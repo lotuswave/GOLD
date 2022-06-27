@@ -33,6 +33,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 
 
+
 public class BaseDriver 
 {
 
@@ -92,9 +93,18 @@ public class BaseDriver
 			
 			
 			else if(browserName.equalsIgnoreCase("chrome"))
+				
 			{
+				
+				
+
+				
 				WebDriverManager.chromedriver().setup();
+				
+				
+				
 				String 	downloadFilepath = System.getProperty("user.dir")+"\\TestLogs\\Download";
+				
 				File dlDirectory = new File(downloadFilepath);
 				dlDirectory.mkdir();
 				if (!dlDirectory.exists()) {
@@ -144,6 +154,9 @@ public class BaseDriver
 			options.addArguments("-disable-dev-shm-usage");
 			options.addArguments("--test-type");
 			options.addArguments("--enable-video-player-chromecast-support");
+			
+					options.addArguments("--disable-blink-features=AutomationControlled");
+					//driver = webdriver.Chrome(options=options);
 			
 			
 	
