@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class Automation_properties {
 
-	private static String configFile = System.getProperty("configFile","config.properties");
+	private static String configFile = System.getProperty("configFile","Hydroflask\\config.properties");
 	public static String testNG =  System.getProperty("user.dir")+"\\src\\test\\resources\\TestNGfiles\\"+System.getProperty("testNG","TestNG.xml");
 	private static Properties automation_properties = new Properties();
 

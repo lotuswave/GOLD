@@ -81,4 +81,70 @@ public class HydroHelper {
 			e.printStackTrace();
 		}
 	}
-}
+
+
+
+
+	public void Navigate_MYAccoun(String dataSet) {
+		String pagetitle = data.get(dataSet).get("title");
+		 String[] Pagetitle = pagetitle.split(",");
+		 String pagename = data.get(dataSet).get("MYAccountlinks");
+		 String[] Pagename = pagename.split(",");
+		 
+		 
+		 System.out.println(pagetitle);
+		 System.out.println(pagename);
+		int i=1;
+		try {
+			//Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			int size = Common.findElements("xpath", "//ul[@class='m-account-nav__links']/li").size();
+			 
+		for(i=1;i<=Pagetitle.length;i++){
+			
+			Common.mouseOverClick("xpath", "//div[@class='m-account-nav__content']");
+			Common.getscreenShotPathforReport("Clicked My Account icon in header");
+			Sync.waitElementClickable(30, "xpath", "(//a[text()='"+Pagename[i-1]+"'])[2]");
+	        Common.javascriptclickElement("xpath", "(//a[text()='"+Pagename[i-1]+"'])[2]");
+	        Sync.waitPageLoad();
+	        Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper']");
+	        String PageTitle = Common.findElement("xpath", "//h1[@class='page-title-wrapper']").getText();
+	       System.out.println(PageTitle);
+	        Common.assertionCheckwithReport(Common.getPageTitle().equals(Pagetitle[i-1]), Pagetitle[i-1] +  "the page is dispalyed " +Pagetitle[i-1], "Should land on the "+Pagetitle[i-1] +"page" , "Failed to dispaly the page" + Pagetitle[i-1]);
+		
+		}	
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+			
+		}
+		
+	}
+
+
+
+
+	public void minicart() {
+		try {
+			Sync.waitElementClickable("xpath", "//span[@class='icon-header__cart--desktop a-icon-text-btn__icon c-mini-cart__icon']");
+			Common.clickElement("xpath", "//span[@class='icon-header__cart--desktop a-icon-text-btn__icon c-mini-cart__icon']");
+	        Common.isElementDisplayed("id", "mini-cart-panel");
+			int size = Common.findElements("id", "mini-cart-panel").size();
+			
+			 Common.assertionCheckwithReport(size>0, "the mini cart is displayed", "Should dislay the mini cart" , "mini cart is not displayed");
+				
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+			
+		}
+		}
+	
+	
+	
+	
+	
+	
+	}
