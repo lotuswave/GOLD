@@ -18,7 +18,9 @@ public class DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent {
 	public void customerLogin() throws Exception {
 
 		try {
-	        Hydro.Navigate_MYAccoun("pagetitle");
+			Hydro.click_singinButton();
+	        Hydro.validateCreateAccountpageNavigation();
+	        Hydro.validatingTrackmyOrderNavigation();
 	        Hydro.minicart();
 	       
 		}

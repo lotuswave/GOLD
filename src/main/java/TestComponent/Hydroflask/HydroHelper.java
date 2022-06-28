@@ -1,8 +1,10 @@
 package TestComponent.Hydroflask;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import TestLib.Automation_properties;
@@ -81,8 +83,42 @@ public class HydroHelper {
 			e.printStackTrace();
 		}
 	}
+	
+	public void validate_accountoptions() {
 
+		WebElement account = Common.findElement("xpath", "//div[@class='m-account-nav__content']/button");
+		account.click();
+		List<WebElement> accountoptions = Common.findElements("xpath", "//ul[@class='m-account-nav__links']/li/a");
+		
+		for (int i = 0; i <= accountoptions.size(); i++) {
+			account.click();
+			if (accountoptions.get(i).getText().equals("Sign In")) {
+			
+				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Customer Login"),
+						"Validating sign In page navigation", "after clinking sigin in page it will navigate loginpage",
+						"Successfully navigate to signIn page", "Failed to navigate login page ");
+			}
 
+			else if (accountoptions.get(i).getText().equals("Create an Account")) {
+				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[2]/a");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
+						"Validating Create New Customer Account page navigation",
+						"after clinking Create New Customer Account page it will navigate account creation page",
+						"Successfully navigate to create account page", "Failed to navigate account create page ");
+			}
+
+			else if (accountoptions.get(i).getText().equals("Track my order")) {
+				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[3]/a");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Orders and Returns"),
+						"Validating Orders and Returns page navigation",
+						"after clinking Orders and Returns page it will navigate order retun page",
+						"Successfully navigate to order retuns page", "Failed to navigate order retun page");
+			}
+
+		}
+
+	}
 
 
 	public void Navigate_MYAccoun(String dataSet) {
@@ -130,7 +166,7 @@ public class HydroHelper {
 			Sync.waitElementClickable("xpath", "//span[@class='icon-header__cart--desktop a-icon-text-btn__icon c-mini-cart__icon']");
 			Common.clickElement("xpath", "//span[@class='icon-header__cart--desktop a-icon-text-btn__icon c-mini-cart__icon']");
 	        Common.isElementDisplayed("id", "mini-cart-panel");
-			int size = Common.findElements("id", "mini-cart-panel").size();
+			int size = Common.findElements("id", "x`").size();
 			
 			 Common.assertionCheckwithReport(size>0, "the mini cart is displayed", "Should dislay the mini cart" , "mini cart is not displayed");
 				
