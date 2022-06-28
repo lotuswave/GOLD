@@ -1,9 +1,13 @@
 package TestComponent.Hydroflask;
 
+import static org.testng.Assert.fail;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -83,34 +87,92 @@ public class HydroHelper {
 			e.printStackTrace();
 		}
 	}
+
+public void validateCreateAccountpageNavigation() {
+		
+		try {
+			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']/button");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']/button");
+			Sync.waitPageLoad();
+			
+				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[2]/a");
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
+						"Validating Create New Customer Account page navigation",
+						"after clinking Create New Customer Account page it will navigate account creation page",
+						"Successfully navigate to create account page", "Failed to navigate account create page ");
+			}
+		catch(Exception |Error e) {
+			e.printStackTrace();
+			report.addFailedLog("Validating Create New Customer Account page navigation ", "after clinking Create New Customer Account page it will navigate account creation page", "Successfully click singIn button ",Common.getscreenShotPathforReport("Failed to navigate account create page"));
+			Assert.fail();
+		}
+	}
 	
+	public void validatingTrackmyOrderNavigation() {
+		try {
+			
+			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']/button");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']/button");
+		Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[3]/a");
+		Sync.waitPageLoad();
+		System.out.println(Common.getPageTitle());
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Orders and Returns"),
+				"Validating Orders and Returns page navigation",
+				"after clinking Orders and Returns page it will navigate order retun page",
+				"Successfully navigate to order retuns page", "Failed to navigate order retun page");
+		}
+		catch(Exception |Error e) {
+			e.printStackTrace();
+			report.addFailedLog("Validating Create New Customer Account page navigation ", "after clinking Create New Customer Account page it will navigate account creation page", "Successfully click singIn button ",Common.getscreenShotPathforReport("Failed to navigate account create page"));
+			Assert.fail();
+		}
+		
+	}
+ 
+	 
+
 	public void validate_accountoptions() {
 
 		WebElement account = Common.findElement("xpath", "//div[@class='m-account-nav__content']/button");
 		account.click();
 		List<WebElement> accountoptions = Common.findElements("xpath", "//ul[@class='m-account-nav__links']/li/a");
 		
-		for (int i = 0; i <= accountoptions.size(); i++) {
-			account.click();
-			if (accountoptions.get(i).getText().equals("Sign In")) {
+		ArrayList<String> names=new ArrayList<String>();
+		for(int i=0;i<accountoptions.size();i++) {
+			names.add(accountoptions.get(i).getText());
+		}
+		
+		
+		for (int i = 0; i < names.size(); i++) {
+			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']/button");
+			
+		Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']/button");
+			if (names.get(i).equals("Sign In")) {
 			
 				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("Customer Login"),
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Customer Login"),
 						"Validating sign In page navigation", "after clinking sigin in page it will navigate loginpage",
 						"Successfully navigate to signIn page", "Failed to navigate login page ");
 			}
 
-			else if (accountoptions.get(i).getText().equals("Create an Account")) {
+			else if (names.get(i).equals("CREATE AN ACCOUNT")) {
+				Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
 				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[2]/a");
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Create New Customer Account"),
 						"Validating Create New Customer Account page navigation",
 						"after clinking Create New Customer Account page it will navigate account creation page",
 						"Successfully navigate to create account page", "Failed to navigate account create page ");
 			}
 
-			else if (accountoptions.get(i).getText().equals("Track my order")) {
+			else if (names.get(i).equals("TRACK MY ORDER")) {
+				Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
 				Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[3]/a");
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("Orders and Returns"),
+				Sync.waitPageLoad();
+				
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Orders and Returns"),
 						"Validating Orders and Returns page navigation",
 						"after clinking Orders and Returns page it will navigate order retun page",
 						"Successfully navigate to order retuns page", "Failed to navigate order retun page");
@@ -119,6 +181,7 @@ public class HydroHelper {
 		}
 
 	}
+
 
 
 	public void Navigate_MYAccoun(String dataSet) {
@@ -166,7 +229,7 @@ public class HydroHelper {
 			Sync.waitElementClickable("xpath", "//span[@class='icon-header__cart--desktop a-icon-text-btn__icon c-mini-cart__icon']");
 			Common.clickElement("xpath", "//span[@class='icon-header__cart--desktop a-icon-text-btn__icon c-mini-cart__icon']");
 	        Common.isElementDisplayed("id", "mini-cart-panel");
-			int size = Common.findElements("id", "x`").size();
+			int size = Common.findElements("id", "mini-cart-panel").size();
 			
 			 Common.assertionCheckwithReport(size>0, "the mini cart is displayed", "Should dislay the mini cart" , "mini cart is not displayed");
 				
