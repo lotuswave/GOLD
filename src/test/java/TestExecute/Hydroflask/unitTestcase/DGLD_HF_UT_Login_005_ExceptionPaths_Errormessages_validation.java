@@ -9,20 +9,20 @@ import TestComponent.Hydroflask.HydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent {
-
+public class DGLD_HF_UT_Login_005_ExceptionPaths_Errormessages_validation {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";	
 	HydroHelper Hydro=new HydroHelper(datafile);
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Unauthenticateduser_viewscontent() throws Exception {
+	public void Validate_Login_Page() throws Exception {
 
 		try {
-			Hydro.click_singinButton();
-	        Hydro.validateCreateAccountpageNavigation();
-	        Hydro.validatingTrackmyOrderNavigation();
-	        Hydro.minicart();
 	       
+	        Hydro.click_singinButton();
+	        Hydro.login_Invalidemail_Errormsg_Validation("Invalid Email");
+	        Hydro.login_Invalidcrdentials_Errormsg_Validation("invalidpassword");
+	        Hydro.login_Invalidcrdentials_Errormsg_Validation("UnregisteredEmail");
+	        Hydro.login_Missingfields_Errormsg_Validation();
 		}
 		catch (Exception e) {
 			
@@ -48,6 +48,4 @@ public class DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent {
 		  
 	  }
 
-	
-	
 }

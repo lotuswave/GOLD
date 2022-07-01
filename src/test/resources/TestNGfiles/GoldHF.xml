@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF Sprint -4 Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    <test name="Validate_header_storelogo" testid="DTG-639" priority="P1" description="This script will cover validating Store Logo">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo"/>
+        </classes>
+        </test>   
+
+           <test name="Validate_newsletter_subscription_footer" testid="DTG-644" priority="P1" description="This script will cover validating Email News Letter">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Footer_003_ExceptionPath_UserEntersInvalidEmailforNewsletter"/>
+        </classes>
+        </test>   
+
+        <test name="Validate_Global_search" testid="DTG-646" priority="P1" description="This script will cover validating Search Selection">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Header_004_NormalPath_User_SelectsTheSearch"/>
+        </classes>
+        </test> 
+
+     <test name="Validate_Unauthenticateduser_viewscontent" testid="DTG-463" priority="P1" description="This script will cover validating the content for unautnenticated User">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent"/>
+        </classes>
+        </test> 
+        <test name="Validate_Login_Page" testid="DTG-645" priority="P1" description="This script will cover validating the Login page">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Login_005_ExceptionPaths_Errormessages_validation"/>
+        </classes>
+        </test>
+        
+        
+</suite>  
