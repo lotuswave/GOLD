@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF Admin Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	  
+             <test name="Validate_The_customer_Grid" testid="DTG-665" priority="P1" description="This script will cover validating Customer grid">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid"/>
+        </classes>
+        </test>   
+ 
+           <test name="Validate_add_new_customer" testid="DTG-667" priority="P1" description="This script will cover validating new  Customer">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer"/>
+        </classes>
+        </test>    
+         
+          <test name="Validate_edit_customer" testid="DTG-666" priority="P1" description="This script will cover validating Edit Customer ">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_002_AlternatePath_Admin_Updates_Customers_Information"/>
+        </classes>
+        </test>   
+        
+
+        <test name="Validate_delete_customer" testid="DTG-668" priority="P1" description="This script will cover validating Delete Customer ">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer"/>
+        </classes>
+        </test> 
+        
+        <test name="Validate_Admin_creates_Newcustomergroup" testid="DTG-672" priority="P1" description="This script will cover validating Create new Customer group">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_008_AlternatePath_Admin_Creates_NewCustomerGroup"/>
+        </classes>
+        </test> 
+         <test name="Validate_Admin_Updates_Newcustomergroup" testid="DTG-673" priority="P1" description="This script will cover validating Edit new Customer group">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_009_AlternatePath_Admin_UpdateCustomerGroup"/>
+        </classes>
+        </test>  
+
+           <test name="Validate_Admin_delete_Newcustomergroup" testid="DTG-674" priority="P1" description="This script will cover validating Delete new Customer group">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_010_AlternatePath_Admin_Delete_CustomerGroup"/>
+        </classes>
+        </test>   
+        
+     <test name="Validate_new_customer_segment" testid="DTG-669" priority="P1" description="This script will cover validating New Customer Segment">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_005_AlternatePath_Admin_Creates_a_New_Customer_Segment"/>
+        </classes>
+        </test>   
+          <test name="Validate_edit_customer_segment" testid="DTG-670" priority="P1" description="This script will cover validating Edit Customer Segment">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_006_AlternatePath_Admin_Edits_a_Customer_Segment"/>
+        </classes>
+        </test>  
+         <test name="Validate_delete_customer_segment" testid="DTG-671" priority="P1" description="This script will cover validating Delete Customer Segment">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment"/>
+        </classes>
+        </test> 
+
+        
+
+    
+        
+</suite>  
