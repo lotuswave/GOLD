@@ -631,6 +631,12 @@ public class Common {
 		new Actions(getDriver()).dragAndDrop(ddSourcename, findElement(ddTargetElemFindBy, ddTargetsname)).build().perform();
 		Sync.waitPageLoad();
 	}
+	
+	public static void dragdrop(WebElement ddSourcename, WebElement ddTargetname)  {
+		Sync.waitPageLoad();
+		new Actions(getDriver()).dragAndDrop(ddSourcename,ddTargetname).build().perform();
+		Sync.waitPageLoad();
+	}
 
 	/**
 	 * mouseOver: will get the mouse over action on a element.
