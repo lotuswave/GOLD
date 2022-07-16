@@ -1411,7 +1411,7 @@ public WebElement Promo_Content() {
 public void draganddropContentBlock(WebElement source) {
     try
     {
-    Common.dragdrop(Promo_Content(),"xpath","//div[contains(@class,'pagebuilder-emp')]" );
+    Common.dragdrop(source,"xpath","//div[contains(@class,'pagebuilder-emp')]" );
     
     }
     catch(Exception | Error e)
@@ -1625,9 +1625,10 @@ public void deletepage() {
 	try
 	{
 		Common.closeCurrentWindow();
+		Common.switchToDefault();
 		Sync.waitPageLoad(40);
-		Sync.waitElementPresent(40, "xpath", "//button[@title='Delete Page']");
-		Common.clickElement("xpath", "//button[@title='Delete Page']");
+		Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+		Common.clickElement("xpath", "//span[text()='Delete Page']");
 		String message = Common.findElement("xpath", "//div[@class='modal-content']").getText();
 		if (message.equals("Are you sure you want to do this?")) {
 			Common.clickElement("xpath", "//span[text()='OK']");
@@ -1726,10 +1727,11 @@ public void dragndrop_promoBlock() {
 
 public void edit_promoBlocker_one() {
 	try {
-		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+		Thread.sleep(2000);
+		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
 				.getAttribute("id");
 
-		Common.mouseOverClick("xpath", "//div[@id='" + id + "']//div[3]//i");
+		Common.mouseOverClick("xpath", "//div[@id='"+id+"']//div[3]//i");
 
 		String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
 
@@ -1749,6 +1751,35 @@ public void edit_promoBlocker_one() {
 		Assert.fail();
 
 	}
+}
+
+public void website_verification() {
+	// TODO Auto-generated method stub
+	try
+	{
+		
+		Sync.waitElementPresent(40, "xpath", "//div[contains(@class,'c-promo-block__rig')]");
+		String imageverification=Common.findElement("xpath", "//div[contains(@class,'c-promo-block__rig')]").getAttribute("data-background-images");
+		System.out.println(imageverification);
+		Common.assertionCheckwithReport(imageverification.contains("Lotusqa"),
+				"validation Image upload in the forntend website ",
+				"Image should de appear on fornt end page",
+				"Successfully image is appeared on the frondend",
+				"Failed to navigate to edit promoBlocker page");
+				}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+
+		report.addFailedLog("validation Image upload in the forntend website ",
+				"Image should de appear on fornt end page",
+				"Successfully image is appeared on the frondend",
+				Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+		Assert.fail();
+
+		
+	}
+	
 }
 
 }

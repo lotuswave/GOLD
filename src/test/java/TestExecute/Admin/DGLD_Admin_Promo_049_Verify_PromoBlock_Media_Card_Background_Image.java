@@ -21,8 +21,9 @@ public class DGLD_Admin_Promo_049_Verify_PromoBlock_Media_Card_Background_Image 
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.dragndrop_promoBlock();
-           Admin.  dragndrop_promoBlock();
-           Admin.editcontent();
+           Admin. edit_promoBlocker_one();
+         //  Admin.  dragndrop_promoBlock();
+           //Admin.editcontent();
            Admin.editpromocontent_color("promocontent");
            Admin.editpromocontent_image();
            Admin.allbackground("promocontent");

@@ -30,7 +30,7 @@ public class DGLD_Admin_Promo_048_Verify_Promo_Media_Card_Background_Image {
            Admin.allbackground("promocontent");
            Admin.savecontent("promocontent");
            Admin.openwebsite("promocontent");
-//           Admin.websiteverification();
+           Admin.website_verification();
 
         //   Admin.clonepage();
 //           Admin.deletepage();
