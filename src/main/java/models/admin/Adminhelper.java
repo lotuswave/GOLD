@@ -1408,7 +1408,7 @@ public WebElement Promo_Content() {
 }
 
 
-public void draganddropContentBlock(WebElement source, String elementtype,String elemntvalue) {
+public void draganddropContentBlock(WebElement source) {
     try
     {
     Common.dragdrop(Promo_Content(),"xpath","//div[contains(@class,'pagebuilder-emp')]" );
@@ -1418,6 +1418,26 @@ public void draganddropContentBlock(WebElement source, String elementtype,String
     {
     	
     }
+}
+public void dragndrop_Promo_Content() {
+	try {
+		WebElement element = Common.findElement("xpath", "//span[text()='Promo Content (Product)']");
+		draganddropContentBlock(element);
+		String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+				.getAttribute("data-content-type");
+		Common.assertionCheckwithReport(blockname.equals("hot_product_promo"),
+				"Validating promocontent Dragndrop operation", "promocontent dragndrop to content with options",
+				"successfully dragndrop the promocontent with options ", "fail to dragndrop the promocontent");
+	} catch (Exception e) {
+
+		e.printStackTrace();
+
+		report.addFailedLog("Validating promocontent Dragndrop operation",
+				"User should able Dragndrop promocontent", "Sucessfully Dragndrop promocontent",
+				Common.getscreenShotPathforReport("Failed to Dragndrop promocontent"));
+		Assert.fail();
+
+	}
 }
 
 public void editcontent() {
@@ -1682,4 +1702,55 @@ public void Contentpage() {
 	
 }
 
+
+public void dragndrop_promoBlock() {
+	try {
+		WebElement element = Common.findElement("xpath", "//span[text()='Promo Block']");
+		draganddropContentBlock(element);
+		String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+				.getAttribute("data-content-type");
+		Common.assertionCheckwithReport(blockname.equals("hot_promo_block"),
+				"Validating Promoblocker Dragndrop operation", "promoblocker dragndrop to content with options",
+				"successfully dragndrop the promoblocker with options ", "fail to dragndrop the promobaner");
+	} catch (Exception e) {
+
+		e.printStackTrace();
+
+		report.addFailedLog("Validating Promoblocker Dragndrop operation",
+				"User should able Dragndrop Promoblocker", "Sucessfully Dragndrop Promoblocker",
+				Common.getscreenShotPathforReport("Failed to Dragndrop Promoblocker"));
+		Assert.fail();
+
+	}
 }
+
+public void edit_promoBlocker_one() {
+	try {
+		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+				.getAttribute("id");
+
+		Common.mouseOverClick("xpath", "//div[@id='" + id + "']//div[3]//i");
+
+		String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+		Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
+				"validation Navigation to the edit  Promo Media Card page ",
+				"after Click on edit button it should be navigate to the edit promoBlocker page ",
+				"Successfully it is navigated to edit promoBlocker page ",
+				"Failed to navigate to edit promoBlocker page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+
+		report.addFailedLog("validation Navigation to the edit promo Blocker ",
+				"after Click on edit button it should be navigate to the edit Blocker page ",
+				"Successfully it is navigated to edit Blocker page ",
+				Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+		Assert.fail();
+
+	}
+}
+
+}
+
+

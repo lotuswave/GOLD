@@ -23,7 +23,7 @@ public class DGLD_Admin_Promo_048_Verify_Promo_Media_Card_Background_Image {
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.Promo_Content();
-           Admin.draganddropContentBlock(null, datafile, datafile);
+           Admin.dragndrop_Promo_Content();
            Admin.editcontent();
            Admin.editpromocontent_color("promocontent");
            Admin.editpromocontent_image();
