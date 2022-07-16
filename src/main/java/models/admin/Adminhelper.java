@@ -1353,7 +1353,7 @@ public void newpageCTA() {
 	{
 		Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
 		Common.clickElement("xpath", "//button[@title='Add New Page']");
-		Common.assertionCheckwithReport(Common.getPageTitle().equals("New Page / Pages / Magento Admin"),
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("New Page / Pages / Elements / Content / Magento Admin"),
 				"Validating edit page bulider navigation ",
 				"after clicking on edit page builder it will navigate edit page builder filed ",
 				"Successfully navigate to the edit page builder filed ",
