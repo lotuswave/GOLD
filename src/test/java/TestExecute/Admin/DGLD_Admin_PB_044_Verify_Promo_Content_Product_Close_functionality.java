@@ -18,11 +18,12 @@ public class DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality 
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.dragndrop_Promo_Content();
            Admin.close_promo_page();
+           Admin.Clearfilter();
         }
         catch (Exception e) {
 
@@ -35,6 +36,7 @@ public class DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality 
     @AfterTest
     public void clearBrowser()
     {
+    	System.setProperty("configFile", "Admin\\config.properties");
         Common.closeAll();
 
     }
@@ -42,7 +44,7 @@ public class DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality 
 
     @BeforeTest
       public void startTest() throws Exception {
-    	System.setProperty("configFile", "Oxo\\config.properties");
+    	System.setProperty("configFile", "Admin\\config.properties");
           Login.signIn();
 
 

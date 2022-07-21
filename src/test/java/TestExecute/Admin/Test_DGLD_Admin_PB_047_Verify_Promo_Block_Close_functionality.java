@@ -19,11 +19,12 @@ public class Test_DGLD_Admin_PB_047_Verify_Promo_Block_Close_functionality {
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.dragndrop_promoBlock();
            Admin.close_promo_block();
+           Admin.Clearfilter();
            
            
            

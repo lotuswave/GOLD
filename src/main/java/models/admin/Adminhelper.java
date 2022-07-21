@@ -1321,11 +1321,29 @@ public class Adminhelper {
 
 	}
 
-	public void newpageCTA() {
+	public void newpageCTA(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
-			Common.clickElement("xpath", "//button[@title='Add New Page']");
+			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+			Common.actionsKeyPress(Keys.ENTER);
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+			if (records.equals("0 records found")) {
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
+				Common.clickElement("xpath", "//button[@title='Add New Page']");
+			} else {
+				Sync.waitElementPresent("xpath", "//button[text()='Select']");
+				Common.clickElement("xpath", "//button[text()='Select']");
+				Common.clickElement("xpath", "//a[text()='Edit']");
+				Sync.waitPageLoad();
+				delete_existing_page("promocontent");
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
+				Common.clickElement("xpath", "//button[@title='Add New Page']");
+			}
+			
+			
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("New Page / Pages / Elements / Content / Magento Admin"),
 					"Validating edit page bulider navigation ",
@@ -2617,4 +2635,34 @@ public class Adminhelper {
 
 		}
 }
+	public void delete_existing_page(String Dataset) throws Exception 
+	
+	{
+		String title = data.get(Dataset).get("pageTitle");
+		Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
+		String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+		if (name.equals(title)) {
+			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+			Common.clickElement("xpath", "//span[text()='Delete Page']");
+		} else {
+			Assert.fail();
+		}
+		String message = Common.findElement("xpath", "//div[@class='modal-content']").getText();
+		if (message.equals("Are you sure you want to do this?")) {
+			Common.clickElement("xpath", "//span[text()='OK']");
+
+		} else {
+			Assert.fail();
+		}
+		Sync.waitPageLoad();
+		String deletemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+				.getText();
+		System.out.println(deletemessage);
+		Common.assertionCheckwithReport(
+				Common.getPageTitle().equals("Pages / Magento Admin")
+						&& deletemessage.equals("The page has been deleted."),
+				"Validating page filed  navigation and customer deleted message",
+				"after clicking save button it will navigate page filed and message should be displayed",
+				"Successfully navigate to page filed and message is dispalyed", "Failed to navigate to page filed");
+	}
 }

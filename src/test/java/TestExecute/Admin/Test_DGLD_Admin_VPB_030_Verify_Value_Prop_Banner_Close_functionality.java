@@ -19,7 +19,7 @@ public class Test_DGLD_Admin_VPB_030_Verify_Value_Prop_Banner_Close_functionalit
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.Promo_Content();
@@ -32,7 +32,7 @@ public class Test_DGLD_Admin_VPB_030_Verify_Value_Prop_Banner_Close_functionalit
            Admin.close_individual_page_Two();
            Admin.edit_valueprop_banner_Three();
            Admin.close_individual_page_Three();
-           
+           Admin.Clearfilter();
            
            
            

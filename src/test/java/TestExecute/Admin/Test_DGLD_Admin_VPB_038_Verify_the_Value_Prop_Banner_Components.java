@@ -19,7 +19,7 @@ public class Test_DGLD_Admin_VPB_038_Verify_the_Value_Prop_Banner_Components {
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.Promo_Content();
@@ -39,7 +39,7 @@ public class Test_DGLD_Admin_VPB_038_Verify_the_Value_Prop_Banner_Components {
            Admin.clone_valueprop_banner();  
            Admin.vlaueprop_clone_frontend("promocontent"); 
            Admin.deletepage("promocontent");
-      
+           Admin.Clearfilter();
            
         }
         catch (Exception e) {

@@ -19,7 +19,7 @@ public class DGLD_Admin_PB_050_Verify_the_Promo_Block_Components_Background_Vide
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.Promo_Content();
@@ -32,6 +32,7 @@ public class DGLD_Admin_PB_050_Verify_the_Promo_Block_Components_Background_Vide
            Admin.openwebsite("promocontent");
            Admin.video_promo_component();
            Admin.deletepage("promocontent");  
+           Admin.Clearfilter();
         }
         catch (Exception e) {
 

@@ -19,7 +19,7 @@ public class DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Image {
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.Promo_Content();
@@ -34,6 +34,7 @@ public class DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Image {
            Admin.clone_page();
            Admin.clone_image_frontend();  
            Admin.deletepage("promocontent");
+           Admin.Clearfilter();
         }
         catch (Exception e) {
 
