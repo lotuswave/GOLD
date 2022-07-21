@@ -58,9 +58,8 @@ public class HydroHelper {
 			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']/button");
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']/a");
 			Common.assertionCheckwithReport(
-					Common.getText("xpath", "//h1[@class='page-title-wrapper']").equals("Customer Login"),
-					"To validate the signIn-buton",
-					"Validate the signIn-button", "Successfully click singIn button",
+					Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
+					"To validate the signIn-buton", "Validate the signIn-button", "Successfully click singIn button",
 					"User unabel to click singup button");
 
 		} catch (Exception | Error e) {
@@ -72,6 +71,109 @@ public class HydroHelper {
 		}
 	}
 
+	public void login_Hydroflask(String dataSet) {
+
+		try {
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
+					"To validate the user lands on Home page after successfull login", "Should land on Home Page",
+					"User lands on Home Page", "User failed to login");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			report.addFailedLog("Validate the User is able to login", "Should login into user Account sucessfully",
+					" sucessfully login to the account", Common.getscreenShotPathforReport("User is unable to login"));
+
+			Assert.fail();
+		}
+	}
+
+public void Validate_Myaccountoptions(String string) {
+		
+		try {
+			WebElement account = Common.findElement("xpath", "//div[@class='m-account-nav__welcome']/button/span");
+			account.click();
+			List<WebElement> Myaccountoptions = Common.findElements("xpath", "//ul[@class='m-account-nav__links']/li/a");
+
+			ArrayList<String> names = new ArrayList<String>();
+			for (int i = 0; i < Myaccountoptions.size(); i++) {
+				names.add(Myaccountoptions.get(i).getText());
+				System.out.println(names);
+			}
+
+			for (int i = 0; i < names.size(); i++) {
+				Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__welcome']/button");
+
+				Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__welcome']/button");
+				if (names.get(i).equals("MY ACCOUNT")) {
+
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Sync.waitPageLoad();
+					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+							"Validating Muy account page navigation", "after clinking My account CTA it will navigate My Account page",
+							"Successfully navigate to My Account page", "Failed to navigate to my account page ");
+				}
+
+				else if (names.get(i).contains("MY FAVORITES")) {
+					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[2]/a");
+					Sync.waitPageLoad();
+					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Favorites"),
+							"Validating My favourites page navigation",
+							"after clinking My favourites CTA it will navigate My favourites page",
+							"Successfully navigate to My favourites page", "Failed to navigate My favourites page ");
+				}
+
+				else if (names.get(i).contains("MY ORDERS")) {
+					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[3]/a");
+					Sync.waitPageLoad();
+					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
+
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Orders"),
+							"Validating MyOrders navigation",
+							"after clinking MyOrders CTA it will navigate MyOrders page",
+							"Successfully navigate to MyOrderspage", "Failed to navigate MyOrders page");
+				}
+				else if (names.get(i).contains("MY PRODUCTS SUBSCRIPTIONS")) {
+					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
+					Sync.waitPageLoad();
+					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
+
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Subscriptions"),
+							"Validating Myproductssubscriptions CTA navigation",
+							"after clinking Myproductssubscriptions CTA it will navigate Myproductssubscriptions page",
+							"Successfully navigate to Myproductssubscriptions page", "Failed to navigate Myproductssubscriptions page");
+				}
+				else if (names.get(i).contains("SIGN OUT")) {
+					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[5]/a");
+					Sync.waitPageLoad(30);
+					Sync.waitElementVisible("xpath", "//div[contains(@class,'c-hero-block')]");
+
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
+							"Validating Customer logout functionality",
+							"after clinking SignOut CTA it should successfully logout the customer ",
+							"Successfully logout from the Account", "Failed to logout from the customer account");
+				}
+
+			}
+		
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			
+			Assert.fail();
+		}
+		
+	}
 	public void validateCreateAccountpageNavigation() {
 
 		try {
@@ -215,8 +317,8 @@ public class HydroHelper {
 			Common.javascriptclickElement("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 
-			Common.assertionCheckwithReport(openminicart.contains("active"),"To validate the minicart popup" ,"the mini cart is displayed",
-					"Should dislay the mini cart", "mini cart is not displayed");
+			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
+					"the mini cart is displayed", "Should dislay the mini cart", "mini cart is not displayed");
 
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'minicart__close')]");
 			Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close')]");
@@ -238,7 +340,8 @@ public class HydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			//Common.scrollToElementAndClick("xpath", "//input[@id='newsletter-signup_email']");
+			// Common.scrollToElementAndClick("xpath",
+			// "//input[@id='newsletter-signup_email']");
 			Common.actionsKeyPress(Keys.END);
 			Sync.waitElementClickable(30, "xpath", "//input[@id='newsletter-signup_email']");
 			Common.textBoxInput("xpath", "//input[@id='newsletter-signup_email']", data.get(Dataset).get("Email"));
@@ -247,13 +350,13 @@ public class HydroHelper {
 			System.out.println(Errormessage);
 			Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
 					"To validate the error message for Invalid Email",
-					"Should display error Please enter a valid email address.",
-					Errormessage, "Failed to display the error message for invaild email");
+					"Should display error Please enter a valid email address.", Errormessage,
+					"Failed to display the error message for invaild email");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("To validate the error message for Invalid Email", "Should display error Please enter a valid email address.",
-					"Failed to display the error message",
+			report.addFailedLog("To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", "Failed to display the error message",
 					Common.getscreenShotPathforReport("User unable to see an error message"));
 
 			Assert.fail();
@@ -263,21 +366,21 @@ public class HydroHelper {
 
 	public void Empty_Email() {
 		try {
-			
+
 			Common.textBoxInputClear("xpath", "//input[@id='newsletter-signup_email']");
 			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
 			System.out.println(Errormessage);
 			Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
 					"To validate the error message for missing email fields",
-					"Should display Error Please enter a valid email address.",
-					Errormessage, "Error message dispaly unsuccessfull");
+					"Should display Error Please enter a valid email address.", Errormessage,
+					"Error message dispaly unsuccessfull");
 
 		}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validate the Error message ", "Should display Error: Please enter a valid email address.",
-					"Failed to dispaly the Error message ",
+			ExtenantReportUtils.addFailedLog("Validate the Error message ",
+					"Should display Error: Please enter a valid email address.", "Failed to dispaly the Error message ",
 					Common.getscreenShotPathforReport("User unable to see an error message"));
 			Assert.fail();
 		}
@@ -295,14 +398,13 @@ public class HydroHelper {
 			System.out.println(emailerror);
 			Common.assertionCheckwithReport(emailerror.equals(errormessage),
 					"To validate the error message when given invalid email or password",
-					"Should dispaly the error message "+errormessage, emailerror + "error message is displayed",
+					"Should dispaly the error message " + errormessage, emailerror + "error message is displayed",
 					"Failed to display error message");
 			clickStoreLogo();
 			Sync.waitPageLoad();
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To validate the error message when given invalid email ",
+			ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
 					"Should dispaly the error message" + errormessage, "Error message dispaly Failed ",
 					Common.getscreenShotPathforReport("Failed to display the error message"));
 			Assert.fail();
@@ -335,10 +437,8 @@ public class HydroHelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To validate the login page for invalid credentials ",
-					"Should dispaly the error message" + errormsg,
-					"Error message dispaly Failed ",
+			ExtenantReportUtils.addFailedLog("To validate the login page for invalid credentials ",
+					"Should dispaly the error message" + errormsg, "Error message dispaly Failed ",
 					Common.getscreenShotPathforReport("Failed to display the error message"));
 			Assert.fail();
 
@@ -373,6 +473,33 @@ public class HydroHelper {
 
 		}
 
+	}
+
+	public void toplevelnavigation(String dataSet) {
+		try {
+			Sync.waitElementVisible("xpath", "//div[contains(@class,'welcome-')]");
+			String Welcome = Common.findElement("xpath", "//div[contains(@class,'welcome-')]").getText();
+			String logo = Common.findElement("xpath", "//a[@class='a-logo']/img").getAttribute("alt");
+			clickStoreLogo();
+			
+			int header = Common.findElements("xpath", "//a[contains(@class,'level-top ui-corner-all')]").size();
+			
+			for(int i=0;i<header; i++)
+			{			
+		    Sync.waitElementVisible("xpath", "(//a[contains(@class,'level-top ui-corner-all')])["+i+"]");
+			Common.mouseOverClick("xpath", "(//a[contains(@class,'level-top ui-corner-all')])["+i+"]");
+			String link = Common.findElement("xpath", "(//a[contains(@class,'level-top ui-corner-all')])["+i+"]").getText();
+			String headerlink[] = data.get(dataSet).get("menu").split(",");
+			
+			Common.assertionCheckwithReport(link.contains(headerlink[i]), "to validate the header menu "+ link, "it should clik the link"+ link, link+"is clicked", "failed to click the link");
+			}
+			Common.assertionCheckwithReport(Welcome.contains("Welcome, QA") && logo.contains("Logo") , "To validate the header menu",
+					"Components in header menu should be dispalyed", "Componenets in header menu are displayed",
+					"Failed to display the components in header menu");
+			
+		} catch (Exception e) {
+
+		}
 	}
 
 }
