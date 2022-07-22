@@ -2901,4 +2901,148 @@ public class Adminhelper {
 		}
 
 	}
+
+	public void buttontext(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[@data-placeholder='Button text']");
+			Common.clickElement("xpath", "//span[@data-placeholder='Button text']");
+			Common.findElement("xpath", "//span[@data-placeholder='Button text']").sendKeys(data.get(Dataset).get("Attachment"));
+			String buttontext=Common.findElement("xpath", "//span[@data-placeholder='Button text']").getText();
+			Common.assertionCheckwithReport(
+					buttontext.equals("Fixed"),
+					"Validating text entered in the button text button",
+					"Text should be entered in the button text button",
+					"Successfully text entered in the button text button", " user unable enter text in button text button");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			report.addFailedLog("Validating text entered in the button text button",
+					"Text should be entered in the button text button",
+					"Failed to enter text in the button text button",
+					Common.getscreenShotPathforReport("user unable enter text in button text button"));
+			Assert.fail();
+			
+			
+		}
+		
+	}
+
+	public void CTA_content(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
+			Common.clickElement("xpath", "//span[text()='CTA Elements']");
+			Common.clickElement("xpath", "//input[@name='link_text']");
+			Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("mobilelayout"));
+			Common.clickElement("xpath", "//select[@name='button_type']");
+			Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT, data.get(Dataset).get("CTA Type"));
+			Common.clickElement("xpath", "//select[@name='link_url']");
+			Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT, data.get(Dataset).get("videoUrl"));
+			Common.clickElement("xpath", "//div[contains(@class,'url-input-e')]");
+			Common.textBoxInput("xpath", "//input[@name='link_url[default]']",data.get(Dataset).get("URL"));
+			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			String editpagebuilder=Common.findElement("xpath", "//span[@data-placeholder='Button text']").getText();
+			Common.assertionCheckwithReport(
+					editpagebuilder.equals("Stacked"),
+					"Validating text entered in the button text button",
+					"Text should be entered in the button text button",
+					"Successfully text entered in the button text button", " user unable enter text in button text button");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			report.addFailedLog("Validating text entered in the button text button",
+					"Text should be entered in the button text button",
+					"Failed to enter text in the button text button",
+					Common.getscreenShotPathforReport("user unable enter text in button text button"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void CTA_product_content(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
+			Common.clickElement("xpath", "//span[text()='CTA Elements']");
+			Common.clickElement("xpath", "//input[@name='link_text']");
+			Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("CTA Link"));
+			Common.clickElement("xpath", "//select[@name='button_type']");
+			Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT, data.get(Dataset).get("CTA Type"));
+			Common.clickElement("xpath", "//select[@name='link_url']");
+			Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT, data.get(Dataset).get("heading"));
+			Common.clickElement("xpath", "//div[@data-role='selected-option']");
+			Common.scrollIntoView("xpath", "//div[@data-role='selected-option']");
+			Common.clickElement("xpath", "//div[contains(@class,'admin__action-multiselect-s')]");
+			Common.textBoxInput("xpath", "//input[@placeholder='Product Name or SKU']", data.get(Dataset).get("SKU"));
+            Sync.waitPageLoad();
+			Common.clickElement("xpath", "//span[@data-bind='text: option.label']");
+			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			String editpagebuilder=Common.findElement("xpath", "(//span[@data-placeholder='Button text'])[2]").getText();
+			Common.assertionCheckwithReport(
+					editpagebuilder.equals("URL"),
+					"Validating text entered in the button text button",
+					"Text should be entered in the button text button",
+					"Successfully text entered in the button text button", " user unable enter text in button text button");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			report.addFailedLog("Validating text entered in the button text button",
+					"Text should be entered in the button text button",
+					"Failed to enter text in the button text button",
+					Common.getscreenShotPathforReport("user unable enter text in button text button"));
+			Assert.fail();
+			
+		}
+		
+	}
+
+	public void website_button_verification_promoblock(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			String button1=data.get(Dataset).get("URL");
+			String button2=data.get(Dataset).get("SKU");
+			
+			String websitebutton=Common.findElement("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[1]").getAttribute("href");
+			Common.assertionCheckwithReport(
+					websitebutton.equals(button1),
+					"Validating button text is present in front end",
+					"Button text should be present in the front end",
+					"Successfully button text entered in the front end", "unable to see button text on front end");
+			Common.clickElement("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[2]");
+			Sync.waitPageLoad();
+			
+			String sku=Common.findElement("xpath", "//span[@class='a-product-attribute__value']").getText();
+			Common.assertionCheckwithReport(
+					sku.equals(button2)&&Common.getCurrentURL().contains("32-oz-wide-mouth-copper-brown.html"),
+					"Validating button text is present in front end and link in button text",
+					"Button text should be present in the front end and link in button text",
+					"Successfully button text entered in the front end and link is present", "unable to see button text on front end and link not present");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			report.addFailedLog("Validating button text is present in front end and link in button text",
+					"Button text should be present in the front end and link in button text",
+					"Successfully button text entered in the front end and link is present",
+					Common.getscreenShotPathforReport("unable to see button text on front end and link not present"));
+			Assert.fail();
+			
+		}
+		
+	}
 }

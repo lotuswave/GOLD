@@ -23,7 +23,7 @@ public class DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality 
            Admin.hot_elements();
            Admin.dragndrop_Promo_Content();
            Admin.close_promo_page();
-           Admin.Clearfilter();
+           
         }
         catch (Exception e) {
 
@@ -36,7 +36,7 @@ public class DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality 
     @AfterTest
     public void clearBrowser()
     {
-    	System.setProperty("configFile", "Admin\\config.properties");
+   
         Common.closeAll();
 
     }
