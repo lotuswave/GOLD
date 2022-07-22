@@ -244,5 +244,89 @@ public class OxoHelper {
 
 	
 
+	public void clickcountryselector() {
+		try {
 
+			Common.scrollIntoView("xpath", "//button[@class='a-icon-text-btn c-footer__country-selector action']");
+
+			// Thread.sleep(1500);
+			Common.clickElement("xpath", "//button[@class='a-icon-text-btn c-footer__country-selector action']");
+			String text = Common.findElement("xpath", "//h1[@class='heading heading--page m-modal__headline']")
+					.getText();
+
+			Common.assertionCheckwithReport(text.contains("Choose Your Location"),
+					"To validate the Country Selector Pop up", "Country Selector Pop up should be dispalyed",
+					"Different Countries Should be displayed", "Failed to display the Different Countries");
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("validating the Country Selector Pop up",
+					"User successfully open Country Selector Pop up", "User unabel to open country Selector Pop up",
+					Common.getscreenShotPathforReport("user failed to open the Country Selector Pop up"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Verify_Available_Selections(String dataSet) {
+
+		String available = data.get(dataSet).get("Options");
+		String[] Select = available.split(",");
+		int i = 0;
+
+		try {
+
+			for (i = 1; i <= Select.length; i++) {
+				System.out.println(Select[i - 1]);
+				Common.scrollIntoView("xpath", "(//input[contains(@name,'countrySelector')])[" + i + "]");
+
+				String Country = Common
+						.findElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]")
+						.getText();
+			
+				Sync.waitElementClickable("xpath",
+						"(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+				Common.clickElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+				System.out.println(Country);
+				Common.assertionCheckwithReport(Country.equals(Select[i - 1]), "verifying the Country" + Select[i - 1],
+						"user Selects " + Select[i - 1] + "Country",
+						"user successfully Selects the country " + Select[i - 1],
+						"Failed to select the country " + Select[i - 1]);
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Country Selector" + Select[i-1],
+					"user Selects the " + Select[i-1] + "Country", "User unabel to Select Country " + Select[i-1],
+					Common.getscreenShotPathforReport("user failed to Select the Country"));
+			System.out.println(Select[i-1] + " is Missing");
+			Assert.fail();
+
+		}
+	}
+	public void Promobanner() {
+		try {
+			Common.clickElement("xpath", "//span[text()='See Details']");
+			Thread.sleep(2000);
+			
+			Common.assertionCheckwithReport(
+					Common.getText("xpath", "//strong[text()='Free Ground Shipping']").equals("Free Ground Shipping"),
+					"To validate the Popup of Free Ground Shipping",
+					"Validate the Pop up of Free Ground Shipping ", "Successfully displays Free Ground Shipping Pop up",
+					"User unabel display Free Ground Shipping Pop up");
+		} 
+		catch (Exception e) {
+
+			e.printStackTrace();
+			
+			report.addFailedLog("Validate the Popup of Free Ground Shipping", "User Opens the Free Ground Shipping Pop up",
+					"Successfully displays Free Ground Shipping Pop up",
+					Common.getscreenShotPathforReport("User unabel to display Free Ground Shipping Pop up"));
+			
+			Assert.fail();
+
+		}
+	}
+	
 }

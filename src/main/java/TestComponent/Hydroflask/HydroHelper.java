@@ -501,5 +501,30 @@ public void Validate_Myaccountoptions(String string) {
 
 		}
 	}
+public void Promobanner() {
+		
+		try {
+			Common.clickElement("xpath", "//span[text()='See Details']");
+			Thread.sleep(2000);
+			
+            Common.assertionCheckwithReport(
+					Common.getText("xpath", "//strong[text()='Free Ground Shipping']").equals("Free Ground Shipping"),
+					"To validate the Popup of Free Ground Shipping",
+					"Validate the Pop up of Free Ground Shipping ", "Successfully displays Free Ground Shipping Pop up",
+					"User unabel display Free Ground Shipping Pop up");
+		} 
+		catch (Exception e) {
+
+			e.printStackTrace();
+			
+			report.addFailedLog("Validate the See Details link", "User Opens the Free Ground Shipping Pop up",
+					"Successfully displays Free Ground Shipping Pop up",
+					Common.getscreenShotPathforReport("User unabel to display Free Ground Shipping Pop up"));
+			
+			Assert.fail();
+
+		}
+
+	}
 
 }
