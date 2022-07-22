@@ -1547,6 +1547,7 @@ public class Adminhelper {
 			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
 			Common.clickElement("xpath", "//button[@id='save-button']");
 			Sync.waitPageLoad(70);
+			
 			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
 					"Validating the User need to save the page", "User should able to save the page",
@@ -1773,6 +1774,7 @@ public class Adminhelper {
 				Common.clickElement("xpath", "//button[@id='save-button']");
 				Sync.waitPageLoad(70);
 				Sync.waitPageLoad();
+				Thread.sleep(8000);
 				String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 				Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
 						"Validating the User need to save the page", "User should able to save the page",
@@ -2474,6 +2476,7 @@ public class Adminhelper {
 		{
 			String id=Common.findElement("xpath", "(//div[@data-background-type='image'])[4]").getAttribute("data-pb-style");
 	        String websiteverification=Common.findElement("xpath", "//div[@data-pb-style='" + id +"']").getAttribute("data-background-images");
+	        System.out.println(websiteverification);
 	        Common.assertionCheckwithReport(websiteverification.contains("Lotusqa"),
 					"validation of images are displaying on fornt end ",
 					"after Click on link  it should be navigate to the respective page contains with 2 images",
@@ -2500,14 +2503,18 @@ public class Adminhelper {
 		{
 			Common.switchToFirstTab();
 			Contentpage();
+			Sync.waitElementPresent(30, "xpath", "//div[@data-content-type='hot_promo_block']");
+			Common.mouseOver("xpath", "//div[@data-content-type='hot_promo_block']");
+			Sync.waitElementPresent("xpath", "//a[@title='Duplicate']");
+		    Common.clickElement("xpath", "//a[@title='Duplicate']");
 			edit_promoBlocker_one();
 			editpromocontent_image1();
 			Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
 			Common.clickElement("xpath", "//i[@title='Close Full Screen']");
-			Common.clickElement("xpath", "//input[@name='title']");
-			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+            Sync.waitElementPresent("xpath", "//button[@id='save-button']");
 			Common.clickElement("xpath", "//button[@id='save-button']");
 			Sync.waitPageLoad();
+			Thread.sleep(8000);
 			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
 					"Validating the User need to save the page", "User should able to save the page",
@@ -2563,9 +2570,10 @@ public class Adminhelper {
 			Common.switchToSecondTab();
 			Common.refreshpage();
 			Sync.waitPageLoad();
-			String id=Common.findElement("xpath", "(//div[@data-background-type='image'])[3]").getAttribute("data-pb-style");
-			Sync.waitElementPresent("xpath", "//div[@data-pb-style='" + id +"']");
-			String imagefrontend=Common.findElement("xpath", "//div[@data-pb-style='" + id +"']").getAttribute("data-background-images");
+			String id=Common.findElement("xpath", "(//div[@data-background-type='image'])[4]").getAttribute("data-pb-style");
+			Thread.sleep(4000);
+	        String imagefrontend=Common.findElement("xpath", "//div[@data-pb-style='" + id +"']").getAttribute("data-background-images");
+			System.out.println(imagefrontend);
 			Common.assertionCheckwithReport(imagefrontend.contains("Lotusqa1"),
 					"validation the image uploading on content for fornt end image ",
 					"Image should be upload for front end image", "Successfully image uploaded in front end image ",
