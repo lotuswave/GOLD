@@ -1277,6 +1277,7 @@ public class Adminhelper {
 	public void click_content() {
 		// TODO Auto-generated method stub
 		try {
+			Common.switchToFirstTab();
 			Sync.waitPageLoad();
 			Common.clickElement("id", "menu-magento-backend-content");
 			Sync.waitElementPresent("id", "menu-magento-backend-content");
@@ -1289,7 +1290,7 @@ public class Adminhelper {
 					"Failed to click the Content menu");
 
 		} catch (Exception | Error e) {
-			e.printStackTrace();
+			e.printStackTrace();			
 			report.addFailedLog("To verify the content menu ",
 					"After clicking the content menu it will display menu options ",
 					"Successfully clicked the content menu and it displayed the Content options",
@@ -1457,6 +1458,7 @@ public class Adminhelper {
 	public void editpromocontent_color(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
+			
 			Common.scrollIntoView("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
 			Common.clickElement("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
 			String color = data.get(Dataset).get("Color");
@@ -1572,10 +1574,14 @@ public class Adminhelper {
 			Common.openNewTab();
 			Sync.waitPageLoad(40);
 			Common.oppenURL(data.get(Dataset).get("URL") + urlkey);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("qaFlask"),
-					"Validating the User lands to the hydroflask page", "User should able lands on the hydroflask page",
+			String uname= Common.getPageTitle();
+			Common.assertionCheckwithReport(
+					uname.equals("qaFlask") || uname.equals("QATESTINGHYDRO") ,
+					"Validating the User lands to the hydroflask page",
+					"User should able lands on the hydroflask page",
 					"Sucessfully User lands on the hydroflask page", "Failed user navigates to the hydroflask page");
-
+			
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			report.addFailedLog("Validating page filed  navigation and customer deleted message",
@@ -3052,5 +3058,350 @@ public class Adminhelper {
 			
 		}
 		
+	}
+
+	public void newpageCTA() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
+			Common.clickElement("xpath", "//button[@title='Add New Page']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("New Page / Pages / Elements / Content / Magento Admin"),
+					"Validating edit page bulider navigation ",
+					"after clicking on edit page builder it will navigate edit page builder filed ",
+					"Successfully navigate to the edit page builder filed ",
+					"Failed to navigate to the edit page builder filed");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			report.addFailedLog("Validating edit page bulider navigation ",
+					"after clicking on edit page builder it will navigate edit page builder filed ",
+					"Successfully navigate to the edit page builder filed",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
+			Assert.fail();
+		}
+	}
+
+	public void dragndrop_promocontentBlock() {
+		// TODO Auto-generated method stub
+		try {
+			WebElement element = Common.findElement("xpath", "//span[text()='Promo Content (Product)']");
+			draganddropContentBlock(element);
+			String blocknames = Common.findElement("xpath", "//div[@class='pagebuilder-content-type']")
+					.getAttribute("data-content-type");
+			Common.assertionCheckwithReport(blocknames.equals("hot_product_promo"),
+					"Validating Promocontent Dragndrop operation", "promocontent dragndrop to content with options",
+					"successfully dragndrop the promocontent with options ", "fail to dragndrop the promobaner");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			report.addFailedLog("Validating Promocontent Dragndrop operation",
+					"User should able Dragndrop Promoblocker", "Sucessfully Dragndrop Promocontent",
+					Common.getscreenShotPathforReport("Failed to Dragndrop Promocontent"));
+			
+			Assert.fail();
+			
+		}
+	}
+
+	public void editpromocontent() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+					.getAttribute("id");
+
+//			Common.mouseOverClick("xpath", "//div[@id='"+id+"']//div[3]//i");
+			Common.mouseOverClick("xpath", "//div[@id='"+id+"']");
+			Common.clickElement("xpath","//i[@class='icon-admin-pagebuilder-systems']");
+			
+			
+			String editpromo = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
+
+			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Content (Product)"),
+					"validation Navigation to the edit  Promo Media Card page ",
+					"after Click on edit button it should be navigate to the edit promoBlocker page ",
+					"Successfully it is navigated to edit promoBlocker page ",
+					"Failed to navigate to edit promoBlocker page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+					"after Click on edit button it should be navigate to the edit Blocker page ",
+					"Successfully it is navigated to edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+			Assert.fail();
+
+		}
+		}
+
+	public void Apply_filterpromo(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "(//input[@id='fulltext'])[1]", data.get(Dataset).get("pageTitle"));
+			Common.actionsKeyPress(Keys.ENTER);
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+			if (records.equals("1 records found")) {
+				Sync.waitElementPresent("xpath", "(//button[@class='action-select'])[3]");
+				Common.clickElement("xpath", "(//button[@class='action-select'])[3]");
+				
+				Sync.waitElementPresent("xpath", "//a[text()='Edit']");
+				Common.clickElement("xpath", "//a[text()='Edit']");
+				
+			} else {
+				Assert.fail();
+			}
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("New Customer / Customers / Customers / Magento Admin"),
+					"Validating New customer page navigation ", "after clicking on it will navigate new Customer page",
+					"Successfully navigate to new Customer page", "Failed to navigate to New Customer page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("Validating New customer page navigation ",
+					"after clicking on it will navigate new Customer page",
+					"Successfully navigate to new Customer page",
+					Common.getscreenShotPathforReport("Failed to navigate to New Customer page"));
+			
+
+		}
+	}
+
+	public void clickAlternative() {
+		// TODO Auto-generated method stub
+		try {
+			
+			Sync.waitElementPresent(20, "xpath", "//span[text()='Alternative']");
+			Common.clickElement("xpath","//span[text()='Alternative']");
+			Sync.waitElementPresent("xpath", "//button[@id='save']");
+			Common.clickElement("xpath","//button[@id='save']");
+			
+			
+			//button[@id='save']
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+					"after Click on edit button it should be navigate to the edit Blocker page ",
+					"Successfully it is navigated to edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+			Assert.fail();
+
+		}
+		}
+
+	public void verficationAlternative() {
+		// TODO Auto-generated method stub
+		try {
+			
+			
+			
+			Common.switchToSecondTab();
+			Common.refreshpage();
+			Sync.waitPageLoad();
+			
+			String Block = Common.findElement("xpath", "//div[@class='c-promo-block__left']").getText();
+					
+			Common.assertionCheckwithReport(Block.equals("qaFlask"),
+					"Validating promo block operation", "promoblocker content",
+					"successfully left promoblock", "fail to move left promoblock");
+		
+			//Common.clickElement("xpath", "(//button[@class='action-select'])[3]");
+			//Sync.waitElementPresent("xpath\", \"(//button[@class='action-select'])[3]");
+		
+			
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+
+			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+					"after Click on edit button it should be navigate to the edit Blocker page ",
+					"Successfully it is navigated to edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+			Assert.fail();
+		}
+		
+		
+	}
+
+	public void edit_promoContentProduct() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(3000);
+			
+			Common.mouseOverClick("xpath", "//a[@class='edit-content-type']");
+			
+			Thread.sleep(5000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+					"after Click on edit button it should be navigate to the edit Blocker page ",
+					"Successfully it is navigated to edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+			Assert.fail();
+
+		}
+	}
+
+	public void edit_promoContentProduct_ContentSection(String DataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(1000);
+			String name=Common.getText("xpath", "(//span[text()='Content'])[3]");
+			System.out.println(name);
+			Sync.waitElementPresent("xpath", "(//input[@name='title'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(DataSet).get("title"));
+			Thread.sleep(4000);
+			
+			Common.scrollIntoView("xpath", "//span[text()='Description']");
+			Common.switchFrames("id", "hot_product_promo_form_description_ifr");
+			Common.findElement("id", "html-body").sendKeys( data.get(DataSet).get("Description"));
+			Common.switchToDefault();
+			//Thread.sleep(2000);
+		
+			
+			Thread.sleep(5000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation to the edit content promo Blocker ",
+					"after giving data it should show the data",
+					"Successfully data is populated",
+					Common.getscreenShotPathforReport("Failed to show the data"));
+			Assert.fail();
+
+		}
+	}
+
+	public void edit_promoContentProduct_CTAElements(String DataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			String name=Common.getText("xpath", "//span[text()='CTA Elements']");
+			System.out.println(name);
+			Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
+			Common.clickElement("xpath", "//span[text()='CTA Elements']");
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(DataSet).get("CTAText"));
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(DataSet).get("CTAurl"));
+			Thread.sleep(4000);
+			//Sync.waitElementClickable("xpath", "(//label[@class='admin__field-label'])[6]");
+			Common.clickElement("xpath", "(//label[@class='admin__field-label'])[6]");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "(//span[text()='Save'])[2]");
+			Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+			Thread.sleep(5000);
+			
+			
+			Thread.sleep(5000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation to the edit content promo Blocker ",
+					"after giving data it should show the data",
+					"Successfully data is populated and Saved",
+					Common.getscreenShotPathforReport("Failed to save the data"));
+			Assert.fail();
+
+		}
+	}
+
+	public void promoContentProduct_Save(String DataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//i[@title='Close Full Screen']");
+			Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "(//input[@name='title'])[1]");
+			Common.textBoxInput("xpath", "(//input[@name='title'])[1]", data.get(DataSet).get("pageTitle"));
+			Thread.sleep(3000);		
+			
+			Sync.waitElementPresent("xpath", "(//button[@title='Save'])[1]");
+			Common.clickElement("xpath", "(//button[@title='Save'])[1]");
+			Thread.sleep(5000);
+			
+			
+			
+			Thread.sleep(5000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation to the edit content promo Blocker ",
+					"after giving data it should save the data",
+					"Successfully data is Saved",
+					Common.getscreenShotPathforReport("Failed to Save the data"));
+			Assert.fail();
+
+		}
+	}
+
+	public void website_verification_CTAButton() {
+		// TODO Auto-generated method stub
+		try
+		{
+			
+			Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Thread.sleep(5000);
+			String headingverification=Common.getText("xpath", "//h2[@class='c-promo-block__heading']");
+			System.out.println(headingverification);
+			Common.assertionCheckwithReport(headingverification.contains("QA Test/Promo Block-Content"),
+					"validation Image upload in the forntend website ",
+					"Image should de appear on fornt end page",
+					"Successfully image is appeared on the frondend",
+					"Failed to navigate to edit promoBlocker page");
+					}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+
+			report.addFailedLog("validation Image upload in the forntend website ",
+					"Image should de appear on fornt end page",
+					"Successfully image is appeared on the frondend",
+					Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+			Assert.fail();
+
+			
+		}
+		
+	}
+
+	public void edit_titlepromocontent_color(String Dataset) {
+		// TODO Auto-generated method stub
+try {
+	Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(Dataset).get("pageTitle"));
+	
+	
+			Common.scrollIntoView("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+			Common.clickElement("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+			String color = data.get(Dataset).get("Color");
+			Common.clickElement("xpath", "//span[@title='" + color + "']");
+			Common.clickElement("xpath", "//button[text()='Apply']");
+			String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
+					.getAttribute("value");
+			Common.assertionCheckwithReport(appliedcolor.equals(color),
+					"validation of the color applied in the backgroud color ",
+					"after Clicking on the color the background color should be applied ",
+					"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("validation of the color applied in the backgroud color ",
+					"after Clicking on the color the background color should be applied ",
+					"Successfully Background color is applied ",
+					Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+			Assert.fail();
+
+		}
 	}
 }
