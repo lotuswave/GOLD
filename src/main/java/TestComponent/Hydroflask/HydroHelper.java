@@ -314,7 +314,8 @@ public void Validate_Myaccountoptions(String string) {
 	public void minicart() {
 		try {
 			Sync.waitPageLoad();
-			Common.javascriptclickElement("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+			Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
@@ -322,7 +323,7 @@ public void Validate_Myaccountoptions(String string) {
 
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'minicart__close')]");
 			Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close')]");
-
+			Thread.sleep(3000);
 			Common.isElementNotDisplayed("xpath", "//div[contains(@class,'mini-cart--active')]");
 			int closeminicart = Common.findElements("xpath", "//div[contains(@class,'mini-cart--active')]").size();
 			System.out.println(closeminicart);
@@ -477,30 +478,44 @@ public void Validate_Myaccountoptions(String string) {
 
 	public void toplevelnavigation(String dataSet) {
 		try {
-			Sync.waitElementVisible("xpath", "//div[contains(@class,'welcome-')]");
-			String Welcome = Common.findElement("xpath", "//div[contains(@class,'welcome-')]").getText();
+			Sync.waitElementVisible("xpath", "//button[contains(@class,'m-account-nav__trigger')]/span[2]");
+			String Welcome = Common.findElement("xpath", "//button[contains(@class,'m-account-nav__trigger')]/span[2]")
+					.getText();
 			String logo = Common.findElement("xpath", "//a[@class='a-logo']/img").getAttribute("alt");
+			System.out.println(logo);
 			clickStoreLogo();
-			
+			Common.assertionCheckwithReport(Welcome.contains("Welcome, QA") && logo.contains("Logo"),
+					"To validate the header menu", "Components in header menu should be dispalyed",
+					"Componenets in header menu are displayed", "Failed to display the components in header menu");
+
 			int header = Common.findElements("xpath", "//a[contains(@class,'level-top ui-corner-all')]").size();
-			
-			for(int i=0;i<header; i++)
-			{			
-		    Sync.waitElementVisible("xpath", "(//a[contains(@class,'level-top ui-corner-all')])["+i+"]");
-			Common.mouseOverClick("xpath", "(//a[contains(@class,'level-top ui-corner-all')])["+i+"]");
-			String link = Common.findElement("xpath", "(//a[contains(@class,'level-top ui-corner-all')])["+i+"]").getText();
-			String headerlink[] = data.get(dataSet).get("menu").split(",");
-			
-			Common.assertionCheckwithReport(link.contains(headerlink[i]), "to validate the header menu "+ link, "it should clik the link"+ link, link+"is clicked", "failed to click the link");
+
+			for (int i = 1; i <= header; i++) {
+				Sync.waitElementVisible("xpath", "(//a[contains(@class,'level-top ui-corner-all')])[" + i + "]");
+				Common.mouseOverClick("xpath", "(//a[contains(@class,'level-top ui-corner-all')])[" + i + "]");
+				String link = Common
+						.findElement("xpath", "(//a[contains(@class,'level-top ui-corner-all')]/span)[" + i + "]")
+						.getText();
+				System.out.println(link);
+				String headerlink[] = data.get(dataSet).get("menu").split(",");
+				System.out.println(headerlink[i - 1]);
+
+				Common.assertionCheckwithReport(link.contains(headerlink[i - 1]), "to validate the header menu " + link,
+						"it should clik the link" + link, link + "is clicked", "failed to click the link");
 			}
-			Common.assertionCheckwithReport(Welcome.contains("Welcome, QA") && logo.contains("Logo") , "To validate the header menu",
-					"Components in header menu should be dispalyed", "Componenets in header menu are displayed",
-					"Failed to display the components in header menu");
-			
+
 		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the header menu for Authorised user ",
+					" it should clik the Header links and navigate to the My account menu", "Top level navigation unsuccessfull", "Failed to navigate through the header menu");
+			Assert.fail();
 
 		}
 	}
+
+
+
+	
 public void Promobanner() {
 		
 		try {

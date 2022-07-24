@@ -18,7 +18,7 @@ public class DGLD_OXO_UT_Chat_Bot_001_AdditionalPath_User_toggle_between_chat_op
 
 		try {
 	       
-			Oxo.click_ChatBot();
+			Oxo.click_ChatBot("Chatoptions");
 			
 		}
 		catch (Exception e) {

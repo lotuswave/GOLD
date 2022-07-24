@@ -204,31 +204,49 @@ public class OxoHelper {
 
 	}
 	
-	public void click_ChatBot() {
+	public void click_ChatBot(String dataSet) {
 
 		try {
-		
+			Sync.waitPageLoad();
+			Sync.waitElementClickable("xpath", "//a[@class='a-logo']");		
 			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
 			
-			Common.findElement("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
-			Common.clickElement("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
-		String chat = Common.findElement("xpath", "//div[@id='kustomer-ui-modal-root']/div[2]/div[1]/div[1]/p").getText();
+			Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
 			
-			Common.assertionCheckwithReport(chat.equals("Answers"), "validate the ChatBot",
+	  String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
+			Common.assertionCheckwithReport(answers.contains("Answers") , "validate the ChatBot",
 					"Open the ChatBot", "Sucessfully click on the ChatBot",
 					"Unable to click the ChatBot");
 			
-			Common.findElement("xpath", "//div[@id='kustomer-ui-modal-root']/div[2]/div[1]/div[2]/div/p");
-			Common.clickElement("xpath", "//div[@id='kustomer-ui-modal-root']/div[2]/div[1]/div[2]/div/p");
 			
-			Common.clickElement("xpath", "//button[@aria-label='New Conversation']");
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
 			
-			String newchat=Common.findElement("xpath", "//button[@aria-label='New Conversation']").getText();
-			Common.assertionCheckwithReport(newchat.equals("New Conversation"), "validate the ChatBot",
-					"Open the ChatBot", "Sucessfully click on the ChatBot",
-					"Unable to click the ChatBot");
+			int elements = Common.findElements("xpath", "//div[contains(@class,'SearchListItem__details')]").size();
 			
-//			Common.clickElement("xpath", "//button[@aria-label='minimize chat widget']");
+			String items[] = data.get(dataSet).get("OXOAnswers").split(",");
+			
+			for(int i=1; i<=elements && i<=items.length; i++) {
+				System.out.println(items[i-1]);
+				String searchitems = Common.findElement("xpath", "(//div[contains(@class,'SearchListItem__title')])["+i+"]").getText();
+				System.out.println(searchitems);
+				Assert.assertEquals(searchitems, items[i-1]);
+				
+			}
+			
+			String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+			Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
+			//Common.isElementDisplayedonPage(30,  "xpath", "//div[contains(@class,'Thread__message')]");
+			Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+			
+			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to Hydro Flask") , "validate the Chat display",
+					"Open the Chat conversation in ChatBot", "Sucessfully click on the ChatBot and display the Chat conversation ",
+					"Unable to dispaly the chat conversation");
+			
+
 			
 			Common.switchToDefault();
 			
@@ -240,7 +258,6 @@ public class OxoHelper {
 		}
 
 	}
-	
 
 	
 
