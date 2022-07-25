@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestLib.Common;
 import TestLib.Login;
 import models.admin.Adminhelper;
 
@@ -18,7 +19,7 @@ public class DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant {
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
-           Admin.newpageCTA();
+           Admin.newpageCTA("promocontent");
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.dragndrop_promocontentBlock();        
@@ -36,6 +37,8 @@ public class DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant {
            Admin.clickAlternative();
            Admin.savecontent("promocontent");        
            Admin.verficationAlternative();
+           Admin.deletepage("promocontent");
+           Admin.Clearfilter();
       
         }
         catch (Exception e) {
@@ -49,7 +52,7 @@ public class DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant {
     @AfterTest
     public void clearBrowser()
     {
-//        Common.closeAll();
+        Common.closeAll();
 
     }
 

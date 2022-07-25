@@ -1245,6 +1245,7 @@ public class Adminhelper {
 	public void click_content() {
 		// TODO Auto-generated method stub
 		try {
+			Common.switchToFirstTab();
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//li[@id='menu-magento-backend-content']");
 			Sync.waitElementPresent("xpath", "//li[@id='menu-magento-backend-content']");
@@ -1267,7 +1268,7 @@ public class Adminhelper {
 
 	}
 
-	public void pages() {
+	public void Pages() {
 
 		try {
 			Sync.waitElementPresent("xpath", "//span[text()='Pages']");
@@ -1277,6 +1278,27 @@ public class Adminhelper {
 					"Validating content filed page navigation ", "after clicking on pages it will navigate page filed ",
 					"Successfully navigate to the page filed ", "Failed to navigate to the page filed");
 			delete_existingpage("ProductcardTile");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("Validating content filed page navigation ",
+					"after clicking on pages it will navigate page filed ", "Successfully navigate to the page filed ",
+					Common.getscreenShotPathforReport("Failed to navigate to the page filed"));
+			Assert.fail();
+
+		}
+
+	}
+	public void pages() {
+
+		try {
+			Sync.waitElementPresent("xpath", "//span[text()='Pages']");
+			Common.clickElement("xpath", "//span[text()='Pages']");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Pages / Magento Admin"),
+					"Validating content filed page navigation ", "after clicking on pages it will navigate page filed ",
+					"Successfully navigate to the page filed ", "Failed to navigate to the page filed");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1870,7 +1892,7 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//li[@name='video']");
 			Common.clickElement("xpath", "//li[@name='video']");
 			Common.clickElement("xpath", "//input[@name='video_source']");
-			Common.textBoxInput("xpath", "//input[@name='video_source']", data.get(Dataset).get("videoUrl"));
+			Common.textBoxInput("xpath", "//input[@name='video_source']", data.get(Dataset).get("VideoURL"));
 			Common.clickElement("xpath", "(//div[contains(@class,'sp-preview-')])[2]");
 			String color = data.get(Dataset).get("Color");
 			Common.clickElement("xpath", "//span[@title='" + color + "']");
@@ -2381,6 +2403,7 @@ public class Adminhelper {
 			Common.clickElement("xpath", "//button[@id='save-button']");
 			Sync.waitPageLoad(70);
 			Sync.waitPageLoad();
+			Thread.sleep(6000);
 			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
 					"Validating the User need to save the page", "User should able to save the page",
@@ -2402,7 +2425,7 @@ public class Adminhelper {
 			Common.switchToSecondTab();
 			Common.refreshpage();
 			Sync.waitPageLoad();
-			String image = Common.findElement("xpath", "(//img[@data-element='desktop_image'])[6]")
+			String image = Common.findElement("xpath", "(//img[@data-element='desktop_image'])[5]")
 					.getAttribute("data-pb-style");
 			System.out.println();
 			String headingname = Common.findElement("xpath", "//img[@data-pb-style='" + image + "']")
@@ -2494,7 +2517,7 @@ public class Adminhelper {
 		// TODO Auto-generated method stub
 
 		try {
-			String id = Common.findElement("xpath", "(//div[@data-background-type='image'])[4]")
+			String id = Common.findElement("xpath", "(//div[@data-background-type='image'])[3]")
 					.getAttribute("data-pb-style");
 			String websiteverification = Common.findElement("xpath", "//div[@data-pb-style='" + id + "']")
 					.getAttribute("data-background-images");
@@ -2523,6 +2546,7 @@ public class Adminhelper {
 		try {
 			Common.switchToFirstTab();
 			Contentpage();
+		    Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@data-content-type='hot_promo_block']");
 			Common.mouseOver("xpath", "//div[@data-content-type='hot_promo_block']");
 			Sync.waitElementPresent("xpath", "//a[@title='Duplicate']");
@@ -2589,7 +2613,7 @@ public class Adminhelper {
 			Common.switchToSecondTab();
 			Common.refreshpage();
 			Sync.waitPageLoad();
-			String id = Common.findElement("xpath", "(//div[@data-background-type='image'])[4]")
+			String id = Common.findElement("xpath", "(//div[@data-background-type='image'])[3]")
 					.getAttribute("data-pb-style");
 			Thread.sleep(4000);
 			String imagefrontend = Common.findElement("xpath", "//div[@data-pb-style='" + id + "']")
@@ -2954,7 +2978,7 @@ public class Adminhelper {
 					data.get(Dataset).get("CTA Type"));
 			Common.clickElement("xpath", "//select[@name='link_url']");
 			Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("videoUrl"));
+					data.get(Dataset).get("VideoURL"));
 			Common.clickElement("xpath", "//div[contains(@class,'url-input-e')]");
 			Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(Dataset).get("URL"));
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");

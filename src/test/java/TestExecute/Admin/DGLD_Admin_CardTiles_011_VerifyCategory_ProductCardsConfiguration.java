@@ -21,7 +21,7 @@ public class DGLD_Admin_CardTiles_011_VerifyCategory_ProductCardsConfiguration {
 		try {
 			Admin.Admin_signin("pagetitle");
 			Admin.click_content();
-			Admin.pages();
+			Admin.Pages();
 			Admin.NewpageCTA();
 			Admin.Contentpage();
 			Admin.hot_elements();
@@ -51,7 +51,7 @@ public class DGLD_Admin_CardTiles_011_VerifyCategory_ProductCardsConfiguration {
 
 	@AfterTest
 	public void clearBrowser() {
-		// Common.closeAll();
+		 Common.closeAll();
 
 	}
 

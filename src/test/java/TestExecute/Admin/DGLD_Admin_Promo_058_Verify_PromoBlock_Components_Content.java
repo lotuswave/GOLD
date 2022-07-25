@@ -19,7 +19,7 @@ public class DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content {
     	  Admin.Admin_signin("AccountDetails");
           Admin.click_content();
           Admin.pages();
-          Admin.newpageCTA();
+          Admin.newpageCTA("promocontent");
           Admin.Contentpage();
           Admin.hot_elements();
           Admin.dragndrop_promocontentBlock();
@@ -29,9 +29,8 @@ public class DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content {
           Admin.promoContentProduct_Save("CTAElements");         
           Admin.openwebsite("CTAElements");
           Admin.website_verification_CTAButton();
-
-       //   Admin.clonepage();
-//          Admin.deletepage();  
+          Admin.deletepage("promocontent");
+          Admin.Clearfilter();
        }
        catch (Exception e) {
 
