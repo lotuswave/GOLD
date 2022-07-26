@@ -2620,15 +2620,14 @@ public class Adminhelper {
 					.getAttribute("data-background-images");
 			System.out.println(imagefrontend);
 			Common.assertionCheckwithReport(imagefrontend.contains("Lotusqa1"),
-					"validation the image uploading on content for fornt end image ",
+					"validating the image uploading on content for fornt end image ",
 					"Image should be upload for front end image", "Successfully image uploaded in front end image ",
 					"Failed to upload image on the frond end image");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-
-			report.addFailedLog("validation the image uploading on content for fornt end image ",
-					"Image should be upload for front end image", "Successfully image uploaded in front end image ",
-					Common.getscreenShotPathforReport("Failed to upload image on the frond end image"));
+			ExtenantReportUtils.addFailedLog("validating the image uploading on content for fornt end image ",
+					"Image should be upload for front end image", "Unable to upload image on front end ",
+					"Failed to upload image on the frond end image");
 			Assert.fail();
 
 		}
@@ -2640,7 +2639,7 @@ public class Adminhelper {
 		try {
 			Sync.waitElementPresent("xpath", "//span[text()='Play video']");
 			Common.clickElement("xpath", "//span[text()='Play video']");
-			String pause = Common.findElement("xpath", "//button[contains(@class,'a-video-btn a-')]")
+			String pause = Common.findElement("xpath", "//button[contains(@class,'a-video-btn a-video-btn--icon-only js-v')]")
 					.getAttribute("class");
 			System.out.println(pause);
 			Common.assertionCheckwithReport(pause.contains(" video-playing"),
@@ -2648,9 +2647,8 @@ public class Adminhelper {
 					"Successfully video uploaded in front end  ", "Failed to upload video on the frond end ");
 
 		} catch (Exception | Error e) {
-			report.addFailedLog("validation the video uploading on fornt end  ",
-					"video should be upload for front end ", "Successfully video uploaded in front end  ",
-					Common.getscreenShotPathforReport("Failed to upload video on the frond end "));
+			ExtenantReportUtils.addFailedLog("validation the video uploading on fornt end  ", "video should be upload for front end ",
+					"Unable to upload video on front end  ", "Failed to upload video on the frond end ");
 		}
 
 	}
@@ -4411,5 +4409,8 @@ public class Adminhelper {
 
 		}
 	}
+
+
+	
 
 }
