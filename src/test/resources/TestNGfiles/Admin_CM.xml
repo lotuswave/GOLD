@@ -61,9 +61,107 @@
             <class name="TestExecute.Admin.DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment"/>
         </classes>
         </test> 
-
         
+          <test name="Validate_Adds_New_Country_Language" testid="DTG-726" priority="P1" description="This script will cover validating Adds New Country Language">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CLSM_022_AlternatePath_Admin_Adds_New_Country_Language"/>
+        </classes>
+        </test>  
+        
+        <test name="Validating_Edits_Country_Language" testid="DTG-734" priority="P1" description="This script will cover validating  Edits Country Language">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CLSM_024_AlternatePath_Admin_Edits_Country_Language"/>
+        </classes>
+        </test>  
+       
+         <test name="Validating_Deletes_Country_Language" testid="DTG-736" priority="P1" description="This script will cover validating Deletes Country Language">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CLSM_026_AlternatePath_Admin_Deletes_Country_Language"/>
+        </classes>
+        </test>
+        
 
-    
+       <test name="Validating_Promo_Content_Product_Close_functionality" testid="DTG-754" priority="P1" description="This script will cover validating Promo Content Product Close functionality">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality"/>
+        </classes>
+        </test>
+        
+        
+        <test name="Validating_Promo_Block_Components_Background_Video" testid="DTG-760" priority="P1" description="This script will cover validating the Promo Block Components Background Video">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_PB_050_Verify_the_Promo_Block_Components_Background_Video"/>
+        </classes>
+        </test>
+        
+        <test name="Validating_PromoBlock_Media_Card_Background_Image" testid="DTG-758" priority="P1" description="This script will cover validating PromoBlock Media Card Background Image">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_Promo_048_Verify_PromoBlock_Media_Card_Background_Image"/>
+        </classes>
+        </test>
+        
+        <test name="Validating_Promo_Block_Content_Background_Image" testid="DTG-759" priority="P1" description="This script will cover validating Promo Block Content Background Image">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Image"/>
+        </classes>
+        </test>
+        
+        <test name="Validating_Promo_Block_Close_functionality" testid="DTG-757" priority="P1" description="This script will cover validating Promo Block Close functionality">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_PB_047_Verify_Promo_Block_Close_functionality"/>
+        </classes>
+        </test>
+        
+        
+        <test name="Validating_Value_Prop_Banner_Close_functionality" testid="DTG-740" priority="P1" description="This script will cover validating Value Prop Banner Close functionality">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_VPB_030_Verify_Value_Prop_Banner_Close_functionality"/>
+        </classes>
+        </test>
+        
+        
+        
+        <test name="Validating_Value_Prop_Banner_Components" testid="DTG-748" priority="P1" description="This script will cover validating Value Prop Banner Components">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_VPB_038_Verify_the_Value_Prop_Banner_Components"/>
+        </classes>
+        </test>
+        
+         
+        <test name="Validating_Views_List_of_Countries_Languages" testid="DTG-723" priority="P1" description="This script will cover validating Views List of Countries Languages">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CLSM_014_NormalPath_Admin_Views_List_of_Countries_Languages"/>
+        </classes>
+        </test>
+
+        <test name="Validating_Promo_Media_Card_Content" testid="DTG-800" priority="P1" description="This script will cover validating Promo Media Card Content">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content"/>
+        </classes>
+        </test>
+        
+        
+         <test name="Validating_Category_ProductCardsConfiguration" testid="DTG-733" priority="P1" description="This script will cover validating Category ProductCardsConfiguration">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_CardTiles_011_VerifyCategory_ProductCardsConfiguration"/>
+        </classes>
+        </test>
+        
+        
+         <test name="Validating_PromoBlock_Components_Variant" testid="DTG-794" priority="P1" description="This script will cover validating PromoBlock Components Variant">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant"/>
+        </classes>
+        </test>
+        
+        
+         <test name="Validating_PromoBlock_Components_Content" testid="DTG-796" priority="P1" description="This script will cover validating PromoBlock Components Content">
+       <classes>
+            <class name="TestExecute.Admin.DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content"/>
+        </classes>
+        </test>
+
+
+
         
 </suite>  

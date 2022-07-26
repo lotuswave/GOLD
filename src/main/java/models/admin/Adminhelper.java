@@ -15,6 +15,7 @@ import TestLib.Common.SelectBy;
 import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
+import groovyjarjarantlr.CommonAST;
 
 public class Adminhelper {
 
@@ -1332,6 +1333,7 @@ public class Adminhelper {
 				Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
 				Common.clickElement("xpath", "//button[@title='Add New Page']");
 			}
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("New Page / Pages / Elements / Content / Magento Admin"),
@@ -1403,6 +1405,7 @@ public class Adminhelper {
 
 	public void dragndrop_Promo_Content() {
 		try {
+		    Common.scrollIntoView("xpath", "//span[text()='Promo Content (Product)']");
 			WebElement element = Common.findElement("xpath", "//span[text()='Promo Content (Product)']");
 			draganddropContentBlock(element);
 			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
@@ -1557,6 +1560,7 @@ public class Adminhelper {
 			Sync.waitElementVisible("xpath", "//div[@data-ui-id='messages-message-success']");
 			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(savethepage.contains("You saved the page."),
 					"Validating the User need to save the page", "User should able to save the page",
 					"Sucessfully User saves the page", "Unable to save the page");
@@ -1622,17 +1626,19 @@ public class Adminhelper {
 			String deletemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
 					.getText();
 			System.out.println(deletemessage);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Pages / Magento Admin")
 							&& deletemessage.equals("The page has been deleted."),
 					"Validating page filed  navigation and customer deleted message",
-					"after clicking save button it will navigate page filed and message should be displayed",
+					"after clicking delete button it will navigate page filed and message should be displayed",
 					"Successfully navigate to page filed and message is dispalyed", "Failed to navigate to page filed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User lands to the hydroflask page",
-					"User should able lands on the hydroflask page", "Sucessfully User lands on the hydroflask page",
+			report.addFailedLog("Validating page filed  navigation and customer deleted message",
+					"after clicking delete button it will navigate page filed and message should be displayed",
+					"Unable to navigate to the page filed ",
 					Common.getscreenShotPathforReport("Failed to navigate to page filed"));
 			Assert.fail();
 		}
@@ -1724,10 +1730,12 @@ public class Adminhelper {
 
 	public void dragndrop_promoBlock() {
 		try {
+			Common.scrollIntoView("xpath", "//span[text()='Promo Block']");
 			WebElement element = Common.findElement("xpath", "//span[text()='Promo Block']");
 			draganddropContentBlock(element);
 			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
 					.getAttribute("data-content-type");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(blockname.equals("hot_promo_block"),
 					"Validating Promoblocker Dragndrop operation", "promoblocker dragndrop to content with options",
 					"successfully dragndrop the promoblocker with options ", "fail to dragndrop the promobaner");
@@ -1752,6 +1760,7 @@ public class Adminhelper {
 			Common.mouseOverClick("xpath", "//div[@id='" + id + "']//div[3]//i");
 
 			String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
 			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
 					"validation Navigation to the edit  Promo Media Card page ",
@@ -1947,6 +1956,7 @@ public class Adminhelper {
 	public void dragndrop_valueprop_Banner() {
 		// TODO Auto-generated method stub
 		try {
+			Common.scrollIntoView("xpath", "//span[text()='Value Prop Banner']");
 			WebElement elements = Common.findElement("xpath", "//span[text()='Value Prop Banner']");
 			draganddropContentBlock(elements);
 			String blocknames = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
@@ -2493,6 +2503,8 @@ public class Adminhelper {
 			Common.clickElement("xpath", "//div[@id='" + id + "']//div[4]//i");
 
 			String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+			
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
 			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
 					"validation Navigation to the edit  Promo Media Card page ",
@@ -2517,7 +2529,7 @@ public class Adminhelper {
 		// TODO Auto-generated method stub
 
 		try {
-			String id = Common.findElement("xpath", "(//div[@data-background-type='image'])[3]")
+			String id = Common.findElement("xpath", "//div[@class='c-promo']//div[@data-background-type='image']")
 					.getAttribute("data-pb-style");
 			String websiteverification = Common.findElement("xpath", "//div[@data-pb-style='" + id + "']")
 					.getAttribute("data-background-images");
@@ -2613,7 +2625,8 @@ public class Adminhelper {
 			Common.switchToSecondTab();
 			Common.refreshpage();
 			Sync.waitPageLoad();
-			String id = Common.findElement("xpath", "(//div[@data-background-type='image'])[3]")
+			Common.scrollIntoView("xpath", "//div[@class='c-promo']//div[@data-background-type='image']");
+			String id = Common.findElement("xpath", "//div[@class='c-promo']//div[@data-background-type='image']")
 					.getAttribute("data-pb-style");
 			Thread.sleep(4000);
 			String imagefrontend = Common.findElement("xpath", "//div[@data-pb-style='" + id + "']")
@@ -3097,6 +3110,7 @@ public class Adminhelper {
 	public void dragndrop_promocontentBlock() {
 		// TODO Auto-generated method stub
 		try {
+			Common.scrollIntoView("xpath", "//span[text()='Promo Content (Product)']");
 			WebElement element = Common.findElement("xpath", "//span[text()='Promo Content (Product)']");
 			draganddropContentBlock(element);
 			String blocknames = Common.findElement("xpath", "//div[@class='pagebuilder-content-type']")
@@ -3175,10 +3189,10 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating New customer page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating New customer page navigation ",
 					"after clicking on it will navigate new Customer page",
-					"Successfully navigate to new Customer page",
-					Common.getscreenShotPathforReport("Failed to navigate to New Customer page"));
+					"unable to navigate the new Customer page", "Failed to navigate to New Customer page");
+		Assert.fail();
 
 		}
 	}
