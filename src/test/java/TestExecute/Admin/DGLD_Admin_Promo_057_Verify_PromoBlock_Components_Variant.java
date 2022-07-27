@@ -28,12 +28,7 @@ public class DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant {
            Admin.editpromocontent_image();
            Admin.allbackground("promocontent"); 
            Admin.savecontent("promocontent"); 
-           Admin.openwebsite("promocontent");          
-           Admin.click_content();
-           Admin.pages();         
-           Admin.Apply_filterpromo("promocontent");
-           Admin.Contentpage();
-           Admin.editpromocontent();            
+           Admin.openwebsite("promocontent");                      
            Admin.clickAlternative();
            Admin.savecontent("promocontent");        
            Admin.verficationAlternative();

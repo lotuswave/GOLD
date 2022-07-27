@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestLib.Common;
 import TestLib.Login;
 import models.admin.Adminhelper;
 
@@ -23,7 +24,7 @@ public class DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content {
           Admin.Contentpage();
           Admin.hot_elements();
           Admin.dragndrop_promocontentBlock();
-          Admin.edit_promoContentProduct();
+          Admin.editpromocontent();
           Admin.edit_promoContentProduct_ContentSection("EditContentSection");
           Admin.edit_promoContentProduct_CTAElements("CTAElements");
           Admin.promoContentProduct_Save("CTAElements");         
@@ -43,7 +44,7 @@ public class DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content {
    @AfterTest
    public void clearBrowser()
    {
-//       Common.closeAll();
+       Common.closeAll();
 
    }
 

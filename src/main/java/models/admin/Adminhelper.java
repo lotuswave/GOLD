@@ -3200,6 +3200,9 @@ public class Adminhelper {
 	public void clickAlternative() {
 		// TODO Auto-generated method stub
 		try {
+			Common.switchToFirstTab();
+			Contentpage();
+			editpromocontent(); 
 
 			Sync.waitElementPresent(20, "xpath", "//span[text()='Alternative']");
 			Common.clickElement("xpath", "//span[text()='Alternative']");
