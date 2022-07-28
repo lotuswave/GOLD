@@ -764,7 +764,7 @@ System.out.println(account);
 
 	}
 	
-	public void click_ChatBot(String dataSet) {
+	public void click_ChatBot(String DataSet) {
 
 		try {
 			Sync.waitPageLoad();
@@ -784,7 +784,7 @@ System.out.println(account);
 			
 			int elements = Common.findElements("xpath", "//div[contains(@class,'SearchListItem__details')]").size();
 			
-			String items[] = data.get(dataSet).get("OXOAnswers").split(",");
+			String items[] = data.get(DataSet).get("OXOAnswers").split(",");
 			
 			for(int i=1; i<=elements && i<=items.length; i++) {
 				System.out.println(items[i-1]);
@@ -822,19 +822,21 @@ System.out.println(account);
 	
 
 	public void clickcountryselector() {
-		try {
+		  
+		        try {
 
-			Common.scrollIntoView("xpath", "//button[@class='a-icon-text-btn c-footer__country-selector action']");
+		            Common.scrollIntoView("xpath", "//button[contains(@class,'selector action')]");
 
-			// Thread.sleep(1500);
-			Common.clickElement("xpath", "//button[@class='a-icon-text-btn c-footer__country-selector action']");
-			String text = Common.findElement("xpath", "//h1[@class='heading heading--page m-modal__headline']")
-					.getText();
+		            Sync.waitElementClickable("xpath", "//button[contains(@class,'selector action')]");
+		            Common.clickElement("xpath", "//button[contains(@class,'selector action')]");
+		            Sync.waitElementVisible("xpath", "//h1[@class='heading heading--page m-modal__headline']");
+		            String text = Common.findElement("xpath", "//h1[@class='heading heading--page m-modal__headline']")
+		                    .getText();
 
-			Common.assertionCheckwithReport(text.contains("Choose Your Location"),
-					"To validate the Country Selector Pop up", "Country Selector Pop up should be dispalyed",
-					"Different Countries Should be displayed", "Failed to display the Different Countries");
-		}
+		            Common.assertionCheckwithReport(text.contains("Choose Your Location"),
+		                    "To validate the Country Selector Pop up", "Country Selector Pop up should be dispalyed",
+		                    "Different Countries Should be displayed", "Failed to display the Different Countries");
+		        }
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -846,42 +848,67 @@ System.out.println(account);
 
 	}
 
-	public void Verify_Available_Selections(String dataSet) {
+	 public void Verify_Available_Selections(String dataSet) {
 
-		String available = data.get(dataSet).get("Options");
-		String[] Select = available.split(",");
-		int i = 0;
+	        String available = data.get(dataSet).get("CountryOptions");
+	        String[] Select = available.split(",");
+	        String[] url= data.get(dataSet).get("url").split(",");
 
-		try {
+	        int i = 0;
 
-			for (i = 1; i <= Select.length; i++) {
-				System.out.println(Select[i - 1]);
-				Common.scrollIntoView("xpath", "(//input[contains(@name,'countrySelector')])[" + i + "]");
+	        try {
 
-				String Country = Common
-						.findElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]")
-						.getText();
-			
-				Sync.waitElementClickable("xpath",
-						"(//label[contains(@class,'country-item__country-label')])[" + i + "]");
-				Common.clickElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
-				System.out.println(Country);
-				Common.assertionCheckwithReport(Country.equals(Select[i - 1]), "verifying the Country" + Select[i - 1],
-						"user Selects " + Select[i - 1] + "Country",
-						"user successfully Selects the country " + Select[i - 1],
-						"Failed to select the country " + Select[i - 1]);
-			}
+	            for (i = 1; i <= Select.length && i<=url.length; i++) {
+	                System.out.println(Select[i - 1]);
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Country Selector" + Select[i-1],
-					"user Selects the " + Select[i-1] + "Country", "User unabel to Select Country " + Select[i-1],
-					Common.getscreenShotPathforReport("user failed to Select the Country"));
-			System.out.println(Select[i-1] + " is Missing");
-			Assert.fail();
+	                Common.scrollIntoView("xpath", "(//input[contains(@name,'countrySelector')])[" + i + "]");
 
-		}
-	}
+	                String Country = Common
+	                        .findElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]")
+	                        .getText();
+
+	                Sync.waitElementClickable("xpath",
+	                        "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+	                Common.mouseOverClick("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+	                System.out.println(Country);
+	                Common.assertionCheckwithReport(Country.contains(Select[i - 1]), "verifying the Country" + Select[i - 1],
+	                        "user Selects " + Select[i - 1] + "Country",
+	                        "user successfully Selects the country " + Select[i - 1],
+	                        "Failed to select the country " + Select[i - 1]);
+
+	                Common.scrollIntoView("xpath", "//button[contains(@class,'primary action')]");
+	                Common.mouseOverClick("xpath", "//button[contains(@class,'primary action')]");
+	                Sync.waitPageLoad();
+
+	                String Websiteurl = Common.getCurrentURL();
+	                System.out.println(url[i-1]);
+	                System.out.println(Websiteurl);
+
+	                //Sync.waitElementClickable("xpath", "//a[@class='logo']/img");
+	                //String logo = Common.findElement("xpath", "//a[@class='logo']/img").getAttribute("alt");
+
+	                Common.assertionCheckwithReport(Websiteurl.contains(url[i-1]), "To validate the store logo" + Select[i - 1],
+	                        "Should Navigated to the Hydroflask website"+ Select[i - 1], "Navigated to the Hydroflask US website"+ Select[i - 1],
+	                        "Failed to navigate to Hydroflask Website " + Select[i - 1]);
+	                Common.openNewTab();
+	                Common.oppenURL(data.get(dataSet).get("WebsiteURL"));
+	                Sync.waitPageLoad();
+	                clickcountryselector();
+
+
+
+	            }
+
+	        } catch (Exception | Error e) {
+	            e.printStackTrace();
+	            ExtenantReportUtils.addFailedLog("validating the Country Selector" + Select[i - 1],
+	                    "user Selects the " + Select[i - 1] + "Country", "User unabel to Select Country " + Select[i - 1],
+	                    Common.getscreenShotPathforReport("user failed to Select the Country"));
+	            System.out.println(Select[i - 1] + " is Missing");
+	            Assert.fail();
+
+	        }
+	    }
 	public void Promobanner() {
 		try {
 			Common.clickElement("xpath", "//span[text()='See Details']");

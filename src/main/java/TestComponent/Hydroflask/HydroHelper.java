@@ -8,12 +8,14 @@ import java.util.Map;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.AssertJUnit;
 
 import TestLib.Automation_properties;
 import TestLib.Common;
 import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
+import Utilities.Utils;
 
 public class HydroHelper {
 
@@ -542,4 +544,406 @@ public void Promobanner() {
 
 	}
 
+public void clickcountryselector() {
+	  
+    try {
+
+        Common.scrollIntoView("xpath", "//button[contains(@class,'selector action')]");
+
+        Sync.waitElementClickable("xpath", "//button[contains(@class,'selector action')]");
+        Common.clickElement("xpath", "//button[contains(@class,'selector action')]");
+        Sync.waitElementVisible("xpath", "//h1[@class='heading heading--page m-modal__headline']");
+        String text = Common.findElement("xpath", "//h1[@class='heading heading--page m-modal__headline']")
+                .getText();
+
+        Common.assertionCheckwithReport(text.contains("Choose Your Location"),
+                "To validate the Country Selector Pop up", "Country Selector Pop up should be dispalyed",
+                "Different Countries Should be displayed", "Failed to display the Different Countries");
+    }
+
+catch (Exception | Error e) {
+e.printStackTrace();
+report.addFailedLog("validating the Country Selector Pop up",
+		"User successfully open Country Selector Pop up", "User unabel to open country Selector Pop up",
+		Common.getscreenShotPathforReport("user failed to open the Country Selector Pop up"));
+Assert.fail();
+}
+
+}
+
+public void Verify_Available_Selections(String dataSet) {
+
+String available = data.get(dataSet).get("CountryOptions");
+String[] Select = available.split(",");
+String[] url= data.get(dataSet).get("url").split(",");
+
+int i = 0;
+
+try {
+
+    for (i = 1; i <= Select.length && i<=url.length; i++) {
+        System.out.println(Select[i - 1]);
+
+        Common.scrollIntoView("xpath", "(//input[contains(@name,'countrySelector')])[" + i + "]");
+
+        String Country = Common
+                .findElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]")
+                .getText();
+
+        Sync.waitElementClickable("xpath",
+                "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+        Common.mouseOverClick("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+        System.out.println(Country);
+        Common.assertionCheckwithReport(Country.contains(Select[i - 1]), "verifying the Country" + Select[i - 1],
+                "user Selects " + Select[i - 1] + "Country",
+                "user successfully Selects the country " + Select[i - 1],
+                "Failed to select the country " + Select[i - 1]);
+
+        Common.scrollIntoView("xpath", "//button[contains(@class,'primary action')]");
+        Common.mouseOverClick("xpath", "//button[contains(@class,'primary action')]");
+        Sync.waitPageLoad();
+
+        String Websiteurl = Common.getCurrentURL();
+        System.out.println(url[i-1]);
+        System.out.println(Websiteurl);
+
+
+        Common.assertionCheckwithReport(Websiteurl.contains(url[i-1]), "To validate the store logo" + Select[i - 1],
+                "Should Navigated to the Hydroflask website"+ Select[i - 1], "Navigated to the Hydroflask US website"+ Select[i - 1],
+                "Failed to navigate to Hydroflask Website " + Select[i - 1]);
+        Common.openNewTab();
+        Common.oppenURL(data.get(dataSet).get("WebsiteURL"));
+        Sync.waitPageLoad();
+        clickcountryselector();
+
+
+
+    }
+
+} catch (Exception | Error e) {
+    e.printStackTrace();
+    ExtenantReportUtils.addFailedLog("validating the Country Selector" + Select[i - 1],
+            "user Selects the " + Select[i - 1] + "Country", "User unabel to Select Country " + Select[i - 1],
+            Common.getscreenShotPathforReport("user failed to Select the Country"));
+    System.out.println(Select[i - 1] + " is Missing");
+    Assert.fail();
+
+}
+}
+
+public void verifingHomePage() {
+	try {
+		Sync.waitPageLoad();
+		int size =Common.findElements("xpath", "//a[@class='a-logo']").size();
+		Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("Home Page"), "validating store logo",
+				"System directs the user back to the Homepage", "Sucessfully user back to home page",
+				"faield to get back to homepage");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validating store logo", "System directs the user back to the Homepage",
+				"Sucessfully user back to home page",
+				Common.getscreenShotPathforReport("faield to get back to homepage"));
+		Assert.fail();
+	}
+
+}
+
+public void UserViewsContactUsPageandSubmits(String DataSet) throws Exception{
+	String country="United States";
+	try {
+		Sync.waitPageLoad();
+		Common.actionsKeyPress(Keys.END);
+		Common.clickElement("xpath", "//a[text()='Contact Us']");
+		/*Common.assertionCheckwithReport(Common.getPageTitle().equals("Contact"), "validating store logo",
+				"System directs the user back to the Homepage", "Sucessfully user back to home page",
+				"faield to get back to homepage");*/
+		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
+		Common.switchFrames("xpath","//iframe[contains(@src,'https://hydroflask')]");
+		
+		Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
+		Common.textBoxInput("xpath", "//input[@id='customerEmail']",data.get(DataSet).get("Email"));
+		
+
+		Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
+		Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(DataSet).get("FirstName"));
+		
+		Sync.waitElementPresent("xpath", "//input[@id='lastName']");
+		Common.textBoxInput("xpath", "//input[@id='lastName']", data.get(DataSet).get("LastName"));
+		
+		Sync.waitElementPresent("xpath", "//input[@name='company']");
+		Common.textBoxInput("xpath", "//input[@name='company']", data.get(DataSet).get("Company"));
+		
+		Sync.waitElementPresent("xpath", "//input[@id='primary']");
+		Common.textBoxInput("xpath", "//input[@id='primary']", data.get(DataSet).get("phone"));
+		
+		Sync.waitElementPresent("xpath", "//input[@name='street']");
+		Common.textBoxInput("xpath", "//input[@name='street']", data.get(DataSet).get("Street"));
+		
+		Sync.waitElementPresent("xpath", "//input[@name='city']");
+		Common.textBoxInput("xpath", "//input[@name='city']", data.get(DataSet).get("City"));
+		
+		Sync.waitElementPresent("xpath", "//input[@name='city']");
+		Common.clickElement("xpath","//div[@id='country']");
+		
+		
+		Sync.waitElementPresent("xpath", "//div[@value='united-states']//span[contains(text(),'United States')]");
+		Common.clickElement("xpath","//div[@value='united-states']//span[contains(text(),'United States')]");
+		
+
+		Sync.waitElementPresent("xpath", "//input[@id='zipPostalCode']");
+		Common.textBoxInput("xpath", "//input[@id='zipPostalCode']", data.get(DataSet).get("postcode"));
+		
+		Sync.waitElementPresent("xpath", "//div[@id='stateOrProvince']");
+		Common.clickElement("xpath", "//div[@id='stateOrProvince']");
+		
+		
+		Sync.waitElementPresent("xpath", "//span[text()='Alabama']");
+		Common.clickElement("xpath", "//span[text()='Alabama']");
+		
+		
+		Sync.waitElementPresent("xpath", "//div[@id='howCanWeHelp']");
+		Common.clickElement("xpath", "//div[@id='howCanWeHelp']");
+		Common.clickElement("xpath", "//span[text()='Order Issues']");
+		
+		
+		
+		Sync.waitElementPresent("xpath", "//div[@id='selectACategory']");
+		Common.clickElement("xpath", "//div[@id='selectACategory']");
+		Common.clickElement("xpath", "//span[text()='Billing Issue']");
+	
+		
+		Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
+		Common.textBoxInput("xpath", "//textarea[@id='messagePreview']", data.get(DataSet).get("CommetsHydroflask"));
+		
+				
+		Common.scrollIntoView("xpath", "//button[text()='Submit']");
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		
+		Sync.waitElementPresent("xpath", "//div[@class='form-modal-success']");
+		int Contactussuccessmessage = Common
+                .findElements("xpath", "//div[@class='form-modal-success']").size();
+        Common.assertionCheckwithReport(Contactussuccessmessage > 0,
+                "verifying Contact us Success message ", "Success message should be Displayed",
+                "Contact us Success message displayed ", "failed to dispaly success message");
+        ExtenantReportUtils.addPassLog("New Contact us", "Contact us Should be successfully submission",
+                "Contact us Successfully", Common.getscreenShotPathforReport("Contact us"));
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        ExtenantReportUtils.addFailedLog("Validating  of Contact us Page",
+                "Expected text should not be obtained", "Expected text is not obtained",
+                "Link Validation Contact us");
+        AssertJUnit.fail();
+    }
+}
+public void Validate_Newsletter_Footer(String DataSet) {
+    try {
+
+        Common.scrollIntoView("id", "newsletter-signup_email");
+        int newsletter = Common.findElements("id", "newsletter-signup_email").size();
+        Common.assertionCheckwithReport(newsletter > 0, "To validate the Footer newsletter is available ",
+                "The user should see the Newsletter signup in the footer section", "Footer newsletter is available",
+                "Failed to locate the Footer Newsletter");
+       // String email = Common.genrateRandomEmail(data.get(DataSet).get("Email"));
+        Common.textBoxInput("id", "newsletter-signup_email", Utils.getEmailid());
+        Common.mouseOverClick("xpath", "//button[contains(@class,'signup__submit-btn')]");
+        Sync.waitPageLoad(30);
+        Sync.waitElementPresent("xpath", "//div[contains(@class,' a-message--success')]/div");
+        String successmessage = Common.findElement("xpath", "//div[contains(@class,' a-message--success')]/div")
+                .getText();
+        Common.assertionCheckwithReport(successmessage.contains("Thank you for your subscription."),
+                "To validate the Footer newsletter subscription is sucessfull ",
+                "The user should successfully subscribe to newsletter    ", "Newsletter subscription successfull",
+                "Footer newsletter subscription failed");
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+        ExtenantReportUtils.addFailedLog("validating the Footer newsletter subscription",
+                "Footer newsletter subscription should be successfull", "Failed footer newsletter subscription ",
+                Common.getscreenShot("Failed footer newsletter subscription"));
+
+        Assert.fail();
+    }
+}
+public void click_ChatBot(String DataSet) {
+
+	try {
+		Sync.waitPageLoad();
+		Sync.waitElementClickable("xpath", "//a[@class='a-logo']");		
+		Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+		
+		Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+		Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+		
+  String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
+		Common.assertionCheckwithReport(answers.contains("Answers") , "validate the ChatBot",
+				"Open the ChatBot", "Sucessfully click on the ChatBot",
+				"Unable to click the ChatBot");
+		
+		
+		Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
+		
+		int elements = Common.findElements("xpath", "//div[contains(@class,'SearchListItem__details')]").size();
+		
+		String items[] = data.get(DataSet).get("OXOAnswers").split(",");
+		
+		for(int i=1; i<=elements && i<=items.length; i++) {
+			System.out.println(items[i-1]);
+			String searchitems = Common.findElement("xpath", "(//div[contains(@class,'SearchListItem__title')])["+i+"]").getText();
+			System.out.println(searchitems);
+			Assert.assertEquals(searchitems, items[i-1]);
+			
+		}
+		
+		String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+		Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+		Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
+		Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
+		//Common.isElementDisplayedonPage(30,  "xpath", "//div[contains(@class,'Thread__message')]");
+		Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+		String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+		System.out.println(welcomemsg);
+		
+		Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to Hydro Flask") , "validate the Chat display",
+				"Open the Chat conversation in ChatBot", "Sucessfully click on the ChatBot and display the Chat conversation ",
+				"Unable to dispaly the chat conversation");
+		
+
+		
+		Common.switchToDefault();
+		
+	} catch (Exception | Error e) {
+		report.addFailedLog("validate the ChatBot", "Open the ChatBot",
+				"Unable click on the ChatBot",
+				Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+		Assert.fail();
+	}
+
+}
+
+
+public void click_ChatBot() {
+
+	try {
+
+		Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+
+		Common.findElement("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+		Common.clickElement("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+		String chat = Common.findElement("xpath", "//div[@id='kustomer-ui-modal-root']/div[2]/div[1]/div[1]/p")
+				.getText();
+
+		Common.assertionCheckwithReport(chat.equals("Answers"), "validate the ChatBot", "Open the ChatBot",
+				"Sucessfully click on the ChatBot", "Unable to click the ChatBot");
+
+		Common.findElement("xpath", "//div[@id='kustomer-ui-modal-root']/div[2]/div[1]/div[2]/div/p");
+		Common.clickElement("xpath", "//div[@id='kustomer-ui-modal-root']/div[2]/div[1]/div[2]/div/p");
+
+		Common.clickElement("xpath", "//button[@aria-label='New Conversation']");
+
+		String newchat = Common.findElement("xpath", "//button[@aria-label='New Conversation']").getText();
+		Common.assertionCheckwithReport(newchat.equals("New Conversation"), "validate the ChatBot",
+				"Open the ChatBot", "Sucessfully click on the ChatBot", "Unable to click the ChatBot");
+
+//		Common.clickElement("xpath", "//button[@aria-label='minimize chat widget']");
+
+		Common.switchToDefault();
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+				Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+		Assert.fail();
+	}
+
+}
+public void verifychatbot(String Dataset) {
+	// TODO Auto-generated method stub
+
+	try {
+		Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+		Thread.sleep(3000);
+		// Sync.waitElementPresent("xpath", "//p[contains(text(),'Answers')]");
+		Common.javascriptclickElement("xpath", "//p[contains(text(),'Answers')]");
+
+		String available = data.get(Dataset).get("Chatbot");
+		String[] Select = available.split(",");
+		
+		System.out.println(Select.length);
+		int i = 0;
+
+		for (i = 1; i <= Select.length; i++) {
+			System.out.println(Select[i-1]);
+
+			String chat = Common
+					.findElement("xpath", "(//div[contains(@class,'ListItem__itemContainer')])[" + i + "]")
+					.getText();
+			System.out.println(chat);
+			Common.assertionCheckwithReport(chat.contains(Select[i-1]), "verifying chatbot of " + Select[i-1],
+					"chatbot  " + Select[i-1] + " display", "chatbot option successfully displays " + Select[i-1],
+					"Failed to display chatbot " + Select[i-1]);
+		}
+
+		Common.switchToDefault();
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+				Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+		Assert.fail();
+	}
+
+}
+public void verifingContactUSErrorMessage() {
+	try {
+		Sync.waitPageLoad();
+		Common.actionsKeyPress(Keys.END);
+		Common.clickElement("xpath", "//a[text()='Contact Us']");
+		
+		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
+		
+		Common.switchFrames("xpath","//iframe[contains(@src,'https://hydroflask')]");
+		
+		Common.scrollIntoView("xpath", "//button[text()='Submit']");
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		
+		
+		String errorpopup=Common.findElement("xpath","//script[@id='initial-data']").getAttribute("data-json");
+		System.out.println(errorpopup);
+		
+		Common.assertionCheckwithReport(errorpopup.contains("Please fill out this field")&&Common.getPageTitle().equals("Contact"), "validating contactus error message and contact us page",
+				"user navigates to contactus page user able to see error message", "Sucessfully user navigate to contact us page and able to seeerror message",
+				"faield to navigate to contactus page and unable to see error message");
+
+//		Common.assertionCheckwithReport(errorpopup.equals("display)),"vlaidating the pop up message after submittion","After submit button user able see the error popup","Sucessfully popup message has been diplayed after subit button","Failed to get error message after click on submit button");
+		
+		Common.switchToDefault();
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validating store logo", "System directs the user back to the Homepage",
+				"Sucessfully user back to home page",
+				Common.getscreenShotPathforReport("faield to get back to homepage"));
+		Assert.fail();
+	}
+}
+
+public void validate_Homepage() {
+	try {
+		Sync.waitPageLoad();
+		int size =Common.findElements("xpath", "//a[@class='a-logo']").size();
+		Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("Home Page"), "validating store logo",
+				"System directs the user back to the Homepage", "Sucessfully user back to home page",
+				"faield to get back to homepage");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validating store logo", "System directs the user back to the Homepage",
+				"Sucessfully user back to home page",
+				Common.getscreenShotPathforReport("faield to get back to homepage"));
+		Assert.fail();
+	}
+
+
+	
+}
 }
