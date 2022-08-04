@@ -19,6 +19,7 @@ public class DGLD_HF_UT_010_Validate_MiniCart_Functionality {
 
 		try {
 			Hydro.verifingHomePage();
+			Hydro.minicart();
 			Hydro.headerlinks("Accessories");
 			Hydro.minicart_freeshipping();    
 			Hydro.minicart_delete("delete product");

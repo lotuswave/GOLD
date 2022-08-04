@@ -4,7 +4,7 @@
         <listener class-name="Utilities.TestListener"/>
     </listeners>
    	
-   <test name="Validate_header_storelogo" testid="DTG-647" priority="P1" description="This script will cover validating Store Logo">
+   <!-- <test name="Validate_header_storelogo" testid="DTG-647" priority="P1" description="This script will cover validating Store Logo">
        <classes>
             <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Header_011_NormalPath_UserSelectsStoreLogo"/>
         </classes>
@@ -65,6 +65,12 @@
        <classes>
             <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Country_Selector_008_Additional_Path_Verify_OXO_Available_Selections"/>
         </classes>
-        </test>
+        </test> -->
+        
+         <test name="Validate_MiniCart_Functionalities" testid="DTG-937" priority="P1" description="This script will cover validating the Minicart Functionality">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Minicart_007_Validate_MiniCart_Functionality"/>
+        </classes>
+        </test> 
        
 </suite>  

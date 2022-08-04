@@ -91,6 +91,23 @@
 		</dependency>
 		
 		
+		
+		<dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>4.3.1</version>
+    </dependency>
+    <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured-common</artifactId>
+        <version>4.3.1</version>
+    </dependency>
+    <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>json-path</artifactId>
+        <version>4.3.1</version>
+    </dependency>
+		
 		<dependency>
 <groupId>org.openjfx</groupId>
 <artifactId>javafx-controls</artifactId>
