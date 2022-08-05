@@ -322,7 +322,7 @@ public void Validate_Myaccountoptions(String string) {
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
             System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
-					"the mini cart is displayed", "Should dislay the mini cart", "mini cart is not displayed");
+					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
 
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'minicart__close')]");
 			Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close')]");
@@ -993,7 +993,6 @@ public void minicart_freeshipping() {
 	// TODO Auto-generated method stub
 	try
 	{
-		Common.clickElement("xpath", "//a[text()='See all products']");
 		Sync.waitPageLoad();
 		for (int i = 0; i <= 10; i++) {
 			Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
@@ -1007,22 +1006,32 @@ public void minicart_freeshipping() {
 				break;
 			}
 		}
-		Common.mouseOver("xpath", "(//img[@class='m-product-card__image'])[3]");
+		Common.mouseOver("xpath", "(//img[@class='m-product-card__image'])[1]");
 		Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 		List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Bag']");
-		element.get(2).click();
+		element.get(0).click();
+		Sync.waitPageLoad();
+		Common.mouseOver("xpath", "(//img[@class='m-product-card__image'])[1]");
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		Common.clickElement("xpath", "//span[text()='Add to Bag']");
+		Sync.waitPageLoad();
 		click_minicart();
 		String shipping=Common.findElement("xpath", "//div[contains(@class,'label-')]").getText();
 		if(shipping.contains("left for Free Shipping."))
 		{
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'minicart__close')]");
 			Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close')]");
-			Common.mouseOver("xpath", "(//img[@class='m-product-card__image'])[1]");
-			List<WebElement> elements = Common.findElements("xpath", "//span[text()='Add to Bag']");
-			Common.mouseOver("xpath", "//button[@title='Add to Cart']");
-			elements.get(0).click();
-			Thread.sleep(5000);
+			shop_bottle("Bottles & Drinkware");
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "(//img[@class='m-product-card__image'])[1]");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("18 oz Standard Mouth"), "validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page", "Sucessfully Product navigate to the PDP page",
+					"Failed product to the PDP page");
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//div[@aria-label='Black']");
+            Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			click_minicart();
+
 					
 			
 		}
@@ -1055,13 +1064,13 @@ public void click_minicart()
 	try
 	{
 		Thread.sleep(8000);
-		Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
+		Common.actionsKeyPress(Keys.ARROW_UP);
 		Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 		Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
 		String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
         System.out.println(openminicart);
 		Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
-				"the mini cart is displayed", "Should dislay the mini cart", "mini cart is not displayed");
+				"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
 		
 		
 	}
@@ -1080,34 +1089,39 @@ public void minicart_delete(String Dataset) {
 	// TODO Auto-generated method stub
 	String deleteproduct = data.get(Dataset).get("Products");
 	try {
+		Sync.waitElementPresent(30, "xpath","//div[@class='m-mini-product-card']//span[contains(@class,'icon-cart__remove')]");
+	Common.clickElement("xpath",
+				"//div[@class='m-mini-product-card']//span[contains(@class,'icon-cart__remove')]");
+		Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
+		Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
+		Thread.sleep(4000);
 		String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-				.replace("$", "").replace(",", "");
+				.replace("$", "");
 		Float subtotalvalue = Float.parseFloat(subtotal);
-		String productname = Common.findElement("xpath", "(//div[@class='m-mini-product-card']//a)[2]").getText();
-		String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]")
-				.replace("$", "").replace(",", "");
+		String productname = Common.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[2]").getText();
+		String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[2]")
+				.replace("$", "");
 		Float productamount1value = Float.parseFloat(productamount1);
 		if (productname.equals(deleteproduct)) {
-			Sync.waitElementPresent("xpath",
-					"//div[@class='m-mini-product-card']//span[contains(@class,'icon-cart__remove')]");
+			Sync.waitElementPresent(30, "xpath","(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[2]");
 			Common.clickElement("xpath",
-					"//div[@class='m-mini-product-card']//span[contains(@class,'icon-cart__remove')]");
+					"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[2]");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
 			Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
 		} else {
 			Assert.fail();
 		}
 		Thread.sleep(6000);
 		String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-				.replace("$", "").replace(",", "");
+				.replace("$", "");
 		Float subtotal1value = Float.parseFloat(subtotal1);
 		Thread.sleep(8000);
-		String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace("$", "")
-				.replace(",", "");
+		String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace("$", "");
 		Float productamountvalue = Float.parseFloat(productamount);
 		Float Total = subtotalvalue - productamount1value;
 		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 		Thread.sleep(4000);
-		Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(productamount),
+		Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
 				"validating the delete operation and subtotal",
 				"The product should be delete from mini cart and subtotal should change",
 				"Successfully product delete from the mini cart and subtotal has been changed",
@@ -1126,23 +1140,24 @@ public void minicart_delete(String Dataset) {
 
 public void minicart_update(String Dataset) {
 	// TODO Auto-generated method stub
-	String quantity = data.get(Dataset).get("Products");
+	String quantity = data.get(Dataset).get("ProductQuantity");
 	try {
 
 		String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
 				.replace("$", "");
 		Float subtotalvalue = Float.parseFloat(Subtotal);
+		Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
 		Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
-		Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
-				data.get(Dataset).get("Products"));
+		Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,data.get(Dataset).get("ProductQuantity"));
 		Common.clickElement("xpath", "//span[text()='Update']");
 		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 		String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+		System.out.println(cart);
 		String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
 				.replace("$", "");
 		Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-		Float Total = subtotalvalue * 3;
+		Float Total = subtotalvalue * 2;
 		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 		Common.assertionCheckwithReport(quantity.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 				"validating the product update quantity and subtotal",
@@ -1357,4 +1372,125 @@ public void closepromobanner() {
 }
 }
 
+public void minicart_crosssell(String Dataset) {
+	// TODO Auto-generated method stub
+	String product=data.get(Dataset).get("Products");
+	String sku=data.get(Dataset).get("GropName");
+	try
+	{
+       Sync.waitPageLoad();
+		Common.scrollIntoView("xpath", "//img[@alt='" +product+ "']");
+		Common.clickElement("xpath", "//img[@alt='" +product+ "']");
+		Common.assertionCheckwithReport(Common.getPageTitle().equals(product), "validating the product should navigate to the PDP page",
+				"When we click on the product is should navigate to the PDP page", "Sucessfully Product navigate to the PDP page",
+				"Failed product to the PDP page");
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//select[@name='options[3]']");
+		Common.dropdown("xpath", "//select[@name='options[3]']", Common.SelectBy.TEXT, data.get(Dataset).get("ProductQuantity"));
+        Common.clickElement("xpath", "//button[@title='Add to Cart']");
+        click_minicart();
+       int minicartscroll= Common.findElements("xpath", "//div[@class='m-product-upsell__item']").size();
+       String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+				.replace("$", "");
+		Float subtotalvalue = Float.parseFloat(subtotal);
+
+    	   Common.clickElement("xpath", "//form[@data-product-sku='"+ sku +"']//button");
+    	   String productamount=Common.getText("xpath", "//div[@data-price-box='product-id-8']//span[@class='price']").replace("$", "");
+    	   Float productamountvalue = Float.parseFloat(productamount);
+    	   Float Total=subtotalvalue+productamountvalue;
+    	   String ExpectedTotalAmmount = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+    	   Thread.sleep(4000);
+    	   String subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span").replace("$", "");
+    		Common.assertionCheckwithReport(subtotal2.equals(ExpectedTotalAmmount), "validating the mini cart crosssell, add to cart and subtotal",
+    				"User should able to see the crosssell in mincart product should be add to cart and subtotal should be change", "Sucessfully crosssell dispalyed product added to cart and subtotal changed ",
+    				"Failed to see the crossell");
+    	  
+       Common.scrollIntoView("xpath", "//span[contains(@class,'minicart__close')]");
+       Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'minicart__close')]");
+		Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close')]");  
+        
+
+		
+	}
+	catch(Exception | Error e)
+{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the mini cart crosssell, add to cart and subtotal",
+				"User should able to see the crosssell in mincart product should be add to cart and subtotal should be change", " unable to display the crossell and products",
+			Common.getscreenShot("Failed to see the crossell"));
+		Assert.fail();
+	
+}
+
+}
+
+public void search_product(String Dataset) {
+	// TODO Auto-generated method stub
+	String product=data.get(Dataset).get("Products");
+	try
+	{
+		Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+		String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+		Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+				"User should able to click on the search button", "Search expands to the full page",
+				"Sucessfully search bar should be expand");
+		Common.textBoxInput("xpath", "//input[@id='search']", product);
+		Common.actionsKeyPress(Keys.ENTER);
+		Sync.waitPageLoad();
+		String productsearch=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+		Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+				"enter product name will display in the search box","user enter the product name in  search box",
+				"Failed to see the product name");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the search functionality",
+				"enter product name will display in the search box"," unable to enter the product name in  search box",
+			Common.getscreenShot("Failed to see the product name"));
+		Assert.fail();
+	}
+	
+}
+
+public void shop_bottle(String category) {
+	// TODO Auto-generated method stub
+	String expectedResult = "User should click the" + category;
+	try
+	{
+	
+		Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+		Thread.sleep(3000);
+		Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+		Thread.sleep(3000);
+		
+		try {
+			Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+		} catch (Exception e) {
+			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+		}
+		Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+        Common.clickElement("xpath", "//span[text()=' Bottles']");
+		expectedResult = "User should select the " + category + "category";
+		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+		Common.assertionCheckwithReport(sizebotteles > 0,
+				"validating the product category as" + category + "from navigation menu ", expectedResult,
+				"Selected the " + category + " category", "User unabel to click" + category + "");
+		
+	}
+
+
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",expectedResult ,
+				"Unable to Selected the " + category + " category",
+                Common.getscreenShot("Failed to click on the"+ category +""));
+		
+		Assert.fail();
+	}
+	
+	
+}
 }

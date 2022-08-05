@@ -15,11 +15,14 @@ public class DGLD_HF_UT_010_Validate_MiniCart_Functionality {
 	String datafile = "Hydroflask//HydroTestData.xlsx";	
 	HydroHelper Hydro=new HydroHelper(datafile);
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void All_Minicart_Scenarios() throws Exception {
+	public void Validate_MiniCart_Functionality() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
 			Hydro.minicart();
+			Hydro.search_product("crosssell");
+			Hydro.minicart_crosssell("crosssell");
+//			Hydro.shop_bottle("Bottles & Drinkware");
 			Hydro.headerlinks("Accessories");
 			Hydro.minicart_freeshipping();    
 			Hydro.minicart_delete("delete product");
@@ -28,6 +31,7 @@ public class DGLD_HF_UT_010_Validate_MiniCart_Functionality {
 			Hydro.minicart_product_close();
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();
+			
 			
 	        
 	       
