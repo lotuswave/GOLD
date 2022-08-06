@@ -182,10 +182,10 @@ public void Validate_Myaccountoptions(String string) {
 		try {
 			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']/button");
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']/button");
-			Sync.waitPageLoad();
-
+			Sync.waitPageLoad(); 
 			Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[2]/a");
-			System.out.println(Common.getPageTitle());
+			Thread.sleep(2000);
+			 System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
 					"Validating Create New Customer Account page navigation",
 					"after clinking Create New Customer Account page it will navigate account creation page",
@@ -1491,6 +1491,45 @@ public void shop_bottle(String category) {
 		Assert.fail();
 	}
 	
+	
+}
+
+public void validateaccountcreationPassword(String dataSet) throws Exception {
+	try {
+		
+		Sync.waitPageLoad();
+		Sync.waitElementPresent("id", "firstname");
+		Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+		Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+		Common.textBoxInput("id", "email_address", Utils.getEmailid());
+		Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+		String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+		String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+		Common.actionsKeyPress(Keys.PAGE_DOWN);
+		
+		Common.assertionCheckwithReport(classes.contains("complete")&&textlength.contains("complete"), "Password is validated","password should be validate","failed to validate password");
+		Common.actionsKeyPress(Keys.UP);
+        Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password"));
+		
+        Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+		Common.clickElement("xpath", "//button[@title='Sign Up']");
+		Sync.waitPageLoad();
+		Sync.waitElementVisible("xpath","//h1[@class='page-title-wrapper h2']");
+		Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the  my Account page",
+				"User should able to navigate to the my account page after clicking on submit button", "Sucessfully navigate to the My account page ",
+				"failed to navigates to My Account Page");
+}	
+	
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button", "Sucessfully navigate to the My account page ",
+					"failed to navigates to My Account Page");
+
+			Assert.fail();
+}
+
+
 	
 }
 }

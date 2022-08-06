@@ -16,6 +16,7 @@ import TestLib.Common;
 import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
+import Utilities.Utils;
 
 public class OxoHelper {
 
@@ -1278,6 +1279,47 @@ public class OxoHelper {
 			Assert.fail();
 		}
 
+	}
+
+	public void validateaccountcreationpassword(String dataSet) {
+		try {
+			
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("id", "email_address", Utils.getEmailid());
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password1"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			
+			Common.assertionCheckwithReport(classes.contains("complete")&&textlength.contains("complete"), "Password is validated","password should be validate","failed to validate password");
+			Common.actionsKeyPress(Keys.UP);
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password1"));
+			
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("xpath","//h1[@class='page-title-wrapper h2']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button", "Sucessfully navigate to the My account page ",
+					"failed to navigates to My Account Page");
+			
+			
+	}	
+		
+		
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  my Account page",
+						"User should able to navigate to the my account page after clicking on submit button", "unable to navigate to the My account page",
+						Common.getscreenShot("failed to navigates to My Account Page"));
+				Assert.fail();
+		
+	}
+
+
+		
 	}
 
 }
