@@ -42,13 +42,13 @@ public class OxoHelper {
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//a[@class='a-logo']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Home Page"), "validating store logo",
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("OXO Home Page"), "validating store logo",
 					"System directs the user back to the Homepage", "Sucessfully user back to home page",
 					"faield to get back to homepage");
 		} catch (Exception | Error e) {
-			report.addFailedLog("validating store logo", "System directs the user back to the Homepage",
-					"Sucessfully user back to home page",
-					Common.getscreenShotPathforReport("faield to get back to homepage"));
+			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to the Homepage",
+					"Unable to get back to home page",
+					Common.getscreenShotPathforReport("failed to get back to homepage"));
 			Assert.fail();
 		}
 
@@ -58,14 +58,14 @@ public class OxoHelper {
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("Home Page"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
 					"faield to naviagte to homepage");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validating store logo", "System directs to the Homepage",
+			ExtenantReportUtils.addFailedLog("validating store logo", "System directs to the Homepage",
 					"Unable to navigate Home page",
-					Common.getscreenShotPathforReport("faield to get back to homepage"));
+					Common.getscreenShotPathforReport("failed to get back to homepage"));
 			Assert.fail();
 		}
 
@@ -76,9 +76,10 @@ public class OxoHelper {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath", "//a[text()='Contact Us']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Contact"), "validating store logo",
-					"System directs the user back to the Homepage", "Sucessfully user back to home page",
-					"faield to get back to homepage");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Contact"), "validating contact us page",
+					"User navigates to Contact Us Page",
+					"Sucessfully user navigate to contactus page and able to see error message",
+					"failed to navigate to contactus page");
 			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://oxo')]");
 
 			Common.switchFrames("xpath", "//iframe[contains(@src,'https://oxo')]");
@@ -93,9 +94,9 @@ public class OxoHelper {
 			Common.switchToDefault();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validating store logo", "System directs the user back to the Homepage",
-					"Sucessfully user back to home page",
-					Common.getscreenShotPathforReport("faield to get back to homepage"));
+			ExtenantReportUtils.addFailedLog("validating contact us page", "User navigates to Contact Us Page",
+					"Unable to navigate to contactus page",
+					Common.getscreenShotPathforReport("failed to navigate to contactus page"));
 			Assert.fail();
 		}
 	}
@@ -179,7 +180,7 @@ public class OxoHelper {
 	}
 
 	public void Usersignin(String dataSet) throws Exception {
-		// TODO Auto-generated method stub
+	
 		// Common.findElement("xpath", "");
 		Thread.sleep(3000);
 		Common.textBoxInput("id", "email", data.get(dataSet).get("Email1"));
@@ -191,11 +192,10 @@ public class OxoHelper {
 				Common.getText("xpath", "//span[contains(text(),'Welcome, test')]").equals("Welcome, test"),
 				"Validating My Account page navigation", "user sign in and navigate to my account page",
 				"Successfully navigate to my account page", "Failed to navigate my account page ");
-
 	}
 
 	public void MyFavoritespage(String DataSet) {
-		// TODO Auto-generated method stub
+	
 
 		try {
 			RegClickaccount();
@@ -214,9 +214,9 @@ public class OxoHelper {
 					"Successfully navigate to My favorites page", "Failed to navigate My favorites page ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating My favorites page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating My favorites page navigation ",
 					"after clinking my favorites page it will navigate My favorites page",
-					"Successfully navigate to My favorites page ",
+					"Unable to navigate to My favorites page ",
 					Common.getscreenShotPathforReport("Failed to navigate My favorites page"));
 			Assert.fail();
 		}
@@ -224,7 +224,7 @@ public class OxoHelper {
 	}
 
 	public void Myorderspage(String DataSet) {
-		// TODO Auto-generated method stub
+	
 
 		try {
 			RegClickaccount();
@@ -240,16 +240,16 @@ public class OxoHelper {
 					"Successfully navigate to My orders page", "Failed to navigate My orders page ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating My orders page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating My orders page navigation ",
 					"after clinking my favorites page it will navigate My orders page",
-					"Successfully navigate to My orders page ",
+					"Unable to navigate to My orders page ",
 					Common.getscreenShotPathforReport("Failed to navigate My orders page"));
 			Assert.fail();
 		}
 	}
 
 	public void MyProductSubscription(String DataSet) {
-		// TODO Auto-generated method stub
+		
 
 		try {
 			RegClickaccount();
@@ -264,9 +264,9 @@ public class OxoHelper {
 					"Successfully navigate to My Subscriptions page", "Failed to navigateMy Subscriptions page ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating My Subscriptions page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating My Subscriptions page navigation ",
 					"after clinking My Subscriptions page it will navigate My Subscriptions page",
-					"Successfully navigate to My Subscriptions page ",
+					"Unable to navigate to My Subscriptions page ",
 					Common.getscreenShotPathforReport("Failed to navigate My Subscriptions page"));
 			Assert.fail();
 		}
@@ -288,9 +288,9 @@ public class OxoHelper {
 					"Successfully navigate to create account page", "Failed to navigate account create page ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating Create New Customer Account page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
 					"after clinking Create New Customer Account page it will navigate account creation page",
-					"Successfully click singIn button ",
+					"Unable to click singIn button ",
 					Common.getscreenShotPathforReport("Failed to navigate account create page"));
 			Assert.fail();
 		}
@@ -309,14 +309,14 @@ public class OxoHelper {
 
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Orders and Returns"),
 					"Validating Orders and Returns page navigation",
-					"after clinking Orders and Returns page it will navigate order retun page",
+					"after clicking Orders and Returns page it will navigate order retun page",
 					"Successfully navigate to order retuns page", "Failed to navigate order retun page");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating Create New Customer Account page navigation ",
-					"after clinking Create New Customer Account page it will navigate account creation page",
-					"Successfully click singIn button ",
-					Common.getscreenShotPathforReport("Failed to navigate account create page"));
+			ExtenantReportUtils.addFailedLog("Validating Validating Orders and Returns page navigation",
+					"after clicking Orders and Returns page it will navigate order retun page",
+					"Unable navigate to order retuns page ",
+					Common.getscreenShotPathforReport("Failed to navigate order retun page"));
 			Assert.fail();
 		}
 
@@ -343,7 +343,7 @@ public class OxoHelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("To verify the mini cart is closed or not", "Mini cart is closed",
+			ExtenantReportUtils.addFailedLog("To verify the mini cart is closed or not", "Mini cart is closed",
 					"Unable to close the  mini cart",
 					Common.getscreenShotPathforReport("Failed to navigate account create page"));
 
@@ -353,7 +353,7 @@ public class OxoHelper {
 	}
 
 	public void ValidateMyAccountpage(String DataSet) {
-		// TODO Auto-generated method stub
+	
 
 		try {
 			RegClickaccount();
@@ -368,7 +368,7 @@ public class OxoHelper {
 					"Successfully navigate to create account page", "Failed to navigate account create page ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating Create New Customer Account page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
 					"after clinking Create New Customer Account page it will navigate account creation page",
 					"Successfully click singIn button ",
 					Common.getscreenShotPathforReport("Failed to navigate account create page"));
@@ -377,7 +377,7 @@ public class OxoHelper {
 	}
 
 	public void Signout(String DataSet) {
-		// TODO Auto-generated method stub
+	
 
 		try {
 			RegClickaccount();
@@ -393,7 +393,7 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating My Subscriptions page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating My Subscriptions page navigation ",
 					"after clinking my favorites page it will navigate My Subscriptions page",
 					"Successfully navigate to My Subscriptions page ",
 					Common.getscreenShotPathforReport("Failed to navigate My Subscriptions page"));
@@ -440,7 +440,7 @@ public class OxoHelper {
 	}
 
 	public void Toplevelnavigation(String DataSet) {
-		// TODO Auto-generated method stub
+		
 		try {
 			int header = Common.findElements("xpath", "//a[contains(@class,'level-top ui-corner-all')]").size();
 
@@ -462,7 +462,7 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating top level navigation ",
+			ExtenantReportUtils.addFailedLog("Validating top level navigation ",
 					"after clinking top level page it will navigate CLP page",
 					"Successfully navigate to My Subscriptions page ",
 					Common.getscreenShotPathforReport("Failed to navigate CLP page"));
@@ -471,7 +471,7 @@ public class OxoHelper {
 	}
 
 	public void Toplevelnavigation2() {
-		// TODO Auto-generated method stub
+		
 		try {
 
 			// Sync.waitElementClickable("xpath", "//span[text()=' Shop']");
@@ -488,7 +488,7 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating top level navigation ",
+			ExtenantReportUtils.addFailedLog("Validating top level navigation ",
 					"after clinking top level page it will navigate CLP page",
 					"Successfully navigate to My Subscriptions page ",
 					Common.getscreenShotPathforReport("Failed to navigate CLP page"));
@@ -497,7 +497,7 @@ public class OxoHelper {
 	}
 
 	public void RegClickaccount() {
-		// TODO Auto-generated method stub
+		
 
 		try {
 			Sync.waitElementClickable("xpath", "//button[contains(@data-bind,'scope: ')]");
@@ -510,14 +510,15 @@ public class OxoHelper {
 					"Failed todisplay content ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating  my account button", "after clinking My my account should display contents",
-					"Successfully displays content", Common.getscreenShotPathforReport("Failed to navigate CLP page"));
+			ExtenantReportUtils.addFailedLog("Validating  my account button",
+					"after clinking My my account should display contents", "Successfully displays content",
+					Common.getscreenShotPathforReport("Failed to navigate CLP page"));
 			Assert.fail();
 		}
 	}
 
 	public void GuestClickaccount() {
-		// TODO Auto-generated method stub
+		
 
 		try {
 			Sync.waitElementClickable("xpath", "(//span[@class='icon-header__account a-icon-text-btn__icon'])[2]");
@@ -530,15 +531,16 @@ public class OxoHelper {
 					"Failed todisplay content ");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating  my account button", "after clinking My my account should display contents",
-					"Successfully displays content", Common.getscreenShotPathforReport("Failed to navigate CLP page"));
+			ExtenantReportUtils.addFailedLog("Validating  my account button",
+					"after clinking My my account should display contents", "Successfully displays content",
+					Common.getscreenShotPathforReport("Failed to navigate CLP page"));
 			Assert.fail();
 		}
 
 	}
 
 	public void verifychatbot(String Dataset) {
-		// TODO Auto-generated method stub
+		
 
 		try {
 			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
@@ -569,7 +571,7 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+			ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
 					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
 			Assert.fail();
 		}
@@ -605,7 +607,7 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+			ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
 					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
 			Assert.fail();
 		}
@@ -625,8 +627,8 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validate the signIn-button ", "User navigating signin page",
-					"Successfully click singIn button ",
+			ExtenantReportUtils.addFailedLog("Validate the signIn-button ", "User navigating signin page",
+					"unable to click singIn button ",
 					Common.getscreenShotPathforReport("User unable to click singup button"));
 			Assert.fail();
 		}
@@ -712,7 +714,7 @@ public class OxoHelper {
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			report.addFailedLog(
+			ExtenantReportUtils.addFailedLog(
 					"verify the error message when any required fields are missinng will throw an error message",
 					"Should display the error message as This is a required field.",
 					"Failed to display the required fields Error message",
@@ -731,8 +733,8 @@ public class OxoHelper {
 					"Navigate to Contact Us Page", "Sucessfully Navigate to Contact Us Page",
 					"failed to get back to homepage");
 		} catch (Exception | Error e) {
-			report.addFailedLog("validating Contact Us", "Navigate to Contact Us Page", "Navigate to Contact Us Page",
-					Common.getscreenShotPathforReport("faield to get back to homepage"));
+			ExtenantReportUtils.addFailedLog("validating Contact Us", "Navigate to Contact Us Page",
+					"Navigate to Contact Us Page", Common.getscreenShotPathforReport("faield to get back to homepage"));
 			Assert.fail();
 		}
 
@@ -751,7 +753,7 @@ public class OxoHelper {
 
 			Common.switchToDefault();
 		} catch (Exception | Error e) {
-			report.addFailedLog("validating Contact Us errormessage", "Navigate to Contact Us Page",
+			ExtenantReportUtils.addFailedLog("validating Contact Us errormessage", "Navigate to Contact Us Page",
 					"verify error message in Contact Us Page",
 					Common.getscreenShotPathforReport("faield to get back to homepage"));
 			Assert.fail();
@@ -805,7 +807,7 @@ public class OxoHelper {
 			Common.switchToDefault();
 
 		} catch (Exception | Error e) {
-			report.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+			ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
 					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
 			Assert.fail();
 		}
@@ -831,7 +833,7 @@ public class OxoHelper {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validating the Country Selector Pop up",
+			ExtenantReportUtils.addFailedLog("validating the Country Selector Pop up",
 					"User successfully open Country Selector Pop up", "User unabel to open country Selector Pop up",
 					Common.getscreenShotPathforReport("user failed to open the Country Selector Pop up"));
 			Assert.fail();
@@ -916,7 +918,7 @@ public class OxoHelper {
 
 			e.printStackTrace();
 
-			report.addFailedLog("Validate the Popup of Free Ground Shipping",
+			ExtenantReportUtils.addFailedLog("Validate the Popup of Free Ground Shipping",
 					"User Opens the Free Ground Shipping Pop up", "Successfully displays Free Ground Shipping Pop up",
 					Common.getscreenShotPathforReport("User unabel to display Free Ground Shipping Pop up"));
 
@@ -926,7 +928,7 @@ public class OxoHelper {
 	}
 
 	public void Validating_search() {
-		// TODO Auto-generated method stub
+	
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
@@ -943,7 +945,7 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validate the User searches using the search field ",
+			ExtenantReportUtils.addFailedLog("Validate the User searches using the search field ",
 					"Clicking on search bar it should expand and click on close button",
 					" sucessfully clicks on close button ",
 					Common.getscreenShotPathforReport("User unable to close the search button"));
@@ -954,7 +956,7 @@ public class OxoHelper {
 	}
 
 	public void headerlinks(String category) {
-		// TODO Auto-generated method stub
+		
 		String expectedResult = "User should click the" + category;
 		try {
 
@@ -994,7 +996,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_freeshipping() {
-		// TODO Auto-generated method stub
+	
 		try {
 //	        		
 			Sync.waitPageLoad();
@@ -1122,9 +1124,8 @@ public class OxoHelper {
 
 	}
 
-	
 	public void minicart_update(String Dataset) {
-		// TODO Auto-generated method stub
+	
 		String quantity = data.get(Dataset).get("Products");
 		try {
 
@@ -1166,17 +1167,15 @@ public class OxoHelper {
 	}
 
 	public void minicart_click_productname() {
-		// TODO Auto-generated method stub
+		
 		try {
 			String minicartproduct = Common
 					.findElement("xpath", "//div[@class='m-mini-product-card']//a[@class='a-product-name']").getText();
 			Common.clickElement("xpath", "//div[@class='m-mini-product-card']//a[@class='a-product-name']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
-					"validating the product navigating to the PDP page",
-					"The product Should navigate to the PDP page",
-					"Successfully product navigate to the PDP page",
-					"Failed to Navigate Product to the PDP page");
+					"validating the product navigating to the PDP page", "The product Should navigate to the PDP page",
+					"Successfully product navigate to the PDP page", "Failed to Navigate Product to the PDP page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1189,7 +1188,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_product_close() {
-		// TODO Auto-generated method stub
+		
 		try {
 			click_minicart();
 			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
@@ -1231,7 +1230,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_viewcart() {
-		// TODO Auto-generated method stub
+	
 		try {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -1241,8 +1240,7 @@ public class OxoHelper {
 			Common.assertionCheckwithReport(
 					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should navigate to the view cart page",
-					"Successfully navigate to the view cart page",
-					"Failed to navigate to the view and edit cart page");
+					"Successfully navigate to the view cart page", "Failed to navigate to the view and edit cart page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1257,7 +1255,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_Checkout() {
-		// TODO Auto-generated method stub
+		
 		try {
 			click_minicart();
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -1272,7 +1270,8 @@ public class OxoHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the navigation to the shipping page when we click on the Checkout",
+			ExtenantReportUtils.addFailedLog(
+					"validating the navigation to the shipping page when we click on the Checkout",
 					"User should navigate to the shipping  page", "unable to navigate to the shipping page",
 					Common.getscreenShot("Failed to navigate to the shipping page"));
 
@@ -1280,11 +1279,10 @@ public class OxoHelper {
 		}
 
 	}
-	
 
 	public void validateaccountcreationpassword(String dataSet) {
 		try {
-			
+
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
@@ -1293,112 +1291,104 @@ public class OxoHelper {
 			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
 			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			
-			Common.assertionCheckwithReport(classes.contains("complete")&&textlength.contains("complete"), "Password is validated","password should be validate","failed to validate password");
+
+			Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete"),
+					"Password is validated", "password should be validate", "failed to validate password");
 			Common.actionsKeyPress(Keys.UP);
 			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password1"));
-			
+
 			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitPageLoad();
-			Sync.waitElementVisible("xpath","//h1[@class='page-title-wrapper h2']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the  my Account page",
-					"User should able to navigate to the my account page after clicking on submit button", "Sucessfully navigate to the My account page ",
-					"failed to navigates to My Account Page");
-			
-			
-	}	
-		
-		
-			catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("validating the  my Account page",
-						"User should able to navigate to the my account page after clicking on submit button", "unable to navigate to the My account page",
-						Common.getscreenShot("failed to navigates to My Account Page"));
-				Assert.fail();
-		
-	}
+			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper h2']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button",
+					"Sucessfully navigate to the My account page ", "failed to navigates to My Account Page");
 
+		}
 
-		
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button",
+					"unable to navigate to the My account page",
+					Common.getscreenShot("failed to navigates to My Account Page"));
+			Assert.fail();
+
+		}
+
 	}
 
 	public void verifypromobanner() {
-		// TODO Auto-generated method stub
+		
 		try {
 			Sync.waitPageLoad();
-			int size =Common.findElements("xpath", "(//div[@class='m-promo-banner__container'])[1]").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"), "validating CMS promobanner",
-					"System directs the CMS promobanner", "Sucessfully directs the cms promobanner ",
-					"faield to get CMS promobanner");
+			int size = Common.findElements("xpath", "(//div[@class='m-promo-banner__container'])[1]").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"),
+					"validating CMS promobanner", "System directs the CMS promobanner",
+					"Sucessfully directs the cms promobanner ", "faield to get CMS promobanner");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating CMS promobanner", "System directs the CMS promobanner",
 					"unable to direct the cms promobanner",
 					Common.getscreenShotPathforReport("faield to get CMS promobanner"));
 			Assert.fail();
-	}}
+		}
+	}
+
 	public void CMSpromobanner() {
-		// TODO Auto-generated method stub
 		
-		
-		
-		
+
 		try {
-			Sync.waitElementPresent("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]");           
-	           String message1=Common.findElement("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]").getText();
-	           System.out.println(message1);
-	           String message3=Common.findElement("xpath", "(//div[@class='slick-initialized slick-slider']//a)[2]").getAttribute("href");
-	           System.out.println(message3);
-	           if(message3.equals("https://mcloud-na-stage.oxo.com/#")||message1.equals("Marketing Deals"))
-	           {
-	        	   Common.clickElement("xpath", "//span[text()='Marketing Deals']");
-	        	   Common.assertionCheckwithReport(
-	   					Common.getText("xpath", "//strong[text()='Free Ground Shipping']").equals("Free Ground Shipping"),
-	   					"To validate the Popup of Free Ground Shipping",
-	   					"Validate the Pop up of Free Ground Shipping ", "Successfully displays Free Ground Shipping Pop up",
-	  					"User unabel display Free Ground Shipping Pop up");
-	        	   }
-	           else
-	           {
-	        	   Assert.fail();
-	           }
-				
-		
-			
+			Sync.waitElementPresent("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]");
+			String message1 = Common
+					.findElement("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]").getText();
+			System.out.println(message1);
+			String message3 = Common.findElement("xpath", "(//div[@class='slick-initialized slick-slider']//a)[2]")
+					.getAttribute("href");
+			System.out.println(message3);
+			if (message3.equals("https://mcloud-na-stage.oxo.com/#") || message1.equals("Marketing Deals")) {
+				Common.clickElement("xpath", "//span[text()='Marketing Deals']");
+				Common.assertionCheckwithReport(
+						Common.getText("xpath", "//strong[text()='Free Ground Shipping']")
+								.equals("Free Ground Shipping"),
+						"To validate the Popup of Free Ground Shipping", "Validate the Pop up of Free Ground Shipping ",
+						"Successfully displays Free Ground Shipping Pop up",
+						"User unabel display Free Ground Shipping Pop up");
+			} else {
+				Assert.fail();
+			}
 
 		} catch (Exception | Error e) {
 
 			e.printStackTrace();
-			
-			ExtenantReportUtils.addFailedLog("Validate the See Details link", "User Opens the Free Ground Shipping Pop up",
-					"unable to display Free Ground Shipping Pop up",
-					Common.getscreenShotPathforReport("User failed to display Free Ground Shipping Pop up"));
-			
-			Assert.fail();	
-		
-		
-		
-	}
-	}
 
+			ExtenantReportUtils.addFailedLog("Validate the See Details link",
+					"User Opens the Free Ground Shipping Pop up", "unable to display Free Ground Shipping Pop up",
+					Common.getscreenShotPathforReport("User failed to display Free Ground Shipping Pop up"));
+
+			Assert.fail();
+
+		}
+	}
 
 	public void closepromobanner() {
-		// TODO Auto-generated method stub
-		
+	
+
 		try {
 			Common.clickElement("xpath", "//span[@aria-label='Close']");
-			int size =Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"), "validating store logo",
-					"System directs the user back to the Homepage", "Sucessfully user back to home page",
-					"faield to get back to homepage");
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"),
+					"validating store logo", "System directs the user back to the Homepage",
+					"Sucessfully user back to home page", "faield to get back to homepage");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating CMS promobanner", "System directs the CMS promobanner",
 					"unable to direct  cms promobanner",
 					Common.getscreenShotPathforReport("faield to get CMS promobanner"));
 			Assert.fail();
+		}
 	}
-	}
-	
+
 }
