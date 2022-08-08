@@ -1280,6 +1280,7 @@ public class OxoHelper {
 		}
 
 	}
+	
 
 	public void validateaccountcreationpassword(String dataSet) {
 		try {
@@ -1322,4 +1323,82 @@ public class OxoHelper {
 		
 	}
 
+	public void verifypromobanner() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			int size =Common.findElements("xpath", "(//div[@class='m-promo-banner__container'])[1]").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"), "validating CMS promobanner",
+					"System directs the CMS promobanner", "Sucessfully directs the cms promobanner ",
+					"faield to get CMS promobanner");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating CMS promobanner", "System directs the CMS promobanner",
+					"unable to direct the cms promobanner",
+					Common.getscreenShotPathforReport("faield to get CMS promobanner"));
+			Assert.fail();
+	}}
+	public void CMSpromobanner() {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		try {
+			Sync.waitElementPresent("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]");           
+	           String message1=Common.findElement("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]").getText();
+	           System.out.println(message1);
+	           String message3=Common.findElement("xpath", "(//div[@class='slick-initialized slick-slider']//a)[2]").getAttribute("href");
+	           System.out.println(message3);
+	           if(message3.equals("https://mcloud-na-stage.oxo.com/#")||message1.equals("Marketing Deals"))
+	           {
+	        	   Common.clickElement("xpath", "//span[text()='Marketing Deals']");
+	        	   Common.assertionCheckwithReport(
+	   					Common.getText("xpath", "//strong[text()='Free Ground Shipping']").equals("Free Ground Shipping"),
+	   					"To validate the Popup of Free Ground Shipping",
+	   					"Validate the Pop up of Free Ground Shipping ", "Successfully displays Free Ground Shipping Pop up",
+	  					"User unabel display Free Ground Shipping Pop up");
+	        	   }
+	           else
+	           {
+	        	   Assert.fail();
+	           }
+				
+		
+			
+
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			
+			ExtenantReportUtils.addFailedLog("Validate the See Details link", "User Opens the Free Ground Shipping Pop up",
+					"unable to display Free Ground Shipping Pop up",
+					Common.getscreenShotPathforReport("User failed to display Free Ground Shipping Pop up"));
+			
+			Assert.fail();	
+		
+		
+		
+	}
+	}
+
+
+	public void closepromobanner() {
+		// TODO Auto-generated method stub
+		
+		try {
+			Common.clickElement("xpath", "//span[@aria-label='Close']");
+			int size =Common.findElements("xpath", "//a[@class='a-logo']").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("OXO Home Page"), "validating store logo",
+					"System directs the user back to the Homepage", "Sucessfully user back to home page",
+					"faield to get back to homepage");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating CMS promobanner", "System directs the CMS promobanner",
+					"unable to direct  cms promobanner",
+					Common.getscreenShotPathforReport("faield to get CMS promobanner"));
+			Assert.fail();
+	}
+	}
+	
 }
