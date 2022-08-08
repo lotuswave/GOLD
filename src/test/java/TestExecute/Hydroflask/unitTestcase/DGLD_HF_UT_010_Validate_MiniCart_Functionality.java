@@ -24,7 +24,7 @@ public class DGLD_HF_UT_010_Validate_MiniCart_Functionality {
 			Hydro.minicart_crosssell("crosssell");
 //			Hydro.shop_bottle("Bottles & Drinkware");
 			Hydro.headerlinks("Accessories");
-			Hydro.minicart_freeshipping();    
+			Hydro.minicart_freeshipping("Product");    
 			Hydro.minicart_delete("delete product");
 			Hydro.minicart_update("Quantity");
 			Hydro.minicart_click_productname();

@@ -18,7 +18,7 @@ public class DGLD_HF_UT_CheckoutShippingStep_014_AdditionalPath_Unauthenticated_
 		try {
 			Hydro.verifingHomePage();
 			Hydro.headerlinks("Accessories");
-			Hydro.addtocart();
+			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();
 	       Hydro.validate_ExistingUser_Login_Checkoutpage("invalidpassword");
