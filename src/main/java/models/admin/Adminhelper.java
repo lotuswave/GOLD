@@ -188,12 +188,12 @@ public class Adminhelper {
 			Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
 			Sync.waitPageLoad(30);
 			Sync.waitElementPresent("name", "loginfmt");
-			Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
+			Common.textBoxInput("name", "loginfmt", "spanem@helenoftroy.com");
 			Common.clickElement("id", "idSIButton9");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "name", "passwd");
-			Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
+			Common.textBoxInput("name", "passwd", "Aonqkziplddf1!");
 			Common.clickElement("id", "idSIButton9");
 			Sync.waitPageLoad();
 
@@ -3291,7 +3291,9 @@ public class Adminhelper {
 			Common.clickElement("xpath", "//span[text()='Alternative']");
 			Sync.waitElementPresent("xpath", "//button[@id='save']");
 			Common.clickElement("xpath", "//button[@id='save']");
-	
+			String alter = Common.findElement("xpath", "//li[@name='c-promo-block__container--alternate']").getText();
+	           Common.assertionCheckwithReport(alter.equals("Alternative"), "Validating alternative",
+	                    "Click Alternatitve", "successfully clicked alternative", "fail to click alternative");
 			// button[@id='save']
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3369,8 +3371,11 @@ public class Adminhelper {
 			Common.findElement("id", "html-body").sendKeys(data.get(DataSet).get("Description"));
 			Common.switchToDefault();
 			// Thread.sleep(2000);
-
+            
 			Thread.sleep(5000);
+			report.addPassLog("validation to the edit content promo Blocker", "after giving data it should show the data",
+			        "Successfully data is populated",
+			        Common.getscreenShotPathforReport("Succesfully data entered")); 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -3388,9 +3393,14 @@ public class Adminhelper {
 			Thread.sleep(2000);
 			String name = Common.getText("xpath", "//span[text()='CTA Elements']");
 			System.out.println(name);
+			
+			Common.scrollIntoView("xpath", "//span[text()='Background Repeat']");
 			Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//span[text()='CTA Elements']");
 			Common.clickElement("xpath", "//span[text()='CTA Elements']");
 			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//input[@name='link_text']");
 			Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(DataSet).get("CTAText"));
 			Thread.sleep(2000);
 			Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(DataSet).get("CTAurl"));
@@ -3403,7 +3413,9 @@ public class Adminhelper {
 			Common.clickElement("xpath", "(//span[text()='Save'])[2]");
 			Thread.sleep(5000);
 
-			Thread.sleep(5000);
+			report.addPassLog("validation to the edit content promo Blocker", "after giving data it should show the data",
+			        "Successfully data is populated and saved",
+			        Common.getscreenShotPathforReport("Succesfully data saved"));
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -3431,6 +3443,9 @@ public class Adminhelper {
 			Thread.sleep(5000);
 
 			Thread.sleep(5000);
+			report.addPassLog("validation to the edit content promo Blocker", "after giving data it should show the data",
+			        "Successfully data is populated",
+			        Common.getscreenShotPathforReport("Succesfully data entered"));
 		
 			} catch (Exception | Error e) {
 			e.printStackTrace();
