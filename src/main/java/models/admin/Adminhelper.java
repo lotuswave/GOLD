@@ -188,12 +188,12 @@ public class Adminhelper {
 			Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
 			Sync.waitPageLoad(30);
 			Sync.waitElementPresent("name", "loginfmt");
-			Common.textBoxInput("name", "loginfmt", "spanem@helenoftroy.com");
+			Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
 			Common.clickElement("id", "idSIButton9");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "name", "passwd");
-			Common.textBoxInput("name", "passwd", "Aonqkziplddf1!");
+			Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
 			Common.clickElement("id", "idSIButton9");
 			Sync.waitPageLoad();
 
