@@ -761,6 +761,120 @@ public class OxoHelper {
 
 	}
 
+	public void validateChatboxOptions(String DataSet) {
+
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementClickable("xpath", "//a[@class='a-logo']");
+			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+            Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+
+			String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
+			Common.assertionCheckwithReport(answers.contains("Answers"), "validate the Answers options in Chatbox", "Click the Answers option to disaply the related options",
+					"Sucessfully click the answers optionsbuttion", "Unable to click the Answeroption button");
+
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
+		}
+			 catch (Exception | Error e) {
+					ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+							Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+					Assert.fail();
+			 }
+		
+			 List<WebElement> Answerwebelements=Common.findElements("xpath", "//div[contains(@class,'SearchListItem__details')]");
+			 
+			 ArrayList<String> arrayoptionName=new ArrayList<String>();
+			 
+			 
+			 for(WebElement answernames: Answerwebelements) {
+				 arrayoptionName.add(answernames.getText());
+			 }
+			 
+			String[] items = data.get(DataSet).get("OXOAnswers").split(",");
+		
+			
+			 for (int i = 0;  i < items.length; i++) {
+				 
+				if(arrayoptionName.contains(items[i])) {
+					}
+			 else {
+				
+						ExtenantReportUtils.addFailedLog("validate the Answers options in chatbox", "All the Answer related options are diaplyed ", "Missed the "+items[i] +"options",
+								Common.getscreenShotPathforReport("failed to display answersoptions"));
+						Assert.fail();
+				 }
+			
+				ExtenantReportUtils.addPassLog("Validate the Answers options ", "click the answers options it must display all the options ","Sucessfully displayed the answers options "+arrayoptionName , Common.getscreenShotPathforReport("Answervalidation"));
+				}
+			 
+			 
+			 try {
+			 String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+				Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+				Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
+				Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
+				
+				Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+				String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+
+				Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
+						"validate the Chat display", "Open the Chat conversation in ChatBot",
+						"Sucessfully click on the ChatBot and display the Chat conversation ",
+						"Unable to dispaly the chat conversation");
+
+				Common.switchToDefault();
+
+			} catch (Exception | Error e) {
+				ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+						Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+				Assert.fail();
+			}
+			 
+		}			 
+			 
+			
+			 
+			// System.out.println(items[]);
+			 
+			 
+			 
+			 /*for (int i = 0; i <= items.length; i++) {
+				
+				
+					
+					
+				}
+				Assert.assertEquals(searchitems, items[i - 1]);
+
+			}
+
+			String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+			Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
+			// Common.isElementDisplayedonPage(30, "xpath",
+			// "//div[contains(@class,'Thread__message')]");
+			Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+
+			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to Hydro Flask"),
+					"validate the Chat display", "Open the Chat conversation in ChatBot",
+					"Sucessfully click on the ChatBot and display the Chat conversation ",
+					"Unable to dispaly the chat conversation");
+
+			Common.switchToDefault();
+
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+			Assert.fail();
+		}*/
+
+	
+	
+	
+	
 	public void click_ChatBot(String DataSet) {
 
 		try {
