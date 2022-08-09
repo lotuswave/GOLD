@@ -11,9 +11,9 @@ import TestLib.Login;
 
 public class Test_DGLD_HF_UT_StoreLocator_019_020_021_023_NormalPath_UserViews_StoreLocatorPage {
 
+	String datafile = "Hydroflask//HydroTestData.xlsx";
+	HydroHelper Hydro = new HydroHelper(datafile);
 
-	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_storelocator() throws Exception {
 
@@ -24,34 +24,25 @@ public class Test_DGLD_HF_UT_StoreLocator_019_020_021_023_NormalPath_UserViews_S
 			Hydro.CLick_Usemylocation();
 			Hydro.Validate_AvailableRetailers();
 			Hydro.Validate_retailerlocations();
-			
-			
-			
-	       
-		}
-		catch (Exception e) {
-			
+
+		} catch (Exception e) {
+
 			Assert.fail(e.getMessage(), e);
-		} 
-	} 
-	
-	
-	
+		}
+	}
+
 	@AfterTest
-	public void clearBrowser()
-	{
+	public void clearBrowser() {
 		Common.closeAll();
 
 	}
-	
-	
+
 	@BeforeTest
-	  public void startTest() throws Exception {
+	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		
-		  Login.signIn();
-		 
-		  
-	  }
-	
+
+		Login.signIn();
+
+	}
+
 }

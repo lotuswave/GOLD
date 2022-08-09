@@ -10,10 +10,11 @@ import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword {
-	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
+	String datafile = "Hydroflask//HydroTestData.xlsx";
+	HydroHelper Hydro = new HydroHelper(datafile);
+
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void UserEntersEmailAssociatedWithAnAccount_ForgotPassword () throws Exception {
+	public void UserEntersEmailAssociatedWithAnAccount_ForgotPassword() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
@@ -21,34 +22,26 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthentic
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();
-	       Hydro.validate_ExistingUser_Login_Checkoutpage("invalidpassword");
-	       Hydro.Validate_Signin_Checkoutpage();
-	       Hydro.forgotpassword();
-		}
-		catch (Exception e) {
-			
+			Hydro.validate_ExistingUser_Login_Checkoutpage("invalidpassword");
+			Hydro.Validate_Signin_Checkoutpage();
+			Hydro.forgotpassword();
+		} catch (Exception e) {
+
 			Assert.fail(e.getMessage(), e);
-		} 
+		}
 	}
-	
-	
-	
+
 	@AfterTest
-	public void clearBrowser()
-	{
+	public void clearBrowser() {
 		Common.closeAll();
 	}
-	
-	
+
 	@BeforeTest
-	  public void startTest() throws Exception {
+	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		
 
-		  Login.signIn();
-		 
-		  
-	  }
+		Login.signIn();
 
+	}
 
 }

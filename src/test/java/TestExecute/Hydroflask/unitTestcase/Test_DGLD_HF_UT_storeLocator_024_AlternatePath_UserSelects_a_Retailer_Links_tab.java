@@ -11,45 +11,36 @@ import TestLib.Login;
 
 public class Test_DGLD_HF_UT_storeLocator_024_AlternatePath_UserSelects_a_Retailer_Links_tab {
 
-	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
+	String datafile = "Hydroflask//HydroTestData.xlsx";
+	HydroHelper Hydro = new HydroHelper(datafile);
+
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Newsletter_Footer() throws Exception {
 
 		try {
-			Hydro.validate_Homepage();		      
-	        Hydro.Click_Findstore();
-	        Hydro.click_Retailer();
-	        Hydro.click_Links();
-	        
-		}
-		catch (Exception e) {
-			
+			Hydro.validate_Homepage();
+			Hydro.Click_Findstore();
+			Hydro.click_Retailer();
+			Hydro.click_Links();
+
+		} catch (Exception e) {
+
 			Assert.fail(e.getMessage(), e);
-		} 
+		}
 	}
-	
-	
-	
+
 	@AfterTest
-	public void clearBrowser()
-	{
+	public void clearBrowser() {
 		Common.closeAll();
 
 	}
-	
-	
+
 	@BeforeTest
-	  public void startTest() throws Exception {
+	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		
-		  Login.signIn();
-		 
-		  
-	  }
 
-}		
-	
-	
+		Login.signIn();
 
+	}
 
+}

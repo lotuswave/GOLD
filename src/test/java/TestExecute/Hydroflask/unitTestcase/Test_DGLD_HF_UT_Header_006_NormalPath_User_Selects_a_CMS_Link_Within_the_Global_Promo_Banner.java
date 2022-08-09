@@ -11,41 +11,34 @@ import TestLib.Login;
 
 public class Test_DGLD_HF_UT_Header_006_NormalPath_User_Selects_a_CMS_Link_Within_the_Global_Promo_Banner {
 
-	
-	
-	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
+	String datafile = "Hydroflask//HydroTestData.xlsx";
+	HydroHelper Hydro = new HydroHelper(datafile);
+
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_CMS_link_Global_Promobanner() throws Exception {
 
 		try {
-			 Hydro.verifypromobanner();  
-	     Hydro.CMSpromobanner();
-	     Hydro.closepromobanner();
-		}
-		catch (Exception e) {
-			
+			Hydro.verifypromobanner();
+			Hydro.CMSpromobanner();
+			Hydro.closepromobanner();
+		} catch (Exception e) {
+
 			Assert.fail(e.getMessage(), e);
-		} 
+		}
 	}
-	
-	
-	
+
 	@AfterTest
-	public void clearBrowser()
-	{
+	public void clearBrowser() {
 		Common.closeAll();
 
 	}
-	
-	
+
 	@BeforeTest
-	  public void startTest() throws Exception {
+	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		
-		  Login.signIn();
-		 
-		  
-	  }
+
+		Login.signIn();
+
+	}
 
 }

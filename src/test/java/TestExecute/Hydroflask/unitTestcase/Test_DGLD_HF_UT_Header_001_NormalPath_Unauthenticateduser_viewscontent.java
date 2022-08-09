@@ -11,44 +11,36 @@ import TestLib.Login;
 
 public class Test_DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent {
 
+	String datafile = "Hydroflask//HydroTestData.xlsx";
+	HydroHelper Hydro = new HydroHelper(datafile);
 
-	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Unauthenticateduser_viewscontent() throws Exception {
 
 		try {
 			Hydro.click_singinButton();
-	        Hydro.validateCreateAccountpageNavigation();
-	        Hydro.validatingTrackmyOrderNavigation();
-	        Hydro.minicart();
-	       
-		}
-		catch (Exception e) {
-			
+			Hydro.validateCreateAccountpageNavigation();
+			Hydro.validatingTrackmyOrderNavigation();
+			Hydro.minicart();
+
+		} catch (Exception e) {
+
 			Assert.fail(e.getMessage(), e);
-		} 
+		}
 	}
-	
-	
-	
+
 	@AfterTest
-	public void clearBrowser()
-	{
+	public void clearBrowser() {
 		Common.closeAll();
 
 	}
-	
-	
-	@BeforeTest
-	  public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
-		
-		  Login.signIn();
-		 
-		  
-	  }
 
-	
-	
+	@BeforeTest
+	public void startTest() throws Exception {
+		System.setProperty("configFile", "Hydroflask\\config.properties");
+
+		Login.signIn();
+
+	}
+
 }
