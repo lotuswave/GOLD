@@ -777,7 +777,7 @@ public class OxoHelper {
 			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
 		}
 			 catch (Exception | Error e) {
-					ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
+					ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page", "Open the ChatBot and ansers option should be displayed", "Unable click on the ChatBot and answers are not displayed",
 							Common.getscreenShotPathforReport("failed to click on the ChatBot"));
 					Assert.fail();
 			 }
@@ -826,8 +826,10 @@ public class OxoHelper {
 				Common.switchToDefault();
 
 			} catch (Exception | Error e) {
-				ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
-						Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validate the Chat display", "Open the Chat conversation in ChatBot",
+						"Unable click on the ChatBot and Chat conversation is not displayed ",
+						Common.getscreenShotPathforReport("Failed to dispaly the chat conversation"));
 				Assert.fail();
 			}
 			 

@@ -83,13 +83,13 @@ public class HydroHelper {
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
-					"To validate the user lands on Home page after successfull login", "Should land on Home Page",
-					"User lands on Home Page", "User failed to login");
+					"To validate the user lands on Home page after successfull login", "After clicking on the signin button it should navigate to the home page",
+					"Sucessfully user navigate to the home after clicking on the login button", "User failed to login");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validate the User is able to login",
-					"Should login into user Account sucessfully", "Unable to login to the account",
+			ExtenantReportUtils.addFailedLog("To validate the user lands on Home page after successfull login", "After clicking on the signin button it should navigate to the home page",
+					"Unable to the user navigate to the home after clicking on the login button",
 					Common.getscreenShotPathforReport("Failed to Login"));
 
 			Assert.fail();

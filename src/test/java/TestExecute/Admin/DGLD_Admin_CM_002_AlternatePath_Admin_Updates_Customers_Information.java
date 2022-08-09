@@ -50,7 +50,7 @@ public class DGLD_Admin_CM_002_AlternatePath_Admin_Updates_Customers_Information
 		
 		@BeforeTest
 		  public void startTest() throws Exception {
-
+			System.setProperty("configFile", "Admin\\config.properties");
 			  Login.signIn();
 			 
 			  

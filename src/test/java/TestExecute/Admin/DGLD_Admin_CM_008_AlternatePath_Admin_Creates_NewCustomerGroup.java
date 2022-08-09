@@ -42,6 +42,7 @@ public class DGLD_Admin_CM_008_AlternatePath_Admin_Creates_NewCustomerGroup {
 	
 	@BeforeTest
 	  public void startTest() throws Exception {
+		System.setProperty("configFile", "Admin\\config.properties");
 
 		  Login.signIn();
 		 

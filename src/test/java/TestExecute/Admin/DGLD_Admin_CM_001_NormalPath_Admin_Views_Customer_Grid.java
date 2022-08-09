@@ -18,7 +18,7 @@ public class DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid {
 		public void Admin_Views_Customer_Grid() throws Exception {
 
 			try {
-				Admin.Admin_signin("AccountDetails");
+			  Admin.Admin_signin("AccountDetails");
 		      Admin.Customers();
 		      Admin.NewcustomerCTA();
 		      Admin.Search_by_keyword();
@@ -50,7 +50,7 @@ public class DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid {
 		
 		@BeforeTest
 		  public void startTest() throws Exception {
-
+			System.setProperty("configFile", "Admin\\config.properties");
 			  Login.signIn();
 			 
 			  

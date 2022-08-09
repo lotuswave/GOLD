@@ -43,7 +43,7 @@ public class DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment {
 
     @BeforeTest
       public void startTest() throws Exception {
-
+    	System.setProperty("configFile", "Admin\\config.properties");
           Login.signIn();
     }
 }

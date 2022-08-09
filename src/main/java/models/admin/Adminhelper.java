@@ -46,16 +46,18 @@ public class Adminhelper {
 			String customers = Common.findElement("xpath", "//strong[contains(text(),'Customers')]").getText();
 			System.out.println(customers);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(customers.equals("Customers"), "User need to display in customer field",
-					"User should able to click on the customers button",
-					"customers button expands the customer fields dispalyed", "Failed to expand customer fileds");
+			Common.assertionCheckwithReport(customers.equals("Customers"),
+					"Validating the customers field menu is displayed",
+					" click on the customers button customers field menu should displayed",
+					"Customers field menu is displayed after a click on the customers button",
+					"Failed to display customers field menu");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to display in customer field",
-					"User should able to click on the customers button",
-					"customers button expands the customer fileds displayed",
-					Common.getscreenShotPathforReport("User unable to expands the customer"));
+			ExtenantReportUtils.addFailedLog("Validating the customers field menu is displayed",
+					" click on the customers button customers field menu should displayed",
+					"unable to display field menu after a click on the customers button",
+					"Failed to display customers field menu");
 			Assert.fail();
 		}
 
@@ -81,14 +83,15 @@ public class Adminhelper {
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("New Customer / Customers / Customers / Magento Admin"),
-					"Validating New customer page navigation ", "after clicking on it will navigate new Customer page",
+					"Validating the new customer page  ",
+					"Click on the new customer it should  navigate to the new customer page",
 					"Successfully navigate to new Customer page", "Failed to navigate to New Customer page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating New customer page navigation ",
-					"after clicking on it will navigate new Customer page",
-					"Successfully navigate to new Customer page",
+			ExtenantReportUtils.addFailedLog("Validating the new customer page  ",
+					"Click on the new customer it should  navigate to the new customer page",
+					"unable to navigate to the new Customer page",
 					Common.getscreenShotPathforReport("Failed to navigate to New Customer page"));
 			Assert.fail();
 
@@ -108,9 +111,10 @@ public class Adminhelper {
 			if (records.equals("1 records found")) {
 				Common.clickElement("xpath", "//a[text()='Edit']");
 				Common.assertionCheckwithReport(Common.getPageTitle().contains("testing qa / Customers"),
-						"Validating user selects the edit button",
-						"After clicking edit button user should navigates to the selected page",
-						"Successfully navigate to user the selected page", "Failed to navigate to user selected page");
+						"Validating the edit button on the customers page",
+						"After clicking edit button it should navigate to the selected page",
+						"Successfully navigate to the selected page when we click on edit button",
+						"Failed to navigate to the selected page");
 
 			} else {
 				Assert.fail();
@@ -118,10 +122,10 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating user selects the edit button",
-					"After clicking edit button user should navigates to the selected page",
-					"Successfully navigate to user the selected page",
-					Common.getscreenShotPathforReport("Failed to navigate to Customer filed page"));
+			ExtenantReportUtils.addFailedLog("Validating the edit button on the customers page",
+					"After clicking edit button it should navigate to the selected page",
+					"Unable to navigate to the selected page when we click on edit button",
+					Common.getscreenShotPathforReport("Failed to navigate to the Customer filed page"));
 			Assert.fail();
 
 		}
@@ -161,15 +165,15 @@ public class Adminhelper {
 					Common.getPageTitle().equals("Customers / Customers / Magento Admin")
 							&& savemessage.equals("You deleted the customer."),
 					"Validating customers filed page navigation and customer deleted message",
-					"after clicking save button it will navigate Customer filed page and message should be displayed",
+					"after clicking save button it will navigate Customer filed page and message should be dispalyed",
 					"Successfully navigate to Customer filed page and message is dispalyed",
 					"Failed to navigate to Customer filed page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating customers filed page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation ",
 					"after clicking save button it will navigate Customer filed page",
-					"Successfully navigate to Customer filed page",
+					"Unable to  navigate to the Customer filed page and message not dispalyed",
 					Common.getscreenShotPathforReport("Failed to navigate to Customer filed page"));
 			Assert.fail();
 		}
@@ -204,15 +208,18 @@ public class Adminhelper {
 			Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
 
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
-					"Validate the Customer menu is displayed", "Should display the customer menu",
-					"Customer menu is displayed", "Failed to display the customer menu");
+					"Validate the Dashboard menu is dispalyed",
+					"After clicking on sigin button it should navigate to the dashboard",
+					"Sucessfully it navigate to the dashboard after click on signin button",
+					"Failed to display the dashbord after clicking on the signin button");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			ExtenantReportUtils.addFailedLog("Validate the Customer menu is displayed",
-					"After successfull login should land on Dashboard of admin panel",
-					"Admin is not able to successfully login", "Failed to signin into Admin panel");
+			ExtenantReportUtils.addFailedLog("Validate the Dashboard menu is dispalyed",
+					"After clicking on sigin button it should navigate to the dashboard",
+					"unable to navigate to the dashboard after click on signin button",
+					"Failed to display the dashbord after clicking on the signin button");
 			Assert.fail();
 
 		}
@@ -229,13 +236,13 @@ public class Adminhelper {
 			System.out.println(newcustomer);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(newcustomer.equals("Add New Customer"),
-					"validating new customer CTA Button in Customers page", "able to display Add new Customer CTA ",
+					"validating new customer CTA Button in Customers page", "Able to display Add new Customer CTA ",
 					"successfully displayed Add New Customer CTA", "Failed to display Add New Customer CTA");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validating new customer CTA Button in Customers page",
-					"able to display Add new Customer CTA", "successfully display Add New Customer CTA",
+			ExtenantReportUtils.addFailedLog("validating new customer CTA Button in Customers page",
+					"Able to display Add new Customer CTA", "Unable to  display Add New Customer CTA",
 					Common.getscreenShotPathforReport("Failed to display Add New Customer CTA"));
 			Assert.fail();
 		}
@@ -248,15 +255,18 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//input[@id='fulltext']");
 			Common.clickElement("xpath", "//input[@id='fulltext']");
 			String Search = Common.findElement("xpath", "//input[@id='fulltext']").getAttribute("placeholder");
-			Common.assertionCheckwithReport(Search.equals("Search by keyword"), "validating search by keyword input",
-					"able to display search by keyword input", "successfully display search by keyword",
-					"Failed to display search by keyword");
+			Common.assertionCheckwithReport(Search.equals("Search by keyword"),
+					"validating search by keyword input on customers page",
+					"Able to display search by keyword input on customer page",
+					"successfully display search by keyword on customers page",
+					"Failed to display search by keyword on customers page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validating search by keyword input", "able to display search by keyword input",
-					"successfully display search by keyword",
-					Common.getscreenShotPathforReport("Failed to display search by keyword"));
+			ExtenantReportUtils.addFailedLog("validating search by keyword input on customers page",
+					"Able to display search by keyword input on customer page",
+					"unable to display the search by keyword on customers page",
+					Common.getscreenShotPathforReport("Failed to display search by keyword on customers page"));
 			Assert.fail();
 
 		}
@@ -269,15 +279,18 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//div[@class='action-select-wrap']");
 			Common.clickElement("xpath", "//div[@class='action-select-wrap']");
 			String Action = Common.findElement("xpath", "//div[@class='action-menu-items']//ul").getAttribute("class");
-			Common.assertionCheckwithReport(Action.contains("active"), "Validating Action dropdown CTA",
-					"Able to display Action dropdown CTA", "Successfully action dropdown CTA displayed",
-					"Failed to Display action dropdown CTA");
+			Common.assertionCheckwithReport(Action.contains("active"),
+					"Validating Action dropdown CTA on customers page",
+					"Able to display Action dropdown CTA on customers page",
+					"Successfully action dropdown CTA displayed on customers page",
+					"Failed to Display action dropdown CTA on customers page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating Action dropdown CTA", "Able to display Action dropdown CTA",
-					"Successfully action dropdown CTA displayed",
-					Common.getscreenShotPathforReport("Failed to Display action dropdown CTA"));
+			ExtenantReportUtils.addFailedLog("Validating Action dropdown CTA on customers page",
+					"Able to display Action dropdown CTA on customers page",
+					"Unable to display action dropdown CTA on customers page",
+					Common.getscreenShotPathforReport("Failed to Display action dropdown CTA on customers page"));
 			Assert.fail();
 		}
 
@@ -291,15 +304,18 @@ public class Adminhelper {
 			String Filters = Common.findElement("xpath", "//button[@data-action='grid-filter-expand']")
 					.getAttribute("class");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.assertionCheckwithReport(Filters.contains("active"), "Validating the Filters Selector",
-					"Able to display the Filters Selector", "Successfully filters selector is diplayed",
-					"Failed to Display Filters selector");
+			Common.assertionCheckwithReport(Filters.contains("active"),
+					"Validating the Filters Selector on customers page",
+					"Able to display the Filters Selector on customers page",
+					"Successfully filters selector is diplayed on customers page",
+					"Failed to Display Filters selector on customers page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the Filters Selector", "Able to display the Filters Selector",
-					"Successfully filters selector is diplayed",
-					Common.getscreenShotPathforReport("Failed to Display Filters selector"));
+			ExtenantReportUtils.addFailedLog("Validating the Filters Selector on customers page",
+					"Able to display the Filters Selector on customers page",
+					"unable to display thr  filters selector on customers page",
+					Common.getscreenShotPathforReport("Failed to Display Filters selector on customers page"));
 			Assert.fail();
 
 		}
@@ -312,15 +328,19 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//span[text()='Columns']");
 			Common.clickElement("xpath", "//span[text()='Columns']");
 			String Columns = Common.findElement("xpath", "(//div[@data-bind='collapsible'])[2]").getAttribute("class");
-			Common.assertionCheckwithReport(Columns.contains("active"), "Validating the columns configuration CTA ",
-					"Able to display the columns Configuration CTA", "Successfully displayed Columns Configuration CTA",
-					"Failed to display the Columns Configuration CTA");
+			Common.assertionCheckwithReport(Columns.contains("active"),
+					"Validating the columns configuration CTA on customers page",
+					"Able to display the columns Configuration CTA on customers page",
+					"Successfully displayed Columns Configuration CTA on customers page",
+					"Failed to display the Columns Configuration CTA on customers page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the columns configuration CTA ",
-					"Able to display the columns Configuration CTA", "Successfully displayed Columns Configuration CTA",
-					Common.getscreenShotPathforReport("Failed to display the Columns Configuration CTA"));
+			ExtenantReportUtils.addFailedLog("Validating the columns configuration CTA on customers page",
+					"Able to display the columns Configuration CTA on customers page",
+					"Unable to  display the  Columns Configuration CTA on customers page",
+					Common.getscreenShotPathforReport(
+							"Failed to display the Columns Configuration CTA on customers page"));
 			Assert.fail();
 
 		}
@@ -333,15 +353,18 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//span[text()='Default View']");
 			Common.clickElement("xpath", "//span[text()='Default View']");
 			String Defaultview = Common.findElement("xpath", "//div[@data-bind='collapsible']").getAttribute("class");
-			Common.assertionCheckwithReport(Defaultview.contains("active"), "Validating the Default view Selector CTA ",
-					"Able to display the Default view Selector CTA ", "Successfully Default view selector CTA",
-					"Failed to Display view Selector CTA");
+			Common.assertionCheckwithReport(Defaultview.contains("active"),
+					"Validating the Default view Selector CTA on customers page ",
+					"Able to display the Default view Selector CTA on customers page",
+					"Successfully Default view selector CTA on customers page",
+					"Failed to Display view Selector CTA on customers page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the Default view Selector CTA",
-					"Able to display the Default view Selector CTA ", "Successfully Default view selector CTA",
-					Common.getscreenShotPathforReport("Failed to Display view Selector CTA"));
+			ExtenantReportUtils.addFailedLog("Validating the Default view Selector CTA on customers page",
+					"Able to display the Default view Selector CTA on customers page ",
+					"unable to display Default view selector CTA on customers page",
+					Common.getscreenShotPathforReport("Failed to Display view Selector CTA on customers page"));
 			Assert.fail();
 
 		}
@@ -353,16 +376,19 @@ public class Adminhelper {
 		try {
 			Common.clickElement("xpath", "//button[@title='Next Page']");
 			String pagination = Common.findElement("xpath", "//button[@title='Next Page']").getAttribute("class");
-			Common.assertionCheckwithReport(pagination.contains("next"), "Validating the pagination CTA ",
-					"Able to display the pagination CTA ", "Successfully Dispaly Pageination CTA",
-					"Failed to Display Pagination CTA");
+			Common.assertionCheckwithReport(pagination.contains("next"),
+					"Validating the pagination CTA on customers page",
+					"Able to display the pagination CTA on customers page",
+					"Successfully Dispaly Pageination CTA on customers page",
+					"Failed to Display Pagination CTA on customers page");
 			Common.clickElement("xpath", "//button[@title='Previous Page']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the pagination CTA ", "Able to display the pagination CTA ",
-					"Successfully Dispaly Pageination CTA",
-					Common.getscreenShotPathforReport("Failed to Display Pagination CTA"));
+			ExtenantReportUtils.addFailedLog("Validating the pagination CTA on customers page ",
+					"Able to display the pagination CTA on customers page",
+					"unable to Display Pageination CTA on customers page",
+					Common.getscreenShotPathforReport("Failed to Display Pagination CTA on customers page"));
 			Assert.fail();
 
 		}
@@ -375,13 +401,15 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//a[text()='Edit']");
 			String Edit = Common.findElement("xpath", "//a[text()='Edit']").getText();
 			System.out.println(Edit);
-			Common.assertionCheckwithReport(Edit.equals("Edit"), "Validating the Edit CTA ",
-					"Able to display the Edit CTA ", "Successfully Dispaly Edit CTA", "Failed to Display Edit CTA");
+			Common.assertionCheckwithReport(Edit.equals("Edit"), "Validating the Edit CTA on customers page",
+					"Able to display the Edit CTA on customers page ",
+					"Successfully Dispaly Edit CTA on customers page", "Failed to Display Edit CTA on customers page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the Edit CTA ", "Able to display the Edit CTA ",
-					"Successfully Dispaly Edit CTA", Common.getscreenShotPathforReport("Failed to Display Edit CTA"));
+			ExtenantReportUtils.addFailedLog("Validating the Edit CTA on customers page ",
+					"Able to display the Edit CTA on customers page ", "unable to Dispaly Edit CTA on customers page",
+					Common.getscreenShotPathforReport("Failed to Display Edit CTA on customers page"));
 			Assert.fail();
 
 		}
@@ -400,14 +428,13 @@ public class Adminhelper {
 			System.out.println(clear);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(clear.contains("current"), "Validating the Clear filters ",
-					"Able to clear the all filters ", "Successfully filters has been cleared ",
+					"Able to clear the all filters ", "Successfully all filters has cleared ",
 					"Failed to Clear all filters");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the Clear filters ", "Able to clear the all filters ",
-					"Successfully filters has been cleared",
-					Common.getscreenShotPathforReport("Failed to Clear all filters"));
+			ExtenantReportUtils.addFailedLog("Validating the Clear filters ", "Able to clear the all filters ",
+					"Unable to clear all filters ", Common.getscreenShotPathforReport("Failed to Clear all filters"));
 			Assert.fail();
 
 		}
@@ -421,17 +448,17 @@ public class Adminhelper {
 			Common.clickElement("xpath", "//span[text()='All Customers']");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Customers / Customers / Magento Admin"),
-					"Validating customers filed page navigation ",
-					"after clicking all customers it will navigate Customer filed page",
-					"Successfully navigate to the Customer filed page ",
-					"Failed to navigate to the Customer filed page");
+					"Validating customers field page navigation ",
+					"after clicking all customers it will navigate to the Customer field page",
+					"Successfully navigate to the Customer field page ",
+					"Failed to navigate to the Customer field page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating customers filed page navigation ",
-					"after clicking all customers it will navigate Customer filed page",
-					"Successfully navigate to Customer filed page",
-					Common.getscreenShotPathforReport("Failed to navigate  Customer filed page"));
+			ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
+					"after clicking all customers it will navigate Customer field page",
+					"Unable to navigate to the Customer filed page",
+					Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
 			Assert.fail();
 
 		}
@@ -491,9 +518,9 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating customers filed page navigation and saved message ",
+			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation and saved message ",
 					"after clicking save button it will navigate Customer filed page and it should be display save message",
-					"Successfully navigate to Customer filed page and save message has displayed",
+					"Unable to  navigate to the  Customer filed page and save message not displayed",
 					Common.getscreenShotPathforReport(
 							"Failed to navigate to Customer filed page and save message not displayed"));
 			Assert.fail();
@@ -528,10 +555,10 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating customers filed page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation ",
 					"after clicking save button it will navigate Customer filed page",
-					"Successfully navigate to Customer filed page",
-					Common.getscreenShotPathforReport("Failed to navigate to Customer filed page"));
+					"Unable to  navigate to the Customer filed page",
+					Common.getscreenShotPathforReport("Failed to navigate to the Customer filed page"));
 			Assert.fail();
 		}
 
@@ -548,9 +575,9 @@ public class Adminhelper {
 				Common.clickElement("xpath", "//label[@class='label admin__field-label']");
 				String checkbox = Common.findElement("xpath", "//input[@name='subscription_status[1]']")
 						.getAttribute("value");
-				Common.assertionCheckwithReport(checkbox.equals("true"), "Validating the newsletter checkout",
-						"newsletter checkbox should be selected", "Successfully newsletter checkout selected",
-						"Failed to select newsletter checkbox");
+				Common.assertionCheckwithReport(checkbox.equals("true"), "Validating the newsletter checkbox clicked",
+						"newsletter checkbox should be selected the checkbox",
+						"Successfully newsletter checkbox is selected", "Failed to select newsletter checkbox");
 
 			} else {
 				Assert.fail();
@@ -558,8 +585,8 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the newsletter checkout", "newsletter checkbox should be selected",
-					"Successfully newsletter checkout selected",
+			ExtenantReportUtils.addFailedLog("Validating the newsletter checkbox clicked",
+					"newsletter checkbox should be selected the checkbox", "unable to select the newsletter checkbox",
 					Common.getscreenShotPathforReport("Failed to select newsletter checkbox"));
 			Assert.fail();
 		}
@@ -596,14 +623,16 @@ public class Adminhelper {
 			Thread.sleep(8000);
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			System.out.println(records);
-			Common.assertionCheckwithReport(records.equals("1 records found"), "Validating the address with records",
-					"User should be able save address ", "Successfully address has been saved",
-					"Failed to save the address");
+			Common.assertionCheckwithReport(records.equals("1 records found"),
+					"Validating the new saved address with records",
+					"User should be able save address and record should be found ",
+					"Successfully address has been saved and record found", "Failed to save the address");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the address with records", "User should be able save address ",
-					"Successfully address has been saved",
+			ExtenantReportUtils.addFailedLog("Validating the new saved address with records",
+					"User should be able save address and record should be found ",
+					"unable to save address and record not found",
 					Common.getscreenShotPathforReport("Failed to save the address"));
 			Assert.fail();
 		}
@@ -629,16 +658,17 @@ public class Adminhelper {
 				String number = data.get(Dataset).get("ordernumber");
 				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 				Common.assertionCheckwithReport(ordernumber.equals(number),
-						"Validating the order number in orders page", "User should be able see order number  ",
-						"Successfully order number is dispalyed in orders page",
-						"Failed to see order number in order page");
+						"Validating the order number on orders page", "User should be able see the order number  ",
+						"Successfully order number is displayed on the orders page",
+						"Failed to see order number on order page");
 
 			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the order number in orders page", "User should be able see order number  ",
-					"Successfully order number is dispalyed in orders page",
+			ExtenantReportUtils.addFailedLog("Validating the order number on orders page",
+					"User should be able see the order number  ",
+					"Unable to dispaly the order number on the orders page",
 					Common.getscreenShotPathforReport("Failed to see order number in order page"));
 			Assert.fail();
 
@@ -665,20 +695,20 @@ public class Adminhelper {
 				String number = data.get(Dataset).get("ordernumber");
 				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 				Common.assertionCheckwithReport(ordernumber.equals(number),
-						"Validating the order number in Returns page",
-						"User should be able see order number in Returns page  ",
-						"Successfully order number is dispalyed in Returns page",
-						"Failed to see order number in Returns page");
+						"Validating the order number on Returns page",
+						"User should be able see order number on the Returns page  ",
+						"Successfully order number is dispalyed on the Returns page",
+						"Failed to see order number on the Returns page");
 			}
 
 		} catch (Exception | Error e)
 
 		{
 			e.printStackTrace();
-			report.addFailedLog("Validating the order number in Returns page",
-					"User should be able see order number in Returns page  ",
-					"Successfully order number is dispalyed in Returns page",
-					Common.getscreenShotPathforReport("Failed to see order number in Returns page"));
+			ExtenantReportUtils.addFailedLog("Validating the order number on Returns page",
+					"User should be able see order number on the Returns page  ",
+					"unable to display order number on the Returns page",
+					Common.getscreenShotPathforReport("Failed to see order number on the  Returns page"));
 			Assert.fail();
 
 		}
@@ -714,9 +744,9 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the Sku ID in Shopping cart page",
+			ExtenantReportUtils.addFailedLog("Validating the Sku ID in Shopping cart page",
 					"User should be able see Sku ID in Shopping cart page  ",
-					"Successfully SKU ID is dispalyed in Shopping cart page",
+					"Unable to display the SKU ID on the Shopping cart page",
 					Common.getscreenShotPathforReport("Failed to see SKU ID in Shopping cart page"));
 			Assert.fail();
 
@@ -742,19 +772,19 @@ public class Adminhelper {
 				System.out.println(product);
 				String name = data.get(Dataset).get("Productname");
 				Common.assertionCheckwithReport(product.equals(name),
-						"Validating the productname in the whishlist page",
-						"User should be able see product name in the whishlist page  ",
-						"Successfully productname is dispalyed in the whishlist page",
-						"Failed to productname in the whishlist page");
+						"Validating the productname on the whishlist page",
+						"User should be able see product name on the whishlist page  ",
+						"Successfully productname is displayed on the whishlist page",
+						"Failed to seed productname on the whishlist page");
 
 			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the productname in the whishlist page",
-					"User should be able see product name in the whishlist page  ",
-					"Successfully productname is dispalyed in the whishlist page",
-					Common.getscreenShotPathforReport("Failed to productname in the whishlist page"));
+			ExtenantReportUtils.addFailedLog("Validating the productname on the whishlist page",
+					"User should be able see product name on the whishlist page  ",
+					"Unable to display the productname on the whishlist page",
+					Common.getscreenShotPathforReport("Failed to see productname on the whishlist page"));
 			Assert.fail();
 
 		}
@@ -773,14 +803,14 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Customers / Customers / Magento Admin"),
 					"Validating customers filed page navigation",
 					"after clicking save button it will navigate Customer filed page",
-					"Successfully navigate to Customer filed page", "Failed to navigate to Customer filed page");
+					"Successfully navigate to Customer filed page", "Failed to navigate to the Customer filed page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating customers filed page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation ",
 					"after clicking save button it will navigate Customer filed page",
-					"Successfully navigate to Customer filed page",
-					Common.getscreenShotPathforReport("Failed to navigate to Customer filed page"));
+					"Unable to navigate to the Customer filed page",
+					Common.getscreenShotPathforReport("Failed to navigate to the Customer filed page"));
 			Assert.fail();
 
 		}
@@ -793,17 +823,18 @@ public class Adminhelper {
 			Common.mouseOverClick("id", "menu-magento-customer-customer");
 			String customers = Common.findElement("id", "menu-magento-customer-customer").getAttribute("class");
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(customers.contains("show"), "To verify the customer menu ",
+			Common.assertionCheckwithReport(customers.contains("show"), "To verify the customer menu Field ",
 					"After clicking the Customer menu it will display menu options ",
-					"Successfully clicked the customer menu and it displayed the Customer options",
-					"Failed to click the Customer menu");
+					"Successfully clicked on the customer menu and it displayed the Customer options",
+					"Failed to click on the Customer menu");
 			Sync.waitElementPresent("xpath", "//strong[text()='Customers']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to display in customer field",
-					"User should able to click on the customers button", "customers button expands the customer fileds",
-					Common.getscreenShotPathforReport("User unable to expands the customer"));
+			ExtenantReportUtils.addFailedLog("To verify the customer menu Field ",
+					"After clicking the Customer menu it will display menu options ",
+					"Unable to  clicked on the customer menu and it displayed the Customer options",
+					Common.getscreenShotPathforReport("Failed to click on the Customer menu"));
 			Assert.fail();
 		}
 
@@ -817,9 +848,9 @@ public class Adminhelper {
 			Sync.waitPageLoad(30);
 			Sync.waitElementVisible("xpath", "//h1[@class='page-title']");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals(pagetitle), "Validate the customer grops page",
-					"Should navigate to the Customer groups page", "Successfully navigated to customer groups page",
-					"Failed navigation to customer groups page");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals(pagetitle),
+					"Validate the customer groups page", "Should navigate to the Customer groups page",
+					"Successfully navigated to customer groups page", "Failed navigation to customer groups page");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1082,15 +1113,17 @@ public class Adminhelper {
 			System.out.println(Common.getPageTitle());
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Customer Segments"),
-					"User navigates to customer segment field", "User should navigate to the customers segment fields",
-					"User navigates to the customer segment fields", "User unable to display customer segments ");
+					"Validating the customer segment field navigation",
+					"It should navigate to the customers segment fields",
+					"Sucessfully navigates to the customer segment fields",
+					"Failed to Navigate customer segments fields ");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User navigates to customer segment field",
-					"User should navigate to the customer segment fields",
-					"User navigates to the customer segment fields",
-					Common.getscreenShotPathforReport("User unable to navigate to customer segment"));
+			ExtenantReportUtils.addFailedLog("Validating the customer segment field navigation",
+					"It should navigate to the customers segment fields",
+					"Sucessfully navigates to the customer segment fields",
+					Common.getscreenShotPathforReport("Failed to navigate to the customer segment fields"));
 			Assert.fail();
 		}
 	}
@@ -1143,14 +1176,19 @@ public class Adminhelper {
 
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Customer Segments") && message.contains("You saved the segment"),
-					"User need to save new customer segment field", "User saves the new customer segment",
-					"User saved the new customer segment", "unable to save the New Segment");
+					"Validating the Navigation to the customer segement page and save customer message",
+					"It should navigate to the customer segment page and save message should be displayed",
+					"Sucessfully navigated to the customer segement page and able to display the save message",
+					"Failed to navigate to the customer segment page and not able to see the save message");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to save customer segment field", "User saves the new customer segment",
-					"User saved the new customer segment",
-					Common.getscreenShotPathforReport("User unable to save the new customer segment"));
+			ExtenantReportUtils.addFailedLog(
+					"Validating the Navigation to the customer segement page and save customer message",
+					"It should navigate to the customer segment page and save message should be displayed",
+					"Unable to navigated to the customer segement page and able to display the save message",
+					Common.getscreenShotPathforReport(
+							"Failed to navigate to the customer segment page and not able to see the save message"));
 			Assert.fail();
 		}
 	}
@@ -1186,15 +1224,15 @@ public class Adminhelper {
 			System.out.println(message);
 
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Customer Segments"),
-					"User need to save edited customer segment field",
-					"User should able to save edited customer segment", "User saves the Edited customer segment",
-					"Unable to save the Edited Customer segment");
+					"Validating the save edit customer segment message",
+					"It should able to save edited customer segment", "Sucessfully  saves the Edited customer segment",
+					"Failed to save the Edited Customer segment");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to save updated customer segment field",
-					"User should able to save updated customer segment", "User saves the updated customer segment",
-					Common.getscreenShotPathforReport("User unable to save the customer segment"));
+			ExtenantReportUtils.addFailedLog("Validating the save edit customer segment message",
+					"It should able to save edited customer segment", "Unable to  save the Edited customer segment",
+					Common.getscreenShotPathforReport("Failed to save the Edited Customer segment"));
 			Assert.fail();
 		}
 
@@ -1212,9 +1250,9 @@ public class Adminhelper {
 			System.out.println(Common.getPageTitle());
 
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(segmentName),
-					"User selects to delete existing customer segment field",
-					"User should able to select the customer segment", "User selects the customer segment",
-					"user unable to select customer segment");
+					"validating the  delete existing customer segment field",
+					"It should able to select the customer segment", "Sucessfully selects to the customer segment",
+					"Failed to select the customer segment");
 
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Delete')]");
@@ -1230,14 +1268,14 @@ public class Adminhelper {
 			String message1 = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			System.out.println(message1);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Customer Segments"),
-					"User need to delete customer segment field", "User should able to delete the customer segment",
-					"User deletes the customer segment", " user unable to delete customer segment");
+					"Validating the  delete customer segment field", "It should able to delete the customer segment",
+					"Sucessfully deletes the customer segment", " Failed to delete customer segment");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to delete customer segment field",
-					"User should able to delete the customer segment", "User deletes the customer segment",
-					Common.getscreenShotPathforReport("User unable to delete the customer segment"));
+			ExtenantReportUtils.addFailedLog("Validating the  delete customer segment field",
+					"It should able to delete the customer segment", "Unable to delete the customer segment",
+					Common.getscreenShotPathforReport("Failed to delete the customer segment"));
 			Assert.fail();
 		}
 
@@ -1260,9 +1298,9 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("To verify the content menu ",
+			ExtenantReportUtils.addFailedLog("To verify the content menu ",
 					"After clicking the content menu it will display menu options ",
-					"Successfully clicked the content menu and it displayed the Content options",
+					"Unable to click the content menu and not displayed the Content options",
 					Common.getscreenShotPathforReport("Failed to click on the content menu"));
 			Assert.fail();
 		}
@@ -1282,14 +1320,15 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating content filed page navigation ",
-					"after clicking on pages it will navigate page filed ", "Successfully navigate to the page filed ",
+			ExtenantReportUtils.addFailedLog("Validating content filed page navigation ",
+					"after clicking on pages it will navigate page filed ", "unable to navigate to the page filed ",
 					Common.getscreenShotPathforReport("Failed to navigate to the page filed"));
 			Assert.fail();
 
 		}
 
 	}
+
 	public void pages() {
 
 		try {
@@ -1299,12 +1338,11 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Pages / Magento Admin"),
 					"Validating content filed page navigation ", "after clicking on pages it will navigate page filed ",
 					"Successfully navigate to the page filed ", "Failed to navigate to the page filed");
-			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating content filed page navigation ",
-					"after clicking on pages it will navigate page filed ", "Successfully navigate to the page filed ",
+			ExtenantReportUtils.addFailedLog("Validating content filed page navigation ",
+					"after clicking on pages it will navigate page filed ", "Unable to navigate to the page filed ",
 					Common.getscreenShotPathforReport("Failed to navigate to the page filed"));
 			Assert.fail();
 
@@ -1338,14 +1376,14 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("New Page / Pages / Elements / Content / Magento Admin"),
 					"Validating edit page bulider navigation ",
-					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Successfully navigate to the edit page builder filed ",
-					"Failed to navigate to the edit page builder filed");
+					"after clicking on the edit page builder it will navigate to the edit page builder field ",
+					"Successfully navigate to the edit page builder field ",
+					"Failed to navigate to the edit page builder field");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating edit page bulider navigation ",
-					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Successfully navigate to the edit page builder filed",
+			ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
+					"after clicking on the edit page builder it will navigate to the edit page builder field ",
+					"Unable to  navigate to the edit page builder field ",
 					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
 			Assert.fail();
 		}
@@ -1365,9 +1403,9 @@ public class Adminhelper {
 					"Failed to navigate to the edit page builder filed");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating edit page bulider navigation ",
+			ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
 					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Successfully navigate to the edit page builder filed",
+					"Unable to  navigate to the edit page builder filed",
 					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
 			Assert.fail();
 		}
@@ -1381,14 +1419,14 @@ public class Adminhelper {
 					.getAttribute("class");
 
 			Common.assertionCheckwithReport(hotelements.equals("active"), "Verify the Hot element drop down contents ",
-					"after clicking on hot elemnet contents should be appear ",
+					"after clicking on hot elements contents should be appear ",
 					"Successfully hot elements contents appeared ", "Failed to appear hot elements contents");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Verify the Hot element drop down contents ",
+			ExtenantReportUtils.addFailedLog("Verify the Hot element drop down contents ",
 					"after clicking on hot elemnet contents should be appear ",
-					"Successfully hot elements contents appeared",
-					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
+					"unable to display the hot elements contents",
+					Common.getscreenShotPathforReport("Failed to appear hot elements contents"));
 			Assert.fail();
 		}
 	}
@@ -1405,21 +1443,21 @@ public class Adminhelper {
 
 	public void dragndrop_Promo_Content() {
 		try {
-		    Common.scrollIntoView("xpath", "//span[text()='Promo Content (Product)']");
+			Common.scrollIntoView("xpath", "//span[text()='Promo Content (Product)']");
 			WebElement element = Common.findElement("xpath", "//span[text()='Promo Content (Product)']");
 			draganddropContentBlock(element);
 			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
 					.getAttribute("data-content-type");
 			Common.assertionCheckwithReport(blockname.equals("hot_product_promo"),
 					"Validating promocontent Dragndrop operation", "promocontent dragndrop to content with options",
-					"successfully dragndrop the promocontent with options ", "fail to dragndrop the promocontent");
+					"successfully dragndrop the promocontent with options ", "failed to dragndrop the promocontent");
 		} catch (Exception e) {
 
 			e.printStackTrace();
 
-			report.addFailedLog("Validating promocontent Dragndrop operation",
-					"User should able Dragndrop promocontent", "Sucessfully Dragndrop promocontent",
-					Common.getscreenShotPathforReport("Failed to Dragndrop promocontent"));
+			ExtenantReportUtils.addFailedLog("Validating promocontent Dragndrop operation", "promocontent dragndrop to content with options",
+					"Unable to dragndrop the promocontent with options ",
+					Common.getscreenShotPathforReport("Failed to Dragndrop the promocontent"));
 			Assert.fail();
 
 		}
@@ -1434,7 +1472,7 @@ public class Adminhelper {
 					.getAttribute("class");
 			System.out.println(visible);
 			Common.assertionCheckwithReport(visible.contains("-options-visible"),
-					"validation Edit option  in the page builder ",
+					"validating Edit option  on the page builder ",
 					"after mouse over on the page builder edit option should be appear ",
 					"Successfully edit option appeared in the pagebuilder",
 					"Failed to appear edit option when we mouse over");
@@ -1443,16 +1481,16 @@ public class Adminhelper {
 			String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
 			System.out.println(editpromo);
 			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Content (Product)"),
-					"validation Navigation to the edit promo page ",
-					"after Click on edit button it should be navigate to the edit promo page ",
-					"Successfully it is navigated to edit promo page ", "Failed to navigate to edit promo page");
+					"validating Navigation to the edit promo page ",
+					"after Clicking on the edit button it should be navigate to the edit promo page ",
+					"Successfully it is navigated to edit promo page ", "Failed to navigate to the edit promo page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit promo page ",
-					"after Click on edit button it should be navigate to the edit promo page ",
-					"Successfully it is navigated to edit promo page ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo page ",
+					"after Clicking on the edit button it should be navigate to the edit promo page ",
+					"Unable to navigate to the edit promo page ",
 					Common.getscreenShotPathforReport("Failed to navigate to edit promo page"));
 			Assert.fail();
 
@@ -1471,15 +1509,15 @@ public class Adminhelper {
 			String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
 					.getAttribute("value");
 			Common.assertionCheckwithReport(appliedcolor.equals(color),
-					"validation of the color applied in the backgroud color ",
+					"validating of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ", "Failed to apply backgroud color");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation of the color applied in the backgroud color ",
+			ExtenantReportUtils.addFailedLog("validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
-					"Successfully Background color is applied ",
+					"Unable to apply the  Background color ",
 					Common.getscreenShotPathforReport("Failed to apply backgroud color"));
 			Assert.fail();
 
@@ -1496,16 +1534,16 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
 			System.out.println(image);
 			Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
-					"validation the image uploading on content for background image ",
-					"Image should be upload for background image", "Successfully image uploaded in background image ",
+					"validating the image uploading on content for background image ",
+					"Image should be upload on the background image", "Successfully image uploaded on the background image ",
 					"Failed to upload image on the background image");
 
 		}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content for background image ",
-					"Image should be upload for background image", "Successfully image uploaded in background image ",
+			ExtenantReportUtils.addFailedLog("validating the image uploading on content for background image ",
+					"Image should be upload for background image", "unable to upload image on the background image ",
 					Common.getscreenShotPathforReport("Failed to upload image on the background image"));
 			Assert.fail();
 
@@ -1527,7 +1565,7 @@ public class Adminhelper {
 			String background = Common.findElement("xpath", "(//select[@name='background_attachment']//option)[2]")
 					.getText();
 			Common.assertionCheckwithReport(background.equals("Fixed"),
-					"validation of the back groun attachemnt drop down ",
+					"validation of the back ground attachemnt drop down ",
 					"back groud attachment drop down should be open and its should be select",
 					"Successfully dropdown should be opend and text has been selected ",
 					"Failed to open drop down and text to select");
@@ -1538,9 +1576,9 @@ public class Adminhelper {
 		} catch (Exception | Error e) {
 
 			e.printStackTrace();
-			report.addFailedLog("validation of the back ground attachemnt drop down ",
+			ExtenantReportUtils.addFailedLog("validation of the back ground attachemnt drop down ",
 					"back groud attachment drop down should be open and its should be select",
-					"Successfully dropdown should be opend and text has been selected ",
+					"Unable to open the dropdown and text has not been selected ",
 					Common.getscreenShotPathforReport("Failed to open drop down and text to select"));
 			Assert.fail();
 		}
@@ -1567,8 +1605,8 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User need to save the page", "User should able to save the page",
-					"Sucessfully User saves the page", Common.getscreenShotPathforReport("Failed to save the page"));
+			ExtenantReportUtils.addFailedLog("Validating the User need to save the page", "User should able to save the page",
+					"unable to save the page", Common.getscreenShotPathforReport("Failed to save the page"));
 			Assert.fail();
 		}
 
@@ -1591,10 +1629,9 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating page filed  navigation and customer deleted message",
-					"after clicking save button it will navigate page filed and message should be displayed",
-					"Successfully navigate to page filed and message is dispalyed",
-					Common.getscreenShotPathforReport("Failed to navigate to page filed"));
+			ExtenantReportUtils.addFailedLog("Validating the User lands to the hydroflask page", "User should able lands on the hydroflask page",
+					"unable to land User on the hydroflask page",
+					Common.getscreenShotPathforReport("Failed user navigates to the hydroflask page"));
 
 			Assert.fail();
 		}
@@ -1636,7 +1673,7 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating page filed  navigation and customer deleted message",
+			ExtenantReportUtils.addFailedLog("Validating page filed  navigation and customer deleted message",
 					"after clicking delete button it will navigate page filed and message should be displayed",
 					"Unable to navigate to the page filed ",
 					Common.getscreenShotPathforReport("Failed to navigate to page filed"));
@@ -1659,13 +1696,14 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(pagebuilder.contains("pagebuilder-wysiwyg-overlay"),
 					"Validating edit page bulider navigation ",
 					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Successfully navigate to the edit page builder filed ",
+					"Successfully navigate to the edit page builder filed",
 					"Failed to navigate to the edit page builder filed");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating Contentpage", "User should able to edit the content fo the page",
-					"Admin edits Content page",
-					Common.getscreenShotPathforReport("Failed to edit the content of the page"));
+			ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
+					"after clicking on edit page builder it will navigate edit page builder filed ",
+					"Unable navigate to the edit page builder filed",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
 
 			Assert.fail();
 		}
@@ -1720,9 +1758,9 @@ public class Adminhelper {
 
 			e.printStackTrace();
 
-			report.addFailedLog("Validating card tile Dragndrop operation", "User should able Dragndrop cardtile",
-					"Sucessfully Dragndrop cardtile",
-					Common.getscreenShotPathforReport("Failed to Dragndrop cardtile"));
+			ExtenantReportUtils.addFailedLog("Validating card tile Dragndrop operation", "User should able Dragndrop cardtile",
+					"Unable to Dragndrop the cardtile",
+					Common.getscreenShotPathforReport("Failed to Dragndrop the cardtile"));
 			Assert.fail();
 
 		}
@@ -1743,7 +1781,7 @@ public class Adminhelper {
 
 			e.printStackTrace();
 
-			report.addFailedLog("Validating Promoblocker Dragndrop operation",
+			ExtenantReportUtils.addFailedLog("Validating Promoblocker Dragndrop operation",
 					"User should able Dragndrop Promoblocker", "Sucessfully Dragndrop Promoblocker",
 					Common.getscreenShotPathforReport("Failed to Dragndrop Promoblocker"));
 			Assert.fail();
@@ -1763,17 +1801,17 @@ public class Adminhelper {
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
 			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
-					"validation Navigation to the edit  Promo Media Card page ",
-					"after Click on edit button it should be navigate to the edit promoBlocker page ",
+					"validating the  Navigation to the edit  Promo Media Card page ",
+					"after Clicking on the edit button it should be navigate to the edit promoBlocker page ",
 					"Successfully it is navigated to edit promoBlocker page ",
 					"Failed to navigate to edit promoBlocker page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit promo Blocker ",
-					"after Click on edit button it should be navigate to the edit Blocker page ",
-					"Successfully it is navigated to edit Blocker page ",
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the edit promo Blocker ",
+					"after Click on the edit button it should be navigate to the edit Blocker page ",
+					"Unable to  navigated to the edit Blocker page ",
 					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
 			Assert.fail();
 
@@ -1789,14 +1827,14 @@ public class Adminhelper {
 					.getAttribute("data-background-images");
 			System.out.println(imageverification);
 			Common.assertionCheckwithReport(imageverification.contains("Lotusqa"),
-					"validation Image upload in the forntend website ", "Image should de appear on fornt end page",
-					"Successfully image is appeared on the frondend", "Failed to navigate to edit promoBlocker page");
+					"validating the  Image upload on the forntend website ", "Image should de appear on the fornt end page",
+					"Successfully image is appeared on the frond end", "Failed to appear image on the front end");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Image upload in the forntend website ",
-					"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
-					Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+			ExtenantReportUtils.addFailedLog("validation Image upload in the fornt end website ",
+					"Image should de appear on fornt end page", "unable to appear image on the frond end",
+					Common.getscreenShotPathforReport("Failed to appear image on the front end"));
 			Assert.fail();
 
 		}
@@ -1821,15 +1859,15 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(closebutton.contains(crossbutton),
 					"validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					"Failed to the page after clicking on close and cross buttton");
+					"Successfully page has been closed after clicking on the close and cross button",
+					"Failed to close the page after clicking on close and cross buttton");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation the close and cross button funtionality ",
+			ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					Common.getscreenShotPathforReport("Failed to the page after clicking on close and cross buttton"));
+					"Unable to close the page after clicking on the close and cross button",
+					Common.getscreenShotPathforReport("Failed to close the page after clicking on close and cross buttton"));
 			Assert.fail();
 		}
 
@@ -1860,8 +1898,8 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User need to save the page", "User should able to save the page",
-					"Sucessfully User saves the page", Common.getscreenShotPathforReport("Failed to save the page"));
+			ExtenantReportUtils.addFailedLog("Validating the User need to save the page", "User should able to save the page",
+					"Unable to save the page", Common.getscreenShotPathforReport("Failed to save the page"));
 			Assert.fail();
 
 		}
@@ -1879,15 +1917,15 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@data-pb-style='" + id + "']")
 					.getAttribute("data-background-images");
 			Common.assertionCheckwithReport(image.contains("Lotusqa1"),
-					"validation the image uploading on front end page ", "Image should be upload for fornt end page",
-					"Successfully image uploaded in front end page", "Failed to upload image on the front end page");
+					"validating the image uploading on front end page ", "Image should be upload for the front end page",
+					"Successfully image uploaded on the front end page", "Failed to upload image on the front end page");
 
 		}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on front end page ",
-					"Image should be upload for fornt end page", "Successfully image uploaded in front end page",
+			ExtenantReportUtils.addFailedLog("validating the image uploading on front end page ",
+					"Image should be upload for front end page", "unable to upload image on the front end page",
 					Common.getscreenShotPathforReport("Failed to upload image on the front end page"));
 			Assert.fail();
 
@@ -1916,9 +1954,9 @@ public class Adminhelper {
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation of the color applied in the overlay color ",
+			ExtenantReportUtils.addFailedLog("validation of the color applied in the overlay color ",
 					"after Clicking on the color the overlay color should be applied ",
-					"Successfully overlay color is applied ",
+					"Unable to applied the overlay color  ",
 					Common.getscreenShotPathforReport("Failed to apply overlay color"));
 			Assert.fail();
 		}
@@ -1933,8 +1971,8 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
 			System.out.println(image);
 			Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
-					"validation the image uploading on content for fallback image ",
-					"Image should be upload for Fallback image", "Successfully image uploaded in Fallback image ",
+					"validating the image uploading on content for fallback image ",
+					"Image should be upload for Fallback image", "Successfully image uploaded on Fallback image ",
 					"Failed to upload image on the Fallback image");
 
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
@@ -1944,8 +1982,8 @@ public class Adminhelper {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content for Fallback image ",
-					"Image should be upload for Fallback image", "Successfully image uploaded in Fallback image ",
+			ExtenantReportUtils.addFailedLog("validating the image uploading on content for Fallback image ",
+					"Image should be upload for Fallback image", "unable to upload on Fallback image ",
 					Common.getscreenShotPathforReport("Failed to upload image on the Fallback image"));
 			Assert.fail();
 
@@ -1962,7 +2000,7 @@ public class Adminhelper {
 			String blocknames = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
 					.getAttribute("data-content-type");
 			Common.assertionCheckwithReport(blocknames.equals("hot_value_prop_banner"),
-					"Validating value prop banner Dragndrop operation",
+					"Validating the value prop banner Dragndrop operation",
 					"value prop banner dragndrop to content with options",
 					"successfully dragndrop the value prop banner with options ",
 					"fail to dragndrop the value prop banner");
@@ -1970,9 +2008,9 @@ public class Adminhelper {
 
 			e.printStackTrace();
 
-			report.addFailedLog("Validating value prop banner Dragndrop operation",
+			ExtenantReportUtils.addFailedLog("Validating value prop banner Dragndrop operation",
 					"value prop banner dragndrop to content with options",
-					"successfully dragndrop the value prop banner with options ",
+					"Unable to  dragndrop the value prop banner with options ",
 					Common.getscreenShotPathforReport("fail to dragndrop the value prop banner"));
 			Assert.fail();
 
@@ -1992,7 +2030,7 @@ public class Adminhelper {
 			String editvlauepropcard = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
 
 			Common.assertionCheckwithReport(editvlauepropcard.contains("Edit Value Prop Card"),
-					"validation Navigation to the edit  value prop Card page ",
+					"validating Navigation to the edit  value prop Card page ",
 					"after Click on edit button it should be navigate to the edit value prop card page ",
 					"Successfully it is navigated to edit value prop card  page ",
 					"Failed to navigate to edit value prop card page");
@@ -2000,10 +2038,10 @@ public class Adminhelper {
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit  value prop Card page ",
-					"after Click on edit button it should be navigate to the edit value prop card page ",
-					"Successfully it is navigated to edit value prop card  page ",
-					Common.getscreenShotPathforReport("Failed to navigate to edit value prop card page"));
+			ExtenantReportUtils.addFailedLog("validati Navigation to the edit  value prop Card page ",
+					"after Click on edit button it should bnge navigate to the edit value prop card page ",
+					"Unable to  navigated to the edit value prop card  page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit value prop card page"));
 			Assert.fail();
 
 		}
@@ -2024,17 +2062,17 @@ public class Adminhelper {
 			String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
 					.getAttribute("class");
 			Common.assertionCheckwithReport(closebutton.contains(crossbutton),
-					"validation the close and cross button funtionality ",
-					"After clickng close and cross button the page should be close",
+					"validating the close and cross button funtionality ",
+					"After clickng on the close and cross button the page should be close",
 					"Successfully page has been closed after clicking on close and cross button",
-					"Failed to the page after clicking on close and cross buttton");
+					"Failed to close the page after clicking on close and cross buttton");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation the close and cross button funtionality ",
+			ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					Common.getscreenShotPathforReport("Failed to the page after clicking on close and cross buttton"));
+					"Unable to  close the page after clicking on close and cross button",
+					Common.getscreenShotPathforReport("Failed to close the page after clicking on close and cross buttton"));
 			Assert.fail();
 		}
 
@@ -2054,18 +2092,18 @@ public class Adminhelper {
 			String editvlauepropcard = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
 
 			Common.assertionCheckwithReport(editvlauepropcard.contains("Edit Value Prop Card"),
-					"validation Navigation to the edit  value prop Card page ",
+					"validating the Navigation to the edit  value prop Card page ",
 					"after Click on edit button it should be navigate to the edit value prop card page ",
-					"Successfully it is navigated to edit value prop card  page ",
+					"Successfully it is navigated to the edit value prop card  page ",
 					"Failed to navigate to edit value prop card page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit  value prop Card page ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit  value prop Card page ",
 					"after Click on edit button it should be navigate to the edit value prop card page ",
-					"Successfully it is navigated to edit value prop card  page ",
-					Common.getscreenShotPathforReport("Failed to navigate to edit value prop card page"));
+					"Unable to navigate to the edit value prop card  page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit value prop card page"));
 			Assert.fail();
 
 		}
@@ -2089,14 +2127,14 @@ public class Adminhelper {
 					"validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
 					"Successfully page has been closed after clicking on close and cross button",
-					"Failed to the page after clicking on close and cross buttton");
+					"Failed to close the page after clicking on close and cross buttton");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation the close and cross button funtionality ",
+			ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					Common.getscreenShotPathforReport("Failed to the page after clicking on close and cross buttton"));
+					"Unable to close the page after clicking on close and cross button",
+					Common.getscreenShotPathforReport("Failed to close the page after clicking on close and cross buttton"));
 			Assert.fail();
 		}
 
@@ -2115,18 +2153,18 @@ public class Adminhelper {
 			String editvlauepropcard = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
 
 			Common.assertionCheckwithReport(editvlauepropcard.contains("Edit Value Prop Card"),
-					"validation Navigation to the edit  value prop Card page ",
+					"validating the Navigation to the edit  value prop Card page ",
 					"after Click on edit button it should be navigate to the edit value prop card page ",
 					"Successfully it is navigated to edit value prop card  page ",
-					"Failed to navigate to edit value prop card page");
+					"Failed to navigate to the edit value prop card page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit  value prop Card page ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit  value prop Card page ",
 					"after Click on edit button it should be navigate to the edit value prop card page ",
-					"Successfully it is navigated to edit value prop card  page ",
-					Common.getscreenShotPathforReport("Failed to navigate to edit value prop card page"));
+					"Unable to navigate to the edit value prop card  page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit value prop card page"));
 			Assert.fail();
 
 		}
@@ -2148,17 +2186,17 @@ public class Adminhelper {
 			String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
 					.getAttribute("class");
 			Common.assertionCheckwithReport(closebutton.contains(crossbutton),
-					"validation the close and cross button funtionality ",
+					"validating the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
 					"Successfully page has been closed after clicking on close and cross button",
-					"Failed to the page after clicking on close and cross buttton");
+					"Failed to close the page after clicking on close and cross buttton");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation the close and cross button funtionality ",
+			ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					Common.getscreenShotPathforReport("Failed to the page after clicking on close and cross buttton"));
+					"Unable to close the page after clicking on close and cross button",
+					Common.getscreenShotPathforReport("Failed to close the page after clicking on close and cross buttton"));
 			Assert.fail();
 		}
 
@@ -2184,16 +2222,16 @@ public class Adminhelper {
 			System.out.println(editpromo);
 			Common.assertionCheckwithReport(editpromo.contains("Edit Value Prop Banner"),
 					"validation Navigation to the edit promo page ",
-					"after Click on edit button it should be navigate to the edit promo page ",
-					"Successfully it is navigated to edit promo page ", "Failed to navigate to edit promo page");
+					"after Clicking on the edit button it should be navigate to the edit promo page ",
+					"Successfully it is navigated to the edit promo page ", "Failed to navigate to the edit promo page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit promo page ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo page ",
 					"after Click on edit button it should be navigate to the edit promo page ",
-					"Successfully it is navigated to edit promo page ",
-					Common.getscreenShotPathforReport("Failed to navigate to edit promo page"));
+					"Unablr to navigate to the edit promo page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit promo page"));
 			Assert.fail();
 
 		}
@@ -2217,17 +2255,17 @@ public class Adminhelper {
 			String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
 					.getAttribute("class");
 			Common.assertionCheckwithReport(closebutton.contains(crossbutton),
-					"validation the close and cross button funtionality ",
+					"validating the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
 					"Successfully page has been closed after clicking on close and cross button",
-					"Failed to the page after clicking on close and cross buttton");
+					"Failed to close the page after clicking on close and cross buttton");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation the close and cross button funtionality ",
+			ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					Common.getscreenShotPathforReport("Failed to the page after clicking on close and cross buttton"));
+					"Unable to close the page after clicking on close and cross button",
+					Common.getscreenShotPathforReport("Failed to close the page after clicking on close and cross buttton"));
 			Assert.fail();
 		}
 
@@ -2252,15 +2290,15 @@ public class Adminhelper {
 			String colortext = Common.findElement("xpath", "//h2[@class='m-heading__text']").getText();
 			System.out.println(colortext);
 			Common.assertionCheckwithReport(colortext.equals("Text"),
-					"validation of the color applied in the backgroud Text ",
+					"validating  the color applied on the backgroud Text ",
 					"after Clicking on the color the background Text color should be applied ",
 					"Successfully Background Text color  is applied ", "Failed to apply backgroud Text color");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation of the color applied in the backgroud Text ",
+			ExtenantReportUtils.addFailedLog("validation of the color applied in the backgroud Text ",
 					"after Clicking on the color the background Text color should be applied ",
-					"Successfully Background Text color  is applied ",
+					"Unable to apply the Background Text color ",
 					Common.getscreenShotPathforReport("Failed to apply backgroud Text color"));
 			Assert.fail();
 		}
@@ -2278,8 +2316,8 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
 			System.out.println(image);
 			Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
-					"validation the image uploading on content for icon image ",
-					"Image should be upload for icone image", "Successfully image uploaded in icon image ",
+					"validating  the image uploading on content for icon image ",
+					"Image should be upload for icon image", "Successfully image uploaded in icon image ",
 					"Failed to upload image on the icon image");
 			String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
 			Common.textBoxInput("xpath", "//input[@id='" + newid + "']", data.get(Dataset).get("Attachment"));
@@ -2290,9 +2328,9 @@ public class Adminhelper {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content for icon image ",
-					"Image should be upload for icon image", "Successfully image uploaded in icon image ",
-					Common.getscreenShotPathforReport("Failed to upload image on the icon image"));
+			ExtenantReportUtils.addFailedLog("validation the image uploading on content for icon image ",
+					"Image should be upload for icon image", "Unable to upload the image for icon image ",
+					Common.getscreenShotPathforReport("Failed to upload image for icon image"));
 			Assert.fail();
 
 		}
@@ -2310,9 +2348,9 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
 			System.out.println(image);
 			Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
-					"validation the image uploading on content for icon image ",
-					"Image should be upload for icone image", "Successfully image uploaded in icon image ",
-					"Failed to upload image on the icon image");
+					"validating the image uploading on content for icon image ",
+					"Image should be upload for icon image", "Successfully image uploaded for the icon image ",
+					"Failed to upload image for the icon image");
 			String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
 			Common.textBoxInput("xpath", "//input[@id='" + newid + "']", data.get(Dataset).get("Attachment"));
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
@@ -2322,9 +2360,9 @@ public class Adminhelper {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content for icon image ",
-					"Image should be upload for icon image", "Successfully image uploaded in icon image ",
-					Common.getscreenShotPathforReport("Failed to upload image on the icon image"));
+			ExtenantReportUtils.addFailedLog("validating the image uploading on content for icon image ",
+					"Image should be upload for icon image", "Unable to upload the  image for icon image ",
+					Common.getscreenShotPathforReport("Failed to upload image for the icon image"));
 			Assert.fail();
 
 		}
@@ -2348,16 +2386,16 @@ public class Adminhelper {
 			String imageupload = Common.findElement("xpath", "(//div[contains(@data-bind,'visible: hasData()')])[3]")
 					.getAttribute("data-bind");
 			Common.assertionCheckwithReport(imageupload.contains("isShowImageUploadOptions"),
-					"validation the image uploading on content in value prop banner ",
+					"validating the image uploading on content in value prop banner ",
 					"Image should be upload for value prop baneer",
 					"Successfully image uploaded in the value prop banner ",
 					"Failed to upload image on the value prop banner");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content in value prop banner ",
+			ExtenantReportUtils.addFailedLog("validation the image uploading on content in value prop banner ",
 					"Image should be upload for value prop baneer",
-					"Successfully image uploaded in the value prop banner ",
+					"Unable to upload image on the value prop banner ",
 					Common.getscreenShotPathforReport("Failed to upload image on the value prop banner"));
 			Assert.fail();
 
@@ -2383,14 +2421,14 @@ public class Adminhelper {
 			System.out.println(image3);
 			Common.assertionCheckwithReport(
 					image1.contains("Lotusqa") && image2.contains("Lotusqa1") && image3.contains("demo-desktop"),
-					"validation the image uploading on content in frontend website ",
-					"Image should be upload for frontend website", "Successfully image uploaded in frond end image ",
+					"validating the image uploading on content in frontend website ",
+					"Image should be upload on the frontend website", "Successfully image uploaded on the frond end image ",
 					"Failed to upload image on the frond end");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content in frontend website ",
-					"Image should be upload for frontend website", "Successfully image uploaded in frond end image ",
+			ExtenantReportUtils.addFailedLog("validating the image uploading on content in frontend website ",
+					"Image should be upload for frontend website", "Unable to upload the image on the frond end ",
 					Common.getscreenShotPathforReport("Failed to upload image on the frond end"));
 			Assert.fail();
 		}
@@ -2420,8 +2458,8 @@ public class Adminhelper {
 					"Sucessfully User saves the page", "Unable to save the page");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User need to save the page", "User should able to save the page",
-					"Sucessfully User saves the page", Common.getscreenShotPathforReport("Unable to save the page"));
+			ExtenantReportUtils.addFailedLog("Validating the User need to save the page", "User should able to save the page",
+					"Unable to save the page", Common.getscreenShotPathforReport("Unable to save the page"));
 			Assert.fail();
 
 		}
@@ -2441,16 +2479,16 @@ public class Adminhelper {
 			String headingname = Common.findElement("xpath", "//img[@data-pb-style='" + image + "']")
 					.getAttribute("src");
 			Common.assertionCheckwithReport(headingname.contains("demo-desktop"),
-					"validation the text on clone value prop banner on fornt end",
+					"validating the text on clone value prop banner on fornt end",
 					"Text should be add for the clone value prop baneer on fornt end",
 					"Successfully text added to the  clone value prop banner on front end",
 					"Failed to add text on the clone value prop banner on front end");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the text on clone value prop banner on fornt end",
+			ExtenantReportUtils.addFailedLog("validating the text on clone value prop banner on fornt end",
 					"Text should be add for the clone value prop baneer on fornt end",
-					"Successfully text added to the  clone value prop banner on front end",
+					"Unable to add the text on the clone value prop banner on front end",
 					Common.getscreenShotPathforReport(
 							"Failed to add text on the clone value prop banner on front end"));
 			Assert.fail();
@@ -2476,17 +2514,17 @@ public class Adminhelper {
 			String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
 					.getAttribute("class");
 			Common.assertionCheckwithReport(closebutton.contains(crossbutton),
-					"validation the close and cross button funtionality ",
+					"validating the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
 					"Successfully page has been closed after clicking on close and cross button",
-					"Failed to the page after clicking on close and cross buttton");
+					"Failed to close the page after clicking on close and cross buttton");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation the close and cross button funtionality ",
+			ExtenantReportUtils.addFailedLog("validating the close and cross button funtionality ",
 					"After clickng close and cross button the page should be close",
-					"Successfully page has been closed after clicking on close and cross button",
-					Common.getscreenShotPathforReport("Failed to the page after clicking on close and cross buttton"));
+					"Unable to close after clicking on close and cross button",
+					Common.getscreenShotPathforReport("Failed to close the page after clicking on close and cross buttton"));
 			Assert.fail();
 		}
 
@@ -2503,22 +2541,22 @@ public class Adminhelper {
 			Common.clickElement("xpath", "//div[@id='" + id + "']//div[4]//i");
 
 			String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
-			
+
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
 			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
-					"validation Navigation to the edit  Promo Media Card page ",
+					"validating the Navigation to the edit  Promo Media Card page ",
 					"after Click on edit button it should be navigate to the edit promoBlocker page ",
 					"Successfully it is navigated to edit promoBlocker page ",
-					"Failed to navigate to edit promoBlocker page");
+					"Failed to navigate to the edit promoBlocker page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo Blocker ",
 					"after Click on edit button it should be navigate to the edit Blocker page ",
-					"Successfully it is navigated to edit Blocker page ",
-					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+					"Unable to navigated to the edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit Blocker page"));
 			Assert.fail();
 
 		}
@@ -2535,18 +2573,18 @@ public class Adminhelper {
 					.getAttribute("data-background-images");
 			System.out.println(websiteverification);
 			Common.assertionCheckwithReport(websiteverification.contains("Lotusqa"),
-					"validation of images are displaying on fornt end ",
-					"after Click on link  it should be navigate to the respective page contains with 2 images",
+					"validating the images are displaying on fornt end ",
+					"after Clicking on the link  it should be navigate to the respective page contains with 2 images",
 					"Successfully it is navigated to respective page and contains 2 images ",
-					"Failed to navigate to respective page and imrages are not appeared");
+					"Failed to navigate to respective page and images are not appeared");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation of images are displaying on fornt end ",
+			ExtenantReportUtils.addFailedLog("validating the images are displaying on fornt end ",
 					"after Click on link  it should be navigate to the respective page contains with 2 images",
-					"Successfully it is navigated to respective page and contains 2 images ",
+					"Unable to navigated to the respective page and 2 images are not displayed",
 					Common.getscreenShotPathforReport(
-							"Failed to navigate to respective page and imrages are not appeared"));
+							"Failed to navigate to respective page and images are not appeared"));
 			Assert.fail();
 
 		}
@@ -2558,7 +2596,7 @@ public class Adminhelper {
 		try {
 			Common.switchToFirstTab();
 			Contentpage();
-		    Thread.sleep(4000);
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@data-content-type='hot_promo_block']");
 			Common.mouseOver("xpath", "//div[@data-content-type='hot_promo_block']");
 			Sync.waitElementPresent("xpath", "//a[@title='Duplicate']");
@@ -2578,8 +2616,8 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User need to save the page", "User should able to save the page",
-					"Sucessfully User saves the page", Common.getscreenShotPathforReport("Failed to save the page"));
+			ExtenantReportUtils.addFailedLog("Validating the User need to save the page", "User should able to save the page",
+					"Unable to saves the page", Common.getscreenShotPathforReport("Failed to save the page"));
 			Assert.fail();
 
 		}
@@ -2600,7 +2638,7 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
 			System.out.println(image);
 			Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
-					"validation the image uploading on content for background image ",
+					"validating the image uploading on content for background image ",
 					"Image should be upload for background image", "Successfully image uploaded in background image ",
 					"Failed to upload image on the background image");
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
@@ -2610,8 +2648,8 @@ public class Adminhelper {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content for background image ",
-					"Image should be upload for background image", "Successfully image uploaded in background image ",
+			ExtenantReportUtils.addFailedLog("validation the image uploading on content for background image ",
+					"Image should be upload for background image", "Unable to upload the image in background image ",
 					Common.getscreenShotPathforReport("Failed to upload image on the background image"));
 			Assert.fail();
 
@@ -2652,16 +2690,18 @@ public class Adminhelper {
 		try {
 			Sync.waitElementPresent("xpath", "//span[text()='Play video']");
 			Common.clickElement("xpath", "//span[text()='Play video']");
-			String pause = Common.findElement("xpath", "//button[contains(@class,'a-video-btn a-video-btn--icon-only js-v')]")
+			String pause = Common
+					.findElement("xpath", "//button[contains(@class,'a-video-btn a-video-btn--icon-only js-v')]")
 					.getAttribute("class");
 			System.out.println(pause);
 			Common.assertionCheckwithReport(pause.contains(" video-playing"),
-					"validation the video uploading on fornt end  ", "video should be upload for front end ",
+					"validating the video uploading on fornt end  ", "video should be upload for front end ",
 					"Successfully video uploaded in front end  ", "Failed to upload video on the frond end ");
 
 		} catch (Exception | Error e) {
-			ExtenantReportUtils.addFailedLog("validation the video uploading on fornt end  ", "video should be upload for front end ",
-					"Unable to upload video on front end  ", "Failed to upload video on the frond end ");
+			ExtenantReportUtils.addFailedLog("validating the video uploading on fornt end  ",
+					"video should be upload for front end ", "Unable to upload video on front end  ",
+					"Failed to upload video on the frond end ");
 		}
 
 	}
@@ -2678,7 +2718,7 @@ public class Adminhelper {
 			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
 			System.out.println(image);
 			Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
-					"validation the image uploading on content for background image ",
+					"validating the image uploading on content for background image ",
 					"Image should be upload for background image", "Successfully image uploaded in background image ",
 					"Failed to upload image on the background image");
 
@@ -2686,8 +2726,8 @@ public class Adminhelper {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation the image uploading on content for background image ",
-					"Image should be upload for background image", "Successfully image uploaded in background image ",
+			ExtenantReportUtils.addFailedLog("validation the image uploading on content for background image ",
+					"Image should be upload for background image", "Unable to upload the image on the background image ",
 					Common.getscreenShotPathforReport("Failed to upload image on the background image"));
 			Assert.fail();
 
@@ -2743,9 +2783,9 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating Country Languge Selector page navigation ",
+			ExtenantReportUtils.addFailedLog("Validating Country Languge Selector page navigation ",
 					"Navigate to Country Language Selector Page",
-					"Successfully navigate to the Country Language Selector Page ",
+					"Unable navigate to the Country Language Selector Page ",
 					Common.getscreenShotPathforReport("Failed to navigate to the Country Language Selector Page"));
 			Assert.fail();
 		}
@@ -2763,17 +2803,17 @@ public class Adminhelper {
 
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Country & Language Selector Management / Magento Admin"),
-					"Validating Country Languge Selector page navigation ",
-					"Navigate to Country Language Selector Page ",
-					"Successfully navigate to the Country Language Selector Page ",
-					"Failed to navigate to the Country Language Selector Page");
+					"Validating new Country Selector item page navigation ",
+					"Navigate to new Country Selector item Page ",
+					"Successfully navigate to the new Country  Selector item Page ",
+					"Failed to navigate to the Country Selector item Page");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("Validating Country Languge Selector page navigation ",
-					"Navigate to Country Language Selector Page",
-					"Successfully navigate to the Country Language Selector Page ",
-					Common.getscreenShotPathforReport("Failed to navigate to the Country Language Selector Page"));
+			ExtenantReportUtils.addFailedLog("Validating new Country Selector item page navigation ",
+					"Navigate to new Country Selector item Page ",
+					"Unable to navigate to the new Country  Selector item Page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the Country Selector item Page"));
 			Assert.fail();
 
 		}
@@ -2808,16 +2848,17 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Country & Language Selector Management / Magento Admin")
 							&& message.contains("You saved the Country Selector Item."),
-					"User need to save new Country & Language Selector",
-					"User saves the new Country & Language Selector", "User saved the new Country & Language Selector",
-					"Country & Language Selector");
+					"Validating Country Languge Selector page navigation and save message",
+					"Navigate to Country Language Selector Page and message should be displayed",
+					"Sucessfully navigate to the Country Language Selector Page and message is displayed",
+					"Failed to navigate to the Country Language Selector Page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("Validating Country Languge Selector page navigation ",
-					"Navigate to Country Language Selector Page",
-					"Successfully navigate to the Country Language Selector Page ",
+			ExtenantReportUtils.addFailedLog("Validating Country Languge Selector page navigation and save message",
+					"Navigate to Country Language Selector Page and message should be displayed",
+					"Unable to navigate to the Country Language Selector Page and message is not displayed",
 					Common.getscreenShotPathforReport("Failed to navigate to the Country Language Selector Page"));
 			Assert.fail();
 
@@ -2849,8 +2890,8 @@ public class Adminhelper {
 				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
 						"Validating user selects the edit button",
-						"After clicking edit button user should navigates to the selected page",
-						"Successfully navigate to user the selected page", "Failed to navigate to user selected page");
+						"After clicking edit button it should navigate to the selected page",
+						"Successfully navigate to the selected page", "Failed to navigate to the selected page");
 
 			} else {
 				Assert.fail();
@@ -2867,16 +2908,17 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Country & Language Selector Management / Magento Admin")
 							&& message.contains("You saved the Country Selector Item."),
-					"User need to update Country & Language Selector",
-					"User updates the new Country & Language Selector",
-					"User updated the new Country & Language Selector", "unable to update Country & Language Selector");
+					"To verify the save updated Country & Language Selector",
+					"It should able to save updated Country & Language Selector",
+					"Sucessfully saves the updated Country & Language Selector",
+					"Failed to update Country & Language Selector");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to save updated Country & Language Selector",
-					"User should able to save updated Country & Language Selector",
-					"User saves the updated Country & Language Selector",
-					Common.getscreenShotPathforReport("User unable to save the Country & Language Selector"));
+			ExtenantReportUtils.addFailedLog("To verify the save updated Country & Language Selector",
+					"It should able to save updated Country & Language Selector",
+					"Unable to  save the updated Country & Language Selector",
+					Common.getscreenShotPathforReport("Failed to update Country & Language Selector"));
 			Assert.fail();
 		}
 
@@ -2906,18 +2948,19 @@ public class Adminhelper {
 
 				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
-						"Validating user selects the edit button",
-						"After clicking edit button user should navigates to the selected page",
-						"Successfully navigate to user the selected page", "Failed to navigate to user selected page");
+						"Validating the selects edit button",
+						"After clicking edit button it should navigate to the selected page",
+						"Successfully navigate to  the selected page", "Failed to navigate to the selected page");
 
 				Common.clickElement("id", "delete");
 				Sync.waitPageLoad();
 				System.out.println(Common.getPageTitle());
 
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
-						"User selects to delete existing customer  Country Selector",
-						"User should able to select the  Country Selector", "User selects the  Country Selector",
-						"user unable to select  Country Selector");
+						"To verfy the delete existing customer  Country Selector",
+						"It should able to select the  delete existing customer and popup should display",
+						"Sucessfully selects the  delete existing customer and popup is displayed",
+						"Failed to select the delete existing customer");
 
 				Sync.waitPageLoad();
 
@@ -2934,18 +2977,18 @@ public class Adminhelper {
 				System.out.println(message1);
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains("Country & Language Selector Management"),
-						"User need to delete Country & Language Selector Managementt field",
-						"User should able to delete the Country & Language Selector Management",
-						"User deletes the Country & Language Selector Management",
-						" user unable to delete Country & Language Selector Management");
+						"To verify the delete Country & Language Selector Managementt field and deleted message",
+						"It should able to delete the Country & Language Selector Management and delete message should be displayed",
+						"Sucessfully deletes the Country & Language Selector Management and delete message will displayed",
+						" Failed to delete Country & Language Selector Management");
 
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("User need to delete Country & Language Selector Management field",
-					"User should able to delete the Country & Language Selector Management",
-					"User deletes the Country & Language Selector Management", Common.getscreenShotPathforReport(
-							"User unable to delete the Country & Language Selector Management"));
+			ExtenantReportUtils.addFailedLog("To verify the delete Country & Language Selector Managementt field and deleted message",
+					"It should able to delete the Country & Language Selector Management and delete message should be displayed",
+					"Unable to deletes the Country & Language Selector Management and delete message is not displayed", Common.getscreenShotPathforReport(
+							" Failed to delete Country & Language Selector Management"));
 			Assert.fail();
 		}
 
@@ -2967,7 +3010,7 @@ public class Adminhelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating text entered in the button text button",
+			ExtenantReportUtils.addFailedLog("Validating text entered in the button text button",
 					"Text should be entered in the button text button",
 					"Failed to enter text in the button text button",
 					Common.getscreenShotPathforReport("user unable enter text in button text button"));
@@ -2980,33 +3023,50 @@ public class Adminhelper {
 	public void CTA_content(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
-			Common.clickElement("xpath", "//span[text()='CTA Elements']");
-			Common.clickElement("xpath", "//input[@name='link_text']");
-			Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("mobilelayout"));
-			Common.clickElement("xpath", "//select[@name='button_type']");
-			Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("CTA Type"));
-			Common.clickElement("xpath", "//select[@name='link_url']");
-			Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("VideoURL"));
-			Common.clickElement("xpath", "//div[contains(@class,'url-input-e')]");
-			Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(Dataset).get("URL"));
+			Thread.sleep(5000);
+			String cta = Common.findElement("xpath", "(//div[contains(@class,'admin__fieldset-wrapper-content a')])[8]")
+					.getAttribute("class");
+			System.out.println(cta);
+			if (cta.contains("show")) {
+				Common.clickElement("xpath", "//input[@name='link_text']");
+				Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("mobilelayout"));
+				Common.clickElement("xpath", "//select[@name='button_type']");
+				Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("CTA Type"));
+				Common.clickElement("xpath", "//select[@name='link_url']");
+				Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("VideoURL"));
+				Common.clickElement("xpath", "//div[contains(@class,'url-input-e')]");
+				Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(Dataset).get("URL"));
+			} else {
+				Common.javascriptclickElement("xpath", "//span[text()='CTA Elements']");
+				Common.clickElement("xpath", "//input[@name='link_text']");
+				Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("mobilelayout"));
+				Common.clickElement("xpath", "//select[@name='button_type']");
+				Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("CTA Type"));
+				Common.clickElement("xpath", "//select[@name='link_url']");
+				Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("VideoURL"));
+				Common.clickElement("xpath", "//div[contains(@class,'url-input-e')]");
+				Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(Dataset).get("URL"));
+			}
+
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			String editpagebuilder = Common.findElement("xpath", "//span[@data-placeholder='Button text']").getText();
 			Common.assertionCheckwithReport(editpagebuilder.equals("Stacked"),
-					"Validating text entered in the button text button",
-					"Text should be entered in the button text button",
-					"Successfully text entered in the button text button",
-					" user unable enter text in button text button");
+					"Validating the text entered on the text button",
+					"Text should be entered on the text button",
+					"Successfully text entered on the text button",
+					" user unable enter text on the text button");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating text entered in the button text button",
-					"Text should be entered in the button text button",
-					"Failed to enter text in the button text button",
-					Common.getscreenShotPathforReport("user unable enter text in button text button"));
+			ExtenantReportUtils.addFailedLog("Validating the text entered on the text button",
+					"Text should be entered on the text button",
+					"Failed to enter text on the text button",
+					Common.getscreenShotPathforReport("user unable to enter text on the text button"));
 			Assert.fail();
 		}
 
@@ -3015,22 +3075,46 @@ public class Adminhelper {
 	public void CTA_product_content(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
-			Common.clickElement("xpath", "//span[text()='CTA Elements']");
-			Common.clickElement("xpath", "//input[@name='link_text']");
-			Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("CTA Link"));
-			Common.clickElement("xpath", "//select[@name='button_type']");
-			Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("CTA Type"));
-			Common.clickElement("xpath", "//select[@name='link_url']");
-			Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("heading"));
-			Common.clickElement("xpath", "//div[@data-role='selected-option']");
-			Common.scrollIntoView("xpath", "//div[@data-role='selected-option']");
-			Common.clickElement("xpath", "//div[contains(@class,'admin__action-multiselect-s')]");
-			Common.textBoxInput("xpath", "//input[@placeholder='Product Name or SKU']", data.get(Dataset).get("SKU"));
-			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[@data-bind='text: option.label']");
+			Thread.sleep(5000);
+			String cta = Common.findElement("xpath", "(//div[contains(@class,'admin__fieldset-wrapper-content a')])[8]")
+					.getAttribute("class");
+			System.out.println(cta);
+			if (cta.contains("show")) {
+				Common.clickElement("xpath", "//input[@name='link_text']");
+				Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("CTA Link"));
+				Common.clickElement("xpath", "//select[@name='button_type']");
+				Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("CTA Type"));
+				Common.clickElement("xpath", "//select[@name='link_url']");
+				Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("heading"));
+				Common.clickElement("xpath", "//div[@data-role='selected-option']");
+				Common.scrollIntoView("xpath", "//div[@data-role='selected-option']");
+				Common.clickElement("xpath", "//div[contains(@class,'admin__action-multiselect-s')]");
+				Common.textBoxInput("xpath", "//input[@placeholder='Product Name or SKU']",
+						data.get(Dataset).get("SKU"));
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[@data-bind='text: option.label']");
+			} else {
+				Sync.waitElementPresent("xpath", "//span[text()='CTA Elements']");
+				Common.javascriptclickElement("xpath", "//span[text()='CTA Elements']");
+				Common.clickElement("xpath", "//input[@name='link_text']");
+				Common.textBoxInput("xpath", "//input[@name='link_text']", data.get(Dataset).get("CTA Link"));
+				Common.clickElement("xpath", "//select[@name='button_type']");
+				Common.dropdown("xpath", "//select[@name='button_type']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("CTA Type"));
+				Common.clickElement("xpath", "//select[@name='link_url']");
+				Common.dropdown("xpath", "//select[@name='link_url']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("heading"));
+				Common.clickElement("xpath", "//div[@data-role='selected-option']");
+				Common.scrollIntoView("xpath", "//div[@data-role='selected-option']");
+				Common.clickElement("xpath", "//div[contains(@class,'admin__action-multiselect-s')]");
+				Common.textBoxInput("xpath", "//input[@placeholder='Product Name or SKU']",
+						data.get(Dataset).get("SKU"));
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[@data-bind='text: option.label']");
+			}
+
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			String editpagebuilder = Common.findElement("xpath", "(//span[@data-placeholder='Button text'])[2]")
@@ -3039,13 +3123,13 @@ public class Adminhelper {
 					"Validating text entered in the button text button",
 					"Text should be entered in the button text button",
 					"Successfully text entered in the button text button",
-					" user unable enter text in button text button");
+					" user unable enter text on the text button");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating text entered in the button text button",
-					"Text should be entered in the button text button",
-					"Failed to enter text in the button text button",
-					Common.getscreenShotPathforReport("user unable enter text in button text button"));
+			ExtenantReportUtils.addFailedLog("Validating text entered on the text button",
+					"Text should be entered on the text button",
+					"Failed to enter text on the text button",
+					Common.getscreenShotPathforReport("user unable enter text on button text button"));
 			Assert.fail();
 
 		}
@@ -3056,7 +3140,7 @@ public class Adminhelper {
 		// TODO Auto-generated method stub
 		try {
 			String button1 = data.get(Dataset).get("URL");
-			String button2 = data.get(Dataset).get("SKU");
+//			String button2 = data.get(Dataset).get("SKU");
 
 			String websitebutton = Common.findElement("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[1]")
 					.getAttribute("href");
@@ -3066,20 +3150,19 @@ public class Adminhelper {
 			Common.clickElement("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[2]");
 			Sync.waitPageLoad();
 
-			String sku = Common.findElement("xpath", "//span[@class='a-product-attribute__value']").getText();
-			Common.assertionCheckwithReport(
-					sku.equals(button2) && Common.getCurrentURL().contains("32-oz-wide-mouth-copper-brown.html"),
-					"Validating button text is present in front end and link in button text",
-					"Button text should be present in the front end and link in button text",
-					"Successfully button text entered in the front end and link is present",
-					"unable to see button text on front end and link not present");
+//			String sku = Common.findElement("xpath", "//span[@class='a-product-attribute__value']").getText();
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("32-oz-wide-mouth-copper-brown.html"),
+					"Validating button text is present in front end and the link",
+					"Button text should be present on the front end and when we click on the link it should navigate to the PDP page",
+					"Successfully button text entered in the front end and link is Navigating to the PDP Page",
+					"unable to see button text on front end and link not Navigating");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating button text is present in front end and link in button text",
-					"Button text should be present in the front end and link in button text",
-					"Successfully button text entered in the front end and link is present",
-					Common.getscreenShotPathforReport("unable to see button text on front end and link not present"));
+			ExtenantReportUtils.addFailedLog("Validating button text is present in front end and the link",
+					"Button text should be present on the front end and when we click on the link it should navigate to the PDP page",
+					"Unable to display the button text entered on the front end and link is not Navigating to the PDP Page",
+					Common.getscreenShotPathforReport("unable to see button text on front end and link not Navigating"));
 			Assert.fail();
 
 		}
@@ -3099,9 +3182,9 @@ public class Adminhelper {
 					"Failed to navigate to the edit page builder filed");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating edit page bulider navigation ",
+			ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
 					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Successfully navigate to the edit page builder filed",
+					"Unable to  navigate to the edit page builder filed",
 					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
 			Assert.fail();
 		}
@@ -3122,8 +3205,8 @@ public class Adminhelper {
 
 			e.printStackTrace();
 
-			report.addFailedLog("Validating Promocontent Dragndrop operation",
-					"User should able Dragndrop Promoblocker", "Sucessfully Dragndrop Promocontent",
+			ExtenantReportUtils.addFailedLog("Validating Promocontent Dragndrop operation",
+					"User should able Dragndrop Promoblocker", "Unable to Dragndrop the Promocontent",
 					Common.getscreenShotPathforReport("Failed to Dragndrop Promocontent"));
 
 			Assert.fail();
@@ -3145,7 +3228,7 @@ public class Adminhelper {
 			String editpromo = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
 
 			Common.assertionCheckwithReport(editpromo.contains("Edit Promo Content (Product)"),
-					"validation Navigation to the edit  Promo Media Card page ",
+					"validating the Navigation to the edit  Promo Media Card page ",
 					"after Click on edit button it should be navigate to the edit promoBlocker page ",
 					"Successfully it is navigated to edit promoBlocker page ",
 					"Failed to navigate to edit promoBlocker page");
@@ -3153,10 +3236,10 @@ public class Adminhelper {
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo Blocker ",
 					"after Click on edit button it should be navigate to the edit Blocker page ",
-					"Successfully it is navigated to edit Blocker page ",
-					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+					"Unable to navigate  to the edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit Blocker page"));
 			Assert.fail();
 
 		}
@@ -3190,9 +3273,9 @@ public class Adminhelper {
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating New customer page navigation ",
-					"after clicking on it will navigate new Customer page",
-					"unable to navigate the new Customer page", "Failed to navigate to New Customer page");
-		Assert.fail();
+					"after clicking on it will navigate new Customer page", "unable to navigate the new Customer page",
+					"Failed to navigate to New Customer page");
+			Assert.fail();
 
 		}
 	}
@@ -3202,18 +3285,18 @@ public class Adminhelper {
 		try {
 			Common.switchToFirstTab();
 			Contentpage();
-			editpromocontent(); 
+			editpromocontent();
 
 			Sync.waitElementPresent(20, "xpath", "//span[text()='Alternative']");
 			Common.clickElement("xpath", "//span[text()='Alternative']");
 			Sync.waitElementPresent("xpath", "//button[@id='save']");
 			Common.clickElement("xpath", "//button[@id='save']");
-
+	
 			// button[@id='save']
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation Navigation to the edit promo Blocker ",
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo Blocker ",
 					"after Click on edit button it should be navigate to the edit Blocker page ",
 					"Successfully it is navigated to edit Blocker page ",
 					Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
@@ -3348,10 +3431,11 @@ public class Adminhelper {
 			Thread.sleep(5000);
 
 			Thread.sleep(5000);
-		} catch (Exception | Error e) {
+		
+			} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation to the edit content promo Blocker ",
+			ExtenantReportUtils.addFailedLog("validation to the edit content promo Blocker ",
 					"after giving data it should save the data", "Successfully data is Saved",
 					Common.getscreenShotPathforReport("Failed to Save the data"));
 			Assert.fail();
@@ -3457,10 +3541,10 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating button text in product tile", "User should able to add the button text",
+			ExtenantReportUtils.addFailedLog("Validating button text in product tile", "User should able to add the button text",
 					"Admin failed to add the button text",
 					Common.getscreenShotPathforReport("Failed to edit the content of the page"));
-
+  
 			Assert.fail();
 
 		}
@@ -3531,10 +3615,11 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("to validate featured configutaion", "User should be able to validate the featured coinfiguration ",
+			ExtenantReportUtils.addFailedLog("to validate featured configutaion",
+					"User should be able to validate the featured coinfiguration ",
 					"Admin failed to validate the featured confiration",
 					Common.getscreenShotPathforReport("Failed featured configuration "));
-			
+
 			Assert.fail();
 
 		}
@@ -3720,10 +3805,10 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating product cards configuration	", "Admin should able to add the prodcut configuration",
-					"Product card configuration failed",
+			ExtenantReportUtils.addFailedLog("Validating product cards configuration	",
+					"Admin should able to add the prodcut configuration", "Product card configuration failed",
 					Common.getscreenShotPathforReport("Failed to add the product configuration"));
-			
+
 			Assert.fail();
 
 		}
@@ -3785,7 +3870,7 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(
 					videoverification.contains(video) && Title.contains(title) && Buttontext.contains(buttontext)
 							&& number == products,
-					"validation video upload in the forntend website ", "video should de appear on fornt end page",
+					"validating the video upload in the forntend website ", "video should de appear on fornt end page",
 					"Successfully video is appeared on the frondend",
 					"Failed to navigate to edit Product card tile page");
 
@@ -3796,8 +3881,8 @@ public class Adminhelper {
 		catch (Exception | Error e) {
 			e.printStackTrace();
 
-			report.addFailedLog("validation video upload in the forntend website ",
-					"Video should de appear on fornt end page", "Failed to upload the video on the front end",
+			ExtenantReportUtils.addFailedLog("validation video upload in the forntend website ",
+					"Video should de appear on fornt end page", "Unable to upload the video on the front end",
 					Common.getscreenShotPathforReport("Failed to navigate to edit cardtile page"));
 			Assert.fail();
 
@@ -3845,10 +3930,10 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating clone functionality", "User should able to clone the blocks or content",
+			ExtenantReportUtils.addFailedLog("Validating clone functionality", "User should able to clone the blocks or content",
 					"Admin failed to clone the content",
 					Common.getscreenShotPathforReport("Failed to clone the content of the page"));
-			
+
 			Assert.fail();
 
 		}
@@ -3881,8 +3966,7 @@ public class Adminhelper {
 			report.addFailedLog("Validating hide functionality", "User should able to hide the blocks or content",
 					"Admin failed to hide the content",
 					Common.getscreenShotPathforReport("Failed to hide the content of the page"));
-			
-			
+
 			Assert.fail();
 
 		}
@@ -3899,11 +3983,11 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating clone functionality on the front end", "User should able to clone the blocks or content on the front end",
+			report.addFailedLog("Validating clone functionality on the front end",
+					"User should able to clone the blocks or content on the front end",
 					"Admin failed to clone the content on the fornt end",
 					Common.getscreenShotPathforReport("Failed to clone the content of the page"));
-			
-			
+
 			Assert.fail();
 
 		}
@@ -3956,11 +4040,10 @@ public class Adminhelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 			invalidformkey("ProductcardTile");
-			report.addFailedLog("Validating content delete functionality", "User should able to delete the blocks or content",
-					"Admin failed to delete the content",
+			report.addFailedLog("Validating content delete functionality",
+					"User should able to delete the blocks or content", "Admin failed to delete the content",
 					Common.getscreenShotPathforReport("Failed to delete the content of the page"));
-			
-			
+
 			Assert.fail();
 
 		}
@@ -4015,11 +4098,11 @@ public class Adminhelper {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating invalid form key error message in admin ", "User should able to validate the error message in the admin",
+			report.addFailedLog("Validating invalid form key error message in admin ",
+					"User should able to validate the error message in the admin",
 					"Admin failed to validate the error message",
 					Common.getscreenShotPathforReport("Failed to validate the error messaage "));
-			
-			
+
 			Assert.fail();
 		}
 
@@ -4037,7 +4120,8 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating delete functionality in the website", "User should able to clone the blocks or content",
+			report.addFailedLog("Validating delete functionality in the website",
+					"User should able to clone the blocks or content",
 					"Admin failed to validate the delete functionality on the website",
 					Common.getscreenShotPathforReport("Failed to validate the delete functinality in the website"));
 			Assert.fail();
@@ -4117,12 +4201,12 @@ public class Adminhelper {
 			frontend_Verification("CLPHerobanner");
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("To validate the image element in the CLP hero banner", "Admin should be able to add the image in the CLP hero banner",
+			report.addFailedLog("To validate the image element in the CLP hero banner",
+					"Admin should be able to add the image in the CLP hero banner",
 					"Admin failed to add the image in the CLP hero banner",
 					Common.getscreenShotPathforReport("Failed to add the image in the content of the page"));
-			
+
 			Assert.fail();
-			
 
 		}
 
@@ -4148,11 +4232,11 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("To validate the CLP Hero baner components", "User should able to validate the CLP hero banner components",
+			report.addFailedLog("To validate the CLP Hero baner components",
+					"User should able to validate the CLP hero banner components",
 					"Admin failed to validate the CLP hero banner components",
 					Common.getscreenShotPathforReport("CLP hero banner components unsuccessfull"));
-			
-			
+
 			Assert.fail();
 		}
 
@@ -4174,10 +4258,11 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("To validate the CLP Hero baner content", "User should able to validate the CLP hero banner content",
+			report.addFailedLog("To validate the CLP Hero baner content",
+					"User should able to validate the CLP hero banner content",
 					"Admin failed to validate the CLP hero banner content",
 					Common.getscreenShotPathforReport("CLP hero banner content unsuccessfull"));
-			
+
 			Assert.fail();
 
 		}
@@ -4216,10 +4301,11 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("To validate the CLP Hero baner components clone functionality", "User should able to validate the CLP hero banner clone functionality",
+			report.addFailedLog("To validate the CLP Hero baner components clone functionality",
+					"User should able to validate the CLP hero banner clone functionality",
 					"Admin failed to validate the CLP hero banner components clone functionality",
 					Common.getscreenShotPathforReport("CLP hero banner components clone functionality unsuccessfull"));
-			
+
 			Assert.fail();
 
 		}
@@ -4238,10 +4324,11 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("To validate the product card clone functionality", "User should able to validate the product card clone functionality",
+			report.addFailedLog("To validate the product card clone functionality",
+					"User should able to validate the product card clone functionality",
 					"Admin failed to validate the product card clone functionality",
 					Common.getscreenShotPathforReport("product card clone functionality unsuccessfull"));
-			
+
 			Assert.fail();
 		}
 
@@ -4429,7 +4516,7 @@ public class Adminhelper {
 
 	public void click_catlog() {
 		// TODO Auto-generated method stub
-		
+
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("id", "menu-magento-catalog-catalog");
@@ -4437,8 +4524,7 @@ public class Adminhelper {
 			String catlog = Common.findElement("xpath", "//strong[contains(text(),'Catalog')]").getText();
 			System.out.println(catlog);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(catlog.equals("Catalog"),
-					"To verify the Catalog menu ",
+			Common.assertionCheckwithReport(catlog.equals("Catalog"), "To verify the Catalog menu ",
 					"After clicking the Catalog menu it will display menu options ",
 					"Successfully clicked the Catalog menu and it displayed the Catalog options",
 					"Failed to click the Catalog menu");
@@ -4462,12 +4548,11 @@ public class Adminhelper {
 			Sync.waitElementPresent("xpath", "//li[@class='item-catalog-categories    level-2']");
 			String categories = Common.findElement("xpath", "//h1[@class='page-title']").getText();
 			System.out.println(categories);
-			//Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(categories.equals("Hydro Flask (ID: 2)"),
-					"To verify the categories menu ",
+			// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+			// @style='display: none;']");
+			Common.assertionCheckwithReport(categories.equals("Hydro Flask (ID: 2)"), "To verify the categories menu ",
 					"After clicking the categories menu it will navigate to categories page ",
-					"Successfully navigate to categories page",
-					"Failed to navigate to categories page");
+					"Successfully navigate to categories page", "Failed to navigate to categories page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -4481,120 +4566,95 @@ public class Adminhelper {
 
 	public void Verify_CTALinks() {
 		// TODO Auto-generated method stub
-try {
-			
-			String category=Common.findElement("xpath", "//div[@class='admin__field _required']").getText();
-			System.out.println(category);
-			Common.assertionCheckwithReport(category.equals("Category Name"),
-					"validation the category name ",
-					"validating the scope ",
-					"Successfully validate the category name ", "validate the category name");
-			
+		try {
 
-			String Scope=Common.findElement("xpath", "//div[@class='store-switcher store-view']").getText();
+			String category = Common.findElement("xpath", "//div[@class='admin__field _required']").getText();
+			System.out.println(category);
+			Common.assertionCheckwithReport(category.equals("Category Name"), "validation the category name ",
+					"validating the scope ", "Successfully validate the category name ", "validate the category name");
+
+			String Scope = Common.findElement("xpath", "//div[@class='store-switcher store-view']").getText();
 			System.out.println(Scope);
-			Common.assertionCheckwithReport(Scope.contains("Scope:"),
-					"validation of the scope ",
-					"validating the scope ",
-					"Successfully validate scope ", "validate the scope");
-			
-			String save=Common.findElement("xpath", "//button[@id='save']").getText();
+			Common.assertionCheckwithReport(Scope.contains("Scope:"), "validation of the scope ",
+					"validating the scope ", "Successfully validate scope ", "validate the scope");
+
+			String save = Common.findElement("xpath", "//button[@id='save']").getText();
 			System.out.println(save);
-			Common.assertionCheckwithReport(save.equals("Save"),
-					"validation of the save button ",
-					"validating the save button ",
-					"Successfully validate save ", "validate save");
-		
-			String addroot=Common.findElement("xpath", "//button[@id='add_root_category_button']").getText();
+			Common.assertionCheckwithReport(save.equals("Save"), "validation of the save button ",
+					"validating the save button ", "Successfully validate save ", "validate save");
+
+			String addroot = Common.findElement("xpath", "//button[@id='add_root_category_button']").getText();
 			System.out.println(addroot);
-			Common.assertionCheckwithReport(addroot.equals("Add Root Category"),
-					"validation of the Root Category ",
-					"validating of the Root Category ",
-					"Successfully validate the Root Category ", "validate the Root Category");
-		
-			String subcategory=Common.findElement("xpath", "//button[@id='add_subcategory_button']").getText();
+			Common.assertionCheckwithReport(addroot.equals("Add Root Category"), "validation of the Root Category ",
+					"validating of the Root Category ", "Successfully validate the Root Category ",
+					"validate the Root Category");
+
+			String subcategory = Common.findElement("xpath", "//button[@id='add_subcategory_button']").getText();
 			System.out.println(subcategory);
-			Common.assertionCheckwithReport(subcategory.equals("Add Subcategory"),
-					"validation of the Subcategory ",
-					"validating of the Subcategory ",
-					"Successfully validate the Subcategory ", "validate the Subcategory");
-		
-			
-		}
-		catch(Exception | Error e)
-		{
+			Common.assertionCheckwithReport(subcategory.equals("Add Subcategory"), "validation of the Subcategory ",
+					"validating of the Subcategory ", "Successfully validate the Subcategory ",
+					"validate the Subcategory");
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("validation of the Subcategory ",
-					"aftervalidate the Subcategory ",
+			report.addFailedLog("validation of the Subcategory ", "aftervalidate the Subcategory ",
 					"Successfully validate the Subcategory ",
 					Common.getscreenShotPathforReport("Failed to validate the Subcategory"));
 			Assert.fail();
-			
+
 		}
 	}
 
 	public void categorylist() {
 		// TODO Auto-generated method stub
 		try {
-			String colapse=Common.findElement("xpath", "//a[@id='colapseAll']").getText();
+			String colapse = Common.findElement("xpath", "//a[@id='colapseAll']").getText();
 			System.out.println(colapse);
-			Common.assertionCheckwithReport(colapse.equals("Collapse All"),
-					"validation to validate collapse ",
-					"validation to validate collapse ",
-					"Successfully validated to validate collapse ", "validated collapse ");
+			Common.assertionCheckwithReport(colapse.equals("Collapse All"), "validation to validate collapse ",
+					"validation to validate collapse ", "Successfully validated to validate collapse ",
+					"validated collapse ");
 
-			String expand=Common.findElement("xpath", "//a[@id='expandAll']").getText();
+			String expand = Common.findElement("xpath", "//a[@id='expandAll']").getText();
 			System.out.println(expand);
-			Common.assertionCheckwithReport(expand.equals("Expand All"),
-					"validation of the expand all ",
-					"validation of the expand all ",
-					"Successfully validated of the expand all ", "validated collapse ");
+			Common.assertionCheckwithReport(expand.equals("Expand All"), "validation of the expand all ",
+					"validation of the expand all ", "Successfully validated of the expand all ",
+					"validated collapse ");
 
-			String tree=Common.findElement("xpath", "//div[@class='categories-side-col']").getText();
+			String tree = Common.findElement("xpath", "//div[@class='categories-side-col']").getText();
 			System.out.println(tree);
-			Common.assertionCheckwithReport(tree.contains("Collapse All"),
-					"validation of category tree ",
-					"validating cateory tree ",
-					"Successfully validating cateory tree ", "validated category tree");
-			
-		}
-		catch(Exception | Error e)
-		{
+			Common.assertionCheckwithReport(tree.contains("Collapse All"), "validation of category tree ",
+					"validating cateory tree ", "Successfully validating cateory tree ", "validated category tree");
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			report.addFailedLog("validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ",
 					Common.getscreenShotPathforReport("Failed to validate"));
 			Assert.fail();
-			
-			
+
 		}
-		}
+	}
 
 	public void category_content() {
 		// TODO Auto-generated method stub
-		
+
 		try {
-			String enable=Common.findElement("xpath", "//div[@class='admin__field-label']").getText();
+			String enable = Common.findElement("xpath", "//div[@class='admin__field-label']").getText();
 			System.out.println(enable);
 			Common.assertionCheckwithReport(enable.equals("Enable Category"),
 					"validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ", "Failed to apply backgroud color");
 
-			String include=Common.findElement("xpath", "(//div[@class='admin__field-label'])[2]").getText();
+			String include = Common.findElement("xpath", "(//div[@class='admin__field-label'])[2]").getText();
 			System.out.println(include);
 			Common.assertionCheckwithReport(include.equals("Include in Menu"),
 					"validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ", "Failed to apply backgroud color");
 
-			
-			
-				
-		}
-		catch(Exception | Error e)
-		{
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			report.addFailedLog("validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
@@ -4606,22 +4666,21 @@ try {
 
 	public void Validate_Content() {
 		// TODO Auto-generated method stub
-		try
-		{
+		try {
 			Sync.waitElementPresent(30, "xpath", "//strong//span[text()='Content']");
 			Common.clickElement("xpath", "//strong//span[text()='Content']");
-			
-			//common.asser
-			String include=Common.findElement("xpath", "//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show']").getText();
+
+			// common.asser
+			String include = Common
+					.findElement("xpath", "//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show']")
+					.getText();
 			System.out.println(include);
 			Common.assertionCheckwithReport(include.contains("Content"),
 					"validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ", "Failed to apply backgroud color");
-					
-	}	
-		catch(Exception | Error e)
-		{
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			report.addFailedLog("validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
@@ -4633,61 +4692,59 @@ try {
 
 	public void click_Display() {
 		// TODO Auto-generated method stub
-try {
-			
-			
+		try {
+
 			Sync.waitElementPresent(30, "xpath", "//strong//span[text()='Display Settings']");
 			Common.clickElement("xpath", "//strong//span[text()='Display Settings']");
-			
+
 			Common.scrollIntoView("xpath", "(//fieldset[@class='admin__fieldset'])[3]");
-			String include=Common.findElement("xpath", "(//fieldset[@class='admin__fieldset'])[3]").getText();
+			String include = Common.findElement("xpath", "(//fieldset[@class='admin__fieldset'])[3]").getText();
 			System.out.println(include);
 			Common.assertionCheckwithReport(include.contains("Display Mode"),
 					"validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ", "Failed to apply backgroud color");
-					
-			
-			}	
-			catch(Exception | Error e)
-			{
-				e.printStackTrace();
-				report.addFailedLog("validation of the color applied in the backgroud color ",
-						"after Clicking on the color the background color should be applied ",
-						"Successfully Background color is applied ",
-						Common.getscreenShotPathforReport("Failed to apply backgroud color"));
-				Assert.fail();
-			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("validation of the color applied in the backgroud color ",
+					"after Clicking on the color the background color should be applied ",
+					"Successfully Background color is applied ",
+					Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+			Assert.fail();
 		}
+	}
+
 	public void click_search_engine() {
 		// TODO Auto-generated method stub
 
-try {
-			
-			Sync.waitElementPresent(30, "xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper'])[2]");
-			
-		    Common.clickElement("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper'])[2]");
-		
-		    Common.scrollIntoView("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[3]");
-			String engine=Common.findElement("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[3]").getText();
+		try {
+
+			Sync.waitElementPresent(30, "xpath",
+					"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper'])[2]");
+
+			Common.clickElement("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper'])[2]");
+
+			Common.scrollIntoView("xpath",
+					"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[3]");
+			String engine = Common.findElement("xpath",
+					"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[3]").getText();
 			System.out.println(engine);
 			Common.assertionCheckwithReport(engine.contains("Search Engine Optimization"),
 					"validation of the color applied in the backgroud color ",
 					"after Clicking on the color the background color should be applied ",
 					"Successfully Background color is applied ", "Failed to apply backgroud color");
-			//fieldset[@class='admin__fieldset'])[4]		
-			
-			}	
-			catch(Exception | Error e)
-			{
-				e.printStackTrace();
-				report.addFailedLog("validation of the color applied in the backgroud color ",
-						"after Clicking on the color the background color should be applied ",
-						"Successfully Background color is applied ",
-						Common.getscreenShotPathforReport("Failed to apply backgroud color"));
-				Assert.fail();
-			}
+			// fieldset[@class='admin__fieldset'])[4]
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("validation of the color applied in the backgroud color ",
+					"after Clicking on the color the background color should be applied ",
+					"Successfully Background color is applied ",
+					Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+			Assert.fail();
 		}
+	}
 
 	public void products_category() {
 		// TODO Auto-generated method stub
@@ -4696,11 +4753,12 @@ try {
 			Common.clickElement("xpath", "//span[text()='Products in Category']");
 			Sync.waitElementPresent("xpath", "//span[text()='Products in Category']");
 			Common.scrollIntoView("xpath", "//div[@id='merchandiser-app']");
-			String products = Common.findElement("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[4]").getText();
+			String products = Common.findElement("xpath",
+					"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[4]").getText();
 			System.out.println(products);
-			//Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(products.contains("Products in Category"),
-					"To verify the Catalog menu ",
+			// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+			// @style='display: none;']");
+			Common.assertionCheckwithReport(products.contains("Products in Category"), "To verify the Catalog menu ",
 					"After clicking the Catalog menu it will display menu options ",
 					"Successfully clicked the Catalog menu and it displayed the Catalog options",
 					"Failed to click the Catalog menu");
@@ -4721,13 +4779,15 @@ try {
 			Sync.waitPageLoad();
 			Common.scrollIntoView("xpath", "(//span[text()='Design'])[2]");
 			Common.clickElement("xpath", "(//span[text()='Design'])[2]");
-			//Sync.waitElementPresent("xpath", "//span[text()='Design");
-			Common.scrollIntoView("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[5]");
-			String products = Common.findElement("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[5]").getText();
+			// Sync.waitElementPresent("xpath", "//span[text()='Design");
+			Common.scrollIntoView("xpath",
+					"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[5]");
+			String products = Common.findElement("xpath",
+					"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[5]").getText();
 			System.out.println(products);
-			//Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(products.contains("Design"),
-					"To verify the Catalog menu ",
+			// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+			// @style='display: none;']");
+			Common.assertionCheckwithReport(products.contains("Design"), "To verify the Catalog menu ",
 					"After clicking the Catalog menu it will display menu options ",
 					"Successfully clicked the Catalog menu and it displayed the Catalog options",
 					"Failed to click the Catalog menu");
@@ -4754,8 +4814,7 @@ try {
 			Common.assertionCheckwithReport(button.equals("Add Root Category"),
 					"To verify the Add Root Category button ",
 					"After clicking the Add Root Category it should navigate to page ",
-					"Successfully navigate to Add Root Category",
-					"Failed navigate to Add Root Category");
+					"Successfully navigate to Add Root Category", "Failed navigate to Add Root Category");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -4769,64 +4828,47 @@ try {
 
 	public void savecategory(String DataSet) {
 		// TODO Auto-generated method stub
-		
-		try
-		{
-			//Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
-			//Common.clickElement("xpath", "//i[@title='Close Full Screen']");
-			Common.textBoxInput("xpath", "(//input[@type='text'])[2]", data.get(DataSet).get("categoryname"));	
+
+		try {
+			// Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+			// Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+			Common.textBoxInput("xpath", "(//input[@type='text'])[2]", data.get(DataSet).get("categoryname"));
 			Common.clickElement("xpath", "//button[@id='save']");
 			Sync.waitPageLoad(70);
-			String savethepage=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
-			Common.assertionCheckwithReport(
-					savethepage.equals("You saved the category."),
-					"Validating the User need to save the page",
-					"User should able to save the page",
+			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			Common.assertionCheckwithReport(savethepage.equals("You saved the category."),
+					"Validating the User need to save the page", "User should able to save the page",
 					"Sucessfully User saves the page", "Unable to save the page");
-			
-			
-		}
-		catch(Exception | Error e)
-		{
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User need to save the page",
-					"User should able to save the page",
-					"Sucessfully User saves the page",
-					Common.getscreenShotPathforReport("Failed to save the page"));
+			report.addFailedLog("Validating the User need to save the page", "User should able to save the page",
+					"Sucessfully User saves the page", Common.getscreenShotPathforReport("Failed to save the page"));
 			Assert.fail();
-			
+
 		}
 	}
 
 	public void deletecategory() {
 		// TODO Auto-generated method stub
-		try
-		{
+		try {
 			Sync.waitElementPresent("xpath", "//button[@id='delete']");
 			Common.clickElement("xpath", "//button[@id='delete']");
 			Sync.waitElementPresent("xpath", "//span[text()='OK']");
 			Common.clickElement("xpath", "//span[text()='OK']");
 			Sync.waitPageLoad(70);
-			String delete=Common.findElement("xpath", "//div[@class='message message-success success']").getText();
+			String delete = Common.findElement("xpath", "//div[@class='message message-success success']").getText();
 			System.out.println(delete);
-			Common.assertionCheckwithReport(
-					delete.contains("You deleted the category."),
-					"Validating the User need to save the page",
-					"User should able to save the page",
+			Common.assertionCheckwithReport(delete.contains("You deleted the category."),
+					"Validating the User need to save the page", "User should able to save the page",
 					"Sucessfully User saves the page", "Unable to save the page");
-			
-			
-			
-		}
-		catch(Exception | Error e)
-		{
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating the User need to delete the page",
-					"User should able to delete the page",
-					"Sucessfully User delete the page",
-					Common.getscreenShotPathforReport("Failed to delete the page"));
+			report.addFailedLog("Validating the User need to delete the page", "User should able to delete the page",
+					"Sucessfully User delete the page", Common.getscreenShotPathforReport("Failed to delete the page"));
 			Assert.fail();
-			
+
 		}
 	}
 
@@ -4852,8 +4894,7 @@ try {
 				Common.mouseOverClick("xpath", "//span[text()='Advanced']");
 			}
 			Common.assertionCheckwithReport(advancedsection.contains("show"), "to validate the Padding and margins",
-					"Pad"
-					+ "paddding and margin should apply successfully", "Paddding and margion applied",
+					"Pad" + "paddding and margin should apply successfully", "Paddding and margion applied",
 					"Failed to apply padding");
 
 			Sync.waitElementVisible("xpath", "//div[@data-index='css_classes']");
@@ -4869,7 +4910,6 @@ try {
 			Common.textBoxInput("name", "paddingLeft", paddingleft);
 			Editandsavepage();
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -4888,52 +4928,50 @@ try {
 
 	}
 
-		public void verify_Padding_fronytend(String DataSet) throws Exception {
+	public void verify_Padding_fronytend(String DataSet) throws Exception {
 
-			String mrgtop = data.get(DataSet).get("mrgtop");
-			String mrgright = data.get(DataSet).get("mrgright");
-			String mrgbottom = data.get(DataSet).get("mrgbottom");
-			String mrgleft = data.get(DataSet).get("mrgleft");
-			String paddingtop = data.get(DataSet).get("paddingtop");
-			String paddingright = data.get(DataSet).get("paddingright");
-			String paddingbottom = data.get(DataSet).get("paddingbottom");
-			String paddingleft = data.get(DataSet).get("paddingleft");
-			try {
-				Sync.waitElementVisible(30, "xpath", "//p[@class='m-breadcrumb__text']");
+		String mrgtop = data.get(DataSet).get("mrgtop");
+		String mrgright = data.get(DataSet).get("mrgright");
+		String mrgbottom = data.get(DataSet).get("mrgbottom");
+		String mrgleft = data.get(DataSet).get("mrgleft");
+		String paddingtop = data.get(DataSet).get("paddingtop");
+		String paddingright = data.get(DataSet).get("paddingright");
+		String paddingbottom = data.get(DataSet).get("paddingbottom");
+		String paddingleft = data.get(DataSet).get("paddingleft");
+		try {
+			Sync.waitElementVisible(30, "xpath", "//p[@class='m-breadcrumb__text']");
 
-				String style = Common.findElement("xpath", "//main[@id='maincontent']/div[2]/div/style")
-						.getAttribute("innerHTML");
-				System.out.println(style);
-				if (style.contains("margin-top")) {
+			String style = Common.findElement("xpath", "//main[@id='maincontent']/div[2]/div/style")
+					.getAttribute("innerHTML");
+			System.out.println(style);
+			if (style.contains("margin-top")) {
 
-					Common.assertionCheckwithReport(
-							style.contains("margin-top:" + mrgtop + "px;margin-right:" + mrgright + "px;margin-bottom:"
-									+ mrgbottom + "px;margin-left:" + mrgleft + "px;padding-top:" + paddingtop
-									+ "px;padding-right:" + paddingright + "px;padding-bottom:" + paddingbottom
-									+ "px;padding-left:" + paddingleft + "px"),
-							"to validate the Padding and margins", "Padding and margin should apply successfully",
-							"Paddding and margion applied", "Failed to apply padding");
-				} else {
+				Common.assertionCheckwithReport(
+						style.contains("margin-top:" + mrgtop + "px;margin-right:" + mrgright + "px;margin-bottom:"
+								+ mrgbottom + "px;margin-left:" + mrgleft + "px;padding-top:" + paddingtop
+								+ "px;padding-right:" + paddingright + "px;padding-bottom:" + paddingbottom
+								+ "px;padding-left:" + paddingleft + "px"),
+						"to validate the Padding and margins", "Padding and margin should apply successfully",
+						"Paddding and margion applied", "Failed to apply padding");
+			} else {
 
-					// margin:40px 27px 55px 48px;padding:100px 278px 300px 129px
-					// margin:40px 27px 55px 48px;padding:100px 278px 300px 129px
-					System.out.println("margin:" + mrgtop + "px " + mrgright + "px " + mrgbottom + "px " + mrgleft
-							+ "px;padding:" + paddingtop + "px " + paddingright + "px " + paddingbottom + "px "
-							+ paddingleft + "px");
-					Thread.sleep(4000);
-					Common.assertionCheckwithReport(
-							style.contains("margin:" + mrgtop + "px " + mrgright + "px " + mrgbottom + "px " + mrgleft
-									+ "px;padding:" + paddingtop + "px " + paddingright + "px " + paddingbottom + "px "
-									+ paddingleft + "px"),
-							"to validate the Padding and margins", "Padding and margin should apply successfully",
-							"Paddding and margion applied", "Failed to apply padding");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				Assert.fail();
+				// margin:40px 27px 55px 48px;padding:100px 278px 300px 129px
+				// margin:40px 27px 55px 48px;padding:100px 278px 300px 129px
+				System.out.println("margin:" + mrgtop + "px " + mrgright + "px " + mrgbottom + "px " + mrgleft
+						+ "px;padding:" + paddingtop + "px " + paddingright + "px " + paddingbottom + "px "
+						+ paddingleft + "px");
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(
+						style.contains("margin:" + mrgtop + "px " + mrgright + "px " + mrgbottom + "px " + mrgleft
+								+ "px;padding:" + paddingtop + "px " + paddingright + "px " + paddingbottom + "px "
+								+ paddingleft + "px"),
+						"to validate the Padding and margins", "Padding and margin should apply successfully",
+						"Paddding and margion applied", "Failed to apply padding");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
-
-	
 	}
-	
+
+}

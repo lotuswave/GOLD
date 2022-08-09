@@ -43,6 +43,7 @@ public class DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer {
 		
 		@BeforeTest
 		  public void startTest() throws Exception {
+			System.setProperty("configFile", "Admin\\config.properties");
 
 			  Login.signIn();
 			 

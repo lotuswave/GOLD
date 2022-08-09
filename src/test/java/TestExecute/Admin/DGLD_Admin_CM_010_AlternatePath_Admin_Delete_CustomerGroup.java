@@ -41,6 +41,7 @@ public class DGLD_Admin_CM_010_AlternatePath_Admin_Delete_CustomerGroup {
 	
 	@BeforeTest
 	  public void startTest() throws Exception {
+		System.setProperty("configFile", "Admin\\config.properties");
 
 		  Login.signIn();
 		 

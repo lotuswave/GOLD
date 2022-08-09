@@ -43,6 +43,7 @@ public class DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer {
 		
 		@BeforeTest
 		  public void startTest() throws Exception {
+			System.setProperty("configFile", "Admin\\config.properties");
 
 			  Login.signIn();
 			 
