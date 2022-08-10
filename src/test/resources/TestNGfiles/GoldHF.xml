@@ -1,37 +1,121 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-HF Sprint -4 Regression Suite">
+<suite name="Gold-HydroFlask Regression Suite">
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
    	
-    <test name="Validate_header_storelogo" testid="DTG-639" priority="P1" description="This script will cover validating Store Logo">
+   	
+   	<test name="Test_DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent" testid="DTG-463" priority="P1" description="his script will cover validating the content for unautnenticated User">
        <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo"/>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent"/>
+        </classes>
+        </test>  
+        
+    <test name="Test_DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo" testid="DTG-639" priority="P1" description="This script will cover validating Store Logo">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo"/>
         </classes>
         </test>   
 
-           <test name="Validate_newsletter_subscription_footer" testid="DTG-644" priority="P1" description="This script will cover validating Email News Letter">
+ 	<test name="Test_DGLD_HF_UT_Header_003_NormalPath_User_SelectsTheSearch" testid="DTG-646" priority="P1" description="This script will cover validating Search Selection">
        <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Footer_003_ExceptionPath_UserEntersInvalidEmailforNewsletter"/>
-        </classes>
-        </test>   
-
-        <test name="Validate_Global_search" testid="DTG-646" priority="P1" description="This script will cover validating Search Selection">
-       <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Header_004_NormalPath_User_SelectsTheSearch"/>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_003_NormalPath_User_SelectsTheSearch"/>
         </classes>
         </test> 
-
-     <test name="Validate_Unauthenticateduser_viewscontent" testid="DTG-463" priority="P1" description="This script will cover validating the content for unautnenticated User">
-       <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscontent"/>
-        </classes>
-        </test> 
-        <test name="Validate_Login_Page" testid="DTG-645" priority="P1" description="This script will cover validating the Login page">
-       <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.DGLD_HF_UT_Login_005_ExceptionPaths_Errormessages_validation"/>
+        
+        <test name="Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewscontent" testid="DTG-694" priority="P1" description="This script will cover validating the Authenticated User views Header content">
+      	<classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewscontent"/>
         </classes>
         </test>
         
+        <test name="Test_DGLD_HF_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner" testid="DTG-793" priority="P1" description="This script will cover validating the Selection of a Product Link Within the Global Promo Banner">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner"/>
+        </classes>
+        </test>  
+        
+         <test name="Test_DGLD_HF_UT_Header_006_NormalPath_User_Selects_a_CMS_Link_Within_the_Global_Promo_Banner" testid="DTG-950" priority="P1" description="This script will cover validating the Selection of a CMS Link Within the Global Promo Banner">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_006_NormalPath_User_Selects_a_CMS_Link_Within_the_Global_Promo_Banner"/>
+        </classes>
+        </test> 
+        
+           <test name="Test_DGLD_HF_UT_Footer_007_AlternatePath_UserSignsUpForNewsletter" testid="DTG-656" priority="P1" description="This script will cover validating Email News Letter SignUp">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Footer_007_AlternatePath_UserSignsUpForNewsletter"/>
+        </classes>
+        </test>  
+        
+        <test name="Test_DGLD_HF_UT_Footer_008_ExceptionPath_UserEntersInvalidEmailforNewsletter" testid="DTG-644" priority="P1" description="This script will cover validating Invalid Email News Letter SignUp">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Footer_008_ExceptionPath_UserEntersInvalidEmailforNewsletter"/>
+        </classes>
+        </test> 
+
+        <test name="Test_DGLD_HF_UT_Login_009_ExceptionPaths_Errormessages_validation" testid="DTG-645" priority="P1" description="This script will cover validating the Login page Error messages validation">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Login_009_ExceptionPaths_Errormessages_validation"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_UT_Country_Selector_011_012_Additional_Path_Verify_Hydroflask_Available_Selections_views_and_selects_country_selector" testid="DTG-709" priority="P1" description="This script will cover validating the Country Selector Available Selection views and selects country selector">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Country_Selector_011_012_Additional_Path_Verify_Hydroflask_Available_Selections_views_and_selects_country_selector"/>
+        </classes>
+        </test>
+        <test name="Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options" testid="DTG-713" priority="P1" description="This script will cover validating the Select to View the Chatbot and User toggle between chat options">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options"/>
+        </classes>
+        </test>
+         <test name="Test_DGLD_HF_UT_StoreLocator_017_AlternatePath_UserSelects_a_Retailer_Hourstab" testid="DTG-925" priority="P1" description="This script will cover validating the Store Locator User Selecting a Retailer Hourstab">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_StoreLocator_017_AlternatePath_UserSelects_a_Retailer_Hourstab"/>
+        </classes>
+        </test>
+         <test name="Test_DGLD_HF_UT_StoreLocator_018_AlternatePath_UserSelects_a_Retailer_Browsertab" testid="DTG-933" priority="P1" description="This script will cover validating the Store Locator User Selecting a Retailer Browsertab">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_StoreLocator_018_AlternatePath_UserSelects_a_Retailer_Browsertab"/>
+        </classes>
+        </test>
+        <test name="Test_DGLD_HF_UT_StoreLocator_019_020_021_023_NormalPath_UserViews_StoreLocatorPage" testid="DTG-943" priority="P1" description="This script will cover validating the User View of Store Locator Page">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_StoreLocator_019_020_021_023_NormalPath_UserViews_StoreLocatorPage"/>
+        </classes>
+        </test>
+        <test name="Test_DGLD_HF_UT_StoreLocator_022_AlternatePath_UserSelects_a_Product_Tab" testid="DTG-951" priority="P1" description="This script will cover validating the Store Locator User Selecting a Retailer Product tab">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_StoreLocator_022_AlternatePath_UserSelects_a_Product_Tab"/>
+        </classes>
+        </test>
+        <test name="Test_DGLD_HF_UT_storeLocator_024_AlternatePath_UserSelects_a_Retailer_Links_tab" testid="DTG-960" priority="P1" description="This script will cover validating the Store Locator User Selecting a Retailer Links tab">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_storeLocator_024_AlternatePath_UserSelects_a_Retailer_Links_tab"/>
+        </classes>
+        </test>
+        
+        <test name="Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality" testid="DTG-928" priority="P1" description="This script will cover validating the MiniCart Functionality">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality"/>
+        </classes>
+        </test>
+        
+        <test name="Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Requirement_Checks" testid="DTG-932" priority="P1" description="This script will cover validating the Account Registration Password Requirement Checks">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Requirement_Checks"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount" testid="DTG-963" priority="P1" description="This script will cover validating the Unauthenticated User Enters Email Associated With An Account in Shipping page">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount"/>
+        </classes>
+        </test>
+        <test name="Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword" testid="DTG-976" priority="P1" description="This script will cover validating the Unauthenticated User Enters Email Associated With An Account and clicks Forgot password in Shipping page">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword"/>
+        </classes>
+        </test>
         
 </suite>  

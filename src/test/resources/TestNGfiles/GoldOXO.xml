@@ -1,75 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-OXO  Regression Suite">
+<suite name="Gold-OXO Regression Suite">
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
    	
-   <test name="Validate_header_storelogo" testid="DTG-647" priority="P1" description="This script will cover validating Store Logo">
+   <test name="Test_DGLD_OXO_UT_Header_001_NormalPath_UserSelectsStoreLogo" testid="DTG-647" priority="P1" description="This script will cover validating Store Logo">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Header_011_NormalPath_UserSelectsStoreLogo"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_001_NormalPath_UserSelectsStoreLogo"/>
         </classes>
         </test>   
 
-        
-
-        <test name="Validate_Global_search" testid="DTG-648" priority="P1" description="This script will cover validating Search Selection">
+        <test name="Test_DGLD_OXO_UT_Header_002_NormalPath_User_SelectsTheSearch" testid="DTG-648" priority="P1" description="This script will cover validating Search Selection">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Header_003_NormalPath_User_SelectsTheSearch"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_002_NormalPath_User_SelectsTheSearch"/>
         </classes>
         </test> 
 
-     <test name="Validate_Unauthenticateduser_viewscontent" testid="DTG-704" priority="P1" description="This script will cover validating the content for unautnenticated User">
+     <test name="Test_DGLD_OXO_UT_Header_003_Normalpath_Unauthenticated_user_views_content" testid="DTG-704" priority="P1" description="This script will cover validating the Unauthenticated User Views Header content ">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Header_002_Normalpath_Unauthenticated_user_views_content"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_003_Normalpath_Unauthenticated_user_views_content"/>
+        </classes>
+        </test> 
+        <test name="Test_DGLD_OXO_UT_Header_004_Normalpath_Authenticated_user_views_content" testid="DTG-705" priority="P1" description="This script will cover validating the Authenticated User views Header content">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_004_Normalpath_Authenticated_user_views_content"/>
+        </classes>
+        </test> 
+        <test name="Test_DGLD_OXO_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner" testid="DTG-801" priority="P1" description="This script will cover validating the Selection of a Product Link Within the Global Promo Banner">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner"/>
+        </classes>
+        </test>
+        <test name="Test_DGLD_OXO_UT_Header_006_NormalPath_User_Selects_a_CMS_Link_Within_the_Global_Promo_Banner" testid="DTG-971" priority="P1" description="This script will cover validating the Selection of a CMS Link Within the Global Promo Banner">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_006_NormalPath_User_Selects_a_CMS_Link_Within_the_Global_Promo_Banner"/>
         </classes>
         </test> 
         
-        <test name="Validate_Login_Page" testid="DTG-706" priority="P1" description="This script will cover validating the Login page">
+        <test name="Test_DGLD_OXO_UT_Login_009_ExceptionPaths_Errormessages_validation" testid="DTG-706" priority="P1" description="This script will cover validating the Login page Error messages validation">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Login_005_ExceptionPaths_Errormessages_validation"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Login_009_ExceptionPaths_Errormessages_validation"/>
         </classes>
         </test>
         
-       <test name="Validate_Authenticateduser_viewscontent" testid="DTG-705" priority="P1" description="This script will cover validating the content for unautnenticated User">
+          <test name="Test_DGLD_OXO_UT_Country_Selector_011_012_Additional_Path_Verify_OXO_Available_Selections_views_and_selects_country_selectors" testid="DTG-714" pririty="P1" description="This script will cover validating the Country Selector Available Selections views and selects country selectors">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Header_001_Normalpath_Authenticated_user_views_content"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Country_Selector_011_012_Additional_Path_Verify_OXO_Available_Selections_views_and_selects_country_selectors"/>
         </classes>
-        </test>  
+        </test> 
         
             
-       <test name="Validate_Contactus_Errormessage" testid="DTG-710" priority="P1" description="This script will cover validating the Contactus Errormessage">
+       <test name="Test_DGLD_OXO_UT_ContactUS_013_VerifingContactUSErrorMessage" testid="DTG-710" priority="P1" description="This script will cover validating the Contactus Errormessage">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Footer_005_VerifingContactUSErrorMessage"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_ContactUS_013_VerifingContactUSErrorMessage"/>
         </classes>
         </test>  
              
-       <test name="Validate_Contactus_page_submit" testid="DTG-787" priority="P1" description="This script will cover validating the Contactuspage submit">
+       <test name="Test_DGLD_OXO_UT_ContactUS_014_UserViewsContactUsPageandSubmits" testid="DTG-787" priority="P1" description="This script will cover validating the Contactus page submit">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Footer_006_UserViewsContactUsPageandSubmits"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_ContactUS_014_UserViewsContactUsPageandSubmits"/>
         </classes>
         </test>
         
-     <test name="Validate_User_toggle_between_Chatoption" testid="DTG-707" priority="P1" description="This script will cover validating the User toggle between chat option">
+     <test name="Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_chat_options" testid="DTG-707" priority="P1" description="This script will cover validating the User toggle between chat options">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Chat_Bot_001_AdditionalPath_User_toggle_between_chat_options"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_chat_options"/>
         </classes>
         </test>
         
-          <test name="Validate_User_selects_to_view _the_chatbot" testid="DTG-788" pririty="P1" description="This script will cover validating the User select to view chatbot">
+          <test name="Test_DGLD_OXO_UT_Chatbot_016_NormalPath_User_Selects_to_View_the_Chatbot" testid="DTG-788" pririty="P1" description="This script will cover validating the User select to view chatbot">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Chatbot_008_NormalPath_User_Selects_to_View_the_Chatbot"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Chatbot_016_NormalPath_User_Selects_to_View_the_Chatbot"/>
         </classes>
         </test>
         
-            <test name="Validate_Countryselector_OXO_availabele_selections" testid="DTG-714" pririty="P1" description="This script will cover validating thecountry selector oxo avalabke selections">
+         <test name="Test_DGLD_OXO_UT_Minicart_017_026_Validate_MiniCart_Functionality" testid="DTG-952" priority="P1" description="This script will cover validating the Minicart Functionality">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Country_Selector_008_Additional_Path_Verify_OXO_Available_Selections"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Minicart_017_026_Validate_MiniCart_Functionality"/>
         </classes>
         </test> 
-        
-         <test name="Validate_MiniCart_Functionalities" testid="DTG-937" priority="P1" description="This script will cover validating the Minicart Functionality">
+         <test name="Test_DGLD_OXO_UT_AccountRegistration_027_AdditionalPath_Password_RequirementChecks" testid="DTG-942" priority="P1" description="This script will cover validating the Account Registration Password Requirement Checks">
        <classes>
-            <class name="TestExecute.OXO.unitTestcase.DGLD_OXO_UT_Minicart_007_Validate_MiniCart_Functionality"/>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_AccountRegistration_027_AdditionalPath_Password_RequirementChecks"/>
         </classes>
         </test> 
        
