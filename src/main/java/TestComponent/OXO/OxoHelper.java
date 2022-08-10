@@ -763,9 +763,9 @@ public class OxoHelper {
 			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
 
 			String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
-			Common.assertionCheckwithReport(answers.contains("Answers"), "validate the Answers options in Chatbox",
-					"Click the Answers option to disaply the related options",
-					"Sucessfully click the answers options button", "Unable to click the Answers option button");
+			Common.assertionCheckwithReport(answers.contains("Answers"), "To validate the Answers options in Chatbox",
+					"Click the Answers option to display the related options",
+					"Sucessfully click the answers option button", "Unable to click the Answers option button");
 
 			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
 		} catch (Exception | Error e) {
@@ -792,14 +792,14 @@ public class OxoHelper {
 			if (arrayoptionName.contains(items[i])) {
 			} else {
 
-				ExtenantReportUtils.addFailedLog("validate the Answers options in chatbox",
-						"All the Answer related options are diaplyed ", "Missed the " + items[i] + "options",
+				ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+						"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
 						Common.getscreenShotPathforReport("failed to display answersoptions"));
 				Assert.fail();
 			}
 
-			ExtenantReportUtils.addPassLog("Validate the Answers options ",
-					"click the answers options it must display all the options ",
+			ExtenantReportUtils.addPassLog("To Validate the Answers options ",
+					"click on the answers options it must display all the options ",
 					"Sucessfully displayed the answers options " + arrayoptionName,
 					Common.getscreenShotPathforReport("Answervalidation"));
 		}
@@ -814,17 +814,17 @@ public class OxoHelper {
 			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
 
 			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
-					"validate the Chat display", "Open the Chat conversation in ChatBot",
+					"To validate the Chat Conversation when user click on the chat option", "It should Open the Chat conversation in ChatBot",
 					"Sucessfully click on the ChatBot and display the Chat conversation ",
-					"Unable to dispaly the chat conversation");
+					"Unable to display the chat conversation when user click on the chat option ");
 
 			Common.switchToDefault();
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validate the Chat display", "Open the Chat conversation in ChatBot",
-					"Unable click on the ChatBot and Chat conversation is not displayed ",
-					Common.getscreenShotPathforReport("Failed to dispaly the chat conversation"));
+			ExtenantReportUtils.addFailedLog("To validate the Chat Conversation when user click on the chat option", "It should Open the Chat conversation in ChatBot",
+					"Unable to  click on the ChatBot and not displayed the Chat conversation ",
+					Common.getscreenShotPathforReport("Unable to display the chat conversation when user click on the chat option"));
 			Assert.fail();
 		}
 

@@ -428,14 +428,15 @@ public class Adminhelper {
 					.getAttribute("class");
 			System.out.println(clear);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(clear.contains("current"), "Validating the Clear filters ",
-					"Able to clear the all filters ", "Successfully all filters has cleared ",
-					"Failed to Clear all filters");
+			Common.assertionCheckwithReport(clear.contains("current"), "To Validate the Clear filters ",
+					"Should able to clear all the filters ", "Successfully all the filters are cleared ",
+					"Failed to Clear all the filters");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating the Clear filters ", "Able to clear the all filters ",
-					"Unable to clear all filters ", Common.getscreenShotPathforReport("Failed to Clear all filters"));
+			ExtenantReportUtils.addFailedLog("To Validate the Clear filters ", "Should able to clear all the filters ",
+					"Unable to clear all the filters ",
+					Common.getscreenShotPathforReport("Failed to Clear all the filters"));
 			Assert.fail();
 
 		}
@@ -450,14 +451,14 @@ public class Adminhelper {
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Customers / Customers / Magento Admin"),
 					"Validating customers field page navigation ",
-					"after clicking all customers it will navigate to the Customer field page",
+					"After clicking all customers it will navigate to the Customer field page",
 					"Successfully navigate to the Customer field page ",
 					"Failed to navigate to the Customer field page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
-					"after clicking all customers it will navigate Customer field page",
+					"After clicking all customers it will navigate Customer field page",
 					"Unable to navigate to the Customer filed page",
 					Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
 			Assert.fail();
@@ -512,18 +513,17 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Customers / Customers / Magento Admin")
 							&& savemessage.equals("You saved the customer."),
-					"Validating customers filed page navigation and saved message ",
-					"after clicking save button it will navigate Customer filed page and it should be display save message",
+					"To validate the customers Field page navigation and saved message ",
+					"After clicking save button it will navigate Customer Field page and it should be display save message",
 					"Successfully navigate to Customer filed page and save message has displayed",
-					"Failed to navigate to Customer filed page and save message not displayed");
+					"Failed to navigate to Customer filed page and save message is not displayed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation and saved message ",
-					"after clicking save button it will navigate Customer filed page and it should be display save message",
-					"Unable to  navigate to the  Customer filed page and save message not displayed",
-					Common.getscreenShotPathforReport(
-							"Failed to navigate to Customer filed page and save message not displayed"));
+			ExtenantReportUtils.addFailedLog("To validate customers field page navigation and saved message ",
+					"After clicking save button it will navigate Customer field page and it should be display save message",
+					"Unable to  navigate to the  Customer field page and save message not displayed",
+					"Failed to navigate to Customer field page and save message not displayed");
 			Assert.fail();
 		}
 	}
@@ -1424,7 +1424,8 @@ public class Adminhelper {
 			String hotelements = Common.findElement("xpath", "//li[@id='menu-section-hot_elements']")
 					.getAttribute("class");
 
-			Common.assertionCheckwithReport(hotelements.contains("active"), "To Verify the Hot element drop down contents is displayed ",
+			Common.assertionCheckwithReport(hotelements.contains("active"),
+					"To Verify the Hot element drop down contents is displayed ",
 					"After clicking on hot elements contents should display",
 					"Successfully hot elements contents displayed ", "Failed to display hot elements contents");
 		} catch (Exception | Error e) {
@@ -1601,20 +1602,19 @@ public class Adminhelper {
 			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
 			Common.clickElement("xpath", "//button[@id='save-button']");
 			Sync.waitPageLoad(70);
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
 			Sync.waitElementVisible("xpath", "//div[@data-ui-id='messages-message-success']");
 			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(savethepage.contains("You saved the page."),
-					"Validating the User need to save the page", "User should able to save the page",
-					"Sucessfully User saves the page", "Unable to save the page");
+					" To Validate the User needs to save the page", "User should able to save the page",
+					"Sucessfully User saves the page", "Failed to save the page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
-					"User should able to save the page", "unable to save the page",
+			ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+					"User should able to save the page", "Unable to saves the page",
 					Common.getscreenShotPathforReport("Failed to save the page"));
 			Assert.fail();
 		}
@@ -1633,14 +1633,15 @@ public class Adminhelper {
 			Sync.waitPageLoad(40);
 			String uname = Common.getPageTitle();
 			Common.assertionCheckwithReport(uname.contains(pagetitle),
-					"Validating the User lands to the hydroflask page", "User should able lands on the hydroflask page",
-					"Sucessfully User lands on the hydroflask page", "Failed user navigates to the hydroflask page");
+					"Validating the User lands to the Hydroflask page",
+					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
+					"Failed to navigate to the hydroflask page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating the User lands to the hydroflask page",
-					"User should able lands on the hydroflask page", "unable to land User on the hydroflask page",
-					Common.getscreenShotPathforReport("Failed user navigates to the hydroflask page"));
+			ExtenantReportUtils.addFailedLog("Validating the User lands to the Hydroflask page",
+					"User should able to land on the Hydroflask page", "Unable to Navigate to the Hydroflask page",
+					Common.getscreenShotPathforReport("Failed to navigate to the hydroflask page"));
 
 			Assert.fail();
 		}
@@ -1676,16 +1677,17 @@ public class Adminhelper {
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Pages / Magento Admin")
 							&& deletemessage.equals("The page has been deleted."),
-					"Validating page filed  navigation and customer deleted message",
-					"after clicking delete button it will navigate page filed and message should be displayed",
-					"Successfully navigate to page filed and message is dispalyed", "Failed to navigate to page filed");
+					"To Validate Page field navigation and Page deleted message",
+					"It should click on the Delete page it will navigate to Page field and page deleted message should be displayed",
+					"Successfully navigate to page field and Page delete message is displayed",
+					"Failed to navigate to page filed and message is not displayed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating page filed  navigation and customer deleted message",
-					"after clicking delete button it will navigate page filed and message should be displayed",
-					"Unable to navigate to the page filed ",
-					Common.getscreenShotPathforReport("Failed to navigate to page filed"));
+			ExtenantReportUtils.addFailedLog("To Validate Page field navigation and Page deleted message",
+					"It should click on the Delete page it will navigate to Page field and page deleted message should be displayed",
+					"Unable to navigat to page field and Page delete message is not displayed",
+					Common.getscreenShotPathforReport("Failed to navigate to page filed and message is not displayed"));
 			Assert.fail();
 		}
 	}
@@ -1704,15 +1706,15 @@ public class Adminhelper {
 			System.out.println(pagebuilder);
 			Common.assertionCheckwithReport(pagebuilder.contains("pagebuilder-wysiwyg-overlay"),
 					"Validating edit page bulider navigation ",
-					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Successfully navigate to the edit page builder filed",
+					"After clicking on edit page builder it Should navigate to edit page builder field ",
+					"Successfully navigate to the edit page builder field",
 					"Failed to navigate to the edit page builder filed");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
-					"after clicking on edit page builder it will navigate edit page builder filed ",
-					"Unable navigate to the edit page builder filed",
-					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
+					"After clicking on edit page builder it Should navigate to edit page builder field ",
+					"Unable navigate to the edit page builder field",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit page builder field"));
 
 			Assert.fail();
 		}
@@ -3076,6 +3078,8 @@ public class Adminhelper {
 
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Sync.waitElementPresent("xpath", "//span[@data-placeholder='Button text']");
+			Common.scrollIntoView("xpath", "//span[@data-placeholder='Button text']");
 			String editpagebuilder = Common.findElement("xpath", "//span[@data-placeholder='Button text']").getText();
 			Common.assertionCheckwithReport(editpagebuilder.equals("Stacked"),
 					"Validating the text entered on the text button", "Text should be entered on the text button",
@@ -3136,18 +3140,18 @@ public class Adminhelper {
 
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Sync.waitElementPresent("xpath", "(//span[@data-placeholder='Button text'])[2]");
+			Common.scrollIntoView("xpath", "(//span[@data-placeholder='Button text'])[2]");
 			String editpagebuilder = Common.findElement("xpath", "(//span[@data-placeholder='Button text'])[2]")
 					.getText();
 			Common.assertionCheckwithReport(editpagebuilder.equals("URL"),
-					"Validating text entered in the button text button",
-					"Text should be entered in the button text button",
-					"Successfully text entered in the button text button",
-					" user unable enter text on the text button");
+					"To Validate the text is entered in the Button Text", "Text should be entered in the Button Text",
+					"Successfully text entered in the Button Text", "Failed to enter text on the Button Text");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating text entered on the text button",
-					"Text should be entered on the text button", "Failed to enter text on the text button",
-					Common.getscreenShotPathforReport("user unable enter text on button text button"));
+			ExtenantReportUtils.addFailedLog("To Validate the text is entered in the Button Text",
+					"Text should be entered in the Button Text", "Unable to enter text in the Button Text",
+					Common.getscreenShotPathforReport("Failed to enter text on Button Text"));
 			Assert.fail();
 
 		}
@@ -3159,29 +3163,33 @@ public class Adminhelper {
 		try {
 			String button1 = data.get(Dataset).get("URL");
 //			String button2 = data.get(Dataset).get("SKU");
-
+			Sync.waitElementPresent("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[1]");
+			Common.scrollIntoView("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[1]");
 			String websitebutton = Common.findElement("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[1]")
 					.getAttribute("href");
 			Common.assertionCheckwithReport(websitebutton.equals(button1),
-					"Validating button text is present in front end", "Button text should be present in the front end",
-					"Successfully button text entered in the front end", "unable to see button text on front end");
+					"To Validate the button text is present in front end",
+					"Button text should be display in the front end",
+					"Successfully button text is displayed in the front end",
+					"Failed to Display button text on front end");
+
 			Common.clickElement("xpath", "(//a[@class='a-btn pagebuilder-button-primary'])[2]");
 			Sync.waitPageLoad();
 
 //			String sku = Common.findElement("xpath", "//span[@class='a-product-attribute__value']").getText();
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("32-oz-wide-mouth-copper-brown.html"),
-					"Validating button text is present in front end and the link",
-					"Button text should be present on the front end and when we click on the link it should navigate to the PDP page",
-					"Successfully button text entered in the front end and link is Navigating to the PDP Page",
-					"unable to see button text on front end and link not Navigating");
+					"To validate button text is dispalyed in fornt end when we click on button text it navigates to the PDP ",
+					"It should navigate to the PDP  when we click on the button text ",
+					"Successfully naviagtes to the PDP when we click on the button text",
+					"Failed to navigates to the PDP when we click on the button text");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating button text is present in front end and the link",
-					"Button text should be present on the front end and when we click on the link it should navigate to the PDP page",
-					"Unable to display the button text entered on the front end and link is not Navigating to the PDP Page",
-					Common.getscreenShotPathforReport(
-							"unable to see button text on front end and link not Navigating"));
+			ExtenantReportUtils.addFailedLog(
+					"To validate button text is dispalyed in fornt end when we click on button text it navigates to the PDP ",
+					"It should navigate to the PDP  when we click on the button text ",
+					"Unable to naviagte to the PDP when we click on the button text", Common.getscreenShotPathforReport(
+							"Failed to navigates to the PDP when we click on the button text"));
 			Assert.fail();
 
 		}
@@ -4424,8 +4432,7 @@ public class Adminhelper {
 			ExtenantReportUtils.addFailedLog(
 					"To validate the Admin deletes the page and the success message is displayed",
 					"Admin Should successfully deletes the page and success message is displayedUser should able Dragndrop cardtile",
-					"Admin failed to delete the page",
-					Common.getscreenShotPathforReport("Failed to delete the page"));
+					"Admin failed to delete the page", Common.getscreenShotPathforReport("Failed to delete the page"));
 
 			Assert.fail();
 		}

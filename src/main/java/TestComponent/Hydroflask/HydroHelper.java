@@ -62,14 +62,18 @@ public class HydroHelper {
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']/a");
 			Common.assertionCheckwithReport(
 					Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
-					"To validate the user navigates to the signin page", "user should able to land on the signIn-button",
-					"User Successfully clicked on the singIn button", "User Failed to click the signin button");
+					"To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"User Successfully clicked on the singIn button and Navigate to the signIn page",
+					"User Failed to click the signin button and not navigated to signIn page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the signIn-buton functionality",
-					"User navigating signin page", "Unable to clcik on signin button",
-					Common.getscreenShotPathforReport("Failed to click singup button"));
+			ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"Unable to click on the singIn button and not Navigated to the signIn page",
+					Common.getscreenShotPathforReport(
+							"Failed to click signIn button and not Navigated to the signIn page"));
 			Assert.fail();
 		}
 	}
@@ -84,15 +88,16 @@ public class HydroHelper {
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
 					"To validate the user lands on Home page after successfull login",
-					"After clicking on the signin button it should navigate to the home page",
-					"Sucessfully user navigate to the home after clicking on the login button", "User failed to login");
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the user lands on Home page after successfull login",
-					"After clicking on the signin button it should navigate to the home page",
-					"Unable to the user navigate to the home after clicking on the login button",
-					Common.getscreenShotPathforReport("Failed to Login"));
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
 
 			Assert.fail();
 		}
@@ -122,9 +127,10 @@ public class HydroHelper {
 					Sync.waitPageLoad();
 					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
-							"Validating My account page navigation",
-							"after clinking My account CTA it will navigate My Account page",
-							"Successfully navigate to My Account page", "Failed to navigate to my account page ");
+							"Validating the My account page navigation when user clicks on the My account CTA",
+							"After clicking My account CTA it will navigates My Account page",
+							"Successfully navigate to My Account page after clciking on the My account CTA",
+							"Failed to navigate to my account page after clicking on the My account CTA");
 				}
 
 				else if (names.get(i).contains("MY FAVORITES")) {
@@ -133,9 +139,10 @@ public class HydroHelper {
 					Sync.waitPageLoad();
 					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Favorites"),
-							"Validating My favourites page navigation",
-							"after clinking My favourites CTA it will navigate My favourites page",
-							"Successfully navigate to My favourites page", "Failed to navigate My favourites page ");
+							"Validating My favourites page navigation when user clicks on the My favorites",
+							"After clicking My favourites CTA it should navigate My favourites page",
+							"Successfully navigate to My favourites page after clicking My favourites CTA ",
+							"Failed to navigate My favourites page After clicking My favourites CTA ");
 				}
 
 				else if (names.get(i).contains("MY ORDERS")) {
@@ -145,40 +152,51 @@ public class HydroHelper {
 					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
 
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Orders"),
-							"Validating MyOrders navigation",
-							"after clinking MyOrders CTA it will navigate MyOrders page",
-							"Successfully navigate to MyOrderspage", "Failed to navigate MyOrders page");
-				} else if (names.get(i).contains("MY PRODUCTS SUBSCRIPTION")) {
-					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
-					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
-					Sync.waitPageLoad();
-					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
-
-					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Subscriptions"),
-							"Validating Myproductssubscriptions CTA navigation",
-							"after clinking Myproductssubscriptions CTA it will navigate Myproductssubscriptions page",
-							"Successfully navigate to Myproductssubscriptions page",
-							"Failed to navigate Myproductssubscriptions page");
-				} else if (names.get(i).contains("SIGN OUT")) {
+							"Validating MyOrders navigation after clicking on the My Orders CTA",
+							"After clicking MyOrders CTA it should navigate MyOrders page",
+							"Successfully navigate to MyOrderspage after clicking on the My Orders CTA",
+							"Failed to navigate MyOrders page after clicking on the My Orders CTA");
+				}
+				/*
+				 * else if (names.get(i).contains("MY PRODUCTS SUBSCRIPTION")) {
+				 * Sync.waitElementClickable("xpath",
+				 * "//ul[@class='m-account-nav__links']/li[1]/a");
+				 * Common.javascriptclickElement("xpath",
+				 * "//ul[@class='m-account-nav__links']/li[4]/a"); Sync.waitPageLoad();
+				 * Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
+				 * 
+				 * Common.assertionCheckwithReport(Common.getPageTitle().
+				 * contains("My Subscriptions"),
+				 * "Validating My products subscriptions navigation after clicking on the My subscriptions CTA  "
+				 * ,
+				 * "After clicking My products subscriptions CTA it should navigate My products subscriptions page"
+				 * ,
+				 * "Successfully navigate to My products subscriptions page after clicking on the My subscriptions CTA"
+				 * ,
+				 * "Failed to navigate My products subscriptions page after clicking on the My subscriptions CTA"
+				 * ); }
+				 */
+				else if (names.get(i).contains("SIGN OUT")) {
 					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
 					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
 					Sync.waitPageLoad(30);
 					Sync.waitElementVisible("xpath", "//div[contains(@class,'c-hero-block')]");
 
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
-							"Validating Customer logout functionality",
-							"after clinking SignOut CTA it should successfully logout the customer ",
-							"Successfully logout from the Account", "Failed to logout from the customer account");
+							"Validating Customer logout functionality when user click on the Sign out CTA",
+							"After Clicking SignOut CTA it should successfully logout the customer ",
+							"Successfully logout from the Account after clicking on the Sign out CTA",
+							"Failed to logout from the customer account after clicking on the Sign out CTA");
 				}
 
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating options under signin button ",
-					"All options should able to click under sigin button and it should navigate to respective page",
-					"unable to click on options under signin button and not able to navigate to the respective page",
-					Common.getscreenShotPathforReport("Failed to click options under signin button"));
+			ExtenantReportUtils.addFailedLog("Validating options under the My account CTA ",
+					"All options should able to click under My account CTA and it should navigate to respective page",
+					"unable to click on the options under My account CTA and not able to navigate to the respective page",
+					Common.getscreenShotPathforReport("Failed to click options under My account CTA"));
 
 			Assert.fail();
 		}
@@ -300,22 +318,28 @@ public class HydroHelper {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-					"User should able to click on the search button", "Search expands to the full page",
-					"Sucessfully search bar should be expand");
+			Common.assertionCheckwithReport(open.contains("active"),
+					"To validate the global search box is opened when we click on the search icon",
+					"User should able to click on the search icon and search box opens",
+					"Sucessfully the gobal search box opend when user clicks on search icon",
+					"Failed to open the search box when user clicks on the search icon");
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
 			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String close = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(close.contains("c-header-search"), "User searches using the search field",
-					"User should able to click on the close button", "Search box closed",
-					"Sucessfully search bar should be expand");
+			Common.assertionCheckwithReport(close.contains("c-header-search"),
+					"To validate the global search box is Closed when user click on the close icon",
+					"User should able to click on the close icon and search box should be closed",
+					"Sucessfully the gobal search box closed when user clicks on close icon",
+					"Failed to close the search box when user clicks on the close icon");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validate the User searches using the search field ",
-					"Clicking on search bar it should expand and click on close button",
-					" Unable to clicks on close button ",
-					Common.getscreenShotPathforReport("Failed to close the search button"));
+			ExtenantReportUtils.addFailedLog(
+					"To validate the global search box is Closed when user click on the close icon",
+					"User should able to click on the close icon and search box should be closed",
+					"Unable to close the gobal search box when user clicks on close icon",
+					Common.getscreenShotPathforReport(
+							"Failed to close the search box when user clicks on the close icon"));
 
 			Assert.fail();
 		}
@@ -329,8 +353,11 @@ public class HydroHelper {
 			Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);
-			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
-					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
+			Common.assertionCheckwithReport(openminicart.contains("active"),
+					"To validate the Minicart popup is open when user click on Mini cart icon",
+					"It Should display the Mini cart when user clicks on the Mini cart icon  ",
+					"Sucessfully Minicart is displayed when user clicks on the Mini cart icon",
+					"Failed to display the mini cart when we click on the Mini cart icon");
 
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class,'minicart__close')]");
 			Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close')]");
@@ -338,14 +365,19 @@ public class HydroHelper {
 			Common.isElementNotDisplayed("xpath", "//div[contains(@class,'mini-cart--active')]");
 			int closeminicart = Common.findElements("xpath", "//div[contains(@class,'mini-cart--active')]").size();
 			System.out.println(closeminicart);
-			Common.assertionCheckwithReport(closeminicart <= 0, "To verify the mini cart is closed or not",
-					"the mini cart is closed", "Should close the mini cart", "mini cart is not Closed");
+			Common.assertionCheckwithReport(closeminicart <= 0,
+					"To verify the mini cart is closed or not when user clicked on Close icon",
+					"Mini cart should be closed when user clicks on the Close icon",
+					"Sucessfully Minicart is closed when user clicks on the close icon",
+					"Failed to closed the Mini cart when user clicks on the Close icon");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To verify the mini cart is closed or not", "the mini cart is closed",
-					"unable to  close the mini cart",
-					Common.getscreenShotPathforReport("Failed to close the minicart"));
+			ExtenantReportUtils.addFailedLog("To verify the mini cart is closed or not when user clicked on Close icon",
+					"Mini cart should be closed when user clicks on the Close icon",
+					"Unable to Close the Minicart when user clicks on the close icon",
+					Common.getscreenShotPathforReport(
+							"Failed to closed the Mini cart when user clicks on the Close icon"));
 			Assert.fail();
 
 		}
@@ -497,8 +529,10 @@ public class HydroHelper {
 			System.out.println(logo);
 			clickStoreLogo();
 			Common.assertionCheckwithReport(Welcome.contains("Welcome, QA") && logo.contains("Logo"),
-					"To validate the header menu", "Components in header menu should be dispalyed",
-					"Componenets in header menu are displayed", "Failed to display the components in header menu");
+					"To validate the Main menu in Header and logo",
+					"Components in header menu should be displayed along with logo",
+					"Componenets in header menu and logo are displayed ",
+					"Failed to display the components and logo in header menu ");
 
 			int header = Common.findElements("xpath", "//a[contains(@class,'level-top ui-corner-all')]").size();
 
@@ -512,14 +546,15 @@ public class HydroHelper {
 				String headerlink[] = data.get(dataSet).get("menu").split(",");
 				System.out.println(headerlink[i - 1]);
 
-				Common.assertionCheckwithReport(link.contains(headerlink[i - 1]), "to validate the header menu " + link,
-						"it should clik the link" + link, link + "is clicked", "failed to click the link");
+				Common.assertionCheckwithReport(link.contains(headerlink[i - 1]), "To validate the header menu " + link,
+						"It should click the Header menu link " + link, link + " is clicked on the Header menu",
+						"Failed to click the " + link);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the header menu for Authorised user ",
-					" it should clik the Header links and navigate to the My account menu",
+					" It should click the Header links and navigate to the My account menu",
 					"Top level navigation unsuccessfull", "Failed to navigate through the header menu");
 			Assert.fail();
 
