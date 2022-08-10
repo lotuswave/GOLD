@@ -14,7 +14,7 @@ public class Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content {
 	String datafile = "Admin//AdminTestData.xlsx";    
     Adminhelper Admin=new Adminhelper(datafile);
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-    public void Verify_Promo_Media_Card_Content() throws Exception {
+    public void Configure_and_validate_Promo_Media_Card_Content() throws Exception {
     try {
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
@@ -23,11 +23,11 @@ public class Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content {
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.dragndrop_promoBlock();
-           Admin.edit_promoBlocker_one(); 
+           Admin.edit_promoBlock_one();
            Admin.editpromocontent_color("promocontent");
            Admin.editpromocontent_image();
            Admin.CTA_content("CTA Edit");
-           Admin.edit_promoBlocker_two();
+           Admin.edit_promoBlock_two();
            Admin.editpromocontent_color("promocontent");
            Admin.editpromocontent_image();
            Admin.CTA_product_content("CTA Edit");

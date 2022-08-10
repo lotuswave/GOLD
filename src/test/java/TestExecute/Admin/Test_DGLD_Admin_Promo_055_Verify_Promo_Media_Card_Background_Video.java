@@ -22,11 +22,11 @@ public class Test_DGLD_Admin_Promo_055_Verify_Promo_Media_Card_Background_Video 
            Admin.Contentpage();
            Admin.hot_elements();
            Admin.dragndrop_promoBlock();
-           Admin.edit_promoBlocker_one(); 
+           Admin.edit_promoBlock_one(); 
            Admin.editpromocontent_color("promocontent");
            Admin.editpromocontent_video("promocontent");
            Admin.editpromocontent_fallback_image();
-           Admin.edit_promoBlocker_two();
+           Admin.edit_promoBlock_two();
            Admin.editpromocontent_color("promocontent");
            Admin.editpromocontent_image();
            Admin.allbackground("promocontent");
