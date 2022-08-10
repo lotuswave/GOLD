@@ -515,15 +515,15 @@ public class Adminhelper {
 							&& savemessage.equals("You saved the customer."),
 					"To validate the customers Field page navigation and saved message ",
 					"After clicking save button it will navigate Customer Field page and it should be display save message",
-					"Successfully navigate to Customer filed page and save message has displayed",
-					"Failed to navigate to Customer filed page and save message is not displayed");
+					"Successfully navigate to Customer field page and save message has displayed",
+					"Unable to navigate to the Customer field page and save message is not displayed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate customers field page navigation and saved message ",
 					"After clicking save button it will navigate Customer field page and it should be display save message",
-					"Unable to  navigate to the  Customer field page and save message not displayed",
-					"Failed to navigate to Customer field page and save message not displayed");
+					"Unable to  navigate to the  Customer field page and save message is not displayed",
+					Common.getscreenShotPathforReport("Failed to navigate to Customer field page and save message not displayed"));
 			Assert.fail();
 		}
 	}
