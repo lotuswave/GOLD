@@ -3,6 +3,7 @@ package TestExecute.Admin;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import TestLib.Common;
@@ -53,10 +54,11 @@ public class Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content {
 
 
     @BeforeTest
-      public void startTest() throws Exception {
+ @Parameters("URL")
+    public void startTest(String URL) throws Exception {
     	System.setProperty("configFile", "Admin\\config.properties");
-          Login.signIn();
-
+          //Login.signIn();
+          Login.openwebsite(URL);
 
       }
 

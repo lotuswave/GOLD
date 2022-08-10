@@ -180,7 +180,7 @@ public class OxoHelper {
 	}
 
 	public void Usersignin(String dataSet) throws Exception {
-	
+
 		// Common.findElement("xpath", "");
 		Thread.sleep(3000);
 		Common.textBoxInput("id", "email", data.get(dataSet).get("Email1"));
@@ -195,7 +195,6 @@ public class OxoHelper {
 	}
 
 	public void MyFavoritespage(String DataSet) {
-	
 
 		try {
 			RegClickaccount();
@@ -224,7 +223,6 @@ public class OxoHelper {
 	}
 
 	public void Myorderspage(String DataSet) {
-	
 
 		try {
 			RegClickaccount();
@@ -249,7 +247,6 @@ public class OxoHelper {
 	}
 
 	public void MyProductSubscription(String DataSet) {
-		
 
 		try {
 			RegClickaccount();
@@ -353,7 +350,6 @@ public class OxoHelper {
 	}
 
 	public void ValidateMyAccountpage(String DataSet) {
-	
 
 		try {
 			RegClickaccount();
@@ -377,7 +373,6 @@ public class OxoHelper {
 	}
 
 	public void Signout(String DataSet) {
-	
 
 		try {
 			RegClickaccount();
@@ -440,7 +435,7 @@ public class OxoHelper {
 	}
 
 	public void Toplevelnavigation(String DataSet) {
-		
+
 		try {
 			int header = Common.findElements("xpath", "//a[contains(@class,'level-top ui-corner-all')]").size();
 
@@ -471,7 +466,7 @@ public class OxoHelper {
 	}
 
 	public void Toplevelnavigation2() {
-		
+
 		try {
 
 			// Sync.waitElementClickable("xpath", "//span[text()=' Shop']");
@@ -497,7 +492,6 @@ public class OxoHelper {
 	}
 
 	public void RegClickaccount() {
-		
 
 		try {
 			Sync.waitElementClickable("xpath", "//button[contains(@data-bind,'scope: ')]");
@@ -518,7 +512,6 @@ public class OxoHelper {
 	}
 
 	public void GuestClickaccount() {
-		
 
 		try {
 			Sync.waitElementClickable("xpath", "(//span[@class='icon-header__account a-icon-text-btn__icon'])[2]");
@@ -540,7 +533,6 @@ public class OxoHelper {
 	}
 
 	public void verifychatbot(String Dataset) {
-		
 
 		try {
 			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
@@ -767,100 +759,61 @@ public class OxoHelper {
 			Sync.waitPageLoad();
 			Sync.waitElementClickable("xpath", "//a[@class='a-logo']");
 			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
-            Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+			Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
 			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
 
 			String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
-			Common.assertionCheckwithReport(answers.contains("Answers"), "validate the Answers options in Chatbox", "Click the Answers option to disaply the related options",
-					"Sucessfully click the answers optionsbuttion", "Unable to click the Answeroption button");
+			Common.assertionCheckwithReport(answers.contains("Answers"), "validate the Answers options in Chatbox",
+					"Click the Answers option to disaply the related options",
+					"Sucessfully click the answers options button", "Unable to click the Answers option button");
 
 			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page",
+					"Open the ChatBot and answers option should be displayed",
+					"Unable click on the ChatBot and answers are not displayed",
+					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+			Assert.fail();
 		}
-			 catch (Exception | Error e) {
-					ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page", "Open the ChatBot and ansers option should be displayed", "Unable click on the ChatBot and answers are not displayed",
-							Common.getscreenShotPathforReport("failed to click on the ChatBot"));
-					Assert.fail();
-			 }
-		
-			 List<WebElement> Answerwebelements=Common.findElements("xpath", "//div[contains(@class,'SearchListItem__details')]");
-			 
-			 ArrayList<String> arrayoptionName=new ArrayList<String>();
-			 
-			 
-			 for(WebElement answernames: Answerwebelements) {
-				 arrayoptionName.add(answernames.getText());
-			 }
-			 
-			String[] items = data.get(DataSet).get("OXOAnswers").split(",");
-		
-			
-			 for (int i = 0;  i < items.length; i++) {
-				 
-				if(arrayoptionName.contains(items[i])) {
-					}
-			 else {
-				
-						ExtenantReportUtils.addFailedLog("validate the Answers options in chatbox", "All the Answer related options are diaplyed ", "Missed the "+items[i] +"options",
-								Common.getscreenShotPathforReport("failed to display answersoptions"));
-						Assert.fail();
-				 }
-			
-				ExtenantReportUtils.addPassLog("Validate the Answers options ", "click the answers options it must display all the options ","Sucessfully displayed the answers options "+arrayoptionName , Common.getscreenShotPathforReport("Answervalidation"));
-				}
-			 
-			 
-			 try {
-			 String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
-				Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
-				Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
-				Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
-				
-				Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
-				String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
 
-				Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
-						"validate the Chat display", "Open the Chat conversation in ChatBot",
-						"Sucessfully click on the ChatBot and display the Chat conversation ",
-						"Unable to dispaly the chat conversation");
+		List<WebElement> Answerwebelements = Common.findElements("xpath",
+				"//div[contains(@class,'SearchListItem__details')]");
 
-				Common.switchToDefault();
+		ArrayList<String> arrayoptionName = new ArrayList<String>();
 
-			} catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("validate the Chat display", "Open the Chat conversation in ChatBot",
-						"Unable click on the ChatBot and Chat conversation is not displayed ",
-						Common.getscreenShotPathforReport("Failed to dispaly the chat conversation"));
+		for (WebElement answernames : Answerwebelements) {
+			arrayoptionName.add(answernames.getText());
+		}
+
+		String[] items = data.get(DataSet).get("OXOAnswers").split(",");
+
+		for (int i = 0; i < items.length; i++) {
+
+			if (arrayoptionName.contains(items[i])) {
+			} else {
+
+				ExtenantReportUtils.addFailedLog("validate the Answers options in chatbox",
+						"All the Answer related options are diaplyed ", "Missed the " + items[i] + "options",
+						Common.getscreenShotPathforReport("failed to display answersoptions"));
 				Assert.fail();
 			}
-			 
-		}			 
-			 
-			
-			 
-			// System.out.println(items[]);
-			 
-			 
-			 
-			 /*for (int i = 0; i <= items.length; i++) {
-				
-				
-					
-					
-				}
-				Assert.assertEquals(searchitems, items[i - 1]);
 
-			}
+			ExtenantReportUtils.addPassLog("Validate the Answers options ",
+					"click the answers options it must display all the options ",
+					"Sucessfully displayed the answers options " + arrayoptionName,
+					Common.getscreenShotPathforReport("Answervalidation"));
+		}
 
+		try {
 			String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
 			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
 			Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
 			Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
-			// Common.isElementDisplayedonPage(30, "xpath",
-			// "//div[contains(@class,'Thread__message')]");
+
 			Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
 			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
 
-			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to Hydro Flask"),
+			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
 					"validate the Chat display", "Open the Chat conversation in ChatBot",
 					"Sucessfully click on the ChatBot and display the Chat conversation ",
 					"Unable to dispaly the chat conversation");
@@ -868,15 +821,56 @@ public class OxoHelper {
 			Common.switchToDefault();
 
 		} catch (Exception | Error e) {
-			ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot", "Unable click on the ChatBot",
-					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validate the Chat display", "Open the Chat conversation in ChatBot",
+					"Unable click on the ChatBot and Chat conversation is not displayed ",
+					Common.getscreenShotPathforReport("Failed to dispaly the chat conversation"));
 			Assert.fail();
-		}*/
+		}
 
-	
-	
-	
-	
+	}
+
+	// System.out.println(items[]);
+
+	/*
+	 * for (int i = 0; i <= items.length; i++) {
+	 * 
+	 * 
+	 * 
+	 * 
+	 * } Assert.assertEquals(searchitems, items[i - 1]);
+	 * 
+	 * }
+	 * 
+	 * String chat = Common.findElement("xpath",
+	 * "//div[contains(@class,'footer__chatContainer')]/p").getText();
+	 * Common.javascriptclickElement("xpath",
+	 * "//div[contains(@class,'footer__chatContainer')]");
+	 * Sync.waitElementClickable(30, "xpath",
+	 * "//button[contains(@class,'CLMcd button')]"); Common.mouseOverClick("xpath",
+	 * "//button[contains(@class,'CLMcd button')]"); //
+	 * Common.isElementDisplayedonPage(30, "xpath", //
+	 * "//div[contains(@class,'Thread__message')]");
+	 * Sync.waitElementVisible("xpath",
+	 * "(//div[contains(@class,'markdownBody')])[1]"); String welcomemsg =
+	 * Common.findElement("xpath",
+	 * "(//div[contains(@class,'markdownBody')])[1]").getText();
+	 * 
+	 * Common.assertionCheckwithReport(chat.contains("Chat") ||
+	 * welcomemsg.contains("Welcome to Hydro Flask"), "validate the Chat display",
+	 * "Open the Chat conversation in ChatBot",
+	 * "Sucessfully click on the ChatBot and display the Chat conversation ",
+	 * "Unable to dispaly the chat conversation");
+	 * 
+	 * Common.switchToDefault();
+	 * 
+	 * } catch (Exception | Error e) {
+	 * ExtenantReportUtils.addFailedLog("validate the ChatBot", "Open the ChatBot",
+	 * "Unable click on the ChatBot",
+	 * Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+	 * Assert.fail(); }
+	 */
+
 	public void click_ChatBot(String DataSet) {
 
 		try {
@@ -1044,7 +1038,7 @@ public class OxoHelper {
 	}
 
 	public void Validating_search() {
-	
+
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
@@ -1072,7 +1066,7 @@ public class OxoHelper {
 	}
 
 	public void headerlinks(String category) {
-		
+
 		String expectedResult = "User should click the" + category;
 		try {
 
@@ -1112,7 +1106,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_freeshipping() {
-	
+
 		try {
 //	        		
 			Sync.waitPageLoad();
@@ -1241,7 +1235,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_update(String Dataset) {
-	
+
 		String quantity = data.get(Dataset).get("Products");
 		try {
 
@@ -1283,7 +1277,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_click_productname() {
-		
+
 		try {
 			String minicartproduct = Common
 					.findElement("xpath", "//div[@class='m-mini-product-card']//a[@class='a-product-name']").getText();
@@ -1304,7 +1298,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_product_close() {
-		
+
 		try {
 			click_minicart();
 			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
@@ -1346,7 +1340,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_viewcart() {
-	
+
 		try {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -1371,7 +1365,7 @@ public class OxoHelper {
 	}
 
 	public void minicart_Checkout() {
-		
+
 		try {
 			click_minicart();
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -1437,7 +1431,7 @@ public class OxoHelper {
 	}
 
 	public void verifypromobanner() {
-		
+
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "(//div[@class='m-promo-banner__container'])[1]").size();
@@ -1454,7 +1448,6 @@ public class OxoHelper {
 	}
 
 	public void CMSpromobanner() {
-		
 
 		try {
 			Sync.waitElementPresent("xpath", "(//div[@class='slick-initialized slick-slider']//a//span)[2]");
@@ -1490,7 +1483,6 @@ public class OxoHelper {
 	}
 
 	public void closepromobanner() {
-	
 
 		try {
 			Common.clickElement("xpath", "//span[@aria-label='Close']");

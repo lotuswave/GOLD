@@ -3,6 +3,7 @@ package TestExecute.OXO.unitTestcase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import TestComponent.OXO.OxoHelper;
@@ -37,13 +38,15 @@ public class Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_ch
 	}
 	
 	
-	@BeforeTest
-	  public void startTest() throws Exception {
-		System.setProperty("configFile", "Oxo\\config.properties");
-		  Login.signIn();
-		 
-		  
-	  }
+	
+	 @BeforeTest
+	 @Parameters("URL")
+	    public void startTest(String URL) throws Exception {
+		 System.setProperty("configFile", "Oxo\\config.properties");
+			   //Login.signIn();
+	          Login.openwebsite(URL);
+
+	      }
 
 
 

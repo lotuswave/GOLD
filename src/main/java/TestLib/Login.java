@@ -108,5 +108,14 @@ public class Login {
 		Common.clickElement("id", "btnLogin");
 	}
 
+	public static void openwebsite(String url) throws Exception{
+        if(BaseDriver.getDriver()==null)
+        {
+            Automation_properties.setInstance(null);
+        automation_properties = Automation_properties.getInstance();
+        driver=BaseDriver.StartBrowser(System.getProperty("browser",automation_properties.getInstance().getProperty(automation_properties.BROWSER)),url);
+        Driver.getLogger().info("Logged in with User: ");
+        }
+    }
 	
 	}

@@ -62,13 +62,13 @@ public class HydroHelper {
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']/a");
 			Common.assertionCheckwithReport(
 					Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
-					"To validate the signIn-buton", "Validate the signIn-button", "Successfully click singIn button",
-					"User unabel to click singup button");
+					"To validate the user navigates to the signin page", "user should able to land on the signIn-button",
+					"User Successfully clicked on the singIn button", "User Failed to click the signin button");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validate the signIn-button ", "User navigating signin page",
-					"Unable to clcik on signin button",
+			ExtenantReportUtils.addFailedLog("To validate the signIn-buton functionality",
+					"User navigating signin page", "Unable to clcik on signin button",
 					Common.getscreenShotPathforReport("Failed to click singup button"));
 			Assert.fail();
 		}
@@ -83,12 +83,14 @@ public class HydroHelper {
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
-					"To validate the user lands on Home page after successfull login", "After clicking on the signin button it should navigate to the home page",
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signin button it should navigate to the home page",
 					"Sucessfully user navigate to the home after clicking on the login button", "User failed to login");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the user lands on Home page after successfull login", "After clicking on the signin button it should navigate to the home page",
+			ExtenantReportUtils.addFailedLog("To validate the user lands on Home page after successfull login",
+					"After clicking on the signin button it should navigate to the home page",
 					"Unable to the user navigate to the home after clicking on the login button",
 					Common.getscreenShotPathforReport("Failed to Login"));
 
@@ -146,7 +148,7 @@ public class HydroHelper {
 							"Validating MyOrders navigation",
 							"after clinking MyOrders CTA it will navigate MyOrders page",
 							"Successfully navigate to MyOrderspage", "Failed to navigate MyOrders page");
-				} else if (names.get(i).contains("MY PRODUCTS SUBSCRIPTIONS")) {
+				} else if (names.get(i).contains("MY PRODUCTS SUBSCRIPTION")) {
 					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
 					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
 					Sync.waitPageLoad();
@@ -159,7 +161,7 @@ public class HydroHelper {
 							"Failed to navigate Myproductssubscriptions page");
 				} else if (names.get(i).contains("SIGN OUT")) {
 					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
-					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[5]/a");
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
 					Sync.waitPageLoad(30);
 					Sync.waitElementVisible("xpath", "//div[contains(@class,'c-hero-block')]");
 
@@ -341,9 +343,9 @@ public class HydroHelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To verify the mini cart is closed or not",
-					"the mini cart is closed", "unable to  close the mini cart",
-							Common.getscreenShotPathforReport("Failed to close the minicart"));
+			ExtenantReportUtils.addFailedLog("To verify the mini cart is closed or not", "the mini cart is closed",
+					"unable to  close the mini cart",
+					Common.getscreenShotPathforReport("Failed to close the minicart"));
 			Assert.fail();
 
 		}
@@ -367,7 +369,7 @@ public class HydroHelper {
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
-			"Should display error Please enter a valid email address.", "Failed to display the error message",
+					"Should display error Please enter a valid email address.", "Failed to display the error message",
 					Common.getscreenShotPathforReport("Failed to see an error message"));
 
 			Assert.fail();
@@ -475,11 +477,12 @@ public class HydroHelper {
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verify the error message when any required fields are missinng will throw an error message",
+			ExtenantReportUtils.addFailedLog(
+					"verify the error message when any required fields are missinng will throw an error message",
 					"Should display the error message as This is a required field.",
 					"Unable to display the required fields Error message",
 					Common.getscreenShotPathforReport("Failed to display the error message"));
-	        Assert.fail();
+			Assert.fail();
 
 		}
 
@@ -537,8 +540,8 @@ public class HydroHelper {
 		} catch (Exception e) {
 
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validate the See Details link", "User Opens the Free Ground Shipping Pop up",
-					"User unable to display Free Ground Shipping Pop up",
+			ExtenantReportUtils.addFailedLog("Validate the See Details link",
+					"User Opens the Free Ground Shipping Pop up", "User unable to display Free Ground Shipping Pop up",
 					Common.getscreenShotPathforReport("Failed to display Free Ground Shipping Pop up"));
 
 			Assert.fail();
@@ -938,7 +941,7 @@ public class HydroHelper {
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to the Homepage",
-			"Sucessfully user back to home page",
+					"Sucessfully user back to home page",
 					Common.getscreenShotPathforReport("faield to get back to homepage"));
 			Assert.fail();
 		}
@@ -1543,8 +1546,8 @@ public class HydroHelper {
 			}
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-           Common.clickElement("xpath", "//span[text()='Add to Bag']");
-		
+			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -1661,24 +1664,22 @@ public class HydroHelper {
 		}
 	}
 
-public void Click_Findstore() {
-	// TODO Auto-generated method stub
+	public void Click_Findstore() {
+		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath", "//a[text()='Find a Store']");
-			
-			
-			String find=Common.findElement("xpath","//h1[@class='u-container']").getText();
+
+			String find = Common.findElement("xpath", "//h1[@class='u-container']").getText();
 			System.out.println(find);
-			
+
 			Common.assertionCheckwithReport(find.equals("Find a Store"), "validating Find a Store page",
 					"user navigates to Find a Store page", "Sucessfully user navigate to Find a Store page",
 					"faield to navigate to Find a Store page");
 
 //			Common.assertionCheckwithReport(errorpopup.equals("display)),"vlaidating the pop up message after submittion","After submit button user able see the error popup","Sucessfully popup message has been diplayed after subit button","Failed to get error message after click on submit button");
-			
-			
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to Find a Store",
@@ -1688,313 +1689,311 @@ public void Click_Findstore() {
 		}
 	}
 
-public void Click_Instock() {
-	// TODO Auto-generated method stub
-	try {
-		   
-		Sync.waitPageLoad();
-		Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
-		Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
-		//Sync.waitElementPresent(20 "xpath", "//a[@id='dealer-navigation-inventory']");
-		Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
+	public void Click_Instock() {
+		// TODO Auto-generated method stub
+		try {
 
-		int stock=Common.findElements("xpath","//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
-		System.out.println(stock);
-		
-		Common.assertionCheckwithReport(stock>0, "validating instock page",
-				"user navigates to instock page", "Sucessfully user navigate to instock page",
-				"faield to navigate to instock page");
-	}	catch (Exception e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating instock page", "System directs the user back to the instock page",
-				"unale user to go  back to thr instock page",
-				Common.getscreenShotPathforReport("failed to get back to instock page"));
-		Assert.fail();
+			Sync.waitPageLoad();
+			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
+			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
+			// Sync.waitElementPresent(20 "xpath",
+			// "//a[@id='dealer-navigation-inventory']");
+			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
+
+			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
+			System.out.println(stock);
+
+			Common.assertionCheckwithReport(stock > 0, "validating instock page", "user navigates to instock page",
+					"Sucessfully user navigate to instock page", "faield to navigate to instock page");
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating instock page",
+					"System directs the user back to the instock page", "unale user to go  back to thr instock page",
+					Common.getscreenShotPathforReport("failed to get back to instock page"));
+			Assert.fail();
+		}
+
 	}
-	
-}
 
-public void selectproduct(String Productname) {
-	// TODO Auto-generated method stub
-try {
+	public void selectproduct(String Productname) {
+		// TODO Auto-generated method stub
+		try {
 
-		
-		Sync.waitElementPresent(40, "xpath", "//h5[text()='"+Productname+"']");
-		Common.scrollIntoView("xpath", "//h5[text()='"+Productname+"']");
-		Common.javascriptclickElement("xpath", "//h5[text()='"+Productname+"']");
-		Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");		
-		Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
-		int product=Common.findElements("xpath","//div[@class='pdp-information']/p[2]").size();
-		System.out.println(product);
-		
-		Common.assertionCheckwithReport(product>0, "validating product listing page",
-				"user navigates to product listing page", "Sucessfully user navigate to product listing page",
-				"faield to navigate to product listing page and unable to see error message");
-		
-		
-		
-		//Common.textBoxInput("xpath", "//input[@class='locally-search location-autocomplete']", data.get(DataSet).get("EnterLocation"));
-	}	catch 	(Exception | Error e) {
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating product listing page", "System directs the user back to the product listing page",
-			"unable user back to product listing page",
-			Common.getscreenShotPathforReport("failed to get back product listing page"));
-		Assert.fail();
-}
-}
+			Sync.waitElementPresent(40, "xpath", "//h5[text()='" + Productname + "']");
+			Common.scrollIntoView("xpath", "//h5[text()='" + Productname + "']");
+			Common.javascriptclickElement("xpath", "//h5[text()='" + Productname + "']");
+			Sync.waitElementVisible("xpath", "//div[@class='stock-status-banner alert success checkmark']");
+			Common.scrollIntoView("xpath", "(//h4[@class='pdp-information-title'])[1]");
+			int product = Common.findElements("xpath", "//div[@class='pdp-information']/p[2]").size();
+			System.out.println(product);
 
-public void click_Retailer() {
-	// TODO Auto-generated method stub
-	String store="DICK'S Sporting Goods  - San Antonio | Curbside Contactless Pickup Available - 5.3 mi";
-	try {
-		
-		
-		Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");	
-		
-		Sync.waitPageLoad();
-		Thread.sleep(5000);
-	  String id= Common.findElement("xpath", "//div[@aria-label=\""+store+" \"]").getAttribute("id");
-		
-		Common.findElement("xpath", "//div[@id='"+id+"']").click();
-		Sync.waitElementPresent("xpath","//img[@class='store-info-logo']");
-		int storeSize=Common.findElements("xpath","//img[@class='store-info-logo']").size();
-		System.out.println(storeSize);
-		Common.assertionCheckwithReport(storeSize>0, "validating Retailers page",
-				"user navigates to Retailers page", "Sucessfully user navigate to Retailers page",
-				"faield to navigate to Retailers page");
-	
-} catch (Exception | Error e) {
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating Retailers page", "System directs the user back to Retailers page",
-			"unable to user go back to Retailers page",
-			Common.getscreenShotPathforReport("faield to get back to Retailers page"));
-	Assert.fail();
-}
-}
+			Common.assertionCheckwithReport(product > 0, "validating product listing page",
+					"user navigates to product listing page", "Sucessfully user navigate to product listing page",
+					"faield to navigate to product listing page and unable to see error message");
 
-public void click_Links() {
-	// TODO Auto-generated method stub
-try {
-		
-	Sync.waitElementPresent(40, "xpath", "//span[text()='Links']");	
-		Common.findElement("xpath", "//span[text()='Links']").click();
-	
-		 int links=Common.findElements("xpath","//section[@id='conv-store-tab-links']").size();
-		
-		//int browser=Common.findElements("xpath","//div[@id='clp-container']").size();
-		System.out.println(links);
-		Common.assertionCheckwithReport(links>0, "validating Links page",
-				"user navigates to Links page", "Sucessfully user navigate to Links page",
-				"faield to navigate to Links page");
-		
-		
-		
-		//Common.textBoxInput("xpath", "//input[@class='locally-search location-autocomplete']", data.get(DataSet).get("EnterLocation"));
-	}	catch 	(Exception | Error e) {
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating Links page", "System directs the user back to the Links page",
-			"unable to user go back to the Links page",
-			Common.getscreenShotPathforReport("failed to get back to Links page"));
-		Assert.fail();
-}
-}
-public void verifingRetailerHours() {
-    // TODO Auto-generated method stub
-    String hours="hours";
-    try {
-
-    	Common.findElement("xpath", "//a[@aria-label='"+hours+"']").click();
-        Sync.waitPageLoad();
-        Sync.waitElementPresent("xpath","//div[@class='store-hours-days']");
-        int hoursSize=Common.findElements("xpath","//div[@class='store-hours-days']").size();
-        Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-        Thread.sleep(3000);
-        Common.assertionCheckwithReport(hoursSize>0, "validating hours page",
-                "user navigates to Hours page ", "Successfully user navigate to hours page",
-                "faield to navigate to hours page");
-
-} catch (Exception | Error e) {
-    e.printStackTrace();
-    ExtenantReportUtils.addFailedLog("validating hours page", "System directs the user back to the hours page",
-            "unable to user back to the hours page",
-			Common.getscreenShotPathforReport("Failed to get back to hours page"));
-  
-    Assert.fail();
-}
-}
-public void verifingRetailerBrowser() {
-    // TODO Auto-generated method stub
-    String browse="Browse";
-    try {
-    	Common.findElement("xpath", "//a[@aria-label='"+browse+"']").click();
-        Sync.waitPageLoad();
-        Sync.waitElementPresent("xpath","//div[@class='cat-active-filter-container']");
-        int filterSize=Common.findElements("xpath","//div[@class='cat-active-filter-container']").size();
-      //  String inStock = Common.findElement("xpath", "//div[text()='In Stock']").getText(); && inStock.equals("In Stock")
-       
-        Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-        Sync.waitPageLoad();
-        Thread.sleep(3000);
-        Common.assertionCheckwithReport(filterSize>0, "validating browser page",
-                "user navigates to Browsers page", "Sucessfully user navigate to browser page",
-                "faield to navigate to browser page");
-
-} catch (Exception | Error e) {
-    e.printStackTrace();
-    ExtenantReportUtils.addFailedLog("validating browser page", "System directs the user back to the Browser page",
-            "failed user back to the browser page",
-			Common.getscreenShotPathforReport("Failed to get back to browser page"));
-    Assert.fail();
-}
-}
-public void Validate_store_sidebar() {
-	try {
-		Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
-		Sync.waitElementPresent("id", "conversion-sidebar");
-		int RetailersTab = Common.findElements("id", "dealer-navigation-retailers").size();
-		int InstockTab = Common.findElements("id", "dealer-navigation-inventory").size();
-		int Locationsearch = Common.findElements("xpath", "//input[@name='location']").size();
-		int UsemylocationCTA = Common.findElements("xpath", "//a[@id='current-location-detector']").size();
-		int Retailersmap = Common.findElements("xpath", "//div[contains(@id,'marker-index')]").size();
-		System.out.println(Retailersmap);
-		Common.assertionCheckwithReport(RetailersTab>0 && InstockTab>0 && Locationsearch>0 && UsemylocationCTA>0 && Retailersmap>0 ,
-				"validating Store locator side bar ", "Should visible the RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
-				"RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap displayed", "Failed to land on store locator page");
-		Common.switchToDefault();
-		
-	}catch(Exception e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating Store locator side bar ", "Should visible the RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
-				"failed to display RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
-				Common.getscreenShotPathforReport("faield to display the tabs"));
-		Assert.fail();
+			// Common.textBoxInput("xpath", "//input[@class='locally-search
+			// location-autocomplete']", data.get(DataSet).get("EnterLocation"));
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating product listing page",
+					"System directs the user back to the product listing page",
+					"unable user back to product listing page",
+					Common.getscreenShotPathforReport("failed to get back product listing page"));
+			Assert.fail();
+		}
 	}
-	
-}
 
-public void CLick_Usemylocation() {
-	try {
-		Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
-		Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
-		Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
-		Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
-		Common.scrollIntoView("id", "current-location-indicator");
-		int currentlocation = Common.findElements("id", "current-location-indicator").size();
-		
-		String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
-		Common.assertionCheckwithReport( currentlocation>0 && address.contains("TX"),
-				"validating current location ", "Should visible retailers in the current location",
-				"Current location Displayed", "Failed to display the current location");
-		
-		
-		
+	public void click_Retailer() {
+		// TODO Auto-generated method stub
+		String store = "DICK'S Sporting Goods  - San Antonio | Curbside Contactless Pickup Available - 5.3 mi";
+		try {
 
-} catch (Exception | Error e) {
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating Users based on Current Location", "To display the retailers for the current location",
-			"Failed to display retailers for the current location",
-			Common.getscreenShotPathforReport("faield to display the retailers for current location"));
-	Assert.fail();
-}
+			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
 
-}
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			String id = Common.findElement("xpath", "//div[@aria-label=\"" + store + " \"]").getAttribute("id");
 
-public void Validate_AvailableRetailers() {
-try {
-	Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
+			Common.findElement("xpath", "//div[@id='" + id + "']").click();
+			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
+			int storeSize = Common.findElements("xpath", "//img[@class='store-info-logo']").size();
+			System.out.println(storeSize);
+			Common.assertionCheckwithReport(storeSize > 0, "validating Retailers page",
+					"user navigates to Retailers page", "Sucessfully user navigate to Retailers page",
+					"faield to navigate to Retailers page");
 
-	Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
-	int retailers = Common.findElements("xpath", "//div[contains(@class,'store dl-store-list-tile')]").size();
-	if(retailers>0) {
-	Common.assertionCheckwithReport(retailers>0,
-			"To validate the available retailers", "Retailers should be available",
-			"Retailers are available", "Failed to display the retailers");
-	}else {
-		Sync.waitElementVisible("xpath", "//input[@name='location']");
-		Common.textBoxInput("xpath", "//input[@name='location']", "CT 06473");
-		Common.actionsKeyPress(Keys.ENTER);
-		Sync.waitElementVisible(30, "xpath", "//h3[@class='section-title dl-store-name']");
-		int locationRetailers = Common.findElements("xpath", "//h3[@class='section-title dl-store-name']").size();
-		
-		Common.assertionCheckwithReport(locationRetailers>0,
-				"To validate the available retailers for new location", "Retailers should be available for new location",
-				"Retailers are available for new location", "Failed to display the retailers for new location");
-		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Retailers page",
+					"System directs the user back to Retailers page", "unable to user go back to Retailers page",
+					Common.getscreenShotPathforReport("faield to get back to Retailers page"));
+			Assert.fail();
+		}
 	}
-	
 
-} catch (Exception | Error e) {
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating available retailers page", "retailers should be visible for the given location",
-			"Failed to display retailers for the given location",
-			Common.getscreenShotPathforReport("faield to display the available retailers"));
-	Assert.fail();
-}
+	public void click_Links() {
+		// TODO Auto-generated method stub
+		try {
 
-}
+			Sync.waitElementPresent(40, "xpath", "//span[text()='Links']");
+			Common.findElement("xpath", "//span[text()='Links']").click();
 
+			int links = Common.findElements("xpath", "//section[@id='conv-store-tab-links']").size();
 
-public void Validate_retailerlocations() {
-try {
-	Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
-	Sync.waitElementVisible("xpath", "//div[@class='square-image-container']");
-	int Retailerlogo = Common.findElements("xpath", "//div[@class='square-image-container']").size();
-	int locations = Common.findElements("xpath", "//a[contains(@class,'tab-locations')]").size();
-	int Hours = Common.findElements("xpath", "//a[contains(@class,'tab-hours')]").size();
-	int Links = Common.findElements("xpath", "//a[contains(@class,'tab-links')]").size();
-	Common.assertionCheckwithReport(Retailerlogo>0 && locations>0 && Hours>0 || Links>0,
-			"To validate the store info content displayed ", "store info content should be displayed",
-			"store info content is displayed", "Failed to display the store info content ");
-	String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText();
-	System.out.println(Storename);
-	Common.javascriptclickElement("xpath", "//a[contains(@class,'tab-locations')]");
-	
-	int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
-	System.out.println(storecount);
-	for(int i=1;i<=storecount;i++) {
-	
-		String relatedstores = Common.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)["+i+"]").getText();
-		System.out.println(relatedstores);
-		Common.assertionCheckwithReport(relatedstores.contains(Storename),
-			"To validate the retailer stores displayed ", "Retailer stores should be displayed",
-			"Retailer stores are displayed", "Failed to display the retailer stores ");
-	
-	
+			// int browser=Common.findElements("xpath","//div[@id='clp-container']").size();
+			System.out.println(links);
+			Common.assertionCheckwithReport(links > 0, "validating Links page", "user navigates to Links page",
+					"Sucessfully user navigate to Links page", "faield to navigate to Links page");
+
+			// Common.textBoxInput("xpath", "//input[@class='locally-search
+			// location-autocomplete']", data.get(DataSet).get("EnterLocation"));
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Links page", "System directs the user back to the Links page",
+					"unable to user go back to the Links page",
+					Common.getscreenShotPathforReport("failed to get back to Links page"));
+			Assert.fail();
+		}
 	}
-	Common.switchToDefault();		
 
-} catch (Exception | Error e) {
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating available retailer store locations", "retailers store locations should be visible",
-			"Failed to display retailers store locations",
-			Common.getscreenShotPathforReport("faield to display retailer store locations"));
-	Assert.fail();
-}
+	public void verifingRetailerHours() {
+		// TODO Auto-generated method stub
+		String hours = "hours";
+		try {
 
-}
+			Common.findElement("xpath", "//a[@aria-label='" + hours + "']").click();
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@class='store-hours-days']");
+			int hoursSize = Common.findElements("xpath", "//div[@class='store-hours-days']").size();
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(hoursSize > 0, "validating hours page", "user navigates to Hours page ",
+					"Successfully user navigate to hours page", "faield to navigate to hours page");
 
-public void Click_Storelocator() {
-	try {
-		Common.scrollIntoView("xpath", "//a[text()='Find a Store']");
-		Common.mouseOverClick("xpath", "//a[text()='Find a Store']");
-		Sync.waitPageLoad(30);
-		Sync.waitElementVisible("xpath", "//h1[@class='u-container']");
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("storelocator"),
-				"To validate the Store locator page", "User should land on store locator page",
-				"Successfully landed on store locator page", "Failed to land on store locator page");
-		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating hours page", "System directs the user back to the hours page",
+					"unable to user back to the hours page",
+					Common.getscreenShotPathforReport("Failed to get back to hours page"));
 
-	} catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating storelocator page", "User should land on Store locator page",
-				"User lands on the store locator page",
-				Common.getscreenShotPathforReport("faield navigation to store locator page"));
-		Assert.fail();
+			Assert.fail();
+		}
 	}
+
+	public void verifingRetailerBrowser() {
+		// TODO Auto-generated method stub
+		String browse = "Browse";
+		try {
+			Common.findElement("xpath", "//a[@aria-label='" + browse + "']").click();
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@class='cat-active-filter-container']");
+			int filterSize = Common.findElements("xpath", "//div[@class='cat-active-filter-container']").size();
+			// String inStock = Common.findElement("xpath", "//div[text()='In
+			// Stock']").getText(); && inStock.equals("In Stock")
+
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(filterSize > 0, "validating browser page",
+					"user navigates to Browsers page", "Sucessfully user navigate to browser page",
+					"faield to navigate to browser page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating browser page",
+					"System directs the user back to the Browser page", "failed user back to the browser page",
+					Common.getscreenShotPathforReport("Failed to get back to browser page"));
+			Assert.fail();
+		}
+	}
+
+	public void Validate_store_sidebar() {
+		try {
+			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
+			Sync.waitElementPresent("id", "conversion-sidebar");
+			int RetailersTab = Common.findElements("id", "dealer-navigation-retailers").size();
+			int InstockTab = Common.findElements("id", "dealer-navigation-inventory").size();
+			int Locationsearch = Common.findElements("xpath", "//input[@name='location']").size();
+			int UsemylocationCTA = Common.findElements("xpath", "//a[@id='current-location-detector']").size();
+			int Retailersmap = Common.findElements("xpath", "//div[contains(@id,'marker-index')]").size();
+			System.out.println(Retailersmap);
+			Common.assertionCheckwithReport(
+					RetailersTab > 0 && InstockTab > 0 && Locationsearch > 0 && UsemylocationCTA > 0
+							&& Retailersmap > 0,
+					"validating Store locator side bar ",
+					"Should visible the RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
+					"RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap displayed",
+					"Failed to land on store locator page");
+			Common.switchToDefault();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Store locator side bar ",
+					"Should visible the RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
+					"failed to display RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
+					Common.getscreenShotPathforReport("faield to display the tabs"));
+			Assert.fail();
+		}
+
+	}
+
+	public void CLick_Usemylocation() {
+		try {
+			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
+			Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
+			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
+			Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
+			Common.scrollIntoView("id", "current-location-indicator");
+			int currentlocation = Common.findElements("id", "current-location-indicator").size();
+
+			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
+			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
+					"validating current location ", "Should visible retailers in the current location",
+					"Current location Displayed", "Failed to display the current location");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Users based on Current Location",
+					"To display the retailers for the current location",
+					"Failed to display retailers for the current location",
+					Common.getscreenShotPathforReport("faield to display the retailers for current location"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Validate_AvailableRetailers() {
+		try {
+			Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
+
+			Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
+			int retailers = Common.findElements("xpath", "//div[contains(@class,'store dl-store-list-tile')]").size();
+			if (retailers > 0) {
+				Common.assertionCheckwithReport(retailers > 0, "To validate the available retailers",
+						"Retailers should be available", "Retailers are available", "Failed to display the retailers");
+			} else {
+				Sync.waitElementVisible("xpath", "//input[@name='location']");
+				Common.textBoxInput("xpath", "//input[@name='location']", "CT 06473");
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitElementVisible(30, "xpath", "//h3[@class='section-title dl-store-name']");
+				int locationRetailers = Common.findElements("xpath", "//h3[@class='section-title dl-store-name']")
+						.size();
+
+				Common.assertionCheckwithReport(locationRetailers > 0,
+						"To validate the available retailers for new location",
+						"Retailers should be available for new location", "Retailers are available for new location",
+						"Failed to display the retailers for new location");
+
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating available retailers page",
+					"retailers should be visible for the given location",
+					"Failed to display retailers for the given location",
+					Common.getscreenShotPathforReport("faield to display the available retailers"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Validate_retailerlocations() {
+		try {
+			Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
+			Sync.waitElementVisible("xpath", "//div[@class='square-image-container']");
+			int Retailerlogo = Common.findElements("xpath", "//div[@class='square-image-container']").size();
+			int locations = Common.findElements("xpath", "//a[contains(@class,'tab-locations')]").size();
+			int Hours = Common.findElements("xpath", "//a[contains(@class,'tab-hours')]").size();
+			int Links = Common.findElements("xpath", "//a[contains(@class,'tab-links')]").size();
+			Common.assertionCheckwithReport(Retailerlogo > 0 && locations > 0 && Hours > 0 || Links > 0,
+					"To validate the store info content displayed ", "store info content should be displayed",
+					"store info content is displayed", "Failed to display the store info content ");
+			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText();
+			System.out.println(Storename);
+			Common.javascriptclickElement("xpath", "//a[contains(@class,'tab-locations')]");
+
+			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
+			System.out.println(storecount);
+			for (int i = 1; i <= storecount; i++) {
+
+				String relatedstores = Common
+						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
+						.getText();
+				System.out.println(relatedstores);
+				Common.assertionCheckwithReport(relatedstores.contains(Storename),
+						"To validate the retailer stores displayed ", "Retailer stores should be displayed",
+						"Retailer stores are displayed", "Failed to display the retailer stores ");
+
+			}
+			Common.switchToDefault();
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating available retailer store locations",
+					"retailers store locations should be visible", "Failed to display retailers store locations",
+					Common.getscreenShotPathforReport("faield to display retailer store locations"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Click_Storelocator() {
+		try {
+			Common.scrollIntoView("xpath", "//a[text()='Find a Store']");
+			Common.mouseOverClick("xpath", "//a[text()='Find a Store']");
+			Sync.waitPageLoad(30);
+			Sync.waitElementVisible("xpath", "//h1[@class='u-container']");
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("storelocator"),
+					"To validate the Store locator page", "User should land on store locator page",
+					"Successfully landed on store locator page", "Failed to land on store locator page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating storelocator page", "User should land on Store locator page",
+					"User lands on the store locator page",
+					Common.getscreenShotPathforReport("faield navigation to store locator page"));
+			Assert.fail();
+		}
+	}
+
 }
-
-
-}
-
-	
-

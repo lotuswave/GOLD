@@ -3,6 +3,7 @@ package TestExecute.Hydroflask.unitTestcase;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.HydroHelper;
@@ -15,7 +16,7 @@ public class Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewsconten
 	HydroHelper Hydro = new HydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_authenticateduser_viewscontent() throws Exception {
+	public void Validate_authenticateduser_views_headercontent() throws Exception {
 
 		try {
 			Hydro.click_singinButton();
@@ -37,12 +38,14 @@ public class Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewsconten
 
 	}
 
-	@BeforeTest
-	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
+	 @BeforeTest
+	 @Parameters("URL")
+	    public void startTest(String URL) throws Exception {
+			System.setProperty("configFile", "Hydroflask\\config.properties");
+   //Login.signIn();
+	          Login.openwebsite(URL);
 
-		Login.signIn();
+	      }
 
-	}
 
 }

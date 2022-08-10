@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Demo Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    <test name="Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content" testid="DTG-800" priority="P1" description="This script will configure the Promo media card content on the Admin Panel and verify the content on the front end">
+        <parameter name="URL" value="https://na-stage.hele.digital/heledigitaladmin" />
+       
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content"/>
+        </classes>
+        </test>
+        
+          <test name="Test_DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer" testid="DTG-667" priority="P1" description="This script will cover validating the Add New Customer with alternative path by Admin">
+       <parameter name="URL" value="https://na-stage.hele.digital/heledigitaladmin" />
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer"/>
+        </classes>
+        </test>  
+        
+        <test name="Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewscontent" testid="DTG-694" priority="P1" description="This script will cover validating the Authenticated User views Header content">
+       <parameter name="URL" value="https://mcloud-na-stage.hydroflask.com" />
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewscontent"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_chat_options" testid="DTG-707" priority="P1" description="This script is to validate the Answer and Chat options in Chat Bot.">
+       <parameter name="URL" value="https://mcloud-na-stage.oxo.com" />
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_chat_options"/>
+        </classes>
+        </test>
+        
+        
+</suite>  
