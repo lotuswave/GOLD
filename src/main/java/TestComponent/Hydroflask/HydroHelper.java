@@ -708,43 +708,46 @@ public class HydroHelper {
 			Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
 			Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(DataSet).get("FirstName"));
 
-			Sync.waitElementPresent("xpath", "//input[@id='lastName']");
-			Common.textBoxInput("xpath", "//input[@id='lastName']", data.get(DataSet).get("LastName"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationLastName']");
+			Common.textBoxInput("xpath", "//input[@id='conversationLastName']", data.get(DataSet).get("LastName"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='company']");
-			Common.textBoxInput("xpath", "//input[@name='company']", data.get(DataSet).get("Company"));
+			Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
+			Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(DataSet).get("Company"));
 
-			Sync.waitElementPresent("xpath", "//input[@id='primary']");
-			Common.textBoxInput("xpath", "//input[@id='primary']", data.get(DataSet).get("phone"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationPrimary']");
+			Common.textBoxInput("xpath", "//input[@id='conversationPrimary']", data.get(DataSet).get("phone"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='street']");
-			Common.textBoxInput("xpath", "//input[@name='street']", data.get(DataSet).get("Street"));
+			Sync.waitElementPresent("xpath", "//input[@name='conversationStreet']");
+			Common.textBoxInput("xpath", "//input[@name='conversationStreet']", data.get(DataSet).get("Street"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='city']");
-			Common.textBoxInput("xpath", "//input[@name='city']", data.get(DataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
+			Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(DataSet).get("City"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='city']");
-			Common.clickElement("xpath", "//div[@id='country']");
+			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
+			Common.clickElement("xpath", "//input[@name='conversationCountry']");
 
-			Sync.waitElementPresent("xpath", "//div[@value='united-states']//span[contains(text(),'United States')]");
-			Common.clickElement("xpath", "//div[@value='united-states']//span[contains(text(),'United States')]");
+			Sync.waitElementPresent("xpath", "//div[text()='United States']");
+			Common.clickElement("xpath", "//div[text()='United States']");
 
-			Sync.waitElementPresent("xpath", "//input[@id='zipPostalCode']");
-			Common.textBoxInput("xpath", "//input[@id='zipPostalCode']", data.get(DataSet).get("postcode"));
+		
 
-			Sync.waitElementPresent("xpath", "//div[@id='stateOrProvince']");
-			Common.clickElement("xpath", "//div[@id='stateOrProvince']");
+			Sync.waitElementPresent("xpath", "//input[@name='conversationState']");
+			Common.clickElement("xpath", "//input[@name='conversationState']");
 
-			Sync.waitElementPresent("xpath", "//span[text()='Alabama']");
-			Common.clickElement("xpath", "//span[text()='Alabama']");
+			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
+			Common.clickElement("xpath", "//div[text()='Alabama']");
+			
+			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCode']");
+			Common.textBoxInput("xpath", "//input[@name='conversationZipCode']", data.get(DataSet).get("postcode"));
 
-			Sync.waitElementPresent("xpath", "//div[@id='howCanWeHelp']");
-			Common.clickElement("xpath", "//div[@id='howCanWeHelp']");
-			Common.clickElement("xpath", "//span[text()='Order Issues']");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
+			Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
+			
+			Common.clickElement("xpath", "//div[text()='Order Issues']");
 
-			Sync.waitElementPresent("xpath", "//div[@id='selectACategory']");
-			Common.clickElement("xpath", "//div[@id='selectACategory']");
-			Common.clickElement("xpath", "//span[text()='Billing Issue']");
+			Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
+			//Common.clickElement("xpath", "//div[@id='selectACategory']");
+			Common.clickElement("xpath", "//div[text()='Billing Issue']");
 
 			Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
 			Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
@@ -753,8 +756,8 @@ public class HydroHelper {
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
 			Common.clickElement("xpath", "//button[text()='Submit']");
 
-			Sync.waitElementPresent("xpath", "//div[@class='form-modal-success']");
-			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-modal-success']").size();
+			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
 					"Success message should be Displayed", "Contact us Success message displayed ",
 					"failed to dispaly success message");
@@ -2031,4 +2034,82 @@ public class HydroHelper {
 		}
 	}
 
-}
+	
+	public void Validate_eyeicon(String DateSet) {
+		// TODO Auto-generated method stub
+		try {
+		
+			Thread.sleep(3000);
+			Common.textBoxInput("id", "email", data.get(DateSet).get("UserName"));
+			Common.textBoxInput("id", "pass", data.get(DateSet).get("Password"));
+			String eyeicon=Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+			  System.out.println(eyeicon);
+			  String password= Common.findElement("xpath", "//input[@name='login[password]']").getAttribute("type");
+			  
+			  Common.assertionCheckwithReport(eyeicon.contains("hide")&&password.equals("password"), "validating eye icon password filed",
+						"Eye icon is in hide", "Sucessfully displays eyeicon hide",
+						"faield to display eye icon hide");
+			  Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']"); 
+			  String Eyeicon=Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+			  System.out.println(Eyeicon);
+			  String Text= Common.findElement("xpath", "//input[@name='login[password]']").getAttribute("type");
+			  Common.assertionCheckwithReport(Eyeicon.contains("show")&&Text.equals("text"), "validating eye icon password field",
+						"Eye icon is in hide", "Sucessfully displays eyeicon hide",
+						"faield to display eye icon hide");
+			  
+
+
+		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating login page", "user directs to login page",
+					"Sucessfully directs thelogin page",
+					Common.getscreenShotPathforReport("faield to login the page"));
+			Assert.fail();
+			
+		
+		
+	}
+	}
+	public void validate_signin() {
+		try {
+		Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
+				"To validate the user lands on Home page after successfull login", "Should land on Home Page",
+				"User lands on Home Page", "User failed to login");
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validate the User is able to login", "Should login into user Account sucessfully",
+				" sucessfully login to the account", Common.getscreenShotPathforReport("User is unable to login"));
+
+		Assert.fail();
+	}
+	}
+
+	public void signout() {
+		try {
+		Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementClickable("xpath", "(//a[text()='Sign Out'])[2]");
+		
+
+			Common.javascriptclickElement("xpath", "(//a[text()='Sign Out'])[2]");
+			
+			Common.assertionCheckwithReport(Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
+					"Validating My Account page navigation",
+					"user sign in and navigate to my account page",
+					"Successfully navigate to my account page", "Failed to navigate my account page ");
+		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+					"after clinking signout user signout fro the page",
+					"user Successfully signout  ",
+					Common.getscreenShotPathforReport("user Failed to signout"));
+			Assert.fail();
+		}	
+
+		
+	}}

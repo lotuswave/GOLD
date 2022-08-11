@@ -1498,5 +1498,60 @@ public class OxoHelper {
 			Assert.fail();
 		}
 	}
+	public void Validate_eyeicon(String DateSet) {
+		// TODO Auto-generated method stub
+		try {
+		
+               
+			
+			
+			Thread.sleep(3000);
+			Common.textBoxInput("id", "email", data.get(DateSet).get("Email1"));
+			Common.textBoxInput("id", "pass", data.get(DateSet).get("Password1"));
+			String eyeicon=Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+			  System.out.println(eyeicon);
+			  String password= Common.findElement("xpath", "//input[@name='login[password]']").getAttribute("type");
+			  
+			  Common.assertionCheckwithReport(eyeicon.contains("hide")&&password.equals("password"), "validating eye icon password filed",
+						"Eye icon is in hide", "Sucessfully displays eyeicon hide",
+						"faield to display eye icon hide");
+			  Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']"); 
+			  String Eyeicon=Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+			  System.out.println(Eyeicon);
+			  String Text= Common.findElement("xpath", "//input[@name='login[password]']").getAttribute("type");
+			  Common.assertionCheckwithReport(Eyeicon.contains("show")&&Text.equals("text"), "validating eye icon password field",
+						"Eye icon is in hide", "Sucessfully displays eyeicon hide",
+						"faield to display eye icon hide");
+			  
 
+
+		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating login page", "user directs to login page",
+					"Sucessfully directs thelogin page",
+					Common.getscreenShotPathforReport("faield to login the page"));
+			Assert.fail();
+			
+		
+		
+	}
+	}
+	public void validate_signin() {
+		// TODO Auto-generated method stub
+		try {
+		Common.clickElement("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getPageTitle().contains("OXO Home Page"),
+				"To validate the user lands on Home page after successfull login", "Should land on Home Page",
+				"User lands on Home Page", "User failed to login");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating user login ", "user directs to login page",
+					"Sucessfully user the login page",
+					Common.getscreenShotPathforReport("user faield to login the page"));
+			Assert.fail();
+		
+	}}
 }
