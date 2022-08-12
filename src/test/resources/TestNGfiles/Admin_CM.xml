@@ -3,163 +3,182 @@
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
-   	  
-             <test name="Validate_The_customer_Grid" testid="DTG-665" priority="P1" description="This script will cover validating Customer grid">
+    
+             <test name="Test_DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid" testid="DTG-665" priority="P1" description="This script will cover validating Customer grid">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid"/>
         </classes>
         </test>   
  
-           <test name="Validate_add_new_customer" testid="DTG-667" priority="P1" description="This script will cover validating new  Customer">
+           <test name="Test_DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer" testid="DTG-667" priority="P1" description="This script will cover validating new  Customer">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer"/>
         </classes>
         </test>    
          
-          <test name="Validate_edit_customer" testid="DTG-666" priority="P1" description="This script will cover validating Edit Customer ">
+          <test name="Test_DGLD_Admin_CM_002_AlternatePath_Admin_Updates_Customers_Information" testid="DTG-666" priority="P1" description="This script will cover validating Edit Customer ">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_002_AlternatePath_Admin_Updates_Customers_Information"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_002_AlternatePath_Admin_Updates_Customers_Information"/>
         </classes>
         </test>   
         
 
-        <test name="Validate_delete_customer" testid="DTG-668" priority="P1" description="This script will cover validating Delete Customer ">
+        <test name="Test_DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer" testid="DTG-668" priority="P1" description="This script will cover validating Delete Customer ">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer"/>
         </classes>
         </test> 
         
-        <test name="Validate_Admin_creates_Newcustomergroup" testid="DTG-672" priority="P1" description="This script will cover validating Create new Customer group">
+        <test name="Test_DGLD_Admin_CM_008_AlternatePath_Admin_Creates_NewCustomerGroup" testid="DTG-672" priority="P1" description="This script will cover validating Create new Customer group">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_008_AlternatePath_Admin_Creates_NewCustomerGroup"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_008_AlternatePath_Admin_Creates_NewCustomerGroup"/>
         </classes>
         </test> 
-         <test name="Validate_Admin_Updates_Newcustomergroup" testid="DTG-673" priority="P1" description="This script will cover validating Edit new Customer group">
+         <test name="Test_DGLD_Admin_CM_009_AlternatePath_Admin_UpdateCustomerGroup" testid="DTG-673" priority="P1" description="This script will cover validating Edit new Customer group">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_009_AlternatePath_Admin_UpdateCustomerGroup"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_009_AlternatePath_Admin_UpdateCustomerGroup"/>
         </classes>
         </test>  
 
-           <test name="Validate_Admin_delete_Newcustomergroup" testid="DTG-674" priority="P1" description="This script will cover validating Delete new Customer group">
+           <test name="Test_DGLD_Admin_CM_010_AlternatePath_Admin_Delete_CustomerGroup" testid="DTG-674" priority="P1" description="This script will cover validating Delete new Customer group">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_010_AlternatePath_Admin_Delete_CustomerGroup"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_010_AlternatePath_Admin_Delete_CustomerGroup"/>
         </classes>
         </test>   
         
-     <test name="Validate_new_customer_segment" testid="DTG-669" priority="P1" description="This script will cover validating New Customer Segment">
+     <test name="Test_DGLD_Admin_CM_005_AlternatePath_Admin_Creates_a_New_Customer_Segment" testid="DTG-669" priority="P1" description="This script will cover validating New Customer Segment">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_005_AlternatePath_Admin_Creates_a_New_Customer_Segment"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_005_AlternatePath_Admin_Creates_a_New_Customer_Segment"/>
         </classes>
         </test>   
-          <test name="Validate_edit_customer_segment" testid="DTG-670" priority="P1" description="This script will cover validating Edit Customer Segment">
+          <test name="Test_DGLD_Admin_CM_006_AlternatePath_Admin_Edits_a_Customer_Segment" testid="DTG-670" priority="P1" description="This script will cover validating Edit Customer Segment">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_006_AlternatePath_Admin_Edits_a_Customer_Segment"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_006_AlternatePath_Admin_Edits_a_Customer_Segment"/>
         </classes>
         </test>  
-         <test name="Validate_delete_customer_segment" testid="DTG-671" priority="P1" description="This script will cover validating Delete Customer Segment">
+         <test name="Test_DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment" testid="DTG-671" priority="P1" description="This script will cover validating Delete Customer Segment">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment"/>
         </classes>
         </test> 
         
-          <test name="Validate_Adds_New_Country_Language" testid="DTG-726" priority="P1" description="This script will cover validating Adds New Country Language">
+          <test name="Test_DGLD_Admin_CLSM_022_AlternatePath_Admin_Adds_New_Country_Language" testid="DTG-726" priority="P1" description="This script will cover validating Adds New Country Language">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CLSM_022_AlternatePath_Admin_Adds_New_Country_Language"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CLSM_022_AlternatePath_Admin_Adds_New_Country_Language"/>
         </classes>
         </test>  
         
-        <test name="Validating_Edits_Country_Language" testid="DTG-734" priority="P1" description="This script will cover validating  Edits Country Language">
+        <test name="Test_DGLD_Admin_CLSM_024_AlternatePath_Admin_Edits_Country_Language" testid="DTG-734" priority="P1" description="This script will cover validating  Edits Country Language">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CLSM_024_AlternatePath_Admin_Edits_Country_Language"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CLSM_024_AlternatePath_Admin_Edits_Country_Language"/>
         </classes>
         </test>  
        
-         <test name="Validating_Deletes_Country_Language" testid="DTG-736" priority="P1" description="This script will cover validating Deletes Country Language">
+         <test name="Test_DGLD_Admin_CLSM_026_AlternatePath_Admin_Deletes_Country_Language" testid="DTG-736" priority="P1" description="This script will cover validating Deletes Country Language">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CLSM_026_AlternatePath_Admin_Deletes_Country_Language"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CLSM_026_AlternatePath_Admin_Deletes_Country_Language"/>
         </classes>
         </test>
         
 
-       <test name="Validating_Promo_Content_Product_Close_functionality" testid="DTG-754" priority="P1" description="This script will cover validating Promo Content Product Close functionality">
+       <test name="Test_DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality" testid="DTG-754" priority="P1" description="This script will cover validating Promo Content Product Close functionality">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functionality"/>
         </classes>
         </test>
         
         
-        <test name="Validating_Promo_Block_Components_Background_Video" testid="DTG-760" priority="P1" description="This script will cover validating the Promo Block Components Background Video">
+        <test name="Test_DGLD_Admin_PB_050_Verify_the_Promo_Block_Components_Background_Video" testid="DTG-760" priority="P1" description="This script will cover validating the Promo Block Components Background Video">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_PB_050_Verify_the_Promo_Block_Components_Background_Video"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_PB_050_Verify_the_Promo_Block_Components_Background_Video"/>
         </classes>
         </test>
         
-        <test name="Validating_PromoBlock_Media_Card_Background_Image" testid="DTG-758" priority="P1" description="This script will cover validating PromoBlock Media Card Background Image">
+        <test name="Test_DGLD_Admin_Promo_048_Verify_PromoBlock_Media_Card_Background_Image" testid="DTG-758" priority="P1" description="This script will cover validating PromoBlock Media Card Background Image">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_Promo_048_Verify_PromoBlock_Media_Card_Background_Image"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_Promo_048_Verify_PromoBlock_Media_Card_Background_Image"/>
         </classes>
         </test>
         
-        <test name="Validating_Promo_Block_Content_Background_Image" testid="DTG-759" priority="P1" description="This script will cover validating Promo Block Content Background Image">
+        <test name="Test_DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Image" testid="DTG-759" priority="P1" description="This script will cover validating Promo Block Content Background Image">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Image"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Image"/>
         </classes>
         </test>
         
-        <test name="Validating_Promo_Block_Close_functionality" testid="DTG-757" priority="P1" description="This script will cover validating Promo Block Close functionality">
+        <test name="Test_DGLD_Admin_PB_047_Verify_Promo_Block_Close_functionality" testid="DTG-757" priority="P1" description="This script will cover validating Promo Block Close functionality">
        <classes>
             <class name="TestExecute.Admin.Test_DGLD_Admin_PB_047_Verify_Promo_Block_Close_functionality"/>
         </classes>
         </test>
         
         
-        <test name="Validating_Value_Prop_Banner_Close_functionality" testid="DTG-740" priority="P1" description="This script will cover validating Value Prop Banner Close functionality">
+        <test name="Test_DGLD_Admin_VPB_030_Verify_Value_Prop_Banner_Close_functionality" testid="DTG-740" priority="P1" description="This script will cover validating Value Prop Banner Close functionality">
        <classes>
             <class name="TestExecute.Admin.Test_DGLD_Admin_VPB_030_Verify_Value_Prop_Banner_Close_functionality"/>
         </classes>
         </test>
         
+        <test name="Test_DGLD_Admin_Promo_055_Verify_Promo_Media_Card_Background_Video" testid="DTG-765" priority="P1" description="This script will cover validating Promo Media Card Background Video ">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_Promo_055_Verify_Promo_Media_Card_Background_Video"/>
+        </classes>
+        </test>
         
         
-        <test name="Validating_Value_Prop_Banner_Components" testid="DTG-748" priority="P1" description="This script will cover validating Value Prop Banner Components">
+        
+        <test name="Test_DGLD_Admin_VPB_038_Verify_the_Value_Prop_Banner_Components" testid="DTG-748" priority="P1" description="This script will cover validating Value Prop Banner Components">
        <classes>
             <class name="TestExecute.Admin.Test_DGLD_Admin_VPB_038_Verify_the_Value_Prop_Banner_Components"/>
         </classes>
         </test>
         
          
-        <test name="Validating_Views_List_of_Countries_Languages" testid="DTG-723" priority="P1" description="This script will cover validating Views List of Countries Languages">
+        <test name="Test_DGLD_Admin_CLSM_014_NormalPath_Admin_Views_List_of_Countries_Languages" testid="DTG-723" priority="P1" description="This script will cover validating Views List of Countries Languages">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CLSM_014_NormalPath_Admin_Views_List_of_Countries_Languages"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CLSM_014_NormalPath_Admin_Views_List_of_Countries_Languages"/>
         </classes>
         </test>
 
-        <test name="Validating_Promo_Media_Card_Content" testid="DTG-800" priority="P1" description="This script will cover validating Promo Media Card Content">
+        <test name="Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content" testid="DTG-800" priority="P1" description="This script will cover validating Promo Media Card Content">
        <classes>
             <class name="TestExecute.Admin.Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content"/>
         </classes>
         </test>
         
         
-         <test name="Validating_Category_ProductCardsConfiguration" testid="DTG-733" priority="P1" description="This script will cover validating Category ProductCardsConfiguration">
+         <test name="Test_DGLD_Admin_CardTiles_28_34_35_36_VerifyCategory_ProductCardsConfiguration" testid="DTG-733" priority="P1" description="This script will cover validating Category ProductCardsConfiguration">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_CardTiles_011_VerifyCategory_ProductCardsConfiguration"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CardTiles_28_34_35_36_VerifyCategory_ProductCardsConfiguration"/>
         </classes>
         </test>
         
         
-         <test name="Validating_PromoBlock_Components_Variant" testid="DTG-794" priority="P1" description="This script will cover validating PromoBlock Components Variant">
+         <test name="Test_DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant" testid="DTG-794" priority="P1" description="This script will cover validating PromoBlock Components Variant">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant"/>
         </classes>
         </test>
         
         
-         <test name="Validating_PromoBlock_Components_Content" testid="DTG-796" priority="P1" description="This script will cover validating PromoBlock Components Content">
+         <test name="Test_DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content" testid="DTG-796" priority="P1" description="This script will cover validating PromoBlock Components Content">
        <classes>
-            <class name="TestExecute.Admin.DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content"/>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content"/>
         </classes>
         </test>
+        
+        <test name="Test_DGLD_Admin_CLSM_019_NormalPath_Admin_Views_Category_ListingPage_AddsNew" testid="DTG-730" priority="P1" description="This script will cover validating Views Category ListingPage AddsNew">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CLSM_019_NormalPath_Admin_Views_Category_ListingPage_AddsNew"/>
+        </classes>
+        </test>
+         <test name="Test_DGLD_Admin_CardTiles_033_074_VerifyCategory_categoryCardsConfiguration" testid="DTG-986" priority="P1" description="This script will cover validating categoryCardsConfiguration">
+       <classes>
+            <class name="TestExecute.Admin.Test_DGLD_Admin_CardTiles_033_074_VerifyCategory_categoryCardsConfiguration"/>
+        </classes>
+        </test>
+        
+        
 
 
 

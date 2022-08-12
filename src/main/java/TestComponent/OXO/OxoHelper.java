@@ -1344,11 +1344,11 @@ public class OxoHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
-			Sync.waitElementPresent("xpath", "//span[text()='View Cart']");
-			Common.clickElement("xpath", "//span[text()='View Cart']");
+			Sync.waitElementPresent("xpath", "//div[contains(@class,'sub-section')]/a");
+			Common.clickElement("xpath", "//div[contains(@class,'sub-section')]/a");
 			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
 			Common.assertionCheckwithReport(
-					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
+					viewcart.contains(minicart) && Common.getCurrentURL().contains("checkout/cart"),
 					"validating the navigation to the view cart", "User should navigate to the view cart page",
 					"Successfully navigate to the view cart page", "Failed to navigate to the view and edit cart page");
 
@@ -1554,4 +1554,161 @@ public class OxoHelper {
 			Assert.fail();
 		
 	}}
+	
+
+	
+	
+	public void addtocart(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[@class='m-product-card__image']");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
+           Common.clickElement("xpath", "//span[text()='Add to Bag']");
+		
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+	}
+	
+	public void validate_ExistingUser_Login_Checkoutpage (String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//fieldset[@id='customer-email-fieldset']//input[@id='customer-email']");
+			Common.textBoxInput("xpath", "//fieldset[@id='customer-email-fieldset']//input[@id='customer-email']",
+					data.get(dataSet).get("Email"));
+			Sync.waitElementVisible("xpath", "//div[@class='note note--warning']");
+			String validatingtext = Common.findElement("xpath", "//div[@class='note note--warning']").getText();
+			System.out.println(validatingtext);
+			int password = Common.findElements("xpath", "//span[text()='Password']").size();
+			System.out.println(password);
+			Sync.waitElementPresent("xpath", "//a[@class='action remind']/span");
+			String forgotpassword = Common.findElement("xpath", "//a[@class='action remind']/span").getText();
+			System.out.println(forgotpassword);
+
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
+			String passworddots = Common.findElement("xpath", "//input[@name='password']").getAttribute("type");
+			System.out.println(passworddots);
+			
+
+			Common.assertionCheckwithReport(
+					password > 0
+							&& validatingtext
+									.contains("You already have an account with us. Sign in or continue as guest.")
+							&& passworddots.contains("password") && forgotpassword.contains("Forgot Your Password?"),
+					"To Validate the warning message , password , forgot password , password in dots",
+					" Should display the warning message , pasword , forgot password link, password in dots",
+					"successfully displayed warning message  ,pasword , forgot password , password in dots ",
+					"failed to display warning message , pasword , forgot password , password in dots");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"verify the  warning message ,pasword , forgot password , password in dots",
+					"Should display warning message ,pasword , forgot password , password in dots ",
+					"Unable to display warning message  ,pasword , forgot password , password in dots",
+					Common.getscreenShotPathforReport(
+							"faield  to display warning message  ,pasword , forgot password , password in dots "));
+			Assert.fail();
+
+		}
+	}
+	
+	public void Validate_invalid_Signin_Checkoutpage() {
+		// TODO Auto-generated method stub
+		try {
+
+			Common.clickElement("xpath", "//button[contains(@class,'action login primary')]");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+		
+			String errormessage = Common.findElementBy("xpath", "//div[contains(@class,'message-error')]").getText();
+			Common.assertionCheckwithReport(errormessage.contains("Invalid login or password."),
+					"To validate incorrect password in checkout page", "Error message should be displayed for incorrect password",
+					"Error message displayed",
+					"failed to display error message in checkout page for incorrect password");	
+			
+			
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate incorrect password in checkout page", "Error message should be displayed for incorrect password",
+					"failed to display error message in checkout page for incorrect password",
+					Common.getscreenShotPathforReport("failed to display error message in checkout page"));
+			Assert.fail();
+
+		}
+	}
+	public void Click_forgotpasswordLink_Checkout() {
+		// TODO Auto-generated method stub
+		try {
+			Common.findElement("xpath", "//span[text()='Forgot Your Password?']");
+			Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
+			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+			Common.assertionCheckwithReport(forgotpassword.contains("Forgot Your Password?"),
+					"To validate the user is navigating to Forgot Password page",
+					"user should naviagte to forgot password page",
+					"User lands on Forgot Password page",
+					"User failed to navigate to forgot password page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page", 
+				"user should navigate to forgot password page",
+					"User failed to land on Forgot Password page",
+					Common.getscreenShotPathforReport("failed  to naviagte forgot password page "));
+			Assert.fail();
+
+		}
+	}
+	
+	public void Validate_Valid_Signin_Checkoutpage() {
+		// TODO Auto-generated method stub
+		try {
+			
+			Common.clickElement("xpath", "//button[contains(@class,'action login primary')]");
+			Sync.waitPageLoad();
+			//Thread.sleep(3000);
+			Sync.waitElementInvisible("id", "customer-email-fieldset");
+			System.out.println(Common.getPageTitle());
+			int emailsection = Common.findElements("id", "customer-email-fieldset").size();
+			System.out.println(emailsection);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Checkout") && emailsection <= 0,
+					"To validate register user is able to login and User is on checkout page",
+					"User should be ale to login and is on the Checkout page",
+					"Register User login sucessfully and the user is on checkout page ",
+					"failed to login in checkout page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validate user successfully logins from checkout page", "User should login from Checkout page",
+				"User failed logged in from checkout page ",
+				Common.getscreenShotPathforReport("faield login from checkout page"));
+		Assert.fail();
+
+}}
+	
+	
 }
