@@ -3718,9 +3718,7 @@ public class Adminhelper {
 	}
 
 	public void edit_cardtile_image(String datSet) {
-
-		// String path = System.getProperty("user.dir") +
-		// ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+		
 		String image = data.get(datSet).get("image");
 		try {
 			Sync.waitElementPresent("xpath", "//label[text()='Select from Gallery']");
@@ -4920,6 +4918,13 @@ public class Adminhelper {
 
 		}
 	}
+	
+	/*
+     * 12-08-22-Manoj & Saikumar
+     *
+     *
+     *
+     */
 
 	public void Configure_padding_marins(String DataSet) {
 		// TODO Auto-generated method stub
@@ -4976,6 +4981,13 @@ public class Adminhelper {
 		Sync.waitPageLoad();
 
 	}
+	
+	/*
+     * 12-08-22- Saikumar
+     *
+     *
+     *
+     */
 
 	public void verify_Padding_fronytend(String DataSet) throws Exception {
 
@@ -5022,5 +5034,44 @@ public class Adminhelper {
 			Assert.fail();
 		}
 	}
+	
+public void edit_productcard_image(String datSet) {
+		
+		String image = data.get(datSet).get("image");
+		try {
+			Sync.waitElementPresent("xpath", "(//label[text()='Select from Gallery'])[7]");
+			Common.javascriptclickElement("xpath", "(//label[text()='Select from Gallery'])[7]");
+
+			Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and @style='display: none;']");
+			Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
+			Common.scrollIntoView("xpath", "//small[text()='" + image + "']");
+			Common.javascriptclickElement("xpath", "//small[text()='" + image + "']");
+			Common.actionsKeyPress(Keys.HOME);
+			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+			Sync.waitElementInvisible(30, "xpath", "//div[@class='loading-mask' and @style='display: none;']");
+			Thread.sleep(6000);
+			Common.scrollIntoView("xpath", "//a[@class='image-uploader-preview-link']/img");
+			String imagename = Common.findElement("xpath", "//a[@class='image-uploader-preview-link']/img").getAttribute("alt");
+
+			Common.assertionCheckwithReport(imagename.equals(image),
+					"validation the image uploading for the value prop card ",
+					"Image should be upload for value prop card", "Successfully image uploaded for value prop card",
+					"Failed to upload image on the value prop card");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			report.addFailedLog("validation the image uploading on content for fallback image ",
+					"Image should be upload for fallback image", "Successfully image uploaded the fallback image ",
+					Common.getscreenShotPathforReport("Failed to upload image for fallback image"));
+			Assert.fail();
+
+		}
+
+	}
+	
+	
 
 }
