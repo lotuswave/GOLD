@@ -3333,6 +3333,407 @@ public class Adminhelper {
 
 		}
 	}
+	
+	public void validate_block_buttontext(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		String buttontext=data.get(Dataset).get("Attachment");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Common.scrollIntoView("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			String websitebutton = Common.findElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']//span").getText();
+            Common.assertionCheckwithReport(websitebutton.equals(buttontext),
+					"To Validate the button text is present in front end",
+					"Button text should be display in the front end",
+					"Successfully button text is displayed in the front end",
+					"Failed to Display button text on front end");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the button text is present in front end",
+					"Button text should be display in the front end",
+					"Unable to see button text is displayed on the front end", Common.getscreenShotPathforReport(
+							"Failed to Display button text on front end"));
+			Assert.fail();
+		}
+		
+	}
+	public WebElement Testimonials() {
+		// TODO Auto-generated method stub
+
+		WebElement element = Common.findElement("xpath", "//span[text()='Testimonials Product Carousel']");
+		Common.clickElement("xpath", "//span[text()='Testimonials Product Carousel']");
+
+		return element;
+
+	}
+	public void dragndrop_Testimonials() {
+		try {
+			Common.scrollIntoView("xpath", "//span[text()='Testimonials Product Carousel']");
+			WebElement element = Common.findElement("xpath", "//span[text()='Testimonials Product Carousel']");
+			draganddropContentBlock(element);
+			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+					.getAttribute("data-content-type");
+			Common.assertionCheckwithReport(blockname.equals("hot_testimonials_product_carousel"),
+					"Validating testimonials Dragndrop operation", "Testimonials dragndrop to content with options",
+					"Successfully dragndrop the Testimonials with options ", "failed to dragndrop the Testimonials");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("Validating Testimonials Dragndrop operation",
+					"Testimonials dragndrop to content with options",
+					"Unable to dragndrop the Testimonials with options ",
+					Common.getscreenShotPathforReport("Failed to Dragndrop the Testimonials"));
+			Assert.fail();
+
+		}
+	}
+
+	public void edit_Testimonial_one() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+			String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+					.getAttribute("id");
+
+			Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[2]");
+
+			String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+			Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+					"To validate the  Navigation to the Edit Testimonials Product Card page ",
+					"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+					"Successfully it is navigated to the Edit Testimonials Product Card page ",
+					"Failed to navigate to the Edit Testimonials Product Card page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the  Navigation to the Edit Testimonials Product Card page ",
+					"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+					"Unable to click on the edit button and it is not navigated to the Edit Testimonials Product Card page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card page"));
+			
+			Assert.fail();
+			
+		}
+		
+	}
+
+	public void Testimonial_author_one(String Dataset) {
+		// TODO Auto-generated method stub
+		String color=data.get(Dataset).get("Color");
+		String title=data.get(Dataset).get("Author");
+		String description=data.get(Dataset).get("Quote");
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[text()='"+ color + "']");
+			Common.clickElement("xpath", "//span[text()='"+ color + "']");
+			Sync.waitElementPresent("xpath", "//div[@class='admin__field']//input[@name='title']");
+			Common.textBoxInput("xpath", "//div[@class='admin__field']//input[@name='title']", title);
+			Sync.waitElementPresent("xpath", "//select[@name='rating']");
+			Common.dropdown("xpath", "//select[@name='rating']", Common.SelectBy.TEXT, data.get(Dataset).get("Rating"));
+			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
+			Common.textBoxInput("xpath", "//textarea[@name='description']", description);
+			image_Testimonial_one("promocontent");
+			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			String imagedescription=Common.findElement("xpath", "(//div[@data-element='description'])[1]").getText();
+			String imagetitle=Common.findElement("xpath", "(//div[@data-element='title'])[1]").getText();
+			Common.assertionCheckwithReport(imagedescription.equals(description)&&imagetitle.equals(title),
+					"To validate the description and the title of Testimonials Product Card one ",
+					"After Click on the save button it should be navigate to the Edit Testimonials Product Card one and title and description should be display ",
+					"Successfully Title and Description displayed on the Edit Testimonials Product Card one ",
+					"Failed to navigate to the Edit Testimonials Product Card one and description and title is not displayed");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the description and the title of Testimonials Product Card one ",
+					"After Click on the save button it should be navigate to the Edit Testimonials Product Card one  and title and description should be display ",
+					"Unable to navigate  Edit Testimonials Product Card one and description and title is not displayed",
+					Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card one page and description and title is not displayed"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void image_Testimonial_one(String Dataset) {
+		// TODO Auto-generated method stub
+		String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+
+		try {
+
+			Sync.waitElementPresent(30, "xpath", "//input[@type='file']");
+			String id = Common.findElement("xpath", "//input[@type='file']").getAttribute("id");
+			Common.findElement("xpath", "//input[@id='" + id + "']").sendKeys(path);
+			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+			System.out.println(image);
+			Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
+					"validating  the image uploading on content for Main image ",
+					"Image should be upload for Main image", "Successfully image uploaded in Main image ",
+					"Failed to upload image on the Main image");
+		
+	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validation the image uploading on content for Main image ",
+					"Image should be upload for Main image", "Unable to upload the image for Main image ",
+					Common.getscreenShotPathforReport("Failed to upload image for Main image"));
+			Assert.fail();
+		}
+
+
+}
+	public void image_Testimonial_Two(String Dataset) {
+		// TODO Auto-generated method stub
+		String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa1.png");
+		try {
+
+			Sync.waitElementPresent(30, "xpath", "//input[@type='file']");
+			String id = Common.findElement("xpath", "//input[@type='file']").getAttribute("id");
+			Common.findElement("xpath", "//input[@id='" + id + "']").sendKeys(path);
+			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+			System.out.println(image);
+			Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
+					"validating  the image uploading on content for Main image ",
+					"Image should be upload for Main image", "Successfully image uploaded in Main image ",
+					"Failed to upload image on the Main image");
+		
+	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validation the image uploading on content for Main image ",
+					"Image should be upload for Main image", "Unable to upload the image for Main image ",
+					Common.getscreenShotPathforReport("Failed to upload image for Main image"));
+			Assert.fail();
+		}
+	}
+
+	public void Testimonial_author_Two(String Dataset) {
+		// TODO Auto-generated method stub
+		String color=data.get(Dataset).get("Color");
+		String title=data.get(Dataset).get("Author");
+		String description=data.get(Dataset).get("Quote");
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[text()='"+ color + "']");
+			Common.clickElement("xpath", "//span[text()='"+ color + "']");
+			Sync.waitElementPresent("xpath", "//div[@class='admin__field']//input[@name='title']");
+			Common.textBoxInput("xpath", "//div[@class='admin__field']//input[@name='title']", title);
+			Sync.waitElementPresent("xpath", "//select[@name='rating']");
+			Common.dropdown("xpath", "//select[@name='rating']", Common.SelectBy.TEXT, data.get(Dataset).get("Rating"));
+			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
+			Common.textBoxInput("xpath", "//textarea[@name='description']", description);
+			image_Testimonial_Two("promocontent");
+			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Sync.waitElementPresent("xpath", "(//div[@data-element='description'])[2]");
+			String imagedescription=Common.findElement("xpath", "(//div[@data-element='description'])[2]").getText();
+			String imagetitle=Common.findElement("xpath", "(//div[@data-element='title'])[2]").getText();
+			Common.assertionCheckwithReport(imagedescription.equals(description)&&imagetitle.equals(title),
+					"To validate the description and the title of Testimonials Product Card Three ",
+					"After Click on the save button it should be navigate to the Edit Testimonials Product Card Three and title and description should be display ",
+					"Successfully Title and Description displayed on the Edit Testimonials Product Card Three ",
+					"Failed to navigate to the Edit Testimonials Product Card Three and description and title is not displayed");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the description and the title of Testimonials Product Card Three ",
+					"After Click on the save button it should be navigate to the Edit Testimonials Product Card Three  and title and description should be display ",
+					"Unable to navigate  Edit Testimonials Product Card Three and description and title is not displayed",
+					Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card Three page and description and title is not displayed"));
+			Assert.fail();
+		}
+		
+		
+	}
+
+	public void edit_Testimonial_Two() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+			String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+					.getAttribute("id");
+
+			Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[3]");
+
+			String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+			Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+					"To validate the  Navigation to the Edit Testimonials Product Card page ",
+					"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+					"Successfully it is navigated to the Edit Testimonials Product Card page ",
+					"Failed to navigate to the Edit Testimonials Product Card page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the  Navigation to the Edit Testimonials Product Card page ",
+					"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+					"Unable to click on the edit button and it is not navigated to the Edit Testimonials Product Card page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card page"));
+			
+			Assert.fail();
+			
+		}
+		
+		
+	}
+
+	public void edit_Testimonial_Three() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+			String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+					.getAttribute("id");
+
+			Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[4]");
+
+			String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+			Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+					"To validate the  Navigation to the Edit Testimonials Product Card page ",
+					"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+					"Successfully it is navigated to the Edit Testimonials Product Card page ",
+					"Failed to navigate to the Edit Testimonials Product Card page");
+			
+		}
+		catch(Exception | Error e)
+		{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Unable to click on the edit button and it is not navigated to the Edit Testimonials Product Card page ",
+				Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card page"));
+		
+	}
+}
+
+	public void Testimonial_author_Three(String Dataset) {
+		// TODO Auto-generated method stub
+		String color=data.get(Dataset).get("Color");
+		String title=data.get(Dataset).get("Author");
+		String description=data.get(Dataset).get("Quote");
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[text()='"+ color + "']");
+			Common.clickElement("xpath", "//span[text()='"+ color + "']");
+			Sync.waitElementPresent("xpath", "//div[@class='admin__field']//input[@name='title']");
+			Common.textBoxInput("xpath", "//div[@class='admin__field']//input[@name='title']", title);
+			Sync.waitElementPresent("xpath", "//select[@name='rating']");
+			Common.dropdown("xpath", "//select[@name='rating']", Common.SelectBy.TEXT, data.get(Dataset).get("Rating"));
+			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
+			Common.textBoxInput("xpath", "//textarea[@name='description']", description);
+			image_Testimonial_Three("promocontent");
+			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Sync.waitElementPresent("xpath", "(//div[@data-element='description'])[3]");
+			String imagedescription=Common.findElement("xpath", "(//div[@data-element='description'])[3]").getText();
+			String imagetitle=Common.findElement("xpath", "(//div[@data-element='title'])[3]").getText();
+			Common.assertionCheckwithReport(imagedescription.equals(description)&&imagetitle.equals(title),
+					"To validate the description and the title of Testimonials Product Card Two ",
+					"After Click on the save button it should be navigate to the Edit Testimonials Product Card Two and title and description should be display ",
+					"Successfully Title and Description displayed on the Edit Testimonials Product Card Two ",
+					"Failed to navigate to the Edit Testimonials Product Card Two and description and title is not displayed");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the description and the title of Testimonials Product Card Two ",
+					"After Click on the save button it should be navigate to the Edit Testimonials Product Card Two  and title and description should be display ",
+					"Unable to navigate  Edit Testimonials Product Card Two and description and title is not displayed",
+					Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card Two page and description and title is not displayed"));
+			Assert.fail();
+		}
+		
+		
+		
+	}
+	public void image_Testimonial_Three(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//label[text()='Select from Gallery']");
+			Sync.waitPageLoad();
+			String gallery=Common.findElement("xpath", "//span[contains(@class,'fileinput')]//span").getText();
+			Common.assertionCheckwithReport(gallery.equals("Upload Images"),
+					"To validate the page navigated to the insert pages when we click on the upload from gallery ",
+					"After Click on the upload from the gallery it should navigate to the insert pages",
+					"Successfully It is navigated to the insert pages after clicking on the upload from gallery ",
+					"Failed to Navigate to the insert pages after clicking on the upload from the gallery");
+			Common.clickElement("xpath", "//img[@alt='demo-desktop.png']");
+			Common.clickElement("xpath", "//span[text()='Add Selected']");
+			Sync.waitElementPresent("xpath", "//div[@class='file-uploader-filename']");
+			String imageupload = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+			Common.assertionCheckwithReport(imageupload.equals("demo-desktop.png"),
+					"validating the image uploading on content in Main image from the gallery ",
+					"Image should be upload for Main image from the gallery",
+					"Successfully image uploaded for the Main image from the gallery ",
+					"Failed to upload image from the gallery");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the image uploading on content in Main image from the gallery ",
+					"Image should be upload for Main image from the gallery",
+					"Unable to uplaod the image for the Main image from the gallery ",
+					Common.getscreenShotPathforReport("Failed to upload image from the gallery"));
+			Assert.fail();
+
+		}
+
+}
+
+	public void Testimonial_frontend(String Dataset) {
+		// TODO Auto-generated method stub
+		String Description=data.get(Dataset).get("Quote");
+		try
+		{
+			Sync.waitPageLoad();
+		    Sync.waitElementPresent("xpath", "(//div[@class='m-media-card-testimonial__testimonial'])[1]");
+			String description=Common.findElement("xpath", "(//div[@class='m-media-card-testimonial__testimonial'])[1]").getText();
+			String Title=Common.findElement("xpath", "(//div[@class='m-media-card-testimonial__author'])[2]").getText();
+			String Rating=Common.findElement("xpath", "(//span[@class='m-readonly-star-rating__rating'])[3]").getText();
+			Common.assertionCheckwithReport(description.equals(Description)&&Rating.contains("1")&&Title.equals("Lotusqa"),
+					"validating the description author name and rating on the frontend ",
+					"Description Description author name and rating should be display on the frontend ",
+					"Successfully Description author name and rating is displayed on the frontend",
+					"Failed to dispaly Description author name and rating is displayed on the frontend ");
+			
+			
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the description author name and rating on the frontend ",
+					"Description Description author name and rating should be display on the frontend ",
+					"Unable to display the Description author name and rating on the frontend",
+					Common.getscreenShotPathforReport("Failed to dispaly Description author name and rating is displayed on the fronten"));
+			Assert.fail();
+		}
+		
+	}
+
+
 
 	public void verficationAlternative() {
 		// TODO Auto-generated method stub
