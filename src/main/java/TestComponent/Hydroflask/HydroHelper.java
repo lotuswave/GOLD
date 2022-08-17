@@ -2321,19 +2321,17 @@ public class HydroHelper {
 			{
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 			Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-			String viewcart=Common.findElement("xpath", "//div[contains(@class,'label')]").getText();
-			System.out.println(viewcart);
-			if(viewcart.contains("Free"))
-				
-			{
-				Common.scrollIntoView("xpath", "//div[@class='m-mini-product-card']");
-				List<WebElement> allitems=Common.findElements("xpath", "//div[@class='m-mini-product-card']");
+
+				Common.scrollIntoView("xpath", "//span[@class='a-product-attribute__value']");
+				List<WebElement> allitems=Common.findElements("xpath", "//span[@class='a-product-attribute__value']");
+				System.out.println(allitems);
 				WebElement item;
+				for(int i=0;i<allitems.size();i++)
+				{
+				item = allitems.get(i);
+				System.out.println(item.getText());
 				
-			//mini cart sku id last sku =first
-			
-			
-		}
+				}
 			}
 		catch(Exception | Error e)
 		{
