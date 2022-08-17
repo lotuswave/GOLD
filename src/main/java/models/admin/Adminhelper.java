@@ -1342,8 +1342,8 @@ public class Adminhelper {
 			Common.clickElement("xpath", "//span[text()='Pages']");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Pages / Magento Admin"),
-					"Validating content filed page navigation ", "after clicking on pages it will navigate page filed ",
-					"Successfully navigate to the page filed ", "Failed to navigate to the page filed");
+					"Validating content field page navigation ", "After clicking on pages it will navigate page field ",
+					"Successfully navigate to the page field ", "Failed to navigate to the page filed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1514,8 +1514,9 @@ public class Adminhelper {
 			String color = data.get(Dataset).get("Color");
 			Common.clickElement("xpath", "//span[@title='" + color + "']");
 			Common.clickElement("xpath", "//button[text()='Apply']");
-			String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
-					.getAttribute("value");
+			String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']").getAttribute("value");
+			
+			
 			Common.assertionCheckwithReport(appliedcolor.equals(color),
 					"To validate the color is applied in the Promo content background ",
 					"After clicking on the color the background color should be applied ",
@@ -1579,6 +1580,7 @@ public class Adminhelper {
 					"Successfully dropdown should be opend and text has been selected ",
 					"Failed to open drop down and text to select");
 			Common.clickElement("xpath", "//span[text()='Background Repeat']");
+			
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 
@@ -1708,7 +1710,7 @@ public class Adminhelper {
 					"Validating edit page bulider navigation ",
 					"After clicking on edit page builder it Should navigate to edit page builder field ",
 					"Successfully navigate to the edit page builder field",
-					"Failed to navigate to the edit page builder filed");
+					"Failed to navigate to the edit page builder field");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
@@ -5473,6 +5475,177 @@ public void edit_productcard_image(String datSet) {
 
 	}
 	
+public void dragndrop_heroBanner() {
+	try {
+		Common.scrollIntoView("xpath", "//span[text()='Hero Banner']");
+		WebElement element = Common.findElement("xpath", "//span[text()='Hero Banner']");
+		draganddropContentBlock(element);
+		String bannercontent = Common.findElement("xpath", "//div[@class='file-uploader-area']/label").getText();
+		System.out.println(bannercontent);
+		String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+				.getAttribute("data-content-type");
+		
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+		Common.assertionCheckwithReport(blockname.equals("hot_hero_banner"),
+				"Validating Hero Banner Dragndrop operation", "Hero Banner dragndrop to content with options",
+				"successfully dragndrop the Hero Banner with options ", "Fail to dragndrop the Hero Banner");
+	} catch (Exception e) {
+
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("Validating Hero Banner Dragndrop operation",
+				"User should able Dragndrop Hero Banner", "Sucessfully Dragndrop the Hero Banner",
+				Common.getscreenShotPathforReport("Failed to Dragndrop Hero Banner"));
+		Assert.fail();
+
+	}
+}
+
+public void edit_Herobanner() {
+	try {
+		Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']").getAttribute("id");
+		Sync.waitPageLoad();
+		Common.mouseOverClick("xpath", "//div[@id='" + id + "']/div/div/div/ul/li[3]/a/i");
+
+		String editbanner = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+		Common.assertionCheckwithReport(editbanner.contains("Edit Hero Banner"),
+				"To validate the admin is able to edit  Hero Banner",
+				"After Clicking on the edit button admin should navigate to the edit Hero Banner page ",
+				"Admin Successfully navigated to edit Hero Banner page ",
+				"Failed to navigate to edit Hero Banner page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("To validate the admin is able to edit  Hero Banner",
+				"After Clicking on the edit button admin should navigate to the edit Hero Banner page ",
+				"Admin is not able to  navigate to the edit Hero Banner page ",
+				Common.getscreenShotPathforReport("Failed to navigate to edit Hero Banner page"));
+		Assert.fail();
+
+	}
+}
+
+public void edit_Herobanner_ContentSection(String DataSet) {
+	// TODO Auto-generated method stub
+	try {
+		Thread.sleep(1000);
+		String name = Common.getText("xpath", "(//span[text()='Content'])[3]");
+		System.out.println(name);
+		Sync.waitElementPresent("xpath", "(//input[@name='title'])[2]");
+		Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(DataSet).get("title"));
+		Common.dropdown("xpath", "//select[@name='heading_type']", Common.SelectBy.TEXT,data.get(DataSet).get("headingtype"));
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//input[@name='subtitle']");
+		Common.textBoxInput("xpath", "//input[@name='subtitle']", data.get(DataSet).get("subtitle"));
+		Common.dropdown("xpath", "//select[@name='subtitle_heading']", Common.SelectBy.TEXT,data.get(DataSet).get("headingtype"));
+		
+		Common.scrollIntoView("xpath", "//span[text()='Description']");
+		Common.switchFrames("id", "hot_hero_banner_form_description_ifr");
+		Common.findElement("id", "html-body").sendKeys(data.get(DataSet).get("Description"));
+		Common.switchToDefault();
+		// Thread.sleep(2000);
+		Thread.sleep(5000);
+		
+		Common.assertionCheckwithReport(name.contains("Content"),"validation to the edit content promo Blocker",
+				"after giving data it should show the data", "Successfully data is populated",
+				"Succesfully data entered");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("validation to the edit content promo Blocker ",
+				"after giving data it should show the data", "Successfully data is populated",
+				Common.getscreenShotPathforReport("Failed to show the data"));
+		Assert.fail();
+
+	}
+}
+
+public void edit_Hero_Banner_content_color(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+
+		Common.scrollIntoView("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+		Common.clickElement("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+		String color = data.get(Dataset).get("Color");
+		System.out.println(color);
+		Common.clickElement("xpath", "//span[@title='" + color + "']");
+		Common.clickElement("xpath", "//button[text()='Apply']");
+
+		String appliedcolor = Common.findElement("xpath", "(//input[@class='colorpicker-spectrum'])[2]").getAttribute("value");
+		
+		System.out.println(appliedcolor);
+		
+		Common.assertionCheckwithReport(appliedcolor.equals(color),
+				"To validate the color is applied in the Promo content background ",
+				"After clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the color is applied in the Promo content background ",
+				"After clicking on the color the background color should be applied ",
+				"Unable to apply the  Background color ",
+				Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+		Assert.fail();
+
+	}
+}
+
+public void edit_HeroBanner_ContentAlignment(String Dataset) {
 	
+	String alignment = data.get(Dataset).get("Alignment");
+	String textcolor = data.get(Dataset).get("TextColor");
+	String style = data.get(Dataset).get("Style");
+	try {
+		
+		Common.scrollIntoView("xpath", "//span[text()='"+ alignment +"']");
+		Sync.waitElementPresent("xpath", "//span[text()='"+ alignment +"']");
+		Common.clickElement("xpath", "//span[text()='"+ alignment +"']");
+		Common.clickElement("xpath", "//span[text()='"+ textcolor +"']");
+		Common.clickElement("xpath", "//span[text()='"+ style +"']");
+		Common.assertionCheckwithReport(alignment.contains("Alignment"),
+				"validation of the Content Alignment, Color, Style selection ",
+				"Content Alignment, Color, Style should be open and it should be selected",
+				"Successfully Content Alignment, Color, Style opend and it has been selected ",
+				"Failed to open Content Alignment, Color, Style to select");
+
+	} catch (Exception | Error e) {
+
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validation of the Content Alignment, Color, Style selection ",
+				"Content Alignment, Color, Style should be open and it should be selected",
+				"Unable to open the Content Alignment, Color, Style and  has not been selected ",
+				Common.getscreenShotPathforReport("Failed to open Content Alignment, Color, Style to select"));
+		Assert.fail();
+	}
+}
+
+public void website_verification_Herobanner() {
+	// TODO Auto-generated method stub
+	try {
+
+		Sync.waitElementPresent(40, "xpath", "//div[@data-content-type='hot_hero_banner']");
+//		Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+		Thread.sleep(5000);
+		String headingverification = Common.getText("xpath", "//h2[@class='c-hero-block__headline']");
+		System.out.println(headingverification);
+		Common.assertionCheckwithReport(headingverification.contains("QA test Hero Banner"),
+				"validation Image upload in the forntend website ", "Image should  appear on fornt end page",
+				"Successfully image is appeared on the frondend", "Failed to navigate to appear on fornt end page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("validation Image upload in the forntend website ",
+				"Image should  appear on front end page", "Successfully image is appeared on the frond end",
+				Common.getscreenShotPathforReport("Failed to navigate to appear on fornt end page"));
+		Assert.fail();
+
+	}
+
+}
 
 }
