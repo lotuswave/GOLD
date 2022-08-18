@@ -15,6 +15,7 @@ import org.testng.AssertJUnit;
 
 import TestLib.Automation_properties;
 import TestLib.Common;
+import TestLib.Common.SelectBy;
 import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
@@ -1952,13 +1953,140 @@ public class OxoHelper {
 		return order;
 	}
 	
-		
-	}
-		
-		
-	
+	public void Validate_shippingaddressform() {
+		try {
+			Sync.waitElementVisible("name", "firstname");
 
-		
-	
+			int firstname = Common.findElements("name", "firstname").size();
+			int lastname = Common.findElements("name", "lastname").size();
+			int street1 = Common.findElements("name", "street[0]").size();
+			int street2 = Common.findElements("name", "street[1]").size();
+			int City = Common.findElements("name", "city").size();
+			int state = Common.findElements("name", "region_id").size();
+			Common.scrollIntoView("name", "postcode");
+			int Zipcode = Common.findElements("name", "postcode").size();
+			int Country = Common.findElements("name", "country_id").size();
+			int Phonenumber = Common.findElements("name", "telephone").size();
+			Common.scrollIntoView("xpath", "//div[@class='checkout-shipping-method']");
+			int Shippingmethodsheading = Common.findElements("xpath", "//div[@class='checkout-shipping-method']")
+					.size();
+			int CartCMSmessaging = Common.findElements("xpath", "//div[contains(@class,'methods-cms_block')]").size();
+			int Shippingmethodcontent = Common.findElements("id", "checkout-step-shipping_method").size();
+
+			int shippingprice = Common.findElements("xpath", "//span[@class='shipping-method__radio']").size();
+			int shippingmethod = Common.findElements("xpath", "//td[2][@class='col col-method']").size();
+			Common.scrollIntoView("xpath", "//button[contains(@class,'continue primary')]");
+			int nextbutton = Common.findElements("xpath", "//button[contains(@class,'continue primary')]").size();
+
+			Common.assertionCheckwithReport(
+					firstname > 0 && lastname > 0 && street1 > 0 && street2 > 0 && City > 0 && state > 0 && Zipcode > 0
+							&& Country > 0 && Phonenumber > 0 && Shippingmethodsheading > 0 && CartCMSmessaging > 0
+							&& Shippingmethodcontent > 0 && shippingprice > 0 && shippingmethod > 0 && nextbutton > 0,
+					"To validate the Shipping address form for all the required fields",
+					"All the required fields should be displayed", "All the required fields are displayed",
+					"Failed to display the required fields in shipping address page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Shipping address form for all the required fields",
+					"All the required fields should be displayed", "Failed to display the required fields",
+					Common.getscreenShotPathforReport("faield required fields display shipping address page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void populate_Shippingaddress_fields(String dataSet) throws Exception {
+
+		Common.scrollIntoView("name", "firstname");
+		Common.textBoxInput("name", "firstname", data.get(dataSet).get("FirstName"));
+		Common.textBoxInput("name", "lastname", data.get(dataSet).get("LastName"));
+
+		Common.textBoxInput("name", "street[0]", data.get(dataSet).get("Street"));
+		Common.scrollIntoView("name", "city");
+
+		Common.textBoxInput("name", "city", data.get(dataSet).get("City"));
+
+		Common.dropdown("name", "region_id", SelectBy.TEXT, data.get(dataSet).get("State"));
+
+		Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+		Common.dropdown("name", "country_id", SelectBy.TEXT, "United States");
+
+		Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+	}
+
+	public void selectshippingmethod(String dataSet) {
+		String shippingmethod = data.get(dataSet).get("Shippingmethods");
+		try {
+
+			Common.scrollIntoView("xpath", "//td[2][text()='" + shippingmethod + "']");
+
+			Sync.waitElementClickable("xpath", "//td[2][text()='" + shippingmethod + "']");
+			Common.javascriptclickElement("xpath", "//td[2][text()='" + shippingmethod + "']");
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//input[@class='a-radio-button__input']");
+
+			if (shippingmethod.contains("Fixed")) {
+				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='flatrate_flatrate']")
+						.getAttribute("aria-labelledby");
+				System.out.println(selecetdshippingmethod);
+
+				Common.assertionCheckwithReport(selecetdshippingmethod.contains("flatrate"),
+						"to validate the shipping method selected" + shippingmethod,
+						shippingmethod + "Should be selected", shippingmethod + "is selected",
+						"Failed to select the" + shippingmethod);
+			} else if (shippingmethod.contains("Ground")) {
+				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='fedex_FEDEX_GROUND']")
+						.getAttribute("aria-labelledby");
+				System.out.println(selecetdshippingmethod);
+				Common.assertionCheckwithReport(selecetdshippingmethod.contains("FEDEX_GROUND"),
+						"to validate the shipping method selected" + shippingmethod,
+						shippingmethod + "Should be selected", shippingmethod + "is selected",
+						"Failed to select the" + shippingmethod);
+
+			} else if (shippingmethod.contains("2 Day")) {
+				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='fedex_FEDEX_2_DAY']")
+						.getAttribute("aria-labelledby");
+				System.out.println(selecetdshippingmethod);
+				Common.assertionCheckwithReport(selecetdshippingmethod.contains("FEDEX_2_DAY"),
+						"to validate the shipping method selected" + shippingmethod,
+						shippingmethod + "Should be selected", shippingmethod + "is selected",
+						"Failed to select the" + shippingmethod);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("to validate the shipping method selected" + shippingmethod,
+					shippingmethod + "Should be selected", "Failed to select the shiping method" + shippingmethod,
+					shippingmethod + "Not selected");
+			Assert.fail();
+
+		}
+	}
+
+	public void Validate_Paymentpage() {
+		try {
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'continue primary')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'continue primary')]");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[text()='Payment Method']");
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("#payment") && Common.getPageTitle().contains("Checkout"),
+					"To validate the user lands on the payment page", "User should land on the payment page",
+					"User lands on the payment page", "User failed to land on the payment page");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user lands on the payment page", "User should land on the payment page",
+					"User failed to land on the payment page", "Payment navigation failed");
+			Assert.fail();
+
+		}
+
+	}
+
+}
+
 	
 
