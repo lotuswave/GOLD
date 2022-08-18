@@ -2409,7 +2409,18 @@ public class Adminhelper {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "(//label[text()='Select from Gallery'])[7]");
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//img[@alt='demo-desktop.png']");
+			String gallery=Common.findElement("xpath", "//span[contains(@class,'fileinput')]//span").getText();
+			Common.assertionCheckwithReport(gallery.equals("Upload Images"),
+					"To validate the page navigated to the insert pages when we click on the upload from gallery ",
+					"After Click on the upload from the gallery it should navigate to the insert pages",
+					"Successfully It is navigated to the insert pages after clicking on the upload from gallery ",
+					"Failed to Navigate to the insert pages after clicking on the upload from the gallery");
+			
+			Common.scrollIntoView("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+			Sync.waitElementPresent(30, "xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+			Common.clickElement("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+			Common.scrollIntoView("xpath", "//span[text()='Add Selected']");
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Add Selected']");
 			Common.clickElement("xpath", "//span[text()='Add Selected']");
 			Sync.waitPageLoad();
 			String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
@@ -2453,7 +2464,7 @@ public class Adminhelper {
 			String image3 = Common.findElement("xpath", "//img[@data-pb-style='" + id3 + "']").getAttribute("src");
 			System.out.println(image3);
 			Common.assertionCheckwithReport(
-					image1.contains("Lotusqa") && image2.contains("Lotusqa1") && image3.contains("demo-desktop"),
+					image1.contains("Lotusqa") && image2.contains("Lotusqa1") && image3.contains("cms-corporate-purchasing"),
 					"validating the image uploading on content in frontend website ",
 					"Image should be upload on the frontend website",
 					"Successfully image uploaded on the frond end image ", "Failed to upload image on the frond end");
@@ -2512,7 +2523,7 @@ public class Adminhelper {
 			System.out.println();
 			String headingname = Common.findElement("xpath", "//img[@data-pb-style='" + image + "']")
 					.getAttribute("src");
-			Common.assertionCheckwithReport(headingname.contains("demo-desktop"),
+			Common.assertionCheckwithReport(headingname.contains("cms-corporate-purchasing"),
 					"validating the text on clone value prop banner on fornt end",
 					"Text should be add for the clone value prop baneer on fornt end",
 					"Successfully text added to the  clone value prop banner on front end",
