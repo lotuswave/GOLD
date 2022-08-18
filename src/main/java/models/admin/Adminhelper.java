@@ -5734,6 +5734,45 @@ public class Adminhelper {
 
 	}
 
+	public void featuredcardconfiguration_image(String dataSet) {
+		try {
+			Sync.waitElementPresent("xpath", "//input[@placeholder='Enter title here']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter title here']",
+					data.get(dataSet).get("CardTitle"));
+
+			String selectimage = Common.findElement("xpath", "//li[@name='image']").getAttribute("class");
+			if (selectimage.contains("active")) {
+				System.out.println("image is selected");
+			} else {
+				Common.javascriptclickElement("xpath", "//li[@name='image']");
+			}
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			
+			Common.scrollIntoView("xpath", "//input[@name='alt']");
+			Common.textBoxInput("xpath", "//input[@name='alt']", data.get(dataSet).get("alterantivetext"));
+			Common.textBoxInput("xpath", "//input[@name='title_attribute']", data.get(dataSet).get("titleaatribute"));
+
+			Common.switchFrames("id", "hot_card_tiles_category_form_description_text_ifr");
+			Common.findElement("xpath", "//body[@class='mce-content-body ']/p")
+					.sendKeys(data.get(dataSet).get("Description"));
+			Common.switchToDefault();
+			Thread.sleep(2000);
+			buttontype("ProductcardTile");
+			Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(dataSet).get("Buttontext"));
+			Buttonlink("ProductcardTile");
+			Common.javascriptclickElement("xpath", "//label[text()='Open in new tab']");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate the admin is able to configure  the feautred images in the card tile",
+					"Card tile content should be configured ", "Successfully configured the card tile content",
+					Common.getscreenShotPathforReport("Failed to configure the card tile content"));
+
+			Assert.fail();
+		}
+	}
 	
 
 }
