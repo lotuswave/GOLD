@@ -19,7 +19,7 @@ public class Test_DGLD_Admin_CardTiles_28_34_35_36_VerifyCategory_ProductCardsCo
 	public void Admin_validateproductcard_configuration() throws Exception {
 
 		try {
-			Admin.Admin_signin("pagetitle");
+			Admin.Admin_signin("AccountDetails");
 			Admin.click_content();
 			Admin.Pages();
 			Admin.NewpageCTA();
@@ -29,7 +29,7 @@ public class Test_DGLD_Admin_CardTiles_28_34_35_36_VerifyCategory_ProductCardsCo
 			Admin.dragndrop_Cardtile_Content();
 			Admin.close_Editblock("ProductcardTile");
 			Admin.tile_buttontext("ProductcardTile");
-			Admin.featurescardconfiguration("ProductcardTile");
+			Admin.featurescardconfiguration_Video("ProductcardTile");
 			Admin.productcardconfiguration("ProductcardTile");
 			Admin.savecontent("ProductcardTile");
 			Admin.openwebsite("ProductcardTile");
