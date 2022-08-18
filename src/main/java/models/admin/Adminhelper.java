@@ -2850,17 +2850,17 @@ public class Adminhelper {
 
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Country & Language Selector Management / Magento Admin"),
-					"Validating new Country Selector item page navigation ",
-					"Navigate to new Country Selector item Page ",
-					"Successfully navigate to the new Country  Selector item Page ",
-					"Failed to navigate to the Country Selector item Page");
+					"Validating Country Language Selector Management items  ",
+					"To verify all the Country Language Selector Management items ",
+					"Successfully verified Country Language Selector Management items ",
+					"Failed to verify Country Language Selector Management items");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			ExtenantReportUtils.addFailedLog("Validating new Country Selector item page navigation ",
-					"Navigate to new Country Selector item Page ",
-					"Unable to navigate to the new Country  Selector item Page ",
-					Common.getscreenShotPathforReport("Failed to navigate to the Country Selector item Page"));
+			ExtenantReportUtils.addFailedLog("Validating Country Selector Management items ",
+					"To verify all the Country Language Selector Management items ",
+					"Unable to verify Country  Language Selector Management items ",
+					Common.getscreenShotPathforReport("Failed to verify Country Language Selector Management items"));
 			Assert.fail();
 
 		}
@@ -2868,10 +2868,33 @@ public class Adminhelper {
 	}
 
 	public void add_New_Countries_languages(String dataSet) {
-
+		String url = data.get(dataSet).get("URL");
 		try {
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "//input[@name='url']", url);
+			Common.actionsKeyPress(Keys.ENTER);
+			Thread.sleep(8000);
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+			System.out.println(records);
+			if (records.equals("0 records found")) {
+				
+				Sync.waitPageLoad(30);
+				Sync.waitElementVisible("xpath", "//span[text()='Add New Item']");
+				Common.clickElement("xpath", "//span[text()='Add New Item']");
+				Sync.waitPageLoad();
+				
+			} else {
+				delete_Existing_Country_Selector("Address");
 
-			Common.clickElement("xpath", "//span[text()='Add New Item']");
+				Sync.waitElementVisible("xpath", "//span[text()='Add New Item']");
+				Common.clickElement("xpath", "//span[text()='Add New Item']");
+			}
+			
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("New Country Selector Item / Magento Admin"),
 					"Validating Country Languge Selector page navigation ",
 					"Navigate to Country Language Selector Page ",
@@ -2891,7 +2914,8 @@ public class Adminhelper {
 
 			Common.clickElement("id", "save");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
-
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Country & Language Selector Management / Magento Admin")
 							&& message.contains("You saved the Country Selector Item."),
@@ -2935,6 +2959,8 @@ public class Adminhelper {
 				Sync.waitPageLoad();
 
 				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
 						"Validating user selects the edit button",
 						"After clicking edit button it should navigate to the selected page",
@@ -2949,9 +2975,10 @@ public class Adminhelper {
 			Common.clickElement("id", "save");
 			Sync.waitPageLoad();
 
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			
 			String message = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			System.out.println(message);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Country & Language Selector Management / Magento Admin")
 							&& message.contains("You saved the Country Selector Item."),
@@ -2994,6 +3021,8 @@ public class Adminhelper {
 				Sync.waitPageLoad();
 
 				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
 						"Validating the selects edit button",
 						"After clicking edit button it should navigate to the selected page",
@@ -3004,10 +3033,10 @@ public class Adminhelper {
 				System.out.println(Common.getPageTitle());
 
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
-						"To verfy the delete existing customer  Country Selector",
-						"It should able to select the  delete existing customer and popup should display",
-						"Sucessfully selects the  delete existing customer and popup is displayed",
-						"Failed to select the delete existing customer");
+						"To verify the delete  Country Selector",
+						"It should able to select the  delete Country Selector and popup should display",
+						"Sucessfully selects the  delete Country Selector and popup is displayed",
+						"Failed to select the delete Country Selector");
 
 				Sync.waitPageLoad();
 
@@ -3022,6 +3051,8 @@ public class Adminhelper {
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
 						.getText();
 				System.out.println(message1);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains("Country & Language Selector Management"),
 						"To verify the delete Country & Language Selector Managementt field and deleted message",
@@ -3041,6 +3072,72 @@ public class Adminhelper {
 		}
 
 	}
+	public void delete_Existing_Country_Selector(String dataSet) {
+		String url = data.get(dataSet).get("URL");
+		try {
+
+			Sync.waitPageLoad();
+				Common.clickElement("xpath", "//button[text()='Select']");
+
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Sync.waitElementVisible("xpath", "//a[text()='Edit']");
+				Common.clickElement("xpath", "//a[text()='Edit']");
+				Sync.waitPageLoad();
+
+				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
+				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
+						"Validating the selects edit button",
+						"After clicking edit button it should navigate to the selected page",
+						"Successfully navigate to  the selected page", "Failed to navigate to the selected page");
+
+				Common.clickElement("id", "delete");
+				Sync.waitPageLoad();
+				System.out.println(Common.getPageTitle());
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
+				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
+						"To verfy the delete existing customer  Country Selector",
+						"It should able to select the  delete existing country selector and popup should display",
+						"Sucessfully selects the  delete existing country selector  and popup is displayed",
+						"Failed to select the delete existing country selector ");
+
+				Sync.waitPageLoad();
+
+				String message = Common.getText("xpath", "(//div[@class='modal-content'])[2]");
+				if (message.equals("Are you sure you want to do this?")) {
+
+					Common.clickElement("xpath", "//span[text()='OK']");
+				} else {
+					Assert.fail();
+				}
+
+				String message1 = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+						.getText();
+				System.out.println(message1);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().contains("Country & Language Selector Management"),
+						"To verify the delete Country & Language Selector Managementt field and deleted message",
+						"It should able to delete the Country & Language Selector Management and delete message should be displayed",
+						"Sucessfully deletes the Country & Language Selector Management and delete message will displayed",
+						" Failed to delete Country & Language Selector Management");
+
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To verify the delete Country & Language Selector Managementt field and deleted message",
+					"It should able to delete the Country & Language Selector Management and delete message should be displayed",
+					"Unable to deletes the Country & Language Selector Management and delete message is not displayed",
+					Common.getscreenShotPathforReport(" Failed to delete Country & Language Selector Management"));
+			Assert.fail();
+		}
+
+	}
+
 
 	public void buttontext(String Dataset) {
 		// TODO Auto-generated method stub
