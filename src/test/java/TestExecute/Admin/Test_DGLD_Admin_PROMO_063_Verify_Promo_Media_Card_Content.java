@@ -54,11 +54,11 @@ public class Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content {
 
 
     @BeforeTest
- @Parameters("URL")
-    public void startTest(String URL) throws Exception {
+// @Parameters("URL")
+    public void startTest() throws Exception {
     	System.setProperty("configFile", "Admin\\config.properties");
-          //Login.signIn();
-          Login.openwebsite(URL);
+         Login.signIn();
+//          Login.openwebsite(URL);
 
       }
 

@@ -27,7 +27,7 @@ public class Test_DGLD_Admin_CardTiles_033_074_VerifyCategory_categoryCardsConfi
 			Admin.hot_elements();
 			Admin.Cardtile_content();
 			Admin.dragndrop_Cardtile_Content();
-			Admin.featurescardconfiguration("ProductcardTile");
+//			Admin.featurescardconfiguration("ProductcardTile");
 			Admin.category_cards_config("ProductcardTile");
 			Admin.Configure_padding_marins("ProductcardTile");
 			Admin.savecontent("ProductcardTile");
