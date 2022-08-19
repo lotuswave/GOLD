@@ -40,7 +40,7 @@ public class Test_DGLD_HF_UT_Minicart_041_Additional_Path_Verify_scroll_on_mini_
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

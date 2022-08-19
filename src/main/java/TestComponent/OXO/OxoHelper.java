@@ -1084,11 +1084,9 @@ public class OxoHelper {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-//	                Common.clickElement("xpath", "//a[text()='Shop All']");
+	                Common.clickElement("xpath", "//a[text()='Shop All']");
 
-			Common.clickElement("xpath", "//a[@aria-label='Shop All  Kitchenware ']");
-			Common.clickElement("xpath", "//a[@id='ui-id-11']//span[text()=' POP Containers']");
-//	    	        Common.clickElement("xpath", "//a[@aria-label='Shop All  Coffee & Beverage ']");
+
 			expectedResult = "User should select the " + category + " category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -1567,9 +1565,9 @@ public class OxoHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@class='m-product-card__image']");
+						"//img[contains(@class,'m-product-card__image')]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -1579,6 +1577,7 @@ public class OxoHelper {
 				}
 			}
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
            Common.clickElement("xpath", "//span[text()='Add to Bag']");
@@ -1715,41 +1714,7 @@ public class OxoHelper {
 
 }}
 
-	public void coffee_headerlinks(String category) {
-		// TODO Auto-generated method stub
-		String expectedResult = "User should click the" + category;
-		try {
-
-			Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
-			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
-			Thread.sleep(3000);
-
-			try {
-				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
-			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
-			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Common.clickElement("xpath", "//a[text()='Shop All']");
-			expectedResult = "User should select the " + category + "category";
-			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
-			Common.assertionCheckwithReport(sizebotteles > 0,
-					"validating the product category as" + category + "from navigation menu ", expectedResult,
-					"Selected the " + category + " category", "User unabel to click" + category + "");
-
-		}
-
-		catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
-					expectedResult, "Unable to Selected the " + category + " category",
-					Common.getscreenShot("Failed to click on the" + category + ""));
-
-			Assert.fail();
-		}
-		
-	}
+	
 
 	public String addDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
@@ -2183,9 +2148,193 @@ public class OxoHelper {
 		}
 		
 	}
-	
 
+	public void addtocart_PDP(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String product=data.get(Dataset).get("ProductQuantity");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			
+			 Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Soap Dispensing"),
+						"validating the product should navigate to the PDP page",
+						"When we click on the product is should navigate to the PDP page",
+						"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+				Sync.waitPageLoad();
+				 Sync.waitElementPresent("xpath", "//form[@class ='m-add-to-cart ']");
+				Common.findElement("xpath", "//form[@class ='m-add-to-cart ']").getAttribute("data-product-sku");
+			
+				Common.clickElement("xpath", "//button[@title='Add to Bag']");
+           
+           Sync.waitPageLoad();
+           String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+           Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+           
+           headerlinks("Cleaning & Organization");
+           Sync.waitPageLoad();
+           Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("8-Piece POP"),
+					"validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page",
+					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+			Sync.waitPageLoad();
+           
+			Sync.waitPageLoad();
+			 Sync.waitElementPresent("xpath", "//form[@class ='m-add-to-cart ']");
+			Common.findElement("xpath", "//form[@class ='m-add-to-cart ']").getAttribute("data-product-sku");
+		
+			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+      
+      Sync.waitPageLoad();
+      String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+				.getAttribute("data-ui-id");
+      Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+				"Product should be add to cart", "Sucessfully product added to the cart ",
+				"failed to add product to the cart");
+      
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+	}
+
+	public void coffee_headerlinks(String category) {
+		// TODO Auto-generated method stub
+		String expectedResult = "User should click the" + category;
+		try {
+
+			Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			Thread.sleep(3000);
+			Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			Thread.sleep(3000);
+
+			try {
+				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+			} catch (Exception e) {
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			}
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.clickElement("xpath", "//span[text()='Shop All']");
+			expectedResult = "User should select the " + category + "category";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			Common.assertionCheckwithReport(sizebotteles > 0,
+					"validating the product category as" + category + "from navigation menu ", expectedResult,
+					"Selected the " + category + " category", "User unabel to click" + category + "");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+					expectedResult, "Unable to Selected the " + category + " category",
+					Common.getscreenShot("Failed to click on the" + category + ""));
+
+			Assert.fail();
+		}
+	}
+
+	public void search_product(String Dataset) {
+		// TODO Auto-generated method stub
+		String sku3="";
+		String product = data.get(Dataset).get("Products");
+		try {
+			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+					"User should able to click on the search button", "Search expands to the full page",
+					"Sucessfully search bar should be expand");
+			Common.textBoxInput("xpath", "//input[@id='search']", product);
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			String productsearch = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+					"enter product name will display in the search box", "user enter the product name in  search box",
+					"Failed to see the product name");
+			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			
+			 Sync.waitPageLoad();
+			 Sync.waitElementPresent("xpath", "//form[@class ='m-add-to-cart ']");
+			 sku3=Common.findElement("xpath", "//form[@class ='m-add-to-cart ']").getAttribute("data-product-sku");
+				System.out.println(sku3);
+				Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
+			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		
+			
+			
+
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart",
+					"Product should be add to cart", "Unable to add product to the cart ",
+					Common.getscreenShot("Failed to add product to the cart"));
+			Assert.fail();
+		
+		}
+
+	}
+
+	public void minicart_scroll() {
+		// TODO Auto-generated method stub
+		try
+		{
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+
+			Common.scrollIntoView("xpath", "//div[@class='m-mini-product-card__name']//a[@class='a-product-name']");
+			List<WebElement> allitems=Common.findElements("xpath", "//div[@class='m-mini-product-card__name']//a[@class='a-product-name']");
+			System.out.println(allitems);
+			WebElement item;
+			for(int i=0;i<allitems.size();i++)
+			{
+			item = allitems.get(i);
+			System.out.println(item.getText());
+			Common.scrollIntoView(allitems.get(i));
+			}
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		
+		
+		Assert.fail();
+	}
+	
 }
+		
+	}
+	
+	
+	
 
 	
 
