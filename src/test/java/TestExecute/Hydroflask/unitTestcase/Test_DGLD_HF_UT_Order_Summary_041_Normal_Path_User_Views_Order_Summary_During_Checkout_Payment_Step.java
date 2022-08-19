@@ -36,7 +36,7 @@ public class Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summ
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

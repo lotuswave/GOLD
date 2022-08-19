@@ -1574,12 +1574,14 @@ public class HydroHelper {
 
 	public void addtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@class='m-product-card__image']");
+						"//img[contains(@class,'m-product-card__image')]");
+				
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -1588,6 +1590,7 @@ public class HydroHelper {
 					break;
 				}
 			}
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
@@ -2664,9 +2667,8 @@ public class HydroHelper {
 			Common.clickElement("xpath", "//div[@class='m-accordion__title']");
 			Sync.waitElementPresent("xpath", "//div[@class='content minicart-items']");
 			String expand=Common.findElement("xpath", "//div[@class='content minicart-items']").getAttribute("aria-hidden");
-			 
 			 String productname=Common.findElement("xpath", "//div[@class='m-mini-product-card__name']").getText();
-			 Common.assertionCheckwithReport(expand.equals("false") && productname.contains(product) ,
+			 Common.assertionCheckwithReport(expand.equals("false") && productname.contains(product) || expand.equals("false") && productname.contains("32 OZ WIDE")  ,
 						"validating the items expand button and product under the order summary on payment page",
 						"items should be display under the order summary on the payment page",
 						"Successfully items has displayed under the order summary in payment page",
