@@ -9,21 +9,22 @@ import TestComponent.OXO.OxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_UT_Guest_Checkout_Funtionality {
+public class Test_DGLD_OXO_UT_Order_Summary_033_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step {
 
 	String datafile = "oxo//OXOTestData.xlsx";	
 	OxoHelper Oxo=new OxoHelper(datafile);
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality() throws Exception {
+	public void Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
-//			Oxo.addPaymentDetails("PaymentDetails");
-			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
+			String method=Oxo.addDeliveryAddress("AccountDetails");
+            Oxo.verify_ordersummary();
+            Oxo.product_verification("addproduct");
+            Oxo.shipping_method_verification(method);
 			
 			
 			

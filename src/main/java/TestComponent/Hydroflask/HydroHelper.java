@@ -1320,10 +1320,14 @@ public class HydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			click_minicart();
+			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			Sync.waitElementPresent("xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']//span");
 			String checkout = Common.findElement("xpath", "//strong[@role='heading']//span").getText();
+			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
 					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping"),
@@ -2314,7 +2318,7 @@ public class HydroHelper {
 		return sku;
 	}
 
-	public void minicart_scroll(String Dataset) {
+	public void minicart_scroll() {
 		// TODO Auto-generated method stub
 		
 			try
@@ -2330,7 +2334,7 @@ public class HydroHelper {
 				{
 				item = allitems.get(i);
 				System.out.println(item.getText());
-				
+				Common.scrollIntoView(allitems.get(i));
 				}
 			}
 		catch(Exception | Error e)
@@ -2510,7 +2514,9 @@ public class HydroHelper {
 		String sku1="";
 		String sku2="";
 		String product = data.get(Dataset).get("ProductQuantity");
+		System.out.println(product);
 		String product1 = data.get(Dataset).get("Products");
+		System.out.println(product1);
 		
 		try
 		{
@@ -2527,7 +2533,7 @@ public class HydroHelper {
 					break;
 				}
 			}
-			Sync.waitElementPresent("xpath", "//img[@alt='" + product1 + "']");
+           Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product1 + "']");
 			Common.clickElement("xpath", "//img[@alt='" + product1 + "']");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("32 oz Wide Mouth"),
 					"validating the product should navigate to the PDP page",
@@ -2598,7 +2604,7 @@ public class HydroHelper {
 				 sku3=Common.findElement("xpath", "//form[@class ='m-add-to-cart ']").getAttribute("data-product-sku");
 					System.out.println(sku3);
 					Common.clickElement("xpath", "//button[@title='Add to Bag']");
-				
+				Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
 				String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 						.getAttribute("data-ui-id");
 				Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
@@ -2620,8 +2626,94 @@ public class HydroHelper {
 
 		
 	}
-	}
+	public void verify_ordersummary() {
+	try
+	{
+		String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$", "");
+		Float subtotalvalue = Float.parseFloat(Subtotal);
+		String shipping=Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']").replace("$", "");
+		Float shippingvalue = Float.parseFloat(shipping);
+		String Tax=Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+		Float Taxvalue = Float.parseFloat(Tax);
+		String ordertotal=Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace("$", "");
+		Float ordertotalvalue = Float.parseFloat(ordertotal);
+		Float Total=subtotalvalue+shippingvalue+Taxvalue;
+	    String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+	    Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+				"validating the order summary in the payment page",
+				"Order summary should be display in the payment page and all fields should display",
+				"Successfully Order summary is displayed in the payment page and fields are displayed",
+				"Failed to display the order summary and fileds under order summary");
 
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the order summary in the payment page",
+				"Order summary should be display in the payment page and all fields should display",
+				"Unabel to display the Order summary and fields are not displayed in the payment page", Common.getscreenShot(
+						"Failed to display the order summary and fileds under order summary"));
+		Assert.fail();
+	}
+	}
+	
+	public void product_verification(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-accordion__title']");
+			Common.clickElement("xpath", "//div[@class='m-accordion__title']");
+			Sync.waitElementPresent("xpath", "//div[@class='content minicart-items']");
+			String expand=Common.findElement("xpath", "//div[@class='content minicart-items']").getAttribute("aria-hidden");
+			 
+			 String productname=Common.findElement("xpath", "//div[@class='m-mini-product-card__name']").getText();
+			 Common.assertionCheckwithReport(expand.equals("false") && productname.contains(product) ,
+						"validating the items expand button and product under the order summary on payment page",
+						"items should be display under the order summary on the payment page",
+						"Successfully items has displayed under the order summary in payment page",
+						"Failed to display the items under the order summary in payment page");
+			 
+			 
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the items expand button and product under the order summary on payment page",
+					"items should be display under the order summary on the payment page",
+					"Unable to display the items under the order summary in payment page", Common.getscreenShot(
+							"Failed to display the order summary and fileds under order summary"));
+			Assert.fail();
+			
+		}
+	}
+	
+	public void shipping_method_verification(String Dataset) {
+		// TODO Auto-generated method stub
+		String Method=data.get(Dataset).get("methods");
+		try
+		{
+			Common.scrollIntoView("xpath", "//span[@class='value']");
+			Sync.waitElementPresent("xpath", "//span[@class='value']");
+			String shippingmethod=Common.findElement("xpath", "//span[@class='value']").getText();
+			Common.assertionCheckwithReport(shippingmethod.equals(Method),
+					"validating the shipping method  on the payment page",
+					"Shipping method should be display on the payment page",
+					"Successfully Shipping method has displayed on the payment page",
+					"Failed to display Shipping method on the payment page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the shipping method  on the payment page",
+					"Shipping method should be display on the payment page",
+					"Unable to display the Shipping method on the payment page", Common.getscreenShot(
+							"Failed to display Shipping method on the payment page"));
+			Assert.fail();
+			
+		}
+	}
+}
 		
 
 

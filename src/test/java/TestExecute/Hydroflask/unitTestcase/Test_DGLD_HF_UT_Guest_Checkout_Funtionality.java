@@ -15,14 +15,14 @@ public class Test_DGLD_HF_UT_Guest_Checkout_Funtionality {
 	HydroHelper Hydro = new HydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Normal_Path_User_Views_Order_Summary_During_Checkout_ShippingStep() throws Exception {
+	public void Validate_Guest_Checkout_Funtionality() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-//			Hydro.headerlinks("Accessories");       //use in stage
-//			Hydro.addtocart("Product");                    //use in stage
-			Hydro.shop_QAtest("QA_Testing");
-			Hydro.QAtest_addtocart_pdp("qa testing");
+			Hydro.headerlinks("Accessories");       //use in stage
+			Hydro.addtocart("Product");                    //use in stage
+//			Hydro.shop_QAtest("QA_Testing");
+//			Hydro.QAtest_addtocart_pdp("qa testing");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress("AccountDetails");
 //			Hydro.addPaymentDetails("PaymentDetails");

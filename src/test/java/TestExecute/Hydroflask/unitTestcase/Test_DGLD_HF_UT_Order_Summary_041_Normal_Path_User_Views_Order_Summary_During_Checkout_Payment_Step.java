@@ -9,29 +9,25 @@ import TestComponent.Hydroflask.HydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_UT_Minicart_041_Additional_Path_Verify_scroll_on_mini_cart {
+public class Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";
 	HydroHelper Hydro = new HydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Additional_Path_Verify_scroll_on_mini_cart() throws Exception {
+	public void Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.shop_bottle("Bottles & Drinkware");
-			Hydro.bottles_addtocart_pdp("Product");
-//			Hydro.headerlinks("Accessories");   //use in stage
-//			Hydro.minicart_freeshipping("Product");   //use in stage
-//			Hydro.shop_bottle("Bottles & Drinkware");   //use in stage
-//			Hydro.shop_addtocart("Shopproduct");       //use in stage
-			Hydro.shop_QAtest("QA_Testing");
-			Hydro.QAtest_addtocart_pdp("qa testing");
+//			Hydro.headerlinks("Accessories");       //use in stage
+//			Hydro.addtocart("Product");                    //use in stage
 			Hydro.search_product_pdp("search");
-			Hydro.minicart_scroll();
+			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress("AccountDetails");
+			Hydro.verify_ordersummary();
+			Hydro.product_verification("Product");
+			Hydro.shipping_method_verification("Shipping method");
 			
-			
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
