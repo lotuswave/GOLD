@@ -51,7 +51,7 @@ public class Test_DGLD_Admin_CardTiles_28_34_35_36_VerifyCategory_ProductCardsCo
 
 	@AfterTest
 	public void clearBrowser() {
-		 Common.closeAll();
+		// Common.closeAll();
 
 	}
 

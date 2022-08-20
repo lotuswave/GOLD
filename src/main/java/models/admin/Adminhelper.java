@@ -1629,17 +1629,16 @@ public class Adminhelper {
 		String pagetitle = data.get(Dataset).get("pageTitle");
 		try {
 			Sync.waitPageLoad(60);
-			
-		String currentAdminURL = Common.getCurrentURL();
-		String urlkey = pagetitle.toLowerCase();
-		System.out.println(urlkey);
-		Common.openNewTab();
-			if(currentAdminURL.contains("stage")) {
-			Common.oppenURL(data.get(Dataset).get("stageURL")+ urlkey);
-				}
-			else {
-				Common.oppenURL(data.get(Dataset).get("preprodURL")+ urlkey);
-				
+
+			String currentAdminURL = Common.getCurrentURL();
+			String urlkey = pagetitle.toLowerCase();
+			System.out.println(urlkey);
+			Common.openNewTab();
+			if (currentAdminURL.contains("stage")) {
+				Common.oppenURL(data.get(Dataset).get("URL") + urlkey);
+			} else {
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
+
 			}
 			Sync.waitPageLoad(40);
 			String uname = Common.getPageTitle();
@@ -1647,9 +1646,7 @@ public class Adminhelper {
 					"Validating the User lands to the Hydroflask page",
 					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
 					"Failed to navigate to the hydroflask page");
-		
-		
-						
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the User lands to the Hydroflask page",
@@ -2409,13 +2406,13 @@ public class Adminhelper {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "(//label[text()='Select from Gallery'])[7]");
 			Sync.waitPageLoad();
-			String gallery=Common.findElement("xpath", "//span[contains(@class,'fileinput')]//span").getText();
+			String gallery = Common.findElement("xpath", "//span[contains(@class,'fileinput')]//span").getText();
 			Common.assertionCheckwithReport(gallery.equals("Upload Images"),
 					"To validate the page navigated to the insert pages when we click on the upload from gallery ",
 					"After Click on the upload from the gallery it should navigate to the insert pages",
 					"Successfully It is navigated to the insert pages after clicking on the upload from gallery ",
 					"Failed to Navigate to the insert pages after clicking on the upload from the gallery");
-			
+
 			Common.scrollIntoView("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
 			Sync.waitElementPresent(30, "xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
 			Common.clickElement("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
@@ -2464,7 +2461,8 @@ public class Adminhelper {
 			String image3 = Common.findElement("xpath", "//img[@data-pb-style='" + id3 + "']").getAttribute("src");
 			System.out.println(image3);
 			Common.assertionCheckwithReport(
-					image1.contains("Lotusqa") && image2.contains("Lotusqa1") && image3.contains("cms-corporate-purchasing"),
+					image1.contains("Lotusqa") && image2.contains("Lotusqa1")
+							&& image3.contains("cms-corporate-purchasing"),
 					"validating the image uploading on content in frontend website ",
 					"Image should be upload on the frontend website",
 					"Successfully image uploaded on the frond end image ", "Failed to upload image on the frond end");
@@ -2880,21 +2878,21 @@ public class Adminhelper {
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			System.out.println(records);
 			if (records.equals("0 records found")) {
-				
+
 				Sync.waitPageLoad(30);
 				Sync.waitElementVisible("xpath", "//span[text()='Add New Item']");
 				Common.clickElement("xpath", "//span[text()='Add New Item']");
 				Sync.waitPageLoad();
-				
+
 			} else {
 				delete_Existing_Country_Selector("Address");
 
 				Sync.waitElementVisible("xpath", "//span[text()='Add New Item']");
 				Common.clickElement("xpath", "//span[text()='Add New Item']");
 			}
-			
+
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			
+
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("New Country Selector Item / Magento Admin"),
 					"Validating Country Languge Selector page navigation ",
 					"Navigate to Country Language Selector Page ",
@@ -2915,7 +2913,7 @@ public class Adminhelper {
 			Common.clickElement("id", "save");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			
+
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Country & Language Selector Management / Magento Admin")
 							&& message.contains("You saved the Country Selector Item."),
@@ -2960,7 +2958,7 @@ public class Adminhelper {
 
 				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
 				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				
+
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
 						"Validating user selects the edit button",
 						"After clicking edit button it should navigate to the selected page",
@@ -2975,7 +2973,6 @@ public class Adminhelper {
 			Common.clickElement("id", "save");
 			Sync.waitPageLoad();
 
-			
 			String message = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			System.out.println(message);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
@@ -3022,7 +3019,7 @@ public class Adminhelper {
 
 				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
 				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				
+
 				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
 						"Validating the selects edit button",
 						"After clicking edit button it should navigate to the selected page",
@@ -3052,7 +3049,7 @@ public class Adminhelper {
 						.getText();
 				System.out.println(message1);
 				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				
+
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains("Country & Language Selector Management"),
 						"To verify the delete Country & Language Selector Managementt field and deleted message",
@@ -3072,60 +3069,58 @@ public class Adminhelper {
 		}
 
 	}
+
 	public void delete_Existing_Country_Selector(String dataSet) {
 		String url = data.get(dataSet).get("URL");
 		try {
 
 			Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[text()='Select']");
+			Common.clickElement("xpath", "//button[text()='Select']");
 
-				Common.actionsKeyPress(Keys.PAGE_DOWN);
-				Sync.waitElementVisible("xpath", "//a[text()='Edit']");
-				Common.clickElement("xpath", "//a[text()='Edit']");
-				Sync.waitPageLoad();
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Sync.waitElementVisible("xpath", "//a[text()='Edit']");
+			Common.clickElement("xpath", "//a[text()='Edit']");
+			Sync.waitPageLoad();
 
-				String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
-				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				
-				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
-						"Validating the selects edit button",
-						"After clicking edit button it should navigate to the selected page",
-						"Successfully navigate to  the selected page", "Failed to navigate to the selected page");
+			String editselector = Common.findElement("xpath", "//span[text()='Manage Country Selector']").getText();
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
-				Common.clickElement("id", "delete");
-				Sync.waitPageLoad();
-				System.out.println(Common.getPageTitle());
-				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				
-				Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
-						"To verfy the delete existing customer  Country Selector",
-						"It should able to select the  delete existing country selector and popup should display",
-						"Sucessfully selects the  delete existing country selector  and popup is displayed",
-						"Failed to select the delete existing country selector ");
+			Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
+					"Validating the selects edit button",
+					"After clicking edit button it should navigate to the selected page",
+					"Successfully navigate to  the selected page", "Failed to navigate to the selected page");
 
-				Sync.waitPageLoad();
+			Common.clickElement("id", "delete");
+			Sync.waitPageLoad();
+			System.out.println(Common.getPageTitle());
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 
-				String message = Common.getText("xpath", "(//div[@class='modal-content'])[2]");
-				if (message.equals("Are you sure you want to do this?")) {
+			Common.assertionCheckwithReport(editselector.contains("Manage Country Selector"),
+					"To verfy the delete existing customer  Country Selector",
+					"It should able to select the  delete existing country selector and popup should display",
+					"Sucessfully selects the  delete existing country selector  and popup is displayed",
+					"Failed to select the delete existing country selector ");
 
-					Common.clickElement("xpath", "//span[text()='OK']");
-				} else {
-					Assert.fail();
-				}
+			Sync.waitPageLoad();
 
-				String message1 = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
-						.getText();
-				System.out.println(message1);
-				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				
-				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains("Country & Language Selector Management"),
-						"To verify the delete Country & Language Selector Managementt field and deleted message",
-						"It should able to delete the Country & Language Selector Management and delete message should be displayed",
-						"Sucessfully deletes the Country & Language Selector Management and delete message will displayed",
-						" Failed to delete Country & Language Selector Management");
+			String message = Common.getText("xpath", "(//div[@class='modal-content'])[2]");
+			if (message.equals("Are you sure you want to do this?")) {
 
-			
+				Common.clickElement("xpath", "//span[text()='OK']");
+			} else {
+				Assert.fail();
+			}
+
+			String message1 = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			System.out.println(message1);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Country & Language Selector Management"),
+					"To verify the delete Country & Language Selector Managementt field and deleted message",
+					"It should able to delete the Country & Language Selector Management and delete message should be displayed",
+					"Sucessfully deletes the Country & Language Selector Management and delete message will displayed",
+					" Failed to delete Country & Language Selector Management");
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
@@ -3137,7 +3132,6 @@ public class Adminhelper {
 		}
 
 	}
-
 
 	public void buttontext(String Dataset) {
 		// TODO Auto-generated method stub
@@ -4115,7 +4109,7 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			report.addFailedLog("Validating tile button text", "User should able to edit the button text",
+			ExtenantReportUtils.addFailedLog("Validating tile button text", "User should able to edit the button text",
 					"button text validation is failed",
 					Common.getscreenShotPathforReport("Failed to validate the button text"));
 			Assert.fail();
@@ -4144,7 +4138,7 @@ public class Adminhelper {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Common.textBoxInput("xpath", "//input[@name='video_source']", data.get(dataSet).get("VideoURL"));
 			Editcardtile_color("ProductcardTile");
-			edit_cardtile_image("ProductcardTile");
+			edit_cardtile_image("ProductcardTile", 1);
 
 			Common.switchFrames("id", "hot_card_tiles_category_form_description_text_ifr");
 			Common.findElement("xpath", "//body[@class='mce-content-body ']/p")
@@ -4155,7 +4149,7 @@ public class Adminhelper {
 			Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(dataSet).get("Buttontext"));
 			Buttonlink("ProductcardTile");
 			Common.javascriptclickElement("xpath", "//label[text()='Open in new tab']");
-			category_cards_config("ProductcardTile");
+			
 			Common.actionsKeyPress(Keys.HOME);
 
 		} catch (Exception e) {
@@ -4171,7 +4165,6 @@ public class Adminhelper {
 
 	}
 
-	
 	public void buttontype(String dataSet) {
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Common.dropdown("xpath", "//Select[@name='button_type']", SelectBy.TEXT, data.get(dataSet).get("Buttontype"));
@@ -4187,11 +4180,12 @@ public class Adminhelper {
 				Common.textBoxInput("xpath", "button_link[default]", URL);
 
 			} else if (buttonlinknavugation.contains("Product")) {
-				String Product = data.get(dataSet).get("Buttonlinkproduct");
-				Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+				String Product = data.get(dataSet).get("Buttonlinkproduct").toUpperCase();
+				Sync.waitElementVisible("xpath", "(//div[text()='Select...'])[1]");
+				Common.clickElement("xpath", "(//div[text()='Select...'])[1]");
 				Common.textBoxInput("xpath", "//input[@placeholder='Product Name or SKU']", Product);
-				Sync.waitElementVisible("xpath", "//span[text()='" + Product + "']");
-				Common.clickElement("xpath", "//span[text()='" + Product + "']");
+				Sync.waitElementVisible("xpath", "//span[contains(text(),'" + Product + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'" + Product + "')]");
 				String configuredproduct = Common.findElement("xpath", "//div[contains(@class,'multiselect-text')]")
 						.getText();
 
@@ -4238,8 +4232,21 @@ public class Adminhelper {
 	}
 
 	public void category_cards_config(String dataSet) throws Exception {
+
 		try {
 			Common.scrollIntoView("xpath", "//div[@data-index='category_product_cards']");
+
+			int existingcategories = Common.findElements("xpath", "//span[contains(@class,'multiselect-crumb')]/button")
+					.size();
+			if (existingcategories > 0) {
+				for (int i = 0; i < existingcategories; i++) {
+					Sync.waitElementClickable("xpath", "//span[contains(@class,'multiselect-crumb')]/button");
+					Common.javascriptclickElement("xpath", "//span[contains(@class,'multiselect-crumb')]/button");
+				}
+			} else {
+				System.out.println("No existing categories selected");
+			}
+
 			String opencategoryconfigurationmenu = Common
 					.findElement("xpath", "//div[@data-index='category_product_cards']").getAttribute("class");
 			if (opencategoryconfigurationmenu.contains("show")) {
@@ -4248,13 +4255,13 @@ public class Adminhelper {
 				Common.javascriptclickElement("xpath", "//span[text()='Category Cards Configuration']");
 			}
 
-			Common.clickElement("xpath", "(//div[@class='admin__action-multiselect-text'])[2]");
+			Common.clickElement("xpath", "(//div[contains(@class,'admin__action-multiselect-text')])[2]");
 			Sync.waitElementVisible("xpath", "(//div[@class='action-menu _active'])");
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
 
 			String[] categories = data.get(dataSet).get("Categorydisplay").split(",");
 
-			for (int i = 1; i < categories.length; i++) {
+			for (int i = 1; i <= categories.length; i++) {
+
 				System.out.println(categories[i - 1]);
 
 				Common.scrollIntoView("xpath", "//label[text()='" + categories[i - 1] + "']");
@@ -4273,34 +4280,38 @@ public class Adminhelper {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			ExtenantReportUtils.addFailedLog("To validate the category selected", "category should be selected",
+					"category is selected", "Failed to add the categories");
 			Assert.fail();
 		}
 
 	}
 
-	public void edit_cardtile_image(String datSet) {
+	public void edit_cardtile_image(String dataSet, int i) {
 
-		String image = data.get(datSet).get("image");
+		String image = data.get(dataSet).get("image");
 		try {
-			Sync.waitElementPresent("xpath", "//label[text()='Select from Gallery']");
-			Common.javascriptclickElement("xpath", "//label[text()='Select from Gallery']");
+			System.out.println(i);
+			Sync.waitElementPresent("xpath", "(//label[text()='Select from Gallery'])["+i+"]");
+			Common.scrollIntoView("xpath", "(//label[text()='Select from Gallery'])[" + i + "]");
+			Common.javascriptclickElement("xpath", "(//label[text()='Select from Gallery'])[" + i + "]");
 
 			Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and @style='display: none;']");
 			Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
-			Sync.waitElementPresent("xpath", "//small[contains(text(),'" + image + "')]");
-			Common.scrollIntoView("xpath", "//small[contains(text(),'" + image + "')]");
-			Common.javascriptclickElement("xpath", "//small[contains(text(),'" + image + "')]");
+			Sync.waitElementPresent("xpath", "(//small[contains(text(),'" + image + "')])[2]");
+			Common.scrollIntoView("xpath", "(//small[contains(text(),'" + image + "')])[2]");
+			Common.javascriptclickElement("xpath", "(//small[contains(text(),'" + image + "')])[2]");
 			Common.actionsKeyPress(Keys.HOME);
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
 			Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
 			Sync.waitElementInvisible(30, "xpath", "//div[@class='loading-mask' and @style='display: none;']");
 			Thread.sleep(6000);
-			Common.scrollIntoView("xpath", "//img[@class='preview-image']");
-			String imagename = Common.findElement("xpath", "//img[@class='preview-image']").getAttribute("alt");
+			Common.scrollIntoView("xpath", "(//img[@class='preview-image'])[" + i + "]");
+			String imagename = Common.findElement("xpath", "(//img[@class='preview-image'])[" + i + "]")
+					.getAttribute("alt");
 
 			Common.assertionCheckwithReport(imagename.contains(image),
-					"validation the image uploading on content for Fallback image ",
+					"validation the image uploading on content  ",
 					"Image should be upload for background image", "Successfully image uploaded in background image ",
 					"Failed to upload image on the background image");
 
@@ -4419,20 +4430,42 @@ public class Adminhelper {
 	}
 
 	public void verifycategoriesdisplay(String dataSet) throws Exception {
-
+try {
 		int categories = Common.findElements("xpath", "//div[contains(@data-element,'card_tiles')]/a/span").size();
 		System.out.println(categories);
 
 		String[] categoryselected = data.get(dataSet).get("Categorydisplay").split(",");
 
-		for (int i = 0; i < categories && i < categoryselected.length; i++) {
+		for (int i = 1; i < categories && i < categoryselected.length; i++) {
 
-			Sync.waitElementClickable("xpath", "(//div[contains(@data-element,'card_tiles')]/a/span)[" + i + "]");
+			Sync.waitElementVisible("xpath", "(//div[contains(@data-element,'card_tiles')]/a/span)[" + i + "]");
+			Common.scrollIntoView("xpath", "(//div[contains(@data-element,'card_tiles')]/a/span)[" + i + "]");
 			String categorytile = Common
 					.findElement("xpath", "(//div[contains(@data-element,'card_tiles')]/a/span)[" + i + "]").getText();
-			Assert.assertEquals(categorytile, categoryselected[i]);
+			Common.mouseOverClick("xpath", "(//div[contains(@data-element,'card_tiles')]/a/span)[" + i + "]");
+			Sync.waitPageLoad();
 
-		}
+			Sync.waitElementPresent("xpath", "//ol[@class='m-breadcrumb__list']");
+			Common.scrollIntoView("xpath", "//ol[@class='m-breadcrumb__list']");
+
+			
+			
+			Common.assertionCheckwithReport(
+					categorytile.contains(categoryselected[i-1])
+							&& Common.getPageTitle().contains(categoryselected[i - 1]),
+					"To validate the user is navigating to the respective category when clicked on the category in new page",
+					"Usre should navigate to the Respective category"+ categoryselected[i - 1], "Usre navigated to respective category"+ categoryselected[i - 1], "User failed to navigate to the category"+ categoryselected[i - 1]);
+			BaseDriver.getDriver().navigate().back();
+		}}
+catch(Exception e) {
+e.printStackTrace();
+
+ExtenantReportUtils.addFailedLog("To validate the user is navigating to the respective category when clicked on the category in new page",
+		"Usre should navigate to the Respective category", "User failed to navigate to the category",
+		Common.getscreenShotPathforReport("Failed to navigate to the category"));
+Assert.fail();
+
+	}
 	}
 
 	public void Websiteverification_productcard(String dataSet) {
@@ -4459,32 +4492,32 @@ public class Adminhelper {
 			String productnames[] = data.get(dataSet).get("productnames").split(",");
 
 			for (int i = 1; i <= productnames.length; i++) {
-				System.out.println(productnames[i-1]);
-				
+				System.out.println(productnames[i - 1]);
 
 				Sync.waitElementClickable("xpath", "(//img[contains(@class,'m-cms-tile')])[" + i + "]");
-				
-				String producturl = Common.findElement("xpath", "(//a[contains(@class,'m-cms-tile')])[" + i + "]").getAttribute("href");
+
+				String producturl = Common.findElement("xpath", "(//a[contains(@class,'m-cms-tile')])[" + i + "]")
+						.getAttribute("href");
 				System.out.println(producturl);
-				String productname = Common.findElement("xpath", "(//span[contains(@class,'m-cms-tile')])[" + i + "]").getText();
-				
+				String productname = Common.findElement("xpath", "(//span[contains(@class,'m-cms-tile')])[" + i + "]")
+						.getText();
+
 				System.out.println(productname);
 				Common.mouseOverClick("xpath", "(//img[contains(@class,'m-cms-tile')])[" + i + "]");
 				Sync.waitPageLoad();
-				String productnamePDP = Common.findElement("xpath", "//h1[@class='m-product-overview__title']").getText();
-				
+				String productnamePDP = Common.findElement("xpath", "//h1[@class='m-product-overview__title']")
+						.getText();
+
 				Sync.waitElementVisible("xpath", "//h1[@class='m-product-overview__title']");
 				Common.assertionCheckwithReport(
-						producturl.contains(productnames[i - 1])
-								&& productname.contains(productnamePDP),
+						producturl.contains(productnames[i - 1]) && productname.contains(productnamePDP),
 						"To validate the product navigation to the respectiuve PDP page",
 						"When clicked on the product image it should navigate to the PDP page",
 						"Successfully landed on the respective PDP page",
 						"Failed to land on the pdp page of the product");
 
-			
 				BaseDriver.getDriver().navigate().back();
-	
+
 			}
 
 			Common.assertionCheckwithReport(
@@ -5543,7 +5576,6 @@ public class Adminhelper {
 			Common.textBoxInput("name", "paddingRight", paddingright);
 			Common.textBoxInput("name", "paddingBottom", paddingbottom);
 			Common.textBoxInput("name", "paddingLeft", paddingleft);
-			Editandsavepage();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -5808,7 +5840,7 @@ public class Adminhelper {
 	}
 
 	public void website_verification_Herobanner() {
-		// TODO Auto-generated method stub
+
 		try {
 
 			Sync.waitElementPresent(40, "xpath", "//div[@data-content-type='hot_hero_banner']");
@@ -5844,8 +5876,8 @@ public class Adminhelper {
 				Common.javascriptclickElement("xpath", "//li[@name='image']");
 			}
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-
-			
+			edit_cardtile_image("ProductcardTile", 1);
+			edit_cardtile_image("ProductcardTile", 2);
 			Common.scrollIntoView("xpath", "//input[@name='alt']");
 			Common.textBoxInput("xpath", "//input[@name='alt']", data.get(dataSet).get("alterantivetext"));
 			Common.textBoxInput("xpath", "//input[@name='title_attribute']", data.get(dataSet).get("titleaatribute"));
@@ -5870,6 +5902,98 @@ public class Adminhelper {
 			Assert.fail();
 		}
 	}
+
+	public void verifycardtileimage_frontend(String dataSet) {
+
+		String configuredalternativetext = data.get(dataSet).get("alterantivetext");
+		String configuredtitleattribute = data.get(dataSet).get("titleaatribute");
+
+		try {
+			String ImageName = data.get(dataSet).get("image");
+			System.out.println(ImageName);
+			Sync.waitElementVisible("xpath", "//ol[@class='m-breadcrumb__list']");
+
+			Common.scrollIntoView("xpath", "//picture[@class='m-media-card__image']/source");
+			String desktopimage = Common.findElement("xpath", "//picture[@class='m-media-card__image']/source")
+					.getAttribute("srcset");
+			System.out.println(desktopimage);
+			String alternativetext = Common.findElement("xpath", "//picture[@class='m-media-card__image']/img")
+					.getAttribute("alt");
+			System.out.println(alternativetext);
+			String titleattribute = Common.findElement("xpath", "//picture[@class='m-media-card__image']/img")
+					.getAttribute("title");
+			System.out.println(titleattribute);
+
+			Common.assertionCheckwithReport(
+					desktopimage.contains(ImageName) && alternativetext.contains(configuredalternativetext)
+							&& titleattribute.contains(configuredtitleattribute),
+					"To validate the desktop image is configured on the front end",
+					"desktop image is dispalyed on the frotend", "desktop image dispalyed",
+					"Failed to upload image on the background image");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Admin configured image on the front end ",
+					"Admin configured image should be displayed on the frontend",
+					"Desktop image displayed Successfully on the frontend",
+					Common.getscreenShotPathforReport("Failed to display the image on the front end"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void verifybuttonlink_product(String dataSet) {
+		try {
+			Common.scrollIntoView("xpath", "//span[@data-element='feature_card_button_text']");
+			Common.javascriptclickElement("xpath", "//span[@data-element='feature_card_button_text']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.switchWindows();
+			Sync.waitElementPresent("xpath", "//p[@class='m-breadcrumb__text']");
+			String pagetitle = Common.getPageTitle();
+			System.out.println(pagetitle);
+			String title = data.get(dataSet).get("Buttonlinkproduct");
+			System.out.println(title);
+			
+			Common.assertionCheckwithReport(pagetitle.contains(title) || pagetitle.contains(title.toLowerCase()),
+					"To validate the button link is navigating to a product page",
+					"Button link should navigate to product page", "Button link navigated to product",
+					"Failed button link navigation to product");
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			ExtenantReportUtils.addFailedLog("To validate the button link is navigating to a product page",
+					"Button link should navigate to product page", "Button link is navigating to product page",
+					Common.getscreenShotPathforReport("Failed to button link navigation to product page"));
+
+			Assert.fail();
+
+		}
+	}
+
+	public void verifybuttonlink_page(String dataSet) {
+		try {
+			Common.scrollIntoView("xpath", "//span[@data-element='feature_card_button_text']");
+			Common.javascriptclickElement("xpath", "//span[@data-element='feature_card_button_text']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("xpath", "//p[@class='m-breadcrumb__text']");
+			Common.switchWindows();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(data.get(dataSet).get("Buttonlinkpage")),
+					"To validate the button link is navigating to a page", "Button link should navigate to page",
+					"Button link navigated to page", "Failed to button link navigation to page");
 	
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the button link is navigating to a page",
+					"Button link should navigate to page", "Button link failed navigating to page",
+					Common.getscreenShotPathforReport("Failed to button link navigation to page"));
+			Assert.fail();
+
+		}
+	}
 
 }
