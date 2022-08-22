@@ -17,6 +17,8 @@ public class Test_DGLD_Admin_CPS_081_CategoryProduct_Slider_Edit_Components_Cont
     public void CategoryProduct_Slider_Verify_CategoryProduct_Slider_Components_Content() throws Exception {
     try {
     	
+    	
+    	
            Admin.Admin_signin("AccountDetails");
            Admin.click_content();
            Admin.pages();
