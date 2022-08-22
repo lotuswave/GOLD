@@ -3436,6 +3436,8 @@ public class Adminhelper {
 			String alter = Common.findElement("xpath", "//li[@name='c-promo-block__container--alternate']").getText();
 			Common.assertionCheckwithReport(alter.equals("Alternative"), "Validating alternative", "Click Alternatitve",
 					"successfully clicked alternative", "fail to click alternative");
+			Sync.waitElementPresent("xpath", "//button[@id='save']");
+			Common.clickElement("xpath", "//button[@id='save']");
 			// button[@id='save']
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5996,4 +5998,284 @@ Assert.fail();
 		}
 	}
 
+	public void dragndrop_Category_ProductSlider() {
+		// TODO Auto-generated method stub
+		try {
+			Common.scrollIntoView("xpath", "//span[text()='Category/Product Slider']");
+			WebElement element = Common.findElement("xpath", "//span[text()='Category/Product Slider']");
+			draganddropContentBlock(element);
+			String blocknames = Common.findElement("xpath", "//div[@class='pagebuilder-content-type pagebuilder-hot-category-product-slider']")
+					.getAttribute("data-content-type");
+			Common.assertionCheckwithReport(blocknames.equals("hot_entity_slider"),
+					"Validating Promocontent Dragndrop operation", "promocontent dragndrop to content with options",
+					"successfully dragndrop the promocontent with options ", "fail to dragndrop the promobaner");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("Validating Promocontent Dragndrop operation",
+					"User should able Dragndrop Promoblocker", "Unable to Dragndrop the Promocontent",
+					Common.getscreenShotPathforReport("Failed to Dragndrop Promocontent"));
+
+			Assert.fail();
+
+		}
+	}
+
+	public void editCategory_Productslider() {
+		// TODO Auto-generated method stub
+		
+		try {
+			Thread.sleep(2000);
+			String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+					.getAttribute("id");
+
+			Common.mouseOverClick("xpath", "//div[@id='" + id + "']");
+			Common.clickElement("xpath", "//i[@class='icon-admin-pagebuilder-systems']");
+
+			String editpromo = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
+
+			Common.assertionCheckwithReport(editpromo.contains("Edit Category/Product Slider"),
+					"validating the Navigation to the edit  Promo Media Card page ",
+					"after Click on edit button it should be navigate to the edit promoBlocker page ",
+					"Successfully it is navigated to edit promoBlocker page ",
+					"Failed to navigate to edit promoBlocker page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo Blocker ",
+					"after Click on edit button it should be navigate to the edit Blocker page ",
+					"Unable to navigate  to the edit Blocker page ",
+					Common.getscreenShotPathforReport("Failed to navigate to the edit Blocker page"));
+			Assert.fail();
+
+		}
+	}
+
+	public void editcategorypage(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			
+	 	
+				Common.dropdown("xpath", "//select[@name='heading_type']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("headingtype"));
+				
+				String id = Common.findElement("xpath", "(//input[@name='title'])[2]")
+						.getAttribute("id");
+				Common.textBoxInput("xpath", "//input[@id='" + id + "']",data.get(Dataset).get("title"));				
+				Common.textBoxInput("xpath", "//input[@name='subtitle']",data.get(Dataset).get("subtitle"));
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(Dataset).get("CTAurl"));				
+				Common.clickElement("xpath", "//div[@class='admin__field admin__field-option url-input-setting']");		
+				Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(Dataset).get("Buttontext"));
+						
+				int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])[2]").size();
+				System.out.println(saved);
+				Common.assertionCheckwithReport(saved>0,
+						"Enter the categroy details ", "Category details enterd succesfully",
+						"Successfully v", "Failed to enterd the category details");
+				Common.clickElement("xpath", "//button[@id='save']");
+			
+			} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+				"User should able to save the page", "Unable to saves the page",
+				Common.getscreenShotPathforReport("Failed to save the page"));
+		Assert.fail();
+		}}
+
+	public void website_verification_categroeyslider() {
+		// TODO Auto-generated method stub
+		try {
+
+			Sync.waitElementPresent(40, "xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.clickElement("xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Thread.sleep(5000);
+			Common.switchWindows();
+			Sync.waitPageLoad();
+			int logo = Common.findElements("xpath", "//div[@class='c-header__logo']").size();
+			System.out.println();
+			Common.assertionCheckwithReport(logo>0,
+					"Validation of Homepage ", "Homepage should appear on the front end",
+					"Successfully homepage is appeared on the frontend", "Failed to navigate to homepage");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation of homepage in the forntend website ",
+					"Homepage should be appear on fornt end page", "Successfully homepage is appeared on the frontend",
+					Common.getscreenShotPathforReport("Failed to navigate to homepage page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void click_product(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.switchToFirstTab();	
+			Contentpage();
+	        hot_elements(); 
+	        editCategory_Productslider();
+		
+	        Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+					data.get(Dataset).get("heading"));
+ 	       Common.clickElement("xpath", "//div[@class='admin__action-multiselect-wrap action-select-wrap']");
+			
+    		String text= Common.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])[2]").getAttribute("id");
+    		Common.textBoxInput("xpath", "//input[@id='"+ text +"']", data.get(Dataset).get("productnames"));
+           Sync.waitElementPresent("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+            Common.mouseOverClick("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+		
+		Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(Dataset).get("Buttontext"));
+		int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])[2]").size();
+		System.out.println(saved);
+		Common.assertionCheckwithReport(saved>0,
+				"Enter the categroy details ", "Category details enterd succesfully",
+				"Successfully v", "Failed to enterd the category details");
+		Common.clickElement("xpath", "//button[@id='save']");
+	
+	} catch (Exception e) {
+e.printStackTrace();
+ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+		"User should able to save the page", "Unable to saves the page",
+		Common.getscreenShotPathforReport("Failed to save the page"));
+Assert.fail();
+	}}
+
+	public void Websiteverification_product() {
+		// TODO Auto-generated method stub
+		try {
+            Common.refreshpage();
+            Sync.waitElementPresent(40, "xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.clickElement("xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.switchWindows();
+			Thread.sleep(5000);
+			String headingverification = Common.getText("xpath", "//div[@class='c-product-overview u-container']");
+			System.out.println(headingverification);
+			Common.assertionCheckwithReport(headingverification.contains("32 OZ WIDE MOUTH STAINLESS"),
+					"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation of PDP page in the forntend website ",
+					"PDP should de appear on fornt end page", "Successfully image is appeared on the frondend",
+					Common.getscreenShotPathforReport("Failed to navigate to PDP page"));
+			Assert.fail();
+		}
+
+		
 }
+
+	public void click_categoty(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.switchToFirstTab();	
+			Contentpage();
+	        hot_elements(); 
+	        editCategory_Productslider();
+	        String id = Common.findElement("xpath", "(//input[@name='title'])[2]")
+					.getAttribute("id");
+			Common.textBoxInput("xpath", "//input[@id='" + id + "']",data.get(Dataset).get("title"));
+		
+	        Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+					data.get(Dataset).get("CategorySelect"));
+			Common.clickElement("xpath", "(//div[@class='action-menu-item'])[1]");	
+		Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(Dataset).get("Buttontext"));
+		int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])[2]").size();
+		System.out.println(saved);
+		Common.assertionCheckwithReport(saved>0,
+				"Enter the categroy details ", "Category details enterd succesfully",
+				"Successfully v", "Failed to enterd the category details");
+		Common.clickElement("xpath", "//button[@id='save']");
+			
+		} catch (Exception e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+			"User should able to save the page", "Unable to saves the page",
+			Common.getscreenShotPathforReport("Failed to save the page"));
+	Assert.fail();
+	}}
+
+	public void Websiteverification_category() {
+		// TODO Auto-generated method stub
+		try {
+            Common.refreshpage();
+            Sync.waitElementPresent(40, "xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.clickElement("xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.switchWindows();
+			Thread.sleep(5000);
+			String shop = Common.getText("xpath", "//h1[@id='page-title-heading']");
+			System.out.println(shop);
+			Common.assertionCheckwithReport(shop.contains("Shop"),
+					"validation shop categroy in the forntend website ", "Shop category should be appear on fornt end page",
+					"Successfully Shop category is appeared on the frondend", "Failed to navigate to Shop category page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation Shop category in the forntend website ",
+					"Shop category should be appear on fornt end page", "Successfully Shop category is appeared on the frondend",
+					Common.getscreenShotPathforReport("Failed to navigate to Shop category page"));
+			Assert.fail();
+		}	
+	}
+
+	public void Click_Page(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.switchToFirstTab();	
+			Contentpage();
+	        hot_elements(); 
+	        editCategory_Productslider();
+	        String id = Common.findElement("xpath", "(//input[@name='title'])[2]").getAttribute("id");
+			Common.textBoxInput("xpath", "//input[@id='" + id + "']",data.get(Dataset).get("title"));	        
+	        Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+					data.get(Dataset).get("ButtonLinknavigation"));
+			
+	   
+			Common.clickElement("xpath", "//span[text()='503 Service Unavailable']");
+			
+		Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(Dataset).get("Buttontext"));
+		int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])[2]").size();
+		System.out.println(saved);
+		Common.assertionCheckwithReport(saved>0,
+				"Enter the categroy details ", "Category details enterd succesfully",
+				"Successfully v", "Failed to enterd the category details");
+		Common.clickElement("xpath", "//button[@id='save']");
+
+			
+		} catch (Exception e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+			"User should able to save the page", "Unable to saves the page",
+			Common.getscreenShotPathforReport("Failed to save the page"));
+	Assert.fail();
+	}}
+
+	public void Websiteverification_page() {
+		// TODO Auto-generated method stub
+		
+		try {
+            Common.refreshpage();
+            Sync.waitElementPresent(40, "xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.clickElement("xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Common.switchWindows();
+			Thread.sleep(5000);
+			String page = Common.getText("xpath", "//p[@class='m-breadcrumb__text']");
+			System.out.println(page);
+			Common.assertionCheckwithReport(page.contains("503 Service Unavailable"),
+					"validation 503 Service Unavailable page in the forntend website ", "503 Service Unavailable page should be appear on fornt end page",
+					"Successfully 503 Service Unavailable page is appeared on the frondend", "Failed to navigate to 503 Service Unavailable page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation 503 Service Unavailable page in the forntend website ",
+					"503 Service Unavailable page should be appear on fornt end page", "Successfully 503 Service Unavailable page is appeared on the frondend",
+					Common.getscreenShotPathforReport("Failed to navigate to 503 Service Unavailable page"));
+			Assert.fail();
+		}	
+	}
+
+	}
