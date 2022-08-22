@@ -6280,4 +6280,56 @@ Assert.fail();
 		}	
 	}
 
+	public void savecategory_product(String Dataset) {
+		// TODO Auto-generated method stub
+try {
+			
+			//Common.clickElement("xpath", "//h2[@class='m-heading__text placeholder-text']");
+		String id =	Common.findElement("xpath", "(//input[@class='admin__control-text'])[4]").getAttribute("id");			
+	  	Common.textBoxInput("xpath", "//input[@id='"+id+"']", data.get(Dataset).get("title"));		
+	  	String att =	Common.findElement("xpath", "(//input[@class='admin__control-text'])[5]").getAttribute("id");				
+		Common.textBoxInput("xpath", "//input[@id='"+att+"']", data.get(Dataset).get("SubTitle"));
+		
+		int title = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[5]").size();
+		System.out.println(title);
+		Common.assertionCheckwithReport(title>0 ,
+				" To Validate the Edit Category/Product Slider page", "User should able to navigate Edit Category/Product Slider page",
+				"Sucessfully User lands on Edit Category/Product Slider", "Failed to navigate to Edit Category/Product Slider");
+		
+		Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+	
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+					"User should able to save the page", "Unable to saves the page",
+					Common.getscreenShotPathforReport("Failed to save the page"));
+			Assert.fail();
+		}
+
+	}
+
+	public void webiste_title() {
+		// TODO Auto-generated method stub
+		
+		try {
+
+			Sync.waitElementPresent("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+			
+			String headingverification = Common.getText("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+			System.out.println(headingverification);
+			Common.assertionCheckwithReport(headingverification.contains("HYDROFLASK QA TESTING"),
+					"validation of title in the forntend website ", "Title and subtitle should be appear on fornt end page",
+					"Successfully Title and subtitle is appeared on the frondend", "Failed to display Title and subtitle");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			report.addFailedLog("validation of title in the forntend website ",
+					"Title and subtitle should be appear on fornt end page", "Successfully Title and subtitle is appeared on the frondend",
+					Common.getscreenShotPathforReport("Failed to display Title and subtitle"));
+			Assert.fail();
+
+		}
+	}
+
+
 	}
