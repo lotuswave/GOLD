@@ -2910,13 +2910,13 @@ public class HydroHelper {
 				Thread.sleep(3000);
 				try {
 					Common.clickElement("xpath",
-							"//*[@id='co-shipping-form']/div/fieldset/div/div[1]/div/div/ul/li[1]/a");
+							"//form[@id='co-shipping-form']//input[@name='street[0]");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
 					Common.clickElement("xpath",
-							"//*[@id='co-shipping-form']/div/fieldset/div/div[1]/div/div/ul/li[1]/a");
+							"//form[@id='co-shipping-form']//input[@name='street[0]");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));

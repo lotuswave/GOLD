@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -1870,7 +1871,7 @@ public class OxoHelper {
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String order="";
-		addPaymentDetails("PaymentDetails");
+		add_reg_PaymentDetails("PaymentDetails");
 		String expectedResult = "It redirects to order confirmation page";
 		
 		  if (Common.findElements("xpath",
@@ -2319,6 +2320,7 @@ public class OxoHelper {
 			item = allitems.get(i);
 			System.out.println(item.getText());
 			Common.scrollIntoView(allitems.get(i));
+			
 			}
 		}
 	catch(Exception | Error e)
@@ -2330,6 +2332,253 @@ public class OxoHelper {
 	}
 	
 }
+	public void add_reg_PaymentDetails(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String,String> Paymentmethod=new HashMap<String,String>();
+        Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String cardnumber=data.get(dataSet).get("cardNumber");
+		System.out.println(cardnumber);
+		String expectedResult = "land on the payment section";
+		//Common.refreshpage();
+	
+		try {
+			Sync.waitPageLoad();
+		 
+	  	Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+		int sizes=Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+	 Common.assertionCheckwithReport(sizes>0, "Successfully land on the payment section", expectedResult,"User unabel to land opaymentpage");
+		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+		
+		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+		int payment=Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+		System.out.println(payment);
+		if(payment>0)
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//span[text()='New payment method']");
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+		
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+			
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+			Thread.sleep(1000);
+		    Common.clickElement("xpath", "//span[text()='Place Order']");
+		}
+       else
+        {
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+		
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+			
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//span[text()='Place Order']");
+
+        }
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			
+
+			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+					"failed  to fill the Credit Card infromation",
+					Common.getscreenShotPathforReport("Cardinfromationfail"));
+			Assert.fail();
+          }
+
+		expectedResult = "credit card fields are filled with the data";
+		String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+		
+		
+		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+			expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+	}
+
+	public void addDeliveryAddress_registerUser(String dataSet) {
+		// TODO Auto-generated method stub
+		String expectedResult = "shipping address is entering in the fields";
+        int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
+		if (size > 0) {
+        	try { 
+				Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",	data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",data.get(dataSet).get("Street"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.SPACE);
+				Thread.sleep(2000);
+				try {
+					Common.clickElement("xpath",
+							"//form[@id='co-shipping-form']//input[@name='street[0]']");
+				} catch (Exception e) {
+					Common.actionsKeyPress(Keys.BACK_SPACE);
+					Thread.sleep(1000);
+					Common.actionsKeyPress(Keys.SPACE);
+					Common.clickElement("xpath",
+							"//form[@id='co-shipping-form']//input[@name='street[0]']");
+				}
+				if (data.get(dataSet).get("StreetLine2") != null) {
+					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
+				}
+				if (data.get(dataSet).get("StreetLine3") != null) {
+					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
+				}
+				
+				Common.scrollIntoView("xpath", "//select[@name='region_id']");
+				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));
+				Thread.sleep(3000);
+				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
+				String Shippingstate = Common.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']").getText();
+
+//				Shippingaddress.put("Shippingstate", Shippingstate);
+				System.out.println(Shippingstate);
+
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+						data.get(dataSet).get("City"));
+				// Common.mouseOverClick("name", "region_id");
+				try {
+					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				} catch (ElementClickInterceptedException e) {
+					// TODO: handle exception
+					Thread.sleep(2000);
+					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				Thread.sleep(2000);
+				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
+						data.get(dataSet).get("postcode"));
+				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
+				System.out.println("*****" + ShippingZip + "*******");
+//				Shippingaddress.put("ShippingZip", ShippingZip);
+				
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='telephone']",
+						data.get(dataSet).get("phone"));
+				
+				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
+				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
+
+                Common.clickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
+
+				int sizeerrormessage = Common.findElements("xpath", "//span[contains(text(),'This is a required field')]").size();
+
+				Common.assertionCheckwithReport(sizeerrormessage <= 0, "verifying shipping addres filling ",
+						"user will fill the all the shipping", "user fill the shiping address click save button",
+						"faield to add new shipping address");
+				
+
+				Common.clickElement("xpath", "//tr[@class='row']//td[@class='col col-method' and @id]");
+				Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validating adding  address", expectedResult,
+						"User unabel add shipping address",
+						Common.getscreenShotPathforReport("shipping address faield"));
+			
+				Assert.fail();
+
+			}
+        	
+		}
+
+		else
+
+		{
+			try {
+				Common.clickElement("xpath", "//a[@class='action action-show-popup checkout-add-address-popup-link']");
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+						data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+						data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+						data.get(dataSet).get("Street"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.SPACE);
+				Thread.sleep(3000);
+				try {
+					Common.clickElement("xpath",
+							"//form[@id='co-shipping-form']//input[@name='street[0]");
+				} catch (Exception e) {
+					Common.actionsKeyPress(Keys.BACK_SPACE);
+					Thread.sleep(1000);
+					Common.actionsKeyPress(Keys.SPACE);
+					Common.clickElement("xpath",
+							"//form[@id='co-shipping-form']//input[@name='street[0]");
+				}
+				if (data.get(dataSet).get("StreetLine2") != null) {
+					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
+				}
+				if (data.get(dataSet).get("StreetLine3") != null) {
+					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
+				}
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+						data.get(dataSet).get("City"));
+				
+				try {
+					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				} catch (ElementClickInterceptedException e) {
+					// TODO: handle exception
+					Thread.sleep(3000);
+					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				Thread.sleep(2000);
+				Common.textBoxInputClear("name", "postcode");
+				Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+				
+				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
+				System.out.println("*****" + ShippingZip + "*******");
+//				Shippingaddress.put("ShippingZip", ShippingZip);
+				
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+
+				Sync.waitElementClickable("xpath", "//span[contains(text(),'Continue To Payment')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Continue To Payment')]");
+                int errorsize=Common.findElements("xpath", "//div[@class='field-error']").size();
+				Common.assertionCheckwithReport(errorsize>0, "verifying shipping addres filling ", expectedResult, "user enter the shipping address", "mandatory data");			
+	
+				expectedResult = "shipping address is filled in to the fields";
+				Common.clickElement("xpath", "//button[@data-ac-test='form-shipping-address_action_submit']");
+				Thread.sleep(3000);
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validating adding  address", expectedResult,
+						"User unabel add shipping address",
+						Common.getscreenShotPathforReport("shipping address faield"));
+				
+				Assert.fail();
+
+			}
+		}
+	
+
+	}
 		
 	}
 	
