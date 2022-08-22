@@ -1185,6 +1185,83 @@ public class HydroHelper {
 		}
 
 	}
+	public void validateChatboxOptions(String DataSet) {
+
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementClickable("xpath", "//a[@class='a-logo']");
+			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+			Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+
+			String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
+			Common.assertionCheckwithReport(answers.contains("Answers"), "To validate the Answers options in Chatbox",
+					"Click the Answers option to display the related options",
+					"Sucessfully click the answers option button", "Unable to click the Answers option button");
+
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page",
+					"Open the ChatBot and answers option should be displayed",
+					"Unable click on the ChatBot and answers are not displayed",
+					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+			Assert.fail();
+		}
+
+		List<WebElement> Answerwebelements = Common.findElements("xpath",
+				"//div[contains(@class,'SearchListItem__details')]");
+
+		ArrayList<String> arrayoptionName = new ArrayList<String>();
+
+		for (WebElement answernames : Answerwebelements) {
+			arrayoptionName.add(answernames.getText());
+		}
+
+		String[] items = data.get(DataSet).get("HydroAnswers").split(",");
+
+		for (int i = 0; i < items.length; i++) {
+
+			if (arrayoptionName.contains(items[i])) {
+			} else {
+
+				ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+						"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
+						Common.getscreenShotPathforReport("failed to display answersoptions"));
+				Assert.fail();
+			}
+
+			ExtenantReportUtils.addPassLog("To Validate the Answers options ",
+					"click on the answers options it must display all the options ",
+					"Sucessfully displayed the answers options " + arrayoptionName,
+					Common.getscreenShotPathforReport("Answervalidation"));
+		}
+
+		try {
+			String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+			Sync.waitElementClickable(30, "xpath", "//button[@aria-label='New Conversation']");
+			Common.mouseOverClick("xpath", "//button[@aria-label='New Conversation']");
+
+			Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+
+			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to Hydroflask!"),
+					"To validate the Chat Conversation when user click on the chat option", "It should Open the Chat conversation in ChatBot",
+					"Sucessfully click on the ChatBot and display the Chat conversation ",
+					"Unable to display the chat conversation when user click on the chat option ");
+
+			Common.switchToDefault();
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Chat Conversation when user click on the chat option", "It should Open the Chat conversation in ChatBot",
+					"Unable to  click on the ChatBot and not displayed the Chat conversation ",
+					Common.getscreenShotPathforReport("Unable to display the chat conversation when user click on the chat option"));
+			Assert.fail();
+		}
+
+	}
+
 
 	public void minicart_update(String Dataset) {
 		// TODO Auto-generated method stub
@@ -2803,6 +2880,100 @@ public class HydroHelper {
 			
 		}
 	}
+	public void populate_Shippingaddress_fields(String DataSet) throws Exception {
+
+		Common.scrollIntoView("name", "firstname");
+		Common.textBoxInput("name", "firstname", data.get(DataSet).get("FirstName"));
+		Common.textBoxInput("name", "lastname", data.get(DataSet).get("LastName"));
+
+		Common.textBoxInput("name", "street[0]", data.get(DataSet).get("Street"));
+		Common.scrollIntoView("name", "city");
+
+		Common.textBoxInput("name", "city", data.get(DataSet).get("City"));
+
+		Sync.waitElementPresent("xpath", "//select[@name='region_id']");
+		Common.clickElement("xpath", "//select[@name='region_id']");
+
+		Sync.waitElementPresent("xpath", "//option[text()='Alabama']");
+		Common.clickElement("xpath", "//option[text()='Alabama']");
+		
+		Sync.waitElementPresent("xpath", "//input[@placeholder='Zip/Postal Code']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Zip/Postal Code']", data.get(DataSet).get("postcode"));
+	//	Common.dropdown("name", "country_id", SelectBy.TEXT, "United States");
+		Sync.waitElementPresent("xpath", "//input[@placeholder='Phone Number']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Phone Number']", data.get(DataSet).get("phone"));
+	}
+
+	public void selectshippingmethod(String DataSet) {
+		String shippingmethod = data.get(DataSet).get("Shippingmethods");
+		try {
+
+			Common.scrollIntoView("xpath", "//td[2][text()='" + shippingmethod + "']");
+
+			Sync.waitElementClickable("xpath", "//td[2][text()='" + shippingmethod + "']");
+			Common.javascriptclickElement("xpath", "//td[2][text()='" + shippingmethod + "']");
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//input[@class='a-radio-button__input']");
+
+			if (shippingmethod.contains("Fixed")) {
+				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='flatrate_flatrate']")
+						.getAttribute("aria-labelledby");
+				System.out.println(selecetdshippingmethod);
+
+				Common.assertionCheckwithReport(selecetdshippingmethod.contains("Fixed - Flat Rate"),
+						"to validate the shipping method selected" + shippingmethod,
+						shippingmethod + "Should be selected", shippingmethod + "is selected",
+						"Failed to select the" + shippingmethod);
+			} else if (shippingmethod.contains("Ground")) {
+				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='fedex_FEDEX_GROUND']")
+						.getAttribute("aria-labelledby");
+				System.out.println(selecetdshippingmethod);
+				Common.assertionCheckwithReport(selecetdshippingmethod.contains("FEDEX_GROUND"),
+						"to validate the shipping method selected" + shippingmethod,
+						shippingmethod + "Should be selected", shippingmethod + "is selected",
+						"Failed to select the" + shippingmethod);
+
+			} else if (shippingmethod.contains("2 Day")) {
+				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='fedex_FEDEX_2_DAY']")
+						.getAttribute("aria-labelledby");
+				System.out.println(selecetdshippingmethod);
+				Common.assertionCheckwithReport(selecetdshippingmethod.contains("FEDEX_2_DAY"),
+						"to validate the shipping method selected" + shippingmethod,
+						shippingmethod + "Should be selected", shippingmethod + "is selected",
+						"Failed to select the" + shippingmethod);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("to validate the shipping method selected" + shippingmethod,
+					shippingmethod + "Should be selected", "Failed to select the shiping method" + shippingmethod,
+					shippingmethod + "Not selected");
+			Assert.fail();
+
+		}
+	}
+
+	public void Validate_Paymentpage() {
+		try {
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'continue primary')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'continue primary')]");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[text()='Payment Method']");
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("#payment") && Common.getPageTitle().contains("Checkout"),
+					"To validate the user lands on the payment page", "User should land on the payment page",
+					"User lands on the payment page", "User failed to land on the payment page");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user lands on the payment page", "User should land on the payment page",
+					"User failed to land on the payment page", "Payment navigation failed");
+			Assert.fail();
+
+		}
+
+	}
+
 
 	public void addDeliveryAddress_registerUser(String dataSet) {
 		// TODO Auto-generated method stub

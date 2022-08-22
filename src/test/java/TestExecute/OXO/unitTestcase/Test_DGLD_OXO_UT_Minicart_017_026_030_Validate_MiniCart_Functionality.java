@@ -9,7 +9,7 @@ import TestComponent.OXO.OxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_UT_Minicart_017_026_Validate_MiniCart_Functionality {
+public class Test_DGLD_OXO_UT_Minicart_017_026_030_Validate_MiniCart_Functionality {
 
 	String datafile = "OXO//OxoTestData.xlsx";	
 	OxoHelper Oxo=new OxoHelper(datafile);

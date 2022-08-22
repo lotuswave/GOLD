@@ -17,7 +17,8 @@ public class Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the
 	public void Verifying_User_selects_chatbot_and_toggle_between_chatbot() throws Exception {
 
 		try {
-			Hydro.click_ChatBot("Chatoptions");
+			
+			Hydro.validateChatboxOptions("Chatoptions");
 
 		} catch (Exception e) {
 
@@ -27,7 +28,7 @@ public class Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

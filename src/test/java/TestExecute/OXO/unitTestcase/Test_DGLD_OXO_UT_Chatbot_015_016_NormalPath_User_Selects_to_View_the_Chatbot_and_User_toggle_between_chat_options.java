@@ -10,7 +10,7 @@ import TestComponent.OXO.OxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_chat_options {
+public class Test_DGLD_OXO_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options {
 
 	String datafile = "Oxo//OxoTestData.xlsx";	
 	OxoHelper Oxo=new OxoHelper(datafile);
@@ -39,12 +39,17 @@ public class Test_DGLD_OXO_UT_Chat_Bot_015_AdditionalPath_User_toggle_between_ch
 	
 	
 	
-	 @BeforeTest
-	 @Parameters("URL")
-	    public void startTest(String URL) throws Exception {
-		 System.setProperty("configFile", "Oxo\\config.properties");
-			   //Login.signIn();
-	          Login.openwebsite(URL);
+	// @BeforeTest
+	// @Parameters("URL")
+	 //   public void startTest(String URL) throws Exception {
+		// System.setProperty("configFile", "Oxo\\config.properties");
+			//Login.signIn();
+	         // Login.openwebsite(URL);
+
+			@BeforeTest
+			  public void startTest() throws Exception {
+				System.setProperty("configFile", "Oxo\\config.properties");
+				  Login.signIn();
 
 	      }
 
