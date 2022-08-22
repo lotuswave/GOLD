@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.unitTestcase;
+package TestExecute.Hydroflask.regressionTestcase;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,23 +9,24 @@ import TestComponent.Hydroflask.HydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_UT_Guest_Checkout_Funtionality {
+public class Test_DGLD_HF_UT_002_Register_user_Checkout_Funtionality_Visa_card {
 
-	String datafile = "Hydroflask//HydroTestData.xlsx";
+	String datafile = "Hydroflask//HydroData.xlsx";
 	HydroHelper Hydro = new HydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality() throws Exception {
+	public void Validating_Register_user_Checkout_Funtionality_Visa_card () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.headerlinks("Accessories");       //use in stage
 			Hydro.addtocart("Product");                    //use in stage
 //			Hydro.shop_QAtest("QA_Testing");
 //			Hydro.QAtest_addtocart_pdp("qa testing");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress("AccountDetails");
-//			Hydro.addPaymentDetails("PaymentDetails");
+			Hydro.addDeliveryAddress_registerUser("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
