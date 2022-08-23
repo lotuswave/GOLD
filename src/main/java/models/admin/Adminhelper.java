@@ -6331,5 +6331,105 @@ try {
 		}
 	}
 
+	public void imageupload() {
+		// TODO Auto-generated method stub
+		String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+		try {
+			Sync.waitElementPresent("xpath", "(//input[@name='image_element_desktop'])[2]");
+			Common.findElement("xpath", "(//input[@name='image_element_desktop'])[2]").sendKeys(path);
+			String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+			System.out.println(image);
+			Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
+					"To validate the image uploading on content for background image ",
+					"Image should be upload on the background image",
+					"Successfully image uploaded on the background image ",
+					"Failed to upload image on the background image");
+		}
 
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the image uploading on content for background image ",
+					"Image should be upload on the background image", "unable to upload image on the background image ",
+					Common.getscreenShotPathforReport("Failed to upload image on the background image"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void Mobileupload(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String id = Common.findElement("xpath", "(//label[text()='Select from Gallery'])[7]").getAttribute("id");
+			 Common.clickElement("xpath", "//label[@id='"+ id +"']");
+			Sync.waitElementVisible("xpath", "//span[text()='Upload Images']");
+			
+			String alt = data.get(Dataset).get("image");       
+			Common.scrollIntoView("xpath", "//img[@alt='"+ alt +"']");
+	    	Common.clickElement("xpath", "//img[@alt='"+ alt +"']");
+	    	Common.clickElement("xpath", "//button[@id='insert_files']");
+		String imagename = Common.findElement("xpath", "(//img[@class='preview-image'])[2]").getAttribute("alt");
+		Common.assertionCheckwithReport(imagename.equals(alt),
+				"validation the image uploading on content for Mobile image ",
+				"Image should be upload for Mobile image", "Successfully image uploaded in Mobile image ",
+				"Failed to upload the mobile image");
+		
+		} catch (Exception e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(" To Validate the User upload the mobile image",
+			"User should able to upload the mobile image", "Unable to upload the mobile image",
+			Common.getscreenShotPathforReport("Failed upload the mobile image"));
+	Assert.fail();
+	}}
+
+	public void image_Alt_Attribute(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try {
+			
+		    Common.scrollIntoView("xpath", "//input[@name='alt']");
+			Common.textBoxInput("xpath", "//input[@name='alt']",data.get(Dataset).get("title"));
+			String saved = Common.findElement("xpath", "//span[text()='Image Alt Attribute']").getText();
+			System.out.println(saved);
+			Common.assertionCheckwithReport(saved.equals("Image Alt Attribute"),
+					"Enter the Image Alt Attribute details ", "Image Alt Attribute details enterd succesfully",
+					"Successfully entered Image Alt Attribute details", "Failed to enterd the Image Alt Attribute details");    
+			Common.clickElement("xpath", "//button[@id='save']");
+				
+			} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+				"User should able to save the page", "Unable to saves the page",
+				Common.getscreenShotPathforReport("Failed to save the page"));
+		Assert.fail();
+		}}
+
+	public void website_image() {
+		// TODO Auto-generated method stub
+		
+		try {
+			String image = Common.findElement("xpath", "//div[@class='c-promo-block__raised-image']").getText();
+								
+			System.out.println(image);
+			Common.assertionCheckwithReport(image.contains("HYDROFLASK QA TESTING"),
+					"validating the images are displaying on fornt end ",
+					"after Clicking on the link  it should be navigate to the respective page contains with 2 images",
+					"Successfully it is navigated to respective page and contains 2 images ",
+					"Failed to navigate to respective page and images are not appeared");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validating the images are displaying on fornt end ",
+					"after Click on link  it should be navigate to the respective page contains with 2 images",
+					"Unable to navigated to the respective page and 2 images are not displayed",
+					Common.getscreenShotPathforReport(
+							"Failed to navigate to respective page and images are not appeared"));
+			Assert.fail();
+
+		}
+
+	}
+
+	
 	}
