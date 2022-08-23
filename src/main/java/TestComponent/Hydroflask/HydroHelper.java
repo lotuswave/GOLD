@@ -16,6 +16,7 @@ import org.testng.AssertJUnit;
 
 import TestLib.Automation_properties;
 import TestLib.Common;
+import TestLib.Common.SelectBy;
 import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
@@ -3141,6 +3142,190 @@ public class HydroHelper {
 
 		
 	}
+
+	
+	public void click_AddNewAdress_ShippingPage() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+
+			Common.isElementVisibleOnPage(30, "xpath", "//h1[contains(text(),'Shipping Address')]");
+			String Shipping = Common.findElement("xpath", "//h1[contains(text(),'Shipping Address')]").getText();
+			System.out.println(Shipping);
+			Common.assertionCheckwithReport(Shipping.contains("Shipping Address"),
+					"validate shipping address pop up when click on editaddress link",
+					"it should open a shipping address popup when click on editaddress link",
+					"successfully open a shipping address pop up when click on editaddress link",
+					"failed to open shipping address pop up when click on editaddress link");
+
+		} catch (Exception | Error e) {
+
+			ExtenantReportUtils.addFailedLog("validate shipping address pop up when click on editaddress link",
+					"it should open a shipping address popup when click on editaddress link",
+					"successfully open a shipping address pop up when click on editaddress link",
+					Common.getscreenShot("failed to open shipping address pop up when click on editaddress link"));
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	public void ShippingAddress(String dataSet) {
+		// TODO Auto-generated method stub
+		String FirstName = data.get(dataSet).get("FirstName");
+		String LastName = data.get(dataSet).get("LastName");
+		String Street = data.get(dataSet).get("Street");
+		String City = data.get(dataSet).get("City");
+		String Region = data.get(dataSet).get("Region");
+		String postcode = data.get(dataSet).get("postcode");
+		String Country = data.get(dataSet).get("Country");
+		String phone = data.get(dataSet).get("phone");
+		try {
+
+			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+
+			Common.textBoxInput("xpath", "//input[@name='firstname']", FirstName);
+
+			Sync.waitElementPresent("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("xpath", "//input[@name='lastname']", LastName);
+
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Sync.waitElementPresent("xpath", "//input[@name='street[0]']");
+			Common.textBoxInput("xpath", "//input[@name='street[0]']", Street);
+
+			Common.textBoxInput("xpath", "//input[@name='city']", City);
+
+			Common.dropdown("xpath", "//select[@name='region_id']", SelectBy.TEXT, Region);
+
+			Sync.waitElementPresent("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", postcode);
+
+			Common.dropdown("xpath", "//select[@name='country_id']", SelectBy.TEXT, Country);
+
+			Sync.waitElementPresent("xpath", "//input[@name='telephone']");
+			Common.textBoxInput("xpath", "//input[@name='telephone']", phone);
+
+			Common.clickElement("xpath", "//span[contains(text(),' Ship Here')]");
+
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+
+			Assert.fail();
+
+		}
+
+	}
+	public void Validate_Update_NewAddress_Verification(String dataSet) {
+		String FirstName = data.get(dataSet).get("FirstName");
+		String LastName = data.get(dataSet).get("LastName");
+		String Street = data.get(dataSet).get("Street");
+		String City = data.get(dataSet).get("City");
+		String Region = data.get(dataSet).get("Region");
+		String postcode = data.get(dataSet).get("postcode");
+		String phone = data.get(dataSet).get("phone");
+		String Country = data.get(dataSet).get("Country");
+
+		try {
+			String CheckedAddress = Common.findElement("xpath", "//div[@class='shipping-address-item selected-item']")
+					.getAttribute("class");
+			System.out.println(CheckedAddress);
+			String fullname = Common.findElement("xpath", "(//div[contains(@class,'item selected-item')]/p/strong)")
+					.getText();
+			System.out.println(fullname);
+
+			String selectedaddress = Common.findElement("xpath", "(//div[contains(@class,'item selected-item')]/p)[2]")
+					.getText();
+
+			Common.assertionCheckwithReport(
+					fullname.equals(FirstName + " " + LastName) && CheckedAddress.contains("item selected-item")
+							&& selectedaddress.equals(Street + "\n" + City + ", " + Region + " " + postcode + "\n"
+									+ Country + "\n" + phone),
+
+					"validate the user is able to update the new address in the shipping page",
+					"user should able to update the new address in the shipping page",
+					"user successfuly update the new address in the shipping page",
+					"failed to update the new address in the shipping page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validate the user is able to update the new address in the shipping page",
+					"user should  able to update the new address in the shipping page",
+					"user successfuly update the new address in the shipping page",
+					Common.getscreenShot("failed to update the new address in the shipping page"));
+			
+			Assert.fail();
+		}
+	}
+	public void Validate_invalid_Signin_Checkoutpage() {
+		// TODO Auto-generated method stub
+		try {
+
+			Common.clickElement("xpath", "//button[contains(@class,'action login primary')]");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+
+			String errormessage = Common.findElementBy("xpath", "//div[contains(@class,'message-error')]").getText();
+			Common.assertionCheckwithReport(errormessage.contains("Invalid login or password."),
+					"To validate incorrect password in checkout page",
+					"Error message should be displayed for incorrect password", "Error message displayed",
+					"failed to display error message in checkout page for incorrect password");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate incorrect password in checkout page",
+					"Error message should be displayed for incorrect password",
+					"failed to display error message in checkout page for incorrect password",
+					Common.getscreenShotPathforReport("failed to display error message in checkout page"));
+			Assert.fail();
+
+		}
+	}
+
+	public void Click_forgotpasswordLink_Checkout() {
+		try {
+			Common.findElement("xpath", "//span[text()='Forgot Your Password?']");
+			Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
+			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+			Common.assertionCheckwithReport(forgotpassword.contains("Forgot Your Password?"),
+					"To validate the user is navigating to Forgot Password page",
+					"user should naviagte to forgot password page", "User lands on Forgot Password page",
+					"User failed to navigate to forgot password page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page",
+					"user should navigate to forgot password page", "User failed to land on Forgot Password page",
+					Common.getscreenShotPathforReport("failed  to naviagte forgot password page "));
+			Assert.fail();
+
+		}
+	}
+	public void click_EditAddress() {
+		// TODO Auto-generated method stub
+		try {
+
+			Common.clickElement("xpath", "//div[@class='shipping-address-item selected-item']/div");
+			Sync.waitPageLoad();
+			Common.isElementVisibleOnPage(30, "xpath", "//h1[contains(text(),'Shipping Address')]");
+			String Editaddresspopup = Common.findElement("xpath", "//aside[contains(@class,'shipping-address-modal')]").getAttribute("class");
+			System.out.println(Editaddresspopup);
+			Common.assertionCheckwithReport(Editaddresspopup.contains("show"),
+					"validate shipping address pop up when click on editaddress link in the existing address",
+					"it should open a shipping address popup when click on editaddress link",
+					"successfully open a shipping address pop up when click on editaddress link",
+					"failed to open shipping address pop up when click on editaddress link");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validate shipping address pop up when click on editaddress link",
+					"it should open a shipping address popup when click on editaddress link",
+					"successfully open a shipping address pop up when click on editaddress link",
+					Common.getscreenShot("failed to open shipping address pop up when click on editaddress link"));
+			
+			Assert.fail();
+		}
+	}
+
 }
 		
 

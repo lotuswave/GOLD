@@ -11,6 +11,23 @@
         </classes>
         </test>  
         
+    <test name="Test_DGLD_HF_UT_CheckoutShippingStep_046_AdditionalPath_Authenticateduser_edits_saved_address" testid="DTG-463" priority="P1" description="his script will cover validating the edit saved address">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_046_AdditionalPath_Authenticateduser_edits_saved_address"/>
+        </classes>
+        </test>  
+        
+    
+    <test name="Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress" testid="DTG-463" priority="P1" description="his script will cover validating new address">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress"/>
+        </classes>
+        </test>  
+        
+    
+    <!--
+    
+    
     <test name="Test_DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo" testid="DTG-639" priority="P1" description="This script will cover validating Store Logo">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo"/>
@@ -117,5 +134,5 @@
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword"/>
         </classes>
         </test>
-        
+        -->
 </suite>  

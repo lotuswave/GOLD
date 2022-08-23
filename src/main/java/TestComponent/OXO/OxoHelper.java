@@ -2579,6 +2579,132 @@ public class OxoHelper {
 	
 
 	}
+
+	
+	public void validate_Existingaddress_AddNewAddress_CTA() {
+		try {
+			int Existingaddress = Common.findElements("xpath", "//div[contains(@class,'shipping-address-items')]/div")
+					.size();
+
+			int newaddressCTA = Common.findElements("xpath", "//button[contains(@class,'action-show-popup')]/span")
+					.size();
+			Common.assertionCheckwithReport(Existingaddress > 0 && newaddressCTA > 0,
+					"To validate the Existing addresses are available and New address button is displayed",
+					"Saved Address and new address CTA should be displayed",
+					"Successfully displayed the Saved address and New Address CTA",
+					"Failed to display the Existing address and New address CTA ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate the Existing addresses are available and New address button is displayed",
+					"Saved Address and new address CTA should be displayed",
+					"Exsting address and New address CTA not displayed",
+					"Failed to display the Existing address and New address CTA ");
+			Assert.fail();
+		}
+
+	}
+
+	public void Click_NewAddressCTA() {
+
+		try {
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'action-show-popup')]/span");
+			Common.clickElement("xpath", "//button[contains(@class,'action-show-popup')]/span");
+			Sync.waitElementVisible("xpath", "//div[@id='opc-new-shipping-address' and @style='']");
+			int NewAddresspopup = Common.findElements("xpath", "//div[@id='opc-new-shipping-address' and @style='']")
+					.size();
+			Common.assertionCheckwithReport(NewAddresspopup > 0, "To validate the New addresses popup is displayed",
+					"Add New Address popup should be displayed", "Successfully displayed the dd New Address popup",
+					"Failed to display the dd New Address popup");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the New addresses popup is displayed",
+					"Add New Address popup should be displayed", "Failed to dispaly the Add new address popup",
+					"Add new address popup display failed");
+			Assert.fail();
+		}
+	}
+
+	public void Validate_Update_NewAddress_Verification(String dataSet) {
+		String FirstName = data.get(dataSet).get("FirstName");
+		String LastName = data.get(dataSet).get("LastName");
+		String Street = data.get(dataSet).get("Street");
+		String City = data.get(dataSet).get("City");
+		String Region = data.get(dataSet).get("Region");
+		String postcode = data.get(dataSet).get("postcode");
+		String phone = data.get(dataSet).get("phone");
+		String Country = data.get(dataSet).get("Country");
+
+		try {
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'action-save-address')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action-save-address')]");
+			Sync.waitElementInvisible("xpath", "//div[@id='opc-new-shipping-address' and @style='']");
+			Sync.waitElementVisible("xpath", "//div[@class='shipping-address-item selected-item']");
+			String CheckedAddress = Common.findElement("xpath", "//div[@class='shipping-address-item selected-item']")
+					.getAttribute("class");
+			
+			String fullname = Common.findElement("xpath", "(//div[contains(@class,'item selected-item')]/p/strong)")
+					.getText();
+			
+			String selectedaddress = Common.findElement("xpath", "(//div[contains(@class,'item selected-item')]/p)[2]")
+					.getText();
+			Common.assertionCheckwithReport(
+					fullname.contains(FirstName + " " + LastName) && CheckedAddress.contains("item selected-item")
+							&& selectedaddress
+									.contains(Street + "\n" + City + ", " + Region+ " " + postcode + "\n" + Country + "\n" + phone),
+
+					"validate the user is able to update the new address in the shipping page",
+					" user should  able to update the new address in the shipping page",
+					" user successfuly update the new address in the shipping page",
+					"failed to update the new address in the shipping page ");
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validate the user is able to update the new address in the shipping page",
+					" user should  able to update the new address in the shipping page",
+					" user successfuly update the new address in the shipping page",
+					Common.getscreenShot("failed to update the new address in the shipping page "));
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	public void Validate_RegisterUser_shippingaddressform() {
+		try {
+			Sync.waitElementVisible("name", "firstname");
+
+			int firstname = Common.findElements("name", "firstname").size();
+			int lastname = Common.findElements("name", "lastname").size();
+			int street1 = Common.findElements("name", "street[0]").size();
+			int street2 = Common.findElements("name", "street[1]").size();
+			Common.scrollIntoView("name", "city");
+			int City = Common.findElements("name", "city").size();
+			int state = Common.findElements("name", "region_id").size();
+			int Zipcode = Common.findElements("name", "postcode").size();
+			int Country = Common.findElements("name", "country_id").size();
+			int Phonenumber = Common.findElements("name", "telephone").size();
+			int saveaddresscheckbox = Common.findElements("id", "shipping-save-in-address-book").size();
+			int CancelCTA = Common.findElements("xpath", "//button[contains(@class,'action-hide-popup')]").size();
+			int ShiphereCTA = Common.findElements("xpath", "//button[contains(@class,'action-save-address')]").size();
+
+			Common.assertionCheckwithReport(
+					firstname > 0 && lastname > 0 && street1 > 0 && street2 > 0 && City > 0 && state > 0 && Zipcode > 0
+							&& Country > 0 && Phonenumber > 0 && saveaddresscheckbox > 0 && CancelCTA > 0
+							&& ShiphereCTA > 0,
+					"To validate the Edit Shipping address form for all the required fields",
+					"All the required fields should be displayed", "All the required fields are displayed",
+					"Failed to display the required fields in Edit shipping address form");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Shipping address form for all the required fields",
+					"All the required fields should be displayed", "Failed to display the required fields",
+					Common.getscreenShotPathforReport(
+							"Failed to display the required fields in Edit shipping address form"));
+			Assert.fail();
+
+		}
+	}
 		
 	}
 	

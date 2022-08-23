@@ -9,22 +9,22 @@ import TestComponent.Hydroflask.HydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword {
+public class Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress {
 	String datafile = "Hydroflask//HydroTestData.xlsx";
 	HydroHelper Hydro = new HydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void UserEntersEmailAssociatedWithAnAccount_ForgotPassword() throws Exception {
+	public void Validate_AuthenticatedUser_Enters_a_New_ShippingAddress() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("Accessories");
-			Hydro.addtocart("Product");
-			Hydro.minicart_viewcart();
+			Hydro.search_product_pdp("search");
 			Hydro.minicart_Checkout();
-			Hydro.validate_ExistingUser_Login_Checkoutpage("invalidpassword");
-			Hydro.Validate_invalid_Signin_Checkoutpage();
-			Hydro.Click_forgotpasswordLink_Checkout();
+			Hydro.validate_ExistingUser_Login_Checkoutpage("AccountDetails");
+			Hydro.Validate_Signin_Checkoutpage();
+			Hydro.click_AddNewAdress_ShippingPage();
+			Hydro.ShippingAddress("ShippingAddress");
+			Hydro.Validate_Update_NewAddress_Verification("ShippingAddress");
 
 		} catch (Exception e) {
 
@@ -34,7 +34,8 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthentic
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		 Common.closeAll();
+
 	}
 
 	@BeforeTest

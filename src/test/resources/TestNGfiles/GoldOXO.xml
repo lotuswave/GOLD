@@ -9,7 +9,15 @@
 			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_001_NormalPath_UserSelectsStoreLogo" />
 		</classes>
 	</test>
-
+	
+	<test name="Test_DGLD_OXO_UT_Checkout_ShippingStep_038_AlternatePath_Authenticated_User_Enters_NewShippingAddress" testid="DTG-647" priority="P1" description="This script will cover validating add new address">
+		<classes>
+			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Checkout_ShippingStep_038_AlternatePath_Authenticated_User_Enters_NewShippingAddress" />
+		</classes>
+	</test>
+	
+</suite>
+<!--
 	<test name="Test_DGLD_OXO_UT_Header_002_NormalPath_User_SelectsTheSearch" testid="DTG-648" priority="P1" description="This script will cover validating Search Selection">
 		<classes>
 			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_002_NormalPath_User_SelectsTheSearch" />
@@ -94,5 +102,4 @@
 			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_CheckoutShippingStep_029_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount" />
 		</classes>
 	</test>
-
-</suite>
+	 -->
