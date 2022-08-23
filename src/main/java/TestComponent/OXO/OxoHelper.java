@@ -2262,6 +2262,7 @@ public class OxoHelper {
 		// TODO Auto-generated method stub
 		String sku3="";
 		String product = data.get(Dataset).get("Products");
+		System.out.println(product);
 		try {
 			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
@@ -2271,8 +2272,10 @@ public class OxoHelper {
 			Common.textBoxInput("xpath", "//input[@id='search']", product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
+			Common.scrollIntoView("xpath", "//p[@class='m-breadcrumb__text']");
 			String productsearch = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(Common.getPageTitle().equals(productsearch), "validating the search functionality",
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
@@ -2705,8 +2708,71 @@ public class OxoHelper {
 
 		}
 	}
+	
+	public void minicart_products(String minicart) {
+		// TODO Auto-generated method stub
+		try
+		{
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		
+           Sync.waitElementPresent(30,"xpath", "//span[@class='c-mini-cart__counter']");
+			String cartproducts=Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+		    
+			Common.assertionCheckwithReport(cartproducts.equals(minicart), "validating the products in the cart after creating new account ",
+					"Products should be displayed in the mini cart after Create account with Cart", "Sucessfully after create account with cart products should be display in mini cart",
+					"failed to display the products in mini cart after the create account with cart");
+		
+			
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the products in the cart after creating new account ",
+				"Products should be displayed in the mini cart after Create account with Cart", "Unable to display the products in mini cart after the create account with cart",
+				Common.getscreenShot("failed to display the products in mini cart after the create account with cart"));
+		
+		Assert.fail();
+	}
+		
 		
 	}
+
+	public String minicart_items() {
+		// TODO Auto-generated method stub
+		String items="";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__counter']");
+			items=Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			System.out.println(items);
+			Common.clickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
+			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
+			String miniitems=Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			System.out.println(miniitems);
+			Common.assertionCheckwithReport(items.contains(miniitems), "Vaildating the products count in the mini cart ",
+					"Products count shsould be display in the mini cart", "Sucessfully products count has displayed in the mini cart",
+					"failed to display products count in the mini cart");
+			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+		
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Vaildating the products count in the mini cart ",
+					"Products count shsould be display in the mini cart", "Unable to display the  products count in the mini cart",
+					Common.getscreenShot("failed to display products count in the mini cart"));
+			
+			Assert.fail();
+			
+		}
+		return items;
+		
+	}
+		
+	}	
+	
 	
 	
 	
