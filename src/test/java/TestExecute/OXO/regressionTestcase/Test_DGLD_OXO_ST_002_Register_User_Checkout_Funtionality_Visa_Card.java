@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.OxoHelper;
+import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card {
 
-	String datafile = "OXO//OxoData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	String datafile = "OXO//GoldOxoTestData.xlsx";	
+	GoldOxoHelper Oxo=new GoldOxoHelper(datafile);
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Register_User_Checkout_Funtionality_Visa_Card() throws Exception {
 
