@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 
 import TestLib.Automation_properties;
@@ -6428,8 +6430,157 @@ try {
 			Assert.fail();
 
 		}
-
 	}
 
+		public void Configure_textcolor_dark() {
+			
+			try {
+		
+				int textcolor = Common.findElements("xpath", "//li[@class='active']//span[text()='Dark']").size();
+				if(textcolor>0) {
+					System.out.println("Dark color is selected");
+				}
+				else {
+					Sync.waitElementClickable("xpath", "//span[text()='Dark']");
+					Common.mouseOverClick("xpath", "//span[text()='Dark']");
+				}
+			
+				
+				Common.assertionCheckwithReport(textcolor>0, "To validate the text colour selected is Dark", " should select the text colour Dark",
+						"Sucessfully select the Dark text color", "Failed to select the text colour dark");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the text colour selected is Dark", " should select the text colour Dark",
+						"Unable select the Dark text color", Common.getscreenShotPathforReport("Failed to select the text colour dark"));
+				e.printStackTrace();
+				Assert.fail();
+
+			}
+		}
+		public void Prmocontent_Content(String dataSet) {
+			String Description = data.get(dataSet).get("Description");
+			String Title = data.get(dataSet).get("title");
+			try {
+			Common.scrollIntoView("xpath", "(//input[@name='title'])[2]");
+
+			Common.textBoxInput("xpath","(//input[@name='title'])[2]",Title);
+			Common.dropdown("xpath", "//select[@name='heading_type']", SelectBy.TEXT, "H2");
+			Common.switchFrames("id", "hot_product_promo_form_description_ifr");
+			Common.textBoxInputClear("id", "html-body");
+			Common.findElement("id", "html-body").sendKeys(Description);
+			Common.switchToDefault();
+			Common.scrollIntoView("xpath", "//button[@id='save']");
+			Common.clickElement("xpath","//button[@id='save']");
+//				Thread.sleep(2000);
+//				Editcardtile_color("#599b3d");
+
+			Sync.waitElementVisible("xpath","//h3[@class='c-promo-block__heading']");
+			String title = Common.findElement("xpath","//h3[@class='c-promo-block__heading']").getText();
+
+			Sync.waitElementVisible("xpath","//h3[@class='c-promo-block__heading']");
+			String description = Common.findElement("xpath","//div[@data-element='description']").getText();
+
+			Common.assertionCheckwithReport(title.contains(Title) && description.contains(Description),
+					"validate the title and description are updated in the magento preview page",
+					"Should update title and description in the magento preview page","Successfully updated title and description in the magento preview page",
+					"Failed to update title and description in the magento preview page");
+
+
+			} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validate the title and description are updated in the magento preview page",
+					"Should update title and description in the magento preview page",
+					"Unable to update title and description in the magento preview page",
+							 Common.getscreenShotPathforReport("Failed to update title and description in the magento preview page"));
+			e.printStackTrace();
+			Assert.fail();
+
+			}
+			}
+
+		public void promocontent_text_colour_dark_website_verification() {
+
+
+			try {
+			WebElement color = Common.findElement(By.tagName("h2"));
+			String s = color.getCssValue("color");
+			  String c = Color.fromString(s).asHex();
+			  System.out.println("Color is :" + s);
+			  System.out.println("Hex code for color:" + c);
+			Sync.waitElementPresent("xpath", "//P[@class='m-breadcrumb__text']");
+			String colour = Common.findElement("xpath", "//div[@class='c-promo-block__content']").getCssValue("color");
+			System.out.println(colour);
+
+			Common.assertionCheckwithReport(colour.contains("rgba(0, 0, 0, 1)") || c.contains("#000") || colour.contains("rgba(4, 4, 5, 1)") || c.contains("#040405") ,
+				"validate the Dark text colour display in the website", "Text colour should display Dark in website ","Successfully display text color dark in the website","Failed to display the text color dark in the website");
+
+			}catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validate the Dark text colour display in the website",
+				"Text colour should display Dark in website ",
+				"Unable to display text color dark in the website",
+				Common.getscreenShotPathforReport("Failed to display the text color dark in the website"));
+			Assert.fail();
+			}}
+
+		public void Configure_textcolor_light() {
+			try {
+			Common.switchToFirstTab();
+			Contentpage();
+			editpromocontent();
+
+				
+				int textcolor = Common.findElements("xpath", "//li[@class='active']//span[text()='Light']").size();
+				if(textcolor>0) {
+					System.out.println("light color is selected");
+				}
+				else {
+					Sync.waitElementClickable("xpath", "//span[text()='Light']");
+					Common.mouseOverClick("xpath", "//span[text()='Light']");
+
+					Common.clickElement("xpath", "//span[text()='Light']");
+					
+					
+				}
+
+				int textcolorlight = Common.findElements("xpath", "//li[@class='active']//span[text()='Light']").size();
+
+				Common.assertionCheckwithReport(textcolorlight>0, "To validate the text colour selected is Light", " should select the text colour light",
+						"Successfully select text color is light ", "Faileed to select the text colour light");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the text colour selected is Light", " should select the text colour light",
+						"unable to select text color is light ", Common.getscreenShotPathforReport("Faileed to select the text colour light"));
+				e.printStackTrace();
+				Assert.fail();
+			}
+			}
+		
+		public void promocontent_text_colour_light_website_verification() {
+
+
+			try {
+			WebElement color = Common.findElement(By.tagName("h2"));
+			String s = color.getCssValue("color");
+			  String c = Color.fromString(s).asHex();
+			  System.out.println("Color is :" + s);
+			  System.out.println("Hex code for color:" + c);
+			Sync.waitElementPresent("xpath", "//P[@class='m-breadcrumb__text']");
+			String colour = Common.findElement("xpath", "//div[contains(@class,'c-promo-block__content')]").getCssValue("color");
+			System.out.println(colour);
+
+			Common.assertionCheckwithReport(colour.contains("rgba(255, 255, 255, 1)") || c.contains("#ffff"),"To validate the light text colour display in website", "The text colour should display Light in website",
+				"Sucessfully display the text color is light in website", "Faileed to display the text colour dark");
+			} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the light text colour display in website", "The text colour should display Light in website",
+				"unable to display the text color is light in website", Common.getscreenShotPathforReport("failed to display light text color"));
+			e.printStackTrace();
+			Assert.fail();
+			}}
+
+
+	
+	
 	
 	}
