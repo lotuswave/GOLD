@@ -2467,11 +2467,10 @@ public class HydroHelper {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			
 			 Sync.waitPageLoad();
-//			Common.scrollIntoView("xpath", "//form[@class='m-add-to-cart ']");
-			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "(//div[@data-label='" + productcolor + "'])");
-			Common.clickElement("xpath", "//button[@title='Add to Bag']");
-			sku=Common.findElement("xpath", "//div[@class='m-number-input']//input").getAttribute("data-cart-item-id");
+			 Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			sku=Common.findElement("xpath", "//div[contains(@class,'m-select-menu m-fo')]//select").getAttribute("data-cart-item-id");
 			System.out.println(sku);
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -2697,9 +2696,9 @@ public class HydroHelper {
 		{
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@class='m-product-card__image']");
+						"//img[contains(@class,'m-product-card__image product')]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
