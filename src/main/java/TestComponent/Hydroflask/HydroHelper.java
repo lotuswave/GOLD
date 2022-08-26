@@ -3330,6 +3330,160 @@ public class HydroHelper {
 			Assert.fail();
 		}
 	}
+	
+	public void navigate_To_MyAccount() {
+		
+		try {
+			
+			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__welcome']/button");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__welcome']/button");
+
+			Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+			System.out.println(Common.getPageTitle());
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"Validating the My account page navigation when user clicks on the My account CTA",
+					"After clicking My account CTA it will navigates My Account page",
+					"Successfully navigate to My Account page after clciking on the My account CTA",
+					"Failed to navigate to my account page after clicking on the My account CTA");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the My account page navigation when user clicks on the My account CTA ",
+					"Able clicking My account CTA it will navigates My Account page ", "unable to navigate to My Account page after clciking on the My account CTA",
+					Common.getscreenShotPathforReport("Failed to navigate to My Account page after clciking on the My account CTA"));
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void verify_RewardPoints() {
+
+		try {
+			
+			Sync.waitElementClickable("xpath", "//a[text()='Reward Points']");
+			Common.clickElement("xpath", "//a[text()='Reward Points']");
+			Sync.waitPageLoad();
+			Common.findElement("xpath", "//h1[text()='Reward Points']");
+		
+			String rewardPointss = Common.findElement("xpath", "//div[@class='block-reward__wrapper']").getText();
+			System.out.println(rewardPointss);
+		
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Reward Points") && rewardPointss.contains("Current exchange rates") && rewardPointss.contains("Learn more"),
+					"Validating Reward Points in Account page",
+					"After clicking Reward Points in Account page it will navigate Reward Points page",
+					"Successfully navigate to Reward Points account page", "Failed to navigate Reward Points account page ");
+		
+		} 
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Reward Points in Account page ",
+					"After clicking Reward Points in Account page it will navigate Reward Points page",
+					"unable to click Reward Points account page",
+					Common.getscreenShotPathforReport("Failed to navigate Reward Points account page"));
+			Assert.fail();
+		}
+	}
+	
+	public void verify_BalanceHistroy() {
+	
+		try {
+			Sync.waitElementPresent("xpath", "//div[text()='Balance History']");
+			Common.scrollIntoView("xpath", "//div[text()='Balance History']");
+			List<WebElement> balancetable = Common.findElements("xpath","//thead[@class='m-table__head']/tr/th");
+			for (WebElement i : balancetable) {
+				System.out.println(i.getText());
+			}
+			
+		String bal = Common.findElement("xpath","(//thead[@class='m-table__head']/tr/th)[2]").getText();
+			System.out.println(bal);
+			
+			String balance = Common.findElement("xpath", "//div[text()='Balance History']").getText();
+			
+			Common.assertionCheckwithReport(balance.equals("Balance History") && bal.contains("Amount"), "Validating the Balance History on Account page",
+					"Able to display the Balance History on Account page ",
+					"Successfully Dispaly Balance Historyon Account page", "Failed to Display Balance History on Account page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the Balance History on Account page ",
+					"Able to display the Balance History on Account page ", "unable to Dispaly Balance History on Account page",
+					Common.getscreenShotPathforReport("Failed to Display Balance History on Account page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void verify_EmailNotification() {
+		
+		try {
+			Sync.waitElementPresent("xpath", "//span[text()='Email Notification Settings']");
+			Common.scrollIntoView("xpath", "//span[text()='Email Notification Settings']");
+			String Email = Common.findElement("xpath", "//fieldset[@class='fieldset']/p").getText();
+			
+			boolean Bal_updates= Common.checkBoxIsSelected("xpath", "//input[@id='subscribe_updates']", false);
+			 System.out.println(Bal_updates);
+			 
+			 boolean Points_notification= Common.checkBoxIsSelected("xpath", "//input[@id='subscribe_warnings']", false);
+			 System.out.println(Points_notification);
+			
+			System.out.println(Email);
+			Common.assertionCheckwithReport(Email.contains("Email"), "Validating the Email Notification Settings on customers page",
+					"Able to display the Email Notification Settings on Account page ",
+					"Successfully Dispaly Email Notification Settings on Account page", "Failed to Display Email Notification Settings on Account page");
+
+			
+			Common.scrollIntoView("xpath", "//span[text()='Save Subscription Settings']");
+			Common.clickElement("xpath", "//span[text()='Save Subscription Settings']");
+			Sync.waitPageLoad();
+			Common.scrollIntoView("xpath", "//div[@class='messages']/div/div");
+			String Successmsg = Common.findElement("xpath", "//div[@class='messages']/div/div").getText();
+			System.out.println(Successmsg);
+			Common.assertionCheckwithReport(Successmsg.contains("You saved the settings"), "Validating the Email Notification Settings on Account page",
+					"Able to display the Email Notification Settings on Account page ",
+					"Successfully Dispaly Email Notification Settings on Account page", "Failed to Display Email Notification Settings on Account page");
+
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the Email Notification Settings on Account page ",
+					"Able to display the Email Notification Settings Account page ", "unable to Dispaly Email Notification Settings on Account page",
+					Common.getscreenShotPathforReport("Failed to Display Email Notification Settings on Account page"));
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void verify_LearnMore_CTA() {
+
+		try {
+			
+			Sync.waitElementClickable("xpath", "//a[contains(@href,'reward-points')]");
+			Common.scrollIntoView("xpath", "//a[contains(@href,'reward-points')]");
+			Common.clickElement("xpath", "//a[contains(@href,'reward-points')]");
+			Sync.waitPageLoad();
+			Common.findElement("xpath", "//h1[text()='Reward Points']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Reward Points"),
+					"Validating Learn More in Reward Points page",
+					"After clicking Learn More in Reward Points page it will navigate to Reward Points CMS page",
+					"Successfully navigate to Reward Points  page", "Failed to navigate Reward Points page ");
+		
+		} 
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Learn More in Reward Points page ",
+					"After clicking Learn More in Reward Points page it will navigate to Reward Points CMS page",
+					"unable to click Learn More in Reward Points page",
+					Common.getscreenShotPathforReport("Failed to navigate Reward Points page"));
+			Assert.fail();
+		}
+	}
+	
 
 }
 		
