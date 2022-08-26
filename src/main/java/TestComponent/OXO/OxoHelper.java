@@ -2952,7 +2952,199 @@ public void navigate_To_MyAccount() {
 		}
 	}
 	
+	public void createNewAccount_Required_Fieldsvalidation() {
+		String Errofield;
+		String requiredfielderrmsg;
+		String errormessageID;
+		try {
 
+			Common.scrollIntoView("xpath", "//button[contains(@class,'primary a-btn')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'primary a-btn')]");
+			Sync.waitElementVisible("xpath", "//div[@class='mage-error']");
+
+			List<WebElement> errorfield = Common.findElements("xpath", "//input[contains(@class,'th mage-error')]");
+
+			for (int i = 0; i < errorfield.size(); i++) {
+
+				Errofield = errorfield.get(i).getAttribute("id").toLowerCase();
+				
+				List<WebElement> errormessage = Common.findElements("xpath", "//div[@class='mage-error']");
+				requiredfielderrmsg = errormessage.get(i).getText();
+				
+				errormessageID = errormessage.get(i).getAttribute("id").toLowerCase();
+				
+				Common.assertionCheckwithReport(
+						errormessageID.contains(Errofield) && requiredfielderrmsg.contains("This is a required field."),
+						"To validate the required field error message is displayed for the field " + Errofield,
+						requiredfielderrmsg + "should be displayed for field" + Errofield,
+						requiredfielderrmsg + "error message is displayed for " + Errofield,
+						"Failed to display" + requiredfielderrmsg + "for" + Errofield);
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate the required field error message is displayed for the all the required fields",
+					"This is a required field error meessage should be displayed",
+					"Failed to display the error message",
+					Common.getscreenShotPathforReport("error message display unsuccessfull"));
+			Assert.fail();
+		}
+	}
+	
+	public void validate_Createnewaccount_email(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("id", "email_address", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.actionsKeyPress(Keys.UP);
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password"));
+
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("id", "email_address-error");
+			Common.scrollIntoView("id", "email_address-error");
+			String emailerr = Common.findElement("id", "email_address-error").getText();
+			Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete") && emailerr.contains("Please enter a valid email address (Ex: johndoe@domain.com)."),
+					"validating the invalid email error message",
+					"User should display the error message for "+emailerr,
+					emailerr, "failed to display the error message for invalid email");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the invalid email error message",
+					"User should display the error message for invalid email",
+					"failed to display the error message for invalid email",
+					Common.getscreenShot("Invalid email error message display unsuccessfull"));
+			Assert.fail();
+
+		}
+
+		}
+		
+	
+	public void validate_Createnewaccount_invalidpasssword(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("id", "email_address", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.actionsKeyPress(Keys.UP);
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password1"));
+
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("id", "password-confirmation-error");
+			String passworderr = Common.findElement("id", "password-confirmation-error").getText();
+			Common.assertionCheckwithReport(classes.contains("text-error") && textlength.contains("text-error") && passworderr.contains("Please enter the same value again."),
+					"validating the invalid password error message",
+					"User should display the error message for "+passworderr,
+					passworderr, "failed to display the error message for invalid password");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the invalid password error message",
+					"User should display the error message for invalid password",
+					"failed to display the error message for invalid password",
+					Common.getscreenShot("Invalid password error message display unsuccessfull"));
+			Assert.fail();
+
+		}
+
+		}
+	
+	public void validate_Createnewaccount_passswordFields(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("id", "email_address", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.actionsKeyPress(Keys.UP);
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password1"));
+
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("id", "password-confirmation-error");
+			String passworderr = Common.findElement("id", "password-confirmation-error").getText();
+			Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete") && passworderr.contains("Please enter the same value again."),
+					"validating the error message for two different passwords",
+					"User should display the error message for two different passwords "+passworderr,
+					passworderr, "failed to display the error message for different password");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error message for two different passwords",
+					"User should display the error message for two different passwords ",
+					"failed to display the error message for different password",
+					Common.getscreenShot("Two different password error message display unsuccessfull"));
+			Assert.fail();
+
+		}
+
+		}
+		
+	public void validate_Createnewaccount_existingemail(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("id", "email_address", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.actionsKeyPress(Keys.UP);
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password"));
+
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("xpath", "//div[contains(@class,'message-error')]/div");
+			String existingemailerr = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
+			Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete") && existingemailerr.contains("There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account."),
+					"validating the error message in create new account page when given Existing email",
+					"User should display error message when given existing email",
+					existingemailerr, "failed to display the error message for when given existing email");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error message in create new account page when given Existing email",
+					"User should display error message when given existing email",
+					"failed to display the error message when given existing email",
+					Common.getscreenShot("Existing email error message display unsuccessfull"));
+			Assert.fail();
+
+		}
+
+		}
 		
 	}	
 	

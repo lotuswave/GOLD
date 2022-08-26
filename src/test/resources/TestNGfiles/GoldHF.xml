@@ -142,10 +142,15 @@
         </test>
        
         
-        
           <test name="Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step" testid="DTG-1073" priority="P1" description="This script will cover validating User Views Order Summary During Checkout Payment Step">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_UT_AccountRegistration_043_ExceptionPaths_AccountregistrationPage_errormessagesvalidation" testid="DTG-1076" priority="P1" description="This script will cover validating the Account registration page for error messages">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AccountRegistration_043_ExceptionPaths_AccountregistrationPage_errormessagesvalidation"/>
         </classes>
         </test>
 </suite>  

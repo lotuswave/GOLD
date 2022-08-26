@@ -16,6 +16,12 @@
 		</classes>
 	</test>
 	
+	 <test name="Test_DGLD_OXO_UT_AccountRegistration_036_ExceptionPaths_AccountRegistrationPage_errormessagesvalidation" testid="DTG-1081" priority="P1" description="This script will cover validating the account registration page for the error message validation">
+		<classes>
+			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_AccountRegistration_036_ExceptionPaths_AccountRegistrationPage_errormessagesvalidation" />
+		</classes>
+	</test>
+	
 </suite>
 <!--
 	<test name="Test_DGLD_OXO_UT_Header_002_NormalPath_User_SelectsTheSearch" testid="DTG-648" priority="P1" description="This script will cover validating Search Selection">
@@ -102,4 +108,6 @@
 			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_CheckoutShippingStep_029_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount" />
 		</classes>
 	</test>
-	 -->
+	-->
+	 
+ 
