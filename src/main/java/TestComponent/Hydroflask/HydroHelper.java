@@ -46,7 +46,7 @@ public class HydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//a[@class='a-logo']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Hydro Flask Home Page"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
 					"validating store logo", "System directs the user back to the Homepage",
 					"Sucessfully user back to home page", "faield to get back to homepage");
 		} catch (Exception | Error e) {
@@ -122,12 +122,12 @@ public class HydroHelper {
 			}
 
 			for (int i = 0; i < names.size(); i++) {
-				Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__welcome']/button");
+				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__welcome']");
 
-				Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__welcome']/button");
+				Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__welcome']");
 				if (names.get(i).equals("MY ACCOUNT")) {
 
-					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']//a[text()='My Account']");
 					Sync.waitPageLoad();
 					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
@@ -138,8 +138,8 @@ public class HydroHelper {
 				}
 
 				else if (names.get(i).contains("MY FAVORITES")) {
-					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
-					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[2]/a");
+					Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__welcome']");
+					Common.javascriptclickElement("xpath", "//a[text()='My Favorites']");
 					Sync.waitPageLoad();
 					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Favorites"),
@@ -150,8 +150,8 @@ public class HydroHelper {
 				}
 
 				else if (names.get(i).contains("MY ORDERS")) {
-					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
-					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[3]/a");
+					Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__welcome']");
+					Common.javascriptclickElement("xpath", "//a[text()='My Orders']");
 					Sync.waitPageLoad();
 					Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper h2']");
 
@@ -181,11 +181,14 @@ public class HydroHelper {
 				 * ); }
 				 */
 				else if (names.get(i).contains("SIGN OUT")) {
-					Sync.waitElementClickable("xpath", "//ul[@class='m-account-nav__links']/li[1]/a");
+					Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__welcome']");
+					Sync.waitElementPresent(30, "xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
 					Common.javascriptclickElement("xpath", "//ul[@class='m-account-nav__links']/li[4]/a");
-					Sync.waitPageLoad(30);
+					//Thread.sleep(6000);
+					Sync.waitPageLoad();
 					Sync.waitElementVisible("xpath", "//div[contains(@class,'c-hero-block')]");
-
+				System.out.println(Common.getPageTitle());
+                 
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
 							"Validating Customer logout functionality when user click on the Sign out CTA",
 							"After Clicking SignOut CTA it should successfully logout the customer ",
@@ -977,7 +980,7 @@ public class HydroHelper {
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().equals("Hydro Flask Home Page"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
 					"validating store logo", "System directs the user back to the Homepage",
 					"Sucessfully user back to home page", "faield to get back to homepage");
 		} catch (Exception | Error e) {
@@ -1035,9 +1038,10 @@ public class HydroHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
+				
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@class='m-product-card__image']");
+						"//img[contains(@class,'m-product-card__image product')]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -1056,16 +1060,16 @@ public class HydroHelper {
 			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
-			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-			Common.clickElement("xpath", "//span[text()='Add to Bag']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+//			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+//			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
+//			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+//			Sync.waitPageLoad();
+//			Thread.sleep(4000);
+//			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 			click_minicart();
 			String shipping = Common.findElement("xpath", "//div[contains(@class,'label-')]").getText();
 			if (shipping.contains("left for Free Shipping.")) {
@@ -1079,8 +1083,8 @@ public class HydroHelper {
 						"When we click on the product is should navigate to the PDP page",
 						"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 				Sync.waitPageLoad();
-//				Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-//				Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+				Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 				Common.clickElement("xpath", "//button[@title='Add to Bag']");
 				Thread.sleep(4000);
 				String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -1145,16 +1149,16 @@ public class HydroHelper {
 					.replace("$", "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[2]")
+					.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[1]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[2]").replace("$",
+			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace("$",
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[2]");
+						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
 				Common.clickElement("xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[2]");
+						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
 				Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
 				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
 			} else {
@@ -1284,7 +1288,7 @@ public class HydroHelper {
 			String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
 					.replace("$", "");
 			Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-			Float Total = subtotalvalue * 2;
+			Float Total = subtotalvalue * 3;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Common.assertionCheckwithReport(quantity.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 					"validating the product update quantity and subtotal",
@@ -1508,9 +1512,9 @@ public class HydroHelper {
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//select[@name='options[3]']");
-			Common.dropdown("xpath", "//select[@name='options[3]']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("ProductQuantity"));
+//			Common.clickElement("xpath", "//select[@name='options[3]']");
+//			Common.dropdown("xpath", "//select[@name='options[3]']", Common.SelectBy.TEXT,
+//					data.get(Dataset).get("ProductQuantity"));
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			click_minicart();
 			int minicartscroll = Common.findElements("xpath", "//div[@class='m-product-upsell__item']").size();
@@ -1519,8 +1523,10 @@ public class HydroHelper {
 			Float subtotalvalue = Float.parseFloat(subtotal);
 
 			Common.clickElement("xpath", "//form[@data-product-sku='" + sku + "']//button");
+			Common.scrollIntoView("xpath", "(//div[@class='m-mini-product-card']//span[@class='price'])[1]");
+			Thread.sleep(6000);
 			String productamount = Common
-					.getText("xpath", "//div[@data-price-box='product-id-8']//span[@class='price']").replace("$", "");
+					.getText("xpath", "(//div[@class='m-mini-product-card']//span[@class='price'])[1]").replace("$", "");
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue + productamountvalue;
 			String ExpectedTotalAmmount = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -1714,19 +1720,19 @@ public class HydroHelper {
 							&& validatingtext
 									.contains("You already have an account with us. Sign in or continue as guest.")
 							&& passworddots.contains("password") && forgotpassword.contains("Forgot Your Password?"),
-					"To Validate the warning message , pasword , forgot password , password in dots",
-					" Should display the warning message , pasword , forgot password link, password in dots",
-					"successfully displayed warning message  ,pasword , forgot password , password in dots ",
-					"failed to display warning message , pasword , forgot password , password in dots");
+					"To Validate the warning message - pasword - forgot password - password in dots",
+					"Should display the warning message - pasword - forgot password link- password in dots",
+					"successfully displayed warning message  -pasword - forgot password - password in dots",
+					"failed to display warning message - pasword - forgot password - password in dots");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
-					"verify the  warning message ,pasword , forgot password , password in dots",
-					"Should display warning message ,pasword , forgot password , password in dots ",
-					"Unable to display warning message  ,pasword , forgot password , password in dots",
+					"verify the  warning message-pasword-forgot password-password in dots",
+					"Should display warning message-pasword-forgot password-password in dots",
+					"Unable to display warning message-pasword-forgot password-password in dots",
 					Common.getscreenShotPathforReport(
-							"faield  to display warning message  ,pasword , forgot password , password in dots "));
+							"faield  to display warning message-pasword-forgot password-password in dots"));
 			Assert.fail();
 
 		}
@@ -1751,9 +1757,9 @@ public class HydroHelper {
 						"Register User login sucessfull and the user is on checkout page ",
 						"failed to login in checkout page");
 
-				Common.assertionCheckwithReport(errormessage > 0, "To validate incorrect password in checkout page",
-						"Error message should be displayed for incorrect password", "Error message displayed",
-						"failed to display error message in checkout page for incorrect password");
+			//	Common.assertionCheckwithReport(errormessage > 0, "To validate incorrect password in checkout page",
+					//	"Error message should be displayed for incorrect password", "Error message displayed",
+					//	"failed to display error message in checkout page for incorrect password");
 			}
 
 		} catch (Exception | Error e) {
@@ -2443,9 +2449,9 @@ public class HydroHelper {
 		{
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@class='m-product-card__image']");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@class='m-product-card__image']");
+						"//img[contains(@class,'m-product-card__image product')]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -2461,9 +2467,9 @@ public class HydroHelper {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			
 			 Sync.waitPageLoad();
-			Common.scrollIntoView("xpath", "//form[@class='m-add-to-cart ']");
-			Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + productcolor + "'])[2]");
-			Common.clickElement("xpath", "(//div[@data-option-label='" + productcolor + "'])[2]");
+//			Common.scrollIntoView("xpath", "//form[@class='m-add-to-cart ']");
+			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "(//div[@data-label='" + productcolor + "'])");
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			sku=Common.findElement("xpath", "//div[@class='m-number-input']//input").getAttribute("data-cart-item-id");
 			System.out.println(sku);

@@ -11,21 +11,21 @@
         </classes>
         </test>  
         
-    <test name="Test_DGLD_HF_UT_CheckoutShippingStep_046_AdditionalPath_Authenticateduser_edits_saved_address" testid="DTG-463" priority="P1" description="his script will cover validating the edit saved address">
+    <test name="Test_DGLD_HF_UT_CheckoutShippingStep_046_AdditionalPath_Authenticateduser_edits_saved_address" testid="DTG-1100" priority="P1" description="his script will cover validating the edit saved address">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_046_AdditionalPath_Authenticateduser_edits_saved_address"/>
         </classes>
         </test>  
         
     
-    <test name="Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress" testid="DTG-463" priority="P1" description="his script will cover validating new address">
+    <test name="Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress" testid="DTG-1093" priority="P1" description="his script will cover validating new address">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress"/>
         </classes>
         </test>  
         
     
-    <!--
+  
     
     
     <test name="Test_DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo" testid="DTG-639" priority="P1" description="This script will cover validating Store Logo">
@@ -46,7 +46,7 @@
         </classes>
         </test>
         
-        <test name="Test_DGLD_HF_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner" testid="DTG-793" priority="P1" description="This script will cover validating the Selection of a Product Link Within the Global Promo Banner">
+      <!--  <test name="Test_DGLD_HF_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner" testid="DTG-793" priority="P1" description="This script will cover validating the Selection of a Product Link Within the Global Promo Banner">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_005_Normal_Path_User_Selects_a_Product_Link_Within_the_Global_Promo_Banner"/>
         </classes>
@@ -56,7 +56,7 @@
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_006_NormalPath_User_Selects_a_CMS_Link_Within_the_Global_Promo_Banner"/>
         </classes>
-        </test> 
+        </test>  --> 
         
            <test name="Test_DGLD_HF_UT_Footer_007_AlternatePath_UserSignsUpForNewsletter" testid="DTG-656" priority="P1" description="This script will cover validating Email News Letter SignUp">
        <classes>
@@ -76,11 +76,11 @@
         </classes>
         </test>
         
-         <test name="Test_DGLD_HF_UT_Country_Selector_011_012_Additional_Path_Verify_Hydroflask_Available_Selections_views_and_selects_country_selector" testid="DTG-709" priority="P1" description="This script will cover validating the Country Selector Available Selection views and selects country selector">
+    <!--      <test name="Test_DGLD_HF_UT_Country_Selector_011_012_Additional_Path_Verify_Hydroflask_Available_Selections_views_and_selects_country_selector" testid="DTG-709" priority="P1" description="This script will cover validating the Country Selector Available Selection views and selects country selector">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Country_Selector_011_012_Additional_Path_Verify_Hydroflask_Available_Selections_views_and_selects_country_selector"/>
         </classes>
-        </test>
+        </test>--> 
         <test name="Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options" testid="DTG-713" priority="P1" description="This script will cover validating the Select to View the Chatbot and User toggle between chat options">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options"/>
@@ -112,11 +112,11 @@
         </classes>
         </test>
         
-        <test name="Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality" testid="DTG-928" priority="P1" description="This script will cover validating the MiniCart Functionality">
+    <!--    <test name="Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality" testid="DTG-928" priority="P1" description="This script will cover validating the MiniCart Functionality">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality"/>
         </classes>
-        </test>
+        </test>-->
         
         <test name="Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Requirement_Checks" testid="DTG-932" priority="P1" description="This script will cover validating the Account Registration Password Requirement Checks">
        <classes>
@@ -134,5 +134,18 @@
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword"/>
         </classes>
         </test>
-        -->
+         
+         <test name="Test_DGLD_HF_UT_Checkout_ShippingStep_049_AlternatePath_Authenticated_User_Saves_a_New_Shipping_Address_to_their_Address_Book" testid="DTG-977" priority="P1" description="This script will cover validating Authenticated User Saves a New Shipping Address to their Address Book">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Checkout_ShippingStep_049_AlternatePath_Authenticated_User_Saves_a_New_Shipping_Address_to_their_Address_Book"/>
+        </classes>
+        </test>
+       
+        
+        
+          <test name="Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step" testid="DTG-1073" priority="P1" description="This script will cover validating User Views Order Summary During Checkout Payment Step">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step"/>
+        </classes>
+        </test>
 </suite>  

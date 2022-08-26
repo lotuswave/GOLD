@@ -18,7 +18,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_Unauthentica
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("Accessories");
+			Hydro.headerlinks("QA_Testing");
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();

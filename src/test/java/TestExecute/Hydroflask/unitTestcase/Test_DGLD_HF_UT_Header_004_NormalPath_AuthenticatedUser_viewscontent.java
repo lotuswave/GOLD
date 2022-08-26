@@ -39,11 +39,11 @@ public class Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewsconten
 	}
 
 	 @BeforeTest
-	 @Parameters("URL")
-	    public void startTest(String URL) throws Exception {
+	
+	    public void startTest() throws Exception {
 			System.setProperty("configFile", "Hydroflask\\config.properties");
-   //Login.signIn();
-	          Login.openwebsite(URL);
+   Login.signIn();
+	         
 
 	      }
 

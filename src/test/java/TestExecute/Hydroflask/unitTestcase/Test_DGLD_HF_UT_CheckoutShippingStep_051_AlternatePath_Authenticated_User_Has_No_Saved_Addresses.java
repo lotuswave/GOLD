@@ -22,7 +22,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticate
 			Hydro.verifingHomePage();
 			Hydro.validateCreateAccountpageNavigation();
 			Hydro.validateaccountcreationPassword("AccountDetails");
-			Hydro.headerlinks("Accessories");
+			Hydro.headerlinks("QA_Testing");
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();

@@ -23,7 +23,7 @@ public class Test_DGLD_HF_UT_Checkout_ShippingStep_049_AlternatePath_Authenticat
 	
 			
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.headerlinks("Accessories");
+			Hydro.headerlinks("QA_Testing");
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();
@@ -39,7 +39,7 @@ public class Test_DGLD_HF_UT_Checkout_ShippingStep_049_AlternatePath_Authenticat
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	//	Common.closeAll();
 
 	}
 
