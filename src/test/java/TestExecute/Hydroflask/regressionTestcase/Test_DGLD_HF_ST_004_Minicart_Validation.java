@@ -9,24 +9,27 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card {
+public class Test_DGLD_HF_ST_004_Minicart_Validation {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Register_user_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Minicart_Validation() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.headerlinks("QA_Testing");       
-			Hydro.addtocart("Product");                    
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_registerUser("AccountDetails");
-			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-
+			Hydro.headerlinks("QA_Testing");      
+			Hydro.addtocart("Product");
+			Hydro.headerlinks("Bottles & Drinkware"); 
+			Hydro.addtocart_pdp("Product");
+			Hydro.click_minicart();
+			Hydro.minicart_delete("Product");
+			Hydro.minicart_validation("Product Qunatity");
+			
+			
+			
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

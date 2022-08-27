@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("Accessories");      
+			Hydro.headerlinks("QA_Testing");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress("AccountDetails");
