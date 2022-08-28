@@ -17,6 +17,7 @@ public class Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Req
 	public void AdditionalPath_Password_Requirement_Checks() throws Exception {
 
 		try {
+			
 			Hydro.validateCreateAccountpageNavigation();
 			Hydro.validateaccountcreationPassword("AccountDetails");
 		} catch (Exception e) {

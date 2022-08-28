@@ -3176,7 +3176,7 @@ public class HydroHelper {
 		}
 	}
 	public void ShippingAddress(String dataSet) {
-		// TODO Auto-generated method stub
+		
 		String FirstName = data.get(dataSet).get("FirstName");
 		String LastName = data.get(dataSet).get("LastName");
 		String Street = data.get(dataSet).get("Street");
@@ -3185,6 +3185,7 @@ public class HydroHelper {
 		String postcode = data.get(dataSet).get("postcode");
 		String Country = data.get(dataSet).get("Country");
 		String phone = data.get(dataSet).get("phone");
+		
 		try {
 
 			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
@@ -3221,6 +3222,8 @@ public class HydroHelper {
 		}
 
 	}
+	
+	
 	public void Validate_Update_NewAddress_Verification(String dataSet) {
 		String FirstName = data.get(dataSet).get("FirstName");
 		String LastName = data.get(dataSet).get("LastName");

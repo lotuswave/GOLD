@@ -9,7 +9,9 @@ import TestComponent.OXO.OxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_UT_Checkout_ShippingStep_038_AlternatePath_Authenticated_User_Enters_NewShippingAddress {
+public class Test_DGLD_OXO_UT_Checkout_ShippingStep_037_ExceptionPath_Missing_InvalidFields {
+	
+
 	String datafile = "Oxo//OxoTestData.xlsx";
 	OxoHelper Oxo = new OxoHelper(datafile);
 
@@ -19,18 +21,15 @@ public class Test_DGLD_OXO_UT_Checkout_ShippingStep_038_AlternatePath_Authentica
 		try {
 
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
 			Oxo.headerlinks("Kitchenware");
 			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
-			Oxo.validate_registeruser_Shippingaddresspage();
+			Oxo.Validate_invalid_missing_fileds_shippingpage("shippingpagerrormsg");	
+			Oxo.validate_ExistingUser_Login_Checkoutpage("AccountDetails");
+			Oxo.Validate_Valid_Signin_Checkoutpage();
 			Oxo.Click_NewAddressCTA();
-			Oxo.Validate_RegisterUser_shippingaddressform();
-			Oxo.populate_Shippingaddress_fields("EditAddress");
-			Oxo.Validate_Update_NewAddress_Verification("EditAddress");
-			
-			
+			Oxo.Validate_invalid_missing_fileds_shippingpage("shippingpagerrormsg");
+		
 
 		} catch (Exception e) {
 
@@ -51,7 +50,5 @@ public class Test_DGLD_OXO_UT_Checkout_ShippingStep_038_AlternatePath_Authentica
 
 	}
 
-	
-	
 
 }

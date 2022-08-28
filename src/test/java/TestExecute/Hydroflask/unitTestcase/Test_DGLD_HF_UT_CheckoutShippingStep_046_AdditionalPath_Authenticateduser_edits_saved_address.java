@@ -37,7 +37,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_046_AdditionalPath_Authenticat
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
