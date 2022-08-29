@@ -284,12 +284,12 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 
 		String order = "";
-		addPaymentDetails("PaymentDetails");
+		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 
 		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
 			Thread.sleep(4000);
-			addPaymentDetails("PaymentDetails");
+			addPaymentDetails(dataSet);
 		}
 
 		Thread.sleep(3000);
