@@ -11,6 +11,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
@@ -192,10 +193,10 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("id", "customer-email");
-			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
 
 		}
 		String expectedResult = "email field will have email address";
@@ -670,12 +671,13 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
-			String message = Common.findElement("id", "validation-classes").getAttribute("class");
-			String message1 = Common.findElement("id", "validation-length").getAttribute("class");
+			String message = Common.findElement("id", "validation-classes").getCssValue("color");
+			String redcolor=Color.fromString(message).asHex();
+			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
+			String greencolor=Color.fromString(message1).asHex();
 			String emailmessage = Common.findElement("xpath", "//div[@id='email_address-error']").getText();
 			String confirmpassword = Common.findElement("xpath", "//div[@id='password-confirmation-error']").getText();
-			Common.assertionCheckwithReport(
-					message.contains("error") && message1.contains("complete") && emailmessage.contains("@domain.com")
+			Common.assertionCheckwithReport(redcolor.equals("#bf1322") && greencolor.equals("#2f741f") && emailmessage.contains("@domain.com")
 							&& confirmpassword.contains("enter the same value again"),
 					"validating the error messages with invalid date in accout creation form",
 					"User should able to get error message when used the invaild data",
@@ -893,5 +895,151 @@ try
 		}
 
 	}
+
+
+	public void createAccountFromOrderSummaryPage(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
+			String Greencolor=Color.fromString(Message).asHex();
+			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
+            Common.assertionCheckwithReport(Greencolor.equals("#067a63") && Message1.contains("complete"),
+					"validating the password minimum requriment message field",
+					"User should able to view the minimum requriement field for password",
+					"Sucessfully User able to view the minimum requriement field for password",
+					"Failed to see the minimum requriement field for password");
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
+			Common.clickElement("xpath", "//span[text()='Create an Account']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
+					"validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Sucessfully navigate to the My account page after clicking on signin button ",
+					"Failed to navigates to My Account Page after clicking on Signin button");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Unable to  navigate to the My account page after clicking on signin button ",
+					Common.getscreenShotPathforReport("Failed to navigates to My Account Page after clicking on Signin button"));
+			Assert.fail();
+		}
+	}
+
+	public String minicart_items() {
+		// TODO Auto-generated method stub
+		String items="";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__counter']");
+			items=Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			System.out.println(items);
+			Common.clickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
+			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
+			String miniitems=Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			System.out.println(miniitems);
+			Common.assertionCheckwithReport(items.contains(miniitems), "Vaildating the products count in the mini cart ",
+					"Products count shsould be display in the mini cart", "Sucessfully products count has displayed in the mini cart",
+					"failed to display products count in the mini cart");
+			Sync.waitElementPresent("xpath", "//div[@class='c-mini-cart__close-btn']");
+			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 		
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Vaildating the products count in the mini cart ",
+					"Products count shsould be display in the mini cart", "Unable to display the  products count in the mini cart",
+					Common.getscreenShot("failed to display products count in the mini cart"));
+			
+			Assert.fail();
+			
+		}
+		return items;
+		
+	}
+
+	public void minicart_products(String minicart) {
+		// TODO Auto-generated method stub
+		try
+		{
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		
+           Sync.waitElementPresent(30,"xpath", "//span[@class='c-mini-cart__counter']");
+			String cartproducts=Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+		    
+			Common.assertionCheckwithReport(cartproducts.equals(minicart), "validating the products in the cart after creating new account ",
+					"Products should be displayed in the mini cart after Create account with Cart", "Sucessfully after create account with cart products should be display in mini cart",
+					"failed to display the products in mini cart after the create account with cart");
+		
+			
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the products in the cart after creating new account ",
+				"Products should be displayed in the mini cart after Create account with Cart", "Unable to display the products in mini cart after the create account with cart",
+				Common.getscreenShot("failed to display the products in mini cart after the create account with cart"));
+		
+		Assert.fail();
+	}
+		
+		
+	}	
+	public void discountCode(String dataSet) throws Exception {
+        String expectedResult = "It should opens textbox input.";
+
+
+
+       try {
+
+            Sync.waitElementClickable("id", "block-discount-heading");
+            Common.clickElement("id", "block-discount-heading");
+
+             Sync.waitElementPresent("id", "discount-code");
+
+             Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+
+             int size = Common.findElements("id", "discount-code").size();
+           Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+                    "Successfully open the discount input box", "User unable enter Discount Code");
+             Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
+            Common.clickElement("xpath", "//button[@value='Apply Discount']");
+            Sync.waitPageLoad();
+            Thread.sleep(4000);
+            expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+            String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+            Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+                    "verifying pomocode", expectedResult, "promotion code working as expected",
+                    "Promation code is not applied");
+
+       }
+
+
+       catch (Exception | Error e) {
+            ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+                    "User failed to proceed with discountcode", Common.getscreenShotPathforReport("discountcodefailed"));
+            
+            Assert.fail();
+
+       }
+
+
+
+   }
+
 }
