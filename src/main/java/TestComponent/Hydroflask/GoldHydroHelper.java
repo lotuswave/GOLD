@@ -193,10 +193,10 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("id", "customer-email");
-			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
+			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
+			Common.textBoxInput("id", "customer-email",data.get(dataSet).get("Email"));
 
 		}
 		String expectedResult = "email field will have email address";
@@ -1041,5 +1041,96 @@ try
 
 
    }
+	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+			Sync.waitElementVisible("id", "customer-email");
+			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("id", "customer-email",Utils.getEmailid());
+
+		}
+		String expectedResult = "email field will have email address";
+		try {
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+					data.get(dataSet).get("FirstName"));
+			int size = Common.findElements("id", "customer-email").size();
+			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+					"Filled Email address", "unable to fill the email address");
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+
+			Sync.waitPageLoad();
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating shipping address",
+					"shipping address is filled in to the fields", "user faield to fill the shipping address",
+					Common.getscreenShotPathforReport("shipingaddressfaield"));
+			Assert.fail();
+
+		}
+		try {
+
+			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
+			if (size > 0) {
+				Sync.waitElementPresent(30, "xpath", "//input[@value='fedex_FEDEX_GROUND']");
+				Common.clickElement("xpath", "//input[@value='fedex_FEDEX_GROUND']");
+			}
+
+			expectedResult = "shipping address is filled in to the fields";
+			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+
+			int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+
+			if (errorsize >= 0) {
+				ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
+						"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
+			} else {
+
+				ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas",
+						expectedResult, "failed to add a addres in the filled",
+						Common.getscreenShotPathforReport("failed to add a address"));
+
+				Assert.fail();
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
+					"failed to add a addres in the filled",
+					Common.getscreenShotPathforReport("failed to add a address"));
+
+			Assert.fail();
+		}
+	}
 
 }

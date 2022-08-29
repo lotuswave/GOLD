@@ -22,7 +22,7 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 			Hydro.headerlinks("QA_Testing");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress("AccountDetails");
+			Hydro.newuseraddDeliveryAddress("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			Hydro.createAccountFromOrderSummaryPage("AccountDetails");
 
