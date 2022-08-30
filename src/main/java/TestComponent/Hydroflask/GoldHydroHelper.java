@@ -96,6 +96,44 @@ public class GoldHydroHelper {
 		}
 
 	}
+	
+	public void bottles_headerlinks(String category) {
+		// TODO Auto-generated method stub
+		String expectedResult = "User should click the" + category;
+		try {
+
+			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Thread.sleep(3000);
+//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Thread.sleep(3000);
+
+			try {
+				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+			} catch (Exception e) {
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			}
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.clickElement("xpath", "//span[text()=' Bottles']");
+			expectedResult = "User should select the " + category + "category";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			Common.assertionCheckwithReport(sizebotteles > 0,
+					"validating the product category as" + category + "from navigation menu ", expectedResult,
+					"Selected the " + category + " category", "User unabel to click" + category + "");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+					expectedResult, "Unable to Selected the " + category + " category",
+					Common.getscreenShot("Failed to click on the" + category + ""));
+
+			Assert.fail();
+		}
+
+	}
+
 
 	public void addtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
@@ -762,7 +800,7 @@ public class GoldHydroHelper {
 	}
 
 	
-	public void addtocart_pdp(String Dataset) {
+	public void Configurable_addtocart_pdp(String Dataset) {
 		String product = data.get(Dataset).get("Colorproduct");
 		String productcolor = data.get(Dataset).get("Color");
 		try {
@@ -780,7 +818,7 @@ public class GoldHydroHelper {
 				}
 			}
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("18 oz Standard Mouth"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");

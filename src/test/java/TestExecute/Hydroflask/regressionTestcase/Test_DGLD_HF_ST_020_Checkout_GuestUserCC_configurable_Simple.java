@@ -9,13 +9,13 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_004_Minicart_Validation {
+public class Test_DGLD_HF_ST_020_Checkout_GuestUserCC_configurable_Simple {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile);
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Minicart_Validation() throws Exception {
+	public void Validate_Checkout_GuestUserCC_configurable_Simple () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
@@ -23,13 +23,10 @@ public class Test_DGLD_HF_ST_004_Minicart_Validation {
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.click_minicart();
-			Hydro.minicart_delete("Product");
-			Hydro.minicart_validation("Product Qunatity");
-			
-			
-			
-			
+			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress("AccountDetails");
+			Hydro.updatePaymentAndSubmitOrder("CCMastercard");
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

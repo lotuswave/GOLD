@@ -21,8 +21,8 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 			Hydro.verifingHomePage();
 			Hydro.headerlinks("QA_Testing");      
 			Hydro.addtocart("Product");  
-			Hydro.headerlinks("Bottles & Drinkware"); 
-			Hydro.addtocart_pdp("Product");
+			Hydro.Configurable_addtocart_pdp("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			String minicart=Hydro.minicart_items();
 			Hydro.click_Createaccount();
 			Hydro.create_account("AccountDetails");
