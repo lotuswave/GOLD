@@ -3680,6 +3680,68 @@ public class HydroHelper {
 		}
 
 		}
+	
+	public String minicart_items() {
+		// TODO Auto-generated method stub
+		String items="";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__counter']");
+			items=Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			System.out.println(items);
+			Common.clickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
+			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
+			String miniitems=Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			Common.assertionCheckwithReport(items.contains(miniitems), "Vaildating the products count in the mini cart ",
+					"Products count shsould be display in the mini cart", "Sucessfully products count has displayed in the mini cart",
+					"failed to display products count in the mini cart");
+			Sync.waitElementPresent("xpath", "//div[@class='c-mini-cart__close-btn']");
+			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+		
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Vaildating the products count in the mini cart ",
+					"Products count shsould be display in the mini cart", "Unable to display the  products count in the mini cart",
+					Common.getscreenShot("failed to display products count in the mini cart"));
+			
+			Assert.fail();
+			
+		}
+		return items;
+		
+	}
+	
+	public void minicart_products(String minicart) {
+		// TODO Auto-generated method stub
+		try
+		{
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+		
+           Sync.waitElementPresent(30,"xpath", "//span[@class='c-mini-cart__counter']");
+			String cartproducts=Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+		    
+			Common.assertionCheckwithReport(cartproducts.equals(minicart), "validating the products in the cart after creating new account ",
+					"Products should be displayed in the mini cart after Create account with Cart", "Sucessfully after create account with cart products should be display in mini cart",
+					"failed to display the products in mini cart after the create account with cart");
+		
+			
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the products in the cart after creating new account ",
+				"Products should be displayed in the mini cart after Create account with Cart", "Unable to display the products in mini cart after the create account with cart",
+				Common.getscreenShot("failed to display the products in mini cart after the create account with cart"));
+		
+		Assert.fail();
+	}
+		
+		
+	}	
 		
 
 }
