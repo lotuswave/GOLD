@@ -3741,7 +3741,88 @@ public class HydroHelper {
 	}
 		
 		
-	}	
+	}
+
+	public void Click_Browserstock() {
+		// TODO Auto-generated method stub
+		
+		try {
+
+			Common.clickElement("xpath", "//a[text()='  Browse Stock']");
+			int browsersize = Common.findElements("xpath", "//div[@class='conv-inventory-wrapper']").size();
+			System.out.println(browsersize);
+			Common.assertionCheckwithReport(browsersize > 0, "validating Browse Stock page",
+					"user navigates to Browse Stock page", "Sucessfully user navigate to Browse Stock page",
+					"faield to navigate to Browse Stock page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Browse Stock page",
+					"System directs the user back to Browse Stock page", "unable to user go back to Browse Stock page",
+					Common.getscreenShotPathforReport("faield to get back to Browse Stock page"));
+			Assert.fail();
+		}
+	}
+
+	public void Click_Direction() {
+		// TODO Auto-generated method stub
+		
+		try {
+		       Sync.waitElementPresent("xpath", "//a[@id='conv-store-info-back']");
+		       Common.clickElement("xpath", "//a[@id='conv-store-info-back']");
+
+		       
+		           Sync.waitElementPresent("xpath", "(//span[text()='Directions'])[2]");
+					Common.clickElement("xpath", "(//span[text()='Directions'])[2]");
+					Common.switchWindows();			
+
+					int directionsize = Common.findElements("xpath", "//div[@aria-label='Directions']").size();
+					System.out.println(directionsize);
+					Common.assertionCheckwithReport(directionsize >= 0, "validating google maps page",
+							"user redirects to google maps page", "Sucessfully user redirects to google maps page",
+							"faield to redirects to google maps page");  
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating google maps page",
+							"System directs the user back to google maps page", "unable to user go back to google maps page",
+							Common.getscreenShotPathforReport("faield to get back to google maps page"));
+					Assert.fail();
+					
+				}	
+				
+			}
+
+	public void writeReviews() {
+		// TODO Auto-generated method stub
+		try {
+			   
+			
+         	Common.switchToFirstTab();				       
+            Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
+       
+            Sync.waitElementPresent("xpath", "//span[text()='Write a Review']");
+			Common.clickElement("xpath", "//span[text()='Write a Review']");
+			Common.switchWindows();
+			int reviewSize = Common.findElements("xpath", "//div[@class='review-form-header']//h1").size();
+   
+               System.out.println(reviewSize);
+			Common.assertionCheckwithReport(reviewSize>=0, "validating reviews page",
+					"user redirects to reviews page", "Sucessfully user redirects to reviews page",
+					"faield to redirects to reviews page");
+			 
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating reviews page",
+					"System directs the user back to reviews page", "unable to user go back to reviews page",
+					Common.getscreenShotPathforReport("faield to get back to reviews page"));
+			Assert.fail();
+		}	
+		
+	}
+
+	
 		
 
 }
