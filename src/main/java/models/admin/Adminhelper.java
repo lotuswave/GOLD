@@ -133,6 +133,257 @@ public class Adminhelper {
 
 		}
 	}
+	public WebElement Testimonials_Product_Carousel() {
+
+		WebElement element = Common.findElement("xpath", "//span[text()='Testimonials Product Carousel']");
+		Common.clickElement("xpath", "//span[text()='Testimonials Product Carousel']");
+
+		return element;
+
+	}
+	public void dragndrop_Testimonials_Product_Carousel() {
+		try {
+			WebElement element = Common.findElement("xpath", "//span[text()='Testimonials Product Carousel']");
+			draganddropContentBlock(element);
+			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+					.getAttribute("data-content-type");
+			
+			Common.assertionCheckwithReport(blockname.equals("hot_testimonials_product_carousel"),
+					"Validating Testimonials Product Carousel Dragndrop operation", "Testimonials Product Carousel dragndrop to content with options",
+					"successfully dragndrop the Testimonials Product Carousel with options ", "fail to dragndrop the Testimonials Product Carousel");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("Validating card tile Dragndrop operation",
+					"User should able Dragndrop Testimonials Product Carousel", "Unable to Dragndrop the Testimonials Product Carousel",
+					Common.getscreenShotPathforReport("Failed to Dragndrop the Testimonials Product Carousel"));
+			Assert.fail();
+
+		}
+	}
+	public void Edit_Testimonials_Product_Carousel() {
+		try {
+		       int TestimonialSize=Common.findElements("xpath","//div[@class='m-media-card-testimonial__content text__content--dark']").size();
+		        System.out.println(TestimonialSize);
+			Common.mouseOver("xpath","(//div[@class='m-media-card-testimonial__image'])[1]");
+		
+			Sync.waitElementClickable("xpath", "(//i[@class='icon-admin-pagebuilder-systems'])[2]");
+			Common.clickElement("xpath","(//i[@class='icon-admin-pagebuilder-systems'])[2]");
+			
+	//		String Title = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
+			
+		
+			Common.assertionCheckwithReport(TestimonialSize>0,
+					"Validating Edit Testimonias Product Card Page", "Edit Testimonials Product Card page with options",
+					"successfully navigate to Edit Testimonials Product Card page ", "fail to navigate to Edit Testimonials Product Card page");
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("Validating Edit Testimonials Product Card page",
+					"User should able to navigate Edit Testimonials Product Card page", "Unable to navigate Edit Testimonials Product Card page",
+					Common.getscreenShotPathforReport("Failed to navigate to Edit Testimonials Product Card page"));
+			Assert.fail();
+
+		}
+	}
+	public void SKUvalue(String dataSet) {
+		try {
+			String SKU = Common.findElement("xpath", "//span[text()='Product SKU']").getText();
+			Common.javascriptclickElement("xpath", "//input[@name='product_sku']");
+		    Sync.waitElementClickable("xpath","//input[@name='product_sku']" );
+			Common.textBoxInput("xpath", "//input[@name='product_sku']", data.get(dataSet).get("SKU"));
+
+		
+			Common.assertionCheckwithReport(SKU.equals("Product SKU"), "To validate the Product SKU",
+					"Should able to add Product SKU value ", "Product SKU value is added successfully",
+					"Product SKU value failed");
+		
+		
+					} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Product SKU",
+					"Admin should able to enter Product SKU value", "Product SKU failed",
+					Common.getscreenShotPathforReport("Failed to enter Product SKU"));
+
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void Content_Dark(String dataSet) {
+		try {
+ 
+			String textcolor = Common.findElement("xpath","//span[text()='Dark']").getText();
+			Common.javascriptclickElement("xpath", "(//input[@name='title'])[2]");
+			Sync.waitElementClickable("xpath","(//input[@name='title'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(dataSet).get("Author"));
+
+			Common.javascriptclickElement("xpath", "//textarea[@name='description']");
+			Sync.waitElementClickable("xpath","//textarea[@name='description']");
+			Common.textBoxInput("xpath", "//textarea[@name='description']", data.get(dataSet).get("Quote"));
+
+		
+			Common.assertionCheckwithReport(textcolor.equals("Dark"), "To validate the Content values",
+					"Should able to add Content values ", "Content values is added successfully",
+					"Content values failed");
+		
+		
+					} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Content feildset",
+					"Admin should able to Content values", "Content values failed",
+					Common.getscreenShotPathforReport("Failed to add Content values"));
+
+			Assert.fail();
+
+		}
+
+	}
+
+	public void CSSclassvalue(String dataSet) {
+		try {
+
+					Common.scrollIntoView("xpath", "//span[text()='Advanced']");
+					String Advanced = Common.findElement("xpath","//span[text()='Advanced']").getText();
+			Sync.waitElementClickable("xpath", "//input[@name='css_classes']");
+			Common.textBoxInput("xpath", "//input[@name='css_classes']", data.get(dataSet).get("CSSclasses"));
+		
+			Common.assertionCheckwithReport(Advanced.equals("Advanced"), "To validate the CSS classes value",
+					"Should able to add CSS classes value ", "CSS classes value is added successfully",
+					"CSS classes value failed");
+		
+			
+			
+					} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Testimonials product cards configuration	",
+					"Admin should able to add CSS classes value", "failed to add CSS classes value",
+					Common.getscreenShotPathforReport("Failed to add CSS clasess"));
+
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void frontendView_Dark() {
+		// TODO Auto-generated method stub                     
+		try {
+			
+			//div[@data-product-sku='W32075']
+			
+			ClosADD();
+			String SKU_value = Common.findElement("xpath","//div[@data-product-sku='W32075']").getAttribute("data-product-sku");
+			Assert.assertEquals(SKU_value, "W32075");
+			
+			Sync.waitElementPresent("xpath", "(//div[contains(@class,'text__content--dark')])[1]");
+			String textview = Common.findElement("xpath", "(//div[contains(@class,'text__content--dark')])[1]").getAttribute("class");
+			Common.assertionCheckwithReport(textview.contains("dark"),
+					"Validating the textview on frontend ",
+					"Able to display the text as Dark view on the frontend",
+					"Successfully text is dispalyed as Dark",
+					"Failed to Display dark view on frontend");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the textview on frontend",
+					"Able to display the text as Dark view on the frontend ",
+					"unable to display the text as dark view on the frontend",
+					Common.getscreenShotPathforReport("Failed to Display view Selector CTA on customers page"));
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void Content_Light() {
+		try {
+ 
+			
+			String textcolor = Common.findElement("xpath","//span[text()='Light']").getText();
+			Common.javascriptclickElement("xpath", "//span[text()='Light']");
+
+			Common.assertionCheckwithReport(textcolor.equals("Light"), "To validate the Content values",
+					"Should able to add Content values ", "Content values is added successfully",
+					"Content values failed");
+		
+		
+					} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Content feildset",
+					"Admin should able to Content values", "Content values failed",
+					Common.getscreenShotPathforReport("Failed to add Content values"));
+
+			Assert.fail();
+
+		}
+
+	}
+	public void frontendView_Light() {
+		// TODO Auto-generated method stub                     
+		try {
+			
+			ClosADD();
+		
+			String SKU_value = Common.findElement("xpath","//div[@data-product-sku='W32075']").getAttribute("data-product-sku");
+			Assert.assertEquals(SKU_value, "W32075");
+			
+			
+			Sync.waitElementPresent("xpath", "(//div[contains(@class,'text__content--light')])[1]");
+			String textview = Common.findElement("xpath", "(//div[contains(@class,'text__content--light')])[1]").getAttribute("class");
+			Common.assertionCheckwithReport(textview.contains("dark"),
+					"Validating the textview on frontend ",
+					"Able to display the text as Dark view on the frontend",
+					"Successfully text is dispalyed as Dark",
+					"Failed to Display dark view on frontend");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the textview on frontend",
+					"Able to display the text as Dark view on the frontend ",
+					"unable to display the text as dark view on the frontend",
+					Common.getscreenShotPathforReport("Failed to Display view Selector CTA on customers page"));
+			Assert.fail();
+
+		}
+
+	}
+	public void shifttab() throws InterruptedException {
+		// TODO Auto-generated method stub
+	
+		Common.switchToSecondTab();
+		Sync.waitPageLoad(5000);
+		Thread.sleep(8000);
+		Common.refreshpage();	
+		Common.refreshpage();
+		Thread.sleep(4000);
+		Common.refreshpage();
+		Common.refreshpage();
+		
+	}
+	public void ClosADD() throws Exception{
+		   Thread.sleep(3000);
+		    int sizesframe=Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+		    if(sizesframe>0){
+		    Common.actionsKeyPress(Keys.PAGE_UP);
+		   
+		   // Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+		    Sync.waitElementVisible("xpath" , "//div[@class='sidebar-iframe-close']");
+		    Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
+		    }
+		    else {
+		        int sizeofpopup=Common.findElements("id", "wpx-newsletter-popup").size();
+		        if(sizeofpopup>0){
+		            
+		            
+		            Sync.waitElementClickable("xpath" , "//button[@aria-label='close']");
+		            Common.clickElement("xpath" , "//button[@aria-label='close']");
+		    }
+		    }
+		}
 
 	public void Delete_customer(String Dataset) {
 		// TODO Auto-generated method stub
@@ -1623,6 +1874,42 @@ public class Adminhelper {
 					"User should able to save the page", "Unable to saves the page",
 					Common.getscreenShotPathforReport("Failed to save the page"));
 			Assert.fail();
+		}
+
+	}
+	
+	public void savecontent1(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+			Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+			Common.clickElement("xpath", "//input[@name='title']");
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+			Common.clickElement("xpath", "//button[@id='save-button']");
+			Sync.waitPageLoad(70);
+
+			Sync.waitElementVisible("xpath", "//div[@data-ui-id='messages-message-success']");
+			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(savethepage.contains("You saved the page."),
+					" To Validate the User needs to save the page", "User should able to save the page",
+					"Sucessfully User saves the page", "Failed to save the page");
+
+		} catch (Exception | Error e) {
+			
+			ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+					"User should able to save the page", "Unable to saves the page",
+					Common.getscreenShotPathforReport("Failed to save the page"));
+			Assert.fail();
+			e.printStackTrace();
+			
 		}
 
 	}
