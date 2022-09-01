@@ -1683,6 +1683,7 @@ public class HydroHelper {
 				}
 			}
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.scrollIntoView("xpath","//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
@@ -3933,4 +3934,237 @@ public void Validate_Explore_Headermenu() throws InterruptedException {
 
 	}
 
+
+public void search_product1(String Dataset) throws Exception {
+	// TODO Auto-generated method stub
+	String product = data.get(Dataset).get("Products");
+	try {
+		Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+		String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+		Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+				"User should able to click on the search button", "Search expands to the full page",
+				"Sucessfully search bar should be expand");
+		Common.textBoxInput("xpath", "//input[@id='search']", product);
+		Common.actionsKeyPress(Keys.ENTER);
+	
+String find = Common.findElement("xpath", "//span[contains(text(),'32 oz Wide Mouth - Acai Purple')]").getText();
+System.out.println(find);
+
+Common.assertionCheckwithReport(find.equals("32 oz Wide Mouth - Acai Purple"), "validating the search functionality",
+				"enter product name will display in the search box", "user enter the product name in  search box",
+				"Failed to see the product name");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the search functionality",
+				"enter product name will display in the search box",
+				" unable to enter the product name in  search box",
+				Common.getscreenShot("Failed to see the product name"));
+		Assert.fail();
+	
+	}
+}	
+		
+		public void addDeliveryAddress1(String dataSet) throws Exception {
+			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(5000);
+				Sync.waitElementVisible("id", "customer-email");
+				Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+			} catch (NoSuchElementException e) {
+				minicart_Checkout();
+				Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+
+			}
+			String expectedResult = "email field will have email address";
+			try {
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
+	            int size = Common.findElements("id", "customer-email").size();
+	            Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,"Filled Email address", "unable to fill the email address");
+	            Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",data.get(dataSet).get("Street"));
+				String Text=Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+				
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Thread.sleep(3000);
+				try {
+					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				} catch (ElementClickInterceptedException e) {
+					Thread.sleep(3000);
+					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				Thread.sleep(2000);
+				Common.textBoxInputClear("name", "postcode");
+				Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+				Thread.sleep(5000);
+				
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Thread.sleep(5000);
+				Common.clickElement("xpath", "//input[@class='a-radio-button__input']");
+				
+		
+				expectedResult = "shipping address is filled in to the fields";
+			
+					ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
+							"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
+			}
+				
+					catch(Exception | Error e) {
+					ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
+							"failed to add a addres in the filled",
+							Common.getscreenShotPathforReport("failed to add a address"));
+					
+					Assert.fail();
+			}
+			
+		}
+		
+		
+public void Validate_invalid_Discount_code(String dataset) {
+	
+	//String cardnumber=data.get(dataset).get("Invaliddiscountcode");
+	
+
+	try 
+	{
+	
+	         Common.actionsKeyPress(Keys.PAGE_UP);
+            Common.scrollIntoView("xpath", "//span[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Add Discount Code')]");
+			Thread.sleep(5000);
+			
+			Common.clickElement("id","discount-code");
+			Thread.sleep(5000);
+			Common.textBoxInput("id", "discount-code", data.get(dataset).get("Invaliddiscountcode"));
+			
+			Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
+			
+			Common.clickElement("xpath","//button[@value='Apply Discount']");
+			
+			Thread.sleep(1000);
+       String invalidcode = Common.findElement("xpath", "//div[@class='message message-error error']/div").getText();
+	
+	System.out.println(invalidcode);
+	Common.assertionCheckwithReport(invalidcode.contains("The coupon code isn't valid."), "validating the invalid discount code",
+			"invalid code should be entered", "Sucessfully showing the error message ",
+			"failed to showing the error message");
+
+	
 }
+catch(Exception | Error e)
+{
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the invalid discount code",
+			"invalid code should be entered", "Sucessfully showing the error message",
+			Common.getscreenShot("failed to showing the error message"));
+	Assert.fail();
+}
+}
+
+	public void Validate_valid_Discount_code(String dataset) {
+
+		try 
+		{
+		
+				Thread.sleep(8000);
+				Sync.waitElementPresent("id", "discount-code");
+				Common.clickElement("id","discount-code");
+				
+				Common.textBoxInput("id", "discount-code", data.get(dataset).get("validdiscountcode"));
+				
+				Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
+				
+				Common.clickElement("xpath","//button[@value='Apply Discount']");
+				//Sync.waitPageLoad();
+				Thread.sleep(1000);
+				String validcode = Common.findElement("xpath", "//div[@class='message message-success success']").getText();
+
+		
+		System.out.println(validcode);
+		Common.assertionCheckwithReport(validcode.contains("success"), "validating the valid discount code",
+				"valid code should be entered", "Sucessfully showing the success message ",
+				"failed to showing the suceess message");
+	
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the valid discount code",
+				"valid code should be entered", "Sucessfully showing the success message",
+				Common.getscreenShot("failed to showing the suceess message"));
+		Assert.fail();
+	}
+
+}
+	public void verify_ordersummary_valid_discount_code() throws Exception {
+		try
+		{
+			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$", "");
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping=Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']").replace("$", "");
+			Float shippingvalue = Float.parseFloat(shipping);
+			String discount=Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']").replace("-$", "");
+			Float discountvalue = Float.parseFloat(discount);
+			String Tax=Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+			Float Taxvalue = Float.parseFloat(Tax);
+			String ordertotal=Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace("$", "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Float Total=(subtotalvalue+shippingvalue+Taxvalue)-discountvalue;
+		    String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		    Float ExpectedTotalAmmount2lvalue = Float.parseFloat(ExpectedTotalAmmount2); 
+		    System.out.println(ordertotalvalue);
+		    System.out.println(ExpectedTotalAmmount2lvalue);
+		    
+		    	
+		    Common.assertionCheckwithReport(ExpectedTotalAmmount2lvalue.equals(ordertotalvalue),
+					"validating the order summary in the shipping  page",
+					"Order summary should be display in the shipping page and all fields should display",
+					"Successfully Order summary is displayed in the shipping page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the order summary in the shipping page",
+					"Order summary should be display in the shipping page and all fields should display",
+					"Unabel to display the Order summary and fields are not displayed in the shipping page", Common.getscreenShot(
+							"Failed to display the order summary and fileds under order summary"));
+			Assert.fail();
+		}
+		
+		
+}
+
+
+	
+		
+			public void ClosADD() throws Exception{
+				   Thread.sleep(3000);
+				    int sizesframe=Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+				    if(sizesframe>0){
+				    Common.actionsKeyPress(Keys.PAGE_UP);
+				   
+				   // Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+				    Sync.waitElementVisible("xpath" , "//div[@class='sidebar-iframe-close']");
+				    Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
+				    }
+				    else {
+				        int sizeofpopup=Common.findElements("id", "wpx-newsletter-popup").size();
+				        if(sizeofpopup>0){
+				            
+				            
+				            Sync.waitElementClickable("xpath" , "//button[@aria-label='close']");
+				            Common.clickElement("xpath" , "//button[@aria-label='close']");
+				    }
+				    }
+				}
+		    
+		
+
+	}
+
