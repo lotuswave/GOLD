@@ -40,7 +40,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_044_ExceptionPath_UserEntersIn
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

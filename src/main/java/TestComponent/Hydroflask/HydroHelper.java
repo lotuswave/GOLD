@@ -1682,8 +1682,12 @@ public class HydroHelper {
 					break;
 				}
 			}
+			Thread.sleep(9000);
+			//Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+		
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.scrollIntoView("xpath","//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
