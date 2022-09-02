@@ -4118,7 +4118,9 @@ catch(Exception | Error e)
 			String Tax=Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
 			Float Taxvalue = Float.parseFloat(Tax);
 			String ordertotal=Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace("$", "");
+			
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Thread.sleep(4000);
 			Float Total=(subtotalvalue+shippingvalue+Taxvalue)-discountvalue;
 		    String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 		    Float ExpectedTotalAmmount2lvalue = Float.parseFloat(ExpectedTotalAmmount2); 

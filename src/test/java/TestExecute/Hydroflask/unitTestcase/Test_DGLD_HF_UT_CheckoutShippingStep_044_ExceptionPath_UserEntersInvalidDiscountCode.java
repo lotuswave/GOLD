@@ -21,10 +21,10 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_044_ExceptionPath_UserEntersIn
 			Hydro.verifingHomePage();
 			Hydro.ClosADD();
 			Hydro.search_product1("search");
-			Hydro.ClosADD();
+			
 			Hydro.addtocart("Product"); 
 		    Hydro.minicart_Checkout();
-		    Hydro.ClosADD();
+		  
 		    Hydro.addDeliveryAddress1("AccountDetails");
 		   
 			Hydro.Validate_invalid_Discount_code("Discount code");
