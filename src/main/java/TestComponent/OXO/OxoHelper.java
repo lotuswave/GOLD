@@ -3512,6 +3512,141 @@ public class OxoHelper {
 			Assert.fail();
 
 		}}
+	
+	public void addDeliveryAddressShipping(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+			Sync.waitElementVisible("id", "customer-email");
+			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+
+		}
+		String expectedResult = "email field will have email address";
+		try {
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
+            int size = Common.findElements("id", "customer-email").size();
+            Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,"Filled Email address", "unable to fill the email address");
+            Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",data.get(dataSet).get("Street"));
+			String Text=Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+			
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+			
+			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//input[@class='a-radio-button__input']");
+			
+	
+			expectedResult = "shipping address is filled in to the fields";
+		
+				ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
+						"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
+		}
+			
+				catch(Exception | Error e) {
+				ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
+						"failed to add a addres in the filled",
+						Common.getscreenShotPathforReport("failed to add a address"));
+				
+				Assert.fail();
+		}
+		
+	}
+	
+	
+	public void valid_DiscountCode(String dataSet) throws Exception {
+		String expectedResult = "It should opens textbox input.";
+		try {
+
+			Sync.waitElementClickable("id", "block-discount-heading");
+//			Common.clickElement("id", "block-discount-heading");
+
+			Sync.waitElementPresent("id", "discount-code");
+
+			Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+
+			int size = Common.findElements("id", "discount-code").size();
+			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+					"Successfully open the discount input box", "User unable enter Discount Code");
+			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
+			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			expectedResult = "It should apply discount on your price.If user enters invalid Discount code it should display Discount code is not valid message.";
+			String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+			System.out.println(discountcodemsg);
+			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+					"verifying Discount code", expectedResult, "Discount code is working as expected",
+					"Discount code is not applied");
+
+		}
+
+		catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+					"User failed to proceed with discountcode",
+					Common.getscreenShotPathforReport("discountcodefailed"));
+
+			Assert.fail();
+
+		}
+	}
+
+	public void invalid_DiscountCode(String dataSet) throws Exception {
+		String expectedResult = "It should opens textbox input.";
+		try {
+			
+			 Common.scrollIntoView("id", "block-discount-heading");
+			Sync.waitElementClickable("id", "block-discount-heading");
+			Common.clickElement("id", "block-discount-heading");
+
+			Sync.waitElementPresent("id", "discount-code");
+			Thread.sleep(4000);
+			Common.textBoxInput("id", "discount-code", data.get(dataSet).get("InvalidDiscountcode"));
+
+			int size = Common.findElements("id", "discount-code").size();
+			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+					"Successfully open the discount input box", "User unable enter Discount Code");
+			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
+			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+			String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+			Common.assertionCheckwithReport(discountcodemsg.contains("The coupon code isn't valid"),
+					"verifying pomocode", expectedResult, "Discount code is not working as expected",
+					"Discount code is not applied");
+
+		}
+
+		catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+					"User failed to proceed with discountcode",
+					Common.getscreenShotPathforReport("discountcodefailed"));
+
+			Assert.fail();
+
+		}
+	}
+	
 }
 	
 	

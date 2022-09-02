@@ -687,7 +687,7 @@ public class HydroHelper {
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Homepage"),
 					"validating store logo", "System directs the user to the Homepage",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		} catch (Exception | Error e) {
@@ -4078,7 +4078,7 @@ catch(Exception | Error e)
 				Thread.sleep(8000);
 				Sync.waitElementPresent("id", "discount-code");
 				Common.clickElement("id","discount-code");
-				
+				Thread.sleep(4000);
 				Common.textBoxInput("id", "discount-code", data.get(dataset).get("validdiscountcode"));
 				
 				Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
