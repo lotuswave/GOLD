@@ -3646,6 +3646,190 @@ public class OxoHelper {
 
 		}
 	}
+
+	public void click_MyAccount() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void change_Shippingaddress_Addressbook(String Dataset) {
+		// TODO Auto-generated method stub
+		String firstname=data.get(Dataset).get("FirstName");
+		String secondname=data.get(Dataset).get("LastName");
+		String address=data.get(Dataset).get("Street");
+		String phonenumber=data.get(Dataset).get("phone");
+		String City=data.get(Dataset).get("City");
+		String region=data.get(Dataset).get("Region");
+	    String zipcode=data.get(Dataset).get("postcode");	
+	    String shipping=data.get(Dataset).get("Shipping address");
+
+	 
+		try
+		{
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='Address Book']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
+					"validating the Navigation to the Address Book page",
+					"After Clicking on Address Book CTA user should be navigate to the Address Book page",
+					"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
+					"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
+			
+			String newaddress=Common.findElement("xpath", "//div[@class='block-content']//P").getText();
+			System.out.println(newaddress);
+			if(newaddress.contains("You have no other address"))
+			{
+				Common.clickElement("xpath", "//button[@title='Add New Address']");
+				Sync.waitPageLoad();	
+			    Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+				Common.clickElement("xpath", "//input[@name='firstname']");
+				Common.textBoxInput("xpath", "//input[@name='firstname']",firstname);
+				Common.clickElement("xpath", "//input[@name='lastname']");
+				Common.textBoxInput("xpath", "//input[@name='lastname']",secondname);
+				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+				Common.clickElement("xpath", "//input[@title='Phone Number']");
+				Common.textBoxInput("xpath", "//input[@title='Phone Number']",phonenumber);
+				Common.clickElement("xpath", "//input[@title='Address Line 1']");
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']",address);
+				Common.clickElement("xpath", "//input[@title='City']");
+				Common.textBoxInput("xpath", "//input[@title='City']",City);
+				Common.clickElement("xpath", "//select[@name='region_id']");
+				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+				Common.clickElement("xpath", "//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//input[@name='postcode']",zipcode);
+				Common.clickElement("xpath", "//label[@for='primary_shipping']");
+				Common.clickElement("xpath", "//button[@title='Save Address']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				
+		 Common.assertionCheckwithReport(message.equals("You saved the address."),
+							"validating the saved message after saving address in address book",
+							"Save address message should be displayed after the address saved in address book",
+							"Sucessfully address has been saved in the address book",
+							"Failed to save the address in the address book");
+				shippingaddress_Addressbook("New ShippingAddress");
+			}
+			else
+			{
+				shippingaddress_Addressbook("New ShippingAddress");
+		}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
+			Assert.fail();
+		}
+		
+	
+		
+	}
+
+	public void Login_Oxo(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
+	}
+
+	public void shippingaddress_Addressbook(String Dataset) {
+		// TODO Auto-generated method stub
+		String firstname=data.get(Dataset).get("FirstName");
+		String secondname=data.get(Dataset).get("LastName");
+		String address=data.get(Dataset).get("Street");
+		String phonenumber=data.get(Dataset).get("phone");
+		String City=data.get(Dataset).get("City");
+		String region=data.get(Dataset).get("Region");
+	    String zipcode=data.get(Dataset).get("postcode");	
+	    String shipping=data.get(Dataset).get("Shipping address");
+	    try
+	    {
+		Common.clickElement("xpath", "//a[@title='Change Shipping Address']");
+		Sync.waitPageLoad();	
+	    Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+		Common.clickElement("xpath", "//input[@name='firstname']");
+		Common.textBoxInput("xpath", "//input[@name='firstname']",firstname);
+		Common.clickElement("xpath", "//input[@name='lastname']");
+		Common.textBoxInput("xpath", "//input[@name='lastname']",secondname);
+		Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+		Common.clickElement("xpath", "//input[@title='Phone Number']");
+		Common.textBoxInput("xpath", "//input[@title='Phone Number']",phonenumber);
+		Common.clickElement("xpath", "//input[@title='Address Line 1']");
+		Common.textBoxInput("xpath", "//input[@title='Address Line 1']",address);
+		Common.clickElement("xpath", "//input[@title='City']");
+		Common.textBoxInput("xpath", "//input[@title='City']",City);
+		Common.clickElement("xpath", "//select[@name='region_id']");
+		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+		Common.clickElement("xpath", "//input[@name='postcode']");
+		Common.textBoxInput("xpath", "//input[@name='postcode']",zipcode);
+	  String checkbox=Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
+	  String text=Common.findElement("xpath", "//div[@class='message info']//span").getText();
+	  Common.assertionCheckwithReport(checkbox.equals("checkbox") && text.equals("This is your default shipping address.") ,
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+				"Failed to display checkbox for billing address and fail to display text"+text+"for shipping address");
+	  Common.clickElement("xpath", "//button[@title='Save Address']");
+	  Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+	  String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	  String shippingaddress=Common.findElement("xpath", "//div[contains(@class,'box box-address-s')]//address").getText();
+	  Common.assertionCheckwithReport(shippingaddress.equals(shipping)&&message.equals("You saved the address."),
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+				"Failed to display checkbox for billing address and fail to display text"+text+"for shipping address");
+	    }
+	    catch(Exception | Error e)
+	    {
+	    	e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
+			Assert.fail();
+	    }
+	}
 	
 }
 	
