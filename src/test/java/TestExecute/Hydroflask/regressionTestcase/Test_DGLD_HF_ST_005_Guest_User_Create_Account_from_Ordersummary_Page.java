@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("QA_Testing");      
+			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
 			Hydro.newuseraddDeliveryAddress("AccountDetails");
@@ -41,8 +41,8 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
 		Login.signIn();
+		Hydro.close_add();
 
 	}
 

@@ -21,7 +21,7 @@ public class Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.headerlinks("QA_Testing");       
+			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_registerUser("AccountDetails");
@@ -42,8 +42,8 @@ public class Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
-		Login.signIn();
+        Login.signIn();
+        Hydro.close_add();
 
 	}
 

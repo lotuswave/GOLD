@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_004_Minicart_Validation {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("QA_Testing");      
+			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
@@ -45,8 +45,8 @@ public class Test_DGLD_HF_ST_004_Minicart_Validation {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
 		Login.signIn();
+		Hydro.close_add();
 
 	}
 

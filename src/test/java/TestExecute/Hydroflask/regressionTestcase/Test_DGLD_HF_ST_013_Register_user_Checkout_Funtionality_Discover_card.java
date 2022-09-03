@@ -21,7 +21,7 @@ public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_ca
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.headerlinks("QA_Testing");       
+			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_registerUser("AccountDetails");
@@ -42,8 +42,8 @@ public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_ca
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
-		Login.signIn();
+        Login.signIn();
+        Hydro.close_add();
 
 	}
 

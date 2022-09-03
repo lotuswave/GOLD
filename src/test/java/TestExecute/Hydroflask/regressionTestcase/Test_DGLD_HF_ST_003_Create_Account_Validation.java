@@ -38,8 +38,8 @@ public class Test_DGLD_HF_ST_003_Create_Account_Validation {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
-		Login.signIn();
+         Login.signIn();
+         Hydro.close_add();
 
 	}
 

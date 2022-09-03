@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("QA_Testing");      
+			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");  
 			Hydro.Configurable_addtocart_pdp("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
@@ -44,8 +44,8 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
 		Login.signIn();
+		Hydro.close_add();
 
 	}
 

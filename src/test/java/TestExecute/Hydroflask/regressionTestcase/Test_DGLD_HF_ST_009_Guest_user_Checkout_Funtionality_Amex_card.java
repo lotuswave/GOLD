@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_009_Guest_user_Checkout_Funtionality_Amex_card {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("QA_Testing");      
+			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress("AccountDetails");
@@ -40,8 +40,8 @@ public class Test_DGLD_HF_ST_009_Guest_user_Checkout_Funtionality_Amex_card {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
 		Login.signIn();
+		Hydro.close_add();
 
 	}
 
