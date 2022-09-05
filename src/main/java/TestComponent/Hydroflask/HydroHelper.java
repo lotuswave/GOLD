@@ -94,7 +94,7 @@ public class HydroHelper {
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Homepage"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -687,7 +687,7 @@ public class HydroHelper {
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Homepage"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
 					"validating store logo", "System directs the user to the Homepage",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		} catch (Exception | Error e) {
@@ -4325,5 +4325,358 @@ catch(Exception | Error e)
 				
 			}
 
+			
+			
+			
+			
+			public String ValidateAccountcreationeyeicon(String dataSet) {
+				// TODO Auto-generated method stub
+				String Email = "";
+				try {
+
+					Sync.waitPageLoad();
+					Sync.waitElementPresent("id", "firstname");
+					Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+					Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+					
+					Common.textBoxInput("id", "email_address", Utils.getEmailid());
+					Email=Common.findElement("id","email_address" ).getAttribute("value");
+					System.out.println(Email);
+					
+					Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+					String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+					String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+					Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+					Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete"),
+							"Password is validated", "password should be validate", "failed to validate password");
+					Common.actionsKeyPress(Keys.UP);
+					
+					String eyeicon = Common.findElement("xpath", "(//span[contains(@class,'m-password')])[1]").getAttribute("class");
+					System.out.println(eyeicon);
+					String password = Common.findElement("xpath", "//input[@id='password']").getAttribute("type");
+
+					Common.assertionCheckwithReport(eyeicon.contains("hide") && password.equals("password"),
+							"validating eye icon password filed", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+							"faield to display eye icon hide");
+					Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']");
+					String Eyeicon = Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+					System.out.println(Eyeicon);
+					String Text = Common.findElement("xpath", "//input[@id='password']").getAttribute("type");
+					Common.assertionCheckwithReport(Eyeicon.contains("show") && Text.equals("text"),
+							"validating eye icon password field", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+							"faield to display eye icon hide");
+					
+
+					Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password"));
+					Confirmpassword_eyeicon_validation();
+					
+					
+
+					
+					
+				}
+
+				catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the  my Account page",
+							"User should able to navigate to the my account page after clicking on submit button",
+							"unable to navigate to the My account page",
+							Common.getscreenShot("failed to navigates to My Account Page"));
+					Assert.fail();
+				}
+				return Email;
+				
+			}
+
+			public void Confirmpassword_eyeicon_validation() {
+				// TODO Auto-generated method stub
+
+				try {
+
+					String eyeicon = Common.findElement("xpath", "(//span[contains(@class,'m-password')])[2]").getAttribute("class");
+					System.out.println(eyeicon);
+					String password = Common.findElement("xpath", "//input[@id='password-confirmation']").getAttribute("type");
+
+					Common.assertionCheckwithReport(eyeicon.contains("hide") && password.equals("password"),
+							"validating eye icon password filed", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+							"faield to display eye icon hide");
+					Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']");
+					String Eyeicon = Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+					System.out.println(Eyeicon);
+					String Text = Common.findElement("xpath", "//input[@id='password-confirmation']").getAttribute("type");
+					Common.assertionCheckwithReport(Eyeicon.contains("show") && Text.equals("text"),
+							"validating eye icon password field", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+							"faield to display eye icon hide");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating confirm password eyeicon",
+							"password able to display", "unable to display password",
+							Common.getscreenShotPathforReport("faield to gdisplay password"));
+					Assert.fail();
+
+				}
+
+			}
+
+			public void Validate_Createaccount_signup_newsletter() {
+				// TODO Auto-generated method stub
+
+				try {
+
+					Sync.waitPageLoad();
+					int size = Common.findElements("xpath", "//input[@name='is_subscribed']").size();
+					Common.assertionCheckwithReport(size > 0 ,
+							"validating signup newsletter checkbox", "signup newsletter check box should be display",
+							"able to display signup newsletter checkbox", "faield to signup news letter checkbox");
+
+					Common.clickElement("xpath", "//input[@name='is_subscribed']");
+
+					Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+					Common.clickElement("xpath", "//button[@title='Sign Up']");
+					Sync.waitPageLoad();
+					Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper h2']");
+					
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+							"validating the  my Account page",
+							"User should able to navigate to the my account page after clicking on submit button",
+							"Sucessfully navigate to the My account page ", "failed to navigates to My Account Page");
+					ClosADD();
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating signup newsletter checkbox",
+							"signup newsletter check box should be display", "unable to display signup newsletter checkbox",
+							Common.getscreenShotPathforReport("faield to signup news letter checkbox"));
+					Assert.fail();
+
+				}
+
+
+			}
+
+			public void Admin_signin(String dataSet) {
+				// TODO Auto-generated method stub
+
+				try {
+					Common.openNewTab();
+					Common.oppenURL(data.get(dataSet).get("AdminURL"));
+					Sync.waitPageLoad();
+					Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+					Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+					Sync.waitPageLoad(30);
+					Sync.waitElementPresent("name", "loginfmt");
+					Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("Adminusername"));
+					Common.clickElement("id", "idSIButton9");
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					Sync.waitElementPresent(30, "name", "passwd");
+					Common.textBoxInput("name", "passwd", data.get(dataSet).get("Adminpassword"));
+					Common.clickElement("id", "idSIButton9");
+					Sync.waitPageLoad();
+
+					Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
+					if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
+						Common.javascriptclickElement("id", "KmsiCheckboxField");
+					}
+					Sync.waitElementClickable("id", "idSIButton9");
+					Common.mouseOverClick("id", "idSIButton9");
+					Sync.waitPageLoad();
+					Thread.sleep(5000);
+					Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
+
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+							"To Validate the Admin is landing on the Dashboard after successfull Signin",
+							"After clicking on sigin button admin should navigate to the dashboard",
+							"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+							"Admin failed to display the dashboard after clicking on the signin button");
+
+				} catch (Exception e) {
+					e.printStackTrace();
+
+					ExtenantReportUtils.addFailedLog(
+							"To Validate the Admin is landing on the Dashboard after successfull Signin",
+							"After clicking on sigin button admin should navigate to the dashboard",
+							"Admin failed to navigate to the dashboard after click on signin button",
+							"Admin failed to land on the dashboard after clicking on the signin button");
+					Assert.fail();
+
+				}
+
+
+			}
+
+			public void Customers() {
+				// TODO Auto-generated method stub
+				try {
+					Sync.waitPageLoad();
+					Common.clickElement("id", "menu-magento-customer-customer");
+					Sync.waitElementPresent("id", "menu-magento-customer-customer");
+					String customers = Common.findElement("xpath", "//strong[contains(text(),'Customers')]").getText();
+					System.out.println(customers);
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Common.assertionCheckwithReport(customers.equals("Customers"),
+							"To Validate the customers menu is displayed",
+							"should display the customer menu after clicking on the customers",
+							"Customers field menu is displayed after a click on the customers button",
+							"Failed to display customers menu");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To Validate the customers menu is displayed",
+							"should display the customer menu after clicking on the customers",
+							"unable to display Customers field menu after a click on the customers button",
+							"Failed to display customers field menu");
+					Assert.fail();
+				}
+
+
+			}
+
+			public void Allcustomers() {
+				// TODO Auto-generated method stub
+				try {
+					Sync.waitElementPresent("xpath", "//span[text()='All Customers']");
+					Common.clickElement("xpath", "//span[text()='All Customers']");
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Common.assertionCheckwithReport(Common.getPageTitle().equals("Customers / Customers / Magento Admin"),
+							"Validating customers field page navigation ",
+							"After clicking all customers it will navigate to the Customer field page",
+							"Successfully navigate to the Customer field page ",
+							"Failed to navigate to the Customer field page");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
+							"After clicking all customers it will navigate Customer field page",
+							"Unable to navigate to the Customer filed page",
+							Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
+					Assert.fail();
+
+				}
+
+
+				
+			}
+			public void Viewcustomer(String Dataset) {
+				// TODO Auto-generated method stub
+				try {
+					Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+					Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+					Common.textBoxInput("xpath", "//input[@name='email']",Dataset);
+					Common.actionsKeyPress(Keys.ENTER);
+					Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+					String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+					String EMAIL=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[3]").getText();
+					
+					Common.assertionCheckwithReport(records.contains("1")&& EMAIL.equals(Dataset),
+							"Validating customers field page navigation ",
+							"After clicking all customers it will navigate to the Customer field page",
+							"Successfully navigate to the Customer field page ",
+							"Failed to navigate to the Customer field page");
+					
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
+							"After clicking all customers it will navigate Customer field page",
+							"Unable to navigate to the Customer filed page",
+							Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
+					Assert.fail();
+
+				}}
+			public void Clearfilter() {
+				// TODO Auto-generated method stub
+				try {
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//button[text()='Clear all']");
+					Common.javascriptclickElement("xpath", "//button[text()='Clear all']");
+					String clear = Common.findElement("xpath", "//div[contains(@class,'admin__data-grid-filters-c')]")
+							.getAttribute("class");
+					System.out.println(clear);
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Common.assertionCheckwithReport(clear.contains("current"), "To Validate the Clear filters ",
+							"Should able to clear all the filters ", "Successfully all the filters are cleared ",
+							"Failed to Clear all the filters");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To Validate the Clear filters ", "Should able to clear all the filters ",
+							"Unable to clear all the filters ",
+							Common.getscreenShotPathforReport("Failed to Clear all the filters"));
+					Assert.fail();
+
+				}
+
+			}
+
+				public void Marketing() {
+					// TODO Auto-generated method stub
+					try {
+						Sync.waitPageLoad();
+						Common.clickElement("id", "menu-magento-backend-marketing");
+						Sync.waitElementPresent("id", "menu-magento-backend-marketing");
+						String Marketing = Common.findElement("xpath", "//strong[contains(text(),'Marketing')]").getText();
+						System.out.println(Marketing);
+						Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+						Common.assertionCheckwithReport(Marketing.equals("Marketing"),
+								"To Validate the Marketing is displayed",
+								"should display the Marketing menu after clicking on the Marketing",
+								"Marketing field menu is displayed after a click on the Marketing button",
+								"Failed to display Marketing menu");
+
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("To Validate the Marketing menu is displayed",
+								"should display the Marketing menu after clicking on the Marketing",
+								"unable to display Marketing field menu after a click on the Marketing button",
+								"Failed to display Marketing field menu");
+						Assert.fail();
+					}
+
+
+				}
+
+				public void Admin_newsletter_validation(String Dataset ) {
+					// TODO Auto-generated method stub
+					try {
+						Sync.waitElementPresent("xpath", "//span[text()='Newsletter Subscribers']");
+						Common.clickElement("xpath", "//span[text()='Newsletter Subscribers']");
+						Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+						Common.assertionCheckwithReport(Common.getPageTitle().contains("Newsletter Subscribers"),
+								"Validating customers field page navigation ",
+								"After clicking all customers it will navigate to the Customer field page",
+								"Successfully navigate to the Customer field page ",
+								"Failed to navigate to the Customer field page");
+						Common.clickElement("xpath", "//button[@title='Search']");
+						
+						Common.textBoxInput("xpath", "//input[@name='email']",Dataset);
+						Common.actionsKeyPress(Keys.ENTER);
+						String subscribe = Common.findElement("xpath", "//td[@class=' col-status col-status  ']").getText();
+						
+						Common.assertionCheckwithReport(subscribe.equals("Subscribed"),
+								"Validating customer subscribtion ",
+								"customer should be subscribed for new letter subscrpition",
+								"Successfully subscribed new letter subscrption ",
+								"Failed to subscribe new letter subscription");
+						Common.clickElement("xpath", "//button[@title='Reset Filter']");
+						
+						
+
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("Validating customer subscribtion ",
+								"customer should be subscribed for new letter subscrpition",
+								"unable to subscribe new letter subscrption ",
+						
+								Common.getscreenShotPathforReport("Failed to navigate newsletter filed page"));
+						Assert.fail();
+
+					}
+
+
+					
+				}
 	}
 
