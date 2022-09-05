@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF Sprint -4 Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    
+
+        <test name="Validate_Login_Page_Mobile" testid="DTG-645" priority="P1" description="This script will cover validating the Login page. mini cart and Accoutning information">
+       <classes>
+            <class name="TestExecute.Mobile.Hydroflask.TEST_DGLD_HF_Header_006_NormalPath_AuthenticatedUser_viewscontent"/>
+        </classes>
+        </test>
+        
+        
+</suite>  

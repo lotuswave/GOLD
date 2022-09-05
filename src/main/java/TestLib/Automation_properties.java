@@ -9,8 +9,8 @@ import java.util.Properties;
 
 public class Automation_properties {
 
-	private static String configFile = System.getProperty("configFile","Hydroflask\\config.properties");
-	public static String testNG =  System.getProperty("user.dir")+"\\src\\test\\resources\\TestNGfiles\\"+System.getProperty("testNG","TestNG.xml");
+	private static String configFile = System.getProperty("configFile","Hydroflask/config.properties");
+	public static String testNG =  System.getProperty("user.dir")+"/src/test/resources/TestNGfiles/"+System.getProperty("testNG","TestNG.xml");
 	private static Properties automation_properties = new Properties();
 
 	
@@ -93,7 +93,7 @@ public class Automation_properties {
 		try {
 			automation_properties.clear();	
 			System.out.println( System.getProperty("configFile",configFile));
-			automation_properties.load(new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\Config\\" + System.getProperty("configFile",configFile)));
+			automation_properties.load(new FileInputStream(System.getProperty("user.dir")+"/src/test/resources/Config/" + System.getProperty("configFile",configFile)));
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to load the properties:"+e);
 		}
