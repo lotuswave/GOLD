@@ -247,7 +247,7 @@ public class ExcelReader {
 		
 
 		try {
-			workbook = new XSSFWorkbook(new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\testData\\"+fileName)));
+			workbook = new XSSFWorkbook(new FileInputStream(new File(System.getProperty("user.dir")+"/src/test/resources/testData/"+fileName)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -292,7 +292,7 @@ public class ExcelReader {
 		Map<String, Map<String, String>> excelData=new HashMap<>();
 
 		try {
-			workbook = new XSSFWorkbook(new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\testData\\"+fileName)));
+			workbook = new XSSFWorkbook(new FileInputStream(new File(System.getProperty("user.dir")+"/src/test/resources/testData/"+fileName)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -355,7 +355,7 @@ public class ExcelReader {
 		//Map<String, Map<String, String>> excelData=new HashMap<>();
 
 		try {
-			workbook = new XSSFWorkbook(new FileInputStream(new File(System.getProperty("user.dir")+"\\src\\test\\resources\\testData\\"+fileName)));
+			workbook = new XSSFWorkbook(new FileInputStream(new File(System.getProperty("user.dir")+"/src/test/resources/testData/"+fileName)));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

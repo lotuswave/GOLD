@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -31,6 +32,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
+import javafx.scene.control.ContentDisplay;
 
 
 
@@ -76,6 +78,9 @@ public class BaseDriver
 			 else if(browserName.equalsIgnoreCase("edge"))
 				{
 					WebDriverManager.edgedriver().setup();
+					EdgeOptions option=new EdgeOptions(); 
+					
+					driver= new EdgeDriver(option);
 					 /*DesiredCapabilities cap = new DesiredCapabilities();
 					 cap.setJavascriptEnabled(true);
 					 FirefoxOptions  opt = new FirefoxOptions();*/
@@ -213,6 +218,8 @@ public class BaseDriver
 		{
 			if(Device.equalsIgnoreCase("Andriod"))
 			{	
+				
+						
 			DesiredCapabilities cap = new DesiredCapabilities();
 			cap.setCapability("browserName", "Chrome");
 			cap.setCapability("platformVersion","11");
@@ -221,18 +228,31 @@ public class BaseDriver
 			//cap.setCapability("udid","emulator-5554");
 			cap.setCapability("udid",udid);
 			cap.setCapability("platformName","ANDROID");
+			
+			    
+         //  cap.setCapability(ChromeOptions.CAPABILITY, options);
 			driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
+			
 			driver.get(URL);
 			}
 			else if(Device.equalsIgnoreCase("ios"))
 			{
 				DesiredCapabilities cap = new DesiredCapabilities();
-				cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, udid);
+		
 				//cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14.4");
 			cap.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
 			//cap.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 12");
 			cap.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
 			cap.setCapability(MobileCapabilityType.BROWSER_NAME, "safari"); 
+			if(deviceName.equalsIgnoreCase("iPad")) 
+			{
+			cap.setCapability(MobileCapabilityType.UDID, "A0894758-DFFC-436C-BF18-8B89B45ABB07");
+			cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14.0");
+			}else 
+			{
+				cap.setCapability(MobileCapabilityType.PLATFORM_VERSION, udid);
+				
+			}
 			URL url = new URL("http://127.0.0.1:4723/wd/hub");
 
 			 
@@ -243,7 +263,7 @@ public class BaseDriver
 			BaseDriver.driver=driver;
 			//driver.get("https://jetrails-stg.hydroflask.com");
 
-			driver.get("https://www.hydroflask.com");
+			driver.get(URL);
 			}
 			return driver;
 		}

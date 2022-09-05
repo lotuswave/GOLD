@@ -704,8 +704,9 @@ public class Common {
 	public static String getscreenShotPathforReport(String screnShotName) {
 		String screenName=screnShotName +Utilities.File.GetDateTime();
 		String filePath=System.getProperty("user.dir") + "/TestLogs/ExtentReport/" +screenName+ ".jpg";
-		File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+		
 		try {
+			File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File(filePath));
 		} catch (IOException e) {
 		Driver.getLogger().error(e);
@@ -1492,6 +1493,8 @@ public class Common {
 	
 	public static void assertionCheckwithReport(boolean status,String description,String expectedResult,String actualResult,String FailedMessage)
 	{
+		try {
+		Thread.sleep(4000);}catch(Exception e) {}
 		if(status){
 		ExtenantReportUtils.addPassLog(description, expectedResult, actualResult, Common.getscreenShotPathforReport(expectedResult));
 		}
