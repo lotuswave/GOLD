@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_014_Register_user_Checkout_Funtionality_Klarna_Payment {
+public class Test_DGLD_HF_ST_014_Register_user_Checkout_Funtionality_Klarna_Saved_Payment {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile);
@@ -25,7 +25,7 @@ public class Test_DGLD_HF_ST_014_Register_user_Checkout_Funtionality_Klarna_Paym
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_registerUser("AccountDetails");
-			Hydro.KlarnaPayment("Klarna payment");
+			Hydro.Klarna_Saved_Payment("Klarna Visa Payment");
           
             
 		} catch (Exception e) {
