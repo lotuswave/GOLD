@@ -35,7 +35,7 @@ public class Test_DGLD_HF_UT_Address_Book_062_AlternatePath_User_Changes_Default
 
 		@AfterTest
 		public void clearBrowser() {
-			//Common.closeAll();
+			Common.closeAll();
 
 		}
 
