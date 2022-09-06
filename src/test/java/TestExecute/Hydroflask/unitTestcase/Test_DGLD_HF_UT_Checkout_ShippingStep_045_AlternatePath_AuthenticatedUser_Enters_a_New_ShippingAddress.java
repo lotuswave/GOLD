@@ -43,6 +43,7 @@ public class Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_Authenticat
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

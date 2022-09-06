@@ -38,6 +38,7 @@ public class Test_DGLD_HF_UT_Footer_008_ExceptionPath_UserEntersInvalidEmailforN
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

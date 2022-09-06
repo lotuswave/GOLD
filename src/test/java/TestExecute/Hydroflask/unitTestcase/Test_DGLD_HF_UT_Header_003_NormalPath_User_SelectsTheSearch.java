@@ -37,6 +37,7 @@ public class Test_DGLD_HF_UT_Header_003_NormalPath_User_SelectsTheSearch {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

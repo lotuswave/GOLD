@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO  Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+ 
+        <test name="Test_DGLD_OXO_UT_Header_004_Normalpath_Authenticated_user_views_content" testid="DTG-705" priority="P1" description="This script will cover validating the Authenticated User views Header content">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Header_004_Normalpath_Authenticated_user_views_content"/>
+        </classes>
+        </test>
+            
+     
+ <test name="Test_DGLD_OXO_UT_ContactUS_014_UserViewsContactUsPageandSubmits" testid="DTG-787" priority="P1" description="This script will cover validating the Contactus page submit">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_ContactUS_014_UserViewsContactUsPageandSubmits"/>
+        </classes>
+        </test>
+        
+    
+        
+       <!--      <test name="Test_DGLD_OXO_UT_Minicart_017_026_Validate_MiniCart_Functionality" testid="DTG-952" priority="P1" description="This script will cover validating the Minicart Functionality">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_Minicart_017_026_Validate_MiniCart_Functionality"/>
+        </classes>
+        </test> -->
+        
+        <test name="Test_DGLD_OXO_UT_CheckoutShippingStep_029_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount " testid="DTG-979" priority="P1" description="This script will cover validating the unauthenticated user enters email associated with an account and login into the account from checkout page">
+		<classes>
+			<class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_CheckoutShippingStep_029_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount" />
+		</classes>
+	</test> 
+        
+          <test name="Test_DGLD_OXO_UT_AccountRegistration_027_AdditionalPath_Password_RequirementChecks" testid="DTG-942" priority="P1" description="This script will cover validating the Account Registration Password Requirement Checks">
+       <classes>
+            <class name="TestExecute.OXO.unitTestcase.Test_DGLD_OXO_UT_AccountRegistration_027_AdditionalPath_Password_RequirementChecks"/>
+        </classes>
+        </test>
+</suite>  

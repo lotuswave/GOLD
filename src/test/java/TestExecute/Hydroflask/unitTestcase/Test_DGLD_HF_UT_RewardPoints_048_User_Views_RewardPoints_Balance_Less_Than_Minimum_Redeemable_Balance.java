@@ -45,6 +45,7 @@ public class Test_DGLD_HF_UT_RewardPoints_048_User_Views_RewardPoints_Balance_Le
 	    public void startTest() throws Exception {
 			System.setProperty("configFile", "Hydroflask\\config.properties");
 			Login.signIn();
+			 Hydro.ClosADD();
           
 	      }
 

@@ -28,7 +28,7 @@ public class Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
@@ -36,6 +36,7 @@ public class Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 }

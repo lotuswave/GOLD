@@ -37,7 +37,7 @@ public class Test_DGLD_HF_UT_OrderSummary_043_NormalPath_UserViews_Order_Summary
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
@@ -46,6 +46,7 @@ public class Test_DGLD_HF_UT_OrderSummary_043_NormalPath_UserViews_Order_Summary
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

@@ -37,7 +37,8 @@ public class Test_DGLD_HF_UT_Country_Selector_011_012_Additional_Path_Verify_Hyd
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
-		Login.signIn();
+		Login.signIn(); 
+		Hydro.ClosADD();
 
 	}
 

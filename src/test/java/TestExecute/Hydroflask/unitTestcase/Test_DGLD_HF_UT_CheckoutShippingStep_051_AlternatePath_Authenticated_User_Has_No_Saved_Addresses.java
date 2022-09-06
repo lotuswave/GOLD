@@ -22,7 +22,9 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticate
 			Hydro.verifingHomePage();
 			Hydro.validateCreateAccountpageNavigation();
 			Hydro.validateaccountcreationPassword("AccountDetails");
-			Hydro.headerlinks("QA_Testing");
+			//Hydro.headerlinks("QA_Testing");
+
+Hydro.search_product("Product");
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();
@@ -50,6 +52,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticate
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 }

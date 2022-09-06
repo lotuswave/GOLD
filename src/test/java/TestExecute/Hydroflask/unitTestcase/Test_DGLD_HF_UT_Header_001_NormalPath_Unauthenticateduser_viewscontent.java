@@ -40,6 +40,7 @@ public class Test_DGLD_HF_UT_Header_001_NormalPath_Unauthenticateduser_viewscont
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

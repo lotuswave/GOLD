@@ -41,6 +41,7 @@ public class Test_DGLD_HF_UT_Login_009_ExceptionPaths_Errormessages_validation {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

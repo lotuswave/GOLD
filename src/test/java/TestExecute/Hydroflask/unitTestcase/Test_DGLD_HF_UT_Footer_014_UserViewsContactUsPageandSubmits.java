@@ -43,7 +43,7 @@ public class Test_DGLD_HF_UT_Footer_014_UserViewsContactUsPageandSubmits {
 	  public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		  Login.signIn();
-		 
+		  Hydro.ClosADD();
 		  
 	  }
 

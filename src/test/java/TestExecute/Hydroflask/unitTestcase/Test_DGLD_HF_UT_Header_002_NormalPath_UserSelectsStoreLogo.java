@@ -37,6 +37,7 @@ public class Test_DGLD_HF_UT_Header_002_NormalPath_UserSelectsStoreLogo {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

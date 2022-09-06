@@ -37,6 +37,7 @@ public class Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Req
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

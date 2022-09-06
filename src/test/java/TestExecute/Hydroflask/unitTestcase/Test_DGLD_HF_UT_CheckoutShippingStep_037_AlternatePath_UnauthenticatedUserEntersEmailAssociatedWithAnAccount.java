@@ -18,7 +18,8 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_Unauthentica
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("QA_Testing");
+			//Hydro.headerlinks("QA_Testing");
+			Hydro.search_product("Product");
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();
@@ -41,6 +42,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_Unauthentica
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

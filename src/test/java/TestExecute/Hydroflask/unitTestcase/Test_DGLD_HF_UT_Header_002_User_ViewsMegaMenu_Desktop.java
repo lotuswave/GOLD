@@ -40,6 +40,7 @@ public class Test_DGLD_HF_UT_Header_002_User_ViewsMegaMenu_Desktop {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

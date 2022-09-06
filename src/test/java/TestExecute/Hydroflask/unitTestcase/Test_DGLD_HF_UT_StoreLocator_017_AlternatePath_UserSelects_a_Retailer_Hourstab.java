@@ -43,7 +43,7 @@ public class Test_DGLD_HF_UT_StoreLocator_017_AlternatePath_UserSelects_a_Retail
 	  public void startTest() throws Exception {
 
 		  Login.signIn();
-		 
+		  Hydro.ClosADD();
 		  
 	  }
 

@@ -40,6 +40,7 @@ public class Test_DGLD_HF_UT_StoreLocator_022_AlternatePath_UserSelects_a_Produc
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

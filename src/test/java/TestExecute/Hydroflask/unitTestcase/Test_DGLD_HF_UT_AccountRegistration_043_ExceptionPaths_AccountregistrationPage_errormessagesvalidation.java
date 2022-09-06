@@ -41,7 +41,7 @@ public class Test_DGLD_HF_UT_AccountRegistration_043_ExceptionPaths_Accountregis
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
-
+		 Hydro.ClosADD();
 	}
 
 

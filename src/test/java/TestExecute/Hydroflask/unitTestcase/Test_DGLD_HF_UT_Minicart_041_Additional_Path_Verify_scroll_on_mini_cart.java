@@ -40,7 +40,7 @@ public class Test_DGLD_HF_UT_Minicart_041_Additional_Path_Verify_scroll_on_mini_
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
@@ -49,6 +49,7 @@ public class Test_DGLD_HF_UT_Minicart_041_Additional_Path_Verify_scroll_on_mini_
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

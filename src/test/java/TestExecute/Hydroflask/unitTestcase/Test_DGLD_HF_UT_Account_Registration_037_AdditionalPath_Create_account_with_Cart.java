@@ -19,7 +19,8 @@ public class Test_DGLD_HF_UT_Account_Registration_037_AdditionalPath_Create_acco
 		try {
 			
 			Hydro.verifingHomePage();
-			Hydro.headerlinks("QA_Testing");      
+		//	Hydro.headerlinks("QA_Testing");  
+			Hydro.search_product("Product");
 			Hydro.addtocart("Product");  
 //			Hydro.headerlinks("Bottles & Drinkware"); 
 //			Hydro.bottles_addtocart_pdp("Product");
@@ -44,6 +45,7 @@ public class Test_DGLD_HF_UT_Account_Registration_037_AdditionalPath_Create_acco
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 
 		Login.signIn();
+		 Hydro.ClosADD();
 
 	}
 

@@ -43,6 +43,7 @@ public class Test_DGLD_HF_UT_Login_010_NormalPath_User_Logins_Logout {
 	  public void startTest() throws Exception {
 
 		  Login.signIn();
+		  Hydro.ClosADD();
 		 
 		  
 	  }
