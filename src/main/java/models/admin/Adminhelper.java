@@ -6866,8 +6866,213 @@ try {
 			Assert.fail();
 			}}
 
+		public void cick_products() {
+			// TODO Auto-generated method stub
+			try {
+				Common.clickElement("xpath", "//li[@class='admin__field-visual-select-small']");
+				Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+				
+				Sync.waitElementPresent("xpath", "(//label[text()='Shop'])[1]");
+				Common.clickElement("xpath", "(//label[text()='Shop'])[1]");
+				
+		String category = Common.findElement("xpath", "//li[@name='category_ids']").getText();
+		System.out.println(category);			
+		String sku = Common.findElement("xpath", "//li[@name='sku']").getText();
+		System.out.println(sku);
+		String condition = Common.findElement("xpath", "//li[@name='condition']").getText();
+		System.out.println(condition);
+		
+		int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[4]").size();
+		System.out.println(page);
+		Common.assertionCheckwithReport(page>0,
+				" To Validate the User needs to save the page", "User should able to save the page",
+				"Sucessfully User saves the page", "Failed to save the page");
+		
+	
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				report.addFailedLog("Validating the User need to delete the page", "User should able to delete the page",
+						"Sucessfully User delete the page", Common.getscreenShotPathforReport("Failed to delete the page"));
+				Assert.fail();
+
+			}
+		}
+
+		public void Savecategorypage(String Dataset) {
+			// TODO Auto-generated method stub
+			
+			try {
+				
+				//Common.clickElement("xpath", "//h2[@class='m-heading__text placeholder-text']");
+			String id =	Common.findElement("xpath", "(//input[@class='admin__control-text'])[6]").getAttribute("id");
+				
+			Common.textBoxInput("xpath", "//input[@id='"+id+"']", data.get(Dataset).get("title"));
+			
+			
+					String att =	Common.findElement("xpath", "(//input[@class='admin__control-text'])[7]").getAttribute("id");
+					
+					Common.textBoxInput("xpath", "//input[@id='"+att+"']", data.get(Dataset).get("SubTitle"));
+			       	
+			       	
+			       	int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[5]").size();
+					System.out.println(page);
+					Common.assertionCheckwithReport(page>0,
+							" To Validate the User needs to save the page", "User should able to save the page",
+							"Sucessfully User saves the page", "Failed to save the page");
+					
+					Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+			
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+						"User should able to save the page", "Unable to saves the page",
+						Common.getscreenShotPathforReport("Failed to save the page"));
+				Assert.fail();
+			}
+		
+		}
+
+		public void website_category_verification() {
+			// TODO Auto-generated method stub
+			
+			try {
+
+	            Common.refreshpage();
+				Sync.waitElementPresent("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+				
+				String headingverification = Common.getText("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("HYDROFLASK QA TESTING"),
+						"validation Image upload in the forntend website ", "Image should de appear on fornt end page",
+						"Successfully image is appeared on the frondend", "Failed to navigate to edit promoBlocker page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation Image upload in the forntend website ",
+						"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
+						Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+				Assert.fail();
+
+			}
+		}
+
+		public void Click_SKU(String Dataset) {
+			// TODO Auto-generated method stub
+			
+			try {
+				Common.switchToFirstTab();				
+				Contentpage();
+		        hot_elements(); 
+		        editCategory_Productslider();
+				
+	 		Common.clickElement("xpath", "//span[text()='SKU']");
+	 		String id= Common.findElement("xpath", "(//input[@class='admin__control-text'])[4]").getAttribute("id");
+	 		
+				Common.textBoxInput("xpath", "//input[@id='"+id+"']", data.get(Dataset).get("SKU"));
+				Common.dropdown("xpath", "(//select[@class='admin__control-select'])[1]", Common.SelectBy.TEXT,
+						data.get(Dataset).get("Sortby"));
+				
+				int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[4]").size();
+				System.out.println(page);
+				Common.assertionCheckwithReport(page>0,
+						" To Validate the User needs to save the page", "User should able to save the page",
+						"Sucessfully User saves the page", "Failed to save the page");
+				Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+				
+			} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+				"User should able to save the page", "Unable to saves the page",
+				Common.getscreenShotPathforReport("Failed to save the page"));
+		Assert.fail();
+		}}
+
+		public void website_SKU_verification() {
+			// TODO Auto-generated method stub
+			try {
+
+	            Common.refreshpage();
+				Sync.waitElementPresent("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+				
+				String headingverification = Common.getText("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("HYDROFLASK QA TESTING"),
+						"validation Image upload in the forntend website ", "Image should de appear on fornt end page",
+						"Successfully image is appeared on the frondend", "Failed to navigate to edit promoBlocker page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation Image upload in the forntend website ",
+						"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
+						Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+				Assert.fail();
+
+			}
+		}
+
+		public void click_condition(String Dataset) {
+			// TODO Auto-generated method stub
+			
+			try {
+				Common.switchToFirstTab();	
+				Contentpage();
+		        hot_elements(); 
+		        editCategory_Productslider();
+				
+	 		Common.clickElement("xpath", "//span[text()='Condition']");	
+	 		Common.clickElement("xpath", "//span[@class='rule-param rule-param-new-child']");
+				Common.dropdown("xpath", "//select[@id='condition_source__1__new_child']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("ChooseCondition"));		
+				Common.clickElement("xpath", "//a[text()='is']");
+				Common.clickElement("xpath", "//select[@id='condition_source__1--1__operator']");
+				Common.dropdown("xpath", "//select[@id='condition_source__1--1__operator']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("Price"));
+				
+				
+				Common.clickElement("xpath", "//a[text()='...']");
+			Common.textBoxInput("xpath", "//input[@id='condition_source__1--1__value']",data.get(Dataset).get("mrgtop"));
+			int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[4]").size();
+			System.out.println(page);
+			Common.assertionCheckwithReport(page>0,
+					" To Validate the User needs to save the page", "User should able to save the page",
+					"Sucessfully User saves the page", "Failed to save the page");
+		
+				Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+				
+			} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+				"User should able to save the page", "Unable to saves the page",
+				Common.getscreenShotPathforReport("Failed to save the page"));
+		Assert.fail();
+		}}
+
+		public void website_condition_verification() {
+			// TODO Auto-generated method stub
+			try {
+
+	            Common.refreshpage();
+				Sync.waitElementPresent("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+				
+				String headingverification = Common.getText("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("HYDROFLASK QA TESTING"),
+						"validation Image upload in the forntend website ", "Image should de appear on fornt end page",
+						"Successfully image is appeared on the frondend", "Failed to navigate to edit promoBlocker page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation Image upload in the forntend website ",
+						"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
+						Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+				Assert.fail();
+
+			}	
+			
+		}
+
+		}
 
 	
 	
 	
-	}
