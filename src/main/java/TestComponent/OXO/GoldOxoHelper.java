@@ -299,7 +299,7 @@ public class GoldOxoHelper {
 
 		String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		
-		if(!url.contains("stage")){
+		if(!url.contains("stage") && !url.contains("preprod")){
 			}
 		
 		else{
@@ -447,9 +447,13 @@ public class GoldOxoHelper {
 		Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 		Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 		Common.clickElement("xpath", "//button[contains(@class,'action lo')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
 		String login=Common.findElement("xpath", "//div[@class='m-account-nav__welcome']//span[@class='a-icon-text-btn__label']").getText();
-		Common.assertionCheckwithReport(
-				login.contains("Welcome"),
+		
+		
+		
+		Common.assertionCheckwithReport(login.contains("Welcome"),
 				"Validating My Account page navigation", "user sign in and navigate to my account page",
 					"Successfully navigate to my account page", "Failed to navigate my account page ");
 	
@@ -818,6 +822,253 @@ try
        }
 	}
 	
+	public void updtePayementcrditcard_WithInvalidData(String dataSet) throws Exception {
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String cardnumber = data.get(dataSet).get("cardNumber");
+		System.out.println(cardnumber);
+		String expectedResult = "land on the payment section";
+		// Common.refreshpage();
+
+		try {
+			Sync.waitPageLoad();
+
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+					"User unabel to land opaymentpage");
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+			System.out.println(payment);
+			if (payment > 0) {
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				Common.switchToDefault();
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				expectedResult = "credit card fields are filled with the data";
+				String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+
+				Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+						expectedResult, "Filled the Card details", "missing field data its showing error");
+		
+				
+			} else {
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				Common.switchToDefault();
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				expectedResult = "credit card fields are filled with the data";
+				String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+
+				Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+				
+
+			}
+			
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+					"failed  to fill the Credit Card infromation",
+					Common.getscreenShotPathforReport("Cardinfromationfail"));
+			Assert.fail();
+		}
+
+		
+	}
 	
+	public void ChangeAddress_AddressBook(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
+				"validating the Navigation to the Address Book page",
+				"After Clicking on Address Book CTA user should be navigate to the Address Book page",
+				"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
+				"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
+		
+		String PageTitle = Common.getText("xpath", "//h1[@class='page-title-wrapper h2']");
+		if (PageTitle.contains("New")) {
+			try {
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@title='Phone Number']",data.get(dataSet).get("phone"));
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+				Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
+				try {
+					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				} catch (ElementClickInterceptedException e) {
+					Thread.sleep(3000);
+					Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				
+				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+	
+				Common.clickElement("xpath", "//button[@title='Save Address']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				
+				 Common.assertionCheckwithReport(message.equals("You saved the address."),
+									"validating the saved message after saving address in address book",
+									"Save address message should be displayed after the address saved in address book",
+									"Sucessfully address has been saved in the address book",
+									"Failed to save the address in the address book");
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the saved message after saving address in address book",
+						"Save address message should be displayed after the address saved in address book",
+						"unable to save the adreess in the address book",
+						Common.getscreenShotPathforReport("Failed to save the address in the address book"));
+				
+				Assert.fail();
+
+			}
+		}
+
+		else {
+			Common.clickElementStale("xpath", "//span[contains(text(),'Change Billing Address')]");
+		
+
+			try {
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@title='Phone Number']",data.get(dataSet).get("phone"));
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+				
+				try {
+					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				} catch (ElementClickInterceptedException e) {
+					
+					Thread.sleep(3000);
+					Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				Thread.sleep(2000);
+				
+				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+				
+				Common.clickElement("xpath", "//button[@title='Save Address']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				
+				 Common.assertionCheckwithReport(message.equals("You saved the address."),
+									"validating the saved message after saving address in address book",
+									"Save address message should be displayed after the address saved in address book",
+									"Sucessfully address has been saved in the address book",
+									"Failed to save the address in the address book");
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating my address book with data",
+						"enter the valid address without any validation",
+						"User failed to enter data in my address book",
+						Common.getscreenShotPathforReport("faield to save the address in addressbook"));
+				Assert.fail();
+
+			}
+		}
+	}
+	
+	public void My_Orders_Page(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try
+		{
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Orders"),
+					"validating the Navigation to the My Orders page",
+					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
+					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
+					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
+			String Ordernumber=Common.findElement("xpath", "(//div[@class='order-data order-data__info']//a)[1]").getText();
+			
+			Common.assertionCheckwithReport(Ordernumber.equals(Dataset),
+					"validating the Order Number in My Myorders page",
+					"Order Number should be display in the MY Order page",
+					"Sucessfully Order Number is displayed in the My orders page",
+					"Failed to Display My order Number in the My orders page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Order Number in My Myorders page",
+			"Order Number should be display in the MY Order page",
+			"Unable to Display the Order Number in the My orders page",
+					Common.getscreenShot(
+							"Failed to Display My order Number in the My orders page"));
+			Assert.fail();
+		}
+	}
 	
 }
