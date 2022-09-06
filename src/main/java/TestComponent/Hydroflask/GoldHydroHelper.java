@@ -1175,8 +1175,8 @@ try
 
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//input[@value='fedex_FEDEX_GROUND']");
-				Common.clickElement("xpath", "//input[@value='fedex_FEDEX_GROUND']");
+				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
+				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
 			}
 
 			expectedResult = "shipping address is filled in to the fields";
@@ -1754,15 +1754,26 @@ try
 					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Bag']");
 					Thread.sleep(6000);
 					element.get(0).click();
-					Common.refreshpage();
-					Sync.waitPageLoad();
 					String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
         					.getAttribute("data-ui-id");
         			System.out.println(message);
         			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
         					"Product should be add to cart", "Sucessfully product added to the cart ",
         					"failed to add product to the cart");
-					minicart_Checkout();
+        			int minicart=Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
+        			System.out.println(minicart);
+        			if(minicart>0)
+        			{
+        				minicart_Checkout();
+        			}
+        			else
+        			{
+        				Common.refreshpage();
+    					Sync.waitPageLoad();
+    					minicart_Checkout();
+        			}
+					
+						
 			}
 		}
 		}
