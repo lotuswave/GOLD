@@ -11,6 +11,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
@@ -73,7 +74,8 @@ public class GoldOxoHelper {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Common.clickElement("xpath", "//span[text()='Shop All']");
+//			Common.clickElement("xpath", "//span[text()='Shop All']");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All  Coffee & B')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -277,12 +279,14 @@ public class GoldOxoHelper {
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String order="";
-		addPaymentDetails("PaymentDetails");
+		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 		
 		  if (Common.findElements("xpath",
-		  "//div[@class='message message-error']").size() > 0) { Thread.sleep(4000);
-		  addPaymentDetails("PaymentDetails"); }
+		  "//div[@class='message message-error']").size() > 0) {
+			  Thread.sleep(4000);
+		  addPaymentDetails(dataSet);
+		  }
 		 	
 		Thread.sleep(3000);
 		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
@@ -628,4 +632,192 @@ public class GoldOxoHelper {
 
 	}
 
+	
+	public void click_Createaccount() {
+
+		try {
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
+					"Validating Create New Customer Account page navigation",
+					"after Clicking on Create New Customer Account page it will navigate account creation page",
+					"Successfully navigate to the create account page",
+					"Failed to Navigate to the account create page ");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
+					"after Clicking on Create New Customer Account page it will navigate account creation page",
+					"unable to navigate to the craete account page",
+					Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
+			Assert.fail();
+		}
+	}
+
+	public void create_account(String Dataset) {
+		try {
+			Common.refreshpage();
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
+			Common.clickElement("xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
+					"validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Sucessfully navigate to the My account page after clicking on signin button ",
+					"Failed to navigates to My Account Page after clicking on Signin button");
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Unable to navigate to the My account page after clicking on signin button ",
+					Common.getscreenShot("Failed to navigates to My Account Page after clicking on Signin button"));
+			Assert.fail();
+
+		}
+	}
+
+	public void createaccount_verfication(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
+			Common.clickElement("xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			String message = Common.findElement("id", "validation-classes").getCssValue("color");
+			String redcolor=Color.fromString(message).asHex();
+			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
+			String greencolor=Color.fromString(message1).asHex();
+			String emailmessage = Common.findElement("xpath", "//div[@id='email_address-error']").getText();
+			String confirmpassword = Common.findElement("xpath", "//div[@id='password-confirmation-error']").getText();
+			Common.assertionCheckwithReport(redcolor.equals("#b51a18") && greencolor.equals("#2f741f") && emailmessage.contains("@domain.com")
+							&& confirmpassword.contains("enter the same value again"),
+					"validating the error messages with invalid date in accout creation form",
+					"User should able to get error message when used the invaild data",
+					"Sucessfully error message has been displayed when user use the invalid data",
+					"Failed to get an error message when user used the invalid data");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error messages with invalid date in accout creation form",
+					"User should able to get error message when used the invaild data",
+					"Unable to get error message has been displayed when user use the invalid data",
+					Common.getscreenShotPathforReport(
+							"Failed to get an error message when user used the invalid data"));
+			Assert.fail();
+
+		}
+	}
+	
+	public void minicart_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
+try
+{
+
+		String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+				.replace("$", "");
+		Float subtotalvalue = Float.parseFloat(Subtotal);
+		Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
+		Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
+		Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
+				UpdataedQuntityinminicart);
+		Common.clickElement("xpath", "//span[text()='Update']");
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
+		String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+		System.out.println(cart);
+		String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+				.replace("$", "");
+		Float subtotalvalue2 = Float.parseFloat(Subtotal2);
+		Float Total = subtotalvalue * 3;
+		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		Common.assertionCheckwithReport(UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
+				"validating the product update quantity and subtotal",
+				"The product Quantity should be update in mini cart and subtotal should change",
+				"Successfully product quantity updated and subtotal has been changed",
+				"Failed to update the product quantity from cart and subtotal not changed");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product update quantity and subtotal",
+				"The product Quantity should be update in mini cart and subtotal should change",
+				"unable to update the product quantity and subtotal has not be changed",
+				Common.getscreenShot("Failed to update the product quantity from cart and subtotal not changed"));
+		Assert.fail();
+	}
+
+
+	}
+
+	public void discountCode(String dataSet) throws Exception {
+        String expectedResult = "It should opens textbox input.";
+
+
+
+       try {
+
+            Sync.waitElementClickable("id", "block-discount-heading");
+            Common.clickElement("id", "block-discount-heading");
+
+             Sync.waitElementPresent("id", "discount-code");
+
+             Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+
+             int size = Common.findElements("id", "discount-code").size();
+           Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+                    "Successfully open the discount input box", "User unable enter Discount Code");
+             Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
+            Common.clickElement("xpath", "//button[@value='Apply Discount']");
+            Sync.waitPageLoad();
+            Thread.sleep(4000);
+            expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+            String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+            Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+                    "verifying pomocode", expectedResult, "promotion code working as expected",
+                    "Promation code is not applied");
+
+       }
+
+
+       catch (Exception | Error e) {
+            ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+                    "User failed to proceed with discountcode", Common.getscreenShotPathforReport("discountcodefailed"));
+            
+            Assert.fail();
+
+       }
+	}
+	
+	
+	
 }
