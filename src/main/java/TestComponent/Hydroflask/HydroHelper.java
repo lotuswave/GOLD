@@ -4151,23 +4151,34 @@ catch(Exception | Error e)
 		
 			public void ClosADD() throws Exception{
 				   Thread.sleep(3000);
-				    int sizesframe=Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
-				    if(sizesframe>0){
-				    Common.actionsKeyPress(Keys.PAGE_UP);
+				  try
+				  {
+					  int sizesframe=Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+					  System.out.println(sizesframe);
+					    if(sizesframe>0){
+					    Common.actionsKeyPress(Keys.PAGE_UP);
+					   
+//					    Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+					    Sync.waitElementPresent("xpath" , "//div[@class='sidebar-iframe-close']");
+					    Common.javascriptclickElement("xpath", "//div[@class='sidebar-iframe-close']");
+					    }
+					    else {
+					        int sizeofpopup=Common.findElements("id", "wpx-newsletter-popup").size();
+					        if(sizeofpopup>0){
+					            
+					            
+					            Sync.waitElementClickable("xpath" , "//button[@aria-label='close']");
+					            Common.clickElement("xpath" , "//button[@aria-label='close']");
+					    }
+					    }
+				  }
+				  catch(Exception | Error e)
+				  {
+					  e.printStackTrace();
+					  Assert.fail();
+				  }
 				   
-				   // Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-				    Sync.waitElementVisible("xpath" , "//div[@class='sidebar-iframe-close']");
-				    Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
-				    }
-				    else {
-				        int sizeofpopup=Common.findElements("id", "wpx-newsletter-popup").size();
-				        if(sizeofpopup>0){
-				            
-				            
-				            Sync.waitElementClickable("xpath" , "//button[@aria-label='close']");
-				            Common.clickElement("xpath" , "//button[@aria-label='close']");
-				    }
-				    }
+				   
 				}
 		    
 			public void click_MyAccount() {

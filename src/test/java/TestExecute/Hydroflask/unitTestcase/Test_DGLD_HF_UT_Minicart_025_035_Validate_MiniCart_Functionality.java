@@ -23,7 +23,8 @@ public class Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality {
 			Hydro.search_product("crosssell");
 			Hydro.minicart_crosssell("crosssell");
 //			Hydro.shop_bottle("Bottles & Drinkware");
-			Hydro.headerlinks("QA_Testing");
+//			Hydro.headerlinks("QA_Testing");
+			Hydro.search_product("Product");
 			Hydro.minicart_freeshipping("Product");
 			Hydro.minicart_delete("delete product");
 			Hydro.minicart_update("Quantity");
@@ -46,9 +47,10 @@ public class Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
-
-		Login.signIn();
+	System.setProperty("configFile", "Hydroflask\\config.properties");
+       Login.signIn();
+       Hydro.ClosADD();
+      
 
 	}
 
