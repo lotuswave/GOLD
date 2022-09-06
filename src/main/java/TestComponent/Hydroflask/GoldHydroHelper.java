@@ -24,6 +24,7 @@ import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
+import groovyjarjarantlr.CommonAST;
 
 public class GoldHydroHelper {
 
@@ -1094,7 +1095,7 @@ try
    			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
    					"User should able to click on the search button", "Search expands to the full page",
    					"Sucessfully search bar should be expand");
-   			Common.textBoxInput("xpath", "//input[@id='search']", product);
+   			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
    			Common.actionsKeyPress(Keys.ENTER);
    			Sync.waitPageLoad();
    			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
@@ -1648,5 +1649,132 @@ try
 							"Failed to Display My order Number in the My orders page"));
 			Assert.fail();
 		}
+	}
+
+	public void My_Favorites() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
+			Common.clickElement("xpath", "//a[text()='My Favorites']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+					"validating the Navigation to the My Favorites page",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My Favorites page",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+					"Unable to Navigates the user to My Favorites page after clicking on the My Favorites CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the My Favorites page after Clicking on My Favorites CTA"));
+			Assert.fail();
+		}
+		
+		
+	}
+
+	public void Addtocart_From_MyFavorites(String Dataset) {
+		// TODO Auto-generated method stub
+	
+		try
+		{
+			Sync.waitPageLoad();
+			int MyFavorites=Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+			
+			if(MyFavorites!=0)
+			{
+				search_product("Product");
+                Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+                Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+                Sync.waitPageLoad();
+                Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+    					"validating the Navigation to the My Favorites page",
+    					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+    					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+    					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+                Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+                Sync.waitPageLoad();
+                String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+    			System.out.println(message);
+    			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"), "validating the  product add to the Whishlist",
+    					"Product should be add to whishlist", "Sucessfully product added to the Whishlist ",
+    					"failed to add product to the Whishlist");
+                String Whishlistproduct=Common.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
+                System.out.println(Whishlistproduct);
+                String product=data.get(Dataset).get("Products");
+                if(Whishlistproduct.equals(product))
+                {
+                	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
+        			Common.mouseOver("xpath", "//img[@alt='" +product+ "']");
+                	Common.clickElement("xpath", "//span[text()='Add to Bag']");
+                	Sync.waitPageLoad();
+        			Thread.sleep(4000);
+        			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+        					.getAttribute("data-ui-id");
+        			System.out.println(message1);
+        			Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
+        					"Product should be add to cart", "Sucessfully product added to the cart ",
+        					"failed to add product to the cart");
+        			int minicart=Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
+        			System.out.println(minicart);
+        			if(minicart>0)
+        			{
+        				minicart_Checkout();
+        			}
+        			else
+        			{
+        			Common.refreshpage();
+        			Sync.waitPageLoad();
+                	minicart_Checkout();
+        			}
+                }
+                else
+                {
+                	Assert.fail();
+                }
+                 
+			}
+			else
+			{
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//li[@class='product-item']//a");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//li[@class='product-item']//a");
+
+					String s = webelementslist.get(i).getAttribute("href");
+					System.out.println(s);
+				
+			        Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
+					Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
+					Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Bag']");
+					Thread.sleep(6000);
+					element.get(0).click();
+					Common.refreshpage();
+					Sync.waitPageLoad();
+					String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+        					.getAttribute("data-ui-id");
+        			System.out.println(message);
+        			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+        					"Product should be add to cart", "Sucessfully product added to the cart ",
+        					"failed to add product to the cart");
+					minicart_Checkout();
+			}
+		}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart",
+					"Product should be add to cart", "Unable to add  product to the cart ",
+					Common.getscreenShot(
+							"failed to add product to the cart"));
+			Assert.fail();
+		}
+		
 	}
 }
