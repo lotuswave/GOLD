@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_ST_013_Register_user_Checkout_Funtionality_Discover_card {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile);
+	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_user_Checkout_Funtionality_Discover_card() throws Exception {
