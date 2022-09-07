@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.HydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_UT_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode {
+public class Test_DGLD_HF_UT_ProdealSignup_67_to_71_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode {
 	String datafile = "Hydroflask//HydroTestData.xlsx";
 	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 

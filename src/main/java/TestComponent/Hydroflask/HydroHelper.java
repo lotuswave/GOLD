@@ -2928,10 +2928,10 @@ public HydroHelper(String datafile,String sheetname) {
 		}
 	}
 
-	public void Validate_Paymentpage() {
+	public void Validate_Paymentpage(String dataSet) {
 		try {
 			
-			selectshippingmethod("AccountDetails");
+			selectshippingmethod(dataSet);
 			
 			
 			Sync.waitElementClickable("xpath", "//button[contains(@class,'continue primary')]");

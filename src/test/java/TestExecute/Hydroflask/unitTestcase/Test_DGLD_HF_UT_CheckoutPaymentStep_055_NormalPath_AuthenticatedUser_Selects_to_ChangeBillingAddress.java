@@ -21,11 +21,11 @@ public class Test_DGLD_HF_UT_CheckoutPaymentStep_055_NormalPath_AuthenticatedUse
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.remove_Allproducts_minicart();
-			Hydro.navigate_To_MyAccount();
+//			Hydro.navigate_To_MyAccount();
 			Hydro.setup_DefaultShipping_Billingaddress();
 			Hydro.search_product_pdp("search");
 			Hydro.minicart_Checkout();
-			Hydro.Validate_Paymentpage();
+			Hydro.Validate_Paymentpage("AccountDetails");
 			Hydro.Updatebillingaddress("AccountDetails");
 			Hydro.clickStoreLogo();
 			
@@ -39,7 +39,7 @@ public class Test_DGLD_HF_UT_CheckoutPaymentStep_055_NormalPath_AuthenticatedUse
 
 	@AfterTest
 	public void clearBrowser() {
-	//	Common.closeAll();
+		Common.closeAll();
 
 	}
 
