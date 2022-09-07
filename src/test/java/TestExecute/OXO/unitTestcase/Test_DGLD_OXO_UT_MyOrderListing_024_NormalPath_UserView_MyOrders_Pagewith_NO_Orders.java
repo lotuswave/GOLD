@@ -16,7 +16,7 @@
 
 	
 		String datafile = "OXO//OxoTestData.xlsx";	
-		OxoHelper Oxo=new OxoHelper(datafile);
+		OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 		public void UserView_MyOrders_Pagewith_NO_Orders () throws Exception {
 			try {
