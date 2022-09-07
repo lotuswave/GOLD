@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_UT_Login_010_NormalPath_User_Logins_Logout {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Login_logout() throws Exception {
 

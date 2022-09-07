@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OXO_UT_CheckoutShippingStep_028_AdditionalPath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount_ForgotPassword {
 	String datafile = "Oxo//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Email_Checkout_with_Forgotpassword () throws Exception {
 

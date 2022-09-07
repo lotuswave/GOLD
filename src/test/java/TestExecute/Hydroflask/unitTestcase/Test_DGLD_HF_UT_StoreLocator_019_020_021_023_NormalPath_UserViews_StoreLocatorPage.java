@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_UT_StoreLocator_019_020_021_023_NormalPath_UserViews_StoreLocatorPage {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_storelocator() throws Exception {

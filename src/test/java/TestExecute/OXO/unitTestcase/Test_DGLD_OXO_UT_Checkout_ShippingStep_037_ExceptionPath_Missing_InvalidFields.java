@@ -13,7 +13,7 @@ public class Test_DGLD_OXO_UT_Checkout_ShippingStep_037_ExceptionPath_Missing_In
 	
 
 	String datafile = "Oxo//OxoTestData.xlsx";
-	OxoHelper Oxo = new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_AuthenticatedUser_Enters_NewshippingAddress() throws Exception {

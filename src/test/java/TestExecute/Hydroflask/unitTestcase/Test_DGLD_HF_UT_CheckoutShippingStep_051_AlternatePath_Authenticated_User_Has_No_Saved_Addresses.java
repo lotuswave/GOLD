@@ -13,7 +13,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticate
 
 	
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Authenticated_User_Has_No_Saved_Addresses() throws Exception {
@@ -23,8 +23,7 @@ public class Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticate
 			Hydro.validateCreateAccountpageNavigation();
 			Hydro.validateaccountcreationPassword("AccountDetails");
 			//Hydro.headerlinks("QA_Testing");
-
-Hydro.search_product("Product");
+			Hydro.search_product("Product");
 			Hydro.addtocart("Product");
 			Hydro.minicart_viewcart();
 			Hydro.minicart_Checkout();

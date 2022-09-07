@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_UT_Header_003_NormalPath_User_SelectsTheSearch {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Global_search() throws Exception {

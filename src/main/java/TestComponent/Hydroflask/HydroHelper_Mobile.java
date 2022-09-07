@@ -25,8 +25,8 @@ public class HydroHelper_Mobile {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public HydroHelper_Mobile(String datafile) {
-		excelData = new ExcelReader(datafile);
+	public HydroHelper_Mobile(String datafile,String sheetname) {
+		excelData = new ExcelReader(datafile,sheetname);
 		data = excelData.getExcelValue();
 		this.data = data;
 		if (Utilities.TestListener.report == null) {
@@ -36,6 +36,7 @@ public class HydroHelper_Mobile {
 			this.report = Utilities.TestListener.report;
 		}
 	}
+
 
 	public void clickStoreLogo() {
 		try {

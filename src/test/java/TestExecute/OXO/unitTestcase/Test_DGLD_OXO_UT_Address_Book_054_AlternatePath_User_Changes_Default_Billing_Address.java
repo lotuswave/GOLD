@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OXO_UT_Address_Book_054_AlternatePath_User_Changes_Default_Billing_Address {
 	String datafile = "OXO//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Alternate_Path_User_Changes_Default_BillingAddress() throws Exception {
 		try {

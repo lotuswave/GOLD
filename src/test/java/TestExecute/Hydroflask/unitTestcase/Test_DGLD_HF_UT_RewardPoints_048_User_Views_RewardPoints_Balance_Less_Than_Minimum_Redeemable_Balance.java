@@ -10,7 +10,7 @@ import TestLib.Common;
 import TestLib.Login;
 public class Test_DGLD_HF_UT_RewardPoints_048_User_Views_RewardPoints_Balance_Less_Than_Minimum_Redeemable_Balance {
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_RewardPoints() throws Exception {
