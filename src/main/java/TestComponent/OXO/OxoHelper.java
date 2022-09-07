@@ -4314,6 +4314,41 @@ public class OxoHelper {
 		    }
 			
 		}
+
+public void My_Orders_Page() {
+	try
+	{
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementPresent(30, "xpath", "//a[text()='My Orders']");
+		Common.clickElement("xpath", "//a[text()='My Orders']");
+		Sync.waitPageLoad();
+		String MyOrder = Common.findElement("xpath", "//h1[contains(text(),'My Orders')]").getText();
+		Common.assertionCheckwithReport(MyOrder.equals("My Orders"),
+				"validating the Navigation to the My Orders page",
+				"After Clicking on My Orders CTA user should be navigate to the My Orders page",
+				"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
+				"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
+		String message1=Common.findElement("xpath", "//span[contains(text(),'You have placed no orders.')]").getText();
+		System.out.println(message1);
+		 Common.assertionCheckwithReport(message1.equals("You have placed no orders."),
+					"validating the  message after navigating to the My Orders page ",
+					" message should be displayed in My Orders page ",
+					"Sucessfully message should be displayed in My Orders page",
+					"Failed to display message in my orders page");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  My Myorders page with message",
+		"After Clicking on My Orders CTA user should be navigate to the My Orders page with message",
+		"Unable to Display the message in the My orders page",
+				Common.getscreenShot(
+						"Failed to Display message in the My orders page"));
+		Assert.fail();
+	}
 }
+}
+
 	
 	
