@@ -14,7 +14,7 @@ public class Test_DGLD_Admin_CM_005_AlternatePath_Admin_Creates_a_New_Customer_S
 	
 
 		 String datafile = "Admin//AdminTestData.xlsx";    
-	        Adminhelper Admin=new Adminhelper(datafile);
+		 Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 	        @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	        public void Admin_Creates_a_New_Customer_Segment() throws Exception {
 

@@ -28,18 +28,23 @@ public class Adminhelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public Adminhelper(String datafile) {
-		excelData = new ExcelReader(datafile);
-		data = excelData.getExcelValue();
-		this.data = data;
-		if (Utilities.TestListener.report == null) {
-			report = new ExtenantReportUtils("Admin");
-			report.createTestcase("AdminTestCases");
-		} else {
-			this.report = Utilities.TestListener.report;
-		}
-	}
 
+
+public Adminhelper(String datafile,String DataSet) {
+        
+        excelData = new ExcelReader(datafile,DataSet);
+        data = excelData.getExcelValue();
+        this.data = data;
+        if (Utilities.TestListener.report == null) {
+            report = new ExtenantReportUtils("Admin");
+            report.createTestcase("AdminTestCases");
+        } else {
+            this.report = Utilities.TestListener.report;
+        }
+        
+    }
+	
+	
 	public void Customers() {
 		// TODO Auto-generated method stub
 		try {

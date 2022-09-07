@@ -12,7 +12,7 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_Page_Builder_083_Verify_Edit_Testimonials_Product_Card_Components_Content {
 
     String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+    Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Verify_Edit_Testimonials_Product_Card_Components_Content() throws Exception {
     try {

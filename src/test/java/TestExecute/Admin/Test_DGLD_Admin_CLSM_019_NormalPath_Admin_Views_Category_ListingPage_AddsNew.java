@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_CLSM_019_NormalPath_Admin_Views_Category_ListingPag
 
 
 	String datafile = "Admin//AdminTestData.xlsx";	
-	Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void _Admin_NormalPath_Admin_Views_Category_ListingPage_AddsNew() throws Exception {
 

@@ -11,7 +11,7 @@ import models.admin.Adminhelper;
 
 public class Test_DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant {
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void C() throws Exception {
     try {

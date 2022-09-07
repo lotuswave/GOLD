@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_CPS_082_CategoryProduct_Slider_Edit_Components_Prod
 
 	
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void CategoryProduct_Slider_Verify_CategoryProduct_Slider_Components_Products() throws Exception {
     try {

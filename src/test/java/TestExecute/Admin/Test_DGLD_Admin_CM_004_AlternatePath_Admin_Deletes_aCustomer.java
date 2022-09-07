@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer {
 	
 		
 		String datafile = "Admin//AdminTestData.xlsx";	
-		Adminhelper Admin=new Adminhelper(datafile);
+		Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 		public void Admin_Deletes_aCustomer() throws Exception {
 

@@ -12,7 +12,7 @@ import models.admin.Adminhelper;
 
 public class Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content {
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Configure_and_validate_Promo_Media_Card_Content() throws Exception {
     try {

@@ -12,7 +12,7 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_CLSM_022_AlternatePath_Admin_Adds_New_Country_Language {
 
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Admin_Adds_New_Country_Language() throws Exception {
 

@@ -12,7 +12,7 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segment {
 
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Admin_deletes_a_Customer_Segment() throws Exception {
 

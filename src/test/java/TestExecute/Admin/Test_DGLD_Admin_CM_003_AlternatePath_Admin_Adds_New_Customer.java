@@ -13,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer {
 
 	String datafile = "Admin//AdminTestData.xlsx";
-	Adminhelper Admin = new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Admin_Adds_New_Customer() throws Exception {

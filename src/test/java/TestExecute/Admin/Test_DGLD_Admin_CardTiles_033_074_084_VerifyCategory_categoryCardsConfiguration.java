@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.OXO.OxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 import models.admin.Adminhelper;
@@ -13,7 +14,9 @@ public class Test_DGLD_Admin_CardTiles_033_074_084_VerifyCategory_categoryCardsC
 
 
 	String datafile = "Admin//AdminTestData.xlsx";
-	Adminhelper Admin = new Adminhelper(datafile);
+	
+	
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Admin_validatecategorycard_configuration() throws Exception {

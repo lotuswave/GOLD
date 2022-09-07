@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_Promo_058_Verify_PromoBlock_Components_Content {
 
 	
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Verify_PromoBlock_Components_Content() throws Exception {
     try {

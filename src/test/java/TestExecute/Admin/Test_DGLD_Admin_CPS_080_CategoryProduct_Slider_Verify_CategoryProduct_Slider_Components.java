@@ -11,7 +11,7 @@ import models.admin.Adminhelper;
 
 public class Test_DGLD_Admin_CPS_080_CategoryProduct_Slider_Verify_CategoryProduct_Slider_Components {
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void CategoryProduct_Slider_Verify_CategoryProduct_Slider_Components() throws Exception {
     try {

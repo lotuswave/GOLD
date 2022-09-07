@@ -11,7 +11,7 @@ import models.admin.Adminhelper;
 
 public class Test_DGLD_Admin_Promo_048_Verify_PromoBlock_Media_Card_Background_Image {
 	String datafile = "Admin//AdminTestData.xlsx";    
-    Adminhelper Admin=new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Verify_Promo_Media_Card_Background_Image() throws Exception {
     try {

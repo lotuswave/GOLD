@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_CM_002_AlternatePath_Admin_Updates_Customers_Inform
 	
 		
 		String datafile = "Admin//AdminTestData.xlsx";	
-		Adminhelper Admin=new Adminhelper(datafile);
+		Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 		public void Admin_Updates_Customers_Information() throws Exception {
 

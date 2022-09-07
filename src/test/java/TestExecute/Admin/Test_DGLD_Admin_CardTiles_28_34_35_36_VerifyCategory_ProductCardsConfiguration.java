@@ -13,7 +13,8 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_CardTiles_28_34_35_36_VerifyCategory_ProductCardsConfiguration {
 
 	String datafile = "Admin//AdminTestData.xlsx";
-	Adminhelper Admin = new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
+	
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Admin_validateproductcard_configuration() throws Exception {

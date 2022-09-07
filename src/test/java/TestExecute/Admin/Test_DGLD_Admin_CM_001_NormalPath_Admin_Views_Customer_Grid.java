@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_CM_001_NormalPath_Admin_Views_Customer_Grid {
 	
 		
 		String datafile = "Admin//AdminTestData.xlsx";	
-		Adminhelper Admin=new Adminhelper(datafile);
+		Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 		public void Admin_Views_Customer_Grid() throws Exception {
 

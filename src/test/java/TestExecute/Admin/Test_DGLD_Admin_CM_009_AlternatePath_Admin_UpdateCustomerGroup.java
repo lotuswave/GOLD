@@ -12,7 +12,7 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_CM_009_AlternatePath_Admin_UpdateCustomerGroup {
 
 	String datafile = "Admin//AdminTestData.xlsx";
-	Adminhelper Admin = new Adminhelper(datafile);
+	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void validate_Adminupdate_NewCustomerGroup() throws Exception {
