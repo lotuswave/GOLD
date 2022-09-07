@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_UT_Footer_008_ExceptionPath_UserEntersInvalidEmailforNewsletter {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_newsletter_subscription_footer() throws Exception {

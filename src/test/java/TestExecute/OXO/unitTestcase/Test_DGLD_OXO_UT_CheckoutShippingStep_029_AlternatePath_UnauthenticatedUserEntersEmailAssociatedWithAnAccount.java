@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OXO_UT_CheckoutShippingStep_029_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount {
 	String datafile = "Oxo//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Email_Checkout () throws Exception {
 

@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_Login_009_ExceptionPaths_Errormessages_validation {
 
 	String datafile = "Oxo//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Login_Page() throws Exception {
 

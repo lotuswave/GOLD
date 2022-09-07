@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_UT_AccountRegistration_057_AccountRegistration_Page_validations {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";	
-	HydroHelper Hydro=new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_AccountRegistation_page_validation() throws Exception {
 

@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OXO_UT_RegisterCheckoutShippingStep_039_AlternatePath_AuthenticatedUserSaves_NewshippingtoAddressbook {
 	String datafile = "OXO//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Save_new_address () throws Exception {
 		try {

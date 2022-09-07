@@ -34,17 +34,20 @@ public class HydroHelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public HydroHelper(String datafile) {
-		excelData = new ExcelReader(datafile);
-		data = excelData.getExcelValue();
-		this.data = data;
-		if (Utilities.TestListener.report == null) {
-			report = new ExtenantReportUtils("Hydro");
-			report.createTestcase("HydroTestCases");
-		} else {
-			this.report = Utilities.TestListener.report;
-		}
-	}
+	
+public HydroHelper(String datafile,String sheetname) {
+        
+        excelData = new ExcelReader(datafile,sheetname);
+        data = excelData.getExcelValue();
+        this.data = data;
+        if (Utilities.TestListener.report == null) {
+            report = new ExtenantReportUtils("Hydro");
+            report.createTestcase("HydroTestCases");
+        } else {
+            this.report = Utilities.TestListener.report;
+        }
+        
+    }
 
 	public void clickStoreLogo() {
 		try {
@@ -2740,15 +2743,15 @@ public class HydroHelper {
 			Common.textBoxInput("xpath", "//input[@id='search']", product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
-			String productsearch = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			String productsearch = Common.findElement("id", "algolia-srp-title").getText();
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//form[@class ='m-add-to-cart ']");
-			sku3 = Common.findElement("xpath", "//form[@class ='m-add-to-cart ']").getAttribute("data-product-sku");
+			Sync.waitElementPresent("xpath", "//form[@class ='m-add-to-cart']");
+			sku3 = Common.findElement("xpath", "//form[@class ='m-add-to-cart']").getAttribute("data-product-sku");
 			System.out.println(sku3);
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
@@ -2866,10 +2869,7 @@ public class HydroHelper {
 		Common.textBoxInput("name", "city", data.get(DataSet).get("City"));
 
 		Sync.waitElementPresent("xpath", "//select[@name='region_id']");
-		Common.clickElement("xpath", "//select[@name='region_id']");
-
-		Sync.waitElementPresent("xpath", "//option[text()='Alabama']");
-		Common.clickElement("xpath", "//option[text()='Alabama']");
+		Common.dropdown("xpath", "//select[@name='region_id']", SelectBy.TEXT, data.get(DataSet).get("Region"));
 
 		Sync.waitElementPresent("xpath", "//input[@placeholder='Zip/Postal Code']");
 		Common.textBoxInput("xpath", "//input[@placeholder='Zip/Postal Code']", data.get(DataSet).get("postcode"));
@@ -2882,10 +2882,10 @@ public class HydroHelper {
 		String shippingmethod = data.get(DataSet).get("Shippingmethods");
 		try {
 
-			Common.scrollIntoView("xpath", "//td[2][text()='" + shippingmethod + "']");
+			Common.scrollIntoView("xpath", "//td[contains(text(),'"+shippingmethod+"')]");
 
-			Sync.waitElementClickable("xpath", "//td[2][text()='" + shippingmethod + "']");
-			Common.javascriptclickElement("xpath", "//td[2][text()='" + shippingmethod + "']");
+			Sync.waitElementClickable("xpath", "//td[contains(text(),'"+shippingmethod+"')]");
+			Common.javascriptclickElement("xpath", "//td[contains(text(),'"+shippingmethod+"')]");
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//input[@class='a-radio-button__input']");
 
@@ -2908,6 +2908,7 @@ public class HydroHelper {
 						"Failed to select the" + shippingmethod);
 
 			} else if (shippingmethod.contains("2 Day")) {
+				
 				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='fedex_FEDEX_2_DAY']")
 						.getAttribute("aria-labelledby");
 				System.out.println(selecetdshippingmethod);
@@ -2929,6 +2930,10 @@ public class HydroHelper {
 
 	public void Validate_Paymentpage() {
 		try {
+			
+			selectshippingmethod("AccountDetails");
+			
+			
 			Sync.waitElementClickable("xpath", "//button[contains(@class,'continue primary')]");
 			Common.javascriptclickElement("xpath", "//button[contains(@class,'continue primary')]");
 			Sync.waitPageLoad();
@@ -4824,5 +4829,214 @@ catch(Exception | Error e)
 				    }
 					
 				}
-	}
+				public void remove_Allproducts_minicart() {
+
+					try {
+						Sync.waitElementClickable("xpath", "//span[contains(@class,'icon-header__cart')]");
+						Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__cart')]");
+
+						int numberofproducts = Common.findElements("xpath", "//span[contains(@class,'cart__remove')]").size();
+
+						if (numberofproducts > 0) {
+							for (int i = 0; i < numberofproducts; i++) {
+
+								String productscount = Common
+										.findElement("xpath", "//p[@class='c-mini-cart__total-counter']/strong").getText();
+								int count = Integer.parseInt(productscount);
+								System.out.println(count);
+								String productname = Common.findElement("xpath", "//div[@class='m-mini-product-card__name']/a")
+										.getText();
+								System.out.println(productname);
+								Common.scrollIntoView("xpath", "//span[contains(@class,'cart__remove')]");
+								Common.javascriptclickElement("xpath", "//span[contains(@class,'cart__remove')]");
+								Sync.waitElementVisible("xpath", "//aside[@class='modal-popup confirm _show']");
+								Common.javascriptclickElement("xpath", "//button[contains(@class,'action-accept')]");
+								Sync.waitElementInvisible("xpath", "//a[text()='" + productname + "']");
+								Thread.sleep(4000);
+								int updatedproductcount = Common
+										.findElements("xpath", "//p[@class='c-mini-cart__total-counter']/strong").size();
+								if (updatedproductcount <=0) {
+									break;
+								}
+								String updatedprdctcount = Common
+										.findElement("xpath", "//p[@class='c-mini-cart__total-counter']/strong").getText();
+								int updatedcount = Integer.parseInt(updatedprdctcount);
+								System.out.println(updatedcount);
+								Common.assertionCheckwithReport(updatedcount == (count - 1) || updatedcount == 0,
+										"To validate the products are deleted from the mini cart",
+										"Product should be deleted from the minicart", "product deleted from mini cart",
+										"Failed to remove product from mini cart");
+
+							}
+
+						}
+						Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close ')]");
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("To validate the products are deleted from the mini cart",
+								"Product should be deleted from the minicart", "Not able to delete the product form minicarrt",
+								Common.getscreenShot("Failed to delete the product form minicart"));
+						Assert.fail();
+					}
+
+				}
+				
+				public void setup_DefaultShipping_Billingaddress() {
+					try {
+						Common.scrollIntoView("xpath", "//div[contains(@class,'dashboard-addresses')]");
+
+						String Defaultshipping = Common.findElement("xpath", "//div[contains(@class,'shipping')]//address")
+								.getText();
+						//System.out.println(Defaultshipping);
+						String DefaultBilling = Common.findElement("xpath", "//div[contains(@class,'billing')]//address").getText();
+						//System.out.println(DefaultBilling);
+						if (DefaultBilling.contains(Defaultshipping)) {
+							Common.assertionCheckwithReport(true, "To valifdate the default shipping and Billing address are same",
+									"Default Billing and Shipping address Should be same",
+									"Default Billing and Shipping address are same",
+									"default Billing and shipping addresses are not same");
+						} else {
+
+							Sync.waitElementVisible("xpath", "//div[contains(@class,'billing')]//a/span");
+							Common.mouseOverClick("xpath", "//div[contains(@class,'billing')]//a/span");
+
+							Sync.waitPageLoad();
+							Sync.waitElementVisible(30, "id", "form-validate");
+							Common.scrollIntoView("xpath", "//div[contains(@class,'shipping a-checkbox')]");
+							Common.mouseOverClick("xpath", "//div[contains(@class,'shipping a-checkbox')]//span");
+
+							Common.clickElement("xpath", "//button[contains(@class,'submit primary')]");
+							Sync.waitPageLoad();
+							Sync.waitElementVisible("xpath", "//div[contains(@class,'message-success')]/div");
+							String sucessmessage = Common.findElement("xpath", "//div[contains(@class,'message-success')]/div")
+									.getText();
+							Common.scrollIntoView("xpath", "//div[contains(@class,'dashboard-addresses')]");
+							String updatedDefaultshipping = Common
+									.findElement("xpath", "//div[contains(@class,'shipping')]//address").getText();
+							String updatedDefaultBilling = Common.findElement("xpath", "//div[contains(@class,'billing')]//address")
+									.getText();
+
+							Common.assertionCheckwithReport(
+									sucessmessage.contains("You saved the address.")
+											&& updatedDefaultshipping.contains(updatedDefaultBilling),
+									"To validate the default shipping and Billing address are same",
+									"Default Billing and Shipping address Should be same",
+									"Default Billing and Shipping address are same",
+									"default Billing and shipping addresses are not same");
+						}
+
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog(
+								"validating the checkbox for billing address and text for the shipping address",
+								"Checkbox should be display for the billing address and text should be display for the shipping address",
+								"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+								Common.getscreenShot(
+										"Failed to display checkbox for billing address and fail to display text for shipping address"));
+						Assert.fail();
+					}
+
+				}
+				
+	
+
+				public void Updatebillingaddress(String dataSet) {
+					String FirstName = data.get(dataSet).get("FirstName");
+					String LastName = data.get(dataSet).get("LastName");
+					String Street = data.get(dataSet).get("Street");
+					String City = data.get(dataSet).get("City");
+					String Region = data.get(dataSet).get("Region");
+					String postcode = data.get(dataSet).get("postcode");
+					String phone = data.get(dataSet).get("phone");
+					String Country = data.get(dataSet).get("Country");
+
+					try {
+						
+						
+						Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+						int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+						Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", "payment ,methods should be displayed",
+								"User unabel to land opaymentpage");
+						Common.clickElement("xpath", "//label[@for='stripe_payments']");
+						
+						/*
+						Sync.waitElementVisible("xpath", "//div[@class='payment-method stripe-payments']");
+						Common.javascriptclickElement("xpath", "//div[@class='payment-method stripe-payments']");
+
+						
+						if (!Common.findElement(By.xpath("//div[@class='items payment-methods']/div/div[2]"))
+								.isSelected()) {
+							System.out.println("The Payment method is selected");
+
+						}else {
+							Common.javascriptclickElement("xpath", "//div[@class='payment-method stripe-payments']");
+							
+						}
+						*/
+						Sync.waitElementInvisible(30, "xpath", "//div[@class='loader']/img[@alt='Loading...']");
+						String active = Common.findElement("xpath", "//div[@class='items payment-methods']/div/div[2]")
+								.getAttribute("class");
+									
+						Common.assertionCheckwithReport(active.contains("active"),
+								"To validate the default payment section is expanded", "default payment section should be expanded",
+								"default payment section is expanded", "Failed to expand the default payment section");
+						if (!Common.findElement(By.xpath("//div[contains(@class,'billing-address-same-as-shipping')]//span"))
+								.isSelected()) {
+							Common.findElement(By.xpath("//div[contains(@class,'billing-address-same-as-shipping')]//span"))
+									.click();
+
+							Sync.waitElementVisible("name", "billing_address_id");
+							Common.dropdown("name", "billing_address_id", SelectBy.TEXT, "New Address");
+							populate_Shippingaddress_fields("AccountDetails");
+
+							Common.scrollIntoView("id", "billing-save-in-address-book-stripe_payments");
+							Common.assertionCheckwithReport(
+									Common.findElement(By.id("billing-save-in-address-book-stripe_payments")).isSelected() == true,
+									"To validate the Save in address book checkbox is selected",
+									"Save in address book checkbox should be selected", "Save in address book checkbox is selected",
+									"Failed to select the Save in address book checkbox is selected");
+
+							Common.javascriptclickElement("xpath", "//button[contains(@class,'action-update')]");
+
+						} else {
+							System.out.println("the shipping and billing address is not same");
+							Assert.fail();
+						}
+
+						String updatedfullname = Common
+								.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p/strong").getText();
+						System.out.println(updatedfullname);
+
+						String updateddaddress = Common
+								.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p[2]").getText();
+						System.out.println(updateddaddress);
+						String updatedtelephone = Common
+								.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p[3]").getText();
+						System.out.println(updatedtelephone);
+
+						Common.assertionCheckwithReport(
+								updatedfullname.equals(FirstName + " " + LastName)
+										&& updateddaddress
+												.equals(Street + "\n" + City + ", " + Region + " " + postcode + "\n" + Country)
+										&& updatedtelephone.contains(phone),
+
+								"validate the user is able to update the new address in the shipping page",
+								"user should able to update the new address in the shipping page",
+								"user successfuly update the new address in the shipping page",
+								"failed to update the new address in the shipping page");
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog(
+								"validating the checkbox for billing address and text for the shipping address",
+								"Checkbox should be display for the billing address and text should be display for the shipping address",
+								"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+								Common.getscreenShot(
+										"Failed to display checkbox for billing address and fail to display text for shipping address"));
+						Assert.fail();
+					}
+
+				}
+
+}
 

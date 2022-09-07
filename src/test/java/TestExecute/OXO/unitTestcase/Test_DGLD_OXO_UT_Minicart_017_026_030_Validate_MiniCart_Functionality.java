@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_Minicart_017_026_030_Validate_MiniCart_Functionality {
 
 	String datafile = "OXO//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_minicart() throws Exception {
 

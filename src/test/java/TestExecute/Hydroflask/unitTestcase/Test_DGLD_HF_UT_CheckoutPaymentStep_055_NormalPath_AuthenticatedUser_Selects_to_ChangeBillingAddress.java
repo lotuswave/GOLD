@@ -9,23 +9,28 @@ import TestComponent.Hydroflask.HydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_AuthenticatedUser_Enters_a_New_ShippingAddress {
+public class Test_DGLD_HF_UT_CheckoutPaymentStep_055_NormalPath_AuthenticatedUser_Selects_to_ChangeBillingAddress {
 	String datafile = "Hydroflask//HydroTestData.xlsx";
 	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
-	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_AuthenticatedUser_Enters_a_New_ShippingAddress() throws Exception {
+	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class, invocationCount=4)
+	public void Validate_AuthenticatedUser_Selects_to_ChangeBillingAddress() throws Exception {
 
 		try {
-			Hydro.verifingHomePage();
+			Hydro.validate_Homepage();
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.remove_Allproducts_minicart();
+			Hydro.navigate_To_MyAccount();
+			Hydro.setup_DefaultShipping_Billingaddress();
 			Hydro.search_product_pdp("search");
 			Hydro.minicart_Checkout();
-			Hydro.validate_ExistingUser_Login_Checkoutpage("AccountDetails");
-			Hydro.Validate_Signin_Checkoutpage();
-			Hydro.click_AddNewAdress_ShippingPage();
-			Hydro.ShippingAddress("ShippingAddress");
-			Hydro.Validate_Update_NewAddress_Verification("ShippingAddress");
-
+			Hydro.Validate_Paymentpage();
+			Hydro.Updatebillingaddress("AccountDetails");
+			Hydro.clickStoreLogo();
+			
+			
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -34,17 +39,17 @@ public class Test_DGLD_HF_UT_Checkout_ShippingStep_045_AlternatePath_Authenticat
 
 	@AfterTest
 	public void clearBrowser() {
-		 Common.closeAll();
+	//	Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-
 		Login.signIn();
-		 Hydro.ClosADD();
-
+		Hydro.ClosADD();
 	}
+
+	
 
 }

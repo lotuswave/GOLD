@@ -14,7 +14,7 @@ public class Test_DGLD_HF_UT_StoreLocator_023_AlternatePath_User_Selects_Retaile
 	
 	
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_StoreLocator_AlternatePath_User_Selects_Retailer_CTAs() throws Exception {

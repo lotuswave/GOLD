@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile);
+	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_user_Checkout_Funtionality_With_Discount_Visa_card() throws Exception {

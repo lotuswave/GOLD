@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_Checkout_ShippingStep_041_AlternatePath_AuthenticatedUser_Has_No_Saved_Addresses {
 
 	String datafile = "Oxo//OxoTestData.xlsx";
-	OxoHelper Oxo = new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_AuthenticatedUser_Has_No_Saved_Addresses() throws Exception {

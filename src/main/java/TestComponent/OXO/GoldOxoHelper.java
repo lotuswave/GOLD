@@ -31,8 +31,10 @@ public class GoldOxoHelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public GoldOxoHelper(String datafile) {
-		excelData = new ExcelReader(datafile);
+	
+public GoldOxoHelper(String datafile,String sheetname) {
+		
+		excelData = new ExcelReader(datafile,sheetname);
 		data = excelData.getExcelValue();
 		this.data = data;
 		if (Utilities.TestListener.report == null) {
@@ -41,7 +43,9 @@ public class GoldOxoHelper {
 		} else {
 			this.report = Utilities.TestListener.report;
 		}
+		
 	}
+	
 	public void verifingHomePage() {
 		try {
 			Sync.waitPageLoad();

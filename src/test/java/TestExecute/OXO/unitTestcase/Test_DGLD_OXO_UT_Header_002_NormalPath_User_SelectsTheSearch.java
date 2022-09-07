@@ -13,7 +13,7 @@ public class Test_DGLD_OXO_UT_Header_002_NormalPath_User_SelectsTheSearch {
 
 	
 	String datafile = "oxo//OXOTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void customerLogin() throws Exception {
 

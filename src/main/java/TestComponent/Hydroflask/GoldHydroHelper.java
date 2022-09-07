@@ -34,8 +34,9 @@ public class GoldHydroHelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public GoldHydroHelper(String datafile) {
-		excelData = new ExcelReader(datafile);
+	public GoldHydroHelper(String datafile,String sheetname) {
+		
+		excelData = new ExcelReader(datafile,sheetname);
 		data = excelData.getExcelValue();
 		this.data = data;
 		if (Utilities.TestListener.report == null) {
@@ -44,6 +45,7 @@ public class GoldHydroHelper {
 		} else {
 			this.report = Utilities.TestListener.report;
 		}
+		
 	}
 
 	public void verifingHomePage() {
@@ -230,7 +232,6 @@ public class GoldHydroHelper {
 	}
 
 	public void addDeliveryAddress(String dataSet) throws Exception {
-		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("id", "customer-email");
@@ -238,7 +239,6 @@ public class GoldHydroHelper {
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
 			Common.textBoxInput("id", "customer-email",data.get(dataSet).get("Email"));
-
 		}
 		String expectedResult = "email field will have email address";
 		try {
@@ -295,20 +295,8 @@ public class GoldHydroHelper {
 
 			expectedResult = "shipping address is filled in to the fields";
 			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+			
 
-			int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
-
-			if (errorsize >= 0) {
-				ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
-						"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
-			} else {
-
-				ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas",
-						expectedResult, "failed to add a addres in the filled",
-						Common.getscreenShotPathforReport("failed to add a address"));
-
-				Assert.fail();
-			}
 		}
 
 		catch (Exception | Error e) {
@@ -321,6 +309,144 @@ public class GoldHydroHelper {
 		}
 	}
 
+	
+public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
+		
+		try {
+			Thread.sleep(5000);
+			Sync.waitElementVisible("id", "customer-email");
+			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+			
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("id", "customer-email",data.get(dataSet).get("Email"));
+
+		}
+		String expectedResult = "email field will have email address";
+		try {
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+					data.get(dataSet).get("FirstName"));
+			int size = Common.findElements("id", "customer-email").size();
+			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+					"Filled Email address", "unable to fill the email address");
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+
+			Sync.waitPageLoad();
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating shipping address",
+					"shipping address is filled in to the fields", "user faield to fill the shipping address",
+					Common.getscreenShotPathforReport("shipingaddressfaield"));
+			Assert.fail();
+
+		}
+		
+	}
+	
+	public void clickSubmitbutton_Shippingpage() {
+		String expectedResult = "click the submit button to navigate to payment page";
+		try {
+            Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+			}
+
+      catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the shipping page submitbutton", expectedResult,
+					"failed to click the submitbutton",
+					Common.getscreenShotPathforReport("failed submitbuttonshippingpage"));
+                    Assert.fail();
+		}
+	}
+		
+	
+	public void selectStandedshippingaddress() {
+		try {
+
+			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
+			if (size > 0) {
+				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
+				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
+			}
+				else {
+					
+					Assert.fail();
+				
+			}
+		}
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the Standed shipping method", "Select the Standed shipping method in shipping page ",
+						"failed to select the Standed shipping method ",
+						Common.getscreenShotPathforReport("failed select Standed shipping method"));
+
+				Assert.fail();	
+				}
+	}
+	
+	
+	public void validatingErrormessageShippingpage() {
+		int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+        String expectedResult = "shipping address is filled in to the fields";
+		if (errorsize <= 0) {
+			ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
+					"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
+		} else {
+
+			ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas",
+					expectedResult, "failed to add a addres in the filled",
+					Common.getscreenShotPathforReport("failed to add a address"));
+
+			Assert.fail();
+		}
+	}
+	
+	public void validatingErrormessageShippingpage_negative() {
+		int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+        String expectedResult = "Error message will dispaly when we miss the data in fields ";
+		if (errorsize >= 0) {
+			ExtenantReportUtils.addPassLog("validating the shippingPage error message", expectedResult,
+					"sucessfully  dispaly error message", Common.getscreenShotPathforReport("errormessagenegative"));
+		} else {
+
+			ExtenantReportUtils.addFailedLog("validating the shippingPage error message",
+					expectedResult, "failed to display error message",
+					Common.getscreenShotPathforReport("failederrormessage"));
+
+			Assert.fail();
+		}
+	}
+		
+	
+	
+	
+	
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 

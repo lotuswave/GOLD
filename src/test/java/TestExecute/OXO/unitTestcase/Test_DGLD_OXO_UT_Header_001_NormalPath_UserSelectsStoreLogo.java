@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_Header_001_NormalPath_UserSelectsStoreLogo {
 
 	String datafile = "oxo//OXOTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void customerLogin() throws Exception {
 

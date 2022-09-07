@@ -11,14 +11,14 @@ import TestLib.Login;
 
 public class Test_DGLD_OXO_UT_ContactUS_014_UserViewsContactUsPageandSubmits {
 	String datafile = "OXO//OxoTestData.xlsx";
-	OxoHelper OXO=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	
 	public void Validate_contactus_page_submits() throws Exception {
 
 		try {
-			OXO.verifingHomePage();
-			OXO.UserViewsContactUsPageandSubmits("AccountDetails");
+			Oxo.verifingHomePage();
+			Oxo.UserViewsContactUsPageandSubmits("AccountDetails");
 		
 		} catch (Exception e) {
 

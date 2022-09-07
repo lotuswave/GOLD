@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OXO_UT_AccountRegistration_053_Account_Registration_Page_validations {
 	String datafile = "OXO//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Account_Registration_Page_validations () throws Exception {
 		try {

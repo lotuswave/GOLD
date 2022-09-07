@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_UT_Order_Summary_041_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step {
 
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step() throws Exception {

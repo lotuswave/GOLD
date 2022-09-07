@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_HF_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options {
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_User_selects_chatbot_and_toggle_between_chatbot() throws Exception {

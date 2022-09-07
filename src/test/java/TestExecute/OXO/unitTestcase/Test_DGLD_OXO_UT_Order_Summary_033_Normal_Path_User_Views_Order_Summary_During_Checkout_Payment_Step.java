@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_Order_Summary_033_Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step {
 
 	String datafile = "oxo//OXOTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Normal_Path_User_Views_Order_Summary_During_Checkout_Payment_Step() throws Exception {
 

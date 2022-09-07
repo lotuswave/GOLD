@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_ST_017_registeredUserCheckoutwith_invalid_CC_Credentials {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile);
+	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_registeredUserCheckoutwith_invalid_CC_Credentials() throws Exception {

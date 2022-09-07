@@ -31,17 +31,20 @@ public class OxoHelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public OxoHelper(String datafile) {
-		excelData = new ExcelReader(datafile);
-		data = excelData.getExcelValue();
-		this.data = data;
-		if (Utilities.TestListener.report == null) {
-			report = new ExtenantReportUtils("Oxo");
-			report.createTestcase("OxoTestCases");
-		} else {
-			this.report = Utilities.TestListener.report;
-		}
-	}
+	
+public OxoHelper(String datafile,String sheetname) {
+        
+        excelData = new ExcelReader(datafile,sheetname);
+        data = excelData.getExcelValue();
+        this.data = data;
+        if (Utilities.TestListener.report == null) {
+            report = new ExtenantReportUtils("Oxo");
+            report.createTestcase("OxoTestCases");
+        } else {
+            this.report = Utilities.TestListener.report;
+        }
+        
+    }
 
 	public void clickStoreLogo() {
 		try {

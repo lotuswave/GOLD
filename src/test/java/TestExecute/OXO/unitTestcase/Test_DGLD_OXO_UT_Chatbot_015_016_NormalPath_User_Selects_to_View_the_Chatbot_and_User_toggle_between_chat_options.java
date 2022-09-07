@@ -13,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_Chatbot_015_016_NormalPath_User_Selects_to_View_the_Chatbot_and_User_toggle_between_chat_options {
 
 	String datafile = "Oxo//OxoTestData.xlsx";	
-	OxoHelper Oxo=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_toggle_between_chat_options() throws Exception {
 

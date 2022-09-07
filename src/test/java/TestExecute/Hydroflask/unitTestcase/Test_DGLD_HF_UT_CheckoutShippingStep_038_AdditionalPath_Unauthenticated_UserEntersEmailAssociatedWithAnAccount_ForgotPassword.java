@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_HF_UT_CheckoutShippingStep_038_AdditionalPath_Unauthenticated_UserEntersEmailAssociatedWithAnAccount_ForgotPassword {
 	String datafile = "Hydroflask//HydroTestData.xlsx";
-	HydroHelper Hydro = new HydroHelper(datafile);
+	HydroHelper Hydro = new HydroHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void UserEntersEmailAssociatedWithAnAccount_ForgotPassword() throws Exception {

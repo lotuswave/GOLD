@@ -33,10 +33,14 @@ public class ExcelReader {
 		static XSSFCell cell;
 		static XSSFRow row;
 		static String fileName;
+		static String Sheetname;
 		
-		public ExcelReader(String fileName) {
+		public ExcelReader(String fileName,String  sheetname) {
 			// TODO Auto-generated constructor stub
 			this.fileName=fileName;
+			
+				this.Sheetname=sheetname;
+			
 		}
 	
 	/*
@@ -286,7 +290,6 @@ public class ExcelReader {
 		} return data;
 				
 	}
-	
 	public static Map<String, Map<String, String>> getExcelValue() {
 		Map<String, String> cellVal=new HashMap<>();
 		Map<String, Map<String, String>> excelData=new HashMap<>();
@@ -297,7 +300,12 @@ public class ExcelReader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sheet=workbook.getSheetAt(0);
+		try {
+			sheet=workbook.getSheet(Sheetname);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String data=null;
 		int rowNumber;
 		int cellNumber;

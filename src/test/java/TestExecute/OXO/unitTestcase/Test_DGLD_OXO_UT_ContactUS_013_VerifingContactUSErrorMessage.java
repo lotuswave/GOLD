@@ -12,14 +12,14 @@ import TestLib.Login;
 public class Test_DGLD_OXO_UT_ContactUS_013_VerifingContactUSErrorMessage {
 
 	String datafile = "OXO//OxoTestData.xlsx";
-	OxoHelper OXO=new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	
 	public void contactUserrormessage() throws Exception {
 
 		try {
-			OXO.verifingHomePage();
-			OXO.verifingContactUSErrorMessage();
+			Oxo.verifingHomePage();
+			Oxo.verifingContactUSErrorMessage();
 		
 		} catch (Exception e) {
 

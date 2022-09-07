@@ -13,7 +13,7 @@ public class Test_DGLD_OXO_ST_022_changeAddressIn_AddressBook {
 
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile);
+	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_changeAddressIn_AddressBook() throws Exception {

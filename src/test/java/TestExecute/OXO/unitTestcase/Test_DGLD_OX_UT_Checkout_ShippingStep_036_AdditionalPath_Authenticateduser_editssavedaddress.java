@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OX_UT_Checkout_ShippingStep_036_AdditionalPath_Authenticateduser_editssavedaddress {
 
 	String datafile = "Oxo//OxoTestData.xlsx";
-	OxoHelper Oxo = new OxoHelper(datafile);
+	OxoHelper Oxo = new OxoHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_AuthenticatedUser_editssavedaddress() throws Exception {
