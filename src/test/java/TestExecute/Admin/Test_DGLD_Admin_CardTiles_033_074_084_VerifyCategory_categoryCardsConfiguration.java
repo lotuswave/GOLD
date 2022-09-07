@@ -13,9 +13,7 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_CardTiles_033_074_084_VerifyCategory_categoryCardsConfiguration {
 
 
-	String datafile = "Admin//AdminTestData.xlsx";
-	
-	
+	String datafile = "Admin//AdminTestData.xlsx";	
 	Adminhelper Admin = new Adminhelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)

@@ -43,7 +43,6 @@ public class Test_DGLD_Admin_Promo_055_Verify_Promo_Media_Card_Background_Video 
     }
 
 
-
     @AfterTest
     public void clearBrowser()
     {

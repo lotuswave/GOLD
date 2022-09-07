@@ -67,8 +67,7 @@ public class Test_DGLD_Admin_CPS_081_CategoryProduct_Slider_Edit_Components_Cont
       public void startTest() throws Exception {
     	System.setProperty("configFile", "Admin\\config.properties");
         Login.signIn();
-    	
-    	
+    	  	
           Login.signIn();
 
 

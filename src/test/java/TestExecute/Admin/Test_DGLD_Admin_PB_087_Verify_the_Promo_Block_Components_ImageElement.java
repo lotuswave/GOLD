@@ -60,6 +60,5 @@ public class Test_DGLD_Admin_PB_087_Verify_the_Promo_Block_Components_ImageEleme
 	      }
 
 	    
-
 	
 }

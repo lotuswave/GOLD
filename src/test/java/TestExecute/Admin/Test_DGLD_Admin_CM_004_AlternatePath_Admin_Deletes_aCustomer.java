@@ -30,8 +30,7 @@ public class Test_DGLD_Admin_CM_004_AlternatePath_Admin_Deletes_aCustomer {
 				Assert.fail(e.getMessage(), e);
 			} 
 		}
-		
-		
+				
 		
 		@AfterTest
 		public void clearBrowser()

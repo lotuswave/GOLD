@@ -32,7 +32,6 @@ public class Test_DGLD_Admin_CM_007_AlternatePath_Admin_Deletes_a_Customer_Segme
     }
 
 
-
     @AfterTest
     public void clearBrowser()
     {

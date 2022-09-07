@@ -52,7 +52,6 @@ public class Test_DGLD_Admin_PROMO_063_Verify_Promo_Media_Card_Content {
 
     }
 
-
     @BeforeTest
 // @Parameters("URL")
     public void startTest() throws Exception {

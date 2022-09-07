@@ -32,7 +32,6 @@ public class Test_DGLD_Admin_PB_044_Verify_Promo_Content_Product_Close_functiona
     }
 
 
-
     @AfterTest
     public void clearBrowser()
     {

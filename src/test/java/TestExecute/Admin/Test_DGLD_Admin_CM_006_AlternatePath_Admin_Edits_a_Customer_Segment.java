@@ -31,8 +31,7 @@ public class Test_DGLD_Admin_CM_006_AlternatePath_Admin_Edits_a_Customer_Segment
              Assert.fail(e.getMessage(), e);
          } 
      }
-
-     
+    
 //     @AfterClass
 //     public void Admin_deletes_a_Customer_Segment() {
 //     	Admin.delete_customer_segment("Customer Segment");

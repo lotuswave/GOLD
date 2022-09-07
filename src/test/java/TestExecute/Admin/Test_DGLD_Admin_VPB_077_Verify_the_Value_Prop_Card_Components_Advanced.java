@@ -24,7 +24,7 @@ public class Test_DGLD_Admin_VPB_077_Verify_the_Value_Prop_Card_Components_Advan
            Admin.Promo_Content();
            Admin.dragndrop_valueprop_Banner();
            Admin.edit_valueprop_banner_one();
-          Admin. edit_productcard_image("Valuepropbanner");
+           Admin. edit_productcard_image("Valuepropbanner");
            Admin.Configure_padding_marins("Valuepropbanner");
            Admin.edit_valueprop_banner_Two();
            Admin. edit_productcard_image("Valuepropbanner");

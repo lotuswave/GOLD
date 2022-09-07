@@ -31,7 +31,6 @@ public class Adminhelper {
 
 
 public Adminhelper(String datafile,String DataSet) {
-        
         excelData = new ExcelReader(datafile,DataSet);
         data = excelData.getExcelValue();
         this.data = data;

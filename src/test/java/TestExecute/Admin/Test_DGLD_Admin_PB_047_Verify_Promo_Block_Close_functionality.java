@@ -26,8 +26,7 @@ public class Test_DGLD_Admin_PB_047_Verify_Promo_Block_Close_functionality {
            Admin.close_promo_block();
            
            
-           
-           
+        
            
            
         }

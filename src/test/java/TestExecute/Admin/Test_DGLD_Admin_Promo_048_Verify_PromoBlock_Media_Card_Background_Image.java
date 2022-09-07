@@ -53,7 +53,6 @@ public class Test_DGLD_Admin_Promo_048_Verify_PromoBlock_Media_Card_Background_I
 
     }
 
-
     @BeforeTest
       public void startTest() throws Exception {
     	System.setProperty("configFile", "Admin\\config.properties");

@@ -24,7 +24,6 @@ public class Test_DGLD_Admin_CM_005_AlternatePath_Admin_Creates_a_New_Customer_S
 	            	Admin.Customer_segments();
 	            	Admin.Add_Save_customer_segments("Customer Segment");
 	             
-
 	            }
 	            catch (Exception e) {
 

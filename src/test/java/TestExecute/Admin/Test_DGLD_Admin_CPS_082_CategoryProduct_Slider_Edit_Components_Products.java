@@ -48,8 +48,6 @@ public class Test_DGLD_Admin_CPS_082_CategoryProduct_Slider_Edit_Components_Prod
         } 
     }
 
-
-
     @AfterTest
     public void clearBrowser()
     {

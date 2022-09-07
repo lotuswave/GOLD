@@ -65,7 +65,6 @@ public class Test_DGLD_Admin_VPB_038_Verify_the_Value_Prop_Banner_Components {
 
 
       }
-
-    
+   
 
 }

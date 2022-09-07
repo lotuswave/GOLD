@@ -16,7 +16,7 @@ public class Test_DGLD_Admin_CLSM_014_NormalPath_Admin_Views_List_of_Countries_L
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Admin_Views_New_List_of_Country_Language() throws Exception {
 
-        try {
+       try {
         	
         	Admin.Admin_signin("AccountDetails");
         	Admin.click_content();

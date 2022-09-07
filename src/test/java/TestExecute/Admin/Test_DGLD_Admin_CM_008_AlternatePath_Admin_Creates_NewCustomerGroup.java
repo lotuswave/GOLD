@@ -38,8 +38,7 @@ public class Test_DGLD_Admin_CM_008_AlternatePath_Admin_Creates_NewCustomerGroup
 		Common.closeAll();
 
 	}
-	
-	
+		
 	@BeforeTest
 	  public void startTest() throws Exception {
 		System.setProperty("configFile", "Admin\\config.properties");

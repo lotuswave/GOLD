@@ -41,7 +41,7 @@ public class Test_DGLD_Admin_CM_003_AlternatePath_Admin_Adds_New_Customer {
 //	@Parameters("URL")
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Admin\\config.properties");
-
+		
 		Login.signIn();
 //		Login.openwebsite(URL);
 

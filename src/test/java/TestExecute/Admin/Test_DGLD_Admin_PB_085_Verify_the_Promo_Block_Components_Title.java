@@ -50,7 +50,6 @@ public class Test_DGLD_Admin_PB_085_Verify_the_Promo_Block_Components_Title {
 
     }
 
-
     @BeforeTest
       public void startTest() throws Exception {
     	System.setProperty("configFile", "Admin\\config.properties");

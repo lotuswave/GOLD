@@ -43,7 +43,6 @@ public class Test_DGLD_Admin_Promo_049_Verify_Promo_Block_Content_Background_Ima
     }
 
 
-
     @AfterTest
     public void clearBrowser()
     {

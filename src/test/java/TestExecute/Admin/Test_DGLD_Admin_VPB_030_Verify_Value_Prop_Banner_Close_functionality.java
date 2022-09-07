@@ -60,7 +60,6 @@ public class Test_DGLD_Admin_VPB_030_Verify_Value_Prop_Banner_Close_functionalit
 
 
       }
-
-    
+   
 
 }

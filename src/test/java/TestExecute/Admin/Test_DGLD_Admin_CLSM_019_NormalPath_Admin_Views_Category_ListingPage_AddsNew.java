@@ -56,8 +56,7 @@ public class Test_DGLD_Admin_CLSM_019_NormalPath_Admin_Views_Category_ListingPag
 	@BeforeTest
 	  public void startTest() throws Exception {
 		System.setProperty("configFile", "Admin\\config.properties");	
-		  Login.signIn();
-		 
+		  Login.signIn();	 
 		  
 	  }
 

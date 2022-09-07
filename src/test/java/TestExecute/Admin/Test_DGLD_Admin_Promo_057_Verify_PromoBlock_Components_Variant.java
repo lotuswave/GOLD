@@ -43,7 +43,6 @@ public class Test_DGLD_Admin_Promo_057_Verify_PromoBlock_Components_Variant {
     }
 
 
-
     @AfterTest
     public void clearBrowser()
     {
