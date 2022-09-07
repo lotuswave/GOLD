@@ -5220,6 +5220,314 @@ catch(Exception | Error e)
 		            }
 		         }		
 					
+				public void cookiebanner() {
+					Sync.waitElementClickable("xpath", "//button[@id='truste-consent-button']");
+					Common.javascriptclickElement("xpath", "//button[@id='truste-consent-button']");
+				}
+				
+				
+				public void ProdelerPage(String dataSet) throws Exception {
+					ClickProDealguest();
+
+					String prodealname = Common.getCurrentURL();
+					{
+						/*
+						 * String
+						 * expectedResult="User is redirected to the Apply For Pro Deal page"
+						 * ;
+						 * Common.assertionCheckwithReport(prodealname.contains("prodeal"),
+						 * "Successfully redirected prodeal page",
+						 * expectedResult,"User unabel to land on prodeal page");
+						 */
+						String expectedResult = "User is redirected to login page";
+
+						Common.clickElement("xpath", "//a[@title='Sign in or register']");
+						Sync.waitElementPresent("id", "email");
+						int sizeemeil = Common.findElements("id", "email").size();
+						Common.assertionCheckwithReport(sizeemeil > 0, "Successfully redirected to login page", expectedResult,
+								"User unabel to land on login page");
+
+						try {
+
+							Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+							Sync.waitElementPresent("id", "pass");
+							Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+							Sync.waitElementPresent("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
+							Common.clickElement("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
+							
+							Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"), "Successfully land on pro deal application page", expectedResult,
+									"User unabel to land on pro deal application page");
+							Validate_Register_ProDealpage();
+
+							Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+							Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+							String link=Common.findElement("xpath", "//a[@class='a-btn a-btn--tertiary']").getAttribute("href");
+							System.out.println(link);
+							Common.assertionCheckwithReport(link.contains("application"),"successfully land on pro deal registration page", expectedResult, "User abel to land on pro deal registration page");
+
+						} catch (Exception | Error e) {
+							ExtenantReportUtils.addFailedLog("successfully land on pro deal registration page", "User unabel to land on pro deal registration page",
+									Common.getscreenShotPathforReport("Failed to land on prodeal aplication "));
+							Assert.fail();
+
+						}
+
+						Thread.sleep(3000);
+						Common.switchWindows();
+						Thread.sleep(3000);
+						expectedResult = "User is redirected to Pro Deal application page";
+						try {
+
+							Sync.waitElementPresent("id", "first_name");
+							int fistnamesize = Common.findElements("id", "first_name").size();
+							Common.assertionCheckwithReport(fistnamesize > 0,
+									"Successfully User is redirected to Pro Deal application page", expectedResult,
+									"User unabel to redirected to Pro Deal application page");
+							Thread.sleep(3000);
+							Common.textBoxInput("id", "first_name", data.get(dataSet).get("FirstName"));
+							Sync.waitElementPresent("id", "last_name");
+							Common.textBoxInput("id", "last_name", data.get(dataSet).get("LastName"));
+							Sync.waitElementPresent("id", "association");
+							Common.textBoxInput("id", "association", data.get(dataSet).get("Company Name"));
+							Sync.waitElementPresent("id", "association_email");
+							Common.textBoxInput("id", "association_email", data.get(dataSet).get("CompanyEmail"));
+							Common.actionsKeyPress(Keys.PAGE_DOWN);
+							Thread.sleep(6000);
+							String path = System.getProperty("user.dir")
+									+ ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
+							// Sync.waitElementInvisible("xpath",
+							// "//input[@id='supporting_document']");
+							Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
+
+							Sync.waitElementClickable("xpath", "//select[@id='group_id']");
+
+							System.out.println(data.get(dataSet).get("GropName"));
+							Common.dropdown("id", "group_id", SelectBy.VALUE, "4");
+
+							Sync.waitElementPresent("id", "comment");
+							Common.textBoxInput("id", "comment", data.get(dataSet).get("Comments"));
+
+							Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+							Common.clickElement("xpath", "//button[@title='Submit']");
+				
+
+						} catch (Exception | Error e) {
+							e.printStackTrace();
+							ExtenantReportUtils.addFailedLog("ProDeal application from filling",
+									"User faield to fill the prodeal aplication ",
+									Common.getscreenShotPathforReport("prodeal aplication "));
+							Assert.fail();
+
+						}
+
+						// String text=Common.getText("xpath",
+						// "//div[@class='pro-deal-header']/h4");
+
+						String text = Common.getText("xpath", "//div[@class='success']");
+						// Assert.assertEquals(text, "Pro Deal Application Complete", "pro
+						// Deal application completed");
+
+						expectedResult = "User gets redirected to confirmation page and email is sent to email provided.";
+
+						Common.assertionCheckwithReport(text.contains("Thank you for applying"),
+								"verifying Pro Deal conformation", expectedResult, "User redirected to confirmation page",
+								"User unabel to redirected to confirmation page");
+
+					}
+
+
+
+				try {
+					Sync.waitElementPresent("xpath", "//a[@title='Sign in or register']");
+
+				} catch (Exception e) {
+					Validate_Register_ProDealpage();
+					Thread.sleep(3000);
+				}
+				//String prodealname = Common.getCurrentURL();
+
+				//expectedResult = "User is redirected to the Apply For Pro Deal page";
+				//Common.assertionCheckwithReport(prodealname.contains("prodeal"), "verifying Pro Deal page ", expectedResult,
+						//"Successfully redirected prodeal page", "User unabel to land on prodeal page");
+
+	//
+						
+		}
+
+public void ClickProDealguest() throws Exception {
+	
+	try {
+		Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
+		Common.clickElement("xpath", "//a[text()='Pro Deal']");
+		Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");    
+        Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+             "To validate the Pro Deal", "Should be display the Pro Deal Application ",
+                "Successfully display the Pro Deal Application",
+                "Failed to  display the Pro Deal Application");
+         } catch (Exception | Error e) {
+
+
+
+       e.printStackTrace();
+        ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
+                "Should display the Pro Deal Application ",
+                "Unable to displays the Pro Deal Application",
+                Common.getscreenShot("Failed to  display the Pro Deal Application"));
+
+
+
+       Assert.fail();
+         }
+}
+
+public void Validate_Register_ProDealpage() throws Exception {
+    try {
+           Common.actionsKeyPress(Keys.END);
+	Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
+	Common.clickElement("xpath", "//a[text()='Pro Deal']");
+//Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");	
+String deal = Common.findElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']")
+			.getText();
+	System.out.println(deal);
+	String text = Common.findElement("xpath", "//h2[text()='Apply For Pro Deal']")
+			.getText();
+	System.out.println(text);
+	String Access = Common.findElement("xpath", "//h2[text()='Enter Access Code']")
+			.getText();
+	System.out.println(Access);
+	String code = Common.findElement("xpath","//input[@name='access_code']").getAttribute("title");
+	System.out.println(code);
+	String Enter = Common.findElement("id","pro-deal-form").getAttribute("action");
+	System.out.println(Enter);
+	Common.assertionCheckwithReport(deal.contains("Apply to pro deal") && text.contains("Apply For Pro Deal") && Access.contains("Enter Access Code") && code.contains("Access Code") && Enter.contains("prodeal/index/enter/"), 
+			"To validate the Pro Deal", "Should be display the Pro Deal Application ",
+			"Successfully display the Pro Deal Application",
+				"Failed to  display the Pro Deal Application");
+} catch (Exception | Error e) {
+
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
+			"Should display the Pro Deal Application ",
+			"Unable to displays the Pro Deal Application",
+			Common.getscreenShot("Failed to  display the Pro Deal Application"));
+
+	Assert.fail();
+
+}
+}
+
+public void Prodeal_invalid_access_code(String dataSet) {
+	try {
+		Sync.waitPageLoad();
+	
+	Common.textBoxInput("id", "access_code", data.get(dataSet).get("prodealaccesscode"));
+	Common.clickElement("xpath","//button[@title='Submit']");
+	String message = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div")
+			.getText();
+	System.out.println(message);
+	Common.assertionCheckwithReport(message.contains("Access code was not found."), "validating the displays error message ",
+			"should display the error message", "successfully display the error message",
+			"failed to display the error message");
+	}
+	catch (Exception | Error e) {
+
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the displays error message",
+				"Should display the error message",
+				"Unable to displays the error message",
+				Common.getscreenShot("Failed to  display the error message"));
+		Assert.fail();
+
+	}
+
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath","//button[@title='Submit']");
+		Sync.waitElementVisible(40, "id", "access_code-error");
+		String field = Common.findElement("id", "access_code-error")
+				.getText();
+		System.out.println(field);
+		Common.assertionCheckwithReport(field.contains("This is a required field."), "validating the Displays error messaging beneath the missing fields",
+				"should Displays error messaging beneath the missing fields", "successfullyDisplays error messaging beneath the missing fields",
+				"failed to Displays error messaging beneath the missing fields");
+		
+	
+		
+	}
+	
+	catch (Exception | Error e) {
+
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Displays error messaging beneath the missing fields",
+				"Should display the error messaging beneath the missing fields",
+				"Unable to displays the error messaging beneath the missing fields",
+				Common.getscreenShot("Failed to displays the error messaging beneath the missing fields"));
+	
+	
+	Assert.fail();
+	}
+}
+				
+public void prodeal_access_code(String dataSet) throws Exception {
+	try {
+		Sync.waitPageLoad();
+	
+	Common.textBoxInput("id", "access_code", data.get(dataSet).get("prodealaccesscode"));
+	Common.clickElement("xpath","//button[@title='Submit']");
+	String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
+			.getText();
+	System.out.println(successmessage);
+	Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."), "validating the Pro Deal success message ",
+			"should display the success message", "successfully display the success message",
+			"failed to display the success message");
+	}
+	
+	
+	catch (Exception | Error e) {
+
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the Pro Deal success message ",
+				"Should display the success message",
+				"Unable to displays the success message",
+				Common.getscreenShot("Failed to  display the Pro Deal success message"));
+
+		Assert.fail();
+
+	}
+	
+	
+	
+	
+	
+	
+}
+
+public void MyAccount_Prodeal() {
+	try {
+	Sync.waitPageLoad();
+	Common.clickElement("xpath","(//a[text()='Pro Deal'])[1]");
+	//String information  = Common.findElement("xpath", "//h1[text()='Pro deal information']").getText();
+
+	Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro deal information"),
+					
+			"To validate the page Pro Deal is displayed in my account", "Should display the Pro Deal in My account",
+			"Successfully display the Pro Deal in my account",
+			"Failed to  display the Pro Deal");
+}
+catch (Exception | Error e) {
+
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("To validate the page Pro Deal is displayed in my account",
+			"Should display the Pro Deal in My account",
+			"Unable to displays the Pro Deal in My account",
+			Common.getscreenShot("Failed to  display the Pro Deal in my account"));
+
+	Assert.fail();
+
+}}			
+				
+				
+				
 
 }
 

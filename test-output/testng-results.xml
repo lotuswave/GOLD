@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-09-07T19:05:16Z" name="Default suite" finished-at="2022-09-07T19:07:45Z" duration-ms="149108">
+    <groups>
+    </groups>
+    <test started-at="2022-09-07T19:05:16Z" name="Default test" finished-at="2022-09-07T19:07:45Z" duration-ms="149108">
+      <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode">
+        <test-method is-config="true" signature="startTest()[pri:0, instance:TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode@2d140a7]" started-at="2022-09-08T00:35:16Z" name="startTest" finished-at="2022-09-08T00:35:27Z" duration-ms="10820" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startTest -->
+        <test-method signature="Validate_AuthenticatedUser_SelectstoEnter_AccessCode()[pri:0, instance:TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode@2d140a7]" started-at="2022-09-08T00:35:27Z" name="Validate_AuthenticatedUser_SelectstoEnter_AccessCode" finished-at="2022-09-08T00:37:45Z" duration-ms="137992" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Validate_AuthenticatedUser_SelectstoEnter_AccessCode -->
+        <test-method is-config="true" signature="clearBrowser()[pri:0, instance:TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode@2d140a7]" started-at="2022-09-08T00:37:45Z" name="clearBrowser" finished-at="2022-09-08T00:37:45Z" duration-ms="275" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearBrowser -->
+      </class> <!-- TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
