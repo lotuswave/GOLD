@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_008_Guest_user_Checkout_Funtionality_Master_card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile);
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_user_Checkout_Funtionality_Master_card () throws Exception {
