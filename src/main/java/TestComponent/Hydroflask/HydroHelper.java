@@ -5037,6 +5037,189 @@ catch(Exception | Error e)
 					}
 
 				}
+				
+				public void Validate_Accountinformation_change_email(String Dataset) {
+					// TODO Auto-generated method stub
+					
+					
+					try {
+						Sync.waitPageLoad();
+						Common.clickElement("xpath", "//a[text()='Account Information']");
+						Sync.waitPageLoad();
+
+						Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
+								"validating the Navigation to the Account information page",
+								"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+								"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+								"Failed to Navigate to the Account information page after Clicking on Account information CTA");
+						
+						Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-email')]//span//span");
+					Common.clickElement("xpath", "//button[contains(@class,'toggle-email')]//span//span"); 
+					
+					 String emailsection=Common.findElement("xpath", "//div[contains(@class,'collapsible-email')]").getAttribute("class");
+					  System.out.println(emailsection);
+					  
+						Common.assertionCheckwithReport(emailsection.contains("active"),
+								"validating the email section when we click on edit",
+								"email section field should be displayed when we click on edit",
+								"Sucessfully emailsection  is displayed when we click on edit",
+								"Failed to display section when we click on edit");
+					//div[contains(@class,'collapsible-email')]
+					  String Newemail=Common.findElement("xpath", "//input[@name='email']").getAttribute("type");
+					  System.out.println(Newemail);
+					  String Currentpassword=Common.findElement("xpath", "(//input[@name='current_password'])[1]").getAttribute("type");
+						System.out.println(Currentpassword);
+						Common.assertionCheckwithReport(Newemail.equals("email")&&Currentpassword.equals("password"),
+								"validating the email input field and current password field",
+								"email input field should be displayed and current password filed should be displayed",
+								"Sucessfully email input field is displayed  and current password field is displayed",
+								"Failed to display email input field and current password field ");
+						validate_password_field(Dataset);
+						
+						
+						
+						
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
+								"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+								"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+								Common.getscreenShotPathforReport("Failed to navigate account information page"));
+						Assert.fail();
+					}
+						
+					
+					
+					
+				}
+				
+				public void validate_password_field(String Dataset) {
+					// TODO Auto-generated method stub
+					try {
+				
+						Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[1]");
+						
+						
+						Common.textBoxInput("xpath", "(//input[@name='current_password'])[1]", data.get(Dataset).get("Password"));
+						
+						String passworddots = Common.findElement("xpath", "(//input[@name='current_password'])[1]").getAttribute("type");
+						System.out.println(passworddots);
+
+						Common.assertionCheckwithReport(passworddots.contains("password"),"validating the passoword dot display",
+								"the password should be displed in dots",
+								"Sucessfully password disply in dots",
+								"Failed to display password in dots");
+						Common.actionsKeyPress(Keys.UP);
+						
+
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("validating the passoword dot display",
+								"the password should be displed in dots",
+								"Sucessfully password disply in dots",
+						Common.getscreenShotPathforReport("Failed to navigate newsletter filed page"));
+						Assert.fail();
+
+					}
+
+
+					
+				}
+
+				public void validate_Accountinformation_invalid_email(String Dataset) {
+					// TODO Auto-generated method stub
+					
+					String errormessage = data.get(Dataset).get("errormessage");
+					try {
+						Sync.waitElementPresent("xpath", "//input[@title='Email']");
+						//Common.textBoxInputClear("xpath", "//input[@title='Email']");
+						Common.textBoxInput("xpath", "//input[@title='Email']", data.get(Dataset).get("Email"));
+						Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-email')]//button[contains(@class,'save primary')]");
+						Sync.waitElementVisible(30, "xpath", "//div[@class='mage-error']");
+						String emailerror = Common.findElement("xpath", "//div[@class='mage-error']").getText();
+						System.out.println(emailerror);
+						Common.assertionCheckwithReport(emailerror.equals(errormessage),
+								"To validate the error message when given invalid email or password",
+								"Should dispaly the error message " + errormessage, emailerror + "error message is displayed",
+								"Failed to display error message");
+						
+						
+						
+						
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
+								"Should dispaly the error message" + errormessage, "Error message dispaly Failed ",
+								Common.getscreenShotPathforReport("Failed to display the error message"));
+						Assert.fail();
+					}
+					return;
+				}	
+				public void ChangeEmail_signin(String dataSet) {
+
+					try {
+						
+						
+						Common.textBoxInput("xpath", "//input[@title='Email']", Utils.getEmailid());
+						String EMAIL=Common.findElement("xpath","//input[@title='Email']" ).getAttribute("value");
+						System.out.println(EMAIL);
+						Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-email')]//button[contains(@class,'save primary')]");
+						
+						String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+						
+						 Common.assertionCheckwithReport(message.contains("You saved the account information."),
+											"validating the saved message after changing email",
+											"Save email message should be displayed after the email is saved",
+											"Sucessfully changed email has been saved ",
+											"Failed to save the change email");
+						Sync.waitPageLoad();
+						Common.textBoxInput("id", "email", EMAIL);
+						Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+						Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+						Sync.waitPageLoad();
+						Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+								"To validate the user lands on Home page after successfull login",
+								"After clicking on the signIn button it should navigate to the Home page",
+								"user Sucessfully navigate to the Home page after clicking on the signIn button",
+								"Failed to signIn and not navigated to the Home page ");
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+								"After clicking on the signin button it should navigate to the Home page",
+								"Unable to navigate the user to the home after clicking on the SignIn button",
+								Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+						Assert.fail();
+					}
+				}
+				public void AcceptAll() {
+
+
+
+		            try {
+
+
+
+		                Thread.sleep(5000);
+		                 if (Common.findElement("xpath", "//button[@id='truste-consent-button']") != null) {
+
+
+
+		                    Common.clickElement("xpath", "//button[@id='truste-consent-button']");
+		                 }
+		                 }catch (Exception e) {
+
+
+
+		                e.printStackTrace();
+
+
+
+		            }
+		         }		
+					
 
 }
 
