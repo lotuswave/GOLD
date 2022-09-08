@@ -5656,8 +5656,35 @@ public void Validating_We_are_here_for_you_section_hyperlink(String dataSet) {
 	}
 
 }
+
+public void Validate_Retailers() {
+	// TODO Auto-generated method stub
+	
+	Sync.waitPageLoad();					
+	try {
+		Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");					
+		Sync.waitElementPresent("xpath", "//div[@class='conversion-column-inner']");
+		int retail = Common.findElements("xpath", "//div[@class='conversion-column-inner']").size();
+		System.out.println(retail);
+		Common.assertionCheckwithReport(retail>0,
+				"Validating retailers information",
+				"validated retailers information",
+				"Successfully validated retailers information ",
+				"Failed to validated retailers information");
+		
+		
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating retailers information ",
+				"Retailers information should be validated",
+				"unable to validate retailers information ",
+		
+				Common.getscreenShotPathforReport("Failed to navigate retailers information"));
+		Assert.fail();
+
+	}	
+}
+}
 					
 				
-
-}
 
