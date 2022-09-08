@@ -4532,7 +4532,183 @@ public void AcceptAll() {
 
     }
  }		
+public void Validate_Accountinformation_change_password(String Dataset) {
+	// TODO Auto-generated method stub
 	
+	
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//a[text()='Account Information']");
+		Sync.waitPageLoad();
+
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
+				"validating the Navigation to the Account information page",
+				"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+				"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+				"Failed to Navigate to the Account information page after Clicking on Account information CTA");
+		
+		Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+	Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span"); 
+	
+	 String emailsection=Common.findElement("xpath", "//div[contains(@class,'collapsible-password')]").getAttribute("class");
+	  System.out.println(emailsection);
+	  
+		Common.assertionCheckwithReport(emailsection.contains("active"),
+				"validating the confirm password section when we click on edit",
+				"confirm password section field should be displayed when we click on edit",
+				"Sucessfully confirm password  is displayed when we click on edit",
+				"Failed to display  confirm password section when we click on edit");
+	
+	  String currentpassword=Common.findElement("xpath", "(//input[@name='current_password'])[2]").getAttribute("name");
+	  System.out.println(currentpassword);
+	  String Newpassword=Common.findElement("xpath", "(//input[@name='password'])[1]").getAttribute("type");
+		System.out.println(Newpassword);
+		 String confirmpassword=Common.findElement("xpath", "(//input[@name='password_confirmation'])").getAttribute("name");
+			System.out.println(confirmpassword);
+		
+		Common.assertionCheckwithReport(currentpassword.contains("password")&&Newpassword.contains("password")&&confirmpassword.contains("confirmation"),
+				"validating the email input field and current password field",
+				"email input field should be displayed and current password filed should be displayed",
+				"Sucessfully email input field is displayed  and current password field is displayed",
+				"Failed to display email input field and current password field ");
+		
+		
+		
+		
+		
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
+				"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+				"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+				Common.getscreenShotPathforReport("Failed to navigate account information page"));
+		Assert.fail();
+	}}
+		
+	public void validate_Accountinformation_invalid_password(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		String errormessage = data.get(Dataset).get("passworderror");
+		String invalidnewpassworderror = data.get(Dataset).get("InvalidnewPassword");
+		String confirmpassword = data.get(Dataset).get("NonmatchPassword");
+		try {
+			
+			
+			
+			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Newpassword"));
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]");
+			String invalidcurrentpassword = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
+			System.out.println(invalidcurrentpassword);
+			Common.assertionCheckwithReport(invalidcurrentpassword.equals(errormessage),
+					"To validate the error message when given invalid email or password",
+					"Should dispaly the error message " + errormessage, invalidcurrentpassword + "error message is displayed",
+					"Failed to display error message");
+			
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+			Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+			
+			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("CurrentPassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Newpassword"));
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[@id='password-error']");
+			String invalidnewpassword = Common.findElement("xpath", "//div[@id='password-error']").getText();
+			System.out.println(invalidnewpassword);
+			Common.assertionCheckwithReport(invalidnewpassword.equals(invalidnewpassworderror),
+					"To validate the error message when given invalid email or password",
+					"Should dispaly the error message " + invalidnewpassworderror, invalidnewpassword + "error message is displayed",
+					"Failed to display error message");
+			
+			
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+			
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Password"));
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]/div");
+			String nonmatchpassword = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
+			System.out.println(nonmatchpassword);
+			Common.assertionCheckwithReport(nonmatchpassword.equals(confirmpassword),
+					"To validate the error message when given invalid email or password",
+					"Should dispaly the error message " + confirmpassword, nonmatchpassword + "error message is displayed",
+					"Failed to display error message");
+			
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
+					"Should dispaly the error message" + errormessage, "Error message dispaly Failed ",
+					Common.getscreenShotPathforReport("Failed to display the error message"));
+			Assert.fail();
+	
+		
+	}	
+	
+	
+}
+	public void Changepassword_signin(String Dataset) {
+
+		try {
+			
+			//p[@class='text-email']
+			String Email=Common.findElement("xpath", "//p[@class='text-email']").getText();
+			System.out.println(Email);
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+		Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span"); 
+		
+		Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
+		Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("CurrentPassword"));
+		Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+		Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
+		Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+		Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Newpassword"));
+		Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+		
+		
+		
+		
+			
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			
+			 Common.assertionCheckwithReport(message.contains("You saved the account information."),
+								"validating the saved message after changing email",
+								"Save email message should be displayed after the email is saved",
+								"Sucessfully changed email has been saved ",
+								"Failed to save the change email");
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", Email);
+			Common.textBoxInput("id", "pass", data.get(Dataset).get("Newpassword"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to my account after successfull login",
+					"After clicking on the signin button it should navigate to the myaccount page",
+					"Unable to navigate the user to the myaccount after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the myaccount "));
+
+			Assert.fail();
+		}
+	}			
+
 }
 
 	

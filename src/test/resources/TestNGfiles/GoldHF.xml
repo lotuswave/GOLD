@@ -112,11 +112,11 @@
         </classes>
         </test>
         
-    <!--    <test name="Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality" testid="DTG-928" priority="P1" description="This script will cover validating the MiniCart Functionality">
+     <test name="Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality" testid="DTG-928" priority="P1" description="This script will cover validating the MiniCart Functionality">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality"/>
         </classes>
-        </test>-->
+        </test>
         
         <test name="Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Requirement_Checks" testid="DTG-932" priority="P1" description="This script will cover validating the Account Registration Password Requirement Checks">
        <classes>
@@ -148,9 +148,101 @@
         </classes>
         </test>
         
-         <test name="Test_DGLD_HF_UT_AccountRegistration_043_ExceptionPaths_AccountregistrationPage_errormessagesvalidation" testid="DTG-1076" priority="P1" description="This script will cover validating the Account registration page for error messages">
+      
+        
+        
+           <test name="Test_DGLD_HF_UT_RewardPoints_048_User_Views_RewardPoints_Balance_Less_Than_Minimum_Redeemable_Balance" testid="DTG-1077" priority="P1" description="This script will cover validating the User Views RewardPoints Balance Less Than Minimum Redeemable Balance">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_RewardPoints_048_User_Views_RewardPoints_Balance_Less_Than_Minimum_Redeemable_Balance"/>
+        </classes>
+        </test>
+        
+           
+           <test name="Test_DGLD_HF_UT_AccountRegistration_057_AccountRegistration_Page_validations" testid="DTG-1078" priority="P1" description="This script will coverthe Account Registration page validations">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AccountRegistration_057_AccountRegistration_Page_validations"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_UT_AccountRegistration_043_ExceptionPaths_AccountregistrationPage_errormessagesvalidation" testid="DTG-1079" priority="P1" description="This script will coverthe ExceptionPaths_AccountregistrationPage_errormessagesvalidation">
        <classes>
             <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AccountRegistration_043_ExceptionPaths_AccountregistrationPage_errormessagesvalidation"/>
+        </classes>
+        </test>
+      
+      <test name="Test_DGLD_HF_UT_Address_Book_060_Alternate_Path_User_Changes_Default_ShippingAddress" testid="DTG-1080" priority="P1" description="This script will coverthe Alternate_Path_User_Changes_Default_ShippingAddress">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Address_Book_060_Alternate_Path_User_Changes_Default_ShippingAddress"/>
+        </classes>
+        </test>
+      
+      <test name="Test_DGLD_HF_UT_Address_Book_062_AlternatePath_User_Changes_Default_Billing_Address" testid="DTG-1081" priority="P1" description="This script will coverthe AlternatePath_User_Changes_Default_Billing_Address">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Address_Book_062_AlternatePath_User_Changes_Default_Billing_Address"/>
+        </classes>
+        </test>
+      
+     
+      
+      <test name="Test_DGLD_HF_UT_CheckoutShippingStep_044_ExceptionPath_UserEntersInvalidDiscountCode" testid="DTG-1083" priority="P1" description="This script will coverthe ExceptionPath_UserEntersInvalidDiscountCode">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_044_ExceptionPath_UserEntersInvalidDiscountCode"/>
+        </classes>
+        </test>
+      
+      <test name="Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticated_User_Has_No_Saved_Addresses" testid="DTG-1084" priority="P1" description="This script will coverthe AlternatePath_Authenticated_User_Has_No_Saved_Addresses">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_051_AlternatePath_Authenticated_User_Has_No_Saved_Addresses"/>
+        </classes>
+        </test>
+      
+      <test name="Test_DGLD_HF_UT_Footer_014_UserViewsContactUsPageandSubmits" testid="DTG-1085" priority="P1" description="This script will coverthe UserViewsContactUsPageandSubmits">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Footer_014_UserViewsContactUsPageandSubmits"/>
+        </classes>
+        </test>
+      
+      <test name="Test_DGLD_HF_UT_Login_010_NormalPath_User_Logins_Logout" testid="DTG-1086" priority="P1" description="This script will coverthe NormalPath_User_Logins_Logout">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Login_010_NormalPath_User_Logins_Logout"/>
+        </classes>
+        </test>
+      
+      <test name="Test_DGLD_HF_UT_Minicart_041_Additional_Path_Verify_scroll_on_mini_cart" testid="DTG-1087" priority="P1" description="This script will coverthe Additional_Path_Verify_scroll_on_mini_cart">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Minicart_041_Additional_Path_Verify_scroll_on_mini_cart"/>
+        </classes>
+        </test>
+      
+    
+      
+      <test name="Test_DGLD_HF_UT_StoreLocator_023_AlternatePath_User_Selects_Retailer_CTAs" testid="DTG-1089" priority="P1" description="This script will coverthe AlternatePath_User_Selects_Retailer_CTAs">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_StoreLocator_023_AlternatePath_User_Selects_Retailer_CTAs"/>
+        </classes>
+        </test>
+        
+        <test name="Test_DGLD_HF_UT_Account_Information_076_AlternatePath_User_Changes_Email" testid="DTG-1090" priority="P1" description="This script will coverthe AlternatePath_User_Changes_Email">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Account_Information_076_AlternatePath_User_Changes_Email"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_UT_OrderConfirmation_068_AdditionalPath_We_are_here_for_you_section" testid="DTG-1091" priority="P1" description="This script will coverthe AdditionalPath_We_are_here_for_you_section">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_OrderConfirmation_068_AdditionalPath_We_are_here_for_you_section"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_UT_ProdealSignup_67_to_71_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode" testid="DTG-1092" priority="P1" description="This script will coverthe AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_ProdealSignup_67_to_71_AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_OXO_UT_Account_Information_062_AlternatePath_User_Changes_Password" testid="DTG-1093" priority="P1" description="This script will coverthe AlternatePath_AuthenticatedUser_SelectstoEnter_AccessCode">
+       <classes>
+            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_OXO_UT_Account_Information_062_AlternatePath_User_Changes_Password"/>
         </classes>
         </test>
 </suite>  
