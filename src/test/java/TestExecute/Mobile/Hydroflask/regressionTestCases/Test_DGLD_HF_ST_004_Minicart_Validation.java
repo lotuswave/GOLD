@@ -13,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_004_Minicart_Validation {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper_Mobile Hydro = new GoldHydroHelper_Mobile(datafile);
+	GoldHydroHelper_Mobile Hydro = new GoldHydroHelper_Mobile(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Minicart_Validation() throws Exception {

@@ -13,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper_Mobile Hydro = new GoldHydroHelper_Mobile(datafile);
+	GoldHydroHelper_Mobile Hydro = new GoldHydroHelper_Mobile(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_user_Checkout_Funtionality_Discover_card () throws Exception {

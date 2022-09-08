@@ -42,6 +42,14 @@ public class ExcelReader {
 				this.Sheetname=sheetname;
 			
 		}
+		
+		public ExcelReader(String fileName) {
+			
+			this.fileName=fileName;
+			
+			
+			
+		}
 	
 	/*
 	 *  This function returns the list of Row number 'rowNumber',

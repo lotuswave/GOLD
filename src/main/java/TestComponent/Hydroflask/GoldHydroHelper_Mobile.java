@@ -44,6 +44,19 @@ public class GoldHydroHelper_Mobile {
 			this.report = Utilities.TestListener.report;
 		}
 	}
+public GoldHydroHelper_Mobile(String datafile,String sheetname) {
+		
+		excelData = new ExcelReader(datafile,sheetname);
+		data = excelData.getExcelValue();
+		this.data = data;
+		if (Utilities.TestListener.report == null) {
+			report = new ExtenantReportUtils("Hydro");
+			report.createTestcase("HydroTestCases");
+		} else {
+			this.report = Utilities.TestListener.report;
+		}
+		
+	}
 
 	public void verifingHomePage() {
 		try {
@@ -481,7 +494,7 @@ public class GoldHydroHelper_Mobile {
 		}
 
 		expectedResult = "credit card fields are filled with the data";
-		String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 
 		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
