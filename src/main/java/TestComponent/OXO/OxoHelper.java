@@ -1859,9 +1859,9 @@ public OxoHelper(String datafile,String sheetname) {
 		}
 
 		expectedResult = "credit card fields are filled with the data";
-		String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+		int errorTexts = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
 
-		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+		Common.assertionCheckwithReport(errorTexts<=0, "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 	}
 
@@ -4709,7 +4709,127 @@ public void Validate_Accountinformation_change_password(String Dataset) {
 		}
 	}			
 
+public void Validate_OrderConfirmationPage(String dataSet) {
+	// TODO Auto-generated method stub
+	String expectedResult = "It redirects to order confirmation page";
+
+	try {
+		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+	int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+	
+	String	order =	Common.findElement("xpath", "//a[@class='order-number']").getAttribute("href");
+	System.out.println(order);
+	
+	String	Right_rail = Common.getText("xpath", "//div[@class='c-icon-card-list__headers']");
+	System.out.println(Right_rail);
+	
+
+	int ordersuccesspagecategorylinks = Common.findElements("xpath", "//div[@class='actions-toolbar']//a[contains(@class,'button-secondary')]").size();
+	
+	for(int i=1;i<=ordersuccesspagecategorylinks;i++) {
+		String links[] = data.get(dataSet).get("categorylinks").toLowerCase().split(",");
+		System.out.println(links[i-1]);
+		String URL = System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL));
+		String CTAlink = URL+"shop/"+links[i-1]+".html";
+		System.out.println(CTAlink);
+		String categorylink = Common.findElement("xpath", "(//div[@class='actions-toolbar']//a[contains(@class,'button-secondary')])["+i+"]").getAttribute("href");
+		System.out.println(categorylink);
+		Common.assertionCheckwithReport(categorylink.equals(CTAlink), "verify the category links in order success page", 
+				"category links should peresent in order success page","In order success page successfully displayed category links",
+				"failed to display category links in order success page");
+	}
+	Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") && order.contains("view/order_id/") &&
+			Right_rail.contains("We are here for you"),
+			"verifying the order confirmation confirmation page", expectedResult,
+			"Successfully It redirects to order confirmation page Order Placed",
+			"User unabel to go orderconformation page");
+
+		
+	}catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the order confirmation confirmation page",
+				"Successfully It redirects to order confirmation page Order Placed",
+				"User unabel to go orderconformation page",
+		
+				Common.getscreenShotPathforReport("User unabel to go orderconformation page"));
+		Assert.fail();
+
+	}	
 }
 
+public void Validating_We_are_here_for_you_section_Content(String dataSet) {
+	// TODO Auto-generated method stub
+	try {
+		int content=Common.findElements("xpath", "//span[@class='m-icon-card__text']").size();
+			System.out.println(content);
+	        for(int i=1;i<=content;i++) {
+	        	String text[] = data.get(dataSet).get("Content").split(",");
+	        	
+	        	//https://mcloud-na-preprod.oxo.com/shop/kitchenware.html
+	        	String Rightrail_Content = Common.findElement("xpath", "(//span[@class='m-icon-card__text'])[" +i +"]").getText();
+	        	System.out.println(Rightrail_Content);
+	        	Common.assertionCheckwithReport(Rightrail_Content.contains(text[i-1]), "verify the Content in the We are here for you section  ", 
+						"Content should present in the We are here for you section",
+						"Content successfully present in the We are here for you section", 
+						"failed to  present content in the We are here for you section");	
+	        	
+	        }
+		
+			 
+		}catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verify the Content in the We are here for you section  ",
+					"Content should present in the We are here for you section",
+					"failed to  present content in the We are here for you section",
+			
+					Common.getscreenShotPathforReport("failed to  present content in the We are here for you section"));
+			Assert.fail();
+	}
+
+}
+
+public void Validating_We_are_here_for_you_section_hyperlink(String dataSet) {
+	// TODO Auto-generated method stub
+	try {
+		int right_rail=Common.findElements("xpath", "//a[@class='m-icon-card__link']").size();
+		System.out.println(right_rail);
+        for(int i=1;i<=right_rail;i++) {
+        	String link[] = data.get(dataSet).get("hyperlink").split(",");
+        	System.out.println(link[i-1]);
+        	String Rightrail_hyperlink = Common.findElement("xpath", "(//a[@class='m-icon-card__link'])[" +i +"]").getAttribute("href");
+        	System.out.println(Rightrail_hyperlink);
+        	Common.assertionCheckwithReport(Rightrail_hyperlink.contains(link[i-1]), "verify the chatnow , telephone , email address links  in We are here for you section", 
+					"chatnow , telephone , email address links should present in We are here for you section", 
+					"chatnow , telephone , email address links successfully present in We are here for you section", 
+					"failed to present chatnow , telephone , email address links in We are here for you section");	
+        		
+	}
+        Common.clickElement("xpath","//span[contains(text(),'Chat Now')]");
+        Thread.sleep(5000);
+        	Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+        Sync.waitElementVisible(30, "xpath", "//div[@class='widget__widget___uExal']");
+        int chatbotvisible = Common.findElements("xpath", "//div[@class='widget__widget___uExal']").size();
+        System.out.println(chatbotvisible);
+        Common.assertionCheckwithReport(chatbotvisible>0, "To validate chatnow link", 
+				"chatbot should open after clicking on chat now link", 
+				"chatbot successfully open after clicking on chat now link", 
+				"failed to open chatbot after clicking on chat now link");
+        Common.switchToDefault();
+        }
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verify the chatnow , telephone , email address links  in We are here for you section", 
+				"chatnow , telephone , email address links should present in We are here for you section", 
+				
+				"failed to present chatnow , telephone , email address links in We are here for you section",
+				
+		
+				Common.getscreenShotPathforReport("failed to present chatnow , telephone , email address links in We are here for you section"));
+
+		Assert.fail();
+	}
+
+}
+						
 	
-	
+}
