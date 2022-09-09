@@ -2573,7 +2573,7 @@ public class HydroHelper {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage")) {
+		if (!url.contains("stage") && !url.contains("preprod")) {
 		}
 
 		else {

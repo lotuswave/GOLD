@@ -1887,7 +1887,7 @@ public OxoHelper(String datafile,String sheetname) {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage")) {
+		if (!url.contains("stage") &&!url.contains("preprod") ) {
 		}
 
 		else {
@@ -2396,7 +2396,7 @@ public OxoHelper(String datafile,String sheetname) {
 		}
 
 		expectedResult = "credit card fields are filled with the data";
-		String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 
 		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
@@ -5102,12 +5102,12 @@ public void createAccountFromOrderSummaryPage(String Dataset) {
 		String kitchen=Common.findElement("xpath", "//span[text()='Kitchenware']//parent::a").getAttribute("href");
 		Common.clickElement("xpath", "//input[@name='password']");
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-		Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
+		Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
 		Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
 		Common.clickElement("xpath", "//input[@name='password_confirmation']");
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 				data.get(Dataset).get("Confirm Password"));
-		Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+		Common.clickElement("xpath", "(//span[@class='sr-only'])[3]");
 		String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
 		String confirmpassword=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");
 		String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
@@ -5121,10 +5121,10 @@ public void createAccountFromOrderSummaryPage(String Dataset) {
 		  "User should able to view all details in the order confirmation page",
 		  "Sucessfully all details has been displayed in the order confirmation",
 		  "Failed to display all details in the order confirmation page");
-		  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[1]");
-		  Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
 		  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[2]");
 		  Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+		  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[3]");
+		  Common.clickElement("xpath", "(//span[@class='sr-only'])[3]");
 		  String confirmpassword1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
 			String password1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
 		  Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
