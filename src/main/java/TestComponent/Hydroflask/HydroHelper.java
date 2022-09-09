@@ -6051,5 +6051,116 @@ public class HydroHelper {
 		}
 		
 	}
+	public void Retailers_address(String DataSet) {
+		// TODO Auto-generated method stub
 
+	try {
+		ClosADD();
+			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
+			Common.clickElement("xpath", "//input[@name='location']");
+			Common.textBoxInput("xpath", "//input[@class='locally-search location-autocomplete']",data.get(DataSet).get("Country"));
+			Thread.sleep(8000);
+			Common.javascriptclickElement("xpath", "(//div[@class='autocomplete-suggestion'])[1]");
+			//Common.switchToDefault();
+			
+			/*String Store=Common.getText("xpath", "(//h3[text()='Tradehome Shoes '])[1]");
+			System.out.println(Store);
+			Assert.assertEquals(Store, "Tradehome Shoes");*/
+			
+			/*String A=Common.getText("xpath", "(//h3[text()='Tradehome Shoes '])[1]");
+				System.out.println(A);*/
+				int size = Common.findElements("id", "conversion-sidebar").size();
+
+				
+				System.out.println(size);
+				Common.assertionCheckwithReport(size > 0, "validating Retailers page", "user navigates to Retailers page",
+						"Sucessfully user navigate to Retailers page",
+						"faield to navigate to Retailers page");
+			
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating Retailers page",
+						"System directs the user back to Retailers page", "unable to user go back to Retailers page");
+
+			}
+	}
+	public void Click_filter() {
+			// TODO Auto-generated method stub
+			try {
+		
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "(//h4[@class='filter-header-title'])[1]");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//label[@for='filter-item-top_level_categories-935-company_location']");
+				Thread.sleep(4000);
+				
+				String A=Common.getText("xpath", "//h5[text()='8L Lunch Tote']");
+				System.out.println(A);
+				Assert.assertEquals(A, "8L Lunch Tote");
+				
+				Common.assertionCheckwithReport(A.equals("8L Lunch Tote"),
+						"Validating the luggage and bags filter product",
+						"customer should check luggage and bags filter product",
+						"Successfully shows luggage and bags filter product ",
+						Common.getscreenShotPathforReport("succesfully show luggage and bags filter product"));
+			
+		}catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating luggage and bags filter product ",
+					"customer should view luggage and bags filter product",
+					"unable to view luggage and bags filter product  ",
+			
+					Common.getscreenShotPathforReport("Failed to show luggage and bags filter product"));
+			Assert.fail();
+		}
+	}
+	public void selectproduct_filter() {
+			// TODO Auto-generated method stub
+			try {
+
+				Sync.waitElementPresent(40, "xpath", "//h5[text()='8L Lunch Tote']");
+				Common.clickElement("xpath", "//h5[text()='8L Lunch Tote']");
+				Thread.sleep(8000);
+		
+				String product=Common.getText("xpath", "//h3[@class='pdp-product-name pdp-product-title']");
+				System.out.println(product);
+				Assert.assertEquals(product, "8L Lunch Tote");
+				Common.assertionCheckwithReport(product.equals("8L Lunch Tote"),
+						"user navigates to product details page", "Sucessfully user navigate to product details page",
+						"faield to navigate to product details page and unable to see error message");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating product details page",
+						"System directs the user back to the product details page",
+						"unable user back to product details page",
+						Common.getscreenShotPathforReport("failed to get back product details page"));
+				Assert.fail();
+			}
+	}
+	public void click_Retailer1() {
+			// TODO Auto-generated method stub
+		String store = "DICK'S Sporting Goods  - San Antonio | Curbside Contactless Pickup Available - 5.3 mi";
+			try {
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[text()='Retailers']");
+				Thread.sleep(5000);
+				//Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]"); 
+				int storeSize = Common.findElements("xpath", "//div[@id='conversion-locations']").size();
+				System.out.println(storeSize);
+				Common.assertionCheckwithReport(storeSize > 0, "validating the Retailers page",
+						"user navigates to Retailers page", "Sucessfully user open Retailers page",
+						"faield to navigate to Retailers page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating Retailers page",
+						"System directs the user back to Retailers page", "unable to user go back to Retailers page",
+						Common.getscreenShotPathforReport("faield to get back to Retailers page"));
+				Assert.fail();
+
+						Common.getscreenShotPathforReport("faield to get back to Retailers page");
 }
+	}
+			}
