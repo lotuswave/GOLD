@@ -2234,7 +2234,8 @@ public OxoHelper(String datafile,String sheetname) {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Common.clickElement("xpath", "//span[text()='Shop All']");
+//			Common.clickElement("xpath", "//span[text()='Shop All']");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All  Coffee & B')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -3560,7 +3561,7 @@ public OxoHelper(String datafile,String sheetname) {
 			
 	
 			expectedResult = "shipping address is filled in to the fields";
-		
+			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
 				ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
 						"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
 		}
@@ -4830,6 +4831,91 @@ public void Validating_We_are_here_for_you_section_hyperlink(String dataSet) {
 	}
 
 }
-						
+			
+public void updtePayementcrditcard_WithInvalidData(String dataSet) throws Exception {
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	String cardnumber = data.get(dataSet).get("cardNumber");
+	System.out.println(cardnumber);
+	String expectedResult = "land on the payment section";
+	// Common.refreshpage();
+
+	try {
+		Sync.waitPageLoad();
+
+		Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+				"User unabel to land opaymentpage");
+		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+		System.out.println(payment);
+		if (payment > 0) {
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//span[text()='New payment method']");
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//span[text()='Place Order']");
+			expectedResult = "credit card fields are filled with the data";
+			String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+
+			Common.assertionCheckwithReport(errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
+					expectedResult, "Filled the Card details", "missing field data its showing error");
+	
+			
+		} else {
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//span[text()='Place Order']");
+			expectedResult = "credit card fields are filled with the data";
+			String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+			System.out.println(errorTexts);
+			Common.assertionCheckwithReport(errorTexts.contains("Please complete your payment details"), "validating the credit card information with valid data",
+					expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+			
+
+		}
+		
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+				"failed  to fill the Credit Card infromation",
+				Common.getscreenShotPathforReport("Cardinfromationfail"));
+		Assert.fail();
+	}
+
+	
+}
 	
 }

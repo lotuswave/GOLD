@@ -5861,6 +5861,115 @@ public void Validate_Accountinformation_change_password(String Dataset) {
 		}
 	}			
 
+	public void validateaccountcreationpassword(String dataSet) {
+		try {
+
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("id", "email_address", Utils.getEmailid());
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password1"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete"),
+					"Password is validated", "password should be validate", "failed to validate password");
+			Common.actionsKeyPress(Keys.UP);
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password1"));
+
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper h2']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button",
+					"Sucessfully navigate to the My account page ", "failed to navigates to My Account Page");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button",
+					"unable to navigate to the My account page",
+					Common.getscreenShot("failed to navigates to My Account Page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	
+	public void My_Orders_Page() {
+		try
+		{
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Orders']");
+			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Sync.waitPageLoad();
+			String MyOrder = Common.findElement("xpath", "//h1[contains(text(),'My Orders')]").getText();
+			Common.assertionCheckwithReport(MyOrder.equals("My Orders"),
+					"validating the Navigation to the My Orders page",
+					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
+					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
+					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
+			String message1=Common.findElement("xpath", "//span[contains(text(),'You have placed no orders.')]").getText();
+			System.out.println(message1);
+			 Common.assertionCheckwithReport(message1.equals("You have placed no orders."),
+						"validating the  message after navigating to the My Orders page ",
+						" message should be displayed in My Orders page ",
+						"Sucessfully message should be displayed in My Orders page",
+						"Failed to display message in my orders page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  My Myorders page with message",
+			"After Clicking on My Orders CTA user should be navigate to the My Orders page with message",
+			"Unable to Display the message in the My orders page",
+					Common.getscreenShot(
+							"Failed to Display message in the My orders page"));
+			Assert.fail();
+		}
+	}
+	
+	public void myOrders_Shopcategory() {
+		try
+		{
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
+			
+			Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
+			Sync.waitPageLoad();
+			String MyOrder = Common.findElement("xpath", "//h2[contains(text(),'Shop By Category')]").getText();
+			Common.assertionCheckwithReport(MyOrder.contains("Shop By Category"),
+					"validating the Shop By Category in the My Orders page",
+					"verifying Shop By Category in the My Orders page",
+					"Sucessfully User Navigates to Shop By Category in the My Orders page",
+					"Failed to Navigate to Shop By Category in the My Orders page");
+			
+			Common.clickElement("xpath", "(//a[@class='m-category-card m-category-card--carousel'])[2]");
+			
+			 Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop"),
+						"validating the Shop By Category navigating from the My Orders page ",
+						"Shop By Category should be navigated from the My Orders page ",
+						"Sucessfully Shop By Category navigated from the My Orders page after selecting category",
+						"Failed to display message in my orders page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Shop By Category in the My Orders page",
+					"verifying Shop By Category in the My Orders page",
+					"Sucessfully User Navigates to Shop By Category in the My Orders page",
+					Common.getscreenShot(
+							"Failed to Display Shop By Category in the My orders page"));
+			Assert.fail();
+		}
+	}
 }
 					
 				
