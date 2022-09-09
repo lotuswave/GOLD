@@ -4917,5 +4917,87 @@ public void updtePayementcrditcard_WithInvalidData(String dataSet) throws Except
 
 	
 }
+public void My_Orders() {
+	try {
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath", "(//a[contains(text(),'My Orders')])[3]");
+		Common.clickElement("xpath", "(//a[contains(text(),'My Orders')])[3]");
+		String MyOrders = Common.getText("xpath", "//h1[text()='My Orders']");
+		System.out.println(MyOrders);
+		Common.assertionCheckwithReport(MyOrders.contains("My Orders"), "To validate MyOrders in my account page",
+				 "click on myOrders in my account page", "Successfully navigate to MyOrders page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate MyOrders in my account page", "click on My Orders in my account page",
+				"unable to navigate MyOrders page", Common.getscreenShot("Failed to open MyOrders page"));
+		Assert.fail();
+
+	}
 	
+}
+public void My_Order_list() {
+	try {
+	My_Orders();
+	Thread.sleep(4000);
+	
+	Common.actionsKeyPress(Keys.PAGE_DOWN);
+    Common.actionsKeyPress(Keys.ARROW_UP);
+  
+	
+		Common.scrollIntoView("xpath", "//div[@class='m-pagination']");
+	//	Common.findElement("xpath", "//div[@class='m-pagination']");
+		
+		Common.clickElement("xpath", "//a[@class='m-pagination__label']");
+		Common.actionsKeyPress(Keys.PAGE_DOWN);
+        Common.actionsKeyPress(Keys.ARROW_UP);
+		Common.clickElement("xpath", "//span[@aria-label='Page 1']");
+		
+		
+		String titles=Common.getText("xpath", "//h1[@class='page-title-wrapper h2']");
+		Thread.sleep(5000);
+		
+		Common.assertionCheckwithReport(titles.equals("My Orders"),"Verifying carosel page","it shoud navigate to  Carosel page", "user click on Carosel first page", 
+				"Successfully user navigated to carosel first page");
+		Common.getscreenShotPathforReport("succes to navigate to page");
+		
+		
+		} catch (Exception | Error e) {
+			 e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Verifying carosel page", "user sucessfully click on Carosel first page", "user navigated to carosel first page",
+				Common.getscreenShotPathforReport("failed to navigate to page"));
+
+		Assert.fail();
+		}
+	
+	try {
+		Thread.sleep(4000);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.clickElement("xpath", "//span[text()='Next page']");
+		
+		Common.actionsKeyPress(Keys.PAGE_DOWN);
+        Common.actionsKeyPress(Keys.ARROW_UP);
+		
+	    Sync.waitElementPresent("xpath", "//a[@title='Previous page']");
+		Common.clickElement("xpath", "//a[@title='Previous page']");
+		
+		String page = Common.getText("xpath", "//span[text()='Previous page']");
+        System.out.println(page);
+		
+        Common.assertionCheckwithReport(page.contains("page"), "verifying carosel previous page ",
+				 "user successfully select carosel previous page", "user successfully navigate to carosel previous page",
+				"faield to open carosel previous page");
+				
+	}
+
+	catch (Exception | Error e) {
+		 e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying carosel previous page ",
+				 "user successfully navigate to carosel previous page", "user faield to navigate  carousel previous page",
+				Common.getscreenShotPathforReport("Failed to open carousel previous page"));
+				
+		Assert.fail();
+
+	}}
+
 }
