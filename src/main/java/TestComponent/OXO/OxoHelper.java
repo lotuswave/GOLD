@@ -1811,6 +1811,197 @@ public OxoHelper(String datafile,String sheetname) {
 		}
 		return method;
 	}
+	
+	public void addtocart_in_PDP_page(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath","//img[@alt='" + products + "']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
+			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+
+	}
+	public void Shippingpage_Validation() {
+	    try {
+	    Boolean logo =    Common.findElement("xpath","//a[@class='a-logo']").isDisplayed();
+	    System.out.println(logo);
+	    Boolean Backtocart =    Common.findElement("xpath","//a[@title='Back to Cart']").isDisplayed();
+	    System.out.println(Backtocart);
+	    Boolean Shipping =    Common.findElement("xpath","//li[@class='opc-progress-bar-item _active']").isDisplayed();
+	    System.out.println(Shipping);
+	Common.assertionCheckwithReport(Common.getPageTitle().contains("Checkout"),"To validate the user lands on Home page after successfull login",
+	        "Should land on Home Page","User lands on Home Page", "User failed to login");
+
+
+	    
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To validate the user lands on the shipping page",
+	                "User should land on the shipping page", "User failed to land on the shipping page",
+	                "shipping navigation failed");
+	        Assert.fail();
+
+
+
+	   }
+	}
+
+
+	public void Paymentmethods_Validation() {
+	    try {
+	        Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	        Common.scrollIntoView("xpath", "//span[text()='Card']");
+	        String Card = Common.findElement("xpath","//span[text()='Card']").getText();
+	        Assert.assertEquals(Card, "Card");
+	        String Klarna = Common.findElementBy("xpath","//span[text()='Klarna']").getText();
+	        Assert.assertEquals(Klarna, "Klarna");
+	        String Afterpay = Common.findElementBy("xpath","//span[text()='Afterpay']").getText();
+	        Assert.assertEquals(Afterpay, "Afterpay");
+	        String CardNumber = Common.findElementBy("xpath","//input[@id='Field-numberInput']").getAttribute("id");
+	        Assert.assertEquals(CardNumber, "Field-numberInput");
+	        String Expiration = Common.findElementBy("xpath","//input[@id='Field-expiryInput']").getAttribute("id");
+	        Assert.assertEquals(Expiration, "Field-expiryInput");
+	        String CVV = Common.findElementBy("xpath","//input[@id='Field-cvcInput']").getAttribute("id");
+	        Assert.assertEquals(CVV, "Field-cvcInput");
+	    
+	        String Country = Common.findElementBy("xpath","//select[@id='Field-countryInput']").getAttribute("id");
+	        Assert.assertEquals(Country, "Field-countryInput");
+	        Common.switchToDefault();
+	        String Placeorder = Common.findElementBy("xpath","//span[text()='Place Order']").getText();
+	        Assert.assertEquals(Placeorder, "Place Order");
+
+
+
+	       String Paypal = Common.findElementBy("xpath","//label[@for='paypal_express']").getAttribute("for");
+	        Assert.assertEquals(Paypal, "paypal_express");
+	        
+	        Common.clickElement("xpath","//button[@id='block-giftcard-heading']");
+	        String Giftcard = Common.findElementBy("xpath","//form[@id='giftcard-form']").getAttribute("id");
+	        Assert.assertEquals(Giftcard, "giftcard-form");
+	    
+
+
+
+	       
+	        
+	    }catch (Exception e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To validate the Payment methods on the payment page",
+	                "User should locate different payment methods on the payment page", "User failed to locate different payment methods on the payment page",
+	                "failed to locate the payment methods");
+	        Assert.fail();
+
+	    }
+
+	   }
+	    public void Paymentpage_Validation() {
+	    	 try {
+	             Boolean Payment_Review = Common.findElement("xpath","//li[@class='opc-progress-bar-item _active']").isDisplayed();
+	             System.out.println(Payment_Review);
+	             Common.findElement("xpath", "//label[@for='stripe_payments']").isDisplayed();
+	             Common.clickElement("xpath", "//label[@for='stripe_payments']");
+	            Boolean checkbox  =    Common.findElement("xpath", "//fieldset[@style='display: none;']").isSelected();
+	            
+	            System.out.println(checkbox);
+	            
+	            //    int  size =    Common.findElements("xpath", "//input[@name='billing-address-same-as-shipping']").size();
+	            //    Common.assertionCheckwithReport(size>0, "validating the My billing and shipping address are same checkbox", "Checkbox is selected", "Failed to check the Mybilling and shiipind address checkbox");
+	                    
+	                } catch (Exception e) {
+	                	 e.printStackTrace();
+	                     ExtenantReportUtils.addFailedLog("To validate the user lands on the payment page",
+	                             "User should land on the payment page", "User failed to land on the payment page",
+	                             "Payment navigation failed");
+	                     Assert.fail();
+
+
+
+	                }
+
+
+
+	            }
+	               
+	  
+	    public void ordersummary_validation(String dataset) throws Exception {
+			// TODO Auto-generated method stub
+	    	String expectedResult = "Shipping block will have shipping address";
+			try{
+				Boolean Subtotal = Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").isDisplayed();
+				System.out.println(Subtotal);
+				Boolean shipping = Common.findElement("xpath", "//tr[@class='totals shipping excl']//span[@class='price']").isDisplayed();
+				System.out.println(shipping);
+				Boolean Tax = Common.findElement("xpath", "//tr[@class='totals-tax']//span[@class='price']").isDisplayed();
+				System.out.println(Tax);
+				Boolean ordertotal = Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").isDisplayed();
+				System.out.println(ordertotal);
+				Boolean item = Common.findElement("xpath", "//div[@class='m-accordion__title']").isDisplayed();
+				System.out.println(item);
+		
+				Common.clickElement("xpath", "//div[@class='m-accordion__title']");
+				Boolean image = Common.findElement("xpath", "//img[@title='Pet POP Container (5.8 Qt.)']").isDisplayed();
+				System.out.println("img"+image);
+				
+				String Product= Common.findElement("xpath", "//div[@class='m-mini-product-card__name']").getText();
+				System.out.println(Product);
+				String productname = data.get(dataset).get("OrderSummaryProduct");
+				System.out.println(productname);
+				Common.assertionCheckwithReport(Product.equals(productname), "validate the Product name in order summary block",
+						"Product name should display order summery block", "Sucessfully display order summary block", "failed to display product name in oder summary block");
+
+				Boolean Qty = Common.findElement("xpath", "(//p[@class='a-product-attribute'])[1]").isDisplayed();
+				System.out.println(Qty);
+				Boolean Price = Common.findElement("xpath", "(//p[@class='a-product-attribute'])[2]").isDisplayed();
+				System.out.println(Price);
+				
+				int size = Common.findElements("xpath", "//div[@class='shipping-information']").size();
+				
+				Common.assertionCheckwithReport(size > 0, "validating the Shipping information block", expectedResult,
+						"shipping address should display", "failed to display the shipping address");
+	   	
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the order summary and shipping information in the payment page",
+						"Order summary and shipping information should be display in the payment page and all fields should display",
+						"Unable to display the Order summary and shipping information fields are not displayed in the payment page",
+						Common.getscreenShot("Failed to display the order summary and shipping information fileds under order summary"));
+				Assert.fail();
+			}
+		}
+
+
 
 	public void addPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
