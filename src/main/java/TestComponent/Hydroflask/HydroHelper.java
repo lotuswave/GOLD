@@ -15,6 +15,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
@@ -34,20 +35,19 @@ public class HydroHelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	
-public HydroHelper(String datafile,String sheetname) {
-        
-        excelData = new ExcelReader(datafile,sheetname);
-        data = excelData.getExcelValue();
-        this.data = data;
-        if (Utilities.TestListener.report == null) {
-            report = new ExtenantReportUtils("Hydro");
-            report.createTestcase("HydroTestCases");
-        } else {
-            this.report = Utilities.TestListener.report;
-        }
-        
-    }
+	public HydroHelper(String datafile, String sheetname) {
+
+		excelData = new ExcelReader(datafile, sheetname);
+		data = excelData.getExcelValue();
+		this.data = data;
+		if (Utilities.TestListener.report == null) {
+			report = new ExtenantReportUtils("Hydro");
+			report.createTestcase("HydroTestCases");
+		} else {
+			this.report = Utilities.TestListener.report;
+		}
+
+	}
 
 	public void clickStoreLogo() {
 		try {
@@ -1686,10 +1686,10 @@ public HydroHelper(String datafile,String sheetname) {
 				}
 			}
 			Thread.sleep(9000);
-			//Common.actionsKeyPress(Keys.PAGE_DOWN);
+			// Common.actionsKeyPress(Keys.PAGE_DOWN);
 
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-		
+
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
@@ -2358,7 +2358,7 @@ public HydroHelper(String datafile,String sheetname) {
 		expectedResult = "credit card fields are filled with the data";
 		int errorTexts = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
 
-		Common.assertionCheckwithReport(errorTexts<=0, "validating the credit card information with valid data",
+		Common.assertionCheckwithReport(errorTexts <= 0, "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 	}
 
@@ -2434,7 +2434,7 @@ public HydroHelper(String datafile,String sheetname) {
 		}
 
 		expectedResult = "credit card fields are filled with the data";
-		String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 
 		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
@@ -2882,10 +2882,10 @@ public HydroHelper(String datafile,String sheetname) {
 		String shippingmethod = data.get(DataSet).get("Shippingmethods");
 		try {
 
-			Common.scrollIntoView("xpath", "//td[contains(text(),'"+shippingmethod+"')]");
+			Common.scrollIntoView("xpath", "//td[contains(text(),'" + shippingmethod + "')]");
 
-			Sync.waitElementClickable("xpath", "//td[contains(text(),'"+shippingmethod+"')]");
-			Common.javascriptclickElement("xpath", "//td[contains(text(),'"+shippingmethod+"')]");
+			Sync.waitElementClickable("xpath", "//td[contains(text(),'" + shippingmethod + "')]");
+			Common.javascriptclickElement("xpath", "//td[contains(text(),'" + shippingmethod + "')]");
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//input[@class='a-radio-button__input']");
 
@@ -2908,7 +2908,7 @@ public HydroHelper(String datafile,String sheetname) {
 						"Failed to select the" + shippingmethod);
 
 			} else if (shippingmethod.contains("2 Day")) {
-				
+
 				String selecetdshippingmethod = Common.findElement("xpath", "//input[@value='fedex_FEDEX_2_DAY']")
 						.getAttribute("aria-labelledby");
 				System.out.println(selecetdshippingmethod);
@@ -2930,10 +2930,9 @@ public HydroHelper(String datafile,String sheetname) {
 
 	public void Validate_Paymentpage(String dataSet) {
 		try {
-			
+
 			selectshippingmethod(dataSet);
-			
-			
+
 			Sync.waitElementClickable("xpath", "//button[contains(@class,'continue primary')]");
 			Common.javascriptclickElement("xpath", "//button[contains(@class,'continue primary')]");
 			Sync.waitPageLoad();
@@ -3816,324 +3815,335 @@ public HydroHelper(String datafile,String sheetname) {
 
 	}
 
-	public int getpageresponce(String url) throws MalformedURLException, IOException{
-		 HttpURLConnection c=(HttpURLConnection)new URL(url).openConnection();
-		   c.setRequestMethod("HEAD");
-		   c.connect();
-		   int r = c.getResponseCode();
-		   
-		   
-		   return r;   
+	public int getpageresponce(String url) throws MalformedURLException, IOException {
+		HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
+		c.setRequestMethod("HEAD");
+		c.connect();
+		int r = c.getResponseCode();
+
+		return r;
 	}
 
 	public void validate_Shop_Headermenu() throws InterruptedException {
-		
+
 		Thread.sleep(3000);
-    	String categoryname;
-    	try {
-    	List<WebElement> shopcategoryOptions=Common.findElements("xpath", "//ul[contains(@class,'level0 ')]//span[2]");
-    	
-    	System.out.println(shopcategoryOptions.size());
-    	for(int i=1;i<shopcategoryOptions.size();i++) {
-    		
-    		Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-1')]/a/span");
-    		Thread.sleep(5000);
-    		List<WebElement> shopcategoryOption=Common.findElements("xpath", "//li[contains(@class,'level1 nav-1')]/a/span[2]");
-    		categoryname =shopcategoryOption.get(i-1).getText();
-    		System.out.println(categoryname);
-    	    shopcategoryOption.get(i-1).click();
-    	    
-    	    List<WebElement> shopsubcategorylinks=Common.findElements("xpath", "//li[contains(@class,'level1 nav-1-"+i+"')]//li/a");
-    	    System.out.println(shopsubcategorylinks.size());
-    	    
-    	    for(int j=1;j<=shopsubcategorylinks.size();j++) {
-    	    	
-    	    	Sync.waitElementVisible("xpath", "//li[contains(@class,'level1 nav-1-"+i+"')]//li/a");
-    	    	Thread.sleep(2000);
-    	    //String subcategoryname=shopsubcategorylinks.get(j).getText();
-    	    	
-    	    String subcategoryname = Common.findElement("xpath", "(//li[contains(@class,'level1 nav-1-"+i+"')]//li/a)["+j+"]").getText();
-    	    	System.out.println(subcategoryname);
-    	    	//shopsubcategorylinks.get(j).click();
-    	    	Common.mouseOverClick("xpath", "(//li[contains(@class,'level1 nav-1-"+i+"')]//li/a)["+j+"]");
-    	    	
-    	    	Sync.waitPageLoad();
-    	        Sync.waitElementVisible("xpath", "//h1[contains(@class,'hero__headline')]");
-    	        
-    	        int  responcecode=getpageresponce(Common.getCurrentURL());
-    	        
-      	       System.out.println(responcecode);
-      	   
-      	    if(responcecode==200) {
-      	    	ExtenantReportUtils.addPassLog("Validating"+ subcategoryname +"Page  ", "click the shop linka navigating to "+subcategoryname +"Page", "successfully page navigating to "+subcategoryname +"PAGE", Common.getscreenShotPathforReport(subcategoryname));
-      	    }
-      	    else {
-      	    	
-      	    	 
-      	    	 
-      	    	 ExtenantReportUtils.addFailedLog("Validating Page URL "+ subcategoryname +"page", "click the shop linka navigating to "+subcategoryname +"Page ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport(subcategoryname));
-      	          Assert.fail();
-      	    }
-    	 
- 	      Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-1 category-item')]/a/span");
- 	    
+		String categoryname;
+		try {
+			List<WebElement> shopcategoryOptions = Common.findElements("xpath",
+					"//ul[contains(@class,'level0 ')]//span[2]");
 
- 	     List<WebElement> categoryOption=Common.findElements("xpath", "//li[contains(@class,'level1 nav-1')]/a/span[2]");
- 		categoryname =categoryOption.get(i-1).getText();
- 		System.out.println(categoryname);
- 		categoryOption.get(i-1).click();
-    	
-    	}}}
-    	catch(Exception |Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying Shop links", "user validating shop link ad sub links", "faield to load the shop links",Common.getscreenShotPathforReport("shoplinks"));
-			Assert.fail();
-			
-		} 
-   
-    	}	
-	
-public void Validate_Explore_Headermenu() throws InterruptedException {
-	
-	Thread.sleep(3000);
+			System.out.println(shopcategoryOptions.size());
+			for (int i = 1; i < shopcategoryOptions.size(); i++) {
 
-	try {
-	List<WebElement> ExplorecategoryOptions=Common.findElements("xpath", "//li[contains(@class,'level1 nav-2')]/a");
-	
-	System.out.println(ExplorecategoryOptions.size());
-	for(int i=1;i<=ExplorecategoryOptions.size();i++) {
-		
-		Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-2')]/a/span");
-		Thread.sleep(5000);
-		List<WebElement> ExplorecategoryOption=Common.findElements("xpath", "//li[contains(@class,'level1 nav-2')]/a/span");
-		String Explorecategoryname =ExplorecategoryOption.get(i-1).getText();
-		System.out.println(Explorecategoryname);
-		 	
-	    	Common.mouseOverClick("xpath", "(//li[contains(@class,'level1 nav-2')]/a/span)["+i+"]");
-	    	
-	    	Sync.waitPageLoad();
-	       // Sync.waitElementVisible("xpath", "//h1[contains(@class,'hero__headline')]");
-	        
-	        int  responcecode=getpageresponce(Common.getCurrentURL());
-	        
-  	       System.out.println(responcecode);
-  	   
-  	    if(responcecode==200) {
-  	    	ExtenantReportUtils.addPassLog("Validating"+ Explorecategoryname +"Page  ", "click the shop linka navigating to "+Explorecategoryname +"Page", "successfully page navigating to "+Explorecategoryname +"PAGE", Common.getscreenShotPathforReport(Explorecategoryname));
-  	    }
-  	    else {
-  	    	
-  	    	 
-  	    	 
-  	    	 ExtenantReportUtils.addFailedLog("Validating Page URL "+ Explorecategoryname +"page", "click the shop linka navigating to "+Explorecategoryname +"Page ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport(Explorecategoryname));
-  	         // Assert.fail();
-  	    }
-
-	      Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-2')]/a/span");
-	    
-
-	    
-	}}
-	catch(Exception |Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("verifying Shop links", "user validating shop link ad sub links", "faield to load the shop links",Common.getscreenShotPathforReport("shoplinks"));
-		Assert.fail();
-		
-	} 
-
-	}
-
-
-public void search_product1(String Dataset) throws Exception {
-	// TODO Auto-generated method stub
-	String product = data.get(Dataset).get("Products");
-	try {
-		Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-		String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-		Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-				"User should able to click on the search button", "Search expands to the full page",
-				"Sucessfully search bar should be expand");
-		Common.textBoxInput("xpath", "//input[@id='search']", product);
-		Common.actionsKeyPress(Keys.ENTER);
-	
-String find = Common.findElement("xpath", "//span[contains(text(),'32 oz Wide Mouth - Acai Purple')]").getText();
-System.out.println(find);
-
-Common.assertionCheckwithReport(find.equals("32 oz Wide Mouth - Acai Purple"), "validating the search functionality",
-				"enter product name will display in the search box", "user enter the product name in  search box",
-				"Failed to see the product name");
-
-	} catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the search functionality",
-				"enter product name will display in the search box",
-				" unable to enter the product name in  search box",
-				Common.getscreenShot("Failed to see the product name"));
-		Assert.fail();
-	
-	}
-}	
-		
-		public void addDeliveryAddress1(String dataSet) throws Exception {
-			// TODO Auto-generated method stub
-			try {
+				Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-1')]/a/span");
 				Thread.sleep(5000);
-				Sync.waitElementVisible("id", "customer-email");
-				Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
-			} catch (NoSuchElementException e) {
-				minicart_Checkout();
-				Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+				List<WebElement> shopcategoryOption = Common.findElements("xpath",
+						"//li[contains(@class,'level1 nav-1')]/a/span[2]");
+				categoryname = shopcategoryOption.get(i - 1).getText();
+				System.out.println(categoryname);
+				shopcategoryOption.get(i - 1).click();
 
-			}
-			String expectedResult = "email field will have email address";
-			try {
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
-	            int size = Common.findElements("id", "customer-email").size();
-	            Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,"Filled Email address", "unable to fill the email address");
-	            Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",data.get(dataSet).get("Street"));
-				String Text=Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
-				Sync.waitPageLoad();
-				Thread.sleep(5000);
-				Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",data.get(dataSet).get("City"));
-				System.out.println(data.get(dataSet).get("City"));
-				
-				Common.actionsKeyPress(Keys.PAGE_DOWN);
-				Thread.sleep(3000);
-				try {
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-					Thread.sleep(3000);
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				List<WebElement> shopsubcategorylinks = Common.findElements("xpath",
+						"//li[contains(@class,'level1 nav-1-" + i + "')]//li/a");
+				System.out.println(shopsubcategorylinks.size());
+
+				for (int j = 1; j <= shopsubcategorylinks.size(); j++) {
+
+					Sync.waitElementVisible("xpath", "//li[contains(@class,'level1 nav-1-" + i + "')]//li/a");
+					Thread.sleep(2000);
+					// String subcategoryname=shopsubcategorylinks.get(j).getText();
+
+					String subcategoryname = Common
+							.findElement("xpath", "(//li[contains(@class,'level1 nav-1-" + i + "')]//li/a)[" + j + "]")
+							.getText();
+					System.out.println(subcategoryname);
+					// shopsubcategorylinks.get(j).click();
+					Common.mouseOverClick("xpath",
+							"(//li[contains(@class,'level1 nav-1-" + i + "')]//li/a)[" + j + "]");
+
+					Sync.waitPageLoad();
+					Sync.waitElementVisible("xpath", "//h1[contains(@class,'hero__headline')]");
+
+					int responcecode = getpageresponce(Common.getCurrentURL());
+
+					System.out.println(responcecode);
+
+					if (responcecode == 200) {
+						ExtenantReportUtils.addPassLog("Validating" + subcategoryname + "Page  ",
+								"click the shop linka navigating to " + subcategoryname + "Page",
+								"successfully page navigating to " + subcategoryname + "PAGE",
+								Common.getscreenShotPathforReport(subcategoryname));
+					} else {
+
+						ExtenantReportUtils.addFailedLog("Validating Page URL " + subcategoryname + "page",
+								"click the shop linka navigating to " + subcategoryname + "Page ",
+								"unable to find page it showing 40 error",
+								Common.getscreenShotPathforReport(subcategoryname));
+						Assert.fail();
+					}
+
+					Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-1 category-item')]/a/span");
+
+					List<WebElement> categoryOption = Common.findElements("xpath",
+							"//li[contains(@class,'level1 nav-1')]/a/span[2]");
+					categoryname = categoryOption.get(i - 1).getText();
+					System.out.println(categoryname);
+					categoryOption.get(i - 1).click();
+
 				}
-				Thread.sleep(2000);
-				Common.textBoxInputClear("name", "postcode");
-				Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
-				Thread.sleep(5000);
-				
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-				Thread.sleep(5000);
-				Common.clickElement("xpath", "//input[@class='a-radio-button__input']");
-				
-		
-				expectedResult = "shipping address is filled in to the fields";
-			
-					ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
-							"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
 			}
-				
-					catch(Exception | Error e) {
-					ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
-							"failed to add a addres in the filled",
-							Common.getscreenShotPathforReport("failed to add a address"));
-					
-					Assert.fail();
-			}
-			
-		}
-		
-		
-public void Validate_invalid_Discount_code(String dataset) {
-	
-	//String cardnumber=data.get(dataset).get("Invaliddiscountcode");
-	
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying Shop links", "user validating shop link ad sub links",
+					"faield to load the shop links", Common.getscreenShotPathforReport("shoplinks"));
+			Assert.fail();
 
-	try 
-	{
-	
-	         Common.actionsKeyPress(Keys.PAGE_UP);
-            Common.scrollIntoView("xpath", "//span[contains(text(),'Add Discount Code')]");
+		}
+
+	}
+
+	public void Validate_Explore_Headermenu() throws InterruptedException {
+
+		Thread.sleep(3000);
+
+		try {
+			List<WebElement> ExplorecategoryOptions = Common.findElements("xpath",
+					"//li[contains(@class,'level1 nav-2')]/a");
+
+			System.out.println(ExplorecategoryOptions.size());
+			for (int i = 1; i <= ExplorecategoryOptions.size(); i++) {
+
+				Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-2')]/a/span");
+				Thread.sleep(5000);
+				List<WebElement> ExplorecategoryOption = Common.findElements("xpath",
+						"//li[contains(@class,'level1 nav-2')]/a/span");
+				String Explorecategoryname = ExplorecategoryOption.get(i - 1).getText();
+				System.out.println(Explorecategoryname);
+
+				Common.mouseOverClick("xpath", "(//li[contains(@class,'level1 nav-2')]/a/span)[" + i + "]");
+
+				Sync.waitPageLoad();
+				// Sync.waitElementVisible("xpath", "//h1[contains(@class,'hero__headline')]");
+
+				int responcecode = getpageresponce(Common.getCurrentURL());
+
+				System.out.println(responcecode);
+
+				if (responcecode == 200) {
+					ExtenantReportUtils.addPassLog("Validating" + Explorecategoryname + "Page  ",
+							"click the shop linka navigating to " + Explorecategoryname + "Page",
+							"successfully page navigating to " + Explorecategoryname + "PAGE",
+							Common.getscreenShotPathforReport(Explorecategoryname));
+				} else {
+
+					ExtenantReportUtils.addFailedLog("Validating Page URL " + Explorecategoryname + "page",
+							"click the shop linka navigating to " + Explorecategoryname + "Page ",
+							"unable to find page it showing 40 error",
+							Common.getscreenShotPathforReport(Explorecategoryname));
+					// Assert.fail();
+				}
+
+				Common.mouseOverClick("xpath", "//li[contains(@class,'level0 nav-2')]/a/span");
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying Shop links", "user validating shop link ad sub links",
+					"faield to load the shop links", Common.getscreenShotPathforReport("shoplinks"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void search_product1(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		try {
+			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+					"User should able to click on the search button", "Search expands to the full page",
+					"Sucessfully search bar should be expand");
+			Common.textBoxInput("xpath", "//input[@id='search']", product);
+			Common.actionsKeyPress(Keys.ENTER);
+
+			String find = Common.findElement("xpath", "//span[contains(text(),'32 oz Wide Mouth - Acai Purple')]")
+					.getText();
+			System.out.println(find);
+
+			Common.assertionCheckwithReport(find.equals("32 oz Wide Mouth - Acai Purple"),
+					"validating the search functionality", "enter product name will display in the search box",
+					"user enter the product name in  search box", "Failed to see the product name");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter product name will display in the search box",
+					" unable to enter the product name in  search box",
+					Common.getscreenShot("Failed to see the product name"));
+			Assert.fail();
+
+		}
+	}
+
+	public void addDeliveryAddress1(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+			Sync.waitElementVisible("id", "customer-email");
+			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+
+		}
+		String expectedResult = "email field will have email address";
+		try {
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+					data.get(dataSet).get("FirstName"));
+			int size = Common.findElements("id", "customer-email").size();
+			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+					"Filled Email address", "unable to fill the email address");
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//input[@class='a-radio-button__input']");
+
+			expectedResult = "shipping address is filled in to the fields";
+
+			ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
+					"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
+		}
+
+		catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
+					"failed to add a addres in the filled",
+					Common.getscreenShotPathforReport("failed to add a address"));
+
+			Assert.fail();
+		}
+
+	}
+
+	public void Validate_invalid_Discount_code(String dataset) {
+
+		// String cardnumber=data.get(dataset).get("Invaliddiscountcode");
+
+		try {
+
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.scrollIntoView("xpath", "//span[contains(text(),'Add Discount Code')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Add Discount Code')]");
 			Thread.sleep(5000);
-			
-			Common.clickElement("id","discount-code");
+
+			Common.clickElement("id", "discount-code");
 			Thread.sleep(5000);
 			Common.textBoxInput("id", "discount-code", data.get(dataset).get("Invaliddiscountcode"));
-			
-			Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
-			
-			Common.clickElement("xpath","//button[@value='Apply Discount']");
-			
-			Thread.sleep(1000);
-       String invalidcode = Common.findElement("xpath", "//div[@class='message message-error error']/div").getText();
-	
-	System.out.println(invalidcode);
-	Common.assertionCheckwithReport(invalidcode.contains("The coupon code isn't valid."), "validating the invalid discount code",
-			"invalid code should be entered", "Sucessfully showing the error message ",
-			"failed to showing the error message");
 
-	
-}
-catch(Exception | Error e)
-{
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("validating the invalid discount code",
-			"invalid code should be entered", "Sucessfully showing the error message",
-			Common.getscreenShot("failed to showing the error message"));
-	Assert.fail();
-}
-}
+			Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
+
+			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+
+			Thread.sleep(1000);
+			String invalidcode = Common.findElement("xpath", "//div[@class='message message-error error']/div")
+					.getText();
+
+			System.out.println(invalidcode);
+			Common.assertionCheckwithReport(invalidcode.contains("The coupon code isn't valid."),
+					"validating the invalid discount code", "invalid code should be entered",
+					"Sucessfully showing the error message ", "failed to showing the error message");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the invalid discount code", "invalid code should be entered",
+					"Sucessfully showing the error message",
+					Common.getscreenShot("failed to showing the error message"));
+			Assert.fail();
+		}
+	}
 
 	public void Validate_valid_Discount_code(String dataset) {
 
-		try 
-		{
-		
-				Thread.sleep(8000);
-				Sync.waitElementPresent("id", "discount-code");
-				Common.clickElement("id","discount-code");
-				Thread.sleep(4000);
-				Common.textBoxInput("id", "discount-code", data.get(dataset).get("validdiscountcode"));
-				
-				Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
-				
-				Common.clickElement("xpath","//button[@value='Apply Discount']");
-				//Sync.waitPageLoad();
-				Thread.sleep(1000);
-				String validcode = Common.findElement("xpath", "//div[@class='message message-success success']").getText();
+		try {
 
-		
-		System.out.println(validcode);
-		Common.assertionCheckwithReport(validcode.contains("success"), "validating the valid discount code",
-				"valid code should be entered", "Sucessfully showing the success message ",
-				"failed to showing the suceess message");
-	
-		
-	}
-	catch(Exception | Error e)
-	{
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the valid discount code",
-				"valid code should be entered", "Sucessfully showing the success message",
-				Common.getscreenShot("failed to showing the suceess message"));
-		Assert.fail();
+			Thread.sleep(8000);
+			Sync.waitElementPresent("id", "discount-code");
+			Common.clickElement("id", "discount-code");
+			Thread.sleep(4000);
+			Common.textBoxInput("id", "discount-code", data.get(dataset).get("validdiscountcode"));
+
+			Sync.waitElementPresent("xpath", "//button[@value='Apply Discount']");
+
+			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			// Sync.waitPageLoad();
+			Thread.sleep(1000);
+			String validcode = Common.findElement("xpath", "//div[@class='message message-success success']").getText();
+
+			System.out.println(validcode);
+			Common.assertionCheckwithReport(validcode.contains("success"), "validating the valid discount code",
+					"valid code should be entered", "Sucessfully showing the success message ",
+					"failed to showing the suceess message");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the valid discount code", "valid code should be entered",
+					"Sucessfully showing the success message",
+					Common.getscreenShot("failed to showing the suceess message"));
+			Assert.fail();
+		}
+
 	}
 
-}
 	public void verify_ordersummary_valid_discount_code() throws Exception {
-		try
-		{
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$", "");
+		try {
+			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping=Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']").replace("$", "");
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String discount=Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']").replace("-$", "");
+			String discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
+					.replace("-$", "");
 			Float discountvalue = Float.parseFloat(discount);
-			String Tax=Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
 			Float Taxvalue = Float.parseFloat(Tax);
-			String ordertotal=Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace("$", "");
-			
+			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+					.replace("$", "");
+
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total=(subtotalvalue+shippingvalue+Taxvalue)-discountvalue;
-		    String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-		    Float ExpectedTotalAmmount2lvalue = Float.parseFloat(ExpectedTotalAmmount2); 
-		    System.out.println(ordertotalvalue);
-		    System.out.println(ExpectedTotalAmmount2lvalue);
-		    
-		    	
-		    Common.assertionCheckwithReport(ExpectedTotalAmmount2lvalue.equals(ordertotalvalue),
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue) - discountvalue;
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			Float ExpectedTotalAmmount2lvalue = Float.parseFloat(ExpectedTotalAmmount2);
+			System.out.println(ordertotalvalue);
+			System.out.println(ExpectedTotalAmmount2lvalue);
+
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2lvalue.equals(ordertotalvalue),
 					"validating the order summary in the shipping  page",
 					"Order summary should be display in the shipping page and all fields should display",
 					"Successfully Order summary is displayed in the shipping page and fields are displayed",
@@ -4143,1702 +4153,1622 @@ catch(Exception | Error e)
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the order summary in the shipping page",
 					"Order summary should be display in the shipping page and all fields should display",
-					"Unabel to display the Order summary and fields are not displayed in the shipping page", Common.getscreenShot(
-							"Failed to display the order summary and fileds under order summary"));
+					"Unabel to display the Order summary and fields are not displayed in the shipping page",
+					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
 			Assert.fail();
 		}
-		
-		
-}
 
+	}
 
-	
-		
-			public void ClosADD() throws Exception{
-				   Thread.sleep(3000);
-				  try
-				  {
-					  int sizesframe=Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
-					  System.out.println(sizesframe);
-					    if(sizesframe>0){
-					    Common.actionsKeyPress(Keys.PAGE_UP);
-					   
+	public void ClosADD() throws Exception {
+		Thread.sleep(3000);
+		try {
+			int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+			System.out.println(sizesframe);
+			if (sizesframe > 0) {
+				Common.actionsKeyPress(Keys.PAGE_UP);
+
 //					    Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-					    Sync.waitElementPresent("xpath" , "//div[@class='sidebar-iframe-close']");
-					    Common.javascriptclickElement("xpath", "//div[@class='sidebar-iframe-close']");
-					    }
-					    else {
-					        int sizeofpopup=Common.findElements("id", "wpx-newsletter-popup").size();
-					        if(sizeofpopup>0){
-					            
-					            
-					            Sync.waitElementClickable("xpath" , "//button[@aria-label='close']");
-					            Common.clickElement("xpath" , "//button[@aria-label='close']");
-					    }
-					    }
-				  }
-				  catch(Exception | Error e)
-				  {
-					  e.printStackTrace();
-					  Assert.fail();
-				  }
-				   
-				   
-				}
-		    
-			public void click_MyAccount() {
-				// TODO Auto-generated method stub
-				try {
-					Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-					Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-					Common.clickElement("xpath", "//a[text()='My Account']");
-					Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
-							"validating the Navigation to the My account page",
-							"After Clicking on My account CTA user should be navigate to the my account page",
-							"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
-							"Failed to Navigate to the MY account page after Clicking on my account button");
+				Sync.waitElementPresent("xpath", "//div[@class='sidebar-iframe-close']");
+				Common.javascriptclickElement("xpath", "//div[@class='sidebar-iframe-close']");
+			} else {
+				int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
+				if (sizeofpopup > 0) {
 
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
-							"After Clicking on My account CTA user should be navigate to the my account page",
-							"Unable to Navigates the user to My account page after clicking on the my account CTA",
-							Common.getscreenShot(
-									"Failed to Navigate to the MY account page after Clicking on my account CTA"));
-					Assert.fail();
+					Sync.waitElementClickable("xpath", "//button[@aria-label='close']");
+					Common.clickElement("xpath", "//button[@aria-label='close']");
 				}
 			}
-			public void change_Shippingaddress_Addressbook(String Dataset) {
-				// TODO Auto-generated method stub
-				String firstname=data.get(Dataset).get("FirstName");
-				String secondname=data.get(Dataset).get("LastName");
-				String address=data.get(Dataset).get("Street");
-				String phonenumber=data.get(Dataset).get("phone");
-				String City=data.get(Dataset).get("City");
-				String region=data.get(Dataset).get("Region");
-			    String zipcode=data.get(Dataset).get("postcode");	
-			    String shipping=data.get(Dataset).get("Shipping address");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
 
-			 
-				try
-				{
-					Sync.waitPageLoad();
-					Common.clickElement("xpath", "//a[text()='Address Book']");
-					Sync.waitPageLoad();
-					Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
-							"validating the Navigation to the Address Book page",
-							"After Clicking on Address Book CTA user should be navigate to the Address Book page",
-							"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
-							"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
-					
-					String newaddress=Common.findElement("xpath", "//div[@class='block-content']//P").getText();
-					if(newaddress.contains("You have no other address"))
-					{
-						Common.clickElement("xpath", "//button[@title='Add New Address']");
-						Sync.waitPageLoad();	
-					    Sync.waitElementPresent("xpath", "//input[@name='firstname']");
-						Common.clickElement("xpath", "//input[@name='firstname']");
-						Common.textBoxInput("xpath", "//input[@name='firstname']",firstname);
-						Common.clickElement("xpath", "//input[@name='lastname']");
-						Common.textBoxInput("xpath", "//input[@name='lastname']",secondname);
-						Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
-						Common.clickElement("xpath", "//input[@title='Phone Number']");
-						Common.textBoxInput("xpath", "//input[@title='Phone Number']",phonenumber);
-						Common.clickElement("xpath", "//input[@title='Address Line 1']");
-						Common.textBoxInput("xpath", "//input[@title='Address Line 1']",address);
-						Common.clickElement("xpath", "//input[@title='City']");
-						Common.textBoxInput("xpath", "//input[@title='City']",City);
-						Common.clickElement("xpath", "//select[@name='region_id']");
-						Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
-						Common.clickElement("xpath", "//input[@name='postcode']");
-						Common.textBoxInput("xpath", "//input[@name='postcode']",zipcode);
-						Common.clickElement("xpath", "//label[@for='primary_shipping']");
-						Common.clickElement("xpath", "//button[@title='Save Address']");
-						String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-						
-				 Common.assertionCheckwithReport(message.equals("You saved the address."),
-									"validating the saved message after saving address in address book",
-									"Save address message should be displayed after the address saved in address book",
-									"Sucessfully address has been saved in the address book",
-									"Failed to save the address in the address book");
-						Shippingaddress_Addressbook("New ShippingAddress");
-					}
-					else
-					{
-						Shippingaddress_Addressbook("New ShippingAddress");
-				}
-				}
-				catch(Exception | Error e)
-				{
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating the checkbox for billing address and text for the shipping address",
-							"Checkbox should be display for the billing address and text should be display for the shipping address",
-							"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
-							Common.getscreenShot(
-									"Failed to display checkbox for billing address and fail to display text for shipping address"));
-					Assert.fail();
-				}
-				
-			}
+	}
 
-			public void Shippingaddress_Addressbook(String Dataset) {
-				// TODO Auto-generated method stub
-				String firstname=data.get(Dataset).get("FirstName");
-				String secondname=data.get(Dataset).get("LastName");
-				String address=data.get(Dataset).get("Street");
-				String phonenumber=data.get(Dataset).get("phone");
-				String City=data.get(Dataset).get("City");
-				String region=data.get(Dataset).get("Region");
-			    String zipcode=data.get(Dataset).get("postcode");	
-			    String shipping=data.get(Dataset).get("Shipping address");
-			    try
-			    {
-				Common.clickElement("xpath", "//a[@title='Change Shipping Address']");
-				Sync.waitPageLoad();	
-			    Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+	public void click_MyAccount() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+	}
+
+	public void change_Shippingaddress_Addressbook(String Dataset) {
+		// TODO Auto-generated method stub
+		String firstname = data.get(Dataset).get("FirstName");
+		String secondname = data.get(Dataset).get("LastName");
+		String address = data.get(Dataset).get("Street");
+		String phonenumber = data.get(Dataset).get("phone");
+		String City = data.get(Dataset).get("City");
+		String region = data.get(Dataset).get("Region");
+		String zipcode = data.get(Dataset).get("postcode");
+		String shipping = data.get(Dataset).get("Shipping address");
+
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='Address Book']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
+					"validating the Navigation to the Address Book page",
+					"After Clicking on Address Book CTA user should be navigate to the Address Book page",
+					"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
+					"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
+
+			String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
+			if (newaddress.contains("You have no other address")) {
+				Common.clickElement("xpath", "//button[@title='Add New Address']");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
 				Common.clickElement("xpath", "//input[@name='firstname']");
-				Common.textBoxInput("xpath", "//input[@name='firstname']",firstname);
+				Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
 				Common.clickElement("xpath", "//input[@name='lastname']");
-				Common.textBoxInput("xpath", "//input[@name='lastname']",secondname);
+				Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
 				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
 				Common.clickElement("xpath", "//input[@title='Phone Number']");
-				Common.textBoxInput("xpath", "//input[@title='Phone Number']",phonenumber);
+				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
 				Common.clickElement("xpath", "//input[@title='Address Line 1']");
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']",address);
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
-				Common.textBoxInput("xpath", "//input[@title='City']",City);
+				Common.textBoxInput("xpath", "//input[@title='City']", City);
 				Common.clickElement("xpath", "//select[@name='region_id']");
 				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
 				Common.clickElement("xpath", "//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//input[@name='postcode']",zipcode);
-			  String checkbox=Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
-			  String text=Common.findElement("xpath", "//div[@class='message info']//span").getText();
-			  Common.assertionCheckwithReport(checkbox.equals("checkbox") && text.equals("This is your default shipping address.") ,
-						"validating the checkbox for billing address and text for the shipping address",
-						"Checkbox should be display for the billing address and text should be display for the shipping address",
-						"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
-						"Failed to display checkbox for billing address and fail to display text"+text+"for shipping address");
-			  Common.clickElement("xpath", "//button[@title='Save Address']");
-			  Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-			  String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			  String shippingaddress=Common.findElement("xpath", "//div[contains(@class,'box box-address-s')]//address").getText();
-			  Common.assertionCheckwithReport(shippingaddress.equals(shipping)&&message.equals("You saved the address."),
-						"validating the checkbox for billing address and text for the shipping address",
-						"Checkbox should be display for the billing address and text should be display for the shipping address",
-						"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
-						"Failed to display checkbox for billing address and fail to display text"+text+"for shipping address");
-			    }
-			    catch(Exception | Error e)
-			    {
-			    	e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating the checkbox for billing address and text for the shipping address",
-							"Checkbox should be display for the billing address and text should be display for the shipping address",
-							"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
-							Common.getscreenShot(
-									"Failed to display checkbox for billing address and fail to display text for shipping address"));
-					Assert.fail();
-			    }
-				
+				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+				Common.clickElement("xpath", "//label[@for='primary_shipping']");
+				Common.clickElement("xpath", "//button[@title='Save Address']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+				Common.assertionCheckwithReport(message.equals("You saved the address."),
+						"validating the saved message after saving address in address book",
+						"Save address message should be displayed after the address saved in address book",
+						"Sucessfully address has been saved in the address book",
+						"Failed to save the address in the address book");
+				Shippingaddress_Addressbook("New ShippingAddress");
+			} else {
+				Shippingaddress_Addressbook("New ShippingAddress");
 			}
-
-			
-			
-			
-			
-			public String ValidateAccountcreationeyeicon(String dataSet) {
-				// TODO Auto-generated method stub
-				String Email = "";
-				try {
-
-					Sync.waitPageLoad();
-					Sync.waitElementPresent("id", "firstname");
-					Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
-					Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
-					
-					Common.textBoxInput("id", "email_address", Utils.getEmailid());
-					Email=Common.findElement("id","email_address" ).getAttribute("value");
-					System.out.println(Email);
-					
-					Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-					String classes = Common.findElement("id", "validation-classes").getAttribute("class");
-					String textlength = Common.findElement("id", "validation-length").getAttribute("class");
-					Common.actionsKeyPress(Keys.PAGE_DOWN);
-
-					Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete"),
-							"Password is validated", "password should be validate", "failed to validate password");
-					Common.actionsKeyPress(Keys.UP);
-					
-					String eyeicon = Common.findElement("xpath", "(//span[contains(@class,'m-password')])[1]").getAttribute("class");
-					System.out.println(eyeicon);
-					String password = Common.findElement("xpath", "//input[@id='password']").getAttribute("type");
-
-					Common.assertionCheckwithReport(eyeicon.contains("hide") && password.equals("password"),
-							"validating eye icon password filed", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
-							"faield to display eye icon hide");
-					Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']");
-					String Eyeicon = Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
-					System.out.println(Eyeicon);
-					String Text = Common.findElement("xpath", "//input[@id='password']").getAttribute("type");
-					Common.assertionCheckwithReport(Eyeicon.contains("show") && Text.equals("text"),
-							"validating eye icon password field", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
-							"faield to display eye icon hide");
-					
-
-					Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password"));
-					Confirmpassword_eyeicon_validation();
-					
-					
-
-					
-					
-				}
-
-				catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating the  my Account page",
-							"User should able to navigate to the my account page after clicking on submit button",
-							"unable to navigate to the My account page",
-							Common.getscreenShot("failed to navigates to My Account Page"));
-					Assert.fail();
-				}
-				return Email;
-				
-			}
-
-			public void Confirmpassword_eyeicon_validation() {
-				// TODO Auto-generated method stub
-
-				try {
-
-					String eyeicon = Common.findElement("xpath", "(//span[contains(@class,'m-password')])[2]").getAttribute("class");
-					System.out.println(eyeicon);
-					String password = Common.findElement("xpath", "//input[@id='password-confirmation']").getAttribute("type");
-
-					Common.assertionCheckwithReport(eyeicon.contains("hide") && password.equals("password"),
-							"validating eye icon password filed", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
-							"faield to display eye icon hide");
-					Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']");
-					String Eyeicon = Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
-					System.out.println(Eyeicon);
-					String Text = Common.findElement("xpath", "//input[@id='password-confirmation']").getAttribute("type");
-					Common.assertionCheckwithReport(Eyeicon.contains("show") && Text.equals("text"),
-							"validating eye icon password field", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
-							"faield to display eye icon hide");
-
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating confirm password eyeicon",
-							"password able to display", "unable to display password",
-							Common.getscreenShotPathforReport("faield to gdisplay password"));
-					Assert.fail();
-
-				}
-
-			}
-
-			public void Validate_Createaccount_signup_newsletter() {
-				// TODO Auto-generated method stub
-
-				try {
-
-					Sync.waitPageLoad();
-					int size = Common.findElements("xpath", "//input[@name='is_subscribed']").size();
-					Common.assertionCheckwithReport(size > 0 ,
-							"validating signup newsletter checkbox", "signup newsletter check box should be display",
-							"able to display signup newsletter checkbox", "faield to signup news letter checkbox");
-
-					Common.clickElement("xpath", "//input[@name='is_subscribed']");
-
-					Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
-					Common.clickElement("xpath", "//button[@title='Sign Up']");
-					Sync.waitPageLoad();
-					Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper h2']");
-					
-					Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
-							"validating the  my Account page",
-							"User should able to navigate to the my account page after clicking on submit button",
-							"Sucessfully navigate to the My account page ", "failed to navigates to My Account Page");
-					ClosADD();
-
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating signup newsletter checkbox",
-							"signup newsletter check box should be display", "unable to display signup newsletter checkbox",
-							Common.getscreenShotPathforReport("faield to signup news letter checkbox"));
-					Assert.fail();
-
-				}
-
-
-			}
-
-			public void Admin_signin(String dataSet) {
-				// TODO Auto-generated method stub
-
-				try {
-					Common.openNewTab();
-					Common.oppenURL(data.get(dataSet).get("AdminURL"));
-					Sync.waitPageLoad();
-					Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-					Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
-					Sync.waitPageLoad(30);
-					Sync.waitElementPresent("name", "loginfmt");
-					Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("Adminusername"));
-					Common.clickElement("id", "idSIButton9");
-					Sync.waitPageLoad();
-					Thread.sleep(3000);
-					Sync.waitElementPresent(30, "name", "passwd");
-					Common.textBoxInput("name", "passwd", data.get(dataSet).get("Adminpassword"));
-					Common.clickElement("id", "idSIButton9");
-					Sync.waitPageLoad();
-
-					Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
-					if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
-						Common.javascriptclickElement("id", "KmsiCheckboxField");
-					}
-					Sync.waitElementClickable("id", "idSIButton9");
-					Common.mouseOverClick("id", "idSIButton9");
-					Sync.waitPageLoad();
-					Thread.sleep(5000);
-					Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
-
-					Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
-							"To Validate the Admin is landing on the Dashboard after successfull Signin",
-							"After clicking on sigin button admin should navigate to the dashboard",
-							"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
-							"Admin failed to display the dashboard after clicking on the signin button");
-
-				} catch (Exception e) {
-					e.printStackTrace();
-
-					ExtenantReportUtils.addFailedLog(
-							"To Validate the Admin is landing on the Dashboard after successfull Signin",
-							"After clicking on sigin button admin should navigate to the dashboard",
-							"Admin failed to navigate to the dashboard after click on signin button",
-							"Admin failed to land on the dashboard after clicking on the signin button");
-					Assert.fail();
-
-				}
-
-
-			}
-
-			public void Customers() {
-				// TODO Auto-generated method stub
-				try {
-					Sync.waitPageLoad();
-					Common.clickElement("id", "menu-magento-customer-customer");
-					Sync.waitElementPresent("id", "menu-magento-customer-customer");
-					String customers = Common.findElement("xpath", "//strong[contains(text(),'Customers')]").getText();
-					System.out.println(customers);
-					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-					Common.assertionCheckwithReport(customers.equals("Customers"),
-							"To Validate the customers menu is displayed",
-							"should display the customer menu after clicking on the customers",
-							"Customers field menu is displayed after a click on the customers button",
-							"Failed to display customers menu");
-
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("To Validate the customers menu is displayed",
-							"should display the customer menu after clicking on the customers",
-							"unable to display Customers field menu after a click on the customers button",
-							"Failed to display customers field menu");
-					Assert.fail();
-				}
-
-
-			}
-
-			public void Allcustomers() {
-				// TODO Auto-generated method stub
-				try {
-					Sync.waitElementPresent("xpath", "//span[text()='All Customers']");
-					Common.clickElement("xpath", "//span[text()='All Customers']");
-					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-					Common.assertionCheckwithReport(Common.getPageTitle().equals("Customers / Customers / Magento Admin"),
-							"Validating customers field page navigation ",
-							"After clicking all customers it will navigate to the Customer field page",
-							"Successfully navigate to the Customer field page ",
-							"Failed to navigate to the Customer field page");
-
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
-							"After clicking all customers it will navigate Customer field page",
-							"Unable to navigate to the Customer filed page",
-							Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
-					Assert.fail();
-
-				}
-
-
-				
-			}
-			public void Viewcustomer(String Dataset) {
-				// TODO Auto-generated method stub
-				try {
-					Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
-					Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-					Common.textBoxInput("xpath", "//input[@name='email']",Dataset);
-					Common.actionsKeyPress(Keys.ENTER);
-					Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-					String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
-					String EMAIL=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[3]").getText();
-					
-					Common.assertionCheckwithReport(records.contains("1")&& EMAIL.equals(Dataset),
-							"Validating customers field page navigation ",
-							"After clicking all customers it will navigate to the Customer field page",
-							"Successfully navigate to the Customer field page ",
-							"Failed to navigate to the Customer field page");
-					
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
-							"After clicking all customers it will navigate Customer field page",
-							"Unable to navigate to the Customer filed page",
-							Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
-					Assert.fail();
-
-				}}
-			public void Clearfilter() {
-				// TODO Auto-generated method stub
-				try {
-					Sync.waitPageLoad();
-					Thread.sleep(4000);
-					Sync.waitElementPresent("xpath", "//button[text()='Clear all']");
-					Common.javascriptclickElement("xpath", "//button[text()='Clear all']");
-					String clear = Common.findElement("xpath", "//div[contains(@class,'admin__data-grid-filters-c')]")
-							.getAttribute("class");
-					System.out.println(clear);
-					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-					Common.assertionCheckwithReport(clear.contains("current"), "To Validate the Clear filters ",
-							"Should able to clear all the filters ", "Successfully all the filters are cleared ",
-							"Failed to Clear all the filters");
-
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("To Validate the Clear filters ", "Should able to clear all the filters ",
-							"Unable to clear all the filters ",
-							Common.getscreenShotPathforReport("Failed to Clear all the filters"));
-					Assert.fail();
-
-				}
-
-			}
-
-				public void Marketing() {
-					// TODO Auto-generated method stub
-					try {
-						Sync.waitPageLoad();
-						Common.clickElement("id", "menu-magento-backend-marketing");
-						Sync.waitElementPresent("id", "menu-magento-backend-marketing");
-						String Marketing = Common.findElement("xpath", "//strong[contains(text(),'Marketing')]").getText();
-						System.out.println(Marketing);
-						Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-						Common.assertionCheckwithReport(Marketing.equals("Marketing"),
-								"To Validate the Marketing is displayed",
-								"should display the Marketing menu after clicking on the Marketing",
-								"Marketing field menu is displayed after a click on the Marketing button",
-								"Failed to display Marketing menu");
-
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("To Validate the Marketing menu is displayed",
-								"should display the Marketing menu after clicking on the Marketing",
-								"unable to display Marketing field menu after a click on the Marketing button",
-								"Failed to display Marketing field menu");
-						Assert.fail();
-					}
-
-
-				}
-
-				public void Admin_newsletter_validation(String Dataset ) {
-					// TODO Auto-generated method stub
-					try {
-						Sync.waitElementPresent("xpath", "//span[text()='Newsletter Subscribers']");
-						Common.clickElement("xpath", "//span[text()='Newsletter Subscribers']");
-						Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-						Common.assertionCheckwithReport(Common.getPageTitle().contains("Newsletter Subscribers"),
-								"Validating customers field page navigation ",
-								"After clicking all customers it will navigate to the Customer field page",
-								"Successfully navigate to the Customer field page ",
-								"Failed to navigate to the Customer field page");
-						Common.clickElement("xpath", "//button[@title='Search']");
-						
-						Common.textBoxInput("xpath", "//input[@name='email']",Dataset);
-						Common.actionsKeyPress(Keys.ENTER);
-						String subscribe = Common.findElement("xpath", "//td[@class=' col-status col-status  ']").getText();
-						
-						Common.assertionCheckwithReport(subscribe.equals("Subscribed"),
-								"Validating customer subscribtion ",
-								"customer should be subscribed for new letter subscrpition",
-								"Successfully subscribed new letter subscrption ",
-								"Failed to subscribe new letter subscription");
-						Common.clickElement("xpath", "//button[@title='Reset Filter']");
-						
-						
-
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("Validating customer subscribtion ",
-								"customer should be subscribed for new letter subscrpition",
-								"unable to subscribe new letter subscrption ",
-						
-								Common.getscreenShotPathforReport("Failed to navigate newsletter filed page"));
-						Assert.fail();
-
-					}
-
-
-					
-				}
-				public void change_Billingaddress_Addressbook(String Dataset) {
-					// TODO Auto-generated method stub
-					String firstname=data.get(Dataset).get("FirstName");
-					String secondname=data.get(Dataset).get("LastName");
-					String address=data.get(Dataset).get("Street");
-					String phonenumber=data.get(Dataset).get("phone");
-					String City=data.get(Dataset).get("City");
-					String region=data.get(Dataset).get("Region");
-				    String zipcode=data.get(Dataset).get("postcode");	
-				    String shipping=data.get(Dataset).get("Shipping address");
-
-				 
-					try
-					{
-						Sync.waitPageLoad();
-						Common.clickElement("xpath", "//a[text()='Address Book']");
-						Sync.waitPageLoad();
-						Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
-								"validating the Navigation to the Address Book page",
-								"After Clicking on Address Book CTA user should be navigate to the Address Book page",
-								"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
-								"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
-						
-						String newaddress=Common.findElement("xpath", "//div[@class='block-content']//P").getText();
-						if(newaddress.contains("You have no other address"))
-						{
-							Common.clickElement("xpath", "//button[@title='Add New Address']");
-							Sync.waitPageLoad();	
-						    Sync.waitElementPresent("xpath", "//input[@name='firstname']");
-							Common.clickElement("xpath", "//input[@name='firstname']");
-							Common.textBoxInput("xpath", "//input[@name='firstname']",firstname);
-							Common.clickElement("xpath", "//input[@name='lastname']");
-							Common.textBoxInput("xpath", "//input[@name='lastname']",secondname);
-							Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
-							Common.clickElement("xpath", "//input[@title='Phone Number']");
-							Common.textBoxInput("xpath", "//input[@title='Phone Number']",phonenumber);
-							Common.clickElement("xpath", "//input[@title='Address Line 1']");
-							Common.textBoxInput("xpath", "//input[@title='Address Line 1']",address);
-							Common.clickElement("xpath", "//input[@title='City']");
-							Common.textBoxInput("xpath", "//input[@title='City']",City);
-							Common.clickElement("xpath", "//select[@name='region_id']");
-							Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
-							Common.clickElement("xpath", "//input[@name='postcode']");
-							Common.textBoxInput("xpath", "//input[@name='postcode']",zipcode);
-							Common.clickElement("xpath", "//label[@for='primary_billing']");
-							Common.clickElement("xpath", "//button[@title='Save Address']");
-							String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-							
-					 Common.assertionCheckwithReport(message.equals("You saved the address."),
-										"validating the saved message after saving address in address book",
-										"Save address message should be displayed after the address saved in address book",
-										"Sucessfully address has been saved in the address book",
-										"Failed to save the address in the address book");
-							Billingaddress_Addressbook(Dataset);
-						}
-						else
-						{
-							Billingaddress_Addressbook(Dataset);
-					}
-					}
-					catch(Exception | Error e)
-					{
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("validating the checkbox for billing address and text for the shipping address",
-								"Checkbox should be display for the billing address and text should be display for the shipping address",
-								"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
-								Common.getscreenShot(
-										"Failed to display checkbox for billing address and fail to display text for shipping address"));
-						Assert.fail();
-					}
-					
-				
-				}
-				public void Billingaddress_Addressbook(String Dataset) {
-					// TODO Auto-generated method stub
-					String firstname=data.get(Dataset).get("FirstName");
-					String secondname=data.get(Dataset).get("LastName");
-					String address=data.get(Dataset).get("Street");
-					String phonenumber=data.get(Dataset).get("phone");
-					String City=data.get(Dataset).get("City");
-					String region=data.get(Dataset).get("Region");
-				    String zipcode=data.get(Dataset).get("postcode");	
-				    String shipping=data.get(Dataset).get("Shipping address");
-				    try
-				    {
-					Common.clickElement("xpath", "//a[@title='Change Billing Address']");
-					Sync.waitPageLoad();	
-				    Sync.waitElementPresent("xpath", "//input[@name='firstname']");
-					Common.clickElement("xpath", "//input[@name='firstname']");
-					Common.textBoxInput("xpath", "//input[@name='firstname']",firstname);
-					Common.clickElement("xpath", "//input[@name='lastname']");
-					Common.textBoxInput("xpath", "//input[@name='lastname']",secondname);
-					Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
-					Common.clickElement("xpath", "//input[@title='Phone Number']");
-					Common.textBoxInput("xpath", "//input[@title='Phone Number']",phonenumber);
-					Common.clickElement("xpath", "//input[@title='Address Line 1']");
-					Common.textBoxInput("xpath", "//input[@title='Address Line 1']",address);
-					Common.clickElement("xpath", "//input[@title='City']");
-					Common.textBoxInput("xpath", "//input[@title='City']",City);
-					Common.clickElement("xpath", "//select[@name='region_id']");
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
-					Common.clickElement("xpath", "//input[@name='postcode']");
-					Common.textBoxInput("xpath", "//input[@name='postcode']",zipcode);
-				  String checkbox=Common.findElement("xpath", "//input[@id='primary_shipping']").getAttribute("type");
-				  String text=Common.findElement("xpath", "//div[@class='message info']//span").getText();
-				  System.out.println(text);
-				  Common.assertionCheckwithReport(checkbox.equals("checkbox") && text.equals("This is your default billing address.") ,
-							"validating the checkbox for billing address and text for the shipping address",
-							"Checkbox should be display for the billing address and text should be display for the shipping address",
-							"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
-							"Failed to display checkbox for billing address and fail to display text"+text+"for shipping address");
-				  Common.clickElement("xpath", "//button[@title='Save Address']");
-				  Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-				  String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				String shippingaddress=Common.findElement("xpath", "//div[contains(@class,'box box-address-bil')]//address").getText();
-				 System.out.println(shippingaddress);
-				 
-				Common.assertionCheckwithReport(shippingaddress.equals(shipping)&&message.equals("You saved the address."),
-							"validating the checkbox for shipping address and text for the billing address",
-							"Checkbox should be display for the shipping address and text should be display for the billing address",
-							"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
-							"Failed to display checkbox for shipping address and fail to display text"+text+"for billing address");
-				    }
-				    catch(Exception | Error e)
-				    {
-				    	e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("validating the checkbox for shipping address and text for the billing address",
-								"Checkbox should be display for the shipping address and text should be display for the billing address",
-								"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
-								Common.getscreenShot(
-										"Failed to display checkbox for shipping address and fail to display text for billing address"));
-						Assert.fail();
-				    }
-					
-				}
-				public void remove_Allproducts_minicart() {
-
-					try {
-						Sync.waitElementClickable("xpath", "//span[contains(@class,'icon-header__cart')]");
-						Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__cart')]");
-
-						int numberofproducts = Common.findElements("xpath", "//span[contains(@class,'cart__remove')]").size();
-
-						if (numberofproducts > 0) {
-							for (int i = 0; i < numberofproducts; i++) {
-
-								String productscount = Common
-										.findElement("xpath", "//p[@class='c-mini-cart__total-counter']/strong").getText();
-								int count = Integer.parseInt(productscount);
-								System.out.println(count);
-								String productname = Common.findElement("xpath", "//div[@class='m-mini-product-card__name']/a")
-										.getText();
-								System.out.println(productname);
-								Common.scrollIntoView("xpath", "//span[contains(@class,'cart__remove')]");
-								Common.javascriptclickElement("xpath", "//span[contains(@class,'cart__remove')]");
-								Sync.waitElementVisible("xpath", "//aside[@class='modal-popup confirm _show']");
-								Common.javascriptclickElement("xpath", "//button[contains(@class,'action-accept')]");
-								Sync.waitElementInvisible("xpath", "//a[text()='" + productname + "']");
-								Thread.sleep(4000);
-								int updatedproductcount = Common
-										.findElements("xpath", "//p[@class='c-mini-cart__total-counter']/strong").size();
-								if (updatedproductcount <=0) {
-									break;
-								}
-								String updatedprdctcount = Common
-										.findElement("xpath", "//p[@class='c-mini-cart__total-counter']/strong").getText();
-								int updatedcount = Integer.parseInt(updatedprdctcount);
-								System.out.println(updatedcount);
-								Common.assertionCheckwithReport(updatedcount == (count - 1) || updatedcount == 0,
-										"To validate the products are deleted from the mini cart",
-										"Product should be deleted from the minicart", "product deleted from mini cart",
-										"Failed to remove product from mini cart");
-
-							}
-
-						}
-						Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close ')]");
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("To validate the products are deleted from the mini cart",
-								"Product should be deleted from the minicart", "Not able to delete the product form minicarrt",
-								Common.getscreenShot("Failed to delete the product form minicart"));
-						Assert.fail();
-					}
-
-				}
-				
-				public void setup_DefaultShipping_Billingaddress() {
-					try {
-						Common.scrollIntoView("xpath", "//div[contains(@class,'dashboard-addresses')]");
-
-						String Defaultshipping = Common.findElement("xpath", "//div[contains(@class,'shipping')]//address")
-								.getText();
-						//System.out.println(Defaultshipping);
-						String DefaultBilling = Common.findElement("xpath", "//div[contains(@class,'billing')]//address").getText();
-						//System.out.println(DefaultBilling);
-						if (DefaultBilling.contains(Defaultshipping)) {
-							Common.assertionCheckwithReport(true, "To valifdate the default shipping and Billing address are same",
-									"Default Billing and Shipping address Should be same",
-									"Default Billing and Shipping address are same",
-									"default Billing and shipping addresses are not same");
-						} else {
-
-							Sync.waitElementVisible("xpath", "//div[contains(@class,'billing')]//a/span");
-							Common.mouseOverClick("xpath", "//div[contains(@class,'billing')]//a/span");
-
-							Sync.waitPageLoad();
-							Sync.waitElementVisible(30, "id", "form-validate");
-							Common.scrollIntoView("xpath", "//div[contains(@class,'shipping a-checkbox')]");
-							Common.mouseOverClick("xpath", "//div[contains(@class,'shipping a-checkbox')]//span");
-
-							Common.clickElement("xpath", "//button[contains(@class,'submit primary')]");
-							Sync.waitPageLoad();
-							Sync.waitElementVisible("xpath", "//div[contains(@class,'message-success')]/div");
-							String sucessmessage = Common.findElement("xpath", "//div[contains(@class,'message-success')]/div")
-									.getText();
-							Common.scrollIntoView("xpath", "//div[contains(@class,'dashboard-addresses')]");
-							String updatedDefaultshipping = Common
-									.findElement("xpath", "//div[contains(@class,'shipping')]//address").getText();
-							String updatedDefaultBilling = Common.findElement("xpath", "//div[contains(@class,'billing')]//address")
-									.getText();
-
-							Common.assertionCheckwithReport(
-									sucessmessage.contains("You saved the address.")
-											&& updatedDefaultshipping.contains(updatedDefaultBilling),
-									"To validate the default shipping and Billing address are same",
-									"Default Billing and Shipping address Should be same",
-									"Default Billing and Shipping address are same",
-									"default Billing and shipping addresses are not same");
-						}
-
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog(
-								"validating the checkbox for billing address and text for the shipping address",
-								"Checkbox should be display for the billing address and text should be display for the shipping address",
-								"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
-								Common.getscreenShot(
-										"Failed to display checkbox for billing address and fail to display text for shipping address"));
-						Assert.fail();
-					}
-
-				}
-				
-	
-
-				public void Updatebillingaddress(String dataSet) {
-					String FirstName = data.get(dataSet).get("FirstName");
-					String LastName = data.get(dataSet).get("LastName");
-					String Street = data.get(dataSet).get("Street");
-					String City = data.get(dataSet).get("City");
-					String Region = data.get(dataSet).get("Region");
-					String postcode = data.get(dataSet).get("postcode");
-					String phone = data.get(dataSet).get("phone");
-					String Country = data.get(dataSet).get("Country");
-
-					try {
-						
-						
-						Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-						int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-
-						Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", "payment ,methods should be displayed",
-								"User unabel to land opaymentpage");
-						Common.clickElement("xpath", "//label[@for='stripe_payments']");
-						
-						/*
-						Sync.waitElementVisible("xpath", "//div[@class='payment-method stripe-payments']");
-						Common.javascriptclickElement("xpath", "//div[@class='payment-method stripe-payments']");
-
-						
-						if (!Common.findElement(By.xpath("//div[@class='items payment-methods']/div/div[2]"))
-								.isSelected()) {
-							System.out.println("The Payment method is selected");
-
-						}else {
-							Common.javascriptclickElement("xpath", "//div[@class='payment-method stripe-payments']");
-							
-						}
-						*/
-						Sync.waitElementInvisible(30, "xpath", "//div[@class='loader']/img[@alt='Loading...']");
-						String active = Common.findElement("xpath", "//div[@class='items payment-methods']/div/div[2]")
-								.getAttribute("class");
-									
-						Common.assertionCheckwithReport(active.contains("active"),
-								"To validate the default payment section is expanded", "default payment section should be expanded",
-								"default payment section is expanded", "Failed to expand the default payment section");
-						if (!Common.findElement(By.xpath("//div[contains(@class,'billing-address-same-as-shipping')]//span"))
-								.isSelected()) {
-							Common.findElement(By.xpath("//div[contains(@class,'billing-address-same-as-shipping')]//span"))
-									.click();
-
-							Sync.waitElementVisible("name", "billing_address_id");
-							Common.dropdown("name", "billing_address_id", SelectBy.TEXT, "New Address");
-							populate_Shippingaddress_fields("AccountDetails");
-
-							Common.scrollIntoView("id", "billing-save-in-address-book-stripe_payments");
-							Common.assertionCheckwithReport(
-									Common.findElement(By.id("billing-save-in-address-book-stripe_payments")).isSelected() == true,
-									"To validate the Save in address book checkbox is selected",
-									"Save in address book checkbox should be selected", "Save in address book checkbox is selected",
-									"Failed to select the Save in address book checkbox is selected");
-
-							Common.javascriptclickElement("xpath", "//button[contains(@class,'action-update')]");
-
-						} else {
-							System.out.println("the shipping and billing address is not same");
-							Assert.fail();
-						}
-
-						String updatedfullname = Common
-								.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p/strong").getText();
-						System.out.println(updatedfullname);
-
-						String updateddaddress = Common
-								.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p[2]").getText();
-						System.out.println(updateddaddress);
-						String updatedtelephone = Common
-								.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p[3]").getText();
-						System.out.println(updatedtelephone);
-
-						Common.assertionCheckwithReport(
-								updatedfullname.equals(FirstName + " " + LastName)
-										&& updateddaddress
-												.equals(Street + "\n" + City + ", " + Region + " " + postcode + "\n" + Country)
-										&& updatedtelephone.contains(phone),
-
-								"validate the user is able to update the new address in the shipping page",
-								"user should able to update the new address in the shipping page",
-								"user successfuly update the new address in the shipping page",
-								"failed to update the new address in the shipping page");
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog(
-								"validating the checkbox for billing address and text for the shipping address",
-								"Checkbox should be display for the billing address and text should be display for the shipping address",
-								"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
-								Common.getscreenShot(
-										"Failed to display checkbox for billing address and fail to display text for shipping address"));
-						Assert.fail();
-					}
-
-				}
-				
-				public void Validate_Accountinformation_change_email(String Dataset) {
-					// TODO Auto-generated method stub
-					
-					
-					try {
-						Sync.waitPageLoad();
-						Common.clickElement("xpath", "//a[text()='Account Information']");
-						Sync.waitPageLoad();
-
-						Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
-								"validating the Navigation to the Account information page",
-								"After Clicking on Account information CTA user should be navigate to the AAccount information page",
-								"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
-								"Failed to Navigate to the Account information page after Clicking on Account information CTA");
-						
-						Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-email')]//span//span");
-					Common.clickElement("xpath", "//button[contains(@class,'toggle-email')]//span//span"); 
-					
-					 String emailsection=Common.findElement("xpath", "//div[contains(@class,'collapsible-email')]").getAttribute("class");
-					  System.out.println(emailsection);
-					  
-						Common.assertionCheckwithReport(emailsection.contains("active"),
-								"validating the email section when we click on edit",
-								"email section field should be displayed when we click on edit",
-								"Sucessfully emailsection  is displayed when we click on edit",
-								"Failed to display section when we click on edit");
-					//div[contains(@class,'collapsible-email')]
-					  String Newemail=Common.findElement("xpath", "//input[@name='email']").getAttribute("type");
-					  System.out.println(Newemail);
-					  String Currentpassword=Common.findElement("xpath", "(//input[@name='current_password'])[1]").getAttribute("type");
-						System.out.println(Currentpassword);
-						Common.assertionCheckwithReport(Newemail.equals("email")&&Currentpassword.equals("password"),
-								"validating the email input field and current password field",
-								"email input field should be displayed and current password filed should be displayed",
-								"Sucessfully email input field is displayed  and current password field is displayed",
-								"Failed to display email input field and current password field ");
-						validate_password_field(Dataset);
-						
-						
-						
-						
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
-								"After Clicking on Account information CTA user should be navigate to the AAccount information page",
-								"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
-								Common.getscreenShotPathforReport("Failed to navigate account information page"));
-						Assert.fail();
-					}
-						
-					
-					
-					
-				}
-				
-				public void validate_password_field(String Dataset) {
-					// TODO Auto-generated method stub
-					try {
-				
-						Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[1]");
-						
-						
-						Common.textBoxInput("xpath", "(//input[@name='current_password'])[1]", data.get(Dataset).get("Password"));
-						
-						String passworddots = Common.findElement("xpath", "(//input[@name='current_password'])[1]").getAttribute("type");
-						System.out.println(passworddots);
-
-						Common.assertionCheckwithReport(passworddots.contains("password"),"validating the passoword dot display",
-								"the password should be displed in dots",
-								"Sucessfully password disply in dots",
-								"Failed to display password in dots");
-						Common.actionsKeyPress(Keys.UP);
-						
-
-					} catch (Exception | Error e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("validating the passoword dot display",
-								"the password should be displed in dots",
-								"Sucessfully password disply in dots",
-						Common.getscreenShotPathforReport("Failed to navigate newsletter filed page"));
-						Assert.fail();
-
-					}
-
-
-					
-				}
-
-				public void validate_Accountinformation_invalid_email(String Dataset) {
-					// TODO Auto-generated method stub
-					
-					String errormessage = data.get(Dataset).get("errormessage");
-					try {
-						Sync.waitElementPresent("xpath", "//input[@title='Email']");
-						//Common.textBoxInputClear("xpath", "//input[@title='Email']");
-						Common.textBoxInput("xpath", "//input[@title='Email']", data.get(Dataset).get("Email"));
-						Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-email')]//button[contains(@class,'save primary')]");
-						Sync.waitElementVisible(30, "xpath", "//div[@class='mage-error']");
-						String emailerror = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-						System.out.println(emailerror);
-						Common.assertionCheckwithReport(emailerror.equals(errormessage),
-								"To validate the error message when given invalid email or password",
-								"Should dispaly the error message " + errormessage, emailerror + "error message is displayed",
-								"Failed to display error message");
-						
-						
-						
-						
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
-								"Should dispaly the error message" + errormessage, "Error message dispaly Failed ",
-								Common.getscreenShotPathforReport("Failed to display the error message"));
-						Assert.fail();
-					}
-					return;
-				}	
-				public void ChangeEmail_signin(String dataSet) {
-
-					try {
-						
-						
-						Common.textBoxInput("xpath", "//input[@title='Email']", Utils.getEmailid());
-						String EMAIL=Common.findElement("xpath","//input[@title='Email']" ).getAttribute("value");
-						System.out.println(EMAIL);
-						Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-email')]//button[contains(@class,'save primary')]");
-						
-						String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-						
-						 Common.assertionCheckwithReport(message.contains("You saved the account information."),
-											"validating the saved message after changing email",
-											"Save email message should be displayed after the email is saved",
-											"Sucessfully changed email has been saved ",
-											"Failed to save the change email");
-						Sync.waitPageLoad();
-						Common.textBoxInput("id", "email", EMAIL);
-						Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-						Common.clickElement("xpath", "//button[contains(@class,'action login')]");
-						Sync.waitPageLoad();
-						Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
-								"To validate the user lands on Home page after successfull login",
-								"After clicking on the signIn button it should navigate to the Home page",
-								"user Sucessfully navigate to the Home page after clicking on the signIn button",
-								"Failed to signIn and not navigated to the Home page ");
-
-					} catch (Exception e) {
-						e.printStackTrace();
-						ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
-								"After clicking on the signin button it should navigate to the Home page",
-								"Unable to navigate the user to the home after clicking on the SignIn button",
-								Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
-
-						Assert.fail();
-					}
-				}
-				public void AcceptAll() {
-
-
-
-		            try {
-
-
-
-		                Thread.sleep(5000);
-		                 if (Common.findElement("xpath", "//button[@id='truste-consent-button']") != null) {
-
-
-
-		                    Common.clickElement("xpath", "//button[@id='truste-consent-button']");
-		                 }
-		                 }catch (Exception e) {
-
-
-
-		                e.printStackTrace();
-
-
-
-		            }
-		         }		
-					
-				public void cookiebanner() {
-					Sync.waitElementClickable("xpath", "//button[@id='truste-consent-button']");
-					Common.javascriptclickElement("xpath", "//button[@id='truste-consent-button']");
-				}
-				
-				
-				public void ProdelerPage(String dataSet) throws Exception {
-					ClickProDealguest();
-
-					String prodealname = Common.getCurrentURL();
-					{
-						/*
-						 * String
-						 * expectedResult="User is redirected to the Apply For Pro Deal page"
-						 * ;
-						 * Common.assertionCheckwithReport(prodealname.contains("prodeal"),
-						 * "Successfully redirected prodeal page",
-						 * expectedResult,"User unabel to land on prodeal page");
-						 */
-						String expectedResult = "User is redirected to login page";
-
-						Common.clickElement("xpath", "//a[@title='Sign in or register']");
-						Sync.waitElementPresent("id", "email");
-						int sizeemeil = Common.findElements("id", "email").size();
-						Common.assertionCheckwithReport(sizeemeil > 0, "Successfully redirected to login page", expectedResult,
-								"User unabel to land on login page");
-
-						try {
-
-							Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-							Sync.waitElementPresent("id", "pass");
-							Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-							Sync.waitElementPresent("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
-							Common.clickElement("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
-							
-							Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"), "Successfully land on pro deal application page", expectedResult,
-									"User unabel to land on pro deal application page");
-							Validate_Register_ProDealpage();
-
-							Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-							Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-							String link=Common.findElement("xpath", "//a[@class='a-btn a-btn--tertiary']").getAttribute("href");
-							System.out.println(link);
-							Common.assertionCheckwithReport(link.contains("application"),"successfully land on pro deal registration page", expectedResult, "User abel to land on pro deal registration page");
-
-						} catch (Exception | Error e) {
-							ExtenantReportUtils.addFailedLog("successfully land on pro deal registration page", "User unabel to land on pro deal registration page",
-									Common.getscreenShotPathforReport("Failed to land on prodeal aplication "));
-							Assert.fail();
-
-						}
-
-						Thread.sleep(3000);
-						Common.switchWindows();
-						Thread.sleep(3000);
-						expectedResult = "User is redirected to Pro Deal application page";
-						try {
-
-							Sync.waitElementPresent("id", "first_name");
-							int fistnamesize = Common.findElements("id", "first_name").size();
-							Common.assertionCheckwithReport(fistnamesize > 0,
-									"Successfully User is redirected to Pro Deal application page", expectedResult,
-									"User unabel to redirected to Pro Deal application page");
-							Thread.sleep(3000);
-							Common.textBoxInput("id", "first_name", data.get(dataSet).get("FirstName"));
-							Sync.waitElementPresent("id", "last_name");
-							Common.textBoxInput("id", "last_name", data.get(dataSet).get("LastName"));
-							Sync.waitElementPresent("id", "association");
-							Common.textBoxInput("id", "association", data.get(dataSet).get("Company Name"));
-							Sync.waitElementPresent("id", "association_email");
-							Common.textBoxInput("id", "association_email", data.get(dataSet).get("CompanyEmail"));
-							Common.actionsKeyPress(Keys.PAGE_DOWN);
-							Thread.sleep(6000);
-							String path = System.getProperty("user.dir")
-									+ ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
-							// Sync.waitElementInvisible("xpath",
-							// "//input[@id='supporting_document']");
-							Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
-
-							Sync.waitElementClickable("xpath", "//select[@id='group_id']");
-
-							System.out.println(data.get(dataSet).get("GropName"));
-							Common.dropdown("id", "group_id", SelectBy.VALUE, "4");
-
-							Sync.waitElementPresent("id", "comment");
-							Common.textBoxInput("id", "comment", data.get(dataSet).get("Comments"));
-
-							Sync.waitElementPresent("xpath", "//button[@title='Submit']");
-							Common.clickElement("xpath", "//button[@title='Submit']");
-				
-
-						} catch (Exception | Error e) {
-							e.printStackTrace();
-							ExtenantReportUtils.addFailedLog("ProDeal application from filling",
-									"User faield to fill the prodeal aplication ",
-									Common.getscreenShotPathforReport("prodeal aplication "));
-							Assert.fail();
-
-						}
-
-						// String text=Common.getText("xpath",
-						// "//div[@class='pro-deal-header']/h4");
-
-						String text = Common.getText("xpath", "//div[@class='success']");
-						// Assert.assertEquals(text, "Pro Deal Application Complete", "pro
-						// Deal application completed");
-
-						expectedResult = "User gets redirected to confirmation page and email is sent to email provided.";
-
-						Common.assertionCheckwithReport(text.contains("Thank you for applying"),
-								"verifying Pro Deal conformation", expectedResult, "User redirected to confirmation page",
-								"User unabel to redirected to confirmation page");
-
-					}
-
-
-
-				try {
-					Sync.waitElementPresent("xpath", "//a[@title='Sign in or register']");
-
-				} catch (Exception e) {
-					Validate_Register_ProDealpage();
-					Thread.sleep(3000);
-				}
-				//String prodealname = Common.getCurrentURL();
-
-				//expectedResult = "User is redirected to the Apply For Pro Deal page";
-				//Common.assertionCheckwithReport(prodealname.contains("prodeal"), "verifying Pro Deal page ", expectedResult,
-						//"Successfully redirected prodeal page", "User unabel to land on prodeal page");
-
-	//
-						
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
+			Assert.fail();
 		}
 
-public void ClickProDealguest() throws Exception {
-	
-	try {
-		Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
-		Common.clickElement("xpath", "//a[text()='Pro Deal']");
-		Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");    
-        Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
-             "To validate the Pro Deal", "Should be display the Pro Deal Application ",
-                "Successfully display the Pro Deal Application",
-                "Failed to  display the Pro Deal Application");
-         } catch (Exception | Error e) {
-
-
-
-       e.printStackTrace();
-        ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
-                "Should display the Pro Deal Application ",
-                "Unable to displays the Pro Deal Application",
-                Common.getscreenShot("Failed to  display the Pro Deal Application"));
-
-
-
-       Assert.fail();
-         }
-}
-
-public void Validate_Register_ProDealpage() throws Exception {
-    try {
-           Common.actionsKeyPress(Keys.END);
-	Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
-	Common.clickElement("xpath", "//a[text()='Pro Deal']");
-//Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");	
-String deal = Common.findElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']")
-			.getText();
-	System.out.println(deal);
-	String text = Common.findElement("xpath", "//h2[text()='Apply For Pro Deal']")
-			.getText();
-	System.out.println(text);
-	String Access = Common.findElement("xpath", "//h2[text()='Enter Access Code']")
-			.getText();
-	System.out.println(Access);
-	String code = Common.findElement("xpath","//input[@name='access_code']").getAttribute("title");
-	System.out.println(code);
-	String Enter = Common.findElement("id","pro-deal-form").getAttribute("action");
-	System.out.println(Enter);
-	Common.assertionCheckwithReport(deal.contains("Apply to pro deal") && text.contains("Apply For Pro Deal") && Access.contains("Enter Access Code") && code.contains("Access Code") && Enter.contains("prodeal/index/enter/"), 
-			"To validate the Pro Deal", "Should be display the Pro Deal Application ",
-			"Successfully display the Pro Deal Application",
-				"Failed to  display the Pro Deal Application");
-} catch (Exception | Error e) {
-
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
-			"Should display the Pro Deal Application ",
-			"Unable to displays the Pro Deal Application",
-			Common.getscreenShot("Failed to  display the Pro Deal Application"));
-
-	Assert.fail();
-
-}
-}
-
-public void Prodeal_invalid_access_code(String dataSet) {
-	try {
-		Sync.waitPageLoad();
-	
-	Common.textBoxInput("id", "access_code", data.get(dataSet).get("prodealaccesscode"));
-	Common.clickElement("xpath","//button[@title='Submit']");
-	String message = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div")
-			.getText();
-	System.out.println(message);
-	Common.assertionCheckwithReport(message.contains("Access code was not found."), "validating the displays error message ",
-			"should display the error message", "successfully display the error message",
-			"failed to display the error message");
-	}
-	catch (Exception | Error e) {
-
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the displays error message",
-				"Should display the error message",
-				"Unable to displays the error message",
-				Common.getscreenShot("Failed to  display the error message"));
-		Assert.fail();
-
 	}
 
-	try {
-		Sync.waitPageLoad();
-		Common.clickElement("xpath","//button[@title='Submit']");
-		Sync.waitElementVisible(40, "id", "access_code-error");
-		String field = Common.findElement("id", "access_code-error")
-				.getText();
-		System.out.println(field);
-		Common.assertionCheckwithReport(field.contains("This is a required field."), "validating the Displays error messaging beneath the missing fields",
-				"should Displays error messaging beneath the missing fields", "successfullyDisplays error messaging beneath the missing fields",
-				"failed to Displays error messaging beneath the missing fields");
-		
-	
-		
-	}
-	
-	catch (Exception | Error e) {
-
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the Displays error messaging beneath the missing fields",
-				"Should display the error messaging beneath the missing fields",
-				"Unable to displays the error messaging beneath the missing fields",
-				Common.getscreenShot("Failed to displays the error messaging beneath the missing fields"));
-	
-	
-	Assert.fail();
-	}
-}
-				
-public void prodeal_access_code(String dataSet) throws Exception {
-	try {
-		Sync.waitPageLoad();
-	
-	Common.textBoxInput("id", "access_code", data.get(dataSet).get("prodealaccesscode"));
-	Common.clickElement("xpath","//button[@title='Submit']");
-	String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
-			.getText();
-	System.out.println(successmessage);
-	Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."), "validating the Pro Deal success message ",
-			"should display the success message", "successfully display the success message",
-			"failed to display the success message");
-	}
-	
-	
-	catch (Exception | Error e) {
-
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("To validate the Pro Deal success message ",
-				"Should display the success message",
-				"Unable to displays the success message",
-				Common.getscreenShot("Failed to  display the Pro Deal success message"));
-
-		Assert.fail();
-
-	}
-	
-	
-	
-	
-	
-	
-}
-
-public void MyAccount_Prodeal() {
-	try {
-	Sync.waitPageLoad();
-	Common.clickElement("xpath","(//a[text()='Pro Deal'])[1]");
-	//String information  = Common.findElement("xpath", "//h1[text()='Pro deal information']").getText();
-
-	Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro deal information"),
-					
-			"To validate the page Pro Deal is displayed in my account", "Should display the Pro Deal in My account",
-			"Successfully display the Pro Deal in my account",
-			"Failed to  display the Pro Deal");
-}
-catch (Exception | Error e) {
-
-	e.printStackTrace();
-	ExtenantReportUtils.addFailedLog("To validate the page Pro Deal is displayed in my account",
-			"Should display the Pro Deal in My account",
-			"Unable to displays the Pro Deal in My account",
-			Common.getscreenShot("Failed to  display the Pro Deal in my account"));
-
-	Assert.fail();
-
-}}			
-public void Validate_OrderConfirmationPage(String dataSet) throws Exception {
-	// TODO Auto-generated method stub
-	
-	String expectedResult = "It redirects to order confirmation page";
-
-	try {
-		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-	int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
-	
-	String	order =	Common.findElement("xpath", "//a[@class='order-number']").getAttribute("href");
-	System.out.println(order);
-	
-	String	Right_rail = Common.getText("xpath", "//div[@class='c-icon-card-list__headers']");
-	System.out.println(Right_rail);
-	
-
-	int ordersuccesspagecategorylinks = Common.findElements("xpath", "//div[@class='actions-toolbar']//a[contains(@class,'button-secondary')]").size();
-	
-	for(int i=1;i<=ordersuccesspagecategorylinks;i++) {
-		String links[] = data.get(dataSet).get("categorylinks").split(",");
-		
-		String categoryink = Common.findElement("xpath", "(//div[@class='actions-toolbar']//a[contains(@class,'button-secondary')])["+i+"]").getAttribute("href");
-		System.out.println(categoryink);
-		Common.assertionCheckwithReport(categoryink.contains(links[i-1]), "verify the category links in order success page", 
-				"category links should peresent in order success page","In order success page successfully displayed category links",
-				"failed to display category links in order success page");
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") && order.contains("view/order_id/") &&
-			Right_rail.contains("We are here for you"),
-			"verifying the order confirmation confirmation page", expectedResult,
-			"Successfully It redirects to order confirmation page Order Placed",
-			"User unabel to go orderconformation page");
-
-		
-	}catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("verifying the order confirmation confirmation page",
-				"Successfully It redirects to order confirmation page Order Placed",
-				"User unabel to go orderconformation page",
-		
-				Common.getscreenShotPathforReport("User unabel to go orderconformation page"));
-		Assert.fail();
-
-	}
-}
-	public void Validating_We_are_here_for_you_section_Content(String dataSet) {
+	public void Shippingaddress_Addressbook(String Dataset) {
 		// TODO Auto-generated method stub
+		String firstname = data.get(Dataset).get("FirstName");
+		String secondname = data.get(Dataset).get("LastName");
+		String address = data.get(Dataset).get("Street");
+		String phonenumber = data.get(Dataset).get("phone");
+		String City = data.get(Dataset).get("City");
+		String region = data.get(Dataset).get("Region");
+		String zipcode = data.get(Dataset).get("postcode");
+		String shipping = data.get(Dataset).get("Shipping address");
 		try {
-		int content=Common.findElements("xpath", "//span[@class='m-icon-card__text']").size();
-			System.out.println(content);
-	        for(int i=1;i<=content;i++) {
-	        	String text[] = data.get(dataSet).get("Content").split(",");
-	        	String Rightrail_Content = Common.findElement("xpath", "(//span[@class='m-icon-card__text'])[" +i +"]").getText();
-	        	System.out.println(Rightrail_Content);
-	        	Common.assertionCheckwithReport(Rightrail_Content.contains(text[i-1]), "verify the Content in the We are here for you section  ", 
-						"Content should present in the We are here for you section",
-						"Content successfully present in the We are here for you section", 
-						"failed to  present content in the We are here for you section");	
-	        	
-	        }
-		
-			 
-		}catch (Exception | Error e) {
+			Common.clickElement("xpath", "//a[@title='Change Shipping Address']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+			Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+			Common.clickElement("xpath", "//input[@title='Phone Number']");
+			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+			Common.clickElement("xpath", "//input[@title='Address Line 1']");
+			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.clickElement("xpath", "//input[@title='City']");
+			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			Common.clickElement("xpath", "//select[@name='region_id']");
+			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+			String checkbox = Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
+			String text = Common.findElement("xpath", "//div[@class='message info']//span").getText();
+			Common.assertionCheckwithReport(
+					checkbox.equals("checkbox") && text.equals("This is your default shipping address."),
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+					"Failed to display checkbox for billing address and fail to display text" + text
+							+ "for shipping address");
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String shippingaddress = Common.findElement("xpath", "//div[contains(@class,'box box-address-s')]//address")
+					.getText();
+			Common.assertionCheckwithReport(
+					shippingaddress.equals(shipping) && message.equals("You saved the address."),
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+					"Failed to display checkbox for billing address and fail to display text" + text
+							+ "for shipping address");
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verify the Content in the We are here for you section  ",
-					"Content should present in the We are here for you section",
-					"failed to  present content in the We are here for you section",
-			
-					Common.getscreenShotPathforReport("failed to  present content in the We are here for you section"));
+			ExtenantReportUtils.addFailedLog(
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
 			Assert.fail();
+		}
+
 	}
 
-
-	
-}
-
-	
-
-
-			
-public void Validating_We_are_here_for_you_section_hyperlink(String dataSet) {
-	// TODO Auto-generated method stub
-	try {
-		int right_rail=Common.findElements("xpath", "//a[@class='m-icon-card__link']").size();
-		System.out.println(right_rail);
-        for(int i=1;i<=right_rail;i++) {
-        	String link[] = data.get(dataSet).get("hyperlink").split(",");
-        	System.out.println(link[i-1]);
-        	String Rightrail_hyperlink = Common.findElement("xpath", "(//a[@class='m-icon-card__link'])[" +i +"]").getAttribute("href");
-        	System.out.println(Rightrail_hyperlink);
-        	Common.assertionCheckwithReport(Rightrail_hyperlink.contains(link[i-1]), "verify the chatnow , telephone , email address links  in We are here for you section", 
-					"chatnow , telephone , email address links should present in We are here for you section", 
-					"chatnow , telephone , email address links successfully present in We are here for you section", 
-					"failed to present chatnow , telephone , email address links in We are here for you section");	
-        		
-	}
-        Common.clickElement("xpath","//span[contains(text(),'Chat Now')]");
-        Thread.sleep(5000);
-        	Common.switchFrames("id", "kustomer-ui-sdk-iframe");
-        Sync.waitElementVisible(30, "xpath", "//div[@class='widget__widget___uExal']");
-        int chatbotvisible = Common.findElements("xpath", "//div[@class='widget__widget___uExal']").size();
-        System.out.println(chatbotvisible);
-        Common.assertionCheckwithReport(chatbotvisible>0, "To validate chatnow link", 
-				"chatbot should open after clicking on chat now link", 
-				"chatbot successfully open after clicking on chat now link", 
-				"failed to open chatbot after clicking on chat now link");
-        Common.switchToDefault();
-        }
-	catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("verify the chatnow , telephone , email address links  in We are here for you section", 
-				"chatnow , telephone , email address links should present in We are here for you section", 
-				
-				"failed to present chatnow , telephone , email address links in We are here for you section",
-				
-		
-				Common.getscreenShotPathforReport("failed to present chatnow , telephone , email address links in We are here for you section"));
-
-		Assert.fail();
-	}
-
-}
-
-public void Validate_Retailers() {
-	// TODO Auto-generated method stub
-	
-	Sync.waitPageLoad();					
-	try {
-		Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");					
-		Sync.waitElementPresent("xpath", "//div[@class='conversion-column-inner']");
-		int retail = Common.findElements("xpath", "//div[@class='conversion-column-inner']").size();
-		System.out.println(retail);
-		Common.assertionCheckwithReport(retail>0,
-				"Validating retailers information",
-				"validated retailers information",
-				"Successfully validated retailers information ",
-				"Failed to validated retailers information");
-		
-		
-	} catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("Validating retailers information ",
-				"Retailers information should be validated",
-				"unable to validate retailers information ",
-		
-				Common.getscreenShotPathforReport("Failed to navigate retailers information"));
-		Assert.fail();
-
-	}	
-}
-public void Validate_Accountinformation_change_password(String Dataset) {
-	// TODO Auto-generated method stub
-	
-	
-	try {
-		Sync.waitPageLoad();
-		Common.clickElement("xpath", "//a[text()='Account Information']");
-		Sync.waitPageLoad();
-
-		Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
-				"validating the Navigation to the Account information page",
-				"After Clicking on Account information CTA user should be navigate to the AAccount information page",
-				"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
-				"Failed to Navigate to the Account information page after Clicking on Account information CTA");
-		
-		Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
-	Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span"); 
-	
-	 String emailsection=Common.findElement("xpath", "//div[contains(@class,'collapsible-password')]").getAttribute("class");
-	  System.out.println(emailsection);
-	  
-		Common.assertionCheckwithReport(emailsection.contains("active"),
-				"validating the confirm password section when we click on edit",
-				"confirm password section field should be displayed when we click on edit",
-				"Sucessfully confirm password  is displayed when we click on edit",
-				"Failed to display  confirm password section when we click on edit");
-	
-	  String currentpassword=Common.findElement("xpath", "(//input[@name='current_password'])[2]").getAttribute("name");
-	  System.out.println(currentpassword);
-	  String Newpassword=Common.findElement("xpath", "(//input[@name='password'])[1]").getAttribute("type");
-		System.out.println(Newpassword);
-		 String confirmpassword=Common.findElement("xpath", "(//input[@name='password_confirmation'])").getAttribute("name");
-			System.out.println(confirmpassword);
-		
-		Common.assertionCheckwithReport(currentpassword.contains("password")&&Newpassword.contains("password")&&confirmpassword.contains("confirmation"),
-				"validating the email input field and current password field",
-				"email input field should be displayed and current password filed should be displayed",
-				"Sucessfully email input field is displayed  and current password field is displayed",
-				"Failed to display email input field and current password field ");
-		
-		
-		
-		
-		
-	} catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
-				"After Clicking on Account information CTA user should be navigate to the AAccount information page",
-				"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
-				Common.getscreenShotPathforReport("Failed to navigate account information page"));
-		Assert.fail();
-	}}
-		
-	public void validate_Accountinformation_invalid_password(String Dataset) {
+	public String ValidateAccountcreationeyeicon(String dataSet) {
 		// TODO Auto-generated method stub
-		
-		String errormessage = data.get(Dataset).get("passworderror");
-		String invalidnewpassworderror = data.get(Dataset).get("InvalidnewPassword");
-		String confirmpassword = data.get(Dataset).get("NonmatchPassword");
+		String Email = "";
 		try {
-			
-			
-			
-			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
-			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("Password"));
-			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
-			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
-			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
-			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Newpassword"));
-			Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
-			Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]");
-			String invalidcurrentpassword = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
-			System.out.println(invalidcurrentpassword);
-			Common.assertionCheckwithReport(invalidcurrentpassword.equals(errormessage),
+
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("id", "firstname");
+			Common.textBoxInput("id", "firstname", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "lastname", data.get(dataSet).get("LastName"));
+
+			Common.textBoxInput("id", "email_address", Utils.getEmailid());
+			Email = Common.findElement("id", "email_address").getAttribute("value");
+			System.out.println(Email);
+
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			String classes = Common.findElement("id", "validation-classes").getAttribute("class");
+			String textlength = Common.findElement("id", "validation-length").getAttribute("class");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Common.assertionCheckwithReport(classes.contains("complete") && textlength.contains("complete"),
+					"Password is validated", "password should be validate", "failed to validate password");
+			Common.actionsKeyPress(Keys.UP);
+
+			String eyeicon = Common.findElement("xpath", "(//span[contains(@class,'m-password')])[1]")
+					.getAttribute("class");
+			System.out.println(eyeicon);
+			String password = Common.findElement("xpath", "//input[@id='password']").getAttribute("type");
+
+			Common.assertionCheckwithReport(eyeicon.contains("hide") && password.equals("password"),
+					"validating eye icon password filed", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+					"faield to display eye icon hide");
+			Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']");
+			String Eyeicon = Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+			System.out.println(Eyeicon);
+			String Text = Common.findElement("xpath", "//input[@id='password']").getAttribute("type");
+			Common.assertionCheckwithReport(Eyeicon.contains("show") && Text.equals("text"),
+					"validating eye icon password field", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+					"faield to display eye icon hide");
+
+			Common.textBoxInput("id", "password-confirmation", data.get(dataSet).get("Password"));
+			Confirmpassword_eyeicon_validation();
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button",
+					"unable to navigate to the My account page",
+					Common.getscreenShot("failed to navigates to My Account Page"));
+			Assert.fail();
+		}
+		return Email;
+
+	}
+
+	public void Confirmpassword_eyeicon_validation() {
+		// TODO Auto-generated method stub
+
+		try {
+
+			String eyeicon = Common.findElement("xpath", "(//span[contains(@class,'m-password')])[2]")
+					.getAttribute("class");
+			System.out.println(eyeicon);
+			String password = Common.findElement("xpath", "//input[@id='password-confirmation']").getAttribute("type");
+
+			Common.assertionCheckwithReport(eyeicon.contains("hide") && password.equals("password"),
+					"validating eye icon password filed", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+					"faield to display eye icon hide");
+			Common.clickElement("xpath", "//span[@class='m-password-input--toggle-icon icon-sign-in__hide']");
+			String Eyeicon = Common.findElement("xpath", "//span[contains(@class,'m-password')]").getAttribute("class");
+			System.out.println(Eyeicon);
+			String Text = Common.findElement("xpath", "//input[@id='password-confirmation']").getAttribute("type");
+			Common.assertionCheckwithReport(Eyeicon.contains("show") && Text.equals("text"),
+					"validating eye icon password field", "Eye icon is in hide", "Sucessfully displays eyeicon hide",
+					"faield to display eye icon hide");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating confirm password eyeicon", "password able to display",
+					"unable to display password", Common.getscreenShotPathforReport("faield to gdisplay password"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void Validate_Createaccount_signup_newsletter() {
+		// TODO Auto-generated method stub
+
+		try {
+
+			Sync.waitPageLoad();
+			int size = Common.findElements("xpath", "//input[@name='is_subscribed']").size();
+			Common.assertionCheckwithReport(size > 0, "validating signup newsletter checkbox",
+					"signup newsletter check box should be display", "able to display signup newsletter checkbox",
+					"faield to signup news letter checkbox");
+
+			Common.clickElement("xpath", "//input[@name='is_subscribed']");
+
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper h2']");
+
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"validating the  my Account page",
+					"User should able to navigate to the my account page after clicking on submit button",
+					"Sucessfully navigate to the My account page ", "failed to navigates to My Account Page");
+			ClosADD();
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating signup newsletter checkbox",
+					"signup newsletter check box should be display", "unable to display signup newsletter checkbox",
+					Common.getscreenShotPathforReport("faield to signup news letter checkbox"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void Admin_signin(String dataSet) {
+		// TODO Auto-generated method stub
+
+		try {
+			Common.openNewTab();
+			Common.oppenURL(data.get(dataSet).get("AdminURL"));
+			Sync.waitPageLoad();
+			Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+			Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+			Sync.waitPageLoad(30);
+			Sync.waitElementPresent("name", "loginfmt");
+			Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("Adminusername"));
+			Common.clickElement("id", "idSIButton9");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30, "name", "passwd");
+			Common.textBoxInput("name", "passwd", data.get(dataSet).get("Adminpassword"));
+			Common.clickElement("id", "idSIButton9");
+			Sync.waitPageLoad();
+
+			Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
+			if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
+				Common.javascriptclickElement("id", "KmsiCheckboxField");
+			}
+			Sync.waitElementClickable("id", "idSIButton9");
+			Common.mouseOverClick("id", "idSIButton9");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
+
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+					"To Validate the Admin is landing on the Dashboard after successfull Signin",
+					"After clicking on sigin button admin should navigate to the dashboard",
+					"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+					"Admin failed to display the dashboard after clicking on the signin button");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the Admin is landing on the Dashboard after successfull Signin",
+					"After clicking on sigin button admin should navigate to the dashboard",
+					"Admin failed to navigate to the dashboard after click on signin button",
+					"Admin failed to land on the dashboard after clicking on the signin button");
+			Assert.fail();
+
+		}
+
+	}
+
+	public void Customers() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("id", "menu-magento-customer-customer");
+			Sync.waitElementPresent("id", "menu-magento-customer-customer");
+			String customers = Common.findElement("xpath", "//strong[contains(text(),'Customers')]").getText();
+			System.out.println(customers);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(customers.equals("Customers"),
+					"To Validate the customers menu is displayed",
+					"should display the customer menu after clicking on the customers",
+					"Customers field menu is displayed after a click on the customers button",
+					"Failed to display customers menu");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the customers menu is displayed",
+					"should display the customer menu after clicking on the customers",
+					"unable to display Customers field menu after a click on the customers button",
+					"Failed to display customers field menu");
+			Assert.fail();
+		}
+
+	}
+
+	public void Allcustomers() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//span[text()='All Customers']");
+			Common.clickElement("xpath", "//span[text()='All Customers']");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Customers / Customers / Magento Admin"),
+					"Validating customers field page navigation ",
+					"After clicking all customers it will navigate to the Customer field page",
+					"Successfully navigate to the Customer field page ",
+					"Failed to navigate to the Customer field page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
+					"After clicking all customers it will navigate Customer field page",
+					"Unable to navigate to the Customer filed page",
+					Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void Viewcustomer(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "//input[@name='email']", Dataset);
+			Common.actionsKeyPress(Keys.ENTER);
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+			String EMAIL = Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[3]").getText();
+
+			Common.assertionCheckwithReport(records.contains("1") && EMAIL.equals(Dataset),
+					"Validating customers field page navigation ",
+					"After clicking all customers it will navigate to the Customer field page",
+					"Successfully navigate to the Customer field page ",
+					"Failed to navigate to the Customer field page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating customers field page navigation ",
+					"After clicking all customers it will navigate Customer field page",
+					"Unable to navigate to the Customer filed page",
+					Common.getscreenShotPathforReport("Failed to navigate Customer filed page"));
+			Assert.fail();
+
+		}
+	}
+
+	public void Clearfilter() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[text()='Clear all']");
+			Common.javascriptclickElement("xpath", "//button[text()='Clear all']");
+			String clear = Common.findElement("xpath", "//div[contains(@class,'admin__data-grid-filters-c')]")
+					.getAttribute("class");
+			System.out.println(clear);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(clear.contains("current"), "To Validate the Clear filters ",
+					"Should able to clear all the filters ", "Successfully all the filters are cleared ",
+					"Failed to Clear all the filters");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the Clear filters ", "Should able to clear all the filters ",
+					"Unable to clear all the filters ",
+					Common.getscreenShotPathforReport("Failed to Clear all the filters"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void Marketing() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("id", "menu-magento-backend-marketing");
+			Sync.waitElementPresent("id", "menu-magento-backend-marketing");
+			String Marketing = Common.findElement("xpath", "//strong[contains(text(),'Marketing')]").getText();
+			System.out.println(Marketing);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(Marketing.equals("Marketing"), "To Validate the Marketing is displayed",
+					"should display the Marketing menu after clicking on the Marketing",
+					"Marketing field menu is displayed after a click on the Marketing button",
+					"Failed to display Marketing menu");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the Marketing menu is displayed",
+					"should display the Marketing menu after clicking on the Marketing",
+					"unable to display Marketing field menu after a click on the Marketing button",
+					"Failed to display Marketing field menu");
+			Assert.fail();
+		}
+
+	}
+
+	public void Admin_newsletter_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//span[text()='Newsletter Subscribers']");
+			Common.clickElement("xpath", "//span[text()='Newsletter Subscribers']");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Newsletter Subscribers"),
+					"Validating customers field page navigation ",
+					"After clicking all customers it will navigate to the Customer field page",
+					"Successfully navigate to the Customer field page ",
+					"Failed to navigate to the Customer field page");
+			Common.clickElement("xpath", "//button[@title='Search']");
+
+			Common.textBoxInput("xpath", "//input[@name='email']", Dataset);
+			Common.actionsKeyPress(Keys.ENTER);
+			String subscribe = Common.findElement("xpath", "//td[@class=' col-status col-status  ']").getText();
+
+			Common.assertionCheckwithReport(subscribe.equals("Subscribed"), "Validating customer subscribtion ",
+					"customer should be subscribed for new letter subscrpition",
+					"Successfully subscribed new letter subscrption ", "Failed to subscribe new letter subscription");
+			Common.clickElement("xpath", "//button[@title='Reset Filter']");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating customer subscribtion ",
+					"customer should be subscribed for new letter subscrpition",
+					"unable to subscribe new letter subscrption ",
+
+					Common.getscreenShotPathforReport("Failed to navigate newsletter filed page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void change_Billingaddress_Addressbook(String Dataset) {
+		// TODO Auto-generated method stub
+		String firstname = data.get(Dataset).get("FirstName");
+		String secondname = data.get(Dataset).get("LastName");
+		String address = data.get(Dataset).get("Street");
+		String phonenumber = data.get(Dataset).get("phone");
+		String City = data.get(Dataset).get("City");
+		String region = data.get(Dataset).get("Region");
+		String zipcode = data.get(Dataset).get("postcode");
+		String shipping = data.get(Dataset).get("Shipping address");
+
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='Address Book']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
+					"validating the Navigation to the Address Book page",
+					"After Clicking on Address Book CTA user should be navigate to the Address Book page",
+					"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
+					"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
+
+			String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
+			if (newaddress.contains("You have no other address")) {
+				Common.clickElement("xpath", "//button[@title='Add New Address']");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+				Common.clickElement("xpath", "//input[@name='firstname']");
+				Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+				Common.clickElement("xpath", "//input[@name='lastname']");
+				Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+				Common.clickElement("xpath", "//input[@title='Phone Number']");
+				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+				Common.clickElement("xpath", "//input[@title='Address Line 1']");
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+				Common.clickElement("xpath", "//input[@title='City']");
+				Common.textBoxInput("xpath", "//input[@title='City']", City);
+				Common.clickElement("xpath", "//select[@name='region_id']");
+				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+				Common.clickElement("xpath", "//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+				Common.clickElement("xpath", "//label[@for='primary_billing']");
+				Common.clickElement("xpath", "//button[@title='Save Address']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+				Common.assertionCheckwithReport(message.equals("You saved the address."),
+						"validating the saved message after saving address in address book",
+						"Save address message should be displayed after the address saved in address book",
+						"Sucessfully address has been saved in the address book",
+						"Failed to save the address in the address book");
+				Billingaddress_Addressbook(Dataset);
+			} else {
+				Billingaddress_Addressbook(Dataset);
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Billingaddress_Addressbook(String Dataset) {
+		// TODO Auto-generated method stub
+		String firstname = data.get(Dataset).get("FirstName");
+		String secondname = data.get(Dataset).get("LastName");
+		String address = data.get(Dataset).get("Street");
+		String phonenumber = data.get(Dataset).get("phone");
+		String City = data.get(Dataset).get("City");
+		String region = data.get(Dataset).get("Region");
+		String zipcode = data.get(Dataset).get("postcode");
+		String shipping = data.get(Dataset).get("Shipping address");
+		try {
+			Common.clickElement("xpath", "//a[@title='Change Billing Address']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+			Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+			Common.clickElement("xpath", "//input[@title='Phone Number']");
+			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+			Common.clickElement("xpath", "//input[@title='Address Line 1']");
+			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.clickElement("xpath", "//input[@title='City']");
+			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			Common.clickElement("xpath", "//select[@name='region_id']");
+			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+			String checkbox = Common.findElement("xpath", "//input[@id='primary_shipping']").getAttribute("type");
+			String text = Common.findElement("xpath", "//div[@class='message info']//span").getText();
+			System.out.println(text);
+			Common.assertionCheckwithReport(
+					checkbox.equals("checkbox") && text.equals("This is your default billing address."),
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+					"Failed to display checkbox for billing address and fail to display text" + text
+							+ "for shipping address");
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String shippingaddress = Common
+					.findElement("xpath", "//div[contains(@class,'box box-address-bil')]//address").getText();
+			System.out.println(shippingaddress);
+
+			Common.assertionCheckwithReport(
+					shippingaddress.equals(shipping) && message.equals("You saved the address."),
+					"validating the checkbox for shipping address and text for the billing address",
+					"Checkbox should be display for the shipping address and text should be display for the billing address",
+					"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
+					"Failed to display checkbox for shipping address and fail to display text" + text
+							+ "for billing address");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the checkbox for shipping address and text for the billing address",
+					"Checkbox should be display for the shipping address and text should be display for the billing address",
+					"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
+					Common.getscreenShot(
+							"Failed to display checkbox for shipping address and fail to display text for billing address"));
+			Assert.fail();
+		}
+
+	}
+
+	public void remove_Allproducts_minicart() {
+
+		try {
+			Sync.waitElementClickable("xpath", "//span[contains(@class,'icon-header__cart')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__cart')]");
+
+			int numberofproducts = Common.findElements("xpath", "//span[contains(@class,'cart__remove')]").size();
+
+			if (numberofproducts > 0) {
+				for (int i = 0; i < numberofproducts; i++) {
+
+					String productscount = Common
+							.findElement("xpath", "//p[@class='c-mini-cart__total-counter']/strong").getText();
+					int count = Integer.parseInt(productscount);
+					System.out.println(count);
+					String productname = Common.findElement("xpath", "//div[@class='m-mini-product-card__name']/a")
+							.getText();
+					System.out.println(productname);
+					Common.scrollIntoView("xpath", "//span[contains(@class,'cart__remove')]");
+					Common.javascriptclickElement("xpath", "//span[contains(@class,'cart__remove')]");
+					Sync.waitElementVisible("xpath", "//aside[@class='modal-popup confirm _show']");
+					Common.javascriptclickElement("xpath", "//button[contains(@class,'action-accept')]");
+					Sync.waitElementInvisible("xpath", "//a[text()='" + productname + "']");
+					Thread.sleep(4000);
+					int updatedproductcount = Common
+							.findElements("xpath", "//p[@class='c-mini-cart__total-counter']/strong").size();
+					if (updatedproductcount <= 0) {
+						break;
+					}
+					String updatedprdctcount = Common
+							.findElement("xpath", "//p[@class='c-mini-cart__total-counter']/strong").getText();
+					int updatedcount = Integer.parseInt(updatedprdctcount);
+					System.out.println(updatedcount);
+					Common.assertionCheckwithReport(updatedcount == (count - 1) || updatedcount == 0,
+							"To validate the products are deleted from the mini cart",
+							"Product should be deleted from the minicart", "product deleted from mini cart",
+							"Failed to remove product from mini cart");
+
+				}
+
+			}
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'minicart__close ')]");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the products are deleted from the mini cart",
+					"Product should be deleted from the minicart", "Not able to delete the product form minicarrt",
+					Common.getscreenShot("Failed to delete the product form minicart"));
+			Assert.fail();
+		}
+
+	}
+
+	public void setup_DefaultShipping_Billingaddress() {
+		try {
+			Common.scrollIntoView("xpath", "//div[contains(@class,'dashboard-addresses')]");
+
+			String Defaultshipping = Common.findElement("xpath", "//div[contains(@class,'shipping')]//address")
+					.getText();
+			// System.out.println(Defaultshipping);
+			String DefaultBilling = Common.findElement("xpath", "//div[contains(@class,'billing')]//address").getText();
+			// System.out.println(DefaultBilling);
+			if (DefaultBilling.contains(Defaultshipping)) {
+				Common.assertionCheckwithReport(true, "To valifdate the default shipping and Billing address are same",
+						"Default Billing and Shipping address Should be same",
+						"Default Billing and Shipping address are same",
+						"default Billing and shipping addresses are not same");
+			} else {
+
+				Sync.waitElementVisible("xpath", "//div[contains(@class,'billing')]//a/span");
+				Common.mouseOverClick("xpath", "//div[contains(@class,'billing')]//a/span");
+
+				Sync.waitPageLoad();
+				Sync.waitElementVisible(30, "id", "form-validate");
+				Common.scrollIntoView("xpath", "//div[contains(@class,'shipping a-checkbox')]");
+				Common.mouseOverClick("xpath", "//div[contains(@class,'shipping a-checkbox')]//span");
+
+				Common.clickElement("xpath", "//button[contains(@class,'submit primary')]");
+				Sync.waitPageLoad();
+				Sync.waitElementVisible("xpath", "//div[contains(@class,'message-success')]/div");
+				String sucessmessage = Common.findElement("xpath", "//div[contains(@class,'message-success')]/div")
+						.getText();
+				Common.scrollIntoView("xpath", "//div[contains(@class,'dashboard-addresses')]");
+				String updatedDefaultshipping = Common
+						.findElement("xpath", "//div[contains(@class,'shipping')]//address").getText();
+				String updatedDefaultBilling = Common.findElement("xpath", "//div[contains(@class,'billing')]//address")
+						.getText();
+
+				Common.assertionCheckwithReport(
+						sucessmessage.contains("You saved the address.")
+								&& updatedDefaultshipping.contains(updatedDefaultBilling),
+						"To validate the default shipping and Billing address are same",
+						"Default Billing and Shipping address Should be same",
+						"Default Billing and Shipping address are same",
+						"default Billing and shipping addresses are not same");
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Updatebillingaddress(String dataSet) {
+		String FirstName = data.get(dataSet).get("FirstName");
+		String LastName = data.get(dataSet).get("LastName");
+		String Street = data.get(dataSet).get("Street");
+		String City = data.get(dataSet).get("City");
+		String Region = data.get(dataSet).get("Region");
+		String postcode = data.get(dataSet).get("postcode");
+		String phone = data.get(dataSet).get("phone");
+		String Country = data.get(dataSet).get("Country");
+
+		try {
+
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section",
+					"payment ,methods should be displayed", "User unabel to land opaymentpage");
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+			/*
+			 * Sync.waitElementVisible("xpath",
+			 * "//div[@class='payment-method stripe-payments']");
+			 * Common.javascriptclickElement("xpath",
+			 * "//div[@class='payment-method stripe-payments']");
+			 * 
+			 * 
+			 * if (!Common.findElement(By.
+			 * xpath("//div[@class='items payment-methods']/div/div[2]")) .isSelected()) {
+			 * System.out.println("The Payment method is selected");
+			 * 
+			 * }else { Common.javascriptclickElement("xpath",
+			 * "//div[@class='payment-method stripe-payments']");
+			 * 
+			 * }
+			 */
+			Sync.waitElementInvisible(30, "xpath", "//div[@class='loader']/img[@alt='Loading...']");
+			String active = Common.findElement("xpath", "//div[@class='items payment-methods']/div/div[2]")
+					.getAttribute("class");
+
+			Common.assertionCheckwithReport(active.contains("active"),
+					"To validate the default payment section is expanded", "default payment section should be expanded",
+					"default payment section is expanded", "Failed to expand the default payment section");
+			if (!Common.findElement(By.xpath("//div[contains(@class,'billing-address-same-as-shipping')]//span"))
+					.isSelected()) {
+				Common.findElement(By.xpath("//div[contains(@class,'billing-address-same-as-shipping')]//span"))
+						.click();
+
+				Sync.waitElementVisible("name", "billing_address_id");
+				Common.dropdown("name", "billing_address_id", SelectBy.TEXT, "New Address");
+				populate_Shippingaddress_fields("AccountDetails");
+
+				Common.scrollIntoView("id", "billing-save-in-address-book-stripe_payments");
+				Common.assertionCheckwithReport(
+						Common.findElement(By.id("billing-save-in-address-book-stripe_payments")).isSelected() == true,
+						"To validate the Save in address book checkbox is selected",
+						"Save in address book checkbox should be selected", "Save in address book checkbox is selected",
+						"Failed to select the Save in address book checkbox is selected");
+
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'action-update')]");
+
+			} else {
+				System.out.println("the shipping and billing address is not same");
+				Assert.fail();
+			}
+
+			String updatedfullname = Common
+					.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p/strong").getText();
+			System.out.println(updatedfullname);
+
+			String updateddaddress = Common
+					.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p[2]").getText();
+			System.out.println(updateddaddress);
+			String updatedtelephone = Common
+					.findElement("xpath", "//div[contains(@class,'billing-address-details')]/p[3]").getText();
+			System.out.println(updatedtelephone);
+
+			Common.assertionCheckwithReport(
+					updatedfullname.equals(FirstName + " " + LastName)
+							&& updateddaddress
+									.equals(Street + "\n" + City + ", " + Region + " " + postcode + "\n" + Country)
+							&& updatedtelephone.contains(phone),
+
+					"validate the user is able to update the new address in the shipping page",
+					"user should able to update the new address in the shipping page",
+					"user successfuly update the new address in the shipping page",
+					"failed to update the new address in the shipping page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the checkbox for billing address and text for the shipping address",
+					"Checkbox should be display for the billing address and text should be display for the shipping address",
+					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+					Common.getscreenShot(
+							"Failed to display checkbox for billing address and fail to display text for shipping address"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Validate_Accountinformation_change_email(String Dataset) {
+		// TODO Auto-generated method stub
+
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='Account Information']");
+			Sync.waitPageLoad();
+
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
+					"validating the Navigation to the Account information page",
+					"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+					"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+					"Failed to Navigate to the Account information page after Clicking on Account information CTA");
+
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-email')]//span//span");
+			Common.clickElement("xpath", "//button[contains(@class,'toggle-email')]//span//span");
+
+			String emailsection = Common.findElement("xpath", "//div[contains(@class,'collapsible-email')]")
+					.getAttribute("class");
+			System.out.println(emailsection);
+
+			Common.assertionCheckwithReport(emailsection.contains("active"),
+					"validating the email section when we click on edit",
+					"email section field should be displayed when we click on edit",
+					"Sucessfully emailsection  is displayed when we click on edit",
+					"Failed to display section when we click on edit");
+			// div[contains(@class,'collapsible-email')]
+			String Newemail = Common.findElement("xpath", "//input[@name='email']").getAttribute("type");
+			System.out.println(Newemail);
+			String Currentpassword = Common.findElement("xpath", "(//input[@name='current_password'])[1]")
+					.getAttribute("type");
+			System.out.println(Currentpassword);
+			Common.assertionCheckwithReport(Newemail.equals("email") && Currentpassword.equals("password"),
+					"validating the email input field and current password field",
+					"email input field should be displayed and current password filed should be displayed",
+					"Sucessfully email input field is displayed  and current password field is displayed",
+					"Failed to display email input field and current password field ");
+			validate_password_field(Dataset);
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
+					"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+					"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+					Common.getscreenShotPathforReport("Failed to navigate account information page"));
+			Assert.fail();
+		}
+
+	}
+
+	public void validate_password_field(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+
+			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[1]");
+
+			Common.textBoxInput("xpath", "(//input[@name='current_password'])[1]", data.get(Dataset).get("Password"));
+
+			String passworddots = Common.findElement("xpath", "(//input[@name='current_password'])[1]")
+					.getAttribute("type");
+			System.out.println(passworddots);
+
+			Common.assertionCheckwithReport(passworddots.contains("password"), "validating the passoword dot display",
+					"the password should be displed in dots", "Sucessfully password disply in dots",
+					"Failed to display password in dots");
+			Common.actionsKeyPress(Keys.UP);
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the passoword dot display",
+					"the password should be displed in dots", "Sucessfully password disply in dots",
+					Common.getscreenShotPathforReport("Failed to navigate newsletter filed page"));
+			Assert.fail();
+
+		}
+
+	}
+
+	public void validate_Accountinformation_invalid_email(String Dataset) {
+		// TODO Auto-generated method stub
+
+		String errormessage = data.get(Dataset).get("errormessage");
+		try {
+			Sync.waitElementPresent("xpath", "//input[@title='Email']");
+			// Common.textBoxInputClear("xpath", "//input[@title='Email']");
+			Common.textBoxInput("xpath", "//input[@title='Email']", data.get(Dataset).get("Email"));
+			Common.javascriptclickElement("xpath",
+					"//div[contains(@class,'collapsible-email')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[@class='mage-error']");
+			String emailerror = Common.findElement("xpath", "//div[@class='mage-error']").getText();
+			System.out.println(emailerror);
+			Common.assertionCheckwithReport(emailerror.equals(errormessage),
 					"To validate the error message when given invalid email or password",
-					"Should dispaly the error message " + errormessage, invalidcurrentpassword + "error message is displayed",
+					"Should dispaly the error message " + errormessage, emailerror + "error message is displayed",
 					"Failed to display error message");
-			
-			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
-			Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span");
-			
-			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
-			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("CurrentPassword"));
-			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
-			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Password"));
-			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
-			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Newpassword"));
-			Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
-			Sync.waitElementVisible(30, "xpath", "//div[@id='password-error']");
-			String invalidnewpassword = Common.findElement("xpath", "//div[@id='password-error']").getText();
-			System.out.println(invalidnewpassword);
-			Common.assertionCheckwithReport(invalidnewpassword.equals(invalidnewpassworderror),
-					"To validate the error message when given invalid email or password",
-					"Should dispaly the error message " + invalidnewpassworderror, invalidnewpassword + "error message is displayed",
-					"Failed to display error message");
-			
-		Common.scrollIntoView("xpath","(//input[@name='password'])[1]");
-			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
-			
-			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
-			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
-			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Password"));
-			Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
-			Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]/div");
-			String nonmatchpassword = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
-			System.out.println(nonmatchpassword);
-			Common.assertionCheckwithReport(nonmatchpassword.equals(confirmpassword),
-					"To validate the error message when given invalid email or password",
-					"Should dispaly the error message " + confirmpassword, nonmatchpassword + "error message is displayed",
-					"Failed to display error message");
-			
-			
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
 					"Should dispaly the error message" + errormessage, "Error message dispaly Failed ",
 					Common.getscreenShotPathforReport("Failed to display the error message"));
 			Assert.fail();
-	
-		
-	}	
-	
-	
-}
+		}
+		return;
+	}
+
+	public void ChangeEmail_signin(String dataSet) {
+
+		try {
+
+			Common.textBoxInput("xpath", "//input[@title='Email']", Utils.getEmailid());
+			String EMAIL = Common.findElement("xpath", "//input[@title='Email']").getAttribute("value");
+			System.out.println(EMAIL);
+			Common.javascriptclickElement("xpath",
+					"//div[contains(@class,'collapsible-email')]//button[contains(@class,'save primary')]");
+
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+			Common.assertionCheckwithReport(message.contains("You saved the account information."),
+					"validating the saved message after changing email",
+					"Save email message should be displayed after the email is saved",
+					"Sucessfully changed email has been saved ", "Failed to save the change email");
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", EMAIL);
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
+	}
+
+	public void AcceptAll() {
+
+		try {
+
+			Thread.sleep(5000);
+			if (Common.findElement("xpath", "//button[@id='truste-consent-button']") != null) {
+
+				Common.clickElement("xpath", "//button[@id='truste-consent-button']");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+	}
+
+	public void cookiebanner() {
+		Sync.waitElementClickable("xpath", "//button[@id='truste-consent-button']");
+		Common.javascriptclickElement("xpath", "//button[@id='truste-consent-button']");
+	}
+
+	public void ProdelerPage(String dataSet) throws Exception {
+		ClickProDealguest();
+
+		String prodealname = Common.getCurrentURL();
+		{
+			/*
+			 * String expectedResult="User is redirected to the Apply For Pro Deal page" ;
+			 * Common.assertionCheckwithReport(prodealname.contains("prodeal"),
+			 * "Successfully redirected prodeal page",
+			 * expectedResult,"User unabel to land on prodeal page");
+			 */
+			String expectedResult = "User is redirected to login page";
+
+			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Sync.waitElementPresent("id", "email");
+			int sizeemeil = Common.findElements("id", "email").size();
+			Common.assertionCheckwithReport(sizeemeil > 0, "Successfully redirected to login page", expectedResult,
+					"User unabel to land on login page");
+
+			try {
+
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+				Sync.waitElementPresent("id", "pass");
+				Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+				Sync.waitElementPresent("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
+				Common.clickElement("xpath", "//button[@class='action login primary a-btn a-btn--primary']");
+
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+						"Successfully land on pro deal application page", expectedResult,
+						"User unabel to land on pro deal application page");
+				Validate_Register_ProDealpage();
+
+				Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+				Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+				String link = Common.findElement("xpath", "//a[@class='a-btn a-btn--tertiary']").getAttribute("href");
+				System.out.println(link);
+				Common.assertionCheckwithReport(link.contains("application"),
+						"successfully land on pro deal registration page", expectedResult,
+						"User abel to land on pro deal registration page");
+
+			} catch (Exception | Error e) {
+				ExtenantReportUtils.addFailedLog("successfully land on pro deal registration page",
+						"User unabel to land on pro deal registration page",
+						Common.getscreenShotPathforReport("Failed to land on prodeal aplication "));
+				Assert.fail();
+
+			}
+
+			Thread.sleep(3000);
+			Common.switchWindows();
+			Thread.sleep(3000);
+			expectedResult = "User is redirected to Pro Deal application page";
+			try {
+
+				Sync.waitElementPresent("id", "first_name");
+				int fistnamesize = Common.findElements("id", "first_name").size();
+				Common.assertionCheckwithReport(fistnamesize > 0,
+						"Successfully User is redirected to Pro Deal application page", expectedResult,
+						"User unabel to redirected to Pro Deal application page");
+				Thread.sleep(3000);
+				Common.textBoxInput("id", "first_name", data.get(dataSet).get("FirstName"));
+				Sync.waitElementPresent("id", "last_name");
+				Common.textBoxInput("id", "last_name", data.get(dataSet).get("LastName"));
+				Sync.waitElementPresent("id", "association");
+				Common.textBoxInput("id", "association", data.get(dataSet).get("Company Name"));
+				Sync.waitElementPresent("id", "association_email");
+				Common.textBoxInput("id", "association_email", data.get(dataSet).get("CompanyEmail"));
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Thread.sleep(6000);
+				String path = System.getProperty("user.dir")
+						+ ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
+				// Sync.waitElementInvisible("xpath",
+				// "//input[@id='supporting_document']");
+				Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
+
+				Sync.waitElementClickable("xpath", "//select[@id='group_id']");
+
+				System.out.println(data.get(dataSet).get("GropName"));
+				Common.dropdown("id", "group_id", SelectBy.VALUE, "4");
+
+				Sync.waitElementPresent("id", "comment");
+				Common.textBoxInput("id", "comment", data.get(dataSet).get("Comments"));
+
+				Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+				Common.clickElement("xpath", "//button[@title='Submit']");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("ProDeal application from filling",
+						"User faield to fill the prodeal aplication ",
+						Common.getscreenShotPathforReport("prodeal aplication "));
+				Assert.fail();
+
+			}
+
+			// String text=Common.getText("xpath",
+			// "//div[@class='pro-deal-header']/h4");
+
+			String text = Common.getText("xpath", "//div[@class='success']");
+			// Assert.assertEquals(text, "Pro Deal Application Complete", "pro
+			// Deal application completed");
+
+			expectedResult = "User gets redirected to confirmation page and email is sent to email provided.";
+
+			Common.assertionCheckwithReport(text.contains("Thank you for applying"), "verifying Pro Deal conformation",
+					expectedResult, "User redirected to confirmation page",
+					"User unabel to redirected to confirmation page");
+
+		}
+
+		try {
+			Sync.waitElementPresent("xpath", "//a[@title='Sign in or register']");
+
+		} catch (Exception e) {
+			Validate_Register_ProDealpage();
+			Thread.sleep(3000);
+		}
+		// String prodealname = Common.getCurrentURL();
+
+		// expectedResult = "User is redirected to the Apply For Pro Deal page";
+		// Common.assertionCheckwithReport(prodealname.contains("prodeal"), "verifying
+		// Pro Deal page ", expectedResult,
+		// "Successfully redirected prodeal page", "User unabel to land on prodeal
+		// page");
+
+		//
+
+	}
+
+	public void ClickProDealguest() throws Exception {
+
+		try {
+			Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
+			Common.clickElement("xpath", "//a[text()='Pro Deal']");
+			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
+					"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
+					"Should display the Pro Deal Application ", "Unable to displays the Pro Deal Application",
+					Common.getscreenShot("Failed to  display the Pro Deal Application"));
+
+			Assert.fail();
+		}
+	}
+
+	public void Validate_Register_ProDealpage() throws Exception {
+		try {
+			Common.actionsKeyPress(Keys.END);
+			Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
+			Common.clickElement("xpath", "//a[text()='Pro Deal']");
+//Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");	
+			String deal = Common.findElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']").getText();
+			System.out.println(deal);
+			String text = Common.findElement("xpath", "//h2[text()='Apply For Pro Deal']").getText();
+			System.out.println(text);
+			String Access = Common.findElement("xpath", "//h2[text()='Enter Access Code']").getText();
+			System.out.println(Access);
+			String code = Common.findElement("xpath", "//input[@name='access_code']").getAttribute("title");
+			System.out.println(code);
+			String Enter = Common.findElement("id", "pro-deal-form").getAttribute("action");
+			System.out.println(Enter);
+			Common.assertionCheckwithReport(
+					deal.contains("Apply to pro deal") && text.contains("Apply For Pro Deal")
+							&& Access.contains("Enter Access Code") && code.contains("Access Code")
+							&& Enter.contains("prodeal/index/enter/"),
+					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
+					"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
+					"Should display the Pro Deal Application ", "Unable to displays the Pro Deal Application",
+					Common.getscreenShot("Failed to  display the Pro Deal Application"));
+
+			Assert.fail();
+
+		}
+	}
+
+	public void Prodeal_invalid_access_code(String dataSet) {
+		try {
+			Sync.waitPageLoad();
+
+			Common.textBoxInput("id", "access_code", data.get(dataSet).get("prodealaccesscode"));
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			String message = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("Access code was not found."),
+					"validating the displays error message ", "should display the error message",
+					"successfully display the error message", "failed to display the error message");
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the displays error message",
+					"Should display the error message", "Unable to displays the error message",
+					Common.getscreenShot("Failed to  display the error message"));
+			Assert.fail();
+
+		}
+
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			Sync.waitElementVisible(40, "id", "access_code-error");
+			String field = Common.findElement("id", "access_code-error").getText();
+			System.out.println(field);
+			Common.assertionCheckwithReport(field.contains("This is a required field."),
+					"validating the Displays error messaging beneath the missing fields",
+					"should Displays error messaging beneath the missing fields",
+					"successfullyDisplays error messaging beneath the missing fields",
+					"failed to Displays error messaging beneath the missing fields");
+
+		}
+
+		catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Displays error messaging beneath the missing fields",
+					"Should display the error messaging beneath the missing fields",
+					"Unable to displays the error messaging beneath the missing fields",
+					Common.getscreenShot("Failed to displays the error messaging beneath the missing fields"));
+
+			Assert.fail();
+		}
+	}
+
+	public void prodeal_access_code(String dataSet) throws Exception {
+		try {
+			Sync.waitPageLoad();
+
+			Common.textBoxInput("id", "access_code", data.get(dataSet).get("prodealaccesscode"));
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
+					.getText();
+			System.out.println(successmessage);
+			Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
+					"validating the Pro Deal success message ", "should display the success message",
+					"successfully display the success message", "failed to display the success message");
+		}
+
+		catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Pro Deal success message ",
+					"Should display the success message", "Unable to displays the success message",
+					Common.getscreenShot("Failed to  display the Pro Deal success message"));
+
+			Assert.fail();
+
+		}
+
+	}
+
+	public void MyAccount_Prodeal() {
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "(//a[text()='Pro Deal'])[1]");
+			// String information = Common.findElement("xpath", "//h1[text()='Pro deal
+			// information']").getText();
+
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro deal information"),
+
+					"To validate the page Pro Deal is displayed in my account",
+					"Should display the Pro Deal in My account", "Successfully display the Pro Deal in my account",
+					"Failed to  display the Pro Deal");
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the page Pro Deal is displayed in my account",
+					"Should display the Pro Deal in My account", "Unable to displays the Pro Deal in My account",
+					Common.getscreenShot("Failed to  display the Pro Deal in my account"));
+
+			Assert.fail();
+
+		}
+	}
+
+	public void Validate_OrderConfirmationPage(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+
+		String expectedResult = "It redirects to order confirmation page";
+
+		try {
+			String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+			int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+
+			String order = Common.findElement("xpath", "//a[@class='order-number']").getAttribute("href");
+			System.out.println(order);
+
+			String Right_rail = Common.getText("xpath", "//div[@class='c-icon-card-list__headers']");
+			System.out.println(Right_rail);
+
+			int ordersuccesspagecategorylinks = Common
+					.findElements("xpath", "//div[@class='actions-toolbar']//a[contains(@class,'button-secondary')]")
+					.size();
+
+			for (int i = 1; i <= ordersuccesspagecategorylinks; i++) {
+				String links[] = data.get(dataSet).get("categorylinks").split(",");
+
+				String categoryink = Common
+						.findElement("xpath",
+								"(//div[@class='actions-toolbar']//a[contains(@class,'button-secondary')])[" + i + "]")
+						.getAttribute("href");
+				System.out.println(categoryink);
+				Common.assertionCheckwithReport(categoryink.contains(links[i - 1]),
+						"verify the category links in order success page",
+						"category links should peresent in order success page",
+						"In order success page successfully displayed category links",
+						"failed to display category links in order success page");
+			}
+
+			Common.assertionCheckwithReport(
+					sucessMessage.contains("Thank you for your purchase!") && order.contains("view/order_id/")
+							&& Right_rail.contains("We are here for you"),
+					"verifying the order confirmation confirmation page", expectedResult,
+					"Successfully It redirects to order confirmation page Order Placed",
+					"User unabel to go orderconformation page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the order confirmation confirmation page",
+					"Successfully It redirects to order confirmation page Order Placed",
+					"User unabel to go orderconformation page",
+
+					Common.getscreenShotPathforReport("User unabel to go orderconformation page"));
+			Assert.fail();
+
+		}
+	}
+
+	public void Validating_We_are_here_for_you_section_Content(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			int content = Common.findElements("xpath", "//span[@class='m-icon-card__text']").size();
+			System.out.println(content);
+			for (int i = 1; i <= content; i++) {
+				String text[] = data.get(dataSet).get("Content").split(",");
+				String Rightrail_Content = Common
+						.findElement("xpath", "(//span[@class='m-icon-card__text'])[" + i + "]").getText();
+				System.out.println(Rightrail_Content);
+				Common.assertionCheckwithReport(Rightrail_Content.contains(text[i - 1]),
+						"verify the Content in the We are here for you section  ",
+						"Content should present in the We are here for you section",
+						"Content successfully present in the We are here for you section",
+						"failed to  present content in the We are here for you section");
+
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verify the Content in the We are here for you section  ",
+					"Content should present in the We are here for you section",
+					"failed to  present content in the We are here for you section",
+
+					Common.getscreenShotPathforReport("failed to  present content in the We are here for you section"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Validating_We_are_here_for_you_section_hyperlink(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			int right_rail = Common.findElements("xpath", "//a[@class='m-icon-card__link']").size();
+			System.out.println(right_rail);
+			for (int i = 1; i <= right_rail; i++) {
+				String link[] = data.get(dataSet).get("hyperlink").split(",");
+				System.out.println(link[i - 1]);
+				String Rightrail_hyperlink = Common.findElement("xpath", "(//a[@class='m-icon-card__link'])[" + i + "]")
+						.getAttribute("href");
+				System.out.println(Rightrail_hyperlink);
+				Common.assertionCheckwithReport(Rightrail_hyperlink.contains(link[i - 1]),
+						"verify the chatnow , telephone , email address links  in We are here for you section",
+						"chatnow , telephone , email address links should present in We are here for you section",
+						"chatnow , telephone , email address links successfully present in We are here for you section",
+						"failed to present chatnow , telephone , email address links in We are here for you section");
+
+			}
+			Common.clickElement("xpath", "//span[contains(text(),'Chat Now')]");
+			Thread.sleep(5000);
+			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+			Sync.waitElementVisible(30, "xpath", "//div[@class='widget__widget___uExal']");
+			int chatbotvisible = Common.findElements("xpath", "//div[@class='widget__widget___uExal']").size();
+			System.out.println(chatbotvisible);
+			Common.assertionCheckwithReport(chatbotvisible > 0, "To validate chatnow link",
+					"chatbot should open after clicking on chat now link",
+					"chatbot successfully open after clicking on chat now link",
+					"failed to open chatbot after clicking on chat now link");
+			Common.switchToDefault();
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"verify the chatnow , telephone , email address links  in We are here for you section",
+					"chatnow , telephone , email address links should present in We are here for you section",
+
+					"failed to present chatnow , telephone , email address links in We are here for you section",
+
+					Common.getscreenShotPathforReport(
+							"failed to present chatnow , telephone , email address links in We are here for you section"));
+
+			Assert.fail();
+		}
+
+	}
+
+	public void Validate_Retailers() {
+		// TODO Auto-generated method stub
+
+		Sync.waitPageLoad();
+		try {
+			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
+			Sync.waitElementPresent("xpath", "//div[@class='conversion-column-inner']");
+			int retail = Common.findElements("xpath", "//div[@class='conversion-column-inner']").size();
+			System.out.println(retail);
+			Common.assertionCheckwithReport(retail > 0, "Validating retailers information",
+					"validated retailers information", "Successfully validated retailers information ",
+					"Failed to validated retailers information");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating retailers information ",
+					"Retailers information should be validated", "unable to validate retailers information ",
+
+					Common.getscreenShotPathforReport("Failed to navigate retailers information"));
+			Assert.fail();
+
+		}
+	}
+
+	public void Validate_Accountinformation_change_password(String Dataset) {
+		// TODO Auto-generated method stub
+
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='Account Information']");
+			Sync.waitPageLoad();
+
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
+					"validating the Navigation to the Account information page",
+					"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+					"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+					"Failed to Navigate to the Account information page after Clicking on Account information CTA");
+
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+			Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+
+			String emailsection = Common.findElement("xpath", "//div[contains(@class,'collapsible-password')]")
+					.getAttribute("class");
+			System.out.println(emailsection);
+
+			Common.assertionCheckwithReport(emailsection.contains("active"),
+					"validating the confirm password section when we click on edit",
+					"confirm password section field should be displayed when we click on edit",
+					"Sucessfully confirm password  is displayed when we click on edit",
+					"Failed to display  confirm password section when we click on edit");
+
+			String currentpassword = Common.findElement("xpath", "(//input[@name='current_password'])[2]")
+					.getAttribute("name");
+			System.out.println(currentpassword);
+			String Newpassword = Common.findElement("xpath", "(//input[@name='password'])[1]").getAttribute("type");
+			System.out.println(Newpassword);
+			String confirmpassword = Common.findElement("xpath", "(//input[@name='password_confirmation'])")
+					.getAttribute("name");
+			System.out.println(confirmpassword);
+
+			Common.assertionCheckwithReport(
+					currentpassword.contains("password") && Newpassword.contains("password")
+							&& confirmpassword.contains("confirmation"),
+					"validating the email input field and current password field",
+					"email input field should be displayed and current password filed should be displayed",
+					"Sucessfully email input field is displayed  and current password field is displayed",
+					"Failed to display email input field and current password field ");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
+					"After Clicking on Account information CTA user should be navigate to the AAccount information page",
+					"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+					Common.getscreenShotPathforReport("Failed to navigate account information page"));
+			Assert.fail();
+		}
+	}
+
+	public void validate_Accountinformation_invalid_password(String Dataset) {
+		// TODO Auto-generated method stub
+
+		String errormessage = data.get(Dataset).get("passworderror");
+		String invalidnewpassworderror = data.get(Dataset).get("InvalidnewPassword");
+		String confirmpassword = data.get(Dataset).get("NonmatchPassword");
+		try {
+
+			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])",
+					data.get(Dataset).get("Newpassword"));
+			Common.javascriptclickElement("xpath",
+					"//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]");
+			String invalidcurrentpassword = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div")
+					.getText();
+			System.out.println(invalidcurrentpassword);
+			Common.assertionCheckwithReport(invalidcurrentpassword.equals(errormessage),
+					"To validate the error message when given invalid email or password",
+					"Should dispaly the error message " + errormessage,
+					invalidcurrentpassword + "error message is displayed", "Failed to display error message");
+
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+			Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+
+			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]",
+					data.get(Dataset).get("CurrentPassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])",
+					data.get(Dataset).get("Newpassword"));
+			Common.javascriptclickElement("xpath",
+					"//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[@id='password-error']");
+			String invalidnewpassword = Common.findElement("xpath", "//div[@id='password-error']").getText();
+			System.out.println(invalidnewpassword);
+			Common.assertionCheckwithReport(invalidnewpassword.equals(invalidnewpassworderror),
+					"To validate the error message when given invalid email or password",
+					"Should dispaly the error message " + invalidnewpassworderror,
+					invalidnewpassword + "error message is displayed", "Failed to display error message");
+
+			Common.scrollIntoView("xpath", "(//input[@name='password'])[1]");
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Password"));
+			Common.javascriptclickElement("xpath",
+					"//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+			Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]/div");
+			String nonmatchpassword = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div")
+					.getText();
+			System.out.println(nonmatchpassword);
+			Common.assertionCheckwithReport(nonmatchpassword.equals(confirmpassword),
+					"To validate the error message when given invalid email or password",
+					"Should dispaly the error message " + confirmpassword,
+					nonmatchpassword + "error message is displayed", "Failed to display error message");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
+					"Should dispaly the error message" + errormessage, "Error message dispaly Failed ",
+					Common.getscreenShotPathforReport("Failed to display the error message"));
+			Assert.fail();
+
+		}
+
+	}
+
 	public void Changepassword_signin(String Dataset) {
 
 		try {
-			
-			//p[@class='text-email']
-			String Email=Common.findElement("xpath", "//p[@class='text-email']").getText();
+
+			// p[@class='text-email']
+			String Email = Common.findElement("xpath", "//p[@class='text-email']").getText();
 			System.out.println(Email);
 			Sync.waitElementPresent("xpath", "//button[contains(@class,'toggle-password')]//span//span");
-		Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span"); 
-		
-		Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
-		Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]", data.get(Dataset).get("CurrentPassword"));
-		Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
-		Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
-		Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
-		Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])", data.get(Dataset).get("Newpassword"));
-		Common.javascriptclickElement("xpath", "//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
-		
-		
-		
-		
-			
+			Common.clickElement("xpath", "//button[contains(@class,'toggle-password')]//span//span");
+
+			Sync.waitElementPresent("xpath", "(//input[@name='current_password'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='current_password'])[2]",
+					data.get(Dataset).get("CurrentPassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password'])[1]");
+			Common.textBoxInput("xpath", "(//input[@name='password'])[1]", data.get(Dataset).get("Newpassword"));
+			Sync.waitElementPresent("xpath", "(//input[@name='password_confirmation'])");
+			Common.textBoxInput("xpath", "(//input[@name='password_confirmation'])",
+					data.get(Dataset).get("Newpassword"));
+			Common.javascriptclickElement("xpath",
+					"//div[contains(@class,'collapsible-password')]//button[contains(@class,'save primary')]");
+
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			
-			 Common.assertionCheckwithReport(message.contains("You saved the account information."),
-								"validating the saved message after changing email",
-								"Save email message should be displayed after the email is saved",
-								"Sucessfully changed email has been saved ",
-								"Failed to save the change email");
+
+			Common.assertionCheckwithReport(message.contains("You saved the account information."),
+					"validating the saved message after changing email",
+					"Save email message should be displayed after the email is saved",
+					"Sucessfully changed email has been saved ", "Failed to save the change email");
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Email);
 			Common.textBoxInput("id", "pass", data.get(Dataset).get("Newpassword"));
@@ -5859,7 +5789,7 @@ public void Validate_Accountinformation_change_password(String Dataset) {
 
 			Assert.fail();
 		}
-	}			
+	}
 
 	public void validateaccountcreationpassword(String dataSet) {
 		try {
@@ -5901,10 +5831,8 @@ public void Validate_Accountinformation_change_password(String Dataset) {
 
 	}
 
-	
 	public void My_Orders_Page() {
-		try
-		{
+		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Orders']");
@@ -5916,32 +5844,29 @@ public void Validate_Accountinformation_change_password(String Dataset) {
 					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
-			String message1=Common.findElement("xpath", "//span[contains(text(),'You have placed no orders.')]").getText();
+			String message1 = Common.findElement("xpath", "//span[contains(text(),'You have placed no orders.')]")
+					.getText();
 			System.out.println(message1);
-			 Common.assertionCheckwithReport(message1.equals("You have placed no orders."),
-						"validating the  message after navigating to the My Orders page ",
-						" message should be displayed in My Orders page ",
-						"Sucessfully message should be displayed in My Orders page",
-						"Failed to display message in my orders page");
-		}
-		catch(Exception | Error e)
-		{
+			Common.assertionCheckwithReport(message1.equals("You have placed no orders."),
+					"validating the  message after navigating to the My Orders page ",
+					" message should be displayed in My Orders page ",
+					"Sucessfully message should be displayed in My Orders page",
+					"Failed to display message in my orders page");
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  My Myorders page with message",
-			"After Clicking on My Orders CTA user should be navigate to the My Orders page with message",
-			"Unable to Display the message in the My orders page",
-					Common.getscreenShot(
-							"Failed to Display message in the My orders page"));
+					"After Clicking on My Orders CTA user should be navigate to the My Orders page with message",
+					"Unable to Display the message in the My orders page",
+					Common.getscreenShot("Failed to Display message in the My orders page"));
 			Assert.fail();
 		}
 	}
-	
+
 	public void myOrders_Shopcategory() {
-		try
-		{
+		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			
+
 			Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
 			Sync.waitPageLoad();
 			String MyOrder = Common.findElement("xpath", "//h2[contains(text(),'Shop By Category')]").getText();
@@ -5950,27 +5875,181 @@ public void Validate_Accountinformation_change_password(String Dataset) {
 					"verifying Shop By Category in the My Orders page",
 					"Sucessfully User Navigates to Shop By Category in the My Orders page",
 					"Failed to Navigate to Shop By Category in the My Orders page");
-			
+
 			Common.clickElement("xpath", "(//a[@class='m-category-card m-category-card--carousel'])[2]");
-			
-			 Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop"),
-						"validating the Shop By Category navigating from the My Orders page ",
-						"Shop By Category should be navigated from the My Orders page ",
-						"Sucessfully Shop By Category navigated from the My Orders page after selecting category",
-						"Failed to display message in my orders page");
-		}
-		catch(Exception | Error e)
-		{
+
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop"),
+					"validating the Shop By Category navigating from the My Orders page ",
+					"Shop By Category should be navigated from the My Orders page ",
+					"Sucessfully Shop By Category navigated from the My Orders page after selecting category",
+					"Failed to display message in my orders page");
+		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Shop By Category in the My Orders page",
 					"verifying Shop By Category in the My Orders page",
 					"Sucessfully User Navigates to Shop By Category in the My Orders page",
-					Common.getscreenShot(
-							"Failed to Display Shop By Category in the My orders page"));
+					Common.getscreenShot("Failed to Display Shop By Category in the My orders page"));
 			Assert.fail();
 		}
 	}
-}
-					
-				
 
+	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+			Sync.waitElementVisible("id", "customer-email");
+			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
+
+		}
+		String expectedResult = "email field will have email address";
+		try {
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+					data.get(dataSet).get("FirstName"));
+			int size = Common.findElements("id", "customer-email").size();
+			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+					"Filled Email address", "unable to fill the email address");
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+
+			Sync.waitPageLoad();
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating shipping address",
+					"shipping address is filled in to the fields", "user faield to fill the shipping address",
+					Common.getscreenShotPathforReport("shipingaddressfaield"));
+			Assert.fail();
+
+		}
+		try {
+
+			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
+			if (size > 0) {
+				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
+				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
+			}
+
+			expectedResult = "shipping address is filled in to the fields";
+			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+
+			int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+
+			if (errorsize <= 0) {
+				ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
+						"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
+			} else {
+
+				ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas",
+						expectedResult, "failed to add a addres in the filled",
+						Common.getscreenShotPathforReport("failed to add a address"));
+
+				Assert.fail();
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
+					"failed to add a addres in the filled",
+					Common.getscreenShotPathforReport("failed to add a address"));
+
+			Assert.fail();
+		}
+
+	}
+
+	public void createAccountFromOrderSummaryPage(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			String shopping=Common.findElement("xpath", "//span[text()='Shop Bottles & Drinkware']//parent::a").getAttribute("href");
+			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
+			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
+			String confirmpassword=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");
+			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
+			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
+			String Greencolor=Color.fromString(Message).asHex();
+			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
+			  Common.assertionCheckwithReport(Greencolor.equals("#067a63") &&
+			  Message1.contains("complete")&&shopping.contains("/shop/bottles")&&kitchen.
+			  contains("/shop/kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an account"),
+			  "validating the order confirmation page",
+			  "User should able to view all details in the order confirmation page",
+			  "Sucessfully all details has been displayed in the order confirmation",
+			  "Failed to display all details in the order confirmation page");
+			  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[1]");
+			  Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
+			  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[2]");
+			  Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+			  String confirmpassword1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
+				String password1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
+			  Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
+			  Common.clickElement("xpath", "//label[@for='is_subscribed']");
+			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
+			  Common.assertionCheckwithReport(confirmpassword1.equals("password")&&password1.equals("password"),
+					  "validating the password field changed to dots",
+					  "After clicking on the eye icon it should be change to dots",
+					  "Sucessfully passwords has been changed to dots after clicking on eye icon",
+					  "Failed change passwords into dots after clicking on eye icon"); 
+			  
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
+			Common.clickElement("xpath", "//span[text()='Create an Account']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
+					"validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Sucessfully navigate to the My account page after clicking on signin button ",
+					"Failed to navigates to My Account Page after clicking on Signin button");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Unable to  navigate to the My account page after clicking on signin button ",
+					Common.getscreenShotPathforReport("Failed to navigates to My Account Page after clicking on Signin button"));
+			Assert.fail();
+		}
+		
+	}
+
+}
