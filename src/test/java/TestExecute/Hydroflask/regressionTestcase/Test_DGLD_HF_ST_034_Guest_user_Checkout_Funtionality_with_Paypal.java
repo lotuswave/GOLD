@@ -9,22 +9,22 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page {
+public class Test_DGLD_HF_ST_034_Guest_user_Checkout_Funtionality_with_Paypal {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Change_Password_from_AccountInformation_Page() throws Exception {
+	public void Validate_Guest_user_Checkout_Funtionality_with_Paypal () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_Createaccount();
-            String NewDetail=Hydro.create_account("AccountDetails");
-            Hydro.edit_Account_info("NewDetails");
-            Hydro.changed_password(NewDetail);
-            
-			
+			Hydro.search_product("Product");      
+			Hydro.addtocart("Product");                    
+			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress("AccountDetails");
+			Hydro.payPal_Payment("PaypalDetails");
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -40,9 +40,8 @@ public class Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-         Login.signIn();
-         Hydro.close_add();
-
+		Login.signIn();
+		Hydro.close_add();
 	}
 
 }

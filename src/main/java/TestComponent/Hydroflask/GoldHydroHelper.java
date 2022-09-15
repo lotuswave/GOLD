@@ -206,11 +206,12 @@ public class GoldHydroHelper {
 			click_minicart();
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			System.out.println(minicart);
 			Sync.waitElementPresent("xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']//span");
-			String checkout = Common.findElement("xpath", "//strong[@role='heading']//span").getText();
+			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+			String checkout = Common.findElement("xpath", "//strong[@role='heading']").getAttribute("aria-level");
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
@@ -622,6 +623,8 @@ public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//h3[@id='block-customer-login-heading']");
 			Common.assertionCheckwithReport(
 					Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
 					"To validate the user navigates to the signin page",
@@ -1227,6 +1230,7 @@ try
        public void search_product(String Dataset) {
    		// TODO Auto-generated method stub
    		String product = data.get(Dataset).get("Products");
+   		System.out.println(product);
    		try {
    			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
    			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
@@ -1236,7 +1240,9 @@ try
    			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
    			Common.actionsKeyPress(Keys.ENTER);
    			Sync.waitPageLoad();
+   			Thread.sleep(4000);
    			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+   			System.out.println(productsearch);
    			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
    					"enter product name will display in the search box", "user enter the product name in  search box",
    					"Failed to see the product name");
@@ -2156,7 +2162,7 @@ try
 		}
 	}
 
-	public void changed_email(String Dataset) {
+	public void changed_password(String Dataset) {
 		// TODO Auto-generated method stub
 		
 			try {
@@ -2285,5 +2291,91 @@ try
              Assert.fail();
 	         }
 	}
-	
+
+	public String payPal_Payment(String dataSet) throws Exception {
+
+		String order="";
+
+		String expectedResult = "It should open paypal site window.";
+		try {
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//input[@id='paypal_express']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//input[@id='paypal_express']");
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+			
+			//Common.refreshpage();
+			Thread.sleep(8000);
+			Sync.waitElementClickable("xpath", "//div[@class='paypal-button-label-container']");
+			Common.clickElement("xpath", "//div[@class='paypal-button-label-container']");
+			Common.switchToDefault();
+			Thread.sleep(5000);
+			Common.switchWindows();
+			int size = Common.findElements("id", "acceptAllButton").size();
+			if (size > 0) {
+
+				Common.clickElement("id", "acceptAllButton");
+
+			}
+		}
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+						"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
+				Assert.fail();
+			}
+			String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			
+			if(!url.contains("stage") &!url.contains("preprod")){
+				
+				int sizeofelement=Common.findElements("id", "email").size();
+				Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,"open paypal site window", "faild to open paypal account");
+			}
+			else
+			{
+				
+				Common.clickElement("id", "login_emaildiv");
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			Common.clickElement("id", "btnNext");
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			int sizeemail = Common.findElements("id", "email").size();
+
+			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,"open paypal site window", "faild to open paypal account");
+			
+			try{
+			Common.clickElement("id", "btnLogin");
+			Thread.sleep(5000);
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(5000);
+			Common.clickElement("id", "payment-submit-btn");
+			Thread.sleep(8000);
+			Common.switchToFirstTab();
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
+			Assert.fail();
+		}
+//			Tell_Your_FriendPop_Up();//To close the Pop-up
+			
+			int n=Common.findElements("xpath", "//div[@class='checkout-success']/p[1]/span").size();
+			if(n>0) {
+				 order=Common.getText("xpath", "//div[@class='checkout-success']/p[1]/span");
+				 System.out.println(order);
+			}
+			else {
+				order=Common.getText("xpath", "//a[@class='order-number']/strong");	
+				 System.out.println(order);
+			}
+			
+		String sucessMessage = Common.getText("xpath", "//h1[@class='checkout-success-title']").trim();
+		Assert.assertEquals(sucessMessage, "Your order has been received", "Sucess message validations");
+		expectedResult = "Verify order confirmation number which was dynamically generated";
+		Common.assertionCheckwithReport(sucessMessage.equals("Your order has been received"),"Order Placed successfull", expectedResult, "faild to place order");
+
+	}
+			return order;
+	}
 }
