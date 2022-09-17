@@ -2752,5 +2752,79 @@ try
 		}
 		
 	}
+
+	public void prodeler_invalid_details(String dataSet) {
+		// TODO Auto-generated method stub
+		click_Prodeal();
+		try
+		{
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//a[@title='Sign in or register']");
+		Sync.waitPageLoad();
+		Sync.waitPageLoad();
+		Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+		Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+		Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+				"To validate the user lands on Pro Deal Application after successfull login",
+				"After clicking on the signIn button it should navigate to the Pro Deal Application",
+				"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
+				"Failed to signIn and not navigated to the Pro Deal Application page ");
+
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+		Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+		Sync.waitPageLoad();
+		Common.switchWindows();
+		Thread.sleep(3000);
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating the pro deal application page",
+				"User should lands to the prodeal application ","Unable to navigates to the prodeal application form",
+				Common.getscreenShotPathforReport("Failed to navigate to the prodeal application form "));
+		Assert.fail();
+	}
+
+		String expectedResult = "After clicking hare button with invalid email error message should be display";
+		try {
+       
+			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
+			String errormessage=Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+			 Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+						"validating the error message with empty fields ", "After clicking hare button with empty data error message should be display",
+						"successfully error message has been dispalyed ", "failed to display the error message");
+			
+			Sync.waitElementPresent("id", "association_email");
+			Common.textBoxInput("id", "association_email", data.get(dataSet).get("FirstName"));
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			
+			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
+			String invalidemail=Common.findElement("xpath", "//input[@name='association_email']//following::div").getText();
+			Thread.sleep(4000);
+			 Common.assertionCheckwithReport(invalidemail.contains("Please enter a valid email address"),
+						"validating the error message with invalid email ", "After clicking hare button with invalid email error message should be display",
+						"successfully error message has been dispalyed ", "failed to display the error message");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message with invalid email ", expectedResult,
+				"Unable to see the error message has been dispalyed ",
+				Common.getscreenShot("failed to display the error message"));
+		Assert.fail();
+
+		}
+	}
+		
+	
 	
 }
