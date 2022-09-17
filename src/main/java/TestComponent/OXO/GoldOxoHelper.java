@@ -426,6 +426,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 			     Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
 					"To validate the user navigates to the signin page",
