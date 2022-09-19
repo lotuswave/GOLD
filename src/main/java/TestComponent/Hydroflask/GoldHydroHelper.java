@@ -2388,8 +2388,11 @@ try
 			Common.clickElement("xpath", "//input[@name='access_code']//parent::div");
 			Common.textBoxInput("xpath", "//input[@name='access_code']",data.get(Dataset).get("Access code"));
 			Common.clickElement("xpath", "//button[@title='Submit']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
 			String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
 					.getText();
+			
 			System.out.println(successmessage);
 			Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
 					"validating the Pro Deal success message ", "should display the success message",
@@ -2823,6 +2826,45 @@ try
 		Assert.fail();
 
 		}
+	}
+
+	public void Prodeal_information() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String prodealexpdate=Common.findElement("xpath", "//strong[text()='Program expiration date:']//parent::p").getText();
+			System.out.println(prodealexpdate);
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+			Sync.waitPageLoad();
+             Common.clickElement("xpath", "//a[text()='Pro Deal']");
+             Sync.waitPageLoad();
+             Thread.sleep(4000);
+             Sync.waitElementPresent(50, "xpath", "//strong[text()='Program expiration date:']//parent::p");
+             String prodealdate=Common.findElement("xpath", "//strong[text()='Program expiration date:']//parent::p").getText();
+             System.out.println(prodealdate);
+             Common.assertionCheckwithReport(prodealexpdate.equals(prodealdate),
+						"validating the prodeal information for register user", "After clicking on prodeal information should be displayed ",
+						"successfully prodeal information has been displayed", "failed to display the prodeal information for the register user");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the prodeal information for register user", "After clicking on prodeal information should be displayed ",
+					"Unable to display the  prodeal information for the register user",
+					Common.getscreenShot("failed to display the prodeal information for the register user"));
+			Assert.fail();
+		}
+		
 	}
 		
 	
