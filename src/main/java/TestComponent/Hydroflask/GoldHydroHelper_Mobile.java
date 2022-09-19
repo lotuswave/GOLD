@@ -34,7 +34,7 @@ public class GoldHydroHelper_Mobile {
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
 	public GoldHydroHelper_Mobile(String datafile) {
-		excelData = new ExcelReader(datafile);
+		excelData = new ExcelReader(datafile,"DataSet");
 		data = excelData.getExcelValue();
 		this.data = data;
 		if (Utilities.TestListener.report == null) {
@@ -44,6 +44,8 @@ public class GoldHydroHelper_Mobile {
 			this.report = Utilities.TestListener.report;
 		}
 	}
+	
+	
 public GoldHydroHelper_Mobile(String datafile,String sheetname) {
 		
 		excelData = new ExcelReader(datafile,sheetname);
