@@ -1090,23 +1090,48 @@ try
 		// TODO Auto-generated method stub
 		try
 		{
+			String shopping=Common.findElement("xpath", "//span[text()='Shop Bottles & Drinkware']//parent::a").getAttribute("href");
+			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
+			String confirmpassword=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");
+			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
 			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String Greencolor=Color.fromString(Message).asHex();
 			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
-            Common.assertionCheckwithReport(Greencolor.equals("#067a63") && Message1.contains("complete"),
-					"validating the password minimum requriment message field",
-					"User should able to view the minimum requriement field for password",
-					"Sucessfully User able to view the minimum requriement field for password",
-					"Failed to see the minimum requriement field for password");
+			  Common.assertionCheckwithReport(Greencolor.equals("#067a63") &&
+			  Message1.contains("complete")&&shopping.contains("/shop/bottles")&&kitchen.
+			  contains("/shop/kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an account"),
+			  "validating the order confirmation page",
+			  "User should able to view all details in the order confirmation page",
+			  "Sucessfully all details has been displayed in the order confirmation",
+			  "Failed to display all details in the order confirmation page");
+			  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[1]");
+			  Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
+			  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[2]");
+			  Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+			  String confirmpassword1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
+				String password1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
+			  Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
+			  Common.clickElement("xpath", "//label[@for='is_subscribed']");
+			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
+			  Common.assertionCheckwithReport(confirmpassword1.equals("password")&&password1.equals("password"),
+					  "validating the password field changed to dots",
+					  "After clicking on the eye icon it should be change to dots",
+					  "Sucessfully passwords has been changed to dots after clicking on eye icon",
+					  "Failed change passwords into dots after clicking on eye icon"); 
+			  
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
 			Common.clickElement("xpath", "//span[text()='Create an Account']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			Common.assertionCheckwithReport(
@@ -2866,7 +2891,80 @@ try
 		}
 		
 	}
+
+	public void minicart_viewcart() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
+			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			Sync.waitElementPresent("xpath", "//span[text()='View Cart']");
+			Common.clickElement("xpath", "//span[text()='View Cart']");
+			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
+			Common.assertionCheckwithReport(
+					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
+					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
+					"Successfully navigates to the view cart page",
+					"Failed to navigate to the view and edit cart page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigation to the view cart",
+					"User should able to navigate to the view cart page", "unable to  navigates to the view cart page",
+					Common.getscreenShot("Failed to navigate to the view cart page"));
+
+			Assert.fail();
+
+		}
 		
-	
-	
+	}
+
+	public void additems_giftregistry(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//button[@type='submit']//span[@class='a-btn__label']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			 Common.assertionCheckwithReport(Common.getPageTitle().equals("Manage Gift Registry"),
+						"validating navigation to the Manage Gift Registry page ", "After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
+						"successfully Navigated to the Manage Gift Registry", "failed to Navigate to the Manage Gift Registry");
+			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating navigation to the Manage Gift Registry page ", "After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
+					"Unable to Navigated to the Manage Gift Registry",
+					Common.getscreenShot("failed to Navigate to the Manage Gift Registry"));
+			Assert.fail();
+		}
+		
+	try
+	{
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//div[@class='control m-text-input']");
+		Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']", data.get(Dataset).get("Quantity"));
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Update Items']");
+		Common.clickElement("xpath", "//span[text()='Update Items']");
+		Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
+		String errormessage=Common.findElement("xpath", "//div[@class='mage-error']").getText();
+		 Common.assertionCheckwithReport(errormessage.contains("Please enter a number greater than 0"),
+					"validating nthe error message validation for the prodcuts in gift registry ", "After Upadting the quantity to zero the eroor message should be display",
+					"successfully quantity has been changed to zero and error message has been displayed", "failed to Display the error message for the when quantity changed to zero");
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating nthe error message validation for the prodcuts in gift registry ", "After Upadting the quantity to zero the eroor message should be display",
+				"Unable to Display the error message for the when quantity changed to zero",
+				Common.getscreenShot("failed to Display the error message for the when quantity changed to zero"));
+		Assert.fail();
+		
+	}
+	}
 }

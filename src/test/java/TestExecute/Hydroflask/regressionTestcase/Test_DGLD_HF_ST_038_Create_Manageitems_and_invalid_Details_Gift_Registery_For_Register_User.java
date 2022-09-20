@@ -22,7 +22,10 @@ public class Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Reg
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.giftCreation("Birthday");
-			Hydro.Manage_items();
+			Hydro.search_product("Product");      
+			Hydro.addtocart("Product");
+			Hydro.minicart_viewcart();
+			Hydro.additems_giftregistry("Product Qunatity");
 			Hydro.share_invalid_details("Baby Registry");
 
 		} catch (Exception e) {

@@ -22,7 +22,7 @@ public class Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Re
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
 			Oxo.giftCreation("Birthday");
-			Oxo.Manage_items();
+			Oxo.additems_giftregistry("Product Qunatity");
 			Oxo.share_invalid_details("Baby Registry");
 			
 			
