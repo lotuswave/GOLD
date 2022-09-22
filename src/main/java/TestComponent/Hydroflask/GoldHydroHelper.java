@@ -210,7 +210,9 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+			
 			String checkout = Common.findElement("xpath", "//strong[@role='heading']").getAttribute("aria-level");
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
@@ -1094,12 +1096,12 @@ try
 			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
+			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
 			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
 			String confirmpassword=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");
 			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
@@ -1113,10 +1115,10 @@ try
 			  "User should able to view all details in the order confirmation page",
 			  "Sucessfully all details has been displayed in the order confirmation",
 			  "Failed to display all details in the order confirmation page");
-			  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[1]");
-			  Common.clickElement("xpath", "(//span[@class='sr-only'])[1]");
-			  Sync.waitElementPresent(30, "xpath", "(//span[@class='sr-only'])[2]");
-			  Common.clickElement("xpath", "(//span[@class='sr-only'])[2]");
+			  Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+			  Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+			  Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[2]");
+			  Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
 			  String confirmpassword1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
 				String password1=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");		
 			  Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
@@ -1344,6 +1346,7 @@ try
 
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
 				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
 			}
@@ -2967,4 +2970,94 @@ try
 		
 	}
 	}
+
+	public void gustuserorderStatus(String dataSet) {
+		// TODO Auto-generated method stub
+		click_trackorder();
+		String ordernumber=data.get(dataSet).get("OrderID");
+
+		try{
+			  Sync.waitElementPresent("id", "oar-order-id");
+			  Common.textBoxInput("id", "oar-order-id",ordernumber);
+			  
+			  Sync.waitElementPresent("id", "oar-billing-lastname");
+			  Common.textBoxInput("id", "oar-billing-lastname",data.get(dataSet).get("Billinglastname"));
+			  
+			  Sync.waitElementPresent("id", "oar_email");
+			  Common.textBoxInput("id", "oar_email",data.get(dataSet).get("BillingEmail"));
+			  
+			  Sync.waitElementPresent("xpath", "//button[@title='Search']");
+			  Common.clickElement("xpath", "//button[@title='Search']");
+			  Sync.waitPageLoad();
+			  Thread.sleep(4000);
+				String orderid = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+				System.out.println(orderid);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid), "verifying order status form",
+						"order tracking information page navigation", "successfully order tracking information page ",
+						"Failed to navigate tracking order page infromation");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying order status form",
+						"order tracking information page navigation", "User unable to navigate to the order tracking information page",
+						Common.getscreenShotPathforReport("Failed to navigate tracking order page infromation"));
+				Assert.fail();
+
+				}
+	}
+	public void click_trackorder(){
+		try {
+			Common.actionsKeyPress(Keys.END);
+			Common.clickElement("xpath", "//a[text()='Track Your Order']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Orders and Returns")|| Common.getPageTitle().equals("My Orders") ,
+					"Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"successfully Navigated to the orders and return page",
+					"Failed to Navigate to the orders and return page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"Unable to  Navigated to the orders and return page", Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
+			Assert.fail();
+
+	}
+	}
+
+	public void regiter_userorder_status() {
+		// TODO Auto-generated method stub
+		 click_singinButton();
+		login_Hydroflask("AccountDetails");
+		click_trackorder();
+		
+		try
+		{
+			Sync.waitPageLoad();
+			int size=Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			Common.assertionCheckwithReport(size>0,
+					"Verifying the order numbers in my orders page ",
+					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
+					"successfully order numbers has been displayed in the my orders page",
+					"Failed to Display the order number in my orders page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verifying the order numbers in my orders page ",
+					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
+					"Unable to see the order numbers on my orders page", Common.getscreenShotPathforReport("Failed to Display the order number in my orders page"));
+			Assert.fail();
+			
+		}
+		
+	}
+
+	public void Kalrna_Payment(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+		
 }
