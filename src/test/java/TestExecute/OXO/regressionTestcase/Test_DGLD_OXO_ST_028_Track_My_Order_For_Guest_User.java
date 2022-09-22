@@ -9,26 +9,20 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User {
+public class Test_DGLD_OXO_ST_028_Track_My_Order_For_Guest_User {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"Forms");
-	
+	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"Forms");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User() throws Exception {
+	public void Validate_Track_My_Order_For_Guest_User() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
-			Oxo.giftCreation("Birthday");
-			Oxo.coffee_headerlinks("Coffee & Beverage");
-			Oxo.addtocart("addproduct");
-			Oxo.minicart_viewcart();
-			Oxo.additems_giftregistry("Product Qunatity");
-			Oxo.share_invalid_details("Baby Registry");
+			Oxo.guestuserorderStatus("GuestUserOrderdetails");
 			
 			
+			
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
