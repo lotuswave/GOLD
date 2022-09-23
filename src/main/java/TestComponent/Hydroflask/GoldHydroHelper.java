@@ -1521,33 +1521,41 @@ try
 					Common.getscreenShotPathforReport("Failed to enter Card details in the Klarna payment"));
 			Assert.fail();
 		}
-		try {
-			String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-
-			int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
-			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-					"verifying the product confirmation", "User Should able to Navigate to the order confirmation page",
-					"Successfully It redirects to order confirmation page Order Placed",
-					"User unabel to go orderconformation page");
-
-			if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
-				order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
-				System.out.println(order);
-			}
-			if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
-				order = Common.getText("xpath", "//a[@class='order-number']/strong");
-				System.out.println(order);
-			}
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the product confirmation", "User Should able to Navigate to the order confirmation page",
-					"User failed to navigate  to order confirmation page",
-					Common.getscreenShotPathforReport("failednavigatepage"));
-			Assert.fail();
+		String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		if(!url1.contains("stage") && !url1.contains("preprod")){
 		}
-
 	
+	else{
+		try{
+		Thread.sleep(4000);
+	String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+	System.out.println(sucessMessage);
+	
+	int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+	Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+			"verifying the product confirmation", "It should redirects to the order confirmation mail",
+			"Successfully It redirects to order confirmation page Order Placed",
+			"User unable to go orderconformation page");
+	
+	if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
+		order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+		System.out.println(order);
+	}
+	if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
+		order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+		System.out.println(order);
+	}
+		
+	}
+catch(Exception | Error e)
+{
+ e.printStackTrace();
+ ExtenantReportUtils.addFailedLog("verifying the order confirmartion page", "It should navigate to the order confirmation page",
+			"User failed to proceed to the order confirmation page", Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+ 
+ Assert.fail();
+}
+	}
 	}
 
 	public void close_add() throws Exception {
@@ -2387,23 +2395,42 @@ try
 			Assert.fail();
 		}
 //			Tell_Your_FriendPop_Up();//To close the Pop-up
-			
-			int n=Common.findElements("xpath", "//div[@class='checkout-success']/p[1]/span").size();
-			if(n>0) {
-				 order=Common.getText("xpath", "//div[@class='checkout-success']/p[1]/span");
-				 System.out.println(order);
+	String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			if(!url1.contains("stage") && !url1.contains("preprod")){
 			}
-			else {
-				order=Common.getText("xpath", "//a[@class='order-number']/strong");	
-				 System.out.println(order);
-			}
+		
+		else{
+			try{
+			Thread.sleep(4000);
+		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+		System.out.println(sucessMessage);
+		
+		int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+		Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+				"verifying the product confirmation", expectedResult,
+				"Successfully It redirects to order confirmation page Order Placed",
+				"User unable to go orderconformation page");
+		
+		if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
+			order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+			System.out.println(order);
+		}
+		if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
+			order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+			System.out.println(order);
+		}
 			
-		String sucessMessage = Common.getText("xpath", "//h1[@class='checkout-success-title']").trim();
-		Assert.assertEquals(sucessMessage, "Your order has been received", "Sucess message validations");
-		expectedResult = "Verify order confirmation number which was dynamically generated";
-		Common.assertionCheckwithReport(sucessMessage.equals("Your order has been received"),"Order Placed successfull", expectedResult, "faild to place order");
-
-	}
+		}
+ catch(Exception | Error e)
+ {
+	 e.printStackTrace();
+	 ExtenantReportUtils.addFailedLog("verifying the order confirmartion page", "It should navigate to the order confirmation page",
+				"User failed to proceed to the order confirmation page", Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+	 
+	 Assert.fail();
+ }
+		}
+			}
 			return order;
 	}
 
@@ -3057,6 +3084,27 @@ try
 	public void Kalrna_Payment(String Dataset) {
 		// TODO Auto-generated method stub
 		
+		
+	}
+
+	public void Signin_Checkoutpage(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementVisible("id", "customer-email");
+			Common.textBoxInput("id", "customer-email", data.get(Dataset).get("Email"));
+			Sync.waitElementPresent("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//span[text()='Sign In']");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			
+			Assert.fail();
+		}
 		
 	}
 		
