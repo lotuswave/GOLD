@@ -3096,16 +3096,55 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "//span[text()='Sign In']");
-			
-			
-		}
-		catch(Exception | Error e)
-		{
+			Sync.waitPageLoad();
+			int regsiteruser=Common.findElements("xpath", "//div[contains(@class,'shipping-address-item n')]").size();
+			Common.assertionCheckwithReport(regsiteruser>0,
+					"Verifying the login functionality from the shipping page",
+					"after clicking on the login button it should login and address should be display",
+					"successfully address book has been displayed after login",
+					"Failed to Display the Address book in shipping page after click on login");
+
+		} catch (Exception | Error e) {
 			e.printStackTrace();
-			
+			ExtenantReportUtils.addFailedLog("Verifying the login functionality from the shipping page",
+					"after clicking on the login button it should login and address should be display",
+					"Unable to Display the Address book in shipping page after click on login",
+					Common.getscreenShotPathforReport("Failed to Display the Address book in shipping page after click on login"));
 			Assert.fail();
 		}
 		
+	}
+
+	public void ordersummary_validation() {
+		// TODO Auto-generated method stub
+		try {
+			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+					"");
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+					.replace("$", "");
+			Float shippingvalue = Float.parseFloat(shipping);
+			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+			Float Taxvalue = Float.parseFloat(Tax);
+			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+					.replace("$", "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Float Total = subtotalvalue + shippingvalue + Taxvalue;
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Successfully Order summary is displayed in the payment page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Unabel to display the Order summary and fields are not displayed in the payment page",
+					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
+			Assert.fail();
+		}
 	}
 		
 }
