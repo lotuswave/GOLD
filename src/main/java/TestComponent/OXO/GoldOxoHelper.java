@@ -116,7 +116,9 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			}
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+//			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
            Common.clickElement("xpath", "//span[text()='Add to Bag']");
 		
@@ -2420,26 +2422,45 @@ try
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
 			Assert.fail();
 		}
-			
-			int n=Common.findElements("xpath", "//div[@class='checkout-success']/p[1]/span").size();
-			if(n>0) {
-				 order=Common.getText("xpath", "//div[@class='checkout-success']/p[1]/span");
-				 System.out.println(order);
+			String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			if(!url1.contains("stage") && !url1.contains("preprod")){
 			}
-			else {
-				order=Common.getText("xpath", "//a[@class='order-number']/strong");	
-				 System.out.println(order);
-			}
+		
+		else{
+			try{
+			Thread.sleep(6000);
+		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+		System.out.println(sucessMessage);
+		
+		int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+		Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+				"verifying the product confirmation", expectedResult,
+				"Successfully It redirects to order confirmation page Order Placed",
+				"User unable to go orderconformation page");
+		
+		if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
+			order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+			System.out.println(order);
+		}
+		if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
+			order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+			System.out.println(order);
+		}
 			
-			Thread.sleep(5000);
-		String sucessMessage = Common.getText("xpath", "//h1[@class='checkout-success-title']").trim();
-		Assert.assertEquals(sucessMessage, "Your order has been received", "Sucess message validations");
-		expectedResult = "Verify order confirmation number which was dynamically generated";
-		Common.assertionCheckwithReport(sucessMessage.equals("Your order has been received"),"Order Placed successfull", expectedResult, "faild to place order");
-
-	}
+		}
+ catch(Exception | Error e)
+ {
+	 e.printStackTrace();
+	 ExtenantReportUtils.addFailedLog("verifying the order confirmartion page", "It should navigate to the order confirmation page",
+				"User failed to proceed to the order confirmation page", Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+	 
+	 Assert.fail();
+ }
+		}
+			}
 			return order;
 	}
+
 
 
 	
@@ -2454,7 +2475,7 @@ try
 
 		try {
 			Sync.waitPageLoad();
-
+			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 
@@ -2478,6 +2499,7 @@ try
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
 				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+				Common.dropdown("xpath", "//select[@name='country']", Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
 				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
@@ -2533,6 +2555,7 @@ try
 		
 		else{
 			try{
+				Thread.sleep(5000);
 		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 
 		
