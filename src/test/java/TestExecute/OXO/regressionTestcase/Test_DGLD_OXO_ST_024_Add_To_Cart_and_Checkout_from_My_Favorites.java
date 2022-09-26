@@ -37,7 +37,7 @@ public class Test_DGLD_OXO_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

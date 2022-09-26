@@ -37,7 +37,7 @@ public class Test_DGLD_OXO_ST_023_Validation_My_Orders_For_Register_User {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

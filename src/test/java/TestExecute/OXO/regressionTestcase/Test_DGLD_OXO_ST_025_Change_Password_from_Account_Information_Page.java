@@ -9,26 +9,22 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart {
+public class Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Account_Registration_Create_Account_With_Cart() throws Exception {
+	public void Validate_Create_Account() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.coffee_headerlinks("Coffee & Beverage");
-			Oxo.addtocart("addproduct");
-//			Oxo.minicart_Checkout();
-			String minicart = Oxo.minicart_items();
 			Oxo.click_Createaccount();
-			Oxo.create_account("AccountDetails");
-			Oxo.minicart_products(minicart);
+			String NewDetails = Oxo.create_account("AccountDetails");
+			Oxo.edit_Account_info("NewDetails");
+			Oxo.changed_password(NewDetails);
 			
 			
-	
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -45,8 +41,7 @@ public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart 
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }
-

@@ -9,26 +9,24 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart {
-
+public class Test_DGLD_OXO_ST_040_Register_User_Checkout_with_Afterpay_Payments {
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Account_Registration_Create_Account_With_Cart() throws Exception {
+	public void Validate_Register_User_Checkout_Functionality_AfterPay_Payment() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
+			Oxo.click_singinButton();
+			Oxo.Usersignin("AccountDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
-//			Oxo.minicart_Checkout();
-			String minicart = Oxo.minicart_items();
-			Oxo.click_Createaccount();
-			Oxo.create_account("AccountDetails");
-			Oxo.minicart_products(minicart);
+			Oxo.minicart_Checkout();
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.After_Pay_payment("Afterpay");
 			
 			
-	
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -45,8 +43,8 @@ public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart 
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
+		  Oxo.acceptPrivacy();
 
 	}
-
 }
 

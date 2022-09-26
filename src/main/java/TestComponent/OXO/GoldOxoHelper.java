@@ -980,7 +980,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		}
 	}
 
-	public void create_account(String Dataset) {
+	public String create_account(String Dataset) {
+		String email="";
 		try {
 			Common.refreshpage();
 			Sync.waitPageLoad();
@@ -991,6 +992,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
 			Common.clickElement("xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			email=Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
@@ -1000,6 +1002,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			Common.assertionCheckwithReport(
@@ -1020,6 +1023,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Assert.fail();
 
 		}
+		return email;
 	}
 
 	public void createaccount_verfication(String Dataset) {
@@ -2683,6 +2687,103 @@ public void register_userorder_status() {
 	}
 	
 }
+
+public void edit_Account_info(String dataSet) {
+	// TODO Auto-generated method stub
+	Accont_Information();
+	try {
+
+		Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
+
+		Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "(//div//input[@id='current-password'])[2]");
+		Common.textBoxInput("xpath", "(//input[@id='current-password'])[2]", data.get(dataSet).get("Password"));
+		Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
+		Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
+		String message = Common.findElement("id", "validation-classes").getCssValue("color");
+		String greencolor=Color.fromString(message).asHex();
+		String message1 = Common.findElement("id", "validation-length").getAttribute("class");
+		
+		Common.assertionCheckwithReport(greencolor.equals("#2f741f") && message1.contains("complete") ,
+				"validating the cureent password and new password fields",
+				"User should able enter data in current password and new password",
+				"Sucessfully the data has been entered in new password and current password",
+				"Failed to enter data in current password and new password fields");
+		
+		Common.clickElement("xpath", "//button[@title='Save']");
+		Thread.sleep(4000);
+		String sucessmessage=Common.findElement("xpath", "//div[@data-ui-id='message-success']").getText();
+		System.out.println(sucessmessage);
+		Common.assertionCheckwithReport(sucessmessage.contains("You saved the account"), "Validating the saved account information",
+				"Account information should be saved for the user", "Sucessfully account information has been saved ",
+				"failed to save the account information");
+		
+	
+		
+		
+	} catch (Exception | Error e) {
+		ExtenantReportUtils.addFailedLog("verifying the change passwordfor the register user",
+				"User enter the valid password", "User failed to proceed to change passowrd ",
+				Common.getscreenShotPathforReport("emailpasswordnew"));
+		Assert.fail();
+
+	}
+}
+
+public void changed_password(String Dataset) {
+	// TODO Auto-generated method stub
+	
+		try {
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", Dataset);
+			Common.textBoxInput("id", "pass", "Lotuswave@1234");
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"To validate the user lands on My Account page after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account page",
+					"user Sucessfully navigate to the My Account page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the My Account page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to My Account page after successfull login",
+					"After clicking on the signin button it should navigate to the My Account page",
+					"Unable to navigate the user to the My Account after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the My Account page "));
+
+			Assert.fail();
+
+	}
+}
+
+public void Accont_Information() {
+	// TODO Auto-generated method stub
+	
+	try {
+		Sync.waitElementPresent("xpath", "//a[text()='Account Information']");
+		Common.clickElement("xpath", "//a[text()='Account Information']");
+		Sync.waitPageLoad();
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
+				"validating the Navigation to the Account information page",
+				"After Clicking on Account information CTA user should be navigate to the Account information page",
+				"Sucessfully User Navigates to the Account information page after clicking on the Account information CTA",
+				"Failed to Navigate to the Account information page after Clicking on Account information button");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Navigation to the Account information page",
+				"After Clicking on Account information CTA user should be navigate to the Account information page",
+				"Unable to Navigates the user to Account information page after clicking on the Account information CTA",
+				Common.getscreenShot(
+						"Failed to Navigate to the Account information page after Clicking on Account information CTA"));
+		Assert.fail();
+	}
+}
+
+
 
 	}
 	
