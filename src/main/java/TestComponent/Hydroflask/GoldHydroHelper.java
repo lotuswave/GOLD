@@ -1565,7 +1565,7 @@ catch(Exception | Error e)
          if(sizesframe>0){
          Common.actionsKeyPress(Keys.PAGE_UP);
         
-       
+        Thread.sleep(4000);
          Sync.waitElementVisible("xpath" , "//div[@class='sidebar-iframe-close']");
          Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
          }
@@ -3146,5 +3146,212 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 	}
+	
+	public void clickContact() throws Exception {
+		String expectedResult = "It should land successfully on the explore/contact page";
 		
+		Common.actionsKeyPress(Keys.END);
+		try {
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//a[text()='Contact Us']");
+			Common.clickElement("xpath", "//a[text()='Contact Us']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+		
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("contact"),"Validating the contatus page navigation" ,
+					expectedResult, "successfully land to contact page", "unabel to load the  contact page");
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validating contact us page", expectedResult,
+					"unabel to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
+			Assert.fail();
+
+		}
+	}
+
+	public void contactUsPage(String dataSet) {
+		// TODO Auto-generated method stub
+		
+		String expectedResult = "Email us form is visible in tab";
+		String country=data.get(dataSet).get("Country");
+		
+		try {
+
+
+			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
+			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
+
+			Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
+
+//			int emailsize = Common.findElements("xpath", "//input[contains(@id,'Emails')]").size();
+//			Common.assertionCheckwithReport(emailsize > 0, "Email us form is visible in tab", expectedResult,
+//					"unabel to load the  contacts form");
+           Common.clickElement("xpath", "//input[@id='customerEmail']");
+			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
+
+			Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
+			Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("FirstName"));
+
+			Sync.waitElementPresent("xpath", "//input[@id='conversationLastName']");
+			Common.textBoxInput("xpath", "//input[@id='conversationLastName']", data.get(dataSet).get("LastName"));
+
+			Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
+			Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(dataSet).get("Company"));
+
+			Sync.waitElementPresent("xpath", "//input[@id='conversationPrimary']");
+			Common.textBoxInput("xpath", "//input[@id='conversationPrimary']", data.get(dataSet).get("phone"));
+
+			Sync.waitElementPresent("xpath", "//input[@name='conversationStreet']");
+			Common.textBoxInput("xpath", "//input[@name='conversationStreet']", data.get(dataSet).get("Street"));
+
+			Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
+			Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(dataSet).get("City"));
+//
+//			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
+//			Common.clickElement("xpath", "//input[@name='conversationCountry']");
+//			Common.dropdown("xpath", "//div[@data-path='united_states']", SelectBy.TEXT,country);
+//           Common.clickElement("xpath", "//input[@name='conversationCountry']");
+			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
+			Common.clickElement("xpath", "//input[@name='conversationCountry']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='United States']");
+			Common.clickElement("xpath", "//div[text()='United States']");
+
+			Sync.waitElementPresent("xpath", "//input[@name='conversationState']");
+			Common.clickElement("xpath", "//input[@name='conversationState']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
+			Common.clickElement("xpath", "//div[text()='Alabama']");
+
+			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCode']");
+			Common.textBoxInput("xpath", "//input[@name='conversationZipCode']", data.get(dataSet).get("postcode"));
+
+			Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
+			Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
+
+			Common.clickElement("xpath", "//div[text()='Order Issues']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
+			// Common.clickElement("xpath", "//div[@id='selectACategory']");
+			Common.clickElement("xpath", "//div[text()='Billing Issue']");
+ 
+			Sync.waitElementPresent("xpath", "//input[@class='form-base' and @id='conversationOrder']");
+			Common.textBoxInput("xpath", "//input[@class='form-base' and @id='conversationOrder']", data.get(dataSet).get("OrderID"));
+			Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
+			Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
+					data.get(dataSet).get("CommetsHydroflask"));
+
+			Common.scrollIntoView("xpath", "//button[text()='Submit']");
+			Common.clickElement("xpath", "//button[text()='Submit']");
+
+			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
+					"Success message should be Displayed", "Contact us Success message displayed ",
+					"failed to dispaly success message");
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying email us from",
+					"contact us form data enter without any error message", "Contact us page getting error ",
+					Common.getscreenShotPathforReport("Contact us page"));
+			Assert.fail();
+
+		}
+
+		Common.actionsKeyPress(Keys.PAGE_UP);
+		String Text = Common.getText("xpath", "(//div[@class='form-wrap']//span)[2]");
+		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
+		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+				"verifying contact us conformation message", expectedResult,
+				"User gets confirmation under the same tab", "unabel to load the confirmation form");
+		
+
+	}
+
+	public void review(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+		try
+		{
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			
+			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
+			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
+			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
+					"verifying the write a review button", "Write a review should be appear in the PDP page",
+					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
+			Common.clickElement("xpath", "//label[text()='Reviews & Questions']");
+			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+			Common.clickElement("xpath", "//span[text()='Write A Review']");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
+					"User Unable to click write review option  ", Common.getscreenShotPathforReport("User Failed to click write review option "));
+			Assert.fail();
+		}
+		try
+		{
+			String expectedResult="Sucessfully title input box has been displayed";
+			score(data.get(Dataset).get("score"));
+			Sync.waitElementPresent("xpath", "//input[@name='review_title']");
+			int title=Common.findElements("xpath", "//input[@name='review_title']").size();
+			Common.assertionCheckwithReport(title > 0, "verifying the title page", "title input box should be displayed",
+					expectedResult, "User Unable to display the title box");
+			Common.textBoxInput("xpath", "//input[@name='review_title']",data.get(Dataset).get("title"));
+			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
+			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//input[@value='Post']");
+			Thread.sleep(4000);
+			String message=Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
+			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
+					"verifying the post for the product review", "product review should be submit after clicking on post",
+					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the post for the product review", "product review should be submit after clicking on post",
+					"Unable to display the Thank you message after clickng on post ", Common.getscreenShotPathforReport("Failed to display the thank you message"));
+			Assert.fail();
+			
+		}
+		
+	}
+	
+	public void score(String score) throws Exception
+	{
+		Thread.sleep(4000);
+		switch (score) {
+		case "1":
+		Sync.waitElementPresent("xpath", "//span[@aria-label='score 1']");
+		Common.clickElement("xpath", "//span[@aria-label='score 1']");
+		break;
+		case "2":
+		Sync.waitElementPresent("xpath", "//span[@aria-label='score 2']");
+		Common.clickElement("xpath", "//span[@aria-label='score 2']");
+		break;
+		case "3":
+		Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
+		Common.clickElement("xpath", "//span[@aria-label='score 3']");;
+		System.out.println("clicked");
+		break;
+		case "4":
+		Sync.waitElementPresent("xpath", "//span[@aria-label='score 4']");
+		Common.clickElement("xpath", "//span[@aria-label='score 4']");
+		break;
+		case "5":
+		Sync.waitElementPresent("xpath", "//span[@aria-label='score 5']");
+		Common.clickElement("xpath", "//span[@aria-label='score 5']");
+		break;
+	}
 }
+}
+		
