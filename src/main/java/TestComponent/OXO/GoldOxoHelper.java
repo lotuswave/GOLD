@@ -2784,6 +2784,175 @@ public void Accont_Information() {
 }
 
 
+public void Invalid_email_newsletter(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.actionsKeyPress(Keys.END);
+		Sync.waitElementClickable(30, "xpath", "//input[@id='newsletter-signup_email']");
+		Common.textBoxInput("xpath", "//input[@id='newsletter-signup_email']", data.get(Dataset).get("Email"));
+		Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+		String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+		System.out.println(Errormessage);
+		Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
+				"To validate the error message for Invalid Email",
+				"Should display error Please enter a valid email address.", Errormessage,
+				"Failed to display the error message for invaild email");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
+				"Should display error Please enter a valid email address.", "Failed to display the error message",
+				Common.getscreenShotPathforReport("Failed to see an error message"));
+
+		Assert.fail();
+
+	}
+}
+
+public void Empty_Email() {
+	try {
+
+		Common.textBoxInputClear("xpath", "//input[@id='newsletter-signup_email']");
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+		String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+		System.out.println(Errormessage);
+		Common.assertionCheckwithReport(Errormessage.equals("Error: This field is required."),
+				"To validate the error message for missing email fields",
+				"Should display Error Please enter a valid email address.", Errormessage,
+				"Error message dispaly unsuccessfull");
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validate the Error message ",
+				"Should display Error: Please enter a valid email address.", "Failed to dispaly the Error message ",
+				Common.getscreenShotPathforReport("User unable to see an error message"));
+		Assert.fail();
+	}
+}
+
+public void stayIntouch() throws Exception {
+
+	try {
+		Thread.sleep(5000);
+		Common.actionsKeyPress(Keys.END);
+		Thread.sleep(5000);
+		Sync.waitElementPresent("xpath", "//input[@id='newsletter-signup_email']");
+		Common.clickElement("xpath", "//input[@id='newsletter-signup_email']");
+		Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+		Thread.sleep(5000);
+		Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+		Thread.sleep(5000);
+		String Text = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+		System.out.println(Text);
+		String expectedResult = "User gets confirmation message that it was submitted";
+
+		Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),"verifying newsletter subscription",
+				"User get confirmation message if new email if it used mail it showing error message ", Text,
+				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+
+	} catch (Exception | Error e) {
+		
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
+				"User faield to subscrption for newLetter  ",
+				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+		Assert.fail();
+ 	}
+}
+
+public void validateChatboxOptions(String DataSet) {
+
+	try {
+		Sync.waitPageLoad();
+		Sync.waitElementClickable("xpath", "//a[@class='a-logo']");
+		Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+		Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+		Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+
+		String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
+		System.out.println(answers);
+		Common.assertionCheckwithReport(answers.contains("Answers"), "To validate the Answers options in Chatbox",
+				"Click the Answers option to display the related options",
+				"Sucessfully click the answers option button", "Unable to click the Answers option button");
+
+		Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
+	} catch (Exception | Error e) {
+		ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page",
+				"Open the ChatBot and answers option should be displayed",
+				"Unable click on the ChatBot and answers are not displayed",
+				Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+		Assert.fail();
+	}
+
+	List<WebElement> Answerwebelements = Common.findElements("xpath",
+			"//div[contains(@class,'SearchListItem__details')]");
+
+	ArrayList<String> arrayoptionName = new ArrayList<String>();
+
+	for (WebElement answernames : Answerwebelements) {
+		arrayoptionName.add(answernames.getText());
+	}
+
+	String[] items = data.get(DataSet).get("OXOAnswers").split(",");
+
+	for (int i = 0; i < items.length; i++) {
+
+		if (arrayoptionName.contains(items[i])) {
+		} else {
+
+			ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+					"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
+					Common.getscreenShotPathforReport("failed to display answersoptions"));
+			Assert.fail();
+		}
+
+		ExtenantReportUtils.addPassLog("To Validate the Answers options ",
+				"click on the answers options it must display all the options ",
+				"Sucessfully displayed the answers options " + arrayoptionName,
+				Common.getscreenShotPathforReport("Answervalidation"));
+	}
+
+	try {
+		String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+		System.out.println(chat);
+		Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+//		Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
+//		Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
+		Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'newConversationButton')]");
+		Common.mouseOverClick("xpath", "//button[contains(@class,'newConversationButton')]");
+		
+		Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+		String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+		System.out.println(welcomemsg);
+		Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
+				"To validate the Chat Conversation when user click on the chat option",
+				"It should Open the Chat conversation in ChatBot",
+				"Sucessfully click on the ChatBot and display the Chat conversation ",
+				"Unable to display the chat conversation when user click on the chat option ");
+
+		Common.switchToDefault();
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the Chat Conversation when user click on the chat option",
+				"It should Open the Chat conversation in ChatBot",
+				"Unable to  click on the ChatBot and not displayed the Chat conversation ",
+				Common.getscreenShotPathforReport(
+						"Unable to display the chat conversation when user click on the chat option"));
+		Assert.fail();
+	}
+
+}
+
+
+
+
+
+
 
 	}
 	
