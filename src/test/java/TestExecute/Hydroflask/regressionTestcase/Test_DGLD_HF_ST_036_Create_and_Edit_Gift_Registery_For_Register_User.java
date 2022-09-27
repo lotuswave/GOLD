@@ -20,9 +20,10 @@ public class Test_DGLD_HF_ST_036_Create_and_Edit_Gift_Registery_For_Register_Use
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("Giftaccount");
 			Hydro.giftCreation("Birthday");
 			Hydro.edit_gift("AccountDetails");
+			Hydro.delete_giftcard();
 
 		} catch (Exception e) {
 

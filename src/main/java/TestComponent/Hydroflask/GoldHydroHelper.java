@@ -158,6 +158,7 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
@@ -207,12 +208,11 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(minicart);
-			Sync.waitElementPresent("xpath", "//button[@title='Checkout']");
+			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(7000);
 			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-			
 			String checkout = Common.findElement("xpath", "//strong[@role='heading']").getAttribute("aria-level");
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
@@ -929,6 +929,7 @@ public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitPageLoad();
+			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			Common.assertionCheckwithReport(
@@ -980,6 +981,7 @@ public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
 			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
@@ -1622,9 +1624,8 @@ catch(Exception | Error e)
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
-
-				Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+				String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
 						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 		
 				
@@ -1645,9 +1646,9 @@ catch(Exception | Error e)
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+				String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 
-				Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
 						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 				
 
@@ -2444,7 +2445,7 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@name='access_code']",data.get(Dataset).get("Access code"));
 			Common.clickElement("xpath", "//button[@title='Submit']");
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
 					.getText();
 			
@@ -3206,12 +3207,10 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
 			Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(dataSet).get("City"));
 //
-//			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
-//			Common.clickElement("xpath", "//input[@name='conversationCountry']");
-//			Common.dropdown("xpath", "//div[@data-path='united_states']", SelectBy.TEXT,country);
-//           Common.clickElement("xpath", "//input[@name='conversationCountry']");
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
 			Common.clickElement("xpath", "//input[@name='conversationCountry']");
+//			Common.dropdown("xpath", "//div[@data-path='united_states']", SelectBy.TEXT,country);
+//           Common.clickElement("xpath", "//input[@name='conversationCountry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='United States']");
 			Common.clickElement("xpath", "//div[text()='United States']");
@@ -3341,7 +3340,6 @@ catch(Exception | Error e)
 		case "3":
 		Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
 		Common.clickElement("xpath", "//span[@aria-label='score 3']");;
-		System.out.println("clicked");
 		break;
 		case "4":
 		Sync.waitElementPresent("xpath", "//span[@aria-label='score 4']");
@@ -3353,5 +3351,29 @@ catch(Exception | Error e)
 		break;
 	}
 }
+
+	public void BillingAddress(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page", "payment section should be displayed",
+					"sucessfully payment section has been displayed","Failed to displayed the payment section");
+			Common.clickElement("xpath", "//input[@type='checkbox']");
+			Common.clickElement("xpath", "//select[@name='billing_address_id']");
+			Common.dropdown("xpath", "//select[@name='billing_address_id']", SelectBy.TEXT, "New Address");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			
+			Assert.fail();
+		}
+	}
 }
 		

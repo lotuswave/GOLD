@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Regi
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("Giftaccount");
 			Hydro.giftCreation("Birthday");
 			Hydro.share_giftcard("AccountDetails");
 			Hydro.delete_giftcard();

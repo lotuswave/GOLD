@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Reg
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("Giftaccount");
 			Hydro.giftCreation("Birthday");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");

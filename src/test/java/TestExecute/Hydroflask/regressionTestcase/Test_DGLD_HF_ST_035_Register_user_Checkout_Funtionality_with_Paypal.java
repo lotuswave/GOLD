@@ -35,7 +35,7 @@ public class Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
