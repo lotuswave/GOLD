@@ -22,8 +22,9 @@ public class Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment {
             	Admin.Customer_segments();
             	Admin.Add_Save_customer_segments("Customer Segment");
             	Admin.Edit_customer_segment("Customer Segment");
-            	
             	Admin.Delete_customer_segment("Customer Segment");
+            	
+            	
              
             }
             catch (Exception e) {
@@ -56,9 +57,9 @@ public class Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment {
         	System.setProperty("configFile", "Admin\\config.properties");
               Login.signIn();
         }
+
+
 }
-
-
 
 
 
