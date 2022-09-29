@@ -252,8 +252,24 @@ public class GoldHydroHelper {
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
+			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 					data.get(dataSet).get("Street"));
+			Common.clickElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Thread.sleep(6000);
+			String newadd=Common.findElement("xpath", "//div[@class='pcaitem']").getAttribute("title");
+			System.out.println(newadd);
+			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']");
+			Common.clickElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Thread.sleep(6000);
+			List<WebElement> listofaddresss=Common.findElements("xpath", "(//div[@class='pcaitem'])[1]");
+			ArrayList<WebElement> listaddress=new ArrayList<WebElement>();
+			for(WebElement addresscheck:listofaddresss)
+			{
+		     listaddress.add(addresscheck);
+			 System.out.println(addresscheck.getAttribute("title")); 
+			}
+		
 			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
@@ -578,6 +594,80 @@ public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 			
 				
+
+			}
+			
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+					"failed  to fill the Credit Card infromation",
+					Common.getscreenShotPathforReport("Cardinfromationfail"));
+			Assert.fail();
+		}
+
+		expectedResult = "credit card fields are filled with the data";
+		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+
+		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+	}
+	
+	public void PaymentDetails(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String cardnumber = data.get(dataSet).get("cardNumber");
+		System.out.println(cardnumber);
+		String expectedResult = "land on the payment section";
+		// Common.refreshpage();
+
+		try {
+			Sync.waitPageLoad();
+
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+			System.out.println(payment);
+			if (payment > 0) {
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				Common.switchToDefault();
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+		
+				
+			} else {
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				Common.switchToDefault();
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");	
 
 			}
 			
@@ -1928,8 +2018,9 @@ catch(Exception | Error e)
 
 					String s = webelementslist.get(i).getAttribute("href");
 					System.out.println(s);
-				
+				    Thread.sleep(4000);
 			        Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
+			        Sync.waitElementPresent(30, "xpath", "(//img[contains(@class,'m-produc')])[1]");
 					Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
 					Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Bag']");
@@ -2402,7 +2493,7 @@ catch(Exception | Error e)
 		
 		else{
 			try{
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 		System.out.println(sucessMessage);
 		
@@ -2579,6 +2670,7 @@ catch(Exception | Error e)
 			    Common.clickElement("id", "submit.next");
 			    Sync.waitPageLoad();
 			    Thread.sleep(4000);
+			    Sync.waitElementPresent(30, "xpath", "//span[@class='value']");
 			    String eventname=Common.findElement("xpath", "//span[@class='value']").getText();
 			    Common.assertionCheckwithReport(eventname.equals("Birthday")||eventname.equals("Wedding")||eventname.equals("Baby Registry")  ,
 						"validating seleted event page navigation ", "It should be able to navigate to Respective event page  ",
@@ -2961,7 +3053,7 @@ catch(Exception | Error e)
 			 Common.assertionCheckwithReport(Common.getPageTitle().equals("Manage Gift Registry"),
 						"validating navigation to the Manage Gift Registry page ", "After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 						"successfully Navigated to the Manage Gift Registry", "failed to Navigate to the Manage Gift Registry");
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+//			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
 		}
 		catch(Exception | Error e)
 		{
@@ -2974,8 +3066,8 @@ catch(Exception | Error e)
 		
 	try
 	{
-		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
 		Common.clickElement("xpath", "//div[@class='control m-text-input']");
 		Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']", data.get(Dataset).get("Quantity"));
 		Sync.waitElementPresent(30, "xpath", "//span[text()='Update Items']");
@@ -3082,8 +3174,86 @@ catch(Exception | Error e)
 		
 	}
 
-	public void Kalrna_Payment(String Dataset) {
+	public void Kalrna_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
+		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+	
+		String fullname=data.get(dataSet).get("FirstName");
+		String expectedResult = "land on the payment section";
+
+		try {
+			Sync.waitPageLoad();
+
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+					"User unable to land o n the paymentpage");
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+			System.out.println(payment);
+			if (payment > 0) {
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//span[text()='New payment method']");
+				
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
+				Common.clickElement("xpath", "//button[@value='klarna']");
+				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
+				String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+				Common.assertionCheckwithReport(
+						details.equals(email),
+						"validating the email field for the Klarana Payment Method",
+						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
+						"Failed to enter email in the Klarna Payment");
+				Common.switchToDefault();
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				klarna_Details(dataSet);
+				
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Common.clickElement("xpath", "//button[@value='klarna']");
+				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
+				String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+				Common.assertionCheckwithReport(
+						details.equals(email),
+						"validating the email field for the Klarana Payment Method",
+						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
+						"Failed to enter email in the Klarna Payment");
+				Common.switchToDefault();
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				klarna_Details(dataSet);
+			}
+			
+			
+			
+		
+	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the product confirmation", "User Should able to Navigate to the order confirmation page",
+					"User failed to navigate  to order confirmation page",
+					Common.getscreenShotPathforReport("failednavigatepage"));
+			Assert.fail();
+		}
 		
 		
 	}
@@ -3352,28 +3522,291 @@ catch(Exception | Error e)
 	}
 }
 
-	public void BillingAddress(String Dataset) {
+	public void BillingAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		try
 		{
 			Sync.waitPageLoad();
-
+            Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-
+            Common.clickElement("xpath", "//label[@for='stripe_payments']");
 			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page", "payment section should be displayed",
 					"sucessfully payment section has been displayed","Failed to displayed the payment section");
-			Common.clickElement("xpath", "//input[@type='checkbox']");
-			Common.clickElement("xpath", "//select[@name='billing_address_id']");
-			Common.dropdown("xpath", "//select[@name='billing_address_id']", SelectBy.TEXT, "New Address");
+			Sync.waitElementPresent(30, "xpath", "//input[@type='checkbox']");
+			Common.javascriptclickElement("xpath", "//input[@type='checkbox']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']",
+					data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.findElement("xpath", "//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+//			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']", data.get(dataSet).get("phone"));
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
+			System.out.println(update);
+			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
+					"verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
+					"Sucessfully Billing address form should be Display ", "Failed to display the Billing address in payment page");
 			
 		}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
-			
+			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
+					"Unable to display the Billing address in payment page", Common.getscreenShotPathforReport("Failed to display the Billing address in payment page"));
 			Assert.fail();
 		}
+	}
+	public void Invalid_email_newsletter(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(4000);
+//			Sync.waitElementPresent(30, "xpath", "//input[@placeholder='Enter Email Address']");
+			Common.clickElement("xpath", "//input[@placeholder='Enter Email Address']//parent::div");
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']//parent::div", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+			System.out.println(Errormessage);
+			Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
+					"To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", Errormessage,
+					"Failed to display the error message for invaild email");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", "Failed to display the error message",
+					Common.getscreenShotPathforReport("Failed to see an error message"));
+
+			Assert.fail();
+
+		}
+	}
+
+	public void Empty_Email() {
+		try {
+
+			Common.textBoxInputClear("xpath", "//input[@id='newsletter-signup_email']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+			System.out.println(Errormessage);
+			Common.assertionCheckwithReport(Errormessage.equals("Error: This field is required."),
+					"To validate the error message for missing email fields",
+					"Should display Error Please enter a valid email address.", Errormessage,
+					"Error message dispaly unsuccessfull");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validate the Error message ",
+					"Should display Error: Please enter a valid email address.", "Failed to dispaly the Error message ",
+					Common.getscreenShotPathforReport("User unable to see an error message"));
+			Assert.fail();
+		}
+	}
+
+	public void stayIntouch() throws Exception {
+
+		try {
+			Thread.sleep(5000);
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//input[@id='newsletter-signup_email']");
+			Common.clickElement("xpath", "//input[@id='newsletter-signup_email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+			Thread.sleep(5000);
+			String Text = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+			System.out.println(Text);
+			String expectedResult = "User gets confirmation message that it was submitted";
+
+			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),"verifying newsletter subscription",
+					expectedResult, Text,
+					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+
+		} catch (Exception | Error e) {
+			
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
+					"User faield to subscrption for newLetter  ",
+					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+			Assert.fail();
+	 	}
+	}
+	
+	public void klarna_Details(String Dataset) {
+		// TODO Auto-generated method stub
+		String order="";
+		String otp=data.get(Dataset).get("OTP Number");
+		String DOB=data.get(Dataset).get("DOB");
+		String Cardnumber=data.get(Dataset).get("cardNumber");
+		System.out.println(Cardnumber);
+		
+		try
+		{
+			Sync.waitPageLoad();
+			Common.switchWindows();
+			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
+			Sync.waitElementPresent("xpath", "//input[@name='phone']");
+			int number=Common.genrateRandomNumber();
+			System.out.println(number);
+			String mobile=Integer.toString(number);
+			String phone="+91"+"95862"+mobile;
+			System.out.println(phone);
+			Common.textBoxInput("xpath", "//input[@name='phone']", phone);
+			Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
+			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
+			Thread.sleep(6000);
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//h1[@role='status']");
+			String klarna=Common.findElement("xpath", "//h1[@role='status']").getText();
+			if(klarna.equals("What's your email?"))
+			{
+				Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
+				Common.findElement("xpath","//input[@id='addressCollector-date_of_birth']").sendKeys(DOB);
+				Common.clickElement("xpath", "//div[@id='addressCollector-street_address__label']");
+				Common.findElement("xpath","//input[@name='street_address']").sendKeys(data.get(Dataset).get("Street"));
+				Common.clickElement("xpath", "//div[@id='addressCollector-city__label']");
+				Common.findElement("xpath","//input[@name='city']").sendKeys(data.get(Dataset).get("City"));
+				Common.clickElement("xpath", "//div[@id='addressCollector-region__label']");
+				Common.findElement("xpath","//input[@name='region']").sendKeys(data.get(Dataset).get("Region"));
+				Common.clickElement("xpath", "//div[@id='addressCollector-postal_code__label']");
+				Common.findElement("xpath","//input[@name='postal_code']").sendKeys(data.get(Dataset).get("postcode"));
+				Common.clickElement("xpath", "//div[@id='terms_checkbox__box']");
+				Common.clickElement("xpath", "//span[text()='Continue']");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[contains(text(),'continue')]");
+				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'Continue')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='pick-plan']");
+				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
+				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
+				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
+
+				Common.textBoxInput("xpath", "//input[@id='cardNumber']//parent::div", Cardnumber);
+				
+//				Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
+				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
+				Common.findElement("xpath","//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
+				Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
+				Common.findElement("xpath","//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
+				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+			}
+		
+		}
+		catch(Exception |Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the card details enter in the Kalrna payment", "User Should able to Enter Card Details in Klarna Payment",
+					"User Unable to enter Card details in the Klarna payment",
+					Common.getscreenShotPathforReport("Failed to enter Card details in the Klarna payment"));
+			Assert.fail();
+		}
+		String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		if(!url1.contains("stage") && !url1.contains("preprod")){
+		}
+	
+	else{
+		try{
+		Thread.sleep(4000);
+	String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+	System.out.println(sucessMessage);
+	
+	int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+	Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+			"verifying the product confirmation", "It should redirects to the order confirmation mail",
+			"Successfully It redirects to order confirmation page Order Placed",
+			"User unable to go orderconformation page");
+	
+	if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
+		order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+		System.out.println(order);
+	}
+	if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
+		order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+		System.out.println(order);
+	}
+		
+	}
+catch(Exception | Error e)
+{
+ e.printStackTrace();
+ ExtenantReportUtils.addFailedLog("verifying the order confirmartion page", "It should navigate to the order confirmation page",
+			"User failed to proceed to the order confirmation page", Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+ 
+ Assert.fail();
+}
+	}
+	}
+
+	public void noitems_giftregistry(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{ 
+	       Sync.waitElementPresent(30, "xpath", "//input[@type='checkbox']");
+			Common.clickElement("xpath", "//input[@type='checkbox']");
+			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
+			Common.clickElement("xpath", "//div[@class='control m-text-input']");
+	           Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']", data.get(Dataset).get("Quantity"));
+			Sync.waitElementPresent("xpath", "//span[text()='Update Items']");
+			Common.clickElement("xpath", "//span[text()='Update Items']");
+			String deletemessage=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(deletemessage.contains("You updated the gift registry items."),"verifying the delete product in gift registry",
+					"product should be delete from the gift registry", "Sucessfully product has been deleted from the gift registry",
+					Common.getscreenShotPathforReport("Failed to delete the product from the gift registry"));
+			String emptymessage=Common.findElement("xpath", "//div[@class='message info empty']//span").getText();
+			Common.assertionCheckwithReport(emptymessage.contains("This gift registry has no items."),"verifying the no prodcts in the gift registry",
+					"product should be not display in the gift registry", "Sucessfully products should not been displayed in the gift registry",
+					Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the no prodcts in the gift registry",
+					"product should be not display in the gift registry", "Unable to display the  products in the gift registry", Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
+		 
+			Assert.fail();
+		}
+		
 	}
 }
 		
