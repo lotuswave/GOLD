@@ -3784,19 +3784,25 @@ catch(Exception | Error e)
 	       Sync.waitElementPresent(30, "xpath", "//input[@type='checkbox']");
 			Common.clickElement("xpath", "//input[@type='checkbox']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
-			Common.clickElement("xpath", "//div[@class='control m-text-input']");
-	           Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']", data.get(Dataset).get("Quantity"));
+			Common.javascriptclickElement("xpath", "//div[@class='control m-text-input']");
+	           Common.textBoxInput("xpath", "//input[contains(@class,'input-text qty a-text-input')]", data.get(Dataset).get("Quantity"));
 			Sync.waitElementPresent("xpath", "//span[text()='Update Items']");
 			Common.clickElement("xpath", "//span[text()='Update Items']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			String deletemessage=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(deletemessage);
 			Common.assertionCheckwithReport(deletemessage.contains("You updated the gift registry items."),"verifying the delete product in gift registry",
 					"product should be delete from the gift registry", "Sucessfully product has been deleted from the gift registry",
 					Common.getscreenShotPathforReport("Failed to delete the product from the gift registry"));
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//div[@class='message info empty']//span");
 			String emptymessage=Common.findElement("xpath", "//div[@class='message info empty']//span").getText();
 			Common.assertionCheckwithReport(emptymessage.contains("This gift registry has no items."),"verifying the no prodcts in the gift registry",
 					"product should be not display in the gift registry", "Sucessfully products should not been displayed in the gift registry",
 					Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
-			
+			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
 		}
 		catch(Exception | Error e)
 		{
