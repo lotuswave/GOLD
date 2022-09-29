@@ -158,7 +158,7 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
@@ -1578,6 +1578,25 @@ try
 			int paymenttype=Common.findElements("xpath", "//p[@id='funding-source-card-issuer']").size();
 			if(paymenttype>0)
 			{
+			Common.clickElement("xpath", "//p[@id='funding-source-card-number']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[text()='Add new']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
+			Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
+			Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
+			Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
+			Common.findElement("xpath","//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
+			Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
+			Common.findElement("xpath","//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
+			Common.switchToDefault();
+			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
@@ -1619,10 +1638,11 @@ try
 	
 	else{
 		try{
-		Thread.sleep(4000);
+		Thread.sleep(6000);
+		
 	String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 	System.out.println(sucessMessage);
-	
+	Sync.waitElementPresent(50, "xpath", "//h1[@class='page-title-wrapper']");
 	int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
 	Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 			"verifying the product confirmation", "It should redirects to the order confirmation mail",
@@ -3203,6 +3223,7 @@ catch(Exception | Error e)
 				
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
 				Common.clickElement("xpath", "//button[@value='klarna']");
 				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
@@ -3714,18 +3735,30 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='pick-plan']");
 				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
 				Sync.waitPageLoad();
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
 				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
-
-				Common.textBoxInput("xpath", "//input[@id='cardNumber']//parent::div", Cardnumber);
-				
-//				Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
+				Thread.sleep(4000);	
+				Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
 				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
 				Common.findElement("xpath","//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
 				Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
 				Common.findElement("xpath","//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
+				Common.switchToDefault();
+				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+			}
+			else
+			{
+				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
@@ -3747,6 +3780,7 @@ catch(Exception | Error e)
 	else{
 		try{
 		Thread.sleep(4000);
+		Sync.waitElementPresent(60, "xpath", "//h1[@class='page-title-wrapper']");
 	String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 	System.out.println(sucessMessage);
 	
@@ -3810,6 +3844,58 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("verifying the no prodcts in the gift registry",
 					"product should be not display in the gift registry", "Unable to display the  products in the gift registry", Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
 		 
+			Assert.fail();
+		}
+		
+	}
+
+	public void Stored_Payment() {
+		// TODO Auto-generated method stub
+		
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//strong[text()='Stored Payment Methods']");
+			Common.clickElement("xpath", "//strong[text()='Stored Payment Methods']");
+			Sync.waitPageLoad(30);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
+					"validating the Navigation to the My Payment Methods page",
+					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
+					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
+					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
+			int size=Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			if(size>0)
+			{
+				String number=Common.findElement("xpath", "").getText();
+			}
+			else
+			{
+				
+			}
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
 			Assert.fail();
 		}
 		
