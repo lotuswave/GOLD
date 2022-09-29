@@ -1,46 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-HF Sprint -4 Regression Suite">
+<suite name="Gold-HF GG Sprint  smoke execution">
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
    	
-  <!--    <test name="Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality" testid="DTG-928" priority="P1" description="This script will cover validating the MiniCart Functionality">
+    <test name="Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-928" priority="P1" description="This script will cover validating  Register user Checkout Funtionality with Paypal">
        <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Minicart_025_035_Validate_MiniCart_Functionality"/>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal"/>
         </classes>
-        </test> -->
+        </test> 
          
-         <test name="Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount" testid="DTG-963" priority="P1" description="This script will cover validating the Unauthenticated User Enters Email Associated With An Account in Shipping page">
+           <test name="Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card" testid="DTG-928" priority="P1" description="This script will cover Guestuser checkout functionality of Hydroflask using Visa Payment">
        <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_CheckoutShippingStep_037_AlternatePath_UnauthenticatedUserEntersEmailAssociatedWithAnAccount"/>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card"/>
+        </classes>
+        </test> 
+         
+         <test name="Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Visa Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card"/>
         </classes>
         </test> 
        
-        <test name="Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Requirement_Checks" testid="DTG-932" priority="P1" description="This script will cover validating the Account Registration Password Requirement Checks">
+        <test name="Test_DGLD_HF_ST_003_Create_Account_Validation" testid="DTG-932" priority="P1" description="This script will cover Account Creation Functionality of Hydroflask">
        <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_AccountRegistration_036_AdditionalPath_Password_Requirement_Checks"/>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_003_Create_Account_Validation"/>
         </classes>
         </test>
         
-      <test name="Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewscontent" testid="DTG-694" priority="P1" description="This script will cover validating the Authenticated User views Header content">
-      	<classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_004_NormalPath_AuthenticatedUser_viewscontent"/>
-        </classes>
-        </test> 
-         <test name="DGLD_HF_UT_Footer_014_UserViewsContactUsPageandSubmits" testid="DTG-817" priority="P1" description="This script will cover validating ContactUsPageandSubmits">
-       <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Footer_014_UserViewsContactUsPageandSubmits"/>
-        </classes>
-        </test>
-
-      
-        <test name="Test_DGLD_HF_UT_Footer_007_AlternatePath_UserSignsUpForNewsletter" testid="DTG-656" priority="P1" description="This script will cover validating Email News Letter SignUp">
-       <classes>
-            <class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Footer_007_AlternatePath_UserSignsUpForNewsletter"/>
-        </classes>
-        </test>  
-        
-        
+        <test name="Test_DGLD_HF_UT_Header_002_User_ViewsMegaMenu_Desktop" testid="DTG-963" priority="P1" description="This script will cover validating theUser_ViewsMegaMenu_Desktop">
+<classes>
+<class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_002_User_ViewsMegaMenu_Desktop"/>
+</classes>
+</test>
         
         
         

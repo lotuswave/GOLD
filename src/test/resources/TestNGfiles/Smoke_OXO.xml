@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO GG Sprint Smoke Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+    
+    <test name="Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" testid="DTG-984" priority="P1" description="This script will cover validating the Guest User Checkout Funtionality Visa Card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" />
+		</classes>
+	</test> 
+        
+    <test name="Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card" testid="DTG-985" priority="P1" description="This script will cover validating the Register User Checkout Funtionality Visa Card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_OXO_ST_003_Create_Account_Validation" testid="DTG-986" priority="P1" description="This script will cover validating the Create_Account_Validation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_003_Create_Account_Validation" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" testid="DTG-1348" priority="P1" description="This script will cover validating Guest user Checkout Funtionality with Paypal">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" />
+		</classes>
+	</test> 
+          
+</suite>  
