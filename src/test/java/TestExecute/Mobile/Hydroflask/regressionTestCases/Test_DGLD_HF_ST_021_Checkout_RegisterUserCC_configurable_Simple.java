@@ -38,7 +38,7 @@ public class Test_DGLD_HF_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

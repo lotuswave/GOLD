@@ -10,21 +10,17 @@ import TestComponent.Hydroflask.GoldHydroHelper_Mobile;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
+public class Test_DGLD_HF_ST_030_Track_My_Order_For_Guest_User {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper_Mobile Hydro = new GoldHydroHelper_Mobile(datafile,"DataSet");
+	GoldHydroHelper_Mobile Hydro = new GoldHydroHelper_Mobile(datafile,"Sheet1");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_Track_My_Order_For_Guest_User  () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress("AccountDetails");
-			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+			Hydro.gustuserorderStatus("GustUserOrderdetails");
 
 		} catch (Exception e) {
 
@@ -34,22 +30,21 @@ public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
-
-     
-        String device=System.getProperty("dev","andriod");
+		String device=System.getProperty("dev","IOS");
 		System.setProperty("configFile", "Hydroflask/mobile_config.properties");
 		if(device.equalsIgnoreCase("ios")) {
 			System.setProperty("configFile", "Hydroflask/mobile_config_ios.properties");
 		}
 		  Login.mobilesignIn(device);
-		   Hydro.close_add();
-
+        Hydro.close_add();
 	}
+
+	
 
 }
