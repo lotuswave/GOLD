@@ -9,18 +9,17 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_031_Track_My_Order_For_Register_User {
+public class Test_DGLD_HF_ST_052_Validate_Country_Selector {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Track_My_Order_For_Register_User () throws Exception {
+	public void Validate_Validate_Country_Selector () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.regiter_userorder_status();
-			Hydro.view_order();
+			Hydro.country_selctor();
 
 		} catch (Exception e) {
 
@@ -37,8 +36,9 @@ public class Test_DGLD_HF_ST_031_Track_My_Order_For_Register_User {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		Login.signIn();
-		Hydro.close_add();
+        Login.signIn();
+        Hydro.close_add();
+
 	}
 
 }

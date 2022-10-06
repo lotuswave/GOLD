@@ -3503,6 +3503,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
 					"verifying the post for the product review", "product review should be submit after clicking on post",
 					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
+			Common.clickElement("xpath", "//div[@aria-label='Next']");
 			
 		}
 		catch(Exception | Error e)
@@ -3896,6 +3897,207 @@ catch(Exception | Error e)
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+
+	public void view_order() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+			String number=Common.findElement("xpath", "//a[@title='View Order']").getText();
+			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
+			Common.clickElement("xpath", "//span[text()='View Order']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(40, "xpath", "//h1[@data-ui-id='page-title-wrapper']");
+			String Ordernumber=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+			Common.findElement("xpath", "//span[contains(@class,'order-status ')]");
+			String reorder=Common.findElement("xpath", "//a[contains(@class,'action or')]//span").getText();
+			Common.clickElement("xpath", "//div[@aria-label='Next']");
+			Common.assertionCheckwithReport(reorder.contains("Reorder"),
+					"validating the order summary and UGC carasol ",
+					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
+					"Sucessfully UGC Carsol is displayed and navigated to the orders page",
+					"Failed to Navigate to the orders page and UGC Casrol is not displayed ");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the order summary and UGC carasol ",
+					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
+					"Unable to Navigate to the orders page and UGC Casrol is not displayed ",
+					Common.getscreenShot(
+							"Failed to Navigate to the orders page and UGC Casrol is not displayed "));
+			Assert.fail();
+			
+		}
+		
+	}
+
+	public void CLP_Page(String category) {
+		// TODO Auto-generated method stub
+		
+		String expectedResult = "User should click the" + category;
+		try {
+
+			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Thread.sleep(3000);
+//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Thread.sleep(3000);
+
+			try {
+				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+			} catch (Exception e) {
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			}
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.clickElement("xpath", "//a[text()='Shop All']");
+			expectedResult = "User should select the " + category + "category";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			Common.assertionCheckwithReport(sizebotteles > 0,
+					"validating the product category as" + category + "from navigation menu ", expectedResult,
+					"Selected the " + category + " category", "User unabel to click" + category + "");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+					expectedResult, "Unable to Selected the " + category + " category",
+					Common.getscreenShot("Failed to click on the" + category + ""));
+
+			Assert.fail();
+		}
+
+		
+	}
+
+	public void verifying_sub_category() {
+		// TODO Auto-generated method stub
+		
+		String name;
+		String Productname;
+		try
+		{
+			Sync.waitPageLoad();
+			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
+			System.out.println(sub_category.size());
+			for(int i=0;i<sub_category.size();i++)	
+			{
+			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
+			Thread.sleep(4000);
+			name=Image.get(i).getText();
+		    System.out.println(name);
+			Image.get(i).click();
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Thread.sleep(4000);
+			ExtenantReportUtils.addPassLog("Validating"+ name +"Page  ", "click the sub category should navigate to the  "+name +"Page", "successfully page navigating to "+name +"PAGE", Common.getscreenShotPathforReport(name));
+			}
+			List<WebElement> image_category=Common.findElements("xpath", "//div[@class='m-category-card__container']");
+			System.out.println(image_category.size());
+			for(int i=0;i<image_category.size();i++)	
+			{
+				List<WebElement> button=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
+				Thread.sleep(4000);
+				Productname=button.get(i).getText();
+			    System.out.println(Productname);
+			    Thread.sleep(4000);
+				button.get(i).click();
+				Thread.sleep(4000);
+				Common.navigateBack();
+				Thread.sleep(4000);
+				ExtenantReportUtils.addPassLog("Validating"+ Productname +"Page  ", "click the sub category should navigate to the  "+Productname +"Page", "successfully page navigating to "+Productname +"PAGE", Common.getscreenShotPathforReport(Productname));
+				
+			}
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the category page validation after clicking on sub category in CLP page ",
+		"After Clicking on subcategory it should navigate to the PLP pages",
+		"Unable to navigate to the PLP pages after clicking on the sub category",
+				Common.getscreenShot("Failed to navigate to the PLP pages after clicking on the sub category"));
+		Assert.fail();
+		}
+		
+	}
+
+	public void verifying_shop_Best_Sellers() {
+		// TODO Auto-generated method stub
+		String product;
+
+		try
+		{
+			Sync.waitPageLoad();
+			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'product-item-i')]");
+			System.out.println(sub_category.size());
+			for(int i=0;i<sub_category.size()-3;i++)	
+			{
+			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'product-item-i')]");
+			Thread.sleep(6000);
+			product=Image.get(i).getText();
+		    System.out.println(product);
+			Image.get(i).click();
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Thread.sleep(4000);
+			ExtenantReportUtils.addPassLog("Validating"+ product +"Page  ", "click on the shop best sellers should navigate to the  "+product +"Page", "successfully page navigating to "+product +"PAGE", Common.getscreenShotPathforReport(product));
+			}	
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the category page validation after clicking on sub category in CLP page ",
+					"After Clicking on subcategory it should navigate to the PDP pages",
+					"Unable to navigate to the PDP pages after clicking on the sub category",
+							Common.getscreenShot("Failed to navigate to the PDP pages after clicking on the sub category"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void country_selctor() {
+		// TODO Auto-generated method stub
+		String Country;
+		try
+		{
+			Common.actionsKeyPress(Keys.END);
+			List<WebElement> country=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+			System.out.println(country.size());
+			for(int i=0;i<country.size();i++)
+			{
+			
+				List<WebElement> select=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent(50, "xpath", "//img[@alt='United States flag']");
+				Common.clickElement("xpath", "//img[@alt='United States flag']");
+				Thread.sleep(3000);
+				Country=select.get(i).getText();
+				select.get(i).click();
+				Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.navigateBack();
+				ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));	
+			}
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
+					"After Clicking on the selected country it should navigate to the respective country page",
+					"Unable to navigate to the respective country page after clicking on the selected country",
+							Common.getscreenShot("Failed to navigate to the respective country page after clicking on the selected country"));
 			Assert.fail();
 		}
 		
