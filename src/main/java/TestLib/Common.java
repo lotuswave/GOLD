@@ -151,6 +151,9 @@ public class Common {
 		return "";
 	}
 
+	public static void navigateBack() {
+		getDriver().navigate().back();
+	}
 	public static void refreshpage() {
 		getDriver().navigate().refresh();
 		Driver.getLogger().info("Page Refreshed Sucessfully");
