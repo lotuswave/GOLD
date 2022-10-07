@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import TestLib.Automation_properties;
@@ -586,6 +587,702 @@ public class GoldAdminHelper {
 
 		}
 
-	
+		public void click_content() {
+			// TODO Auto-generated method stub
+			try {
+				Common.switchToFirstTab();
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//li[@id='menu-magento-backend-content']");
+				Sync.waitElementPresent("xpath", "//li[@id='menu-magento-backend-content']");
+				String content = Common.findElement("xpath", "//strong[contains(text(),'Content')]").getText();
+				System.out.println(content);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(content.equals("Content"),
+						"To validate the content menu after admin clicks on the content from the main menu",
+						"After clicking the content Admin should display the content menu options",
+						"Admin successfully clicked the content and it displayed the Content Menu",
+						"Admin failed to click the Content menu");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog(
+						"To validate the content menu after admin clicks on the content from the main menu",
+						"After clicking the content Admin should display the content menu options",
+						"Admin failed to click the content from the mail menu",
+						Common.getscreenShotPathforReport("Admin failed to click on the content menu"));
+				Assert.fail();
+			}
+
+		}
+		public void pages() {
+
+			try {
+				Sync.waitElementPresent("xpath", "//span[text()='Pages']");
+				Common.clickElement("xpath", "//span[text()='Pages']");
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Pages / Magento Admin"),
+						"Validating content field page navigation ", "After clicking on pages it will navigate page field ",
+						"Successfully navigate to the page field ", "Failed to navigate to the page filed");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating content filed page navigation ",
+						"after clicking on pages it will navigate page filed ", "Unable to navigate to the page filed ",
+						Common.getscreenShotPathforReport("Failed to navigate to the page filed"));
+				Assert.fail();
+
+			}
+
+		}
+		
+		public void newpageCTA(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+				Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+				Common.actionsKeyPress(Keys.ENTER);
+				Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+				String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+				if (records.equals("0 records found")) {
+					Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
+					Common.clickElement("xpath", "//button[@title='Add New Page']");
+				} else {
+					Sync.waitElementPresent("xpath", "//button[text()='Select']");
+					Common.clickElement("xpath", "//button[text()='Select']");
+					Common.clickElement("xpath", "//a[text()='Edit']");
+					Sync.waitPageLoad();
+					delete_existing_page("promocontent");
+					Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
+					Common.clickElement("xpath", "//button[@title='Add New Page']");
+				}
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().equals("New Page / Pages / Elements / Content / Magento Admin"),
+						"Validating edit page bulider navigation ",
+						"after clicking on the edit page builder it will navigate to the edit page builder field ",
+						"Successfully navigate to the edit page builder field ",
+						"Failed to navigate to the edit page builder field");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
+						"after clicking on the edit page builder it will navigate to the edit page builder field ",
+						"Unable to  navigate to the edit page builder field ",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit page builder filed"));
+				Assert.fail();
+			}
+		}
+		public void Contentpage() {
+			// TODO Auto-generated method stub
+			try {
+				Common.scrollIntoView("xpath", "//strong//span[text()='Content']");
+				Common.javascriptclickElement("xpath", "//strong//span[text()='Content']");
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				Sync.waitElementPresent(30, "xpath", "//button[@class='action-default action']");
+				Common.mouseOverClick("xpath", "//button[@class='action-default action']");
+				Sync.waitElementPresent(40, "xpath", "//div[contains(@data-bind,'pageBuilderEditButtonClick')]");
+				String pagebuilder = Common.findElement("xpath", "//div[contains(@data-bind,'pageBuilderEditButtonClick')]")
+						.getAttribute("class");
+				System.out.println(pagebuilder);
+				Common.assertionCheckwithReport(pagebuilder.contains("pagebuilder-wysiwyg-overlay"),
+						"Validating edit page bulider navigation ",
+						"After clicking on edit page builder it Should navigate to edit page builder field ",
+						"Successfully navigate to the edit page builder field",
+						"Failed to navigate to the edit page builder field");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating edit page bulider navigation ",
+						"After clicking on edit page builder it Should navigate to edit page builder field ",
+						"Unable navigate to the edit page builder field",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit page builder field"));
+
+				Assert.fail();
+			}
+		}
+		public void delete_existing_page(String Dataset) throws Exception
+
+		{
+			String title = data.get(Dataset).get("pageTitle");
+			Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
+			String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+			if (name.equals(title)) {
+				Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+				Common.clickElement("xpath", "//span[text()='Delete Page']");
+			} else {
+				Assert.fail();
+			}
+			String message = Common.findElement("xpath", "//div[@class='modal-content']").getText();
+			if (message.equals("Are you sure you want to do this?")) {
+				Common.clickElement("xpath", "//span[text()='OK']");
+
+			} else {
+				Assert.fail();
+			}
+			Sync.waitPageLoad();
+			String deletemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			System.out.println(deletemessage);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("Pages / Magento Admin")
+							&& deletemessage.equals("The page has been deleted."),
+					"Validating page filed  navigation and customer deleted message",
+					"after clicking save button it will navigate page filed and message should be displayed",
+					"Successfully navigate to page filed and message is dispalyed", "Failed to navigate to page filed");
+		}
+		
+		public void hot_elements() {
+			try {
+				Sync.waitElementPresent("xpath", "//h4[text()='HoT Elements']");
+				Common.clickElement("xpath", "//h4[text()='HoT Elements']");
+				String hotelements = Common.findElement("xpath", "//li[@id='menu-section-hot_elements']")
+						.getAttribute("class");
+
+				Common.assertionCheckwithReport(hotelements.contains("active"),
+						"To Verify the Hot element drop down contents is displayed ",
+						"After clicking on hot elements contents should display",
+						"Successfully hot elements contents displayed ", "Failed to display hot elements contents");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Verify the Hot element drop down contents is displayed ",
+						"After clicking on hot elements contents should display",
+						"Unable to display the hot elements contents",
+						Common.getscreenShotPathforReport("Failed to display hot elements contents"));
+				Assert.fail();
+			}
+		}
+		
+		public WebElement Promo_Content() {
+			// TODO Auto-generated method stub
+
+			WebElement element = Common.findElement("xpath", "//span[text()='Promo Content (Product)']");
+			Common.clickElement("xpath", "//span[text()='Promo Content (Product)']");
+
+			return element;
+
+		}
+		public void dragndrop_valueprop_Banner() {
+			// TODO Auto-generated method stub
+			try {
+				Common.scrollIntoView("xpath", "//span[text()='Value Prop Banner']");
+				WebElement elements = Common.findElement("xpath", "//span[text()='Value Prop Banner']");
+				draganddropContentBlock(elements);
+				String blocknames = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+						.getAttribute("data-content-type");
+				Common.assertionCheckwithReport(blocknames.equals("hot_value_prop_banner"),
+						"Validating the value prop banner Dragndrop operation",
+						"value prop banner dragndrop to content with options",
+						"successfully dragndrop the value prop banner with options ",
+						"fail to dragndrop the value prop banner");
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("Validating value prop banner Dragndrop operation",
+						"value prop banner dragndrop to content with options",
+						"Unable to  dragndrop the value prop banner with options ",
+						Common.getscreenShotPathforReport("fail to dragndrop the value prop banner"));
+				Assert.fail();
+
+			}
+
+		}
+		public void draganddropContentBlock(WebElement source) {
+			try {
+				Common.dragdrop(source, "xpath", "//div[contains(@class,'pagebuilder-emp')]");
+
+			} catch (Exception | Error e) {
+
+			}
+		}
+		
+		public void edit_valueprop_banner() {
+			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(5000);
+				Sync.waitElementPresent(30, "xpath", "//h2[@data-element='heading']");
+				Common.mouseOver("xpath", "//h2[@data-element='heading']");
+				String visible = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-options ')]")
+						.getAttribute("class");
+				System.out.println(visible);
+				Common.assertionCheckwithReport(visible.contains("-options-visible"),
+						"validation Edit option  in the page builder ",
+						"after mouse over on the page builder edit option should be appear ",
+						"Successfully edit option appeared in the pagebuilder",
+						"Failed to appear edit option when we mouse over");
+
+				Common.clickElement("xpath", "(//i[@class='icon-admin-pagebuilder-systems'])[1]");
+				String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+				System.out.println(editpromo);
+				Common.assertionCheckwithReport(editpromo.contains("Edit Value Prop Banner"),
+						"validation Navigation to the edit promo page ",
+						"after Clicking on the edit button it should be navigate to the edit promo page ",
+						"Successfully it is navigated to the edit promo page ",
+						"Failed to navigate to the edit promo page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo page ",
+						"after Click on edit button it should be navigate to the edit promo page ",
+						"Unablr to navigate to the edit promo page ",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit promo page"));
+				Assert.fail();
+
+			}
+
+		}
+		public void editpromocontent_color(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+
+				Common.scrollIntoView("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+				Common.clickElement("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+				String color = data.get(Dataset).get("Color");
+				Common.clickElement("xpath", "//span[@title='" + color + "']");
+				Common.clickElement("xpath", "//button[text()='Apply']");
+				String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
+						.getAttribute("value");
+
+				Common.assertionCheckwithReport(appliedcolor.equals(color),
+						"To validate the color is applied in the Promo content background ",
+						"After clicking on the color the background color should be applied ",
+						"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the color is applied in the Promo content background ",
+						"After clicking on the color the background color should be applied ",
+						"Unable to apply the  Background color ",
+						Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+				Assert.fail();
+
+			}
+		}
+		public void edit_heading_mobile_valueprop_banner(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Common.clickElement("xpath", "//select[@name='mobile_layout']");
+				Common.dropdown("xpath", "//select[@name='mobile_layout']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("mobilelayout"));
+				Common.clickElement("xpath", "//input[@name='heading']");
+				Common.textBoxInput("xpath", "//input[@name='heading']", data.get(Dataset).get("heading"));
+				Common.clickElement("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+				String color = data.get(Dataset).get("TextColor");
+				Common.clickElement("xpath", "//span[@title='" + color + "']");
+				Common.clickElement("xpath", "//button[text()='Apply']");
+				String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
+						.getAttribute("value");
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				String colortext = Common.findElement("xpath", "//h2[@class='m-heading__text']").getText();
+				System.out.println(colortext);
+				Common.assertionCheckwithReport(colortext.equals("Text"),
+						"validating  the color applied on the backgroud Text ",
+						"after Clicking on the color the background Text color should be applied ",
+						"Successfully Background Text color  is applied ", "Failed to apply backgroud Text color");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation of the color applied in the backgroud Text ",
+						"after Clicking on the color the background Text color should be applied ",
+						"Unable to apply the Background Text color ",
+						Common.getscreenShotPathforReport("Failed to apply backgroud Text color"));
+				Assert.fail();
+			}
+		}
+		
+		public void edit_valueprop_banner_one() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+				String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+						.getAttribute("id");
+
+				Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[2]");
+
+				String editvlauepropcard = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+				Common.assertionCheckwithReport(editvlauepropcard.contains("Edit Value Prop Card"),
+						"validating Navigation to the edit  value prop Card page ",
+						"after Click on edit button it should be navigate to the edit value prop card page ",
+						"Successfully it is navigated to edit value prop card  page ",
+						"Failed to navigate to edit value prop card page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validati Navigation to the edit  value prop Card page ",
+						"after Click on edit button it should bnge navigate to the edit value prop card page ",
+						"Unable to  navigated to the edit value prop card  page ",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit value prop card page"));
+				Assert.fail();
+
+			}
+		}
+		
+		public void icon_image_one(String Dataset) {
+			// TODO Auto-generated method stub
+
+			String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+			try {
+
+				Sync.waitElementPresent(30, "xpath", "(//input[@type='file'])[4]");
+				String id = Common.findElement("xpath", "(//input[@type='file'])[4]").getAttribute("id");
+				Common.findElement("xpath", "//input[@id='" + id + "']").sendKeys(path);
+				String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+				System.out.println(image);
+				Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
+						"validating  the image uploading on content for icon image ",
+						"Image should be upload for icon image", "Successfully image uploaded in icon image ",
+						"Failed to upload image on the icon image");
+				String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
+				Common.textBoxInput("xpath", "//input[@id='" + newid + "']", data.get(Dataset).get("Attachment"));
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation the image uploading on content for icon image ",
+						"Image should be upload for icon image", "Unable to upload the image for icon image ",
+						Common.getscreenShotPathforReport("Failed to upload image for icon image"));
+				Assert.fail();
+
+			}
+
+		}
+		
+		public void edit_valueprop_banner_Two() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitPageLoad(40);
+				Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+				String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+						.getAttribute("id");
+//				Sync.waitElementPresent(30, "xpath","//div[@id='" + id+ "']//div[@class='pagebuilder-content-type-wrapper']");
+				Common.mouseOver("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[3]");
+				Common.clickElement("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[3]");
+
+				String editvlauepropcard = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+				Common.assertionCheckwithReport(editvlauepropcard.contains("Edit Value Prop Card"),
+						"validating the Navigation to the edit  value prop Card page ",
+						"after Click on edit button it should be navigate to the edit value prop card page ",
+						"Successfully it is navigated to the edit value prop card  page ",
+						"Failed to navigate to edit value prop card page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation Navigation to the edit  value prop Card page ",
+						"after Click on edit button it should be navigate to the edit value prop card page ",
+						"Unable to navigate to the edit value prop card  page ",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit value prop card page"));
+				Assert.fail();
+
+			}
+		}
+		
+		public void icon_image_two(String Dataset) {
+			// TODO Auto-generated method stub
+			String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa1.png");
+			try {
+
+				Sync.waitElementPresent(30, "xpath", "(//input[@type='file'])[4]");
+				String id = Common.findElement("xpath", "(//input[@type='file'])[4]").getAttribute("id");
+				Common.findElement("xpath", "//input[@id='" + id + "']").sendKeys(path);
+				String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+				System.out.println(image);
+				Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
+						"validating the image uploading on content for icon image ",
+						"Image should be upload for icon image", "Successfully image uploaded for the icon image ",
+						"Failed to upload image for the icon image");
+				String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
+				Common.textBoxInput("xpath", "//input[@id='" + newid + "']", data.get(Dataset).get("Attachment"));
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the image uploading on content for icon image ",
+						"Image should be upload for icon image", "Unable to upload the  image for icon image ",
+						Common.getscreenShotPathforReport("Failed to upload image for the icon image"));
+				Assert.fail();
+
+			}
+
+		}
+		public void edit_valueprop_banner_Three() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+				String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+						.getAttribute("id");
+
+				Common.mouseOver("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[4]");
+				Common.clickElement("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[4]");
+
+				String editvlauepropcard = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+				Common.assertionCheckwithReport(editvlauepropcard.contains("Edit Value Prop Card"),
+						"validating the Navigation to the edit  value prop Card page ",
+						"after Click on edit button it should be navigate to the edit value prop card page ",
+						"Successfully it is navigated to edit value prop card  page ",
+						"Failed to navigate to the edit value prop card page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation Navigation to the edit  value prop Card page ",
+						"after Click on edit button it should be navigate to the edit value prop card page ",
+						"Unable to navigate to the edit value prop card  page ",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit value prop card page"));
+				Assert.fail();
+
+			}
+
+		}
+		public void icon_image_galary(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "(//label[text()='Select from Gallery'])[7]");
+				Sync.waitPageLoad();
+				String gallery = Common.findElement("xpath", "//span[contains(@class,'fileinput')]//span").getText();
+				Common.assertionCheckwithReport(gallery.equals("Upload Images"),
+						"To validate the page navigated to the insert pages when we click on the upload from gallery ",
+						"After Click on the upload from the gallery it should navigate to the insert pages",
+						"Successfully It is navigated to the insert pages after clicking on the upload from gallery ",
+						"Failed to Navigate to the insert pages after clicking on the upload from the gallery");
+
+				Common.scrollIntoView("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+				Sync.waitElementPresent(30, "xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+				Common.clickElement("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+				Common.scrollIntoView("xpath", "//span[text()='Add Selected']");
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Add Selected']");
+				Common.clickElement("xpath", "//span[text()='Add Selected']");
+				Sync.waitPageLoad();
+				String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
+				Common.textBoxInput("xpath", "//input[@id='" + newid + "']", data.get(Dataset).get("Attachment"));
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Sync.waitElementPresent("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				String imageupload = Common.findElement("xpath", "(//div[contains(@data-bind,'visible: hasData()')])[3]")
+						.getAttribute("data-bind");
+				Common.assertionCheckwithReport(imageupload.contains("isShowImageUploadOptions"),
+						"validating the image uploading on content in value prop banner ",
+						"Image should be upload for value prop baneer",
+						"Successfully image uploaded in the value prop banner ",
+						"Failed to upload image on the value prop banner");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation the image uploading on content in value prop banner ",
+						"Image should be upload for value prop baneer", "Unable to upload image on the value prop banner ",
+						Common.getscreenShotPathforReport("Failed to upload image on the value prop banner"));
+				Assert.fail();
+
+			}
+
+		}
+		public void savecontent(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//input[@name='title']");
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+				Common.clickElement("xpath", "//button[@id='save-button']");
+				Sync.waitPageLoad(70);
+
+				Sync.waitElementVisible("xpath", "//div[@data-ui-id='messages-message-success']");
+				String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(savethepage.contains("You saved the page."),
+						" To Validate the User needs to save the page", "User should able to save the page",
+						"Sucessfully User saves the page", "Failed to save the page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+						"User should able to save the page", "Unable to saves the page",
+						Common.getscreenShotPathforReport("Failed to save the page"));
+				Assert.fail();
+			}
+
+		}
+		public void openwebsite(String Dataset) {
+			String pagetitle = data.get(Dataset).get("pageTitle");
+			try {
+				Sync.waitPageLoad(60);
+
+				String currentAdminURL = Common.getCurrentURL();
+				String urlkey = pagetitle.toLowerCase();
+				System.out.println(urlkey);
+				Common.openNewTab();
+				if (currentAdminURL.contains("stage")) {
+					Common.oppenURL(data.get(Dataset).get("URL") + urlkey);
+				} else {
+					Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
+
+				}
+				Sync.waitPageLoad(40);
+				String uname = Common.getPageTitle();
+				Common.assertionCheckwithReport(uname.contains(pagetitle),
+						"Validating the User lands to the Hydroflask page",
+						"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
+						"Failed to navigate to the hydroflask page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the User lands to the Hydroflask page",
+						"User should able to land on the Hydroflask page", "Unable to Navigate to the Hydroflask page",
+						Common.getscreenShotPathforReport("Failed to navigate to the hydroflask page"));
+
+				Assert.fail();
+			}
+		}
+		public void valueprop_website() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "(//img[@alt='Fixed'])[1]");
+				String id1 = Common.findElement("xpath", "(//img[@alt='Fixed'])[1]").getAttribute("data-pb-style");
+				System.out.println(id1);
+				String image1 = Common.findElement("xpath", "//img[@data-pb-style='" + id1 + "']").getAttribute("src");
+				System.out.println(image1);
+				String id2 = Common.findElement("xpath", "(//img[@alt='Fixed'])[2]").getAttribute("data-pb-style");
+				System.out.println(id2);
+				String image2 = Common.findElement("xpath", "//img[@data-pb-style='" + id2 + "']").getAttribute("src");
+				System.out.println(image2);
+				String id3 = Common.findElement("xpath", "(//img[@alt='Fixed'])[3]").getAttribute("data-pb-style");
+				System.out.println(id3);
+				String image3 = Common.findElement("xpath", "//img[@data-pb-style='" + id3 + "']").getAttribute("src");
+				System.out.println(image3);
+				Common.assertionCheckwithReport(
+						image1.contains("Lotusqa") && image2.contains("Lotusqa1")
+								&& image3.contains("cms-corporate-purchasing"),
+						"validating the image uploading on content in frontend website ",
+						"Image should be upload on the frontend website",
+						"Successfully image uploaded on the frond end image ", "Failed to upload image on the frond end");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the image uploading on content in frontend website ",
+						"Image should be upload for frontend website", "Unable to upload the image on the frond end ",
+						Common.getscreenShotPathforReport("Failed to upload image on the frond end"));
+				Assert.fail();
+			}
+		}
+		public void clone_valueprop_banner() {
+			// TODO Auto-generated method stub
+			try {
+
+				Common.switchToFirstTab();
+				Contentpage();
+				Sync.waitElementPresent(30, "xpath", "//h2[@data-element='heading']");
+				Common.mouseOver("xpath", "//h2[@data-element='heading']");
+				Sync.waitElementPresent("xpath", "//a[@title='Duplicate']");
+				Common.clickElement("xpath", "//a[@title='Duplicate']");
+				edit_valueprop_banner_one();
+				icon_image_galary("promocontent");
+				Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//button[@id='save-button']");
+				Sync.waitPageLoad(70);
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+				Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
+						"Validating the User need to save the page", "User should able to save the page",
+						"Sucessfully User saves the page", "Unable to save the page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
+						"User should able to save the page", "Unable to save the page",
+						Common.getscreenShotPathforReport("Unable to save the page"));
+				Assert.fail();
+
+			}
+
+		}
+		public void vlaueprop_clone_frontend(String Datset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitPageLoad(40);
+				Common.switchToSecondTab();
+				Common.refreshpage();
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String image = Common.findElement("xpath", "(//img[@data-element='desktop_image'])[8]")
+						.getAttribute("data-pb-style");
+				System.out.println();
+				String headingname = Common.findElement("xpath", "//img[@data-pb-style='" + image + "']")
+						.getAttribute("src");
+				Common.assertionCheckwithReport(headingname.contains("cms-corporate-purchasing"),
+						"validating the text on clone value prop banner on fornt end",
+						"Text should be add for the clone value prop baneer on fornt end",
+						"Successfully text added to the  clone value prop banner on front end",
+						"Failed to add text on the clone value prop banner on front end");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the text on clone value prop banner on fornt end",
+						"Text should be add for the clone value prop baneer on fornt end",
+						"Unable to add the text on the clone value prop banner on front end",
+						Common.getscreenShotPathforReport(
+								"Failed to add text on the clone value prop banner on front end"));
+				Assert.fail();
+
+			}
+
+		}
+		public void deletepage(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Common.closeCurrentWindow();
+				Common.switchToFirstTab();
+				Sync.waitPageLoad(40);
+				String title = data.get(Dataset).get("pageTitle");
+				Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
+				String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+				if (name.equals(title)) {
+					Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+					Common.clickElement("xpath", "//span[text()='Delete Page']");
+				} else {
+					Assert.fail();
+				}
+				String message = Common.findElement("xpath", "//div[@class='modal-content']").getText();
+				if (message.equals("Are you sure you want to do this?")) {
+					Common.clickElement("xpath", "//span[text()='OK']");
+
+				} else {
+					Assert.fail();
+				}
+				Sync.waitPageLoad();
+				String deletemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+						.getText();
+				System.out.println(deletemessage);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().equals("Pages / Magento Admin")
+								&& deletemessage.equals("The page has been deleted."),
+						"To Validate Page field navigation and Page deleted message",
+						"It should click on the Delete page it will navigate to Page field and page deleted message should be displayed",
+						"Successfully navigate to page field and Page delete message is displayed",
+						"Failed to navigate to page filed and message is not displayed");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate Page field navigation and Page deleted message",
+						"It should click on the Delete page it will navigate to Page field and page deleted message should be displayed",
+						"Unable to navigat to page field and Page delete message is not displayed",
+						Common.getscreenShotPathforReport("Failed to navigate to page filed and message is not displayed"));
+				Assert.fail();
+			}
+		}
 	
 }
