@@ -38,7 +38,7 @@ public class Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management {
     @AfterTest
     public void clearBrowser()
     {
-  //      Common.closeAll();
+        Common.closeAll();
 
     }
 
