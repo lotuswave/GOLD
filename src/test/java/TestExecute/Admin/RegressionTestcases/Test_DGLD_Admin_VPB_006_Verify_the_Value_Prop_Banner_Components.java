@@ -28,14 +28,28 @@ public class Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components {
            Admin.editpromocontent_color("promocontent");
            Admin.edit_heading_mobile_valueprop_banner("promocontent");
            Admin.edit_valueprop_banner_one();
+           Admin.Configure_padding_marins("Valuepropbanner");
            Admin.icon_image_one("promocontent");
-           Admin.edit_valueprop_banner_Two();   
+           Admin.edit_valueprop_banner_Two(); 
+           Admin.Configure_padding_marins("valuepropcard2");
            Admin.icon_image_two("promocontent");
            Admin.edit_valueprop_banner_Three();
+           Admin.Configure_padding_marins("valuepropcard3");
            Admin.icon_image_galary("promocontent"); 
+           Admin.edit_valueprop_banner();
+           Admin.close_valueprop_page();
+           Admin.edit_valueprop_banner_one();
+           Admin.close_individual_page_one();
+           Admin.edit_valueprop_banner_Two();
+           Admin.close_individual_page_Two();
+           Admin.edit_valueprop_banner_Three();
+           Admin.close_individual_page_Three();
            Admin.savecontent("promocontent");
            Admin.openwebsite("promocontent");
-           Admin.valueprop_website();      
+           Admin.valueprop_website();  
+           Admin.verify_Padding_fronytend("Valuepropbanner");
+           Admin.verify_Padding_fronytend("valuepropcard2");
+           Admin.verify_Padding_fronytend("valuepropcard3");
            Admin.clone_valueprop_banner();  
            Admin.vlaueprop_clone_frontend("promocontent"); 
            Admin.deletepage("promocontent");
@@ -53,7 +67,7 @@ public class Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components {
     @AfterTest
     public void clearBrowser()
     {
-        Common.closeAll();
+//        Common.closeAll();
 
     }
 

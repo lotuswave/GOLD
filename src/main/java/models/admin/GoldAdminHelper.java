@@ -1284,5 +1284,222 @@ public class GoldAdminHelper {
 				Assert.fail();
 			}
 		}
-	
+		public void close_valueprop_page() {
+			// TODO Auto-generated method stub
+			try {
+
+				Sync.waitElementPresent("xpath", "//button[@class='action-close']");
+				Common.clickElement("xpath", "//button[@class='action-close']");
+				Sync.waitPageLoad();
+				String crossbutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				Sync.waitPageLoad();
+				edit_valueprop_banner();
+				Sync.waitElementPresent("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Common.clickElement("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Sync.waitPageLoad();
+				String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				Common.assertionCheckwithReport(closebutton.contains(crossbutton),
+						"validating the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Successfully page has been closed after clicking on close and cross button",
+						"Failed to close the page after clicking on close and cross buttton");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Unable to close the page after clicking on close and cross button",
+						Common.getscreenShotPathforReport(
+								"Failed to close the page after clicking on close and cross buttton"));
+				Assert.fail();
+			}
+
+		}
+		public void close_individual_page_one() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//button[@class='action-close']");
+				Common.clickElement("xpath", "//button[@class='action-close']");
+				Sync.waitPageLoad();
+				String crossbutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				edit_valueprop_banner_one();
+				Sync.waitElementPresent("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Common.clickElement("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Sync.waitPageLoad();
+				String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				Common.assertionCheckwithReport(closebutton.contains(crossbutton),
+						"validating the close and cross button funtionality ",
+						"After clickng on the close and cross button the page should be close",
+						"Successfully page has been closed after clicking on close and cross button",
+						"Failed to close the page after clicking on close and cross buttton");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Unable to  close the page after clicking on close and cross button",
+						Common.getscreenShotPathforReport(
+								"Failed to close the page after clicking on close and cross buttton"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void close_individual_page_Two() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//button[@class='action-close']");
+				Common.clickElement("xpath", "//button[@class='action-close']");
+				Sync.waitPageLoad();
+				String crossbutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				edit_valueprop_banner_Two();
+				Sync.waitElementPresent("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Common.clickElement("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Sync.waitPageLoad();
+				String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				Common.assertionCheckwithReport(closebutton.contains(crossbutton),
+						"validation the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Successfully page has been closed after clicking on close and cross button",
+						"Failed to close the page after clicking on close and cross buttton");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Unable to close the page after clicking on close and cross button",
+						Common.getscreenShotPathforReport(
+								"Failed to close the page after clicking on close and cross buttton"));
+				Assert.fail();
+			}
+
+		}
+		public void close_individual_page_Three() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//button[@class='action-close']");
+				Common.clickElement("xpath", "//button[@class='action-close']");
+				Sync.waitPageLoad();
+				String crossbutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				edit_valueprop_banner_Three();
+				Sync.waitElementPresent("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Common.clickElement("xpath", "//div[@class='page-main-actions']//button[@title='Close']");
+				Sync.waitPageLoad();
+				String closebutton = Common.findElement("xpath", "//aside[contains(@class,'modal-slide pa')]")
+						.getAttribute("class");
+				Common.assertionCheckwithReport(closebutton.contains(crossbutton),
+						"validating the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Successfully page has been closed after clicking on close and cross button",
+						"Failed to close the page after clicking on close and cross buttton");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation the close and cross button funtionality ",
+						"After clickng close and cross button the page should be close",
+						"Unable to close the page after clicking on close and cross button",
+						Common.getscreenShotPathforReport(
+								"Failed to close the page after clicking on close and cross buttton"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void Configure_padding_marins(String DataSet) {
+			// TODO Auto-generated method stub
+			String cssclss = data.get(DataSet).get("CSSclasses");
+			String mrgtop = data.get(DataSet).get("mrgtop");
+			String mrgright = data.get(DataSet).get("mrgright");
+			String mrgbottom = data.get(DataSet).get("mrgbottom");
+			String mrgleft = data.get(DataSet).get("mrgleft");
+			String paddingtop = data.get(DataSet).get("paddingtop");
+			String paddingright = data.get(DataSet).get("paddingright");
+			String paddingbottom = data.get(DataSet).get("paddingbottom");
+			String paddingleft = data.get(DataSet).get("paddingleft");
+			try {
+				Common.scrollIntoView("xpath", "//div[contains(@class,'fieldset-wrapper') and @data-index='advanced']");
+				String advancedsection = Common
+						.findElement("xpath", "//div[contains(@class,'fieldset-wrapper') and @data-index='advanced']")
+						.getAttribute("class");
+				if (advancedsection.contains("show")) {
+					System.out.println("The Advanvced section is visible");
+				} else {
+					Common.mouseOverClick("xpath", "//span[text()='Advanced']");
+				}
+				Common.assertionCheckwithReport(advancedsection.contains("show"), "to validate the Padding and margins",
+						"Pad" + "paddding and margin should apply successfully", "Paddding and margion applied",
+						"Failed to apply padding");
+
+				Sync.waitElementVisible("xpath", "//div[@data-index='css_classes']");
+				Common.textBoxInput("xpath", "//input[@name='css_classes']", cssclss);
+				Common.scrollIntoView("name", "marginTop");
+				Common.textBoxInput("name", "marginTop", mrgtop);
+				Common.textBoxInput("name", "marginRight", mrgright);
+				Common.textBoxInput("name", "marginBottom", mrgbottom);
+				Common.textBoxInput("name", "marginLeft", mrgleft);
+				Common.textBoxInput("name", "paddingTop", paddingtop);
+				Common.textBoxInput("name", "paddingRight", paddingright);
+				Common.textBoxInput("name", "paddingBottom", paddingbottom);
+				Common.textBoxInput("name", "paddingLeft", paddingleft);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail();
+			}
+
+		}
+		
+		public void verify_Padding_fronytend(String DataSet) throws Exception {
+
+			String mrgtop = data.get(DataSet).get("mrgtop");
+			String mrgright = data.get(DataSet).get("mrgright");
+			String mrgbottom = data.get(DataSet).get("mrgbottom");
+			String mrgleft = data.get(DataSet).get("mrgleft");
+			String paddingtop = data.get(DataSet).get("paddingtop");
+			String paddingright = data.get(DataSet).get("paddingright");
+			String paddingbottom = data.get(DataSet).get("paddingbottom");
+			String paddingleft = data.get(DataSet).get("paddingleft");
+			try {
+				Sync.waitElementVisible(30, "xpath", "//p[@class='m-breadcrumb__text']");
+
+				String style = Common.findElement("xpath", "//main[@id='maincontent']/div[2]/div/style")
+						.getAttribute("innerHTML");
+				System.out.println(style);
+				if (style.contains("margin-top")) {
+
+					Common.assertionCheckwithReport(
+							style.contains("margin-top:" + mrgtop + "px;margin-right:" + mrgright + "px;margin-bottom:"
+									+ mrgbottom + "px;margin-left:" + mrgleft + "px;padding-top:" + paddingtop
+									+ "px;padding-right:" + paddingright + "px;padding-bottom:" + paddingbottom
+									+ "px;padding-left:" + paddingleft + "px"),
+							"to validate the Padding and margins", "Padding and margin should apply successfully",
+							"Paddding and margion applied", "Failed to apply padding");
+				} else {
+
+					// margin:40px 27px 55px 48px;padding:100px 278px 300px 129px
+					// margin:40px 27px 55px 48px;padding:100px 278px 300px 129px
+					System.out.println("margin:" + mrgtop + "px " + mrgright + "px " + mrgbottom + "px " + mrgleft
+							+ "px;padding:" + paddingtop + "px " + paddingright + "px " + paddingbottom + "px "
+							+ paddingleft + "px");
+					Thread.sleep(4000);
+					Common.assertionCheckwithReport(
+							style.contains("margin:" + mrgtop + "px " + mrgright + "px " + mrgbottom + "px " + mrgleft
+									+ "px;padding:" + paddingtop + "px " + paddingright + "px " + paddingbottom + "px "
+									+ paddingleft + "px"),
+							"to validate the Padding and margins", "Padding and margin should apply successfully",
+							"Paddding and margion applied", "Failed to apply padding");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				Assert.fail();
+			}
+		}
+
 }
