@@ -3885,6 +3885,44 @@ public void edit_BillingAddress_gustuser(String dataSet) {
 			}  
 		}
 
+public void country_selector() {
+	
+	String Country;
+	try
+	{
+		Common.actionsKeyPress(Keys.END);
+		List<WebElement> country=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+		System.out.println(country.size());
+		for(int i=0;i<country.size();i++)
+		{
+		
+			List<WebElement> select=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(50, "xpath", "//img[@alt='United States flag']");
+			Common.clickElement("xpath", "//img[@alt='United States flag']");
+			Thread.sleep(3000);
+			Country=select.get(i).getText();
+			select.get(i).click();
+			Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.navigateBack();
+			ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));	
+		}
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
+				"After Clicking on the selected country it should navigate to the respective country page",
+				"Unable to navigate to the respective country page after clicking on the selected country",
+						Common.getscreenShot("Failed to navigate to the respective country page after clicking on the selected country"));
+		Assert.fail();
+	}
+	
+}
 
 
 
