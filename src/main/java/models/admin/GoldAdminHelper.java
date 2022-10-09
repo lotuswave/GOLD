@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import TestLib.Automation_properties;
 import TestLib.Common;
+import TestLib.Common.SelectBy;
 import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
@@ -652,7 +653,7 @@ public class GoldAdminHelper {
 					Common.clickElement("xpath", "//button[text()='Select']");
 					Common.clickElement("xpath", "//a[text()='Edit']");
 					Sync.waitPageLoad();
-					delete_existing_page("promocontent");
+					delete_existing_page(Dataset);
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add New Page']");
 					Common.clickElement("xpath", "//button[@title='Add New Page']");
 				}
@@ -703,6 +704,7 @@ public class GoldAdminHelper {
 		public void delete_existing_page(String Dataset) throws Exception
 
 		{
+			Common.switchToFirstTab();
 			String title = data.get(Dataset).get("pageTitle");
 			Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
 			String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
@@ -1412,6 +1414,35 @@ public class GoldAdminHelper {
 
 		}
 		
+	
+		public void Configure_textcolor_light() {
+
+			try {
+
+				int textcolor = Common.findElements("xpath", "//li[@class='active']//span[text()='Light']").size();
+				if (textcolor > 0) {
+					System.out.println("Dark color is selected");
+				} else {
+					Sync.waitElementClickable("xpath", "//span[text()='Light']");
+					Common.mouseOverClick("xpath", "//span[text()='Light']");
+				}
+				int TextColor = Common.findElements("xpath", "//li[@class='active']//span[text()='Light']").size();
+				
+
+				Common.assertionCheckwithReport(TextColor > 0, "To validate the text colour selected is Light",
+						" should select the text colour Light", "Sucessfully select the Light text color",
+						"Failed to select the text colour Light");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the text colour selected is Light",
+						" should select the text colour Light", "Unable select the Dark text Light",
+						Common.getscreenShotPathforReport("Failed to select the text colour Light"));
+				e.printStackTrace();
+				Assert.fail();
+
+			}
+		}
+
 		public void Configure_padding_marins(String DataSet) {
 			// TODO Auto-generated method stub
 			String cssclss = data.get(DataSet).get("CSSclasses");
@@ -1433,9 +1464,6 @@ public class GoldAdminHelper {
 				} else {
 					Common.mouseOverClick("xpath", "//span[text()='Advanced']");
 				}
-				Common.assertionCheckwithReport(advancedsection.contains("show"), "to validate the Padding and margins",
-						"Pad" + "paddding and margin should apply successfully", "Paddding and margion applied",
-						"Failed to apply padding");
 
 				Sync.waitElementVisible("xpath", "//div[@data-index='css_classes']");
 				Common.textBoxInput("xpath", "//input[@name='css_classes']", cssclss);
@@ -1449,13 +1477,21 @@ public class GoldAdminHelper {
 				Common.textBoxInput("name", "paddingBottom", paddingbottom);
 				Common.textBoxInput("name", "paddingLeft", paddingleft);
 
+				Common.assertionCheckwithReport(advancedsection.contains("show"), "to validate the Padding and margins",
+						"Pad" + "paddding and margin should apply successfully", "Paddding and margion applied",
+						"Failed to apply padding");
+
 			} catch (Exception e) {
 				e.printStackTrace();
+				report.addFailedLog("To validate the Padding and margins all the fields are populated",
+						"paddding and margin should apply successfully", "Failed to apply the Paddding and margion",
+						"Failed to apply padding and margin");
+
 				Assert.fail();
 			}
 
 		}
-		
+
 		public void verify_Padding_fronytend(String DataSet) throws Exception {
 
 			String mrgtop = data.get(DataSet).get("mrgtop");
@@ -1502,4 +1538,809 @@ public class GoldAdminHelper {
 			}
 		}
 
+		public void Editandsavepage() throws Exception {
+			// TODO Auto-generated method stub
+			Common.scrollIntoView("xpath", "//div[contains(@class,'header')]//span[text()='Save']");
+			Sync.waitElementClickable("xpath", "//div[contains(@class,'header')]//span[text()='Save']");
+			Thread.sleep(5000);
+			Common.mouseOverClick("xpath", "//div[contains(@class,'header')]//span[text()='Save']");
+
+			Sync.waitPageLoad();
+
+		}
+
+		public void Frontendverification(String DataSet) {
+			String Title = data.get(DataSet).get("titleaatribute");
+			String Description = data.get(DataSet).get("Description");
+			String Video = data.get(DataSet).get("VideoURL");
+			String heading = data.get(DataSet).get("headingtype").toLowerCase();
+			String ctalinkpage = data.get(DataSet).get("Buttonlinkpage");
+			String desktopimage = data.get(DataSet).get("image");
+			String mobileimage = data.get(DataSet).get("image2");
+			String altatt = data.get(DataSet).get("alterantivetext");
+			String ctatext = data.get(DataSet).get("CTAText");
+
+			try {
+				Common.scrollIntoView("xpath", "//p[contains(@class,'plp-cms-block')]");
+				String title = Common.findElement("xpath", "//p[contains(@class,'plp-cms-block')]").getText();
+
+				int video = Common.findElements("xpath", "//div[contains(@class,'pagebuilder-video')]").size();
+				if (video > 0) {
+
+					String videoverification = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-video')]")
+							.getAttribute("data-video-src");
+					
+					
+					Assert.assertEquals(videoverification, Video);
+				} else {
+					String imageverificationdesktop = Common
+							.findElement("xpath", "//img[@data-element='image_element_desktop']").getAttribute("src");
+					String imageverificationmobile = Common
+							.findElement("xpath", "//img[@data-element='image_element_mobile']").getAttribute("src");
+					String imagealtattribute = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
+							.getAttribute("alt");
+
+					Common.assertionCheckwithReport(
+							imageverificationdesktop.contains(desktopimage) && imageverificationmobile.contains(mobileimage)
+									&& imagealtattribute.contains(altatt),
+							"To validate configured image in the PLP CMS block components are reflecting on the store front",
+							"PLP CMS block images should reflect on the store front",
+							"PLP CMS block images reflect on the store front",
+							"Failed to reflect the plp cms block images on the store front");
+
+				}
+
+				String Heading = Common.findElement("xpath", "//p[contains(@class,'plp-cms-block')]")
+						.getAttribute("data-heading-type");
+				String CTAtext = Common.findElement("xpath", "//div[contains(@class,'cta')]//span[@class='a-btn__label']")
+						.getText();
+
+				String description = Common.findElement("xpath", "//div[contains(@class,'block__copy')]").getText();
+				
+
+				Common.assertionCheckwithReport(
+						 title.contains(Title) && Heading.contains(heading)
+								&& CTAtext.contains(ctatext),
+						"To validate the PLP CMS block components are reflecting on the store front",
+						"PLP CMS block components should reflect on the store front",
+						"PLP CMS block components reflect on the store front",
+						"Failed to reflect the plp cms bvlock components on the store front");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog(
+						"To validate the PLP CMS block components are reflecting on the store front",
+						"PLP CMS block components should reflect on the store front",
+						"PLP CMS block components failed to reflect on the store front",
+						"plp cms bvlock components reflect on the store front unsuccessfull");
+
+				Assert.fail();
+			}
+
+		}
+		public void valiadtetextcolordark() {
+			String textcolor = Common.findElement("xpath", "//div[contains(@class,'block__content-')]")
+					.getAttribute("class");
+			Common.assertionCheckwithReport(textcolor.contains("dark"), "To validate the text color is dark", "The text color should be Dark", "The text color is Dark", "Failed to update the text color dark");
+		}
+		public void valiadtetextcolorlight() {
+			String textcolor = Common.findElement("xpath", "//div[contains(@class,'block__content-')]")
+					.getAttribute("class");
+			Common.assertionCheckwithReport(textcolor.contains("light"), "To validate the text color is Light", "The text color should be Light", "The text color is Light", "Failed to update the text color Light");
+		}
+
+		public void CTA_LinksValidationFontend(String DataSet) throws Exception {
+			String CTAnavigation = data.get(DataSet).get("ButtonLinknavigation");
+			
+
+			try {
+				Common.clickElement("xpath", "//div[contains(@class,'cta')]//span[@class='a-btn__label']");
+				Common.switchWindows();
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("xpath", "//p[@class='m-breadcrumb__text']");
+				String pagetitle = Common.getPageTitle();
+				System.out.println(pagetitle);
+
+				if (CTAnavigation.equals("Product")) {
+					String product = data.get(DataSet).get("Buttonlinkproduct");
+					System.out.println(product);
+					
+					Common.assertionCheckwithReport(pagetitle.contains(product), "To validate the CTA Product link", "CTA link should navigate to the product page", "CTA link navigated to product page", "Failed CTA Product Link navigation");
+				
+				} else if (CTAnavigation.equals("Page")) {
+					String page = data.get(DataSet).get("Buttonlinkpage");
+					
+					
+					Common.assertionCheckwithReport(pagetitle.contains(page), "To validate the CTA Product link", "CTA link should navigate to the product page", "CTA link navigated to product page", "Failed CTA Product Link navigation");
+					
+
+				} else if (CTAnavigation.equals("Category")) {
+					String Category = data.get(DataSet).get("Buttonlinkcategory");
+					
+					Common.assertionCheckwithReport(pagetitle.contains(Category), "To validate the CTA Product link", "CTA link should navigate to the product page", "CTA link navigated to product page", "Failed CTA Product Link navigation");
+					
+					
+
+				} else if (CTAnavigation.equals("URL")) {
+					String url = data.get(DataSet).get("ButtonlinkURL");
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains(url), "To validate the CTA link navigate to URL", "CTA link should navigate to the url", "CTA link navigated to url", "Failed CTA Link navigation to URL");
+
+				}
+				Common.navigateBack();
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("xpath", "//p[@class='m-breadcrumb__text']");
+				
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog(
+						"To validate the CTA link navigation",
+						"CTA link should navigate to the respective page",
+						"CTA link navigation Failed",
+						"CTA link navigation unsuccessfull");
+
+				Assert.fail();
+			}
+		}
+		
+
+		public void Clone(String dataSet) {
+			String component = data.get(dataSet).get("component");
+			try {
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'" + component + "')]");
+				Common.mouseOverClick("xpath", "//div[contains(@class,'" + component + "')]");
+				String visible = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-options ')]")
+						.getAttribute("class");
+				System.out.println(visible);
+				Common.assertionCheckwithReport(visible.contains("-options-visible"),
+						"validation Edit option  in the page builder ",
+						"after mouse over on the page builder edit option should be appear ",
+						"Successfully edit option appeared in the pagebuilder",
+						"Failed to appear edit option when we mouse over");
+				Sync.waitElementClickable("xpath", "//i[@class='icon-pagebuilder-copy']");
+				Common.javascriptclickElement("xpath", "//i[@class='icon-pagebuilder-copy']");
+
+				Sync.waitPageLoad();
+
+				String classattribute = data.get(dataSet).get("attribute");
+				int components = Common.findElements("xpath", "//div[contains(@class,'" + component + "')]").size();
+				System.out.println(components);
+
+				Common.assertionCheckwithReport(components > 0, "To validate the clone functionality",
+						"Should clone the product tile ", "Clone of the card tile is successfull",
+						"clone unctionality failed");
+				savecontent(dataSet);
+				Thread.sleep(3000);
+				openwebsite(dataSet);
+				verify_clonefunctionality_website(dataSet);
+				// openwebsite("OXOproducttile");
+				// verify_clonefunctionality_website(dataSet);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating clone functionality",
+						"User should able to clone the blocks or content", "Admin failed to clone the content",
+						Common.getscreenShotPathforReport("Failed to clone the content of the page"));
+
+				Assert.fail();
+
+			}
+
+		}
+
+		public void verify_clonefunctionality_website(String dataSet) {
+			String attribute = data.get(dataSet).get("attribute");
+			try {
+				Sync.waitElementClickable("xpath", "//div[contains(@class,'"+attribute+"')]");
+				int components = Common.findElements("xpath", "//div[contains(@class,'"+attribute+"')]").size();
+				System.out.println(components);
+				Common.assertionCheckwithReport(components >= 2, "To validate the PLP block clone functionality",
+						"Should display two PLP blocks", "2 PLP blocks are displayed in website",
+						"Failed to clone the PLP Block ");
+			} catch (Exception e) {
+				e.printStackTrace();
+				report.addFailedLog("To validate the product card clone functionality",
+						"User should able to validate the product card clone functionality",
+						"Admin failed to validate the product card clone functionality",
+						Common.getscreenShotPathforReport("product card clone functionality unsuccessfull"));
+
+				Assert.fail();
+			}
+
+		}
+
+		public void Hide_functinality() {
+			try {
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'m-media-card')]");
+				Common.mouseOver("xpath", "//div[contains(@class,'m-media-card')]");
+				String visible = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-options ')]")
+						.getAttribute("class");
+				System.out.println(visible);
+				Common.assertionCheckwithReport(visible.contains("-options-visible"),
+						"validation Edit option  in the page builder ",
+						"after mouse over on the page builder edit option should be appear ",
+						"Successfully edit option appeared in the pagebuilder",
+						"Failed to appear edit option when we mouse over");
+				Sync.waitElementClickable("xpath", "//i[@class='icon-pagebuilder-hide']");
+				Common.javascriptclickElement("xpath", "//i[@class='icon-pagebuilder-hide']");
+				Common.isElementDisplayedonPage(10, "xpath", "//i[@class='icon-pagebuilder-show']");
+				savecontent("ProductcardTile");
+				openwebsite("ProductcardTile");
+				Verify_websitehidefunctionality();
+				openwebsite("OXOproducttile");
+				Verify_websitehidefunctionality();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				report.addFailedLog("Validating hide functionality", "User should able to hide the blocks or content",
+						"Admin failed to hide the content",
+						Common.getscreenShotPathforReport("Failed to hide the content of the page"));
+
+				Assert.fail();
+
+			}
+
+		}
+
+		public void Verify_websitehidefunctionality() {
+			try {
+				Sync.waitElementVisible("xpath", "//ol[@class='m-breadcrumb__list']");
+				String text = Common.findElement("xpath", "(//div[@data-content-type='hot_card_tiles'])[1]")
+						.getAttribute("data-pb-style");
+				Common.assertionCheckwithReport(text != null, "To validate the magento hide functionality",
+						"The Card tile block should be hidden", "The card tile is hidden", "Failed to hide the block");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				report.addFailedLog("Validating clone functionality on the front end",
+						"User should able to clone the blocks or content on the front end",
+						"Admin failed to clone the content on the fornt end",
+						Common.getscreenShotPathforReport("Failed to clone the content of the page"));
+
+				Assert.fail();
+
+			}
+
+		}
+
+		public void Delete_hotcomponent(String dataSet) throws Exception {
+			String component = data.get(dataSet).get("datacontenttype");
+
+			try {
+
+				Sync.waitElementPresent("xpath", "//div[@data-content-type='" + component + "']");
+				int no_ofcomponents = Common.findElements("xpath", "//div[@data-content-type='" + component + "']").size();
+				System.out.println(no_ofcomponents);
+
+				for (int i = 1; i < no_ofcomponents; i++) {
+
+					Common.actionsKeyPress(Keys.HOME);
+					Thread.sleep(3000);
+					Common.mouseOverClick("xpath", "//div[@data-content-type='" + component + "']");
+					String visible = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-options ')]")
+							.getAttribute("class");
+					System.out.println(visible);
+					Common.assertionCheckwithReport(visible.contains("-options-visible"),
+							"validation Edit option  in the page builder ",
+							"after mouse over on the page builder edit option should be appear ",
+							"Successfully edit option appeared in the pagebuilder",
+							"Failed to appear edit option when we mouse over");
+					Sync.waitElementClickable("xpath", "//i[contains(@class,'remove')]");
+					Common.mouseOverClick("xpath", "//i[contains(@class,'remove')]");
+					Sync.waitElementVisible("xpath", "//aside[contains(@class,'show')]");
+					Sync.waitElementVisible("xpath", "//span[text()='OK']");
+					Common.clickElement("xpath", "//span[text()='OK']");
+					Sync.waitPageLoad();
+
+				}
+				Thread.sleep(3000);
+				int finalno_ofcomponents = Common.findElements("xpath", "//div[contains(@class,'" + component + "')]")
+						.size();
+				System.out.println(finalno_ofcomponents);
+
+				Common.assertionCheckwithReport(finalno_ofcomponents == 0, "To validate the component is deleted",
+						"Component should be deleted", "Component has beem deleted", "Failed to delete the component");
+				savecontent(dataSet);
+				openwebsite(dataSet);
+				verifydeletefunctionality_website(dataSet);
+				//openwebsite("OXOPLPBLOCK");
+				//verifydeletefunctionality_website(dataSet);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				//invalidformkey("ProductcardTile");
+				report.addFailedLog("Validating content delete functionality",
+						"User should able to delete the blocks or content", "Admin failed to delete the content",
+						Common.getscreenShotPathforReport("Failed to delete the content of the page"));
+
+				Assert.fail();
+
+			}
+		}
+
+		public void invalidformkey(String dataSet) throws Exception {
+
+			try {
+				String pagetitle = Common.getPageTitle();
+				if (pagetitle.contains("Dashboard")) {
+					String formkey = Common.findElement("xpath", "//div[@data-ui-id='messages-message-error']").getText();
+					if (formkey.contains("Invalid security or form key. Please refresh the page.")) {
+						Common.refreshpage();
+					}
+
+					click_content();
+					Sync.waitElementPresent("xpath", "//span[text()='Pages']");
+					Common.clickElement("xpath", "//span[text()='Pages']");
+					Sync.waitElementPresent(30, "xpath", "//input[@placeholder='Search by keyword']");
+					Thread.sleep(3000);
+					if (Common.isElementDisplayedonPage(30, "xpath", "//button[@class='action-remove']")) {
+						Common.mouseOverClick("xpath", "//button[@class='action-remove']");
+						Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					} else {
+						System.out.println("no Active filters found");
+					}
+					String pagename = data.get(dataSet).get("pageTitle");
+					Common.findElement("xpath", "//input[@placeholder='Search by keyword']").sendKeys(pagename);
+					Common.actionsKeyPress(Keys.ENTER);
+					Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'filters-current')]");
+					String active = Common.findElement("xpath", "//div[contains(@class,'filters-current')]")
+							.getAttribute("class");
+					Common.assertionCheckwithReport(active.contains("show"), "To validate the search filters",
+							"Should apply Search filter", "Search filetr is applied", "failed to apply for search filter");
+					Thread.sleep(5000);
+					int pages = Common.findElements("xpath", "//tr[contains(@class,'data-row')]").size();
+					System.out.println(pages);
+
+					Sync.waitElementVisible(30, "xpath", "//button[text()='Select']");
+					Common.javascriptclickElement("xpath", "//button[text()='Select']");
+					Sync.waitElementVisible(30, "xpath", "//a[text()='Edit']");
+					Common.mouseOverClick("xpath", "//a[text()='Edit']");
+					Sync.waitPageLoad();
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+					Common.assertionCheckwithReport(Common.getPageTitle().contains(pagename),
+							"To validate the admin lands on the existingpage", "User Should land on the existing page",
+							"Admin lands on the page", "Failed to land on the existing page");
+					Contentpage();
+					Delete_hotcomponent(dataSet);
+
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				report.addFailedLog("Validating invalid form key error message in admin ",
+						"User should able to validate the error message in the admin",
+						"Admin failed to validate the error message",
+						Common.getscreenShotPathforReport("Failed to validate the error messaage "));
+
+				Assert.fail();
+			}
+
+		}
+
+		public void verifydeletefunctionality_website(String DataSet) {
+	String attribute = data.get(DataSet).get("datacontenttype");
+			
+			try {
+
+				int blocks = Common.findElements("xpath", "//div[@data-content-type='"+attribute+"']").size();
+				System.out.println(blocks);
+				Common.assertionCheckwithReport(blocks <= 1, "To validate the PLP block clone functionality",
+						"Should display two PLP blocks", "2 PLP blocks are displayed in website",
+						"Failed to clone the PLP Block ");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				report.addFailedLog("Validating delete functionality in the website",
+						"User should able to clone the blocks or content",
+						"Admin failed to validate the delete functionality on the website",
+						Common.getscreenShotPathforReport("Failed to validate the delete functinality in the website"));
+				Assert.fail();
+			}
+		}
+		public void dragndrop_PLPCMS_Content() {
+			try {
+				WebElement element = Common.findElement("xpath", "//span[text()='PLP Block']");
+				draganddropContentBlock(element);
+				String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+						.getAttribute("data-content-type");
+				Common.assertionCheckwithReport(blockname.equals("hot_plp_block"),
+						"Validating cardtiles Dragndrop operation", "card tiles dragndrop to content with options",
+						"successfully dragndrop the card tile with options ", "fail to dragndrop the card tile");
+
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'plp-block')]");
+				Common.mouseOverClick("xpath", "//div[contains(@class,'plp-block')]");
+				String visible = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-options ')]")
+						.getAttribute("class");
+				System.out.println(visible);
+				int action = Common.findElements("xpath", "//li[@class='pagebuilder-options-link']/a").size();
+
+				for (int i = 1; i < action; i++) {
+					String Action = Common.findElement("xpath", "(//li[@class='pagebuilder-options-link']/a)[" + i + "]")
+							.getAttribute("title");
+					System.out.println(Action);
+					if (Action.contains("Move")) {
+						Common.mouseOver("xpath", "//i[@class='icon-admin-pagebuilder-handle']");
+
+						Common.assertionCheckwithReport(Action.contains("Move"),
+								"To validate the elements in the PLP block",
+								"Should validate the Elements in the Page builder options",
+								"Page builder options are present", "Failed to validate the page builder element");
+					} else if (Action.contains("Edit")) {
+						Common.mouseOver("xpath", "//i[@class='icon-admin-pagebuilder-systems']");
+						Common.assertionCheckwithReport(Action.contains("Edit"),
+								"To validate the elements in the PLP block",
+								"Should validate the Elements in the Page builder options",
+								"Page builder options are present", "Failed to validate the page builder element");
+					} else if (Action.contains("Duplicate")) {
+						Common.mouseOver("xpath", "//i[@class='icon-pagebuilder-copy']");
+						Common.assertionCheckwithReport(Action.contains("Duplicate"),
+								"To validate the elements in the PLP block",
+								"Should validate the Elements in the Page builder options",
+								"Page builder options are present", "Failed to validate the page builder element");
+					} else if (Action.contains("Remove")) {
+						Common.mouseOver("xpath", "//i[@class='icon-admin-pagebuilder-remove']");
+						Common.assertionCheckwithReport(Action.contains("Remove"),
+								"To validate the elements in the PLP block",
+								"Should validate the Elements in the Page builder options",
+								"Page builder options are present", "Failed to validate the page builder element");
+					}
+
+				}
+				Common.isElementDisplayedonPage(30, "xpath", "//span[@class='a-btn__label']");
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("Validating PLP CMS Block Dragndrop operation",
+						"User should able Dragndrop PLP CMS Block", "Sucessfully Dragndrop PLP CMS Block",
+						Common.getscreenShotPathforReport("Failed to Dragndrop PLP CMS Block"));
+				Assert.fail();
+
+			}
+		}
+		public void edit_block_content(String dataSet) {
+			String Editpagetitle = data.get(dataSet).get("Editpagetitle");
+			String component = data.get(dataSet).get("component");
+
+			try {
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'" + component + "')]");
+				Common.mouseOverClick("xpath", "//div[contains(@class,'" + component + "')]");
+				String visible = Common.findElement("xpath", "//div[contains(@class,'pagebuilder-options ')]")
+						.getAttribute("class");
+				System.out.println(visible);
+				Common.assertionCheckwithReport(visible.contains("options-visible"),
+						"validation Edit option  in the page builder ",
+						"after mouse over on the page builder edit option should be appear ",
+						"Successfully edit option appeared in the pagebuilder",
+						"Failed to appear edit option when we mouse over");
+
+				Common.clickElement("xpath", "//i[@class='icon-admin-pagebuilder-systems']");
+				Sync.waitElementPresent("xpath", "//h1[@class='modal-title']");
+
+				String editPLPBlock = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+				System.out.println(editPLPBlock);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(editPLPBlock.contains(Editpagetitle),
+						"validation Navigation to the edit PLP page ",
+						"after Click on edit button it should be navigate to the edit PLP  page ",
+						"Successfully it is navigated to edit PLP page ", "Failed to navigate to edit PLP page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation Navigation to the edit PLP page ",
+						"after Click on edit button it should be navigate to the edit PLP page ",
+						"Successfully it is navigated to edit PLP page ",
+						Common.getscreenShotPathforReport("Failed to navigate to edit PLP page"));
+				Assert.fail();
+
+			}
+		}
+
+		public void close_Editblock(String dataSet) {
+			try {
+				edit_block_content(dataSet);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Sync.waitElementClickable("xpath", "//button[@id='close']");
+				Common.javascriptclickElement("xpath", "//button[@id='close']");
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				edit_block_content(dataSet);
+				int close = Common.findElements("xpath", "//button[@class='action-close']").size();
+				for (int i = 1; i < close; i++) {
+					if (Common.isElementDisplayedonPage(30, "xpath", "(//button[@class='action-close'])[" + i + "]")) {
+						Common.mouseOverClick("xpath", "(//button[@class='action-close'])[" + i + "]");
+						break;
+					}
+
+				}
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("To validate the PLP Block edit and close functionality",
+						"Admin should edit and close the PLP CMS Block", "Admin failed to Edit and CLose the PLP CMS Block",
+						Common.getscreenShotPathforReport("Failed to edit and close the PLP CMS Blockpage"));
+				Assert.fail();
+
+			}
+		}
+		public void ClosADD() throws Exception {
+			Thread.sleep(3000);
+			int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+			if (sizesframe > 0) {
+				Common.actionsKeyPress(Keys.PAGE_UP);
+
+				// Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+				Sync.waitElementVisible("xpath", "//div[@class='sidebar-iframe-close']");
+				Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
+			} else {
+				int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
+				if (sizeofpopup > 0) {
+
+					Sync.waitElementClickable("xpath", "//button[@aria-label='close']");
+					Common.clickElement("xpath", "//button[@aria-label='close']");
+				}
+			}
+		}
+		
+		public WebElement PLPCMS_content() {
+
+			WebElement element = Common.findElement("xpath", "//span[text()='PLP Block']");
+			Common.clickElement("xpath", "//span[text()='PLP Block']");
+
+			return element;
+
+		}
+
+	
+public void AcceptAll() {
+
+	try {
+
+		Thread.sleep(5000);
+		if (Common.findElement("xpath", "//button[@id='truste-consent-button']") != null) {
+
+			Common.clickElement("xpath", "//button[@id='truste-consent-button']");
+		}
+	} catch (Exception e) {
+
+		e.printStackTrace();
+		Assert.fail();
+
+	}
 }
+
+public void UpdatePLPCMScontent(String dataSet) {
+	try {
+		Configure_textcolor_dark();
+		Common.dropdown("name", "heading_type", SelectBy.TEXT, data.get(dataSet).get("headingtype"));
+		Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(dataSet).get("titleaatribute"));
+		Common.textBoxInput("name", "description", data.get(dataSet).get("Description"));
+		Common.scrollIntoView("name", "link_text");
+		Common.textBoxInput("name", "link_text", data.get(dataSet).get("CTAText"));
+		Common.dropdown("name", "button_type", SelectBy.TEXT, data.get(dataSet).get("Buttontype"));
+		
+
+		CTALink(dataSet);
+		Common.javascriptclickElement("xpath", "//label[text()='Open in new tab']");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"To validate the admin is able to populate all the fields in the Edit PLP CMS Block page",
+				"User should able to populate all the fields in the PLP CMS Block page",
+				"Unable to populate the data in the Edit CMS Block page",
+				Common.getscreenShotPathforReport("Failed to populate the data in the Edit PLP CMS Block page"));
+		Assert.fail();
+	}
+
+}
+public void Configure_textcolor_dark() {
+
+	try {
+
+		int textcolor = Common.findElements("xpath", "//li[@class='active']//span[text()='Dark']").size();
+		if (textcolor > 0) {
+			System.out.println("Dark color is selected");
+		} else {
+			Sync.waitElementClickable("xpath", "//span[text()='Dark']");
+			Common.mouseOverClick("xpath", "//span[text()='Dark']");
+		}
+
+		Common.assertionCheckwithReport(textcolor > 0, "To validate the text colour selected is Dark",
+				" should select the text colour Dark", "Sucessfully select the Dark text color",
+				"Failed to select the text colour dark");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the text colour selected is Dark",
+				" should select the text colour Dark", "Unable select the Dark text color",
+				Common.getscreenShotPathforReport("Failed to select the text colour dark"));
+		e.printStackTrace();
+		Assert.fail();
+
+	}
+}
+public void Configure_Video(String DataSet) {
+	try {
+		String expndvideoelement = Common.findElement("xpath", "//div[@data-index='video_element']")
+				.getAttribute("class");
+
+		if (expndvideoelement.contains("show")) {
+			System.out.println("The Video element section is expanded");
+
+		} else {
+			Common.javascriptclickElement("xpath", "//div[@data-index='video_element']//span[text()='Video']");
+
+		}
+		Sync.waitElementClickable("name", "video_element[video_url]");
+		Common.textBoxInput("name", "video_element[video_url]", data.get(DataSet).get("VideoURL"));
+		String videocontols = Common.findElement("name", "video_element[show_controls]").getAttribute("value");
+
+		if (videocontols.contains("false")) {
+			Common.clickElement("name", "video_element[show_controls]");
+		} else {
+			System.out.println("The video controls are on");
+		}
+		String videocontolson = Common.findElement("name", "video_element[show_controls]").getAttribute("value");
+
+		Common.assertionCheckwithReport(videocontolson.contains("true"), "To turn on the video controls",
+				"video controls should be opn", "Video controls are on", "failed to turn on the Video controls");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+
+		report.addFailedLog("To turn on the video controls", "video controls should be on",
+				"Video control trun on unsuccessfull",
+				Common.getscreenShotPathforReport("Failed to turn on the video controls"));
+		Assert.fail();
+
+	}
+
+}
+public void Navigate_adminpage() {
+	Common.switchToFirstTab();
+	Contentpage();
+}
+
+public void CMS_ImageElement(String DataSet) {
+	// TODO Auto-generated method stub
+	String image = data.get(DataSet).get("image");
+	String image2 = data.get(DataSet).get("image2");
+	String altatt = data.get(DataSet).get("alterantivetext");
+	try {
+		Common.scrollIntoView("xpath", "//span[text()='Image Element']");
+
+		Sync.waitElementPresent("xpath", "(//label[text()='Select from Gallery'])[1]");
+		Common.javascriptclickElement("xpath", "(//label[text()='Select from Gallery'])[1]");
+
+		// Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and
+		// @style='display: none;']");
+		// Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
+		Common.scrollIntoView("xpath", "//small[text()='" + image + "']");
+		Common.javascriptclickElement("xpath", "//small[text()='" + image + "']");
+		Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+		Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+		Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[1]");
+		String imagename = Common.findElement("xpath", "(//a/img[@class='preview-image'])[1]").getAttribute("alt");
+
+		Common.assertionCheckwithReport(imagename.equals(image),
+				"validation the image uploading on content for Fallback image ",
+				"Image should be upload for background image", "Successfully image uploaded in background image ",
+				"Failed to upload image on the background image");
+
+		Sync.waitElementPresent("xpath", "(//label[text()='Select from Gallery'])[2]");
+		Common.javascriptclickElement("xpath", "(//label[text()='Select from Gallery'])[2]");
+		Common.scrollIntoView("xpath", "//small[text()='" + image2 + "']");
+		Common.javascriptclickElement("xpath", "//small[text()='" + image2 + "']");
+		Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+		Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+
+		Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[2]");
+		String imagename2 = Common.findElement("xpath", "(//a/img[@class='preview-image'])[2]").getAttribute("alt");
+
+		Common.assertionCheckwithReport(imagename2.equals(image2),
+				"validation the image uploading on content for Fallback image ",
+				"Image should be upload for background image", "Successfully image uploaded in background image ",
+				"Failed to upload image on the background image");
+
+		Sync.waitElementPresent("xpath", "//input[@name='alt']");
+		Common.findElement("xpath", "//input[@name='alt']").sendKeys(altatt);
+
+		Thread.sleep(5000);
+		System.out.println(altatt);
+
+		String expndvideoelement = Common.findElement("xpath", "//div[@data-index='video_element']")
+				.getAttribute("class");
+
+		if (expndvideoelement.contains("show")) {
+			System.out.println("The Video element section is expanded");
+
+		} else {
+			Common.javascriptclickElement("xpath", "//div[@data-index='video_element']//span[text()='Video']");
+
+		}
+		Sync.waitElementClickable("name", "video_element[video_url]");
+		Common.textBoxInputClear("name", "video_element[video_url]");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+
+		report.addFailedLog("validation Image upload  ", "Image should be uploaded",
+				"Successfully image is uploaded",
+				Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+		Assert.fail();
+
+	}
+}
+
+
+
+public void CTALink(String dataSet) throws Exception {
+	String buttonlinknavugation = data.get(dataSet).get("ButtonLinknavigation");
+	try {
+		Common.scrollIntoView("xpath", "//select[@name='link_url']");
+		Common.dropdown("xpath", "//select[@name='link_url']", SelectBy.TEXT, buttonlinknavugation);
+		if (buttonlinknavugation.contains("URL")) {
+			String URL = data.get(dataSet).get("ButtonlinkURL");
+			Common.textBoxInput("name", "button_link[default]", URL);
+
+		} else if (buttonlinknavugation.contains("Product")) {
+			String Product = data.get(dataSet).get("Buttonlinkproduct").toUpperCase().replace(" -", "");
+			
+			
+			Sync.waitElementVisible("xpath", "//div[@data-role='selected-option']");
+			Common.clickElement("xpath", "//div[@data-role='selected-option']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Product Name or SKU']", Product);
+			Sync.waitElementVisible("xpath", "//span[contains(text(),'" + Product + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Product + "')]");
+			String configuredproduct = Common.findElement("xpath", "//div[contains(@class,'multiselect-text')]")
+					.getText();
+
+			Common.assertionCheckwithReport(configuredproduct.contains(configuredproduct),
+					"To validate the product selected is " + configuredproduct,
+					configuredproduct + " should be selected", configuredproduct + "Product is selected",
+					"Failed to add the " + configuredproduct);
+
+		} else if (buttonlinknavugation.contains("category")) {
+			String category = data.get(dataSet).get("Buttonlinkcategory");
+			Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+			Common.textBoxInput("xpath", "//div[@class='admin__action-multiselect-search-wrap']", category);
+			Sync.waitElementVisible("xpath", "//span[text()='" + category + "']");
+			Common.clickElement("xpath", "//span[text()='" + category + "']");
+			String configuredcategory = Common.findElement("xpath", "//div[contains(@class,'multiselect-text')]")
+					.getText();
+
+			Common.assertionCheckwithReport(category.contains(configuredcategory),
+					"To validate the category selected is " + category, category + "category should be selected",
+					configuredcategory + "category is selected", "Failed to add the " + configuredcategory);
+
+		} else if (buttonlinknavugation.contains("Page")) {
+			String Page = data.get(dataSet).get("Buttonlinkpage");
+			Sync.waitElementClickable("xpath", "(//div[@class='admin__action-multiselect-text'])[1]");
+
+			Common.mouseOverClick("xpath", "(//div[@class='admin__action-multiselect-text'])[1]");
+			Sync.waitElementVisible("xpath", "(//div[@class='action-menu _active'])");
+
+			Common.scrollIntoView("xpath", "//span[contains(text(),'" + Page + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Page + "')]");
+			String configuredpage = Common.findElement("xpath", "//div[contains(@class,'multiselect-text')]")
+					.getText();
+
+			Common.assertionCheckwithReport(configuredpage.contains(Page),
+					"To validate the page selected is " + configuredpage,
+					configuredpage + " page should be selected", configuredpage + "page is selected",
+					"Failed to add the page " + configuredpage);
+
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+		Assert.fail();
+	}
+}
+
+
+}
+
