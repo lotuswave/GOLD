@@ -50,7 +50,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("OXO"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
 					"faield to naviagte to homepage");
 		} catch (Exception | Error e) {
@@ -3923,6 +3923,140 @@ public void country_selector() {
 	}
 	
 }
+
+
+
+public void click_Product_Registration() throws Exception {
+	String expectedResult = "It should land successfully on the Product Registration";
+	
+	Common.actionsKeyPress(Keys.END);
+	try {
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//a[text()='Product Registration']");
+		Common.clickElement("xpath", "//a[text()='Product Registration']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+	
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("registration"),"Validating the Product Registration page navigation" ,
+				expectedResult, "successfully land to Product Registration page", "unable to load the Product Registration page");
+	} catch (Exception | Error e) {
+		ExtenantReportUtils.addFailedLog("validating Product Registration  page", expectedResult,
+				"unable to load the Product Registration page", Common.getscreenShotPathforReport("Product Registration page link"));
+		Assert.fail();
+
+	}
+}
+
+public void product_Registration(String dataSet) {
+	
+	String expectedResult = " Product registration form is visible in tab with success message";
+	String country=data.get(dataSet).get("Country");
+	String state = data.get(dataSet).get("Region");
+	String purchased = data.get(dataSet).get("PurchasedAt");
+	try {
+
+
+		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://oxo')]");
+		Common.switchFrames("xpath", "//iframe[contains(@src,'https://oxo')]");
+
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='First Name']");
+		Common.textBoxInput("xpath", "//input[@data-label='First Name']", data.get(dataSet).get("FirstName"));
+
+		Sync.waitElementPresent("xpath", "//input[@data-label='Last Name']");
+		Common.textBoxInput("xpath", "//input[@data-label='Last Name']", data.get(dataSet).get("LastName"));
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Email']");
+	       
+			Common.textBoxInput("xpath", "//input[@data-label='Email']", data.get(dataSet).get("Email"));
+
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Phone']");
+		Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
+
+		
+		
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Street ']");
+		Common.textBoxInput("xpath", "//input[@data-label='Street ']", data.get(dataSet).get("Street"));
+
+		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
+		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
+		
+		
+
+		Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
+		Common.clickElement("xpath", "//div[@id='conversationState']");
+
+		Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
+		Common.clickElement("xpath", "//div[text()='"+state+"']");
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Zip/Postal Code']");
+		Common.textBoxInput("xpath", "//input[@data-label='Zip/Postal Code']", data.get(dataSet).get("postcode"));
+
+		Common.textBoxInput("xpath", "//input[contains(@data-label,'Item Number')]", data.get(dataSet).get("SKUitemNumber"));
+
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Serial Number']", data.get(dataSet).get("SerialNumber"));
+
+		Common.textBoxInput("xpath", "//input[@data-label='Manufacture Date ']", data.get(dataSet).get("ManufactureDate"));
+
+		Sync.waitElementPresent("xpath", "//div[@id='customerWherePurchased']");
+		Common.clickElement("xpath", "//div[@id='customerWherePurchased']");
+		
+		Sync.waitElementPresent("xpath", "//div[text()='"+purchased+"']");
+		Common.clickElement("xpath", "//div[text()='"+purchased+"']");
+		
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Price']", data.get(dataSet).get("Price"));
+
+		Sync.waitElementPresent("xpath", "//textarea[@data-label='City Purchased']");
+		Common.textBoxInput("xpath", "//textarea[@data-label='City Purchased']",data.get(dataSet).get("City"));
+		
+		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+		Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+		Sync.waitElementPresent("xpath", "//div[text()='"+country+"']");
+		Common.clickElement("xpath", "//div[text()='"+country+"']");
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Purchase Date']",data.get(dataSet).get("Date"));		
+		
+		Common.scrollIntoView("xpath", "//button[text()='Submit']");
+//		Common.clickElement("xpath", "//button[text()='Submit']");
+		
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+		int registrationsuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+		Common.assertionCheckwithReport(registrationsuccessmessage > 0, "verifying Product registration Success message ",
+				"Success message should be Displayed", "Product registration  Success message displayed ",
+				"failed to dispaly success message");
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying Product registration  form",
+				"Product registration form data enter without any error message", "Product registration  page getting error ",
+				Common.getscreenShotPathforReport("Product registration  page"));
+		Assert.fail();
+
+	}
+
+	Common.actionsKeyPress(Keys.PAGE_UP);
+	Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
+	String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+	expectedResult = "User gets confirmation under the same tab. It includes Success message.";
+	Common.assertionCheckwithReport(Text.contains("Your submission was successful"),
+			"verifying Product registration confirmation message", expectedResult,
+			"User gets confirmation under the same tab", "unable to load the confirmation form");
+	
+
+}
+
+
+
+
+
+
 
 
 
