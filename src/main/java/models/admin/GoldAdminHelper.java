@@ -753,6 +753,429 @@ public class GoldAdminHelper {
 			}
 		}
 		
+		public void dragndrop_heroBanner() {
+			try {
+				Common.scrollIntoView("xpath", "//span[text()='Hero Banner']");
+				WebElement element = Common.findElement("xpath", "//span[text()='Hero Banner']");
+				draganddropContentBlock(element);
+				String bannercontent = Common.findElement("xpath", "//div[@class='file-uploader-area']/label").getText();
+				System.out.println(bannercontent);
+				String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+						.getAttribute("data-content-type");
+
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(blockname.equals("hot_hero_banner"),
+						"Validating Hero Banner Dragndrop operation", "Hero Banner dragndrop to content with options",
+						"successfully dragndrop the Hero Banner with options ", "Fail to dragndrop the Hero Banner");
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("Validating Hero Banner Dragndrop operation",
+						"User should able Dragndrop Hero Banner", "Sucessfully Dragndrop the Hero Banner",
+						Common.getscreenShotPathforReport("Failed to Dragndrop Hero Banner"));
+				Assert.fail();
+
+			}
+		}
+		public void edit_Herobanner() {
+			try {
+				Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+				
+				Sync.waitPageLoad();
+				Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
+				Sync.waitElementVisible("xpath", "//div[contains(@class,'options-middle')]");
+				 
+
+				String pagebuilderoptions = Common.findElement("xpath", "//div[contains(@class,'options-middle')]").getAttribute("class");
+				
+				if(pagebuilderoptions.contains("show")) {
+					Sync.waitElementVisible("xpath", "//i[contains(@class,'pagebuilder-systems')]");
+					Common.javascriptclickElement("xpath", "//i[contains(@class,'pagebuilder-systems')]");
+					Sync.waitPageLoad();
+				}
+				else {
+					Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
+					Sync.waitElementVisible("xpath", "//div[contains(@class,'options-middle')]");
+					Common.javascriptclickElement("xpath", "//i[contains(@class,'pagebuilder-systems')]");
+					Sync.waitPageLoad();
+				}
+				
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				String editbanner = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
+				
+				
+				Common.assertionCheckwithReport(editbanner.contains("Edit Hero Banner"),
+						"To validate the admin is able to edit  Hero Banner",
+						"After Clicking on the edit button admin should navigate to the edit Hero Banner page ",
+						"Admin Successfully navigated to edit Hero Banner page ",
+						"Failed to navigate to edit Hero Banner page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("To validate the admin is able to edit  Hero Banner",
+						"After Clicking on the edit button admin should navigate to the edit Hero Banner page ",
+						"Admin is not able to  navigate to the edit Hero Banner page ",
+						Common.getscreenShotPathforReport("Failed to navigate to edit Hero Banner page"));
+				Assert.fail();
+
+			}
+		}
+		public void edit_Herobanner_ContentSection(String DataSet) {
+			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(1000);
+				String name = Common.getText("xpath", "(//span[text()='Content'])[3]");
+				System.out.println(name);
+				Sync.waitElementPresent("xpath", "(//input[@name='title'])[2]");
+				Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(DataSet).get("title"));
+				Common.dropdown("xpath", "//select[@name='heading_type']", Common.SelectBy.TEXT,
+						data.get(DataSet).get("headingtype"));
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//input[@name='subtitle']");
+				Common.textBoxInput("xpath", "//input[@name='subtitle']", data.get(DataSet).get("subtitle"));
+				Common.dropdown("xpath", "//select[@name='subtitle_heading']", Common.SelectBy.TEXT,
+						data.get(DataSet).get("headingtype"));
+
+				Common.scrollIntoView("xpath", "//span[text()='Description']");
+				Common.switchFrames("id", "hot_hero_banner_form_description_ifr");
+				Common.findElement("id", "html-body").sendKeys(data.get(DataSet).get("Description"));
+				Common.switchToDefault();
+				// Thread.sleep(2000);
+				Thread.sleep(5000);
+
+				Common.assertionCheckwithReport(name.contains("Content"), "validation to the edit content promo Blocker",
+						"after giving data it should show the data", "Successfully data is populated",
+						"Succesfully data entered");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation to the edit content promo Blocker ",
+						"after giving data it should show the data", "Successfully data is populated",
+						Common.getscreenShotPathforReport("Failed to show the data"));
+				Assert.fail();
+
+			}
+		}
+		public void herobanner_image() {
+			// TODO Auto-generated method stub
+
+			String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa1.png");
+			try {
+				Sync.waitElementPresent("xpath", "(//input[@name='image_element_desktop'])[2]");
+				Thread.sleep(6000);
+				
+				Common.findElement("xpath", "(//input[@name='image_element_desktop'])[2]").sendKeys(path);
+				
+				String image = Common.findElement("xpath", "(//div[@class='file-uploader-filename'])[1]").getText();
+				System.out.println(image);
+				Thread.sleep(5000);
+				Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
+						"To validate the image uploading on content for background image ",
+						"Image should be upload on the background image",
+						"Successfully image uploaded on the background image ",
+						"Failed to upload image on the background image");
+
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the image uploading on content for background image ",
+						"Image should be upload on the background image", "unable to upload image on the background image ",
+						Common.getscreenShotPathforReport("Failed to upload image on the background image"));
+				Assert.fail();
+
+			}
+
+		}
+		
+		public void edit_HeroBanner_ContentAlignment(String Dataset) {
+
+			String alignment = data.get(Dataset).get("Alignment");
+			String textcolor = data.get(Dataset).get("TextColor");
+			String style = data.get(Dataset).get("Style");
+			try {
+
+				Common.scrollIntoView("xpath", "//span[text()='" + alignment + "']");
+				Sync.waitElementPresent("xpath", "//span[text()='" + alignment + "']");
+			
+				Common.clickElement("xpath", "//span[text()='" + textcolor + "']");
+				Common.clickElement("xpath", "//span[text()='" + style + "']");
+				Common.assertionCheckwithReport(textcolor.contains("Dark"),
+						"validation of the Content Alignment, Color, Style selection ",
+						"Content Alignment, Color, Style should be open and it should be selected",
+						"Successfully Content Alignment, Color, Style opend and it has been selected ",
+						"Failed to open Content Alignment, Color, Style to select");
+
+			} catch (Exception | Error e) {
+
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation of the Content Alignment, Color, Style selection ",
+						"Content Alignment, Color, Style should be open and it should be selected",
+						"Unable to open the Content Alignment, Color, Style and  has not been selected ",
+						Common.getscreenShotPathforReport("Failed to open Content Alignment, Color, Style to select"));
+				Assert.fail();
+			}
+		}
+		public void edit_Hero_Banner_content_color(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+
+				Common.scrollIntoView("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+				Common.clickElement("xpath", "//div[contains(@class,'sp-preview-inner sp-clear-display')]");
+				String color = data.get(Dataset).get("Color");
+				System.out.println(color);
+				Common.clickElement("xpath", "//span[@title='" + color + "']");
+				Common.clickElement("xpath", "//button[text()='Apply']");
+
+				String appliedcolor = Common.findElement("xpath", "(//input[@class='colorpicker-spectrum'])[2]")
+						.getAttribute("value");
+
+				System.out.println(appliedcolor);
+
+				Common.assertionCheckwithReport(appliedcolor.equals(color),
+						"To validate the color is applied in the Promo content background ",
+						"After clicking on the color the background color should be applied ",
+						"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the color is applied in the Promo content background ",
+						"After clicking on the color the background color should be applied ",
+						"Unable to apply the  Background color ",
+						Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+				Assert.fail();
+
+			}
+		}
+		public void editherobanner_Background_image() {
+			// TODO Auto-generated method stub
+
+			String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+			try {
+				Sync.waitElementPresent("xpath", "//input[@name='background_image']");
+				Common.findElement("xpath", "//input[@name='background_image']").sendKeys(path);
+				
+				String image = Common.findElement("xpath", "(//div[@class='file-uploader-filename'])[2]").getText();
+				
+				
+				
+				System.out.println(image);
+				Thread.sleep(5000);
+				Common.assertionCheckwithReport(image.equals("Lotusqa.png") ,
+						"To validate the image uploading on content for background image ",
+						"Image should be upload on the background image",
+						"Successfully image uploaded on the background image ",
+						"Failed to upload image on the background image");
+
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the image uploading on content for background image ",
+						"Image should be upload on the background image", "unable to upload image on the background image ",
+						Common.getscreenShotPathforReport("Failed to upload image on the background image"));
+				Assert.fail();
+
+			}
+
+		}
+		public void allbackground(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//span[text()='Contain']");
+				Common.clickElement("xpath", "//span[text()='Contain']");
+				Common.clickElement("xpath", "//select[@name='background_position']");
+				Common.dropdown("xpath", "//select[@name='background_position']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("Backgroud position"));
+				Common.clickElement("xpath", "//select[@name='background_attachment']");
+				Common.dropdown("xpath", "//select[@name='background_attachment']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("Attachment"));
+				String background = Common.findElement("xpath", "(//select[@name='background_attachment']//option)[2]")
+						.getText();
+				Common.assertionCheckwithReport(background.equals("Fixed"),
+						"validation of the back ground attachemnt drop down ",
+						"back groud attachment drop down should be open and its should be select",
+						"Successfully dropdown should be opend and text has been selected ",
+						"Failed to open drop down and text to select");
+				//Common.clickElement("xpath", "//span[text()='Background Repeat']");
+
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				
+
+			} catch (Exception | Error e) {
+
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation of the back ground attachemnt drop down ",
+						"back groud attachment drop down should be open and its should be select",
+						"Unable to open the dropdown and text has not been selected ",
+						Common.getscreenShotPathforReport("Failed to open drop down and text to select"));
+				Assert.fail();
+			}
+		}
+		public void website_verification_Herobanner() {
+
+			try {
+
+				Sync.waitElementPresent(40, "xpath", "//div[@data-content-type='hot_hero_banner']");
+
+				Thread.sleep(5000);
+				String headingverification = Common.getText("xpath", "//h2[@class='c-hero-block__headline']");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("QA test Hero Banner"),
+						"validation Image upload in the forntend website ", "Image should  appear on fornt end page",
+						"Successfully image is appeared on the frondend", "Failed to navigate to appear on fornt end page");
+				
+				
+				
+				
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation Image upload in the forntend website ",
+						"Image should  appear on front end page", "Successfully image is appeared on the frond end",
+						Common.getscreenShotPathforReport("Failed to navigate to appear on fornt end page"));
+				Assert.fail();
+
+			}
+
+		}
+		public void website_image_verification_herobanner() {
+			// TODO Auto-generated method stub
+			try {
+
+				Sync.waitElementPresent(40, "xpath", "//div[contains(@class,'c-hero-block__image')]");
+				String imageverification = Common.findElement("xpath", "//div[contains(@class,'c-hero-block__image')]")
+						.getAttribute("data-background-images");
+				System.out.println(imageverification);
+				
+				Sync.waitElementPresent(40, "xpath", "//img[@data-element='image_element_desktop']");
+				String imageverification2 = Common.findElement("xpath", "//img[@data-element='image_element_desktop']")
+						.getAttribute("src");
+				System.out.println(imageverification2);
+				
+				
+				Common.assertionCheckwithReport(imageverification.contains("Lotusqa") && imageverification2.contains("Lotusqa1"),
+						"validating the  Image upload on the forntend website ",
+						"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
+						"Failed to appear image on the front end");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation Image upload in the fornt end website ",
+						"Image should de appear on fornt end page", "unable to appear image on the frond end",
+						Common.getscreenShotPathforReport("Failed to appear image on the front end"));
+				Assert.fail();
+
+			}
+
+		}
+		public void editherobanner_video(String Dataset) {
+			// TODO Auto-generated method stub
+	      String video= data.get(Dataset).get("VideoURL");
+			try {
+				
+				Common.switchToFirstTab();
+				Contentpage();
+				edit_Herobanner();
+				Common.findElement("xpath", "(//button[@class='action-remove'])[1]");
+				Common.clickElement("xpath", "(//button[@class='action-remove'])[1]");
+				
+				Sync.waitElementPresent("xpath", "//input[@name='video_element[video_url]']");
+		
+				Common.textBoxInput("xpath", "//input[@name='video_element[video_url]']", data.get(Dataset).get("VideoURL"));
+				Common.clickElement("xpath", "(//div[contains(@class,'sp-preview-')])[2]");
+				
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Sync.waitElementPresent("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation of video upload ",
+						"after Clicking on thesave the video should be applied ",
+						"Unable to save the  video url ",
+						Common.getscreenShotPathforReport("Failed to save the video url"));
+				Assert.fail();
+			}
+		}
+		
+		public void website_verification_video_Herobanner() {
+
+			try {
+
+				
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@id='VideoWorker-0']");			
+				Sync.waitElementPresent(50,"xpath", "//video[@class='video-stream html5-main-video']");
+			
+				int video = Common.findElements("xpath", "//video[@class='video-stream html5-main-video']").size();
+				System.out.println(video);
+				Common.assertionCheckwithReport(video>0,
+						"validation video upload in the forntend website ", "video should  appear on front end pag",
+						"Successfully video is appeared on the frond end", "Failed to navigate to appear on fornt end page");
+				
+				
+				
+				
+				
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation video upload in the forntend website ",
+						"video should  appear on front end page", "Successfully video is appeared on the frond end",
+						Common.getscreenShotPathforReport("Failed to navigate to appear on fornt end page"));
+				Assert.fail();
+
+			}
+
+		}
+		public void click_hero_product(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Common.switchToFirstTab();	
+				Contentpage();
+		        hot_elements(); 
+		        edit_Herobanner();
+			
+		        Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+						data.get(Dataset).get("heading"));
+	 	       Common.clickElement("xpath", "//div[@class='admin__action-multiselect-wrap action-select-wrap']");
+				
+	    		String text= Common.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])").getAttribute("id");
+	    		Common.textBoxInput("xpath", "//input[@id='"+ text +"']", data.get(Dataset).get("productnames"));
+	           Sync.waitElementPresent("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+	            Common.mouseOverClick("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+			
+			Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
+			Common.clickElement("xpath", "//input[@name='link_url']");
+			int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])").size();
+			System.out.println(saved);
+			Common.assertionCheckwithReport(saved>0,
+					"Enter the categroy details ", "Category details enterd succesfully",
+					"Successfully v", "Failed to enterd the category details");
+			Configure_padding_marins(Dataset);
+			 Sync.waitElementPresent("xpath", "//button[@id='save']");
+			Common.clickElement("xpath", "//button[@id='save']");
+		
+		} catch (Exception e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+			"User should able to save the page", "Unable to saves the page",
+			Common.getscreenShotPathforReport("Failed to save the page"));
+	Assert.fail();
+		}}
+		
+		
+		
+		
+		
 		public WebElement Promo_Content() {
 			// TODO Auto-generated method stub
 
@@ -1537,6 +1960,33 @@ public class GoldAdminHelper {
 				Assert.fail();
 			}
 		}
+		public void Websiteverification_hero_product() {
+			// TODO Auto-generated method stub
+			try {
+	            Common.refreshpage();
+	            Common.scrollIntoView("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+	            Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+				Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+				//Common.switchWindows();
+				Thread.sleep(5000);
+				String headingverification = Common.getText("xpath", "//div[@class='c-product-overview u-container']");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("32 OZ WIDE MOUTH STAINLESS"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+				Common.navigateBack();
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation of PDP page in the forntend website ",
+						"PDP should de appear on fornt end page", "Successfully image is appeared on the frondend",
+						Common.getscreenShotPathforReport("Failed to navigate to PDP page"));
+				Assert.fail();
+			}
+
+			
+	}
 
 		public void Editandsavepage() throws Exception {
 			// TODO Auto-generated method stub
