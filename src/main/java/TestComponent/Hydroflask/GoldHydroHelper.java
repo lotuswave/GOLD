@@ -3615,8 +3615,8 @@ public void acceptPrivacy() {
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(4000);
 //			Sync.waitElementPresent(30, "xpath", "//input[@placeholder='Enter Email Address']");
-			Common.clickElement("xpath", "//input[@placeholder='Enter Email Address']//parent::div");
-			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']//parent::div", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//div[@class='form_inputs_wrapper form_spacing']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
 			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
 			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
 			System.out.println(Errormessage);
@@ -3855,7 +3855,7 @@ catch(Exception | Error e)
 		
 	}
 
-	public void Stored_Payment() {
+	public void Stored_Payment(String Dataset) {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -3880,8 +3880,8 @@ catch(Exception | Error e)
 		try
 		{
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//strong[text()='Stored Payment Methods']");
-			Common.clickElement("xpath", "//strong[text()='Stored Payment Methods']");
+			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
 			Sync.waitPageLoad(30);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
@@ -3891,7 +3891,13 @@ catch(Exception | Error e)
 			int size=Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
 			if(size>0)
 			{
-				String number=Common.findElement("xpath", "").getText();
+				String number=Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText();
+				System.out.println(number);
+				Common.assertionCheckwithReport(number.contains(Dataset),
+						"validating the Navigation to the My account page",
+						"After Clicking on My account CTA user should be navigate to the my account page",
+						"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+						"Failed to Navigate to the MY account page after Clicking on my account button");
 			}
 			else
 			{
@@ -3906,7 +3912,6 @@ catch(Exception | Error e)
 		}
 		
 	}
-
 	public void view_order() {
 		// TODO Auto-generated method stub
 		try
