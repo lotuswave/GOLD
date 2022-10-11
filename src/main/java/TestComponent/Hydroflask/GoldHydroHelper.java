@@ -235,6 +235,8 @@ public class GoldHydroHelper {
 	}
 
 	public void addDeliveryAddress(String dataSet) throws Exception {
+		String address=data.get(dataSet).get("Street");
+		
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("id", "customer-email");
@@ -254,9 +256,13 @@ public class GoldHydroHelper {
 					data.get(dataSet).get("LastName"));
 			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
-					data.get(dataSet).get("Street"));
-			Common.clickElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']");
-			Thread.sleep(6000);
+					address);
+			Common.actionsKeyPress(Keys.BACK_SPACE);
+			Common.actionsKeyPress(Keys.BACK_SPACE);
+			Thread.sleep(5000);
+			Common.findElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']").sendKeys("Rd");
+			Thread.sleep(5000);
+			Sync.waitElementPresent(30, "xpath", "//div[@class='pcaitem']");
 			String newadd=Common.findElement("xpath", "//div[@class='pcaitem']").getAttribute("title");
 			System.out.println(newadd);
 			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']");
@@ -266,8 +272,17 @@ public class GoldHydroHelper {
 			ArrayList<WebElement> listaddress=new ArrayList<WebElement>();
 			for(WebElement addresscheck:listofaddresss)
 			{
+				
 		     listaddress.add(addresscheck);
-			 System.out.println(addresscheck.getAttribute("title")); 
+			 String add=addresscheck.getAttribute("title"); 
+			 System.out.println(add);
+			 System.out.println(address);
+			 Thread.sleep(4000);
+			 Common.assertionCheckwithReport(add.equals(address) ,
+						"validating the dropdown in the shipping address page ",
+						"User should able to see the Locate dropdown for respective address", "Successfully Locate dropdown has been displayed in shipping address page",
+						"Failed to display dropdown in the shipping address page");
+			 
 			}
 		
 			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
