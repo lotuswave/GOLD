@@ -213,7 +213,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-			String checkout = Common.findElement("xpath", "//strong[@role='heading']").getAttribute("aria-level");
+			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
@@ -4318,6 +4318,96 @@ catch(Exception | Error e)
 			Assert.fail();
 
 		}
+	}
+
+	public void configurable_Sticky_add_to_cart(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Colorproduct");
+		String productcolor = data.get(Dataset).get("Color");
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image product')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
+					"validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page",
+					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+
+			Sync.waitPageLoad();
+			Common.actionsKeyPress(Keys.END);
+			Sync.waitElementPresent("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+			Thread.sleep(4000);
+			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Sticky_Add_to_Cart(String Dataset ) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Common.actionsKeyPress(Keys.END);
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
+			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+		
 	}
 	
 	
