@@ -6,23 +6,21 @@ import org.testng.annotations.Test;
 import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
-public class Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr {
+public class Test_DGLD_HF_ST_062_Guest_user_Checkout_with_2_DayShipping_method {
     String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 //   Sheet name
-    GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Sheet1");
+    GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-    public void Validation_ShippingAddress_form_for_RegisterUesr() throws Exception {
+    public void Validation_Guest_user_Checkout_with_2_DayShipping_method() throws Exception {
         try {
             Hydro.verifingHomePage();
-            Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
             Hydro.search_product("Product");      
             Hydro.addtocart("Product");                    
             Hydro.minicart_Checkout();
-            Hydro.addDeliveryAddress_RegUser("InvalidAddress");
-            Hydro.selectStandedshippingaddress();
+            Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("2 Day method");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.validatingErrormessageShippingpage_negative();
+            Hydro.updatePaymentAndSubmitOrder("CCAmexcard");
         } catch (Exception e) {
             Assert.fail(e.getMessage(), e);
         }
