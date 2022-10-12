@@ -95,6 +95,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 					Common.getscreenShot("Failed to click on the" + category + ""));
 
 			Assert.fail();
+			
 		}
 	}
 	
@@ -140,7 +141,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+//				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@class,'m-product-card__image')]");
 				String s = webelementslist.get(i).getAttribute("src");
@@ -186,6 +188,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@class,'m-product-card__image product')]");
 				String s = webelementslist.get(i).getAttribute("src");
+				Thread.sleep(3000);
 				System.out.println(s);
 				if (s.isEmpty()) {
 
@@ -198,9 +201,9 @@ public GoldOxoHelper(String datafile,String sheetname) {
 //			Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 			//a[contains(text(),'Write a review')]
 			
-			String Productname = Common.getText("xpath", "//a[contains(text(),'Write a review')]").trim();
-			
-			Thread.sleep(4000);
+			String Productname = Common.findElement("xpath", "//a[contains(text(),'Write a review')]").getText();
+			Sync.waitPageLoad();
+			Thread.sleep(7000);
 			System.out.println(Productname);
 //			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
 					Common.assertionCheckwithReport(Productname.contains("Write a review"),
