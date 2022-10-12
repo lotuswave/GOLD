@@ -326,7 +326,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
 				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
 			}
-			
+			Thread.sleep(4000);
 			expectedResult = "shipping address is filled in to the fields";
 			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
 			
@@ -1110,6 +1110,7 @@ public void selectshippingaddress(String Dataset) {
 		try {
 			Common.refreshpage();
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
 			Common.clickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -1125,6 +1126,7 @@ public void selectshippingaddress(String Dataset) {
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
+			Common.scrollIntoView("xpath", "//button[@title='Sign Up']");
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitPageLoad();
@@ -1982,6 +1984,7 @@ public void acceptPrivacy() {
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 				
 				Common.clickElement("xpath", "//button[@title='Save Address']");
+				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -4695,7 +4698,7 @@ catch(Exception | Error e)
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
 				}
-		   else	if(socallinksarry[i].equals("Youtube")){
+		   else	if(socallinksarry[i].equals("YouTube")){
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();

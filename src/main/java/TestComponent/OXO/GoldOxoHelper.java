@@ -4177,7 +4177,7 @@ public void socialLinkValidation(String dataSet){
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
 		}
-   else	if(socallinksarry[i].equals("Youtube")){
+   else	if(socallinksarry[i].equals("YouTube")){
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
