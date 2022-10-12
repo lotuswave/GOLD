@@ -16,9 +16,9 @@
         </classes>
         </test> 
          
-         <test name="Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Visa Payment">
+         <test name="Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using AMEX Payment">
        <classes>
-            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card"/>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card"/>
         </classes>
         </test> 
        
@@ -28,11 +28,25 @@
         </classes>
         </test>
         
-        <test name="Test_DGLD_HF_UT_Header_002_User_ViewsMegaMenu_Desktop" testid="DTG-963" priority="P1" description="This script will cover validating theUser_ViewsMegaMenu_Desktop">
+        <test name="Test_DGLD_HF_ST_008_Guest_user_Checkout_Funtionality_Master_card" testid="DTG-963" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Master card">
 <classes>
-<class name="TestExecute.Hydroflask.unitTestcase.Test_DGLD_HF_UT_Header_002_User_ViewsMegaMenu_Desktop"/>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_008_Guest_user_Checkout_Funtionality_Master_card"/>
 </classes>
 </test>
+        
+        
+        
+           <test name="Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment" testid="DTG-1230" priority="P1" description="This script will cover Register user Checkout Klarna Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment"/>
+        </classes>
+        </test>
+        
+            <test name="Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment" testid="DTG-1230" priority="P1" description="This script will cover Guest user Checkout Klarna saved Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment"/>
+        </classes>
+        </test>
         
         
         

@@ -11,17 +11,35 @@
 		</classes>
 	</test> 
         
-    <test name="Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card" testid="DTG-985" priority="P1" description="This script will cover validating the Register User Checkout Funtionality Visa Card">
-		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card" />
-		</classes>
-	</test> 
-	
 	<test name="Test_DGLD_OXO_ST_003_Create_Account_Validation" testid="DTG-986" priority="P1" description="This script will cover validating the Create_Account_Validation">
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_003_Create_Account_Validation" />
 		</classes>
 	</test> 
+	
+	<test name="Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card" testid="DTG-1245" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Master card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-1250" priority="P1" description="This script will cover validating the Register User Checkout Funtionality Master Card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_012_Register_user_Checkout_Funtionality_Amex_card" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_OXO_ST_014_Register_user_Checkout_Funtionality_Klarna_Saved_Payment" testid="DTG-1786" priority="P1" description="This script will cover validating Register user Checkout Funtionality Klarna Saved Payment">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_014_Register_user_Checkout_Funtionality_Klarna_Saved_Payment" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" testid="DTG-1253" priority="P1" description="This script will cover validating Guest user Checkout Klarna Payment">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" />
+		</classes>
+	</test>
 	
 	<test name="Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" testid="DTG-1348" priority="P1" description="This script will cover validating Guest user Checkout Funtionality with Paypal">
 		<classes>
