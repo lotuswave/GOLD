@@ -198,16 +198,11 @@
 	</test>
 
 
-
-
 <test name="Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment" testid="DTG-1342" priority="P1" description="This script will cover validating Guest user Checkout Klarna Payment">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment" />
 		</classes>
 	</test>
-
-
-
 
 
 <test name="Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment" testid="DTG-1349" priority="P1" description="This script will cover validating Register user Checkout Klarna Payment">
@@ -320,9 +315,6 @@
 	</test>  
         
 
-
-
-
  <test name="Test_DGLD_HF_ST_56_DealerCentral_Page" testid="DTG-1857" priority="P1" description="This script will cover validating Dealer Central User Views DealerCentral Page">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_56_DealerCentral_Page" />
@@ -341,7 +333,24 @@
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_058_Add_to_Cart_from_Sticky_Cart" />
 		</classes>
 	</test> 
+	
+<test name="Test_DGLD_HF_ST_062_Guest_user_Checkout_with_2_DayShipping_method" testid="DTG-2187" priority="P1" description="This script will cover validating Guest user Checkout with 2 DayShipping method">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_062_Guest_user_Checkout_with_2_DayShipping_method" />
+		</classes>
+	</test> 
 
+ <test name="Test_DGLD_HF_ST_066_Register_user_Checkout_with_2Day_Shipping_method" testid="DTG-2191" priority="P1" description="This script will cover validating Register user Checkout with 2Day Shipping method">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_066_Register_user_Checkout_with_2Day_Shipping_method" />
+		</classes>
+	</test> 
+
+ <test name="Test_DGLD_HF_ST_073_Social_Article_Links" testid="DTG-2198" priority="P1" description="This script will cover validating Social Article Links">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_073_Social_Article_Links" />
+		</classes>
+	</test> 
 
         
 </suite>  

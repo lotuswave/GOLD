@@ -280,24 +280,34 @@
 		</classes>
 	</test>
 
-<test name="Test_DGLD_OXO_ST_052_Add_to_Cart_from_Sticky_Cart" testid="DTG-00" priority="P1" description="This script will cover valiating Add to Cart from Sticky Cart">
+<test name="Test_DGLD_OXO_ST_052_Add_to_Cart_from_Sticky_Cart" testid="DTG-2231" priority="P1" description="This script will cover valiating Add to Cart from Sticky Cart">
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_052_Add_to_Cart_from_Sticky_Cart"/>
 		</classes>
 	</test>
 
-<test name="Test_DGLD_OXO_ST_060_Social_Article_Links" testid="DTG-00" priority="P1" description="This script will cover valiating Social Article Links">
+<test name="Test_DGLD_OXO_ST_060_Social_Article_Links" testid="DTG-2222" priority="P1" description="This script will cover valiating Social Article Links">
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_060_Social_Article_Links"/>
 		</classes>
 	</test>
 
-<test name="Test_DGLD_OXO_ST_063_Register_user_Checkout_With_Bundle_product" testid="DTG-00" priority="P1" description="This script will cover valiating Register user Checkout With Bundle product">
+<test name="Test_DGLD_OXO_ST_063_Register_user_Checkout_With_Bundle_product" testid="DTG-2227" priority="P1" description="This script will cover valiating Register user Checkout With Bundle product">
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_063_Register_user_Checkout_With_Bundle_product"/>
 		</classes>
 	</test>
 
+	<test name="Test_DGLD_OXO_ST_056_Checkout_with_GuestUserCC_Simple_Configurable_Bundle" testid="DTG-2223" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Simple Configurable Bundle">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_056_Checkout_with_GuestUserCC_Simple_Configurable_Bundle"/>
+		</classes>
+	</test>
+	<test name="Test_DGLD_OXO_ST_058_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle" testid="DTG-2207" priority="P1" description="This script will cover valiating Checkout with RegisterUserCC Simple Configurable Bundle">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_058_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle"/>
+		</classes>
+	</test>
 	
 	
 	</suite>
