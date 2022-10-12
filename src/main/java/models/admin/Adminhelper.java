@@ -3506,6 +3506,7 @@ public Adminhelper(String datafile,String DataSet) {
 	public void CTA_product_content(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
+			
 			Thread.sleep(5000);
 			String cta = Common.findElement("xpath", "(//div[contains(@class,'admin__fieldset-wrapper-content a')])[8]")
 					.getAttribute("class");
@@ -5873,7 +5874,7 @@ Assert.fail();
 			Common.textBoxInput("name", "paddingRight", paddingright);
 			Common.textBoxInput("name", "paddingBottom", paddingbottom);
 			Common.textBoxInput("name", "paddingLeft", paddingleft);
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -6384,8 +6385,8 @@ Assert.fail();
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent(40, "xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
-			Common.clickElement("xpath", "//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
+			Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
 			Thread.sleep(5000);
 			Common.switchWindows();
 			Sync.waitPageLoad();
@@ -7075,8 +7076,105 @@ try {
 			
 		}
 
-		}
 
-	
+		public void Click_Promo_Product(String Dataset) {
+			// TODO Auto-generated method stub
+			
+			try {
+			/*	Common.switchToFirstTab();	
+				Contentpage();
+		         hot_elements(); 
+		        //editCategory_Productslider();
+		        editpromocontent();*/
+		        Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+                        data.get(Dataset).get("heading"));
+                Common.clickElement("xpath", "//div[@class='admin__action-multiselect-wrap action-select-wrap']");
+                
+                String text= Common.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])").getAttribute("id");
+                Common.textBoxInput("xpath", "//input[@id='"+ text +"']", data.get(Dataset).get("productnames"));
+               Sync.waitElementPresent("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+                Common.mouseOverClick("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+            
+            Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
+            Common.clickElement("xpath", "//input[@name='link_url']");
+            int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])").size();
+            System.out.println(saved);
+            Common.assertionCheckwithReport(saved>0,
+                    "Enter the categroy details ", "Category details enterd succesfully",
+                    "Successfully v", "Failed to enterd the category details");
+           // Configure_padding_marins(Dataset);
+             Sync.waitElementPresent("xpath", "//button[@id='save']");
+            Common.clickElement("xpath", "//button[@id='save']");
+
+		} catch (Exception e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+			"User should able to save the page", "Unable to saves the page",
+			Common.getscreenShotPathforReport("Failed to save the page"));
+	Assert.fail();
+		}}
+
+
+		public void Websiteverification_hero_product() {
+			// TODO Auto-generated method stub
+			
+			 try {
+	                Common.refreshpage();
+	                Common.scrollIntoView("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+	                Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+	                Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+	                Common.switchWindows();
+	                Thread.sleep(7000);
+	                Sync.waitElementPresent("xpath", "//div[@class='c-product-overview u-container']");
+	                String headingverification = Common.getText("xpath", "//div[@class='c-product-overview u-container']");
+	                System.out.println(headingverification);
+	                Common.assertionCheckwithReport(headingverification.contains("32 OZ WIDE MOUTH STAINLESS"),
+	                        "validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+	                        "Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+	                
+	                Common.switchToFirstTab();
+	            } catch (Exception | Error e) {
+	                e.printStackTrace();
+
+
+
+	               report.addFailedLog("validation of PDP page in the forntend website ",
+	                        "PDP should de appear on fornt end page", "Successfully image is appeared on the frondend",
+	                        Common.getscreenShotPathforReport("Failed to navigate to PDP page"));
+	                Assert.fail();
+	            }
+
+
+			}
+
+
+		public void website_verification_Promocontent() {
+			// TODO Auto-generated method stub
+			
+			try {
+
+				Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+				Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+				Thread.sleep(5000);
+				Common.switchWindows();
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				int logo = Common.findElements("xpath", "//div[@class='t-cms-404__container u-container']").size();
+				System.out.println(logo);
+				Common.assertionCheckwithReport(logo>0,
+						"Validation of Homepage ", "Homepage should appear on the front end",
+						"Successfully homepage is appeared on the frontend", "Failed to navigate to homepage");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation of homepage in the forntend website ",
+						"Homepage should be appear on fornt end page", "Successfully homepage is appeared on the frontend",
+						Common.getscreenShotPathforReport("Failed to navigate to homepage page"));
+				Assert.fail();
+
+			}
+
+		}
+}
 	
 	
