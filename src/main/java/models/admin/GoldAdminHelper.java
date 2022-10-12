@@ -2524,6 +2524,9 @@ public class GoldAdminHelper {
 						"Validating the User lands to the Hydroflask page",
 						"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
 						"Failed to navigate to the hydroflask page");
+				
+				ClosADD();
+				AcceptAll();
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -5132,6 +5135,330 @@ public void inputcontent(String string) {
 
 	}
 }
+public WebElement Testimonials_Product_Carousel() {
+
+	WebElement element = Common.findElement("xpath", "//span[text()='Testimonials Product Carousel']");
+	Common.clickElement("xpath", "//span[text()='Testimonials Product Carousel']");
+
+	return element;
+
+}
+public void dragndrop_Testimonials_Product_Carousel() {
+	try {
+		WebElement element = Common.findElement("xpath", "//span[text()='Testimonials Product Carousel']");
+		draganddropContentBlock(element);
+		String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+				.getAttribute("data-content-type");
+		
+		Common.assertionCheckwithReport(blockname.equals("hot_testimonials_product_carousel"),
+				"Validating Testimonials Product Carousel Dragndrop operation", "Testimonials Product Carousel dragndrop to content with options",
+				"successfully dragndrop the Testimonials Product Carousel with options ", "fail to dragndrop the Testimonials Product Carousel");
+	} catch (Exception e) {
+
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("Validating card tile Dragndrop operation",
+				"User should able Dragndrop Testimonials Product Carousel", "Unable to Dragndrop the Testimonials Product Carousel",
+				Common.getscreenShotPathforReport("Failed to Dragndrop the Testimonials Product Carousel"));
+		Assert.fail();
+
+	}
+}
+public void edit_Testimonial_one() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+				.getAttribute("id");
+
+		Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[2]");
+
+		String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+		Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+				"To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Successfully it is navigated to the Edit Testimonials Product Card page ",
+				"Failed to navigate to the Edit Testimonials Product Card page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Unable to click on the edit button and it is not navigated to the Edit Testimonials Product Card page ",
+				Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card page"));
+
+		Assert.fail();
+
+	}
+
+}
+public void SKUvalue(String dataSet) {
+	try {
+		String SKU = Common.findElement("xpath", "//span[text()='Product SKU']").getText();
+		Common.javascriptclickElement("xpath", "//input[@name='product_sku']");
+	    Sync.waitElementClickable("xpath","//input[@name='product_sku']" );
+		Common.textBoxInput("xpath", "//input[@name='product_sku']", data.get(dataSet).get("SKU"));
+
+	
+		Common.assertionCheckwithReport(SKU.equals("Product SKU"), "To validate the Product SKU",
+				"Should able to add Product SKU value ", "Product SKU value is added successfully",
+				"Product SKU value failed");
+	
+	
+				} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Product SKU",
+				"Admin should able to enter Product SKU value", "Product SKU failed",
+				Common.getscreenShotPathforReport("Failed to enter Product SKU"));
+
+		Assert.fail();
+
+	}
+
+}
+
+public void Content_Dark(String dataSet) {
+	try {
+		
+		
+		String activecolor = Common.findElement("name", "text__content--light").getAttribute("class");
+		
+		if(activecolor.contains("active")) {
+			Common.javascriptclickElement("name", "text__content--dark");							
+	
+		} else {
+			System.out.println("Dark color is selected");
+		}
+		String textcolor = Common.findElement("xpath","//span[text()='Dark']").getText();
+		
+		Sync.waitElementClickable("xpath","(//input[@name='title'])[2]");
+		Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(dataSet).get("Author"));
+		
+		Sync.waitElementPresent("xpath", "//select[@name='rating']");
+		Common.dropdown("xpath", "//select[@name='rating']", Common.SelectBy.TEXT, data.get(dataSet).get("Rating"));
+
+		Common.javascriptclickElement("xpath", "//textarea[@name='description']");
+		Sync.waitElementClickable("xpath","//textarea[@name='description']");
+		Common.textBoxInput("xpath", "//textarea[@name='description']", data.get(dataSet).get("Quote"));
+
+	
+		Common.assertionCheckwithReport(textcolor.equals("Dark"), "To validate the Content values",
+				"Should able to add Content values ", "Content values is added successfully",
+				"Content values failed");
+	
+	
+				} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Content feildset",
+				"Admin should able to Content values", "Content values failed",
+				Common.getscreenShotPathforReport("Failed to add Content values"));
+
+		Assert.fail();
+
+	}
+
+}
+
+
+
+
+
+
+
+public void CSSclassvalue(String dataSet) {
+	try {
+
+				Common.scrollIntoView("xpath", "//span[text()='Advanced']");
+				String Advanced = Common.findElement("xpath","//span[text()='Advanced']").getText();
+		Sync.waitElementClickable("xpath", "//input[@name='css_classes']");
+		Common.textBoxInput("xpath", "//input[@name='css_classes']", data.get(dataSet).get("CSSclasses"));
+	
+		Common.assertionCheckwithReport(Advanced.equals("Advanced"), "To validate the CSS classes value",
+				"Should able to add CSS classes value ", "CSS classes value is added successfully",
+				"CSS classes value failed");
+	
+		
+		
+				} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Testimonials product cards configuration	",
+				"Admin should able to add CSS classes value", "failed to add CSS classes value",
+				Common.getscreenShotPathforReport("Failed to add CSS clasess"));
+
+		Assert.fail();
+
+	}
+
+}
+
+
+
+public void edit_Testimonial_Two() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+				.getAttribute("id");
+
+		Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[3]");
+
+		String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+		Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+				"To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Successfully it is navigated to the Edit Testimonials Product Card page ",
+				"Failed to navigate to the Edit Testimonials Product Card page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Unable to click on the edit button and it is not navigated to the Edit Testimonials Product Card page ",
+				Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card page"));
+
+		Assert.fail();
+
+	}
+
+}
+
+public void Content_Light(String dataSet) {
+	try {
+
+String activecolor = Common.findElement("name", "text__content--light").getAttribute("class");
+		
+		if(activecolor.contains("active")) {
+		System.out.println("Light Color is selected");						
+	
+		}else {
+			Common.javascriptclickElement("name", "text__content--light");							
+			
+		}
+
+		String textcolor = Common.findElement("xpath","//span[text()='Light']").getText();
+		
+		
+		Common.javascriptclickElement("xpath", "(//input[@name='title'])[2]");
+		Sync.waitElementClickable("xpath","(//input[@name='title'])[2]");
+		Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(dataSet).get("Author"));
+
+		Common.javascriptclickElement("xpath", "//textarea[@name='description']");
+		Sync.waitElementClickable("xpath","//textarea[@name='description']");
+		Common.textBoxInput("xpath", "//textarea[@name='description']", data.get(dataSet).get("Quote"));
+
+	
+		Common.assertionCheckwithReport(textcolor.equals("Light"), "To validate the Content values",
+				"Should able to add Content values ", "Content values is added successfully",
+				"Content values failed");
+	
+	
+				} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Content feildset",
+				"Admin should able to Content values", "Content values failed",
+				Common.getscreenShotPathforReport("Failed to add Content values"));
+
+		Assert.fail();
+
+	}
+
+}
+
+
+public void edit_Testimonial_Three() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+		String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+				.getAttribute("id");
+
+		Common.mouseOverClick("xpath", "(//div[@id='" + id + "']//i[@class='icon-admin-pagebuilder-systems'])[4]");
+
+		String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+		Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+				"To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Successfully it is navigated to the Edit Testimonials Product Card page ",
+				"Failed to navigate to the Edit Testimonials Product Card page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the  Navigation to the Edit Testimonials Product Card page ",
+				"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+				"Unable to click on the edit button and it is not navigated to the Edit Testimonials Product Card page ",
+				Common.getscreenShotPathforReport("Failed to navigate to the Edit Testimonials Product Card page"));
+
+	}
+}
+public void Verify_frontend_Testimonial(String Dataset,int i) {
+String Description= data.get(Dataset).get("Quote");
+String Author=  data.get(Dataset).get("Author");
+String Rating[]= data.get(Dataset).get("Rating").split(" ");
+	String SKU=	data.get(Dataset).get("SKU");
+try {
+	
+	
+	Sync.waitPageLoad();
+	
+	
+	
+	
+	Sync.waitElementPresent("xpath", "(//div[@class='m-media-card-testimonial__testimonial'])[1]");
+	
+	
+	Common.scrollIntoView("xpath", "(//div[contains(@class,'_testimonial')])["+i+"]");
+	String description = Common
+			.findElement("xpath", "(//div[contains(@class,'_testimonial')])["+i+"]").getText();
+	System.out.println(description);
+	System.out.println(Description);
+	Common.scrollIntoView("xpath", "(//div[contains(@class,'__author')])["+i+"]");
+	String author = Common.findElement("xpath", "(//div[contains(@class,'__author')])["+i+"]")
+			.getText();
+	System.out.println(author);
+	System.out.println(Author);
+	
+	 int number = Integer.parseInt(Rating[0]);
+	Common.scrollIntoView("xpath", "(//div[contains(@class,'rating_')]/span)["+i+"]");
+	String rating = Common.findElement("xpath", "(//div[contains(@class,'rating_')]/span)["+i+"]")
+			.getText();
+	System.out.println(rating);
+	 int Rating1 = Integer.parseInt(Rating[0]);
+	
+	System.out.println(Rating[0]);
+	String sku=Common.findElement("xpath", "(//div[contains(@class,'c-testimonials-carousel__item ')])["+i+"]").getAttribute("data-product-sku");
+	System.out.println(sku);
+	System.out.println(SKU);
+	
+	//div[contains(@class,'c-testimonials-carousel__item ')]
+Common.assertionCheckwithReport(
+			description.contains(Description) &&  Rating1==number && author.contains(Author) && sku.contains(SKU),
+			"validating the description author name and rating on the frontend ",
+			"Description Description author name and rating should be display on the frontend ",
+			"Successfully Description author name and rating is displayed on the frontend",
+			"Failed to dispaly Description author name and rating is displayed on the frontend ");
+	
+	
+	
+	
+
+} catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the description author name and rating on the frontend ",
+			"Description Description author name and rating should be display on the frontend ",
+			"Unable to display the Description author name and rating on the frontend",
+			Common.getscreenShotPathforReport(
+					"Failed to dispaly Description author name and rating is displayed on the fronten"));
+	Assert.fail();
+}
+
+}
+
+
+
+
 
     }
 
