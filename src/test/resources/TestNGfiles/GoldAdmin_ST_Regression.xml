@@ -71,11 +71,15 @@
 		</classes>
 	</test>
 
-     
-       
          <test name="Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_Card_Components_Content" testid="DTG-1913" priority="P1" description="This script will cover validating Edit Testimonials Product Card Components Content">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_Card_Components_Content" />
+		</classes>
+	</test>
+	
+	 <test name="Test_DGLD_Admin_ST_CategoryManagement_018_Validate_Create_update_Delete_NewCategory" testid="DTG-2075" priority="P1" description="This script will cover create update and delete a new category in adin panel and validate on the front end">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CategoryManagement_018_Validate_Create_update_Delete_NewCategory" />
 		</classes>
 	</test>
 </suite>  

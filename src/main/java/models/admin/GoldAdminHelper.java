@@ -5460,6 +5460,671 @@ Common.assertionCheckwithReport(
 
 
 
+
+
+public void click_catlog() {
+	// TODO Auto-generated method stub
+
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("id", "menu-magento-catalog-catalog");
+		Sync.waitElementPresent("id", "menu-magento-catalog-catalog");
+		String catlog = Common.findElement("xpath", "//strong[contains(text(),'Catalog')]").getText();
+		System.out.println(catlog);
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+		Common.assertionCheckwithReport(catlog.equals("Catalog"), "To verify the Catalog menu ",
+				"After clicking the Catalog menu it will display menu options ",
+				"Successfully clicked the Catalog menu and it displayed the Catalog options",
+				"Failed to click the Catalog menu");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("To verify the Catalog menu ",
+				"After clicking the Catalog menu it will display menu options ",
+				"Successfully clicked the Catalog menu and it displayed the Catalog options",
+				Common.getscreenShotPathforReport("Failed to click on the Catalog menu"));
+		Assert.fail();
+	}
+
+}
+
+public void click_categories() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//li[@class='item-catalog-categories    level-2']");
+		Sync.waitElementPresent("xpath", "//li[@class='item-catalog-categories    level-2']");
+		String categories = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+		System.out.println(categories);
+		// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+		// @style='display: none;']");
+		Common.assertionCheckwithReport(categories.equals("Hydro Flask (ID: 2)"), "To verify the categories menu ",
+				"After clicking the categories menu it will navigate to categories page ",
+				"Successfully navigate to categories page", "Failed to navigate to categories page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("To verify the categories menu ",
+				"After clicking the Catalog menu it will navigate to categories pag ",
+				"Successfully navigate to categories pags",
+				Common.getscreenShotPathforReport("Failed to navigate to categories pag"));
+		Assert.fail();
+	}
+}
+
+public void Verify_CTALinks() {
+	// TODO Auto-generated method stub
+	try {
+
+		String category = Common.findElement("xpath", "//div[@class='admin__field _required']").getText();
+		System.out.println(category);
+		Common.assertionCheckwithReport(category.equals("Category Name"), "validation the category name ",
+				"validating the scope ", "Successfully validate the category name ", "validate the category name");
+
+		String Scope = Common.findElement("xpath", "//div[@class='store-switcher store-view']").getText();
+		System.out.println(Scope);
+		Common.assertionCheckwithReport(Scope.contains("Scope:"), "validation of the scope ",
+				"validating the scope ", "Successfully validate scope ", "validate the scope");
+
+		String save = Common.findElement("xpath", "//button[@id='save']").getText();
+		System.out.println(save);
+		Common.assertionCheckwithReport(save.equals("Save"), "validation of the save button ",
+				"validating the save button ", "Successfully validate save ", "validate save");
+
+		String addroot = Common.findElement("xpath", "//button[@id='add_root_category_button']").getText();
+		System.out.println(addroot);
+		Common.assertionCheckwithReport(addroot.equals("Add Root Category"), "validation of the Root Category ",
+				"validating of the Root Category ", "Successfully validate the Root Category ",
+				"validate the Root Category");
+
+		String subcategory = Common.findElement("xpath", "//button[@id='add_subcategory_button']").getText();
+		System.out.println(subcategory);
+		Common.assertionCheckwithReport(subcategory.equals("Add Subcategory"), "validation of the Subcategory ",
+				"validating of the Subcategory ", "Successfully validate the Subcategory ",
+				"validate the Subcategory");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validation of the Subcategory ", "aftervalidate the Subcategory ",
+				"Successfully validate the Subcategory ",
+				Common.getscreenShotPathforReport("Failed to validate the Subcategory"));
+		Assert.fail();
+
+	}
+}
+
+public void categorylist() {
+	// TODO Auto-generated method stub
+	try {
+		String colapse = Common.findElement("xpath", "//a[@id='colapseAll']").getText();
+		System.out.println(colapse);
+		Common.assertionCheckwithReport(colapse.equals("Collapse All"), "validation to validate collapse ",
+				"validation to validate collapse ", "Successfully validated to validate collapse ",
+				"validated collapse ");
+
+		String expand = Common.findElement("xpath", "//a[@id='expandAll']").getText();
+		System.out.println(expand);
+		Common.assertionCheckwithReport(expand.equals("Expand All"), "validation of the expand all ",
+				"validation of the expand all ", "Successfully validated of the expand all ",
+				"validated collapse ");
+
+		String tree = Common.findElement("xpath", "//div[@class='categories-side-col']").getText();
+		System.out.println(tree);
+		Common.assertionCheckwithReport(tree.contains("Collapse All"), "validation of category tree ",
+				"validating cateory tree ", "Successfully validating cateory tree ", "validated category tree");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ",
+				Common.getscreenShotPathforReport("Failed to validate"));
+		Assert.fail();
+
+	}
+}
+
+public void category_content() {
+	// TODO Auto-generated method stub
+
+	try {
+		String enable = Common.findElement("xpath", "//div[@class='admin__field-label']").getText();
+		System.out.println(enable);
+		Common.assertionCheckwithReport(enable.equals("Enable Category"),
+				"validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+		String include = Common.findElement("xpath", "(//div[@class='admin__field-label'])[2]").getText();
+		System.out.println(include);
+		Common.assertionCheckwithReport(include.equals("Include in Menu"),
+				"validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ",
+				Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+		Assert.fail();
+	}
+}
+
+public void Validate_Content() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementPresent(30, "xpath", "//strong//span[text()='Content']");
+		Common.clickElement("xpath", "//strong//span[text()='Content']");
+
+		// common.asser
+		String include = Common
+				.findElement("xpath", "//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show']")
+				.getText();
+		System.out.println(include);
+		Common.assertionCheckwithReport(include.contains("Content"),
+				"validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ",
+				Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+		Assert.fail();
+	}
+}
+
+public void click_Display() {
+	// TODO Auto-generated method stub
+	try {
+
+		Sync.waitElementPresent(30, "xpath", "//strong//span[text()='Display Settings']");
+		Common.clickElement("xpath", "//strong//span[text()='Display Settings']");
+
+		Common.scrollIntoView("xpath", "(//fieldset[@class='admin__fieldset'])[3]");
+		String include = Common.findElement("xpath", "(//fieldset[@class='admin__fieldset'])[3]").getText();
+		System.out.println(include);
+		Common.assertionCheckwithReport(include.contains("Display Mode"),
+				"validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ", "Failed to apply backgroud color");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ",
+				Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+		Assert.fail();
+	}
+}
+
+public void click_search_engine() {
+	// TODO Auto-generated method stub
+
+	try {
+
+		Sync.waitElementPresent(30, "xpath",
+				"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper'])[2]");
+
+		Common.clickElement("xpath", "(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper'])[2]");
+
+		Common.scrollIntoView("xpath",
+				"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[3]");
+		String engine = Common.findElement("xpath",
+				"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[3]").getText();
+		System.out.println(engine);
+		Common.assertionCheckwithReport(engine.contains("Search Engine Optimization"),
+				"validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ", "Failed to apply backgroud color");
+		// fieldset[@class='admin__fieldset'])[4]
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("validation of the color applied in the backgroud color ",
+				"after Clicking on the color the background color should be applied ",
+				"Successfully Background color is applied ",
+				Common.getscreenShotPathforReport("Failed to apply backgroud color"));
+		Assert.fail();
+	}
+}
+
+public void products_category() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[text()='Products in Category']");
+		Sync.waitElementPresent("xpath", "//span[text()='Products in Category']");
+		Common.scrollIntoView("xpath", "//div[@id='merchandiser-app']");
+		String products = Common.findElement("xpath",
+				"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[4]").getText();
+		System.out.println(products);
+		// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+		// @style='display: none;']");
+		Common.assertionCheckwithReport(products.contains("Products in Category"), "To verify the Catalog menu ",
+				"After clicking the Catalog menu it will display menu options ",
+				"Successfully clicked the Catalog menu and it displayed the Catalog options",
+				"Failed to click the Catalog menu");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("To verify the Catalog menu ",
+				"After clicking the Catalog menu it will display menu options ",
+				"Successfully clicked the Catalog menu and it displayed the Catalog options",
+				Common.getscreenShotPathforReport("Failed to click on the Catalog menu"));
+		Assert.fail();
+	}
+}
+
+public void Click_design() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.scrollIntoView("xpath", "(//span[text()='Design'])[2]");
+		Common.clickElement("xpath", "(//span[text()='Design'])[2]");
+		// Sync.waitElementPresent("xpath", "//span[text()='Design");
+		Common.scrollIntoView("xpath",
+				"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[5]");
+		String products = Common.findElement("xpath",
+				"(//div[@class='fieldset-wrapper admin__collapsible-block-wrapper _show'])[5]").getText();
+		System.out.println(products);
+		// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+		// @style='display: none;']");
+		Common.assertionCheckwithReport(products.contains("Design"), "To verify the Catalog menu ",
+				"After clicking the Catalog menu it will display menu options ",
+				"Successfully clicked the Catalog menu and it displayed the Catalog options",
+				"Failed to click the Catalog menu");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("To verify the Catalog menu ",
+				"After clicking the Catalog menu it will display menu options ",
+				"Successfully clicked the Catalog menu and it displayed the Catalog options",
+				Common.getscreenShotPathforReport("Failed to click on the Catalog menu"));
+		Assert.fail();
+	}
+}
+
+public void click_Add_Root_Category() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("id", "add_root_category_button");
+		Sync.waitElementPresent("id", "add_root_category_button");
+		String button = Common.findElement("xpath", "//button[@title='Add Root Category']").getText();
+		System.out.println(button);
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+		Common.assertionCheckwithReport(button.equals("Add Root Category"),
+				"To verify the Add Root Category button ",
+				"After clicking the Add Root Category it should navigate to page ",
+				"Successfully navigate to Add Root Category", "Failed navigate to Add Root Category");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("To verify the Add Root Category ",
+				"After clicking the Add Root Category it should navigate to page ",
+				"Successfully navigate to Add Root Category",
+				Common.getscreenShotPathforReport("Failed navigate to Add Root Category"));
+		Assert.fail();
+	}
+}
+
+public void savecategory(String DataSet) {
+	// TODO Auto-generated method stub
+
+	try {
+		// Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+		// Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+		Common.textBoxInput("xpath", "(//input[@type='text'])[2]", data.get(DataSet).get("RootCategory"));
+		Common.clickElement("xpath", "//button[@id='save']");
+		Sync.waitPageLoad(70);
+		String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+		Common.assertionCheckwithReport(savethepage.equals("You saved the category."),
+				"Validating the User need to save the page", "User should able to save the page",
+				"Sucessfully User saves the page", "Unable to save the page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("Validating the User need to save the page", "User should able to save the page",
+				"Sucessfully User saves the page", Common.getscreenShotPathforReport("Failed to save the page"));
+		Assert.fail();
+
+	}
+}
+
+public void deletecategory() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementPresent("xpath", "//button[@id='delete']");
+		Common.clickElement("xpath", "//button[@id='delete']");
+		Sync.waitElementPresent("xpath", "//span[text()='OK']");
+		Common.clickElement("xpath", "//span[text()='OK']");
+		Sync.waitPageLoad(70);
+		Sync.waitElementVisible("xpath", "//div[@class='message message-success success']/div");
+		String delete = Common.findElement("xpath", "//div[@class='message message-success success']/div").getText();
+		System.out.println(delete);
+		Common.assertionCheckwithReport(delete.contains("You deleted the category."),
+				"Validating the User need to save the page", "User should able to save the page",
+				"Sucessfully User saves the page", "Unable to save the page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("Validating the User need to delete the page", "User should able to delete the page",
+				"Sucessfully User delete the page", Common.getscreenShotPathforReport("Failed to delete the page"));
+		Assert.fail();
+
+	}
+}
+
+
+public void Create_Newcategory(String dataSet) {
+	// TODO Auto-generated method stub
+
+	String Newcategory = data.get(dataSet).get("Newcategory");
+
+	try {
+
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[text()='Add Subcategory']");
+		Common.textBoxInput("name", "name", data.get(dataSet).get("Newcategory"));
+
+		Thread.sleep(5000);
+		Common.clickElement("xpath", "//span[text()='Save']");
+
+		String successmessage = Common.findElement("xpath", "//div[@class='message message-success success']")
+				.getText();
+		Thread.sleep(2000);
+		String Newcategory_Page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+		Common.assertionCheckwithReport(
+				Newcategory_Page.contains(Newcategory) && successmessage.contains("You saved the category."),
+				"To validate the admin has created a new category",
+				"Admin should  create a new Category",
+				"Successfully cretaed a new category", "Failed to create a new  category");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the admin has created a new category",
+				"Admin should  create a new Category",
+				"Failed to create a new category",
+				Common.getscreenShotPathforReport("new category creation un successfull"));
+		Assert.fail();
+	}
+}
+
+public void Create_Newsubcategory(String dataSet) {
+	// TODO Auto-generated method stub
+	String Newsubcategory = data.get(dataSet).get("Newsubcategory");
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[text()='Add Subcategory']");
+		Common.textBoxInput("name", "name", data.get(dataSet).get("Newsubcategory"));
+		Thread.sleep(5000);
+		Common.clickElement("xpath", "//span[text()='Save']");
+
+		String successmessage = Common.findElement("xpath", "//div[@class='message message-success success']")
+				.getText();
+		Thread.sleep(2000);
+		String Newsubcategory_Page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+		Common.assertionCheckwithReport(
+				Newsubcategory_Page.contains(Newsubcategory) && successmessage.contains("You saved the category."),
+				"To validate the admin has created a new sub category",
+				"Admin should  create a new sub  Category",
+				"Successfully cretaed a new sub category", "Failed to create a new sub category");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the admin has created a new sub category",
+				"Admin should  create a new sub  Category",
+				"Failed to create a new sub category",
+				Common.getscreenShotPathforReport("new sub category creation successfull"));
+		Assert.fail();
+	}
+}
+
+public void Validate_Category_subcategory_frontend(String dataSet) {
+	// TODO Auto-generated method stub
+	String Newcategory = data.get(dataSet).get("Newcategory");
+	String Newsubcategory = data.get(dataSet).get("Newsubcategory");
+
+	try {
+		Common.mouseOverClick("xpath", "(//a[@class='level-top ui-corner-all'])[1]");
+		Common.mouseOverClick("xpath", "//span[contains(text(),'" + Newcategory + "')]");
+		String website_subcategory = Common
+				.findElement("xpath", "//span[contains(text(),'" + Newsubcategory + "')]").getText();
+		Thread.sleep(2000);
+		Common.assertionCheckwithReport(website_subcategory.contains(Newsubcategory),
+				"To validate the New category and sub category on the store front",
+				"New category and sub category should be reflected on the front end","New category and sub category reflected on the store front" , "Failed to cretae New category and sub category");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the New category and sub category on the store front",
+				"New category and sub category should be reflected on the front end","New category and sub category reflect on the store front unsuccesssfull",
+				Common.getscreenShotPathforReport("Failed to cretae New category and sub category"));
+		Assert.fail();
+	}
+}
+
+public void Validate_deletcategory_Frontend(String dataSet) {
+	// TODO Auto-generated method stub
+	String Newcategory = data.get(dataSet).get("Newcategory");
+	String Newsubcategory = data.get(dataSet).get("Newsubcategory");
+
+	try {
+		Common.mouseOverClick("xpath", "(//a[@class='level-top ui-corner-all'])[1]");
+		int testcategory = Common.findElements("xpath", "//span[contains(text(),'" + Newcategory + "')]").size();
+		Thread.sleep(2000);
+		Common.assertionCheckwithReport(testcategory<=0,
+				"To validate the category on the store front is not displayed",
+				"Category should not be dispalyed on the store fornt", "Catgeory is deleted successfully", "Failed to create new category on the store front");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the category on the store front is not displayed",
+				"Category should not be dispalyed on the store fornt",
+				"The test category is not deleted form the shop menu",
+				Common.getscreenShotPathforReport("Failed to delete the category on the front end"));
+		Assert.fail();
+	}
+}
+public void Update_SubCategory(String dataSet) {
+	String Newcategory = data.get(dataSet).get("Newcategory");
+	String Updatesubcategory = data.get(dataSet).get("Updatesubcategory");
+	String Newsubcategory = data.get(dataSet).get("Newsubcategory");
+
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[contains(text(),'" + Newcategory + "')]");
+		Sync.waitPageLoad();
+		Sync.waitElementClickable("xpath", "//span[contains(text(),'" + Newsubcategory + "')]");
+		Common.clickElement("xpath", "//span[contains(text(),'" + Newsubcategory + "')]");
+		Common.textBoxInput("name", "name", data.get(dataSet).get("Updatesubcategory"));
+		Thread.sleep(5000);
+		Common.clickElement("xpath", "//span[text()='Save']");
+		String successmessage = Common.findElement("xpath", "//div[@class='message message-success success']")
+				.getText();
+		Thread.sleep(2000);
+		String Updatesubcategory_Page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+		Common.assertionCheckwithReport(
+				Updatesubcategory_Page.contains(Updatesubcategory)
+						&& successmessage.contains("You saved the category."),
+				"To validate the Updated category is refelected on the store front",
+				"Updated category should be reflected on the store front",
+				"Updated category is reflected on the store front", "Failed to reflect the category on the store front");
+
+		Thread.sleep(300000);
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the Updated category is refelected on the store front",
+				"Updated category should be reflected on the store front",
+				"Failed to update the category on the store front",
+				Common.getscreenShotPathforReport("category update on the store front is unsuccessfull"));
+		Assert.fail();
+	}
+}
+
+public void delete_ExistingCategory(String Dataset) {
+	String category = data.get(Dataset).get("Newcategory");
+	try {
+		Sync.waitElementClickable("id", "expandAll");
+		Common.scrollIntoView("id", "expandAll");
+		Common.javascriptclickElement("id", "expandAll");
+		Sync.waitPageLoad();
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='loader' and @style='display: none;']");
+
+		int catgoriesexpand = Common.findElements("xpath", "//ul[@class='x-tree-node-ct' and @style='']").size();
+		int existingcategory = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+
+		if (catgoriesexpand > 18 && existingcategory > 0) {
+			System.out.println("Categories expanded");
+			Sync.waitElementClickable("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.scrollIntoView("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + category + "')]");
+
+			Sync.waitPageLoad();
+			Sync.waitElementVisible("xpath", "//h1[@class='page-title']");
+			String categoryname = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+			if (categoryname.contains(category) && Common.getPageTitle().contains(category)) {
+
+				Common.assertionCheckwithReport(
+						categoryname.contains(category) && Common.getPageTitle().contains(category),
+						"To validate the admin is on Existing category page",
+						"Admin should be on Existing category page", "Admin is on Existing category page",
+						"failed to land on the existing category page");
+				Sync.waitElementClickable("xpath", "//span[text()='Delete']");
+				Common.javascriptclickElement("xpath", "//span[text()='Delete']");
+				Sync.waitElementVisible("xpath", "//div[text()='Are you sure you want to delete this category?']");
+				int modalpopup = Common
+						.findElements("xpath", "//div[text()='Are you sure you want to delete this category?']")
+						.size();
+
+				if (modalpopup > 0) {
+					Sync.waitElementClickable("xpath", "//span[text()='OK']");
+					Common.javascriptclickElement("xpath", "//span[text()='OK']");
+					Sync.waitPageLoad();
+				} else {
+					System.out.println("Modal popup not dispalyed");
+					Assert.fail();
+				}
+				
+				Sync.waitElementVisible("xpath", "//div[contains(@class,'message-success')]/div");
+				String deletesuccessmessage = Common.findElement("xpath", "//div[contains(@class,'message-success')]/div")
+						.getText();
+
+				Common.assertionCheckwithReport(
+						deletesuccessmessage.contains("You deleted the category.") && Common.getPageTitle()
+								.equals("Shop (ID: 8) / Categories / Inventory / Catalog / Magento Admin"),
+						"To validate the page is successfully deleted", "Page should be deleted successfully",
+						"Successfully navigate to the edit page builder field ",
+						"Failed to navigate to the edit page builder field");
+				
+				
+				
+			} else {
+				System.out.println("The admin is not on the selected page");
+				Assert.fail();
+			}
+
+		} else {
+			System.out.println("Categories not expanded or the existing new category is not present");
+
+		}
+
+		
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the existing test sub category is deleted",
+				"Existing test sub category should be deleted", "Failed to delete the Existing sub catgeory",
+				Common.getscreenShotPathforReport("Existing sub category deletion unsuccessfull"));
+		Assert.fail();
+	}
+
+}
+
+public void Validate_Category_Update_Frontend(String dataSet) {
+	// TODO Auto-generated method stub
+	String Newcategory = data.get(dataSet).get("Newcategory");
+	String Updatesubcategory = data.get(dataSet).get("Updatesubcategory");
+	try {
+		Common.mouseOverClick("xpath", "(//a[@class='level-top ui-corner-all'])[1]");
+		Common.mouseOverClick("xpath", "//span[contains(text(),'" + Newcategory + "')]");
+		String website_subcategory = Common
+				.findElement("xpath", "//span[contains(text(),'" + Updatesubcategory + "')]").getText();
+		Common.assertionCheckwithReport(website_subcategory.contains(Updatesubcategory),
+				"After clicking the categories menu it will navigate to categories page ",
+				"Successfully navigate to categories page", "Failed to navigate to categories page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		report.addFailedLog("To verify the categories menu ",
+				"After clicking the Catalog menu it will navigate to categories pag ",
+				"Successfully navigate to categories pags",
+				Common.getscreenShotPathforReport("Failed to navigate to categories pag"));
+		Assert.fail();
+	}
+}
+
+public void Navigate_Adminpage() {
+	Common.switchToFirstTab();
+}
+
+public void open_Website(String dataSet) {
+	String pagetitle = data.get(dataSet).get("pageTitle");
+	try {
+		Sync.waitPageLoad(60);
+
+		Common.openNewTab();
+		if (Common.getCurrentURL().contains("stage")) {
+			Common.oppenURL(data.get(dataSet).get("URL"));
+		} else {
+			Common.oppenURL(data.get(dataSet).get("preprodURL"));
+		}
+
+		Sync.waitPageLoad(40);
+
+		String uname = Common.getPageTitle();
+		Common.assertionCheckwithReport(uname.contains("Home Page "),
+				"Validating the User lands to the Hydroflask page",
+				"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
+				"Failed to navigate to the hydroflask page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating the User lands to the Hydroflask page",
+				"User should able to land on the Hydroflask page", "Unable to Navigate to the Hydroflask page",
+				Common.getscreenShotPathforReport("Failed to navigate to the hydroflask page"));
+
+		Assert.fail();
+	}}
+
+public void Click_Shop(String DataSet) {
+    String Shop = data.get(DataSet).get("Shop");
+    try {
+        Common.clickElement("xpath", "//span[contains(text(),'"+ Shop +"')]");
+        Common.clickElement("xpath", "//span[contains(text(),'"+ Shop +"')]");
+        Sync.waitPageLoad();
+        String Shop_Page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+       
+       
+         
+       Common.assertionCheckwithReport(Common.getPageTitle().contains(Shop) && Shop_Page.contains(Shop) , "To validate the Admin is on Shop category page", "Admin should be on Shop category page", "Admin is on Shop category page", "Admin Failed to land on the Shop category");
+        
+    }
+    catch(Exception e){
+        e.printStackTrace();
+        Assert.fail();
+    }
+   
+}
+
+
+
+
     }
 
 
