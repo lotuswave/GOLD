@@ -1,6 +1,10 @@
 package TestComponent.OXO;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +35,15 @@ public class GoldOxoHelper {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
+	public int getpageresponce(String url) throws MalformedURLException, IOException{
+        HttpURLConnection c=(HttpURLConnection)new URL(url).openConnection();
+          c.setRequestMethod("HEAD");
+          c.connect();
+          int r = c.getResponseCode();
+          
+          return r;
+   }
+	
 	
 public GoldOxoHelper(String datafile,String sheetname) {
 		
@@ -4200,8 +4213,67 @@ public void socialLinkValidation(String dataSet){
 	
 }
 
-	}
+public void Oxo_URLValidation(String dataSet)  throws Exception, IOException { 
+	// TODO Auto-generated method stub
 	
+	 String urls=data.get(dataSet).get("Links");
+	    int j=0;
+	    
+	    String[] strArray = urls.split("\\r?\\n");
+	   for (int i=0; i<strArray.length; i++) {
+	      System.out.println(strArray[i]);
+	      
+	      if (Common.getCurrentURL().contains("pre")) {
+	          
+	          Common.oppenURL((strArray[i]));
+	          int  responcecode=getpageresponce(Common.getCurrentURL());
+	          System.out.println(responcecode);
+	          
+	       if(responcecode==200) {
+	           ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ", "successfully page configured with products", Common.getscreenShotPathforReport("link"+i));
+	       }
+	       else {
+	           
+	            j++;
+	            
+	            ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+	       
+	       }
+	  
+	          
+	      }
+	      else if(Common.getCurrentURL().contains("https://mcloud-na-preprod.oxo.com/")) {
+	          
+	            Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+	          
+	           int  responcecode=getpageresponce(Common.getCurrentURL());
+	              System.out.println(responcecode);
+	          
+	           if(responcecode==200) {
+	               ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ", "successfully page configured with products", Common.getscreenShotPathforReport("link"+i));
+	           }
+	           else {
+	               
+	                j++;
+	                
+	                ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+	           
+	           }
+	      }
+	   }
+	   
+	     if(j>1) {
+	         Assert.fail();
+	     }  
+	 }
+
+
+
+	}
+		
+		
+
+
 
 
 
