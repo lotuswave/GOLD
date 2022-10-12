@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Admin Regression Testcases">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+    
+    <test name="Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" testid="DTG-984" priority="P1" description="This script will cover validating Create Update and Delete New Customer">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" />
+		</classes>
+	</test> 
+        
+    <test name="Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" testid="DTG-985" priority="P1" description="This script will cover validatiing the Create Edit Delete Customer segment">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" testid="DTG-986" priority="P1" description="This script will cover validating the Create Update Delete Customer Group">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" />
+		</classes>
+	</test> 
+	
+       <test name="Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components" testid="DTG-1912" priority="P1" description="This script will cover validating Verify the Value Prop Banner Components">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components" />
+		</classes>
+	</test>
+
+	<test name="Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" testid="DTG-1348" priority="P1" description="This script will cover validating Country Language selector Management">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" />
+		</classes>
+	</test> 
+          
+      <test name="Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_Backgroundimage" testid="DTG-1916" priority="P1" description="This script will cover validating Verify Hero Banner Components edit content Backgroundimage">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_Backgroundimage" />
+		</classes>
+	</test> 
+
+     <test name="Test_DGLD_Admin_ST_CPS_009_CategoryProduct_Slider_Verify_Edit_CategoryProduct_Slider_Components_Content_Products" testid="DTG-1915" priority="P1" description="This script will cover validating CategoryProduct Slider Verify Edit CategoryProduct Slider Components Content Products">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CPS_009_CategoryProduct_Slider_Verify_Edit_CategoryProduct_Slider_Components_Content_Products" />
+		</classes>
+	</test> 
+
+      <test name="Test_DGLD_Admin_ST_PLP_Block_013_Configure_and_Validate_PLPCMSBlocks" testid="DTG-2076" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_PLP_Block_013_Configure_and_Validate_PLPCMSBlocks" />
+		</classes>
+	</test>
+
+       <test name="Test_DGLD_Admin_Catalog_017_Catalog_Product_Update" testid="DTG-2095" priority="P1" description="This script will cover validating Catalog Product update">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_Catalog_017_Catalog_Product_Update" />
+		</classes>
+	</test> 
+      
+         <test name="Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" testid="DTG-2076" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" />
+		</classes>
+	</test>
+       
+         <test name="Test_DGLD_Admin_ST_CardTiles_015_Configure_and_Validate_Categorycardtiles" testid="DTG-2093" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CardTiles_015_Configure_and_Validate_Categorycardtiles" />
+		</classes>
+	</test>
+
+     
+       
+         <test name="Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_Card_Components_Content" testid="DTG-1913" priority="P1" description="This script will cover validating Edit Testimonials Product Card Components Content">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_Card_Components_Content" />
+		</classes>
+	</test>
+</suite>  
