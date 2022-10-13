@@ -5429,11 +5429,55 @@ catch(Exception | Error e)
         }
         
     }
-		
-        
-		
+
+	public void Shipping_Forgot_Password(String dataSet) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
+			//	Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
+				String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
+				System.out.println(shipping);
+				Common.assertionCheckwithReport( shipping.equals("Shipping"),
+						"To validate the user is navigating to Shipping page",
+						"user should naviagte to Shipping page", "User lands on Shippingd page",
+						"User failed to navigate to Shipping page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the user is navigating to Shipping page",
+						"user should navigate to Shipping page", "User failed to land on Shipping page",
+						Common.getscreenShotPathforReport("failed  to naviagte Shipping page "));
+				//Assert.fail();
 		
 	}
+		
+	}   
+	public void Forgot_password(String DateSet) throws Exception {
+		// TODO Auto-generated method stub
+				try {
+					Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
+					String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+					System.out.println(forgotpassword);
+					Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+					Common.clickElement("xpath", "//span[text()='Reset My Password']");
+					int message= Common.findElements("xpath", "//div[text()='If there is an account associated with hrn296331212@xcoxc.com you will receive an email with a link to reset your password.']").size();
+					System.out.println(message);
+					Common.assertionCheckwithReport(message>0,
+							"To validate the user is navigating to Forgot Password page",
+							"user should naviagte to forgot password page", "User lands on Forgot Password page",
+							"User failed to navigate to forgot password page");
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page",
+							"user should navigate to forgot password page", "User failed to land on Forgot Password page",
+							Common.getscreenShotPathforReport("failed  to naviagte forgot password page "));
+					Assert.fail();
+
+				}
+			}	
+		
+}	
+	
 	
 	
 
