@@ -4794,7 +4794,119 @@ catch(Exception | Error e)
 				Assert.fail();
 			}
 		}
+		public void clickWarranty() {
+			// TODO Auto-generated method stub
+			
+				String expectedResult = "It should land successfully on the Warranty page";
+				
+				Common.actionsKeyPress(Keys.END);
+				try {
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//a[text()='Warranty']");
+					Common.clickElement("xpath", "//a[text()='Warranty']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//strong[text()='Click here to start a Warranty']");
+					Common.clickElement("xpath", "//strong[text()='Click here to start a Warranty']");
+					Sync.waitPageLoad();	
+					Common.assertionCheckwithReport(Common.getPageTitle().contains("Warranty"),"Validating the Warranty page navigation" ,
+							expectedResult, "successfully land to Warranty page", "unabel to load the Warranty page");
+				} catch (Exception | Error e) {
+					ExtenantReportUtils.addFailedLog("validating Warranty page", expectedResult,
+							"unabel to load the Warrantyt page", Common.getscreenShotPathforReport("Warranty page link"));
+					Assert.fail();
 
+				}
+			}
+
+		public void WarrantySubmission(String dataSet) {
+			// TODO Auto-generated method stub
+			String expectedResult = "Warranty form is visible in tab";
+			
+			
+			try {
+
+
+				Sync.waitElementPresent("xpath", "//input[@id='customerFirstName']");
+				Common.textBoxInput("xpath", "//input[@id='customerFirstName']", data.get(dataSet).get("FirstName"));
+
+				Sync.waitElementPresent("xpath", "//input[@id='customerLastName']");
+				Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(dataSet).get("LastName"));
+
+				Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
+		        Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
+
+				Sync.waitElementPresent("xpath", "//input[@id='customerStreet']");
+				Common.textBoxInput("xpath", "//input[@id='customerStreet']", data.get(dataSet).get("Street"));
+
+				Sync.waitElementPresent("xpath", "//input[@id='customerCity']");
+				Common.textBoxInput("xpath", "//input[@id='customerCity']", data.get(dataSet).get("City"));
+	
+				Sync.waitElementPresent("xpath", "//span[text()='State']");
+				Common.clickElement("xpath", "//span[text()='State']");
+
+				Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
+				Common.clickElement("xpath", "//div[text()='Alabama']");
+				
+				Sync.waitElementPresent("xpath", "//input[@id='customerZipPostalCode']");
+				Common.textBoxInput("xpath", "//input[@id='customerZipPostalCode']", data.get(dataSet).get("postcode"));
+				
+				Sync.waitElementPresent("xpath", "//input[@id='customerPhone']");
+				Common.textBoxInput("xpath", "//input[@id='customerPhone']", data.get(dataSet).get("phone"));
+				
+				Sync.waitElementPresent("xpath", "//span[text()='Where Purchased']");
+				Common.clickElement("xpath", "//span[text()='Where Purchased']");
+
+				Sync.waitElementPresent("xpath", "//div[text()='Hydro Flask Website']");
+				Common.clickElement("xpath", "//div[text()='Hydro Flask Website']");
+				
+				Sync.waitElementPresent("xpath", "//div[@class='form-field ']/textarea");
+				Common.textBoxInput("xpath", "//div[@class='form-field ']/textarea", data.get(dataSet).get("text"));
+
+				Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
+				Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("text2"));
+				
+				
+				Thread.sleep(2000);
+				String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+				Sync.waitElementPresent(40, "xpath", "(//input[@type='file'])[1]");
+				Common.findElement("xpath", "(//input[@type='file'])[1]").sendKeys(path);
+				
+				Common.scrollIntoView("xpath", "(//input[@type='file'])[3]");
+				Thread.sleep(2000);
+			    String path1 = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa1.png");
+				Sync.waitElementPresent(40, "xpath", "(//input[@type='file'])[3]");
+				Common.findElement("xpath", "(//input[@type='file'])[3]").sendKeys(path1);
+			
+				Common.scrollIntoView("xpath", "(//input[@type='file'])[5]");
+                String path2 = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
+				Sync.waitElementPresent(40, "xpath", "(//input[@type='file'])[5]");
+				Common.findElement("xpath", "(//input[@type='file'])[5]").sendKeys(path2);
+			
+				
+				Common.scrollIntoView("xpath", "//button[text()='Submit']");
+				Common.clickElement("xpath", "//button[text()='Submit']");
+
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Your submission was successful')]");
+				int Warrantysuccessmessage = Common.findElements("xpath", "//span[contains(text(),'Your submission was successful')]").size();
+				Common.assertionCheckwithReport(Warrantysuccessmessage > 0, "verifying Warranty Success message ",
+						"Success message should be Displayed", "Warranty Success message displayed ",
+						"failed to dispaly success message");
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying Warranty form",
+						"Warranty form data enter without any error message", "Warranty page getting error ",
+						Common.getscreenShotPathforReport("Warranty page"));
+				Assert.fail();
+
+			}
+
+			
+			
+
+		}
 		
 		
 	}

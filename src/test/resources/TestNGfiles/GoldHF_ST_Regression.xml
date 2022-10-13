@@ -345,6 +345,12 @@
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_066_Register_user_Checkout_with_2Day_Shipping_method" />
 		</classes>
 	</test> 
+	
+	<test name="Test_DGLD_HF_ST_072_Warrenty_submission_form" testid="DTG-2214" priority="P1" description="This script will cover submission of Warranty form">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_072_Warrenty_submission_form" />
+		</classes>
+	</test> 
 
  <test name="Test_DGLD_HF_ST_073_Social_Article_Links" testid="DTG-2198" priority="P1" description="This script will cover validating Social Article Links">
 		<classes>
