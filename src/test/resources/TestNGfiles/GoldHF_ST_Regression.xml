@@ -357,6 +357,30 @@
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_073_Social_Article_Links" />
 		</classes>
 	</test> 
+	
+	<test name="Test_DGLD_HF_ST_061_Register_user_Checkout_With_Bundle_product" testid="DTG-2186" priority="P1" description="This script will cover validating the Register user checkout functionality with Bundle product.">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_061_Register_user_Checkout_With_Bundle_product" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_HF_ST_063_Guest_User_Checkout_with_Bundle_product" testid="DTG-2188" priority="P1" description="This script will cover validating the guest user checkout functionality with Bundle product">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_063_Guest_User_Checkout_with_Bundle_product" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_HF_ST_064_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products" testid="DTG-2189" priority="P1" description="This script will cover validating the Guest checkout with simple, configurable, bundle products">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_064_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products" />
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_HF_ST_065_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products" testid="DTG-2190" priority="P1" description="This script will cover validating the register checkout with simple, configurable, bundle products">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_065_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products" />
+		</classes>
+	</test> 
 
         
 </suite>  

@@ -4718,51 +4718,55 @@ catch(Exception | Error e)
 			    Assert.fail();
 			}
 		}
+			public void validating_BundleProducts() throws Exception {
+	            // TODO Auto-generated method stub
+	              
+	            
+	            for(int j=1;j<5;j++)
+	            {
+	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Thread.sleep(4000);
+	                
+	            }
+	            
+	            
+	            int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
+	            for(int i=0;i<subproductsList;i++) {
+	                int value=i+1;
+	                List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m')]");
+	                
+	                WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
+	                WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
+	                WebElement Color=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m-sw')]");
+	                
+	                for(int j=0;j<ListOfSubproducts.size();j++) {
+	                    
+	                    
+	                    String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
+	                    
+	                        if(attributevalue!=null){
+	            }
+	                        else
+	                        {
+	                            
+	                            if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
+	                                Thread.sleep(2000);
+	                                ListOfSubproducts.get(j).click();
+	                             
+	                                
+//	                                Common.assertionCheckwithReport(imagecolor.getAttribute("src").contains(Colornames.getText()) || imagecolor.getAttribute("src").contains(Color.getAttribute("data-simple-sku")) || Color.getAttribute("aria-label").contains(Colornames.getText()) , "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
+	                            }
+	                            else
+	                            {
+	                                break;
+	                            }
+	                        }
+	                }
+	            }
+	            
+	        }
 
-		public void validating_BundleProducts() {
-			// TODO Auto-generated method stub
-			
-			try
-			{
-				
-				int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
-				for(int i=0;i<subproductsList;i++) {
-	        		int value=i+1;
-	        		List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m')]");
-	        		
-	        		WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
-	        		WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
-	        		for(int j=0;j<ListOfSubproducts.size();j++) {
-	        			
-	            		String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
-	            		
-	            			if(attributevalue!=null){
-				}
-	            			else
-	            			{
-	            				if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
-	            					
-	                				ListOfSubproducts.get(j).click();
-          
-	                				
-//	                				Common.assertionCheckwithReport(imagecolor.getAttribute("src").contains(Colornames.getText())||imagecolor.getAttribute("src").trim().equals(""), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
-	            				}
-	            				else
-	            				{
-	            					break;
-	            				}
-	            			}
-	        		}
-				}
-				
-			}
-			catch(Exception | Error e)
-			{
-				e.printStackTrace();
-				Assert.fail();
-			}
-			
-		}
 
 		public void Addtocart_Bundle(String Dataset) {
 			// TODO Auto-generated method stub
