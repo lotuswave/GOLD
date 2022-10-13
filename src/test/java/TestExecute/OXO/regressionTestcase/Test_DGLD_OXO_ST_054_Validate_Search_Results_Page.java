@@ -9,29 +9,17 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_058_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle {
+public class Test_DGLD_OXO_ST_054_Validate_Search_Results_Page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_RegisterUserCC_Simple_Configurable_Bundle() throws Exception {
+	public void Validate_Search_Results() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
-			Oxo.coffee_headerlinks("Coffee & Beverage");
-			Oxo.addtocart("addproduct");
-			Oxo.babytoddler_headerlinks("Baby & Toddler");
-			Oxo.Configurable_addtocart_pdp("ConfigProduct");
-			Oxo.search_product("Bundle");
-			Oxo.addtocart("Bundle");
-			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
-			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
-			
-			
-			
+			Oxo.search_results("aaabbcc");
+
 
 		} catch (Exception e) {
 

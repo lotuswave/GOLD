@@ -4269,6 +4269,54 @@ public void Oxo_URLValidation(String dataSet)  throws Exception, IOException {
 
 
 
+public void search_results(String search) {
+		
+		try {
+			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+					"User should able to click on the search button", "Search expands to the full page",
+					"Sucessfully search bar should be expand");
+			Common.textBoxInput("xpath", "//input[@id='search']", search);
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+			System.out.println(productsearch);
+			Common.assertionCheckwithReport(productsearch.contains("Sorry, your search"), "validating the search functionality",
+					"enter any search term will display no results in the search box", "user enter the search term in  search box",
+					"Failed to see the search term");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter product name will display in the search box",
+					" unable to enter the product name in  search box",
+					Common.getscreenShot("Failed to see the product name"));
+			Assert.fail();
+		}
+
+		try {
+			String contact = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='Contact Us']").getText();
+			Common.assertionCheckwithReport(contact.contains("Contact"), "validating the customer service information",
+					"should display Customer serivce information", "user views the Customer serivce information",
+					"Failed to see the Customer service info");
+
+		}
+		
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the validating the customer service information",
+					"should display Customer serivce information",
+					" user views the Customer serivce information",
+					Common.getscreenShot("Failed to see the Customer service info"));
+			Assert.fail();
+		}
+		
+	}
+
+
+
 	}
 		
 		
