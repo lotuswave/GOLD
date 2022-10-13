@@ -82,4 +82,9 @@
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CategoryManagement_018_Validate_Create_update_Delete_NewCategory" />
 		</classes>
 	</test>
+	 <test name="Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHeroBanner" testid="DTG-2089" priority="P1" description="This testcase is to configure CLP Hero banner on the admin and validate it on the front end">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHeroBanner" />
+		</classes>
+	</test>
 </suite>  
