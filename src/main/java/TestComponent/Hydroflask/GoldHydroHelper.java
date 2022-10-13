@@ -5046,6 +5046,391 @@ catch(Exception | Error e)
 		}
 
 	}
+	public void click_Shop() {
+		   
+	    try {
+	    Sync.waitElementPresent("xpath", "//nav[@class='megamenu navigation m-megamenu-nav']//span[text()=' Shop']");
+	    
+	        Common.clickElement("xpath", "//nav[@class='megamenu navigation m-megamenu-nav']//span[text()=' Shop']");
+	    	Thread.sleep(2000);
+	      
+	      
+	   
+	        String catogories = Common.getText("xpath", "//ul[contains(@class,'level0 submenu')]");
+	        System.out.println(catogories);
+	       
+	        Common.assertionCheckwithReport(catogories.contains("Kitchenware"),
+	                "To Validate the catogories are displayed",
+	                "should display the catogories after clicking on the shop",
+	                "update catogories are displayed after a click on the shop",
+	                "Failed to display the catogories");
+
+
+
+	   } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the catogories are displayed",
+	                "should display the catogories after clicking on the shop",
+	                "unable to display catogories after a click on the shop",
+	                "Failed to display the catogories");
+	        Assert.fail();
+	    }
+
+
+
+	}
+	public void AcceptAll() {
+
+		try {
+
+			Thread.sleep(5000);
+			if (Common.findElement("xpath", "//button[@id='truste-consent-button']") != null) {
+
+				Common.clickElement("xpath", "//button[@id='truste-consent-button']");
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			Assert.fail();
+
+		}
+	}
+	public void ClosADD() throws Exception {
+		Thread.sleep(3000);
+		int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+		if (sizesframe > 0) {
+			Common.actionsKeyPress(Keys.PAGE_UP);
+
+			// Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+			Sync.waitElementVisible("xpath", "//div[@class='sidebar-iframe-close']");
+			Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
+		} else {
+			int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
+			if (sizeofpopup > 0) {
+
+				Sync.waitElementClickable("xpath", "//button[@aria-label='close']");
+				Common.clickElement("xpath", "//button[@aria-label='close']");
+			}
+		}
+	}
+
+	
+	public void click_BottlesDrinkware() {
+		   
+	    try {
+	    Sync.waitElementPresent("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles & Drinkware']");
+	    
+	        Common.clickElement("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles & Drinkware']");
+	    	Thread.sleep(2000);
+	      
+	      
+	   
+	        String subcatogories = Common.getText("xpath", "//ul[contains(@class,'level0 submenu')]");
+	        System.out.println(subcatogories);
+	       
+	        Common.assertionCheckwithReport(subcatogories.contains("Bottles"),
+	                "To Validate the subcatogories are displayed",
+	                "should display the subcatogories after clicking on the shop",
+	                "update subcatogories are displayed after a click on the shop",
+	                "Failed to display the subcatogories");
+	        } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the catogories are displayed",
+	                "should display the catogories after clicking on the shop",
+	                "unable to display catogories after a click on the shop",
+	                "Failed to display subcatogories");
+	        Assert.fail();
+	    }
+
+
+
+	}	
+	public void click_Bottles() {
+		   
+	    try {
+	    Sync.waitElementPresent("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles']");
+	    
+	        Common.clickElement("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles']");
+	    	Sync.waitPageLoad();
+	    	Thread.sleep(2000);
+	      
+	   
+	        String pagetitle = Common.getPageTitle();
+	        System.out.println(pagetitle);
+	       
+	        Common.assertionCheckwithReport(pagetitle.contains("Shop Bottles"),
+	                "To Validate the PLP page is displayed",
+	                "should display the PLP page after clicking on the Bottles",
+	                "update PLP page are displayed after a click on the Bottles",
+	                "Failed to display  catogories");
+	        } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the PLP page are displayed",
+	                "should display the PLP page after clicking on the Bottles",
+	                "unable to display PLP page after a click on the Bottles",
+	                "Failed to display update PLP page");
+	        Assert.fail();
+	    }
+
+
+
+	}	
+	
+	public void click_product() {
+		   
+	    try {
+	    Sync.waitElementPresent("xpath", "//img[@alt='32 oz Wide Mouth']");
+	    
+	        Common.clickElement("xpath", "//img[@alt='32 oz Wide Mouth']");
+	    	Thread.sleep(2000);
+	      
+	      
+	   
+	        String pagetitle = Common.getPageTitle();
+	        System.out.println(pagetitle);
+	       
+	        Common.assertionCheckwithReport(pagetitle.contains("32 oz Wide Mouth"),
+	                "To Validate the PDP page is displayed",
+	                "should display the PDP page after clicking on the product image",
+	                "update PDP page are displayed after a click on the product image",
+	                "Failed to display  PDP page");
+	        } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the PDP page are displayed",
+	                "should display the PDP page after clicking on the product image",
+	                "unable to display PDP page after a click on the product image",
+	                "Failed to display update PDP page");
+	        Assert.fail();
+	    }
+
+
+
+	}	
+	
+	public void click_Customize() {
+		   
+	    try {
+	    Sync.waitElementPresent("xpath", "//button[@data-role='customize-btn']");
+	    
+	        Common.clickElement("xpath", "//button[@data-role='customize-btn']");
+	    	Sync.waitPageLoad();
+	    	Thread.sleep(2000);
+	      
+	   
+	        String text = Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
+	        System.out.println(text);
+	       
+	        Common.assertionCheckwithReport(text.equals("Bottle"),
+	                "To Validate the customize page is displayed",
+	                "should display the customize page after clicking on the customize button",
+	                "update customize page are displayed after a click on the customize button",
+	                "Failed to display  customize");
+	        Common.clickElement("xpath", "//img[@alt='Close icon']");
+	        Thread.sleep(2000);
+	        } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the customize page are displayed",
+	                "should display the customize page after clicking on the customize button",
+	                "unable to display customize page after a click on the customize button",
+	                "Failed to display update customize page");
+	        Assert.fail();
+	    }
+
+	}
+		
+	public void writeareview(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+		try
+		{
+		
+			
+			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
+			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
+			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
+					"verifying the write a review button", "Write a review should be appear in the PDP page",
+					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
+			Common.clickElement("xpath", "//label[text()='Reviews & Questions']");
+			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+			Common.clickElement("xpath", "//span[text()='Write A Review']");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
+					"User Unable to click write review option  ", Common.getscreenShotPathforReport("User Failed to click write review option "));
+			Assert.fail();
+}
+
+	}
+	
+	public void Configurableproduct_addtocart_pdp(String Dataset) {
+		String product = data.get(Dataset).get("Colorproduct");
+		String productcolor = data.get(Dataset).get("Color");
+		String productquantity = data.get(Dataset).get("productquantity");
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image product')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+	
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE,
+					productquantity);
+			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Thread.sleep(4000);
+			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
+			Assert.fail();
+		}
+
+	}
+	public void Recommended_for_you() {
+		   
+	    try {
+	    Sync.waitElementPresent("xpath", "//h2[@data-bind='text: storefrontLabel']");
+	    
+	        Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
+	        Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
+	        Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
+	        Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
+	        
+	    	Sync.waitPageLoad();
+	    	Thread.sleep(2000);
+	      
+	   
+	        String text = Common.findElement("xpath", "//div[@class='u-container c-product-carousel__carousel js-slick-product-carousel']").getText();
+	        System.out.println(text);
+	       
+	        Common.assertionCheckwithReport(text.contains("Recommended For You"),
+	                "To Validate the Recommended for you is displayed",
+	                "should display the Recommended for you after scroll down the PDP page",
+	                "update Recommended for you are displayed after scroll down the PDP page",
+	                "Failed to display  ");
+	       
+	       
+	        } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the Recommended for you are displayed",
+	                "should display the Recommended for you after scroll down the PDP page",
+	                "unable to display Recommended for you after scroll down the PDP page",
+	                "Failed to display Recommended for you");
+	        Assert.fail();
+	    }
+
+	}
+	public void ClickProduct_Image() {
+		   
+	    try {
+	    	
+	    Sync.waitElementPresent("xpath", "//h2[@data-bind='text: storefrontLabel']");
+	    
+	        Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
+	        Sync.waitPageLoad();
+	        Thread.sleep(2000);
+	        Common.clickElement("xpath", "//div[@class='fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img']");
+	    //    Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
+	      //  Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
+	        
+	    	
+	      
+	   
+	        String text = Common.findElement("xpath", "//div[@class='fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img']").getText();
+	        System.out.println(text);
+	       
+	        Common.assertionCheckwithReport(text.contains("Recommended For You"),
+	                "To Validate the Recommended for you is displayed",
+	                "should display the Recommended for you after scroll down the PDP page",
+	                "update Recommended for you are displayed after scroll down the PDP page",
+	                "Failed to display  ");
+	       
+	       
+	        } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("To Validate the Recommended for you are displayed",
+	                "should display the Recommended for you after scroll down the PDP page",
+	                "unable to display Recommended for you after scroll down the PDP page",
+	                "Failed to display Recommended for you");
+	        Assert.fail();
+	    }
+
+	}
+	public void click_minicartatPDP() {
+		try {
+			Thread.sleep(8000);
+			Common.actionsKeyPress(Keys.ARROW_UP);
+			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
+			Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
+			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+			System.out.println(openminicart);
+			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
+					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
+			 Common.clickElement("xpath", "//span[@class='icon-minicart__close a-icon-text-btn__icon']");
+		        Thread.sleep(2000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "the mini cart is displayed",
+					"unable to  dislay the mini cart", Common.getscreenShot("Failed to display the mini cart"));
+			Assert.fail();
+
+		}
+	}
+	public void PDP_cofigurable_product() {
+		int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
+        for(int i=0;i<subproductsList;i++) {
+            int value=i+1;
+            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m')]");
+            
+            WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
+            WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
+            for(int j=0;j<ListOfSubproducts.size();j++) {
+                
+                String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
+                
+                    if(attributevalue!=null){
+        }
+                    else
+                    {
+                        if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
+                            
+                            ListOfSubproducts.get(j).click();
+  
+                            
+                            Common.assertionCheckwithReport(imagecolor.getAttribute("src").contains(Colornames.getText())||imagecolor.getAttribute("src").trim().equals(""), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+            }
+        }
+        
+    }
+		
+        
 		
 		
 	}
