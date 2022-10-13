@@ -4316,6 +4316,101 @@ public void search_results(String search) {
 	}
 
 
+public void popular_searches() {
+	String search;
+
+	try {
+		
+		List<WebElement> Search=Common.findElements("xpath", "(//div[@id='algolia-cms-block-popular-search'])//span[@class='widget block block-category-link-inline']/a");
+		System.out.println(Search);
+		System.out.println(Search.size());
+		for(int i=0;i<Search.size();i++)
+		{
+		
+			List<WebElement> select=Common.findElements("xpath", "(//div[@id='algolia-cms-block-popular-search'])//span[@class='widget block block-category-link-inline']/a");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(50, "xpath", "(//div[@id='algolia-cms-block-popular-search'])//span[@class='widget block block-category-link-inline']/a");
+			Thread.sleep(3000);
+			search=select.get(i).getText();
+//			System.out.println(search);
+			select.get(i).click();
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.navigateBack();
+			ExtenantReportUtils.addPassLog("Validating"+ search +"Page  ", "click on the Popular search should navigate to the  "+search +"Page", "successfully page navigating to "+search +"PAGE", Common.getscreenShotPathforReport(search));
+
+	}
+	}
+
+	
+	catch (Exception | Error e){
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the search functionality",
+				"click on the Popular search should navigate to the ",
+				" unable to enter the product name in  search box",
+				Common.getscreenShot("Failed to see the product name"));
+		Assert.fail();
+	}
+}
+
+public void carousel() {
+	try {
+		
+		Common.scrollIntoView("xpath", "//span[@class='icon-carousel__right']");
+		Common.findElement("xpath", "//span[@class='icon-carousel__right']");
+		Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
+		
+		int carousel = Common.findElements("xpath", "//div[@class='js-slick-carousel-wrapper slick-initialized slick-slider']").size();
+		Common.assertionCheckwithReport(carousel > 0, "validating the carousel",
+				"should navigate to the carousel", "user views the carousel",
+				"Failed to see the carousel");
+	}
+	catch (Exception | Error e){
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the carousel",
+				"click on the carousel should navigate the carousel slider",
+				" unable to view the carousel",
+				Common.getscreenShot("Failed to see the carousel"));
+		Assert.fail();
+	}
+}
+
+public void Validating_search(String search) {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+		String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+		Common.assertionCheckwithReport(open.contains("active"),
+				"To validate the global search box is opened when we click on the search icon",
+				"User should able to click on the search icon and search box opens",
+				"Sucessfully the gobal search box opend when user clicks on search icon",
+				"Failed to open the search box when user clicks on the search icon");
+		Common.textBoxInput("xpath", "//input[@id='search']", search);	
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
+		Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+		String close = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+		Common.assertionCheckwithReport(close.contains("c-header-search"),
+				"To validate the global search box is Closed when user click on the close icon",
+				"User should able to click on the close icon and search box should be closed",
+				"Sucessfully the gobal search box closed when user clicks on close icon",
+				"Failed to close the search box when user clicks on the close icon");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"To validate the global search box is Closed when user click on the close icon",
+				"User should able to click on the close icon and search box should be closed",
+				"Unable to close the gobal search box when user clicks on close icon",
+				Common.getscreenShotPathforReport(
+						"Failed to close the search box when user clicks on the close icon"));
+
+		Assert.fail();
+	}
+
+}
+
 
 	}
 		

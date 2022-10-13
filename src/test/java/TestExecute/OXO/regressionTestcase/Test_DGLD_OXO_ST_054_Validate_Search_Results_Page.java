@@ -18,9 +18,10 @@ public class Test_DGLD_OXO_ST_054_Validate_Search_Results_Page {
 
 		try {
 			Oxo.verifingHomePage();
+			Oxo.Validating_search("aaabbcc");
 			Oxo.search_results("aaabbcc");
-
-
+			Oxo.popular_searches();
+			Oxo.carousel();
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
