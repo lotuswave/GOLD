@@ -2,7 +2,11 @@ package TestComponent.Hydroflask;
 
 import static org.testng.Assert.fail;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +51,14 @@ public class GoldHydroHelper {
 		}
 		
 	}
+	public int getpageresponce(String url) throws MalformedURLException, IOException{
+        HttpURLConnection c=(HttpURLConnection)new URL(url).openConnection();
+          c.setRequestMethod("HEAD");
+          c.connect();
+          int r = c.getResponseCode();
+          
+          return r;
+   }
 
 	public void verifingHomePage() {
 		try {
@@ -1182,6 +1194,7 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			click_UGC();
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -5086,22 +5099,7 @@ catch(Exception | Error e)
 
 
 	}
-	public void AcceptAll() {
 
-		try {
-
-			Thread.sleep(5000);
-			if (Common.findElement("xpath", "//button[@id='truste-consent-button']") != null) {
-
-				Common.clickElement("xpath", "//button[@id='truste-consent-button']");
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			Assert.fail();
-
-		}
-	}
 	public void ClosADD() throws Exception {
 		Thread.sleep(3000);
 		int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
@@ -5481,7 +5479,181 @@ catch(Exception | Error e)
 					Assert.fail();
 
 				}
-			}	
+			}
+
+	public void click_UGC() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='y-image-overlay ']");
+//			Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
+			Common.clickElement("xpath", "//div[@class='y-image-overlay ']");
+			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span").getText();
+			System.out.println(yopto);
+			WebElement UGC=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span");
+			Thread.sleep(4000);
+			Common.scrollIntoView(UGC);
+			Common.assertionCheckwithReport(yopto.contains("Powered by"),
+					"To validate the yopto popup in when we click on the UGC",
+					"user should able to display the yopto popup",
+					"Sucessfully yopto popup has been displayed","Failed to Displayed the yopto popup");
+			Sync.waitElementPresent(40, "xpath", "//span[@aria-label='See Next Image']");
+			Common.clickElement("xpath", "//span[@aria-label='See Next Image']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[@aria-label='Cancel']");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the yopto popup in when we click on the UGC",
+					"user should able to display the yopto popup",
+					"unable to Displayed the yopto popup",
+					Common.getscreenShotPathforReport("Failed to Displayed the yopto popup"));
+			Assert.fail();
+		}
+	}
+
+	public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOException {
+		// TODO Auto-generated method stub
+
+		 String urls=data.get(dataSet).get("Links");
+		    int j=0;
+		    
+		    String[] strArray = urls.split("\\r?\\n");
+		   for (int i=0; i<strArray.length; i++) {
+		      System.out.println(strArray[i]);
+		      
+		      if (Common.getCurrentURL().contains("pre") ) {
+		          
+		          Common.oppenURL((strArray[i]));
+		          int  responcecode=getpageresponce(Common.getCurrentURL());
+		          System.out.println(responcecode);
+		          Common.refreshpage();
+		          System.out.println(responcecode);
+		          
+		       if(responcecode==200) {
+		           ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ", "successfully page configured with products", Common.getscreenShotPathforReport("link"+i));
+		       }
+		       else {
+		           
+		            j++;
+		            
+		            ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+		       
+		       }
+		  
+		          
+		      }
+		      else if(Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")) {
+		          
+		            Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+		          
+		           int  responcecode=getpageresponce(Common.getCurrentURL());
+		              System.out.println(responcecode);
+		          
+		           if(responcecode==200) {
+		               ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ", "successfully page configured with products", Common.getscreenShotPathforReport("link"+i));
+		           }
+		           else {
+		               
+		                j++;
+		                
+		                ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+		           
+		           }
+		      }
+		   }
+		   
+		     if(j>1) {
+		         Assert.fail();
+		     }  
+		 }
+	public void validateChatboxOptions(String DataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementClickable("xpath", "//a[@class='a-logo']");
+			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
+			Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+
+			String answers = Common.findElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p").getText();
+			System.out.println(answers);
+			Common.assertionCheckwithReport(answers.contains("Answers"), "To validate the Answers options in Chatbox",
+					"Click the Answers option to display the related options",
+					"Sucessfully click the answers option button", "Unable to click the Answers option button");
+
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page",
+					"Open the ChatBot and answers option should be displayed",
+					"Unable click on the ChatBot and answers are not displayed",
+					Common.getscreenShotPathforReport("failed to click on the ChatBot"));
+			Assert.fail();
+		}
+
+		List<WebElement> Answerwebelements = Common.findElements("xpath",
+				"//div[contains(@class,'SearchListItem__details')]");
+
+		ArrayList<String> arrayoptionName = new ArrayList<String>();
+
+		for (WebElement answernames : Answerwebelements) {
+			arrayoptionName.add(answernames.getText());
+		}
+
+		String[] items = data.get(DataSet).get("HydroAnswers").split(",");
+
+		for (int i = 0; i < items.length; i++) {
+
+			if (arrayoptionName.contains(items[i])) {
+			} else {
+
+				ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+						"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
+						Common.getscreenShotPathforReport("failed to display answersoptions"));
+				Assert.fail();
+			}
+
+			ExtenantReportUtils.addPassLog("To Validate the Answers options ",
+					"click on the answers options it must display all the options ",
+					"Sucessfully displayed the answers options " + arrayoptionName,
+					Common.getscreenShotPathforReport("Answervalidation"));
+		}
+
+		try {
+			String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
+			System.out.println(chat);
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'footer__chatContainer')]");
+//			Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'CLMcd button')]");
+//			Common.mouseOverClick("xpath", "//button[contains(@class,'CLMcd button')]");
+			Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'newConversationButton')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'newConversationButton')]");
+			
+			Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
+			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+			System.out.println(welcomemsg);
+			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
+					"To validate the Chat Conversation when user click on the chat option",
+					"It should Open the Chat conversation in ChatBot",
+					"Sucessfully click on the ChatBot and display the Chat conversation ",
+					"Unable to display the chat conversation when user click on the chat option ");
+
+			Common.switchToDefault();
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Chat Conversation when user click on the chat option",
+					"It should Open the Chat conversation in ChatBot",
+					"Unable to  click on the ChatBot and not displayed the Chat conversation ",
+					Common.getscreenShotPathforReport(
+							"Unable to display the chat conversation when user click on the chat option"));
+			Assert.fail();
+		}
+
+	}
+
+		
 		
 }	
 	

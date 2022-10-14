@@ -53,7 +53,7 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 
 		  Login.signIn();
 		  Hydro.ClosADD();
-	  Hydro.AcceptAll();
+	  Hydro.acceptPrivacy();
 		  
 	  }
 
