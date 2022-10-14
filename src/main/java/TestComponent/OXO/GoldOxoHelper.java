@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -4802,22 +4803,116 @@ public void click_FeedingDrinking() {
 				}
 			}	
 		
+
+	public void view_PLP_page() {
+		try {
+			String title = Common.findElement("xpath", "//h1[@id='page-title-heading']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[@class='m-breadcrumb u-container']")
+					.getAttribute("aria-label");
+
+			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+			String Sort = Common
+					.findElement("xpath",
+							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
+					.getText();
+			Common.assertionCheckwithReport(
+					breadcrumbs.contains("Breadcrumbs navigation") && title.contains("c-plp-hero__headline")
+							&& filter.contains("Filter by") && Sort.contains("Sort by"),
+					"To validate the Product Listing Page", "User should able to open Product Listing Page",
+					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Product Listing Page",
+					"User should able to open Product Listing Page", "Unable to view the Product Listing Page",
+					Common.getscreenShotPathforReport("Failed to view Product listing Page"));
+
+			Assert.fail();
+		}
+	}
+
+	public void filter_By(String category) {
+		
+		
+		try {
+			
+			Common.clickElement("xpath", "//a[text()='"+category+"']");
+			String text = Common.findElement("xpath", "//a[text()='"+category+"']//span").getText();
+			int textValue = Integer.parseInt(text);
+			String categoryvalue=Integer.toString(textValue);
+			Thread.sleep(6000);
+			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
+					.getText();
+			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+			String items=Integer.toString(noOfItems);
+			System.out.println(text);
+			System.out.println(textValueAfterFilter);
+
+		Common.assertionCheckwithReport(categoryvalue.equals(items),
+				"To validate the filter in Product Listing Page",
+				"User should able to filter in Product Listing Page",
+				"Sucessfully filters in the Product Listing Page",
+				"Failed to filter in Product Listing Page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
+					"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
+					Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
+
+			Assert.fail();
+		}
+	}
+
+	
+	
+	public void sort_By(String dataSet) {
+		try {
+
+			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
+			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", Common.SelectBy.TEXT, data.get(dataSet).get("Sort"));
+			
+			int size = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").size();
+			float[] float_array = new float[size];
+			for(int i=0; i<size; i++) {
+				String text = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").get(i).getText();
+				String price = text.replace("$", "");
+				Float priceValue = Float.parseFloat(price);
+				System.out.println(priceValue);
+				float_array[i]=priceValue;
+			}
+			Arrays.sort(float_array);
+			String firstItemPriceText = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").get(0).getText();
+			String firstItemPrice = firstItemPriceText.replace("$", "");
+			Float firstItemPriceValue = Float.parseFloat(firstItemPrice);
+			if(data.get(dataSet).get("Sort").equals("Lowest Price")) {
+				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[0]),
+						"To validate the Sort in Product Listing Page",
+						"User should able to Sort in Product Listing Page",
+						"Sucessfully Sorts in the Product Listing Page",
+						"Failed to Sort  in Product Listing Page");
+			}
+			else if(data.get(dataSet).get("Sort").equals("Highest Price")) {
+				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[size-1]),
+						"To validate the Sort in Product Listing Page",
+						"User should able to Sort in Product Listing Page",
+						"Sucessfully Sorts in the Product Listing Page",
+						"Failed to Sort  in Product Listing Page");
+			}
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Sort  in Product Listing Page",
+					"User should able to Sort  in Product Listing Page", "Unable to Sort the Product Listing Page",
+					Common.getscreenShotPathforReport("Failed to Sort  Product listing Page"));
+
+			Assert.fail();
+		}
+	}
+	
+	
+	
+
+
 }
-
-
-	
-	
-
-
-
-
-
-
-
-	
-		
-		
-
 
 
 
