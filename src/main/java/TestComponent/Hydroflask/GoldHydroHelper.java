@@ -320,7 +320,7 @@ public class GoldHydroHelper {
 
 		}
 		try {
-
+           Thread.sleep(4000);
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
@@ -1126,9 +1126,10 @@ public void selectshippingaddress(String Dataset) {
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.scrollIntoView("xpath", "//button[@title='Sign Up']");
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
-			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
@@ -1609,7 +1610,7 @@ try
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//span[text()='New payment method']");
-				
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
@@ -1730,7 +1731,6 @@ try
 				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
-			
 				
 			}
 		
@@ -1749,8 +1749,9 @@ try
 	
 	else{
 		try{
-		Thread.sleep(6000);
-		
+//			Sync.waitPageLoad();
+		Thread.sleep(8000);
+		Sync.waitElementPresent(60, "xpath", "//h1[@class='page-title-wrapper']");
 	String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 	System.out.println(sucessMessage);
 	Sync.waitElementPresent(50, "xpath", "//h1[@class='page-title-wrapper']");
@@ -3700,7 +3701,9 @@ public void acceptPrivacy() {
 			Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
 
 			Common.clickElement("xpath", "//div[text()='Order Issues']");
-
+			
+//			Common.clickElement("xpath", "//div[@class='form-field-tree-options']");
+		     Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
 			// Common.clickElement("xpath", "//div[@id='selectACategory']");
 			Common.clickElement("xpath", "//div[text()='Billing Issue']");

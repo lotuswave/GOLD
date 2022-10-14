@@ -20,8 +20,8 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");  
-			Hydro.Configurable_addtocart_pdp("Bottles & Drinkware"); 
+			Hydro.addtocart("Product");
+			Hydro.bottles_headerlinks("Bottles & Drinkware");
 			Hydro.Configurable_addtocart_pdp("Product");
 			String minicart=Hydro.minicart_items();
 			Hydro.click_Createaccount();
