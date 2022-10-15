@@ -24,7 +24,9 @@ public class Test_DGLD_HF_ST_014_Register_user_Checkout_Funtionality_Klarna_Save
 			Hydro.search_product("Product");   
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_registerUser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.Klarna_Saved_Payment("Klarna Visa Payment");
           
             
@@ -45,6 +47,7 @@ public class Test_DGLD_HF_ST_014_Register_user_Checkout_Funtionality_Klarna_Save
 		System.setProperty("configFile", "Hydroflask\\config.properties");
        Login.signIn();
        Hydro.close_add();
+       Hydro.acceptPrivacy();
 
 	}
 

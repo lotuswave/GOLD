@@ -17,7 +17,6 @@ public class Test_DGLD_HF_ST_072_Warrenty_submission_form {
 	public void Validate_the_Warranty_form_page () throws Exception {
 
 		try {
-			Hydro.acceptPrivacy();
 			Hydro.verifingHomePage();
 			Hydro.clickWarranty();
 			Hydro.WarrantySubmission("WarrantyDetails");
@@ -39,6 +38,7 @@ public class Test_DGLD_HF_ST_072_Warrenty_submission_form {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
          Login.signIn();
          Hydro.close_add();
+         Hydro.acceptPrivacy();
 
 	}
 

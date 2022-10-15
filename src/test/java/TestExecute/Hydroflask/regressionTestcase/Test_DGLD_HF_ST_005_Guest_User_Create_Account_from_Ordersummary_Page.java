@@ -43,6 +43,7 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

@@ -24,7 +24,9 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_registerUser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			String Number=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			System.out.println(Number);
 			Hydro.Stored_Payment(Number);
@@ -46,6 +48,7 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

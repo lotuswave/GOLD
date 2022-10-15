@@ -39,6 +39,7 @@ public class Test_DGLD_HF_ST_022_changeAddressIn_AddressBook {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

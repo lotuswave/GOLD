@@ -42,6 +42,7 @@ public class Test_DGLD_HF_ST_036_Create_and_Edit_Gift_Registery_For_Register_Use
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 	}
 
 }

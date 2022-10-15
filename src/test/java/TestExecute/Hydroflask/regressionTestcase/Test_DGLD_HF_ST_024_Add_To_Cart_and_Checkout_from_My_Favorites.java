@@ -23,7 +23,9 @@ public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.My_Favorites();
 			Hydro.Addtocart_From_MyFavorites("Product");
-			Hydro.addDeliveryAddress_registerUser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
@@ -44,6 +46,7 @@ public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

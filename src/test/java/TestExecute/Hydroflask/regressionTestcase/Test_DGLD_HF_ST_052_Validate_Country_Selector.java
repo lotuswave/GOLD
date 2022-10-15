@@ -38,6 +38,7 @@ public class Test_DGLD_HF_ST_052_Validate_Country_Selector {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

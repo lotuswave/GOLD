@@ -24,7 +24,9 @@ public class Test_DGLD_HF_ST_023_Validation_My_Orders_For_Register_User {
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_registerUser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			String order=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
 			Hydro.My_Orders_Page(order);
 			
@@ -45,6 +47,7 @@ public class Test_DGLD_HF_ST_023_Validation_My_Orders_For_Register_User {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

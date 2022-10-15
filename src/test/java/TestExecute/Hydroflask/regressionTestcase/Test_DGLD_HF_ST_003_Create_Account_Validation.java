@@ -40,6 +40,7 @@ public class Test_DGLD_HF_ST_003_Create_Account_Validation {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
          Login.signIn();
          Hydro.close_add();
+         Hydro.acceptPrivacy();
 
 	}
 

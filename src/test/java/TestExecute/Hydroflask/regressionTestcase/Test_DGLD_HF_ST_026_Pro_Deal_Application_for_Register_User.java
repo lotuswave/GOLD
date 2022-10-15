@@ -39,6 +39,7 @@ public class Test_DGLD_HF_ST_026_Pro_Deal_Application_for_Register_User {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

@@ -22,7 +22,9 @@ public class Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress("AccountDetails");
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.BillingAddress("BillingDetails");
 			Hydro.payPal_Payment("PaypalDetails");
 
@@ -43,6 +45,7 @@ public class Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

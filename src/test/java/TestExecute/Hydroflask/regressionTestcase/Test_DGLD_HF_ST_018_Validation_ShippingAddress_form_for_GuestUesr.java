@@ -34,5 +34,6 @@ public class Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr {
         System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
     }
 }

@@ -24,7 +24,9 @@ public class Test_DGLD_HF_ST_020_Checkout_GuestUserCC_configurable_Simple {
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress("AccountDetails");
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("CCMastercard");
 
 		} catch (Exception e) {
@@ -44,6 +46,7 @@ public class Test_DGLD_HF_ST_020_Checkout_GuestUserCC_configurable_Simple {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 	}
 
 }

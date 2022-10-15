@@ -46,6 +46,7 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

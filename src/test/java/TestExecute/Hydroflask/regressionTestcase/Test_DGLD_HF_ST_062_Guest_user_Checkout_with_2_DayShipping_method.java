@@ -34,5 +34,6 @@ public class Test_DGLD_HF_ST_062_Guest_user_Checkout_with_2_DayShipping_method {
         System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
     }
 }

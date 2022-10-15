@@ -24,7 +24,9 @@ public class Test_DGLD_HF_ST_017_registeredUserCheckoutwith_invalid_CC_Credentia
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_registerUser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updtePayementcrditcard_WithInvalidData("invlidPaymentDetails");
 
 		} catch (Exception e) {
@@ -44,6 +46,7 @@ public class Test_DGLD_HF_ST_017_registeredUserCheckoutwith_invalid_CC_Credentia
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

@@ -39,6 +39,7 @@ public class Test_DGLD_HF_ST_039_User_Selects_to_Apply_to_ProDeal_Missing_Invali
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
         Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

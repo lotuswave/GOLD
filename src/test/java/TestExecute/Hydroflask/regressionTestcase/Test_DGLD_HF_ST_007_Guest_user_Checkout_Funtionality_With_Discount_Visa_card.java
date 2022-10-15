@@ -23,7 +23,9 @@ public class Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
             Hydro.discountCode("Discount");
-			Hydro.addDeliveryAddress("AccountDetails");
+            Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
@@ -43,6 +45,7 @@ public class Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
 		Hydro.close_add();
+        Hydro.acceptPrivacy();
 	}
 
 }

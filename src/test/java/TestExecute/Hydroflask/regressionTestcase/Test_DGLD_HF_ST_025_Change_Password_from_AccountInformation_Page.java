@@ -42,6 +42,7 @@ public class Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
          Login.signIn();
          Hydro.close_add();
+         Hydro.acceptPrivacy();
 
 	}
 
