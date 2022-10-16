@@ -87,4 +87,10 @@
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHeroBanner" />
 		</classes>
 	</test>
+	 <test name="Test_DGLD_Admin_ST_CategoryManagement_019_Sceduledcategoryupdate" testid="DTG-2096" priority="P1" description="This testcase is to configure the schedule category update on the admin panel and validate on the store front">
+		<classes>
+			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CategoryManagement_019_Sceduledcategoryupdate" />
+		</classes>
+	</test>
+	
 </suite>  
