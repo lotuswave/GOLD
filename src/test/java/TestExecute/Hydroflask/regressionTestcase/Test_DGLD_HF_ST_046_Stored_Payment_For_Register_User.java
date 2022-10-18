@@ -27,8 +27,8 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			String Number=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-			System.out.println(Number);
+            String Number= Hydro.addPaymentDetails("PaymentDetails");
+            Hydro.Store_payment_placeOrder("PaymentDetails");
 			Hydro.Stored_Payment(Number);
 
 		} catch (Exception e) {

@@ -571,11 +571,12 @@ public void selectshippingaddress(String Dataset) {
 		return order;
 	}
 
-	public void addPaymentDetails(String dataSet) throws Exception {
+	public String addPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		String Number="";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
@@ -604,6 +605,7 @@ public void selectshippingaddress(String Dataset) {
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+				Number=Common.findElement("id", "Field-numberInput").getAttribute("value");
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
@@ -646,12 +648,15 @@ public void selectshippingaddress(String Dataset) {
 					Common.getscreenShotPathforReport("Cardinfromationfail"));
 			Assert.fail();
 		}
+		
 
 		expectedResult = "credit card fields are filled with the data";
 		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 
 		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+		
+		return Number;
 	}
 	
 	public void PaymentDetails(String dataSet) throws Exception {
@@ -3931,23 +3936,29 @@ catch(Exception | Error e)
 			int size=Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
 			if(size>0)
 			{
-				String number=Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText();
+				String number=Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText().replace("•••• ", "");
 				System.out.println(number);
-				Common.assertionCheckwithReport(number.contains(Dataset),
-						"validating the Navigation to the My account page",
-						"After Clicking on My account CTA user should be navigate to the my account page",
-						"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
-						"Failed to Navigate to the MY account page after Clicking on my account button");
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(number.contains(number),
+						"validating the card details in the my orders page",
+						"After Clicking on My payments methods and payment method should be appear in payment methods",
+						"Sucessfully payment method is appeared in my payments methods",
+						"Failed to display the payment methods in the my payments methods");
 			}
 			else
 			{
-				
+				Assert.fail();
 			}
 			
 		}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the card details in the my orders page",
+					"After Clicking on My payments methods and payment method should be appear in payment methods",
+					"Unable to display the payment methods in the my payments methods",
+					Common.getscreenShot(
+							"Failed to display the payment methods in the my payments methods"));
 			Assert.fail();
 		}
 		
@@ -5884,8 +5895,66 @@ catch(Exception | Error e)
 		}
 
 	}
+	public String Store_payment_placeOrder(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		String order = "";
+		String expectedResult = "It redirects to order confirmation page";
+
+		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
+			Thread.sleep(4000);
+			addPaymentDetails(dataSet);
+		}
+
+		Thread.sleep(3000);
+		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
+		if (placeordercount > 1) {
+			Thread.sleep(4000);
+
+			Common.clickElement("xpath", "//span[text()='Place Order']");
+			Common.refreshpage();
+		}
+
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+		if (!url.contains("stage")&& !url.contains("preprod")) {
+		}
+
+		else {
+			try {
+				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+//				Tell_Your_FriendPop_Up();
+
+				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unabel to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']//a//strong").size() > 0) {
+					order = Common.getText("xpath", "//div[@class='checkout-success']//a//strong");
+					System.out.println(order);
+				}
+
+				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+					System.out.println(order);
+				}
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+						"User failed to navigate  to order confirmation page",
+						Common.getscreenShotPathforReport("failednavigatepage"));
+				Assert.fail();
+			}
+
+		}
+		return order;
+	}
+
 		
-}	
+	}
+			
 	
 	
 	
