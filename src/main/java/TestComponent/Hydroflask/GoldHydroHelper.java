@@ -727,7 +727,7 @@ public void selectshippingaddress(String Dataset) {
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Number=Common.findElement("id", "Field-numberInput").getAttribute("value");
+				Number=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
@@ -1069,6 +1069,7 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			PDP_cofigurable_product();
 			click_UGC();
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			Thread.sleep(4000);
@@ -4059,9 +4060,8 @@ catch(Exception | Error e)
 			if(size>0)
 			{
 				String number=Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText().replace("•••• ", "");
-				System.out.println(number);
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(number.contains(number),
+				Common.assertionCheckwithReport(number.contains("4242")&& Dataset.contains("4242"),
 						"validating the card details in the my orders page",
 						"After Clicking on My payments methods and payment method should be appear in payment methods",
 						"Sucessfully payment method is appeared in my payments methods",
@@ -5304,14 +5304,14 @@ catch(Exception | Error e)
 
 		}
 	}
-	public void PDP_cofigurable_product() {
+	public void PDP_cofigurable_product() throws Exception {
 		int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
         for(int i=0;i<subproductsList;i++) {
             int value=i+1;
             List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m')]");
             
             WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
-            WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
+            WebElement imagecolor=Common.findElement("xpath", "//div[@class='m-product-gallery__wrapper gallery-grid']//div["+value+"]//img[1]");
             for(int j=0;j<ListOfSubproducts.size();j++) {
                 
                 String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
@@ -5321,9 +5321,11 @@ catch(Exception | Error e)
                     else
                     {
                         if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
-                            
+                            Thread.sleep(2000);
                             ListOfSubproducts.get(j).click();
-  
+                            
+                           System.out.println(imagecolor.getAttribute("src"));
+                           System.out.println(Colornames.getText());
                             
                             Common.assertionCheckwithReport(imagecolor.getAttribute("src").contains(Colornames.getText())||imagecolor.getAttribute("src").trim().equals(""), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
                         }
@@ -5393,8 +5395,9 @@ catch(Exception | Error e)
 			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span").getText();
 			System.out.println(yopto);
 			WebElement UGC=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.scrollIntoView(UGC);
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(yopto.contains("Powered by"),
 					"To validate the yopto popup in when we click on the UGC",
 					"user should able to display the yopto popup",
