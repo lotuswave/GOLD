@@ -35,7 +35,7 @@ public class Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
@@ -43,7 +43,7 @@ public class Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

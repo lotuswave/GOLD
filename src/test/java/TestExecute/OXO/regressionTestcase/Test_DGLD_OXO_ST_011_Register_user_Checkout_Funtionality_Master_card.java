@@ -44,7 +44,7 @@ public class Test_DGLD_OXO_ST_011_Register_user_Checkout_Funtionality_Master_car
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

@@ -42,7 +42,7 @@ public class Test_DGLD_OXO_ST_010_Guest_user_Checkout_Funtionality_Discover_card
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

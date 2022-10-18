@@ -40,7 +40,7 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

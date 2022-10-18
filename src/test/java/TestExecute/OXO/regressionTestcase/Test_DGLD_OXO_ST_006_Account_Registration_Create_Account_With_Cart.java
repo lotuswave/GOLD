@@ -45,7 +45,7 @@ public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart 
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

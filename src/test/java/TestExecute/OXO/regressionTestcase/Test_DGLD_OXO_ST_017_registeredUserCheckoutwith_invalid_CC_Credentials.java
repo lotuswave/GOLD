@@ -44,7 +44,7 @@ public class Test_DGLD_OXO_ST_017_registeredUserCheckoutwith_invalid_CC_Credenti
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

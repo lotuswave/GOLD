@@ -43,7 +43,7 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

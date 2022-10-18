@@ -42,7 +42,7 @@ public class Test_DGLD_OXO_ST_016_guestCheckoutwith_invalid_CC_Credentials {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

@@ -45,7 +45,7 @@ public class Test_DGLD_OXO_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

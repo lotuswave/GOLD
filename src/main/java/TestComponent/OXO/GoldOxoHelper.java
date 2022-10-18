@@ -1104,8 +1104,9 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
-			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Thread.sleep(5000);
+			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
@@ -2440,6 +2441,7 @@ try
 			String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 			Sync.waitPageLoad(5000);
 			int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+			Thread.sleep(3000);
 			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase"),
 					"verifying the product confirmation", "User Should able to Navigate to the order confirmation page",
 					"Successfully It redirects to order confirmation page Order Placed",

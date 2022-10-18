@@ -47,7 +47,7 @@ public class Test_DGLD_OXO_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }
