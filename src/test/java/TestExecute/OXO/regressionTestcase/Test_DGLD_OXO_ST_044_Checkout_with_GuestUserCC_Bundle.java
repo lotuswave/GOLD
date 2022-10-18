@@ -43,7 +43,7 @@ public class Test_DGLD_OXO_ST_044_Checkout_with_GuestUserCC_Bundle {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 }
 

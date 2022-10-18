@@ -39,7 +39,7 @@ public class Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

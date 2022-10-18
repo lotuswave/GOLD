@@ -41,7 +41,7 @@ public class Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Pay
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

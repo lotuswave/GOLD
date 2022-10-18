@@ -41,7 +41,7 @@ public class Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

@@ -45,7 +45,7 @@ public class Test_DGLD_OXO_ST_052_Add_to_Cart_from_Sticky_Cart {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }

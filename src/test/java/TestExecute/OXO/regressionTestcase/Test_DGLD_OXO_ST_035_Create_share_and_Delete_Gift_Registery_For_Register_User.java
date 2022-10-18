@@ -42,7 +42,7 @@ public class Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Reg
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-
+		  Oxo.acceptPrivacy();
 	}
 
 }
