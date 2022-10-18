@@ -578,8 +578,8 @@ public void selectshippingaddress(String Dataset) {
            Thread.sleep(4000);
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//input[@value='"+ method + "']");
-				Common.clickElement("xpath", "//input[@value='"+ method + "']");
+				Sync.waitElementPresent(30, "xpath", "//td[text()='"+ method +"']");
+				Common.clickElement("xpath", "//td[text()='"+ method +"']");
 			}
 				else {
 					
@@ -3545,9 +3545,6 @@ public void acceptPrivacy() {
 
 			Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 
-//			int emailsize = Common.findElements("xpath", "//input[contains(@id,'Emails')]").size();
-//			Common.assertionCheckwithReport(emailsize > 0, "Email us form is visible in tab", expectedResult,
-//					"unabel to load the  contacts form");
            Common.clickElement("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
@@ -3560,19 +3557,17 @@ public void acceptPrivacy() {
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
 			Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(dataSet).get("Company"));
 
-			Sync.waitElementPresent("xpath", "//input[@id='conversationPrimary']");
-			Common.textBoxInput("xpath", "//input[@id='conversationPrimary']", data.get(dataSet).get("phone"));
+			Sync.waitElementPresent("xpath", "//input[@name='customerPhone']");
+			Common.textBoxInput("xpath", "//input[@name='customerPhone']", data.get(dataSet).get("phone"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationStreet']");
 			Common.textBoxInput("xpath", "//input[@name='conversationStreet']", data.get(dataSet).get("Street"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
 			Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(dataSet).get("City"));
-//
+
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
 			Common.clickElement("xpath", "//input[@name='conversationCountry']");
-//			Common.dropdown("xpath", "//div[@data-path='united_states']", SelectBy.TEXT,country);
-//           Common.clickElement("xpath", "//input[@name='conversationCountry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='United States']");
 			Common.clickElement("xpath", "//div[text()='United States']");
@@ -3586,15 +3581,16 @@ public void acceptPrivacy() {
 			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCode']");
 			Common.textBoxInput("xpath", "//input[@name='conversationZipCode']", data.get(dataSet).get("postcode"));
 
-			Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
-			Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
-
-			Common.clickElement("xpath", "//div[text()='Order Issues']");
+			Sync.waitElementPresent("xpath", "//input[@name='conversationHowCanWeHelp']");
+			Common.clickElement("xpath", "//input[@name='conversationHowCanWeHelp']");
+			Thread.sleep(3000);
+            Common.clickElement("xpath", "//div[@data-path='order_issues']");
 			
-//			Common.clickElement("xpath", "//div[@class='form-field-tree-options']");
 		     Thread.sleep(4000);
+		     Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
+				Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+		     
 			Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
-			// Common.clickElement("xpath", "//div[@id='selectACategory']");
 			Common.clickElement("xpath", "//div[text()='Billing Issue']");
  
 			Sync.waitElementPresent("xpath", "//input[@class='form-base' and @id='conversationOrder']");
@@ -4368,29 +4364,30 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@data-label='Company Name']");
 			Common.textBoxInput("xpath", "//input[@data-label='Company Name']", data.get(dataSet).get("Company"));
 
-			Sync.waitElementPresent("xpath", "//div[@id='channelIndustry']");
-			Common.clickElement("xpath", "//div[@id='channelIndustry']");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationChannelIndustry']");
+			Common.clickElement("xpath", "//div[@id='conversationChannelIndustry']");
 
-			Sync.waitElementPresent("xpath", "//span[text()='"+channel+"']");
-			Common.clickElement("xpath", "//span[text()='"+channel+"']");
+			Sync.waitElementPresent("xpath", "//div[text()='"+channel+"']");
+			Common.clickElement("xpath", "//div[text()='"+channel+"']");
 			
-			Sync.waitElementPresent("xpath", "//div[@id='typeOfBusiness']");
-			Common.clickElement("xpath", "//div[@id='typeOfBusiness']");
-			Sync.waitElementPresent("xpath", "//span[text()='"+typeofbusiness+"']");
-			Common.clickElement("xpath", "//span[text()='"+typeofbusiness+"']");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationTypeOfBusiness']");
+			Common.clickElement("xpath", "//div[@id='conversationTypeOfBusiness']");
+			Sync.waitElementPresent("xpath", "//div[text()='"+typeofbusiness+"']");
+			Common.clickElement("xpath", "//div[text()='"+typeofbusiness+"']");
 			
 			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
 			
-			Common.clickElement("xpath", "//div[@id='areYouAnAsiPpaiIndustryMember']");
-			Common.javascriptclickElement("xpath", "//span[text()='No']");
+			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
+			Common.javascriptclickElement("xpath", "//div[text()='No']");
 			
-			Sync.waitElementPresent("xpath", "//div[@id='areYouInterestedInPlacingACustomOrder']");
-			Common.clickElement("xpath", "//div[@id='areYouInterestedInPlacingACustomOrder']");
-			Common.javascriptclickElement("xpath", "//span[text()='No']");
 			
-			Sync.waitElementPresent("xpath", "//input[@id='whatIsYourDesiredInHandDate']");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationSellThruWebsite']");
+			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
+			Common.javascriptclickElement("xpath", "//div[text()='No']");
 			
-			Common.textBoxInput("xpath", "//input[@id='whatIsYourDesiredInHandDate']",data.get(dataSet).get("date"));
+			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
+			
+			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']",data.get(dataSet).get("date"));
 			
 			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
 			Common.javascriptclickElement("xpath", "//span[text()='No']");
@@ -4399,8 +4396,8 @@ catch(Exception | Error e)
 			
 			Common.textBoxInput("xpath", "//input[@id='numberOfStores']",data.get(dataSet).get("numberOfStores"));
 			
-			Common.clickElement("xpath", "//div[@id='pleaseSelectAnAverageStoreSize']");
-			Common.clickElement("xpath", "//span[text()='"+storesize+"']");
+			Common.clickElement("xpath", "//div[@id='conversationStoreSize']");
+			Common.clickElement("xpath", "//div[text()='"+storesize+"']");
 			
 			Common.textBoxInput("xpath", "//input[@id='annualRevenue']",data.get(dataSet).get("annualRevenue"));
 			
@@ -4445,10 +4442,10 @@ catch(Exception | Error e)
 			
 			Common.textBoxInput("xpath", "//input[@id='jobTitle']", data.get(dataSet).get("Jobtitle"));
 			
-			Common.textBoxInput("xpath", "//input[@id='phoneNumber']", data.get(dataSet).get("phone"));
-			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
+			Common.textBoxInput("xpath", "//input[@name='customerPhone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
 			
-			Common.textBoxInput("xpath", "//input[@id='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
+			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
 			
 			Common.clickElement("xpath", "//button[text()='Submit']");
 
