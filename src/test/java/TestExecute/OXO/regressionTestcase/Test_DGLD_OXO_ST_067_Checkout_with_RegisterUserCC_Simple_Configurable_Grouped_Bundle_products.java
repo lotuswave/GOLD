@@ -27,7 +27,7 @@ public class Test_DGLD_OXO_ST_067_Checkout_with_RegisterUserCC_Simple_Configurab
 			Oxo.search_product("Bundle");
 			Oxo.addtocart("Bundle");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			

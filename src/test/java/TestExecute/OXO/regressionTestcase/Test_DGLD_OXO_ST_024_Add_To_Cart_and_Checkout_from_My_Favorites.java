@@ -16,14 +16,14 @@ public class Test_DGLD_OXO_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_My_Orders_For_Register_User() throws Exception {
+	public void Validating_Add_To_Cart_and_Checkout_from_My_Favorites() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
 			Oxo.My_Favorites();
-			Oxo.Addtocart_From_MyFavorites("addproduct");
+			Oxo.Addtocart_From_MyFavorites("Product");
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("CCDiscovercard");
 			

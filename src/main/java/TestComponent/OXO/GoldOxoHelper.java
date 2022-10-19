@@ -231,7 +231,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			
-			click_UGC();
+//			click_UGC();
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -1336,9 +1336,9 @@ try
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
-
-				Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+				String errorTexts = Common.findElement("xpath", "//div[contains(@data-ui-id,'error')]").getText();
+				System.out.println(errorTexts);
+				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
 						expectedResult, "Filled the Card details", "missing field data its showing error");
 		
 				
@@ -1359,9 +1359,9 @@ try
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+				String errorTexts = Common.findElement("xpath", "//div[contains(@data-ui-id,'error')]").getText();
 
-				Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
 						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 				
 
@@ -1821,6 +1821,7 @@ try
                 String Whishlistproduct=Common.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
                 System.out.println(Whishlistproduct);
                 String product=data.get(Dataset).get("Products");
+                System.out.println(product);
                 if(Whishlistproduct.equals(product))
                 {
                 	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
@@ -1872,6 +1873,7 @@ try
 					element.get(0).click();
 					String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
         					.getAttribute("data-ui-id");
+					Thread.sleep(4000);
         			System.out.println(message);
         			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
         					"Product should be add to cart", "Sucessfully product added to the cart ",
