@@ -1471,6 +1471,7 @@ try
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 				
 				Common.clickElement("xpath", "//button[@title='Save Address']");
+				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -3389,8 +3390,12 @@ public void contactUsPage(String dataSet) {
 		Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
 		Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
 
-//		Common.clickElement("xpath", "//div[text()='Order Issues']");
-		Common.clickElement("xpath", "//div[@id='order_issues']/i");
+		Common.clickElement("xpath", "//div[text()='Order Issues']");
+//		Common.clickElement("xpath", "//div[@id='order_issues']/i");
+		
+		Thread.sleep(4000);
+	     Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
+			Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
 		
 		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
 		
@@ -3406,7 +3411,9 @@ public void contactUsPage(String dataSet) {
 		Common.clickElement("xpath", "//button[text()='Submit']");
 		
 		Thread.sleep(4000);
+		
 		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
 		int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
 		Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
 				"Success message should be Displayed", "Contact us Success message displayed ",
@@ -4089,15 +4096,17 @@ public void product_Registration(String dataSet) {
 		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
 		Common.clickElement("xpath", "//div[@id='conversationCountry']");
 
+		Common.textBoxInput("xpath", "//input[@data-label='Purchase Date']",data.get(dataSet).get("Date"));		
+		
 		Sync.waitElementPresent("xpath", "//div[text()='"+country+"']");
 		Common.clickElement("xpath", "//div[text()='"+country+"']");
 		
-		Common.textBoxInput("xpath", "//input[@data-label='Purchase Date']",data.get(dataSet).get("Date"));		
 		
 		Common.scrollIntoView("xpath", "//button[text()='Submit']");
-//		Common.clickElement("xpath", "//button[text()='Submit']");
+		Common.clickElement("xpath", "//button[text()='Submit']");
 		
 		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
 		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 		int registrationsuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
 		Common.assertionCheckwithReport(registrationsuccessmessage > 0, "verifying Product registration Success message ",
@@ -4118,9 +4127,9 @@ public void product_Registration(String dataSet) {
 	Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
 	String Text = Common.getText("xpath", "//div[@class='form-wrap']");
 	expectedResult = "User gets confirmation under the same tab. It includes Success message.";
-	Common.assertionCheckwithReport(Text.contains("Your submission was successful"),
+	Common.assertionCheckwithReport(Text.contains("Your product has been successfully registered!"),
 			"verifying Product registration confirmation message", expectedResult,
-			"User gets confirmation under the same tab", "unable to load the confirmation form");
+			"User gets confirmation for Product registration ", "unable to load the confirmation form");
 	
 
 }
