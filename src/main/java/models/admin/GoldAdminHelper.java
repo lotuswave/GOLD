@@ -808,6 +808,8 @@ public class GoldAdminHelper {
 		try {
 			Apply_filter("Createcustomergroup");
 			Delete_Existingcustomergroup("DeleteCustomergroup");
+			Apply_filter("UpdatecustomerGroup");
+			Delete_Existingcustomergroup("DeleteCustomergroup");
 
 			Sync.waitElementVisible("xpath", "//button[@title='Add New Customer Group']");
 			Common.javascriptclickElement("xpath", "//button[@title='Add New Customer Group']");
