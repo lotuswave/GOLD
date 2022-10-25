@@ -9,23 +9,24 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page {
+public class Test_DGLD_HF_ST_077_Register_User_Checkout_with_GroupedBundle_product {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Bundle");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_Login_from_shipping_Page () throws Exception {
+	public void Validating_Register_User_Checkout_with_GroupedBundle_product () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("Grouped Bundle");    
+			Hydro.Add_Grouped_Bundle("Grouped Bundle");                    
 			Hydro.minicart_Checkout();
-			Hydro.Signin_Checkoutpage("AccountDetails");
-			Hydro.selectshippingaddress("GroundShipping method");
-			Hydro.ordersummary_validation();
-	        Hydro.clickSubmitbutton_Shippingpage();
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
@@ -46,7 +47,6 @@ public class Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page {
         Login.signIn();
         Hydro.close_add();
         Hydro.acceptPrivacy();
-
 	}
 
 }
