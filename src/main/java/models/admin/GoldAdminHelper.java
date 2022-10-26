@@ -2103,10 +2103,10 @@ public class GoldAdminHelper {
 		try {
 
 			Thread.sleep(4000);
-			Common.switchFrames("xpath", "//iframe[@id='VideoWorker-0']");
-			Sync.waitElementPresent(50, "xpath", "//video[@class='video-stream html5-main-video']");
+			
+			Sync.waitElementPresent(50, "xpath", "//div[@data-element='video_element']");
 
-			int video = Common.findElements("xpath", "//video[@class='video-stream html5-main-video']").size();
+			int video = Common.findElements("xpath", "//div[@data-element='video_element']").size();
 			System.out.println(video);
 			Common.assertionCheckwithReport(video > 0, "validation video upload in the forntend website ",
 					"video should  appear on front end pag", "Successfully video is appeared on the frond end",
