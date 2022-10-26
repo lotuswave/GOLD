@@ -93,7 +93,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All  Coffee & B')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All   Coffee & B')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -130,7 +130,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All  Baby & Toddler')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All   Baby & Toddler ')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -256,10 +256,12 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent("xpath", "//div[@class='y-image-overlay ']");
 //			Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
 			Common.clickElement("xpath", "//div[@class='y-image-overlay ']");
-			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span").getText();
+//			Thread.sleep(6000);
+			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']").getAttribute("aria-label");
+//			Thread.sleep(6000);
 			System.out.println(yopto);
 			WebElement UGC=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span");
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Common.scrollIntoView(UGC);
 			Common.assertionCheckwithReport(yopto.contains("Powered by"),
 					"To validate the yopto popup in when we click on the UGC",
@@ -582,7 +584,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 		
-		  if (Common.findElements("xpath","//div[@class='message message-error']").size() > 0)
+		  if (Common.findElements("xpath","//p[@class='p-FieldError Error']").size() > 0)
 		  {
 			  Thread.sleep(4000);
 		  addPaymentDetails(dataSet);
