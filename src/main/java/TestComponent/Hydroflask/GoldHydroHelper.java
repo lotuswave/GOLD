@@ -173,10 +173,15 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
-
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -3645,6 +3650,11 @@ public void acceptPrivacy() {
 		try
 		{
 			String expectedResult="Sucessfully title input box has been displayed";
+			Common.clickElement("xpath", "//input[@value='Post']");
+			String errormessage=Common.findElement("xpath", "//span[@class='form-input-error']").getText();
+			Common.assertionCheckwithReport(errormessage.contains("Name field cannot be empty"),
+					"verifying the error message in invalid fields", "error message should be display in the invalid fields",
+					"Sucessfully Error message has been displayed in invalid fileds ", "Failed to display the error meesage in invalid fields ");
 			score(data.get(Dataset).get("score"));
 			Sync.waitElementPresent("xpath", "//input[@name='review_title']");
 			int title=Common.findElements("xpath", "//input[@name='review_title']").size();
@@ -3653,6 +3663,12 @@ public void acceptPrivacy() {
 			Common.textBoxInput("xpath", "//input[@name='review_title']",data.get(Dataset).get("title"));
 			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
 			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+			String emailerror=Common.findElement("xpath", "//span[@class='form-input-error']").getText();
+			Common.assertionCheckwithReport(emailerror.contains("Invalid email"),
+					"verifying the invaild email for the product review", "error message should be display for invaild email",
+					"Sucessfully error message has been displayed for invalid email", "Failed to display the error message for invaild email");
+			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 			Common.clickElement("xpath", "//input[@value='Post']");
 			Thread.sleep(4000);

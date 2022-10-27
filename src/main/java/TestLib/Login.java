@@ -70,9 +70,41 @@ public class Login {
 			automation_properties = Automation_properties.getInstance();	
 			driver=BaseDriver.StartBrowser(System.getProperty("browser",automation_properties.getInstance().getProperty(automation_properties.BROWSER)),System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL)));
 			Driver.getLogger().info("Logged in with User: ");
-			}
+			
+if(    driver.getCurrentUrl().equals(System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL)))){
+            
+                
+            }
+        else {
+            driver.get(System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL)));
+        }
+            }
+			
 		
 	}
+	
+//	public static void sign_In() throws Exception
+//	{
+//			if(BaseDriver.getDriver()==null)
+//			{
+//				Automation_properties.setInstance(null);
+//			automation_properties = Automation_properties.getInstance();	
+//			driver=BaseDriver.StartBrowser(System.getProperty("browser",automation_properties.getInstance().getProperty(automation_properties.BROWSER)),System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL)));
+//			Driver.getLogger().info("Logged in with User: ");
+//			
+//if(    driver.getCurrentUrl().equals(System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL)))){
+//            
+//                
+//            }
+//        else {
+//            driver.get(System.getProperty("url",automation_properties.getInstance().getProperty(automation_properties.BASEURL)));
+//        }
+//            }
+//			
+//			
+//			}
+//		
+	
 	
 	
 	public static void signInOxo() throws Exception
