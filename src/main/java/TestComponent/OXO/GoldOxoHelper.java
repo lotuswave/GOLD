@@ -173,6 +173,13 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
+			
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			product_quantity(Dataset);
+			Sync.waitPageLoad();
 			click_UGC();
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
            Common.clickElement("xpath", "//span[text()='Add to Bag']");
@@ -213,10 +220,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 				}
 			}
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
-//			String Productname = Common.getText("xpath", "//h1[@itemprop='name']").trim();
-//			Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-			//a[contains(text(),'Write a review')]
-			
+
 			String Productname = Common.findElement("xpath", "//a[contains(text(),'Write a review')]").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
@@ -231,7 +235,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			
-//			click_UGC();
+			click_UGC();
+			product_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -5034,7 +5039,32 @@ public void click_FeedingDrinking() {
 		return order;
 	}
 	
-	
+
+	public void product_quantity(String Dataset) {
+		// TODO Auto-generated method stub
+		String Quantity=data.get(Dataset).get("Quantity");
+		try
+		{
+			Common.findElement("xpath", "//select[@class='a-select-menu']");
+//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+			Thread.sleep(3000);
+			String value=Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
+			Common.assertionCheckwithReport(value.equals(Quantity), "validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "Sucessfully product Qunatity has been updated ",
+					"failed to Update the prodcut quantity in PDP page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity", Common.getscreenShot("failed to update the product quantity"));
+			Assert.fail();
+		}
+		
+	}
+
 	
 
 

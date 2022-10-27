@@ -15,7 +15,8 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_Card() throws Exception {
-
+//       for(int i=0;i<3;i++)
+//       {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
@@ -32,7 +33,8 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
+//	}
+	
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();

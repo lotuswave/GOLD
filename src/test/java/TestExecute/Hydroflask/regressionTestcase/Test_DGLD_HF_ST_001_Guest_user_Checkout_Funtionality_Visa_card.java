@@ -16,7 +16,8 @@ public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
-
+//      for(int i=0;i<3;i++)
+//      {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product");      
@@ -32,6 +33,7 @@ public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+//}
 
 	@AfterTest
 	public void clearBrowser() {
