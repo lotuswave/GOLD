@@ -180,6 +180,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
+			product_quantity(Dataset);
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
 			Sync.waitPageLoad();
@@ -1075,6 +1076,7 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			PDP_cofigurable_product();
+			product_quantity(Dataset);
 			click_UGC();
 			Common.clickElement("xpath", "//button[@title='Add to Bag']");
 			Thread.sleep(4000);
@@ -4711,6 +4713,7 @@ catch(Exception | Error e)
 				Thread.sleep(4000);
 				
 				validating_BundleProducts();
+				product_quantity(Dataset);
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 				Common.clickElement("xpath", "//span[text()='Add to Bag']");
 
@@ -5412,7 +5415,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//div[@class='y-image-overlay ']");
 //			Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
 			Common.clickElement("xpath", "//div[@class='y-image-overlay ']");
-			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span").getText();
+			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']").getAttribute("aria-label");
 			System.out.println(yopto);
 			WebElement UGC=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span");
 			Thread.sleep(3000);
@@ -5438,6 +5441,8 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 	}
+	
+	
 
 	public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOException {
 		// TODO Auto-generated method stub
@@ -6240,6 +6245,30 @@ catch(Exception | Error e)
                     
             }
         }
+	}
+	public void product_quantity(String Dataset) {
+		// TODO Auto-generated method stub
+		String Quantity=data.get(Dataset).get("Quantity");
+		try
+		{
+			Common.findElement("xpath", "//select[@class='a-select-menu']");
+//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+			Thread.sleep(3000);
+			String value=Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
+			Common.assertionCheckwithReport(value.equals(Quantity), "validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "Sucessfully product Qunatity has been updated ",
+					"failed to Update the prodcut quantity in PDP page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity", Common.getscreenShot("failed to update the product quantity"));
+			Assert.fail();
+		}
+		
 	}
 }
 			
