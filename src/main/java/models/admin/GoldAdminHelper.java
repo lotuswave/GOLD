@@ -2547,6 +2547,8 @@ public class GoldAdminHelper {
 				Common.oppenURL(data.get(Dataset).get("URL") + urlkey);
 			} else {
 				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
+				
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
 
 			}
 			Sync.waitPageLoad(40);
@@ -3112,7 +3114,8 @@ public class GoldAdminHelper {
 			if (CTAnavigation.equals("Product")) {
 				String product = data.get(DataSet).get("Buttonlinkproduct");
 				System.out.println(product);
-
+                Thread.sleep(3000);
+                
 				Common.assertionCheckwithReport(pagetitle.contains(product), "To validate the CTA Product link",
 						"CTA link should navigate to the product page", "CTA link navigated to product page",
 						"Failed CTA Product Link navigation");
@@ -4449,7 +4452,7 @@ public class GoldAdminHelper {
 			// complex']");
 			Common.assertionCheckwithReport(
 					Common.getPageTitle()
-							.contains("10 QATEST product / Products / Inventory / Catalog / Magento Admin"),
+							.contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
@@ -4531,6 +4534,7 @@ public class GoldAdminHelper {
 				Common.oppenURL(data.get(Dataset).get("URL"));
 			} else {
 				Common.oppenURL(data.get(Dataset).get("preprodURL"));
+				Common.oppenURL(data.get(Dataset).get("preprodURL"));
 			}
 
 			Sync.waitPageLoad(40);
@@ -4601,11 +4605,13 @@ public class GoldAdminHelper {
 			// "//form[@id='search_mini_form']//span[text()='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.mouseOver("xpath", "//img[@class='m-product-card__image product-image-photo']");
+			Sync.waitElementPresent("xpath", "//a[text()=' 10 QATEST product ']");
+			Common.scrollIntoView("xpath", "//a[text()=' 10 QATEST product ']");
+			Common.mouseOver("xpath", "//a[text()=' 10 QATEST product ']");
 			Thread.sleep(2000);
 
 			String productlist = Common.getText("xpath",
-					"//div[@class='m-product-card m-product-card--enhanced product-item product-item-info']");
+					"//a[text()=' 10 QATEST product ']");
 			System.out.println(productlist);
 
 			Common.assertionCheckwithReport(productlist.contains("10 QATEST"),
@@ -4726,7 +4732,7 @@ public class GoldAdminHelper {
 			Sync.waitElementVisible("xpath", "//div[contains(@class,'active')]//input[contains(@class,'search')]");
 			// Common.actionsKeyPress(Keys.PAGE_DOWN);
 
-			String[] categories = data.get(dataSet).get("Categorydisplay").split(",");
+			String[] categories = data.get(dataSet).get("ActualCategorydisplay").split(",");
 
 			for (int i = 0; i < categories.length; i++) {
 				System.out.println(categories[i]);
