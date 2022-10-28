@@ -49,6 +49,7 @@ public class Test_DGLD_Admin_ST_CardTiles_015_Configure_and_Validate_Categorycar
 			Admin.Editandsavepage();
 			Admin.savecontent("ProductcardTile");
 			Admin.openwebsite("OXOproducttile");
+			Admin.AcceptAll();
 			Admin.verifycardtileimage_frontend("OXOproducttile");
 			Admin.verify_Padding_fronytend("OXOproducttile");
 			Admin.verifycategoriesdisplay("OXOproducttile");

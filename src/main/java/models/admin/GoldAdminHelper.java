@@ -3114,7 +3114,8 @@ public class GoldAdminHelper {
 			if (CTAnavigation.equals("Product")) {
 				String product = data.get(DataSet).get("Buttonlinkproduct");
 				System.out.println(product);
-                Thread.sleep(3000);
+                
+				Thread.sleep(4000);
                 
 				Common.assertionCheckwithReport(pagetitle.contains(product), "To validate the CTA Product link",
 						"CTA link should navigate to the product page", "CTA link navigated to product page",
