@@ -9,35 +9,27 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
+public class Test_DGLD_HF_ST_082_Guest_User_Back_In_stock_Subcription {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Outofstock");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
-//      for(int i=0;i<3;i++)
-//      {
+	public void Validate_Guest_User_Back_In_stock_Subcription () throws Exception {
+  
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");   
-//			Hydro.search_product("simple warranty");      
-//			Hydro.addtocart("simple warranty"); 
-//			Hydro.search_product("New Product");      
-//			Hydro.addtocart("New Product");
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+			Hydro.search_product("Outofstock Product");     
+			Hydro.outofstock_subcription("Outofstock Product");
+			
+			
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-//}
+	
 
 	@AfterTest
 	public void clearBrowser() {

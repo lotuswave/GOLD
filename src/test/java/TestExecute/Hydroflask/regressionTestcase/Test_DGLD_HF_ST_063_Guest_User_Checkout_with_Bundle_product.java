@@ -16,11 +16,20 @@ public class Test_DGLD_HF_ST_063_Guest_User_Checkout_with_Bundle_product {
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_User_Checkout_with_Bundle_product () throws Exception {
-
+		
+		
+//		for(int i=0;i<2;i++)
+//		{
 		try {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Bundle product"); 
-			Hydro.Addtocart_Bundle("Bundle product");                    
+			Hydro.Addtocart_Bundle("Bundle product");   
+//			Hydro.search_product("Bundle product1"); 
+//			Hydro.Addtocart_Bundle("Bundle product1"); 
+//			Hydro.search_product("Bundle product2"); 
+//			Hydro.Addtocart_Bundle("Bundle product2"); 
+//			Hydro.search_product("Color warranty");     
+//			Hydro.Configurable_addtocart_pdp("Color warranty");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
@@ -32,6 +41,8 @@ public class Test_DGLD_HF_ST_063_Guest_User_Checkout_with_Bundle_product {
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+//	}
+	
 
 	@AfterTest
 	public void clearBrowser() {

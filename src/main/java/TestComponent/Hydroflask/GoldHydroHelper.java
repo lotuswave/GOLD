@@ -915,11 +915,13 @@ public void selectshippingaddress(String Dataset) {
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
+			 Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
 					"Failed to signIn and not navigated to the Home page ");
+         
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1067,7 +1069,10 @@ public void selectshippingaddress(String Dataset) {
 				}
 			}
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
+			Thread.sleep(4000);
+			System.out.println(product);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
@@ -3741,7 +3746,6 @@ public void acceptPrivacy() {
 			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//input[@name='city']").clear();
 			Common.textBoxInput("xpath", "//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
@@ -5021,23 +5025,9 @@ catch(Exception | Error e)
 
 	public void ClosADD() throws Exception {
 		Thread.sleep(3000);
-		int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
-		if (sizesframe > 0) {
-			Common.actionsKeyPress(Keys.PAGE_UP);
-
-			// Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-			Sync.waitElementVisible("xpath", "//div[@class='sidebar-iframe-close']");
-			Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
-		} else {
-			int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
-			if (sizeofpopup > 0) {
-
-				Sync.waitElementClickable("xpath", "//button[@aria-label='close']");
-				Common.clickElement("xpath", "//button[@aria-label='close']");
-			}
-		}
+		Common.clickElement("xpath", "(//button[@data-role='closeBtn'])[2]");
+		Thread.sleep(4000);
 	}
-
 	
 	public void click_BottlesDrinkware() {
 		   
@@ -5328,7 +5318,7 @@ catch(Exception | Error e)
             List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m')]");
             
             WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
-            WebElement imagecolor=Common.findElement("xpath", "//div[@class='m-product-gallery__wrapper gallery-grid']//div["+value+"]//img[1]");
+            WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
             for(int j=0;j<ListOfSubproducts.size();j++) {
                 
                 String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
@@ -5338,11 +5328,9 @@ catch(Exception | Error e)
                     else
                     {
                         if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
-                            Thread.sleep(2000);
-                            ListOfSubproducts.get(j).click();
                             
-                           System.out.println(imagecolor.getAttribute("src"));
-                           System.out.println(Colornames.getText());
+                            ListOfSubproducts.get(j).click();
+  
                             
                             Common.assertionCheckwithReport(imagecolor.getAttribute("src").contains(Colornames.getText())||imagecolor.getAttribute("src").trim().equals(""), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
                         }
@@ -6200,7 +6188,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(Product), "validating the Navigation to the PDP page for selected product",
 					"It should navigates to PDP page after clicking on the product", "Sucessfully It is navigated to the Pdp page ",
 					"failed to Navigate to the PDP page after clicking on the product");
-			Products_Grouped_Bundle("2");
+			Products_Grouped_Bundle("5");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
 
@@ -6231,12 +6219,12 @@ catch(Exception | Error e)
   
                         if(ListOfSubproducts.get(j).getAttribute("class").contains("m-grouped__con")) {
                             Thread.sleep(3000);
-                            ListOfSubproducts.get(j).click();
+//                            ListOfSubproducts.get(j).click();
                             Thread.sleep(3000);
                            Common.dropdown("xpath", "//div["+value+"]//select[@class='a-select-menu']", Common.SelectBy.VALUE, Dataset);
                        String Quantity=Common.findElement("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']//input").getAttribute("value");
                             
-                     Common.assertionCheckwithReport(Quantity.equals(Dataset),"Verifying the products quantity ", "Quantity should be selected for each and every product in Grouped Bundle", "successfully Quantity has been selected for each and every product", "Failed to select the product quantity for the grouped bundle");
+//                     Common.assertionCheckwithReport(Quantity.equals(Dataset),"Verifying the products quantity ", "Quantity should be selected for each and every product in Grouped Bundle", "successfully Quantity has been selected for each and every product", "Failed to select the product quantity for the grouped bundle");
                         }
                         else
                         {
@@ -6270,7 +6258,182 @@ catch(Exception | Error e)
 		}
 		
 	}
-}
+	public void register_billingAddress(String dataSet) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+            Thread.sleep(4000);
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+            Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page", "payment section should be displayed",
+					"sucessfully payment section has been displayed","Failed to displayed the payment section");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//select[@name='billing_address_id']");
+			Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT, "New Address");
+			Common.textBoxInput("xpath", "//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']", data.get(dataSet).get("phone"));
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
+			System.out.println(update);
+			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
+					"verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
+					"Sucessfully Billing address form should be Display ", "Failed to display the Billing address in payment page");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
+			"Unable to display the Billing address in payment page ", Common.getscreenShot("Failed to display the Billing address in payment page"));
+			Assert.fail();
+		}
+		
+	}
+	public void outofstock_subcription(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+		String email=data.get(Dataset).get("Notifyme");
+		try
+		{
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+		Common.clickElement("xpath", "//span[text()='Subscribe']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved."),
+				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+		Common.actionsKeyPress(Keys.END);
+	Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+	Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+	Common.clickElement("xpath", "//span[text()='Subscribe']");
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+			"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+			"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+	
+			
+		}
+		catch(Exception | Error e)
+		{
+			
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Unable to display the message after subcribtion ", Common.getscreenShot("Failed to display the message after subcribtion"));
+			Assert.fail();
+			
+		}
+		
+	}
+	public void reg_outofstock_subcription(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+	
+			try
+			{
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@class,'m-product-card__image')]");
+
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved."),
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+			Common.actionsKeyPress(Keys.END);
+		Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	
+		}
+	}
+
 			
 	
 	

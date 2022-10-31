@@ -16,15 +16,20 @@ public class Test_DGLD_HF_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Checkout_RegisterUserCC_configurable_Simple () throws Exception {
-
+//		
+//		for(int i=0;i<2;i++)
+//		{
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Product");       
-			Hydro.addtocart("Product");  
+			Hydro.search_product("Product");     
+			Hydro.addtocart("Product");
+//			Hydro.Configurable_addtocart_pdp("Color Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
+//			Hydro.search_product("Color warranty");     
+//			Hydro.Configurable_addtocart_pdp("Color warranty");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
@@ -36,6 +41,7 @@ public class Test_DGLD_HF_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+//	}
 
 	@AfterTest
 	public void clearBrowser() {

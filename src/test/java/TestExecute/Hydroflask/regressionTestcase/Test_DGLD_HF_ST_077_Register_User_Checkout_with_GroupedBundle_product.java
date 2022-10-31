@@ -16,13 +16,18 @@ public class Test_DGLD_HF_ST_077_Register_User_Checkout_with_GroupedBundle_produ
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_User_Checkout_with_GroupedBundle_product () throws Exception {
-
+		
+		
+//		for(int i=0;i<2;i++)
+//		{
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Grouped Bundle");    
-			Hydro.Add_Grouped_Bundle("Grouped Bundle");                    
+			Hydro.Add_Grouped_Bundle("Grouped Bundle");
+//			Hydro.search_product("Color warranty");     
+//			Hydro.Configurable_addtocart_pdp("Color warranty");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
@@ -34,7 +39,7 @@ public class Test_DGLD_HF_ST_077_Register_User_Checkout_with_GroupedBundle_produ
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
+//	}
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
