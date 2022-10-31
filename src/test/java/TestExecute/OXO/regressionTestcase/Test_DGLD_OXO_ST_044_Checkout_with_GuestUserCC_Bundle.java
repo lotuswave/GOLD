@@ -21,6 +21,8 @@ public class Test_DGLD_OXO_ST_044_Checkout_with_GuestUserCC_Bundle {
 			Oxo.verifingHomePage();
 			Oxo.search_product("Bundle");
 			Oxo.addtocart("Bundle");
+//			Oxo.search_product("Bundle1");
+//			Oxo.addtocart("Bundle1");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");

@@ -24,6 +24,10 @@ public class Test_DGLD_OXO_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 			Oxo.addtocart_PLP("Product");
 			Oxo.babytoddler_headerlinks("Baby & Toddler");
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
+//			Oxo.search_product("ConfigProduct1");
+//			Oxo.Configurable_addtocart_pdp("ConfigProduct1");
+//			Oxo.search_product("ConfigProduct2");
+//			Oxo.Configurable_addtocart_pdp("ConfigProduct2");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");

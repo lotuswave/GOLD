@@ -219,6 +219,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 					break;
 				}
 			}
+			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 
 			String Productname = Common.findElement("xpath", "//a[contains(text(),'Write a review')]").getText();
@@ -226,7 +227,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Thread.sleep(7000);
 			System.out.println(Productname);
 //			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
-					Common.assertionCheckwithReport(Productname.contains("Write a review"),
+					Common.assertionCheckwithReport(Productname.contains("review"),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");

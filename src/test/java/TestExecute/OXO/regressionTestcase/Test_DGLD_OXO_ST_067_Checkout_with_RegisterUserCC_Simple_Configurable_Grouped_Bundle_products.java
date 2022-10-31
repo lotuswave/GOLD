@@ -26,6 +26,8 @@ public class Test_DGLD_OXO_ST_067_Checkout_with_RegisterUserCC_Simple_Configurab
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 			Oxo.search_product("Bundle");
 			Oxo.addtocart("Bundle");
+//			Oxo.search_product("Group");
+//			Oxo.addtocart("Group");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
