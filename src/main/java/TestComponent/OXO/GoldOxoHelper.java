@@ -5066,9 +5066,258 @@ public void click_FeedingDrinking() {
 		
 	}
 
+	public void outofstock_subcription(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+		String email=data.get(Dataset).get("Notifyme");
+		try
+		{
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			
+			Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+		Common.clickElement("xpath", "//span[text()='Subscribe']");
+		Sync.waitPageLoad();
+		Thread.sleep(6000);
+		String newsubs = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("data-ui-id");
+		System.out.println(newsubs);
+        String newsubscribe=Common.findElementBy("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		System.out.println(newsubscribe);
+		Common.assertionCheckwithReport(newsubscribe.contains("Alert subscription has been saved.") || newsubscribe.contains("Thank you! You are already subscribed to this product.")||newsubs.contains("success"),
+				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+		Common.actionsKeyPress(Keys.END);
+			
+	Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+	Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+	Common.clickElement("xpath", "//span[text()='Subscribe']");
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	String oldsubscribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	System.out.println(oldsubscribe);
+	Common.assertionCheckwithReport(oldsubscribe.contains("Thank you! You are already subscribed to this product."),
+			"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+			"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+		
+		
+		}
+		catch(Exception | Error e)
+		{
+			
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Unable to display the message after subcribtion ", Common.getscreenShot("Failed to display the message after subcribtion"));
+			Assert.fail();
+			
+		}
+		
+	}
+	public void reg_outofstock_subcription(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
 	
+			try
+			{
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@class,'m-product-card__image')]");
 
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
 
+					} else {
+						break;
+					}
+				}
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String newsubs = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("data-ui-id");
+//			System.out.println(newsubs);
+			String newsubscribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(newsubscribe.contains("Alert subscription has been saved.")|| newsubscribe.contains("Thank you! You are already subscribed to this product.")||newsubs.contains("success"),
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+			Common.actionsKeyPress(Keys.END);
+		Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Unable to display the message after subcribtion ", Common.getscreenShot("Failed to display the message after subcribtion"));
+			Assert.fail();
+		}
+		
+	
+		}
+	public void share_whishlist(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+			int MyFavorites=Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+			
+			if(MyFavorites!=0)
+			{
+				search_product("Product");
+                Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+                Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+                Sync.waitPageLoad();
+                Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+    					"validating the Navigation to the My Favorites page",
+    					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+    					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+    					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+                Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+                Sync.waitPageLoad();
+                String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+    			System.out.println(message);
+    			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"), "validating the  product add to the Whishlist",
+    					"Product should be add to whishlist", "Sucessfully product added to the Whishlist ",
+    					"failed to add product to the Whishlist");
+               Common.clickElement("xpath", "//button[@title='Share Favorites']");
+               Sync.waitPageLoad();
+               Thread.sleep(4000);
+               Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+               Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+               Common.clickElement("xpath", "//button[@title='Share Favorites']");
+               Thread.sleep(4000);
+               String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+   			System.out.println(message1);
+   			Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"), "validating the shared whishlist functionality",
+					"sucess message should display after share whishlist", "Sucessfully message has been displayed for whishlist",
+					"failed to display the message for whishlist");
+		}
+			else
+	{
+				 Common.clickElement("xpath", "//button[@title='Share Favorites']");
+	               Sync.waitPageLoad();
+	               Thread.sleep(4000);
+	               Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+	               Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+	               Common.clickElement("xpath", "//button[@title='Share Favorites']");
+	               Thread.sleep(4000);
+	               String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	   			System.out.println(message1);	
+	   			Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"), "validating the shared whishlist functionality",
+						"sucess message should display after share whishlist", "Sucessfully message has been displayed for whishlist",
+						"failed to display the message for whishlist");
+		
+	}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
+					"sucess message should display after share whishlist",
+					"Unable to display the message for whishlist", Common.getscreenShot("failed to display the message for whishlist"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void register_billingAddress(String dataSet) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+            Thread.sleep(4000);
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+            Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page", "payment section should be displayed",
+					"sucessfully payment section has been displayed","Failed to displayed the payment section");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//select[@name='billing_address_id']");
+			Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT, "New Address");
+			Common.textBoxInput("xpath", "//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='city']",
+					data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			try {
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']", data.get(dataSet).get("phone"));
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
+			System.out.println(update);
+			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
+					"verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
+					"Sucessfully Billing address form should be Display ", "Failed to display the Billing address in payment page");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
+			"Unable to display the Billing address in payment page ", Common.getscreenShot("Failed to display the Billing address in payment page"));
+			Assert.fail();
+		}
+		
+	}
+	
+	
 }
 
 
