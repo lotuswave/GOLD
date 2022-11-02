@@ -93,4 +93,20 @@
 		</classes>
 	</test>
 	
+	
+	
+	<test name="Test_DGLD_Admin_PROMO_004_Validate_PromoMedia_Block_Components" testid="DTG-1910" priority="P1" description="This testcase is to Validate PromoMedia Block Components">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_PROMO_004_Validate_PromoMedia_Block_Components" />
+        </classes>
+    </test>
+
+
+
+<test name="Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components" testid="DTG-1911" priority="P1" description="This testcase is to Validate the Promo BlockComponents">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components" />
+        </classes>
+    </test>
+	
 </suite>  
