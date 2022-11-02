@@ -4,11 +4,17 @@
         <listener class-name="Utilities.TestListener"/>
     </listeners>
    	
-    <test name="Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-928" priority="P1" description="This script will cover validating  Register user Checkout Funtionality with Paypal">
+    <test name="Test_DGLD_HF_ST_034_Guest_user_Checkout_Funtionality_with_Paypal" testid="DTG-928" priority="P1" description="This script will cover validating Guest user Checkout Funtionality with Paypal">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_034_Guest_user_Checkout_Funtionality_with_Paypal"/>
+        </classes>
+        </test> 
+        
+          <test name="Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-928" priority="P1" description="This script will cover validating  Register user Checkout Funtionality with Paypal">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal"/>
         </classes>
-        </test> 
+        </test>
          
            <test name="Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card" testid="DTG-928" priority="P1" description="This script will cover Guestuser checkout functionality of Hydroflask using Visa Payment">
        <classes>
@@ -16,7 +22,16 @@
         </classes>
         </test> 
          
-         <test name="Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using AMEX Payment">
+         <test name="Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Discover Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card"/>
+        </classes>
+        </test> 
+        
+        
+        
+        
+          <test name="Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using AMEX Payment">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card"/>
         </classes>
@@ -42,12 +57,33 @@
         </classes>
         </test>
         
+        
+        
+           <test name="Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card" testid="DTG-1230" priority="P1" description="This script will cover Guet user Checkout Discount Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card"/>
+        </classes>
+        </test>
+        
+        
+        
+           <test name="Test_DGLD_HF_ST_044_Register_User_Checkout_Afterpay_Payments" testid="DTG-1230" priority="P1" description="This script will cover Register user Checkout Afterpay Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_044_Register_User_Checkout_Afterpay_Payments"/>
+        </classes>
+        </test>
+        
             <test name="Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment" testid="DTG-1230" priority="P1" description="This script will cover Guest user Checkout Klarna saved Payment">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment"/>
         </classes>
         </test>
-        
+          
+            <test name="Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page" testid="DTG-1230" priority="P1" description="This script will cover Register Login from shipping_Page">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page"/>
+        </classes>
+        </test>
         
         
 </suite>  
