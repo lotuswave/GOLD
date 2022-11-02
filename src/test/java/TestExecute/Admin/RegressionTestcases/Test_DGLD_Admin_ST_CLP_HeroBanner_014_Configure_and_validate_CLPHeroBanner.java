@@ -57,10 +57,11 @@ public class Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHer
 		Admin.verify_Padding_fronytend("OXOCLPHerobanner");
 		Admin.Navigate_adminpage();
 		Admin.Clone("CLPHerobanner");
-		Admin.openwebsite("CLPHerobanner");
+		Admin.openwebsite("OXOCLPHerobanner");
 		Admin.verify_clonefunctionality_website("CLPHerobanner");
 		Admin.openwebsite("OXOCLPHerobanner");
 		Admin.verify_clonefunctionality_website("CLPHerobanner");
+	    Admin.Navigate_adminpage();
 		Admin.Delete_hotcomponent("CLPHerobanner");
 		Admin.delete_existing_page("CLPHerobanner");
 		
@@ -73,7 +74,7 @@ public class Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHer
 
 @AfterTest
 public void clearBrowser() {
-	//Common.closeAll();
+	Common.closeAll();
 
 }
 

@@ -2536,6 +2536,7 @@ public class GoldAdminHelper {
 
 	public void openwebsite(String Dataset) {
 		String pagetitle = data.get(Dataset).get("pageTitle");
+		System.out.println(pagetitle);
 		try {
 			Sync.waitPageLoad(60);
 
@@ -2553,6 +2554,7 @@ public class GoldAdminHelper {
 			}
 			Sync.waitPageLoad(40);
 			String uname = Common.getPageTitle();
+			System.out.println(uname);
 			Common.assertionCheckwithReport(uname.contains(pagetitle),
 					"Validating the User lands to the Hydroflask page",
 					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
@@ -3302,8 +3304,8 @@ public class GoldAdminHelper {
 			savecontent(dataSet);
 			openwebsite(dataSet);
 			verifydeletefunctionality_website(dataSet);
-			// openwebsite("OXOPLPBLOCK");
-			// verifydeletefunctionality_website(dataSet);
+		   openwebsite("OXOCLPHerobanner");
+			 verifydeletefunctionality_website(dataSet);
 
 		} catch (Exception e) {
 			e.printStackTrace();
