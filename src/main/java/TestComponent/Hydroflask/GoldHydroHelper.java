@@ -3788,13 +3788,15 @@ public void acceptPrivacy() {
 			
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(4000);
-//			Sync.waitElementPresent(30, "xpath", "//input[@placeholder='Enter Email Address']");
-			Common.clickElement("xpath", "//div[@class='form_inputs_wrapper form_spacing']");
+			Common.switchFrames("xpath", "//iframe[@aria-label='Modal Overlay Box Frame']");
+			Sync.waitElementPresent(30, "xpath", "//label[@for='form_input_email']");
+			Common.clickElement("xpath", "//label[@for='form_input_email']");
 			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
-			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
+			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
+			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
 			System.out.println(Errormessage);
-			Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
+			Common.assertionCheckwithReport(Errormessage.equals("Your Email is in an invalid format."),
 					"To validate the error message for Invalid Email",
 					"Should display error Please enter a valid email address.", Errormessage,
 					"Failed to display the error message for invaild email");
@@ -3813,12 +3815,13 @@ public void acceptPrivacy() {
 	public void Empty_Email() {
 		try {
 
-			Common.textBoxInputClear("xpath", "//input[@id='newsletter-signup_email']");
+			Common.textBoxInputClear("xpath", "//input[@placeholder='Enter Email Address']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
-			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
+			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
+			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
 			System.out.println(Errormessage);
-			Common.assertionCheckwithReport(Errormessage.equals("Error: This field is required."),
+			Common.assertionCheckwithReport(Errormessage.equals("Your Email is required."),
 					"To validate the error message for missing email fields",
 					"Should display Error Please enter a valid email address.", Errormessage,
 					"Error message dispaly unsuccessfull");
@@ -3840,11 +3843,11 @@ public void acceptPrivacy() {
 			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//input[@id='newsletter-signup_email']");
-			Common.clickElement("xpath", "//input[@id='newsletter-signup_email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Sync.waitElementPresent("xpath", "//label[@for='form_input_email']");
+			Common.clickElement("xpath", "//label[@for='form_input_email']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
 			Thread.sleep(5000);
 			String Text = Common.getText("xpath", "//div[@data-ui-id='message-success']");
 			System.out.println(Text);
@@ -6258,6 +6261,34 @@ catch(Exception | Error e)
 		}
 		
 	}
+	
+	public void Myhydro_quantity(String Dataset) {
+		// TODO Auto-generated method stub
+		String Quantity=data.get(Dataset).get("Quantity");
+		try
+		{
+			Common.findElement("xpath", "//select[@class='quantity-dropdown']");
+//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Common.dropdown("xpath", "//select[@class='quantity-dropdown']", Common.SelectBy.VALUE, Quantity);
+			Thread.sleep(3000);
+			String value=Common.findElement("xpath", "//select[@class='quantity-dropdown']").getAttribute("value");
+			System.out.println(value);
+			Common.assertionCheckwithReport(value.equals(Quantity), "validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "Sucessfully product Qunatity has been updated ",
+					"failed to Update the prodcut quantity in PDP page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
+					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity", Common.getscreenShot("failed to update the product quantity"));
+			Assert.fail();
+		}
+		
+	}
+	
+	
 	public void register_billingAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		try
@@ -6359,7 +6390,7 @@ catch(Exception | Error e)
 	Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 	Common.clickElement("xpath", "//span[text()='Subscribe']");
 	Sync.waitPageLoad();
-	Thread.sleep(4000);
+	Thread.sleep(4000);  
 	String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 	Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 			"verifying the out of stock subcription", "after click on subcribe button message should be appear",
@@ -6411,7 +6442,8 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved."),
+			System.out.println(newsubcribe);
+			Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved.") || newsubcribe.contains("Thank you! You are already subscribed to this product."),
 					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
 			Common.actionsKeyPress(Keys.END);
@@ -6419,6 +6451,7 @@ catch(Exception | Error e)
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		System.out.println(oldsubcribe);
 		Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
@@ -6495,6 +6528,338 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
 					"sucess message should display after share whishlist",
 					"Unable to display the message for whishlist", Common.getscreenShot("failed to display the message for whishlist"));
+			Assert.fail();
+		}
+		
+	}
+	public void Add_Myhydro(String Dataset) {
+		// TODO Auto-generated method stub
+		
+			String products = data.get(Dataset).get("Products");
+			System.out.println(products);
+			try {
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@class,'m-product-card__image')]");
+
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");	
+				Myhydro_bottle("40 oz");
+			    hydro_bottle_color("Black");
+				hydro_cap_color("White");
+				hydro_strap_color("Black");
+				hydro_boot_color("White");
+				Myhydro_Engraving("Myhydro Product");
+				Myhydro_quantity(Dataset);
+				Common.clickElement("xpath", "//button[@class='ATC__btn']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
+				
+			}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+			Assert.fail();
+		}
+		
+	}
+	public void Myhydro_bottle(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		Sync.waitPageLoad();
+		Thread.sleep(8000);
+		try
+		{
+			if(Dataset.equals("20 oz"))
+			{
+				Thread.sleep(8000);
+				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='20 oz']");
+				Common.clickElement("xpath", "//button[@data-gtm-parts='20 oz']");
+				String name=Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
+			System.out.println(name);
+				Common.assertionCheckwithReport(name.contains(Dataset), "validating the product in pdp page",
+						"It should be selected for the selected product"+Dataset, "Sucessfully Navigates to the selected product"+Dataset,
+						"failed to Navigate to the selected product");	
+             }
+			else
+				if(Dataset.equals("40 oz"))
+				{
+					Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='40 oz']");
+					Common.clickElement("xpath", "//button[@data-gtm-parts='40 oz']");
+					String name=Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
+					System.out.println(name);
+					Common.assertionCheckwithReport(name.contains(Dataset), "validating the product in pdp page",
+							"It should be selected for the selected product"+Dataset, "Sucessfully Navigates to the selected product"+Dataset,
+							"failed to Navigate to the selected product");
+				}
+				else
+					if(Dataset.equals("32 oz"))
+					{
+						Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='32 oz']");
+						Common.clickElement("xpath", "//button[@data-gtm-parts='32 oz']");
+						String name=Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
+						System.out.println(name);
+						Common.assertionCheckwithReport(name.contains(Dataset), "validating the product in pdp page",
+								"It should be selected for the selected product"+Dataset, "Sucessfully Navigates to the selected product"+Dataset,
+								"failed to Navigate to the selected product");
+					}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product in the PDP page",
+					"It should be selected for the selected productt",
+					"Unable to Navigate the selected product", Common.getscreenShot("failed to navigate to the selected product"));
+			Assert.fail();
+		}
+		
+	}
+	public void hydro_bottle_color(String Color) {
+		// TODO Auto-generated method stub
+		try
+		{
+		Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Color +"']");	
+		Common.clickElement("xpath", "//button[@aria-label='"+ Color +"']");
+		String productcolor=Common.findElement("xpath", "//label[@class='color-feature__selection__label']").getText();
+		System.out.println(productcolor);
+		Common.assertionCheckwithReport(productcolor.contains(Color), "validating the color selection for bottle",
+				"color should be select for the bottle", "Sucessfully color has been selected for the bottle",
+				"failed to select the color for the selected bottle");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the color selection for bottle",
+					"color should be select for the bottle", "unable to select the color for the selected bottle", Common.getscreenShot("failed to select the color for the selected bottle"));
+			Assert.fail();
+		}
+		
+	}
+	public void hydro_cap_color(String Color) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Thread.sleep(3000);
+			String Cap=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
+			Common.assertionCheckwithReport(Cap.contains("Cap"), "validating the color selection for bottle",
+					"color should be select for the bottle", "Sucessfully color has been selected for the bottle",
+					"failed to select the color for the selected bottle");
+			hydro_select_cap("Wide Mouth Flex Sip Lid");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Color +"']");	
+			Common.clickElement("xpath", "//button[@aria-label='"+ Color +"']");
+			String productcolor=Common.findElement("xpath", "//label[@class='color-feature__selection__label']").getText();
+			System.out.println(productcolor);
+			Common.assertionCheckwithReport(productcolor.contains(Color), "validating the color selection for cap",
+					"color should be select for the cap", "Sucessfully color has been selected for the cap",
+					"failed to select the color for the selected cap");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the color selection for cap",
+					"color should be select for the cap", "unable to select the color for the selected cap", Common.getscreenShot("failed to select the color for the selected cap"));
+			
+			Assert.fail();
+		}
+		
+	}
+	public void hydro_strap_color(String Color) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Thread.sleep(3000);
+			String Strap=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
+			Common.assertionCheckwithReport(Strap.contains("Strap"), "validating the color selection for bottle",
+					"color should be select for the bottle", "Sucessfully color has been selected for the bottle",
+					"failed to select the color for the selected bottle");
+			hydro_select_strap("Flex Strap - Long");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Color +"']");	
+			Common.clickElement("xpath", "//button[@aria-label='"+ Color +"']");
+			String productcolor=Common.findElement("xpath", "//label[@class='color-feature__selection__label']").getText();
+			System.out.println(productcolor);
+			Common.assertionCheckwithReport(productcolor.contains(Color), "validating the color selection for strap",
+					"color should be select for the strap", "Sucessfully color has been selected for the strap",
+					"failed to select the color for the selected strap");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the color selection for starp",
+					"color should be select for the starp", "unable to select the color for the selected starp", Common.getscreenShot("failed to select the color for the selected starp"));
+			
+			Assert.fail();
+		}
+		
+	}
+	public void hydro_boot_color(String Color) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Thread.sleep(3000);
+			String boot=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
+			Common.assertionCheckwithReport(boot.contains("Boot"), "validating the color selection for bottle",
+					"color should be select for the bottle", "Sucessfully color has been selected for the bottle",
+					"failed to select the color for the selected bottle");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Color +"']");	
+			Common.clickElement("xpath", "//button[@aria-label='"+ Color +"']");
+			String productcolor=Common.findElement("xpath", "//label[@class='color-feature__selection__label']").getText();
+			System.out.println(productcolor);
+			Common.assertionCheckwithReport(productcolor.contains(Color), "validating the color selection for boot",
+					"color should be select for the boot", "Sucessfully color has been selected for the boot",
+					"failed to select the color for the selected boot");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the color selection for boot",
+					"color should be select for the boot", "unable to select the color for the selected boot", Common.getscreenShot("failed to select the color for the selected boot"));
+			
+			Assert.fail();
+		}
+		
+	}
+	public void hydro_select_cap(String Cap) {
+		// TODO Auto-generated method stub
+		try
+		{
+				if(Cap.contains("Flex Cap"))
+				{
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='"+ Cap +"']");
+					Common.clickElement("xpath", "//button[@data-gtm-parts='"+ Cap +"']");
+					Thread.sleep(3000);
+				 String name=Common.findElement("xpath", "//button[@data-gtm-parts='"+ Cap +"']").getAttribute("class");
+				System.out.println(name);
+					Common.assertionCheckwithReport(name.contains("active"), "validating the cap for the bottle",
+							"Cap should be selected for the particular bottle", "Sucessfully Cap has been selected",
+							"failed to selected the cap for the particular bottle");	
+	             }
+				else if(Cap.contains("Flex Sip Lid"))
+				{
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='"+ Cap +"']");
+					Common.clickElement("xpath", "//button[@data-gtm-parts='"+ Cap +"']");
+					Thread.sleep(3000);
+				 String name=Common.findElement("xpath", "//button[@data-gtm-parts='"+ Cap +"']").getAttribute("class");
+				System.out.println(name);
+					Common.assertionCheckwithReport(name.contains("active"), "validating the cap for the bottle",
+							"Cap should be selected for the particular bottle", "Sucessfully Cap has been selected",
+							"failed to selected the cap for the particular bottle");
+				}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the cap for the bottle",
+					"Cap should be selected for the particular bottle", "Unable to selected the cap for the particular bottle", Common.getscreenShot("failed to selected the cap for the particular bottle"));
+			
+			Assert.fail();
+		}
+		
+	}
+	public void hydro_select_strap(String Starp) {
+		// TODO Auto-generated method stub
+		try
+		{
+				if(Starp.contains("Flex Cap Strap"))
+				{
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='"+ Starp +"']");
+					Common.clickElement("xpath", "//button[@data-gtm-parts='"+ Starp +"']");
+					Thread.sleep(3000);
+				 String name=Common.findElement("xpath", "//button[@data-gtm-parts='"+ Starp +"']").getAttribute("class");
+				System.out.println(name);
+					Common.assertionCheckwithReport(name.contains("active"), "validating the Strap for the bottle",
+							"strap should be selected for the particular bottle", "Sucessfully strap has been selected",
+							"failed to selected the strap for the particular bottle");	
+	             }
+				else if(Starp.contains("Long"))
+				{
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='"+ Starp +"']");
+					Common.clickElement("xpath", "//button[@data-gtm-parts='"+ Starp +"']");
+					Thread.sleep(3000);
+				 String name=Common.findElement("xpath", "//button[@data-gtm-parts='"+ Starp +"']").getAttribute("class");
+				System.out.println(name);
+					Common.assertionCheckwithReport(name.contains("active"), "validating the strap for the bottle",
+							"strap should be selected for the particular bottle", "Sucessfully strap has been selected",
+							"failed to selected the strap for the particular bottle");
+				}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the strap for the bottle",
+					"starp should be selected for the particular bottle", "Unable to selected the strap for the particular bottle", Common.getscreenShot("failed to selected the strap for the particular bottle"));
+			
+			Assert.fail();
+		}
+		
+		
+	}
+	
+	public void Myhydro_Engraving(String Dataset) {
+		// TODO Auto-generated method stub
+		String engravingtext=data.get(Dataset).get("Engraving");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Thread.sleep(3000);
+			String Engraving=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
+			Common.assertionCheckwithReport(Engraving.contains("Engraving"), "validating the Engraving for the bottle",
+					"Engraving should be select for the bottle", "Sucessfully Engraving  has been selected for the bottle",
+					"failed to select the Engraving for the selected bottle");
+		Sync.waitElementPresent("xpath", "//textarea[@class='text-engraving__input']");
+		Common.textBoxInput("xpath", "//textarea[@class='text-engraving__input']",engravingtext);
+		String Text=Common.findElement("xpath", "//textarea[contains(@class,'text-engraving__input')]").getAttribute("class");
+		System.out.println(Text);
+		Common.assertionCheckwithReport(Text.contains("focus-visible"), "validating the engraving text for bottle",
+				"Engraving text should be added for the bottle", "Sucessfully Engraving has been added for the bottle",
+				"failed to add the engraving for the bottle");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the engraving text for bottle",
+					"Engraving text should be added for the bottle", "Unable to add the Engraving for the bottle", Common.getscreenShot("failed to add engraving for the bottle"));
 			Assert.fail();
 		}
 		
