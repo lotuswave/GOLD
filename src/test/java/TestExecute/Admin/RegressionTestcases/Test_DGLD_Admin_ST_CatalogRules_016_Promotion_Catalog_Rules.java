@@ -39,7 +39,7 @@ public class Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules {
 
 	@AfterTest
 	public void clearBrowser() {
-		// Common.closeAll();
+		 Common.closeAll();
 
 	}
 

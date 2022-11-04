@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import TestLib.Common;
 import TestLib.Login;
-import models.admin.Adminhelper;
 import models.admin.GoldAdminHelper;
 
 public class Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles {

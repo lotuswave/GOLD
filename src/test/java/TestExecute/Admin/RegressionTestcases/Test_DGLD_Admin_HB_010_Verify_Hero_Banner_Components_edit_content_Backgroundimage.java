@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import TestLib.Common;
 import TestLib.Login;
-import models.admin.Adminhelper;
 import models.admin.GoldAdminHelper;
 
 public class Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_Backgroundimage {
