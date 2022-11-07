@@ -9,23 +9,25 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card {
+public class Test_DGLD_HF_ST_094_Register_user_Checkout_With_Discount_Visa_card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_user_Checkout_Funtionality_With_Discount_Visa_card () throws Exception {
-
+	public void Validating_Register_user_Checkout_With_Discount_Visa_card () throws Exception {
+		
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("Product");       
+			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
-            Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();
+            Hydro.discountCode("Discount");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
@@ -33,6 +35,7 @@ public class Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 	@AfterTest
 	public void clearBrowser() {
@@ -43,8 +46,8 @@ public class Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		Login.signIn();
-		Hydro.close_add();
+        Login.signIn();
+        Hydro.close_add();
         Hydro.acceptPrivacy();
 	}
 

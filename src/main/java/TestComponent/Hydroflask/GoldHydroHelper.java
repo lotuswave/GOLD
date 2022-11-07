@@ -889,6 +889,11 @@ public void selectshippingaddress(String Dataset) {
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
 					"To validate the user navigates to the signin page",
@@ -1347,6 +1352,35 @@ try
             Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
                     "verifying pomocode", expectedResult, "promotion code working as expected",
                     "Promation code is not applied");
+            Thread.sleep(4000);
+            String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+					"");
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+					.replace("$", "");
+			Float shippingvalue = Float.parseFloat(shipping);
+			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+			Float Taxvalue = Float.parseFloat(Tax);
+			Thread.sleep(4000);
+			String Discount=Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']").replace("$", "");
+			Float Discountvalue=Float.parseFloat(Discount);
+			System.out.println(Discountvalue);
+
+			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+					.replace("$", "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue)+Discountvalue;
+			System.out.println(Total);
+			Thread.sleep(4000);
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(ordertotal);
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Successfully Order summary is displayed in the payment page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
+            
 
        }
 
@@ -6864,7 +6898,67 @@ catch(Exception | Error e)
 		}
 		
 	}
-}
+	public void url_color_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Colorproduct");
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image product')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Thread.sleep(4000);
+			System.out.println(product);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(product),
+					"validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page",
+					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+
+		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page",
+					"Unable to Navigate the product to the PDP page", Common.getscreenShot("Failed to Navigate the product to the PDP page"));
+			Assert.fail();
+		}
+		
+		try
+		{
+			List<WebElement> pdpcolors=Common.findElements("xpath", "//div[@id='product-options-wrapper']//div[contains(@id,'option-label-hf')]");
+        	for(int i=0;i<pdpcolors.size();i++) {
+        		
+        		pdpcolors.get(i).click();
+        		Thread.sleep(4000);
+        		
+        		String clicked_Color=pdpcolors.get(i).getAttribute("aria-label");
+        		System.out.println(clicked_Color+"selected color");
+        		
+        		System.out.println(Common.getCurrentURL());
+        	    Common.assertionCheckwithReport(Common.getCurrentURL().contains(clicked_Color),"Validating PDP page url Color name is passing to url", "select the color of product is "+clicked_Color+" it must pass throw url", " Selected color "+clicked_Color+"passing throw url", "Failed to clicked colr is passing throw URL"+clicked_Color);   		
+        		
+		}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+	}
+		
+	}
+
 
 			
 	
