@@ -7776,5 +7776,120 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 		}
 
 	}
+	public void delet_existing_Coupon(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			
+
+			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+			Common.clickElement("xpath", "//input[@name='coupon_code']");
+			Common.textBoxInput("xpath", "//input[@name='coupon_code']",data.get(dataSet).get("Coupon Code"));
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			
+			Sync.waitElementPresent("xpath", "//input[@name='name']");
+			Common.scrollIntoView("xpath", "//input[@name='name']");
+			
+			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
+			Common.scrollIntoView("xpath", "//textarea[@name='description']");
+			
+			Sync.waitElementPresent("xpath", "//option[text()='Hydroflask Website']");
+			Common.scrollIntoView("xpath", "//option[text()='Hydroflask Website']");
+			
+			Sync.waitElementPresent("xpath", "//option[text()='General']");
+			Common.scrollIntoView("xpath", "//option[text()='General']");
+			
+			Sync.waitElementPresent("xpath", "//select[@name='coupon_type']");
+			Common.scrollIntoView("xpath", "//select[@name='coupon_type']");
+			
+			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+			Common.scrollIntoView("xpath", "//input[@name='coupon_code']");
+			
+			Sync.waitElementPresent("xpath", "//select[@name='finance_category']");
+			Common.scrollIntoView("xpath", "//select[@name='finance_category']");
+			
+			
+			Sync.waitElementPresent("xpath", "//button[@id='delete']");
+			Common.clickElement("xpath", "//button[@id='delete']");
+			
+			Sync.waitElementPresent("xpath", "//button[@class='action-primary action-accept']");
+			Common.clickElement("xpath", "//button[@class='action-primary action-accept']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+		String deletmsg=Common.findElement("xpath", "//div[text()='You deleted the rule.']").getText();
+		System.out.println(deletmsg);
+			Common.assertionCheckwithReport(
+					deletmsg.contains("You deleted the rule."),
+					"To Validate the delete message is displayed",
+					"should display the delete message page after clicking on the delete button",
+					"delete message  page is displayed after a click on the delete button", "Failed to display delete message ");
+			
+			Click_AddNewRule();
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the new cart price rule page is displayed",
+					"should display the New cart price rules page after clicking on the Add New rule",
+					"unable to display New cart price rules after a click on the Add new rule",
+					"Failed to display New cart price rules page");
+			Assert.fail();
+		}
+
+	}
+	public void Payment_method(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+		
+			Sync.waitElementPresent("xpath", "//input[@title='Default Payment']");
+			Common.clickElement("xpath", "//input[@title='Default Payment']");
+			Thread.sleep(3000);
+		
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+		//	Common.clickElement("xpath", "//label[@for='new_card']");
+			
+				  int sizesframe=Common.findElements("xpath", "//label[@for='new_card']").size();
+			         if(sizesframe>0){
+			        	 Sync.waitElementVisible("xpath" , "//label[@for='new_card']");
+				Common.clickElement("xpath", "//label[@for='new_card']");
+			         }
+			         else {
+			        	 Sync.waitElementPresent("xpath", "//div[@id='stripe-card-element']");
+			 			Common.clickElement("xpath", "//div[@id='stripe-card-element']");
+			         //  	Common.switchFrames("xpath", "//iframe[@title='Secure card payment input frame']");
+			         }
+			         Common.switchFrames("xpath", "//iframe[@title='Secure card payment input frame']");
+			Sync.waitElementPresent("xpath", "//input[@data-elements-stable-field-name='cardNumber']");
+			Common.textBoxInput("xpath", "//input[@data-elements-stable-field-name='cardNumber']", data.get(dataSet).get("CardNumber"));
+			
+			Sync.waitElementPresent("xpath", "//input[@placeholder='MM / YY']");
+			Common.textBoxInput("xpath", "//input[@placeholder='MM / YY']", data.get(dataSet).get("ExpMonth"));
+			
+			Sync.waitElementPresent("xpath", "//input[@placeholder='CVC']");
+			Common.textBoxInput("xpath", "//input[@placeholder='CVC']", data.get(dataSet).get("CVV"));
+			Common.switchToDefault();
+		
+			Thread.sleep(3000);
+		Common.findElement("xpath", "//button[@data-ui-id='order-content-submit-order-top-button-button']").click();
 	
+			 String Sucess=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			 System.out.println(Sucess);
+			Common.assertionCheckwithReport(Sucess.contains("You created the order."),
+					"To Validate the sucess message is displayed",
+					"should display the sucess message after clicking on the sudmitorder",
+					"sucess message is displayed after a click on the sudmitorder button", "Failed to display sucess message");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the sucess message is displayed",
+					"should display the sucess message after clicking on the sudmitorder",
+					"unable to display sucess message after a click on the sudmitorder button",
+					"Failed to display sucess message");
+			Assert.fail();
+		}
+
+	}
 }
