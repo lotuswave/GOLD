@@ -7034,10 +7034,10 @@ ExtenantReportUtils.addFailedLog("To validate the page is deleted successfully a
 			Sync.waitElementPresent("id", "menu-magento-sales-sales");
 			Common.clickElement("id", "menu-magento-sales-sales");
 			Thread.sleep(2000);
-			String Sales = Common.findElement("xpath", "//span[text()='Invoices']").getText();
+			String Sales = Common.findElement("xpath", "//li[@class='item-sales-order    level-2']").getText();
 			System.out.println(Sales);
 	//	Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(Sales.equals("Invoices"), "To verify the sales menu ",
+			Common.assertionCheckwithReport(Sales.equals("Orders"), "To verify the sales menu ",
 					"After clicking the sales menu it will display menu options ",
 					"Successfully clicked the sales menu and it displayed the Catalog options",
 					"Failed to click the sales menu");
@@ -7290,23 +7290,23 @@ ExtenantReportUtils.addFailedLog("To validate the page is deleted successfully a
 			Thread.sleep(3000);
 		Common.findElement("xpath", "//button[@data-ui-id='order-content-submit-order-top-button-button']").click();
 	
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Orders / Operations / Sales / Magento Admin"),
-					"To Validate the orders page is displayed",
-					"should display the orders page after clicking on the orders",
-					"orders page is displayed after a click on the order button", "Failed to display orders page");
+		String Sucess=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+		 System.out.println(Sucess);
+		Common.assertionCheckwithReport(Sucess.contains("You created the order."),
+				"To Validate the sucess message is displayed",
+				"should display the sucess message after clicking on the sudmitorder",
+				"sucess message is displayed after a click on the sudmitorder button", "Failed to display sucess message");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To Validate the orders page is displayed",
-					"should display the orders page after clicking on the orders",
-					"unable to display orders page after a click on the orders button",
-					"Failed to display orders page");
-			Assert.fail();
-		}
-
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To Validate the sucess message is displayed",
+				"should display the sucess message after clicking on the sudmitorder",
+				"unable to display sucess message after a click on the sudmitorder button",
+				"Failed to display sucess message");
+		Assert.fail();
 	}
+
+}
 	
 	public void Select_Shipping_method() {
 		// TODO Auto-generated method stub
@@ -7552,5 +7552,229 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 
 		}
 		
-	}}
+	}
+
+	public void Click_CreatNewCustomer() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//button[@title='Create New Customer']");
+			Common.clickElement("xpath", "//button[@title='Create New Customer']");
+			Sync.waitPageLoad();
+			String title=Common.findElement("xpath", "//h1[@id='order-header']").getText();
+			System.out.println(title);
+				Common.assertionCheckwithReport(
+						title.contains("Create New Order for New Customer"),
+						"To Validate the Create New customer for Create New Order for New Customer page is displayed",
+						"should display the Create New customer for Create New Order for New Customer page after clicking on the create new customer",
+						"Create New customer for Create New Order for New Customer page is displayed after a click on the create new ocustomerrder button", "Failed to display Create New customer for New Customer page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the Create New customer for Create New Order for New Customer page is displayed",
+						"should display the Create New customer for Create New Order for New Customer page after clicking on the create new customer",
+						"unable to display Create New customer for Create New Order for New Customer page after a click on the create new customer button",
+						"Failed to display Create New customer for Create New Order for New Customer page");
+				Assert.fail();
+		}
+
+	}
+
+	public void Guestuser_shippingaddress(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+		
+			Sync.waitElementPresent("xpath", "//input[@name='order[account][email]']");
+			Common.textBoxInput("xpath", "//input[@name='order[account][email]']", data.get(dataSet).get("Email"));
+			Thread.sleep(4000);
+				
+			Common.textBoxInputClear("xpath", "//input[@id='order-billing_address_firstname']");
+			Common.textBoxInput("xpath", "//input[@id='order-billing_address_firstname']",data.get(dataSet).get("FirstName"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_lastname']");
+			Common.textBoxInput("xpath", "//input[@id='order-billing_address_lastname']",data.get(dataSet).get("LastName"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_street0']");
+			Common.textBoxInput("xpath", "//input[@id='order-billing_address_street0']",data.get(dataSet).get("streetaddress"));
+			
+			Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_country_id']");
+			Common.dropdown("xpath", "//select[@id='order-billing_address_country_id']",Common.SelectBy.TEXT,data.get(dataSet).get("Country"));
+			
+			Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_region_id']");
+			Common.dropdown("xpath", "//select[@id='order-billing_address_region_id']",Common.SelectBy.TEXT,data.get(dataSet).get("State"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_city']");
+			Common.textBoxInput("xpath", "//input[@id='order-billing_address_city']",data.get(dataSet).get("City"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_postcode']");
+			Common.textBoxInput("xpath", "//input[@id='order-billing_address_postcode']",data.get(dataSet).get("Postcode"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_telephone']");
+			Common.textBoxInput("xpath", "//input[@id='order-billing_address_telephone']",data.get(dataSet).get("Phonenumber"));
+			 Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//div[@id='order-shipping-method-summary']/a");
+				
+				Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and rates')]");
+							Thread.sleep(2000);
+						
+							Thread.sleep(8000);
+							Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
+						
+							Sync.waitPageLoad();
+						//	Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+							String text=Common.findElement("xpath", "//span[text()='Click to change shipping method']").getText();
+				 			System.out.println(text);
+				 			Common.assertionCheckwithReport(text.contains("Click to change shipping method"),
+				 					"To Validate the displayed click to change shipping method",
+				 					"should display the click to change shipping method after clicking on the standard shipping",
+				 					"click to change shipping method is displayed after a click on the standard shipping", "Failed to display click to change shipping method");
+
+				 		} catch (Exception | Error e) {
+				 			e.printStackTrace();
+				 			ExtenantReportUtils.addFailedLog("To Validate the displayed click to change shipping method",
+				 					"should display the click to change shipping method after clicking on the standard shipping",
+				 					"unable to display click to change shipping method after a click on the standard shipping",
+				 					"Failed to display click to change shipping method");
+				 			Assert.fail();
+
+			
+		}
+
+	}
+
+	public void Click_Marketing() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			
+			Sync.waitElementPresent("xpath", "//li[@id='menu-magento-backend-marketing']");
+			Common.clickElement("xpath", "//li[@id='menu-magento-backend-marketing']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+		String text=Common.findElement("xpath", "//li[@data-ui-id='menu-magento-salesrule-promo-quote']").getText();
+		System.out.println(text);
+			Common.assertionCheckwithReport(
+					text.contains("Cart Price Rules"),
+					"To Validate the sub-categories is displayed under marketing page",
+					"should display the sub-categories under marketing page after clicking on the marketing",
+					"sub-categories page is displayed after a click on the marketing button", "Failed to display sub-categories under marketing");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the sub-categories is displayed under marketing page",
+					"should display the sub-categories under marketing page after clicking on the marketing",
+					"unable to display sub-categories under marketing after a click on the marketing",
+					"Failed to display sub-categories under marketing");
+			Assert.fail();
+		}
+
+	}
+	public void select_cart_price_rule() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			
+			Sync.waitElementPresent("xpath", "//li[@data-ui-id='menu-magento-salesrule-promo-quote']");
+			Common.clickElement("xpath", "//li[@data-ui-id='menu-magento-salesrule-promo-quote']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+		String title=Common.getPageTitle();
+		System.out.println(title);
+			Common.assertionCheckwithReport(
+					title.contains("Cart Price Rules / Promotions / Marketing / Magento Admin"),
+					"To Validate the cart price rule page is displayed",
+					"should display the cart price rules page after clicking on the cart price rule",
+					"cart price rules page is displayed after a click on the cart price rule button", "Failed to display cart price rules page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the cart price rule page is displayed",
+					"should display the cart price rules page after clicking on the cart price rule",
+					"unable to display cart price rules after a click on the cart price rule",
+					"Failed to display cart price rules page");
+			Assert.fail();
+		}
+
+	}
+	public void Click_AddNewRule() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			
+			Sync.waitElementPresent("xpath", "//button[@title='Add New Rule']");
+			Common.clickElement("xpath", "//button[@title='Add New Rule']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+		String text=Common.findElement("xpath", "//h1[@class='page-title']").getText();
+		System.out.println(text);
+			Common.assertionCheckwithReport(
+					text.contains("New Cart Price Rule"),
+					"To Validate the New cart price rule page is displayed",
+					"should display the New cart price rules page after clicking on the Add New rule",
+					"New cart price rules page is displayed after a click on the Add New rule button", "Failed to display New cart price rules page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the new cart price rule page is displayed",
+					"should display the New cart price rules page after clicking on the Add New rule",
+					"unable to display New cart price rules after a click on the Add new rule",
+					"Failed to display New cart price rules page");
+			Assert.fail();
+		}
+
+	}
+	public void Rule_information(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//input[@name='name']");
+			Common.textBoxInput("xpath", "//input[@name='name']", data.get(dataSet).get("RuleName"));
+			
+			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
+			Common.textBoxInput("xpath", "//textarea[@name='description']", data.get(dataSet).get("Description"));
+			
+			Sync.waitElementPresent("xpath", "//option[text()='Hydroflask Website']");
+			Common.clickElement("xpath", "//option[text()='Hydroflask Website']");
+			
+			Sync.waitElementPresent("xpath", "//option[text()='General']");
+			Common.clickElement("xpath", "//option[text()='General']");
+			
+			Sync.waitElementPresent("xpath", "//select[@name='coupon_type']");
+			Common.clickElement("xpath", "//select[@name='coupon_type']");
+			Common.dropdown("xpath", "//select[@name='coupon_type']",Common.SelectBy.TEXT,data.get(dataSet).get("Coupon"));
+			
+			
+			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+			Common.clickElement("xpath", "//input[@name='coupon_code']");
+			Common.textBoxInput("xpath", "//input[@name='coupon_code']",data.get(dataSet).get("Coupon Code"));
+			
+			
+			Sync.waitElementPresent("xpath", "//select[@name='finance_category']");
+			Common.dropdown("xpath", "//select[@name='finance_category']",Common.SelectBy.TEXT,data.get(dataSet).get("FinanceCategory"));
+			
+			Sync.waitElementPresent("xpath", "//button[@id='save']");
+			Common.clickElement("xpath", "//button[@id='save']");
+		
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+		String text=Common.findElement("xpath", "//div[@class='message message-success success']").getText();
+		System.out.println(text);
+			Common.assertionCheckwithReport(
+					text.contains("You saved the rule."),
+					"To Validate the sucess message is displayed",
+					"should display the sucess message after clicking on the sudmitorder",
+					"sucess message is displayed after a click on the sudmitorder button", "Failed to display sucess message");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the sucess message is displayed",
+					"should display the sucess message after clicking on the sudmitorder",
+					"unable to display sucess message after a click on the sudmitorder button",
+					"Failed to display sucess message");
+			Assert.fail();
+		}
+
+	}
 	
+}
