@@ -12,7 +12,7 @@ import models.admin.GoldAdminHelper;
 public class Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement {
 	
 	String datafile = "Admin\\GoldAdminTestData.xlsx";    
-	GoldAdminHelper Admin = new GoldAdminHelper(datafile,"MagentoOrderplacement");
+	GoldAdminHelper Admin = new GoldAdminHelper(datafile,"Retailer OrderPlacement");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Catalog_product_update () throws Exception {
     try {
