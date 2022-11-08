@@ -173,7 +173,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
-			
+			Thread.sleep(2000);
 			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
@@ -1272,6 +1272,7 @@ try
        try {
 
             Sync.waitElementClickable("id", "block-discount-heading");
+            Common.scrollIntoView("id", "block-discount-heading");
             Common.clickElement("id", "block-discount-heading");
 
              Sync.waitElementPresent("id", "discount-code");
@@ -1295,6 +1296,7 @@ try
 
 
        catch (Exception | Error e) {
+    	   e.printStackTrace();
             ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
                     "User failed to proceed with discountcode", Common.getscreenShotPathforReport("discountcodefailed"));
             
@@ -5316,6 +5318,36 @@ public void click_FeedingDrinking() {
 		}
 		
 	}
+	
+	
+	
+	public void qty_Bundle(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		int subproductsList=Common.findElements("xpath","//div[@class='m-grouped__items']//div[@class='m-product-upsell__item']").size();
+        for(int i=0;i<subproductsList;i++) {
+            int value=i+1;
+            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']");
+            
+            for(int j=0;j<ListOfSubproducts.size();j++) {
+  
+                        if(ListOfSubproducts.get(j).getAttribute("class").contains("m-grouped__con")) {
+                            Thread.sleep(3000);
+//                            ListOfSubproducts.get(j).click();
+                            Thread.sleep(3000);
+                           Common.dropdown("xpath", "//div["+value+"]//select[@class='a-select-menu']", Common.SelectBy.VALUE, Dataset);
+                       String Quantity=Common.findElement("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']//input").getAttribute("value");
+                            
+//                     Common.assertionCheckwithReport(Quantity.equals(Dataset),"Verifying the products quantity ", "Quantity should be selected for each and every product in Grouped Bundle", "successfully Quantity has been selected for each and every product", "Failed to select the product quantity for the grouped bundle");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    
+            }
+        }
+	}
+	
 	
 	
 }
