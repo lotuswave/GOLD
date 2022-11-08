@@ -25,7 +25,7 @@ public class Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement {
         Admin.Select_astore();
         Admin.Add_product_SKU("EmailName");
         Admin.Guestuser_shippingaddress("EmailName");
- 	    Admin.payment_method("EmailName");
+ 	    Admin.Default_Payment_method("EmailName");
     	
            
         }

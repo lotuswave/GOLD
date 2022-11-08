@@ -27,7 +27,7 @@ public class Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement {
     	Admin.Select_astore();
    Admin.Add_product_SKU("EmailName");
     	Admin.shippingaddress("EmailName");
-    	Admin.payment_method("EmailName");
+    	Admin.Default_Payment_method("EmailName");
     	
            
         }
