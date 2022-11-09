@@ -14,8 +14,10 @@ public class Test_DGLD_HF_ST_062_Guest_user_Checkout_with_2_DayShipping_method {
     public void Validation_Guest_user_Checkout_with_2_DayShipping_method() throws Exception {
         try {
             Hydro.verifingHomePage();
-            Hydro.search_product("Product");      
-            Hydro.addtocart("Product");                    
+            Hydro.search_product("Product");   
+            Hydro.addtocart_PLP("Product");
+            Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_plp("Product");
             Hydro.minicart_Checkout();
             Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("2 Day method");
