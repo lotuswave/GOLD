@@ -108,5 +108,40 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components" />
         </classes>
     </test>
+    
+    
+     <test name="Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" testid="DTG-1911" priority="P1" description="This testcase is to Validate Guest Magento Order Placement">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" />
+        </classes>
+    </test>
+    
+      
+    <test name="Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement" testid="DTG-1925" priority="P1" description="This testcase is to Validate Register Magento Order Placement">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement" />
+        </classes>
+    </test>
+    
+    
+     <test name="Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement" testid="DTG-1924" priority="P1" description="This testcase is to Validate Register Magento Retail Order Placement">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement" />
+        </classes>
+    </test>
+    
+      <test name="Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Verifying Advance Pric">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" />
+        </classes>
+    </test>
+    
+   
+    
+    <test name="Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" testid="DTG-1923" priority="P1" description="This testcase is to Validate Promotion_Catalog_Rules">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" />
+        </classes> 
+    </test>
 	
 </suite>  
