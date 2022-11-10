@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HydroFlask_loq Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    
+        
+  
+   	<test name="Test_DGLD_HF_ST_Loq_001_Locate_AVS_Check_out_shipping_step" testid="DTG-2097" priority="P1" description="This script will cover validating Locate AVS Check out shipping step">
+       <classes>
+            <class name="TestExecute.Hydroflask_loq.regressionTestcase.Test_DGLD_HF_ST_Loq_001_Locate_AVS_Check_out_shipping_step"/>
+        </classes>
+        </test>  
+        
+        
+   	<test name="Test_DGLD_HF_ST_Loq_002_Register_AddAddress_on_Customer_Account" testid="DTG-2099" priority="P1" description="This script will cover validating Register AddAddress on Customer Account ">
+       <classes>
+            <class name="TestExecute.Hydroflask_loq.regressionTestcase.Test_DGLD_HF_ST_Loq_002_Register_AddAddress_on_Customer_Account"/>
+        </classes>
+        </test>  
+        
+        
+   	<test name="Test_DGLD_HF_ST_Loq_003_Register_Edit_Address_on_Customer_Account" testid="DTG-2101" priority="P1" description="This script will cover validating Edit Address on Customer Account ">
+       <classes>
+            <class name="TestExecute.Hydroflask_loq.regressionTestcase.Test_DGLD_HF_ST_Loq_003_Register_Edit_Address_on_Customer_Account"/>
+        </classes>
+        </test>  
+        
+        
+   	<test name="Test_DGLD_HF_ST_Loq_009_Guest_PaymentPage_UpdateAddress_My_billingand_shippingaddress" testid="DTG-2151" priority="P1" description="This script will cover validating PaymentPage UpdateAddress My billingand shippingaddress">
+       <classes>
+            <class name="TestExecute.Hydroflask_loq.regressionTestcase.Test_DGLD_HF_ST_Loq_009_Guest_PaymentPage_UpdateAddress_My_billingand_shippingaddress"/>
+        </classes>
+        </test>  
+        
+        <test name="Test_DGLD_HF_ST_Loq_013_Register_PaymentPage_UpdateAddress_Mybillingand_shippingaddress" testid="DTG-2157" priority="P1" description="This script will cover validating PaymentPage UpdateAddress My billingand shippingaddress">
+       <classes>
+            <class name="TestExecute.Hydroflask_loq.regressionTestcase.Test_DGLD_HF_ST_Loq_013_Register_PaymentPage_UpdateAddress_Mybillingand_shippingaddress"/>
+        </classes>
+        </test>  
+      
+     
+</suite>  

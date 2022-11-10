@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+   	
+   	<test name="Test_DGLD_OXO_Loq_ST_005_Register_Add_Address_on_Customer_Account" testid="DTG-2102" priority="P1" description="This script will cover validating Add Address on Customer Account">
+       <classes>
+            <class name="TestExecute.OXO_loq.regressionTestcase.Test_DGLD_OXO_Loq_ST_005_Register_Add_Address_on_Customer_Account"/>
+        </classes>
+        </test>  
+        
+   	<test name="Test_DGLD_OXO_ST_06_Loq_Register_Edit_Address_on_Customer_Account" testid="DTG-2101" priority="P1" description="This script will cover validating Edit Address on Customer Account">
+       <classes>
+            <class name="TestExecute.OXO_loq.regressionTestcase.Test_DGLD_OXO_ST_06_Loq_Register_Edit_Address_on_Customer_Account"/>
+        </classes>
+        </test> 
+        
+   	<test name="Test_DGLD_OXO_ST_Loq_007_Locate_AVS_Check_out_shipping_step" testid="DTG-2104" priority="P1" description="This script will cover validatingLocate AVS Check out shipping step ">
+       <classes>
+            <class name="TestExecute.OXO_loq.regressionTestcase.Test_DGLD_OXO_ST_Loq_007_Locate_AVS_Check_out_shipping_step"/>
+        </classes>
+        </test> 
+        
+   	<test name="Test_DGLD_OXO_ST_Loq_008_Guest_PaymentPage_UpdateAddress_Mybilling_and_shippingaddress" testid="DTG-2104" priority="P1" description="This script will cover validating PaymentPage UpdateAddress Mybilling and shippingaddress ">
+       <classes>
+            <class name="TestExecute.OXO_loq.regressionTestcase.Test_DGLD_OXO_ST_Loq_008_Guest_PaymentPage_UpdateAddress_Mybilling_and_shippingaddress"/>
+        </classes>
+        </test> 
+        
+   	<test name="Test_DGLD_OXO_ST_Loq_012_Register_PaymentPage_UpdateAddress_Mybilling_and_shippingaddress" testid="DTG-2156" priority="P1" description="This script will cover validating PaymentPage UpdateAddress Mybilling and shippingaddress">
+       <classes>
+            <class name="TestExecute.OXO_loq.regressionTestcase.Test_DGLD_OXO_ST_Loq_012_Register_PaymentPage_UpdateAddress_Mybilling_and_shippingaddress"/>
+        </classes>
+        </test> 
+        
+  
+   
+      
+     
+</suite>  
