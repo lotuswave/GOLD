@@ -6223,7 +6223,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(Product), "validating the Navigation to the PDP page for selected product",
 					"It should navigates to PDP page after clicking on the product", "Sucessfully It is navigated to the Pdp page ",
 					"failed to Navigate to the PDP page after clicking on the product");
-			Products_Grouped_Bundle("5");
+			Products_Grouped_Bundle("1");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 			Common.clickElement("xpath", "//span[text()='Add to Bag']");
 
