@@ -1342,17 +1342,18 @@ try
             Common.clickElement("xpath", "//button[@value='Apply Discount']");
             Sync.waitPageLoad();
             Thread.sleep(4000);
+            Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
             expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
             String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+            System.out.println(discountcodemsg);
             Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
                     "verifying pomocode", expectedResult, "promotion code working as expected",
                     "Promation code is not applied");
             Thread.sleep(4000);
-            String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
-					"");
+            Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
+            String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$","");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
-					.replace("$", "");
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']").replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
 			Float Taxvalue = Float.parseFloat(Tax);
@@ -4750,9 +4751,8 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//img[@alt='"+ Product +"']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				
-				validating_BundleProducts();
-				product_quantity(Dataset);
+//				validating_BundleProducts();
+//				product_quantity(Dataset);
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 				Common.clickElement("xpath", "//span[text()='Add to Bag']");
 
