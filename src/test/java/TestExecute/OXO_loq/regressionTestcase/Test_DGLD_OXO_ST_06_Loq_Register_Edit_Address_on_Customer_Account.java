@@ -40,6 +40,7 @@ public class Test_DGLD_OXO_ST_06_Loq_Register_Edit_Address_on_Customer_Account {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
+		  Oxo.acceptPrivacy();
 
 	}
 

@@ -42,6 +42,7 @@ public class Test_DGLD_OXO_Loq_ST_005_Register_Add_Address_on_Customer_Account {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
+		  Oxo.acceptPrivacy();
 
 	}
 
