@@ -7371,8 +7371,8 @@ Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and r
 		try {
 
 			Thread.sleep(5000);
-				Sync.waitElementPresent("xpath", "(//span[text()='Submit Retail Order'])[2]");
-		Common.clickElement("xpath", "(//span[text()='Submit Retail Order'])[2]");
+				Sync.waitElementPresent("xpath", "(//span[text()='Submit Retail'])[2]");
+		Common.clickElement("xpath", "(//span[text()='Submit Retail'])[2]");
 	       Thread.sleep(5000);
 	      
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
