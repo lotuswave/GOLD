@@ -63,6 +63,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 	public void verifingHomePage() {
 		try {
 			Sync.waitPageLoad();
+			Thread.sleep(5000);
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("OXO"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
@@ -254,6 +255,96 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		}
 
 	}
+	
+	//Grouped 
+	public void group_Addtocart(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+//				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+//			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+//			product_quantity(Dataset);
+			product_Qty_Grouped(Dataset);
+			Sync.waitPageLoad();
+//			click_UGC();
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
+           Common.clickElement("xpath", "//span[text()='Add to Bag']");
+		
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+	}
+	
+	public void product_Qty_Grouped(String Dataset) throws Exception {
+		String quantity=data.get(Dataset).get("Quantity");
+		int subproductsList=Common.findElements("xpath","//div[@class='m-grouped__items']//div[@class='m-product-upsell__item']").size();
+		System.out.println(quantity); 
+		System.out.println(subproductsList);
+        
+		for(int i=0;i<subproductsList;i++) {
+        	 
+            int value=i+1;
+            
+            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']");
+            
+            System.out.println(ListOfSubproducts);
+            for(int j=0;j<ListOfSubproducts.size();j++) {
+  
+                        if(ListOfSubproducts.get(j).getAttribute("class").contains("m-grouped__con")) {
+                            Thread.sleep(3000);
+                            System.out.println(ListOfSubproducts);
+//                            ListOfSubproducts.get(j).click();
+                            Thread.sleep(3000);
+                           Common.dropdown("xpath", "//div[@class='m-select-menu__wrapper']//select[@class='a-select-menu']", Common.SelectBy.VALUE, quantity);
+//                       String Quantity=Common.findElement("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']//input").getAttribute("value");
+//                        Thread.sleep(3000);
+//                       System.out.println(Quantity);   
+//                     Common.assertionCheckwithReport(Quantity.equals(Dataset),"Verifying the products quantity ", "Quantity should be selected for each and every product in Grouped Bundle", "successfully Quantity has been selected for each and every product", "Failed to select the product quantity for the grouped bundle");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    
+            }
+        }
+	}
+	
 	
 	public void click_UGC() {
 		// TODO Auto-generated method stub
@@ -5320,34 +5411,106 @@ public void click_FeedingDrinking() {
 	}
 	
 	
-	
-	public void qty_Bundle(String Dataset) throws Exception {
+	public void update_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		int subproductsList=Common.findElements("xpath","//div[@class='m-grouped__items']//div[@class='m-product-upsell__item']").size();
-        for(int i=0;i<subproductsList;i++) {
-            int value=i+1;
-            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']");
-            
-            for(int j=0;j<ListOfSubproducts.size();j++) {
-  
-                        if(ListOfSubproducts.get(j).getAttribute("class").contains("m-grouped__con")) {
-                            Thread.sleep(3000);
-//                            ListOfSubproducts.get(j).click();
-                            Thread.sleep(3000);
-                           Common.dropdown("xpath", "//div["+value+"]//select[@class='a-select-menu']", Common.SelectBy.VALUE, Dataset);
-                       String Quantity=Common.findElement("xpath", "//div[@class='m-grouped__items']//div["+value+"]//div[@class=' m-grouped__control-qty']//input").getAttribute("value");
-                            
-//                     Common.assertionCheckwithReport(Quantity.equals(Dataset),"Verifying the products quantity ", "Quantity should be selected for each and every product in Grouped Bundle", "successfully Quantity has been selected for each and every product", "Failed to select the product quantity for the grouped bundle");
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    
-            }
-        }
+		String quantity=data.get(Dataset).get("Quantity");
+		try
+		{
+			Common.clickElement("xpath", "//select[@class='a-form-elem a-select-menu']");
+			Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, quantity);
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String productquantity=Common.findElement("xpath", "//select[@class='a-form-elem a-select-menu']").getAttribute("value");
+			System.out.println(productquantity);
+			Common.assertionCheckwithReport(productquantity.equals(quantity),
+					"validating the update quantity in shopping cart page",
+					"Quantity should be update in the shopping cart page",
+					"Qunatity has been updated in the shopping cart page",
+					"Failed to update the product quantity in the shopping cart page");	
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the update quantity in shopping cart page",
+					"Quantity should be update in the shopping cart page",
+					"Unable to update the product quantity in the shopping cart page", Common.getscreenShot("Failed to update the product quantity in the shopping cart page"));
+			Assert.fail();
+		}
+		
 	}
 	
+	
+	public void minicart_ordersummary_discount(String Dataset) {
+		// TODO Auto-generated method stub.
+	     String expectedResult = "It should opens textbox input to enter discount.";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title']");
+            Common.clickElement("xpath", "//button[@class='m-accordion__title']");
+
+             Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+
+             Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
+
+             int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
+           Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+                    "Successfully open the discount input box", "User unable enter Discount Code");
+             Sync.waitElementClickable("xpath", "//button[@value='Add']");
+            Common.clickElement("xpath", "//button[@value='Add']");
+            Sync.waitPageLoad();
+            Thread.sleep(4000);
+            expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+            String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+            Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"),
+                    "verifying pomocode", expectedResult, "promotion code working as expected",
+                    "Promation code is not applied");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the promocode in the shopping cart page",
+					"Promocode should be apply in the shopping cart page",
+					"Unable to display the promocode in the shopping cart page",
+					Common.getscreenShot("Failed to display the promocode in the shopping cart page"));
+			Assert.fail();
+		}
+		try {
+			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+					"");
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+					.replace("$", "");
+			Float shippingvalue = Float.parseFloat(shipping);
+			String Discount=Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']").replace("$", "");
+			Float Discountvalue=Float.parseFloat(Discount);
+			
+			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+					.replace("$", "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Float Total = (subtotalvalue + shippingvalue)+Discountvalue;
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(ordertotal);
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Successfully Order summary is displayed in the payment page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Unabel to display the Order summary and fields are not displayed in the payment page",
+					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
+			Assert.fail();
+		}
+		
+	}
 	
 	
 }
