@@ -120,7 +120,7 @@ public class GoldHydroHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
@@ -133,6 +133,8 @@ public class GoldHydroHelper {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Common.clickElement("xpath", "//span[text()=' Bottles']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -683,7 +685,7 @@ public void selectshippingaddress(String Dataset) {
 				}
 
 				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success']//span");
+					 Common.getText("xpath", "//div[@class='checkout-success']//span");
 					System.out.println(order);
 				}
 
@@ -3671,7 +3673,7 @@ public void acceptPrivacy() {
 			
 			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
-			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
+			String form=Common.getText("xpath", "//label[@for='tab-product.yotpo.reviews']");
 			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
 					"verifying the write a review button", "Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
@@ -3692,7 +3694,8 @@ public void acceptPrivacy() {
 			String expectedResult="Sucessfully title input box has been displayed";
 			Common.clickElement("xpath", "//input[@value='Post']");
 			String errormessage=Common.findElement("xpath", "//span[@class='form-input-error']").getText();
-			Common.assertionCheckwithReport(errormessage.contains("Name field cannot be empty"),
+			System.out.println(errormessage);
+			Common.assertionCheckwithReport(errormessage.contains("Please enter a star rating for this review"),
 					"verifying the error message in invalid fields", "error message should be display in the invalid fields",
 					"Sucessfully Error message has been displayed in invalid fileds ", "Failed to display the error meesage in invalid fields ");
 			score(data.get(Dataset).get("score"));
@@ -3704,6 +3707,7 @@ public void acceptPrivacy() {
 			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
 			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+			Common.clickElement("xpath", "//input[@value='Post']");
 			String emailerror=Common.findElement("xpath", "//span[@class='form-input-error']").getText();
 			Common.assertionCheckwithReport(emailerror.contains("Invalid email"),
 					"verifying the invaild email for the product review", "error message should be display for invaild email",
