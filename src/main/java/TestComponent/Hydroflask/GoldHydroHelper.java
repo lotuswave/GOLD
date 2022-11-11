@@ -6596,7 +6596,9 @@ catch(Exception | Error e)
 				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
-						"failed to Navigate to the PDP page");	
+						"failed to Navigate to the PDP page");
+				Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+				Thread.sleep(3000);
 				Myhydro_bottle("40 oz");
 			    hydro_bottle_color("Black");
 				hydro_cap_color("White");
@@ -7180,6 +7182,38 @@ catch(Exception | Error e)
 					"Order summary should be display in the payment page and all fields should display",
 					"Unabel to display the Order summary and fields are not displayed in the payment page",
 					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
+			Assert.fail();
+		}
+		
+	}
+	public void reorder() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
+			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//span[text()='View Order']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
+			Common.clickElement("xpath", "//span[text()='Reorder']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+					"validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Successfully navigated to the shopping cart page",
+					"Failed to Navigate to the shopping cart page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Unable to Navigate to the shopping cart page",
+					Common.getscreenShot("Failed to Navigate to the shopping cart page"));
 			Assert.fail();
 		}
 		
