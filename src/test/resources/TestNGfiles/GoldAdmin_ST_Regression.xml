@@ -130,6 +130,15 @@
         </classes>
     </test>
     
+    
+    
+    
+     <test name="Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" testid="DTG-1924" priority="P1" description="This testcase is to Validate Promotion Cart Rule Prices">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" />
+        </classes>
+    </test>
+    
       <test name="Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Verifying Advance Pric">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" />
