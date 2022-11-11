@@ -9,21 +9,20 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_057_Checkout_with_GuestUserCC_Grouped_Product {
-
+public class Test_DGLD_OXO_ST_086_Place_an_Order_Using_Reorder {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_GuestUserCC_Checkout_Grouped_Product() throws Exception {
-
+	public void Place_an_Order_with_Reorder() throws Exception {
+		
 		try {
 			Oxo.verifingHomePage();
-			Oxo.search_product("Group");
-			Oxo.addtocart("Group");
-//			Oxo.blog_PDP();
+			Oxo.click_singinButton();
+			Oxo.Usersignin("AccountDetails");
+			Oxo.reorder();
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			
@@ -34,6 +33,7 @@ public class Test_DGLD_OXO_ST_057_Checkout_with_GuestUserCC_Grouped_Product {
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 	@AfterTest
 	public void clearBrowser() {

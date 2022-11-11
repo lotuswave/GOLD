@@ -20,6 +20,7 @@ public class Test_DGLD_OXO_ST_051_Product_Registration_Form {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_Product_Registration();
+//			Oxo.product_Registration_invalid("ProductRegistration invalid");
 			Oxo.product_Registration("ProductRegistration");
 			
 			

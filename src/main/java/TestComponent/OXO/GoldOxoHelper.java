@@ -181,7 +181,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 					"failed to Navigate to the PDP page");
 			product_quantity(Dataset);
 			Sync.waitPageLoad();
-			click_UGC();
+//			click_UGC();
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
            Common.clickElement("xpath", "//span[text()='Add to Bag']");
 		
@@ -2839,7 +2839,7 @@ catch(Exception | Error e)
 			Thread.sleep(2000);
 			Common.clickElement("xpath", "//input[@id='paypal_express']");
 			Thread.sleep(2000);
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 			
 			//Common.refreshpage();
@@ -4235,6 +4235,103 @@ public void product_Registration(String dataSet) {
 
 }
 
+public void product_Registration_invalid(String dataSet) {
+	
+	String expectedResult = " Product registration form is visible in tab with success message";
+	String country=data.get(dataSet).get("Country");
+	String state = data.get(dataSet).get("Region");
+	String purchased = data.get(dataSet).get("PurchasedAt");
+	try {
+
+
+		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://oxo')]");
+		Common.switchFrames("xpath", "//iframe[contains(@src,'https://oxo')]");
+
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='First Name']");
+		Common.textBoxInput("xpath", "//input[@data-label='First Name']", data.get(dataSet).get("FirstName"));
+
+		Sync.waitElementPresent("xpath", "//input[@data-label='Last Name']");
+		Common.textBoxInput("xpath", "//input[@data-label='Last Name']", data.get(dataSet).get("LastName"));
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Email']");
+	       
+			Common.textBoxInput("xpath", "//input[@data-label='Email']", data.get(dataSet).get("Email"));
+
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Phone']");
+		Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
+
+		
+		
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Street ']");
+		Common.textBoxInput("xpath", "//input[@data-label='Street ']", data.get(dataSet).get("Street"));
+
+		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
+		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
+		
+		
+
+		Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
+		Common.clickElement("xpath", "//div[@id='conversationState']");
+
+		Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
+		Common.clickElement("xpath", "//div[text()='"+state+"']");
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Zip/Postal Code']");
+		Common.textBoxInput("xpath", "//input[@data-label='Zip/Postal Code']", data.get(dataSet).get("postcode"));
+
+		Common.textBoxInput("xpath", "//input[contains(@data-label,'Item Number')]", data.get(dataSet).get("SKUitemNumber"));
+
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Serial Number']", data.get(dataSet).get("SerialNumber"));
+
+		Common.textBoxInput("xpath", "//input[@data-label='Manufacture Date ']", data.get(dataSet).get("ManufactureDate"));
+
+		Sync.waitElementPresent("xpath", "//div[@id='customerWherePurchased']");
+		Common.clickElement("xpath", "//div[@id='customerWherePurchased']");
+		
+		Sync.waitElementPresent("xpath", "//div[text()='"+purchased+"']");
+		Common.clickElement("xpath", "//div[text()='"+purchased+"']");
+		
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Price']", data.get(dataSet).get("Price"));
+
+		Sync.waitElementPresent("xpath", "//textarea[@data-label='City Purchased']");
+		Common.textBoxInput("xpath", "//textarea[@data-label='City Purchased']",data.get(dataSet).get("City"));
+		
+		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+		Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+		Common.textBoxInput("xpath", "//input[@data-label='Purchase Date']",data.get(dataSet).get("Date"));		
+		
+		Sync.waitElementPresent("xpath", "//div[text()='"+country+"']");
+		Common.clickElement("xpath", "//div[text()='"+country+"']");
+		
+		
+		Common.scrollIntoView("xpath", "//button[text()='Submit']");
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		
+		Thread.sleep(4000);
+//		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
+//		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+//		int registrationsuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+//		Common.assertionCheckwithReport(registrationsuccessmessage > 0, "verifying Product registration Success message ",
+//				"Success message should be Displayed", "Product registration  Success message displayed ",
+//				"failed to dispaly success message");
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying Product registration  form",
+				"Product registration form data enter without any error message", "Product registration  page getting error ",
+				Common.getscreenShotPathforReport("Product registration  page"));
+		Assert.fail();
+
+	}
+}
+
 public void configurable_Sticky_add_to_cart(String Dataset) {
 	// TODO Auto-generated method stub
 	String product = data.get(Dataset).get("Colorproduct");
@@ -5507,6 +5604,70 @@ public void click_FeedingDrinking() {
 					"Order summary should be display in the payment page and all fields should display",
 					"Unabel to display the Order summary and fields are not displayed in the payment page",
 					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
+			Assert.fail();
+		}
+		
+	}
+	
+	// Temp
+	public void blog_PDP() {
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='c-product-blog u-container']");
+			Common.scrollIntoView("xpath", "//div[@class='c-product-blog u-container']");
+			Common.clickElement("xpath", "//div[@class='m-blog-card__image-container']");
+//			Thread.sleep(6000);
+			String blog=Common.findElement("xpath", "//h2[@class='m-blog-post-heading__title']").getText();
+			Thread.sleep(4000);
+			System.out.println(blog);
+			
+			Common.assertionCheckwithReport(blog.contains("Article"),
+					"To validate the Blog Article when we click on the PDP Blog section",
+					"user should able to display the Blog Article",
+					"Sucessfully Blog Article has been displayed","Failed to Displayed the Blog Article");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Blog Article in when we click on the PDP Blog section",
+					"user should able to display the Blog Article",
+					"unable to Displayed the Blog Article",
+					Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+			Assert.fail();
+		}
+	}
+	
+	public void reorder() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
+			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//span[text()='View Order']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
+			Common.clickElement("xpath", "//span[text()='Reorder']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+					"validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Successfully navigated to the shopping cart page",
+					"Failed to Navigate to the shopping cart page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Unable to Navigate to the shopping cart page",
+					Common.getscreenShot("Failed to Navigate to the shopping cart page"));
 			Assert.fail();
 		}
 		

@@ -9,25 +9,29 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_057_Checkout_with_GuestUserCC_Grouped_Product {
-
+public class Test_DGLD_OXO_ST_087_GuestUser_checkout_PayPal_Multiple_Products_with_Discount_Same_Billing_Shipping {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_GuestUserCC_Checkout_Grouped_Product() throws Exception {
+	public void Validate_GuestUserCC_Simple_Configurable_Grouped_Bundle_products() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.search_product("Group");
-			Oxo.addtocart("Group");
-//			Oxo.blog_PDP();
+			Oxo.coffee_headerlinks("Coffee & Beverage");
+			Oxo.addtocart("addproduct");
+			Oxo.search_product("Product");
+			Oxo.addtocart_PLP("Product");
+			Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.Configurable_addtocart_pdp("ConfigProduct");
+			Oxo.search_product("Bundle");
+			Oxo.addtocart("Bundle");
+//			Oxo.search_product("Group");
+//			Oxo.addtocart("Group");
 			Oxo.minicart_Checkout();
+			Oxo.discountCode("Discount");
 			Oxo.addDeliveryAddress("AccountDetails");
-			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
-			
-			
-			
+			Oxo.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
