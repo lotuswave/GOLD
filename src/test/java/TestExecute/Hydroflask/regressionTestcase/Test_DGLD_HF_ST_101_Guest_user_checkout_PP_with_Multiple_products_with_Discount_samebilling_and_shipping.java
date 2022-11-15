@@ -28,7 +28,7 @@ public class Test_DGLD_HF_ST_101_Guest_user_checkout_PP_with_Multiple_products_w
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+            Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 

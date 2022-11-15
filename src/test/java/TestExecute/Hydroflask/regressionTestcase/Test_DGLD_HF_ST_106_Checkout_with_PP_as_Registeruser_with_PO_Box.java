@@ -9,28 +9,24 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_102_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping {
+public class Test_DGLD_HF_ST_106_Checkout_with_PP_as_Registeruser_with_PO_Box {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Bundle");
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Address");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping () throws Exception {
+	public void Validate_Checkout_with_PP_as_Registeruser_with_PO_Box () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Bundle product"); 
-			Hydro.Addtocart_Bundle("Bundle product");
-			Hydro.search_product("Grouped Bundle");    
-			Hydro.Add_Grouped_Bundle("Grouped Bundle"); 
+			Hydro.search_product("Product");     
+			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.RegaddDeliveryAddress("Po box Address");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.register_billingAddress("BillingDetails");
             Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {

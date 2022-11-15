@@ -349,32 +349,32 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 				address);
-		Common.actionsKeyPress(Keys.BACK_SPACE);
-		Common.actionsKeyPress(Keys.BACK_SPACE);
-		Thread.sleep(5000);
-		Common.findElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']").sendKeys("Rd");
-		Thread.sleep(5000);
-		Sync.waitElementPresent(30, "xpath", "//div[@class='pcaitem']");
-		String newadd=Common.findElement("xpath", "//div[@class='pcaitem']").getAttribute("title");
-		System.out.println(newadd);
-		Thread.sleep(6000);
-		List<WebElement> listofaddresss=Common.findElements("xpath", "(//div[@class='pcaitem'])[1]");
-		ArrayList<WebElement> listaddress=new ArrayList<WebElement>();
-		for(WebElement addresscheck:listofaddresss)
-		{
-			
-	     listaddress.add(addresscheck);
-		 String add=addresscheck.getAttribute("title"); 
-		 System.out.println(add);
-		 System.out.println(address);
-		 Thread.sleep(4000);
-		 Common.assertionCheckwithReport(add.equals(address) ,
-					"validating the dropdown in the shipping address page ",
-					"User should able to see the Locate dropdown for respective address", "Successfully Locate dropdown has been displayed in shipping address page",
-					"Failed to display dropdown in the shipping address page");
+//		Common.actionsKeyPress(Keys.BACK_SPACE);
+//		Common.actionsKeyPress(Keys.BACK_SPACE);
+//		Thread.sleep(5000);
+//		Common.findElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']").sendKeys("Rd");
+//		Thread.sleep(5000);
+//		Sync.waitElementPresent(30, "xpath", "//div[@class='pcaitem']");
+//		String newadd=Common.findElement("xpath", "//div[@class='pcaitem']").getAttribute("title");
+//		System.out.println(newadd);
+//		Thread.sleep(6000);
+//		List<WebElement> listofaddresss=Common.findElements("xpath", "(//div[@class='pcaitem'])[1]");
+//		ArrayList<WebElement> listaddress=new ArrayList<WebElement>();
+//		for(WebElement addresscheck:listofaddresss)
+//		{
+//			
+//	     listaddress.add(addresscheck);
+//		 String add=addresscheck.getAttribute("title"); 
+//		 System.out.println(add);
+//		 System.out.println(address);
+//		 Thread.sleep(4000);
+//		 Common.assertionCheckwithReport(add.equals(address) ,
+//					"validating the dropdown in the shipping address page ",
+//					"User should able to see the Locate dropdown for respective address", "Successfully Locate dropdown has been displayed in shipping address page",
+//					"Failed to display dropdown in the shipping address page");
 		 
-		}
-		String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+//		}
+//		String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 		
 		Sync.waitPageLoad();
 		Thread.sleep(5000);
@@ -7214,6 +7214,19 @@ catch(Exception | Error e)
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Unable to Navigate to the shopping cart page",
 					Common.getscreenShot("Failed to Navigate to the shopping cart page"));
+			Assert.fail();
+		}
+		
+	}
+	public void webpagelinks_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
 			Assert.fail();
 		}
 		
