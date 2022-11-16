@@ -9,11 +9,11 @@ import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
 
-public class Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement {
+public class Test_DGLD_Admin_ST_027_HF_Guest_CreateNewOrder_Grouped_Product {
 	String datafile = "Admin\\GoldAdminTestData.xlsx";    
 	GoldAdminHelper Admin = new GoldAdminHelper(datafile,"Mogento,orderplacement");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-    public void Catalog_product_update () throws Exception {
+    public void Guest_CreateNewOrder_Grouped_Product () throws Exception {
     try {
     	
     	
@@ -23,8 +23,9 @@ public class Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement {
     	Admin.Click_Orders_Salesmenu();
     	Admin.Click_CreatNewOrders(); 
     	Admin.Click_CreatNewCustomer();
-        Admin.Select_astore();
-        Admin.Add_product_SKU("Details");
+        Admin.Select_Store("HFWebsite");
+        Admin.Add_Group_Product_sku("HFGroupproduct");
+        Admin.Configure_child_Products("HFGroupproduct");
         Admin.Guestuser_shippingaddress("Details");
  	    Admin.Default_Payment_method("Details");
     	
@@ -41,7 +42,7 @@ public class Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement {
     @AfterTest
     public void clearBrowser()
     {
-      Common.closeAll();
+     Common.closeAll();
 
     }
 

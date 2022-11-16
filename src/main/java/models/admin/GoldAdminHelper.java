@@ -7583,16 +7583,127 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 		}
 
 	}
+	
+	public void Select_Store(String dataSet) {
+		// TODO Auto-generated method stub
+		
+			String Website=data.get(dataSet).get("Store");
+			
+			try
+			{
+				Common.findElement("xpath", "//label[text()='" + Website + "']");
+        		Common.clickElement("xpath", "//label[text()='" + Website + "']");
+				
+				Thread.sleep(3000);
+			
+				Sync.waitPageLoad();
+			
+				String page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+			
+				Common.assertionCheckwithReport(
+					page.contains(Website),
+						"To Validate the create new order page is displayed",
+						"should display the create new order page after clicking on the store",
+						"create new order page is displayed after a click on the store button", "Failed to display create new order page");
+			
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the create new order page page is displayed",
+						"should display the create new order page after clicking on the store",
+						"unable to display create new order page after a click on the store button",
+						"Failed to display create new order page");
+				Assert.fail();
+			}
+
+		}
+	public void Add_Group_Product_sku(String dataSet) {
+		// TODO Auto-generated method stub
+		String Noticemessage = data.get(dataSet).get("message");
+		try {
+			Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+			Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+			Thread.sleep(2000);
+			
+			Sync.waitElementPresent("xpath", "//td[@class='col-sku']//input[@name='sku']");
+			Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']",data.get(dataSet).get("SKUNumber") );
+			
+			Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']", data.get(dataSet).get("Quantity") );
+			
+				
+			Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
+			Common.clickElement("xpath", "//button[@title='Add to Order']");
+			Sync.waitPageLoad();
+		String noticemessage =	Common.findElement("xpath", "//div[@class='message message-notice']").getText();
+		Common.assertionCheckwithReport(
+				noticemessage.equals(Noticemessage),
+					"To Validate the group product item sku is added and display a notice message to configure child products",
+					"should add group product item sku and displays a notice message to configure child products",
+					"group product item sku is added successfully and display a notice message to configure child products",
+					"Failed to add group product item sku and not dispalying notice message to configure child products");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the group product item sku is added and display a notice message to configure child products",
+					"To Validate the group product item sku is added and display a notice message to configure child products ",
+					"unable to add group product item sku and not displays a notice message to configure child products",
+					"Failed to add group product item sku and not dispalying notice message to configure child products");
+			Assert.fail();
+		}
+
+	}
+	public void Configure_child_Products(String dataSet) {
+		// TODO Auto-generated method stub
+	String[] product_quantity = data.get(dataSet).get("quantity").split(",");
+	
+		try {
+			Common.clickElement("xpath", "//span[text()='Configure']");
+			int productcount = Common.findElements("xpath", "//td[@class='col-name']").size();
+		
+			for(int i=1;i<=productcount;i++) {
+				Sync.waitElementClickable("xpath", "(//input[contains(@name,'super_group')])["+i+"]");
+				Common.textBoxInput("xpath", "(//input[contains(@name,'super_group')])["+i+"]", product_quantity[i-1]);
+				Common.scrollIntoView("xpath", "(//input[contains(@name,'super_group')])["+i+"]");
+				
+				
+			}
+			Common.scrollIntoView("xpath", "//button[@class='action-primary']");
+			Common.javascriptclickElement("xpath", "//button[@class='action-primary']");
+			
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//table[@id='sku_errors_table']");
+			int noticemessage = Common.findElements("xpath", "//div[@class='message message-notice']").size();
+			System.out.println(noticemessage);
+			Common.assertionCheckwithReport(
+					noticemessage<=0,
+						"To Validate the selected group product child items added with sku,productname ,qty",
+						"should add the selected group product child items with sku,productname ,qty",
+						"Selected group product child items added successfuly with sku,productname ,qty", 
+						"Failed to add group product child items with sku,productname ,qty");
+           Common.javascriptclickElement("xpath", "//button[@title='Add Products to Order']");
+			Common.getscreenShotPathforReport("Adding Products to Order");
+		}catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the selected group product child items added with sku,productname ,qty",
+					"should add the selected group product child items with sku,productname ,qty",
+					"unable to add the selected group product child items with sku,productname ,qty",
+					"Failed to add group product child items with sku,productname ,qty");
+			Assert.fail();
+		}
+
+	}
+
 
 	public void Guestuser_shippingaddress(String dataSet) {
 		// TODO Auto-generated method stub
+		
 		try {
 			Thread.sleep(2000);
 		
 			Sync.waitElementPresent("xpath", "//input[@name='order[account][email]']");
-			Common.textBoxInput("xpath", "//input[@name='order[account][email]']", data.get(dataSet).get("Email"));
+			Common.textBoxInput("xpath", "//input[@name='order[account][email]']",  Utils.getEmailid());
+			
 			Thread.sleep(4000);
-				
 			Common.textBoxInputClear("xpath", "//input[@id='order-billing_address_firstname']");
 			Common.textBoxInput("xpath", "//input[@id='order-billing_address_firstname']",data.get(dataSet).get("FirstName"));
 			
