@@ -8736,5 +8736,155 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 		}
 		
 	}
+	
+	public void AddProduct_Group_Product(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//span[text()='Add Products']");
+			Common.textBoxInput("xpath", "//input[@id='sales_order_create_search_grid_filter_sku']",
+					data.get(dataSet).get("SKUNumber"));
+			Common.actionsKeyPress(Keys.ENTER);
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//a[@class='action-configure ']");
+			Common.clickElement("xpath", "//a[@class='action-configure ']");
+			Thread.sleep(2000);
+			String pagetitle = Common.findElement("xpath", "//h1[contains(text(),'Configure Product')]").getText();
+			System.out.println(pagetitle);
+			Common.assertionCheckwithReport(pagetitle.contains("Configure Product"),
+					"To validate Product configure Tab is opened when we click on the configure link",
+					"Product Configure tab should open when we click on the Configure link",
+					"Product Configure tab is opened when we click on the configure link",
+					"Failed to opne the product configure tab when we click on the Configure link");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate Product configure Tab is opened when we click on the configure link",
+					"Product Configure tab should open when we click on the Configure link",
+					"Product Configure tab is not opened when we click on the configure link",
+					"failed to open the product configure Tab when we click on the configure link");
+			Assert.fail();
+		}
+
+	}
+
+	public void AddProduct_Configure_child_items(String dataSet) {
+		// TODO Auto-generated method stub
+		String[] product_quantity = data.get(dataSet).get("quantity").split(",");
+		try {
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//span[text()='Add Selected Product(s) to Order']");
+			int productcount = Common.findElements("xpath", "//td[@class='col-name']").size();
+
+			for (int i = 1; i <= productcount; i++) {
+				Sync.waitElementClickable("xpath", "(//input[contains(@name,'super_group')])[" + i + "]");
+				Common.textBoxInput("xpath", "(//input[contains(@name,'super_group')])[" + i + "]",
+						product_quantity[i - 1]);
+			}
+			Sync.waitElementVisible("xpath", "//button[@class='action-primary']");
+			Common.javascriptclickElement("xpath", "//button[@class='action-primary']");
+			Sync.waitPageLoad();
+			Common.scrollIntoView("xpath", "//span[text()='Add Selected Product(s) to Order']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add Selected Product(s) to Order']");
+
+			Sync.waitPageLoad();
+			int noofproducts = Common.findElements("xpath", "//td[@class='col-product']").size();
+			Common.assertionCheckwithReport(noofproducts > 1,
+					"To Validate the selected group product child items added with sku,productname ,qty",
+					"should add the selected group product child items with sku,productname ,qty",
+					"Selected group product child items added successfuly with sku,productname ,qty",
+					"Failed to add group product child items with sku,productname ,qty");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the selected group product child items added with sku,productname ,qty",
+					"should add the selected group product child items with sku,productname ,qty",
+					"unable to add the selected group product child items with sku,productname ,qty",
+					"Failed to add group product child items with sku,productname ,qty");
+			Assert.fail();
+		}
+
+	}
+	
+	public void AddProduct_By_SKU_Group_Product(String dataSet) {
+		// TODO Auto-generated method stub
+		String Noticemessage = data.get(dataSet).get("message");
+		try {
+			Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+			Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+			Thread.sleep(2000);
+
+			Sync.waitElementPresent("xpath", "//td[@class='col-sku']//input[@name='sku']");
+			Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']",
+					data.get(dataSet).get("SKUNumber"));
+
+			Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']",
+					data.get(dataSet).get("Quantity"));
+
+			Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
+			Common.clickElement("xpath", "//button[@title='Add to Order']");
+			Sync.waitPageLoad();
+			String noticemessage = Common.findElement("xpath", "//div[@class='message message-notice']").getText();
+			Common.assertionCheckwithReport(noticemessage.equals(Noticemessage),
+					"To Validate the group product item sku is added and display a notice message to configure child products",
+					"should add group product item sku and displays a notice message to configure child products",
+					"group product item sku is added successfully and display a notice message to configure child products",
+					"Failed to add group product item sku and not dispalying notice message to configure child products");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the group product item sku is added and display a notice message to configure child products",
+					"To Validate the group product item sku is added and display a notice message to configure child products ",
+					"unable to add group product item sku and not displays a notice message to configure child products",
+					"Failed to add group product item sku and not dispalying notice message to configure child products");
+			Assert.fail();
+		}
+
+	}
+
+	public void AddProduct_By_SKU_Configure_child_Products(String dataSet) {
+		// TODO Auto-generated method stub
+		String[] product_quantity = data.get(dataSet).get("quantity").split(",");
+
+		try {
+			Common.clickElement("xpath", "//span[text()='Configure']");
+			int productcount = Common.findElements("xpath", "//td[@class='col-name']").size();
+
+			for (int i = 1; i <= productcount; i++) {
+				Sync.waitElementClickable("xpath", "(//input[contains(@name,'super_group')])[" + i + "]");
+				Common.textBoxInput("xpath", "(//input[contains(@name,'super_group')])[" + i + "]",
+						product_quantity[i - 1]);
+				Common.scrollIntoView("xpath", "(//input[contains(@name,'super_group')])[" + i + "]");
+
+			}
+			Common.scrollIntoView("xpath", "//button[@class='action-primary']");
+			Common.javascriptclickElement("xpath", "//button[@class='action-primary']");
+
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//table[@id='sku_errors_table']");
+			int noticemessage = Common.findElements("xpath", "//div[@class='message message-notice']").size();
+			System.out.println(noticemessage);
+			Common.assertionCheckwithReport(noticemessage <= 0,
+					"To Validate the selected group product child items added with sku,productname ,qty",
+					"should add the selected group product child items with sku,productname ,qty",
+					"Selected group product child items added successfuly with sku,productname ,qty",
+					"Failed to add group product child items with sku,productname ,qty");
+			Common.javascriptclickElement("xpath", "//button[@title='Add Products to Order']");
+			Common.getscreenShotPathforReport("Adding Products to Order");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the selected group product child items added with sku,productname ,qty",
+					"should add the selected group product child items with sku,productname ,qty",
+					"unable to add the selected group product child items with sku,productname ,qty",
+					"Failed to add group product child items with sku,productname ,qty");
+			Assert.fail();
+		}
+
+	}
+
+	
 }
 

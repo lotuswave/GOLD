@@ -152,5 +152,17 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" />
         </classes> 
     </test>
+     
+    <test name="Test_DGLD_Admin_ST_031_HF_Guest_CreateNewOrder_Grouped_Products" testid="DTG-2074" priority="P1" description="This testcase is to Validate New Order Creation in admin as Guest User with Grouped product for  Hydroflask">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_031_HF_Guest_CreateNewOrder_Grouped_Product" />
+        </classes> 
+    </test>
+     
+    <test name="Test_DGLD_Admin_ST_029_OXO_Guest_CreateNewOrder_Grouped_Product" testid="DTG-2535" priority="P1" description="This testcase is to Validate New Order Creation in admin as Guest User with Grouped product for OXO">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_029_OXO_Guest_CreateNewOrder_Grouped_Product" />
+        </classes> 
+    </test>
 	
 </suite>  
