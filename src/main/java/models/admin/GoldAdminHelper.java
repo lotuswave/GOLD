@@ -2605,11 +2605,27 @@ public class GoldAdminHelper {
 		}
 	}
 
-	public void clone_valueprop_banner() {
+	public void clone_valueprop_banner(String Dataset) {
 		// TODO Auto-generated method stub
+		String title=data.get(Dataset).get("pageTitle");
 		try {
 
 			Common.switchToFirstTab();
+			click_content();
+	        pages();
+	        Thread.sleep(3000);
+	        Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "//input[@name='title']", title );
+			Common.actionsKeyPress(Keys.ENTER);
+			String name=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
+			Common.assertionCheckwithReport(name.equals(title),
+					"Validating the title name should be match", "title name should be appear in the pages",
+					"Sucessfully title should be appear in the pages", "Unable to see the title in the page");
+			Common.clickElement("xpath", "//tr//button[@class='action-select']");
+			Common.clickElement("xpath", "//a[text()='Edit']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Contentpage();
 			Sync.waitElementPresent(30, "xpath", "//h2[@data-element='heading']");
 			Common.mouseOver("xpath", "//h2[@data-element='heading']");
@@ -2672,14 +2688,30 @@ public class GoldAdminHelper {
 
 	public void deletepage(String Dataset) {
 		// TODO Auto-generated method stub
+		String title = data.get(Dataset).get("pageTitle");
 		try {
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
 			Sync.waitPageLoad(40);
-			String title = data.get(Dataset).get("pageTitle");
+			click_content();
+	        pages();
+	        Thread.sleep(3000);
+	        Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "//input[@name='title']", title );
+			Common.actionsKeyPress(Keys.ENTER);
+			String name=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
+			Common.assertionCheckwithReport(name.equals(title),
+					"Validating the title name should be match", "title name should be appear in the pages",
+					"Sucessfully title should be appear in the pages", "Unable to see the title in the page");
+			Common.clickElement("xpath", "//tr//button[@class='action-select']");
+			Common.clickElement("xpath", "//a[text()='Edit']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			
 			Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
-			String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-			if (name.equals(title)) {
+			String name1 = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+			if (name1.equals(title)) {
 				Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
 				Common.clickElement("xpath", "//span[text()='Delete Page']");
 			} else {
@@ -8665,6 +8697,41 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity", Common.getscreenShot("failed to update the product quantity"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Flush_Magneto_cache(String Dataset) {
+		// TODO Auto-generated method stub
+		String Magento=data.get(Dataset).get("cache");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//a//span[text()='System']");
+			Common.clickElement("xpath", "//a//span[text()='System']");
+			Sync.waitElementPresent("xpath", "//a//span[text()='Cache Management']");
+			Common.clickElement("xpath", "//a//span[text()='Cache Management']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Cache Management"), "validating the page navigates to the cache management",
+			"It should Navigates to the Cache management page", "Sucessfully it is navigated to the cache managment page",
+					"failed to Navigate to the cache managment page");
+			Sync.waitElementPresent("xpath", "//button[@title='"+ Magento +"']");
+			Common.clickElement("xpath", "//button[@title='"+ Magento +"']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String Cachemessage=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			Common.assertionCheckwithReport(Cachemessage.equals("The Magento cache storage has been flushed."), "validating the cache management sucess message",
+					"cache message should be display after clicking on the flush magento", "Sucessfullythe message has been displayed after clicking on the flush magneto",
+							"failed to display the sucess message after clicking on the flush magneto");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog( "validating the cache management sucess message",
+			"cache message should be display after clicking on the flush magento", "unable to display the sucess message after clicking on the flush magneto", Common.getscreenShot("failed to display the sucess message after clicking on the flush magneto"));
 			Assert.fail();
 		}
 		
