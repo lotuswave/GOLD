@@ -7616,35 +7616,80 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 
 	}
 	
+
 	public void Select_Store(String dataSet) {
 		// TODO Auto-generated method stub
+
+		String Website = data.get(dataSet).get("Store");
+
+		try {
+			Common.findElement("xpath", "//label[text()='" + Website + "']");
+			Common.clickElement("xpath", "//label[text()='" + Website + "']");
+
+			Thread.sleep(3000);
+
+			Sync.waitPageLoad();
+
+			String page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+
+			Common.assertionCheckwithReport(page.contains(Website),
+					"To Validate the create new order page is displayed",
+					"should display the create new order page after clicking on the store",
+					"create new order page is displayed after a click on the store button",
+					"Failed to display create new order page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the create new order page page is displayed",
+					"should display the create new order page after clicking on the store",
+					"unable to display create new order page after a click on the store button",
+					"Failed to display create new order page");
+			Assert.fail();
+		}
+
+	}
+	
+	public void Select_ExistingUser_email(String dataSet) {
+		// TODO Auto-generated method stub
 		
-			String Website=data.get(dataSet).get("Store");
-			
+			String storeview=data.get(dataSet).get("Store");
+			String email = data.get(dataSet).get("Email");
 			try
 			{
-				Common.findElement("xpath", "//label[text()='" + Website + "']");
-        		Common.clickElement("xpath", "//label[text()='" + Website + "']");
-				
+				Common.textBoxInput("xpath", "//input[@name='email']", data.get(dataSet).get("Email"));
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Sync.waitElementVisible("xpath", "//td[text()='"+email+"']");
+				int numofemails = Common.findElements("xpath", "//td[text()='"+email+"']").size();
+				if(numofemails>1)
+				{					
+				Common.findElement("xpath", "//td[text()='"+storeview+"']");
+        		Common.clickElement("xpath", "//td[text()='"+storeview+"']");
+				}
+				else {
+					Assert.fail();
+				}
 				Thread.sleep(3000);
 			
 				Sync.waitPageLoad();
 			
-				String page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+				Sync.waitElementVisible("id", "order-header");
+				String page = Common.findElement("id", "order-header").getText();
 			
 				Common.assertionCheckwithReport(
-					page.contains(Website),
-						"To Validate the create new order page is displayed",
-						"should display the create new order page after clicking on the store",
-						"create new order page is displayed after a click on the store button", "Failed to display create new order page");
+					page.contains("Create New Order for qa Testing"),
+						"To validate the customer is on the select store page",
+						"Select store page should be displayed",
+						"Select store page is displayed", "Failed to display Select store page");
 			
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("To Validate the create new order page page is displayed",
-						"should display the create new order page after clicking on the store",
-						"unable to display create new order page after a click on the store button",
-						"Failed to display create new order page");
+				ExtenantReportUtils.addFailedLog("To validate the customer is on the select store page",
+						"Select store page should be displayed",
+						"Select store page is not displayed",
+						"Failed to display select store page");
 				Assert.fail();
 			}
 

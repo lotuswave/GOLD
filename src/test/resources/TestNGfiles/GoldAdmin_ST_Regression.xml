@@ -164,5 +164,17 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_029_OXO_Guest_CreateNewOrder_Grouped_Product" />
         </classes> 
     </test>
+    
+      <test name="Test_DGLD_Admin_ST_032_Register_HF_CreateNewOrder_GroupedProduct" testid="DTG-2551" priority="P1" description="This testcase is to Validate New Order Creation in admin as Existing User with Grouped product for  Hydroflask">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_032_Register_HF_CreateNewOrder_GroupedProduct" />
+        </classes> 
+    </test>
+     
+    <test name="Test_DGLD_Admin_ST_030_Register_OXO_CreateNewOrder_GroupedProduct" testid="DTG-2197" priority="P1" description="This testcase is to Validate New Order Creation in admin as existing User with Grouped product for OXO">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_030_Register_OXO_CreateNewOrder_GroupedProduct" />
+        </classes> 
+    </test>
 	
 </suite>  
