@@ -225,6 +225,7 @@ public class GoldHydroHelper {
 	public void minicart_Checkout() {
 		// TODO Auto-generated method stub
 		try {
+			Thread.sleep(2000);
 			click_minicart();
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -1028,9 +1029,10 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
 					"validating the  my Account page Navigation when user clicks on signin button",
@@ -1367,12 +1369,10 @@ try
 			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue)+Discountvalue;
-			System.out.println(Total);
 			Thread.sleep(4000);
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue)+Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 					"validating the order summary in the payment page",
 					"Order summary should be display in the payment page and all fields should display",
@@ -2477,8 +2477,8 @@ public void acceptPrivacy() {
 
 			Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//div//input[@id='current-password'])[2]");
-			Common.textBoxInput("xpath", "(//input[@id='current-password'])[2]", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//div//input[@id='current-password']");
+			Common.textBoxInput("xpath", "//input[@id='current-password']", data.get(dataSet).get("Password"));
 			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
 			String message = Common.findElement("id", "validation-classes").getCssValue("color");
@@ -2492,7 +2492,10 @@ public void acceptPrivacy() {
 					"Failed to enter data in current password and new password fields");
 			
 			Common.clickElement("xpath", "//button[@title='Save']");
-			String sucessmessage=Common.findElement("xpath", "//div[@data-ui-id='message-success']").getText();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String sucessmessage=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Thread.sleep(4000);
 			System.out.println(sucessmessage);
 			Common.assertionCheckwithReport(sucessmessage.contains("You saved the account"), "Validating the saved account information",
 					"Account information should be saved for the user", "Sucessfully account information has been saved ",
@@ -4577,7 +4580,9 @@ catch(Exception | Error e)
 				}
 			}
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
+			System.out.println(product);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.equals(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
@@ -4755,8 +4760,8 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//img[@alt='"+ Product +"']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-//				validating_BundleProducts();
-//				product_quantity(Dataset);
+				validating_BundleProducts();
+				product_quantity(Dataset);
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
 				Common.clickElement("xpath", "//span[text()='Add to Bag']");
 
