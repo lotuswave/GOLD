@@ -177,4 +177,16 @@
         </classes> 
     </test>
 	
+	  <test name="Test_DGLD_Admin_ST_027_OXO_Guest_CreateNewOrder_simple_Configurable_Bundle_products" testid="DTG-2522" priority="P1" description="This testcase is to Validate New Order Creation in admin as Existing (Register) user with simple , configurable and Bundleproduct for OXO">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_027_OXO_Guest_CreateNewOrder_simple_Configurable_Bundle_products" />
+        </classes> 
+    </test>
+     
+    <test name="Test_DGLD_Admin_ST_028_Register_OXO_CreateNewOrder_Simple_Configurable_Bundle_products" testid="DTG-2530" priority="P1" description="This testcase is to Validate New Order Creation in admin as New user with simple , configurable and Bundleproduct for OXO">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_028_Register_OXO_CreateNewOrder_Simple_Configurable_Bundle_products" />
+        </classes> 
+    </test>
+	
 </suite>  

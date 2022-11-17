@@ -7633,7 +7633,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 				Thread.sleep(2000);
 				Sync.waitElementVisible("xpath", "//td[text()='"+email+"']");
 				int numofemails = Common.findElements("xpath", "//td[text()='"+email+"']").size();
-				if(numofemails>1)
+				if(numofemails>0)
 				{					
 				Common.findElement("xpath", "//td[text()='"+storeview+"']");
         		Common.clickElement("xpath", "//td[text()='"+storeview+"']");
@@ -8937,6 +8937,138 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 			Assert.fail();
 		}
 	}
+
+
+	 public void Add_simpleproduct_SKU(String dataSet) {
+			// TODO Auto-generated method stub
+		 String simpleproduct=data.get(dataSet).get("SKUNumberoxosimple");
+		 System.out.println(simpleproduct);
+			try {
+				Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+				Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+				
+				Sync.waitElementPresent("xpath", "//td[@class='col-sku']//input[@name='sku']");
+				Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']",data.get(dataSet).get("SKUNumberoxosimple"));
+				
+				Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']",data.get(dataSet).get("oxoQuantity"));
+				
+					
+				Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
+				Common.clickElement("xpath", "//button[@title='Add to Order']");
+				
+				
+				String searchsimpleproduct=Common.findElement("xpath","(//div[@class='product-sku-block'])").getText();
+				System.out.println(searchsimpleproduct);
+				Common.assertionCheckwithReport(searchsimpleproduct.contains(simpleproduct), "To validate the products are added to order", "products should be added to order", "products is added to order", "failed to add products to order");
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the products are added to order", "products should be added to order", "products is added to order", "failed to add products to order");
+				Assert.fail();
+			}
+	 }
+				
+	 public void Add_configurableproduct_SKU(String dataSet) {
+			// TODO Auto-generated method stub
+		 String configurableproduct=data.get(dataSet).get("SKUNumberoxoconfigurable");
+		 System.out.println(configurableproduct);
+		 String skunum=data.get(dataSet).get("SKUnumb");
+			try {	
+				Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+				Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+				
+				Sync.waitElementPresent("xpath", "//td[@class='col-sku']//input[@name='sku']");
+				Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']",data.get(dataSet).get("SKUNumberoxoconfigurable"));
+				
+				Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']",data.get(dataSet).get("oxoQuantity"));
+				
+					
+				Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
+				Common.clickElement("xpath", "//button[@title='Add to Order']");
+		
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+			//	Common.findElement("xpath", "//div[@id='sku_errors']");
+				Common.scrollIntoView("xpath", "//div[@id='sku_errors']");
+				
+				Sync.waitElementPresent("xpath", "(//button[@title='Configure'])");
+				Common.clickElement("xpath", "(//button[@title='Configure'])");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				
+			//	Sync.waitElementPresent("xpath", "//div[@class='control admin__field-control  last']");
+				Common.clickElement("xpath", "//select[contains(@name,'super_attribute')]");
+				Thread.sleep(2000);
+				Common.dropdown("xpath", "//select[contains(@name,'super_attribute')]", Common.SelectBy.TEXT,
+						data.get(dataSet).get("Choosecolor"));
+				Common.clickElement("xpath", "//button[@data-role='action']");
+				
+			//	Common.clickElement("xpath", "//button[@data-role='action']");
+				Sync.waitElementPresent("xpath", "//span[text()='Add Products to Order']");
+				Common.clickElement("xpath", "//span[text()='Add Products to Order']");
+				Thread.sleep(4000);
+				
+				Common.actionsKeyPress(Keys.PAGE_UP);
+				Thread.sleep(3000);
+				Common.scrollIntoView("xpath", "(//div[@class='product-sku-block'])[2]");
+				String searchconfigproduct=Common.findElement("xpath","(//div[@class='product-sku-block'])[2]").getText();
+				System.out.println(searchconfigproduct);
+				Common.assertionCheckwithReport(searchconfigproduct.contains(skunum), "To validate the products are added to order", "products should be added to order", "products is added to order", "failed to add products to order");
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the products are added to order", "products should be added to order", "products is added to order", "failed to add products to order");
+				Assert.fail();
+			}
+	 }
+	 public void Add_bundleproduct_SKU(String dataSet) {
+			// TODO Auto-generated method stub
+		 String bundleproduct=data.get(dataSet).get("SKUNumberoxobundle");
+		 System.out.println(bundleproduct);
+			try {	
+				Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+				Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
+				
+				Sync.waitElementPresent("xpath", "//td[@class='col-sku']//input[@name='sku']");
+				Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']",data.get(dataSet).get("SKUNumberoxobundle"));
+				
+				Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']",data.get(dataSet).get("oxoQuantity"));
+				
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
+				Common.clickElement("xpath", "//button[@title='Add to Order']");
+				Thread.sleep(6000);
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+			//	Common.findElement("xpath", "//div[@id='sku_errors']");
+				Common.scrollIntoView("xpath", "//div[@id='sku_errors']");
+				Sync.waitElementPresent("xpath", "//div[@id='sku_errors']");
+				
+				Common.findElement("xpath", "(//button[@title='Configure'])[2]");
+				Common.clickElement("xpath", "(//button[@title='Configure'])[2]");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				
+				Common.clickElement("xpath", "//button[@data-role='action']");
+				
+				Sync.waitElementPresent("xpath", "//span[text()='Add Products to Order']");
+				Common.clickElement("xpath", "//span[text()='Add Products to Order']");
+				Thread.sleep(4000);
+				
+				Common.actionsKeyPress(Keys.PAGE_UP);
+				Thread.sleep(3000);
+				Common.scrollIntoView("xpath", "(//div[@class='product-sku-block'])[3]");
+				String searchbundleproduct=Common.findElement("xpath","(//div[@class='product-sku-block'])[3]").getText();
+				System.out.println(searchbundleproduct);
+				Common.assertionCheckwithReport(searchbundleproduct.contains(bundleproduct), "To validate the products are added to order", "products should be added to order", "products is added to order", "failed to add products to order");
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the products are added to order", "products should be added to order", "products is added to order", "failed to add products to order");
+				Assert.fail();
+			}
+	 }
+
+
+	
 
 	
 }
