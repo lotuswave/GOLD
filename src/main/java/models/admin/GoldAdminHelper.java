@@ -2605,27 +2605,13 @@ public class GoldAdminHelper {
 		}
 	}
 
-	public void clone_valueprop_banner(String Dataset) {
+	public void clone_valueprop_banner() {
 		// TODO Auto-generated method stub
-		String title=data.get(Dataset).get("pageTitle");
+
 		try {
 
 			Common.switchToFirstTab();
-			click_content();
-	        pages();
-	        Thread.sleep(3000);
-	        Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.textBoxInput("xpath", "//input[@name='title']", title );
-			Common.actionsKeyPress(Keys.ENTER);
-			String name=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
-			Common.assertionCheckwithReport(name.equals(title),
-					"Validating the title name should be match", "title name should be appear in the pages",
-					"Sucessfully title should be appear in the pages", "Unable to see the title in the page");
-			Common.clickElement("xpath", "//tr//button[@class='action-select']");
-			Common.clickElement("xpath", "//a[text()='Edit']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Search_previous_page_Magento("promocontent");
 			Contentpage();
 			Sync.waitElementPresent(30, "xpath", "//h2[@data-element='heading']");
 			Common.mouseOver("xpath", "//h2[@data-element='heading']");
@@ -2692,22 +2678,7 @@ public class GoldAdminHelper {
 		try {
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
-			Sync.waitPageLoad(40);
-			click_content();
-	        pages();
-	        Thread.sleep(3000);
-	        Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.textBoxInput("xpath", "//input[@name='title']", title );
-			Common.actionsKeyPress(Keys.ENTER);
-			String name=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
-			Common.assertionCheckwithReport(name.equals(title),
-					"Validating the title name should be match", "title name should be appear in the pages",
-					"Sucessfully title should be appear in the pages", "Unable to see the title in the page");
-			Common.clickElement("xpath", "//tr//button[@class='action-select']");
-			Common.clickElement("xpath", "//a[text()='Edit']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Search_previous_page_Magento("promocontent");
 			
 			Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
 			String name1 = Common.findElement("xpath", "//h1[@class='page-title']").getText();
@@ -8928,6 +8899,43 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 			Assert.fail();
 		}
 
+	}
+
+	public void Search_previous_page_Magento(String Dataset) {
+		// TODO Auto-generated method stub
+		String title=data.get(Dataset).get("pageTitle");
+		try
+		{
+			click_content();
+	        pages();
+	        Thread.sleep(3000);
+	        Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.textBoxInput("xpath", "//input[@name='title']", title );
+			Common.actionsKeyPress(Keys.ENTER);
+			String name=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
+			Common.assertionCheckwithReport(name.equals(title),
+					"Validating the title name should be match", "title name should be appear in the pages",
+					"Sucessfully title should be appear in the pages", "Unable to see the title in the page");
+			Common.clickElement("xpath", "//tr//button[@class='action-select']");
+			Common.clickElement("xpath", "//a[text()='Edit']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			String name1=Common.findElement("xpath", "//h1[@class='page-title']").getText();
+			Common.assertionCheckwithReport(name1.equals(title),
+					"Validating the page navigation", "title name should be appear in the pages",
+					"Sucessfully title  appear in the pages", "Unable to see the title in the page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"Validating the page navigation", "title name should be appear in the pages",
+					"Unable to see the title in the page",
+					"Failed to see the title in the page");
+			Assert.fail();
+		}
 	}
 
 	

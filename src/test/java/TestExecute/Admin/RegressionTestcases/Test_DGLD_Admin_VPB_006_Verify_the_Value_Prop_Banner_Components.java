@@ -51,11 +51,12 @@ public class Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components {
            Admin.verify_Padding_fronytend("Valuepropbanner");
            Admin.verify_Padding_fronytend("valuepropcard2");
            Admin.verify_Padding_fronytend("valuepropcard3");
-           Admin.clone_valueprop_banner("promocontent");  
+           Admin.clone_valueprop_banner();  
            Admin.Flush_Magneto_cache("FlushMagento");
            Admin.vlaueprop_clone_frontend("promocontent"); 
            Admin.deletepage("promocontent");
            Admin.Clearfilter();
+
            
         }
         catch (Exception e) {
