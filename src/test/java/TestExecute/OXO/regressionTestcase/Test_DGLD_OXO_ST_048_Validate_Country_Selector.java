@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.OXO.GoldOxoHelper;
+import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_048_Validate_Country_Selector {
@@ -30,7 +31,7 @@ public class Test_DGLD_OXO_ST_048_Validate_Country_Selector {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

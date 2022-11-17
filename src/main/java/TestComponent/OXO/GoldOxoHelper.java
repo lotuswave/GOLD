@@ -437,10 +437,11 @@ public GoldOxoHelper(String datafile,String sheetname) {
 	
 	public void click_minicart() {
 		try {
-			Thread.sleep(8000);
-			Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
+			Thread.sleep(9000);
+//			Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
+//			Common.javascriptclickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
@@ -1915,6 +1916,7 @@ try
     					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
                 Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
                 Sync.waitPageLoad();
+                Thread.sleep(3000);
                 String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"), "validating the  product add to the Whishlist",
@@ -2095,7 +2097,7 @@ try
 	        Common.dropdown("xpath", "//select[@name='address_type_or_id']", Common.SelectBy.VALUE, shipping);
 	        Common.clickElement("id", "submit.save");
 	        Sync.waitPageLoad();
-	        Thread.sleep(4000);
+	        Thread.sleep(5000);
 	        String message=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 	        Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ", "After clicking on save button It should be able to navigate to the gift registry page ",
@@ -5098,8 +5100,10 @@ public void click_FeedingDrinking() {
 		
 		try {
 			
-			Common.clickElement("xpath", "//a[text()='"+category+"']");
+			
 			String text = Common.findElement("xpath", "//a[text()='"+category+"']//span").getText();
+			System.out.println(text);
+			Common.clickElement("xpath", "//a[text()='"+category+"']");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue=Integer.toString(textValue);
 			Thread.sleep(6000);
@@ -5672,6 +5676,98 @@ public void click_FeedingDrinking() {
 		}
 		
 	}
+	
+	public void Account_page_Validation(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+		Common.clickElement("xpath", "//a[text()='My Account']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		
+			String Accountlinks=data.get(Dataset).get("Account Links");
+			String[] Account=Accountlinks.split(",");
+			int i=0;
+			try
+	    {
+				for(i=0;i<Account.length;i++){
+					Sync.waitElementPresent("xpath", "//div[@class='content account-nav-content']//a[text()='"+Account[i]+"']");
+					Common.clickElement("xpath", "//div[@class='content account-nav-content']//a[text()='"+Account[i]+"']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+					Common.assertionCheckwithReport(title.contains(Account[i]), "verifying Account page links "+Account[i],"user should navigate to the "+Account[i]+" page", "user successfully Navigated to the "+Account[i],"Failed click on the "+Account[i]);
+			
+		}
+	    }
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the account page links " +Account[i],"user should Navigate to the "+Account[i]+" page","User unable to navigate to the "+Account[i],Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+		    Assert.fail();
+		}
+		
+	}
+	
+	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
+		// TODO Auto-generated method stub
+		 String links=data.get(Dataset).get("Links");
+		 int j=0;
+		 
+		 String[] strArray = links.split("\\r?\\n");
+	    for (int i=0; i<strArray.length; i++) {
+	       System.out.println(strArray[i]);
+	       
+	       if (Common.getCurrentURL().contains("preprod")) {
+	    	   
+	    	   Common.oppenURL((strArray[i]));
+	    	   int  responcecode=getpageresponce(Common.getCurrentURL());
+		       System.out.println(responcecode);
+		   
+		    if(responcecode==200) {
+		    	ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ", "successfully page configured with products", Common.getscreenShotPathforReport("link"+i));
+		    }
+		    else {
+		    	
+		    	 j++;
+		    	 
+		    	 ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+		    
+		    }
+	   
+	    	   
+	       }
+	       else if(Common.getCurrentURL().contains("https://mcloud-na.oxo.com/")) {
+	    	   
+	    	     Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
+	    	   
+	    	    int  responcecode=getpageresponce(Common.getCurrentURL());
+	    	       System.out.println(responcecode);
+	    	   
+	    	    if(responcecode==200) {
+	    	    	ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ", "successfully page configured with products", Common.getscreenShotPathforReport("link"+i));
+	    	    }
+	    	    else {
+	    	    	
+	    	    	 j++;
+	    	    	 
+	    	    	 ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+	    	    
+	    	    }
+	       }
+	    }
+	    
+		  if(j>1) {
+			  Assert.fail();
+		  }  
+	  
+	  
+		
+	}
+	
+	
+	
 	
 	
 }
