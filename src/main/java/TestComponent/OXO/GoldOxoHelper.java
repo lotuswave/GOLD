@@ -182,8 +182,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			product_quantity(Dataset);
 			Sync.waitPageLoad();
 //			click_UGC();
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-           Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+           Common.clickElement("xpath", "//span[text()='Add to Cart']");
 		
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -239,7 +239,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			
 			click_UGC();
 			product_quantity(Dataset);
-			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
@@ -290,8 +290,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			product_Qty_Grouped(Dataset);
 			Sync.waitPageLoad();
 //			click_UGC();
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-           Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+           Common.clickElement("xpath", "//span[text()='Add to Cart']");
 		
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -491,9 +491,12 @@ public GoldOxoHelper(String datafile,String sheetname) {
 				Thread.sleep(3000);
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-			Thread.sleep(2000);
-			Common.textBoxInputClear("name", "postcode");
-			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Thread.sleep(3000);
+//			Common.textBoxInputClear("name", "postcode");
+//			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]", data.get(dataSet).get("postcode"));
+			
 			Thread.sleep(5000);
 			
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
@@ -1930,7 +1933,7 @@ try
                 {
                 	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
         			Common.mouseOver("xpath", "//img[@alt='" +product+ "']");
-                	Common.clickElement("xpath", "//span[text()='Add to Bag']");
+                	Common.clickElement("xpath", "//span[text()='Add to Cart']");
                 	Sync.waitPageLoad();
         			Thread.sleep(4000);
         			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -1972,7 +1975,7 @@ try
 			        Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
 					Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
 					Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Bag']");
+					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Cart']");
 					Thread.sleep(6000);
 					element.get(0).click();
 					String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -3628,8 +3631,8 @@ public void addtocart_PLP(String Dataset) {
 		Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 		
 //		Common.clickElement("xpath", "//img[@alt='" + products + "']");
-		Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-       Common.clickElement("xpath", "//span[text()='Add to Bag']");
+		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+       Common.clickElement("xpath", "//span[text()='Add to Cart']");
 	
 		Sync.waitPageLoad();
 		Thread.sleep(5000);
@@ -4822,7 +4825,7 @@ public void click_FeedingDrinking() {
 			Common.clickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE,
 					productquantity);
-			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
