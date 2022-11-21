@@ -284,8 +284,8 @@ public void acceptPrivacy() {
 				Thread.sleep(6000);
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-				Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-				Common.clickElement("xpath", "//span[text()='Add to Bag']");
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
 
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -336,6 +336,127 @@ public void acceptPrivacy() {
 			}
 
 		}
+	 
+	 
+	 public void Addnew_Address(String dataSet) {
+		 String address=data.get(dataSet).get("Street");
+			// TODO Auto-generated method stub
+			String expectedResult = "shipping address is entering in the fields";
+		
+			int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
+			if (size > 0) {
+				try {
+					Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+					Common.clickElementStale("xpath", "//span[contains(text(),'Add New Address')]");
+					
+		         /*   Common.textBoxInput("xpath", "//form[@id='form-validate']//input[@name='firstname']",
+		                    data.get(dataSet).get("FirstName"));
+		            int size1 = Common.findElements("id", "customer-email").size();
+		            Common.assertionCheckwithReport(size1 > 0, "validating the email address field", expectedResult,
+		                    "Filled Email address", "unable to fill the email address");
+		            Common.textBoxInput("xpath", "//form[@id='form-validate']//input[@name='lastname']",
+//		                    data.get(dataSet).get("LastName"));*/
+		            Common.clickElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']");
+		            Common.textBoxInput("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']",
+		                    address);
+		            Common.actionsKeyPress(Keys.BACK_SPACE);
+		            Common.actionsKeyPress(Keys.BACK_SPACE);
+		            Thread.sleep(5000);
+		            Common.findElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']").sendKeys("Rd");
+		            Thread.sleep(5000);
+		            Sync.waitElementPresent(50, "xpath", "(//div[@class='pcaitem'])[1]");
+		            String newadd=Common.findElement("xpath", "(//div[@class='pcaitem'])[1]").getAttribute("title");
+		            System.out.println(newadd);
+		            Common.clickElement("xpath","//form[@id='co-shipping-form']//input[@name='city']");
+		            Common.clickElement("xpath","//form[@id='co-shipping-form']//input[@name='street[0]']");
+		            Thread.sleep(5000);
+		            List<WebElement> listofaddresss=Common.findElements("xpath", "(//div[@class='pcaitem'])[1]");
+		            ArrayList<WebElement> listaddress=new ArrayList<WebElement>();
+		            for(WebElement addresscheck:listofaddresss)
+		            {
+		                
+		             listaddress.add(addresscheck);
+		             String add=addresscheck.getAttribute("title");
+		             System.out.println(add);
+		             System.out.println(address);
+		             Thread.sleep(4000);
+		             Common.assertionCheckwithReport(add.equals(address) ,
+		                        "validating the dropdown in the shipping address page ",
+		                        "User should able to see the Locate dropdown for respective address", "Successfully Locate dropdown has been displayed in shipping address page",
+		                        "Failed to display dropdown in the shipping address page");
+		             
+		            }
+		        
+		            String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+		            Sync.waitPageLoad();
+		            Thread.sleep(5000);
+		            Common.findElement("xpath", "//input[@name='city']").clear();
+		            Common.textBoxInput("xpath", "//input[@name='city']",
+		                    data.get(dataSet).get("City"));
+		            System.out.println(data.get(dataSet).get("City"));
+
+
+
+		           Common.actionsKeyPress(Keys.PAGE_DOWN);
+		            Thread.sleep(3000);
+		            try {
+		                Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		            } catch (ElementClickInterceptedException e) {
+		                Thread.sleep(3000);
+		                Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		            }
+		            Thread.sleep(4000);
+		            Common.findElement("name", "postcode").clear();
+		            Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+		            Thread.sleep(5000);
+
+
+
+		           Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+		           Thread.sleep(3000);
+					
+					
+					Common.clickElement("xpath", "(//span[@class='a-btn__label'])[3]");
+
+
+		           Sync.waitPageLoad();
+		        }
+
+
+
+		       catch (Exception | Error e) {
+		            e.printStackTrace();
+		            ExtenantReportUtils.addFailedLog("validating shipping address",
+		                    "shipping address is filled in to the fields", "user faield to fill the shipping address",
+		                    Common.getscreenShotPathforReport("shipingaddressfaield"));
+		            Assert.fail();
+
+		       }
+				try {
+		           Thread.sleep(4000);
+					int sizes = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
+					if (sizes > 0) {
+						Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
+						Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
+					}
+					Thread.sleep(4000);
+					expectedResult = "shipping address is filled in to the fields";
+					Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+					
+
+				}
+
+				catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
+							"failed to add a addres in the filled",
+							Common.getscreenShotPathforReport("failed to add a address"));
+
+					Assert.fail();
+				}
+			}
+		}
+	 
 	 
 	 public void click_minicart() {
 			try {
