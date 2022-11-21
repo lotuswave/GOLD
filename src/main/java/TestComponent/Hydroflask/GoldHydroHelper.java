@@ -183,8 +183,8 @@ public class GoldHydroHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			product_quantity(Dataset);
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -393,8 +393,8 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 		}
 		Thread.sleep(2000);
-		Common.textBoxInputClear("name", "postcode");
-		Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+		Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
+		Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]", data.get(dataSet).get("postcode"));
 		Thread.sleep(5000);
 
 		Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
@@ -680,14 +680,20 @@ public void selectshippingaddress(String Dataset) {
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//strong").size() > 0) {
+				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					System.out.println(order);
+				}
+				else
+				{
 					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
 					System.out.println(order);
 				}
 
 				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
 					 Common.getText("xpath", "//div[@class='checkout-success']//span");
-					System.out.println(order);
+					 System.out.println(order);
+					
 				}
 
 			} catch (Exception | Error e) {
@@ -1087,7 +1093,7 @@ public void selectshippingaddress(String Dataset) {
 			PDP_cofigurable_product();
 			product_quantity(Dataset);
 			click_UGC();
-			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
@@ -2036,7 +2042,7 @@ public void acceptPrivacy() {
                 {
                 	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
         			Common.mouseOver("xpath", "//img[@alt='" +product+ "']");
-                	Common.clickElement("xpath", "//span[text()='Add to Bag']");
+                	Common.clickElement("xpath", "//button[@title='Add to Cart']");
                 	Sync.waitPageLoad();
         			Thread.sleep(4000);
         			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -2079,7 +2085,7 @@ public void acceptPrivacy() {
 			        Sync.waitElementPresent(30, "xpath", "(//img[contains(@class,'m-produc')])[1]");
 					Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
 					Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Bag']");
+					List<WebElement> element = Common.findElements("xpath", "//button[@title='Add to Cart']");
 					Thread.sleep(6000);
 					element.get(0).click();
 					String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -4632,8 +4638,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -4762,8 +4768,8 @@ catch(Exception | Error e)
 				Thread.sleep(4000);
 				validating_BundleProducts();
 				product_quantity(Dataset);
-				Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-				Common.clickElement("xpath", "//span[text()='Add to Bag']");
+				Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
+				Common.clickElement("xpath", "//button[@title='Add to Cart']");
 
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -5249,7 +5255,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE,
 					productquantity);
-			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
@@ -6233,8 +6239,8 @@ catch(Exception | Error e)
 					"It should navigates to PDP page after clicking on the product", "Sucessfully It is navigated to the Pdp page ",
 					"failed to Navigate to the PDP page after clicking on the product");
 			Products_Grouped_Bundle("1");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -7022,8 +7028,8 @@ catch(Exception | Error e)
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -7063,7 +7069,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + PLPcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + PLPcolor + "']");
-			Common.clickElement("xpath", "//button[@title='Add to Bag']");
+			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
@@ -7309,6 +7315,30 @@ catch(Exception | Error e)
 		    Assert.fail();
 		}
 		
+	}
+	public void employee_discount() {
+		// TODO Auto-generated method stub
+		try
+		{
+		
+			String originalprice=Common.getText("xpath", "//span[contains(@id,'old-price')]//span").replace("$", "");
+			Float originalvalue = Float.parseFloat(originalprice);
+			String Newprice=Common.getText("xpath", "//span[contains(@id,'product')]//span").replace("$", "");
+			Float pricevalue = Float.parseFloat(Newprice);
+			Thread.sleep(4000);
+			float discount=originalvalue-(originalvalue*65/100);
+			String discountvalue=String.valueOf(discount).replace("$", "");
+			Float value = Float.parseFloat(discountvalue);
+			Common.assertionCheckwithReport(discountvalue.contains(Newprice), "verifying the discount for the employee discount ","user should able to see the discount for the employee", "user successfully able to apply the discount","Failed to apply the discount for the employee");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the discount for the employee discount ","user should able to see the discount for the employee","Unable to apply the discount for the employee",Common.getscreenShotPathforReport("Failed to apply the discount for the employee"));
+		    Assert.fail();
+		}
 	}
 	}
 		
