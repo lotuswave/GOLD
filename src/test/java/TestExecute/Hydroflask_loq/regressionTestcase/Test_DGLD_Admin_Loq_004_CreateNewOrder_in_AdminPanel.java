@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
 
@@ -43,7 +44,7 @@ public class Test_DGLD_Admin_Loq_004_CreateNewOrder_in_AdminPanel {
     @AfterTest
     public void clearBrowser()
     {
-  //    Common.closeAll();
+    	Common.closeAll();
 
     }
 
