@@ -7677,7 +7677,7 @@ public class GoldAdminHelper {
 			Sync.waitElementVisible("id", "order-header");
 			String page = Common.findElement("id", "order-header").getText();
 
-			Common.assertionCheckwithReport(page.contains("Create New Order for qa Testing"),
+			Common.assertionCheckwithReport(page.contains("Create New Order for QA Tester"),
 					"To validate the customer is on the select store page", "Select store page should be displayed",
 					"Select store page is displayed", "Failed to display Select store page");
 

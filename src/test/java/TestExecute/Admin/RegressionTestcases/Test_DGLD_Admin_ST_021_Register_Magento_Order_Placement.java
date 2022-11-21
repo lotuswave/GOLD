@@ -18,16 +18,16 @@ public class Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement {
     try {
     	
     	
-    	
-    	Admin.Admin_signin("AccountDetails");
-    	Admin.click_Sales();
-    	Admin.Click_Orders_Salesmenu();
-    	Admin.Click_CreatNewOrders(); 
-    	Admin.Enter_email("EmailName");
-    	Admin.Select_astore();
-   Admin.Add_product_SKU("EmailName");
-    	Admin.shippingaddress("EmailName");
-    	Admin.Default_Payment_method("EmailName");
+    	  Admin.Admin_signin("AccountDetails");
+          Admin.click_Sales();
+          Admin.Click_Orders_Salesmenu();
+          Admin.Click_CreatNewOrders();
+          Admin.Select_ExistingUser_email("HFWebsite");
+          
+          Admin.Select_Store("HFWebsite");
+     Admin.Add_product_SKU("Details");
+          Admin.shippingaddress("Details");
+          Admin.Default_Payment_method("Details");
     	
            
         }
