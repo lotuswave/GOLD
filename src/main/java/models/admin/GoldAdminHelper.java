@@ -7171,6 +7171,7 @@ public class GoldAdminHelper {
 			Assert.fail();
 		}
 
+	
 	}
 
 	public void Add_product_SKU(String dataSet) {
@@ -9278,4 +9279,91 @@ public class GoldAdminHelper {
 		
 	}
 
-}
+	
+		public void validate_Guestuser_shippingaddress(String dataSet) {
+			// TODO Auto-generated method stub
+
+		String address=data.get(dataSet).get("streetaddress");
+			try {
+				Thread.sleep(2000);
+			
+				Sync.waitElementPresent("xpath", "//input[@name='order[account][email]']");
+				Common.textBoxInput("xpath", "//input[@name='order[account][email]']", data.get(dataSet).get("Email"));
+				Thread.sleep(4000);
+					
+				Common.textBoxInputClear("xpath", "//input[@id='order-billing_address_firstname']");
+				Common.textBoxInput("xpath", "//input[@id='order-billing_address_firstname']",data.get(dataSet).get("FirstName"));
+				
+				Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_lastname']");
+				Common.textBoxInput("xpath", "//input[@id='order-billing_address_lastname']",data.get(dataSet).get("LastName"));
+				
+				Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_street0']");
+				Common.textBoxInput("xpath", "//input[@id='order-billing_address_street0']",address);
+				Thread.sleep(4000);
+				Common.actionsKeyPress(Keys.BACK_SPACE);
+				Common.actionsKeyPress(Keys.BACK_SPACE);
+				Thread.sleep(5000);
+				Common.findElement("xpath","//input[@id='order-billing_address_street0']").sendKeys("Rd");
+				Thread.sleep(5000);
+				
+				List<WebElement> listofaddresss=Common.findElements("xpath", "(//div[@class='pcaitem'])[1]");
+				ArrayList<WebElement> listaddress=new ArrayList<WebElement>();
+				for(WebElement addresscheck:listofaddresss)
+				{
+					
+			     listaddress.add(addresscheck);
+			     Thread.sleep(4000);
+				 String add=addresscheck.getAttribute("title"); 			 
+				 System.out.println(add);
+				 System.out.println(address);
+				 Thread.sleep(4000);
+				 Common.assertionCheckwithReport(add.equals(address) ,
+							"validating the dropdown in the shipping address page ",
+							"User should able to see the Locate dropdown for respective address", "Successfully Locate dropdown has been displayed in shipping address page",
+				      		"Failed to display dropdown in the shipping address page");
+
+				 Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_country_id']");
+					Common.dropdown("xpath", "//select[@id='order-billing_address_country_id']",Common.SelectBy.TEXT,data.get(dataSet).get("Country"));
+					
+					Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_region_id']");
+					Common.dropdown("xpath", "//select[@id='order-billing_address_region_id']",Common.SelectBy.TEXT,data.get(dataSet).get("State"));
+					
+					Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_city']");
+					Common.textBoxInput("xpath", "//input[@id='order-billing_address_city']",data.get(dataSet).get("City"));
+					
+					Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_postcode']");
+					Common.textBoxInput("xpath", "//input[@id='order-billing_address_postcode']",data.get(dataSet).get("Postcode"));
+					
+					Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_telephone']");
+					Common.textBoxInput("xpath", "//input[@id='order-billing_address_telephone']",data.get(dataSet).get("Phonenumber"));
+					 Thread.sleep(3000);
+						Sync.waitElementPresent("xpath", "//div[@id='order-shipping-method-summary']/a");
+						
+						Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and rates')]");
+									Thread.sleep(2000);
+								
+									Thread.sleep(8000);
+									Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
+								
+									Sync.waitPageLoad();
+								//	Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+									String text=Common.findElement("xpath", "//span[text()='Click to change shipping method']").getText();
+						 			System.out.println(text);
+						 			Common.assertionCheckwithReport(text.contains("Click to change shipping method"),
+						 					"To Validate the displayed click to change shipping method",
+						 					"should display the click to change shipping method after clicking on the standard shipping",
+						 					"click to change shipping method is displayed after a click on the standard shipping", "Failed to display click to change shipping method");
+				 
+				}
+			} catch (Exception | Error e) {
+	 			e.printStackTrace();
+	 			ExtenantReportUtils.addFailedLog("To Validate the displayed click to change shipping method",
+	 					"should display the click to change shipping method after clicking on the standard shipping",
+	 					"unable to display click to change shipping method after a click on the standard shipping",
+	 					"Failed to display click to change shipping method");
+	 			Assert.fail();		
+		}
+	}
+
+	}
+
