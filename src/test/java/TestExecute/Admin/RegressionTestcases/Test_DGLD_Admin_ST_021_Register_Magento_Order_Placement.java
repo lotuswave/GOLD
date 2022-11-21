@@ -42,7 +42,7 @@ public class Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement {
     @AfterTest
     public void clearBrowser()
     {
-  //    Common.closeAll();
+   Common.closeAll();
 
     }
 

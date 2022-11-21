@@ -145,7 +145,17 @@
         </classes>
     </test>
     
-   
+    <test name="Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with Priceoverride highvalue">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" />
+        </classes>
+    </test>
+    
+     <test name="Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_LowPriceOverride" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with LowPriceOverride">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_LowPriceOverride" />
+        </classes>
+    </test>
     
     <test name="Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" testid="DTG-1923" priority="P1" description="This testcase is to Validate Promotion_Catalog_Rules">
         <classes>
@@ -188,5 +198,7 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_028_Register_OXO_CreateNewOrder_Simple_Configurable_Bundle_products" />
         </classes> 
     </test>
+    
+    
 	
 </suite>  
