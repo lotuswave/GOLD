@@ -9100,50 +9100,47 @@ public class GoldAdminHelper {
 		}
 	}
 
-	public String update_customprice_withhighprice(String dataSet) throws Exception {
-		String updatedprice = "";
+	public String update_customprice(String dataSet) throws Exception {
+		String updatedhighprice = "";
 		try {
 
 			Thread.sleep(3000);
 
-			Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[1]");
-			Common.clickElement("xpath", "(//span[text()='Custom Price*'])[1]");
-			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@class='input-text item-price admin__control-text'])[1]",
-					data.get(dataSet).get("highprice"));
+			Sync.waitElementPresent("xpath", "//span[text()='Custom Price*']");
+			
+			int customprices = Common.findElements("xpath", "//span[text()='Custom Price*']").size();
+			
+		
+			for(int i=1;i<=customprices;i++) {
+				String newhighprice[] = data.get(dataSet).get("highprice").split(",");
+				Float New_Price = Float.valueOf(newhighprice[i-1]);	
+			System.out.println(New_Price);
+			Common.clickElement("xpath", "(//input[contains(@id,'use_custom_price')])["+i+"]");
+			
+			Common.textBoxInput("xpath", "(//input[contains(@name,'custom_price')])["+i+"]",
+					newhighprice[i-1]);	
+			
+			Common.clickElement("xpath", "//span[text()='Update Items and Quantities']");
+			Thread.sleep(5000);
+			Sync.waitElementVisible("xpath", "(//td[@class='col-price']/span)["+i+"]");
+			
+			updatedhighprice = Common.findElement("xpath", "(//td[@class='col-price']/span)["+i+"]").getText().replace("$", "");
+			Float updated_highprice = Float.valueOf(updatedhighprice);
+			System.out.println(updated_highprice);
 			Thread.sleep(3000);
-			/*
-			 * Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[2]");
-			 * Common.clickElement("xpath", "(//span[text()='Custom Price*'])[2]");
-			 * Thread.sleep(3000); Common.textBoxInput("xpath",
-			 * "(//input[@class='input-text item-price admin__control-text'])[2]",
-			 * data.get(dataSet).get("highprice")); Thread.sleep(3000);
-			 * Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[3]");
-			 * Common.clickElement("xpath", "(//span[text()='Custom Price*'])[3]");
-			 * Thread.sleep(3000); Common.textBoxInput("xpath",
-			 * "(//input[@class='input-text item-price admin__control-text'])[3]",
-			 * data.get(dataSet).get("highprice"));
-			 */
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "//span[contains(text(),'Update Items and Quantities')]");
-			Thread.sleep(3000);
-			updatedprice = Common.getText("xpath", "(//span[contains(text(),'$50.99')])[1]").replace("$", "");
-			Float updated_price = Float.valueOf(updatedprice);
-			System.out.println(updated_price);
-			Thread.sleep(3000);
-
-			Common.assertionCheckwithReport(updatedprice.contains("50.99"), "To Validate the custom price override with High Value",
-					"should able to update the Custom price ", "Successfully price updated",
-					"passed to update custom price");
-
+			Common.assertionCheckwithReport(updated_highprice.equals(New_Price), "To Validate the custom price override with High Value",
+					"The original price should be Override to higher value", "The original price is Overrided to higher value",
+					"Failed to override the custom price");
+	}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the increasing the price of product",
-					"sku price should be increased", "increasing the sku price", "failed to increase the price");
+			ExtenantReportUtils.addFailedLog("To Validate the custom price override with High Value",
+					"The original price should be Override to higher value", "The original price is not Overrided to higher value",
+					"Failed to override the custom price");
 			Assert.fail();
 
 		}
-		return updatedprice;
+		return updatedhighprice;
 
 	}
 
@@ -9566,5 +9563,54 @@ public class GoldAdminHelper {
 			}
 
 		}
+		
+		
+		public String update_customprice_withhighprice(String dataSet) throws Exception {
+			String updatedprice = "";
+			try {
+
+				Thread.sleep(3000);
+
+				Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[1]");
+				Common.clickElement("xpath", "(//span[text()='Custom Price*'])[1]");
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "(//input[@class='input-text item-price admin__control-text'])[1]",
+						data.get(dataSet).get("highprice"));
+				Thread.sleep(3000);
+				/*
+				 * Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[2]");
+				 * Common.clickElement("xpath", "(//span[text()='Custom Price*'])[2]");
+				 * Thread.sleep(3000); Common.textBoxInput("xpath",
+				 * "(//input[@class='input-text item-price admin__control-text'])[2]",
+				 * data.get(dataSet).get("highprice")); Thread.sleep(3000);
+				 * Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[3]");
+				 * Common.clickElement("xpath", "(//span[text()='Custom Price*'])[3]");
+				 * Thread.sleep(3000); Common.textBoxInput("xpath",
+				 * "(//input[@class='input-text item-price admin__control-text'])[3]",
+				 * data.get(dataSet).get("highprice"));
+				 */
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//span[contains(text(),'Update Items and Quantities')]");
+				Thread.sleep(3000);
+				updatedprice = Common.getText("xpath", "(//span[contains(text(),'$50.99')])[1]").replace("$", "");
+				Float updated_price = Float.valueOf(updatedprice);
+				System.out.println(updated_price);
+				Thread.sleep(3000);
+
+				Common.assertionCheckwithReport(updatedprice.contains("50.99"), "To Validate the custom price override with High Value",
+						"should able to update the Custom price ", "Successfully price updated",
+						"passed to update custom price");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the increasing the price of product",
+						"sku price should be increased", "increasing the sku price", "failed to increase the price");
+				Assert.fail();
+
+			}
+			return updatedprice;
+
+		}
+		
 }
 
