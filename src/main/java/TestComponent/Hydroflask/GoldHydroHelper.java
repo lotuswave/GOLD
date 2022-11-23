@@ -1093,7 +1093,6 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
-			PDP_cofigurable_product();
 			product_quantity(Dataset);
 			click_UGC();
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
@@ -1413,7 +1412,6 @@ try
        public void search_product(String Dataset) {
    		// TODO Auto-generated method stub
    		String product = data.get(Dataset).get("Products");
-   		String prod=data.get(Dataset).get("prod product");
    		System.out.println(product);
    		try {
    			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
@@ -1422,20 +1420,13 @@ try
    			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
    					"User should able to click on the search button", "Search expands to the full page",
    					"Sucessfully search bar should be expand");
-   			if(Common.getCurrentURL().contains("preprod"))
-   			{
    			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
-   			}
-   			else
-   			{
-   				Common.textBoxInput("xpath", "//input[@id='search']",prod );
-   			}
    			Common.actionsKeyPress(Keys.ENTER);
    			Sync.waitPageLoad();
    			Thread.sleep(4000);
    			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
    			System.out.println(productsearch);
-   			Common.assertionCheckwithReport(productsearch.contains(product) ||productsearch.contains(prod) , "validating the search functionality",
+   			Common.assertionCheckwithReport(productsearch.contains(product) , "validating the search functionality",
    					"enter product name will display in the search box", "user enter the product name in  search box",
    					"Failed to see the product name");
 
@@ -5293,6 +5284,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE,
 					productquantity);
+			Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 				Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Thread.sleep(4000);
@@ -7399,6 +7391,57 @@ catch(Exception | Error e)
 		    Assert.fail();
 		}
 	}
+	
+	public void Configurableproduct_addtocart_pdppage(String Dataset) {
+        String product = data.get(Dataset).get("Colorproduct");
+        String productcolor = data.get(Dataset).get("Color");
+        String productquantity = data.get(Dataset).get("productquantity");
+        try {
+            Sync.waitPageLoad();
+            for (int i = 0; i <= 10; i++) {
+                Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+                List<WebElement> webelementslist = Common.findElements("xpath",
+                        "//img[contains(@class,'m-product-card__image product')]");
+                String s = webelementslist.get(i).getAttribute("src");
+                System.out.println(s);
+                if (s.isEmpty()) {
+
+
+
+               } else {
+                    break;
+                }
+            }
+    
+            Sync.waitPageLoad();
+             List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='product-options-wrapper']//div[@class='m-swatch m-swatch-group__option swatch-option color']");
+            System.out.println(ListOfSubproducts.size());
+                for(int i=0;i<ListOfSubproducts.size();i++) {
+                    ListOfSubproducts.get(i).click();
+                    
+                   Thread.sleep(5000);
+                   String colorname=Common.getText("xpath", "(//div[@class='swatch-opt']//span[contains(@class,'m-swatch')])[1]");
+                    System.out.println(colorname);
+                    
+                    String s = Common.findElement("xpath",
+                            "//img[contains(@class,'m-product-gallery__media')]").getAttribute("src");
+                    System.out.println(s);
+
+        }
+        }
+                                 
+
+
+         catch (Exception | Error e) {
+            e.printStackTrace();
+            ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+                    "Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
+            Assert.fail();
+        }
+
+	}
+
+
 	}
 		
 

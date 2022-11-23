@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_082_Guest_User_Back_In_stock_Subcription {
   
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Outofstock Product");     
+			Hydro.search_product("Outofstock Prod");     
 			Hydro.outofstock_subcription("Outofstock Product");
 			
 			
