@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_087_Register_User_Checkout_with_My_Hydro_Customize_product {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"MyHydro");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_User_Checkout_with_My_Hydro_Customize_product () throws Exception {

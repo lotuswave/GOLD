@@ -302,8 +302,8 @@ public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
-			Common.textBoxInputClear("name", "postcode");
-			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]", data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
@@ -1481,8 +1481,8 @@ try
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
-			Common.textBoxInputClear("name", "postcode");
-			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]", data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
@@ -3702,14 +3702,18 @@ public void acceptPrivacy() {
 	public void review(String Dataset) {
 		// TODO Auto-generated method stub
 		String products=data.get(Dataset).get("Products");
+		System.out.println(products);
 		try
 		{
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			
 			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			Thread.sleep(3000);
 			String form=Common.getText("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			System.out.println(form);
 			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
 					"verifying the write a review button", "Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
@@ -4278,12 +4282,15 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 			System.out.println(sub_category.size());
+			System.out.println(sub_category);
 			for(int i=0;i<sub_category.size();i++)	
 			{
 			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 			Thread.sleep(6000);
 			name=Image.get(i).getText();
+			Thread.sleep(4000);
 		    System.out.println(name);
+		    Thread.sleep(4000);
 			Image.get(i).click();
 			Thread.sleep(5000);
 			Common.navigateBack();
@@ -6183,8 +6190,9 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Thread.sleep(3000);
-			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+			String page=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(Footrer[i]) || page.contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+			Common.closeCurrentWindow();
 			Common.actionsKeyPress(Keys.END);	
 			
 		}
@@ -6668,7 +6676,7 @@ catch(Exception | Error e)
 				Myhydro_quantity(Dataset);
 				Common.clickElement("xpath", "//button[@class='ATC__btn']");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(6000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 						.getAttribute("data-ui-id");
 				System.out.println(message);
@@ -7190,9 +7198,14 @@ catch(Exception | Error e)
             Common.clickElement("xpath", "//button[@class='m-accordion__title']");
 
              Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-
+             if(Common.getCurrentURL().contains("preprod"))
+             {
              Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
-
+             }
+             else
+             {
+            	 Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
+             }
              int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
            Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
                     "Successfully open the discount input box", "User unable enter Discount Code");
