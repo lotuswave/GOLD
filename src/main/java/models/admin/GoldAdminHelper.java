@@ -9257,7 +9257,8 @@ public class GoldAdminHelper {
 				Thread.sleep(2000);
 			
 				Sync.waitElementPresent("xpath", "//input[@name='order[account][email]']");
-				Common.textBoxInput("xpath", "//input[@name='order[account][email]']", data.get(dataSet).get("Email"));
+				Common.textBoxInput("xpath", "//input[@name='order[account][email]']", Utils.getEmailid());
+
 				Thread.sleep(4000);
 					
 				Common.textBoxInputClear("xpath", "//input[@id='order-billing_address_firstname']");

@@ -19,7 +19,6 @@ public class Test_DGLD_Admin_Loq_004_CreateNewOrder_in_AdminPanel {
     try {
     	
     	
-    	
     	Admin.Admin_signin("AccountDetails");
     	Admin.click_Sales();
     	Admin.Click_Orders_Salesmenu();
