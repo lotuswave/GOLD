@@ -22,6 +22,8 @@ public class Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal {
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
+//			Oxo.search_product("Product");
+//			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress("AccountDetails");
 			Oxo.payPal_Payment("PaypalDetails");

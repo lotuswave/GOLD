@@ -1576,7 +1576,7 @@ try
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 				
 				Common.clickElement("xpath", "//button[@title='Save Address']");
-				Thread.sleep(4000);
+				Sync.waitPageLoad();
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -1604,6 +1604,8 @@ try
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
 			Common.clickElement("xpath", "//a[text()='My Account']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
@@ -1630,7 +1632,9 @@ try
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
 			String Ordernumber=Common.findElement("xpath", "(//div[@class='order-data order-data__info']//a)[1]").getText();
-			
+			Sync.waitPageLoad();
+			System.out.println(Ordernumber);
+			System.out.println(Dataset);
 			Common.assertionCheckwithReport(Ordernumber.equals(Dataset),
 					"validating the Order Number in My Myorders page",
 					"Order Number should be display in the MY Order page",
@@ -1919,7 +1923,7 @@ try
     					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
                 Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
                 Sync.waitPageLoad();
-                Thread.sleep(3000);
+//                Thread.sleep(2000);
                 String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"), "validating the  product add to the Whishlist",
@@ -2100,7 +2104,7 @@ try
 	        Common.dropdown("xpath", "//select[@name='address_type_or_id']", Common.SelectBy.VALUE, shipping);
 	        Common.clickElement("id", "submit.save");
 	        Sync.waitPageLoad();
-	        Thread.sleep(5000);
+	        Thread.sleep(4000);
 	        String message=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 	        Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ", "After clicking on save button It should be able to navigate to the gift registry page ",
@@ -2869,7 +2873,7 @@ catch(Exception | Error e)
 			}
 			String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 			
-			if(!url.contains("stage") &!url.contains("preprod")){
+			if(!url.contains("na.oxo") &!url.contains("preprod")){
 				
 				int sizeofelement=Common.findElements("id", "email").size();
 				Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,"open paypal site window", "faild to open paypal account");
@@ -2900,7 +2904,7 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 			String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			if(!url1.contains("stage") && !url1.contains("preprod")){
+			if(!url1.contains("na.oxo") && !url1.contains("preprod")){
 			}
 		
 		else{
@@ -3097,11 +3101,19 @@ public void guestuserorderStatus(String dataSet) {
 	// TODO Auto-generated method stub
 	click_trackorder();
 	String ordernumber=data.get(dataSet).get("OrderID");
+	String prodordernumber=data.get(dataSet).get("ProdOrderID");
 
 	try{
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 		  Sync.waitElementPresent("id", "oar-order-id");
 		  Common.textBoxInput("id", "oar-order-id",ordernumber);
-		  
+		}
+		else
+		{
+			Sync.waitElementPresent("id", "oar-order-id");
+			  Common.textBoxInput("id", "oar-order-id",prodordernumber);
+		}
 		  Sync.waitElementPresent("id", "oar-billing-lastname");
 		  Common.textBoxInput("id", "oar-billing-lastname",data.get(dataSet).get("Billinglastname"));
 		  
@@ -3170,8 +3182,8 @@ public void edit_Account_info(String dataSet) {
 
 		Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
 		Thread.sleep(4000);
-		Common.clickElement("xpath", "(//div//input[@id='current-password'])[2]");
-		Common.textBoxInput("xpath", "(//input[@id='current-password'])[2]", data.get(dataSet).get("Password"));
+		Common.clickElement("xpath", "(//div//input[@id='current-password'])");
+		Common.textBoxInput("xpath", "(//input[@id='current-password'])", data.get(dataSet).get("Password"));
 		Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
 		Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
 		String message = Common.findElement("id", "validation-classes").getCssValue("color");
@@ -3196,6 +3208,7 @@ public void edit_Account_info(String dataSet) {
 		
 		
 	} catch (Exception | Error e) {
+		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("verifying the change passwordfor the register user",
 				"User enter the valid password", "User failed to proceed to change passowrd ",
 				Common.getscreenShotPathforReport("emailpasswordnew"));
@@ -3662,11 +3675,13 @@ public void review(String Dataset) {
 		Thread.sleep(4000);
 		Common.scrollIntoView("xpath", "//label[text()='Reviews']");
 		Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
-		String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
-		Common.assertionCheckwithReport(form.equals("Reviews"),
+		String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getAttribute("id");
+		System.out.println(form);
+		Common.assertionCheckwithReport(form.contains("review"),
 				"verifying the write a review button", "Write a review should be appear in the PDP page",
 				"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
 		Common.clickElement("xpath", "//label[text()='Reviews']");
+		Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
 		Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 		Common.clickElement("xpath", "//span[text()='Write A Review']");
 	
