@@ -746,6 +746,7 @@ public void selectshippingaddress(String Dataset) {
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 				Number=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+				System.out.println(Number);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
@@ -1880,6 +1881,7 @@ public void acceptPrivacy() {
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 	
 				Common.clickElement("xpath", "//button[@title='Save Address']");
+				Thread.sleep(3000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -4121,6 +4123,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
 			Common.clickElement("xpath", "//a[text()='My Account']");
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
@@ -4282,15 +4285,13 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 			System.out.println(sub_category.size());
-			System.out.println(sub_category);
-			for(int i=0;i<sub_category.size();i++)	
+			for(int i=0;i<sub_category.size()-1;i++)	
 			{
 			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 			Thread.sleep(6000);
 			name=Image.get(i).getText();
 			Thread.sleep(4000);
 		    System.out.println(name);
-		    Thread.sleep(4000);
 			Image.get(i).click();
 			Thread.sleep(5000);
 			Common.navigateBack();
@@ -4299,7 +4300,7 @@ catch(Exception | Error e)
 			}
 			List<WebElement> image_category=Common.findElements("xpath", "//div[@class='m-category-card__container']");
 			System.out.println(image_category.size());
-			for(int i=0;i<image_category.size();i++)	
+			for(int i=0;i<image_category.size()-1;i++)	
 			{
 				List<WebElement> button=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 				Thread.sleep(4000);
@@ -6179,7 +6180,7 @@ catch(Exception | Error e)
 	}
 	public void footervalidation_Company(String dataSet) {
 		// TODO Auto-generated method stub
-		Common.actionsKeyPress(Keys.END);
+//		Common.actionsKeyPress(Keys.END);
 		String Footerlinks=data.get(dataSet).get("Company Links");
 		String[] Footrer=Footerlinks.split(",");
 		int i=0;
@@ -6187,13 +6188,14 @@ catch(Exception | Error e)
 		try{
 		for(i=0;i<Footrer.length;i++){
 			System.out.println(Footrer[i]);
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
+			Common.scrollIntoView("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
+			Common.findElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']").sendKeys(Keys.CONTROL+"t");
 			Thread.sleep(3000);
 			String page=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(Footrer[i]) || page.contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-			Common.closeCurrentWindow();
-			Common.actionsKeyPress(Keys.END);	
+			Common.closeCurrentWindow();	
 			
 		}
 		}
@@ -6675,11 +6677,13 @@ catch(Exception | Error e)
 				Myhydro_Engraving("Myhydro Product");
 				Myhydro_quantity(Dataset);
 				Common.clickElement("xpath", "//button[@class='ATC__btn']");
+				Thread.sleep(4000);
 				Sync.waitPageLoad();
-				Thread.sleep(6000);
+				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 						.getAttribute("data-ui-id");
 				System.out.println(message);
+				Thread.sleep(6000);
 				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
@@ -7212,12 +7216,21 @@ catch(Exception | Error e)
              Sync.waitElementClickable("xpath", "//button[@value='Add']");
             Common.clickElement("xpath", "//button[@value='Add']");
             Sync.waitPageLoad();
-            Thread.sleep(4000);
             expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+           if(Common.getCurrentURL().contains("preprod"))
+           {
             String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']");
             Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"),
                     "verifying pomocode", expectedResult, "promotion code working as expected",
                     "Promation code is not applied");
+           }
+           else
+           {
+        	String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']//div"); 
+            Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"),
+                    "verifying pomocode", expectedResult, "promotion code working as expected",
+                    "Promation code is not applied");
+           }
 		}
 		catch(Exception | Error e)
 		{
