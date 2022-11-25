@@ -34,7 +34,7 @@ public class Test_DGLD_OXO_ST_088_RegisterUser_checkout_PayPal_Multiple_Products
 //			Oxo.addtocart("Group");
 			Oxo.minicart_Checkout();
 			Oxo.discountCode("Discount");
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.register_billingAddress("BillingDetails");
 			Oxo.payPal_Payment("PaypalDetails");
 

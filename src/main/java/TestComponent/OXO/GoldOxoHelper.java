@@ -237,8 +237,9 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			
-			click_UGC();
+//			click_UGC();
 			product_quantity(Dataset);
+			Common.scrollIntoView("xpath", "//button[@title='Add to Cart']");
 			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -253,6 +254,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 					"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
 			Assert.fail();
 		}
+		click_UGC();
 
 	}
 	
@@ -702,7 +704,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 
 		String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		
-		if(!url.contains("stage") && !url.contains("preprod")){
+		if(!url.contains("na.oxo") && !url.contains("preprod")){
 			}
 		
 		else{
@@ -717,10 +719,12 @@ public GoldOxoHelper(String datafile,String sheetname) {
 				"User unabel to go orderconformation page");
 		
 		if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
+			Thread.sleep(3000);
 			order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
 			System.out.println(order);
 		}
 		if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
+			Thread.sleep(3000);
 			order=	Common.getText("xpath", "//a[@class='order-number']/strong");
 			System.out.println(order);
 		}
@@ -1369,11 +1373,18 @@ try
             Sync.waitElementClickable("id", "block-discount-heading");
             Common.scrollIntoView("id", "block-discount-heading");
             Common.clickElement("id", "block-discount-heading");
-
+            if(Common.getCurrentURL().contains("preprod"))
+            {
              Sync.waitElementPresent("id", "discount-code");
 
              Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+            }
+            else
+            {
+         	   Sync.waitElementPresent("id", "discount-code");
 
+                Common.textBoxInput("id", "discount-code", data.get(dataSet).get("ProdDiscountcode"));
+            }
              int size = Common.findElements("id", "discount-code").size();
            Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
                     "Successfully open the discount input box", "User unable enter Discount Code");
@@ -3811,6 +3822,7 @@ public void stored_Payments(String Dataset) {
 		{
 			String number=Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText().replace("•••• ", "");
 			System.out.println(number);
+			System.out.println(Dataset);
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(number.contains("4242")&& Dataset.contains("4242"),
 					"validating the card details in the my orders page",
@@ -5023,7 +5035,7 @@ public void click_FeedingDrinking() {
 	        String text = Common.findElement("xpath", "//div[@class='u-container c-product-carousel__carousel js-slick-product-carousel']").getText();
 	        System.out.println(text);
 	       
-	        Common.assertionCheckwithReport(text.contains("Recommended For You"),
+	        Common.assertionCheckwithReport(text.contains("Recommended For You")||text.contains("Seller"),
 	                "To Validate the Recommended for you is displayed",
 	                "should display the Recommended for you after scroll down the PDP page",
 	                "update Recommended for you are displayed after scroll down the PDP page",
@@ -5216,13 +5228,13 @@ public void click_FeedingDrinking() {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage")&& !url.contains("preprod")) {
+		if (!url.contains("na.oxo")&& !url.contains("preprod")) {
 		}
 
 		else {
 			try {
 				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-//				Tell_Your_FriendPop_Up();
+
 
 				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),

@@ -24,7 +24,7 @@ public class Test_DGLD_OXO_ST_072_Register_User_Checkout_With_Different_Billing_
 			Oxo.search_product("Product");
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.register_billingAddress("BillingDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 
@@ -37,7 +37,7 @@ public class Test_DGLD_OXO_ST_072_Register_User_Checkout_With_Different_Billing_
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

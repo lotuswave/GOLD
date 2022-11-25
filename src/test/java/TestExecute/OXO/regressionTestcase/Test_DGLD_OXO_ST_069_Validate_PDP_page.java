@@ -14,15 +14,17 @@ public class Test_DGLD_OXO_ST_069_Validate_PDP_page {
 	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"PDP");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_User_Checkout_Bundle() throws Exception {
+	public void Validate_PDP_page() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_Shop();
-			Oxo.click_BabyToddler();
-			Oxo.click_FeedingDrinking();
-			Oxo.click_product();
-			Oxo.Configurableproduct_addtocart_pdp("Product");
+//			Oxo.click_Shop();
+//			Oxo.click_BabyToddler();
+//			Oxo.click_FeedingDrinking();
+//			Oxo.click_product();
+			Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.Configurable_addtocart_pdp("Product");
+//			Oxo.Configurableproduct_addtocart_pdp("Product");  //
 			Oxo.PDP_cofigurable_product();
 			Oxo.click_minicartatPDP();
 		
