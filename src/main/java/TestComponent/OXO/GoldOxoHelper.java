@@ -777,7 +777,9 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-		
+			Number=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+			System.out.println(Number);
+			
 			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 			
 			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
@@ -804,7 +806,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.switchToDefault();
 			Thread.sleep(1000);
 			Common.clickElement("xpath", "//span[text()='Place Order']");
-
+			
         }
 		}
 
@@ -824,7 +826,9 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		
 		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
 			expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+		
 		return Number;
+		
 	}
 	
 	public void click_singinButton() {
@@ -3820,10 +3824,11 @@ public void stored_Payments(String Dataset) {
 		int size=Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
 		if(size>0)
 		{
+			Thread.sleep(5000);
 			String number=Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText().replace("•••• ", "");
 			System.out.println(number);
 			System.out.println(Dataset);
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			Common.assertionCheckwithReport(number.contains("4242")&& Dataset.contains("4242"),
 					"validating the card details in the my orders page",
 					"After Clicking on My payments methods and payment method should be appear in payment methods",
@@ -5077,14 +5082,15 @@ public void click_FeedingDrinking() {
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
 				try {
-					Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
+					Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
 					String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
 					System.out.println(forgotpassword);
 					Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
 					Common.clickElement("xpath", "//span[text()='Reset My Password']");
-					int message= Common.findElements("xpath", "//div[text()='If there is an account associated with hrn296331212@xcoxc.com you will receive an email with a link to reset your password.']").size();
+					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
+					String message= Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
 					System.out.println(message);
-					Common.assertionCheckwithReport(message>0,
+					Common.assertionCheckwithReport(message.contains("We received too many requests for password resets")|| message.contains("If there is an account associated"),
 							"To validate the user is navigating to Forgot Password page",
 							"user should naviagte to forgot password page", "User lands on Forgot Password page",
 							"User failed to navigate to forgot password page");
@@ -5797,6 +5803,28 @@ public void click_FeedingDrinking() {
 	}
 	
 	
+	public void signout() {
+		try {
+			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementClickable("xpath", "(//a[text()='Sign Out'])[2]");
+
+			Common.javascriptclickElement("xpath", "(//a[text()='Sign Out'])[2]");
+
+			Common.assertionCheckwithReport(
+					Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
+					"Validating My Account page navigation", "user sign in and navigate to my account page",
+					"Successfully navigate to my account page", "Failed to navigate my account page ");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+					"after clinking signout user signout fro the page", "user Successfully signout  ",
+					Common.getscreenShotPathforReport("user Failed to signout"));
+			Assert.fail();
+		}
+
+	}
 	
 	
 	

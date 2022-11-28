@@ -22,6 +22,7 @@ public class Test_DGLD_OXO_ST_094_My_Account_Page_Validation {
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
 			Oxo.Account_page_Validation("Account");
+			Oxo.signout();
 			
 		} catch (Exception e) {
 

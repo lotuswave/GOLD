@@ -19,7 +19,7 @@ public class Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
-			//Oxo.Forgot_password("AccountDetails");
+			Oxo.Forgot_password("AccountDetails");
 			
 		} catch (Exception e) {
 
@@ -29,7 +29,7 @@ public class Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
