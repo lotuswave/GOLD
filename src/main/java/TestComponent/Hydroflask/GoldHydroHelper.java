@@ -4757,6 +4757,7 @@ catch(Exception | Error e)
 	            
 	            
 	            int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
+	            System.out.println(subproductsList);
 	            for(int i=0;i<subproductsList;i++) {
 	                int value=i+1;
 	                List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m')]");
@@ -6191,11 +6192,23 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Common.scrollIntoView("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.findElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']").sendKeys(Keys.CONTROL+"t");
-			Thread.sleep(3000);
-			String page=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(Footrer[i]) || page.contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-			Common.closeCurrentWindow();	
+			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			System.out.println(Common.getPageTitle());
+            if(Common.getPageTitle().contains(Footrer[i]))
+            {
+            	Common.assertionCheckwithReport(Common.getPageTitle().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+    			Common.closeCurrentWindow();
+            }
+            else
+            {
+            	
+    			String page=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();  
+    			Common.assertionCheckwithReport(page.contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+    			Common.navigateBack();
+            }
+			
 			
 		}
 		}
@@ -6252,7 +6265,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Thread.sleep(3000);
 			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+//			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
 			Common.navigateBack();	
 			
 		}
@@ -6774,8 +6787,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
 			Thread.sleep(3000);
 			String Cap=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Cap.contains("Cap"), "validating the color selection for bottle",
@@ -6806,8 +6819,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
 			Thread.sleep(3000);
 			String Strap=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Strap.contains("Strap"), "validating the color selection for bottle",
@@ -6838,8 +6851,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
 			Thread.sleep(3000);
 			String boot=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(boot.contains("Boot"), "validating the color selection for bottle",
@@ -6949,8 +6962,8 @@ catch(Exception | Error e)
 		String engravingtext=data.get(Dataset).get("Engraving");
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
 			Thread.sleep(3000);
 			String Engraving=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Engraving.contains("Engraving"), "validating the Engraving for the bottle",
@@ -7369,7 +7382,8 @@ catch(Exception | Error e)
 		Common.clickElement("xpath", "//a[text()='My Account']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 			String Accountlinks=data.get(Dataset).get("Account Links");
 			String[] Account=Accountlinks.split(",");
 			int i=0;
@@ -7390,6 +7404,31 @@ catch(Exception | Error e)
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the account page links " +Account[i],"user should Navigate to the "+Account[i]+" page","User unable to navigate to the "+Account[i],Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
 		    Assert.fail();
+		}
+		}
+		else
+		{
+			String Accountlinks=data.get(Dataset).get("Prod Account Links");
+			String[] Account=Accountlinks.split(",");
+			int i=0;
+			try
+	    {
+				for(i=0;i<Account.length;i++){
+					Sync.waitElementPresent("xpath", "//div[@class='content account-nav-content']//a[text()='"+Account[i]+"']");
+					Common.clickElement("xpath", "//div[@class='content account-nav-content']//a[text()='"+Account[i]+"']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+					Common.assertionCheckwithReport(title.contains(Account[i]), "verifying Account page links "+Account[i],"user should navigate to the "+Account[i]+" page", "user successfully Navigated to the "+Account[i],"Failed click on the "+Account[i]);
+			
+		}
+	    }
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the account page links " +Account[i],"user should Navigate to the "+Account[i]+" page","User unable to navigate to the "+Account[i],Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+		    Assert.fail();
+		}
 		}
 		
 	}
@@ -7466,9 +7505,329 @@ catch(Exception | Error e)
         }
 
 	}
+	public void footervalidation_Dogood(String Dataset) {
+		// TODO Auto-generated method stub
+		Common.actionsKeyPress(Keys.END);
+		String Footerlinks=data.get(Dataset).get("Benefits Links");
+		String[] Footrer=Footerlinks.split(",");
+		int i=0;
+		
+		try{
+		for(i=0;i<Footrer.length;i++){
+			System.out.println(Footrer[i]);
+			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
+			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
+			Thread.sleep(3000);
+			System.out.println(Common.getPageTitle());
+//			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+			Common.navigateBack();	
+			
+		}
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+//			ExtenantReportUtils.addFailedLog("validating Header Links " +Footrer[i],"user open the "+Footrer[i]+" option","User unabel open the header link "+Footrer[i],Common.getscreenShotPathforReport("user failed to open the headerlink"));
+		    Assert.fail();
 
+		}
+		
+	}
+	public void Text_Engraving(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String color=data.get(Dataset).get("Color");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color +"']");
+			Common.clickElement("xpath", "//div[@aria-label='" + color +"']");
+			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
+			engraving_color();
+			engraving_Text("Horizontal Text");
+			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Thread.sleep(6000);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+			
+		
+	}
+	catch(Exception | Error e)
+		{
+		        e.printStackTrace();
+		        ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+						"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		        Assert.fail();
+		}
 
 	}
+	public void engraving_Text(String Dataset) {
+		// TODO Auto-generated method stub
+		String font=data.get(Dataset).get("Font");
+		String Texttype=data.get(Dataset).get("Text");
+		String engravetext=data.get(Dataset).get("Engraving");
+		System.out.println(engravetext);
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ font +"']");
+			Common.clickElement("xpath", "//button[@aria-label='"+ font +"']");
+			Thread.sleep(3000);
+			String Font=Common.findElement("xpath", "//span[@class='text-engraving__label']").getText();
+			Common.assertionCheckwithReport(Font.equals(font), "validating the font text for the product",
+					"Font should be select for the product", "Sucessfully font has been selected for the product",
+					"failed to select the font for the product");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Texttype +"']");
+			Common.clickElement("xpath", "//button[@aria-label='"+ Texttype +"']");
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='"+ Texttype +"']");
+			Thread.sleep(3000);
+			String Text=Common.findElement("xpath", "//button[@aria-label='"+ Texttype +"']").getAttribute("class");
+			Common.assertionCheckwithReport(Text.contains("active"), "validating the text for the product",
+					"Text type should be select for the product", "Sucessfully Text has been selected for the product",
+					"failed to select the Text for the product");
+			Sync.waitElementPresent("xpath", "//textarea[@class='text-engraving__input']");
+			Common.textBoxInput("xpath", "//textarea[@class='text-engraving__input']", engravetext);
+			Thread.sleep(3000);
+			String engrave=Common.findElement("xpath", "//textarea[contains(@class,'text-engraving__input')]").getAttribute("class");
+			Common.assertionCheckwithReport(engrave.contains("focus-visible"), "validating the engraving text for bottle",
+					"Engraving text should be added for the bottle", "Sucessfully Engraving has been added for the bottle",
+					"failed to add the engraving for the bottle");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the engraving text for bottle",
+					"Engraving text should be added for the bottle",
+                    "Unable to add the engraving for the bottle ", Common.getscreenShot("Failed to add the engraving for the bottle"));
+			Assert.fail();
+		}
+		
+	}
+	public void engraving_color() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath","//div[@aria-label='Select a color']//div[@class='color-feature__selection']");
+			int subproductsList=Common.findElements("xpath","//div[@aria-label='Select a color']//div[@class='color-feature__selection']").size();
+            for(int i=0;i<subproductsList;i++) {
+                int value=i+1;
+                List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@aria-label='Select a color']//div["+value+"]//button");
+                
+                WebElement Colornames=Common.findElement("xpath", "//div[@class='color-feature__selection__label__wrapper']//label");
+               
+                System.out.println(Colornames);
+                WebElement color=Common.findElement("xpath", "//div[@aria-label='Select a color']//div["+value+"]//button");
+                
+                for(int j=0;j<ListOfSubproducts.size();j++) {
+                    
+                    
+                    String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
+                    
+                        if(attributevalue!=null){
+            }
+                        else
+                        {
+                            
+                            if(ListOfSubproducts.get(j).getAttribute("class").contains("color-feature__")) {
+                            	Thread.sleep(4000);
+                                ListOfSubproducts.get(j).click();
+                                Thread.sleep(4000);
+                                
+                           Common.assertionCheckwithReport(Colornames.getText().contains(color.getAttribute("aria-label")) , "Verifiying the swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
+		}
+                        }
+                }
+            }
+		}
+		catch(Exception | Error e )
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the color for the engraving product",
+					"Color should be selected for the engraving product",
+                    "Unable to select the color for the engraving product ", Common.getscreenShot("Failed to selecte the color for the engraving product"));
+			Assert.fail();
+		}
+		
+	}
+	public void Graphic_Engraving(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String color=data.get(Dataset).get("Color");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color +"']");
+			Common.clickElement("xpath", "//div[@aria-label='" + color +"']");
+			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
+			engraving_color();
+			engraving_graphic("Graphic");
+			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Thread.sleep(6000);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+			
+		
+	}
+	catch(Exception | Error e)
+		{
+		        e.printStackTrace();
+		        ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+						"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		        Assert.fail();
+		}
+
+	}
+	public void engraving_graphic(String Dataset) {
+		// TODO Auto-generated method stub
+		String graphic=data.get(Dataset).get("Engraving Graphic");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[text()='Graphic']");
+			Common.clickElement("xpath", "//span[text()='Graphic']");
+			int subproductsList=Common.findElements("xpath","//div[@class='graphic-engraving__wrapper']//button").size();
+            for(int i=0;i<subproductsList;i++) {
+                int value=i+1;
+                List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='graphic-engraving__selections-container']//div["+value+"]//button");
+                
+                WebElement Graphicnames=Common.findElement("xpath", "//span[@class='graphic-engraving__label']");
+               
+                WebElement Graphic=Common.findElement("xpath", "//div[@class='graphic-engraving__selections-container']//div["+value+"]//button");
+                
+                for(int j=0;j<ListOfSubproducts.size();j++) {
+                    
+                    
+                    String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
+                    
+                        if(attributevalue!=null){
+            }
+                        else
+                        {
+                           
+                            if(ListOfSubproducts.get(j).getAttribute("class").contains("graphic-engraving__") || ListOfSubproducts.get(j).getAttribute("class").contains("graphic-engraving__selection__btn active")) {
+                            	Thread.sleep(4000);
+                            	System.out.println(ListOfSubproducts);
+                                ListOfSubproducts.get(j).click();
+                                Thread.sleep(4000);
+                               
+                           Common.assertionCheckwithReport(Graphicnames.getText().contains(Graphic.getAttribute("aria-label")) ,"Verifying the  swatch Graphics button "+Graphicnames.getText(), "after click graphic swatch button"+Graphicnames.getText()+"it must dispaly swatch graphic image", "successfully graphic swatch image is dispalying", "Failed load graphic swatch image");
+		}
+                        }
+                }
+            }
+            Sync.waitElementPresent("xpath", "//button[@aria-label='"+ graphic + "']");
+            Common.clickElement("xpath", "//button[@aria-label='"+ graphic + "']");
+           
+		}
+		catch(Exception | Error e )
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the graphic for the engraving product",
+					"graphic should be selected for the engraving product",
+                    "Unable to select the graphic for the engraving product ", Common.getscreenShot("Failed to select the graphic for the engraving product"));
+			Assert.fail();
+		}
+		
+	}
+	public void enraving_Checkout(String Dataset) {
+		// TODO Auto-generated method stub
+		String Graphic=data.get(Dataset).get("Engraving Graphic");
+		String text=data.get(Dataset).get("Engraving");
+		try
+		{
+			Thread.sleep(2000);
+			click_minicart();
+			Sync.waitElementPresent("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
+			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]").getText();
+			System.out.println(engraving);
+			Common.assertionCheckwithReport(engraving.contains(Graphic) || engraving.contains(text), "Validating the "+engraving+ "for the bottle",
+					  engraving+"should apply for the bottle " , "Sucessfully"+engraving+"has been applied for the bottle",
+					"failed apply the"+engraving+"for the bottle");
+			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			System.out.println(minicart);
+			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
+			Common.clickElement("xpath", "//button[@title='Checkout']");
+			Sync.waitPageLoad();
+			Thread.sleep(7000);
+			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
+			System.out.println(checkout);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(
+					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping"),
+					"validating the navigation to the shipping page when we click on the checkout",
+					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
+					"Failed to navigate to the shipping page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the navigation to the shipping page when we click on the checkout ",
+					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
+					Common.getscreenShot("Failed to navigate to the shipping page"));
+
+			Assert.fail();
+		}
+		
+	}
+		
+	}
+	
 		
 
 
