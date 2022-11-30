@@ -27,7 +27,7 @@ public class Test_DGLD_HF_ST_113_Register_User_Checkout_PP_with_Graphic_Engravin
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("CCAmexcard");
+            Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
