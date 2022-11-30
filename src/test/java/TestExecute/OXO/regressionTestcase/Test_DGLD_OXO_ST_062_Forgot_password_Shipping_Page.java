@@ -21,8 +21,8 @@ public class Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page {
 			Oxo.search_product("Product");      
 			Oxo.addtocart("Product");                    
 			Oxo.minicart_Checkout();
-			//Oxo.Shipping_Forgot_Password("AccountDetails");
-			//Oxo.Forgot_password("AccountDetails");
+			Oxo.Shipping_Forgot_Password("AccountDetails");
+			Oxo.Forgot_password("AccountDetails");
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

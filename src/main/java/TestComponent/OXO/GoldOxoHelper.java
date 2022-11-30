@@ -2491,22 +2491,13 @@ try
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//span[text()='New payment method']");
-				
+				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
 				Common.clickElement("xpath", "//button[@value='klarna']");
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//				Common.assertionCheckwithReport(
-//						details.equals(email),
-//						"validating the email field for the Klarana Payment Method",
-//						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
-//						"Failed to enter email in the Klarna Payment");
+
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				klarna_Saved_Details(dataSet);
@@ -2517,16 +2508,7 @@ try
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//button[@value='klarna']");
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//				Common.assertionCheckwithReport(
-//						details.equals(email),
-//						"validating the email field for the Klarana Payment Method",
-//						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
-//						"Failed to enter email in the Klarna Payment");
+
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				klarna_Saved_Details(dataSet);
@@ -2561,14 +2543,14 @@ try
 			Common.switchWindows();
 			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 			Sync.waitElementPresent("xpath", "//input[@name='phone']");
-//			Common.textBoxInput("xpath", "//input[@name='phone']", number);
-			Common.clickElement("xpath", "//span[text()='Phone number']");
+
+			Common.clickElement("xpath", "//input[@name='phone']");
 			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
-			Common.textBoxInputClear("xpath", "//input[@name='phone'])");
+
 			Common.findElement("xpath", "//input[@name='phone']").sendKeys(number);
-			Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
@@ -2616,7 +2598,7 @@ try
 		
 		String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		
-		if(!url.contains("stage") && !url.contains("preprod")){
+		if(!url.contains("na.oxo") && !url.contains("preprod")){
 			}
 		
 		else{
@@ -2684,17 +2666,17 @@ try
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
 				Common.clickElement("xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
-				String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-				Common.assertionCheckwithReport(
-						details.equals(email),
-						"validating the email field for the Klarana Payment Method",
-						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
-						"Failed to enter email in the Klarna Payment");
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
+//				String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//				Common.assertionCheckwithReport(
+//						details.equals(email),
+//						"validating the email field for the Klarana Payment Method",
+//						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
+//						"Failed to enter email in the Klarna Payment");
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				klarna_Details(dataSet);
@@ -2705,17 +2687,17 @@ try
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
-				String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-				Common.assertionCheckwithReport(
-						details.equals(email),
-						"validating the email field for the Klarana Payment Method",
-						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
-						"Failed to enter email in the Klarna Payment");
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
+//				String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//				Common.assertionCheckwithReport(
+//						details.equals(email),
+//						"validating the email field for the Klarana Payment Method",
+//						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
+//						"Failed to enter email in the Klarna Payment");
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				klarna_Details(dataSet);
@@ -2751,13 +2733,17 @@ try
 			Common.switchWindows();
 			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 			Sync.waitElementPresent("xpath", "//input[@name='phone']");
+			Common.clickElement("xpath", "//input[@name='phone']");
+			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
+		    clear.sendKeys(Keys.CONTROL+"a");
+		    clear.sendKeys(Keys.DELETE);
 			int number=Common.genrateRandomNumber();
 			System.out.println(number);
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;
 			System.out.println(phone);
 			Common.textBoxInput("xpath", "//input[@name='phone']", phone);
-			Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
@@ -2767,7 +2753,7 @@ try
 			String klarna=Common.findElement("xpath", "//h1[@role='status']").getText();
 			if(klarna.equals("What's your email?"))
 			{
-				Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
 				Common.findElement("xpath","//input[@id='addressCollector-date_of_birth']").sendKeys(DOB);
@@ -2999,27 +2985,29 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//span[text()='New payment method']");
-				
+				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
 				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-				Common.dropdown("xpath", "//select[@name='country']", Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
-				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
-				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-				Common.assertionCheckwithReport(
-						details.equals(email),
-						"validating the email field for the Afterpay Payment Method",
-						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
-						"Failed to enter email in the Afterpay Payment");
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//				Common.dropdown("xpath", "//select[@name='country']", Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
+//				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
+//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//				Common.assertionCheckwithReport(
+//						details.equals(email),
+//						"validating the email field for the Afterpay Payment Method",
+//						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
+//						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 		
 	}
@@ -3031,19 +3019,19 @@ catch(Exception | Error e)
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
 				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
-				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
-				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
-				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-				Common.assertionCheckwithReport(
-						details.equals(email),
-						"validating the email field for the Afterpay Payment Method",
-						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
-						"Failed to enter email in the Afterpay Payment");
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
+//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
+//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
+//				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
+//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//				Common.assertionCheckwithReport(
+//						details.equals(email),
+//						"validating the email field for the Afterpay Payment Method",
+//						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
+//						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
@@ -3725,6 +3713,8 @@ public void review(String Dataset) {
 	{
 		String expectedResult="Sucessfully title input box has been displayed";
 		score(data.get(Dataset).get("score"));
+		Common.actionsKeyPress(Keys.DOWN);
+		Common.actionsKeyPress(Keys.DOWN);
 		Sync.waitElementPresent("xpath", "//input[@name='review_title']");
 		Common.scrollIntoView("xpath", "//input[@name='review_title']");
 		int title=Common.findElements("xpath", "//input[@name='review_title']").size();

@@ -29,7 +29,7 @@ public class Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
