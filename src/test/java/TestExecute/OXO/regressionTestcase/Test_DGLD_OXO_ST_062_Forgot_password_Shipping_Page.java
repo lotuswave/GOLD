@@ -18,9 +18,9 @@ public class Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.search_product("Product");      
-			Oxo.addtocart("Product");                    
-			Oxo.minicart_Checkout();
+            Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.Configurable_addtocart_pdp("ConfigProduct");
+		    Oxo.minicart_Checkout();
 			Oxo.Shipping_Forgot_Password("AccountDetails");
 			Oxo.Forgot_password("AccountDetails");
 		} catch (Exception e) {

@@ -5438,10 +5438,19 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
-			//	Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
-				String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
-				System.out.println(shipping);
+			 Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
+	            Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
+	            Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
+	                String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
+	                System.out.println(shipping);
+	                Common.clickElement("xpath", "//span[text()='Item in Cart']");
+	                String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
+	                System.out.println(QTY);
+	                String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
+	                System.out.println(Price);
+	                Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
+	                String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
+	                System.out.println(Color);
 				Common.assertionCheckwithReport( shipping.equals("Shipping"),
 						"To validate the user is navigating to Shipping page",
 						"user should naviagte to Shipping page", "User lands on Shippingd page",
@@ -5451,7 +5460,7 @@ catch(Exception | Error e)
 				ExtenantReportUtils.addFailedLog("To validate the user is navigating to Shipping page",
 						"user should navigate to Shipping page", "User failed to land on Shipping page",
 						Common.getscreenShotPathforReport("failed  to naviagte Shipping page "));
-				//Assert.fail();
+				Assert.fail();
 		
 	}
 		

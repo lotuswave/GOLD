@@ -19,8 +19,8 @@ public class Test_DGLD_HF_ST_075_Forgot_password_from_Shipping_page {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.Shipping_Forgot_Password("AccountDetails");
 			Hydro.Forgot_password("AccountDetails");
@@ -40,7 +40,7 @@ public class Test_DGLD_HF_ST_075_Forgot_password_from_Shipping_page {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
-        Hydro.close_add();
+       // Hydro.close_add();
         Hydro.acceptPrivacy();
 
 	}
