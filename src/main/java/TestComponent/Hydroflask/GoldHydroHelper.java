@@ -6796,8 +6796,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
-			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Cap=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Cap.contains("Cap"), "validating the color selection for bottle",
@@ -6828,8 +6828,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
-			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Strap=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Strap.contains("Strap"), "validating the color selection for bottle",
@@ -6860,8 +6860,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
-			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String boot=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(boot.contains("Boot"), "validating the color selection for bottle",
@@ -6971,8 +6971,8 @@ catch(Exception | Error e)
 		String engravingtext=data.get(Dataset).get("Engraving");
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[contains(@class,'nav-buttons__btn')]");
-			Common.clickElement("xpath", "//button[contains(@class,'nav-buttons__btn')]");
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Engraving=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Engraving.contains("Engraving"), "validating the Engraving for the bottle",
@@ -7576,6 +7576,7 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_Text("Horizontal Text");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Sync.waitForLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -7721,6 +7722,7 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Sync.waitForLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -7801,6 +7803,7 @@ catch(Exception | Error e)
 		{
 			Thread.sleep(2000);
 			click_minicart();
+			Sync.waitForLoad();
 			Sync.waitElementPresent("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
 			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]").getText();
 			System.out.println(engraving);
