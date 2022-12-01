@@ -5248,12 +5248,14 @@ catch(Exception | Error e)
 		
 			
 			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
-			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			Common.clickElement("xpath", "//label[text()='Reviews & Questions']");
+			Thread.sleep(4000);
 			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
+			System.out.println(form);
 			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
 					"verifying the write a review button", "Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//label[text()='Reviews & Questions']");
+			
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
 		
@@ -6309,7 +6311,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("to your shopping bag"), "validating the  product add to the cart",
+			Common.assertionCheckwithReport(message.contains("to your shopping cart"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 		} catch (Exception | Error e) {
@@ -7197,7 +7199,9 @@ catch(Exception | Error e)
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Common.scrollIntoView("xpath", "//button[contains(@class,'video')]");
 			Common.clickElement("xpath", "//span[text()='Play video']");
-			Common.clickElement("xpath", "//span[text()='Play']");
+			Sync.waitElementPresent(30, "xpath", "//button[@title='Play Video']");
+			Common.clickElement("xpath", "//button[@title='Play Video']");
+			Sync.waitForLoad();
 			String video=Common.findElement("xpath", "//button[contains(@class,'vjs-play-con')]").getAttribute("title");
 			System.out.println(video);
 			Common.assertionCheckwithReport(video.equals("Pause"), "validating the video in PDP page",
