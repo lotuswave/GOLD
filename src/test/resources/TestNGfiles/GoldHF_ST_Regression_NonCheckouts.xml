@@ -7,7 +7,7 @@
  
     
        
-       <test name="Test_DGLD_HF_ST_003_Create_Account_Validation" testid="DTG-932" priority="P1" description="This script will cover Account Creation Functionality of Hydroflask">
+      <test name="Test_DGLD_HF_ST_003_Create_Account_Validation" testid="DTG-932" priority="P1" description="This script will cover Account Creation Functionality of Hydroflask">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_003_Create_Account_Validation"/>
         </classes>
@@ -22,7 +22,7 @@
         
           
            
-        <test name="Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart" testid="DTG-1222" priority="P1" description="This script will cover Account Registration Create Account With Cart">
+       <test name="Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart" testid="DTG-1222" priority="P1" description="This script will cover Account Registration Create Account With Cart">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart"/>
         </classes>
@@ -30,7 +30,7 @@
 
 
 
-<test name="Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr" testid="DTG-1234" priority="P1" description="This script will cover Validation ShippingAddress form for GuestUesr">
+ <test name="Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr" testid="DTG-1234" priority="P1" description="This script will cover Validation ShippingAddress form for GuestUesr">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr"/>
         </classes>
@@ -45,7 +45,7 @@
 
  
 
-<test name="Test_DGLD_HF_ST_022_changeAddressIn_AddressBook" testid="DTG-1313" priority="P1" description="This script will cover validating changeAddressIn AddressBook">
+  <test name="Test_DGLD_HF_ST_022_changeAddressIn_AddressBook" testid="DTG-1313" priority="P1" description="This script will cover validating changeAddressIn AddressBook">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_022_changeAddressIn_AddressBook" />
 		</classes>
@@ -53,7 +53,7 @@
 
 
 
-   <test name="Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page" testid="DTG-1343" priority="P1" description="This script will cover validating Change Password from AccountInformation Page">
+    <test name="Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page" testid="DTG-1343" priority="P1" description="This script will cover validating Change Password from AccountInformation Page">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page" />
 		</classes>
@@ -112,7 +112,7 @@
 
 
 
-   <test name="Test_DGLD_HF_ST_039_User_Selects_to_Apply_to_ProDeal_Missing_Invalid_Fields" testid="DTG-1857" priority="P1" description="This script will cover validating when User Selects to Apply to ProDeal Missing Invalid Fields">
+  <test name="Test_DGLD_HF_ST_039_User_Selects_to_Apply_to_ProDeal_Missing_Invalid_Fields" testid="DTG-1857" priority="P1" description="This script will cover validating when User Selects to Apply to ProDeal Missing Invalid Fields">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_039_User_Selects_to_Apply_to_ProDeal_Missing_Invalid_Fields" />
 		</classes>
@@ -122,7 +122,11 @@
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_041_Footer_Newsletter_subcription" />
 		</classes>
 	</test> 
-	
+	<test name="Test_DGLD_HF_ST_042_Validate_Store_Locator" testid="DTG-1222" priority="P1" description="This script will cover Validate Store Locator">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_042_Validate_Store_Locator"/>
+        </classes>
+        </test>
 	
 	 <test name="Test_DGLD_HF_ST_060_Validating_the_Search_Results_Page" testid="DTG-2198" priority="P1" description="This script will cover Validating the Search Results Page">
 		<classes>
@@ -152,7 +156,7 @@
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_052_Validate_Country_Selector" />
 		</classes>
-	</test> 
+	</test>  
 
 
    <test name="Test_DGLD_HF_ST_053_Write_a_Reviewe" testid="DTG-1857" priority="P1" description="This script will cover validating Write a Reviewnon PDP">
@@ -258,6 +262,22 @@
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_085_share_Whishlist_Funtionality" />
         </classes>
     </test>
+    <test name="Test_DGLD_HF_ST_107_My_Account_Page_Validation" testid="DTG-1222" priority="P1" description="This script will cover My Account Page Validation">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_107_My_Account_Page_Validation"/>
+        </classes>
+        </test>
+
+     <test name="Test_DGLD_HF_ST_103_WebPageLinkValidation" testid="DTG-1222" priority="P1" description="This script will cover WebPageLinkValidation">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_103_WebPageLinkValidation"/>
+        </classes>
+        </test>
+    <test name="Test_DGLD_HF_ST_084_employee_Discount_for_Register_User" testid="DTG-1222" priority="P1" description="This script will cover employee Discount for Register User">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_084_employee_Discount_for_Register_User"/>
+        </classes>
+        </test> 
 	
 
         
