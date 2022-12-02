@@ -6703,6 +6703,7 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//button[@class='ATC__btn']");
 				Thread.sleep(4000);
 				Sync.waitPageLoad();
+				Sync.waitForLoad();
 				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 						.getAttribute("data-ui-id");
@@ -7753,7 +7754,7 @@ catch(Exception | Error e)
 		String graphic=data.get(Dataset).get("Engraving Graphic");
 		try
 		{
-			Sync.waitElementPresent("xpath", "//span[text()='Graphic']");
+			Sync.waitElementPresent(30,"xpath", "//span[text()='Graphic']");
 			Common.clickElement("xpath", "//span[text()='Graphic']");
 			int subproductsList=Common.findElements("xpath","//div[@class='graphic-engraving__wrapper']//button").size();
             for(int i=0;i<subproductsList;i++) {
@@ -7841,7 +7842,128 @@ catch(Exception | Error e)
 		}
 		
 	}
+	public void Myhydro_Graphic(String Dataset) {
+		// TODO Auto-generated method stub
 		
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Thread.sleep(3000);
+			Myhydro_bottle("40 oz");
+		    hydro_bottle_color("Black");
+			hydro_cap_color("White");
+			hydro_strap_color("Black");
+			hydro_boot_color("White");
+			Myhydrographic("Graphic");
+			Myhydro_quantity(Dataset);
+			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+		    Sync.waitForLoad();
+			Thread.sleep(3000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Thread.sleep(6000);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+			
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		Assert.fail();
+	}
+	
+		
+	}
+		
+	
+	public void Myhydrographic(String Dataset) {
+		// TODO Auto-generated method stub
+		String graphic=data.get(Dataset).get("Engraving Graphic");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Thread.sleep(3000);
+			String Engraving=Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
+			Common.assertionCheckwithReport(Engraving.contains("Engraving"), "validating the Engraving for the bottle",
+					"Engraving should be select for the bottle", "Sucessfully Engraving  has been selected for the bottle",
+					"failed to select the Engraving for the selected bottle");
+			Sync.waitElementPresent(30,"xpath", "//span[text()='Graphic']");
+			Common.clickElement("xpath", "//span[text()='Graphic']");
+			int subproductsList=Common.findElements("xpath","//div[@class='graphic-engraving__wrapper']//button").size();
+            for(int i=0;i<subproductsList;i++) {
+                int value=i+1;
+                List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='graphic-engraving__selections-container']//div["+value+"]//button");
+                
+                WebElement Graphicnames=Common.findElement("xpath", "//span[@class='graphic-engraving__label']");
+               
+                WebElement Graphic=Common.findElement("xpath", "//div[@class='graphic-engraving__selections-container']//div["+value+"]//button");
+                
+                for(int j=0;j<ListOfSubproducts.size();j++) {
+                    
+                    
+                    String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
+                    
+                        if(attributevalue!=null){
+            }
+                        else
+                        {
+                           
+                            if(ListOfSubproducts.get(j).getAttribute("class").contains("graphic-engraving__") || ListOfSubproducts.get(j).getAttribute("class").contains("graphic-engraving__selection__btn active")) {
+                            	Thread.sleep(4000);
+                            	System.out.println(ListOfSubproducts);
+                                ListOfSubproducts.get(j).click();
+                                Thread.sleep(4000);
+                               
+                           Common.assertionCheckwithReport(Graphicnames.getText().contains(Graphic.getAttribute("aria-label")) ,"Verifying the  swatch Graphics button "+Graphicnames.getText(), "after click graphic swatch button"+Graphicnames.getText()+"it must dispaly swatch graphic image", "successfully graphic swatch image is dispalying", "Failed load graphic swatch image");
+		}
+                        }
+                }
+            }
+            Sync.waitElementPresent("xpath", "//button[@aria-label='"+ graphic + "']");
+            Common.clickElement("xpath", "//button[@aria-label='"+ graphic + "']");
+           
+		}
+		catch(Exception | Error e )
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the graphic for the engraving product",
+					"graphic should be selected for the engraving product",
+                    "Unable to select the graphic for the engraving product ", Common.getscreenShot("Failed to select the graphic for the engraving product"));
+			Assert.fail();
+		}
+		
+	}
 	}
 	
 		
