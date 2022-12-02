@@ -2646,6 +2646,7 @@ public class GoldAdminHelper {
 			Sync.waitPageLoad(40);
 			Common.switchToSecondTab();
 			Common.refreshpage();
+			Common.refreshpage();
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String image = Common.findElement("xpath", "(//img[@data-element='desktop_image'])[8]")
@@ -9611,6 +9612,61 @@ public class GoldAdminHelper {
 			}
 			return updatedprice;
 
+		}
+
+		public void page_Cache(String Dataset) {
+			// TODO Auto-generated method stub
+			String Magento = data.get(Dataset).get("cache");
+			try {
+				Sync.waitElementPresent("xpath", "//a//span[text()='System']");
+				Common.clickElement("xpath", "//a//span[text()='System']");
+				Sync.waitElementPresent("xpath", "//a//span[text()='Cache Management']");
+				Common.clickElement("xpath", "//a//span[text()='Cache Management']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Cache Management"),
+						"validating the page navigates to the cache management",
+						"It should Navigates to the Cache management page",
+						"Sucessfully it is navigated to the cache managment page",
+						"failed to Navigate to the cache managment page");
+				String page=Common.findElement("xpath", "//td[text()='Page Cache']").getText();
+				if(page.equals("Page Cache"))
+				{
+					Sync.waitElementPresent("xpath","//td[text()='Page Cache']");
+					Common.clickElement("xpath", "//td[text()='Page Cache']");
+				}
+				else
+				{
+					Assert.fail();
+				}
+				String records=Common.findElement("xpath", "//span[@class='mass-select-info']//strong").getText();
+				if(records.equals("1"))
+				{
+					Sync.waitElementPresent("xpath","//span[text()='Submit']");
+					Common.clickElement("xpath", "//span[text()='Submit']");
+				}
+				else
+				{
+					Assert.fail();
+				}
+				String message=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+				Common.assertionCheckwithReport(message.equals("1 cache type(s) refreshed."),
+						"validating the cache management sucess message",
+						"cache message should be display after clicking on the flush magento",
+						"Sucessfullythe message has been displayed after clicking on the flush magneto",
+						"failed to display the sucess message after clicking on the flush magneto");
+				
+				}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the cache management sucess message",
+						"cache message should be display after clicking on the flush magento",
+						"unable to display the sucess message after clicking on the flush magneto",
+						Common.getscreenShot("failed to display the sucess message after clicking on the flush magneto"));
+				Assert.fail();
+			}
+			
 		}
 		
 }
