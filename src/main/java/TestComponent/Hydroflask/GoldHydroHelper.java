@@ -7727,7 +7727,7 @@ catch(Exception | Error e)
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitForLoad();
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
