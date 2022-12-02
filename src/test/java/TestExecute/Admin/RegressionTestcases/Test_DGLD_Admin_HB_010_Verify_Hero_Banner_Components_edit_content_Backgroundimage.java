@@ -34,17 +34,23 @@ public class Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_B
            Admin.editherobanner_Background_image();
            Admin.allbackground("Herobanner");
            Admin.savecontent("Herobanner");
+           Admin.page_Cache("FlushMagento");
            Admin.openwebsite("Herobanner");
+           Admin.ClosADD();
+           Admin.AcceptAll();
            Admin.website_verification_Herobanner();
            Admin.website_image_verification_herobanner();
            Admin.editherobanner_video("Herobanner");
            Admin.savecontent("Herobanner");
+           Admin.page_Cache("FlushMagento");
            Admin.openwebsite("Herobanner");
            Admin.website_verification_video_Herobanner();
+           
            
            Admin.click_hero_product("Herobanner");
          
            Admin.savecontent("Herobanner");
+           Admin.page_Cache("FlushMagento");
            Admin.openwebsite("Herobanner");
            Admin.verify_Padding_fronytend("Herobanner");
            Admin.Websiteverification_hero_product();

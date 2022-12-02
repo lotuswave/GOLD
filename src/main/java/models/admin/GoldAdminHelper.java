@@ -2076,6 +2076,7 @@ public class GoldAdminHelper {
 		try {
 
 			Common.switchToFirstTab();
+			Search_previous_page_Magento(Dataset);
 			Contentpage();
 			edit_Herobanner();
 			Common.findElement("xpath", "(//button[@class='action-remove'])[1]");
@@ -2131,6 +2132,7 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Common.switchToFirstTab();
+			Search_previous_page_Magento(Dataset);
 			Contentpage();
 			hot_elements();
 			edit_Herobanner();
@@ -2679,7 +2681,7 @@ public class GoldAdminHelper {
 		try {
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
-			Search_previous_page_Magento("promocontent");
+			Search_previous_page_Magento(Dataset);
 
 			Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
 			String name1 = Common.findElement("xpath", "//h1[@class='page-title']").getText();
