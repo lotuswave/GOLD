@@ -2136,8 +2136,7 @@ public class GoldAdminHelper {
 			Contentpage();
 			hot_elements();
 			edit_Herobanner();
-
-			Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+        Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
 					data.get(Dataset).get("heading"));
 			Common.clickElement("xpath", "//div[@class='admin__action-multiselect-wrap action-select-wrap']");
 
