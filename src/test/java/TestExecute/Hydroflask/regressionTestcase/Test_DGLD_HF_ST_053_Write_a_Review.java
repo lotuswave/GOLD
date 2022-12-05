@@ -21,6 +21,7 @@ public class Test_DGLD_HF_ST_053_Write_a_Review {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product"); 
 			Hydro.review("review");
+			Hydro.Ask_a_question("Ask a question");
 			
 		} catch (Exception e) {
 

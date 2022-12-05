@@ -8023,6 +8023,37 @@ catch(Exception | Error e)
 	
 		
 	}
+	public void Ask_a_question(String Dataset) {
+		// TODO Auto-generated method stub
+		String Question=data.get(Dataset).get("CommetsHydroflask");
+		String Name=data.get(Dataset).get("FirstName");
+		String Email=data.get(Dataset).get("Email");
+		try
+		{
+		Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");	
+		Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
+		Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
+		Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_q')]",Question);
+		Sync.waitElementPresent(30, "xpath", "//input[@name='display_name']");
+		Common.textBoxInput("xpath", "//input[@name='display_name']",Name);
+		Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
+		Common.textBoxInput("xpath", "//input[@name='email']",Email);
+		Common.clickElement("xpath", "//input[@data-button-type='submit']");
+		String question=Common.findElement("xpath", "//div[@class='yotpo-thank-you']//span[contains(text(),'Thank you')]").getText();
+		System.out.println(question);
+		Common.assertionCheckwithReport(question.contains("THANK YOU FOR POSTING A QUESTION!"), "validating the question submit form",
+				"Ask a form should be submit", "Sucessfully question post should be submit",
+				"Failed to submit the ask a question post");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the question submit form",
+					"Ask a form should be submit", "Unable to subit question post", Common.getscreenShot("failed to subit question post"));
+			Assert.fail();
+		}
+		
+	}
 	}
 	
 		
