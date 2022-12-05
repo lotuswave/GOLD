@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF GG Sprint  smoke execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+   <test name="Test_DGLD_HF_ST_114_Guest_User_Myhydro_Graphic_Engraving" testid="DTG-1222" priority="P1" description="This script will cover Guest User Myhydro Graphic Engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_114_Guest_User_Myhydro_Graphic_Engraving"/>
+        </classes>
+        </test>
+ <test name="Test_DGLD_HF_ST_115_Register_User_Checkout_PP_Myhydro_Graphic_Engraving" testid="DTG-1222" priority="P1" description="This script will cover Register User Checkout PP Myhydro Graphic Engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_115_Register_User_Checkout_PP_Myhydro_Graphic_Engraving"/>
+        </classes>
+        </test>
+
+ <test name="Test_DGLD_HF_ST_108_Checkout_Guest_User_MyHydro_Engraving_with_PP" testid="DTG-1222" priority="P1" description="This script will cover Checkout Guest User MyHydro Engraving with PP">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_108_Checkout_Guest_User_MyHydro_Engraving_with_PP"/>
+        </classes>
+        </test>
+
+ <test name="Test_DGLD_HF_ST_109_Checkout_Register_User_MyHydro_Engraving_with_Discover_Card" testid="DTG-1222" priority="P1" description="This script will cover Checkout Register User MyHydro Engraving with Discover Card">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_109_Checkout_Register_User_MyHydro_Engraving_with_Discover_Card"/>
+        </classes>
+        </test>
+<test name="Test_DGLD_HF_ST_086_Guest_User_Checkout_with_My_Hydro_Customize_product" testid="DTG-2384" priority="P1" description="This script will cover validating the Guest User Checkout with My Hydro Customize product">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_086_Guest_User_Checkout_with_My_Hydro_Customize_product" />
+		</classes>
+	</test> 
+ 	<test name="Test_DGLD_HF_ST_087_Register_User_Checkout_with_My_Hydro_Customize_product" testid="DTG-2387" priority="P1" description="This script will cover validating the Register User Checkout with My Hydro Customize product ">
+		<classes>
+			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_087_Register_User_Checkout_with_My_Hydro_Customize_product" />
+		</classes>
+	</test> 
+	<test name="Test_DGLD_HF_ST_088_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products" testid="DTG-1222" priority="P1" description="This script will cover Checkout with GuestUserCC Simple Configurable Engraving Grouped My Hydro and Bundle products">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_088_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products"/>
+        </classes>
+        </test>
+ <test name="Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products" testid="DTG-1222" priority="P1" description="This script will cover Checkout with RegisterUserCC Simple Configurable Engraving Grouped My Hydro and Bundle products">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products"/>
+        </classes>
+        </test>
+<test name="Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_without_engraving" testid="DTG-1222" priority="P1" description="This script will cover Guest user Checkout Myhydro without engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_without_engraving"/>
+        </classes>
+        </test>
+   
+        
+        
+</suite>  

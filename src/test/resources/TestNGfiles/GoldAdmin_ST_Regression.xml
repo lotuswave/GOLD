@@ -5,111 +5,7 @@
     </listeners>
     
        
-    <!--<test name="Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" testid="DTG-984" priority="P1" description="This script will cover validating Create Update and Delete New Customer">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" />
-		</classes>
-	</test> 
-        
-    <test name="Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" testid="DTG-985" priority="P1" description="This script will cover validatiing the Create Edit Delete Customer segment">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" />
-		</classes>
-	</test> 
-	
-	<test name="Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" testid="DTG-986" priority="P1" description="This script will cover validating the Create Update Delete Customer Group">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" />
-		</classes>
-	</test> 
-	
-       <test name="Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components" testid="DTG-1912" priority="P1" description="This script will cover validating Verify the Value Prop Banner Components">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_VPB_006_Verify_the_Value_Prop_Banner_Components" />
-		</classes>
-	</test>
-
-	<test name="Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" testid="DTG-1348" priority="P1" description="This script will cover validating Country Language selector Management">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" />
-		</classes>
-	</test> 
-
- <test name="Test_DGLD_Admin_ST_CPS_009_CategoryProduct_Slider_Verify_Edit_CategoryProduct_Slider_Components_Content_Products" testid="DTG-1915" priority="P1" description="This script will cover validating CategoryProduct Slider Verify Edit CategoryProduct Slider Components Content Products">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CPS_009_CategoryProduct_Slider_Verify_Edit_CategoryProduct_Slider_Components_Content_Products" />
-		</classes>
-	</test> 
-
-
-  <test name="Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_Backgroundimage" testid="DTG-1916" priority="P1" description="This script will cover validating Verify Hero Banner Components edit content Backgroundimage">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_Backgroundimage" />
-		</classes>
-	</test> 
-
-   <test name="Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" testid="DTG-2076" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" />
-		</classes>
-	</test>
-       
-         <test name="Test_DGLD_Admin_ST_CardTiles_015_Configure_and_Validate_Categorycardtiles" testid="DTG-2093" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CardTiles_015_Configure_and_Validate_Categorycardtiles" />
-		</classes>
-	</test>
-
-
-	<test name="Test_DGLD_Admin_PROMO_004_Validate_PromoMedia_Block_Components" testid="DTG-1910" priority="P1" description="This testcase is to Validate PromoMedia Block Components">
-        <classes>
-            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_PROMO_004_Validate_PromoMedia_Block_Components" />
-        </classes>
-    </test>
-
-
-
-<test name="Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components" testid="DTG-1911" priority="P1" description="This testcase is to Validate the Promo BlockComponents">
-        <classes>
-            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components" />
-        </classes>
-    </test>
-
-
-
-
- <test name="Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_Card_Components_Content" testid="DTG-1913" priority="P1" description="This script will cover validating Edit Testimonials Product Card Components Content">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_Card_Components_Content" />
-		</classes>
-	</test>
-
- <test name="Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHeroBanner" testid="DTG-2089" priority="P1" description="This testcase is to configure CLP Hero banner on the admin and validate it on the front end">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CLP_HeroBanner_014_Configure_and_validate_CLPHeroBanner" />
-		</classes>
-	</test>
-
- <test name="Test_DGLD_Admin_ST_PLP_Block_013_Configure_and_Validate_PLPCMSBlocks" testid="DTG-2076" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
-		<classes>
-			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_PLP_Block_013_Configure_and_Validate_PLPCMSBlocks" />
-		</classes>
-	</test>
-
-
-  <test name="Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue" testid="DTG-2522" priority="P1" description="This testcase is to Validate OXO guest Magento Retail Order Placement PriceOverride Lowervalue">
-        <classes>
-            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue" />
-        </classes> 
-    </test>
-    
-     <test name="Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_PriceOverridehighervalue" testid="DTG-2522" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement PriceOverridehighervalue">
-        <classes>
-            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_PriceOverridehighervalue" />
-        </classes> 
-    </test> -->
- 
-  <!--     <test name="Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" testid="DTG-984" priority="P1" description="This script will cover validating Create Update and Delete New Customer">
+       <test name="Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" testid="DTG-984" priority="P1" description="This script will cover validating Create Update and Delete New Customer">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" />
 		</classes>
@@ -211,10 +107,10 @@
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components" />
         </classes>
-    </test> -->
+    </test> 
     
     
- <!--      <test name="Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" testid="DTG-1911" priority="P1" description="This testcase is to Validate Guest Magento Order Placement">
+      <test name="Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" testid="DTG-1911" priority="P1" description="This testcase is to Validate Guest Magento Order Placement">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" />
         </classes>
@@ -232,12 +128,12 @@
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement" />
         </classes>
-    </test> -->
+    </test> 
     
     
     
     
-<!--     <test name="Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" testid="DTG-1924" priority="P1" description="This testcase is to Validate Promotion Cart Rule Prices">
+     <test name="Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" testid="DTG-1924" priority="P1" description="This testcase is to Validate Promotion Cart Rule Prices">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" />
         </classes>
@@ -247,9 +143,9 @@
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" />
         </classes>
-    </test> -->  
+    </test>  
     
- <!--     <test name="Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with Priceoverride highvalue">
+     <test name="Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with Priceoverride highvalue">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" />
         </classes>
@@ -259,15 +155,15 @@
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_LowPriceOverride" />
         </classes>
-    </test> -->
+    </test> 
     
-<!--    <test name="Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" testid="DTG-1923" priority="P1" description="This testcase is to Validate Promotion_Catalog_Rules">
+    <test name="Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" testid="DTG-1923" priority="P1" description="This testcase is to Validate Promotion_Catalog_Rules">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" />
         </classes> 
-    </test> -->  
+    </test>  
      
- <!--    <test name="Test_DGLD_Admin_ST_031_HF_Guest_CreateNewOrder_Grouped_Products" testid="DTG-2074" priority="P1" description="This testcase is to Validate New Order Creation in admin as Guest User with Grouped product for  Hydroflask">
+    <test name="Test_DGLD_Admin_ST_031_HF_Guest_CreateNewOrder_Grouped_Products" testid="DTG-2074" priority="P1" description="This testcase is to Validate New Order Creation in admin as Guest User with Grouped product for  Hydroflask">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_031_HF_Guest_CreateNewOrder_Grouped_Product" />
         </classes> 
@@ -318,7 +214,7 @@
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_PriceOverridehighervalue" />
         </classes> 
-    </test> -->
+    </test> 
     
      <test name="Test_DGLD_Admin_ST_036_HF_WarrantyOrderPlacement" testid="DTG-2650" priority="P1" description="This testcase is to Validate WarrantyOrderPlacement">
         <classes>
@@ -331,5 +227,6 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_037_OXO_WarrantyOrderPlacement" />
         </classes> 
     </test>
+	
 	
 </suite>  
