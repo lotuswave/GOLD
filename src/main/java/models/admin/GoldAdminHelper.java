@@ -4455,9 +4455,11 @@ public class GoldAdminHelper {
 	public void Click_SearchProduct() {
 		try {
 
-			Thread.sleep(2000);
-			Common.clickElement("xpath", "//tr[contains(@class,'data-row')]");
+			//Thread.sleep(2000);
+			//Common.clickElement("xpath", "//tr[contains(@class,'data-row')]");
 			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//a[text()='Edit']");
+			Common.clickElement("xpath", "//a[text()='Edit']");
 
 			// Sync.waitElementInvisible(30, "xpath", "//div[@class='page-title-wrapper
 			// complex']");
@@ -4491,6 +4493,7 @@ public class GoldAdminHelper {
 			// "//button[@data-action='remove-selected-item']");
 			Common.clickElement("xpath",
 					"//fieldset[@data-index='container_category_ids']//div[contains(@class,'multiselect-wrap')]");
+		Thread.sleep(3000);
 			Sync.waitElementVisible("xpath", "//div[contains(@class,'active')]//input[contains(@class,'search')]");
 			// Common.actionsKeyPress(Keys.PAGE_DOWN);
 
@@ -4600,44 +4603,63 @@ public class GoldAdminHelper {
 	}
 
 	public void click_sortby(String dataset) {
+		String Actualproductprice= data.get(dataset).get("Price");
+		        try {
+		            Thread.sleep(2000);
+		            Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
+		            Thread.sleep(3000);
+		            Common.clickElement("xpath", "//select[@class='ais-SortBy-select']//option[text()='Newest']");
+		            // Thread.sleep(6000);
+		            // Common.textBoxInput("xpath", "//input[@id='search']",
+		            // data.get(dataset).get("Updateproductname"));
+		            // Sync.waitElementPresent("xpath",
+		            // "//form[@id='search_mini_form']//span[text()='Search']");
+		            // Common.clickElement("xpath",
+		            // "//form[@id='search_mini_form']//span[text()='Search']");
+		            Sync.waitPageLoad();
+		            Thread.sleep(4000);
+		            Common.refreshpage();
+		            Sync.waitElementPresent("xpath", "//span[text()='10 QATEST product ']");
+		            Common.scrollIntoView("xpath", "//span[text()='10 QATEST product ']");
+		            Common.mouseOver("xpath", "//span[text()='10 QATEST product ']");
+		        
+		            Thread.sleep(2000);
+		            String productname = Common.findElement("xpath", "//span[text()='10 QATEST product ']").getText();
+		            System.out.println(productname);
+		            String plpproductprice = Common.findElement("xpath", "//span[text()='$5.00']").getText();
+		            System.out.println(plpproductprice);
+		            
+		            Common.assertionCheckwithReport(productname.contains("10 QATEST") && plpproductprice.contains(Actualproductprice),
+		                    "To Validate the update product is displayed",
+		                    "should display the update product after clicking on the search",
+		                    "update product is displayed after a click on the search", "Failed to display update product");
+		            Common.clickElement("xpath", "//span[text()='10 QATEST product ']");
+		            
+		            String pdpproductname = Common.findElement("xpath", "//h1[text()='10 QATEST product ']").getText();
+		            System.out.println(pdpproductname);
+		            String productprice = Common.getText("xpath", "//span[text()='$5.00']");
+		            System.out.println(productprice);
 
-		try {
-			Thread.sleep(2000);
-			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']//option[text()='Newest']");
-			// Thread.sleep(6000);
-			// Common.textBoxInput("xpath", "//input[@id='search']",
-			// data.get(dataset).get("Updateproductname"));
-			// Sync.waitElementPresent("xpath",
-			// "//form[@id='search_mini_form']//span[text()='Search']");
-			// Common.clickElement("xpath",
-			// "//form[@id='search_mini_form']//span[text()='Search']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//a[text()=' 10 QATEST product ']");
-			Common.scrollIntoView("xpath", "//a[text()=' 10 QATEST product ']");
-			Common.mouseOver("xpath", "//a[text()=' 10 QATEST product ']");
-			Thread.sleep(2000);
 
-			String productlist = Common.getText("xpath", "//a[text()=' 10 QATEST product ']");
-			System.out.println(productlist);
 
-			Common.assertionCheckwithReport(productlist.contains("10 QATEST"),
-					"To Validate the update product is displayed",
-					"should display the update product after clicking on the search",
-					"update product is displayed after a click on the search", "Failed to display update product");
+		           Common.assertionCheckwithReport(productprice.contains(Actualproductprice) && pdpproductname.contains("10 QATEST") ,
+		                    "To Validate the update product is displayed",
+		                    "should display the update product after clicking on the search",
+		                    "update product is displayed after a click on the search", "Failed to display update product");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To Validate the update product is displayed",
-					"should display the update product after clicking on the search",
-					"unable to display update product after a click on the search", "Failed to display update product");
-			Assert.fail();
-		}
 
-	}
 
+		       } catch (Exception | Error e) {
+		            e.printStackTrace();
+		            ExtenantReportUtils.addFailedLog("To Validate the update product is displayed",
+		                    "should display the update product after clicking on the search",
+		                    "unable to display update product after a click on the search", "Failed to display update product");
+		            Assert.fail();
+		        }
+
+
+
+		   }
 	public void openwebsiteoxo(String Dataset) {
 		String pagetitle = data.get(Dataset).get("pageTitle");
 		try {

@@ -27,9 +27,9 @@ public class Test_DGLD_Admin_Catalog_017_Catalog_Product_Update {
            Admin.open_website("Address");
            Admin.bottles_headerlinks();
           Admin.click_sortby("AccountDetails");
-//          Admin.openwebsiteoxo("AccountDetails");
-//           Admin.POPContainers_headerlinks();
-//          Admin.click_sortby("AccountDetails");
+          Admin.openwebsiteoxo("AccountDetails");
+           Admin.POPContainers_headerlinks();
+          Admin.click_sortby("AccountDetails");
           Admin.Backto_magento_admin();
            Admin.Actual_Name_Price_Stock_Categories("Productupdate");
       
