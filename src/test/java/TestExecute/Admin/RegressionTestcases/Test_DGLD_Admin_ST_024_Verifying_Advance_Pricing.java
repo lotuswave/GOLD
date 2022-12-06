@@ -13,7 +13,7 @@ public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 
 	
 		String datafile = "Admin\\GoldAdminTestData.xlsx";    
-		GoldAdminHelper Admin = new GoldAdminHelper(datafile,"Catalog");
+		GoldAdminHelper Admin = new GoldAdminHelper(datafile,"CatalogPricerule");
 	    @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	    public void Catalog_product_update () throws Exception {
 	    try {
@@ -25,7 +25,7 @@ public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 	           Admin.Click_Products_Catalogmenu();
 	           Admin.Search_products("AccountDetails");
 	           Admin.Click_SearchProduct(); 
-	         Admin.Click_Edit();
+	        // Admin.Click_Edit();
 	           
 	           Admin.QAtest_Advanced_Pricing("AdvancedPricing");
 	        
@@ -48,7 +48,7 @@ public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 	    @AfterTest
 	    public void clearBrowser()
 	    {
-	     // Common.closeAll();
+	      Common.closeAll();
 
 	    }
 
@@ -58,7 +58,7 @@ public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 	    	System.setProperty("configFile", "Admin\\config.properties");
 	        Login.signIn();
 	    	  	
-	          Login.signIn();
+	          //Login.signIn();
 
 
 	      }

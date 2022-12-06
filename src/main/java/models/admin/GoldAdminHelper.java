@@ -4728,11 +4728,12 @@ public class GoldAdminHelper {
 
 			// String text=Common.getText("xpath", "//h1[@class='page-title']");
 			String text = Common.getPageTitle();
+			
 
 			System.out.println(text);
 			Thread.sleep(2000);
 
-			Common.assertionCheckwithReport(text.contains("Catalog "), "To Validate the pagetitle is displayed",
+			Common.assertionCheckwithReport(text.contains("Cart Rule price") || text.contains("QATEST product"), "To Validate the pagetitle is displayed",
 					"should display the pagetitle after clicking on the switchtofirsttab",
 					"pagetitle is displayed after a click on the switchtofirsttab", "Failed to display pagetitle");
 
@@ -8478,8 +8479,8 @@ public class GoldAdminHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			product_quantity(Dataset);
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Bag']");
-			Common.clickElement("xpath", "//span[text()='Add to Bag']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
