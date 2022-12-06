@@ -6205,24 +6205,23 @@ catch(Exception | Error e)
 			Common.scrollIntoView("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
-            if(Common.getPageTitle().contains(Footrer[i]))
-            {
-            	Common.assertionCheckwithReport(Common.getPageTitle().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-    			Common.closeCurrentWindow();
-            }
-            else
-            {
-            	
-    			String page=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();  
-    			Common.assertionCheckwithReport(page.contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-    			Common.navigateBack();
-            }
-			
-			
+             if(Common.getPageTitle().contains("Careers | Helen of Troy"))
+             {
+            	Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+    			Common.switchToFirstTab();
+		}
+		else
+		{
+			Sync.waitForLoad();
+			String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			Common.assertionCheckwithReport(breadcrumbs.contains(Footrer[i]) || Common.getPageTitle().contains("Affiliate Program"), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+			Common.navigateBack();
 		}
 		}
+		}
+
 		catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -6237,8 +6236,12 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		Common.actionsKeyPress(Keys.END);
 		String Footerlinks=data.get(dataSet).get("Customer Links");
+		String pagenames=data.get(dataSet).get("PageTitle");
 		String[] Footrer=Footerlinks.split(",");
+		String[] pagetitle=pagenames.split(",");
 		int i=0;
+		int j=0;
+		
 		
 		try{
 		for(i=0;i<Footrer.length;i++){
@@ -6247,7 +6250,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
 			Thread.sleep(3000);
 			System.out.println(Common.getPageTitle());
-//			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(pagetitle[j]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
 			Common.navigateBack();	
 			
 		}
@@ -7522,7 +7525,8 @@ catch(Exception | Error e)
 	public void footervalidation_Dogood(String Dataset) {
 		// TODO Auto-generated method stub
 		Common.actionsKeyPress(Keys.END);
-		String Footerlinks=data.get(Dataset).get("Benefits Links");
+		String Footerlinks=data.get(Dataset).get("good Links");
+		System.out.println(Footerlinks);
 		String[] Footrer=Footerlinks.split(",");
 		int i=0;
 		
@@ -7583,7 +7587,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitForLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
 			System.out.println(message);
