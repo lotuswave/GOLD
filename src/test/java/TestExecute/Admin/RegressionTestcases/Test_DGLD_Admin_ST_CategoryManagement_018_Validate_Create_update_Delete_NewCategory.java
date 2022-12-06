@@ -84,7 +84,7 @@ public class Test_DGLD_Admin_ST_CategoryManagement_018_Validate_Create_update_De
 
 	@AfterTest
 	public void clearBrowser() {
-		// Common.closeAll();
+		 Common.closeAll();
 
 	}
 

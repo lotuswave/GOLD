@@ -6760,8 +6760,8 @@ public class GoldAdminHelper {
 
 			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + HFsubcategory + "')]");
 			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "(//img[contains(@class,'elbow-end-plus')])[2]");
-			Common.javascriptclickElement("xpath", "(//img[contains(@class,'elbow-end-plus')])[2]");
+			Common.scrollIntoView("xpath", "(//img[contains(@class,'x-tree-elbow-plus')])[6]");
+			Common.javascriptclickElement("xpath", "(//img[contains(@class,'x-tree-elbow-plus')])[6]");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + OxoCategory + "')]");
 			Common.doubleClick("xpath", "//span[contains(text(),'" + OxoCategory + "')]");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Oxosubcategory + "')]");
@@ -6793,7 +6793,7 @@ public class GoldAdminHelper {
 					"After filling the catalog price rule details and click on save button, catalog promotion rule should save",
 					"Successfully catalog price rule saved with a success message",
 					"failed to save catalog price rule");
-
+          Thread.sleep(200000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -6819,12 +6819,7 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'" + HFsubcategory + "')]");
 			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + HFsubcategory + "')]");
 			Sync.waitPageLoad();
-
-			Sync.waitElementVisible("xpath", "(//button[@aria-label='Close'])[2]");
-			Common.javascriptclickElement("xpath", "(//button[@aria-label='Close'])[2]");
 			Thread.sleep(4000);
-			Sync.waitPageLoad();
-
 			Sync.waitElementVisible("xpath", "//span[text()=' Shop']");
 			Common.javascriptclickElement("xpath", "//span[text()=' Shop']");
 			Common.mouseOverClick("xpath", "//span[contains(text(),'" + HFCategory + "')]");

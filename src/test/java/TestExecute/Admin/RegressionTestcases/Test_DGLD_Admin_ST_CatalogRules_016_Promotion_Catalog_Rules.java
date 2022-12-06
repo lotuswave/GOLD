@@ -21,16 +21,15 @@ public class Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules {
 			Admin.Admin_signin("AccountDetails");
 			Admin.Admin_marketing();
 			Admin.Admin_CatalogPriceRule();
-		Admin.deleteexistingcatalogrule("Catalogpricedetails");
-		Admin.Admin_Create_New_Rule("Catalogpricedetails");
+			Admin.deleteexistingcatalogrule("Catalogpricedetails");
+			Admin.Admin_Create_New_Rule("Catalogpricedetails");
 			Admin.Admin_Select_Category("Categoryselection");
 			Admin.open_website("Hydroflask");
 			Admin.Validate_Catalog_Pricerule_HF_Frontend("Categoryselection");
 			Admin.open_website("OXO");
 			Admin.Validate_Catalog_Pricerule_OXO_Frontend("Categoryselection");
-		Admin.Navigate_Adminpage();
-		
-		Admin.deleteexistingcatalogrule("Catalogpricedetails");
+			Admin.Navigate_Adminpage();
+			Admin.deleteexistingcatalogrule("Catalogpricedetails");
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
