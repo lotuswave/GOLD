@@ -5942,6 +5942,9 @@ public class GoldAdminHelper {
 		String Newsubcategory = data.get(dataSet).get("Newsubcategory");
 
 		try {
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.refreshpage();
 			Common.mouseOverClick("xpath", "(//a[@class='level-top ui-corner-all'])[1]");
 			Common.mouseOverClick("xpath", "//span[contains(text(),'" + Newcategory + "')]");
 			String website_subcategory = Common
@@ -5969,6 +5972,8 @@ public class GoldAdminHelper {
 		String Newsubcategory = data.get(dataSet).get("Newsubcategory");
 
 		try {
+			Thread.sleep(3000);
+			Common.refreshpage();
 			Common.mouseOverClick("xpath", "(//a[@class='level-top ui-corner-all'])[1]");
 			int testcategory = Common.findElements("xpath", "//span[contains(text(),'" + Newcategory + "')]").size();
 			Thread.sleep(2000);
@@ -6013,7 +6018,7 @@ public class GoldAdminHelper {
 					"Updated category is reflected on the store front",
 					"Failed to reflect the category on the store front");
 
-			Thread.sleep(300000);
+			Thread.sleep(3000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the Updated category is refelected on the store front",
@@ -6026,6 +6031,7 @@ public class GoldAdminHelper {
 
 	public void delete_ExistingCategory(String Dataset) {
 		String category = data.get(Dataset).get("Newcategory");
+		String shop =  data.get(Dataset).get("Shop");
 		try {
 			Sync.waitElementClickable("id", "expandAll");
 			Common.scrollIntoView("id", "expandAll");
@@ -6074,7 +6080,7 @@ public class GoldAdminHelper {
 
 					Common.assertionCheckwithReport(
 							deletesuccessmessage.contains("You deleted the category.") && Common.getPageTitle()
-									.equals("Shop (ID: 8) / Categories / Inventory / Catalog / Magento Admin"),
+									.equals(shop + " / Categories / Inventory / Catalog / Magento Admin"),
 							"To validate the page is successfully deleted", "Page should be deleted successfully",
 							"Successfully navigate to the edit page builder field ",
 							"Failed to navigate to the edit page builder field");
@@ -6104,6 +6110,9 @@ public class GoldAdminHelper {
 		String Newcategory = data.get(dataSet).get("Newcategory");
 		String Updatesubcategory = data.get(dataSet).get("Updatesubcategory");
 		try {
+			Sync.waitPageLoad();
+			Common.refreshpage();
+		    Thread.sleep(5000);
 			Common.mouseOverClick("xpath", "(//a[@class='level-top ui-corner-all'])[1]");
 			Common.mouseOverClick("xpath", "//span[contains(text(),'" + Newcategory + "')]");
 			String website_subcategory = Common
