@@ -496,8 +496,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Thread.sleep(3000);
 //			Common.textBoxInputClear("name", "postcode");
 //			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
-			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
-			Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])");
+			Common.textBoxInput("xpath", "(//input[@name='postcode'])", data.get(dataSet).get("postcode"));
 			
 			Thread.sleep(5000);
 			
@@ -1711,8 +1711,8 @@ try
 			Thread.sleep(2000);
 //			Common.textBoxInputClear("name", "postcode");
 //			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
-			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
-			Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])");
+			Common.textBoxInput("xpath", "(//input[@name='postcode'])", data.get(dataSet).get("postcode"));
 			
 			Thread.sleep(5000);
 
@@ -1780,15 +1780,17 @@ try
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
-			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
+//			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
+			String accounttext=Common.findElement("xpath", "//div[@id='registration']/h3").getText();
 			String confirmpassword=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");
 			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
 			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String Greencolor=Color.fromString(Message).asHex();
 			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
+			System.out.println(Message1);
 			  Common.assertionCheckwithReport(Greencolor.equals("#4d8b40") &&
 			  Message1.contains("complete")&&shopping.contains("/shop/coffee-beverage")&&kitchen.
-			  contains("kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an account"),
+			  contains("kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
 			  "User should able to view all details in the order confirmation page",
 			  "Sucessfully all details has been displayed in the order confirmation",
@@ -3291,12 +3293,13 @@ public void Invalid_email_newsletter(String Dataset) {
 	try {
 		Sync.waitPageLoad();
 		Common.actionsKeyPress(Keys.END);
-		Sync.waitElementClickable(30, "xpath", "//input[@id='newsletter-signup_email']");
-		Common.textBoxInput("xpath", "//input[@id='newsletter-signup_email']", data.get(Dataset).get("Email"));
-		Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
-		String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
-		System.out.println(Errormessage);
-		Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
+		Common.switchFrames("xpath", "//iframe[@title='OXO Gold Footer Signup']");
+		Sync.waitElementClickable(30, "xpath", "//input[@id='form_input_email']");
+		Common.textBoxInput("xpath", "//input[@id='form_input_email']", data.get(Dataset).get("Email"));
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		String Errormessage = Common.findElement("xpath", "//span[@class='error-message']").getText();
+		System.out.println(Errormessage);    //Error: Please enter a valid email address. (previous error)
+		Common.assertionCheckwithReport(Errormessage.equals("Email address is required"),
 				"To validate the error message for Invalid Email",
 				"Should display error Please enter a valid email address.", Errormessage,
 				"Failed to display the error message for invaild email");
@@ -3315,12 +3318,12 @@ public void Invalid_email_newsletter(String Dataset) {
 public void Empty_Email() {
 	try {
 
-		Common.textBoxInputClear("xpath", "//input[@id='newsletter-signup_email']");
+		Common.textBoxInputClear("xpath", "//input[@id='form_input_email']");
 		Thread.sleep(4000);
-		Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
-		String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
-		System.out.println(Errormessage);
-		Common.assertionCheckwithReport(Errormessage.equals("Error: This field is required."),
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		String Errormessage = Common.findElement("xpath", "//span[@class='error-message']").getText();
+		System.out.println(Errormessage);   //Error: This field is required. (Previous error)
+		Common.assertionCheckwithReport(Errormessage.equals("Email address is required"),
 				"To validate the error message for missing email fields",
 				"Should display Error Please enter a valid email address.", Errormessage,
 				"Error message dispaly unsuccessfull");
@@ -3342,17 +3345,17 @@ public void stayIntouch() throws Exception {
 		Thread.sleep(5000);
 		Common.actionsKeyPress(Keys.END);
 		Thread.sleep(5000);
-		Sync.waitElementPresent("xpath", "//input[@id='newsletter-signup_email']");
-		Common.clickElement("xpath", "//input[@id='newsletter-signup_email']");
-		Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+		Sync.waitElementPresent("xpath", "//input[@id='form_input_email']");
+		Common.clickElement("xpath", "//input[@id='form_input_email']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Enter email address']", Utils.getEmailid());
 		Thread.sleep(5000);
-		Common.clickElement("xpath", "//div[contains(@class,'m-n')]//button[@type='submit']");
+		Common.clickElement("xpath", "//button[text()='Submit']");
 		Thread.sleep(5000);
-		String Text = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+		String Text = Common.getText("xpath", "//div[@id='thxtext1']");
 		System.out.println(Text);
 		String expectedResult = "User gets confirmation message that it was submitted";
 
-		Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),"verifying newsletter subscription",
+		Common.assertionCheckwithReport(Text.contains("Thank you For your Subscription"),"verifying newsletter subscription",
 				"User get confirmation message if new email if it used mail it showing error message ", Text,
 				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
@@ -3479,7 +3482,8 @@ public void contactUsPage(String dataSet) {
 	
 	try {
 
-
+		Common.clickElement("xpath", "//span[text()='Write to Us']");
+		
 		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://oxo')]");
 		Common.switchFrames("xpath", "//iframe[contains(@src,'https://oxo')]");
 
@@ -3544,12 +3548,12 @@ public void contactUsPage(String dataSet) {
 
 		Common.scrollIntoView("xpath", "//button[text()='Submit']");
 		Common.clickElement("xpath", "//button[text()='Submit']");
-		
+		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		
-		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
-		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
-		int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+		Sync.waitElementPresent("xpath", "//h1[@data-content-type='heading']");
+		Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
+		int Contactussuccessmessage = Common.findElements("xpath", "//h1[@data-content-type='heading']").size();
 		Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
 				"Success message should be Displayed", "Contact us Success message displayed ",
 				"failed to dispaly success message");
@@ -3565,11 +3569,11 @@ public void contactUsPage(String dataSet) {
 	}
 
 	Common.actionsKeyPress(Keys.PAGE_UP);
-	Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
-	String Text = Common.getText("xpath", "//div[@class='form-wrap']");
-	expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-	Common.assertionCheckwithReport(Text.contains("Your submission was successful"),
-			"verifying contact us conformation message", expectedResult,
+	Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
+	String Text = Common.getText("xpath", "//h1[@data-content-type='heading']");
+	expectedResult = "User gets confirmation email with Success message";
+	Common.assertionCheckwithReport(Text.contains("Thank You!"),
+			"verifying contact us confirmation message", expectedResult,
 			"User gets confirmation under the same tab", "unabel to load the confirmation form");
 	
 
