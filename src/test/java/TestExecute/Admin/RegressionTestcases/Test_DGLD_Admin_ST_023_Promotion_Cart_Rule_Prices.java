@@ -58,7 +58,7 @@ public class Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices {
 		System.setProperty("configFile", "Admin\\config.properties");
 		Login.signIn();
 
-		Login.signIn();
+		//Login.signIn();
 
 	}
 

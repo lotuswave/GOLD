@@ -4733,7 +4733,7 @@ public class GoldAdminHelper {
 			System.out.println(text);
 			Thread.sleep(2000);
 
-			Common.assertionCheckwithReport(text.contains("Cart Rule price") || text.contains("QATEST product"), "To Validate the pagetitle is displayed",
+			Common.assertionCheckwithReport(text.contains("Cart Price Rules") || text.contains("QATEST product"), "To Validate the pagetitle is displayed",
 					"should display the pagetitle after clicking on the switchtofirsttab",
 					"pagetitle is displayed after a click on the switchtofirsttab", "Failed to display pagetitle");
 
@@ -7935,6 +7935,7 @@ public class GoldAdminHelper {
 
 	public void Rule_information(String dataSet) {
 		// TODO Auto-generated method stub
+
 		try {
 			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//input[@name='name']");
@@ -7943,11 +7944,11 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
 			Common.textBoxInput("xpath", "//textarea[@name='description']", data.get(dataSet).get("Description"));
 
-			Sync.waitElementPresent("xpath", "//option[text()='Hydroflask Website']");
-			Common.clickElement("xpath", "//option[text()='Hydroflask Website']");
-
-			Sync.waitElementPresent("xpath", "//option[text()='General']");
-			Common.clickElement("xpath", "//option[text()='General']");
+	
+			
+			Select_websites(dataSet);
+			Sync.waitElementPresent("xpath", "//option[text()='NOT LOGGED IN']");
+			Common.clickElement("xpath", "//option[text()='NOT LOGGED IN']");
 
 			Sync.waitElementPresent("xpath", "//select[@name='coupon_type']");
 			Common.clickElement("xpath", "//select[@name='coupon_type']");
@@ -7961,6 +7962,22 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "//select[@name='finance_category']");
 			Common.dropdown("xpath", "//select[@name='finance_category']", Common.SelectBy.TEXT,
 					data.get(dataSet).get("FinanceCategory"));
+			
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//span[text()='Actions']");
+			Common.clickElement("xpath", "//span[text()='Actions']");
+			
+			Sync.waitElementPresent("xpath", "//select[@name='simple_action']");
+			Common.clickElement("xpath", "//select[@name='simple_action']");
+			
+		//	Sync.waitElementPresent("xpath", "//option[@data-title='Fixed amount discount']");
+			Common.dropdown("xpath", "//select[@name='simple_action']", Common.SelectBy.TEXT,
+					data.get(dataSet).get("Apply"));
+			
+			Sync.waitElementPresent("xpath", "//input[@name='discount_amount']");
+			Common.clickElement("xpath", "//input[@name='discount_amount']");
+			Common.textBoxInput("xpath", "//input[@name='discount_amount']", data.get(dataSet).get("Discount Amount"));
+
 
 			Sync.waitElementPresent("xpath", "//button[@id='save']");
 			Common.clickElement("xpath", "//button[@id='save']");
@@ -7986,66 +8003,90 @@ public class GoldAdminHelper {
 
 	}
 
-	public void delet_existing_Coupon(String dataSet) {
-		// TODO Auto-generated method stub
-		try {
-			Thread.sleep(2000);
 
-			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-			Common.clickElement("xpath", "//input[@name='coupon_code']");
-			Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(dataSet).get("Coupon Code"));
-			Common.actionsKeyPress(Keys.ENTER);
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
 
-			Sync.waitElementPresent("xpath", "//input[@name='name']");
-			Common.scrollIntoView("xpath", "//input[@name='name']");
 
-			Sync.waitElementPresent("xpath", "//textarea[@name='description']");
-			Common.scrollIntoView("xpath", "//textarea[@name='description']");
 
-			Sync.waitElementPresent("xpath", "//option[text()='Hydroflask Website']");
-			Common.scrollIntoView("xpath", "//option[text()='Hydroflask Website']");
+public void Select_websites(String dataSet) throws Exception {
+		String website=data.get(dataSet).get("website");
+		System.out.println(website);
+		
+		String[] websites = website.split(",");
 
-			Sync.waitElementPresent("xpath", "//option[text()='General']");
-			Common.scrollIntoView("xpath", "//option[text()='General']");
+		for (int i = 0; i < websites.length; i++) {
+			System.out.println(websites[i]);
+			Sync.waitElementClickable("xpath", "//option[text()='" + websites[i] + "']");
+			
+			Common.clickElement("xpath", "//option[text()='" + websites[i] + "']");
 
-			Sync.waitElementPresent("xpath", "//select[@name='coupon_type']");
-			Common.scrollIntoView("xpath", "//select[@name='coupon_type']");
-
-			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-			Common.scrollIntoView("xpath", "//input[@name='coupon_code']");
-
-			Sync.waitElementPresent("xpath", "//select[@name='finance_category']");
-			Common.scrollIntoView("xpath", "//select[@name='finance_category']");
-
-			Sync.waitElementPresent("xpath", "//button[@id='delete']");
-			Common.clickElement("xpath", "//button[@id='delete']");
-
-			Sync.waitElementPresent("xpath", "//button[@class='action-primary action-accept']");
-			Common.clickElement("xpath", "//button[@class='action-primary action-accept']");
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			String deletmsg = Common.findElement("xpath", "//div[text()='You deleted the rule.']").getText();
-			System.out.println(deletmsg);
-			Common.assertionCheckwithReport(deletmsg.contains("You deleted the rule."),
-					"To Validate the delete message is displayed",
-					"should display the delete message page after clicking on the delete button",
-					"delete message  page is displayed after a click on the delete button",
-					"Failed to display delete message ");
-
-			Click_AddNewRule();
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To Validate the new cart price rule page is displayed",
-					"should display the New cart price rules page after clicking on the Add New rule",
-					"unable to display New cart price rules after a click on the Add new rule",
-					"Failed to display New cart price rules page");
-			Assert.fail();
 		}
-
 	}
+
+public void delet_existing_Coupon(String dataSet) {
+	// TODO Auto-generated method stub
+	try {
+		Thread.sleep(2000);
+
+		Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+		Common.clickElement("xpath", "//input[@name='coupon_code']");
+		Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(dataSet).get("Coupon Code"));
+		Common.actionsKeyPress(Keys.ENTER);
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
+
+		Sync.waitElementPresent("xpath", "//input[@name='name']");
+		Common.scrollIntoView("xpath", "//input[@name='name']");
+		
+		Sync.waitElementVisible("xpath", "//a[text()='Edit']");
+		Common.clickElement("xpath", "//a[text()='Edit']");
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+
+		Sync.waitElementPresent("xpath", "//textarea[@name='description']");
+		Common.scrollIntoView("xpath", "//textarea[@name='description']");
+
+		Sync.waitElementPresent("xpath", "//option[text()='Hydroflask Website']");
+		Common.scrollIntoView("xpath", "//option[text()='Hydroflask Website']");
+
+		Sync.waitElementPresent("xpath", "//option[text()='General']");
+		Common.scrollIntoView("xpath", "//option[text()='General']");
+
+		Sync.waitElementPresent("xpath", "//select[@name='coupon_type']");
+		Common.scrollIntoView("xpath", "//select[@name='coupon_type']");
+
+		Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
+		Common.scrollIntoView("xpath", "//input[@name='coupon_code']");
+
+		Sync.waitElementPresent("xpath", "//select[@name='finance_category']");
+		Common.scrollIntoView("xpath", "//select[@name='finance_category']");
+
+		Sync.waitElementPresent("xpath", "//button[@id='delete']");
+		Common.clickElement("xpath", "//button[@id='delete']");
+
+		Sync.waitElementPresent("xpath", "//button[@class='action-primary action-accept']");
+		Common.clickElement("xpath", "//button[@class='action-primary action-accept']");
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
+		String deletmsg = Common.findElement("xpath", "//div[text()='You deleted the rule.']").getText();
+		System.out.println(deletmsg);
+		Common.assertionCheckwithReport(deletmsg.contains("You deleted the rule."),
+				"To Validate the delete message is displayed",
+				"should display the delete message page after clicking on the delete button",
+				"delete message  page is displayed after a click on the delete button",
+				"Failed to display delete message ");
+
+		//Click_AddNewRule();
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To Validate the new cart price rule page is displayed",
+				"should display the New cart price rules page after clicking on the Add New rule",
+				"unable to display New cart price rules after a click on the Add new rule",
+				"Failed to display New cart price rules page");
+		Assert.fail();
+	}
+
+}
 
 	public void Payment_method(String dataSet) {
 		// TODO Auto-generated method stub
