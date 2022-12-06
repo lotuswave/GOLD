@@ -9,7 +9,7 @@ import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
 
-public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pric {
+public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 
 	
 		String datafile = "Admin\\GoldAdminTestData.xlsx";    
