@@ -204,7 +204,7 @@ public class GoldHydroHelper {
 	public void click_minicart() {
 		try {
 			Thread.sleep(8000);
-			Common.actionsKeyPress(Keys.ARROW_UP);
+			Common.actionsKeyPress(Keys.PAGE_UP);
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
@@ -7805,6 +7805,7 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String Graphic=data.get(Dataset).get("Engraving Graphic");
 		String text=data.get(Dataset).get("Engraving");
+		System.out.println(text);
 		try
 		{
 			Thread.sleep(2000);
@@ -7813,6 +7814,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
 			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]").getText();
 			System.out.println(engraving);
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(engraving.contains(Graphic) || engraving.contains(text), "Validating the "+engraving+ "for the bottle",
 					  engraving+"should apply for the bottle " , "Sucessfully"+engraving+"has been applied for the bottle",
 					"failed apply the"+engraving+"for the bottle");
