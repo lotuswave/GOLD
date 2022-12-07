@@ -54,7 +54,24 @@
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_113_Register_User_Checkout_PP_with_Graphic_Engraving_product"/>
         </classes>
         </test>
-   
+        
+        <test name="Test_DGLD_HF_ST_118_Guest_User_simple_Engraving_Text" testid="DTG-2735" priority="P1" description="Validating the checkout functionality with simple Text engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_118_Guest_User_simple_Engraving_Text"/>
+        </classes>
+        </test>
+        
+    <test name="Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic" testid="DTG-2736" priority="P1" description="Validating the checkout functionality with simple Graphic engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_ST_120_Guest_User_Engraving_multiple_line_Text" testid="DTG-2737" priority="P1" description="Validating Guest user Engraving Multi line text engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_120_Guest_User_Engraving_multiple_line_Text"/>
+        </classes>
+        </test>
         
         
 </suite>  
