@@ -7579,7 +7579,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
-//			engraving_color();
+			engraving_color();
 			engraving_Text("Horizontal Text");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitForLoad();

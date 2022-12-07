@@ -46,11 +46,24 @@
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products"/>
         </classes>
         </test>
-<test name="Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_without_engraving" testid="DTG-1222" priority="P1" description="This script will cover Guest user Checkout Myhydro without engraving">
+<test name="Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_with_Text" testid="DTG-1222" priority="P1" description="This script will cover Guest user Checkout Myhydro without engraving">
        <classes>
-            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_without_engraving"/>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_with_Text"/>
         </classes>
         </test>
+        
+        <test name="Test_DGLD_HF_ST_117_Register_user_Checkout_Myhydro_with_Text" testid="DTG-2734" priority="P1" description="Validating the checkout functionality with simple Text engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_117_Register_user_Checkout_Myhydro_with_Text"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_ST_121_Register_User_Customize_Multiple_line_Text" testid="DTG-2738" priority="P1" description="Validating Register user Multi line text Engraving">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_121_Register_User_Customize_Multiple_line_Text"/>
+        </classes>
+        </test>
+        
    
         
         
