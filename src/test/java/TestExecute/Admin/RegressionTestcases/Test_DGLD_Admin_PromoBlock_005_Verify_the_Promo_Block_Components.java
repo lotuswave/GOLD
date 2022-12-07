@@ -8,12 +8,13 @@ import org.testng.annotations.Test;
 import TestLib.Common;
 import TestLib.Login;
 import models.admin.Adminhelper;
+import models.admin.GoldAdminHelper;
 
 public class Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components {
 
 	
-	 String datafile = "Admin//AdminTestData.xlsx";    
-	    Adminhelper Admin = new Adminhelper(datafile,"DataSet");
+	 String datafile = "Admin//GoldAdminTestData.xlsx";    
+	 GoldAdminHelper Admin = new GoldAdminHelper(datafile,"PromoContent");
 	    @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	    public void Verify_the_Promo_Block_Components() throws Exception {
 	    try {
@@ -37,7 +38,9 @@ public class Test_DGLD_Admin_PromoBlock_005_Verify_the_Promo_Block_Components {
 	          Admin.hot_elements();
 	          Admin.editpromocontent();
 	          Admin.Configure_padding_marins("Valuepropbanner");
+	          Admin.Editandsavepage();
 	          Admin.savecontent("promocontent");
+	          Admin.page_Cache();
 	          Admin.openwebsite("promocontent");	           
 	          Admin.verify_Padding_fronytend("Valuepropbanner");   		      
 	        }

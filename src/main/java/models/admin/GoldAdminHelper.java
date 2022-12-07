@@ -2986,7 +2986,7 @@ public class GoldAdminHelper {
 					"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
 					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
 
-			Common.navigateBack();
+			Common.switchToFirstTab();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -9737,6 +9737,323 @@ public void delet_existing_Coupon(String dataSet) {
 			}
 			
 		}
+
+		public void dragndrop_promoBlock() {
+			try {
+				Common.scrollIntoView("xpath", "//span[text()='Promo Block']");
+				WebElement element = Common.findElement("xpath", "//span[text()='Promo Block']");
+				draganddropContentBlock(element);
+				String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+						.getAttribute("data-content-type");
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(blockname.equals("hot_promo_block"),
+						"Validating Promoblocker Dragndrop operation", "promoblocker dragndrop to content with options",
+						"successfully dragndrop the promoblocker with options ", "fail to dragndrop the promobaner");
+			} catch (Exception e) {
+
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("Validating Promoblocker Dragndrop operation",
+						"User should able Dragndrop Promoblocker", "Sucessfully Dragndrop Promoblocker",
+						Common.getscreenShotPathforReport("Failed to Dragndrop Promoblocker"));
+				Assert.fail();
+
+			}
+		}
+
+		public void edit_promoBlock_one() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+				String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+						.getAttribute("id");
+
+				Common.mouseOverClick("xpath", "//div[@id='" + id + "']//div[3]//i");
+
+				String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+				Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
+						"To validate the admin is able to edit  Promo Media Card content",
+						"After Clicking on the edit button admin should navigate to the edit promoBlock page ",
+						"Admin Successfully navigated to edit promoBlock page ",
+						"Failed to navigate to edit promoBlock page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("To validate the admin is able to edit  Promo Media Card content",
+						"After Clicking on the edit button admin should navigate to the edit promoBlock page ",
+						"Admin is not able to  navigate to the edit Blocker page ",
+						Common.getscreenShotPathforReport("Failed to navigate to edit Blocker page"));
+				Assert.fail();
+
+			}
+		}
+
+		public void edit_promoBlock_two() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
+				String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+						.getAttribute("id");
+
+				Common.mouseOver("xpath", "//div[@id='" + id + "']//div[4]//i");
+				Common.clickElement("xpath", "//div[@id='" + id + "']//div[4]//i");
+
+				String editpromo = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+				Common.assertionCheckwithReport(editpromo.contains("Edit Promo Media Card"),
+						"validating the Navigation to the edit  Promo Media Card page ",
+						"After Click on edit button it should navigate to the edit promo content page ",
+						"Successfully it is navigated to edit promo content page ",
+						"Failed to navigate to the edit promo content page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validating the Navigation to the edit  Promo Media Card page ",
+						"After Click on edit button it should navigate to the edit promo content page ",
+						"Unable to navigated to the edit Blocker page ",
+						Common.getscreenShotPathforReport("Failed to navigate to the edit promo content page"));
+				Assert.fail();
+
+			}
+
+		}
+
+		public void editpromocontent_video(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//li[@name='video']");
+				Common.clickElement("xpath", "//li[@name='video']");
+				Common.clickElement("xpath", "//input[@name='video_source']");
+				Common.textBoxInput("xpath", "//input[@name='video_source']", data.get(Dataset).get("VideoURL"));
+			/*	Common.clickElement("xpath", "(//div[contains(@class,'sp-preview-')])[2]");
+				String color = data.get(Dataset).get("Color");
+				Common.clickElement("xpath", "//span[@title='" + color + "']");
+				Common.clickElement("xpath", "//button[text()='Apply']");
+				String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
+						.getAttribute("value");
+				Common.assertionCheckwithReport(appliedcolor.equals(color),
+						"validation of the color applied in the overlay color ",
+						"after Clicking on the color the overlay color should be applied ",
+						"Successfully overlay color is applied ", "Failed to apply overlay color");
+	*/
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validation of the color applied in the overlay color ",
+						"after Clicking on the color the overlay color should be applied ",
+						"Unable to applied the overlay color  ",
+						Common.getscreenShotPathforReport("Failed to apply overlay color"));
+				Assert.fail();
+			}
+		}
+
+		public void editpromocontent_fallback_image() {
+			// TODO Auto-generated method stub
+			String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa.png");
+			try {
+				Sync.waitElementPresent("xpath", "//input[@name='video_fallback_image']");
+				Common.findElement("xpath", "//input[@name='video_fallback_image']").sendKeys(path);
+				String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+				System.out.println(image);
+				Common.assertionCheckwithReport(image.equals("Lotusqa.png"),
+						"validating the image uploading on content for fallback image ",
+						"Image should be upload for Fallback image", "Successfully image uploaded on Fallback image ",
+						"Failed to upload image on the Fallback image");
+
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the image uploading on content for Fallback image ",
+						"Image should be upload for Fallback image", "unable to upload on Fallback image ",
+						Common.getscreenShotPathforReport("Failed to upload image on the Fallback image"));
+				Assert.fail();
+
+			}
+
+		}
+
+		public void video_promo_component() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent("xpath", "//span[text()='Play video']");
+				Common.clickElement("xpath", "//span[text()='Play video']");
+				String pause = Common
+						.findElement("xpath", "//button[contains(@class,'a-video-btn a-video-btn--icon-only js-v')]")
+						.getAttribute("class");
+				System.out.println(pause);
+				Common.assertionCheckwithReport(pause.contains(" video-playing"),
+						"validating the video uploading on fornt end  ", "video should be upload for front end ",
+						"Successfully video uploaded in front end  ", "Failed to upload video on the frond end ");
+
+			} catch (Exception | Error e) {
+				ExtenantReportUtils.addFailedLog("validating the video uploading on fornt end  ",
+						"video should be upload for front end ", "Unable to upload video on front end  ",
+						"Failed to upload video on the frond end ");
+			}
+
+		}
+
+		public void clone_page_promo_block(String string) {
+			// TODO Auto-generated method stub
+			try {
+				Common.switchToFirstTab();
+				Contentpage();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//div[@data-content-type='hot_promo_block']");
+				Common.mouseOver("xpath", "//div[@data-content-type='hot_promo_block']");
+				Sync.waitElementPresent("xpath", "//a[@title='Duplicate']");
+				Common.clickElement("xpath", "//a[@title='Duplicate']");
+				edit_promoBlock_one();
+				editpromocontent_image1();
+				Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+				Sync.waitElementPresent("xpath", "//button[@id='save-button']");
+				Common.clickElement("xpath", "//button[@id='save-button']");
+				Sync.waitPageLoad();
+				Thread.sleep(8000);
+				String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+				Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
+						"Validating the User need to save the page", "User should able to save the page",
+						"Sucessfully User saves the page", "Unable to save the page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
+						"User should able to save the page", "Unable to saves the page",
+						Common.getscreenShotPathforReport("Failed to save the page"));
+				Assert.fail();
+
+			}
+
+		}
+
+		private void editpromocontent_image1() {
+			// TODO Auto-generated method stub
+			String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\Lotusqa1.png");
+			try {
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Delete image']");
+				Common.clickElement("xpath", "//button[@title='Delete image']");
+				Sync.waitElementPresent("xpath", "//input[@name='background_image']");
+				Common.findElement("xpath", "//input[@name='background_image']").sendKeys(path);
+				Sync.waitElementPresent("xpath", "//div[@class='file-uploader-filename']");
+				Common.scrollIntoView("xpath", "//div[@class='file-uploader-filename']");
+				String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+				System.out.println(image);
+				Common.assertionCheckwithReport(image.equals("Lotusqa1.png"),
+						"validating the image uploading on content for background image ",
+						"Image should be upload for background image", "Successfully image uploaded in background image ",
+						"Failed to upload image on the background image");
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation the image uploading on content for background image ",
+						"Image should be upload for background image", "Unable to upload the image in background image ",
+						Common.getscreenShotPathforReport("Failed to upload image on the background image"));
+				Assert.fail();
+
+			}
+
+		}	
 		
+
+		public void clone_page_valueprop_forntend() {
+			// TODO Auto-generated method stub
+			try {
+				Common.switchToSecondTab();
+				Common.refreshpage();
+				Sync.waitPageLoad();
+				Common.scrollIntoView("xpath", "//div[@class='c-promo']//div[@data-background-type='image']");
+				Thread.sleep(4000);
+				String id = Common.findElement("xpath", "//div[@class='c-promo']//div[@data-background-type='image']")
+						.getAttribute("data-pb-style");
+				Thread.sleep(4000);
+				String imagefrontend = Common.findElement("xpath", "//div[@data-pb-style='" + id + "']")
+						.getAttribute("data-background-images");
+				System.out.println(imagefrontend);
+				Thread.sleep(3000);
+				Common.assertionCheckwithReport(imagefrontend.contains("Lotusqa"),
+						"validating the image uploading on content for fornt end image ",
+						"Image should be upload for front end image", "Successfully image uploaded in front end image ",
+						"Failed to upload image on the frond end image");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the image uploading on content for fornt end image ",
+						"Image should be upload for front end image", "Unable to upload image on front end ",
+						"Failed to upload image on the frond end image");
+				Assert.fail();
+
+			}
+
+		}
+
+		public void page_Cache() {
+            // TODO Auto-generated method stub
+           // String Magento = data.get(Dataset).get("cache");
+            try {
+                Sync.waitElementPresent("xpath", "//a//span[text()='System']");
+                Common.clickElement("xpath", "//a//span[text()='System']");
+                Sync.waitElementPresent("xpath", "//a//span[text()='Cache Management']");
+                Common.clickElement("xpath", "//a//span[text()='Cache Management']");
+                Sync.waitPageLoad();
+                Thread.sleep(4000);
+                Common.assertionCheckwithReport(Common.getPageTitle().contains("Cache Management"),
+                        "validating the page navigates to the cache management",
+                        "It should Navigates to the Cache management page",
+                        "Sucessfully it is navigated to the cache managment page",
+                        "failed to Navigate to the cache managment page");
+                String page=Common.findElement("xpath", "//td[text()='Page Cache']").getText();
+                if(page.equals("Page Cache"))
+                {
+                    Sync.waitElementPresent("xpath","//td[text()='Page Cache']");
+                    Common.clickElement("xpath", "//td[text()='Page Cache']");
+                }
+                else
+                {
+                    Assert.fail();
+                }
+                String records=Common.findElement("xpath", "//span[@class='mass-select-info']//strong").getText();
+                if(records.equals("1"))
+                {
+                    Sync.waitElementPresent("xpath","//span[text()='Submit']");
+                    Common.clickElement("xpath", "//span[text()='Submit']");
+                }
+                else
+                {
+                    Assert.fail();
+                }
+                String message=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+                Common.assertionCheckwithReport(message.equals("1 cache type(s) refreshed."),
+                        "validating the cache management sucess message",
+                        "cache message should be display after clicking on the flush magento",
+                        "Sucessfullythe message has been displayed after clicking on the flush magneto",
+                        "failed to display the sucess message after clicking on the flush magneto");
+                
+                }
+            catch(Exception | Error e)
+            {
+                e.printStackTrace();
+                ExtenantReportUtils.addFailedLog("validating the cache management sucess message",
+                        "cache message should be display after clicking on the flush magento",
+                        "unable to display the sucess message after clicking on the flush magneto",
+                        Common.getscreenShot("failed to display the sucess message after clicking on the flush magneto"));
+                Assert.fail();
+            }	
+		
+}
+
 }
 
