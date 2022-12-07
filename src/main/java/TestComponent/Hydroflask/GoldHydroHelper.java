@@ -3582,21 +3582,20 @@ public void acceptPrivacy() {
 	}
 	
 	public void clickContact() throws Exception {
-		String expectedResult = "It should land successfully on the explore/contact page";
+		String expectedResult = "It should land successfully on the contact page";
 		
 		Common.actionsKeyPress(Keys.END);
 		try {
-			Thread.sleep(4000);
+			
 			Sync.waitElementPresent("xpath", "//a[text()='Contact Us']");
 			Common.clickElement("xpath", "//a[text()='Contact Us']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-		
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("contact"),"Validating the contatus page navigation" ,
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("contact"),"Validating the contatus page navigation" ,
 					expectedResult, "successfully land to contact page", "unabel to load the  contact page");
 		} catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("validating contact us page", expectedResult,
-					"unabel to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
+					"unable to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
 			Assert.fail();
 
 		}
@@ -3610,7 +3609,7 @@ public void acceptPrivacy() {
 		
 		try {
 
-
+			Common.clickElement("xpath", "//span[text()='Write to Us']");
 			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
 			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
 
@@ -3673,8 +3672,9 @@ public void acceptPrivacy() {
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
 			Common.clickElement("xpath", "//button[text()='Submit']");
 
-			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
-			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+			Sync.waitElementPresent("xpath", "//h1[@data-content-type='heading']");
+			Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
+			int Contactussuccessmessage = Common.findElements("xpath", "//h1[@data-content-type='heading']").size();
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
 					"Success message should be Displayed", "Contact us Success message displayed ",
 					"failed to dispaly success message");
@@ -3690,10 +3690,11 @@ public void acceptPrivacy() {
 		}
 
 		Common.actionsKeyPress(Keys.PAGE_UP);
-		String Text = Common.getText("xpath", "(//div[@class='form-wrap']//span)[2]");
-		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
-				"verifying contact us conformation message", expectedResult,
+		Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
+		String Text = Common.getText("xpath", "//h1[@data-content-type='heading']");
+		expectedResult = "User gets confirmation email with Success message";
+		Common.assertionCheckwithReport(Text.contains("Thank You!"),
+				"verifying contact us confirmation message", expectedResult,
 				"User gets confirmation under the same tab", "unabel to load the confirmation form");
 		
 
@@ -7580,12 +7581,12 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
-			engraving_color();
+//			engraving_color();
 			engraving_Text("Horizontal Text");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitForLoad();
-			Thread.sleep(4000);
-//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//			Thread.sleep(4000);
+			Sync.waitElementPresent(10, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
 			System.out.println(message);
