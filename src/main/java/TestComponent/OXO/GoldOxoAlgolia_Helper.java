@@ -149,8 +149,6 @@ public void Validating_search(String search) {
 	}
 
 }
-
-
 public void search_results1(String search) {
 	
 	try {

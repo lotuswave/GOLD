@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+   	
+   	<test name="Test_DGLD_HF_ST_01_Algolia_Req001_Search_for_a_product_Guest_User" testid="DTG-2234" priority="P1" description="This script will cover validating Algolia Search for a product Guest User">
+       <classes>
+            <class name="TestExecute.Hydroflask_Algolia_Regression_Testcases.Test_DGLD_HF_ST_01_Algolia_Req001_Search_for_a_product_Guest_User"/>
+        </classes>
+        </test>  
+        
+   	<test name="Test_DGLD_HF_ST_05_Algolia_Req005_Search_for_a_product_using_differentsynonyms" testid="DTG-2236" priority="P1" description="This script will cover validating Algolia Search for a product using different synonyms">
+       <classes>
+            <class name="TestExecute.Hydroflask_Algolia_Regression_Testcases.Test_DGLD_HF_ST_05_Algolia_Req005_Search_for_a_product_using_differentsynonyms"/>
+        </classes>
+        </test> 
+        
+   	<test name="Test_DGLD_HF_ST_06_Algolia_Req006_Search_for_a_product_using_its_singular_pluralform" testid="DTG-2243" priority="P1" description="This script will cover validating Algolia Search for a product using its singular pluralform">
+       <classes>
+            <class name="TestExecute.Hydroflask_Algolia_Regression_Testcases.Test_DGLD_HF_ST_06_Algolia_Req006_Search_for_a_product_using_its_singular_pluralform"/>
+        </classes>
+        </test> 
+        
+   	<test name="Test_DGLD_HF_ST_08_Algolia_Req008_Search_for_a_SKU_For_Guest_User" testid="DTG-2259" priority="P1" description="This script will cover validating PaymentPage UpdateAddress Mybilling and shippingaddress ">
+       <classes>
+            <class name="TestExecute.Hydroflask_Algolia_Regression_Testcases.Test_DGLD_HF_ST_08_Algolia_Req008_Search_for_a_SKU_For_Guest_User"/>
+        </classes>
+        </test> 
+        	<test name="Test_DGLD_HF_ST_03_Algolia_Req003_Search_for_a_product_using_an_unorderedwords_positionGuest_User" testid="DTG-2249" priority="P1" description="This script will cover validating Algolia Search for a product using its singular pluralform">
+       <classes>
+            <class name="TestExecute.Hydroflask_Algolia_Regression_Testcases.Test_DGLD_HF_ST_03_Algolia_Req003_Search_for_a_product_using_an_unorderedwords_positionGuest_User"/>
+        </classes>
+        </test> 
+        
+   	<test name="Test_DGLD_HF_ST_16_Algolia_Req016_SearchItemNumberonWarrantyForm" testid="DTG-2242" priority="P1" description="This script will cover validating PaymentPage UpdateAddress Mybilling and shippingaddress ">
+       <classes>
+            <class name="Test_DGLD_HF_ST_16_Algolia_Req016_SearchItemNumberonWarrantyForm"/>
+        </classes>
+        </test> 
+      
+      
+</suite>  

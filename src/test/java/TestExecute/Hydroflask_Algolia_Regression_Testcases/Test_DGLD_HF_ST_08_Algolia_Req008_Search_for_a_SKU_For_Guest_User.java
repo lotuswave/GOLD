@@ -44,8 +44,6 @@ public class Test_DGLD_HF_ST_08_Algolia_Req008_Search_for_a_SKU_For_Guest_User {
         }
     }
 
-
-
    @AfterTest
     public void clearBrowser() {
         Common.closeAll();

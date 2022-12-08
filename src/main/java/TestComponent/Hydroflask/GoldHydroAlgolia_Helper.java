@@ -171,9 +171,6 @@ public void Validating_search1(String search) {
 
 }
 
-
-
-
 public void search_results1(String search) {
 		
 		try {
@@ -461,6 +458,43 @@ public void acceptPrivacy() {
 
 
    }
+	public void Algolia_search_results(String search) {
+	    
+	    try {
+	        Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+	        String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+	        Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+	                "User should able to click on the search button", "Search expands to the full page",
+	                "Sucessfully search bar should be expand");
+	        Common.textBoxInput("xpath", "//input[@id='search']", search);
+	        //Common.actionsKeyPress(Keys.ENTER);
+	        Sync.waitPageLoad();
+	        Thread.sleep(4000);
+	        int Searchresult = Common.findElements("xpath", "//div[contains(@class,'m-search__container')]")
+	                .size();
+
+
+
+	   Common.assertionCheckwithReport(Searchresult > 0,
+	            "To validate the search result",
+	            "should navigate add engraving page", "successfully navigate to add engraving page",
+	            "Failed to navigate to add engraving page");
+
+
+
+	           
+
+
+
+	   } catch (Exception | Error e) {
+	    e.printStackTrace();
+	    ExtenantReportUtils.addFailedLog("validating add engraving page",
+	        "should navigate add engraving page",
+	        "Failed to navigate to add engraving page",
+	        Common.getscreenShotPathforReport("Failed to navigate to add engraving pages"));
+	    Assert.fail();
+	    }
+	    }
 }
 
 

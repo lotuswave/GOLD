@@ -47,8 +47,6 @@ public class Test_DGLD_OXO_ST_08_Algolia_Req008_Search_for_a_SKU_For_Guest_User 
 
    }
 
-
-
    @BeforeTest
       public void startTest() throws Exception {
          System.setProperty("configFile", "oxo\\config.properties");

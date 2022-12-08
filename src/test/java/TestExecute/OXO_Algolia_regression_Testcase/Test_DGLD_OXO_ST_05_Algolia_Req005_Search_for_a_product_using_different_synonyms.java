@@ -44,8 +44,7 @@ public class Test_DGLD_OXO_ST_05_Algolia_Req005_Search_for_a_product_using_diffe
 		  Oxo.acceptPrivacy();
 	}
 
-	
-	
+
 	
 	
 }
