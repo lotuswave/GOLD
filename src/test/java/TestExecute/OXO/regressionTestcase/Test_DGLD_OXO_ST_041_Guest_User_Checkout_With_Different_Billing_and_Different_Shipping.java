@@ -22,7 +22,9 @@ public class Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and
 			Oxo.search_product("Product");
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.BillingAddress("BillingDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 

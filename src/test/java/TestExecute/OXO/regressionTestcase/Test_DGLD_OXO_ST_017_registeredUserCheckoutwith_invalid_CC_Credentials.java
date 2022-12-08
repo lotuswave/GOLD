@@ -25,6 +25,8 @@ public class Test_DGLD_OXO_ST_017_registeredUserCheckoutwith_invalid_CC_Credenti
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updtePayementcrditcard_WithInvalidData("invlidPaymentDetails");
 			
 			

@@ -6,32 +6,25 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.OXO.GoldOxoHelper;
-import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card {
+public class Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Register_User_Checkout_Funtionality_Visa_Card() throws Exception {
-		
-		
-//		for(int i=0;i<2;i++)
-//	       {
+	public void Validate_Guest_Checkout_with_2day_shipping_method() throws Exception {
+//       for(int i=0;i<3;i++)
+//       {
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
-//			Oxo.search_product("Productwarranty");
-//			Oxo.addtocart("Productwarranty");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress_registerUser("AccountDetails");
-			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("2 Day method");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
@@ -44,7 +37,7 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 		}
 	}
 //	}
-
+	
 	@AfterTest
 	public void clearBrowser() {
 //		Common.closeAll();
@@ -56,6 +49,7 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
 		  Oxo.acceptPrivacy();
+
 	}
 
 }

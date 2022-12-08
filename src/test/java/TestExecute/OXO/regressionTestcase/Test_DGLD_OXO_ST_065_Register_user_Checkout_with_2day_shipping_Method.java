@@ -9,12 +9,12 @@ import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card {
+public class Test_DGLD_OXO_ST_065_Register_user_Checkout_with_2day_shipping_Method {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Register_User_Checkout_Funtionality_Visa_Card() throws Exception {
+	public void Register_User_Checkout_with_2day_shipping_Method() throws Exception {
 		
 		
 //		for(int i=0;i<2;i++)
@@ -27,11 +27,9 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 			Oxo.addtocart("addproduct");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
-//			Oxo.search_product("Productwarranty");
-//			Oxo.addtocart("Productwarranty");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
-			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.select_Shipping_Method("2 Day method");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
@@ -47,7 +45,7 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

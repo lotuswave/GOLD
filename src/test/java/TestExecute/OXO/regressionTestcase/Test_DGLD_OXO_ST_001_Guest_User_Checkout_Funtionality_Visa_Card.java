@@ -26,7 +26,9 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 //			Oxo.search_product("Productwarranty");
 //			Oxo.addtocart("Productwarranty");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			
@@ -41,7 +43,7 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

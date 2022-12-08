@@ -25,6 +25,8 @@ public class Test_DGLD_OXO_ST_072_Register_User_Checkout_With_Different_Billing_
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.register_billingAddress("BillingDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 

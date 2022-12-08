@@ -24,6 +24,8 @@ public class Test_DGLD_OXO_ST_042_Stored_Payment_For_Register_User {
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			String Number= Oxo.addPaymentDetails("PaymentDetails");
 			Oxo.Store_payment_placeOrder("PaymentDetails");
 			Oxo.stored_Payments(Number);

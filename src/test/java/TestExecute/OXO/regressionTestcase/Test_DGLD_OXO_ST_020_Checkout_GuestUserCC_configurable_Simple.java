@@ -26,7 +26,9 @@ public class Test_DGLD_OXO_ST_020_Checkout_GuestUserCC_configurable_Simple {
 //			Oxo.search_product("ConfigProduct2");
 //			Oxo.Configurable_addtocart_pdp("ConfigProduct2");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			

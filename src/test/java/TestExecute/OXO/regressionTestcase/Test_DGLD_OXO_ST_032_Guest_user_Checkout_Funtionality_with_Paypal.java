@@ -25,7 +25,9 @@ public class Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal {
 //			Oxo.search_product("Product");
 //			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.payPal_Payment("PaypalDetails");
 			
 		} catch (Exception e) {

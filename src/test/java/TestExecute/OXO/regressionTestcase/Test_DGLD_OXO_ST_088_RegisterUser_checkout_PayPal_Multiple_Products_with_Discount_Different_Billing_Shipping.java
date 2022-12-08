@@ -35,6 +35,8 @@ public class Test_DGLD_OXO_ST_088_RegisterUser_checkout_PayPal_Multiple_Products
 			Oxo.minicart_Checkout();
 			Oxo.discountCode("Discount");
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.register_billingAddress("BillingDetails");
 			Oxo.payPal_Payment("PaypalDetails");
 

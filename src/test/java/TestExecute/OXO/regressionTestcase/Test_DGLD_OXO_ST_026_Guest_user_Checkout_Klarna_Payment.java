@@ -22,7 +22,9 @@ public class Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.Kalrna_Payment("Klarna Visa Payment");
 			
 		} catch (Exception e) {
@@ -33,7 +35,7 @@ public class Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

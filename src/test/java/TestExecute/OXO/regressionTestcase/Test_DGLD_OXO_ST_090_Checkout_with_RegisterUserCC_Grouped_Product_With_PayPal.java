@@ -24,6 +24,8 @@ public class Test_DGLD_OXO_ST_090_Checkout_with_RegisterUserCC_Grouped_Product_W
 			Oxo.addtocart("Group");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.payPal_Payment("PaypalDetails");
 			
 			

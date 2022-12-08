@@ -22,7 +22,9 @@ public class Test_DGLD_OXO_ST_092_Checkout_Guestuser_PO_Box_Address_with_AMEX {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("PO box Address");
+			Oxo.addDeliveryAddress_Guest("PO box Address");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 			

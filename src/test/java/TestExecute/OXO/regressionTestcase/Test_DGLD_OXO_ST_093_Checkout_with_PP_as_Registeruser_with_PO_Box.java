@@ -25,6 +25,8 @@ public class Test_DGLD_OXO_ST_093_Checkout_with_PP_as_Registeruser_with_PO_Box {
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("PO box Address");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.payPal_Payment("PaypalDetails");
 			
 			

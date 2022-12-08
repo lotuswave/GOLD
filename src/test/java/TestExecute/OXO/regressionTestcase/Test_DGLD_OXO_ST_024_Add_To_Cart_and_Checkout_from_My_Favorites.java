@@ -25,6 +25,8 @@ public class Test_DGLD_OXO_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 			Oxo.My_Favorites();
 			Oxo.Addtocart_From_MyFavorites("Product");
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("CCDiscovercard");
 			
 			

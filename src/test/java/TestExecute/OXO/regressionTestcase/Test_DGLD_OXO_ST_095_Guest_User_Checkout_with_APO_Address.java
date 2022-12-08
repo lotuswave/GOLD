@@ -21,7 +21,9 @@ public class Test_DGLD_OXO_ST_095_Guest_User_Checkout_with_APO_Address {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("APO Address");
+			Oxo.addDeliveryAddress_Guest("APO Address");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 			

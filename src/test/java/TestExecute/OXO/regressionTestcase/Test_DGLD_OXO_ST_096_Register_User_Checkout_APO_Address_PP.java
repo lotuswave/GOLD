@@ -26,6 +26,8 @@ public class Test_DGLD_OXO_ST_096_Register_User_Checkout_APO_Address_PP {
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("APO Address");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.payPal_Payment("PaypalDetails");
 			
 			

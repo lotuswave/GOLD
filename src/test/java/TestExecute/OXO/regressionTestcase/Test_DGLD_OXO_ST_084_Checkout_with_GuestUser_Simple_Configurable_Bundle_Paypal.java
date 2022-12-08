@@ -24,7 +24,9 @@ public class Test_DGLD_OXO_ST_084_Checkout_with_GuestUser_Simple_Configurable_Bu
 			Oxo.search_product("Bundle");
 			Oxo.addtocart("Bundle");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.payPal_Payment("PaypalDetails");
 			
 			

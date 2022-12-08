@@ -21,7 +21,9 @@ public class Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Pay
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.After_Pay_payment("Afterpay");
 			
 			

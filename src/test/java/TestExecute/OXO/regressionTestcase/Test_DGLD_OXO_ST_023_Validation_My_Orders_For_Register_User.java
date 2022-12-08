@@ -25,6 +25,8 @@ public class Test_DGLD_OXO_ST_023_Validation_My_Orders_For_Register_User {
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();;
 			String order = Oxo.updatePaymentAndSubmitOrder("CCDiscovercard");
 			Oxo.My_Orders_Page(order);
 			

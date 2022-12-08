@@ -24,6 +24,8 @@ public class Test_DGLD_OXO_ST_040_Register_User_Checkout_with_Afterpay_Payments 
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.After_Pay_payment("Afterpay");
 			
 			

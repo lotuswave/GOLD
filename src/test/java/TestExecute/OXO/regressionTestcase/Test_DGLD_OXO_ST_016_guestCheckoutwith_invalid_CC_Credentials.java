@@ -22,7 +22,9 @@ public class Test_DGLD_OXO_ST_016_guestCheckoutwith_invalid_CC_Credentials {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updtePayementcrditcard_WithInvalidData("invlidPaymentDetails");
 			
 			

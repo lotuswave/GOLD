@@ -22,7 +22,9 @@ public class Test_DGLD_OXO_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.Klarna_Saved_Payment("Klarna Visa Payment");
 			
 		} catch (Exception e) {

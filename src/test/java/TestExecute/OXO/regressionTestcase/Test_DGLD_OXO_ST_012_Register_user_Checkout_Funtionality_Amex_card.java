@@ -25,6 +25,8 @@ public class Test_DGLD_OXO_ST_012_Register_user_Checkout_Funtionality_Amex_card 
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 			

@@ -30,7 +30,9 @@ public class Test_DGLD_OXO_ST_087_GuestUser_checkout_PayPal_Multiple_Products_wi
 //			Oxo.addtocart("Group");
 			Oxo.minicart_Checkout();
 			Oxo.discountCode("Discount");
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {

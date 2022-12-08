@@ -30,6 +30,8 @@ public class Test_DGLD_OXO_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 //			Oxo.Configurable_addtocart_pdp("ConfigProduct2");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			
