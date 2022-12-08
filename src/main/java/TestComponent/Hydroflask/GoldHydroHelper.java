@@ -4633,6 +4633,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
@@ -5247,9 +5248,10 @@ catch(Exception | Error e)
 		{
 		
 			
-			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
-			Common.clickElement("xpath", "//label[text()='Reviews & Questions']");
-			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			Common.clickElement("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			Sync.waitForLoad();
+			Thread.sleep(2000);
 			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
 			System.out.println(form);
 			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
@@ -5298,6 +5300,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitForLoad();	
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
@@ -6704,14 +6707,11 @@ catch(Exception | Error e)
 				Myhydro_Engraving("Myhydro Product");
 				Myhydro_quantity(Dataset);
 				Common.clickElement("xpath", "//button[@class='ATC__btn']");
-				Thread.sleep(4000);
 				Sync.waitPageLoad();
 				Sync.waitForLoad();
 				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-						.getAttribute("data-ui-id");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("data-ui-id");
 				System.out.println(message);
-				Thread.sleep(6000);
 				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");

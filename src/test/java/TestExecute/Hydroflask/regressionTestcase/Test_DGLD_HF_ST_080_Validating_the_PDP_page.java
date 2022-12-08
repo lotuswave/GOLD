@@ -23,7 +23,6 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 			Hydro.click_product();
 			Hydro.Configurableproduct_addtocart_pdppage("Product");
 			Hydro.Configurableproduct_addtocart_pdp("Product");
-			Hydro.configurable_Sticky_add_to_cart("Product");
 			Hydro.writeareview("Product");
 		
 		}
@@ -46,7 +45,7 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 	@BeforeTest
 	  public void startTest() throws Exception {
 		  Login.signIn();
-		  Hydro.ClosADD();
+		  Hydro.close_add();
 	  Hydro.acceptPrivacy();
 		  
 	  }
