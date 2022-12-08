@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"MyHydro");
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_User_Simple_Engraving_Graphic () throws Exception {

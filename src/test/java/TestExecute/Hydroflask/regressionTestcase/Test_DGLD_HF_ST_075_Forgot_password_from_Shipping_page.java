@@ -40,7 +40,7 @@ public class Test_DGLD_HF_ST_075_Forgot_password_from_Shipping_page {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
-       // Hydro.close_add();
+        Hydro.close_add();
         Hydro.acceptPrivacy();
 
 	}
