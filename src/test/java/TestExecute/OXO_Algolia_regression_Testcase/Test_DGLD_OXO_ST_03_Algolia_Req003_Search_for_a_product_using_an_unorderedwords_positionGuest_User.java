@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Hydroflask.GoldHydroAlgolia_Helper;
 import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
@@ -12,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_ST_03_Algolia_Req003_Search_for_a_product_using_an_unorderedwords_positionGuest_User {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldHydroAlgolia_Helper Oxo=new GoldHydroAlgolia_Helper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Search_Results() throws Exception {
 
@@ -37,6 +38,8 @@ public class Test_DGLD_OXO_ST_03_Algolia_Req003_Search_for_a_product_using_an_un
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
 		  Oxo.acceptPrivacy();
+		  
+		 
 	}
 
 }

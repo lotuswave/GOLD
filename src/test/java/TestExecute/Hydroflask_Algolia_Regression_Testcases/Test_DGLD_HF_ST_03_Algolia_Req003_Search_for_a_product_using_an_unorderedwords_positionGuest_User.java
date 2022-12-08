@@ -5,13 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Hydroflask.GoldHydroAlgolia_Helper;
 import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_03_Algolia_Req003_Search_for_a_product_using_an_unorderedwords_positionGuest_User {
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Forms");
+	GoldHydroAlgolia_Helper Hydro = new GoldHydroAlgolia_Helper(datafile,"Forms");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_the_searchforunorder_prodcuts () throws Exception {
@@ -49,8 +50,7 @@ public class Test_DGLD_HF_ST_03_Algolia_Req003_Search_for_a_product_using_an_uno
          Hydro.acceptPrivacy();
 
          
-         
-         
+                
          
 	}
 

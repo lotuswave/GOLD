@@ -33,6 +33,9 @@ import groovyjarjarantlr.CommonAST;
 
 public class GoldHydroHelper {
 
+	
+	
+	
 	String datafile;
 	ExcelReader excelData;
 	Map<String, Map<String, String>> data = new HashMap<>();
@@ -8174,11 +8177,128 @@ catch(Exception | Error e)
 	}
 		
 	}
+	public void clickWarrantylink() {
+	// TODO Auto-generated method stub
+	
+		String expectedResult = "It should land successfully on the Warranty page";
+		
+		Common.actionsKeyPress(Keys.END);
+		try {
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//a[text()='Warranty']");
+			Common.clickElement("xpath", "//a[text()='Warranty']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			
+			Sync.waitPageLoad();	
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Warranty"),"Validating the Warranty page navigation" ,
+					expectedResult, "successfully land to Warranty page", "unabel to load the Warranty page");
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validating Warranty page", expectedResult,
+					"unabel to load the Warrantyt page", Common.getscreenShotPathforReport("Warranty page link"));
+			Assert.fail();
+
+		}
+		
+	}
+	public void Warrantysearch_results(String search)  {
+		 String expectedResult = "It should opens the search resluts of searched prodcuts.";
+		
+		try {
+			Common.clickElement("xpath", "//input[@class='form-control form-control-search']");
+			//Common.textBoxInput("xpath", "//input[@id='search']", search);
+			String searchresults = Common.findElement("xpath", "//input[@class='form-control form-control-search']").getText();
+			System.out.println(searchresults);
+			Common.textBoxInput("xpath", "//input[@id='searchInput']", search);
+			
+			
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			
+			  String searchresults1 = Common.findElement("xpath", "//span[@class='search-results-number']").getText();
+			  System.out.println(searchresults1);
+	            Common.assertionCheckwithReport(searchresults1.contains("30 results found for  'CAP LAGUNA'"),
+	                    "verifying search resluts", expectedResult, "search resluts should be displayed",
+	                    "search resluts not displayed");
+			
+			
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter product name will display in the search box",
+					" unable to enter the product name in  search box",
+					Common.getscreenShot("Failed to see the product name"));
+			Assert.fail();
+		}
 	}
 	
-		
+	
+public void unorderprodcut_search(String search) {
+// TODO Auto-generated method stub
+try 
+{
+Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+	"User should able to click on the search button", "Search expands to the full page",
+	"Sucessfully search bar should be expand");
+Common.textBoxInput("xpath", "//input[@id='search']", search);
+Common.actionsKeyPress(Keys.ENTER);
+Sync.waitPageLoad();
+Thread.sleep(4000);
+String searchresults1 = Common.getText("xpath", "//span[text()='pop container oxo']");
+String productsearch = Common.findElement("xpath", "(//div[@id='algolia-right-container'])[1]").getText();
+System.out.println(productsearch);
+Common.assertionCheckwithReport(searchresults1.contains("pop container oxo'"), "validating the search functionality",
+	"enter any search term will display no results in the search box", "user enter the search term in  search box",
+	"Failed to see the search term");
 
+} catch (Exception | Error e) {
+e.printStackTrace();
+ExtenantReportUtils.addFailedLog("validating the search functionality",
+	"enter product name will display in the search box",
+	" unable to enter the product name in  search box",
+	Common.getscreenShot("Failed to see the product name"));
+Assert.fail();
+}
 
+}
+	public void orderprodcut_search(String search) {
+		// TODO Auto-generated method stub
+	
+	try
+	{
+	Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+		"User should able to click on the search button", "Search expands to the full page",
+		"Sucessfully search bar should be expand");
+Common.textBoxInput("xpath", "//input[@id='search']", search);
+Common.actionsKeyPress(Keys.ENTER);
+Sync.waitPageLoad();
+Thread.sleep(4000);
+String searchresults = Common.getText("xpath", "//span[text()='32 oz mouth']");
+String productsearch1 = Common.findElement("xpath", "(//div[@id='algolia-right-container'])[1]").getText();
+System.out.println(productsearch1);
+Common.assertionCheckwithReport(searchresults.contains("32 oz mouth"), "validating the search functionality",
+		"enter any search term will display no results in the search box", "user enter the search term in  search box",
+		"Failed to see the search term");
+
+} catch (Exception | Error e) {
+e.printStackTrace();
+ExtenantReportUtils.addFailedLog("validating the search functionality",
+		"enter product name will display in the search box",
+		" unable to enter the product name in  search box",
+		Common.getscreenShot("Failed to see the product name"));
+Assert.fail();
+}
+
+}
+
+}
 			
 	
 	

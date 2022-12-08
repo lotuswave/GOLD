@@ -5844,10 +5844,78 @@ public void click_FeedingDrinking() {
 		}
 
 	}
+
+
+	public void orderprodcut_search(String search) {
+		// TODO Auto-generated method stub
 	
-	
-	
+	try
+	{
+	Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+		"User should able to click on the search button", "Search expands to the full page",
+		"Sucessfully search bar should be expand");
+Common.textBoxInput("xpath", "//input[@id='search']", search);
+Common.actionsKeyPress(Keys.ENTER);
+Sync.waitPageLoad();
+Thread.sleep(4000);
+String searchresults = Common.getText("xpath", "//span[text()='32 oz mouth']");
+String productsearch1 = Common.findElement("xpath", "(//div[@id='algolia-right-container'])[1]").getText();
+System.out.println(productsearch1);
+Common.assertionCheckwithReport(searchresults.contains("32 oz mouth"), "validating the search functionality",
+		"enter any search term will display no results in the search box", "user enter the search term in  search box",
+		"Failed to see the search term");
+
+} catch (Exception | Error e) {
+e.printStackTrace();
+ExtenantReportUtils.addFailedLog("validating the search functionality",
+		"enter product name will display in the search box",
+		" unable to enter the product name in  search box",
+		Common.getscreenShot("Failed to see the product name"));
+Assert.fail();
 }
+
+}
+
+
+	
+public void unorderprodcut_search(String search) {
+// TODO Auto-generated method stub
+
+
+try {
+Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+		"User should able to click on the search button", "Search expands to the full page",
+		"Sucessfully search bar should be expand");
+Common.textBoxInput("xpath", "//input[@id='search']", search);
+Common.actionsKeyPress(Keys.ENTER);
+Sync.waitPageLoad();
+Thread.sleep(4000);
+String searchresults = Common.getText("xpath", "//span[text()='mouth wide oz 32']");
+String productsearch = Common.findElement("xpath", "(//div[@id='algolia-right-container'])[1]").getText();
+System.out.println(productsearch);
+Common.assertionCheckwithReport(searchresults.contains("mouth wide oz 32"), "validating the search functionality",
+		"enter any search term will display no results in the search box", "user enter the search term in  search box",
+		"Failed to see the search term");
+
+} catch (Exception | Error e) {
+e.printStackTrace();
+ExtenantReportUtils.addFailedLog("validating the search functionality",
+		"enter product name will display in the search box",
+		" unable to enter the product name in  search box",
+		Common.getscreenShot("Failed to see the product name"));
+Assert.fail();
+}
+
+}
+
+}
+	
+	
+
 
 
 
