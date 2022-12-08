@@ -1220,15 +1220,15 @@ try
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
-			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
+			String accounttext=Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
 			String confirmpassword=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");
 			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
 			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String Greencolor=Color.fromString(Message).asHex();
-			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
+			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");			
 			  Common.assertionCheckwithReport(Greencolor.equals("#067a63") &&
 			  Message1.contains("complete")&&shopping.contains("/shop/bottles")&&kitchen.
-			  contains("/shop/kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an account"),
+			  contains("/shop/kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
 			  "User should able to view all details in the order confirmation page",
 			  "Sucessfully all details has been displayed in the order confirmation",
@@ -1252,8 +1252,8 @@ try
 			Common.clickElement("xpath", "//span[text()='Create an Account']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
 					"validating the  my Account page Navigation when user clicks on signin button",

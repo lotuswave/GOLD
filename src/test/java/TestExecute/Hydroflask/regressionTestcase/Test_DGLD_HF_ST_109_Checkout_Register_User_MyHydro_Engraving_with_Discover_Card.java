@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_109_Checkout_Register_User_MyHydro_Engraving_with_Discover_Card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Checkout_Register_User_MyHydro_Engraving_with_Discover_Card () throws Exception {
