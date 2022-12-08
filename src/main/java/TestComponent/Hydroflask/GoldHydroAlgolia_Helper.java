@@ -569,10 +569,10 @@ Common.textBoxInput("xpath", "//input[@id='search']", search);
 Common.actionsKeyPress(Keys.ENTER);
 Sync.waitPageLoad();
 Thread.sleep(4000);
-String searchresults = Common.getText("xpath", "//span[text()='32 oz mouth']");
+String searchresults = Common.getText("xpath", "//span[text()='oxo pop container']");
 String productsearch1 = Common.findElement("xpath", "(//div[@id='algolia-right-container'])[1]").getText();
 System.out.println(productsearch1);
-Common.assertionCheckwithReport(searchresults.contains("32 oz mouth"), "validating the search functionality",
+Common.assertionCheckwithReport(searchresults.contains("oxo pop container"), "validating the search functionality",
 		"enter any search term will display no results in the search box", "user enter the search term in  search box",
 		"Failed to see the search term");
 
@@ -603,10 +603,10 @@ public void unorderprodcut_search(String search) {
 		Common.actionsKeyPress(Keys.ENTER);
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		String searchresults = Common.getText("xpath", "//span[text()='mouth wide oz 32']");
+		String searchresults = Common.getText("xpath", "//span[text()='pop container oxo']");
 		String productsearch = Common.findElement("xpath", "(//div[@id='algolia-right-container'])[1]").getText();
 		System.out.println(productsearch);
-		Common.assertionCheckwithReport(searchresults.contains("mouth wide oz 32"), "validating the search functionality",
+		Common.assertionCheckwithReport(searchresults.contains("pop container oxo"), "validating the search functionality",
 				"enter any search term will display no results in the search box", "user enter the search term in  search box",
 				"Failed to see the search term");
 
