@@ -49,8 +49,8 @@ public class GoldAdminHelper {
 
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-			Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+		//	Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+			//Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
 			Sync.waitPageLoad(30);
 			Sync.waitElementPresent("name", "loginfmt");
 			Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
@@ -7280,7 +7280,7 @@ public class GoldAdminHelper {
 
 			Sync.waitPageLoad();
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			int selectedshippingmethods = Common.findElements("xpath", "//dd[text()='Standard Shipping - ']").size();
+			int selectedshippingmethods = Common.findElements("xpath", "//dd[text()='Ground Shipping - ']").size();
 			int changeshippingmethods = Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
 		
 			Common.assertionCheckwithReport(
@@ -9565,8 +9565,8 @@ public void delet_existing_Coupon(String dataSet) {
 				Sync.waitElementVisible("xpath", "//span[text()='Click to change shipping method']");
 				Common.doubleClick("xpath", "//span[text()='Click to change shipping method']");
 				Thread.sleep(3000);
-				Sync.waitElementVisible("xpath", "//label[contains(text(),'Standard Shipping')]");
-				Common.doubleClick("xpath", "//label[contains(text(),'Standard Shipping')]");
+				Sync.waitElementVisible("xpath", "//label[@for='s_method_tablerate_bestway']//span[text()='$0.00']");
+				Common.doubleClick("xpath", "//label[@for='s_method_tablerate_bestway']//span[text()='$0.00']");
 				Thread.sleep(3000);
 				Sync.waitElementVisible("xpath", "//label[text()='Use Store Credit (']");
 				int storecrdeit = Common.findElements("xpath", "//label[text()='Use Store Credit (']").size();
