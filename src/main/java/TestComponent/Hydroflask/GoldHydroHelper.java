@@ -207,7 +207,7 @@ public class GoldHydroHelper {
 	public void click_minicart() {
 		try {
 			Thread.sleep(8000);
-			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.actionsKeyPress(Keys.UP);
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
@@ -4807,9 +4807,9 @@ catch(Exception | Error e)
 				Thread.sleep(4000);
 				validating_BundleProducts();
 				product_quantity(Dataset);
+				bundle_color("White");
 					Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 					Common.clickElement("xpath", "//span[text()='Add to Cart']");
-	
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -8525,7 +8525,47 @@ Assert.fail();
 		
 		
 	}
+	public void bundle_color(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
+        System.out.println(subproductsList);
+        for(int i=0;i<subproductsList;i++) {
+            int value=i+1;
+            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='m-swatch-group']//div[1]//div[@data-option-label='"+Dataset+"']");
+            
+            WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
+            WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
+            WebElement Color=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//div[contains(@class,'m-swatch m-sw')]");
+            
+            for(int j=0;j<ListOfSubproducts.size();j++) {
+                
+                
+                String attributevalue=ListOfSubproducts.get(j).getAttribute("disabled");
+                
+                    if(attributevalue!=null){
+        }
+                    else
+                    {
+                        
+                        if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
+                            Thread.sleep(2000);
+                            ListOfSubproducts.get(j).click();
+                         
+                            
+                            Common.assertionCheckwithReport(Colornames.getText().contains(Color.getAttribute("aria-label")), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+            }
+        }
+        
+    }
+		
 	}
+	
 				
 
 			
