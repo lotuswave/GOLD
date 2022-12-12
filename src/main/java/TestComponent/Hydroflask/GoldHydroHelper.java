@@ -8531,7 +8531,7 @@ Assert.fail();
         System.out.println(subproductsList);
         for(int i=0;i<subproductsList;i++) {
             int value=i+1;
-            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "//div[@class='m-swatch-group']//div[1]//div[@data-option-label='"+Dataset+"']");
+            List<WebElement> ListOfSubproducts=Common.findElements("xpath", "(//div[@class='swatch-attribute hf_color']//div[@aria-label='Color'])["+value+"]//div[@data-option-label='"+Dataset+"']");
             
             WebElement Colornames=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//span[contains(@class,'m-swa')]");
             WebElement imagecolor=Common.findElement("xpath", "//div[@class='fieldset']//div["+value+"]//img");
@@ -8550,9 +8550,9 @@ Assert.fail();
                         if(ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
                             Thread.sleep(2000);
                             ListOfSubproducts.get(j).click();
-                         
+ 
                             
-                            Common.assertionCheckwithReport(Colornames.getText().contains(Color.getAttribute("aria-label")), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
+                            Common.assertionCheckwithReport(Colornames.getText().contains(Colornames.getText()), "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
                         }
                         else
                         {
