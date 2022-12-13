@@ -209,7 +209,7 @@ public class GoldHydroHelper {
 			Thread.sleep(8000);
 			Common.actionsKeyPress(Keys.UP);
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
+			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
