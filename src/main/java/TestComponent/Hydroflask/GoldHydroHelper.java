@@ -8563,6 +8563,27 @@ Assert.fail();
         }
         
     }
+	public void back_to_cart() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Common.actionsKeyPress(Keys.UP);
+			Sync.waitElementPresent("xpath", "//a[@title='Back to Cart']");
+			Common.clickElement("xpath", "//a[@title='Back to Cart']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shopping Cart"), "verifying the shopping cart navigation","user should be able to navigate to the shopping cart page", "user successfully Navigated to shopping cart page","Failed to navigate to the shopping cart page");			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the shopping cart navigation","user should be able to navigate to the shopping cart page", "user Unable Navigated to shopping cart page",
+					Common.getscreenShot("user Failed to Navigated to shopping cart page"));
+			Assert.fail();
+		}
+		
+	}
 		
 	}
 	

@@ -19,14 +19,13 @@ public class Test_DGLD_HF_ST_058_Add_to_Cart_from_Sticky_Cart {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottles_headerlinks("Bottles & Drinkware");
-			Hydro.configurable_Sticky_add_to_cart("Product");
 			Hydro.search_product("Product");
 			Hydro.Sticky_Add_to_Cart("Product");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
+            Hydro.ordersummary_validation();
 			Hydro.updatePaymentAndSubmitOrder("CCMastercard");
 
 		} catch (Exception e) {
