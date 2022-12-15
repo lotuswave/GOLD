@@ -265,19 +265,19 @@ public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
 	
 		try {
 			Thread.sleep(5000);
-			Sync.waitElementVisible("id", "customer-email");
-			Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 			
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("id", "customer-email",data.get(dataSet).get("Email"));
+			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
 
 		}
 		String expectedResult = "email field will have email address";
 		try {
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
-			int size = Common.findElements("id", "customer-email").size();
+			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -332,19 +332,19 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 	
 	try {
 		Thread.sleep(5000);
-		Sync.waitElementVisible("id", "customer-email");
-		Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+		Sync.waitElementVisible("xpath", "//input[@type='email']");
+		Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 		
 	} catch (NoSuchElementException e) {
 		minicart_Checkout();
-		Common.textBoxInput("id", "customer-email",data.get(dataSet).get("Email"));
+		Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
 
 	}
 	String expectedResult = "email field will have email address";
 	try {
 		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 				data.get(dataSet).get("FirstName"));
-		int size = Common.findElements("id", "customer-email").size();
+		int size = Common.findElements("xpath", "//input[@type='email']").size();
 		Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 				"Filled Email address", "unable to fill the email address");
 		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -3524,8 +3524,8 @@ public void acceptPrivacy() {
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementVisible("id", "customer-email");
-			Common.textBoxInput("id", "customer-email", data.get(Dataset).get("Email"));
+			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
 			Sync.waitElementPresent("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "//span[text()='Sign In']");
@@ -8491,9 +8491,9 @@ Assert.fail();
 				Common.clickElement("xpath", "//a[@class='ui-corner-all']//span[contains(text(),'"+Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains("Knowledge Base") || Common.getPageTitle().contains("Contact") || Common.getPageTitle().contains("Let’s Go!") || Common.getPageTitle().contains("Refill For Good")  , "verifying the explore links navigation","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask") || Common.getPageTitle().contains("Contact") || Common.getPageTitle().contains("Let’s Go!") || Common.getPageTitle().contains("Refill For Good")  , "verifying the explore links navigation","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 				Thread.sleep(3000);
-				if(Common.getPageTitle().contains("Knowledge Base"))
+				if(Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask"))
 				{
 					Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
 				}
