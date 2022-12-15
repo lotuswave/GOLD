@@ -2407,24 +2407,14 @@ public void acceptPrivacy() {
 
 		{
 			try {
-				Common.clickElement("xpath", "//a[@class='action action-show-popup checkout-add-address-popup-link']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
-				Thread.sleep(2000);
-				Common.actionsKeyPress(Keys.SPACE);
-				Thread.sleep(3000);
-				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
-				} catch (Exception e) {
-					Common.actionsKeyPress(Keys.BACK_SPACE);
-					Thread.sleep(1000);
-					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
-				}
+			
+			
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
 				}
@@ -2437,21 +2427,21 @@ public void acceptPrivacy() {
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("name", "postcode");
-				Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
-				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
+				String ShippingZip = Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 
 
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='telephone']", data.get(dataSet).get("phone"));
 
 		  
 
@@ -4160,6 +4150,19 @@ catch(Exception | Error e)
 						"After Clicking on My payments methods and payment method should be appear in payment methods",
 						"Sucessfully payment method is appeared in my payments methods",
 						"Failed to display the payment methods in the my payments methods");
+//				Thread.sleep(4000);
+//				Common.clickElement("xpath", "//a[contains(@class,'stripe-payments')]");
+//				Common.switchToTopFrame();
+//				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+//				Common.switchToDefault();
+//				Thread.sleep(4000);
+//				String message=Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
+//				Common.assertionCheckwithReport(message.contains("Sorry, it is not possible to delete this payment method"),
+//						"validating the error message for delete card",
+//						"After Clicking the delete button we need to get the error message",
+//						"Sucessfully the error has been displayed when we click on the delete",
+//						"Failed to display the error message when we clcik on the delete message");
+				
 			}
 			else
 			{
@@ -4170,11 +4173,11 @@ catch(Exception | Error e)
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the card details in the my orders page",
-					"After Clicking on My payments methods and payment method should be appear in payment methods",
-					"Unable to display the payment methods in the my payments methods",
+			ExtenantReportUtils.addFailedLog("validating the error message for delete card",
+					"After Clicking the delete button we need to get the error message",
+					"Unable to display the error message when we clcik on the delete message",
 					Common.getscreenShot(
-							"Failed to display the payment methods in the my payments methods"));
+							"Failed to display the error message when we clcik on the delete message"));
 			Assert.fail();
 		}
 		
@@ -8584,9 +8587,57 @@ Assert.fail();
 		}
 		
 	}
-		
+	public void empty_storedpayment() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Sync.waitPageLoad(30);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
+					"validating the Navigation to the My Payment Methods page",
+					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
+					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
+					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
+			String card=Common.findElement("xpath", "//div[@class='message info empty']//span").getText();
+			Common.assertionCheckwithReport(card.contains("You do not have any saved payment methods."),
+					"validating the no saved payments in stored credit card",
+					"After Clicking on stored methods CTA stored credit cart should be empty",
+					"Sucessfully we dont have any payments in stored payments",
+					"Failed to dispaly the message for empty stored payments");
 	}
-	
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My Payment Methods page",
+					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
+					"Unable to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA"));
+			Assert.fail();
+		}
+	}
+}
 				
 
 			

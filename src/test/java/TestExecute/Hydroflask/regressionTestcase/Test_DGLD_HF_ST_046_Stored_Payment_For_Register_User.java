@@ -19,8 +19,9 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.click_Createaccount();
+            Hydro.create_account("AccountDetails");
+            Hydro.empty_storedpayment();
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
@@ -30,6 +31,7 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
             String Number= Hydro.addPaymentDetails("PaymentDetails");
             Hydro.Store_payment_placeOrder("PaymentDetails");
 			Hydro.Stored_Payment(Number);
+		
 
 		} catch (Exception e) {
 
@@ -39,7 +41,7 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
