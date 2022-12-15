@@ -1213,7 +1213,7 @@ try
 		// TODO Auto-generated method stub
 		try
 		{
-			String shopping=Common.findElement("xpath", "//span[text()='Shop Bottles & Drinkware']//parent::a").getAttribute("href");
+			String shop=Common.findElement("xpath", "//span[text()='Shop Accessories']//parent::a").getAttribute("href");
 			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
@@ -1228,9 +1228,9 @@ try
 			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
 			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String Greencolor=Color.fromString(Message).asHex();
-			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");			
+			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");	
 			  Common.assertionCheckwithReport(Greencolor.equals("#067a63") &&
-			  Message1.contains("complete")&&shopping.contains("/shop/bottles")&&kitchen.
+			  Message1.contains("complete")&&shop.contains("/shop/accessories")&&kitchen.
 			  contains("/shop/kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
 			  "User should able to view all details in the order confirmation page",
@@ -1448,18 +1448,18 @@ try
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(5000);
-			Sync.waitElementVisible("id", "customer-email");
-			Common.textBoxInput("id", "customer-email", Utils.getEmailid());
+			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("id", "customer-email",Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']",Utils.getEmailid());
 
 		}
 		String expectedResult = "email field will have email address";
 		try {
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
-			int size = Common.findElements("id", "customer-email").size();
+			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",

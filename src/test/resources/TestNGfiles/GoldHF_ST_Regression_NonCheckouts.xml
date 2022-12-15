@@ -88,6 +88,11 @@
 		</classes>
 	</test>
 
+<test name="Test_DGLD_HF_ST_032_Header_Links_Validation" testid="DTG-633" priority="P1" description="Validating the Header Links Functionality">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_032_Header_Links_Validation"/>
+        </classes>
+        </test>
 
 
 <test name="Test_DGLD_HF_ST_036_Create_and_Edit_Gift_Registery_For_Register_User" testid="DTG-1795" priority="P1" description="This script will cover validating Create and Edit Gift Registery For Register User">
