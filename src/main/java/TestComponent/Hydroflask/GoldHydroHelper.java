@@ -4151,6 +4151,7 @@ catch(Exception | Error e)
 						"Sucessfully payment method is appeared in my payments methods",
 						"Failed to display the payment methods in the my payments methods");
 //				Thread.sleep(4000);
+//				Sync.waitElementPresent("xpath", "//a[contains(@class,'stripe-payments')]");
 //				Common.clickElement("xpath", "//a[contains(@class,'stripe-payments')]");
 //				Common.switchToTopFrame();
 //				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
@@ -4162,7 +4163,7 @@ catch(Exception | Error e)
 //						"After Clicking the delete button we need to get the error message",
 //						"Sucessfully the error has been displayed when we click on the delete",
 //						"Failed to display the error message when we clcik on the delete message");
-				
+//				
 			}
 			else
 			{
@@ -4381,6 +4382,14 @@ catch(Exception | Error e)
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(50, "xpath", "//img[@alt='United States flag']");
 				Common.clickElement("xpath", "//img[@alt='United States flag']");
+				String Countryname=Common.findElement("xpath", "//label[contains(@class,'a-radio-button')]//span").getText();
+				if(Countryname.contains("United States"))
+				{
+					Country=select.get(i).getText();
+					ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));
+				}
+				else
+				{
 				Thread.sleep(3000);
 				Country=select.get(i).getText();
 				select.get(i).click();
@@ -4389,6 +4398,7 @@ catch(Exception | Error e)
 				Thread.sleep(4000);
 				Common.navigateBack();
 				ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));	
+			}
 			}
 			
 			
@@ -6517,7 +6527,7 @@ catch(Exception | Error e)
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-		Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved."),
+		Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved.") || newsubcribe.contains("Thank you! You are already subscribed to this product.")  ,
 				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
 		Common.actionsKeyPress(Keys.END);
