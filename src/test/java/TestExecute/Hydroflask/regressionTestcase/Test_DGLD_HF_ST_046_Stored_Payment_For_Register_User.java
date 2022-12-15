@@ -41,7 +41,7 @@ public class Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

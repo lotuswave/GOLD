@@ -3918,11 +3918,11 @@ public void acceptPrivacy() {
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
 			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+			String Text = Common.getText("xpath", "//div[@id='thxtext3']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),"verifying newsletter subscription",
+			Common.assertionCheckwithReport(Text.contains("Thank you For your Subscription"),"verifying newsletter subscription",
 					expectedResult, Text,
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
@@ -4382,17 +4382,18 @@ catch(Exception | Error e)
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(50, "xpath", "//img[@alt='United States flag']");
 				Common.clickElement("xpath", "//img[@alt='United States flag']");
-				String Countryname=Common.findElement("xpath", "//label[contains(@class,'a-radio-button')]//span").getText();
-				if(Countryname.contains("United States"))
+				Thread.sleep(3000);
+				Country=select.get(i).getText();
+				System.out.println(Country);
+				select.get(i).click();
+				if(Country.contains("United States"))
 				{
-					Country=select.get(i).getText();
+					
+					Common.clickElement("xpath", "//button[@data-role='closeBtn']");
 					ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));
 				}
 				else
 				{
-				Thread.sleep(3000);
-				Country=select.get(i).getText();
-				select.get(i).click();
 				Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
