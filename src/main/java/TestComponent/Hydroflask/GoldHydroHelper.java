@@ -7431,7 +7431,8 @@ catch(Exception | Error e)
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-					Common.assertionCheckwithReport(title.contains(Account[i]), "verifying Account page links "+Account[i],"user should navigate to the "+Account[i]+" page", "user successfully Navigated to the "+Account[i],"Failed click on the "+Account[i]);
+					System.out.println(title);
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods"), "verifying Account page links "+Account[i],"user should navigate to the "+Account[i]+" page", "user successfully Navigated to the "+Account[i],"Failed click on the "+Account[i]);
 			
 		}
 	    }
@@ -7455,7 +7456,8 @@ catch(Exception | Error e)
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-					Common.assertionCheckwithReport(title.contains(Account[i]), "verifying Account page links "+Account[i],"user should navigate to the "+Account[i]+" page", "user successfully Navigated to the "+Account[i],"Failed click on the "+Account[i]);
+					System.out.println(title);
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods") , "verifying Account page links "+Account[i],"user should navigate to the "+Account[i]+" page", "user successfully Navigated to the "+Account[i],"Failed click on the "+Account[i]);
 			
 		}
 	    }
