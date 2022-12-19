@@ -5,19 +5,19 @@
     </listeners>
     
        
-       <test name="Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" testid="DTG-984" priority="P1" description="This script will cover validating Create Update and Delete New Customer">
+       <test name="Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" testid="DTG-1907" priority="P1" description="This script will cover validating Create Update and Delete New Customer">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer" />
 		</classes>
 	</test> 
         
-    <test name="Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" testid="DTG-985" priority="P1" description="This script will cover validatiing the Create Edit Delete Customer segment">
+    <test name="Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" testid="DTG-1908" priority="P1" description="This script will cover validatiing the Create Edit Delete Customer segment">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment" />
 		</classes>
 	</test> 
 	
-	<test name="Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" testid="DTG-986" priority="P1" description="This script will cover validating the Create Update Delete Customer Group">
+	<test name="Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" testid="DTG-1909" priority="P1" description="This script will cover validating the Create Update Delete Customer Group">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CM_003__Creates_Update_Delete_CustomerGroup" />
 		</classes>
@@ -29,7 +29,7 @@
 		</classes>
 	</test>
 
-	<test name="Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" testid="DTG-1348" priority="P1" description="This script will cover validating Country Language selector Management">
+	<test name="Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" testid="DTG-2073" priority="P1" description="This script will cover validating Country Language selector Management">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CLSM_011_Country_Language_Selector_Management" />
 		</classes>
@@ -59,7 +59,7 @@
 		</classes>
 	</test> 
       
-         <test name="Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" testid="DTG-2076" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
+         <test name="Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" testid="DTG-2092" priority="P1" description="This script will cover validating Configure and Validate PLPCMSBlocks">
 		<classes>
 			<class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CardTiles_012_Configure_and_validate_ProductCardTiles" />
 		</classes>
@@ -110,21 +110,21 @@
     </test> 
     
     
-      <test name="Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" testid="DTG-1911" priority="P1" description="This testcase is to Validate Guest Magento Order Placement">
+      <test name="Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" testid="DTG-2374" priority="P1" description="This testcase is to Validate Guest Magento Order Placement">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" />
         </classes>
     </test>
     
       
-    <test name="Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement" testid="DTG-1925" priority="P1" description="This testcase is to Validate Register Magento Order Placement">
+    <test name="Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement" testid="DTG-2376" priority="P1" description="This testcase is to Validate Register Magento Order Placement">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement" />
         </classes>
     </test>
     
     
-     <test name="Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement" testid="DTG-1924" priority="P1" description="This testcase is to Validate Register Magento Retail Order Placement">
+     <test name="Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement" testid="DTG-2435" priority="P1" description="This testcase is to Validate Register Magento Retail Order Placement">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement" />
         </classes>
@@ -133,31 +133,31 @@
     
     
     
-     <test name="Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" testid="DTG-1924" priority="P1" description="This testcase is to Validate Promotion Cart Rule Prices">
+     <test name="Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" testid="DTG-2451" priority="P1" description="This testcase is to Validate Promotion Cart Rule Prices">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices" />
         </classes>
     </test>
     
-      <test name="Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Verifying Advance Pric">
+      <test name="Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" testid="DTG-2462" priority="P1" description="This testcase is to Validate Register Verifying Advance Pric">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" />
         </classes>
     </test>  
     
-     <test name="Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with Priceoverride highvalue">
+     <test name="Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" testid="DTG-2520" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with Priceoverride highvalue">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue" />
         </classes>
     </test>
     
-     <test name="Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_LowPriceOverride" testid="DTG-1922" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with LowPriceOverride">
+     <test name="Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_LowPriceOverride" testid="DTG-2521" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement with LowPriceOverride">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_LowPriceOverride" />
         </classes>
     </test> 
     
-    <test name="Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" testid="DTG-1923" priority="P1" description="This testcase is to Validate Promotion_Catalog_Rules">
+    <test name="Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" testid="DTG-2094" priority="P1" description="This testcase is to Validate Promotion_Catalog_Rules">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_CatalogRules_016_Promotion_Catalog_Rules" />
         </classes> 
@@ -198,7 +198,7 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_028_Register_OXO_CreateNewOrder_Simple_Configurable_Bundle_products" />
         </classes> 
     </test>   
-    <test name="Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue" testid="DTG-2522" priority="P1" description="This testcase is to Validate OXO guest Magento Retail Order Placement PriceOverride Lowervalue">
+    <test name="Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue" testid="DTG-2550" priority="P1" description="This testcase is to Validate OXO guest Magento Retail Order Placement PriceOverride Lowervalue">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue" />
         </classes> 
@@ -210,7 +210,7 @@
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_033_OXO_Registeruser_Magento_Retail_Order_Placement" />
         </classes>
     </test>
-     <test name="Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_PriceOverridehighervalue" testid="DTG-2522" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement PriceOverridehighervalue">
+     <test name="Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_PriceOverridehighervalue" testid="DTG-2549" priority="P1" description="This testcase is to Validate Register Admin Retail Order Placement PriceOverridehighervalue">
         <classes>
             <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_PriceOverridehighervalue" />
         </classes> 
