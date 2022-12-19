@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO Regression Suite">
+	<listeners>
+		<listener class-name="Utilities.TestListener" />
+	</listeners>
+	
+	<test name="Test_DGLD_OXO_ST_003_Create_Account_Validation" testid="DTG-1240" priority="P1" description="This script will cover validating Create Account Validation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_003_Create_Account_Validation" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_004_Minicart_Validation" testid="DTG-1241" priority="P1" description="This script will cover validating Minicart Validation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_004_Minicart_Validation" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart" testid="DTG-1243" priority="P1" description="This script will cover validating Account Registration Create Account With Cart">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_016_guestCheckoutwith_invalid_CC_Credentials" testid="DTG-1256" priority="P1" description="This script will cover validating guestCheckoutwith invalid CC Credentials">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_016_guestCheckoutwith_invalid_CC_Credentials" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_017_registeredUserCheckoutwith_invalid_CC_Credentials" testid="DTG-1258" priority="P1" description="This script will cover validating registeredUserCheckoutwith invalid CC Credentials">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_017_registeredUserCheckoutwith_invalid_CC_Credentials" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_018_Validation_ShippingAddress_form_for_GuestUser" testid="DTG-1257" priority="P1" description="This script will cover Validation ShippingAddress form for GuestUser">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_018_Validation_ShippingAddress_form_for_GuestUser" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_019_Validation_ShippingAddress_form_for_RegisterUser" testid="DTG-1254" priority="P1" description="This script will cover Validation ShippingAddress form for RegisterUser">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_019_Validation_ShippingAddress_form_for_RegisterUser" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_022_changeAddressIn_AddressBook" testid="DTG-1338" priority="P1" description="This script will cover validating changeAddressIn AddressBook">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_022_changeAddressIn_AddressBook" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page" testid="DTG-1345" priority="P1" description="This script will cover valiating Change Password from Account Information Page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_028_Track_My_Order_For_Guest_User" testid="DTG-1355" priority="P1" description="This script will cover validating Track My Order For Guest User">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_028_Track_My_Order_For_Guest_User" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_029_Track_My_Order_For_Register_User" testid="DTG-1356" priority="P1" description="This script will cover validating Track My Order For Register User">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_029_Track_My_Order_For_Register_User" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" testid="DTG-1855" priority="P1" description="This script will cover validating Create and Edit Gift Registery For Register User">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DTG-1856" priority="P1" description="This script will cover validating Create share and Delete Gift Registery For Register User">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DTG-1858" priority="P1" description="This script will cover validating Create Manageitems and invalid Details Gift Registery For Register User">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_037_Write_a_Review" testid="DTG-2056" priority="P1" description="This script will cover valiating Write a Review">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_037_Write_a_Review"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_039_Footer_newsletter_subcription" testid="DTG-1720" priority="P1" description="This script will cover valiating Footer newsletter subcription">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_039_Footer_newsletter_subcription"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_043_Validate_ChatBot" testid="DTG-1933" priority="P1" description="This script will cover valiating Validate ChatBot">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_043_Validate_ChatBot"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_045_Contactus_form" testid="DTG-1892" priority="P1" description="This script will cover valiating Contactus form">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_045_Contactus_form"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_047_Submit_Product_RecallForm" testid="DTG-652" priority="P1" description="This script will cover valiating Submit Product RecallForm">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_047_Submit_Product_RecallForm"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_048_Validate_Country_Selector" testid="DTG-653" priority="P1" description="This script will cover valiating Validate Country Selector">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_048_Validate_Country_Selector"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_051_Product_Registration_Form" testid="DTG-2206" priority="P1" description="This script will cover valiating Product Registration Form">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_051_Product_Registration_Form"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_053_Validate_PLP_page" testid="DTG-2230" priority="P1" description="This script will cover valiating PLP page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_053_Validate_PLP_page"/>
+		</classes>
+	</test>
+
+        <test name="Test_DGLD_OXO_ST_054_Validate_Search_Results_Page" testid="DTG-2232" priority="P1" description="This script will cover valiating Search Results Page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_054_Validate_Search_Results_Page"/>
+		</classes>
+	</test>
+
+        <test name="Test_DGLD_OXO_ST_060_Social_Article_Links" testid="DTG-2222" priority="P1" description="This script will cover valiating Social Article Links">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_060_Social_Article_Links"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page" testid="DTG-2225" priority="P1" description="This script will cover valiating Forgot password SignIn Page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page" testid="DTG-2226" priority="P1" description="This script will cover valiating Forgot password Shipping Page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_069_Validate_PDP_page" testid="DTG-2219" priority="P1" description="This script will cover valiating Validate PDP page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_069_Validate_PDP_page"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_071_Miscellaneous_Pages" testid="DTG-2224" priority="P1" description="This script will cover valiating Miscellaneous Pages">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_071_Miscellaneous_Pages"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_073_Guest_User_Back_In_stock_Subcription" testid="DTG-2386" priority="P1" description="This script will cover valiating Guest User Back In stock Subcription">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_073_Guest_User_Back_In_stock_Subcription"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_074_Register_User_Back_In_stock_Subcription" testid="DTG-2388" priority="P1" description="This script will cover valiating Register User Back In stock Subcription">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_074_Register_User_Back_In_stock_Subcription"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_076_share_Whishlist_Funtionality" testid="DTG-2406" priority="P1" description="This script will cover valiating share Whishlist Funtionality">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_076_share_Whishlist_Funtionality"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DTG-2472" priority="P1" description="This script will cover valiating Validating the shopping cart page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_091_WebPageLinkValidation" testid="DTG-2518" priority="P1" description="This script will cover valiating WebPageLinkValidation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_091_WebPageLinkValidation"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_094_My_Account_Page_Validation" testid="DTG-2529" priority="P1" description="This script will cover valiating My Account Page Validation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_094_My_Account_Page_Validation"/>
+		</classes>
+	</test>
+	
+		</suite>

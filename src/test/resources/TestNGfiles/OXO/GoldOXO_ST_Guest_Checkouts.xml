@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HydroFlask Regression Suite">
+    <listeners>
+		<listener class-name="Utilities.TestListener" />
+	</listeners>
+
+	  <test name="Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" testid="DTG-1238" priority="P1" description="This script will cover validating Guest User Checkout Funtionality Visa Card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Page" testid="DTG-1242" priority="P1" description="This script will cover validating Guest User Create Account from Ordersummary Page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Page" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card" testid="DTG-1244" priority="P1" description="This script will cover validating Guest user Checkout Funtionality With Discount Visa card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card" testid="DTG-1245" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Master card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_009_Guest_user_Checkout_Funtionality_Amex_card" testid="DTG-1247" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Amex card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_009_Guest_user_Checkout_Funtionality_Amex_card" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_010_Guest_user_Checkout_Funtionality_Discover_card" testid="DTG-1248" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Discover card">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_010_Guest_user_Checkout_Funtionality_Discover_card" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment" testid="DTG-1759" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Klarna Saved Payment">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_020_Checkout_GuestUserCC_configurable_Simple" testid="DTG-1251" priority="P1" description="This script will cover Validation Checkout GuestUserCC configurable Simple">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_020_Checkout_GuestUserCC_configurable_Simple" />
+		</classes>
+	</test>
+	
+    <test name="Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" testid="DTG-1347" priority="P1" description="This script will cover valiating Guest user Checkout Klarna Payment">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" testid="DTG-1348" priority="P1" description="This script will cover validating Guest user Checkout Funtionality with Paypal">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" />
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Payment" testid="DTG-1886" priority="P1" description="This script will cover validating Guest User Checkout Functionality Afterpay Payment">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Payment" />
+		</classes>
+	</test>
+   	
+    <test name="Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DTG-1350" priority="P1" description="This script will cover valiating Guest User Checkout With Different Billing and Different Shipping">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping"/>
+		</classes>
+	</test> 
+	
+	<test name="Test_DGLD_OXO_ST_044_Checkout_with_GuestUserCC_Bundle" testid="DTG-2052" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Bundle">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_044_Checkout_with_GuestUserCC_Bundle"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_056_Checkout_with_GuestUserCC_Simple_Configurable_Bundle" testid="DTG-2223" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Simple Configurable Bundle Products">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_056_Checkout_with_GuestUserCC_Simple_Configurable_Bundle"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_057_Checkout_with_GuestUserCC_Grouped_Product" testid="DTG-2218" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Grouped Product">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_057_Checkout_with_GuestUserCC_Grouped_Product"/>
+		</classes>
+	</test>
+
+	
+    <test name="Test_DGLD_OXO_ST_066_Checkout_with_GuestUserCC_Simple_Configurable_Grouped_Bundle_products" testid="DTG-2215" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Simple Configurable Grouped Bundle products">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_066_Checkout_with_GuestUserCC_Simple_Configurable_Grouped_Bundle_products"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_082_GuestUser_Checkout_Bundle_Paypal" testid="DTG-2507" priority="P1" description="This script will cover valiating GuestUser Checkout Bundle Paypal ">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_082_GuestUser_Checkout_Bundle_Paypal"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_084_Checkout_with_GuestUser_Simple_Configurable_Bundle_Paypal" testid="DTG-2506" priority="P1" description="This script will cover valiating Checkout with GuestUser Simple Configurable Bundle Paypal">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_084_Checkout_with_GuestUser_Simple_Configurable_Bundle_Paypal"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_086_Place_an_Order_Using_Reorder" testid="DTG-2504" priority="P1" description="This script will cover valiating Place an Order Using Reorder">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_086_Place_an_Order_Using_Reorder"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_087_GuestUser_checkout_PayPal_Multiple_Products_with_Discount_Same_Billing_Shipping" testid="DTG-2503" priority="P1" description="This script will cover valiating GuestUser checkout PayPal Multiple Products_with Discount Same Billing Shipping">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_087_GuestUser_checkout_PayPal_Multiple_Products_with_Discount_Same_Billing_Shipping"/>
+		</classes>
+	</test>
+	
+    <test name="Test_DGLD_OXO_ST_089_Checkout_with_GuestUserCC_Grouped_Product_with_PayPal" testid="DTG-2512" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Grouped Product with PayPal">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_089_Checkout_with_GuestUserCC_Grouped_Product_with_PayPal"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_092_Checkout_Guestuser_PO_Box_Address_with_AMEX" testid="DTG-2523" priority="P1" description="This script will cover valiating Checkout Guestuser PO Box Address with AMEX">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_092_Checkout_Guestuser_PO_Box_Address_with_AMEX"/>
+		</classes>
+	</test>
+
+    <test name="Test_DGLD_OXO_ST_095_Guest_User_Checkout_with_APO_Address" testid="DTG-2538" priority="P1" description="This script will cover valiating Guest User Checkout with APO Address">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_095_Guest_User_Checkout_with_APO_Address"/>
+		</classes>
+	</test>
+
+</suite>  
