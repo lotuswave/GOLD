@@ -6,13 +6,13 @@
    	
  
          
-        <test name="Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card" testid="DTG-928" priority="P1" description="This script will cover Guestuser checkout functionality of Hydroflask using Visa Payment">
+        <test name="Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card" testid="DTG-1217" priority="P1" description="This script will cover Guestuser checkout functionality of Hydroflask using Visa Payment">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card"/>
         </classes>
         </test> 
          
-         <test name="Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Visa Payment">
+         <test name="Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card" testid="DTG-1218" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Visa Payment">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_002_Register_user_Checkout_Funtionality_Visa_card"/>
         </classes>
@@ -21,7 +21,7 @@
        
         
           
-        <test name="Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Page" testid="DTG-932" priority="P1" description="This script will cover Account Creation Functionality of Hydroflask">
+        <test name="Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Page" testid="DTG-1221" priority="P1" description="This script will cover Account Creation Functionality of Hydroflask">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Page"/>
         </classes>
@@ -62,7 +62,7 @@
         </classes>
         </test> 
         
-     <test name="Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-1229" priority="P1" description="This script will cover Register user Checkout Funtionality Amex card">
+     <test name="Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-1228" priority="P1" description="This script will cover Register user Checkout Funtionality Amex card">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card"/>
         </classes>
@@ -70,7 +70,7 @@
 
 
 
-   <test name="Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card" testid="DTG-1230" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Paypal Payment">
+   <test name="Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card" testid="DTG-1229" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Paypal Payment">
        <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card"/>
         </classes>
@@ -141,14 +141,14 @@
 
 
 
-<!--<test name="Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment" testid="DTG-1342" priority="P1" description="This script will cover validating Guest user Checkout Klarna Payment">
+<!--<test name="Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment" testid="DTG-1344" priority="P1" description="This script will cover validating Guest user Checkout Klarna Payment">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment" />
 		</classes>
 	</test>
 
 
-<test name="Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment" testid="DTG-1349" priority="P1" description="This script will cover validating Register user Checkout Klarna Payment">
+<test name="Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment" testid="DTG-1341" priority="P1" description="This script will cover validating Register user Checkout Klarna Payment">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment" />
 		</classes>
@@ -181,14 +181,14 @@
 		</classes>
 	</test>  -->
 
-<test name="Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DTG-1857" priority="P1" description="This script will cover validating Guest User Checkout With Different Billing and Different Shipping">
+<test name="Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DTG-1993" priority="P1" description="This script will cover validating Guest User Checkout With Different Billing and Different Shipping">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" />
 		</classes>
 	</test>  
 
 
-<test name="Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User" testid="DTG-1857" priority="P1" description="This script will cover validating Stored Payment For Register User">
+<test name="Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User" testid="DTG-1887" priority="P1" description="This script will cover validating Stored Payment For Register User">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User" />
 		</classes>
@@ -199,7 +199,7 @@
 
 
 
-    <test name="Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page" testid="DTG-1857" priority="P1" description="This script will cover validating Registered user login from Shipping page">
+    <test name="Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page" testid="DTG-2043" priority="P1" description="This script will cover validating Registered user login from Shipping page">
 		<classes>
 			<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page" />
 		</classes>
@@ -313,7 +313,7 @@
         </classes>
     </test>
 
-<test name="Test_DGLD_HF_ST_100_Paypal_checkout_as_a_Guestuser_with_Configure_bundle_and_simple_product" testid="DTG-2492" priority="P1" description="This script will cover validating Paypal checkout as a Guestuser with Configure bundle and simple product">
+<test name="Test_DGLD_HF_ST_100_Paypal_checkout_as_a_Guestuser_with_Configure_bundle_and_simple_product" testid="DTG-2496" priority="P1" description="This script will cover validating Paypal checkout as a Guestuser with Configure bundle and simple product">
         <classes>
             <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_100_Paypal_checkout_as_a_Guestuser_with_Configure_bundle_and_simple_product" />
         </classes>
