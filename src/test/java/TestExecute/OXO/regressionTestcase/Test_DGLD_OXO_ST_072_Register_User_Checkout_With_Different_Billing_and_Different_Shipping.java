@@ -39,7 +39,7 @@ public class Test_DGLD_OXO_ST_072_Register_User_Checkout_With_Different_Billing_
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

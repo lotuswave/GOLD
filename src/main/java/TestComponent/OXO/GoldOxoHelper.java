@@ -1024,7 +1024,6 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
 				String Shippingstate = Common.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']").getText();
 
-//				Shippingaddress.put("Shippingstate", Shippingstate);
 				System.out.println(Shippingstate);
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
@@ -1080,7 +1079,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 
 		{
 			try {
-				Common.clickElement("xpath", "//a[@class='action action-show-popup checkout-add-address-popup-link']");
+
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -1088,18 +1087,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
-				Common.actionsKeyPress(Keys.SPACE);
-				Thread.sleep(3000);
-				try {
-					Common.clickElement("xpath",
-							"//form[@id='co-shipping-form']//input[@name='street[0]");
-				} catch (Exception e) {
-					Common.actionsKeyPress(Keys.BACK_SPACE);
-					Thread.sleep(1000);
-					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath",
-							"//form[@id='co-shipping-form']//input[@name='street[0]");
-				}
+
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
 				}
@@ -1112,30 +1100,23 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 						data.get(dataSet).get("City"));
 				
 				try {
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("name", "postcode");
-				Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
+				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']", data.get(dataSet).get("postcode"));
 				
-				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
+				String ShippingZip = Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
 				
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='telephone']", data.get(dataSet).get("phone"));
 
-				Sync.waitElementClickable("xpath", "//span[contains(text(),'Continue To Payment')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Continue To Payment')]");
-                int errorsize=Common.findElements("xpath", "//div[@class='field-error']").size();
-				Common.assertionCheckwithReport(errorsize>0, "verifying shipping addres filling ", expectedResult, "user enter the shipping address", "mandatory data");			
-	
-				expectedResult = "shipping address is filled in to the fields";
-				Common.clickElement("xpath", "//button[@data-ac-test='form-shipping-address_action_submit']");
-				Thread.sleep(3000);
+
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -2603,6 +2584,10 @@ try
 
 				Common.switchToDefault();
 				Common.clickElement("xpath", "//span[text()='Place Order']");
+				int klarna = Common.findElements("xpath", "//span[text()='Place Order']").size();
+				if(klarna>0) {
+					Common.clickElement("xpath", "//span[text()='Place Order']");
+				}
 				klarna_Saved_Details(dataSet);
 				
 			}
@@ -3092,8 +3077,9 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitPageLoad();
-				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
+				Sync.waitElementPresent(30, "xpath", "//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
+
+				Common.clickElement("xpath", "//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
 //				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
 //				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
@@ -3652,9 +3638,9 @@ public void contactUsPage(String dataSet) {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		
-		Sync.waitElementPresent("xpath", "//h1[@data-content-type='heading']");
-		Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
-		int Contactussuccessmessage = Common.findElements("xpath", "//h1[@data-content-type='heading']").size();
+//		Sync.waitElementPresent("xpath", "//h1[@data-content-type='heading']");
+//		Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
+		int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
 		Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
 				"Success message should be Displayed", "Contact us Success message displayed ",
 				"failed to dispaly success message");
@@ -3670,10 +3656,11 @@ public void contactUsPage(String dataSet) {
 	}
 
 	Common.actionsKeyPress(Keys.PAGE_UP);
-	Common.scrollIntoView("xpath", "//h1[@data-content-type='heading']");
-	String Text = Common.getText("xpath", "//h1[@data-content-type='heading']");
+	Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
+	String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+	System.out.println(Text);
 	expectedResult = "User gets confirmation email with Success message";
-	Common.assertionCheckwithReport(Text.contains("Thank You!"),
+	Common.assertionCheckwithReport(Text.contains("Your submission was successful"),
 			"verifying contact us confirmation message", expectedResult,
 			"User gets confirmation under the same tab", "unabel to load the confirmation form");
 	
@@ -4226,11 +4213,20 @@ public void country_selector() {
 		
 			List<WebElement> select=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(50, "xpath", "//img[@alt='United States flag']");
-			Common.clickElement("xpath", "//img[@alt='United States flag']");
+			Common.actionsKeyPress(Keys.END);
+			Sync.waitElementPresent(50, "xpath", "//img[contains(@src,'country-selector')]");
+			Common.clickElement("xpath", "//img[contains(@src,'country-selector')]");
 			Thread.sleep(3000);
 			Country=select.get(i).getText();
 			select.get(i).click();
+			if(Country.contains("United States"))
+			{
+				
+				Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+				ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));
+			}
+			else
+			{
 			Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -4238,7 +4234,7 @@ public void country_selector() {
 			ExtenantReportUtils.addPassLog("Validating"+ Country +"Page  ", "click on the country should navigate to the  "+Country +"Page", "successfully page navigating to "+Country +"PAGE", Common.getscreenShotPathforReport(Country));	
 		}
 		
-		
+		}
 	}
 	catch(Exception | Error e)
 	{
@@ -4282,7 +4278,8 @@ public void product_Registration(String dataSet) {
 	String state = data.get(dataSet).get("Region");
 	String purchased = data.get(dataSet).get("PurchasedAt");
 	try {
-
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[text()='Write to Us']");
 
 		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://oxo')]");
 		Common.switchFrames("xpath", "//iframe[contains(@src,'https://oxo')]");
@@ -4305,8 +4302,8 @@ public void product_Registration(String dataSet) {
 		
 		
 		
-		Sync.waitElementPresent("xpath", "//input[@data-label='Street ']");
-		Common.textBoxInput("xpath", "//input[@data-label='Street ']", data.get(dataSet).get("Street"));
+		Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
+		Common.textBoxInput("xpath", "//input[@data-label='Street']", data.get(dataSet).get("Street"));
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
@@ -4319,8 +4316,8 @@ public void product_Registration(String dataSet) {
 		Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
 		Common.clickElement("xpath", "//div[text()='"+state+"']");
 		
-		Sync.waitElementPresent("xpath", "//input[@data-label='Zip/Postal Code']");
-		Common.textBoxInput("xpath", "//input[@data-label='Zip/Postal Code']", data.get(dataSet).get("postcode"));
+		Sync.waitElementPresent("xpath", "//input[@name='conversationZipCode']");
+		Common.textBoxInput("xpath", "//input[@name='conversationZipCode']", data.get(dataSet).get("postcode"));
 
 		Common.textBoxInput("xpath", "//input[contains(@data-label,'Item Number')]", data.get(dataSet).get("SKUitemNumber"));
 
@@ -5848,8 +5845,8 @@ public void click_FeedingDrinking() {
 			try
 	    {
 				for(i=0;i<Account.length;i++){
-					Sync.waitElementPresent("xpath", "//div[@class='content account-nav-content']//a[text()='"+Account[i]+"']");
-					Common.clickElement("xpath", "//div[@class='content account-nav-content']//a[text()='"+Account[i]+"']");
+					Sync.waitElementPresent("xpath", "//div[@class='content account-nav-content']//a[contains(text(),'"+Account[i]+"')]");
+					Common.clickElement("xpath", "//div[@class='content account-nav-content']//a[contains(text(),'"+Account[i]+"')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
@@ -6067,6 +6064,57 @@ public void click_FeedingDrinking() {
 			Assert.fail();
 		}
 		
+	}
+	
+	public void empty_storedpayment() {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Sync.waitPageLoad(30);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
+					"validating the Navigation to the My Payment Methods page",
+					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
+					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
+					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
+			String card=Common.findElement("xpath", "//div[@class='message info empty']//span").getText();
+			Common.assertionCheckwithReport(card.contains("You do not have any saved payment methods."),
+					"validating the no saved payments in stored credit card",
+					"After Clicking on stored methods CTA stored credit cart should be empty",
+					"Sucessfully we dont have any payments in stored payments",
+					"Failed to dispaly the message for empty stored payments");
+	}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My Payment Methods page",
+					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
+					"Unable to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA",
+					Common.getscreenShot(
+							"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA"));
+			Assert.fail();
+		}
 	}
 	
 }

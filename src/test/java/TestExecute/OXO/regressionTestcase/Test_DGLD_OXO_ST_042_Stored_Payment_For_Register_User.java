@@ -18,8 +18,9 @@ public class Test_DGLD_OXO_ST_042_Stored_Payment_For_Register_User {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
+			Oxo.click_Createaccount();
+			Oxo.create_account("AccountDetails");
+			Oxo.empty_storedpayment();
 			Oxo.search_product("Product");
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
