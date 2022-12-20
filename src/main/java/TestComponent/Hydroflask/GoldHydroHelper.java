@@ -7655,7 +7655,7 @@ catch(Exception | Error e)
 					"Text type should be select for the product", "Sucessfully Text has been selected for the product",
 					"failed to select the Text for the product");
 			Sync.waitElementPresent("xpath", "//textarea[@class='text-engraving__input']");
-			Common.textBoxInput("xpath", "//textarea[@class='text-engraving__input']", engravetext);
+			Common.findElement("xpath", "//textarea[@class='text-engraving__input']").sendKeys(engravetext);
 			Thread.sleep(3000);
 			String engrave=Common.findElement("xpath", "//textarea[contains(@class,'text-engraving__input')]").getAttribute("class");
 			Common.assertionCheckwithReport(engrave.contains("focus-visible"), "validating the engraving text for bottle",
