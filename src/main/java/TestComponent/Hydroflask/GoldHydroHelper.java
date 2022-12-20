@@ -7010,7 +7010,7 @@ catch(Exception | Error e)
 					"Engraving should be select for the bottle", "Sucessfully Engraving  has been selected for the bottle",
 					"failed to select the Engraving for the selected bottle");
 		Sync.waitElementPresent("xpath", "//textarea[@class='text-engraving__input']");
-		Common.textBoxInput("xpath", "//textarea[@class='text-engraving__input']",engravingtext);
+		Common.findElement("xpath", "//textarea[@class='text-engraving__input']").sendKeys(engravingtext);
 		String Text=Common.findElement("xpath", "//textarea[contains(@class,'text-engraving__input')]").getAttribute("class");
 		System.out.println(Text);
 		Common.assertionCheckwithReport(Text.contains("focus-visible"), "validating the engraving text for bottle",
@@ -7755,14 +7755,11 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitForLoad();
-//			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
+			Thread.sleep(6000);
+			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 			
@@ -8177,15 +8174,11 @@ catch(Exception | Error e)
 			Myhydro_Engraving("Multiline Horizontal");
 			Myhydro_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Thread.sleep(4000);
-			Sync.waitPageLoad();
-			Sync.waitForLoad();
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
 			Thread.sleep(6000);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 			
