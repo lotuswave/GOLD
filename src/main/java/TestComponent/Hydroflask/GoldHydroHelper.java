@@ -4388,8 +4388,8 @@ catch(Exception | Error e)
 			
 				List<WebElement> select=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
 				Sync.waitPageLoad();
-				Sync.waitElementPresent(50, "xpath", "//img[@alt='United States flag']");
-				Common.clickElement("xpath", "//img[@alt='United States flag']");
+				Sync.waitElementPresent(50, "xpath", "//img[contains(@class,'a-icon-text-btn')]");
+				Common.clickElement("xpath", "//img[contains(@class,'a-icon-text-btn')]");
 				Thread.sleep(3000);
 				Country=select.get(i).getText();
 				System.out.println(Country);
@@ -4451,8 +4451,8 @@ catch(Exception | Error e)
 		Common.actionsKeyPress(Keys.END);
 		try {
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[text()='New Account Inquiry']");
-			Common.clickElement("xpath", "//a[text()='New Account Inquiry']");
+			Sync.waitElementPresent("xpath", "//a[text()='Retail New Account Inquiry']");
+			Common.clickElement("xpath", "//a[text()='Retail New Account Inquiry']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 		
@@ -4479,8 +4479,8 @@ catch(Exception | Error e)
 		String storesize = data.get(dataSet).get("Storesize");
 		String state = data.get(dataSet).get("Region");
 		try {
-			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
-			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
+//			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
+//			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
 
 			Sync.waitElementPresent("xpath", "//input[@data-label='Company Name']");
 			Common.textBoxInput("xpath", "//input[@data-label='Company Name']", data.get(dataSet).get("Company"));
@@ -4594,7 +4594,7 @@ catch(Exception | Error e)
 		}
 
 		Common.actionsKeyPress(Keys.PAGE_UP);
-		String Text = Common.getText("xpath", "(//div[@class='form-wrap']//span)[2]");
+		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
 		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
 		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
 				"verifying contact us confirmation message", expectedResult,
@@ -8341,7 +8341,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under bottles and drinkware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8375,7 +8375,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8408,7 +8408,9 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				System.out.println(title);
+				System.out.println(Links[i]);
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Accessories","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8441,7 +8443,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8482,7 +8484,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
