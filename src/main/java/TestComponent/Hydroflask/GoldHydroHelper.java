@@ -7612,14 +7612,11 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_Text("Horizontal Text");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitForLoad();
-//			Thread.sleep(4000);
-//			Sync.waitElementPresent(10, "xpath", "//div[@data-ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
 			Thread.sleep(6000);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+			Sync.waitElementPresent(30, "xpath", "//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 			
@@ -8119,17 +8116,15 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
-			engraving_color();
+//			engraving_color();
 			engraving_Text("Multiline Horizontal");
+			product_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-//			Sync.waitForLoad();
-			Thread.sleep(2000);
-//			Sync.waitElementPresent(20, "xpath", "//div[@data-ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
 			Thread.sleep(6000);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+			Sync.waitElementPresent(30, "xpath", "//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 			
