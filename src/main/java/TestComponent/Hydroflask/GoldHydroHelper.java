@@ -4298,9 +4298,9 @@ catch(Exception | Error e)
 		    System.out.println(name);
 			Image.get(i).click();
 			Thread.sleep(5000);
-			Common.navigateBack();
-			Thread.sleep(5000);
 			ExtenantReportUtils.addPassLog("Validating"+ name +"Page  ", "click the sub category should navigate to the  "+name +"Page", "successfully page navigating to "+name +"PAGE", Common.getscreenShotPathforReport(name));
+			Common.navigateBack();
+
 			}
 			List<WebElement> image_category=Common.findElements("xpath", "//div[@class='m-category-card__container']");
 			System.out.println(image_category.size());
@@ -4313,10 +4313,9 @@ catch(Exception | Error e)
 			    Thread.sleep(4000);
 				button.get(i).click();
 				Thread.sleep(4000);
-				Common.navigateBack();
-				Thread.sleep(4000);
 				ExtenantReportUtils.addPassLog("Validating"+ Productname +"Page  ", "click the sub category should navigate to the  "+Productname +"Page", "successfully page navigating to "+Productname +"PAGE", Common.getscreenShotPathforReport(Productname));
-				
+				Common.navigateBack();
+			
 			}
 			
 			
@@ -4340,20 +4339,29 @@ catch(Exception | Error e)
 		try
 		{
 			Sync.waitPageLoad();
+			Thread.sleep(3000);
 			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'product-item-info m-')]");
 			System.out.println(sub_category.size());
 			for(int i=0;i<sub_category.size()-3;i++)	
 			{
-			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'product-item-i')]");
-			Thread.sleep(6000);
+			List<WebElement> Image=Common.findElements("xpath", "//img[contains(@class,'lazy m-product-card')]");
+			Thread.sleep(4000);
 			product=Image.get(i).getText();
-		    System.out.println(product);
+		    Thread.sleep(3000);
 			Image.get(i).click();
 			Thread.sleep(4000);
-			Common.navigateBack();
-			Thread.sleep(4000);
 			ExtenantReportUtils.addPassLog("Validating"+ product +"Page  ", "click on the shop best sellers should navigate to the  "+product +"Page", "successfully page navigating to "+product +"PAGE", Common.getscreenShotPathforReport(product));
+			Common.navigateBack();
+			
 			}	
+			Sync.waitElementPresent("xpath", "//nav[@class='m-breadcrumb u-container']");
+			Common.clickElement("xpath", "//a[text()='Shop']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String title=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+			Common.assertionCheckwithReport(title.contains("Shop"),
+					"validating the breadcrumbs navigating to the" + title, "It should be navigate sucessfully to the"+title,
+					"Sucessfully navigated to the"+title, "Failed to navigate to the"+title);
 		}
 		catch(Exception | Error e)
 		{
@@ -6218,22 +6226,21 @@ catch(Exception | Error e)
 		for(i=0;i<Footrer.length;i++){
 			System.out.println(Footrer[i]);
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.scrollIntoView("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
+			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[contains(text(),'"+Footrer[i]+"')]");
+			Common.scrollIntoView("xpath", "//li[@class='m-footer-links__item']//a[contains(text(),'"+Footrer[i]+"')]");
+			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[contains(text(),'"+Footrer[i]+"')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			System.out.println(Common.getPageTitle());
-             if(Common.getPageTitle().contains("Careers | Helen of Troy"))
+			Thread.sleep(8000);
+            if(Common.getPageTitle().equals("Careers | Helen of Troy"))
              {
             	Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
     			Common.switchToFirstTab();
 		}
 		else
 		{
-			Sync.waitForLoad();
+			Thread.sleep(4000);
 			String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-			Common.assertionCheckwithReport(breadcrumbs.contains(Footrer[i]) || Common.getPageTitle().contains("Affiliate Program"), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
+			Common.assertionCheckwithReport(breadcrumbs.contains(Footrer[i]) || breadcrumbs.contains("Retail Information") || Common.getPageTitle().contains("Affiliate Program") , "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
 			Common.navigateBack();
 		}
 		}
@@ -8116,9 +8123,9 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_Text("Multiline Horizontal");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitForLoad();
-//			Thread.sleep(4000);
-			Sync.waitElementPresent(20, "xpath", "//div[@data-ui-id='message-success']");
+//			Sync.waitForLoad();
+			Thread.sleep(2000);
+//			Sync.waitElementPresent(20, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
 			System.out.println(message);
@@ -8334,7 +8341,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-plp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under bottles and drinkware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8368,7 +8375,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-plp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8401,7 +8408,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-plp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Accessories","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
@@ -8434,7 +8441,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title=Common.findElement("xpath", "//h1[@class='c-plp-hero__headline']").getText();
+				String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
