@@ -25,6 +25,7 @@ public class Test_DGLD_OXO_ST_Loq_011_Register_Locate_AVS_Check_out_shipping_ste
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
 			Oxo.Addnew_Address("AccountDetails");
+			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			
 

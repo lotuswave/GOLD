@@ -23,9 +23,9 @@ public class Test_DGLD_HF_ST_Loq_013_Register_PaymentPage_UpdateAddress_Mybillin
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product"); 
-			
-		  Hydro.minicart_Checkout1();
+		    Hydro.minicart_Checkout1();
 			Hydro.BillingAddress1("BillingDetails");
+			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
 

@@ -26,6 +26,7 @@ public class Test_DGLD_HF_ST_Loq_010_Register_Locate_AVS_Check_out_shipping_step
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
 			Hydro.Addnew_Address("AccountDetails");
+			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 		 
 

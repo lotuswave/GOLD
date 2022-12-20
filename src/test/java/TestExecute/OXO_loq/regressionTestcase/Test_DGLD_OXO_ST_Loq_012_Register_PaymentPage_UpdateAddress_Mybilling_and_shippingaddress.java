@@ -24,6 +24,7 @@ public class Test_DGLD_OXO_ST_Loq_012_Register_PaymentPage_UpdateAddress_Mybilli
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout1();
 			Oxo.BillingAddress1("BillingDetails");
+			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
 			

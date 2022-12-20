@@ -22,7 +22,8 @@ public class Test_DGLD_OXO_ST_Loq_007_Locate_AVS_Check_out_shipping_step {
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress("AccountDetails");
-			//Oxo.BillingAddress("BillingDetails");
+			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
+			
 			
 
 			

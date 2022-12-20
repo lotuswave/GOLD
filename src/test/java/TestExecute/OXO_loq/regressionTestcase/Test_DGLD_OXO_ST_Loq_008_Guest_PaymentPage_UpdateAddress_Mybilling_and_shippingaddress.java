@@ -24,6 +24,7 @@ public class Test_DGLD_OXO_ST_Loq_008_Guest_PaymentPage_UpdateAddress_Mybilling_
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress("AccountDetails");
 			Oxo.BillingAddress("BillingDetails");
+			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
 			

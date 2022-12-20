@@ -93,27 +93,6 @@ public void acceptPrivacy() {
 		
 		Common.clickElementStale("id", "truste-consent-button");
 	}
-
-	
-
-	
-
-	
-
-	
-	
-	
-
-	
-
-	
-	
-
-	
-	
-		
-	
-
 	
 	
 	public void ClosADD() throws Exception {
@@ -480,17 +459,17 @@ public void acceptPrivacy() {
 			
 			try {
 				Thread.sleep(5000);
-				Sync.waitElementVisible("id", "customer-email");
-				Common.textBoxInput("id", "customer-email", data.get(dataSet).get("Email"));
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 			} catch (NoSuchElementException e) {
 				minicart_Checkout();
-				Common.textBoxInput("id", "customer-email",data.get(dataSet).get("Email"));
+				Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
 			}
 			String expectedResult = "email field will have email address";
 			try {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
-				int size = Common.findElements("id", "customer-email").size();
+				int size = Common.findElements("xpath", "//input[@type='email']").size();
 				Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 						"Filled Email address", "unable to fill the email address");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -1004,9 +983,200 @@ public void acceptPrivacy() {
 				Assert.fail();
 			}
 		}
+		public void selectshippingaddress(String Dataset) {
+			String method=data.get(Dataset).get("methods");
+			
+			try {
+	           Thread.sleep(4000);
+				int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
+				if (size > 0) {
+					Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'"+ method +"')]");
+					Common.clickElement("xpath", "//td[contains(text(),'"+ method +"')]");
+				}
+					else {
+						
+						Assert.fail();
+					
+				}
+			}
+				catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the Standed shipping method", "Select the Standed shipping method in shipping page ",
+							"failed to select the Standed shipping method ",
+							Common.getscreenShotPathforReport("failed select Standed shipping method"));
+
+					Assert.fail();	
+					}
+		}
+		public void clickSubmitbutton_Shippingpage() {
+			String expectedResult = "click the submit button to navigate to payment page";
+			try {
+	            Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+				}
+
+	      catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the shipping page submitbutton", expectedResult,
+						"failed to click the submitbutton",
+						Common.getscreenShotPathforReport("failed submitbuttonshippingpage"));
+	                    Assert.fail();
+			}
+		}		
+
+		public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
+			// TODO Auto-generated method stub
+
+			String order = "";
+			addPaymentDetails(dataSet);
+			String expectedResult = "It redirects to order confirmation page";
+
+			if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
+				Thread.sleep(4000);
+				addPaymentDetails(dataSet);
+			}
+
+			Thread.sleep(3000);
+			int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
+			if (placeordercount > 1) {
+				Thread.sleep(4000);
+
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.refreshpage();
+			}
+
+			String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+			if (!url.contains("na.hydroflask")&& !url.contains("preprod") ) {
+			}
+
+			else {
+				try {
+					String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+//					Tell_Your_FriendPop_Up();
+
+					int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+							"verifying the product confirmation", expectedResult,
+							"Successfully It redirects to order confirmation page Order Placed",
+							"User unabel to go orderconformation page");
+
+					if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+						Thread.sleep(4000);
+						order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+						System.out.println(order);
+					}
+					else
+					{
+						Thread.sleep(4000);
+						order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+						System.out.println(order);
+					}
+
+					if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
+						 Common.getText("xpath", "//div[@class='checkout-success']//span");
+						 System.out.println(order);
+						
+					}
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+							"User failed to navigate  to order confirmation page",
+							Common.getscreenShotPathforReport("failednavigatepage"));
+					Assert.fail();
+				}
+
+			}
+			return order;
+		}
+		public String addPaymentDetails(String dataSet) throws Exception {
+			// TODO Auto-generated method stub
+			HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String Number="";
+			String cardnumber = data.get(dataSet).get("cardNumber");
+			System.out.println(cardnumber);
+			String expectedResult = "land on the payment section";
+			// Common.refreshpage();
+
+			try {
+				Sync.waitPageLoad();
+
+				Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+				int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+				Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+						"User unabel to land opaymentpage");
+				Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+				System.out.println(payment);
+				if (payment > 0) {
+					Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+					Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+					Common.clickElement("xpath", "//span[text()='New payment method']");
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Thread.sleep(5000);
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+					Number=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+					System.out.println(Number);
+
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//span[text()='Place Order']");
+			
+					
+				} else {
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Thread.sleep(5000);
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//span[text()='Place Order']");
+				
+					
+
+				}
+				
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+						"failed  to fill the Credit Card infromation",
+						Common.getscreenShotPathforReport("Cardinfromationfail"));
+				Assert.fail();
+			}
 			
 
-		
+			expectedResult = "credit card fields are filled with the data";
+			String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+
+			Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+					expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+			
+			return Number;
+		}
 }	
 	
 	

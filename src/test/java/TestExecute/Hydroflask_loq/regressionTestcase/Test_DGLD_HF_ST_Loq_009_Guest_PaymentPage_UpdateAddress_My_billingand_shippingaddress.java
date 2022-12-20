@@ -25,6 +25,7 @@ public class Test_DGLD_HF_ST_Loq_009_Guest_PaymentPage_UpdateAddress_My_billinga
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress("AccountDetails");
 			Hydro.BillingAddress("BillingDetails");
+	        Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
 

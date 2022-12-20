@@ -24,6 +24,7 @@ public class Test_DGLD_HF_ST_Loq_001_Locate_AVS_Check_out_shipping_step {
            Hydro.addtocart("Product");                    
            Hydro.minicart_Checkout();
            Hydro.addDeliveryAddress("AccountDetails");
+           Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
         
        } catch (Exception e) {
            Assert.fail(e.getMessage(), e);
@@ -31,7 +32,7 @@ public class Test_DGLD_HF_ST_Loq_001_Locate_AVS_Check_out_shipping_step {
    }
    @AfterTest
    public void clearBrowser() {
-       Common.closeAll();
+     Common.closeAll();
    }
    @BeforeTest
    public void startTest() throws Exception {
