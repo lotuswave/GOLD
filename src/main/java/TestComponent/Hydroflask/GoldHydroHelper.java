@@ -6733,12 +6733,11 @@ catch(Exception | Error e)
 				Myhydro_Engraving("Myhydro Product");
 				Myhydro_quantity(Dataset);
 				Common.clickElement("xpath", "//button[@class='ATC__btn']");
-				Sync.waitPageLoad();
-				Sync.waitForLoad();
-//				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("data-ui-id");
+				Thread.sleep(6000);
+				Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+				String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 				System.out.println(message);
-				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+				Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
 				
