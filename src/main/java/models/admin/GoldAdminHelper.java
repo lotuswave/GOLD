@@ -49,8 +49,8 @@ public class GoldAdminHelper {
 
 		try {
 
-		//	Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-			//Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+			Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+			Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
 			Sync.waitPageLoad(30);
 			Sync.waitElementPresent("name", "loginfmt");
 			Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
@@ -2291,6 +2291,7 @@ public class GoldAdminHelper {
 			Common.clickElement("xpath", "//button[text()='Apply']");
 			String appliedcolor = Common.findElement("xpath", "//input[@class='colorpicker-spectrum']")
 					.getAttribute("value");
+			Configure_padding_marins(Dataset);
 			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
 			String colortext = Common.findElement("xpath", "//h2[@class='m-heading__text']").getText();
