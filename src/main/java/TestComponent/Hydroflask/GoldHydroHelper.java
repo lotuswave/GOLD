@@ -7838,8 +7838,8 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30,"xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
 			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]").getText();
 			System.out.println(engraving);
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(engraving.contains(Graphic) || engraving.contains(text), "Validating the "+engraving+ "for the bottle",
+			System.out.println(text);
+			Common.assertionCheckwithReport(engraving.equals(Graphic)||engraving.equals(text), "Validating the "+engraving+ "for the bottle",
 					  engraving+"should apply for the bottle " , "Sucessfully"+engraving+"has been applied for the bottle",
 					"failed apply the"+engraving+"for the bottle");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
