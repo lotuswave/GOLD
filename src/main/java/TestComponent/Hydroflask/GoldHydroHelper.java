@@ -7834,8 +7834,8 @@ catch(Exception | Error e)
 		{
 			Thread.sleep(2000);
 			click_minicart();
-			Sync.waitForLoad();
-			Sync.waitElementPresent("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
+			Thread.sleep(2000);
+			Sync.waitElementPresent(30,"xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
 			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]").getText();
 			System.out.println(engraving);
 			Thread.sleep(4000);
@@ -8113,7 +8113,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//div[@aria-label='" + color +"']");
 			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
-//			engraving_color();
+			engraving_color();
 			engraving_Text("Multiline Horizontal");
 			product_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");

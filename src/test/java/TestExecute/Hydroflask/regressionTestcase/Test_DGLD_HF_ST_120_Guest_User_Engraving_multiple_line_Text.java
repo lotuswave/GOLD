@@ -22,7 +22,7 @@ public class Test_DGLD_HF_ST_120_Guest_User_Engraving_multiple_line_Text {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Multiline Engraving");   
 			Hydro.multiline_Engraving("Multiline Engraving");
-			Hydro.enraving_Checkout("Horizontal Text");
+			Hydro.enraving_Checkout("Multiline Engraving");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
