@@ -23,10 +23,11 @@ public class Test_DGLD_HF_ST_084_employee_Discount_for_Register_User {
 			Hydro.login_Hydroflask("Employee_id");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-			Hydro.employee_discount();
+//			Hydro.employee_discount();
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.discountCode("Employee Discount");
             Hydro.back_to_cart();
             Hydro.ordersummary_validation();
             Hydro.minicart_Checkout();
