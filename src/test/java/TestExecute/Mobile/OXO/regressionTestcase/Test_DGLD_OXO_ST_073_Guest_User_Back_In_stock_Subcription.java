@@ -14,8 +14,7 @@ public class Test_DGLD_OXO_ST_073_Guest_User_Back_In_stock_Subcription {
 
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper_Mobile Oxo = new GoldOxoHelper_Mobile(datafile,"DataSet");
-	
+	GoldOxoHelper_Mobile Oxo=new GoldOxoHelper_Mobile(datafile,"Outofstock");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_User_Back_In_stock_Subcription() throws Exception {
 
