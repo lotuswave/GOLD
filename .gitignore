@@ -3,3 +3,4 @@
 *.gitignore
 *.project
 *.settings
+/log4j.properties
