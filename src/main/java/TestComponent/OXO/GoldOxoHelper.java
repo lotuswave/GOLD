@@ -6009,8 +6009,13 @@ public void click_FeedingDrinking() {
 	}
 	
 	
-	public void chefs_and_Residence() {
+	public void chefs_and_Residence(String Dataset) {
 		
+		String chefslinks=data.get(Dataset).get("chefs");
+		String Aluminichefs=data.get(Dataset).get("AluminiChefs");
+		String[] Chef=chefslinks.split(",");
+		String[] Alumini=Aluminichefs.split(",");
+		int i=0;
 		try
 		{
 			Sync.waitPageLoad();
@@ -6018,19 +6023,20 @@ public void click_FeedingDrinking() {
 			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Chefs in Residence']");
 			Sync.waitPageLoad();
 			
-			List<WebElement> Chefs = Common.findElements("xpath",
-					"//div[@class='c_chefs-in-residence_nav']/div/div/table/tbody/tr/td[2]/ul[1]/li");
-			System.out.println(Chefs);
-			for (WebElement j : Chefs) {
-				j.click();
+			for(i=0;i<Chef.length;i++) {
 				Sync.waitPageLoad();
-				System.out.println(j);
+			String link =	Common.findElement("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='"+Chef[i]+"']").getText();
+			System.out.println(link);
+			Common.clickElement("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='"+Chef[i]+"']");
+			System.out.println(Chef[i]);
+			System.out.println(Common.getPageTitle());
+			 Common.assertionCheckwithReport(Common.getPageTitle().contains(Chef[i]),
+						"validating navigation to the chefs and Residence page " +Chef, "After clicking on "+Chef+" it should navigate to "+Chef,
+						"successfully Navigated to the chefs and Residence " +Chef, "failed to Navigate to the chefs and Residence ");
+
 			}
-
-//			 Common.assertionCheckwithReport(Common.getPageTitle().equals("Manage Gift Registry"),
-//						"validating navigation to the chefs and Residence page ", "After clicking on chefs and Residence button it should navigate to the chefs and Residence  page ",
-//						"successfully Navigated to the chefs and Residence ", "failed to Navigate to the chefs and Residence ");
-
+			
+			
 		}
 		catch(Exception | Error e)
 		{
@@ -6043,6 +6049,42 @@ public void click_FeedingDrinking() {
 	
 	}
 	
+public void alumini_Chefs(String Dataset) {
+		
+		String Alumnichefs=data.get(Dataset).get("AluminiChefs");
+		String[] Alumni=Alumnichefs.split(",");
+		int i=0;
+		try
+		{
+			Sync.waitPageLoad();
+			for(i=0;i<Alumni.length;i++) {
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Chefs in Residence']");
+				Sync.waitPageLoad();
+				Common.mouseOver("xpath", "//button[text()='Alumni Chefs']");
+				Common.mouseOverClick("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='"+Alumni[i]+"']");
+				
+			String link =	Common.findElement("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='"+Alumni[i]+"']").getText();
+			System.out.println(link);
+			System.out.println(Alumni[i]);
+			System.out.println(Common.getPageTitle());
+			 Common.assertionCheckwithReport(Common.getPageTitle().contains(Alumni[i]),
+						"validating navigation to the chefs and Residence page " +Alumni, "After clicking on "+Alumni+" it should navigate to "+Alumni,
+						"successfully Navigated to the chefs and Residence " +Alumni, "failed to Navigate to the chefs and Residence ");
+
+			}
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating navigation to the chefs and Residence  page ", "After clicking on chefs and Residence button it should navigate to the chefs and Residence  page ",
+					"Unable to Navigated to the chefs and Residence ",
+					Common.getscreenShot("failed to Navigate to the chefs and Residence "));
+			Assert.fail();
+		}
+	
+	}
 	
 	public void back_to_cart() {
 		// TODO Auto-generated method stub
