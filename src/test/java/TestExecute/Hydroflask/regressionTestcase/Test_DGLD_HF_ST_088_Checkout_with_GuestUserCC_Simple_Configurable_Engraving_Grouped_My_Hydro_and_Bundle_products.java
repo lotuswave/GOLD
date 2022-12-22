@@ -19,16 +19,16 @@ public class Test_DGLD_HF_ST_088_Checkout_with_GuestUserCC_Simple_Configurable_E
 
 		try {
 			Hydro.verifingHomePage();
+			Hydro.search_product("Myhydro Product");   
+			Hydro.Add_Myhydro("Myhydro Product");  
+			Hydro.search_product("Grouped Bundle");    
+			Hydro.Add_Grouped_Bundle("Grouped Bundle");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
-			Hydro.search_product("Grouped Bundle");    
-			Hydro.Add_Grouped_Bundle("Grouped Bundle");
-			Hydro.search_product("Myhydro Product");   
-			Hydro.Add_Myhydro("Myhydro Product");  
 			Hydro.search_product("Engraving Product"); 
 			Hydro.Graphic_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Graphic");

@@ -1096,7 +1096,7 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			product_quantity(Dataset);
-			click_UGC();
+//			click_UGC();
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 				Common.clickElement("xpath", "//span[text()='Add to Cart']");
 		

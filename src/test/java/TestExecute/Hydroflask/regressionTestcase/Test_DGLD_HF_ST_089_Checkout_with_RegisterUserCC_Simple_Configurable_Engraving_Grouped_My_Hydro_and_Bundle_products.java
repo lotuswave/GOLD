@@ -37,7 +37,6 @@ public class Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurabl
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.discountCode("Discount");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
