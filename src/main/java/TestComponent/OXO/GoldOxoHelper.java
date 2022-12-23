@@ -6159,6 +6159,99 @@ public void alumini_Chefs(String Dataset) {
 		}
 	}
 	
+	
+	  public void footerLinks_ProductSupport(String Dataset){
+//			 String Links= "AboutUs";
+			 String Footerlinks=data.get(Dataset).get("Product Support");
+				String[] Footer=Footerlinks.split(",");
+				int i=0;
+			  try{
+				  Sync.waitPageLoad();
+			  
+			  for(i=0;i<Footer.length;i++) {
+				  Common.actionsKeyPress(Keys.END);
+				  Sync.waitPageLoad();
+				  Common.scrollIntoView("xpath", "//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
+			  Common.clickElement("xpath","//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
+			  Sync.waitPageLoad();
+			 String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			  System.out.println(Footer[i]);
+			  System.out.println( Common.getCurrentURL());
+			  System.out.println(Common.getPageTitle());
+			  Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footer[i]) ||Common.getCurrentURL().contains(Footer[i])|| breadcrumb.contains(Footer[i]),"Validate the Footer link "+Footer[i], "Click the footer link "+Footer[i]+"it will navigate to page"+Footer[i], "successfully navigating to "+Footer[i] +"page ","Failed to navigate to"+Footer[i]+"page");
+			  }
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Footer[i],"Click the footer link "+Footer[i]+"it will navigate to page"+Footer[i], "Failed to navigate to"+Footer[i]+"page", Common.getscreenShotPathforReport("failed to land on "+Footer[i]));
+			    Assert.fail();
+			  
+		  }
+		  }
+	
+	
+	  public void footerLinks_CustomerSupport(String Dataset){
+
+			 String Footerlinks=data.get(Dataset).get("Customer Support");
+				String[] Footer=Footerlinks.split(",");
+				int i=0;
+			  try{
+				  Sync.waitPageLoad();
+			  
+			  for(i=0;i<Footer.length;i++) {
+				  Common.actionsKeyPress(Keys.END);
+				  Sync.waitPageLoad();
+				  Common.scrollIntoView("xpath", "//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
+			  Common.clickElement("xpath","//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
+			  Footer[i].toLowerCase( );
+			  Sync.waitPageLoad();
+//			 String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			  System.out.println(Footer[i]);
+			  System.out.println( Common.getCurrentURL());
+			  System.out.println(Common.getPageTitle());
+			  Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footer[i]) ||Common.getPageTitle().contains(Footer[i]),"Validate the Footer link "+Footer[i], "Click the footer link "+Footer[i]+"it will navigate to page"+Footer[i], "successfully navigating to "+Footer[i] +"page ","Failed to navigate to"+Footer[i]+"page");
+			  }
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Footer[i],"Click the footer link "+Footer[i]+"it will navigate to page"+Footer[i], "Failed to navigate to"+Footer[i]+"page", Common.getscreenShotPathforReport("failed to land on "+Footer[i]));
+			    Assert.fail();
+			  
+		  }
+		  }
+	
+	  public void footerLinks_WeAre_Oxo(String Dataset){
+
+			 String Footerlinks=data.get(Dataset).get("We Are OXO");
+				String[] Footer=Footerlinks.split(",");
+				int i=0;
+			  try{
+				  Sync.waitPageLoad();
+			  
+			  for(i=0;i<Footer.length;i++) {
+				  Common.actionsKeyPress(Keys.END);
+				  Sync.waitPageLoad();
+				  Common.scrollIntoView("xpath", "//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
+			  Common.clickElement("xpath","//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
+			  Footer[i].toLowerCase( );
+			  Sync.waitPageLoad();
+//			 String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			  System.out.println(Footer[i]);
+			  System.out.println( Common.getCurrentURL());
+			  System.out.println(Common.getPageTitle());
+			  Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footer[i]) ||Common.getPageTitle().contains(Footer[i]),"Validate the Footer link "+Footer[i], "Click the footer link "+Footer[i]+"it will navigate to page"+Footer[i], "successfully navigating to "+Footer[i] +"page ","Failed to navigate to"+Footer[i]+"page");
+			  }
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Footer[i],"Click the footer link "+Footer[i]+"it will navigate to page"+Footer[i], "Failed to navigate to"+Footer[i]+"page", Common.getscreenShotPathforReport("failed to land on "+Footer[i]));
+			    Assert.fail();
+			  
+		  }
+		  }
+	
+	
+	
 }
 
 
