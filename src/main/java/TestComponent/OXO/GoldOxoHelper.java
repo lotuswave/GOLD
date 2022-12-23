@@ -6161,7 +6161,6 @@ public void alumini_Chefs(String Dataset) {
 	
 	
 	  public void footerLinks_ProductSupport(String Dataset){
-//			 String Links= "AboutUs";
 			 String Footerlinks=data.get(Dataset).get("Product Support");
 				String[] Footer=Footerlinks.split(",");
 				int i=0;
@@ -6187,6 +6186,7 @@ public void alumini_Chefs(String Dataset) {
 			    Assert.fail();
 			  
 		  }
+			  footerLink_Shipping_Returns();
 		  }
 	
 	
@@ -6203,9 +6203,8 @@ public void alumini_Chefs(String Dataset) {
 				  Sync.waitPageLoad();
 				  Common.scrollIntoView("xpath", "//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
 			  Common.clickElement("xpath","//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
-			  Footer[i].toLowerCase( );
+			 
 			  Sync.waitPageLoad();
-//			 String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 			  System.out.println(Footer[i]);
 			  System.out.println( Common.getCurrentURL());
 			  System.out.println(Common.getPageTitle());
@@ -6218,6 +6217,7 @@ public void alumini_Chefs(String Dataset) {
 			    Assert.fail();
 			  
 		  }
+			  footerLink_FAQs();
 		  }
 	
 	  public void footerLinks_WeAre_Oxo(String Dataset){
@@ -6235,7 +6235,6 @@ public void alumini_Chefs(String Dataset) {
 			  Common.clickElement("xpath","//div[@class='c-footer__items-wrapper']//a[contains(text(),'"+Footer[i]+"')]");
 			  Footer[i].toLowerCase( );
 			  Sync.waitPageLoad();
-//			 String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 			  System.out.println(Footer[i]);
 			  System.out.println( Common.getCurrentURL());
 			  System.out.println(Common.getPageTitle());
@@ -6248,11 +6247,112 @@ public void alumini_Chefs(String Dataset) {
 			    Assert.fail();
 			  
 		  }
+			footerLink_Careers();
+			footerLink_Investor_Relations();
 		  }
 	
+	  public void footerLink_Shipping_Returns(){
+			 String Links= "Shipping & Returns";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='Shipping & Returns']");
+			  Sync.waitPageLoad();
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Shipping"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  Sync.waitPageLoad();
+			    Common.navigateBack();
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+		  }
+		  }
 	
+	  public void footerLink_FAQs(){
+			 String Links= "FAQs";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='FAQ']");
+			  Sync.waitPageLoad();
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Knowledge Base"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  
+			    Common.navigateBack();
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+			  
+		  }
+		  }
+	  
+	  
+	  public void footerLink_Careers(){
+			 String Links= "Careers";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='Careers ']");
+			  Sync.waitPageLoad();
+			  Common.switchWindows();
+			  System.out.println(Common.getPageTitle());
+			  System.out.println(Common.getCurrentURL());
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers")||Common.getCurrentURL().contains("careers"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			      
+		  }
+			 
+			  Common.closeCurrentWindow();
+				Common.switchToFirstTab();
+		  }
+	  
 	
+	  public void footerLink_Investor_Relations(){
+			 String Links= "Investor Relations";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='Investor Relations ']");
+			  Common.switchWindows();
+			  Sync.waitPageLoad();
+			  System.out.println(Common.getCurrentURL());
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Investor Relations")||Common.getCurrentURL().contains("investor"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			 
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+			  
+		  }
+			  Common.closeCurrentWindow();
+				Common.switchToFirstTab();
+		  }
+	  
+	
+	  
+	  
 }
+
+
 
 
 
