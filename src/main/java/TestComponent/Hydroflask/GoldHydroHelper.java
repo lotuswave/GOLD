@@ -1213,8 +1213,8 @@ try
 		// TODO Auto-generated method stub
 		try
 		{
-			String shop=Common.findElement("xpath", "//span[text()='Shop Accessories']//parent::a").getAttribute("href");
-			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
+//			String shop=Common.findElement("xpath", "//span[text()='Shop Accessories']//parent::a").getAttribute("href");
+//			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
@@ -1230,8 +1230,7 @@ try
 			String Greencolor=Color.fromString(Message).asHex();
 			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");	
 			  Common.assertionCheckwithReport(Greencolor.equals("#067a63") &&
-			  Message1.contains("complete")&&shop.contains("/shop/accessories")&&kitchen.
-			  contains("/shop/kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
+			  Message1.contains("complete")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
 			  "User should able to view all details in the order confirmation page",
 			  "Sucessfully all details has been displayed in the order confirmation",
@@ -6733,6 +6732,8 @@ catch(Exception | Error e)
 				Myhydro_Engraving("Myhydro Product");
 				Myhydro_quantity(Dataset);
 				Common.clickElement("xpath", "//button[@class='ATC__btn']");
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 				Thread.sleep(6000);
 				Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
 				String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -7612,8 +7613,10 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_Text("Horizontal Text");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='a-message__container-inner']");
+			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
@@ -7755,6 +7758,8 @@ catch(Exception | Error e)
 			engraving_color();
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -7908,18 +7913,16 @@ catch(Exception | Error e)
 			Myhydrographic("Graphic");
 			Myhydro_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Thread.sleep(4000);
-			Sync.waitPageLoad();
-		    Sync.waitForLoad();
-			Thread.sleep(3000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
-			
+//			Common.refreshpage();
 		}
 	catch(Exception | Error e)
 	{
@@ -8117,14 +8120,16 @@ catch(Exception | Error e)
 			engraving_Text("Multiline Horizontal");
 			product_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='a-message__container-inner']");
+			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
-			
+//			Common.refreshpage();
 		
 	}
 	catch(Exception | Error e)
@@ -8174,6 +8179,8 @@ catch(Exception | Error e)
 			Myhydro_Engraving("Multiline Horizontal");
 			Myhydro_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
