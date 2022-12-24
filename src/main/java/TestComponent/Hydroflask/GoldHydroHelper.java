@@ -5048,8 +5048,9 @@ catch(Exception | Error e)
 			Common.scrollIntoView("xpath", "//span[@class='icon-carousel__right']");
 			Common.findElement("xpath", "//span[@class='icon-carousel__right']");
 			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			
-			int carousel = Common.findElements("xpath", "//div[@class='js-slick-carousel-wrapper slick-initialized slick-slider']").size();
+			Thread.sleep(4000);
+			int carousel = Common.findElements("xpath", "//div[contains(@class,'js-slick-carousel')]").size();
+			System.out.println(carousel);
 			Common.assertionCheckwithReport(carousel > 0, "validating the carousel",
 					"should navigate to the carousel", "user views the carousel",
 					"Failed to see the carousel");
