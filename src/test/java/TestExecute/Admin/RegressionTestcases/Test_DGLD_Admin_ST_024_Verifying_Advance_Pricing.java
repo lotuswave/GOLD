@@ -19,22 +19,24 @@ public class  Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 	    try {
 	    	
 	    	
-	    	
 	    	Admin.Admin_signin("AccountDetails");
 	           Admin.Click_Catalog();
 	           Admin.Click_Products_Catalogmenu();
 	           Admin.Search_products("AccountDetails");
 	           Admin.Click_SearchProduct(); 
-	        // Admin.Click_Edit();
+	         Admin.Click_Edit();
+	         Admin.Quantityincrease("Quantity");
+	         Admin.stockstatus("Stockstatus");
 	           
-	           Admin.QAtest_Advanced_Pricing("AdvancedPricing");
+	          Admin.QAtest_Advanced_Pricing("AdvancedPricing");
 	        
-	           Admin.open_website("Address");
+	          Admin.open_website("Address");
 	           Admin.Homepage_searchproduct("searchproduct");
 	           Admin.click_product();
 	          
 	         Admin.Backto_magento_admin();
-	                  Admin.QAtestproduct_Advanced_Pricing("QATestProduct");
+	                 Admin.QAtestproduct_Advanced_Pricing("QATestProduct");
+	                  //Admin.open_website("Address");
 	         
 	        }
 	        catch (Exception e) {

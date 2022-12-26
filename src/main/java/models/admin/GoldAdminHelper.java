@@ -4366,7 +4366,6 @@ public class GoldAdminHelper {
 	}
 
 	public void Click_Catalog() {
-
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
@@ -4388,6 +4387,7 @@ public class GoldAdminHelper {
 					"Failed to display catalog field menu");
 			Assert.fail();
 		}
+
 
 	}
 
@@ -4412,6 +4412,7 @@ public class GoldAdminHelper {
 					"Failed to display Catalog menu");
 			Assert.fail();
 		}
+
 
 	}
 
@@ -4456,16 +4457,14 @@ public class GoldAdminHelper {
 	public void Click_SearchProduct() {
 		try {
 
-			//Thread.sleep(2000);
-			//Common.clickElement("xpath", "//tr[contains(@class,'data-row')]");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//tr[contains(@class,'data-row')]");
 			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//a[text()='Edit']");
-			Common.clickElement("xpath", "//a[text()='Edit']");
 
 			// Sync.waitElementInvisible(30, "xpath", "//div[@class='page-title-wrapper
 			// complex']");
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
@@ -4477,6 +4476,7 @@ public class GoldAdminHelper {
 					"unable to display QATEST productafter a click on the product", "Failed to display QATEST product");
 			Assert.fail();
 		}
+
 
 	}
 
@@ -7368,31 +7368,29 @@ public class GoldAdminHelper {
 	
 	public void Click_Edit() {
 		// TODO Auto-generated method stub
-		String expectedResult = "to edit and navigate to next page";
+		String expectedResult= "to edit and navigate to next page";
 
 		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//a[@aria-label='Edit QATEST product']");
-			Common.clickElement("xpath", "//a[@aria-label='Edit QATEST product']");
+			Thread.sleep(5000);
+		        Sync.waitElementPresent("xpath", "//a[text()='Edit']");
+			Common.clickElement("xpath", "//a[text()='Edit']");
 			Thread.sleep(6000);
-
+			
 			int pages = Common.findElements("xpath", "//h1[text()='QATEST product']").size();
 			System.out.println(pages);
-
+			
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
-
-		}
+			
+	}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To validate the page is deleted successfully and success message is dispalyed",
-					"Should display successmessage after deleteing the catalog price rule",
-					"Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
+ExtenantReportUtils.addFailedLog("To validate the page is deleted successfully and success message is dispalyed",
+						"Should display successmessage after deleteing the catalog price rule", "Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
 			Assert.fail();
 
 		}
@@ -7400,42 +7398,56 @@ public class GoldAdminHelper {
 
 	public void QAtest_Advanced_Pricing(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
-		String expectedResult = "to edit and navigate to next page";
+		String expectedResult= "to edit and navigate to next page";
 
 		try {
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[text()='Advanced Pricing']");
+		        Sync.waitElementPresent("xpath", "//span[text()='Advanced Pricing']");
 			Common.clickElement("xpath", "//span[text()='Advanced Pricing']");
 			Thread.sleep(6000);
-
-			// int pages = Common.findElements("xpath", "//h1[text()='QATEST
-			// product']").size();
-			// System.out.println(pages);
-
+			
+			//int pages = Common.findElements("xpath", "//h1[text()='QATEST product']").size();
+			//System.out.println(pages);
+			
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@name='product[special_price]'])",
-					data.get(dataSet).get("SpecialPrice"));
+			Common.textBoxInput("xpath", "(//input[@name='product[special_price]'])",data.get(dataSet).get("SpecialPrice"));
 			Thread.sleep(3000);
+			
+			//Sync.waitElementPresent("xpath", "//span[text()='Add']");
+			//Common.clickElement("xpath", "//span[text()='Add']");
+			
+			Thread.sleep(2000);
+			Common.dropdown("xpath", "(//select[@name='product[tier_price][0][cust_group]'])", 
+					Common.SelectBy.TEXT, data.get(dataSet).get("CustomerGroup"));
+			
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "(//input[@name='product[tier_price][0][price_qty]'])",data.get(dataSet).get("Qty"));
+			
+			//Thread.sleep(3000);
+			//Common.textBoxInput("xpath", "(//select[@name='product[tier_price][0][value_type]'])",data.get(dataSet).get("QtyPrice"));
+			
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "(//input[@name='product[tier_price][0][price]'])",data.get(dataSet).get("Price"));
+			
 			Common.clickElement("xpath", "(//span[text()='Done'])[4]");
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button[@id='save-button']");
-
+			
 			int pages = Common.findElements("xpath", "//div[@class='message message-success success']").size();
 			System.out.println(pages);
-
+			
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("10 QATEST product / Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
-
-		}
+			
+	}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the page price successfully and success message is dispalyed",
-					"Should display successmessage after deleteing the catalog price rule",
-					"Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
+ExtenantReportUtils.addFailedLog("To validate the page price successfully and success message is dispalyed",
+						"Should display successmessage after deleteing the catalog price rule", "Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
 			Assert.fail();
 
 		}
@@ -7444,37 +7456,33 @@ public class GoldAdminHelper {
 
 	public void Homepage_searchproduct(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
-		String expectedResult = "to search product in homepage";
+		String expectedResult= "to search product in homepage";
 
 		try {
 			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "(//span[@class='a-icon-text-btn__container'])[3]");
 			Common.clickElement("xpath", "(//span[@class='a-icon-text-btn__container'])[3]");
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@id='search'])", data.get(dataSet).get("search"));
+			Common.textBoxInput("xpath", "(//input[@id='search'])",data.get(dataSet).get("search"));
 			Thread.sleep(6000);
 			Common.clickElement("xpath", "(//span[@class='icon-header__search--desktop a-icon-text-btn__icon'])[3]");
 			int pages = Common.findElements("xpath", "//span[text()='QATest Product']").size();
 			System.out.println(pages);
-
-			ExtenantReportUtils.addPassLog("verifying the search functionality",
-					"Should get the  product name in search field",
-					"user successfully Entered the product name in search field",
-					Common.getscreenShotPathforReport("searched productname successfully"));
-		} catch (Exception | Error e) {
+			
+			ExtenantReportUtils.addPassLog("verifying the search functionality","Should get the  product name in search field","user successfully Entered the product name in search field", Common.getscreenShotPathforReport("searched productname successfully"));
+	}
+		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To saearch product in the  the home page successfully and success message is dispalyed",
-					"Should display successmessage after deleteing the catalog price rule",
-					"Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
+ExtenantReportUtils.addFailedLog("To saearch product in the  the home page successfully and success message is dispalyed",
+						"Should display successmessage after deleteing the catalog price rule", "Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
 			Assert.fail();
 
 		}
-
 	}
 
 	public void click_product() {
 		// TODO Auto-generated method stub
-		String expectedResult = "to validate product PDP";
+		String expectedResult= "to validate product PDP";
 
 		try {
 			Thread.sleep(3000);
@@ -7482,65 +7490,83 @@ public class GoldAdminHelper {
 			Thread.sleep(2000);
 			int pages = Common.findElements("xpath", "//p[text()='QATEST product']").size();
 			System.out.println(pages);
-
-			ExtenantReportUtils.addPassLog("verifying the PDP functionality",
-					"Should naviagte the  product name in search field",
-					"user successfully Entered the product name in search field",
+			
+			ExtenantReportUtils.addPassLog("verifying the PDP functionality","Should naviagte the  product name in search field","user successfully Entered the product name in search field", 
 					Common.getscreenShotPathforReport("searched productname successfully"));
-
-		} catch (Exception | Error e) {
+	
+	}
+	catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To saearch product to PDP successfully and success message is dispalyed",
-					"Should display successmessage after deleteing the catalog price rule",
-					"Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
+ ExtenantReportUtils.addFailedLog("To saearch product to PDP successfully and success message is dispalyed",
+						"Should display successmessage after deleteing the catalog price rule", "Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
 			Assert.fail();
 
-		}
-
+}	
 	}
 
 	public void QAtestproduct_Advanced_Pricing(String dataSet) {
 		// TODO Auto-generated method stub
 
-		String expectedResult = "to edit and navigate to next page";
+		String expectedResult= "to edit and navigate to next page";
 
 		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[text()='Advanced Pricing']");
+			Thread.sleep(5000);
+		        Sync.waitElementPresent("xpath", "//span[text()='Advanced Pricing']");
 			Common.clickElement("xpath", "//span[text()='Advanced Pricing']");
 			Thread.sleep(6000);
-
-			// int pages = Common.findElements("xpath", "//h1[text()='QATEST
-			// product']").size();
-			// System.out.println(pages);
-
-			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@name='product[special_price]'])",
-					data.get(dataSet).get("SpecialPrice"));
+			
+			//int pages = Common.findElements("xpath", "//h1[text()='QATEST product']").size();
+			//System.out.println(pages);
+			
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//span[text()='Add']");
+			Common.clickElement("xpath", "//span[text()='Add']");
+			
 			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "(//input[@name='product[special_price]'])",data.get(dataSet).get("SpecialPrice"));
+			
+			//Sync.waitElementPresent("xpath", "//span[text()='Add']");
+			//Common.clickElement("xpath", "//span[text()='Add']");
+			
+			Thread.sleep(2000);
+			Common.dropdown("xpath", "(//select[@name='product[tier_price][1][cust_group]'])", 
+					Common.SelectBy.TEXT, data.get(dataSet).get("CustomerGroup"));
+			
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "(//input[@name='product[tier_price][1][price_qty]'])",data.get(dataSet).get("Qty"));
+			
+			Thread.sleep(5000);
+			//Common.textBoxInput("xpath", "(//select[@name='product[tier_price][1][value_type]'])",data.get(dataSet).get("QtyPrice1"));
+			
+			Common.dropdown("xpath", "(//select[@name='product[tier_price][1][value_type]'])", 
+					Common.SelectBy.TEXT, data.get(dataSet).get("QtyPrice1"));
+			
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "(//input[@name='product[tier_price][1][percentage_value]'])",data.get(dataSet).get("percentage"));
+			
 			Common.clickElement("xpath", "(//span[text()='Done'])[4]");
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button[@id='save-button']");
-
+			
 			int pages = Common.findElements("xpath", "//div[@class='message message-success success']").size();
 			System.out.println(pages);
-
+			
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("10 QATEST product / Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
-
-		}
+			
+	}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the page price successfully and success message is dispalyed",
-					"Should display successmessage after deleteing the catalog price rule",
-					"Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
+ExtenantReportUtils.addFailedLog("To validate the page price successfully and success message is dispalyed",
+						"Should display successmessage after deleteing the catalog price rule", "Failed to delet the categroy price rule", "Catalog price rule deletion unsuccessfull");
 			Assert.fail();
 
 		}
+		
 
 	}
 
@@ -10055,6 +10081,55 @@ public void delet_existing_Coupon(String dataSet) {
             }	
 		
 }
+		public void Quantityincrease(String dataSet) throws Exception {
+			// TODO Auto-generated method stub
+			try {
+				
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//input[@name='product[quantity_and_stock_status][qty]']");
+			Common.textBoxInput("xpath", "//input[@name='product[quantity_and_stock_status][qty]']", data.get(dataSet).get("Products"));
+			
+			ExtenantReportUtils.addFailedLog("To validate the quantity", "the quantity to increase",
+					"to increase the qty the product", Common.getscreenShot("Failed to display"));
+			
+		}
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the quantity", "the quantity to increase",
+						"to increase the qty the product", Common.getscreenShot("Failed to display"));
+				Assert.fail();
+
+			}
+		
+		}
+
+		public void stockstatus(String dataSet)throws Exception {
+			// TODO Auto-generated method stub
+			String expectedResult=" should navigate to Out of stock";
+			try {
+				
+				Thread.sleep(6000);
+				Common.dropdown("xpath", "//select[@name='product[quantity_and_stock_status][is_in_stock]']", 
+						Common.SelectBy.TEXT, data.get(dataSet).get("Instock"));
+				
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[text()='Save']");
+				Common.clickElement("xpath", "//span[text()='Save']");
+				
+				ExtenantReportUtils.addFailedLog("verifying In stock productsin magento", expectedResult,
+						"User failed to login in account  ", Common.getscreenShotPathforReport("login faield"));
+		}
+			catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("verifying login page with credentials", expectedResult,
+						"User failed to login in account  ", Common.getscreenShotPathforReport("login faield"));
+			
+				Assert.fail();
+
+		}
+			}
+			
 
 }
 
