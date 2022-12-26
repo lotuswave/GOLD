@@ -6215,112 +6215,8 @@ catch(Exception | Error e)
 		}
 		return order;
 	}
-	public void footervalidation_Company(String dataSet) {
-		// TODO Auto-generated method stub
-//		Common.actionsKeyPress(Keys.END);
-		String Footerlinks=data.get(dataSet).get("Company Links");
-		String[] Footrer=Footerlinks.split(",");
-		int i=0;
-		
-		try{
-		for(i=0;i<Footrer.length;i++){
-			System.out.println(Footrer[i]);
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[contains(text(),'"+Footrer[i]+"')]");
-			Common.scrollIntoView("xpath", "//li[@class='m-footer-links__item']//a[contains(text(),'"+Footrer[i]+"')]");
-			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[contains(text(),'"+Footrer[i]+"')]");
-			Sync.waitPageLoad();
-			Thread.sleep(8000);
-            if(Common.getPageTitle().equals("Careers | Helen of Troy"))
-             {
-            	Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-    			Common.switchToFirstTab();
-		}
-		else
-		{
-			Thread.sleep(4000);
-			String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-			Common.assertionCheckwithReport(breadcrumbs.contains(Footrer[i]) || breadcrumbs.contains("Retail Information") || Common.getPageTitle().contains("Affiliate Program") , "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-			Common.navigateBack();
-		}
-		}
-		}
-
-		catch (Exception | Error e) {
-			e.printStackTrace();
-
-			ExtenantReportUtils.addFailedLog("validating Header Links " +Footrer[i],"user open the "+Footrer[i]+" option","User unabel open the header link "+Footrer[i],Common.getscreenShotPathforReport("user failed to open the headerlink"));
-		
-			Assert.fail();
-
-		}
-		
-	}
-	public void footervalidation_CustomerSupport(String dataSet) {
-		// TODO Auto-generated method stub
-		Common.actionsKeyPress(Keys.END);
-		String Footerlinks=data.get(dataSet).get("Customer Links");
-		String pagenames=data.get(dataSet).get("PageTitle");
-		String[] Footrer=Footerlinks.split(",");
-		String[] pagetitle=pagenames.split(",");
-		int i=0;
-		int j=0;
-		
-		
-		try{
-		for(i=0;i<Footrer.length;i++){
-			for(j=0;j<pagetitle.length;j++)
-			{
-			System.out.println(Footrer);	
-			System.out.println(pagetitle);
-			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(pagetitle[j]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-			Common.navigateBack();
-		
-		}
-		}
-		}
-		catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating Header Links " +Footrer[i],"user open the "+Footrer[i]+" option","User unabel open the header link "+Footrer[i],Common.getscreenShotPathforReport("user failed to open the headerlink"));
-		    Assert.fail();
-
-		}
-		
-		
-	}
-	public void footervalidation_Benifits(String dataSet) {
-		// TODO Auto-generated method stub
-		
-		Common.actionsKeyPress(Keys.END);
-		String Footerlinks=data.get(dataSet).get("Benefits Links");
-		String[] Footrer=Footerlinks.split(",");
-		int i=0;
-		
-		try{
-		for(i=0;i<Footrer.length;i++){
-			System.out.println(Footrer[i]);
-			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Thread.sleep(3000);
-			System.out.println(Common.getPageTitle());
-//			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-			Common.navigateBack();	
-			
-		}
-		}
-		catch (Exception | Error e) {
-			e.printStackTrace();
-//			ExtenantReportUtils.addFailedLog("validating Header Links " +Footrer[i],"user open the "+Footrer[i]+" option","User unabel open the header link "+Footrer[i],Common.getscreenShotPathforReport("user failed to open the headerlink"));
-		    Assert.fail();
-
-		}
-		
-	}
+	
+	
 	public void Add_Grouped_Bundle(String Dataset) {
 		// TODO Auto-generated method stub
 		String Product=data.get(Dataset).get("Products");
@@ -7551,34 +7447,7 @@ catch(Exception | Error e)
         }
 
 	}
-	public void footervalidation_Dogood(String Dataset) {
-		// TODO Auto-generated method stub
-		Common.actionsKeyPress(Keys.END);
-		String Footerlinks=data.get(Dataset).get("good Links");
-		System.out.println(Footerlinks);
-		String[] Footrer=Footerlinks.split(",");
-		int i=0;
-		
-		try{
-		for(i=0;i<Footrer.length;i++){
-			System.out.println(Footrer[i]);
-			Sync.waitElementPresent("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Common.clickElement("xpath", "//li[@class='m-footer-links__item']//a[text()='"+Footrer[i]+"']");
-			Thread.sleep(3000);
-			System.out.println(Common.getPageTitle());
-//			Common.assertionCheckwithReport(Common.getCurrentURL().contains(Footrer[i]), "verifying footer link of "+Footrer[i],"user open the "+Footrer[i]+" option", "user successfully open the header link "+Footrer[i],"Failed open the header link "+Footrer[i]);
-			Common.navigateBack();	
-			
-		}
-		}
-		catch (Exception | Error e) {
-			e.printStackTrace();
-//			ExtenantReportUtils.addFailedLog("validating Header Links " +Footrer[i],"user open the "+Footrer[i]+" option","User unabel open the header link "+Footrer[i],Common.getscreenShotPathforReport("user failed to open the headerlink"));
-		    Assert.fail();
-
-		}
-		
-	}
+	
 	public void Text_Engraving(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
@@ -8654,9 +8523,145 @@ Assert.fail();
 			Assert.fail();
 		}
 	}
+	public void Kustomer_Links(String Dataset) {
+		// TODO Auto-generated method stub
+		String Kustomer=data.get(Dataset).get("Kustomer Links");
+		String [] Kustomerlinks=Kustomer.split(",");
+		int i=0;
+		try
+		{
+		for(i=0;i<Kustomerlinks.length;i++){
+		Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+Kustomerlinks[i]+"')]");
+		Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+Kustomerlinks[i]+"')]");
+		Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+Kustomerlinks[i]+"')]");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		Common.assertionCheckwithReport(Common.getPageTitle().contains(Kustomerlinks[i]) || Common.getPageTitle().contains("Frequently Asked Questions"),
+				"validating the Kustomer links navigation from footer Links",
+				"After Clicking on" +Kustomerlinks[i]+"it should navigate to the",Kustomerlinks[i]+
+				"Sucessfully Navigated to the"+Kustomerlinks[i]+"Links",
+				"Unable to Navigated to the"+Kustomerlinks[i]+"Links");
+		Common.navigateBack();
+		}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Kustomer links navigation from footer Links",
+					"After Clicking on" +Kustomerlinks[i]+"it should navigate to the",Kustomerlinks[i]+
+					"Unable to Navigated to the"+Kustomerlinks[i]+"Links",
+					Common.getscreenShot(
+							"Failed to Navigated to the"+Kustomerlinks[i]+"Links"));
+			Assert.fail();
+		}
+		
+	
+	}
+	public void Footer_Links(String Dataset) {
+		// TODO Auto-generated method stub
+		String footer=data.get(Dataset).get("Footer Links");
+		String [] footerlinks=footer.split(",");
+		int i=0;
+		try
+		{
+			for(i=0;i<footerlinks.length;i++){
+				Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				
+				Common.assertionCheckwithReport(Common.getPageTitle().contains(footerlinks[i]) || Common.getPageTitle().contains("We are Hydro Flask")|| Common.getPageTitle().contains("Store Locator") || Common.getPageTitle().contains("Corporate Purchasing") ,
+						"validating the links navigation from footer Links",
+						"After Clicking on" +footerlinks[i]+"it should navigate to the",footerlinks[i]+
+						"Sucessfully Navigated to the"+footerlinks[i]+"Links",
+						"Unable to Navigated to the"+footerlinks[i]+"Links");
+				Common.navigateBack();
+				
+			}
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+					"After Clicking on" +footerlinks[i]+"it should navigate to the",footerlinks[i]+
+					"Unable to Navigated to the"+footerlinks[i]+"Links",
+					Common.getscreenShot(
+							"Failed to Navigated to the"+footerlinks[i]+"Links"));
+			Assert.fail();
+		}
+		
+	}
+	public void Footer_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String footer=data.get(Dataset).get("Footer Links");
+		String [] footerlinks=footer.split(",");
+		int i=0;
+		try
+		{
+			for(i=0;i<footerlinks.length;i++){
+				Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String Bread=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(Common.getPageTitle().contains(footerlinks[i]) || Common.getPageTitle().contains("We are Hydro Flask")|| Common.getPageTitle().contains("Store Locator") || Common.getPageTitle().contains("Corporate Purchasing") ,
+						"validating the links navigation from footer Links",
+						"After Clicking on" +footerlinks[i]+"it should navigate to the",footerlinks[i]+
+						"Sucessfully Navigated to the"+footerlinks[i]+"Links",
+						"Unable to Navigated to the"+footerlinks[i]+"Links");
+				Common.navigateBack();
+				
+			}
+			Carrers();
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+					"After Clicking on" +footerlinks[i]+"it should navigate to the",footerlinks[i]+
+					"Unable to Navigated to the"+footerlinks[i]+"Links",
+					Common.getscreenShot(
+							"Failed to Navigated to the"+footerlinks[i]+"Links"));
+			Assert.fail();
+		}
+		
+	}
+	
+	public void Carrers () {
+		
+	
+		try
+		{
+				Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+				Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+				Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("") || Common.getPageTitle().contains("We are Hydro Flask")|| Common.getPageTitle().contains("Store Locator") || Common.getPageTitle().contains("Corporate Purchasing") ,
+						"validating the links navigation from footer Links",
+						"After Clicking on carrers it should navigate to the page",
+						"Sucessfully Navigated to thecarrers Link",
+						"Unable to Navigated to the Link");
+				Common.switchToFirstTab();				
+	
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+					"After Clicking on the carrers it should navigate ",
+					"Unable to Navigated to thecarrers Links",
+					Common.getscreenShot(
+							"Failed to Navigated to the carrers Links"));
+			Assert.fail();
+		}
 }
 				
-
+	}
 			
 	
 	
