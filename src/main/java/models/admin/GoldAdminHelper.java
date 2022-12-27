@@ -2157,8 +2157,8 @@ public class GoldAdminHelper {
 					.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])")
 					.getAttribute("id");
 			Common.textBoxInput("xpath", "//input[@id='" + text + "']", data.get(Dataset).get("productnames"));
-			Sync.waitElementPresent("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
-			Common.mouseOverClick("xpath", "//span[text()='32 OZ WIDE MOUTH STAINLESS']");
+			Sync.waitElementPresent("xpath", "//span[text()='24 oz Standard Mouth - Seagrass']");
+			Common.mouseOverClick("xpath", "//span[text()='24 oz Standard Mouth - Seagrass']");
 
 			Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
 			Common.clickElement("xpath", "//input[@name='link_url']");
@@ -2996,7 +2996,7 @@ public class GoldAdminHelper {
 			Thread.sleep(5000);
 			String headingverification = Common.getText("xpath", "//div[@class='c-product-overview u-container']");
 			System.out.println(headingverification);
-			Common.assertionCheckwithReport(headingverification.contains("32 OZ WIDE MOUTH STAINLESS"),
+			Common.assertionCheckwithReport(headingverification.contains("24 oz Standard Mouth - Seagrass"),
 					"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
 					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
 

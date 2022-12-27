@@ -22,7 +22,7 @@ public class Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic {
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Simple Engraving");   
-			Hydro.Add_Myhydro("Simple Engraving");
+			Hydro.Text_Engraving("Simple Engraving");
 			Hydro.enraving_Checkout("Horizontal Text");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
