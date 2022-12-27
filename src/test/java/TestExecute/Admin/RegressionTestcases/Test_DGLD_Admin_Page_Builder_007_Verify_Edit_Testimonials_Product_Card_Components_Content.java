@@ -39,12 +39,14 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
           
         
           Admin.edit_Testimonial_Two();
-          Admin.SKUvalue("Author Two");
+         // Admin.SKUvalue("Author Two");
+         
           Admin.Content_Light("Author Two");
           Admin.Editcardtile_color("Author Two");
           Admin.CSSclassvalue("Author Two");
           Admin.Configure_padding_marins("Author Two");
-          Admin.Editandsavepage();
+          Admin.backgroundicon_image_galary("Author Two");
+          
           
           Admin.edit_Testimonial_Three();
           Admin.SKUvalue("Author Three");
@@ -55,7 +57,10 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
           Admin.Editandsavepage();
           Admin.edit_Testimonial("TestmonialProductcard");
           
+          
+          
           Admin.savecontent("TestmonialProductcard");
+          Admin.page_Cache("TestmonialProductcard");
           Admin.openwebsite("TestmonialProductcard");
           Admin.verify_Padding_fronytend("TestmonialProductcard");
           Admin.Verify_frontend_Testimonial("Author one",1);
@@ -64,6 +69,11 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
          Admin.verify_Padding_fronytend("Author one");
          Admin.verify_Padding_fronytend("Author Two");
          Admin.verify_Padding_fronytend("Author Three");
+         
+         Admin.clone_Testimonials();
+         Admin.page_Cache("TestmonialProductcard");
+         Admin.openwebsite("TestmonialProductcard");
+         Admin.clone_testimonials_frontend("Author Two");
         Admin.deletepage("TestmonialProductcard");
           Admin.Clearfilter();
 
@@ -78,7 +88,7 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
 
   @AfterTest
     public void clearBrowser() {
-       Common.closeAll();
+      Common.closeAll();
 
 
 

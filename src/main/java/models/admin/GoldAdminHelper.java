@@ -5613,15 +5613,11 @@ public class GoldAdminHelper {
 
 			System.out.println(Rating[0]);
 			String sku = Common
-					.findElement("xpath", "(//div[contains(@class,'c-testimonials-carousel__item ')])[" + i + "]")
-					.getAttribute("data-product-sku");
-			System.out.println(sku);
-			System.out.println(SKU);
-
-			// div[contains(@class,'c-testimonials-carousel__item ')]
+					.findElement("xpath", "(//div[contains(@class,'background-image')])")
+					.getAttribute("data-bg-desktop");
+			
 			Common.assertionCheckwithReport(
-					description.contains(Description) && Rating1 == number && author.contains(Author)
-							&& sku.contains(SKU),
+					description.contains(Description) && Rating1 == number && author.contains(Author) && sku.contains("jpg"),
 					"validating the description author name and rating on the frontend ",
 					"Description Description author name and rating should be display on the frontend ",
 					"Successfully Description author name and rating is displayed on the frontend",
@@ -10267,18 +10263,22 @@ public void delet_existing_Coupon(String dataSet) {
 				Common.clickElement("xpath", "(//a[@title='Edit'])[1]");
 			    Thread.sleep(3000);
 				String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+				
+				System.out.println(EditTestimonials);
 
-				Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+				Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Carousel"),
 						"To validate the  Navigation to the Edit Testimonials Product Card page ",
 						"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
 						"Successfully it is navigated to the Edit Testimonials Product Card page ",
 						"Failed to navigate to the Edit Testimonials Product Card page");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "(//input[@name='title'])[2]");
+				Common.textBoxInput("xpath", "(//input[@name='title'])[2]", title);
 				
-				Sync.waitElementPresent("xpath", "//input[@name='title']");
-				Common.textBoxInput("xpath", "//input[@name='title']", title);
 				Configure_padding_marins(Dataset);
 				Editandsavepage();
 				String heading=Common.findElementBy("xpath", "//h2[@class='m-heading__text']").getText();
+				System.out.println(heading);
 				Common.assertionCheckwithReport(heading.equals(title),
 						"Validatring the header title name for testinomial ",
 						"After save button header titile should be display for the testinomial ",
@@ -10298,6 +10298,151 @@ public void delet_existing_Coupon(String dataSet) {
 			
 		}
 			
+			
+		
+		public void backgroundicon_image_galary(String Dataset) {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "(//label[text()='Select from Gallery'])[1]");
+				Sync.waitPageLoad();
+				String gallery = Common.findElement("xpath", "//span[contains(@class,'fileinput')]//span").getText();
+				Common.assertionCheckwithReport(gallery.equals("Upload Images"),
+						"To validate the page navigated to the insert pages when we click on the upload from gallery ",
+						"After Click on the upload from the gallery it should navigate to the insert pages",
+						"Successfully It is navigated to the insert pages after clicking on the upload from gallery ",
+						"Failed to Navigate to the insert pages after clicking on the upload from the gallery");
 
+				Common.scrollIntoView("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+				Sync.waitElementPresent(30, "xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+				Common.clickElement("xpath", "(//small[text()='cms-corporate-purcha...'])[2]");
+				Common.scrollIntoView("xpath", "//span[text()='Add Selected']");
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Add Selected']");
+				Common.clickElement("xpath", "//span[text()='Add Selected']");
+				Sync.waitPageLoad();
+//				String newid = Common.findElement("xpath", "//input[@name='alt']").getAttribute("id");
+//				Common.textBoxInput("xpath", "//input[@id='" + newid + "']", data.get(Dataset).get("Attachment"));
+				Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				Sync.waitElementPresent("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				
+				Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+				String imageupload = Common.findElement("xpath", "(//div[@class='m-media-card-testimonial__author'])[2]")
+						.getText();
+				Common.assertionCheckwithReport(imageupload.contains("tester"),
+						"validating the image uploading on testimonials ",
+						"Image should be upload for testimonails",
+						"Successfully image uploaded in the testimonials ",
+						"Failed to upload image on the testimonials");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validation the image uploading on content in value prop banner ",
+						"Image should be upload for value prop baneer", "Unable to upload image on the value prop banner ",
+						Common.getscreenShotPathforReport("Failed to upload image on the value prop banner"));
+				Assert.fail();
+
+			}
+
+		}
+		
+		
+		public void hide_Testimonials() {
+			// TODO Auto-generated method stub
+
+			try {
+
+				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'c-testimonials-carousel__h')]");
+				Common.mouseOver("xpath", "//div[contains(@class,'c-testimonials-carousel__h')]");
+				Sync.waitElementPresent("xpath", "//a[@class='hide-show-content-type']");
+				Common.clickElement("xpath", "//a[@class='hide-show-content-type']");
+				
+				
+				String hide = Common.findElement("xpath", "//a[@class='hide-show-content-type']").getAttribute("title");
+				Common.assertionCheckwithReport(hide.equals("Show"),
+						"Validating the User hide the content", "User should able to hide the content",
+						"Sucessfully User hide the content", "Unable to save the content");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
+						"User should able to save the page", "Unable to save the page",
+						Common.getscreenShotPathforReport("Unable to save the page"));
+				Assert.fail();
+
+			}
+
+		}
+
+		
+		public void clone_Testimonials() {
+			// TODO Auto-generated method stub
+
+			try {
+
+				Common.switchToFirstTab();
+				Search_previous_page_Magento("TestmonialProductcard");
+				Contentpage();
+				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'c-testimonials-carousel__h')]");
+				Common.mouseOver("xpath", "//div[contains(@class,'c-testimonials-carousel__h')]");
+				Sync.waitElementPresent("xpath", "(//a[@title='Duplicate'])[1]");
+				Common.clickElement("xpath", "(//a[@title='Duplicate'])[1]");
+				hide_Testimonials();
+			
+				Sync.waitElementPresent("xpath", "(//a[@title='Duplicate'])[8]");
+				Common.clickElement("xpath", "(//a[@title='Duplicate'])[8]");
+				
+				Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+				Common.clickElement("xpath", "//button[@id='save-button']");
+				Sync.waitPageLoad(70);
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+				Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
+						"Validating the User need to save the page", "User should able to save the page",
+						"Sucessfully User saves the page", "Unable to save the page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
+						"User should able to save the page", "Unable to save the page",
+						Common.getscreenShotPathforReport("Unable to save the page"));
+				Assert.fail();
+
+			}
+
+		}
+
+		public void clone_testimonials_frontend(String Datset) {
+			// TODO Auto-generated method stub
+			String SKU = data.get(Datset).get("SKU");
+			
+			try {
+				Sync.waitPageLoad(40);
+				
+				String hide = Common.findElement("xpath", "//div[contains(@class,'c-testimonials-carousel__item testing1 slick-slide ')]")
+						.getAttribute("aria-label");
+				System.out.println(hide);
+				
+				String clone = Common.findElement("xpath", "//div[@aria-label='Slider 2 slide 4']")
+						.getAttribute("data-product-sku");
+				System.out.println(clone);
+		
+				Common.assertionCheckwithReport(hide.contains("Slider 1 slide 1") && clone.contains(SKU),
+						"validating the text on clone hero banner on fornt end",
+						"Text should be add for the clone hero baneer on fornt end",
+						"Successfully text added to the  clone hero banner on front end",
+						"Failed to add text on the clone hero banner on front end");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the text on clone hero banner on fornt end",
+						"Text should be add for the clone hero baneer on fornt end",
+						"Unable to add the text on the clone hero banner on front end",
+						Common.getscreenShotPathforReport(
+								"Failed to add text on the clone hero banner on front end"));
+				Assert.fail();
+
+			}
+
+		}
 }
 
