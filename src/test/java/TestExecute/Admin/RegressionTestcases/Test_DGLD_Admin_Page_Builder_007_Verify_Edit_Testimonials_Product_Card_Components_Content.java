@@ -78,7 +78,7 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
 
   @AfterTest
     public void clearBrowser() {
-//       Common.closeAll();
+       Common.closeAll();
 
 
 
