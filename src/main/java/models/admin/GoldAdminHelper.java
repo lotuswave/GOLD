@@ -10256,6 +10256,47 @@ public void delet_existing_Coupon(String dataSet) {
 
 		}
 			}
+
+		public void edit_Testimonial(String Dataset) {
+			// TODO Auto-generated method stub
+			String title=data.get(Dataset).get("Tiletext");
+			try
+			{
+				Common.mouseOver("xpath", "//div[contains(@class,'c-testimonials-carousel__h')]");
+				Sync.waitElementPresent("xpath", "(//a[@title='Edit'])[1]");
+				Common.clickElement("xpath", "(//a[@title='Edit'])[1]");
+			    Thread.sleep(3000);
+				String EditTestimonials = Common.findElement("xpath", "//h1[@class='modal-title']").getText();
+
+				Common.assertionCheckwithReport(EditTestimonials.contains("Edit Testimonials Product Card"),
+						"To validate the  Navigation to the Edit Testimonials Product Card page ",
+						"After Click on the edit button it should be navigate to the Edit Testimonials Product Card page ",
+						"Successfully it is navigated to the Edit Testimonials Product Card page ",
+						"Failed to navigate to the Edit Testimonials Product Card page");
+				
+				Sync.waitElementPresent("xpath", "//input[@name='title']");
+				Common.textBoxInput("xpath", "//input[@name='title']", title);
+				Configure_padding_marins(Dataset);
+				Editandsavepage();
+				String heading=Common.findElementBy("xpath", "//h2[@class='m-heading__text']").getText();
+				Common.assertionCheckwithReport(heading.equals(title),
+						"Validatring the header title name for testinomial ",
+						"After save button header titile should be display for the testinomial ",
+						"Successfully header title is displayed for the testinomial ",
+						"Failed to display the header title is displayed for the testinomial");
+				
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				 ExtenantReportUtils.addFailedLog("Validatring the header title name for testinomial ",
+							"After save button header titile should be display for the testinomial ",
+							"Unable to display the header title is displayed for the testinomial ",
+	                        Common.getscreenShot("Failed to display the header title is displayed for the testinomial"));
+				Assert.fail();
+			}
+			
+		}
 			
 
 }

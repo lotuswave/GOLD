@@ -53,9 +53,11 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
           Admin.CSSclassvalue("Author Three");
           Admin.Configure_padding_marins("Author Three");
           Admin.Editandsavepage();
+          Admin.edit_Testimonial("TestmonialProductcard");
           
           Admin.savecontent("TestmonialProductcard");
           Admin.openwebsite("TestmonialProductcard");
+          Admin.verify_Padding_fronytend("TestmonialProductcard");
           Admin.Verify_frontend_Testimonial("Author one",1);
           Admin.Verify_frontend_Testimonial("Author Two",2);
          Admin.Verify_frontend_Testimonial("Author Three",3);
@@ -76,7 +78,7 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
 
   @AfterTest
     public void clearBrowser() {
-       Common.closeAll();
+//       Common.closeAll();
 
 
 
