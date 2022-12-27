@@ -49,7 +49,7 @@ public class Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices {
 
 	@AfterTest
 	public void clearBrowser() {
-		 Common.closeAll();
+ Common.closeAll();
 
 	}
 
