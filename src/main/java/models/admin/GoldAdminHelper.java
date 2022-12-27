@@ -47,50 +47,63 @@ public class GoldAdminHelper {
 
 	public void Admin_signin(String dataSet) {
 
-		try {
+		 
 
-			Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-			Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
-			Sync.waitPageLoad(30);
-			Sync.waitElementPresent("name", "loginfmt");
-			Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
-			Common.clickElement("id", "idSIButton9");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "name", "passwd");
-			Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
-			Common.clickElement("id", "idSIButton9");
-			Sync.waitPageLoad();
+        try {
+            if (Common.getCurrentURL().contains("preprod")) {
+                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+            } 
+            Sync.waitPageLoad(30);
+            Sync.waitElementPresent("name", "loginfmt");
+            Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
+            Common.clickElement("id", "idSIButton9");
+            Sync.waitPageLoad();
+            Thread.sleep(3000);
+            Sync.waitElementPresent(30, "name", "passwd");
+            Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
+            Common.clickElement("id", "idSIButton9");
+            Sync.waitPageLoad();
 
-			Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
-			if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
-				Common.javascriptclickElement("id", "KmsiCheckboxField");
-			}
-			Sync.waitElementClickable("id", "idSIButton9");
-			Common.mouseOverClick("id", "idSIButton9");
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
+ 
 
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
-					"To Validate the Admin is landing on the Dashboard after successfull Signin",
-					"After clicking on sigin button admin should navigate to the dashboard",
-					"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
-					"Admin failed to display the dashboard after clicking on the signin button");
+            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
+            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
+                Common.javascriptclickElement("id", "KmsiCheckboxField");
+            }
+            Sync.waitElementClickable("id", "idSIButton9");
+            Common.mouseOverClick("id", "idSIButton9");
+            Sync.waitPageLoad();
+            Thread.sleep(5000);
+            Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
 
-		} catch (Exception e) {
-			e.printStackTrace();
+ 
 
-			ExtenantReportUtils.addFailedLog(
-					"To Validate the Admin is landing on the Dashboard after successfull Signin",
-					"After clicking on sigin button admin should navigate to the dashboard",
-					"Admin failed to navigate to the dashboard after click on signin button",
-					"Admin failed to land on the dashboard after clicking on the signin button");
-			Assert.fail();
+            Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+                    "To Validate the Admin is landing on the Dashboard after successfull Signin",
+                    "After clicking on sigin button admin should navigate to the dashboard",
+                    "Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+                    "Admin failed to display the dashboard after clicking on the signin button");
 
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
 
-	}
+ 
+
+            ExtenantReportUtils.addFailedLog(
+                    "To Validate the Admin is landing on the Dashboard after successfull Signin",
+                    "After clicking on sigin button admin should navigate to the dashboard",
+                    "Admin failed to navigate to the dashboard after click on signin button",
+                    "Admin failed to land on the dashboard after clicking on the signin button");
+            Assert.fail();
+
+ 
+
+        }
+
+ 
+
+    }
 
 	public void Customers() {
 		// TODO Auto-generated method stub
@@ -2549,12 +2562,12 @@ public class GoldAdminHelper {
 			String urlkey = pagetitle.toLowerCase();
 			System.out.println(urlkey);
 			Common.openNewTab();
-			if (currentAdminURL.contains("stage")) {
-				Common.oppenURL(data.get(Dataset).get("URL") + urlkey);
+			if (currentAdminURL.contains("preprod")) {
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
 			} else {
-				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
+				Common.oppenURL(data.get(Dataset).get("prodURL") + urlkey);
 
-				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
+				Common.oppenURL(data.get(Dataset).get("prodURL") + urlkey);
 
 			}
 			Sync.waitPageLoad(40);
@@ -2995,6 +3008,115 @@ public class GoldAdminHelper {
 					"PDP should de appear on fornt end page", "Successfully image is appeared on the frondend",
 					Common.getscreenShotPathforReport("Failed to navigate to PDP page"));
 			Assert.fail();
+		}
+
+	}
+	
+	
+	
+	
+
+	public void clone_Hero_banner_backgroundvideo(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+
+			
+			
+			
+			Sync.waitElementPresent("xpath", "(//input[@name='title'])[2]");
+			Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(Dataset).get("tilte2"));
+			
+		
+			Common.findElement("xpath", "(//input[@name='video_element[video_url]'])");
+			Common.textBoxInputClear("xpath", "(//input[@name='video_element[video_url]'])");
+
+			Sync.waitElementPresent("xpath", "(//li//span[text()='Video'])[2]");
+			
+			Common.clickElement("xpath", "(//li//span[text()='Video'])[2]");
+
+			Common.textBoxInput("xpath", "//input[@name='video_source']",
+					data.get(Dataset).get("VideoB"));
+			
+			
+
+			Common.scrollIntoView("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Sync.waitElementPresent("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			Common.clickElement("xpath", "//div[@class='page-actions floating-header']//button[@id='save']");
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
+					"User should able to save the page", "Unable to save the page",
+					Common.getscreenShotPathforReport("Unable to save the page"));
+			Assert.fail();
+
+		}
+
+	}
+	public void clone_Hero_banner() {
+		// TODO Auto-generated method stub
+
+		try {
+
+			Common.switchToFirstTab();
+			Search_previous_page_Magento("Herobanner");
+			Contentpage();
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'c-hero-block__image')]");
+			Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block__image')]");
+			Sync.waitElementPresent("xpath", "//a[@title='Duplicate']");
+			Common.clickElement("xpath", "//a[@title='Duplicate']");
+			edit_Herobanner();
+		
+			
+			clone_Hero_banner_backgroundvideo("Herobanner");
+			Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
+			Common.clickElement("xpath", "//i[@title='Close Full Screen']");
+			Common.clickElement("xpath", "//button[@id='save-button']");
+			Sync.waitPageLoad(70);
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			Common.assertionCheckwithReport(savethepage.equals("You saved the page."),
+					"Validating the User need to save the page", "User should able to save the page",
+					"Sucessfully User saves the page", "Unable to save the page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the User need to save the page",
+					"User should able to save the page", "Unable to save the page",
+					Common.getscreenShotPathforReport("Unable to save the page"));
+			Assert.fail();
+
+		}
+
+	}
+	public void herobanner_clone_frontend(String Datset) {
+		// TODO Auto-generated method stub
+		String video = data.get(Datset).get("VideoB");
+		String title = data.get(Datset).get("tilte2");
+		
+		try {
+			Sync.waitPageLoad(40);
+			
+			String Video = Common.findElement("xpath", "//div[contains(@data-video-src,'665626770')]")
+					.getAttribute("data-video-src");
+			System.out.println(Video);
+			String headingname = Common.getText("xpath", "(//h2[@class='c-hero-block__headline'])[1]");
+			System.out.println(headingname);
+			Common.assertionCheckwithReport(Video.contains("665626770") && headingname.contains(title),
+					"validating the text on clone hero banner on fornt end",
+					"Text should be add for the clone hero baneer on fornt end",
+					"Successfully text added to the  clone hero banner on front end",
+					"Failed to add text on the clone hero banner on front end");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the text on clone hero banner on fornt end",
+					"Text should be add for the clone hero baneer on fornt end",
+					"Unable to add the text on the clone hero banner on front end",
+					Common.getscreenShotPathforReport(
+							"Failed to add text on the clone hero banner on front end"));
+			Assert.fail();
+
 		}
 
 	}

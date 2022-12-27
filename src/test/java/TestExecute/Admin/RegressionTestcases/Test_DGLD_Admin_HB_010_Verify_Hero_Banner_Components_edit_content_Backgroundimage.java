@@ -52,6 +52,11 @@ public class Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_B
            Admin.openwebsite("Herobanner");
            Admin.verify_Padding_fronytend("Herobanner");
            Admin.Websiteverification_hero_product();
+           Admin.clone_Hero_banner();
+           
+           Admin.page_Cache("FlushMagento");
+           Admin.openwebsite("Herobanner");
+           Admin.herobanner_clone_frontend("Herobanner");
               Admin.deletepage("Herobanner");
            Admin.Clearfilter();
            
