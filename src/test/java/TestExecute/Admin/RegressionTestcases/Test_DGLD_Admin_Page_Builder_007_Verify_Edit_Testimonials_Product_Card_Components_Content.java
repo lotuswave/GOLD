@@ -73,7 +73,7 @@ public class Test_DGLD_Admin_Page_Builder_007_Verify_Edit_Testimonials_Product_C
          Admin.clone_Testimonials();
          Admin.page_Cache("TestmonialProductcard");
          Admin.openwebsite("TestmonialProductcard");
-         Admin.clone_testimonials_frontend("Author Two");
+         Admin.clone_testimonials_frontend("Author Three");
         Admin.deletepage("TestmonialProductcard");
           Admin.Clearfilter();
 

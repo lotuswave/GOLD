@@ -10418,13 +10418,14 @@ public void delet_existing_Coupon(String dataSet) {
 			try {
 				Sync.waitPageLoad(40);
 				
-				String hide = Common.findElement("xpath", "//div[contains(@class,'c-testimonials-carousel__item testing1 slick-slide ')]")
+				String hide = Common.findElement("xpath", "(//div[contains(@class,'c-testimonials-carousel__item testing1 slick-slide ')])[1]")
 						.getAttribute("aria-label");
 				System.out.println(hide);
 				
 				String clone = Common.findElement("xpath", "//div[@aria-label='Slider 2 slide 4']")
 						.getAttribute("data-product-sku");
 				System.out.println(clone);
+				System.out.println(SKU);
 		
 				Common.assertionCheckwithReport(hide.contains("Slider 1 slide 1") && clone.contains(SKU),
 						"validating the text on clone hero banner on fornt end",
