@@ -7486,7 +7486,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
@@ -7631,7 +7631,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
@@ -7714,7 +7714,7 @@ catch(Exception | Error e)
 			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]").getText();
 			System.out.println(engraving);
 			System.out.println(text);
-			Common.assertionCheckwithReport(engraving.equals(Graphic)||engraving.equals(text), "Validating the "+engraving+ "for the bottle",
+			Common.assertionCheckwithReport(engraving.equals(Graphic)||engraving.equals(text)||engraving.contains("Happy Birthday! Happy!!! Birthday!!"), "Validating the "+engraving+ "for the bottle",
 					  engraving+"should apply for the bottle " , "Sucessfully"+engraving+"has been applied for the bottle",
 					"failed apply the"+engraving+"for the bottle");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -7993,13 +7993,13 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(40,"xpath", "//div[@class='a-message__container-inner']");
+			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
-//			Common.refreshpage();
+
 		
 	}
 	catch(Exception | Error e)
