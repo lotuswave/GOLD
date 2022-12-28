@@ -1853,7 +1853,7 @@ public class GoldAdminHelper {
 			Common.findElement("id", "html-body").sendKeys(data.get(DataSet).get("Description"));
 			Common.switchToDefault();
 			// Thread.sleep(2000);
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 
 			Common.assertionCheckwithReport(name.contains("Content"), "validation to the edit content promo Blocker",
 					"after giving data it should show the data", "Successfully data is populated",
@@ -2157,8 +2157,8 @@ public class GoldAdminHelper {
 					.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])")
 					.getAttribute("id");
 			Common.textBoxInput("xpath", "//input[@id='" + text + "']", data.get(Dataset).get("productnames"));
-			Sync.waitElementPresent("xpath", "//span[text()='24 oz Standard Mouth - Seagrass']");
-			Common.mouseOverClick("xpath", "//span[text()='24 oz Standard Mouth - Seagrass']");
+			Sync.waitElementPresent("xpath", "//span[text()='32 oz Wide Mouth - Laguna']");
+			Common.mouseOverClick("xpath", "//span[text()='32 oz Wide Mouth - Laguna']");
 
 			Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
 			Common.clickElement("xpath", "//input[@name='link_url']");
@@ -2996,7 +2996,7 @@ public class GoldAdminHelper {
 			Thread.sleep(5000);
 			String headingverification = Common.getText("xpath", "//div[@class='c-product-overview u-container']");
 			System.out.println(headingverification);
-			Common.assertionCheckwithReport(headingverification.contains("24 oz Standard Mouth - Seagrass"),
+			Common.assertionCheckwithReport(headingverification.contains("32 oz Wide Mouth - Laguna"),
 					"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
 					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
 

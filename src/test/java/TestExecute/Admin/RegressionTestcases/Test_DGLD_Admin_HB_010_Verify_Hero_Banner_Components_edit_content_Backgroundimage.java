@@ -37,7 +37,7 @@ public class Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_B
            
            Admin.page_Cache("FlushMagento");
            Admin.openwebsite("Herobanner");
-           Admin.ClosADD();
+          // Admin.ClosADD();
            Admin.AcceptAll();
            Admin.website_verification_Herobanner();
            Admin.website_image_verification_herobanner();
@@ -72,7 +72,7 @@ public class Test_DGLD_Admin_HB_010_Verify_Hero_Banner_Components_edit_content_B
     @AfterTest
     public void clearBrowser()
     {
-       Common.closeAll();
+      // Common.closeAll();
 
     }
 
