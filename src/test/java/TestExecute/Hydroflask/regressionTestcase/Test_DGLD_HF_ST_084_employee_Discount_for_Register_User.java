@@ -26,7 +26,7 @@ public class Test_DGLD_HF_ST_084_employee_Discount_for_Register_User {
 //			Hydro.employee_discount();
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.selectshippingaddress("2 Day method");
             Hydro.discountCode("Employee Discount");
 //            Hydro.back_to_cart();
 //            Hydro.ordersummary_validation();

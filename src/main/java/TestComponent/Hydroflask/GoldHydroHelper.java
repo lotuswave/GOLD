@@ -7939,6 +7939,7 @@ catch(Exception | Error e)
 		Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
 		Common.textBoxInput("xpath", "//input[@name='email']",Email);
 		Common.clickElement("xpath", "//input[@data-button-type='submit']");
+		Thread.sleep(4000);
 		String question=Common.findElement("xpath", "//div[@class='yotpo-thank-you']//span[contains(text(),'Thank you')]").getText();
 		System.out.println(question);
 		Common.assertionCheckwithReport(question.contains("THANK YOU FOR POSTING A QUESTION!"), "validating the question submit form",
