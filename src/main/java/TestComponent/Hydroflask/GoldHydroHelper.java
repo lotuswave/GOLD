@@ -3921,7 +3921,7 @@ public void acceptPrivacy() {
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text.contains("Thank you For your Subscription"),"verifying newsletter subscription",
+			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),"verifying newsletter subscription",
 					expectedResult, Text,
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
@@ -8661,6 +8661,99 @@ Assert.fail();
 			Assert.fail();
 		}
 }
+	public void filter_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String filter=data.get(Dataset).get("Type");
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
+			Common.clickElement("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Water ')]");
+			String search=Common.findElement("xpath", "//span[contains(text(),' Water ')]").getText();
+			for (int i = 0; i <= 10-6; i++) {
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//span[@class='highlight-text']");
+
+			String s = webelementslist.get(i).getText();
+			System.out.println(s);
+			Common.assertionCheckwithReport(s.contains("water") ,
+					"validating the filter reviews",
+					"After Clicking on filters the repective reviews should be displayed",
+					"Sucessfully Respective Reviews has been displayed",
+					"Failed to display the respective reviews");
+			
+			}
+			
+			Sync.waitElementPresent("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
+			Common.clickElement("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//input[@type='search']", filter);
+			Common.actionsKeyPress(Keys.ENTER);
+			for (int i = 0; i <= 10-6; i++) {
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//span[@class='highlight-text']");
+
+				String s = webelementslist.get(i).getText();
+				System.out.println(s);
+				Common.assertionCheckwithReport(s.contains("Star") ,
+						"validating the filter reviews search",
+						"After Clicking on filters search the repective reviews should be displayed",
+						"Sucessfully Respective search Reviews has been displayed",
+						"Failed to display the respective search reviews");
+			}
+			
+			click_arrows();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the filter reviews",
+					"After Clicking on filters the repective reviews should be displayed",
+					"Unable to display the respective reviews",
+					Common.getscreenShot(
+							"Failed to display the respective reviews"));
+			Assert.fail();
+		}
+	}
+	public void click_arrows() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Next Page')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
+			Thread.sleep(3000);
+			String rightarrow=Common.findElement("xpath", "//a[contains(@aria-label,'Page 2')]").getAttribute("aria-label");
+			Common.assertionCheckwithReport(rightarrow.contains("Current Page") ,
+					"validating the arrow for the page navigation",
+					"After Clicking on right arrow button it display the next page",
+					"Sucessfully next page has been displayed",
+					"Failed to display the next page");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Previous Page')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Previous Page')]");
+			Thread.sleep(3000);
+			String leftarrow=Common.findElement("xpath", "//a[contains(@aria-label,'Page 1')]").getAttribute("aria-label");
+			Common.assertionCheckwithReport(leftarrow.contains("Current Page") ,
+					"validating the arrow for the page navigation",
+					"After Clicking on left arrow button it display the previous page",
+					"Sucessfully previous page has been displayed",
+					"Failed to display the previous page");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the arrow for the page navigation",
+					"After Clicking on left arrow button it display the previous page",
+					"Unable to display the previous page",
+					Common.getscreenShot(
+							"Failed to display the previous page"));
+			Assert.fail();
+		}
+		
+	}
 				
 	}
 			

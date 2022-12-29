@@ -19,9 +19,11 @@ public class Test_DGLD_HF_ST_053_Write_a_Review {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product"); 
+			Hydro.search_product("Review product"); 
 			Hydro.review("review");
 			Hydro.Ask_a_question("Ask a question");
+			Hydro.filter_validation("Filters");
+			
 			
 		} catch (Exception e) {
 
