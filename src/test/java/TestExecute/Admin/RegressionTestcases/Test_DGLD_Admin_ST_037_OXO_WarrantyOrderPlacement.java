@@ -28,7 +28,7 @@ public class Test_DGLD_Admin_ST_037_OXO_WarrantyOrderPlacement {
          Admin.update_customprice("CustomPrice");
          Admin.shippingaddress("OXOWebsite");
          Admin.Select_Shipping_method();
-	     Admin.Submit_RetailOrder_Success();
+	     Admin.Submit_Replacement_Success();
            
         }
         catch (Exception e) {
@@ -42,7 +42,7 @@ public class Test_DGLD_Admin_ST_037_OXO_WarrantyOrderPlacement {
     @AfterTest
     public void clearBrowser()
     {
-     Common.closeAll();
+ //    Common.closeAll();
 
     }
 

@@ -10446,5 +10446,35 @@ public void delet_existing_Coupon(String dataSet) {
 			}
 
 		}
+		public void Submit_Replacement_Success() {
+			// TODO Auto-generated method stub
+			try {
+
+				
+				Sync.waitElementPresent("xpath", "//span[text()='Submit Replacement']");
+				Common.clickElement("xpath", "//span[text()='Submit Replacement']");
+				Sync.waitPageLoad();
+
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				
+				Sync.waitElementVisible("xpath", "//div[contains(@class,'success')]");
+				String successmessage = Common.findElement("xpath", "//div[contains(@class,'success')]/div").getText();
+				
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().contains("Orders / Operations / Sales / Magento Admin")&& successmessage.contains("You created the order."),
+						"To Validate the orders page is displayed",
+						"should display the orders page after clicking on the orders",
+						"orders page is displayed after a click on the order button", "Failed to display orders page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the orders page is displayed",
+						"should display the orders page after clicking on the orders",
+						"unable to display orders page after a click on the orders button",
+						"Failed to display orders page");
+				Assert.fail();
+			}
+
+		}	
 }
 

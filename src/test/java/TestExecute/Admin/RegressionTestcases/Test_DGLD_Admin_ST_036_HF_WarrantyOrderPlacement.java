@@ -29,7 +29,7 @@ public class Test_DGLD_Admin_ST_036_HF_WarrantyOrderPlacement {
         Admin.update_customprice("CustomPrice");
         Admin.shippingaddress("OXOWebsite");
         Admin.Select_Shipping_method();
-	     Admin.Submit_RetailOrder_Success();
+	     Admin.Submit_Replacement_Success();
     	
            
         }
