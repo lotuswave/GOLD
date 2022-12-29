@@ -27,6 +27,7 @@ public class Test_DGLD_Admin_ST_028_Register_OXO_CreateNewOrder_Simple_Configura
         Admin.Add_configurableproduct_SKU("OXOProducts");
         Admin.Add_bundleproduct_SKU("OXOProducts");
         Admin.shippingaddress("Details");
+        Admin.Select_Shipping_method();
     	Admin.Default_Payment_method("Details");
 
         }

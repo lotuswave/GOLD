@@ -23,10 +23,10 @@ public class Test_DGLD_Admin_ST_021_Register_Magento_Order_Placement {
           Admin.Click_Orders_Salesmenu();
           Admin.Click_CreatNewOrders();
           Admin.Select_ExistingUser_email("HFWebsite");
-          
           Admin.Select_Store("HFWebsite");
-     Admin.Add_product_SKU("Details");
+          Admin.Add_product_SKU("Details");
           Admin.shippingaddress("Details");
+          Admin.Select_Shipping_method();
           Admin.Default_Payment_method("Details");
     	
            
