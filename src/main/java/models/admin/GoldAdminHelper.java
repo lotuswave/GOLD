@@ -7399,11 +7399,12 @@ public class GoldAdminHelper {
 
 			Sync.waitPageLoad();
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			int selectedshippingmethods = Common.findElements("xpath", "//dd[text()='Ground Shipping - ']").size();
+			int selectedshippingmethods = Common.findElements("xpath", "//dd[contains(text(),'Ground')]").size();
+			System.out.println(selectedshippingmethods);
 			int changeshippingmethods = Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
-		
+			System.out.println(changeshippingmethods);
 			Common.assertionCheckwithReport(
-					selectedshippingmethods>0 && changeshippingmethods>0,
+					selectedshippingmethods>=1 && changeshippingmethods>0,
 					"To validate the shipping methods is selected",
 					"Shipping methods should be selected and change the shipping methods link should be displayed",
 					"Shipping methods are selected and change the shipping methods link is displayed",

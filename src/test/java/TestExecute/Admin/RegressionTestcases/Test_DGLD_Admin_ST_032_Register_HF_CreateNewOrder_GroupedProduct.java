@@ -26,6 +26,7 @@ public class Test_DGLD_Admin_ST_032_Register_HF_CreateNewOrder_GroupedProduct {
 			Admin.AddProduct_By_SKU_Group_Product("HFGroupproduct");
 			Admin.AddProduct_By_SKU_Configure_child_Products("HFGroupproduct");
 			Admin.shippingaddress("Details");
+			Admin.Select_Shipping_method();
 			Admin.Default_Payment_method("Details");
 
 		} catch (Exception e) {
@@ -36,7 +37,7 @@ public class Test_DGLD_Admin_ST_032_Register_HF_CreateNewOrder_GroupedProduct {
 
 	@AfterTest
 	public void clearBrowser() {
-		 Common.closeAll();
+//		 Common.closeAll();
 
 	}
 
