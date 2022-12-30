@@ -7556,7 +7556,7 @@ ExtenantReportUtils.addFailedLog("To validate the page is deleted successfully a
 			System.out.println(pages);
 			
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("10 QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
@@ -7671,7 +7671,7 @@ ExtenantReportUtils.addFailedLog("To saearch product in the  the home page succe
 			System.out.println(pages);
 			
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("10 QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
