@@ -8533,6 +8533,7 @@ Assert.fail();
 		{
 		for(i=0;i<Kustomerlinks.length;i++){
 		Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+Kustomerlinks[i]+"')]");
+		Thread.sleep(3000);
 		Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+Kustomerlinks[i]+"')]");
 		Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+Kustomerlinks[i]+"')]");
 		Sync.waitPageLoad();
@@ -8567,6 +8568,7 @@ Assert.fail();
 		{
 			for(i=0;i<footerlinks.length;i++){
 				Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Thread.sleep(3000);
 				Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
 				Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
 				Sync.waitPageLoad();
@@ -8603,6 +8605,7 @@ Assert.fail();
 		{
 			for(i=0;i<footerlinks.length;i++){
 				Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
+				Thread.sleep(3000);
 				Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
 				Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'"+footerlinks[i]+"')]");
 				Sync.waitPageLoad();
@@ -8616,7 +8619,7 @@ Assert.fail();
 				Common.navigateBack();
 				
 			}
-			Carrers();
+//			Carrers();
 		}
 		catch(Exception | Error e)
 		{
@@ -8632,32 +8635,26 @@ Assert.fail();
 	}
 	
 	public void Carrers () {
-		
-	
 		try
 		{
 				Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+				Thread.sleep(3000);
 				Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
 				Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
-				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("") || Common.getPageTitle().contains("We are Hydro Flask")|| Common.getPageTitle().contains("Store Locator") || Common.getPageTitle().contains("Corporate Purchasing") ,
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"),
 						"validating the links navigation from footer Links",
 						"After Clicking on carrers it should navigate to the page",
 						"Sucessfully Navigated to thecarrers Link",
 						"Unable to Navigated to the Link");
-				Common.switchToFirstTab();				
-	
-			
 		}
+		
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-					"After Clicking on the carrers it should navigate ",
-					"Unable to Navigated to thecarrers Links",
-					Common.getscreenShot(
-							"Failed to Navigated to the carrers Links"));
+					"After Clicking on the carrers it should navigate ", "Unable to Navigated to the carrers Links",
+					Common.getscreenShot("Failed to Navigated to the carrers Links"));
 			Assert.fail();
 		}
 }
@@ -8690,7 +8687,7 @@ Assert.fail();
 			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@type='search']", filter);
 			Common.actionsKeyPress(Keys.ENTER);
-			for (int i = 0; i <= 10-6; i++) {
+			for (int i = 0; i <= 10-5; i++) {
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//span[@class='highlight-text']");
 
@@ -8750,6 +8747,39 @@ Assert.fail();
 					"Unable to display the previous page",
 					Common.getscreenShot(
 							"Failed to display the previous page"));
+			Assert.fail();
+		}
+		
+	}
+	public void search_filter(String Dataset) {
+		// TODO Auto-generated method stub
+		String rating=data.get(Dataset).get("Review");
+		String filter=data.get(Dataset).get("CommetsHydroflask");
+		try
+		{
+			Common.clickElement("xpath", "//span[text()='Select']");
+			Sync.waitElementPresent("xpath", "//a[text()='" +filter+ "']");
+			Common.clickElement("xpath", "//a[text()='" +filter+ "']");
+			for (int i = 0; i <= 10-6; i++) {
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//div[@class='yotpo-review-stars ']//span[text()='" +rating+"']");
+
+				String s = webelementslist.get(i).getText();
+				System.out.println(s);
+				Common.assertionCheckwithReport(s.contains(rating), "validating the filter search",
+						"After Clicking on filters search the repective reviews should be displayed",
+						"Sucessfully Respective search Reviews has been displayed",
+						"Failed to display the respective search reviews");
+		
+			}
+			
+			
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
 			Assert.fail();
 		}
 		

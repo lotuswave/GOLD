@@ -23,6 +23,7 @@ public class Test_DGLD_HF_ST_053_Write_a_Review {
 			Hydro.review("review");
 			Hydro.Ask_a_question("Ask a question");
 			Hydro.filter_validation("Filters");
+			Hydro.search_filter("Filters");
 			
 			
 		} catch (Exception e) {

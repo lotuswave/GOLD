@@ -23,7 +23,6 @@ public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 			Hydro.Footer_Links("Footer");
 			Hydro.Footer_validation("Breadcrumbs");
 			
-			
 			} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
