@@ -6351,6 +6351,66 @@ public void alumini_Chefs(String Dataset) {
 	  public void header_kitchenware(String Dataset) {
 			// TODO Auto-generated method stub
 			String names=data.get(Dataset).get("Kitchen ware");
+			String[] kitchenLinks=names.split(",");
+			int i=0;
+			try
+	    {
+				for(i=0;i<kitchenLinks.length;i++){
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +kitchenLinks[i]+"')]");
+//					Common.clickElement("xpath", "//span[contains(text(),'" +Links[i]+"')]//following::ul//span[contains(text(),' Prep & Go Containers')]");
+					Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +kitchenLinks[i]+"')]");
+					Sync.waitPageLoad();
+					System.out.println(kitchenLinks[i]);
+					
+					if(kitchenLinks[i].contains("Food Containers")){
+						header_kichenware_foodcontainers("FoodContainers");
+					}
+					else if(kitchenLinks[i].contains("Cutlery")) {
+						header_kichenware_Cultery("Cutlery");
+					}
+					else if(kitchenLinks[i].contains("Cooking & Baking")) {
+						header_kichenware_CookingAndBaking("CookingAndBaking");
+					}
+					else if(kitchenLinks[i].contains("Tools & Gadgets")) {
+						header_kichenware_ToolsAndGadgets("ToolsAndGadgets");
+					}
+					
+					
+					Thread.sleep(4000);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String breadcrum= Common.findElement("xpath", "//nav[@aria-label='Breadcrumbs navigation']").getText();
+					System.out.println(title);
+					System.out.println(Common.getPageTitle());
+					System.out.println(breadcrumb);
+					System.out.println(kitchenLinks[i]);
+					System.out.println(breadcrum);
+					
+					Common.assertionCheckwithReport(title.contains(kitchenLinks[i])||breadcrum.contains(kitchenLinks[i]) ||breadcrumb.contains(kitchenLinks[i])||Common.getPageTitle().contains(kitchenLinks[i]), "verifying the header link "+kitchenLinks[i]+ "Under Kitchenware","user should navigate to the "+kitchenLinks[i]+" page", "user successfully Navigated to the "+kitchenLinks[i],"Failed to navigate to the "+kitchenLinks[i]);
+			
+		}
+	    }
+		
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link "+kitchenLinks[i]+ "Under Kitchenware",
+						"User should navigate to the "+kitchenLinks[i]+"pages",
+						" unable to navigate to the "+kitchenLinks[i]+"pages",
+						Common.getscreenShot("Failed to navigate to the "+kitchenLinks[i]+"pages"));
+				Assert.fail();
+			}
+			header_Kitchenware_ShopAll("Kitchenware");
+			
+		}
+	  
+	  public void header_kichenware_foodcontainers(String Dataset) {
+			
+			String names=data.get(Dataset).get("Food Containers");
 			String[] Links=names.split(",");
 			int i=0;
 			try
@@ -6359,65 +6419,20 @@ public void alumini_Chefs(String Dataset) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
-					Thread.sleep(3000);
-					Sync.waitElementPresent("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
-//					Common.clickElement("xpath", "//span[contains(text(),'" +Links[i]+"')]//following::ul//span[contains(text(),' Prep & Go Containers')]");
-					Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
-					Sync.waitPageLoad();
-					System.out.println(Links[i]);
-					if(Links[i].contains("Food Containers")){
-						header_kichenware_foodcontainers("FoodContainers");
-					}
-					else if(Links[i].contains("Cutlery")) {
-						header_kichenware_Cultery("Cutlery");
-					}
-					else if(Links[i].contains("Cooking & Baking")) {
-						header_kichenware_CookingAndBaking("CookingAndBaking");
-					}
-					else if(Links[i].contains("Tools & Gadgets")) {
-						header_kichenware_ToolsAndGadgets("ToolsAndGadgets");
-					}
-					
-					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
-			
-		}
-	    }
-		
-			catch(Exception | Error e)
-			{
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Kitchenware",
-						"User should navigate to the "+Links[i]+"pages",
-						" unable to navigate to the "+Links[i]+"pages",
-						Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
-				Assert.fail();
-			}
-			
-		}
-	  
-	  public void header_kichenware_foodcontainers(String Dataset) {
-			// TODO Auto-generated method stub
-			String names=data.get(Dataset).get("Food Containers");
-			String[] Links=names.split(",");
-			int i=0;
-			try
-	    {
-				for(i=0;i<Links.length;i++){
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
 					Common.clickElement("xpath", "//a//span[contains(text(),'Food Containers')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'Food Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]");
-					//span[contains(text(),'Food Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+
 					Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'Food Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]");
 					Sync.waitPageLoad();
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(Common.getPageTitle());
+					System.out.println(breadcrumb);
+					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 			
 		}
 	    }
@@ -6435,14 +6450,14 @@ public void alumini_Chefs(String Dataset) {
 		}
 	  
 	  public void header_kichenware_Cultery(String Dataset) {
-			// TODO Auto-generated method stub
+
 			String names=data.get(Dataset).get("Cutleryy");
 			String[] Links=names.split(",");
 			int i=0;
 			try
 	    {
 				for(i=0;i<Links.length;i++){
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
 					Common.clickElement("xpath", "//a//span[contains(text(),'Cutlery')]");
@@ -6453,8 +6468,12 @@ public void alumini_Chefs(String Dataset) {
 					Sync.waitPageLoad();
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(Common.getPageTitle());
+					System.out.println(breadcrumb);
+					Common.assertionCheckwithReport(title.contains(Links[i])||breadcrumb.contains(Links[i])||Common.getPageTitle().contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 			
 		}
 	    }
@@ -6472,14 +6491,14 @@ public void alumini_Chefs(String Dataset) {
 		}
 	  
 	  public void header_kichenware_CookingAndBaking(String Dataset) {
-			// TODO Auto-generated method stub
+			
 			String names=data.get(Dataset).get("Cooking And Baking");
 			String[] Links=names.split(",");
 			int i=0;
 			try
 	    {
 				for(i=0;i<Links.length;i++){
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
 					Common.clickElement("xpath", "//a//span[contains(text(),'Cooking & Baking')]");
@@ -6490,8 +6509,12 @@ public void alumini_Chefs(String Dataset) {
 					Sync.waitPageLoad();
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(Common.getPageTitle());
+					System.out.println(breadcrumb);
+					Common.assertionCheckwithReport(title.contains(Links[i])||breadcrumb.contains(Links[i])||Common.getPageTitle().contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 			
 		}
 	    }
@@ -6516,7 +6539,7 @@ public void alumini_Chefs(String Dataset) {
 			try
 	    {
 				for(i=0;i<Links.length;i++){
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
 					Common.clickElement("xpath", "//a//span[contains(text(),'Tools & Gadgets')]");
@@ -6527,8 +6550,12 @@ public void alumini_Chefs(String Dataset) {
 					Sync.waitPageLoad();
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumb= Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(Common.getPageTitle());
+					System.out.println(breadcrumb);
+					Common.assertionCheckwithReport(title.contains(Links[i])||breadcrumb.contains(Links[i])||Common.getPageTitle().contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 			
 		}
 	    }
@@ -6569,8 +6596,11 @@ public void alumini_Chefs(String Dataset) {
 					}
 					
 					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrum= Common.findElement("xpath", "//nav[@aria-label='Breadcrumbs navigation']").getText();
+					System.out.println(title);
+					System.out.println(breadcrum);
+					Common.assertionCheckwithReport(title.contains(Links[i])||breadcrum.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 			
 		}
 	    }
@@ -6584,7 +6614,8 @@ public void alumini_Chefs(String Dataset) {
 						Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
 				Assert.fail();
 			}
-			
+			header_CoffeeAndBeverage_ShopAll("Coffee & Beverage");
+
 		}
 	  
 	  public void header_CoffeeAndBeverage_Coffee_Tea(String Dataset) {
@@ -6688,8 +6719,11 @@ public void alumini_Chefs(String Dataset) {
 						header_CleaningAndOrganization_HomeAndOffice("HomeAndOffice");
 					}
 					Thread.sleep(4000);
-//					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-//					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrum= Common.findElement("xpath", "//nav[@aria-label='Breadcrumbs navigation']").getText();
+					System.out.println(title);
+					System.out.println(breadcrum);
+					Common.assertionCheckwithReport(title.contains(Links[i])||breadcrum.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 			
 		}
 	    }
@@ -6703,7 +6737,7 @@ public void alumini_Chefs(String Dataset) {
 						Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
 				Assert.fail();
 			}
-			
+			header_CleaningAndOrganization_ShopAll("Cleaning & Organization");
 		}
 	  
 	  public void header_CleaningAndOrganization_Kitchen(String Dataset) {
@@ -6853,9 +6887,178 @@ public void alumini_Chefs(String Dataset) {
 			
 		}
 	  
+
+		  public void header_ShopAll(String Dataset) {
+				// TODO Auto-generated method stub
+				String names=data.get(Dataset).get("shop all");
+				String[] Links=names.split(",");
+				int i=0;
+				try
+		    {
+						for(i=0;i<Links.length;i++){
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+						Thread.sleep(3000);
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]");       
+						Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+						Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				
+			}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
+							"User should navigate to the "+Links[i]+"pages",
+							" unable to navigate to the "+Links[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+					Assert.fail();
+				}
+				
+			}
 	  
+		  
+		  public void header_Kitchenware_ShopAll(String Dataset) {
+				// TODO Auto-generated method stub
+				String names=data.get(Dataset).get("shop all");
+				String[] Links=names.split(",");
+				int i=0;
+				try
+		    {
+					for(i=0;i<Links.length;i++){
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]"); 
+						Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+						Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				
+			}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
+							"User should navigate to the "+Links[i]+"pages",
+							" unable to navigate to the "+Links[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+					Assert.fail();
+				}
+				
+			}
+		  
+		  public void header_CoffeeAndBeverage_ShopAll(String Dataset) {
+				// TODO Auto-generated method stub
+				String names=data.get(Dataset).get("shop all");
+				String[] Links=names.split(",");
+				int i=0;
+				try
+		    {
+					for(i=0;i<Links.length;i++){
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[text()=' Coffee & Beverage']");
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]"); 
+						Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+						Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				
+			}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
+							"User should navigate to the "+Links[i]+"pages",
+							" unable to navigate to the "+Links[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+					Assert.fail();
+				}
+				
+			}
 	  
+		  public void header_CleaningAndOrganization_ShopAll(String Dataset) {
+				// TODO Auto-generated method stub
+				String names=data.get(Dataset).get("shop all");
+				String[] Links=names.split(",");
+				int i=0;
+				try
+		    {
+					for(i=0;i<Links.length;i++){
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[text()=' Cleaning & Organization']");
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]"); 
+						Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+						Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				
+			}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
+							"User should navigate to the "+Links[i]+"pages",
+							" unable to navigate to the "+Links[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+					Assert.fail();
+				}
+				
+			}
 	  
+		  public void header_Menu_ImageItemblocksLinks(String Dataset) {
+				// TODO Auto-generated method stub
+				String names=data.get(Dataset).get("shop all");
+				String[] Links=names.split(",");
+				int i=0;
+				try
+		    {
+					for(i=0;i<Links.length;i++){
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+//						Common.clickElement("xpath", "//span[text()=' Cleaning & Organization']");
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]"); 
+						Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+						Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				
+			}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
+							"User should navigate to the "+Links[i]+"pages",
+							" unable to navigate to the "+Links[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+					Assert.fail();
+				}
+				
+			} 
+		  
 	  
 }
 
