@@ -24,5 +24,16 @@
 		</classes>
 	</test> 
         
+          <test name="Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" testid="DTG-2374" priority="P1" description="This testcase is to Validate Guest Magento Order Placement">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_020_Guest_Magento_Order_Placement" />
+        </classes>
+    </test>
+        
+         <test name="Test_DGLD_Admin_ST_033_OXO_Registeruser_Magento_Retail_Order_Placement" testid="DTG-2547" priority="P1" description="This testcase is to validate the Retail order placement scenario for Register user">
+        <classes>
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_033_OXO_Registeruser_Magento_Retail_Order_Placement" />
+        </classes>
+    </test>
         </suite>  
         

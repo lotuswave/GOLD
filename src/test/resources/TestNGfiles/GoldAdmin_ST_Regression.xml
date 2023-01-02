@@ -141,7 +141,7 @@
     
       <test name="Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" testid="DTG-2462" priority="P1" description="This testcase is to Validate Register Verifying Advance Pric">
         <classes>
-            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_024_Verifying_Advance_Pric" />
+            <class name="TestExecute.Admin.RegressionTestcases.Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing" />
         </classes>
     </test>  
     
