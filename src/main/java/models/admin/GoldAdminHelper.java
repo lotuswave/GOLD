@@ -23,6 +23,7 @@ import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
+import groovyjarjarantlr4.v4.parse.ANTLRParser.sync_return;
 
 public class GoldAdminHelper {
 
@@ -7128,6 +7129,8 @@ public class GoldAdminHelper {
 			String name = Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
 			if (records.equals("1 records found")) {
 				Common.clickElement("xpath", "//a[text()='Edit']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Common.getPageTitle().contains(name + " / Customers / "),
 						"Validating the edit button on the customers page",
 						"After clicking edit button it should navigate to the selected page",
@@ -7139,7 +7142,8 @@ public class GoldAdminHelper {
 				// Common.findElement("xpath", "//div[text()='" + storeview + "']");
 				Sync.waitElementPresent("xpath", "(//a[text()='Edit'])[1]");
 				Common.clickElement("xpath", "(//a[text()='Edit'])[1]");
-				Thread.sleep(3000);
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Common.getPageTitle().contains(name + " / Customers / "),
 						"Validating the edit button on the customers page",
 						"After clicking edit button it should navigate to the selected page",
@@ -10475,6 +10479,206 @@ public void delet_existing_Coupon(String dataSet) {
 				Assert.fail();
 			}
 
+		}
+
+		public void Customer_StoreCredit_Blanace(String dataset) {
+			// TODO Auto-generated method stub
+			
+			String Updatebalance=data.get(dataset).get("UpdateBalance");
+			try {
+				Thread.sleep(5000);
+				Sync.waitElementPresent("xpath", "//span[text()='Store Credit']");
+				Common.clickElement("xpath", "//span[text()='Store Credit']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String balance=Common.getText("xpath", "(//td[contains(@class,'col-amount a-left')])[2]").replace("$","");
+				Common.textBoxInput("id", "_customerbalanceamount_delta",Updatebalance );
+				Thread.sleep(2000);
+				Sync.waitElementPresent("id", "_customerbalancenotify_by_email");
+				Common.clickElement("id", "_customerbalancenotify_by_email");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//button[@title='Save Customer']");
+				Common.clickElement("xpath", "//button[@title='Save Customer']");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				String successmsg = Common.findElement("xpath", "//div[@class='message message-success success']")
+						.getText();
+				System.out.println(successmsg);
+
+				Common.assertionCheckwithReport(successmsg.contains("customer"),
+						"update the store Credit balance  on the customers page",
+						" store credit  balance should update to the customer",
+						"Successfully updated the store credit balance for the selected customer",
+						"Passed to update the balance");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//button[text()='Clear all']");
+				SelectCustomer_Edit("RetailOrder");
+				Thread.sleep(5000);
+				Sync.waitElementPresent("xpath", "//span[text()='Store Credit']");
+				Common.clickElement("xpath", "//span[text()='Store Credit']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String updatedbalance = Common.getText("xpath", "(//td[contains(@class,'col-amount a-left')])[2]").replace("$","");
+				Float previousbalancevalue=Float.parseFloat(balance);
+				Float balancevalue=Float.parseFloat(Updatebalance);
+				Float Total = previousbalancevalue + balancevalue;
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(updatedbalance),
+						"validating the updated store credit balance",
+						"store credit balance should be update ",
+						"Successfully store credit balance has been updated",
+						"Failed to update the store credit balance");
+				 
+				
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the updated store credit balance",
+						"store credit balance should be update ",
+						"unable to update the store credit balance",
+						Common.getscreenShotPathforReport("Failed to update the store credit balance"));
+				Assert.fail();
+
+			}
+		}
+
+		public void reorder_from_customers(String Dataset) {
+			// TODO Auto-generated method stub
+			try
+			{
+				Sync.waitElementPresent("xpath", "//button[@title='Create Order']");
+				Common.clickElement("xpath", "//button[@title='Create Order']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("New Order"),
+						"validating the create new order from customers",
+						"After clicking on the create new order it should navigate to the new orders page ",
+						"Successfully Navigated to the new orders page after clicking on the create new order",
+						"Failed to Navigated to thr new orders page");
+				select_a_store("RetailOrder");
+	
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the create new order from customers",
+						"After clicking on the create new order it should navigate to the new orders page ",
+						"Unable to Navigated to thr new orders page",
+						Common.getscreenShotPathforReport("Failed to Navigated to thr new orders page"));
+				Assert.fail();
+			}
+			
+		}
+
+		public void select_a_store(String Dataset) {
+			// TODO Auto-generated method stub
+			String storeview=data.get(Dataset).get("Store");
+			try {
+				Thread.sleep(2000);
+
+				Sync.waitElementPresent("xpath", "//label[text()='"+ storeview + "']");
+				Common.clickElement("xpath",  "//label[text()='"+ storeview + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+				System.out.println(title);
+				Common.assertionCheckwithReport(title.contains("Items Ordered"),
+						"To Validate the Items Ordered page is displayed",
+						"should display the Items Orderedpage after clicking on the store",
+						"Items Ordered page is displayed after a click on the store button",
+						"Failed to display Items Ordered page");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the Items Ordered page is displayed",
+						"should display the Items OrderedT page after clicking on the store",
+						"unable to display Items OrderedT page after a click on the store button",
+						"Failed to display Items Ordered page");
+				Assert.fail();
+			}
+
+		
+			
+		}
+
+		public void Address_registeruser(String Dataset) {
+			// TODO Auto-generated method stub
+			String Street=data.get(Dataset).get("streetaddress");
+			String newaddress=data.get(Dataset).get("Address");
+			try
+			{
+				Sync.waitElementPresent("xpath", "//select[contains(@id,'order-billing_address')]");
+				Common.dropdown("xpath", "//select[contains(@id,'order-billing_address')]",Common.SelectBy.TEXT,newaddress);
+				Sync.waitElementPresent("xpath", "//input[@name='order[billing_address][firstname]']");
+				Common.textBoxInput("xpath", "//input[@name='order[billing_address][firstname]']", data.get(Dataset).get("FirstName"));
+				Sync.waitElementPresent("xpath", "//input[@name='order[billing_address][lastname]']");
+				Common.textBoxInput("xpath", "//input[@name='order[billing_address][lastname]']", data.get(Dataset).get("LastName"));
+				Sync.waitElementPresent("xpath", "//input[@name='order[billing_address][street][0]']");
+				Common.textBoxInput("xpath", "//input[@name='order[billing_address][street][0]']", data.get(Dataset).get("streetaddress"));
+				Sync.waitElementPresent("xpath", "//input[@name='order[billing_address][city]']");
+				Common.textBoxInput("xpath", "//input[@name='order[billing_address][city]']", data.get(Dataset).get("City"));
+				Sync.waitElementPresent("xpath", "//select[@name='order[billing_address][region_id]']");
+				Common.dropdown("xpath", "//select[@name='order[billing_address][region_id]']", Common.SelectBy.TEXT, data.get(Dataset).get("State"));
+				Sync.waitElementPresent("xpath", "//input[@name='order[billing_address][postcode]']");
+				Common.textBoxInput("xpath", "//input[@name='order[billing_address][postcode]']", data.get(Dataset).get("Postcode"));
+				Sync.waitElementPresent("xpath", "//input[@name='order[billing_address][telephone]']");
+				Common.textBoxInput("xpath", "//input[@name='order[billing_address][telephone]']", data.get(Dataset).get("Phonenumber"));
+				String address=Common.findElement("xpath", "//input[@name='order[billing_address][street][0]']").getAttribute("value");
+				Common.assertionCheckwithReport(address.equals(Street),
+						"validating the address in magneto",
+						"Address should be added in the magento",
+						"Sucessfully address added to the magento",
+						"Failed to add address to the magneto order");
+				
+				}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the address in magneto",
+						"Address should be added in the magento",
+						"Unable  to add address to the magneto order",
+						"Failed to add address to the magneto order");
+				Assert.fail();
+			}
+		}
+
+		public void Shipping_method(String Dataset) {
+			// TODO Auto-generated method stub
+			String method=data.get(Dataset).get("Shipping method");
+			try {
+				
+				//Common.scrollIntoView("xpath", "//div[@id='order-shipping-method-summary']/a");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//div[@id='order-shipping-method-summary']/a");
+
+				Common.doubleClick("xpath", "//div[@id='order-shipping-method-summary']/a");
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//label[contains(text(),'" + method +"')]");
+				Common.clickElement("xpath", "//label[contains(text(),'" + method +"')]");
+
+				Sync.waitPageLoad();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				int selectedshippingmethods = Common.findElements("xpath", "//dd[contains(text(),'Ground')]").size();
+				System.out.println(selectedshippingmethods);
+				int changeshippingmethods = Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
+				System.out.println(changeshippingmethods);
+				Common.assertionCheckwithReport(
+						selectedshippingmethods>=1 && changeshippingmethods>0,
+						"To validate the shipping methods is selected",
+						"Shipping methods should be selected and change the shipping methods link should be displayed",
+						"Shipping methods are selected and change the shipping methods link is displayed",
+						"Failed to select Shipping methods and change the shipping methods link is not displayed");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the shipping methods is selected",
+						"Shipping methods should be selected and change the shipping methods link should be displayed",
+						"Shipping methods are not selected and change the shipping methods link is not displayed",
+						"Failed to select Shipping methods and change the shipping methods link is not displayed");
+				Assert.fail();
+			}
+
+			
 		}	
 }
 
