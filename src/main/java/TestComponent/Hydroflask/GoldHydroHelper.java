@@ -3610,23 +3610,23 @@ public void acceptPrivacy() {
            Common.clickElement("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
-			Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
-			Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("FirstName"));
+			Sync.waitElementPresent("xpath", "//input[@id='customerFirstName']");
+			Common.textBoxInput("xpath", "//input[@id='customerFirstName']", data.get(dataSet).get("FirstName"));
 
-			Sync.waitElementPresent("xpath", "//input[@id='conversationLastName']");
-			Common.textBoxInput("xpath", "//input[@id='conversationLastName']", data.get(dataSet).get("LastName"));
+			Sync.waitElementPresent("xpath", "//input[@id='customerLastName']");
+			Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(dataSet).get("LastName"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
 			Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(dataSet).get("Company"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='customerPhone']");
-			Common.textBoxInput("xpath", "//input[@name='customerPhone']", data.get(dataSet).get("phone"));
+			Sync.waitElementPresent("xpath", "//input[@name='conversationPhone']");
+			Common.textBoxInput("xpath", "//input[@name='conversationPhone']", data.get(dataSet).get("phone"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationStreet']");
 			Common.textBoxInput("xpath", "//input[@name='conversationStreet']", data.get(dataSet).get("Street"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
-			Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(dataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
+			Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("City"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
 			Common.clickElement("xpath", "//input[@name='conversationCountry']");
@@ -4344,7 +4344,9 @@ catch(Exception | Error e)
 			for(int i=0;i<sub_category.size()-3;i++)	
 			{
 			List<WebElement> Image=Common.findElements("xpath", "//img[contains(@class,'lazy m-product-card')]");
-			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Sync.waitImplicit(10);
+//			Thread.sleep(4000);
 			product=Image.get(i).getText();
 		    Thread.sleep(3000);
 			Image.get(i).click();
@@ -5644,15 +5646,16 @@ catch(Exception | Error e)
 
 		for (WebElement answernames : Answerwebelements) {
 			arrayoptionName.add(answernames.getText());
+			System.out.println(arrayoptionName);
 		}
 
 		String[] items = data.get(DataSet).get("HydroAnswers").split(",");
-
+		System.out.println(items);
 		for (int i = 0; i < items.length; i++) {
-
+            
 			if (arrayoptionName.contains(items[i])) {
 			} else {
-
+           
 				ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
 						"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
 						Common.getscreenShotPathforReport("failed to display answersoptions"));
