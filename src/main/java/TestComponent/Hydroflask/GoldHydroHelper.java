@@ -4563,13 +4563,13 @@ catch(Exception | Error e)
 			
 			Common.textBoxInput("xpath", "//textarea[@id='howDidYouHearAboutUs']", data.get(dataSet).get("Aboutus"));
 			
-			Common.textBoxInput("xpath", "//input[@id='firstName']", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='customerFirstName']", data.get(dataSet).get("FirstName"));
 			
-			Common.textBoxInput("xpath", "//input[@id='lastName']", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
 			
 			Common.textBoxInput("xpath", "//input[@id='jobTitle']", data.get(dataSet).get("Jobtitle"));
 			
-			Common.textBoxInput("xpath", "//input[@name='customerPhone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@name='conversationPhone']", data.get(dataSet).get("phone"));
 			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
 			
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
@@ -8241,6 +8241,8 @@ Assert.fail();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				System.out.println(title);
+				System.out.println(Links[i]);
 				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
