@@ -4341,9 +4341,9 @@ catch(Exception | Error e)
 			Thread.sleep(3000);
 			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'product-item-info m-')]");
 			System.out.println(sub_category.size());
-			for(int i=0;i<sub_category.size()-3;i++)	
+			for(int i=0;i<sub_category.size()-5;i++)
 			{
-			List<WebElement> Image=Common.findElements("xpath", "//img[contains(@class,'lazy m-product-card')]");
+			List<WebElement> Image=Common.findElements("xpath", "//span[@class='product-image-wrapper']");
 			Sync.waitPageLoad();
 			Sync.waitImplicit(10);
 //			Thread.sleep(4000);
