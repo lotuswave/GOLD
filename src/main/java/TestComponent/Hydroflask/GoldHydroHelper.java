@@ -3712,15 +3712,15 @@ public void acceptPrivacy() {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			
-			Common.scrollIntoView("xpath", "//label[text()='Reviews & Questions']");
-			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			Common.scrollIntoView("xpath", "//a[text()='Reviews & Questions']");
+			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
 			Thread.sleep(3000);
-			String form=Common.getText("xpath", "//label[@for='tab-product.yotpo.reviews']");
+			String form=Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
 			System.out.println(form);
 			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
 					"verifying the write a review button", "Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//label[text()='Reviews & Questions']");
+			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
 		
@@ -5284,21 +5284,18 @@ catch(Exception | Error e)
 		String products=data.get(Dataset).get("Products");
 		try
 		{
-		
-			
-			Common.scrollIntoView("xpath", "//label[@for='tab-product.yotpo.reviews']");
-			Common.clickElement("xpath", "//label[@for='tab-product.yotpo.reviews']");
-			Sync.waitForLoad();
-			Thread.sleep(2000);
-			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
+			Common.scrollIntoView("xpath", "//a[text()='Reviews & Questions']");
+			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+			Thread.sleep(3000);
+			String form=Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
 			System.out.println(form);
 			Common.assertionCheckwithReport(form.equals("Reviews & Questions"),
 					"verifying the write a review button", "Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
-			
+			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
-		
+			
 		}
 		catch(Exception | Error e)
 		{
@@ -6979,7 +6976,7 @@ catch(Exception | Error e)
 		
 		try
 		{
-			List<WebElement> pdpcolors=Common.findElements("xpath", "//div[@id='product-options-wrapper']//div[contains(@id,'option-label-hf')]");
+			List<WebElement> pdpcolors=Common.findElements("xpath", "//div[@id='product-options-wrapper']//div[contains(@class,'m-swatch m-swatch-group__optio')]");
         	for(int i=0;i<pdpcolors.size();i++) {
         		
         		pdpcolors.get(i).click();
