@@ -1,5 +1,7 @@
 package TestExecute.Admin.RegressionTestcases;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -24,13 +26,16 @@ public class Test_DGLD_Admin_ST_050_RMA_Order_Placement_for_Hydroflask {
     	Admin.Customer_StoreCredit_Blanace("RetailOrder");
     	Admin.reorder_from_customers("RetailOrder");
     	Admin.Add_product_SKU("RetailOrder");
+   	    HashMap<String,String> data=Admin.productprice_and_Quantity();
+   	    System.out.println(data);
     	Admin.Address_registeruser("RetailOrder");
     	Admin.Shipping_method("RetailOrder");
     	Admin.Select_Storecredit_payment_method();
-    	Admin.Submit_RetailOrder_Success();
-
-    	
-           
+    	String ordernumber=Admin.Submit_RetailOrder_Success();
+//    	String Address=Admin.Address_and_Sku_Validation("RetailOrder");
+    	Admin.Login_Kustomerwebsite("AccountDetails");
+    	Admin.search_ordernumber(ordernumber);
+       
         }
         catch (Exception e) {
 

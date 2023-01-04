@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -7456,8 +7457,9 @@ public class GoldAdminHelper {
 
 	}
 
-	public void Submit_RetailOrder_Success() {
+	public String Submit_RetailOrder_Success() {
 		// TODO Auto-generated method stub
+		String ordernumber="";
 		try {
 
 			
@@ -7475,8 +7477,11 @@ public class GoldAdminHelper {
 					"To Validate the orders page is displayed",
 					"should display the orders page after clicking on the orders",
 					"orders page is displayed after a click on the order button", "Failed to display orders page");
+			Thread.sleep(4000);
+			 ordernumber=Common.findElement("xpath", "//h1[@class='page-title']").getText();	
 
-		} catch (Exception | Error e) {
+		}
+		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To Validate the orders page is displayed",
 					"should display the orders page after clicking on the orders",
@@ -7484,7 +7489,8 @@ public class GoldAdminHelper {
 					"Failed to display orders page");
 			Assert.fail();
 		}
-
+      
+		return ordernumber;
 	}
 
 
@@ -10679,6 +10685,191 @@ public void delet_existing_Coupon(String dataSet) {
 			}
 
 			
+		}
+
+		public String Address_and_Sku_Validation(String Dataset) {
+			// TODO Auto-generated method stub
+			String Address="";
+			
+			try
+			{
+				Address=Common.findElement("xpath", "//address[@class='admin__page-section-item-content']").getText();
+				System.out.println(Address);
+				List <WebElement> sku=Common.findElements("xpath", "//div[@class='product-sku-block']");
+				ArrayList<String> skuids = new ArrayList<String>();
+				for (WebElement Allskus : sku) {
+	             skuids.add(Allskus.getText().replace("SKU:", "").trim());
+	              System.out.println(skuids);
+	              
+				}
+	
+				String[] SKUnumber = data.get(Dataset).get("SKUNumber").split(",");
+				
+				for (int i = 0; i < SKUnumber.length; i++) {
+					
+				  
+				if (skuids.contains(SKUnumber[i])) {
+//					 System.out.println(skuids);
+					  System.out.println(SKUnumber[i]);
+					
+				} else {
+                 
+					  System.out.println(SKUnumber[i]);
+//					ExtenantReportUtils.addFailedLog("Validating the sku ids in magento",
+//							"the skuids should be equal to the SKUnumber" ,
+//							"The displayed skuids is not equal to the SKUnumber",
+//							Common.getscreenShotPathforReport("Failed to match the skuids to the Skunumber"));
+//					Assert.fail();
+				}
+//				Common.assertionCheckwithReport(skuids.equals(SKUnumber), "Validating the sku ids in magento",
+//						"the " + skuids + "should be equal to the " + SKUnumber[i],
+//						"The displayed" + skuids + "is equal to the" + SKUnumber[i],
+//						"Failed to match the" + skuids + "to the" + SKUnumber[i]);
+			}
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the sku ids in magento",
+						"the skuids should be equal to the SKUnumber" ,
+						"The displayed skuids is not equal to the SKUnumber",
+						Common.getscreenShotPathforReport("Failed to match the skuids to the SKUnumber"));
+				Assert.fail();
+			}
+			return Address;
+		}
+
+		public void Login_Kustomerwebsite(String Dataset) {
+			// TODO Auto-generated method stub
+			String url=data.get(Dataset).get("URL");
+			try
+			{
+				Common.openNewTab();
+				Common.oppenURL(url);
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//img[@class='samlAuthButton']");
+				Common.clickElement("xpath", "//img[@class='samlAuthButton']");
+				Thread.sleep(4000);
+//		          Sync.waitElementPresent("name", "loginfmt");
+//		         Common.textBoxInput("name", "loginfmt", data.get(Dataset).get("UserName"));
+//		         Common.clickElement("id", "idSIButton9");
+//		         Sync.waitPageLoad();
+//		         Thread.sleep(3000);
+//		         Sync.waitElementPresent(30, "name", "passwd");
+//		         Common.textBoxInput("name", "passwd", data.get(Dataset).get("Password"));
+//		         Common.clickElement("id", "idSIButton9");
+//		         Sync.waitPageLoad();
+//		         Thread.sleep(3000);
+				System.out.println(Common.getPageTitle());
+					Common.assertionCheckwithReport(
+							Common.getPageTitle().contains("Kustomer | Hydro Flask")
+									|| Common.getPageTitle().contains("Kustomer | oxo"),
+							"Validating the kustomer login",
+							"After clicking on the login button it should navigate to the kustomer page",
+							"sucessfully it is navigated to the Kustomer page",
+							"Failed to navigate to the Kustomer page");
+				
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the kustomer login",
+						"After clicking on the login button it should navigate to the kustomer page",
+						"Unable to navigate to the Kustomer page",
+						Common.getscreenShotPathforReport("Failed to navigate to the Kustomer page"));
+				Assert.fail();
+			}
+			
+		}
+
+		public void search_ordernumber(String Dataset) {
+			// TODO Auto-generated method stub
+			try
+			{
+				Sync.waitElementPresent("xpath", "//input[@type='search']");
+				Common.clickElement("xpath", "//input[@type='search']");
+			Common.textBoxInput("xpath", "//input[@type='search']", Dataset);
+			List<WebElement> listofordernumber=Common.findElements("xpath", "//mark[contains(@class,'headerSearch')]");
+			ArrayList<WebElement> listordernumber=new ArrayList<WebElement>();
+			for(WebElement Kustomerordernumber:listofordernumber)
+			{
+				
+				listordernumber.add(Kustomerordernumber);
+				 String add=Kustomerordernumber.getText(); 
+				 Common.assertionCheckwithReport(add.equals(Dataset) ,
+							"validating the dropdown in the order number ",
+							"User should able to see the  dropdown for respective order number", "Successfully order dropdown has been displayed",
+							"Failed to display order dropdown ");
+				 Kustomerordernumber.click();
+			
+			}
+			}
+			catch(Exception | Error e)
+			{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the dropdown in the order number ",
+					"User should able to see the  dropdown for respective order number", "unable to displayed the order dropdown",
+					Common.getscreenShotPathforReport("Failed to display the order dropdown"));
+			Assert.fail();
 		}	
+}
+
+		public  HashMap<String,String> productprice_and_Quantity() {
+			// TODO Auto-generated method stub
+			HashMap<String,String> data=new HashMap<String,String>();
+			try
+			{
+				List <WebElement> totalproducts=Common.findElements("xpath", "//tbody//td[@class='col-price']//span[@class='price']");
+				List <WebElement> quantity=Common.findElements("xpath", "//tbody//td[@class='col-qty']//input[contains(@class,'input-text')]");
+
+				List <WebElement> rowsubtotal=Common.findElements("xpath", "//td[@class='col-price col-row-subtotal']//span");
+			
+				
+				for(int i=0;i<totalproducts.size();i++)
+				{
+				List<WebElement> productprice=Common.findElements("xpath", "//tbody//td[@class='col-price']//span[@class='price']");
+		
+				String Price=productprice.get(i).getText().replace("$", "");
+			
+				 Float Priceammountvalue=Float.valueOf(Price);
+				
+					
+				List<WebElement> productqty=Common.findElements("xpath", "//tbody//td[@class='col-qty']//input[contains(@class,'input-text')]");
+					
+					String QTY=productqty.get(i).getAttribute("value");
+			
+					Float QTYsvalue = Float.parseFloat(QTY);
+					Float ExpectedTotalAmmount=Priceammountvalue*QTYsvalue;
+				
+					String ExpectedTotalAmmount2 = new BigDecimal(ExpectedTotalAmmount).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+					String ExpectedTotalAmount=ExpectedTotalAmmount2;
+				
+					data.put("ExpectedTotalAmmountvalue",ExpectedTotalAmmount2);
+			
+					List<WebElement> rowtotal=Common.findElements("xpath", "//td[@class='col-price col-row-subtotal']//span");
+					
+					String row=rowtotal.get(i).getText().replace("$", "");
+					
+					data.put("rowtotalvalue", row);
+					System.out.println(data);
+					 Common.assertionCheckwithReport(row.matches(ExpectedTotalAmount) ,
+								"validating the product qty and amount equals to the subtotal ",
+								"User should able to product qty and amount equals to the subtotal", "Successfully after multiply the product amount and quantity is equal to the subtotal",
+								"Failed to equal to the subtotal for product amount and quantity ");
+					
+					}
+				
+
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the product qty and amount equals to the subtotal ",
+						"User should able to product qty and amount equals to the subtotal", "unable to equal to the subtotal for product amount and quantity",
+						Common.getscreenShotPathforReport("Failed to equal to the subtotal for product amount and quantity"));
+				Assert.fail();
+			}
+			return data;
+		}
 }
 
