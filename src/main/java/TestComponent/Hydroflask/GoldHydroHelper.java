@@ -674,13 +674,25 @@ public void selectshippingaddress(String Dataset) {
 		else {
 			try {
 				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-//				Tell_Your_FriendPop_Up();
+				
+				if(Common.getCurrentURL().contains("na.hydroflask"))
+				{
+				Tell_Your_FriendPop_Up();
 
 				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
+				}
+				else
+				{
+					int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+							"verifying the product confirmation", expectedResult,
+							"Successfully It redirects to order confirmation page Order Placed",
+							"User unabel to go orderconformation page");
+				}
 
 				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
 					Thread.sleep(4000);
@@ -4861,9 +4873,10 @@ catch(Exception | Error e)
 					Common.clickElement("xpath", "//a[text()='Warranty']");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					Sync.waitElementPresent("xpath", "//span[text()='Click here to start a Warranty']");
-					Common.clickElement("xpath", "//span[text()='Click here to start a Warranty']");
+					Sync.waitElementPresent("xpath", "//a[@class='btn btn-primary']");
+					Common.clickElement("xpath", "//a[@class='btn btn-primary']");
 					Sync.waitPageLoad();	
+					Thread.sleep(3000);
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("Warranty"),"Validating the Warranty page navigation" ,
 							expectedResult, "successfully land to Warranty page", "unabel to load the Warranty page");
 				} catch (Exception | Error e) {
@@ -4891,11 +4904,11 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 		        Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
-				Sync.waitElementPresent("xpath", "//input[@id='customerStreet']");
-				Common.textBoxInput("xpath", "//input[@id='customerStreet']", data.get(dataSet).get("Street"));
+				Sync.waitElementPresent("xpath", "//input[@name='conversationStreet']");
+				Common.textBoxInput("xpath", "//input[@name='conversationStreet']", data.get(dataSet).get("Street"));
 
-				Sync.waitElementPresent("xpath", "//input[@id='customerCity']");
-				Common.textBoxInput("xpath", "//input[@id='customerCity']", data.get(dataSet).get("City"));
+				Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
+				Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(dataSet).get("City"));
 	
 				Sync.waitElementPresent("xpath", "//span[text()='Select State']");
 				Common.clickElement("xpath", "//span[text()='Select State']");
@@ -4903,14 +4916,14 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 				Common.clickElement("xpath", "//div[text()='Alabama']");
 				
-				Sync.waitElementPresent("xpath", "//input[@id='customerZipPostalCode']");
-				Common.textBoxInput("xpath", "//input[@id='customerZipPostalCode']", data.get(dataSet).get("postcode"));
+				Sync.waitElementPresent("xpath", "//input[@name='conversationZipCode']");
+				Common.textBoxInput("xpath", "//input[@name='conversationZipCode']", data.get(dataSet).get("postcode"));
 				
-				Sync.waitElementPresent("xpath", "//input[@id='customerPhone']");
-				Common.textBoxInput("xpath", "//input[@id='customerPhone']", data.get(dataSet).get("phone"));
+				Sync.waitElementPresent("xpath", "//input[@id='conversationPhone']");
+				Common.textBoxInput("xpath", "//input[@id='conversationPhone']", data.get(dataSet).get("phone"));
 				
-				Sync.waitElementPresent("xpath", "//div[@id='customerWherePurchased']");
-				Common.clickElement("xpath", "//div[@id='customerWherePurchased']");
+				Sync.waitElementPresent("xpath", "//div[@id='conversationWherePurchased']");
+				Common.clickElement("xpath", "//div[@id='conversationWherePurchased']");
 
 				Sync.waitElementPresent("xpath", "//div[text()='Hydro Flask Website']");
 				Common.clickElement("xpath", "//div[text()='Hydro Flask Website']");
@@ -4941,8 +4954,9 @@ catch(Exception | Error e)
 				
 				Common.scrollIntoView("xpath", "//button[text()='Submit']");
 				Common.clickElement("xpath", "//button[text()='Submit']");
-
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Your submission was successful')]");
+               
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[contains(text(),'Your submission was successful')]");
 				int Warrantysuccessmessage = Common.findElements("xpath", "//span[contains(text(),'Your submission was successful')]").size();
 				Common.assertionCheckwithReport(Warrantysuccessmessage > 0, "verifying Warranty Success message ",
 						"Success message should be Displayed", "Warranty Success message displayed ",
