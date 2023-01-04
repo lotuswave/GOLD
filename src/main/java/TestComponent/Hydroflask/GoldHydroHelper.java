@@ -4957,7 +4957,7 @@ catch(Exception | Error e)
                
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//div[contains(text(),'Your submission was successful')]");
-				int Warrantysuccessmessage = Common.findElements("xpath", "//span[contains(text(),'Your submission was successful')]").size();
+				int Warrantysuccessmessage = Common.findElements("xpath", "//div[contains(text(),'Your submission was successful')]").size();
 				Common.assertionCheckwithReport(Warrantysuccessmessage > 0, "verifying Warranty Success message ",
 						"Success message should be Displayed", "Warranty Success message displayed ",
 						"failed to dispaly success message");
