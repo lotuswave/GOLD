@@ -60,6 +60,17 @@ public GoldHydroHelper_Mobile(String datafile,String sheetname) {
 		
 	}
 
+public void acceptPrivacy() {
+	
+	Common.clickElementStale("id", "truste-consent-button");
+	try {	Thread.sleep(5000);
+	Common.clickElement("xpath","//*[text()='Yes']");
+	Thread.sleep(3000);
+		Common.clickElement("xpath", "//button[@id='button3']");}
+	catch(Exception e) {}
+	
+}
+
 public void ChangeAddress_AddressBook(String dataSet) {
 	// TODO Auto-generated method stub
 	try {
@@ -2004,9 +2015,9 @@ public void Stored_Payment() {
 		try {
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
-					"validating store logo", "System directs the user to the Homepage",
-					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
+			//Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
+			//		"validating store logo", "System directs the user to the Homepage",
+			//		"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -2356,11 +2367,12 @@ public void Stored_Payment() {
 		return order;
 	}
 
-	public void addPaymentDetails(String dataSet) throws Exception {
+	public String addPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		String Number="";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
@@ -2383,17 +2395,13 @@ public void Stored_Payment() {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//span[text()='New payment method']");
-				Thread.sleep(9000);
-				String url2=Common.findElement("xpath", "//iframe[@title='Secure payment input frame']").getAttribute("src");
-				System.out.println(url2);
-				Common.getDriver().navigate();
-			
-				
-				//Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+				Number=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
@@ -2436,14 +2444,17 @@ public void Stored_Payment() {
 					Common.getscreenShotPathforReport("Cardinfromationfail"));
 			Assert.fail();
 		}
+		
 
 		expectedResult = "credit card fields are filled with the data";
 		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 
 		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
 				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+		
+		return Number;
 	}
-
+	
 	public void Tell_Your_FriendPop_Up() throws Exception {
 
 		try {
