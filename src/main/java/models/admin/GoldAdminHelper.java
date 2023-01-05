@@ -6881,8 +6881,9 @@ public class GoldAdminHelper {
 
 			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + HFsubcategory + "')]");
 			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "(//img[contains(@class,'x-tree-elbow-plus')])[6]");
-			Common.javascriptclickElement("xpath", "(//img[contains(@class,'x-tree-elbow-plus')])[6]");
+			Common.scrollIntoView("xpath", "(//img[contains(@class,'x-tree-elbow-plus')])[5]");
+			Common.javascriptclickElement("xpath", "(//img[contains(@class,'x-tree-elbow-plus')])[5]");
+			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + OxoCategory + "')]");
 			Common.doubleClick("xpath", "//span[contains(text(),'" + OxoCategory + "')]");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Oxosubcategory + "')]");
@@ -6925,7 +6926,6 @@ public class GoldAdminHelper {
 			Assert.fail();
 		}
 	}
-
 	public void Validate_Catalog_Pricerule_HF_Frontend(String dataSet) {
 		// TODO Auto-generated method stub
 		String HFCategory = data.get(dataSet).get("HFCategory");
@@ -6948,20 +6948,21 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'" + HFsubcategory + "')]");
 			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + HFsubcategory + "')]");
 			Sync.waitPageLoad();
-			Sync.waitElementVisible("xpath", "//span[contains(@class,'before_special')]/span");
-			for (int i = 3; i <= 5; i++) {
-				Common.scrollIntoView("xpath", "(//span[contains(@class,'before_special')]/span)[" + i + "]");
+			Sync.waitElementVisible("xpath", "(//span[contains(@class,'old-price')]/span)");
+			for (int i = 1; i <= 5; i++) {
+				Common.scrollIntoView("xpath", "(//span[contains(@class,'old-price')]/span)[" + i + "]");
 				String Oldprice = Common
-						.findElement("xpath", "(//span[contains(@class,'before_special')]/span)[" + i + "]").getText()
+						.findElement("xpath", "(//span[contains(@class,'old-price')]/span)[" + i + "]").getText()
 						.replace("$", "");
 				System.out.println("website old price" + Oldprice);
 				String Website_discountprice = Common
-						.findElement("xpath", "(//span[contains(@class,'after_special')]/span)[" + i + "]").getText()
+						.findElement("xpath", "(//span[contains(@class,'normal-price')]/span)[" + i + "]").getText()
 						.replace("$", "");
-				System.out.println("website discount price" + Website_discountprice);
-
+				
 				float OldPrice = Float.parseFloat(Oldprice);
 				float Website_Discountprice = Float.parseFloat(Website_discountprice);
+				System.out.println("Website_Discountprice" + Website_Discountprice);
+
 				float discountpercent = Float.parseFloat(discount);
 
 				float discountamount = OldPrice * discountpercent / 100;
@@ -6977,7 +6978,7 @@ public class GoldAdminHelper {
 				System.out.println("calculatedspecialprice" + specialrpice);
 				String discountprice = new BigDecimal(specialrpice).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				float calculateddiscountprice = Float.parseFloat(discountprice);
-				System.out.println(calculateddiscountprice);
+				System.out.println("calculateddiscountprice"+ calculateddiscountprice);
 
 				Common.assertionCheckwithReport(Website_Discountprice == calculateddiscountprice,
 						"To validate the catalog price is applied on the hf store front",
@@ -6996,7 +6997,6 @@ public class GoldAdminHelper {
 			Assert.fail();
 		}
 	}
-
 	public void Validate_Catalog_Pricerule_OXO_Frontend(String dataSet) {
 		// TODO Auto-generated method stub
 		String OxoCategory = data.get(dataSet).get("OxoCategory");
@@ -7010,7 +7010,7 @@ public class GoldAdminHelper {
 			Common.javascriptclickElement("xpath", "//a[@aria-label='Shop All   Coffee & Tea ']");
 			Sync.waitPageLoad();
 			Sync.waitElementVisible("xpath", "//span[contains(@class,'before_special')]/span");
-			for (int i = 3; i <= 5; i++) {
+			for (int i = 1; i <= 5; i++) {
 				Common.scrollIntoView("xpath", "(//span[contains(@class,'before_special')]/span)[" + i + "]");
 				String Oldprice = Common
 						.findElement("xpath", "(//span[contains(@class,'before_special')]/span)[" + i + "]").getText()
@@ -7057,7 +7057,6 @@ public class GoldAdminHelper {
 			Assert.fail();
 		}
 	}
-
 	public void deleteexistingcatalogrule(String dataSet) {
 		String pricerulename = data.get(dataSet).get("RuleName");
 
