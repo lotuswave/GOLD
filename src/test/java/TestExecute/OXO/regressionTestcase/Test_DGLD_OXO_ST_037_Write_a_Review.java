@@ -21,6 +21,9 @@ public class Test_DGLD_OXO_ST_037_Write_a_Review {
 			Oxo.verifingHomePage();
 			Oxo.search_product("Product");
 			Oxo.review("review");
+			Oxo.Ask_a_question("Ask a question");
+//			Oxo.filter_validation("Filters");
+//			Oxo.search_filter("Filters");
 			
 		} catch (Exception e) {
 

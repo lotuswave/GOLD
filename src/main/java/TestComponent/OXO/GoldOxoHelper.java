@@ -2650,7 +2650,7 @@ try
 			{
 			Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+			Common.clickElement("xpath", "//button[@data-testid='SmoothCheckoutPopUp:skip']");
 			}
 			else
 			{
@@ -3784,14 +3784,14 @@ public void review(String Dataset) {
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 		Common.clickElement("xpath", "//img[@alt='" + products + "']");
 		Thread.sleep(4000);
-		Common.scrollIntoView("xpath", "//label[text()='Reviews']");
-		Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
-		String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getAttribute("id");
+		Common.scrollIntoView("xpath", "//a[text()='Reviews']");
+		Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+		String form=Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
 		System.out.println(form);
-		Common.assertionCheckwithReport(form.contains("review"),
+		Common.assertionCheckwithReport(form.contains("Review"),
 				"verifying the write a review button", "Write a review should be appear in the PDP page",
 				"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
-		Common.clickElement("xpath", "//label[text()='Reviews']");
+		Common.clickElement("xpath", "//a[text()='Reviews']");
 		Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
 		Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 		Common.clickElement("xpath", "//span[text()='Write A Review']");
@@ -7066,6 +7066,168 @@ public void alumini_Chefs(String Dataset) {
 				}
 				
 			} 
+		
+		  public void Ask_a_question(String Dataset) {
+				// TODO Auto-generated method stub
+				String Question=data.get(Dataset).get("Comments");
+				String Name=data.get(Dataset).get("FirstName");
+				String Email=data.get(Dataset).get("Email");
+				try
+				{
+				Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");	
+				Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
+				Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
+				Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_q')]",Question);
+				Sync.waitElementPresent(30, "xpath", "//input[@name='display_name']");
+				Common.textBoxInput("xpath", "//input[@name='display_name']",Name);
+				Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
+				Common.textBoxInput("xpath", "//input[@name='email']",Email);
+				Common.clickElement("xpath", "//input[@data-button-type='submit']");
+				Thread.sleep(4000);
+				String question=Common.findElement("xpath", "//div[@class='yotpo-thank-you']//span[contains(text(),'Thank you')]").getText();
+				System.out.println(question);
+				Common.assertionCheckwithReport(question.contains("THANK YOU FOR POSTING A QUESTION!"), "validating the question submit form",
+						"Ask a form should be submit", "Sucessfully question post should be submit",
+						"Failed to submit the ask a question post");
+				}
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the question submit form",
+							"Ask a form should be submit", "Unable to subit question post", Common.getscreenShot("failed to subit question post"));
+					Assert.fail();
+				}
+				
+			}
+		  
+		  public void filter_validation(String Dataset) {
+				// TODO Auto-generated method stub
+				String filter=data.get(Dataset).get("Type");
+				
+				try
+				{
+					Sync.waitElementPresent("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
+					Common.clickElement("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
+//					Common.clickElement("xpath", "//span[contains(text(),' Water ')]");
+//					String search=Common.findElement("xpath", "//span[contains(text(),' Water ')]").getText();
+//					for (int i = 0; i <= 10-6; i++) {
+//					List<WebElement> webelementslist = Common.findElements("xpath",
+//							"//span[@class='highlight-text']");
+			//
+//					String s = webelementslist.get(i).getText();
+//					System.out.println(s);
+//					Common.assertionCheckwithReport(s.contains("water") ,
+//							"validating the filter reviews",
+//							"After Clicking on filters the repective reviews should be displayed",
+//							"Sucessfully Respective Reviews has been displayed",
+//							"Failed to display the respective reviews");
+//					
+//					}
+//					
+//					Sync.waitElementPresent("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
+//					Common.clickElement("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
+					Thread.sleep(2000);
+					Common.textBoxInput("xpath", "//input[@type='search']", filter);
+					Common.actionsKeyPress(Keys.ENTER);
+					for (int i = 0; i <= 10-5; i++) {
+						List<WebElement> webelementslist = Common.findElements("xpath",
+								"//span[@class='highlight-text']");
+
+						String s = webelementslist.get(i).getText();
+						System.out.println(s);
+						Common.assertionCheckwithReport(s.contains("Star") ,
+								"validating the filter reviews search",
+								"After Clicking on filters search the repective reviews should be displayed",
+								"Sucessfully Respective search Reviews has been displayed",
+								"Failed to display the respective search reviews");
+					}
+					
+					click_arrows();
+					
+				}
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the filter reviews",
+							"After Clicking on filters the repective reviews should be displayed",
+							"Unable to display the respective reviews",
+							Common.getscreenShot(
+									"Failed to display the respective reviews"));
+					Assert.fail();
+				}
+			}
+			public void click_arrows() {
+				// TODO Auto-generated method stub
+				try
+				{
+					Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Next Page')]");
+					Common.clickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
+					Thread.sleep(3000);
+					String rightarrow=Common.findElement("xpath", "//a[contains(@aria-label,'Page 2')]").getAttribute("aria-label");
+					Common.assertionCheckwithReport(rightarrow.contains("Current Page") ,
+							"validating the arrow for the page navigation",
+							"After Clicking on right arrow button it display the next page",
+							"Sucessfully next page has been displayed",
+							"Failed to display the next page");
+					Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Previous Page')]");
+					Common.clickElement("xpath", "//a[contains(@aria-label,'Previous Page')]");
+					Thread.sleep(3000);
+					String leftarrow=Common.findElement("xpath", "//a[contains(@aria-label,'Page 1')]").getAttribute("aria-label");
+					Common.assertionCheckwithReport(leftarrow.contains("Current Page") ,
+							"validating the arrow for the page navigation",
+							"After Clicking on left arrow button it display the previous page",
+							"Sucessfully previous page has been displayed",
+							"Failed to display the previous page");
+					
+					
+				}
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the arrow for the page navigation",
+							"After Clicking on left arrow button it display the previous page",
+							"Unable to display the previous page",
+							Common.getscreenShot(
+									"Failed to display the previous page"));
+					Assert.fail();
+				}
+				
+			}
+			public void search_filter(String Dataset) {
+				// TODO Auto-generated method stub
+				String rating=data.get(Dataset).get("Review");
+				String filter=data.get(Dataset).get("Comments");
+				try
+				{
+					Common.clickElement("xpath", "//a[text()='Reviews']");
+					
+					Common.clickElement("xpath", "//span[text()='Select']");
+					Sync.waitElementPresent("xpath", "//a[text()='" +filter+ "']");
+					Common.clickElement("xpath", "//a[text()='" +filter+ "']");
+					for (int i = 0; i <= 10-6; i++) {
+						List<WebElement> webelementslist = Common.findElements("xpath",
+								"//div[@class='yotpo-review-stars ']//span[text()='" +rating+"']");
+
+						String s = webelementslist.get(i).getText();
+						System.out.println(s);
+						Common.assertionCheckwithReport(s.contains(rating), "validating the filter search",
+								"After Clicking on filters search the repective reviews should be displayed",
+								"Sucessfully Respective search Reviews has been displayed",
+								"Failed to display the respective search reviews");
+				
+					}
+					
+					
+					
+					
+				}
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					Assert.fail();
+				}
+				
+			}
 		  
 	  
 }

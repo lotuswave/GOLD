@@ -23,6 +23,8 @@ public class Test_DGLD_OXO_ST_086_Place_an_Order_Using_Reorder {
 			Oxo.reorder();
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			

@@ -19,7 +19,6 @@ public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.header_CleaningAndOrganization_ShopAll("Cleaning & Organization");
 			Oxo.header_kitchenware("Kitchenware");
 			Oxo.header_CoffeeAndBeverage("Coffee & Beverage");
 			Oxo.header_CleaningAndOrganization("Cleaning & Organization");
