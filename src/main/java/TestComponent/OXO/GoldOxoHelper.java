@@ -7230,6 +7230,42 @@ public void alumini_Chefs(String Dataset) {
 			}
 		  
 	  
+			public void goodTips_Blog(String Dataset) {
+
+				String names=data.get(Dataset).get("blog");
+				String[] Blog=names.split(",");
+				int i=0;
+				try
+		    {
+						for(i=0;i<Blog.length;i++){
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' Good Tips Blog')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Good Tips Blog')]");
+						Thread.sleep(3000);
+						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Blog[i]+"')]");       
+						Common.clickElement("xpath", "//span[contains(text(),' "+Blog[i]+"')]");
+//						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Blog[i]+ "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+						Common.assertionCheckwithReport(title.contains(Blog[i]), "verifying the header link "+Blog[i]+ "Under Featured","user should navigate to the "+Blog[i]+" page", "user successfully Navigated to the "+Blog[i],"Failed to navigate to the "+Blog[i]);
+				
+			}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link "+Blog[i]+ "Under Featured",
+							"User should navigate to the "+Blog[i]+"pages",
+							" unable to navigate to the "+Blog[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the "+Blog[i]+"pages"));
+					Assert.fail();
+				}
+				
+			}
+	  	
+			
+			
 }
 
 
