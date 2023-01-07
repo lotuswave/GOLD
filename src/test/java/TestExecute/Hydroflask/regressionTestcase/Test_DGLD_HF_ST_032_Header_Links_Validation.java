@@ -37,7 +37,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
