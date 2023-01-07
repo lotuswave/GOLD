@@ -22,6 +22,7 @@ public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 			Hydro.Kustomer_Links("Kustomer");
 			Hydro.Footer_Links("Footer");
 			Hydro.Footer_validation("Breadcrumbs");
+			Hydro.Terms_and_privacy();
 			
 			} catch (Exception e) {
 

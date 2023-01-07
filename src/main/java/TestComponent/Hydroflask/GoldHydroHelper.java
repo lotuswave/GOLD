@@ -5713,17 +5713,14 @@ catch(Exception | Error e)
 
 	public void view_PLP_page() {
 		try {
-			String title = Common.findElement("xpath", "//h1[@id='page-title-heading']").getAttribute("Class");
+			String title = Common.findElement("xpath", "//h1[@data-element='title']").getAttribute("Class");
 			String breadcrumbs = Common.findElement("xpath", "//nav[@class='m-breadcrumb u-container']")
 					.getAttribute("aria-label");
-
+		
 			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
-			String Sort = Common
-					.findElement("xpath",
-							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
-					.getText();
+			String Sort = Common.findElement("xpath","//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ").getText();
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumbs navigation") && title.contains("c-plp-hero__headline")
+					breadcrumbs.contains("Breadcrumbs navigation") && title.contains("c-clp-hero__headline")
 							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -7651,7 +7648,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
-			
+		  
 		
 	}
 	catch(Exception | Error e)
@@ -8796,8 +8793,41 @@ Assert.fail();
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the filter search",
+					"After Clicking on filters search the repective reviews should be displayed",
+					"Unable to display the respective search reviews",
+					Common.getscreenShot(
+							"Failed to display the respective search reviews"));
 			Assert.fail();
 		}
+		
+	}
+	public void Terms_and_privacy() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//p//a[contains(text(),'Terms & Privacy')]");
+			Common.clickElement("xpath", "//p//a[contains(text(),'Terms & Privacy')]");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Terms and Privacy"),
+					"validating the Terms and privacy page Navigation",
+					"After Clicking Terms and privacy it should navigate to the respective page",
+					"Sucessfully Navigated to the terms and privacy page",
+					"Failed Navigate to the terms and privacy page");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Terms and privacy page Navigation",
+					"After Clicking Terms and privacy it should navigate to the respective page",
+					"Unable to Navigate to the terms and privacy page",
+					Common.getscreenShot(
+							"Failed Navigate to the terms and privacy page"));
+			Assert.fail();
+		}
+		
 		
 	}
 				
