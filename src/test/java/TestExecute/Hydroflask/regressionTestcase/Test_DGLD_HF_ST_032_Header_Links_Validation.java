@@ -25,6 +25,8 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
             Hydro.featured_validation("Featured");
             Hydro.customize_shopall("Shop All");
 			Hydro.Explore_Validation("Explore Links");
+			Hydro.image_button("Shop All");
+			
 			
 			} catch (Exception e) {
 
@@ -35,7 +37,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

@@ -8830,6 +8830,41 @@ Assert.fail();
 		
 		
 	}
+	public void image_button(String Dataset) {
+		// TODO Auto-generated method stub
+		String names=data.get(Dataset).get("shopall");
+		String image=data.get(Dataset).get("Image Button Link");
+		String[] Links=names.split(",");
+		String[] Link=image.split(",");
+		int i=0;
+		try
+    {
+				for(i=0;i<Links.length;i++){
+				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]");       
+				Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+				Common.clickElement("xpath", "//div[@data-content-type='button-item']//span[text() ='"+Link[i]+"']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains(Link[i]), "verifying the header image link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+		
+	}
+    }
+	
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header image link "+Links[i]+ "Under Featured",
+					"User should navigate to the "+Links[i]+"pages",
+					" unable to navigate to the "+Links[i]+"pages",
+					Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+			Assert.fail();
+		}
+		
+		
+	}
 				
 	}
 			
