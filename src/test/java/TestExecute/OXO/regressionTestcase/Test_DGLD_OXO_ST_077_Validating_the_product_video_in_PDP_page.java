@@ -18,8 +18,7 @@ public class Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page {
 	public void Validate_Product_Video_in_PDP_page() throws Exception {
 
 		try {
-//			Oxo.verifingHomePage();
-//			Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.verifingHomePage();
 			Oxo.search_product("Product");
 			Oxo.PDP_video_validation("Product");
 			
@@ -32,7 +31,7 @@ public class Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

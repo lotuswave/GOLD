@@ -7294,8 +7294,8 @@ public void alumini_Chefs(String Dataset) {
 					System.out.println(vid);
 //					Common.clickElement("xpath", "//div[contains(@class,'video-thumb')]//img[@alt='"+product+"']");
 					Common.mouseOverClick("xpath", "(//div[contains(@class,'video-thumb')])/div/img");
-					
-					Common.javascriptclickElement("xpath", "//div//button[contains(@class,'vjs-play-con')]");
+					Thread.sleep(4000);
+					Common.javascriptclickElement("xpath", "//button[@title='Play']//span[@class='vjs-icon-placeholder']");
 //					Sync.waitElementPresent(30, "xpath", "//button[@title='Play Video']");
 //					Common.clickElement("xpath", "//button[@title='Play Video']");
 					Sync.waitForLoad();
