@@ -807,7 +807,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 
 		String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		
-		if(!url.contains("na.oxo") && !url.contains("preprod")){
+		if(!url.contains("stage") && !url.contains("preprod")){
 			}
 		
 		else{
@@ -2588,6 +2588,7 @@ try
 				if(klarna>0) {
 					Common.clickElement("xpath", "//span[text()='Place Order']");
 				}
+				
 				klarna_Saved_Details(dataSet);
 				
 			}
@@ -2686,7 +2687,7 @@ try
 		
 		String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		
-		if(!url.contains("na.oxo") && !url.contains("preprod")){
+		if(!url.contains("stage") && !url.contains("preprod")){
 			}
 		
 		else{
@@ -2975,7 +2976,7 @@ catch(Exception | Error e)
 			}
 			String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 			
-			if(!url.contains("na.oxo") &!url.contains("preprod")){
+			if(!url.contains("stage") &!url.contains("preprod")){
 				
 				int sizeofelement=Common.findElements("id", "email").size();
 				Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,"open paypal site window", "faild to open paypal account");
@@ -3006,7 +3007,7 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 			String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			if(!url1.contains("na.oxo") && !url1.contains("preprod")){
+			if(!url1.contains("stage") && !url1.contains("preprod")){
 			}
 		
 		else{
@@ -5358,7 +5359,7 @@ public void click_FeedingDrinking() {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("na.oxo")&& !url.contains("preprod")) {
+		if (!url.contains("stage")&& !url.contains("preprod")) {
 		}
 
 		else {
