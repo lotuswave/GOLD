@@ -889,26 +889,26 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
-			Thread.sleep(1000);
-			
-			String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			
-			if(!url.contains("stage") && !url.contains("preprod")){
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				}
-			else
-			{
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
-				System.out.println(Cardnumber);
-				Common.assertionCheckwithReport(
-						Cardnumber.equals(cardnumber),
-							"To validate the card details entered in the production environment",
-							"user should able to see the card details in the production environment",
-							"User Successfully able to see the card details enterd in the production environment ",
-							"User Failed to see the card deails in prod environemnt");
-				
-			}
+			Thread.sleep(4000);
+
+			if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("stage")){
+
+                Common.clickElement("xpath", "//span[text()='Place Order']");
+                }
+            else
+            {
+                Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+                String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+                System.out.println(Cardnumber);
+                Common.assertionCheckwithReport(
+                        Cardnumber.equals(cardnumber),
+                            "To validate the card details entered in the production environment",
+                            "user should able to see the card details in the production environment",
+                            "User Successfully able to see the card details enterd in the production environment ",
+                            "User Failed to see the card deails in prod environemnt");
+                Common.switchToDefault();
+
+            }
 		    
 		}
        else
@@ -927,21 +927,24 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
 			Thread.sleep(1000);
-	     String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			
-			if(!url.contains("stage") && !url.contains("preprod")){
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				}
-			else
-			{
-				String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value");
-				Common.assertionCheckwithReport(
-						Cardnumber.equals(cardnumber),
-							"To validate the card details entered in the production environment",
-							"user should able to see the card details in the production environment",
-							"User Successfully able to see the card details enterd in the production environment ",
-							"User Failed to see the card deails in prod environemnt");
-			}
+			if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("stage")){
+
+                Common.clickElement("xpath", "//span[text()='Place Order']");
+                }
+            else
+            {
+                Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+                String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+                System.out.println(Cardnumber);
+                Common.assertionCheckwithReport(
+                        Cardnumber.equals(cardnumber),
+                            "To validate the card details entered in the production environment",
+                            "user should able to see the card details in the production environment",
+                            "User Successfully able to see the card details enterd in the production environment ",
+                            "User Failed to see the card deails in prod environemnt");
+                Common.switchToDefault();
+
+            }
 			
         }
 		}
