@@ -3132,11 +3132,28 @@ catch(Exception | Error e)
 //						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
 //						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 		
 	}
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String afterpay=Common.findElement("xpath", "//button[@value='afterpay_clearpay']//span").getText();
+					System.out.println(afterpay);
+					Common.assertionCheckwithReport(
+							afterpay.contains("Afterpay"),
+							"validating the selection of the afterpay method in production environment",
+							"After pay should be select in the production environment","After pay is selected in the production environment",
+							"Failed to select the after pay method in the production environment");
+					Common.switchToDefault();
+					
+				}
+			}
 			else
 			{
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
@@ -3159,9 +3176,29 @@ catch(Exception | Error e)
 //						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
 //						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
-			}
+				Common.switchToDefault();
+		
+	}
+				else
+				{
+					Thread.sleep(4000);
+					String afterpay=Common.findElement("xpath", "//button[@value='afterpay_clearpay']//span").getText();
+					System.out.println(afterpay);
+					Common.assertionCheckwithReport(
+							afterpay.contains("Afterpay"),
+							"validating the selection of the afterpay method in production environment",
+							"After pay should be select in the production environment","After pay is selected in the production environment",
+							"Failed to select the after pay method in the production environment");
+					
+				}
+		}
 		}
 			
 			catch(Exception | Error e)
