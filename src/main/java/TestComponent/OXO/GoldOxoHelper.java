@@ -6229,6 +6229,8 @@ public void alumini_Chefs(String Dataset) {
 			  
 		  }
 			  footerLink_Shipping_Returns();
+			  footerLink_Better_Guarantee();
+			  footerLink_Cookware_Guarantee();
 		  }
 	
 	
@@ -6260,6 +6262,7 @@ public void alumini_Chefs(String Dataset) {
 			  
 		  }
 			  footerLink_FAQs();
+			  footerLink_Voluntary_Recall();
 		  }
 	
 	  public void footerLinks_WeAre_Oxo(String Dataset){
@@ -6313,6 +6316,46 @@ public void alumini_Chefs(String Dataset) {
 			    
 		  }
 		  }
+	  public void footerLink_Better_Guarantee(){
+			 String Links= "Better Guarantee";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='Better Guarantee']");
+			  Sync.waitPageLoad();
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Guarantee"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  Sync.waitPageLoad();
+			    Common.navigateBack();
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+		  }
+		  }
+	  public void footerLink_Cookware_Guarantee(){
+			 String Links= "Cookware Guarantee";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='OXO Cookware Guarantee]");
+			  Sync.waitPageLoad();
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Cookware"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  Sync.waitPageLoad();
+			    Common.navigateBack();
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+		  }
+		  }
 	
 	  public void footerLink_FAQs(){
 			 String Links= "FAQs";
@@ -6335,7 +6378,27 @@ public void alumini_Chefs(String Dataset) {
 			  
 		  }
 		  }
-	  
+	  public void footerLink_Voluntary_Recall(){
+			 String Links= "Voluntary Recall";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='Voluntary Recall']");
+			  Sync.waitPageLoad();
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("//a[text()='Voluntary']"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  
+			    Common.navigateBack();
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+			  
+		  }
+		  }
 	  
 	  public void footerLink_Careers(){
 			 String Links= "Careers";
