@@ -23,6 +23,10 @@ public class Test_DGLD_OXO_ST_027_Register_user_Checkout_Klarna_Payment {
 			Oxo.Usersignin("AccountDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
+//			Oxo.babytoddler_headerlinks("Baby & Toddler");
+//			Oxo.Configurable_addtocart_pdp("ConfigProduct");
+//			Oxo.search_product("Bundle");
+//			Oxo.addtocart("Bundle");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.Kalrna_Payment("Klarna Visa Payment");
@@ -36,7 +40,7 @@ public class Test_DGLD_OXO_ST_027_Register_user_Checkout_Klarna_Payment {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

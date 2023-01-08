@@ -20,6 +20,10 @@ public class Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Pay
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
+//			Oxo.babytoddler_headerlinks("Baby & Toddler");
+//			Oxo.Configurable_addtocart_pdp("ConfigProduct");
+//			Oxo.search_product("Bundle");
+//			Oxo.addtocart("Bundle");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");

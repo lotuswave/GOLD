@@ -2619,13 +2619,26 @@ try
 				Common.clickElement("xpath", "//button[@value='klarna']");
 
 				Common.switchToDefault();
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
-				int klarna = Common.findElements("xpath", "//span[text()='Place Order']").size();
-				if(klarna>0) {
-					Common.clickElement("xpath", "//span[text()='Place Order']");
+				Sync.waitPageLoad();
+				klarna_Details(dataSet);
 				}
-				
-				klarna_Saved_Details(dataSet);
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+					System.out.println(klarna);
+					Common.assertionCheckwithReport(
+							klarna.contains("Klarna"),
+							"validating the selection of the klarna method",
+							"klarna should be selected ","klarna is selected",
+							"Failed to select the klarna method in the production environment");
+					Common.switchToDefault();
+					
+				}
 				
 			}
 			else
@@ -2635,8 +2648,27 @@ try
 				Common.clickElement("xpath", "//button[@value='klarna']");
 
 				Common.switchToDefault();
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
-				klarna_Saved_Details(dataSet);
+				Sync.waitPageLoad();
+				klarna_Details(dataSet);
+				}
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+					System.out.println(klarna);
+					Common.assertionCheckwithReport(
+							klarna.contains("Klarna"),
+							"validating the selection of the klarna method",
+							"klarna should be selected ","klarna is selected",
+							"Failed to select the klarna method in the production environment");
+					Common.switchToDefault();
+					
+				}
+				
 			}
 			
 			
@@ -2803,8 +2835,29 @@ try
 //						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
 //						"Failed to enter email in the Klarna Payment");
 				Common.switchToDefault();
+//				Common.clickElement("xpath", "//span[text()='Place Order']");
+				
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Sync.waitPageLoad();
 				klarna_Details(dataSet);
+				}
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+					System.out.println(klarna);
+					Common.assertionCheckwithReport(
+							klarna.contains("Klarna"),
+							"validating the selection of the klarna method",
+							"klarna should be selected ","klarna is selected",
+							"Failed to select the klarna method in the production environment");
+					Common.switchToDefault();
+					
+				}
+				
 				
 			}
 			else
@@ -2824,8 +2877,27 @@ try
 //						"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
 //						"Failed to enter email in the Klarna Payment");
 				Common.switchToDefault();
+				
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Sync.waitPageLoad();
 				klarna_Details(dataSet);
+				}
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+					System.out.println(klarna);
+					Common.assertionCheckwithReport(
+							klarna.contains("Klarna"),
+							"validating the selection of the klarna method",
+							"klarna should be selected ","klarna is selected",
+							"Failed to select the klarna method in the production environment");
+					Common.switchToDefault();
+					
+				}
 			}
 			
 			
