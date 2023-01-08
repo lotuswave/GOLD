@@ -5438,38 +5438,55 @@ public void click_FeedingDrinking() {
 	
 	
 	public void sort_By(String dataSet) {
+		String sort = data.get(dataSet).get("Sort");
 		try {
 
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
-			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", Common.SelectBy.TEXT, data.get(dataSet).get("Sort"));
+//			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
+			Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'"+sort+"')]");
 			
-			int size = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").size();
-			float[] float_array = new float[size];
-			for(int i=0; i<size; i++) {
-				String text = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").get(i).getText();
-				String price = text.replace("$", "");
-				Float priceValue = Float.parseFloat(price);
-				System.out.println(priceValue);
-				float_array[i]=priceValue;
-			}
-			Arrays.sort(float_array);
-			String firstItemPriceText = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").get(0).getText();
-			String firstItemPrice = firstItemPriceText.replace("$", "");
-			Float firstItemPriceValue = Float.parseFloat(firstItemPrice);
-			if(data.get(dataSet).get("Sort").equals("Lowest Price")) {
-				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[0]),
-						"To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page",
-						"Failed to Sort  in Product Listing Page");
-			}
-			else if(data.get(dataSet).get("Sort").equals("Highest Price")) {
-				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[size-1]),
-						"To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page",
-						"Failed to Sort  in Product Listing Page");
-			}
+//			int size = Common.findElements("xpath", "//span[@data-price-type='finalPrice']/span[1]").size();
+//			System.out.println("size ="+size);
+//			float[] float_array = new float[size];
+//			for(int i=0; i<size; i++) {
+////				String text = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").get(i).getText();
+//				String text = Common.findElements("xpath", "//span[@data-price-type='finalPrice']/span[1]").get(i).getText();
+//				
+//				String price = text.replace("$", "");
+//				System.out.println(price);
+//				Float priceValue = Float.parseFloat(price);
+//				System.out.println(priceValue);
+//				float_array[i]=priceValue;
+//			}
+//			Arrays.sort(float_array);
+//			String firstItemPriceText = Common.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']").get(0).getText();
+//			String firstItemPrice = firstItemPriceText.replace("$", "");
+//			Float firstItemPriceValue = Float.parseFloat(firstItemPrice);
+//			if(data.get(dataSet).get("Sort").equals("Lowest Price")) {
+//				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[0]),
+//						"To validate the Sort in Product Listing Page",
+//						"User should able to Sort in Product Listing Page",
+//						"Sucessfully Sorts in the Product Listing Page",
+//						"Failed to Sort  in Product Listing Page");
+//			}
+//			else if(data.get(dataSet).get("Sort").equals("Highest Price")) {
+//				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[size-1]),
+//						"To validate the Sort in Product Listing Page",
+//						"User should able to Sort in Product Listing Page",
+//						"Sucessfully Sorts in the Product Listing Page",
+//						"Failed to Sort  in Product Listing Page");
+//			}
+			////// 
+			
+			String low = Common.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'"+sort+"')]").getText();
+			
+			Common.assertionCheckwithReport(low.contains(sort),
+					"To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page",
+					"Sucessfully Sorts in the Product Listing Page",
+					"Failed to Sort  in Product Listing Page");
+			
+			
 			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
