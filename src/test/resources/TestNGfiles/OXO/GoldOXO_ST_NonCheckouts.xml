@@ -70,6 +70,18 @@
 		</classes>
 	</test>
 	
+	<test name="Test_DGLD_OXO_ST_030_Header_Links_Validation" testid="DTG-1354" priority="P1" description="This script will cover valiating Header Links Validation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_030_Header_Links_Validation"/>
+		</classes>
+	</test>
+
+<test name="Test_DGLD_OXO_ST_031_Footer_Links_Validation" testid="DTG-1346" priority="P1" description="This script will cover valiating Footer Links Validation">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_031_Footer_Links_Validation"/>
+		</classes>
+	</test>
+	
 	<test name="Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" testid="DTG-1855" priority="P1" description="This script will cover validating Create and Edit Gift Registery For Register User">
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" />
@@ -141,6 +153,12 @@
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_054_Validate_Search_Results_Page"/>
 		</classes>
 	</test>
+	
+	<test name="Test_DGLD_OXO_ST_055_Validate_Blog_page" testid="DTG-1788" priority="P1" description="This script will cover valiating Blog page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_055_Validate_Blog_page"/>
+		</classes>
+	</test>
 
         <test name="Test_DGLD_OXO_ST_060_Social_Article_Links" testid="DTG-2222" priority="P1" description="This script will cover valiating Social Article Links">
 		<classes>
@@ -163,6 +181,12 @@
 	<test name="Test_DGLD_OXO_ST_069_Validate_PDP_page" testid="DTG-2219" priority="P1" description="This script will cover valiating Validate PDP page">
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_069_Validate_PDP_page"/>
+		</classes>
+	</test>
+	
+	<test name="Test_DGLD_OXO_ST_070_Validate_Chefs_In_Residence_page" testid="DTG-2221" priority="P1" description="This script will cover valiating Chefs In Residence page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_070_Validate_Chefs_In_Residence_page"/>
 		</classes>
 	</test>
 	
@@ -189,6 +213,13 @@
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_076_share_Whishlist_Funtionality"/>
 		</classes>
 	</test>
+	
+	<test name="Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page" testid="DTG-1752" priority="P1" description="This script will cover valiating the product video in PDP page">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page"/>
+		</classes>
+	</test>
+	
 
     <test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DTG-2472" priority="P1" description="This script will cover valiating Validating the shopping cart page">
 		<classes>

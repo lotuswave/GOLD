@@ -105,6 +105,12 @@
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_063_Register_user_Checkout_With_Bundle_product"/>
 		</classes>
 	 </test>
+	 
+	 <test name="Test_DGLD_OXO_ST_065_Register_user_Checkout_with_2day_shipping_Method" testid="DTG-2213" priority="P1" description="This script will cover valiating Register user ">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_065_Register_user_Checkout_with_2day_shipping_Method"/>
+		</classes>
+	 </test>
 	
 	 <test name="Test_DGLD_OXO_ST_067_Checkout_with_RegisterUserCC_Simple_Configurable_Grouped_Bundle_products" testid="DTG-2216" priority="P1" description="This script will cover valiating Checkout with RegisterUserCC Simple Configurable Grouped Bundle products">
 		<classes>

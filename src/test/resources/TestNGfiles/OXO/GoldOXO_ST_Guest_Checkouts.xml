@@ -93,7 +93,12 @@
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_057_Checkout_with_GuestUserCC_Grouped_Product"/>
 		</classes>
 	</test>
-
+	
+	<test name="Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method" testid="DTG-2228" priority="P1" description="This script will cover valiating Guest user Checkout with 2day shipping method">
+		<classes>
+			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method"/>
+		</classes>
+	</test>
 	
     <test name="Test_DGLD_OXO_ST_066_Checkout_with_GuestUserCC_Simple_Configurable_Grouped_Bundle_products" testid="DTG-2215" priority="P1" description="This script will cover valiating Checkout with GuestUserCC Simple Configurable Grouped Bundle products">
 		<classes>
