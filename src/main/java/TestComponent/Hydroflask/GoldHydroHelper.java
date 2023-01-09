@@ -8865,9 +8865,111 @@ Assert.fail();
 		
 		
 	}
+	public void clickontheproduct_and_image(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		String color = data.get(Dataset).get("Colorproduct");
+		try
+		{
+			String minicartproduct = Common
+					.findElement("xpath", "//a[@class='a-product-name' and @title='" +product+ "']").getText();
+			Common.clickElement("xpath", "//a[@class='a-product-name' and @title='" +product+ "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
+					"validating the product navigating to the PDP page",
+					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+					"Failed to Navigates Product to the PDP page");
+			click_minicart();
+			String minicartimage=Common.findElement("xpath", "//img[contains(@alt,'" +color+ "')]").getAttribute("alt");
+			Common.clickElement("xpath", "//img[contains(@alt,'" +color+"')]");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(color),
+					"validating the product navigating to the PDP page",
+					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+					"Failed to Navigates Product to the PDP page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product navigating to the PDP page",
+					"The product Should be navigates to the PDP page",
+					" unable to Navigates Product to the PDP page",
+					Common.getscreenShot("Failed to Navigates Product to the PDP page"));
+			Assert.fail();
+		}
+		
+	}
+	public void minicart_freeshipping() {
+		// TODO Auto-generated method stub
+		try
+		{
+			click_minicart();
+			String Freeshipping = Common.findElement("xpath", "//div[@class='m-progress-bar false']//div[contains(@class,'label-')]").getText();
+			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
+					"validating the free shipping in mini cart",
+					"Free shipping should be avaliable for selected products",
+					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the free shipping in mini cart",
+					"Free shipping should be avaliable for selected products",
+					"unable to apply free shipping for the selected products",
+					Common.getscreenShot("Failed to see free shipping bar"));
+			Assert.fail();
+		}
+		
+	}
+	
+	public void minicart_product_close() {
+		// TODO Auto-generated method stub
+		try {
+			
+			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
+			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
+			String minicartpopup = Common.findElement("xpath", "//div[@class='modal-popup confirm _show']")
+					.getAttribute("class");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+					"validating the popup when you click on delete", "The Popup should be displayed",
+					"Successfully popup is displayed when we click on the delete button",
+					"Failed to Display the popup");
+			String popup = Common.findElement("xpath", "//h1[@data-role='title']").getText();
+			if (popup.equals("Remove Item")) {
+				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
+			} else {
+				Assert.fail();
+			}
+			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
+			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+					"validating the popup when you click on delete", "The Popup should be displayed",
+					"Successfully popup is displayed when we click on the delete button",
+					"Failed to Display the popup");
+			if (popup.equals("Remove Item")) {
+
+				Common.clickElement("xpath", "//button[@data-role='closeBtn' and @aria-label='Close']");
+			} else {
+				Assert.fail();
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the close and cancel functionality",
+					"User should able to click on close and cancel button",
+					"unable to click on close and cancel button",
+					Common.getscreenShot("Failed to Click on close and cancel button"));
+
+			Assert.fail();
+		}
+
 				
 	}
-			
+}			
 	
 	
 	

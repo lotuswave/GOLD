@@ -24,7 +24,10 @@ public class Test_DGLD_HF_ST_004_Minicart_Validation {
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.click_minicart();
+			Hydro.clickontheproduct_and_image("Product");
+			Hydro.minicart_freeshipping();
 			Hydro.minicart_delete("Product");
+			Hydro.minicart_product_close();
 			Hydro.minicart_validation("Product Qunatity");
 			
 			
