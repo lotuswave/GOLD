@@ -7292,6 +7292,70 @@ public void alumini_Chefs(String Dataset) {
 				}
 				
 			} 
+		  
+		  public void header_WeAre_Oxo(String Dataset){
+              String Headerlinks=data.get(Dataset).get("We Are OXO");
+                 String[] header=Headerlinks.split(",");
+                 int i=0;
+               try{
+                   Sync.waitPageLoad();
+               for(i=0;i<header.length;i++) {
+                   Sync.waitPageLoad();
+                   Common.clickElement("xpath", "//span[text()=' We Are OXO']");
+                   Sync.waitElementPresent("xpath", "//div[contains(@class,'megamenu')]//span[contains(text(),'"+header[i]+"')]");
+               Common.clickElement("xpath","//div[contains(@class,'megamenu')]//span[contains(text(),'"+header[i]+"')]");
+               header[i].toLowerCase( );
+               Sync.waitPageLoad();
+               System.out.println(header[i]);
+               System.out.println( Common.getCurrentURL());
+               System.out.println(Common.getPageTitle());
+               Common.assertionCheckwithReport(Common.getCurrentURL().contains(header[i]) ||Common.getPageTitle().contains(header[i]),"Validate the Footer link "+header[i], "Click the footer link "+header[i]+"it will navigate to page"+header[i], "successfully navigating to "+header[i] +"page ","Failed to navigate to"+header[i]+"page");
+               }
+               }
+               catch (Exception |Error e) {
+                     e.printStackTrace();
+                 ExtenantReportUtils.addFailedLog("Validate the Header link "+header[i],"Click the header link "+header[i]+"it will navigate to page"+header[i], "Failed to navigate to"+header[i]+"page", Common.getscreenShotPathforReport("failed to land on "+header[i]));
+                 Assert.fail();
+           }
+               header_FAQs_Corporate_Responsibility();
+           }
+		  public void header_FAQs_Corporate_Responsibility(){
+				 String Links= "FAQs";
+				 String Links1= "Corporate Responsibility";
+				  try{
+					  Sync.waitPageLoad();
+					  Common.clickElement("xpath", "//span[text()=' We Are OXO']");
+				  Common.clickElement("xpath","//span[text()=' FAQ']");
+				  Sync.waitPageLoad();
+				  Common.assertionCheckwithReport(Common.getPageTitle().contains("Knowledge Base"),"Validate the header link "+Links, "Click the header link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+				  
+				    Common.navigateBack();
+				  }
+				  catch (Exception |Error e) {
+						e.printStackTrace();
+				    ExtenantReportUtils.addFailedLog("Validate the Header link "+Links,"Click the header link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+				    Assert.fail();
+		  
+			  }
+				  //corporate
+				  try{
+					  Sync.waitPageLoad();
+					  Common.clickElement("xpath", "//span[text()=' We Are OXO']");
+				  Common.clickElement("xpath","//span[text()=' Corporate Responsibility']");
+				  Common.clickElement("xpath","//a[contains(@aria-label,'Corporate Responsibility')]");
+				  Sync.waitPageLoad();
+				  Common.assertionCheckwithReport(Common.getPageTitle().contains("Corporate Responsibility"),"Validate the header link "+Links1, "Click the header link "+Links1+"it will navigate to page"+Links1, "successfully navigating to "+Links1 +"page ","Failed to navigate to"+Links1+"page");
+				  
+				   
+				  }
+				  catch (Exception |Error e) {
+						e.printStackTrace();
+				    ExtenantReportUtils.addFailedLog("Validate the Header link "+Links1,"Click the header link "+Links1+"it will navigate to page"+Links1, "Failed to navigate to"+Links1+"page", Common.getscreenShotPathforReport("failed to land on "+Links1));
+				    Assert.fail();
+		  
+			  } 
+			  }
+		  
 		
 		  public void Ask_a_question(String Dataset) {
 				// TODO Auto-generated method stub

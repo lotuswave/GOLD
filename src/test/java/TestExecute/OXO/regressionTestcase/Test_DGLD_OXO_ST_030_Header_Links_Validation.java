@@ -24,6 +24,7 @@ public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 			Oxo.header_CleaningAndOrganization("Cleaning & Organization");
 			Oxo.header_BabyandToddler("BabyAndToddler");
 			Oxo.header_ShopAll("ShopAll");
+			Oxo.header_WeAre_Oxo("WeAreOXO");
 			
 			
 		} catch (Exception e) {
