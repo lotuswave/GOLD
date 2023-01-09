@@ -7261,8 +7261,10 @@ public void alumini_Chefs(String Dataset) {
 	  
 		  public void header_Menu_ImageItemblocksLinks(String Dataset) {
 				// TODO Auto-generated method stub
-				String names=data.get(Dataset).get("shop all");
+			  String names=data.get(Dataset).get("shop all");
+				String blocks=data.get(Dataset).get("Image blocks");
 				String[] Links=names.split(",");
+				String[] Link=blocks.split(",");
 				int i=0;
 				try
 		    {
@@ -7272,11 +7274,12 @@ public void alumini_Chefs(String Dataset) {
 //						Common.clickElement("xpath", "//span[text()=' Cleaning & Organization']");
 						Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]"); 
 						Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
-						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+						Common.clickElement("xpath", "//a[@data-link-type]//span[contains(text(),'"+Link[i]+"')]");
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
 						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-						Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+						
+						Common.assertionCheckwithReport(title.contains(Link[i])|| Common.getPageTitle().contains(Link[i]), "verifying the header image link "+Link[i]+ "Under Featured","user should navigate to the headr image "+Link[i]+" page", "user successfully Navigated to the header image "+Link[i],"Failed to navigate to the header image "+Link[i]);
 				
 			}
 		    }
@@ -7284,10 +7287,10 @@ public void alumini_Chefs(String Dataset) {
 				catch(Exception | Error e)
 				{
 					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
-							"User should navigate to the "+Links[i]+"pages",
-							" unable to navigate to the "+Links[i]+"pages",
-							Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+					ExtenantReportUtils.addFailedLog("verifying the header image link "+Link[i]+ "Under Featured",
+							"User should navigate to the header image "+Link[i]+"pages",
+							" unable to navigate to the header image"+Link[i]+"pages",
+							Common.getscreenShot("Failed to navigate to the header image "+Link[i]+"pages"));
 					Assert.fail();
 				}
 				
