@@ -3424,6 +3424,32 @@ public void register_userorder_status() {
 	
 }
 
+public void close_Pop_up() throws Exception {
+
+	 Sync.waitPageLoad();
+     int sizesframe=Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
+     if(sizesframe>0){
+     Common.actionsKeyPress(Keys.PAGE_UP);
+     Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+    
+    Thread.sleep(2000);
+     Sync.waitElementVisible("xpath" , "//button[@aria-label='Close Modal']");
+     Common.clickElement("xpath", "//button[@aria-label='Close Modal']");
+     Common.switchToDefault();
+     }
+     else {
+         int sizeofpopup=Common.findElements("id", "wpx-newsletter-popup").size();
+         if(sizeofpopup>0){
+             
+             
+             Sync.waitElementClickable("xpath" , "//button[@aria-label='close']");
+             Common.clickElement("xpath" , "//button[@aria-label='close']");
+     }
+        
+     }
+ 
+}
+
 public void edit_Account_info(String dataSet) {
 	// TODO Auto-generated method stub
 	Accont_Information();
