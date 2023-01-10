@@ -51,7 +51,6 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 	  public void startTest() throws Exception {
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
-		  Oxo.close_Pop_up();
 		  Oxo.acceptPrivacy();
 
 	}

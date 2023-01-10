@@ -94,7 +94,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All   Coffee & B')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Coffee & Beverage')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -131,7 +131,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Shop All   Baby & Toddler ')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Baby & Toddler')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -3320,8 +3320,8 @@ catch(Exception | Error e)
 	}
 	
 	
-public void acceptPrivacy() {
-		
+public void acceptPrivacy() throws Exception {
+		close_Pop_up();
 		Common.clickElementStale("id", "truste-consent-button");
 	}
 
