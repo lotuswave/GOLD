@@ -668,7 +668,7 @@ public void selectshippingaddress(String Dataset) {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("na.hydroflask")&& !url.contains("preprod") ) {
+		if (!url.contains("stage")&& !url.contains("preprod") ) {
 		}
 
 		else {
@@ -7204,7 +7204,9 @@ catch(Exception | Error e)
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Common.scrollIntoView("xpath", "//button[contains(@class,'video')]");
 			Common.clickElement("xpath", "//span[text()='Play video']");
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Play Video']");
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'video-thumb-icon')]");
+			Common.clickElement("xpath", "//div[contains(@class,'video-thumb-icon')]");
+			Sync.waitElementPresent("xpath", "//button[@title='Play Video']");
 			Common.clickElement("xpath", "//button[@title='Play Video']");
 			Sync.waitForLoad();
 			String video=Common.findElement("xpath", "//button[contains(@class,'vjs-play-con')]").getAttribute("title");
