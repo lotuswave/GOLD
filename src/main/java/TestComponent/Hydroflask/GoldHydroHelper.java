@@ -767,8 +767,24 @@ public void selectshippingaddress(String Dataset) {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("stage")){
+
+	                Common.clickElement("xpath", "//span[text()='Place Order']");
+	                }
+	            else
+	            {
+	                Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	                String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+	                System.out.println(Cardnumber);
+	                Common.assertionCheckwithReport(
+	                        Cardnumber.equals(cardnumber),
+	                            "To validate the card details entered in the production environment",
+	                            "user should able to see the card details in the production environment",
+	                            "User Successfully able to see the card details enterd in the production environment ",
+	                            "User Failed to see the card deails in prod environemnt");
+	                Common.switchToDefault();
+
+	            }
 		
 				
 			} else {
@@ -785,8 +801,24 @@ public void selectshippingaddress(String Dataset) {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("stage")){
+
+	                Common.clickElement("xpath", "//span[text()='Place Order']");
+	                }
+	            else
+	            {
+	                Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	                String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+	                System.out.println(Cardnumber);
+	                Common.assertionCheckwithReport(
+	                        Cardnumber.equals(cardnumber),
+	                            "To validate the card details entered in the production environment",
+	                            "user should able to see the card details in the production environment",
+	                            "User Successfully able to see the card details enterd in the production environment ",
+	                            "User Failed to see the card deails in prod environemnt");
+	                Common.switchToDefault();
+
+	            }
 			
 				
 
@@ -1798,12 +1830,30 @@ public void acceptPrivacy() {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
-						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+				if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("stage")){
+
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//span[text()='Place Order']");
+					expectedResult = "credit card fields are filled with the data";
+					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+					Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
+							expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+	                }
+	            else
+	            {
+	                Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	                String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+	                System.out.println(Cardnumber);
+	                Common.assertionCheckwithReport(
+	                        Cardnumber.equals(cardnumber),
+	                            "To validate the card details entered in the production environment",
+	                            "user should able to see the card details in the production environment",
+	                            "User Successfully able to see the card details enterd in the production environment ",
+	                            "User Failed to see the card deails in prod environemnt");
+	                Common.switchToDefault();
+
+	            }
+				
 		
 				
 			} else {
@@ -1820,13 +1870,30 @@ public void acceptPrivacy() {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+				if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("stage")){
 
-				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
-						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//span[text()='Place Order']");
+					expectedResult = "credit card fields are filled with the data";
+					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+					Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
+							expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+	                }
+	            else
+	            {
+	                Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	                String Cardnumber=Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+	                System.out.println(Cardnumber);
+	                Common.assertionCheckwithReport(
+	                        Cardnumber.equals(cardnumber),
+	                            "To validate the card details entered in the production environment",
+	                            "user should able to see the card details in the production environment",
+	                            "User Successfully able to see the card details enterd in the production environment ",
+	                            "User Failed to see the card deails in prod environemnt");
+	                Common.switchToDefault();
+
+	            }
+				
 				
 
 			}
@@ -2708,7 +2775,7 @@ public void acceptPrivacy() {
 			}
 			String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 			
-			if(!url.contains("na.hydroflask") &!url.contains("preprod")){
+			if(!url.contains("stage") &!url.contains("preprod")){
 				
 				int sizeofelement=Common.findElements("id", "email").size();
 				Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,"open paypal site window", "faild to open paypal account");
