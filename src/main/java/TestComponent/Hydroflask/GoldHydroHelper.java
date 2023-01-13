@@ -9038,6 +9038,185 @@ Assert.fail();
 
 				
 	}
+	public void corporate_purchasing() {
+		// TODO Auto-generated method stub
+		String name="";
+		Common.actionsKeyPress(Keys.END);
+		try
+		{
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//a[text()='Group Customization']");
+			Common.clickElement("xpath", "//a[text()='Group Customization']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Corporate Purchasing"),"Validating the Corporate Purchasing page navigation" ,
+					"User should able to land on the Corporate Purchasing page", "successfully land to Corporate Purchasing page", "unable to load the  Corporate Purchasing page");
+			
+			List <WebElement> corporate =Common.findElements("xpath", "//div[contains(@class,'pagebuilder')]//a[contains(@class,'pagebuilder')]");
+			System.out.println(corporate.size());
+			for(int i=0;i<corporate.size();i++)	
+			{
+			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'pagebuilder')]//a[contains(@class,'pagebuilder')]//span[@class='a-btn__label']");
+			Thread.sleep(6000);
+			name=Image.get(i).getText();
+			Common.assertionCheckwithReport(name.equals("Register")||name.equals("Existing Customers")||name.equals("ASI/PPAi Customers"),"Validating the" +name+ "in the corporate purchasing" ,
+					"User should able to see the " +name+ "in the corporate purchasing page", "successfully " +name +"able to see in the coorparate purchasing page", "unable see the" +name+ "in the coorparate purchasing page");
+			}
+			Sync.waitElementPresent("xpath", "//a[@class='pagebuilder-button-primary']//span[text()='Register']");
+			Common.clickElement("xpath", "//a[@class='pagebuilder-button-primary']//span[text()='Register']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("New Account Inquiry Form Page"),"Validating the New Account Inquiry Form Page navigation" ,
+					"User should able to land on the New Account Inquiry Form  page", "successfully land to New Account Inquiry Form Page", "unable to load the  New Account Inquiry Form Page");
+			
+			
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the New Account Inquiry Form Page navigation" ,
+					"User should able to land on the New Account Inquiry Form  page", "unable to  land on New Account Inquiry Form Page",
+					Common.getscreenShot("Failed to land on New Account Inquiry Form Page"));
+			Assert.fail();
+		}
+		
+	}
+	public void new_Account_Inquiry_corporate(String dataSet) {
+		// TODO Auto-generated method stub
+		
+		String expectedResult = "Email us form is visible in tab";
+		String country=data.get(dataSet).get("Country");
+		String channel = data.get(dataSet).get("Channel");
+		String typeofbusiness = data.get(dataSet).get("Typeofbusiness");
+		String storesize = data.get(dataSet).get("Storesize");
+		String state = data.get(dataSet).get("Region");
+		try {
+			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
+			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
+
+			Sync.waitElementPresent("xpath", "//input[@data-label='Company Name']");
+			Common.textBoxInput("xpath", "//input[@data-label='Company Name']", data.get(dataSet).get("Company"));
+ 
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[@id='conversationChannelIndustry']");
+			Common.clickElement("xpath", "//div[@id='conversationChannelIndustry']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='"+channel+"']");
+			Common.clickElement("xpath", "//div[text()='"+channel+"']");
+			
+			Sync.waitElementPresent("xpath", "//div[@id='conversationTypeOfBusiness']");
+			Common.clickElement("xpath", "//div[@id='conversationTypeOfBusiness']");
+			Sync.waitElementPresent("xpath", "//div[text()='"+typeofbusiness+"']");
+			Common.clickElement("xpath", "//div[text()='"+typeofbusiness+"']");
+			
+			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
+			
+			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
+			Thread.sleep(4000);
+			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+			
+			
+			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
+			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
+			Thread.sleep(4000);
+			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+			
+			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
+			
+			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']",data.get(dataSet).get("date"));
+			
+			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
+			Thread.sleep(4000);
+			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+			
+			Common.textBoxInput("xpath", "//input[@id='whatOfYourSalesComeThroughYourWebsite']",data.get(dataSet).get("salesPercentage"));
+			
+			Common.textBoxInput("xpath", "//input[@id='numberOfStores']",data.get(dataSet).get("numberOfStores"));
+			
+			Common.clickElement("xpath", "//div[@id='conversationStoreSize']");
+			Common.clickElement("xpath", "//div[text()='"+storesize+"']");
+			
+			Common.textBoxInput("xpath", "//input[@id='annualRevenue']",data.get(dataSet).get("annualRevenue"));
+			
+			Common.textBoxInput("xpath", "//input[contains(@id,'WhatIsTheEstimatedNumberOfUnits')]",data.get(dataSet).get("NumberOfUnits"));
+			
+			Common.textBoxInput("xpath", "//input[@id='yearsInBusiness']",data.get(dataSet).get("yearsInBusiness"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='storeAddress']");
+			Common.textBoxInput("xpath", "//input[@id='storeAddress']", data.get(dataSet).get("Street"));
+			
+			Common.textBoxInput("xpath", "//input[@name='suiteUnit']", data.get(dataSet).get("yearsInBusiness"));
+			
+			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='"+country+"']");
+			Common.clickElement("xpath", "//div[text()='"+country+"']");
+
+			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
+			Common.clickElement("xpath", "//div[@id='conversationState']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
+			Common.clickElement("xpath", "//div[text()='"+state+"']");
+			
+			Sync.waitElementPresent("xpath", "//input[@id='city']");
+			Common.textBoxInput("xpath", "//input[@id='city']", data.get(dataSet).get("City"));
+			
+			Sync.waitElementPresent("xpath", "//input[@id='zipCode']");
+			Common.textBoxInput("xpath", "//input[@id='zipCode']", data.get(dataSet).get("postcode"));
+		
+
+			Common.textBoxInput("xpath", "//textarea[@id='pleaseDescribeYourBusiness']", data.get(dataSet).get("YourBusiness"));
+			
+			Common.textBoxInput("xpath", "//textarea[@id='whyAreYouInterestedInHydroFlask']", data.get(dataSet).get("interested"));
+			
+			Common.textBoxInput("xpath", "//textarea[@id='messagePreview']", data.get(dataSet).get("Brandscarry"));
+			
+			Common.textBoxInput("xpath", "//textarea[@id='howDoYouPlanToMarketDisplayOurProducts']", data.get(dataSet).get("DisplayProducts"));
+			
+			Common.textBoxInput("xpath", "//textarea[@id='howDidYouHearAboutUs']", data.get(dataSet).get("Aboutus"));
+			
+			Common.textBoxInput("xpath", "//input[@name='customerFirstName']", data.get(dataSet).get("FirstName"));
+			
+			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
+			
+			Common.textBoxInput("xpath", "//input[@id='jobTitle']", data.get(dataSet).get("Jobtitle"));
+			
+			Common.textBoxInput("xpath", "//input[@name='conversationPhone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
+			
+			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
+			
+			Common.clickElement("xpath", "//button[text()='Submit']");
+
+			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
+					"Success message should be Displayed", "Contact us Success message displayed ",
+					"failed to dispaly success message");
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying email us from",
+					"contact us form data enter without any error message", "Contact us page getting error ",
+					Common.getscreenShotPathforReport("Contact us page"));
+			Assert.fail();
+
+		}
+
+		Common.actionsKeyPress(Keys.PAGE_UP);
+		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
+		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+				"verifying contact us confirmation message", expectedResult,
+				"User gets confirmation under the same tab", "unable to load the confirmation form");
+		
+
+	}
+		
+	
 }			
 	
 	
