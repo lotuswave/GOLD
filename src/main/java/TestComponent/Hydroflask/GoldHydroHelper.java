@@ -4971,11 +4971,11 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 		        Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
-				Sync.waitElementPresent("xpath", "//input[@name='conversationStreet']");
-				Common.textBoxInput("xpath", "//input[@name='conversationStreet']", data.get(dataSet).get("Street"));
+				Sync.waitElementPresent("xpath", "//input[@name='customerStreet']");
+				Common.textBoxInput("xpath", "//input[@name='customerStreet']", data.get(dataSet).get("Street"));
 
-				Sync.waitElementPresent("xpath", "//input[@name='conversationCity']");
-				Common.textBoxInput("xpath", "//input[@name='conversationCity']", data.get(dataSet).get("City"));
+				Sync.waitElementPresent("xpath", "//input[@name='customerCity']");
+				Common.textBoxInput("xpath", "//input[@name='customerCity']", data.get(dataSet).get("City"));
 	
 				Sync.waitElementPresent("xpath", "//span[text()='Select State']");
 				Common.clickElement("xpath", "//span[text()='Select State']");
@@ -4983,14 +4983,14 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 				Common.clickElement("xpath", "//div[text()='Alabama']");
 				
-				Sync.waitElementPresent("xpath", "//input[@name='conversationZipCode']");
-				Common.textBoxInput("xpath", "//input[@name='conversationZipCode']", data.get(dataSet).get("postcode"));
+				Sync.waitElementPresent("xpath", "//input[@name='customerZipPostalCode']");
+				Common.textBoxInput("xpath", "//input[@name='customerZipPostalCode']", data.get(dataSet).get("postcode"));
 				
 				Sync.waitElementPresent("xpath", "//input[@id='conversationPhone']");
 				Common.textBoxInput("xpath", "//input[@id='conversationPhone']", data.get(dataSet).get("phone"));
 				
-				Sync.waitElementPresent("xpath", "//div[@id='conversationWherePurchased']");
-				Common.clickElement("xpath", "//div[@id='conversationWherePurchased']");
+				Sync.waitElementPresent("xpath", "//div[@id='customerWherePurchased']");
+				Common.clickElement("xpath", "//div[@id='customerWherePurchased']");
 
 				Sync.waitElementPresent("xpath", "//div[text()='Hydro Flask Website']");
 				Common.clickElement("xpath", "//div[text()='Hydro Flask Website']");
