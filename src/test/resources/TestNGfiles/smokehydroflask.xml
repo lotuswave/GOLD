@@ -109,5 +109,11 @@
         </classes>
         </test>
         
+        <test name="Test_DGLD_HF_ST_033_Footer_Links_Validation" testid="DTG-464" priority="P1" description="This script will cover Footer Links Validation">
+    <classes>
+    <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_033_Footer_Links_Validation" />
+    </classes>
+      </test>
+        
         
 </suite>  
