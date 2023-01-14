@@ -7204,8 +7204,6 @@ catch(Exception | Error e)
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Common.scrollIntoView("xpath", "//button[contains(@class,'video')]");
 			Common.clickElement("xpath", "//span[text()='Play video']");
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'video-thumb-icon')]");
-			Common.clickElement("xpath", "//div[contains(@class,'video-thumb-icon')]");
 			Sync.waitElementPresent("xpath", "//button[@title='Play Video']");
 			Common.clickElement("xpath", "//button[@title='Play Video']");
 			Sync.waitForLoad();
