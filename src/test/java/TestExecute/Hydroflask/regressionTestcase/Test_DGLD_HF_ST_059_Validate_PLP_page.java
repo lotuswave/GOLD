@@ -22,7 +22,8 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.view_PLP_page();
 			Hydro.filter_By("Cups & Tumblers ");
-			Hydro.sort_By("SortBy");
+			Hydro.color_validation("Black");
+//			Hydro.sort_By("SortBy");
 			 
 			
 
@@ -34,7 +35,7 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

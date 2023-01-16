@@ -9231,14 +9231,16 @@ Assert.fail();
 			String bottlecount=Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount),
 					"verifying the color bar has been expand", "When we click on the color it should be expand",
-					"Successfully the color has been expand when we click on the colors ", "unable to expand the colors in PLP page");
-			
+					"Successfully the color has been expand when we click on the colors ", "unable to expand the colors in PLP page");	
 		
 		
 		}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the color bar has been expand", "When we click on the color it should be expand",
+					"unable to expand the colors in PLP page",
+					Common.getscreenShotPathforReport("Failed to expand the colors in PLP page"));
 			Assert.fail();
 		}
 		
