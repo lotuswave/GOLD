@@ -35,7 +35,7 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
