@@ -23,6 +23,7 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 			Hydro.view_PLP_page();
 			Hydro.filter_By("Cups & Tumblers ");
 			Hydro.color_validation("Black");
+			Hydro.price_filter_validation();
 //			Hydro.sort_By("SortBy");
 			 
 			

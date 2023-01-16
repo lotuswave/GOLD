@@ -9249,7 +9249,82 @@ Assert.fail();
 		}
 		
 	}
+	public void price_filter_validation() {
+		// TODO Auto-generated method stub
+		String name="";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='33' and @data-handle-key='1']");
+		   WebElement price= Common.findElement("xpath", "//div[@aria-valuemax='33' and @data-handle-key='1']");
+		    dragprice(price);
+		    Thread.sleep(6000);
+		    List<WebElement> products=Common.findElements("xpath", "//ol[@class='ais-InfiniteHits-list']//img[contains(@class,'m-product')]");
+		    for(int i=0;i<products.size();i++)	
+			{
+		    	int Size=products.size();
+		    	System.out.println(Size);
+		    	Thread.sleep(4000);
+		    	if(Size==1)
+		    	{
+		    		String name1=Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace("$", "");
+		    		Float namevlaue1 = Float.parseFloat(name1);
+		    		if(namevlaue1<=20)
+					{
+						Thread.sleep(3000);
+						String value1=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+						Common.assertionCheckwithReport(value1.equals(name1),
+								"verifying the price filters in PLP page", "When we select the range of price filters between the range only products should display",
+								"Successfully are displayed in the pricing range", "unable to display the procing range after pricing filter applied");	
+					}
+		    		else
+		    		{
+		    			Assert.fail();
+		    		}
+		    	}
+		    	else
+		    	{
+			List<WebElement> productprice=Common.findElements("xpath", "//span[@class='price-wrapper']//span[@class='price']");
+			Thread.sleep(6000);
+			 name=productprice.get(i).getText().replace("$", "");
+			Float namevlaue = Float.parseFloat(name);
+			if(namevlaue<=20)
+			{
+				Thread.sleep(3000);
+				String value=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+				Common.assertionCheckwithReport(value.equals(name),
+						"verifying the price filters in PLP page", "When we select the range of price filters between the range only products should display",
+						"Successfully are displayed in the pricing range", "unable to display the procing range after pricing filter applied");	
+			}
+			else
+			{
+				Assert.fail();
+			}
+			}
+		}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page", "When we select the range of price filters between the range only products should display",
+					"unable to display the procing range after pricing filter applied",
+					Common.getscreenShotPathforReport("unable to display the procing range after pricing filter applied"));
+			Assert.fail();
+		}
 		
+	
+	}
+	
+	public void dragprice(WebElement price)
+	{
+		try
+		{
+			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='33' and @data-handle-key='0']");
+		}
+		catch(Exception | Error e)
+		{
+			
+		}
+	}
 	
 }			
 	
