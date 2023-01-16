@@ -20,8 +20,9 @@ public class Test_DGLD_HF_ST_057_Category_Listing_Page {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.CLP_Page("Bottles & Drinkware");
-			Hydro.verifying_sub_category();
-			Hydro.verifying_shop_Best_Sellers();
+			Hydro.CLP_Page("Kitchenware");
+			Hydro.CLP_Page("Accessories");
+			Hydro.CLP_Page("Featured");
 
 		} catch (Exception e) {
 
@@ -31,7 +32,7 @@ public class Test_DGLD_HF_ST_057_Category_Listing_Page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

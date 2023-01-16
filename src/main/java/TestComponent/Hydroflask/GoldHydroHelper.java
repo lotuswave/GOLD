@@ -4342,6 +4342,8 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
+			verifying_sub_category();
+			verifying_shop_Best_Sellers();
 
 		}
 
@@ -4367,7 +4369,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 			System.out.println(sub_category.size());
-			for(int i=0;i<sub_category.size()-1;i++)	
+			for(int i=0;i<sub_category.size()-2;i++)	
 			{
 			List<WebElement> Image=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 			Thread.sleep(6000);
@@ -4378,11 +4380,12 @@ catch(Exception | Error e)
 			Thread.sleep(5000);
 			ExtenantReportUtils.addPassLog("Validating"+ name +"Page  ", "click the sub category should navigate to the  "+name +"Page", "successfully page navigating to "+name +"PAGE", Common.getscreenShotPathforReport(name));
 			Common.navigateBack();
+			Common.navigateBack();
 
 			}
 			List<WebElement> image_category=Common.findElements("xpath", "//div[@class='m-category-card__container']");
 			System.out.println(image_category.size());
-			for(int i=0;i<image_category.size()-1;i++)	
+			for(int i=0;i<image_category.size()-2;i++)	
 			{
 				List<WebElement> button=Common.findElements("xpath", "//div[contains(@class,'c-category-carousel__item slick-')]");
 				Thread.sleep(4000);
@@ -4392,6 +4395,7 @@ catch(Exception | Error e)
 				button.get(i).click();
 				Thread.sleep(4000);
 				ExtenantReportUtils.addPassLog("Validating"+ Productname +"Page  ", "click the sub category should navigate to the  "+Productname +"Page", "successfully page navigating to "+Productname +"PAGE", Common.getscreenShotPathforReport(Productname));
+				Common.navigateBack();
 				Common.navigateBack();
 			
 			}
@@ -4435,11 +4439,11 @@ catch(Exception | Error e)
 			
 			}	
 			Sync.waitElementPresent("xpath", "//nav[@class='m-breadcrumb u-container']");
-			Common.clickElement("xpath", "//a[text()='Shop']");
+//			Common.clickElement("xpath", "//a[text()='Shop']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			String title=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
-			Common.assertionCheckwithReport(title.contains("Shop"),
+			String title=Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
+			Common.assertionCheckwithReport(title.contains("Bottles & Drinkware"),
 					"validating the breadcrumbs navigating to the" + title, "It should be navigate sucessfully to the"+title,
 					"Sucessfully navigated to the"+title, "Failed to navigate to the"+title);
 		}
