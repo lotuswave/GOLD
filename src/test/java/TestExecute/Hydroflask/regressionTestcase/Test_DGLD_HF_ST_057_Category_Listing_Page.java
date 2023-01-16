@@ -32,7 +32,7 @@ public class Test_DGLD_HF_ST_057_Category_Listing_Page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
