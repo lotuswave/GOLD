@@ -124,7 +124,8 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+	
 			Thread.sleep(3000);
 
 			try {
@@ -133,9 +134,10 @@ public class GoldHydroHelper {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[text()=' Bottles']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
