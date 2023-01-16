@@ -4850,13 +4850,13 @@ catch(Exception | Error e)
 	            // TODO Auto-generated method stub
 	              
 	            
-	            for(int j=1;j<5;j++)
-	            {
-	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-	                Thread.sleep(4000);
-	                
-	            }
+//	            for(int j=1;j<5;j++)
+//	            {
+//	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+//	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+//	                Thread.sleep(4000);
+//	                
+//	            }
 	            
 	            
 	            int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
@@ -9212,6 +9212,36 @@ Assert.fail();
 				"User gets confirmation under the same tab", "unable to load the confirmation form");
 		
 
+	}
+	public void color_validation(String colorname) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
+			Common.clickElement("xpath", "//button[@aria-label='Colors']");
+			Thread.sleep(3000);
+			String expand=Common.findElement("xpath", "//button[@aria-label='Colors']").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(expand.contains("true"),
+					"verifying the color bar has been expand", "When we click on the color it should be expand",
+					"Successfully the color has been expand when we click on the colors ", "unable to expand the colors in PLP page");
+			Sync.waitElementPresent("xpath", "//label[contains(@class,'ais-RefinementList')]//input[@value='"+ colorname+ "']");
+			Common.clickElement("xpath", "//label[contains(@class,'ais-RefinementList')]//input[@value='"+colorname+ "']");
+			Thread.sleep(3000);
+			String colorcount=Common.findElement("xpath", "//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']").getText();
+			String bottlecount=Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+			Common.assertionCheckwithReport(colorcount.equals(bottlecount),
+					"verifying the color bar has been expand", "When we click on the color it should be expand",
+					"Successfully the color has been expand when we click on the colors ", "unable to expand the colors in PLP page");
+			
+		
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
 	}
 		
 	
