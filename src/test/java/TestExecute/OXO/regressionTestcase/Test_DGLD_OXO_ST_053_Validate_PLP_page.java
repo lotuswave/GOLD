@@ -20,7 +20,9 @@ public class Test_DGLD_OXO_ST_053_Validate_PLP_page {
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.view_PLP_page();
-			Oxo.filter_By("Coffee & Tea ");
+			Oxo.filter_By("Barware ");
+			Oxo.color_validation("Sage");
+			Oxo.price_filter_validation();
 			Oxo.sort_By("SortBy");
 			
 
