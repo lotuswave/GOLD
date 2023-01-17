@@ -23,7 +23,7 @@ public class Test_DGLD_HF_ST_083_Register_User_Back_In_stock_Subcription {
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Outofstock Prod");       
-			Hydro.reg_outofstock_subcription("Outofstock Product");
+			Hydro.reg_outofstock_subcription("Outofstock Prod");
 
 		} catch (Exception e) {
 
