@@ -23,7 +23,7 @@ public class Test_DGLD_HF_ST_120_Guest_User_Engraving_multiple_line_Text {
 			Hydro.search_product("Multiline Engraving");   
 			Hydro.multiline_Engraving("Multiline Engraving");
 			Hydro.enraving_Checkout("Multiline Engraving");
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("CCMastercard");

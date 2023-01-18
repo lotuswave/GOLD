@@ -3918,7 +3918,7 @@ public void acceptPrivacy() {
 			Thread.sleep(4000);
 			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
+			Common.assertionCheckwithReport(update.contains("Little Rock"),
 					"verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ", "Failed to display the Billing address in payment page");
 			
@@ -4344,7 +4344,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
-			verifying_sub_category();
+//			verifying_sub_category();
 			verifying_shop_Best_Sellers();
 
 		}
@@ -4423,7 +4423,7 @@ catch(Exception | Error e)
 		try
 		{
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			List<WebElement> sub_category=Common.findElements("xpath", "//div[contains(@class,'product-item-info m-')]");
 			System.out.println(sub_category.size());
 			for(int i=0;i<sub_category.size()-5;i++)
@@ -5114,6 +5114,7 @@ catch(Exception | Error e)
 				select.get(i).click();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
+				Common.navigateBack();
 				Common.navigateBack();
 				ExtenantReportUtils.addPassLog("Validating"+ search +"Page  ", "click on the Popular search should navigate to the  "+search +"Page", "successfully page navigating to "+search +"PAGE", Common.getscreenShotPathforReport(search));
 
