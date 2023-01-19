@@ -3918,7 +3918,7 @@ public void acceptPrivacy() {
 			Thread.sleep(4000);
 			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("Little Rock"),
+			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
 					"verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ", "Failed to display the Billing address in payment page");
 			
