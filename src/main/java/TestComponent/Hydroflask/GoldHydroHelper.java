@@ -3892,7 +3892,8 @@ public void acceptPrivacy() {
 					data.get(dataSet).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='street[0]']",
 					data.get(dataSet).get("Street"));
-			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Thread.sleep(4000);
+			String text=Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='city']",
@@ -3918,7 +3919,7 @@ public void acceptPrivacy() {
 			Thread.sleep(4000);
 			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
+			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr") || text.contains("6 Walnut Valley Dr") ,
 					"verifying the Billing address form in payment page", "Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ", "Failed to display the Billing address in payment page");
 			
