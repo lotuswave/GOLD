@@ -2616,7 +2616,8 @@ try
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//button[@value='klarna']");
+				Common.scrollIntoView("xpath", "//button[@value='klarna']");
+				Common.mouseOverClick("xpath", "//button[@value='klarna']");
 
 				Common.switchToDefault();
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
@@ -2652,7 +2653,7 @@ try
 				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				Sync.waitPageLoad();
-				klarna_Details(dataSet);
+				klarna_Saved_Details(dataSet);
 				}
 				else
 				{
@@ -7492,7 +7493,20 @@ public void alumini_Chefs(String Dataset) {
 		  
 			  } 
 			  }
+		  public void header_1_Percent_Planet(){
+				 String Links= "1% For The Planet";
+				 try{
+					 Common.clickElement("xpath", "//a[contains(@href,'1-percent') and contains(@class,'level-top')]");
+				  Sync.waitPageLoad();
+				  Common.assertionCheckwithReport(Common.getPageTitle().contains("The Planet"),"Validate the header link "+Links, "Click the header link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+				  }
+				  catch (Exception |Error e) {
+						e.printStackTrace();
+				    ExtenantReportUtils.addFailedLog("Validate the Header link "+Links,"Click the header link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+				    Assert.fail();
 		  
+			  }
+		  }
 		
 		  public void Ask_a_question(String Dataset) {
 				// TODO Auto-generated method stub
