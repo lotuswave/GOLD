@@ -3745,12 +3745,12 @@ public void contactUsPage(String dataSet) {
 
 		Common.clickElement("xpath", "//span[text()='Write to Us']");
 		
-		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'oxo.com/contact')]");
-		Common.switchFrames("xpath", "//iframe[contains(@src,'oxo.com/contact')]");
+//		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'oxo.com/contact')]");
+		Common.switchFrames("xpath", "//iframe[contains(@id,'contact-us-form')]");
 
-		Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
+		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'How can we')]");
+		Common.textBoxInput("xpath", "//input[contains(@data-label,'How can we')]", data.get(dataSet).get("Comments"));
 
-//		
        Common.clickElement("xpath", "//input[@id='customerEmail']");
 		Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
@@ -3793,19 +3793,24 @@ public void contactUsPage(String dataSet) {
 		Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
 		Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
 
-		Common.clickElement("xpath", "//div[text()='Order Issues']");
+//		Common.clickElement("xpath", "//div[text()='Order Issues']");
 //		Common.clickElement("xpath", "//div[@id='order_issues']/i");
+		Common.clickElement("xpath", "//div[text()='General Inquiries']");
 		
 		Thread.sleep(4000);
-	     Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
-			Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+//	     Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
+//			Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+			
+			Common.clickElement("xpath", "//div[@id='conversationGeneralInquiries']");
 		
-		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
+//		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
+//		Common.clickElement("xpath", "//div[text()='Billing Issue']");
 		
-		Common.clickElement("xpath", "//div[text()='Billing Issue']");
+		Sync.waitElementPresent("xpath", "//div[text()='Blogger']");
+		Common.clickElement("xpath", "//div[text()='Blogger']");
 
-		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'Order')]");
-		Common.textBoxInput("xpath", "//input[contains(@data-label,'Order')]",data.get(dataSet).get("OrderID"));
+//		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'Order')]");
+//		Common.textBoxInput("xpath", "//input[contains(@data-label,'Order')]",data.get(dataSet).get("OrderID"));
 		Sync.waitElementPresent("xpath", "//textarea[@data-label='Comments']");
 		Common.textBoxInput("xpath", "//textarea[@data-label='Comments']", data.get(dataSet).get("Comments"));
 
@@ -6787,6 +6792,7 @@ public void alumini_Chefs(String Dataset) {
 				for(i=0;i<Links.length;i++){
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[text()=' Kitchenware']");
 					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
 					Common.clickElement("xpath", "//a//span[contains(text(),'Food Containers')]");
 					Thread.sleep(3000);
@@ -7480,7 +7486,7 @@ public void alumini_Chefs(String Dataset) {
 					  Sync.waitPageLoad();
 					  Common.clickElement("xpath", "//span[text()=' We Are OXO']");
 				  Common.clickElement("xpath","//span[text()=' Corporate Responsibility']");
-				  Common.clickElement("xpath","//a[contains(@aria-label,'Corporate Responsibility')]");
+//				  Common.clickElement("xpath","//a[contains(@aria-label,'Corporate Responsibility')]");
 				  Sync.waitPageLoad();
 				  Common.assertionCheckwithReport(Common.getPageTitle().contains("Corporate Responsibility"),"Validate the header link "+Links1, "Click the header link "+Links1+"it will navigate to page"+Links1, "successfully navigating to "+Links1 +"page ","Failed to navigate to"+Links1+"page");
 				  
