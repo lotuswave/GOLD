@@ -28,7 +28,7 @@ public class Test_DGLD_HF_ST_042_Validate_Store_Locator {
 			Hydro.Validate_AvailableRetailers();
 			Hydro.Validate_retailerlocations();
 			Hydro.Click_Instock();
-			Hydro.selectproduct("32 Oz Wide Flex Cap");
+			Hydro.selectproduct("Small Bottle Boot");
 			
 
 		} catch (Exception e) {
