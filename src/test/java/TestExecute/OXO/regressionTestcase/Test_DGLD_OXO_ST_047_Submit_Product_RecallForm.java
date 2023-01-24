@@ -20,7 +20,7 @@ public class Test_DGLD_OXO_ST_047_Submit_Product_RecallForm {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_Voulantry_Recall();
-			Oxo.voluntary_Recall("Productrecall");
+			Oxo.voluntary_Recall("contactusEmail"); // Prod
 			
 			
 		} catch (Exception e) {
