@@ -4286,11 +4286,6 @@ catch(Exception | Error e)
 					"Failed to Navigate to the orders detail page");
 			
 
-
-
-
-
-
 			Common.clickElement("xpath", "//div[@aria-label='Next']");
 			Common.assertionCheckwithReport(reorder.contains("Reorder"),
 					"validating the order summary and UGC carasol ",
