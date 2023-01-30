@@ -4625,11 +4625,11 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
 			Common.clickElement("xpath", "//div[text()='"+state+"']");
 			
-			Sync.waitElementPresent("xpath", "//input[@id='city']");
-			Common.textBoxInput("xpath", "//input[@id='city']", data.get(dataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
+			Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
 			
-			Sync.waitElementPresent("xpath", "//input[@id='zipCode']");
-			Common.textBoxInput("xpath", "//input[@id='zipCode']", data.get(dataSet).get("postcode"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationZipCodeforforms']");
+			Common.textBoxInput("xpath", "//input[@id='conversationZipCodeforforms']", data.get(dataSet).get("postcode"));
 		
 
 			Common.textBoxInput("xpath", "//textarea[@id='pleaseDescribeYourBusiness']", data.get(dataSet).get("YourBusiness"));
@@ -4646,15 +4646,14 @@ catch(Exception | Error e)
 			
 			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
 			
-			Common.textBoxInput("xpath", "//input[@id='jobTitle']", data.get(dataSet).get("Jobtitle"));
+			Common.textBoxInput("xpath", "//input[@id='conversationJobTitle']", data.get(dataSet).get("Jobtitle"));
 			
-			Common.textBoxInput("xpath", "//input[@name='conversationPhone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
 			
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
 			
 			Common.clickElement("xpath", "//button[text()='Submit']");
-
 			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
@@ -6424,7 +6423,8 @@ catch(Exception | Error e)
 			Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT, "New Address");
 			Common.textBoxInput("xpath", "//input[@name='street[0]']",
 					data.get(dataSet).get("Street"));
-			String Text = Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']").getAttribute("value");
+			Thread.sleep(4000);
+			String Text = Common.findElement("xpath", "//div[@class='checkout-billing-address']//input[@name='street[0]']").getAttribute("value");
 			System.out.println(Text);
 			
 			Sync.waitPageLoad();
@@ -6449,6 +6449,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
+			
 			String update=Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
 			System.out.println(update);
 			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr") || Text.contains("6 Walnut Valley Dr"),
@@ -9159,11 +9160,11 @@ Assert.fail();
 			Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
 			Common.clickElement("xpath", "//div[text()='"+state+"']");
 			
-			Sync.waitElementPresent("xpath", "//input[@id='city']");
-			Common.textBoxInput("xpath", "//input[@id='city']", data.get(dataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
+			Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
 			
-			Sync.waitElementPresent("xpath", "//input[@id='zipCode']");
-			Common.textBoxInput("xpath", "//input[@id='zipCode']", data.get(dataSet).get("postcode"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationZipCodeforforms']");
+			Common.textBoxInput("xpath", "//input[@id='conversationZipCodeforforms']", data.get(dataSet).get("postcode"));
 		
 
 			Common.textBoxInput("xpath", "//textarea[@id='pleaseDescribeYourBusiness']", data.get(dataSet).get("YourBusiness"));
@@ -9180,9 +9181,9 @@ Assert.fail();
 			
 			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
 			
-			Common.textBoxInput("xpath", "//input[@id='jobTitle']", data.get(dataSet).get("Jobtitle"));
+			Common.textBoxInput("xpath", "//input[@id='conversationJobTitle']", data.get(dataSet).get("Jobtitle"));
 			
-			Common.textBoxInput("xpath", "//input[@name='conversationPhone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
 			
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
