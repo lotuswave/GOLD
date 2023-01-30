@@ -2099,7 +2099,7 @@ public void acceptPrivacy() {
 
 	public void Addtocart_From_MyFavorites(String Dataset) {
 		// TODO Auto-generated method stub
-	
+		String product=data.get(Dataset).get("Products");
 		try
 		{
 			Sync.waitPageLoad();
@@ -2108,6 +2108,8 @@ public void acceptPrivacy() {
 			if(MyFavorites!=0)
 			{
 				search_product("Product");
+				  Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+					Common.clickElement("xpath", "//img[@alt='" + product + "']");
                 Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
                 Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
                 Sync.waitPageLoad();
@@ -2125,7 +2127,7 @@ public void acceptPrivacy() {
     					"failed to add product to the Whishlist");
                 String Whishlistproduct=Common.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
                 System.out.println(Whishlistproduct);
-                String product=data.get(Dataset).get("Products");
+                
                 if(Whishlistproduct.equals(product))
                 {
                 	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
@@ -4968,11 +4970,11 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 		        Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
-				Sync.waitElementPresent("xpath", "//input[@name='customerStreet']");
-				Common.textBoxInput("xpath", "//input[@name='customerStreet']", data.get(dataSet).get("Street"));
+				Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
+				Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']", data.get(dataSet).get("Street"));
 
-				Sync.waitElementPresent("xpath", "//input[@name='customerCity']");
-				Common.textBoxInput("xpath", "//input[@name='customerCity']", data.get(dataSet).get("City"));
+				Sync.waitElementPresent("xpath", "//input[@name='conversationCityForForms']");
+				Common.textBoxInput("xpath", "//input[@name='conversationCityForForms']", data.get(dataSet).get("City"));
 	
 				Sync.waitElementPresent("xpath", "//span[text()='Select State']");
 				Common.clickElement("xpath", "//span[text()='Select State']");
@@ -4980,14 +4982,14 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 				Common.clickElement("xpath", "//div[text()='Alabama']");
 				
-				Sync.waitElementPresent("xpath", "//input[@name='customerZipPostalCode']");
-				Common.textBoxInput("xpath", "//input[@name='customerZipPostalCode']", data.get(dataSet).get("postcode"));
+				Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeforforms']");
+				Common.textBoxInput("xpath", "//input[@name='conversationZipCodeforforms']", data.get(dataSet).get("postcode"));
 				
-				Sync.waitElementPresent("xpath", "//input[@id='conversationPhone']");
-				Common.textBoxInput("xpath", "//input[@id='conversationPhone']", data.get(dataSet).get("phone"));
+				Sync.waitElementPresent("xpath", "//input[@id='conversationPhoneForForms']");
+				Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 				
-				Sync.waitElementPresent("xpath", "//div[@id='customerWherePurchased']");
-				Common.clickElement("xpath", "//div[@id='customerWherePurchased']");
+				Sync.waitElementPresent("xpath", "//div[@id='conversationWherePurchased']");
+				Common.clickElement("xpath", "//div[@id='conversationWherePurchased']");
 
 				Sync.waitElementPresent("xpath", "//div[text()='Hydro Flask Website']");
 				Common.clickElement("xpath", "//div[text()='Hydro Flask Website']");
@@ -5015,7 +5017,7 @@ catch(Exception | Error e)
 //				Sync.waitElementPresent(40, "xpath", "(//input[@type='file'])[5]");
 //				Common.findElement("xpath", "(//input[@type='file'])[5]").sendKeys(path2);
 			
-				
+				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "//button[text()='Submit']");
 				Common.clickElement("xpath", "//button[text()='Submit']");
                
