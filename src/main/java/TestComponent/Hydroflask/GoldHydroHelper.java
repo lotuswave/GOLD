@@ -5066,8 +5066,8 @@ catch(Exception | Error e)
 			}
 
 			try {
-				String contact = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='Contact Us']").getText();
-				Common.assertionCheckwithReport(contact.contains("Contact"), "validating the customer service information",
+				String FAQ = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']").getText();
+				Common.assertionCheckwithReport(FAQ.contains("FAQ"), "validating the customer service information",
 						"should display Customer serivce information", "user views the Customer serivce information",
 						"Failed to see the Customer service info");
 
