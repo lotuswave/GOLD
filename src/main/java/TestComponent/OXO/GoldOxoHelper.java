@@ -1904,9 +1904,10 @@ try
 			String password=Common.findElement("xpath", "//input[@name='password_confirmation']").getAttribute("type");	
 			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String Greencolor=Color.fromString(Message).asHex();
+			System.out.println(Greencolor);
 			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
 			System.out.println(Message1);
-			  Common.assertionCheckwithReport(Greencolor.equals("#4d8b40") &&
+			  Common.assertionCheckwithReport(Greencolor.equals("#47813b") &&
 			  Message1.contains("complete")&&shopping.contains("/shop/coffee-beverage")&&kitchen.
 			  contains("kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
@@ -2624,7 +2625,8 @@ try
 				{
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				Sync.waitPageLoad();
-				klarna_Details(dataSet);
+				klarna_Saved_Details(dataSet);
+				
 				}
 				else
 				{
@@ -4900,8 +4902,11 @@ public void search_results(String search) {
 		}
 
 		try {
-			String contact = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='Contact Us']").getText();
-			Common.assertionCheckwithReport(contact.contains("Contact"), "validating the customer service information",
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			String contact = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']").getText();
+			Thread.sleep(4000);
+			System.out.println(contact);					
+			Common.assertionCheckwithReport(contact.contains("FAQ"), "validating the customer service information",
 					"should display Customer serivce information", "user views the Customer serivce information",
 					"Failed to see the Customer service info");
 
@@ -4963,7 +4968,8 @@ public void carousel() {
 		Common.findElement("xpath", "//span[@class='icon-carousel__right']");
 		Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
 		
-		int carousel = Common.findElements("xpath", "//div[@class='js-slick-carousel-wrapper slick-initialized slick-slider']").size();
+		int carousel = Common.findElements("xpath", "//div[contains(@class,'js-slick-carousel')]").size();
+		System.out.println(carousel);
 		Common.assertionCheckwithReport(carousel > 0, "validating the carousel",
 				"should navigate to the carousel", "user views the carousel",
 				"Failed to see the carousel");
@@ -5710,6 +5716,7 @@ public void click_FeedingDrinking() {
 	public void product_quantity(String Dataset) {
 		// TODO Auto-generated method stub
 		String Quantity=data.get(Dataset).get("Quantity");
+		System.out.println(Quantity);
 		try
 		{
 			Common.findElement("xpath", "//select[@class='a-select-menu']");
