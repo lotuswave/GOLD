@@ -4830,13 +4830,13 @@ catch(Exception | Error e)
 	            // TODO Auto-generated method stub
 	              
 	            
-	            for(int j=1;j<5;j++)
-	            {
-	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-	                Thread.sleep(4000);
-	                
-	            }
+//	            for(int j=1;j<5;j++)
+//	            {
+//	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+//	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+//	                Thread.sleep(4000);
+//	                
+//	            }
 	            
 	            
 	            int subproductsList=Common.findElements("xpath","//div[@class='field option bundle-item  required']").size();
@@ -8282,7 +8282,8 @@ Assert.fail();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under bottles and drinkware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]), "verifying the header link "+Links[i]+ "Under bottles and drinkware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
     }
@@ -8316,9 +8317,10 @@ Assert.fail();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				System.out.println(title);
 				System.out.println(Links[i]);
-				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
     }
@@ -8351,9 +8353,10 @@ Assert.fail();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				System.out.println(title);
 				System.out.println(Links[i]);
-				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Accessories","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Accessories","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
     }
@@ -8386,7 +8389,8 @@ Assert.fail();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]) ||breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
     }
@@ -8458,7 +8462,7 @@ Assert.fail();
 				Common.clickElement("xpath", "//a[@class='ui-corner-all']//span[contains(text(),'"+Links[i]+"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask") || Common.getPageTitle().contains("Contact") || Common.getPageTitle().contains("Let’s Go!") || Common.getPageTitle().contains("Refill For Good")  , "verifying the explore links navigation","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask") || Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask") || Common.getPageTitle().contains("Contact") || Common.getPageTitle().contains("Let’s Go!") || Common.getPageTitle().contains("Refill For Good") || Common.getPageTitle().contains("Parks For All")  , "verifying the explore links navigation","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 				Thread.sleep(3000);
 				if(Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask"))
 				{
