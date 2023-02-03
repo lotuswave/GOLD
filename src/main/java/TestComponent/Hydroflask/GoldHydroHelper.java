@@ -5798,7 +5798,7 @@ catch(Exception | Error e)
 		
 		
 		try {
-			
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//a[text()='"+category+"']");
 //			Common.clickElement("xpath", "//span[text()='Load more']");
 			String text = Common.findElement("xpath", "//a[text()='"+category+"']//span").getText();
@@ -9214,8 +9214,9 @@ Assert.fail();
 		
 
 	}
-	public void color_validation(String colorname) {
+	public void color_validation(String Dataset) {
 		// TODO Auto-generated method stub
+		String colorname=data.get(Dataset).get("Color");
 		try
 		{
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
@@ -9251,8 +9252,11 @@ Assert.fail();
 		String name="";
 		try
 		{
-			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='33' and @data-handle-key='1']");
-		   WebElement price= Common.findElement("xpath", "//div[@aria-valuemax='33' and @data-handle-key='1']");
+			Thread.sleep(4000);
+			String lastvalue=Common.findElement("xpath", "//div[@class='value end active']").getText().replace("$", "").replace(".00", "");
+			System.out.println(lastvalue);
+			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='"+lastvalue+"' and @data-handle-key='1']");
+		   WebElement price= Common.findElement("xpath", "//div[@aria-valuemax='"+lastvalue+"' and @data-handle-key='1']");
 		    dragprice(price);
 		    Thread.sleep(6000);
 		    List<WebElement> products=Common.findElements("xpath", "//ol[@class='ais-InfiniteHits-list']//img[contains(@class,'m-product')]");
@@ -9315,7 +9319,10 @@ Assert.fail();
 	{
 		try
 		{
-			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='33' and @data-handle-key='0']");
+			String lastvalue=Common.getText("xpath", "//div[@class='value end active']").replace("$", "").replace(".00", "");
+			System.out.println(lastvalue);
+			Thread.sleep(3000);
+			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='"+lastvalue+"' and @data-handle-key='0']");
 		}
 		catch(Exception | Error e)
 		{
