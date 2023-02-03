@@ -21,6 +21,8 @@ public class Test_DGLD_HF_ST_058_Add_to_Cart_from_Sticky_Cart {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product");
 			Hydro.Sticky_Add_to_Cart("Product");
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Sticky_Add_to_Cart("Product");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
