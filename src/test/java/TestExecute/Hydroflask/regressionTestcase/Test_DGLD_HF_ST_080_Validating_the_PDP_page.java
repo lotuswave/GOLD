@@ -17,9 +17,7 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 
 		try {
 			 Hydro.verifingHomePage();
-			 Hydro.click_Shop();
-			Hydro.click_BottlesDrinkware();
-			Hydro.click_Bottles();	
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 	
 			Hydro.click_product();
 			Hydro.Configurableproduct_addtocart_pdppage("Product");
 			Hydro.Configurableproduct_addtocart_pdp("Product");

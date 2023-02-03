@@ -1117,6 +1117,7 @@ public void selectshippingaddress(String Dataset) {
 				} else {
 					break;
 				}
+			
 			}
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
@@ -4812,6 +4813,7 @@ catch(Exception | Error e)
 				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
+				Common.actionsKeyPress(Keys.UP);
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7519,9 +7521,7 @@ catch(Exception | Error e)
 	}
 	
 	public void Configurableproduct_addtocart_pdppage(String Dataset) {
-        String product = data.get(Dataset).get("Colorproduct");
-        String productcolor = data.get(Dataset).get("Color");
-        String productquantity = data.get(Dataset).get("productquantity");
+        String product = data.get(Dataset).get("Products");
         try {
             Sync.waitPageLoad();
             for (int i = 0; i <= 10; i++) {
@@ -7546,12 +7546,16 @@ catch(Exception | Error e)
                     ListOfSubproducts.get(i).click();
                     
                    Thread.sleep(5000);
-                   String colorname=Common.getText("xpath", "(//div[@class='swatch-opt']//span[contains(@class,'m-swatch')])[1]");
+                   String colorname=Common.getText("xpath", "//div[@class='swatch-opt']//span[contains(@class,'m-swatch')]");
                     System.out.println(colorname);
-                    
-                    String s = Common.findElement("xpath",
-                            "//img[contains(@class,'m-product-gallery__media')]").getAttribute("src");
+                    String color=Common.findElement("xpath", "(//div[@class='m-product-gallery__wrapper gallery-grid']//img)[1]").getAttribute("alt").replace(product, "").replace(" - ", "");
+                    System.out.println(color);
+                    String s = Common.findElement("xpath","//img[contains(@class,'m-product-gallery__media')]").getAttribute("src");
                     System.out.println(s);
+                    
+                    Common.assertionCheckwithReport(colorname.equals(color), "validating the  product add to the cart",
+        					"Product should be add to cart", "Sucessfully product added to the cart ",
+        					"failed to add product to the cart");
 
         }
         }
