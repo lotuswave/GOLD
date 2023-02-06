@@ -4609,11 +4609,11 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
 			Common.clickElement("xpath", "//div[text()='"+state+"']");
 			
-			Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
-			Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@data-label='City']");
+			Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 			
-			Sync.waitElementPresent("xpath", "//input[@id='conversationZipCodeforforms']");
-			Common.textBoxInput("xpath", "//input[@id='conversationZipCodeforforms']", data.get(dataSet).get("postcode"));
+			Sync.waitElementPresent("xpath", "//input[@data-label='Zip / Code']");
+			Common.textBoxInput("xpath", "//input[@data-label='Zip / Code']", data.get(dataSet).get("postcode"));
 		
 
 			Common.textBoxInput("xpath", "//textarea[@id='pleaseDescribeYourBusiness']", data.get(dataSet).get("YourBusiness"));
@@ -4632,7 +4632,7 @@ catch(Exception | Error e)
 			
 			Common.textBoxInput("xpath", "//input[@id='conversationJobTitle']", data.get(dataSet).get("Jobtitle"));
 			
-			Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
 			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
 			
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
@@ -6532,18 +6532,14 @@ catch(Exception | Error e)
 			Thread.sleep(6000);
 			if(Common.getCurrentURL().contains("preprod"))
 			{
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			}
-			else
-			{
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prod + "']");
-				Common.clickElement("xpath", "//img[@alt='" + prod + "']");	
-			}
+			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
+			String productprice=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+			Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
+			String PLPprice=Common.findElement("xpath", "//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']").getAttribute("data-price-amount");
 			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-			Common.assertionCheckwithReport(name.contains(products) || name.contains(prod) , "validating the  product navigates to PDP page",
+			Common.assertionCheckwithReport(name.contains(products) && productprice.equals(PLPprice) || name.contains(prod) && productprice.equals(PLPprice) , "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
@@ -6566,6 +6562,40 @@ catch(Exception | Error e)
 			"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 			"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
 	
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
+				String productprice=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");	
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String PLPprice=Common.findElement("xpath", "//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']").getAttribute("data-price-amount");
+				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Common.assertionCheckwithReport(name.contains(products) && productprice.equals(PLPprice) || name.contains(prod) && productprice.equals(PLPprice), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+			Common.clickElement("xpath", "//span[text()='Subscribe']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved.") || newsubcribe.contains("Thank you! You are already subscribed to this product.")  ,
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+			Common.actionsKeyPress(Keys.END);
+		Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+		Common.clickElement("xpath", "//span[text()='Subscribe']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);  
+		String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+		
+			}
 			
 		}
 		catch(Exception | Error e)
@@ -6603,18 +6633,14 @@ catch(Exception | Error e)
 				Thread.sleep(6000);
 				if(Common.getCurrentURL().contains("preprod"))
 				{
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
-				}
-				else
-				{
-					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prod + "']");
-					Common.clickElement("xpath", "//img[@alt='" + prod + "']");
-				}
+				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
+				String productprice=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
+				String PLPprice=Common.findElement("xpath", "//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']").getAttribute("data-price-amount");
 				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				Common.assertionCheckwithReport(name.contains(products) || name.contains(prod), "validating the  product navigates to PDP page",
+				Common.assertionCheckwithReport(name.contains(products) && productprice.equals(PLPprice)|| name.contains(prod) && productprice.equals(PLPprice), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
 				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
@@ -6635,6 +6661,39 @@ catch(Exception | Error e)
 				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
 		
+				}
+				else
+				{
+					Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
+					String productprice=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+					Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					String PLPprice=Common.findElement("xpath", "//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']").getAttribute("data-price-amount");
+					String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+					Common.assertionCheckwithReport(name.contains(products) && productprice.equals(PLPprice) || name.contains(prod) && productprice.equals(PLPprice), "validating the  product navigates to PDP page",
+							"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+							"failed to Navigate to the PDP page");
+					Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				System.out.println(newsubcribe);
+				Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved.") || newsubcribe.contains("Thank you! You are already subscribed to this product."),
+						"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+						"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+				Common.actionsKeyPress(Keys.END);
+			Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(oldsubcribe);
+			Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+			
+				}
+				
 		}
 		catch(Exception | Error e)
 		{
