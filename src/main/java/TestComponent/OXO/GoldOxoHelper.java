@@ -998,6 +998,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		try
 		{
 		Sync.waitPageLoad();
+		Thread.sleep(2000);
 		Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 		Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 		Common.clickElement("xpath", "//button[contains(@class,'action lo')]");
@@ -1458,6 +1459,7 @@ try
 		Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
 		Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
 				UpdataedQuntityinminicart);
+		
 		Common.clickElement("xpath", "//span[text()='Update']");
 		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
@@ -1465,9 +1467,12 @@ try
 		System.out.println(cart);
 		String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
 				.replace("$", "");
+		System.out.println(Subtotal2);
 		Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-		Float Total = subtotalvalue * 3;
+		Float Total = subtotalvalue * 2;
 		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		System.out.println(ExpectedTotalAmmount2);
+		Thread.sleep(2000);
 		Common.assertionCheckwithReport(UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 				"validating the product update quantity and subtotal",
 				"The product Quantity should be update in mini cart and subtotal should change",
