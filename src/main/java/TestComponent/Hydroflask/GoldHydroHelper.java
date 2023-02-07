@@ -9113,7 +9113,7 @@ Assert.fail();
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
-			String popup = Common.findElement("xpath", "//h1[@data-role='title']").getText();
+			String popup = Common.findElement("xpath", "//h2[contains(text(),'Remove')]").getText();
 			if (popup.equals("Remove Item")) {
 				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
 			} else {
@@ -9198,6 +9198,10 @@ Assert.fail();
 		String storesize = data.get(dataSet).get("Storesize");
 		String state = data.get(dataSet).get("Region");
 		try {
+			
+			Sync.waitElementPresent("xpath", "//span[text()='Write to Us']");
+			Common.clickElement("xpath", "//span[text()='Write to Us']");
+		
 			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
 			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
 
