@@ -352,8 +352,10 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		// TODO Auto-generated method stub
 		try
 		{
+			Common.actionsKeyPress(Keys.END);
+			Common.scrollIntoView("xpath", "//div[contains(@class,'ugc instagram')]");
 			Sync.waitElementPresent("xpath", "//div[@class='y-image-overlay ']");
-//			Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
+			Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
 			Common.clickElement("xpath", "//div[@class='y-image-overlay ']");
 //			Thread.sleep(6000);
 			String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']").getAttribute("aria-label");
@@ -1469,7 +1471,7 @@ try
 				.replace("$", "");
 		System.out.println(Subtotal2);
 		Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-		Float Total = subtotalvalue * 2;
+		Float Total = subtotalvalue * 3;
 		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 		System.out.println(ExpectedTotalAmmount2);
 		Thread.sleep(2000);
@@ -3566,7 +3568,7 @@ public void Invalid_email_newsletter(String Dataset) {
 		Common.clickElement("xpath", "//button[text()='Submit']");
 		String Errormessage = Common.findElement("xpath", "//span[@class='error-message']").getText();
 		System.out.println(Errormessage);    //Error: Please enter a valid email address. (previous error)
-		Common.assertionCheckwithReport(Errormessage.equals("Email address is required"),
+		Common.assertionCheckwithReport(Errormessage.equals("Your Email is in an invalid format."),
 				"To validate the error message for Invalid Email",
 				"Should display error Please enter a valid email address.", Errormessage,
 				"Failed to display the error message for invaild email");
@@ -3590,7 +3592,7 @@ public void Empty_Email() {
 		Common.clickElement("xpath", "//button[text()='Submit']");
 		String Errormessage = Common.findElement("xpath", "//span[@class='error-message']").getText();
 		System.out.println(Errormessage);   //Error: This field is required. (Previous error)
-		Common.assertionCheckwithReport(Errormessage.equals("Email address is required"),
+		Common.assertionCheckwithReport(Errormessage.equals("Your Email is in an invalid format."),
 				"To validate the error message for missing email fields",
 				"Should display Error Please enter a valid email address.", Errormessage,
 				"Error message dispaly unsuccessfull");
@@ -3622,7 +3624,7 @@ public void stayIntouch() throws Exception {
 		System.out.println(Text);
 		String expectedResult = "User gets confirmation message that it was submitted";
 
-		Common.assertionCheckwithReport(Text.contains("Thank you For your Subscription"),"verifying newsletter subscription",
+		Common.assertionCheckwithReport(Text.contains("Thank you For your subscription"),"verifying newsletter subscription",
 				"User get confirmation message if new email if it used mail it showing error message ", Text,
 				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
@@ -3669,8 +3671,38 @@ public void validateChatboxOptions(String DataSet) {
 	for (WebElement answernames : Answerwebelements) {
 		arrayoptionName.add(answernames.getText());
 	}
+//	String[] items = data.get(DataSet).get("OXOAnswers").split(",");
+	
+	if (Common.getCurrentURL().contains("pre")) {
+		String[] items = data.get(DataSet).get("OXOAnswersPreProd").split(",");
 
-	String[] items = data.get(DataSet).get("OXOAnswers").split(",");
+		for (int i = 0; i < items.length; i++) {
+
+			if (arrayoptionName.contains(items[i])) {
+			} else {
+
+				ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+						"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
+						Common.getscreenShotPathforReport("failed to display answersoptions"));
+				Assert.fail();
+			}
+		}}
+	
+	else {
+		String[] items = data.get(DataSet).get("OXOAnswers").split(",");
+
+		for (int i = 0; i < items.length; i++) {
+
+			if (arrayoptionName.contains(items[i])) {
+			} else {
+
+				ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+						"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
+						Common.getscreenShotPathforReport("failed to display answersoptions"));
+				Assert.fail();
+			}
+	}
+
 
 	for (int i = 0; i < items.length; i++) {
 
@@ -3688,7 +3720,7 @@ public void validateChatboxOptions(String DataSet) {
 				"Sucessfully displayed the answers options " + arrayoptionName,
 				Common.getscreenShotPathforReport("Answervalidation"));
 	}
-
+	}
 	try {
 		String chat = Common.findElement("xpath", "//div[contains(@class,'footer__chatContainer')]/p").getText();
 		System.out.println(chat);
@@ -3718,7 +3750,7 @@ public void validateChatboxOptions(String DataSet) {
 						"Unable to display the chat conversation when user click on the chat option"));
 		Assert.fail();
 	}
-
+	
 }
 
 public void clickContact() throws Exception {
@@ -4908,6 +4940,7 @@ public void search_results(String search) {
 
 		try {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Common.scrollIntoView("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']");
 			String contact = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']").getText();
 			Thread.sleep(4000);
 			System.out.println(contact);					
@@ -6582,6 +6615,7 @@ public void alumini_Chefs(String Dataset) {
 			    Assert.fail();
 			  
 		  }
+			 footerLink_Inventor_Submission();
 			footerLink_Careers();
 			footerLink_Investor_Relations();
 		  }
@@ -6596,6 +6630,26 @@ public void alumini_Chefs(String Dataset) {
 			  Common.clickElement("xpath","//a[text()='Shipping & Returns']");
 			  Sync.waitPageLoad();
 			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Shipping"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  Sync.waitPageLoad();
+			    Common.navigateBack();
+			  }
+			  catch (Exception |Error e) {
+					e.printStackTrace();
+			    ExtenantReportUtils.addFailedLog("Validate the Footer link "+Links,"Click the footer link "+Links+"it will navigate to page"+Links, "Failed to navigate to"+Links+"page", Common.getscreenShotPathforReport("failed to land on "+Links));
+			    Assert.fail();
+			    
+		  }
+		  }
+	  public void footerLink_Inventor_Submission(){
+			 String Links= "Inventor Submission";
+			  try{
+				  Sync.waitPageLoad();
+			  Common.actionsKeyPress(Keys.END);
+			  Thread.sleep(3000);
+			  
+			  Common.clickElement("xpath","//a[text()='Inventor Submission']");
+			  Sync.waitPageLoad();
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Inventor"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  Sync.waitPageLoad();
 			    Common.navigateBack();
 			  }
@@ -6633,7 +6687,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='OXO Cookware Guarantee]");
+			  Common.clickElement("xpath","//a[text()='OXO Cookware Guarantee']");
 			  Sync.waitPageLoad();
 			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Cookware"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  Sync.waitPageLoad();
@@ -6677,7 +6731,9 @@ public void alumini_Chefs(String Dataset) {
 			  
 			  Common.clickElement("xpath","//a[text()='Voluntary Recall']");
 			  Sync.waitPageLoad();
-			  Common.assertionCheckwithReport(Common.getPageTitle().contains("//a[text()='Voluntary']"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
+			  Thread.sleep(3000);
+			  System.out.println(Common.getPageTitle());
+			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Voluntary"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  
 			    Common.navigateBack();
 			  }
@@ -7935,7 +7991,7 @@ public void alumini_Chefs(String Dataset) {
 							"validating the popup when you click on delete", "The Popup should be displayed",
 							"Successfully popup is displayed when we click on the delete button",
 							"Failed to Display the popup");
-					String popup = Common.findElement("xpath", "//h1[@data-role='title']").getText();
+					String popup = Common.findElement("xpath", "//h2[contains(text(),'Remove')]").getText();
 					if (popup.equals("Remove Item")) {
 						Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
 					} else {
