@@ -6256,7 +6256,7 @@ public void click_FeedingDrinking() {
 	   
 	    	   
 	       }
-	       else if(Common.getCurrentURL().contains("https://mcloud-na.oxo.com/")) {
+	       else if(Common.getCurrentURL().contains("www.oxo.com")) {
 	    	   
 	    	     Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
 	    	   
