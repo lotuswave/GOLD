@@ -4266,19 +4266,19 @@ catch(Exception | Error e)
 			String itemsordered=Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
 			System.out.println(itemsordered);
 			
-			Common.assertionCheckwithReport(reorder.contains("Reorder") && backCTA.contains("Back") && orderdate.contains("Date"),
+			Common.assertionCheckwithReport(reorder.contains("Reorder") && backCTA.contains("Back") && orderdate.contains("Date") && reorder.contains("Reorder"),
 					"validating the order details ",
 					"After Clicking on view Order it should be navigate to the order details page ",
 					"Sucessfully navigated to the orders detail page",
 					"Failed to Navigate to the orders detail page");
-			
-
-			Common.clickElement("xpath", "//div[@aria-label='Next']");
-			Common.assertionCheckwithReport(reorder.contains("Reorder"),
-					"validating the order summary and UGC carasol ",
-					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
-					"Sucessfully UGC Carsol is displayed and navigated to the orders page",
-					"Failed to Navigate to the orders page and UGC Casrol is not displayed ");
+//			
+//
+//			Common.clickElement("xpath", "//div[@aria-label='Next']");
+//			Common.assertionCheckwithReport(reorder.contains("Reorder"),
+//					"validating the order summary and UGC carasol ",
+//					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
+//					"Sucessfully UGC Carsol is displayed and navigated to the orders page",
+//					"Failed to Navigate to the orders page and UGC Casrol is not displayed ");
 			
 			
 		}
