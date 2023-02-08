@@ -7525,13 +7525,13 @@ catch(Exception | Error e)
 		    	
 		    	 j++;
 		    	 
-		    	 ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 40 error",Common.getscreenShotPathforReport("link"+i));
+		    	 ExtenantReportUtils.addFailedLog("Validating Page URL  "+Common.getCurrentURL(), "page configured with products ", "unable to find page it showing 404 error",Common.getscreenShotPathforReport("link"+i));
 		    
 		    }
 	   
 	    	   
 	       }
-	       else if(Common.getCurrentURL().contains("https://mcloud-na.hydroflask.com/")) {
+	       else if(Common.getCurrentURL().contains("https://www.hydroflask.com/")) {
 	    	   
 	    	     Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
 	    	   
