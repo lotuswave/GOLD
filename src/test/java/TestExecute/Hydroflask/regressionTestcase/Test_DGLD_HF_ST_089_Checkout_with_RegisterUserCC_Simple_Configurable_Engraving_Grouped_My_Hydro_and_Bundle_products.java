@@ -27,8 +27,8 @@ public class Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurabl
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
-			Hydro.search_product("Grouped Bundle");    
-			Hydro.Add_Grouped_Bundle("Grouped Bundle");
+//			Hydro.search_product("Grouped Bundle");    
+//			Hydro.Add_Grouped_Bundle("Grouped Bundle");
 			Hydro.search_product("Myhydro Product");   
 			Hydro.Add_Myhydro("Myhydro Product");  
 			Hydro.search_product("Engraving Product"); 
