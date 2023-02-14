@@ -23,6 +23,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
             Hydro.kitchenware_validation("kitchenware");
             Hydro.Accessories_validation("Accessories");
             Hydro.featured_validation("Featured");
+            Hydro.New_Color_Destination("Colors");
             Hydro.customize_shopall("Shop All");
 			Hydro.Explore_Validation("Explore Links");
 			Hydro.image_button("Shop All");

@@ -9562,6 +9562,41 @@ Assert.fail();
 		}
 		
 	}
+	public void New_Color_Destination(String Dataset) {
+		// TODO Auto-generated method stub
+		String names=data.get(Dataset).get("colornames");
+		String[] Links=names.split(",");
+		int i=0;
+		try
+    {
+			for(i=0;i<Links.length;i++){
+				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//span[contains(text(),' New Color Destination')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
+				Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]) ||breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+		
+	}
+    }
+	
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "Under Featured",
+					"User should navigate to the "+Links[i]+"pages",
+					" unable to navigate to the "+Links[i]+"pages",
+					Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+			Assert.fail();
+		}
+		
+		
+	}
 	
 }			
 	
