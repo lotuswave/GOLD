@@ -9045,15 +9045,15 @@ Assert.fail();
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//p//a[contains(text(),'Terms & Privacy')]");
-			Common.clickElement("xpath", "//p//a[contains(text(),'Terms & Privacy')]");
+			Sync.waitElementPresent("xpath", "//p//a[contains(text(),'Privacy Policy')]");
+			Common.clickElement("xpath", "//p//a[contains(text(),'Privacy Policy')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Terms and Privacy"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Privacy Policy"),
 					"validating the Terms and privacy page Navigation",
 					"After Clicking Terms and privacy it should navigate to the respective page",
-					"Sucessfully Navigated to the terms and privacy page",
-					"Failed Navigate to the terms and privacy page");
+					"Sucessfully Navigated to the Privacy Policy page",
+					"Failed Navigate to the Privacy Policy page");
 			
 		}
 		catch(Exception | Error e)
@@ -9061,9 +9061,9 @@ Assert.fail();
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Terms and privacy page Navigation",
 					"After Clicking Terms and privacy it should navigate to the respective page",
-					"Unable to Navigate to the terms and privacy page",
+					"Unable to Navigate to the Privacy Policy page",
 					Common.getscreenShot(
-							"Failed Navigate to the terms and privacy page"));
+							"Failed Navigate to the Privacy Policy page"));
 			Assert.fail();
 		}
 		
