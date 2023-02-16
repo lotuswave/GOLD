@@ -6613,6 +6613,7 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String products=data.get(Dataset).get("Products");
 		String prod=data.get(Dataset).get("prod product");
+		
 	
 			try
 			{
@@ -6695,6 +6696,7 @@ catch(Exception | Error e)
 				}
 				
 		}
+			
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
@@ -6794,8 +6796,9 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Thread.sleep(4000);
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
@@ -6916,6 +6919,7 @@ catch(Exception | Error e)
 				{
 					Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='40 oz']");
 					Common.clickElement("xpath", "//button[@data-gtm-parts='40 oz']");
+					Thread.sleep(4000);
 					String name=Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
 					System.out.println(name);
 					Common.assertionCheckwithReport(name.contains(Dataset), "validating the product in pdp page",
@@ -9598,6 +9602,41 @@ Assert.fail();
 			Assert.fail();
 		}
 		
+		
+	}
+	public void My_order_subcribtion(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+		String prod=data.get(Dataset).get("prod product");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the page navigation to the my account",
+ 					"after clicking on the my account it should navigate to the my account page", "Sucessfully Navigated to the my account page",
+ 					"failed to Navigate to the my account page");
+			Sync.waitElementPresent("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Common.clickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+				Sync.waitElementPresent(20,"xpath", "//span[@class='a-product-name']");
+			String name= Common.findElement("xpath","(//span[@class='a-product-name'])[1]").getText();
+			Common.assertionCheckwithReport(name.equals(products) ||name.equals(prod) , "validating the outofstock produt in the subcribtion page",
+ 					"Product should be display in the subcribtion page", "Sucessfully product has been appeared in the outofstock subcription page",
+ 					"Failed to see the product in subcribtion page");
+			
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the outofstock produt in the subcribtion page",
+ 					"Product should be display in the subcribtion page", "Unable to see the product in subcribtion page",
+					Common.getscreenShot("Failed to see the product in subcribtion page"));
+			Assert.fail();
+		}
 		
 	}
 	
