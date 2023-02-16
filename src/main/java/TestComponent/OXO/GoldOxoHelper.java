@@ -979,7 +979,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-			     Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
+			     Common.getText("xpath", "//h1[@id='block-customer-login-heading']").equals("Sign In"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigin button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -1362,8 +1362,9 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 	public String create_account(String Dataset) {
 		String email="";
 		try {
-			Common.refreshpage();
+//			Common.refreshpage();
 			Sync.waitPageLoad();
+			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
 			Common.clickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -1425,10 +1426,14 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			String message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String redcolor=Color.fromString(message).asHex();
+			System.out.println(redcolor);
 			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
 			String greencolor=Color.fromString(message1).asHex();
+			System.out.println(greencolor);
 			String emailmessage = Common.findElement("xpath", "//div[@id='email_address-error']").getText();
+			System.out.println(emailmessage);
 			String confirmpassword = Common.findElement("xpath", "//div[@id='password-confirmation-error']").getText();
+			System.out.println(confirmpassword);
 			Common.assertionCheckwithReport(redcolor.equals("#b51a18") && greencolor.equals("#2f741f") && emailmessage.contains("@domain.com")
 							&& confirmpassword.contains("enter the same value again"),
 					"validating the error messages with invalid date in accout creation form",
@@ -3195,6 +3200,7 @@ catch(Exception | Error e)
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(3000);
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
 
