@@ -745,7 +745,7 @@ public void selectshippingaddress(String Dataset) {
 				Common.clickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(6000);
+				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
