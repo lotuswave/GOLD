@@ -745,7 +745,7 @@ public void selectshippingaddress(String Dataset) {
 				Common.clickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Thread.sleep(6000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -939,7 +939,7 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getText("xpath", "//h3[@id='block-customer-login-heading']").equals("Sign In"),
+					Common.getText("xpath", "//h1[@id='block-customer-login-heading']").equals("Sign In"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -6904,6 +6904,7 @@ catch(Exception | Error e)
 				Thread.sleep(8000);
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='20 oz']");
 				Common.clickElement("xpath", "//button[@data-gtm-parts='20 oz']");
+				Thread.sleep(4000);
 				String name=Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
 			System.out.println(name);
 				Common.assertionCheckwithReport(name.contains(Dataset), "validating the product in pdp page",
@@ -6947,6 +6948,7 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try
 		{
+			Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Color +"']");	
 		Common.clickElement("xpath", "//button[@aria-label='"+ Color +"']");
 		String productcolor=Common.findElement("xpath", "//label[@class='color-feature__selection__label']").getText();
@@ -8283,6 +8285,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
