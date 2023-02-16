@@ -8481,10 +8481,17 @@ Assert.fail();
 		// TODO Auto-generated method stub
 		
 		String names=data.get(Dataset).get("Kitchen");
+		String prodlinks=data.get(Dataset).get("Kitchen prod");
 		String[] Links=names.split(",");
+		String[] Link=prodlinks.split(",");
 		int i=0;
 		try
     {
+			Thread.sleep(4000);
+			String preprod=Common.getCurrentURL();
+			System.out.println(preprod);
+			if(preprod.contains("preprod"))
+			{
 			for(i=0;i<Links.length;i++){
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
@@ -8501,6 +8508,27 @@ Assert.fail();
 				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 		
 	}
+			}
+			else
+			{
+				for(i=0;i<Link.length;i++){
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
+					Common.clickElement("xpath", "//li[contains(@class,'level2 ')]//a//span[contains(text(),'" +Links[i]+"')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(Links[i]);
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+			
+				
+			}
+    }
     }
 	
 		catch(Exception | Error e)
@@ -8521,6 +8549,7 @@ Assert.fail();
 		int i=0;
 		try
     {
+	
 			for(i=0;i<Links.length;i++){
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
@@ -9639,6 +9668,31 @@ Assert.fail();
 		}
 		
 	}
+	public void Coolers_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Coolers')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+			String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			System.out.println(title);
+			Common.assertionCheckwithReport(title.contains("Coolers") || breadcrumbs.contains("Coolers") , "verifying the header link for coolers ","user should navigate to the coolers page", "user successfully Navigated to the coolers","Failed to navigate to the coolers page");
+	
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link for coolers ","user should navigate to the coolers page", "user Unable to Navigated to the coolers",
+					Common.getscreenShot(" Failed to Navigated to the coolers"));
+			Assert.fail();
+		}
+		
+	}
+	
 	
 }			
 	

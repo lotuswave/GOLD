@@ -20,10 +20,11 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 		try {
 			Hydro.verifingHomePage();
             Hydro.bottles_validation("Bottle and drinkware");
+            Hydro.Coolers_validation("Coolers");   //keep in comment in prod
             Hydro.kitchenware_validation("kitchenware");
             Hydro.Accessories_validation("Accessories");
             Hydro.featured_validation("Featured");
-            Hydro.New_Color_Destination("Colors");
+            Hydro.New_Color_Destination("Colors");   //keep in comment in prod
             Hydro.customize_shopall("Shop All");
 			Hydro.Explore_Validation("Explore Links");
 			Hydro.image_button("Shop All");
