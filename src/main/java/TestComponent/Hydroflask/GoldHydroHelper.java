@@ -1265,7 +1265,7 @@ try
 			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String Greencolor=Color.fromString(Message).asHex();
 			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");	
-			  Common.assertionCheckwithReport(Greencolor.equals("#067a63") &&
+			  Common.assertionCheckwithReport(Greencolor.equals("#056d59") &&
 			  Message1.contains("complete")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
 			  "User should able to view all details in the order confirmation page",
@@ -6609,10 +6609,11 @@ catch(Exception | Error e)
 		}
 		
 	}
-	public void reg_outofstock_subcription(String Dataset) {
+	public String reg_outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products=data.get(Dataset).get("Products");
 		String prod=data.get(Dataset).get("prod product");
+		String price ="";
 		
 	
 			try
@@ -6661,7 +6662,7 @@ catch(Exception | Error e)
 		Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
-		
+		price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
 				}
 				else
 				{
@@ -6692,7 +6693,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
-			
+			price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
 				}
 				
 		}
@@ -6704,7 +6705,7 @@ catch(Exception | Error e)
 					"Unable to display the message after subcribtion ", Common.getscreenShot("Failed to display the message after subcribtion"));
 			Assert.fail();
 		}
-		
+		return price;
 	
 		}
 	public void share_whishlist(String Dataset) {
@@ -6860,11 +6861,13 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Thread.sleep(6000);
+				String name=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+				System.out.println(name);
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Yours!']");
 				Common.clickElement("xpath", "//span[text()='Customize Yours!']");
 				Thread.sleep(3000);
 				Myhydro_bottle("40 oz");
@@ -7020,6 +7023,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[@aria-label='"+ Color +"']");
 			String productcolor=Common.findElement("xpath", "//label[@class='color-feature__selection__label']").getText();
 			System.out.println(productcolor);
+			Thread.sleep(3000);
 			Common.assertionCheckwithReport(productcolor.contains(Color), "validating the color selection for strap",
 					"color should be select for the strap", "Sucessfully color has been selected for the strap",
 					"failed to select the color for the selected strap");
@@ -8287,7 +8291,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
@@ -9688,6 +9692,38 @@ Assert.fail();
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the header link for coolers ","user should navigate to the coolers page", "user Unable to Navigated to the coolers",
 					Common.getscreenShot(" Failed to Navigated to the coolers"));
+			Assert.fail();
+		}
+		
+	}
+	public void remove_outofstock_subcribtion(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			String price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
+			if(price.equals(Dataset))
+			{
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "(//td[contains(@class,'m-table__action')]//a[@title='Remove This Item'])[1]");
+				Common.switchToTopFrame();
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//span[text()='Cancel']");
+				Common.switchToDefault();
+				Common.clickElement("xpath", "//td[contains(@class,'m-table__action')]//a[@title='Remove This Item']");
+				Common.switchToTopFrame();
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//span[text()='Ok']");
+				Common.switchToDefault();
+				
+			}
+			else
+			{
+				
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
 			Assert.fail();
 		}
 		
