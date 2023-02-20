@@ -2637,6 +2637,7 @@ public void acceptPrivacy() {
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			Thread.sleep(3000);
+			
 		}
 		catch(Exception | Error e)
 		{
@@ -2681,11 +2682,22 @@ public void acceptPrivacy() {
 
 				Sync.waitElementPresent("xpath", "//button[@title='Submit']");
 				Common.clickElement("xpath", "//button[@title='Submit']");
+				
+				Common.switchToDefault();
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String message=Common.findElement("xpath", "//div[@class='prodeal']//h4").getText();
+				Common.assertionCheckwithReport(message.contains("Thank you for applying"),
+						"To validate the success message for the prodeal",
+						"After clicking on the submit button it should navigate to the Success page",
+						"user Sucessfully navigate to the Success page after clicking on the submit button",
+						"Failed to get the success message for the pro deal submission");
+				
 
 			} catch (Exception | Error e) {
-				ExtenantReportUtils.addFailedLog("ProDeal application from filling",
-						"User faield to fill the prodeal aplication ",
-						Common.getscreenShotPathforReport("prodeal aplication "));
+				ExtenantReportUtils.addFailedLog("ProDeal application form filling",
+						"User field to fill the prodeal aplication ","user to get the success message for the pro deal submission",
+						Common.getscreenShotPathforReport("Failed to get the success message for the pro deal submission"));
 				Assert.fail();
 
 			}
