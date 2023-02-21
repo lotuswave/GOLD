@@ -9716,16 +9716,13 @@ Assert.fail();
 			if(price.equals(Dataset))
 			{
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//td[contains(@class,'m-table__action')]//a[@title='Remove This Item'])[1]");
-				Common.switchToTopFrame();
+				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+			    Common.implicitWait();
+				Common.alerts("Cancel");
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "//span[text()='Cancel']");
-				Common.switchToDefault();
-				Common.clickElement("xpath", "//td[contains(@class,'m-table__action')]//a[@title='Remove This Item']");
-				Common.switchToTopFrame();
-				Thread.sleep(3000);
-				Common.clickElement("xpath", "//span[text()='Ok']");
-				Common.switchToDefault();
+				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+			    Common.implicitWait();
+		         Common.alerts("Ok");
 				
 			}
 			else
