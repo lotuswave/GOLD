@@ -17,6 +17,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
@@ -1919,7 +1920,7 @@ try
 			System.out.println(Greencolor);
 			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
 			System.out.println(Message1);
-			  Common.assertionCheckwithReport(Greencolor.equals("#47813b") &&
+			  Common.assertionCheckwithReport(Greencolor.equals("#3f7435") &&
 			  Message1.contains("complete")&&shopping.contains("/shop/coffee-beverage")&&kitchen.
 			  contains("kitchenware")&&confirmpassword.equals("text")&&password.equals("text")&&accounttext.contains("Create an Account"),
 			  "validating the order confirmation page",
@@ -3765,14 +3766,16 @@ public void clickContact() throws Exception {
 	Common.actionsKeyPress(Keys.END);
 	try {
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//a[text()='Contact Us']");
-		Common.clickElement("xpath", "//a[text()='Contact Us']");
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Contact')]");
+		Common.scrollIntoView("xpath", "//a[contains(text(),'Contact')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Contact')]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 	
 		Common.assertionCheckwithReport(Common.getCurrentURL().contains("contact"),"Validating the contatus page navigation" ,
 				expectedResult, "successfully land to contact page", "unabel to load the  contact page");
 	} catch (Exception | Error e) {
+		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating contact us page", expectedResult,
 				"unabel to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
 		Assert.fail();
@@ -3788,11 +3791,12 @@ public void contactUsPage(String dataSet) {
 	String country=data.get(dataSet).get("Country");
 	
 	try {
-
+		Common.refreshpage();
+		Sync.waitPageLoad();
 		Common.clickElement("xpath", "//span[text()='Write to Us']");
 		
 //		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'oxo.com/contact')]");
-		Common.switchFrames("xpath", "//iframe[contains(@id,'contact-us-form')]");
+		Common.switchFrames("xpath", "//iframe[(@id='contact-us-form')]");
 
 		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'How can we')]");
 		Common.textBoxInput("xpath", "//input[contains(@data-label,'How can we')]", data.get(dataSet).get("Comments"));
@@ -3824,8 +3828,8 @@ public void contactUsPage(String dataSet) {
 		Sync.waitElementPresent("xpath", "//div[text()='United States']");
 		Common.clickElement("xpath", "//div[text()='United States']");
 
-		Sync.waitElementPresent("xpath", "//input[@data-label='State']");
-		Common.clickElement("xpath", "//input[@data-label='State']");
+		Sync.waitElementPresent("xpath", "//input[@data-label='State / Province']");
+		Common.clickElement("xpath", "//input[@data-label='State / Province']");
 
 		Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 		Common.clickElement("xpath", "//div[text()='Alabama']");
@@ -4497,14 +4501,16 @@ public void click_Product_Registration() throws Exception {
 	Common.actionsKeyPress(Keys.END);
 	try {
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//a[text()='Product Registration']");
-		Common.clickElement("xpath", "//a[text()='Product Registration']");
+//		Sync.waitElementPresent("xpath", "//a[text()='Product Registration']");
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Product')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Product')]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 	
 		Common.assertionCheckwithReport(Common.getCurrentURL().contains("registration"),"Validating the Product Registration page navigation" ,
 				expectedResult, "successfully land to Product Registration page", "unable to load the Product Registration page");
 	} catch (Exception | Error e) {
+		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating Product Registration  page", expectedResult,
 				"unable to load the Product Registration page", Common.getscreenShotPathforReport("Product Registration page link"));
 		Assert.fail();
@@ -4521,8 +4527,9 @@ public void product_Registration(String dataSet) {
 	String SKUitemNumber = data.get(dataSet).get("SKUitemNumber");
 	String feedback = ("Good Product");
 	try {
+		Common.refreshpage();
 		Sync.waitPageLoad();
-		Common.clickElement("xpath", "//span[text()='Write to Us']");
+		Common.clickElement("xpath", "//span[text()='Register Your Product']");
 
 		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'registration')]");
 		Common.switchFrames("xpath", "//iframe[contains(@src,'registration')]");
@@ -4550,8 +4557,8 @@ public void product_Registration(String dataSet) {
 		
 		Common.clickElement("xpath", "//button[text()='Submit']");
 
-		Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
-		Common.clickElement("xpath", "//div[@id='conversationState']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationStateProvince']");
+		Common.clickElement("xpath", "//div[@id='conversationStateProvince']");
 
 		Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
 		Common.clickElement("xpath", "//div[text()='"+state+"']");
@@ -5851,10 +5858,11 @@ public void click_FeedingDrinking() {
 		}
 		
 	}
-	public void reg_outofstock_subcription(String Dataset) {
+	public String reg_outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products=data.get(Dataset).get("Products");
-	
+		String prod=data.get(Dataset).get("prod product");
+		String price ="";
 			try
 			{
 				Sync.waitPageLoad();
@@ -5872,12 +5880,16 @@ public void click_FeedingDrinking() {
 					}
 				}
 				Thread.sleep(6000);
+				if(Common.getCurrentURL().contains("preprod"))
+				{
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				String productprice=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
+				String PlpPrice =Common.findElement("xpath", "//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']").getAttribute("data-price-amount");
 				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				Common.assertionCheckwithReport(name.contains(products) && productprice.equals(PlpPrice)|| name.contains(prod) && productprice.equals(PlpPrice), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
 				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
@@ -5897,7 +5909,41 @@ public void click_FeedingDrinking() {
 		Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 				"verifying the out of stock subcription", "after click on subcribe button message should be appear",
 				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
-		
+		price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
+				}
+				else
+				{
+					Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
+					String productprice=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+					Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					String PLPprice=Common.findElement("xpath", "//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']").getAttribute("data-price-amount");
+					String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+					Common.assertionCheckwithReport(name.contains(products) && productprice.equals(PLPprice) || name.contains(prod) && productprice.equals(PLPprice), "validating the  product navigates to PDP page",
+							"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+							"failed to Navigate to the PDP page");
+					Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String newsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				System.out.println(newsubcribe);
+				Common.assertionCheckwithReport(newsubcribe.contains("Alert subscription has been saved.") || newsubcribe.contains("Thank you! You are already subscribed to this product."),
+						"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+						"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+				Common.actionsKeyPress(Keys.END);
+			Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String oldsubcribe=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(oldsubcribe);
+			Common.assertionCheckwithReport(oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
+			price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
+				}
+				
+				
 		}
 		catch(Exception | Error e)
 		{
@@ -5906,9 +5952,76 @@ public void click_FeedingDrinking() {
 					"Unable to display the message after subcribtion ", Common.getscreenShot("Failed to display the message after subcribtion"));
 			Assert.fail();
 		}
-		
+			return price;
 	
 		}
+	
+	public void My_order_subcribtion(String Dataset) {
+		// TODO Auto-generated method stub
+		String products=data.get(Dataset).get("Products");
+		String prod=data.get(Dataset).get("prod product");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the page navigation to the my account",
+ 					"after clicking on the my account it should navigate to the my account page", "Sucessfully Navigated to the my account page",
+ 					"failed to Navigate to the my account page");
+			Sync.waitElementPresent("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Common.clickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+				Sync.waitElementPresent(20,"xpath", "//span[@class='a-product-name']");
+			String name= Common.findElement("xpath","(//span[@class='a-product-name'])[1]").getText();
+			Common.assertionCheckwithReport(name.equals(products) ||name.equals(prod) , "validating the outofstock produt in the subcribtion page",
+ 					"Product should be display in the subcribtion page", "Sucessfully product has been appeared in the outofstock subcription page",
+ 					"Failed to see the product in subcribtion page");
+			
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the outofstock produt in the subcribtion page",
+ 					"Product should be display in the subcribtion page", "Unable to see the product in subcribtion page",
+					Common.getscreenShot("Failed to see the product in subcribtion page"));
+			Assert.fail();
+		}
+		
+	}
+	public void remove_outofstock_subcribtion(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			String price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
+			if(price.equals(Dataset))
+			{
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+			    Common.implicitWait();
+				Common.alerts("Cancel");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+			    Common.implicitWait();
+		        Common.alerts("Ok");
+				
+			}
+			else
+			{
+				
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+	
+	
 	public void share_whishlist(String Dataset) {
 		// TODO Auto-generated method stub
 		try
@@ -5920,6 +6033,7 @@ public void click_FeedingDrinking() {
 			{
 				search_product("Product");
                 Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+                Common.scrollIntoView("xpath", "//button[@data-action='add-to-wishlist']");
                 Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
                 Sync.waitPageLoad();
                 Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
@@ -6633,8 +6747,10 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='Shipping & Returns']");
+//			  Common.clickElement("xpath","//a[text()='Shipping & Returns']");
+			  Common.clickElement("xpath","//a[contains(text(),'Shipping')]");
 			  Sync.waitPageLoad();
+			  System.out.println(Common.getPageTitle());
 			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Shipping"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  Sync.waitPageLoad();
 			    Common.navigateBack();
@@ -6653,7 +6769,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='Inventor Submission']");
+			  Common.clickElement("xpath","//a[contains(text(),'Inventor')]");
 			  Sync.waitPageLoad();
 			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Inventor"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  Sync.waitPageLoad();
@@ -6673,7 +6789,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='Better Guarantee']");
+			  Common.clickElement("xpath","//a[contains(text(),'Better')]");
 			  Sync.waitPageLoad();
 			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Guarantee"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  Sync.waitPageLoad();
@@ -6693,7 +6809,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='OXO Cookware Guarantee']");
+			  Common.clickElement("xpath","//a[contains(text(),'Cookware Guarantee')]");
 			  Sync.waitPageLoad();
 			  Common.assertionCheckwithReport(Common.getPageTitle().contains("Cookware"),"Validate the Footer link "+Links, "Click the footer link "+Links+"it will navigate to page"+Links, "successfully navigating to "+Links +"page ","Failed to navigate to"+Links+"page");
 			  Sync.waitPageLoad();
@@ -6735,7 +6851,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='Voluntary Recall']");
+			  Common.clickElement("xpath","//a[contains(text(),'Voluntary')]");
 			  Sync.waitPageLoad();
 			  Thread.sleep(3000);
 			  System.out.println(Common.getPageTitle());
@@ -6759,7 +6875,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='Careers ']");
+			  Common.clickElement("xpath","//a[contains(text(),'Careers')]");
 			  Sync.waitPageLoad();
 			  Common.switchWindows();
 			  System.out.println(Common.getPageTitle());
@@ -6786,7 +6902,7 @@ public void alumini_Chefs(String Dataset) {
 			  Common.actionsKeyPress(Keys.END);
 			  Thread.sleep(3000);
 			  
-			  Common.clickElement("xpath","//a[text()='Investor Relations ']");
+			  Common.clickElement("xpath","//a[contains(text(),'Investor')]");
 			  Common.switchWindows();
 			  Sync.waitPageLoad();
 			  System.out.println(Common.getCurrentURL());

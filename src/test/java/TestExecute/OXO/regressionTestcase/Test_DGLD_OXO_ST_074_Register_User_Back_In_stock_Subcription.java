@@ -21,8 +21,9 @@ public class Test_DGLD_OXO_ST_074_Register_User_Back_In_stock_Subcription {
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
 			Oxo.search_product("Outofstock");
-			Oxo.reg_outofstock_subcription("Outofstock");
-			
+			String price = Oxo.reg_outofstock_subcription("Outofstock");
+			Oxo.My_order_subcribtion("Outofstock");
+			Oxo.remove_outofstock_subcribtion(price);
 			
 			
 
