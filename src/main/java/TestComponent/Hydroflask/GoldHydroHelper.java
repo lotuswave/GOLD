@@ -6730,6 +6730,7 @@ catch(Exception | Error e)
 			if(MyFavorites!=0)
 			{
 				search_product("Product");
+	            Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
                 Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
                 Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
                 Sync.waitPageLoad();
@@ -6809,9 +6810,8 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				Thread.sleep(4000);
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
@@ -6873,7 +6873,7 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
-				Thread.sleep(6000);
+				Thread.sleep(3000);
 				String name=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
 				System.out.println(name);
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
@@ -8478,7 +8478,7 @@ Assert.fail();
 				String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				String breadcrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]), "verifying the header link "+Links[i]+ "Under bottles and drinkware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
-		
+		        
 	}
     }
 	
@@ -8522,7 +8522,11 @@ Assert.fail();
 				System.out.println(title);
 				System.out.println(Links[i]);
 				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
-		
+		       Common.clickElement("xpath", "//a[@title='Go to Home Page']");
+		       Common.implicitWait();
+		       Thread.sleep(2000);
+		       Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask") , "verifying the breadcrumbs click from PLP page","After clicking on the breadcrumbs it should navigate to the respective page", "user successfully navigated to the respective page","Failed to navigate to the Respective page");
+			     
 	}
 			}
 			else
@@ -8541,7 +8545,11 @@ Assert.fail();
 					System.out.println(title);
 					System.out.println(Links[i]);
 					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) , "verifying the header link "+Links[i]+ "Under Kitchware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
-			
+					  Common.clickElement("xpath", "//a[@title='Go to Home Page']");
+				       Common.implicitWait();
+				       Thread.sleep(2000);
+				       Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask") , "verifying the breadcrumbs click from PLP page","After clicking on the breadcrumbs it should navigate to the respective page", "user successfully navigated to the respective page","Failed to navigate to the Respective page");
+					   
 				
 			}
     }
@@ -9722,7 +9730,7 @@ Assert.fail();
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
 			    Common.implicitWait();
-		         Common.alerts("Ok");
+		        Common.alerts("Ok");
 				
 			}
 			else

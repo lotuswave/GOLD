@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_106_Checkout_with_PP_as_Registeruser_with_PO_Box {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("Po box Address");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();

@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_111_Register_User_Checkout_APO_Address_PP {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("APO Address");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
