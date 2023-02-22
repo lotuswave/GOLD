@@ -334,12 +334,27 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 	
 	try {
 		Thread.sleep(5000);
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 		Sync.waitElementVisible("xpath", "//input[@type='email']");
 		Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+		}
+		else
+		{
+			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+		}
 		
 	} catch (NoSuchElementException e) {
 		minicart_Checkout();
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 		Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
+		}
+		else
+		{
+			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Prod Email"));
+		}
 
 	}
 	String expectedResult = "email field will have email address";
@@ -959,8 +974,15 @@ public void selectshippingaddress(String Dataset) {
 	public void login_Hydroflask(String dataSet) {
 
 		try {
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			}
+			else
+			{
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
@@ -8499,7 +8521,7 @@ Assert.fail();
 		String names=data.get(Dataset).get("Kitchen");
 		String prodlinks=data.get(Dataset).get("Kitchen prod");
 		String[] Links=names.split(",");
-		String[] Link=prodlinks.split(",");
+		String[] ProdLink=prodlinks.split(",");
 		int i=0;
 		try
     {
@@ -8531,7 +8553,8 @@ Assert.fail();
 			}
 			else
 			{
-				for(i=0;i<Link.length;i++){
+				
+				for(i=0;i<ProdLink.length;i++){
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
