@@ -347,15 +347,7 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		
 	} catch (NoSuchElementException e) {
 		minicart_Checkout();
-		if(Common.getCurrentURL().contains("preprod"))
-		{
 		Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
-		}
-		else
-		{
-			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Prod Email"));
-		}
-
 	}
 	String expectedResult = "email field will have email address";
 	try {
@@ -6896,8 +6888,7 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				String name=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
-				System.out.println(name);
+				String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
