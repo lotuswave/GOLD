@@ -3593,8 +3593,17 @@ public void acceptPrivacy() {
 		// TODO Auto-generated method stub
 		try
 		{
+			if(Common.getCurrentURL().contains("preprod"))
+					{
+	
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath","//input[@type='email']", data.get(Dataset).get("Email"));
+					}
+			else
+			{
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath","//input[@type='email']", data.get(Dataset).get("Prod Email"));
+			}
 			Sync.waitElementPresent("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "//span[text()='Sign In']");
