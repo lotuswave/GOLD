@@ -23,6 +23,7 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware");
 			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.MyFavorites_Guestuser("Product");
 			String minicart=Hydro.minicart_items();
 			Hydro.click_Createaccount();
 			Hydro.create_account("AccountDetails");

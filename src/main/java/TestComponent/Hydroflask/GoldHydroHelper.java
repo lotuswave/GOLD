@@ -977,13 +977,13 @@ public void selectshippingaddress(String Dataset) {
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
-			Sync.waitPageLoad();
-			 Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask"),
-					"To validate the user lands on Home page after successfull login",
-					"After clicking on the signIn button it should navigate to the Home page",
-					"user Sucessfully navigate to the Home page after clicking on the signIn button",
-					"Failed to signIn and not navigated to the Home page ");
+				Sync.waitPageLoad();
+				 Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask"),
+						"To validate the user lands on Home page after successfull login",
+						"After clicking on the signIn button it should navigate to the Home page",
+						"user Sucessfully navigate to the Home page after clicking on the signIn button",
+						"Failed to signIn and not navigated to the Home page ");
          
 
 		} catch (Exception e) {
@@ -1091,14 +1091,15 @@ public void selectshippingaddress(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
+			String favmessage=Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]").getText();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
-					"validating the  my Account page Navigation when user clicks on signin button",
-					"User should able to navigate to the my account page after clicking on Signin button",
-					"Sucessfully navigate to the My account page after clicking on signin button ",
-					"Failed to navigates to My Account Page after clicking on Signin button");
+					Common.getPageTitle().equals("My Favorites") && message.contains("Thank you for registering with Hydro Flask.") && favmessage.contains("Straw Cleaning Set has been added to your Wish List") ,
+					"validating the  My Favorites page Navigation when user clicks on signin button",
+					"User should able to navigate to the My Favorites page after clicking on Signin button",
+					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
+					"Failed to navigates to My Favorites Page after clicking on Signin button");
 		}
 
 		catch (Exception | Error e) {
@@ -2167,9 +2168,6 @@ public void acceptPrivacy() {
         			}
         			else
         			{
-//        			Common.refreshpage();
-//        			Sync.waitPageLoad();
-//                	minicart_Checkout();
         				Assert.fail();
         			}
                 }
@@ -9898,9 +9896,41 @@ Assert.fail();
 		}
 		
 	}
+	public void MyFavorites_Guestuser(String Dataset) {
+		// TODO Auto-generated method stub
+		String product=data.get(Dataset).get("Products");
+		try
+	
+			{
+			search_product("Product");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+		        Common.actionsKeyPress(Keys.DOWN);
+				Common.mouseOver("xpath", "//img[@alt='" + product + "']");
+                Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+                Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+                Sync.waitPageLoad();
+                Thread.sleep(4000);
+                String message=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+                Common.assertionCheckwithReport(Common.getPageTitle().equals("Customer Login") && message.contains("You must login or register to add items to your wishlist."),
+    					"validating the Navigation to the Customer Login page",
+    					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+    					"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
+    					"Failed to Navigate to the Customer Login page after Clicking on My Favorites button");
+		
+	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Customer Login page",
+					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page", "Unable to Navigate to the Customer Login page after Clicking on My Favorites button",
+					Common.getscreenShot("Failed to Navigate to the Customer Login page after Clicking on My Favorites button"));
+		
+			Assert.fail();
+		}
 	
 	
-}			
+}		
+}
 	
 	
 	
