@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page {
+public class Test_DGLD_HF_ST_025_Change_Password_and_Email_from_AccountInformation_Page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
@@ -23,7 +23,8 @@ public class Test_DGLD_HF_ST_025_Change_Password_from_AccountInformation_Page {
             String NewDetail=Hydro.create_account("AccountDetails");
             Hydro.edit_Account_info("NewDetails");
             Hydro.changed_password(NewDetail);
-            
+           String newemail=Hydro.change_Email("NewDetails");
+            Hydro.Change_to_Existingemail(newemail);
 			
 		} catch (Exception e) {
 

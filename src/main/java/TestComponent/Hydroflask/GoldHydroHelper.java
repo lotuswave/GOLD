@@ -9768,6 +9768,136 @@ Assert.fail();
 		}
 		
 	}
+	public String change_Email(String Dataset) {
+		// TODO Auto-generated method stub
+		String oldemail="";
+		
+		try
+		{
+			Sync.waitElementPresent(20, "xpath", "//span[text()='Edit']//parent::a");
+			String name=Common.findElement("xpath", "//span[text()='Edit']//parent::a").getAttribute("aria-label");
+			Common.clickElement("xpath", "//span[text()='Edit']//parent::a");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String editaccount=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			Common.assertionCheckwithReport(name.contains(editaccount), "verifying the page navigated to the edit account ","user should navigate to the Edit account page", "user successfully Navigated to the edit account page","Failed to navigate to the edit account page");
+			oldemail=Common.findElement("xpath", "//p[@class='text-email']").getText();
+			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.textBoxInputAndVerify("xpath", "//input[@name='email']",Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String errormessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Common.assertionCheckwithReport(errormessage.contains("The password doesn't match this account"), "verifying the error message for the password","user should get the error message if he enter the different password", "Successfully user gets the error message","Failed to get the error message if the user gives an different password");
+			Common.refreshpage();
+			Sync.waitPageLoad();
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.textBoxInputAndVerify("xpath", "//input[@name='email']",data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Confirm Password"));
+			}
+			else
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+				Common.textBoxInputAndVerify("xpath", "//input[@name='email']",data.get(Dataset).get("Prod Email"));
+				Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Confirm Password"));
+			}
+			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String emailerrormessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Common.assertionCheckwithReport(emailerrormessage.contains("A customer with the same email address already exists"), "verifying the error message for the existing account email","user should get the error message if he enter the existing email", "Successfully user gets the error message","Failed to get the error message if the user gives an existing email id");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.textBoxInputAndVerify("xpath", "//input[@name='email']",Utils.getEmailid());
+			String newemail=Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String successmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Common.assertionCheckwithReport(
+					successmessage.contains("You saved the account information.")
+							&& Common.getPageTitle().contains("Customer Login"),
+					"verifying the Success message for the Change email",
+					"user should get the success message and navigate back to the Login page",
+					"Successfully user gets the success message and navigated to the Login page",
+					"Failed to get the success message and unable to navigate to the login page");
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", newemail);
+			Common.textBoxInput("id", "pass", data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"To validate the user lands on My Account after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account",
+					"user Sucessfully navigate to the My Account after clicking on the signIn button",
+					"Failed to signIn and not navigated to the My Account");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user lands on My Account after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account", "Unable to signIn and not navigated to the My Account",
+					Common.getscreenShot(" Failed to signIn and not navigated to the My Account"));
+			Assert.fail();
+		}
+		return oldemail;
+	}
+	public void Change_to_Existingemail(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+		
+			String name=Common.findElement("xpath", "//span[text()='Edit']//parent::a").getAttribute("aria-label");
+			Common.clickElement("xpath", "//span[text()='Edit']//parent::a");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String editaccount=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			Common.assertionCheckwithReport(name.contains(editaccount), "verifying the page navigated to the edit account ","user should navigate to the Edit account page", "user successfully Navigated to the edit account page","Failed to navigate to the edit account page");
+			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.textBoxInputAndVerify("xpath", "//input[@name='email']",Dataset);
+			Common.textBoxInput("xpath", "//input[@name='current_password']", "Lotuswave@1234");
+			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String successmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Common.assertionCheckwithReport(
+					successmessage.contains("You saved the account information.")
+							&& Common.getPageTitle().contains("Customer Login"),
+					"verifying the Success message for the Change email",
+					"user should get the success message and navigate back to the Login page",
+					"Successfully user gets the success message and navigated to the Login page",
+					"Failed to get the success message and unable to navigate to the login page");
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", Dataset);
+			Common.textBoxInput("id", "pass", "Lotuswave@1234");
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+					"To validate the user lands on My Account after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account",
+					"user Sucessfully navigate to the My Account after clicking on the signIn button",
+					"Failed to signIn and not navigated to the My Account");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user lands on My Account after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account", "Unable to signIn and not navigated to the My Account",
+					Common.getscreenShot(" Failed to signIn and not navigated to the My Account"));
+			Assert.fail();
+		}
+		
+	}
 	
 	
 }			
