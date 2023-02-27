@@ -637,12 +637,25 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		
 		try {
 			Thread.sleep(5000);
-			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
-			
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+				
+			}
+			else {
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+			}
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+				Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Email"));
+			}
+			else {
+				Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("Prod Email"));
+			}
 
 		}
 		String expectedResult = "email field will have email address";
@@ -1002,7 +1015,15 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		{
 		Sync.waitPageLoad();
 		Thread.sleep(2000);
+		if(Common.getCurrentURL().contains("preprod"))
+		{
+		Sync.waitPageLoad();
 		Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+		}
+		else {
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Prod Email"));
+		}
+		
 		Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 		Common.clickElement("xpath", "//button[contains(@class,'action lo')]");
 		Sync.waitPageLoad();
