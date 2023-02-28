@@ -25,6 +25,7 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 			Hydro.newuseraddDeliveryAddress("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			Hydro.createAccountFromOrderSummaryPage("AccountDetails");
+			Hydro.newsletter_subscription();
 
 		} catch (Exception e) {
 
