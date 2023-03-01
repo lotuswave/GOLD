@@ -17,10 +17,11 @@ public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart 
 	public void Validate_Account_Registration_Create_Account_With_Cart() throws Exception {
 
 		try {
-			Oxo.verifingHomePage();
+			Oxo.verifingHomePage(); // cart+AC creation+guestMyfavourites
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 //			Oxo.minicart_Checkout();
+			Oxo.MyFavorites_Guestuser("Product");
 			String minicart = Oxo.minicart_items();
 			Oxo.click_Createaccount();
 			Oxo.create_account("AccountDetails");

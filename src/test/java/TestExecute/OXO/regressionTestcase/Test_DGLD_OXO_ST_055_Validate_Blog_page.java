@@ -19,6 +19,8 @@ public class Test_DGLD_OXO_ST_055_Validate_Blog_page {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.goodTips_Blog("Blog");
+			Oxo.blog_page();
+
 			
 		} catch (Exception e) {
 

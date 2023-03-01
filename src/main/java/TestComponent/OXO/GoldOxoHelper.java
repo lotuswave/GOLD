@@ -3931,7 +3931,7 @@ public void Signin_Checkoutpage(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 		Common.clickElement("xpath", "//span[text()='Sign In']");
 		Sync.waitPageLoad();
-		int regsiteruser=Common.findElements("xpath", "//div[contains(@class,'shipping-address-item n')]").size();
+		int regsiteruser=Common.findElements("xpath", "//div[contains(@class,'shipping-address-item ')]").size();
 		Common.assertionCheckwithReport(regsiteruser>0,
 				"Verifying the login functionality from the shipping page",
 				"after clicking on the login button it should login and address should be display",
@@ -7914,8 +7914,12 @@ public void alumini_Chefs(String Dataset) {
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
 						String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-						Common.assertionCheckwithReport(title.contains(Blog[i]), "verifying the header link "+Blog[i]+ "Under Featured","user should navigate to the "+Blog[i]+" page", "user successfully Navigated to the "+Blog[i],"Failed to navigate to the "+Blog[i]);
-				
+						Common.assertionCheckwithReport(title.contains(Blog[i]),
+								"verifying the header link " + Blog[i] + "Under Featured",
+								"user should navigate to the " + Blog[i] + " page",
+								"user successfully Navigated to the " + Blog[i],
+								"Failed to navigate to the " + Blog[i]);
+
 			}
 		    }
 			
@@ -7930,6 +7934,104 @@ public void alumini_Chefs(String Dataset) {
 				}
 				
 			}
+			
+			
+			public void blog_page() {
+				
+				try {
+					
+					Common.clickElement("xpath", "//a[contains(text(),'Good Tips')]");
+					Sync.waitPageLoad();
+					
+					String  blogcategory = Common.findElement("xpath", "//div[contains(@class,'hero')]//span[@class='a-btn-tertiary__label']").getText();
+					System.out.println(blogcategory);
+					int blogtitle = Common.findElements("xpath", "//div[contains(@class,'hero')]//h2[@class='m-blog-base-list__content-title']").size();
+					String blogcarousel = Common.findElement("xpath", "//div[contains(@class,'js-slick-carousel-wrapper')]").getAttribute("aria-roledescription");
+					
+					Common.assertionCheckwithReport(blogcategory.contains("Cooking & Baking")&& blogtitle>0 && blogcarousel.contains("carousel"),
+							"To validate the Blog page",
+							"user should able to see the Blog Article",
+							"Sucessfully Blog Article has been displayed","Failed to Displayed the Blog Article");
+					Common.clickElement("xpath","//button//span[@class='icon-carousel__right']");
+					Common.clickElement("xpath","//button//span[@class='icon-carousel__left']");
+					Common.scrollIntoView("xpath", "//div[contains(@class,'hero')]//span[text()='Read Article']");
+					Common.clickElement("xpath", "//div[contains(@class,'hero')]//span[text()='Read Article']");
+					
+				}
+				catch(Exception |Error e){
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To validate the Blog page",
+							"user should able to see the Blog Article",
+							"unable to Displayed the Blog Article",
+							Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+					Assert.fail();
+				}
+				blog_article_page();
+				blog_article_comments();
+			}
+			
+			public void blog_article_page() {
+				
+				try {
+					String blogbreadcrumb = Common.findElement("xpath", "//ol[@class='m-breadcrumb__list']").getText();
+					System.out.println(blogbreadcrumb);
+					int blogarticle = Common.findElements("xpath", "//div[@class='m-blog-post-meta__name-date']").size();
+					Common.assertionCheckwithReport(blogbreadcrumb.contains("Good Tips Blog")&& blogarticle>0,
+							"To validate the Blog page",
+							"user should able to see the Blog Article",
+							"Sucessfully Blog Article has been displayed","Failed to Displayed the Blog Article");
+					
+					 Common.scrollIntoView("xpath", "//ul[@class='m-social-links']/li/button");
+					List<WebElement> blogsocial = Common.findElements("xpath", "//ul[@class='m-social-links']/li/button");
+					for (WebElement blog : blogsocial) {
+						
+						System.out.println(blog.getText()); 
+					
+						Common.assertionCheckwithReport((blog.getText().contains("Pinterest"))||(blog.getText().contains("Facebook"))||(blog.getText().contains("Twitter"))||(blog.getText().contains("Copy URL")),
+								"To validate the Blog page",
+								"user should able to see the Blog Article",
+								"Sucessfully Blog Article has been displayed","Failed to Displayed the Blog Article");
+							
+					}
+					
+				}
+				catch(Exception| Error e){
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To validate the Blog page",
+							"user should able to see the Blog Article",
+							"unable to Displayed the Blog Article",
+							Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+					Assert.fail();
+				}
+			}
+			
+			public void blog_article_comments() {
+				
+				try {
+					
+					Common.switchFrames("xpath", "//iframe[@title='Disqus']");
+				String comment =	Common.findElement("xpath", "//span[@class='comment-count']").getText();
+					System.out.println(comment);
+				Common.clickElement("xpath", "//div[@aria-label='Start the discussion…']");
+					
+				String disqus = Common.findElement("xpath", "//ul[@data-role='login-menu']/li/button").getAttribute("aria-label");
+				System.out.println(disqus);	
+				Common.assertionCheckwithReport(comment.contains("Comments") && disqus.contains("Disqus"),
+								"To validate the Blog page", "user should able to see the Blog Article",
+								"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+			}
+				catch(Exception| Error e){
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To validate the Blog page",
+							"user should able to see the Blog Article",
+							"unable to Displayed the Blog Article",
+							Common.getscreenShotPathforReport("Failed to Displayed the Blog Article"));
+					Assert.fail();
+				}
+			}
+			
+			
+			
 			public void PDP_video_validation(String Dataset) {
 				// TODO Auto-generated method stub
 				String product = data.get(Dataset).get("Products");
@@ -8165,6 +8267,86 @@ public void alumini_Chefs(String Dataset) {
 				
 			}
 			
+			public void MyFavorites_Guestuser(String Dataset) {
+			
+				String product = data.get(Dataset).get("Products");
+				try
+
+				{
+					search_product("Product");
+					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+					Common.actionsKeyPress(Keys.DOWN);
+					Common.mouseOver("xpath", "//img[@alt='" + product + "']");
+					Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+					Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+					Common.assertionCheckwithReport(
+							Common.getPageTitle().equals("Customer Login")
+									&& message.contains("You must login or register to add items to your wishlist."),
+							"validating the Navigation to the Customer Login page",
+							"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+							"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
+							"Failed to Navigate to the Customer Login page after Clicking on My Favorites button");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the Navigation to the Customer Login page",
+							"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+							"Unable to Navigate to the Customer Login page after Clicking on My Favorites button",
+							Common.getscreenShot(
+									"Failed to Navigate to the Customer Login page after Clicking on My Favorites button"));
+
+					Assert.fail();
+				}
+
+			}
+
+			public void newsletter_subscription() {
+				// TODO Auto-generated method stub
+				try {
+					Sync.waitElementPresent("xpath", "//a[text()='Newsletter Subscriptions']");
+					Common.clickElement("xpath", "//a[text()='Newsletter Subscriptions']");
+					String newsletter = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+					Common.assertionCheckwithReport(newsletter.contains("Newsletter Subscription"),
+							"validating the Navigation to the Newsletter Subscription page",
+							"After Clicking on Newsletter Subscription CTA user should be navigate to the Newsletter Subscription page",
+							"Sucessfully User Navigates to the Newsletter Subscription page after clicking on the Newsletter Subscription CTA",
+							"Failed to Navigate to the Newsletter Subscription page after Clicking on Newsletter Subscription button");
+					Common.switchFrames("xpath", "//iframe[contains(@title,'OXO Website Preference')]");
+					WebElement Checkbox = Common.findElement("xpath", "//input[@id='field7']");
+					if (!Checkbox.isSelected()) {
+						Checkbox.click();
+						Sync.waitElementPresent(20, "xpath", "//button[text()='SAVE PREFERENCES']");
+						Common.clickElement("xpath", "//button[text()='SAVE PREFERENCES']");
+					} else {
+						Sync.waitElementPresent(20, "xpath", "//button[text()='SAVE PREFERENCES']");
+						Common.clickElement("xpath", "//button[text()='SAVE PREFERENCES']");
+					}
+					
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String message = Common.findElement("xpath", "//div[@class='thxtext2']").getText();
+					Common.assertionCheckwithReport(message.contains("Thank you"),
+							"validating the success messgae for the Newsletter Subscription",
+							"After Clicking on update preference CTA user should be navigate to see the success message",
+							"Sucessfully User able to see the success message after clicking on the update preference",
+							"Failed to see the success message after clicking on the update preference");
+
+					Common.switchToDefault();
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the success messgae for the Newsletter Subscription",
+							"After Clicking on update preference CTA user should be navigate to see the success message",
+							"Unable to see the success message after clicking on the update preference",
+							Common.getscreenShot("Failed to see the success message after clicking on the update preference"));
+					Assert.fail();
+
+				}
+
+			}		
 			
 }
 
