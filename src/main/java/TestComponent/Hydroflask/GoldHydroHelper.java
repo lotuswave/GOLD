@@ -7586,7 +7586,7 @@ public class GoldHydroHelper {
 					Thread.sleep(4000);
 					String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
 					System.out.println(title);
-					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods"),
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods") || title.contains("Newsletter Subscription"),
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
 							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
@@ -9979,5 +9979,35 @@ public class GoldHydroHelper {
 
 		}
 
+	}
+
+	public void Were_here_section(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			List<WebElement> werehere=Common.findElements("xpath", "//div[@class='c-icon-card-list__cards']//span[@class='m-icon-card__text']");
+			ArrayList<String> heresection = new ArrayList<String>();
+
+			for (WebElement sections : werehere) {
+				heresection.add(sections.getText());
+				System.out.println(sections);
+		     }
+			String[] messages=data.get(Dataset).get("message").split(",");
+			Common.assertionCheckwithReport(heresection.contains(messages),
+					"validating the were here section in the order summary page",
+					"In Order summary page the user should able to see the were here section",
+					"Sucessfully werehere section should be dispalyed in the order summary page",
+					"Failed werehere section should be dispalyed in the order summary page");
+			
+			}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the were here section in the order summary page",
+					"In Order summary page the user should able to see the were here section",
+					"Unble to see the werehere section should be dispalyed in the order summary page",
+					Common.getscreenShot("Failed werehere section should be dispalyed in the order summary page"));
+			Assert.fail();
+		}
 	}
 }
