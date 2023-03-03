@@ -2542,7 +2542,12 @@ public class GoldHydroHelper {
 			Common.clickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
-			Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			if (Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
@@ -3131,7 +3136,12 @@ public class GoldHydroHelper {
 			Common.clickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
-			Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			if (Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
@@ -4934,25 +4944,25 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
-			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
+			Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
+			Common.textBoxInput("xpath", "//input[@data-label='Street']",
 					data.get(dataSet).get("Street"));
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationCityForForms']");
-			Common.textBoxInput("xpath", "//input[@name='conversationCityForForms']", data.get(dataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@data-label='City']");
+			Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 
-			Sync.waitElementPresent("xpath", "//span[text()='Select State']");
-			Common.clickElement("xpath", "//span[text()='Select State']");
+			Sync.waitElementPresent("xpath", "//input[@data-label='State / Province']");
+			Common.clickElement("xpath", "//input[@data-label='State / Province']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 			Common.clickElement("xpath", "//div[text()='Alabama']");
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeforforms']");
-			Common.textBoxInput("xpath", "//input[@name='conversationZipCodeforforms']",
+			Sync.waitElementPresent("xpath", "//input[@data-label='Zip Code']");
+			Common.textBoxInput("xpath", "//input[@data-label='Zip Code']",
 					data.get(dataSet).get("postcode"));
 
-			Sync.waitElementPresent("xpath", "//input[@id='conversationPhoneForForms']");
-			Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+			Sync.waitElementPresent("xpath", "//input[@data-label='Phone']");
+			Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationWherePurchased']");
 			Common.clickElement("xpath", "//div[@id='conversationWherePurchased']");
