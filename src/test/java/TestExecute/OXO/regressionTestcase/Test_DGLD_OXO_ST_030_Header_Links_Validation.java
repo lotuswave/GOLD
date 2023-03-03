@@ -28,6 +28,8 @@ public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 			Oxo.header_1_Percent_Planet();
 			Oxo.header_Menu_ImageItemblocksLinks("ShopAll");
 			
+//			Oxo.header_Shop("Shop");
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

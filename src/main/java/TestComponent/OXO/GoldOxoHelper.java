@@ -442,6 +442,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 	
 	public void click_minicart() {
 		try {
+			
 			Thread.sleep(9000);
 //			Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
@@ -5882,7 +5883,7 @@ public void click_FeedingDrinking() {
 	public String reg_outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products=data.get(Dataset).get("Products");
-		String prod=data.get(Dataset).get("prod product");
+		String prod=data.get(Dataset).get("Prod Products OOS");
 		String price ="";
 			try
 			{
@@ -8346,7 +8347,57 @@ public void alumini_Chefs(String Dataset) {
 
 				}
 
-			}		
+			}	
+			
+			
+			public void header_Shop(String Dataset) {
+				// TODO Auto-generated method stub
+//				String names=data.get(Dataset).get("Home Shop");
+//				String[] shopLinks=names.split(",");
+				int i=0;
+				try
+		    {
+					Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+					Thread.sleep(3000);
+					Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+					Thread.sleep(3000);
+				List<WebElement> shop = Common.findElements("xpath","//li[contains(@class,'level1 nav-1-')]/a/span[2]");
+		    
+				ArrayList<String> shopmenu = new ArrayList<String>();
+				for (WebElement shp : shop) {
+					shopmenu.add(shp.getText());
+					
+					System.out.println(shopmenu);
+		    }
+				String[] items = data.get(Dataset).get("Home Shop").split(",");
+
+				for (i = 0; i < items.length; i++) {
+
+					if (shopmenu.contains(items[i])) {
+						System.out.println(items[i]);
+					} else {
+
+						ExtenantReportUtils.addFailedLog("To validate the Answers options in chatbox",
+								"All the Answer related options are displayed ", "Missed the " + items[i] + "options",
+								Common.getscreenShotPathforReport("failed to display answersoptions"));
+						Assert.fail();
+					}
+				}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+//					ExtenantReportUtils.addFailedLog("verifying the header link "+kitchenLinks[i]+ "Under Kitchenware",
+//							"User should navigate to the "+kitchenLinks[i]+"pages",
+//							" unable to navigate to the "+kitchenLinks[i]+"pages",
+//							Common.getscreenShot("Failed to navigate to the "+kitchenLinks[i]+"pages"));
+					Assert.fail();
+				}
+				
+				
+			}
+			
 			
 }
 
