@@ -9640,7 +9640,7 @@ public class GoldHydroHelper {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' New Color Destination')]");
+				Common.clickElement("xpath", "//span[contains(text(),' New Colors')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
@@ -9993,12 +9993,25 @@ public class GoldHydroHelper {
 				System.out.println(sections);
 		     }
 			String[] messages=data.get(Dataset).get("message").split(",");
-			Common.assertionCheckwithReport(heresection.contains(messages),
-					"validating the were here section in the order summary page",
-					"In Order summary page the user should able to see the were here section",
-					"Sucessfully werehere section should be dispalyed in the order summary page",
-					"Failed werehere section should be dispalyed in the order summary page");
 			
+			for (int i = 0; i < messages.length; i++) {
+
+				if (heresection.contains(messages[i])) {
+
+					Common.assertionCheckwithReport(heresection.contains(messages[i]),
+							"validating the were here section in the order summary page",
+							"In Order summary page the user should able to see the were here section",
+							"Sucessfully werehere section should be dispalyed in the order summary page",
+							"Failed werehere section should be dispalyed in the order summary page");
+				} else {
+
+					ExtenantReportUtils.addFailedLog("validating the were here section in the order summary page",
+							"In Order summary page the user should able to see the were here section ", "Missed the " + messages[i] + "options",
+							Common.getscreenShotPathforReport("Failed werehere section should be dispalyed in the order summary page"));
+					Assert.fail();
+				}
+
+			}
 			}
 		catch(Exception | Error e)
 		{
