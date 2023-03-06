@@ -9035,7 +9035,7 @@ public class GoldHydroHelper {
 
 				String s = webelementslist.get(i).getText();
 				System.out.println(s);
-				Common.assertionCheckwithReport(s.contains("Star"), "validating the filter reviews search",
+				Common.assertionCheckwithReport(s.contains("star")|| s.contains("Star"), "validating the filter reviews search",
 						"After Clicking on filters search the repective reviews should be displayed",
 						"Sucessfully Respective search Reviews has been displayed",
 						"Failed to display the respective search reviews");
@@ -9056,6 +9056,7 @@ public class GoldHydroHelper {
 	public void click_arrows() {
 		// TODO Auto-generated method stub
 		try {
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Common.clickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Thread.sleep(3000);
