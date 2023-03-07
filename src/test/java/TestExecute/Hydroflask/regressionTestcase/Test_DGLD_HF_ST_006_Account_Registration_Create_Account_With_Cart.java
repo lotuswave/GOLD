@@ -26,7 +26,7 @@ public class Test_DGLD_HF_ST_006_Account_Registration_Create_Account_With_Cart {
 			Hydro.MyFavorites_Guestuser("Product");
 			String minicart=Hydro.minicart_items();
 			Hydro.click_Createaccount();
-			Hydro.create_account("AccountDetails");
+			Hydro.create_account_with_fav("AccountDetails");
 			Hydro.minicart_products(minicart);
 			
 

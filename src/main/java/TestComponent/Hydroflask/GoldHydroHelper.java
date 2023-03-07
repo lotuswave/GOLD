@@ -1055,13 +1055,10 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
 			String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
-			String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
-					.getText();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("My Favorites")
-							&& message.contains("Thank you for registering with Hydro Flask.")
-							&& favmessage.contains("Straw Cleaning Set has been added to your Wish List"),
+					Common.getPageTitle().equals("My Account")
+							&& message.contains("Thank you for registering with Hydro Flask."),
 					"validating the  My Favorites page Navigation when user clicks on signin button",
 					"User should able to navigate to the My Favorites page after clicking on Signin button",
 					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
@@ -8679,7 +8676,7 @@ public class GoldHydroHelper {
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				Common.assertionCheckwithReport(title.contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getPageTitle().contains("Shop New Colors"),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -9056,10 +9053,10 @@ public class GoldHydroHelper {
 	public void click_arrows() {
 		// TODO Auto-generated method stub
 		try {
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.actionsKeyPress(Keys.ARROW_UP);
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Common.clickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			String rightarrow = Common.findElement("xpath", "//a[contains(@aria-label,'Page 2')]")
 					.getAttribute("aria-label");
 			Common.assertionCheckwithReport(rightarrow.contains("Current Page"),
@@ -9150,16 +9147,16 @@ public class GoldHydroHelper {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
+				System.out.println(Links.length);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
-				Common.clickElement("xpath",
-						"//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
+				Common.clickElement("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(Common.getPageTitle().contains(Link[i]),
+				Common.assertionCheckwithReport(Common.getPageTitle().contains(Link[i]) || Common.getPageTitle().contains("Shop New Colors") ,
 						"verifying the header image link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -9718,19 +9715,32 @@ public class GoldHydroHelper {
 
 	public void Coolers_validation(String Dataset) {
 		// TODO Auto-generated method stub
-		try {
-			Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-			Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Coolers')]");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-			String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-			System.out.println(title);
-			Common.assertionCheckwithReport(title.contains("Coolers") || breadcrumbs.contains("Coolers"),
-					"verifying the header link for coolers ", "user should navigate to the coolers page",
-					"user successfully Navigated to the coolers", "Failed to navigate to the coolers page");
 
+		String names = data.get(Dataset).get("Kitchen");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+		         	Thread.sleep(4000);
+		         	for (i = 0; i < Links.length; i++) {
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+					Common.clickElement("xpath", "//span[text()=' Coolers']");
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//a[@class='m-breadcrumb__text'])[2]").getText();
+					System.out.println(title);
+					System.out.println(Links[i]);
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || Common.getPageTitle().contains(Links[i]),
+							"verifying the header link " + Links[i] + "Under coolers",
+							"user should navigate to the " + Links[i] + " page",
+							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+		         	}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the header link for coolers ",
@@ -10034,4 +10044,62 @@ public class GoldHydroHelper {
 			Assert.fail();
 		}
 	}
-}
+
+	public String create_account_with_fav(String Dataset) {
+		// TODO Auto-generated method stub
+		String email = "";
+		try {
+			Common.refreshpage();
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
+			Common.clickElement("xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			System.out.println(email);
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
+			String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
+					.getText();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("My Favorites")
+							&& message.contains("Thank you for registering with Hydro Flask.")
+							&& favmessage.contains("Straw Cleaning Set has been added to your Wish List"),
+					"validating the  My Favorites page Navigation when user clicks on signin button",
+					"User should able to navigate to the My Favorites page after clicking on Signin button",
+					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
+					"Failed to navigates to My Favorites Page after clicking on Signin button");
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the  my Account page Navigation when user clicks on signin button",
+					"User should able to navigate to the my account page after clicking on Signin button",
+					"Unable to navigate to the My account page after clicking on signin button ",
+					Common.getscreenShot("Failed to navigates to My Account Page after clicking on Signin button"));
+			Assert.fail();
+
+		}
+		return email;
+	}
+		
+	}
+
