@@ -2089,7 +2089,7 @@ try
 			{
 				search_product("Product");
                 Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-                Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+                Common.mouseOverClick("xpath", "//button[@data-action='add-to-wishlist']");
                 Sync.waitPageLoad();
                 Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
     					"validating the Navigation to the My Favorites page",
@@ -2112,8 +2112,10 @@ try
                 System.out.println(product);
                 if(Whishlistproduct.equals(product))
                 {
-                	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
-        			Common.mouseOver("xpath", "//img[@alt='" +product+ "']");
+//                	Sync.waitElementPresent(30, "xpath", "//img[@alt='" +product+ "']");
+//        			Common.mouseOver("xpath", "//img[@alt='" +product+ "']");
+                	Sync.waitElementPresent(30, "xpath", "//a[@title='" +product+ "']/parent::div");
+        			Common.mouseOver("xpath", "//a[@title='" +product+ "']/parent::div");
                 	Common.clickElement("xpath", "//span[text()='Add to Cart']");
                 	Sync.waitPageLoad();
         			Thread.sleep(4000);
@@ -3368,8 +3370,8 @@ public void acceptPrivacy() throws Exception {
 public void click_trackorder(){
 	try {
 		Common.actionsKeyPress(Keys.END);
-		Common.scrollIntoView("xpath", "//a[text()='Track Your Order']");
-		Common.clickElement("xpath", "//a[text()='Track Your Order']");
+		Common.scrollIntoView("xpath", "//a[contains(text(),'Track Your')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Track Your')]");
 		Sync.waitPageLoad();
 		Common.assertionCheckwithReport(Common.getPageTitle().contains("Orders and Returns")|| Common.getPageTitle().equals("My Orders") ,
 				"Verifying the track order page navigation ",
@@ -3988,6 +3990,8 @@ public void addtocart_PLP(String Dataset) {
 	System.out.println(products);
 	try {
 		Sync.waitPageLoad();
+		Common.refreshpage();
+		Thread.sleep(5000);
 		for (int i = 0; i <= 10; i++) {
 			Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
 			List<WebElement> webelementslist = Common.findElements("xpath",
@@ -4764,12 +4768,14 @@ public void configurable_Sticky_add_to_cart(String Dataset) {
 			}
 		}
 		Common.clickElement("xpath", "//img[@alt='" + product + "']");
-		String Productname = Common.getText("xpath", "//a[contains(text(),'Write a review')]").trim();
+		String Productname = Common.getText("xpath", "//a[contains(text(),' Review')]").trim();
 		
 		Thread.sleep(4000);
 		System.out.println(Productname);
+		String Breadcrumb = Common.getText("xpath", "//ol[(@class='m-breadcrumb__list')]");
+		System.out.println(Breadcrumb);
 //		Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
-				Common.assertionCheckwithReport(Productname.contains("Write a review"),
+				Common.assertionCheckwithReport(Productname.contains("Review") && Breadcrumb.contains("Home"),
 				"validating the product should navigate to the PDP page",
 				"When we click on the product is should navigate to the PDP page",
 				"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
