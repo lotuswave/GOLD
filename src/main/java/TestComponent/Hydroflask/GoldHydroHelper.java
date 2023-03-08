@@ -4500,10 +4500,10 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
-			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
-			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
-			Thread.sleep(4000);
-			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
+//			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
+//			Thread.sleep(4000);
+//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
 
@@ -9053,8 +9053,9 @@ public class GoldHydroHelper {
 	public void click_arrows() {
 		// TODO Auto-generated method stub
 		try {
-			Common.actionsKeyPress(Keys.ARROW_UP);
+			Common.actionsKeyPress(Keys.DOWN);
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Next Page')]");
+			Common.scrollIntoView("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Common.clickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Thread.sleep(4000);
 			String rightarrow = Common.findElement("xpath", "//a[contains(@aria-label,'Page 2')]")
@@ -9366,10 +9367,10 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
-			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
-			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
-			Thread.sleep(4000);
-			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
+//			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
+//			Thread.sleep(4000);
+//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
 
