@@ -4336,7 +4336,7 @@ public class GoldHydroHelper {
 			List<WebElement> sub_category = Common.findElements("xpath",
 					"//div[contains(@class,'product-item-info m-')]");
 			System.out.println(sub_category.size());
-			for (int i = 0; i < sub_category.size() - 5; i++) {
+			for (int i = 0; i < sub_category.size() - 4; i++) {
 				List<WebElement> Image = Common.findElements("xpath", "//span[@class='product-image-wrapper']");
 				Sync.waitPageLoad();
 				Sync.waitImplicit(10);
@@ -9154,6 +9154,7 @@ public class GoldHydroHelper {
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
+				Sync.waitElementPresent("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
 				Common.clickElement("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
