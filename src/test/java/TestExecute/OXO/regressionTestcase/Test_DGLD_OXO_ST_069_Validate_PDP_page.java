@@ -24,6 +24,7 @@ public class Test_DGLD_OXO_ST_069_Validate_PDP_page {
 //			Oxo.click_product();
 			Oxo.babytoddler_headerlinks("Baby & Toddler");
 			Oxo.Configurable_addtocart_pdp("Product");
+			Oxo.click_UGC();
 //			Oxo.Configurableproduct_addtocart_pdp("Product");  //
 			Oxo.PDP_cofigurable_product();
 			Oxo.click_minicartatPDP();

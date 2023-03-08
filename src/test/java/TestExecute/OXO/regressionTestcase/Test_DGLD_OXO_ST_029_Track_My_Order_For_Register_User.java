@@ -19,6 +19,7 @@ public class Test_DGLD_OXO_ST_029_Track_My_Order_For_Register_User {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.register_userorder_status();
+			Oxo.view_order();
 			
 			
 			

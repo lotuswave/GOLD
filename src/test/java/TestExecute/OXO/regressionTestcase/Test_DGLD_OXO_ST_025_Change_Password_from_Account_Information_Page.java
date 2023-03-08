@@ -15,7 +15,7 @@ public class Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page 
 	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Create_Account() throws Exception {
+	public void Validate_Create_Account_and_Change_Password() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();

@@ -225,11 +225,13 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 
 			String Productname = Common.findElement("xpath", "//button[@id='product-addtocart-button']/span").getText();
+			String stars = Common.findElement("xpath", "//span[@class='yotpo-stars']").getAttribute("class");
+			
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 			System.out.println(Productname);
 //			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
-					Common.assertionCheckwithReport(Productname.contains("Add"),
+					Common.assertionCheckwithReport(Productname.contains("Add")&& stars.contains("stars"),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
@@ -1457,8 +1459,8 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			System.out.println(emailmessage);
 			String confirmpassword = Common.findElement("xpath", "//div[@id='password-confirmation-error']").getText();
 			System.out.println(confirmpassword);
-			Common.assertionCheckwithReport(redcolor.equals("#b51a18") && greencolor.equals("#2f741f") && emailmessage.contains("@domain.com")
-							&& confirmpassword.contains("enter the same value again"),
+			Common.assertionCheckwithReport(redcolor.equals("#b51a18") && greencolor.equals("#2f741f") && emailmessage.contains("Please enter a valid email address")
+							&& confirmpassword.contains("Passwords must match"),
 					"validating the error messages with invalid date in accout creation form",
 					"User should able to get error message when used the invaild data",
 					"Sucessfully error message has been displayed when user use the invalid data",
@@ -4486,6 +4488,7 @@ public void country_selector() {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
 			Sync.waitElementPresent(50, "xpath", "//img[contains(@src,'country-selector')]");
+			Common.scrollIntoView("xpath", "//img[contains(@src,'country-selector')]");
 			Common.clickElement("xpath", "//img[contains(@src,'country-selector')]");
 			Thread.sleep(3000);
 			Country=select.get(i).getText();
@@ -5390,14 +5393,15 @@ public void click_FeedingDrinking() {
 		{
 		
 			
-			Common.scrollIntoView("xpath", "//label[text()='Reviews']");
-			Sync.waitElementPresent("xpath", "//label[@for='tab-product.yotpo.reviews']");
-			String form=Common.findElement("xpath", "//label[@for='tab-product.yotpo.reviews']").getText();
+			Common.scrollIntoView("xpath", "//a[text()='Reviews']");
+			Sync.waitElementPresent("xpath", "//div[@id='tab-label-product.yotpo.reviews']/a");
+			String form=Common.findElement("xpath", "//div[@id='tab-label-product.yotpo.reviews']/a").getText();
+			System.out.println(form);
 			Common.assertionCheckwithReport(form.equals("Reviews"),
 					"verifying the write a review button", "Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//label[text()='Reviews']");
-			Sync.waitElementPresent("xpath", "//label[text()='Reviews']");
+			Common.clickElement("xpath", "//a[text()='Reviews']");
+			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
 		
 		}
@@ -7951,11 +7955,12 @@ public void alumini_Chefs(String Dataset) {
 					Sync.waitPageLoad();
 					
 					String  blogcategory = Common.findElement("xpath", "//div[contains(@class,'hero')]//span[@class='a-btn-tertiary__label']").getText();
+					String  blogcategories = Common.findElement("xpath", "//div[contains(@class,'hero')]//a[contains(@class,'m-blog-card__categories-anchor')]").getAttribute("class");
 					System.out.println(blogcategory);
 					int blogtitle = Common.findElements("xpath", "//div[contains(@class,'hero')]//h2[@class='m-blog-base-list__content-title']").size();
 					String blogcarousel = Common.findElement("xpath", "//div[contains(@class,'js-slick-carousel-wrapper')]").getAttribute("aria-roledescription");
 					
-					Common.assertionCheckwithReport(blogcategory.contains("Cooking & Baking")&& blogtitle>0 && blogcarousel.contains("carousel"),
+					Common.assertionCheckwithReport(blogcategories.contains("categories")&& blogtitle>0 && blogcarousel.contains("carousel"),
 							"To validate the Blog page",
 							"user should able to see the Blog Article",
 							"Sucessfully Blog Article has been displayed","Failed to Displayed the Blog Article");
@@ -8402,6 +8407,45 @@ public void alumini_Chefs(String Dataset) {
 				}
 				
 				
+			}
+			public void view_order() {
+				
+				try {
+					Sync.waitPageLoad();
+					String number = Common.findElement("xpath", "//a[@title='View Order']").getText();
+					Sync.waitElementPresent("xpath", "//span[text()='View Order']");
+					Common.clickElement("xpath", "//span[text()='View Order']");
+					Sync.waitPageLoad();
+					Sync.waitElementPresent(40, "xpath", "//h1[@data-ui-id='page-title-wrapper']");
+					String Ordernumber = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+					Common.findElement("xpath", "//span[contains(@class,'order-status ')]");
+					String reorder = Common.findElement("xpath", "//a[contains(@class,'action or')]//span").getText();
+					String backCTA = Common.findElement("xpath", "//a[contains(@class,'action back')]//span[2]").getText();
+					String orderdate = Common.findElement("xpath", "//div[@class='order-info']/p").getText();
+					String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
+					String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
+					String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
+					String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
+					String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
+					System.out.println(itemsordered);
+
+					Common.assertionCheckwithReport(
+							reorder.contains("Reorder") && backCTA.contains("Back") && orderdate.contains("Date")
+									&& reorder.contains("Reorder"),
+							"validating the order details ",
+							"After Clicking on view Order it should be navigate to the order details page ",
+							"Sucessfully navigated to the orders detail page", "Failed to Navigate to the orders detail page");
+//	
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the order Details ",
+							"After Clicking on view Order it should be navigate to the order details page ",
+							"Unable to Navigate to the orders details page  ",
+							Common.getscreenShot("Failed to Navigate to the orders details page "));
+					Assert.fail();
+
+				}
+
 			}
 			
 			
