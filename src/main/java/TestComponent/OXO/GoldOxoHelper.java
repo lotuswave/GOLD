@@ -3932,6 +3932,7 @@ public void Signin_Checkoutpage(String Dataset) {
 	{
 		Sync.waitElementVisible("xpath", "//input[@type='email']");
 		Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
+		Thread.sleep(3000);
 		Sync.waitElementPresent("xpath", "//input[@name='password']");
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 		Common.clickElement("xpath", "//span[text()='Sign In']");
@@ -5508,16 +5509,21 @@ public void click_FeedingDrinking() {
 	public void view_PLP_page() {
 		try {
 			String title = Common.findElement("xpath", "//h1[@id='page-title-heading']").getAttribute("Class");
-			String breadcrumbs = Common.findElement("xpath", "//nav[@class='m-breadcrumb u-container']")
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
 					.getAttribute("aria-label");
-
+			Thread.sleep(2000);
 			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
 			String Sort = Common
 					.findElement("xpath",
 							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
 					.getText();
+			System.out.println(title);
+			System.out.println(breadcrumbs);
+			System.out.println(filter);
+			System.out.println(Sort);
+			
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumbs navigation") && title.contains("c-plp-hero__headline")
+					breadcrumbs.contains("Breadcrumb") && title.contains("c-plp-hero__headline")
 							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -5639,8 +5645,8 @@ public void click_FeedingDrinking() {
 			Common.assertionCheckwithReport(expand.contains("true"),
 					"verifying the color bar has been expand", "When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ", "unable to expand the colors in PLP page");
-			Sync.waitElementPresent("xpath", "//label[contains(@class,'ais-RefinementList')]//input[@value='"+ colorname+ "']");
-			Common.clickElement("xpath", "//label[contains(@class,'ais-RefinementList')]//input[@value='"+colorname+ "']");
+			Sync.waitElementPresent("xpath", "//ul[contains(@class,'ais-RefinementList')]//input[@value='"+ colorname+ "']");
+			Common.clickElement("xpath", "//ul[contains(@class,'ais-RefinementList')]//input[@value='"+colorname+ "']");
 			Thread.sleep(3000);
 			String colorcount=Common.findElement("xpath", "//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']").getText();
 			String bottlecount=Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
@@ -5661,12 +5667,16 @@ public void click_FeedingDrinking() {
 		
 	}
 	public void price_filter_validation() {
-		// TODO Auto-generated method stub
+		
 		String name="";
 		try
 		{
-			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='15' and @data-handle-key='1']");
-		   WebElement price= Common.findElement("xpath", "//div[@aria-valuemax='15' and @data-handle-key='1']");
+			Thread.sleep(3000);
+			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
+					.replace("$", "").replace(".00", "");
+			System.out.println(lastvalue);
+			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+		   WebElement price= Common.findElement("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 		    dragprice(price);
 		    Thread.sleep(6000);
 		    List<WebElement> products=Common.findElements("xpath", "//ol[@class='ais-InfiniteHits-list']//img[contains(@class,'m-product')]");
@@ -5678,11 +5688,14 @@ public void click_FeedingDrinking() {
 		    	if(Size==1)
 		    	{
 		    		String name1=Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace("$", "");
-		    		Float namevlaue1 = Float.parseFloat(name1);
-		    		if(namevlaue1<=5)
+		    		System.out.println(name1);
+		    		Float namevalue1 = Float.parseFloat(name1);
+		    		System.out.println(namevalue1);
+		    		if(namevalue1>=5)
 					{
 						Thread.sleep(3000);
-						String value1=Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace("$", "");
+						String value1=Common.findElement("xpath", "//span[@class='price-wrapper']").getAttribute("data-price-amount");
+						System.out.println(value1);
 						Common.assertionCheckwithReport(value1.equals(name1),
 								"verifying the price filters in PLP page", "When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range", "unable to display the procing range after pricing filter applied");	
@@ -5698,7 +5711,7 @@ public void click_FeedingDrinking() {
 			Thread.sleep(6000);
 			 name=productprice.get(i).getText().replace("$", "");
 			Float namevlaue = Float.parseFloat(name);
-			if(namevlaue<=5)
+			if(namevlaue>=5)
 			{
 				Thread.sleep(3000);
 				String value=Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace("$", "");
@@ -5729,11 +5742,16 @@ public void click_FeedingDrinking() {
 	{
 		try
 		{
-			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='15' and @data-handle-key='0']");
+			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
+					.replace(".00", "");
+			System.out.println(lastvalue);
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 		}
 		catch(Exception | Error e)
 		{
-			
+			e.printStackTrace();
 		}
 	}
 
