@@ -4826,13 +4826,13 @@ public class GoldHydroHelper {
 	public void validating_BundleProducts() throws Exception {
 		// TODO Auto-generated method stub
 
-//	            for(int j=1;j<5;j++)
-//	            {
-//	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-//	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-//	                Thread.sleep(4000);
-//	                
-//	            }
+	            for(int j=1;j<5;j++)
+	            {
+	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Thread.sleep(4000);
+	                
+	            }
 
 		int subproductsList = Common.findElements("xpath", "//div[@class='field option bundle-item  required']").size();
 		System.out.println(subproductsList);
