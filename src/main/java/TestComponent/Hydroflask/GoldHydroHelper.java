@@ -4842,10 +4842,10 @@ public class GoldHydroHelper {
 					"//div[@class='fieldset']//div[" + value + "]//div[contains(@class,'m-swatch m')]");
 
 			WebElement Colornames = Common.findElement("xpath",
-					"//div[@class='fieldset']//div[" + value + "]//span[contains(@class,'m-swa')]");
+					"//div[@class='fieldset']//div[" + value + "]//span[contains(@class,'m-swatch-group__header s')]");
 			WebElement imagecolor = Common.findElement("xpath", "//div[@class='fieldset']//div[" + value + "]//img");
 			WebElement Color = Common.findElement("xpath",
-					"//div[@class='fieldset']//div[" + value + "]//div[contains(@class,'m-swatch m-sw')]");
+					"(//div[@class='fieldset']//div[@class='m-swatch-group__container']//div[contains(@class,'m-swatch m-sw')])["+ value +"]");
 
 			for (int j = 0; j < ListOfSubproducts.size(); j++) {
 
@@ -4855,10 +4855,15 @@ public class GoldHydroHelper {
 				} else {
 
 					if (ListOfSubproducts.get(j).getAttribute("class").contains("m-swatch m")) {
-						Thread.sleep(2000);
+						Thread.sleep(4000);
 						ListOfSubproducts.get(j).click();
-
-//	                                Common.assertionCheckwithReport(imagecolor.getAttribute("src").contains(Colornames.getText()) || imagecolor.getAttribute("src").contains(Color.getAttribute("data-simple-sku")) || Color.getAttribute("aria-label").contains(Colornames.getText()) , "Vrifying  swatch color button "+Colornames.getText(), "after click color swatch button"+Colornames.getText()+"it must dispaly swatch color image", "successfully color swatch image is dispalying", "Failed load color swatch image");
+						Thread.sleep(3000);
+//						Common.assertionCheckwithReport(
+//								Color.getAttribute("data-option-label").contains(Colornames.getText()),
+//								"Vrifying  swatch color button " + Colornames.getText(),
+//								"after click color swatch button" + Colornames.getText()
+//										+ "it must dispaly swatch color image",
+//								"successfully color swatch image is dispalying", "Failed load color swatch image");
 					} else {
 						break;
 					}
@@ -5749,16 +5754,15 @@ public class GoldHydroHelper {
 	public void view_PLP_page() {
 		try {
 			String title = Common.findElement("xpath", "//h1[@data-element='title']").getAttribute("Class");
-			String breadcrumbs = Common.findElement("xpath", "//nav[@class='m-breadcrumb u-container']")
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
 					.getAttribute("aria-label");
-
 			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
 			String Sort = Common
 					.findElement("xpath",
 							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
 					.getText();
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumbs navigation") && title.contains("c-clp-hero__headline")
+					breadcrumbs.contains("Breadcrumb") && title.contains("c-clp-hero__headline")
 							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -9485,9 +9489,9 @@ public class GoldHydroHelper {
 					"Successfully the color has been expand when we click on the colors ",
 					"unable to expand the colors in PLP page");
 			Sync.waitElementPresent("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
 			Common.clickElement("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
 			Thread.sleep(3000);
 			String colorcount = Common.findElement("xpath",
 					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
