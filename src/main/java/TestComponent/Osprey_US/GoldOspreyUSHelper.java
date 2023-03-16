@@ -61,4 +61,22 @@ public class GoldOspreyUSHelper {
 
 		return r;
 	}
+
+	public void verifingHomePage() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			int size = Common.findElements("xpath", "//a[@aria-label='Osprey Packs']").size();
+			Common.assertionCheckwithReport(
+					size > 0 && Common.getPageTitle().contains("Hike, Ride"),
+					"validating store logo", "System directs the user to the Homepage",
+					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user to the Homepage",
+					" user unable navigates to the home page", "Failed to navigate to the homepage");
+			Assert.fail();
+		}
+	}
 }
