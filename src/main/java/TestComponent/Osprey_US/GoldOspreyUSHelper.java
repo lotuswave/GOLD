@@ -45,8 +45,8 @@ public class GoldOspreyUSHelper {
 		data = excelData.getExcelValue();
 		this.data = data;
 		if (Utilities.TestListener.report == null) {
-			report = new ExtenantReportUtils("Hydro");
-			report.createTestcase("HydroTestCases");
+			report = new ExtenantReportUtils("Osprey_US");
+			report.createTestcase("Osprey_USTestCases");
 		} else {
 			this.report = Utilities.TestListener.report;
 		}
