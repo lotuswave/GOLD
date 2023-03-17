@@ -2085,11 +2085,10 @@ public class GoldHydroHelper {
 				System.out.println(Whishlistproduct);
 
 				if (Whishlistproduct.equals(product)) {
-					Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + product + "')]");
-					Common.mouseOver("xpath", "//img[contains(@alt,'" + product + "')]");
+					Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + product + "')]//img");
+					Common.mouseOver("xpath", "//a[contains(@title,'" + product + "')]//img");
 					Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 					Common.clickElement("xpath", "//span[text()='Add to Cart']");
-
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -10106,6 +10105,82 @@ public class GoldHydroHelper {
 
 		}
 		return email;
+	}
+
+	public void Myhydro_addtofavorites(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Thread.sleep(3000);
+			Myhydro_bottle("40 oz");
+			hydro_bottle_color("Black");
+			hydro_cap_color("White");
+			hydro_strap_color("Black");
+			hydro_boot_color("White");
+			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Myhydro_quantity(Dataset);
+			Sync.waitElementPresent("xpath", "//button[@class='favorite__btn']//img");
+			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
+			Sync.waitPageLoad(30);
+			Thread.sleep(3000);
+			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
+			String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") && myhydrofav.contains("has been added to your Wish List"),
+					"validating the Navigation to the My Favorites page and added to the whishlist",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page and product should be added in the whishlist",
+					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA and product added to the whishlist",
+					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button and no products in whishlist");
+			String Whishlistproduct = Common
+					.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
+			System.out.println(Whishlistproduct);
+
+			if (Whishlistproduct.equals(products)) {
+				Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + products + "')]//img");
+				Common.mouseOver("xpath", "//a[contains(@title,'" + products + "')]//img");
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message1);
+				Common.assertionCheckwithReport(message1.contains("success"),
+						"validating the  product add to the cart", "Product should be add to cart",
+						"Sucessfully product added to the cart ", "failed to add product to the cart");
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+			Assert.fail();
+		}
+		
 	}
 		
 	}
