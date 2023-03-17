@@ -9592,6 +9592,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		try {
+			Thread.sleep(4000);
 			String seeoption = Common.findElement("xpath", "//fieldset[@class='fieldset m-product-card__cta']//span")
 					.getText();
 			System.out.println(seeoption);
@@ -9636,7 +9637,17 @@ public class GoldHydroHelper {
 						"failed to add product to the cart");
 
 			} else {
-				Assert.fail();
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message1);
+				Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
+				
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
