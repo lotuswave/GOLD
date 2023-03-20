@@ -4894,6 +4894,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
+		Common.actionsKeyPress(Keys.PAGE_UP);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -10160,6 +10161,34 @@ public class GoldHydroHelper {
 			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
 			Sync.waitPageLoad(30);
 			Thread.sleep(3000);
+			if(Common.getPageTitle().contains("Customer Login"))
+			{
+				String favmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+				Common.assertionCheckwithReport(favmessage.contains("You must login or register"),
+						"validating the Navigation to the Customer Login page",
+						"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+						"Sucessfully User Navigates to the Customer Login page after clicking on the My Favorites CTA ",
+						"Failed to Navigate to the Customer Login page after clicking on the my favoriate Icon");
+				if (Common.getCurrentURL().contains("preprod")) {
+					Sync.waitPageLoad();
+					Common.textBoxInput("id", "email", data.get(Dataset).get("UserName"));
+				} else {
+					Common.textBoxInput("id", "email", data.get(Dataset).get("Prod UserName"));
+				}
+				Common.textBoxInput("id", "pass", data.get(Dataset).get("Password"));
+				Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
+				String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") && myhydrofav.contains("has been added to your Wish List"),
+						"validating the Navigation to the My Favorites page and added to the whishlist",
+						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page and product should be added in the whishlist",
+						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA and product added to the whishlist",
+						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button and no products in whishlist");
+			}
+			else
+			{
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") && myhydrofav.contains("has been added to your Wish List"),
@@ -10167,6 +10196,7 @@ public class GoldHydroHelper {
 					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page and product should be added in the whishlist",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA and product added to the whishlist",
 					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button and no products in whishlist");
+			}
 			String Whishlistproduct = Common
 					.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
 			System.out.println(Whishlistproduct);
@@ -10184,7 +10214,8 @@ public class GoldHydroHelper {
 				Common.assertionCheckwithReport(message1.contains("success"),
 						"validating the  product add to the cart", "Product should be add to cart",
 						"Sucessfully product added to the cart ", "failed to add product to the cart");
-			}
+				}
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
