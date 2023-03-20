@@ -21,8 +21,8 @@ public class Test_DGLD_HF_ST_117_Register_user_Checkout_Myhydro_with_Text {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Myhydro Product");   
-			Hydro.Add_Myhydro_Text("Myhydro Product");
+			Hydro.search_product("Myhydro Product");  
+			Hydro.Myhydrotext_addtofavorites("Myhydro Product");
 			Hydro.enraving_Checkout("Myhydro Product");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
