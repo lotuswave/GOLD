@@ -19,10 +19,8 @@ public class Test_DGLD_HF_ST_115_Register_User_Checkout_PP_Myhydro_Graphic_Engra
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Myhydro Product");   
-			Hydro.Myhydro_Graphic("Myhydro Product");
+			Hydro.search_product("Myhydro Product"); 
+			Hydro.Myhydro_GraphicEngraving_fromMyfav("Myhydro Product");
 			Hydro.enraving_Checkout("Graphic");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
