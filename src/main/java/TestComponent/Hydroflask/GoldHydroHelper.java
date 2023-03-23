@@ -8923,7 +8923,7 @@ public class GoldHydroHelper {
 								|| Common.getPageTitle().contains("We are Hydro Flask")
 								|| Common.getPageTitle().contains("Store Locator")
 								|| Common.getPageTitle().contains("Corporate Purchasing")
-								|| Common.getPageTitle().contains("Trade In"),
+								|| Common.getPageTitle().contains("Trade"),
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
