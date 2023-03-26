@@ -8378,7 +8378,7 @@ public void alumini_Chefs(String Dataset) {
 
 			}	
 			
-			
+			// header all tmp
 			public void header_Shop(String Dataset) {
 				// TODO Auto-generated method stub
 //				String names=data.get(Dataset).get("Home Shop");
@@ -8466,6 +8466,56 @@ public void alumini_Chefs(String Dataset) {
 
 			}
 			
+			public void headr_kitchen(String Dataset) {
+				
+//				String names=data.get(Dataset).get("Home Shop");
+//				String[] shopLinks=names.split(",");
+				int i=0;
+				try
+		    {
+					Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+					Thread.sleep(3000);
+					Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+					
+					Common.mouseOverClick("xpath", "//a[@class='ui-corner-all']//span[contains(text(),'Kitchenware')]");
+					//a[@class='ui-corner-all']//span[contains(text(),'Kitchenware')]
+					Thread.sleep(3000);
+				List<WebElement> shop = Common.findElements("xpath","//ul//li[contains(@class,'level2 nav-1-1-')]/a");
+		    
+				ArrayList<String> shopmenu = new ArrayList<String>();
+				for (WebElement shp : shop) {
+					shopmenu.add(shp.getText());
+					
+					System.out.println(shopmenu);
+		    }
+				String[] items = data.get(Dataset).get("Kitchen ware").split(",");
+
+				for (i = 0; i < items.length; i++) {
+
+					if (shopmenu.contains(items[i])) {
+						System.out.println(items[i]);
+					} else {
+
+						ExtenantReportUtils.addFailedLog("To validate the Header options in chatbox",
+								"All the Header related options are displayed ", "Missed the " + items[i] + "options",
+								Common.getscreenShotPathforReport("failed to display Header options"));
+						Assert.fail();
+					}
+				}
+		    }
+			
+				catch(Exception | Error e)
+				{
+					e.printStackTrace();
+//					ExtenantReportUtils.addFailedLog("verifying the header link "+kitchenLinks[i]+ "Under Kitchenware",
+//							"User should navigate to the "+kitchenLinks[i]+"pages",
+//							" unable to navigate to the "+kitchenLinks[i]+"pages",
+//							Common.getscreenShot("Failed to navigate to the "+kitchenLinks[i]+"pages"));
+					Assert.fail();
+				}
+				
+				
+			}
 			
 }
 
