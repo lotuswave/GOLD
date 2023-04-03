@@ -1730,19 +1730,19 @@ public class GoldHydroHelper {
 		int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
 		if (sizesframe > 0) {
 			Common.actionsKeyPress(Keys.PAGE_UP);
-
 			Thread.sleep(4000);
-			Sync.waitElementVisible("xpath", "//div[@class='sidebar-iframe-close']");
+			Sync.waitElementPresent("xpath", "//div[@class='sidebar-iframe-close']");
 			Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
+			
 		} else {
-			int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
-			if (sizeofpopup > 0) {
-
-				Sync.waitElementClickable("xpath", "//button[@aria-label='close']");
-				Common.clickElement("xpath", "//button[@aria-label='close']");
+		
+			
+			
+			Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+			Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+			Common.switchToDefault();
 			}
-
-		}
 
 	}
 
@@ -1761,7 +1761,7 @@ public class GoldHydroHelper {
 
 		try {
 			Sync.waitPageLoad();
-
+       
 			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 
@@ -9826,6 +9826,7 @@ public class GoldHydroHelper {
 			Common.refreshpage();
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod")) {
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
 				Common.textBoxInputAndVerify("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//input[@name='current_password']",
