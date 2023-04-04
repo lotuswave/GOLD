@@ -61,4 +61,26 @@ public class GoldOspreyEMEAHelper {
 
 		return r;
 	}
+
+	public void verifingHomePage() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitPageLoad();
+			int size = Common.findElements("xpath", "//a[@aria-label='Home page link']").size();
+			Common.assertionCheckwithReport(
+					size > 0 && Common.getPageTitle().contains("Home page"),
+					"validating store logo on the homwpage", "System directs the user to the Homepage and store logo should display",
+					"Sucessfully user navigates to the home page and logo has been displayed", "Failed to navigate to the homepage and logo is not displayed");	
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating store logo on the homwpage", "System directs the user to the Homepage and store logo should display",
+					"Unable to navigate to the homepage and logo is not displayed", "Failed to navigate to the homepage and logo is not displayed");
+			
+			Assert.fail();
+		}
+		
+	}
 }

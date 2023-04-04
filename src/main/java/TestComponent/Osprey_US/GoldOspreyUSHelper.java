@@ -76,6 +76,7 @@ public class GoldOspreyUSHelper {
 
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user to the Homepage",
 					" user unable navigates to the home page", "Failed to navigate to the homepage");
+
 			Assert.fail();
 		}
 	}
