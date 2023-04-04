@@ -29,7 +29,7 @@ public class Test_DGLD_OS_EU_001_verifyhomepage_Functionality {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
