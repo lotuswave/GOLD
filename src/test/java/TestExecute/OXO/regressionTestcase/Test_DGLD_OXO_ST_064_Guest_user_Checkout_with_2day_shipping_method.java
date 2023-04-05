@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.OXO.GoldOxoHelper;
+import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method {
@@ -14,7 +15,7 @@ public class Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method 
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_with_2day_shipping_method() throws Exception {
-//       for(int i=0;i<3;i++)
+//       for(int i=0;i<2;i++)
 //       {
 		try {
 			Oxo.verifingHomePage();
@@ -40,7 +41,7 @@ public class Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method 
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

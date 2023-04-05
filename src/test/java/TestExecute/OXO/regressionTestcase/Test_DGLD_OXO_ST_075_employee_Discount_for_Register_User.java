@@ -43,7 +43,7 @@ public class Test_DGLD_OXO_ST_075_employee_Discount_for_Register_User {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

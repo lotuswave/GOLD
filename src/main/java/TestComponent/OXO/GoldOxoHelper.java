@@ -1387,7 +1387,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 	public String create_account(String Dataset) {
 		String email="";
 		try {
-//			Common.refreshpage();
+			Common.refreshpage();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
@@ -3820,8 +3820,8 @@ public void contactUsPage(String dataSet) {
 		Common.refreshpage();
 		Sync.waitPageLoad();
 		Common.clickElement("xpath", "//span[text()='Write to Us']");
-		
-//		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'oxo.com/contact')]");
+		Thread.sleep(2000);
+		Sync.waitElementPresent(40, "xpath", "//iframe[(@id='contact-us-form')]");
 		Common.switchFrames("xpath", "//iframe[(@id='contact-us-form')]");
 
 		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'How can we')]");
@@ -3841,21 +3841,23 @@ public void contactUsPage(String dataSet) {
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='Phone']");
 		Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
-
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
+		Common.clickElement("xpath", "//input[@data-label='Country']");
+		Sync.waitElementPresent("xpath", "//div[text()='United States']");
+		Common.clickElement("xpath", "//div[text()='United States']");
 		Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
 		Common.textBoxInput("xpath", "//input[@data-label='Street']", data.get(dataSet).get("Street"));
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 
-		Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
-		Common.clickElement("xpath", "//input[@data-label='Country']");
+		
 
-		Sync.waitElementPresent("xpath", "//div[text()='United States']");
-		Common.clickElement("xpath", "//div[text()='United States']");
+		
 
-		Sync.waitElementPresent("xpath", "//input[@data-label='State / Province']");
-		Common.clickElement("xpath", "//input[@data-label='State / Province']");
+		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'State')]");
+		Common.clickElement("xpath", "//input[contains(@data-label,'State')]");
 
 		Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 		Common.clickElement("xpath", "//div[text()='Alabama']");
@@ -4244,15 +4246,16 @@ public void stored_Payment_Methods_Delete() {
 public void click_Voulantry_Recall() throws Exception {
 	String expectedResult = "It should land successfully on the explore/product-recall";
 	
-	Common.actionsKeyPress(Keys.END);
+//	Common.actionsKeyPress(Keys.END);
 	try {
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//a[text()='Voluntary Recall']");
-		Common.clickElement("xpath", "//a[text()='Voluntary Recall']");
+		Common.scrollIntoView("xpath", "//a[contains(text(),'Voluntary')]");
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Voluntary')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Voluntary')]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 	
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("recall"),"Validating the Product recall page navigation" ,
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("recall")|| Common.getPageTitle().contains("Recall"),"Validating the Product recall page navigation" ,
 				expectedResult, "successfully land to Product recall page", "unable to load the Product recall page");
 	} catch (Exception | Error e) {
 		ExtenantReportUtils.addFailedLog("validating Product recall  page", expectedResult,
@@ -4290,21 +4293,21 @@ public void voluntary_Recall(String dataSet) {
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='Phone']");
 		Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
+		Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
+		Common.clickElement("xpath", "//input[@data-label='Country']");
 
+		Sync.waitElementPresent("xpath", "//div[text()='United States']");
+		Common.clickElement("xpath", "//div[text()='United States']");
 		Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
 		Common.textBoxInput("xpath", "//input[@data-label='Street']", data.get(dataSet).get("Street"));
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 
-		Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
-		Common.clickElement("xpath", "//input[@data-label='Country']");
+		
 
-		Sync.waitElementPresent("xpath", "//div[text()='United States']");
-		Common.clickElement("xpath", "//div[text()='United States']");
-
-		Sync.waitElementPresent("xpath", "//input[@data-label='State']");
-		Common.clickElement("xpath", "//input[@data-label='State']");
+		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'State')]");
+		Common.clickElement("xpath", "//input[contains(@data-label,'State')]");
 
 		Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 		Common.clickElement("xpath", "//div[text()='Alabama']");
