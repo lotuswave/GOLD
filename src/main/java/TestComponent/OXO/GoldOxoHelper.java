@@ -1612,9 +1612,14 @@ try
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@data-ui-id,'error')]").getText();
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				String errorTexts = Common.findElement("xpath", "//p[contains(@id,'numberError')]").getText();
 				System.out.println(errorTexts);
-				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
+				String experror = Common.findElement("xpath", "//p[contains(@id,'expiryError')]").getText();
+				System.out.println(experror);
+				String cvcerror = Common.findElement("xpath", "//p[contains(@id,'cvcError')]").getText();
+				System.out.println(cvcerror);
+				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Your card number is incomplete."), "validating the credit card information with valid data",
 						expectedResult, "Filled the Card details", "missing field data its showing error");
 		
 				
@@ -1635,9 +1640,14 @@ try
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//span[text()='Place Order']");
 				expectedResult = "credit card fields are filled with the data";
-				String errorTexts = Common.findElement("xpath", "//div[contains(@data-ui-id,'error')]").getText();
-
-				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Please complete your payment details."), "validating the credit card information with valid data",
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				String errorTexts = Common.findElement("xpath", "//p[contains(@id,'numberError')]").getText();
+				System.out.println(errorTexts);
+				String experror = Common.findElement("xpath", "//p[contains(@id,'expiryError')]").getText();
+				System.out.println(experror);
+				String cvcerror = Common.findElement("xpath", "//p[contains(@id,'cvcError')]").getText();
+				System.out.println(cvcerror);
+				Common.assertionCheckwithReport(errorTexts.isEmpty()||errorTexts.contains("Your card number is incomplete."), "validating the credit card information with valid data",
 						expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 				
 
