@@ -146,4 +146,117 @@ public class GoldOspreyEMEAHelper {
 			Assert.fail();
 		}
 	}
+	
+	public void header_OutdoorPacks(String Dataset) {
+	
+		String names = data.get(Dataset).get("Outdoorpacks");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Outdoor Packs')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath",
+						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Outdoor Packs",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Outdoor Packs",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void header_KidsPacks(String Dataset) {
+		
+		String names = data.get(Dataset).get("KidsPacksCarriers");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Kids Packs & Carriers')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath",
+						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Kids Packs",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Kids Packs",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+	}
+public void header_DayPacks(String Dataset) {
+		
+		String names = data.get(Dataset).get("DayPacks");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Day Packs')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath",
+						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Day Packs",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Day Packs",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+	}
 }
