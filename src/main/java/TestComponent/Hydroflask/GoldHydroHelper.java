@@ -4500,18 +4500,18 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
 
-			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
-			Thread.sleep(4000);
-			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
+//			Thread.sleep(4000);
+//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 //			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
 //			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
 //			Thread.sleep(4000);
 //			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
-
-			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
+//			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
+//
+//			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
 
 			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
 			Thread.sleep(4000);
@@ -4527,21 +4527,23 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='annualRevenue']", data.get(dataSet).get("annualRevenue"));
 
-			Common.textBoxInput("xpath", "//input[contains(@id,'WhatIsTheEstimatedNumberOfUnits')]",
-					data.get(dataSet).get("NumberOfUnits"));
+//			Common.textBoxInput("xpath", "//input[contains(@id,'WhatIsTheEstimatedNumberOfUnits')]",
+//					data.get(dataSet).get("NumberOfUnits"));
 
 			Common.textBoxInput("xpath", "//input[@id='yearsInBusiness']", data.get(dataSet).get("yearsInBusiness"));
+			
+			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
+			Common.clickElement("xpath", "//div[text()='" + country + "']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='storeAddress']");
 			Common.textBoxInput("xpath", "//input[@id='storeAddress']", data.get(dataSet).get("Street"));
 
 			Common.textBoxInput("xpath", "//input[@name='suiteUnit']", data.get(dataSet).get("yearsInBusiness"));
 
-			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
-			Common.clickElement("xpath", "//div[@id='conversationCountry']");
-
-			Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
-			Common.clickElement("xpath", "//div[text()='" + country + "']");
+	
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
 			Common.clickElement("xpath", "//div[@id='conversationState']");
@@ -4549,11 +4551,12 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//div[text()='" + state + "']");
 			Common.clickElement("xpath", "//div[text()='" + state + "']");
 
-			Sync.waitElementPresent("xpath", "//input[@data-label='City']");
-			Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
+			Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
 
-			Sync.waitElementPresent("xpath", "//input[@data-label='Zip / Code']");
-			Common.textBoxInput("xpath", "//input[@data-label='Zip / Code']", data.get(dataSet).get("postcode"));
+			Sync.waitElementPresent("xpath", "//input[@id='conversationZipCodeforforms']");
+			Common.textBoxInput("xpath", "//input[@id='conversationZipCodeforforms']",
+					data.get(dataSet).get("postcode"));
 
 			Common.textBoxInput("xpath", "//textarea[@id='pleaseDescribeYourBusiness']",
 					data.get(dataSet).get("YourBusiness"));
@@ -4574,12 +4577,13 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='conversationJobTitle']", data.get(dataSet).get("Jobtitle"));
 
-			Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 			Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
 
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
 
 			Common.clickElement("xpath", "//button[text()='Submit']");
+
 			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
@@ -4599,7 +4603,7 @@ public class GoldHydroHelper {
 		Common.actionsKeyPress(Keys.PAGE_UP);
 		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
 		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+		Common.assertionCheckwithReport(Text.contains("Your submission was successful,"),
 				"verifying contact us confirmation message", expectedResult,
 				"User gets confirmation under the same tab", "unable to load the confirmation form");
 
@@ -9393,9 +9397,9 @@ public class GoldHydroHelper {
 //			Thread.sleep(4000);
 //			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
-
-			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
+//			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
+//
+//			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
 
 			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
 			Thread.sleep(4000);
@@ -9411,21 +9415,23 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='annualRevenue']", data.get(dataSet).get("annualRevenue"));
 
-			Common.textBoxInput("xpath", "//input[contains(@id,'WhatIsTheEstimatedNumberOfUnits')]",
-					data.get(dataSet).get("NumberOfUnits"));
+//			Common.textBoxInput("xpath", "//input[contains(@id,'WhatIsTheEstimatedNumberOfUnits')]",
+//					data.get(dataSet).get("NumberOfUnits"));
 
 			Common.textBoxInput("xpath", "//input[@id='yearsInBusiness']", data.get(dataSet).get("yearsInBusiness"));
+			
+			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+			Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
+			Common.clickElement("xpath", "//div[text()='" + country + "']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='storeAddress']");
 			Common.textBoxInput("xpath", "//input[@id='storeAddress']", data.get(dataSet).get("Street"));
 
 			Common.textBoxInput("xpath", "//input[@name='suiteUnit']", data.get(dataSet).get("yearsInBusiness"));
 
-			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
-			Common.clickElement("xpath", "//div[@id='conversationCountry']");
-
-			Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
-			Common.clickElement("xpath", "//div[text()='" + country + "']");
+	
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
 			Common.clickElement("xpath", "//div[@id='conversationState']");
@@ -9484,8 +9490,9 @@ public class GoldHydroHelper {
 
 		Common.actionsKeyPress(Keys.PAGE_UP);
 		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+		System.out.println(Text);
 		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+		Common.assertionCheckwithReport(Text.contains("Your submission was successful,"),
 				"verifying contact us confirmation message", expectedResult,
 				"User gets confirmation under the same tab", "unable to load the confirmation form");
 
