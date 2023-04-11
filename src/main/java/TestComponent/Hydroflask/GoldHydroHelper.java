@@ -4951,15 +4951,23 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
-			Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
-			Common.textBoxInput("xpath", "//input[@data-label='Street']",
+
+			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+			
+
+			Sync.waitElementPresent("xpath", "//div[text()='United States']");
+			Common.clickElement("xpath", "//div[text()='United States']");
+			
+			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
+			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
 					data.get(dataSet).get("Street"));
 
 			Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 			Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 
-			Sync.waitElementPresent("xpath", "//input[@data-label='State / Province']");
-			Common.clickElement("xpath", "//input[@data-label='State / Province']");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
+			Common.clickElement("xpath", "//div[@id='conversationState']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 			Common.clickElement("xpath", "//div[text()='Alabama']");
@@ -8969,11 +8977,13 @@ public class GoldHydroHelper {
 						Common.getPageTitle().contains(footerlinks[i])
 								|| Common.getPageTitle().contains("We are Hydro Flask")
 								|| Common.getPageTitle().contains("Store Locator")
-								|| Common.getPageTitle().contains("Corporate Purchasing"),
+								|| Common.getPageTitle().contains("Corporate Purchasing")
+								|| Common.getPageTitle().contains("Parks For All"),
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
-						"Unable to Navigated to the" + footerlinks[i] + "Links");
+						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+				Thread.sleep(4000);
 				Common.navigateBack();
 
 			}
@@ -9374,9 +9384,9 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
 
-			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
-			Thread.sleep(4000);
-			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
+//			Thread.sleep(4000);
+//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 //			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
 //			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
