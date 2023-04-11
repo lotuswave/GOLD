@@ -685,7 +685,7 @@ public class GoldHydroHelper {
 					System.out.println(order);
 
 				}
-
+			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
@@ -984,8 +984,8 @@ public class GoldHydroHelper {
 			String emailmessage = Common.findElement("xpath", "//div[@id='email_address-error']").getText();
 			String confirmpassword = Common.findElement("xpath", "//div[@id='password-confirmation-error']").getText();
 			Common.assertionCheckwithReport(
-					redcolor.equals("#bf1322") && greencolor.equals("#2f741f") && emailmessage.contains("@domain.com")
-							&& confirmpassword.contains("enter the same value again"),
+					redcolor.equals("#bf1322") && greencolor.equals("#2f741f") && emailmessage.contains("Please enter a valid email address")
+							&& confirmpassword.contains("Passwords must match"),
 					"validating the error messages with invalid date in accout creation form",
 					"User should able to get error message when used the invaild data",
 					"Sucessfully error message has been displayed when user use the invalid data",
@@ -3616,6 +3616,11 @@ public class GoldHydroHelper {
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationPhoneForForms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+			
+			Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
+			Common.clickElement("xpath", "//input[@data-label='Country']");
+			Sync.waitElementPresent("xpath", "//div[text()='"+ country +"']");
+			Common.clickElement("xpath", "//div[text()='"+ country +"']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
@@ -4825,13 +4830,13 @@ public class GoldHydroHelper {
 	public void validating_BundleProducts() throws Exception {
 		// TODO Auto-generated method stub
 
-//	            for(int j=1;j<5;j++)
-//	            {
-//	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-//	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-//	                Thread.sleep(4000);
-//	                
-//	            }
+	            for(int j=1;j<5;j++)
+	            {
+	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Thread.sleep(4000);
+	                
+	            }
 
 		int subproductsList = Common.findElements("xpath", "//div[@class='field option bundle-item  required']").size();
 		System.out.println(subproductsList);
