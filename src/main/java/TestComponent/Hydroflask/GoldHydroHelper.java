@@ -4353,6 +4353,7 @@ public class GoldHydroHelper {
 						"click on the shop best sellers should navigate to the  " + product + "Page",
 						"successfully page navigating to " + product + "PAGE",
 						Common.getscreenShotPathforReport(product));
+				Thread.sleep(3000);
 				Common.navigateBack();
 
 			}
@@ -4361,7 +4362,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String title = Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
-			Common.assertionCheckwithReport(title.contains("Bottles & Drinkware"),
+			Common.assertionCheckwithReport(title.contains("Shop Bottles & Drinkware"),
 					"validating the breadcrumbs navigating to the" + title,
 					"It should be navigate sucessfully to the" + title, "Sucessfully navigated to the" + title,
 					"Failed to navigate to the" + title);
