@@ -259,4 +259,152 @@ public void header_DayPacks(String Dataset) {
 		}
 
 	}
+public void header_Travel(String Dataset) {
+	
+	String names = data.get(Dataset).get("Travel");
+	String[] Links = names.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < Links.length; i++) {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
+
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+			String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					"verifying the header link " + Links[i] + "Under Travel",
+					"user should navigate to the " + Links[i] + " page",
+					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+		}
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Travel",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+	}
+
+}
+public void header_Accessories(String Dataset) {
+	
+	String names = data.get(Dataset).get("Accessories");
+	String[] Links = names.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < Links.length; i++) {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Accessories')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Accessories')]");
+
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+			String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					"verifying the header link " + Links[i] + "Under Accessories",
+					"user should navigate to the " + Links[i] + " page",
+					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+		}
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Accessories",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+	}
+
+}
+
+public void header_Featured(String Dataset) {
+	
+	String names = data.get(Dataset).get("Featured");
+	String[] Links = names.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < Links.length; i++) {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+			String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+			Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					"verifying the header link " + Links[i] + "Under Accessories",
+					"user should navigate to the " + Links[i] + " page",
+					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+		}
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Accessories",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+	}
+
+}
+
+public void header_ShopAll(String Dataset) {
+	
+	String names=data.get(Dataset).get("Shop all");
+	String[] Links=names.split(",");
+	int i=0;
+	try
+{
+		
+			for(i=0;i<Links.length;i++){
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' "+Links[i]+"')]");       
+			Common.clickElement("xpath", "//span[contains(text(),' "+Links[i]+"')]");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'" +Links[i]+ "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+			Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Featured","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
+	
+}
+}
+
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link "+Links[i]+ "",
+				"User should navigate to the "+Links[i]+"pages",
+				" unable to navigate to the "+Links[i]+"pages",
+				Common.getscreenShot("Failed to navigate to the "+Links[i]+"pages"));
+		Assert.fail();
+	}
+	
+}
+
 }

@@ -22,6 +22,10 @@ public class Test_DGLD_OS_EU_003_Header_Links {
         Osprey_Eu.header_OutdoorPacks("Outdoor Packs");
         Osprey_Eu.header_KidsPacks("Kids Packs Carriers");
         Osprey_Eu.header_DayPacks("Day Packs");
+        Osprey_Eu.header_Travel("Travel");
+        Osprey_Eu.header_Accessories("Accessories");
+        Osprey_Eu.header_Featured("Featured");
+        Osprey_Eu.header_ShopAll("ShopAll");
 			
 		} catch (Exception e) {
 
@@ -32,7 +36,7 @@ public class Test_DGLD_OS_EU_003_Header_Links {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
