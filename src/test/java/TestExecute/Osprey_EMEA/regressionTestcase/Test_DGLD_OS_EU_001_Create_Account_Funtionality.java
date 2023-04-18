@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_001_Create_Acoount_Funtionality {
+public class Test_DGLD_OS_EU_001_Create_Account_Funtionality {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"CreateAccount");
