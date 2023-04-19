@@ -130,4 +130,67 @@ public class OspreyRegressionEMEA {
 		}
 		
 	}
+
+	public void click_singinButton() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getText("xpath", "//h1[@id='block-customer-login-heading']").equals("Sign In"),
+					"To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigIn button",
+					"User Successfully clicked on the singIn button and Navigate to the signIn page",
+					"User Failed to click the signin button and not navigated to signIn page");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"Unable to click on the singIn button and not Navigated to the signIn page",
+					Common.getscreenShotPathforReport(
+							"Failed to click signIn button and not Navigated to the signIn page"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Forgot_password(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+		Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
+		String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+		System.out.println(forgotpassword);
+		Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+		Thread.sleep(4000);
+		Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+		Common.clickElement("xpath", "//span[text()='Reset My Password']");
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
+		Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
+		String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
+		Thread.sleep(4000);
+		System.out.println(message);
+		Common.assertionCheckwithReport(
+				message.contains("We received too many requests for password resets")
+						|| message.contains("If there is an account associated"),
+				"To validate the user is navigating to Forgot Password page",
+				"user should naviagte to forgot password page", "User lands on Forgot Password page",
+				"User failed to navigate to forgot password page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page",
+				"user should navigate to forgot password page", "User failed to land on Forgot Password page",
+				Common.getscreenShotPathforReport("failed  to naviagte forgot password page "));
+		Assert.fail();
+	}
+		
+	}
 }
