@@ -193,4 +193,91 @@ public class OspreyRegressionEMEA {
 	}
 		
 	}
+
+	public void Empty_Email() {
+		// TODO Auto-generated method stub
+		try {
+
+			Common.textBoxInputClear("xpath", "//input[@placeholder='Enter Email Address']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[@class='icon-arrow a-icon_icon']");
+			Sync.waitElementPresent(30, "xpath", "//div[@class='newsletter-error']");
+			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+			System.out.println(Errormessage);
+			Common.assertionCheckwithReport(Errormessage.equals("Error: This field is required."),
+					"To validate the error message for missing email fields",
+					"Should display Error Please enter a valid email address.", Errormessage,
+					"Error message dispaly unsuccessfull");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validate the Error message ",
+					"Should display Error: Please enter a valid email address.", "Failed to dispaly the Error message ",
+					Common.getscreenShotPathforReport("User unable to see an error message"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void stayIntouch() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(5000);
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//form[@class='m-newsletter-signup__form']");
+			Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", Utils.getEmailid());
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//span[@class='icon-arrow a-icon_icon']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			String Text = Common.getText("xpath", "//div[@class='a-message__container-inner']");
+			System.out.println(Text);
+			String expectedResult = "User gets confirmation message that it was submitted";
+			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription."),
+					"verifying newsletter subscription", expectedResult, Text,
+					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
+					"User faield to subscrption for newLetter  ",
+					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Invalid_email_newsletter(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//form[@class='m-newsletter-signup__form']");
+			Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//span[@class='icon-arrow a-icon_icon']");
+			Sync.waitElementPresent(30, "xpath", "//div[@class='newsletter-error']");
+			String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+			System.out.println(Errormessage);
+			Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
+					"To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", Errormessage,
+					"Failed to display the error message for invaild email");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", "Failed to display the error message",
+					Common.getscreenShotPathforReport("Failed to see an error message"));
+
+			Assert.fail();
+
+		}
+		
+	}
 }
