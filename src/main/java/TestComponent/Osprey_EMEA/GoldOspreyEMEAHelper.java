@@ -407,4 +407,221 @@ public void header_ShopAll(String Dataset) {
 	
 }
 
+public void click_SignIn() {
+	try {
+		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementPresent("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+		String SignIn = Common.getText("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+		System.out.println(SignIn);
+		Thread.sleep(1000);
+		//Temp
+		Common.assertionCheckwithReport(SignIn.contains("SIGN IN"),
+				"To validate the user Click on the Account icon Display the SignIn Button",
+				"User Should View the SignIn Button after clicking on the Account icon button",
+				"User Successfully clicked on the Account icon button and Views to the SignIn button",
+				"User Failed to click on the Account icon button and not displays signIn Button");
+		
+		Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(
+				Common.getText("xpath", "//h1[@id='block-customer-login-heading']").equals("Sign In"),
+				"To validate the user navigates to the SignIn page",
+				"User Should Navigate to the SignIn page after clicking on the SigIn button",
+				"User Successfully clicked on the singIn button and Navigate to the signIn page",
+				"User Failed to click the signin button and not navigated to signIn page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user navigates to the SignIn page",
+				"user should able to land on the SignIn page after clicking on the SignIn button",
+				"Unable to click on the SignIn button and not Navigated to the signIn page",
+				Common.getscreenShotPathforReport(
+						"Failed to click signIn button and not Navigated to the signIn page"));
+		Assert.fail();
+	}
+}
+
+public void login(String dataSet) {
+
+	try {
+		if (Common.getCurrentURL().contains("stage")) {
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+		} else {
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+		}
+		Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+		Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		System.out.println(Common.getPageTitle());
+		Common.assertionCheckwithReport(
+				Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Osprey"),
+				"To validate the user lands on Home page after successfull login",
+				"After clicking on the signIn button it should navigate to the Home page",
+				"user Sucessfully navigate to the Home page after clicking on the signIn button",
+				"Failed to signIn and not navigated to the Home page ");
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+				"After clicking on the signin button it should navigate to the Home page",
+				"Unable to navigate the user to the home after clicking on the SignIn button",
+				Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+		Assert.fail();
+	}
+}
+
+public void signout() {
+	try {
+		Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementClickable("xpath", "(//a[text()='Sign Out'])[2]");
+
+		Common.javascriptclickElement("xpath", "(//a[text()='Sign Out'])[2]");
+
+		Common.assertionCheckwithReport(
+				Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
+				"Validating My Account page navigation", "user sign in and navigate to my account page",
+				"Successfully navigate to my account page", "Failed to navigate my account page ");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+				"after clinking signout user signout fro the page", "user Successfully signout  ",
+				Common.getscreenShotPathforReport("user Failed to signout"));
+		Assert.fail();
+	}
+
+}
+
+public void login_Missingfields_Errormsg() {
+
+	try {
+		
+		Common.textBoxInputClear("name", "login[username]");
+		Common.textBoxInputClear("name", "login[password]");
+		Common.javascriptclickElement("xpath", "//button[contains(@class,'action login primary')]");
+
+		String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
+		System.out.println(errormessage);
+		Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+				"verify the error message when any required fields are missing will throw an error message",
+				"Should display the error message as This is a required field.", "Error message"+ errormessage,
+				"Failed to display error message required fields");
+
+	} catch (Exception e) {
+
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"verify the error message when any required fields are missinng will throw an error message",
+				"Should display the error message as This is a required field.",
+				"Failed to display the required fields Error message",
+				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+
+	}
+
+}
+
+public void login_Invalid_Email_Errormsg(String dataSet) {
+	String errormessage = data.get(dataSet).get("message");
+
+	try {
+		Sync.waitElementPresent("name", "login[username]");
+		Common.textBoxInput("name", "login[username]", data.get(dataSet).get("Email"));
+		Common.javascriptclickElement("xpath", "//button[contains(@class,'action login primary')]");
+		Sync.waitElementVisible(30, "id", "email-error");
+		String emailerror = Common.findElement("id", "email-error").getText();
+		System.out.println(emailerror);
+		Common.assertionCheckwithReport(emailerror.equals(errormessage),
+				"To validate the error message when given invalid email or password",
+				"Should dispaly the error message Please enter a valid email address (Ex johndoe@domain.com).",
+				"Please enter a valid email address (Ex johndoe@domain.com).error message is displayed",
+				"Failed to display error message");
+		
+		Sync.waitPageLoad();
+	} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the error message when given invalid email ",
+				"Should dispaly the error message Please enter a valid email address (Ex johndoe@domain.com).",
+				"Error message dispaly Failed ",
+				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+	}
+
+}
+
+public void login_Invalidcrdentials_Errormsg(String dataSet) {
+
+	String errormsg = data.get(dataSet).get("message");
+
+	try {
+		
+		Common.textBoxInputClear("name", "login[username]");
+		Common.textBoxInput("name", "login[username]", data.get(dataSet).get("Email"));
+		Common.textBoxInputClear("name", "login[password]");
+		Common.textBoxInput("name", "login[password]", data.get(dataSet).get("Password"));
+		Common.clickElement("xpath", "//span[contains(@class,'toggle-icon icon-sign-in__hide')]");
+		Common.javascriptclickElement("xpath", "//button[contains(@class,'action login primary')]");
+		Sync.waitPageLoad();
+		Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'message-error')]/div");
+		String error = Common.findElement("xpath", "//div[contains(@class,'message-error')]/div").getText();
+		System.out.println(error);
+		Common.assertionCheckwithReport(error.equals(errormsg),
+				"To validate the login page for invalid credentials ",
+				"Should dispaly the error message" + errormsg, error + "error message is displayed",
+				"Failed to display error message");
+
+		
+		Sync.waitPageLoad();
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the login page for invalid credentials ",
+				"Should dispaly the error message" + errormsg, "Error message dispaly Failed ",
+				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+
+	}
+
+}
+
+
+
+
+
+public void ivalid_details(String Dataset) {
+	
+	try {
+		Common.actionsKeyPress(Keys.END);
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//form[@class='m-newsletter-signup__form']");
+		Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
+		Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
+		Common.clickElement("xpath", "//span[contains(@class,'toggle-icon icon-sign-in__hide')]");
+		Sync.waitElementPresent(30, "xpath", "//div[@class='newsletter-error']");
+		String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
+		System.out.println(Errormessage);
+		Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
+				"To validate the error message for Invalid Email",
+				"Should display error Please enter a valid email address.", Errormessage,
+				"Failed to display the error message for invaild email");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
+				"Should display error Please enter a valid email address.", "Failed to display the error message",
+				Common.getscreenShotPathforReport("Failed to see an error message"));
+
+		Assert.fail();
+
+	}
+	
+}
+
+
 }
