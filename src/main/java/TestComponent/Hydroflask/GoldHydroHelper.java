@@ -1447,6 +1447,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
+			Thread.sleep(8000);
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3756,7 +3757,7 @@ public class GoldHydroHelper {
 					"verifying the post for the product review",
 					"product review should be submit after clicking on post",
 					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
-			Common.clickElement("xpath", "//div[@aria-label='Next']");
+//			Common.clickElement("xpath", "//div[@aria-label='Next']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9033,14 +9034,16 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
 			Common.clickElement("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
-			Common.clickElement("xpath", "//span[contains(text(),' Water ')]");
-			String search = Common.findElement("xpath", "//span[contains(text(),' Water ')]").getText();
-			for (int i = 0; i <= 10 - 6; i++) {
+			Common.clickElement("xpath", "//span[contains(text(),' Color')]");
+			String search = Common.findElement("xpath", "//span[contains(text(),' Color')]").getText();
+			System.out.println(search);
+			Sync.waitImplicit(30);
+			for (int i = 1; i <= 10 - 2; i++) {
 				List<WebElement> webelementslist = Common.findElements("xpath", "//span[@class='highlight-text']");
-
+				System.out.println(webelementslist);
 				String s = webelementslist.get(i).getText();
 				System.out.println(s);
-				Common.assertionCheckwithReport(s.contains("water"), "validating the filter reviews",
+				Common.assertionCheckwithReport(s.contains("color"), "validating the filter reviews",
 						"After Clicking on filters the repective reviews should be displayed",
 						"Sucessfully Respective Reviews has been displayed",
 						"Failed to display the respective reviews");
