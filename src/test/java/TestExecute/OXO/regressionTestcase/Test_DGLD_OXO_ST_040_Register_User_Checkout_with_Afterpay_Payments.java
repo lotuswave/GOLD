@@ -22,10 +22,10 @@ public class Test_DGLD_OXO_ST_040_Register_User_Checkout_with_Afterpay_Payments 
 			Oxo.Usersignin("AccountDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
-//			Oxo.babytoddler_headerlinks("Baby & Toddler");
-//			Oxo.Configurable_addtocart_pdp("ConfigProduct");
-//			Oxo.search_product("Bundle");
-//			Oxo.addtocart("Bundle");
+			Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.Configurable_addtocart_pdp("ConfigProduct");
+			Oxo.search_product("Bundle");
+			Oxo.addtocart("Bundle");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");

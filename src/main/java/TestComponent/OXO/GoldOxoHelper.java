@@ -2998,8 +2998,8 @@ try
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Thread.sleep(6000);
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//h1[@role='status']");
-			String klarna=Common.findElement("xpath", "//h1[@role='status']").getText();
+			Sync.waitElementPresent(30, "xpath", "//h2[@role='status']");
+			String klarna=Common.findElement("xpath", "//h2[@role='status']").getText();
 			if(klarna.equals("What's your email?"))
 			{
 				Common.clickElement("xpath", "//button[@id='onContinue']");
@@ -4492,6 +4492,12 @@ public void country_selector() {
 	String Country;
 	try
 	{
+		Common.refreshpage();
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
+		Common.refreshpage();
+		Sync.waitPageLoad();
+		Thread.sleep(2000);
 		Common.actionsKeyPress(Keys.END);
 		List<WebElement> country=Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
 		System.out.println(country.size());

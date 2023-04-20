@@ -19,6 +19,7 @@ public class Test_DGLD_OS_EU_001_verifyhomepage_Functionality {
 
 		try {
         Osprey_Eu.verifingHomePage();
+        Osprey_Eu.clickStoreLogo();
 			
 		} catch (Exception e) {
 

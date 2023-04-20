@@ -590,37 +590,21 @@ public void login_Invalidcrdentials_Errormsg(String dataSet) {
 
 }
 
-
-
-
-
-public void ivalid_details(String Dataset) {
-	
+public void clickStoreLogo() {
 	try {
-		Common.actionsKeyPress(Keys.END);
-		Thread.sleep(4000);
-		Sync.waitElementPresent(30, "xpath", "//form[@class='m-newsletter-signup__form']");
-		Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
-		Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
-		Common.clickElement("xpath", "//span[contains(@class,'toggle-icon icon-sign-in__hide')]");
-		Sync.waitElementPresent(30, "xpath", "//div[@class='newsletter-error']");
-		String Errormessage = Common.findElement("xpath", "//div[@class='newsletter-error']").getText();
-		System.out.println(Errormessage);
-		Common.assertionCheckwithReport(Errormessage.equals("Error: Please enter a valid email address."),
-				"To validate the error message for Invalid Email",
-				"Should display error Please enter a valid email address.", Errormessage,
-				"Failed to display the error message for invaild email");
-
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//a[@class='a-logo']");
+		Common.assertionCheckwithReport(Common.getPageTitle().contains("Home page"), "validating store logo",
+				"System directs the user back to the Homepage", "Sucessfully user back to home page",
+				"failed to get back to homepage");
 	} catch (Exception | Error e) {
 		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
-				"Should display error Please enter a valid email address.", "Failed to display the error message",
-				Common.getscreenShotPathforReport("Failed to see an error message"));
-
+		ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to the Homepage",
+				"unable to navigate to home page",
+				Common.getscreenShotPathforReport("failed to get back to homepage"));
 		Assert.fail();
-
 	}
-	
+
 }
 
 
