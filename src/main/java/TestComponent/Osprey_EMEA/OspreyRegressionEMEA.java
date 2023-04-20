@@ -280,4 +280,105 @@ public class OspreyRegressionEMEA {
 		}
 		
 	}
+
+	public void Login_Account(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			if (Common.getCurrentURL().contains("stage")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Osprey"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
+		
+	}
+
+	public void Account_page_Validation(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+		Common.clickElement("xpath", "//a[text()='My Account']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		if (Common.getCurrentURL().contains("stage")) {
+			String Accountlinks = data.get(Dataset).get("Account Links");
+			String[] Account = Accountlinks.split(",");
+			int i = 0;
+			try {
+				for (i = 0; i < Account.length; i++) {
+					Sync.waitElementPresent("xpath",
+							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
+					Common.clickElement("xpath",
+							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+					System.out.println(title);
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods") || title.contains("Newsletter Subscription") || title.contains("Pro deal information"),
+							"verifying Account page links " + Account[i],
+							"user should navigate to the " + Account[i] + " page",
+							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+
+				}
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
+						"user should Navigate to the " + Account[i] + " page",
+						"User unable to navigate to the " + Account[i],
+						Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+				Assert.fail();
+			}
+		} else {
+			String Accountlinks = data.get(Dataset).get("Prod Account Links");
+			String[] Account = Accountlinks.split(",");
+			int i = 0;
+			try {
+				for (i = 0; i < Account.length; i++) {
+					Sync.waitElementPresent("xpath",
+							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
+					Common.clickElement("xpath",
+							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+					System.out.println(title);
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods") || title.contains("Newsletter Subscription") || title.contains("Pro deal information"),
+							"verifying Account page links " + Account[i],
+							"user should navigate to the " + Account[i] + " page",
+							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+
+				}
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
+						"user should Navigate to the " + Account[i] + " page",
+						"User unable to navigate to the " + Account[i],
+						Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+				Assert.fail();
+			}
+		}
+		
+	}
 }
