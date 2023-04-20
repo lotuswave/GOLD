@@ -15,7 +15,7 @@ public class Test_DGLD_OS_EU_004_My_Account_Page_Validation {
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"My AccountPage");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_the_My_Account_Page_Validation () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
