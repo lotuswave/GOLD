@@ -21,7 +21,6 @@ public class Test_DGLD_HF_ST_115_Register_User_Checkout_PP_Myhydro_Graphic_Engra
 			Hydro.verifingHomePage();
 			Hydro.search_product("Myhydro Product"); 
 			Hydro.Myhydro_GraphicEngraving_fromMyfav("Myhydro Product");
-			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.enraving_Checkout("Graphic");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");

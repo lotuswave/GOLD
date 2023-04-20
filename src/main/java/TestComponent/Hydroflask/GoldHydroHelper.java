@@ -7980,9 +7980,9 @@ public class GoldHydroHelper {
 		String text = data.get(Dataset).get("Engraving");
 		System.out.println(text);
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			click_minicart();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@data-bind,'getEngravingText(item)')]");
 			String engraving = Common.findElement("xpath", "//span[contains(@data-bind,'getEngravingText(item)')]")
 					.getText();
@@ -10397,7 +10397,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//button[@class='favorite__btn']//img");
 			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
 			Sync.waitPageLoad(30);
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			if(Common.getPageTitle().contains("Customer Login"))
 			{
 				String favmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
