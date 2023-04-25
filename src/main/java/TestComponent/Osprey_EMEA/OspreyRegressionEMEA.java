@@ -1187,6 +1187,7 @@ public void share_invalid_details(String Dataset) {
 				"validating the error message with invalid email ",
 				"After clicking hare button with invalid email error message should be display",
 				"successfully error message has been dispalyed ", "failed to display the error message");
+		
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the error message with invalid email ",

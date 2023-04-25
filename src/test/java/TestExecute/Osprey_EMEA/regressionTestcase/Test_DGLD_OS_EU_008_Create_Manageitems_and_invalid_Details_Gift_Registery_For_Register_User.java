@@ -29,8 +29,6 @@ public class Test_DGLD_OS_EU_008_Create_Manageitems_and_invalid_Details_Gift_Reg
         Osprey_ReEu.noitems_giftregistry("Baby Registry");
         Osprey_ReEu.share_invalid_details("Baby Registry");
         
-      
-        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
