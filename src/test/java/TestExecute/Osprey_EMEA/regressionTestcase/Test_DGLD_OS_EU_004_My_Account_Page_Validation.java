@@ -22,6 +22,7 @@ public class Test_DGLD_OS_EU_004_My_Account_Page_Validation {
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.Account_page_Validation("Account validation");
+        Osprey_ReEu.signout();
         
 		} catch (Exception e) {
 

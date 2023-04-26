@@ -1644,4 +1644,27 @@ public void clickSubmitbutton_Shippingpage() {
 	}
 	
 }
+public void signout() {
+	try {
+		Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementClickable("xpath", "(//a[text()='Sign Out'])[2]");
+
+		Common.javascriptclickElement("xpath", "(//a[text()='Sign Out'])[2]");
+
+		Common.assertionCheckwithReport(
+				Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
+				"Validating My Account page navigation", "user sign in and navigate to my account page",
+				"Successfully navigate to my account page", "Failed to navigate my account page ");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+				"after clinking signout user signout fro the page", "user Successfully signout  ",
+				Common.getscreenShotPathforReport("user Failed to signout"));
+		Assert.fail();
+	}
+
+}
+
 }
