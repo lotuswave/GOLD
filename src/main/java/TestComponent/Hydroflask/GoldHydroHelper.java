@@ -3122,6 +3122,30 @@ public class GoldHydroHelper {
 					Common.getscreenShot("failed to display the error message"));
 			Assert.fail();
 		}
+		try
+		{
+			Sync.waitElementPresent(30, "xpath", "//strong[text()='Gift Registry']");
+			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+			Sync.waitImplicit(40);
+			Common.maximizeImplicitWait();
+			Thread.sleep(2000);
+			String page=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			Common.assertionCheckwithReport(page.contains("Gift Registry"),
+					"validating the gift registry page navigation ",
+					"After clicking Gift registry it should navigate to the gift registry page",
+					"successfully Navigated to the gift registry page ", "failed to Navigate to the gift rigistry page");
+			delete_giftcard();
+			
+		}
+		catch(Exception |Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the gift registry page navigation ",
+					"After clicking Gift registry it should navigate to the gift registry page",
+					"Unable to  Navigate  to the gift registry page ",
+					Common.getscreenShot("Failed to Navigate to the gift rigistry page"));
+			Assert.fail();
+		}
 
 	}
 
