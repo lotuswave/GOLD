@@ -1667,4 +1667,42 @@ public void signout() {
 
 }
 
+public void click_UGC() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Common.actionsKeyPress(Keys.END);
+		Common.scrollIntoView("xpath", "//div[contains(@class,'ugc instagram')]");
+		Sync.waitElementPresent("xpath", "//div[@class='y-image-overlay ']");
+		Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
+		Common.clickElement("xpath", "//div[@class='y-image-overlay ']");
+//		Thread.sleep(6000);
+		String yopto=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']").getAttribute("aria-label");
+//		Thread.sleep(6000);
+		System.out.println(yopto);
+		WebElement UGC=Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span");
+		Thread.sleep(6000);
+		Common.scrollIntoView(UGC);
+		Common.assertionCheckwithReport(yopto.contains("Powered by"),
+				"To validate the yopto popup in when we click on the UGC",
+				"user should able to display the yopto popup",
+				"Sucessfully yopto popup has been displayed","Failed to Displayed the yopto popup");
+		Sync.waitElementPresent(40, "xpath", "//span[@aria-label='See Next Image']");
+		Common.clickElement("xpath", "//span[@aria-label='See Next Image']");
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//span[@aria-label='Cancel']");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the yopto popup in when we click on the UGC",
+				"user should able to display the yopto popup",
+				"unable to Displayed the yopto popup",
+				Common.getscreenShotPathforReport("Failed to Displayed the yopto popup"));
+		Assert.fail();
+	}
+}
+
+
 }
