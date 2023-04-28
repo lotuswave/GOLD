@@ -5130,7 +5130,7 @@ public class GoldHydroHelper {
 			System.out.println(Search);
 			System.out.println(Search.size());
 			for (int i = 0; i < Search.size(); i++) {
-
+                 Thread.sleep(4000);
 				List<WebElement> select = Common.findElements("xpath",
 						"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
 				Sync.waitPageLoad();
@@ -5164,7 +5164,7 @@ public class GoldHydroHelper {
 
 	public void carousel() {
 		try {
-
+            Sync.waitElementPresent(40, "xpath", "//span[@class='icon-carousel__right']");
 			Common.scrollIntoView("xpath", "//span[@class='icon-carousel__right']");
 			Common.findElement("xpath", "//span[@class='icon-carousel__right']");
 			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
