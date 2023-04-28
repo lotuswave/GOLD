@@ -10544,18 +10544,6 @@ public class GoldHydroHelper {
 		
 	}
 
-	public void product() {
-		// TODO Auto-generated method stub
-		try
-		{
-			
-		}
-		catch(Exception | Error e)
-		{
-			
-		}
-	}
-		
 	}
 		
 
