@@ -19,8 +19,6 @@ public class Test_DGLD_HF_ST_087_Register_User_Checkout_with_My_Hydro_Customize_
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Myhydro Product"); 
 			Hydro.Myhydro_addtofavorites("Myhydro Product");
 			Hydro.minicart_Checkout();
@@ -38,7 +36,7 @@ public class Test_DGLD_HF_ST_087_Register_User_Checkout_with_My_Hydro_Customize_
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

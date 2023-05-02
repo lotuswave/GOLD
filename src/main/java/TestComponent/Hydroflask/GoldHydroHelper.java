@@ -1444,7 +1444,20 @@ public class GoldHydroHelper {
      					"Sucessfully search bar should be expand"); 
      			WebElement serachbar=Common.findElement("xpath", "//input[@id='search']");
                 serachbar.sendKeys(product);
-                
+                Common.actionsKeyPress(Keys.ENTER);
+    			Sync.waitPageLoad();
+    			Thread.sleep(4000);
+                String message=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+                if(message.contains("Sorry, your search for"))
+                {
+                	Common.textBoxInput("xpath", "//input[@id='srp-search-general']", product);
+                	
+                }
+                else
+                {
+                	Assert.fail();
+                }
+              
              }
              else
              {
@@ -1455,7 +1468,7 @@ public class GoldHydroHelper {
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand"); 
 			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
-             }
+             
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -1465,7 +1478,7 @@ public class GoldHydroHelper {
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
 			Thread.sleep(8000);
-            
+             }  
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the search functionality",
