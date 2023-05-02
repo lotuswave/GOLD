@@ -36,7 +36,7 @@ public class Test_DGLD_HF_ST_087_Register_User_Checkout_with_My_Hydro_Customize_
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
