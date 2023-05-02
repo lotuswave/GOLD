@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -1435,7 +1436,15 @@ public class GoldHydroHelper {
 			 String user=Common.findElement("xpath", "(//button[@aria-controls='desktop-account-nav']//span)[2]").getText();
              if(user.contains("Log In"))
              {
-            	 Accessories_headerlinks("Bottles & Drinkware");
+            	 Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+     			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+     			Thread.sleep(4000);
+     			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+     					"User should able to click on the search button", "Search expands to the full page",
+     					"Sucessfully search bar should be expand"); 
+     			WebElement serachbar=Common.findElement("xpath", "//input[@id='search']");
+                serachbar.sendKeys(product);
+                
              }
              else
              {
@@ -1446,6 +1455,7 @@ public class GoldHydroHelper {
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand"); 
 			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
+             }
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -1455,7 +1465,7 @@ public class GoldHydroHelper {
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
 			Thread.sleep(8000);
-             }
+            
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the search functionality",
@@ -10551,46 +10561,6 @@ public class GoldHydroHelper {
 		
 	}
 	
-	public void Accessories_headerlinks(String category) {
-		// TODO Auto-generated method stub
-		String expectedResult = "User should click the" + category;
-		try {
-
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Thread.sleep(3000);
-//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
-
-			Thread.sleep(3000);
-
-			try {
-				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
-			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
-			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()=' Accessories']");
-			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			expectedResult = "User should select the " + category + "category";
-			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
-			Common.assertionCheckwithReport(sizebotteles > 0,
-					"validating the product category as" + category + "from navigation menu ", expectedResult,
-					"Selected the " + category + " category", "User unabel to click" + category + "");
-
-		}
-
-		catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
-					expectedResult, "Unable to Selected the " + category + " category",
-					Common.getscreenShot("Failed to click on the" + category + ""));
-
-			Assert.fail();
-		}
-
-	}
 
 	}
 		
