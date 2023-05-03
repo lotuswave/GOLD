@@ -6871,7 +6871,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -6932,8 +6932,8 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Yours!']");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Now']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -8105,7 +8105,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -8228,7 +8228,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -8373,7 +8373,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -10228,7 +10228,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -10241,7 +10241,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//button[@class='favorite__btn']//img");
 			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
 			Sync.waitPageLoad(30);
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			if(Common.getPageTitle().contains("Customer Login"))
 			{
 				String favmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -10334,8 +10334,8 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Yours!']");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Now']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -10439,7 +10439,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Yours!']");
+			Common.clickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
