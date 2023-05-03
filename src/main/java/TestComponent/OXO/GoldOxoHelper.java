@@ -8532,8 +8532,63 @@ public void alumini_Chefs(String Dataset) {
 //							Common.getscreenShot("Failed to navigate to the "+kitchenLinks[i]+"pages"));
 					Assert.fail();
 				}
-				
-				
+			}
+				public void Gift_Message(String Dataset) {
+					// TODO Auto-generated method stub
+					String message=data.get(Dataset).get("message");
+					try
+					{
+						Common.scrollIntoView("xpath", "//span[text()='Add Gift Message']");
+						Sync.waitElementPresent(40, "xpath", "//span[text()='Add Gift Message']");
+						Thread.sleep(4000);	
+						Common.javascriptclickElement("xpath", "//span[text()='Add Gift Message']");
+						int gift=Common.findElements("xpath", "//button[contains(@class,'action action')]").size();
+						System.out.println(gift);
+						if(gift>1)
+						{
+						Thread.sleep(4000);
+						Common.clickElement("xpath", "//span[text()='Delete']");
+						Sync.waitPageLoad(40);
+						Sync.waitElementPresent(40, "xpath", "//span[text()='Add Gift Message']");
+						Common.clickElement("xpath", "//span[text()='Add Gift Message']");
+						Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
+						Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
+						Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
+						Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
+						Common.clickElement("xpath", "//button[@title='Add']");
+						Sync.waitPageLoad(40);
+						Thread.sleep(2000);
+						Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
+						String Messgae=Common.findElement("xpath", "//div[@class='gift-message-summary']").getText().replace("Message: ", "");
+						System.out.println(Messgae);
+						Common.assertionCheckwithReport(Messgae.equals(message),
+								"validating the Gift cart message", "Gift card message should be applied",
+								"Sucessfully gift message has been applied ", "failed to apply the gift message");
+						
+						}
+						else
+						{
+						Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
+						Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
+						Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
+						Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
+						Common.clickElement("xpath", "//button[@title='Add']");
+						Sync.waitPageLoad(40);
+						Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
+						String Messgae=Common.findElement("xpath", "//div[@class='gift-message-summary']").getText().replace("Message: ", "");
+						System.out.println(Messgae);
+						Common.assertionCheckwithReport(Messgae.equals(message),
+								"validating the Gift cart message", "Gift card message should be applied",
+								"Sucessfully gift message has been applied ", "failed to apply the gift message");
+						}
+					}
+					catch(Exception | Error e)
+					{
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
+								"Unabled to apply the gift message", Common.getscreenShot("failed to apply the gift message"));
+						Assert.fail();
+					}
 			}
 			
 }
