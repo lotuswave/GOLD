@@ -356,8 +356,18 @@
     </test>
 
 
+<test name="Test_DGLD_HF_ST_122_Guest_User_Checkout_with_Gift_Message" testid="DTG-3265" priority="P1" description="This script will cover validating Guest User Checkout with Gift message">
+        <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_122_Guest_User_Checkout_with_Gift_Message" />
+        </classes>
+    </test>
 
 
+<test name="Test_DGLD_HF_ST_123_Register_User_Checkout_with_Gift_Message" testid="DTG-3266" priority="P1" description="This script will cover validating Register User Checkout with Gift message">
+        <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_123_Register_User_Checkout_with_Gift_Message" />
+        </classes>
+    </test>
 
 
         
