@@ -2060,4 +2060,133 @@ public void selectproduct(String Productname) {
 	
 }
 
+public void Shipping_Forgot_Password(String dataSet) {
+	// TODO Auto-generated method stub
+	try {
+		Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
+		Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
+		Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
+		String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
+		System.out.println(shipping);
+		Common.clickElement("xpath", "//span[text()='Item in Cart']");
+		String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
+		System.out.println(QTY);
+		String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
+		System.out.println(Price);
+		Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
+		String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
+		System.out.println(Color);
+		String Size=Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[4]").getText();
+		System.out.println(Size);
+		Common.assertionCheckwithReport(shipping.equals("Shipping"),
+				"To validate the user is navigating to Shipping page", "user should naviagte to Shipping page",
+				"User lands on Shippingd page", "User failed to navigate to Shipping page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user is navigating to Shipping page",
+				"user should navigate to Shipping page", "User failed to land on Shipping page",
+				Common.getscreenShotPathforReport("failed  to naviagte Shipping page "));
+		Assert.fail();
+
+	}
+
+}
+
+public void Configurable_addtocart_pdp(String Dataset) {
+	// TODO Auto-generated method stub
+	String product = data.get(Dataset).get("Colorproduct");
+	String productcolor = data.get(Dataset).get("Color");
+	String Productsize=data.get(Dataset).get("Size");
+	try {
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) {
+			Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[contains(@class,'m-product-card__image product')]");
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+
+		}
+		Common.clickElement("xpath", "//img[@alt='" + product + "']");
+		Thread.sleep(4000);
+		System.out.println(product);
+		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		Common.assertionCheckwithReport(name.contains(product),
+				"validating the product should navigate to the PDP page",
+				"When we click on the product is should navigate to the PDP page",
+				"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+
+		Sync.waitPageLoad();
+		Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+		Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+		Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
+		Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
+		
+		product_quantity(Dataset);
+//		click_UGC();
+		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+		Common.clickElement("xpath", "//span[text()='Add to Cart']");
+
+		Thread.sleep(4000);
+		String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+				.getAttribute("data-ui-id");
+		Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+				"Product should be add to cart", "Sucessfully product added to the cart ",
+				"failed to add product to the cart");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
+		Assert.fail();
+	}
+
+	
+}
+
+public void Bagpacks_headerlinks(String category) {
+	// TODO Auto-generated method stub
+	String expectedResult = "User should click the" + category;
+	try {
+
+		Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Backpacks & Bags']");
+		Thread.sleep(3000);
+		Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Backpacks & Bags']");
+
+		Thread.sleep(3000);
+
+		try {
+			Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+		} catch (Exception e) {
+			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Backpacks & Bags']");
+		}
+		Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//span[text()=' Backpacking Packs']");
+		Sync.waitPageLoad();
+		Thread.sleep(6000);
+		expectedResult = "User should select the " + category + "category";
+		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+		Common.assertionCheckwithReport(sizebotteles > 0,
+				"validating the product category as" + category + "from navigation menu ", expectedResult,
+				"Selected the " + category + " category", "User unabel to click" + category + "");
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+				expectedResult, "Unable to Selected the " + category + " category",
+				Common.getscreenShot("Failed to click on the" + category + ""));
+
+		Assert.fail();
+	}
+
+}
+
 }
