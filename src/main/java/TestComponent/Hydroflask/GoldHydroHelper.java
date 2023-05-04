@@ -7440,10 +7440,10 @@ public class GoldHydroHelper {
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			Common.scrollIntoView("xpath", "//button[contains(@class,'video')]");
-			Common.clickElement("xpath", "//span[text()='Play video']");
-			Sync.waitElementPresent("xpath", "//button[@title='Play Video']");
-			Common.clickElement("xpath", "//button[@title='Play Video']");
+//			Common.scrollIntoView("xpath", "//button[contains(@class,'video')]");
+			Common.clickElement("xpath", "//div[contains(@class,'fotorama__nav__frame fotorama__nav__frame--thumb v')]");
+			Sync.waitElementPresent(40, "xpath", "//button[@title='Play']");
+			Common.clickElement("xpath", "//button[@title='Play']");
 			Sync.waitForLoad();
 			String video = Common.findElement("xpath", "//button[contains(@class,'vjs-play-con')]")
 					.getAttribute("title");
@@ -7451,6 +7451,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(video.equals("Pause"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7747,8 +7748,7 @@ public class GoldHydroHelper {
 						.findElement("xpath", "(//div[@class='m-product-gallery__wrapper gallery-grid']//img)[1]")
 						.getAttribute("alt").replace(product, "").replace(" - ", "");
 				System.out.println(color);
-				String s = Common.findElement("xpath", "//img[contains(@class,'m-product-gallery__media')]")
-						.getAttribute("src");
+				String s = Common.findElement("xpath", "//img[contains(@class,'m-product-gallery__media')]").getAttribute("src");
 				System.out.println(s);
 
 				Common.assertionCheckwithReport(colorname.equals(color), "validating the  product add to the cart",
