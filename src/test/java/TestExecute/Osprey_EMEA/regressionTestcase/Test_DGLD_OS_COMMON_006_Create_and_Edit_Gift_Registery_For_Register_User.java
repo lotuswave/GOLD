@@ -9,25 +9,22 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_008_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User {
+public class Test_DGLD_OS_COMMON_006_Create_and_Edit_Gift_Registery_For_Register_User {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"GiftRegistry");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Create_share_and_Delete_Gift_Registery_For_Register_User () throws Exception {
+	public void Verifying_Create_and_Edit_Gift_Registery_For_Register_User () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Giftaccount");
         Osprey_ReEu.giftCreation("Birthday");
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_viewcart();
-        Osprey_ReEu.additems_giftregistry("Product Qunatity");
-        Osprey_ReEu.noitems_giftregistry("Baby Registry");
-        Osprey_ReEu.share_invalid_details("Baby Registry");
+        Osprey_ReEu.edit_gift("Giftaccount");
+        Osprey_ReEu.delete_giftcard();
+      
         
 		} catch (Exception e) {
 

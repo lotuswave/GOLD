@@ -9,17 +9,18 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_001_Create_Account_Funtionality {
+public class Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_the_Forgot_Password_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Create_Account("Create Account");
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Forgot_password("AccountDetails");
         
 		} catch (Exception e) {
 

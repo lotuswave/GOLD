@@ -3667,7 +3667,7 @@ public void stayIntouch() throws Exception {
 		System.out.println(Text);
 		String expectedResult = "User gets confirmation message that it was submitted";
 
-		Common.assertionCheckwithReport(Text.contains("Thank you For your subscription"),"verifying newsletter subscription",
+		Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),"verifying newsletter subscription",
 				"User get confirmation message if new email if it used mail it showing error message ", Text,
 				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 

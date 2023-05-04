@@ -9,26 +9,22 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_010_Find_a_Dealer {
+public class Test_DGLD_OS_COMMON_007_Create_share_and_Delete_Gift_Registery_For_Register_User {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MyFavorites");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"GiftRegistry");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Store_Locator_Funtionality () throws Exception {
+	public void Verifying_Create_share_and_Delete_Gift_Registery_For_Register_User () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Find_a_delear();
-        Osprey_ReEu.click_Retailer();
-        Osprey_ReEu.verifingRetailerHours();
-        Osprey_ReEu.verifingRetailerBrowser();
-        Osprey_ReEu.Validate_store_sidebar();
-        Osprey_ReEu.CLick_Usemylocation();
-        Osprey_ReEu.Validate_AvailableRetailers();
-        Osprey_ReEu.Validate_retailerlocations();  //need to add locations
-        Osprey_ReEu.Click_Instock();
-        Osprey_ReEu.selectproduct("Daylite Plus");
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Giftaccount");
+        Osprey_ReEu.giftCreation("Birthday");
+        Osprey_ReEu.share_giftcard("Giftaccount");
+        Osprey_ReEu.delete_giftcard();
+      
         
 		} catch (Exception e) {
 

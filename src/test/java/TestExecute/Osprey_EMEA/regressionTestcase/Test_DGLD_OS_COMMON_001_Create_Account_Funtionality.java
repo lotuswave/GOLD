@@ -9,24 +9,17 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_005_HeaderLinks {
+public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Header");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Header_Links_Functionality () throws Exception {
+	public void Verifying_the_Create_account_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.header_OutdoorPacks("Outdoor Packs");
-        Osprey_ReEu.header_KidsPacks("Kids Packs Carriers");
-        Osprey_ReEu.header_DayPacks("Day Packs");
-        Osprey_ReEu.header_Travel("Travel");
-        Osprey_ReEu.header_Accessories("Accessories");
-        Osprey_ReEu.header_Featured("Featured");
-        Osprey_ReEu.header_ShopAll("ShopAll");
-        
+        Osprey_ReEu.Create_Account("Create Account");
         
 		} catch (Exception e) {
 

@@ -9,21 +9,24 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_004_My_Account_Page_Validation {
+public class Test_DGLD_OS_COMMON_009_Add_To_Cart_and_Checkout_from_My_Favorites {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"My AccountPage");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MyFavorites");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_My_Account_Page_Validation () throws Exception {
+	public void Verifying_Add_To_Cart_and_Checkout_from_My_Favorites () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_UGC();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.Account_page_Validation("Account validation");
-        Osprey_ReEu.signout();
+        Osprey_ReEu.My_Favorites();
+        Osprey_ReEu.Addtocart_From_MyFavorites("Product");
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
+        Osprey_ReEu.selectshippingaddress("GroundShipping method");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+
         
 		} catch (Exception e) {
 

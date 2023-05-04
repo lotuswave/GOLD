@@ -9,22 +9,19 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_007_Create_share_and_Delete_Gift_Registery_For_Register_User {
+public class Test_DGLD_OS_COMMON_003_Footer_Newsletter_Subcription {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"GiftRegistry");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Newsletter");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Create_share_and_Delete_Gift_Registery_For_Register_User () throws Exception {
+	public void Verifying_the_Create_account_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Giftaccount");
-        Osprey_ReEu.giftCreation("Birthday");
-        Osprey_ReEu.share_giftcard("Giftaccount");
-        Osprey_ReEu.delete_giftcard();
-      
+        Osprey_ReEu.Invalid_email_newsletter("Invalid details");
+        Osprey_ReEu.Empty_Email();
+        Osprey_ReEu.stayIntouch();
         
 		} catch (Exception e) {
 

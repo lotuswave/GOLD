@@ -9,22 +9,21 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_EU_019_Forgot_password_from_Shipping_page {
+public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MyFavorites");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"My AccountPage");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Forgot_password_from_Shipping_page () throws Exception {
+	public void Verifying_the_My_Account_Page_Validation () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Bagpacks_headerlinks(" Outdoor Packs"); 
-        Osprey_ReEu.Configurable_addtocart_pdp("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.Shipping_Forgot_Password("Account");
-        Osprey_ReEu.Forgot_password("Account");
-
+        Osprey_ReEu.click_UGC();
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.Account_page_Validation("Account validation");
+        Osprey_ReEu.signout();
         
 		} catch (Exception e) {
 
