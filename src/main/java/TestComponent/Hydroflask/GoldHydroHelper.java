@@ -94,10 +94,10 @@ public class GoldHydroHelper {
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.javascriptclickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Common.clickElement("xpath", "//a[text()='Shop All']");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.javascriptclickElement("xpath", "//a[text()='Shop All']");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -125,18 +125,18 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.javascriptclickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.javascriptclickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()=' Water Bottles']");
+			Common.javascriptclickElement("xpath", "//span[text()=' Water Bottles']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
@@ -178,7 +178,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -188,7 +188,7 @@ public class GoldHydroHelper {
 			product_quantity(Dataset);
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -211,7 +211,7 @@ public class GoldHydroHelper {
 			Thread.sleep(8000);
 			Common.actionsKeyPress(Keys.UP);
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			Common.javascriptclickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
@@ -235,7 +235,7 @@ public class GoldHydroHelper {
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(minicart);
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
-			Common.clickElement("xpath", "//button[@title='Checkout']");
+			Common.javascriptclickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -281,7 +281,7 @@ public class GoldHydroHelper {
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 //			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 //					data.get(dataSet).get("Street"));
 //			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
@@ -352,7 +352,7 @@ public class GoldHydroHelper {
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']", address);
 //		Common.actionsKeyPress(Keys.BACK_SPACE);
 //		Common.actionsKeyPress(Keys.BACK_SPACE);
@@ -424,7 +424,7 @@ public class GoldHydroHelper {
 	public void clickSubmitbutton_Shippingpage() {
 		String expectedResult = "click the submit button to navigate to payment page";
 		try {
-			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+			Common.javascriptclickElement("xpath", "//button[@data-role='opc-continue']");
 		}
 
 		catch (Exception | Error e) {
@@ -443,7 +443,7 @@ public class GoldHydroHelper {
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
-				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
+				Common.javascriptclickElement("xpath", "//input[@value='tablerate_bestway']");
 			} else {
 
 				Assert.fail();
@@ -477,23 +477,23 @@ public class GoldHydroHelper {
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Common.javascriptclickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.javascriptclickElement("xpath", "//span[text()='New payment method']");
 
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+				Common.javascriptclickElement("xpath", "//button[@value='afterpay_clearpay']");
+//				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
 //				Common.dropdown("xpath", "//select[@name='country']", Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
@@ -506,8 +506,8 @@ public class GoldHydroHelper {
 //						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
 //						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 
 			} else {
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
@@ -515,10 +515,10 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+				Common.javascriptclickElement("xpath", "//button[@value='afterpay_clearpay']");
+//				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
 //				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
@@ -530,8 +530,8 @@ public class GoldHydroHelper {
 //						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
 //						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			}
 		}
 
@@ -586,7 +586,7 @@ public class GoldHydroHelper {
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method + "')]");
-				Common.clickElement("xpath", "//td[contains(text(),'" + method + "')]");
+				Common.javascriptclickElement("xpath", "//td[contains(text(),'" + method + "')]");
 			} else {
 
 				Assert.fail();
@@ -651,7 +651,7 @@ public class GoldHydroHelper {
 		if (placeordercount > 1) {
 			Thread.sleep(4000);
 
-			Common.clickElement("xpath", "//span[text()='Place Order']");
+			Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 			Common.refreshpage();
 		}
 
@@ -718,20 +718,20 @@ public class GoldHydroHelper {
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Common.javascriptclickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.javascriptclickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.javascriptclickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
@@ -744,7 +744,7 @@ public class GoldHydroHelper {
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
-					Common.clickElement("xpath", "//span[text()='Place Order']");
+					Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -764,7 +764,7 @@ public class GoldHydroHelper {
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.javascriptclickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -775,7 +775,7 @@ public class GoldHydroHelper {
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
-					Common.clickElement("xpath", "//span[text()='Place Order']");
+					Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -830,13 +830,13 @@ public class GoldHydroHelper {
 			System.out.println(payment);
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Common.javascriptclickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.javascriptclickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.javascriptclickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -846,14 +846,14 @@ public class GoldHydroHelper {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 
 			} else {
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.javascriptclickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -863,7 +863,7 @@ public class GoldHydroHelper {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 
 			}
 
@@ -909,8 +909,8 @@ public class GoldHydroHelper {
 	public void click_singinButton() {
 		try {
 			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -941,7 +941,7 @@ public class GoldHydroHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -966,18 +966,18 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.javascriptclickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.javascriptclickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//input[@name='email']");
+			Common.javascriptclickElement("xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@name='password']");
+			Common.javascriptclickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.javascriptclickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Common.javascriptclickElement("xpath", "//button[@title='Sign Up']");
 			String message = Common.findElement("id", "validation-classes").getCssValue("color");
 			String redcolor = Color.fromString(message).asHex();
 			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
@@ -1008,8 +1008,8 @@ public class GoldHydroHelper {
 
 		try {
 			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
@@ -1034,24 +1034,24 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
-			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.javascriptclickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.javascriptclickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//input[@name='email']");
+			Common.javascriptclickElement("xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			System.out.println(email);
-			Common.clickElement("xpath", "//input[@name='password']");
+			Common.javascriptclickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.javascriptclickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
-			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.javascriptclickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
@@ -1097,7 +1097,7 @@ public class GoldHydroHelper {
 				}
 
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -1108,11 +1108,11 @@ public class GoldHydroHelper {
 
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.javascriptclickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			product_quantity(Dataset);
 //			click_UGC();
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -1139,10 +1139,10 @@ public class GoldHydroHelper {
 					.replace("$", "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
+			Common.javascriptclickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
 			Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.javascriptclickElement("xpath", "//span[text()='Update']");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -1187,10 +1187,10 @@ public class GoldHydroHelper {
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
 						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
 				Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
 			} else {
 				Assert.fail();
 			}
@@ -1226,14 +1226,14 @@ public class GoldHydroHelper {
 		try {
 //			String shop=Common.findElement("xpath", "//span[text()='Shop Accessories']//parent::a").getAttribute("href");
 //			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
-			Common.clickElement("xpath", "//input[@name='password']");
+			Common.javascriptclickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+			Common.javascriptclickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.javascriptclickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
+			Common.javascriptclickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
 			String accounttext = Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
 			String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
 					.getAttribute("type");
@@ -1250,15 +1250,15 @@ public class GoldHydroHelper {
 					"Sucessfully all details has been displayed in the order confirmation",
 					"Failed to display all details in the order confirmation page");
 			Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[1]");
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+			Common.javascriptclickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
 			Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[2]");
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
+			Common.javascriptclickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
 			String confirmpassword1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
 					.getAttribute("type");
 			String password1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
 					.getAttribute("type");
 			Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
-			Common.clickElement("xpath", "//label[@for='is_subscribed']");
+			Common.javascriptclickElement("xpath", "//label[@for='is_subscribed']");
 			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
 			Common.assertionCheckwithReport(confirmpassword1.equals("password") && password1.equals("password"),
 					"validating the password field changed to dots",
@@ -1267,7 +1267,7 @@ public class GoldHydroHelper {
 					"Failed change passwords into dots after clicking on eye icon");
 
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
-			Common.clickElement("xpath", "//span[text()='Create an Account']");
+			Common.javascriptclickElement("xpath", "//span[text()='Create an Account']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath",
@@ -1299,7 +1299,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__counter']");
 			items = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
 			System.out.println(items);
-			Common.clickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
+			Common.javascriptclickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String miniitems = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong")
 					.getText();
@@ -1310,7 +1310,7 @@ public class GoldHydroHelper {
 					"Sucessfully products count has displayed in the mini cart",
 					"failed to display products count in the mini cart");
 			Sync.waitElementPresent("xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			Common.javascriptclickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1360,7 +1360,7 @@ public class GoldHydroHelper {
 		try {
 
 			Sync.waitElementClickable("id", "block-discount-heading");
-			Common.clickElement("id", "block-discount-heading");
+			Common.javascriptclickElement("id", "block-discount-heading");
 			if (Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -1375,7 +1375,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Common.javascriptclickElement("xpath", "//button[@value='Apply Discount']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
@@ -1432,46 +1432,19 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
-		try {
-			 String user=Common.findElement("xpath", "(//button[@aria-controls='desktop-account-nav']//span)[2]").getText();
-             if(user.contains("Log In"))
-             {
-            	 Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-     			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-     			Thread.sleep(4000);
-     			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-     					"User should able to click on the search button", "Search expands to the full page",
-     					"Sucessfully search bar should be expand"); 
-     			WebElement serachbar=Common.findElement("xpath", "//input[@id='search']");
-                serachbar.sendKeys(product);
-                Common.actionsKeyPress(Keys.ENTER);
-    			Sync.waitPageLoad();
-    			Thread.sleep(4000);
-                String message=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
-                if(message.contains("Sorry, your search for"))
-                {
-                	Common.textBoxInput("xpath", "//input[@id='srp-search-general']", product);
-                	
-                }
-                else
-                {
-                	Assert.fail();
-                }
-              
-             }
-             else
-             {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-					"User should able to click on the search button", "Search expands to the full page",
-					"Sucessfully search bar should be expand"); 
-			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
-             
-			Common.actionsKeyPress(Keys.ENTER);
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+		try
+		{
+        Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+     	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+     	Thread.sleep(4000);
+     	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+     	"User should able to click on the search button", "Search expands to the full page",
+     	"Sucessfully search bar should be expand"); 
+     	WebElement serachbar=Common.findElement("xpath", "//input[@id='search']");
+        serachbar.sendKeys(product);
+        Common.actionsKeyPress(Keys.ENTER);
+    	Sync.waitPageLoad();
+    	Thread.sleep(4000);
 			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 			System.out.println(productsearch);
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
@@ -1479,7 +1452,7 @@ public class GoldHydroHelper {
 					"Failed to see the product name");
 			Thread.sleep(8000);
              }  
-		} catch (Exception | Error e) {
+		 catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the search functionality",
 					"enter product name will display in the search box",
@@ -1552,11 +1525,11 @@ public class GoldHydroHelper {
 			if (size > 0) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
-				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
+				Common.javascriptclickElement("xpath", "//input[@value='tablerate_bestway']");
 			}
 
 			expectedResult = "shipping address is filled in to the fields";
-			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+			Common.javascriptclickElement("xpath", "//button[@data-role='opc-continue']");
 
 			int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
 
@@ -1601,30 +1574,30 @@ public class GoldHydroHelper {
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Common.javascriptclickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.javascriptclickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//button[@value='klarna']");
+				Common.javascriptclickElement("xpath", "//button[@value='klarna']");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 				klarna_Saved_Details(dataSet);
 
 			} else {
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Common.clickElement("xpath", "//button[@value='klarna']");
+				Common.javascriptclickElement("xpath", "//button[@value='klarna']");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 				klarna_Saved_Details(dataSet);
 			}
 
@@ -1653,30 +1626,30 @@ public class GoldHydroHelper {
 			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 			Sync.waitElementPresent("xpath", "//input[@name='phone']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()='Phone number']");
+			Common.javascriptclickElement("xpath", "//span[text()='Phone number']");
 			WebElement clear = Common.findElement("xpath", "//input[@name='phone']");
 			clear.sendKeys(Keys.CONTROL + "a");
 			clear.sendKeys(Keys.DELETE);
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='phone']").sendKeys(number);
-			Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+			Common.javascriptclickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Thread.sleep(6000);
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
+			Common.javascriptclickElement("xpath", "//button[@data-testid='pick-plan']");
 			int paymenttype = Common.findElements("xpath", "//p[@id='funding-source-card-issuer']").size();
 			if (paymenttype > 0) {
-				Common.clickElement("xpath", "//p[@id='funding-source-card-number']");
+				Common.javascriptclickElement("xpath", "//p[@id='funding-source-card-number']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[text()='Add new']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add new']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
 				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
+				Common.javascriptclickElement("xpath", "//input[@id='cardNumber']//parent::div");
 				Common.findElement("xpath", "//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
 				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
 				Common.findElement("xpath", "//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
@@ -1685,26 +1658,26 @@ public class GoldHydroHelper {
 				Common.switchToDefault();
 				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Continue')]");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+				Common.javascriptclickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
 			} else {
-				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
+				Common.javascriptclickElement("xpath", "//button[@data-testid='pick-plan']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
 				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
-				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
+				Common.javascriptclickElement("xpath", "//input[@id='cardNumber']//parent::div");
 				Common.findElement("xpath", "//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
 				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
 				Common.findElement("xpath", "//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
 				Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
 				Common.findElement("xpath", "//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+				Common.javascriptclickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
 
 			}
 
@@ -1763,7 +1736,7 @@ public class GoldHydroHelper {
 			Common.actionsKeyPress(Keys.PAGE_UP);
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@class='sidebar-iframe-close']");
-			Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
+			Common.javascriptclickElement("xpath", "//div[@class='sidebar-iframe-close']");
 			
 		} else {
 		
@@ -1771,7 +1744,7 @@ public class GoldHydroHelper {
 			
 			Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
 			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
-			Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+			Common.javascriptclickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
 			Common.switchToDefault();
 			}
 
@@ -1779,7 +1752,7 @@ public class GoldHydroHelper {
 
 	public void acceptPrivacy() {
 
-		Common.clickElementStale("id", "truste-consent-button");
+		Common.javascriptclickElement("id", "truste-consent-button");
 	}
 
 	public void updtePayementcrditcard_WithInvalidData(String dataSet) throws Exception {
@@ -1798,20 +1771,20 @@ public class GoldHydroHelper {
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Common.javascriptclickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.javascriptclickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.javascriptclickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -1823,7 +1796,7 @@ public class GoldHydroHelper {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
 					Thread.sleep(1000);
-					Common.clickElement("xpath", "//span[text()='Place Order']");
+					Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 					expectedResult = "credit card fields are filled with the data";
 					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 					Common.assertionCheckwithReport(
@@ -1849,7 +1822,7 @@ public class GoldHydroHelper {
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.javascriptclickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -1861,7 +1834,7 @@ public class GoldHydroHelper {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
 					Thread.sleep(1000);
-					Common.clickElement("xpath", "//span[text()='Place Order']");
+					Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 					expectedResult = "credit card fields are filled with the data";
 					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 					Common.assertionCheckwithReport(
@@ -1900,9 +1873,9 @@ public class GoldHydroHelper {
 	public void ChangeAddress_AddressBook(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
@@ -1918,7 +1891,7 @@ public class GoldHydroHelper {
 			Assert.fail();
 		}
 		Sync.waitPageLoad();
-		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Common.javascriptclickElement("xpath", "//a[text()='Address Book']");
 		Sync.waitPageLoad();
 		Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
 				"validating the Navigation to the Address Book page",
@@ -1944,7 +1917,7 @@ public class GoldHydroHelper {
 
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
-				Common.clickElement("xpath", "//button[@title='Save Address']");
+				Common.javascriptclickElement("xpath", "//button[@title='Save Address']");
 				Thread.sleep(3000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 
@@ -1967,7 +1940,7 @@ public class GoldHydroHelper {
 		}
 
 		else {
-			Common.clickElementStale("xpath", "//span[contains(text(),'Change Billing Address')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'Change Billing Address')]");
 
 			try {
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
@@ -1987,7 +1960,7 @@ public class GoldHydroHelper {
 
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
-				Common.clickElement("xpath", "//button[@title='Save Address']");
+				Common.javascriptclickElement("xpath", "//button[@title='Save Address']");
 				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 
@@ -2013,9 +1986,9 @@ public class GoldHydroHelper {
 	public void My_Orders_Page(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
@@ -2033,7 +2006,7 @@ public class GoldHydroHelper {
 		}
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Orders']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Orders"),
 					"validating the Navigation to the My Orders page",
@@ -2063,9 +2036,9 @@ public class GoldHydroHelper {
 	public void My_Favorites() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
-			Common.clickElement("xpath", "//a[text()='My Favorites']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Favorites']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
 					"validating the Navigation to the My Favorites page",
 					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
@@ -2094,9 +2067,9 @@ public class GoldHydroHelper {
 			if (MyFavorites != 0) {
 				search_product("Product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
-				Common.clickElement("xpath", "//img[@alt='" + product + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
@@ -2119,7 +2092,7 @@ public class GoldHydroHelper {
 					Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + product + "')]//img");
 					Common.mouseOver("xpath", "//a[contains(@title,'" + product + "')]//img");
 					Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-					Common.clickElement("xpath", "//span[text()='Add to Cart']");
+					Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -2171,7 +2144,7 @@ public class GoldHydroHelper {
 		int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
 		if (size > 0) {
 			try {
-				Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Add New Address')]");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -2184,12 +2157,12 @@ public class GoldHydroHelper {
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
 				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2234,9 +2207,9 @@ public class GoldHydroHelper {
 						data.get(dataSet).get("phone"));
 
 				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
-				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
+				Common.javascriptclickElement("xpath", "//label[@class='label a-checkbox__label']");
 
-				Common.clickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
+				Common.javascriptclickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
 
 				ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
 						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
@@ -2259,7 +2232,7 @@ public class GoldHydroHelper {
 
 		{
 			try {
-				Common.clickElement("xpath", "//a[@class='action action-show-popup checkout-add-address-popup-link']");
+				Common.javascriptclickElement("xpath", "//a[@class='action action-show-popup checkout-add-address-popup-link']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -2270,12 +2243,12 @@ public class GoldHydroHelper {
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(3000);
 				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
+					Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
+					Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2325,7 +2298,7 @@ public class GoldHydroHelper {
 		int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
 		if (size > 0) {
 			try {
-				Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Add New Address')]");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -2338,12 +2311,12 @@ public class GoldHydroHelper {
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
 				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.javascriptclickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2388,9 +2361,9 @@ public class GoldHydroHelper {
 						data.get(dataSet).get("phone"));
 
 				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
-				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
+				Common.javascriptclickElement("xpath", "//label[@class='label a-checkbox__label']");
 
-				Common.clickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
+				Common.javascriptclickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
 
 				ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
 						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
@@ -2472,7 +2445,7 @@ public class GoldHydroHelper {
 
 		try {
 			Sync.waitElementPresent("xpath", "//a[text()='Account Information']");
-			Common.clickElement("xpath", "//a[text()='Account Information']");
+			Common.javascriptclickElement("xpath", "//a[text()='Account Information']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
 					"validating the Navigation to the Account information page",
@@ -2498,9 +2471,9 @@ public class GoldHydroHelper {
 
 			Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
 
-			Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
+			Common.javascriptclickElement("xpath", "//span[@class='m-accordion__title-label']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//div//input[@id='current-password']");
+			Common.javascriptclickElement("xpath", "//div//input[@id='current-password']");
 			Common.textBoxInput("xpath", "//input[@id='current-password']", data.get(dataSet).get("Password"));
 			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']",
@@ -2515,7 +2488,7 @@ public class GoldHydroHelper {
 					"Sucessfully the data has been entered in new password and current password",
 					"Failed to enter data in current password and new password fields");
 
-			Common.clickElement("xpath", "//button[@title='Save']");
+			Common.javascriptclickElement("xpath", "//button[@title='Save']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String sucessmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -2541,7 +2514,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Dataset);
 			Common.textBoxInput("id", "pass", "Lotuswave@1234");
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
 					"To validate the user lands on My Account page after successfull login",
@@ -2566,7 +2539,7 @@ public class GoldHydroHelper {
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Common.javascriptclickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -2576,7 +2549,7 @@ public class GoldHydroHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
 					"To validate the user lands on Pro Deal Application after successfull login",
@@ -2587,7 +2560,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+			Common.javascriptclickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			Thread.sleep(3000);
@@ -2626,14 +2599,14 @@ public class GoldHydroHelper {
 			Common.findElement("xpath", "//input[@id='supporting_document']").sendKeys(path);
 
 			Sync.waitElementPresent("id", "group_id");
-			Common.clickElement("xpath", "//select[@id='group_id']");
+			Common.javascriptclickElement("xpath", "//select[@id='group_id']");
 			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("GropName"));
 
 			Sync.waitElementPresent("id", "comment");
 			Common.textBoxInput("id", "comment", data.get(dataSet).get("CommetsHydroflask"));
 
 			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
-			Common.clickElement("xpath", "//button[@title='Submit']");
+			Common.javascriptclickElement("xpath", "//button[@title='Submit']");
 
 			Common.switchToDefault();
 			Sync.waitPageLoad();
@@ -2660,7 +2633,7 @@ public class GoldHydroHelper {
 		try {
 			Common.scrollIntoView("xpath", "//a[text()='Pro Deal']");
 			Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
-			Common.clickElement("xpath", "//a[text()='Pro Deal']");
+			Common.javascriptclickElement("xpath", "//a[text()='Pro Deal']");
 			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
 					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
@@ -2683,7 +2656,7 @@ public class GoldHydroHelper {
 			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//input[@id='paypal_express']");
 			Thread.sleep(2000);
-			Common.clickElement("xpath", "//input[@id='paypal_express']");
+			Common.javascriptclickElement("xpath", "//input[@id='paypal_express']");
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
@@ -2691,14 +2664,14 @@ public class GoldHydroHelper {
 			// Common.refreshpage();
 			Thread.sleep(8000);
 			Sync.waitElementClickable("xpath", "//div[@class='paypal-button-label-container']");
-			Common.clickElement("xpath", "//div[@class='paypal-button-label-container']");
+			Common.javascriptclickElement("xpath", "//div[@class='paypal-button-label-container']");
 			Common.switchToDefault();
 			Thread.sleep(5000);
 			Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
 			if (size > 0) {
 
-				Common.clickElement("id", "acceptAllButton");
+				Common.javascriptclickElement("id", "acceptAllButton");
 
 			}
 		} catch (Exception | Error e) {
@@ -2716,9 +2689,9 @@ public class GoldHydroHelper {
 					"open paypal site window", "faild to open paypal account");
 		} else {
 
-			Common.clickElement("id", "login_emaildiv");
+			Common.javascriptclickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
+			Common.javascriptclickElement("id", "btnNext");
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
 
@@ -2726,11 +2699,11 @@ public class GoldHydroHelper {
 					"open paypal site window", "faild to open paypal account");
 
 			try {
-				Common.clickElement("id", "btnLogin");
+				Common.javascriptclickElement("id", "btnLogin");
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Common.clickElement("id", "payment-submit-btn");
+				Common.javascriptclickElement("id", "payment-submit-btn");
 				Thread.sleep(8000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
@@ -2785,9 +2758,9 @@ public class GoldHydroHelper {
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//input[@name='access_code']//parent::div");
+			Common.javascriptclickElement("xpath", "//input[@name='access_code']//parent::div");
 			Common.textBoxInput("xpath", "//input[@name='access_code']", data.get(Dataset).get("Access code"));
-			Common.clickElement("xpath", "//button[@title='Submit']");
+			Common.javascriptclickElement("xpath", "//button[@title='Submit']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
@@ -2816,9 +2789,9 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
@@ -2864,7 +2837,7 @@ public class GoldHydroHelper {
 			String shipping = Common.findElement("xpath", "(//select[@name='address_type_or_id']//option)[2]")
 					.getAttribute("value");
 			Common.dropdown("xpath", "//select[@name='address_type_or_id']", Common.SelectBy.VALUE, shipping);
-			Common.clickElement("id", "submit.save");
+			Common.javascriptclickElement("id", "submit.save");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -2889,7 +2862,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Gift Registry']");
-			Common.clickElement("xpath", "//a[text()='Gift Registry']");
+			Common.javascriptclickElement("xpath", "//a[text()='Gift Registry']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry"),
@@ -2910,10 +2883,10 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
-			Common.clickElement("xpath", "//span[text()='Create New Registry']");
+			Common.javascriptclickElement("xpath", "//span[text()='Create New Registry']");
 			Sync.waitPageLoad();
 			Common.dropdown("id", "type_id", SelectBy.TEXT, data.get(Dataset).get("Type"));
-			Common.clickElement("id", "submit.next");
+			Common.javascriptclickElement("id", "submit.next");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//span[@class='value']");
@@ -2966,7 +2939,7 @@ public class GoldHydroHelper {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][lastname]']",
 						data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][email]']", data.get(Dataset).get("Email"));
-				Common.clickElement("id", "add-registrant-button");
+				Common.javascriptclickElement("id", "add-registrant-button");
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][firstname]']",
 						data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][lastname]']",
@@ -2981,7 +2954,7 @@ public class GoldHydroHelper {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][email]']", data.get(Dataset).get("Email"));
 				Common.dropdown("xpath", "//select[@name='registrant[0][role]']", Common.SelectBy.TEXT,
 						data.get(Dataset).get("Role"));
-				Common.clickElement("id", "add-registrant-button");
+				Common.javascriptclickElement("id", "add-registrant-button");
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][firstname]']",
 						data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][lastname]']",
@@ -3012,11 +2985,11 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//span[text()='Edit']");
+			Common.javascriptclickElement("xpath", "//span[text()='Edit']");
 			Sync.waitPageLoad();
 			Common.scrollIntoView("xpath", "//input[@title='Zip/Postal Code']");
 			Common.textBoxInput("xpath", "//input[@title='Zip/Postal Code']", data.get(Dataset).get("postcode"));
-			Common.clickElement("id", "submit.save");
+			Common.javascriptclickElement("id", "submit.save");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -3040,14 +3013,14 @@ public class GoldHydroHelper {
 	public void share_giftcard(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[@title='Share']");
+			Common.javascriptclickElement("xpath", "//a[@title='Share']");
 			Sync.waitPageLoad();
 			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("Email"));
-			Common.clickElement("id", "add-recipient-button");
+			Common.javascriptclickElement("id", "add-recipient-button");
 			Common.textBoxInput("xpath", "//input[@name='recipients[1][name]']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
-			Common.clickElement("xpath", "//button[@type='submit']");
+			Common.javascriptclickElement("xpath", "//button[@type='submit']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(50, "xpath", "//div[@data-ui-id='message-success']//div");
@@ -3073,8 +3046,8 @@ public class GoldHydroHelper {
 	public void delete_giftcard() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[@title='Delete']");
-			Common.clickElement("xpath", "//button[@class='a-btn a-btn--primary action-primary action-accept']");
+			Common.javascriptclickElement("xpath", "//a[@title='Delete']");
+			Common.javascriptclickElement("xpath", "//button[@class='a-btn a-btn--primary action-primary action-accept']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -3097,7 +3070,7 @@ public class GoldHydroHelper {
 	public void Manage_items() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[@title='Manage Items']");
+			Common.javascriptclickElement("xpath", "//a[@title='Manage Items']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Manage Gift Registry"),
@@ -3105,7 +3078,7 @@ public class GoldHydroHelper {
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"successfully Navigated to the Manage Gift Registry",
 					"failed to Navigate to the Manage Gift Registry");
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+			Common.javascriptclickElement("xpath", "//strong[text()='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating navigation to the Manage Gift Registry page ",
@@ -3124,11 +3097,11 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//a[@title='Share']");
-			Common.clickElement("xpath", "//a[@title='Share']");
+			Common.javascriptclickElement("xpath", "//a[@title='Share']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']");
-			Common.clickElement("xpath", "//button[@type='submit']");
+			Common.javascriptclickElement("xpath", "//button[@type='submit']");
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
 			String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
 			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
@@ -3137,7 +3110,7 @@ public class GoldHydroHelper {
 					"successfully error message has been dispalyed ", "failed to display the error message");
 			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//button[@type='submit']");
+			Common.javascriptclickElement("xpath", "//button[@type='submit']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
 			String invalidemail = Common.findElement("xpath", "//div[@class='mage-error']").getText();
 			Common.assertionCheckwithReport(invalidemail.contains("Please enter a valid email address"),
@@ -3155,7 +3128,7 @@ public class GoldHydroHelper {
 		try
 		{
 			Sync.waitElementPresent(30, "xpath", "//strong[text()='Gift Registry']");
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+			Common.javascriptclickElement("xpath", "//strong[text()='Gift Registry']");
 			Sync.waitImplicit(40);
 			Common.maximizeImplicitWait();
 			Thread.sleep(2000);
@@ -3184,7 +3157,7 @@ public class GoldHydroHelper {
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Common.javascriptclickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -3194,7 +3167,7 @@ public class GoldHydroHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
 					"To validate the user lands on Pro Deal Application after successfull login",
@@ -3205,7 +3178,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+			Common.javascriptclickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			Thread.sleep(3000);
@@ -3222,7 +3195,7 @@ public class GoldHydroHelper {
 		try {
 
 			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
-			Common.clickElement("xpath", "//button[@title='Submit']");
+			Common.javascriptclickElement("xpath", "//button[@title='Submit']");
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
 			String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
 			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
@@ -3235,7 +3208,7 @@ public class GoldHydroHelper {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 
 			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
-			Common.clickElement("xpath", "//button[@title='Submit']");
+			Common.javascriptclickElement("xpath", "//button[@title='Submit']");
 
 			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
 			String invalidemail = Common.findElement("xpath", "//input[@name='association_email']//following::div")
@@ -3263,16 +3236,16 @@ public class GoldHydroHelper {
 			String prodealexpdate = Common
 					.findElement("xpath", "//strong[text()='Program expiration date:']//parent::p").getText();
 			System.out.println(prodealexpdate);
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
 					"Failed to Navigate to the MY account page after Clicking on my account button");
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[text()='Pro Deal']");
+			Common.javascriptclickElement("xpath", "//a[text()='Pro Deal']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(50, "xpath", "//strong[text()='Program expiration date:']//parent::p");
@@ -3302,7 +3275,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			Sync.waitElementPresent("xpath", "//span[text()='View Cart']");
-			Common.clickElement("xpath", "//span[text()='View Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
@@ -3329,7 +3302,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@type='submit']//span[@class='a-btn__label']");
+			Common.javascriptclickElement("xpath", "//button[@type='submit']//span[@class='a-btn__label']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Manage Gift Registry"),
@@ -3337,7 +3310,7 @@ public class GoldHydroHelper {
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"successfully Navigated to the Manage Gift Registry",
 					"failed to Navigate to the Manage Gift Registry");
-//			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+//			Common.javascriptclickElement("xpath", "//strong[text()='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating navigation to the Manage Gift Registry page ",
@@ -3350,11 +3323,11 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
-			Common.clickElement("xpath", "//div[@class='control m-text-input']");
+			Common.javascriptclickElement("xpath", "//div[@class='control m-text-input']");
 			Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']",
 					data.get(Dataset).get("Quantity"));
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Update Items']");
-			Common.clickElement("xpath", "//span[text()='Update Items']");
+			Common.javascriptclickElement("xpath", "//span[text()='Update Items']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
 			String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
 			Common.assertionCheckwithReport(errormessage.contains("Please enter a number greater than 0"),
@@ -3396,7 +3369,7 @@ public class GoldHydroHelper {
 			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
 
 			Sync.waitElementPresent("xpath", "//button[@title='Search']");
-			Common.clickElement("xpath", "//button[@title='Search']");
+			Common.javascriptclickElement("xpath", "//button[@title='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String orderid = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
@@ -3419,7 +3392,7 @@ public class GoldHydroHelper {
 	public void click_trackorder() {
 		try {
 			Common.actionsKeyPress(Keys.END);
-			Common.clickElement("xpath", "//a[text()='Track Your Order']");
+			Common.javascriptclickElement("xpath", "//a[text()='Track Your Order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders"),
@@ -3481,26 +3454,26 @@ public class GoldHydroHelper {
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Common.javascriptclickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.javascriptclickElement("xpath", "//span[text()='New payment method']");
 
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+				Common.javascriptclickElement("xpath", "//button[@value='klarna']");
+				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
 				String email = Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']")
 						.getAttribute("value");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
 				String details = Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']")
 						.getAttribute("value");
@@ -3510,18 +3483,18 @@ public class GoldHydroHelper {
 						"Email has been dispalyed in the Klarna payment",
 						"Failed to enter email in the Klarna Payment");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 				klarna_Details(dataSet);
 
 			} else {
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Common.clickElement("xpath", "//button[@value='klarna']");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+				Common.javascriptclickElement("xpath", "//button[@value='klarna']");
+				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
 				String email = Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']")
 						.getAttribute("value");
-				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+				Common.javascriptclickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
 				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
 				String details = Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']")
 						.getAttribute("value");
@@ -3531,7 +3504,7 @@ public class GoldHydroHelper {
 						"Email has been dispalyed in the Klarna payment",
 						"Failed to enter email in the Klarna Payment");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 				klarna_Details(dataSet);
 			}
 
@@ -3559,7 +3532,7 @@ public class GoldHydroHelper {
 			}
 			Sync.waitElementPresent("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Sign In']");
+			Common.javascriptclickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			String regsiteruser = Common.findElement("xpath", "//div[@class='new-address-popup']//span").getText();
@@ -3625,7 +3598,7 @@ public class GoldHydroHelper {
 		try {
 
 			Sync.waitElementPresent("xpath", "//a[text()='Contact Us']");
-			Common.clickElement("xpath", "//a[text()='Contact Us']");
+			Common.javascriptclickElement("xpath", "//a[text()='Contact Us']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Contact"),
@@ -3647,13 +3620,13 @@ public class GoldHydroHelper {
 
 		try {
 
-			Common.clickElement("xpath", "//span[text()='Write to Us']");
+			Common.javascriptclickElement("xpath", "//span[text()='Write to Us']");
 			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
 			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
 
 			Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 
-			Common.clickElement("xpath", "//input[@id='customerEmail']");
+			Common.javascriptclickElement("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
 			Sync.waitElementPresent("xpath", "//input[contains(@data-label,'How can we')]");
@@ -3673,9 +3646,9 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 			
 			Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
-			Common.clickElement("xpath", "//input[@data-label='Country']");
+			Common.javascriptclickElement("xpath", "//input[@data-label='Country']");
 			Sync.waitElementPresent("xpath", "//div[text()='"+ country +"']");
-			Common.clickElement("xpath", "//div[text()='"+ country +"']");
+			Common.javascriptclickElement("xpath", "//div[text()='"+ country +"']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
@@ -3685,32 +3658,32 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@name='conversationCityForForms']", data.get(dataSet).get("City"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
-			Common.clickElement("xpath", "//input[@name='conversationCountry']");
+			Common.javascriptclickElement("xpath", "//input[@name='conversationCountry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='United States']");
-			Common.clickElement("xpath", "//div[text()='United States']");
+			Common.javascriptclickElement("xpath", "//div[text()='United States']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationState']");
-			Common.clickElement("xpath", "//input[@name='conversationState']");
+			Common.javascriptclickElement("xpath", "//input[@name='conversationState']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
-			Common.clickElement("xpath", "//div[text()='Alabama']");
+			Common.javascriptclickElement("xpath", "//div[text()='Alabama']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeforforms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationZipCodeforforms']",
 					data.get(dataSet).get("postcode"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationHowCanWeHelp']");
-			Common.clickElement("xpath", "//input[@name='conversationHowCanWeHelp']");
+			Common.javascriptclickElement("xpath", "//input[@name='conversationHowCanWeHelp']");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//div[@data-path='order_issues']");
+			Common.javascriptclickElement("xpath", "//div[@data-path='order_issues']");
 
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
-			Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationOrderIssues']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
-			Common.clickElement("xpath", "//div[text()='Billing Issue']");
+			Common.javascriptclickElement("xpath", "//div[text()='Billing Issue']");
 
 			Sync.waitElementPresent("xpath", "//input[@class='form-base' and @id='conversationOrder']");
 			Common.textBoxInput("xpath", "//input[@class='form-base' and @id='conversationOrder']",
@@ -3720,7 +3693,7 @@ public class GoldHydroHelper {
 					data.get(dataSet).get("CommetsHydroflask"));
 
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
-			Common.clickElement("xpath", "//button[text()='Submit']");
+			Common.javascriptclickElement("xpath", "//button[text()='Submit']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 			int Contactussuccessmessage = Common.findElements("xpath", "//h1[@data-content-type='heading']").size();
@@ -3754,7 +3727,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 
 			Common.scrollIntoView("xpath", "//a[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
@@ -3765,9 +3738,9 @@ public class GoldHydroHelper {
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
+			Common.javascriptclickElement("xpath", "//a[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			Common.javascriptclickElement("xpath", "//span[text()='Write A Review']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3778,7 +3751,7 @@ public class GoldHydroHelper {
 		}
 		try {
 			String expectedResult = "Sucessfully title input box has been displayed";
-			Common.clickElement("xpath", "//input[@value='Post']");
+			Common.javascriptclickElement("xpath", "//input[@value='Post']");
 			String errormessage = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
 			System.out.println(errormessage);
 			Common.assertionCheckwithReport(errormessage.contains("Please enter a star rating for this review"),
@@ -3795,7 +3768,7 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
 			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			Common.clickElement("xpath", "//input[@value='Post']");
+			Common.javascriptclickElement("xpath", "//input[@value='Post']");
 			String emailerror = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
 			Common.assertionCheckwithReport(emailerror.contains("Invalid email"),
 					"verifying the invaild email for the product review",
@@ -3804,14 +3777,14 @@ public class GoldHydroHelper {
 					"Failed to display the error message for invaild email");
 			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@value='Post']");
+			Common.javascriptclickElement("xpath", "//input[@value='Post']");
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
 			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
 					"verifying the post for the product review",
 					"product review should be submit after clicking on post",
 					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
-//			Common.clickElement("xpath", "//div[@aria-label='Next']");
+//			Common.javascriptclickElement("xpath", "//div[@aria-label='Next']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3830,24 +3803,24 @@ public class GoldHydroHelper {
 		switch (score) {
 		case "1":
 			Sync.waitElementPresent("xpath", "//span[@aria-label='score 1']");
-			Common.clickElement("xpath", "//span[@aria-label='score 1']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='score 1']");
 			break;
 		case "2":
 			Sync.waitElementPresent("xpath", "//span[@aria-label='score 2']");
-			Common.clickElement("xpath", "//span[@aria-label='score 2']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='score 2']");
 			break;
 		case "3":
 			Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
-			Common.clickElement("xpath", "//span[@aria-label='score 3']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='score 3']");
 			;
 			break;
 		case "4":
 			Sync.waitElementPresent("xpath", "//span[@aria-label='score 4']");
-			Common.clickElement("xpath", "//span[@aria-label='score 4']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='score 4']");
 			break;
 		case "5":
 			Sync.waitElementPresent("xpath", "//span[@aria-label='score 5']");
-			Common.clickElement("xpath", "//span[@aria-label='score 5']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='score 5']");
 			break;
 		}
 	}
@@ -3859,7 +3832,7 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
@@ -3891,7 +3864,7 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.javascriptclickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String update = Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
@@ -3921,9 +3894,9 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			Common.switchFrames("xpath", "//iframe[@aria-label='Modal Overlay Box Frame']");
 			Sync.waitElementPresent(30, "xpath", "//label[@for='form_input_email']");
-			Common.clickElement("xpath", "//label[@for='form_input_email']");
+			Common.javascriptclickElement("xpath", "//label[@for='form_input_email']");
 			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Submit Modal Form']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
 			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
 			System.out.println(Errormessage);
@@ -3948,7 +3921,7 @@ public class GoldHydroHelper {
 
 			Common.textBoxInputClear("xpath", "//input[@placeholder='Enter Email Address']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Submit Modal Form']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
 			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
 			System.out.println(Errormessage);
@@ -3975,10 +3948,10 @@ public class GoldHydroHelper {
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//label[@for='form_input_email']");
-			Common.clickElement("xpath", "//label[@for='form_input_email']");
+			Common.javascriptclickElement("xpath", "//label[@for='form_input_email']");
 			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Submit Modal Form']");
 			Thread.sleep(5000);
 			String Text = Common.getText("xpath", "//div[@id='thxtext3']");
 			System.out.println(Text);
@@ -4022,7 +3995,7 @@ public class GoldHydroHelper {
 			String phone = "+91" + "95862" + mobile;
 			System.out.println(phone);
 			Common.textBoxInput("xpath", "//input[@name='phone']", phone);
-			Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+			Common.javascriptclickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
@@ -4031,33 +4004,33 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent(30, "xpath", "//h1[@role='status']");
 			String klarna = Common.findElement("xpath", "//h1[@role='status']").getText();
 			if (klarna.equals("What's your email?")) {
-				Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+				Common.javascriptclickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
+				Common.javascriptclickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
 				Common.findElement("xpath", "//input[@id='addressCollector-date_of_birth']").sendKeys(DOB);
-				Common.clickElement("xpath", "//div[@id='addressCollector-street_address__label']");
+				Common.javascriptclickElement("xpath", "//div[@id='addressCollector-street_address__label']");
 				Common.findElement("xpath", "//input[@name='street_address']")
 						.sendKeys(data.get(Dataset).get("Street"));
-				Common.clickElement("xpath", "//div[@id='addressCollector-city__label']");
+				Common.javascriptclickElement("xpath", "//div[@id='addressCollector-city__label']");
 				Common.findElement("xpath", "//input[@name='city']").sendKeys(data.get(Dataset).get("City"));
-				Common.clickElement("xpath", "//div[@id='addressCollector-region__label']");
+				Common.javascriptclickElement("xpath", "//div[@id='addressCollector-region__label']");
 				Common.findElement("xpath", "//input[@name='region']").sendKeys(data.get(Dataset).get("Region"));
-				Common.clickElement("xpath", "//div[@id='addressCollector-postal_code__label']");
+				Common.javascriptclickElement("xpath", "//div[@id='addressCollector-postal_code__label']");
 				Common.findElement("xpath", "//input[@name='postal_code']").sendKeys(data.get(Dataset).get("postcode"));
-				Common.clickElement("xpath", "//div[@id='terms_checkbox__box']");
-				Common.clickElement("xpath", "//span[text()='Continue']");
+				Common.javascriptclickElement("xpath", "//div[@id='terms_checkbox__box']");
+				Common.javascriptclickElement("xpath", "//span[text()='Continue']");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//span[contains(text(),'continue')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'continue')]");
 				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'Continue')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Continue')]");
 				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='pick-plan']");
-				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
+				Common.javascriptclickElement("xpath", "//button[@data-testid='pick-plan']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
 				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
+				Common.javascriptclickElement("xpath", "//input[@id='cardNumber']//parent::div");
 				Thread.sleep(4000);
 				Common.findElement("xpath", "//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
 				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
@@ -4067,17 +4040,17 @@ public class GoldHydroHelper {
 				Common.switchToDefault();
 				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Continue')]");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+				Common.javascriptclickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
 			} else {
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Continue')]");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+				Common.javascriptclickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
 			}
 
 		} catch (Exception | Error e) {
@@ -4130,13 +4103,13 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent(30, "xpath", "//input[@type='checkbox']");
-			Common.clickElement("xpath", "//input[@type='checkbox']");
+			Common.javascriptclickElement("xpath", "//input[@type='checkbox']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
 			Common.javascriptclickElement("xpath", "//div[@class='control m-text-input']");
 			Common.textBoxInput("xpath", "//input[contains(@class,'input-text qty a-text-input')]",
 					data.get(Dataset).get("Quantity"));
 			Sync.waitElementPresent("xpath", "//span[text()='Update Items']");
-			Common.clickElement("xpath", "//span[text()='Update Items']");
+			Common.javascriptclickElement("xpath", "//span[text()='Update Items']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String deletemessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -4154,7 +4127,7 @@ public class GoldHydroHelper {
 					"product should be not display in the gift registry",
 					"Sucessfully products should not been displayed in the gift registry",
 					Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+			Common.javascriptclickElement("xpath", "//strong[text()='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the no prodcts in the gift registry",
@@ -4171,9 +4144,9 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
@@ -4192,7 +4165,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Common.javascriptclickElement("xpath", "//a[text()='Stored Payment Methods']");
 			Sync.waitPageLoad(30);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
@@ -4211,9 +4184,9 @@ public class GoldHydroHelper {
 						"Failed to display the payment methods in the my payments methods");
 //				Thread.sleep(4000);
 //				Sync.waitElementPresent("xpath", "//a[contains(@class,'stripe-payments')]");
-//				Common.clickElement("xpath", "//a[contains(@class,'stripe-payments')]");
+//				Common.javascriptclickElement("xpath", "//a[contains(@class,'stripe-payments')]");
 //				Common.switchToTopFrame();
-//				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+//				Common.javascriptclickElement("xpath", "//span[contains(text(),'OK')]");
 //				Common.switchToDefault();
 //				Thread.sleep(4000);
 //				String message=Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
@@ -4244,7 +4217,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			String number = Common.findElement("xpath", "//a[@title='View Order']").getText();
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
-			Common.clickElement("xpath", "//span[text()='View Order']");
+			Common.javascriptclickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(40, "xpath", "//h1[@data-ui-id='page-title-wrapper']");
 			String Ordernumber = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
@@ -4267,7 +4240,7 @@ public class GoldHydroHelper {
 					"Sucessfully navigated to the orders detail page", "Failed to Navigate to the orders detail page");
 //			
 //
-//			Common.clickElement("xpath", "//div[@aria-label='Next']");
+//			Common.javascriptclickElement("xpath", "//div[@aria-label='Next']");
 //			Common.assertionCheckwithReport(reorder.contains("Reorder"),
 //					"validating the order summary and UGC carasol ",
 //					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
@@ -4301,10 +4274,10 @@ public class GoldHydroHelper {
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.javascriptclickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
-			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Common.clickElement("xpath", "//a[text()='Shop All']");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.javascriptclickElement("xpath", "//a[text()='Shop All']");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -4413,7 +4386,7 @@ public class GoldHydroHelper {
 
 			}
 			Sync.waitElementPresent("xpath", "//nav[@class='m-breadcrumb u-container']");
-//			Common.clickElement("xpath", "//a[text()='Shop']");
+//			Common.javascriptclickElement("xpath", "//a[text()='Shop']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String title = Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
@@ -4445,20 +4418,20 @@ public class GoldHydroHelper {
 				List<WebElement> select = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(50, "xpath", "//img[contains(@class,'a-icon-text-btn')]");
-				Common.clickElement("xpath", "//img[contains(@class,'a-icon-text-btn')]");
+				Common.javascriptclickElement("xpath", "//img[contains(@class,'a-icon-text-btn')]");
 				Thread.sleep(3000);
 				Country = select.get(i).getText();
 				System.out.println(Country);
 				select.get(i).click();
 				if (Country.contains("United States")) {
 
-					Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+					Common.javascriptclickElement("xpath", "//button[@data-role='closeBtn']");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 							"click on the country should navigate to the  " + Country + "Page",
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				} else {
-					Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+					Common.javascriptclickElement("xpath", "//span[contains(text(),'Confirm')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.navigateBack();
@@ -4488,7 +4461,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Dealer Central']");
-			Common.clickElement("xpath", "//a[text()='Dealer Central']");
+			Common.javascriptclickElement("xpath", "//a[text()='Dealer Central']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("dealer"),
@@ -4510,7 +4483,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Retail New Account Inquiry']");
-			Common.clickElement("xpath", "//a[text()='Retail New Account Inquiry']");
+			Common.javascriptclickElement("xpath", "//a[text()='Retail New Account Inquiry']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 
@@ -4544,32 +4517,32 @@ public class GoldHydroHelper {
 
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@id='conversationChannelIndustry']");
-			Common.clickElement("xpath", "//div[@id='conversationChannelIndustry']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationChannelIndustry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='" + channel + "']");
-			Common.clickElement("xpath", "//div[text()='" + channel + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + channel + "']");
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationTypeOfBusiness']");
-			Common.clickElement("xpath", "//div[@id='conversationTypeOfBusiness']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationTypeOfBusiness']");
 			Sync.waitElementPresent("xpath", "//div[text()='" + typeofbusiness + "']");
-			Common.clickElement("xpath", "//div[text()='" + typeofbusiness + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + typeofbusiness + "']");
 
 			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
 
-//			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
+//			Common.javascriptclickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
 //			Thread.sleep(4000);
-//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Common.Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 //			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
-//			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
+//			Common.javascriptclickElement("xpath", "//div[@id='conversationCustomOrder']");
 //			Thread.sleep(4000);
-//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Common.Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 //			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
 //
 //			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
 
-			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationSellThruWebsite']");
 			Thread.sleep(4000);
 			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
@@ -4578,8 +4551,8 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='numberOfStores']", data.get(dataSet).get("numberOfStores"));
 
-			Common.clickElement("xpath", "//div[@id='conversationStoreSize']");
-			Common.clickElement("xpath", "//div[text()='" + storesize + "']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationStoreSize']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + storesize + "']");
 
 			Common.textBoxInput("xpath", "//input[@id='annualRevenue']", data.get(dataSet).get("annualRevenue"));
 
@@ -4589,10 +4562,10 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@id='yearsInBusiness']", data.get(dataSet).get("yearsInBusiness"));
 			
 			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
-			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationCountry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
-			Common.clickElement("xpath", "//div[text()='" + country + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + country + "']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='storeAddress']");
 			Common.textBoxInput("xpath", "//input[@id='storeAddress']", data.get(dataSet).get("Street"));
@@ -4602,10 +4575,10 @@ public class GoldHydroHelper {
 	
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
-			Common.clickElement("xpath", "//div[@id='conversationState']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationState']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='" + state + "']");
-			Common.clickElement("xpath", "//div[text()='" + state + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + state + "']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
 			Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
@@ -4638,7 +4611,7 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
 
-			Common.clickElement("xpath", "//button[text()='Submit']");
+			Common.javascriptclickElement("xpath", "//button[text()='Submit']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
@@ -4671,7 +4644,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Contact Page']");
-			Common.clickElement("xpath", "//a[text()='Contact Page']");
+			Common.javascriptclickElement("xpath", "//a[text()='Contact Page']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
@@ -4705,7 +4678,7 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			System.out.println(product);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.equals(product),
@@ -4716,8 +4689,8 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
 			Sync.waitElementPresent("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+			Common.javascriptclickElement("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
+			Common.javascriptclickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -4760,18 +4733,18 @@ public class GoldHydroHelper {
 				}
 				Thread.sleep(6000);
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + colorproduct + "']");
-				Common.clickElement("xpath", "//img[@alt='" + colorproduct + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + colorproduct + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.actionsKeyPress(Keys.END);
 				Common.actionsKeyPress(Keys.PAGE_UP);
 				Sync.waitElementPresent("xpath",
 						"//div[contains(@class,'sticky-atc')]//div[@aria-label='" + colorname + "']");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//div[contains(@class,'sticky-atc')]//div[@aria-label='" + colorname + "']");
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -4798,13 +4771,13 @@ public class GoldHydroHelper {
 				}
 				Thread.sleep(6000);
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 
-				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+				Common.javascriptclickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -4832,7 +4805,7 @@ public class GoldHydroHelper {
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='" + socallinksarry[i] + "']");
+				Common.javascriptclickElement("xpath", "//span[text()='" + socallinksarry[i] + "']");
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 
@@ -4893,7 +4866,7 @@ public class GoldHydroHelper {
 	            for(int j=1;j<5;j++)
 	            {
 	                Common.scrollIntoView("xpath", "//a[contains(@class,'u-hidden--md-d')]");
-	                Common.clickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
+	                Common.javascriptclickElement("xpath", "//a[contains(@class,'u-hidden--md-d')]");
 	                Thread.sleep(4000);
 	                
 	            }
@@ -4943,14 +4916,14 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//img[@alt='" + Product + "']");
-			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + Product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			validating_BundleProducts();
 			product_quantity(Dataset);
 			bundle_color("White");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -4978,11 +4951,11 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Warranty']");
-			Common.clickElement("xpath", "//a[text()='Warranty']");
+			Common.javascriptclickElement("xpath", "//a[text()='Warranty']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[@class='btn btn-primary']");
-			Common.clickElement("xpath", "//a[@class='btn btn-primary']");
+			Common.javascriptclickElement("xpath", "//a[@class='btn btn-primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Warranty"),
@@ -5013,11 +4986,11 @@ public class GoldHydroHelper {
 
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
-			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationCountry']");
 			
 
 			Sync.waitElementPresent("xpath", "//div[text()='United States']");
-			Common.clickElement("xpath", "//div[text()='United States']");
+			Common.javascriptclickElement("xpath", "//div[text()='United States']");
 			
 			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
@@ -5027,10 +5000,10 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
-			Common.clickElement("xpath", "//div[@id='conversationState']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationState']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
-			Common.clickElement("xpath", "//div[text()='Alabama']");
+			Common.javascriptclickElement("xpath", "//div[text()='Alabama']");
 
 			Sync.waitElementPresent("xpath", "//input[@data-label='Zip Code']");
 			Common.textBoxInput("xpath", "//input[@data-label='Zip Code']",
@@ -5040,25 +5013,25 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationWherePurchased']");
-			Common.clickElement("xpath", "//div[@id='conversationWherePurchased']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationWherePurchased']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Hydro Flask Website']");
-			Common.clickElement("xpath", "//div[text()='Hydro Flask Website']");
+			Common.javascriptclickElement("xpath", "//div[text()='Hydro Flask Website']");
 
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Select Product')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Select Product')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'Select Product')]");
 
 			Sync.waitElementPresent("xpath", "//div[@data-path='my_hydro']");
-			Common.clickElement("xpath", "//div[@data-path='my_hydro']");
+			Common.javascriptclickElement("xpath", "//div[@data-path='my_hydro']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='form-field ']/textarea");
 			Common.textBoxInput("xpath", "//div[@class='form-field ']/textarea", data.get(dataSet).get("text"));
 
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'form-field-select')]");
-			Common.clickElement("xpath", "//span[contains(@class,'form-field-select')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'form-field-select')]");
 
 			Sync.waitElementPresent("xpath", "//span[text()='No']");
-			Common.clickElement("xpath", "//span[text()='No']");
+			Common.javascriptclickElement("xpath", "//span[text()='No']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
 			Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("text2"));
@@ -5081,7 +5054,7 @@ public class GoldHydroHelper {
 
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
-			Common.clickElement("xpath", "//button[text()='Submit']");
+			Common.javascriptclickElement("xpath", "//button[text()='Submit']");
 
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[contains(text(),'Your submission was successful')]");
@@ -5106,7 +5079,7 @@ public class GoldHydroHelper {
 	public void search_results(String search) {
 
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
 			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
@@ -5197,7 +5170,7 @@ public class GoldHydroHelper {
             Sync.waitElementPresent(40, "xpath", "//span[@class='icon-carousel__right']");
 			Common.scrollIntoView("xpath", "//span[@class='icon-carousel__right']");
 			Common.findElement("xpath", "//span[@class='icon-carousel__right']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
+			Common.javascriptclickElement("xpath", "//span[@class='icon-carousel__right']");
 			Thread.sleep(4000);
 			int carousel = Common.findElements("xpath", "//div[contains(@class,'js-slick-carousel')]").size();
 			System.out.println(carousel);
@@ -5216,7 +5189,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
 			Common.assertionCheckwithReport(open.contains("active"),
 					"To validate the global search box is opened when we click on the search icon",
@@ -5226,7 +5199,7 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@id='search']", search);
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String close = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
 			Common.assertionCheckwithReport(close.contains("c-header-search"),
 					"To validate the global search box is Closed when user click on the close icon",
@@ -5254,7 +5227,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath",
 					"//nav[@class='megamenu navigation m-megamenu-nav']//span[text()=' Shop']");
 
-			Common.clickElement("xpath", "//nav[@class='megamenu navigation m-megamenu-nav']//span[text()=' Shop']");
+			Common.javascriptclickElement("xpath", "//nav[@class='megamenu navigation m-megamenu-nav']//span[text()=' Shop']");
 			Thread.sleep(2000);
 
 			String catogories = Common.getText("xpath", "//ul[contains(@class,'level0 submenu')]");
@@ -5277,7 +5250,7 @@ public class GoldHydroHelper {
 
 	public void ClosADD() throws Exception {
 		Thread.sleep(3000);
-		Common.clickElement("xpath", "(//button[@data-role='closeBtn'])[2]");
+		Common.javascriptclickElement("xpath", "(//button[@data-role='closeBtn'])[2]");
 		Thread.sleep(4000);
 	}
 
@@ -5287,7 +5260,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles & Drinkware']");
 
-			Common.clickElement("xpath",
+			Common.javascriptclickElement("xpath",
 					"//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles & Drinkware']");
 			Thread.sleep(2000);
 
@@ -5314,7 +5287,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles']");
 
-			Common.clickElement("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles']");
+			Common.javascriptclickElement("xpath", "//ul[contains(@class,'level0 submenu')]//span[text()=' Bottles']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
@@ -5339,8 +5312,9 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//img[@alt='32 oz Wide Mouth']");
 
-			Common.clickElement("xpath", "//img[@alt='32 oz Wide Mouth']");
-			Thread.sleep(2000);
+			Common.javascriptclickElement("xpath", "//img[@alt='32 oz Wide Mouth']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 
 			String pagetitle = Common.getPageTitle();
 			System.out.println(pagetitle);
@@ -5365,7 +5339,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@data-role='customize-btn']");
 
-			Common.clickElement("xpath", "//button[@data-role='customize-btn']");
+			Common.javascriptclickElement("xpath", "//button[@data-role='customize-btn']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
@@ -5376,7 +5350,7 @@ public class GoldHydroHelper {
 					"should display the customize page after clicking on the customize button",
 					"update customize page are displayed after a click on the customize button",
 					"Failed to display  customize");
-			Common.clickElement("xpath", "//img[@alt='Close icon']");
+			Common.javascriptclickElement("xpath", "//img[@alt='Close icon']");
 			Thread.sleep(2000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5402,9 +5376,9 @@ public class GoldHydroHelper {
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
+			Common.javascriptclickElement("xpath", "//a[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			Common.javascriptclickElement("xpath", "//span[text()='Write A Review']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5437,12 +5411,12 @@ public class GoldHydroHelper {
 
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Common.javascriptclickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.javascriptclickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, productquantity);
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitForLoad();
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -5465,10 +5439,10 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//h2[@data-bind='text: storefrontLabel']");
 
-			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
+			Common.javascriptclickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
+			Common.javascriptclickElement("xpath", "//span[@class='icon-carousel__right']");
+			Common.javascriptclickElement("xpath", "//span[@class='icon-carousel__right']");
+			Common.javascriptclickElement("xpath", "//span[@class='icon-carousel__left']");
 
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
@@ -5501,13 +5475,13 @@ public class GoldHydroHelper {
 
 			Sync.waitElementPresent("xpath", "//h2[@data-bind='text: storefrontLabel']");
 
-			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
+			Common.javascriptclickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Common.clickElement("xpath",
+			Common.javascriptclickElement("xpath",
 					"//div[@class='fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img']");
-			// Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			// Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
+			// Common.javascriptclickElement("xpath", "//span[@class='icon-carousel__right']");
+			// Common.javascriptclickElement("xpath", "//span[@class='icon-carousel__left']");
 
 			String text = Common.findElement("xpath",
 					"//div[@class='fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img']")
@@ -5540,7 +5514,7 @@ public class GoldHydroHelper {
 			System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
 					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
-			Common.clickElement("xpath", "//span[@class='icon-minicart__close a-icon-text-btn__icon']");
+			Common.javascriptclickElement("xpath", "//span[@class='icon-minicart__close a-icon-text-btn__icon']");
 			Thread.sleep(2000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5592,15 +5566,15 @@ public class GoldHydroHelper {
 		try {
 			Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
+			Common.javascriptclickElement("xpath", "//span[text()='Toggle password visibility']");
 			String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
 			System.out.println(shipping);
-			Common.clickElement("xpath", "//span[text()='Item in Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Item in Cart']");
 			String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
 			System.out.println(QTY);
 			String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
 			System.out.println(Price);
-			Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
+			Common.javascriptclickElement("xpath", "(//span[text()='View Details'])[2]");
 			String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
 			System.out.println(Color);
 			Common.assertionCheckwithReport(shipping.equals("Shipping"),
@@ -5620,13 +5594,13 @@ public class GoldHydroHelper {
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),'Forgot')]");
 			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
 			System.out.println(forgotpassword);
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.clickElement("xpath", "//span[text()='Reset My Password']");
+			Common.javascriptclickElement("xpath", "//span[text()='Reset My Password']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
@@ -5654,7 +5628,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//div[@class='y-image-overlay ']");
 //			Common.scrollIntoView("xpath", "//div[@class='y-image-overlay ']");
-			Common.clickElement("xpath", "//div[@class='y-image-overlay ']");
+			Common.javascriptclickElement("xpath", "//div[@class='y-image-overlay ']");
 			String yopto = Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']").getAttribute("aria-label");
 			System.out.println(yopto);
 			WebElement UGC = Common.findElement("xpath", "//a[@class='yotpo-logo-link-new']//span");
@@ -5666,9 +5640,9 @@ public class GoldHydroHelper {
 					"user should able to display the yopto popup", "Sucessfully yopto popup has been displayed",
 					"Failed to Displayed the yopto popup");
 			Sync.waitElementPresent(40, "xpath", "//span[@aria-label='See Next Image']");
-			Common.clickElement("xpath", "//span[@aria-label='See Next Image']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='See Next Image']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[@aria-label='Cancel']");
+			Common.javascriptclickElement("xpath", "//span[@aria-label='Cancel']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5853,13 +5827,13 @@ public class GoldHydroHelper {
 
 		try {
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[text()='" + category + "']");
-//			Common.clickElement("xpath", "//span[text()='Load more']");
+			Common.javascriptclickElement("xpath", "//a[text()='" + category + "']");
+//			Common.javascriptclickElement("xpath", "//span[text()='Load more']");
 			String text = Common.findElement("xpath", "//a[text()='" + category + "']//span").getText();
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-//			Common.clickElement("xpath", "//span[text()='Load more']");
+//			Common.javascriptclickElement("xpath", "//span[text()='Load more']");
 			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
 					.getText();
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
@@ -5890,7 +5864,7 @@ public class GoldHydroHelper {
 	public void sort_By(String dataSet) {
 		try {
 
-			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
+			Common.javascriptclickElement("xpath", "//select[@class='ais-SortBy-select']");
 			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", Common.SelectBy.TEXT,
 					data.get(dataSet).get("Sort"));
 
@@ -5941,7 +5915,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
-			Common.clickElement("xpath", "//a[text()='Find a Store']");
+			Common.javascriptclickElement("xpath", "//a[text()='Find a Store']");
 
 			String find = Common.findElement("xpath", "//h1[@class='u-container']").getText();
 			System.out.println(find);
@@ -5973,7 +5947,7 @@ public class GoldHydroHelper {
 			Thread.sleep(8000);
 			String id = Common.findElement("xpath", "//div[contains(@aria-label,\"" + store + " \")]")
 					.getAttribute("id");
-//            Common.clickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting ")]");
+//            Common.javascriptclickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting ")]");
 
 			Common.findElement("xpath", "//div[@id='" + id + "']").click();
 			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
@@ -6087,7 +6061,7 @@ public class GoldHydroHelper {
 
 	public void Validate_retailerlocations() {
 		try {
-			Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
+			Common.javascriptclickElement("xpath", "//h3[@class='section-title dl-store-name']");
 			Sync.waitElementVisible("xpath", "//div[@class='square-image-container']");
 			int Retailerlogo = Common.findElements("xpath", "//div[@class='square-image-container']").size();
 			int locations = Common.findElements("xpath", "//a[contains(@class,'tab-locations')]").size();
@@ -6113,7 +6087,7 @@ public class GoldHydroHelper {
 
 			}
 			Thread.sleep(2000);
-			Common.clickElement("xpath", "//a[@class='nav-bar-back']");
+			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
 			Click_Direction();
 			Thread.sleep(2000);
 			writeReviews();
@@ -6167,8 +6141,8 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(filterSize > 0, "validating browser page",
 					"user navigates to Browsers page", "Sucessfully user navigate to browser page",
 					"faield to navigate to browser page");
-			Common.clickElement("xpath", "//a[@class='nav-bar-back']");
-			Common.clickElement("xpath", "//a[@class='nav-bar-back']");
+			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
+			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -6188,7 +6162,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-inventory']");
 			// Sync.waitElementPresent(20 "xpath",
 			// "//a[@id='dealer-navigation-inventory']");
-			Common.clickElement("xpath", "//a[@id='dealer-navigation-inventory']");
+			Common.javascriptclickElement("xpath", "//a[@id='dealer-navigation-inventory']");
 
 			int stock = Common.findElements("xpath", "//div[@id='dealer-tab-inventory-grid-container-desktop']").size();
 			System.out.println(stock);
@@ -6236,10 +6210,10 @@ public class GoldHydroHelper {
 
 		try {
 			Sync.waitElementPresent("xpath", "//a[@id='conv-store-info-back']");
-			Common.clickElement("xpath", "//a[@id='conv-store-info-back']");
+			Common.javascriptclickElement("xpath", "//a[@id='conv-store-info-back']");
 
 			Sync.waitElementPresent("xpath", "(//span[text()='Directions'])[2]");
-			Common.clickElement("xpath", "(//span[text()='Directions'])[2]");
+			Common.javascriptclickElement("xpath", "(//span[text()='Directions'])[2]");
 			Common.switchWindows();
 
 			int directionsize = Common.findElements("xpath", "//div[@aria-label='Directions']").size();
@@ -6268,7 +6242,7 @@ public class GoldHydroHelper {
 			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
 
 			Sync.waitElementPresent("xpath", "//span[text()='Write a Review']");
-			Common.clickElement("xpath", "//span[text()='Write a Review']");
+			Common.javascriptclickElement("xpath", "//span[text()='Write a Review']");
 			Common.switchWindows();
 			int reviewSize = Common.findElements("xpath", "//div[@class='review-form-header']//h1").size();
 
@@ -6303,7 +6277,7 @@ public class GoldHydroHelper {
 		if (placeordercount > 1) {
 			Thread.sleep(4000);
 
-			Common.clickElement("xpath", "//span[text()='Place Order']");
+			Common.javascriptclickElement("xpath", "//span[text()='Place Order']");
 			Common.refreshpage();
 		}
 
@@ -6352,7 +6326,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//img[@alt='" + Product + "']");
-			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + Product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(Product),
@@ -6362,7 +6336,7 @@ public class GoldHydroHelper {
 					"failed to Navigate to the PDP page after clicking on the product");
 			Products_Grouped_Bundle("1");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -6415,7 +6389,7 @@ public class GoldHydroHelper {
 		String Quantity = data.get(Dataset).get("Quantity");
 		try {
 			Common.findElement("xpath", "//select[@class='a-select-menu']");
-//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+//			Common.javascriptclickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
 			String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
@@ -6440,7 +6414,7 @@ public class GoldHydroHelper {
 		String Quantity = data.get(Dataset).get("Quantity");
 		try {
 			Common.findElement("xpath", "//select[@class='quantity-dropdown']");
-//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+//			Common.javascriptclickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='quantity-dropdown']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
 			String value = Common.findElement("xpath", "//select[@class='quantity-dropdown']").getAttribute("value");
@@ -6468,14 +6442,14 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.javascriptclickElement("xpath", "//label[@for='stripe_payments']");
 			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Edit']");
-			Common.clickElement("xpath", "//span[text()='Edit']");
-			Common.clickElement("xpath", "//select[@name='billing_address_id']");
+			Common.javascriptclickElement("xpath", "//span[text()='Edit']");
+			Common.javascriptclickElement("xpath", "//select[@name='billing_address_id']");
 			Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT, "New Address");
 			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 			Thread.sleep(4000);
@@ -6504,7 +6478,7 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.javascriptclickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
@@ -6553,7 +6527,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
+				Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PLPprice = Common
@@ -6566,9 +6540,9 @@ public class GoldHydroHelper {
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//span[text()='Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
-				Common.clickElement("xpath", "//span[text()='Subscribe']");
+				Common.javascriptclickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6580,9 +6554,9 @@ public class GoldHydroHelper {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//span[text()='Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
-				Common.clickElement("xpath", "//span[text()='Subscribe']");
+				Common.javascriptclickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6597,7 +6571,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
+				Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PLPprice = Common
@@ -6610,9 +6584,9 @@ public class GoldHydroHelper {
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//span[text()='Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
-				Common.clickElement("xpath", "//span[text()='Subscribe']");
+				Common.javascriptclickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6624,9 +6598,9 @@ public class GoldHydroHelper {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//span[text()='Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
-				Common.clickElement("xpath", "//span[text()='Subscribe']");
+				Common.javascriptclickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6678,7 +6652,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
+				Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PLPprice = Common
@@ -6691,7 +6665,7 @@ public class GoldHydroHelper {
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//a[text()='Notify Me When Available']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6704,7 +6678,7 @@ public class GoldHydroHelper {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//a[text()='Notify Me When Available']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6721,7 +6695,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
+				Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PLPprice = Common
@@ -6734,7 +6708,7 @@ public class GoldHydroHelper {
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//a[text()='Notify Me When Available']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6747,7 +6721,7 @@ public class GoldHydroHelper {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//a[text()='Notify Me When Available']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -6786,7 +6760,7 @@ public class GoldHydroHelper {
 				search_product("Product");
 				Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
 						"validating the Navigation to the My Favorites page",
@@ -6800,12 +6774,12 @@ public class GoldHydroHelper {
 				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
-				Common.clickElement("xpath", "//button[@title='Share Favorites']");
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Common.clickElement("xpath", "//button[@title='Share Favorites']");
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
@@ -6815,12 +6789,12 @@ public class GoldHydroHelper {
 						"Sucessfully message has been displayed for whishlist",
 						"failed to display the message for whishlist");
 			} else {
-				Common.clickElement("xpath", "//button[@title='Share Favorites']");
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Common.clickElement("xpath", "//button[@title='Share Favorites']");
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
@@ -6864,14 +6838,14 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -6880,12 +6854,12 @@ public class GoldHydroHelper {
 			hydro_boot_color("White");
 //				Myhydro_Engraving("Myhydro Product");
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent(20, "xpath", "//button[@class='ATC__btn']");
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 //				Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-//				Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+//				Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -6925,7 +6899,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -6933,7 +6907,7 @@ public class GoldHydroHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Now']");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -6943,9 +6917,9 @@ public class GoldHydroHelper {
 			Myhydro_Engraving("Myhydro Product");
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent(20, "xpath", "//button[@class='ATC__btn']");
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -6971,7 +6945,7 @@ public class GoldHydroHelper {
 			if (Dataset.equals("20 oz")) {
 				Thread.sleep(8000);
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='20 oz']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='20 oz']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='20 oz']");
 				Thread.sleep(4000);
 				String name = Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
 				System.out.println(name);
@@ -6981,7 +6955,7 @@ public class GoldHydroHelper {
 						"failed to Navigate to the selected product");
 			} else if (Dataset.equals("40 oz")) {
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='40 oz']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='40 oz']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='40 oz']");
 				Thread.sleep(4000);
 				String name = Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
 				System.out.println(name);
@@ -6991,7 +6965,7 @@ public class GoldHydroHelper {
 						"failed to Navigate to the selected product");
 			} else if (Dataset.equals("32 oz")) {
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='32 oz']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='32 oz']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='32 oz']");
 				String name = Common.findElement("xpath", "//h1[@class='hero-section__product-title']").getText();
 				System.out.println(name);
 				Common.assertionCheckwithReport(name.contains(Dataset), "validating the product in pdp page",
@@ -7014,7 +6988,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + Color + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + Color + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + Color + "']");
 			String productcolor = Common.findElement("xpath", "//label[@class='color-feature__selection__label']")
 					.getText();
 			System.out.println(productcolor);
@@ -7036,7 +7010,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Cap = Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Cap.contains("Cap"), "validating the color selection for bottle",
@@ -7045,7 +7019,7 @@ public class GoldHydroHelper {
 			hydro_select_cap("Wide Mouth Flex Sip Lid");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + Color + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + Color + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + Color + "']");
 			String productcolor = Common.findElement("xpath", "//label[@class='color-feature__selection__label']")
 					.getText();
 			System.out.println(productcolor);
@@ -7068,7 +7042,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Strap = Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Strap.contains("Strap"), "validating the color selection for bottle",
@@ -7077,7 +7051,7 @@ public class GoldHydroHelper {
 			hydro_select_strap("Flex Strap - Long");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + Color + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + Color + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + Color + "']");
 			String productcolor = Common.findElement("xpath", "//label[@class='color-feature__selection__label']")
 					.getText();
 			System.out.println(productcolor);
@@ -7101,14 +7075,14 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String boot = Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(boot.contains("Boot"), "validating the color selection for bottle",
 					"color should be select for the bottle", "Sucessfully color has been selected for the bottle",
 					"failed to select the color for the selected bottle");
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + Color + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + Color + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + Color + "']");
 			String productcolor = Common.findElement("xpath", "//label[@class='color-feature__selection__label']")
 					.getText();
 			System.out.println(productcolor);
@@ -7133,7 +7107,7 @@ public class GoldHydroHelper {
 			if (Cap.contains("Flex Cap")) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='" + Cap + "']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='" + Cap + "']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='" + Cap + "']");
 				Thread.sleep(3000);
 				String name = Common.findElement("xpath", "//button[@data-gtm-parts='" + Cap + "']")
 						.getAttribute("class");
@@ -7144,7 +7118,7 @@ public class GoldHydroHelper {
 			} else if (Cap.contains("Flex Sip Lid")) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='" + Cap + "']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='" + Cap + "']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='" + Cap + "']");
 				Thread.sleep(3000);
 				String name = Common.findElement("xpath", "//button[@data-gtm-parts='" + Cap + "']")
 						.getAttribute("class");
@@ -7171,7 +7145,7 @@ public class GoldHydroHelper {
 			if (Starp.contains("Flex Cap Strap")) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='" + Starp + "']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='" + Starp + "']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='" + Starp + "']");
 				Thread.sleep(3000);
 				String name = Common.findElement("xpath", "//button[@data-gtm-parts='" + Starp + "']")
 						.getAttribute("class");
@@ -7182,7 +7156,7 @@ public class GoldHydroHelper {
 			} else if (Starp.contains("Long")) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//button[@data-gtm-parts='" + Starp + "']");
-				Common.clickElement("xpath", "//button[@data-gtm-parts='" + Starp + "']");
+				Common.javascriptclickElement("xpath", "//button[@data-gtm-parts='" + Starp + "']");
 				Thread.sleep(3000);
 				String name = Common.findElement("xpath", "//button[@data-gtm-parts='" + Starp + "']")
 						.getAttribute("class");
@@ -7208,7 +7182,7 @@ public class GoldHydroHelper {
 		String engravingtext = data.get(Dataset).get("Engraving");
 		try {
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Engraving = Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Engraving.contains("Engraving"), "validating the Engraving for the bottle",
@@ -7252,7 +7226,7 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -7305,9 +7279,9 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		String quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.clickElement("xpath", "//select[@class='a-form-elem a-select-menu']");
+			Common.javascriptclickElement("xpath", "//select[@class='a-form-elem a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, quantity);
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.javascriptclickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
@@ -7355,7 +7329,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -7395,9 +7369,9 @@ public class GoldHydroHelper {
 			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + PLPcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + PLPcolor + "']");
+			Common.javascriptclickElement("xpath", "//div[@aria-label='" + PLPcolor + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 
 			Thread.sleep(4000);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -7432,7 +7406,7 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -7441,9 +7415,9 @@ public class GoldHydroHelper {
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 //			Common.scrollIntoView("xpath", "//button[contains(@class,'video')]");
-			Common.clickElement("xpath", "//div[contains(@class,'fotorama__nav__frame fotorama__nav__frame--thumb v')]");
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'fotorama__nav__frame fotorama__nav__frame--thumb v')]");
 			Sync.waitElementPresent(40, "xpath", "//button[@title='Play']");
-			Common.clickElement("xpath", "//button[@title='Play']");
+			Common.javascriptclickElement("xpath", "//button[@title='Play']");
 			Sync.waitForLoad();
 			String video = Common.findElement("xpath", "//button[contains(@class,'vjs-play-con')]")
 					.getAttribute("title");
@@ -7467,7 +7441,7 @@ public class GoldHydroHelper {
 		String expectedResult = "It should opens textbox input to enter discount.";
 		try {
 			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title']");
-			Common.clickElement("xpath", "//button[@class='m-accordion__title']");
+			Common.javascriptclickElement("xpath", "//button[@class='m-accordion__title']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -7479,7 +7453,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Sync.waitElementClickable("xpath", "//button[@value='Add']");
-			Common.clickElement("xpath", "//button[@value='Add']");
+			Common.javascriptclickElement("xpath", "//button[@value='Add']");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -7537,15 +7511,15 @@ public class GoldHydroHelper {
 	public void reorder() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
-			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__welcome']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Orders']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//span[text()='View Order']");
+			Common.javascriptclickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
-			Common.clickElement("xpath", "//span[text()='Reorder']");
+			Common.javascriptclickElement("xpath", "//span[text()='Reorder']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -7624,9 +7598,9 @@ public class GoldHydroHelper {
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
 		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 		Sync.waitElementPresent("xpath", "//a[text()='My Account']");
-		Common.clickElement("xpath", "//a[text()='My Account']");
+		Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		if (Common.getCurrentURL().contains("preprod")) {
@@ -7637,7 +7611,7 @@ public class GoldHydroHelper {
 				for (i = 0; i < Account.length; i++) {
 					Sync.waitElementPresent("xpath",
 							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
-					Common.clickElement("xpath",
+					Common.javascriptclickElement("xpath",
 							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
@@ -7665,7 +7639,7 @@ public class GoldHydroHelper {
 				for (i = 0; i < Account.length; i++) {
 					Sync.waitElementPresent("xpath",
 							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
-					Common.clickElement("xpath",
+					Common.javascriptclickElement("xpath",
 							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
@@ -7732,26 +7706,33 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
-
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			Thread.sleep(4000);
+			System.out.println(product);
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText().replace("Water Bottle", "").replace(" - ", "");
+			System.out.println(name);
+			Common.assertionCheckwithReport(name.contains(product),
+					"validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page",
+					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Sync.waitPageLoad();
 			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
-					"//div[@class='product-options-wrapper']//div[@class='m-swatch m-swatch-group__option swatch-option color']");
+					"//div[@class='product-options-wrapper']//div[contains(@class,'m-swatch m-swatch-group__option')]");
 			System.out.println(ListOfSubproducts.size());
 			for (int i = 0; i < ListOfSubproducts.size(); i++) {
 				ListOfSubproducts.get(i).click();
-
+				int value = i + 1;
 				Thread.sleep(5000);
-				String colorname = Common.getText("xpath",
-						"//div[@class='swatch-opt']//span[contains(@class,'m-swatch')]");
+				String colorname = Common.getText("xpath","//div[@class='swatch-opt']//span[contains(@class,'m-swatch')]");
 				System.out.println(colorname);
-				String color = Common
-						.findElement("xpath", "(//div[@class='m-product-gallery__wrapper gallery-grid']//img)[1]")
-						.getAttribute("alt").replace(product, "").replace(" - ", "");
+				String Bottleimagecolor = Common
+						.findElement("xpath", "(//div[contains(@class,'fotorama__nav__frame fotorama')]//img)[1]")
+						.getAttribute("alt").replace("Go to", "").replace(product, "").replace(" -  ", "").replace("1", "");
+				System.out.println(Bottleimagecolor);
+				String color = Common.findElement("xpath", "(//div[@class='m-product-overview__info']//div[contains(@style,'background:') and @index ])[" + value + "]")
+						.getAttribute("data-option-label");
 				System.out.println(color);
-				String s = Common.findElement("xpath", "//img[contains(@class,'m-product-gallery__media')]").getAttribute("src");
-				System.out.println(s);
-
-				Common.assertionCheckwithReport(colorname.equals(color), "validating the  product add to the cart",
+				Common.assertionCheckwithReport(colorname.equals(color) || colorname.equals(Bottleimagecolor), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
 
@@ -7789,7 +7770,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -7797,13 +7778,13 @@ public class GoldHydroHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + color + "']");
-			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
+			Common.javascriptclickElement("xpath", "//div[@aria-label='" + color + "']");
+			Common.javascriptclickElement("xpath", "//button[@data-role='engrave-btn']");
 			engraving_color();
 			engraving_Text("Horizontal Text");
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -7829,14 +7810,14 @@ public class GoldHydroHelper {
 		System.out.println(engravetext);
 		try {
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + font + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + font + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + font + "']");
 			Thread.sleep(3000);
 			String Font = Common.findElement("xpath", "//span[@class='text-engraving__label']").getText();
 			Common.assertionCheckwithReport(Font.equals(font), "validating the font text for the product",
 					"Font should be select for the product", "Sucessfully font has been selected for the product",
 					"failed to select the font for the product");
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + Texttype + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + Texttype + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + Texttype + "']");
 			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='" + Texttype + "']");
 			Thread.sleep(3000);
 			String Text = Common.findElement("xpath", "//button[@aria-label='" + Texttype + "']").getAttribute("class");
@@ -7938,7 +7919,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -7946,13 +7927,13 @@ public class GoldHydroHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + color + "']");
-			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
+			Common.javascriptclickElement("xpath", "//div[@aria-label='" + color + "']");
+			Common.javascriptclickElement("xpath", "//button[@data-role='engrave-btn']");
 			engraving_color();
 			engraving_graphic("Graphic");
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -7975,7 +7956,7 @@ public class GoldHydroHelper {
 		String graphic = data.get(Dataset).get("Engraving Graphic");
 		try {
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
-			Common.clickElement("xpath", "//span[text()='Graphic']");
+			Common.javascriptclickElement("xpath", "//span[text()='Graphic']");
 			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
 					.size();
 			for (int i = 0; i < subproductsList; i++) {
@@ -8015,7 +7996,7 @@ public class GoldHydroHelper {
 				}
 			}
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + graphic + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + graphic + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + graphic + "']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8051,7 +8032,7 @@ public class GoldHydroHelper {
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(minicart);
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
-			Common.clickElement("xpath", "//button[@title='Checkout']");
+			Common.javascriptclickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -8098,14 +8079,14 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -8114,9 +8095,9 @@ public class GoldHydroHelper {
 			hydro_boot_color("White");
 			Myhydrographic("Graphic");
 			Myhydro_quantity(Dataset);
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8139,7 +8120,7 @@ public class GoldHydroHelper {
 		String graphic = data.get(Dataset).get("Engraving Graphic");
 		try {
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Thread.sleep(3000);
 			String Engraving = Common.findElement("xpath", "//h1[@class='menu__category-title']").getText();
 			Common.assertionCheckwithReport(Engraving.contains("Engraving"), "validating the Engraving for the bottle",
@@ -8147,7 +8128,7 @@ public class GoldHydroHelper {
 					"Sucessfully Engraving  has been selected for the bottle",
 					"failed to select the Engraving for the selected bottle");
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
-			Common.clickElement("xpath", "//span[text()='Graphic']");
+			Common.javascriptclickElement("xpath", "//span[text()='Graphic']");
 			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
 					.size();
 			for (int i = 0; i < subproductsList; i++) {
@@ -8187,7 +8168,7 @@ public class GoldHydroHelper {
 				}
 			}
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + graphic + "']");
-			Common.clickElement("xpath", "//button[@aria-label='" + graphic + "']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='" + graphic + "']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8221,21 +8202,21 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
 			hydro_cap_color("White");
 			hydro_strap_color("Black");
 			hydro_boot_color("White");
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
 			Sync.waitForLoad();
@@ -8264,14 +8245,14 @@ public class GoldHydroHelper {
 		String Email = data.get(Dataset).get("Email");
 		try {
 			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");
-			Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
 			Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
 			Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_q')]", Question);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='display_name']");
 			Common.textBoxInput("xpath", "//input[@name='display_name']", Name);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", Email);
-			Common.clickElement("xpath", "//input[@data-button-type='submit']");
+			Common.javascriptclickElement("xpath", "//input[@data-button-type='submit']");
 			Thread.sleep(4000);
 			String question = Common
 					.findElement("xpath", "//div[@class='yotpo-thank-you']//span[contains(text(),'Thank you')]")
@@ -8311,7 +8292,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -8319,14 +8300,14 @@ public class GoldHydroHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//div[@aria-label='" + color + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + color + "']");
-			Common.clickElement("xpath", "//button[@data-role='engrave-btn']");
+			Common.javascriptclickElement("xpath", "//div[@aria-label='" + color + "']");
+			Common.javascriptclickElement("xpath", "//button[@data-role='engrave-btn']");
 			engraving_color();
 			engraving_Text("Multiline Horizontal");
 			product_quantity(Dataset);
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8365,7 +8346,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -8373,7 +8354,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -8382,9 +8363,9 @@ public class GoldHydroHelper {
 			hydro_boot_color("White");
 			Myhydro_Engraving("Multiline Horizontal");
 			Myhydro_quantity(Dataset);
-			Common.clickElement("xpath", "//button[@class='ATC__btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8411,7 +8392,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Warranty']");
-			Common.clickElement("xpath", "//a[text()='Warranty']");
+			Common.javascriptclickElement("xpath", "//a[text()='Warranty']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
@@ -8432,7 +8413,7 @@ public class GoldHydroHelper {
 		String expectedResult = "It should opens the search resluts of searched prodcuts.";
 
 		try {
-			Common.clickElement("xpath", "//input[@class='form-control form-control-search']");
+			Common.javascriptclickElement("xpath", "//input[@class='form-control form-control-search']");
 			// Common.textBoxInput("xpath", "//input[@id='search']", search);
 			String searchresults = Common.findElement("xpath", "//input[@class='form-control form-control-search']")
 					.getText();
@@ -8463,7 +8444,7 @@ public class GoldHydroHelper {
 	public void unorderprodcut_search(String search) {
 // TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
 			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
@@ -8495,7 +8476,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-header__s')]");
 			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
 			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
@@ -8531,12 +8512,12 @@ public class GoldHydroHelper {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Bottles & Drinkware']");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.javascriptclickElement("xpath", "//span[text()=' Bottles & Drinkware']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -8576,12 +8557,12 @@ public class GoldHydroHelper {
 			if (preprod.contains("preprod")) {
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+					Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+					Common.javascriptclickElement("xpath", "//span[text()=' Kitchenware']");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-					Common.clickElement("xpath",
+					Common.javascriptclickElement("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
@@ -8593,7 +8574,7 @@ public class GoldHydroHelper {
 							"verifying the header link " + Links[i] + "Under Kitchware",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
-					Common.clickElement("xpath", "//a[@title='Go to Home Page']");
+					Common.javascriptclickElement("xpath", "//a[@title='Go to Home Page']");
 					Common.implicitWait();
 					Thread.sleep(2000);
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask"),
@@ -8607,12 +8588,12 @@ public class GoldHydroHelper {
 
 				for (i = 0; i < ProdLink.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+					Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+					Common.javascriptclickElement("xpath", "//span[text()=' Kitchenware']");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-					Common.clickElement("xpath",
+					Common.javascriptclickElement("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
@@ -8624,7 +8605,7 @@ public class GoldHydroHelper {
 							"verifying the header link " + Links[i] + "Under Kitchware",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
-					Common.clickElement("xpath", "//a[@title='Go to Home Page']");
+					Common.javascriptclickElement("xpath", "//a[@title='Go to Home Page']");
 					Common.implicitWait();
 					Thread.sleep(2000);
 					Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask"),
@@ -8657,12 +8638,12 @@ public class GoldHydroHelper {
 
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Accessories']");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.javascriptclickElement("xpath", "//span[text()=' Accessories']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -8697,12 +8678,12 @@ public class GoldHydroHelper {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Featured']");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.javascriptclickElement("xpath", "//span[text()=' Featured']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -8734,9 +8715,9 @@ public class GoldHydroHelper {
 		int i = 0;
 		try {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-			Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
 			Sync.waitElementPresent("xpath", "//span[text()=' Customize']");
-			Common.clickElement("xpath", "//span[text()=' Customize']");
+			Common.javascriptclickElement("xpath", "//span[text()=' Customize']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String cutomize = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
@@ -8745,11 +8726,11 @@ public class GoldHydroHelper {
 					"Failed to navigate to the cutomize");
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
-				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
-				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
+				Common.javascriptclickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
@@ -8780,11 +8761,11 @@ public class GoldHydroHelper {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Explore')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Explore')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),'Explore')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a[@class='ui-corner-all']//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath", "//a[@class='ui-corner-all']//span[contains(text(),'" + Links[i] + "')]");
+				Common.javascriptclickElement("xpath", "//a[@class='ui-corner-all']//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask")
@@ -8796,14 +8777,14 @@ public class GoldHydroHelper {
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 				Thread.sleep(3000);
 				if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
-					Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
+					Common.javascriptclickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
 				} else {
-					Common.clickElement("xpath", "//img[@alt='Logo']");
+					Common.javascriptclickElement("xpath", "//img[@alt='Logo']");
 				}
 
 			}
 			Sync.waitElementPresent("xpath", "//span[text()=' Customize']");
-			Common.clickElement("xpath", "//span[text()=' Customize']");
+			Common.javascriptclickElement("xpath", "//span[text()=' Customize']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String cutomize = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
@@ -8870,7 +8851,7 @@ public class GoldHydroHelper {
 		try {
 			Common.actionsKeyPress(Keys.UP);
 			Sync.waitElementPresent("xpath", "//a[@title='Back to Cart']");
-			Common.clickElement("xpath", "//a[@title='Back to Cart']");
+			Common.javascriptclickElement("xpath", "//a[@title='Back to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shopping Cart"),
@@ -8893,9 +8874,9 @@ public class GoldHydroHelper {
 	public void empty_storedpayment() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
 					"validating the Navigation to the My account page",
@@ -8914,7 +8895,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Common.javascriptclickElement("xpath", "//a[text()='Stored Payment Methods']");
 			Sync.waitPageLoad(30);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
@@ -8950,7 +8931,7 @@ public class GoldHydroHelper {
 				Thread.sleep(3000);
 				Common.findElement("xpath",
 						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
@@ -8986,7 +8967,7 @@ public class GoldHydroHelper {
 				Thread.sleep(3000);
 				Common.findElement("xpath",
 						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
@@ -9028,7 +9009,7 @@ public class GoldHydroHelper {
 				Thread.sleep(3000);
 				Common.findElement("xpath",
 						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
@@ -9064,7 +9045,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent(30, "xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
-			Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
+			Common.javascriptclickElement("xpath", "//ul[@class='m-footer-links__list']//a[contains(text(),'Careers')]");
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Careers | Helen of Troy"),
 					"validating the links navigation from footer Links",
@@ -9087,8 +9068,8 @@ public class GoldHydroHelper {
 
 		try {
 			Sync.waitElementPresent("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
-			Common.clickElement("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
-			Common.clickElement("xpath", "//span[contains(text(),' Color')]");
+			Common.javascriptclickElement("xpath", "//div[@class='yotpo-nav-wrapper']//span[contains(text(),'REVIEWS')]");
+			Common.javascriptclickElement("xpath", "//span[contains(text(),' Color')]");
 			String search = Common.findElement("xpath", "//span[contains(text(),' Color')]").getText();
 			System.out.println(search);
 			Sync.waitImplicit(30);
@@ -9105,7 +9086,7 @@ public class GoldHydroHelper {
 			}
 
 			Sync.waitElementPresent("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
-			Common.clickElement("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
+			Common.javascriptclickElement("xpath", "//div[contains(@class,'yotpo-default')]//span[text()='Clear All']");
 			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@type='search']", filter);
 			Common.actionsKeyPress(Keys.ENTER);
@@ -9138,7 +9119,7 @@ public class GoldHydroHelper {
 			Common.actionsKeyPress(Keys.DOWN);
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Common.scrollIntoView("xpath", "//a[contains(@aria-label,'Next Page')]");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
+			Common.javascriptclickElement("xpath", "//a[contains(@aria-label,'Next Page')]");
 			Thread.sleep(4000);
 			String rightarrow = Common.findElement("xpath", "//a[contains(@aria-label,'Page 2')]")
 					.getAttribute("aria-label");
@@ -9147,7 +9128,7 @@ public class GoldHydroHelper {
 					"After Clicking on right arrow button it display the next page",
 					"Sucessfully next page has been displayed", "Failed to display the next page");
 			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Previous Page')]");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Previous Page')]");
+			Common.javascriptclickElement("xpath", "//a[contains(@aria-label,'Previous Page')]");
 			Thread.sleep(3000);
 			String leftarrow = Common.findElement("xpath", "//a[contains(@aria-label,'Page 1')]")
 					.getAttribute("aria-label");
@@ -9171,9 +9152,9 @@ public class GoldHydroHelper {
 		String rating = data.get(Dataset).get("Review");
 		String filter = data.get(Dataset).get("CommetsHydroflask");
 		try {
-			Common.clickElement("xpath", "//span[text()='Select']");
+			Common.javascriptclickElement("xpath", "//span[text()='Select']");
 			Sync.waitElementPresent("xpath", "//a[text()='" + filter + "']");
-			Common.clickElement("xpath", "//a[text()='" + filter + "']");
+			Common.javascriptclickElement("xpath", "//a[text()='" + filter + "']");
 			for (int i = 0; i <= 10 - 6; i++) {
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//div[@class='yotpo-review-stars ']//span[text()='" + rating + "']");
@@ -9202,7 +9183,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//p//a[contains(text(),'Privacy Policy')]");
-			Common.clickElement("xpath", "//p//a[contains(text(),'Privacy Policy')]");
+			Common.javascriptclickElement("xpath", "//p//a[contains(text(),'Privacy Policy')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Privacy Policy"),
@@ -9232,12 +9213,12 @@ public class GoldHydroHelper {
 			for (i = 0; i < Links.length; i++) {
 				System.out.println(Links.length);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
-				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Sync.waitElementPresent("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
-				Common.clickElement("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
+				Common.javascriptclickElement("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Common.getPageTitle().contains(Link[i]) || Common.getPageTitle().contains("Shop New Colors") ,
@@ -9266,7 +9247,7 @@ public class GoldHydroHelper {
 		try {
 			String minicartproduct = Common
 					.findElement("xpath", "//a[@class='a-product-name' and @title='" + product + "']").getText();
-			Common.clickElement("xpath", "//a[@class='a-product-name' and @title='" + product + "']");
+			Common.javascriptclickElement("xpath", "//a[@class='a-product-name' and @title='" + product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
@@ -9276,7 +9257,7 @@ public class GoldHydroHelper {
 			click_minicart();
 			String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + color + "')]")
 					.getAttribute("alt");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
+			Common.javascriptclickElement("xpath", "//img[contains(@alt,'" + color + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(color),
@@ -9320,7 +9301,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
 			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
 			String minicartpopup = Common.findElement("xpath", "//div[@class='modal-popup confirm _show']")
 					.getAttribute("class");
@@ -9331,11 +9312,11 @@ public class GoldHydroHelper {
 					"Failed to Display the popup");
 			String popup = Common.findElement("xpath", "//h2[contains(text(),'Remove')]").getText();
 			if (popup.equals("Remove Item")) {
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
 			} else {
 				Assert.fail();
 			}
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
 			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
@@ -9344,7 +9325,7 @@ public class GoldHydroHelper {
 					"Failed to Display the popup");
 			if (popup.equals("Remove Item")) {
 
-				Common.clickElement("xpath", "//button[@data-role='closeBtn' and @aria-label='Close']");
+				Common.javascriptclickElement("xpath", "//button[@data-role='closeBtn' and @aria-label='Close']");
 			} else {
 				Assert.fail();
 			}
@@ -9367,7 +9348,7 @@ public class GoldHydroHelper {
 		try {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[text()='Group Customization']");
-			Common.clickElement("xpath", "//a[text()='Group Customization']");
+			Common.javascriptclickElement("xpath", "//a[text()='Group Customization']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Corporate Purchasing"),
@@ -9392,7 +9373,7 @@ public class GoldHydroHelper {
 						"unable see the" + name + "in the coorparate purchasing page");
 			}
 			Sync.waitElementPresent("xpath", "//a[@class='pagebuilder-button-primary']//span[text()='Register']");
-			Common.clickElement("xpath", "//a[@class='pagebuilder-button-primary']//span[text()='Register']");
+			Common.javascriptclickElement("xpath", "//a[@class='pagebuilder-button-primary']//span[text()='Register']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("New Account Inquiry Form Page"),
@@ -9424,7 +9405,7 @@ public class GoldHydroHelper {
 		try {
 
 			Sync.waitElementPresent("xpath", "//span[text()='Write to Us']");
-			Common.clickElement("xpath", "//span[text()='Write to Us']");
+			Common.javascriptclickElement("xpath", "//span[text()='Write to Us']");
 
 			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
 			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
@@ -9434,32 +9415,32 @@ public class GoldHydroHelper {
 
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@id='conversationChannelIndustry']");
-			Common.clickElement("xpath", "//div[@id='conversationChannelIndustry']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationChannelIndustry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='" + channel + "']");
-			Common.clickElement("xpath", "//div[text()='" + channel + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + channel + "']");
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationTypeOfBusiness']");
-			Common.clickElement("xpath", "//div[@id='conversationTypeOfBusiness']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationTypeOfBusiness']");
 			Sync.waitElementPresent("xpath", "//div[text()='" + typeofbusiness + "']");
-			Common.clickElement("xpath", "//div[text()='" + typeofbusiness + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + typeofbusiness + "']");
 
 			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
 
-//			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
+//			Common.javascriptclickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
 //			Thread.sleep(4000);
-//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Common.Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 //			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
-//			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
+//			Common.javascriptclickElement("xpath", "//div[@id='conversationCustomOrder']");
 //			Thread.sleep(4000);
-//			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
+//			Common.Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
 //			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
 //
 //			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
 
-			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationSellThruWebsite']");
 			Thread.sleep(4000);
 			Common.javascriptclickElement("xpath", "//div[@data-path='no']");
 
@@ -9468,8 +9449,8 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@id='numberOfStores']", data.get(dataSet).get("numberOfStores"));
 
-			Common.clickElement("xpath", "//div[@id='conversationStoreSize']");
-			Common.clickElement("xpath", "//div[text()='" + storesize + "']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationStoreSize']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + storesize + "']");
 
 			Common.textBoxInput("xpath", "//input[@id='annualRevenue']", data.get(dataSet).get("annualRevenue"));
 
@@ -9479,10 +9460,10 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@id='yearsInBusiness']", data.get(dataSet).get("yearsInBusiness"));
 			
 			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
-			Common.clickElement("xpath", "//div[@id='conversationCountry']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationCountry']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
-			Common.clickElement("xpath", "//div[text()='" + country + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + country + "']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='storeAddress']");
 			Common.textBoxInput("xpath", "//input[@id='storeAddress']", data.get(dataSet).get("Street"));
@@ -9492,10 +9473,10 @@ public class GoldHydroHelper {
 	
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
-			Common.clickElement("xpath", "//div[@id='conversationState']");
+			Common.javascriptclickElement("xpath", "//div[@id='conversationState']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='" + state + "']");
-			Common.clickElement("xpath", "//div[text()='" + state + "']");
+			Common.javascriptclickElement("xpath", "//div[text()='" + state + "']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
 			Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
@@ -9528,7 +9509,7 @@ public class GoldHydroHelper {
 
 			Common.textBoxInput("xpath", "//input[@name='inquirySubmittedBy']", data.get(dataSet).get("submittedby"));
 
-			Common.clickElement("xpath", "//button[text()='Submit']");
+			Common.javascriptclickElement("xpath", "//button[text()='Submit']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 			int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
@@ -9561,7 +9542,7 @@ public class GoldHydroHelper {
 		String colorname = data.get(Dataset).get("Color");
 		try {
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
-			Common.clickElement("xpath", "//button[@aria-label='Colors']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Colors']");
 			Thread.sleep(3000);
 			String expand = Common.findElement("xpath", "//button[@aria-label='Colors']").getAttribute("aria-expanded");
 			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
@@ -9570,7 +9551,7 @@ public class GoldHydroHelper {
 					"unable to expand the colors in PLP page");
 			Sync.waitElementPresent("xpath",
 					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
-			Common.clickElement("xpath",
+			Common.javascriptclickElement("xpath",
 					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
 			Thread.sleep(3000);
 			String colorcount = Common.findElement("xpath",
@@ -9679,8 +9660,8 @@ public class GoldHydroHelper {
 			System.out.println(seeoption);
 			if (seeoption.equals("See options")) {
 				Sync.waitElementPresent("xpath", "//label[@for='wishlist-select-all']");
-				Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
-				Common.clickElement("xpath", "//span[text()='Remove From My Favorites']");
+				Common.javascriptclickElement("xpath", "//label[@for='wishlist-select-all']");
+				Common.javascriptclickElement("xpath", "//span[text()='Remove From My Favorites']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String emptymessage = Common.findElement("xpath", "//form[@class='form-wishlist-items']//div//span")
@@ -9692,9 +9673,9 @@ public class GoldHydroHelper {
 						"failed to see empty products in my favorites page");
 				search_product("Product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
 						"validating the Navigation to the My Favorites page",
@@ -9706,7 +9687,7 @@ public class GoldHydroHelper {
 				Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
 
 				Sync.waitElementPresent(30, "xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -9719,7 +9700,7 @@ public class GoldHydroHelper {
 
 			} else {
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -9745,12 +9726,12 @@ public class GoldHydroHelper {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' New Colors')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.javascriptclickElement("xpath", "//span[contains(text(),' New Colors')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
+				Common.javascriptclickElement("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -9781,15 +9762,15 @@ public class GoldHydroHelper {
 		String prod = data.get(Dataset).get("prod product");
 		try {
 			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.javascriptclickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Account']");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
 					"validating the page navigation to the my account",
 					"after clicking on the my account it should navigate to the my account page",
 					"Sucessfully Navigated to the my account page", "failed to Navigate to the my account page");
 			Sync.waitElementPresent("xpath", "//a[text()='My Out of Stock Subscriptions']");
-			Common.clickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Common.javascriptclickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(20, "xpath", "//span[@class='a-product-name']");
@@ -9821,12 +9802,12 @@ public class GoldHydroHelper {
 		         	Thread.sleep(4000);
 		         	for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[text()=' Coolers']");
+					Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
+					Common.javascriptclickElement("xpath", "//span[text()=' Coolers']");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
-					Common.clickElement("xpath",
+					Common.javascriptclickElement("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
@@ -9856,11 +9837,11 @@ public class GoldHydroHelper {
 					.getAttribute("data-price-amount");
 			if (price.equals(Dataset)) {
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+				Common.javascriptclickElement("xpath", "(//span[text()='Remove'])[2]");
 				Common.implicitWait();
 				Common.alerts("Cancel");
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+				Common.javascriptclickElement("xpath", "(//span[text()='Remove'])[2]");
 				Common.implicitWait();
 				Common.alerts("Ok");
 
@@ -9881,7 +9862,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitElementPresent(20, "xpath", "//span[text()='Edit']//parent::a");
 			String name = Common.findElement("xpath", "//span[text()='Edit']//parent::a").getAttribute("aria-label");
-			Common.clickElement("xpath", "//span[text()='Edit']//parent::a");
+			Common.javascriptclickElement("xpath", "//span[text()='Edit']//parent::a");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
@@ -9891,10 +9872,10 @@ public class GoldHydroHelper {
 					"user successfully Navigated to the edit account page",
 					"Failed to navigate to the edit account page");
 			oldemail = Common.findElement("xpath", "//p[@class='text-email']").getText();
-			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
 			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Utils.getEmailid());
 			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Common.javascriptclickElement("xpath", "//span[text()='Save Changes']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String errormessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -9907,17 +9888,17 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod")) {
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+				Common.javascriptclickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
 				Common.textBoxInputAndVerify("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//input[@name='current_password']",
 						data.get(Dataset).get("Confirm Password"));
 			} else {
-				Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+				Common.javascriptclickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
 				Common.textBoxInputAndVerify("xpath", "//input[@name='email']", data.get(Dataset).get("Prod Email"));
 				Common.textBoxInput("xpath", "//input[@name='current_password']",
 						data.get(Dataset).get("Confirm Password"));
 			}
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Common.javascriptclickElement("xpath", "//span[text()='Save Changes']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String emailerrormessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']")
@@ -9930,12 +9911,12 @@ public class GoldHydroHelper {
 					"Failed to get the error message if the user gives an existing email id");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
 			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Utils.getEmailid());
 			String newemail = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Common.javascriptclickElement("xpath", "//span[text()='Save Changes']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String successmessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -9949,7 +9930,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", newemail);
 			Common.textBoxInput("id", "pass", data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
@@ -9974,7 +9955,7 @@ public class GoldHydroHelper {
 		try {
 
 			String name = Common.findElement("xpath", "//span[text()='Edit']//parent::a").getAttribute("aria-label");
-			Common.clickElement("xpath", "//span[text()='Edit']//parent::a");
+			Common.javascriptclickElement("xpath", "//span[text()='Edit']//parent::a");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
@@ -9983,10 +9964,10 @@ public class GoldHydroHelper {
 					"user should navigate to the Edit account page",
 					"user successfully Navigated to the edit account page",
 					"Failed to navigate to the edit account page");
-			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
 			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Dataset);
 			Common.textBoxInput("xpath", "//input[@name='current_password']", "Lotuswave@1234");
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Common.javascriptclickElement("xpath", "//span[text()='Save Changes']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String successmessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -10000,7 +9981,7 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Dataset);
 			Common.textBoxInput("id", "pass", "Lotuswave@1234");
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
@@ -10031,7 +10012,7 @@ public class GoldHydroHelper {
 			Common.actionsKeyPress(Keys.DOWN);
 			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
 			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -10060,7 +10041,7 @@ public class GoldHydroHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//a[text()='Newsletter Subscriptions']");
-			Common.clickElement("xpath", "//a[text()='Newsletter Subscriptions']");
+			Common.javascriptclickElement("xpath", "//a[text()='Newsletter Subscriptions']");
 			String newsletter = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
 			Common.assertionCheckwithReport(newsletter.contains("Newsletter Subscription"),
 					"validating the Navigation to the Newsletter Subscription page",
@@ -10072,10 +10053,10 @@ public class GoldHydroHelper {
 			if (!Checkbox.isSelected()) {
 				Checkbox.click();
 				Sync.waitElementPresent(20, "xpath", "//button[text()='UPDATE PREFERENCES']");
-				Common.clickElement("xpath", "//button[text()='UPDATE PREFERENCES']");
+				Common.javascriptclickElement("xpath", "//button[text()='UPDATE PREFERENCES']");
 			} else {
 				Sync.waitElementPresent(20, "xpath", "//button[text()='UPDATE PREFERENCES']");
-				Common.clickElement("xpath", "//button[text()='UPDATE PREFERENCES']");
+				Common.javascriptclickElement("xpath", "//button[text()='UPDATE PREFERENCES']");
 			}
 			
 			Sync.waitPageLoad();
@@ -10152,24 +10133,24 @@ public class GoldHydroHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
-			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.javascriptclickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.javascriptclickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//input[@name='email']");
+			Common.javascriptclickElement("xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			System.out.println(email);
-			Common.clickElement("xpath", "//input[@name='password']");
+			Common.javascriptclickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.javascriptclickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
-			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.javascriptclickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
@@ -10221,14 +10202,14 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -10236,10 +10217,10 @@ public class GoldHydroHelper {
 			hydro_strap_color("Black");
 			hydro_boot_color("White");
 			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			Common.javascriptclickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent("xpath", "//button[@class='favorite__btn']//img");
-			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
+			Common.javascriptclickElement("xpath", "//button[@class='favorite__btn']//img");
 			Sync.waitPageLoad(30);
 			Thread.sleep(4000);
 			if(Common.getPageTitle().contains("Customer Login"))
@@ -10257,7 +10238,7 @@ public class GoldHydroHelper {
 					Common.textBoxInput("id", "email", data.get(Dataset).get("Prod UserName"));
 				}
 				Common.textBoxInput("id", "pass", data.get(Dataset).get("Password"));
-				Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
@@ -10286,7 +10267,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + products + "')]//img");
 				Common.mouseOver("xpath", "//a[contains(@title,'" + products + "')]//img");
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -10327,7 +10308,7 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -10335,7 +10316,7 @@ public class GoldHydroHelper {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Customize Now']");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -10345,7 +10326,7 @@ public class GoldHydroHelper {
 			Myhydro_Engraving("Myhydro Product");
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent("xpath", "//button[@class='favorite__btn']//img");
-			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
+			Common.javascriptclickElement("xpath", "//button[@class='favorite__btn']//img");
 			Sync.waitPageLoad(30);
 			Thread.sleep(3000);
 			if(Common.getPageTitle().contains("Customer Login"))
@@ -10363,7 +10344,7 @@ public class GoldHydroHelper {
 					Common.textBoxInput("id", "email", data.get(Dataset).get("Prod UserName"));
 				}
 				Common.textBoxInput("id", "pass", data.get(Dataset).get("Password"));
-				Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -10391,7 +10372,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + products + "')]//img");
 				Common.mouseOver("xpath", "//a[contains(@title,'" + products + "')]//img");
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -10432,14 +10413,14 @@ public class GoldHydroHelper {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.javascriptclickElement("xpath", "//span[text()='Customize Now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -10449,7 +10430,7 @@ public class GoldHydroHelper {
 			Myhydrographic("Graphic");
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent("xpath", "//button[@class='favorite__btn']//img");
-			Common.clickElement("xpath", "//button[@class='favorite__btn']//img");
+			Common.javascriptclickElement("xpath", "//button[@class='favorite__btn']//img");
 			Sync.waitPageLoad(30);
 			Thread.sleep(5000);
 			if(Common.getPageTitle().contains("Customer Login"))
@@ -10468,7 +10449,7 @@ public class GoldHydroHelper {
 					Common.textBoxInput("id", "email", data.get(Dataset).get("Prod UserName"));
 				}
 				Common.textBoxInput("id", "pass", data.get(Dataset).get("Password"));
-				Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'action login')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -10496,7 +10477,7 @@ public class GoldHydroHelper {
 				Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + products + "')]//img");
 				Common.mouseOver("xpath", "//a[contains(@title,'" + products + "')]//img");
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -10529,15 +10510,15 @@ public class GoldHydroHelper {
 			if(gift>1)
 			{
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()='Delete']");
+			Common.javascriptclickElement("xpath", "//span[text()='Delete']");
 			Sync.waitPageLoad(40);
 			Sync.waitElementPresent(40, "xpath", "//span[text()='Add Gift Message']");
-			Common.clickElement("xpath", "//span[text()='Add Gift Message']");
+			Common.javascriptclickElement("xpath", "//span[text()='Add Gift Message']");
 			Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
 			Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
-			Common.clickElement("xpath", "//button[@title='Add']");
+			Common.javascriptclickElement("xpath", "//button[@title='Add']");
 			Sync.waitPageLoad(40);
 			Thread.sleep(2000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
@@ -10554,7 +10535,7 @@ public class GoldHydroHelper {
 			Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
-			Common.clickElement("xpath", "//button[@title='Add']");
+			Common.javascriptclickElement("xpath", "//button[@title='Add']");
 			Sync.waitPageLoad(40);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
 			String Messgae=Common.findElement("xpath", "//div[@class='gift-message-summary']").getText().replace("Message: ", "");
