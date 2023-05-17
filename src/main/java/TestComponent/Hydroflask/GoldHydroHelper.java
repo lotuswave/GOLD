@@ -3896,7 +3896,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent(30, "xpath", "//label[@for='form_input_email']");
 			Common.javascriptclickElement("xpath", "//label[@for='form_input_email']");
 			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
-			Common.javascriptclickElement("xpath", "//button[@aria-label='Submit Modal Form']");
+			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
 			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
 			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
 			System.out.println(Errormessage);
@@ -8655,7 +8655,6 @@ public class GoldHydroHelper {
 						"verifying the header link " + Links[i] + "Under Accessories",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
-
 			}
 		}
 
@@ -8708,22 +8707,12 @@ public class GoldHydroHelper {
 
 	}
 
-	public void customize_shopall(String Dataset) {
+	public void shopall(String Dataset) {
 		// TODO Auto-generated method stub
 		String names = data.get(Dataset).get("shopall links");
 		String[] Links = names.split(",");
 		int i = 0;
 		try {
-			Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-			Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
-			Sync.waitElementPresent("xpath", "//span[text()=' Customize']");
-			Common.javascriptclickElement("xpath", "//span[text()=' Customize']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String cutomize = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-			Common.assertionCheckwithReport(cutomize.contains("Customize"), "verifying the customize under shop links",
-					"user should navigate to the cutomize link", "user successfully Navigated to the customize",
-					"Failed to navigate to the cutomize");
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.javascriptclickElement("xpath", "//span[contains(text(),' Shop')]");
@@ -8768,11 +8757,13 @@ public class GoldHydroHelper {
 				Common.javascriptclickElement("xpath", "//a[@class='ui-corner-all']//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
+				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(Common.getPageTitle().contains("We are Hydro Flask")
 						|| Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")
 						|| Common.getPageTitle().contains("Contact") || Common.getPageTitle().contains("Let’s Go!")
 						|| Common.getPageTitle().contains("Refill For Good")
-						|| Common.getPageTitle().contains("Parks For All"), "verifying the explore links navigation",
+						|| Common.getPageTitle().contains("Parks For All")
+						|| Common.getPageTitle().contains("Trade In"), "verifying the explore links navigation",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 				Thread.sleep(3000);
@@ -10550,6 +10541,43 @@ public class GoldHydroHelper {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
 					"Unabled to apply the gift message", Common.getscreenShot("failed to apply the gift message"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Customize_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Customize");
+		String[] Links = names.split(",");
+		int i=0;
+		try
+		{
+			Thread.sleep(4000);
+         	for (i = 0; i < Links.length; i++) {
+         		Sync.waitElementPresent("xpath", "//span[text()=' Customize']");
+    			Common.javascriptclickElement("xpath", "//span[text()=' Customize']");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Common.javascriptclickElement("xpath",
+					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			System.out.println(Links[i]);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Hydro™ by Hydro Flask") || Common.getPageTitle().contains("Shop Engrave Your Faves") || Common.getPageTitle().contains("Corporate Purchasing"),
+					"verifying the header link " + Links[i] + "Under Customize",
+					"user should navigate to the " + Links[i] + " page",
+					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+         	}
+		}
+		catch(Exception |Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Customize",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
 			Assert.fail();
 		}
 		
