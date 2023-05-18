@@ -237,6 +237,28 @@ public GoldOxoHelper(String datafile,String sheetname) {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 
 			Sync.waitPageLoad();
+			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
+					"//div[@class='product-options-wrapper']//div[contains(@class,'m-swatch m-swatch-group__option')]");
+			System.out.println(ListOfSubproducts.size());
+			for (int i = 0; i < ListOfSubproducts.size(); i++) {
+				ListOfSubproducts.get(i).click();
+				int value = i + 1;
+				Thread.sleep(5000);
+				String colorname = Common.getText("xpath","//div[@class='swatch-opt']//span[contains(@class,'m-swatch')]");
+				System.out.println(colorname);
+				String imagecolor = Common
+						.findElement("xpath", "(//div[contains(@class,'fotorama__nav__frame fotorama')]//img)[1]")
+						.getAttribute("alt").replace("Go to", "").replace(product, "").replace(" -  ", "").replace("1", "");
+				System.out.println(imagecolor);
+				String color = Common.findElement("xpath", "(//div[@class='m-product-overview__info']//div[contains(@style,'background') and @index ])[" + value + "]")
+						.getAttribute("data-option-label");
+				System.out.println(color);
+				Common.assertionCheckwithReport(colorname.equals(color) || colorname.equals(imagecolor), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
+
+			}
+
 			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			
@@ -3983,6 +4005,8 @@ public void ordersummary_validation() {
 		Float ordertotalvalue = Float.parseFloat(ordertotal);
 		Float Total = subtotalvalue + shippingvalue + Taxvalue;
 		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		System.out.println(ordertotal);
+		System.out.println(ExpectedTotalAmmount2);
 		Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 				"validating the order summary in the payment page",
 				"Order summary should be display in the payment page and all fields should display",
@@ -5392,6 +5416,7 @@ public void click_FeedingDrinking() {
 			Common.clickElement("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 			Thread.sleep(4000);
+			Common.actionsKeyPress(Keys.PAGE_UP);
 			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
 			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
