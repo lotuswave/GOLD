@@ -25,6 +25,8 @@ public class Test_DGLD_OS_COMMON_042_Login_from_Shipping_page {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.Signin_Checkoutpage("Account");
+        Osprey_ReEu.selectshippingaddress("GroundShipping method");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         
 
         
@@ -37,7 +39,7 @@ public class Test_DGLD_OS_COMMON_042_Login_from_Shipping_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
