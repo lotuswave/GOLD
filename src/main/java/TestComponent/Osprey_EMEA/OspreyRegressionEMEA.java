@@ -2252,5 +2252,35 @@ public void social_Links(String dataSet) {
 	}
 }
 
+public void Signin_Checkoutpage(String Dataset) {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementVisible("xpath", "//input[@type='email']");
+		Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//input[@name='password']");
+		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+		Common.clickElement("xpath", "//span[text()='Sign In']");
+		Sync.waitPageLoad();
+		int regsiteruser=Common.findElements("xpath", "//div[contains(@class,'shipping-address-item ')]").size();
+		Common.assertionCheckwithReport(regsiteruser>0,
+				"Verifying the login functionality from the shipping page",
+				"after clicking on the login button it should login and address should be display",
+				"successfully address book has been displayed after login",
+				"Failed to Display the Address book in shipping page after click on login");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Verifying the login functionality from the shipping page",
+				"after clicking on the login button it should login and address should be display",
+				"Unable to Display the Address book in shipping page after click on login",
+				Common.getscreenShotPathforReport("Failed to Display the Address book in shipping page after click on login"));
+		Assert.fail();
+	}
+	
+}
+
+
 
 }
