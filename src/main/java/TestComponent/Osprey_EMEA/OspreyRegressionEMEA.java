@@ -2281,6 +2281,70 @@ public void Signin_Checkoutpage(String Dataset) {
 	
 }
 
+public void share_whishlist(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
 
+		if (MyFavorites != 0) {
+			search_product("Product");
+			Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+			Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+					"validating the Navigation to the My Favorites page",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+			Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+			Sync.waitPageLoad();
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
+					"validating the  product add to the Whishlist", "Product should be add to whishlist",
+					"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Thread.sleep(4000);
+			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(message1);
+			Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
+					"validating the shared whishlist functionality",
+					"sucess message should display after share whishlist",
+					"Sucessfully message has been displayed for whishlist",
+					"failed to display the message for whishlist");
+		} else {
+			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Thread.sleep(4000);
+			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(message1);
+			Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
+					"validating the shared whishlist functionality",
+					"sucess message should display after share whishlist",
+					"Sucessfully message has been displayed for whishlist",
+					"failed to display the message for whishlist");
+
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
+				"sucess message should display after share whishlist",
+				"Unable to display the message for whishlist",
+				Common.getscreenShot("failed to display the message for whishlist"));
+		Assert.fail();
+	}
+
+}
 
 }
