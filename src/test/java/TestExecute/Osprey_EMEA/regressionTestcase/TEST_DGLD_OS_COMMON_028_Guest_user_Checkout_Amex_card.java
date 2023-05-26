@@ -9,26 +9,23 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_042_Login_from_Shipping_page {
+public class TEST_DGLD_OS_COMMON_028_Guest_user_Checkout_Amex_card {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"My AccountPage");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Login_from_Shipping_page () throws Exception {
+	public void Verifying_Guest_user_Checkout_Amex_card () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-//        Osprey_ReEu.Bagpacks_headerlinks(" Outdoor Packs"); 
-//        Osprey_ReEu.Configurable_addtocart_pdp("Product");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.Signin_Checkoutpage("Account");
+        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        
-
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
         
 		} catch (Exception e) {
 
