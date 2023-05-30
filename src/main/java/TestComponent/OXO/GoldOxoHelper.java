@@ -2240,7 +2240,7 @@ try
    			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
    					"User should able to click on the search button", "Search expands to the full page",
    					"Sucessfully search bar should be expand");
-   			Common.textBoxInput("xpath", "//input[@id='search']", data.get(Dataset).get("Products"));
+   			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Products"));
    			Common.actionsKeyPress(Keys.ENTER);
    			Sync.waitPageLoad();
    			Thread.sleep(4000);

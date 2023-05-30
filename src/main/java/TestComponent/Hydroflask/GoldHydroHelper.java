@@ -1440,7 +1440,7 @@ public class GoldHydroHelper {
      	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
      	"User should able to click on the search button", "Search expands to the full page",
      	"Sucessfully search bar should be expand"); 
-     	WebElement serachbar=Common.findElement("xpath", "//input[@id='search']");
+     	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
         serachbar.sendKeys(product);
         Common.actionsKeyPress(Keys.ENTER);
     	Sync.waitPageLoad();
