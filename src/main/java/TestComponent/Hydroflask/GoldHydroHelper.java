@@ -4570,7 +4570,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//input[@id='conversationStreetForForms']");
 			Common.textBoxInput("xpath", "//input[@id='conversationStreetForForms']", data.get(dataSet).get("Street"));
 
-			Common.textBoxInput("xpath", "//input[@name='suiteUnit']", data.get(dataSet).get("yearsInBusiness"));
+			Common.textBoxInput("xpath", "//input[@name='conversationAptSuiteforforms']", data.get(dataSet).get("yearsInBusiness"));
 
 	
 
@@ -6857,8 +6857,8 @@ public class GoldHydroHelper {
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent(20, "xpath", "//button[@class='ATC__btn']");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-//				Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-//				Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+//				Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+//				Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -6917,8 +6917,8 @@ public class GoldHydroHelper {
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent(20, "xpath", "//button[@class='ATC__btn']");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -7782,8 +7782,8 @@ public class GoldHydroHelper {
 			engraving_color();
 			engraving_Text("Horizontal Text");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -7931,8 +7931,8 @@ public class GoldHydroHelper {
 			engraving_color();
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8095,8 +8095,8 @@ public class GoldHydroHelper {
 			Myhydrographic("Graphic");
 			Myhydro_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8305,8 +8305,8 @@ public class GoldHydroHelper {
 			engraving_Text("Multiline Horizontal");
 			product_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitImplicit(30);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8363,8 +8363,8 @@ public class GoldHydroHelper {
 			Myhydro_Engraving("Multiline Horizontal");
 			Myhydro_quantity(Dataset);
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Agree &')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Agree &')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Agree &')]");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
