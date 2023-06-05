@@ -470,7 +470,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Thread.sleep(9000);
 //			Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.mouseOverClick("xpath", "//a[contains(@class,'c-mini')]");
+			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
 //			Common.javascriptclickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);

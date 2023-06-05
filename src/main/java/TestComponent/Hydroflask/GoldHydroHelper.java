@@ -4921,7 +4921,7 @@ public class GoldHydroHelper {
 			Thread.sleep(4000);
 			validating_BundleProducts();
 			product_quantity(Dataset);
-			bundle_color("White");
+			bundle_color("Black");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
@@ -5084,7 +5084,7 @@ public class GoldHydroHelper {
 			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
-			Common.textBoxInput("xpath", "//input[@id='search']", search);
+			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", search);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -5146,7 +5146,6 @@ public class GoldHydroHelper {
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.navigateBack();
-				Common.navigateBack();
 				ExtenantReportUtils.addPassLog("Validating" + search + "Page  ",
 						"click on the Popular search should navigate to the  " + search + "Page",
 						"successfully page navigating to " + search + "PAGE",
@@ -5196,7 +5195,7 @@ public class GoldHydroHelper {
 					"User should able to click on the search icon and search box opens",
 					"Sucessfully the gobal search box opend when user clicks on search icon",
 					"Failed to open the search box when user clicks on the search icon");
-			Common.textBoxInput("xpath", "//input[@id='search']", search);
+			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", search);
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
 			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
@@ -6540,7 +6539,7 @@ public class GoldHydroHelper {
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
