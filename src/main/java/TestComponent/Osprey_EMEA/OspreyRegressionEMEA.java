@@ -985,11 +985,13 @@ public void addtocart(String Dataset) {
 				break;
 			}
 		}
+		Sync.waitPageLoad(30);
 		Thread.sleep(6000);
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 		Common.clickElement("xpath", "//img[@alt='" + products + "']");
-		Sync.waitPageLoad();
-		Thread.sleep(3000);
+		Sync.waitPageLoad(30);
+		Thread.sleep(6000);
+		Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
 		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
@@ -2798,6 +2800,198 @@ public void Stored_Payment(String Dataset) {
 				"After Clicking the delete button we need to get the error message",
 				"Unable to display the error message when we clcik on the delete message",
 				Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
+		Assert.fail();
+	}
+
+}
+public void validatingErrormessageShippingpage_negative() {
+	int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+	String expectedResult = "Error message will dispaly when we miss the data in fields ";
+	if (errorsize >= 0) {
+		ExtenantReportUtils.addPassLog("validating the shippingPage error message", expectedResult,
+				"sucessfully  dispaly error message", Common.getscreenShotPathforReport("errormessagenegative"));
+	} else {
+
+		ExtenantReportUtils.addFailedLog("validating the shippingPage error message", expectedResult,
+				"failed to display error message", Common.getscreenShotPathforReport("failederrormessage"));
+
+		Assert.fail();
+	}
+}
+
+public void Shippingform_Guestuser(String dataSet) throws Exception {
+
+	try {
+		Thread.sleep(5000);
+		Sync.waitElementVisible("xpath", "//input[@type='email']");
+		Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+
+	} catch (NoSuchElementException e) {
+		minicart_Checkout();
+		Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+
+	}
+	String expectedResult = "email field will have email address";
+	try {
+		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+				data.get(dataSet).get("FirstName"));
+		int size = Common.findElements("xpath", "//input[@type='email']").size();
+		Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+				"Filled Email address", "unable to fill the email address");
+		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+				data.get(dataSet).get("LastName"));
+		Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
+		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+				data.get(dataSet).get("City"));
+		System.out.println(data.get(dataSet).get("City"));
+
+		Common.actionsKeyPress(Keys.PAGE_DOWN);
+		Thread.sleep(3000);
+		try {
+			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		} catch (ElementClickInterceptedException e) {
+			Thread.sleep(3000);
+			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		}
+		Thread.sleep(2000);
+		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
+		Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+		Thread.sleep(5000);
+
+		Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+
+		Sync.waitPageLoad();
+		ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
+				"shipping address is filled in to the fields", "user should able to fill the shipping address ",
+				Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating shipping address",
+				"shipping address is filled in to the fields", "user faield to fill the shipping address",
+				Common.getscreenShotPathforReport("shipingaddressfaield"));
+		Assert.fail();
+
+	}
+
+}
+
+public void Paymentcreditcard_WithInvalidData(String dataSet) throws Exception {
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	String cardnumber = data.get(dataSet).get("cardNumber");
+	System.out.println(cardnumber);
+	String expectedResult = "land on the payment section";
+	// Common.refreshpage();
+
+	try {
+		Sync.waitPageLoad();
+   
+		Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+				"User unabel to land opaymentpage");
+		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+		System.out.println(payment);
+		if (payment > 0) {
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//span[text()='New payment method']");
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				expectedResult = "credit card fields are filled with the data";
+				String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+				Common.assertionCheckwithReport(
+						errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+						"validating the credit card information with valid data", expectedResult,
+						"Filled the Card detiles", "missing field data it showinng error");
+			} else {
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
+						"");
+				System.out.println(Cardnumber);
+				Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+						"To validate the card details entered in the production environment",
+						"user should able to see the card details in the production environment",
+						"User Successfully able to see the card details enterd in the production environment ",
+						"User Failed to see the card deails in prod environemnt");
+				Common.switchToDefault();
+
+			}
+
+		} else {
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				expectedResult = "credit card fields are filled with the data";
+				String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+				Common.assertionCheckwithReport(
+						errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+						"validating the credit card information with valid data", expectedResult,
+						"Filled the Card detiles", "missing field data it showinng error");
+			} else {
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
+						"");
+				System.out.println(Cardnumber);
+				Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+						"To validate the card details entered in the production environment",
+						"user should able to see the card details in the production environment",
+						"User Successfully able to see the card details enterd in the production environment ",
+						"User Failed to see the card deails in prod environemnt");
+				Common.switchToDefault();
+
+			}
+
+		}
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+
+		ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+				"failed  to fill the Credit Card infromation",
+				Common.getscreenShotPathforReport("Cardinfromationfail"));
 		Assert.fail();
 	}
 
