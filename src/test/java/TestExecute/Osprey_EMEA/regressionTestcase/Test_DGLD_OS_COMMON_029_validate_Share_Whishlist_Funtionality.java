@@ -9,23 +9,20 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_028_Guest_user_Checkout_Amex_card {
+public class Test_DGLD_OS_COMMON_029_validate_Share_Whishlist_Funtionality {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"ShareWhishList");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_user_Checkout_Amex_card () throws Exception {
+	public void Verifying_Share_Whishlist_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.My_Favorites();    
+        Osprey_ReEu.share_whishlist("share whishlist");
         
 		} catch (Exception e) {
 

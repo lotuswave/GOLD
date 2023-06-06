@@ -9,21 +9,19 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_029_validate_Share_Whishlist_Funtionality {
+public class Test_DGLD_OS_COMMON_035_Track_My_Order_For_Register_User {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"ShareWhishList");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Share_Whishlist_Funtionality () throws Exception {
+	public void Verifying_Track_My_Order_For_Register_User () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.My_Favorites();    
-        Osprey_ReEu.share_whishlist("share whishlist");
-        
+        Osprey_ReEu.Register_userorder_status();
+        Osprey_ReEu.view_order();
+       
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

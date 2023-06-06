@@ -9,13 +9,13 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_043_Guest_User_Checkout_Visa_Card {
+public class Test_DGLD_OS_COMMON_028_Guest_user_Checkout_Amex_card {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_User_Checkout_Visa_Card () throws Exception {
+	public void Verifying_Guest_user_Checkout_Amex_card () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
@@ -25,7 +25,7 @@ public class TEST_DGLD_OS_COMMON_043_Guest_User_Checkout_Visa_Card {
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
         
 		} catch (Exception e) {
 
