@@ -1231,9 +1231,9 @@ public void My_Favorites() {
 	// TODO Auto-generated method stub
 	try {
 		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-		Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
-		Common.clickElement("xpath", "//a[text()='My Favorites']");
-		Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+		Sync.waitElementPresent(30, "xpath", "//a[text()='My Wish Lists']");
+		Common.clickElement("xpath", "//a[text()='My Wish Lists']");
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
 				"validating the Navigation to the My Favorites page",
 				"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 				"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -1613,7 +1613,7 @@ public void selectshippingmethod(String Dataset) {
 
 	try {
 		Thread.sleep(3000);
-		int size = Common.findElements("xpath", "//input[@class='radio']").size();
+		int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
 		System.out.println(size);
 		if (size > 0) {
 //			Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method + "')]");
@@ -2299,8 +2299,18 @@ public void share_whishlist(String Dataset) {
 			Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
 			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
 			Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			String whishlistpopup=Common.findElement("xpath", "//h4").getText();
+			if(whishlistpopup.contains("Add to Wishlist"))
+			{
+				Sync.waitElementPresent("xpath", "//button[@title='Add To List']");
+				Common.clickElement("xpath", "//button[@title='Add To List']");
+			}
+			else
+			{
+				Assert.fail();
+			}
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
 					"validating the Navigation to the My Favorites page",
 					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
