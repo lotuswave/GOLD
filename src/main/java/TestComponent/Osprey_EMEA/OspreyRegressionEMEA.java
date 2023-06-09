@@ -112,7 +112,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitImplicit(30);
 			Thread.sleep(4000);
 			String message=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-			Common.assertionCheckwithReport(message.contains("Thank you for registering with Osprey Store.")&&Common.getPageTitle().contains("My Account"),
+			Common.assertionCheckwithReport(message.contains("Thank you for registering with Osprey UK Store.")&&Common.getPageTitle().contains("My Account"),
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
 					"Sucessfully user navigates to the My account page after clickng on thr signup button",
