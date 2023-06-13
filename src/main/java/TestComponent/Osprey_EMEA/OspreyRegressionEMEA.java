@@ -336,7 +336,7 @@ public class OspreyRegressionEMEA {
 					Thread.sleep(4000);
 					String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
 					System.out.println(title);
-					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods") || title.contains("Newsletter Subscription") || title.contains("Pro deal information"),
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Wish Lists")|| title.contains("My Payment Methods") || title.contains("Newsletter Subscription") || title.contains("Pro deal information"),
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
 							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
