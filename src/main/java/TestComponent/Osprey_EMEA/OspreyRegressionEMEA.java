@@ -1254,6 +1254,11 @@ public void My_Favorites() {
 public void Addtocart_From_MyFavorites(String Dataset) {
 	// TODO Auto-generated method stub
 	String product = data.get(Dataset).get("Products");
+	System.out.println(product);
+	String productcolor= data.get(Dataset).get("Color");
+	System.out.println(productcolor);
+	String Productsize= data.get(Dataset).get("Size");
+	System.out.println(Productsize);
 	try {
 		Sync.waitPageLoad();
 		int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
@@ -1262,11 +1267,29 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 			search_product("Product");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
+			Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
+			
 			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
 			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+			Sync.waitPageLoad(30);
+			Thread.sleep(4000);
+			Sync.waitElementVisible(30, "xpath", "//h4");
+			String whishlistpopup=Common.findElement("xpath", "//h4").getText();
+			System.out.println(whishlistpopup);
+			if(whishlistpopup.contains("Add to Wishlist"))
+			{
+				Sync.waitElementPresent(30,"xpath", "//button[@title='Add To List']");
+				Common.clickElement("xpath", "//button[@title='Add To List']");
+			}
+			else
+			{
+				Assert.fail();
+			}
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
 					"validating the Navigation to the My Favorites page",
 					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -1309,9 +1332,9 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		} else {
 			Sync.waitPageLoad();
 
-			Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
-			Sync.waitElementPresent(30, "xpath", "(//img[contains(@class,'m-produc')])[1]");
-			Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
+			Common.scrollIntoView("xpath", "//img[contains(@class,'lazy m-product-card')]");
+			Sync.waitElementPresent(30, "xpath", "//img[contains(@class,'lazy m-product-card')]");
+			Common.mouseOver("xpath", "//img[contains(@class,'lazy m-product-card')]");
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 			see_options("Product");
 			int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
@@ -1334,18 +1357,23 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 public void see_options(String Dataset) {
 	// TODO Auto-generated method stub
 	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
+	String productcolor= data.get(Dataset).get("Color");
+	System.out.println(productcolor);
+	String Productsize= data.get(Dataset).get("Size");
+	System.out.println(Productsize);
 	try {
 		Thread.sleep(4000);
 		String seeoption = Common.findElement("xpath", "//fieldset[@class='fieldset m-product-card__cta']//span")
 				.getText();
 		System.out.println(seeoption);
-		if (seeoption.equals("See options")) {
+		if (seeoption.equals("SEE OPTIONS")) {
 			Sync.waitElementPresent("xpath", "//label[@for='wishlist-select-all']");
 			Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
 			Common.clickElement("xpath", "//span[text()='Remove From My Favorites']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String emptymessage = Common.findElement("xpath", "//form[@class='form-wishlist-items']//div//span")
+			String emptymessage = Common.findElement("xpath", "//div[contains(@class,'message in')]//span")
 					.getText();
 			Common.assertionCheckwithReport(emptymessage.contains("You have no items in your favorites."),
 					"validating the empty products in my favrioutes page ",
@@ -1355,10 +1383,28 @@ public void see_options(String Dataset) {
 			search_product("Product");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
+			Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
 			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
 			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+			Thread.sleep(3000);
+			Sync.waitElementVisible(30, "xpath", "//h4");
+			String whishlistpopup=Common.findElement("xpath", "//h4").getText();
+			System.out.println(whishlistpopup);
+			if(whishlistpopup.contains("Add to Wishlist"))
+			{
+				Sync.waitElementPresent(30,"xpath", "//button[@title='Add To List']");
+				Common.clickElement("xpath", "//button[@title='Add To List']");
+			}
+			else
+			{
+				Assert.fail();
+			}
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
 					"validating the Navigation to the My Favorites page",
 					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -1461,10 +1507,10 @@ public void RegaddDeliveryAddress(String dataSet) {
   
 	String firstname=data.get(dataSet).get("FirstName");
 	System.out.println(firstname);
-	int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
+	int size = Common.findElements(By.xpath("//span[contains(text(),'New Address')]")).size();
 	if (size > 0) {
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+			Common.clickElement("xpath", "//span[contains(text(),'New Address')]");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -2299,10 +2345,12 @@ public void share_whishlist(String Dataset) {
 			Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
 			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
 			Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitElementVisible(30, "xpath", "//h4");
 			String whishlistpopup=Common.findElement("xpath", "//h4").getText();
+			System.out.println(whishlistpopup);
 			if(whishlistpopup.contains("Add to Wishlist"))
 			{
-				Sync.waitElementPresent("xpath", "//button[@title='Add To List']");
+				Sync.waitElementPresent(30,"xpath", "//button[@title='Add To List']");
 				Common.clickElement("xpath", "//button[@title='Add To List']");
 			}
 			else
@@ -2322,12 +2370,12 @@ public void share_whishlist(String Dataset) {
 			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
 					"validating the  product add to the Whishlist", "Product should be add to whishlist",
 					"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
-			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Common.javascriptclickElement("xpath", "//button[@title='Share Wish List']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 			Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Common.javascriptclickElement("xpath", "//button[@title='Share Wish List']");
 			Thread.sleep(4000);
 			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			System.out.println(message1);
@@ -2337,16 +2385,16 @@ public void share_whishlist(String Dataset) {
 					"Sucessfully message has been displayed for whishlist",
 					"failed to display the message for whishlist");
 		} else {
-			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Common.javascriptclickElement("xpath", "//button[@title='Share Wish List']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 			Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-			Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+			Common.javascriptclickElement("xpath", "//button[@title='Share Wish List']");
 			Thread.sleep(4000);
 			String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			System.out.println(message1);
-			Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
+			Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
 					"validating the shared whishlist functionality",
 					"sucess message should display after share whishlist",
 					"Sucessfully message has been displayed for whishlist",
