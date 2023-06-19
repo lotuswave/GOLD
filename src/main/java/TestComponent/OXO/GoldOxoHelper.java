@@ -3878,8 +3878,8 @@ public void contactUsPage(String dataSet) {
 		Common.clickElement("xpath", "//input[@data-label='Country']");
 		Sync.waitElementPresent("xpath", "//div[text()='United States']");
 		Common.clickElement("xpath", "//div[text()='United States']");
-		Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
-		Common.textBoxInput("xpath", "//input[@data-label='Street']", data.get(dataSet).get("Street"));
+		Sync.waitElementPresent("xpath", "//input[@data-label='Address']");
+		Common.textBoxInput("xpath", "//input[@data-label='Address']", data.get(dataSet).get("Street"));
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
@@ -4332,8 +4332,8 @@ public void voluntary_Recall(String dataSet) {
 
 		Sync.waitElementPresent("xpath", "//div[text()='United States']");
 		Common.clickElement("xpath", "//div[text()='United States']");
-		Sync.waitElementPresent("xpath", "//input[@data-label='Street']");
-		Common.textBoxInput("xpath", "//input[@data-label='Street']", data.get(dataSet).get("Street"));
+		Sync.waitElementPresent("xpath", "//input[@data-label='Address']");
+		Common.textBoxInput("xpath", "//input[@data-label='Address']", data.get(dataSet).get("Street"));
 
 		Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 		Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
