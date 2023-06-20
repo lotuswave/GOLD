@@ -3747,4 +3747,431 @@ public void ChangeAddress_AddressBook(String dataSet) {
 	}
 }
 
+public void Add_NewAddress(String dataSet) {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+	Sync.waitElementVisible(30, "xpath","//button[@title='Add New Address']");
+	Common.clickElement("xpath","//button[@title='Add New Address']");
+	String newaddress=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+    if(newaddress.contains("Add New Address"))
+    {
+	Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
+	Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+	Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
+	try {
+		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+				data.get(dataSet).get("Region"));
+	} catch (ElementClickInterceptedException e) {
+		Thread.sleep(3000);
+		Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	}
+
+	Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+
+	Common.clickElement("xpath", "//button[@title='Save Address']");
+	Thread.sleep(3000);
+	String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+	Common.assertionCheckwithReport(message.equals("You saved the address."),
+			"validating the saved message after saving address in address book",
+			"Save address message should be displayed after the address saved in address book",
+			"Sucessfully address has been saved in the address book",
+			"Failed to save the address in the address book");
+    }
+    else
+    {
+    	Assert.fail();
+    }
+
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the No address in the address book",
+				"After saving the address for Register user no extra address should be there in address book",
+				"Unable to see no address in the address book",
+				Common.getscreenShotPathforReport("Failed to see no address in the address book"));
+		Assert.fail();
+	}
+}
+
+public void Add_Address(String dataSet) {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+	Sync.waitElementVisible(30, "xpath","//a[text()='Address Book']");
+	Common.clickElement("xpath","//a[text()='Address Book']");
+	Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
+	Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+	Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
+	try {
+		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+				data.get(dataSet).get("Region"));
+	} catch (ElementClickInterceptedException e) {
+		Thread.sleep(3000);
+		Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	}
+
+	Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+
+	Common.clickElement("xpath", "//button[@title='Save Address']");
+	Thread.sleep(3000);
+	String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+	Common.assertionCheckwithReport(message.equals("You saved the address."),
+			"validating the saved message after saving address in address book",
+			"Save address message should be displayed after the address saved in address book",
+			"Sucessfully address has been saved in the address book",
+			"Failed to save the address in the address book");
+	
+
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the No address in the address book",
+				"After saving the address for Register user no extra address should be there in address book",
+				"Unable to see no address in the address book",
+				Common.getscreenShotPathforReport("Failed to see no address in the address book"));
+		Assert.fail();
+	}
+}
+
+public void change_Shippingaddress_Addressbook(String Dataset) {
+	// TODO Auto-generated method stub
+	String firstname = data.get(Dataset).get("FirstName");
+	String secondname = data.get(Dataset).get("LastName");
+	String address = data.get(Dataset).get("Street");
+	String phonenumber = data.get(Dataset).get("phone");
+	String City = data.get(Dataset).get("City");
+	String region = data.get(Dataset).get("Region");
+	String zipcode = data.get(Dataset).get("postcode");
+	String shipping = data.get(Dataset).get("Shipping address");
+
+	try {
+		Sync.waitPageLoad();
+		
+
+		String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
+		if (newaddress.contains("You have no other address")) {
+			Common.clickElement("xpath", "//button[@title='Add New Address']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+			Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+			Common.clickElement("xpath", "//input[@title='Phone Number']");
+			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+			Common.clickElement("xpath", "//input[@title='Address Line 1']");
+			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.clickElement("xpath", "//input[@title='City']");
+			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			Common.clickElement("xpath", "//select[@name='region_id']");
+			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+			Common.clickElement("xpath", "//label[@for='primary_shipping']");
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+			Common.assertionCheckwithReport(message.equals("You saved the address."),
+					"validating the saved message after saving address in address book",
+					"Save address message should be displayed after the address saved in address book",
+					"Sucessfully address has been saved in the address book",
+					"Failed to save the address in the address book");
+			Shippingaddress_Addressbook("New ShippingAddress");
+		} else {
+			Shippingaddress_Addressbook("New ShippingAddress");
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+				Common.getscreenShot(
+						"Failed to display checkbox for billing address and fail to display text for shipping address"));
+		Assert.fail();
+	}
+
+}
+public void Shippingaddress_Addressbook(String Dataset) {
+	// TODO Auto-generated method stub
+	String firstname = data.get(Dataset).get("FirstName");
+	String secondname = data.get(Dataset).get("LastName");
+	String address = data.get(Dataset).get("Street");
+	String phonenumber = data.get(Dataset).get("phone");
+	String City = data.get(Dataset).get("City");
+	String region = data.get(Dataset).get("Region");
+	String zipcode = data.get(Dataset).get("postcode");
+	String shipping = data.get(Dataset).get("Shipping address");
+	try {
+		Common.clickElement("xpath", "//a[@title='Change Shipping Address']");
+		Sync.waitPageLoad();
+		Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+		Common.clickElement("xpath", "//input[@name='firstname']");
+		Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+		Common.clickElement("xpath", "//input[@name='lastname']");
+		Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+		Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+		Common.clickElement("xpath", "//input[@title='Phone Number']");
+		Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+		Common.clickElement("xpath", "//input[@title='Address Line 1']");
+		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+		Common.clickElement("xpath", "//input[@title='City']");
+		Common.textBoxInput("xpath", "//input[@title='City']", City);
+		Common.clickElement("xpath", "//select[@name='region_id']");
+		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+		Common.clickElement("xpath", "//input[@name='postcode']");
+		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+		String checkbox = Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
+		String text = Common.findElement("xpath", "//div[@class='message info']//span").getText();
+		Common.assertionCheckwithReport(
+				checkbox.equals("checkbox") && text.equals("This is your default shipping address."),
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+				"Failed to display checkbox for billing address and fail to display text" + text
+						+ "for shipping address");
+		Common.clickElement("xpath", "//input[@id='primary_billing']");
+		Common.clickElement("xpath", "//button[@title='Save Address']");
+		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		Common.assertionCheckwithReport(
+				 message.equals("You saved the address."),
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+				"Failed to display checkbox for billing address and fail to display text" + text
+						+ "for shipping address");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+				Common.getscreenShot(
+						"Failed to display checkbox for billing address and fail to display text for shipping address"));
+		Assert.fail();
+	}
+
+}
+
+public void change_Billingaddress_Addressbook(String Dataset) {
+	// TODO Auto-generated method stub
+	String firstname = data.get(Dataset).get("FirstName");
+	String secondname = data.get(Dataset).get("LastName");
+	String address = data.get(Dataset).get("Street");
+	String phonenumber = data.get(Dataset).get("phone");
+	String City = data.get(Dataset).get("City");
+	String region = data.get(Dataset).get("Region");
+	String zipcode = data.get(Dataset).get("postcode");
+	String shipping = data.get(Dataset).get("Shipping address");
+
+	try {
+		Sync.waitPageLoad();
+
+		String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
+		if (newaddress.contains("You have no other address")) {
+			Common.clickElement("xpath", "//button[@title='Add New Address']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+			Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+			Common.clickElement("xpath", "//input[@title='Phone Number']");
+			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+			Common.clickElement("xpath", "//input[@title='Address Line 1']");
+			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.clickElement("xpath", "//input[@title='City']");
+			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			Common.clickElement("xpath", "//select[@name='region_id']");
+			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+			Common.assertionCheckwithReport(message.equals("You saved the address."),
+					"validating the saved message after saving address in address book",
+					"Save address message should be displayed after the address saved in address book",
+					"Sucessfully address has been saved in the address book",
+					"Failed to save the address in the address book");
+			Billingaddress_Addressbook(Dataset);
+		} else {
+			Billingaddress_Addressbook(Dataset);
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
+				Common.getscreenShot(
+						"Failed to display checkbox for billing address and fail to display text for shipping address"));
+		Assert.fail();
+	}
+
+}
+
+public void Billingaddress_Addressbook(String Dataset) {
+	// TODO Auto-generated method stub
+	String firstname = data.get(Dataset).get("FirstName");
+	String secondname = data.get(Dataset).get("LastName");
+	String address = data.get(Dataset).get("Street");
+	String phonenumber = data.get(Dataset).get("phone");
+	String City = data.get(Dataset).get("City");
+	String region = data.get(Dataset).get("Region");
+	String zipcode = data.get(Dataset).get("postcode");
+	String shipping = data.get(Dataset).get("Shipping address");
+	try {
+		Common.clickElement("xpath", "//a[@title='Change Billing Address']");
+		Sync.waitPageLoad();
+		Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+		Common.clickElement("xpath", "//input[@name='firstname']");
+		Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+		Common.clickElement("xpath", "//input[@name='lastname']");
+		Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+		Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+		Common.clickElement("xpath", "//input[@title='Phone Number']");
+		Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+		Common.clickElement("xpath", "//input[@title='Address Line 1']");
+		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+		Common.clickElement("xpath", "//input[@title='City']");
+		Common.textBoxInput("xpath", "//input[@title='City']", City);
+		Common.clickElement("xpath", "//select[@name='region_id']");
+		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+		Common.clickElement("xpath", "//input[@name='postcode']");
+		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+//		String checkbox = Common.findElement("xpath", "//input[@id='primary_shipping']").getAttribute("type");
+		String text = Common.findElement("xpath", "//div[@class='message info']//span").getText();
+		System.out.println(text);
+		Common.assertionCheckwithReport(
+				/*checkbox.equals("checkbox") &&*/ text.equals("This is your default billing address."),
+				"validating the checkbox for billing address and text for the shipping address",
+				"Checkbox should be display for the billing address and text should be display for the shipping address",
+				"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
+				"Failed to display checkbox for billing address and fail to display text" + text
+						+ "for shipping address");
+		Common.clickElement("xpath", "//button[@title='Save Address']");
+		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		String shippingaddress = Common
+				.findElement("xpath", "//div[contains(@class,'box box-address-bil')]//address").getText();
+		System.out.println(shippingaddress);
+
+		Common.assertionCheckwithReport(
+				shippingaddress.equals(shipping) && message.equals("You saved the address."),
+				"validating the checkbox for shipping address and text for the billing address",
+				"Checkbox should be display for the shipping address and text should be display for the billing address",
+				"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
+				"Failed to display checkbox for shipping address and fail to display text" + text
+						+ "for billing address");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the checkbox for shipping address and text for the billing address",
+				"Checkbox should be display for the shipping address and text should be display for the billing address",
+				"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
+				Common.getscreenShot(
+						"Failed to display checkbox for shipping address and fail to display text for billing address"));
+		Assert.fail();
+	}
+
+}
+
+public void Edit_Delete_Address(String Dataset) {
+	// TODO Auto-generated method stub
+	
+	String firstname = data.get(Dataset).get("FirstName");
+	String secondname = data.get(Dataset).get("LastName");
+	String address = data.get(Dataset).get("Street");
+	String phonenumber = data.get(Dataset).get("phone");
+	String City = data.get(Dataset).get("City");
+	String region = data.get(Dataset).get("Region");
+	String zipcode = data.get(Dataset).get("postcode");
+	String shipping = data.get(Dataset).get("Shipping address");
+	try
+	{
+		String addressbook=Common.findElement("xpath", "//span[@class='toolbar-number']").getText();
+		System.out.println(addressbook);
+		if(addressbook.contains("1 Item"))
+		{
+			Common.clickElement("xpath", "//span[text()='Edit']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+			Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+			Common.clickElement("xpath", "//input[@title='Phone Number']");
+			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+			Common.clickElement("xpath", "//input[@title='Address Line 1']");
+			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.clickElement("xpath", "//input[@title='City']");
+			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			Common.clickElement("xpath", "//select[@name='region_id']");
+			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+			Common.clickElement("xpath", "//label[@for='primary_shipping']");
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+			Common.assertionCheckwithReport(message.equals("You saved the address."),
+					"validating the saved message after saving address in address book",
+					"Save address message should be displayed after the address saved in address book",
+					"Sucessfully address has been saved in the address book",
+					"Failed to save the address in the address book");
+			Common.scrollIntoView("xpath", "//span[text()='Delete']");
+			Sync.waitElementPresent("xpath", "//span[text()='Delete']");
+			Common.clickElement("xpath", "//span[text()='Delete']");
+			String popmessage=Common.findElement("xpath", "//div[contains(text(),'Are you ')]").getText();
+			if(popmessage.contains("Are you sure you want to delete this address?"))
+			{
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
+				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+				String Delmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+
+				Common.assertionCheckwithReport(Delmessage.equals("You deleted the address."),
+						"validating the Delete message after Deleting address in address book",
+						"Delete address message should be displayed after the address delete in address book",
+						"Sucessfully address has been Deleted in the address book",
+						"Failed to Delete the address in the address book");
+			}
+			else
+			{
+				Assert.fail();
+			}
+			
+		}
+		else
+		{
+			Assert.fail();
+		}
+			
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the Delete message after Deleting address in address book",
+				"Delete address message should be displayed after the address delete in address book",
+				"Unable to  Delete the address in the address book",
+				Common.getscreenShot(
+						"Failed to Delete the address in the address book"));
+		
+		Assert.fail();
+	}
+	
+}
+
 }
