@@ -190,6 +190,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
+			Common.clickElement("xpath", "//button[@class='a-icon-text-btn a-icon-text-btn--icon-only a-message__close']");
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",

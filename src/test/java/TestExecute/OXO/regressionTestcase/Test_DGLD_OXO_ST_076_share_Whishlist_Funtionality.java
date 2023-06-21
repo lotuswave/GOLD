@@ -19,8 +19,9 @@ public class Test_DGLD_OXO_ST_076_share_Whishlist_Funtionality {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
+			Oxo.click_Createaccount();
+			Oxo.createaccount_verfication("Invalid details");
+			Oxo.create_account("AccountDetails");
 			Oxo.My_Favorites();
 			Oxo.share_whishlist("ShareWishlist");
 			
