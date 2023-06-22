@@ -3868,7 +3868,7 @@ public void change_Shippingaddress_Addressbook(String Dataset) {
 			Common.clickElement("xpath", "//input[@title='Phone Number']");
 			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
 			Common.clickElement("xpath", "//input[@title='Address Line 1']");
-			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);  
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
 			Common.clickElement("xpath", "//select[@name='region_id']");
@@ -4122,7 +4122,7 @@ public void Edit_Delete_Address(String Dataset) {
 			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
 			Common.clickElement("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
-			Common.clickElement("xpath", "//label[@for='primary_shipping']");
+//			Common.clickElement("xpath", "//label[@for='primary_shipping']");
 			Common.clickElement("xpath", "//button[@title='Save Address']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 
@@ -4131,6 +4131,7 @@ public void Edit_Delete_Address(String Dataset) {
 					"Save address message should be displayed after the address saved in address book",
 					"Sucessfully address has been saved in the address book",
 					"Failed to save the address in the address book");
+			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//span[text()='Delete']");
 			Sync.waitElementPresent("xpath", "//span[text()='Delete']");
 			Common.clickElement("xpath", "//span[text()='Delete']");
