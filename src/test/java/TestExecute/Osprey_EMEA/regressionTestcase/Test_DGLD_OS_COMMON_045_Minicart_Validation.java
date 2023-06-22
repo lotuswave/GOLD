@@ -9,23 +9,26 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_048_changeAddressIn_AddressBook {
+public class Test_DGLD_OS_COMMON_045_Minicart_Validation {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Address Book");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Minicart");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_changeAddressIn_AddressBook() throws Exception {
+	public void Verifying_the_Create_account_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Create_Account("Create Account");
-        Osprey_ReEu.Add_Address("Account");
-        Osprey_ReEu.change_Shippingaddress_Addressbook("New ShippingAddress");
-        Osprey_ReEu.change_Billingaddress_Addressbook("New BillingAddress");
-        Osprey_ReEu.Edit_Delete_Address("Account");
-
-       
+        Osprey_ReEu.search_product("Product");      
+        Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.search_product("ConfigurableProduct");      
+        Osprey_ReEu.addtocart("ConfigurableProduct");
+        Osprey_ReEu.click_minicart();
+        Osprey_ReEu.clickontheproduct_and_image("Product");
+        Osprey_ReEu.minicart_freeshipping();
+        Osprey_ReEu.minicart_delete("Product");
+        Osprey_ReEu.minicart_product_close();
+        Osprey_ReEu.minicart_validation("Product Qunatity");
         
 		} catch (Exception e) {
 

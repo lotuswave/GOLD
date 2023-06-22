@@ -9,26 +9,22 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_050_Validation_My_Orders_For_Register_User {
+public class Test_DGLD_OS_COMMON_051_Write_a_Review_and_ask_a_question {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Review");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Validation_My_Orders_For_Register_User () throws Exception {
+	public void Verifying_Write_a_Review_and_ask_a_question() throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        String order=Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-        Osprey_ReEu.My_Orders_Page(order);
+        Osprey_ReEu.search_product("Review product");
+        Osprey_ReEu.review("review");
+        Osprey_ReEu.Ask_a_question("Ask a question");
+//        Osprey_ReEu.filter_validation("Filters");  //need to add after full Implementation
+//        Osprey_ReEu.search_filter("Filters");  //need to add after full Implementation
+       
         
 		} catch (Exception e) {
 

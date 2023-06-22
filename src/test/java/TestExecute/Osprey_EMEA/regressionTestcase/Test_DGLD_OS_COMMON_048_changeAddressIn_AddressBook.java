@@ -9,25 +9,23 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_046_Guest_User_Create_Account_from_OrderConfirmation_Page {
+public class Test_DGLD_OS_COMMON_048_changeAddressIn_AddressBook {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Address Book");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Account_Registration_Create_Account_With_Cart() throws Exception {
+	public void Verifying_changeAddressIn_AddressBook() throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.newuseraddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-        Osprey_ReEu.createAccountFromOrderSummaryPage("Account");
-        
+        Osprey_ReEu.Create_Account("Create Account");
+        Osprey_ReEu.Add_Address("Account");
+        Osprey_ReEu.change_Shippingaddress_Addressbook("New ShippingAddress");
+        Osprey_ReEu.change_Billingaddress_Addressbook("New BillingAddress");
+        Osprey_ReEu.Edit_Delete_Address("Account");
+
+       
         
 		} catch (Exception e) {
 

@@ -9,26 +9,23 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_045_Minicart_Validation {
+public class Test_DGLD_OS_COMMON_047_guestCheckoutwith_invalid_CC_Credentials {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Minicart");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_guestCheckoutwith_invalid_CC_Credentials () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");      
+        Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.search_product("ConfigurableProduct");      
-        Osprey_ReEu.addtocart("ConfigurableProduct");
-        Osprey_ReEu.click_minicart();
-        Osprey_ReEu.clickontheproduct_and_image("Product");
-        Osprey_ReEu.minicart_freeshipping();
-        Osprey_ReEu.minicart_delete("Product");
-        Osprey_ReEu.minicart_product_close();
-        Osprey_ReEu.minicart_validation("Product Qunatity");
+        Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+        Osprey_ReEu.Paymentcreditcard_WithInvalidData("Invalid Card Details");
         
 		} catch (Exception e) {
 
