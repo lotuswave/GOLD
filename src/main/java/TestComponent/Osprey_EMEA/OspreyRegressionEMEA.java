@@ -4709,4 +4709,98 @@ public void Change_to_Existingemail(String Dataset) {
 
 }
 
+public void reorder() {
+	// TODO Auto-generated method stub
+	try {
+		Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
+		Common.clickElement("xpath", "//a[text()='My Orders']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		Common.clickElement("xpath", "//span[text()='View Order']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
+		Common.clickElement("xpath", "//span[text()='Reorder']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+				"validating the navigates to the shopping cart page",
+				"After clicking on the reorder it should navigate to the shopping cart page",
+				"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+				"After clicking on the reorder it should navigate to the shopping cart page",
+				"Unable to Navigate to the shopping cart page",
+				Common.getscreenShot("Failed to Navigate to the shopping cart page"));
+		Assert.fail();
+	}
+
+}
+
+public void Navigate_back_to_Shoppingcart_page(String Dataset) {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
+		Common.clickElement("xpath", "//span[text()='Back to Cart']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+				"validating the navigates to the shopping cart page",
+				"After clicking on the reorder it should navigate to the shopping cart page",
+				"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+		
+		String Cart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText().replace(" Item(s)", "");
+		System.out.println(Cart);
+		Sync.waitElementVisible(30, "xpath", "//button[@data-role='proceed-to-checkout']");
+		Common.clickElement("xpath", "//button[@data-role='proceed-to-checkout']");
+		Sync.waitPageLoad();
+		Thread.sleep(7000);
+		Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+		String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
+		System.out.println(checkout);
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+		Common.assertionCheckwithReport(
+				checkout.equals(Cart) && Common.getCurrentURL().contains("checkout/#shipping"),
+				"validating the navigation to the shipping page when we click on the checkout",
+				"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
+				"Failed to navigate to the shipping page");
+		selectshippingmethod(Dataset);
+		clickSubmitbutton_Shippingpage();
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the navigation to the shipping page when we click on the checkout ",
+				"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
+				Common.getscreenShot("Failed to navigate to the shipping page"));
+		Assert.fail();
+		
+	}
+}
+
+public void Continue_Shopping() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementVisible("xpath", "//span[@class='a-btn-tertiary__label']");
+		Common.clickElement("xpath", "//span[@class='a-btn-tertiary__label']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		verifingHomePage();
+	}
+	catch(Exception |Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating store logo on the homwpage", "System directs the user to the Homepage and store logo should display",
+				"Unable to navigate to the homepage and logo is not displayed", "Failed to navigate to the homepage and logo is not displayed");
+		Assert.fail();
+	}
+	
+}
+
+
 }
