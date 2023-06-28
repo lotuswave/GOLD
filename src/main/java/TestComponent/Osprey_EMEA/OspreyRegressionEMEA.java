@@ -403,6 +403,9 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				System.out.println(title);
+				System.out.println(breadcrumbs);
+				System.out.println(Links[i]);
 				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
 						"verifying the header link " + Links[i] + "Under Outdoor Packs",
 						"user should navigate to the " + Links[i] + " page",
