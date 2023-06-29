@@ -20,7 +20,7 @@ public class Test_OSPG_Admin_ST_Cart_Price_Rule_Create_Cart_Price_Rule {
 	public void validate_Sceduled_categoryupdate() throws Exception {
 
 		try {
-			
+			 
 		   Osprey_Admin.Admin_signin("AccountDetails");
 		   Osprey_Admin.Click_Marketing();
 		   Osprey_Admin.select_cart_price_rule();
@@ -45,7 +45,7 @@ public class Test_OSPG_Admin_ST_Cart_Price_Rule_Create_Cart_Price_Rule {
 
 	@AfterTest
 	public void clearBrowser() {
-//		 Common.closeAll();
+		 Common.closeAll();
 
 	}
 
