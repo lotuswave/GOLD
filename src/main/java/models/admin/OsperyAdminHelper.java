@@ -2321,7 +2321,663 @@ public class OsperyAdminHelper {
 			Assert.fail();
 		}
 	}
+	 public void Click_Catalog() {
+			try {
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.clickElement("id", "menu-magento-catalog-catalog");
+				Thread.sleep(5000);
 
+				String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+				System.out.println(catalogmenu);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+						"should display the catalog menu after clicking on the catalog",
+						"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+						"should display the catalog menu after clicking on the catalog",
+						"unable to display catalog field menu after a click on the catalog button",
+						"Failed to display catalog field menu");
+				Assert.fail();
+			}
+	    }
+			public void Click_Products_Catalogmenu() {
+				// TODO Auto-generated method stub
+				try {
+					Thread.sleep(2000);
+					Common.clickElement("xpath", "//li[@class='item-catalog-products    level-2']");
+					Sync.waitPageLoad();
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Common.assertionCheckwithReport(
+							Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
+							"To Validate the Catalogmenu is displayed",
+							"should display the Catalogmenu after clicking on the customers",
+							"Catalog menu is displayed after a click on the Catalog button", "Failed to display Catalogmenu");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To Validate the Catalogmenu is displayed",
+							"should display the Catalogmenu after clicking on the Catalog",
+							"unable to display Catalog menu after a click on the Catalog button",
+							"Failed to display Catalog menu");
+					Assert.fail();
+				}
+			}
+				public void Search_products(String dataSet) {
+					// TODO Auto-generated method stub
+					try {
+						Sync.waitElementPresent(30, "xpath", "//input[@placeholder='Search by keyword']");
+						Thread.sleep(3000);
+						if (Common.isElementDisplayedonPage(30, "xpath", "//button[@class='action-remove']")) {
+							Common.mouseOverClick("xpath", "//button[@class='action-remove']");
+							Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+						} else {
+							System.out.println("no Active filters found");
+						}
+						Common.textBoxInput("id", "fulltext", data.get(dataSet).get("Productname"));
+
+//			         Common.findElement("xpath", "//input[@placeholder='Search by keyword']").sendKeys(pagename);
+						Common.actionsKeyPress(Keys.ENTER);
+						Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'filters-current')]");
+						String active = Common.findElement("xpath", "//div[contains(@class,'filters-current')]")
+								.getAttribute("class");
+						Common.assertionCheckwithReport(active.contains("show"), "To validate the search filters",
+								"Should apply Search filter", "Search filetr is applied", "failed to apply for search filter");
+						Thread.sleep(5000);
+						int pages = Common.findElements("xpath", "//tr[contains(@class,'data-row')]").size();
+						System.out.println(pages);
+
+						if (pages > 0) {
+
+						}
+					}
+
+					catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("To Validate the search filters", "should display the Search filter",
+								"unable to display Search filte", "Failed to display Search filte");
+						Assert.fail();
+					}
+
+				}
+
+				public void Click_SearchProduct() {
+					try {
+
+						Thread.sleep(2000);
+						Common.clickElement("xpath", "//tr[contains(@class,'data-row')]");
+						Thread.sleep(5000);
+
+						// Sync.waitElementInvisible(30, "xpath", "//div[@class='page-title-wrapper
+						// complex']");
+						Common.assertionCheckwithReport(
+								Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
+								"To Validate the QATEST product is displayed",
+								"should display the QATEST product after clicking on the prouct",
+								"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
+
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("To Validate the QATEST product is displayed",
+								"should display the QATEST product after clicking on the product",
+								"unable to display QATEST productafter a click on the product", "Failed to display QATEST product");
+						Assert.fail();
+					}
+				}
+				public void PaginationCTA() {
+					// TODO Auto-generated method stub
+					try {
+						Common.clickElement("xpath", "//button[@title='Next Page']");
+						String pagination = Common.findElement("xpath", "//button[@title='Next Page']").getAttribute("class");
+						Common.assertionCheckwithReport(pagination.contains("next"),
+								"Validating the pagination CTA on customers page",
+								"Able to display the pagination CTA on customers page",
+								"Successfully Dispaly Pageination CTA on customers page",
+								"Failed to Display Pagination CTA on customers page");
+						Common.clickElement("xpath", "//button[@title='Previous Page']");
+
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("Validating the pagination CTA on customers page ",
+								"Able to display the pagination CTA on customers page",
+								"unable to Display Pageination CTA on customers page",
+								Common.getscreenShotPathforReport("Failed to Display Pagination CTA on customers page"));
+						Assert.fail();
+
+					}
+
+				}
+					public void Click_Edit() {
+						// TODO Auto-generated method stub
+						String expectedResult= "to edit and navigate to next page";
+
+						try {
+							Thread.sleep(5000);
+						        Sync.waitElementPresent("xpath", "//a[text()='Edit']");
+							Common.clickElement("xpath", "//a[text()='Edit']");
+							Thread.sleep(6000);
+							
+							int pages = Common.findElements("xpath", "//h1[text()='AETHER™ 55']").size();
+							System.out.println(pages);
+							
+							Common.assertionCheckwithReport(
+									Common.getPageTitle().contains("AETHER™ 55 / Products / Inventory / Catalog / Magento Admin"),
+									"To Validate the AETHER™ 55 product is Edit",
+									"should display the AETHER™ 55 product Edit page",
+									"AETHER™ 55 product name displayed after a click on the edit", "Failed to display AETHER™ 55 product edit page");
+							
+					}
+
+						catch (Exception | Error e) {
+							e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the AETHER™ 55 product Edit page",
+										"Should display AETHER™ 55 product Edit page rule", "Failed to Navigate to edit page", "Failed to display AETHER™ 55 product edit page ");
+							Assert.fail();
+
+						}
+					}
+					
+
+					
+					public void Product_listing_page_size(String dataSet) {
+						try {
+
+			
+							Common.clickElement("xpath", "//div[@class='selectmenu']");
+							Thread.sleep(5000);
+							Common.clickElement("xpath", "(//li//button[text()='Custom'])[2]");
+							Thread.sleep(5000);
+						//	Common.clickElement("xpath", "(//div//input[contains(@data-bind,'hasFocus: isCustomVisible(), ')])[2]");
+							Common.textBoxInput("xpath", "(//div//input[contains(@data-bind,'hasFocus: isCustomVisible(), ')])[2]", data.get(dataSet).get("number"));
+							Thread.sleep(2000);
+							Common.actionsKeyPress(Keys.ENTER);
+
+							
+						Common.assertionCheckwithReport(
+									Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
+									"To Validate the product listing page size",
+									"should display the product listing page size after clicking on the prouct listing page size num",
+									"product listing page size is displayed after a click on the product page size num", "Failed to display product listing page size");
+
+						} catch (Exception | Error e) {
+							e.printStackTrace();
+							ExtenantReportUtils.addFailedLog("To Validate the product listing page size is displayed",
+									"should display the product listing page size after selecting on the product page size num",
+									"unable to display product listing page size after a click on the product page sizs num", "Failed to display product listing page size");
+							Assert.fail();
+						}
+					}
+						
+						public void Click_Addproduct() {
+							try {
+								
+								Common.findElement("xpath", "//span[text()='Add Product']");
+								Common.clickElement("xpath", "//button[contains(@data-ui-id,'products-list-add-new-product-button-')]");
+								Thread.sleep(5000);
+								Common.clickElement("xpath", "//span[text()='Simple Product']");
+								
+								Common.assertionCheckwithReport(
+										Common.getPageTitle().contains("New Product / Products / Inventory / Catalog / Magento Admin"),
+										"To Validate Add product page",
+										"should display the product page after clicking on the Add prouct dropdown",
+										"Add product page is displayed after a click on the Add product dropdown", "Failed to display Add product page");
+
+							} catch (Exception | Error e) {
+								e.printStackTrace();
+								ExtenantReportUtils.addFailedLog("To Validate Add product page",
+										"should display the product page after clicking on the Add prouct dropdown",
+										"unable to display Add product page after click on the Add product dropdown", "Failed to display Add product page");
+								Assert.fail();
+								
+							}
+						}
+						public void Add_New_product(String dataSet) {
+							try {
+								Common.textBoxInput("xpath", "//div//input[@name='product[name]']", data.get(dataSet).get("Productname"));
+								Common.textBoxInput("xpath", "//div//input[@name='product[sku]']", data.get(dataSet).get("SKU"));
+								Common.textBoxInput("xpath", "//div//input[@name='product[price]']", data.get(dataSet).get("Price"));
+								Common.textBoxInput("xpath", "//div//input[contains(@name,'product[quantity')]", data.get(dataSet).get("Product quantity"));
+								
+								Common.clickElement("xpath", "(//div[text()='Select...'])[1]");
+							//	Common.clickElement("xpath", "//div[@id='D3HPRRI']");
+								Common.clickElement("xpath", "//label[text()='Test Category']");
+								Common.clickElement("xpath", "//div//button[@class='action-default']");
+								Common.clickElement("xpath", "//select[@name='product[customizable]']");
+								Common.clickElement("xpath", "//option[@data-title='TEST-Option']");
+								Common.textBoxInput("xpath", "//input[@name='product[customize_sku]']", data.get(dataSet).get("Customazition SKU"));
+								Common.textBoxInput("xpath", "//input[@name='product[engrave_sku]']", data.get(dataSet).get("Engraving SKU"));
+						
+								Common.clickElement("xpath", "//button//span[text()='Save']");
+								 String Saveproduct = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+						                    .getText();
+								
+								 Common.assertionCheckwithReport(Saveproduct.contains("You saved the product."),
+										"To Validate Add new product page",
+										"should display the Added product after saving the product",
+										"Add product Should display in product page", "Failed to display saved new product");
+
+							} catch (Exception | Error e) {
+								e.printStackTrace();
+								ExtenantReportUtils.addFailedLog("To Validate Add new product page",
+										"should display the Added product after saving the product",
+										"unable to display Add new product in product listing page", "Failed to display Add new product");
+								Assert.fail();
+							}
+						}
+						
+						public void product_Reindex(String dataSet) {
+							
+						try {	
+							Common.clickElement("xpath", "//a//span[text()='Stores']");
+							 Sync.waitElementPresent("xpath", "//a//span[text()='Reindex SKU(s)']");
+							Common.clickElement("xpath", "//a//span[text()='Reindex SKU(s)']");
+							Common.clickElement("xpath", "//textarea[@name='skus']");
+							Common.textBoxInput("xpath", "//textarea[@name='skus']", data.get(dataSet).get("SKU"));
+							Common.clickElement("xpath", "//button//span[text()='Reindex SKU(s)']");
+							
+							 String Reindex = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+					                    .getText();
+							
+							  Common.assertionCheckwithReport(Reindex.contains("has been reindexed for store \"Osprey UK / Osprey UK Store / Osprey UK English Store"),
+					                    "validating the Reindex sucess message",
+					                    "success message should be display after clicking on the Reindex SKU",
+					                    "Sucessfully the message has been displayed after clicking on Reindex SKU",
+					                    "failed to display the sucess message after clicking on the Reindex SKU");
+						}  catch (Exception | Error e) {
+				            e.printStackTrace();
+				            ExtenantReportUtils.addFailedLog("validating the Reindex SKU sucess message",
+				                    "cache message should be display after clicking on Reindex SKU",
+				                    "unable to display the sucess message after clicking on the Reindex SKU",
+				                    Common.getscreenShot("failed to display the sucess message after clicking on Reindex SKU"));
+				            Assert.fail();
+							
+							
+						}
+						
+					}
+						public void Cache_Management(String dataSet) {
+						// TODO Auto-generated method stub
+				        String Magento = data.get(dataSet).get("cache");
+				        try {
+				            Sync.waitElementPresent("xpath", "//a//span[text()='System']");
+				            Common.clickElement("xpath", "//a//span[text()='System']");
+				            Sync.waitElementPresent("xpath", "//a//span[text()='Cache Management']");
+				            Common.clickElement("xpath", "//a//span[text()='Cache Management']");
+				            Sync.waitPageLoad();
+				            Thread.sleep(4000);
+				            Common.assertionCheckwithReport(Common.getPageTitle().contains("Cache Management"),
+				                    "validating the page navigates to the cache management",
+				                    "It should Navigates to the Cache management page",
+				                    "Sucessfully it is navigated to the cache managment page",
+				                    "failed to Navigate to the cache managment page");
+				          //  Sync.waitElementPresent("xpath", "//button[@title='" + Magento + "']");
+				            Common.clickElement("xpath", "//button[@id='flush_magento']");
+				            Sync.waitPageLoad();
+				            Thread.sleep(4000);
+				            String Cachemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+				                    .getText();
+				            Common.assertionCheckwithReport(Cachemessage.equals("The Magento cache storage has been flushed."),
+				                    "validating the cache management sucess message",
+				                    "cache message should be display after clicking on the flush magento",
+				                    "Sucessfullythe message has been displayed after clicking on the flush magneto",
+				                    "failed to display the sucess message after clicking on the flush magneto");
+
+				 
+
+				        } catch (Exception | Error e) {
+				            e.printStackTrace();
+				            ExtenantReportUtils.addFailedLog("validating the cache management sucess message",
+				                    "cache message should be display after clicking on the flush magento",
+				                    "unable to display the sucess message after clicking on the flush magneto",
+				                    Common.getscreenShot("failed to display the sucess message after clicking on the flush magneto"));
+				            Assert.fail();
+				        }
+
+				 
+
+				    }
+					
+						public void Delete_product(String dataset) {
+							String product = data.get(dataset).get("Productname");
+							System.out.println(product);
+							
+							try {	
+								Common.clickElement("xpath", "//label[contains(@class,'data-grid-check')]");
+						
+								String Adproduct = Common.findElement("xpath", "(//td//div[@class='data-grid-cell-content white-space-preserved'])[1]").getText();
+								String records = Common.findElement("xpath",  "//div[@class='admin__control-support-text']").getText();
+								if ((Adproduct.equals(product)) && (records.contains("1 records found"))){
+								//	Common.clickElement("xpath", "//label[contains(@class,'data-grid-check')]");
+									Common.clickElement("xpath", "//button[@class='action-select']//span[text()='Actions']");
+									Common.clickElement("xpath", "//li//span[text()='Delete']");
+								} 
+								else  {
+									Assert.fail();
+								}
+								Common.clickElement("xpath", "//button[@class='action-primary action-accept']");
+								
+								 String Successmessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']")
+						                    .getText();
+								
+								  Common.assertionCheckwithReport(Successmessage.contains("A total of 1 record(s) have been deleted."),
+						                    "validating the sucess message for delete product",
+						                    "success message should be display after deleting the product",
+						                    "Sucessfully the message has been displayed after deleting the product",
+						                    "failed to display the sucess message after deleting the product");
+							}  catch (Exception | Error e) {
+					            e.printStackTrace();
+					            ExtenantReportUtils.addFailedLog("validating the sucess message for delete product",
+					                    "success message should be display after deleting the product",
+					                    "unable to display the sucess message after deleting the product",
+					                    Common.getscreenShot("failed to display the sucess message after deleting the product"));
+					            Assert.fail();
+							}}
+								
+								
+							
+
+						
+						public void Backto_magento_Cache_admin() {
+							try {
+
+								Common.switchToFirstTab();
+								Thread.sleep(2000);
+
+								// String text=Common.getText("xpath", "//h1[@class='page-title']");
+								String text = Common.getPageTitle();
+								
+
+								System.out.println(text);
+								Thread.sleep(2000);
+
+
+								  Common.assertionCheckwithReport(text.contains("Cache Management / Tools / System / Magento Admin"),
+						                    "validating the switchtofirsttab",	
+										"should display the pagetitle after clicking on the switchtofirsttab",
+										"pagetitle is displayed after a click on the switchtofirsttab", "Failed to display pagetitle");
+
+							} catch (Exception | Error e) {
+								e.printStackTrace();
+								ExtenantReportUtils.addFailedLog("To Validate the pagetitle is displayed",
+										"should display the pagetitle after clicking on the switchtofirsttab",
+										"unable to display pagetitle after a click on the switchtofirsttab", "Failed to display pagetitle");
+								Assert.fail();
+							}
+
+						
+
+
+						}
+						public void search_addAdminproduct(String dataset) {
+							// TODO Auto-generated method stub
+							String product = data.get(dataset).get("Productname");
+							System.out.println(product);
+							try {
+								Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+								String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+								Thread.sleep(4000);
+								Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+										"User should able to click on the search button", "Search expands to the full page",
+										"Sucessfully search bar should be expand");
+								Common.textBoxInput("xpath", "//input[@type='search']", data.get(dataset).get("Productname"));
+								Common.actionsKeyPress(Keys.ENTER);
+								Sync.waitPageLoad();
+								Thread.sleep(4000);
+								String searchError = Common.findElement("xpath", "//span[@class='js-search-query-no-results']").getText();
+								System.out.println(searchError);
+								Common.assertionCheckwithReport(searchError.contains("Lotustest"), "validating the search functionality",
+										"enter product name will display in the search box", "user enter the product name in  search box",
+										"Failed to see the product name");
+								Thread.sleep(8000);
+
+							} catch (Exception | Error e) {
+								e.printStackTrace();
+								ExtenantReportUtils.addFailedLog("validating the search functionality",
+										"enter product name will display in the search box",
+										" unable to enter the product name in  search box",
+										Common.getscreenShot("Failed to see the product name"));
+								Assert.fail();
+							}
+							
+						}
+						public void Adds_Related_Product(String dataset) {
+							
+							try {
+								Common.actionsKeyPress(Keys.UP);
+								Common.clickElement("xpath", "//span[contains(text(),'Related Products,')]");
+								String open = Common.findElement("xpath", "//span[text()='Related Products']").getAttribute("text");
+								Thread.sleep(4000);
+								System.out.println( open);
+								
+								
+							//	Common.assertionCheckwithReport(open.contains("Related"), "User should open the Releted Product dropdown",
+							//			"User should able to click on  Releted Product dropdown", "expands to  Releted Product dropdown ",
+							//			"Sucessfully  expand Releted Product dropdown ");
+								Common.clickElement("xpath", "//button//span[text()='Add Related Products']");
+								String text = Common.getPageTitle();
+								Common.assertionCheckwithReport(text.contains("AETHER™ 55 / Products / Inventory / Catalog / Magento Admin"),
+					                    "validating  Add Releated products grid",	
+									"should display Add Releated products grid after clicking on Add Releated products",
+									"pagetitle is displayed after a clicking on Add Releated products grid", "Failed to display Add Releated products grid");
+							
+								Common.findElement("xpath", "//div[text()='POCO® CARRYING CASE']");
+								Common.clickElement("xpath", "//input[@id= 'idscheck19']");
+								
+								Common.clickElement("xpath", "//div//span[text()='Add Selected Products']");
+								String addproduct = Common.getPageTitle();
+								Common.clickElement("xpath", "//button[@id='save-button']");
+								Sync.waitPageLoad();
+								Thread.sleep(4000);
+								String Successmessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+								System.out.println( Successmessage);
+								Common.assertionCheckwithReport( Successmessage.contains("You saved the product."), "validating the sucess message for saved product",
+									"success message should be display after Adding the product ", "Sucessfully the message has been displayed after saving the product",
+										"Failed to display the sucess message after saving the product");
+								Thread.sleep(8000);
+
+							} catch (Exception | Error e) {
+					            e.printStackTrace();
+					            ExtenantReportUtils.addFailedLog("validating the sucess message for Saved product",
+					                    "success message should be display after saving the product",
+					                    "unable to display the sucess message after saving the product",
+					                    Common.getscreenShot("failed to display the sucess message after deleting the product"));
+					            Assert.fail();
+							}
+							
+						}
+						public void PDP_Releted_search(String dataset) {
+
+						    // TODO Auto-generated method stub
+
+							String product = data.get(dataset).get("Productname");
+							System.out.println(product);
+						    try {
+						        Sync.waitPageLoad();
+						        for (int i = 0; i <= 10; i++) {
+						            Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+						            List<WebElement> webelementslist = Common.findElements("xpath",
+						                    "//img[contains(@class,'m-product-card__image')]");
+	                          String s = webelementslist.get(i).getAttribute("src");
+
+						            System.out.println(s);
+
+						            if (s.isEmpty()) {
+
+						            } else {
+
+						                break;
+
+						            }
+
+						        }
+
+						        Sync.waitPageLoad(30);
+
+						        Thread.sleep(6000);
+
+						        Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+
+						        Common.clickElement("xpath", "//img[@alt='" + product + "']");
+					        Sync.waitPageLoad(30);
+	                        Thread.sleep(6000);
+						        Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+						        String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+					        Common.assertionCheckwithReport(name.contains(product), "validating the  product navigates to PDP page",
+
+						                "It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+
+						                "failed to Navigate to the PDP page");
+						        Sync.waitPageLoad();
+						        Thread.sleep(4000);
+						       // Common.actionsKeyPress(Keys.DOWN);
+						        Common.scrollIntoView("xpath", "//h2[text()='Compare Similar Products']");
+						      //  Common.findElement("xpath", "//h2[text()='Compare Similar Products']");
+						      
+						        
+						        String message = Common.findElement("xpath", "//a[@title='POCO® CARRYING CASE']")
+
+						                .getAttribute("text");
+						        Common.assertionCheckwithReport(message.contains("POCO® CARRYING CASE"), "Compare Similar Products",
+
+						                "Product should be in Compare Similar Products", " product Should display is in Compare Similar Products ",
+
+						                "failed to see");
+
+						    } catch (Exception | Error e) {
+
+						        e.printStackTrace();
+
+						        ExtenantReportUtils.addFailedLog("validating Compare Similar Products section", "Product should be in Compare Similar Products",
+
+						                "unable to display product in Compare Similar Products", Common.getscreenShot("failed to display product in Compare Similar Products"));
+
+						 
+
+						        Assert.fail();
+
+						    }
+							
+						}
+
+	        public void delete_Related_Product(String dataset) {
+	        	String product = data.get(dataset).get("Productname");
+				System.out.println(product);
+							
+							try {
+								Common.actionsKeyPress(Keys.UP);
+								Common.clickElement("xpath", "//span[contains(text(),'Related Products,')]");
+								String open = Common.findElement("xpath", "//span[text()='Related Products']").getAttribute("text");
+								Thread.sleep(4000);
+								System.out.println( open);
+								String deleteproduct = Common.findElement("xpath",  "(//div//span[text()='POCO® CARRYING CASE'])[1]").getText();
+//								String RelatedProduct = Common.findElement("xpath",  "//span[text()='Related Products']").getText();
+								if ((deleteproduct.equals(product))){  
+									
+										Common.clickElement("xpath", "//button[@Class='action-delete']");
+										Common.clickElement("xpath", "//button[@id='save-button']");
+									} 
+									else  {
+										Assert.fail();
+									}
+								String Successmessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+								System.out.println( Successmessage);
+								Common.assertionCheckwithReport( Successmessage.contains("You saved the product."), "validating the sucess message for saved product",
+									"success message should be display after Adding the product ", "Sucessfully the message has been displayed after saving the product",
+										"Failed to display the sucess message after saving the product");
+								Thread.sleep(8000);
+								
+								
+							} catch (Exception | Error e) {
+					            e.printStackTrace();
+					            ExtenantReportUtils.addFailedLog("validating the sucess message for delete product",
+					                    "success message should be display after deleting the product",
+					                    "unable to display the sucess message after deleting the product",
+					                    Common.getscreenShot("failed to display the sucess message after deleting the product"));
+					            Assert.fail();
+
+							 
+							}
+							
+
+	        }
+	    	public void PDP_deleteReleted_search(String dataset) {
+
+			    // TODO Auto-generated method stub
+
+				String product = data.get(dataset).get("Productname");
+				System.out.println(product);
+			    try {
+			        Sync.waitPageLoad();
+			        for (int i = 0; i <= 10; i++) {
+			            Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+			            List<WebElement> webelementslist = Common.findElements("xpath",
+			                    "//img[contains(@class,'m-product-card__image')]");
+	              String s = webelementslist.get(i).getAttribute("src");
+
+			            System.out.println(s);
+
+			            if (s.isEmpty()) {
+
+			            } else {
+
+			                break;
+
+			            }
+
+			        }
+
+			        Sync.waitPageLoad(30);
+
+			        Thread.sleep(6000);
+
+			        Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+
+			        Common.clickElement("xpath", "//img[@alt='" + product + "']");
+		        Sync.waitPageLoad(30);
+	            Thread.sleep(6000);
+			        Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			        String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		        Common.assertionCheckwithReport(name.contains(product), "validating the  product navigates to PDP page",
+
+			                "It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+
+			                "failed to Navigate to the PDP page");
+			        Sync.waitPageLoad();
+			        Thread.sleep(4000);
+			      
+			        Common.scrollIntoView("xpath", "//h2[text()='Compare Similar Products']");
+			        String message = Common.findElement("xpath", "//a[@title='POCO® CARRYING CASE']")
+
+			                .getAttribute("text");
+			 
+			        if (message.contains(product)) {
+						
+						
+					
+						Assert.fail();
+					}
+			        
+			     
+			     
+
+			    } catch (Exception | Error e) {
+
+			        e.printStackTrace();
+
+			        ExtenantReportUtils.addFailedLog("validating Compare Similar Products section", "Product should not display in Compare Similar Products",
+
+			                "should to display product in Compare Similar Products", Common.getscreenShot("failed if product is displad in Compare Similar Products"));
+
+			 
+
+			        Assert.fail();
+
+			    }
+				
+			}
 
 }
 
