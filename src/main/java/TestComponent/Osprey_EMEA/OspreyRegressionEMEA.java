@@ -5490,4 +5490,79 @@ public void Verify_Address(String Dataset) {
 		}
 
 	}
+
+	public void Loginpage_validation(String dataSet) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Thread.sleep(5000);
+			click_singinButton();
+			Sync.waitElementPresent("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitElementPresent(30, "xpath", "//div[@id='pass-error']");
+			String errormessage=Common.findElement("xpath", "//div[@id='pass-error']").getText();
+			Common.assertionCheckwithReport(
+					errormessage.contains("This is a required field."),
+					"verifying the error message validation with empty fileds",
+					"after click on signin button with empty blanks error message should appear",
+					"Sucessfully error messsage should be display ",
+					"Failed to display the error message");
+			if (Common.getCurrentURL().contains("stage")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad(40);
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//div[@class='a-message__container-inner']");
+			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Sync.waitPageLoad(40);
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					message.contains("The account sign-in was incorrect"),
+					"verifying the error message for invalid password",
+					"after click on signin button with empty invalid password error message should appear",
+					"Sucessfully error messsage should be display ",
+					"Failed to display the error message");
+			if (Common.getCurrentURL().contains("stage")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("unregisterd Username"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad(40);
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//div[@class='a-message__container-inner']");
+			String message1 = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Sync.waitPageLoad(40);
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					message1.contains("The account sign-in was incorrect"),
+					"verifying the error message for invalid password",
+					"after click on signin button with un registered email error message should appear",
+					"Sucessfully error messsage should be display ",
+					"Failed to display the error message");
+			
+					
+					}
+		
+		
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the error message for invalid password",
+					"after click on signin button with un registered email error message should appear",
+					"Unable to display the error message",
+					Common.getscreenShot("Failed to display the error message"));
+			Assert.fail();
+			
+		}
+		
+	}
 }

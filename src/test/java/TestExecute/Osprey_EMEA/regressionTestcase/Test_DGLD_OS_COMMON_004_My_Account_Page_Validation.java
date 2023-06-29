@@ -24,6 +24,7 @@ public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.Account_page_Validation("Account validation");
         Osprey_ReEu.signout();
+        Osprey_ReEu.Loginpage_validation("Invalid Details");
         
 		} catch (Exception e) {
 
