@@ -2978,7 +2978,693 @@ public class OsperyAdminHelper {
 			    }
 				
 			}
+	    	public void Click_Products_Catalogmenu1() {
+	    		// TODO Auto-generated method stub
+	    		try {
+	    			Thread.sleep(2000);
+	    			Common.clickElement("xpath", "//li[@data-ui-id='menu-magento-catalog-catalog-products']");
+	    			Sync.waitPageLoad();
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(
+	    					Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
+	    					"To Validate the Catalogmenu is displayed",
+	    					"should display the Catalogmenu after clicking on the customers",
+	    					"Catalog menu is displayed after a click on the Catalog button", "Failed to display Catalogmenu");
 
-}
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the Catalogmenu is displayed",
+	    					"should display the Catalogmenu after clicking on the Catalog",
+	    					"unable to display Catalog menu after a click on the Catalog button",
+	    					"Failed to display Catalog menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_SKU(String Dataset) {
+	    		// TODO Auto-generated method stub
+
+	    				try {
+	    					
+	                 Thread.sleep(2000);
+	    			Sync.waitElementPresent("xpath", "//input[@name='sku']");
+	    			Common.textBoxInput("xpath", "//input[@name='sku']", data.get(Dataset).get("SKU"));
+	    			Thread.sleep(2000);
+	    			Sync.waitElementPresent("xpath", "//button//span[text()='Apply Filters']");
+	                Common.clickElement("xpath", "//button//span[text()='Apply Filters']");
+	                Thread.sleep(2000);
+	                	String SKU = Common.findElement("xpath", "//ul[@class='admin__current-filters-list']").getText();
+	    					System.out.println(SKU);
+	    					Common.assertionCheckwithReport(SKU, " To Validate the selected product SKU page",
+	    							"User should sucessfully Apply the ApplyFilters", "Sucessfully User saves the page", "Failed to save the page");
+	    					
+
+	    				} catch (Exception e) {
+	    					e.printStackTrace();
+	    					ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+	    							"User should able to save the page", "Unable to saves the page",
+	    							Common.getscreenShotPathforReport("Failed to save the page"));
+	    					Assert.fail();
+	    				}
+	    			}
+	    	public void Click_edit(String dataSet) {
+	    		String title = data.get(dataSet).get("title");
+
+	    		try {
+	    			if (Common.isElementDisplayed("xpath", "//tr[@class='data-row']")) {
+	    				Sync.waitElementClickable("xpath", "//button[text()='Select']");
+	    				Thread.sleep(3000);
+	    				Common.clickElement("xpath", "//button[text()='Select']");
+
+	    				Common.actionsKeyPress(Keys.PAGE_DOWN);
+	    				Sync.waitElementVisible("xpath", "//a[text()='Edit']");
+	    				Common.clickElement("xpath", "//a[text()='Edit']");
+	    				Sync.waitPageLoad();
+
+	    				Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title']");
+	    				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+
+	    				Common.assertionCheckwithReport(Common.getPageTitle().equals(title),
+	    						"To validate the admin is navigated to customer groups page",
+	    						"Should navigate to the existing Customer groups page",
+	    						"Successfully navigated to customer groups page", "Failed navigation to customer groups page");
+
+	    			} else {
+	    				System.out.println("0 Filter results found");
+	    			}
+
+	    		} catch (Exception e) {
+	    			e.printStackTrace();
+
+	    			ExtenantReportUtils.addFailedLog("Validate the Customer group is updated",
+	    					"Should update the customer groups", "Customer groups is not updated	",
+	    					"Failed to update the customer groups page");
+	    			Assert.fail();
+	    		}
+	    	}
+	    	public void Click_Filters() {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+	    			Thread.sleep(5000);
+
+	    			String Filtersmenu = Common.findElement("xpath", "//div[contains(@class,'data-grid-filters-wrap')]").getAttribute("class");
+	    			System.out.println(Filtersmenu);
+	    		//	Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(Filtersmenu.contains("data-grid-filters-wrap"), "To Validate the Filters menu is displayed",
+	    					"should display the Filters menu after clicking on the Filters",
+	    					"Filters menu is displayed after a click on the Filters button", "Failed to display Filters menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the Filters menu is displayed",
+	    					"should display the Filters menu after clicking on the Filters",
+	    					"unable to display Filters field menu after a click on the Filters button",
+	    					"Failed to display Filters field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_Stores() {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Thread.sleep(5000);
+
+	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+	    			System.out.println(catalogmenu);
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_Products_Storemenu() {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Thread.sleep(5000);
+
+	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+	    			System.out.println(catalogmenu);
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_Addnewattribute() {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Thread.sleep(5000);
+
+	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+	    			System.out.println(catalogmenu);
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Creat_Newattribute(String dataset) {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Thread.sleep(5000);
+
+	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+	    			System.out.println(catalogmenu);
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_Defaultlabel(String dataset) {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Thread.sleep(5000);
+
+	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+	    			System.out.println(catalogmenu);
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_DeleteAttribute(String dataset) {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Thread.sleep(5000);
+
+	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
+	    			System.out.println(catalogmenu);
+	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+	    	}
+	    	public void product_search(String DataSet) throws Exception {
+	    		String expectedResult=" should select the product from search";
+	    		try{
+	    	Thread.sleep(3000);
+	    	Common.textBoxInput("xpath","(//input[@id='fulltext'])[1]",data.get(DataSet).get("product"));
+	    	Common.actionsKeyPress(Keys.ENTER);
+	    	Thread.sleep(5000);
+	    	Common.clickElement("xpath", "//a[@class='action-menu-item']");
+	    	Thread.sleep(3000);
+	    	  String Text =   Common.findElement("xpath", "//h1[@class='page-title']").getText();
+	    	
+	    	Common.assertionCheckwithReport(Text.equalsIgnoreCase("TEST Product!"),
+	    	"verifying the product", "User navigate to product details",
+	    	"user successfully open the product details", "user faield to click product");
+
+	    		}
+	    		catch (Exception | Error e) {
+	    			e.printStackTrace();
+
+	    			ExtenantReportUtils.addFailedLog("verifying the products search", expectedResult,
+	    					"User failed to navigate products list ", Common.getscreenShotPathforReport("failed to click products search"));
+
+	    			Assert.fail();
+
+
+	    		}
+	    	}
+	    	public void Addproduct_upsells() throws InterruptedException
+	    	{
+	    		String expectedResult="should click on Related Products, Up-Sells, and Cross-Sells";
+	    		try
+	    		{
+	    		Thread.sleep(4000);
+	    	String text=Common.findElement("xpath", "//span[contains(text(),'Related Products, Up-Sells, and Cross-Sells')]").getText();
+	    	Thread.sleep(5000);
+	    		Common.clickElement("xpath", "//span[contains(text(),'Related Products, Up-Sells, and Cross-Sells')]");
+	    		
+	    		Common.assertionCheckwithReport(text.equalsIgnoreCase("Related Products, Up-Sells, and Cross-Sells"),
+	    				"verifying Related Products, Up-Sells, and Cross-Sells", "User navigate to Related Products, Up-Sells, and Cross-Sells page",
+	    				"user successfully open the Related Products, Up-Sells, and Cross-Sells page", "user faield to click on Related Products, Up-Sells, and Cross-Sells");
+	    		
+	    		if (Common.isElementDisplayed("xpath", "//span[text()='Configurable TEST']")) {
+	    		//	Sync.waitElementVisible("xpath", "//span[text()='Configurable TEST']");
+	    			Thread.sleep(3000);
+	    			Common.scrollIntoView("xpath", "//span[text()='Configurable TEST']");
+	    			Sync.waitElementVisible("xpath", "//span[text()='Configurable TEST']");
+	    		//	Common.clickElement("xpath", "(//button[@data-action='remove_row'])[5]");
+	    			Thread.sleep(3000);
+	    			Common.scrollIntoView("xpath", "//span[contains(text(),'Add Up-Sell Products')]");
+	    		
+	    			
+	    		Common.clickElement("xpath", "//span[contains(text(),'Add Up-Sell Products')]");	
+
+	    		} else {
+	    			
+	    			Thread.sleep(3000);
+	    		Common.scrollIntoView("xpath", "//span[contains(text(),'Add Up-Sell Products')]");
+
+//	    	String text1 = 	Common.findElement("xpath", "//span[contains(text(),'Add Up-Sell Products')]").getText();
+//	    	System.out.println(text1);
+	    	Thread.sleep(5000);
+	    Common.clickElement("xpath", "//span[contains(text(),'Add Up-Sell Products')]");
+	    		}
+	    		String text1 = 	Common.findElement("xpath", "//span[contains(text(),'Add Up-Sell Products')]").getText();
+	    		System.out.println(text1);
+	    Thread.sleep(5000);
+	    Common.scrollIntoView("xpath", "//div[text()='Configurable TEST']");
+	    Thread.sleep(5000);
+	    Sync.waitElementPresent("xpath","//label//input[@id='idscheck28']");
+	    Common.clickElement("xpath", "//label//input[@id='idscheck28']");
+	    Common.assertionCheckwithReport(text1.equals("Add Up-Sell Products"),
+	    		"verifying the add the selected product", "User navigate to add the select product",
+	             "user successfully open the add selected product", "user faield to add select the product");
+	    		
+	    	}
+	    	
+	    catch (Exception | Error e) {
+	       e.printStackTrace();
+	    	ExtenantReportUtils.addFailedLog("verifying the add selected products", expectedResult,
+	    			"User should add selected products ", Common.getscreenShotPathforReport("failed to add selected products"));
+	    	Assert.fail();
+	    }
+
+
+	    			
+	    	}	
+//	    	public void addupsellproduct() {
+//	    		String expectedResult="should add the selected product";
+//	    		try{
+//	    			
+//	    	Thread.sleep(3000);
+//	    	Sync.waitElementPresent("xpath","//label//input[@id='idscheck4']");
+//	    	Common.clickElement("xpath", "//label//input[@id='idscheck4']");
+	    //	
+//	    	Common.assertionCheckwithReport(.equals("Add Up-Sell Products"),
+//	    			"verifying the add the selected product", "User navigate to add the select product",
+//	                 "user successfully open the add selected product", "user faield to add select the product");
+//	    			}
+//	    		}
+//	    		
+//	    	catch (Exception | Error e) {
+//	    	   e.printStackTrace();
+//	    		ExtenantReportUtils.addFailedLog("verifying the add selected products", expectedResult,
+//	    				"User should add selected products ", Common.getscreenShotPathforReport("failed to add selected products"));
+//	    		Assert.fail();
+//	    	}
+
+	    	//}
+	    	public void addselectedproduct() {
+	    		String expectedResult="should add the selected product";
+	    		try{
+	    			Thread.sleep(3000);
+//	    			Sync.waitElementPresent("xpath","//label//input[@id='idscheck28']");
+//	    			Common.clickElement("xpath", "//label//input[@id='idscheck28']");
+	    		String text = 	Common.findElement("xpath", "(//span[text()='Add Selected Products'])[2]").getText();
+	    	Common.clickElement("xpath", "(//span[contains(text(),'Add Selected Products')])[2]");
+	    	Common.assertionCheckwithReport(text.equals("Add Selected Products"),
+	    			"verifying the add the selected product", "User navigate to add the select product",
+	                 "user successfully open the add selected product", "user faield to add select the product");
+	    	Thread.sleep(3000);
+	    	Sync.waitElementPresent("xpath","//button[@id='save-button']");
+	    	Common.clickElement("xpath", "//button[@id='save-button']");
+	    	
+	    	Sync.waitElementPresent(20, "xpath", "//div[text()='You saved the product.']");
+	    	String sucessMessage = Common.getText("xpath", "//div[text()='You saved the product.']");
+	    	Thread.sleep(3000);
+	    	System.out.println(sucessMessage);
+	    	
+	    	Thread.sleep(3000);
+	    		
+	    		}
+	    	catch (Exception | Error e) {
+	    	   e.printStackTrace();
+	    		ExtenantReportUtils.addFailedLog("verifying the add selected products", expectedResult,
+	    				"User should add selected products ", Common.getscreenShotPathforReport("failed to add selected products"));
+	    		Assert.fail();
+	    	}
+
+	    	}
+	    	public void page_Cache(String Dataset) {
+	    		// TODO Auto-generated method stub
+	    		String Magento = data.get(Dataset).get("cache");
+	    		try {
+	    			Sync.waitElementPresent("xpath", "//a//span[text()='System']");
+	    			Common.clickElement("xpath", "//a//span[text()='System']");
+	    			Sync.waitElementPresent("xpath", "//a//span[text()='Cache Management']");
+	    			Common.clickElement("xpath", "//a//span[text()='Cache Management']");
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(4000);
+	    			Common.assertionCheckwithReport(Common.getPageTitle().contains("Cache Management"),
+	    					"validating the page navigates to the cache management",
+	    					"It should Navigates to the Cache management page",
+	    					"Sucessfully it is navigated to the cache managment page",
+	    					"failed to Navigate to the cache managment page");
+	    			String page=Common.findElement("xpath", "//td[text()='Page Cache']").getText();
+	    			if(page.equals("Page Cache"))
+	    			{
+	    				Sync.waitElementPresent("xpath","//td[text()='Page Cache']");
+	    				Common.clickElement("xpath", "//td[text()='Page Cache']");
+	    			}
+	    			else
+	    			{
+	    				Assert.fail();
+	    			}
+	    			String records=Common.findElement("xpath", "//span[@class='mass-select-info']//strong").getText();
+	    			if(records.equals("1"))
+	    			{
+	    				Sync.waitElementPresent("xpath","//span[text()='Submit']");
+	    				Common.clickElement("xpath", "//span[text()='Submit']");
+	    			}
+	    			else
+	    			{
+	    				Assert.fail();
+	    			}
+	    			String message=Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+	    			Common.assertionCheckwithReport(message.equals("1 cache type(s) refreshed."),
+	    					"validating the cache management sucess message",
+	    					"cache message should be display after clicking on the flush magento",
+	    					"Sucessfullythe message has been displayed after clicking on the flush magneto",
+	    					"failed to display the sucess message after clicking on the flush magneto");
+	    			
+	    			}
+	    		catch(Exception | Error e)
+	    		{
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("validating the cache management sucess message",
+	    					"cache message should be display after clicking on the flush magento",
+	    					"unable to display the sucess message after clicking on the flush magneto",
+	    					Common.getscreenShot("failed to display the sucess message after clicking on the flush magneto"));
+	    			Assert.fail();
+	    		}
+	    		
+	    	}
+	    	public void openwebsite(String Dataset) {
+	    		String pagetitle = data.get(Dataset).get("URL");
+	    		System.out.println(pagetitle);
+	    		try {
+	    			Sync.waitPageLoad(60);
+
+	    			String currentAdminURL = Common.getCurrentURL();
+	    			//String urlkey = pagetitle.toLowerCase();
+	    			//System.out.println(urlkey);
+	    			Common.openNewTab();
+	    			if (currentAdminURL.contains("staging")) {
+	    				Common.oppenURL(data.get(Dataset).get("URL"));
+	    				
+	    			} else {
+	    				Common.oppenURL(data.get(Dataset).get("preprodURL"));
+
+	    			}
+	    			Sync.waitPageLoad(40);
+	    			String uname = Common.getPageTitle();
+	    			Common.assertionCheckwithReport(uname.contains("Home page"),
+	    					"Validating the User lands to the osprey page",
+	    					"User should able to land on the osprey page", "Sucessfully User lands on the osprey page",
+	    					"Failed to navigate to the osprey page");
+
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("Validating the User lands to the osprey page",
+	    					"User should able to land on the osprey page", "Unable to Navigate to the osprey page",
+	    					Common.getscreenShotPathforReport("Failed to navigate to the osprey page"));
+
+	    			Assert.fail();
+	    		}
+	    	}
+	    	public void verifingHomePage() {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(5000);
+	    			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+	    			String title= Common.getPageTitle();
+	    			System.out.println(title);
+	    			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
+	    					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
+	    					"faield to naviagte to homepage");
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("validating store logo", "System directs to the Homepage",
+	    					"Unable to navigate Home page",
+	    					Common.getscreenShotPathforReport("failed to get back to homepage"));
+	    			Assert.fail();
+	    		}
+
+	    	}
+	    	public void search_product1(String Dataset) {
+	    		// TODO Auto-generated method stub
+//	    		String product = data.get(Dataset).get("product");
+//	    		System.out.println(product);
+	    		try
+	    		{
+	            Common.clickElement("xpath", "(//div[contains(@class,'m-utilities-nav__item--search')])[2]");
+	         	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+	         	Thread.sleep(4000);
+	         	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+	         	"User should able to click on the search button", "Search expands to the full page",
+	         	"Sucessfully search bar should be expand");
+	         	String product = data.get(Dataset).get("product");
+	    		System.out.println(product);
+	         	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
+	            serachbar.sendKeys(product);
+	            Common.actionsKeyPress(Keys.ENTER);
+	        	Sync.waitPageLoad();
+	        	Thread.sleep(4000);
+	    			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+	    			System.out.println(productsearch);
+	    			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+	    					"enter product name will display in the search box", "user enter the product name in  search box",
+	    					"Failed to see the product name");
+	    			Thread.sleep(8000);
+	                 }  
+	    		 catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("validating the search functionality",
+	    					"enter product name will display in the search box",
+	    					" unable to enter the product name in  search box",
+	    					Common.getscreenShot("Failed to see the product name"));
+	    			Assert.fail();
+	    		}
+
+	    	}
+	    	
+	    	public void click_product() {
+
+	    		try {
+	    			Sync.waitElementPresent("xpath", "//img[@alt='TEST Product!']");
+
+	    			Common.clickElement("xpath", "//img[@alt='TEST Product!']");
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(4000);
+	    			Common.refreshpage();
+	    			Thread.sleep(5000);
+
+	    			String pagetitle = Common.getPageTitle();
+	    			System.out.println(pagetitle);
+	    Thread.sleep(2000);
+	    			Common.assertionCheckwithReport(pagetitle.contains("TEST Product"),
+	    					"To Validate the PDP page is displayed",
+	    					"should display the PDP page after clicking on the product image",
+	    					"update PDP page are displayed after a click on the product image", "Failed to display  PDP page");
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the PDP page are displayed",
+	    					"should display the PDP page after clicking on the product image",
+	    					"unable to display PDP page after a click on the product image",
+	    					"Failed to display update PDP page");
+	    			Assert.fail();
+	    		}
+
+	    	}
+	    	public void verifyselectedproduct() throws InterruptedException {
+	    		String expectedResult="should add the added selected product";
+	    		try{
+	    		Thread.sleep(4000);
+	    		Common.scrollIntoView("xpath", "//img[@alt='Configurable TEST']");
+	    		Thread.sleep(3000);
+	    		String selectedproduct = Common.getText("xpath", "//a[text()='Configurable TEST']");
+	    		System.out.println(selectedproduct);
+	    		Thread.sleep(4000);
+//	    	    String producttitle=Common.getText("xpath", "//a[@title='24K Gold One-Step Blowout And Volumizer']");
+//	    	    System.out.println(producttitle);
+	    	    Common.assertionCheckwithReport(selectedproduct.contains("Configurable TEST"),
+	    	    		"verifying the added selected product", "User navigate to added select product",
+	    	    		"user successfully open the added selected product", "user faield to added select product");
+	    	    }
+	    	    catch (Exception | Error e) {
+	    	       e.printStackTrace();
+	    	    	ExtenantReportUtils.addFailedLog("verifying the added selected products", expectedResult,
+	    	    			"User should added selected products ", Common.getscreenShotPathforReport("failed to added selected products"));
+	    	    	Assert.fail();
+	    	    }
+	    	}
+	    	public void back_to_Magento_Admin() {
+	    		String expectedResult=" should navigate to magento homepage";
+	    		try{
+	    		
+//	    	Common.oppenURL("https://jetrails-m2-stag.hottools.com/PUjbcJfzYQqqP6BeP");
+	    			Common.switchToFirstTab();
+	    	}
+	    	catch (Exception | Error e) {
+	    		e.printStackTrace();
+
+	    		ExtenantReportUtils.addFailedLog("verifying magento homepage", expectedResult,
+	    				"User should navigate to magento homepage", Common.getscreenShotPathforReport("failed to login magento"));
+
+	    		Assert.fail();
+	    	}		
+	    	}
+	    	public void Removeproduct_upsells() throws InterruptedException
+	    	{
+	    		String expectedResult="should click on Related Products, Up-Sells, and Cross-Sells";
+	    		try
+	    		{
+	    		Thread.sleep(4000);
+	    	String text=Common.findElement("xpath", "//span[contains(text(),'Related Products, Up-Sells, and Cross-Sells')]").getText();
+	    	Thread.sleep(5000);
+	    		Common.clickElement("xpath", "//span[contains(text(),'Related Products, Up-Sells, and Cross-Sells')]");
+	    		
+	    		Common.assertionCheckwithReport(text.equalsIgnoreCase("Related Products, Up-Sells, and Cross-Sells"),
+	    				"verifying Related Products, Up-Sells, and Cross-Sells", "User navigate to Related Products, Up-Sells, and Cross-Sells page",
+	    				"user successfully open the Related Products, Up-Sells, and Cross-Sells page", "user faield to click on Related Products, Up-Sells, and Cross-Sells");
+	    		
+	    			Sync.waitElementVisible("xpath", "//span[text()='Configurable TEST']");
+	    			Thread.sleep(3000);
+	    			Common.clickElement("xpath", "(//button[@data-action='remove_row'])[5]");
+	    			Thread.sleep(3000);
+	    			Sync.waitElementPresent("xpath","//button[@id='save-button']");
+	    			Common.clickElement("xpath", "//button[@id='save-button']");
+	    			
+	    			Sync.waitElementPresent(20, "xpath", "//div[text()='You saved the product.']");
+	    			String sucessMessage = Common.getText("xpath", "//div[text()='You saved the product.']");
+	    			Thread.sleep(3000);
+	    			System.out.println(sucessMessage);
+	    			
+	    			Thread.sleep(3000);
+	    				
+	    				}
+	    			catch (Exception | Error e) {
+	    			   e.printStackTrace();
+	    				ExtenantReportUtils.addFailedLog("verifying the add selected products", expectedResult,
+	    						"User should add selected products ", Common.getscreenShotPathforReport("failed to add selected products"));
+	    				Assert.fail();
+	    			}
+
+	    			}
+	    	
+	    	public void opensecondtab() {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(5000);
+	    			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+	    			String title= Common.getPageTitle();
+	    			System.out.println(title);
+	    			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
+	    					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
+	    					"faield to naviagte to homepage");
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("validating store logo", "System directs to the Homepage",
+	    					"Unable to navigate Home page",
+	    					Common.getscreenShotPathforReport("failed to get back to homepage"));
+	    			Assert.fail();
+	    		}
+
+	    	}
+	    	public void verifyremoveproduct() throws InterruptedException {
+	    		String expectedResult="should add the added selected product";
+	    		try{
+	    		Thread.sleep(4000);
+	    		Common.scrollIntoView("xpath", "//div[@class='c-product-carousel c-product-carousel--slick upsell']");
+	    		Thread.sleep(3000);
+	    		String deletedtedproduct = Common.findElement("xpath", "//div[@class='c-product-carousel c-product-carousel--slick upsell']").getAttribute("class");
+	    		System.out.println(deletedtedproduct);
+	    		Thread.sleep(4000);
+//	    	    String producttitle=Common.getText("xpath", "//a[@title='24K Gold One-Step Blowout And Volumizer']");
+//	    	    System.out.println(producttitle);
+	    	    Common.assertionCheckwithReport(deletedtedproduct.contains("c-product-carousel c-product-carousel--slick upsel"),
+	    	    		"verifying the deleted selected product", "User navigate to deleted select product",
+	    	    		"user successfully open the deleted selected product", "user faield to deleted select product");
+	    	    }
+	    	    catch (Exception | Error e) {
+	    	       e.printStackTrace();
+	    	    	ExtenantReportUtils.addFailedLog("verifying the deleted selected products", expectedResult,
+	    	    			"User should deleted selected products ", Common.getscreenShotPathforReport("failed to deleted selected products"));
+	    	    	Assert.fail();
+	    	    }
+	    	}
+	    	}
+
+
 
 	
