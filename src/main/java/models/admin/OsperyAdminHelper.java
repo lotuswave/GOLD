@@ -3239,6 +3239,9 @@ public class OsperyAdminHelper {
 	    	public void product_search(String DataSet) throws Exception {
 	    		String expectedResult=" should select the product from search";
 	    		try{
+	    			if (Common.isElementDisplayed("xpath", "//ul[@class='admin__current-filters-list']")) {
+                        Common.javascriptclickElement("xpath", "//button[@class='action-tertiary action-clear']");
+                    }
 	    	Thread.sleep(3000);
 	    	Common.textBoxInput("xpath","(//input[@id='fulltext'])[1]",data.get(DataSet).get("product"));
 	    	Common.actionsKeyPress(Keys.ENTER);
