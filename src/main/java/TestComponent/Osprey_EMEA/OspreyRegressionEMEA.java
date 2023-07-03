@@ -5607,4 +5607,97 @@ public void Verify_Address(String Dataset) {
 		}
 		
 	}
+	
+	public void Sticky_Add_to_Cart(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String Productsize=data.get(Dataset).get("Size");
+		String productcolor = data.get(Dataset).get("Color");
+		System.out.println(products);
+		
+		String results=Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+		System.out.println(results);
+		try {
+
+			if (results.contains("POCO® CARRYING CASE")) {                                                        //need to implement from the Header links After the configurations
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@class,'m-product-card__image')]");
+
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.actionsKeyPress(Keys.END);
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[@class='sticky-atc__inner']//div[@aria-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@class='sticky-atc__inner']//div[@aria-label='" + productcolor + "']");
+				Sync.waitElementPresent("xpath", "//div[@class='sticky-atc__inner']//div[@data-option-label='"+ Productsize +"']");
+				Common.clickElement("xpath", "//div[@class='sticky-atc__inner']//div[@data-option-label='" +Productsize+"']");
+				Sync.waitElementPresent("xpath", "//button[@id='product-sticky-addtocart-button']");
+				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
+				Thread.sleep(4000);
+				Common.actionsKeyPress(Keys.HOME);
+				Common.actionsKeyPress(Keys.UP);
+				
+			} else {
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@class,'m-product-card__image')]");
+
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad();
+				Common.actionsKeyPress(Keys.END);
+				Sync.waitElementPresent("xpath", "//div[@class='sticky-atc__inner']//div[@data-option-label='"+ Productsize +"']");
+				Common.clickElement("xpath", "//div[@class='sticky-atc__inner']//div[@data-option-label='" +Productsize+"']");
+				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
+				Common.actionsKeyPress(Keys.HOME);
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+	}
 }
