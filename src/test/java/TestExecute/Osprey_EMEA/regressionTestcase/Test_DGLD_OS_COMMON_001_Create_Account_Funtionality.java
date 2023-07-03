@@ -22,6 +22,7 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
         Osprey_ReEu.createaccount_exitingemail("Existing details");
         Osprey_ReEu.Create_Account("Create Account");
         Osprey_ReEu.click_Myorders();
+        Osprey_ReEu.Edit_Name("Edit contactinfo");
         
 		} catch (Exception e) {
 

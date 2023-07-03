@@ -5700,4 +5700,48 @@ public void Verify_Address(String Dataset) {
 			Assert.fail();
 		}
 	}
+
+	public void Edit_Name(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//ul[@class='nav items reset-list']//a[text()='My Account']");
+			Common.clickElement("xpath", "//ul[@class='nav items reset-list']//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the my account page navigation",
+					"After clicking on my account it should navigate to the My account page", "Sucessfully Navigated to the my account page",
+					"failed to Navigate to the My account page");
+			Sync.waitElementPresent("xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//span[text()='Edit']");
+			String editaccount=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			if(editaccount.contains("Edit Account Information"))
+			{
+				Sync.waitElementPresent("xpath", "//button[@aria-label='Edit Account Name']//span[text()='Edit']");
+				Common.clickElement("xpath", "//button[@aria-label='Edit Account Name']//span[text()='Edit']");
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+				Common.clickElement("xpath", "//button[@title='Save']");
+				Sync.waitPageLoad(40);
+				Thread.sleep(4000);
+				String message=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+				Common.assertionCheckwithReport(message.contains("You saved the account information."), "validating the edit account information",
+						"After clicking oon save changes sucess message should appear", "Sucessfully save address suceess message should display",
+						"failed to save the data and success message is not displayed");
+				
+			}
+			else
+			{
+				Assert.fail();
+			}
+				
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the edit account information",
+					"After clicking oon save changes sucess message should appear", "Unable to save the data and success message is not displayed", Common.getscreenShot("failed to save the data and success message is not displayed"));
+			Assert.fail();
+		}
+		
+	}
 }
