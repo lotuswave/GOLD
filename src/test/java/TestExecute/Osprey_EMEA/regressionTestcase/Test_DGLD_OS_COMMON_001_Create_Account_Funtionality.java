@@ -19,7 +19,9 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.createaccount_exitingemail("Existing details");
         Osprey_ReEu.Create_Account("Create Account");
+        Osprey_ReEu.click_Myorders();
         
 		} catch (Exception e) {
 

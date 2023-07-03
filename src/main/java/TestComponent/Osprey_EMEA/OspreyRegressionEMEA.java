@@ -94,15 +94,7 @@ public class OspreyRegressionEMEA {
 		String email = "";
 		try
 		{
-			Sync.waitElementPresent(30, "xpath", "//button[@aria-controls='desktop-account-nav']");
-			Common.clickElement("xpath", "//button[@aria-controls='desktop-account-nav']");
-			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
-			Sync.waitImplicit(30);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Create New Customer Account"),
-					"validating navigation to the create new account page",
-					"User should navigate to the create account page",
-					"Sucessfully user navigates to the Create account page",
-					"Failed to navigate to the Create account page");
+			
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
@@ -132,6 +124,54 @@ public class OspreyRegressionEMEA {
 		}
 		return email;
 	}
+	
+	public void createaccount_exitingemail(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-controls='desktop-account-nav']");
+			Common.clickElement("xpath", "//button[@aria-controls='desktop-account-nav']");
+			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
+			Sync.waitImplicit(30);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Create New Customer Account"),
+					"validating navigation to the create new account page",
+					"User should navigate to the create account page",
+					"Sucessfully user navigates to the Create account page",
+					"Failed to navigate to the Create account page");
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//input[@name='firstname']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
+			Common.clickElement("xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+					data.get(Dataset).get("Confirm Password"));
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[text()='Sign Up']");
+			String exsitingemail=Common.findElement("xpath", "//div[@data-ui-id='message-error']//div").getText();
+			
+			Common.assertionCheckwithReport(
+					exsitingemail.contains("There is already an account with this email address"),
+					"validating the error messages for existing email",
+					"User should able to get error message when we given exsiting email",
+					"Sucessfully error message has been displayed when user use the existing email",
+					"Failed to get an error message when user used the existing email");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error messages for existing email",
+					"User should able to get error message when we given exsiting email",
+					"Unable to get an error message when user used the existing email",
+					Common.getscreenShotPathforReport(
+							"Failed to get an error message when user used the existing email"));
+			Assert.fail();
+
+		}
+	}
+
 
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
@@ -1001,7 +1041,7 @@ public void addtocart(String Dataset) {
 		Thread.sleep(6000);
 		Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
 		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+		Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
 				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 				"failed to Navigate to the PDP page");
 		product_quantity(Dataset);
@@ -2703,6 +2743,8 @@ public void click_Myorders() {
 				"after clicking on the track order it should navigate to the orders and return page",
 				"successfully Navigated to the orders and return page",
 				"Failed to Navigate to the orders and return page");
+			
+		
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
