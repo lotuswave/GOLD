@@ -19,6 +19,7 @@ public class Test_DGLD_OS_COMMON_048_changeAddressIn_AddressBook {
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.click_Createaccount();
         Osprey_ReEu.Create_Account("Create Account");
         Osprey_ReEu.Add_Address("Account");
         Osprey_ReEu.change_Shippingaddress_Addressbook("New ShippingAddress");

@@ -125,18 +125,13 @@ public class OspreyRegressionEMEA {
 		return email;
 	}
 	
+
+	
+	
 	public void createaccount_exitingemail(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent(30, "xpath", "//button[@aria-controls='desktop-account-nav']");
-			Common.clickElement("xpath", "//button[@aria-controls='desktop-account-nav']");
-			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
-			Sync.waitImplicit(30);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Create New Customer Account"),
-					"validating navigation to the create new account page",
-					"User should navigate to the create account page",
-					"Sucessfully user navigates to the Create account page",
-					"Failed to navigate to the Create account page");
+			click_Createaccount();
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
