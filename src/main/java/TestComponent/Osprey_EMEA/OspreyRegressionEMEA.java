@@ -5739,9 +5739,244 @@ public void Verify_Address(String Dataset) {
 		{
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the edit account information",
-					"After clicking oon save changes sucess message should appear", "Unable to save the data and success message is not displayed", Common.getscreenShot("failed to save the data and success message is not displayed"));
+					"After clicking on save changes sucess message should appear",
+					"Unable to save the data and success message is not displayed",
+					Common.getscreenShot("failed to save the data and success message is not displayed"));
 			Assert.fail();
 		}
 		
 	}
+
+	public void Add_Whishlist_PLP(String string) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+
+			if (MyFavorites != 0) {
+				search_product("Product");
+				Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
+				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
+				Sync.waitElementVisible(30, "xpath", "//h4");
+				String whishlistpopup=Common.findElement("xpath", "//h4").getText();
+				System.out.println(whishlistpopup);
+				if(whishlistpopup.contains("Add to Wishlist"))
+				{
+					Sync.waitElementPresent(30,"xpath", "//button[@title='Add To List']");
+					Common.clickElement("xpath", "//button[@title='Add To List']");
+				}
+				else
+				{
+					Assert.fail();
+				}
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
+						"validating the Navigation to the My Favorites page",
+						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+				Sync.waitPageLoad();
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
+						"validating the  product add to the Whishlist", "Product should be add to whishlist",
+						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+			}
+		}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  product add to the Whishlist", "Product should be add to whishlist",
+						"Unable to add product to the Whishlist",
+						Common.getscreenShot("failed to add product to the Whishlist"));
+				Assert.fail();
+			}
+		
+	}
+
+	public void Add_Whishlist_PDP(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		System.out.println(product);
+		String productcolor= data.get(Dataset).get("Color");
+		System.out.println(productcolor);
+		String Productsize= data.get(Dataset).get("Size");
+		System.out.println(Productsize);
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String MyFavorites = Common.findElement("xpath", "//a[@id='wishlist-create-button']//span").getText();
+			System.out.println(MyFavorites);
+
+			if (MyFavorites.contains("CREATE NEW WISH LIST")) {
+				search_product("Simple product");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+				Common.clickElement("xpath", "//img[@alt='" + product + "']");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
+				Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
+				
+				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+				Sync.waitPageLoad(30);
+				Thread.sleep(4000);
+				Sync.waitElementVisible(30, "xpath", "//h4");
+				String whishlistpopup=Common.findElement("xpath", "//h4").getText();
+				System.out.println(whishlistpopup);
+				if(whishlistpopup.contains("Add to Wishlist"))
+				{
+					
+					Sync.waitElementPresent(30,"xpath", "//label[text()='Create New Wish List']");
+					Common.clickElement("xpath", "//label[text()='Create New Wish List']");
+					Common.textBoxInput("xpath", "//input[@name='name']", data.get(Dataset).get("whishlist name"));
+					Sync.waitElementPresent(30,"xpath", "//button[@title='Add To List']");
+					Common.clickElement("xpath", "//button[@title='Add To List']");
+				}
+				else
+				{
+					Assert.fail();
+				}
+				Sync.waitPageLoad(40);
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
+						"validating the Navigation to the My Favorites page",
+						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+				Sync.waitPageLoad();
+				String message = Common.findElement("xpath", "(//div[@data-ui-id='message-success']//div)[4]").getText();
+				System.out.println(message);
+				String newwhishlist = Common.findElement("xpath", "(//div[@data-ui-id='message-success']//div)[2]").getText();
+				System.out.println(newwhishlist);
+				Common.assertionCheckwithReport(message.contains( product+" has been added to your Wish List. Click ") && newwhishlist.contains("Wish list"),
+						"validating the  product add to the Whishlist", "Product should be add to whishlist",
+						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+		
+	}
+		}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  product add to the Whishlist", "Product should be add to whishlist",
+						"Unable to add product to the Whishlist",
+						Common.getscreenShot("failed to add product to the Whishlist"));
+				Assert.fail();
+			}
+	}
+	
+	public void Delete_Whishlist() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent(30,"xpath", "//label[@for='wishlist-select-all']");
+			Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
+			Sync.waitElementPresent(30,"xpath", "//button[@title='Delete Wish List']");
+			Common.clickElement("xpath", "//button[@title='Delete Wish List']");
+			Thread.sleep(4000);
+			String popup=Common.findElement("xpath", "//div[@class='modal-popup confirm _show']//div[@class='modal-content']//div").getText();
+			if(popup.contains("Are you sure you want to delete"))
+			{
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
+				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+			    Sync.waitElementVisible(40, "xpath", "//div[@class='a-message__container-inner']");
+				String message=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+
+				Common.assertionCheckwithReport(message.contains("Wish List"),
+						"validating the whishlist deletion", "new whishlist should be delete sucessfully",
+						"Sucessfully new whishlist has been deleted", "failed to delete the new whishlist");
+			}
+			else
+			{
+				Assert.fail();
+			}
+		}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the copy whishlist items to another whishlist", "Product should be added to the whishlist",
+						"Unable to to copy the whishlist to the exsiting whishlist",
+						Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
+				Assert.fail();
+			}
+		}
+
+	public void Copy_Whishlist() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
+			Sync.waitElementPresent(30,"xpath", "//span[text()='Copy Selected to Wish List']");
+			Common.clickElement("xpath", "//span[text()='Copy Selected to Wish List']");
+			Sync.waitElementPresent(30,"xpath", "//li[@class='item m-dropdown__item']//span[text()='Wish List']");
+			Common.clickElement("xpath", "//li[@class='item m-dropdown__item']//span[text()='Wish List']");
+			Thread.sleep(4000);
+			String copied=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
+			System.out.println(copied);
+			Common.assertionCheckwithReport(copied.contains("1 items were copied to Wish List"),
+					"validating the copy whishlist items to another whishlist", "Product should be added to the whishlist",
+					"Sucessfully product copied form one whishlist to another", "Failed to to copy the whishlist to the exsiting whishlist");
+			Delete_Whishlist();
+			
+		}
+		catch(Exception |Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the copy whishlist items to another whishlist", "Product should be added to the whishlist",
+					"Unable to to copy the whishlist to the exsiting whishlist",
+					Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Move_Whishlist(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
+			Sync.waitElementPresent(30,"xpath", "//span[text()='Move Selected to Wish List']");
+			Common.clickElement("xpath", "//span[text()='Move Selected to Wish List']");
+			Common.clickElement("xpath", "//span[@title='Create New Wish List']");
+			Common.textBoxInput("xpath", "//input[@name='name']", data.get(Dataset).get("whishlist name"));
+			Sync.waitElementPresent("xpath", "//button[@title='Save']");
+			Common.clickElement("xpath", "//button[@title='Save']");
+			Thread.sleep(4000);
+			String whishlist=Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
+			System.out.println(whishlist);
+			String message=Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("2 items were moved to Testing") && whishlist.contains("Wish list"),
+					"validating the  product add to the Whishlist", "Product should be add to whishlist",
+					"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+
+			if (MyFavorites != 0)
+			{
+			Sync.waitElementPresent(30,"xpath", "//a[text()='Testing']");
+			Common.clickElement("xpath", "//a[text()='Testing']");
+			Delete_Whishlist();
+			}
+			else
+			{
+				Assert.fail();
+			}
+			
+		}
+		catch(Exception | Error e)
+		{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the copy whishlist items to another whishlist", "Product should be added to the whishlist",
+				"Unable to to copy the whishlist to the exsiting whishlist",
+				Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
+		Assert.fail();
+		}
+	}		
 }
