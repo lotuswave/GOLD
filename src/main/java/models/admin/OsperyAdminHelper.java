@@ -3016,7 +3016,7 @@ public class OsperyAdminHelper {
 	                Thread.sleep(2000);
 	                	String SKU = Common.findElement("xpath", "//ul[@class='admin__current-filters-list']").getText();
 	    					System.out.println(SKU);
-	    					Common.assertionCheckwithReport(SKU, " To Validate the selected product SKU page",
+	    					Common.assertionCheckwithReport(SKU.contains("23164"), " To Validate the selected product SKU page",
 	    							"User should sucessfully Apply the ApplyFilters", "Sucessfully User saves the page", "Failed to save the page");
 	    					
 
@@ -3067,6 +3067,10 @@ public class OsperyAdminHelper {
 	    		try {
 	    			Sync.waitPageLoad();
 	    			Thread.sleep(2000);
+	    			
+		    			if (Common.isElementDisplayed("xpath", "//ul[@class='admin__current-filters-list']")) {
+	                        Common.javascriptclickElement("xpath", "//button[@class='action-tertiary action-clear']");
+	                    }
 	    			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 	    			Thread.sleep(5000);
 
@@ -3092,13 +3096,12 @@ public class OsperyAdminHelper {
 	    		try {
 	    			Sync.waitPageLoad();
 	    			Thread.sleep(2000);
-	    			Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Common.clickElement("xpath", "//span[text()='Stores']");
 	    			Thread.sleep(5000);
 
 	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
 	    			System.out.println(catalogmenu);
-	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
+	    			Common.assertionCheckwithReport(catalogmenu.contains("active"), "To Validate the catalog menu is displayed",
 	    					"should display the catalog menu after clicking on the catalog",
 	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
 
@@ -3163,31 +3166,7 @@ public class OsperyAdminHelper {
 
 
 	    	}
-	    	public void Creat_Newattribute(String dataset) {
-	    		try {
-	    			Sync.waitPageLoad();
-	    			Thread.sleep(2000);
-	    			Common.clickElement("id", "menu-magento-catalog-catalog");
-	    			Thread.sleep(5000);
-
-	    			String catalogmenu = Common.findElement("xpath", "//li[contains(@class,'active')]").getAttribute("class");
-	    			System.out.println(catalogmenu);
-	    			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-	    			Common.assertionCheckwithReport(catalogmenu.contains("show"), "To Validate the catalog menu is displayed",
-	    					"should display the catalog menu after clicking on the catalog",
-	    					"catalog menu is displayed after a click on the catalog button", "Failed to display catalog menu");
-
-	    		} catch (Exception | Error e) {
-	    			e.printStackTrace();
-	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
-	    					"should display the catalog menu after clicking on the catalog",
-	    					"unable to display catalog field menu after a click on the catalog button",
-	    					"Failed to display catalog field menu");
-	    			Assert.fail();
-	    		}
-
-
-	    	}
+	    	
 	    	public void Click_Defaultlabel(String dataset) {
 	    		try {
 	    			Sync.waitPageLoad();
@@ -4362,9 +4341,169 @@ public class OsperyAdminHelper {
 
 	    	}
 
+	    	public void Click_Product_Storemenu() {
+				// TODO Auto-generated method stub
+				try {
+					Thread.sleep(2000);
+					Common.clickElement("xpath", "//li[@class='item-catalog-attributes-attributes    level-2']");
+					Sync.waitPageLoad();
+				//	Sync.waitElementInvisible(30, "xpath", "//div[@class='page-wrapper']");
+					Common.assertionCheckwithReport(
+							Common.getPageTitle().contains("Product Attributes / Attributes / Stores / Magento Admin"),
+							"To Validate the Storegmenu is displayed",
+							"should display the Storegmenu after clicking on the customers",
+							"Storegmenu  is displayed after a click on the Store button", "Failed to display Storegmenu");
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To Validate the Storegmenu is displayed",
+							"should display the Storegmenu after clicking on the Catalog",
+							"unable to display Store menu after a click on the Store button",
+							"Failed to display Store menu");
+					Assert.fail();
+				}
+			}
+	    	public void Creat_Newattribute(String dataset) {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    		//	Common.clickElement("id", "menu-magento-catalog-catalog");
+	    			Common.textBoxInput("xpath", "//input[@id='attribute_label']", data.get(dataset).get("Attribute"));
+	    			Thread.sleep(5000);
+	    			Common.clickElement("xpath", "//button[@id='save']");
+                     Thread.sleep(2000);
+                     Sync.waitElementPresent(20, "xpath", "//div[text()='You saved the product attribute.']");
+         	    	String sucessMessage = Common.getText("xpath", "//div[text()='You saved the product attribute.']");
+         	    	Thread.sleep(3000);
+         	    	System.out.println(sucessMessage);
+         	    	Common.assertionCheckwithReport(sucessMessage.contains("You saved the product"),
+        					"To Validate the sucess message is displayed",
+        					"should display the sucess message after clicking on the sudmitorder",
+        					"sucess message is displayed after a click on the sudmitorder button",
+        					"Failed to display sucess message");
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
 
 
+	    	}
+	    	public void updates_productAttribute(String dataset) {
+	    		try {
+	    			
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.textBoxInput("xpath", "//input[@name='frontend_label']", data.get(dataset).get("Attribute"));
+	    			Common.clickElement("xpath", "//span[text()='Search']");
+	    			Thread.sleep(3000);
+	    			
+	    				Common.clickElement("xpath", "//td[contains(text(),'attr')]");
+	    				Sync.waitPageLoad();
+	    				Thread.sleep(4000);
+	    			Common.textBoxInput("xpath", "//input[@id='attribute_label']", data.get(dataset).get("update Attribute"));
+	    			Thread.sleep(5000);
+	    			Common.clickElement("xpath", "//button[@id='save']");
+                     Thread.sleep(2000);
+                     Sync.waitElementPresent(20, "xpath", "//div[text()='You saved the product attribute.']");
+         	    	String sucessMessage = Common.getText("xpath", "//div[text()='You saved the product attribute.']");
+         	    	Thread.sleep(3000);
+         	    	System.out.println(sucessMessage);
+         	    	Common.assertionCheckwithReport(sucessMessage.contains("You saved the product"),
+        					"To Validate the sucess message is displayed",
+        					"should display the sucess message after clicking on the sudmitorder",
+        					"sucess message is displayed after a click on the sudmitorder button",
+        					"Failed to display sucess message");
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
 
+
+	    	}
+	    	public void Delete_productAttribute(String dataset) {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.textBoxInput("xpath", "//input[@name='frontend_label']", data.get(dataset).get("update Attribute"));
+	    			Common.clickElement("xpath", "//span[text()='Search']");
+	    			Thread.sleep(3000);
+	    			
+	    				Common.clickElement("xpath", "//td[contains(text(),'attr')]");
+	    				Sync.waitPageLoad();
+	    				Thread.sleep(4000);
+	    		Common.findElement("xpath", "//input[@id='attribute_label']");
+	    			Common.clickElement("xpath", "//button[@title='Delete Attribute']");
+	    			Thread.sleep(2000);
+	    			Common.clickElement("xpath", "//button[@class='action-primary action-accept']");
+                     Thread.sleep(2000);
+                     Sync.waitElementPresent(20, "xpath", "//div[text()='You deleted the product attribute.']");
+         	    	String sucessMessage = Common.getText("xpath", "//div[text()='You deleted the product attribute.']");
+         	    	Thread.sleep(3000);
+         	    	System.out.println(sucessMessage);
+         	    	Common.assertionCheckwithReport(sucessMessage.contains("You deleted the product"),
+        					"To Validate the sucess message is displayed",
+        					"should display the sucess message after clicking on the sudmitorder",
+        					"sucess message is displayed after a click on the sudmitorder button",
+        					"Failed to display sucess message");
+	    		} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the catalog menu is displayed",
+	    					"should display the catalog menu after clicking on the catalog",
+	    					"unable to display catalog field menu after a click on the catalog button",
+	    					"Failed to display catalog field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
+	    	public void Click_Addnewattribute(String Dataset) {
+	    		try {
+	    			Sync.waitPageLoad();
+	    			Thread.sleep(2000);
+	    			Common.textBoxInput("xpath", "//input[@name='frontend_label']", data.get(Dataset).get("Attribute"));
+	    			Common.clickElement("xpath", "//span[text()='Search']");
+	    			Thread.sleep(3000);
+	    			if (Common.isElementDisplayed("xpath", "//td[contains(text(),'attr')]")) {
+	    				Common.clickElement("xpath", "//td[contains(text(),'attr')]");
+	    				Sync.waitPageLoad();
+	    				Common.clickElement("xpath", "//button[@title='Delete Attribute']");
+	    				Thread.sleep(2000);
+	    				Common.clickElement("xpath", "//button[@class='action-primary action-accept']");
+	    				Thread.sleep(2000);
+	    				Common.clickElement("xpath", "//button[@title='Add New Attribute']");
+	    				Thread.sleep(4000);
+	    				
+	    			} else {
+	    				
+	    			Common.clickElement("xpath", "//button[@title='Add New Attribute']");
+	    			Thread.sleep(5000);
+	    			}
+	    			String NewproductAttribute = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+	    			System.out.println(NewproductAttribute);
+	    		Thread.sleep(2000);
+	    			Common.assertionCheckwithReport(NewproductAttribute.contains("New Product Attribute"), "To Validate the New product Attribute page is displayed",
+	    					"should display the New product Attribute page after clicking on the Add New Attribute",
+	    					"New product Attribute page is displayed after a click on the Add New Attribute button", "Failed to display New product Attribute page");
+
+	    				} catch (Exception | Error e) {
+	    			e.printStackTrace();
+	    			ExtenantReportUtils.addFailedLog("To Validate the New product Attribute page is displayed",
+	    					"should display the New product Attribute page after clicking on the Add New Attribute",
+	    					"unable to display New product Attribute field page after a click on the Add New Attribute button",
+	    					"Failed to display New product Attribute field menu");
+	    			Assert.fail();
+	    		}
+
+
+	    	}
 }
 
 
