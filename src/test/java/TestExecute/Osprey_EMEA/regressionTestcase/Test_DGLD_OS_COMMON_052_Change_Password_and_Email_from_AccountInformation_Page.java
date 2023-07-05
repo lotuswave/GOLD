@@ -19,6 +19,7 @@ public class Test_DGLD_OS_COMMON_052_Change_Password_and_Email_from_AccountInfor
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.click_Createaccount();
         String NewDetail=Osprey_ReEu.Create_Account("Create Account");
         Osprey_ReEu.edit_Account_info("NewDetails");
         Osprey_ReEu.changed_password(NewDetail);
