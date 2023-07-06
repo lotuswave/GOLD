@@ -19,7 +19,7 @@ public class Test_DGLD_OS_COMMON_014_Validate_Country_Selector {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.country_selctor("Countryselector");  //need to add validation from excel and webelements
+        Osprey_ReEu.country_selctor("Countryselector");  //need to add validation from excel and webelements and assertions
         
 		} catch (Exception e) {
 
