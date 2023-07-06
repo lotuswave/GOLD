@@ -95,6 +95,7 @@ public class OspreyRegressionEMEA {
 		try
 		{
 			
+			
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
@@ -133,6 +134,7 @@ public class OspreyRegressionEMEA {
 		try {
 			click_Createaccount();
 			Sync.waitPageLoad();
+			
 			Common.clickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.clickElement("xpath", "//input[@name='lastname']");
@@ -2493,10 +2495,10 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Thread.sleep(3000);
 		try {
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 		} catch (ElementClickInterceptedException e) {
 			Thread.sleep(3000);
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 		}
 		Thread.sleep(3000);
 		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -5973,5 +5975,76 @@ public void Verify_Address(String Dataset) {
 				Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
 		Assert.fail();
 		}
-	}		
+	}	
+	
+	public void country_selctor(String Dataset) {
+		// TODO Auto-generated method stub
+		String Country;
+		try {
+			Common.actionsKeyPress(Keys.END);
+			List<WebElement> country = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+			List<WebElement> Countryselector = Common.findElements("xpath","//label[contains(@class,'a-radio-button')]");
+			ArrayList<String> CountryNames = new ArrayList<String>();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector']");
+			Common.clickElement("xpath", "//button[@data-trigger='country_selector']");
+			Thread.sleep(4000);
+			for (WebElement Countryselections : Countryselector) {
+				CountryNames.add(Countryselections.getText());
+				System.out.println(CountryNames);
+			}
+			String[] items = data.get(Dataset).get("Countrynames").split(",");
+			System.out.println(items);
+			Common.clickElement("xpath", "//span[contains(@class,'icon-modal__close')]");
+			for (int j = 0; j < items.length; j++) {
+				if (CountryNames.contains(items[j])) {
+				 
+			System.out.println(country.size());
+			
+
+			for (int i = 0; i < country.size(); i++) {
+
+				List<WebElement> select = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector']");
+				Common.clickElement("xpath", "//button[@data-trigger='country_selector']");
+				Thread.sleep(3000);
+				Country = select.get(i).getText();
+				System.out.println(Country);
+				select.get(i).click();
+				if (Country.contains("United Kingdom")) {
+
+					Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
+							"click on the country should navigate to the  " + Country + "Page",
+							"successfully page navigating to " + Country + "PAGE",
+							Common.getscreenShotPathforReport(Country));
+				} else {
+					Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					Common.navigateBack();
+					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
+							"click on the country should navigate to the  " + Country + "Page",
+							"successfully page navigating to " + Country + "PAGE",
+								Common.getscreenShotPathforReport(Country));
+					
+			}
+				}
+			}
+		}
+		}
+			
+	
+		
+		 catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
+					"After Clicking on the selected country it should navigate to the respective country page",
+					"Unable to navigate to the respective country page after clicking on the selected country",
+					Common.getscreenShot(
+							"Failed to navigate to the respective country page after clicking on the selected country"));
+			Assert.fail();
+		}
+	}
 }
