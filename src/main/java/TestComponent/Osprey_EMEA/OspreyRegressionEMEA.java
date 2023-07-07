@@ -1582,13 +1582,13 @@ public void RegaddDeliveryAddress(String dataSet) {
 				Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 			}
 
-			Common.scrollIntoView("xpath", "//select[@name='region_id']");
-			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
 					data.get(dataSet).get("Region"));
 			Thread.sleep(3000);
-			String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
+			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']").getAttribute("value");
 			String Shippingstate = Common
-					.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
+					.findElement("xpath", "//input[@placeholder='State/Province']//option[@value='" + Shippingvalue + "']")
 					.getText();
 
 			System.out.println(Shippingstate);
@@ -1599,13 +1599,13 @@ public void RegaddDeliveryAddress(String dataSet) {
 					data.get(dataSet).get("City"));
 
 			try {
-				Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-						Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
+					 data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 
 				Thread.sleep(2000);
-				Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-						Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
+						 data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
@@ -1662,13 +1662,11 @@ public void RegaddDeliveryAddress(String dataSet) {
 					data.get(dataSet).get("City"));
 
 			try {
-				Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-						Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				// TODO: handle exception
 				Thread.sleep(3000);
-				Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-						Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
@@ -3716,11 +3714,10 @@ public void ChangeAddress_AddressBook(String dataSet) {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 			Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 			try {
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
-						data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
@@ -3757,12 +3754,11 @@ public void ChangeAddress_AddressBook(String dataSet) {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 
 			try {
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
-						data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 
 				Thread.sleep(3000);
-				Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 
@@ -3805,11 +3801,10 @@ public void Add_NewAddress(String dataSet) {
 	Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 	Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 	try {
-		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
-				data.get(dataSet).get("Region"));
+		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 	} catch (ElementClickInterceptedException e) {
 		Thread.sleep(3000);
-		Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 	}
 
 	Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
@@ -3852,11 +3847,12 @@ public void Add_Address(String dataSet) {
 	Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 	Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 	try {
-		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+		Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
 				data.get(dataSet).get("Region"));
 	} catch (ElementClickInterceptedException e) {
 		Thread.sleep(3000);
-		Common.dropdown("id", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+				data.get(dataSet).get("Region"));
 	}
 
 	Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
@@ -3915,8 +3911,8 @@ public void change_Shippingaddress_Addressbook(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);  
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
-			Common.clickElement("xpath", "//select[@name='region_id']");
-			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@name='region']");
+			Common.textBoxInput("xpath", "//input[@name='region']", region);
 			Common.clickElement("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 			Common.clickElement("xpath", "//label[@for='primary_shipping']");
@@ -3969,8 +3965,8 @@ public void Shippingaddress_Addressbook(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 		Common.clickElement("xpath", "//input[@title='City']");
 		Common.textBoxInput("xpath", "//input[@title='City']", City);
-		Common.clickElement("xpath", "//select[@name='region_id']");
-		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+		Common.clickElement("xpath", "//input[@placeholder='State/Province']");
+		Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
 		Common.clickElement("xpath", "//input[@name='postcode']");
 		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 		String checkbox = Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
@@ -4036,8 +4032,8 @@ public void change_Billingaddress_Addressbook(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
-			Common.clickElement("xpath", "//select[@name='region_id']");
-			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@placeholder='State/Province']");
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
 			Common.clickElement("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 			Common.clickElement("xpath", "//button[@title='Save Address']");
@@ -4090,8 +4086,8 @@ public void Billingaddress_Addressbook(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 		Common.clickElement("xpath", "//input[@title='City']");
 		Common.textBoxInput("xpath", "//input[@title='City']", City);
-		Common.clickElement("xpath", "//select[@name='region_id']");
-		Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+		Common.clickElement("xpath", "//input[@placeholder='State/Province']");
+		Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
 		Common.clickElement("xpath", "//input[@name='postcode']");
 		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 //		String checkbox = Common.findElement("xpath", "//input[@id='primary_shipping']").getAttribute("type");
@@ -4110,7 +4106,7 @@ public void Billingaddress_Addressbook(String Dataset) {
 		String shippingaddress = Common
 				.findElement("xpath", "//div[contains(@class,'box box-address-bil')]//address").getText();
 		System.out.println(shippingaddress);
-
+		System.out.println(shipping);
 		Common.assertionCheckwithReport(
 				shippingaddress.equals(shipping) && message.equals("You saved the address."),
 				"validating the checkbox for shipping address and text for the billing address",
@@ -4162,8 +4158,8 @@ public void Edit_Delete_Address(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
-			Common.clickElement("xpath", "//select[@name='region_id']");
-			Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, region);
+			Common.clickElement("xpath", "//input[@placeholder='State/Province']");
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
 			Common.clickElement("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 //			Common.clickElement("xpath", "//label[@for='primary_shipping']");
@@ -5167,13 +5163,13 @@ public String shipping_new_Address(String dataSet) {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
+				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']").getAttribute("value");
 				String Shippingstate = Common
-						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
+						.findElement("xpath", "//input[@placeholder='State/Province']//option[@value='" + Shippingvalue + "']")
 						.getText();
 
 				System.out.println(Shippingstate);
@@ -5184,13 +5180,13 @@ public String shipping_new_Address(String dataSet) {
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
+							 data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 
 					Thread.sleep(2000);
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
+							 data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
@@ -5267,13 +5263,13 @@ public void Edit_Address_verify(String dataSet) {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
+				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']").getAttribute("value");
 				String Shippingstate = Common
-						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
+						.findElement("xpath", "//input[@placeholder='State/Province']//option[@value='" + Shippingvalue + "']")
 						.getText();
 
 				System.out.println(Shippingstate);
@@ -5284,13 +5280,13 @@ public void Edit_Address_verify(String dataSet) {
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("xpath", "//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+							 data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 
 					Thread.sleep(2000);
-					Common.dropdown("xpath", "//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+							 data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//input[@name='postcode']");
