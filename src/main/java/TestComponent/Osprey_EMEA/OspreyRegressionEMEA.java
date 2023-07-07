@@ -2955,10 +2955,12 @@ public void Shippingform_Guestuser(String dataSet) throws Exception {
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Thread.sleep(3000);
 		try {
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		} catch (ElementClickInterceptedException e) {
 			Thread.sleep(3000);
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		}
 		Thread.sleep(2000);
 		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -3197,10 +3199,12 @@ public void newuseraddDeliveryAddress(String dataSet) throws Exception {
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Thread.sleep(3000);
 		try {
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		} catch (ElementClickInterceptedException e) {
 			Thread.sleep(3000);
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		}
 		Thread.sleep(2000);
 		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
