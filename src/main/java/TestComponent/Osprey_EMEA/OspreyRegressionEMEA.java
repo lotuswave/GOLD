@@ -1587,11 +1587,7 @@ public void RegaddDeliveryAddress(String dataSet) {
 					data.get(dataSet).get("Region"));
 			Thread.sleep(3000);
 			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']").getAttribute("value");
-			String Shippingstate = Common
-					.findElement("xpath", "//input[@placeholder='State/Province']//option[@value='" + Shippingvalue + "']")
-					.getText();
-
-			System.out.println(Shippingstate);
+			System.out.println(Shippingvalue);
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
@@ -5172,11 +5168,6 @@ public String shipping_new_Address(String dataSet) {
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']").getAttribute("value");
-				String Shippingstate = Common
-						.findElement("xpath", "//input[@placeholder='State/Province']//option[@value='" + Shippingvalue + "']")
-						.getText();
-
-				System.out.println(Shippingstate);
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
@@ -5272,11 +5263,7 @@ public void Edit_Address_verify(String dataSet) {
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']").getAttribute("value");
-				String Shippingstate = Common
-						.findElement("xpath", "//input[@placeholder='State/Province']//option[@value='" + Shippingvalue + "']")
-						.getText();
-
-				System.out.println(Shippingstate);
+				
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
