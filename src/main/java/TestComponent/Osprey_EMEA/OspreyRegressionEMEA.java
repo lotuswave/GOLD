@@ -4264,7 +4264,7 @@ public String reg_outofstock_subcription(String Dataset) {
 			Common.clickElement("xpath", "//a[text()='Notify me when this product is in stock']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String newsubcribe = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(newsubcribe);
 			Common.assertionCheckwithReport(
 					newsubcribe.contains("Alert subscription has been saved.")
@@ -4388,14 +4388,15 @@ public void remove_outofstock_subcribtion(String Dataset) {
 		String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 				.getAttribute("data-price-amount");
 		if (price.equals(Dataset)) {
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
-			Common.implicitWait();
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "(//span[text()='Remove'])[3]");
+			Common.maximizeImplicitWait();
 			Common.alerts("Cancel");
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "(//span[text()='Remove'])[3]");
 			Common.implicitWait();
 			Common.alerts("Ok");
+			
 
 		} else {
 
@@ -5061,10 +5062,12 @@ public String BillingAddress(String dataSet) {
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Thread.sleep(3000);
 		try {
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		} catch (ElementClickInterceptedException e) {
 			Thread.sleep(3000);
-			Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		}
 		Thread.sleep(2000);
 //		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
