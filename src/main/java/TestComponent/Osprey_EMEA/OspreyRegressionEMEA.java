@@ -2489,10 +2489,13 @@ public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Thread.sleep(3000);
 		try {
-			Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		} catch (ElementClickInterceptedException e) {
 			Thread.sleep(3000);
-			Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					data.get(dataSet).get("Region"));
 		}
 		Thread.sleep(3000);
 		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -3843,6 +3846,7 @@ public void Add_Address(String dataSet) {
 	{
 	Sync.waitElementVisible(30, "xpath","//a[text()='Address Book']");
 	Common.clickElement("xpath","//a[text()='Address Book']");
+	Thread.sleep(4000);
 	Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
 	Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 	Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
