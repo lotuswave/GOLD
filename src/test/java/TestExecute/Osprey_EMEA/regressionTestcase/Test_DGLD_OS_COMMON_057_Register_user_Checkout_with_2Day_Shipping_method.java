@@ -9,26 +9,25 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page {
+public class Test_DGLD_OS_COMMON_057_Register_user_Checkout_with_2Day_Shipping_method {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Add_to_Cart_from_Sticky_Cart_in_PDP_Page() throws Exception {
+	public void Verifying_Register_user_Checkout_with_2Day_Shipping_method () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");      // need to add from header links categories and need to change in the helper also
-        Osprey_ReEu.Sticky_Add_to_Cart("Product");
-        Osprey_ReEu.search_product("Simple product");
-        Osprey_ReEu.Sticky_Add_to_Cart("Simple product");        
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
+        Osprey_ReEu.selectshippingmethod("Bestway method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Change_Shippingmethods("Bestway method");
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
         
 		} catch (Exception e) {
 

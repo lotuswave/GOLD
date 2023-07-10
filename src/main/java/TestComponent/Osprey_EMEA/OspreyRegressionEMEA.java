@@ -6038,4 +6038,32 @@ public void Verify_Address(String Dataset) {
 			Assert.fail();
 		}
 	}
+
+	public void Change_Shippingmethods(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@data-bind='click: backToShippingMethod']");
+			Common.clickElement("xpath", "//button[@data-bind='click: backToShippingMethod']");
+			Sync.waitPageLoad(40);
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Checkout"),
+					"validating the navigation to the checkout page", "after click on edit button from payment page it should navigate to the shiiping page",
+					"Sucessfully Navigated to the shipping page ", "failed to Navigate to the shipping page");
+			selectshippingmethod(Dataset);
+			clickSubmitbutton_Shippingpage();
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigation to the checkout page", "after click on edit button from payment page it should navigate to the shiiping page",
+					"Unable  to Navigate to the shipping page",
+					Common.getscreenShot(
+							"failed to Navigate to the shipping page"));
+			Assert.fail();
+		}
+		
+	}
 }
