@@ -607,5 +607,124 @@ public void clickStoreLogo() {
 
 }
 
+public void clickcountryselector() {
 
+	try {
+
+		Common.scrollIntoView("xpath", "//button[contains(@class,'selector action')]");
+
+		//Sync.waitElementClickable("xpath", "//button[contains(@class,'selector action')]");
+		Common.clickElement("xpath", "//button[contains(@class,'selector action')]");
+		Sync.waitElementVisible("xpath", "//h2[@class='heading heading--page m-modal__headline']");
+		String text = Common.findElement("xpath", "//h2[@class='heading heading--page m-modal__headline']")
+				.getText();
+
+		Common.assertionCheckwithReport(text.contains("Choose Your Location"),
+				"To validate the Country Selector Pop up", "Country Selector Pop up should be dispalyed",
+				"Different Countries Should be displayed", "Failed to display the Different Countries");
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Country Selector Pop up",
+				"User successfully open Country Selector Pop up", "User unable to open country Selector Pop up",
+				Common.getscreenShotPathforReport("user failed to open the Country Selector Pop up"));
+		Assert.fail();
+	}
+
+}
+
+public void Selectscountries_CountrySelector(String dataSet) {
+
+	String available = data.get(dataSet).get("CountryOptions");
+	String[] Select = available.split(",");
+	String[] url = data.get(dataSet).get("url").split(",");
+
+	int i = 0;
+
+	try {
+
+		for (i = 1; i <= Select.length && i <= url.length; i++) {
+			System.out.println(Select[i - 1]);
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "(//input[contains(@name,'countrySelector')])[" + i + "]");
+
+			String Country = Common
+					.findElement("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]")
+					.getText();
+
+			Sync.waitElementClickable("xpath",
+					"(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+			Common.mouseOverClick("xpath", "(//label[contains(@class,'country-item__country-label')])[" + i + "]");
+			System.out.println(Country);
+			Common.assertionCheckwithReport(Country.contains(Select[i - 1]),
+					"verifying the Country" + Select[i - 1], "user Selects " + Select[i - 1] + "Country",
+					"user successfully Selects the country " + Select[i - 1],
+					"Failed to select the country " + Select[i - 1]);
+
+			Common.scrollIntoView("xpath", "//button[contains(@class,'primary action')]");
+			Common.mouseOverClick("xpath", "//button[contains(@class,'primary action')]");
+			Sync.waitPageLoad();
+
+			String Websiteurl = Common.getCurrentURL();
+			System.out.println(url[i - 1]);
+			System.out.println(Websiteurl);
+
+			Common.assertionCheckwithReport(Websiteurl.contains(url[i - 1]),
+					"To validate the store logo" + Select[i - 1],
+					"Should Navigated to the Osprey website" + Select[i - 1],
+					"Navigated to the Osprey Denmark website" + Select[i - 1],
+					"Failed to navigate to Osprey Website " + Select[i - 1]);
+			Common.openNewTab();
+			Common.oppenURL(data.get(dataSet).get("WebsiteURL"));
+			Sync.waitPageLoad();
+			clickcountryselector();
+
+		}
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Country Selector" + Select[i - 1],
+				"user Selects the " + Select[i - 1] + "Country", "User unabel to Select Country " + Select[i - 1],
+				Common.getscreenShotPathforReport("user failed to Select the Country"));
+		System.out.println(Select[i - 1] + " is Missing");
+		Assert.fail();
+
+	}
+	
+	
+																																												
+	List<WebElement> countrywebelements = Common.findElements("xpath",
+		"//label[@class='a-radio-button__label country-item__country-label']");
+
+ArrayList<String> arraycountryName = new ArrayList<String>();
+
+for (WebElement countrynames : countrywebelements) {
+	arraycountryName.add(countrynames.getText());
+	System.out.println("Websitedata" +arraycountryName);
+}
+
+String[] items = data.get(dataSet).get("CountryOptions").split(",");
+
+for (int j = 0; j < items.length; j++) {
+	
+	System.out.println(items[j]);
+
+	if (arraycountryName.contains(items[j])) {
+	} else {
+
+		ExtenantReportUtils.addFailedLog("To validate the Countries in Country Selector",
+				"All countries are displayed ", " Selects the " + items[j] + "options",
+				Common.getscreenShotPathforReport("failed to display countries"));
+		Assert.fail();
+	}
+
+ExtenantReportUtils.addPassLog("To validate the Countries in Country Selector ",
+			"click on the Country Selector it must display all the country options ",
+			"Sucessfully displayed the countries " + arraycountryName,
+			Common.getscreenShotPathforReport("countries validation"));
+
+
+	
+}}
 }
