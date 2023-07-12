@@ -713,7 +713,7 @@ public void giftCreation(String Dataset) {
 		Common.dropdown("xpath", "//select[@id='is_active']", SelectBy.TEXT, data.get(Dataset).get("Status"));
 		String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
 		if (eventname.equals("Birthday")) {
-			Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+			Common.textBoxInput("xpath", "//input[@id='event_country_region_text']",
 					data.get(Dataset).get("Region"));
 			Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
 		} else if (eventname.equals("Wedding")) {
@@ -5071,7 +5071,7 @@ public String BillingAddress(String dataSet) {
 		}
 		Thread.sleep(2000);
 //		Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-		Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='postcode']",
+		Common.textBoxInput("xpath", "//div[@class='field']//input[@name='postcode']",
 				data.get(dataSet).get("postcode"));
 		Thread.sleep(5000);
 
@@ -5079,11 +5079,11 @@ public String BillingAddress(String dataSet) {
 				data.get(dataSet).get("phone"));
 		Common.clickElement("xpath", "//span[text()='Update']");
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		 update = Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
 		System.out.println(update);
 		Common.assertionCheckwithReport(
-				update.contains("844 N Colony Rd") || text.contains("844 N Colony Rd"),
+				update.contains("935 The Horsley Dr") || text.contains("935 The Horsley Dr"),
 				"verifying the Billing address form in payment page",
 				"Billing address should be saved in the payment page",
 				"Sucessfully Billing address form should be Display ",
@@ -6069,4 +6069,65 @@ public void Verify_Address(String Dataset) {
 		}
 		
 	}
+	public void Gift_message(String Dataset) {
+	// TODO Auto-generated method stub
+	String message=data.get(Dataset).get("message");
+	try
+	{
+		Common.scrollIntoView("xpath", "//span[text()='Add Gift Message']");
+		Sync.waitElementPresent(40, "xpath", "//span[text()='Add Gift Message']");
+		Thread.sleep(4000);	
+		Common.clickElement("xpath", "//span[text()='Add Gift Message']");
+		int gift=Common.findElements("xpath", "//button[contains(@class,'action action')]").size();
+		System.out.println(gift);
+		if(gift>=3)
+		{
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//span[text()='Delete']");
+		Sync.waitPageLoad(40);
+		Sync.waitElementPresent(40, "xpath", "//span[text()='Add Gift Message']");
+		Common.clickElement("xpath", "//span[text()='Add Gift Message']");
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//span[text()='Gift Receipt']");
+		Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
+		Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
+		Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
+		Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
+		Common.clickElement("xpath", "//button[@title='Add']");
+		Sync.waitPageLoad(40);
+		Thread.sleep(2000);
+		Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
+		String Messgae=Common.findElement("xpath", "//div[@class='gift-message-summary']").getText().replace("Message: ", "");
+		System.out.println(Messgae);
+		Common.assertionCheckwithReport(Messgae.equals(message),
+				"validating the Gift cart message", "Gift card message should be applied",
+				"Sucessfully gift message has been applied ", "failed to apply the gift message");
+		
+		}
+		else
+		{
+		Common.clickElement("xpath", "//span[text()='Gift Receipt']");
+		Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
+		Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
+		Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
+		Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
+		Common.clickElement("xpath", "//button[@title='Add']");
+		Sync.waitPageLoad(40);
+		Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
+		String Messgae=Common.findElement("xpath", "//div[@class='gift-message-summary']").getText().replace("Message: ", "");
+		System.out.println(Messgae);
+		Common.assertionCheckwithReport(Messgae.equals(message),
+				"validating the Gift cart message", "Gift card message should be applied",
+				"Sucessfully gift message has been applied ", "failed to apply the gift message");
+		}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
+				"Unabled to apply the gift message", Common.getscreenShot("failed to apply the gift message"));
+		Assert.fail();
+	}
+	
+}
 }
