@@ -5356,7 +5356,7 @@ public void Verify_Address(String Dataset) {
 		System.out.println(shippingaddress);
 		System.out.println(Dataset);
 		Common.assertionCheckwithReport(
-				shippingaddress.equals(Dataset) ||shippingaddress.contains("844 N Colony Rd") ,
+				shippingaddress.equals(Dataset) ||shippingaddress.contains("935 The Horsley Dr") ,
 				"verifying the address added to the address book",
 				"after saving the address in shiiping page it should save in the address book",
 				"Sucessfully Address ha been saved in the address book",
