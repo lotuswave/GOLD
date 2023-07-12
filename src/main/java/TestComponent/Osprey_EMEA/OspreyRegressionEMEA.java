@@ -6130,4 +6130,77 @@ public void Verify_Address(String Dataset) {
 	}
 	
 }
+	
+	public void update_shoppingcart(String Dataset) {
+		// TODO Auto-generated method stub
+		String quantity = data.get(Dataset).get("Quantity");
+		try {
+			Common.clickElement("xpath", "//select[@class='a-form-elem a-select-menu']");
+			Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, quantity);
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String productquantity = Common.findElement("xpath", "//select[@class='a-form-elem a-select-menu']")
+					.getAttribute("value");
+			System.out.println(productquantity);
+			Common.assertionCheckwithReport(productquantity.equals(quantity),
+					"validating the update quantity in shopping cart page",
+					"Quantity should be update in the shopping cart page",
+					"Qunatity has been updated in the shopping cart page",
+					"Failed to update the product quantity in the shopping cart page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the update quantity in shopping cart page",
+					"Quantity should be update in the shopping cart page",
+					"Unable to update the product quantity in the shopping cart page",
+					Common.getscreenShot("Failed to update the product quantity in the shopping cart page"));
+			Assert.fail();
+		}
+
+	}
+
+	public void Remove_Product() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Thread.sleep(4000);
+			String subtotal=Common.findElement("xpath", "//span[@data-th='Subtotal']").getText().replace("£", "");
+			Float subtotalvalue = Float.parseFloat(subtotal);
+			System.out.println(subtotalvalue);
+			String Productprice = Common.getText("xpath", "(//td[@data-th='Subtotal']//span[@class='price'])[2]")
+					.replace("£", "");
+			Float pricevalue = Float.parseFloat(Productprice);
+			System.out.println(pricevalue);
+			Float Total=subtotalvalue-pricevalue;
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			System.out.println(ExpectedTotalAmmount2);
+			Sync.waitElementPresent("xpath", "//span[text()='Remove Zealot 45']");
+			Common.clickElement("xpath", "//span[text()='Remove Zealot 45']");
+			Sync.waitPageLoad(30);
+			Thread.sleep(5000);
+			String ordertotal=Common.getText("xpath", "//td[@data-th='Order Total']//span[@class='price']").replace("£", "");
+			Thread.sleep(4000);
+			Float ordervalue = Float.parseFloat(ordertotal);
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(ordertotal);
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the remove prodcut form shopping cart page",
+					"Product should be remove form the shopping cart page",
+					"Sucessfully Product removed from the shopping cart page",
+					"Failed to remove the product from the shopping cart page");	
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the remove prodcut form shopping cart page",
+					"Product should be remove form the shopping cart page",
+					"Unable to remove the product from the shopping cart page",
+					Common.getscreenShot("Failed to remove the product from the shopping cart page"));
+			Assert.fail();
+		}
+		
+	}
 }
