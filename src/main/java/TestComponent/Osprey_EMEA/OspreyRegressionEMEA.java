@@ -2600,8 +2600,8 @@ public String addPaymentDetails(String dataSet) throws Exception {
 
 	try {
 		Sync.waitPageLoad();
-
-		Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+         Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+		Common.clickElement("xpath", "//label[@for='stripe_payments']");
 		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
