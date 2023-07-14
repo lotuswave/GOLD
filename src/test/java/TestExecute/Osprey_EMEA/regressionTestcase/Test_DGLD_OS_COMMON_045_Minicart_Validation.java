@@ -21,8 +21,8 @@ public class Test_DGLD_OS_COMMON_045_Minicart_Validation {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.search_product("Product");      
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.search_product("ConfigurableProduct");      
-        Osprey_ReEu.addtocart("ConfigurableProduct");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product"); 
         Osprey_ReEu.click_minicart();
         Osprey_ReEu.clickontheproduct_and_image("Product");
         Osprey_ReEu.minicart_freeshipping();

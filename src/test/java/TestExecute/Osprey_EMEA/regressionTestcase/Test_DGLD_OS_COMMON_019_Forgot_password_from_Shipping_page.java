@@ -19,8 +19,8 @@ public class Test_DGLD_OS_COMMON_019_Forgot_password_from_Shipping_page {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-//        Osprey_ReEu.Bagpacks_headerlinks(" Outdoor Packs"); 
-//        Osprey_ReEu.Configurable_addtocart_pdp("Product");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();

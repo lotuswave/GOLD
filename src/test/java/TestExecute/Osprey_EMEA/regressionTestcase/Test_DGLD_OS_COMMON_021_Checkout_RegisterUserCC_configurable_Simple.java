@@ -21,10 +21,10 @@ public class Test_DGLD_OS_COMMON_021_Checkout_RegisterUserCC_configurable_Simple
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("Product");      // need to add from header links categories
+        Osprey_ReEu.search_product("Product");     
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.search_product("Simple product");
-        Osprey_ReEu.addtocart("Simple product");        
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product");        
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");

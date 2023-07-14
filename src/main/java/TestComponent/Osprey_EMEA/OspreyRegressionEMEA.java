@@ -2246,9 +2246,9 @@ public void Bagpacks_headerlinks(String category) {
 	String expectedResult = "User should click the" + category;
 	try {
 
-		Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Backpacks & Bags']");
+		Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + category + "')]");
 		Thread.sleep(3000);
-		Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Backpacks & Bags']");
+		Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + category + "')]");
 
 		Thread.sleep(3000);
 
@@ -2257,9 +2257,9 @@ public void Bagpacks_headerlinks(String category) {
 		} catch (Exception e) {
 			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Backpacks & Bags']");
 		}
-		Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+		Common.clickElement("xpath", "//span[contains(text(),'Outdoor Packs')]");
 		Thread.sleep(4000);
-		Common.clickElement("xpath", "//span[text()=' Backpacking Packs']");
+		Common.clickElement("xpath", "//span[text()=' Backpacking Backpacks']");
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
 		expectedResult = "User should select the " + category + "category";
@@ -4222,7 +4222,6 @@ public void Edit_Delete_Address(String Dataset) {
 public String reg_outofstock_subcription(String Dataset) {
 	// TODO Auto-generated method stub
 	String products = data.get(Dataset).get("Products");
-	String productcolor=data.get(Dataset).get("Color");
 	String prod = data.get(Dataset).get("prod product");
 	String price = "";
 
@@ -4259,8 +4258,6 @@ public String reg_outofstock_subcription(String Dataset) {
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//a[text()='Notify me when this product is in stock']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -4982,11 +4979,11 @@ public String create_account_with_fav(String Dataset) {
 		Common.assertionCheckwithReport(
 				Common.getPageTitle().equals("My Wish List")
 						&& message.contains("Thank you for registering with Osprey UK Store.")
-						&& favmessage.contains("POCO® CARRYING CASE has been added to your Wish List. Click"),
+						&& favmessage.contains("Zealot 45 has been added to your Wish List. Click"),
 				"validating the  My Favorites page Navigation when user clicks on signin button",
 				"User should able to navigate to the My Favorites page after clicking on Signin button",
 				"Sucessfully navigate to the My Favorites page after clicking on signin button ",
-				"Failed to navigates to My Favorites Page after clicking on Signin button");
+				"Failed to navigates to My Favorites Page after clicking on Signin button");   
 	}
 
 	catch (Exception | Error e) {
@@ -5041,7 +5038,8 @@ public String BillingAddress(String dataSet) {
 	try {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+		Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+		Common.clickElement("xpath", "//label[@for='stripe_payments']");
 		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 		Common.clickElement("xpath", "//label[@for='stripe_payments']");
 		Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
@@ -5610,7 +5608,7 @@ public void Verify_Address(String Dataset) {
 		System.out.println(results);
 		try {
 
-			if (results.contains("POCO® CARRYING CASE")) {                                                        //need to implement from the Header links After the configurations
+			if (results.contains("Zealot 45")) {                                                        //need to implement from the Header links After the configurations
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
 					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
@@ -6203,4 +6201,58 @@ public void Verify_Address(String Dataset) {
 		}
 		
 	}
+
+	public void simple_addtocart(String Dataset) {
+		// TODO Auto-generated method stub
+	
+			String products = data.get(Dataset).get("Products");
+			System.out.println(products);
+			try {
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@class,'m-product-card__image')]");
+
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				Sync.waitPageLoad(30);
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad(30);
+				Thread.sleep(6000);
+				Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+				product_quantity(Dataset);
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+						"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+				Assert.fail();
+			}
+		}
+	
 }

@@ -19,9 +19,9 @@ public class Test_DGLD_OS_COMMON_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");      // need to add from header links categories and need to change in the helper also
+        Osprey_ReEu.search_product("Product");     
         Osprey_ReEu.Sticky_Add_to_Cart("Product");
-        Osprey_ReEu.search_product("Simple product");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");  
         Osprey_ReEu.Sticky_Add_to_Cart("Simple product");        
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
