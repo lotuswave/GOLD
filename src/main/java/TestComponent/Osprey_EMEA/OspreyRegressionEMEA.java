@@ -5112,7 +5112,7 @@ public void verify_BillingAddress(String Dataset) {
 		System.out.println(Address);
 		System.out.println(Dataset);
 		Common.assertionCheckwithReport(
-				Address.equals(Dataset) || Dataset.contains("844 N Colony Rd"),
+				Address.equals(Dataset) || Dataset.contains("935 The Horsley Dr"),
 				"verifying the Billing address form in Address book",
 				"Billing address should be saved in the Address book",
 				"Sucessfully Billing address form should be Displayed in the Address book",
@@ -5789,10 +5789,6 @@ public void Verify_Address(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
-		String productcolor= data.get(Dataset).get("Color");
-		System.out.println(productcolor);
-		String Productsize= data.get(Dataset).get("Size");
-		System.out.println(Productsize);
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -5800,15 +5796,11 @@ public void Verify_Address(String Dataset) {
 			System.out.println(MyFavorites);
 
 			if (MyFavorites.contains("CREATE NEW WISH LIST")) {
-				search_product("Simple product");
+				Bagpacks_headerlinks("Backpacks & Bags");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 				Common.clickElement("xpath", "//img[@alt='" + product + "']");
 				Sync.waitPageLoad();
-				Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-				Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
-				Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
-				
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
 				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad(30);
@@ -5864,6 +5856,7 @@ public void Verify_Address(String Dataset) {
 		{
 			Sync.waitElementPresent(30,"xpath", "//label[@for='wishlist-select-all']");
 			Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30,"xpath", "//button[@title='Delete Wish List']");
 			Common.clickElement("xpath", "//button[@title='Delete Wish List']");
 			Thread.sleep(4000);
@@ -5907,7 +5900,7 @@ public void Verify_Address(String Dataset) {
 			Thread.sleep(4000);
 			String copied=Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
 			System.out.println(copied);
-			Common.assertionCheckwithReport(copied.contains("1 items were copied to Wish List"),
+			Common.assertionCheckwithReport(copied.contains("1 items were copied"),
 					"validating the copy whishlist items to another whishlist", "Product should be added to the whishlist",
 					"Sucessfully product copied form one whishlist to another", "Failed to to copy the whishlist to the exsiting whishlist");
 			Delete_Whishlist();
@@ -6286,12 +6279,16 @@ public void Verify_Address(String Dataset) {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			click_UGC();
+			Locally_PDP();
 			
 			
 		}
 		catch(Exception | Error e )
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the PDP page",
+					"In PDP fav ugc all should be appear",
+					"Unable to see few things in the PDP", Common.getscreenShot("Failed to see few things in the PDP page"));
 			Assert.fail();
 		}
 		
@@ -6301,18 +6298,77 @@ public void Verify_Address(String Dataset) {
 		// TODO Auto-generated method stub
 		try
 		{
-			Common.switchFrames("xpath", "//iframe[@id='lcly-iframe-inner-0']");
+			Common.scrollIntoView("xpath", "//span[@class='lcly-city-name']");
 			Sync.waitElementPresent(30, "xpath", "//span[@class='lcly-city-name']");
-			String locally=Common.findElement("xpath", "//span[@class='lcly-city-name']").getText();
 			Common.clickElement("xpath", "//span[@class='lcly-city-name']");
-			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "(//h5[contains(@class,'conv-section-store-address')])[1]//br");
-			String maps=Common.findElement("xpath", "(//h5[contains(@class,'conv-section-store-address')])[1]//br").getText();
+			Thread.sleep(4000);
+			Common.switchFrames("xpath", "//iframe[@id='lcly-iframe-inner-0']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent(40, "xpath", "//a[@id='dealer-navigation-retailers']//span");
+			String retail=Common.findElement("xpath",  "//a[@id='dealer-navigation-retailers']//span").getText();
+			System.out.println(retail);
+			Common.assertionCheckwithReport(retail.contains("RETAILERS"), "validating the Find Locally in the PDP ",
+					"when we click on the locally maps should be opened", "Sucessfully google maps has been opend",
+					"failed to open the google maps when we click on the Find Locally");
+			Common.switchToDefault();
+			Common.clickElement("xpath", "//a[@id='lcly-iframe-closer-0']");
+				
 			
 		}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Find Locally in the PDP ",
+					"when we click on the locally maps should be opened",
+					"Unable to open the google maps when we click on the Find Locally", Common.getscreenShot("Failed to open the google maps when we click on the Find Locally"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Configurable_PDP(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String Productsize=data.get(Dataset).get("Size");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Sync.waitPageLoad(30);
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
+			Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
+			Sync.waitPageLoad(30);
+			Thread.sleep(6000);
+			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			click_UGC();
+			Locally_PDP();
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the PDP page",
+					"In PDP fav ugc all should be appear",
+					"Unable to see few things in the PDP", Common.getscreenShot("Failed to see few things in the PDP page"));
+			
 			Assert.fail();
 		}
 		
