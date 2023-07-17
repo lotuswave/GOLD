@@ -83,15 +83,15 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
@@ -120,15 +120,15 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+				Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");

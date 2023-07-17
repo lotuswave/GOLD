@@ -4259,8 +4259,8 @@ public String reg_outofstock_subcription(String Dataset) {
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//a[text()='Notify me when this product is in stock']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Sync.waitPageLoad(40);
+			Thread.sleep(5000);
 			String newsubcribe = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(newsubcribe);
 			Common.assertionCheckwithReport(
@@ -4385,12 +4385,12 @@ public void remove_outofstock_subcribtion(String Dataset) {
 		String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 				.getAttribute("data-price-amount");
 		if (price.equals(Dataset)) {
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//span[text()='Remove'])[3]");
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
 			Common.maximizeImplicitWait();
 			Common.alerts("Cancel");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//span[text()='Remove'])[3]");
+			Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
 			Common.implicitWait();
 			Common.alerts("Ok");
 			
@@ -6254,5 +6254,69 @@ public void Verify_Address(String Dataset) {
 				Assert.fail();
 			}
 		}
+
+	public void Simple_PDP(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Sync.waitPageLoad(30);
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad(30);
+			Thread.sleep(6000);
+			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			click_UGC();
+			
+			
+		}
+		catch(Exception | Error e )
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+
+	public void Locally_PDP() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Common.switchFrames("xpath", "//iframe[@id='lcly-iframe-inner-0']");
+			Sync.waitElementPresent(30, "xpath", "//span[@class='lcly-city-name']");
+			String locally=Common.findElement("xpath", "//span[@class='lcly-city-name']").getText();
+			Common.clickElement("xpath", "//span[@class='lcly-city-name']");
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30, "xpath", "(//h5[contains(@class,'conv-section-store-address')])[1]//br");
+			String maps=Common.findElement("xpath", "(//h5[contains(@class,'conv-section-store-address')])[1]//br").getText();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+	
 	
 }
