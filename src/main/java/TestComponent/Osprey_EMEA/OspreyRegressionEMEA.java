@@ -6280,7 +6280,7 @@ public void Verify_Address(String Dataset) {
 					"failed to Navigate to the PDP page");
 			click_UGC();
 			Locally_PDP();
-			
+			Common.actionsKeyPress(Keys.UP);
 			
 		}
 		catch(Exception | Error e )
@@ -6361,6 +6361,9 @@ public void Verify_Address(String Dataset) {
 					"failed to Navigate to the PDP page");
 			click_UGC();
 			Locally_PDP();
+			Common.actionsKeyPress(Keys.UP);
+			add_simplarproducts("configurable product");
+			PDP_Tabs("Tabs");
 		}
 		catch(Exception | Error e)
 		{
@@ -6368,6 +6371,101 @@ public void Verify_Address(String Dataset) {
 			ExtenantReportUtils.addFailedLog("validating the PDP page",
 					"In PDP fav ugc all should be appear",
 					"Unable to see few things in the PDP", Common.getscreenShot("Failed to see few things in the PDP page"));
+			
+			Assert.fail();
+		}
+		
+	}
+
+	public void add_simplarproducts(String Dataset) {
+		// TODO Auto-generated method stub
+		String colorproduct=data.get(Dataset).get("Products");
+		String productcolor = data.get(Dataset).get("Color");
+		String Productsize=data.get(Dataset).get("Size");
+		
+		try
+		{
+			Thread.sleep(4000);
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			String simlar=Common.findElement("xpath", "//div[@class='m-product-upsell__cta']//a").getText();
+			System.out.println(simlar);
+			if(simlar.contains("SHOP NOW"))
+			{
+			Common.scrollIntoView("xpath", "//a[text()='" + colorproduct +"']");
+			Common.clickElement("xpath", "//a[text()='" + colorproduct +"']");
+			Sync.waitPageLoad(30);
+			Thread.sleep(4000);
+			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(colorproduct)||Common.getPageTitle().contains(colorproduct), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Common.navigateBack();
+			Sync.waitPageLoad(30);
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[@class='m-product-upsell__cta']//a");
+			Common.clickElement("xpath", "//div[@class='m-product-upsell__cta']//a");
+			Sync.waitPageLoad(30);
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(name.contains(colorproduct)||Common.getPageTitle().contains(colorproduct), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
+			Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+			
+			}
+			else
+			{
+				Assert.fail();
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the similar products functionality",
+					"Products should be add from the similar products from PDP page",
+					"Unable to add the products from the similar products", Common.getscreenShot("Failed to add the products from the similar products"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void PDP_Tabs(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("names");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//a[@class='data switch' and text()='" + Links[i] + "']");
+				Common.clickElement("xpath",
+						"//a[@class='data switch' and text()='" + Links[i] + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div").getAttribute("aria-expanded");
+				Common.assertionCheckwithReport(title.contains("true"),
+						"verifying the tabs in PDP ","After clicking on the " + Links[i] +"It should display the related content",
+						"sucessfully after clicking on the " + Links[i] + "it has been displayed related content", "Failed to display related content" + Links[i]);
+	
+		}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the tabs in PDP ","After clicking on the " + Links[i] +"It should display the related content",
+					"Unable to display the content in  " + Links[i], Common.getscreenShot("Failed to display related content" + Links[i]));
 			
 			Assert.fail();
 		}

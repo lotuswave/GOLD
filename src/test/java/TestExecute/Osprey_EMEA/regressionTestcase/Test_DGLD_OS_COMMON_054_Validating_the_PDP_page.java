@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OS_COMMON_054_Validating_the_PDP_page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"PDP");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_the_PDP_Page () throws Exception {
@@ -25,6 +25,7 @@ public class Test_DGLD_OS_COMMON_054_Validating_the_PDP_page {
         Osprey_ReEu.Simple_PDP("Simple product");
         Osprey_ReEu.search_product("Product");  
         Osprey_ReEu.Configurable_PDP("Product");
+
   
         
  
