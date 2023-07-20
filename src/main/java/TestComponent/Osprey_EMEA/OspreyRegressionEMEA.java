@@ -1011,6 +1011,7 @@ public void search_product(String Dataset) {
 public void addtocart(String Dataset) {
 	// TODO Auto-generated method stub
 	String products = data.get(Dataset).get("Products");
+	String productcolor = data.get(Dataset).get("Color");
 	String Productsize=data.get(Dataset).get("Size");
 	System.out.println(products);
 	try {
@@ -1032,6 +1033,8 @@ public void addtocart(String Dataset) {
 		Thread.sleep(6000);
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 		Common.clickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ productcolor +"']");
+		Common.clickElement("xpath", "//div[@data-option-label='" +productcolor+"']");
 		Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
 		Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
 		Sync.waitPageLoad(30);
@@ -2257,9 +2260,9 @@ public void Bagpacks_headerlinks(String category) {
 		} catch (Exception e) {
 			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Backpacks & Bags']");
 		}
-		Common.clickElement("xpath", "//span[contains(text(),'Outdoor Packs')]");
+		Common.clickElement("xpath", "//span[contains(text(),' Day Packs')]");
 		Thread.sleep(4000);
-		Common.clickElement("xpath", "//span[text()=' Backpacking Backpacks']");
+		Common.clickElement("xpath", "//span[text()=' Lifestyle Backpacks']");
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
 		expectedResult = "User should select the " + category + "category";
@@ -6223,7 +6226,11 @@ public void Verify_Address(String Dataset) {
 				Thread.sleep(6000);
 				Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
 				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
+				System.out.println(name);
+				Thread.sleep(4000);
+				String product=data.get(Dataset).get("Products").toUpperCase();
+				System.out.println(product);
+				Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
 				product_quantity(Dataset);
@@ -6467,6 +6474,53 @@ public void Verify_Address(String Dataset) {
 			ExtenantReportUtils.addFailedLog("verifying the tabs in PDP ","After clicking on the " + Links[i] +"It should display the related content",
 					"Unable to display the content in  " + Links[i], Common.getscreenShot("Failed to display related content" + Links[i]));
 			
+			Assert.fail();
+		}
+		
+	}
+
+	public void Click_My_Return() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);	
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"), "validating the user navigated to the my account page",
+					"After clicking on my account it should navigate to my account", "Sucessfully Navigated to the my account page",
+					"failed to Navigated to the my account page");
+			
+			Sync.waitElementPresent("xpath", "//a[text()='Spares, Repairs & Reservoirs']");
+			Common.clickElement("xpath", "//a[text()='Spares, Repairs & Reservoirs']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);	
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Returns"), "validating the user navigated to the my Return page",
+					"After clicking on my account it should navigate to my Returns page", "Sucessfully Navigated to the my Returns page",
+					"failed to Navigated to the my Returns page");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the user navigated to the my Return page",
+					"After clicking on my account it should navigate to my Returns page", "Unable to Navigated to the my Returns page", Common.getscreenShot("Failed to Navigated to the my Returns page"));
+			
+			Assert.fail();
+		}
+		
+	}
+
+	public void view_RMA() {
+		// TODO Auto-generated method stub
+		try
+		{
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
 			Assert.fail();
 		}
 		
