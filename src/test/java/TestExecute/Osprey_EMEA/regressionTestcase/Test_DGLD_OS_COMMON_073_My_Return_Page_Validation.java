@@ -22,12 +22,10 @@ public class Test_DGLD_OS_COMMON_073_My_Return_Page_Validation {
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.Click_My_Return();
-        Osprey_ReEu.view_RMA();
         Osprey_ReEu.LogoutExistingUser();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("NoReturn_Account");
         Osprey_ReEu.Click_My_Return();
-        Osprey_ReEu.view_RMA();
         
         
         

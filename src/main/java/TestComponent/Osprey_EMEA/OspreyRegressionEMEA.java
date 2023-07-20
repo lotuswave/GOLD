@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -2246,40 +2247,42 @@ public void Configurable_addtocart_pdp(String Dataset) {
 	
 }
 
-public void Bagpacks_headerlinks(String category) {
+public void Bagpacks_headerlinks(String Dataset) {
 	// TODO Auto-generated method stub
-	String expectedResult = "User should click the" + category;
+	String expectedResult = "User should click the" + Dataset;
+	String out=data.get(Dataset).get("outdoor");
+	String Trail=data.get(Dataset).get("Trail");
 	try {
 
-		Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + category + "')]");
+		Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'Backpacks & Bags')]");
 		Thread.sleep(3000);
-		Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + category + "')]");
+		Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'"+ Dataset +"')]");
 
 		Thread.sleep(3000);
 
 		try {
-			Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+			Common.mouseOver("xpath", "//span[contains(text(),'Backpacks & Bags')]");
 		} catch (Exception e) {
 			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Backpacks & Bags']");
 		}
-		Common.clickElement("xpath", "//span[contains(text(),' Day Packs')]");
+		Common.clickElement("xpath", "//span[contains(text(),' "+ out +"')]");
 		Thread.sleep(4000);
-		Common.clickElement("xpath", "//span[text()=' Lifestyle Backpacks']");
+		Common.clickElement("xpath", "//span[contains(text(),'" + Trail +"')]");
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
-		expectedResult = "User should select the " + category + "category";
-		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+		expectedResult = "User should select the " + Dataset + "category";
+		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'Backpacks & Bags')]").size();
 		Common.assertionCheckwithReport(sizebotteles > 0,
-				"validating the product category as" + category + "from navigation menu ", expectedResult,
-				"Selected the " + category + " category", "User unabel to click" + category + "");
+				"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
+				"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
 
 	}
 
 	catch (Exception | Error e) {
 		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
-				expectedResult, "Unable to Selected the " + category + " category",
-				Common.getscreenShot("Failed to click on the" + category + ""));
+		ExtenantReportUtils.addFailedLog("validating the product category as" + Dataset + "from navigation menu ",
+				expectedResult, "Unable to Selected the " + Dataset + " category",
+				Common.getscreenShot("Failed to click on the" + Dataset + ""));
 
 		Assert.fail();
 	}
@@ -6502,6 +6505,7 @@ public void Verify_Address(String Dataset) {
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Returns"), "validating the user navigated to the my Return page",
 					"After clicking on my account it should navigate to my Returns page", "Sucessfully Navigated to the my Returns page",
 					"failed to Navigated to the my Returns page");
+			view_RMA();
 		}
 		catch(Exception | Error e)
 		{
@@ -6551,10 +6555,10 @@ public void Verify_Address(String Dataset) {
 		System.out.println(OrderNo);
 	   
 		Common.clickElement("xpath", "(//a[text()='RMA Packing Slip'])[1]");
-		
+		Thread.sleep(4000);
 //		Need to write code to close the Pop-up
-		
-		String Print_ProductName = Common.findElementBy("xpath", "//td[@data-th='Product Name']").getText();
+	   
+	    String Print_ProductName = Common.findElementBy("xpath", "//td[@data-th='Product Name']").getText();
 		String Print_ProductQTY = Common.findElementBy("xpath", "//td[@data-th='Qty']").getText();
 		
 		String Print_OrderNo = Common.findElementBy("xpath", "(//p[@class='order-date'])[2]").getText();
