@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -6513,18 +6515,108 @@ public void Verify_Address(String Dataset) {
 	}
 
 	public void view_RMA() {
-		// TODO Auto-generated method stub
+		String Print_OrderNumber = null;
 		try
 		{
 			
+		
+			List<WebElement> RMA_Status= Common.findElements("xpath", "//span[text()='Approved']");
+			
+			
+			if (!RMA_Status.isEmpty()) {
+			   
+			    for (WebElement element : RMA_Status) {
+			        String statusText = element.getText();
+			        
+			        System.out.println("Status:"  +statusText);
+			        // Check if the text is equal to "Approved"
+			        if (statusText.equals("Approved")) {
+			      
+			            Common.clickElement("xpath", "//a[text()='View']");
+			            break; 
+			        }
+			        else {
+			        	System.out.println("No Approved Status Found");
+			        }
+			    }
+			
+			
+			
+		String ProductName = Common.findElementBy("xpath", "//td[@data-th='Product Name']").getText();
+		String ProductQTY = Common.findElementBy("xpath", "//td[@data-th='QTY']").getText();
+		String OrderNo = Common.findElementBy("xpath", "//td[@data-th='Order']").getText();
+		
+		System.out.println(ProductName);
+		System.out.println(ProductQTY);
+		System.out.println(OrderNo);
+	   
+		Common.clickElement("xpath", "(//a[text()='RMA Packing Slip'])[1]");
+		
+//		Need to write code to close the Pop-up
+		
+		String Print_ProductName = Common.findElementBy("xpath", "//td[@data-th='Product Name']").getText();
+		String Print_ProductQTY = Common.findElementBy("xpath", "//td[@data-th='Qty']").getText();
+		
+		String Print_OrderNo = Common.findElementBy("xpath", "(//p[@class='order-date'])[2]").getText();
+		Pattern pattern = Pattern.compile("#(\\d+)");
+         Matcher matcher = pattern.matcher(Print_OrderNo);
+         
+         
+       if (matcher.find()) {
+             // Extract the order number from the first match
+              Print_OrderNumber = matcher.group(1);
+             System.out.println("Order Number: " + Print_OrderNumber);
+         } else {
+             System.out.println("Order number not found.");
+         }
+		
+		System.out.println(Print_ProductName);
+		System.out.println(Print_ProductQTY);
+		System.out.println(Print_OrderNumber);
+		
+		Common.assertionCheckwithReport(ProductName.equals(Print_ProductName) && ProductQTY.equals(Print_ProductQTY) && OrderNo.equals(Print_OrderNumber) , "validating the user navigated to the my Return page",
+				"After clicking on RMA Packin slip it should navigate to RMA Print page", "Sucessfully Navigated to the RMA Print page",
+				"failed to Navigated to the RMA Print page");
+		
+		
+		} else {
+			
+			String No_returns = Common.findElement("xpath", "//span[text()='There are no returns']").getText();
+			System.out.println(No_returns);
+			Common.assertionCheckwithReport(No_returns.contains("There are no returns"),
+					"validating the My Return Page",
+					"There are no returns should display after Clicking  my Returns",
+					"Sucessfully There re no returns displayed in  My returns page",
+					"failed to display There are no returns ");
 		}
+		}
+		
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the user navigated to RMA Print page",
+					"After clicking on my account it should navigate to RMA Print page", "Unable to Navigated to RMA Print page", Common.getscreenShot("Failed to Navigated to RMA Print page"));
 			Assert.fail();
 		}
 		
 	}
+
+	public void LogoutExistingUser() {
+		// TODO Auto-generated method stub
+		try {
+			
+//			Common.clickElement("xpath", "//a[@class='a-logo']");
+		
+			String URL = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			Common.oppenURL(URL);
+			signout();
+		}
 	
+catch(Exception | Error e)
+{
+	e.printStackTrace();
+	Assert.fail();
+}
+	}
 	
 }
