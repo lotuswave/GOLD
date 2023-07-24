@@ -176,10 +176,10 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-//			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-//			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
-//					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
-//					"failed to Navigate to the PDP page");
+			String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
 			product_quantity(Dataset);
 			Sync.waitPageLoad();
 //			click_UGC();
@@ -188,13 +188,13 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
 			Common.clickElement("xpath", "//button[@class='a-icon-text-btn a-icon-text-btn--icon-only a-message__close']");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -446,12 +446,12 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Sync.waitElementPresent("xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
 			Thread.sleep(4000);
-//			String checkout = Common.findElement("xpath", "//strong[@role='heading']//span").getText();
-//			Common.assertionCheckwithReport(
-//					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping"),
-//					"validating the navigation to the shipping page when we click on the Checkout",
-//					"User should navigate to the shipping  page", "Successfully navigate to the shipping page",
-//					"Failed to navigate to the shipping page");
+			String checkout = Common.findElement("xpath", "//strong[@role='heading']//span").getText();
+			Common.assertionCheckwithReport(
+					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping"),
+					"validating the navigation to the shipping page when we click on the Checkout",
+					"User should navigate to the shipping  page", "Successfully navigate to the shipping page",
+					"Failed to navigate to the shipping page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -746,7 +746,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		String method=data.get(Dataset).get("methods");
 		
 		try {
-           Thread.sleep(4000);
+           Thread.sleep(6000);
 			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'"+ method +"')]");
@@ -754,7 +754,10 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			}
 				else {
 					
-					Assert.fail();
+					Common.refreshpage();
+					  Thread.sleep(5000);
+					Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'"+ method +"')]");
+					Common.clickElement("xpath", "//td[contains(text(),'"+ method +"')]");
 				
 			}
 		}
@@ -2245,11 +2248,12 @@ try
    			Common.actionsKeyPress(Keys.ENTER);
    			Sync.waitPageLoad();
    			Thread.sleep(4000);
-//   			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
-//   			System.out.println(productsearch);
-//   			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
-//   					"enter product name will display in the search box", "user enter the product name in  search box",
-//   					"Failed to see the product name");
+   			Common.refreshpage();
+   			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+   			System.out.println(productsearch);
+   			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+   					"enter product name will display in the search box", "user enter the product name in  search box",
+   					"Failed to see the product name");
 
    		} catch (Exception | Error e) {
    			e.printStackTrace();

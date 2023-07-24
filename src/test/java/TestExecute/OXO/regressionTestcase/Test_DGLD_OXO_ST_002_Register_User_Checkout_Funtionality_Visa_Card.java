@@ -15,19 +15,20 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Register_User_Checkout_Funtionality_Visa_Card() throws Exception {
-		Oxo.verifingHomePage();
-		Oxo.click_singinButton();
-		Oxo.Usersignin("AccountDetails");
+	
 		
-		for(int i=0;i<2;i++)
-	       {
+//		for(int i=0;i<2;i++)
+//	       {
 		try {
-//			Oxo.coffee_headerlinks("Coffee & Beverage");
-//			Oxo.addtocart("addproduct");
+			Oxo.verifingHomePage();
+			Oxo.click_singinButton();
+			Oxo.Usersignin("AccountDetails");
+			Oxo.coffee_headerlinks("Coffee & Beverage");
+			Oxo.addtocart("addproduct");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
-//			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
@@ -40,11 +41,11 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-	}
+//	}
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
