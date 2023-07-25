@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Osprey_EMEA.GoldOspreyRMAHelper;
+import TestLib.Common;
 //import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Login;
 
@@ -56,7 +57,7 @@ public class Test_OSPG_RMA_FT_001_Admin_RMA_Creation {
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

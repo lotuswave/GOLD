@@ -6701,4 +6701,92 @@ catch(Exception | Error e)
 		}
 	}
 	
+public void Compare_Products()throws Exception {
+		
+		try {
+			
+ List<WebElement> compareLinks = Common.findElements("xpath", "//*[text()='Add to Compare']");
+ 	
+
+    if(compareLinks.size() >=2)	{
+	
+    	compareLinks.get(2).click();
+       Thread.sleep(3000);
+       compareLinks.get(6).click();
+       Sync.waitElementPresent("xpath", "//a[text()='comparison list']");
+       Common.clickElement("xpath", "//a[text()='comparison list']");
+}
+   else {
+            System.out.println("Insufficient number of products for comparison.");
+        
+		} 
+  
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Compare Products", "Products added to Compare list successfull",
+					"failed to add product to compareList",
+					Common.getscreenShotPathforReport("CompareProductfail"));
+			Assert.fail();
+		}
+			
+	}
+
+	public void Add_Wishlist() throws Exception{
+		// TODO Auto-generated method stub
+		try {
+			
+			Sync.waitElementPresent("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+			Common.javascriptclickElement("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+			int Size=Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[4]").size();
+			
+			if(Size>0) {
+			
+			Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
+			Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
+		     
+			}
+			
+			Thread.sleep(3000);
+			int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
+     Common.assertionCheckwithReport(WishlistMSG>0,
+						"validating the My Wish List",
+						"My Wish List should be display",
+						"Sucessfully navigated to My Wish List ",
+						"failed to navigate to My Wish List");
+			
+			
+	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating product added to wishlist ", "Products added to Compare list successfull",
+					"failed to add product to wishlist",
+					Common.getscreenShotPathforReport("Wishlistfail"));
+			Assert.fail();
+		}
+
+			
+	}
+
+	public void AddtoCart_Wishlist() throws Exception{
+		// TODO Auto-generated method stub
+		try {
+			
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Add to Cart']");
+			Common.mouseOverClick("xpath", "//span[text()='Add to Cart']");
+			minicart_Checkout();
+		}
+		
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Adding to cart from wishlist ", "Products added to cart successfull",
+					"failed to add Products to cart",
+					Common.getscreenShotPathforReport("AddtoCartfail"));
+			Assert.fail();
+		}
+
+	}
 }
