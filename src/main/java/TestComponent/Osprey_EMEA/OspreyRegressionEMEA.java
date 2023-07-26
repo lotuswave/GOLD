@@ -4994,7 +4994,7 @@ public String create_account_with_fav(String Dataset) {
 		Common.assertionCheckwithReport(
 				Common.getPageTitle().equals("My Wish List")
 						&& message.contains("Thank you for registering with Osprey UK Store.")
-						&& favmessage.contains(product +"has been added to your Wish List. Click"),
+						&& favmessage.contains(product + " has been added to your Wish List. Click"),
 				"validating the  My Favorites page Navigation when user clicks on signin button",
 				"User should able to navigate to the My Favorites page after clicking on Signin button",
 				"Sucessfully navigate to the My Favorites page after clicking on signin button ",
