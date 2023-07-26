@@ -1,5 +1,5 @@
 package TestComponent.Osprey_EMEA;
-
+  
 import static org.testng.Assert.fail;
 
 import java.io.IOException;
@@ -38,7 +38,7 @@ import Utilities.Utils;
 import groovyjarjarantlr.CommonAST;
 import groovyjarjarantlr.CommonASTWithHiddenTokens;
 import groovyjarjarantlr4.v4.parse.ANTLRParser.action_return;
-
+  
 public class OspreyRegressionEMEA {
 
 	String datafile;
@@ -48,7 +48,7 @@ public class OspreyRegressionEMEA {
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
 	public OspreyRegressionEMEA(String datafile, String sheetname) {
-
+   
 		excelData = new ExcelReader(datafile, sheetname);
 		data = excelData.getExcelValue();
 		this.data = data;
@@ -338,7 +338,7 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Osprey"),
+					Common.getPageTitle().contains("Home page") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Osprey"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -6723,6 +6723,15 @@ public void Compare_Products()throws Exception {
        compareLinks.get(6).click();
        Sync.waitElementPresent("xpath", "//a[text()='comparison list']");
        Common.clickElement("xpath", "//a[text()='comparison list']");
+       
+      Common.clickElement("xpath", "(//span[text()='Add to Cart'])[2]");
+      Sync.waitElementVisible("xpath", "//a[text()='shopping cart']");
+
+      String Shoppping =Common.findElement("xpath", "//a[text()='shopping cart']").getText();
+      
+      System.out.println(Shoppping);
+      Assert.assertEquals(Shoppping, "shopping cart") ;
+       
 }
    else {
             System.out.println("Insufficient number of products for comparison.");
@@ -6740,48 +6749,55 @@ public void Compare_Products()throws Exception {
 		}
 			
 	}
-
-	public void Add_Wishlist() throws Exception{
-		// TODO Auto-generated method stub
-		try {
-			
-			Sync.waitElementPresent("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
-			Common.javascriptclickElement("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
-			int Size=Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[4]").size();
-			
-			if(Size>0) {
-			
-			Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
-			Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
-		     
-			}
-			
-			Thread.sleep(3000);
-			int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
-     Common.assertionCheckwithReport(WishlistMSG>0,
-						"validating the My Wish List",
-						"My Wish List should be display",
-						"Sucessfully navigated to My Wish List ",
-						"failed to navigate to My Wish List");
-			
-			
-	}
-		catch(Exception | Error e)
-		{
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating product added to wishlist ", "Products added to Compare list successfull",
-					"failed to add product to wishlist",
-					Common.getscreenShotPathforReport("Wishlistfail"));
-			Assert.fail();
+public void Add_Wishlist() throws Exception{
+	// TODO Auto-generated method stub
+	try {
+		
+		Sync.waitElementPresent("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+		Common.javascriptclickElement("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+		int Size=Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
+		System.out.println(Size);
+		if(Size>0) {
+		
+		Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
+		Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
+	     
 		}
+		else {
+			String Error = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			if(Error.contains("You must login")) {
+				Login_Account("Account");
+			} else 
+			{
+				System.out.println("no Error message displayed");
 
-			
+			}
+		}
+		Thread.sleep(3000);
+		int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
+		System.out.println("Wishlist"+WishlistMSG);
+ Common.assertionCheckwithReport(WishlistMSG>0,
+					"validating the My Wish List",
+					"My Wish List should be display",
+					"Sucessfully navigated to My Wish List ",
+					"failed to navigate to My Wish List");
+		
+		
+}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating product added to wishlist ", "Products added to Compare list successfull",
+				"failed to add product to wishlist",
+				Common.getscreenShotPathforReport("Wishlistfail"));
+		Assert.fail();
 	}
-
+}
 	public void AddtoCart_Wishlist() throws Exception{
 		// TODO Auto-generated method stub
 		try {
-			
+			String Wishlist = Common.findElement("xpath", "//h1[text()='My Wish Lists']").getText();
+			if (Wishlist.equals("My Wish Lists"))
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Add to Cart']");
 			Common.mouseOverClick("xpath", "//span[text()='Add to Cart']");
 			minicart_Checkout();
