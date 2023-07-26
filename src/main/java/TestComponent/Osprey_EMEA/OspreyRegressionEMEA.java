@@ -5623,7 +5623,7 @@ public void Verify_Address(String Dataset) {
 		System.out.println(results);
 		try {
 
-			if (results.contains("Zealot 45")) {                                                        //need to implement from the Header links After the configurations
+			if (results.contains("Atmos AG 50")) {                                                        //need to implement from the Header links After the configurations
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
 					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
@@ -5683,8 +5683,6 @@ public void Verify_Address(String Dataset) {
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent("xpath", "//div[@class='sticky-atc__inner']//div[@data-option-label='"+ Productsize +"']");
-				Common.clickElement("xpath", "//div[@class='sticky-atc__inner']//div[@data-option-label='" +Productsize+"']");
 				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
