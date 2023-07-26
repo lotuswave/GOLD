@@ -2172,7 +2172,7 @@ public void Shipping_Forgot_Password(String dataSet) {
 		Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
 		String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
 		System.out.println(shipping);
-		Common.clickElement("xpath", "//span[text()='Item in Cart']");
+		Common.clickElement("xpath", "//span[text()='Items in Cart']");
 		String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
 		System.out.println(QTY);
 		String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
@@ -4959,6 +4959,7 @@ public void click_Createaccount() {
 public String create_account_with_fav(String Dataset) {
 	// TODO Auto-generated method stub
 	String email = "";
+	String product=data.get(Dataset).get("Products");
 	try {
 		Common.refreshpage();
 		Sync.waitPageLoad();
@@ -4993,7 +4994,7 @@ public String create_account_with_fav(String Dataset) {
 		Common.assertionCheckwithReport(
 				Common.getPageTitle().equals("My Wish List")
 						&& message.contains("Thank you for registering with Osprey UK Store.")
-						&& favmessage.contains("Zealot 45 has been added to your Wish List. Click"),
+						&& favmessage.contains(product +"has been added to your Wish List. Click"),
 				"validating the  My Favorites page Navigation when user clicks on signin button",
 				"User should able to navigate to the My Favorites page after clicking on Signin button",
 				"Sucessfully navigate to the My Favorites page after clicking on signin button ",
