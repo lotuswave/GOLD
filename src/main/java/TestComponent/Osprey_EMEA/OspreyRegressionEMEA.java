@@ -710,6 +710,14 @@ public void giftCreation(String Dataset) {
 	click_giftcard();
 	newregistry_CTA("Birthday");
 	try {
+		Thread.sleep(4000);
+		Common.clickElement("id", "submit.save");
+		String errormessage=Common.findElement("xpath", "//div[@class='mage-error']").getText();
+		Common.assertionCheckwithReport(
+				errormessage.equals("This is a required field."),
+				"validating error message in empty form",
+				"It should display the error message when form is empty",
+				"successfully error message when form is empty", "Failed to display the error message when form is empty");
 		Common.textBoxInput("xpath", "//input[@id='title']", data.get(Dataset).get("Type"));
 		Common.textBoxInput("xpath", "//textarea[@id='message']", data.get(Dataset).get("Message"));
 		Common.dropdown("xpath", "//select[@id='is_public']", SelectBy.TEXT, data.get(Dataset).get("privacy"));
@@ -843,6 +851,15 @@ public void newregistry_CTA(String Dataset) {
 		Sync.waitPageLoad();
 		Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
 		Common.clickElement("xpath", "//span[text()='Create New Registry']");
+		Common.clickElement("id", "submit.next");
+		String errormessage=Common.findElement("xpath", "//div[@class='mage-error']").getText();
+		Common.assertionCheckwithReport(
+				errormessage.equals("This is a required field."),
+				"validating error message when we not give any type ",
+				"It should display the error message when we not given any type",
+				"successfully error message has been displayed", "Failed to display the error message");
+//		Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
+//		Common.clickElement("xpath", "//span[text()='Create New Registry']");
 		Sync.waitPageLoad();
 		Common.dropdown("id", "type_id", SelectBy.TEXT, data.get(Dataset).get("Type"));
 		Common.clickElement("id", "submit.next");
