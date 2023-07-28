@@ -6904,7 +6904,7 @@ public void Add_Wishlist() throws Exception{
 		String expectedResult = "It should opens textbox input to enter discount.";
 		 String Symbol=data.get(Dataset).get("Symbol");
 		try {
-			Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add Discount Code']");
 			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
@@ -6972,6 +6972,74 @@ public void Add_Wishlist() throws Exception{
 			Assert.fail();
 		}
 
+	}
+
+	public void invalid_Discount(String Dataset) {
+		// TODO Auto-generated method stub
+		String invalidcode=data.get(Dataset).get("invalidcode");
+		try
+		{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[text()='Add Discount Code']");
+			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+			Sync.waitElementPresent("id", "discount-code");
+			Common.textBoxInput("id", "discount-code",invalidcode);
+			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Thread.sleep(2000);
+			String errormessage=Common.findElement("xpath", "//div[@class='message message-error error']//div").getText();
+			Common.assertionCheckwithReport(errormessage.contains("The coupon code isn't valid."),
+					"validating the discount error message in the payment page",
+					"Error message should be display in the payment page",
+					"Successfully error message should be displayed",
+					"Failed to display the error message in the payment page");
+			Tool_Tip();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the discount error message in the payment page",
+					"Error message should be display in the payment page",
+					"unable to display the  error message should in the payment page",
+					Common.getscreenShot("Failed to display the error message in the payment page"));
+			Assert.fail();
+		}
+		
+	}
+	
+	public void Tool_Tip() {
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Shipping']");
+			Common.clickElement("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Shipping']");
+			String message=Common.findElement("xpath", "//button[@aria-describedby='formShippingExclTaxTooltip']").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("Shipping"),
+					"validating the shiiping tooltip in the payment page",
+					"after clicking on the shipping tooltip message should appear",
+					"Successfully shipping tooltip is displayed",
+					"Failed to display the Tooltip for shipping");
+			Sync.waitElementPresent("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Tax']");
+			Common.clickElement("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Tax']");
+			String taxtooltip=Common.findElement("xpath", "//button[@aria-describedby='formShippingTotalTaxTooltip']").getText();
+			System.out.println(taxtooltip);
+			Common.assertionCheckwithReport(taxtooltip.contains("Tax"),
+					"validating the Tax tooltip in the payment page",
+					"after clicking on the Tax tooltip message should appear",
+					"Successfully Tax tooltip is displayed",
+					"Failed to display the Tooltip for Tax");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the tooltip in the payment page",
+					"after clicking on the particular tooltip message should appear",
+					"Unable to display the Tooltip in the payment page",
+					Common.getscreenShot("Failed to display the Tooltip in the payment page"));
+			Assert.fail();
+		}
 	}
 
 }
