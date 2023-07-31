@@ -1052,39 +1052,39 @@ public void addtocart(String Dataset) {
 		
 		Sync.waitPageLoad(30);
 		Thread.sleep(6000);
-		String id=Common.findElement("xpath", "(//div[@aria-label='Color'])[1]").getAttribute("aria-labelledby").replace("label-", "").replace("-838", "");
-		System.out.println(id);
-		String price=Common.findElement("xpath", "//div[@data-product-id='" + id +"']//span[@class='price']").getText().replace("£", "");
-		System.out.println(price);
-		Float Pricevalue = Float.parseFloat(price);
-		if(Pricevalue>0)
-		{
-			Sync.waitElementPresent("xpath", "//div[@data-product-id='" + id +"']");
-			Common.mouseOverClick("xpath", "//div[@data-product-id='" + id +"']");
-//			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-//			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-		}
-		else
-		{
-			Assert.fail();
-		}
-//		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-//		Common.clickElement("xpath", "//img[@alt='" + products + "']");
+//		String id=Common.findElement("xpath", "(//div[@aria-label='Color'])[1]").getAttribute("aria-labelledby").replace("label-", "").replace("-838", "");
+//		System.out.println(id);
+//		String price=Common.findElement("xpath", "//div[@data-product-id='" + id +"']//span[@class='price']").getText().replace("£", "");
+//		System.out.println(price);
+//		Float Pricevalue = Float.parseFloat(price);
+//		if(Pricevalue>0)
+//		{
+//			Sync.waitElementPresent("xpath", "//div[@data-product-id='" + id +"']");
+//			Common.mouseOverClick("xpath", "//div[@data-product-id='" + id +"']");
+////			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+////			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+//		}
+//		else
+//		{
+//			Assert.fail();
+//		}
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.clickElement("xpath", "//img[@alt='" + products + "']");
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
 		Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ productcolor +"']");
 		Common.clickElement("xpath", "//div[@data-option-label='" +productcolor+"']");
 		Sync.waitElementPresent("xpath", "//div[@data-option-label='"+ Productsize +"']");
 		Common.clickElement("xpath", "//div[@data-option-label='" +Productsize+"']");
-//		Sync.waitPageLoad(30);
-//		Thread.sleep(6000);
-//		Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-//		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-//		Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
-//				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
-//				"failed to Navigate to the PDP page");
-//		product_quantity(Dataset);
-//		Thread.sleep(4000);
+		Sync.waitPageLoad(30);
+		Thread.sleep(6000);
+		Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+		product_quantity(Dataset);
+		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 		Common.clickElement("xpath", "//span[text()='Add to Cart']");
 		Sync.waitPageLoad();
@@ -6270,66 +6270,66 @@ public void Verify_Address(String Dataset) {
 				}
 				Sync.waitPageLoad(30);
 				Thread.sleep(6000);
-				int Amount=Common.findElements("xpath", "//div[@data-role='priceBox']").size();
-				for (int i = 0; i < Amount; i++) {
-					int value = i + 1;
-				Thread.sleep(2000);
-				List<WebElement> Price=Common.findElements("xpath", "(//span[@data-price-type='finalPrice']//span[@class='price'])["+value+"]");
-				System.out.println(Price);
-				for(WebElement amount : Price)
-				{
-					String priceamount=amount.getText().replace("£", "");
-					Thread.sleep(2000);
-					Float PRICE =Float.parseFloat(priceamount);
-					System.out.println(PRICE);
-					
-					if(PRICE>0)
-					{
-						Common.mouseOver("xpath", "(//span[@data-price-type='finalPrice']//span[@class='price'])["+value+"]");
-						Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-						Common.clickElement("xpath", "//span[text()='Add to Cart']");
-						Sync.waitPageLoad();
-						Thread.sleep(4000);
-						Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-						String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-								.getAttribute("data-ui-id");
-						System.out.println(message);
-						Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-								"Product should be add to cart", "Sucessfully product added to the cart ",
-								"failed to add product to the cart");
-					}
-					else
-					{
-						
-					}
-				}
-				}
-//				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-//				Common.clickElement("xpath", "//img[@alt='" + products + "']");
-//				Sync.waitPageLoad(30);
-//				Thread.sleep(6000);
-//				Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-//				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-//				System.out.println(name);
-//				Thread.sleep(4000);
-//				String product=data.get(Dataset).get("Products").toUpperCase();
-//				System.out.println(product);
-//				Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product), "validating the  product navigates to PDP page",
-//						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
-//						"failed to Navigate to the PDP page");
-//				product_quantity(Dataset);
-//				Thread.sleep(4000);
-//				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-//				Common.clickElement("xpath", "//span[text()='Add to Cart']");
-//				Sync.waitPageLoad();
-//				Thread.sleep(4000);
-//				Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-//				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//						.getAttribute("data-ui-id");
-//				System.out.println(message);
-//				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//						"Product should be add to cart", "Sucessfully product added to the cart ",
-//						"failed to add product to the cart");
+//				int Amount=Common.findElements("xpath", "//div[@data-role='priceBox']").size();
+//				for (int i = 0; i < Amount; i++) {
+//					int value = i + 1;
+//				Thread.sleep(2000);
+//				List<WebElement> Price=Common.findElements("xpath", "(//span[@data-price-type='finalPrice']//span[@class='price'])["+value+"]");
+//				System.out.println(Price);
+//				for(WebElement amount : Price)
+//				{
+//					String priceamount=amount.getText().replace("£", "");
+//					Thread.sleep(2000);
+//					Float PRICE =Float.parseFloat(priceamount);
+//					System.out.println(PRICE);
+//					
+//					if(PRICE>0)
+//					{
+//						Common.mouseOver("xpath", "(//span[@data-price-type='finalPrice']//span[@class='price'])["+value+"]");
+//						Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+//						Common.clickElement("xpath", "//span[text()='Add to Cart']");
+//						Sync.waitPageLoad();
+//						Thread.sleep(4000);
+//						Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//						String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//								.getAttribute("data-ui-id");
+//						System.out.println(message);
+//						Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//								"Product should be add to cart", "Sucessfully product added to the cart ",
+//								"failed to add product to the cart");
+//					}
+//					else
+//					{
+//						
+//					}
+//				}
+//				}
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitPageLoad(30);
+				Thread.sleep(6000);
+				Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				System.out.println(name);
+				Thread.sleep(4000);
+				String product=data.get(Dataset).get("Products").toUpperCase();
+				System.out.println(product);
+				Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+				product_quantity(Dataset);
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+						.getAttribute("data-ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
 			
 			}catch (Exception | Error e) {
 				e.printStackTrace();
@@ -7055,6 +7055,33 @@ public void Add_Wishlist() throws Exception{
 					"after clicking on the particular tooltip message should appear",
 					"Unable to display the Tooltip in the payment page",
 					Common.getscreenShot("Failed to display the Tooltip in the payment page"));
+			Assert.fail();
+		}
+	}
+
+	public void Edit_Gift_Message(String Dataset) {
+		// TODO Auto-generated method stub
+		String message=data.get(Dataset).get("Discountcode");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//button[@type='submit']//span[text()='Edit']");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Edit']");
+			Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
+			Common.clickElement("xpath", "//button[@title='Add']");
+			String Messgae=Common.findElement("xpath", "//div[@class='gift-message-summary']").getText().replace("Message: ", "");
+			System.out.println(Messgae);
+			Common.assertionCheckwithReport(Messgae.equals(message),
+					"validating the Gift cart message", "Gift card message should be applied",
+					"Sucessfully gift message has been applied ", "failed to apply the gift message");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Gift cart message",
+					"Gift card message should be applied",
+					"Unable to dapply the gift message",
+					Common.getscreenShot("Failed to apply the gift message"));
 			Assert.fail();
 		}
 	}

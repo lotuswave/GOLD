@@ -23,6 +23,7 @@ public class Test_DGLD_OS_COMMON_060_Guest_User_Checkout_with_Gift_Message {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_viewcart();
         Osprey_ReEu.Gift_message("GiftMessage");
+        Osprey_ReEu.Edit_Gift_Message("GiftMessage");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("Bestway method");
@@ -38,7 +39,7 @@ public class Test_DGLD_OS_COMMON_060_Guest_User_Checkout_with_Gift_Message {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
