@@ -1131,6 +1131,48 @@ public void product_quantity(String Dataset) {
 
 }
 
+public void more_Quantity(String Dataset)
+{
+
+	String Quantity = data.get(Dataset).get("Quantity");
+	System.out.println(Quantity);
+	String MoreQuantity = data.get(Dataset).get("MoreQuantity");
+	System.out.println(MoreQuantity);
+	String products = data.get(Dataset).get("Products");
+	
+	try
+	{
+		Common.findElement("xpath", "//select[@class='a-select-menu']");
+		Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+		Thread.sleep(4300);
+//		Common.textBoxInputClear("xpath", "//input[@class='a-number-input m-add-to-cart__input']");
+		Common.findElement("xpath", "//input[@class='a-number-input m-add-to-cart__input']").sendKeys(MoreQuantity);
+//		Common.textBoxInput("xpath", "//input[@class='a-number-input m-add-to-cart__input']", "1000");
+		
+		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+		Common.clickElement("xpath", "//span[text()='Add to Cart']");
+		String Error=Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
+		System.out.println(Error);
+		System.out.println("We don’t have as many "+ products+ "as your requested");
+		Common.assertionCheckwithReport(Error.contains("We don’t have as many "+ products + " as your requested"),
+				"validating the error message if item is not not avliable request quantity",
+				"Error message should be dispaly if the requested quantity is not avaliable",
+				"Sucessfully Error message ha been displayed when reuested quantity is not avaliable",
+				"failed to display the error message if requested quantity is not avaliable");
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message if item is not not avliable request quantity",
+				"Error message should be dispaly if the requested quantity is not avaliable",
+				"Unable to display the error message if requested quantity is not avaliable",
+				Common.getscreenShot("failed to display the error message if requested quantity is not avaliable"));
+		Assert.fail();
+	}
+}
+
 public void minicart_viewcart() {
 	// TODO Auto-generated method stub
 	try {
@@ -3601,7 +3643,9 @@ public void review(String Dataset) {
 		Thread.sleep(4000);
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 		Common.clickElement("xpath", "//img[@alt='" + products + "']");
-
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		more_Quantity("review");
 		Common.scrollIntoView("xpath", "//a[text()='Reviews']");
 		Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
 		Thread.sleep(3000);
