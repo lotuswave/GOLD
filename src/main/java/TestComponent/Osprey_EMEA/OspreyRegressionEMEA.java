@@ -10,6 +10,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7128,6 +7129,157 @@ public void Add_Wishlist() throws Exception{
 					Common.getscreenShot("Failed to apply the gift message"));
 			Assert.fail();
 		}
+	}
+
+
+public void Invalid_search_product(String Dataset) {
+	// TODO Auto-generated method stub
+	String product = data.get(Dataset).get("InvalidProductName");
+	System.out.println(product);
+	try {
+		Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+		String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+				"User should able to click on the search button", "Search expands to the full page",
+				"Sucessfully search bar should be expand");
+		Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']",
+				data.get(Dataset).get("InvalidProductName"));
+		Common.actionsKeyPress(Keys.ENTER);
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+		System.out.println(productsearch);
+		Common.assertionCheckwithReport(productsearch.contains("Sorry, your search for"),
+				"validating the search functionality", "enter Invalid product name will display in the search box",
+				"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
+		Thread.sleep(8000);
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the search functionality",
+				"enter Invalid product name will display in the search box",
+				" unable to enter the Invalid product name in  search box",
+				Common.getscreenShot("Failed to see the Invalid product name"));
+		Assert.fail();
+	}
+}
+
+
+
+
+public void Sort_By(String Dataset) throws InterruptedException {
+	// TODO Auto-generated method stub
+    String symbol =  data.get(Dataset).get("Price_Symbol");
+	try {
+		Sync.waitPageLoad();
+
+		Thread.sleep(5000);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		// Before filter capture the price and make them ascending order
+	List<WebElement> BeforeFilterprice = Common.findElements("xpath", "//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+
+	
+		List<String> Beforefilterpricelist = new ArrayList<String>();
+
+		for (WebElement p : BeforeFilterprice) {
+//			Beforefilterpricelist.add(Double.valueOf(p.getText().replace("£", " ")));
+			Beforefilterpricelist.add(p.getText().replace(symbol, " "));
+			 System.out.println("Beforefilterpricelist"+Beforefilterpricelist);
+		} 
+		Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.TEXT,
+				data.get(Dataset).get("Sortby_Dropdown"));
+		
+		Thread.sleep(4000);
+//		Common.refreshpage();
+		
+
+
+
+		List<WebElement> AfterFilterprice = Common.findElements("xpath", "//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+
+		List<String> Afterfilterpricelist = new ArrayList<String>();
+
+		for (WebElement p : AfterFilterprice) {
+//			Afterfilterpricelist.add(Double.valueOf(p.getText().replace("£", " ")));
+			Afterfilterpricelist.add(p.getText().replace(symbol, " "));
+			System.out.println("Afterfilterpricelist"+Afterfilterpricelist);
+		}
+//Compare the values/Assert the values 
+		
+		if(data.get(Dataset).get("Sortby_Dropdown").equals("Highest price")) {
+			Collections.sort(Beforefilterpricelist, Collections.reverseOrder());
+			  System.out.println("Beforefilterpricelist"+Beforefilterpricelist);
+			Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+					"To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page",
+					"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+		} else if (data.get(Dataset).get("Sort").equals("Lowest Price")) {
+			Collections.sort(Beforefilterpricelist);
+			Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+					"To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page",
+					"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+		}	
+		 
+					  
+/*		  boolean areEqual = Beforefilterpricelist.equals(Afterfilterpricelist);
+		System.out.println(areEqual);
+		  Assert.assertEquals(areEqual, true);
+		Thread.sleep(5000);*/
+		Common.quitProcess();
+	} catch (NumberFormatException | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Sort by functionality",
+				"Products should be display as per selected sort option ",
+				" Unable to display the Products as per selected sort option",
+				Common.getscreenShot("Failed to sort_by"));
+		Assert.fail();
+	}
+
+}
+public void Filter() throws InterruptedException {
+	// TODO Auto-generated method stub
+	try {
+		
+		Sync.waitElementPresent("xpath", "//span[@data-color='Aircovers & Airporters']");
+		Common.clickCheckBox("xpath", "//span[@data-color='Aircovers & Airporters']");
+		Sync.waitElementPresent("xpath", "//span[text()='Aircovers & Airporters']");
+		String SelectedFilter =Common.findElement("xpath", "//span[text()='Aircovers & Airporters']").getText();
+		System.out.println("SelectedFilter:" +SelectedFilter);
+		 String RetrivedValue = "aircover" ;
+		if(SelectedFilter.equals("Aircovers & Airporters")) {
+			
+			List<WebElement> Series_Filters = Common.findElements("xpath",
+					"//div[@class='m-product-card__image-wrapper']//a");
+	
+			for (WebElement Filter : Series_Filters) {
+//				System.out.println(Filter);
+		String AttributeValue =Filter.getAttribute("href");
+		
+		
+		
+		if (AttributeValue != null && AttributeValue.contains(RetrivedValue)) {
+            
+			System.out.println("Attribute '" + AttributeValue + "' contains the text '" + RetrivedValue + "' for product: " + AttributeValue);
+			
+			
+        } 
+		else {
+        	
+            System.out.println("Attribute '" + AttributeValue + "' does not contain the text '" + RetrivedValue + "' for product: " + AttributeValue);
+            Assert.fail(); 
+        }
+		}
+		}
+	}catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Filter functionality",
+				"Products should be display as per selected Filter option ",
+				" Unable to display the Products as per selected Filter option",
+				Common.getscreenShot("Failed to Filter"));
+		Assert.fail();
+	}
 	}
 
 }
