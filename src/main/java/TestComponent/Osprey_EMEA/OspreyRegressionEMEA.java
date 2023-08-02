@@ -7282,4 +7282,62 @@ public void Filter() throws InterruptedException {
 	}
 	}
 
+public void webpagelinks_validation(String Dataset) throws Exception, IOException {
+	// TODO Auto-generated method stub
+	String links = data.get(Dataset).get("Links");
+	int j = 0;
+
+	String[] strArray = links.split("\\r?\\n");
+	for (int i = 0; i < strArray.length; i++) {
+		System.out.println(strArray[i]);
+
+		if (Common.getCurrentURL().contains("stage")) {
+
+			Common.oppenURL((strArray[i]));
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+
+			if (responcecode == 200) {
+				ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+						"successfully page configured with products",
+						Common.getscreenShotPathforReport("link" + i));
+			} else {
+
+				j++;
+
+				ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+						"page configured with products ", "unable to find page it showing 404 error",
+						Common.getscreenShotPathforReport("link" + i));
+
+			}
+
+		} else if (Common.getCurrentURL().contains("https://hele.digital/")) {
+
+			Common.oppenURL(strArray[i].replace("emea-preprod", "www"));
+
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+
+			if (responcecode == 200) {
+				ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+						"successfully page configured with products",
+						Common.getscreenShotPathforReport("link" + i));
+			} else {
+
+				j++;
+
+				ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+						"page configured with products ", "unable to find page it showing 40 error",
+						Common.getscreenShotPathforReport("link" + i));
+
+			}
+		}
+	}
+
+	if (j > 1) {
+		Assert.fail();
+	}
+
+}
+
 }
