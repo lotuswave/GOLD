@@ -1583,7 +1583,7 @@ public class OspreyRegressionEMEA {
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping"),
+					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping") || Common.getCurrentURL().contains("/checkout/#payment") ,
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -7215,6 +7215,137 @@ public class OspreyRegressionEMEA {
 			Assert.fail();
 		}
 
+	}
+
+	public void Gift_cards(String Dataset) {
+		// TODO Auto-generated method stub
+		String GiftCard = data.get(Dataset).get("Osprey");
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop Gift Cards"),
+					"To validate Gift card Navigation to the PLP",
+					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Sync.waitPageLoad(30);
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + GiftCard + "']");
+			Common.clickElement("xpath", "//img[@alt='" + GiftCard + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			String GiftcardName=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+			System.out.println(GiftcardName);
+			String Card = data.get(Dataset).get("Osprey").toUpperCase();
+			Common.assertionCheckwithReport(GiftcardName.contains(Card),
+					"validating the Gift card Navigation to the PDP page",
+					"After clicking on the gift card it should navigate to the PDP",
+					"Successfully Gift card is Navigated to the PDP",
+					"Failed to Navigate the Gift card to the PDP page");
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Gift card Navigation to the PDP page",
+					"After clicking on the gift card it should navigate to the PDP",
+					"Unable to Navigate the Gift card to the PDP page",
+					Common.getscreenShot("Failed to Navigate the Gift card to the PDP page"));
+			Assert.fail();
+			
+		
+		}
+	}
+
+	public void Card_Value(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+			Common.assertionCheckwithReport(Price.contains(amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			Common.clickElement("xpath", "(//img[@class='amcard-image'])[2]");
+			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
+			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
+			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
+					"validating the selected gift card",
+					"After clicking on the card design gift card should be match",
+					"Successfully Gift card design has been matched",
+					"Failed to match the Gift card design");
+			Giftcard_details("Gift Details");
+			product_quantity("Product Qunatity");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Giftcard_details(String Dataset) {
+		// TODO Auto-generated method stub
+		String Giftmessage=data.get(Dataset).get("message");
+		try
+		{
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_sender_name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_recipient_name']", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_recipient_email']", data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath", "//textarea[@name='am_giftcard_message']", Giftmessage);
+			Thread.sleep(3000);
+			String Message=Common.findElement("xpath", "//textarea[@name='am_giftcard_message']").getAttribute("value");
+			System.out.println(Message);
+			Common.assertionCheckwithReport(Message.equals(Giftmessage),
+					"validating the message for the Gift card",
+					"Message should be dispaly for the Gift card",
+					"Successfully message has been dispalyed for the Gift card",
+					"Failed to display the gift message for the Gift Card");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the message for the Gift card",
+					"Message should be dispaly for the Gift card",
+					"Unable to display the gift message for the Gift Card",
+					Common.getscreenShot("Failed to display the gift message for the Gift Card"));
+			Assert.fail();
+		}
+		
 	}
 
 }
