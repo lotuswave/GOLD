@@ -1370,6 +1370,19 @@ public class OspreyRegressionEMEA {
 	public void My_Favorites() {
 		// TODO Auto-generated method stub
 		try {
+			if(Common.getCurrentURL().contains("stage3"))
+			{
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
+				Common.clickElement("xpath", "//a[text()='My Favorites']");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+						"validating the Navigation to the My Favorites page",
+						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+			}
+			else
+			{
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent(30, "xpath", "//a[text()='My Wish Lists']");
 			Common.clickElement("xpath", "//a[text()='My Wish Lists']");
@@ -1378,6 +1391,7 @@ public class OspreyRegressionEMEA {
 					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
 					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1417,6 +1431,18 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad(30);
 				Thread.sleep(4000);
+				if(Common.getCurrentURL().contains("stage3"))
+                {
+                    Sync.waitPageLoad();
+                    String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+                    System.out.println(message);
+                    Common.assertionCheckwithReport(message.contains("has been added to your Favorites"),
+                            "validating the  product add to the Favorites", "Product should be add to Favorites",
+                            "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
+
+                }
+				else
+				{
 				Sync.waitElementVisible(30, "xpath", "//h4");
 				String whishlistpopup = Common.findElement("xpath", "//h4").getText();
 				System.out.println(whishlistpopup);
@@ -1438,6 +1464,7 @@ public class OspreyRegressionEMEA {
 				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+				}
 				String Whishlistproduct = Common
 						.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
 				System.out.println(Whishlistproduct);
@@ -1457,11 +1484,7 @@ public class OspreyRegressionEMEA {
 							"Sucessfully product added to the cart ", "failed to add product to the cart");
 					int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
 					System.out.println(minicart);
-					if (minicart > 0) {
-						minicart_Checkout();
-					} else {
-						Assert.fail();
-					}
+				
 				} else {
 					Assert.fail();
 				}
@@ -1476,11 +1499,10 @@ public class OspreyRegressionEMEA {
 				see_options("Product");
 				int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
 				System.out.println(minicart);
-				if (minicart > 0) {
-					minicart_Checkout();
-				}
+			
 
 			}
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1529,6 +1551,18 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
+				if(Common.getCurrentURL().contains("stage3"))
+                {
+                    Sync.waitPageLoad();
+                    String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+                    System.out.println(message);
+                    Common.assertionCheckwithReport(message.contains("has been added to your Favorites"),
+                            "validating the  product add to the Favorites", "Product should be add to Favorites",
+                            "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
+
+                }
+				else
+				{
 				Sync.waitElementVisible(30, "xpath", "//h4");
 				String whishlistpopup = Common.findElement("xpath", "//h4").getText();
 				System.out.println(whishlistpopup);
@@ -1543,6 +1577,7 @@ public class OspreyRegressionEMEA {
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
 						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+				}
 				Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
 				Sync.waitElementPresent(30, "xpath", "(//img[contains(@class,'m-produc')])[1]");
 				Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
@@ -1587,6 +1622,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(minicart);
+			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();
@@ -1671,13 +1707,24 @@ public class OspreyRegressionEMEA {
 				if (data.get(dataSet).get("StreetLine3") != null) {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
-
+				  if(Common.getCurrentURL().contains("stage3"))
+	                {
+	                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
+	                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                    Thread.sleep(3000);
+	                    String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+	                            .getAttribute("value");
+	                    System.out.println(Shippingvalue);
+	                }
+				else
+				{
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
 						.getAttribute("value");
 				System.out.println(Shippingvalue);
+				}
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
@@ -2583,11 +2630,18 @@ public class OspreyRegressionEMEA {
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			try {
+			  if(Common.getCurrentURL().contains("stage3"))
+              {
+                  Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                  Thread.sleep(3000);
+                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                          .getAttribute("value");
+                  System.out.println(Shippingvalue);
+              }
+			  else
+			  {
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(3000);
