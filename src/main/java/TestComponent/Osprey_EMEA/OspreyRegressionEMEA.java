@@ -112,7 +112,8 @@ public class OspreyRegressionEMEA {
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering with Osprey UK Store.")
-							&& Common.getPageTitle().contains("My Account"),
+							&& Common.getPageTitle().contains("My Account") || message.contains("Thank you for registering with Osprey US Store.")
+							&& Common.getPageTitle().contains("My Account") ,
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
 					"Sucessfully user navigates to the My account page after clickng on thr signup button",
@@ -725,8 +726,18 @@ public class OspreyRegressionEMEA {
 			Common.dropdown("xpath", "//select[@id='is_active']", SelectBy.TEXT, data.get(Dataset).get("Status"));
 			String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
 			if (eventname.equals("Birthday")) {
+				System.out.println(Common.getCurrentURL());
+				if(Common.getCurrentURL().contains("stage3"))
+				{
+					Common.dropdown("xpath","//select[@id='event_country_region']", SelectBy.TEXT,
+							data.get(Dataset).get("Region"));
+				}
+				else
+				{
 				Common.textBoxInput("xpath", "//input[@id='event_country_region_text']",
 						data.get(Dataset).get("Region"));
+			
+				}
 				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
 			} else if (eventname.equals("Wedding")) {
 
