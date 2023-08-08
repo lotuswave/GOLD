@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1615,6 +1617,8 @@ public class OspreyRegressionEMEA {
 		try {
 			Thread.sleep(4000);
 			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Common.refreshpage();
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
@@ -7280,6 +7284,178 @@ public class OspreyRegressionEMEA {
 		
 		}
 	}
+	
+	
+	
+	public void SendLater_Card_Value(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+			Common.assertionCheckwithReport(Price.contains(amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			Common.clickElement("xpath", "(//img[@class='amcard-image'])[2]");
+			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
+			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
+			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
+					"validating the selected gift card",
+					"After clicking on the card design gift card should be match",
+					"Successfully Gift card design has been matched",
+					"Failed to match the Gift card design");
+			SendLater_Giftcard_details("Gift Details");
+			product_quantity("Product Qunatity");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			Assert.fail();
+		}
+
+	}
+	public void SendLater_Giftcard_details(String Dataset) {
+		// TODO Auto-generated method stub
+		String Giftmessage=data.get(Dataset).get("message");
+		try
+		{
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_sender_name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_recipient_name']", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='am_giftcard_recipient_email']", data.get(Dataset).get("Email"));
+			Common.textBoxInput("xpath", "//textarea[@name='am_giftcard_message']", Giftmessage);
+			Thread.sleep(3000);
+			String Message=Common.findElement("xpath", "//textarea[@name='am_giftcard_message']").getAttribute("value");
+			System.out.println(Message);
+			Common.assertionCheckwithReport(Message.equals(Giftmessage),
+					"validating the message for the Gift card",
+					"Message should be dispaly for the Gift card",
+					"Successfully message has been dispalyed for the Gift card",
+					"Failed to display the gift message for the Gift Card");
+			Common.clickElement("xpath", "//label[text()='Send later']");
+
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate currentDate = LocalDate.now();
+			String formattedDate = currentDate.format(dateFormatter);
+
+
+			LocalDate nextDay = currentDate.plusDays(1);
+			String formattednextDay = nextDay.format(dateFormatter);
+
+			System.out.println("Current Date: " + formattedDate);
+			System.out.println("NextDay Date: "+ formattednextDay);
+
+
+			Common.textBoxInput("xpath", "//input[@id='am_giftcard_date_delivery']", formattednextDay);
+			Common.dropdown("id", "am_giftcard_date_delivery_timezone", Common.SelectBy.INDEX, "1");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the message for the Gift card",
+					"Message should be dispaly for the Gift card",
+					"Unable to display the gift message for the Gift Card",
+					Common.getscreenShot("Failed to display the gift message for the Gift Card"));
+			Assert.fail();
+		}
+	}
+	
+	public void DeliveryAddress_Guestuser_Gift(String dataSet) throws Exception {
+		String address = data.get(dataSet).get("Street");
+
+		try {
+			Thread.sleep(5000);
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+			} else {
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+			}
+
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+		}
+		String expectedResult = "email field will have email address";
+
+		int Size =Common.findElements("xpath", "//span[text()='Review & Payments']").size();
+
+			try {
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='firstname']",
+						data.get(dataSet).get("FirstName"));
+				int size = Common.findElements("xpath", "//input[@type='email']").size();
+				Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
+						"Filled Email address", "unable to fill the email address");
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='lastname']",
+						data.get(dataSet).get("LastName"));
+				Common.clickElement("xpath", "//div[@class='billing-address-form']//input[@name='street[0]']");
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='street[0]']", address);
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.findElement("xpath", "//div[@class='billing-address-form']//input[@name='city']").clear();
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='city']",
+						data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+
+				
+				Thread.sleep(3000);
+				try {
+					Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				} catch (ElementClickInterceptedException e) {
+					Thread.sleep(3000);
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				}
+
+				Thread.sleep(3000);
+				Common.textBoxInputClear("xpath", "//div[@class='billing-address-form']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='postcode']", data.get(dataSet).get("postcode"));
+				Thread.sleep(5000);
+
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='telephone']", data.get(dataSet).get("phone"));
+				
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[text()='Update']");
+				
+				ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
+						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
+						Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+
+			
+		}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating shipping address",
+						"shipping address is filled in to the fields", "user faield to fill the shipping address",
+						Common.getscreenShotPathforReport("shipingaddressfaield"));
+				Assert.fail();
+
+			
+			}
+		}
+	
 
 	public void Card_Value(String Dataset) {
 		// TODO Auto-generated method stub
