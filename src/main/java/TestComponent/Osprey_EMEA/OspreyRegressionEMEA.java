@@ -1485,6 +1485,7 @@ public class OspreyRegressionEMEA {
 							"Sucessfully product added to the cart ", "failed to add product to the cart");
 					int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
 					System.out.println(minicart);
+					minicart_Checkout();
 				
 				} else {
 					Assert.fail();
@@ -1500,7 +1501,7 @@ public class OspreyRegressionEMEA {
 				see_options("Product");
 				int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
 				System.out.println(minicart);
-			
+				minicart_Checkout();
 
 			}
 			
@@ -1594,6 +1595,7 @@ public class OspreyRegressionEMEA {
 				Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
+				minicart_Checkout();
 
 			} else {
 				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
@@ -1606,6 +1608,7 @@ public class OspreyRegressionEMEA {
 				Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
+				minicart_Checkout();
 
 			}
 		} catch (Exception | Error e) {
@@ -1655,7 +1658,7 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(4000);
 			Common.actionsKeyPress(Keys.PAGE_UP);
 			Common.actionsKeyPress(Keys.PAGE_UP);
-			Common.refreshpage();
+//			Common.refreshpage();
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
@@ -1710,6 +1713,7 @@ public class OspreyRegressionEMEA {
 				}
 				  if(Common.getCurrentURL().contains("stage3"))
 	                {
+					  Thread.sleep(4000);
 	                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
 	                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 	                    Thread.sleep(3000);
@@ -1727,20 +1731,10 @@ public class OspreyRegressionEMEA {
 				System.out.println(Shippingvalue);
 				}
 
-				Common.actionsKeyPress(Keys.PAGE_DOWN);
+//				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
-
-				try {
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
-							data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-
-					Thread.sleep(2000);
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
-							data.get(dataSet).get("Region"));
-				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
@@ -1795,15 +1789,26 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				try {
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
-							data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-					// TODO: handle exception
-					Thread.sleep(3000);
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
-							data.get(dataSet).get("Region"));
-				}
+				if(Common.getCurrentURL().contains("stage3"))
+                {
+				  Thread.sleep(4000);
+                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                    Thread.sleep(3000);
+                    String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                            .getAttribute("value");
+                    System.out.println(Shippingvalue);
+                }
+			else
+			{
+			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+			Thread.sleep(3000);
+			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
+					.getAttribute("value");
+			System.out.println(Shippingvalue);
+			}
+				
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
