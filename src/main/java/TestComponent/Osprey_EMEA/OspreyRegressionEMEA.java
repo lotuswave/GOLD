@@ -954,6 +954,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("xpath", "//a[@title='Delete']");
+			Thread.sleep(2000);
 			Common.clickElement("xpath", "//button[@class='a-btn a-btn--primary action-primary action-accept']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -2304,7 +2305,7 @@ public class OspreyRegressionEMEA {
 	public void Shipping_Forgot_Password(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
+			Common.textBoxInput("xpath", "//input[@name='username']", data.get(dataSet).get("UserName"));
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
 			String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
@@ -2396,9 +2397,10 @@ public class OspreyRegressionEMEA {
 		String Trail = data.get(Dataset).get("Trail");
 		try {
 
+			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
 					"//a[contains(@class,'level-top')]//span[contains(text(),'Backpacks & Bags')]");
-			Thread.sleep(3000);
+			
 			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + Dataset + "')]");
 
 			Thread.sleep(3000);
@@ -3107,10 +3109,19 @@ public class OspreyRegressionEMEA {
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			try {
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
+			
+			  if(Common.getCurrentURL().contains("stage3"))
+              {
+                  Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                  Thread.sleep(3000);
+                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                          .getAttribute("value");
+                  System.out.println(Shippingvalue);
+              }
+			  else
+			  {
+				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
