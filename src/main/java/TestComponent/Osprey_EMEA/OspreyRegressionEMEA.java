@@ -1166,10 +1166,11 @@ public class OspreyRegressionEMEA {
 
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitElementVisible("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']");
 			String Error = Common.findElement("xpath",
 					"//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
 			System.out.println(Error);
-			System.out.println("We don’t have as many " + products + "as your requested");
+			System.out.println("We don’t have as many " + products + " as your requested");
 			Common.assertionCheckwithReport(Error.contains("We don’t have as many " + products + " as your requested"),
 					"validating the error message if item is not not avliable request quantity",
 					"Error message should be dispaly if the requested quantity is not avaliable",
