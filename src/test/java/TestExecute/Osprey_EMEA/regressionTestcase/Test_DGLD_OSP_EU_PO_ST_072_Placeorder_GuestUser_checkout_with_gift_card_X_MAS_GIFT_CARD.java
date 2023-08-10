@@ -22,7 +22,7 @@ public class Test_DGLD_OSP_EU_PO_ST_072_Placeorder_GuestUser_checkout_with_gift_
         Osprey_ReEu.Gift_cards("X-mas Gift Card");
         Osprey_ReEu.Card_Value("price");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 
