@@ -7329,8 +7329,8 @@ public class OspreyRegressionEMEA {
 			}
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + GiftCard + "']");
-			Common.clickElement("xpath", "//img[@alt='" + GiftCard + "']");
+			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
+			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			String GiftcardName=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
@@ -7534,8 +7534,9 @@ public class OspreyRegressionEMEA {
 		try
 		{
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
-			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//label[@class='amcard-label-block -price']//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//label[@class='amcard-label-block -price']//span[text()='"+ amount +"']");
 			String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
 			Common.assertionCheckwithReport(Price.contains(amount),
 					"validating gift card amount value in PDP",
