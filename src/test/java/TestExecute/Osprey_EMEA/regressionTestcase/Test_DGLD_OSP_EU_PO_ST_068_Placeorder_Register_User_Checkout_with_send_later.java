@@ -15,7 +15,7 @@ public class Test_DGLD_OSP_EU_PO_ST_068_Placeorder_Register_User_Checkout_with_s
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Placeorder_Register_user_Configure_gift_card_in_PDP_and_checkout () throws Exception {
+	public void Verifying_Placeorder_Register_User_Checkout_with_send_later_checkout () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
