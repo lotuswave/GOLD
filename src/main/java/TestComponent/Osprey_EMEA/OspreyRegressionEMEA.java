@@ -1658,8 +1658,6 @@ public class OspreyRegressionEMEA {
 		try {
 			Thread.sleep(4000);
 			Common.actionsKeyPress(Keys.PAGE_UP);
-			Common.actionsKeyPress(Keys.PAGE_UP);
-			Common.refreshpage();
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
@@ -7611,14 +7609,12 @@ public class OspreyRegressionEMEA {
 		
 		try
 		{
-	Common.scrollIntoView("xpath", "//input[@class='amcard-field -datalist']");
-
-	Common.textBoxInputClear("xpath", "//input[@class='amcard-field -datalist']");
-	Thread.sleep(2000);
-		Common.textBoxInput("xpath","//input[@class='amcard-field -datalist']", data.get(dataSet).get("GiftCard"));
+			Thread.sleep(3000);
+	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard"));
 		
-		Common.clickElement("xpath","//input[@value='Add Code']");
-		Thread.sleep(3000);
+		Common.clickElement("xpath","//span[text()='Add Code']");
+		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
 	  System.out.println(successmsg);
 		
