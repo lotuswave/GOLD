@@ -212,11 +212,21 @@ public class GoldHydroHelper {
 			Common.actionsKeyPress(Keys.UP);
 			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
 			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);
+			if(openminicart.contains("active")) {
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
 					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
-
+			} else {
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
+			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			String openminicart1 = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+			System.out.println(openminicart1);
+			Common.assertionCheckwithReport(openminicart1.contains("active"), "To validate the minicart popup",
+					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "the mini cart is displayed",
@@ -664,7 +674,7 @@ public class GoldHydroHelper {
 			try {
 				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 
-				Tell_Your_FriendPop_Up();
+				//Tell_Your_FriendPop_Up();
 				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
@@ -713,7 +723,7 @@ public class GoldHydroHelper {
 		try {
 			Sync.waitPageLoad();
 
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
@@ -1049,7 +1059,7 @@ public class GoldHydroHelper {
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.scrollIntoView("xpath", "//label//a[text()='Privacy Policy']");
 			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
 			Sync.waitPageLoad();
@@ -1729,26 +1739,27 @@ public class GoldHydroHelper {
 	}
 
 	public void close_add() throws Exception {
-		// TODO Auto-generated method stub
-		Thread.sleep(3000);
-		int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
-		if (sizesframe > 0) {
-			Common.actionsKeyPress(Keys.PAGE_UP);
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[@class='sidebar-iframe-close']");
-			Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
-			
-		} else {
-		
-			
-			
-			Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
-			Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
-			Common.switchToDefault();
-			}
+        // TODO Auto-generated method stub
+        Thread.sleep(3000);
+        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
+        System.out.println(sizesframe);
+        if (sizesframe > 0) {
+            Common.actionsKeyPress(Keys.PAGE_UP);
+            Thread.sleep(4000);
+            Sync.waitElementPresent("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+            Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+        }
+        else {
 
-	}
+            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+            Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+            Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+            Common.switchToDefault();
+            }
+
+ 
+
+    }
 
 	public void acceptPrivacy() {
 
