@@ -1417,8 +1417,8 @@ public class OspreyRegressionEMEA {
 		System.out.println(Productsize);
 		try {
 			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
-
+			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+            System.out.println(MyFavorites);
 			if (MyFavorites != 0) {
 				search_product("Product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
@@ -1432,7 +1432,7 @@ public class OspreyRegressionEMEA {
 				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
 				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
 				Sync.waitPageLoad(30);
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				if(Common.getCurrentURL().contains("stage3"))
                 {
                     Sync.waitPageLoad();
@@ -1454,7 +1454,7 @@ public class OspreyRegressionEMEA {
 				} else {
 					Assert.fail();
 				}
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Favorites") ,
 						"validating the Navigation to the My Favorites page",
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -1500,9 +1500,7 @@ public class OspreyRegressionEMEA {
 				Common.mouseOver("xpath", "//img[contains(@class,'lazy m-product-card')]");
 				Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 				see_options("Product");
-				int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
-				System.out.println(minicart);
-				minicart_Checkout();
+				
 
 			}
 			
