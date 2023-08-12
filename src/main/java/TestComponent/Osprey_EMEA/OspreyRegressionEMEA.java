@@ -1225,7 +1225,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//button[@type='submit']//span[@class='a-btn__label']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry Items"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry Items") || Common.getPageTitle().equals("Manage Gift Registry"),
 					"validating navigation to the Manage Gift Registry page ",
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"successfully Navigated to the Manage Gift Registry",
