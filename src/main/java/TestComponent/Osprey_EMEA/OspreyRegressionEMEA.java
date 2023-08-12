@@ -4013,12 +4013,20 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 			Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
-			try {
+			Thread.sleep(4000);
+			 if(Common.getCurrentURL().contains("stage3"))
+             {
+                 
+                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Thread.sleep(3000);
+                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                         .getAttribute("value");
+                 System.out.println(Shippingvalue);
+             }
+			 else
+			 {
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			}
+			 }
 
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
@@ -4072,8 +4080,16 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
+				Thread.sleep(4000);
+				if(Common.getCurrentURL().contains("stage3"))
+	             { 
+	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+	             }
+				else
+				{
 				Common.clickElement("xpath", "//input[@name='region']");
 				Common.textBoxInput("xpath", "//input[@name='region']", region);
+				}
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				Common.clickElement("xpath", "//label[@for='primary_shipping']");
@@ -4127,8 +4143,15 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			if(Common.getCurrentURL().contains("stage3"))
+            { 
+                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+            }
+			else
+			{
 			Common.clickElement("xpath", "//input[@placeholder='State/Province']");
 			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
+			}
 			Common.clickElement("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 			String checkbox = Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
@@ -4193,13 +4216,19 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
+				if(Common.getCurrentURL().contains("stage3"))
+	             { 
+	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+	             }
+				else
+				{
 				Common.clickElement("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
+				}
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-
 				Common.assertionCheckwithReport(message.equals("You saved the address."),
 						"validating the saved message after saving address in address book",
 						"Save address message should be displayed after the address saved in address book",
@@ -4247,8 +4276,15 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
+			if(Common.getCurrentURL().contains("stage3"))
+            { 
+                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+            }
+			else
+			{
 			Common.clickElement("xpath", "//input[@placeholder='State/Province']");
 			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
+			}
 			Common.clickElement("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 			// String checkbox = Common.findElement("xpath",
@@ -4318,8 +4354,15 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
+				if(Common.getCurrentURL().contains("stage3"))
+	             { 
+	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+	             }
+				else
+				{
 				Common.clickElement("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
+				}
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				// Common.clickElement("xpath", "//label[@for='primary_shipping']");
