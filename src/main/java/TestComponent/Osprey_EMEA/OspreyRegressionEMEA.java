@@ -7859,4 +7859,83 @@ public class OspreyRegressionEMEA {
 		
 	}
 
+	public String Check_money_order() throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//label[@for='checkmo']");
+			Common.clickElement("xpath", "//label[@for='checkmo']");
+			String check=Common.findElement("xpath", "(//label[@for='checkmo']//parent::div//parent::div)[1]").getAttribute("class");
+			Common.assertionCheckwithReport(check.contains("active"),
+					"validating the check money order in payment page",
+					"Check money order radio button should be selected",
+					"Sucessfully check money order has been selected",
+					"failed to select the check mony order");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the check money order in payment page",
+					"Check money order radio button should be selected",
+					"Unable to select the check mony order", Common.getscreenShot("Failed to select the check mony order"));
+			Assert.fail();
+		}
+		String order = "";
+		String expectedResult = "It redirects to order confirmation page";
+		Common.actionsKeyPress(Keys.PAGE_UP);
+		Thread.sleep(3000);
+		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
+			Thread.sleep(4000);
+
+			Common.clickElement("xpath", "//span[text()='Place Order']");
+			//Common.refreshpage();
+		Thread.sleep(3000);
+
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+		if (!url.contains("stage") && !url.contains("preprod")) {
+		}
+
+		else {
+			try {
+				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+
+//				Tell_Your_FriendPop_Up();
+				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unabel to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+					Thread.sleep(4000);
+					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					System.out.println(order);
+				} else {
+					Thread.sleep(4000);
+					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+					System.out.println(order);
+				}
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
+					Common.getText("xpath", "//div[@class='checkout-success']//span");
+					System.out.println(order);
+
+				}
+			
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+						"User failed to navigate  to order confirmation page",
+						Common.getscreenShotPathforReport("failednavigatepage"));
+				Assert.fail();
+			}
+
+		}
+		return order;
+	}
+		
 }
+
+
