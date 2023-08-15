@@ -3558,15 +3558,16 @@ public class OspreyRegressionEMEA {
 	public void minicart_delete(String Dataset) {
 		// TODO Auto-generated method stub
 		String deleteproduct = data.get(Dataset).get("Colorproduct");
+		String symbol=data.get(Dataset).get("Symbol");
 		try {
 			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__subtotal-amount']//span");
 			String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("£", "");
+					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
 					.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[1]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace("£",
+			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if (productname.equals(deleteproduct)) {
@@ -3581,10 +3582,10 @@ public class OspreyRegressionEMEA {
 			}
 			Thread.sleep(6000);
 			String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("£", "");
+					.replace(symbol, "");
 			Float subtotal1value = Float.parseFloat(subtotal1);
 			Thread.sleep(8000);
-			String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace("£", "");
+			String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace(symbol, "");
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue - productamount1value;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -3652,10 +3653,11 @@ public class OspreyRegressionEMEA {
 	public void minicart_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
+		String symbol=data.get(Dataset).get("Symbol");
 		try {
 
 			String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("£", "");
+					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
 			Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
@@ -3667,7 +3669,7 @@ public class OspreyRegressionEMEA {
 			String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(cart);
 			String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("£", "");
+					.replace(symbol, "");
 			Float subtotalvalue2 = Float.parseFloat(Subtotal2);
 			Float Total = subtotalvalue * 2;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
