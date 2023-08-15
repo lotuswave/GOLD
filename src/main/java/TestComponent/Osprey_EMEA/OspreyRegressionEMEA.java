@@ -5344,26 +5344,29 @@ public class OspreyRegressionEMEA {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
-						.getAttribute("value");
-
-				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				try {
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
-							data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-
-					Thread.sleep(2000);
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
-							data.get(dataSet).get("Region"));
-				}
+				if(Common.getCurrentURL().contains("stage3"))
+                {
+				  Thread.sleep(4000);
+                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                    Thread.sleep(3000);
+                    String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                            .getAttribute("value");
+                    System.out.println(Shippingvalue);
+                }
+			else
+			{
+			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+			Thread.sleep(3000);
+			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
+					.getAttribute("value");
+			System.out.println(Shippingvalue);
+			}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
@@ -5520,7 +5523,7 @@ public class OspreyRegressionEMEA {
 			System.out.println(shippingaddress);
 			System.out.println(Dataset);
 			Common.assertionCheckwithReport(
-					shippingaddress.equals(Dataset) || shippingaddress.contains("935 The Horsley Dr"),
+					shippingaddress.equals(Dataset) || shippingaddress.contains("844 N Colony Rd"),
 					"verifying the address added to the address book",
 					"after saving the address in shiiping page it should save in the address book",
 					"Sucessfully Address ha been saved in the address book",
@@ -7671,10 +7674,11 @@ public class OspreyRegressionEMEA {
 	public void invalid_Gift_card(String dataSet) {
 		try
 		{
-	Common.scrollIntoView("xpath", "//input[@class='amcard-field -datalist']");
-		Common.textBoxInput("xpath","//input[@class='amcard-field -datalist']", data.get(dataSet).get("InvalidGC"));
+		Thread.sleep(4000);
+	    Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("InvalidGC"));
 		
-		Common.clickElement("xpath","//input[@value='Add Code']");
+		Common.clickElement("xpath","//span[text()='Add Code']");
 		Thread.sleep(3000);
 		String errormsg=Common.findElement("xpath", "//div[@role='alert']").getText();
 	  System.out.println(errormsg);
