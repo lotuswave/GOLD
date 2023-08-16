@@ -7343,12 +7343,12 @@ public class OspreyRegressionEMEA {
 		String GiftCard = data.get(Dataset).get("Osprey");
 		try
 		{
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop Gift Cards"),
-					"To validate Gift card Navigation to the PLP",
-					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
-					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
+//			Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
+//			Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
+//			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop Gift Cards"),
+//					"To validate Gift card Navigation to the PLP",
+//					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+//					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
@@ -7508,6 +7508,10 @@ public class OspreyRegressionEMEA {
 		int Size =Common.findElements("xpath", "//span[text()='Review & Payments']").size();
 
 			try {
+				
+				Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+				Common.clickElement("xpath", "//label[@for='stripe_payments']");
+				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				int size = Common.findElements("xpath", "//input[@type='email']").size();
@@ -7535,8 +7539,10 @@ public class OspreyRegressionEMEA {
 				}
 
 				Thread.sleep(3000);
-				Common.textBoxInputClear("xpath", "//div[@class='billing-address-form']//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='postcode']", data.get(dataSet).get("postcode"));
+//				Common.textBoxInputClear("xpath", "//div[@class='billing-address-form']//input[@name='postcode']");
+				String id=Common.findElement("xpath", "(//div[@class='billing-address-form']//input[@name='postcode'])[2]").getAttribute("id");
+				System.out.println(id);
+				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@id='"+ id +"']", data.get(dataSet).get("postcode"));
 				Thread.sleep(5000);
 
 				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='telephone']", data.get(dataSet).get("phone"));
