@@ -322,7 +322,7 @@ public class OspreyRegressionEMEA {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -361,7 +361,7 @@ public class OspreyRegressionEMEA {
 		Common.clickElement("xpath", "//a[text()='My Account']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		if (Common.getCurrentURL().contains("stage")) {
+		if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")) {
 			String Accountlinks = data.get(Dataset).get("Account Links");
 			String[] Account = Accountlinks.split(",");
 			int i = 0;
@@ -7996,7 +7996,8 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("xpath", "//input[@id='amcard-code-input']");
 			
 		
-			Common.textBoxInput("xpath", "//input[@id='amcard-code-input']", data.get(dataSet).get("GiftCard2"));		
+			Common.textBoxInput("xpath", "//input[@id='amcard-code-input']", data.get(dataSet).get("GiftCard2"));
+			System.out.println(data.get(dataSet).get("GiftCard2"));
 			Common.clickElement("xpath", "//span[text()='Add']");
 			
 		
