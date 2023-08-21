@@ -3345,14 +3345,23 @@ public class OspreyRegressionEMEA {
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			try {
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
+			if(Common.getCurrentURL().contains("stage3"))
+            {
+			  Thread.sleep(4000);
+                Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                Thread.sleep(3000);
+                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                        .getAttribute("value");
+                System.out.println(Shippingvalue);
+            }
+			else
+			{
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
+			
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
