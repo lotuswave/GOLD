@@ -9,20 +9,20 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_EU_ST_067_Placeorder_Register_user_Configure_gift_card_in_PDP_and_checkout {
+public class Test_DGLD_OS_COMMON_080_Placeorder_Register_User_Checkout_with_send_later {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Placeorder_Register_user_Configure_gift_card_in_PDP_and_checkout () throws Exception {
+	public void Verifying_Placeorder_Register_User_Checkout_with_send_later_checkout () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.Gift_cards("Osprey Gift Card");
-        Osprey_ReEu.Card_Value("price");
+        Osprey_ReEu.SendLater_Card_Value("price");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
         
