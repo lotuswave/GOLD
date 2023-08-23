@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO GG Sprint Smoke Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+        <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DTG-3203" priority="P1" description="This test case validate the create account functionality.">
+		<classes>
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" />
+		</classes>
+	 </test> 
+	 
+	  
+        
+	
+	
+          
+</suite>  

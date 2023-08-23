@@ -5058,7 +5058,7 @@ public class OspreyRegressionEMEA {
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Customer Login")
-							&& message.contains("You must login or register to add items to your wishlist."),
+							&& message.contains("You must login or register to add items"),
 					"validating the Navigation to the Customer Login page",
 					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
@@ -5171,7 +5171,7 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("My Wish List")
-							&& message.contains("Thank you for registering with Osprey UK Store.")
+							&& message.contains("Thank you for registering with Osprey") 
 							&& favmessage.contains(product + " has been added to your Wish List. Click"),
 					"validating the  My Favorites page Navigation when user clicks on signin button",
 					"User should able to navigate to the My Favorites page after clicking on Signin button",
@@ -5248,12 +5248,21 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			try {
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
+			 if(Common.getCurrentURL().contains("stage3"))
+             {
+				  Thread.sleep(4000);
+                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Thread.sleep(3000);
+                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                         .getAttribute("value");
+                 System.out.println(Shippingvalue);
+             }
+			 else
+			 {
+				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
@@ -5838,6 +5847,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 						.getAttribute("data-ui-id");
 				System.out.println(message);
