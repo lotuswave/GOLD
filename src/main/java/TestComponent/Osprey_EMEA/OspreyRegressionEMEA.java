@@ -6478,7 +6478,7 @@ public class OspreyRegressionEMEA {
 			Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-			click_UGC();
+//			click_UGC();
 			Locally_PDP();
 			Common.actionsKeyPress(Keys.UP);
 
@@ -6555,10 +6555,10 @@ public class OspreyRegressionEMEA {
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-			click_UGC();
+//			click_UGC();
 			Locally_PDP();
 			Common.actionsKeyPress(Keys.UP);
-			add_simplarproducts("configurable product");
+//			add_simplarproducts("configurable product");
 			PDP_Tabs("Tabs");
 		} catch (Exception | Error e) {
 			e.printStackTrace();

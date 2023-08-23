@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-OXO GG Sprint Smoke Suite">
+<suite name="Gold-Osprey US Smoke Suite">
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
     
-    
-        <test name="Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" testid="DTG-984" priority="P1" description="This script will cover validating the Guest User Checkout Funtionality Visa Card">
+        <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DTG-3203" priority="P1" description="This test case validate the create account functionality.">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" />
 		</classes>
 	 </test> 
-        
-	 <test name="Test_DGLD_OXO_ST_003_Create_Account_Validation" testid="DTG-986" priority="P1" description="This script will cover validating the Create_Account_Validation">
+	 
+	  <test name="Test_DGLD_OS_COMMON_020_Register_user_Checkout_With_Discount_Visa_card" testid="DTG-3309" priority="P1" description="This testcase is to validate the checkout functionality using visa card for Register user with discount applied in shipping page">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_003_Create_Account_Validation" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_020_Register_user_Checkout_With_Discount_Visa_card" />
+		</classes>
+	 </test>   
+	 
+	  <test name="Test_DGLD_OS_COMMON_045_Minicart_Validation" testid="DTG-3873" priority="P1" description="This testcase is to validate the checkout functionality using visa card for Register user with discount applied in shipping page">
+		<classes>
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_045_Minicart_Validation" />
 		</classes>
 	 </test> 
-	
-         <test name="Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card" testid="DTG-1244" priority="P1" description="This script will cover validating Guest user Checkout Funtionality With Discount Visa card">
+	 
+	  <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Visa_Card" testid="DTG-3837" priority="P1" description="This test case is to validate Guest user Checkout using a Visa card.">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Visa_Card" />
 		</classes>
 	 </test>
-
-	 <test name="Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card" testid="DTG-1245" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Master card">
+	 
+	   <test name="Test_DGLD_OS_COMMON_042_Login_from_Shipping_page" testid="DTG-3834" priority="P1" description="This test case is to validate Login from Shipping Page.">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_042_Login_from_Shipping_page" />
 		</classes>
 	 </test>
-
-         <test name="Test_DGLD_OXO_ST_010_Guest_user_Checkout_Funtionality_Discover_card" testid="DTG-1248" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Discover card">
+	 
+	  <test name="Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page" testid="DTG-3222" priority="P1" description="This test case is to Validate the shopping cart functionality.">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_010_Guest_user_Checkout_Funtionality_Discover_card" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page" />
 		</classes>
 	 </test>
-	
-	 <test name="Test_DGLD_OXO_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-1250" priority="P1" description="This script will cover validating the Register User Checkout Funtionality Master Card">
+	 
+	 <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DTG-3324" priority="P1" description="This test case is to validate the checkout functionality using Paypal as payment method for a Register user">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_012_Register_user_Checkout_Funtionality_Amex_card" />
-		</classes>
-	 </test> 
-	
-	 <test name="Test_DGLD_OXO_ST_014_Register_user_Checkout_Funtionality_Klarna_Saved_Payment" testid="DTG-1786" priority="P1" description="This script will cover validating Register user Checkout Funtionality Klarna Saved Payment">
-		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_014_Register_user_Checkout_Funtionality_Klarna_Saved_Payment" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" />
 		</classes>
 	 </test>
-	
-	 <test name="Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" testid="DTG-1253" priority="P1" description="This script will cover validating Guest user Checkout Klarna Payment">
+	 
+	 <test name="Test_DGLD_OS_COMMON_005_HeaderLinks" testid="DTG-3209" priority="P1" description="This test case is used to validate the Header Links Funtionality">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_005_HeaderLinks" />
 		</classes>
 	 </test>
-	
-	 <test name="Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" testid="DTG-1348" priority="P1" description="This script will cover validating Guest user Checkout Funtionality with Paypal">
+	 
+	  <test name="Test_DGLD_OS_COMMON_004_My_Account_Page_Validation" testid="DTG-3208" priority="P1" description="This test case is used to Verify the My Account page Validations">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_004_My_Account_Page_Validation" />
 		</classes>
 	 </test>
-
-         <test name="Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-1351" priority="P1" description="This script will cover validating Register user Checkout Funtionality with Paypal">
+	 
+	  <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DTG-4101" priority="P1" description="This test case is to validate the PDP page Funtionality">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" />
 		</classes>
 	 </test>
-	
-	 <test name="Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Payment" testid="DTG-1886" priority="P1" description="This script will cover validating Guest User Checkout Functionality Afterpay Payment">
+	 
+	 <test name="Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page" testid="DTG-3206" priority="P1" description="This test case is used to validate the Forgot password functionality on the sign-in page.">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Payment" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page" />
 		</classes>
 	 </test>
-	
-         <test name="Test_DGLD_OXO_ST_046_Register_Login_from_shipping_Page" testid="DTG-1931" priority="P1" description="This script will cover validating Register Login from shipping Page">
+	 
+	  <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DTG-4132" priority="P1" description="This test case is to validate the functionality of Search result page">
 		<classes>
-			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_046_Register_Login_from_shipping_Page" />
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" />
 		</classes>
 	 </test>
-	
+	 
+	 <test name="Test_DGLD_OS_COMMON_052_Change_Password_and_Email_from_AccountInformation_Page" testid="DTG-3961" priority="P1" description="This test case is to validate the change password and email from account information page.">
+		<classes>
+			<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_052_Change_Password_and_Email_from_AccountInformation_Page" />
+		</classes>
+	 </test>
+	 
           
 </suite>  
