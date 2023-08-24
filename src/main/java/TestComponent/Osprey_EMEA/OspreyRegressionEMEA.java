@@ -656,7 +656,7 @@ public class OspreyRegressionEMEA {
 
 	}
 
-	public void header_ShopAll(String Dataset) {
+	public void Bagpack_ShopAll(String Dataset) {
 
 		String names = data.get(Dataset).get("Shop all");
 		String[] Links = names.split(",");
@@ -666,6 +666,42 @@ public class OspreyRegressionEMEA {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
+				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				Common.assertionCheckwithReport(title.contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Featured",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void Travel_ShopAll(String Dataset) {
+
+		String names = data.get(Dataset).get("Shop all");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
