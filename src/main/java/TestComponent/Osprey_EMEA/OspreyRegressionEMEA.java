@@ -6407,6 +6407,24 @@ public class OspreyRegressionEMEA {
 						"failed to apply the gift message");
 
 			} else {
+				if(Common.getCurrentURL().contains("stage3"))
+				{
+					Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
+					Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
+					Common.textBoxInput("id", "gift-message-whole-from-giftOptionsCart", data.get(Dataset).get("LastName"));
+					Common.textBoxInput("id", "gift-message-whole-message-giftOptionsCart", message);
+					Common.clickElement("xpath", "//button[@title='Add']");
+					Sync.waitPageLoad(40);
+					Sync.waitElementPresent(40, "xpath", "//div[@class='gift-message-summary']");
+					String Messgae = Common.findElement("xpath", "//div[@class='gift-message-summary']").getText()
+							.replace("Message: ", "");
+					System.out.println(Messgae);
+					Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
+							"Gift card message should be applied", "Sucessfully gift message has been applied ",
+							"failed to apply the gift message");
+				}
+				else
+				{
 				Common.clickElement("xpath", "//span[text()='Gift Receipt']");
 				Sync.waitElementPresent(40, "id", "gift-message-whole-to-giftOptionsCart");
 				Common.textBoxInput("id", "gift-message-whole-to-giftOptionsCart", data.get(Dataset).get("FirstName"));
@@ -6421,6 +6439,7 @@ public class OspreyRegressionEMEA {
 				Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
 						"Gift card message should be applied", "Sucessfully gift message has been applied ",
 						"failed to apply the gift message");
+				}
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
