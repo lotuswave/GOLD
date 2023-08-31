@@ -1810,10 +1810,10 @@ public class OspreyRegressionEMEA {
 	public void click_minicart() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.PAGE_UP);
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini-cart__btn')]");
+			Common.clickElement("xpath", "//a[contains(@class,'c-mini-cart__btn')]");
 			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
 			System.out.println(openminicart);
 			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
@@ -5320,19 +5320,43 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-			String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
-			String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
-					.getText();
-			System.out.println(favmessage);
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("My Wish List")
-							&& message.contains("Thank you for registering with Osprey") 
-							&& favmessage.contains(product + " has been added to your Wish List. Click"),
-					"validating the  My Favorites page Navigation when user clicks on signin button",
-					"User should able to navigate to the My Favorites page after clicking on Signin button",
-					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
-					"Failed to navigates to My Favorites Page after clicking on Signin button");
+			
+			
+			if(Common.getCurrentURL().contains("stage3")) {
+				String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
+				String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
+						.getText();
+				System.out.println("favmessage"+favmessage);
+				System.out.println("Register message"+ message);
+			
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().equals("My Favorites")
+								&& message.contains("Thank you for registering with Osprey") 
+								&& favmessage.contains(product + " has been added to your Favorites. Click "),
+						"validating the  My Favorites page Navigation when user clicks on signin button",
+						"User should able to navigate to the My Favorites page after clicking on Signin button",
+						"Sucessfully navigate to the My Favorites page after clicking on signin button ",
+						"Failed to navigates to My Favorites Page after clicking on Signin button");
+		
+			}
+			else {
+				String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
+				String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
+						.getText();
+				System.out.println(favmessage);
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().equals("My Wish List")
+								&& message.contains("Thank you for registering with Osprey") 
+								&& favmessage.contains(product + " has been added to your Wish List. Click"),
+						"validating the  My Favorites page Navigation when user clicks on signin button",
+						"User should able to navigate to the My Favorites page after clicking on Signin button",
+						"Sucessfully navigate to the My Favorites page after clicking on signin button ",
+						"Failed to navigates to My Favorites Page after clicking on Signin button");
+			}
+			
+			
 		}
 
 		catch (Exception | Error e) {
@@ -5352,7 +5376,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-			Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+			Common.javascriptclickElement("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 
 			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__counter']");
 			String cartproducts = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
@@ -5363,8 +5387,8 @@ public class OspreyRegressionEMEA {
 					"Sucessfully after create account with cart products should be display in mini cart",
 					"failed to display the products in mini cart after the create account with cart");
 
-			Sync.waitElementVisible("xpath", "//span[contains(@class,'icon-minicart__close')]");
-			Common.clickElement("xpath", "//span[contains(@class,'icon-minicart__close')]");
+			Sync.waitElementVisible("xpath", "//div[contains(@class,'c-mini-cart__close-btn')]");
+			Common.clickElement("xpath", "//div[contains(@class,'c-mini-cart__close-btn')]");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5423,7 +5447,7 @@ public class OspreyRegressionEMEA {
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//div[@class='field']//input[@name='postcode']",
+			Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 
@@ -5432,10 +5456,10 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			update = Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
-			System.out.println(update);
+			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+			System.out.println("update"+update);
 			Common.assertionCheckwithReport(
-					update.contains("935 The Horsley Dr") || text.contains("935 The Horsley Dr"),
+					update.contains("Connecticut") || text.contains("Wallingford"),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -6585,6 +6609,7 @@ public class OspreyRegressionEMEA {
 			// }
 			// }
 			// }
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad(30);
