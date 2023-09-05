@@ -47,6 +47,7 @@ public class OspreyRegressionEMEA {
 	String datafile;
 	ExcelReader excelData;
 	Map<String, Map<String, String>> data = new HashMap<>();
+	private String String;
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
@@ -1221,25 +1222,7 @@ public class OspreyRegressionEMEA {
 
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			// String id=Common.findElement("xpath",
-			// "(//div[@aria-label='Color'])[1]").getAttribute("aria-labelledby").replace("label-",
-			// "").replace("-838", "");
-			// System.out.println(id);
-			// String price=Common.findElement("xpath", "//div[@data-product-id='" + id
-			// +"']//span[@class='price']").getText().replace("£", "");
-			// System.out.println(price);
-			// Float Pricevalue = Float.parseFloat(price);
-			// if(Pricevalue>0)
-			// {
-			// Sync.waitElementPresent("xpath", "//div[@data-product-id='" + id +"']");
-			// Common.mouseOverClick("xpath", "//div[@data-product-id='" + id +"']");
-			//// Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			//// Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			// }
-			// else
-			// {
-			// Assert.fail();
-			// }
+			
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
@@ -2001,7 +1984,7 @@ public class OspreyRegressionEMEA {
 			if (size > 0) {
 				// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 				// "')]");
-				Common.clickElement("xpath", "//td[contains(text(),'" + method + "')]");
+				Common.clickElement("xpath", "(//strong[contains(text(),'" + method + "')])[1]");
 			} else {
 
 				Assert.fail();
@@ -8309,7 +8292,186 @@ public class OspreyRegressionEMEA {
 		}
 	}
 
+	public void Verify_Price(String Dataset) {
+		
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+	
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+		        	
+			String Price = Common.findElement("xpath", "//div[@class='product-info-price']//span[contains(@id,'product-price')]//span").getText();
+			System.out.println(Price);
+			
+			if(Common.getCurrentURL().contains("stage")) {
 
+				double productPrice = Double.parseDouble(Price.replace("£", ""));
+				System.out.println(productPrice);
+			}
+			else {
+			double productPrice = Double.parseDouble(Price.replace("$", ""));
+			System.out.println(productPrice);
+			}
+			
+			double productPrice = 0;
+			if (productPrice <= 50.0) {
 
+//		            	Common.scrollIntoView("xpath", "//button[@title='Add to Cart']");
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+
+				System.out.println("Product added to cart.");
+		            }
+			
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
+					"Check Price In PLp page",
+					"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
+			Assert.fail();
+		}
+	}
+
+	
+public void Verify_OrderTotal() {
+	
+		try {
+      	
+			String Ordertotal = Common.findElement("xpath", "//td[@data-th='Order Total']").getText();
+			System.out.println(Ordertotal);
+			
+			if(Common.getCurrentURL().contains("gb")) {
+
+				double Order_Total = Double.parseDouble(Ordertotal.replace("£", ""));
+				System.out.println(Order_Total);
+			}
+			else {
+			double Order_Total = Double.parseDouble(Ordertotal.replace("$", ""));
+			System.out.println(Order_Total);
+			}
+			
+			double Order_Total = 0;
+			if (Order_Total <= 50.0) {
+
+				System.out.println("Order Total is Less than 50");
+		            }
+			else {
+				System.out.println("Order Total is Not Less than 50");
+			}
+		
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
+					"Check Price In PLp page",
+					"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
+			Assert.fail();
+		}
+	}	
+	
+	
+	
+	public void After_Pay_payment(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		String order = "";
+		Sync.waitPageLoad();
+		Thread.sleep(3000);	
+		String expectedResult = "User should able to proceed the afterpay payment method";
+
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+					"User unable to land o n the paymentpage");
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+			System.out.println(payment);
+			if (payment > 0) {
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//span[text()='New payment method']");
+
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
+//				
+				Common.switchToDefault();
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Place Order']");
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+
+			} else {
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
+				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
+//				
+				Common.switchToDefault();
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
+					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
+			Assert.fail();
+		}
+
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		if (!url.contains("stage") && !url.contains("preprod")) {
+		}
+
+		else {
+			try {
+				Thread.sleep(5000);
+				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+
+				int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unable to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+					order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+					System.out.println(order);
+				}
+				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+					System.out.println(order);
+				}
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+						"It should navigate to the order confirmation page",
+						"User failed to proceed to the order confirmation page",
+						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+				Assert.fail();
+			}
+		}
+	}
+
+	
 }
-
