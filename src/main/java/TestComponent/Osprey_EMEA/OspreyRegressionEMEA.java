@@ -2826,7 +2826,7 @@ public class OspreyRegressionEMEA {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage") && !url.contains("preprod")) {
+		if (!url.contains("stage") && !url.contains("na.osprey")) {
 		}
 
 		else {
@@ -2911,7 +2911,7 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				if (Common.getCurrentURL().contains("na.osprey.com") || Common.getCurrentURL().contains("stage") ) {
 
 					Common.clickElement("xpath", "//span[text()='Place Order']");
 				} else {
