@@ -1,5 +1,5 @@
 package TestComponent.Osprey_EMEA;
-
+ 
 import static org.testng.Assert.fail;
 
 import java.io.IOException;
@@ -2776,7 +2776,8 @@ public class OspreyRegressionEMEA {
 			  else
 			  {
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+//				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -2897,7 +2898,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
@@ -7288,7 +7289,7 @@ public class OspreyRegressionEMEA {
 		try {
 			Sync.waitElementPresent("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Shipping']");
 			Common.clickElement("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Shipping']");
-			String message = Common.findElement("xpath", "//button[@aria-describedby='formShippingExclTaxTooltip']")
+			String message = Common.findElement("xpath", "//div[@data-content-type='text']//p")
 					.getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("Shipping"),
