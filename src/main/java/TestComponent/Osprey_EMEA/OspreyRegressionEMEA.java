@@ -2764,7 +2764,7 @@ public class OspreyRegressionEMEA {
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			  if(Common.getCurrentURL().contains("stage3"))
+			  if(Common.getCurrentURL().contains("stage3") )
               {
                   Common.scrollIntoView("xpath", "//select[@name='region_id']");
                   Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -2776,8 +2776,8 @@ public class OspreyRegressionEMEA {
 			  else
 			  {
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-//				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+//				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -7022,7 +7022,7 @@ public class OspreyRegressionEMEA {
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
