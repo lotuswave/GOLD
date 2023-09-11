@@ -7546,12 +7546,12 @@ public class OspreyRegressionEMEA {
 		String GiftCard = data.get(Dataset).get("Osprey");
 		try
 		{
-//			Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
-//			Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
-//			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop Gift Cards"),
-//					"To validate Gift card Navigation to the PLP",
-//					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
-//					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop Gift Cards"),
+					"To validate Gift card Navigation to the PLP",
+					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
