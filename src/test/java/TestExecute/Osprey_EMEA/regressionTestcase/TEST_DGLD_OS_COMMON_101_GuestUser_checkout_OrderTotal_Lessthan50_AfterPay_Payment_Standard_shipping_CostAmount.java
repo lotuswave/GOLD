@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OSP_EU_PO_ST_078_GuestUser_checkout_OrderTotal_Lessthan50_AfterPay_Payment_Standard_shipping_CostAmount {
+public class TEST_DGLD_OS_COMMON_101_GuestUser_checkout_OrderTotal_Lessthan50_AfterPay_Payment_Standard_shipping_CostAmount {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
@@ -18,7 +18,7 @@ public class Test_DGLD_OSP_EU_PO_ST_078_GuestUser_checkout_OrderTotal_Lessthan50
 	public void Verifying_Guest_user_Checkout_With_Ordetotal_Lessthan50_Afterpay () throws Exception {
 
 		try {
-//        Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.search_product("After_Pay");
         Osprey_ReEu.Verify_Price("After_Pay");
         Osprey_ReEu.minicart_Checkout();
