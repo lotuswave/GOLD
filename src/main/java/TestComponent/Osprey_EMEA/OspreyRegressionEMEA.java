@@ -323,7 +323,7 @@ public class OspreyRegressionEMEA {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("na.osprey")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
