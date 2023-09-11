@@ -3397,7 +3397,7 @@ public class OspreyRegressionEMEA {
 		String prodordernumber = data.get(dataSet).get("prod order");
 
 		try {
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") ) {
 				Sync.waitElementPresent("id", "oar-order-id");
 				Common.textBoxInput("id", "oar-order-id", ordernumber);
 			} else {
