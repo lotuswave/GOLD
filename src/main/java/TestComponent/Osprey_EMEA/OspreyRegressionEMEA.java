@@ -1928,7 +1928,7 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				if(Common.getCurrentURL().contains("stage3"))
+				if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("na.osprey"))
                 {
 				  Thread.sleep(4000);
                     Common.scrollIntoView("xpath", "//select[@name='region_id']");
@@ -1942,6 +1942,7 @@ public class OspreyRegressionEMEA {
 			{
 			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
 			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+			
 			Thread.sleep(3000);
 			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
 					.getAttribute("value");
@@ -2767,7 +2768,7 @@ public class OspreyRegressionEMEA {
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			  if(Common.getCurrentURL().contains("stage3") )
+			  if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("na.osprey"))
               {
                   Common.scrollIntoView("xpath", "//select[@name='region_id']");
                   Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -2779,8 +2780,8 @@ public class OspreyRegressionEMEA {
 			  else
 			  {
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-//				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+//				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
