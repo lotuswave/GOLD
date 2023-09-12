@@ -99,6 +99,7 @@ public class OspreyRegressionEMEA {
 	public String Create_Account(String Dataset) {
 		// TODO Auto-generated method stub
 		String email = "";
+		String Store= data.get(Dataset).get("Store");
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -113,9 +114,10 @@ public class OspreyRegressionEMEA {
 			Sync.waitImplicit(30);
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			System.out.println(message);
+			System.out.println("Thank you for registering with Osprey "+Store+" Store.");
 			Common.assertionCheckwithReport(
-					message.contains("Thank you for registering with Osprey UK Store.")
-							&& Common.getPageTitle().contains("My Account") || message.contains("Thank you for registering with Osprey US Store.")
+					message.contains("Thank you for registering with Osprey "+Store+" Store.")
 							&& Common.getPageTitle().contains("My Account") ,
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
@@ -1860,7 +1862,8 @@ public class OspreyRegressionEMEA {
 				else
 				{
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+//				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				   Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
 						.getAttribute("value");
@@ -2776,8 +2779,8 @@ public class OspreyRegressionEMEA {
 			  else
 			  {
 				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-//				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+//				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -8984,6 +8987,24 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 		return update;
+	}
+
+	
+	public void Close_Geolocation() {
+		// TODO Auto-generated method stub
+		try {
+			
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[2]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[2]");
+			
+		
+	}catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	
+
 	}
 }
 

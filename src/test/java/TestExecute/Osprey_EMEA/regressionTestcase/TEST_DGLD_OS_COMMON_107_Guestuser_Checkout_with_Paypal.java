@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_107_Guestuser_Checkout_with_Paypal {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreySweden.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -37,14 +37,14 @@ public class TEST_DGLD_OS_COMMON_107_Guestuser_Checkout_with_Paypal {
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-
+		
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
-        
+        Osprey_ReEu.Close_Geolocation();
 
 	}
 

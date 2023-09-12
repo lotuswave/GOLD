@@ -12,7 +12,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_109_RegisterUser_checkout_Klarna_SavedPayment_Standard_Shipping {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreySweden.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -48,7 +48,7 @@ public class TEST_DGLD_OS_COMMON_109_RegisterUser_checkout_Klarna_SavedPayment_S
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
-        
+        Osprey_ReEu.Close_Geolocation();
 
 	}
 

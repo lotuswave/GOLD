@@ -37,7 +37,7 @@ public class Test_DGLD_OS_COMMON_074_Guest_user_Checkout_With_Discount_Amex_card
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
@@ -45,7 +45,7 @@ public class Test_DGLD_OS_COMMON_074_Guest_user_Checkout_With_Discount_Amex_card
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
-        
+        Osprey_ReEu.Close_Geolocation();
 
 	}
 

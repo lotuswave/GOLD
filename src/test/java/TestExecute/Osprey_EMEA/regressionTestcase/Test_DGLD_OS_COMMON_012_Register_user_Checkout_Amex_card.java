@@ -46,6 +46,8 @@ public class Test_DGLD_OS_COMMON_012_Register_user_Checkout_Amex_card {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
+        Osprey_ReEu.Close_Geolocation();
+
         
 
 	}
