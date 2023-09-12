@@ -1,6 +1,6 @@
 package TestExecute.Osprey_EMEA.regressionTestcase;
 
-
+ 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -12,7 +12,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_109_RegisterUser_checkout_Klarna_SavedPayment_Standard_Shipping {
 
-	String datafile = "Osprey_EMEA//GoldOspreySweden.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
