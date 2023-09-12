@@ -9006,5 +9006,101 @@ catch(Exception | Error e)
 	
 
 	}
+
+	public void Giropay_payment(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+		String order = "";
+		Sync.waitPageLoad();
+		Thread.sleep(3000);	
+		String expectedResult = "User should able to proceed the afterpay payment method";
+
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+					"User unable to land o n the paymentpage");
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+			System.out.println(payment);
+			if (payment > 0) {
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Common.clickElement("xpath", "//span[text()='New payment method']");
+
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Cadre de saisie sécurisé pour le paiement']");
+				Common.switchFrames("xpath", "//iframe[@title='Cadre de saisie sécurisé pour le paiement']");
+				Sync.waitElementPresent(30, "xpath", "//button[@id='giropay-tab']");
+				Common.javascriptclickElement("xpath", "//button[@id='giropay-tab']");
+//				
+				Common.switchToDefault();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Place Order']");
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+
+			} else {
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Cadre de saisie sécurisé pour le paiement']");
+				Common.switchFrames("xpath", "//iframe[@title='Cadre de saisie sécurisé pour le paiement']");
+//				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+//				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitElementPresent(30, "xpath", "//button[@value='giropay']");
+				Common.clickElement("xpath", "//button[@value='giropay']");
+//				
+				Common.switchToDefault();
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
+					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
+			Assert.fail();
+		}
+
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		if (!url.contains("stage") && !url.contains("preprod")) {
+		}
+
+		else {
+			try {
+				Thread.sleep(5000);
+				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+
+				int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unable to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+					order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+					System.out.println(order);
+				}
+				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+					System.out.println(order);
+				}
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+						"It should navigate to the order confirmation page",
+						"User failed to proceed to the order confirmation page",
+						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+				Assert.fail();
+			}
+		}
+	}
 }
 
