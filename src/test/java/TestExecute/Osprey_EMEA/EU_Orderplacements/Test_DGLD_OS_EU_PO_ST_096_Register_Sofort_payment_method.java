@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.regressionTestcase;
+package TestExecute.Osprey_EMEA.EU_Orderplacements;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,24 +9,25 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_074_Guest_user_Checkout_With_Discount_Amex_card {
+public class Test_DGLD_OS_EU_PO_ST_096_Register_Sofort_payment_method {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemeaEUFR.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_user_Checkout_With_Discount_Amex_card () throws Exception {
+	public void Verifying_Register_Sofort_payment_method () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.discountCode("Discount");
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
+        Osprey_ReEu.Sofort_payment("Sofort");
         
 		} catch (Exception e) {
 
@@ -45,6 +46,7 @@ public class Test_DGLD_OS_COMMON_074_Guest_user_Checkout_With_Discount_Amex_card
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
+        
 
 	}
 
