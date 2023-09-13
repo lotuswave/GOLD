@@ -9354,5 +9354,58 @@ catch(Exception | Error e)
 		}
 	}
 
+	public void PDP_video_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image product')]");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Thread.sleep(4000);
+			System.out.println(product);
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			String products = data.get(Dataset).get("Products").toUpperCase();
+			System.out.println(product);
+			Common.assertionCheckwithReport(name.contains(products),
+					"validating the product should navigate to the PDP page",
+					"When we click on the product is should navigate to the PDP page",
+					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//p[text()='SUSTAINABLE DESIGN']");
+			Common.switchFrames("xpath", "//iframe[@title='YouTube video player']");
+			Thread.sleep(4000);
+			
+			Sync.waitElementPresent(40, "xpath", "//button[@aria-label='Play']");
+			Common.clickElement("xpath", "//button[@aria-label='Play']");
+			Sync.waitForLoad();
+			String video = Common.findElement("xpath", "//button[contains(@class,'ytp-play-button')]")
+					.getAttribute("data-title-no-tooltip");
+			System.out.println(video);
+			Common.assertionCheckwithReport(video.equals("Pause"), "validating the video in PDP page",
+					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
+					"failed to play the video in PDP page");
+		}
+		
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the video in PDP page", "video should be play in the PDP page",
+					"Unable to play the the video on the PDP page",
+					Common.getscreenShot("failed to play the video in PDP page"));
+			Assert.fail();
+		}
+	}
+
 }
 
