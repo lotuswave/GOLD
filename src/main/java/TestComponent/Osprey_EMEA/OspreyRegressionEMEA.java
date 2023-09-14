@@ -2014,6 +2014,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		String expectedResult = "click the submit button to navigate to payment page";
 		try {
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -7756,7 +7757,7 @@ public class OspreyRegressionEMEA {
 		int Size =Common.findElements("xpath", "//span[text()='Review & Payments']").size();
 
 			try {
-				
+				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
 				Common.clickElement("xpath", "//label[@for='stripe_payments']");
 				Thread.sleep(3000);
@@ -7788,7 +7789,7 @@ public class OspreyRegressionEMEA {
 
 				Thread.sleep(3000);
 //				Common.textBoxInputClear("xpath", "//div[@class='billing-address-form']//input[@name='postcode']");
-				String id=Common.findElement("xpath", "(//div[@class='billing-address-form']//input[@name='postcode'])[2]").getAttribute("id");
+				String id=Common.findElement("xpath", "(//input[@name='postcode'])[2]").getAttribute("id");
 				System.out.println(id);
 				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@id='"+ id +"']", data.get(dataSet).get("postcode"));
 				Thread.sleep(5000);
