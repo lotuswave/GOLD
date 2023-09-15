@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_087_Add_Giftcard_checkout_with_Promo_code {
+public class Test_DGLD_OS_COMMON_087_Add_Giftcard_checkout_with_Promo_code_and_Configurable_Product {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
@@ -22,8 +22,12 @@ public class Test_DGLD_OS_COMMON_087_Add_Giftcard_checkout_with_Promo_code {
         Osprey_ReEu.search_product("X-mas Gift Card");
         Osprey_ReEu.Gift_cards("X-mas Gift Card");
         Osprey_ReEu.Card_Value("price");
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.DeliveryAddress_Guestuser_Gift("Account");
+        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         

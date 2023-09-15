@@ -2545,7 +2545,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("xpath",
 					"//a[contains(@class,'level-top')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + Dataset + "')]");
+			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
