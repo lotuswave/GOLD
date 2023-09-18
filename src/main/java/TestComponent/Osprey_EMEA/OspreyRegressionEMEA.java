@@ -8468,8 +8468,10 @@ public void Verify_OrderTotal() {
 				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
 //				
 				Common.switchToDefault();
+				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
 				Common.clickElement("xpath", "//button[@class='action primary checkout']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 
 			} else {
