@@ -9454,5 +9454,266 @@ catch(Exception | Error e)
 		}
 	}
 
+	public void prodeler_invalid_details(String dataSet) {
+		// TODO Auto-generated method stub
+		click_Prodeal();
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") ) {
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+					"To validate the user lands on Pro Deal Application after successfull login",
+					"After clicking on the signIn button it should navigate to the Pro Deal Application",
+					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Pro Deal Application page ");
+
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+			Sync.waitPageLoad();
+			Common.switchWindows();
+			Thread.sleep(3000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the pro deal application page",
+					"User should lands to the prodeal application ",
+					"Unable to navigates to the prodeal application form",
+					Common.getscreenShotPathforReport("Failed to navigate to the prodeal application form "));
+			Assert.fail();
+		}
+
+		String expectedResult = "After clicking hare button with invalid email error message should be display";
+		try {
+
+			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
+			String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+					"validating the error message with empty fields ",
+					"After clicking hare button with empty data error message should be display",
+					"successfully error message has been dispalyed ", "failed to display the error message");
+
+			Sync.waitElementPresent("id", "association_email");
+			Common.textBoxInput("id", "association_email", data.get(dataSet).get("FirstName"));
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+
+			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+			Common.clickElement("xpath", "//button[@title='Submit']");
+
+			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
+			String invalidemail = Common.findElement("xpath", "//input[@name='association_email']//following::div")
+					.getText();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(invalidemail.contains("Please enter a valid email address"),
+					"validating the error message with invalid email ",
+					"After clicking hare button with invalid email error message should be display",
+					"successfully error message has been dispalyed ", "failed to display the error message");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error message with invalid email ", expectedResult,
+					"Unable to see the error message has been dispalyed ",
+					Common.getscreenShot("failed to display the error message"));
+			Assert.fail();
+
+		}
+	}
+	
+	public void click_Prodeal() {
+		// TODO Auto-generated method stub
+		try {
+			Common.scrollIntoView("xpath", "//a[text()='Osprey Pro']");
+			Sync.waitElementPresent("xpath", "//a[text()='Osprey Pro']");
+			Common.clickElement("xpath", "//a[text()='Osprey Pro']");
+			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
+					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
+					"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
+					"Should display the Pro Deal Application ", "Unable to displays the Pro Deal Application",
+					Common.getscreenShot("Failed to  display the Pro Deal Application"));
+			Assert.fail();
+		}
+	}
+	
+	public void Prodeler_Application_Page(String dataSet) {
+		// TODO Auto-generated method stub
+		click_Prodeal();
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Sync.waitPageLoad();
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") ) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
+					"To validate the user lands on Pro Deal Application after successfull login",
+					"After clicking on the signIn button it should navigate to the Pro Deal Application",
+					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Pro Deal Application page ");
+
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+			Sync.waitPageLoad();
+			Common.switchWindows();
+			Thread.sleep(3000);
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the pro deal application page",
+					"User should lands to the prodeal application ",
+					"Unable to navigates to the prodeal application form",
+					Common.getscreenShotPathforReport("Failed to navigate to the prodeal application form "));
+			Assert.fail();
+		}
+
+		String expectedResult = "User is redirected to Pro Deal application page";
+		try {
+
+			Sync.waitElementPresent("id", "first_name");
+			int fistnamesize = Common.findElements("id", "first_name").size();
+			Common.assertionCheckwithReport(fistnamesize > 0,
+					"Successfully User is redirected to Pro Deal application page", expectedResult,
+					"User able to redirected to Pro Deal application page");
+			Thread.sleep(3000);
+			Common.textBoxInput("id", "first_name", data.get(dataSet).get("FirstName"));
+			Sync.waitElementPresent("id", "last_name");
+			Common.textBoxInput("id", "last_name", data.get(dataSet).get("LastName"));
+			Sync.waitElementPresent("id", "association");
+			Common.textBoxInput("id", "association", data.get(dataSet).get("Company"));
+			Sync.waitElementPresent("id", "association_email");
+			Common.textBoxInput("id", "association_email", data.get(dataSet).get("Email"));
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(6000);
+			String path = System.getProperty("user.dir")
+					+ ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\TestScreen.png");
+			Sync.waitElementPresent(40, "xpath", "//input[@id='supporting_document']");
+//				Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
+			Common.findElement("xpath", "//input[@id='supporting_document']").sendKeys(path);
+
+			Sync.waitElementPresent("id", "group_id");
+			Common.clickElement("xpath", "//select[@id='group_id']");
+			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("GropName"));
+
+			Sync.waitElementPresent("id", "comment");
+			Common.textBoxInput("id", "comment", data.get(dataSet).get("Comments"));
+
+			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
+			Common.clickElement("xpath", "//button[@title='Submit']");
+
+			Common.switchToDefault();
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@class='prodeal']//h4").getText();
+			Common.assertionCheckwithReport(message.contains("Thank you"),
+					"To validate the success message for the prodeal",
+					"After clicking on the submit button it should navigate to the Success page",
+					"user Sucessfully navigate to the Success page after clicking on the submit button",
+					"Failed to get the success message for the pro deal submission");
+
+		} catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("ProDeal application form filling",
+					"User field to fill the prodeal aplication ",
+					"user to get the success message for the pro deal submission",
+					Common.getscreenShotPathforReport("Failed to get the success message for the pro deal submission"));
+			Assert.fail();
+
+		}
+	}
+	public void access_for_prodeal(String Dataset) {
+		// TODO Auto-generated method stub
+		click_Prodeal();
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//input[@name='access_code']//parent::div");
+			Common.textBoxInput("xpath", "//input[@name='access_code']", data.get(Dataset).get("Access code"));
+			Common.clickElement("xpath", "//button[@title='Submit']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
+					.getText();
+
+			System.out.println(successmessage);
+			Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
+					"validating the Pro Deal success message ", "should display the success message",
+					"successfully display the success message", "failed to display the success message");
+		}
+
+		catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Pro Deal success message ",
+					"Should display the success message", "Unable to displays the success message",
+					Common.getscreenShot("Failed to  display the Pro Deal success message"));
+
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void Prodeal_information() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String prodealexpdate = Common
+					.findElement("xpath", "//strong[text()='Program expiration date:']//parent::p").getText();
+			System.out.println(prodealexpdate);
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='Pro Deal']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(50, "xpath", "//strong[text()='Program expiration date:']//parent::p");
+			String prodealdate = Common.findElement("xpath", "//strong[text()='Program expiration date:']//parent::p")
+					.getText();
+			System.out.println(prodealdate);
+			Common.assertionCheckwithReport(prodealexpdate.equals(prodealdate),
+					"validating the prodeal information for register user",
+					"After clicking on prodeal information should be displayed ",
+					"successfully prodeal information has been displayed",
+					"failed to display the prodeal information for the register user");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the prodeal information for register user",
+					"After clicking on prodeal information should be displayed ",
+					"Unable to display the  prodeal information for the register user",
+					Common.getscreenShot("failed to display the prodeal information for the register user"));
+			Assert.fail();
+		}
+
+	}
+
 }
 
