@@ -12,7 +12,7 @@ import TestLib.Login;
 public class TEST_DGLD_OS_COMMON_111_PRO_Customer_Checkout_with_Giftcard_single_Item_Using_CC {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_PRO_Customer_Checkout_with_Giftcard_single_Item_Using_CC () throws Exception {
