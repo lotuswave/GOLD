@@ -9715,5 +9715,133 @@ catch(Exception | Error e)
 
 	}
 
+	public String Store_Credit_balance() throws Exception {
+		// TODO Auto-generated method stub
+	String Price="";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "(//ul[@id='desktop-account-nav']//a)[1]");
+			String account=Common.findElement("xpath", "(//ul[@id='desktop-account-nav']//a)[1]").getAttribute("id");
+			Common.clickElement("xpath", "//a[@id='"+ account +"']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("account"),
+					"validating the page navigation to the my account",
+					"After clicking on My account it should navigate to the my account page",
+					"successfully Navigated to the My account page",
+					"Failed to Navigate to the My account page");
+			Sync.waitElementPresent("xpath", "//a[text()='Store Credit']");
+			Common.clickElement("xpath", "//a[text()='Store Credit']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("storecredit"),
+					"validating the page navigation to the storecredit",
+					"After clicking on storecredit it should navigate to the storecredit page",
+					"successfully Navigated to the storecredit page",
+					"Failed to Navigate to the storecredit page");
+		 Price=Common.getText("xpath", "(//div[@class='block-content']//span[@class='price'])[1]");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the page navigation to the storecredit",
+					"After clicking on storecredit it should navigate to the storecredit page",
+					"Unable Navigated to the storecredit page",
+					Common.getscreenShot("Failed to Navigate to the storecredit page"));
+			Assert.fail();
+		}
+		return Price;
+	}
+
+	public void Apply_Store_Credit(String Price) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Thread.sleep(3000);
+			String ordertotal = Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace("£", "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			System.out.println(ordertotalvalue);
+			Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+			Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace("£", "");
+			Float Pricevalue = Float.parseFloat(price);
+			if(Pricevalue<ordertotalvalue)
+			{
+				
+				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
+				if(balance.equals(Price))
+				{
+					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
+					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
+					String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'checkout-cart')]")
+							.getAttribute("id");
+					Thread.sleep(4000);
+					System.out.println(message);
+					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
+					System.out.println(storeorder);
+					System.out.println(Price);
+					Common.assertionCheckwithReport(message.contains("-message-success") || storeorder.equals(Price) ,"validating the store credit balance applied sucess message",
+							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
+							"failed to Display the success message");
+				}
+				else
+				{
+					Assert.fail();
+				}
+			}
+			else
+			{
+				Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-checkout__back')]");
+				Common.clickElement("xpath", "//span[contains(@class,'icon-checkout__back')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/") ,"validating the shopping cart page",
+						"After clciking on back to cart it should navigate to shopping cart page", "Sucessfully Navigated to the shopping cart page",
+						"failed to Navigate to the shopping cart page");
+				Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, "3");
+				Common.clickElement("xpath", "//button[@name='update_cart_action']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				System.out.println(ordertotalvalue);
+				System.out.println(Pricevalue);
+				if(Pricevalue>ordertotalvalue)
+				{
+					minicart_Checkout();
+				    selectshippingmethod("GroundShipping method");
+				    clickSubmitbutton_Shippingpage();
+				    Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+					Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+					String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
+					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
+					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
+					String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'checkout-cart')]")
+							.getAttribute("id");
+					System.out.println(message);
+					System.out.println(Price);
+					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
+					System.out.println(storeorder);
+					Common.assertionCheckwithReport(message.contains("success") || storeorder.equals(Price) ,"validating the store credit balance applied sucess message",
+							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
+							"failed to Display the success message");
+				    
+				}
+				
+				
+			}
+					
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+	
+
 }
 
