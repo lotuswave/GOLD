@@ -20,7 +20,7 @@ public class TEST_DGLD_OS_COMMON_112_PRO_Customer_Checkout_with_Gift_card_Multip
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.Login_Account("prouser");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.search_product("X-mas Gift Card");

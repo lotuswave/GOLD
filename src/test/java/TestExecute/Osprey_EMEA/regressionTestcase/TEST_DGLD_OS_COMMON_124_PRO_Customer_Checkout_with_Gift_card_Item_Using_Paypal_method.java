@@ -20,7 +20,7 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.Login_Account("prouser");
         Osprey_ReEu.Gift_cards("Birthday Gift Card");
         Osprey_ReEu.Card_Value("price"); 
         Osprey_ReEu.minicart_Checkout();

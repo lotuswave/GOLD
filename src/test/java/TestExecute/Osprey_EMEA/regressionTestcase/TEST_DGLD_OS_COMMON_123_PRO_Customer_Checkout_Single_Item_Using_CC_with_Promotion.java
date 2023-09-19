@@ -20,7 +20,7 @@ public class TEST_DGLD_OS_COMMON_123_PRO_Customer_Checkout_Single_Item_Using_CC_
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.Login_Account("prouser");
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
