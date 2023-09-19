@@ -4761,7 +4761,7 @@ public class OspreyRegressionEMEA {
 
 			// Common.refreshpage();
 			Thread.sleep(8000);
-			Sync.waitElementClickable("xpath", "//div[@class='paypal-button-label-container']");
+			Sync.waitElementPresent("xpath", "//div[@class='paypal-button-label-container']");
 			Common.clickElement("xpath", "//div[@class='paypal-button-label-container']");
 			Common.switchToDefault();
 			Thread.sleep(5000);
