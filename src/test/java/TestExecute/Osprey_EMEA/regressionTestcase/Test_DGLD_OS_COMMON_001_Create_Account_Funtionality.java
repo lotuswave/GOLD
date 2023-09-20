@@ -23,6 +23,7 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
         Osprey_ReEu.Create_Account("Create Account");
         Osprey_ReEu.click_Myorders();
         Osprey_ReEu.Edit_Name("Edit contactinfo");
+       
         
 		} catch (Exception e) {
 
@@ -41,7 +42,6 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
-        Osprey_ReEu.Close_Geolocation();
 
 	}
 

@@ -79,6 +79,8 @@ public class OspreyRegressionEMEA {
 		try {
 			Sync.waitPageLoad();
 			Close_Geolocation();
+			close_add();
+		     acceptPrivacy();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
@@ -98,6 +100,7 @@ public class OspreyRegressionEMEA {
 		}
 
 	}
+	
 
 	public String Create_Account(String Dataset) {
 		// TODO Auto-generated method stub
@@ -6038,6 +6041,34 @@ public class OspreyRegressionEMEA {
 			Assert.fail();
 		}
 	}
+	
+	public void close_add() throws Exception {
+        // TODO Auto-generated method stub
+        Thread.sleep(3000);
+        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
+        System.out.println(sizesframe);
+        if (sizesframe > 0) {
+            Common.actionsKeyPress(Keys.PAGE_UP);
+            Thread.sleep(4000);
+            Sync.waitElementPresent("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+            Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+        }
+        else {
+
+            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+            Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+            Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
+            Common.switchToDefault();
+            }
+
+ 
+
+    }
+
+	public void acceptPrivacy() {
+
+		Common.clickElement("id", "truste-consent-button");
+	}
 
 	public void Edit_Name(String Dataset) {
 		// TODO Auto-generated method stub
@@ -9813,6 +9844,7 @@ catch(Exception | Error e)
 					minicart_Checkout();
 				    selectshippingmethod("GroundShipping method");
 				    clickSubmitbutton_Shippingpage();
+				    Thread.sleep(4000);
 				    Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
 					Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
 					String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
@@ -9829,6 +9861,10 @@ catch(Exception | Error e)
 							"failed to Display the success message");
 				    
 				}
+				else
+				{
+					Assert.fail();
+				}
 				
 				
 			}
@@ -9837,9 +9873,70 @@ catch(Exception | Error e)
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the store credit balance applied sucess message",
+					"After adding the store credit success message should display", "Unable to Display the success message",
+					Common.getscreenShot("failed to Display the success message"));
 			Assert.fail();
 		}
 		
+	}
+
+	public void Partial_Payment(String Dataset) {
+		// TODO Auto-generated method stub
+		String symbol=data.get(Dataset).get("Symbol");
+		System.out.println(symbol);
+		try
+		{
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+			Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCard"));
+			Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary am')]");
+			Thread.sleep(4000);
+			String status=Common.getText("xpath", "//td[@class='col balance']//span").replace(symbol, "");
+			String giftorder=Common.getText("xpath", "//tr[@class='totals']//td[@class='amount']//span[@class='price']").replace(symbol, "").replace("-", "");
+			Common.assertionCheckwithReport(status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
+					"After adding the gift card code it should be applied in the order summary", "Sucessfully gift car code has been applied in order summary",
+					"failed to apply the gift card code in the order summary");
+			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace(symbol, "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			if(ordertotalvalue>0)
+			{
+				updatePaymentAndSubmitOrder("CCVisacard");
+			}
+			else
+			{
+				Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-checkout__back')]");
+				Common.clickElement("xpath", "//span[contains(@class,'icon-checkout__back')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/") ,"validating the shopping cart page",
+						"After clciking on back to cart it should navigate to shopping cart page", "Sucessfully Navigated to the shopping cart page",
+						"failed to Navigate to the shopping cart page");
+				Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, "3");
+				Common.clickElement("xpath", "//button[@name='update_cart_action']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				System.out.println(ordertotalvalue);
+				if(ordertotalvalue>0)
+				{
+					minicart_Checkout();
+				    selectshippingmethod("GroundShipping method");
+				    clickSubmitbutton_Shippingpage();
+				    Thread.sleep(4000);
+					Common.assertionCheckwithReport( status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
+							"After adding the gift card code it should be applied in the order summary", "Sucessfully gift car code has been applied in order summary",
+							"failed to apply the gift card code in the order summary");
+					updatePaymentAndSubmitOrder("CCVisacard");
+				    
+				}
+				
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
 	}
 	
 
