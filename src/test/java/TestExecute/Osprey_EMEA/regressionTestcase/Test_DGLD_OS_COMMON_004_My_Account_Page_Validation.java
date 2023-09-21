@@ -20,6 +20,7 @@ public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        
        // Osprey_ReEu.click_UGC();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
