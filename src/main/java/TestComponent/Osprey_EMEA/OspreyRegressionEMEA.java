@@ -78,6 +78,19 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
+			if(Common.getCurrentURL().contains("na.osprey"))
+			{
+				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				System.out.println(size);
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
+						"validating store logo on the homwpage",
+						"System directs the user to the Homepage and store logo should display",
+						"Sucessfully user navigates to the home page and logo has been displayed",
+						"Failed to navigate to the homepage and logo is not displayed");
+			}
+			else
+			{
 			Close_Geolocation();
 			close_add();
 		     acceptPrivacy();
@@ -89,6 +102,7 @@ public class OspreyRegressionEMEA {
 					"System directs the user to the Homepage and store logo should display",
 					"Sucessfully user navigates to the home page and logo has been displayed",
 					"Failed to navigate to the homepage and logo is not displayed");
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating store logo on the homwpage",
