@@ -9953,6 +9953,141 @@ catch(Exception | Error e)
 		}
 	}
 	
+	public String store_Credit(String Dataset) {
+		// TODO Auto-generated method stub
+		String balance= "";
+		String symbol=  data.get(Dataset).get("Symbol");
+
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/customer/account/"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "(//div[@class='content account-nav-content']//li[@class='nav item'])[7]");
+			Common.clickElement("xpath", "(//div[@class='content account-nav-content']//li[@class='nav item'])[7]");
+			Sync.waitPageLoad(30);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("storecredit/info/"),
+					"validating the Navigation to the store credit page",
+					"After Clicking on store credit CTA user should be navigate to the Store credit page",
+					"Sucessfully User Navigates to the store credit page after clicking on the store credit CTA",
+					"Failed to Navigate to the Store credit page after Clicking on Store credit CTA");
+			
+			 balance= Common.getText("xpath", "//div[@class='block block-balance']//span[@class='price']").replace(symbol, "");
+			 System.out.println(balance);
+			
+			
+			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			 System.out.println(size);
+			/*if (size > 0) {
+				String number = Common.findElement("xpath", "//td[@data-header-title='Balance']").getText();
+				System.out.println(number);
+				Thread.sleep(4000);
+			
+			
+				Common.assertionCheckwithReport(!number.equals("0"),
+						"validating the card details in the my orders page",
+						"After Clicking on My payments methods and payment method should be appear in payment methods",
+						"Sucessfully payment method is appeared in my payments methods",
+						"Failed to display the payment methods in the my payments methods");
+			} else {
+				Assert.fail();
+			}*/
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error message for delete card",
+					"After Clicking the delete button we need to get the error message",
+					"Unable to display the error message when we clcik on the delete message",
+					Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
+			Assert.fail();
+		}
+		
+		return balance;
+
+	}
+	
+public void select_Store_Credit_Payment(String dataSet) {
+	
+	String expectedResult = "land on the payment section";
+	//String symbol=  data.get(dataSet).get("Symbol");
+		
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//span[text()='Store Credit']");
+			// Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//div[@class='payment-option-title']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,"User unabel to land opaymentpage");
+			Common.clickElement("xpath", "//div[@class='payment-option-title']");
+			Thread.sleep(2000);
+		   String Balance =Common.findElement("xpath", "//strong[@id='customerbalance-available-amount']").getText();
+	       System.out.println(Balance);
+	       String total =Common.getText("xpath", "//strong[@id='customerbalance-available-amount']").replace("£", "");
+	       System.out.println(total);
+	       System.out.println(dataSet);
+	       Thread.sleep(2000);
+	       
+	        if(dataSet.equals(total)) {
+	    	   Thread.sleep(3000);
+	    	   Sync.waitElementPresent("xpath", "//button[@id='use-customer-balance']");
+	    	   Common.clickElement("xpath", "//button[@id='use-customer-balance']");
+	    	   Sync.waitPageLoad();
+	    	   Thread.sleep(3000);
+	    	   String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+	    		  System.out.println(successmsg);
+	    			
+	    			Common.assertionCheckwithReport(successmsg.contains("applied"),
+	    					"validating the success message after applying Store credit",
+	    					"Success message should be displayed after the applying Store credit",
+	    					"Sucessfully Store credit has been applyed","Failed to apply Store credit");
+	    			
+	    			
+	       }else
+	       {
+	    	   Assert.fail();
+	       }
+		
+	
+		
+		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace("£", "");
+		System.out.println(ordertotal);
+		if(ordertotal.equals(0.00)) {
+			
+			giftCardSubmitOrder();
+		}
+		else {
+			Assert.fail();
+		}
+		}
+   
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the gift card",
+					"Success message should be displayed after the applying of gift card",
+					"Sucessfully gift card has been applyed",
+					Common.getscreenShotPathforReport("Failed to apply the gift card"));
+			Assert.fail();
+		}
+}	
+	
 
 }
 
