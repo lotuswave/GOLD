@@ -21,7 +21,7 @@ public class Test_DGLD_OS_COMMON_003_Footer_Newsletter_Subcription {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Invalid_email_newsletter("Invalid details");
         Osprey_ReEu.Empty_Email();
-        Osprey_ReEu.stayIntouch();
+        Osprey_ReEu.stayIntouch("Create Account");
         
 		} catch (Exception e) {
 

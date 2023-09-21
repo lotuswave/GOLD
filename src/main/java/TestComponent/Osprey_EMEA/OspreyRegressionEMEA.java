@@ -124,7 +124,7 @@ public class OspreyRegressionEMEA {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
@@ -228,7 +228,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
 			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
 			System.out.println(forgotpassword);
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.clickElement("xpath", "//span[text()='Reset My Password']");
@@ -281,7 +281,7 @@ public class OspreyRegressionEMEA {
 
 	}
 
-	public void stayIntouch() {
+	public void stayIntouch(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(5000);
@@ -289,7 +289,7 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//form[@class='m-newsletter-signup__form']");
 			Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']",data.get(Dataset).get("UserName"));
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "//span[@class='icon-arrow a-icon_icon']");
 			Sync.waitPageLoad();
@@ -3486,10 +3486,10 @@ public class OspreyRegressionEMEA {
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("UserName"));
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("UserName"));
 
 		}
 		String expectedResult = "email field will have email address";
@@ -4980,7 +4980,7 @@ public class OspreyRegressionEMEA {
 					"Failed to navigate to the edit account page");
 			oldemail = Common.findElement("xpath", "//p[@class='text-email']").getText();
 			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInputAndVerify("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "//span[text()='Save Changes']");
 			Sync.waitPageLoad();
@@ -5019,7 +5019,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInputAndVerify("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			String newemail = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
@@ -5315,7 +5315,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
 			Common.clickElement("xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			System.out.println(email);
 			Common.clickElement("xpath", "//input[@name='password']");
