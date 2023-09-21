@@ -20,11 +20,11 @@ public class TEST_DGLD_OS_COMMON_110_PROCustomer_Checkout_with_Multiple_Items_us
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("prouser");
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.simple_addtocart("Simple product");  
+        Osprey_ReEu.Login_Account("prouser"); 
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product"); 
         Osprey_ReEu.search_product("X-mas Gift Card");
         Osprey_ReEu.Gift_cards("X-mas Gift Card");
         Osprey_ReEu.Card_Value("price");  
