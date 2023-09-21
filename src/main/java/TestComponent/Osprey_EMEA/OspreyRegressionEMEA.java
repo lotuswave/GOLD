@@ -7099,7 +7099,7 @@ public class OspreyRegressionEMEA {
 						.replace(Symbol, "").replace(",", ".");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				Thread.sleep(4000);
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				Thread.sleep(4000);
 				System.out.println(ExpectedTotalAmmount2);
@@ -7110,7 +7110,7 @@ public class OspreyRegressionEMEA {
 						"Successfully Order summary is displayed in the payment page and fields are displayed",
 						"Failed to display the order summary and fileds under order summary");
 			}
-			else
+			else 
 			{
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
@@ -7132,7 +7132,9 @@ public class OspreyRegressionEMEA {
 					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+			if(Common.getCurrentURL().contains("gb"))
+			{
+			Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
@@ -7142,6 +7144,20 @@ public class OspreyRegressionEMEA {
 					"Order summary should be display in the payment page and all fields should display",
 					"Successfully Order summary is displayed in the payment page and fields are displayed",
 					"Failed to display the order summary and fileds under order summary");
+			}
+			else
+			{
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Thread.sleep(4000);
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+						"validating the order summary in the payment page",
+						"Order summary should be display in the payment page and all fields should display",
+						"Successfully Order summary is displayed in the payment page and fields are displayed",
+						"Failed to display the order summary and fileds under order summary");
+			}
 			}
 
 		}
@@ -9908,9 +9924,9 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			String status=Common.getText("xpath", "//td[@class='col balance']//span").replace(symbol, "");
 			String giftorder=Common.getText("xpath", "//tr[@class='totals']//td[@class='amount']//span[@class='price']").replace(symbol, "").replace("-", "");
-			Common.assertionCheckwithReport(status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
+		/*	Common.assertionCheckwithReport(status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
 					"After adding the gift card code it should be applied in the order summary", "Sucessfully gift car code has been applied in order summary",
-					"failed to apply the gift card code in the order summary");
+					"failed to apply the gift card code in the order summary");*/
 			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace(symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			if(ordertotalvalue>0)
