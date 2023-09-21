@@ -8252,11 +8252,9 @@ public class OspreyRegressionEMEA {
 		String Symbl = data.get(dataSet).get("Symbol");
 		try {
 			String  GiftCard=data.get(dataSet).get("GiftCard");
-			String Total_Incl_Tax =Common.getText("xpath", "//td[contains(@data-th,'Order Total Incl. Tax')]").replace(Symbl,"");
-			String Total_Excld_Tax =Common.getText("xpath", "//td[contains(@data-th,'Order Total Incl. Tax')]").replace(Symbl,"");
+			String Total_Incl_Tax =Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace(Symbl,"");
 			
 			System.out.println("Total_Incl_Tax :"+Total_Incl_Tax);
-			System.out.println("Total_Excld_Tax :"+Total_Excld_Tax);
 			Common.assertionCheckwithReport(Total_Incl_Tax.equals("0.00"),
 					"validating the check money order in payment page",
 					"Check money order radio button should be selected",
