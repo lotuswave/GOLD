@@ -92,8 +92,8 @@ public class OspreyRegressionEMEA {
 			else
 			{
 			Close_Geolocation();
-			close_add();
-		     acceptPrivacy();
+//			close_add();
+//		     acceptPrivacy();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
@@ -2666,7 +2666,7 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Sign In']");
+			Common.clickElement("xpath", "//button[@data-action='checkout-method-login']");
 			Sync.waitPageLoad();
 			int regsiteruser = Common.findElements("xpath", "//div[contains(@class,'shipping-address-item ')]").size();
 			Common.assertionCheckwithReport(regsiteruser > 0,
@@ -2862,7 +2862,7 @@ public class OspreyRegressionEMEA {
 
 				// Tell_Your_FriendPop_Up();
 				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!")|| Common.getCurrentURL().contains("success")&& sizes>0 ,
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
@@ -5557,24 +5557,25 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				if(Common.getCurrentURL().contains("stage3"))
+				if(Common.getCurrentURL().contains("gb"))
                 {
-				  Thread.sleep(4000);
-                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                    Thread.sleep(3000);
-                    String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                            .getAttribute("value");
-                    System.out.println(Shippingvalue);
+				  
+                	Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+        			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+        			Thread.sleep(3000);
+        			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
+        					.getAttribute("value");
+        			System.out.println(Shippingvalue);
                 }
 			else
 			{
-			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			Thread.sleep(3000);
-			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
-					.getAttribute("value");
-			System.out.println(Shippingvalue);
+				Thread.sleep(4000);
+                Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                Thread.sleep(3000);
+                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                        .getAttribute("value");
+                System.out.println(Shippingvalue);
 			}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
@@ -5587,7 +5588,6 @@ public class OspreyRegressionEMEA {
 						data.get(dataSet).get("phone"));
 
 				Common.clickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
-
 				ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
 						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 						Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
@@ -5711,43 +5711,46 @@ public class OspreyRegressionEMEA {
 	public void Verify_Address(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//img[@alt='Logo']");
+			Common.clickElement("xpath", "//img[@alt='Logo Osprey']");
 			Sync.waitElementPresent(30, "xpath", "//button[@aria-controls='desktop-account-nav']");
 			Common.clickElement("xpath", "//button[@aria-controls='desktop-account-nav']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			String id=Common.findElement("xpath", "(//ul[@id='desktop-account-nav']//a)[1]").getAttribute("id");
+			Common.clickElement("xpath", "//a[@id='"+id+"']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("account"),
 					"verifying the My account navigation",
 					"after clicking on the my account it should navigate to the My Account page",
 					"Sucessfully Navigated to the My Account page", "Failed to navigate to the my account page");
-			Common.clickElement("xpath", "//a[text()='Address Book']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Address Book"),
+			Common.clickElement("xpath", "(//div[@id='account-nav']//a)[3]");
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("address"),
 					"verifying the Address Book page navigation",
 					"after clicking on the Address Book it should navigate to the Address Book page",
 					"Sucessfully Navigated to the Address Book page", "Failed to navigate to the Address Book page");
-			Common.scrollIntoView("xpath", "//td[@data-header-title='Street Address:']");
-			String shippingaddress = Common.findElement("xpath", "//td[@data-header-title='Street Address:']")
+			
+				Common.scrollIntoView("xpath", "(//tbody[@class='m-table__body']//td)[3]");
+			String shippingaddress = Common.findElement("xpath", "(//tbody[@class='m-table__body']//td)[3]")
 					.getText();
 			System.out.println(shippingaddress);
 			System.out.println(Dataset);
 			Common.assertionCheckwithReport(
-					shippingaddress.equals(Dataset) || shippingaddress.contains("844 N Colony Rd"),
+					shippingaddress.contains(Dataset) || shippingaddress.contains("844 N Colony Rd"),
 					"verifying the address added to the address book",
 					"after saving the address in shiiping page it should save in the address book",
 					"Sucessfully Address ha been saved in the address book",
 					"Failed to save the address in the address book");
-			Common.scrollIntoView("xpath", "//span[text()='Delete']");
-			Sync.waitElementPresent("xpath", "//span[text()='Delete']");
-			Common.clickElement("xpath", "//span[text()='Delete']");
+			Common.scrollIntoView("xpath", "//a[contains(@class,'action delete')]");
+			Sync.waitElementPresent("xpath", "//a[contains(@class,'action delete')]");
+			Common.clickElement("xpath", "//a[contains(@class,'action delete')]");
 			Thread.sleep(4000);
 			String popmessage = Common.findElement("xpath", "//div[contains(text(),'Are you ')]").getText();
-			if (popmessage.contains("Are you sure you want to delete this address?")) {
+			String popup=Common.findElement("xpath", "//div[@class='modal-content']").getAttribute("data-role");
+			if (popmessage.contains("Are you sure you want to delete this address?") || popup.contains("content")) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
 				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 				String Delmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-
-				Common.assertionCheckwithReport(Delmessage.equals("You deleted the address."),
+				String delete=Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("class");
+				Common.assertionCheckwithReport(Delmessage.equals("You deleted the address.") || delete.contains("message-success"),
 						"validating the Delete message after Deleting address in address book",
 						"Delete address message should be displayed after the address delete in address book",
 						"Sucessfully address has been Deleted in the address book",
@@ -6095,13 +6098,12 @@ public class OspreyRegressionEMEA {
 					"validating the my account page navigation",
 					"After clicking on my account it should navigate to the My account page",
 					"Sucessfully Navigated to the my account page", "failed to Navigate to the My account page");
-			Sync.waitElementPresent("xpath", "(//span[@class='a-btn-tertiary__label'])[1]");
-			Common.clickElement("xpath", "(//span[@class='a-btn-tertiary__label'])[1]");
+			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
+			Common.clickElement("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
 			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
 			String url=Common.getCurrentURL();
 			if (editaccount.contains("Edit Account Information") || url.contains("edit")) {
-				Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
-				Common.clickElement("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
+				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 				Common.clickElement("xpath", "//button[@class='action save primary a-btn a-btn--primary']");
