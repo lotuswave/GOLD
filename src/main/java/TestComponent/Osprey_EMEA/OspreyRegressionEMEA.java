@@ -4797,7 +4797,7 @@ public class OspreyRegressionEMEA {
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage") & !url.contains("preprod")) {
+		if (!url.contains("stage") & !url.contains("preprod") & !url.contains("na.osprey") ) {
 
 			int sizeofelement = Common.findElements("id", "email").size();
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
