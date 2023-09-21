@@ -12,6 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"My AccountPage");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -19,7 +20,7 @@ public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_UGC();
+       // Osprey_ReEu.click_UGC();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.Account_page_Validation("Account validation");
