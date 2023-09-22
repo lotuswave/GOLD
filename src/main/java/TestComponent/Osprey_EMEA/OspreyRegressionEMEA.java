@@ -10160,5 +10160,196 @@ public void select_Store_Credit_Payment(String dataSet) {
 }	
 	
 
+public void validate_GIFT_CARD_PLP() {
+	
+	
+	try
+	{
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
+		Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
+		Thread.sleep(5000);
+		String GIFTCARDtitle = Common.getText("xpath", "//h1[@id='page-title-heading']");
+	    System.out.println(GIFTCARDtitle);	
+		Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("gift cards"),
+				"To validate Gift card Navigation to the PLP",
+				"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+				"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
+	     Sync.waitElementPresent("xpath", "(//span[contains(text(),'Sort by')])[1]");
+	    String Sortingoptions = Common.getText("xpath", "(//span[contains(text(),'Sort by')])[1]");
+	    System.out.println(Sortingoptions);
+	    Common.assertionCheckwithReport(Sortingoptions.equalsIgnoreCase("Sort by:"),
+			"Verifying the sorting options are visible or not",
+			"Sort by options should visible",
+			"Sort by options are visibled", "Failed to visible the sort by options");
+	      
+	    Sync.waitElementPresent("xpath", "//div[@id='filter-by-title']");
+	    String FILTERSBY = Common.getText("xpath", "//div[@id='filter-by-title']");
+	    System.out.println(FILTERSBY);
+	    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by"),
+			"Verifying the filterby options are visible or not",
+			"filter by options should visible",
+			"filter by options are visibled", "Failed to visible the filter by options");
+	    Sync.waitElementPresent("xpath", "//span[contains(text(),'Categories')]");
+	    String Categorysection = Common.getText("xpath", "//span[contains(text(),'Categories')]");
+	    System.out.println(Categorysection);
+	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories:"),
+			"Verifying the filterby options are visible or not",
+			"filter by options should visible",
+			"filter by options are visibled", "Failed to visible the filter by options");
+	    Thread.sleep(3000);
+	    List<WebElement> allProducts = Common.findElements("xpath","//li[@class='ais-InfiniteHits-item']");
+        int visibleProductCount = 0;
+        for (WebElement product : allProducts) {
+            if (product.isDisplayed()) {
+                visibleProductCount++;
+            }
+            else {
+            	Assert.fail();
+            	
+            }
+        }
+        System.out.println("Number of visible products: " + visibleProductCount);
+	
+	}
+	
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate Gift card Navigation to the PLP",
+				"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+				"Sucessfully It has been navigated to the Gift card PLP ",
+				Common.getscreenShot("Failed to Navigate to the Gift card PLP"));
+		Assert.fail();
+		
+	
+	}
+}
+
+public void Card_Value_for_my_fav(String Dataset) {
+	// TODO Auto-generated method stub
+	String amount=data.get(Dataset).get("Card Amount");
+	try
+	{
+		Sync.waitPageLoad();
+		Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+		Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+		String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+		Common.assertionCheckwithReport(Price.contains(amount),
+				"validating gift card amount value in PDP",
+				"After clicking on the value amount should be appear in PDP",
+				"Successfully selected amount is matched for the gift card",
+				"Failed to appear amount for the gift card");
+		Common.clickElement("xpath", "(//img[@class='amcard-image'])[2]");
+		String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
+		String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
+		Common.assertionCheckwithReport(SmallCard.equals(MainCard),
+				"validating the selected gift card",
+				"After clicking on the card design gift card should be match",
+				"Successfully Gift card design has been matched",
+				"Failed to match the Gift card design");
+		Giftcard_details("Gift Details");
+	/*	product_quantity("Product Qunatity");
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+		Common.clickElement("xpath", "//span[text()='Add to Cart']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+				.getAttribute("data-ui-id");
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+				"Product should be add to cart", "Sucessfully product added to the cart ",
+				"failed to add product to the cart");*/
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		/*	ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));*/
+			Assert.fail();
+		}
+		
+	}
+
+public void Guest_Add_Wishlist_Create_account() throws Exception {
+	// TODO Auto-generated method stub
+	try {
+
+		Sync.waitElementPresent("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+		Common.javascriptclickElement("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+		int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
+		System.out.println(Size);
+		if (Size > 0) {
+
+			Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
+			Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
+
+		} else {
+			String Error = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			if (Error.contains("You must login")) {
+				
+				Common.mouseOverClick("xpath", "(//span[text()='Create an Account'])");
+				Create_Account_for_Guest_my_fav("Create Account");
+			} else {
+				System.out.println("no Error message displayed");
+
+			}
+		}
+		Thread.sleep(3000);
+		int WishlistMSG = Common.findElements("xpath", "(//div[@data-ui-id='message-success'])[2]").size();
+		System.out.println("Wishlist" + WishlistMSG);
+		Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
+				"My Wish List should be display", "Sucessfully navigated to My Wish List ",
+				"failed to navigate to My Wish List");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
+				"Products added to Compare list successfull", "failed to add product to wishlist",
+				Common.getscreenShotPathforReport("Wishlistfail"));
+		Assert.fail();
+	}
+}
+
+public String Create_Account_for_Guest_my_fav(String Dataset) {
+	// TODO Auto-generated method stub
+	String email = "";
+	try {
+
+		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+		Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+		Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+		email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//span[text()='Sign Up']");
+		Sync.waitImplicit(30);
+		Thread.sleep(4000);
+	    String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
+		String message2 = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]").getText();
+		Common.assertionCheckwithReport(message.contains("")
+						&& Common.getPageTitle().contains("wishlist")||message2.contains("New Year Gift Card has been added to your Favourites.")
+						&& Common.getPageTitle().contains("wishlist"),
+				"validating navigation to the account page after clicking on sign up button",
+				"User should navigate to the My account page after clicking on the Signup",
+				"Sucessfully user navigates to the My account page after clickng on thr signup button",
+				"Failed to navigate to the My account page after clicking on the signup button");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating navigation to the account page after clicking on sign up button",
+				"User should navigate to the My account page after clicking on the Signup",
+				"Unable to navigate to the My account page after clicking on the signup button",
+				"Failed to navigate to the My account page after clicking on the signup button");
+		Assert.fail();
+	}
+	return email;
+}
+
+
 }
 
