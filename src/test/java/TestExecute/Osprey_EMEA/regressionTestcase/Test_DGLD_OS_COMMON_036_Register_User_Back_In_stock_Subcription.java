@@ -21,7 +21,7 @@ public class Test_DGLD_OS_COMMON_036_Register_User_Back_In_stock_Subcription {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("Outofstock Prod");
+        Osprey_ReEu.search_product("Outofstock Prod");  
         String amount=Osprey_ReEu.reg_outofstock_subcription("Outofstock Prod");
         Osprey_ReEu.My_order_subcribtion("Outofstock Prod");
         Osprey_ReEu.remove_outofstock_subcribtion(amount);

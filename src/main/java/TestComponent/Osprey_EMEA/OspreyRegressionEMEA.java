@@ -4598,8 +4598,9 @@ public class OspreyRegressionEMEA {
 
 	public String reg_outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
-		String products = data.get(Dataset).get("Products");
+		String products = data.get(Dataset).get("oss Product");
 		String prod = data.get(Dataset).get("prod product");
+		String productcolor = data.get(Dataset).get("Color");
 		String price = "";
 
 		try {
@@ -4620,6 +4621,8 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(6000);
 			if (Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
+				Common.scrollIntoView("xpath", "//img[contains(@alt,'" + products + "')]");
+				Common.mouseOver("xpath", "//img[contains(@alt,'" + products + "')]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
 				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
@@ -4629,11 +4632,17 @@ public class OspreyRegressionEMEA {
 						.findElement("xpath",
 								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
 						.getAttribute("data-price-amount");
+				System.out.println(PLPprice);
+				System.out.println(productprice);
 				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 				Common.assertionCheckwithReport(productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//a[text()='Notify me when this product is in stock']");
 				Sync.waitPageLoad(40);
 				Thread.sleep(5000);
@@ -4647,6 +4656,10 @@ public class OspreyRegressionEMEA {
 						"after click on subcribe button message should be appear",
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
+				
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Thread.sleep(4000);
 				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath", "//a[text()='Notify me when this product is in stock']");
 				Sync.waitPageLoad();
@@ -4662,7 +4675,8 @@ public class OspreyRegressionEMEA {
 				price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 						.getAttribute("data-price-amount");
 			} else {
-				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
+				
+				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,\"" + prod + "\")]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
 				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
@@ -4765,6 +4779,7 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
 				Common.maximizeImplicitWait();
+				Thread.sleep(3000);
 				Common.alerts("Cancel");
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
