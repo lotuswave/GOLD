@@ -8513,7 +8513,7 @@ public void Verify_OrderTotal() {
 				}
 			}
 			else {
-			double Order_Total = Double.parseDouble(Ordertotal.replace("$", ""));
+			double Order_Total = Double.parseDouble(Ordertotal.replace("£", ""));
 			System.out.println(Order_Total);
 					
 			if (Order_Total <= 50.0) {
