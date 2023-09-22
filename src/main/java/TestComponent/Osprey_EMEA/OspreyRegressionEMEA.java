@@ -92,8 +92,8 @@ public class OspreyRegressionEMEA {
 			else
 			{
 			Close_Geolocation();
-			//close_add();
-		   //  acceptPrivacy();
+			close_add();
+		     acceptPrivacy();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
