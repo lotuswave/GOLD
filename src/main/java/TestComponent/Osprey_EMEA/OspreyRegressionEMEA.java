@@ -6609,7 +6609,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[text()='Remove " + products + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(5000);
-			String ordertotal = Common.getText("xpath", "//td[@data-th='Order Total']//span[@class='price']")
+			String ordertotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']")
 					.replace(Symbol, "");
 			Thread.sleep(4000);
 			Float ordervalue = Float.parseFloat(ordertotal);
@@ -7315,7 +7315,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[text()='Back to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/"),
 					"validating the navigates to the shopping cart page",
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
@@ -7400,7 +7400,7 @@ public class OspreyRegressionEMEA {
 				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
 				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
