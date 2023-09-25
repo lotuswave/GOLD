@@ -7369,6 +7369,8 @@ public class OspreyRegressionEMEA {
 			Assert.fail();
 		}
 		try {
+			if(Common.getCurrentURL().contains("stage3"))
+			{
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
@@ -7392,6 +7394,33 @@ public class OspreyRegressionEMEA {
 					"Order summary should be display in the payment page and all fields should display",
 					"Successfully Order summary is displayed in the payment page and fields are displayed",
 					"Failed to display the order summary and fileds under order summary");
+			}
+			else
+			{
+				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+						"");
+				Float subtotalvalue = Float.parseFloat(Subtotal);
+				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+						.replace(Symbol, "");
+				Float shippingvalue = Float.parseFloat(shipping);
+				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
+						.replace(Symbol, "");
+				Float Discountvalue = Float.parseFloat(Discount);
+				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				Float Taxvalue = Float.parseFloat(Tax);
+				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+						.replace(Symbol, "");
+				Float ordertotalvalue = Float.parseFloat(ordertotal);
+				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+						"validating the order summary in the payment page",
+						"Order summary should be display in the payment page and all fields should display",
+						"Successfully Order summary is displayed in the payment page and fields are displayed",
+						"Failed to display the order summary and fileds under order summary");
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();

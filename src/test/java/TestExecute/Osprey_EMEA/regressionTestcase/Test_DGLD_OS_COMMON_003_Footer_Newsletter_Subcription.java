@@ -11,8 +11,8 @@ import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_003_Footer_Newsletter_Subcription {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Newsletter");
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx"; 
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Newsletters");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_the_Create_account_Funtionality () throws Exception {
