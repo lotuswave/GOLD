@@ -9,13 +9,13 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OSP_EU_PO_ST_071_Register_User_Checkout_Gift_Card_With_Full_Payment {
+public class TEST_DGLD_OS_COMMON_125_Register_UsersCheckout_Gift_Card_With_Full_payment {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_user_Checkout_GiftCard_With_FullPayment () throws Exception {
+	public void Verifying_Register_user_Checkout_GiftCard_With_FullPayment () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
