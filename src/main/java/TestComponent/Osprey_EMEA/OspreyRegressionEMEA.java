@@ -1967,7 +1967,7 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("na.osprey"))
+				if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("na.osprey"))
                 {
 				  Thread.sleep(4000);
                     Common.scrollIntoView("xpath", "//select[@name='region_id']");
@@ -6609,7 +6609,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[text()='Remove " + products + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(5000);
-			String ordertotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']")
+			String ordertotal = Common.getText("xpath", "//td[@data-th='Order Total']//span[@class='price']")
 					.replace(Symbol, "");
 			Thread.sleep(4000);
 			Float ordervalue = Float.parseFloat(ordertotal);
@@ -7217,22 +7217,23 @@ public class OspreyRegressionEMEA {
 
 			List<WebElement> compareLinks = Common.findElements("xpath", "//*[text()='Add to Compare']");
 
+			System.out.println(compareLinks.size());
 			if (compareLinks.size() >= 2) {
 
-				compareLinks.get(2).click();
+				compareLinks.get(1).click();
 				Thread.sleep(3000);
-				compareLinks.get(6).click();
+				compareLinks.get(3).click();
 				Sync.waitElementPresent("xpath", "//a[text()='comparison list']");
 				Common.clickElement("xpath", "//a[text()='comparison list']");
 
-				Common.clickElement("xpath", "(//button[@id='product-addtocart-button'])[2]");
+				Common.clickElement("xpath", "(//a[contains(@class,'action tocart primary a-btn a-btn')])[1]");
+				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 				Sync.waitElementVisible("xpath", "//a[text()='shopping cart']");
 
 				String Shoppping = Common.findElement("xpath", "//a[text()='shopping cart']").getText();
 
 				System.out.println(Shoppping);
 				Assert.assertEquals(Shoppping, "shopping cart");
-
 			} else {
 				System.out.println("Insufficient number of products for comparison.");
 
@@ -7288,14 +7289,17 @@ public class OspreyRegressionEMEA {
 
 	public void AddtoCart_Wishlist() throws Exception {
 		// TODO Auto-generated method stub
+		
 		try {
-			String Wishlist = Common.findElement("xpath", "//h1[text()='My Wish Lists']").getText();
-			if (Wishlist.equals("My Wish Lists"))
-				Sync.waitElementPresent(30, "xpath", "//button[@id='product-addtocart-button']");
-			Common.mouseOverClick("xpath", "//button[@id='product-addtocart-button']");
+		String Wishlist = Common.findElement("xpath", "//h1[text()='My Favourites']").getText();		
+		Assert.assertEquals(Wishlist, "My Favourites");
+	   
+		    Sync.waitElementPresent(30, "xpath", "//button[@class='action tocart a-btn a-btn--secondary']");
+			Common.mouseOverClick("xpath", "//button[@class='action tocart a-btn a-btn--secondary']");
+		
 			minicart_Checkout();
-		}
 
+		}
 		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating Adding to cart from wishlist ",
@@ -7315,7 +7319,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[text()='Back to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
 					"validating the navigates to the shopping cart page",
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
@@ -7400,7 +7404,7 @@ public class OspreyRegressionEMEA {
 				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
+				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
 				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
