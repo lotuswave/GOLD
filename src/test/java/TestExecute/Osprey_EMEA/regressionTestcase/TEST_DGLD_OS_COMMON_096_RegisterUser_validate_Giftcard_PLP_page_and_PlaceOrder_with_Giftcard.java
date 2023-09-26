@@ -28,7 +28,6 @@ public class TEST_DGLD_OS_COMMON_096_RegisterUser_validate_Giftcard_PLP_page_and
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
        
@@ -44,7 +43,7 @@ public class TEST_DGLD_OS_COMMON_096_RegisterUser_validate_Giftcard_PLP_page_and
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
