@@ -9596,7 +9596,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") ) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("UserName"));
@@ -9633,6 +9633,7 @@ catch(Exception | Error e)
 
 			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
 			Common.clickElement("xpath", "//button[@title='Submit']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
 			String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
 			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
