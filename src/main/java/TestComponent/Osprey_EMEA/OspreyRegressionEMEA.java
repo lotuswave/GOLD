@@ -1,5 +1,5 @@
 package TestComponent.Osprey_EMEA;
- 
+   
 import static org.testng.Assert.fail;
 
 import java.io.IOException;
@@ -7202,6 +7202,7 @@ public class OspreyRegressionEMEA {
 		}
 
 		catch (Exception | Error e) {
+			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
 					"User failed to proceed with discountcode",
 					Common.getscreenShotPathforReport("discountcodefailed"));
@@ -8041,8 +8042,8 @@ public class OspreyRegressionEMEA {
 		{
 			Thread.sleep(3000);
 	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard"));
-		
+		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard3"));
+		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//span[text()='Add Code']");
 		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
