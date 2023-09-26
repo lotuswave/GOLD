@@ -89,6 +89,18 @@ public class OspreyRegressionEMEA {
 						"Sucessfully user navigates to the home page and logo has been displayed",
 						"Failed to navigate to the homepage and logo is not displayed");
 			}
+			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
+			{
+				close_add();
+				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				System.out.println(size);
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
+						"validating store logo on the homwpage",
+						"System directs the user to the Homepage and store logo should display",
+						"Sucessfully user navigates to the home page and logo has been displayed",
+						"Failed to navigate to the homepage and logo is not displayed");
+			}
 			else
 			{
 			Close_Geolocation();
