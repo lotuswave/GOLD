@@ -4920,6 +4920,7 @@ public class OspreyRegressionEMEA {
 		String order = "";
 
 		String expectedResult = "It should open venmo site window.";
+		
 		try {
 			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//input[@id='paypal_express']");

@@ -18,6 +18,7 @@ public class TEST_DGLD_OSP_US_PO_ST_064_Register_User_Checkout_With_Venmo_Paymen
 	public void Verifying_Guest_User_Checkout_with_Venmo_Payment () throws Exception {
 
 		try {
+			
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");

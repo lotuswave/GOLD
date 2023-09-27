@@ -24,7 +24,6 @@ public class TEST_DGLD_OSP_US_PO_ST_065_Guest_User_Checkout_With_Venmo_Payment {
         Osprey_ReEu.addDeliveryAddress_Guestuser("GroundShipping method");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-       
         Osprey_ReEu.venmo_Payment("PaypalDetails");
         
 		} catch (Exception e) {
