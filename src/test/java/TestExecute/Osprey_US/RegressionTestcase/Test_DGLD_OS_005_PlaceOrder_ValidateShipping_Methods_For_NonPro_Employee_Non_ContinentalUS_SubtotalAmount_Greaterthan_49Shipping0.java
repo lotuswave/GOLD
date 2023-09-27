@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_US_PO_ST_005_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Greaterthan_49Shipping0 {
+public class Test_DGLD_OS_005_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Greaterthan_49Shipping0 {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_PO_ST_005_PlaceOrder_ValidateShipping_Methods_For_N
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

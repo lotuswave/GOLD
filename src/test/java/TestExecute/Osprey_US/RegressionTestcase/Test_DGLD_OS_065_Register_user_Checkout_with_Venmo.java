@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OSP_US_PO_ST_064_Register_User_Checkout_With_Venmo_Payment {
+public class Test_DGLD_OS_065_Register_user_Checkout_with_Venmo {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");

@@ -9,25 +9,25 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_US_PO_ST_004_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Lessthan_OR_Equal_49StandardShipping5 {
+public class Test_DGLD_OS_003_PlaceOrder_Validate_ShippingMethods_for_Employee_only_customer_group_Cortez_Pickup {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping () throws Exception {
-   
+	public void Verifying_ShippingMethods_for_Employee_only_customer_group_Cortez_Pickup () throws Exception {
+
 		try {
-			 Osprey_ReEu.verifingHomePage();
-		        Osprey_ReEu.search_product("Product<50");
-		        Osprey_ReEu.simple_addtocart("Product<50");
-		        Osprey_ReEu.minicart_Checkout();
-		        Osprey_ReEu.addDeliveryAddress_Guestuser("Non_Continental");
-		        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-		        Osprey_ReEu.Verify_ShippingAmount_Lessthan_Or_Equal49();
-		        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-		        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-		        
+        Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Employee");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product"); 
+        Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
+        Osprey_ReEu.selectshippingmethod("Employee Cortez");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 

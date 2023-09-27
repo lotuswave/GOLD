@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_066_Register_user_Checkout_with_2Day_Shipping_method {
+public class TEST_DGLD_OS_066_Checkout_Register_UserCC_configurable_Simple_with_2_day_shipping {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
@@ -23,6 +23,8 @@ public class Test_DGLD_OS_066_Register_user_Checkout_with_2Day_Shipping_method {
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product"); 
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("Bestway method");
