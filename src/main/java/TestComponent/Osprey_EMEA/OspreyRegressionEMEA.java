@@ -1563,7 +1563,8 @@ public class OspreyRegressionEMEA {
 	public void My_Favorites() {
 		// TODO Auto-generated method stub
 		try {
-			if(Common.getCurrentURL().contains("stage3"))
+			Thread.sleep(2000);
+			if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
 			{
 				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
@@ -1576,14 +1577,14 @@ public class OspreyRegressionEMEA {
 			}
 			else
 			{
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Wish Lists']");
-			Common.clickElement("xpath", "//a[text()='My Wish Lists']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
-					"validating the Navigation to the My Favorites page",
-					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favourites']");
+				Common.clickElement("xpath", "//a[text()='My Favourites']");
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
+						"validating the Navigation to the My Favorites page",
+						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 			}
 
 		} catch (Exception | Error e) {
@@ -1979,25 +1980,25 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("na.osprey"))
+				if(Common.getCurrentURL().contains("gb"))
                 {
 				  Thread.sleep(4000);
-                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                    Thread.sleep(3000);
-                    String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                            .getAttribute("value");
-                    System.out.println(Shippingvalue);
+                    Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+        			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+        			
+        			Thread.sleep(3000);
+        			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
+        					.getAttribute("value");
+        			System.out.println(Shippingvalue);
                 }
 			else
 			{
-			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-			
-			Thread.sleep(3000);
-			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
-					.getAttribute("value");
-			System.out.println(Shippingvalue);
+				  Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                  Thread.sleep(3000);
+                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                          .getAttribute("value");
+                  System.out.println(Shippingvalue);
 			}
 				
 				Thread.sleep(2000);
