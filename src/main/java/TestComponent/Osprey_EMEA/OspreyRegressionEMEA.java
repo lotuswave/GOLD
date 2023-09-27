@@ -2040,7 +2040,7 @@ public class OspreyRegressionEMEA {
 			if (size > 0  ) {
 				// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 				// "')]");
-				Common.clickElement("xpath", "//td[text()='"+ method +"']");
+				Common.clickElement("xpath", "//strong[text()='"+ method +"']");
 			}
 			else
 			{
@@ -10397,6 +10397,55 @@ public String Create_Account_for_Guest_my_fav(String Dataset) {
 	}
 	return email;
 }
+
+public void Verify_ShippingAmount_Lessthan_Or_Equal49() {
+	// TODO Auto-generated method stub
+	try {
+	
+			String Shipping_Method = Common.getText("xpath", "//span[@class='shipping-method__radio']//span[text()='$5.00']");
+			System.out.println(Shipping_Method);
+			Common.assertionCheckwithReport(Shipping_Method.equals("$5.00"),
+					"validating Shipping amount is displayed $5",
+					"Shippping method ammount should display $5",
+					"Unable to display $5 in shipping page",
+					"Failed to  display $5 in shipping page ");
+			
+		
+	}
+ catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(
+			"validating Shipping amount is displayed $5",
+			"Shippping method ammount should display $5",
+			"Unable to display $5 in shipping page",
+			"Failed to  display $5 in shipping page ");
+	Assert.fail();
+}
+}
+
+public void Verify_ShippingAmount_Greater_than49() {
+	// TODO Auto-generated method stub
+	try {
+		
+		String Shipping_Method = Common.getText("xpath", "//span[@class='shipping-method__radio']//span[text()='$0.00']");
+		System.out.println(Shipping_Method);
+		Common.assertionCheckwithReport(Shipping_Method.equals("$0.00"),
+				"validating Shipping amount is displayed $0",
+				"Shippping method ammount should display $0",
+				"Unable to display $0 in shipping page",
+				"Failed to  display $0 in shipping page ");
+	}
+ catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog(
+			"validating Shipping amount is displayed $5",
+			"Shippping method ammount should display $5",
+			"Unable to display $5 in shipping page",
+			"Failed to  display $5 in shipping page ");
+	Assert.fail();
+}
+}
+
 
 
 }
