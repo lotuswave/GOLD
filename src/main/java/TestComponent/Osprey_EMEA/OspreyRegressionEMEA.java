@@ -2036,14 +2036,14 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(3000);
 			int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
 			System.out.println(size);
-			if (size > 0) {
+			if (size > 0  ) {
 				// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 				// "')]");
-				Common.clickElement("xpath", "(//strong[contains(text(),'" + method + "')])[1]");
-			} else {
-
+				Common.clickElement("xpath", "//td[text()='"+ method +"']");
+			}
+			else
+			{
 				Assert.fail();
-
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
