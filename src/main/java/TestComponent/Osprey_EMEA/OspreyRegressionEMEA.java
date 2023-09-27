@@ -1295,7 +1295,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
