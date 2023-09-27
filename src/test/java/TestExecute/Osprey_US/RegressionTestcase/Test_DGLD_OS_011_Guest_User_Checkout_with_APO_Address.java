@@ -22,7 +22,7 @@ public class Test_DGLD_OS_011_Guest_User_Checkout_with_APO_Address {
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("GroundShipping method");
+        Osprey_ReEu.addDeliveryAddress_Guestuser("APO Address");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
