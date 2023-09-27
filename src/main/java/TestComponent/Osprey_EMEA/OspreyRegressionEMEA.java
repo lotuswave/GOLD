@@ -9821,7 +9821,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") ) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("prepord") ) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -9911,7 +9911,10 @@ catch(Exception | Error e)
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
+			
 			Common.clickElement("xpath", "//input[@name='access_code']//parent::div");
+			if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("stage") )
+			{
 			Common.textBoxInput("xpath", "//input[@name='access_code']", data.get(Dataset).get("Access code"));
 			Common.clickElement("xpath", "//button[@title='Submit']");
 			Sync.waitPageLoad();
@@ -9923,6 +9926,25 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
 					"validating the Pro Deal success message ", "should display the success message",
 					"successfully display the success message", "failed to display the success message");
+			}
+			else if(Common.getCurrentURL().contains("prepord"))
+			{
+				Common.textBoxInput("xpath", "//input[@name='access_code']", data.get(Dataset).get("Access code1"));
+				Common.clickElement("xpath", "//button[@title='Submit']");
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
+						.getText();
+
+				System.out.println(successmessage);
+				Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
+						"validating the Pro Deal success message ", "should display the success message",
+						"successfully display the success message", "failed to display the success message");
+			}
+			else
+			{
+				Assert.fail();
+			}
 		}
 
 		catch (Exception | Error e) {
