@@ -2040,7 +2040,9 @@ public class OspreyRegressionEMEA {
 			if (size > 0  ) {
 				// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 				// "')]");
-				Common.clickElement("xpath", "//strong[text()='"+ method +"']");
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//td[text()='"+ method +"']");
+				Common.clickElement("xpath", "//td[text()='"+ method +"']");
 			}
 			else
 			{
