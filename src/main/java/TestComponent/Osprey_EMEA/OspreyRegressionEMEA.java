@@ -972,7 +972,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[contains(@class,'a-message__container-')]").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
