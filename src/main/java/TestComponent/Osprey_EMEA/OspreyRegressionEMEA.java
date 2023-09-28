@@ -8169,19 +8169,28 @@ public class OspreyRegressionEMEA {
 		
 		try
 		{
+			String URL = Common.getCurrentURL();
+			if(URL.contains("Stage")|| URL.contains("Stage3")|| URL.contains("na.osprey.com")){
 			Thread.sleep(3000);
 	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+	
+	
 		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard3"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//span[text()='Add Code']");
 		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
-	  System.out.println(successmsg);
+	    System.out.println(successmsg);
 		
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
 				"Success message should be displayed after the applying of gift card",
 				"Sucessfully gift card has been applyed","Failed to apply the gift card");
+			}
+			else
+			{
+				System.out.println("Gift code not Available in Pre-prod");
+			}
 		}
 		catch(Exception | Error e)
 		{
