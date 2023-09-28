@@ -10732,6 +10732,83 @@ public String symbols_method(String Dataset) {
 	 return symbol;
 }
 
+
+
+
+public void Verify_Prouser_Shipping_lessthan100() {
+	
+	try {
+
+		String shipping= Common.findElement("xpath", "//span[@class='shipping-method__radio']").getText();
+		System.out.println(shipping);
+		String method= Common.findElement("xpath", "//td[@id='label_method_amstrates16_amstrates-label_carrier_amstrates16_amstrates']").getText();
+		System.out.println(method);   	
+		String Price = Common.findElement("xpath", "//td[@data-th='Order Total']").getText().replace("$", "");
+		
+		double totalPrice = Double.parseDouble(Price);
+		System.out.println(totalPrice);
+		
+		if(shipping.contains("10")&&method.contains("Standard")&&totalPrice<=100) {
+			
+			clickSubmitbutton_Shippingpage();
+			
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"), "validating pro user shipping method",
+					"submit button should click after verifying the shipping method", "Sucessfully navigating to checkout page",
+					"failed to navigate to the page");
+		}
+		else {
+			
+			Assert.fail();
+		}
+	}
+      catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
+				"Check Price In PLp page",
+				"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
+		Assert.fail();
+	}
+}
+
+
+
+public void Validateshippingmethods_Reguleruser(String Dataset) {
+	// TODO Auto-generated method stub4
+
+	try {
+		Thread.sleep(3000);
+		int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
+		System.out.println(size);
+		if (size > 0) {
+			// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
+			// "')]");
+			String method1=Common.findElement("xpath", "//td[@id='label_method_amstrates1_amstrates-label_carrier_amstrates1_amstrates']").getText();
+			String shipping1= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[1]").getText();
+			String method2=Common.findElement("xpath", "//td[@id='label_method_amstrates4_amstrates-label_carrier_amstrates4_amstrates']").getText();
+			String shipping2= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[2]").getText();
+			
+			Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Standard")&&shipping2.equals("$50.00")&&method2.contains("Expedited"),
+					"validating the standard shipping method",
+					"Verifying Shipping methods in Shipping page",
+					"Successfully verifed Standard and Expedited shipping method",
+					"Failed to verifed Standard and Expedited shipping method");
+			
+			
+		} else {
+
+			Assert.fail();
+
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the standard shipping method",
+				"Verifying Shipping methods in Shipping page","Failed verifed Standard and Expedited shipping method",
+				Common.getscreenShotPathforReport("failed verify shipping methods"));
+
+		Assert.fail();
+	}
+
+}
 	
 }
 
