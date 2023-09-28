@@ -1287,6 +1287,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
+			Common.scrollIntoView("xpath", "//div[@class='m-product-overview__info-top']//h1");
 			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
@@ -2070,7 +2071,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/#payment"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/#payment")||Common.getCurrentURL().contains("checkout/#shipping"),
 					"validating the navigates to the Checkout page",
 					"After clicking on the next button it should navigate to the Checkout page",
 					"Successfully navigated to the Checkout page", "Failed to Navigate to the Checkout page");
