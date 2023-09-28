@@ -7285,7 +7285,7 @@ public class OspreyRegressionEMEA {
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
+			String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
@@ -9730,7 +9730,7 @@ catch(Exception | Error e)
 				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("UserName"));
 			} else {
-				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("Prod UserName"));
+				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("Prod Email"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
