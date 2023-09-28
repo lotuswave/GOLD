@@ -10067,6 +10067,7 @@ catch(Exception | Error e)
 
 	public void Apply_Store_Credit(String Price) {
 		// TODO Auto-generated method stub
+		  String symbol=symbols_method("Account");
 		try
 		{
 			Thread.sleep(3000);
@@ -10075,7 +10076,7 @@ catch(Exception | Error e)
 			System.out.println(ordertotalvalue);
 			Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
 			Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
-			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace("£", "");
+			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
 			Float Pricevalue = Float.parseFloat(price);
 			if(Pricevalue<ordertotalvalue)
 			{
@@ -10304,7 +10305,7 @@ catch(Exception | Error e)
 public void select_Store_Credit_Payment(String dataSet) {
 	
 	String expectedResult = "land on the payment section";
-	//String symbol=  data.get(dataSet).get("Symbol");
+	  String symbol=symbols_method("Account");
 		
 		try
 		{
@@ -10318,7 +10319,8 @@ public void select_Store_Credit_Payment(String dataSet) {
 			Thread.sleep(2000);
 		   String Balance =Common.findElement("xpath", "//strong[@id='customerbalance-available-amount']").getText();
 	       System.out.println(Balance);
-	       String total =Common.getText("xpath", "//strong[@id='customerbalance-available-amount']").replace("£", "");
+	     
+	       String total =Common.getText("xpath", "//strong[@id='customerbalance-available-amount']").replace(symbol, "");
 	       System.out.println(total);
 	       System.out.println(dataSet);
 	       Thread.sleep(2000);
@@ -10345,8 +10347,9 @@ public void select_Store_Credit_Payment(String dataSet) {
 		
 	
 		
-		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace("£", "");
+		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace(symbol, "");
 		System.out.println(ordertotal);
+		Thread.sleep(4000);
 		if(ordertotal.equals(0.00)) {
 			
 			giftCardSubmitOrder();
@@ -10721,6 +10724,14 @@ public String Express_Venmo_Payment(String dataSet) throws Exception {
 	}
 	return order;
 }
+
+public String symbols_method(String Dataset) {
+	// TODO Auto-generated method stub
+	String symbol="";
+	 symbol=  data.get(Dataset).get("Symbol");
+	 return symbol;
+}
+
 	
 }
 
