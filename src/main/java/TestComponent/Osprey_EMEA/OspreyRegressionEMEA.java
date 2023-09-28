@@ -8170,12 +8170,12 @@ public class OspreyRegressionEMEA {
 		try
 		{
 			String URL = Common.getCurrentURL();
-			if(URL.contains("Stage")|| URL.contains("Stage3")|| URL.contains("na.osprey.com")){
+			System.out.println(URL);
+			if(URL.contains("stage.osprey.com")|| URL.contains("Stage3")) {
 			Thread.sleep(3000);
-	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-	
-	
-		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard3"));
+			
+     	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//span[text()='Add Code']");
 		Thread.sleep(2000);
@@ -8189,7 +8189,18 @@ public class OspreyRegressionEMEA {
 			}
 			else
 			{
-				System.out.println("Gift code not Available in Pre-prod");
+				Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+				Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard_Prod"));
+				Common.actionsKeyPress(Keys.ARROW_UP);
+				Common.clickElement("xpath","//span[text()='Add Code']");
+				Thread.sleep(2000);
+				String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+			    System.out.println(successmsg);
+				
+				Common.assertionCheckwithReport(successmsg.contains("added"),
+						"validating the success message after applying gift card",
+						"Success message should be displayed after the applying of gift card",
+						"Sucessfully gift card has been applyed","Failed to apply the gift card");
 			}
 		}
 		catch(Exception | Error e)
@@ -8475,7 +8486,7 @@ public class OspreyRegressionEMEA {
 	}
 
 	public void FUll_Payment(String dataSet) {
-		
+	 	
 		String Symbl = data.get(dataSet).get("Symbol");
 		try {
 			String  GiftCard=data.get(dataSet).get("GiftCard");
