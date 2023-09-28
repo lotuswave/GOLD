@@ -80,6 +80,8 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 			if(Common.getCurrentURL().contains("na.osprey"))
 			{
+				Close_Geolocation();
+			     acceptPrivacy();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
