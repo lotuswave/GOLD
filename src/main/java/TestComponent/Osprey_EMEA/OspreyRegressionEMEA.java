@@ -6034,6 +6034,7 @@ public class OspreyRegressionEMEA {
 		System.out.println(products);
 		String email = data.get(Dataset).get("Notifyme");
 		String prod = data.get(Dataset).get("prod product");
+		String productcolor = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -6060,16 +6061,22 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(3000);
 				String PLPprice = Common
 						.findElement("xpath",
-								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
+								"//div[@class='price-box price-final_price']//span[@class='price-wrapper']")
 						.getAttribute("data-price-amount");
 				System.out.println(PLPprice);
+				
 				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 				System.out.println(name);
+				String products1 = data.get(Dataset).get("Products").toUpperCase();
+				System.out.println(products1);
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(products) && productprice.equals(PLPprice)
+						name.contains(products1) && productprice.equals(PLPprice)
 								|| Common.getPageTitle().contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
@@ -6084,6 +6091,8 @@ public class OspreyRegressionEMEA {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				Common.clickElement("xpath",
 						"//div[@class='sticky-atc__cta-container']//span[text()=' Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
