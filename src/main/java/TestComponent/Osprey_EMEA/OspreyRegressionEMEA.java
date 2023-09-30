@@ -11108,6 +11108,120 @@ public void Footer_Links(String Dataset) {
 	}
 
 }
+
+public void warrenty_Replacement() {
+	// TODO Auto-generated method stub
+	try
+	{
+		if(Common.getCurrentURL().contains("stage") )
+		{
+			String stage="https://mcloud-na-stage.osprey.com/gb/customer-support/return-authorization";
+			Common.oppenURL(stage);
+			Sync.waitPageLoad();
+			
+		}
+		else if(Common.getCurrentURL().contains("na.osprey") )
+		{
+			String prod="https://mcloud-na.osprey.com/gb/customer-support/return-authorization";
+			Common.oppenURL(prod);
+		}
+		else if(Common.getCurrentURL().contains("stage3"))
+		{
+			String stage3="https://mcloud-na-stage3.osprey.com/customer-support/return-authorization/";
+			Common.oppenURL(stage3);
+		}
+		else if(Common.getCurrentURL().contains("preprod"))
+		{
+			String preprod="https://mcloud-na-preprod.osprey.com/customer-support/return-authorization/";
+			Common.oppenURL(preprod);
+		}
+		else
+		{
+			Assert.fail();
+		}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	
+}
+
+public void Empty_Details_warrenty_return(String Dataset) {
+	// TODO Auto-generated method stub
+	String phonenumber=data.get(Dataset).get("Phone");
+	String zipcode=data.get(Dataset).get("Zipcode");
+	try
+	{
+		Sync.waitElementPresent(30,"xpath", "//button[contains(@class,'action submit')]");
+		Common.scrollIntoView("xpath", "//button[contains(@class,'action submit')]");
+		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
+		String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
+		Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+				"validating the error message with empty fields ",
+				"After clicking hare button with empty data error message should be display",
+				"successfully error message has been dispalyed ", "failed to display the error message");
+		Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+		Common.scrollIntoView("xpath", "//button[contains(@class,'action submit')]");
+		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
+		Thread.sleep(4000);
+		String mobileerror=Common.findElement("xpath", "//div[@id='telephone-error']").getText();
+		String ziperror=Common.findElement("xpath", "//div[@id='zip-error']").getText();
+		Common.assertionCheckwithReport(mobileerror.contains("Please enter a phone number with at least 8 digits.") && ziperror.contains("Provided Zip/Postal Code seems to be invalid"),
+				"validating the error message with Invalid fields ",
+				"After clicking hare button with invalid data error message should be display",
+				"successfully error message has been dispalyed ", "failed to display the error message");
+		
+		
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message with empty fields ",
+				"After clicking hare button with empty data error message should be display",
+				"Unable to display the error message ",
+				Common.getscreenShot("Failed to display the error message"));
+		Assert.fail();
+	}
+}
+
+public void warrenty_return() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Common.scrollIntoView("xpath", "//ul[@class='m-footer-links__list']//a[text()='All Mighty Guarantee']");
+		Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[text()='All Mighty Guarantee']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee"),
+				"validating the page navigates to the mighty guarantee",
+				"After clicking on mighty guarantee from footer it should navigate to the mighty guarantee page",
+				"successfully navigated to the mighty guarantee page", "failed to Navigate to the mighty guarantee page");
+		Common.scrollIntoView("xpath", "//a[@class='a-btn a-btn--secondary']");
+		Common.clickElement("xpath", "//a[@class='a-btn a-btn--secondary']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("return-authorization"),
+				"validating the page navigates to the Return authorization form",
+				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
+				"successfully navigated to the Return authorization form", "failed to Navigate to the Return authorization form");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the page navigates to the Return authorization form",
+				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
+				"Unable to Navigate to the Return authorization form",
+				Common.getscreenShot("Failed to Navigate to the Return authorization form"));
+		Assert.fail();
+	}
+	
+}
 		
 }
 
