@@ -10068,7 +10068,16 @@ catch(Exception | Error e)
 			}
 			else
 			{
-				Assert.fail();
+				Common.textBoxInput("xpath", "//input[@name='access_code']", data.get(Dataset).get("Access code prod"));
+				Common.clickElement("xpath", "//button[@title='Submit']");
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div").getText();
+
+				System.out.println(successmessage);
+				Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
+						"validating the Pro Deal success message ", "should display the success message",
+						"successfully display the success message", "failed to display the success message");
 			}
 		}
 
@@ -11424,6 +11433,183 @@ public void warrenty_Return_Form(String Dataset) {
 		Assert.fail();
 	}
 }
+
+
+public void click_Product_Registration() throws Exception {
+	String expectedResult = "It should land successfully on the Product Registration";
+	
+	Common.actionsKeyPress(Keys.END);
+	try {
+		Thread.sleep(4000);
+//		Sync.waitElementPresent("xpath", "//a[text()='Product Registration']");
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Product')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Product')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+	
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("registration"),"Validating the Product Registration page navigation" ,
+				expectedResult, "successfully land to Product Registration page", "unable to load the Product Registration page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating Product Registration  page", expectedResult,
+				"unable to load the Product Registration page", Common.getscreenShotPathforReport("Product Registration page link"));
+		Assert.fail();
+
+	}
+}
+
+public void product_Registration(String dataSet) {
+	
+	String expectedResult = " Product registration form is visible in tab with success message";
+	String country=data.get(dataSet).get("Country");
+	String state = data.get(dataSet).get("Region");
+	String purchased = data.get(dataSet).get("PurchasedAt");
+	String SKUitemNumber = data.get(dataSet).get("SKUitemNumber");
+	String feedback = ("Good Product");
+	try {
+		Common.refreshpage();
+		Sync.waitPageLoad();
+		/*Common.clickElement("xpath", "//span[text()='Register Your Product']");
+
+		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'registration')]");
+		Common.switchFrames("xpath", "//iframe[contains(@src,'registration')]");*/
+		String heading=Common.findElement("xpath", "//h1[@class='form-title']").getText();
+		System.out.println(heading);
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='First Name']");
+		Common.textBoxInput("xpath", "//input[@data-label='First Name']", data.get(dataSet).get("FirstName"));
+
+		Sync.waitElementPresent("xpath", "//input[@data-label='Last Name']");
+		Common.textBoxInput("xpath", "//input[@data-label='Last Name']", data.get(dataSet).get("LastName"));
+		
+		Sync.waitElementPresent("xpath", "//input[@id='conversationDateofbirthforforms']");
+		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']",data.get(dataSet).get("DOB"));	
+		
+		//Sync.waitElementPresent("xpath", "//div[@id='conversationGender']");
+		Common.clickElement("xpath", "//div[@id='conversationGender']");
+		Common.clickElement("xpath", "//div[@data-path='female']");
+	       
+		//Common.dropdown("xpath", "//div[@id='conversationGender']",Common.SelectBy.TEXT, data.get(dataSet).get("Gender"));
+		
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Email']");
+	       
+			Common.textBoxInput("xpath", "//input[@data-label='Email']", data.get(dataSet).get("Email"));
+			
+			//Sync.waitElementPresent("xpath", "//div[@id='conversationCountryCodeFor']");
+			Common.clickElement("xpath", "//div[@id='conversationCountryCodeFor']");
+			Common.clickElement("xpath", "//div[@data-path='GB']");
+		       
+			//Common.dropdown("xpath", "//div[@id='conversationCountryCodeFor']",SelectBy.TEXT, data.get(dataSet).get("Country"));
+
+		
+		Sync.waitElementPresent("xpath", "//input[@id='conversationPhoneForForms']");
+		Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+		
+		Sync.waitElementPresent("xpath", "//input[contains(@id,'Wheredidyoupurchased')]");
+		Common.clickElement("xpath", "//input[contains(@id,'Wheredidyoupurchased')]");
+		
+		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date"));
+		
+		Sync.waitElementPresent("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
+		Common.clickElement("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
+		Common.clickElement("xpath", "//div[@data-path='travel']");
+		//Common.dropdown("xpath", "//div[contains(@id,'Activitiestousetheproduct')]",SelectBy.TEXT, data.get(dataSet).get("UseofProduct"));
+
+		/*Sync.waitElementPresent("xpath", "//input[contains(@data-label,'Street')]");
+		Common.textBoxInput("xpath", "//input[contains(@data-label,'Street')]", data.get(dataSet).get("Street"));
+
+		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'City')]");
+		Common.textBoxInput("xpath", "//input[contains(@data-label,'City')]", data.get(dataSet).get("City"));
+		
+		Common.clickElement("xpath", "//button[text()='Submit']");
+
+		Sync.waitElementPresent("xpath", "//div[@id='conversationStateProvince']");
+		Common.clickElement("xpath", "//div[@id='conversationStateProvince']");
+
+		Sync.waitElementPresent("xpath", "//div[text()='"+state+"']");
+		Common.clickElement("xpath", "//div[text()='"+state+"']");
+		
+		Sync.waitElementPresent("xpath", "//input[contains(@data-label,'Zip Code ')]");
+		Common.textBoxInput("xpath", "//input[contains(@data-label,'Zip Code ')]", data.get(dataSet).get("postcode"));
+
+//		Common.textBoxInput("xpath", "//input[contains(@data-label,'Item Number')]", data.get(dataSet).get("SKUitemNumber"));
+		
+		Common.clickElement("xpath", "//div[@id='conversationProductItemDescription']");
+//		Common.dropdown("xpath", "//div[@id='conversationProductItemDescription']", Common.SelectBy.VALUE, SKUitemNumber);
+		Common.clickElement("xpath", "//div[contains(@Value,'"+SKUitemNumber+"')]");
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Serial Number']", data.get(dataSet).get("SerialNumber"));
+
+		Common.textBoxInput("xpath", "//input[@data-label='Manufacture Date ']", data.get(dataSet).get("ManufactureDate"));
+
+		
+		
+		Sync.waitElementPresent("xpath", "//div[text()='"+purchased+"']");
+		Common.clickElement("xpath", "//div[text()='"+purchased+"']");
+		
+		
+		Common.textBoxInput("xpath", "//input[@data-label='Price']", data.get(dataSet).get("Price"));
+
+//		Sync.waitElementPresent("xpath", "//textarea[@data-label='City Purchased']");
+//		Common.textBoxInput("xpath", "//textarea[@data-label='City Purchased']",data.get(dataSet).get("City"));
+//		
+//		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+//		Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+			
+		
+//		Sync.waitElementPresent("xpath", "//div[text()='"+country+"']");
+//		Common.clickElement("xpath", "//div[text()='"+country+"']");
+		
+		Common.textBoxInput("xpath", "//textarea[@name='messagePreview']", feedback);*/
+		
+		Sync.waitElementPresent("xpath", "//input[@data-label='Comment Title']");
+		Common.textBoxInput("xpath", "//input[@data-label='Comment Title']",data.get(dataSet).get("Comment"));
+		
+		Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
+		//Common.textBoxInput("xpath", "//input[@id='messagePreview-characterLimit']",data.get(dataSet).get("Detailed"));
+		Common.clickAndtextBoxInput("xpath", "//textarea[@id='messagePreview']",data.get(dataSet).get("Detailed"));
+
+		Sync.waitElementPresent("xpath","//input[@value='keep-up-to-date-with-osprey-products-and-promotions.-']");
+		Common.clickElement("xpath","//input[@value='keep-up-to-date-with-osprey-products-and-promotions.-']");
+		
+		Sync.waitElementPresent("xpath","//input[@name='snOrgTermsAndConditions']");
+		Common.clickElement("xpath","//input[@name='snOrgTermsAndConditions']");
+		
+		
+		Common.scrollIntoView("xpath", "//span[text()='Submit']");
+		Common.clickElement("xpath", "//span[text()='Submit']");
+		
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
+		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+		int registrationsuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+		Common.assertionCheckwithReport(registrationsuccessmessage > 0, "verifying Product registration Success message ",
+				"Success message should be Displayed", "Product registration  Success message displayed ",
+				"failed to dispaly success message");
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying Product registration  form",
+				"Product registration form data enter without any error message", "Product registration  page getting error ",
+				Common.getscreenShotPathforReport("Product registration  page"));
+		Assert.fail();
+
+	}
+
+	Common.actionsKeyPress(Keys.PAGE_UP);
+	Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
+	String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+	expectedResult = "User gets confirmation under the same tab. It includes Success message.";
+	Common.assertionCheckwithReport(Text.contains("Your product has been successfully registered"),
+			"verifying Product registration confirmation message", expectedResult,
+			"User gets confirmation for Product registration ", "unable to load the confirmation form");
+	
+
+}
+
 
 		
 }
