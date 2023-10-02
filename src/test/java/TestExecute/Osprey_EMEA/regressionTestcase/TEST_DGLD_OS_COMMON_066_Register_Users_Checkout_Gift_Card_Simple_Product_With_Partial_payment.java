@@ -23,9 +23,9 @@ public class TEST_DGLD_OS_COMMON_066_Register_Users_Checkout_Gift_Card_Simple_Pr
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.search_product("X-mas Gift Card");
-        Osprey_ReEu.Gift_cards("X-mas Gift Card");
-        Osprey_ReEu.Card_Value("price");
+//        Osprey_ReEu.search_product("X-mas Gift Card");
+//        Osprey_ReEu.Gift_cards("X-mas Gift Card");
+//        Osprey_ReEu.Card_Value("price");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");

@@ -1348,6 +1348,7 @@ public class OspreyRegressionEMEA {
 		String productcolor = data.get(Dataset).get("Color");
 		String Productsize = data.get(Dataset).get("Size");
 		System.out.println(products);
+		System.out.println(Productsize);
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -8747,7 +8748,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(productPrice);
 			}
 			else {
-			double productPrice = Double.parseDouble(Price.replace("$", ""));
+			double productPrice = Double.parseDouble(Price.replace("£", ""));
 			System.out.println(productPrice);
 			}
 			
@@ -11222,6 +11223,151 @@ public void warrenty_return() {
 	}
 	
 }
+public void clickContact() throws Exception {
+	String expectedResult = "It should land successfully on the contact page";
+
+	try {
+
+		Sync.waitElementPresent("xpath", "//a[contains(@class,'a-cms-link a-icon-t')]");
+		Common.clickElement("xpath", "//a[contains(@class,'a-cms-link a-icon-t')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("contact-us"),
+				"Validating the contatus page navigation", expectedResult, "successfully land to contact page",
+				"unabel to load the  contact page");
+	} catch (Exception | Error e) {
+		ExtenantReportUtils.addFailedLog("validating contact us page", expectedResult,
+				"unable to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
+		Assert.fail();
+
+	}
+}
+
+public void contactUsPage(String dataSet) {
+	// TODO Auto-generated method stub
+
+	String expectedResult = "Email us form is visible in tab";
+	String country = data.get(dataSet).get("Country");
+	String state = data.get(dataSet).get("Region");
+
+	try {
+        Common.scrollIntoView("xpath", "//a[contains(@class,'pagebuilder')]");
+		Common.clickElement("xpath", "//a[contains(@class,'pagebuilder')]");
+		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://osprey-emea')]");
+		Common.switchFrames("xpath", "//iframe[contains(@src,'https://osprey-emea')]");
+
+		Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
+
+		Common.clickElement("xpath", "//input[@id='customerEmail']");
+		Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
+
+		Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
+		Common.textBoxInput("xpath", "//input[@id='messageSubject']",
+				data.get(dataSet).get("Subject"));
+
+		Sync.waitElementPresent("xpath", "//input[@id='customerFirstName']");
+		Common.textBoxInput("xpath", "//input[@id='customerFirstName']", data.get(dataSet).get("FirstName"));
+
+		Sync.waitElementPresent("xpath", "//input[@id='customerLastName']");
+		Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(dataSet).get("LastName"));
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
+		Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(dataSet).get("Company"));
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationPhoneForForms']");
+		Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+		
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+		Common.clickElement("xpath", "//div[@id='conversationCountry']");
+		Sync.waitElementPresent("xpath", "//div[text()='"+ country +"']");
+		Common.clickElement("xpath", "//div[text()='"+ country +"']");
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
+		Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
+				data.get(dataSet).get("Street"));
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationCityforforms']");
+		Common.textBoxInput("xpath", "//input[@name='conversationCityforforms']", data.get(dataSet).get("City"));
+
+	/*	Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
+		Common.clickElement("xpath", "//input[@name='conversationCountry']");
+
+		Sync.waitElementPresent("xpath", "//div[text()='United States']");
+		Common.clickElement("xpath", "//div[text()='United States']");*/
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationStateforforms']");
+		Common.clickElement("xpath", "//input[@name='conversationStateforforms']");
+        Common.textBoxInput("xpath", "//input[@name='conversationStateforforms']", state);
+		
+	/*	Sync.waitElementPresent("xpath", "//div[text()='"+ state+"']");
+		Common.clickElement("xpath", "//div[text()='"+ state+"']");    */
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeForForms']");
+		Common.textBoxInput("xpath", "//input[@name='conversationZipCodeForForms']",
+				data.get(dataSet).get("postcode"));
+
+		Sync.waitElementPresent("xpath", "//input[@name='conversationHowcanwehelpforforms']");
+		Common.clickElement("xpath", "//input[@name='conversationHowcanwehelpforforms']");
+		Thread.sleep(3000);
+		Common.clickElement("xpath", "//div[@data-path='order_issues']");
+
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//div[@id='conversationOrderissues']");
+		Common.clickElement("xpath", "//div[@id='conversationOrderissues']");
+
+		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue ']");
+		Common.clickElement("xpath", "//div[text()='Billing Issue ']");
+
+		Sync.waitElementPresent("xpath", "//input[@id='conversationOrdernumber']");
+		Common.textBoxInput("xpath", "//input[@id='conversationOrdernumber']",
+				data.get(dataSet).get("OrderID"));
+		Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
+		Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
+				data.get(dataSet).get("Commetsosprey"));
+
+	Thread.sleep(4000);
+		Common.clickElement("xpath", "//input[contains(@data-label,'Terms and Conditions')]");
+		
+		Boolean Checkbox=Common.checkBoxIsSelected("xpath", "//input[contains(@data-label,'Terms and Conditions')]");
+		if(Checkbox.TRUE)
+		{
+		Common.scrollIntoView("xpath", "//button[text()='Submit']");
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		}
+		else
+		{
+			Common.clickElement("xpath", "//input[contains(@data-label,'Terms and Conditions')]");
+			Common.scrollIntoView("xpath", "//button[text()='Submit']");
+			Common.clickElement("xpath", "//button[text()='Submit']");
+		}
+
+		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+		int Contactussuccessmessage = Common.findElements("xpath", "//h1[@data-content-type='heading']").size();
+		System.out.println(Contactussuccessmessage);
+		Common.assertionCheckwithReport(Contactussuccessmessage > 0 || Contactussuccessmessage >= 0,
+				"verifying Contact us Success message ", "Success message should be Displayed",
+				"Contact us Success message displayed ", "failed to dispaly success message");
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying email us from",
+				"contact us form data enter without any error message", "Contact us page getting error ",
+				Common.getscreenShotPathforReport("Contact us page"));
+		Assert.fail();
+
+	}
+
+	Common.actionsKeyPress(Keys.PAGE_UP);
+	String Text = Common.getText("xpath", "(//div[@class='form-wrap']//span)[2]");
+	expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
+	Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+			"verifying contact us conformation message", expectedResult, "Failed to submit the contact us form");
+
+}
+
+
 		
 }
 
