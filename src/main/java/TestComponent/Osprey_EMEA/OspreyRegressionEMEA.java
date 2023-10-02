@@ -11367,6 +11367,63 @@ public void contactUsPage(String dataSet) {
 
 }
 
+public void warrenty_Return_Form(String Dataset) {
+	// TODO Auto-generated method stub
+	String phonenumber=data.get(Dataset).get("Phone");
+	String zipcode=data.get(Dataset).get("postcode");
+	String Address =data.get(Dataset).get("Street");
+	String City =data.get(Dataset).get("City");
+	String State =data.get(Dataset).get("Region");
+	String Packname =data.get(Dataset).get("PackageName");
+	String Color =data.get(Dataset).get("Color");
+	String Description =data.get(Dataset).get("description");
+	try
+	{
+		Sync.waitElementPresent(30,"xpath", "//input[@id='telephone']");
+		Common.scrollIntoView("xpath", "//input[@id='telephone']");
+		Common.textBoxInput("xpath", "//input[@id='telephone']", phonenumber);
+		Common.textBoxInput("xpath", "//input[@id='address']", Address);
+		
+		
+		Common.textBoxInput("xpath", "//input[@id='city']", City);
+		Common.textBoxInput("xpath", "//input[@id='region_value']", State);
+		Common.textBoxInput("xpath", "//input[@id='zip']", zipcode);
+		
+		Common.textBoxInput("xpath", "//input[@id='packName']", Packname);
+		Common.textBoxInput("xpath", "//input[@id='colorSize']", Color);
+		Common.textBoxInput("xpath", "//textarea[@id='description']", Description);
+		
+		
+		
+		Thread.sleep(4000);
+		
+		String path = System.getProperty("user.dir")
+				+ ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\warranty.PNG");
+		Sync.waitElementPresent(40, "xpath", "//input[@id='photoUpload']");
+		Common.findElement("xpath", "//input[@id='photoUpload']").sendKeys(path);
+
+		Common.clickElement("xpath", "//input[@id='gdpr_confirm']");
+		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
+		
+		String Successmsg =Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+	System.out.println(Successmsg);
+		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Repair Form. Please be sure to add customer.service@osprey.com to your contact,"),
+				"validating the waranty and return Success message",
+				"After clicking Submit button waranty and return Success message should be display",
+				"successfully  message has been dispalyed ", "failed to display the Successfull message");
+		
+		
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the waranty and return Success message ",
+				"After clicking Submit button waranty and return Success message should be display",
+				"Unable to display the Success message ",
+				Common.getscreenShot("Failed to display the Successful message"));
+		Assert.fail();
+	}
+}
 
 		
 }
