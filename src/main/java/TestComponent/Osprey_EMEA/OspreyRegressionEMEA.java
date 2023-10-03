@@ -8206,7 +8206,7 @@ public class OspreyRegressionEMEA {
 					"After clicking on the value amount should be appear in PDP",
 					"Successfully selected amount is matched for the gift card",
 					"Failed to appear amount for the gift card");
-			Common.clickElement("xpath", "(//img[@class='amcard-image'])[2]");
+			Common.clickElement("xpath", "(//img[@class='amcard-image'])[1]");
 			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
 			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
 			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
@@ -10562,7 +10562,7 @@ public void Card_Value_for_my_fav(String Dataset) {
 				"After clicking on the value amount should be appear in PDP",
 				"Successfully selected amount is matched for the gift card",
 				"Failed to appear amount for the gift card");
-		Common.clickElement("xpath", "(//img[@class='amcard-image'])[2]");
+		Common.clickElement("xpath", "(//img[@class='amcard-image'])[1]");
 		String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
 		String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
 		Common.assertionCheckwithReport(SmallCard.equals(MainCard),
@@ -10643,7 +10643,7 @@ public String Create_Account_for_Guest_my_fav(String Dataset) {
 
 		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 		Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-		Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+		Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
 		email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
@@ -10653,9 +10653,9 @@ public String Create_Account_for_Guest_my_fav(String Dataset) {
 		Thread.sleep(4000);
 	    String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
 		String message2 = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]").getText();
-		Common.assertionCheckwithReport(message.contains("")
-						&& Common.getPageTitle().contains("wishlist")||message2.contains("New Year Gift Card has been added to your Favourites.")
-						&& Common.getPageTitle().contains("wishlist"),
+		Common.assertionCheckwithReport(message.contains("Thank you for registering")
+						&& Common.getCurrentURL().contains("wishlist")||message2.contains("New Year Gift Card has been added to your Favourites.")
+						&& Common.getCurrentURL().contains("wishlist"),
 				"validating navigation to the account page after clicking on sign up button",
 				"User should navigate to the My account page after clicking on the Signup",
 				"Sucessfully user navigates to the My account page after clickng on thr signup button",
@@ -11608,6 +11608,56 @@ public void product_Registration(String dataSet) {
 			"User gets confirmation for Product registration ", "unable to load the confirmation form");
 	
 
+}
+
+public void Giftcard_Add_from_My_fav(String Dataset) {
+	// TODO Auto-generated method stub
+	String amount=data.get(Dataset).get("Card Amount");
+	try
+	{
+		Sync.waitElementPresent("xpath", "//img[contains(@class,'lazy m-product-card')]");
+		Common.mouseOver("xpath", "//img[contains(@class,'lazy m-product-card')]");
+		String Product=Common.findElement("xpath", "//strong[contains(@class,'product-item')]//a[@data-location='my favorites']").getText();
+		System.out.println(Product);
+		Sync.waitElementPresent("xpath", "//button[contains(@class,'action tocart a-btn a-btn--s')]");
+		Common.clickElement("xpath", "//button[contains(@class,'action tocart a-btn a-btn--s')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String Pdp=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+		System.out.println(Pdp);
+		Common.assertionCheckwithReport(Product.contains(Pdp),
+				"verifying Product navigation to the PDP", "After clicking add to cart in the myfav it should navigate to the PDP",
+				"Product navigated to the PDP page", "Failed to Navigate tot the PDP");
+		Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+		Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+		String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+		Common.assertionCheckwithReport(Price.contains(amount),
+				"validating gift card amount value in PDP",
+				"After clicking on the value amount should be appear in PDP",
+				"Successfully selected amount is matched for the gift card",
+				"Failed to appear amount for the gift card");
+		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+		Common.clickElement("xpath", "//span[text()='Add to Cart']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+				.getAttribute("data-ui-id");
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+				"Product should be add to cart", "Sucessfully product added to the cart ",
+				"failed to add product to the cart");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating gift card amount value in PDP",
+				"After clicking on the value amount should be appear in PDP",
+				"Failed to selected amount is matched for the gift card",
+				Common.getscreenShotPathforReport("Failed to appear amount for the gift card"));
+		Assert.fail();
+	}
 }
 
 
