@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_116_Product_Registration {
+public class TEST_DGLD_OS_CT_ST_COMMON_126_Product_Registration_form {
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx"; 
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Forms");
 
