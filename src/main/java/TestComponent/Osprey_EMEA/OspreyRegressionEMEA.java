@@ -10902,7 +10902,205 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 	}
 
 }
+public void Warranty_Parts_Replacement_Valid_Data(String Dataset) throws Exception{
+	
+	String gText=data.get(Dataset).get("warranty");
+	try {
+		Thread.sleep(4000);
+		Common.actionsKeyPress(Keys.END);
+		Common.scrollIntoView("xpath","(//a[text()='"+gText+"'])[1]");
+		Thread.sleep(2000);
+		Common.clickElement("xpath","(//a[text()='"+gText+"'])[1]");
+		Sync.waitPageLoad();
+	Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee/repairs-fabric-claims"),
+			"validating the REPAIRS & FABRIC CLAIMS page",
+			"Verifying REPAIRS & FABRIC CLAIMS page",
+			"Successfully verifed REPAIRS & FABRIC CLAIMS page",
+			"Failed to verifed REPAIRS & FABRIC CLAIMS page");
+		
+} catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the REPAIRS & FABRIC CLAIMS page",
+			"Verifying REPAIRS & FABRIC CLAIMS page","Failed verifed REPAIRS & FABRIC CLAIMS page",
+			Common.getscreenShotPathforReport("REPAIRS & FABRIC CLAIMS page"));
+
+	Assert.fail();
+}
+	
+
+try {
+	Thread.sleep(4000);
+	String url=Common.getCurrentURL();
+	if(url.contains("na-stage")) {
+	Common.scrollIntoView("xpath","//a[@class='pagebuilder-button-primary']");
+	Thread.sleep(2000);
+	Common.clickElement("xpath","//a[@class='pagebuilder-button-primary']");
+	Sync.waitPageLoad();
+Common.assertionCheckwithReport(Common.getCurrentURL().contains("customer-support/return-authorization"),
+		"validating the REPAIRS & FABRIC CLAIMS page",
+		"Verifying REPAIRS & FABRIC CLAIMS page",
+		"Successfully verifed REPAIRS & FABRIC CLAIMS page",
+		"Failed to verifed REPAIRS & FABRIC CLAIMS page");
+	}else {
+		Thread.sleep(2000);
+	}
+Sync.waitPageLoad();
+Thread.sleep(2000);
+Common.scrollIntoView("xpath","//input[@title='Phone Number']");
+Thread.sleep(2000);
+Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(Dataset).get("phone"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "address", data.get(Dataset).get("Street"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "city", data.get(Dataset).get("City"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "region_value", data.get(Dataset).get("Region"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "zip", data.get(Dataset).get("postcode"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "packName", data.get(Dataset).get("FirstName"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "colorSize", data.get(Dataset).get("colorSize"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "prNumber", data.get(Dataset).get("prNumber"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "description", data.get(Dataset).get("description"));
+Thread.sleep(2000);
+Common.scrollIntoView("id","photoUpload");
+String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\TestScreen.png");
+Sync.waitElementPresent(20, "id", "photoUpload");
+Common.findElement("id", "photoUpload").sendKeys(path);
+Thread.sleep(2000);
+Common.scrollIntoView("id","gdpr_confirm");
+Thread.sleep(2000);
+Common.clickCheckBox("id","gdpr_confirm");
+Thread.sleep(2000);
+Common.clickElement("xpath","//button[@class='action submit primary a-btn a-btn--primary']");
+Sync.waitPageLoad();
+String sucessMessage = Common.getText("xpath", "//div[@class='a-message__container-inner']");
+System.out.println(sucessMessage);
+int size = Common.findElements("xpath", "//div[@class='a-message__container-inner']").size();
+Common.assertionCheckwithReport(sucessMessage.contains("Thanks for submitting your Repair Form.")|| size>0,
+		"validating the Warranty form for parts replacement page",
+		"Verifying Warranty form for parts replacement page",
+		"Successfully verifed Warranty form for parts replacement page",
+		"Failed to verifed Warranty form for parts replacement page");
+} catch (Exception | Error e) {
+e.printStackTrace();
+ExtenantReportUtils.addFailedLog("validating the Warranty form for parts replacement page",
+		"Verifying Warranty form for parts replacement page","Failed Warranty form for parts replacement page",
+		Common.getscreenShotPathforReport("Warranty form for parts replacement page"));
+
+Assert.fail();
+}
 	
 }
 
+public void Warranty_Parts_Replacement_Empty_InValid_Data(String Dataset) throws Exception{
+	// TODO Auto-generated method stub
+
+	String warrantyText=data.get(Dataset).get("warranty");
+	try {
+		Thread.sleep(4000);
+		Common.actionsKeyPress(Keys.END);
+		Common.scrollIntoView("xpath","(//a[text()='"+warrantyText+"'])[1]");
+		Thread.sleep(2000);
+		Common.clickElement("xpath","(//a[text()='"+warrantyText+"'])[1]");
+		Sync.waitPageLoad();
+	Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee/repairs-fabric-claims"),
+			"validating the REPAIRS & FABRIC CLAIMS page",
+			"Verifying REPAIRS & FABRIC CLAIMS page",
+			"Successfully verifed REPAIRS & FABRIC CLAIMS page",
+			"Failed to verifed REPAIRS & FABRIC CLAIMS page");
+		
+} catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the REPAIRS & FABRIC CLAIMS page",
+			"Verifying REPAIRS & FABRIC CLAIMS page","Failed verifed REPAIRS & FABRIC CLAIMS page",
+			Common.getscreenShotPathforReport("REPAIRS & FABRIC CLAIMS page"));
+
+	Assert.fail();
+}
+	
+
+try {
+	Thread.sleep(4000);
+	String url=Common.getCurrentURL();
+	if(url.contains("na-stage")) {
+	Common.scrollIntoView("xpath","//a[@class='pagebuilder-button-primary']");
+	Thread.sleep(2000);
+	Common.clickElement("xpath","//a[@class='pagebuilder-button-primary']");
+	Sync.waitPageLoad();
+Common.assertionCheckwithReport(Common.getCurrentURL().contains("customer-support/return-authorization"),
+		"validating the REPAIRS & FABRIC CLAIMS page",
+		"Verifying REPAIRS & FABRIC CLAIMS page",
+		"Successfully verifed REPAIRS & FABRIC CLAIMS page",
+		"Failed to verifed REPAIRS & FABRIC CLAIMS page");
+	}else {
+		Thread.sleep(2000);
+	}
+Sync.waitPageLoad();
+Common.scrollIntoView("xpath","//button[@class='action submit primary a-btn a-btn--primary']");
+Thread.sleep(2000);
+Common.clickElement("xpath","//button[@class='action submit primary a-btn a-btn--primary']");
+Sync.waitPageLoad();
+String errorMesage=Common.getText("id","gdpr_confirm-error");
+int size = Common.findElements("id","gdpr_confirm-error").size();
+Common.assertionCheckwithReport(errorMesage.contains("This is a required field.")||size>0,
+		"validating the empty warranty form clicking",
+		"Verifying empty warranty form ",
+		"Successfully verifed empty warranty form ",
+		"Failed to verifed empty warranty form ");
+
+Sync.waitPageLoad();
+Thread.sleep(2000);
+Common.scrollIntoView("xpath","//input[@title='Phone Number']");
+Thread.sleep(2000);
+Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(Dataset).get("Invalidphone"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "address", data.get(Dataset).get("Street"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "city", data.get(Dataset).get("City"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "region_value", data.get(Dataset).get("Region"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "zip", data.get(Dataset).get("postcode"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "packName", data.get(Dataset).get("FirstName"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "colorSize", data.get(Dataset).get("colorSize"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "prNumber", data.get(Dataset).get("prNumber"));
+Thread.sleep(2000);
+Common.textBoxInput("id", "description", data.get(Dataset).get("description"));
+Thread.sleep(2000);
+Common.scrollIntoView("id","photoUpload");
+String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\TestScreen.png");
+Sync.waitElementPresent(20, "id", "photoUpload");
+Common.findElement("id", "photoUpload").sendKeys(path);
+Thread.sleep(2000);
+Common.scrollIntoView("id","gdpr_confirm");
+Thread.sleep(2000);
+Common.clickCheckBox("id","gdpr_confirm");
+Thread.sleep(2000);
+Common.clickElement("xpath","//button[@class='action submit primary a-btn a-btn--primary']");
+Sync.waitPageLoad();
+String errorMessage = Common.getText("id", "telephone-error");
+System.out.println(errorMessage);
+int sizes = Common.findElements("id", "telephone-error").size();
+Common.assertionCheckwithReport(errorMessage.contains("Please enter a valid phone number that starts with + or a digit and contains only digits thereafter.")|| sizes>0,
+		"validating the Warranty form invalid data",
+		"Verifying Warranty form invalid data ",
+		"Successfully verifed Warranty form invalid data",
+		"Failed to verifed Warranty form invalid data");
+} catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the invalid data",
+			"Verifying invalid data","Failed verifed invalid data",
+			Common.getscreenShotPathforReport("invalid data"));
+
+	Assert.fail();
+}
+
+}}
 
