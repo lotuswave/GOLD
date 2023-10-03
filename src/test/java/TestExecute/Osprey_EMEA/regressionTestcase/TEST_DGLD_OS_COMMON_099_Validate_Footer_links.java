@@ -22,7 +22,7 @@ public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
         Osprey_ReEu.Kustomer_Links("Kustomer");
         Osprey_ReEu.Footer_validation("Breadcrumbs");
         Osprey_ReEu.Footer_Links("Footer");
-        
+        Osprey_ReEu.newtab_footerlinks("Footer");
         
 		} catch (Exception e) {
 

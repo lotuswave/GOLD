@@ -11767,6 +11767,60 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 
 	return Number;
 }
+
+public void newtab_footerlinks(String Dataset) {
+	// TODO Auto-generated method stub
+	String AssetBank=data.get(Dataset).get("Asset Bank");
+	System.out.println(AssetBank);
+	String Parts=data.get(Dataset).get("Spare Parts");
+	System.out.println(Parts);
+	try
+	{
+		Sync.waitElementPresent(30, "xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+		Thread.sleep(3000);
+		Common.findElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+		Common.clickElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String errormessage=Common.findElement("xpath", "//div[contains(@class,'message-error')]").getAttribute("data-ui-id");
+		Login_Account(Dataset);
+		Common.assertionCheckwithReport(
+				Common.getCurrentURL().contains("parts-request/"),
+				"validating the links navigation from footer Links",
+				"After Clicking on" + Parts + "it should navigate to the",
+				Parts + "Sucessfully Navigated to the" + Parts + "Links",
+				"Unable to Navigated to the" + Parts + "Links");
+		Sync.waitElementPresent(30, "xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank+"')]");
+		Thread.sleep(3000);
+		Common.findElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank +"')]");
+		Common.clickElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),'" + AssetBank + "')]");
+		Thread.sleep(2000);
+		Common.switchToSecondTab();
+		Common.assertionCheckwithReport(
+				Common.getPageTitle().contains("Osprey Europe Asset Bank"),
+				"validating the links navigation from footer Links",
+				"After Clicking on" + AssetBank + "it should navigate to the",
+				AssetBank + "Sucessfully Navigated to the" + AssetBank + "Links",
+				"Unable to Navigated to the" + AssetBank + "Links");
+		Common.closeCurrentWindow();
+		Thread.sleep(4000);
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	
+}
+
 		
 }
 
