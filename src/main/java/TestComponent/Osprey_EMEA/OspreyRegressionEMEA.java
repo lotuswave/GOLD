@@ -10621,7 +10621,7 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 			}
 		}
 		Thread.sleep(3000);
-		int WishlistMSG = Common.findElements("xpath", "(//div[@data-ui-id='message-success'])[2]").size();
+		int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
 		System.out.println("Wishlist" + WishlistMSG);
 		Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
 				"My Wish List should be display", "Sucessfully navigated to My Wish List ",
@@ -11617,14 +11617,15 @@ public void Giftcard_Add_from_My_fav(String Dataset) {
 	{
 		Sync.waitElementPresent("xpath", "//img[contains(@class,'lazy m-product-card')]");
 		Common.mouseOver("xpath", "//img[contains(@class,'lazy m-product-card')]");
-		String Product=Common.findElement("xpath", "//strong[contains(@class,'product-item')]//a[@data-location='my favorites']").getText();
+		String Product=Common.findElement("xpath", "//strong[contains(@class,'product-item')]//a[@data-location='my favorites']").getText().toLowerCase();
 		System.out.println(Product);
 		Sync.waitElementPresent("xpath", "//button[contains(@class,'action tocart a-btn a-btn--s')]");
 		Common.clickElement("xpath", "//button[contains(@class,'action tocart a-btn a-btn--s')]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		String Pdp=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
+		String Pdp=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText().toLowerCase();
 		System.out.println(Pdp);
+		
 		Common.assertionCheckwithReport(Product.contains(Pdp),
 				"verifying Product navigation to the PDP", "After clicking add to cart in the myfav it should navigate to the PDP",
 				"Product navigated to the PDP page", "Failed to Navigate tot the PDP");
