@@ -7931,9 +7931,9 @@ public class OspreyRegressionEMEA {
 
 				}
 
-			} else if (Common.getCurrentURL().contains("https://hele.digital/")) {
+			} else if (Common.getCurrentURL().contains("https://mcloud-na.osprey.com/gb/")) {
 
-				Common.oppenURL(strArray[i].replace("emea-preprod", "www"));
+				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "mcloud-na"));
 
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
