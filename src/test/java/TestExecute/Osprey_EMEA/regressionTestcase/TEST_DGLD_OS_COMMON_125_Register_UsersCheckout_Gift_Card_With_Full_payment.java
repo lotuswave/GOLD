@@ -29,7 +29,7 @@ public class TEST_DGLD_OS_COMMON_125_Register_UsersCheckout_Gift_Card_With_Full_
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Gift_card("Giftcard");
         Osprey_ReEu.FUll_Payment("Giftcard");
-        Osprey_ReEu.giftCardSubmitOrder();
+//        Osprey_ReEu.giftCardSubmitOrder();
         
 		} catch (Exception e) {
 

@@ -78,7 +78,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			if(Common.getCurrentURL().contains("na.osprey"))
+			if(Common.getCurrentURL().contains("osprey.com"))
 			{
 				Close_Geolocation();
 			     acceptPrivacy();
@@ -134,7 +134,7 @@ public class OspreyRegressionEMEA {
 		String Running=data.get(dataSet).get("interests");
 		Sync.waitPageLoad();
 		try {
-		if(Common.getCurrentURL().contains("na.osprey"))
+		if(Common.getCurrentURL().contains("osprey.com"))
 		{
 			Close_Geolocation();
 		     acceptPrivacy();
@@ -448,7 +448,7 @@ public class OspreyRegressionEMEA {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("na.osprey")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -2981,7 +2981,7 @@ public class OspreyRegressionEMEA {
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage") && !url.contains("na.osprey")) {
+		if (!url.contains("stage") && !url.contains("preprod")) {
 		}
 
 		else {
@@ -3066,7 +3066,7 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("na.osprey.com") || Common.getCurrentURL().contains("stage") ) {
+				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 
 					Common.clickElement("xpath", "//button[@class='action primary checkout']");
 				} else {
@@ -4940,7 +4940,7 @@ public class OspreyRegressionEMEA {
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage") & !url.contains("preprod") & !url.contains("na.osprey") ) {
+		if (!url.contains("stage") & !url.contains("preprod")) {
 
 			int sizeofelement = Common.findElements("id", "email").size();
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
@@ -5052,7 +5052,7 @@ public class OspreyRegressionEMEA {
 		Sync.waitElementPresent("xpath", "//img[@alt='PayPal']");
 		Common.clickElement("xpath", "//img[@alt='PayPal']");
 		}
-		if (!url.contains("stage") & !url.contains("preprod") & !url.contains("na.osprey")& !url.contains("stage3") ) {
+		if (!url.contains("stage") & !url.contains("preprod")& !url.contains("stage3") ) {
 
 			int sizeofelement = Common.findElements("id", "email").size();
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the venmo payment ", expectedResult,
@@ -7931,9 +7931,9 @@ public class OspreyRegressionEMEA {
 
 				}
 
-			} else if (Common.getCurrentURL().contains("https://mcloud-na.osprey.com/gb/")) {
+			} else if (Common.getCurrentURL().contains("https://www.osprey.com/de/")) {
 
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "mcloud-na"));
+				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "osprey"));
 
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
@@ -8276,7 +8276,7 @@ public class OspreyRegressionEMEA {
 		{
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
-			if(URL.contains("stage.osprey.com")|| URL.contains("Stage3")) {
+			if(URL.contains("stage")|| URL.contains("Stage3")) {
 			Thread.sleep(3000);
 			
      	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
@@ -8357,10 +8357,16 @@ public class OspreyRegressionEMEA {
 		Thread.sleep(3000);
 		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
 			Thread.sleep(4000);
-
+   if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
+   {
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			//Common.refreshpage();
 		Thread.sleep(3000);
+   }
+   else
+   {
+	   Assert.fail();
+   }
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
@@ -8849,7 +8855,8 @@ public void Verify_OrderTotal() {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
-
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+						{
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
@@ -8861,8 +8868,27 @@ public void Verify_OrderTotal() {
 				Common.clickElement("xpath", "//button[@class='action primary checkout']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+						}
+				else
+				{
+					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Thread.sleep(4000);
+					Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+					Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
+					String Afterpay=Common.findElement("xpath", "//button[@id='afterpay_clearpay-tab']").getAttribute("data-testid");
+					System.out.println(Afterpay);
+					Common.assertionCheckwithReport(
+							Afterpay.contains("afterpay_clearpay"),
+							"validating the selection of the Afterpay method",
+							"Afterpay should be selected ","Afterpay is selected",
+							"Failed to select the Afterpay method in the production environment");
+					Common.switchToDefault();
+				}
 
 			} else {
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
@@ -8874,6 +8900,23 @@ public void Verify_OrderTotal() {
 				Common.clickElement("xpath", "//button[@class='action primary checkout']");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			}
+				else
+				{
+					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Thread.sleep(4000);
+					Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+					Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
+					String Afterpay=Common.findElement("xpath", "//button[@value='afterpay_clearpay']").getAttribute("data-testid");
+					System.out.println(Afterpay);
+					Common.assertionCheckwithReport(
+							Afterpay.contains("afterpay_clearpay"),
+							"validating the selection of the Afterpay method",
+							"Afterpay should be selected ","Afterpay is selected",
+							"Failed to select the Afterpay method in the production environment");
+					Common.switchToDefault();
+				}
+		}
 		}
 
 		catch (Exception | Error e) {
@@ -8972,10 +9015,10 @@ public void Verify_OrderTotal() {
 				{
 					Thread.sleep(4000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
-							klarna.contains("Klarna"),
+							klarna.contains("klarna"),
 							"validating the selection of the klarna method",
 							"klarna should be selected ","klarna is selected",
 							"Failed to select the klarna method in the production environment");
@@ -9002,10 +9045,10 @@ public void Verify_OrderTotal() {
 				{
 					Thread.sleep(4000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
-							klarna.contains("Klarna"),
+							klarna.contains("klarna"),
 							"validating the selection of the klarna method",
 							"klarna should be selected ","klarna is selected",
 							"Failed to select the klarna method in the production environment");
@@ -9250,7 +9293,7 @@ catch(Exception | Error e)
 				Assert.fail();
 			}
 			express_paypal_shipping("Paypal Shipping");
-			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("na.osprey"))
+			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
 			{
 				Common.scrollIntoView("xpath", "//button[@value='Place Order']");
 				Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
@@ -10463,7 +10506,7 @@ public void select_Store_Credit_Payment(String dataSet) {
 		System.out.println(ordertotal);
 		Thread.sleep(4000);
 		if(ordertotal.equals(0.00)) {
-			
+			if(Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod"))
 			giftCardSubmitOrder();
 		}
 		else {
@@ -10757,7 +10800,7 @@ public String Express_Venmo_Payment(String dataSet) throws Exception {
 	Sync.waitElementPresent("xpath", "//img[@alt='PayPal']");
 	Common.clickElement("xpath", "//img[@alt='PayPal']");
 	}
-	if (!url.contains("stage") & !url.contains("preprod") & !url.contains("na.osprey")& !url.contains("stage3") ) {
+	if (!url.contains("stage") & !url.contains("preprod") & !url.contains("stage3") ) {
 
 		int sizeofelement = Common.findElements("id", "email").size();
 		Common.assertionCheckwithReport(sizeofelement > 0, "verifying the venmo payment ", expectedResult,
@@ -10790,7 +10833,7 @@ public String Express_Venmo_Payment(String dataSet) throws Exception {
 			Assert.fail();
 		}
 		express_paypal_shipping(dataSet);
-		if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("na.osprey")|| Common.getCurrentURL().contains("preprod"))
+		if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 		{
 			Common.scrollIntoView("xpath", "//button[@value='Place Order']");
 			Thread.sleep(4000);
@@ -11130,9 +11173,9 @@ public void warrenty_Replacement() {
 			Sync.waitPageLoad();
 			
 		}
-		else if(Common.getCurrentURL().contains("na.osprey") )
+		else if(Common.getCurrentURL().contains("osprey.com") )
 		{
-			String prod="https://mcloud-na.osprey.com/gb/customer-support/return-authorization";
+			String prod="https://mcloud-osprey.com.com/gb/customer-support/return-authorization";
 			Common.oppenURL(prod);
 		}
 		else if(Common.getCurrentURL().contains("stage3"))
@@ -11735,7 +11778,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
-			if (Common.getCurrentURL().contains("na.osprey.com") || Common.getCurrentURL().contains("stage") ) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 				Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 
 				//Common.clickElement("xpath", "//button[@class='action primary checkout']");
