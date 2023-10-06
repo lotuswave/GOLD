@@ -1030,14 +1030,15 @@ public class OspreyRegressionEMEA {
 			String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
 			if (eventname.equals("Birthday")) {
 				System.out.println(Common.getCurrentURL());
-				if(Common.getCurrentURL().contains("stage3"))
+				if(Common.getCurrentURL().contains("gb"))
 				{
-					Common.dropdown("xpath","//select[@id='event_country_region']", SelectBy.TEXT,
+					Common.textBoxInput("xpath", "//input[@id='event_country_region_text']",
 							data.get(Dataset).get("Region"));
 				}
 				else
 				{
-				Common.textBoxInput("xpath", "//input[@id='event_country_region_text']",
+				
+				Common.dropdown("xpath","//select[@id='event_country_region']", SelectBy.TEXT,
 						data.get(Dataset).get("Region"));
 			
 				}
