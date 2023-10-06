@@ -25,9 +25,6 @@ public class TEST_DGLD_OS_064_Register_User_Checkout_With_Express_Venmo_Payment 
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Express_Venmo_Payment("2PaypalDetails");
         
 		} catch (Exception e) {
