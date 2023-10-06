@@ -11814,6 +11814,71 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 	return Number;
 }
 
+
+
+public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOException {
+		// TODO Auto-generated method stub
+
+		String urls = data.get(dataSet).get("Links");
+		int j = 0;
+
+		String[] strArray = urls.split("\\r?\\n");
+		for (int i = 0; i < strArray.length; i++) {
+			System.out.println(strArray[i]);
+
+			if (Common.getCurrentURL().contains("pre")) {
+
+				Common.oppenURL((strArray[i]));
+				int responcecode = getpageresponce(Common.getCurrentURL());
+				System.out.println(responcecode);
+				Common.refreshpage();
+				System.out.println(responcecode);
+
+				if (responcecode == 200) {
+					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+							"successfully page configured with products",
+							Common.getscreenShotPathforReport("link" + i));
+				} else {
+
+					j++;
+
+					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+							"page configured with products ", "unable to find page it showing 40 error",
+							Common.getscreenShotPathforReport("link" + i));
+
+				}
+
+			} else if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
+
+				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+
+				int responcecode = getpageresponce(Common.getCurrentURL());
+				System.out.println(responcecode);
+
+				if (responcecode == 200) {
+					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+							"successfully page configured with products",
+							Common.getscreenShotPathforReport("link" + i));
+				} else {
+
+					j++;
+
+					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+							"page configured with products ", "unable to find page it showing 40 error",
+							Common.getscreenShotPathforReport("link" + i));
+
+				}
+			}
+		}
+
+		if (j > 1) {
+			Assert.fail();
+		}
+	}
+
+
+
+
 public void newtab_footerlinks(String Dataset) {
 	// TODO Auto-generated method stub
 	String AssetBank=data.get(Dataset).get("Asset Bank");
