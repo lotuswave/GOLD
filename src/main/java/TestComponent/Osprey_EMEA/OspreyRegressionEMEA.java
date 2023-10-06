@@ -3391,19 +3391,20 @@ public class OspreyRegressionEMEA {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			
-			  if(Common.getCurrentURL().contains("stage3"))
+			  if(Common.getCurrentURL().contains("gb"))
               {
-                  Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                  Thread.sleep(3000);
-                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                          .getAttribute("value");
-                  System.out.println(Shippingvalue);
+				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
               }
 			  else
 			  {
-				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				
+				 Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Thread.sleep(3000);
+                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                         .getAttribute("value");
+                 System.out.println(Shippingvalue);
 			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -6091,9 +6092,10 @@ public class OspreyRegressionEMEA {
 						"after click on subcribe button message should be appear",
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
-				Common.actionsKeyPress(Keys.END);
+				
 				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath",
 						"//div[@class='sticky-atc__cta-container']//span[text()=' Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
