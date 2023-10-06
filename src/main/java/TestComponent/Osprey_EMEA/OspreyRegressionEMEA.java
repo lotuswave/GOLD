@@ -78,7 +78,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			if(Common.getCurrentURL().contains("osprey.com"))
+			if(Common.getCurrentURL().contains("osprey.com/gb/"))
 			{
 				Close_Geolocation();
 			     acceptPrivacy();
@@ -93,7 +93,7 @@ public class OspreyRegressionEMEA {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-				close_add();
+//				close_add();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
@@ -134,7 +134,7 @@ public class OspreyRegressionEMEA {
 		String Running=data.get(dataSet).get("interests");
 		Sync.waitPageLoad();
 		try {
-		if(Common.getCurrentURL().contains("osprey.com"))
+		if(Common.getCurrentURL().contains("osprey.com/gb/"))
 		{
 			Close_Geolocation();
 		     acceptPrivacy();
@@ -448,7 +448,7 @@ public class OspreyRegressionEMEA {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -7933,7 +7933,7 @@ public class OspreyRegressionEMEA {
 
 				}
 
-			} else if (Common.getCurrentURL().contains("https://www.osprey.com/de/")) {
+			} else if (Common.getCurrentURL().contains("https://www.osprey.com/gb/")) {
 
 				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "osprey"));
 
@@ -9991,7 +9991,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("prepord") ) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
