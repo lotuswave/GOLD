@@ -5678,6 +5678,7 @@ public class OspreyRegressionEMEA {
 	public String BillingAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String update = "";
+		String Shipping="";
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -5702,20 +5703,23 @@ public class OspreyRegressionEMEA {
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			 if(Common.getCurrentURL().contains("stage3"))
+			 if(Common.getCurrentURL().contains("gb"))
              {
-				  Thread.sleep(4000);
+				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 
+             }
+			 else
+			 {
+				 Thread.sleep(4000);
                  Common.scrollIntoView("xpath", "//select[@name='region_id']");
                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
                  Thread.sleep(3000);
                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
                          .getAttribute("value");
+                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+	              System.out.println(Shipping);
                  System.out.println(Shippingvalue);
-             }
-			 else
-			 {
-				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -5731,7 +5735,7 @@ public class OspreyRegressionEMEA {
 			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
 			System.out.println("update"+update);
 			Common.assertionCheckwithReport(
-					update.contains("Connecticut") || text.contains("Wallingford"),
+					update.equals(Shipping),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -9398,6 +9402,7 @@ catch(Exception | Error e)
 	public String Reg_BillingAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String update = "";
+		String Shipping="";
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -9410,7 +9415,7 @@ catch(Exception | Error e)
 					"Failed to displayed the payment section");
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
+			Common.doubleClick("xpath", "//label[contains(@for,'billing-address')]//span");
 			Thread.sleep(5000);
 			Common.dropdown("xpath", "//select[@aria-label='Billing Address']", SelectBy.TEXT, "New Address");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
@@ -9425,20 +9430,23 @@ catch(Exception | Error e)
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			 if(Common.getCurrentURL().contains("stage3"))
+			 if(Common.getCurrentURL().contains("gb"))
              {
-				  Thread.sleep(4000);
-                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                 Thread.sleep(3000);
-                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                         .getAttribute("value");
-                 System.out.println(Shippingvalue);
+				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
              }
 			 else
 			 {
-				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				  Thread.sleep(4000);
+	                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
+	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Thread.sleep(3000);
+	              String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+	                         .getAttribute("value");
+	              Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+	              System.out.println(Shipping);
+	                 System.out.println(Shippingvalue);
+				
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -9454,7 +9462,7 @@ catch(Exception | Error e)
 			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
 			System.out.println("update"+update);
 			Common.assertionCheckwithReport(
-					update.contains("Connecticut") || text.contains("Wallingford") || text.contains("Aberdeen"),
+					update.equals(Shipping),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -11814,7 +11822,125 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 	return Number;
 }
 
+public void newtab_footerlinks(String Dataset) {
+	// TODO Auto-generated method stub
+	String AssetBank=data.get(Dataset).get("Asset Bank");
+	System.out.println(AssetBank);
+	String Parts=data.get(Dataset).get("Spare Parts");
+	System.out.println(Parts);
+	try
+	{
+		Sync.waitElementPresent(30, "xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+		Thread.sleep(3000);
+		Common.findElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+		Common.clickElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String errormessage=Common.findElement("xpath", "//div[contains(@class,'message-error')]").getAttribute("data-ui-id");
+		Login_Account(Dataset);
+		Common.assertionCheckwithReport(
+				Common.getCurrentURL().contains("parts-request/"),
+				"validating the links navigation from footer Links",
+				"After Clicking on" + Parts + "it should navigate to the",
+				Parts + "Sucessfully Navigated to the" + Parts + "Links",
+				"Unable to Navigated to the" + Parts + "Links");
+		Sync.waitElementPresent(30, "xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank+"')]");
+		Thread.sleep(3000);
+		Common.findElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank +"')]");
+		Common.clickElement("xpath",
+				"//ul[@class='m-footer-links__list']//a[contains(text(),'" + AssetBank + "')]");
+		Thread.sleep(2000);
+		Common.switchToSecondTab();
+		Common.assertionCheckwithReport(
+				Common.getPageTitle().contains("Osprey Europe Asset Bank"),
+				"validating the links navigation from footer Links",
+				"After Clicking on" + AssetBank + "it should navigate to the",
+				AssetBank + "Sucessfully Navigated to the" + AssetBank + "Links",
+				"Unable to Navigated to the" + AssetBank + "Links");
+		Common.closeCurrentWindow();
+		Thread.sleep(4000);
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	
+}
 
+public void Prevent_Shipping() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Thread.sleep(4000);
+		String standard=Common.findElement("xpath", "(//div[@class='message error restriction-error']//div)[1]").getText();
+		String Expedited=Common.findElement("xpath", "(//div[@class='message error restriction-error']//div)[2]").getText();
+		Common.assertionCheckwithReport(
+				standard.contains("Poco products and Ace 38 & 50 are not available for shipment to California")
+						|| Expedited.contains("Poco products and Ace 38 & 50 are not available for shipment to California"),
+				"validating the the error meesgage in shipments while adding the poco and ace products",
+				"After adding poco and ace products shipping methods should not display",
+				"Sucessfully shipping methods are not displayed",
+				"Failed to display the error message in shipments while adding poco and ace products");
+		Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String errormessage=Common.findElement("xpath", "//div[@class='message notice']//span").getText();
+		System.out.println(errormessage);
+		Common.assertionCheckwithReport(errormessage.contains("The shipping method is missing"),
+				"validating the error message after click next button",
+				"After clicking on the next button it should display the error message",
+				"Successfully Error message has been displayed", "Failed to display the error message");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message after click next button",
+				"After clicking on the next button it should display the error message",
+				"Unable to display the error message",
+				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+	}
+}
+
+public void proAce_Error_Payment(String dataSet) {
+	// TODO Auto-generated method stub
+
+	try
+	{
+		addPaymentDetails(dataSet);
+		String expectedResult = "It redirects to order confirmation page";
+
+		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
+			Thread.sleep(4000);
+			addPaymentDetails(dataSet);
+		}
+		Thread.sleep(4000);
+		String errormessage=Common.findElement("xpath", "//div[contains(@data-ui-id,'checkout-cart')]").getText();
+		Common.assertionCheckwithReport(errormessage.contains("not available for shipment to California"),
+				"validating the error message after click Place order button",
+				"After clicking on the place order button it should display the error message",
+				"Successfully Error message has been displayed", "Failed to display the error message");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message after click place order button",
+				"After clicking on the place order button it should display the error message",
+				"Unable to display the error message",
+				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+
+	}
+}
 
 public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOException {
 		// TODO Auto-generated method stub
@@ -11875,62 +12001,6 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 			Assert.fail();
 		}
 	}
-
-
-
-
-public void newtab_footerlinks(String Dataset) {
-	// TODO Auto-generated method stub
-	String AssetBank=data.get(Dataset).get("Asset Bank");
-	System.out.println(AssetBank);
-	String Parts=data.get(Dataset).get("Spare Parts");
-	System.out.println(Parts);
-	try
-	{
-		Sync.waitElementPresent(30, "xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
-		Thread.sleep(3000);
-		Common.findElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
-		Common.clickElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
-		Sync.waitPageLoad();
-		Thread.sleep(4000);
-		String errormessage=Common.findElement("xpath", "//div[contains(@class,'message-error')]").getAttribute("data-ui-id");
-		Login_Account(Dataset);
-		Common.assertionCheckwithReport(
-				Common.getCurrentURL().contains("parts-request/"),
-				"validating the links navigation from footer Links",
-				"After Clicking on" + Parts + "it should navigate to the",
-				Parts + "Sucessfully Navigated to the" + Parts + "Links",
-				"Unable to Navigated to the" + Parts + "Links");
-		Sync.waitElementPresent(30, "xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank+"')]");
-		Thread.sleep(3000);
-		Common.findElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank +"')]");
-		Common.clickElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),'" + AssetBank + "')]");
-		Thread.sleep(2000);
-		Common.switchToSecondTab();
-		Common.assertionCheckwithReport(
-				Common.getPageTitle().contains("Osprey Europe Asset Bank"),
-				"validating the links navigation from footer Links",
-				"After Clicking on" + AssetBank + "it should navigate to the",
-				AssetBank + "Sucessfully Navigated to the" + AssetBank + "Links",
-				"Unable to Navigated to the" + AssetBank + "Links");
-		Common.closeCurrentWindow();
-		Thread.sleep(4000);
-		
-		
-	}
-	catch(Exception | Error e)
-	{
-		e.printStackTrace();
-		Assert.fail();
-	}
-	
-}
 
 		
 }
