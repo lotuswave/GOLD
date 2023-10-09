@@ -448,7 +448,7 @@ public class OspreyRegressionEMEA {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -8477,7 +8477,7 @@ public class OspreyRegressionEMEA {
 		try
 		{
 			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("stage3"))
+			if(Common.getCurrentURL().contains("stage3")|| Common.getCurrentURL().contains("preprod"))
 			{
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Favorites']");
