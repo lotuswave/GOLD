@@ -28,6 +28,7 @@ public class Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address {
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("CAAccount");
         Osprey_ReEu.Prevent_Shipping();
+        Osprey_ReEu.Remove_Products_from_Shoppingcart(); 
         
         
         

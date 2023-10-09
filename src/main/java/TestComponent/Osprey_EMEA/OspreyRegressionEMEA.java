@@ -12002,6 +12002,39 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 		}
 	}
 
+public void Remove_Products_from_Shoppingcart() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Shoppingcart_page();
+		List<WebElement> Products= Common.findElements("xpath","//tbody[@class='cart item']//span[contains(@class,'icon-cart__remove')]");
+		for(int i=0;i<Products.size();i++) {
+            Thread.sleep(4000);
+			Products.get(i).click();
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+   
+		}
+		String emptycart=Common.findElement("xpath", "//div[@class='cart-empty']//p[@role='alert']").getText();
+		Common.assertionCheckwithReport(emptycart.contains("not available for shipment to California"),
+				"validating the empty cart message in the your cart",
+				"After products cleared in the your cart empty message should display",
+				"Successfully empty cart empty message should be dispalyed", "Failed to display the empty message in the cart");
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the empty cart message in the your cart",
+				"After products cleared in the your cart empty message should display",
+				"Successfully empty cart empty message should be dispalyed",
+				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+	}
+	
+}
+
 		
 }
 
