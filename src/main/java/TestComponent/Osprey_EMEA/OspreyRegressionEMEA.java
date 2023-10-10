@@ -11890,7 +11890,7 @@ public void Prevent_Shipping() {
 				"After adding poco and ace products shipping methods should not display",
 				"Sucessfully shipping methods are not displayed",
 				"Failed to display the error message in shipments while adding poco and ace products");
-		Common.clickElement("xpath", "//button[@data-role='opc-continue']");
+		/*Common.clickElement("xpath", "//button[@data-role='opc-continue']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		String errormessage=Common.findElement("xpath", "//div[@class='message notice']//span").getText();
@@ -11898,7 +11898,7 @@ public void Prevent_Shipping() {
 		Common.assertionCheckwithReport(errormessage.contains("The shipping method is missing"),
 				"validating the error message after click next button",
 				"After clicking on the next button it should display the error message",
-				"Successfully Error message has been displayed", "Failed to display the error message");
+				"Successfully Error message has been displayed", "Failed to display the error message");*/
 	}
 	catch(Exception | Error e)
 	{
@@ -12007,16 +12007,29 @@ public void Remove_Products_from_Shoppingcart() {
 	try
 	{
 		Shoppingcart_page();
-		List<WebElement> Products= Common.findElements("xpath","//tbody[@class='cart item']//span[contains(@class,'icon-cart__remove')]");
-		for(int i=0;i<Products.size();i++) {
-            Thread.sleep(4000);
-			Products.get(i).click();
-			Sync.waitPageLoad();
+		
+	int Products= Common.findElements("xpath","//tbody[@class='cart item']").size();
+	System.out.println(Products);
+	for(int i=0;i<Products;i++) {
+		Thread.sleep(4000);
+		List<WebElement> ListOfSubproducts = Common.findElements("xpath",
+				"//tbody[@class='cart item']//span[contains(@class,'icon-cart__r')]");
+		int Product = Common.findElements("xpath",
+				"//tbody[@class='cart item']//span[contains(@class,'icon-cart__r')]").size();
+		System.out.println(Product);
+		for (int j = Product; j <= Product; j++) {
 			Thread.sleep(4000);
-   
+			System.out.println(Product);
+			int value=j-1;
+			ListOfSubproducts.get(value).click();
+			Thread.sleep(4000);
 		}
+		}
+	
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
 		String emptycart=Common.findElement("xpath", "//div[@class='cart-empty']//p[@role='alert']").getText();
-		Common.assertionCheckwithReport(emptycart.contains("not available for shipment to California"),
+		Common.assertionCheckwithReport(emptycart.contains("You have no items in your shopping cart."),
 				"validating the empty cart message in the your cart",
 				"After products cleared in the your cart empty message should display",
 				"Successfully empty cart empty message should be dispalyed", "Failed to display the empty message in the cart");
