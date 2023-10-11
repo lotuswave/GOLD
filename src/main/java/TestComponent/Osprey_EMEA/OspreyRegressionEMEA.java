@@ -3643,19 +3643,20 @@ public class OspreyRegressionEMEA {
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			if(Common.getCurrentURL().contains("stage3"))
+			if(Common.getCurrentURL().contains("gb"))
             {
-			  Thread.sleep(4000);
-                Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                Thread.sleep(3000);
-                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                        .getAttribute("value");
-                System.out.println(Shippingvalue);
+				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
             }
 			else
 			{
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				  Thread.sleep(4000);
+	                Common.scrollIntoView("xpath", "//select[@name='region_id']");
+	                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                Thread.sleep(3000);
+	                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+	                        .getAttribute("value");
+	                System.out.println(Shippingvalue);
+				
 			}
 			
 			Thread.sleep(2000);
@@ -6662,7 +6663,7 @@ public class OspreyRegressionEMEA {
 						Country = select.get(i).getText();
 						System.out.println(Country);
 						select.get(i).click();
-						if (Country.contains("United Kingdom")) {
+						if (Country.contains("United Kingdom") || Country.contains("United States")) {
 
 							Common.clickElement("xpath", "//button[@data-role='closeBtn']");
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
