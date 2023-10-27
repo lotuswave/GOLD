@@ -22,14 +22,7 @@ public class TEST_DGLD_OS_COMMON_096_RegisterUser_validate_Giftcard_PLP_page {
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.validate_GIFT_CARD_PLP();
-        /*Osprey_ReEu.Gift_cards("X-mas Gift Card");
-        Osprey_ReEu.Card_Value("price");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");*/
+       
         
        
         
