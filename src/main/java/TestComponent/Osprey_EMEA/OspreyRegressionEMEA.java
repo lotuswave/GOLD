@@ -11260,6 +11260,8 @@ public void warrenty_return() {
 	// TODO Auto-generated method stub
 	try
 	{
+		if(Common.getCurrentURL().contains("gb"))
+		{
 		Common.scrollIntoView("xpath", "//ul[@class='m-footer-links__list']//a[text()='All Mighty Guarantee']");
 		Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[text()='All Mighty Guarantee']");
 		Sync.waitPageLoad();
@@ -11276,6 +11278,18 @@ public void warrenty_return() {
 				"validating the page navigates to the Return authorization form",
 				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
 				"successfully navigated to the Return authorization form", "failed to Navigate to the Return authorization form");
+		}
+		else
+		{
+			Common.scrollIntoView("xpath", "//ul[@class='m-footer-links__list']//a[text()='Need a Pack Repair?']");
+			Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[text()='Need a Pack Repair?']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("return-authorization"),
+					"validating the page navigates to the Return authorization form",
+					"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
+					"successfully navigated to the Return authorization form", "failed to Navigate to the Return authorization form");
+		}
 		
 	}
 	catch(Exception | Error e)
@@ -12069,9 +12083,9 @@ public void validate_price_PLP_and_PDP() {
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "(//img[contains(@class,'m-product-card')])["+ value + "]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			String PDPPrice=Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])[1]");
-			System.out.println(PLPprice);
+			System.out.println(PDPPrice);
 			Common.assertionCheckwithReport(PLPprice.equals(PDPPrice),
 					"validating the Price for the Gift card in the PDP",
 					"After clicking on the giftcard it should navigate to the PDP page",
