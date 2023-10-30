@@ -10543,6 +10543,8 @@ public void validate_GIFT_CARD_PLP() {
 	
 	try
 	{
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
+		Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
 		Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
 		Thread.sleep(5000);
@@ -12044,6 +12046,49 @@ public void Remove_Products_from_Shoppingcart() {
 				"After products cleared in the your cart empty message should display",
 				"Successfully empty cart empty message should be dispalyed",
 				Common.getscreenShotPathforReport("Failed to display the error message"));
+		Assert.fail();
+	}
+	
+}
+
+public void validate_price_PLP_and_PDP() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		int Products= Common.findElements("xpath","//img[contains(@class,'m-product-card')]").size();
+		System.out.println(Products);
+		for(int i=0;i<Products;i++) 
+		{
+			Thread.sleep(4000);
+			int value = i + 1;
+			WebElement ListOfSubproducts = Common.findElement("xpath",
+					"(//div[contains(@class,'m-product-card m-produ')]//span[@class='price'])[" + value + "]");
+			String PLPprice=ListOfSubproducts.getText().replace("From ", "");
+		    System.out.println(PLPprice);
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "(//img[contains(@class,'m-product-card')])["+ value + "]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String PDPPrice=Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])[1]");
+			System.out.println(PLPprice);
+			Common.assertionCheckwithReport(PLPprice.equals(PDPPrice),
+					"validating the Price for the Gift card in the PDP",
+					"After clicking on the giftcard it should navigate to the PDP page",
+					"Successfully PLP and PDP price should be equal", "Failed to validate the PLP and PDP price");
+			Thread.sleep(4000);
+			Common.navigateBack();
+	
+		}
+	
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Price for the Gift card in the PDP",
+				"After clicking on the giftcard it should navigate to the PDP page",
+				"Unable to validate the PLP and PDP price",
+				Common.getscreenShotPathforReport("Failed to validate the PLP and PDP price"));
 		Assert.fail();
 	}
 	
