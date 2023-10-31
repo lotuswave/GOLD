@@ -12134,9 +12134,295 @@ public void validate_price_PLP_and_PDP() {
 	
 }
 
+public void Footer_Links_Company(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("Company_Links");
+	String Terms=data.get(Dataset).get("Terms");
+	String[] footerlinks = footer.split(",");
+	String[] Termlinks = Terms.split(",");
+	int i = 0;
+	int j=0;
+	try {
 		
+		for(j = 0; j < Termlinks.length; j++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+			Common.clickElement("xpath",
+					"//p[@class='c-footer__copyright']//a[contains(text(),'" + Termlinks[j] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+				Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(Termlinks[j])
+							|| Common.getCurrentURL().contains("/about-us")
+							|| Common.getCurrentURL().contains("history")
+							|| Common.getCurrentURL().contains("sustainability")
+							|| Common.getCurrentURL().contains("philanthropy")
+							|| Common.getCurrentURL().contains("careers"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + Termlinks[j] + "it should navigate to the",
+					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
+					"Unable to Navigated to the" + Termlinks[j] + "Links");
+			Thread.sleep(4000);
+			
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		}
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+		/*	Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("/blog")
+							|| Common.getCurrentURL().contains("prodeal")
+							|| Common.getCurrentURL().contains("Osprey Asset Bank"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links");
+					*/
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		
+		}
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
 }
 
+public void Footer_Links_CustomerSupport(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("CustomerSupport_Links");
+	String[] footerlinks = footer.split(",");
+	
+	int i = 0;
+
+	try {
+		
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("customer-support-center")
+							|| Common.getCurrentURL().contains("knowledge-base")
+							|| Common.getCurrentURL().contains("size-fit")
+							|| Common.getCurrentURL().contains("/order/status")
+							|| Common.getCurrentURL().contains("all-mighty-guarantee")
+							|| Common.getCurrentURL().contains("reservoir-warranty")
+							|| Common.getCurrentURL().contains("catalog-request")
+							|| Common.getCurrentURL().contains("gift-card"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links");
+					
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		
+		}
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
+}
+
+
+public void Footer_Links_Resources(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("Resources_Links");
+	String[] footerlinks = footer.split(",");
+	
+	int i = 0;
+
+	try {
+		
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("/prodeal")
+							|| Common.getCurrentURL().contains("corporate-sales")
+							|| Common.getCurrentURL().contains("program-sales")
+							|| Common.getCurrentURL().contains("dealer-inquiries")
+							|| Common.getCurrentURL().contains("ospreydealers")
+							|| Common.getCurrentURL().contains("affiliate"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links");
+					
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		
+		}
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
+}
+
+
+public void Footer_Links_BrandTeam(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("BrandTeam_Links");
+	String[] footerlinks = footer.split(",");
+	
+	int i = 0;
+
+	try {
+		
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("/athletes")
+							|| Common.getCurrentURL().contains("coming-soon")
+							|| Common.getCurrentURL().contains("coming-soon"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links");
+				
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		
+		}
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
+}
+
+public void Footer_Links_Repari_And_Replacement(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("Repair&Replacement");
+	String[] footerlinks = footer.split(",");
+	
+	int i = 0;
+
+	try {
+		
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("/athletes")
+							|| Common.getCurrentURL().contains("coming-soon"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links");
+				
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		
+		}
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
+}
+}
 
 	
 
