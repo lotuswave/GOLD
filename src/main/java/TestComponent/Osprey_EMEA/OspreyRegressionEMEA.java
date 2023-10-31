@@ -7470,6 +7470,8 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//a[text()='comparison list']");
 
 				Common.clickElement("xpath", "(//a[contains(@class,'action tocart primary a-btn a-btn')])[1]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 				Sync.waitElementVisible("xpath", "//a[text()='shopping cart']");
 
@@ -9873,6 +9875,7 @@ catch(Exception | Error e)
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//p[text()='SUSTAINABLE DESIGN']");
+			Thread.sleep(4000);
 			Common.switchFrames("xpath", "//iframe[@title='YouTube video player']");
 			Thread.sleep(4000);
 			
@@ -9885,6 +9888,29 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(video.equals("Pause"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
+			Sync.waitElementPresent(40, "xpath", "//button[contains(@class,'ytp-play-button')]");
+			Common.clickElement("xpath", "//button[contains(@class,'ytp-play-button')]");
+			String video1 = Common.findElement("xpath", "//button[contains(@class,'ytp-play-button')]")
+					.getAttribute("data-title-no-tooltip");
+			System.out.println(video);
+			Common.assertionCheckwithReport(video1.equals("Play"), "validating the video in PDP page",
+					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
+					"failed to Pause the video in PDP page");
+			Common.switchToDefault();
+			Sync.waitElementPresent("xpath", "//button[@data-role='closeBtn']");
+			Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[@class='fotorama__nav__frame fotorama__nav__frame--thumb video-thumb-icon']");
+			Common.clickElement("xpath", "//div[@class='fotorama__nav__frame fotorama__nav__frame--thumb video-thumb-icon']");
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//button[@title='Play']");
+			String video2 = Common.findElement("xpath", "//button[@title='Pause']")
+					.getAttribute("class");
+			Common.assertionCheckwithReport(video2.contains("playing"), "validating the video in PDP page",
+					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
+					"failed to Pause the video in PDP page");
+			
+			
 		}
 		
 		catch(Exception | Error e)
