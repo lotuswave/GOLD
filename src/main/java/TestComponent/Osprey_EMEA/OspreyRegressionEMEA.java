@@ -1662,9 +1662,9 @@ public class OspreyRegressionEMEA {
 			if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
 			{
 				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
-				Common.clickElement("xpath", "//a[text()='My Favorites']");
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favourites']");
+				Common.clickElement("xpath", "//a[text()='My Favourites']");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favourites"),
 						"validating the Navigation to the My Favorites page",
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -2832,7 +2832,7 @@ public class OspreyRegressionEMEA {
                     Sync.waitPageLoad();
                     String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
                     System.out.println(message);
-                    Common.assertionCheckwithReport(message.contains("has been added to your Favorites"),
+                    Common.assertionCheckwithReport(message.contains("has been added to your Favourites"),
                             "validating the  product add to the Favorites", "Product should be add to Favorites",
                             "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
                     whishlist_share_Button("share whishlist");
@@ -8483,16 +8483,16 @@ public class OspreyRegressionEMEA {
 			if(Common.getCurrentURL().contains("stage3")|| Common.getCurrentURL().contains("preprod"))
 			{
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Favorites']");
+				Common.clickElement("xpath", "//button[@title='Share Favourites']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favourites']");
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
+				Common.assertionCheckwithReport(message1.contains("Your Favourites has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
