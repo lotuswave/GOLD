@@ -94,6 +94,8 @@ public class OspreyRegressionEMEA {
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
 //				close_add();
+				 acceptPrivacy();
+				 Close_Geolocation();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
