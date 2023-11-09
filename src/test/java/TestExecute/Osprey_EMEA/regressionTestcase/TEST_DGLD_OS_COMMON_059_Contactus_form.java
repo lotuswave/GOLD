@@ -11,11 +11,11 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_059_Contactus_form {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Forms");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_User_Back_In_stock_Subcription () throws Exception {
+	public void Verifying_Contactus_form () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
@@ -38,7 +38,7 @@ public class TEST_DGLD_OS_COMMON_059_Contactus_form {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
+		System.setProperty("configFile", "Osprey_US\\config.properties");
         Login.signIn();
         
 

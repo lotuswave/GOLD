@@ -93,7 +93,19 @@ public class OspreyRegressionEMEA {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-//				close_add();
+				close_add();
+				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				System.out.println(size);
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
+						"validating store logo on the homwpage",
+						"System directs the user to the Homepage and store logo should display",
+						"Sucessfully user navigates to the home page and logo has been displayed",
+						"Failed to navigate to the homepage and logo is not displayed");
+			}
+			else if(Common.getCurrentURL().contains("preprod.osprey.com/gb/"))
+			{
+				
 				 acceptPrivacy();
 				 Close_Geolocation();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
@@ -11351,18 +11363,20 @@ public void clickContact() throws Exception {
 	}
 }
 
-public void contactUsPage(String dataSet) {
+public void contactUsPage(String dataSet) throws Exception {
 	// TODO Auto-generated method stub
 
 	String expectedResult = "Email us form is visible in tab";
 	String country = data.get(dataSet).get("Country");
 	String state = data.get(dataSet).get("Region");
+	System.out.println(state);
 
 	try {
         Common.scrollIntoView("xpath", "//a[contains(@class,'pagebuilder')]");
 		Common.clickElement("xpath", "//a[contains(@class,'pagebuilder')]");
-		Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://osprey-emea')]");
-		Common.switchFrames("xpath", "//iframe[contains(@src,'https://osprey-emea')]");
+	
+			Sync.waitElementPresent(40, "xpath", "//iframe[@id='contact-us-form']");
+			Common.switchFrames("xpath", "//iframe[@id='contact-us-form']");
 
 		Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 
@@ -11382,8 +11396,8 @@ public void contactUsPage(String dataSet) {
 		Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
 		Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(dataSet).get("Company"));
 
-		Sync.waitElementPresent("xpath", "//input[@name='conversationPhoneForForms']");
-		Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+		Sync.waitElementPresent("xpath", "//input[@name='conversationPhoneforforms']");
+		Common.textBoxInput("xpath", "//input[@name='conversationPhoneforforms']", data.get(dataSet).get("phone"));
 		
 		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
@@ -11406,17 +11420,17 @@ public void contactUsPage(String dataSet) {
 
 		Sync.waitElementPresent("xpath", "//input[@name='conversationStateforforms']");
 		Common.clickElement("xpath", "//input[@name='conversationStateforforms']");
-        Common.textBoxInput("xpath", "//input[@name='conversationStateforforms']", state);
-		
+//        Common.textBoxInput("xpath", "//input[@name='conversationStateforforms']", state);
+    	Common.clickElement("xpath", "//div[text()='"+ state +"']");
 	/*	Sync.waitElementPresent("xpath", "//div[text()='"+ state+"']");
 		Common.clickElement("xpath", "//div[text()='"+ state+"']");    */
 
-		Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeForForms']");
-		Common.textBoxInput("xpath", "//input[@name='conversationZipCodeForForms']",
+		Sync.waitElementPresent("xpath", "//input[@name='conversationZipcodeforforms']");
+		Common.textBoxInput("xpath", "//input[@name='conversationZipcodeforforms']",
 				data.get(dataSet).get("postcode"));
 
-		Sync.waitElementPresent("xpath", "//input[@name='conversationHowcanwehelpforforms']");
-		Common.clickElement("xpath", "//input[@name='conversationHowcanwehelpforforms']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationHowcanwehelp1']");
+		Common.clickElement("xpath", "//div[@id='conversationHowcanwehelp1']");
 		Thread.sleep(3000);
 		Common.clickElement("xpath", "//div[@data-path='order_issues']");
 
@@ -11424,8 +11438,8 @@ public void contactUsPage(String dataSet) {
 		Sync.waitElementPresent("xpath", "//div[@id='conversationOrderissues']");
 		Common.clickElement("xpath", "//div[@id='conversationOrderissues']");
 
-		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue ']");
-		Common.clickElement("xpath", "//div[text()='Billing Issue ']");
+		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
+		Common.clickElement("xpath", "//div[text()='Billing Issue']");
 
 		Sync.waitElementPresent("xpath", "//input[@id='conversationOrdernumber']");
 		Common.textBoxInput("xpath", "//input[@id='conversationOrdernumber']",
@@ -11435,9 +11449,9 @@ public void contactUsPage(String dataSet) {
 				data.get(dataSet).get("Commetsosprey"));
 
 	Thread.sleep(4000);
-		Common.clickElement("xpath", "//input[contains(@data-label,'Terms and Conditions')]");
+		Common.clickElement("xpath", "//input[contains(@data-label,'Be the first to know!')]");
 		
-		Boolean Checkbox=Common.checkBoxIsSelected("xpath", "//input[contains(@data-label,'Terms and Conditions')]");
+		Boolean Checkbox=Common.checkBoxIsSelected("xpath", "//input[contains(@data-label,'Be the first to know!')]");
 		if(Checkbox.TRUE)
 		{
 		Common.scrollIntoView("xpath", "//button[text()='Submit']");
@@ -11445,7 +11459,7 @@ public void contactUsPage(String dataSet) {
 		}
 		else
 		{
-			Common.clickElement("xpath", "//input[contains(@data-label,'Terms and Conditions')]");
+			Common.clickElement("xpath", "//input[contains(@data-label,'Be the first to know!')]");
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
 			Common.clickElement("xpath", "//button[text()='Submit']");
 		}
@@ -11468,9 +11482,11 @@ public void contactUsPage(String dataSet) {
 	}
 
 	Common.actionsKeyPress(Keys.PAGE_UP);
-	String Text = Common.getText("xpath", "(//div[@class='form-wrap']//span)[2]");
+	Thread.sleep(4000);
+	String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+	System.out.println(Text);
 	expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-	Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+	Common.assertionCheckwithReport(Text.contains("Your submission has been received"),
 			"verifying contact us conformation message", expectedResult, "Failed to submit the contact us form");
 
 }
