@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_059_Contactus_form {
 
-	String datafile = "Osprey_US//GoldOspreyus.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Forms");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -38,7 +38,7 @@ public class TEST_DGLD_OS_COMMON_059_Contactus_form {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
         
 

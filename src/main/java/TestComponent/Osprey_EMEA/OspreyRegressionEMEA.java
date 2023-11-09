@@ -8772,13 +8772,13 @@ public class OspreyRegressionEMEA {
 			String Price = Common.findElement("xpath", "//div[@class='product-info-price']//span[contains(@id,'product-price')]//span").getText();
 			System.out.println(Price);
 			
-			if(Common.getCurrentURL().contains("stage")) {
+			if(Common.getCurrentURL().contains("/gb")) {
 
 				double productPrice = Double.parseDouble(Price.replace("£", ""));
 				System.out.println(productPrice);
 			}
 			else {
-			double productPrice = Double.parseDouble(Price.replace("£", ""));
+			double productPrice = Double.parseDouble(Price.replace("$", ""));
 			System.out.println(productPrice);
 			}
 			
@@ -8831,7 +8831,7 @@ public void Verify_OrderTotal() {
 				}
 			}
 			else {
-			double Order_Total = Double.parseDouble(Ordertotal.replace("£", ""));
+			double Order_Total = Double.parseDouble(Ordertotal.replace("$", ""));
 			System.out.println(Order_Total);
 					
 			if (Order_Total <= 50.0) {
