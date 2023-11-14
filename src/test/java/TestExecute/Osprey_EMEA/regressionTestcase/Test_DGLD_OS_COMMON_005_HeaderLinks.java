@@ -20,13 +20,13 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.header_OutdoorPacks("Outdoor Packs");
-//        Osprey_ReEu.header_KidsPacks("Kids Packs Carriers");   //While Executing US please comment this line and execute it
+        Osprey_ReEu.header_KidsPacks("Kids Packs Carriers");   //While Executing US please comment this line and execute it
         Osprey_ReEu.header_DayPacks("Day Packs");
         Osprey_ReEu.header_Travel("Travel");
         Osprey_ReEu.header_Accessories("Accessories");
         Osprey_ReEu.header_Featured("Featured");
         Osprey_ReEu.Bagpack_ShopAll("ShopAll");
-//       Osprey_ReEu.Travel_ShopAll("TravelShopAll");                 //While Executing EU please comment this line and execute it
+//      Osprey_ReEu.Travel_ShopAll("TravelShopAll");                 //While Executing EU please comment this line and execute it
         Osprey_ReEu.header_Shopbyactivity("Shop by Activity");       
         Osprey_ReEu.header_Shopbycollection("Shop by Collections"); 
         Osprey_ReEu.Featured_ShopAll("FeaturedShopAll");      
