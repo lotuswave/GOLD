@@ -9,27 +9,31 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_125_Register_UsersCheckout_Gift_Card_With_Full_payment {
+public class TEST_DGLD_OS_COMMON_125_Pro_user_Mutilple_products_with_storecredit_giftcardcode_discount_full_payment {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Register_user_Checkout_GiftCard_With_FullPayment () throws Exception {
+	public void Verifying_Pro_user_Mutilple_products_with_storecredit_giftcardcode_discount_full_payment () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.Login_Account("prouser");
+        String Price= Osprey_ReEu.Store_Credit_balance();
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.simple_addtocart("Simple product"); 
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");;
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Gift_card("Giftcard");
-        Osprey_ReEu.FUll_Payment("Giftcard");
-//        Osprey_ReEu.giftCardSubmitOrder();
+        Osprey_ReEu.Apply_Store_Credit(Price);
+        Osprey_ReEu.Gift_card("Partial Giftcard");
+        Osprey_ReEu.discountCode("Discount");
+        Osprey_ReEu.giftCardSubmitOrder();
         
 		} catch (Exception e) {
 
