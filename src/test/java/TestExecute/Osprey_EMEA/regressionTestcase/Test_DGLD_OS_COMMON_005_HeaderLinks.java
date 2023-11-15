@@ -30,7 +30,8 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
         Osprey_ReEu.header_Shopbyactivity("Shop by Activity");       
         Osprey_ReEu.header_Shopbycollection("Shop by Collections"); 
         Osprey_ReEu.Featured_ShopAll("FeaturedShopAll");      
-        Osprey_ReEu.image_ShopAll("ImageShopAll");   // image shop all is not working in preprod
+        Osprey_ReEu.image_ShopAll("ImageShopAll");     // image shop all is not working in preprod
+        Osprey_ReEu.header_sale();
         
         
 		} catch (Exception e) {

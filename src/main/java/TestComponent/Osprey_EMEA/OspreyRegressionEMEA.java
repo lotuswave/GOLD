@@ -12897,6 +12897,37 @@ public void image_ShopAll(String Dataset) throws Exception {
 	
 	
 }
+
+public void header_sale() throws Exception {
+	// TODO Auto-generated method stub
+	
+	Thread.sleep(3000);
+	Sync.waitElementPresent("xpath", "//span[contains(text(),'SALE')]");
+	Common.clickElement("xpath", "//span[contains(text(),'SALE')]");
+	Thread.sleep(4000);
+	String title1 = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+	System.out.println(title1);
+	Thread.sleep(4000);
+	String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+	System.out.println(products);
+	int Number = Integer.parseInt(products);
+	int j=0;
+	if(Number>j)
+	{
+	Common.assertionCheckwithReport(title1.contains("SALE"),
+			"verifying the header link New Season",
+			"user should navigate to the New Season page",
+			"user successfully Navigated to the New Season", "Failed to navigate to the New Season");
+	}
+	else
+	{
+		ExtenantReportUtils.addFailedLog(
+				"validating the the products in the plp ",
+				"User should able to see the products in plp", "unable to see the products in the PLP",
+				Common.getscreenShot("Failed to see products in PLP"));
+	}
+	
+}
 }
 
 	
