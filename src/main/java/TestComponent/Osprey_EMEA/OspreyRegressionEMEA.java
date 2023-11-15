@@ -12786,8 +12786,10 @@ public void image_ShopAll(String Dataset) throws Exception {
 	Thread.sleep(3000);
 	Sync.waitElementPresent("xpath", "//span[contains(text(),'New Season')]");
 	Common.clickElement("xpath", "//span[contains(text(),'New Season')]");
+	Thread.sleep(4000);
 	String title1 = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 	System.out.println(title1);
+	Thread.sleep(4000);
 	String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 	System.out.println(products);
 	int Number = Integer.parseInt(products);
