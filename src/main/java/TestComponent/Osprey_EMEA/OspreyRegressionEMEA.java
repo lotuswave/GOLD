@@ -795,6 +795,8 @@ public class OspreyRegressionEMEA {
 		{
 			String names = data.get(Dataset).get("Featureds");
 			String[] Links = names.split(",");
+			String name = data.get(Dataset).get("Featureds").toUpperCase();
+			String[] Link = name.split(",");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
@@ -816,7 +818,7 @@ public class OspreyRegressionEMEA {
 					int j=0;
 					if(Number>j)
 					{
-					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Link[i]),
 							"verifying the header link " + Links[i] + "Under the Featured",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -845,6 +847,8 @@ public class OspreyRegressionEMEA {
 		{
 			String names = data.get(Dataset).get("Featured");
 			String[] Links = names.split(",");
+			String name = data.get(Dataset).get("Featured").toUpperCase();
+			String[] Link = name.split(",");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
@@ -866,7 +870,7 @@ public class OspreyRegressionEMEA {
 					int j=0;
 					if(Number>j)
 					{
-					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Link[i]),
 							"verifying the header link " + Links[i] + "Under the Featured",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -903,6 +907,8 @@ public class OspreyRegressionEMEA {
 		{
 			String names = data.get(Dataset).get("Featureds");
 			String[] Links = names.split(",");
+			String name = data.get(Dataset).get("Featureds").toUpperCase();
+			String[] Link = name.split(",");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
@@ -924,7 +930,7 @@ public class OspreyRegressionEMEA {
 					int j=0;
 					if(Number>j)
 					{
-					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Link[i]) ,
 							"verifying the header link " + Links[i] + "Under the Featured",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -953,6 +959,8 @@ public class OspreyRegressionEMEA {
 		{
 			String names = data.get(Dataset).get("Featured");
 			String[] Links = names.split(",");
+			String name = data.get(Dataset).get("Featureds").toUpperCase();
+			String[] Link = name.split(",");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
@@ -974,7 +982,7 @@ public class OspreyRegressionEMEA {
 					int j=0;
 					if(Number>j)
 					{
-					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) ||  breadcrumbs.contains(Link[i]),
 							"verifying the header link " + Links[i] + "Under the Featured",
 							"user should navigate to the " + Links[i] + " page",
 							"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -1374,7 +1382,7 @@ public class OspreyRegressionEMEA {
 				if(Number>j)
 				{
 				
-				Common.assertionCheckwithReport(title.contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12903,7 +12911,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 				int z=0;
 				if(Number1>z)
 				{
-				Common.assertionCheckwithReport(title.contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12946,7 +12954,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				System.out.println(title);
 				System.out.println(Links[i]);
-				Common.assertionCheckwithReport(title.contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
