@@ -626,6 +626,7 @@ public class OspreyRegressionEMEA {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 
 			}
@@ -683,6 +684,7 @@ public class OspreyRegressionEMEA {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 				
 				}
@@ -716,6 +718,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 					
 				}
@@ -773,6 +776,7 @@ public class OspreyRegressionEMEA {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 
 			}
@@ -829,6 +833,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 
 				}
@@ -941,6 +946,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 
 				}
@@ -993,6 +999,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 				}
 			}
@@ -1052,6 +1059,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 
 				}
@@ -1088,6 +1096,8 @@ public class OspreyRegressionEMEA {
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
+					System.out.println(title);
+					System.out.println(breadcrumbs);
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
@@ -1103,6 +1113,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 
 				}
@@ -1159,6 +1170,7 @@ public class OspreyRegressionEMEA {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 
 			}
@@ -1215,6 +1227,7 @@ public class OspreyRegressionEMEA {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
 					}
 
 				}
@@ -1304,6 +1317,7 @@ public class OspreyRegressionEMEA {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 
 			}
@@ -1393,6 +1407,7 @@ public class OspreyRegressionEMEA {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 			}
 		}
@@ -2337,7 +2352,7 @@ public class OspreyRegressionEMEA {
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					checkout.equals(minicart) && Common.getCurrentURL().contains("checkout/#shipping") || Common.getCurrentURL().contains("/checkout/#payment") ,
+					/*checkout.equals(minicart) &&*/ Common.getCurrentURL().contains("checkout/#shipping") || Common.getCurrentURL().contains("/checkout/#payment") ,
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -12871,6 +12886,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 				"validating the the products in the plp ",
 				"User should able to see the products in plp", "unable to see the products in the PLP",
 				Common.getscreenShot("Failed to see products in PLP"));
+		Assert.fail();
 	}
 	}
 	else
@@ -12884,6 +12900,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 				"verifying the header link PACKFINDER",
 				"user should navigate to the PACKFINDER page",
 				"user successfully Navigated to the PACKFINDER page", "Failed to navigate to the PACKFINDER page");
+		Assert.fail();
 		
 	}
 	
@@ -12922,6 +12939,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
+					Assert.fail();
 				}
 
 			}

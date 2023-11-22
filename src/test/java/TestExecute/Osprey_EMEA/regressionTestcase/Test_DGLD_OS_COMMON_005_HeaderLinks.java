@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 
-	String datafile = "Osprey_US//GoldOspreyus.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Header");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -50,7 +50,7 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
         
 
