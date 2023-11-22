@@ -134,6 +134,78 @@ public class GoldApi {
 
 	}
 	
+	
+	
+	
+	public void Login_Account(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("getpostman") || Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "username", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'primary sign-in-btn')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Postman"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
+
+	}
+	
+	
+	public void WorkSpace() {
+		
+		try {
+			int  Recent_workSpace= Common.findElements("xpath", "//h2[contains(text(),'Recently visited workspaces')]").size();
+	        System.out.println(Recent_workSpace);
+	        if (Recent_workSpace > 0) {
+	           
+	            Thread.sleep(4000);
+	            Sync.waitElementPresent("xpath", "//span[contains(text(),'My Workspace')]");
+	            Common.clickElement("xpath", "//span[contains(text(),'My Workspace')]");
+	        }
+	        
+	        
+	        else {
+
+	           
+	            Sync.waitElementPresent("xpath", "//span[contains(text(),'My Workspace')]");
+	            Common.clickElement("xpath", "//span[contains(text(),'My Workspace')]");
+	          
+	            }
+	        Sync.waitElementPresent("xpath", "//div[text()='Integration2']");
+	        Common.clickElement("xpath", "//div[text()='Integration2']");
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+				"After clicking on the signin button it should navigate to the Home page",
+				"Unable to navigate the user to the home after clicking on the SignIn button",
+				Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+		Assert.fail();
+	}
+
+}		
+		
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
 		try {
