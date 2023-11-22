@@ -250,5 +250,51 @@ public class GoldApi {
  
 
     }
+
+	public void select_Website(String Dataset) {
+		// TODO Auto-generated method stub
+		String website=data.get(Dataset).get("preprod"); 
+		try
+		{
+			Common.clickElement("xpath", "//div[@title='"+ website +"']");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+
+	public void Generate_Token(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		String API=data.get(Dataset).get("API");
+		String Token_Url=data.get(Dataset).get("Token");
+		try
+		{
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//div[@title='"+ API +"']");
+			Thread.sleep(3000);
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("API KEY"),
+					"ATo validate it is navigated to the API page",
+					"After clicking on the API  key button it should navigate to api key",
+					"user Sucessfully navigate to the API Key page",
+					"Failed to Nvaigate to the API key page ");
+			Common.textBoxInput("xpath", "//div[contains(@class,'public-DraftSt')]", Token_Url);
+			
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+			
+		}
+		
+	}
 	
 }

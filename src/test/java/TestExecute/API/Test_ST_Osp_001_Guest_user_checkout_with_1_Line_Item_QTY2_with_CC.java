@@ -23,7 +23,9 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 //			API.verifingHomePage();	
 			API.Login_Account("Post_Account");
 			API.WorkSpace();
-
+			API.select_Website("Website_selection");
+			API.Generate_Token("Api_Key");
+			
 
 		} catch (Exception e) {
 
