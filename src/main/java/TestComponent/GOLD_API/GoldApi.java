@@ -140,12 +140,12 @@ public class GoldApi {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("getpostman") || Common.getCurrentURL().contains("preprod")) {
+			Common.oppenURL("https://identity.getpostman.com/login?addAccount=1");
+			Thread.sleep(4000);
+			if (Common.getCurrentURL().contains("getpostman")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "username", data.get(dataSet).get("UserName"));
-			} else {
-				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
-			}
+			} 
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'primary sign-in-btn')]");
 			Sync.waitPageLoad();

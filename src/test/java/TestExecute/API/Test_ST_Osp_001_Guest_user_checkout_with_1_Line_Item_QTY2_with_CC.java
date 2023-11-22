@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.GOLD_API.GoldApi;
-import TestComponent.Holley.GoldHolleyHelper;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -21,7 +20,7 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 		try {
 			
 			
-			API.verifingHomePage();	
+//			API.verifingHomePage();	
 			API.Login_Account("Post_Account");
 			API.WorkSpace();
 
