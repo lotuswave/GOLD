@@ -271,11 +271,14 @@ public class GoldApi {
 		
 		String API=data.get(Dataset).get("API");
 		String Token_Url=data.get(Dataset).get("Token");
+		String Token_name=data.get(Dataset).get("Details");
 		try
 		{
 			Thread.sleep(4000);
+			Sync.waitElementPresent(30,"xpath", "//div[@title='"+ API +"']");
 			Common.clickElement("xpath", "//div[@title='"+ API +"']");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
+			Sync.waitForLoad();
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("API KEY"),
@@ -283,10 +286,19 @@ public class GoldApi {
 					"After clicking on the API  key button it should navigate to api key",
 					"user Sucessfully navigate to the API Key page",
 					"Failed to Nvaigate to the API key page ");
+			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//div[contains(@class,'public-DraftSt')]", Token_Url);
-			
-			
-			
+			Common.clickElement("xpath", "//span[text()='Body']");
+			Common.textBoxInput("xpath", "//div[@class='view-lines']", Token_name);
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[text()='Send']");
+			String token1=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[2]");
+			String token2=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[3]");
+			String token3=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[4]");
+			String token4=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[2]");
+			String token5=Common.getText("xpath", "((//div[@class='view-line'])[5]//span)[3]");
+			String fulltoken=token1+token2+token3+token4+token5;
+			System.out.println(fulltoken);
 		}
 		catch(Exception | Error e)
 		{
