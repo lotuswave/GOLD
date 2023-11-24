@@ -291,15 +291,23 @@ public class GoldApi {
 					"user Sucessfully navigate to the API Key page",
 					"Failed to Nvaigate to the API key page");
 			Thread.sleep(3000);
-//			Common.textBoxInputClear("xpath", "//div[contains(@class,'public-DraftSt')]");
-//			Thread.sleep(4000);
-//			Common.clickElement("xpath", "//div[contains(@class,'public-DraftSt')]");
-			Common.textBoxInput("xpath", "//div[contains(@class,'public-DraftSt')]", data.get(Dataset).get("Token"));
+			Common.textBoxInputClear("xpath", "//div[contains(@class,'public-DraftSt')]");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//div[contains(@class,'public-DraftSt')]");
+			Common.findElement("xpath", "//div[contains(@class,'public-DraftSt')]").sendKeys(Token_Url);
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Body']");
 			Common.clickElement("xpath", "//span[text()='Body']");
-			Common.textBoxInput("xpath", "//div[@class='view-lines']", Token_name);
+			Thread.sleep(4000);
+//			Common.clickElement("xpath", "//div[@class='view-lines']");
+			WebElement clear=Common.findElement("xpath", "//div[@class='view-lines']");
+			Common.textBoxInputClear("xpath", "//div[@class='view-lines']");
+			clear.sendKeys(Keys.CONTROL + "a");
+			clear.sendKeys(Keys.DELETE);
+			Common.findElement("xpath", "//div[@class='view-lines']").sendKeys(Token_name);
+//			Common.textBoxInput("xpath", "//div[@class='view-lines']", Token_name);
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[text()='Send']");
+			Thread.sleep(4000);
 			String token1=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[2]");
 			String token2=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[3]");
 			String token3=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[4]");
