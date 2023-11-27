@@ -19,26 +19,32 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 
 		try {
 			
-//			API.verifingHomePage();	
-//			API.search_product("Product");
-//			API.addtocart("Product");
-//	        API.minicart_Checkout();
-//	        API.addDeliveryAddress_Guestuser("Account");
-//	        API.selectshippingmethod("GroundShipping method");
-//	        API.clickSubmitbutton_Shippingpage();
-//	        String order= API.updatePaymentAndSubmitOrder("CCVisacard");
-//	        System.out.println(order);
+			API.verifingHomePage();	
+			API.search_product("Product");
+			API.addtocart("Product");
+	        API.minicart_Checkout();
+	        API.addDeliveryAddress_Guestuser("Account");
+	        API.selectshippingmethod("GroundShipping method");
+	        API.clickSubmitbutton_Shippingpage();
+	        String order= API.updatePaymentAndSubmitOrder("CCVisacard");
+	        System.out.println(order);
 //			String order="ZSOPREPD11000058647";
-//			API.Admin_signin("AccountDetails");
-//			API.click_Sales();
-//			API.Click_Orders_Salesmenu();
-//			API.Orders(order);
-//			String id=API.getorder_id("sales order");
-//			System.out.println(id);
+			API.Admin_signin("AccountDetails");
+			API.click_Sales();
+			API.Click_Orders_Salesmenu();
+			API.Orders(order);
+			String id=API.getorder_id("sales order");
+			System.out.println(id);
+//			String id="8672853/";
 			API.Login_Account("Post_Account");
 			API.WorkSpace();
 			API.select_Website("Website_selection");
-			API.Generate_Token("Api_Key");
+			String Token=API.Generate_Token("Api_Key");
+			System.out.println(Token);
+			API.Get_order("order");
+			API.order_Url(id);
+			API.Authorization(Token);
+		
 			
 			
 
@@ -51,7 +57,7 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

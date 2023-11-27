@@ -267,7 +267,7 @@ public class GoldApi {
 		
 	}
 
-	public void Generate_Token(String Dataset) {
+	public String Generate_Token(String Dataset) {
 		// TODO Auto-generated method stub
 		
 		String API=data.get(Dataset).get("API");
@@ -276,6 +276,9 @@ public class GoldApi {
 		System.out.println(Token_Url);
 		String Token_name=data.get(Dataset).get("Details");
 		System.out.println(Token_name);
+		String remove=data.get(Dataset).get("Remove");
+		System.out.println(remove);
+		String fulltoken="";
 		try
 		{
 			Thread.sleep(4000);
@@ -295,33 +298,36 @@ public class GoldApi {
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//div[contains(@class,'public-DraftSt')]");
 			Common.findElement("xpath", "//div[contains(@class,'public-DraftSt')]").sendKeys(Token_Url);
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Body']");
+		/*	Sync.waitElementPresent(30, "xpath", "//span[text()='Body']");
 			Common.clickElement("xpath", "//span[text()='Body']");
 			Thread.sleep(4000);
-//			Common.clickElement("xpath", "//div[@class='view-lines']");
 			WebElement clear=Common.findElement("xpath", "//div[@class='view-lines']");
-			Common.textBoxInputClear("xpath", "//div[@class='view-lines']");
-			clear.sendKeys(Keys.CONTROL + "a");
+			clear.click();
+			clear.sendKeys(Keys.CONTROL + "a"+ Keys.DELETE); 
 			clear.sendKeys(Keys.DELETE);
 			Common.findElement("xpath", "//div[@class='view-lines']").sendKeys(Token_name);
 //			Common.textBoxInput("xpath", "//div[@class='view-lines']", Token_name);
-			Thread.sleep(4000);
+			Thread.sleep(4000);*/
 			Common.clickElement("xpath", "//span[text()='Send']");
-			Thread.sleep(4000);
-			String token1=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[2]");
-			String token2=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[3]");
-			String token3=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[4]");
-			String token4=Common.getText("xpath", "((//div[@class='view-line'])[4]//span)[2]");
-			String token5=Common.getText("xpath", "((//div[@class='view-line'])[5]//span)[3]");
-			String fulltoken=token1+token2+token3+token4+token5;
+			Thread.sleep(6000);
+			String token1=Common.getText("xpath", "((//div[@class='view-line'])[1]//span)[2]").replace(remove, "");
+			String token2=Common.getText("xpath", "((//div[@class='view-line'])[1]//span)[3]");
+			String token3=Common.getText("xpath", "((//div[@class='view-line'])[1]//span)[4]");
+//			String token4=Common.getText("xpath", "((//div[@class='view-line'])[2]//span)[2]");
+			Sync.waitElementPresent(30, "xpath", "((//div[@class='view-line'])[2]//span)[3]");
+			String token5=Common.getText("xpath", "((//div[@class='view-line'])[2]//span)[3]").replace(remove, "");
+			fulltoken=token1+token2+token3+token5;
+		
 			System.out.println(fulltoken);
 		}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			
 			Assert.fail();
 			
 		}
+		return fulltoken;
 		
 	}
 	
@@ -1030,6 +1036,109 @@ public class GoldApi {
 			Assert.fail();
 		}
 		return id;
+	}
+
+	public void Get_order(String Dataset) {
+		// TODO Auto-generated method stub
+		String Order=data.get(Dataset).get("Order");
+		String Order_name=data.get(Dataset).get("Magento");
+		System.out.println(Order_name);
+		try
+		{
+		   Sync.waitElementPresent("xpath", "//div[@title='"+ Order +"']");
+		   Common.clickElement("xpath", "//div[@title='"+ Order +"']");
+		   Thread.sleep(8000);
+			Sync.waitForLoad();
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Get Order"),
+					"To validate it is navigated to the Get Order page",
+					"After clicking on the Get Order  key button it should navigate to Get Order",
+					"user Sucessfully navigate to the Get Order page",
+					"Failed to Navigate to the Order page");
+			Common.clickElement("xpath", "//div[contains(@class,'public-DraftSt')]");
+			Thread.sleep(4000);
+			Common.textBoxInputClear("xpath", "//div[contains(@class,'public-DraftSt')]");
+			Thread.sleep(4000);
+			Common.findElement("xpath", "//div[contains(@class,'public-DraftSt')]").sendKeys(Order_name);
+			Thread.sleep(4000);
+			String get=Common.getText("xpath", "//span[@data-text='true']");
+			System.out.println(get);
+			Common.assertionCheckwithReport(get.equals(Order_name),
+                    "To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Successfully order url has been entered in the textbox",
+                    "Failed to Enter the order URL in the text box");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate it is navigated to the Get Order page",
+					"After clicking on the Get Order  key button it should navigate to Get Order",
+					"Unable to Navigate to the Order page",
+                    "Failed to Navigate to the Order page");
+			Assert.fail();
+		}
+		
+	}
+
+	public void order_Url(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent(30, "xpath","//div[contains(@class,'public-DraftSt')]");
+			Common.findElement("xpath", "//div[contains(@class,'public-DraftSt')]").sendKeys(Dataset);
+			String get=Common.getText("xpath", "//span[@data-text='true']");
+			System.out.println(get);
+			Common.assertionCheckwithReport(get.contains(Dataset),
+                    "To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Successfully order url has been entered in the textbox",
+                    "Failed to Enter the order URL in the text box");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Unbale to enter order url in the text box",
+                    "Failed to Enter the order URL in the text box");
+			Assert.fail();
+			
+		}
+	}
+
+	public void Authorization(String Dataset) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='tab-text-wrapper']//span[text()='Headers']");
+			Common.clickElement("xpath", "//div[@class='tab-text-wrapper']//span[text()='Headers']");
+			String Authorization=Common.getText("xpath", "(//span[contains(@class,'key-value')])[3]");
+			System.out.println(Authorization);
+			Common.assertionCheckwithReport(Authorization.contains("Authorization"),
+                    "To Validate navigated to the headers in the get order",
+                    "After clicking on header it should navigate to the headers",
+                    "Successfully Navigated to the headers",
+                    "Failed to Navigated to the header");
+			Sync.waitElementPresent("xpath", "(//span[contains(@class,'key-value')])[4]");
+			Common.clickElement("xpath", "(//span[contains(@class,'key-value')])[4]");
+			Common.textBoxInputClear("xpath", "(//span[contains(@class,'key-value')])[4]");
+			Thread.sleep(4000);
+			Common.findElement("xpath", "(//span[contains(@class,'key-value')])[4]").sendKeys("Bearer"+Dataset);
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			
+			Assert.fail();
+		}
+		
 	}
 	
 }
