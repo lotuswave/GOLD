@@ -2,6 +2,9 @@ package TestComponent.GOLD_API;
    
 import static org.testng.Assert.fail;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
@@ -19,6 +22,17 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -30,6 +44,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
+
 
 import TestLib.Automation_properties;
 import TestLib.Common;
@@ -1056,11 +1071,11 @@ public class GoldApi {
 					"After clicking on the Get Order  key button it should navigate to Get Order",
 					"user Sucessfully navigate to the Get Order page",
 					"Failed to Navigate to the Order page");
-			Common.clickElement("xpath", "//div[contains(@class,'public-DraftSt')]");
+			Common.clickElement("xpath", "(//div[contains(@class,'public-DraftSt')])[1]");
 			Thread.sleep(4000);
-			Common.textBoxInputClear("xpath", "//div[contains(@class,'public-DraftSt')]");
+			Common.textBoxInputClear("xpath", "(//div[contains(@class,'public-DraftSt')])[1]");
 			Thread.sleep(4000);
-			Common.findElement("xpath", "//div[contains(@class,'public-DraftSt')]").sendKeys(Order_name);
+			Common.findElement("xpath", "(//div[contains(@class,'public-DraftSt')])[1]").sendKeys(Order_name);
 			Thread.sleep(4000);
 			String get=Common.getText("xpath", "//span[@data-text='true']");
 			System.out.println(get);
@@ -1140,5 +1155,148 @@ public class GoldApi {
 		}
 		
 	}
+
+	public HashMap<String, String> getorderDetails() throws Exception {
+		// TODO Auto-generated method stub
+		
+		  HashMap<String,String> GetOrderDetails=new HashMap<String,String>();
+		  
+		  Thread.sleep(4000);
+//		  Common.clickElement("xpath", "//div[@class='btn btn-secondary btn-small']");
+//		  Thread.sleep(4000);
+//		  Common.clickElement("xpath", "//span[text()='HTML']");
+		try
+		{
+			Common.clickElement("xpath", "//div[@class='view-line']");
+			Common.scrollIntoView("xpath", "(//span[@class='mtk6'])[2]");
+			Sync.waitElementPresent(30, "xpath", "(//span[@class='mtk6'])[2]");
+			String customer_email=Common.findElement("xpath", "(//span[@class='mtk6'])[2]").getText();
+			System.out.println(customer_email);
+			GetOrderDetails.put("customer email", customer_email);
+			
+			Sync.waitElementPresent(30, "xpath", "(//span[@class='mtk6'])[3]");
+			String customer_Firstname=Common.findElement("xpath", "(//span[@class='mtk6'])[3]").getText();
+			System.out.println(customer_Firstname);
+			GetOrderDetails.put("customer_Firstname", customer_Firstname);
+			
+			Sync.waitElementPresent(30, "xpath", "(//span[@class='mtk6'])[4]");
+			String customer_Lastname=Common.findElement("xpath", "(//span[@class='mtk6'])[4]").getText();
+			System.out.println(customer_Lastname);
+			GetOrderDetails.put("customer_Lastname", customer_Lastname);
+			
+			
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		return GetOrderDetails;
+	}
+
+	public void Ship_Items(String Dataset) {
+		// TODO Auto-generated method stub
+		String Ship=data.get(Dataset).get("Order");
+		String ship_name=data.get(Dataset).get("Magento");
+		System.out.println(ship_name);
+		try
+		{
+		   Sync.waitElementPresent("xpath", "//div[@title='"+ Ship +"']");
+		   Common.clickElement("xpath", "//div[@title='"+ Ship +"']");
+		   Thread.sleep(8000);
+			Sync.waitForLoad();
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Ship Items"),
+					"To validate it is navigated to the ship items page",
+					"After clicking on the ship items  key button it should navigate to ship items",
+					"user Sucessfully navigate to the ship items page",
+					"Failed to Navigate to the ship items page");
+			Common.clickElement("xpath", "(//div[contains(@class,'public-DraftSt')])[2]");
+			Thread.sleep(4000);
+			Common.textBoxInputClear("xpath", "(//div[contains(@class,'public-DraftSt')])[2]");
+			Thread.sleep(4000);
+			Common.findElement("xpath", "(//div[contains(@class,'public-DraftSt')])[2]").sendKeys(ship_name);
+			Thread.sleep(4000);
+			String get=Common.getText("xpath", "//span[@data-text='true']");
+			System.out.println(get);
+			Common.assertionCheckwithReport(get.equals(ship_name),
+                    "To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Successfully order url has been entered in the textbox",
+                    "Failed to Enter the order URL in the text box");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate it is navigated to the Get Order page",
+					"After clicking on the Get Order  key button it should navigate to Get Order",
+					"Unable to Navigate to the Order page",
+                    "Failed to Navigate to the Order page");
+			Assert.fail();
+		}
+		
+	}
+
+	public void Ship_URL(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Sync.waitElementPresent(30, "xpath","(//div[contains(@class,'public-DraftSt')])[2]");
+			Common.findElement("xpath", "(//div[contains(@class,'public-DraftSt')])[2]").sendKeys(Dataset+"ship");
+			String get=Common.getText("xpath", "//span[@data-text='true']");
+			System.out.println(get);
+			Common.assertionCheckwithReport(get.contains(Dataset),
+                    "To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Successfully order url has been entered in the textbox",
+                    "Failed to Enter the order URL in the text box");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate it is navigated to the Get Order page",
+					"After clicking on the Get Order  key button it should navigate to Get Order",
+					"Unable to Navigate to the Order page",
+                    "Failed to Navigate to the Order page");
+			Assert.fail();
+		}
+	}
+
+	public void order_item_id() {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Common.switchToFirstTab();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//div[@class='product-title']");
+			String order_item_id=Common.findElement("xpath", "//div[@class='product-title']").getAttribute("id").replace("order_item_", "").replace("_title", "");
+			System.out.println(order_item_id);
+			Common.switchToSecondTab();
+		    Thread.sleep(4000);
+			WebElement id=Common.findElement("xpath", "//span[@class='mtk8']");
+			id.click();
+			id.sendKeys(Keys.CONTROL+"a");
+			id.sendKeys(Keys.DELETE);
+			Thread.sleep(3000);
+			id.sendKeys(order_item_id);
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//span[text()='Send']");
+			
+			}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+	      	
 	
 }

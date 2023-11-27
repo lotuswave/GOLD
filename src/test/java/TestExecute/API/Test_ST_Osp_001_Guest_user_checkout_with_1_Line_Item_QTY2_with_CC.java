@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import java.io.File;
+import java.util.HashMap;
 
 import TestComponent.GOLD_API.GoldApi;
 import TestLib.Common;
@@ -43,11 +45,13 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 			System.out.println(Token);
 			API.Get_order("order");
 			API.order_Url(id);
+			API.Authorization(Token);	
+			HashMap<String,String> GetOrderDetails=API.getorderDetails();
+			System.out.println(GetOrderDetails);
+			API.Ship_Items("Ship");
+			API.Ship_URL(id);
 			API.Authorization(Token);
-		
-			
-			
-
+			API.order_item_id();
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -65,7 +69,6 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Gold_API\\config.properties");
         Login.signIn();
-
 
 	}
 
