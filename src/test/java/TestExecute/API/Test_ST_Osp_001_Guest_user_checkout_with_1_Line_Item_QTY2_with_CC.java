@@ -54,6 +54,7 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 			String orderid=API.order_item_id(order);
 			API.Magento_Order_Id(orderid);
 			
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

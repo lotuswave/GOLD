@@ -1293,6 +1293,7 @@ public class GoldApi {
 			Tracking_Number.sendKeys(Keys.CONTROL+"a");
 			Tracking_Number.sendKeys(Keys.DELETE);
 			Thread.sleep(4000);
+			Dataset.replace("#ZSOPREPD", "");
 			Tracking_Number.sendKeys(Dataset+"111");
 			System.out.println(Tracking_Number);
 			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
@@ -1304,7 +1305,7 @@ public class GoldApi {
 			int number = Common.genrateRandomNumber();
 			System.out.println(number);
 			String Delivery = Integer.toString(number);
-			String Number="256"+Delivery;
+			String Number="25"+Delivery;
 			System.out.println(Number);
 			Tracking_Number.sendKeys(Number);
 			Thread.sleep(4000);
