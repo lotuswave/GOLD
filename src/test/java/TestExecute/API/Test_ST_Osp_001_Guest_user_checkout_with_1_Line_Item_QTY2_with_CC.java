@@ -21,16 +21,16 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 
 		try {
 			
-			API.verifingHomePage();	
-			API.search_product("Product");
-			API.addtocart("Product");
-	        API.minicart_Checkout();
-	        API.addDeliveryAddress_Guestuser("Account");
-	        API.selectshippingmethod("GroundShipping method");
-	        API.clickSubmitbutton_Shippingpage();
-	        String order= API.updatePaymentAndSubmitOrder("CCVisacard");
-	        System.out.println(order);
-//			String order="ZSOPREPD11000058647";
+//			API.verifingHomePage();	
+//			API.search_product("Product");
+//			API.addtocart("Product");
+//	        API.minicart_Checkout();
+//	        API.addDeliveryAddress_Guestuser("Account");
+//	        API.selectshippingmethod("GroundShipping method");
+//	        API.clickSubmitbutton_Shippingpage();
+//	        String order= API.updatePaymentAndSubmitOrder("CCVisacard");
+//	        System.out.println(order);
+			String order="ZSOPREPD11000058668";
 			API.Admin_signin("AccountDetails");
 			API.click_Sales();
 			API.Click_Orders_Salesmenu();
@@ -43,15 +43,17 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 			API.select_Website("Website_selection");
 			String Token=API.Generate_Token("Api_Key");
 			System.out.println(Token);
-			API.Get_order("order");
-			API.order_Url(id);
-			API.Authorization(Token);	
-			HashMap<String,String> GetOrderDetails=API.getorderDetails();
-			System.out.println(GetOrderDetails);
+//			API.Get_order("order");
+//			API.order_Url(id);
+//			API.Authorization(Token);	
+//			HashMap<String,String> GetOrderDetails=API.getorderDetails();
+//			System.out.println(GetOrderDetails);
 			API.Ship_Items("Ship");
 			API.Ship_URL(id);
-			API.Authorization(Token);
-			API.order_item_id();
+//			API.Authorization(Token);
+			String orderid=API.order_item_id(order);
+			API.Magento_Order_Id(orderid);
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -61,7 +63,7 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

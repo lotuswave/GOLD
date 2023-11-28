@@ -1268,9 +1268,9 @@ public class GoldApi {
 		}
 	}
 
-	public void order_item_id() {
+	public String order_item_id(String Dataset) {
 		// TODO Auto-generated method stub
-		
+		String orderid="";
 		try
 		{
 			Common.switchToFirstTab();
@@ -1287,15 +1287,99 @@ public class GoldApi {
 			Thread.sleep(3000);
 			id.sendKeys(order_item_id);
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//span[text()='Send']");
+			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
+			WebElement Tracking_Number=Common.findElement("xpath", "//span[@class='mtk6']");
+			Tracking_Number.click();
+			Tracking_Number.sendKeys(Keys.CONTROL+"a");
+			Tracking_Number.sendKeys(Keys.DELETE);
+			Thread.sleep(4000);
+			Tracking_Number.sendKeys(Dataset+"111");
+			System.out.println(Tracking_Number);
+			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
+			WebElement delivery_number=Common.findElement("xpath", "//span[@class='mtk6']");
+			delivery_number.click();
+			delivery_number.sendKeys(Keys.CONTROL+"a");
+			delivery_number.sendKeys(Keys.DELETE);
+			Thread.sleep(4000);
+			int number = Common.genrateRandomNumber();
+			System.out.println(number);
+			String Delivery = Integer.toString(number);
+			String Number="256"+Delivery;
+			System.out.println(Number);
+			Tracking_Number.sendKeys(Number);
+			Thread.sleep(4000);
+//			Common.clickElement("xpath", "//span[text()='Send']");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Ship Items"),
+                    "To Validate the response code for the shipment",
+                    "After clicking on the send button response code should appear",
+                    "Successfully Response code has been displayed",
+                    "Failed to Displayed the Response code");
+			 orderid=Common.getText("xpath", "(//span[@class='mtk32'])[5]");
+			
 			
 			}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the response code for the shipment",
+                    "After clicking on the send button response code should appear",
+                    "unable to Displayed the Response code when we click on the send button",
+                    "Failed to Displayed the Response code");
+			
 			Assert.fail();
 		}
+		return orderid;
 		
+	}
+
+	public void Magento_Order_Id(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Common.switchToFirstTab();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//a[@title='Order Shipments']");
+			Common.clickElement("xpath", "//a[@title='Order Shipments']");
+			Common.refreshpage();
+			Thread.sleep(4000);
+			String records=Common.getText("xpath", "(//span[text()='records found']//parent::div)[3]");
+			System.out.println(records);
+			if(records.equals("1"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//a[text()='View']");
+				Common.clickElement("xpath", "//a[text()='View']");
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("shipment_id") && Common.getPageTitle().contains(Dataset),
+	                    "To Validate the shipment id in the magento url",
+	                    "After clicking on the view button is should navigate to the shippment page",
+	                    "Successfully Navigated to the shippment page and ship id also appeared in the url",
+	                    "Failed to Displayed the shipment id in the Magneto url");
+				
+			}
+			else
+			{
+				ExtenantReportUtils.addFailedLog(
+						"To Validate the records in the shipment",
+	                    "After clicking on the shipment button records should be appear ",
+	                    "Unable to Displayed the records in the shipment page",
+	                    "Failed to Displayed the records in the shipment page");
+				Assert.fail();
+			}
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the shipment id in the magento url",
+                    "After clicking on the view button is should navigate to the shippment page",
+                    "Unable to Displayed the shipment id in the Magneto url",
+                    "Failed to Displayed the shipment id in the Magneto url");
+			Assert.fail();
+		}
 	}
 	      	
 	
