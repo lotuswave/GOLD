@@ -1346,6 +1346,9 @@ public class GoldApi {
 			Common.clickElement("xpath", "//a[@title='Order Shipments']");
 			Common.refreshpage();
 			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//a[@title='Order Shipments']");
+			Common.clickElement("xpath", "//a[@title='Order Shipments']");
+			Thread.sleep(4000);
 			String records=Common.getText("xpath", "(//span[text()='records found']//parent::div)[3]");
 			System.out.println(records);
 			if(records.equals("1"))
@@ -1381,6 +1384,211 @@ public class GoldApi {
                     "Failed to Displayed the shipment id in the Magneto url");
 			Assert.fail();
 		}
+	}
+
+	public String Delivery_Details() {
+		// TODO Auto-generated method stub
+		
+		String Delivery="";
+		try
+		{
+			Common.switchToSecondTab();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
+			WebElement tracknumber=Common.findElement("xpath", "//span[@class='mtk6']");
+			tracknumber.click();
+			Delivery=tracknumber.getText();
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+			
+		}
+		return Delivery;
+		
+	}
+
+	public void Invoice(String Dataset) {
+		// TODO Auto-generated method stub
+		String Ship=data.get(Dataset).get("Order");
+		String ship_name=data.get(Dataset).get("Magento");
+		System.out.println(ship_name);
+		try
+		{
+		   Sync.waitElementPresent("xpath", "//div[@title='"+ Ship +"']");
+		   Common.clickElement("xpath", "//div[@title='"+ Ship +"']");
+		   Thread.sleep(8000);
+			Sync.waitForLoad();
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Invoice"),
+					"To validate it is navigated to the Invoice page",
+					"After clicking on the Invoice items  key button it should navigate to Invoice items",
+					"user Sucessfully navigate to the Invoice items page",
+					"Failed to Navigate to the ship Invoice page");
+			Common.clickElement("xpath", "(//div[contains(@class,'public-DraftSt')])");
+			Thread.sleep(4000);
+			Common.textBoxInputClear("xpath", "(//div[contains(@class,'public-DraftSt')])");
+			Thread.sleep(4000);
+			Common.findElement("xpath", "(//div[contains(@class,'public-DraftSt')])").sendKeys(ship_name);
+			Thread.sleep(4000);
+			String get=Common.getText("xpath", "//span[@data-text='true']");
+			System.out.println(get);
+			Common.assertionCheckwithReport(get.equals(ship_name),
+                    "To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Successfully order url has been entered in the textbox",
+                    "Failed to Enter the order URL in the text box");
+		}
+		catch(Exception | Error e)
+        {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate it is navigated to the Get Order page",
+					"After clicking on the Get Order  key button it should navigate to Get Order",
+					"Unable to Navigate to the Order page",
+                    "Failed to Navigate to the Order page");
+			Assert.fail();
+			
+         }
+	}
+
+	public void Invoice_URL(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Sync.waitElementPresent(30, "xpath","(//div[contains(@class,'public-DraftSt')])");
+			Common.findElement("xpath", "(//div[contains(@class,'public-DraftSt')])").sendKeys(Dataset+"invoice");
+			String get=Common.getText("xpath", "//span[@data-text='true']");
+			System.out.println(get);
+			Common.assertionCheckwithReport(get.contains(Dataset),
+                    "To Validate the order url entered in the text box",
+                    "After clicking on textbox order url should be entered",
+                    "Successfully order url has been entered in the textbox",
+                    "Failed to Enter the order URL in the text box");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate it is navigated to the Get Order page",
+					"After clicking on the Get Order  key button it should navigate to Get Order",
+					"Unable to Navigate to the Order page",
+                    "Failed to Navigate to the Order page");
+			Assert.fail();
+			
+		}
+		
+	}
+
+	public void Invoice_Body(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			WebElement order=Common.findElement("xpath", "//span[@class='mtk8']");
+			order.click();
+			order.sendKeys(Keys.CONTROL+"a");
+			order.sendKeys(Keys.DELETE);
+			Thread.sleep(4000);
+			order.sendKeys(Dataset);
+	
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+	
+	public String Invoice_Delivery(String Dataset) {
+	    // TODO Auto-generated method stub
+		String Invoice="";
+		try
+		{
+			WebElement order=Common.findElement("xpath", "//span[@class='mtk6']");
+			Common.scrollIntoView(order);
+			order.click();
+			order.sendKeys(Keys.CONTROL+"a");
+			order.sendKeys(Keys.DELETE);
+			Thread.sleep(4000);
+			order.sendKeys(Dataset);
+			Common.clickElement("xpath", "//span[text()='Send']");
+			Thread.sleep(6000);
+			Invoice=Common.getText("xpath", "//span[@class='mtk32']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Invoice"),
+			"To validate Invoice number in the postman",
+			"After clicking on the send button invoice should be generated",
+			"Successfully invoice has been generated",
+			"Failed to generate the invoice when we click on the send button");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To validate Invoice number in the postman",
+					"After clicking on the send button invoice should be generated",
+					"Unable to generate the invoice when we click on the send button",
+                    "Failed to generate the invoice when we click on the send button");
+			Assert.fail();
+			
+		}
+		return Invoice;
+	}
+
+	public void Magento_InvoiceID(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Common.switchToSecondTab();
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[@title='Order Invoices']");
+			String records=Common.getText("xpath", "(//span[text()='records found']//parent::div)[1]");
+			System.out.println(records);
+			if(records.equals("1"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//a[text()='View']");
+				Common.clickElement("xpath", "//a[text()='View']");
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("order_invoice") && Common.getPageTitle().contains(Dataset),
+	                    "To Validate the invoice id in the magento url",
+	                    "After clicking on the view button is should navigate to the invoice page",
+	                    "Successfully Navigated to the invoice page and invoice id also appeared in the url",
+	                    "Failed to Displayed the invoice id in the Magneto url");
+				
+			}
+			else
+			{
+				ExtenantReportUtils.addFailedLog(
+						"To Validate the records in the shipment",
+	                    "After clicking on the shipment button records should be appear ",
+	                    "Unable to Displayed the records in the shipment page",
+	                    "Failed to Displayed the records in the shipment page");
+				Assert.fail();
+			}
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the Invoice id in the magento url",
+                    "After clicking on the view button is should navigate to the Invoice page",
+                    "Unable to Displayed the Invoice id in the Magneto url",
+                    "Failed to Displayed the Invoice id in the Magneto url");
+			Assert.fail();
+		}
+		
 	}
 	      	
 	
