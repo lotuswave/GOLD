@@ -9254,11 +9254,11 @@ public void alumini_Chefs(String Dataset) {
 					Sync.waitElementPresent("xpath", "//input[@name='telephone']");
 					Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 					Thread.sleep(3000);
-					int c=Common.findElements("xpath", "//span[contains(text(),'Ship Here')]").size();
+					int c=Common.findElements("xpath", "//button[@class='a-btn a-btn--primary action primary action-save-address']").size();
 
 					if(c>0)
 					{
-						Common.clickElement("xpath", "//span[contains(text(),'Ship Here')]");}
+						Common.clickElement("xpath", "//button[@class='a-btn a-btn--primary action primary action-save-address']");}
 					else{
 
 					}
