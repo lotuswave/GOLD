@@ -33,7 +33,7 @@ public class Test_DGLD_OXO_E2E_002_Ecom_RegisterUser_Afterpay_1_item_Standard_Sh
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
 			HashMap<String,String> data=Oxo.OrderSummaryValidation();
-			HashMap<String,String> AfterPayment=Oxo.AfterPayment("PaypalDetails");
+			HashMap<String,String> AfterPayment=Oxo.AfterPayment("Afterpay");
 			String OrderIdNumber= Oxo.Verify_order_page();
 			System.out.println(OrderIdNumber);
 			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),AfterPayment.get("Card"),Products_details);
