@@ -9244,7 +9244,7 @@ public void alumini_Chefs(String Dataset) {
 					String Shippingstate = Common.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']").getText(); Shippingaddress.put("ShippingState", Shippingstate); Sync.waitElementPresent("xpath", "//input[@name='city']");
 					Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
 					Thread.sleep(2000);
-					Common.textBoxInputClear("name", "postcode");
+					//Common.textBoxInputClear("name", "postcode");
 					Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
 					Thread.sleep(5000);
 					String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
@@ -9509,13 +9509,13 @@ public void alumini_Chefs(String Dataset) {
 				      String sucessMessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
 				      System.out.println(sucessMessage);
 				      //String Orderid="";
-				      int size=Common.findElements("xpath", "(//div[@class='checkout-success']//span)[1]").size();
+				      int size=Common.findElements("xpath", "//div[@class='m-account-nav__welcome']//span[@class='a-icon-text-btn__label']").size();
 				      if(size>0) {
 				      	
-				      Orderid=Common.getText("xpath", "(//div[@class='checkout-success']//span)[1]");
+				      Orderid=Common.getText("xpath", "(//div[@class='checkout-success']//strong)[1]");
 				      }
 				      else{
-				      Orderid=Common.getText("xpath", "((//div[@class='column main'])//span)[1]");
+				      Orderid=Common.getText("xpath", "(//div[@class='checkout-success']//span)[1]");
 				      }
 				      
 				  	System.out.println(Orderid);
@@ -9887,6 +9887,184 @@ public void alumini_Chefs(String Dataset) {
 						//return order;
 						return Payment;
 				}
+
+				public HashMap<String, String> AfterPayment(String dataSet) throws Exception {
+					HashMap<String, String> Afterpay = new HashMap<String, String>();
+
+				
+				//public String payPalPayment(String dataSet) throws Exception {
+
+					String order="";
+
+					String expectedResult = "It should Select Afterpay payment.";
+					
+					try {
+						
+					 Common.clickElement("xpath", "//label[@class='label']//span[contains(text(),'Default Payment')]");
+					Thread.sleep(5000);
+					
+			
+					} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the Credit Card option", "click the creadit card label",
+					"faield to click Credit Card option", Common.getscreenShotPathforReport("Cardinoption"));
+					Assert.fail();
+
+
+
+					}
+					try {
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+						int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+						Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+								"User unable to land o n the paymentpage");
+						Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+						Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+						int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+						System.out.println(payment);
+						if (payment > 0) {
+							Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+							Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+							Common.clickElement("xpath", "//span[text()='New payment method']");
+							Sync.waitPageLoad();
+							Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+							Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+							Thread.sleep(3000);
+							Sync.waitPageLoad();
+							Sync.waitElementPresent(30, "xpath", "//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
+
+							Common.clickElement("xpath", "//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
+							Thread.sleep(3000);
+							String Card=Common.findElement("xpath","//span[@class='p-TabLabel TabLabel TabLabel--selected']").getText();
+							Afterpay.put("Card", Card);
+							System.out.println(Card);
+
+							Common.switchToDefault();
+							if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+							{
+								
+							Common.clickElement("xpath", "//span[text()='Place Order']");
+							Sync.waitPageLoad();
+							Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+					
+				}
+							else
+							{
+								Thread.sleep(4000);
+								Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+								String afterpay=Common.findElement("xpath", "//button[@value='afterpay_clearpay']//span").getText();
+								System.out.println(afterpay);
+								Common.assertionCheckwithReport(
+										afterpay.contains("Afterpay"),
+										"validating the selection of the afterpay method in production environment",
+										"After pay should be select in the production environment","After pay is selected in the production environment",
+										"Failed to select the after pay method in the production environment");
+								Common.switchToDefault();
+								
+							}
+						}
+						else
+						{
+							Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+							Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+							Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+							Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+							Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
+							Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
+//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
+//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
+//							Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
+//							String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//							Common.assertionCheckwithReport(
+//									details.equals(email),
+//									"validating the email field for the Afterpay Payment Method",
+//									"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
+//									"Failed to enter email in the Afterpay Payment");
+							Common.switchToDefault();
+							if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+							{
+								Thread.sleep(4000);
+								Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+							Common.clickElement("xpath", "//span[text()='Place Order']");
+							Sync.waitPageLoad();
+							
+							Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+							Common.switchToDefault();
+					
+				}
+							else
+							{
+								Thread.sleep(4000);
+								String afterpay=Common.findElement("xpath", "//button[@value='afterpay_clearpay']//span").getText();
+								System.out.println(afterpay);
+								Common.assertionCheckwithReport(
+										afterpay.contains("Afterpay"),
+										"validating the selection of the afterpay method in production environment",
+										"After pay should be select in the production environment","After pay is selected in the production environment",
+										"Failed to select the after pay method in the production environment");
+								
+							}
+					}
+					}
+						
+						catch(Exception | Error e)
+						{
+							e.printStackTrace();
+							ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
+									"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
+							Assert.fail();
+						}
+					
+						String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+						if(!url.contains("stage") && !url.contains("preprod")){
+						}
+					
+					else{
+						try{
+							Thread.sleep(5000);
+					String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+
+					
+					int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+							"verifying the product confirmation", expectedResult,
+							"Successfully It redirects to order confirmation page Order Placed",
+							"User unable to go orderconformation page");
+					
+					if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
+						order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+						System.out.println(order);
+					}
+					if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
+						order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+						System.out.println(order);
+					}
+						
+					}
+			 catch(Exception | Error e)
+			 {
+				 e.printStackTrace();
+				 ExtenantReportUtils.addFailedLog("verifying the order confirmartion page", "It should navigate to the order confirmation page",
+							"User failed to proceed to the order confirmation page", Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+				 
+				 Assert.fail();
+			 }
+				
+					
+						}
+						//return order;
+						return Afterpay;
+				}
+
+
 
 
 
