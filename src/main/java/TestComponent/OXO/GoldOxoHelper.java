@@ -3051,28 +3051,30 @@ try
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Thread.sleep(6000);
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//h2[@role='status']");
-			String klarna=Common.findElement("xpath", "//h2[@role='status']").getText();
+			Sync.waitElementPresent(30, "xpath", "(//h1[@role='heading'])[2]");
+			String klarna=Common.findElement("xpath", "(//h1[@role='heading'])[2]").getText();
 			if(klarna.equals("What's your email?"))
 			{
 				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
 				Common.findElement("xpath","//input[@id='addressCollector-date_of_birth']").sendKeys(DOB);
-				Common.clickElement("xpath", "//div[@id='addressCollector-street_address__label']");
+/*		Common.clickElement("xpath", "//div[@id='addressCollector-street_address__label']");
 				Common.findElement("xpath","//input[@name='street_address']").sendKeys(data.get(Dataset).get("Street"));
 				Common.clickElement("xpath", "//div[@id='addressCollector-city__label']");
 				Common.findElement("xpath","//input[@name='city']").sendKeys(data.get(Dataset).get("City"));
 				Common.clickElement("xpath", "//div[@id='addressCollector-region__label']");
 				Common.findElement("xpath","//input[@name='region']").sendKeys(data.get(Dataset).get("Region"));
 				Common.clickElement("xpath", "//div[@id='addressCollector-postal_code__label']");
-				Common.findElement("xpath","//input[@name='postal_code']").sendKeys(data.get(Dataset).get("postcode"));
+				Common.findElement("xpath","//input[@name='postal_code']").sendKeys(data.get(Dataset).get("postcode"));*/
 				Common.clickElement("xpath", "//div[@id='terms_checkbox__box']");
-				Common.clickElement("xpath", "//span[text()='Continue']");
+				Common.clickElement("xpath", "//button[@id='continueBtn']");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//span[contains(text(),'continue')]");
-				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'Continue')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.clickElement("xpath", "//button[@id='btn_continue']");
+				
+				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='select-payment-category']");
+				Common.clickElement("xpath", "//button[@data-testid='select-payment-category']");
+				
 				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='pick-plan']");
 				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
 				Sync.waitPageLoad();
@@ -3083,18 +3085,20 @@ try
 				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
 				Thread.sleep(4000);	
 				Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
+				Thread.sleep(2000);
 				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
 				Common.findElement("xpath","//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
+				Thread.sleep(2000);
 				Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
 				Common.findElement("xpath","//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
 				Common.switchToDefault();
 				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Common.clickElement("xpath", "//button[@id='payinparts_kp.0-card-collection-continue-button']");
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+		//Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
 			}
 			else
 			{
@@ -3152,7 +3156,6 @@ catch(Exception | Error e)
 	}
 	}
 
-	
 	public String payPal_Payment(String dataSet) throws Exception {
 
 		String order="";
@@ -9426,7 +9429,7 @@ public void alumini_Chefs(String Dataset) {
 							
 							Common.clickElement("xpath", "(//span[text()='New payment method'])[1]");
 						}
-						else {}
+						//else {}
 						
 						
 
@@ -9673,7 +9676,7 @@ public void alumini_Chefs(String Dataset) {
 						Sync.waitPageLoad();
 						Thread.sleep(2000);
 						String name=Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-						Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+						Common.assertionCheckwithReport(products.contains(name), "validating the  product navigates to PDP page",
 								"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 								"failed to Navigate to the PDP page");
 						
@@ -10077,6 +10080,145 @@ public void alumini_Chefs(String Dataset) {
 						//return order;
 						return Afterpay;
 				}
+
+
+				public HashMap<String, String> Klarna(String dataSet) {
+					// TODO Auto-generated method stub
+					HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+					Sync.waitPageLoad();
+					//Thread.sleep(4000);
+				
+					String fullname=data.get(dataSet).get("FirstName");
+					String expectedResult = "land on the payment section";
+
+					try {
+						Sync.waitPageLoad();
+                        Thread.sleep(2000);
+						Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
+						int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+						Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+								"User unable to land o n the paymentpage");
+						Common.clickElement("xpath", "//label[@for='stripe_payments']");
+
+				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+						int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+						System.out.println(payment);
+						if (payment > 0) {
+							Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+							Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+							Common.clickElement("xpath", "//span[text()='New payment method']");
+							
+							Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+							Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+							Thread.sleep(4000);
+							Sync.waitElementPresent(30, "xpath", "//button[@value='klarna']");
+							Common.clickElement("xpath", "//button[@value='klarna']");
+							Thread.sleep(2000);
+							
+							String Card=Common.findElement("xpath","//span[@class='p-TabLabel TabLabel TabLabel--selected']").getText();
+		Paymentmethod.put("Card",Card);
+					//paymAfterpay.put("Card", Card);
+							System.out.println(Card);
+//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
+//							String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//							String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//							Common.assertionCheckwithReport(
+//									details.equals(email),
+//									"validating the email field for the Klarana Payment Method",
+//									"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
+//									"Failed to enter email in the Klarna Payment");
+							Common.switchToDefault();
+//							Common.clickElement("xpath", "//span[text()='Place Order']");
+							
+							if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+							{
+							Common.clickElement("xpath", "//span[text()='Place Order']");
+							Sync.waitPageLoad();
+							klarna_Details(dataSet);
+							}
+							else
+							{
+								Thread.sleep(4000);
+								Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+								String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+								System.out.println(klarna);
+								Common.assertionCheckwithReport(
+										klarna.contains("Klarna"),
+										"validating the selection of the klarna method",
+										"klarna should be selected ","klarna is selected",
+										"Failed to select the klarna method in the production environment");
+								Common.switchToDefault();
+								
+							}
+							
+							
+						}
+						else
+						{
+							Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+							Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+							Common.clickElement("xpath", "//button[@value='klarna']");
+//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
+//							String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
+//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
+//							String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
+//							Common.assertionCheckwithReport(
+//									details.equals(email),
+//									"validating the email field for the Klarana Payment Method",
+//									"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
+//									"Failed to enter email in the Klarna Payment");
+							Common.switchToDefault();
+							
+							if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+							{
+							Common.clickElement("xpath", "//span[text()='Place Order']");
+							Sync.waitPageLoad();
+							klarna_Details(dataSet);
+							}
+							else
+							{
+								Thread.sleep(4000);
+								Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+								String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getText();
+								System.out.println(klarna);
+								Common.assertionCheckwithReport(
+										klarna.contains("Klarna"),
+										"validating the selection of the klarna method",
+										"klarna should be selected ","klarna is selected",
+										"Failed to select the klarna method in the production environment");
+								Common.switchToDefault();
+								
+							}
+						}
+						
+						
+						
+					
+				}
+					catch(Exception | Error e)
+					{
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("verifying the product confirmation", "User Should able to Navigate to the order confirmation page",
+								"User failed to navigate  to order confirmation page",
+								Common.getscreenShotPathforReport("failednavigatepage"));
+						Assert.fail();
+					}
+					return Paymentmethod;
+					
+					
+				}
+
+
+
+
+
+
 
 
 
