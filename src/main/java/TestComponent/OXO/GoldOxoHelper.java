@@ -9415,6 +9415,20 @@ public void alumini_Chefs(String Dataset) {
 
 
 					try {
+						Thread.sleep(3000);
+						int size = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+						if (size > 0) {
+ 
+							
+							
+							Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+							Thread.sleep(1000);
+							
+							Common.clickElement("xpath", "(//span[text()='New payment method'])[1]");
+						}
+						else {}
+						
+						
 
 
 
