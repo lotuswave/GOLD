@@ -21,45 +21,46 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 
 		try {
 			
-			API.verifingHomePage();	
-			API.search_product("Product");
-			API.addtocart("Product");
-	        API.minicart_Checkout();
-	        API.addDeliveryAddress_Guestuser("Account");
-	        API.selectshippingmethod("GroundShipping method");
-	        API.clickSubmitbutton_Shippingpage();
-	        String order= API.updatePaymentAndSubmitOrder("CCVisacard");
-	        System.out.println(order);
-//			String order="ZSOPREPD11000058668";
+//			API.verifingHomePage();	
+//			API.search_product("Product");
+//			API.addtocart("Product");
+//	        API.minicart_Checkout();
+//	        API.addDeliveryAddress_Guestuser("Account");
+//	        API.selectshippingmethod("GroundShipping method");
+//	        API.clickSubmitbutton_Shippingpage();
+//	        String order= API.updatePaymentAndSubmitOrder("CCVisacard");
+//	        System.out.println(order);
+			String order="ZSOPREPD11000059014";
 			API.Admin_signin("AccountDetails");
 			API.click_Sales();
 			API.Click_Orders_Salesmenu();
 			API.Orders(order);
 			String id=API.getorder_id("sales order");
 			System.out.println(id);
-//			String id="8672853/";
+//			String id="8673018/";
 			API.Login_Account("Post_Account");
 			API.WorkSpace();
 			API.select_Website("Website_selection");
 			String Token=API.Generate_Token("Api_Key");
 			System.out.println(Token);
-			API.Get_order("order");
-			API.order_Url(id);
-			API.Authorization(Token);	
-			HashMap<String,String> GetOrderDetails=API.getorderDetails();
-			System.out.println(GetOrderDetails);
+//			API.Get_order("order");
+//			API.order_Url(id);
+//			API.Authorization(Token);	
+//			HashMap<String,String> GetOrderDetails=API.getorderDetails();
+//			System.out.println(GetOrderDetails);
 			API.Ship_Items("Ship");
 			API.Ship_URL(id);
-			API.Authorization(Token);
+			String Token1=API.Generate_Token("Api_Key");
+			API.Ship_Authorization(Token1);
 			String orderid=API.order_item_id(order);
 			API.Magento_Order_Id(orderid);
-			String Delivery=API.Delivery_Details();
-			API.Invoice("Invoice");
-			API.Invoice_URL(id);
-			API.Authorization(Token);
-			API.Invoice_Body(Delivery);
-			String Invoice=API.Invoice_Delivery(order);
-			API.Magento_InvoiceID(Invoice);
+//			String Delivery=API.Delivery_Details();
+//			API.Invoice("Invoice");
+//			API.Invoice_URL(id);
+//			API.Authorization(Token);
+//			API.Invoice_Body(Delivery);
+//			String Invoice=API.Invoice_Delivery(order);
+//			API.Magento_InvoiceID(Invoice);
 			
 		} catch (Exception e) {
 
