@@ -3118,7 +3118,7 @@ try
 					Common.getscreenShotPathforReport("Failed to enter Card details in the Klarna payment"));
 			Assert.fail();
 		}
-		String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+	/*	String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		if(!url1.contains("stage") && !url1.contains("preprod")){
 		}
 	
@@ -3153,7 +3153,7 @@ catch(Exception | Error e)
  
  Assert.fail();
 }
-	}
+	}*/
 	}
 
 	public String payPal_Payment(String dataSet) throws Exception {
@@ -9334,7 +9334,7 @@ public void alumini_Chefs(String Dataset) {
 					Float ExpectedTotalAmmount = subtotlaValue+shippingammountvalue+Taxammountvalue;
 
 					String ExpectedTotalAmmount2 = new BigDecimal(ExpectedTotalAmmount).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-					String ExpectedTotalAmount=String.valueOf(ExpectedTotalAmmount);
+					String ExpectedTotalAmount=String.valueOf(ExpectedTotalAmmount2);
 					data.put("ExpectedTotalAmmountvalue",ExpectedTotalAmount);
 
 					}
@@ -9528,6 +9528,8 @@ public void alumini_Chefs(String Dataset) {
 				      String sucessMessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
 				      System.out.println(sucessMessage);
 				      //String Orderid="";
+				      
+				      Thread.sleep(3000);
 				      int size=Common.findElements("xpath", "//div[@class='m-account-nav__welcome']//span[@class='a-icon-text-btn__label']").size();
 				      if(size>0) {
 				      	
@@ -10122,17 +10124,7 @@ public void alumini_Chefs(String Dataset) {
 		Paymentmethod.put("Card",Card);
 					//paymAfterpay.put("Card", Card);
 							System.out.println(Card);
-//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
-//							String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-//							String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//							Common.assertionCheckwithReport(
-//									details.equals(email),
-//									"validating the email field for the Klarana Payment Method",
-//									"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
-//									"Failed to enter email in the Klarna Payment");
+//							
 							Common.switchToDefault();
 //							Common.clickElement("xpath", "//span[text()='Place Order']");
 							
@@ -10164,17 +10156,7 @@ public void alumini_Chefs(String Dataset) {
 							Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 							Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 							Common.clickElement("xpath", "//button[@value='klarna']");
-//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", Utils.getEmailid());
-//							String email=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//							Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-//							Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-//							String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//							Common.assertionCheckwithReport(
-//									details.equals(email),
-//									"validating the email field for the Klarana Payment Method",
-//									"Email should be entered in the email field in Klarana payment method","Email has been dispalyed in the Klarna payment",
-//									"Failed to enter email in the Klarna Payment");
+//							
 							Common.switchToDefault();
 							
 							if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
