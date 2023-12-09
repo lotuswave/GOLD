@@ -9298,7 +9298,7 @@ public void alumini_Chefs(String Dataset) {
 
 					// Capabilities cap = (WebDriver).getCapabilities();
 
-					String shippingammount=Common.getText("xpath", "//span[@data-th='Shipping']").replace("$", "");
+					String shippingammount=Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']").replace("$", "");
 					Float shippingammountvalue=Float.valueOf(shippingammount);
 					data.put("shippingammountvalue",shippingammount);
 
@@ -9332,6 +9332,8 @@ public void alumini_Chefs(String Dataset) {
 
 
 					Float ExpectedTotalAmmount = subtotlaValue+shippingammountvalue+Taxammountvalue;
+
+					String ExpectedTotalAmmount2 = new BigDecimal(ExpectedTotalAmmount).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 					String ExpectedTotalAmount=String.valueOf(ExpectedTotalAmmount);
 					data.put("ExpectedTotalAmmountvalue",ExpectedTotalAmount);
 
@@ -10215,7 +10217,189 @@ public void alumini_Chefs(String Dataset) {
 				}
 
 
+				public HashMap<String, String> ExpressPaypal(String dataSet) {
+					
+					HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+					
+						String order = "";
 
+						String expectedResult = "It should open paypal site window.";
+						
+						try {
+							Thread.sleep(3000);
+							Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+
+							// Common.refreshpage();
+							Thread.sleep(8000);
+							Sync.waitElementClickable("xpath", "//div[contains(@class,'paypal-button-lab')]");
+							Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+							
+							
+							String Card= "ExpressPayPal";
+							
+							Paymentmethod.put("Card",Card);
+										
+												System.out.println(Card);
+							
+							Common.switchToDefault();
+							Thread.sleep(5000);
+							Common.switchWindows();
+							Common.clickElement("id", "login_emaildiv");
+							Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+							Common.clickElement("id", "btnNext");
+							Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+							Common.clickElement("id", "btnLogin");
+							
+							Thread.sleep(3000);
+							//Paypal_Address_Verification("Express Paypal");
+							
+						}
+						 catch (Exception | Error e) {
+							e.printStackTrace();
+							ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+									"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
+							Assert.fail();
+						}
+			
+					
+						return Paymentmethod;
+						}
+
+
+				//public HashMap<String, String> Paypal_Address(String string) 
+				
+				public void Paypal_Address()
+				{
+					// TODO Auto-generated method stub
+					//HashMap<String, String> Shippingaddress = new HashMap<String, String>();
+					String expectedResult = "It should open paypal site window.";
+					try {
+						Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
+						Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
+						Thread.sleep(1000);
+						Common.findElement("xpath", "//button[@id='add-option-shipping-link']");
+						Common.clickElement("xpath", "//button[@id='add-option-shipping-link']");
+						
+					}
+					catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+								"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
+						Assert.fail();
+					}
+					
+					
+					//return null;
+				}
+
+
+				public void ExpressOrder() {
+					
+					String expectedResult = "";
+				String order = "";
+					
+					if(Common.getCurrentURL().contains("preprod") )
+					{
+						Common.scrollIntoView("xpath", "//button[@value='Place Order']");
+						//Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
+						//Thread.sleep(2000);
+						
+						Common.clickElement("xpath", "//button[@value='Place Order']");
+					}
+					
+					// Tell_Your_FriendPop_Up();//To close the Pop-up
+					String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+					if (!!url1.contains("preprod")) {
+					}
+
+					else {
+						try {
+							Thread.sleep(6000);
+							String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+							System.out.println(sucessMessage);
+
+							int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+							Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+									"verifying the product confirmation", expectedResult,
+									"Successfully It redirects to order confirmation page Order Placed",
+									"User unable to go orderconformation page");
+
+							if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+								order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+								System.out.println(order);
+							}
+							if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+								order = Common.getText("xpath", "//a[@class='order-number']/strong");
+								System.out.println(order);
+							}
+
+						} catch (Exception | Error e) {
+							e.printStackTrace();
+							ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+									"It should navigate to the order confirmation page",
+									"User failed to proceed to the order confirmation page",
+									Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+							Assert.fail();
+						}
+					}
+				}
+					
+				
+
+					
+				
+		public HashMap<String, String> ExpressShipingdetails(String dataSet) throws Exception{
+			HashMap<String, String> Shippingaddress = new HashMap<String, String>();
+			try{
+				
+			Common.clickElement("xpath", "//input[@data-testid='address-auto-suggest']");
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//input[@data-testid='address-auto-suggest']", data.get(dataSet).get("Street"));
+			/*
+			Sync.waitElementPresent("xpath", "//select[@name='country_id']");
+			Common.dropdown("xpath", "//select[@name='country_id']", SelectBy.TEXT, data.get(dataSet).get("Countryname"));*/
+			Thread.sleep(3000);
+			Common.dropdown("xpath", "//select[@id='state']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));
+			Thread.sleep(5000);
+			String Shippingvalue = Common.findElement("xpath", "//select[@id='state']").getAttribute("value");
+			String Shippingstate = Common.findElement("xpath", "//select[@id='state']//option[@value='" + Shippingvalue + "']").getText(); 
+			Shippingaddress.put("ShippingState", Shippingstate); 
+			Sync.waitElementPresent("xpath", "//input[@data-testid='address-form-field-city']");
+			Common.textBoxInput("xpath", "//input[@data-testid='address-form-field-city']", data.get(dataSet).get("City"));
+			Thread.sleep(2000);
+			//Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("xpath", "//input[@data-testid='address-form-field-postalCode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+			String ShippingZip = Common.findElement("xpath", "//input[@data-testid='address-form-field-postalCode']").getAttribute("value");
+			System.out.println("*****" + ShippingZip + "*******");
+			Shippingaddress.put("ShippingZip", ShippingZip);
+			Thread.sleep(3000);
+			int c=Common.findElements("xpath", "//button[@data-testid='add-shipping-save-btn']").size();
+
+			if(c>0)
+			{
+				Common.clickElement("xpath", "//button[@data-testid='add-shipping-save-btn']");}
+			else{
+
+			}
+			Common.clickElement("id", "payment-submit-btn");
+			Thread.sleep(8000);
+			Common.switchToFirstTab();
+
+			Thread.sleep(3000);
+			
+			}
+			catch(Exception |Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying shipping addres filling", "user will fill the all the shipping", "faield to add new shipping address",Common.getscreenShotPathforReport("faieldsshippingpagefilling"));
+			Assert.fail();
+			}
+			System.out.println(Shippingaddress);
+			return Shippingaddress;
+			}
+
+					
 
 
 
