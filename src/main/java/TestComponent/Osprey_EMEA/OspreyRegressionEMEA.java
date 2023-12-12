@@ -10694,13 +10694,15 @@ catch(Exception | Error e)
 		try
 		{
 			Thread.sleep(3000);
-			String ordertotal = Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace("£", "");
+			String ordertotal = Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace(symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			System.out.println(ordertotalvalue);
 			Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
 			Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+			Thread.sleep(4000);
 			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
 			Float Pricevalue = Float.parseFloat(price);
+			Thread.sleep(4000);
 			if(Pricevalue<ordertotalvalue)
 			{
 				
