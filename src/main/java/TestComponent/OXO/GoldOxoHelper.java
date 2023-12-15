@@ -112,8 +112,8 @@ public GoldOxoHelper(String datafile,String sheetname) {
 				Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-//			Common.clickElement("xpath", "//span[text()='Shop All']");
-			//Common.clickElement("xpath", "//a[contains(@aria-label,'Coffee & Beverage')]");
+			//Common.clickElement("xpath", "//span[text()='Shop All']");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Coffee & Beverage')]");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -952,8 +952,10 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-			Common.textBoxInput("id", "Field-numberInput", data.get(dataSet).get("cardnumber"));
+			Common.clickElement("xpath", "//input[@id='Field-numberInput']");
+			Thread.sleep(1000);
+			Common.textBoxInput("xpath", "//input[@id='Field-numberInput']", data.get(dataSet).get("cardNumber"));
+			Thread.sleep(2000);
 			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 			
 			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
@@ -8837,7 +8839,7 @@ public void alumini_Chefs(String Dataset) {
 			
 				
 				
-				public void writeOrderNumber(String OrderIdNumber,String Description, String subtotlaValue, String shippingammountvalue, String Taxammountvalue,String ActualTotalammountvalue,String ExpectedTotalammountvalue,String Discountammountvalue, String ShippingState,String ShippingZip, String Card, String Products_details) throws FileNotFoundException, IOException
+				public void writeOrderNumber(String OrderIdNumber,String Description, String subtotlaValue, String shippingammountvalue, String Taxammountvalue,String ActualTotalammountvalue,String ExpectedTotalammountvalue,String Discountammountvalue, String ShippingState,String ShippingZip, String Card, String Products_details, String AdminOrderstatus, String AdminOrdertax, String AdminOrdertotal) throws FileNotFoundException, IOException
 				{
 					//String fileOut="";
 				try{
@@ -8953,6 +8955,48 @@ public void alumini_Chefs(String Dataset) {
 						cell = row.createCell(15);
 					cell.setCellType(CellType.NUMERIC);
 					cell.setCellValue(Products_details);
+					
+					cell = row.createCell(16);
+					cell.setCellType(CellType.STRING);
+					cell.setCellValue(AdminOrderstatus);
+					
+					cell = row.createCell(17);
+					cell.setCellType(CellType.NUMERIC);
+					cell.setCellValue(AdminOrdertax);
+					
+					cell = row.createCell(18);
+					cell.setCellType(CellType.NUMERIC);
+					cell.setCellValue(AdminOrdertotal);
+					
+					cell = row.createCell(19);
+					cell.setCellType(CellType.STRING);
+					
+					String Status;
+					 
+					if(AdminOrderstatus.equals("Processing") && AdminOrdertax.equals(Taxammountvalue) && AdminOrdertotal.equals(ExpectedTotalammountvalue))
+				     {
+						
+						Status="PASS";
+						CellStyle style = workbook.createCellStyle();
+						Font font= workbook.createFont();
+						font.setColor(IndexedColors.GREEN.getIndex());
+						font.setBold(true);
+						style.setFont(font);
+						cell.setCellStyle(style);
+					}
+					else
+					{
+						Status="FAIL";
+						CellStyle style = workbook.createCellStyle();
+						Font font= workbook.createFont();
+						font.setColor(IndexedColors.RED.getIndex());
+						font.setBold(true);
+						style.setFont(font);
+						cell.setCellStyle(style);
+						}
+					
+					
+					cell.setCellValue(Status);
 					
 					/*cell = row.createCell(17);
 					cell.setCellType(CellType.NUMERIC);
@@ -9124,6 +9168,21 @@ public void alumini_Chefs(String Dataset) {
 						cell.setCellStyle(cs);
 						cell.setCellValue("Products_details");
 						
+						cell=row.createCell(16);
+						cell.setCellStyle(cs);
+						cell.setCellValue("MagentoStatus");
+						
+						cell=row.createCell(17);
+						cell.setCellStyle(cs);
+						cell.setCellValue("Magento Order tax");
+						
+						cell=row.createCell(18);
+						cell.setCellStyle(cs);
+						cell.setCellValue("Magento Order total");
+						
+						cell=row.createCell(19);
+						cell.setCellStyle(cs);
+						cell.setCellValue("Status");
 						
 						/*	cell=row.createCell(17);
 						cell.setCellStyle(cs);
@@ -10381,15 +10440,198 @@ public void alumini_Chefs(String Dataset) {
 			return Shippingaddress;
 			}
 
-					
+
+		public void Admin(String dataSet) {
+			// TODO Auto-generated method stub
+			//String pagetitle = data.get(Dataset).get("pageTitle");
+			try {
+				Sync.waitPageLoad(60);
+
+				Common.openNewTab();
+				
+				Common.oppenURL(data.get(dataSet).get("preprodURL"));
+				/*if (Common.getCurrentURL().contains("preprod")) {
+					Common.oppenURL(data.get(dataSet).get("preprodURL"));
+				} else {
+					Common.oppenURL(data.get(dataSet).get("prodURL"));
+					//Common.oppenURL(data.get(dataSet).get("prodURL"));
+				}*/
+				//Thread.sleep(5000);
+
+				Sync.waitPageLoad(40);
+
+				String URL = Common.getPageTitle();
+				Common.assertionCheckwithReport(URL.contains("Magento"),
+						"Validating the Magento Admin panel",
+						"User should able to land on Magento Admin panel", "Sucessfully User lands on the Magento Admin panel",
+						"Failed to navigate to the Magento Admin panel");
+			}
+			catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the User lands on the Magento Admin panel",
+					"User should able to land on the Magento Admin panel", "Unable to Navigate to the Magento Admin panel",
+					Common.getscreenShotPathforReport("Failed to navigate to the Magento Admin panel"));
+
+			Assert.fail();
+		}
+
+		        try {
+		            if (Common.getCurrentURL().contains("preprod")) {
+		                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+		                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+		            } 
+		            Sync.waitPageLoad(30);
+		            Sync.waitElementPresent("name", "loginfmt");
+		            Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
+		            Common.clickElement("id", "idSIButton9");
+		            Sync.waitPageLoad();
+		            Thread.sleep(3000);
+		            Sync.waitElementPresent(30, "name", "passwd");
+		            Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
+		            Common.clickElement("id", "idSIButton9");
+		            Sync.waitPageLoad();
+		            Thread.sleep(4000);
+		            Common.clickElement("xpath", "//input[@value='Yes']");
+		        
+		            String URL = Common.getPageTitle();
+		            Common.assertionCheckwithReport(URL.contains("Magento"),
+							"Validating the Magento Admin panel",
+							"User should able to land on Magento Admin panel", "Sucessfully User lands on the Magento Admin panel",
+							"Failed to navigate to the Magento Admin panel");
+
+			} 
+		catch (Exception | Error e) 
+		{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Validating the User lands on the Magento Admin panel",
+						"User should able to land on the Magento Admin panel", "Unable to Navigate to the Magento Admin panel",
+						Common.getscreenShotPathforReport("Failed to navigate to the Magento Admin panel"));
+
+				Assert.fail();
+			}
+		
+		}
+		public void click_Sales() {
+			// TODO Auto-generated method stub
+
+			try {
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("id", "menu-magento-sales-sales");
+				Common.clickElement("id", "menu-magento-sales-sales");
+				Thread.sleep(2000);
+				String Sales = Common.findElement("xpath", "//li[@class='item-sales-order    level-2']").getText();
+				System.out.println(Sales);
+				// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+				// @style='display: none;']");
+				Common.assertionCheckwithReport(Sales.equals("Orders"), "To verify the sales menu ",
+						"After clicking the sales menu it will display menu options ",
+						"Successfully clicked the sales menu and it displayed the Catalog options",
+						"Failed to click the sales menu");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				report.addFailedLog("To verify the sales menu ",
+						"After clicking the sales menu it will display menu options ",
+						"Successfully clicked the sales menu and it displayed the sales options",
+						Common.getscreenShotPathforReport("Failed to click on the sales menu"));
+				Assert.fail();
+			}
+
+		
+		try {
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//li[@class='item-sales-order    level-2']");
+			Common.clickElement("xpath", "//li[@class='item-sales-order    level-2']");
+			Sync.waitPageLoad();
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Orders / Operations / Sales / Magento Admin"),
+					"To Validate the orders page is displayed",
+					"should display the orders page after clicking on the orders",
+					"orders page is displayed after a click on the order button", "Failed to display orders page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the orders page is displayed",
+					"should display the orders page after clicking on the orders",
+					"unable to display orders page after a click on the orders button",
+					"Failed to display orders page");
+			Assert.fail();
+		}
+}
 
 
-
-
-
-
-
+		public HashMap<String, String> Admin_Order_Details(String OrderId) {
+			HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
+			// TODO Auto-generated method stub
+			//String  OrderIdNumber = "";
+			try {
+				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", OrderId);
+				Common.actionsKeyPress(Keys.ENTER);
+			}
+			
+			 catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To Validate the orders page is displayed",
+							"should display the orders page after clicking on the orders",
+							"unable to display orders page after a click on the orders button",
+							"Failed to display orders page");
+					Assert.fail();
+		}
+		try {
+		Thread.sleep(3000);
+				String  a = Common.findElement("xpath", "//div[@class='data-grid-cell-content']").getText();
+				
+				if (OrderId.contains(a))
+				{
+					Thread.sleep(3000);
+					Common.clickElement("xpath", "//a[@class='action-menu-item']");
+				}
+				
+				String b = "Processing";
+				String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+				
+						
+						
+							System.out.println(Orderstatus);
+							Orderstatus1.put("AdminOrderstatus", Orderstatus);
+							
+							String Ordertax = Common.getText("xpath", "//table/tbody/tr[4]/td[2]/span").replace("$", "");
+							
+							//String Ordertax = Common.findElement("xpath", "//table/tbody/tr[4]/td[2]/span").getText();
+							System.out.println(Ordertax);
+							Orderstatus1.put("AdminOrdertax", Ordertax);
+							
+							String GrandTotal = Common.getText("xpath", "//table/tbody/tr[5]/td[2]/strong").replace("$", "");
+							//String GrandTotal = Common.findElement("xpath", "//table/tbody/tr[5]/td[2]/strong").getText();
+							System.out.println(GrandTotal);
+							Orderstatus1.put("AdminOrdertotal", GrandTotal);
+						//}
+		}
+		
+			catch (Exception | Error e) {
+				e.printStackTrace();
+			}
+			//}
+			return Orderstatus1;
 
 }
+}
+
+		
+
+
+
+
+
+
+
+
+
+
+
 
 
