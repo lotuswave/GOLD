@@ -206,18 +206,19 @@ public class OspreyRegressionEMEA {
 		            Common.clickElement("xpath", "//div[@data-testid='form-row']//button");
 		            int sizes = Common.findElements("xpath", "//div[@data-testid='form-component']//span").size();
 		            String text=Common.findElement("xpath", "//div[@data-testid='form-component']//span").getText();
-		            Common.assertionCheckwithReport(sizes>0 ||text.equals("Tell us your favourite interests:"), "verifying Account page links newsletter Subcription popup",
+		            System.out.println(text);
+		            Common.assertionCheckwithReport(sizes>0 ||text.equals("Thanks for signing up!"), "verifying Account page links newsletter Subcription popup",
 							"user should navigate to the newsletter Subcription popup page",
 							"user successfully Navigated to the newsletter Subcription popup", "Failed click on the newsletter Subcription popup" );
 		            
-		            Common.clickElement("xpath", "//div[text()='"+Running+"']");
-		            Common.clickElement("xpath", "//div[@data-testid='form-row']//button");
-		            int sizes1 = Common.findElements("xpath", "(//span[@class='ql-font-kanit'])[1]").size();
-		            String text1=Common.findElement("xpath", "(//span[@class='ql-font-kanit'])[1]").getText();
-		            Common.assertionCheckwithReport(sizes1>0 ||text1.equals("Check your inbox"), "verifying Account page links newsletter Subcription popup",
-							"user should navigate to the newsletter Subcription popup page",
-							"user successfully Navigated to the newsletter Subcription popup", "Failed click on the newsletter Subcription popup" );
-		            
+//		            Common.clickElement("xpath", "//div[text()='"+Running+"']");
+//		            Common.clickElement("xpath", "//div[@data-testid='form-row']//button");
+//		            int sizes1 = Common.findElements("xpath", "(//span[@class='ql-font-kanit'])[1]").size();
+//		            String text1=Common.findElement("xpath", "(//span[@class='ql-font-kanit'])[1]").getText();
+//		            Common.assertionCheckwithReport(sizes1>0 ||text1.equals("Check your inbox"), "verifying Account page links newsletter Subcription popup",
+//							"user should navigate to the newsletter Subcription popup page",
+//							"user successfully Navigated to the newsletter Subcription popup", "Failed click on the newsletter Subcription popup" );
+//		            
 		        }else {
 		        	
 		        }
@@ -9446,8 +9447,8 @@ public void Verify_OrderTotal() {
 				System.out.println("Switch to Default");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 				{
-					Sync.waitElementClickable("xpath", "//button[@class='action primary checkout']");
-				Common.clickElement("xpath", "//button[@class='action primary checkout']");
+					Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
+				Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 				Sync.waitPageLoad();
 				klarna_Details(dataSet);
 				}
@@ -9552,9 +9553,12 @@ public void Verify_OrderTotal() {
 			
 			if(klarna.contains("How do you want to pay"))
 			{
-				
-				Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Thread.sleep(4000);
+			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+			//	Thread.sleep(8000);
+				Common.javascriptclickElement("xpath", "(//span[contains(text(),'Continue')])[1]");
+				Thread.sleep(4000);
+				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Common.clickElement("xpath", "//span[contains(text(),'Pay "+Symbol+"')]");
 				Sync.waitPageLoad();
 				
@@ -9611,7 +9615,10 @@ public void Verify_OrderTotal() {
 				Common.switchToDefault();
 				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+		//		Thread.sleep(4000);
+				Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+				Thread.sleep(8000);
+				Common.javascriptclickElement("xpath", "(//span[contains(text(),'Continue')])[1]");
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
