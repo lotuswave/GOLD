@@ -1881,9 +1881,12 @@ public class OspreyRegressionEMEA {
 			Common.findElement("xpath", "//input[@class='a-number-input m-add-to-cart__input']").sendKeys(MoreQuantity);
 			// Common.textBoxInput("xpath", "//input[@class='a-number-input
 			// m-add-to-cart__input']", "1000");
-
+			WebElement Scroll=Common.findElement("xpath", "//ol[@class='m-breadcrumb__list']");
+			Common.scrollIntoView(Scroll);
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Thread.sleep(4000);
 			Sync.waitElementVisible("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']");
 			String Error = Common.findElement("xpath",
 					"//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
@@ -4438,8 +4441,8 @@ public class OspreyRegressionEMEA {
 		System.out.println(products);
 		try {
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo lazy loaded']");
+			Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo lazy loaded']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			more_Quantity("review");
