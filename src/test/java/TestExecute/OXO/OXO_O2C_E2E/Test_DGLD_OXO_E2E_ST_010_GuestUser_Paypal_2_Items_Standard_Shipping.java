@@ -37,7 +37,10 @@ public class Test_DGLD_OXO_E2E_ST_010_GuestUser_Paypal_2_Items_Standard_Shipping
 			HashMap<String,String> Payment=Oxo.payPalPayment("PaypalDetails");
 			String OrderIdNumber= Oxo.Verify_order_page();
 			System.out.println(OrderIdNumber);
-			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),Payment.get("Card"),Products_details);
+			Oxo.Admin("Login Details");
+			Oxo.click_Sales();
+			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderIdNumber);
+			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),Payment.get("Card"),Products_details,Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("AdminOrdertax"),Orderstatus1.get("AdminOrdertotal"));
 
 			
 			
