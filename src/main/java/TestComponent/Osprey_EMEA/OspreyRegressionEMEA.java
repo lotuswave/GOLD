@@ -9743,10 +9743,12 @@ catch(Exception | Error e)
 				Assert.fail();
 			}
 			express_paypal_shipping("Paypal Shipping");
+			Thread.sleep(4000);
 			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
 			{
 				Common.scrollIntoView("xpath", "//button[@value='Place Order']");
 				Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@value='Place Order']");
 			}
 			// Tell_Your_FriendPop_Up();//To close the Pop-up
@@ -9794,9 +9796,17 @@ catch(Exception | Error e)
 		
 		try
 		{
-			Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
-			String address=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
-			if(address.contains("united states"))
+			Sync.waitElementPresent("xpath", "//span[@data-testid='header-cart-total']");
+			String symbol=Common.findElement("xpath", "//span[@data-testid='header-cart-total']").getText();
+			System.out.println(symbol);
+			Thread.sleep(5000);
+			if(symbol.contains("$"))
+			{
+				Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
+				String address=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
+				System.out.println(address);
+			}
+			else
 			{
 				Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
 				Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
@@ -9805,7 +9815,7 @@ catch(Exception | Error e)
 				Thread.sleep(3000);
 				String Ukaddress=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
 				System.out.println(Ukaddress);
-				String UK=data.get(Dataset).get("Street").replace("QA TEST - ", "");
+				String UK=data.get(Dataset).get("Street").replace("Test Qa - ", "");
 				System.out.println(UK);
 				Common.assertionCheckwithReport(
 						Ukaddress.contains(UK),

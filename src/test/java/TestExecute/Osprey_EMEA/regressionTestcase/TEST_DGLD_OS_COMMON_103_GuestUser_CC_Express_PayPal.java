@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_103_GuestUser_CC_Express_PayPal {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -40,7 +40,7 @@ public class TEST_DGLD_OS_COMMON_103_GuestUser_CC_Express_PayPal {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
+		System.setProperty("configFile", "Osprey_US\\config.properties");
         Login.signIn();
         
 
