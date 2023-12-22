@@ -10457,6 +10457,8 @@ catch(Exception | Error e)
 	public void click_Prodeal() {
 		// TODO Auto-generated method stub
 		try {
+			if(Common.getCurrentURL().contains("/gb"))
+			{
 			Common.scrollIntoView("xpath", "//a[text()='Osprey Pro']");
 			Sync.waitElementPresent("xpath", "//a[text()='Osprey Pro']");
 			Common.clickElement("xpath", "//a[text()='Osprey Pro']");
@@ -10464,6 +10466,17 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
 					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
 					"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
+			}
+			else
+			{
+				Common.scrollIntoView("xpath", "//a[text()='Pro Sales']");
+				Sync.waitElementPresent("xpath", "//a[text()='Pro Sales']");
+				Common.clickElement("xpath", "//a[text()='Pro Sales']");
+				Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
+						"To validate the Pro Deal", "Should be display the Pro Deal Application ",
+						"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
