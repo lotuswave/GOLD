@@ -10381,7 +10381,16 @@ catch(Exception | Error e)
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			if(Common.getCurrentURL().contains("/gb"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//a[@title='Sign in or register']");
+				Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Sign in or Apply']");
+				Common.clickElement("xpath", "//span[text()='Sign in or Apply']");
+			}
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
@@ -10402,11 +10411,11 @@ catch(Exception | Error e)
 
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Sync.waitPageLoad();
-			Common.switchWindows();
-			Thread.sleep(3000);
+//			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+//			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+//			Sync.waitPageLoad();
+//			Common.switchWindows();
+//			Thread.sleep(3000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the pro deal application page",
