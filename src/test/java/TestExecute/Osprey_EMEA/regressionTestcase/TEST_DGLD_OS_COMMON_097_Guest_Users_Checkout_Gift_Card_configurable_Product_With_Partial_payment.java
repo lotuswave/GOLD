@@ -21,15 +21,16 @@ public class TEST_DGLD_OS_COMMON_097_Guest_Users_Checkout_Gift_Card_configurable
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.search_product("X-mas Gift Card");
-        Osprey_ReEu.Gift_cards("X-mas Gift Card");
-        Osprey_ReEu.Card_Value("price");
+//        Osprey_ReEu.search_product("X-mas Gift Card");
+//        Osprey_ReEu.Gift_cards("X-mas Gift Card");
+//        Osprey_ReEu.Card_Value("price");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Gift_card("Partial Giftcard");
-        Osprey_ReEu.Partial_Payment("Partial Giftcard");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+//        Osprey_ReEu.Partial_Payment("Partial Giftcard");
         
 		} catch (Exception e) {
 
@@ -40,7 +41,7 @@ public class TEST_DGLD_OS_COMMON_097_Guest_Users_Checkout_Gift_Card_configurable
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

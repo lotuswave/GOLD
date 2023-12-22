@@ -81,6 +81,7 @@ public class OspreyRegressionEMEA {
 			if(Common.getCurrentURL().contains("osprey.com/gb/"))
 			{
 				Close_Geolocation();
+				Thread.sleep(5000);
 			     acceptPrivacy();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
@@ -8724,6 +8725,7 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(3000);
 			
      	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+     	Common.clickElement("xpath","//span[text()='Add Gift Card']");
 		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//span[text()='Add Code']");
@@ -8739,8 +8741,9 @@ public class OspreyRegressionEMEA {
 			else
 			{
 				Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+				Common.clickElement("xpath","//span[text()='Add Gift Card']");
 				Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard_Prod"));
-				Common.actionsKeyPress(Keys.ARROW_UP);
+//				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//span[text()='Add Code']");
 				Thread.sleep(2000);
 				String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
@@ -10812,7 +10815,8 @@ catch(Exception | Error e)
 		{
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-			Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCard"));
+			Common.clickElement("xpath","//span[text()='Add Gift Card']");
+			Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCard_Prod"));
 			Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary am')]");
 			Thread.sleep(4000);
 			String status=Common.getText("xpath", "//td[@class='col balance']//span").replace(symbol, "");
