@@ -10835,11 +10835,11 @@ catch(Exception | Error e)
 		System.out.println(symbol);
 		try
 		{
-			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-			Common.clickElement("xpath","//span[text()='Add Gift Card']");
-			Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCard_Prod"));
-			Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary am')]");
+//			Thread.sleep(3000);
+//			Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+//			Common.clickElement("xpath","//span[text()='Add Gift Card']");
+//			Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCard_Prod"));
+//			Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary am')]");
 			Thread.sleep(4000);
 			String status=Common.getText("xpath", "//td[@class='col balance']//span").replace(symbol, "");
 			String giftorder=Common.getText("xpath", "//tr[@class='totals']//td[@class='amount']//span[@class='price']").replace(symbol, "").replace("-", "");
