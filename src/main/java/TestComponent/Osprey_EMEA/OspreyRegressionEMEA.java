@@ -8721,7 +8721,7 @@ public class OspreyRegressionEMEA {
 		{
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
-			if(URL.contains("stage")|| URL.contains("Stage3")) {
+			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(3000);
 			
      	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
@@ -8731,8 +8731,7 @@ public class OspreyRegressionEMEA {
 		Common.clickElement("xpath","//span[text()='Add Code']");
 		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
-	    System.out.println(successmsg);
-		
+	    System.out.println(successmsg);	
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
 				"Success message should be displayed after the applying of gift card",
@@ -8747,8 +8746,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath","//span[text()='Add Code']");
 				Thread.sleep(2000);
 				String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
-			    System.out.println(successmsg);
-				
+			    System.out.println(successmsg);	
 				Common.assertionCheckwithReport(successmsg.contains("added"),
 						"validating the success message after applying gift card",
 						"Success message should be displayed after the applying of gift card",
@@ -10768,9 +10766,7 @@ catch(Exception | Error e)
 				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
 				if(balance.equals(Price))
 				{
-					String total=Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace(symbol, "");
-					Float totalvalue = Float.parseFloat(total);
-					System.out.println(totalvalue);
+					String total=Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText();
 					Sync.waitElementPresent(30,"xpath", "//button[@id='use-customer-balance']");
 					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
 					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
@@ -10780,8 +10776,10 @@ catch(Exception | Error e)
 					System.out.println(message);
 					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
 					System.out.println(storeorder);
+					System.out.println(total);
 					System.out.println(Price);
-					Common.assertionCheckwithReport(message.contains("Your store credit") || storecredit.equals(Price) &&storeorder.equals(totalvalue)  ,"validating the store credit balance applied sucess message",
+					System.out.println(storecredit);
+					Common.assertionCheckwithReport(message.contains("Your store credit") || storecredit.equals(Price) &&storeorder.equals(total)  ,"validating the store credit balance applied sucess message",
 							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
 							"failed to Display the success message");
 				}
