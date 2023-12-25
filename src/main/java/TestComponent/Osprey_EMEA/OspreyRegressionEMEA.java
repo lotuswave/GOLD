@@ -10768,17 +10768,20 @@ catch(Exception | Error e)
 				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
 				if(balance.equals(Price))
 				{
+					String total=Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace(symbol, "");
+					Float totalvalue = Float.parseFloat(total);
+					System.out.println(totalvalue);
+					Sync.waitElementPresent(30,"xpath", "//button[@id='use-customer-balance']");
 					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
 					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
 					String message = Common.findElement("xpath", "(//div[contains(@class,'message ')]//div)[1]")
 							.getText();
-					Thread.sleep(4000);
+					Thread.sleep(2000);
 					System.out.println(message);
 					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
-			
 					System.out.println(storeorder);
 					System.out.println(Price);
-					Common.assertionCheckwithReport(message.contains("Your store credit") || storecredit.equals(Price) ,"validating the store credit balance applied sucess message",
+					Common.assertionCheckwithReport(message.contains("Your store credit") || storecredit.equals(Price) &&storeorder.equals(totalvalue)  ,"validating the store credit balance applied sucess message",
 							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
 							"failed to Display the success message");
 				}
