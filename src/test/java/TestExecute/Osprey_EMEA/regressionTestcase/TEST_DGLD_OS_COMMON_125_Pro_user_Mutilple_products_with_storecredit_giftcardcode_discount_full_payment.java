@@ -30,9 +30,9 @@ public class TEST_DGLD_OS_COMMON_125_Pro_user_Mutilple_products_with_storecredit
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Apply_Store_Credit(Price);
-        Osprey_ReEu.Gift_card("Partial Giftcard");
         Osprey_ReEu.discountCode("Discount");
+        Osprey_ReEu.Gift_card("Partial Giftcard");
+        Osprey_ReEu.Apply_Store_Credit(Price);
         Osprey_ReEu.giftCardSubmitOrder();
         
 		} catch (Exception e) {
