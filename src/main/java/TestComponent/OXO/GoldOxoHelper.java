@@ -10492,6 +10492,7 @@ public void alumini_Chefs(String Dataset) {
 		            Sync.waitPageLoad();
 		            Thread.sleep(4000);
 		            Common.clickElement("xpath", "//input[@value='Yes']");
+		            Thread.sleep(3000);
 		        
 		            String URL = Common.getPageTitle();
 		            Common.assertionCheckwithReport(URL.contains("Magento"),
@@ -10516,6 +10517,7 @@ public void alumini_Chefs(String Dataset) {
 
 			try {
 				Sync.waitPageLoad();
+				Thread.sleep(3000);
 				Sync.waitElementPresent("id", "menu-magento-sales-sales");
 				Common.clickElement("id", "menu-magento-sales-sales");
 				Thread.sleep(2000);
@@ -10583,15 +10585,17 @@ public void alumini_Chefs(String Dataset) {
 		}
 		try {
 		Thread.sleep(3000);
-				String  a = Common.findElement("xpath", "//div[@class='data-grid-cell-content']").getText();
+		Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+		
+				/*String  a = Common.findElement("xpath", "//div[@class='data-grid-cell-content']").getText();
 				
-				if (OrderId.contains(a))
-				{
-					Thread.sleep(3000);
+				if (OrderId.equals(a))
+				{*/
+					Thread.sleep(1000);
 					Common.clickElement("xpath", "//a[@class='action-menu-item']");
-				}
+				//}
 				
-				String b = "Processing";
+				//String b = "Processing";
 				String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
 				
 						
@@ -10614,7 +10618,13 @@ public void alumini_Chefs(String Dataset) {
 		
 			catch (Exception | Error e) {
 				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the orders page is displayed",
+						"should display the orders page after clicking on the orders",
+						"unable to display orders page after a click on the orders button",
+						"Failed to display orders page");
+				Assert.fail();
 			}
+		
 			//}
 			return Orderstatus1;
 
