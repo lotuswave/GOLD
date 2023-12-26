@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.checkerframework.checker.units.qual.s;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -294,8 +295,11 @@ public class OspreyRegressionEMEA {
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
-			String exsitingemail = Common.findElement("xpath", "//div[@data-ui-id='message-error']//div").getText();
+			Thread.sleep(4000);
+			String exsitingemail = Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
+			System.out.println(exsitingemail);
             String exsiting=Common.findElement("xpath", "//div[@data-ui-id='message-error']").getAttribute("data-ui-id");		
+            System.out.println(exsiting);
             		Common.assertionCheckwithReport(
 					exsitingemail.contains("There is already an account with this email address") || exsiting.contains("message-error"),
 					"validating the error messages for existing email",
@@ -3599,6 +3603,7 @@ public class OspreyRegressionEMEA {
 	}
 
 	public void click_Myorders() {
+
 		try {
 			Sync.waitElementVisible(40, "xpath", "//div[@class='m-account-nav__content']");
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
@@ -3610,6 +3615,7 @@ public class OspreyRegressionEMEA {
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
 					"Failed to Navigate to the orders and return page");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3620,6 +3626,42 @@ public class OspreyRegressionEMEA {
 			Assert.fail();
 
 		}
+	}
+	
+	
+	public void Click_Myorders_and_Account(String Dataset)
+	{
+		 String account=data.get(Dataset).get("account");
+			try {
+				Sync.waitElementVisible(40, "xpath", "//div[@class='m-account-nav__content']");
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				Common.clickElement("xpath", "(//ul[@class='m-account-nav__links']//a)[3]");
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders") || Common.getCurrentURL().contains("order/history/"),
+						"Verifying the track order page navigation ",
+						"after clicking on the track order it should navigate to the orders and return page",
+						"successfully Navigated to the orders and return page",
+						"Failed to Navigate to the orders and return page");
+				Sync.waitElementPresent("xpath", "//ul[@class='nav items reset-list']//a[text()='"+ account +"']");
+				Common.clickElement("xpath", "//ul[@class='nav items reset-list']//a[text()='"+ account +"']");
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account") || Common.getCurrentURL().contains("account"),
+						"validating the my account page navigation",
+						"After clicking on my account it should navigate to the My account page",
+						"Sucessfully Navigated to the my account page", "failed to Navigate to the My account page");
+				
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
+						"after clicking on the track order it should navigate to the orders and return page",
+						"Unable to  Navigated to the orders and return page",
+						Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
+				Assert.fail();
+
+			}
+		
+		
 	}
 
 	public void view_order() {
@@ -6806,14 +6848,11 @@ public class OspreyRegressionEMEA {
 	public void Edit_Name(String Dataset) {
 		// TODO Auto-generated method stub
 
-		 String account=data.get(Dataset).get("account");
 		try {
-			Sync.waitElementPresent("xpath", "//ul[@class='nav items reset-list']//a[text()='"+ account +"']");
-			Common.clickElement("xpath", "//ul[@class='nav items reset-list']//a[text()='"+ account +"']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account") || Common.getCurrentURL().contains("account"),
-					"validating the my account page navigation",
-					"After clicking on my account it should navigate to the My account page",
-					"Sucessfully Navigated to the my account page", "failed to Navigate to the My account page");
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30,"xpath", "//a[@aria-label='Edit Account Information']");
+			Common.clickElement("xpath", "//a[@aria-label='Edit Account Information']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
 			Common.clickElement("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
 			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
