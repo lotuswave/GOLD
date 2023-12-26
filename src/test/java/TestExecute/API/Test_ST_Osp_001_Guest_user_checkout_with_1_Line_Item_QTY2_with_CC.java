@@ -37,7 +37,6 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 			API.Orders(order);
 			String id=API.getorder_id("sales order");
 			System.out.println(id);
-//			String id="8673018/";
 			API.Login_Account("Post_Account");
 			API.WorkSpace();
 			API.select_Website("Website_selection");
@@ -52,8 +51,8 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 			API.Ship_URL(id);
 			String Token1=API.Generate_Token("Api_Key");
 			API.Ship_Authorization(Token1);
-			String orderid=API.order_item_id(order);
-			API.Magento_Order_Id(orderid);
+//			String orderid=API.order_item_id(order);
+//			API.Magento_Order_Id(orderid);
 //			String Delivery=API.Delivery_Details();
 //			API.Invoice("Invoice");
 //			API.Invoice_URL(id);
@@ -71,7 +70,7 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
@@ -81,5 +80,4 @@ public class Test_ST_Osp_001_Guest_user_checkout_with_1_Line_Item_QTY2_with_CC {
         Login.signIn();
 
 	}
-
 }

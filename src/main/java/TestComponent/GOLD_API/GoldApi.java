@@ -2,6 +2,7 @@ package TestComponent.GOLD_API;
    
 import static org.testng.Assert.fail;
 
+import java.awt.Robot;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
@@ -48,6 +49,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
+import com.sun.glass.events.KeyEvent;
 
 import TestLib.Automation_properties;
 import TestLib.Common;
@@ -1148,8 +1150,6 @@ public class GoldApi {
                     "Failed to Navigated to the header");
 			Thread.sleep(5000);
 			Sync.waitElementPresent(30,"xpath", "(//span[contains(@class,'key-value')])[4]");
-//			Common.clickElement("xpath", "(//span[contains(@class,'key-value')])[4]");
-//			Thread.sleep(4000);
 			WebElement clear=Common.findElement("xpath", "(//span[contains(@class,'key-value')])[4]");
 			Thread.sleep(4000);
 			clear.click();
@@ -1157,34 +1157,15 @@ public class GoldApi {
 			WebElement clear1=Common.findElement("xpath", "//div[@data-testid='auto-suggest']");
 			String Value=clear1.getAttribute("data-testid");
 			System.out.println(Value);
-			clear.click();
-//			Thread.sleep(3000);
 			Common.maximizeImplicitWait();
-			Thread.sleep(3000);
-//			Common.textBoxInput("xpath", "(//div[@class='key-value-form-column'])[6]", "Bearer "+Dataset);
-			Common.javascriptTextBoxInput("xpath", "(//div[@class='key-value-form-column'])[6]", "Bearer "+Dataset);
-			
-////			clear1.clear();
-//			clear1.sendKeys(Keys.CONTROL+"a");
-//			clear1.sendKeys(Keys.DELETE);
-//			Thread.sleep(3000);
-			
-//			Actions actions=new Actions();
-//			actions.click(Common.findElement(By.xpath("(//span[contains(@class,'key-value')])[4]")))
-//			clear.click();
-//			((Actions) clear).keyDown(Keys.CONTROL)
-//			.sendKeys("a")
-//			.keyUp(Keys.CONTROL)
-//			.sendKeys(Keys.BACK_SPACE)
-//			.build().perform();
-//			clear.sendKeys(Keys.CONTROL+"a");
-//			clear.sendKeys(Keys.DELETE);
-//			Common.textBoxInputClear("xpath", "(//span[contains(@class,'key-value')])[4]");
-//			Common.findElement("xpath", "//div[@data-testid='auto-suggest']").clear();
 			Thread.sleep(4000);
-//			Common.clickElement("xpath", "(//span[contains(@class,'key-value')])[4]");
-//			Common.findElement("xpath", "(//span[contains(@class,'key-value')])[4]").sendKeys("Bearer"+Dataset);
-			
+			Common.JSTexboxclear("xpath", "(//div[@class='key-value-form-column'])[8]");
+			Thread.sleep(4000);
+			Common.javascriptTextBoxInput("xpath", "(//div[@class='key-value-form-column'])[8]", "Bearer "+Dataset);
+//			Thread.sleep(4000);
+//			Common.clickElement("xpath", "(//span[@class='key-value-cell__multiline__item'])[3]");
+//			Thread.sleep(4000);
+
 		}
 		catch(Exception | Error e)
 		{
@@ -1194,6 +1175,7 @@ public class GoldApi {
 		}
 		
 	}
+
 
 	public HashMap<String, String> getorderDetails() throws Exception {
 		// TODO Auto-generated method stub
@@ -1222,10 +1204,6 @@ public class GoldApi {
 			String customer_Lastname=Common.findElement("xpath", "(//span[@class='mtk6'])[4]").getText();
 			System.out.println(customer_Lastname);
 			GetOrderDetails.put("customer_Lastname", customer_Lastname);
-			
-			
-			
-			
 		}
 		catch(Exception | Error e)
 		{
@@ -1328,29 +1306,33 @@ public class GoldApi {
 			Thread.sleep(3000);
 			Common.javascriptTextBoxInput("xpath", "//span[@class='mtk8']", order_item_id);
 			Thread.sleep(3000);
-//			id.sendKeys(order_item_id);
-//			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
-			WebElement Tracking_Number=Common.findElement("xpath", "//span[@class='mtk6']");
-			Tracking_Number.click();
-			Tracking_Number.sendKeys(Keys.CONTROL+"a");
-			Tracking_Number.sendKeys(Keys.DELETE);
+			Common.scrollIntoView("xpath", "//span[contains(text(),'tracks')]");
+			WebElement Track_ID=Common.findElement("xpath", "//span[contains(text(),'track_number')]");
+			Common.scrollIntoView(Track_ID);
 			Thread.sleep(4000);
-			Dataset.replace("#ZSOPREPD", "");
-			Tracking_Number.sendKeys(Dataset+"111");
+			WebElement Tracking_Number=Common.findElement("xpath", "(//span[@class='mtk6'])[1]");
+			Tracking_Number.click();
+			Thread.sleep(4000);
+			Common.switchToFirstTab();
+			Thread.sleep(4000);
+			String Number=Common.getText("xpath", "//h1[@class='page-title']").replace("#ZSOPREPD", "");
+			System.out.println(Number);
+			Thread.sleep(4000);
+			Common.switchToSecondTab();
+			Thread.sleep(4000);
+			Common.javascriptTextBoxInput("xpath", "(//span[@class='mtk6'])[1]", Number+"111");
+			Thread.sleep(4000);
 			System.out.println(Tracking_Number);
-			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
-			WebElement delivery_number=Common.findElement("xpath", "//span[@class='mtk6']");
+//			Common.scrollIntoView("xpath", "//span[@class='mtk6']");
+			WebElement delivery_number=Common.findElement("xpath", "(//span[@class='mtk6'])[4]");
 			delivery_number.click();
-			delivery_number.sendKeys(Keys.CONTROL+"a");
-			delivery_number.sendKeys(Keys.DELETE);
 			Thread.sleep(4000);
 			int number = Common.genrateRandomNumber();
 			System.out.println(number);
 			String Delivery = Integer.toString(number);
-			String Number="25"+Delivery;
-			System.out.println(Number);
-			Tracking_Number.sendKeys(Number);
+			String DelNumber="252"+Delivery;
+			System.out.println(DelNumber);
+			Common.javascriptTextBoxInput("xpath", "(//span[@class='mtk6'])[4]", DelNumber);
 			Thread.sleep(4000);
 //			Common.clickElement("xpath", "//span[text()='Send']");
 			Thread.sleep(4000);

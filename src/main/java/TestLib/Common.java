@@ -169,7 +169,6 @@ public class Common {
 	}
 
 
-
 	public static List<WebElement> findElements(String elemfindBY, String elemfindText) {
 		return getDriver().findElements(returnByLocator(elemfindBY, elemfindText));
 	}
@@ -1064,6 +1063,14 @@ public class Common {
 			executeJS("arguments[0].innerHTML='" + longstring + "';", inputField);
 		}
 	}
+	
+	public static void JSTexboxclear(String elemfindBY, String elemfindText)  {
+		WebElement inputField = findElement(elemfindBY,elemfindText);
+	    JavascriptExecutor js = (JavascriptExecutor)inputField;
+	    js.executeScript("arguments[0].value='';",inputField);
+	}
+	
+	
 
 	public static boolean isValueInDropdown(String elemfindBY, String elemfindText, String value)  {
 		Sync.waitElementClickable(elemfindBY, elemfindText);
@@ -1183,6 +1190,8 @@ public class Common {
 	public static void scrollIntoView(WebElement element) {
 		executeJS("arguments[0].scrollIntoView();", element);
 	}
+	
+	
 	
 	public static void scrollIntoView(String elemfindBY, String elemfindText) {
 		WebElement element=findElement(elemfindBY, elemfindText);
