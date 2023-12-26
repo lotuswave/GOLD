@@ -8281,6 +8281,8 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		String symbol = data.get(Dataset).get("Price_Symbol");
 		String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
+		System.out.println(PriceFilter);
+		System.out.println(symbol);
 		try {
 			Sync.waitPageLoad();
 
@@ -8298,9 +8300,11 @@ public class OspreyRegressionEMEA {
 				Beforefilterpricelist.add(p.getText().replace(symbol, " "));
 				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 			}
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//select[@id='srp-sort-by']");
 			Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.TEXT,
-					data.get(Dataset).get("Sortby_Dropdown"));
-
+					PriceFilter);
+			
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath",
 					"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
