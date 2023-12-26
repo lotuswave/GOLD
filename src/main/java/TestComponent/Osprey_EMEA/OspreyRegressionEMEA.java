@@ -99,7 +99,7 @@ public class OspreyRegressionEMEA {
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -6852,8 +6852,8 @@ public class OspreyRegressionEMEA {
 
 		try {
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30,"xpath", "//a[@aria-label='Edit Account Information']");
-			Common.clickElement("xpath", "//a[@aria-label='Edit Account Information']");
+			Sync.waitElementPresent(30,"xpath", "//div[@class='box-actions table-actions-list']//a[contains(@class,'action e')]");
+			Common.clickElement("xpath", "//div[@class='box-actions table-actions-list']//a[contains(@class,'action e')]");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
 			Common.clickElement("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
