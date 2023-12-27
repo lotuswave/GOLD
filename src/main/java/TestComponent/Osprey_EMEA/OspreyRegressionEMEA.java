@@ -8289,7 +8289,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 
 			Thread.sleep(5000);
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
+//			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.scrollIntoView("xpath",
 					"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
 
@@ -8303,7 +8303,7 @@ public class OspreyRegressionEMEA {
 				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 			}
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//select[@id='srp-sort-by']");
+//			Common.scrollIntoView("xpath", "//select[@id='srp-sort-by']");
 			Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.TEXT,
 					PriceFilter);
 			
@@ -12703,11 +12703,8 @@ public void Footer_Links_Company(String Dataset) {
 			Thread.sleep(4000);
 				Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Termlinks[j])
-							|| Common.getCurrentURL().contains("/about-us")
-							|| Common.getCurrentURL().contains("history")
-							|| Common.getCurrentURL().contains("sustainability")
-							|| Common.getCurrentURL().contains("philanthropy")
-							|| Common.getCurrentURL().contains("careers"),
+							|| Common.getCurrentURL().contains("privacy-policy")
+							|| Common.getCurrentURL().contains("terms-of-use"),		
 					"validating the links navigation from footer Links",
 					"After Clicking on" + Termlinks[j] + "it should navigate to the",
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
@@ -12730,16 +12727,17 @@ public void Footer_Links_Company(String Dataset) {
 					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-		/*	Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("/blog")
-							|| Common.getCurrentURL().contains("prodeal")
-							|| Common.getCurrentURL().contains("Osprey Asset Bank"),
-					"validating the links navigation from footer Links",
-					"After Clicking on" + footerlinks[i] + "it should navigate to the",
-					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
-					"Unable to Navigated to the" + footerlinks[i] + "Links");
-					*/
+			Common.assertionCheckwithReport(
+			Common.getPageTitle().contains(footerlinks[i])
+			|| Common.getCurrentURL().contains("/about-us")
+			|| Common.getCurrentURL().contains("history")
+			|| Common.getCurrentURL().contains("sustainability")
+			|| Common.getCurrentURL().contains("philanthropy")
+			|| Common.getCurrentURL().contains("careers"),
+			"validating the links navigation from footer Links",
+			"After Clicking on" + footerlinks[i] + "it should navigate to the",
+			footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+			"Unable to Navigated to the" + footerlinks[i] + "Links");
 			Thread.sleep(4000);
 			Common.navigateBack();
 			Sync.waitPageLoad();
