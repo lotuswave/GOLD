@@ -20,7 +20,6 @@ public class Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page {
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Invalid_search_product("Invalid_Product");
-      //Empty Search method should be written after implementing the functionality
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.Sort_By("SortBy");
         Osprey_ReEu.Filter();

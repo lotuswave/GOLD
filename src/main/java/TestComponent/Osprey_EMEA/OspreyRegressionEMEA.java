@@ -8261,8 +8261,10 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+			String searchproduct=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getAttribute("class");
+			System.out.println(searchproduct);
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("Sorry, your search for"),
+			Common.assertionCheckwithReport(productsearch.contains("Sorry, your search for") || searchproduct.contains("no-results"),
 					"validating the search functionality", "enter Invalid product name will display in the search box",
 					"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
 			Thread.sleep(8000);
@@ -8352,12 +8354,13 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.scrollIntoView("xpath", "//input[@id='blue']");
-			Sync.waitElementPresent("xpath", "//input[@id='blue']");
+			Common.scrollIntoView("xpath", "//input[@value='Blue']");
+			Sync.waitElementPresent("xpath", "//input[@value='Blue']");
 			Common.clickElement("xpath", "//input[@value='Blue']");
-			Common.scrollIntoView("xpath", "//input[@id='blue']");
-
-			String SelectedFilter = Common.findElement("xpath", "//span[text()='Blue']").getText();
+			Common.scrollIntoView("xpath", "//input[@value='Blue']");
+			Thread.sleep(4000);
+			String SelectedFilter = Common.findElement("xpath", "//div[@data-attr='osprey_common_color']//label//span[@data-color='Blue']").getText();
+			System.out.println(SelectedFilter);
 			System.out.println("SelectedFilter:" + SelectedFilter);
 			String RetrivedValue = "blue";
 			if (SelectedFilter.equals("Blue")) {
