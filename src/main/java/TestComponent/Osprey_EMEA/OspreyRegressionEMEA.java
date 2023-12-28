@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.checkerframework.checker.units.qual.s;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -12710,7 +12711,27 @@ public void Footer_Links_Company(String Dataset) {
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
 					"Unable to Navigated to the" + Termlinks[j] + "Links");
 			Thread.sleep(4000);
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+			String pagecode=Integer.toString(responcecode);
+			System.out.println(pagecode);
 			
+			if(pagecode.equals("200"))
+			{
+				
+				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
+				  ,"Page configured Properly with any issues"
+				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
+				 }
+			else
+			{
+				j++;
+				
+				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
+						"Page configured Properly with any issues", "Unable to get the proper response from the page",
+						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + Termlinks[j]));
+				Assert.fail();
+			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -12739,6 +12760,27 @@ public void Footer_Links_Company(String Dataset) {
 			footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 			"Unable to Navigated to the" + footerlinks[i] + "Links");
 			Thread.sleep(4000);
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+			String pagecode=Integer.toString(responcecode);
+			System.out.println(pagecode);
+			
+			if(pagecode.equals("200"))
+			{
+				
+				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
+				  ,"Page configured Properly with any issues"
+				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
+				 }
+			else
+			{
+				i++;
+				
+				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
+						"Page configured Properly with any issues", "Unable to get the proper response from the page",
+						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
+				Assert.fail();
+			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -12794,6 +12836,27 @@ public void Footer_Links_CustomerSupport(String Dataset) {
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 					
 			Thread.sleep(4000);
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+			String pagecode=Integer.toString(responcecode);
+			System.out.println(pagecode);
+			
+			if(pagecode.equals("200"))
+			{
+				
+				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
+				  ,"Page configured Properly with any issues"
+				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
+				 }
+			else
+			{
+				i++;
+				
+				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
+						"Page configured Properly with any issues", "Unable to get the proper response from the page",
+						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
+				Assert.fail();
+			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -12848,6 +12911,27 @@ public void Footer_Links_Resources(String Dataset) {
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 					
 			Thread.sleep(4000);
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+			String pagecode=Integer.toString(responcecode);
+			System.out.println(pagecode);
+			
+			if(pagecode.equals("200"))
+			{
+				
+				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
+				  ,"Page configured Properly with any issues"
+				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
+				 }
+			else
+			{
+				i++;
+				
+				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
+						"Page configured Properly with any issues", "Unable to get the proper response from the page",
+						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
+				Assert.fail();
+			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -12879,6 +12963,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
 					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
@@ -12899,6 +12984,27 @@ public void Footer_Links_BrandTeam(String Dataset) {
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
 			Thread.sleep(4000);
+			int responcecode = getpageresponce(Common.getCurrentURL());
+			System.out.println(responcecode);
+			String pagecode=Integer.toString(responcecode);
+			System.out.println(pagecode);
+			
+			if(pagecode.equals("200"))
+			{
+				
+				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
+				  ,"Page configured Properly with any issues"
+				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
+				 }
+			else
+			{
+				i++;
+				
+				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
+						"Page configured Properly with any issues", "Unable to get the proper response from the page",
+						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
+				Assert.fail();
+			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
