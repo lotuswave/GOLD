@@ -3124,7 +3124,7 @@ public class OspreyRegressionEMEA {
 		String expectedResult = "User should click the" + Dataset;
 		String out = data.get(Dataset).get("outdoor");
 		String Trail = data.get(Dataset).get("Trail");
-		String header=data.get(Dataset).get("header");
+		String header=data.get(Dataset).get("headers");
 		try {
 
 			Thread.sleep(3000);
@@ -3140,7 +3140,7 @@ public class OspreyRegressionEMEA {
 			} catch (Exception e) {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
-			Common.clickElement("xpath", "//span[contains(text(),' " + out + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[contains(text(),'" + Trail + "')]");
 			Sync.waitPageLoad();
@@ -7561,7 +7561,9 @@ public class OspreyRegressionEMEA {
 			Locally_PDP();
 			Common.actionsKeyPress(Keys.UP);
 //			add_simplarproducts("configurable product");
-			PDP_Tabs("Tabs");
+			 PDP_Tabs("Tabs");  
+			
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the PDP page", "In PDP fav ugc all should be appear",
