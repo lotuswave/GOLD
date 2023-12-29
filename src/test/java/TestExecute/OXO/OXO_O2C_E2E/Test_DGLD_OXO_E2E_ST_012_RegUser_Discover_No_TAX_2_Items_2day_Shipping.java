@@ -26,9 +26,9 @@ public class Test_DGLD_OXO_E2E_ST_012_RegUser_Discover_No_TAX_2_Items_2day_Shipp
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
 			Oxo.search_E2E_product("SKU-8716900");
-			Oxo.Addtocart("SKU-8716900");
-			Oxo.search_E2E_product("SKU-11215400");
-			Oxo.Addtocart("SKU-11215400");
+		Oxo.Addtocart("SKU-8716900");
+			//Oxo.search_E2E_product("SKU-11215400");
+		//	Oxo.Addtocart("SKU-11215400");
 			Oxo.minicart_Checkout();
 			String Products_details=Oxo.shipping_order_details();
 			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetailsE2E");

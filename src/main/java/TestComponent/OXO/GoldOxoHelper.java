@@ -45,7 +45,7 @@ import Utilities.Utils;
 
 public class GoldOxoHelper {
 
-	String datafile;
+	String datafile; 
 	ExcelReader excelData;
 	Map<String, Map<String, String>> data = new HashMap<>();
 	static ExtenantReportUtils report;
@@ -9480,7 +9480,7 @@ public void alumini_Chefs(String Dataset) {
 
 					try {
 						Thread.sleep(3000);
-						int size = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+						int size = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']//img[@alt='credit card logo']").size();
 						if (size > 0) {
  
 							
