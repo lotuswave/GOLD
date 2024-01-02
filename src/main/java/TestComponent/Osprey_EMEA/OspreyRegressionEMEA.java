@@ -13291,8 +13291,69 @@ public void header_Explore(String Dataset) {
 	}
 
 }	
-}
 
+public void AddtoCart_Disable_PLP(String Dataset) {
+	// TODO Auto-generated method stub
+	
+	String products = data.get(Dataset).get("Products");
+	try
+	{
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) {
+			Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[contains(@class,'m-product-card__image')]");
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+
+		Sync.waitPageLoad(30);
+		Thread.sleep(4000);	
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+		String Mouseover=Common.findElement("xpath", "//img[@alt='" + products + "']").getAttribute("alt");
+		System.out.println(Mouseover);
+		WebElement addtocart=Common.findElement("xpath", "//button[@title='Add to Cart']");
+		boolean element=addtocart.isEnabled();
+		if(element)
+		{
+			Thread.sleep(3000);
+			System.out.println("'Add to cart button is Enabled");
+		}
+		else
+		{
+		
+			Thread.sleep(3000);
+			System.out.println("'Add to cart button is Disabled");
+		}
+		
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.clickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad(30);
+		Thread.sleep(6000);
+		Common.scrollIntoView("xpath", "//div[@class='m-product-overview__info-top']//h1");
+		Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		System.out.println(name);
+		System.out.println(products);
+		Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
+				"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
+				"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		
+		Assert.fail();
+	}
+}
+}
 	
 
 
