@@ -610,7 +610,7 @@ public class OspreyRegressionEMEA {
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				System.out.println(title);
 				System.out.println(breadcrumbs);
@@ -672,7 +672,7 @@ public class OspreyRegressionEMEA {
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 				System.out.println(products);
@@ -706,7 +706,7 @@ public class OspreyRegressionEMEA {
 							"//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -764,7 +764,7 @@ public class OspreyRegressionEMEA {
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 				System.out.println(products);
@@ -821,7 +821,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -874,7 +874,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -934,7 +934,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -987,7 +987,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -1047,7 +1047,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -1084,7 +1084,7 @@ public class OspreyRegressionEMEA {
 		{
 			String names = data.get(Dataset).get("Travel");
 			String[] Links = names.split(",");
-			String name = data.get(Dataset).get("Travel");
+			String name = data.get(Dataset).get("Travel").toUpperCase();
 			String[] Link = name.split(",");
 			int i = 0;
 			try {
@@ -1099,7 +1099,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -1158,7 +1158,7 @@ public class OspreyRegressionEMEA {
 						"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 				System.out.println(products);
@@ -1215,7 +1215,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
@@ -1268,7 +1268,7 @@ public class OspreyRegressionEMEA {
 							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Link[i]),
 							"verifying the header link " + Links[i] + "Under Accessories",
@@ -1294,6 +1294,8 @@ public class OspreyRegressionEMEA {
 
 		String names = data.get(Dataset).get("Shop all");
 		String[] Links = names.split(",");
+		String name = data.get(Dataset).get("Shop all").toUpperCase();
+		String[] Link = name.split(",");
 		int i = 0;
 		try {
 
@@ -1306,14 +1308,19 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+				String BreadCrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
 				System.out.println(products);
 				int Number = Integer.parseInt(products);
 				int j=0;
+				System.out.println(title);
+				System.out.println(Links[i]);
+				System.out.println(BreadCrumbs);
+				System.out.println(Common.getCurrentURL());
 				if(Number>j)
 				{
-				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]) || BreadCrumbs.contains(Link[i]),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -1345,6 +1352,8 @@ public class OspreyRegressionEMEA {
 
 		String names = data.get(Dataset).get("Shop all");
 		String[] Links = names.split(",");
+		String name = data.get(Dataset).get("Shop all").toUpperCase();
+		String[] Link = name.split(",");
 		int i = 0;
 		try {
 
@@ -1357,8 +1366,10 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]),
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+				String BreadCrumbs=Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]) || BreadCrumbs.contains(Link[i]) ,
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -1393,7 +1404,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				System.out.println(title);
 				System.out.println(Links[i]);
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
@@ -13220,7 +13231,7 @@ public void header_sale() throws Exception {
 	Sync.waitElementPresent("xpath", "//span[contains(text(),'SALE')]");
 	Common.clickElement("xpath", "//span[contains(text(),'SALE')]");
 	Thread.sleep(4000);
-	String title1 = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+	String title1 = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 	System.out.println(title1);
 	Thread.sleep(4000);
 	String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
@@ -13229,7 +13240,7 @@ public void header_sale() throws Exception {
 	int j=0;
 	if(Number>j)
 	{
-	Common.assertionCheckwithReport(title1.contains("SALE"),
+	Common.assertionCheckwithReport(title1.contains("Sale"),
 			"verifying the header link New Season",
 			"user should navigate to the New Season page",
 			"user successfully Navigated to the New Season", "Failed to navigate to the New Season");
