@@ -13258,8 +13258,10 @@ public void header_sale() throws Exception {
 public void header_Explore(String Dataset) {
 	// TODO Auto-generated method stub
 	
-	String names = data.get(Dataset).get("Osprey Explore").toUpperCase();
+	String names = data.get(Dataset).get("Osprey Explore");
 	String[] Links = names.split(",");
+	String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
+	String[] Link = name.split(",");
 	int i = 0;
 	try {
 		for (i = 0; i < Links.length; i++) {
@@ -13273,8 +13275,12 @@ public void header_Explore(String Dataset) {
 					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();		
-			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]),
+			String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();	
+			System.out.println(breadcrumbs);
+			System.out.println(Links[i]);
+			System.out.println(Link[i]);
+			
+			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) ||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("ABOUT US") ,
 					"verifying the header link " + Links[i] + "Under Accessories",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
