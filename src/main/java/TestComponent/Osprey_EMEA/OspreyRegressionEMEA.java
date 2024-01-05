@@ -615,7 +615,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(title);
 				System.out.println(breadcrumbs);
 				System.out.println(Links[i]);
-				
+				Thread.sleep(4000);
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 				System.out.println(products);
 				int Number = Integer.parseInt(products);
