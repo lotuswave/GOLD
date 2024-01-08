@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OS_US_Content_006_Validate_HeaderLinks {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"EN Content Header");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MX_KR_MY EN Content Header");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Header_Links_Functionality () throws Exception {
@@ -23,6 +23,7 @@ public class Test_DGLD_OS_US_Content_006_Validate_HeaderLinks {
         Osprey_ReEu.header_KidsPacks("Kids Packs Carriers");   
         Osprey_ReEu.header_DayPacks("Day Packs");
         Osprey_ReEu.header_Travel("Travel");
+        Osprey_ReEu.header_Luggage("Travel");
         Osprey_ReEu.header_Accessories("Accessories");         
         Osprey_ReEu.header_Featured("Featured");  
         Osprey_ReEu.Bagpack_ShopAll("ShopAll");   
