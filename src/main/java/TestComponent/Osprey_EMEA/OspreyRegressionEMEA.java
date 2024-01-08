@@ -1160,6 +1160,7 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
 				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				Thread.sleep(4000);
 				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 				System.out.println(products);
 				int Number = Integer.parseInt(products);
