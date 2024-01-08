@@ -597,12 +597,16 @@ public class OspreyRegressionEMEA {
 		String[] Links = names.split(",");
 		String names1 = data.get(Dataset).get("Outdoorpacks").toUpperCase();
 		String[] Link = names1.split(",");
+		String bag=data.get(Dataset).get("Backpacks");
+		String outdoor=data.get(Dataset).get("Outdoor");
+		
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Outdoor')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ outdoor +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ outdoor +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
@@ -656,6 +660,7 @@ public class OspreyRegressionEMEA {
 		String[] Links = names.split(",");
 		String names1 = data.get(Dataset).get("KidsPacksCarriers").toUpperCase();
 		String[] Link = names1.split(",");
+		String bag=data.get(Dataset).get("Backpacks");
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
@@ -697,8 +702,8 @@ public class OspreyRegressionEMEA {
 				}
 				else
 				{
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag+ "')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//span[contains(text(),'" + Links[i] + "')]");
@@ -751,12 +756,15 @@ public class OspreyRegressionEMEA {
 		String[] Links = names.split(",");
 		String names1 = data.get(Dataset).get("DayPacks").toUpperCase();
 		String[] Link = names1.split(",");
+		String bag=data.get(Dataset).get("Backpacks");
+		String day=data.get(Dataset).get("Daypacks");
+		
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Day Packs')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
@@ -861,12 +869,14 @@ public class OspreyRegressionEMEA {
 			String[] Links = names.split(",");
 			String name = data.get(Dataset).get("Featured").toUpperCase();
 			String[] Link = name.split(",");
+			String Featured=data.get(Dataset).get("Feature");
+			String activity=data.get(Dataset).get("Activity");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Shop by Activity')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured +"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ activity +"')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
@@ -974,12 +984,14 @@ public class OspreyRegressionEMEA {
 			String[] Links = names.split(",");
 			String name = data.get(Dataset).get("Featureds").toUpperCase();
 			String[] Link = name.split(",");
+			String Featured=data.get(Dataset).get("Feature");
+			String collections=data.get(Dataset).get("Activity");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured+ "')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ collections +"')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
@@ -1088,11 +1100,12 @@ public class OspreyRegressionEMEA {
 			String[] Links = names.split(",");
 			String name = data.get(Dataset).get("Luggage").toUpperCase();
 			String[] Link = name.split(",");
+			String Travel=data.get(Dataset).get("Travelling");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Travel +"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'" + Travel +"')]");
 
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
@@ -1203,11 +1216,12 @@ public class OspreyRegressionEMEA {
 			String[] Links = names.split(",");
 			String name = data.get(Dataset).get("Travel").toUpperCase();
 			String[] Link = name.split(",");
+			String Travel=data.get(Dataset).get("Travelling");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Travel +"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ Travel +"')]");
 
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
@@ -1266,11 +1280,13 @@ public class OspreyRegressionEMEA {
 		String[] Links = names.split(",");
 		String name = data.get(Dataset).get("Accessories").toUpperCase();
 		String[] Link = name.split(",");
+		String Access=data.get(Dataset).get("Access");
+		System.out.println(Access);
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Accessories')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Accessories')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Access +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Access +"')]");
 
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
@@ -1377,11 +1393,13 @@ public class OspreyRegressionEMEA {
 			String[] Links = names.split(",");
 			String name = data.get(Dataset).get("Featured").toUpperCase();
 			String[] Link = name.split(",");
+			String Featured=data.get(Dataset).get("Feature");
+			
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured +"')]");
+					Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
 
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
@@ -1418,12 +1436,14 @@ public class OspreyRegressionEMEA {
 		String[] Links = names.split(",");
 		String name = data.get(Dataset).get("Shop all").toUpperCase();
 		String[] Link = name.split(",");
+		String Backs=data.get(Dataset).get("Backpacks");
+		System.out.println(Backs);
 		int i = 0;
 		try {
 
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Backpacks & Bags')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Backpacks & Bags')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Backs +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Backs +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
@@ -1476,12 +1496,14 @@ public class OspreyRegressionEMEA {
 		String[] Links = names.split(",");
 		String name = data.get(Dataset).get("Shop all").toUpperCase();
 		String[] Link = name.split(",");
+		String Travel=data.get(Dataset).get("Travelling");
+		
 		int i = 0;
 		try {
 
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Travel')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Travel')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Travel +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Travel +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
@@ -1515,11 +1537,12 @@ public class OspreyRegressionEMEA {
 		String names = data.get(Dataset).get("Shop all");
 		String[] Links = names.split(",");
 		int i = 0;
+		String Featured =data.get(Dataset).get("Feature");
 		try {
 
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
-				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
@@ -13384,11 +13407,12 @@ public void header_Explore(String Dataset) {
 	String[] Links = names.split(",");
 	String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
 	String[] Link = name.split(",");
+	String Explore=data.get(Dataset).get("Explore CTA");
 	int i = 0;
 	try {
 		for (i = 0; i < Links.length; i++) {
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'Explore')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Explore')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
@@ -13408,8 +13432,8 @@ public void header_Explore(String Dataset) {
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 
 		}
-		Sync.waitElementPresent("xpath", "//span[contains(text(),'Explore')]");
-		Common.clickElement("xpath", "//span[contains(text(),'Explore')]");
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+		Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'Stories')]");
 		Common.clickElement("xpath", "//span[contains(text(),'Stories')]");
 		Thread.sleep(4000);
