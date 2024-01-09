@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OS_US_Content_006_Validate_HeaderLinks {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"CA_FR EN Content Header");
+	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"UY_SP Content Header");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Header_Links_Functionality () throws Exception {

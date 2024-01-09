@@ -13427,7 +13427,9 @@ public void header_Explore(String Dataset) {
 			System.out.println(Links[i]);
 			System.out.println(Link[i]);
 			
-			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) ||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("Learn How to Pack Your Backpack") ,
+			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
+					||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("Learn How to Pack Your Backpack")
+					|| Common.getPageTitle().contains("Philanthropy") ,
 					"verifying the header link " + Links[i] + "Under Accessories",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
