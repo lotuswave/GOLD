@@ -639,8 +639,34 @@ public class OspreyRegressionEMEA {
 							Common.getscreenShot("Failed to see products in PLP"));
 					Assert.fail();
 				}
-
+				
+			
+				}
+			if(Common.getCurrentURL().contains("/fr/"))
+			{
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ outdoor +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ outdoor +"')]");
+				String name="Sacs à dos d";
+				Sync.waitElementPresent("xpath",
+						"(//li[contains(@class,'level2 ')]//a//span[contains(text(),'"+ name + "')])[2]");
+				Common.clickElement("xpath",
+						"(//li[contains(@class,'level2 ')]//a//span[contains(text(),'"+ name + "')])[2]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				System.out.println(breadcrumbs);
+				String name1="Sacs à dos d".toUpperCase();
+				name.toUpperCase();
+				System.out.println(name1);
+				Common.assertionCheckwithReport(breadcrumbs.contains(name1),
+						"verifying the header link " + name1 + "Under Outdoor Packs",
+						"user should navigate to the " + name1 + " page",
+						"user successfully Navigated to the " + name1, "Failed to navigate to the " + name1);
+				
 			}
+		
 		}
 
 		catch (Exception | Error e) {
