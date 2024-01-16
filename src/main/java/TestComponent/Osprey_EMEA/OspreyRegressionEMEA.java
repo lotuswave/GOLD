@@ -4092,6 +4092,210 @@ public class OspreyRegressionEMEA {
 		}
 
 	}
+	
+	public void view_PLP_page() {
+		try {
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+					.getAttribute("aria-label");
+			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+			String Sort = Common
+					.findElement("xpath",
+							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
+					.getText();
+			Common.assertionCheckwithReport(
+					breadcrumbs.contains("Breadcrumb") && title.contains("c-plp-hero__headline")
+							&& filter.contains("Filter by") && Sort.contains("Sort by"),
+					"To validate the Product Listing Page", "User should able to open Product Listing Page",
+					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the Product Listing Page",
+					"User should able to open Product Listing Page", "Unable to view the Product Listing Page",
+					Common.getscreenShotPathforReport("Failed to view Product listing Page"));
+
+			Assert.fail();
+		}
+	}
+	
+	public void filter_By(String Dataset) {
+  String category=data.get(Dataset).get("category");
+		try {
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//a[text()='" + category + "']");
+			String text = Common.findElement("xpath", "//a[text()='" + category + "']//span").getText();
+			int textValue = Integer.parseInt(text);
+			String categoryvalue = Integer.toString(textValue);
+			Thread.sleep(6000);
+			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
+					.getText();
+			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+			String items = Integer.toString(noOfItems);
+			System.out.println(text);
+			System.out.println(textValue);
+			System.out.println(categoryvalue);
+
+			System.out.println(textValueAfterFilter);
+			System.out.println(noOfItems);
+
+			System.out.println(items);
+
+			Common.assertionCheckwithReport(categoryvalue.equals(items),
+					"To validate the filter in Product Listing Page",
+					"User should able to filter in Product Listing Page",
+					"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
+					"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
+					Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
+
+			Assert.fail();
+		}
+	}
+	
+	public void price_filter_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String name = "";
+		String Symbol=data.get(Dataset).get("Symbol");
+		try {
+			Thread.sleep(4000);
+			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
+					.replace(Symbol, "").replace(".00", "");
+			System.out.println(lastvalue);
+			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+			WebElement price = Common.findElement("xpath",
+					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+			dragprice(price);
+			Thread.sleep(6000);
+			List<WebElement> products = Common.findElements("xpath",
+					"//ol[@class='ais-InfiniteHits-list']//img[contains(@class,'m-product')]");
+			for (int i = 0; i < products.size(); i++) {
+				int Size = products.size();
+				System.out.println(Size);
+				Thread.sleep(4000);
+				if (Size == 1) {
+					String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']")
+							.getText().replace(Symbol, "").replace(".00", "");
+					System.out.println(name1);
+					Float namevlaue1 = Float.parseFloat(name1);
+					System.out.println(namevlaue1);
+					if (namevlaue1 >= 20) {
+						Thread.sleep(3000);
+						String value1 = Common.findElement("xpath", "//span[@class='price-wrapper']")
+								.getAttribute("data-price-amount");
+						Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
+								"When we select the range of price filters between the range only products should display",
+								"Successfully are displayed in the pricing range",
+								"unable to display the procing range after pricing filter applied");
+					} else {
+						Assert.fail();
+					}
+				} else {
+					List<WebElement> productprice = Common.findElements("xpath",
+							"//span[@class='price-wrapper']//span[@class='price']");
+					Thread.sleep(6000);
+					name = productprice.get(i).getText().replace(Symbol, "");
+					Float namevlaue = Float.parseFloat(name);
+					if (namevlaue <= 20) {
+						Thread.sleep(3000);
+						String value = Common.findElement("xpath", "//span[@class='price-wrapper']")
+								.getAttribute("data-price-amount");
+						Common.assertionCheckwithReport(value.equals(name), "verifying the price filters in PLP page",
+								"When we select the range of price filters between the range only products should display",
+								"Successfully are displayed in the pricing range",
+								"unable to display the procing range after pricing filter applied");
+					} else {
+						Assert.fail();
+					}
+				}
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page",
+					"When we select the range of price filters between the range only products should display",
+					"unable to display the procing range after pricing filter applied",
+					Common.getscreenShotPathforReport(
+							"unable to display the procing range after pricing filter applied"));
+			Assert.fail();
+		}
+
+	}
+
+	public void dragprice(WebElement price) {
+		try {
+			if(Common.getCurrentURL().contains("/gb"))
+			{
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("£", "")
+						.replace(".00", "");
+				System.out.println(lastvalue);
+				Thread.sleep(3000);
+				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+			}
+			else
+			{
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
+						.replace(".00", "");
+				System.out.println(lastvalue);
+				Thread.sleep(3000);
+				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+			}
+			
+		} catch (Exception | Error e) {
+
+		}
+	}
+	
+	public void color_validation(String Dataset) {
+		// TODO Auto-generated method stub
+		String colorname = data.get(Dataset).get("Color");
+		try {
+			if(Common.getCurrentURL().contains("/gb"))
+			{
+				Sync.waitElementPresent("xpath", "//button[@aria-label='Colour']");
+				Common.clickElement("xpath", "//button[@aria-label='Colour']");
+				Thread.sleep(3000);
+				String expand = Common.findElement("xpath", "//button[@aria-label='Colour']").getAttribute("aria-expanded");
+				Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
+						"When we click on the color it should be expand",
+						"Successfully the color has been expand when we click on the colors ",
+						"unable to expand the colors in PLP page");
+			}
+			else
+			{
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Color']");
+			Common.clickElement("xpath", "//button[@aria-label='Color']");
+			Thread.sleep(3000);
+			String expand = Common.findElement("xpath", "//button[@aria-label='Color']").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
+					"When we click on the color it should be expand",
+					"Successfully the color has been expand when we click on the colors ",
+					"unable to expand the colors in PLP page");
+			}
+			Sync.waitElementPresent("xpath",
+					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+			Common.clickElement("xpath",
+					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+			Thread.sleep(3000);
+			String colorcount = Common.findElement("xpath",
+					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
+					.getText();
+			String bottlecount = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
+					"When we click on the color it should be expand",
+					"Successfully the color has been expand when we click on the colors ",
+					"unable to expand the colors in PLP page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the color bar has been expand",
+					"When we click on the color it should be expand", "unable to expand the colors in PLP page",
+					Common.getscreenShotPathforReport("Failed to expand the colors in PLP page"));
+			Assert.fail();
+		}
+
+	}
 
 	public void Paymentcreditcard_WithInvalidData(String dataSet) throws Exception {
 		Sync.waitPageLoad();
