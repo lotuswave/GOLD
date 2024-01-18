@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_026_URL_verification_of_PDP {
 
-	String datafile = "Osprey_US//GoldOspreyus.xlsx";
+	String datafile = "Osprey_EU//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"PDP");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -32,13 +32,13 @@ public class TEST_DGLD_OS_COMMON_026_URL_verification_of_PDP {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		System.setProperty("configFile", "Osprey_EU\\config.properties");
         Login.signIn();
       
 
