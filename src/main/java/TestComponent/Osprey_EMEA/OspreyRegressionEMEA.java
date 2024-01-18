@@ -10765,22 +10765,22 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//p[text()='SUSTAINABLE DESIGN']");
 			Thread.sleep(4000);
-			Common.switchFrames("xpath", "//iframe[@title='YouTube video player']");
+			Common.switchFrames("xpath", "//iframe[contains(@title,'Osprey Packs')]");
 			Thread.sleep(4000);
 			
 			Sync.waitElementPresent(40, "xpath", "//button[@aria-label='Play']");
 			Common.clickElement("xpath", "//button[@aria-label='Play']");
 			Sync.waitForLoad();
-			String video = Common.findElement("xpath", "//button[contains(@class,'ytp-play-button')]")
-					.getAttribute("data-title-no-tooltip");
+			String video = Common.findElement("xpath", "//button[contains(@class,'Button_module' ) and @data-play-button]")
+					.getAttribute("aria-label");
 			System.out.println(video);
 			Common.assertionCheckwithReport(video.equals("Pause"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
-			Sync.waitElementPresent(40, "xpath", "//button[contains(@class,'ytp-play-button')]");
-			Common.clickElement("xpath", "//button[contains(@class,'ytp-play-button')]");
-			String video1 = Common.findElement("xpath", "//button[contains(@class,'ytp-play-button')]")
-					.getAttribute("data-title-no-tooltip");
+			Sync.waitElementPresent(40, "xpath", "//button[@aria-label='Pause']");
+			Common.clickElement("xpath", "//button[@aria-label='Pause']");
+			String video1 = Common.findElement("xpath", "//button[contains(@class,'Button_module' ) and @data-play-button]")
+					.getAttribute("aria-label");
 			System.out.println(video);
 			Common.assertionCheckwithReport(video1.equals("Play"), "validating the video in PDP page",
 					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
