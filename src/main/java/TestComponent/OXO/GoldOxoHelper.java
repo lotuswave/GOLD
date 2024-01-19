@@ -150,7 +150,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
-			Common.clickElement("xpath", "//a[contains(@aria-label,'Baby & Toddler')]");
+			Common.clickElement("xpath", "//span[text()=' Feeding & Drinking']");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -925,9 +925,10 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		HashMap<String,String> Paymentmethod=new HashMap<String,String>();
         Sync.waitPageLoad();
 		Thread.sleep(4000);
-		String Number="";
+		
 		String cardnumber=data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
+		String Number=cardnumber;
 		String expectedResult = "land on the payment section";
 		//Common.refreshpage();
 	
@@ -1087,7 +1088,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		Thread.sleep(4000);
 		String login=Common.findElement("xpath", "//div[@class='m-account-nav__welcome']//span[@class='a-icon-text-btn__label']").getText();
 		
-		
+		Thread.sleep(2000);
 		
 		Common.assertionCheckwithReport(login.contains("Welcome"),
 				"Validating My Account page navigation", "user sign in and navigate to my account page",
@@ -1769,6 +1770,7 @@ try
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 	
 				Common.clickElement("xpath", "//button[@title='Save Address']");
+				Thread.sleep(2000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -5512,7 +5514,7 @@ public void click_FeedingDrinking() {
 	        String text = Common.findElement("xpath", "//div[@class='u-container c-product-carousel__carousel js-slick-product-carousel']").getText();
 	        System.out.println(text);
 	       
-	        Common.assertionCheckwithReport(text.contains("Recommended For You")||text.contains("Seller"),
+	        Common.assertionCheckwithReport(text.contains("Recommended"),
 	                "To Validate the Recommended for you is displayed",
 	                "should display the Recommended for you after scroll down the PDP page",
 	                "update Recommended for you are displayed after scroll down the PDP page",
@@ -5951,7 +5953,7 @@ public void click_FeedingDrinking() {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			
-			Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+			Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
 		Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 		Common.clickElement("xpath", "//span[text()='Subscribe']");
 		Sync.waitPageLoad();
@@ -5965,7 +5967,7 @@ public void click_FeedingDrinking() {
 				"Sucessfully message has been displayed when we click on the subcribe button ", "Failed to display the message after subcribtion");
 		Common.actionsKeyPress(Keys.END);
 			
-	Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+	Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
 	Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 	Common.clickElement("xpath", "//span[text()='Subscribe']");
 	Sync.waitPageLoad();
@@ -6174,6 +6176,7 @@ public void click_FeedingDrinking() {
     					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
                 Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
                 Sync.waitPageLoad();
+                Thread.sleep(4000);
                 String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"), "validating the  product add to the Whishlist",
