@@ -3691,8 +3691,20 @@ public class OspreyRegressionEMEA {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
-
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                       if(Common.getCurrentURL().contains("/gb"))
+                       {
+                    	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_2']");
+                    	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_2']");
+                    	   
+                    	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                    	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                       }
+                       else
+                       {
+                    	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                    	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                       }
+					
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -3723,7 +3735,20 @@ public class OspreyRegressionEMEA {
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
+					 if(Common.getCurrentURL().contains("/gb"))
+                     {
+                  	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_2']");
+                  	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_2']");
+                  	   
+                  	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                     }
+                     else
+                     {
+                  	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                     }
+			
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
