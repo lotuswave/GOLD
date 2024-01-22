@@ -2282,7 +2282,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(2000);
-			if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
+			if(Common.getCurrentURL().contains("preprod")&&Common.getCurrentURL().contains("/gb") )
 			{
 				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favourites']");
@@ -2296,8 +2296,8 @@ public class OspreyRegressionEMEA {
 			else
 			{
 				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favourites']");
-				Common.clickElement("xpath", "//a[text()='My Favourites']");
+				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
+				Common.clickElement("xpath", "//a[text()='My Favorites']");
 				Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
 						"validating the Navigation to the My Favorites page",
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
