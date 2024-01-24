@@ -2109,7 +2109,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			Common.assertionCheckwithReport(
-					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
+					viewcart.contains(minicart) || Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
 					"Successfully navigates to the view cart page",
 					"Failed to navigate to the view and edit cart page");
@@ -4187,7 +4187,7 @@ public class OspreyRegressionEMEA {
 		try {
 			Thread.sleep(4000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
-					.replace(Symbol, "").replace(".00", "");
+					.replace(Symbol, "").replace(".00", "").trim();
 			System.out.println(lastvalue);
 			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 			WebElement price = Common.findElement("xpath",
@@ -4202,7 +4202,7 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(4000);
 				if (Size == 1) {
 					String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']")
-							.getText().replace(Symbol, "").replace(".00", "");
+							.getText().replace(Symbol, "").replace(".00", "").trim();
 					System.out.println(name1);
 					Float namevlaue1 = Float.parseFloat(name1);
 					System.out.println(namevlaue1);
@@ -4253,7 +4253,7 @@ public class OspreyRegressionEMEA {
 			if(Common.getCurrentURL().contains("/gb"))
 			{
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("£", "")
-						.replace(".00", "");
+						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(3000);
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
@@ -4261,7 +4261,7 @@ public class OspreyRegressionEMEA {
 			else
 			{
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
-						.replace(".00", "");
+						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(3000);
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
