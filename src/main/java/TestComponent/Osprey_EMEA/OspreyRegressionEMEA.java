@@ -13953,7 +13953,130 @@ public void Add_Favorites_product_from_View_Cart() {
 		Assert.fail();
 	}
 }
+
+public void Add_Favorites_from_PLP(String Dataset) {
+	// TODO Auto-generated method stub
+	String product = data.get(Dataset).get("Products");
+	System.out.println(product);
+	String productcolor = data.get(Dataset).get("Color");
+	System.out.println(productcolor);
+	String Productsize = data.get(Dataset).get("Size");
+	System.out.println(Productsize);
+	try {
+		Sync.waitPageLoad();
+		int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+        System.out.println(MyFavorites);
+		if (MyFavorites != 0) {
+			Bagpacks_headerlinks(Dataset);
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
+			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitPageLoad(30);
+			Thread.sleep(3000);
+			if(Common.getCurrentURL().contains("preprod"))
+            {
+                Sync.waitPageLoad();
+                Thread.sleep(4000);
+                String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+                System.out.println(message);
+                Common.assertionCheckwithReport(message.contains("has been added to your Fav"),
+                        "validating the  product add to the Favorites", "Product should be add to Favorites",
+                        "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
+
+            }
+			else
+			{
+			Sync.waitElementVisible(30, "xpath", "//h4");
+			String whishlistpopup = Common.findElement("xpath", "//h4").getText();
+			System.out.println(whishlistpopup);
+			if (whishlistpopup.contains("Add to Wishlist")) {
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
+				Common.clickElement("xpath", "//button[@title='Add To List']");
+			} else {
+				Assert.fail();
+			}
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Favorites") ,
+					"validating the Navigation to the My Favorites page",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+			Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+			Sync.waitPageLoad();
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
+					"validating the  product add to the Whishlist", "Product should be add to whishlist",
+					"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+			}
+			String Whishlistproduct = Common
+					.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
+			System.out.println(Whishlistproduct);
 }
+	}
+catch(Exception | Error e)
+{
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the products added to the whishlist form PDP", "Product should be add to fav from the PDP",
+			"Unable to add  product to the My Faviorates from the PDP ", Common.getscreenShot("failed to add  product to the My Faviorates from the PDP"));
+	Assert.fail();
+}
+
+}
+
+public void Fav_Seeoption_from_View_cart(String Dataset) {
+	// TODO Auto-generated method stub
+	String products = data.get(Dataset).get("Products");
+	String productcolor = data.get(Dataset).get("Color");
+	String Productsize = data.get(Dataset).get("Size");
+	try
+	{
+	Common.maximizeImplicitWait();
+	Common.actionsKeyPress(Keys.END);
+	String Yourfav=Common.findElement("xpath", "//h2[@class='t-cart__favorites-heading']").getText();
+	System.out.println(Yourfav);
+	Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
+			"validating the favorites in view cart page", "Favorites should be in the view cart page",
+			"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
+	Sync.waitElementPresent("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
+	Common.clickElement("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
+	Sync.waitPageLoad();
+	Thread.sleep(8000);
+	String Options=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+	Common.assertionCheckwithReport(Options.contains("You need to choose options for your item"),
+			"validating the color option on the PDP", "After clicking on the add to cart button for color product it should navigate to PDP",
+			"Sucessfully Navigated to the PDP and options messgae has been appeared ", "failed to Display the choose options message on PDP");
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+	Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+	Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+	Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+	Sync.waitPageLoad();
+	Thread.sleep(6000);
+	Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+	String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+			.getAttribute("data-ui-id");
+	System.out.println(message);
+	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+			"Product should be add to cart", "Sucessfully product added to the cart ",
+			"failed to add product to the cart");
+	
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		Assert.fail();
+	}
+}
+}
+
 
 
 
