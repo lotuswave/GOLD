@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_128_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_YourFavorites_Products {
 
-	String datafile = "Osprey_US//GoldOspreyus.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MyFavorites");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -50,7 +50,7 @@ public class TEST_DGLD_OS_COMMON_128_Registeruser_Products_are_added_to_the_Wish
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
         
 
