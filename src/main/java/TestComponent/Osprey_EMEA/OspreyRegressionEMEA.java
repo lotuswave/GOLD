@@ -4278,10 +4278,10 @@ public class OspreyRegressionEMEA {
 		try {
 			if(Common.getCurrentURL().contains("/gb"))
 			{
-				Sync.waitElementPresent("xpath", "//button[@aria-label='Colour']");
-				Common.clickElement("xpath", "//button[@aria-label='Colour']");
+				Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
+				Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
 				Thread.sleep(3000);
-				String expand = Common.findElement("xpath", "//button[@aria-label='Colour']").getAttribute("aria-expanded");
+				String expand = Common.findElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']").getAttribute("aria-expanded");
 				Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
 						"When we click on the color it should be expand",
 						"Successfully the color has been expand when we click on the colors ",
@@ -4289,10 +4289,10 @@ public class OspreyRegressionEMEA {
 			}
 			else
 			{
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Color']");
-			Common.clickElement("xpath", "//button[@aria-label='Color']");
+			Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
+			Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
 			Thread.sleep(3000);
-			String expand = Common.findElement("xpath", "//button[@aria-label='Color']").getAttribute("aria-expanded");
+			String expand = Common.findElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']").getAttribute("aria-expanded");
 			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
