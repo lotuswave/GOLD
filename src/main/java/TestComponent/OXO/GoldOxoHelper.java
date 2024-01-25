@@ -1770,7 +1770,8 @@ try
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 	
 				Common.clickElement("xpath", "//button[@title='Save Address']");
-				Thread.sleep(2000);
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -1814,6 +1815,7 @@ try
 				
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				Sync.waitPageLoad();
+				Thread.sleep(5000);
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -6189,7 +6191,7 @@ public void click_FeedingDrinking() {
                Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
                Common.clickElement("xpath", "//button[@title='Share Favorites']");
                Sync.waitPageLoad();
-//               Thread.sleep(4000);
+               Thread.sleep(4000);
                String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
    			System.out.println(message1);
    			Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"), "validating the shared whishlist functionality",
