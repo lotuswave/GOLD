@@ -4121,7 +4121,7 @@ public class OspreyRegressionEMEA {
 	public void view_PLP_page() {
 		try {
 			Thread.sleep(4000);
-			String title = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getAttribute("Class");
+			String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
 			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
 					.getAttribute("aria-label");
 			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
@@ -4129,8 +4129,9 @@ public class OspreyRegressionEMEA {
 					.findElement("xpath",
 							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
 					.getText();
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("c-plp-hero__headline")
+					breadcrumbs.contains("Breadcrumb") && title.contains("c-clp-hero")
 							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -4201,14 +4202,14 @@ public class OspreyRegressionEMEA {
 				System.out.println(Size);
 				Thread.sleep(4000);
 				if (Size == 1) {
-					String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']")
+					String name1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span[@class='price']")
 							.getText().replace(Symbol, "").replace(".00", "").trim();
 					System.out.println(name1);
 					Float namevlaue1 = Float.parseFloat(name1);
 					System.out.println(namevlaue1);
 					if (namevlaue1 >= 20) {
 						Thread.sleep(3000);
-						String value1 = Common.findElement("xpath", "//span[@class='price-wrapper']")
+						String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
 								.getAttribute("data-price-amount");
 						Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
@@ -4219,14 +4220,18 @@ public class OspreyRegressionEMEA {
 					}
 				} else {
 					List<WebElement> productprice = Common.findElements("xpath",
-							"//span[@class='price-wrapper']//span[@class='price']");
+							"//span[contains(@class,'price-wrapper')]//span[@class='price']");
 					Thread.sleep(6000);
-					name = productprice.get(i).getText().replace(Symbol, "");
+					name = productprice.get(i).getText().replace(Symbol, "").replace(".00", "").trim();
+					System.out.println(name);
 					Float namevlaue = Float.parseFloat(name);
-					if (namevlaue <= 20) {
+					System.out.println(namevlaue);
+					if (namevlaue >= 20) {
 						Thread.sleep(3000);
-						String value = Common.findElement("xpath", "//span[@class='price-wrapper']")
+						String value = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
 								.getAttribute("data-price-amount");
+						System.out.println(value);
+						System.out.println(name);
 						Common.assertionCheckwithReport(value.equals(name), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
@@ -4247,12 +4252,21 @@ public class OspreyRegressionEMEA {
 		}
 
 	}
+	
+	public String symbol(String Dataset)
+	{
+		String Symbol="";
+		 Symbol=data.get(Dataset).get("Symbol");
+		return Symbol;
+	}
 
 	public void dragprice(WebElement price) {
+		String symbol=symbol("PLP Color");
 		try {
+		
 			if(Common.getCurrentURL().contains("/gb"))
 			{
-				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("£", "")
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(3000);
@@ -4260,7 +4274,7 @@ public class OspreyRegressionEMEA {
 			}
 			else
 			{
-				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(3000);
@@ -4269,6 +4283,8 @@ public class OspreyRegressionEMEA {
 			
 		} catch (Exception | Error e) {
 
+			e.printStackTrace();
+			Assert.fail();
 		}
 	}
 	
