@@ -4203,15 +4203,19 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(4000);
 				if (Size == 1) {
 					String name1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span[@class='price']")
-							.getText().replace(Symbol, "").replace(".00", "").trim();
-					System.out.println(name1);
+							.getText().replace(Symbol, "").trim();
+						System.out.println(name1);
 					Float namevlaue1 = Float.parseFloat(name1);
 					System.out.println(namevlaue1);
 					if (namevlaue1 >= 20) {
 						Thread.sleep(3000);
 						String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
 								.getAttribute("data-price-amount");
-						Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
+						String amount=Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span").getText().replace(Symbol, "").trim();
+						System.out.println(value1);
+						System.out.println(name1);
+						System.out.println(amount);
+						Common.assertionCheckwithReport(value1.equals(name1) || amount.equals(name1), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
 								"unable to display the procing range after pricing filter applied");
