@@ -3693,8 +3693,9 @@ public class OspreyRegressionEMEA {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
                        if(Common.getCurrentURL().contains("/gb"))
                        {
-                    	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_2']");
-                    	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_2']");
+                    	   Thread.sleep(5000);
+                    	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
+                    	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
                     	   
                     	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
@@ -13759,7 +13760,7 @@ public void AddtoCart_Disable_PLP(String Dataset) {
 		Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 		String Mouseover=Common.findElement("xpath", "//img[@alt='" + products + "']").getAttribute("alt");
 		System.out.println(Mouseover);
-		WebElement addtocart=Common.findElement("xpath", "//button[@title='Add to Cart']");
+		WebElement addtocart=Common.findElement("xpath", "//div[@class='m-product-card__cta']//child::form");
 		boolean element=addtocart.isEnabled();
 		if(element)
 		{
