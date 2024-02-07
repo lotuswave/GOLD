@@ -4123,17 +4123,21 @@ public class OspreyRegressionEMEA {
 		try {
 			Thread.sleep(4000);
 			String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
+			System.out.println(title);
 			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
 					.getAttribute("aria-label");
+			System.out.println(breadcrumbs);
 			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+			System.out.println(filter);
 			String Sort = Common
 					.findElement("xpath",
 							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
 					.getText();
+			System.out.println(Sort);
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("c-clp-hero")
-							&& filter.contains("Filter by") && Sort.contains("Sort by"),
+					breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") && title.contains("c-clp-hero")
+							&& filter.contains("Filter by") || filter.contains("Filtrado por")&& Sort.contains("Sort by") || Sort.contains("Ordenar por"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -4150,8 +4154,8 @@ public class OspreyRegressionEMEA {
   String category=data.get(Dataset).get("category");
 		try {
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[text()='" + category + "']");
-			String text = Common.findElement("xpath", "//a[text()='" + category + "']//span").getText();
+			Common.clickElement("xpath", "//a[contains(text(),'" + category + "')]");
+			String text = Common.findElement("xpath", "//a[contains(text(),'" + category + "')]//span").getText();
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
