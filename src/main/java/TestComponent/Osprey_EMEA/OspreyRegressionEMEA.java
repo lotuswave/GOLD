@@ -4138,8 +4138,8 @@ public class OspreyRegressionEMEA {
 			System.out.println(Sort);
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") && title.contains("c-clp-hero")
-							&& filter.contains("Filter by") || filter.contains("Filtrado por")&& Sort.contains("Sort by") || Sort.contains("Ordenar por"),
+					breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane") && title.contains("c-clp-hero")
+							&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -4215,7 +4215,7 @@ public class OspreyRegressionEMEA {
 					Thread.sleep(4000);
 					if (Size == 1) {
 						String name1 = Common.findElement("xpath", "//span[contains(@data-price-type,'finalPrice')]//span[@class='price']")
-								.getText().replace(Symbol, "").trim();
+								.getText().replace(Symbol, "").replace(",00", "").trim();
 							System.out.println(name1);
 						Float namevlaue1 = Float.parseFloat(name1);
 						System.out.println(namevlaue1);
@@ -4279,7 +4279,7 @@ public class OspreyRegressionEMEA {
 					Thread.sleep(4000);
 					if (Size == 1) {
 						String name1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span[@class='price']")
-								.getText().replace(Symbol, "").trim();
+								.getText().replace(Symbol, "").replace(".00", "").trim();
 							System.out.println(name1);
 						Float namevlaue1 = Float.parseFloat(name1);
 						System.out.println(namevlaue1);
