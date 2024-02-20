@@ -4344,12 +4344,12 @@ public class OspreyRegressionEMEA {
 		return Symbol;
 	}
 
-	public void dragprice(WebElement price) {
+	public void dragprice(WebElement price) throws Exception {
 		String symbol=symbol("PLP Color");
 		try {
 		Thread.sleep(8000);
 			if(Common.getCurrentURL().contains("/gb"))
-			{
+			{Thread.sleep(5000);
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
@@ -4358,6 +4358,7 @@ public class OspreyRegressionEMEA {
 			}
 			else if (Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/"))
 			{
+				Thread.sleep(5000);
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(",00", "").trim();
 				System.out.println(lastvalue);
@@ -4366,6 +4367,7 @@ public class OspreyRegressionEMEA {
 			}
 			else
 			{
+				Thread.sleep(5000);
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
@@ -13847,7 +13849,7 @@ public void AddtoCart_Disable_PLP(String Dataset) {
 		Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 		String Mouseover=Common.findElement("xpath", "//img[@alt='" + products + "']").getAttribute("alt");
 		System.out.println(Mouseover);
-		WebElement addtocart=Common.findElement("xpath", "//div[@class='m-product-card__cta']//child::form");
+		WebElement addtocart=Common.findElement("xpath", "//div[@class='m-product-card__cta']//child::form");   //element is not visible for the content stores
 		boolean element=addtocart.isEnabled();
 		if(element)
 		{
