@@ -42,6 +42,7 @@ import TestLib.Sync;
 import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
+import ch.qos.logback.core.net.SyslogConstants;
 import groovyjarjarantlr.CommonAST;
 import groovyjarjarantlr.CommonASTWithHiddenTokens;
 import groovyjarjarantlr4.v4.parse.ANTLRParser.action_return;
@@ -4349,29 +4350,36 @@ public class OspreyRegressionEMEA {
 		try {
 		Thread.sleep(8000);
 			if(Common.getCurrentURL().contains("/gb"))
-			{Thread.sleep(5000);
+			{
+				Thread.sleep(5000);
+			Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else if (Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/"))
 			{
 				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(",00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else
 			{
 				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			
