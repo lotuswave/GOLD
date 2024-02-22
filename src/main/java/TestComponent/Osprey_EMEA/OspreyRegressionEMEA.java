@@ -4194,14 +4194,14 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		String name = "";
 		String Symbol=data.get(Dataset).get("Symbol");
+		System.out.println(Symbol);
 		try {
 			Thread.sleep(6000);
 
 			if(Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/") )
 			{
 				
-				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
-						.replace(Symbol, "").replace(",00", "").trim();
+				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(",00", "").trim();
 				System.out.println(lastvalue);
 				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 				WebElement price = Common.findElement("xpath",
@@ -4236,6 +4236,35 @@ public class OspreyRegressionEMEA {
 							Assert.fail();
 						}
 					} else {
+						
+						if(Common.getCurrentURL().contains("/mx/es/"))
+						{
+							List<WebElement> productprice = Common.findElements("xpath",
+									"//span[contains(@data-price-type,'finalPrice')]//span[@class='price']");
+							Thread.sleep(8000);
+							System.out.println(productprice);
+							Thread.sleep(4000);
+							System.out.println(i);
+							name = productprice.get(i).getText().replace(Symbol, "").replace(",50", "").trim();
+							System.out.println(name);
+							Float namevlaue = Float.parseFloat(name);
+							System.out.println(namevlaue);
+							if (namevlaue >= 20) {
+								Thread.sleep(3000);
+								String value = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
+										.getAttribute("data-price-amount");
+								System.out.println(value);
+								System.out.println(name);
+								Common.assertionCheckwithReport(value.contains(name), "verifying the price filters in PLP page",
+										"When we select the range of price filters between the range only products should display",
+										"Successfully are displayed in the pricing range",
+										"unable to display the procing range after pricing filter applied");
+							} else {
+								Assert.fail();
+							}
+						}
+						else
+						{
 						List<WebElement> productprice = Common.findElements("xpath",
 								"//span[contains(@data-price-type,'finalPrice')]//span[@class='price']");
 						Thread.sleep(8000);
@@ -4259,6 +4288,7 @@ public class OspreyRegressionEMEA {
 						} else {
 							Assert.fail();
 						}
+					}
 					}
 				}
 			}
