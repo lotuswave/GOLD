@@ -4294,13 +4294,39 @@ public class OspreyRegressionEMEA {
 			}
 			else
 			{
+				if (Common.getCurrentURL().contains("/ph/en/"))
+				{
+					String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
+							.replace(Symbol, "").replace(".00", "").replace(",", "").trim();
+					System.out.println(lastvalue);
+					Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+					WebElement price = Common.findElement("xpath",
+							"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+					
+					dragprice(price);
+				}
+				else if(Common.getCurrentURL().contains("/kr/en/"))
+				{
+					String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
+							.replace(Symbol, "").replace(",", "").trim();
+					System.out.println(lastvalue);
+					Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+					WebElement price = Common.findElement("xpath",
+							"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+					
+					dragprice(price);
+				}
+				else
+				{
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 				WebElement price = Common.findElement("xpath",
 						"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+				
 				dragprice(price);
+				}
 				Thread.sleep(6000);
 				List<WebElement> products = Common.findElements("xpath",
 						"//ol[@class='ais-InfiniteHits-list']//img[contains(@class,'m-product')]");
@@ -4309,33 +4335,89 @@ public class OspreyRegressionEMEA {
 					System.out.println(Size);
 					Thread.sleep(4000);
 					if (Size == 1) {
+						if (Common.getCurrentURL().contains("/ph/en/"))
+						{
 						String name1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span[@class='price']")
-								.getText().replace(Symbol, "").replace(".00", "").trim();
+								.getText().replace(Symbol, "").replace(".00", "").replace(",", "").trim();
 							System.out.println(name1);
-						Float namevlaue1 = Float.parseFloat(name1);
-						System.out.println(namevlaue1);
-						if (namevlaue1 >= 20) {
-							Thread.sleep(3000);
-							String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
-									.getAttribute("data-price-amount");
-							String amount=Common.findElement("xpath", "//span[contains(@data-price-type,'finalPrice')]//span[@class='price']").getText().replace(Symbol, "").trim();
-							System.out.println(value1);
-							System.out.println(name1);
-							System.out.println(amount);
-							Common.assertionCheckwithReport(value1.equals(name1) || amount.equals(name1), "verifying the price filters in PLP page",
-									"When we select the range of price filters between the range only products should display",
-									"Successfully are displayed in the pricing range",
-									"unable to display the procing range after pricing filter applied");
-						} else {
-							Assert.fail();
+							Float namevlaue1 = Float.parseFloat(name1);
+							System.out.println(namevlaue1);
+							if (namevlaue1 >= 20) {
+								Thread.sleep(3000);
+								String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
+										.getAttribute("data-price-amount");
+								String amount=Common.findElement("xpath", "//span[contains(@data-price-type,'finalPrice')]//span[@class='price']").getText().replace(Symbol, "").trim();
+								System.out.println(value1);
+								System.out.println(name1);
+								System.out.println(amount);
+								Common.assertionCheckwithReport(value1.equals(name1) || amount.equals(name1), "verifying the price filters in PLP page",
+										"When we select the range of price filters between the range only products should display",
+										"Successfully are displayed in the pricing range",
+										"unable to display the procing range after pricing filter applied");
+							} else {
+								Assert.fail();
+							}
+						}
+						else
+						{
+							if(Common.getCurrentURL().contains("/kr/en/"))
+									{
+								String name1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span[@class='price']")
+										.getText().replace(Symbol, "").replace(",", "").trim();
+								Float namevlaue1 = Float.parseFloat(name1);
+								System.out.println(namevlaue1);
+								if (namevlaue1 >= 20) {
+									Thread.sleep(3000);
+									
+									String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
+											.getAttribute("data-price-amount");
+									String amount=Common.findElement("xpath", "//span[contains(@data-price-type,'finalPrice')]//span[@class='price']").getText().replace(Symbol, "").replace(",", "").trim();
+									System.out.println(value1);
+									System.out.println(name1);
+									System.out.println(amount);
+									Common.assertionCheckwithReport(value1.equals(name1) || amount.equals(name1), "verifying the price filters in PLP page",
+											"When we select the range of price filters between the range only products should display",
+											"Successfully are displayed in the pricing range",
+											"unable to display the procing range after pricing filter applied");
+								} else {
+									Assert.fail();
+								}
+									}
+							else
+							{
+								String name1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]//span[@class='price']")
+										.getText().replace(Symbol, "").replace(".00", "").trim();
+								Float namevlaue1 = Float.parseFloat(name1);
+								System.out.println(namevlaue1);
+								if (namevlaue1 >= 20) {
+									Thread.sleep(3000);
+									
+									String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
+											.getAttribute("data-price-amount");
+									String amount=Common.findElement("xpath", "//span[contains(@data-price-type,'finalPrice')]//span[@class='price']").getText().replace(Symbol, "").trim();
+									System.out.println(value1);
+									System.out.println(name1);
+									System.out.println(amount);
+									Common.assertionCheckwithReport(value1.equals(name1) || amount.equals(name1), "verifying the price filters in PLP page",
+											"When we select the range of price filters between the range only products should display",
+											"Successfully are displayed in the pricing range",
+											"unable to display the procing range after pricing filter applied");
+								} else {
+									Assert.fail();
+								}
+							}
+							
 						}
 					} else {
-						List<WebElement> productprice = Common.findElements("xpath",
-								"//span[contains(@data-price-type,'finalPrice')]//span[@class='price']");
-						Thread.sleep(6000);
-						System.out.println(i);
-						name = productprice.get(i).getText().replace(Symbol, "").replace(".00", "").trim();
-						System.out.println(name);
+						
+					
+							List<WebElement> productprice = Common.findElements("xpath",
+									"//span[contains(@data-price-type,'finalPrice')]//span[@class='price']");
+							Thread.sleep(6000);
+							System.out.println(i);
+							name = productprice.get(i).getText().replace(Symbol, "").replace(".00", "").trim();
+							System.out.println(name);
+
 						Float namevlaue = Float.parseFloat(name);
 						System.out.println(namevlaue);
 						if (namevlaue >= 20) {
@@ -4396,6 +4478,28 @@ public class OspreyRegressionEMEA {
 				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
 						.replace(",00", "").trim();
+				System.out.println(lastvalue);
+				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+			}
+			else if(Common.getCurrentURL().contains("/ph/en/"))
+			{
+				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
+						.replace(".00", "").replace(",", "").trim();
+				System.out.println(lastvalue);
+				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+			}
+			else if(Common.getCurrentURL().contains("/kr/en/"))
+			{
+				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
+						.replace(",", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
