@@ -30,11 +30,12 @@ public class Test_DGLD_OXO_E2E_ST_010_GuestUser_Paypal_2_Items_Standard_Shipping
 			Oxo.Addtocart("SKU-11312500");
 			Oxo.minicart_Checkout();
 			String Products_details=Oxo.shipping_order_details();
-			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");
-			Oxo.select_Shipping_Method("GroundShipping method");
-			Oxo.clickSubmitbutton_Shippingpage();
+			HashMap<String,String> Payment= Oxo.ExpressPaypal("PaypalDetails");
+			Oxo.Paypal_Address();
+			HashMap<String,String> Shipping=Oxo.ExpressShipingdetails("AccountDetails");
+			Oxo.express_paypal_shipping("PaypalDetails");
 			HashMap<String,String> data=Oxo.OrderSummaryValidation();
-			HashMap<String,String> Payment=Oxo.payPalPayment("PaypalDetails");
+			Oxo.ExpressOrder();
 			String OrderIdNumber= Oxo.Verify_order_page();
 			System.out.println(OrderIdNumber);
 			Oxo.Admin("Login Details");

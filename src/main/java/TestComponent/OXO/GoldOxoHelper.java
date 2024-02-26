@@ -249,6 +249,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 
 			String Productname = Common.findElement("xpath", "//button[@id='product-addtocart-button']/span").getText();
+			Thread.sleep(3000);
 			String stars = Common.findElement("xpath", "//span[@class='yotpo-stars']").getAttribute("class");
 			
 			Sync.waitPageLoad();
@@ -8432,7 +8433,7 @@ public void alumini_Chefs(String Dataset) {
 							"After Clicking on Newsletter Subscription CTA user should be navigate to the Newsletter Subscription page",
 							"Sucessfully User Navigates to the Newsletter Subscription page after clicking on the Newsletter Subscription CTA",
 							"Failed to Navigate to the Newsletter Subscription page after Clicking on Newsletter Subscription button");
-					Common.switchFrames("xpath", "//iframe[contains(@title,'OXO Website Preference')]");
+					Common.switchFrames("xpath", "//iframe[@id='klaviyo_subscribe_page_1']");
 					WebElement Checkbox = Common.findElement("xpath", "//input[@id='field7']");
 					if (!Checkbox.isSelected()) {
 						Checkbox.click();
@@ -10486,6 +10487,7 @@ public void alumini_Chefs(String Dataset) {
 		                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
 		            } 
 		            Sync.waitPageLoad(30);
+		            Thread.sleep(3000);
 		            Sync.waitElementPresent("name", "loginfmt");
 		            Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
 		            Common.clickElement("id", "idSIButton9");
