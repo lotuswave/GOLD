@@ -9984,21 +9984,7 @@ public void alumini_Chefs(String Dataset) {
 
 					String expectedResult = "It should Select Afterpay payment.";
 					
-					try {
-						
-					 Common.clickElement("xpath", "//label[@class='label']//span[contains(text(),'Default Payment')]");
-					Thread.sleep(5000);
 					
-			
-					} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("validating the Credit Card option", "click the creadit card label",
-					"faield to click Credit Card option", Common.getscreenShotPathforReport("Cardinoption"));
-					Assert.fail();
-
-
-
-					}
 					try {
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
@@ -10598,8 +10584,8 @@ public void alumini_Chefs(String Dataset) {
 				
 				if (OrderId.equals(a))
 				{*/
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//a[@class='action-menu-item']");
+					Thread.sleep(3000);
+					Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
 				//}
 				
 				//String b = "Processing";

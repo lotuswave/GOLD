@@ -25,8 +25,8 @@ public class Test_DGLD_OXO_E2E_ST_007_Ecom_GuestUser_Afterpay_2_Items_Standard_S
 			Oxo.verifingHomePage();
 			Oxo.search_E2E_product("SKU-11262700");
 			Oxo.Addtocart("SKU-11262700");
-			Oxo.search_E2E_product("SKU-1130780");
-			Oxo.Addtocart("SKU-1130780");
+			Oxo.search_E2E_product("SKU-11404000");
+			Oxo.Addtocart("SKU-11404000");
 		    Oxo.minicart_Checkout();
 			String Products_details=Oxo.shipping_order_details();
 			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");
