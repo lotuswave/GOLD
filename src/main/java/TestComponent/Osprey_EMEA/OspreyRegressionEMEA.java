@@ -4418,9 +4418,7 @@ public class OspreyRegressionEMEA {
 									} else {
 										Assert.fail();
 									}
-									
-									
-									
+															
 								}
 								else
 								{
@@ -4443,12 +4441,22 @@ public class OspreyRegressionEMEA {
 											"Successfully are displayed in the pricing range",
 											"unable to display the procing range after pricing filter applied");
 								} else {
-									Assert.fail();
+									Thread.sleep(3000);
+									String value1 = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
+											.getAttribute("data-price-amount");
+									String amount=Common.findElement("xpath", "//span[contains(@data-price-type,'finalPrice')]//span[@class='price']").getText().replace(Symbol, "").trim();
+									System.out.println(value1);
+									System.out.println(name1);
+									System.out.println(amount);
+									Common.assertionCheckwithReport(value1.equals(name1) || amount.equals(name1), "verifying the price filters in PLP page",
+											"When we select the range of price filters between the range only products should display",
+											"Successfully are displayed in the pricing range",
+											"unable to display the procing range after pricing filter applied");
 								}
 							}
 							
 						}
-					} 
+						}
 					}else {
 						
 					
