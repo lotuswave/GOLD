@@ -4511,6 +4511,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else if (Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/"))
@@ -4522,6 +4523,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else if(Common.getCurrentURL().contains("/ph/en/"))
@@ -4533,6 +4535,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else if(Common.getCurrentURL().contains("/kr/en/"))
@@ -4544,6 +4547,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else if(Common.getCurrentURL().contains("/tw/en/"))
@@ -4555,6 +4559,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");	
 			}
 			else
@@ -4566,6 +4571,7 @@ public class OspreyRegressionEMEA {
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			
