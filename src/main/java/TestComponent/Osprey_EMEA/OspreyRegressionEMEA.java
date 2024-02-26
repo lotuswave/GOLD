@@ -4273,6 +4273,38 @@ public class OspreyRegressionEMEA {
 								Assert.fail();
 							}
 						}
+							
+							else
+								{
+								if(Common.getCurrentURL().contains("/id/en/"))
+								{
+									List<WebElement> productprice = Common.findElements("xpath",
+											"//span[contains(@data-price-type,'finalPrice')]//span[@class='price']");
+									Thread.sleep(8000);
+									System.out.println(productprice);
+									Thread.sleep(4000);
+									System.out.println(i);
+									name = productprice.get(i).getText().replace(Symbol, "").replace(".50", "").trim();
+									System.out.println(name);
+									Float namevlaue = Float.parseFloat(name);
+									System.out.println(namevlaue);
+									if (namevlaue >= 20) {
+										Thread.sleep(3000);
+										String value = Common.findElement("xpath", "//span[contains(@class,'price-wrapper')]")
+												.getAttribute("data-price-amount");
+										System.out.println(value);
+										System.out.println(name);
+										Common.assertionCheckwithReport(value.contains(name), "verifying the price filters in PLP page",
+												"When we select the range of price filters between the range only products should display",
+												"Successfully are displayed in the pricing range",
+												"unable to display the procing range after pricing filter applied");
+									} else {
+										Assert.fail();
+									}
+							{
+								
+							}
+						}
 						else
 						{
 						List<WebElement> productprice = Common.findElements("xpath",
@@ -4301,6 +4333,7 @@ public class OspreyRegressionEMEA {
 					}
 					}
 				}
+				}
 			}
 			else
 			{
@@ -4315,7 +4348,8 @@ public class OspreyRegressionEMEA {
 					
 					dragprice(price);
 				}
-				else if(Common.getCurrentURL().contains("/kr/en/") )
+				
+				else if(Common.getCurrentURL().contains("/kr/en/") || Common.getCurrentURL().contains("/jp/en/")  )
 				{
 					String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 							.replace(Symbol, "").replace(",", "").trim();
@@ -4556,7 +4590,7 @@ public class OspreyRegressionEMEA {
 				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
-			else if(Common.getCurrentURL().contains("/kr/en/"))
+			else if(Common.getCurrentURL().contains("/kr/en/") || Common.getCurrentURL().contains("/jp/en/"))
 			{
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
