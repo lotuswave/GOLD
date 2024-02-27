@@ -2330,7 +2330,7 @@ public class OspreyRegressionEMEA {
 		System.out.println(Productsize);
 		try {
 			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'m-product')]//img").size();
             System.out.println(MyFavorites);
 			if (MyFavorites != 0) {
 				search_product("Product");
@@ -2387,8 +2387,8 @@ public class OspreyRegressionEMEA {
 				if (Whishlistproduct.equals(product)) {
 					Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + product + "')]//img");
 					Common.mouseOver("xpath", "//a[contains(@title,'" + product + "')]//img");
-					Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-					Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+					Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+					Common.clickElement("xpath", "//span[text()='Add to Cart']");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -2407,10 +2407,9 @@ public class OspreyRegressionEMEA {
 
 			} else {
 				Sync.waitPageLoad();
-
-				Common.scrollIntoView("xpath", "//img[contains(@class,'lazy m-product-card')]");
-				Sync.waitElementPresent(30, "xpath", "//img[contains(@class,'lazy m-product-card')]");
-				Common.mouseOver("xpath", "//img[contains(@class,'lazy m-product-card')]");
+				Common.scrollIntoView("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent(30, "xpath", "//img[contains(@class,'m-product-card__image')]");
+				Common.mouseOver("xpath", "//img[contains(@class,'m-product-card__image')]");
 				Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
 				see_options("Product");
 				
@@ -2437,6 +2436,7 @@ public class OspreyRegressionEMEA {
 		System.out.println(Productsize);
 		try {
 			Thread.sleep(4000);
+			Common.mouseOver("xpath", "//fieldset[@class='fieldset m-product-card__cta']//span");
 			String seeoption = Common.findElement("xpath", "//fieldset[@class='fieldset m-product-card__cta']//span")
 					.getText();
 			System.out.println(seeoption);
