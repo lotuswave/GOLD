@@ -3084,7 +3084,7 @@ public class OspreyRegressionEMEA {
 
 			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
 			for (int i = 1; i <= storecount; i++) {
-				Thread.sleep(3000);
+				Thread.sleep(8000);
 				String relatedstores = Common
 						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
 						.getText();
