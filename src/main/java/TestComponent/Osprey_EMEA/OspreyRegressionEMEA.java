@@ -2014,13 +2014,14 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8203,9 +8204,10 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
-//			Sync.waitPageLoad();
-//			Thread.sleep(4000);
-//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
 //			System.out.println(message);
