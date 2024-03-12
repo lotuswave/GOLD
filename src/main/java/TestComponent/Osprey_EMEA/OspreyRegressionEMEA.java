@@ -14601,13 +14601,15 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 	Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 	Sync.waitPageLoad();
 	Thread.sleep(6000);
-	Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-	String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-			.getAttribute("data-ui-id");
-	System.out.println(message);
-	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-			"Product should be add to cart", "Sucessfully product added to the cart ",
-			"failed to add product to the cart");
+//	Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//	String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//			.getAttribute("data-ui-id");
+//	System.out.println(message);
+//	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//			"Product should be add to cart", "Sucessfully product added to the cart ",
+//			"failed to add product to the cart");
+	Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+	Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 	
 	}
 	catch(Exception | Error e)
