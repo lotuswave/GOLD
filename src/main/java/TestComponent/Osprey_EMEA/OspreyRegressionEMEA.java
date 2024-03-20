@@ -1971,6 +1971,8 @@ public class OspreyRegressionEMEA {
 		String products = data.get(Dataset).get("Products");
 		String productcolor = data.get(Dataset).get("Color");
 		String Productsize = data.get(Dataset).get("Size");
+		String symbol=data.get(Dataset).get("Symbol");
+		System.out.println(symbol);
 		System.out.println(products);
 		System.out.println(Productsize);
 		try {
@@ -2010,24 +2012,46 @@ public class OspreyRegressionEMEA {
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			product_quantity(Dataset);
 			Thread.sleep(4000);
+			String country=Common.findElement("xpath", "(//span[@class='a-icon-text-btn__label'])[1]").getText();
+			System.out.println(country);
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
 //			System.out.println(message);
 //			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //					"Product should be add to cart", "Sucessfully product added to the cart ",
 //					"failed to add product to the cart");
+			String price=Common.findElement("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+			System.out.println(price);
+			Thread.sleep(5000);
+			price = price.trim();
+			price = price.substring(0,price.length() - 2);
+		    System.out.println(price);  
+			int amount=Integer.parseInt(price);
+			System.out.println(amount);
+			
+			if(amount>199 && country.contains("US | EN"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+				Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+				Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+				Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-
 			Assert.fail();
 		}
 
@@ -3511,6 +3535,7 @@ public class OspreyRegressionEMEA {
 
 	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		String address = data.get(dataSet).get("Street");
+		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
 			Thread.sleep(5000);
@@ -3565,8 +3590,26 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
-
+	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			
+			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+			System.out.println(subtotal);
+			subtotal = subtotal.trim();
+			subtotal = subtotal.substring(0,subtotal.length() - 2);
+		    System.out.println(subtotal);  
+			int amount=Integer.parseInt(subtotal);
+			System.out.println(amount);
+			if(amount>199 && symbol.equals("$"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			}
+			else
+			{
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			}
 
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
@@ -3803,8 +3846,18 @@ public class OspreyRegressionEMEA {
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
 		// Common.refreshpage();
-
+		String symbol=data.get(dataSet).get("Symbol");
+		
 		try {
+			Thread.sleep(4000);
+			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+			System.out.println(subtotal);
+			subtotal = subtotal.trim();
+			subtotal = subtotal.substring(0,subtotal.length() - 2);
+		    System.out.println(subtotal);  
+			int amount=Integer.parseInt(subtotal);
+			System.out.println(amount);
+			
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
 			// Common.clickElement("xpath", "//label[@for='stripe_payments']");
@@ -3822,20 +3875,44 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
-				Thread.sleep(5000);
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
-				System.out.println(Number);
+				if(amount>199 && symbol.equals("$"))
+				{
+					Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+					Common.clickElement("xpath", "//div[@class='ampromo-close']");
+					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
+					Thread.sleep(5000);
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+					System.out.println(Number);
 
-				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
-				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-				Thread.sleep(2000);
-				Common.actionsKeyPress(Keys.ARROW_DOWN);
-				Common.switchToDefault();
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+				
+				}
+				else
+				{
+					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
+					Thread.sleep(5000);
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+					System.out.println(Number);
+
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+				}
+				
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
                        if(Common.getCurrentURL().contains("/gb"))
                        {
@@ -9246,7 +9323,6 @@ public class OspreyRegressionEMEA {
 			Sync.waitPageLoad();
 
 			Thread.sleep(5000);
-//			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.scrollIntoView("xpath",
 					"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
 
@@ -9255,12 +9331,10 @@ public class OspreyRegressionEMEA {
 			List<String> Beforefilterpricelist = new ArrayList<String>();
 
 			for (WebElement p : BeforeFilterprice) {
-				// Beforefilterpricelist.add(Double.valueOf(p.getText().replace("£", " ")));
 				Beforefilterpricelist.add(p.getText().replace(symbol, " "));
 				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 			}
 			Thread.sleep(4000);
-//			Common.scrollIntoView("xpath", "//select[@id='srp-sort-by']");
 			Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.TEXT,
 					PriceFilter);
 			
@@ -9272,7 +9346,6 @@ public class OspreyRegressionEMEA {
 			List<String> Afterfilterpricelist = new ArrayList<String>();
 
 			for (WebElement p : AfterFilterprice) {
-				// Afterfilterpricelist.add(Double.valueOf(p.getText().replace("£", " ")));
 				Afterfilterpricelist.add(p.getText().replace(symbol, " "));
 				System.out.println("Afterfilterpricelist" + Afterfilterpricelist);
 			}
