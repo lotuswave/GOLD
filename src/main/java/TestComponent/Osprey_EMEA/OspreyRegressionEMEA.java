@@ -3701,11 +3701,21 @@ public class OspreyRegressionEMEA {
 		Thread.sleep(4000);
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
+		String symbol=data.get(dataSet).get("Symbol");
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
 		// Common.refreshpage();
 
 		try {
+			
+			Thread.sleep(4000);
+			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+			System.out.println(subtotal);
+			subtotal = subtotal.trim();
+			subtotal = subtotal.substring(0,subtotal.length() - 2);
+		    System.out.println(subtotal);  
+			int amount=Integer.parseInt(subtotal);
+			System.out.println(amount);
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
 			// Common.clickElement("xpath", "//label[@for='stripe_payments']");
@@ -3723,20 +3733,45 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
-				Thread.sleep(5000);
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
-				System.out.println(Number);
+				if(amount>199 && symbol.equals("$"))
+				{
+					Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+					Common.clickElement("xpath", "//div[@class='ampromo-close']");
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
+					Thread.sleep(5000);
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+					System.out.println(Number);
 
-				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
-				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-				Thread.sleep(2000);
-				Common.actionsKeyPress(Keys.ARROW_DOWN);
-				Common.switchToDefault();
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+				}
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
+					Thread.sleep(5000);
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+					System.out.println(Number);
+
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+				}
+			
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
                        if(Common.getCurrentURL().contains("/gb"))
                        {
