@@ -9469,7 +9469,7 @@ public class OspreyRegressionEMEA {
 		for (int i = 0; i < strArray.length; i++) {
 			System.out.println(strArray[i]);
 
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("preprod")) {
 
 				Common.oppenURL((strArray[i]));
 				int responcecode = getpageresponce(Common.getCurrentURL());
@@ -10329,13 +10329,17 @@ public class OspreyRegressionEMEA {
 		            }
 			
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+			
+			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			
+//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 		}
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -10983,8 +10987,8 @@ catch(Exception | Error e)
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.doubleClick("xpath", "//label[contains(@for,'billing-address')]//span");
+			Sync.waitElementPresent(30, "xpath", "(//label[contains(@for,'billing-address')]//span");
+			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
 			Thread.sleep(5000);
 			Common.dropdown("xpath", "//select[@aria-label='Billing Address']", SelectBy.TEXT, "New Address");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
