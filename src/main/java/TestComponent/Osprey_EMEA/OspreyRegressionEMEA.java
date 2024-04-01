@@ -8174,13 +8174,13 @@ public class OspreyRegressionEMEA {
 		String Country;
 		try {
 			Common.actionsKeyPress(Keys.END);
-			List<WebElement> country = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+			List<WebElement> country = Common.findElements("xpath", "//p[@class='country-item__language']");
 			List<WebElement> Countryselector = Common.findElements("xpath",
-					"//label[contains(@class,'a-radio-button')]");
+					"//p[@class='country-item__language']");
 			ArrayList<String> CountryNames = new ArrayList<String>();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector']");
-			Common.clickElement("xpath", "//button[@data-trigger='country_selector']");
+			Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
+			Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
 			Thread.sleep(4000);
 			for (WebElement Countryselections : Countryselector) {
 				CountryNames.add(Countryselections.getText());
@@ -8197,23 +8197,21 @@ public class OspreyRegressionEMEA {
 					for (int i = 0; i < country.size(); i++) {
 
 						List<WebElement> select = Common.findElements("xpath",
-								"//label[contains(@class,'a-radio-button')]");
+								"//p[@class='country-item__language']");
 						Sync.waitPageLoad();
-						Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector']");
-						Common.clickElement("xpath", "//button[@data-trigger='country_selector']");
+						Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
+						Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
 						Thread.sleep(3000);
 						Country = select.get(i).getText();
 						System.out.println(Country);
 						select.get(i).click();
-						if (Country.contains("United Kingdom") || Country.contains("United States")) {
-
-							Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+						if (Country.contains("United Kingdom") || Country.contains("English")) {
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
 									Common.getscreenShotPathforReport(Country));
 						} else {
-							Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+//							Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							Common.navigateBack();
@@ -10987,7 +10985,7 @@ catch(Exception | Error e)
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "(//label[contains(@for,'billing-address')]//span");
+			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
 			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
 			Thread.sleep(5000);
 			Common.dropdown("xpath", "//select[@aria-label='Billing Address']", SelectBy.TEXT, "New Address");
