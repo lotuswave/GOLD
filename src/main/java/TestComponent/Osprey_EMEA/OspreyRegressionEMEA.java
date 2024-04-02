@@ -9259,10 +9259,12 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("id", "discount-code");
 			Common.textBoxInput("id", "discount-code", invalidcode);
 			Common.clickElement("xpath", "//button[@value='Apply Discount']");
-			Thread.sleep(2000);
-			String errormessage = Common.findElement("xpath", "//div[@class='message message-error error']//div")
+			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
+			String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']")
 					.getText();
-			Common.assertionCheckwithReport(errormessage.contains("The coupon code isn't valid."),
+			System.out.println(errormessage);
+			Common.assertionCheckwithReport(errormessage.contains("The code "+ invalidcode +" is not active."),
 					"validating the discount error message in the payment page",
 					"Error message should be display in the payment page",
 					"Successfully error message should be displayed",
@@ -9284,6 +9286,7 @@ public class OspreyRegressionEMEA {
 		try {
 			Sync.waitElementPresent("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Shipping']");
 			Common.clickElement("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Shipping']");
+			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-content-type='text']//p")
 					.getText();
 			System.out.println(message);
@@ -9293,6 +9296,7 @@ public class OspreyRegressionEMEA {
 					"Successfully shipping tooltip is displayed", "Failed to display the Tooltip for shipping");
 			Sync.waitElementPresent("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Tax']");
 			Common.clickElement("xpath", "//span[@class='a-tooltip__trigger-text' and text()='Tax']");
+			Thread.sleep(4000);
 			String taxtooltip = Common.findElement("xpath", "//button[@aria-describedby='formShippingTotalTaxTooltip']")
 					.getText();
 			System.out.println(taxtooltip);
