@@ -7662,10 +7662,10 @@ public class OspreyRegressionEMEA {
 						"Failed to display the message after subcribtion");
 
 			} else {
-				Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo lazy loaded']");
+				Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper is-special-price']")
 						.getAttribute("data-price-amount");
-				Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo lazy loaded']");
+				Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PLPprice = Common
