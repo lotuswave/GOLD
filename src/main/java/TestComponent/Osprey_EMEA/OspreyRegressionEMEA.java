@@ -8201,16 +8201,39 @@ public class OspreyRegressionEMEA {
 						Sync.waitPageLoad();
 						Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
 						Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
+						String countryname=Common.findElement("xpath", "(//span[@class='country-item__country-label'])[1]").getText();
+						System.out.println(countryname);
 						Thread.sleep(3000);
 						Country = select.get(i).getText();
 						System.out.println(Country);
 						select.get(i).click();
-						if (Country.contains("United Kingdom") || Country.contains("English")) {
+						Thread.sleep(5000);
+						if (Country.contains("English (£)") && countryname.contains("UK")|| Country.contains("English") && countryname.contains("United States")) {
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
 									Common.getscreenShotPathforReport(Country));
-						} else {
+						} 
+						
+						else if (Country.contains("English (€)") || Country.contains("Français (€)")
+								|| Country.contains("Deutsch (€)") || Country.contains("Italiano (€)")
+								|| Country.contains("Español (€)") || Country.contains("English (DKK)")
+								|| Country.contains("Norsk (NOK)") || Country.contains("Svenska (SEK)")
+								|| Country.contains("Deutsch (CHF)") || Country.contains("Français (CHF)")
+								|| Country.contains("Italiano (CHF)") || Country.contains("English (£)")) {
+							
+							Sync.waitElementPresent("xpath", "(//legend[@class='h5'])[2]");
+							Common.getText("xpath", "(//legend[@class='h5'])[2]");
+							Sync.waitPageLoad();
+							Thread.sleep(4000);
+							Common.navigateBack();
+							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
+									"click on the country should navigate to the  " + Country + "Page",
+									"successfully page navigating to " + Country + "PAGE",
+									Common.getscreenShotPathforReport(Country));
+							
+						}
+						else {
 //							Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
