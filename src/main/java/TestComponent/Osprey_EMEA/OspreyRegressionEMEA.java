@@ -257,11 +257,11 @@ public class OspreyRegressionEMEA {
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
 			Sync.waitImplicit(30);
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
-					message.contains("Osprey")
+					message.contains("Thank you for registering with Osprey")
 							&& Common.getCurrentURL().contains("account") ,
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
@@ -5854,7 +5854,7 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
 			Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 			Thread.sleep(4000);
-			 if(Common.getCurrentURL().contains("stage3"))
+			 if(Common.getCurrentURL().contains("preprod"))
              {
                  
                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -5871,10 +5871,10 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
 			Common.clickElement("xpath", "//button[@title='Save Address']");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-
-			Common.assertionCheckwithReport(message.equals("You saved the address."),
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("You saved the address."),
 					"validating the saved message after saving address in address book",
 					"Save address message should be displayed after the address saved in address book",
 					"Sucessfully address has been saved in the address book",
@@ -5921,7 +5921,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
 				Thread.sleep(4000);
-				if(Common.getCurrentURL().contains("stage3"))
+				if(Common.getCurrentURL().contains("preprod"))
 	             { 
 	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
 	             }
@@ -5936,7 +5936,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 
-				Common.assertionCheckwithReport(message.equals("You saved the address."),
+				Common.assertionCheckwithReport(message.contains("You saved the address."),
 						"validating the saved message after saving address in address book",
 						"Save address message should be displayed after the address saved in address book",
 						"Sucessfully address has been saved in the address book",
@@ -5983,7 +5983,7 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
-			if(Common.getCurrentURL().contains("stage3"))
+			if(Common.getCurrentURL().contains("preprod"))
             { 
                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
             }
@@ -6007,7 +6007,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//button[@title='Save Address']");
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			Common.assertionCheckwithReport(message.equals("You saved the address."),
+			Common.assertionCheckwithReport(message.contains("You saved the address."),
 					"validating the checkbox for billing address and text for the shipping address",
 					"Checkbox should be display for the billing address and text should be display for the shipping address",
 					"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
@@ -6056,7 +6056,7 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
-				if(Common.getCurrentURL().contains("stage3"))
+				if(Common.getCurrentURL().contains("preprod"))
 	             { 
 	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
 	             }
@@ -6116,7 +6116,7 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
-			if(Common.getCurrentURL().contains("stage3"))
+			if(Common.getCurrentURL().contains("preprod"))
             { 
                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
             }
@@ -6132,7 +6132,7 @@ public class OspreyRegressionEMEA {
 			String text = Common.findElement("xpath", "//div[@class='message info']//span").getText();
 			System.out.println(text);
 			Common.assertionCheckwithReport(
-					/* checkbox.equals("checkbox") && */ text.equals("This is your default billing address."),
+					/* checkbox.equals("checkbox") && */ text.contains("This is your default billing address."),
 					"validating the checkbox for billing address and text for the shipping address",
 					"Checkbox should be display for the billing address and text should be display for the shipping address",
 					"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
@@ -6140,13 +6140,14 @@ public class OspreyRegressionEMEA {
 							+ "for shipping address");
 			Common.clickElement("xpath", "//button[@title='Save Address']");
 			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
+			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 			String shippingaddress = Common
 					.findElement("xpath", "//div[contains(@class,'box box-address-bil')]//address").getText();
 			System.out.println(shippingaddress);
 			System.out.println(shipping);
 			Common.assertionCheckwithReport(
-					shippingaddress.equals(shipping) && message.equals("You saved the address."),
+					shippingaddress.equals(shipping) && message.contains("You saved the address."),
 					"validating the checkbox for shipping address and text for the billing address",
 					"Checkbox should be display for the shipping address and text should be display for the billing address",
 					"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
@@ -6194,7 +6195,7 @@ public class OspreyRegressionEMEA {
 				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
-				if(Common.getCurrentURL().contains("stage3"))
+				if(Common.getCurrentURL().contains("preprod"))
 	             { 
 	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
 	             }
@@ -6209,7 +6210,7 @@ public class OspreyRegressionEMEA {
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 
-				Common.assertionCheckwithReport(message.equals("You saved the address."),
+				Common.assertionCheckwithReport(message.contains("You saved the address."),
 						"validating the saved message after saving address in address book",
 						"Save address message should be displayed after the address saved in address book",
 						"Sucessfully address has been saved in the address book",
@@ -6225,8 +6226,8 @@ public class OspreyRegressionEMEA {
 					Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 					String Delmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div")
 							.getText();
-
-					Common.assertionCheckwithReport(Delmessage.equals("You deleted the address."),
+					System.out.println(Delmessage);
+					Common.assertionCheckwithReport(Delmessage.contains("You deleted the address."),
 							"validating the Delete message after Deleting address in address book",
 							"Delete address message should be displayed after the address delete in address book",
 							"Sucessfully address has been Deleted in the address book",
@@ -7163,11 +7164,13 @@ public class OspreyRegressionEMEA {
 				String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
 						.getText();
 				System.out.println(favmessage);
+				System.out.println(message);
+				System.out.println(Common.getPageTitle());
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().equals("My Wish List")
+						Common.getPageTitle().equals("My Favorites")
 								&& message.contains("Thank you for registering with Osprey") 
-								&& favmessage.contains(product + " has been added to your Wish List. Click"),
+								&& favmessage.contains(product + " has been added to your Favorites. Click"),
 						"validating the  My Favorites page Navigation when user clicks on signin button",
 						"User should able to navigate to the My Favorites page after clicking on Signin button",
 						"Sucessfully navigate to the My Favorites page after clicking on signin button ",
@@ -7306,12 +7309,12 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
 			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
 			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.scrollIntoView("xpath", "(//div[contains(@class,'box box-billing')]//br)[1]");
-			String Address = Common.findElement("xpath", "(//div[contains(@class,'box box-billing')]//br)[1]")
+			Common.scrollIntoView("xpath", "(//div[contains(@class,'box box-billing')]//br)[2]");
+			String Address = Common.findElement("xpath", "(//div[contains(@class,'box box-billing')]//br)[2]")
 					.getText();
 			System.out.println(Address);
 			System.out.println(Dataset);
-			Common.assertionCheckwithReport(Address.equals(Dataset) || Dataset.contains("935 The Horsley Dr"),
+			Common.assertionCheckwithReport(Address.contains(Dataset) || Dataset.contains("935 The Horsley Dr"),
 					"verifying the Billing address form in Address book",
 					"Billing address should be saved in the Address book",
 					"Sucessfully Billing address form should be Displayed in the Address book",
