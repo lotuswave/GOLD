@@ -13756,8 +13756,8 @@ public void validate_price_PLP_and_PDP() {
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "(//img[contains(@class,'m-product-card')])["+ value + "]");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			String PDPPrice=Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])[1]");
+			Thread.sleep(6000);
+			String PDPPrice=Common.getText("xpath", "(//label[@class='amcard-label-block -price']//span)[1]");
 			System.out.println(PDPPrice);
 			Common.assertionCheckwithReport(PLPprice.equals(PDPPrice),
 					"validating the Price for the Gift card in the PDP",
