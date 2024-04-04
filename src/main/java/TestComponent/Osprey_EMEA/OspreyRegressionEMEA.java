@@ -2558,7 +2558,7 @@ public class OspreyRegressionEMEA {
 	public void minicart_Checkout() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			click_minicart();
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
@@ -8519,8 +8519,8 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+			Thread.sleep(6000);
+			Sync.waitElementPresent(50, "xpath", "//div[@class='c-mini-cart__close-btn']");
 			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
