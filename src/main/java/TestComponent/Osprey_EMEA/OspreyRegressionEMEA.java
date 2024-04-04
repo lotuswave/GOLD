@@ -5550,8 +5550,8 @@ public class OspreyRegressionEMEA {
 		System.out.println(products);
 		try {
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo lazy loaded']");
-			Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo lazy loaded']");
+			Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
+			Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			more_Quantity("review");

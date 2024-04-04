@@ -136,7 +136,7 @@ public class GoldHydroHelper {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()=' Water Bottles']");
+			Common.clickElement("xpath", "//span[text()=' Bottles']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
