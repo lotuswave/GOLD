@@ -1788,6 +1788,7 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
+			Thread.sleep(6000);
 			Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
 			Common.clickElement("xpath", "//span[text()='Create New Registry']");
 			Common.clickElement("id", "submit.next");
@@ -1856,8 +1857,9 @@ public class OspreyRegressionEMEA {
 			Common.textBoxInput("xpath", "//input[@title='Zip/Postal Code']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Thread.sleep(6000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
+			System.out.println(message);
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
@@ -10586,6 +10588,7 @@ public void Verify_OrderTotal() {
 				Common.scrollIntoView("xpath", "//div[@class='stripe-dropdown-selection']");
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
