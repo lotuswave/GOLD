@@ -3733,7 +3733,7 @@ public class OspreyRegressionEMEA {
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+//				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Thread.sleep(4000);
 				if(amount>199 && symbol.equals("$"))
 				{
