@@ -21,6 +21,7 @@ public class Test_DGLD_OS_COMMON_083_RegisterUser_Add_Other_Amount_To_GiftCard_I
 			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.click_singinButton();
 			Osprey_ReEu.Login_Account("Account");
+			Osprey_ReEu.search_product("Osprey Gift Card");
 			Osprey_ReEu.Gift_cards("Osprey Gift Card");
 			Osprey_ReEu.Other_Amount("price");
 			Osprey_ReEu.minicart_Checkout();
@@ -35,7 +36,7 @@ public class Test_DGLD_OS_COMMON_083_RegisterUser_Add_Other_Amount_To_GiftCard_I
 
 	@AfterTest
 	public void clearBrowser() {
-				Common.closeAll();
+	Common.closeAll();
 
 	}
 
