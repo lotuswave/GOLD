@@ -11486,7 +11486,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//p[text()='SUSTAINABLE DESIGN']");
 			Thread.sleep(4000);
-			Common.switchFrames("xpath", "//iframe[contains(@title,'Osprey Packs')]");
+			Common.switchFrames("xpath", "//iframe[contains(@title,'Vimeo video player')]");
 			Thread.sleep(4000);
 			
 			Sync.waitElementPresent(40, "xpath", "//button[@aria-label='Play']");
@@ -11510,10 +11510,13 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//button[@data-role='closeBtn']");
 			Common.clickElement("xpath", "//button[@data-role='closeBtn']");
 			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//div[@class='fotorama__nav__frame fotorama__nav__frame--thumb video-thumb-icon']");
 			Sync.waitElementPresent("xpath", "//div[@class='fotorama__nav__frame fotorama__nav__frame--thumb video-thumb-icon']");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//div[@class='fotorama__nav__frame fotorama__nav__frame--thumb video-thumb-icon']");
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button[@title='Play']");
+			Thread.sleep(4000);
 			String video2 = Common.findElement("xpath", "//button[@title='Pause']")
 					.getAttribute("class");
 			Common.assertionCheckwithReport(video2.contains("playing"), "validating the video in PDP page",
