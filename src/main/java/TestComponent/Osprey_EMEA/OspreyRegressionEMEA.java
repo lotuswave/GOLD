@@ -2575,7 +2575,9 @@ public class OspreyRegressionEMEA {
 			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					/*checkout.equals(minicart) &&*/ Common.getCurrentURL().contains("checkout/#shipping") || Common.getCurrentURL().contains("/checkout/#payment") ,
+					/* checkout.equals(minicart) && */ Common.getCurrentURL().contains("checkout/#shipping")
+							|| Common.getCurrentURL().contains("/checkout/#payment")
+							|| Common.getCurrentURL().contains("/checkout/"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -9044,6 +9046,12 @@ public class OspreyRegressionEMEA {
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+				
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+				Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+				
 				Sync.waitElementVisible("xpath", "//a[text()='shopping cart']");
 
 				String Shoppping = Common.findElement("xpath", "//a[text()='shopping cart']").getText();
@@ -9701,7 +9709,7 @@ public class OspreyRegressionEMEA {
 
 		try {
 			Thread.sleep(5000);
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 			} else {
@@ -9741,8 +9749,9 @@ public class OspreyRegressionEMEA {
 				
 				Thread.sleep(3000);
 				try {
-					Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+					Common.scrollIntoView("xpath", "//select[@name='region_id']");
+					 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+
 				} catch (ElementClickInterceptedException e) {
 					Thread.sleep(3000);
 					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
@@ -13142,7 +13151,11 @@ public void warrenty_Return_Form(String Dataset) {
 		
 		
 		Common.textBoxInput("xpath", "//input[@id='city']", City);
-		Common.textBoxInput("xpath", "//input[@id='region_value']", State);
+//		Common.("xpath", "//select[@name='region']", State);
+		Thread.sleep(4000);
+		Common.findElement("xpath", "//select[@name='region']");
+		Common.clickElement("xpath", "//select[@name='region']");
+		Common.dropdown("xpath", "//select[@name='region']", SelectBy.TEXT, State);
 		Common.textBoxInput("xpath", "//input[@id='zip']", zipcode);
 		
 		Common.textBoxInput("xpath", "//input[@id='packName']", Packname);

@@ -19,6 +19,7 @@ public class Test_DGLD_OS_COMMON_084_Placeorder_GuestUser_checkout_with_gift_car
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.search_product("Osprey Gift Card");
         Osprey_ReEu.Gift_cards("X-mas Gift Card");
         Osprey_ReEu.Card_Value("price");
         Osprey_ReEu.minicart_Checkout();
