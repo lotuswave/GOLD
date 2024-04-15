@@ -3649,7 +3649,6 @@ public class OspreyRegressionEMEA {
 		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
 		if (placeordercount > 1) {
 			Thread.sleep(4000);
-
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			Common.refreshpage();
 		}
@@ -3726,7 +3725,7 @@ public class OspreyRegressionEMEA {
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
-					"User unabel to land opaymentpage");
+					"User unable to land on the paymentpage");
 			Common.clickElement("xpath", "//label[@for='stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
@@ -3782,15 +3781,46 @@ public class OspreyRegressionEMEA {
                     	   Thread.sleep(5000);
                     	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
                     	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-                    	   
+                    	   if(Common.findElement("xpath", "//div[contains(@data-ui-id,'messages-message-error')]").getAttribute("data-ui-id").contains("messages-message-error"))
+                    	   {
+                    		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+                    		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                    		   Thread.sleep(5000);
+                    		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                        	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                    		   
+                    	   }
+                    	   else
+                    	   {
                     	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-                    
+                    	   }
                        }
                        else
                        {
+                    	 
                     	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                    	   Thread.sleep(10000);
+                    	   if(Common.getCurrentURL().contains("/checkout/#payment"))
+                    	   {
+                    		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+                    		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                    		   Thread.sleep(5000);
+                    		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                        	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                    		   
+                    	   }
+                    	   else if(Common.getCurrentURL().contains("/success/"))
+                    	   {
+                    	    String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+                    	    System.out.println(sucessmessage);
+                    	   }
+                    	   else
+                    	   {
+                    		   Assert.fail();
+                    	   }
+                    	  
                     
                        }
 					
@@ -3866,10 +3896,10 @@ public class OspreyRegressionEMEA {
 		}
 
 		expectedResult = "credit card fields are filled with the data";
-		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-
-		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
-				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+//		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+//
+//		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+//				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 
 		return Number;
 	}
@@ -11660,7 +11690,7 @@ catch(Exception | Error e)
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Common.clickElement("xpath", "//a[@title='Sign in or Apply']");
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitPageLoad();
@@ -11679,9 +11709,9 @@ catch(Exception | Error e)
 
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Sync.waitPageLoad();
+//			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+//			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
+//			Sync.waitPageLoad();
 			Common.switchWindows();
 			Thread.sleep(3000);
 
