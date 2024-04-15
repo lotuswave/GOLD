@@ -3777,24 +3777,32 @@ public class OspreyRegressionEMEA {
 			
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
                        if(Common.getCurrentURL().contains("/gb"))
-                       {
-                    	   Thread.sleep(5000);
-                    	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
-                    	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-                    	   if(Common.findElement("xpath", "//div[contains(@data-ui-id,'messages-message-error')]").getAttribute("data-ui-id").contains("messages-message-error"))
-                    	   {
-                    		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-                    		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-                    		   Thread.sleep(5000);
-                    		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-                        	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-                    		   
-                    	   }
-                    	   else
-                    	   {
-                    	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                       {Thread.sleep(5000);
+                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
+                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
+		
+			   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+
+                	   Thread.sleep(10000);
+                	   if(Common.getCurrentURL().contains("/checkout/#payment"))
+                	   {
+                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+                		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                		   Thread.sleep(5000);
+                		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-                    	   }
+                		   
+                	   }
+                	   else if(Common.getCurrentURL().contains("/success/"))
+                	   {
+                         String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+                	    System.out.println(sucessmessage);
+                	   }
+                	   else
+                	   {
+                		   Assert.fail();
+                	   }
                        }
                        else
                        {
