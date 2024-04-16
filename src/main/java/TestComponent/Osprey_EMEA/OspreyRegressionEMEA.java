@@ -173,7 +173,7 @@ public class OspreyRegressionEMEA {
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
 					"validating store logo on the homwpage",
 					"System directs the user to the Homepage and store logo should display",
 					"Sucessfully user navigates to the home page and logo has been displayed",
@@ -12957,10 +12957,10 @@ public void Empty_Details_warrenty_return(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 		Common.scrollIntoView("xpath", "//button[contains(@class,'action submit')]");
 		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		String mobileerror=Common.findElement("xpath", "//div[@id='telephone-error']").getText();
 		String ziperror=Common.findElement("xpath", "//div[@id='zip-error']").getText();
-		Common.assertionCheckwithReport(mobileerror.contains("Please enter a phone number with at least 8 digits.") && ziperror.contains("Provided Zip/Postal Code seems to be invalid"),
+		Common.assertionCheckwithReport(mobileerror.contains("Please enter a phone number that is 10 digits in length.") && ziperror.contains("Provided Zip/Postal Code seems to be invalid"),
 				"validating the error message with Invalid fields ",
 				"After clicking hare button with invalid data error message should be display",
 				"successfully error message has been dispalyed ", "failed to display the error message");
@@ -13180,9 +13180,12 @@ public void warrenty_Return_Form(String Dataset) {
 	String Address =data.get(Dataset).get("Street");
 	String City =data.get(Dataset).get("City");
 	String State =data.get(Dataset).get("Region");
+	System.out.println(State);
 	String Packname =data.get(Dataset).get("PackageName");
 	String Color =data.get(Dataset).get("Color");
 	String Description =data.get(Dataset).get("description");
+	String issue=data.get(Dataset).get("issue");
+	String POnumber=data.get(Dataset).get("Ponumber");
 	try
 	{
 		Sync.waitElementPresent(30,"xpath", "//input[@id='telephone']");
@@ -13196,6 +13199,7 @@ public void warrenty_Return_Form(String Dataset) {
 		Thread.sleep(4000);
 		Common.findElement("xpath", "//select[@name='region']");
 		Common.clickElement("xpath", "//select[@name='region']");
+		Thread.sleep(4000);
 		Common.dropdown("xpath", "//select[@name='region']", SelectBy.TEXT, State);
 		Common.textBoxInput("xpath", "//input[@id='zip']", zipcode);
 		
@@ -13203,21 +13207,23 @@ public void warrenty_Return_Form(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@id='colorSize']", Color);
 		Common.textBoxInput("xpath", "//textarea[@id='description']", Description);
 		
-		
+		Common.textBoxInput("xpath", "//input[@id='prNumber']", issue);
+		Common.textBoxInput("xpath", "//textarea[@id='location']", POnumber);
 		
 		Thread.sleep(4000);
 		
 		String path = System.getProperty("user.dir")
-				+ ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\warranty.PNG");
+				+ ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\Guarantee.png");
 		Sync.waitElementPresent(40, "xpath", "//input[@id='photoUpload']");
 		Common.findElement("xpath", "//input[@id='photoUpload']").sendKeys(path);
 
 		Common.clickElement("xpath", "//input[@id='gdpr_confirm']");
 		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
 		
-		String Successmsg =Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+		Thread.sleep(4000);
+		String Successmsg =Common.findElement("xpath", "//div[@class='return-authorization-success']//h2").getText();
 	System.out.println(Successmsg);
-		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Repair Form. Please be sure to add customer.service@osprey.com to your contact,"),
+		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Parts Request."),
 				"validating the waranty and return Success message",
 				"After clicking Submit button waranty and return Success message should be display",
 				"successfully  message has been dispalyed ", "failed to display the Successfull message");
