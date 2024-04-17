@@ -25,7 +25,7 @@ public class TEST_DGLD_OS_COMMON_120_PRO_Customer_Checkout_With_SingleItem_Using
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");         //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         

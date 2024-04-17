@@ -28,7 +28,7 @@ public class TEST_DGLD_OS_COMMON_113_PRO_Customer_Checkout_with_Gift_card_one_Li
 //        Osprey_ReEu.Card_Value("price");  
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");      //ProShippingMethod while executing us change this to proshipping method
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");      //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Gift_card("Partial Giftcard");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");

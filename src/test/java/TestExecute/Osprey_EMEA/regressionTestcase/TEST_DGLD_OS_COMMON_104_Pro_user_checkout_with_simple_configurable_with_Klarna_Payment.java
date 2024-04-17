@@ -27,7 +27,7 @@ public class TEST_DGLD_OS_COMMON_104_Pro_user_checkout_with_simple_configurable_
         Osprey_ReEu.simple_addtocart("Simple product");        
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");              //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Kalrna_Payment("Klarna Visa Payment");
         

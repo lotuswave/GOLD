@@ -24,8 +24,8 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
         Osprey_ReEu.Gift_cards("Birthday Gift Card");
         Osprey_ReEu.Card_Value("price"); 
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.RegaddDeliveryAddress("Account"); 
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");         //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.payPal_Payment("PaypalDetails");
         

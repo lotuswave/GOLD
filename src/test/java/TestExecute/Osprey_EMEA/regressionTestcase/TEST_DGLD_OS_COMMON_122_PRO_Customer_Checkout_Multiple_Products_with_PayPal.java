@@ -27,7 +27,7 @@ public class TEST_DGLD_OS_COMMON_122_PRO_Customer_Checkout_Multiple_Products_wit
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");                      //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.payPal_Payment("PaypalDetails");
         

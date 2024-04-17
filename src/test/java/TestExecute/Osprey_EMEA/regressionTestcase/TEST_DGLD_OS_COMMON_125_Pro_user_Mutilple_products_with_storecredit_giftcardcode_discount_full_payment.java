@@ -28,7 +28,7 @@ public class TEST_DGLD_OS_COMMON_125_Pro_user_Mutilple_products_with_storecredit
         Osprey_ReEu.simple_addtocart("Simple product"); 
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");                        //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.Gift_card("Partial Giftcard");

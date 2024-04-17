@@ -24,8 +24,8 @@ public class TEST_DGLD_OS_COMMON_123_PRO_Customer_Checkout_Single_Item_Using_CC_
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.RegaddDeliveryAddress("Account"); 
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");         //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
