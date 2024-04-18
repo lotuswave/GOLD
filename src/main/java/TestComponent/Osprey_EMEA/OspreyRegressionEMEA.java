@@ -3778,11 +3778,12 @@ public class OspreyRegressionEMEA {
 			
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
                        if(Common.getCurrentURL().contains("/gb"))
-                       {Thread.sleep(5000);
+                       {
+                       Thread.sleep(5000);
                 	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
                 	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
 		
-			   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                 	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
 
                 	   Thread.sleep(10000);
@@ -3807,7 +3808,6 @@ public class OspreyRegressionEMEA {
                        }
                        else
                        {
-                    	 
                     	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
                     	   Thread.sleep(10000);
@@ -10390,7 +10390,8 @@ public class OspreyRegressionEMEA {
 	
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-		        	
+		     
+			Thread.sleep(4000);
 			String Price = Common.findElement("xpath", "//div[@class='product-info-price']//span[contains(@id,'product-price')]//span").getText();
 			System.out.println(Price);
 			
@@ -10641,11 +10642,11 @@ public void Verify_OrderTotal() {
 				Thread.sleep(2000);
 				
 				Common.refreshpage();
-				Common.scrollIntoView("xpath", "//div[@class='stripe-dropdown-selection']");
-				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+//				Common.scrollIntoView("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Thread.sleep(4000);
+//				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				System.out.println("Switch to Frames");
@@ -10657,10 +10658,74 @@ public void Verify_OrderTotal() {
 				System.out.println("Switch to Default");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 				{
-					Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
-				Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
-				Sync.waitPageLoad();
-				klarna_Details(dataSet);
+					if(Common.getCurrentURL().contains("/gb"))
+					{
+						 Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
+	                	 Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
+	                	 
+	                	 Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
+	     				 Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
+	     				Thread.sleep(10000);
+	     				
+	     				 if(Common.getCurrentURL().contains("/checkout/#payment"))
+	     				 {
+								Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+								Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+								Thread.sleep(5000);
+								Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
+								Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
+								Thread.sleep(4000);
+								Sync.waitPageLoad();
+								klarna_Details(dataSet);
+	     				 }
+	     				 else if(Common.getCurrentURL().contains("/success/"))
+	     				 {
+	     					String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+	                	    System.out.println(sucessmessage);
+	     				 }
+	     				 else
+	     				 {
+	     					 Thread.sleep(4000);
+	     					Sync.waitPageLoad();
+		    				klarna_Details(dataSet);
+	     					
+	     				 }
+	     				
+					}
+					else
+					{
+						Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
+						Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
+						Thread.sleep(10000);
+						 if(Common.getCurrentURL().contains("/checkout/#payment"))
+                  	   {
+							 Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+							 Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                  		   	Thread.sleep(5000);
+                  			Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
+							Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
+							Thread.sleep(4000);
+							Sync.waitPageLoad();
+							klarna_Details(dataSet);
+                  	   }
+						 else if(Common.getCurrentURL().contains("/success/"))
+						 {
+							 String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+	                    	    System.out.println(sucessmessage);
+						 }
+						 else
+						 {
+							 Thread.sleep(4000);
+		     					Sync.waitPageLoad();
+			    				klarna_Details(dataSet);
+						 }
+					}
+//				Sync.waitElementPresent("xpath", "");
+//				Common.clickElement("xpath", "");
+//				Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
+//				Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
+//				Sync.waitPageLoad();
+//				klarna_Details(dataSet);
 				}
 				else
 				{
