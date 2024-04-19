@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_Using_Paypal_method {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EU//GoldOspreyemea.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -21,12 +21,10 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("prouser");
-        Osprey_ReEu.Gift_cards("Birthday Gift Card");
+        Osprey_ReEu.search_product("X-mas Gift Card");
+        Osprey_ReEu.Gift_cards("X-mas Gift Card");
         Osprey_ReEu.Card_Value("price"); 
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account"); 
-        Osprey_ReEu.selectshippingmethod("ProShippingMethod");         //ProShippingMethod while executing us change this to proshipping method
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.payPal_Payment("PaypalDetails");
         
 		} catch (Exception e) {
@@ -44,7 +42,7 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
+		System.setProperty("configFile", "Osprey_EU\\config.properties");
         Login.signIn();
         
 
