@@ -2916,7 +2916,7 @@ public class OspreyRegressionEMEA {
 
 	public void click_Retailer() {
 		// TODO Auto-generated method stub
-		String store = "Ride Away Bicycles";
+		String store = "Trek Bicycle San Antonio South";
 
 		try {
 
@@ -3113,7 +3113,7 @@ public class OspreyRegressionEMEA {
 
 			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
 			for (int i = 1; i <= storecount; i++) {
-				Thread.sleep(8000);
+				Thread.sleep(10000);
 				String relatedstores = Common
 						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
 						.getText();
