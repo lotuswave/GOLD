@@ -21,13 +21,21 @@ public class Test_DGLD_DB_ST_001_Guest_user_Checkout_Funtionality_With_Multiple_
 		try {
 		
 			Drybar.Verify_Homepage();
+			Drybar.search_product("Product");  
+			Drybar.addtocart("Product");
+			Drybar.minicart_Checkout();
+			Drybar.addDeliveryAddress_Guestuser("Colorado Address");
+			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
+	
 	@AfterTest
 	public void clearBrowser() {
 //		Common.closeAll();
