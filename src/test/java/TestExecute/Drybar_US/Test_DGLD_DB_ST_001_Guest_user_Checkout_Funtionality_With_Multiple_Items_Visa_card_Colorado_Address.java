@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarUSHelper;
-import TestComponent.Hydroflask.GoldHydroHelper;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -38,7 +37,7 @@ public class Test_DGLD_DB_ST_001_Guest_user_Checkout_Funtionality_With_Multiple_
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
