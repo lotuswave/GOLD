@@ -13120,10 +13120,14 @@ public void clickContact() throws Exception {
 		Common.clickElement("xpath", "//a[contains(@class,'a-cms-link a-icon-t')]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//a[contains(@class,'contactUs-ctaLink')]");
+		Common.clickElement("xpath", "//a[contains(@class,'contactUs-ctaLink')]");
+		
 		Common.assertionCheckwithReport(Common.getCurrentURL().contains("contact-us"),
 				"Validating the contatus page navigation", expectedResult, "successfully land to contact page",
 				"unabel to load the  contact page");
 	} catch (Exception | Error e) {
+		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating contact us page", expectedResult,
 				"unable to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
 		Assert.fail();
