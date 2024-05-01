@@ -736,7 +736,10 @@ public class GoldHydroHelper {
 			if (payment > 0) {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				int size=Common.findElements("xpath", "//span[text()='New payment method']").size();
+				if(size>0) {
 				Common.clickElement("xpath", "//span[text()='New payment method']");
+				}
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
@@ -2851,7 +2854,8 @@ public class GoldHydroHelper {
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div/div").getText();
+			System.out.println(message);
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
