@@ -100,6 +100,7 @@ public class OspreyRegressionEMEA {
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
 				close_add();
+				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
@@ -7971,9 +7972,9 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 
 		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent(30,"xpath", "//div[@class='box-actions table-actions-list']//a[contains(@class,'action e')]");
-			Common.clickElement("xpath", "//div[@class='box-actions table-actions-list']//a[contains(@class,'action e')]");
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30,"xpath", "//button[@id='truste-consent-button']");
+			Common.clickElement("xpath", "//button[@id='truste-consent-button']");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
 			Common.clickElement("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
@@ -13857,6 +13858,36 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 			Assert.fail();
 		}
 	}
+
+
+
+
+public void verfy_links(String dataSet) throws Exception, IOException {
+	// TODO Auto-generated method stub
+
+	String urls = data.get(dataSet).get("Links");
+	String[] Links = urls.split(",");
+	int i = 0;
+
+	for (i = 0; i < Links.length; i++) {
+		Common.oppenURL(Links[i]);
+System.out.println(Common.getCurrentURL());
+
+int responcecode = getpageresponce(Common.getCurrentURL());
+System.out.println(responcecode);
+
+
+
+		
+	}
+}
+
+
+
+
+
+
+
 
 public void Remove_Products_from_Shoppingcart() {
 	// TODO Auto-generated method stub
