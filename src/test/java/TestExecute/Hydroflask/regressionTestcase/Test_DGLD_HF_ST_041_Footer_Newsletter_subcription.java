@@ -21,7 +21,8 @@ public class Test_DGLD_HF_ST_041_Footer_Newsletter_subcription {
 			Hydro.verifingHomePage();
 		    Hydro.Invalid_email_newsletter("Invalid details");
 		    Hydro.Empty_Email();
-		    Hydro.stayIntouch();
+		    Hydro.valid_email_newsletter("AccountDetails");
+		   // Hydro.stayIntouch();
 
 		} catch (Exception e) {
 

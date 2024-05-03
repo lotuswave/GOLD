@@ -31,8 +31,7 @@ public class Test_DGLD_HF_ST_107_My_Account_Page_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		sCommon.closeAll();
-
+		Common.closeAll();
 	}
 
 	@BeforeTest

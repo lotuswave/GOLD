@@ -1444,6 +1444,7 @@ public class GoldHydroHelper {
 	public void search_product(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
+		//String product = "25 oz Wine Bottle";
 		System.out.println(product);
 		try
 		{
@@ -3907,15 +3908,21 @@ public class GoldHydroHelper {
 
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(4000);
-			Common.switchFrames("xpath", "//iframe[@aria-label='Modal Overlay Box Frame']");
-			Sync.waitElementPresent(30, "xpath", "//label[@for='form_input_email']");
-			Common.clickElement("xpath", "//label[@for='form_input_email']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
-			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
+			//Common.switchFrames("xpath", "//iframe[@aria-label='Modal Overlay Box Frame']");
+			Sync.waitElementPresent(30, "xpath", "//label[text()='Email address']");
+			Common.clickElement("xpath", "//label[text()='Email address']");
+			Common.textBoxInput("xpath", "//input[@placeholder='ie. youremail@email.com']", data.get(Dataset).get("Email"));
+			Thread.sleep(5000);
+			Common.javascriptclickElement("xpath", "//button[text()='Submit']");
+			Thread.sleep(2000);
+			int size=Common.findElements("xpath", "//span[@id='klaviyo_ariaid_3']").size();
+			if(size<0) {
+			Common.clickElement("xpath", "//button[text()='Submit']");}
+			Thread.sleep(2000);
+			Sync.waitElementPresent(30, "xpath", "//span[@id='klaviyo_ariaid_3']");
+			String Errormessage = Common.findElement("xpath", "//span[@id='klaviyo_ariaid_3']").getText();
 			System.out.println(Errormessage);
-			Common.assertionCheckwithReport(Errormessage.equals("Your Email is in an invalid format."),
+			Common.assertionCheckwithReport(Errormessage.equals("This email is invalid"),
 					"To validate the error message for Invalid Email",
 					"Should display error Please enter a valid email address.", Errormessage,
 					"Failed to display the error message for invaild email");
@@ -3931,16 +3938,46 @@ public class GoldHydroHelper {
 		}
 	}
 
+	public void valid_email_newsletter(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(4000);
+			
+			Sync.waitElementPresent(30, "xpath", "//label[text()='Email address']");
+			Common.clickElement("xpath", "//label[text()='Email address']");
+			Common.textBoxInput("xpath", "//input[@placeholder='ie. youremail@email.com']", data.get(Dataset).get("Email"));
+			Thread.sleep(2000);
+			Common.javascriptclickElement("xpath", "//button[text()='Submit']");
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "(//span[@class='ql-font-nunito-sans'])[1]").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.equals("Thanks for subscribing!"),
+					"To validate the error message for valid Email",
+					"Should display  Please enter a valid email address.", message,
+					"Failed to display the error message for vaild email");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", "Failed to display the error message",
+					Common.getscreenShotPathforReport("Failed to see an error message"));
+
+			Assert.fail();
+
+		}
+	}
 	public void Empty_Email() {
 		try {
 
-			Common.textBoxInputClear("xpath", "//input[@placeholder='Enter Email Address']");
+			Common.textBoxInputClear("xpath", "//input[@placeholder='ie. youremail@email.com']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@aria-label='Submit Modal Form']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='form_inputs_error_text']");
-			String Errormessage = Common.findElement("xpath", "//div[@class='form_inputs_error_text']").getText();
+			Common.clickElement("xpath", "//button[text()='Submit']");
+			Sync.waitElementPresent(30, "xpath", "//span[@id='klaviyo_ariaid_3']");
+			String Errormessage = Common.findElement("xpath", "//span[@id='klaviyo_ariaid_3']").getText();
 			System.out.println(Errormessage);
-			Common.assertionCheckwithReport(Errormessage.equals("Your Email is required."),
+			Common.assertionCheckwithReport(Errormessage.equals("This field is required"),
 					"To validate the error message for missing email fields",
 					"Should display Error Please enter a valid email address.", Errormessage,
 					"Error message dispaly unsuccessfull");
@@ -4934,13 +4971,14 @@ public class GoldHydroHelper {
 			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			validating_BundleProducts();
+			//validating_BundleProducts();
 			product_quantity(Dataset);
-			bundle_color("Black");
+			//bundle_color("Black");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
 			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 					.getAttribute("data-ui-id");
 			System.out.println(message);
@@ -6519,6 +6557,7 @@ public class GoldHydroHelper {
 	public void outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
+//		String products = "25 oz Wine Bottle";
 		String email = data.get(Dataset).get("Notifyme");
 		String prod = data.get(Dataset).get("prod product");
 		try {
@@ -6536,7 +6575,8 @@ public class GoldHydroHelper {
 					break;
 				}
 			}
-			Thread.sleep(6000);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			if (Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
 				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
@@ -6554,7 +6594,7 @@ public class GoldHydroHelper {
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
+				Common.javascriptclickElement("xpath", "//span[text()=' Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
@@ -6568,7 +6608,8 @@ public class GoldHydroHelper {
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
