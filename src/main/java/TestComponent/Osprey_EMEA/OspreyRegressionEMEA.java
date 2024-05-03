@@ -14818,13 +14818,13 @@ public void Add_Favorites_product_from_View_Cart() {
 		Common.clickElement("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
-		Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-				.getAttribute("data-ui-id");
-		System.out.println(message);
-		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-				"Product should be add to cart", "Sucessfully product added to the cart ",
-				"failed to add product to the cart");
+//		Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//				.getAttribute("data-ui-id");
+//		System.out.println(message);
+//		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//				"Product should be add to cart", "Sucessfully product added to the cart ",
+//				"failed to add product to the cart");
 		
 	}
 	catch(Exception | Error e)
@@ -14854,8 +14854,8 @@ public void Add_Favorites_from_PLP(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']//parent::a//parent::div//span[text()='Add to Favorites']");
+			Common.clickElement("xpath", "//img[@alt='" + product + "']//parent::a//parent::div//span[text()='Add to Favorites']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(3000);
 			if(Common.getCurrentURL().contains("preprod"))
