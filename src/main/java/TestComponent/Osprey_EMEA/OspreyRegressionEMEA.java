@@ -1907,6 +1907,7 @@ public class OspreyRegressionEMEA {
 		try {
 			Common.clickElement("xpath", "//a[@title='Share']");
 			Sync.waitPageLoad();
+			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("Email"));
 			Common.clickElement("id", "add-recipient-button");
