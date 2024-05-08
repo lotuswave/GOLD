@@ -1057,8 +1057,8 @@ public class GoldDrybarUSHelper {
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[5]");
-			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[5]").isSelected();
+			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @id='billing-address-same-as-shipping-stripe_payments']");
+			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @id='billing-address-same-as-shipping-stripe_payments']").isSelected();
 			System.out.println(checkbox);
 			Thread.sleep(7000);
 			String box=Boolean.toString(checkbox);
@@ -1067,7 +1067,7 @@ public class GoldDrybarUSHelper {
 			{
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'My billing')]");
 				Common.clickElement("xpath", "//span[contains(text(),'My billing')]");
-			    Boolean billcheckbox=Common.findElement("xpath", "(//input[@type='checkbox'])[2]").isSelected();
+			    Boolean billcheckbox=Common.findElement("xpath", "//input[@type='checkbox' and @id='billing-address-same-as-shipping-stripe_payments']").isSelected();
 			    System.out.println(billcheckbox);
 			    String box1=Boolean.toString(billcheckbox);
 				System.out.println(box1);
