@@ -1182,22 +1182,143 @@ public class GoldDrybarUSHelper {
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-					"validating the order summary in the payment page",
-					"Order summary should be display in the payment page and all fields should display",
-					"Successfully Order summary is displayed in the payment page and fields are displayed",
-					"Failed to display the order summary and fileds under order summary");
+					"validating the Tax on the payment page",
+					"On the order summary tax should be display on the payment page",
+					"Successfully Tax should be display in the order summary",
+					"Failed to display the tax on the order summary");
 
 		}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating discount code", "",
-					"User failed to proceed with discountcode",
-					Common.getscreenShotPathforReport("discountcodefailed"));
+			ExtenantReportUtils.addFailedLog("validating the Tax on the payment page",
+					"On the order summary tax should be display on the payment page",
+					"Unable to display the tax on the order summaryy",
+					Common.getscreenShotPathforReport("Failed to display the tax on the order summary"));
 			Assert.fail();
 		}
 		
 	}
 
+	public void No_Tax_Validation() {
+		// TODO Auto-generated method stub
+		try
+		{
+			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+					"");
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+					.replace("$", "");
+			Float shippingvalue = Float.parseFloat(shipping);
+			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+					.replace("$", "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Thread.sleep(4000);
+			Float Total = (subtotalvalue + shippingvalue);
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			Thread.sleep(4000);
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(ordertotal);
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the No tax on the order summary in the payment page",
+					"Order summary should be display in the payment page and tax field should not display",
+					"Successfully Order summary is displayed and tax is displayed",
+					"Failed tax is displayed under order summary");
+
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the No tax on the order summary in the payment page",
+					"Order summary should be display in the payment page and tax field should not display",
+					"Successfully Order summary is displayed and tax is displayed",
+					Common.getscreenShotPathforReport("Failed tax is displayed under order summary"));
+			Assert.fail();
+		}
+		
+	}
+
+	
+	public String BillingAddress(String dataSet) {
+		// TODO Auto-generated method stub
+		String update = "";
+		String Shipping="";
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[5]");
+			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[5]").isSelected();
+			System.out.println(checkbox);
+			Thread.sleep(7000);
+			String box=Boolean.toString(checkbox);
+			if(box.contains("true"))
+			{
+			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
+					"payment section should be displayed", "sucessfully payment section has been displayed",
+					"Failed to displayed the payment section");
+			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
+			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			Thread.sleep(4000);
+			String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+				 Thread.sleep(4000);
+                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Thread.sleep(3000);
+                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                         .getAttribute("value");
+                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+	              System.out.println(Shipping);
+                 System.out.println(Shippingvalue);
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
+					data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+
+			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+					data.get(dataSet).get("phone"));
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+			System.out.println("update"+update);
+			Common.assertionCheckwithReport(
+					update.equals(Shipping),
+					"verifying the Billing address form in payment page",
+					"Billing address should be saved in the payment page",
+					"Sucessfully Billing address form should be Display ",
+					"Failed to display the Billing address in payment page");
+			}
+			else
+			{
+				Common.assertionCheckwithReport(box.equals("false"),
+						"To validate the billing and shipping address are different",
+						"user should able to see different billing and shipping on payment page",
+						"User Successfully able to see the same billing and shipping on the payment page",
+						"User Failed to see the same billing and shipping address on the payment page");
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page",
+					"Billing address should be saved in the payment page",
+					"Unable to display the Billing address in payment page",
+					Common.getscreenShotPathforReport("Failed to display the Billing address in payment page"));
+			Assert.fail();
+		}
+		return update;
+	}
 
 }
