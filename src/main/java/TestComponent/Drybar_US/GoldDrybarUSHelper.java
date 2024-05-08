@@ -636,12 +636,13 @@ public class GoldDrybarUSHelper {
 
 		Thread.sleep(3000);
 		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
-		if (placeordercount > 1) {
-			Thread.sleep(4000);
-
-			Common.clickElement("xpath", "//span[text()='Place Order']");
-			Common.refreshpage();
-		}
+//		System.out.println(placeordercount);
+//		if (placeordercount > 1) {
+//			Thread.sleep(4000);
+//
+//			Common.clickElement("xpath", "//span[text()='Place Order']");
+//			Common.refreshpage();
+//		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
@@ -650,6 +651,7 @@ public class GoldDrybarUSHelper {
 
 		else {
 			try {
+				Thread.sleep(5000);
 				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 
 				//Tell_Your_FriendPop_Up();
@@ -1263,6 +1265,50 @@ public class GoldDrybarUSHelper {
 					"Failed to displayed the payment section");
 			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
 			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
+			if(Common.findElement("xpath", "//select[@name='billing_address_id']").getAttribute("id").contains("billing-address-id"))
+			{
+				Sync.waitElementPresent("xpath", "//select[@name='billing_address_id']");
+				Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT,"New Address");
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+
+					 Thread.sleep(4000);
+	                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
+	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Thread.sleep(3000);
+	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+	                         .getAttribute("value");
+	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+		              System.out.println(Shipping);
+	                 System.out.println(Shippingvalue);
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
+						data.get(dataSet).get("postcode"));
+				Thread.sleep(5000);
+
+				Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+						data.get(dataSet).get("phone"));
+				Common.clickElement("xpath", "//span[text()='Update']");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+				System.out.println("update"+update);
+				Common.assertionCheckwithReport(
+						update.equals(Shipping),
+						"verifying the Billing address form in payment page",
+						"Billing address should be saved in the payment page",
+						"Sucessfully Billing address form should be Display ",
+						"Failed to display the Billing address in payment page");
+			}
+			else
+			{
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
@@ -1300,6 +1346,7 @@ public class GoldDrybarUSHelper {
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
 					"Failed to display the Billing address in payment page");
+			}
 			}
 			else
 			{
