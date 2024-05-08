@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_053_Validate_RegisterUser_Checkout_MasterCC_NoTax_Multiple_Products_with_Different_Billing_and_shipping {
+public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
@@ -20,19 +20,15 @@ public class TEST_DGLD_DB_US_ST_053_Validate_RegisterUser_Checkout_MasterCC_NoTa
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.login_Drybar("AccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
-			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("NoTaxAddress");
+			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.No_Tax_Validation();
-			Drybar.BillingAddress("BillingDetails");
-			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
 		} catch (Exception e) {
@@ -44,7 +40,6 @@ public class TEST_DGLD_DB_US_ST_053_Validate_RegisterUser_Checkout_MasterCC_NoTa
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-		
 
 	}
 
