@@ -9,27 +9,27 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_016_Registered_User_checkout_with_Discover_Credit_card {
+public class TEST_DGLD_DB_US_ST_047_Validate_GuestUser_Checkout_DiscoverCC_Tax_Multiple_Products_with_same_Billing_and_shipping {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Registered_User_Checkout_Funtionality_Discover_card () throws Exception {
+	public void Validate_GuestUser_Checkout_DiscoverCC_Tax_Multiple_Products_with_same_Billing_and_shipping () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.login_Drybar("AccountDetails");
+			Drybar.search_product("Product");  
+			Drybar.addtocart("Product");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.tax_validation_Paymentpage();
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
-			
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
 
@@ -40,7 +40,6 @@ public class TEST_DGLD_DB_US_ST_016_Registered_User_checkout_with_Discover_Credi
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-		
 
 	}
 
