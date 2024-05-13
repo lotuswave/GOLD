@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_054_Validate_GuestUser_Checkout_AmexCC_NoTax_Mul
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_GuestUser_Checkout_AmexCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping () throws Exception {
 
 		try {
 		

@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_014_Registered_user_checkout_with_Amex_Credit_ca
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_Registered_User_Checkout_Funtionality_Amex_card () throws Exception {
 
 		try {
 		

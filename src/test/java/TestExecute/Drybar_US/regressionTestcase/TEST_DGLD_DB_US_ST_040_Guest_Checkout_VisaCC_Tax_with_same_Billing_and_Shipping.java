@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_040_Guest_Checkout_VisaCC_Tax_with_same_Billing_
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_Guest_Checkout_VisaCC_Tax_with_same_Billing_and_Shipping () throws Exception {
 
 		try {
 		

@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_016_Registered_User_checkout_with_Discover_Credi
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_Registered_User_Checkout_Funtionality_Discover_card () throws Exception {
 
 		try {
 		
