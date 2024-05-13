@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping {
+public class TEST_DGLD_DB_US_ST_054_Validate_GuestUser_Checkout_AmexCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
@@ -20,15 +20,16 @@ public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Mul
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
+			Drybar.HairTools_headerlinks("Hair Tools"); 
+			Drybar.addtocart("PLP Product");
+			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("NoTaxAddress");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.No_Tax_Validation();
-			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 
 		} catch (Exception e) {

@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping {
+public class TEST_DGLD_DB_US_ST_048_Validate_Registeruser_Checkout_VisaCC_NoTax_Single_Product_with_Different_Billing_and_Shipping {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
@@ -20,13 +20,15 @@ public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Mul
 		try {
 		
 			Drybar.Verify_Homepage();
+			Drybar.click_singinButton();
+			Drybar.login_Drybar("AccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
-			Drybar.search_product("Product");  
-			Drybar.addtocart("Product");
-			Drybar.addDeliveryAddress_Guestuser("NoTaxAddress");
+			Drybar.minicart_Checkout();
+			Drybar.RegaddDeliveryAddress("NoTaxAddress");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.BillingAddress("BillingDetails");
 			Drybar.No_Tax_Validation();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
@@ -40,6 +42,7 @@ public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Mul
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
+		
 
 	}
 
