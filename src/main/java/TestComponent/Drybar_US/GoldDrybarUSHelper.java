@@ -332,7 +332,7 @@ public class GoldDrybarUSHelper {
 		System.out.println(product);
 		try
 		{
-        Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
+        Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
      	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
      	Thread.sleep(4000);
      	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
@@ -439,8 +439,9 @@ public class GoldDrybarUSHelper {
 		try {
 			Thread.sleep(2000);
 			click_minicart();
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__total-counter']//strong");
+			String minicart = Common.findElement("xpath", "//span[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(minicart);
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
@@ -1474,5 +1475,135 @@ public class GoldDrybarUSHelper {
 		}
 		return order;
 	}
+	public String Express_Venmo_Payment(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		String order="";
+		String expectedResult = "It should open venmo site window.";
+		
+		try {
+			Thread.sleep(2000);
+			
+			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+
+			// Common.refreshpage();
+			Thread.sleep(8000);
+			Sync.waitElementPresent("xpath", "//img[@class='paypal-logo paypal-logo-venmo paypal-logo-color-white']");
+			Common.clickElement("xpath", "//img[@class='paypal-logo paypal-logo-venmo paypal-logo-color-white']");
+			Common.switchToDefault();
+			Thread.sleep(5000);
+			Common.switchWindows();
+			int size = Common.findElements("id", "acceptAllButton").size();
+			if (size > 0) {
+
+				Common.clickElement("id", "acceptAllButton");
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
+					"User failed to proceed with venmo payment", Common.getscreenShotPathforReport(expectedResult));
+			Assert.fail();
+		}
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+		Sync.waitElementPresent("xpath", "//div[@class='max-width-wrapper']/img");
+		String venmo = Common.findElement("xpath", "//div[@class='max-width-wrapper']/img").getAttribute("alt");
+		if(venmo.equals("Venmo")) {
+		Sync.waitElementPresent("xpath", "//img[@alt='PayPal']");
+		Common.clickElement("xpath", "//img[@alt='PayPal']");
+		}
+		if (!url.contains("stage") & !url.contains("preprod") & !url.contains("stage3") ) {
+
+			int sizeofelement = Common.findElements("id", "email").size();
+			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the venmo payment ", expectedResult,
+					"open venmo site window", "faild to open venmo account");
+		} else {
+
+			Common.clickElement("id", "login_emaildiv");
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			Common.clickElement("id", "btnNext");
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			int sizeemail = Common.findElements("id", "email").size();
+
+			Common.assertionCheckwithReport(sizeemail > 0, "verifying the venmo payment ", expectedResult,
+					"open venmo site window", "faild to open venmo account");
+		
+			try {
+				Common.clickElement("id", "btnLogin");
+				Thread.sleep(5000);
+				Common.actionsKeyPress(Keys.END);
+				Thread.sleep(5000);
+				Common.clickElement("id", "payment-submit-btn");
+				Thread.sleep(8000);
+				Common.switchToFirstTab();
+			
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
+						"User failed to proceed with venmo payment",
+						Common.getscreenShotPathforReport(expectedResult));
+				Assert.fail();
+			}
+			express_paypal_shipping(dataSet);
+			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
+			{
+				Common.scrollIntoView("xpath", "//button[@value='Place Order']");
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
+				Common.clickElement("xpath", "//button[@value='Place Order']");
+			}
+			// Tell_Your_FriendPop_Up();//To close the Pop-up
+			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			if (!url1.contains("stage") && !url1.contains("preprod")) {
+			}
+
+			else {
+				try {
+					Thread.sleep(6000);
+					String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+					System.out.println(sucessMessage);
+
+					int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+							"verifying the product confirmation", expectedResult,
+							"Successfully It redirects to order confirmation page Order Placed",
+							"User unable to go orderconformation page");
+
+					if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+						order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+						System.out.println(order);
+					}
+					if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+						order = Common.getText("xpath", "//a[@class='order-number']/strong");
+						System.out.println(order);
+					}
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+							"It should navigate to the order confirmation page",
+							"User failed to proceed to the order confirmation page",
+							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+					Assert.fail();
+				}
+			}
+		}
+		return order;
+	}
 	
+	public void express_paypal_shipping(String Dataset) {
+		// TODO Auto-generated method stub
+		String shippment=data.get(Dataset).get("methods");
+		try
+		{
+			Thread.sleep(4000);
+			Common.dropdown("xpath", "//select[@name='shipping_method']", SelectBy.TEXT, shippment);
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
 }
