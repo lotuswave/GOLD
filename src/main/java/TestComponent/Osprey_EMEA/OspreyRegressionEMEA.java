@@ -2349,7 +2349,7 @@ public class OspreyRegressionEMEA {
 
 	}
 
-	public void Addtocart_From_MyFavorites(String Dataset) {
+	public void Addtocart_From_MyFavorites(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
@@ -2357,6 +2357,7 @@ public class OspreyRegressionEMEA {
 		System.out.println(productcolor);
 		String Productsize = data.get(Dataset).get("Size");
 		System.out.println(Productsize);
+		Thread.sleep(4000);
 		try {
 			Sync.waitPageLoad();
 			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'m-product')]//img").size();
