@@ -1606,4 +1606,68 @@ public class GoldDrybarUSHelper {
 		}
 		
 	}
+	
+	public void gustuserorderStatus(String dataSet) {
+		// TODO Auto-generated method stub
+		click_trackorder();
+		String ordernumber = data.get(dataSet).get("OrderID");
+		String prodordernumber = data.get(dataSet).get("prod order");
+
+		try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
+				Sync.waitElementPresent("id", "oar-order-id");
+				Common.textBoxInput("id", "oar-order-id", ordernumber);
+			} else {
+				Sync.waitElementPresent("id", "oar-order-id");
+				Common.textBoxInput("id", "oar-order-id", prodordernumber);
+			}
+			Sync.waitElementPresent("id", "oar-billing-lastname");
+			Common.textBoxInput("id", "oar-billing-lastname", data.get(dataSet).get("Billinglastname"));
+
+			Sync.waitElementPresent("id", "oar_email");
+			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
+
+			Sync.waitElementPresent("xpath", "//button[@title='Search']");
+			Common.clickElement("xpath", "//button[@title='Search']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String orderid = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			System.out.println(orderid);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid), "verifying order status form",
+					"order tracking information page navigation", "successfully order tracking information page ",
+					"Failed to navigate tracking order page infromation");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying order status form",
+					"order tracking information page navigation",
+					"User unable to navigate to the order tracking information page",
+					Common.getscreenShotPathforReport("Failed to navigate tracking order page infromation"));
+			Assert.fail();
+
+		}
+	}
+	
+	public void click_trackorder() {
+		try {
+			Sync.waitElementPresent(30, "xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//a[text()='Track my order']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders"),
+					"Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"successfully Navigated to the orders and return page",
+					"Failed to Navigate to the orders and return page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"Unable to  Navigated to the orders and return page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
+			Assert.fail();
+
+		}
+	}
 }
