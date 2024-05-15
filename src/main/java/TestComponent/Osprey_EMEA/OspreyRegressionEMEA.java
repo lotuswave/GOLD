@@ -10150,19 +10150,19 @@ public class OspreyRegressionEMEA {
 		try
 		{
 			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("stage3")|| Common.getCurrentURL().contains("preprod"))
+			if(Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod"))
 			{
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Favourites']");
+				Common.clickElement("xpath", "//button[@title='Share Favorites']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Common.javascriptclickElement("xpath", "//button[@title='Share Favourites']");
-				Thread.sleep(4000);
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+				Thread.sleep(8000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your Favourites has been shared."),
+				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
@@ -10177,7 +10177,8 @@ public class OspreyRegressionEMEA {
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Common.javascriptclickElement("xpath", "//button[@title='Share Wish List']");
+				Thread.sleep(4000);
+				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
 				Thread.sleep(4000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
