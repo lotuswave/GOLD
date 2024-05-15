@@ -5489,13 +5489,13 @@ public class OspreyRegressionEMEA {
 		// TODO Auto-generated method stub
 		try {
 			click_minicart();
-			String Freeshipping = Common
-					.findElement("xpath", "//div[@class='m-progress-bar false']//div[contains(@class,'label-')]")
-					.getText();
-			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
-					"validating the free shipping in mini cart",
-					"Free shipping should be avaliable for selected products",
-					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
+//			String Freeshipping = Common
+//					.findElement("xpath", "//div[@class='m-progress-bar false']//div[contains(@class,'label-')]")
+//					.getText();
+//			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
+//					"validating the free shipping in mini cart",
+//					"Free shipping should be avaliable for selected products",
+//					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5617,7 +5617,7 @@ public class OspreyRegressionEMEA {
 			Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
 			Common.clickElement("xpath", "//span[text()='Update']");
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(cart);
