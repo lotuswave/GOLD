@@ -1670,4 +1670,65 @@ public class GoldDrybarUSHelper {
 
 		}
 	}
+
+	public void Configurable_addtocart(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		String products = data.get(Dataset).get("Products");
+		String Productsize= data.get(Dataset).get("size");
+		System.out.println(Productsize);
+		System.out.println(products);
+		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Sync.waitPageLoad(30);
+			Thread.sleep(6000);
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+			String size=Common.findElement("xpath", "//span[contains(@class,'m-swatch-group__header s')]").getText().toUpperCase();
+			System.out.println(size);
+			String size1= data.get(Dataset).get("size").toUpperCase();
+			Common.assertionCheckwithReport(
+					size.equals(size1),
+					"Verifying the the size of the product is selected in the PDP",
+					"after clicking on the size product size should be selected",
+					"successfully Product size has been selected on the PDP",
+					"Failed to select the product price on the PDP");
+			product_quantity(Dataset);
+			Thread.sleep(4000);
+			
+			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+					.getAttribute("data-ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+			Assert.fail();
+		}
+	}
 }
