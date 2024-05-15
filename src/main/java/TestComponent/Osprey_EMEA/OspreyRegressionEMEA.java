@@ -5051,9 +5051,9 @@ public class OspreyRegressionEMEA {
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+//				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
@@ -5070,13 +5070,28 @@ public class OspreyRegressionEMEA {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
 					Thread.sleep(1000);
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
-					expectedResult = "credit card fields are filled with the data";
+					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	             	  Thread.sleep(10000);
+	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
+	           	   {
+	           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+	           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+	           		   Thread.sleep(5000);
+	           		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	               	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	               	expectedResult = "credit card fields are filled with the data";
 					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 					Common.assertionCheckwithReport(
 							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
 							"validating the credit card information with valid data", expectedResult,
 							"Filled the Card detiles", "missing field data it showinng error");
+	           	   }
+	             	   else
+	             	   {
+	             		   Assert.fail();
+	             	   }
+					
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -5108,13 +5123,27 @@ public class OspreyRegressionEMEA {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
 					Thread.sleep(1000);
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
-					expectedResult = "credit card fields are filled with the data";
+					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	             	  Thread.sleep(10000);
+	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
+	           	   {
+	           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+	           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+	           		   Thread.sleep(5000);
+	           		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	               	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	               	expectedResult = "credit card fields are filled with the data";
 					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
 					Common.assertionCheckwithReport(
 							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
 							"validating the credit card information with valid data", expectedResult,
 							"Filled the Card detiles", "missing field data it showinng error");
+	           	   }
+	             	   else
+	             	   {
+	             		   Assert.fail();
+	             	   }
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
