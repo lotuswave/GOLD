@@ -4165,7 +4165,7 @@ public class OspreyRegressionEMEA {
 		try {
 			Sync.waitElementVisible(40, "xpath", "//div[@class='m-account-nav__content']");
 			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "(//ul[@class='m-account-nav__links']//a)[3]");
+			Common.clickElement("xpath", "(//ul[@class='m-account-nav__links']//a)[4]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders") || Common.getCurrentURL().contains("order/history/"),
@@ -4242,10 +4242,12 @@ public class OspreyRegressionEMEA {
 			String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
 			String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
 			System.out.println(itemsordered);
-
+			System.out.println(reorder);
+			System.out.println(backCTA);
+			System.out.println(orderdate);
 			Common.assertionCheckwithReport(
-					reorder.contains("Reorder") && backCTA.contains("Back") && orderdate.contains("Date")
-							&& reorder.contains("Reorder"),
+					reorder.contains("REORDER") && backCTA.contains("BACK") && orderdate.contains("Order Date")
+							&& reorder.contains("REORDER"),
 					"validating the order details ",
 					"After Clicking on view Order it should be navigate to the order details page ",
 					"Sucessfully navigated to the orders detail page", "Failed to Navigate to the orders detail page");
