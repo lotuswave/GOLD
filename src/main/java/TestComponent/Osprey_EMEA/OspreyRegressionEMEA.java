@@ -5075,7 +5075,16 @@ public class OspreyRegressionEMEA {
 					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	             	  Thread.sleep(10000);
-	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
+	             	 if(Common.findElement("xpath", "//div[contains(@class,'error')]").getText().contains("Please complete your payment details."))
+	             	 {
+	             		expectedResult = "credit card fields are filled with the data";
+						String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+						Common.assertionCheckwithReport(
+								errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+								"validating the credit card information with valid data", expectedResult,
+								"Filled the Card detiles", "missing field data it showinng error");
+	             	 }
+	             	 else if(Common.getCurrentURL().contains("/checkout/#payment"))
 	           	   {
 	           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
 	           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
@@ -5089,6 +5098,7 @@ public class OspreyRegressionEMEA {
 							"validating the credit card information with valid data", expectedResult,
 							"Filled the Card detiles", "missing field data it showinng error");
 	           	   }
+	             	  
 	             	   else
 	             	   {
 	             		   Assert.fail();
@@ -5142,6 +5152,15 @@ public class OspreyRegressionEMEA {
 							"validating the credit card information with valid data", expectedResult,
 							"Filled the Card detiles", "missing field data it showinng error");
 	           	   }
+	             	  else if(Common.getCurrentURL().contains("/checkout/#payment"))
+	             	  {
+	             			expectedResult = "credit card fields are filled with the data";
+	    					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+	    					Common.assertionCheckwithReport(
+	    							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+	    							"validating the credit card information with valid data", expectedResult,
+	    							"Filled the Card detiles", "missing field data it showinng error"); 
+	             	  }
 	             	   else
 	             	   {
 	             		   Assert.fail();
