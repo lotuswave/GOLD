@@ -542,7 +542,8 @@ public class OspreyRegressionEMEA {
 									currentUrl.contains("sales/order/history")|| currentUrl.contains("wishlist")||currentUrl.contains("customer/address")
 									|| currentUrl.contains("customer/address/index")|| currentUrl.contains("customer/account/edit")|| currentUrl.contains("stripe/customer/paymentmethods")
 									|| currentUrl.contains("storecredit/info")|| currentUrl.contains("reward/customer/info")|| currentUrl.contains("giftregistry")
-									|| currentUrl.contains("xnotif/stock/index")|| currentUrl.contains("newsletter/manage")|| currentUrl.contains("amgcard/account")|| currentUrl.contains("prodeal/application/account"),
+									|| currentUrl.contains("xnotif/stock/index")|| currentUrl.contains("newsletter")|| currentUrl.contains("amgcard/account")|| currentUrl.contains("prodeal/application/account")
+									|| currentUrl.contains("/all-mighty-guarantee"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
@@ -7842,7 +7843,7 @@ public class OspreyRegressionEMEA {
 					"verifying the error message validation with empty fileds",
 					"after click on signin button with empty blanks error message should appear",
 					"Sucessfully error messsage should be display ", "Failed to display the error message");
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -7861,7 +7862,7 @@ public class OspreyRegressionEMEA {
 					"verifying the error message for invalid password",
 					"after click on signin button with empty invalid password error message should appear",
 					"Sucessfully error messsage should be display ", "Failed to display the error message");
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("unregisterd Username"));
 			} else {
