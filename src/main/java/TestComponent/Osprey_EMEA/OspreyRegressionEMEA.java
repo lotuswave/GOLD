@@ -9741,7 +9741,8 @@ public class OspreyRegressionEMEA {
 			String GiftcardName=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
 			System.out.println(GiftcardName);
 			String Card = data.get(Dataset).get("Osprey").toUpperCase();
-			Common.assertionCheckwithReport(GiftcardName.contains(Card),
+			System.out.println(Card);
+			Common.assertionCheckwithReport(GiftcardName.contains(GiftCard),
 					"validating the Gift card Navigation to the PDP page",
 					"After clicking on the gift card it should navigate to the PDP",
 					"Successfully Gift card is Navigated to the PDP",
