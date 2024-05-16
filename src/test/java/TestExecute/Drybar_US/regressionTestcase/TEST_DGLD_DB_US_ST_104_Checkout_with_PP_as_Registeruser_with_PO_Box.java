@@ -26,7 +26,7 @@ public class TEST_DGLD_DB_US_ST_104_Checkout_with_PP_as_Registeruser_with_PO_Box
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("PO Box Address");
-			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.selectshippingmethod("POBox Shipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.payPal_Payment("PaypalDetails");
 
