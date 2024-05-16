@@ -4013,28 +4013,79 @@ public class OspreyRegressionEMEA {
                     	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
                     	   Thread.sleep(8000);
-                    	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
-                    	   System.out.println(frameid);
-                    	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-               			Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-                   		Thread.sleep(4000);
-                   		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
-                   		Common.switchToDefault();
-                   		Common.switchToDefault();
+                    	   if(Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart')]").contains("Please enter your card's security code."))
+                    	   {
+                    		   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+                              	System.out.println(frameid);
+                              	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                         		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
+                         		Thread.sleep(4000);
+                             	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
+                             	Common.switchToDefault();
+                             	Common.switchToDefault();
+                    	   }                    	
+                    	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
+                    	   {
+                    		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+                       		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                       		Thread.sleep(5000);
+                       		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                           	Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                           	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+                           	System.out.println(frameid);
+                           	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                      		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
+                      		Thread.sleep(4000);
+                          	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
+                          	Common.switchToDefault();
+                          	Common.switchToDefault();
+                    	   }
+                    	   else
+                    	   {
+                    		   Assert.fail();
+                    	   }
                        }
                        else
                        {
                     	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                     	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
                     	   Thread.sleep(8000);
-                    	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
-                    	   System.out.println(frameid);
-                    	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-               			Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-                   		Thread.sleep(4000);
-                   		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
-                   		Common.switchToDefault();
-                   		Common.switchToDefault();
+                    	   if(Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart')]").contains("Please enter your card's security code."))
+                    	   {
+                    		   
+                             	 Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+                            		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                            		Thread.sleep(5000);
+                            		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                                	Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                                	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+                                	System.out.println(frameid);
+                                	Thread.sleep(4000);
+                                	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                                  	Thread.sleep(6000);
+                           		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
+                           		Thread.sleep(6000);
+                               	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
+                               	Common.switchToDefault();
+                               	Common.switchToDefault();
+                    	   }                    	
+                    	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
+                    	   {
+                    		   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+                             	System.out.println(frameid);
+                              	Thread.sleep(4000);
+                             	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                             	Thread.sleep(4000);
+                        		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
+                        		Thread.sleep(4000);
+                            	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
+                            	Common.switchToDefault();
+                            	Common.switchToDefault();
+                    	   }
+                    	   else
+                    	   {
+                    		   Assert.fail();
+                    	   }
                        }
 					
 				} else {
