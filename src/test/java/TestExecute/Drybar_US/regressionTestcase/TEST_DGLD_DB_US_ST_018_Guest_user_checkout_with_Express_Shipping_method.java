@@ -9,27 +9,24 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_024_Order_ID_Verification {
+public class TEST_DGLD_DB_US_ST_018_Guest_user_checkout_with_Express_Shipping_method {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Registered_User_Order_ID_from_Success_Page  () throws Exception {
+	public void Validate_Guest_user_checkout_with_Express_Shipping_method() throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.login_Drybar("AccountDetails");
-			Drybar.search_product("Product");  
-			Drybar.addtocart("Product");
+			Drybar.HairTools_headerlinks("Hair Tools"); 
+			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
-			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.addDeliveryAddress_Guestuser("Address");
+			Drybar.selectshippingmethod("Express method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			String Ordernumber=Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
-			Drybar.Order_ID_Verification(Ordernumber);
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
 		} catch (Exception e) {
