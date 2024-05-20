@@ -357,6 +357,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
 			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
 			System.out.println(forgotpassword);
+			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
@@ -7434,8 +7435,11 @@ public class OspreyRegressionEMEA {
 
 			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
+			Thread.sleep(4000);		
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 			Thread.sleep(5000);
 			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
 			System.out.println("update"+update);

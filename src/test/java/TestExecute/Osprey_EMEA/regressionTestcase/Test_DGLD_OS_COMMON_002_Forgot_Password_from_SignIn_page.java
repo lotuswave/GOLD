@@ -20,7 +20,7 @@ public class Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page {
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Forgot_password("AccountDetails");
+        Osprey_ReEu.Forgot_password("Account");
         
 		} catch (Exception e) {
 
