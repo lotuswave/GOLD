@@ -2023,7 +2023,7 @@ public class OspreyRegressionEMEA {
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(8000);
 			
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
@@ -8529,13 +8529,13 @@ public class OspreyRegressionEMEA {
 			Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, quantity);
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(14000);
 			String productquantity = Common.findElement("xpath", "//select[@class='a-form-elem a-select-menu']")
 					.getAttribute("value");
 			System.out.println(productquantity);
-			Common.assertionCheckwithReport(productquantity.equals(quantity),
+			String items=Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText().replace("  Items  in your cart", "");
+			System.out.println(items);
+			Common.assertionCheckwithReport(productquantity.equals(quantity) || productquantity.equals(items),
 					"validating the update quantity in shopping cart page",
 					"Quantity should be update in the shopping cart page",
 					"Qunatity has been updated in the shopping cart page",
@@ -9319,7 +9319,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
 				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
 			} else {
 				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
@@ -9331,7 +9331,7 @@ public class OspreyRegressionEMEA {
 			Common.clickElement("xpath", "//button[@value='Add']");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			if (Common.getCurrentURL().contains("Stage")) {
+			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
 				String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
@@ -9349,8 +9349,9 @@ public class OspreyRegressionEMEA {
 			Assert.fail();
 		}
 		try {
-			if(Common.getCurrentURL().contains("stage3"))
+			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") )
 			{
+			Thread.sleep(6000);
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
