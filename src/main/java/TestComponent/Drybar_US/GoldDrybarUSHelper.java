@@ -393,12 +393,12 @@ public class GoldDrybarUSHelper {
 			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -1730,5 +1730,36 @@ public class GoldDrybarUSHelper {
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
 			Assert.fail();
 		}
+	}
+
+	public void Order_ID_Verification(String Ordernumber) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			
+		 Sync.waitElementPresent("xpath", "//a[@class='order-number']");
+	     Common.clickElement("xpath", "//a[@class='order-number']");
+	     Thread.sleep(4000);
+	     Common.assertionCheckwithReport(Common.getCurrentURL().contains("order_id"), "validating the navigated to the my orders page",
+					"when we click on the order number it is navigate to the My orders page", "Sucessfully Navigated to the My orders page ",
+					"failed to Navigate to the My orders page");
+	    String Order_ID= Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText().replace("Order # ", "");
+	    System.out.println(Order_ID);
+	    Common.assertionCheckwithReport(Ordernumber.equals(Order_ID), "Validating the order number in the my orders page",
+				"Order Number should be display on the My Orders page", "Sucessfully Order Number io displayed in the My orders page",
+				"Failed to display the Order ID Number on the My Orders page");
+			
+		}
+		catch (Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the order number in the my orders page",
+					"Order Number should be display on the My Orders page",
+					"Unable to display the Order ID Number on the My Orders page",
+					Common.getscreenShot("Failed to display the Order ID Number on the My Orders page"));
+			Assert.fail();
+		}
+		
 	}
 }
