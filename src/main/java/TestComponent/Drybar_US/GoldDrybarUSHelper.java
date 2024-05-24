@@ -1988,5 +1988,165 @@ public class GoldDrybarUSHelper {
 		}
 
 	}
+	
+	public String Express_Paypal(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		String order = "";
+
+		String expectedResult = "It should open paypal site window.";
+		
+		try {
+			Thread.sleep(3000);
+			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+
+			// Common.refreshpage();
+			Thread.sleep(8000);
+			Sync.waitElementClickable("xpath", "//div[contains(@class,'paypal-button-lab')]");
+			Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+			Common.switchToDefault();
+			Thread.sleep(5000);
+			Common.switchWindows();
+			int size = Common.findElements("id", "acceptAllButton").size();
+			if (size > 0) {
+
+				Common.clickElement("id", "acceptAllButton");
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
+			Assert.fail();
+		}
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+		if (!url.contains("stage") & !url.contains("preprod")) {
+
+			int sizeofelement = Common.findElements("id", "email").size();
+			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
+					"open paypal site window", "faild to open paypal account");
+		} else {
+
+			Common.clickElement("id", "login_emaildiv");
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			Common.clickElement("id", "btnNext");
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			int sizeemail = Common.findElements("id", "email").size();
+
+			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
+					"open paypal site window", "faild to open paypal account");
+
+			try {
+				Common.clickElement("id", "btnLogin");
+				Thread.sleep(5000);
+				Common.actionsKeyPress(Keys.END);
+				Thread.sleep(5000);
+				Paypal_Address_Verification("Express Paypal");
+				Thread.sleep(4000);
+				if(Common.getCurrentURL().contains(""))
+				Common.clickElement("id", "payment-submit-btn");
+				Thread.sleep(8000);
+				Common.switchToFirstTab();
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+						"User failed to proceed with paypal payment",
+						Common.getscreenShotPathforReport(expectedResult));
+				Assert.fail();
+			}
+			express_paypal_shipping(dataSet);
+			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
+			{
+				Common.scrollIntoView("xpath", "//button[@value='Place Order']");
+				Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[@value='Place Order']");
+			}
+			// Tell_Your_FriendPop_Up();//To close the Pop-up
+			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			if (!url1.contains("stage") && !url1.contains("preprod")) {
+			}
+
+			else {
+				try {
+					Thread.sleep(6000);
+					String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+					System.out.println(sucessMessage);
+
+					int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+							"verifying the product confirmation", expectedResult,
+							"Successfully It redirects to order confirmation page Order Placed",
+							"User unable to go orderconformation page");
+
+					if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+						order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+						System.out.println(order);
+					}
+					if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+						order = Common.getText("xpath", "//a[@class='order-number']/strong");
+						System.out.println(order);
+					}
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+							"It should navigate to the order confirmation page",
+							"User failed to proceed to the order confirmation page",
+							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+					Assert.fail();
+				}
+			}
+		}
+		return order;
+	}
+	
+	public void Paypal_Address_Verification(String Dataset) {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[@data-testid='header-cart-total']");
+			String symbol=Common.findElement("xpath", "//span[@data-testid='header-cart-total']").getText();
+			System.out.println(symbol);
+			Thread.sleep(5000);
+			if(symbol.contains("$"))
+			{
+				Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
+				String address=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
+				System.out.println(address);
+			}
+			else
+			{
+				Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
+				Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
+//				Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
+				Common.dropdown("xpath", "//select[@data-testid='shipping-dropdown']", SelectBy.TEXT, data.get(Dataset).get("Street"));
+				Thread.sleep(3000);
+				String Ukaddress=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
+				System.out.println(Ukaddress);
+				String UK=data.get(Dataset).get("Street").replace("Test Qa - ", "");
+				System.out.println(UK);
+				Common.assertionCheckwithReport(
+						Ukaddress.contains(UK),
+						"validating the address selection from the drop down",
+						"Address should be select from the dropdown ","Sucessfully address has been selected from the dropdown",
+						"Failed to select the Address from the dropdown");
+				
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the address selection from the drop down",
+					"Address should be select from the dropdown ","Unable to select the Address from the dropdown",
+					Common.getscreenShotPathforReport("Failed to select the Address from the dropdown"));
+			Assert.fail();
+		}
+		
+	}
+
 
 }
