@@ -3136,4 +3136,34 @@ public class GoldDrybarUSHelper {
 
 	}
 
+	public void Validate_shipping_methods() {
+
+		String No_Quotes = "Sorry, no quotes are available for this order at this time";
+
+		try {
+			String Error = Common.getText("xpath", "//div[@id=\"checkout-step-shipping_method\"]");
+
+			if (No_Quotes.contentEquals(Error)) {
+
+				System.out.println("Sorry, no quotes are available for this order at this time");
+			}
+
+			else {
+
+				Assert.fail();
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating error message  Sorry, no quotes are available for this order at this time",
+					"Sorry, no quotes are available for this order at this time message will display",
+					" unable to enter the product name in  search box", Common.getscreenShot(
+							"Failed to display the Sorry, no quotes are available for this order at this time"));
+			Assert.fail();
+		}
+	}
+		
 }
+
+	
