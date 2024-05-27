@@ -2522,4 +2522,39 @@ public class GoldDrybarUSHelper {
 			Assert.fail();
 		}
 	}
+	
+	public void share_giftcard(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//a[@title='Share']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("Email"));
+			Common.clickElement("id", "add-recipient-button");
+			Common.textBoxInput("xpath", "//input[@name='recipients[1][name]']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
+			Common.clickElement("xpath", "//button[@type='submit']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(50, "xpath", "//div[@data-ui-id='message-success']//div");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("You shared the gift registry"),
+					"validating the gift registery page navigation ",
+					"After clicking on save button It should be able to navigate to the gift registry page ",
+					"successfully Navigated to the gift registry page", "failed to Navigate to the gift registry page");
+
+		} catch (Exception | Error e) {
+
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the gift registery page navigation ",
+					"After clicking on save button It should be able to navigate to the gift registry page ",
+					"Unable to navigate to the gift registry page",
+					Common.getscreenShot("failed to Navigate to the gift registry page"));
+			Assert.fail();
+
+		}
+
+	}
 }
