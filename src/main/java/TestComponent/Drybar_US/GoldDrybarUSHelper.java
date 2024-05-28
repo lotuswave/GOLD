@@ -3240,7 +3240,211 @@ public class GoldDrybarUSHelper {
 			Assert.fail();
 		}
 	}
+	
+	public String Store_Credit_balance() throws Exception {
+		// TODO Auto-generated method stub
+	String Price="";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "(//ul[@id='desktop-account-nav']//a)[1]");
+			String account=Common.findElement("xpath", "(//ul[@id='desktop-account-nav']//a)[1]").getAttribute("id");
+			Common.clickElement("xpath", "//a[@id='"+ account +"']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("account"),
+					"validating the page navigation to the my account",
+					"After clicking on My account it should navigate to the my account page",
+					"successfully Navigated to the My account page",
+					"Failed to Navigate to the My account page");
+			Sync.waitElementPresent("xpath", "//a[text()='Store Credit']");
+			Common.clickElement("xpath", "//a[text()='Store Credit']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("storecredit"),
+					"validating the page navigation to the storecredit",
+					"After clicking on storecredit it should navigate to the storecredit page",
+					"successfully Navigated to the storecredit page",
+					"Failed to Navigate to the storecredit page");
+		 Price=Common.getText("xpath", "(//div[@class='block-content']//span[@class='price'])[1]");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the page navigation to the storecredit",
+					"After clicking on storecredit it should navigate to the storecredit page",
+					"Unable Navigated to the storecredit page",
+					Common.getscreenShot("Failed to Navigate to the storecredit page"));
+			Assert.fail();
+		}
+		return Price;
+	}
+	public void Apply_Store_Credit(String Price) throws InterruptedException {
+		// TODO Auto-generated method stub
+		String symbol="";
+		Thread.sleep(4000);
+		  String Url=Common.getCurrentURL();
+		  Thread.sleep(4000);
+		  if(Url.contains("/gb"))
+		  {
+			symbol="£";
+		  }
+		  else
+		  {
+			  symbol="$";
+		  }
+		try
+		{
+			Thread.sleep(3000);
+			String ordertotal = Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace(symbol, "");
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			System.out.println(ordertotalvalue);
+			Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+			Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+			Thread.sleep(4000);
+			String storecredit=Common.findElement("xpath", "//strong[@id='customerbalance-available-amount']").getText();
+			System.out.println(storecredit);
+			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
+			Float Pricevalue = Float.parseFloat(price);
+			System.out.println(Pricevalue);
+			Thread.sleep(4000);
+			
+				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
+				if(balance.equals(Price))
+				{
+					String totalbeforeWC=Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText();
+					Sync.waitElementPresent(30,"xpath", "//button[@id='use-customer-balance']");
+					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
+				//	Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
+				//	String message = Common.findElement("xpath", "(//div[contains(@class,'message ')]//div)[1]").getText();
+					Thread.sleep(2000);
+					//System.out.println(message);
+					Common.scrollIntoView("xpath", "//tr[@class='totals balance']//span[@class='price']");
+					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
+					System.out.println(storeorder);
+					System.out.println(totalbeforeWC);
+					System.out.println(Price);
+					System.out.println(storecredit);
+					Common.refreshpage();
+					Common.assertionCheckwithReport(storecredit.equals(Price),"validating the store credit balance applied sucess message",
+							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
+							"failed to Display the success message");
+				}
+				else
+				{
+					Assert.fail();
+				}
+
+					
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the store credit balance applied sucess message",
+					"After adding the store credit success message should display", "Unable to Display the success message",
+					Common.getscreenShot("failed to Display the success message"));
+			Assert.fail();
+		}
 		
+	}
+
+	
+	public HashMap<String, String> gitCard(String Dataset) throws Exception{
+		HashMap<String, String> Payment = new HashMap<String, String>();
+		try{
+		
+		Thread.sleep(5000);
+Common.clickElement("xpath", "//span[text()='Apply Gift Card']");
+Thread.sleep(5000);
+	Common.textBoxInput("id","giftcard-code",data.get(Dataset).get("GiftCardCode"));
+		
+		Common.textBoxInput("id","giftcard-pin",data.get(Dataset).get("GiftCardPin"));
+		String GiftCard="GiftCard";
+		Payment.put("GiftCard", GiftCard);
+		Thread.sleep(5000);
+		Common.javascriptclickElement("xpath", "//button[@value='Apply']");
+		Thread.sleep(2000);
+		Common.javascriptclickElement("xpath", "//button[@value='Apply']");
+		
+		Thread.sleep(3000);
+		int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
+		Common.assertionCheckwithReport(size>0, "validating the gift card", "Gift Card was added.", "successfully gift card was added","Failed to add gift card");
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the gift card","Gift Card was added.","User faield to to add gift card",Common.getscreenShotPathforReport("gitcard"));
+	        Assert.fail();
+	        }
+		return Payment;
+		
+	}
+	public String giftCardSubmitOrder() throws Exception {
+		// TODO Auto-generated method stub
+
+		String order = "";
+		String expectedResult = "It redirects to order confirmation page";
+		Common.actionsKeyPress(Keys.PAGE_UP);
+		Thread.sleep(3000);
+		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
+			Thread.sleep(4000);
+   if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
+   {
+			Common.clickElement("xpath", "//button[@class='action primary checkout']");
+			//Common.refreshpage();
+		Thread.sleep(3000);
+   }
+   else
+   {
+	   Assert.fail();
+   }
+
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+		if (!url.contains("stage") && !url.contains("preprod")) {
+		}
+
+		else {
+			try {
+				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+
+//				Tell_Your_FriendPop_Up();
+				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unabel to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+					Thread.sleep(4000);
+					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					System.out.println(order);
+				} else {
+					Thread.sleep(4000);
+					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+					System.out.println(order);
+				}
+
+				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
+					Common.getText("xpath", "//div[@class='checkout-success']//span");
+					System.out.println(order);
+
+				}
+			
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+						"User failed to navigate  to order confirmation page",
+						Common.getscreenShotPathforReport("failednavigatepage"));
+				Assert.fail();
+			}
+
+		}
+		return order;
+	}
+	
 }
 
 	
