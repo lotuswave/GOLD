@@ -3512,6 +3512,78 @@ Thread.sleep(5000);
 			Assert.fail();
 		}
 	}
+
+	public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOException {
+		// TODO Auto-generated method stub
+		String urls = data.get(dataSet).get("Links");
+		int j = 0;
+
+		String[] strArray = urls.split("\\r?\\n");
+		for (int i = 0; i < strArray.length; i++) {
+			System.out.println(strArray[i]);
+
+			if (Common.getCurrentURL().contains("pre")) {
+
+				Common.oppenURL((strArray[i]));
+				int responcecode = getpageresponce(Common.getCurrentURL());
+				System.out.println(responcecode);
+				Common.refreshpage();
+				System.out.println(responcecode);
+
+				if (responcecode == 200) {
+					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+							"successfully page configured with products",
+							Common.getscreenShotPathforReport("link" + i));
+				} else {
+
+					j++;
+
+					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+							"page configured with products ", "unable to find page it showing 40 error",
+							Common.getscreenShotPathforReport("link" + i));
+
+				}
+
+			} else if (Common.getCurrentURL().contains("https://mcloud-na-stage3.drybar.com/")) {
+
+				Common.oppenURL(strArray[i].replace("mcloud-na-stage3", "www"));
+
+				int responcecode = getpageresponce(Common.getCurrentURL());
+				System.out.println(responcecode);
+
+				if (responcecode == 200) {
+					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+							"successfully page configured with products",
+							Common.getscreenShotPathforReport("link" + i));
+				} else {
+
+					j++;
+
+					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+							"page configured with products ", "unable to find page it showing 40 error",
+							Common.getscreenShotPathforReport("link" + i));
+
+				}
+			}
+		}
+
+		if (j > 1) {
+			Assert.fail();
+		}
+		Thread.sleep(3000);
+		String message=Common.getText("xpath", "//h2[text()='Well... This Blows.']");
+		System.out.println(message);
+	}
+
+	public int getpageresponce(String url) throws MalformedURLException, IOException {
+		HttpURLConnection c = (HttpURLConnection) new URL(url).openConnection();
+		c.setRequestMethod("HEAD");
+		c.connect();
+		int r = c.getResponseCode();
+
+		return r;
+	}
+	
 	
 }
 
