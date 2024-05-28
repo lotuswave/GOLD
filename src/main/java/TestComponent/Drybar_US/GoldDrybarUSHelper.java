@@ -3444,6 +3444,74 @@ Thread.sleep(5000);
 		}
 		return order;
 	}
+
+	public void Expeditedshippingmethod(String Dataset) {
+		// TODO Auto-generated method stub
+		String method = data.get(Dataset).get("methods");
+		System.out.println(method);
+
+		try {
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "(//label[@class='a-radio-button__label'])[2]").size();
+			System.out.println(size);
+			if (size > 0  ) {
+				
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//td[text()='"+ method +"']");
+				Common.clickElement("xpath", "//td[text()='"+ method +"']");
+				
+			}
+			else
+			{
+				Assert.fail();
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Expedited shipping method",
+					"Select the Expedited shipping method in shipping page ",
+					"failed to select the Expedited shipping method ",
+					Common.getscreenShotPathforReport("failed select Expedited shipping method"));
+
+			Assert.fail();
+		}
+
+	}
+
+	public void add_aerosolproduct(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		System.out.println(product);
+		try
+		{
+        Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
+     	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+     	Thread.sleep(4000);
+     	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+     	"User should able to click on the search button", "Search expands to the full page",
+     	"Sucessfully search bar should be expand"); 
+     	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
+        serachbar.sendKeys(product);
+        Common.actionsKeyPress(Keys.ENTER);
+    	Sync.waitPageLoad();
+    	Thread.sleep(4000);
+			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+			System.out.println(productsearch);
+			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+					"enter product name will display in the search box", "user enter the product name in  search box",
+					"Failed to see the product name");
+			Thread.sleep(8000);
+			Common.mouseOverClick("xpath", "(//span[text()='Add to Cart'])[1]");
+			 //Common.clickElement("xpath", "(//span[text()='Add to Cart'])[1]");
+             }  
+		 catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter product name will display in the search box",
+					" unable to enter the product name in  search box",
+					Common.getscreenShot("Failed to see the product name"));
+			Assert.fail();
+		}
+	}
 	
 }
 
