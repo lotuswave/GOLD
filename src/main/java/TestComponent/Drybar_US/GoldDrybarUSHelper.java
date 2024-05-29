@@ -3957,8 +3957,51 @@ Thread.sleep(5000);
     			Assert.fail();
     		}
     	}
-    	 
+
+		public void Communication_Preference_MyAccount() {
+			
+				try {
+				
+				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
+				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
+				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				
+				String MyAccount= Common.getPageTitle();
+				
+				System.out.println(MyAccount);
+				
+				Common.assertionCheckwithReport(MyAccount.equals("My Account"),
+    					"validating the order summary in the payment page",
+    					"Order summary should be display in the payment page and all fields should display",
+    					"Successfully Order summary is displayed in the payment page and fields are displayed",
+    					"Failed to display the order summary and fileds under order summary");
+				
+				
+				Sync.waitElementPresent("xpath", "//a[text ()='Communication Preferences']");
+				Common.clickElement("xpath", "//a[text ()='Communication Preferences']");
+
+				String Communication = Common.getText("xpath", "//h1[text()='Communication Preferences']");
+
+				String Storefront_Text = "Communication Preferences";
+
+				Assert.assertEquals(Communication, Storefront_Text);
+
+				Common.clickCheckBox("xpath", "//span[text()='General Subscription']");
+				Common.clickElement("xpath", "//span[text()='Save']");
+		  
+		    		} catch (Exception | Error e) {
+		    			e.printStackTrace();
+		    			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+		    					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+		    			Assert.fail();
+		    		}
+		    	}
+			
+
 }
-
-
 	
