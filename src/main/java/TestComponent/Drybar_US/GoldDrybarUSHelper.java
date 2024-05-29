@@ -3291,6 +3291,12 @@ public class GoldDrybarUSHelper {
 
 				Assert.fail();
 			}
+			
+			Common.assertionCheckwithReport(Error.equals("Sorry, no quotes are available for this order at this time"),
+					"validating error message  Sorry, no quotes are available for this order at this time",
+					"No Shipping methods should be displayed after entering the address",
+					"Sucessfully error message  Sorry, no quotes are available for this order at this time",
+					"Failed to display the Sorry, no quotes are available for this order at this time");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
