@@ -4003,5 +4003,27 @@ Thread.sleep(5000);
 		    	}
 			
 
+		
+		public void reorder() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
+				Common.clickElement("xpath", "//span[text()='Reorder']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+						"validating the navigates to the shopping cart page",
+						"After clicking on the reorder it should navigate to the shopping cart page",
+						"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+						"After clicking on the reorder it should navigate to the shopping cart page",
+						"Unable to Navigate to the shopping cart page",
+						Common.getscreenShot("Failed to Navigate to the shopping cart page"));
+				Assert.fail();
+			}
+
+		}
 }
 	
