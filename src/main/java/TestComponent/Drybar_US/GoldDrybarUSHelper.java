@@ -3821,7 +3821,6 @@ Thread.sleep(5000);
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
     					data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
-    		//	Common.scrollIntoView("xpath", "//label//a[text()='Privacy Policy']");
     			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
     			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
     			Sync.waitPageLoad();
@@ -3832,7 +3831,7 @@ Thread.sleep(5000);
     			System.out.println(Common.getPageTitle());
     			Common.assertionCheckwithReport(
     					Common.getPageTitle().equals("My Account")
-    							&& message.contains("Thank you for registering with Hydro Flask."),
+    							&& message.contains("Thank you for registering"),
     					"validating the  My Favorites page Navigation when user clicks on signin button",
     					"User should able to navigate to the My Favorites page after clicking on Signin button",
     					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
@@ -3957,8 +3956,73 @@ Thread.sleep(5000);
     			Assert.fail();
     		}
     	}
-    	 
+
+		public void Communication_Preference_MyAccount() {
+			
+				try {
+				
+				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
+				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
+				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				
+				String MyAccount= Common.getPageTitle();
+				
+				System.out.println(MyAccount);
+				
+				Common.assertionCheckwithReport(MyAccount.equals("My Account"),
+    					"validating the order summary in the payment page",
+    					"Order summary should be display in the payment page and all fields should display",
+    					"Successfully Order summary is displayed in the payment page and fields are displayed",
+    					"Failed to display the order summary and fileds under order summary");
+				
+				
+				Sync.waitElementPresent("xpath", "//a[text ()='Communication Preferences']");
+				Common.clickElement("xpath", "//a[text ()='Communication Preferences']");
+
+				String Communication = Common.getText("xpath", "//h1[text()='Communication Preferences']");
+
+				String Storefront_Text = "Communication Preferences";
+
+				Assert.assertEquals(Communication, Storefront_Text);
+
+				Common.clickCheckBox("xpath", "//span[text()='General Subscription']");
+				Common.clickElement("xpath", "//span[text()='Save']");
+		  
+		    		} catch (Exception | Error e) {
+		    			e.printStackTrace();
+		    			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+		    					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+		    			Assert.fail();
+		    		}
+		    	}
+			
+
+		
+		public void reorder() {
+			// TODO Auto-generated method stub
+			try {
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Reorder']");
+				Common.clickElement("xpath", "//span[text()='Reorder']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+						"validating the navigates to the shopping cart page",
+						"After clicking on the reorder it should navigate to the shopping cart page",
+						"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+						"After clicking on the reorder it should navigate to the shopping cart page",
+						"Unable to Navigate to the shopping cart page",
+						Common.getscreenShot("Failed to Navigate to the shopping cart page"));
+				Assert.fail();
+			}
+
+		}
 }
-
-
 	
