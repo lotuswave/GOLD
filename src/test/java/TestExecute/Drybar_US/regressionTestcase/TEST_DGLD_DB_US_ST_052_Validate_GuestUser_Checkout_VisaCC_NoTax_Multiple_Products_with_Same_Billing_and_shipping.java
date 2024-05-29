@@ -24,6 +24,7 @@ public class TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Mul
 			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
+			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("NoTaxAddress");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
