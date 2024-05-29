@@ -32,7 +32,7 @@ public class TEST_DGLD_DB_US_ST_162_Miscellaneous_Pages {
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

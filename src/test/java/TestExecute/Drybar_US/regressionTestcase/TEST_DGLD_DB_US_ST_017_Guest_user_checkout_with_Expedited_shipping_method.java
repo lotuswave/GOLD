@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

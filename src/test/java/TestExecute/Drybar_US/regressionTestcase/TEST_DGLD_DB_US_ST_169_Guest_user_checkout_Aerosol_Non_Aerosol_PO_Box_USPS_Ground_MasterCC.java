@@ -25,8 +25,7 @@ public class TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_B
 			Drybar.add_aerosolproduct("Aerosol");
 			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("PO Box Address");
-			//Drybar.addDeliveryAddress_Guestuser("Address");
-			//Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 		
@@ -39,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_B
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
