@@ -1977,7 +1977,7 @@ public class GoldHydroHelper {
 
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String message = Common.findElement("xpath", "//div[@class='u-container a-message__container']//div").getText();
 
 				Common.assertionCheckwithReport(message.equals("You saved the address."),
 						"validating the saved message after saving address in address book",
