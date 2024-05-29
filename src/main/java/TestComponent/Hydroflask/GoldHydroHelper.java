@@ -4971,7 +4971,7 @@ public class GoldHydroHelper {
 			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			//validating_BundleProducts();
+//			validating_BundleProducts();
 			product_quantity(Dataset);
 			//bundle_color("Black");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
