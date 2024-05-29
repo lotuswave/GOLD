@@ -3728,7 +3728,7 @@ public class GoldHydroHelper {
 
 		}
 
-		Common.actionsKeyPress(Keys.PAGE_UP);
+		Common.actionsKeyPress(Keys.PAGE_UP); 
 		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
 		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
 		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
