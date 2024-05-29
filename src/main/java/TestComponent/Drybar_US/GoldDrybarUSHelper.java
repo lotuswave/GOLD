@@ -3780,7 +3780,39 @@ Thread.sleep(5000);
     		}
     	}
 
-        
+        public void Addtocart_Bundle(String Dataset) {
+    		// TODO Auto-generated method stub
+    		String Product = data.get(Dataset).get("Products");
+    		try {
+    			Sync.waitPageLoad();
+    			Sync.waitElementPresent("xpath", "//img[@alt='" + Product + "']");
+    			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
+    			Sync.waitPageLoad();
+    			Thread.sleep(4000);
+//    			validating_BundleProducts();
+    			product_quantity(Dataset);
+    			//bundle_color("Black");
+    			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+    			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+    			Sync.waitPageLoad();
+    			Sync.waitPageLoad();
+    			Thread.sleep(6000);
+    			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+    					.getAttribute("data-ui-id");
+    			System.out.println(message);
+    			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+    					"Product should be add to cart", "Sucessfully product added to the cart ",
+    					"failed to add product to the cart");
+    		Common.actionsKeyPress(Keys.PAGE_UP);
+    		} catch (Exception | Error e) {
+    			e.printStackTrace();
+    			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+    					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+    			Assert.fail();
+    		}
+    	}
+    	 
 }
 
 
