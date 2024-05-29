@@ -3821,7 +3821,6 @@ Thread.sleep(5000);
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
     					data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
-    		//	Common.scrollIntoView("xpath", "//label//a[text()='Privacy Policy']");
     			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
     			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
     			Sync.waitPageLoad();
@@ -3832,7 +3831,7 @@ Thread.sleep(5000);
     			System.out.println(Common.getPageTitle());
     			Common.assertionCheckwithReport(
     					Common.getPageTitle().equals("My Account")
-    							&& message.contains("Thank you for registering with Hydro Flask."),
+    							&& message.contains("Thank you for registering"),
     					"validating the  My Favorites page Navigation when user clicks on signin button",
     					"User should able to navigate to the My Favorites page after clicking on Signin button",
     					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
