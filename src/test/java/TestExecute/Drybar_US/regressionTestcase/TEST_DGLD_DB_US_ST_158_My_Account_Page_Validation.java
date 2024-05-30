@@ -34,7 +34,7 @@ public class TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation {
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

@@ -29,8 +29,6 @@ public class TEST_DGLD_DB_US_ST_166_Register_user_checkout_simple_product_PO_Box
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("PO Box Address");
 			Drybar.selectshippingmethod("POBox Shipping method");
-			//Drybar.RegaddDeliveryAddress("AccountDetails");
-			//Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Apply_Store_Credit(Price);
 			Drybar.giftCardSubmitOrder();
@@ -45,7 +43,7 @@ public class TEST_DGLD_DB_US_ST_166_Register_user_checkout_simple_product_PO_Box
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

@@ -26,8 +26,8 @@ public class TEST_DGLD_DB_US_ST_130_Register_user_1_item_with_10_Qty_StoreCredit
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("10 qty product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
-			Drybar.selectshippingmethod("GroundShipping method");
+	    	Drybar.RegaddDeliveryAddress("AccountDetails");
+	    	Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Apply_Store_Credit(Price);
 			Drybar.giftCardSubmitOrder();

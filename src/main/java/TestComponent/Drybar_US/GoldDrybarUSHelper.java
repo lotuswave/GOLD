@@ -3679,11 +3679,9 @@ Thread.sleep(5000);
 		Common.textBoxInput("id","giftcard-pin",data.get(Dataset).get("GiftCardPin"));
 		String GiftCard="GiftCard";
 		Payment.put("GiftCard", GiftCard);
-		Thread.sleep(5000);
-		Common.javascriptclickElement("xpath", "//button[@value='Apply']");
-		Thread.sleep(2000);
-		Common.javascriptclickElement("xpath", "//button[@value='Apply']");
-		
+		Thread.sleep(6000);
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Apply']");
+		Common.clickElement("xpath", "//span[text()='Apply']");
 		Thread.sleep(3000);
 		int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
 		Common.assertionCheckwithReport(size>0, "validating the gift card", "Gift Card was added.", "successfully gift card was added","Failed to add gift card");
@@ -3707,9 +3705,13 @@ Thread.sleep(5000);
 			Thread.sleep(4000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
+	   Thread.sleep(5000);
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			//Common.refreshpage();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//button[@class='action primary checkout']");
+		Thread.sleep(4000);
+		
    }
    else
    {
