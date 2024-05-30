@@ -1,5 +1,5 @@
 package TestExecute.Drybar_US.regressionTestcase;
-
+       
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -9,29 +9,29 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_145_Register_user_StoreCredit_Checkout_Full_and_validate_the_StoreCredit_balance_in_MYAccountpage {
+public class TEST_DGLD_DB_US_ST_148_Validate_RegisterUser_Checkout_Aerosol_Product_VisaCC_with_PO_Box {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_user_StoreCredit_Checkout_Full_and_validate_the_StoreCredit_balance_in_MYAccountpage () throws Exception {
+	public void Validate_RegisterUser_Checkout_Aerosol_Product_VisaCC_with_PO_Box () throws Exception {
 
 		try {
-		
+	
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			  String Price= Drybar.Store_Credit_balance();
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
+			Drybar.search_product("Aerosol");  
+			Drybar.addtocart("Aerosol");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
-			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.RegaddDeliveryAddress("PO Box Address");
+			Drybar.selectshippingmethod("POBox Shipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.Apply_Store_Credit(Price);
-			Drybar.giftCardSubmitOrder();
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
+			
+		
 
 		} catch (Exception e) {
 
@@ -41,8 +41,7 @@ public class TEST_DGLD_DB_US_ST_145_Register_user_StoreCredit_Checkout_Full_and_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
-		
+		//Common.closeAll();
 
 	}
 
@@ -50,7 +49,7 @@ public class TEST_DGLD_DB_US_ST_145_Register_user_StoreCredit_Checkout_Full_and_
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+       Drybar.close_add();
         
 
 	}

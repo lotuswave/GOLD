@@ -551,17 +551,34 @@ public class GoldDrybarUSHelper {
 	public void product_quantity(String Dataset) {
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
+		System.out.println(Quantity);
 		try {
 			Common.findElement("xpath", "//select[@class='a-select-menu']");
-//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
-			Thread.sleep(3000);
-			String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
-			Common.assertionCheckwithReport(value.equals(Quantity),
-					"validating the  product the product quantity in PDP page",
-					"Product quantity should be update in the PDP page",
-					"Sucessfully product Qunatity has been updated ",
-					"failed to Update the prodcut quantity in PDP page");
+			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			if(Quantity.equals("10+"))
+			{
+				Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+				Thread.sleep(3000);
+				String value = Common.findElement("xpath", "//input[@name='qty']").getAttribute("value");
+				Common.assertionCheckwithReport(value.contains("10") || value.contains(Quantity) ,
+						"validating the  product the product quantity in PDP page",
+						"Product quantity should be update in the PDP page",
+						"Sucessfully product Qunatity has been updated ",
+						"failed to Update the prodcut quantity in PDP page");
+				
+			}
+			else
+			{
+				Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+				Thread.sleep(3000);
+				String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
+				Common.assertionCheckwithReport(value.equals(Quantity),
+						"validating the  product the product quantity in PDP page",
+						"Product quantity should be update in the PDP page",
+						"Sucessfully product Qunatity has been updated ",
+						"failed to Update the prodcut quantity in PDP page");
+			}
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1509,6 +1526,158 @@ public class GoldDrybarUSHelper {
 		return update;
 	}
 
+	
+	public void signout() {
+		try {
+			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementClickable("xpath", "//li[@class='link authorization-link']/a");
+
+			Common.javascriptclickElement("xpath", "//li[@class='link authorization-link']/a");
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/logoutSuccess"),
+					"Validating My Account page navigation", "user sign in and navigate to my account page",
+					"Successfully navigate to my account page", "Failed to navigate my account page ");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+					"after clinking signout user signout fro the page", "user Successfully signout  ",
+					Common.getscreenShotPathforReport("user Failed to signout"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void Account_Navlinks(String Dataset) {
+		String Navlinks = data.get(Dataset).get("Navigation Links");
+		String[] Account = Navlinks.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Account.length; i++) {
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				System.out.println(Account[i]);
+				Sync.waitElementPresent("xpath",
+						"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+				Common.clickElement("xpath",
+						"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String currentUrl=Common.getCurrentURL();
+				System.out.println(currentUrl);
+				Common.assertionCheckwithReport(
+						currentUrl.contains("rma/returns/history/")|| currentUrl.contains("wishlist"),
+						"verifying Account page links " + Account[i],
+						"user should navigate to the " + Account[i] + " page",
+						"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+				Thread.sleep(2000);
+
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
+					"user should Navigate to the " + Account[i] + " page",
+					"User unable to navigate to the " + Account[i],
+					Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+			Assert.fail();
+		}
+	}
+	
+	public void Account_page_Validation(String Dataset) throws Exception {
+		// TODO Auto-generated method stub
+				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
+				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
+				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")) {
+					String Accountlinks = data.get(Dataset).get("Account Links");
+					String[] Account = Accountlinks.split(",");
+					int i = 0;
+					try {
+						for (i = 0; i < Account.length; i++) {
+							System.out.println(Account[i]);
+							Sync.waitElementPresent("xpath",
+									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+							Common.clickElement("xpath",
+									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+							Sync.waitPageLoad();
+							Thread.sleep(4000);
+							/*String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+							System.out.println(title);
+							Common.assertionCheckwithReport(
+									title.contains(Account[i]) || title.contains("My Wish Lists")
+											|| title.contains("My Payment Methods") || title.contains("Newsletter Subscription")
+											|| title.contains("Pro deal information"),
+									"verifying Account page links " + Account[i],
+									"user should navigate to the " + Account[i] + " page",
+									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+		                 */
+							String currentUrl=Common.getCurrentURL();
+							System.out.println(currentUrl);
+							Common.assertionCheckwithReport(
+									currentUrl.contains("rma/returns/history/")|| currentUrl.contains("wishlist")||currentUrl.contains("customer/address")
+									|| currentUrl.contains("appointments")|| currentUrl.contains("customer/account/edit")|| currentUrl.contains("barflymembership")
+									|| currentUrl.contains("storecredit/info")|| currentUrl.contains("profile")|| currentUrl.contains("giftregistry")|| currentUrl.contains("newsletter/manage")
+									,
+									"verifying Account page links " + Account[i],
+									"user should navigate to the " + Account[i] + " page",
+									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+							Thread.sleep(2000);
+							}
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
+								"user should Navigate to the " + Account[i] + " page",
+								"User unable to navigate to the " + Account[i],
+								Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+						Assert.fail();
+					}
+				} else {
+					String Accountlinks = data.get(Dataset).get("Prod Account Links");
+					String[] Account = Accountlinks.split(",");
+					int i = 0;
+					try {
+						for (i = 0; i < Account.length; i++) {
+							System.out.println(Account[i]);
+							Sync.waitElementPresent("xpath",
+									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+							Common.clickElement("xpath",
+									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+							Sync.waitPageLoad();
+							Thread.sleep(4000);
+							String currentUrl=Common.getCurrentURL();
+							System.out.println(currentUrl);
+							Common.assertionCheckwithReport(
+									currentUrl.contains("rma/returns/history/")|| currentUrl.contains("wishlist")||currentUrl.contains("customer/address")
+									|| currentUrl.contains("appointments")|| currentUrl.contains("customer/account/edit")|| currentUrl.contains("barflymembership")
+									|| currentUrl.contains("storecredit/info")|| currentUrl.contains("profile")|| currentUrl.contains("giftregistry")
+									,
+									"verifying Account page links " + Account[i],
+									"user should navigate to the " + Account[i] + " page",
+									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+							Thread.sleep(2000);
+		 
+
+						}
+					} catch (Exception | Error e) {
+						e.printStackTrace();
+						ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
+								"user should Navigate to the " + Account[i] + " page",
+								"User unable to navigate to the " + Account[i],
+								Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
+						Assert.fail();
+					}
+				}
+
+	}
+
+
+	
 	public String payPal_Payment(String dataSet) throws Exception  {
 		// TODO Auto-generated method stub
 		
