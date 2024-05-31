@@ -27,7 +27,7 @@ public class TEST_DGLD_DB_US_ST_049_Validate_GuestUser_Checkout_MastercardCC_NoT
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.No_Tax_Validation();
-			Drybar.same_Blling_and_Shipping_SubmitOrder("PaymentDetails");
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
 		} catch (Exception e) {
