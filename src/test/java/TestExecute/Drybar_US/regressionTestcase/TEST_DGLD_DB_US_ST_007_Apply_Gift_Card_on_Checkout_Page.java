@@ -9,24 +9,28 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
+public class TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_on_Checkout_Page {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_user_checkout_with_Expedited_shipping_method () throws Exception {
+	public void Validate_Applying_Gift_Card_on_Checkout_Page () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Configurable Product");
-			Drybar.addtocart("Configurable Product");
-			Drybar.HairTools_headerlinks("Hair Tools");
+			Drybar.click_singinButton();
+			Drybar.login_Drybar("AccountDetails");
+			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.Shipping_Forgot_Password("AccountDetails");
-			Drybar.Forgot_password("AccountDetails");
+			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.gitCard("GiftCode");
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			
 			
 
 		} catch (Exception e) {
@@ -37,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 	
 	@AfterTest
 	public void clearBrowser() {
-    Common.closeAll();
+		Common.closeAll();
 
 	}
 
@@ -47,5 +51,7 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
         Login.signIn();
         Drybar.close_add();
         
+
 	}
+
 }

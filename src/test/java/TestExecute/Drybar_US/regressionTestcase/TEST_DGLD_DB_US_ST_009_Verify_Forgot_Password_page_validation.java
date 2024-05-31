@@ -9,8 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
-
+public class TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation {
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
@@ -20,11 +19,6 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Configurable Product");
-			Drybar.addtocart("Configurable Product");
-			Drybar.HairTools_headerlinks("Hair Tools");
-			Drybar.addtocart("PLP Product");
-			Drybar.minicart_Checkout();
 			Drybar.Shipping_Forgot_Password("AccountDetails");
 			Drybar.Forgot_password("AccountDetails");
 			
@@ -37,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 	
 	@AfterTest
 	public void clearBrowser() {
-    Common.closeAll();
+		Common.closeAll();
 
 	}
 
@@ -48,4 +42,5 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
         Drybar.close_add();
         
 	}
+
 }
