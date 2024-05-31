@@ -3709,8 +3709,8 @@ Thread.sleep(5000);
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			//Common.refreshpage();
 		Thread.sleep(4000);
-		Common.clickElement("xpath", "//button[@class='action primary checkout']");
-		Thread.sleep(4000);
+		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
+		//Thread.sleep(4000);
 		
    }
    else
