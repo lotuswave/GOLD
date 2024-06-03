@@ -9,36 +9,28 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_097_RegisterUser_SimpleConfigurable_BundleAerosolProducts_Discount_Storecredit_Partialredeem_GiftCode_PartialRedeem_KlarnaStandard_Shipping {
+public class TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Single_Bundle_product_SKU1_Regular_Item_Same_SKU1_From_Bundle {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Registered_User_Checkout_Funtionality_Amex_card () throws Exception {
+	public void Validate_Registeruser_Checkout_MasterCC_Single_Bundle_product_SKU1_Regular_Item_Same_SKU1_From_Bundle  () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			String Price= Drybar.Store_Credit_balance();
-			Drybar.search_product("Bundle Product");  
-			Drybar.Addtocart_Bundle("Bundle Product");
-			Drybar.search_product("Product");  
-			Drybar.addtocart("Product");
-			Drybar.search_product("Configurable Product");
-			Drybar.Configurable_addtocart("Configurable Product");
-			Drybar.add_aerosolproduct("Aerosol");
+			Drybar.search_product("Bundle child Product");  
+			Drybar.Addtocart_Bundle("Bundle child Product");
+			Drybar.search_product("Child Product");  
+			Drybar.addtocart("Child Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.discountCode("Discount");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.gitCard("GiftCode");
-			Drybar.Apply_Store_Credit(Price);
-			Drybar.Kalrna_Payment("Klarna Visa Payment");
-			
+			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 
 		} catch (Exception e) {
 
