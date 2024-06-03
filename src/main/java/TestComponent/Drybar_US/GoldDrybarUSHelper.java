@@ -3683,6 +3683,8 @@ Thread.sleep(5000);
 		Sync.waitElementPresent(30, "xpath", "//span[text()='Apply']");
 		Common.clickElement("xpath", "//span[text()='Apply']");
 		Thread.sleep(3000);
+		Common.refreshpage();
+		Thread.sleep(3000);
 		int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
 		Common.assertionCheckwithReport(size>0, "validating the gift card", "Gift Card was added.", "successfully gift card was added","Failed to add gift card");
 		}
@@ -4657,7 +4659,7 @@ Thread.sleep(5000);
 				Thread.sleep(4000);
 				//Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 				Thread.sleep(5000);
-				update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+				update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[3]").getText();
 				System.out.println("update"+update);
 				Common.assertionCheckwithReport(
 						update.equals(Shipping),

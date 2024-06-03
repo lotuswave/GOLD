@@ -38,7 +38,7 @@ package TestExecute.Drybar_US.regressionTestcase;
 		
 		@AfterTest
 		public void clearBrowser() {
-			//Common.closeAll();
+			Common.closeAll();
 
 		}
 
