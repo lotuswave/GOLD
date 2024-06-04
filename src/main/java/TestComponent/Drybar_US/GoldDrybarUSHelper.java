@@ -5189,8 +5189,88 @@ Thread.sleep(5000);
     		}
     	}
         
+        public void Travel_Sizesearch_product(String Dataset) {
+			// TODO Auto-generated method stub
+			String product = data.get(Dataset).get("Products");
+			System.out.println(product);
+			try
+			{
+	        Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
+	     	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+	     	Thread.sleep(4000);
+	     	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+	     	"User should able to click on the search button", "Search expands to the full page",
+	     	"Sucessfully search bar should be expand"); 
+	     	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
+	        serachbar.sendKeys(product);
+	        Common.actionsKeyPress(Keys.ENTER);
+	    	Sync.waitPageLoad();
+	    	Thread.sleep(4000);
+				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+				System.out.println(productsearch);
+				Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+						"enter product name will display in the search box", "user enter the product name in  search box",
+						"Failed to see the product name");
+				Thread.sleep(8000);
+	             }  
+			 catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the search functionality",
+						"enter product name will display in the search box",
+						" unable to enter the product name in  search box",
+						Common.getscreenShot("Failed to see the product name"));
+				Assert.fail();
+			}
+		}
 
-}
+		public void addtocartTravel_Sizesearch(String Dataset) {
+			// TODO Auto-generated method stub
+			String products = data.get(Dataset).get("Products");
+			System.out.println(products);
+			try {
+				Sync.waitPageLoad();
+				for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath","//img[contains(@class,'m-product-card__image')]");
+
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				Thread.sleep(6000);
+			
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+				
+				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+				product_quantity(Dataset);
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+//				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+						"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+				Assert.fail();
+			}
+		}
+		}	
+
+
 
 
 
