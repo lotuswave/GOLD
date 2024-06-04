@@ -3450,7 +3450,7 @@ public class GoldDrybarUSHelper {
 		String No_Quotes = "Sorry, no quotes are available for this order at this time";
 
 		try {
-			String Error = Common.getText("xpath", "//div[@id=\"checkout-step-shipping_method\"]");
+			String Error = Common.getText("xpath", "//div[@id='checkout-step-shipping_method']");
 
 			if (No_Quotes.contentEquals(Error)) {
 
