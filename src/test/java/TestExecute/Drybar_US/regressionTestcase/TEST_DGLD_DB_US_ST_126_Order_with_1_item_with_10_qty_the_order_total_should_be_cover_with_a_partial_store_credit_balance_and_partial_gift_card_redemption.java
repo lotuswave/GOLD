@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_126_Order_with_1_item_with_10_qty_the_order_tota
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public TEST_DGLD_DB_US_ST_126_Order_with_1_item_with_10_qty_the_order_total_should_be_cover_with_a_partial_store_credit_balance_and_partial_gift_card_redemption () throws Exception {
+	public void Validate_Order_with_1_item_with_10_qty_the_order_total_should_be_cover_with_a_partial_store_credit_balance_and_partial_gift_card_redemption() throws Exception {
 
 		try {
 		
