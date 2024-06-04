@@ -19,6 +19,8 @@ public class TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation {
 		try {
 		
 			Drybar.Verify_Homepage();
+			Drybar.click_singinButton();
+			Drybar.Forgot_password("AccountDetails");
 			Drybar.search_product("Configurable Product");
 			Drybar.addtocart("Configurable Product");
 			Drybar.HairTools_headerlinks("Hair Tools");
