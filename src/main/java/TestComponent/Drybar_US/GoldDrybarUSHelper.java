@@ -4034,7 +4034,7 @@ Thread.sleep(5000);
 
     			Sync.waitElementClickable("id", "block-discount-heading");
     			Common.clickElement("id", "block-discount-heading");
-    			if (Common.getCurrentURL().contains("preprod")) {
+    			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
     				Sync.waitElementPresent("id", "discount-code");
 
     				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
