@@ -3977,7 +3977,7 @@ Thread.sleep(5000);
     		}
     	}
         public String create_account(String Dataset) {
-    		String email = "";
+    		String email1 = "";
     		try {
     			Common.refreshpage();
     			Sync.waitPageLoad();
@@ -3988,8 +3988,15 @@ Thread.sleep(5000);
     			Common.clickElement("xpath", "//input[@name='lastname']");
     			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
     			Common.clickElement("xpath", "//input[@name='email']");
-    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-    			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+    			
+    			
+    			String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+    			Common.textBoxInput("xpath", "//input[@name='email']", email);
+    			
+//    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+    			email1 = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+    			
+    		
     			System.out.println(email);
     			Common.clickElement("xpath", "//input[@name='password']");
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
@@ -4025,7 +4032,7 @@ Thread.sleep(5000);
     			Assert.fail();
 
     		}
-    		return email;
+    		return email1;
     	}
         public void discountCode(String dataSet) throws Exception {
     		String expectedResult = "It should opens textbox input to enter discount.";
