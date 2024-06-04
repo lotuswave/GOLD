@@ -3386,7 +3386,7 @@ public class GoldDrybarUSHelper {
 	public void Verify_Address(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//img[@alt='Logo Osprey']");
+			Common.clickElement("xpath", "//img[@alt='Logo']");
 			Sync.waitElementPresent(30, "xpath", "//button[@aria-controls='desktop-account-nav']");
 			Common.clickElement("xpath", "//button[@aria-controls='desktop-account-nav']");
 			String id=Common.findElement("xpath", "(//ul[@id='desktop-account-nav']//a)[1]").getAttribute("id");
