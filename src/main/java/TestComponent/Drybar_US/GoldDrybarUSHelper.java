@@ -4054,8 +4054,8 @@ Thread.sleep(5000);
     			int size = Common.findElements("id", "discount-code").size();
     			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
     					"Successfully open the discount input box", "User unable enter Discount Code");
-    			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-    			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+    			Sync.waitElementClickable("xpath", "//span[text()='Apply Code']");
+    			Common.clickElement("xpath", "//span[text()='Apply Code']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
     			Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
