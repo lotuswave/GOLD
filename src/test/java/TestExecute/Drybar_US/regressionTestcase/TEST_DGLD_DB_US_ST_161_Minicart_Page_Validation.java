@@ -21,10 +21,12 @@ public class TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation {
 			Drybar.Verify_Homepage();
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
-			Drybar.search_product("Configurable Product");
-			Drybar.Configurable_addtocart("Configurable Product");
+			Drybar.search_product("Product");  
+			Drybar.addtocart("Product");
 			Drybar.click_minicart();
-			
+			Drybar.clickontheproduct_and_image("Product");
+			Drybar.minicart_delete("PLP Product");
+			Drybar.minicart_validation("Product");
             
  
 		} catch (Exception e) {
@@ -36,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

@@ -42,7 +42,7 @@ public class TEST_DGLD_DB_US_ST_061_Validate_RegisterUser_Checkout_AmexCC_NoTax_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	//	Common.closeAll();
 		
 
 	}
