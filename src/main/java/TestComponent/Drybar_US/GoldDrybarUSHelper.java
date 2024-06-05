@@ -5847,7 +5847,143 @@ Thread.sleep(5000);
 		}
 		
 
-		
+		public void view_PLP_page() {
+			try {
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
+				System.out.println(title);
+				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+						.getAttribute("aria-label");
+				System.out.println(breadcrumbs);
+				String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+				System.out.println(filter);
+				String Sort = Common
+						.findElement("xpath",
+								"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
+						.getText();
+				System.out.println(Sort);
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(
+						breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane") && title.contains("c-clp-hero")
+								&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
+						"To validate the Product Listing Page", "User should able to open Product Listing Page",
+						"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the Product Listing Page",
+						"User should able to open Product Listing Page", "Unable to view the Product Listing Page",
+						Common.getscreenShotPathforReport("Failed to view Product listing Page"));
+
+				Assert.fail();
+			}
+		}
+		public void filter_By(String dataSet) {
+			String category = data.get(dataSet).get("category");
+	try {
+				
+		Thread.sleep(6000);
+				String text = Common.findElement("xpath", "//a[text()='"+category+"']//span").getText();
+				System.out.println(text);
+				Common.clickElement("xpath", "//a[text()='"+category+"']");
+				int textValue = Integer.parseInt(text);
+				String categoryvalue=Integer.toString(textValue);
+				Thread.sleep(6000);
+				String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
+						.getText();
+				int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+				String items=Integer.toString(noOfItems);
+				System.out.println(text);
+				System.out.println(textValueAfterFilter);
+
+			Common.assertionCheckwithReport(categoryvalue.equals(items),
+					"To validate the filter in Product Listing Page",
+					"User should able to filter in Product Listing Page",
+					"Sucessfully filters in the Product Listing Page",
+					"Failed to filter in Product Listing Page");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
+						"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
+						Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
+
+				Assert.fail();
+			}
+		}
+
+		public void price_filter_validation() {
+			// TODO Auto-generated method stub
+	    	String name = "";
+			try {
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "(//button[@class='ais-Panel-collapseButton'])[2]");
+				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
+						.replace("$", "").replace(".00", "");
+				System.out.println(lastvalue);
+				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+				WebElement price = Common.findElement("xpath","//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+				dragprice(price);
+				Thread.sleep(6000);
+				List<WebElement> products = Common.findElements("xpath","//ol[@class='ais-InfiniteHits-list']//img[contains(@class,'m-product')]");
+				for (int i = 0; i < products.size(); i++) {
+					int Size = products.size();
+					System.out.println(Size);
+					Thread.sleep(4000);
+					if (Size == 1) {
+						String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace("$", "");
+						Float namevlaue1 = Float.parseFloat(name1);
+						if (namevlaue1 <= 20) {
+							Thread.sleep(3000);
+							String value1 = Common.findElement("xpath", "//span[@class='price-wrapper']")
+									.getAttribute("data-price-amount");
+							Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
+									"When we select the range of price filters between the range only products should display",
+									"Successfully are displayed in the pricing range",
+									"unable to display the procing range after pricing filter applied");
+						} else {
+							Assert.fail();
+						}
+					} else {
+						List<WebElement> productprice = Common.findElements("xpath",
+								"//span[@class='price-wrapper']//span[@class='price']");
+						Thread.sleep(6000);
+						name = productprice.get(i).getText().replace("$", "");
+						Float namevlaue = Float.parseFloat(name);
+						if (namevlaue <= 20) {
+							Thread.sleep(3000);
+							String value = Common.findElement("xpath", "//span[@class='price-wrapper']")
+									.getAttribute("data-price-amount");
+							Common.assertionCheckwithReport(value.equals(name), "verifying the price filters in PLP page",
+									"When we select the range of price filters between the range only products should display",
+									"Successfully are displayed in the pricing range",
+									"unable to display the procing range after pricing filter applied");
+						} else {
+							Assert.fail();
+						}
+					}
+				}
+			} catch (Exception | Error e) {
+				
+				ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page",
+						"When we select the range of price filters between the range only products should display",
+						"unable to display the procing range after pricing filter applied",
+						Common.getscreenShotPathforReport(
+								"unable to display the procing range after pricing filter applied"));
+				//Assert.fail();
+				e.printStackTrace();
+			}
+
+		}
+		 public void dragprice(WebElement price) {
+	 		try {
+	 			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
+	 					.replace(".00", "");
+	 			System.out.println(lastvalue);
+	 			Thread.sleep(3000);
+	 			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+	 		} catch (Exception | Error e) {
+
+	 		}
+	 	}
 		
 		}	
 
