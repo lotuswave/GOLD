@@ -5448,6 +5448,405 @@ Thread.sleep(5000);
 
 		
 		
+		public void header_Hairproducts(String Dataset) {
+
+			String names = data.get(Dataset).get("Hairproducts");
+			String[] Links = names.split(",");
+			
+			String hair=data.get(Dataset).get("headers");
+			
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
+					Common.clickElement("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(breadcrumbs);
+					System.out.println(Links[i]);
+					Thread.sleep(4000);
+					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					System.out.println(products);
+					int Number = Integer.parseInt(products);
+					int j=0;
+					if(Number>j)
+					{
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) ,
+								"verifying the header link " + Links[i] + "Under Hairproducts",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					else
+					{
+						ExtenantReportUtils.addFailedLog(
+								"validating the the products in the plp ",
+								"User should able to see the products in plp", "unable to see the products in the PLP",
+								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
+					}
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Hairproducts",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+
+		public void header_HairTools(String Dataset) {
+
+			String names = data.get(Dataset).get("Hairtools");
+			String[] Links = names.split(",");
+			String bag=data.get(Dataset).get("headers");
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+						Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
+						Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					System.out.println(title);
+					System.out.println(breadcrumbs);
+					System.out.println(products);
+					
+					int Number = Integer.parseInt(products);
+					int j=0;
+					if(Number>j)
+					{
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+								"verifying the header link " + Links[i] + "Under HairTools",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					else
+					{
+						ExtenantReportUtils.addFailedLog(
+								"validating the the products in the plp ",
+								"User should able to see the products in plp", "unable to see the products in the PLP",
+								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
+					}
+					
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under HairTools",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void header_Brushes(String Dataset) {
+
+			String names = data.get(Dataset).get("Brushes");
+			String[] Links = names.split(",");
+			String bag=data.get(Dataset).get("headers");
+			
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+						Sync.waitElementPresent("xpath", "//span[contains(text(),'"+bag+"')]");
+						Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
+						Common.clickElement("xpath", "//span[contains(text(),' Brushes')]");
+						
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					System.out.println(products);
+					int Number = Integer.parseInt(products);
+					int j=0;
+					if(Number>j)
+					{
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+								"verifying the header link " + Links[i] + "Under Brushes",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					else
+					{
+						ExtenantReportUtils.addFailedLog(
+								"validating the the products in the plp ",
+								"User should able to see the products in plp", "unable to see the products in the PLP",
+								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
+					}
+					
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Brushes",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void header_Benfits(String Dataset) {
+
+			String names = data.get(Dataset).get("Benfits");
+			String[] Links = names.split(",");
+			
+			String benfits=data.get(Dataset).get("headers");
+			
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ benfits +"')])");
+					Common.clickElement("xpath", "(//span[contains(text(),'"+ benfits +"')])");
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(breadcrumbs);
+					System.out.println(Links[i]);
+					Thread.sleep(4000);
+					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					System.out.println(products);
+					int Number = Integer.parseInt(products);
+					int j=0;
+					if(Number>=j)
+					{
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+								"verifying the header link " + Links[i] + "Under Benfits",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					else
+					{
+						ExtenantReportUtils.addFailedLog(
+								"validating the the products in the plp ",
+								"User should able to see the products in plp", "unable to see the products in the PLP",
+								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
+					}
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Benfits",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void header_GiftsSets(String Dataset) {
+
+			String names = data.get(Dataset).get("GiftsSets");
+			String[] Links = names.split(",");
+			
+			String gifts=data.get(Dataset).get("headers");
+			
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ gifts +"')])");
+					Common.clickElement("xpath", "(//span[contains(text(),'"+ gifts +"')])");
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(breadcrumbs);
+					System.out.println(Links[i]);
+					Thread.sleep(4000);
+					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					System.out.println(products);
+					int Number = Integer.parseInt(products);
+					int j=0;
+					if(Number>j)
+					{
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+								"verifying the header link " + Links[i] + "under GiftsSets",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					else
+					{
+						ExtenantReportUtils.addFailedLog(
+								"validating the the products in the plp ",
+								"User should able to see the products in plp", "unable to see the products in the PLP",
+								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
+					}
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "under GiftsSets",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void header_New(String Dataset) {
+
+			String names = data.get(Dataset).get("New");
+			String[] Links = names.split(",");
+			
+			String New=data.get(Dataset).get("headers");
+			
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ New +"')])");
+					Common.clickElement("xpath", "(//span[contains(text(),'"+ New +"')])");
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(breadcrumbs);
+					System.out.println(Links[i]);
+					Thread.sleep(4000);
+					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					System.out.println(products);
+					int Number = Integer.parseInt(products);
+					int j=0;
+					if(Number>j)
+					{
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+								"verifying the header link " + Links[i] + "Under New",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					else
+					{
+						ExtenantReportUtils.addFailedLog(
+								"validating the the products in the plp ",
+								"User should able to see the products in plp", "unable to see the products in the PLP",
+								Common.getscreenShot("Failed to see products in PLP"));
+						Assert.fail();
+					}
+				}
+			}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under New",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+		
+		public void header_HowToInspo(String Dataset) {
+
+			String names = data.get(Dataset).get("Howtoinspo");
+			String[] Links = names.split(",");
+			
+			String inspo=data.get(Dataset).get("headers");
+			
+			int i = 0;
+			try {
+				for (i = 0; i < Links.length; i++) {
+					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ inspo +"')])");
+					Common.clickElement("xpath", "(//span[contains(text(),'"+ inspo +"')])");
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Common.clickElement("xpath",
+							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(4000);
+					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					System.out.println(title);
+					System.out.println(breadcrumbs);
+					System.out.println(Links[i]);
+					Thread.sleep(4000);
+					//String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					//System.out.println(products);
+					
+						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+								"verifying the header link " + Links[i] + "Under HowToInspo",
+								"user should navigate to the " + Links[i] + " page",
+								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+					}
+					
+				}
+		
+			
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under HowToInspo",
+						"User should navigate to the " + Links[i] + "pages",
+						" unable to navigate to the " + Links[i] + "pages",
+						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+				Assert.fail();
+			}
+
+		}
+		
+
 		
 		
 		}	
