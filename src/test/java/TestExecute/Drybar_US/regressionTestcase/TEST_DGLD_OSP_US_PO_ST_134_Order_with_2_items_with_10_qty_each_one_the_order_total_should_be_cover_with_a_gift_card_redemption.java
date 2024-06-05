@@ -44,7 +44,7 @@ public class  TEST_DGLD_OSP_US_PO_ST_134_Order_with_2_items_with_10_qty_each_one
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

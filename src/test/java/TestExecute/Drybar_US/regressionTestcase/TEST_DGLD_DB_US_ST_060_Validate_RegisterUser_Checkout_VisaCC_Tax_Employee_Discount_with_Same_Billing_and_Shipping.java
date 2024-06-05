@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_060_Validate_RegisterUser_Checkout_VisaCC_Tax_Em
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

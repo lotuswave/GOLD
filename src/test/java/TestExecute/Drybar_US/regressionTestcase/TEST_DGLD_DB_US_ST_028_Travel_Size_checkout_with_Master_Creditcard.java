@@ -38,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_028_Travel_Size_checkout_with_Master_Creditcard 
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

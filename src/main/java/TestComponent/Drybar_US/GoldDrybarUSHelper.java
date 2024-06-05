@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -5296,6 +5297,159 @@ Thread.sleep(5000);
 				Assert.fail();
 			}
 		}
+		
+		public void Sort_By(String Dataset) throws InterruptedException {
+			// TODO Auto-generated method stub
+			String symbol = data.get(Dataset).get("Price_Symbol");
+			String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
+			System.out.println(PriceFilter);
+			System.out.println(symbol);
+			try {
+				Sync.waitPageLoad();
+
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath",
+						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+
+				List<WebElement> BeforeFilterprice = Common.findElements("xpath",
+						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+				List<String> Beforefilterpricelist = new ArrayList<String>();
+
+				for (WebElement p : BeforeFilterprice) {
+					Beforefilterpricelist.add(p.getText().replace(symbol, " "));
+					System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
+				}
+				Thread.sleep(4000);
+				Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.TEXT,
+						PriceFilter);
+				
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath",
+						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+				List<WebElement> AfterFilterprice = Common.findElements("xpath",
+						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+				List<String> Afterfilterpricelist = new ArrayList<String>();
+
+				for (WebElement p : AfterFilterprice) {
+					Afterfilterpricelist.add(p.getText().replace(symbol, " "));
+					System.out.println("Afterfilterpricelist" + Afterfilterpricelist);
+				}
+
+				if (PriceFilter.equals("Highest price")) {
+					Collections.sort(Beforefilterpricelist);
+					System.out.println("Beforefilterpricelist Highest " + Beforefilterpricelist);
+					Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+							"To validate the Sort in Product Listing Page",
+							"User should able to Sort in Product Listing Page",
+							"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+				} else {
+					if (PriceFilter.equals("Lowest price")) {
+						Collections.sort(Beforefilterpricelist, Collections.reverseOrder());
+						System.out.println("Beforefilterpricelist Lowest" + Beforefilterpricelist);
+						Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+								"To validate the Sort in Product Listing Page",
+								"User should able to Sort in Product Listing Page",
+								"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+					}
+
+				}
+				Thread.sleep(2000);
+			} catch (NumberFormatException | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the Sort by functionality",
+						"Products should be display as per selected sort option ",
+						" Unable to display the Products as per selected sort option",
+						Common.getscreenShot("Failed to sort_by"));
+				Assert.fail();
+			}
+
+		}
+
+		public void Filter() throws InterruptedException {
+			// TODO Auto-generated method stub
+			try {
+
+				Common.scrollIntoView("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
+				Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
+				Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
+				Sync.waitElementPresent("xpath", "//label[@for='facet_drybar_hair_type_all_hair_types']");
+				Common.clickElement("xpath", "//label[@for='facet_drybar_hair_type_all_hair_types']");
+				Thread.sleep(4000);
+				String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
+				System.out.println(SelectedFilter);
+				System.out.println("SelectedFilter:" + SelectedFilter);
+				String RetrivedValue = "hot_toddy";
+				if (SelectedFilter.equals("All Hair Types")) {
+
+					List<WebElement> Series_Filters = Common.findElements("xpath",
+							"(//div[@class='m-product-card__image-wrapper']//a//img)[1]");
+
+					for (WebElement Filter : Series_Filters) {
+						// System.out.println(Filter);
+						String AttributeValue = Filter.getAttribute("src");
+
+						if (AttributeValue.contains(RetrivedValue)) {
+
+							System.out.println("Attribute '" + AttributeValue + "' contains the text '" + RetrivedValue
+									+ "' for product: " + AttributeValue);
+
+						} else {
+
+							System.out.println("Attribute '" + AttributeValue + "' does not contain the text '"
+									+ RetrivedValue + "' for product: " + AttributeValue);
+							Assert.fail();
+						}
+					}
+				}
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the Filter functionality",
+						"Products should be display as per selected Filter option ",
+						" Unable to display the Products as per selected Filter option",
+						Common.getscreenShot("Failed to Filter"));
+				Assert.fail();
+			}
+		}
+		
+		public void Invalid_search_product(String Dataset) {
+			// TODO Auto-generated method stub
+			String invalidproduct = data.get(Dataset).get("Products");
+			System.out.println(invalidproduct);
+			try {
+			Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
+				String open = Common.findElement("xpath", "//input[contains(@class,'aa-Input input-text algolia-search')]").getAttribute("class");
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(open.contains("algolia-search-input"), "User searches using the search field",
+						"User should able to click on the search button", "Search expands to the full page",
+						"Sucessfully search bar should be expand");
+				Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']",
+						data.get(Dataset).get("Products"));
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+				String searchproduct=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getAttribute("class");
+				System.out.println(searchproduct);
+				System.out.println(productsearch);
+				Common.assertionCheckwithReport(productsearch.contains("Sorry, your search for") || searchproduct.contains("no-results"),
+						"validating the search functionality", "enter Invalid product name will display in the search box",
+						"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
+				Thread.sleep(8000);
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the search functionality",
+						"enter Invalid product name will display in the search box",
+						" unable to enter the Invalid product name in  search box",
+						Common.getscreenShot("Failed to see the Invalid product name"));
+				Assert.fail();
+			}
+		}
+
+		
+		
+		
+		
 		}	
 
 
