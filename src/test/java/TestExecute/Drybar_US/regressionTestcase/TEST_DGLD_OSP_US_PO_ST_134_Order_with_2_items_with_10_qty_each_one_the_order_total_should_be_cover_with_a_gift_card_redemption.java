@@ -15,14 +15,14 @@ public class  TEST_DGLD_OSP_US_PO_ST_134_Order_with_2_items_with_10_qty_each_one
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void TEST_DGLD_OSP_US_PO_ST_134_Order_with_2_items_with_10_qty_each_one_the_order_total_should_be_cover_with_a_gift_card_redemption () throws Exception {
+	public void Validate_Order_with_2_items_with_10_qty_each_one_the_order_total_should_be_cover_with_a_gift_card_redemption () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			String Price= Drybar.Store_Credit_balance();
+		    Drybar.Store_Credit_balance();
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("10 qty product");
 			Drybar.search_product("Product");  

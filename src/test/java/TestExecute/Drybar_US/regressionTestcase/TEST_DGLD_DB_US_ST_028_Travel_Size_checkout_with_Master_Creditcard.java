@@ -15,13 +15,12 @@ public class TEST_DGLD_DB_US_ST_028_Travel_Size_checkout_with_Master_Creditcard 
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void TEST_DGLD_DB_US_ST_028_Travel_Size_checkout_with_Master_Creditcard () throws Exception {
+	public void Validate_Travel_Size_checkout_with_Master_Creditcard () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage(); 
-			Drybar.Travel_Sizesearch_product("Travel_SizeProduct");
-			
+			Drybar.Travel_Sizesearch_product("Travel_SizeProduct");	
 			Drybar.addtocartTravel_Sizesearch("Travel_SizeProduct");
 			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("Address");
