@@ -4172,9 +4172,30 @@ Thread.sleep(5000);
 				String Storefront_Text = "Communication Preferences";
 
 				Assert.assertEquals(Communication, Storefront_Text);
-
-				Common.clickCheckBox("xpath", "//span[text()='General Subscription']");
-				Common.clickElement("xpath", "//span[text()='Save']");
+				System.out.println(Communication);
+				System.out.println(Storefront_Text);
+				
+				
+				WebElement checkBox = Common.findElement("xpath", "//input[@id='subscription']");
+				WebElement Save = Common.findElement("xpath", "//span[text()='Save']");
+                
+				if(checkBox.isSelected())
+				{
+					
+					System.out.println("Checkbox is Selected");
+					Common.clickElement("xpath", "//label[@for='subscription']");
+					Save.click();
+				}
+				
+				else {
+					
+					System.out.println("Checkbox is Not-Selected");
+					Common.clickElement("xpath", "//label[@for='subscription']");	
+				
+				}
+				
+				Save.click();
+				
 		  
 		    		} catch (Exception | Error e) {
 		    			e.printStackTrace();
