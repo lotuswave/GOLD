@@ -1422,6 +1422,7 @@ public class GoldDrybarUSHelper {
 			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
 			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
 			if(Common.findElement("xpath", "//select[@name='billing_address_id']").getAttribute("id").contains("billing-address-id"))
