@@ -415,7 +415,6 @@ public class GoldDrybarUSHelper {
 
 	}
 	
-	
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
