@@ -6194,12 +6194,12 @@ Thread.sleep(5000);
 	    		// TODO Auto-generated method stub
 	    		try {
 	    			Thread.sleep(2000);
-	    			if(Common.getCurrentURL().contains("preprod")&&Common.getCurrentURL().contains("stage") )
+	    			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 	    			{
 	    				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-	    				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favourites']");
-	    				Common.clickElement("xpath", "//a[text()='My Favourites']");
-	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favourites"),
+	    				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
+	    				Common.clickElement("xpath", "//a[text()='My Favorites']");
+	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 	    						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
