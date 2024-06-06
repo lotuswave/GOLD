@@ -2041,6 +2041,7 @@ public class GoldDrybarUSHelper {
 			String size=Common.findElement("xpath", "//span[contains(@class,'m-swatch-group__header s')]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
+			System.out.println(size1);
 			Common.assertionCheckwithReport(
 					size.equals(size1),
 					"Verifying the the size of the product is selected in the PDP",
