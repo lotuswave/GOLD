@@ -42,7 +42,7 @@ public class TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User 
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}
