@@ -1423,12 +1423,12 @@ public class GoldDrybarUSHelper {
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
-			if(Common.findElement("xpath", "//select[@name='billing_address_id']").getAttribute("id").contains("billing-address-id"))
+			Sync.waitElementPresent(30, "xpath", "//input[@id='billing-address-same-as-shipping-stripe_payments']");
+			Common.clickElement("xpath", "//input[@id='billing-address-same-as-shipping-stripe_payments']");
+			if(Common.findElement("xpath", "(//select[@name='billing_address_id'])[3]").getAttribute("id").contains("billing-address-id"))
 			{
-				Sync.waitElementPresent("xpath", "//select[@name='billing_address_id']");
-				Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT,"New Address");
+				Sync.waitElementPresent("xpath", "(//select[@name='billing_address_id'])[3]");
+				Common.dropdown("xpath", "(//select[@name='billing_address_id'])[3]", Common.SelectBy.TEXT,"New Address");
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
