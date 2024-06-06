@@ -60,12 +60,12 @@ public class GoldDrybarUSHelper {
 		{
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Close_Geolocation();
+//			Close_Geolocation();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Drybar")
-							|| Common.getPageTitle().contains("Home Drybar"),
+							|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home"),
 					"validating store logo", "System directs the user to the Homepage",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		}
@@ -111,7 +111,7 @@ public class GoldDrybarUSHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Home Drybar"),
+					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -658,10 +658,11 @@ public class GoldDrybarUSHelper {
 	
 	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		String address = data.get(dataSet).get("Street");
+		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
 			Thread.sleep(5000);
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage3")) {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 			} else {
@@ -693,18 +694,45 @@ public class GoldDrybarUSHelper {
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			  if(Common.getCurrentURL().contains("gb"))
+              {
+				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+              }
+			  else
+			  {
+				
+				Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                Thread.sleep(3000);
+                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                        .getAttribute("value");
+                System.out.println(Shippingvalue);
 			}
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
-
+	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			
+			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+			System.out.println(subtotal);
+			subtotal = subtotal.trim();
+			subtotal = subtotal.substring(0,subtotal.length() - 2);
+		    System.out.println(subtotal);  
+			int amount=Integer.parseInt(subtotal);
+			System.out.println(amount);
+			if(amount>199 && symbol.equals("$"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			}
+			else
+			{
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			}
 
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
