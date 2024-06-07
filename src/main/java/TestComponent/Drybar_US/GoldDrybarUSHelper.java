@@ -60,7 +60,7 @@ public class GoldDrybarUSHelper {
 		{
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-//			Close_Geolocation();
+			Close_Geolocation();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -83,10 +83,15 @@ public class GoldDrybarUSHelper {
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
 		try {
-			
+			if (Common.getCurrentURL().contains("/gb"))
+			{
+				System.out.println(Common.getCurrentURL());
+			}
+			else
+			{
 			Sync.waitElementPresent("xpath", "(//button[@data-role='closeBtn'])[5]");
 			Common.clickElement("xpath", "(//button[@data-role='closeBtn'])[5]");
-			
+			}
 		
 	}catch(Exception | Error e)
 	{
