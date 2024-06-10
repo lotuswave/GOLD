@@ -253,6 +253,7 @@ public class GoldDrybarUSHelper {
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
+			System.out.println(sizebotteles);
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
 					"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
@@ -3994,7 +3995,7 @@ Thread.sleep(5000);
     		try {
     			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
     			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-    			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
+    			Common.clickElement("xpath", "//ul[@id='desktop-account-nav']//a[text()='Create an Account']");
     			Sync.waitPageLoad();
     			Thread.sleep(5000);
     			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
@@ -6560,10 +6561,9 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                             	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                             	System.out.println(frameid);
                             	Thread.sleep(4000);
-                            	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-                              	Thread.sleep(6000);
+//                            	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
                        		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-                       		Thread.sleep(6000);
+                       		Thread.sleep(4000);
                            	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
                            	Common.switchToDefault();
                            	Common.switchToDefault();
