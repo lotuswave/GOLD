@@ -4013,63 +4013,42 @@ Thread.sleep(5000);
     		}
     	}
         public String create_account(String Dataset) {
-    		String email1 = "";
+        	String email = "";
+    		String Store= data.get(Dataset).get("Store");
     		try {
-    			Common.refreshpage();
-    			Sync.waitPageLoad();
-    			Thread.sleep(4000);
-    			Sync.waitElementPresent(30, "xpath", "//input[@name='firstname']");
-    			Common.clickElement("xpath", "//input[@name='firstname']");
+
     			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-    			Common.clickElement("xpath", "//input[@name='lastname']");
-    			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-    			Common.clickElement("xpath", "//input[@name='email']");
-    			
-    			
-    			String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
-    			Common.textBoxInput("xpath", "//input[@name='email']", email);
-    			
-//    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-    			email1 = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-    			
-    		
-    			System.out.println(email);
-    			Common.clickElement("xpath", "//input[@name='password']");
+    			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+    			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-    			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
-    			Common.clickElement("xpath", "//input[@name='password_confirmation']");
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
     					data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
-    			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
-    			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
-    			Sync.waitPageLoad();
-    			Thread.sleep(4000);
-    			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-    			String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
-    			Thread.sleep(5000);
-    			System.out.println(Common.getPageTitle());
+    			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
+    			Sync.waitImplicit(30);
+    			Thread.sleep(6000);
+    			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+    			System.out.println(message);
     			Common.assertionCheckwithReport(
-    					Common.getPageTitle().equals("My Account")
-    							&& message.contains("Thank you for registering"),
-    					"validating the  My Favorites page Navigation when user clicks on signin button",
-    					"User should able to navigate to the My Favorites page after clicking on Signin button",
-    					"Sucessfully navigate to the My Favorites page after clicking on signin button ",
-    					"Failed to navigates to My Favorites Page after clicking on Signin button");
-    		}
+    					message.contains("Thank you for registering with Osprey")
+    							&& Common.getCurrentURL().contains("account") ,
+    					"validating navigation to the account page after clicking on sign up button",
+    					"User should navigate to the My account page after clicking on the Signup",
+    					"Sucessfully user navigates to the My account page after clickng on thr signup button",
+    					"Failed to navigate to the My account page after clicking on the signup button");
 
-    		catch (Exception | Error e) {
+    		} catch (Exception | Error e) {
     			e.printStackTrace();
     			ExtenantReportUtils.addFailedLog(
-    					"validating the  my Account page Navigation when user clicks on signin button",
-    					"User should able to navigate to the my account page after clicking on Signin button",
-    					"Unable to navigate to the My account page after clicking on signin button ",
-    					Common.getscreenShot("Failed to navigates to My Account Page after clicking on Signin button"));
+    					"validating navigation to the account page after clicking on sign up button",
+    					"User should navigate to the My account page after clicking on the Signup",
+    					"Unable to navigate to the My account page after clicking on the signup button",
+    					"Failed to navigate to the My account page after clicking on the signup button");
     			Assert.fail();
-
     		}
-    		return email1;
-    	}
+    		return email;
+        }
         public void discountCode(String dataSet) throws Exception {
     		String expectedResult = "It should opens textbox input to enter discount.";
 
