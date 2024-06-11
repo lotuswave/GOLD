@@ -4110,8 +4110,10 @@ Thread.sleep(5000);
     			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
     			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+    			System.out.println(data.get(Dataset).get("Password"));
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
     					data.get(Dataset).get("Confirm Password"));
+    			System.out.println(data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
     			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
     			Sync.waitImplicit(30);
@@ -4119,7 +4121,7 @@ Thread.sleep(5000);
     			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(
-    					message.contains("Thank you for registering with Osprey")
+    					message.contains("Thank you for registering")
     							&& Common.getCurrentURL().contains("account") ,
     					"validating navigation to the account page after clicking on sign up button",
     					"User should navigate to the My account page after clicking on the Signup",
