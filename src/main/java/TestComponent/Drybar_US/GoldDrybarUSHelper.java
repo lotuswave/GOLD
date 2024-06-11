@@ -895,6 +895,56 @@ public class GoldDrybarUSHelper {
 		}
 		return order;
 	}
+	
+	public void My_Orders_Page(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try {
+			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Orders"),
+					"validating the Navigation to the My Orders page",
+					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
+					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
+					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
+			String Ordernumber = Common.findElement("xpath", "(//div[@class='order-data order-data__info']//a)[1]")
+					.getText();
+			System.out.println(Ordernumber);
+			System.out.println(Dataset);
+			Common.assertionCheckwithReport(Ordernumber.equals(Dataset),
+					"validating the Order Number in My Myorders page",
+					"Order Number should be display in the MY Order page",
+					"Sucessfully Order Number is displayed in the My orders page",
+					"Failed to Display My order Number in the My orders page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Order Number in My Myorders page",
+					"Order Number should be display in the MY Order page",
+					"Unable to Display the Order Number in the My orders page",
+					Common.getscreenShot("Failed to Display My order Number in the My orders page"));
+			Assert.fail();
+		}
+	}
 
 	
 	public String addPaymentDetails(String dataSet) throws Exception {
