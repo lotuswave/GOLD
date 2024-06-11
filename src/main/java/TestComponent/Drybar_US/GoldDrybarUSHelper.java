@@ -2744,6 +2744,7 @@ public class GoldDrybarUSHelper {
 			Thread.sleep(6000);
 			Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
 			Common.clickElement("xpath", "//span[text()='Create New Registry']");
+			Thread.sleep(4000);
 			Common.clickElement("id", "submit.next");
 			String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
 			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
