@@ -277,10 +277,12 @@ public class GoldDrybarUSHelper {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
 
-		int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
+		String firstname = data.get(dataSet).get("FirstName");
+		System.out.println(firstname);
+		int size = Common.findElements(By.xpath("//div[@class='new-address-popup']//button")).size();
 		if (size > 0) {
 			try {
-				Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
+				Common.clickElement("xpath", "//div[@class='new-address-popup']//button");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -306,32 +308,32 @@ public class GoldDrybarUSHelper {
 				if (data.get(dataSet).get("StreetLine3") != null) {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
+				  if(Common.getCurrentURL().contains("gb"))
+	                {
+					  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+						   Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+						Thread.sleep(3000);
+						String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
+								.getAttribute("value");
+						System.out.println(Shippingvalue);
+	                }
+				else
+				{
+					
+					Thread.sleep(4000);
+                    Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                    Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                    Thread.sleep(3000);
+                    String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                            .getAttribute("value");
+                    System.out.println(Shippingvalue);
+				
+				}
 
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
-						data.get(dataSet).get("Region"));
-				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
-				String Shippingstate = Common
-						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
-						.getText();
-
-				System.out.println(Shippingstate);
-
-				Common.actionsKeyPress(Keys.PAGE_DOWN);
+//				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
-
-				try {
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-
-					Thread.sleep(2000);
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
@@ -386,14 +388,27 @@ public class GoldDrybarUSHelper {
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
-				try {
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-					Thread.sleep(3000);
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-				}
+				if(Common.getCurrentURL().contains("gb"))
+                {
+				  Thread.sleep(4000);
+                    Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+        			Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+        			
+        			Thread.sleep(3000);
+        			String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
+        					.getAttribute("value");
+        			System.out.println(Shippingvalue);
+                }
+			else
+			{
+				  Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                  Thread.sleep(3000);
+                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                          .getAttribute("value");
+                  System.out.println(Shippingvalue);
+			}
+				
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
