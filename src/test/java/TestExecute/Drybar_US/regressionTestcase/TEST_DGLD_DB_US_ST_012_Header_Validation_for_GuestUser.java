@@ -17,7 +17,7 @@ public class TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser {
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Header");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser () throws Exception {
+	public void Header_Validation_for_GuestUser () throws Exception {
 
 		try {
 		
