@@ -44,8 +44,9 @@ public class TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Stand
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
+		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
+        Drybar.close_add();
         
 
 	}
