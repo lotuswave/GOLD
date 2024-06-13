@@ -26,7 +26,7 @@ public class TEST_DGLD_DB_US_ST_171_Register_user_Store_Credit_Checkout_Partial_
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("Account");
+			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("Express method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Apply_Store_Credit(Price);
@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_171_Register_user_Store_Credit_Checkout_Partial_
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
