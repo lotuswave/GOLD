@@ -6963,7 +6963,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                 	   {
                 		   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                           	System.out.println(frameid);
-                //          	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                          	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
                      		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
                      		Thread.sleep(4000);
                          	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
@@ -6973,6 +6973,11 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                         	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
                         String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
                         System.out.println(errormessage);
+                        Common.assertionCheckwithReport(errormessage.contains("declined"),
+            					"To validate the invalid card details entered in the production environment",
+            					"user should able to see the invalid card details in the production environment",
+            					"User Successfully able to see declained error ",
+            					"User Failed to see the declained error");
                 	   }                    	
                 	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
                 	   {
@@ -6981,6 +6986,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                    		Thread.sleep(5000);
                    		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                        	Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                       	Thread.sleep(7000);
                        	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                        	System.out.println(frameid);
                        	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
@@ -6993,6 +6999,11 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                     	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
                     String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
                     System.out.println(errormessage);
+                    Common.assertionCheckwithReport(errormessage.contains("declined"),
+        					"To validate the invalid card details entered in the production environment",
+        					"user should able to see the invalid card details in the production environment",
+        					"User Successfully able to see declained error ",
+        					"User Failed to see the declained error");
                 	   }
                 	   else
                 	   {
@@ -7012,11 +7023,12 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                         		Thread.sleep(5000);
                         		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                             	Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                            	Thread.sleep(7000);
                             	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                             	System.out.println(frameid);
                             	Thread.sleep(4000);
-                            //	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-                       		Common.switchFrames("xpath", "//*[@id=\"challengeFrame\"]");
+                         	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                       		Common.switchFrames("xpath", "//*[@id='challengeFrame']");
                        		Thread.sleep(4000);
                            	Common.clickElement("xpath", "//button[contains(text(),' Complete')]");
                            	Common.switchToDefault();
@@ -7025,14 +7037,20 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                         	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
                         String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
                         System.out.println(errormessage);
+                        Common.assertionCheckwithReport(errormessage.contains("declined"),
+            					"To validate the invalid card details entered in the production environment",
+            					"user should able to see the invalid card details in the production environment",
+            					"User Successfully able to see declained error ",
+            					"User Failed to see the declained error");
                 	   }                    	
                 	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
                 	   {
+                		   Thread.sleep(7000);
                 		   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                          	System.out.println(frameid);
-                          	Thread.sleep(4000);
+                          
                          	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-                         	Thread.sleep(4000);
+                         
                     		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
                     		Thread.sleep(4000);
                         	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
@@ -7042,6 +7060,11 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                         	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
                         String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
                         System.out.println(errormessage);
+                        Common.assertionCheckwithReport(errormessage.contains("declined"),
+            					"To validate the invalid card details entered in the production environment",
+            					"user should able to see the invalid card details in the production environment",
+            					"User Successfully able to see declained error ",
+            					"User Failed to see the declained error");
                 	   }
                 	   else
                 	   {
@@ -7099,6 +7122,11 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
             	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
             String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
             System.out.println(errormessage);
+            Common.assertionCheckwithReport(errormessage.contains("declined"),
+					"To validate the invalid card details entered in the production environment",
+					"user should able to see the invalid card details in the production environment",
+					"User Successfully able to see declained error ",
+					"User Failed to see the declained error");
                  }
                  else
                  {
@@ -7117,6 +7145,11 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
             	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
             String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
             System.out.println(errormessage);
+            Common.assertionCheckwithReport(errormessage.contains("declined"),
+					"To validate the invalid card details entered in the production environment",
+					"user should able to see the invalid card details in the production environment",
+					"User Successfully able to see declained error ",
+					"User Failed to see the declained error");
                  }
 		
 			} else {
@@ -7146,12 +7179,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 		Assert.fail();
 	}
 
-	expectedResult = "credit card fields are filled with the data";
-	String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-
-	Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
-			expectedResult, "Filled the Card detiles", "missing field data it showinng error");
-
+	
 	
 }
 

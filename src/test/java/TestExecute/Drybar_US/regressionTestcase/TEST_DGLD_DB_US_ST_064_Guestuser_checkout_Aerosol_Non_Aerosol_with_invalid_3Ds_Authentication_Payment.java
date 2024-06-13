@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_065_Registeruser_checkout_Aerosol_Non_Aerosol_with_invalid_3Ds_Authentication_Payment {
+public class TEST_DGLD_DB_US_ST_064_Guestuser_checkout_Aerosol_Non_Aerosol_with_invalid_3Ds_Authentication_Payment {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
@@ -20,14 +20,12 @@ public class TEST_DGLD_DB_US_ST_065_Registeruser_checkout_Aerosol_Non_Aerosol_wi
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.login_Drybar("AccountDetails");
 			Drybar.search_product("Aerosol");  
 			Drybar.addtocart("Aerosol");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Invalid_ThreedPaymentDetails("invalid_3D_Secure");
