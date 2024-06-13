@@ -569,6 +569,74 @@ public class GoldDrybarUSHelper {
 	}
 
 	
+	
+	
+	public void	subcribe_product_Add_to_Cart (String Dataset) {
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		String save=data.get(Dataset).get("SubscribeSave");
+		System.out.println(save);
+		try
+		{
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[contains(@class,'m-product-card__image')]");
+
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
+
+				} else {
+					break;
+				}
+			}
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+			product_quantity(Dataset);
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-1']");
+			Common.clickElement("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-1']");
+			Thread.sleep(2000);
+		     Sync.waitElementPresent("xpath", "//select[@class='aw-sarp2-subscription__options-list']");
+			Common.dropdown("xpath", "//select[@class='aw-sarp2-subscription__options-list']", Common.SelectBy.TEXT, save);
+			Thread.sleep(4000);
+			String drop=Common.findElement("xpath", "//select[@class='aw-sarp2-subscription__options-list']//option[text()='"+ save +"']").getText();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(drop.contains(save), "To ensure that selected text has selected in the product subcription dropdown",
+					"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
+					"failed to select the text from the dropdown");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//			.getAttribute("data-ui-id");
+//	System.out.println(message);
+//	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//			"Product should be add to cart", "Sucessfully product added to the cart ",
+//			"failed to add product to the cart");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+	
+}
+	
 	public void product_quantity(String Dataset) {
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
@@ -7216,6 +7284,34 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			Assert.fail();
 		}
 	}
+}
+
+public void subcription_Profile() {
+	// TODO Auto-generated method stub
+	try
+	{
+		String profile=Common.findElement("xpath", "//p[contains(text(),'Your subscription profile is:')]//a//strong").getText();
+		System.out.println(profile);
+		Common.clickElement("xpath", "//p[contains(text(),'Your subscription profile is:')]//a//strong");
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath", "//h1[@class='aw-sarp2__title']");
+		String subscription=Common.findElement("xpath", "//h1[@class='aw-sarp2__title']").getText().replace("Subscription Profile #", "");
+		System.out.println(subscription);
+		Common.assertionCheckwithReport(
+				subscription.equals(profile),
+				"To ensure that subcription number is displaying in My subcriptions",
+				"number should be displayed in the my subcriptions page ","Sucessfully Number is displayed in the subscription page",
+				"Failed to dispaly the profile number in the subscription page");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To ensure that subcription number is displaying in My subcriptions",
+				"number should be displayed in the my subcriptions page ","Unable to dispaly the profile number in the subscription page",
+				Common.getscreenShotPathforReport("Failed to dispaly the profile number in the subscription page"));
+		Assert.fail();
+	}
+	
 }
 
 
