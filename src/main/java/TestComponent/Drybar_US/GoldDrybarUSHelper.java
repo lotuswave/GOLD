@@ -4911,12 +4911,12 @@ Thread.sleep(5000);
 				Common.clickElement("xpath", "//span[text()='Update']");
 				//Sync.waitPageLoad();
 				Thread.sleep(4000);
-				//Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 				Thread.sleep(5000);
-				update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[3]").getText();
+				update = Common.findElement("xpath", "//li[@class='opc-progress-bar-item _complete']//span[text()='Shipping']").getText();
 				System.out.println("update"+update);
 				Common.assertionCheckwithReport(
-						update.equals(Shipping),
+						update.contains(Shipping),
 						"verifying the Billing address form in payment page",
 						"Billing address should be saved in the payment page",
 						"Sucessfully Billing address form should be Display ",
@@ -7337,6 +7337,48 @@ public void subcription_Profile() {
 		ExtenantReportUtils.addFailedLog("To ensure that subcription number is displaying in My subcriptions",
 				"number should be displayed in the my subcriptions page ","Unable to dispaly the profile number in the subscription page",
 				Common.getscreenShotPathforReport("Failed to dispaly the profile number in the subscription page"));
+		Assert.fail();
+	}
+	
+}
+
+public void Tax_validation_Paymentpage() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("£","");
+		Float subtotalvalue = Float.parseFloat(Subtotal);
+		System.out.println("subtotalvalue");
+		String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']").replace("£", "");
+		Float shippingvalue = Float.parseFloat(shipping);
+		String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("£", "");
+		Float Taxvalue = Float.parseFloat(Tax);
+		Thread.sleep(4000);
+
+		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				.replace("£", "");
+		Float ordertotalvalue = Float.parseFloat(ordertotal);
+		Thread.sleep(4000);
+		Float Total = (subtotalvalue + shippingvalue );
+		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		Thread.sleep(4000);
+		System.out.println(ExpectedTotalAmmount2);
+		System.out.println(ordertotal);
+		Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+				"validating the Tax on the payment page",
+				"On the order summary tax should be display on the payment page",
+				"Successfully Tax should be display in the order summary",
+				"Failed to display the tax on the order summary");
+
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Tax on the payment page",
+				"On the order summary tax should be display on the payment page",
+				"Unable to display the tax on the order summaryy",
+				Common.getscreenShotPathforReport("Failed to display the tax on the order summary"));
 		Assert.fail();
 	}
 	
