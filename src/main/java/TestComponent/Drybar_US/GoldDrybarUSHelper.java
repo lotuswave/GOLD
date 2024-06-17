@@ -7344,7 +7344,7 @@ public void subcription_Profile() {
 
 public void Tax_validation_Paymentpage() {
 	// TODO Auto-generated method stub
-	
+	  
 	try
 	{
 		String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("£","");
