@@ -4325,7 +4325,7 @@ Thread.sleep(5000);
     			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
     					"User failed to proceed with discountcode",
     					Common.getscreenShotPathforReport("discountcodefailed"));
-
+                e.printStackTrace();
     			Assert.fail();
 
     		}
@@ -7384,7 +7384,79 @@ public void Tax_validation_Paymentpage() {
 	
 }
 
+public void DiscountCode(String dataSet) throws Exception {
+	String expectedResult = "It should opens textbox input to enter discount.";
 
+	try {
+
+		Sync.waitElementClickable("id", "block-discount-heading");
+		Common.clickElement("id", "block-discount-heading");
+		if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+			Sync.waitElementPresent("id", "discount-code");
+
+			Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+		} else {
+			Sync.waitElementPresent("id", "discount-code");
+
+			Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
+		}
+
+		int size = Common.findElements("id", "discount-code").size();
+		Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+				"Successfully open the discount input box", "User unable enter Discount Code");
+		Sync.waitElementClickable("xpath", "//span[text()='Apply Code']");
+		Common.clickElement("xpath", "//span[text()='Apply Code']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+		expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+		String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+		System.out.println(discountcodemsg);
+		Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+				"verifying pomocode", expectedResult, "promotion code working as expected",
+				"Promation code is not applied");
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
+		String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("£",
+				"");
+		Float subtotalvalue = Float.parseFloat(Subtotal);
+		String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
+				.replace("£", "");
+		Float shippingvalue = Float.parseFloat(shipping);
+		String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("£", "");
+		Float Taxvalue = Float.parseFloat(Tax);
+		Thread.sleep(4000);
+		String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
+				.replace("£", "");
+		Float Discountvalue = Float.parseFloat(Discount);
+		System.out.println(Discountvalue);
+
+		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				.replace("£", "");
+		Float ordertotalvalue = Float.parseFloat(ordertotal);
+		Thread.sleep(4000);
+		Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
+		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+		Thread.sleep(4000);
+		System.out.println(ExpectedTotalAmmount2);
+		System.out.println(ordertotal);
+		Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+				"validating the order summary in the payment page",
+				"Order summary should be display in the payment page and all fields should display",
+				"Successfully Order summary is displayed in the payment page and fields are displayed",
+				"Failed to display the order summary and fileds under order summary");
+
+	}
+
+	catch (Exception | Error e) {
+		ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+				"User failed to proceed with discountcode",
+				Common.getscreenShotPathforReport("discountcodefailed"));
+        e.printStackTrace();
+		Assert.fail();
+
+	}
+}
 		}	
 
 
