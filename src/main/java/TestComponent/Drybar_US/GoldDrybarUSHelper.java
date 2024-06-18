@@ -6702,11 +6702,19 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                 	   Thread.sleep(8000);
                 	   if(Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart')]").contains("Please enter your card's security code."))
                 	   {
-                		   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+                  		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+                  		Thread.sleep(5000);
+                  		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+                      	Common.clickElement("xpath", "//button[@class='action primary checkout']");
+                      	Thread.sleep(4000);
+                      	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                           	System.out.println(frameid);
+                        	Thread.sleep(8000);
                           	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+                          	Thread.sleep(5000);
                      		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-                     		Thread.sleep(4000);
+                     		Thread.sleep(5000);
                          	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
                          	Common.switchToDefault();
                          	Common.switchToDefault();
