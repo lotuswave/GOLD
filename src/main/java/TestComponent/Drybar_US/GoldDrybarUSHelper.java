@@ -6694,8 +6694,8 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                    if(Common.getCurrentURL().contains("/gb"))
                    {
                 	   Thread.sleep(5000);
-                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
-                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
+//                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
+//                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
                 	   
                 	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                 	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
@@ -6713,11 +6713,11 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                 	   }                    	
                 	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
                 	   {
-                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-                   		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-                   		Thread.sleep(5000);
-                   		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-                       	Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+//                   		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+//                   		Thread.sleep(5000);
+//                   		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+//                       	Common.clickElement("xpath", "//button[@class='action primary checkout']");
                        	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                        	System.out.println(frameid);
                        	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
