@@ -7522,7 +7522,74 @@ public void DiscountCode(String dataSet) throws Exception {
 
 	}
 }
-		}	
+
+public void Share_WishList(String dataSet) {
+	// TODO Auto-generated method stub
+	
+		try
+		{
+			Thread.sleep(2000);
+		//Sync.waitElementPresent("xpath", "(//a[text()='here'])");
+		//Common.clickElement("xpath", "(//a[text()='here'])");
+		Thread.sleep(1000);
+		Common.scrollIntoView("xpath", "(//span[@class='a-btn-tertiary__icon icon-customizer__download'])[1]");
+		Common.clickElement("xpath", "(//span[@class='a-btn-tertiary__icon icon-customizer__download'])[1]");
+		
+		Common.textBoxInput("xpath", "(//textarea[@id='email_address'])",data.get(dataSet).get("Email"));
+		Common.textBoxInput("xpath", "(//textarea[@id='message'])",data.get(dataSet).get("message"));
+		Common.clickElement("xpath", "(//span[text()='Share Wish List'])");
+		
+		//Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+		Thread.sleep(4000);
+		String message = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+		System.out.println(message);
+		
+		String message1 = Common.findElement("xpath", "//div[@class='message-success success message a-message a-message--success undefined']").getText();
+		System.out.println(message1);
+		Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+				"validating the shared whishlist functionality",
+				"sucess message should display after share whishlist",
+				"Sucessfully message has been displayed for whishlist",
+				"failed to display the message for whishlist");
+	
+}
+             catch(Exception | Error e)
+            {
+	         e.printStackTrace();
+	         ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
+			                                   "sucess message should display after share whishlist",
+			                                     "Unable to display the message for whishlist", Common.getscreenShot("Failed to display the message for whishlist"));
+	         Assert.fail();
+
+		}
+}
+
+public void Add_product_to_Wishlist() {
+	// TODO Auto-generated method stub
+	try {
+        Thread.sleep(4000);
+        Sync.waitElementPresent("xpath", "//span[text()='Add to Favorites']");
+        Common.clickElement("xpath", "//span[text()='Add to Favorites']");
+        Thread.sleep(5000);
+        int message=Common.findElements("xpath", "(//div[@class='message-success success message'])").size();
+        //Common.assertionCheckwithReport(message>0, "To verify the product added to My Wishlist", "Should add product to  My wishlist page","Product sucessfully added to My wishlist", "passed  add product to Wishlist");
+    }
+            catch(Exception |Error e)
+	{
+    	e.printStackTrace();
+    	ExtenantReportUtils.addFailedLog("To verify the  the product added to My wishlist","Should add product to Wishlist", "user unable to add Product to wishlist page", Common.getscreenShotPathforReport("failed to add product to Wishlist"));           
+        Assert.fail();   
+     }
+   
+}
+}
+	
+
+		
+
+
+
+			
 
 
 
