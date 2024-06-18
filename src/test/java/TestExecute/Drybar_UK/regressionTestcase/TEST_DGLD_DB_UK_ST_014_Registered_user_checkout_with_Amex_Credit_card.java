@@ -28,7 +28,7 @@ public class TEST_DGLD_DB_UK_ST_014_Registered_user_checkout_with_Amex_Credit_ca
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
+			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 
 		} catch (Exception e) {
