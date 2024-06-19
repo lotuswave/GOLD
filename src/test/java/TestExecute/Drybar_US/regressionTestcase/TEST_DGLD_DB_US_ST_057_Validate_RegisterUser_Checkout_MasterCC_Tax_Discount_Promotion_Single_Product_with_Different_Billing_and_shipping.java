@@ -21,11 +21,11 @@ public class TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_
 		
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
-			Drybar.login_Drybar("AccountDetails");
+			Drybar.login_Drybar("AccountDetail");
 			Drybar.search_product("Product");
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.RegaddDeliveryAddress("BillingDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.tax_validation_Paymentpage();
 			Drybar.clickSubmitbutton_Shippingpage();
@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}

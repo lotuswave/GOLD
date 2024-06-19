@@ -4968,12 +4968,12 @@ Thread.sleep(5000);
 				Common.clickElement("xpath", "//span[text()='Update']");
 				//Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+				//Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 				Thread.sleep(5000);
-				update = Common.findElement("xpath", "//li[@class='opc-progress-bar-item _complete']//span[text()='Shipping']").getText();
-				System.out.println("update"+update);
-				Common.assertionCheckwithReport(
-						update.contains(Shipping),
+				update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
+				System.out.println(update);
+				Sync.waitPageLoad();
+				Common.assertionCheckwithReport(update.contains("Payment Method"),
 						"verifying the Billing address form in payment page",
 						"Billing address should be saved in the payment page",
 						"Sucessfully Billing address form should be Display ",
