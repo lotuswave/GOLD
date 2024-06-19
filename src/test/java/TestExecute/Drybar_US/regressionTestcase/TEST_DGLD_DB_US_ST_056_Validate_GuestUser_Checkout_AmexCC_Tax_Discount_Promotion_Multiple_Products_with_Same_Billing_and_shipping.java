@@ -10,7 +10,7 @@ import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_056_Validate_GuestUser_Checkout_AmexCC_Tax_Discount_Promotion_Multiple_Products_with_Same_Billing_and_shipping {
-   
+     
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
