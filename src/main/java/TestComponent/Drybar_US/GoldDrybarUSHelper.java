@@ -1495,7 +1495,7 @@ public class GoldDrybarUSHelper {
 				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+				String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
 				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
@@ -1506,7 +1506,7 @@ public class GoldDrybarUSHelper {
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				Thread.sleep(4000);
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue);
+				Float Total = (subtotalvalue + shippingvalue);
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				Thread.sleep(4000);
 				System.out.println(ExpectedTotalAmmount2);
@@ -1522,7 +1522,7 @@ public class GoldDrybarUSHelper {
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+			String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
@@ -1533,7 +1533,7 @@ public class GoldDrybarUSHelper {
 					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue);
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue);
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
