@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_US_ST_074_Validate_RegisterUser_Checkout_Aerosol_Produ
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.same_Blling_and_Shipping_SubmitOrder("PaymentDetails");
 		
 

@@ -27,7 +27,7 @@ public class TEST_DGLD_DB_US_ST_047_Validate_GuestUser_Checkout_DiscoverCC_Tax_M
 			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 

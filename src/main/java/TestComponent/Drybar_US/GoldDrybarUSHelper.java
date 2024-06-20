@@ -1484,26 +1484,56 @@ public class GoldDrybarUSHelper {
 		return order;
 	}
 
-	public void tax_validation_Paymentpage() {
+	public void tax_validation_Paymentpage(String Dataset) {
 		// TODO Auto-generated method stub
-		
+		String Symbol=data.get(Dataset).get("Symbol");
 		try
 		{
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+			
+			if(Common.getCurrentURL().contains("/gb"))
+			{
+				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+						"");
+				Float subtotalvalue = Float.parseFloat(Subtotal);
+				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+						.replace(Symbol, "");
+				Float shippingvalue = Float.parseFloat(shipping);
+				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				Float Taxvalue = Float.parseFloat(Tax);
+				Thread.sleep(4000);
+
+				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+						.replace(Symbol, "");
+				Float ordertotalvalue = Float.parseFloat(ordertotal);
+				Thread.sleep(4000);
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue);
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Thread.sleep(4000);
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+						"validating the Tax on the payment page",
+						"On the order summary tax should be display on the payment page",
+						"Successfully Tax should be display in the order summary",
+						"Failed to display the tax on the order summary");
+			}
+			else
+			{
+			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
-					.replace("$", "");
+					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
 			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
-					.replace("$", "");
+					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue);
+			Float Total = (subtotalvalue + shippingvalue);
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
@@ -1515,6 +1545,8 @@ public class GoldDrybarUSHelper {
 					"Failed to display the tax on the order summary");
 
 		}
+		}
+		
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();

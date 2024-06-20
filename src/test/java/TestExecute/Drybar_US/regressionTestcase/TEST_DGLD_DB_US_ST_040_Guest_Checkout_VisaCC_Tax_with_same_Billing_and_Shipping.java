@@ -26,7 +26,7 @@ public class TEST_DGLD_DB_US_ST_040_Guest_Checkout_VisaCC_Tax_with_same_Billing_
 			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {

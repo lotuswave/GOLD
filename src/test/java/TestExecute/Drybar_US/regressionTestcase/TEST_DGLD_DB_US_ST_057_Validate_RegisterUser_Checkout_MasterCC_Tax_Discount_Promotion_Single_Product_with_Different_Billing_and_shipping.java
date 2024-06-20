@@ -27,7 +27,7 @@ public class TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("BillingDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.discountCode("Discount");
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");

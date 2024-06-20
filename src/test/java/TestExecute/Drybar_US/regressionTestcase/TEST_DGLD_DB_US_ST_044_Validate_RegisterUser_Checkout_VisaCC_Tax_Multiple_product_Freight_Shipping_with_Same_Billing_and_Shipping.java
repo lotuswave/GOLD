@@ -30,7 +30,7 @@ public class TEST_DGLD_DB_US_ST_044_Validate_RegisterUser_Checkout_VisaCC_Tax_Mu
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.same_Blling_and_Shipping_SubmitOrder("PaymentDetails");
 			
 

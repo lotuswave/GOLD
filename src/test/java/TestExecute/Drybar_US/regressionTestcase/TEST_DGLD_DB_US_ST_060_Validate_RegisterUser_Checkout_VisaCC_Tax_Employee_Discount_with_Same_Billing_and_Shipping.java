@@ -27,7 +27,7 @@ public class TEST_DGLD_DB_US_ST_060_Validate_RegisterUser_Checkout_VisaCC_Tax_Em
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.discountCode("Discount");
 		    Drybar.updatePaymentAndSubmitOrder("PaymentDetails");

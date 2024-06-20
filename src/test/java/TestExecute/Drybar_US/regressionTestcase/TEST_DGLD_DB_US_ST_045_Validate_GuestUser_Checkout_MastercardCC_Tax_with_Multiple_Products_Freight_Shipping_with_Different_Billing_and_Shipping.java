@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_US_ST_045_Validate_GuestUser_Checkout_MastercardCC_Tax
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.guest_BillingAddress("BillingDetails");
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 			
 

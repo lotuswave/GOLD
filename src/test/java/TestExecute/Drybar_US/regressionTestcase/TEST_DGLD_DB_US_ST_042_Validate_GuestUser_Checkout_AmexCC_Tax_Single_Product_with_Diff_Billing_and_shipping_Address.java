@@ -27,7 +27,7 @@ public class TEST_DGLD_DB_US_ST_042_Validate_GuestUser_Checkout_AmexCC_Tax_Singl
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.guest_BillingAddress("BillingDetails");
-			Drybar.tax_validation_Paymentpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 
 		} catch (Exception e) {
