@@ -5000,11 +5000,22 @@ Thread.sleep(5000);
 				Common.clickElement("xpath", "//span[text()='Update']");
 				//Sync.waitPageLoad();
 				Thread.sleep(4000);
-				//Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+                    if(Common.isElementDisplayed("xpath", "//span[contains(text(),'OK')]")) {
+					
+					Common.clickElement("xpath", "//span[contains(text(),'OK')]");
 				Thread.sleep(5000);
+				
 				update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
 				System.out.println(update);
 				Sync.waitPageLoad();
+			}
+				else {
+					
+				
+				update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
+				System.out.println(update);
+				Sync.waitPageLoad();
+				}
 				Common.assertionCheckwithReport(update.contains("Payment Method"),
 						"verifying the Billing address form in payment page",
 						"Billing address should be saved in the payment page",
