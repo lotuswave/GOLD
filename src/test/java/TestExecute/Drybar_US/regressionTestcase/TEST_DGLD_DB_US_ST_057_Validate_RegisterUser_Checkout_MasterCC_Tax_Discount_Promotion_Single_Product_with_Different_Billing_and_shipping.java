@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

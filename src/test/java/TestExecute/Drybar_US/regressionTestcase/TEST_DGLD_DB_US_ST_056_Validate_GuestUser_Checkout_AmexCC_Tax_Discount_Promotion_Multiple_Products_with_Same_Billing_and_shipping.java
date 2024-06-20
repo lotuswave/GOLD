@@ -45,7 +45,7 @@ public class TEST_DGLD_DB_US_ST_056_Validate_GuestUser_Checkout_AmexCC_Tax_Disco
 	
 	@AfterTest
 	public void clearBrowser() {
-	//	Common.closeAll();
+		Common.closeAll();
 
 	}
 
