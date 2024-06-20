@@ -7816,7 +7816,172 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 	}
 }
 
+public void Add_To_MyFavorities(String Dataset) {
+	// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		System.out.println(product);
+		String productcolor = data.get(Dataset).get("Color");
+		System.out.println(productcolor);
+		String Productsize = data.get(Dataset).get("Size");
+		System.out.println(Productsize);
+		try {
+			Sync.waitPageLoad();
+			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+            System.out.println(MyFavorites);
+			if (MyFavorites != 0) {
+				search_product("Product");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+				Common.clickElement("xpath", "//img[@alt='" + product + "']");
+				Sync.waitPageLoad();
+				//Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
+			//	Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			//	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+			//	Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Add to Wish List']");
+				Common.clickElement("xpath", "//span[text()='Add to Wish List']");
+				Sync.waitPageLoad(30);
+				Thread.sleep(3000);
+				if(Common.getCurrentURL().contains("drybar.com/gb/"))
+                {
+                    Sync.waitPageLoad();
+                    Thread.sleep(4000);
+                    String message = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+                    System.out.println(message);
+                    Common.assertionCheckwithReport(message.contains("My Wish List"),
+                            "validating the  product add to the Favorites", "Product should be add to Favorites",
+                            "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
+
+                }
+				
+	}
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the products added to the whishlist form PDP", "Product should be add to fav from the PDP",
+				"Unable to add  product to the My Faviorates from the PDP ", Common.getscreenShot("failed to add  product to the My Faviorates from the PDP"));
+		Assert.fail();
+	}
+	
+}
+
+
+
+public void Add_Favorites_from_PLP(String Dataset) {
+	// TODO Auto-generated method stub
+	String product = data.get(Dataset).get("Products");
+	System.out.println(product);
+	String productcolor = data.get(Dataset).get("Color");
+	System.out.println(productcolor);
+	String Productsize = data.get(Dataset).get("Size");
+	System.out.println(Productsize);
+	try {
+		Sync.waitPageLoad();
+		int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+        System.out.println(MyFavorites);
+		if (MyFavorites != 0) {
+			Bagpacks_headerlinks(Dataset);
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']//parent::a//parent::div//span[text()='Add to Favorites']");
+			Common.clickElement("xpath", "//img[@alt='" + product + "']//parent::a//parent::div//span[text()='Add to Favorites']");
+			Sync.waitPageLoad(30);
+			Thread.sleep(3000);
+			if(Common.getCurrentURL().contains("osprey.com/gb"))
+            {
+                Sync.waitPageLoad();
+                Thread.sleep(4000);
+                String message = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+                System.out.println(message);
+                Common.assertionCheckwithReport(message.contains("My Wish List"),
+                        "validating the  product add to the Favorites", "Product should be add to Favorites",
+                        "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
+
+            }
+			/*else
+			{
+			Sync.waitElementVisible(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
+			String whishlistpopup = Common.findElement("xpath", "//img[@class='m-product-card__image product-image-photo']").getText();
+			System.out.println(whishlistpopup);
+			if (whishlistpopup.contains("Add to Wishlist")) {
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
+				Common.clickElement("xpath", "//button[@title='Add To List']");
+			} else {
+				Assert.fail();
+			}
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Wish List") ,
+					"validating the Navigation to the My Favorites page",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+			Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+			Sync.waitPageLoad();
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
+					"validating the  product add to the Whishlist", "Product should be add to whishlist",
+					"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+			}
+			String Whishlistproduct = Common
+					.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
+			System.out.println(Whishlistproduct);*/
+}
+	}
+catch(Exception | Error e)
+{
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("validating the products added to the whishlist form PDP", "Product should be add to fav from the PDP",
+			"Unable to add  product to the My Faviorates from the PDP ", Common.getscreenShot("failed to add  product to the My Faviorates from the PDP"));
+	Assert.fail();
+}
+
+}
+
+public void Bagpacks_headerlinks(String Dataset) {
+	// TODO Auto-generated method stub
+	String expectedResult = "User should click the" + Dataset;
+	String out = data.get(Dataset).get("outdoor");
+	String header=data.get(Dataset).get("headers");
+	try {
+
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath","//a[contains(@class,'level-top')]//span[contains(text(),'"+ header +"')]");
+		
+		Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + header + "')]");
+
+		Thread.sleep(3000);
+
+		try {
+			Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
+		} catch (Exception e) {
+			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
+		}
+		Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
+		
+		Sync.waitPageLoad();
+		Thread.sleep(6000);
+		expectedResult = "User should select the " + Dataset + "category";
+		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
+		Common.assertionCheckwithReport(sizebotteles > 0,
+				"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
+				"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product category as" + Dataset + "from navigation menu ",
+				expectedResult, "Unable to Selected the " + Dataset + " category",
+				Common.getscreenShot("Failed to click on the" + Dataset + ""));
+
+		Assert.fail();
+	}
+
+}
 
 }
 
