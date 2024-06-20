@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_UK_ST_043_RegisteredUser_Checkout_DiscoverCC_Tax_with_
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.tax_validation_Paymentpage("Address");
-			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
 			
 
 		} catch (Exception e) {
