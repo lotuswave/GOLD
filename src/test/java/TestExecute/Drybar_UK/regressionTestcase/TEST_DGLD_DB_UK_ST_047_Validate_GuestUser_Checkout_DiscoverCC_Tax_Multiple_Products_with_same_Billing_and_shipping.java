@@ -22,8 +22,8 @@ public class TEST_DGLD_DB_UK_ST_047_Validate_GuestUser_Checkout_DiscoverCC_Tax_M
 			Drybar.Verify_Homepage();
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
-			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Product"); 
+			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
