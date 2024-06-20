@@ -25,11 +25,12 @@ public class TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_
 			Drybar.search_product("Product");
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("BillingDetails");
+			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.discountCode("Discount");
+			Drybar.BillingAddress("BillingDetails");
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 
 		} catch (Exception e) {
@@ -40,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}

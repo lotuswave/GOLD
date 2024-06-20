@@ -27,11 +27,12 @@ public class TEST_DGLD_DB_US_ST_059_Validate_RegisterUser_Checkout_DiscoverCC_Ta
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("BillingDetails");
+			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.discountCode("Discount");
+			Drybar.BillingAddress("BillingDetails");
 			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
 			
 
