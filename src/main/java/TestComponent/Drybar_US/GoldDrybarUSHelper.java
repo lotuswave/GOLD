@@ -116,7 +116,7 @@ public class GoldDrybarUSHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home"),
+					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Home Drybar") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Drybar Home"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -6479,6 +6479,16 @@ Thread.sleep(5000);
 	    			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 	    			{
 	    				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+	    				if (Common.getCurrentURL().contains("/gb")){
+	    					Sync.waitElementPresent(30, "xpath", "//a[text()='My Wish List']");
+		    				Common.clickElement("xpath", "//a[text()='My Wish List']");
+		    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
+		    						"validating the Navigation to the My Favorites page",
+		    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+		    						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+		    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+	    				}
+	    				else {
 	    				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
 	    				Common.clickElement("xpath", "//a[text()='My Favorites']");
 	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
@@ -6487,6 +6497,8 @@ Thread.sleep(5000);
 	    						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
 	    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    			}
+	    			}
+	    				
 	    			else
 	    			{
 	    				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
@@ -7690,7 +7702,113 @@ public void Subscribe_to_back_in_stock_notification(String Dataset) {
 }
 	
 
+
+public void addto_MyWishList(String Dataset) {
+String products = data.get(Dataset).get("Products");
+System.out.println(products);
+try {
+	Sync.waitPageLoad();
+	for (int i = 0; i <= 10; i++) {
+		Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+		List<WebElement> webelementslist = Common.findElements("xpath",
+				"//img[contains(@class,'m-product-card__image')]");
+
+		String s = webelementslist.get(i).getAttribute("src");
+		System.out.println(s);
+		if (s.isEmpty()) {
+
+		} else {
+			break;
+		}
+	}
+	Thread.sleep(6000);
+	Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+	Common.clickElement("xpath", "//img[@alt='" + products + "']");
+	Sync.waitPageLoad();
+	Thread.sleep(3000);
+	String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+	Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+			"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+			"failed to Navigate to the PDP page");
+	product_quantity(Dataset);
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//span[text()='Add to Wish List']");
+	Common.clickElement("xpath", "//span[text()='Add to Wish List']");
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	String message = Common.findElement("xpath", "//h1[text()='Sign In']").getText();
+	System.out.println(message);
+	Common.assertionCheckwithReport(message.contains("Sign In"), "Naviaged to the  Sign In Page",
+			"Product should be navigated Sign In page", "Sucessfully pages is  navigated to the Sign In page ",
+			"failed to naviaged to Sign In page");
+} catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("Naviaged to the  Sign In Page", "page should navigated be Sign In page",
+			"unable to navigated be Sign In page", Common.getscreenShot("failed to navigated be Sign In page"));
+
+	Assert.fail();
 }
+}
+
+public void Fav_Seeoption_from_View_cart(String Dataset) {
+	// TODO Auto-generated method stub
+	String products = data.get(Dataset).get("Products");
+	String productcolor = data.get(Dataset).get("Color");
+	String Productsize = data.get(Dataset).get("Size");
+	try
+	{
+	Common.maximizeImplicitWait();
+	Common.actionsKeyPress(Keys.END);
+	String Yourfav=Common.findElement("xpath", "//h2[@class='t-cart__favorites-heading']").getText();
+	System.out.println(Yourfav);
+	Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
+			"validating the favorites in view cart page", "Favorites should be in the view cart page",
+			"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
+	Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+	Common.clickElement("xpath", "//span[text()='Add to Cart']");
+	Sync.waitPageLoad();
+	Thread.sleep(8000);
+	/*String Options=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+	Common.assertionCheckwithReport(Options.contains("You need to choose options for your item"),
+			"validating the color option on the PDP", "After clicking on the add to cart button for color product it should navigate to PDP",
+			"Sucessfully Navigated to the PDP and options messgae has been appeared ", "failed to Display the choose options message on PDP");
+			
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+	Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+	Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+	Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+	Sync.waitPageLoad();
+	Thread.sleep(6000);
+//	Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//	String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//			.getAttribute("data-ui-id");
+//	System.out.println(message);
+//	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//			"Product should be add to cart", "Sucessfully product added to the cart ",
+//			"failed to add product to the cart");
+ 
+ 
+	Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+	Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+	*/
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		Assert.fail();
+	}
+}
+
+
+
+}
+
 	
 
 		
