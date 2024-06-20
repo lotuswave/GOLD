@@ -7614,6 +7614,82 @@ public void Add_product_to_Wishlist() {
      }
    
 }
+
+public void Notify_me (String Dataset) {
+	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
+	try {
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) {
+			Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[contains(@class,'m-product-card__image')]");
+
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+		Thread.sleep(6000);
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.clickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+		
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//span[text()=' Notify Me When Available']");
+		Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String message = Common.findElement("xpath", "//h3[@class='m-newsletter-signup__heading h5']").getText();
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.equals("Subscribe to back in stock notification"), "validating the  product add to the  back in stock notification",
+			"Product should be add to back in stock Subscribe page", "Sucessfully product added to the back in stock Subscribe page ",
+				"failed to add product to the back in stock Subscribe page");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the back in stock Subscribe page", "Product should be add to back in stock Subscribe page",
+				"unable to add product to the back in stock Subscribe page", Common.getscreenShot("failed to add product to the back in stock Subscribe page"));
+
+		Assert.fail();
+	}
+}
+
+
+public void Subscribe_to_back_in_stock_notification(String Dataset) {
+	// TODO Auto-generated method stub
+	try
+	{
+		Common.textBoxInput("xpath", "//input[@name='guest_email']", Utils.getEmailid());
+	String	email = Common.findElement("xpath", "//input[@name='guest_email']").getAttribute("value");
+		System.out.println(email);
+    Common.actionsKeyPress(Keys.ENTER);
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+		String success = Common.findElement("xpath", "//div[@class='u-container a-message__container']").getText();
+		System.out.println(success);
+		Common.assertionCheckwithReport(success.contains("Alert subscription has been saved."), "validating the Subscribe to back in stock notification functionality",
+				"enter Mail id will display in the back in stock Subscribe", "user enter the Mail ID inback in stock Subscribe",
+				"Failed to see the back in stock Subscribe Mail ID");
+         }  
+	 catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Subscribe to back in stock notification functionality",
+				"enter Mail id will display in the back in stock Subscribe ",
+				" unable to enter the product  in  back in stock Subscribe",
+				Common.getscreenShot("Failed to see the back in stock Subscribe Mail ID"));
+		Assert.fail();
+	}
+}
+	
+
 }
 	
 
