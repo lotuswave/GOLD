@@ -2615,13 +2615,14 @@ public class GoldDrybarUSHelper {
 	
 	public void Paypal_Address_Verification(String Dataset) {
 		// TODO Auto-generated method stub
-		
+		String Street=data.get(Dataset).get("Street");
+		System.out.println(Street);
 		try
 		{
 			Sync.waitElementPresent("xpath", "//span[@data-testid='header-cart-total']");
 			String symbol=Common.findElement("xpath", "//span[@data-testid='header-cart-total']").getText();
 			System.out.println(symbol);
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			if(symbol.contains("$"))
 			{
 				Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
@@ -2632,7 +2633,9 @@ public class GoldDrybarUSHelper {
 			{
 				Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
 				Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
-//				Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
+				Thread.sleep(4000);
 				Common.dropdown("xpath", "//select[@data-testid='shipping-dropdown']", SelectBy.TEXT, data.get(Dataset).get("Street"));
 				Thread.sleep(3000);
 				String Ukaddress=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
