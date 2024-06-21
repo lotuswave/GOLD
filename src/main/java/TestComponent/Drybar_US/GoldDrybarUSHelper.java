@@ -5048,12 +5048,12 @@ Thread.sleep(5000);
     			System.out.println(QTY);
     			String Price = Common.findElement("xpath", "(//span[@class='cart-price'])[2]").getText();
     			System.out.println(Price);
-    			Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
+//    			Common.clickElement("xpath", "(//span[text()='View Details'])[2]");    need to un comment after drybar configurable prodcuted added
  //   			String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
  //   			System.out.println(Color);
  //   			String Size = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
-    			String Size = Common.findElement("xpath", "//dd[@class='values']").getText();
-    			System.out.println(Size);
+//    			String Size = Common.findElement("xpath", "//dd[@class='values']").getText();
+//    			System.out.println(Size);              need to un comment after drybar configurable prodcuted added
     			Common.assertionCheckwithReport(shipping.equals("Shipping"),
     					"To validate the user is navigating to Shipping page", "user should naviagte to Shipping page",
     					"User lands on Shippingd page", "User failed to navigate to Shipping page");
