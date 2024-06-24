@@ -964,6 +964,65 @@ public class GoldDrybarUSHelper {
 		return order;
 	}
 	
+	
+	public void Stored_Payment(String Dataset) {
+		// TODO Auto-generated method stub
+
+		try {
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+					"validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+					"Failed to Navigate to the MY account page after Clicking on my account button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+					"After Clicking on My account CTA user should be navigate to the my account page",
+					"Unable to Navigates the user to My account page after clicking on the my account CTA",
+					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
+			Assert.fail();
+		}
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Sync.waitPageLoad(30);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
+					"validating the Navigation to the My Payment Methods page",
+					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
+					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
+					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
+			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			if (size > 0) {
+				String number = Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText()
+						.replace("•••• ", "");
+				System.out.println(number);
+				System.out.println(Dataset);
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(number.contains("4242") && Dataset.contains("4242"),
+						"validating the card details in the my orders page",
+						"After Clicking on My payments methods and payment method should be appear in payment methods",
+						"Sucessfully payment method is appeared in my payments methods",
+						"Failed to display the payment methods in the my payments methods");
+			} else {
+				Assert.fail();
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the error message for delete card",
+					"After Clicking the delete button we need to get the error message",
+					"Unable to display the error message when we clcik on the delete message",
+					Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
+			Assert.fail();
+		}
+
+	}
 	public void My_Orders_Page(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
