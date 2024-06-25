@@ -8190,6 +8190,54 @@ public void outofstock_subcription(String Dataset) {
 
 }
 
+public void Verify_OrderTotal() {
+	
+	try {
+  	
+		String Ordertotal = Common.findElement("xpath", "//td[@data-th='Order Total']").getText();
+		System.out.println(Ordertotal);
+		
+		if(Common.getCurrentURL().contains("gb")) {
+
+			double Order_Total = Double.parseDouble(Ordertotal.replace("£", ""));
+			System.out.println(Order_Total);
+			if (Order_Total <= 50.0) {
+
+				System.out.println("Order Total is Less than 50");
+				clickSubmitbutton_Shippingpage();
+		            }
+			else {
+				System.out.println("Order Total is Not Less than 50");
+				Assert.fail();
+			}
+		}
+		else {
+		double Order_Total = Double.parseDouble(Ordertotal.replace("$", ""));
+		System.out.println(Order_Total);
+				
+		if (Order_Total <= 50.0) {
+
+			System.out.println("Order Total is Less than or Equal to 50");
+			clickSubmitbutton_Shippingpage();
+	            }
+		else {
+			System.out.println("Order Total is Not Less than or Equal to 50");
+			
+			Assert.fail();
+		}
+	
+		}
+	}
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
+				"Check Price In PLp page",
+				"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
+		Assert.fail();
+	}
+}	
+
+
 
 }
 
