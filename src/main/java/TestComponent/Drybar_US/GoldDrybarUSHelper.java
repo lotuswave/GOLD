@@ -3661,7 +3661,8 @@ public class GoldDrybarUSHelper {
 					"verifying the My account navigation",
 					"after clicking on the my account it should navigate to the My Account page",
 					"Sucessfully Navigated to the My Account page", "Failed to navigate to the my account page");
-			Common.clickElement("xpath", "(//div[@id='account-nav']//a)[3]");
+			Common.clickElement("xpath", "//a[text()='Address Book']");
+			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("address"),
 					"verifying the Address Book page navigation",
 					"after clicking on the Address Book it should navigate to the Address Book page",
