@@ -8237,8 +8237,240 @@ public void Verify_OrderTotal() {
 	}
 }	
 
+public void Navigate_to_addressbook() {
+	
+	try
+	{
+		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath", "//ul[@class='m-account-nav__links']//a[text()='My Account']");
+		Common.clickElement("xpath", "//ul[@class='m-account-nav__links']//a[text()='My Account']");
+		Thread.sleep(3000);
+		Common.assertionCheckwithReport(
+				Common.getCurrentURL().contains("account"),
+				"verifying the user navigates to the account page",
+				"after clicking on the my account user should able to navigate to the account page",
+				"Sucessfully user navigated to the My account page",
+				"Failed to navigate to the My account page after clicking on the My account button");
+		Sync.waitElementPresent("xpath", "//a[text()='Address Book']");
+		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Thread.sleep(3000);
+		String title=Common.getText("xpath", "//h1[@class='page-title-wrapper h2']");
+		System.out.println(title);
+		Common.assertionCheckwithReport(
+				title.contains("Address Book"),
+				"verifying the user navigates to the Address Book page",
+				"after clicking on the Address Book user should able to navigate to the Address Book page",
+				"Sucessfully user navigated to the Address Book page",
+				"Failed to navigate to the Address Book page after clicking on the Address Book button");
+		
+	}
+	catch (Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the user navigates to the Address Book page",
+				"after clicking on the Address Book user should able to navigate to the Address Book page",
+				"Unable to navigate to the Address Book page after clicking on the Address Book button",
+				Common.getscreenShot("Failed to navigate to the Address Book page after clicking on the Address Book button"));
+		Assert.fail();
+		
+	}
+}
 
+public String Add_New_AddressBook(String dataSet) {
+	// TODO Auto-generated method stub
+	String numer="";
+	try {
+		
+		Navigate_to_addressbook();
+		Sync.waitElementVisible(30, "xpath", "//button[@title='Add New Address']");
+		Common.clickElement("xpath", "//button[@title='Add New Address']");
+		Thread.sleep(4000);
+		Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
+		numer=Common.findElement("xpath", "//input[@title='Phone Number']").getAttribute("value");
+		System.out.println(numer);
+		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+		Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
+		Thread.sleep(4000);
+		 if(Common.getCurrentURL().contains("/gb"))
+         {
+			 
+			 Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+             
+         }
+		 else
+		 {
+			 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+             Thread.sleep(3000);
+             String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                     .getAttribute("value");
+             System.out.println(Shippingvalue);
+		 }
 
+		Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+         Thread.sleep(4000);
+         Sync.waitElementPresent("xpath", "//div[@id='ltksmsfield']//input");
+         Common.clickElement("xpath", "//div[@id='ltksmsfield']//input");
+         Thread.sleep(3000);
+         
+		Common.clickElement("xpath", "//button[@title='Save Address']");
+		Thread.sleep(5000);
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("You saved the address."),
+				"validating the saved message after saving address in address book",
+				"Save address message should be displayed after the address saved in address book",
+				"Sucessfully address has been saved in the address book",
+				"Failed to save the address in the address book");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the No address in the address book",
+				"After saving the address for Register user no extra address should be there in address book",
+				"Unable to see no address in the address book",
+				Common.getscreenShotPathforReport("Failed to see no address in the address book"));
+		Assert.fail();
+	}
+	
+	return numer;
+}
+
+public void communication_Prefrence(String phonenumber) {
+	// TODO Auto-generated method stub
+	
+	
+	try
+	{
+		Sync.waitElementPresent("xpath", "//a[text()='Communication Preferences']");
+		Common.clickElement("xpath", "//a[text()='Communication Preferences']");
+		Thread.sleep(4000);
+		String Title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+		System.out.println(Title);
+		Common.assertionCheckwithReport(Title.contains("Communication Preferences"),
+				"verifying the user navigates to the Communication Preferences page",
+				"after clicking on the Communication Preferences user should able to navigate to the Communication Preferences page",
+				"Sucessfully user navigated to the Communication Preferences page",
+				"Failed to navigate to the Communication Preferences page after clicking on the Communication Preferences button");
+		int subproductsList = Common.findElements("xpath", "//div[@id='phones_list']//input")
+				.size();
+		for (int i = 0; i < subproductsList; i++) {
+			int value = i + 1;
+		List <WebElement> Numbers=Common.findElements("xpath", "(//div[@id='phones_list']//input)["+ value +"]");
+		for (int j = 0; j < Numbers.size(); j++) {
+
+			String attributevalue = Numbers.get(j).getAttribute("value");
+			
+			if (attributevalue.equals(phonenumber))
+			{
+				System.out.println(attributevalue);
+				Common.assertionCheckwithReport(attributevalue.equals(phonenumber),
+						"verifying the phone number in the Communication Preferences",
+						"Phone number should be diplay in the Communication Preferences page",
+						"Sucessfully phone number is displayed in the Communication Preferences page",
+						"Failed to display the phone number in the Communication Preferences page");
+				
+			}
+			else
+			{
+				System.out.println(attributevalue);
+			}
+		}
+		
+		}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the phone number in the Communication Preferences",
+				"Phone number should be diplay in the Communication Preferences page",
+				"Unable to display the phone number in the Communication Preferences page",
+				Common.getscreenShotPathforReport("Failed to display the phone number in the Communication Preferences page"));
+		Assert.fail();
+		
+	}
+}
+
+public void Delete_Address() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementPresent("xpath", "//a[text()='Address Book']");
+		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//span[text()='Delete']");
+		Sync.waitElementPresent("xpath", "//span[text()='Delete']");
+		Common.clickElement("xpath", "//span[text()='Delete']");
+		Thread.sleep(4000);
+		String popmessage = Common.findElement("xpath", "//div[contains(text(),'Are you ')]").getText();
+		if (popmessage.contains("Are you sure you want to delete this address?")) {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
+			Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+			String Delmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div")
+					.getText();
+			System.out.println(Delmessage);
+			Common.assertionCheckwithReport(Delmessage.contains("You deleted the address."),
+					"validating the Delete message after Deleting address in address book",
+					"Delete address message should be displayed after the address delete in address book",
+					"Sucessfully address has been Deleted in the address book",
+					"Failed to Delete the address in the address book");
+		} else {
+			Assert.fail();
+		}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Delete message after Deleting address in address book",
+				"Delete address message should be displayed after the address delete in address book",
+				"Unable to Delete the address in the address book",
+				Common.getscreenShotPathforReport("Failed to Delete the address in the address book"));
+		
+		Assert.fail();
+	}
+	
+}
+
+public String edit_MobileNumber(String dataSet) {
+	// TODO Auto-generated method stub
+	
+	String numer="";
+	try
+	{
+		Sync.waitElementPresent("xpath", "//a[text()='Address Book']");
+		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//a[@class='action edit']");
+		Sync.waitElementPresent("xpath", "//a[@class='action edit']");
+		Common.clickElement("xpath", "//a[@class='action edit']");
+		Thread.sleep(4000);
+		Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone1"));
+		numer=Common.findElement("xpath", "//input[@title='Phone Number']").getAttribute("value");
+		System.out.println(numer);
+		Common.clickElement("xpath", "//button[@title='Save Address']");
+		Thread.sleep(5000);
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("You saved the address."),
+				"validating the saved message after saving address in address book",
+				"Save address message should be displayed after the address saved in address book",
+				"Sucessfully address has been saved in the address book",
+				"Failed to save the address in the address book");
+   
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the No address in the address book",
+				"After saving the address for Register user no extra address should be there in address book",
+				"Unable to see no address in the address book",
+				Common.getscreenShotPathforReport("Failed to see no address in the address book"));
+		Assert.fail();
+	}
+	return numer;
+}
 }
 
 	
