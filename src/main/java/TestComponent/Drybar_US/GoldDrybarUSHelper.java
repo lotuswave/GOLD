@@ -4330,7 +4330,7 @@ Thread.sleep(5000);
     			Thread.sleep(4000);
     			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
     			Sync.waitImplicit(30);
-    			Thread.sleep(6000);
+    			Thread.sleep(8000);
     			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(

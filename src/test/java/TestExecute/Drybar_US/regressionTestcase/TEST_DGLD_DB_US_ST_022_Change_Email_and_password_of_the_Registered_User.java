@@ -14,7 +14,7 @@ public class TEST_DGLD_DB_US_ST_022_Change_Email_and_password_of_the_Registered_
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_Account () throws Exception {
+	public void Validating_Change_Email_and_password_of_the_Registered_User () throws Exception {
 
 		try {
 		
