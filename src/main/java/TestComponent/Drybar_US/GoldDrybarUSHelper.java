@@ -5313,18 +5313,18 @@ Thread.sleep(5000);
     					"after clicking on the my account it should navigate to the my account page",
     					"Sucessfully Navigated to the my account page", "failed to Navigate to the my account page");
     			
-    			Sync.waitElementPresent("xpath", "//a[text()='My Subscriptions']");
-    			Common.clickElement("xpath", "//a[text()='My Subscriptions']");
+    			Sync.waitElementPresent("xpath", "//a[text()='My Out of Stock Subscriptions']");
+    			Common.clickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
     			Sync.waitElementPresent(20, "xpath", "//span[@class='a-product-name']");
     			String name = Common.findElement("xpath", "(//span[@class='a-product-name'])[1]").getText();
     			System.out.println(name);
-    			/*Common.assertionCheckwithReport(name.contains(products) || name.contains(prod),
+    			Common.assertionCheckwithReport(name.contains(products) || name.contains(prod),
     					"validating the outofstock produt in the subcribtion page",
     					"Product should be display in the subcribtion page",
     					"Sucessfully product has been appeared in the outofstock subcription page",
-    					"Failed to see the product in subcribtion page");*/
+    					"Failed to see the product in subcribtion page");
 
     		} catch (Exception | Error e) {
     			e.printStackTrace();

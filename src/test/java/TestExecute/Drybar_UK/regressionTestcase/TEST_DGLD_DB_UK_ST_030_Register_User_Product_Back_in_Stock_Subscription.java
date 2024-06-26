@@ -36,7 +36,7 @@ public class TEST_DGLD_DB_UK_ST_030_Register_User_Product_Back_in_Stock_Subscrip
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}
