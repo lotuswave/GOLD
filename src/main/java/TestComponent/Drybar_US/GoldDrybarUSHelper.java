@@ -2223,7 +2223,7 @@ public class GoldDrybarUSHelper {
 			Common.clickElement("xpath", "//a[text()='Track my order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders"),
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
