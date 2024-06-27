@@ -4008,6 +4008,146 @@ public class GoldDrybarUSHelper {
 		
 	}
 
+	public void Add_GiftCode_Myaccount(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		try{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Sync.waitPageLoad();
+
+			Sync.waitElementPresent("xpath", "//a[text()='Gift Cards']");
+			Common.clickElement("xpath", "//a[text()='Gift Cards']");
+			
+			
+			Assert.assertEquals("Gift Cards / My Account", Common.getPageTitle());
+			
+			
+			Sync.waitElementPresent("xpath", "//input[@placeholder='Enter your Code']");
+			
+		
+			Common.textBoxInput("xpath", "//input[@placeholder='Enter your Code']", data.get(dataSet).get("GiftCardCode"));
+			System.out.println(data.get(dataSet).get("GiftCardCode"));
+			Common.clickElement("xpath", "//span[text()='Add']");
+			
+		
+			Thread.sleep(6000);
+		String Applied_Code = Common.findElement("xpath", "//td[@class='col code']").getText();
+		
+		Common.assertionCheckwithReport(Applied_Code.equals(data.get(dataSet).get("GiftCardCode")),
+				"validating the Gifcode Applied in My Account",
+				"Giftcode should be Applied",
+				"Sucessfully Giftcode should be Applied",
+				"failed to add Giftcode Apply");
+			
+
+
+
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Gift code applied in Myaccount page",
+					"Check Gift code applied in Myaccount page",
+					"Unable add the Giftcode", Common.getscreenShot("Failed to add Giftcoder in Myaccount page"));
+			Assert.fail();
+		}
+	}
+
+	public void Select_Gift_Code(String dataSet) {
+		// TODO Auto-generated method stub
+		String Giftcard = data.get(dataSet).get("GiftCardCode");
+		try {
+			Common.clickElement("xpath", "//input[@name='amcard-field -datalist']");
+ 
+			//			Common.dropdown("xpath", "//input[@name='amcard-field -datalist']", Common.SelectBy.TEXT, "GiftCard2");
+			Common.clickElement("xpath", "//li[text()='"+Giftcard+"']");
+			Common.clickElement("xpath", "//span[text()='Add Code']");
+			
+			Thread.sleep(2000);
+			String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+		  System.out.println(successmsg);
+			
+			Common.assertionCheckwithReport(successmsg.contains("added"),
+					"validating the success message after applying gift card",
+					"Success message should be displayed after the applying of gift card",
+					"Sucessfully gift card has been applyed","Failed to apply the gift card");
+			FUll_Payment("GiftCode Full Redeem");
+		}
+		
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Gift code Selected in Payment page",
+					"Check Gift code Selected in Payment page",
+					"Unable add the Giftcode in Payment page", Common.getscreenShot("Failed to add Giftcoder in Payment page"));
+			Assert.fail();
+		}
+	}
+	
+public void FUll_Payment(String dataSet) {
+	 	
+		String Symbl = data.get(dataSet).get("Symbol");
+		try {
+			String  GiftCard=data.get(dataSet).get("GiftCardCode");
+			String Total_Incl_Tax =Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace(Symbl,"");
+			
+			System.out.println("Total_Incl_Tax :"+Total_Incl_Tax);
+			Common.assertionCheckwithReport(Total_Incl_Tax.equals("0.00"),
+					"validating the check money order in payment page",
+					"Check money order radio button should be selected",
+					"Sucessfully check money order has been selected",
+					"failed to select the check mony order");
+			
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Gift code  order in payment page",
+					"Check Gift code applied and Fullpayment is applied",
+					"Unable add the Giftcode", Common.getscreenShot("Failed to add Giftcoder"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Remove_GiftCode() {
+		// TODO Auto-generated method stub
+		try{
+			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
+			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//a[text()='My Account']");
+			Sync.waitPageLoad();
+
+			Sync.waitElementPresent("xpath", "//a[text()='Gift Cards']");
+			Common.clickElement("xpath", "//a[text()='Gift Cards']");
+			
+			
+			Assert.assertEquals("Gift Cards / My Account", Common.getPageTitle());
+	        Common.clickElement("xpath", "//span[text()='Remove']");
+	        
+	        Common.clickElement("xpath", "//button[contains(@class,'ction-accept')]");
+	        Thread.sleep(2000);
+	        String Remove_Code = Common.findElement("xpath", "//div[@role='alert']").getText();
+		
+		Common.assertionCheckwithReport(Remove_Code.contains("removed"),
+				"validating the Gifcode Applied in My Account",
+				"Giftcode should be Applied",
+				"Sucessfully Giftcode should be Applied",
+				"failed to add Giftcode Apply");
+		
+
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Gift code applied in Myaccount page",
+					"Check Gift code applied in Myaccount page",
+					"Unable add the Giftcode", Common.getscreenShot("Failed to add Giftcoder in Myaccount page"));
+			Assert.fail();
+		}
+	}
+	
 	
 	public void gitCard(String Dataset) throws Exception{
 	
