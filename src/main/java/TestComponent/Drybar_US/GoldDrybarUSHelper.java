@@ -4010,7 +4010,26 @@ public class GoldDrybarUSHelper {
 	public HashMap<String, String> gitCard(String Dataset) throws Exception{
 		HashMap<String, String> Payment = new HashMap<String, String>();
 		try{
-		
+			String URL = Common.getCurrentURL();
+			System.out.println(URL);
+			if(URL.contains("stage")&&URL.contains("/gb") || URL.contains("preprod")&&URL.contains("/gb")) {
+			Thread.sleep(5000);
+			
+     	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+//     	Common.clickElement("xpath","//span[text()='Add Gift Card']");
+		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCardCode"));
+		Common.actionsKeyPress(Keys.ARROW_UP);
+		Common.clickElement("xpath","//span[text()='Add Code']");
+		Thread.sleep(2000);
+		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+	    System.out.println(successmsg);	
+		Common.assertionCheckwithReport(successmsg.contains("added"),
+				"validating the success message after applying gift card",
+				"Success message should be displayed after the applying of gift card",
+				"Sucessfully gift card has been applyed","Failed to apply the gift card");
+			}
+			else
+			{
 		Thread.sleep(5000);
 Common.clickElement("xpath", "//span[text()='Apply Gift Card']");
 Thread.sleep(5000);
@@ -4027,6 +4046,7 @@ Thread.sleep(5000);
 		Thread.sleep(3000);
 		int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
 		Common.assertionCheckwithReport(size>0, "validating the gift card", "Gift Card was added.", "successfully gift card was added","Failed to add gift card");
+		}
 		}
 		catch (Exception | Error e) {
 			e.printStackTrace();
