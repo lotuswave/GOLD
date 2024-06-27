@@ -544,6 +544,8 @@ public class GoldDrybarUSHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			
+			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
@@ -4061,10 +4063,11 @@ Thread.sleep(5000);
 		Common.actionsKeyPress(Keys.PAGE_UP);
 		Thread.sleep(3000);
 		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
-			Thread.sleep(4000);
+			Thread.sleep(5000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
 	   Thread.sleep(5000);
+	   Sync.waitElementClickable("xpath", "//button[@class='action primary checkout']");
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			//Common.refreshpage();
 		Thread.sleep(4000);
@@ -4079,7 +4082,9 @@ Thread.sleep(5000);
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage") && !url.contains("preprod")) {
+		if (!url.contains("stage") || !url.contains("preprod")) {
+		
+			
 		}
 
 		else {
