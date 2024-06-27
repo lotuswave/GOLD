@@ -4007,14 +4007,13 @@ public class GoldDrybarUSHelper {
 	}
 
 	
-	public HashMap<String, String> gitCard(String Dataset) throws Exception{
-		HashMap<String, String> Payment = new HashMap<String, String>();
+	public void gitCard(String Dataset) throws Exception{
+	
 		try{
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
 			if(URL.contains("stage")&&URL.contains("/gb") || URL.contains("preprod")&&URL.contains("/gb")) {
 			Thread.sleep(5000);
-			
      	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
 //     	Common.clickElement("xpath","//span[text()='Add Gift Card']");
 		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCardCode"));
@@ -4036,8 +4035,6 @@ Thread.sleep(5000);
 	Common.textBoxInput("id","giftcard-code",data.get(Dataset).get("GiftCardCode"));
 		
 		Common.textBoxInput("id","giftcard-pin",data.get(Dataset).get("GiftCardPin"));
-		String GiftCard="GiftCard";
-		Payment.put("GiftCard", GiftCard);
 		Thread.sleep(6000);
 		Sync.waitElementPresent(30, "xpath", "//span[text()='Apply']");
 		Common.clickElement("xpath", "//span[text()='Apply']");
@@ -4053,7 +4050,7 @@ Thread.sleep(5000);
 			ExtenantReportUtils.addFailedLog("validating the gift card","Gift Card was added.","User faield to to add gift card",Common.getscreenShotPathforReport("gitcard"));
 	        Assert.fail();
 	        }
-		return Payment;
+	
 		
 	}
 	public String giftCardSubmitOrder() throws Exception {
@@ -6833,7 +6830,7 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
 		
 		Sync.waitPageLoad();
 		Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-		// Common.clickElement("xpath", "//label[@for='stripe_payments']");
+		 Common.clickElement("xpath", "//label[@for='stripe_payments']");
 		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
