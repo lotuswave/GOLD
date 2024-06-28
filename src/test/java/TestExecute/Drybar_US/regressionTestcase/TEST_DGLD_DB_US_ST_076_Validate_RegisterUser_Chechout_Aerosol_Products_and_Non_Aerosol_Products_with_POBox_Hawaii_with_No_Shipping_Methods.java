@@ -25,14 +25,9 @@ public class TEST_DGLD_DB_US_ST_076_Validate_RegisterUser_Chechout_Aerosol_Produ
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 		    Drybar.addtocart("PLP Product");
 			Drybar.add_aerosolproduct("Aerosol");
-			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("NoTaxAddress");
-			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.No_Tax_Validation();
-			Drybar.same_Blling_and_Shipping_SubmitOrder("CCDiscovercard");
-			
-
+			Drybar.minicart_Checkout();		
+			Drybar.RegaddDeliveryAddress("Po_Box_Hawai");
+			Drybar.Validate_shipping_methods();
 		
 
 		} catch (Exception e) {
@@ -43,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_076_Validate_RegisterUser_Chechout_Aerosol_Produ
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
