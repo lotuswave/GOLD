@@ -9,16 +9,15 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_UK_ST_182_Guest_User_Checkout_with_10_Quantity_of_Single_Product_Gift_Card_and_Promo_Code_Using_PayPal {
+public class TEST_DGLD_DB_UK_ST_184_Guest_User_Order_with_1_item_with_10_qty_the_order_total_should_be_cover_with_a_partial_GC_redemption_Paypal {
 
 	String datafile = "Drybar_UK//GoldDrybarUKTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Guest_User_Checkout_with_10_Quantity_of_Single_Product_Gift_Card_and_Promo_Code_Using_PayPal () throws Exception {
+	public void Guest_User_Order_with_1_item_with_10_qty_the_order_total_should_be_cover_with_a_partial_GC_redemption_Paypal () throws Exception {
 
 		try {
-			
 			Drybar.Verify_Homepage();
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("10 qty product");
@@ -27,9 +26,7 @@ public class TEST_DGLD_DB_UK_ST_182_Guest_User_Checkout_with_10_Quantity_of_Sing
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.gitCard("Partial GiftCode");
-			Drybar.DiscountCode("Discount");
 			Drybar.payPal_Payment("PaypalDetails");
-			
 
 		} catch (Exception e) {
 
