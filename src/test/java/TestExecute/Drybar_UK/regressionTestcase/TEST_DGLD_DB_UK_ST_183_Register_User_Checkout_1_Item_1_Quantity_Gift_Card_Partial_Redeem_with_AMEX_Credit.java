@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_UK_ST_183_Register_User_Checkout_1_Item_1_Quantity_Gif
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}

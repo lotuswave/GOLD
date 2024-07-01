@@ -3980,7 +3980,7 @@ public class GoldDrybarUSHelper {
 					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
 				//	Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
 				//	String message = Common.findElement("xpath", "(//div[contains(@class,'message ')]//div)[1]").getText();
-					Thread.sleep(2000);
+					Thread.sleep(5000);
 					//System.out.println(message);
 					Common.scrollIntoView("xpath", "//tr[@class='totals balance']//span[@class='price']");
 					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
@@ -7756,10 +7756,10 @@ public void DiscountCode(String dataSet) throws Exception {
 		Sync.waitElementClickable("xpath", "//span[text()='Apply Code']");
 		Common.clickElement("xpath", "//span[text()='Apply Code']");
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
-		Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+		Thread.sleep(3000);
+		Common.scrollIntoView("xpath", "(//div[contains(@data-ui-id,'checkout-cart-validation')])[1]");
 		expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-		String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+		String discountcodemsg = Common.getText("xpath", "(//div[contains(@data-ui-id,'checkout-cart-validation')])[1]");
 		System.out.println(discountcodemsg);
 		Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
 				"verifying pomocode", expectedResult, "promotion code working as expected",
@@ -7774,7 +7774,7 @@ public void DiscountCode(String dataSet) throws Exception {
 		Float shippingvalue = Float.parseFloat(shipping);
 		String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("£", "");
 		Float Taxvalue = Float.parseFloat(Tax);
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
 				.replace("£", "");
 		Float Discountvalue = Float.parseFloat(Discount);
@@ -7783,7 +7783,7 @@ public void DiscountCode(String dataSet) throws Exception {
 		String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
 				.replace("£", "");
 		Float ordertotalvalue = Float.parseFloat(ordertotal);
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
 		String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 		Thread.sleep(4000);

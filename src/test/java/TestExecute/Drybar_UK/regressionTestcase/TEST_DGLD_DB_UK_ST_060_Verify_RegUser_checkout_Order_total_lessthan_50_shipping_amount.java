@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_UK_ST_060_Verify_RegUser_checkout_Order_total_lessthan
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_UK_ST_045_Validate_GuestUser_Checkout_MastercardCC_Tax
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

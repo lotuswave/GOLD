@@ -43,7 +43,7 @@ public class TEST_DGLD_DB_UK_ST_039_GuestUser_Add_product_from_pdp_to_wishlist_s
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

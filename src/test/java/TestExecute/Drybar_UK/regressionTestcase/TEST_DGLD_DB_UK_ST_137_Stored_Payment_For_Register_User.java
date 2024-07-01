@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_UK_ST_137_Stored_Payment_For_Register_User {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}

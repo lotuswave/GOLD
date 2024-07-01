@@ -44,7 +44,7 @@ public class TEST_DGLD_DB_UK_ST_143_Register_user_Products_are_added_to_Wishlist
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}
