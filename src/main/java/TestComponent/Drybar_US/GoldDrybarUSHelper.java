@@ -9054,7 +9054,23 @@ public void Edit_Delete_Address(String Dataset) {
 	}
 
 }
-
+public void Cancel_Giftcard() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//span[@class='icon-order-summary__remove a-icon-text-btn__icon']");
+		Common.clickElement("xpath", "//span[@class='icon-order-summary__remove a-icon-text-btn__icon']");
+		Thread.sleep(4000);
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+}
 
 }
 
