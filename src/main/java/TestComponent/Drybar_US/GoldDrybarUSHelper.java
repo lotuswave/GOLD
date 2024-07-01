@@ -9060,10 +9060,11 @@ public void Cancel_Giftcard() {
 	try
 	{
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//span[@class='icon-order-summary__remove a-icon-text-btn__icon']");
-		Common.clickElement("xpath", "//span[@class='icon-order-summary__remove a-icon-text-btn__icon']");
+		Sync.waitElementPresent("xpath", "//tr[@class='totals giftcard']//span[contains(text(),'Remove')]");
+		Common.clickElement("xpath", "//tr[@class='totals giftcard']//span[contains(text(),'Remove')]");
 		Thread.sleep(4000);
-		
+		System.out.println("Gift Card removed");
+		Common.refreshpage();
 	}
 	catch(Exception | Error e)
 	{
@@ -9071,6 +9072,8 @@ public void Cancel_Giftcard() {
 		Assert.fail();
 	}
 }
+
+
 
 }
 
