@@ -3965,15 +3965,15 @@ public class GoldDrybarUSHelper {
 			Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
 			Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
 			Thread.sleep(4000);
-			String storecredit=Common.findElement("xpath", "//strong[@id='customerbalance-available-amount']").getText();
-			System.out.println(storecredit);
+			String storecredit=Common.getText("xpath", "//strong[@id='customerbalance-available-amount']").replace(symbol, "");
+			System.out.println("storecredit"+storecredit);
 			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
 			Float Pricevalue = Float.parseFloat(price);
 			System.out.println(Pricevalue);
 			Thread.sleep(4000);
 			
-				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
-				if(balance.equals(Price))
+				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
+				if(balance.equals(price))
 				{
 					String totalbeforeWC=Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText();
 					Sync.waitElementPresent(30,"xpath", "//button[@id='use-customer-balance']");
@@ -3986,10 +3986,10 @@ public class GoldDrybarUSHelper {
 					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
 					System.out.println(storeorder);
 					System.out.println(totalbeforeWC);
-					System.out.println(Price);
+					System.out.println(price);
 					System.out.println(storecredit);
 					Common.refreshpage();
-					Common.assertionCheckwithReport(storecredit.equals(Price),"validating the store credit balance applied sucess message",
+					Common.assertionCheckwithReport(storecredit.equals(price),"validating the store credit balance applied sucess message",
 							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
 							"failed to Display the success message");
 				}
@@ -9075,11 +9075,60 @@ public void Cancel_Giftcard() {
 	}
 }
 
+public void Cancel_StoreCredit() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//button[@id='delete-customer-balance']//span[contains(text(),'Remove')]");
+		Common.clickElement("xpath", "//button[@id='delete-customer-balance']//span[contains(text(),'Remove')]");
+		Thread.sleep(4000);
+		System.out.println("Store Credit removed");
+		Common.refreshpage();
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+}
 
+public void Cancel_Discount() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//tr[@class='totals discount']//span[contains(text(),'Cancel Discount Code')]");
+		Common.clickElement("xpath", "//tr[@class='totals discount']//span[contains(text(),'Cancel Discount Code')]");
+		Thread.sleep(4000);
+		System.out.println("Discount removed");
+		Common.refreshpage();
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+}
 
 }
 
-	
+			
+
+
+		
+
+
+
+			
+
+
+
+
+
+		
+
 
 		
 
