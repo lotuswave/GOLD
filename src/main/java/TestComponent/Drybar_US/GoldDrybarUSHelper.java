@@ -547,6 +547,7 @@ public class GoldDrybarUSHelper {
 			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			
 			System.out.println(name);
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
