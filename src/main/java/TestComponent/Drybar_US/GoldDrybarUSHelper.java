@@ -523,6 +523,7 @@ public class GoldDrybarUSHelper {
 	public void addtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
+	
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -1417,8 +1418,8 @@ public class GoldDrybarUSHelper {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
-			Sync.waitPageLoad();
+//			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
+//			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();

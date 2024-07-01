@@ -37,7 +37,7 @@ public class TEST_DGLD_DB_UK_ST_068_Guestuser_checkout_with_3Ds_Authentication_P
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	//	Common.closeAll();
 
 	}
 
