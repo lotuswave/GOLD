@@ -2688,6 +2688,7 @@ public class GoldDrybarUSHelper {
 			Thread.sleep(4000);
 			if(symbol.contains("$"))
 			{
+				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//p[@data-testid='ship-to-address']");
 				String address=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
 				System.out.println(address);
