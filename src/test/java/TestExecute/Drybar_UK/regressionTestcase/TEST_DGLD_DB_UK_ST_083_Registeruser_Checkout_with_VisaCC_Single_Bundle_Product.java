@@ -9,23 +9,26 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_UK_ST_030_Register_User_Product_Back_in_Stock_Subscription {
+public class TEST_DGLD_DB_UK_ST_083_Registeruser_Checkout_with_VisaCC_Single_Bundle_Product {
 
 	String datafile = "Drybar_UK//GoldDrybarUKTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Outofstock");
+	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_User_Product_Back_in_Stock_Subscription() throws Exception {
+	public void Validate_Registeruser_Checkout_with_VisaCC_Single_Bundle_Product  () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.search_product("Outofstock Product");  
-			String amount=Drybar.reg_outofstock_subcription("Outofstock Product");
-		    Drybar.My_order_subcribtion("Outofstock Product");
-		    Drybar.remove_outofstock_subcribtion(amount);
+			Drybar.search_product("Bundle Product");  
+			Drybar.Addtocart_Bundle("Bundle Product"); 
+			Drybar.minicart_Checkout();
+			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
 		} catch (Exception e) {
