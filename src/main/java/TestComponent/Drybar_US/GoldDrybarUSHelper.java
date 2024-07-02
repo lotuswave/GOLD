@@ -5371,6 +5371,8 @@ Thread.sleep(5000);
     		String products = data.get(Dataset).get("oss Product");
     		String prod = data.get(Dataset).get("prod product");
     		String productsize = data.get(Dataset).get("Size");
+    		String symbol=productsize = data.get(Dataset).get("Symbol");
+    		System.out.println(symbol);
     		String price = "";
 
     		try {
@@ -5393,13 +5395,13 @@ Thread.sleep(5000);
     				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
     				Common.scrollIntoView("xpath", "//img[contains(@alt,'" + products + "')]");
     				Common.mouseOver("xpath", "//img[contains(@alt,'" + products + "')]");
-    				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
-    						.getAttribute("data-price-amount");
+    				Thread.sleep(4000);
+    				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace(symbol,"").replace(".00", "");
     				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
     				String PLPprice = Common
-    						.findElement("xpath","//div[@class='m-product-overview__prices']//span[@class='price-wrapper']")
+    						.findElement("xpath","//div[@class='m-product-overview__prices']//span[contains(@class,'price-wrapper')]")
     						.getAttribute("data-price-amount");
     				System.out.println(PLPprice);
     				System.out.println(productprice);
@@ -5409,10 +5411,17 @@ Thread.sleep(5000);
     						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
+    				if(Common.getCurrentURL().contains("/gb"))
+    				{
+    					System.out.println(name);
+    				}
+    				else
+    				{
     				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productsize + "']");
     				Common.clickElement("xpath", "//div[@data-option-label='" + productsize + "']");
+    				}
     				Thread.sleep(4000);
-    				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+    				Common.clickElement("xpath", "//a[@class='action alert']");
     				Sync.waitPageLoad(40);
     				Thread.sleep(5000);
     				String newsubcribe = Common.findElement("xpath", "//div[@class='a-message__container-inner']")
@@ -5425,12 +5434,18 @@ Thread.sleep(5000);
     						"after click on subcribe button message should be appear",
     						"Sucessfully message has been displayed when we click on the subcribe button ",
     						"Failed to display the message after subcribtion");
-    				
+    				if(Common.getCurrentURL().contains("/gb"))
+    				{
+    					System.out.println(name);
+    				}
+    				else
+    				{
     				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productsize + "']");
     				Common.clickElement("xpath", "//div[@data-option-label='" + productsize + "']");
+    				}
     				Thread.sleep(4000);
     				Common.actionsKeyPress(Keys.END);
-    				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+    				Common.clickElement("xpath", "//a[@class='action alert']");
     				Sync.waitPageLoad();
     				Thread.sleep(4000);
     				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
@@ -5442,8 +5457,9 @@ Thread.sleep(5000);
     						"Sucessfully message has been displayed when we click on the subcribe button ",
     						"Failed to display the message after subcribtion");
     				price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
-    						.getAttribute("data-price-amount");
-    			} else {
+    							.getAttribute("data-price-amount");
+    			
+    			}else {
     				
     				Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
     				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper is-special-price']")
