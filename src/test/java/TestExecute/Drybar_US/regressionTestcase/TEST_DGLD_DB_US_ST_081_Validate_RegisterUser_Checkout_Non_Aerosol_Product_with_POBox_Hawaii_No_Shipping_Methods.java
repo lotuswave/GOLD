@@ -9,13 +9,13 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_079_Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Hawaii_no_Shipping_Methods {
+public class TEST_DGLD_DB_US_ST_081_Validate_RegisterUser_Checkout_Non_Aerosol_Product_with_POBox_Hawaii_No_Shipping_Methods {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Hawaii_no_Shipping_Methods () throws Exception {
+	public void Validate_RegisterUser_Checkout_NonAerosol_Products_with_POBox_and_Hawaii_no_Shipping_Methods () throws Exception {
 
 		try {
 		
@@ -23,12 +23,10 @@ public class TEST_DGLD_DB_US_ST_079_Validate_RegisterUser_Checkout_Aerosol_Produ
 		Drybar.Verify_Homepage();
 		Drybar.click_singinButton();
 		Drybar.login_Drybar("AccountDetails");
-		Drybar.search_product("Aerosol");  
-		Drybar.addtocart("Aerosol");
 		Drybar.HairTools_headerlinks("Hair Tools"); 
 		Drybar.addtocart("PLP Product");
 		Drybar.minicart_Checkout();
-		Drybar.RegaddDeliveryAddress("Non-Po_Box_Hawai");
+		Drybar.RegaddDeliveryAddress("Po_Box_Hawai");
 		Drybar.Validate_shipping_methods();
 		
 		
