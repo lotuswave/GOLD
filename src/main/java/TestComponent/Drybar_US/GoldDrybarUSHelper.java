@@ -2249,6 +2249,7 @@ public class GoldDrybarUSHelper {
 		
 		String products = data.get(Dataset).get("Products");
 		String Productsize= data.get(Dataset).get("size");
+		String scent=data.get(Dataset).get("scent");
 		System.out.println(Productsize);
 		System.out.println(products);
 		try {
@@ -2266,6 +2267,44 @@ public class GoldDrybarUSHelper {
 					break;
 				}
 			}
+			if(Common.getCurrentURL().contains("/gb"))
+			{
+				Sync.waitPageLoad(30);
+				Thread.sleep(6000);
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+				String size=Common.findElement("xpath", "(//span[contains(@class,'m-swatch-group__header s')])[2]").getText().toUpperCase();
+				System.out.println(size);
+				String size1= data.get(Dataset).get("size").toUpperCase();
+				System.out.println(size1);
+				Common.assertionCheckwithReport(
+						size.equals(size1),
+						"Verifying the the size of the product is selected in the PDP",
+						"after clicking on the size product size should be selected",
+						"successfully Product size has been selected on the PDP",
+						"Failed to select the product price on the PDP");
+				product_quantity(Dataset);
+				Thread.sleep(4000);
+				
+				Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+//				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//						.getAttribute("data-ui-id");
+//				System.out.println(message);
+//				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//						"Product should be add to cart", "Sucessfully product added to the cart ",
+//						"failed to add product to the cart");
+			}
+			else
+			{
+				
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
 			Thread.sleep(4000);
@@ -2296,6 +2335,7 @@ public class GoldDrybarUSHelper {
 //			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //					"Product should be add to cart", "Sucessfully product added to the cart ",
 //					"failed to add product to the cart");
+		}
 		}
 		catch(Exception | Error e)
 		{
