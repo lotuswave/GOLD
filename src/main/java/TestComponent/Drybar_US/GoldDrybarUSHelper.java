@@ -3369,26 +3369,59 @@ public class GoldDrybarUSHelper {
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
-					.replace(Symbol, "");
-			Float shippingvalue = Float.parseFloat(shipping);
-			String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-					.replace(Symbol, "");
-			Float Discountvalue = Float.parseFloat(Discount);
-			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
-			Float Taxvalue = Float.parseFloat(Tax);
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
-					.replace(Symbol, "");
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
-			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-					"validating the order summary in the payment page",
-					"Order summary should be display in the payment page and all fields should display",
-					"Successfully Order summary is displayed in the payment page and fields are displayed",
-					"Failed to display the order summary and fileds under order summary");
+			if(Common.getCurrentURL().contains("/gb")) {
+				
+				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
+						.replace(Symbol, "");
+				Float shippingvalue = Float.parseFloat(shipping);
+				
+				System.out.println("Shipping:"+  shippingvalue);
+				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
+						.replace(Symbol, "");
+				Float Discountvalue = Float.parseFloat(Discount);
+				System.out.println("Discount:"+ Discountvalue);
+				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				Float Taxvalue = Float.parseFloat(Tax);
+				System.out.println("Tax:"+  Taxvalue);
+				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+						.replace(Symbol, "");
+				Float ordertotalvalue = Float.parseFloat(ordertotal);
+				System.out.println("Order Total"+   ordertotalvalue);
+				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
+				
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+						"validating the order summary in the payment page",
+						"Order summary should be display in the payment page and all fields should display",
+						"Successfully Order summary is displayed in the payment page and fields are displayed",
+						"Failed to display the order summary and fileds under order summary");
+			}
+			else {
+				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+						.replace(Symbol, "");
+				Float shippingvalue = Float.parseFloat(shipping);
+				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
+						.replace(Symbol, "");
+				Float Discountvalue = Float.parseFloat(Discount);
+				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				Float Taxvalue = Float.parseFloat(Tax);
+				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+						.replace(Symbol, "");
+				Float ordertotalvalue = Float.parseFloat(ordertotal);
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(ordertotal);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+						"validating the order summary in the payment page",
+						"Order summary should be display in the payment page and all fields should display",
+						"Successfully Order summary is displayed in the payment page and fields are displayed",
+						"Failed to display the order summary and fileds under order summary");
+			}
+			
+			
 			}
 			else
 			{
