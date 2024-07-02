@@ -930,7 +930,8 @@ public class GoldDrybarUSHelper {
 
 		else {
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(6000);
+				Sync.waitElementPresent(30,"xpath", "//h1[@class='page-title-wrapper']");
 				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 
 				//Tell_Your_FriendPop_Up();
