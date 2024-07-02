@@ -2276,8 +2276,8 @@ public class GoldDrybarUSHelper {
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
 				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-				Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
+				Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
 				String size=Common.findElement("xpath", "(//span[contains(@class,'m-swatch-group__header s')])[2]").getText().toUpperCase();
 				System.out.println(size);
 				String size1= data.get(Dataset).get("size").toUpperCase();
