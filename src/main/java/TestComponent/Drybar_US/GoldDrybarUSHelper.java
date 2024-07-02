@@ -9152,8 +9152,9 @@ public void Cancel_Giftcard() {
 	try
 	{
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//tr[@class='totals giftcard']//span[contains(text(),'Remove')]");
-		Common.clickElement("xpath", "//tr[@class='totals giftcard']//span[contains(text(),'Remove')]");
+		Sync.waitElementPresent("xpath", "//button[@class='amcard-delete a-btn a-btn--tertiary']//span[contains(text(),'Remove')]");
+		Common.clickElement("xpath", "//button[@class='amcard-delete a-btn a-btn--tertiary']//span[contains(text(),'Remove')]");
+
 		Thread.sleep(4000);
 		System.out.println("Gift Card removed");
 		Common.refreshpage();

@@ -9,15 +9,14 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_UK_ST_064_Register_User_Checkout_storecredit_GiftCode_3D_payment_Discount_Partial_Payment {
+public class TEST_DGLD_DB_UK_ST_178_Register_User_Multiple_Items_Add_GC_WC_Discount_and_Cancel_Applied_GC_WC_Discount_Place_an_Order_with_CC_and_Verify_Order {
 
 	
-
 	String datafile = "Drybar_UK//GoldDrybarUKTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Reg_User_Checkout_Storecredit_GiftCode_3d_payment_Discount_Partial_Payment () throws Exception {
+	public void Validate_Reg_User_Checkout_Storecredit_GiftCode_Discount_Applied_Cancelled_CC() throws Exception {
 
 		try {
 			
@@ -28,6 +27,8 @@ public class TEST_DGLD_DB_UK_ST_064_Register_User_Checkout_storecredit_GiftCode_
 			String Price= Drybar.Store_Credit_balance();
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
+			Drybar.HairTools_headerlinks("Hair Tools"); 
+			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
@@ -35,7 +36,10 @@ public class TEST_DGLD_DB_UK_ST_064_Register_User_Checkout_storecredit_GiftCode_
 			Drybar.discountCode("Discount");
 			Drybar.gitCard("Partial GiftCode");
 			Drybar.Apply_Store_Credit(Price);
-			Drybar.Secure_Payment_details("3d_Secure");
+			Drybar.Cancel_StoreCredit();
+			Drybar.Cancel_Discount();
+			Drybar.Cancel_Giftcard();
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
 
@@ -45,7 +49,7 @@ public class TEST_DGLD_DB_UK_ST_064_Register_User_Checkout_storecredit_GiftCode_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
