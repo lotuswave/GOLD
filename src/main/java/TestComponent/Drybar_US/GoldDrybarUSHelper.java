@@ -283,6 +283,7 @@ public class GoldDrybarUSHelper {
 		if (size > 0) {
 			try {
 				Common.clickElement("xpath", "//div[@class='new-address-popup']//button");
+				
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
@@ -435,6 +436,7 @@ public class GoldDrybarUSHelper {
 		}
 
 	}
+	
 	
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
