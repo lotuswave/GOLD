@@ -7145,9 +7145,10 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                           	System.out.println(frameid);
                         	Thread.sleep(8000);
                           	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-                          	Thread.sleep(5000);
-                     		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-                     		Thread.sleep(5000);
+                          	Thread.sleep(8000);
+                          	Sync.waitElementPresent(30, "xpath", "//iframe[@id='challengeFrame' and @title='3DS Challenge']");
+                     		Common.switchFrames("xpath", "//iframe[@id='challengeFrame' and @title='3DS Challenge']");
+                     		Thread.sleep(6000);
                          	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
                          	Common.switchToDefault();
                          	Common.switchToDefault();
@@ -7206,7 +7207,7 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                          	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
                          	Thread.sleep(4000);
                     		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-                    		Thread.sleep(4000);
+                     		Thread.sleep(4000);
                         	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
                         	Common.switchToDefault();
                         	Common.switchToDefault();
@@ -7257,7 +7258,9 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
               	 Thread.sleep(8000);
           	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
           	   System.out.println(frameid);
+          	   Thread.sleep(4000);
           	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+          	  Thread.sleep(4000);
      			Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
          		Thread.sleep(4000);
          		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
