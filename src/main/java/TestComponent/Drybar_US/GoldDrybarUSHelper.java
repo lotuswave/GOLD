@@ -4243,6 +4243,7 @@ public void FUll_Payment(String dataSet) {
 		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
 	    System.out.println(successmsg);	
+	    Common.refreshpage();
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
 				"Success message should be displayed after the applying of gift card",
@@ -4279,17 +4280,18 @@ Thread.sleep(5000);
 
 		String order = "";
 		String expectedResult = "It redirects to order confirmation page";
-		Common.actionsKeyPress(Keys.PAGE_UP);
+	//	Common.refreshpage();
+	//	Common.actionsKeyPress(Keys.PAGE_UP);
 		Thread.sleep(3000);
 		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
 			Thread.sleep(5000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
 	   Thread.sleep(5000);
-	   Sync.waitElementClickable("xpath", "//button[@class='action primary checkout']");
+	//   Sync.waitElementClickable("xpath", "//button[@class='action primary checkout']");
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			//Common.refreshpage();
-		Thread.sleep(4000);
+		Thread.sleep(8000);
 		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 		//Thread.sleep(4000);
 		
@@ -4301,7 +4303,7 @@ Thread.sleep(5000);
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		if (!url.contains("stage") || !url.contains("preprod")) {
+		if (url.contains("stage") || url.contains("preprod")) {
 		
 			
 		}

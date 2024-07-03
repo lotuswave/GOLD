@@ -1,4 +1,4 @@
-package TestExecute.Drybar_US.regressionTestcase;
+package TestExecute.Drybar_UK.regressionTestcase;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,14 +9,14 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_180_Register_User_Multiple_Items_Add_WC_and_Cancel_Applied_WC_Place_an_Order_with_PayPal_and_Verify_Order {
+public class TEST_DGLD_DB_UK_ST_179_RegUser_Multiple_Items_QTY_WC_Fullredeem_and_Cancel_Applied_WC_and_Place_Order_with_PayPal_and_Verify_Order_details_in_MYOrdersPage {
 
 	
-	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
+	String datafile = "Drybar_UK//GoldDrybarUKTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Reg_User_Multiple_Items_Add_WC_and_Cancel_Applied_WC_Place_an_Order_with_PayPal_and_Verify_Order() throws Exception {
+	public void Validate_Reg_User_Checkout_Storecredit_Applied_and_Cancelled_place_with_Paypal() throws Exception {
 
 		try {
 			
@@ -35,11 +35,8 @@ public class TEST_DGLD_DB_US_ST_180_Register_User_Multiple_Items_Add_WC_and_Canc
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Apply_Store_Credit(Price);
 			Drybar.Cancel_StoreCredit();
-			
 			String Ordernumber=Drybar.payPal_Payment("PaypalDetails");
 			Drybar.Order_ID_Verification(Ordernumber);
-
-		
 
 		} catch (Exception e) {
 
@@ -49,16 +46,17 @@ public class TEST_DGLD_DB_US_ST_180_Register_User_Multiple_Items_Add_WC_and_Canc
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Drybar_US\\config.properties");
+		System.setProperty("configFile", "Drybar_UK\\config.properties");
         Login.signIn();
         Drybar.close_add();
         
 
 	}
+	
 }
