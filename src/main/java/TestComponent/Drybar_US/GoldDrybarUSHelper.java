@@ -5406,7 +5406,7 @@ Thread.sleep(5000);
     		String products = data.get(Dataset).get("oss Product");
     		String prod = data.get(Dataset).get("prod product");
     		String productsize = data.get(Dataset).get("Size");
-    		String symbol=productsize = data.get(Dataset).get("Symbol");
+    		String symbol= data.get(Dataset).get("Symbol");
     		System.out.println(symbol);
     		String price = "";
 

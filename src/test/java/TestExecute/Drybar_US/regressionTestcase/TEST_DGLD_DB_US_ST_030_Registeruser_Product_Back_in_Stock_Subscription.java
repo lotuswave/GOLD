@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_030_Product_Back_in_Stock_Subscription {
+public class TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscription {
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Outofstock");
 
