@@ -4310,6 +4310,8 @@ Thread.sleep(5000);
 		Thread.sleep(8000);
 		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 		//Thread.sleep(4000);
+		order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+		System.out.println(order);
 		
    }
    else
