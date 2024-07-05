@@ -7704,9 +7704,9 @@ public void After_Pay_payment(String dataSet) throws Exception {
 		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 		System.out.println(payment);
 		if (payment > 0) {
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-			Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-			Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+			//Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			//Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+			//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
 			Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
