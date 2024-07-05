@@ -23,12 +23,11 @@ public class TEST_DGLD_DB_US_ST_165__Guest_User_Create_Account_from_OrderConfirm
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.addDeliveryAddress_Guestuser("Address");
+			Drybar.addDeliveryAddress_Guestuser("NewAccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
-			Drybar.click_Createaccount();
-			Drybar.create_account("NewAccountDetails");
+			Drybar.createAccountFromOrderSummaryPage("NewAccountDetails");
 			
 
 		} catch (Exception e) {

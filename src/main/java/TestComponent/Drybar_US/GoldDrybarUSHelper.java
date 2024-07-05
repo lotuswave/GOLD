@@ -9382,7 +9382,85 @@ public String discount_Giftcard_Express_Paypal(String dataSet) throws Exception 
 	
 }
 
+public void createAccountFromOrderSummaryPage(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+
+		Common.clickElement("xpath", "//input[@name='password']");
+		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+		Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+		Sync.waitElementPresent(10, "xpath", "//input[@name='password_confirmation']");
+		Common.clickElement("xpath", "//input[@name='password_confirmation']");
+		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+				data.get(Dataset).get("Confirm Password"));
+		Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
+		String accounttext = Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
+		String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
+				.getAttribute("type");
+		String password = Common.findElement("xpath", "//input[@name='password_confirmation']")
+				.getAttribute("type");
+		String Message = Common.findElement("id", "validation-classes").getCssValue("color");
+		String Greencolor = Color.fromString(Message).asHex();
+		String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
+		System.out.println(Greencolor);
+		System.out.println(Message1);
+		System.out.println(confirmpassword);
+		System.out.println(password);
+		System.out.println(accounttext);
+		Common.assertionCheckwithReport(
+				Greencolor.equals("#ffffff") && Message1.contains("validation icon")
+						&& confirmpassword.equals("text") && password.equals("text")
+						&& accounttext.contains("Create an Account"),
+				"validating the order confirmation page",
+				"User should able to view all details in the order confirmation page",
+				"Sucessfully all details has been displayed in the order confirmation",
+				"Failed to display all details in the order confirmation page");
+		Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+		Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+		Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[2]");
+		Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
+		String confirmpassword1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
+				.getAttribute("type");
+		String password1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
+				.getAttribute("type");
+		Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
+		Common.clickElement("xpath", "//label[@for='is_subscribed']");
+		Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
+		Common.assertionCheckwithReport(confirmpassword1.equals("password") && password1.equals("password"),
+				"validating the password field changed to dots",
+				"After clicking on the eye icon it should be change to dots",
+				"Sucessfully passwords has been changed to dots after clicking on eye icon",
+				"Failed change passwords into dots after clicking on eye icon");
+
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
+		Common.clickElement("xpath", "//span[text()='Create an Account']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath",
+				"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']");
+		String message = Common.findElement("xpath",
+				"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
+		Common.assertionCheckwithReport(
+				Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
+				"validating the  my Account page Navigation when user clicks on signin button",
+				"User should able to navigate to the my account page after clicking on Signin button",
+				"Sucessfully navigate to the My account page after clicking on signin button ",
+				"Failed to navigates to My Account Page after clicking on Signin button");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the  my Account page Navigation when user clicks on signin button",
+				"User should able to navigate to the my account page after clicking on Signin button",
+				"Unable to  navigate to the My account page after clicking on signin button ",
+				Common.getscreenShotPathforReport(
+						"Failed to navigates to My Account Page after clicking on Signin button"));
+		Assert.fail();
+	}
 }
+
+}
+
+
 
 			
 
