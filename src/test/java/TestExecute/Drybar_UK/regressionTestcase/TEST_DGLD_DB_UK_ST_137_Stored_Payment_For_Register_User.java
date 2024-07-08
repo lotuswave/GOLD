@@ -28,7 +28,7 @@ public class TEST_DGLD_DB_UK_ST_137_Stored_Payment_For_Register_User {
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			String Number=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
+			String Number=Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 		    Drybar.Stored_Payment(Number);
 			
 
@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_UK_ST_137_Stored_Payment_For_Register_User {
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 		
 
 	}
