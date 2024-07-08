@@ -7719,6 +7719,16 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			Thread.sleep(3000);
+			
+			Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+			Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+			Thread.sleep(3000);	
+			
+			Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
+			Common.clickElement("xpath", "//button[@class='action primary checkout']");
+			
+			Thread.sleep(3000);
+
 			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 					}
 			else
