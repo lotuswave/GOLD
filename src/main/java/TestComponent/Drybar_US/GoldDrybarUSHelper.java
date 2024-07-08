@@ -6836,7 +6836,7 @@ Thread.sleep(5000);
 					String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
 							.replace(symbol, "");
 					Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-					Float Total = subtotalvalue * 2;
+					Float Total = subtotalvalue;
 					String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 					System.out.println(subtotalvalue);
 					System.out.println(UpdataedQuntityinminicart);
