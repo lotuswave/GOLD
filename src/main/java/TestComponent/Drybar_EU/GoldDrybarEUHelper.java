@@ -51,7 +51,7 @@ public class GoldDrybarEUHelper {
 		} else {
 			this.report = Utilities.TestListener.report;
 		}
-
+ 
 	}
 
 	public void close_add() throws Exception {
@@ -442,7 +442,7 @@ public class GoldDrybarEUHelper {
 		System.out.println(method);
 
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(20000);
 			int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
 			System.out.println(size);
 			if (size > 0  ) {
