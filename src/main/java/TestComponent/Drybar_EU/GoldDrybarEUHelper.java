@@ -340,6 +340,143 @@ public class GoldDrybarEUHelper {
 	}
 
 	
+	 
+	 
+	 public void minicart_delete(String Dataset) {
+			// TODO Auto-generated method stub
+			String deleteproduct = data.get(Dataset).get("Products");
+			String symbol=data.get(Dataset).get("Symbol");
+			try {
+				click_minicart();
+				Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__subtotal-amount']//span");
+				String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span").replace(symbol, "");
+				Float subtotalvalue = Float.parseFloat(subtotal);
+				String productname = Common
+						.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[text()='"+deleteproduct+"'])").getText();
+				String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace(symbol,"");
+				Float productamount1value = Float.parseFloat(productamount1);
+				if (productname.equals(deleteproduct)) {
+					Sync.waitElementPresent(30, "xpath",
+							"(//div[@class='m-mini-product-card__info']//span[contains(@class,'delete')])[1]");
+					Common.clickElement("xpath",
+							"(//div[@class='m-mini-product-card__info']//span[contains(@class,'delete')])[1]");
+					Thread.sleep(3000);
+					Common.clickElement("xpath","//span[contains(text(),'OK')]");
+				
+				} else {
+					Assert.fail();
+				}
+				Thread.sleep(6000);
+				String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+						.replace(symbol, "");
+				Float subtotal1value = Float.parseFloat(subtotal1);
+				Thread.sleep(8000);
+				String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace(symbol, "");
+				Float productamountvalue = Float.parseFloat(productamount);
+				Float deletedproductamount = subtotalvalue - subtotal1value;
+				Float Total = subtotalvalue - deletedproductamount;
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Thread.sleep(4000);
+				System.out.println(subtotalvalue);
+				System.out.println(subtotal1value);
+				System.out.println(deletedproductamount);
+				System.out.println(productamount);
+				System.out.println(productamount1value);
+				System.out.println(Total);
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(subtotal1);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
+						"validating the delete operation and subtotal",
+						"The product should be delete from mini cart and subtotal should change",
+						"Successfully product delete from the mini cart and subtotal has been changed",
+						"Failed to delete the product from cart and subtotal not changed");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the delete operation and subtotal",
+						"The product should be delete from mini cart and subtotal should change",
+						"unable to delete product from the mini cart and subtotal has not changed", Common.getscreenShot(
+								"Failed to delete the product from the mini cart and subtotal has not changed"));
+				Assert.fail();
+			}
+		}
+	 
+	 
+	 public void clickontheproduct_and_image(String Dataset) {
+			// TODO Auto-generated method stub
+			String product = data.get(Dataset).get("Products");
+			System.out.println(product);
+			
+			try {
+				String minicartproduct = Common
+						.findElement("xpath", "//a[@class='a-product-name' and text()='" + product + "']").getText();
+				Common.clickElement("xpath", "//a[@class='a-product-name' and text()='" + product + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				System.out.println(minicartproduct);
+				Common.assertionCheckwithReport(product.contains(minicartproduct),
+						"validating the product navigating to the PDP page",
+						"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+						"Failed to Navigates Product to the PDP page");
+				
+				
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the product navigating to the PDP page",
+						"The product Should be navigates to the PDP page", " unable to Navigates Product to the PDP page",
+						Common.getscreenShot("Failed to Navigates Product to the PDP page"));
+				Assert.fail();
+			}
+
+		}
+	 
+		public void minicart_validation(String Dataset) {
+			// TODO Auto-generated method stub
+			String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
+			String symbol=data.get(Dataset).get("Symbol");
+			try {
+
+				String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+						.replace(symbol, "");
+				Float subtotalvalue = Float.parseFloat(Subtotal);
+				Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
+				Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
+				Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
+						UpdataedQuntityinminicart);
+				Common.clickElement("xpath", "//span[text()='Update']");
+				Thread.sleep(8000);
+				Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__total-counter']/strong");
+				String cart = Common.findElement("xpath", "//span[@class='c-mini-cart__total-counter']/strong").getText();
+				System.out.println(cart);
+				String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+						.replace(symbol, "");
+				Float subtotalvalue2 = Float.parseFloat(Subtotal2);
+				Float Total = subtotalvalue;
+				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				System.out.println(subtotalvalue);
+				System.out.println(UpdataedQuntityinminicart);
+				System.out.println(cart);
+				System.out.println(ExpectedTotalAmmount2);
+				System.out.println(Subtotal2);
+				Common.assertionCheckwithReport(
+						UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
+						"validating the product update quantity and subtotal",
+						"The product Quantity should be update in mini cart and subtotal should change",
+						"Successfully product quantity updated and subtotal has been changed",
+						"Failed to update the product quantity from cart and subtotal not changed");
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the product update quantity and subtotal",
+						"The product Quantity should be update in mini cart and subtotal should change",
+						"unable to update the product quantity and subtotal has not be changed",
+						Common.getscreenShot("Failed to update the product quantity from cart and subtotal not changed"));
+				Assert.fail();
+			}
+
+		}
+	
+	
 	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		String address = data.get(dataSet).get("Street");
 		String symbol=data.get(dataSet).get("Symbol");
