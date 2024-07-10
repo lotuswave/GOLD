@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_EU_ST_009_Guest_user_checkout_with_Standard_Shipping_M
 
 		
 		String datafile = "Drybar_EU//GoldDrybarEUTestData.xlsx";
-		GoldDrybarUSHelper Drybar_US= new GoldDrybarUSHelper(datafile,"DataSet");
+		GoldDrybarUSHelper Drybar= new GoldDrybarUSHelper(datafile,"DataSet");
 		
 		
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -23,14 +23,14 @@ public class TEST_DGLD_DB_EU_ST_009_Guest_user_checkout_with_Standard_Shipping_M
 
 			try {
 			
-				Drybar_US.Verify_Homepage();
-				Drybar_US.HairTools_headerlinks("Hair Tools"); 
-				Drybar_US.addtocart("PLP Product");
-				Drybar_US.minicart_Checkout();
-				Drybar_US.addDeliveryAddress_Guestuser("Address");
-				Drybar_US.selectshippingmethod("GroundShipping method");
-				Drybar_US.clickSubmitbutton_Shippingpage();
-				Drybar_US.updatePaymentAndSubmitOrder("PaymentDetails");	
+				Drybar.Verify_Homepage();
+				Drybar.HairTools_headerlinks("Hair Tools"); 
+				Drybar.addtocart("PLP Product");
+				Drybar.minicart_Checkout();
+				Drybar.addDeliveryAddress_Guestuser("Address");
+				Drybar.selectshippingmethod("GroundShipping method");
+				Drybar.clickSubmitbutton_Shippingpage();
+				Drybar.updatePaymentAndSubmitOrder("PaymentDetails");	
 
 			} catch (Exception e) {
 
@@ -49,7 +49,7 @@ public class TEST_DGLD_DB_EU_ST_009_Guest_user_checkout_with_Standard_Shipping_M
 		public void startTest() throws Exception {
 			System.setProperty("configFile", "Drybar_EU\\config.properties");
 	        Login.signIn();
-	        Drybar_US.close_add();
+	        Drybar.close_add();
 	        
 
 		}

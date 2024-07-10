@@ -65,7 +65,7 @@ public class GoldDrybarUSHelper {
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Drybar")
-							|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home"),
+							|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar - Home page"),
 					"validating store logo", "System directs the user to the Homepage",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		}
@@ -853,7 +853,7 @@ public class GoldDrybarUSHelper {
 		System.out.println(method);
 
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
 			System.out.println(size);
 			if (size > 0  ) {

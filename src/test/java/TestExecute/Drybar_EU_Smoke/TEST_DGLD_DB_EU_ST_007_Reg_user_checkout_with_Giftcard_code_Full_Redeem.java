@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_EU.GoldDrybarEUHelper;
+import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -14,7 +15,7 @@ public class TEST_DGLD_DB_EU_ST_007_Reg_user_checkout_with_Giftcard_code_Full_Re
 
 		
 		String datafile = "Drybar_EU//GoldDrybarEUTestData.xlsx";
-		GoldDrybarEUHelper Drybar_EU = new GoldDrybarEUHelper(datafile,"DataSet");
+		GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 		
 		
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -22,17 +23,17 @@ public class TEST_DGLD_DB_EU_ST_007_Reg_user_checkout_with_Giftcard_code_Full_Re
 
 			try {
 			
-				Drybar_EU.Verify_Homepage();
-				Drybar_EU.click_singinButton();
-				Drybar_EU.login_Drybar("AccountDetails");
-				Drybar_EU.HairTools_headerlinks("Hair Tools"); 
-				Drybar_EU.addtocart("PLP Product");
-				Drybar_EU.minicart_Checkout();
-				Drybar_EU.RegaddDeliveryAddress("AccountDetails");
-				Drybar_EU.selectshippingmethod("GroundShipping method");
-				Drybar_EU.clickSubmitbutton_Shippingpage();
-				Drybar_EU.gitCard("GiftCode Full Redeem");
-				Drybar_EU.giftCardSubmitOrder();	
+				Drybar.Verify_Homepage();
+				Drybar.click_singinButton();
+				Drybar.login_Drybar("AccountDetails");
+				Drybar.HairTools_headerlinks("Hair Tools"); 
+				Drybar.addtocart("PLP Product");
+				Drybar.minicart_Checkout();
+				Drybar.RegaddDeliveryAddress("AccountDetails");
+				Drybar.selectshippingmethod("GroundShipping method");
+				Drybar.clickSubmitbutton_Shippingpage();
+				Drybar.gitCard("GiftCode Full Redeem");
+				Drybar.giftCardSubmitOrder();	
 
 			} catch (Exception e) {
 
@@ -51,7 +52,7 @@ public class TEST_DGLD_DB_EU_ST_007_Reg_user_checkout_with_Giftcard_code_Full_Re
 		public void startTest() throws Exception {
 			System.setProperty("configFile", "Drybar_EU\\config.properties");
 	        Login.signIn();
-	        Drybar_EU.close_add();
+	        Drybar.close_add();
 	        
 
 		}
