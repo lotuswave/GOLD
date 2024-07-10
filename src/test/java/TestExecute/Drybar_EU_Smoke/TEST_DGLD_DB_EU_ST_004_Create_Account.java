@@ -35,7 +35,7 @@ public class TEST_DGLD_DB_EU_ST_004_Create_Account {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}

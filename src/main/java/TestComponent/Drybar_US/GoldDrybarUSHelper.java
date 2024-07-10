@@ -2314,7 +2314,7 @@ public class GoldDrybarUSHelper {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-			String size=Common.findElement("xpath", "//span[contains(@class,'m-swatch-group__header s')]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'m-swatch-group__header s')])[2]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -3371,7 +3371,7 @@ public class GoldDrybarUSHelper {
 			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			if(Common.getCurrentURL().contains("/gb")) {
+			if(Common.getCurrentURL().contains("/gb")|| Common.getCurrentURL().contains("/eu"))  {
 				
 				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
 						.replace(Symbol, "");
