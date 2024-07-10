@@ -83,7 +83,7 @@ public class GoldDrybarUSHelper {
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("/gb") || Common.getCurrentURL().contains("/eu") )
+			if (Common.getCurrentURL().contains("/gb") || Common.getCurrentURL().contains("/eu") || Common.getCurrentURL().contains("stage4")  )
 			{
 				System.out.println(Common.getCurrentURL());
 			}
