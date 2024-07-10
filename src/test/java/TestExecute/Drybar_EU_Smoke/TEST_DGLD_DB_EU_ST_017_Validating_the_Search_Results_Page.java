@@ -5,7 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_EU.GoldDrybarEUHelper;
+
 import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
@@ -44,7 +44,7 @@ public class TEST_DGLD_DB_EU_ST_017_Validating_the_Search_Results_Page {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_EU\\config.properties");
         Login.signIn();
-        Drybar_US.close_add();
+        Drybar.close_add();
         
 
 	}
