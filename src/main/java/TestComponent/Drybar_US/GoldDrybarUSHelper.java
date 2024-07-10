@@ -117,7 +117,7 @@ public class GoldDrybarUSHelper {
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Home Drybar") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Drybar Home")
-					|| Common.getPageTitle().contains("\"Drybar - Home page"),
+					|| Common.getPageTitle().contains("Drybar - Home page"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
