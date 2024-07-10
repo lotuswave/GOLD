@@ -781,6 +781,10 @@ public class GoldDrybarUSHelper {
 					data.get(dataSet).get("LastName"));
 			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']", address);
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//select[@name='country_id']");
+		    Common.dropdown("xpath", "//select[@name='country_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
+			Thread.sleep(2000);
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
@@ -3651,6 +3655,10 @@ public class GoldDrybarUSHelper {
 
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
+				
+				Common.scrollIntoView("xpath", "//select[@name='country_id']");
+			    Common.dropdown("xpath", "//select[@name='country_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
+				Thread.sleep(2000);
 
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
