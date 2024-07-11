@@ -27,6 +27,7 @@ public class TEST_DGLD_DB_EU_ST_014_Register_user_Checkout_With_Discount_Visa_ca
 		//	Drybar_EU.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.discountCode("Discount");
 			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
  
 		} catch (Exception e) {

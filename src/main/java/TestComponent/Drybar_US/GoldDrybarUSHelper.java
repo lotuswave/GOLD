@@ -4748,7 +4748,7 @@ Thread.sleep(5000);
     					.replace(Symbol, "");
     			Float ordertotalvalue = Float.parseFloat(ordertotal);
     			Thread.sleep(4000);
-    			if(Common.getCurrentURL().contains("gb"))
+    			if(Common.getCurrentURL().contains("gb")||Common.getCurrentURL().contains("eu"))
     			{
     			Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
     			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -6077,11 +6077,11 @@ Thread.sleep(5000);
 			// TODO Auto-generated method stub
 			try {
 
-				Common.scrollIntoView("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
-				Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
-				Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
-				Sync.waitElementPresent("xpath", "//label[@for='facet_drybar_hair_type_all_hair_types']");
-				Common.clickElement("xpath", "//label[@for='facet_drybar_hair_type_all_hair_types']");
+//				Common.scrollIntoView("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
+//				Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
+//				Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
+				Sync.waitElementPresent("xpath", "//a[text()='All Products ']");
+				Common.clickElement("xpath", "//a[text()='All Products ']");
 				Thread.sleep(4000);
 				String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
 				System.out.println(SelectedFilter);
