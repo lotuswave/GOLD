@@ -79,7 +79,7 @@ public GoldOxoHelper(String datafile,String sheetname) {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//button[@class='needsclick klaviyo-close-form kl-private-reset-css-Xuajs1']");
+		//	Common.clickElement("xpath", "//button[@class='needsclick klaviyo-close-form kl-private-reset-css-Xuajs1']");
 			
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 	
@@ -262,14 +262,18 @@ public GoldOxoHelper(String datafile,String sheetname) {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 
 			Sync.waitPageLoad();
+			
+			
 			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
 					"//div[@class='product-options-wrapper']//div[contains(@class,'m-swatch m-swatch-group__option')]");
 			System.out.println(ListOfSubproducts.size());
 			for (int i = 0; i < ListOfSubproducts.size(); i++) {
+				
 				ListOfSubproducts.get(i).click();
+			
 				int value = i + 1;
 				Thread.sleep(5000);
-				String colorname = Common.getText("xpath","//div[@class='swatch-opt']//span[contains(@class,'m-swatch')]");
+				String colorname = Common.getText("xpath","(//div//label[@class='m-swatch-group__header swatch-attribute-selected-option'])[1]");
 				System.out.println(colorname);
 				String imagecolor = Common
 						.findElement("xpath", "(//div[contains(@class,'fotorama__nav__frame fotorama')]//img)[1]")
@@ -3448,7 +3452,7 @@ public void click_trackorder(){
 		Common.scrollIntoView("xpath", "//a[contains(text(),'Track Your')]");
 		Common.clickElement("xpath", "//a[contains(text(),'Track Your')]");
 		Sync.waitPageLoad();
-		Common.assertionCheckwithReport(Common.getPageTitle().contains("Orders and Returns")|| Common.getPageTitle().equals("My Orders") ,
+		Common.assertionCheckwithReport(Common.getPageTitle().contains("Tracking & Returns")|| Common.getPageTitle().equals("My Orders") ,
 				"Verifying the track order page navigation ",
 				"after clicking on the track order it should navigate to the orders and return page",
 				"successfully Navigated to the orders and return page",
@@ -6325,8 +6329,8 @@ public void click_FeedingDrinking() {
 	     String expectedResult = "It should opens textbox input to enter discount.";
 		try
 		{
-			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title']");
-            Common.clickElement("xpath", "//button[@class='m-accordion__title']");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Add Discount Code']");
+            Common.clickElement("xpath", "//button[@aria-label='Add Discount Code']");
 
              Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
 
