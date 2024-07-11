@@ -2746,8 +2746,8 @@ public class GoldDrybarUSHelper {
 				Sync.waitElementPresent("xpath", "//button[@data-testid='change-shipping']");
 				Common.clickElement("xpath", "//button[@data-testid='change-shipping']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
-				Thread.sleep(4000);
+//				Common.clickElement("xpath", "//select[@data-testid='shipping-dropdown']");
+//				Thread.sleep(4000);
 				Common.dropdown("xpath", "//select[@data-testid='shipping-dropdown']", SelectBy.TEXT, data.get(Dataset).get("Street"));
 				Thread.sleep(3000);
 				String Ukaddress=Common.findElement("xpath", "//p[@data-testid='ship-to-address']").getText();
