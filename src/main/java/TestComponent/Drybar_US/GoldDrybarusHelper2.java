@@ -40,7 +40,7 @@ public class GoldDrybarusHelper2 {
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
-	public GoldDrybarUSHelper(String datafile, String sheetname) {
+	public GoldDrybarusHelper2(String datafile, String sheetname) {
 
 		excelData = new ExcelReader(datafile, sheetname);
 		data = excelData.getExcelValue();
