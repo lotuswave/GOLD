@@ -273,7 +273,7 @@ public class GoldDrybarUSHelper {
 	}
 
 
-	
+
 	public void RegaddDeliveryAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
@@ -292,7 +292,9 @@ public class GoldDrybarUSHelper {
 
 				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
-
+				
+				Common.scrollIntoView("xpath", "//select[@name='country_id']");
+			    Common.dropdown("xpath", "//select[@name='country_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
@@ -437,7 +439,6 @@ public class GoldDrybarUSHelper {
 		}
 
 	}
-	
 	
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
@@ -1947,8 +1948,6 @@ public class GoldDrybarUSHelper {
 
 	}
 
-
-	
 	public String payPal_Payment(String dataSet) throws Exception  {
 		// TODO Auto-generated method stub
 		
@@ -1961,8 +1960,23 @@ public class GoldDrybarUSHelper {
 			Thread.sleep(2000);
 			Common.clickElement("xpath", "//input[@id='paypal_express']");
 			Thread.sleep(2000);
+			
+			String url=Common.getCurrentURL();
+			if(url.contains("stage")&&url.contains("/eu")){
+				
+				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Thread.sleep(8000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Continue to PayPal')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Continue to PayPal')]");
+				
+				Thread.sleep(5000);
+				
+			}
+			else {
+			
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+			
 
 			// Common.refreshpage();
 			Thread.sleep(8000);
@@ -1971,6 +1985,9 @@ public class GoldDrybarUSHelper {
 			Common.switchToDefault();
 			Thread.sleep(5000);
 			Common.switchWindows();
+			}
+			//Thread.sleep(5000);
+			//Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
 			if (size > 0) {
 
@@ -1994,8 +2011,14 @@ public class GoldDrybarUSHelper {
 
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			int sizepas = Common.findElements("id", "password").size();
+		  if(sizepas>0) {
+			  Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			  
+		  }else {
 			Common.clickElement("id", "btnNext");
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+		  }
 			int sizeemail = Common.findElements("id", "email").size();
 
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
@@ -2055,6 +2078,8 @@ public class GoldDrybarUSHelper {
 		}
 		return order;
 	}
+	
+	
 	public String Express_Venmo_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String order="";
@@ -4027,20 +4052,31 @@ public class GoldDrybarUSHelper {
 		}
 		return Price;
 	}
+	
+	public String symbols_method(String Dataset) {
+		// TODO Auto-generated method stub
+		String symbol="";
+		 symbol=  data.get(Dataset).get("Symbol");
+		 return symbol;
+	}
+
 	public void Apply_Store_Credit(String Price) throws InterruptedException {
 		// TODO Auto-generated method stub
 		String symbol="";
 		Thread.sleep(4000);
 		  String Url=Common.getCurrentURL();
 		  Thread.sleep(4000);
-		  if(Url.contains("/gb"))
+		  
+		  symbol= symbols_method("AccountDetails");
+		  
+		/*  if(Url.contains("/gb"))
 		  {
 			symbol="£";
 		  }
 		  else
 		  {
 			  symbol="$";
-		  }
+		  }*/
 		try
 		{
 			Thread.sleep(3000);
@@ -4242,7 +4278,7 @@ public void FUll_Payment(String dataSet) {
 		try{
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
-			if(URL.contains("stage")&&URL.contains("/gb") || URL.contains("preprod")&&URL.contains("/gb")) {
+			if(URL.contains("stage")&&URL.contains("/gb") || URL.contains("preprod")&&URL.contains("/gb")|| URL.contains("stage")&&URL.contains("/eu")) {
 			Thread.sleep(5000);
      	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
 //     	Common.clickElement("xpath","//span[text()='Add Gift Card']");
