@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_DB_UK_ST_014_Registered_user_checkout_with_Amex_Credit_card {
 
-	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
+	String datafile = "Drybar_UK//GoldDrybarUKTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -46,7 +46,7 @@ public class TEST_DGLD_DB_UK_ST_014_Registered_user_checkout_with_Amex_Credit_ca
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Drybar_US\\config.properties");
+		System.setProperty("configFile", "Drybar_UK\\config.properties");
         Login.signIn();
         Drybar.close_add();
         
