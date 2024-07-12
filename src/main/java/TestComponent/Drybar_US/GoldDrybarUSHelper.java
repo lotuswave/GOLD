@@ -2011,14 +2011,15 @@ public class GoldDrybarUSHelper {
 
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			int sizepas = Common.findElements("id", "password").size();
+		/*	int sizepas = Common.findElements("id", "password").size();
 		  if(sizepas>0) {
 			  Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			  
-		  }else {
+		  }*/
+			
 			Common.clickElement("id", "btnNext");
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-		  }
+		  
 			int sizeemail = Common.findElements("id", "email").size();
 
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
