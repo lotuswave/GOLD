@@ -8561,6 +8561,105 @@ public void outofstock_subcription(String Dataset) {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+public void Sofort_payment(String Dataset) throws Exception {
+	// TODO Auto-generated method stub
+	String order = "";
+	Sync.waitPageLoad();
+	Thread.sleep(3000);	
+	String expectedResult = "User should able to proceed the afterpay payment method";
+
+	try {
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+
+		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+				"User unable to land o n the paymentpage");
+
+		
+              Common.clickElement("xpath", "//input[@id='stripe_payments']");
+              Thread.sleep(4000);
+              
+              Sync.waitElementPresent(30, "xpath", "//label[@for='stripe-new-payments']");
+		     Common.clickCheckBox("xpath", "//label[@for='stripe-new-payments']");
+		     
+		     
+		    if(Common.verifyCheckBox("xpath", "//label[@for='stripe-stored-payments']", true)) {
+		    	System.out.println("Stored payemnt checkbox is checked");
+		    	 Sync.waitElementPresent(30, "xpath", "//label[@for='stripe-stored-payments']");
+			     Common.clickCheckBox("xpath", "//label[@for='stripe-stored-payments']");
+		    }
+		    	
+			Sync.waitElementPresent(30, "xpath", "(//iframe[contains(@name,'__privateStripeFrame')])[2]");
+			Common.switchFrames("xpath", "(//iframe[contains(@name,'__privateStripeFrame')])[2]");
+			Sync.waitElementPresent(30, "xpath", "//button[@value='sofort']");
+			Common.clickElement("xpath", "//button[@value='sofort']");			
+			Common.switchToDefault();
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[text()='Place Order']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+			
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
+				"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
+		Assert.fail();
+	}
+
+	String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+	if (!url.contains("stage") && !url.contains("preprod")) {
+	}
+
+	else {
+		try {
+			Thread.sleep(5000);
+			String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+
+			int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+					"verifying the product confirmation", expectedResult,
+					"Successfully It redirects to order confirmation page Order Placed",
+					"User unable to go orderconformation page");
+
+			if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+				order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+				System.out.println(order);
+			}
+			if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+				order = Common.getText("xpath", "//a[@class='order-number']/strong");
+				System.out.println(order);
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+					"It should navigate to the order confirmation page",
+					"User failed to proceed to the order confirmation page",
+					Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+			Assert.fail();
+		}
+	}
+}
+
+
+
+
 public void Verify_OrderTotal() {
 	
 	try {
