@@ -689,22 +689,22 @@ public class GoldDrybarusHelper2 {
 	public void minicart_Checkout() {
 		// TODO Auto-generated method stub
 		try {
-//			Thread.sleep(2000);
-//			click_minicart();
-//			Thread.sleep(4000);
-//			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
-//			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-//			System.out.println(minicart);
-			Sync.waitElementPresent(30, "xpath", "(//a[contains(@href,'checkout')])[4]");
-			Common.clickElement("xpath", "(//a[contains(@href,'checkout')])[4]");
-//			Sync.waitPageLoad();
-//			Thread.sleep(7000);
-//			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-//			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
-//			System.out.println(checkout);
-//			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Thread.sleep(2000);
+			click_minicart();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+			System.out.println(minicart);
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitPageLoad();
+			Thread.sleep(7000);
+			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
+			System.out.println(checkout);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					 Common.getCurrentURL().contains("checkout/"),
+					checkout.equals(minicart) || Common.getCurrentURL().contains("checkout/#shipping"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -725,21 +725,21 @@ public class GoldDrybarusHelper2 {
 		try {
 			Thread.sleep(8000);
 			Common.actionsKeyPress(Keys.UP);
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
 			
-			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+			String openminicart = Common.findElement("xpath", "//button[@id='menu-cart-icon']").getAttribute("aria-expanded");
 			System.out.println(openminicart);
-			if(openminicart.contains("active")) {
-			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
+			if(openminicart.contains("true")) {
+			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
 					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
 			} else {
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
-			String openminicart1 = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			String openminicart1 = Common.findElement("xpath", "//button[@id='menu-cart-icon']").getAttribute("aria-expanded");
 			System.out.println(openminicart1);
-			Common.assertionCheckwithReport(openminicart1.contains("active"), "To validate the minicart popup",
+			Common.assertionCheckwithReport(openminicart1.contains("true"), "To validate the minicart popup",
 					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
 			}
 		} catch (Exception | Error e) {
