@@ -816,7 +816,7 @@ public class GoldDrybarusHelper2 {
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			
-			String subtotal=Common.findElement("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", "//div[@class='item subtotal']//span[@class='value']").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
