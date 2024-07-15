@@ -60,7 +60,7 @@ public class GoldDrybarusHelper2 {
 		{
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Close_Geolocation();
+//			Close_Geolocation();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -112,7 +112,7 @@ public class GoldDrybarusHelper2 {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -442,9 +442,9 @@ public class GoldDrybarusHelper2 {
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -530,9 +530,9 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[@class='group-hover/item-image:block hidden']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -544,10 +544,10 @@ public class GoldDrybarusHelper2 {
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Thread.sleep(5000);
+			String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
 			
 			System.out.println(name);
 			Thread.sleep(4000);
@@ -556,16 +556,16 @@ public class GoldDrybarusHelper2 {
 					"failed to Navigate to the PDP page");
 			product_quantity(Dataset);
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
+			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+					.getAttribute("ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -649,11 +649,11 @@ public class GoldDrybarusHelper2 {
 		String Quantity = data.get(Dataset).get("Quantity");
 		System.out.println(Quantity);
 		try {
-			Common.findElement("xpath", "//select[@class='a-select-menu']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Common.findElement("xpath", "//select[@name='qty']");
+			Common.clickElement("xpath", "//select[@name='qty']");
 			if(Quantity.equals("10+"))
 			{
-				Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 				Thread.sleep(3000);
 				String value = Common.findElement("xpath", "//input[@name='qty']").getAttribute("value");
 				Common.assertionCheckwithReport(value.contains("10") || value.contains(Quantity) ,
@@ -665,9 +665,9 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-				Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 				Thread.sleep(3000);
-				String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
+				String value = Common.findElement("xpath", "//select[@name='qty']").getAttribute("value");
 				Common.assertionCheckwithReport(value.equals(Quantity),
 						"validating the  product the product quantity in PDP page",
 						"Product quantity should be update in the PDP page",
@@ -1414,9 +1414,9 @@ public class GoldDrybarusHelper2 {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-top')]//span[contains(text(),'"+ header +"')]");
+					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
 
 			Thread.sleep(3000);
 
@@ -1427,11 +1427,11 @@ public class GoldDrybarusHelper2 {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
 			Thread.sleep(4000);
-//			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
-//			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
+			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
-			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
+			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
 					"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
