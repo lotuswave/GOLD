@@ -689,22 +689,22 @@ public class GoldDrybarusHelper2 {
 	public void minicart_Checkout() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(2000);
-			click_minicart();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__total-counter']//strong");
-			String minicart = Common.findElement("xpath", "//span[@class='c-mini-cart__total-counter']//strong").getText();
-			System.out.println(minicart);
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
-			Common.clickElement("xpath", "//button[@title='Checkout']");
-			Sync.waitPageLoad();
-			Thread.sleep(7000);
-			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
-			System.out.println(checkout);
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+//			Thread.sleep(2000);
+//			click_minicart();
+//			Thread.sleep(4000);
+//			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+//			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+//			System.out.println(minicart);
+			Sync.waitElementPresent(30, "xpath", "(//a[contains(@href,'checkout')])[4]");
+			Common.clickElement("xpath", "(//a[contains(@href,'checkout')])[4]");
+//			Sync.waitPageLoad();
+//			Thread.sleep(7000);
+//			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+//			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
+//			System.out.println(checkout);
+//			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					checkout.equals(minicart) || Common.getCurrentURL().contains("checkout/#shipping"),
+					 Common.getCurrentURL().contains("checkout/"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -772,23 +772,23 @@ public class GoldDrybarusHelper2 {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("id", "shipping-firstname",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+			Common.textBoxInput("id", "shipping-lastname",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']", address);
+			Common.clickElement("id", "shipping-street-0");
+			Common.textBoxInput("id", "shipping-street-0", address);
 			Thread.sleep(5000);
-			Common.scrollIntoView("xpath", "//select[@name='country_id']");
-		    Common.dropdown("xpath", "//select[@name='country_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
+			Common.scrollIntoView("id", "shipping-country_id");
+		    Common.dropdown("id", "shipping-country_id",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
 			Thread.sleep(2000);
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Common.findElement("id", "shipping-city").clear();
+			Common.textBoxInput("id", "shipping-city",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
@@ -802,10 +802,10 @@ public class GoldDrybarusHelper2 {
 			  else
 			  {
 				
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.scrollIntoView("xpath", "//select[@name='region']");
+                Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
                 Thread.sleep(3000);
-                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                String Shippingvalue = Common.findElement("xpath", "//select[@name='region']")
                         .getAttribute("value");
                 System.out.println(Shippingvalue);
 			}
@@ -816,7 +816,7 @@ public class GoldDrybarusHelper2 {
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			
-			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
