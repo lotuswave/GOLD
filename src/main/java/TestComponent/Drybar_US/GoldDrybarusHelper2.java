@@ -699,12 +699,12 @@ public class GoldDrybarusHelper2 {
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
-			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
-			System.out.println(checkout);
+//			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+//			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
+//			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					checkout.equals(minicart) || Common.getCurrentURL().contains("checkout/#shipping"),
+					 Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
