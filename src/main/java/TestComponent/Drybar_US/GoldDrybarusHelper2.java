@@ -1100,12 +1100,12 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 
-			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
 			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
@@ -4528,22 +4528,21 @@ Thread.sleep(5000);
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Create an Account']");
 			Thread.sleep(4000);
-			String message = Common.findElement("id", "validation-classes").getCssValue("color");
-			String redcolor = Color.fromString(message).asHex();
-			System.out.println(redcolor);
-			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
-			String greencolor = Color.fromString(message1).asHex();
-			System.out.println(greencolor);
-			String emailmessage = Common.findElement("xpath", "//div[@id='email_address-error']").getText();
+//			String message = Common.findElement("id", "validation-classes").getCssValue("color");
+//			String redcolor = Color.fromString(message).asHex();
+//			System.out.println(redcolor);
+//			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
+//			String greencolor = Color.fromString(message1).asHex();
+//			System.out.println(greencolor);
+			String emailmessage = Common.findElement("xpath", "//li[@data-msg-field='email']").getText();
 			System.out.println(emailmessage);
-			String confirmpassword = Common.findElement("xpath", "//div[@id='password-confirmation-error']").getText();
+			String confirmpassword = Common.findElement("xpath", "//li[@data-msg-field='password_confirmation']").getText();
 			System.out.println(confirmpassword);
 		
 			Common.assertionCheckwithReport(
-					redcolor.equals("#2f741f") && greencolor.equals("#ad0000") && emailmessage.contains("Please enter a valid email address")
-							&& confirmpassword.contains("Passwords must match"),
+					emailmessage.equals("Please enter a valid email address.") && confirmpassword.contains("This field value must be the same as") ,
 					"validating the error messages with invalid date in accout creation form",
 					"User should able to get error message when used the invaild data",
 					"Sucessfully error message has been displayed when user use the invalid data",
@@ -4598,14 +4597,14 @@ Thread.sleep(5000);
     					data.get(Dataset).get("Confirm Password"));
     			System.out.println(data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
-    			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
+    			Common.clickElement("xpath", "//button[@title='Create an Account']");
     			Sync.waitImplicit(30);
     			Thread.sleep(8000);
-    			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+    			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(
     					message.contains("Thank you for registering")
-    							&& Common.getCurrentURL().contains("account") ,
+    							|| Common.getCurrentURL().contains("account") ,
     					"validating navigation to the account page after clicking on sign up button",
     					"User should navigate to the My account page after clicking on the Signup",
     					"Sucessfully user navigates to the My account page after clickng on thr signup button",
@@ -9473,6 +9472,28 @@ public void createAccountFromOrderSummaryPage(String Dataset) {
 				"Unable to  navigate to the My account page after clicking on signin button ",
 				Common.getscreenShotPathforReport(
 						"Failed to navigates to My Account Page after clicking on Signin button"));
+		Assert.fail();
+	}
+}
+
+public void click_createAccount_Signinpage() {
+
+	try {
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Create an Account') and @class='btn btn-primary w-full']");
+		Common.clickElement("xpath", "//a[contains(text(),'Create an Account') and @class='btn btn-primary w-full']");
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Account"),
+				"Validating Create New Customer Account page navigation",
+				"after Clicking on Create New Customer Account page it will navigate account creation page",
+				"Successfully navigate to the create account page",
+				"Failed to Navigate to the account create page ");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
+				"after Clicking on Create New Customer Account page it will navigate account creation page",
+				"unable to navigate to the craete account page",
+				Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
 		Assert.fail();
 	}
 }

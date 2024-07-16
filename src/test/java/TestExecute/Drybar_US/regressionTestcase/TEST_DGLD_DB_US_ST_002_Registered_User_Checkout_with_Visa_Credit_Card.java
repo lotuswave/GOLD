@@ -27,7 +27,7 @@ public class TEST_DGLD_DB_US_ST_002_Registered_User_Checkout_with_Visa_Credit_Ca
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.clickSubmitbutton_Shippingpage();
+//			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
