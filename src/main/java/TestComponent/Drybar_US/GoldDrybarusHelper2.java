@@ -5436,14 +5436,14 @@ Thread.sleep(5000);
         public void Forgot_password(String Dataset) {
     		// TODO Auto-generated method stub
     		try {
-    			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
-    			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+    			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+    			String forgotpassword = Common.findElement("xpath", "//h1//span[text()='Forgot Your Password?']").getText();
     			System.out.println(forgotpassword);
     			Thread.sleep(5000);
-    			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
+    			Common.textBoxInput("xpath", "//input[@name='email_address']",data.get(Dataset).get("UserName"));
     			Thread.sleep(4000);
-    			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-    			Common.clickElement("xpath", "//span[text()='Reset My Password']");
+    			Common.findElement("xpath", "//input[@name='email_address']").getAttribute("value");
+    			Common.clickElement("xpath", "//button[@type='submit' and @class='btn btn-primary w-full']");
     			Sync.waitPageLoad();
     			Thread.sleep(2000);
     			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
