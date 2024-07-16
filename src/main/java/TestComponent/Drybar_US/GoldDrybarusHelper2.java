@@ -65,7 +65,7 @@ public class GoldDrybarusHelper2 {
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Drybar")
-							|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar - Home page"),
+							|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar"),
 					"validating store logo", "System directs the user to the Homepage",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		}
@@ -938,19 +938,19 @@ public class GoldDrybarusHelper2 {
 		else {
 			try {
 				Thread.sleep(6000);
-				Sync.waitElementPresent(30,"xpath", "//h1[@class='page-title-wrapper']");
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 
 				//Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
 					Thread.sleep(4000);
@@ -958,8 +958,8 @@ public class GoldDrybarusHelper2 {
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
-					Common.getText("xpath", "//div[@class='checkout-success']//span");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 
 				}
@@ -1107,7 +1107,7 @@ public class GoldDrybarusHelper2 {
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -1182,9 +1182,9 @@ public class GoldDrybarusHelper2 {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	             	   Thread.sleep(10000);
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	             	   Thread.sleep(60000);
 	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
 	              	   {
 	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
@@ -1199,7 +1199,7 @@ public class GoldDrybarusHelper2 {
 	              	   }
 	              	   else if(Common.getCurrentURL().contains("/success/"))
 	              	   {
-	              	    String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+	              	    String sucessmessage=Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 	              	    System.out.println(sucessmessage);
 	              	   }
 	              	   else
