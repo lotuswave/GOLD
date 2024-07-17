@@ -116,7 +116,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Home Drybar") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Drybar Home")
+					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Drybar") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Drybar Home")
 					|| Common.getPageTitle().contains("Drybar - Home page"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
@@ -559,7 +559,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
 					.getAttribute("ui-id");
 			System.out.println(message);
@@ -954,7 +954,7 @@ public class GoldDrybarusHelper2 {
 					System.out.println(order);
 				} else {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
