@@ -565,7 +565,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Thread.sleep(9000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
 					.getAttribute("ui-id");
 			System.out.println(message);
@@ -1640,13 +1640,13 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try
 		{
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").replace("$",
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[@class='flex items-center'])[2]")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[@class='value text-right title-sm text-sale-font'])[2]")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
@@ -1660,7 +1660,7 @@ public class GoldDrybarusHelper2 {
 					"Order summary should be display in the payment page and tax field should not display",
 					"Successfully Order summary is displayed and tax is displayed",
 					"Failed tax is displayed under order summary");
-
+ 
 			
 		}
 		catch(Exception | Error e)
