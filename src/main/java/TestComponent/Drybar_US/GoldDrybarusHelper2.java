@@ -61,6 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
+			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -78,6 +79,11 @@ public class GoldDrybarusHelper2 {
 		}
 		
 		
+	}
+	
+	public void acceptPrivacy() {
+
+		Common.clickElement("id", "truste-consent-button");
 	}
 	
 	public void Close_Geolocation() {
