@@ -822,7 +822,7 @@ public class GoldDrybarusHelper2 {
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			
-			String subtotal=Common.findElement("xpath", "//div[@class='item subtotal']//span[@class='value']").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])[2]  ").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
@@ -4388,7 +4388,7 @@ Thread.sleep(5000);
 
 		try {
 			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "(//label[@class='a-radio-button__label'])[2]").size();
+			int size = Common.findElements("xpath", "//section[@id='shipping']").size();
 			System.out.println(size);
 			if (size > 0  ) {
 				
@@ -6130,7 +6130,7 @@ Thread.sleep(5000);
 			String invalidproduct = data.get(Dataset).get("Products");
 			System.out.println(invalidproduct);
 			try {
-			Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
+			Common.clickElement("xpath", "//span[@x-show='!searchOpen']");
 				String open = Common.findElement("xpath", "//input[contains(@class,'aa-Input input-text algolia-search')]").getAttribute("class");
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(open.contains("algolia-search-input"), "User searches using the search field",
@@ -7413,13 +7413,13 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 		System.out.println(amount);
 		
 		Sync.waitPageLoad();
-		Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+		Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
 		// Common.clickElement("xpath", "//label[@for='stripe_payments']");
-		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+		int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 				"User unabel to land opaymentpage");
-		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
 		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();

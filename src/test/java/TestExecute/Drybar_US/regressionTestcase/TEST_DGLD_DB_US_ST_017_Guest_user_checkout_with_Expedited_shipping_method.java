@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -28,8 +29,7 @@ public class TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_
 			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.selectshippingmethod("Expedited_method");
-			Drybar.Expeditedshippingmethod("Expedited_method");
-			Drybar.clickSubmitbutton_Shippingpage();
+//			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
