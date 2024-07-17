@@ -2268,9 +2268,9 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'group-hover/item-image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@class,'group-hover/item-image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -2286,7 +2286,8 @@ public class GoldDrybarusHelper2 {
 				Thread.sleep(6000);
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+//				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
 				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
 				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
