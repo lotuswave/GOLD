@@ -2257,6 +2257,7 @@ public class GoldDrybarusHelper2 {
 		}
 	}
 
+	
 	public void Configurable_addtocart(String Dataset) {
 		// TODO Auto-generated method stub
 		
@@ -2286,8 +2287,7 @@ public class GoldDrybarusHelper2 {
 				Thread.sleep(6000);
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
-//				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
 				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
 				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
@@ -2323,10 +2323,12 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(6000);
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-			String size=Common.findElement("xpath", "(//span[contains(@class,'m-swatch-group__header s')])[2]").getText().toUpperCase();
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
+			Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
+			Thread.sleep(3000);
+			String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -2359,6 +2361,7 @@ public class GoldDrybarusHelper2 {
 			Assert.fail();
 		}
 	}
+
 
 	public void Order_ID_Verification(String Ordernumber) {
 		// TODO Auto-generated method stub
@@ -3194,11 +3197,11 @@ public class GoldDrybarusHelper2 {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__total-counter']//strong");
-			String minicart = Common.findElement("xpath", "//span[@class='c-mini-cart__total-counter']//strong").getText();
-			Sync.waitElementPresent("xpath", "//span[text()='View Cart']");
-			Common.clickElement("xpath", "//span[text()='View Cart']");
-			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
+			Sync.waitElementPresent("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']");
+			String minicart = Common.findElement("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").getText();
+			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
+			Common.clickElement("xpath", "//a[@title='View Cart']");
+			String viewcart = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			Common.assertionCheckwithReport(
@@ -3218,6 +3221,9 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
+
+
+
 	public void additems_giftregistry(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
@@ -3484,21 +3490,21 @@ public class GoldDrybarusHelper2 {
 
 		try {
 			Thread.sleep(4000);
-			String subtotal = Common.findElement("xpath", "//span[@data-th='Subtotal']").getText().replace(Symbol, "");
+			String subtotal = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText().replace(Symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			System.out.println(subtotalvalue);
-			String Productprice = Common.getText("xpath", "(//td[@data-th='Subtotal']//span[@class='price'])[2]")
+			String Productprice = Common.getText("xpath", "(//span[@class='price'])[5]")
 					.replace(Symbol, "");
 			Float pricevalue = Float.parseFloat(Productprice);
 			System.out.println(pricevalue);
 			Float Total = subtotalvalue - pricevalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			System.out.println(ExpectedTotalAmmount2);
-			Sync.waitElementPresent("xpath", "//span[text()='Remove " + products + "']");
-			Common.clickElement("xpath", "//span[text()='Remove " + products + "']");
+			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
+			Common.clickElement("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
 			Sync.waitPageLoad(30);
 			Thread.sleep(5000);
-			String ordertotal = Common.getText("xpath", "//td[@data-th='Order Total']//span[@class='price']")
+			String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 					.replace(Symbol, "");
 			Thread.sleep(4000);
 			Float ordervalue = Float.parseFloat(ordertotal);
