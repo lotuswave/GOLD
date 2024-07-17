@@ -340,7 +340,7 @@ public class GoldDrybarusHelper2 {
 
 //					Common.actionsKeyPress(Keys.PAGE_DOWN);
 					Thread.sleep(3000);
-					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='city']",
+					Common.textBoxInput("xpath", "//input[@id='shipping-city']",
 							data.get(dataSet).get("City"));
 					Thread.sleep(2000);
 					Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
@@ -393,7 +393,7 @@ public class GoldDrybarusHelper2 {
 					}
 					Common.actionsKeyPress(Keys.PAGE_DOWN);
 					Thread.sleep(3000);
-					Common.textBoxInput("xpath", "//form[@id='shipping]//input[@name='city']",
+					Common.textBoxInput("xpath", "//input[@id='shipping-city']",
 							data.get(dataSet).get("City"));
 
 					if(Common.getCurrentURL().contains("gb"))
