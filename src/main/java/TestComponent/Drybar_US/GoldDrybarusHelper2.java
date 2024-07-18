@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-			acceptPrivacy();
+			//acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -821,15 +821,16 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(5000);
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			Thread.sleep(3000);
 			
-			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])[2]  ").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
 		    System.out.println(subtotal);  
 			int amount=Integer.parseInt(subtotal);
 			System.out.println(amount);
-			if(amount>199 && symbol.equals("$"))
+		/*	if(amount>199 && symbol.equals("$"))
 			{
 				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
 				Common.clickElement("xpath", "//div[@class='ampromo-close']");
@@ -838,7 +839,7 @@ public class GoldDrybarusHelper2 {
 			else
 			{
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
+			}*/
 
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
@@ -3325,8 +3326,8 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
-			Common.clickElement("xpath", "//span[text()='Back to Cart']");
+			Sync.waitElementVisible(30, "xpath", "//a[@class='flex items-center link']");
+			Common.clickElement("xpath", "//a[@class='flex items-center link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -3502,7 +3503,9 @@ public class GoldDrybarusHelper2 {
 			System.out.println(ExpectedTotalAmmount2);
 			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
 			Common.clickElement("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
-			Sync.waitPageLoad(30);
+			Sync.waitPageLoad(40);
+			Thread.sleep(10000);
+			Common.refreshpage();
 			Thread.sleep(5000);
 			String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 					.replace(Symbol, "");
@@ -3533,16 +3536,18 @@ public class GoldDrybarusHelper2 {
 		String quantity = data.get(Dataset).get("Quantity");
 		try {
 			
-			Sync.waitElementClickable("xpath", "//select[@class='a-form-elem a-select-menu']");
-			Common.clickElement("xpath", "//select[@class='a-form-elem a-select-menu']");
-			Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, quantity);
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitElementClickable("xpath", "(//select[@title='Qty'])[1]");
+			Common.clickElement("xpath", "(//select[@title='Qty'])[1]");
+			Common.dropdown("xpath", "(//select[@title='Qty'])[1]", Common.SelectBy.VALUE, quantity);
+			//Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(14000);
-			String productquantity = Common.findElement("xpath", "//select[@class='a-form-elem a-select-menu']")
+			Common.refreshpage();
+			Thread.sleep(3000);
+			String productquantity = Common.findElement("xpath", "(//select[@title='Qty'])[1]")
 					.getAttribute("value");
 			System.out.println(productquantity);
-			String items=Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText().replace("  Items  in your cart", "");
+			String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hidden lg:inline']").getText().replace("  Items  in your cart", "");
 			System.out.println(items);
 			Common.assertionCheckwithReport(productquantity.equals(quantity) || productquantity.equals(items),
 					"validating the update quantity in shopping cart page",
