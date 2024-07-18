@@ -823,7 +823,7 @@ public class GoldDrybarusHelper2 {
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			Thread.sleep(3000);
 			
-			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
@@ -929,7 +929,7 @@ public class GoldDrybarusHelper2 {
 		}
 
 		Thread.sleep(3000);
-		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
+//		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
 //		System.out.println(placeordercount);
 //		if (placeordercount > 1) {
 //			Thread.sleep(4000);
@@ -7143,7 +7143,7 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
 	
 	try {
 		Thread.sleep(4000);
-		String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+		String subtotal=Common.findElement("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
 		System.out.println(subtotal);
 		subtotal = subtotal.trim();
 		subtotal = subtotal.substring(0,subtotal.length() - 2);
@@ -7152,15 +7152,15 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
 		System.out.println(amount);
 		
 		Sync.waitPageLoad();
-		Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-		 Common.clickElement("xpath", "//label[@for='stripe_payments']");
-		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+	    Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+				int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
-		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
-				"User unabel to land opaymentpage");
-		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+				Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+						"User unabel to land opaymentpage");
+				Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+		
 		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 		System.out.println(payment);
 		if (payment > 0) {
@@ -7245,7 +7245,7 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
 //                       	Common.clickElement("xpath", "//button[@class='action primary checkout']");
                        	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
                        	System.out.println(frameid);
-                       	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+//                       	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
                   		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
                   		Thread.sleep(4000);
                       	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
@@ -7352,12 +7352,13 @@ public String ThreedPaymentDetails(String dataSet) throws Exception {
                  }
                  else
                  {
-              	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-              	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+              	   Sync.waitElementPresent("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
+              	   Common.clickElement("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
               	 Thread.sleep(8000);
           	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
           	   System.out.println(frameid);
           	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+          	 Thread.sleep(8000);
      			Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
          		Thread.sleep(4000);
          		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
