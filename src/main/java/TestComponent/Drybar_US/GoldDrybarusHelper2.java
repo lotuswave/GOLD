@@ -1434,10 +1434,10 @@ public class GoldDrybarusHelper2 {
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + Brushes + "')]");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[contains(text(),'" + Detangling + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			expectedResult = "User should select the " + Dataset + "category";
 			int sizebotteles = Common.findElements("xpath", "//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -2794,26 +2794,23 @@ public class GoldDrybarusHelper2 {
 		
 		try {
 			Thread.sleep(2000);
-			Sync.waitElementPresent("xpath", "//input[@id='paypal_express']");
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Sync.waitElementPresent("xpath", "//div[contains(text(),'PayPal Express Checkout')]");
 			Thread.sleep(2000);
-			Common.clickElement("xpath", "//input[@id='paypal_express']");
+			Common.clickElement("xpath", "//div[contains(text(),'PayPal Express Checkout')]");
+			
+			
+			Common.switchFrames("xpath", "//iframe[contains(@name,'__zoid__paypal_buttons__ey')]");
+			
+			
+			Sync.waitElementPresent("xpath", "//div[@aria-label='venmo']");
+			Common.clickElement("xpath", "//div[@aria-label='venmo']");
 			Thread.sleep(2000);
 			
-			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-
-			// Common.refreshpage();
-			Thread.sleep(8000);
-			Sync.waitElementPresent("xpath", "//img[@class='paypal-logo paypal-logo-venmo paypal-logo-color-white']");
-			Common.clickElement("xpath", "//img[@class='paypal-logo paypal-logo-venmo paypal-logo-color-white']");
 			Common.switchToDefault();
 			Thread.sleep(5000);
 			Common.switchWindows();
-			int size = Common.findElements("id", "acceptAllButton").size();
-			if (size > 0) {
-
-				Common.clickElement("id", "acceptAllButton");
-
-			}
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
@@ -2825,7 +2822,7 @@ public class GoldDrybarusHelper2 {
 		String venmo = Common.findElement("xpath", "//div[@class='max-width-wrapper']/img").getAttribute("alt");
 		if(venmo.equals("Venmo")) {
 		Sync.waitElementPresent("xpath", "//img[@alt='PayPal']");
-		Common.clickElement("xpath", "//img[@alt='PayPal']");
+		Common.clickElement("id", "paypalButton");
 		}
 		if (!url.contains("stage") & !url.contains("preprod")& !url.contains("stage3") ) {
 
@@ -2862,30 +2859,43 @@ public class GoldDrybarusHelper2 {
 //			express_paypal_shipping("Paypal Shipping");
 			// Tell_Your_FriendPop_Up();//To close the Pop-up
 			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			if (!url1.contains("stage") && !url1.contains("preprod")) {
+			if (!url1.contains("stage4") && !url1.contains("preprod")) {
+				
+				
 			}
 
 			else {
 				try {
-					Thread.sleep(6000);
-					String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-					System.out.println(sucessMessage);
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					
+					Thread.sleep(3000);
+					Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+					String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 
-					int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					//Tell_Your_FriendPop_Up();
+					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']").size();
 					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 							"verifying the product confirmation", expectedResult,
 							"Successfully It redirects to order confirmation page Order Placed",
-							"User unable to go orderconformation page");
+							"User unabel to go orderconformation page");
 
-					if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
-						order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+						Thread.sleep(4000);
+						order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+						System.out.println(order);
+					} else {
+						Thread.sleep(4000);
+						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 						System.out.println(order);
 					}
-					if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
-						order = Common.getText("xpath", "//a[@class='order-number']/strong");
-						System.out.println(order);
-					}
 
+					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+						Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+						System.out.println(order);
+
+					}
+				
 				} catch (Exception | Error e) {
 					e.printStackTrace();
 					ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
