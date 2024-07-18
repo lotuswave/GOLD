@@ -3942,28 +3942,28 @@ public class GoldDrybarusHelper2 {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+			Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Common.findElement("xpath", "//form[@id='shipping']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
