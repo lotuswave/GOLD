@@ -3835,17 +3835,17 @@ public class GoldDrybarusHelper2 {
 
 	public void Validate_shipping_methods() {
 
-		String No_Quotes = "Sorry, no quotes are available for this order at this time";
+		String No_Quotes = "No shipping methods available.";
 
 		try {
 			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//div[@id='checkout-step-shipping_method']");
-			Sync.waitElementVisible("xpath", "//div[@id='checkout-step-shipping_method']");;
-			String Error = Common.getText("xpath", "//div[@id='checkout-step-shipping_method']");
+			Common.scrollIntoView("xpath", "//h2[normalize-space()='Shipping Methods']");
+			Sync.waitElementVisible("xpath", "//h2[normalize-space()='Shipping Methods']");;
+			String Error = Common.getText("xpath", "//span[@x-text='message.text']");
 
 			if (No_Quotes.contentEquals(Error)) {
 
-				System.out.println("Sorry, no quotes are available for this order at this time");
+				System.out.println("No shipping methods available.");
 			}
 
 			else {
@@ -3853,7 +3853,7 @@ public class GoldDrybarusHelper2 {
 				Assert.fail();
 			}
 			
-			Common.assertionCheckwithReport(Error.equals("Sorry, no quotes are available for this order at this time"),
+			Common.assertionCheckwithReport(Error.equals("No shipping methods available."),
 					"validating error message  Sorry, no quotes are available for this order at this time",
 					"No Shipping methods should be displayed after entering the address",
 					"Sucessfully error message  Sorry, no quotes are available for this order at this time",
