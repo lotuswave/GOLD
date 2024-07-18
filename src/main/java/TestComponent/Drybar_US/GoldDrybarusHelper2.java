@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-			//acceptPrivacy();
+			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -945,7 +945,7 @@ public class GoldDrybarusHelper2 {
 
 		else {
 			try {
-				Thread.sleep(6000);
+				Thread.sleep(3000);
 				Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 				String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 
@@ -1107,7 +1107,7 @@ public class GoldDrybarusHelper2 {
 
 		try {
 			Sync.waitPageLoad();
-
+    Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
@@ -1192,15 +1192,15 @@ public class GoldDrybarusHelper2 {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Thread.sleep(60000);
+	             	   Thread.sleep(40000);
 	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
 	              	   {
 	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
 	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-	              		   Thread.sleep(5000);
+	              		   Thread.sleep(3000);
 	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	                  	   Thread.sleep(8000);
+	                  	   Thread.sleep(4000);
 	                  	 String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
 		              	    System.out.println(sucessmessage);
 	              		   
