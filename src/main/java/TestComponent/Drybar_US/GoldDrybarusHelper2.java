@@ -535,7 +535,7 @@ public class GoldDrybarusHelper2 {
 	
 		try {
 			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
+			for (int i = 0; i <= 10; i++) { 
 				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[@class='group-hover/item-image:block hidden']");
@@ -3351,8 +3351,8 @@ public class GoldDrybarusHelper2 {
 		String expectedResult = "It should opens textbox input to enter discount.";
 		String Symbol = data.get(Dataset).get("Symbol");
 		try {
-			Sync.waitElementPresent("xpath", "//span[text()='Add Discount Code']");
-			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+			Sync.waitElementPresent("xpath", "//button[@id='discount-form-toggle']");
+			Common.clickElement("xpath", "//button[@id='discount-form-toggle']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
@@ -3363,12 +3363,12 @@ public class GoldDrybarusHelper2 {
 			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Add']");
-			Common.clickElement("xpath", "//button[@value='Add']");
+			Sync.waitElementClickable("xpath", "//span[text()='Apply Discount']");
+			Common.clickElement("xpath", "//span[text()='Apply Discount']");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			if (Common.getCurrentURL().contains("Stage") || Common.getCurrentURL().contains("preprod")) {
-				String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+			if (Common.getCurrentURL().contains("stage4") || Common.getCurrentURL().contains("preprod")) {
+				String discountcodemsg = Common.getText("xpath", "//span[@class='w-full text-center pr-10']");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
@@ -3388,7 +3388,7 @@ public class GoldDrybarusHelper2 {
 			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") )
 			{
 			Thread.sleep(6000);
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+			String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			if(Common.getCurrentURL().contains("/gb")|| Common.getCurrentURL().contains("/eu"))  {
@@ -3402,10 +3402,11 @@ public class GoldDrybarusHelper2 {
 						.replace(Symbol, "");
 				Float Discountvalue = Float.parseFloat(Discount);
 				System.out.println("Discount:"+ Discountvalue);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				Common.clickElement("xpath", "//span[@class='block transform']");
+				String Tax = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(taxItem.amount)']").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				System.out.println("Tax:"+  Taxvalue);
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				System.out.println("Order Total"+   ordertotalvalue);
@@ -3421,12 +3422,15 @@ public class GoldDrybarusHelper2 {
 						"Failed to display the order summary and fileds under order summary");
 			}
 			else {
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+				String shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
-				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-						.replace(Symbol, "");
+				System.out.println("Shipping:"+  shippingvalue);
+				String Discount = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[1]")
+						.replace(Symbol, "").replace("-", "");
+				
 				Float Discountvalue = Float.parseFloat(Discount);
+				System.out.println("Discount:"+ Discountvalue);
 				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")

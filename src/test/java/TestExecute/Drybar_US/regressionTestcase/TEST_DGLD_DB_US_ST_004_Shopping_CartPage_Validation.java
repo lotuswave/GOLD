@@ -31,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
             Drybar.minicart_Checkout();
             Drybar.addDeliveryAddress_Guestuser("Address");
             Drybar.selectshippingmethod("GroundShipping method");
-			//Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Shoppingcart_page();
 			Drybar.minicart_ordersummary_discount("Discount");
             
@@ -45,7 +45,7 @@ public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
