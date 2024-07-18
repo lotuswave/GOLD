@@ -4648,25 +4648,25 @@ Thread.sleep(5000);
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
 
-    			Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
-    			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+    			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+    			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
     			if(Common.getCurrentURL().contains("stage")&&Common.getCurrentURL().contains("paypal/express/review/") || Common.getCurrentURL().contains("preprod")&&Common.getCurrentURL().contains("paypal/express/review/") )
     			{
-    				Sync.waitElementPresent("id", "coupon_code");
+    				Sync.waitElementPresent("id", "discount-code");
 
-    				Common.textBoxInput("id", "coupon_code", data.get(dataSet).get("Discountcode"));
-    				int size = Common.findElements("id", "coupon_code").size();
+    				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+    				int size = Common.findElements("id", "discount-code").size();
         			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
         					"Successfully open the discount input box", "User unable enter Discount Code");
-        			Sync.waitElementClickable("xpath", "//button[@value='Add']");
-        			Common.clickElement("xpath", "//button[@value='Add']");
+        			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
+        			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
         			Sync.waitPageLoad();
         			Thread.sleep(4000);
-        			Common.scrollIntoView("xpath", "//div[@class='a-message__container-inner']");
+        			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
         			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-        			String discountcodemsg = Common.getText("xpath", "//div[@class='a-message__container-inner']");
+        			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
         			System.out.println(discountcodemsg);
-        			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"),
+        			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
         					"verifying pomocode", expectedResult, "promotion code working as expected",
         					"Promation code is not applied");
     				
@@ -4678,13 +4678,13 @@ Thread.sleep(5000);
     				int size = Common.findElements("id", "discount-code").size();
         			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
         					"Successfully open the discount input box", "User unable enter Discount Code");
-        			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-        			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+        			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
+        			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
         			Sync.waitPageLoad();
         			Thread.sleep(4000);
-        			Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+        			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
         			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-        			String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+        			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
         			System.out.println(discountcodemsg);
         			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
         					"verifying pomocode", expectedResult, "promotion code working as expected",
@@ -4746,22 +4746,22 @@ Thread.sleep(5000);
     			else 
     			{
     			Thread.sleep(4000);
-    			Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
-    			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+    			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
+    			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
     					"");
     			Float subtotalvalue = Float.parseFloat(Subtotal);
-    			String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
+    			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='flex items-center']")
     					.replace(Symbol, "");
     			Float shippingvalue = Float.parseFloat(shipping);
-    			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+    			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
     			Float Taxvalue = Float.parseFloat(Tax);
     			Thread.sleep(4000);
-    			String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
+    			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
     					.replace(Symbol, "");
     			Float Discountvalue = Float.parseFloat(Discount);
     			System.out.println(Discountvalue);
 
-    			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+    			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]")
     					.replace(Symbol, "");
     			Float ordertotalvalue = Float.parseFloat(ordertotal);
     			Thread.sleep(4000);
