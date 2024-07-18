@@ -6029,6 +6029,7 @@ Thread.sleep(5000);
 				Assert.fail();
 			}
 		}
+		
 		public void Sort_By(String Dataset) throws InterruptedException {
 			// TODO Auto-generated method stub
 			String symbol = data.get(Dataset).get("Price_Symbol");
@@ -6039,11 +6040,9 @@ Thread.sleep(5000);
 				Sync.waitPageLoad();
 
 				Thread.sleep(5000);
-				Common.scrollIntoView("xpath",
-						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
 
-				List<WebElement> BeforeFilterprice = Common.findElements("xpath",
-						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
 				List<String> Beforefilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : BeforeFilterprice) {
@@ -6051,14 +6050,13 @@ Thread.sleep(5000);
 					System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 				}
 				Thread.sleep(4000);
-				Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.TEXT,
-						PriceFilter);
+				Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
 				
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath",
-						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
 				List<WebElement> AfterFilterprice = Common.findElements("xpath",
-						"//div[@class='product-info-main m-product-card__price ']//span[@data-price-type='finalPrice']//span[@class='price']");
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
 				List<String> Afterfilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : AfterFilterprice) {
@@ -6095,16 +6093,16 @@ Thread.sleep(5000);
 			}
 
 		}
-
+		
 		public void Filter() throws InterruptedException {
 			// TODO Auto-generated method stub
 			try {
 
-				Common.scrollIntoView("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
-				Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
-				Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_drybar_hair_type']");
-				Sync.waitElementPresent("xpath", "//label[@for='facet_drybar_hair_type_all_hair_types']");
-				Common.clickElement("xpath", "//label[@for='facet_drybar_hair_type_all_hair_types']");
+				Common.scrollIntoView("xpath", "//div[@class='is-widget-container-drybar_hair_type']");
+				Sync.waitElementPresent("xpath", "//div[@class='is-widget-container-drybar_hair_type']");
+				Common.clickElement("xpath", "//div[@class='is-widget-container-drybar_hair_type']");
+				Sync.waitElementPresent("xpath", "//input[@value='All Hair Types']");
+				Common.clickElement("xpath", "//input[@value='All Hair Types']");
 				Thread.sleep(4000);
 				String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
 				System.out.println(SelectedFilter);
@@ -6113,7 +6111,7 @@ Thread.sleep(5000);
 				if (SelectedFilter.equals("All Hair Types")) {
 
 					List<WebElement> Series_Filters = Common.findElements("xpath",
-							"(//div[@class='m-product-card__image-wrapper']//a//img)[1]");
+							"(//div[contains(@class,'group/item-image')]//a//img)[1]");
 
 					for (WebElement Filter : Series_Filters) {
 						// System.out.println(Filter);
@@ -6141,6 +6139,7 @@ Thread.sleep(5000);
 				Assert.fail();
 			}
 		}
+
 		
 		public void Invalid_search_product(String Dataset) {
 			// TODO Auto-generated method stub
@@ -6148,9 +6147,9 @@ Thread.sleep(5000);
 			System.out.println(invalidproduct);
 			try {
 			Common.clickElement("xpath", "//span[@x-show='!searchOpen']");
-				String open = Common.findElement("xpath", "//input[contains(@class,'aa-Input input-text algolia-search')]").getAttribute("class");
+				String open = Common.findElement("xpath", "//input[contains(@id, 'autocomplete-0-input')]").getAttribute("type");
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(open.contains("algolia-search-input"), "User searches using the search field",
+				Common.assertionCheckwithReport(open.contains("search"), "User searches using the search field",
 						"User should able to click on the search button", "Search expands to the full page",
 						"Sucessfully search bar should be expand");
 				Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']",
@@ -6158,11 +6157,11 @@ Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.ENTER);
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
-				String searchproduct=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getAttribute("class");
-				System.out.println(searchproduct);
+				String productsearch = Common.findElement("id", "instant-empty-results-container").getText();
+				//String searchproduct=Common.findElement("id", "instant-empty-results-container").getAttribute("class");
+				//System.out.println(searchproduct);
 				System.out.println(productsearch);
-				Common.assertionCheckwithReport(productsearch.contains("Sorry, your search for") || searchproduct.contains("no-results"),
+				Common.assertionCheckwithReport(productsearch.contains("No products for query"),
 						"validating the search functionality", "enter Invalid product name will display in the search box",
 						"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
 				Thread.sleep(8000);
@@ -6176,7 +6175,6 @@ Thread.sleep(5000);
 				Assert.fail();
 			}
 		}
-
 		
 		
 		public void header_Hairproducts(String Dataset) {
