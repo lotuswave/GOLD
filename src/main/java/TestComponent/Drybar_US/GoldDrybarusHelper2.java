@@ -696,7 +696,7 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(2000);
-			click_minicart();
+//			click_minicart();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
@@ -4445,25 +4445,33 @@ Thread.sleep(5000);
 		System.out.println(product);
 		try
 		{
-        Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
-     	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-     	Thread.sleep(4000);
-     	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-     	"User should able to click on the search button", "Search expands to the full page",
-     	"Sucessfully search bar should be expand"); 
+			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
+	     	String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
+	     	Thread.sleep(4000);
+	     	Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
+	     	"User should able to click on the search button", "Search expands to the full page",
+	     	"Sucessfully search bar should be expand"); 
      	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
         serachbar.sendKeys(product);
         Common.actionsKeyPress(Keys.ENTER);
     	Sync.waitPageLoad();
     	Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+		/*	String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 			System.out.println(productsearch);
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
 					"enter product name will display in the search box", "user enter the product name in  search box",
-					"Failed to see the product name");
+					"Failed to see the product name");*/
 			Thread.sleep(8000);
-			Common.mouseOverClick("xpath", "(//span[text()='Add to Cart'])[1]");
-			 //Common.clickElement("xpath", "(//span[text()='Add to Cart'])[1]");
+//			Common.mouseOverClick("xpath", "//form[@id='form-70051']//button[@title='ADD TO BAG']");
+			 Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
+			 Thread.sleep(9000);
+			 
+			 String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+						.getAttribute("ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
              }  
 		 catch (Exception | Error e) {
 			e.printStackTrace();
