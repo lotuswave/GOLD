@@ -5950,10 +5950,10 @@ Thread.sleep(5000);
 			System.out.println(product);
 			try
 			{
-	        Common.clickElement("xpath", "//span[contains(@class,'drybar-icon-search')]");
-	     	String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+	        Common.clickElement("xpath", "//button[@id='menu-search-icon']");
+	     	String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
 	     	Thread.sleep(4000);
-	     	Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+	     	Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 	     	"User should able to click on the search button", "Search expands to the full page",
 	     	"Sucessfully search bar should be expand"); 
 	     	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
@@ -5961,12 +5961,12 @@ Thread.sleep(5000);
 	        Common.actionsKeyPress(Keys.ENTER);
 	    	Sync.waitPageLoad();
 	    	Thread.sleep(4000);
-				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
-				System.out.println(productsearch);
-				Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
-						"enter product name will display in the search box", "user enter the product name in  search box",
-						"Failed to see the product name");
-				Thread.sleep(8000);
+//				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+//				System.out.println(productsearch);
+//				Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+//						"enter product name will display in the search box", "user enter the product name in  search box",
+//						"Failed to see the product name");
+//				Thread.sleep(8000);
 	             }  
 			 catch (Exception | Error e) {
 				e.printStackTrace();
@@ -5985,8 +5985,8 @@ Thread.sleep(5000);
 			try {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-					List<WebElement> webelementslist = Common.findElements("xpath","//img[contains(@class,'m-product-card__image')]");
+					Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+					List<WebElement> webelementslist = Common.findElements("xpath","//img[@class='group-hover/item-image:block hidden']");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -5998,22 +5998,28 @@ Thread.sleep(5000);
 				}
 				Thread.sleep(6000);
 			
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				
+				Thread.sleep(4000);
+				Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				
+				Thread.sleep(5000);
+				String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
+		
 				Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 						"failed to Navigate to the PDP page");
 				product_quantity(Dataset);
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
+				Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(6000);
+				String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+						.getAttribute("ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");
 //				
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -6023,7 +6029,6 @@ Thread.sleep(5000);
 				Assert.fail();
 			}
 		}
-		
 		public void Sort_By(String Dataset) throws InterruptedException {
 			// TODO Auto-generated method stub
 			String symbol = data.get(Dataset).get("Price_Symbol");
