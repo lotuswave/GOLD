@@ -3441,12 +3441,15 @@ public class GoldDrybarusHelper2 {
 				
 				Float Discountvalue = Float.parseFloat(Discount);
 				System.out.println("Discount:"+ Discountvalue);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				Common.clickElement("xpath", "//span[@class='block transform']");
+				
+				String Tax = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(taxItem.amount)']").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				System.out.println("Taxvalue:"+ Taxvalue);
+				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue) - Discountvalue;
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				System.out.println(ExpectedTotalAmmount2);
 				System.out.println(ordertotal);
