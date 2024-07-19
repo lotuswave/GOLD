@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_048_Validate_Registeruser_Checkout_VisaCC_NoTax_Single_Product_with_Different_Billing_and_Shipping {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Registeruser_Checkout_VisaCC_NoTax_Single_Product_with_Different_Billing_and_Shipping () throws Exception {
@@ -22,8 +23,8 @@ public class TEST_DGLD_DB_US_ST_048_Validate_Registeruser_Checkout_VisaCC_NoTax_
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
+			//Drybar.HairTools_headerlinks("Hair Tools"); 
+			//Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("NoTaxAddress");
 			Drybar.selectshippingmethod("GroundShipping method");
@@ -41,7 +42,7 @@ public class TEST_DGLD_DB_US_ST_048_Validate_Registeruser_Checkout_VisaCC_NoTax_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}

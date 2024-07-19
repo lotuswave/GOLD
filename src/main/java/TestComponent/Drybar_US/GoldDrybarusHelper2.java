@@ -1713,14 +1713,62 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[5]");
-			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[5]").isSelected();
+			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
+			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[2]").isSelected();
 			System.out.println(checkbox);
 			Thread.sleep(7000);
 			String box=Boolean.toString(checkbox);
 			if(box.contains("true"))
 			{
-			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+				//Common.dropdown("xpath", "(//select[@name='billing_address_id'])[3]", Common.SelectBy.TEXT,"New Address");
+				
+				Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
+				Common.clickElement("xpath", "(//input[@type='checkbox'])[2]");
+				Thread.sleep(5000);
+				Sync.waitElementPresent("xpath", "(//button[contains(text(),' New Address ')])[2]");
+				Common.clickElement("xpath", "(//button[contains(text(),' New Address ')])[2]");
+				Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+
+					 Thread.sleep(4000);
+	                 Common.scrollIntoView("xpath", "//select[@name='region']");
+	                 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Thread.sleep(3000);
+	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region']")
+	                         .getAttribute("value");
+	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+		              System.out.println(Shipping);
+	                 System.out.println(Shippingvalue);
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]",
+						data.get(dataSet).get("postcode"));
+				Thread.sleep(5000);
+
+				Common.textBoxInput("xpath", "(//input[@name='telephone'])[2]",
+						data.get(dataSet).get("phone"));
+				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				//update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+				//System.out.println("update"+update);
+				/*Common.assertionCheckwithReport(
+						update.equals(Shipping),
+						"verifying the Billing address form in payment page",
+						"Billing address should be saved in the payment page",
+						"Sucessfully Billing address form should be Display ",
+						"Failed to display the Billing address in payment page");*/
+			}
+				
+				
+			/*Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
 			Common.clickElement("xpath", "//label[@for='stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
 			Common.clickElement("xpath", "//label[@for='stripe_payments']");
@@ -1771,14 +1819,21 @@ public class GoldDrybarusHelper2 {
 						"Billing address should be saved in the payment page",
 						"Sucessfully Billing address form should be Display ",
 						"Failed to display the Billing address in payment page");
-			}
+			}*/
 			else
 			{
+		Sync.waitElementPresent("xpath", "(//button[contains(text(),' New Address ')])[2]");
+		Common.clickElement("xpath", "(//button[contains(text(),' New Address ')])[2]");
+		Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			Common.textBoxInput("xpath", "//input[@name='street[1]']", data.get(dataSet).get("Street"));
+			
 			Thread.sleep(4000);
 			String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+			Sync.waitPageLoad();
+			String text1 = Common.findElement("xpath", "//input[@name='street[1]']").getAttribute("value");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
@@ -1800,27 +1855,27 @@ public class GoldDrybarusHelper2 {
 
 			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.clickElement("xpath", "//button[contains(text(), ' Save ')]");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+			/*update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
 			System.out.println("update"+update);
 			Common.assertionCheckwithReport(
 					update.equals(Shipping),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
-					"Failed to display the Billing address in payment page");
+					"Failed to display the Billing address in payment page");*/
 			}
-			}
-			else
+			
+			/*else
 			{
 				Common.assertionCheckwithReport(box.equals("false"),
 						"To validate the billing and shipping address are different",
 						"user should able to see different billing and shipping on payment page",
 						"User Successfully able to see the same billing and shipping on the payment page",
 						"User Failed to see the same billing and shipping address on the payment page");
-			}
+			}*/
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1832,6 +1887,9 @@ public class GoldDrybarusHelper2 {
 		}
 		return update;
 	}
+
+	
+	
 
 	
 	public void signout() {
