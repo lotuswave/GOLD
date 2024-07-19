@@ -36,7 +36,7 @@ public class TEST_DGLD_DB_US_ST_071_Validate_GuestUser_Checkout_Aerosol_Products
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
    
 	}
 

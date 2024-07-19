@@ -727,6 +727,34 @@ public class GoldDrybarusHelper2 {
 
 	}
 	
+	
+	public void Validate_Shipping_Options() {
+		// TODO Auto-generated method stub
+		
+		try {
+			
+			String Expedited = Common.getText("xpath", "//td[text()='Expedited (2 - 3 Business Days)']");
+			System.out.println(Expedited);
+			
+			String Express = Common.getText("xpath", "//td[text()='Express (1 - 2 Business Days)']");
+			System.out.println(Express);
+			
+			Common.assertionCheckwithReport(Expedited.equals("Expedited (2 - 3 Business Days)") && Express.equals("Express (1 - 2 Business Days)"),
+					"validating the Shipping methods",
+					"After entering the address it should display the shipping methods",
+					"Successfully  shipping methods", "Failed to  shipping methods");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the Shipping methods",
+					"After entering the address it should display the shipping methods",
+					"Unable to shipping methods",
+					Common.getscreenShot("Failed to shipping methods"));
+			Assert.fail();
+		}
+
+	}
+	
+	
 	public void click_minicart() {
 		try {
 			Thread.sleep(8000);
