@@ -1221,7 +1221,7 @@ public class GoldDrybarusHelper2 {
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 	             	   Thread.sleep(40000);
-	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
+	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
 	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
 	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
