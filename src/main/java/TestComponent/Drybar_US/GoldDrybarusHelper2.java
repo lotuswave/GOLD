@@ -733,10 +733,10 @@ public class GoldDrybarusHelper2 {
 		
 		try {
 			
-			String Expedited = Common.getText("xpath", "//td[text()='Expedited (2 - 3 Business Days)']");
+			String Expedited = Common.getText("xpath", "//div[normalize-space()='Expedited (2 - 3 Business Days)']                            ");
 			System.out.println(Expedited);
 			
-			String Express = Common.getText("xpath", "//td[text()='Express (1 - 2 Business Days)']");
+			String Express = Common.getText("xpath", "//div[normalize-space()='Express (1 - 2 Business Days)']                            ");
 			System.out.println(Express);
 			
 			Common.assertionCheckwithReport(Expedited.equals("Expedited (2 - 3 Business Days)") && Express.equals("Express (1 - 2 Business Days)"),
