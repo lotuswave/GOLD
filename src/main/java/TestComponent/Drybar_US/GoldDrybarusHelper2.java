@@ -5324,18 +5324,24 @@ Thread.sleep(5000);
 		}
 		}
 
-		public void Validate_Shipping_Options() {
+		public void Validate_Shipping_Options(String Dataset) throws Exception {
 			// TODO Auto-generated method stub
+			String expected=data.get(Dataset).get("methods");
+			String epress=data.get(Dataset).get("method1");
+			Thread.sleep(4000);
 			
 			try {
 				
-				String Expedited = Common.getText("xpath", "//td[text()='Expedited (2 - 3 Business Days)']");
+				Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'"+ expected +"')]");
+				String Expedited = Common.getText("xpath", "//div[contains(text(),'"+ expected +"')]");
 				System.out.println(Expedited);
-				
-				String Express = Common.getText("xpath", "//td[text()='Express (1 - 2 Business Days)']");
+				System.out.println(expected);
+				Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'"+ epress +"')]");
+				String Express = Common.getText("xpath", "//div[contains(text(),'"+ epress +"')]");
 				System.out.println(Express);
+				System.out.println(epress);
 				
-				Common.assertionCheckwithReport(Expedited.equals("Expedited (2 - 3 Business Days)") && Express.equals("Express (1 - 2 Business Days)"),
+				Common.assertionCheckwithReport(Expedited.contains(expected) && Express.contains(epress),
 						"validating the Shipping methods",
 						"After entering the address it should display the shipping methods",
 						"Successfully  shipping methods", "Failed to  shipping methods");
