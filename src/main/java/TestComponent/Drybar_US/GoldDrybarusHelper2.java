@@ -4676,28 +4676,29 @@ Thread.sleep(5000);
 		}
 	}
 
-        public void click_Createaccount() {
+       
+	public void click_Createaccount() {
 
-    		try {
-    			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-    			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-    			Common.clickElement("xpath", "//ul[@id='desktop-account-nav']//a[text()='Create an Account']");
-    			Sync.waitPageLoad();
-    			Thread.sleep(5000);
-    			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
-    					"Validating Create New Customer Account page navigation",
-    					"after Clicking on Create New Customer Account page it will navigate account creation page",
-    					"Successfully navigate to the create account page",
-    					"Failed to Navigate to the account create page ");
-    		} catch (Exception | Error e) {
-    			e.printStackTrace();
-    			ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
-    					"after Clicking on Create New Customer Account page it will navigate account creation page",
-    					"unable to navigate to the craete account page",
-    					Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
-    			Assert.fail();
-    		}
-    	}
+		try {
+			Sync.waitElementPresent("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//a[@title='Create an Account']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account") || Common.getPageTitle().equals("Create New Account"),
+					"Validating Create New Customer Account page navigation",
+					"after Clicking on Create New Customer Account page it will navigate account creation page",
+					"Successfully navigate to the create account page",
+					"Failed to Navigate to the account create page ");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
+					"after Clicking on Create New Customer Account page it will navigate account creation page",
+					"unable to navigate to the craete account page",
+					Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
+			Assert.fail();
+		}
+	}
         public String create_account(String Dataset) {
         	String email = "";
     		String Store= data.get(Dataset).get("Store");
