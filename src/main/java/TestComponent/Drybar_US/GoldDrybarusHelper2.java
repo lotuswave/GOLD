@@ -1601,17 +1601,20 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
+			String shipping = Common.getText("xpath", "(//span[@class='flex items-center'])[2]")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+			
+			Common.clickElement("xpath", "//div[normalize-space()='Tax Breakdown']");
+			String Tax = Common.getText("xpath", "//span[@class='tax-unit']").replace(Symbol, "");
+			
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+			String ordertotal = Common.getText("xpath", "(//span[@class=\"value text-right title-sm text-sale-font\"])[2]")
 					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
