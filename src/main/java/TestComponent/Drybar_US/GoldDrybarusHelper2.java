@@ -6847,12 +6847,11 @@ Thread.sleep(5000);
 				System.out.println(products);
 				
 				try {
-					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-					Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+					Sync.waitElementPresent(30, "xpath", "//p[@class='title-sm']//a[text()='" + products + "']");
+					Common.javascriptclickElement("xpath", "//p[@class='title-sm']//a[text()='" + products + "']");
 					
 					Thread.sleep(20000);
-					String PDP_ProductTitle = Common
-							.findElement("xpath", "//span[contains(@class,'pdp-grid-title title')]").getText();
+					String PDP_ProductTitle = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title title')]").getText();
 					System.out.println(PDP_ProductTitle);
 					Common.assertionCheckwithReport(products.contains(PDP_ProductTitle),
 							"validating the product navigating to the PDP page",
@@ -6869,7 +6868,6 @@ Thread.sleep(5000);
 				}
 
 			}
-		 
 		 
 		 
 		 
@@ -6988,30 +6986,28 @@ Thread.sleep(5000);
 				String symbol=data.get(Dataset).get("Symbol");
 				try {
 					click_minicart();
-					Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__subtotal-amount']//span");
-					String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span").replace(symbol, "");
+					Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span[@class='price']");
+					String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(subtotal);
 					String productname = Common
-							.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[text()='"+deleteproduct+"'])").getText();
-					String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace(symbol,"");
+							.findElement("xpath", "//p[@class='title-sm']//a[text()='" + deleteproduct + "']").getText();
+					String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,"");
 					Float productamount1value = Float.parseFloat(productamount1);
 					if (productname.equals(deleteproduct)) {
-						Sync.waitElementPresent(30, "xpath",
-								"(//div[@class='m-mini-product-card__info']//span[contains(@class,'delete')])[1]");
-						Common.clickElement("xpath",
-								"(//div[@class='m-mini-product-card__info']//span[contains(@class,'delete')])[1]");
+						Sync.waitElementPresent(30, "xpath","//button[contains(@aria-label,'" + deleteproduct + "')]");
+						Common.clickElement("xpath","//button[contains(@aria-label,'" + deleteproduct + "')]");
 						Thread.sleep(3000);
-						Common.clickElement("xpath","//span[contains(text(),'OK')]");
+						Common.clickElement("xpath","//button[contains(text(),'OK')]");
 					
 					} else {
 						Assert.fail();
 					}
 					Thread.sleep(6000);
-					String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+					String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']")
 							.replace(symbol, "");
 					Float subtotal1value = Float.parseFloat(subtotal1);
 					Thread.sleep(8000);
-					String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace(symbol, "");
+					String productamount = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol, "");
 					Float productamountvalue = Float.parseFloat(productamount);
 					Float deletedproductamount = subtotalvalue - subtotal1value;
 					Float Total = subtotalvalue - deletedproductamount;
@@ -7039,7 +7035,7 @@ Thread.sleep(5000);
 									"Failed to delete the product from the mini cart and subtotal has not changed"));
 					Assert.fail();
 				}
-			}
+		 }
 
 			public void minicart_product_close() {
 				// TODO Auto-generated method stub
@@ -7091,19 +7087,19 @@ Thread.sleep(5000);
 				String symbol=data.get(Dataset).get("Symbol");
 				try {
 
-					String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+					String Subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']")
 							.replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(Subtotal);
-					Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
-					Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
-					Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
+					Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
+					Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+					Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 							UpdataedQuntityinminicart);
-					Common.clickElement("xpath", "//span[text()='Update']");
+					//Common.clickElement("xpath", "//span[text()='Update']");
 					Thread.sleep(8000);
-					Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__total-counter']/strong");
-					String cart = Common.findElement("xpath", "//span[@class='c-mini-cart__total-counter']/strong").getText();
+					Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+					String cart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 					System.out.println(cart);
-					String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+					String Subtotal2 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']")
 							.replace(symbol, "");
 					Float subtotalvalue2 = Float.parseFloat(Subtotal2);
 					Float Total = subtotalvalue;
