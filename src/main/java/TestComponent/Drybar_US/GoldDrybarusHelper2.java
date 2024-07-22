@@ -1049,11 +1049,11 @@ public class GoldDrybarusHelper2 {
 	public void My_Orders_Page(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
 			Common.clickElement("xpath", "//a[@title='My Account']");
-			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account") || Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -1066,7 +1066,6 @@ public class GoldDrybarusHelper2 {
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
 			Assert.fail();
-			
 		}
 		try {
 			Sync.waitPageLoad();
@@ -1077,7 +1076,7 @@ public class GoldDrybarusHelper2 {
 					"After Clicking on My Orders CTA user should be navigate to the My Orders page",
 					"Sucessfully User Navigates to the My Orders page after clicking on the My Orders CTA",
 					"Failed to Navigate to the My Orders page after Clicking on My Orders CTA");
-			String Ordernumber = Common.findElement("xpath", "(//span[@class='text-right'])[1]")
+			String Ordernumber = Common.findElement("xpath", "(//table[@class='table-orders']//span[@class='text-right'])[1]")
 					.getText();
 			System.out.println(Ordernumber);
 			System.out.println(Dataset);
@@ -1096,7 +1095,6 @@ public class GoldDrybarusHelper2 {
 			Assert.fail();
 		}
 	}
-
 	
 	public String addPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
