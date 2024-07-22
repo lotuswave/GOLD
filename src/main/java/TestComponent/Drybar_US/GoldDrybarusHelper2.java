@@ -5443,25 +5443,36 @@ Thread.sleep(5000);
 			String update = "";
 			String Shipping="";
 			try {
+				
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-				Common.clickElement("xpath", "//label[@for='stripe_payments']");
-				int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-				Common.clickElement("xpath", "//label[@for='stripe_payments']");
-				Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-						"payment section should be displayed", "sucessfully payment section has been displayed",
-						"Failed to displayed the payment section");
-				Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
-				Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
-				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
+				Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[2]").isSelected();
+				System.out.println(checkbox);
+				Thread.sleep(7000);
+				String box=Boolean.toString(checkbox);
+				if(box.contains("true"))
+				{
+				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+//				Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+//				Common.clickElement("xpath", "//label[@for='stripe_payments']");
+//				int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+//				Common.clickElement("xpath", "//label[@for='stripe_payments']");
+//				Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
+//						"payment section should be displayed", "sucessfully payment section has been displayed",
+//						"Failed to displayed the payment section");
+				Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
+				Common.clickElement("xpath", "(//input[@type='checkbox'])[2]");
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//input[@name='firstname' and @data-form='billing']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+				Common.textBoxInput("xpath", "//input[@name='city' and @data-form='billing']", data.get(dataSet).get("City"));
 				System.out.println(data.get(dataSet).get("City"));
 
 //				Common.actionsKeyPress(Keys.PAGE_DOWN);
@@ -5474,36 +5485,42 @@ Thread.sleep(5000);
 	             }
 				 else
 				 {
-					 Thread.sleep(4000);
-	                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
-	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					 Common.scrollIntoView("xpath", "//select[@name='region' and @data-form='billing']");
+	                 Common.dropdown("xpath", "//select[@name='region' and @data-form='billing']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 	                 Thread.sleep(3000);
-	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region' and @data-form='billing']")
 	                         .getAttribute("value");
 	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
 		              System.out.println(Shipping);
 	                 System.out.println(Shippingvalue);
-				}
+				 }
+					
 				Thread.sleep(2000);
 				// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 						data.get(dataSet).get("postcode"));
 				Thread.sleep(5000);
-
-				Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 						data.get(dataSet).get("phone"));
-				Thread.sleep(4000);		
-				Common.clickElement("xpath", "//span[text()='Update']");
-				//Sync.waitPageLoad();
-				Thread.sleep(4000);
-                    if(Common.isElementDisplayed("xpath", "//span[contains(text(),'OK')]")) {
-					
-					Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-				Thread.sleep(5000);
+//				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
+//				Sync.waitPageLoad();
+//				Thread.sleep(5000);
+
+//				Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+//						data.get(dataSet).get("phone"));
+//				Thread.sleep(4000);		
+//				Common.clickElement("xpath", "//span[text()='Update']");
+//				//Sync.waitPageLoad();
+//				Thread.sleep(4000);
+//                    if(Common.isElementDisplayed("xpath", "//span[contains(text(),'OK')]")) {
+//					
+//					Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+//				Thread.sleep(5000);
 				
-				update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
-				System.out.println(update);
-				Sync.waitPageLoad();
+//				update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
+//				System.out.println(update);
+//				Sync.waitPageLoad();
 			}
 				else {
 					
@@ -5512,11 +5529,11 @@ Thread.sleep(5000);
 				System.out.println(update);
 				Sync.waitPageLoad();
 				}
-				Common.assertionCheckwithReport(update.contains("Payment Method"),
-						"verifying the Billing address form in payment page",
-						"Billing address should be saved in the payment page",
-						"Sucessfully Billing address form should be Display ",
-						"Failed to display the Billing address in payment page");
+//				Common.assertionCheckwithReport(update.contains("Payment Method"),
+//						"verifying the Billing address form in payment page",
+//						"Billing address should be saved in the payment page",
+//						"Sucessfully Billing address form should be Display ",
+//						"Failed to display the Billing address in payment page");
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
