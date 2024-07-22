@@ -2469,7 +2469,7 @@ public class GoldDrybarusHelper2 {
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='" + socallinksarry[i] + "']");
+				Common.clickElement("xpath", "//a[contains(@href,'" + socallinksarry[i] + "')]");
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 				System.out.println(socallinksarry[i]);
