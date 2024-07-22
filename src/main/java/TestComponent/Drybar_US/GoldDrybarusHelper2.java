@@ -2436,13 +2436,13 @@ public class GoldDrybarusHelper2 {
 		try
 		{
 			
-		 Sync.waitElementPresent("xpath", "//a[@class='order-number']");
-	     Common.clickElement("xpath", "//a[@class='order-number']");
+		 Sync.waitElementPresent("xpath", "//a[@class='order-number link link-primary']");
+	     Common.clickElement("xpath", "//a[@class='order-number link link-primary']");
 	     Thread.sleep(4000);
 	     Common.assertionCheckwithReport(Common.getCurrentURL().contains("order_id"), "validating the navigated to the my orders page",
 					"when we click on the order number it is navigate to the My orders page", "Sucessfully Navigated to the My orders page ",
 					"failed to Navigate to the My orders page");
-	    String Order_ID= Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText().replace("Order # ", "");
+	    String Order_ID= Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("Order # ", "");
 	    System.out.println(Order_ID);
 	    Common.assertionCheckwithReport(Ordernumber.equals(Order_ID), "Validating the order number in the my orders page",
 				"Order Number should be display on the My Orders page", "Sucessfully Order Number io displayed in the My orders page",
