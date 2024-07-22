@@ -6826,17 +6826,18 @@ Thread.sleep(5000);
 		 
 		 public void clickontheproduct_and_image(String Dataset) {
 				// TODO Auto-generated method stub
-				String product = data.get(Dataset).get("Products");
-				System.out.println(product);
+				String products = data.get(Dataset).get("Products");
+				System.out.println(products);
 				
 				try {
-					String minicartproduct = Common
-							.findElement("xpath", "//a[@class='a-product-name' and text()='" + product + "']").getText();
-					Common.clickElement("xpath", "//a[@class='a-product-name' and text()='" + product + "']");
-					Sync.waitPageLoad();
-					Thread.sleep(3000);
-					System.out.println(minicartproduct);
-					Common.assertionCheckwithReport(product.contains(minicartproduct),
+					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+					Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+					
+					Thread.sleep(20000);
+					String PDP_ProductTitle = Common
+							.findElement("xpath", "//span[contains(@class,'pdp-grid-title title')]").getText();
+					System.out.println(PDP_ProductTitle);
+					Common.assertionCheckwithReport(products.contains(PDP_ProductTitle),
 							"validating the product navigating to the PDP page",
 							"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 							"Failed to Navigates Product to the PDP page");
@@ -6851,6 +6852,119 @@ Thread.sleep(5000);
 				}
 
 			}
+		 
+		 
+		 
+		 
+		 public void Write_Review(String Dataset) {
+				// TODO Auto-generated method stub
+
+				
+				
+				
+				try {
+					int write= Common.findElements("xpath", "//a[text()='Write a review']").size();
+					
+					if(write>0) {
+						
+					
+					Sync.waitElementPresent(30, "xpath", "//a[text()='Write a review']");
+					Common.javascriptclickElement("xpath", "//a[text()='Write a review']");
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					
+					Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
+					Common.clickElementStale("xpath", "//span[text()='Write A Review']");
+					int Write = Common
+							.findElements("xpath", "//h2[text()='WRITE A REVIEW']").size();
+					System.out.println(Write);
+					
+					if(Write>0) {
+						Thread.sleep(3000);
+						Sync.waitElementPresent(30, "xpath", "//span[@data-score='4']");
+						Common.javascriptclickElement("xpath", "//span[@data-score='4']");
+						
+						
+						Common.textBoxInput("xpath", "//input[@name='review_title']", data.get(Dataset).get("title"));
+						
+						Common.textBoxInput("xpath", "(//textarea[@name='review_content'])[1]", data.get(Dataset).get("Review"));
+						
+						String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+						Common.textBoxInput("xpath", "//input[contains(@id,'yotpo_input_review_email')]", email);
+//						Common.textBoxInput("xpath", "//input[contains(@id,'yotpo_input_review_email')]", data.get(Dataset).get("Email"));
+						Common.textBoxInput("xpath", "//input[contains(@id,'yotpo_input_review_username')]", data.get(Dataset).get("FirstName"));
+						Common.clickCheckBox("xpath", "(//input[@class='yotpo-default-button primary-color-btn yotpo-submit'])[1]");
+					} else {
+						
+						Assert.fail();
+					}
+					
+					}
+					else
+					{
+						Thread.sleep(6000);
+						Sync.waitElementPresent(30, "xpath", "//a[contains(@aria-label,'reviews')]");
+						Common.javascriptclickElement("xpath", "//a[contains(@aria-label,'reviews')]");
+						Sync.waitPageLoad();
+						Thread.sleep(3000);
+						
+						Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
+						Common.clickElementStale("xpath", "//span[text()='Write A Review']");
+						int Write = Common
+								.findElements("xpath", "//h2[text()='WRITE A REVIEW']").size();
+						System.out.println(Write);
+						
+						if(Write>0) {
+							
+							Sync.waitElementPresent(30, "xpath", "//span[@data-score='4']");
+							
+							Common.javascriptclickElement("xpath", "//span[@data-score='4']");
+							
+							Common.textBoxInput("xpath", "//input[@name='review_title']", data.get(Dataset).get("title"));
+							
+							Common.textBoxInput("xpath", "(//textarea[@name='review_content'])[1]", data.get(Dataset).get("Review"));
+							
+							String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+							Common.textBoxInput("xpath", "//input[contains(@id,'yotpo_input_review_email')]", email);
+//							Common.textBoxInput("xpath", "//input[contains(@id,'yotpo_input_review_email')]", data.get(Dataset).get("Email"));
+							Common.textBoxInput("xpath", "//input[contains(@id,'yotpo_input_review_username')]", data.get(Dataset).get("FirstName"));
+							Common.clickCheckBox("xpath", "(//input[@class='yotpo-default-button primary-color-btn yotpo-submit'])[1]");
+						
+					}
+					}
+					
+					int Success_MSG= Common.findElements("xpath", "(//span[text()='Your review has already been submitted.'])[1]").size();
+					if (Success_MSG>0) {
+						int Thanks =Common.findElements("xpath", "(//span[text()='Your review has already been submitted.'])[1]").size();
+						System.out.println(Thanks);
+						Common.assertionCheckwithReport(Thanks>0,
+								"validating the product navigating to the PDP page",
+								"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+								"Failed to Navigates Product to the PDP page");
+//							
+						
+					} else {
+						
+					
+					int Thanks =Common.findElements("xpath", "(//span[text()='Thank you for posting a review!'])[1]").size();
+					
+					Common.assertionCheckwithReport(Thanks>0,
+							"validating the product navigating to the PDP page",
+							"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+							"Failed to Navigates Product to the PDP page");
+//					
+					}
+					
+					} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the product navigating to the PDP page",
+							"The product Should be navigates to the PDP page", " unable to Navigates Product to the PDP page",
+							Common.getscreenShot("Failed to Navigates Product to the PDP page"));
+					Assert.fail();
+				}
+
+			}
+		 
 		 public void minicart_delete(String Dataset) {
 				// TODO Auto-generated method stub
 				String deleteproduct = data.get(Dataset).get("Products");
