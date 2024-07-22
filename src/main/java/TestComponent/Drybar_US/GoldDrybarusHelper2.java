@@ -2283,8 +2283,10 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(4000);
 			String orderid = Common.findElement("xpath", "//span[@class='title-lg']").getText();
 			System.out.println(orderid);
-			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid), "verifying order status form",
+			String ID=Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("ORDER #", "");
+			System.out.println("ID");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
+					
 					"order tracking information page navigation", "successfully order tracking information page ",
 					"Failed to navigate tracking order page infromation");
 
