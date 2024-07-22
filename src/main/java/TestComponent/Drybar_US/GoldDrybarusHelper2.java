@@ -2277,12 +2277,13 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("id", "oar_email");
 			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
 
-			Sync.waitElementPresent("xpath", "//button[@title='Search']");
-			Common.clickElement("xpath", "//button[@title='Search']");
+			Sync.waitElementPresent("xpath", "//button[@title='Continue']");
+			Common.clickElement("xpath", "//button[@title='Continue']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			String orderid = Common.findElement("xpath", "//span[@class='title-lg']").getText();
 			System.out.println(orderid);
+			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid), "verifying order status form",
 					"order tracking information page navigation", "successfully order tracking information page ",
 					"Failed to navigate tracking order page infromation");
