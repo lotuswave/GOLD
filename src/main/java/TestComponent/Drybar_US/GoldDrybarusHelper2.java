@@ -3597,7 +3597,7 @@ public class GoldDrybarusHelper2 {
 			String subtotal = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText().replace(Symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			System.out.println(subtotalvalue);
-			String Productprice = Common.getText("xpath", "(//span[@class='price'])[5]")
+			String Productprice = Common.getText("xpath", "(//span[@class='price'])[7]")
 					.replace(Symbol, "");
 			Float pricevalue = Float.parseFloat(Productprice);
 			System.out.println(pricevalue);
@@ -3606,7 +3606,19 @@ public class GoldDrybarusHelper2 {
 			System.out.println(ExpectedTotalAmmount2);
 			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
 			Common.clickElement("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
-			Sync.waitPageLoad(40);
+			
+			
+			int Remove_Popup = Common.findElements("xpath", "//h2[normalize-space()='Remove Item'] ").size();
+			System.out.println(Remove_Popup);
+					if(Remove_Popup>0) {
+						Sync.waitElementClickable("xpath", "//button[normalize-space()='OK'] ");
+						Common.clickElement("xpath", "//button[normalize-space()='OK'] ");
+						System.out.println("Product Removed successfully");
+					} else {
+						
+						Assert.fail();
+					}
+					Sync.waitPageLoad(40);
 			Thread.sleep(10000);
 			Common.refreshpage();
 			Thread.sleep(5000);
