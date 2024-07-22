@@ -1066,6 +1066,7 @@ public class GoldDrybarusHelper2 {
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
 			Assert.fail();
+			
 		}
 		try {
 			Sync.waitPageLoad();
