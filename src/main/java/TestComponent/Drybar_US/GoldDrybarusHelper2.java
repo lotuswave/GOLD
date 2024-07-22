@@ -1198,13 +1198,13 @@ public class GoldDrybarusHelper2 {
 	             	   Thread.sleep(40000);
 	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
-	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-	              		   Thread.sleep(3000);
-	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	                  	   Thread.sleep(4000);
-	                  	 String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+//	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+//	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+//	              		   Thread.sleep(3000);
+//	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+//	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//	                  	   Thread.sleep(4000);
+	                  	 String sucessmessage=Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
 		              	    System.out.println(sucessmessage);
 	              		   
 	              	   }
