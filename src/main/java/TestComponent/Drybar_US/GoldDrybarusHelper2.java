@@ -5501,7 +5501,7 @@ Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 						data.get(dataSet).get("postcode"));
 				Thread.sleep(5000);
-				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
+				Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
 						data.get(dataSet).get("phone"));
 //				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
 //				Sync.waitPageLoad();
