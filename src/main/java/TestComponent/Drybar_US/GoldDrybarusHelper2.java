@@ -2442,7 +2442,7 @@ public class GoldDrybarusHelper2 {
 	     Common.assertionCheckwithReport(Common.getCurrentURL().contains("order_id"), "validating the navigated to the my orders page",
 					"when we click on the order number it is navigate to the My orders page", "Sucessfully Navigated to the My orders page ",
 					"failed to Navigate to the My orders page");
-	    String Order_ID= Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("Order # ", "");
+	    String Order_ID= Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("ORDER #", "");
 	    System.out.println(Order_ID);
 	    Common.assertionCheckwithReport(Ordernumber.equals(Order_ID), "Validating the order number in the my orders page",
 				"Order Number should be display on the My Orders page", "Sucessfully Order Number io displayed in the My orders page",
@@ -4922,8 +4922,8 @@ Thread.sleep(5000);
 //    			validating_BundleProducts();
     			product_quantity(Dataset);
     			//bundle_color("Black");
-    			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-    			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+    			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
+    			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
     			Sync.waitPageLoad();
     			Sync.waitPageLoad();
     			Thread.sleep(6000);
