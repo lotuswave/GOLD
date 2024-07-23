@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_059_Validate_RegisterUser_Checkout_DiscoverCC_Tax_Multiple_Products_Discount_Promotion_with_Different_Billing_and_shipping {
     
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_RegisterUser_Checkout_DiscoverCC_Tax_Multiple_Products_Discount_Promotion_with_Different_Billing_and_shipping () throws Exception {
@@ -31,6 +31,7 @@ public class TEST_DGLD_DB_US_ST_059_Validate_RegisterUser_Checkout_DiscoverCC_Ta
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.tax_validation_Paymentpage("Address");
+//			Drybar.close_successmessage();
 			Drybar.discountCode("Discount");
 			Drybar.BillingAddress("BillingDetails");
 			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
