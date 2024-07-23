@@ -25,7 +25,7 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
 
 		try {
-			FileInputStream datafile = new FileInputStream(("user.dir")+"\\src\\test\\resources\\TestData\\Hydroflask\\GoldHydroTestData1.xlsx");
+			FileInputStream datafile = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\TestData\\Hydroflask\\GoldHydroTestData1.xlsx");
 			XSSFWorkbook workbook= new XSSFWorkbook(datafile);
 			XSSFSheet sheet=workbook.getSheet("order_Placement");
 			int rowcount=sheet.getLastRowNum();
