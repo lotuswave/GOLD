@@ -36,7 +36,7 @@ public class TEST_DGLD_DB_US_ST_178_Change_Address_In_AddressBook {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
