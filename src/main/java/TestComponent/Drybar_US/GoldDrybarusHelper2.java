@@ -1600,20 +1600,20 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").replace(Symbol,
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "(//span[@class='flex items-center'])[2]")
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='flex items-center']")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			
-			Common.clickElement("xpath", "//div[normalize-space()='Tax Breakdown']");
-			String Tax = Common.getText("xpath", "//span[@class='tax-unit']").replace(Symbol, "");
+			
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
 			
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
-			String ordertotal = Common.getText("xpath", "(//span[@class=\"value text-right title-sm text-sale-font\"])[2]")
+			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]")
 					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
@@ -9752,8 +9752,22 @@ public void click_createAccount_Signinpage() {
 	}
 }
 
+
+public void close_successmessage() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close message']");
+		Common.clickElement("xpath", "//button[@aria-label='Close message']");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
 }
 
+}
 
 
 			
