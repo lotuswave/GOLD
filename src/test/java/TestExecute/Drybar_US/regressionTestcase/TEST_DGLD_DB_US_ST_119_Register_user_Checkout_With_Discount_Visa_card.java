@@ -28,7 +28,7 @@ public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_Visa_ca
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.discountCode("Discount");
-//			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 

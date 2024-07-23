@@ -335,6 +335,8 @@ public class GoldDrybarusHelper2 {
 					ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
 							"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 							Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+					
+					close_successmessage();
 
 				} catch (Exception | Error e) {
 					e.printStackTrace();
