@@ -7960,12 +7960,12 @@ public void After_Pay_payment(String dataSet) throws Exception {
 	try {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+		Sync.waitElementClickable("xpath", "//label[@for='payment-method-stripe_payments']");
+		int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 				"User unable to land o n the paymentpage");
-		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
 		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
