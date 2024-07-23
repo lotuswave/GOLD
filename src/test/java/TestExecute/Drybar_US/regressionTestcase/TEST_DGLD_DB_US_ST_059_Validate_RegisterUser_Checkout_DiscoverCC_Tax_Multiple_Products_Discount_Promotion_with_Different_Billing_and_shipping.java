@@ -31,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_059_Validate_RegisterUser_Checkout_DiscoverCC_Ta
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.tax_validation_Paymentpage("Address");
-//			Drybar.close_successmessage();
+			Drybar.close_successmessage();
 			Drybar.discountCode("Discount");
 			Drybar.BillingAddress("BillingDetails");
 			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
