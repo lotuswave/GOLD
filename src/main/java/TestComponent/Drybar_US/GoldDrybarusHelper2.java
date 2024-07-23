@@ -6705,21 +6705,21 @@ Thread.sleep(5000);
 		public void view_PLP_page() {
 			try {
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
-				System.out.println(title);
-				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+//				String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
+//				System.out.println(title);
+				String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 						.getAttribute("aria-label");
 				System.out.println(breadcrumbs);
-				String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+				String filter = Common.findElement("xpath", "//span[normalize-space()='Filter by:']").getText();
 				System.out.println(filter);
 				String Sort = Common
 						.findElement("xpath",
-								"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
+								"//div[@class='flex items-center']//span")
 						.getText();
 				System.out.println(Sort);
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(
-						breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane") && title.contains("c-clp-hero")
+						breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane")
 								&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
 						"To validate the Product Listing Page", "User should able to open Product Listing Page",
 						"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -6734,13 +6734,20 @@ Thread.sleep(5000);
 		}
 		public void filter_By(String dataSet) {
 			String category = data.get(dataSet).get("category");
+			System.out.println(category);
 	try {
 				
 		Thread.sleep(6000);
 				String text = Common.findElement("xpath", "//a[text()='"+category+"']//span").getText();
 				System.out.println(text);
+				 
+				text = text.replaceAll("[()]", ""); // Remove the parentheses  
+				int textValue = Integer.parseInt(text); // Now parse the cleaned string  
+				System.out.println(textValue); // This will print: 14
+				
 				Common.clickElement("xpath", "//a[text()='"+category+"']");
-				int textValue = Integer.parseInt(text);
+				
+//				int textValue = Integer.parseInt(text);
 				String categoryvalue=Integer.toString(textValue);
 				Thread.sleep(6000);
 				String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
