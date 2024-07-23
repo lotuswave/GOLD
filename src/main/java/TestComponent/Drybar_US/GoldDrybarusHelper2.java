@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-			acceptPrivacy();
+//			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -4704,15 +4704,19 @@ Thread.sleep(5000);
 			Assert.fail();
 		}
 	}
-        public String create_account(String Dataset) {
-        	String email = "";
+        public void create_account(String Dataset) {
+        	
     		String Store= data.get(Dataset).get("Store");
     		try {
 
     			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
     			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-    			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+//    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+    			
+    			String email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
+    			System.out.println(email);
+    			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
+//    			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
     			System.out.println(data.get(Dataset).get("Password"));
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
@@ -4741,7 +4745,7 @@ Thread.sleep(5000);
     					"Failed to navigate to the My account page after clicking on the signup button");
     			Assert.fail();
     		}
-    		return email;
+//    		return email;
         }
         public void discountCode(String dataSet) throws Exception {
         	String expectedResult = "It should opens textbox input to enter discount.";
@@ -9047,11 +9051,11 @@ public void Add_Address(String dataSet) {
 	// TODO Auto-generated method stub
 
 	try {
-		Sync.waitElementVisible(30, "xpath", "//a[text()='Address Book']");
-		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Sync.waitElementVisible(30, "xpath", "//a[@title='Address Book']");
+		Common.clickElement("xpath", "//a[@title='Address Book']");
 		Thread.sleep(4000);
 		Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
-		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+		Common.textBoxInput("xpath", "//input[@id='street_1']", data.get(dataSet).get("Street"));
 		Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 		Thread.sleep(4000);
 		 if(Common.getCurrentURL().contains("/gb"))
@@ -9073,7 +9077,7 @@ public void Add_Address(String dataSet) {
 
 		Common.clickElement("xpath", "//button[@title='Save Address']");
 		Thread.sleep(5000);
-		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		String message = Common.findElement("xpath", "//span[text()='You saved the address.']").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(message.contains("You saved the address."),
 				"validating the saved message after saving address in address book",
@@ -9106,9 +9110,9 @@ public void change_Shippingaddress_Addressbook(String Dataset) {
 	try {
 		Sync.waitPageLoad();
 
-		String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
-		if (newaddress.contains("You have no other address")) {
-			Common.clickElement("xpath", "//button[@title='Add New Address']");
+		String newaddress = Common.findElement("xpath", "//span[text()='You have no other address entries in your address book.']").getText();
+		if (newaddress.contains("You have no other address entries in your address book.")) {
+			Common.clickElement("xpath", "//a[normalize-space()='Add New Address']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//input[@name='firstname']");
 			Common.clickElement("xpath", "//input[@name='firstname']");
@@ -9118,8 +9122,8 @@ public void change_Shippingaddress_Addressbook(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
 			Common.clickElement("xpath", "//input[@title='Phone Number']");
 			Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
-			Common.clickElement("xpath", "//input[@title='Address Line 1']");
-			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+			Common.clickElement("xpath", "//input[@id='street_1']");
+			Common.textBoxInput("xpath", "//input[@id='street_1']", address);
 			Common.clickElement("xpath", "//input[@title='City']");
 			Common.textBoxInput("xpath", "//input[@title='City']", City);
 			Thread.sleep(4000);
@@ -9137,7 +9141,7 @@ public void change_Shippingaddress_Addressbook(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 			Common.clickElement("xpath", "//label[@for='primary_shipping']");
 			Common.clickElement("xpath", "//button[@title='Save Address']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//span[text()='You saved the address.']").getText();
 
 			Common.assertionCheckwithReport(message.contains("You saved the address."),
 					"validating the saved message after saving address in address book",
@@ -9172,7 +9176,8 @@ public void Shippingaddress_Addressbook(String Dataset) {
 	String zipcode = data.get(Dataset).get("postcode");
 	String shipping = data.get(Dataset).get("Shipping address");
 	try {
-		Common.clickElement("xpath", "//a[@title='Change Shipping Address']");
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//span[text()='Change Shipping Address']");
 		Sync.waitPageLoad();
 		Sync.waitElementPresent("xpath", "//input[@name='firstname']");
 		Common.clickElement("xpath", "//input[@name='firstname']");
@@ -9182,8 +9187,8 @@ public void Shippingaddress_Addressbook(String Dataset) {
 		Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
 		Common.clickElement("xpath", "//input[@title='Phone Number']");
 		Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
-		Common.clickElement("xpath", "//input[@title='Address Line 1']");
-		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+		Common.clickElement("xpath", "//input[@id='street_1']");
+		Common.textBoxInput("xpath", "//input[@id='street_1']", address);
 		Common.clickElement("xpath", "//input[@title='City']");
 		Common.textBoxInput("xpath", "//input[@title='City']", City);
 		if(Common.getCurrentURL().contains("/gb"))
@@ -9199,9 +9204,9 @@ public void Shippingaddress_Addressbook(String Dataset) {
 		Common.clickElement("xpath", "//input[@name='postcode']");
 		Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 		String checkbox = Common.findElement("xpath", "//input[@id='primary_billing']").getAttribute("type");
-		String text = Common.findElement("xpath", "//div[@class='message info']//span").getText();
+		String text = Common.findElement("xpath", "//span[@class='text-base w-full']").getText();
 		Common.assertionCheckwithReport(
-				checkbox.equals("checkbox") && text.equals("This is your default shipping address."),
+				checkbox.equals("checkbox") && text.equals("It's a default shipping address."),
 				"validating the checkbox for billing address and text for the shipping address",
 				"Checkbox should be display for the billing address and text should be display for the shipping address",
 				"Sucessfully checkbox is displayed for the billing address and text is displayed for the shipping address",
@@ -9209,8 +9214,10 @@ public void Shippingaddress_Addressbook(String Dataset) {
 						+ "for shipping address");
 		Common.clickElement("xpath", "//input[@id='primary_billing']");
 		Common.clickElement("xpath", "//button[@title='Save Address']");
+		Sync.waitPageLoad(3000);
 		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		String message = Common.findElement("xpath", "//span[text()='You saved the address.']").getText();
+		System.out.println(message);
 		Common.assertionCheckwithReport(message.contains("You saved the address."),
 				"validating the checkbox for billing address and text for the shipping address",
 				"Checkbox should be display for the billing address and text should be display for the shipping address",
