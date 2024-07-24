@@ -268,6 +268,7 @@ public class GoldHydroHelper {
 			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
 			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
 			System.out.println(minicart);
+			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
 			Common.clickElement("xpath", "//button[@title='Checkout']");
 			Sync.waitPageLoad();

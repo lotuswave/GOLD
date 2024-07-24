@@ -18,9 +18,6 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 	String datafile = "Hydroflask//GoldHydroTestData1.xlsx";
 	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"order_Placement");
 	
-
-
-
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
 
@@ -33,17 +30,18 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 			Hydro.prepareTaxData("Hydro_OrderNumbers.xlsx");
 			
 			Hydro.verifingHomePage();
-			 for(int i=1;i<=rowcount;i++)
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			 for(int i=1;i<=rowcount-87;i++)
 			 {
 				 
 			XSSFRow celldata=sheet.getRow(i);
 			String Account=celldata.getCell(0).getStringCellValue();
 		    Thread.sleep(10000);
 //			String website = Hydro.website();
-			Hydro.search_product(Account);      
-			Hydro.addtocart(Account);   
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser(Account);
+		    Hydro.reorder();
+	        Hydro.minicart_Checkout();
+	        Hydro.RegaddDeliveryAddress(Account);
             Hydro.selectshippingaddress(Account);
             Hydro.clickSubmitbutton_Shippingpage();
 			String Ordernumber= Hydro.updatePaymentAndSubmitOrder(Account);
