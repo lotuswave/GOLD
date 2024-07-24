@@ -7154,7 +7154,11 @@ Thread.sleep(5000);
 	    			Thread.sleep(2000);
 	    			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 	    			{
-	    				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+	    				Common.clickElement("xpath", "//button[@aria-label='My Account']");
+	    				Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+	    				Common.clickElement("xpath", "//a[@title='My Account']");
+	    				Thread.sleep(3000);
+	    				
 	    				if (Common.getCurrentURL().contains("/gb")){
 	    					Sync.waitElementPresent(30, "xpath", "//a[text()='My Wish List']");
 		    				Common.clickElement("xpath", "//a[text()='My Wish List']");
@@ -7165,9 +7169,9 @@ Thread.sleep(5000);
 		    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    				}
 	    				else {
-	    				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
-	    				Common.clickElement("xpath", "//a[text()='My Favorites']");
-	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+	    				Sync.waitElementPresent(30, "xpath", "//span[text()='My Favorites']");
+	    				Common.clickElement("xpath", "//span[text()='My Favorites']");
+	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") || Common.getPageTitle().equals("Wish List Sharing"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 	    						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -7207,12 +7211,13 @@ Thread.sleep(5000);
 	    			if(Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod"))
 	    			{
 	    				Thread.sleep(4000);
-	    				Common.clickElement("xpath", "//button[@title='Share Favorites']");
+	    				My_Favorites();
+	    				Common.clickElement("xpath", "//div[@class='lg:ml-3']//button[@type='button']");
 	    				Sync.waitPageLoad();
 	    				Thread.sleep(4000);
 	    				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 	    				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-	    				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+	    				Common.javascriptclickElement("xpath", "//button[contains(text(),'Share Wish List')]");
 	    				Thread.sleep(8000);
 //	    				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 //	    				System.out.println(message1);
@@ -7257,14 +7262,14 @@ Thread.sleep(5000);
 	    		// TODO Auto-generated method stub
 	    		try {
 	    			Sync.waitPageLoad();
-	    			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+	    			int MyFavorites = Common.findElements("xpath", "//form[@id='wishlist-view-form']//div[contains(@class,'message info')]//span").size();
 
 	    			if (MyFavorites != 0) {
 	    				search_product("Product");
-	    				Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
-	    				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-	    				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
-	    				if(Common.getCurrentURL().contains("stage3"))
+	    				Common.mouseOver("xpath", "(//span[contains(@class, 'group-hover/wishlist')])[1]");
+	    				Sync.waitElementPresent(30, "xpath", "(//span[contains(@class, 'group-hover/wishlist')])[1]");
+	    				Common.javascriptclickElement("xpath", "(//span[contains(@class, 'group-hover/wishlist')])[1]");
+	    				if(Common.getCurrentURL().contains("stage"))
 	                    {
 //	                        Sync.waitPageLoad();
 //	                        String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
