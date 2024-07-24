@@ -57,7 +57,7 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
