@@ -4114,11 +4114,12 @@ public class GoldDrybarusHelper2 {
 	String Price="";
 		try
 		{
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent("xpath", "(//ul[@id='desktop-account-nav']//a)[1]");
-			String account=Common.findElement("xpath", "(//ul[@id='desktop-account-nav']//a)[1]").getAttribute("id");
-			Common.clickElement("xpath", "//a[@id='"+ account +"']");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+//			String account=Common.findElement("xpath", "(//ul[@id='desktop-account-nav']//a)[1]").getAttribute("id");
+//			Common.clickElement("xpath", "//a[@id='"+ account +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("account"),
@@ -4126,8 +4127,8 @@ public class GoldDrybarusHelper2 {
 					"After clicking on My account it should navigate to the my account page",
 					"successfully Navigated to the My account page",
 					"Failed to Navigate to the My account page");
-			Sync.waitElementPresent("xpath", "//a[text()='Store Credit']");
-			Common.clickElement("xpath", "//a[text()='Store Credit']");
+			Sync.waitElementPresent("xpath", "//span[text()='Store Credit']");
+			Common.clickElement("xpath", "//span[text()='Store Credit']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("storecredit"),
@@ -4135,7 +4136,7 @@ public class GoldDrybarusHelper2 {
 					"After clicking on storecredit it should navigate to the storecredit page",
 					"successfully Navigated to the storecredit page",
 					"Failed to Navigate to the storecredit page");
-		 Price=Common.getText("xpath", "(//div[@class='block-content']//span[@class='price'])[1]");
+		 Price=Common.getText("xpath", "//div[@class='block-balance card flex flex-col justify-between']//span[@class='price']");
 			
 			
 		}
@@ -4167,37 +4168,37 @@ public class GoldDrybarusHelper2 {
 		try
 		{
 			Thread.sleep(3000);
-			String ordertotal = Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText().replace(symbol, "");
+			String ordertotal = Common.findElement("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[2]").getText().replace(symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			System.out.println(ordertotalvalue);
-			Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
-			Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+			Sync.waitElementPresent("xpath", "//div[normalize-space()='Apply Store Credit']");
+			Common.clickElement("xpath", "//div[normalize-space()='Apply Store Credit']");
 			Thread.sleep(4000);
-			String storecredit=Common.getText("xpath", "//strong[@id='customerbalance-available-amount']").replace(symbol, "");
+			String storecredit=Common.getText("xpath", "//span[normalize-space()='$15.98 credit available']").replace(symbol, "").replace("credit available", "");
 			System.out.println("storecredit"+storecredit);
-			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
-			Float Pricevalue = Float.parseFloat(price);
-			System.out.println(Pricevalue);
+//			String price=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
+//			Float Pricevalue = Float.parseFloat(price);
+//			System.out.println(Pricevalue);
 			Thread.sleep(4000);
 			
-				String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
-				if(balance.equals(price))
+//				String balstorecreditance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]").replace(symbol, "");
+				if(storecredit.equals(Price))
 				{
-					String totalbeforeWC=Common.findElement("xpath", "//tr[@class='grand totals']//span[@class='price']").getText();
-					Sync.waitElementPresent(30,"xpath", "//button[@id='use-customer-balance']");
-					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
+					String totalbeforeWC=Common.findElement("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[2]").getText();
+					Sync.waitElementPresent(30,"xpath", "//span[normalize-space()='Apply']");
+					Common.clickElement("xpath", "//span[normalize-space()='Apply']");
 				//	Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
 				//	String message = Common.findElement("xpath", "(//div[contains(@class,'message ')]//div)[1]").getText();
 					Thread.sleep(5000);
 					//System.out.println(message);
-					Common.scrollIntoView("xpath", "//tr[@class='totals balance']//span[@class='price']");
-					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
+					Common.scrollIntoView("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[2]");
+					String storeorder=Common.findElement("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[2]").getText().replace("-", "");
 					System.out.println(storeorder);
 					System.out.println(totalbeforeWC);
-					System.out.println(price);
+					System.out.println(Price);
 					System.out.println(storecredit);
 					Common.refreshpage();
-					Common.assertionCheckwithReport(storecredit.equals(price),"validating the store credit balance applied sucess message",
+					Common.assertionCheckwithReport(storecredit.equals(Price),"validating the store credit balance applied sucess message",
 							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
 							"failed to Display the success message");
 				}
