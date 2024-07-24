@@ -10626,7 +10626,188 @@ public void alumini_Chefs(String Dataset) {
 			return Orderstatus1;
 
 }
-}
+		
+		public void prepareTaxData(String fileName) {
+			// TODO Auto-generated method stub
+			
+				try{
+					
+					File file=new File(System.getProperty("user.dir")+"/src/test/resources/"+fileName);
+					XSSFWorkbook workbook;
+					XSSFSheet sheet;
+					Row row;
+					Cell cell;
+					int rowcount;
+					if(!(file.exists()))
+					{
+					workbook = new XSSFWorkbook();
+					sheet = workbook.createSheet("Order ID");
+					CellStyle cs = workbook.createCellStyle();
+					cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+					cs.setFillForegroundColor(IndexedColors.GOLD.getIndex());
+					Font f = workbook.createFont();
+					f.setBold(true);
+					cs.setFont(f);
+					cs.setAlignment(HorizontalAlignment.RIGHT);
+					row = sheet.createRow(0);
+					cell = row.createCell(0);
+					cell.setCellStyle(cs);
+					cell.setCellValue("OXO_US_OrderDetails");
+
+
+					row = sheet.createRow(1);
+					cell = row.createCell(0);
+					cell.setCellStyle(cs);
+					cell.setCellValue("S.No");
+					cell=row.createCell(1);
+					cell.setCellStyle(cs);
+					cell.setCellValue("Company");
+					cell = row.createCell(2);
+					cell.setCellStyle(cs);
+					cell.setCellValue("Order Number");
+					cell=row.createCell(3);
+					cell.setCellStyle(cs);
+					cell.setCellValue("Digital QA Status(PASS/FAIL)");
+					rowcount=2;
+					}
+
+					else
+					{
+					workbook = new XSSFWorkbook(new FileInputStream(file));
+					sheet=workbook.getSheet("Order ID");
+					rowcount=sheet.getLastRowNum()+1;
+					}
+					/*row = sheet.createRow(rowcount);
+					cell = row.createCell(0);*/
+
+
+
+					FileOutputStream fileOut = new FileOutputStream(file);
+					workbook.write(fileOut);
+					fileOut.flush();
+					fileOut.close();
+
+
+
+					} catch (Exception e) {
+					e.printStackTrace();
+					}
+					}
+		
+		public void writeResultstoXLSx(String Ordernumber)
+		{
+		//String fileOut="";
+		try{
+
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources/Oxo_OrderNumbers.xlsx");
+		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+		XSSFSheet sheet;
+		Row row;
+		Cell cell;
+		int rowcount;
+		sheet = workbook.getSheet("Order ID");
+
+		if((workbook.getSheet("Order ID"))==null)
+		{
+		sheet = workbook.createSheet("Order ID");
+		CellStyle cs = workbook.createCellStyle();
+		cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+		Font f = workbook.createFont();
+		f.setBold(true);
+		cs.setFont(f);
+		cs.setAlignment(HorizontalAlignment.RIGHT);
+		row = sheet.createRow(0);
+		cell = row.createCell(0);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Orders details");
+
+		row = sheet.createRow(1);
+		cell = row.createCell(0);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Web Order Number");
+		cell = row.createCell(1);
+		cell.setCellStyle(cs);
+		cell.setCellValue("SubTotal");
+		cell = row.createCell(2);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Shipping");
+		cell=row.createCell(3);
+		cell.setCellStyle(cs);
+		cell.setCellValue("TaxRate");
+		cell=row.createCell(4);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Web Configured TaxRate");
+		cell=row.createCell(5);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Actual TaxAmount");
+		cell=row.createCell(6);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Expected TaxAmount");
+
+		rowcount=2;
+
+		}
+
+		else
+		{
+
+		sheet=workbook.getSheet("Order ID");
+		rowcount=sheet.getLastRowNum()+1;
+		}
+		row = sheet.createRow(rowcount);
+		cell = row.createCell(0);
+		cell.setCellType(CellType.NUMERIC);
+		int SNo=rowcount-1;
+		cell.setCellValue(SNo);
+		cell = row.createCell(1);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue("Lotuswave");
+		cell = row.createCell(2);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Ordernumber);
+		cell = row.createCell(3);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue("Lotuswave");
+		
+		String status;
+		if(Ordernumber.contains("700"))
+		{
+
+		status="PASS";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.GREEN.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+		else
+		{
+		status="FAIL";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.RED.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+
+
+		cell.setCellValue(status);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		workbook.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+
+		}
+		
+
+		}
+
 
 		
 
