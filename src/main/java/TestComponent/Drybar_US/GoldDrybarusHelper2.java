@@ -1530,27 +1530,29 @@ public class GoldDrybarusHelper2 {
 
 		else {
 			try {
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				Thread.sleep(3000);
+				Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 
 				//Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
-					Common.getText("xpath", "//div[@class='checkout-success']//span");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 
 				}
