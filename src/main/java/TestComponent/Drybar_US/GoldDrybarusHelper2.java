@@ -1692,8 +1692,8 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
-			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[2]").isSelected();
+			Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
+			Boolean checkbox=Common.findElement("xpath", "//input[@id='billing-as-shipping']").isSelected();
 			System.out.println(checkbox);
 			Thread.sleep(7000);
 			String box=Boolean.toString(checkbox);
@@ -1701,11 +1701,11 @@ public class GoldDrybarusHelper2 {
 			{
 				//Common.dropdown("xpath", "(//select[@name='billing_address_id'])[3]", Common.SelectBy.TEXT,"New Address");
 				
-				Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
-				Common.clickElement("xpath", "(//input[@type='checkbox'])[2]");
+				Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
+				Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
 				Thread.sleep(5000);
-				Sync.waitElementPresent("xpath", "(//button[contains(text(),' New Address ')])[2]");
-				Common.clickElement("xpath", "(//button[contains(text(),' New Address ')])[2]");
+				Sync.waitElementPresent("xpath", "(//button[contains(text(),'New Address')])[2]");
+				Common.clickElement("xpath", "(//button[contains(text(),'New Address')])[2]");
 				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
