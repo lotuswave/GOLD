@@ -6869,8 +6869,8 @@ Thread.sleep(5000);
 				System.out.println(products);
 				
 				try {
-					Sync.waitElementPresent(30, "xpath", "//p[@class='title-sm']//a[text()='" + products + "']");
-					Common.javascriptclickElement("xpath", "//p[@class='title-sm']//a[text()='" + products + "']");
+					Sync.waitElementPresent(30, "xpath", "//a[@data-role='item-image']//img[@alt='" + products + "']");
+					Common.javascriptclickElement("xpath", "//a[@data-role='item-image']//img[@alt='" + products + "']");
 					
 					Thread.sleep(20000);
 					String PDP_ProductTitle = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title title')]").getText();
