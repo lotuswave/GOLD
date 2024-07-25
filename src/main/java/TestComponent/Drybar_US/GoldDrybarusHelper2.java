@@ -1119,7 +1119,9 @@ public class GoldDrybarusHelper2 {
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-			
+			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
+			 String code=Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
+			 System.out.println(code);
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -1134,11 +1136,24 @@ public class GoldDrybarusHelper2 {
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
+				
+				
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
+				
+				int zipcode=Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+				System.out.println(zipcode);
+				
+				if(zipcode > 0)
+				{
+				 
+				 Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+				 Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+				}
+				
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
@@ -1191,6 +1206,16 @@ public class GoldDrybarusHelper2 {
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
+				
+				int zipcode=Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+				System.out.println(zipcode);
+				
+				if(zipcode > 0)
+				{
+				 
+				 Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+				 Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+				}
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
