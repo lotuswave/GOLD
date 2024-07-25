@@ -1728,8 +1728,9 @@ public class GoldDrybarusHelper2 {
 			{
 				//Common.dropdown("xpath", "(//select[@name='billing_address_id'])[3]", Common.SelectBy.TEXT,"New Address");
 				
-				Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
-				Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
+				Common.scrollIntoView("xpath", "//input[@id='billing-as-shipping']");
+				Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");	
+				Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
 				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath", "(//button[contains(text(),'New Address')])[2]");
 				Common.clickElement("xpath", "(//button[contains(text(),'New Address')])[2]");
