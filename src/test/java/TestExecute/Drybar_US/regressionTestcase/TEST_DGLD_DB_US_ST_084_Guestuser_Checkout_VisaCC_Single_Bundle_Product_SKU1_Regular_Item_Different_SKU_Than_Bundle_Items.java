@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_Single_Bundle_Product_SKU1_Regular_Item_Different_SKU_Than_Bundle_Items {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Bundles");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Guestuser_Checkout_VisaCC_Single_Bundle_Product_SKU1_Regular_Item_Different_SKU_Than_Bundle_Items () throws Exception {
