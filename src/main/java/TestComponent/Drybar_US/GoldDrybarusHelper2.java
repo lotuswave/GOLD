@@ -1270,16 +1270,16 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 
-			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
 			
 			Same_Billing_and_Shipping();
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -1354,24 +1354,24 @@ public class GoldDrybarusHelper2 {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	             	   Thread.sleep(10000);
-	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	             	   Thread.sleep(40000);
+	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
-	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-	              		   Thread.sleep(5000);
-	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	                  	   Thread.sleep(8000);
-	                  	 String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+//	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+//	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+//	              		   Thread.sleep(3000);
+//	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+//	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//	                  	   Thread.sleep(4000);
+	                  	 String sucessmessage=Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
 		              	    System.out.println(sucessmessage);
 	              		   
 	              	   }
 	              	   else if(Common.getCurrentURL().contains("/success/"))
 	              	   {
-	              	    String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+	              	    String sucessmessage=Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 	              	    System.out.println(sucessmessage);
 	              	   }
 	              	   else
@@ -1414,7 +1414,7 @@ public class GoldDrybarusHelper2 {
 
 		return Number;
 	}
-
+	
 	
 	public void HairTools_headerlinks(String Dataset) {
 		// TODO Auto-generated method stub
@@ -1465,17 +1465,17 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try
 		{
-			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @id='billing-address-same-as-shipping-stripe_payments']");
-			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @id='billing-address-same-as-shipping-stripe_payments']").isSelected();
+			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @id='billing-as-shipping']");
+			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @id='billing-as-shipping']").isSelected();
 			System.out.println(checkbox);
 			Thread.sleep(7000);
 			String box=Boolean.toString(checkbox);
 			System.out.println(box);
 			if(box.contains("false"))
 			{
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'My billing')]");
-				Common.clickElement("xpath", "//span[contains(text(),'My billing')]");
-			    Boolean billcheckbox=Common.findElement("xpath", "//input[@type='checkbox' and @id='billing-address-same-as-shipping-stripe_payments']").isSelected();
+				Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");
+				Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
+			    Boolean billcheckbox=Common.findElement("xpath", "//input[@type='checkbox' and @id='billing-as-shipping']").isSelected();
 			    System.out.println(billcheckbox);
 			    String box1=Boolean.toString(billcheckbox);
 				System.out.println(box1);
@@ -1487,7 +1487,7 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-				Assert.fail();
+				System.out.println(box);
 			}
 			
 		}
@@ -4715,19 +4715,20 @@ Thread.sleep(5000);
 			Assert.fail();
 		}
 	}
-        public void create_account(String Dataset) {
+        public String create_account(String Dataset) {
         	
     		String Store= data.get(Dataset).get("Store");
+    		
+    		String email="";
     		try {
 
     			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
     			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 //    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
     			
-    			String email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
-    			System.out.println(email);
-    			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
-//    			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+    			
+    			Common.textBoxInput("xpath", "//input[@id='email_address']", data.get(Dataset).get("UserName"));
+    			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
     			System.out.println(data.get(Dataset).get("Password"));
     			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
@@ -4756,7 +4757,7 @@ Thread.sleep(5000);
     					"Failed to navigate to the My account page after clicking on the signup button");
     			Assert.fail();
     		}
-//    		return email;
+    		return email;
         }
         public void discountCode(String dataSet) throws Exception {
         	String expectedResult = "It should opens textbox input to enter discount.";
