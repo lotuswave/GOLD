@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-//			acceptPrivacy();
+			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -428,6 +428,32 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/login"),
+					"To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigIn button",
+					"User Successfully clicked on the singIn button and Navigate to the signIn page",
+					"User Failed to click the signin button and not navigated to signIn page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"Unable to click on the singIn button and not Navigated to the signIn page",
+					Common.getscreenShotPathforReport(
+							"Failed to click signIn button and not Navigated to the signIn page"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void click_singin_Shippingpage() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Sign in')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Sign in')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -5592,6 +5618,8 @@ Thread.sleep(5000);
 		public void Shipping_Forgot_Password(String dataSet) {
     		// TODO Auto-generated method stub
     		try {
+    			
+    			
     			Common.textBoxInput("xpath", "//input[@name='username']", data.get(dataSet).get("UserName"));
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
     			Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
@@ -5629,14 +5657,14 @@ Thread.sleep(5000);
     			String forgotpassword = Common.findElement("xpath", "//h1//span[text()='Forgot Your Password?']").getText();
     			System.out.println(forgotpassword);
     			Thread.sleep(5000);
-    			Common.textBoxInput("xpath", "//input[@name='email_address']",data.get(Dataset).get("UserName"));
+    			Common.textBoxInput("xpath", "//input[@id='email_address']",data.get(Dataset).get("UserName"));
     			Thread.sleep(4000);
-    			Common.findElement("xpath", "//input[@name='email_address']").getAttribute("value");
+    			Common.findElement("xpath", "//input[@id='email_address']").getAttribute("value");
     			Common.clickElement("xpath", "//button[@type='submit' and @class='btn btn-primary w-full']");
     			Sync.waitPageLoad();
     			Thread.sleep(2000);
-    			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
-    			String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
+    			Sync.waitElementPresent(30, "xpath", "//span[@x-html='message.text']");
+    			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
     			Thread.sleep(4000);
     			System.out.println(message);
     			Common.assertionCheckwithReport(
