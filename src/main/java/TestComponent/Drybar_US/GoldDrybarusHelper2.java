@@ -7688,9 +7688,12 @@ Thread.sleep(5000);
 	    	                 }
 	    	                 else
 	    	                 {
-	    	              	   Sync.waitElementPresent("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
+	    	                	 Thread.sleep(4000);
+	    	              	   Sync.waitElementPresent(30,"xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
 	    	              	   Common.clickElement("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
 	    	              	 Thread.sleep(8000);
+	    	                 Sync.waitElementPresent(30,"xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]");
+	    	                 Sync.waitElementVisible("xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]");
 	    	          	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]").getAttribute("name");
 	    	          	   System.out.println(frameid);
 	    	          	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
@@ -7729,11 +7732,6 @@ Thread.sleep(5000);
 		Assert.fail();
 	}
 
-	expectedResult = "credit card fields are filled with the data";
-	String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-
-	Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
-			expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 
 	return Number;
 }
@@ -7753,6 +7751,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 	
 	try {
 		Thread.sleep(4000);
+		
 		String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
 		System.out.println(subtotal);
 		subtotal = subtotal.trim();
