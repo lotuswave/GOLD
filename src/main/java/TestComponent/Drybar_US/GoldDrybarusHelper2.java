@@ -4567,8 +4567,8 @@ Thread.sleep(5000);
 			if (size > 0  ) {
 				
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//td[text()='"+ method +"']");
-				Common.clickElement("xpath", "//td[text()='"+ method +"']");
+				Sync.waitElementPresent("xpath","//div[contains(text(),'" + method + "')]");
+				Common.clickElement("xpath","//div[contains(text(),'" + method + "')]");
 				
 			}
 			else
