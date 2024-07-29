@@ -4640,7 +4640,7 @@ Thread.sleep(5000);
 		for (int i = 0; i < strArray.length; i++) {
 			System.out.println(strArray[i]);
 
-			if (Common.getCurrentURL().contains("pre")) {
+			if (Common.getCurrentURL().contains("stage4")) {
 
 				Common.oppenURL((strArray[i]));
 				int responcecode = getpageresponce(Common.getCurrentURL());
@@ -4662,9 +4662,9 @@ Thread.sleep(5000);
 
 				}
 
-			} else if (Common.getCurrentURL().contains("https://mcloud-na-stage3.drybar.com/")) {
+			} else if (Common.getCurrentURL().contains("https://mcloud-na-stage4.drybar.com/")) {
 
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage3", "www"));
+				Common.oppenURL(strArray[i].replace("mcloud-na-stage4", "www"));
 
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
@@ -4689,8 +4689,8 @@ Thread.sleep(5000);
 			Assert.fail();
 		}
 		Thread.sleep(3000);
-		String message=Common.getText("xpath", "//h2[text()='Well... This Blows.']");
-		System.out.println(message);
+//		String message=Common.getText("xpath", "//h2[text()='Well... This Blows.']");
+//		System.out.println(message);
 	}
 
 	public int getpageresponce(String url) throws MalformedURLException, IOException {
