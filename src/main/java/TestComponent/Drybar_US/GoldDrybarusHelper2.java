@@ -478,25 +478,23 @@ public class GoldDrybarusHelper2 {
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
         Thread.sleep(3000);
-        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
+        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
             Thread.sleep(4000);
-            Sync.waitElementPresent("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
-            Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+            Sync.waitElementPresent("id", "ltkpopup-close-button");
+            Common.clickElement("id", "ltkpopup-close-button");
         }
         else {
 
 //            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-            Sync.waitElementPresent("xpath", "(//button[@data-role='closeBtn'])[2]");
-            Common.clickElement("xpath", "(//button[@data-role='closeBtn'])[2]");
+            Sync.waitElementPresent("id", "ltkpopup-close-button");
+            Common.clickElement("id", "ltkpopup-close-button");
 //            Common.switchToDefault();
             }
 
- 
-
-    }
+	}
 
 	public void search_product(String Dataset) {
 		// TODO Auto-generated method stub
@@ -595,10 +593,9 @@ public class GoldDrybarusHelper2 {
 		try
 		{
 			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+			for (int i = 0; i <= 10; i++) { 
+				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+				List<WebElement> webelementslist = Common.findElements("xpath","//img[@class='group-hover/item-image:block hidden']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -608,30 +605,31 @@ public class GoldDrybarusHelper2 {
 					break;
 				}
 			}
-			Thread.sleep(6000);
+			Thread.sleep(7000);
+			
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 			product_quantity(Dataset);
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-1']");
-			Common.clickElement("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-1']");
-			Thread.sleep(2000);
-		     Sync.waitElementPresent("xpath", "//select[@class='aw-sarp2-subscription__options-list']");
-			Common.dropdown("xpath", "//select[@class='aw-sarp2-subscription__options-list']", Common.SelectBy.TEXT, save);
+			Sync.waitElementPresent("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
+			Common.clickElement("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
+			//Thread.sleep(2000);
+		     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
+			Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save);
 			Thread.sleep(4000);
-			String drop=Common.findElement("xpath", "//select[@class='aw-sarp2-subscription__options-list']//option[text()='"+ save +"']").getText();
+			String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ save +"')]").getText();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(drop.contains(save), "To ensure that selected text has selected in the product subcription dropdown",
 					"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
 					"failed to select the text from the dropdown");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
+			Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -652,6 +650,7 @@ public class GoldDrybarusHelper2 {
 		}
 	
 }
+
 	
 	public void product_quantity(String Dataset) {
 		// TODO Auto-generated method stub
