@@ -7755,7 +7755,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 	try {
 		Thread.sleep(4000);
 		
-		String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+		String subtotal=Common.findElement("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]").getText().replace(symbol, "").replace(".", "");
 		System.out.println(subtotal);
 		subtotal = subtotal.trim();
 		subtotal = subtotal.substring(0,subtotal.length() - 2);
@@ -7771,8 +7771,12 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 				"User unabel to land opaymentpage");
 		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+		
+		Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
+		 String code=Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
+		 System.out.println(code);
 
-		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+
 		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 		System.out.println(payment);
 		if (payment > 0) {
@@ -7964,6 +7968,16 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 
 			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 			Thread.sleep(2000);
+			int zipcode=Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+			System.out.println(zipcode);
+			
+			if(zipcode > 0)
+			{
+			 
+			 Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+			 Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+			}
+			
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.switchToDefault();
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
@@ -7996,22 +8010,23 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
                  }
                  else
                  {
-              	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-              	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+              	   Sync.waitElementPresent("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
+              	   Common.clickElement("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
               	 Thread.sleep(8000);
-          	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
+          	   String frameid=Common.findElement("xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]").getAttribute("name");
           	   System.out.println(frameid);
           	   Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
+          	   Thread.sleep(8000);
      			Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
          		Thread.sleep(4000);
          		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
          		Common.switchToDefault();
          		Common.switchToDefault();
          		Thread.sleep(3000);
-            	Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
-            String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']").getText();
+            	Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']//span");
+            String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
             System.out.println(errormessage);
-            Common.assertionCheckwithReport(errormessage.contains("declined"),
+            Common.assertionCheckwithReport(errormessage.contains("We are unable to authenticate your payment method. Please choose a different payment method and try again."),
 					"To validate the invalid card details entered in the production environment",
 					"user should able to see the invalid card details in the production environment",
 					"User Successfully able to see declained error ",
