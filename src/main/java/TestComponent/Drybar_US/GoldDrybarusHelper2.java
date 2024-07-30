@@ -656,12 +656,16 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
 		System.out.println(Quantity);
+		
 		try {
 			Common.findElement("xpath", "//select[@name='qty']");
-			Common.clickElement("xpath", "//select[@name='qty']");
+			Thread.sleep(5000);
 			if(Quantity.equals("10+"))
 			{
-				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
+				Sync.waitElementPresent("xpath","//select[@name='qty']");
+//				Common.clickElement("xpath","//select[@name='qty']");
+//				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
+				Common.clickElement("xpath", "//select[@name='qty']//option[@value='10']");
 				Thread.sleep(3000);
 				String value = Common.findElement("xpath", "//input[@name='qty']").getAttribute("value");
 				Common.assertionCheckwithReport(value.contains("10") || value.contains(Quantity) ,
@@ -4501,8 +4505,8 @@ public void FUll_Payment(String dataSet) {
 			else	{
 		Thread.sleep(5000);
 
-Common.clickElement("xpath", "(//button[@class='flex items-center justify-between w-full focus:outline-none'])[3]");
-Thread.sleep(5000);
+    Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+   Thread.sleep(5000);
 	Common.textBoxInput("xpath","//input[@id='card-code-input']",data.get(Dataset).get("GiftCardCode"));
 		Common.textBoxInput("xpath","//input[@id='card-pin-input']",data.get(Dataset).get("GiftCardPin"));
 		Thread.sleep(6000);
