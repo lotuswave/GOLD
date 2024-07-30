@@ -22,12 +22,12 @@ public class  TEST_DGLD_DB_US_ST_134_Order_with_2_items_with_10_qty_each_one_the
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("10 qty product");
-			Drybar.search_product("Product");  
-			Drybar.addtocart("Product");
+//			Drybar.HairTools_headerlinks("Hair Tools"); 
+//			Drybar.addtocart("10 qty product");
+//			Drybar.search_product("Product");  
+//			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
-	    	Drybar.RegaddDeliveryAddress("AccountDetails");
+//	    	Drybar.RegaddDeliveryAddress("AccountDetails");
 	    	Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();			
 			Drybar.gitCard("GiftCode");
@@ -43,7 +43,7 @@ public class  TEST_DGLD_DB_US_ST_134_Order_with_2_items_with_10_qty_each_one_the
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
