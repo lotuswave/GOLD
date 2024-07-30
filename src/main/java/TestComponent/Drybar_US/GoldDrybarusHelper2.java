@@ -8093,7 +8093,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
             	Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']//span");
             String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
             System.out.println(errormessage);
-            Common.assertionCheckwithReport(errormessage.contains("We are unable to authenticate your payment method. Please choose a different payment method and try again."),
+            Common.assertionCheckwithReport(errormessage.contains("Your card has been declined."),
 					"To validate the invalid card details entered in the production environment",
 					"user should able to see the invalid card details in the production environment",
 					"User Successfully able to see declained error ",
