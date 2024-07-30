@@ -853,7 +853,7 @@ public class GoldDrybarusHelper2 {
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			Thread.sleep(3000);
 			
-			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
@@ -4428,7 +4428,6 @@ public void FUll_Payment(String dataSet) {
 	
 	
 	public void gitCard(String Dataset) throws Exception{
-	
 		try{
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
@@ -4454,7 +4453,6 @@ public void FUll_Payment(String dataSet) {
 				Common.clickElement("xpath", "//strong[text()='Gift Cards']");
 				Thread.sleep(5000);
 					Common.textBoxInput("id","giftcard-code",data.get(Dataset).get("GiftCardCode"));
-						
 						Common.textBoxInput("id","giftcard-pin",data.get(Dataset).get("GiftCardPin"));
 						Thread.sleep(6000);
 						Sync.waitElementPresent(30, "xpath", "//span[text()='Add Gift Card']");
@@ -4467,18 +4465,20 @@ public void FUll_Payment(String dataSet) {
 			}
 			else	{
 		Thread.sleep(5000);
-Common.clickElement("xpath", "//span[text()='Apply Gift Card']");
+
+Common.clickElement("xpath", "(//button[@class='flex items-center justify-between w-full focus:outline-none'])[3]");
 Thread.sleep(5000);
-	Common.textBoxInput("id","giftcard-code",data.get(Dataset).get("GiftCardCode"));
-		
-		Common.textBoxInput("id","giftcard-pin",data.get(Dataset).get("GiftCardPin"));
+	Common.textBoxInput("xpath","//input[@id='card-code-input']",data.get(Dataset).get("GiftCardCode"));
+		Common.textBoxInput("xpath","//input[@id='card-pin-input']",data.get(Dataset).get("GiftCardPin"));
 		Thread.sleep(6000);
-		Sync.waitElementPresent(30, "xpath", "//span[text()='Apply']");
-		Common.clickElement("xpath", "//span[text()='Apply']");
+		Sync.waitElementPresent(30, "xpath", "(//button[@class='btn btn-primary'])[1]");
+		Common.clickElement("xpath", "(//button[@class='btn btn-primary'])[1]");
 		Thread.sleep(3000);
 		Common.refreshpage();
 		Thread.sleep(3000);
-		int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
+		//div[@class='item drybar_giftcard']
+		//int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
+		int size=Common.findElements("xpath", "//div[@class='item drybar_giftcard']").size();
 		Common.assertionCheckwithReport(size>0, "validating the gift card", "Gift Card was added.", "successfully gift card was added","Failed to add gift card");
 		}
 		}
@@ -4487,67 +4487,89 @@ Thread.sleep(5000);
 			ExtenantReportUtils.addFailedLog("validating the gift card","Gift Card was added.","User faield to to add gift card",Common.getscreenShotPathforReport("gitcard"));
 	        Assert.fail();
 	        }
+
+	}
 	
+	public void select_noPayment_method() throws Exception {
+		try {
+		
+		Thread.sleep(3000);
+		
+		Sync.waitElementPresent(30, "id", "payment-method-free");
+		Common.clickElement("id", "payment-method-free");
+		
+		Thread.sleep(5000);
 		
 	}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating free payment method","free payment method selected.","User faield to click free payment method",Common.getscreenShotPathforReport("free payment method"));
+	        Assert.fail();
+	        }
+			
+		}
+
+	
 	public String giftCardSubmitOrder() throws Exception {
 		// TODO Auto-generated method stub
-
+ 
 		String order = "";
 		String expectedResult = "It redirects to order confirmation page";
 	//	Common.refreshpage();
 	//	Common.actionsKeyPress(Keys.PAGE_UP);
 		Thread.sleep(3000);
-		int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
+		select_noPayment_method();
+		
+		int placeordercount = Common.findElements("xpath", "(//button[contains(@class,'btn-place-order')])[1]").size();
 			Thread.sleep(5000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
 	   Thread.sleep(5000);
 	//   Sync.waitElementClickable("xpath", "//button[@class='action primary checkout']");
-			Common.clickElement("xpath", "//button[@class='action primary checkout']");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			//Common.refreshpage();
 		Thread.sleep(8000);
 		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 		//Thread.sleep(4000);
-		order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+		order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
 		System.out.println(order);
-		
    }
    else
    {
 	   Assert.fail();
    }
-
+ 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
+ 
 		if (url.contains("stage") || url.contains("preprod")) {
-		
-			
-		}
 
+		}
+ 
 		else {
 			try {
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				Thread.sleep(3000);
+				Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 
-//				Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				//Tell_Your_FriendPop_Up();
+				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
-					Common.getText("xpath", "//div[@class='checkout-success']//span");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 
 				}
@@ -4563,6 +4585,7 @@ Thread.sleep(5000);
 		}
 		return order;
 	}
+
 
 	public void Expeditedshippingmethod(String Dataset) {
 		// TODO Auto-generated method stub
