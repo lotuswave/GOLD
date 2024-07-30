@@ -5056,7 +5056,7 @@ Thread.sleep(5000);
     		try {
     			Sync.waitPageLoad();
     			Sync.waitElementPresent("xpath", "//img[@alt='" + Product + "']");
-    			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
+    			Common.javascriptclickElement("xpath", "//img[@alt='" + Product + "']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
 //    			validating_BundleProducts();
