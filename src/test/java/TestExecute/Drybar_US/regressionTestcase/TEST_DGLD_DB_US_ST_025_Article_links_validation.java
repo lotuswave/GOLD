@@ -33,7 +33,7 @@ public class TEST_DGLD_DB_US_ST_025_Article_links_validation {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}

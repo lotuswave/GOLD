@@ -2528,7 +2528,7 @@ public class GoldDrybarusHelper2 {
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 				System.out.println(socallinksarry[i]);
-				if (socallinksarry[i].contains("Instagram")) {
+				if (socallinksarry[i].contains("instagram")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -2538,7 +2538,7 @@ public class GoldDrybarusHelper2 {
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].contains("Facebook")) {
+				else if (socallinksarry[i].contains("facebook")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.facebook.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -2546,22 +2546,32 @@ public class GoldDrybarusHelper2 {
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
 				}
+				
+				else if (socallinksarry[i].contains("tiktok")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.tiktok.com"),
+							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
+							"successfully navigating to social link  " + socallinksarry[i],
+							"Failed to navigate to social link " + socallinksarry[i]);
+					Common.closeCurrentWindow();
+					Common.switchToFirstTab();
+				}
 
-				else if (socallinksarry[i].contains("Follow Us On X")) {
+				else if (socallinksarry[i].contains("x.com")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://x.com/"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].contains("YouTube")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"),
+				} else if (socallinksarry[i].contains("youtube")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.youtube.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].contains("Pinterest")) {
+				} 
+				else if (socallinksarry[i].contains("pinterest")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("pinterest"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
