@@ -3467,6 +3467,41 @@ public class GoldDrybarusHelper2 {
 	}
 	
 	
+	public void employee_discount() {
+		// TODO Auto-generated method stub
+		try {
+
+			
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+			Thread.sleep(4000);
+			String originalprice = Common.getText("xpath", "//div[contains(@class,'old-price')]//span[@class='price line-through']").replace("$", "");
+			Float originalvalue = Float.parseFloat(originalprice);
+			String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "");
+			Float pricevalue = Float.parseFloat(Newprice);
+			Thread.sleep(4000);
+			float discount = originalvalue - (originalvalue * 40 / 100);
+			String discountvalue = String.valueOf(discount).replace("$", "");
+			Float value = Float.parseFloat(discountvalue);
+			String s=String.valueOf(value); 
+			System.out.println(discountvalue);
+			System.out.println(value);
+			Common.assertionCheckwithReport(discountvalue.contains(s),
+					"verifying the discount for the employee discount ",
+					"user should able to see the discount for the employee",
+					"user successfully able to apply the discount", "Failed to apply the discount for the employee");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the discount for the employee discount ",
+					"user should able to see the discount for the employee",
+					"Unable to apply the discount for the employee",
+					Common.getscreenShotPathforReport("Failed to apply the discount for the employee"));
+			Assert.fail();
+		}
+	}
+	
+	
 	
 	
 	

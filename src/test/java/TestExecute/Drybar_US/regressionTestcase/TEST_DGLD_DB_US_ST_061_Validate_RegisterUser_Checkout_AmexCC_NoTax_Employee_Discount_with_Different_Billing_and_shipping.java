@@ -5,7 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -13,7 +13,7 @@ public class TEST_DGLD_DB_US_ST_061_Validate_RegisterUser_Checkout_AmexCC_NoTax_
 
 	
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Registeruser_Checkout_VisaCC_NoTax_Single_Product_withEmployeeDiscount_Different_Billing_and_Shipping () throws Exception {
@@ -25,6 +25,7 @@ public class TEST_DGLD_DB_US_ST_061_Validate_RegisterUser_Checkout_AmexCC_NoTax_
 			Drybar.login_Drybar("EmployeeAccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
+			Drybar.employee_discount();
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("NoTaxAddress");
 			Drybar.selectshippingmethod("GroundShipping method");
