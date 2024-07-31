@@ -324,12 +324,16 @@ public class GoldDrybarusHelper2 {
 					String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 					System.out.println("*****" + ShippingZip + "*******");
 
+					
+					Thread.sleep(3000);
 					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 							data.get(dataSet).get("phone"));
 
 //					Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
 //					Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
 
+					
+					Thread.sleep(3000);
 					Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
 					ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
@@ -404,6 +408,8 @@ public class GoldDrybarusHelper2 {
 							.getAttribute("value");
 					System.out.println("*****" + ShippingZip + "*******");
 
+					
+					Thread.sleep(4000);
 					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 							data.get(dataSet).get("phone"));
 
