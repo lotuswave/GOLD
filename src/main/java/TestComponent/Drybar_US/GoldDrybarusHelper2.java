@@ -6890,10 +6890,10 @@ public void FUll_Payment(String dataSet) {
 	try {
 				
 		Thread.sleep(6000);
-				String text = Common.findElement("xpath", "//a[text()='"+category+"']//span").getText();
+				String text = Common.findElement("xpath", "//span[text()='"+category+"']//parent::a//span[2]").getText();
 				System.out.println(text);
 				 
-				text = text.replaceAll("[()]", ""); // Remove the parentheses  
+				text = text.replace("(", "").replace(")", ""); // Remove the parentheses  
 				int textValue = Integer.parseInt(text); // Now parse the cleaned string  
 				System.out.println(textValue); // This will print: 14
 				
@@ -6902,8 +6902,8 @@ public void FUll_Payment(String dataSet) {
 //				int textValue = Integer.parseInt(text);
 				String categoryvalue=Integer.toString(textValue);
 				Thread.sleep(6000);
-				String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
-						.getText();
+				String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']")
+						.getText().replace("Items", "").trim();
 				int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 				String items=Integer.toString(noOfItems);
 				System.out.println(text);
