@@ -10280,7 +10280,79 @@ public void Join(String Dataset) {
 
 }
 
+public void Newsletter_subscription_MyAccount() {
+	
+	try {
+	
+	Sync.waitElementPresent("xpath", "//button[@aria-label='My Account']");
+	Common.clickElement("xpath", "//button[@aria-label='My Account']");
+	Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+	Common.clickElement("xpath", "//a[@title='My Account']");
+	
+//	String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
+//	Common.clickElement("xpath", "//a[@id='"+MyId+"']");
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	
+	String MyAccount= Common.getCurrentURL();
+	System.out.println(MyAccount);
+	Common.assertionCheckwithReport(MyAccount.contains("/account/"),"validating the order summary in the payment page","Order summary should be display in the payment page and all fields should display",
+			"Successfully Order summary is displayed in the payment page and fields are displayed",
+			"Failed to display the order summary and fileds under order summary");
+	
+	Thread.sleep(5000);
+	Sync.waitElementPresent("xpath", "//a[@title='Newsletter Subscriptions']");
+	Common.clickElement("xpath", "//a[@title='Newsletter Subscriptions']");
+
+	String Communication = Common.getText("xpath", "//span[text()='Communication Preferences']");
+
+	//String Storefront_Text = "Communication Preferences";
+
+	//Assert.assertEquals(Communication, Storefront_Text);
+	System.out.println(Communication);
+	//System.out.println(Storefront_Text);
+	
+	
+	WebElement checkBox = Common.findElement("xpath", "//input[@id='subscription']");
+	WebElement Save = Common.findElement("xpath", "//button[@title='Save']");
+    
+	if(checkBox.isSelected())
+	{
+		
+		System.out.println("Checkbox is Selected");
+		Common.clickElement("xpath", "//label[@for='subscription']");
+		Save.click();
+	}
+	
+	else {
+		
+		System.out.println("Checkbox is Not-Selected");
+		Common.clickElement("xpath", "//label[@for='subscription']");
+		Save.click();
+	
+	}
+	
+	Thread.sleep(2000);
+	String Success=Common.findElement("xpath","//div[@ui-id='message-success']").getText();
+	
+	Common.assertionCheckwithReport(Success.contains("We have removed your newsletter subscription.")|| Success.contains("We have saved your subscription."),"validating the order summary in the payment page","Order summary should be display in the payment page and all fields should display",
+			"Successfully Order summary is displayed in the payment page and fields are displayed",
+			"Failed to display the order summary and fileds under order summary");
+	
+	
+	
+	} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+			Assert.fail();
+		}
+	}
+
 }
+
+
 
 
 			
