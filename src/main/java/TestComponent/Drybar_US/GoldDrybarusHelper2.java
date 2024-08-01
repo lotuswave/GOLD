@@ -1745,6 +1745,184 @@ public class GoldDrybarusHelper2 {
 		}
 		
 	}
+	
+	public void review(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		System.out.println(products);
+		try {
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+
+			Thread.sleep(4000);
+//			Common.scrollIntoView("xpath", "//a[text()='Reviews & Questions']");
+//			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+//			Thread.sleep(3000);
+//			String form = Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+//			System.out.println(form);
+//			Common.assertionCheckwithReport(form.equals("Reviews & Questions"), "verifying the write a review button",
+//					"Write a review should be appear in the PDP page",
+//					"Sucessfully write a review button has been displayed in PDP page",
+//					"Failed to display the write a review button in PDP page");
+//			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
+			Common.actionsKeyPress(Keys.END);
+			
+			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+			Common.clickElement("xpath", "//span[text()='Write A Review']");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
+					"User Unable to click write review option  ",
+					Common.getscreenShotPathforReport("User Failed to click write review option "));
+			Assert.fail();
+		}
+		try {
+			String expectedResult = "Sucessfully title input box has been displayed";
+			Common.clickElement("xpath", "//input[@value='Post']");
+			String errormessage = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
+			System.out.println(errormessage);
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(errormessage.contains("Please enter a star rating for this review") || errormessage.contains("Review's title & body can't be empty"),
+					"verifying the error message in invalid fields",
+					"error message should be display in the invalid fields",
+					"Sucessfully Error message has been displayed in invalid fileds ",
+					"Failed to display the error meesage in invalid fields ");
+			score(data.get(Dataset).get("score"));
+			Sync.waitElementPresent("xpath", "//input[@name='review_title']");
+			int title = Common.findElements("xpath", "//input[@name='review_title']").size();
+			Common.assertionCheckwithReport(title > 0, "verifying the title page",
+					"title input box should be displayed", expectedResult, "User Unable to display the title box");
+			Common.textBoxInput("xpath", "//input[@name='review_title']", data.get(Dataset).get("title"));
+			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
+			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+			Common.clickElement("xpath", "//input[@value='Post']");
+			String emailerror = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
+			Common.assertionCheckwithReport(emailerror.contains("Invalid email"),
+					"verifying the invaild email for the product review",
+					"error message should be display for invaild email",
+					"Sucessfully error message has been displayed for invalid email",
+					"Failed to display the error message for invaild email");
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.clickElement("xpath", "//input[@value='Post']");
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
+			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
+					"verifying the post for the product review",
+					"product review should be submit after clicking on post",
+					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
+//			Common.clickElement("xpath", "//div[@aria-label='Next']");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the post for the product review",
+					"product review should be submit after clicking on post",
+					"Unable to display the Thank you message after clickng on post ",
+					Common.getscreenShotPathforReport("Failed to display the thank you message"));
+			Assert.fail();
+
+		}
+
+	}
+	
+	
+	public void score(String score) throws Exception {
+		Thread.sleep(4000);
+		switch (score) {
+		case "1":
+			Sync.waitElementPresent("xpath", "//span[@aria-label='score 1']");
+			Common.clickElement("xpath", "//span[@aria-label='score 1']");
+			break;
+		case "2":
+			Sync.waitElementPresent("xpath", "//span[@aria-label='score 2']");
+			Common.clickElement("xpath", "//span[@aria-label='score 2']");
+			break;
+		case "3":
+			Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
+			Common.clickElement("xpath", "//span[@aria-label='score 3']");
+			;
+			break;
+		case "4":
+			Sync.waitElementPresent("xpath", "//span[@aria-label='score 4']");
+			Common.clickElement("xpath", "//span[@aria-label='score 4']");
+			break;
+		case "5":
+			Sync.waitElementPresent("xpath", "//span[@aria-label='score 5']");
+			Common.clickElement("xpath", "//span[@aria-label='score 5']");
+			break;
+		}
+	}
+	
+	
+	public void Ask_a_question(String Dataset) {
+		// TODO Auto-generated method stub
+		String Question = data.get(Dataset).get("CommetsDrybar");
+		String Name = data.get(Dataset).get("FirstName");
+		String Email = data.get(Dataset).get("Email");
+		try {
+			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");
+			Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
+			Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
+			Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_q')]", Question);
+			Sync.waitElementPresent(30, "xpath", "//input[@name='display_name']");
+			Common.textBoxInput("xpath", "//input[@name='display_name']", Name);
+			Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.clickElement("xpath", "//input[@data-button-type='submit']");
+			Thread.sleep(4000);
+			String question = Common
+					.findElement("xpath", "//div[@class='yotpo-thank-you']//span[contains(text(),'Thank you')]")
+					.getText();
+			System.out.println(question);
+			Common.assertionCheckwithReport(question.contains("THANK YOU FOR POSTING A QUESTION!"),
+					"validating the question submit form", "Ask a form should be submit",
+					"Sucessfully question post should be submit", "Failed to submit the ask a question post");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the question submit form", "Ask a form should be submit",
+					"Unable to subit question post", Common.getscreenShot("failed to subit question post"));
+			Assert.fail();
+		}
+
+	}
+	
+	public void search_filter(String Dataset) {
+		// TODO Auto-generated method stub
+		String rating = data.get(Dataset).get("Review");
+		String filter = data.get(Dataset).get("CommetsHydroflask");
+		try {
+			Common.clickElement("xpath", "//span[text()='Select']");
+			Sync.waitElementPresent("xpath", "//a[text()='" + filter + "']");
+			Common.clickElement("xpath", "//a[text()='" + filter + "']");
+			for (int i = 0; i <= 10 - 6; i++) {
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//div[@class='yotpo-review-stars ']//span[text()='" + rating + "']");
+
+				String s = webelementslist.get(i).getText();
+				System.out.println(s);
+				Common.assertionCheckwithReport(s.contains(rating), "validating the filter search",
+						"After Clicking on filters search the repective reviews should be displayed",
+						"Sucessfully Respective search Reviews has been displayed",
+						"Failed to display the respective search reviews");
+
+			}
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the filter search",
+					"After Clicking on filters search the repective reviews should be displayed",
+					"Unable to display the respective search reviews",
+					Common.getscreenShot("Failed to display the respective search reviews"));
+			Assert.fail();
+		}
+
+	}
+	
+	
+	
 
 	
 	public String BillingAddress(String dataSet) {
