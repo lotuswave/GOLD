@@ -3873,7 +3873,7 @@ public class GoldDrybarusHelper2 {
 			String subtotal = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText().replace(Symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			System.out.println(subtotalvalue);
-			String Productprice = Common.getText("xpath", "(//span[@class='price'])[7]")
+			String Productprice = Common.getText("xpath", "(//span[@class='price'])[16]")
 					.replace(Symbol, "");
 			Float pricevalue = Float.parseFloat(Productprice);
 			System.out.println(pricevalue);
