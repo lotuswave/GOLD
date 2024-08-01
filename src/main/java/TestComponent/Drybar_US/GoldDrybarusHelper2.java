@@ -9991,6 +9991,117 @@ public void webpagelinks_validation(String Dataset) throws Exception, IOExceptio
 
 }
 
+
+public void Footer_newsletter(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+		Common.actionsKeyPress(Keys.END);
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "id", "subscribe-email");
+		Common.clickElement("id", "subscribe-email");
+		Common.textBoxInput("id", "subscribe-email", data.get(Dataset).get("Email"));
+		Common.clickElement("xpath", "//span[text()='Join']");
+		//Sync.waitElementPresent(30, "xpath", "//div[@class='newsletter-error']");
+		int successmessage = Common.findElements("xpath", "//div[@ui-id='message-success']").size();
+		System.out.println(successmessage);
+		if(successmessage>0) {
+		String success=Common.findElementBy("xpath", "//div[@ui-id='message-success']").getText();
+		
+			
+			Common.assertionCheckwithReport(success.equals("Error: Please enter a valid email address."),
+					"To validate the error message for Invalid Email",
+					"Should display error Please enter a valid email address.", success,
+					"Failed to display the error message for invaild email");
+			
+		}
+		else {
+			
+			Join("Create Account");
+			
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the  message for Invalid and valid  Email",
+				"Should display error and success  Please enter a valid email address.", "Failed to display message",
+				Common.getscreenShotPathforReport("Failed to subscripbe nes letter"));
+
+		Assert.fail();
+
+	}
+
+}
+
+public void Empty_Email() {
+	// TODO Auto-generated method stub
+	try {
+		Common.actionsKeyPress(Keys.END);
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "id", "subscribe-email");
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Join']");
+		Common.clickElement("xpath", "//span[text()='Join']");
+		//Sync.waitElementPresent(30, "xpath", "//div[@class='newsletter-error']");
+		int successmessage = Common.findElements("xpath", "//div[@ui-id='message-success']").size();
+		System.out.println(successmessage);
+		
+		/*Common.assertionCheckwithReport(successmessage.equals(0)),
+				"To validate the error message for missing email fields",
+				"Should display Error Please enter a valid email address.", successmessage,
+				"Error message dispaly unsuccessfull");*/
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validate the Error message ",
+				"Should display Error: Please enter a valid email address.", "Failed to dispaly the Error message ",
+				Common.getscreenShotPathforReport("User unable to see an error message"));
+		Assert.fail();
+	}
+
+}
+
+public void Join(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+		Thread.sleep(5000);
+		Sync.waitElementPresent(30, "id", "subscribe-email");
+		Common.clickElement("id", "subscribe-email");
+		Common.textBoxInput("id", "subscribe-email", data.get(Dataset).get("Email"));
+		Common.clickElement("xpath", "//span[text()='Join']");
+		
+		int successmessage = Common.findElements("xpath", "//div[@ui-id='message-success']").size();
+		System.out.println(successmessage);
+		if(successmessage>0) {
+		
+		String Text = Common.getText("xpath", "//div[@ui-id='message-success']");
+		System.out.println(Text);
+		String expectedResult = "User gets confirmation message that it was submitted";
+		Common.assertionCheckwithReport(Text.contains("Thank you for your subscription."),
+				"verifying newsletter subscription", expectedResult, Text,
+				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+		}
+		else {
+			String Text = Common.getText("xpath", "//div[@ui-id='message-error']");
+			System.out.println(Text);
+			String expectedResult = "User gets confirmation message that it was submitted";
+			Common.assertionCheckwithReport(Text.contains("This email address is already subscribed."),
+					"verifying newsletter subscription", expectedResult, Text,
+					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+		}
+			
+		
+
+	} catch (Exception | Error e) {
+
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
+				"User faield to subscrption for newLetter  ",
+				Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+		Assert.fail();
+	}
+
+}
+
 }
 
 
