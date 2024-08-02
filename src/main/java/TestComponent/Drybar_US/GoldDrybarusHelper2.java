@@ -7485,8 +7485,8 @@ public void FUll_Payment(String dataSet) {
 		    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    				}
 	    				else {
-	    				Sync.waitElementPresent(30, "xpath", "//span[text()='My Favorites']");
-	    				Common.clickElement("xpath", "//span[text()='My Favorites']");
+	    				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
+	    				Common.clickElement("xpath", "//a[@title='My Favorites']");
 	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") || Common.getPageTitle().equals("Wish List Sharing"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
@@ -7497,10 +7497,10 @@ public void FUll_Payment(String dataSet) {
 	    				
 	    			else
 	    			{
-	    				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-	    				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
-	    				Common.clickElement("xpath", "//a[text()='My Favorites']");
-	    				Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
+	    				Common.clickElement("xpath", "//button[@aria-label='My Account']");
+	    				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'My Favorites')]");
+	    				Common.clickElement("xpath", "//a[contains(text(),'My Favorites')]");
+	    				Common.assertionCheckwithReport(Common.getCurrentURL().contains("Wish List Sharing"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 	    						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -10392,9 +10392,61 @@ public void Store_payment_placeOrder(String Dataset) {
 
 }
 
+public void pdp_add_myfav(String Dataset) {
+	// TODO Auto-generated method stub
+	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
 
+	try {
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) {
+			Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[contains(@class,'m-product-card__image')]");
+
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+		Thread.sleep(6000);
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.clickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		
+		System.out.println(name);
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+		
+		Sync.waitElementPresent("xpath", "//button[@title='Add to Wish List']");
+		Common.clickElement("xpath", "//button[@title='Add to Wish List']");
+		
+		String Message=Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
+		Common.assertionCheckwithReport(Message.contains("You must login or register to add items to your wishlist."), "validating the  product add to the whishlist",
+				"Product should be whishlist", "Sucessfully product added to the whishlist ",
+				"failed to add product to the whishlist");
+		
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the whishlist",
+				"Product should be whishlist", "unable to add product added to the whishlist ", Common.getscreenShot("failed to add product to the whishlist"));
+
+		Assert.fail();
+	}
+	
 }
 
+}
 
 
 
