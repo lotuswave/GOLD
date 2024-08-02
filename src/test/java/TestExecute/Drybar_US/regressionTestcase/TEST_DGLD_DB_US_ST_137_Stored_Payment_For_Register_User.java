@@ -29,7 +29,8 @@ public class TEST_DGLD_DB_US_ST_137_Stored_Payment_For_Register_User {
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			String Number=Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+		String Number=Drybar.addPaymentDetails("PaymentDetails");
+			Drybar.Store_payment_placeOrder("PaymentDetails");
 			Drybar.Stored_Payment(Number);
 			
 			
