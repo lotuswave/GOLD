@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_174_Register_user_Checkout_With_Subscription_wit
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

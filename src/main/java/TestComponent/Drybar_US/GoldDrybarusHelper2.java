@@ -8436,10 +8436,10 @@ public void subcription_Profile() {
 	{
 		String profile=Common.findElement("xpath", "//p[contains(text(),'Your subscription profile is:')]//a//strong").getText();
 		System.out.println(profile);
-		Common.clickElement("xpath", "//p[contains(text(),'Your subscription profile is:')]//a//strong");
+		Common.javascriptclickElement("xpath", "//p[contains(text(),'Your subscription profile is:')]//a//strong");
 		Thread.sleep(3000);
-		Sync.waitElementPresent("xpath", "//h1[@class='aw-sarp2__title']");
-		String subscription=Common.findElement("xpath", "//h1[@class='aw-sarp2__title']").getText().replace("Subscription Profile #", "");
+		Sync.waitElementPresent("xpath", "//h1[@class='title-2xl']//span");
+		String subscription=Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText().replace("SUBSCRIPTION PROFILE #", "");
 		System.out.println(subscription);
 		Common.assertionCheckwithReport(
 				subscription.equals(profile),
