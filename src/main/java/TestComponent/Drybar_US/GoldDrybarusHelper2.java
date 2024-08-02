@@ -7185,8 +7185,8 @@ public void FUll_Payment(String dataSet) {
 				
 				try {
 					Thread.sleep(4000);
-					Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'cart-item')]//img[@alt='" + products + "']");
-					Common.javascriptclickElement("xpath", "//div[contains(@class,'cart-item')]//img[@alt='" + products + "']");
+					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+					Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 					
 					Thread.sleep(20000);
 					String PDP_ProductTitle = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title title')]").getText();
