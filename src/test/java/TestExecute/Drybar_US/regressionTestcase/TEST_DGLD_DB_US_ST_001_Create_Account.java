@@ -20,8 +20,7 @@ public class TEST_DGLD_DB_US_ST_001_Create_Account {
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.click_createAccount_Signinpage();
+			Drybar.ClickCreateAccount();
 			Drybar.createaccount_verfication("Invalid details");
 			Drybar.create_account("NewAccountDetails");
 

@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-			acceptPrivacy();
+//			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -5047,7 +5047,14 @@ public void FUll_Payment(String dataSet) {
     					data.get(Dataset).get("Confirm Password"));
     			System.out.println(data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
+    			if(Common.getCurrentURL().contains("stage"))
+    			{
     			Common.clickElement("xpath", "//button[@title='Sign Up']");
+    			}
+    			else
+    			{
+    				Common.clickElement("xpath", "//button[@title='Create an Account']");
+    			}
     			Sync.waitImplicit(30);
     			Thread.sleep(8000);
     			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
