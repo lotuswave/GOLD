@@ -8874,31 +8874,31 @@ public void Add_Favorites_from_PLP(String Dataset) {
 	System.out.println(Productsize);
 	try {
 		Sync.waitPageLoad();
-		int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+		int MyFavorites = Common.findElements("xpath", "//form[@id='wishlist-view-form']//div[@data-row='product-item']").size();
         System.out.println(MyFavorites);
-		if (MyFavorites != 0) {
-			Bagpacks_headerlinks(Dataset);
+		if (MyFavorites== 0) {
+			HairTools_headerlinks("Hair Tools");
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']//parent::a//parent::div//span[text()='Add to Favorites']");
-			Common.clickElement("xpath", "//img[@alt='" + product + "']//parent::a//parent::div//span[text()='Add to Favorites']");
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']//parent::a//parent::div//button");
+			Common.clickElement("xpath", "//img[@alt='" + product + "']//parent::a//parent::div//button");
 			Sync.waitPageLoad(30);
 			Thread.sleep(3000);
-			if(Common.getCurrentURL().contains("osprey.com/gb"))
+			if(Common.getCurrentURL().contains("stage"))
             {
                 Sync.waitPageLoad();
                 Thread.sleep(4000);
-                String message = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+                String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
                 System.out.println(message);
-                Common.assertionCheckwithReport(message.contains("My Wish List"),
+                Common.assertionCheckwithReport(message.contains(product+" has been added to your Wish List."),
                         "validating the  product add to the Favorites", "Product should be add to Favorites",
                         "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
 
             }
-			/*else
+			else
 			{
 			Sync.waitElementVisible(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
 			String whishlistpopup = Common.findElement("xpath", "//img[@class='m-product-card__image product-image-photo']").getText();
@@ -8922,9 +8922,10 @@ public void Add_Favorites_from_PLP(String Dataset) {
 					"validating the  product add to the Whishlist", "Product should be add to whishlist",
 					"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 			}
+			My_Favorites();
 			String Whishlistproduct = Common
-					.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
-			System.out.println(Whishlistproduct);*/
+					.findElement("xpath", "//div[contains(@class,'product-item-content')]//img").getAttribute("alt");
+			System.out.println(Whishlistproduct);
 }
 	}
 catch(Exception | Error e)
