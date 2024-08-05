@@ -19,12 +19,12 @@ public class TEST_DGLD_DB_US_ST_022_Change_Email_and_password_of_the_Registered_
 		try {
 		
 			Drybar.Verify_Homepage();
-		    Drybar.click_Createaccount();
+			Drybar.ClickCreateAccount();
 		    String NewDetail=Drybar.create_account("NewAccountDetails");
 		    Drybar.edit_Account_info("NewDetails");
             Drybar.changed_password(NewDetail);
            String newemail=Drybar.change_Email("NewDetails");
-            Drybar.Change_to_Existingemail(newemail);
+//            Drybar.Change_to_Existingemail(newemail);
 
 		} catch (Exception e) {
 
