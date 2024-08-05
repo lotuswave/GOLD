@@ -33,6 +33,7 @@ public class TEST_DGLD_DB_US_ST_149_Validation_Shipping_Address_form_for_registe
 
 		} catch (Exception e) {
 
+			
 			Assert.fail(e.getMessage(), e);
 		}
 	}
