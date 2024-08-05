@@ -20,8 +20,7 @@ public class TEST_DGLD_DB_US_ST_137_Stored_Payment_For_Register_User {
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.click_createAccount_Signinpage();
+			Drybar.ClickCreateAccount();
 			Drybar.create_account("NewAccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
@@ -29,7 +28,7 @@ public class TEST_DGLD_DB_US_ST_137_Stored_Payment_For_Register_User {
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-		String Number=Drybar.addPaymentDetails("PaymentDetails");
+		   String Number=Drybar.addPaymentDetails("PaymentDetails");
 			Drybar.Store_payment_placeOrder("PaymentDetails");
 			Drybar.Stored_Payment(Number);
 			
