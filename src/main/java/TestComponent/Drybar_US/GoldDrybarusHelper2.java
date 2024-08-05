@@ -5047,7 +5047,7 @@ public void FUll_Payment(String dataSet) {
     					data.get(Dataset).get("Confirm Password"));
     			System.out.println(data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
-    			Common.clickElement("xpath", "//button[@title='Create an Account']");
+    			Common.clickElement("xpath", "//button[@title='Sign Up']");
     			Sync.waitImplicit(30);
     			Thread.sleep(8000);
     			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
@@ -10448,6 +10448,35 @@ public void pdp_add_myfav(String Dataset) {
 		Assert.fail();
 	}
 	
+}
+
+public void ClickCreateAccount() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Sync.waitElementPresent("xpath", "//button[@aria-label='My Account']");
+		Common.clickElement("xpath", "//button[@aria-label='My Account']");
+		
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Create an Account')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Create an Account')]");
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Account"),
+				"Validating Create New Customer Account page navigation",
+				"after Clicking on Create New Customer Account page it will navigate account creation page",
+				"Successfully navigate to the create account page",
+				"Failed to Navigate to the account create page ");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("Validating Create New Customer Account page navigation ",
+				"after Clicking on Create New Customer Account page it will navigate account creation page",
+				"unable to navigate to the craete account page",
+				Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
+		Assert.fail();
+	}
 }
 
 }
