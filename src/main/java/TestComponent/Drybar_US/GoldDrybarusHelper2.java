@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-//			acceptPrivacy();
+			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -10495,6 +10495,199 @@ public void ClickCreateAccount() {
 		Assert.fail();
 	}
 }
+
+public void Simple_PDP(String Dataset) {
+	// TODO Auto-generated method stub
+	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
+
+	try {
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) { 
+			Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[@class='group-hover/item-image:block hidden']");
+
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+		Thread.sleep(6000);
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
+		
+		System.out.println(name);
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+		product_quantity(Dataset);
+//		click_UGC();
+//		Locally_PDP();
+		PDP_Tabs("PLP Product");
+		validate_reviews_AskQuestions_PDP();
+//		Common.actionsKeyPress(Keys.UP);
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the PDP page", "In PDP fav ugc all should be appear",
+				"Unable to see few things in the PDP",
+				Common.getscreenShot("Failed to see few things in the PDP page"));
+		Assert.fail();
+	}
+
+}
+
+
+public void PDP_Tabs(String Dataset) {
+	// TODO Auto-generated method stub
+	String names = data.get(Dataset).get("PDPTabs");
+	String[] Links = names.split(",");
+	int i = 0;
+	try {
+		
+		int size=Common.findElements("xpath", "//section[@class='w-full']//span[text()='Product Details']").size();
+		if(size>0) {
+		   for (i = 0; i < Links.length; i++) {
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "(//div[@class='pb-12'])")
+					.getAttribute(":class");
+			System.out.println(title);
+			Common.assertionCheckwithReport(title.contains("open"), "verifying the tabs in PDP ",
+					"After clicking on the " + Links[i] + "It should display the related content",
+					"sucessfully after clicking on the " + Links[i] + "it has been displayed related content",
+					"Failed to display related content" + Links[i]);
+
+		}
+		}
+		else {
+			Assert.fail();
+		}
+	
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the tabs in PDP ",
+				"After clicking on the " + Links[i] + "It should display the related content",
+				"Unable to display the content in  " + Links[i],
+				Common.getscreenShot("Failed to display related content" + Links[i]));
+
+		Assert.fail();
+	}
+
+}
+
+
+public void Configurable_PDP(String Dataset) {
+	// TODO Auto-generated method stub
+	String products = data.get(Dataset).get("Products");
+	String Productsize= data.get(Dataset).get("size");
+	String scent=data.get(Dataset).get("scent");
+	System.out.println(Productsize);
+	System.out.println(products);
+	try {
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) {
+			Sync.waitElementPresent("xpath", "//img[contains(@class,'group-hover/item-image')]");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[contains(@class,'group-hover/item-image')]");
+
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
+		Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
+		Thread.sleep(3000);
+		String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
+		System.out.println(size);
+		String size1= data.get(Dataset).get("size").toUpperCase();
+		System.out.println(size1);
+		Common.assertionCheckwithReport(
+				size.equals(size1),
+				"Verifying the the size of the product is selected in the PDP",
+				"after clicking on the size product size should be selected",
+				"successfully Product size has been selected on the PDP",
+				"Failed to select the product price on the PDP");
+		product_quantity(Dataset);
+		Thread.sleep(4000);
+		PDP_Tabs("Configurable Product");
+		validate_reviews_AskQuestions_PDP();
+	
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		Assert.fail();
+	}
+}
+
+public void validate_reviews_AskQuestions_PDP() {
+	
+	try {
+		Thread.sleep(6000);
+	
+		int size=Common.findElements("xpath", "//div[@class='main-widget yotpo-display-wrapper ']").size();
+		if(size>0) {
+		
+		Thread.sleep(6000);
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
+		Common.javascriptclickElement("xpath", "//span[text()='Write A Review']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
+		Common.clickElementStale("xpath", "//span[text()='Write A Review']");
+		int Write = Common
+				.findElements("xpath", "//h2[text()='WRITE A REVIEW']").size();
+		System.out.println(Write);
+Thread.sleep(3000);
+		
+		Sync.waitElementPresent(30, "xpath", "//span[text()='Ask A Question']");
+		Common.clickElementStale("xpath", "//span[text()='Ask A Question']");
+		int question = Common
+				.findElements("xpath", "//h2[text()='ASK A QUESTION']").size();
+		System.out.println(question);
+		
+		
+
+	}
+		else {
+			Assert.fail();
+		}
+}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  Write a review Ask Question Section in PDP", "Sections should display",
+				"unable to display reviews section", Common.getscreenShot("failed to display reviews section"));
+		Assert.fail();
+	}
+}
+
+
+
 
 }
 
