@@ -6269,7 +6269,7 @@ public void FUll_Payment(String dataSet) {
     			Common.clickElement("xpath", "//button[@title='Save Account Information']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
-    			String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+    			String successmessage = Common.findElement("xpath", "(//div[@ui-id='message-success']//span)[2]").getText();
     			Common.assertionCheckwithReport(
     					successmessage.contains("You must confirm your account. Please check your email for the confirmation link")
     							&& Common.getPageTitle().contains("Customer Login"),
