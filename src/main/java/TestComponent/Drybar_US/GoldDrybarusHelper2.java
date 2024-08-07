@@ -5373,17 +5373,17 @@ public void FUll_Payment(String dataSet) {
 
 			try {
 				Thread.sleep(3000);
-				int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
+				int size = Common.findElements("xpath", "//input[@name='shipping-method-option']").size();
 				System.out.println(size);
 				if (size == 1) {
 					// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 					// "')]");
-					String method1=Common.findElement("xpath", "//td[@id='label_method_amstrates20_amstrates-label_carrier_amstrates20_amstrates']").getText();
-					String shipping1= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[1]").getText();
+					String method1=Common.findElement("xpath", "//div[@class='pl-3 pr-1']").getText();
+					String shipping1= Common.findElement("xpath", "//span[@class='price-including-tax']").getText();
 					//String method2=Common.findElement("xpath", "//td[@id='label_method_amstrates4_amstrates-label_carrier_amstrates4_amstrates']").getText();
 					//String shipping2= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[2]").getText();
 					
-					Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Ground Only"),
+					Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Standard"),
 							"validating the standard shipping method",
 							"Verifying Shipping methods in Shipping page",
 							"Successfully verifed Standard and Expedited shipping method",
