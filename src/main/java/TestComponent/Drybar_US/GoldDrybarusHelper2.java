@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-			acceptPrivacy();
+//			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -4661,11 +4661,11 @@ public void FUll_Payment(String dataSet) {
 //     	Common.clickElement("xpath","//span[text()='Add Gift Card']");
 		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCardCode"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
-		Common.clickElement("xpath","//span[text()='Add Code']");
+		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		Thread.sleep(2000);
 		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
 	    System.out.println(successmsg);	
-	    Common.refreshpage();
+//	    Common.refreshpage();
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
 				"Success message should be displayed after the applying of gift card",
@@ -4679,10 +4679,10 @@ public void FUll_Payment(String dataSet) {
 					Common.textBoxInput("id","giftcard-code",data.get(Dataset).get("GiftCardCode"));
 						Common.textBoxInput("id","giftcard-pin",data.get(Dataset).get("GiftCardPin"));
 						Thread.sleep(6000);
-						Sync.waitElementPresent(30, "xpath", "//span[text()='Add Gift Card']");
-						Common.clickElement("xpath", "//span[text()='Add Gift Card']");
+						Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Add Code']");
+						Common.clickElement("xpath", "//button[@aria-label='Add Code']");
 						Thread.sleep(3000);
-						Common.refreshpage();
+//						Common.refreshpage();
 						Thread.sleep(3000);
 						int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
 						Common.assertionCheckwithReport(size>0, "validating the gift card", "Gift Card was added.", "successfully gift card was added","Failed to add gift card");	
@@ -4695,10 +4695,10 @@ public void FUll_Payment(String dataSet) {
 	Common.textBoxInput("xpath","//input[@id='card-code-input']",data.get(Dataset).get("GiftCardCode"));
 		Common.textBoxInput("xpath","//input[@id='card-pin-input']",data.get(Dataset).get("GiftCardPin"));
 		Thread.sleep(6000);
-		Sync.waitElementPresent(30, "xpath", "(//button[@class='btn btn-primary'])[1]");
-		Common.clickElement("xpath", "(//button[@class='btn btn-primary'])[1]");
+		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Add Code']");
+		Common.clickElement("xpath", "//button[@aria-label='Add Code']");
 		Thread.sleep(3000);
-		Common.refreshpage();
+//		Common.refreshpage();
 		Thread.sleep(3000);
 		//div[@class='item drybar_giftcard']
 		//int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
@@ -4718,7 +4718,8 @@ public void FUll_Payment(String dataSet) {
 		try {
 		
 		Thread.sleep(3000);
-		
+		Common.refreshpage();
+		Thread.sleep(4000);
 		Sync.waitElementPresent(30, "id", "payment-method-free");
 		Common.clickElement("id", "payment-method-free");
 		
