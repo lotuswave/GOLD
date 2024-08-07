@@ -5862,7 +5862,7 @@ public void FUll_Payment(String dataSet) {
 				else {
 					
 				
-				update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
+				update = Common.findElement("xpath", "//label[@for='billing-as-shipping']").getText();
 				System.out.println(update);
 				Sync.waitPageLoad();
 				}
