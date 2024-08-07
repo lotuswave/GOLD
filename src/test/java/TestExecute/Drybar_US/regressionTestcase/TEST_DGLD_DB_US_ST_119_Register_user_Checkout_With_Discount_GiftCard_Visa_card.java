@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_Visa_card {
+public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
