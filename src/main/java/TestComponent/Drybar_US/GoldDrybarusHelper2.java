@@ -123,7 +123,7 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Drybar") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Drybar Home")
-					|| Common.getPageTitle().contains("Drybar - Home page") || Common.getPageTitle().contains(" ") || Common.getPageTitle().contains("Checkout"),
+					|| Common.getPageTitle().contains("Drybar - Home page") || Common.getPageTitle().contains("Dashboard") || Common.getPageTitle().contains("Checkout"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -10428,9 +10428,9 @@ public void pdp_add_myfav(String Dataset) {
 	try {
 		Sync.waitPageLoad();
 		for (int i = 0; i <= 10; i++) {
-			Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+			Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
 			List<WebElement> webelementslist = Common.findElements("xpath",
-					"//img[contains(@class,'m-product-card__image')]");
+					"//img[@class='group-hover/item-image:block hidden']");
 
 			String s = webelementslist.get(i).getAttribute("src");
 			System.out.println(s);
@@ -10442,10 +10442,10 @@ public void pdp_add_myfav(String Dataset) {
 		}
 		Thread.sleep(6000);
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-		Common.clickElement("xpath", "//img[@alt='" + products + "']");
+		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 		Sync.waitPageLoad();
 		Thread.sleep(3000);
-		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+		String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
 		
 		System.out.println(name);
 		Thread.sleep(4000);
@@ -10455,7 +10455,7 @@ public void pdp_add_myfav(String Dataset) {
 		
 		Sync.waitElementPresent("xpath", "//button[@title='Add to Wish List']");
 		Common.clickElement("xpath", "//button[@title='Add to Wish List']");
-		
+		Thread.sleep(5000);
 		String Message=Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 		Common.assertionCheckwithReport(Message.contains("You must login or register to add items to your wishlist."), "validating the  product add to the whishlist",
 				"Product should be whishlist", "Sucessfully product added to the whishlist ",
