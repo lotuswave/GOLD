@@ -10687,6 +10687,36 @@ Thread.sleep(3000);
 	}
 }
 
+public void fav_from_shoppingcart() {   //adding fav prodcut to cart from shopping cart
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Common.actionsKeyPress(Keys.END);
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//button[contains(text(),'ADD TO BAG')]");
+		Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'ADD TO BAG')]");
+		Common.clickElement("xpath", "//button[contains(text(),'ADD TO BAG')]");
+		Thread.sleep(4000);
+		Common.maximizeImplicitWait();
+		Sync.waitElementVisible("xpath", "//div[@ui-id='message-success']");
+		String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+				.getAttribute("ui-id");
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+				"Product should be add to cart", "Sucessfully product added to the cart ",
+				"failed to add product to the cart");
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+
+		Assert.fail();
+	}
+	
+	
+}
+
 
 
 

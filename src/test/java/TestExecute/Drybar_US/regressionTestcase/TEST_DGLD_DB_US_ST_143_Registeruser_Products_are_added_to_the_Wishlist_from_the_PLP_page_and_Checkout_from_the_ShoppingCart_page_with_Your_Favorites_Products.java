@@ -28,7 +28,7 @@ public class TEST_DGLD_DB_US_ST_143_Registeruser_Products_are_added_to_the_Wishl
 			Drybar.addtocart("Product");
 			Drybar.click_minicart();
 			Drybar.minicart_viewcart();
-			Drybar.Fav_Seeoption_from_View_cart("Plp Product");
+			Drybar.fav_from_shoppingcart();
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
