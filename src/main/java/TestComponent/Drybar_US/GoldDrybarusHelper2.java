@@ -8842,20 +8842,26 @@ public void Add_To_MyFavorities(String Dataset) {
 			Sync.waitPageLoad();
 			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
             System.out.println(MyFavorites);
-			if (MyFavorites != 0) {
+			if (MyFavorites == 0) {
 				search_product("Product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
-				Common.clickElement("xpath", "//img[@alt='" + product + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 				Sync.waitPageLoad();
 				//Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
 			//	Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			//	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			//	Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 
-				Sync.waitElementPresent(30, "xpath", "//span[text()='Add to Wish List']");
-				Common.clickElement("xpath", "//span[text()='Add to Wish List']");
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add to Wish List']");
+				Common.clickElement("xpath", "//button[@title='Add to Wish List']");
 				Sync.waitPageLoad(30);
 				Thread.sleep(3000);
+//				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Wish List") ,
+//						"validating the Navigation to the My Favorites page",
+//						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+//						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+//						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+				
 				if(Common.getCurrentURL().contains("drybar.com/gb/"))
                 {
                     Sync.waitPageLoad();
