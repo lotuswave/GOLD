@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Login;
+import TestLib.Common;
 
 public class TEST_DGLD_DB_US_ST_191_GuestUser_Simple_product_Checkout_with_GiftCode_FullRedeem {
 	
@@ -37,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_191_GuestUser_Simple_product_Checkout_with_GiftC
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
