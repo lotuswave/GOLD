@@ -7095,6 +7095,7 @@ public void FUll_Payment(String dataSet) {
 				
 				Common.clickElement("xpath", "//a[text()='"+category+"']");
 				
+				Thread.sleep(4000);
 //				int textValue = Integer.parseInt(text);
 				String categoryvalue=Integer.toString(textValue);
 				Thread.sleep(6000);
@@ -7104,12 +7105,37 @@ public void FUll_Payment(String dataSet) {
 				String items=Integer.toString(noOfItems);
 				System.out.println(text);
 				System.out.println(textValueAfterFilter);
-
+				System.out.println(items);
+				System.out.println(categoryvalue);
+				if(categoryvalue!=items)
+				{
+					Common.actionsKeyPress(Keys.END);
+					Thread.sleep(3000);
+					Common.scrollIntoView("xpath", "//button[text()='Load More']");
+					Sync.waitElementPresent("xpath", "//button[text()='Load More']");
+					Common.clickElement("xpath", "//button[text()='Load More']");
+					Thread.sleep(4000);
+					Sync.waitPageLoad();
+					Common.actionsKeyPress(Keys.PAGE_UP);
+					int noOfItems1 = Common.findElements("xpath", "//ol//li[@class='ais-InfiniteHits-item']").size();
+					String items1=Integer.toString(noOfItems1);
+					System.out.println(items1);
+					System.out.println(categoryvalue);
+					Common.assertionCheckwithReport(categoryvalue.equals(items1),
+							"To validate the filter in Product Listing Page",
+							"User should able to filter in Product Listing Page",
+							"Sucessfully filters in the Product Listing Page",
+							"Failed to filter in Product Listing Page");
+					
+				}
+				else
+				{
 			Common.assertionCheckwithReport(categoryvalue.equals(items),
 					"To validate the filter in Product Listing Page",
 					"User should able to filter in Product Listing Page",
 					"Sucessfully filters in the Product Listing Page",
 					"Failed to filter in Product Listing Page");
+				}
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
@@ -7125,7 +7151,7 @@ public void FUll_Payment(String dataSet) {
 	    	String name = "";
 			try {
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "(//button[@class='ais-Panel-collapseButton'])[2]");
+//				Common.clickElement("xpath", "(//button[@class='ais-Panel-collapseButton'])[2]");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace("$", "").replace(".00", "");
 				System.out.println(lastvalue);
