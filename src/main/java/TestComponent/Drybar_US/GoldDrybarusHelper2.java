@@ -6207,7 +6207,8 @@ public void FUll_Payment(String dataSet) {
     			Thread.sleep(3000);
     			String editaccount = Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText();
     			System.out.println(editaccount);
-    			Common.assertionCheckwithReport(name.contains(editaccount) || editaccount.contains("EDIT ACCOUNT INFORMATION"),
+    			Common.assertionCheckwithReport(name.contains(editaccount) || editaccount.contains("EDIT ACCOUNT INFORMATION") ||
+    					editaccount.contains("ACCOUNT INFORMATION"),
     					"verifying the page navigated to the edit account ",
     					"user should navigate to the Edit account page",
     					"user successfully Navigated to the edit account page",
@@ -6270,6 +6271,7 @@ public void FUll_Payment(String dataSet) {
     			Common.clickElement("xpath", "//button[@title='Save Account Information']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
+    			if(Common.getCurrentURL().contains("stage")) {
     			String successmessage = Common.findElement("xpath", "(//div[@ui-id='message-success']//span)[2]").getText();
     			Common.assertionCheckwithReport(
     					successmessage.contains("You must confirm your account. Please check your email for the confirmation link")
@@ -6278,6 +6280,18 @@ public void FUll_Payment(String dataSet) {
     					"user should get the success message and navigate back to the Login page",
     					"Successfully user gets the success message and navigated to the Login page",
     					"Failed to get the success message and unable to navigate to the login page");
+    			} else
+    			{
+    				String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+    				Common.assertionCheckwithReport(
+        					successmessage.contains("You must confirm your account. Please check your email for the confirmation link")
+        							&& Common.getPageTitle().contains("Customer Login"),
+        					"verifying the Success message for the Change email",
+        					"user should get the success message and navigate back to the Login page",
+        					"Successfully user gets the success message and navigated to the Login page",
+        					"Failed to get the success message and unable to navigate to the login page");
+    			}
+    			
 //    			Sync.waitPageLoad();
 //    			Common.textBoxInput("id", "email", newemail);
 //    			Common.textBoxInput("id", "pass", data.get(Dataset).get("Confirm Password"));
