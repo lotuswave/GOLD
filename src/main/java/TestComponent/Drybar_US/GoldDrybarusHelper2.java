@@ -10371,7 +10371,7 @@ public void Newsletter_subscription_MyAccount() {
 	Sync.waitElementPresent("xpath", "//a[@title='Newsletter Subscriptions']");
 	Common.clickElement("xpath", "//a[@title='Newsletter Subscriptions']");
 
-	String Communication = Common.getText("xpath", "//span[text()='Communication Preferences']");
+	String Communication = Common.getText("xpath", "//span[text()='Newsletter Subscription']");
 
 	//String Storefront_Text = "Communication Preferences";
 
