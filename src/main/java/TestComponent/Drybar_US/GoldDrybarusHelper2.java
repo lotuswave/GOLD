@@ -173,7 +173,7 @@ public class GoldDrybarusHelper2 {
 				Thread.sleep(4000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(4000);
-			  if(Productsize.contains(Common.findElement("xpath", "(//input[@name='super_attribute[1341]'])[3]").getAttribute("aria-label")))
+			  if(Productsize.contains(Common.findElement("xpath", "(//input[@name='super_attribute[1346]'])[3]").getAttribute("aria-label")))
 			  {
 				Sync.waitElementPresent("xpath",
 						"//input[@aria-label='" + Productsize + "']");
@@ -3660,7 +3660,6 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try {
 
-			
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
 			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 			Thread.sleep(4000);
