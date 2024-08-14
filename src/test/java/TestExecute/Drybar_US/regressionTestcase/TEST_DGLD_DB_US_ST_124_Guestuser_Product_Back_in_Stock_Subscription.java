@@ -5,13 +5,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription {
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void validate_Guest_User_Product_Back_in_Subscription() throws Exception {
