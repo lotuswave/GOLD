@@ -4974,7 +4974,7 @@ public void FUll_Payment(String dataSet) {
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//button[@title='Create an Account']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Thread.sleep(4000);
 //			String message = Common.findElement("id", "validation-classes").getCssValue("color");
 //			String redcolor = Color.fromString(message).asHex();
@@ -5049,14 +5049,7 @@ public void FUll_Payment(String dataSet) {
     					data.get(Dataset).get("Confirm Password"));
     			System.out.println(data.get(Dataset).get("Confirm Password"));
     			Thread.sleep(4000);
-    			if(Common.getCurrentURL().contains("stage"))
-    			{
     			Common.clickElement("xpath", "//button[@title='Sign Up']");
-    			}
-    			else
-    			{
-    				Common.clickElement("xpath", "//button[@title='Create an Account']");
-    			}
     			Sync.waitImplicit(30);
     			Thread.sleep(8000);
     			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
