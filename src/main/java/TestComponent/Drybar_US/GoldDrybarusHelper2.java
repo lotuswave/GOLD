@@ -10757,11 +10757,108 @@ public void fav_from_shoppingcart() {   //adding fav prodcut to cart from shoppi
 	
 }
 
+public void Company(String Dataset) {
+	String footer = data.get(Dataset).get("Footer Links");
+	String[] footerlinks = footer.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Common.clickElement("xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			
+			
+			
+			String Bread = Common.findElement("xpath", "//span[@class='text-secondary']").getText().toLowerCase();
+			System.out.println(Bread);
+			System.out.println(footerlinks[i]);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("about-us")
+							|| Common.getCurrentURL().contains("what-is-a-blowout")
+							|| Common.getCurrentURL().contains("where-to-buy")
+							|| Common.getCurrentURL().contains("news")
+							|| Common.getCurrentURL().contains("careers")
+							|| Common.getCurrentURL().contains("drybarshops.com"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+			Thread.sleep(5000);
+			Common.navigateBack();
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+			
 
-
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
 
 }
 
+public void Support(String Dataset) {
+	String footer = data.get(Dataset).get("Footer Links");
+	String[] footerlinks = footer.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Common.clickElement("xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+		
+			System.out.println(footerlinks[i]);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("contact-us")
+							|| Common.getCurrentURL().contains("track/order/status")
+							|| Common.getCurrentURL().contains("where-to-buy")
+							|| Common.getCurrentURL().contains("news")
+							|| Common.getCurrentURL().contains("warranty"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+			Thread.sleep(5000);
+			Common.navigateBack();
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+			
+
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
+}
+
+}
 
 
 
