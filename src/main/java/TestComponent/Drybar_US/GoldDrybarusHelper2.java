@@ -2638,7 +2638,8 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
 			Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
-			Thread.sleep(3000);
+			Thread.sleep(8000);
+			Sync.waitElementPresent("xpath", "//span[contains(@class,'text-secondary-700')]");
 			String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
