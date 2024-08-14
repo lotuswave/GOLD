@@ -2208,7 +2208,7 @@ public class GoldDrybarusHelper2 {
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
 									currentUrl.contains("ustomer/account/edit/")||currentUrl.contains("/customer/address/")||currentUrl.contains("sales/order/history/")||currentUrl.contains("rma/returns/history/")||currentUrl.contains("/wishlist/")||currentUrl.contains("/storecredit/info/")||currentUrl.contains("customer/paymentmethods/")||currentUrl.contains("newsletter/manage/")
-									||currentUrl.contains("customer/account/logoutSuccess/"),
+								  ||Common.getPageTitle().contains("My Subscriptions")||currentUrl.contains("customer/account/logoutSuccess/"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
@@ -3868,6 +3868,7 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		String Symbol = data.get(dataSet).get("Symbol");
 		String products = data.get(dataSet).get("Products");
+		System.out.println(products);
 
 		try {
 			Thread.sleep(4000);
@@ -7117,10 +7118,10 @@ public void FUll_Payment(String dataSet) {
 				if(categoryvalue!=items)
 				{
 					Common.actionsKeyPress(Keys.END);
-					Thread.sleep(3000);
+					Thread.sleep(6000);
 					Common.scrollIntoView("xpath", "//button[text()='Load More']");
 					Sync.waitElementPresent("xpath", "//button[text()='Load More']");
-					Common.clickElement("xpath", "//button[text()='Load More']");
+					Common.javascriptclickElement("xpath", "//button[text()='Load More']");
 					Thread.sleep(4000);
 					Sync.waitPageLoad();
 					Common.actionsKeyPress(Keys.PAGE_UP);
