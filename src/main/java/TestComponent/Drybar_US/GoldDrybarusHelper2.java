@@ -118,7 +118,7 @@ public class GoldDrybarusHelper2 {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+//			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -858,7 +858,7 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 	        
 			Common.clickElement("xpath", "//input[@name='telephone']");
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
@@ -5606,21 +5606,21 @@ public void FUll_Payment(String dataSet) {
 				Thread.sleep(6000);
 				Sync.waitPageLoad();
 				
-				String klarna=Common.findElement("xpath", "//h2[contains(text(),'How do you want to pay')]").getText();
-				if(klarna.contains("How do you want to pay"))
+				String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
+				if(klarna.contains("Choose how to pay"))
 				{
 					Thread.sleep(4000);
 				//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-					Sync.waitElementPresent("id", "pay_now__label");
-					Common.clickElement("id", "pay_now__label");
+					Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+					Common.clickElement("xpath", "//label[@for='pay_now__label']");
 					
 					Thread.sleep(2000);
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
 					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
 					Thread.sleep(4000);
 					//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'Pay "+Symbol+"')]");
-					Common.clickElement("xpath", "//span[contains(text(),'Pay "+Symbol+"')]");
+					Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
+					Common.clickElement("xpath", "//span[text()='Pay with']");
 					Sync.waitPageLoad();
 					
 						
@@ -5703,18 +5703,18 @@ public void FUll_Payment(String dataSet) {
 		else{
 			try{
 			Thread.sleep(4000);
-			Sync.waitElementPresent(60, "xpath", "//h1[@class='page-title-wrapper']");
-		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+			Sync.waitElementPresent(60, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
+		String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
 		System.out.println(sucessMessage);
 		
-		int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+		int size = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
 		Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 				"verifying the product confirmation", "It should redirects to the order confirmation mail",
 				"Successfully It redirects to order confirmation page Order Placed",
 				"User unable to go orderconformation page");
 		
-		if(Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size()>0) {
-			order=Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+		if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size()>0) {
+			order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 			System.out.println(order);
 		}
 		if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
