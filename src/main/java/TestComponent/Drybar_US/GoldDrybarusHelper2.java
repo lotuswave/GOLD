@@ -2639,8 +2639,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
 			Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
 			Thread.sleep(8000);
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'text-secondary-700')]");
-			String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "//*[contains(@id,'attribute-label-71902-1346')]/span[2]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -10075,7 +10074,7 @@ public void createAccountFromOrderSummaryPage(String Dataset) {
 		Common.clickElement("xpath", "//input[@name='password_confirmation']");
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 				data.get(Dataset).get("Confirm Password"));
-		Common.clickElement("xpath", "(//button[@aria-label='Show Password'])[2]");
+		Common.clickElement("xpath", "//button[@aria-label='Show Password']");
 		String accounttext = Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
 		String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
 				.getAttribute("type");
