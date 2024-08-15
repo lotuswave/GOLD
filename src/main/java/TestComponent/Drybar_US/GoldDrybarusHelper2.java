@@ -2639,8 +2639,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
 			Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
 			Thread.sleep(8000);
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'text-secondary-700')]");
-			String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "//*[contains(@id,'attribute-label-71902-1346')]/span[2]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -10075,7 +10074,7 @@ public void createAccountFromOrderSummaryPage(String Dataset) {
 		Common.clickElement("xpath", "//input[@name='password_confirmation']");
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 				data.get(Dataset).get("Confirm Password"));
-		Common.clickElement("xpath", "(//button[@aria-label='Show Password'])[2]");
+		Common.clickElement("xpath", "//button[@aria-label='Show Password']");
 		String accounttext = Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
 		String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
 				.getAttribute("type");
@@ -10811,6 +10810,58 @@ public void Company(String Dataset) {
 
 }
 
+public void Information(String Dataset) {
+	String footer = data.get(Dataset).get("Footer Links");
+	String[] footerlinks = footer.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Common.clickElement("xpath",
+					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			
+			
+			
+			String Bread = Common.findElement("xpath", "//span[@class='text-secondary']").getText().toLowerCase();
+			System.out.println(Bread);
+			System.out.println(footerlinks[i]);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("ca-transparency-in-supply-chains-act")
+							|| Common.getCurrentURL().contains("privacy-policy")
+							|| Common.getCurrentURL().contains("terms-of-use")
+							|| Common.getCurrentURL().contains("news")
+							|| Common.getCurrentURL().contains("careers")
+							|| Common.getCurrentURL().contains("drybarshops.com"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+			Thread.sleep(5000);
+			Common.navigateBack();
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+			
+
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		Assert.fail();
+	}
+
+}
 public void Support(String Dataset) {
 	String footer = data.get(Dataset).get("Footer Links");
 	String[] footerlinks = footer.split(",");

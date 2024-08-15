@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
+import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_011_Footer_Link_Validation {
@@ -21,6 +22,7 @@ public class TEST_DGLD_DB_US_ST_011_Footer_Link_Validation {
 			Drybar.Verify_Homepage();
 			Drybar.Company("Company");
 			Drybar.Support("support");
+			Drybar.Information("information");
 
 		} catch (Exception e) {
 
@@ -30,7 +32,7 @@ public class TEST_DGLD_DB_US_ST_011_Footer_Link_Validation {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}

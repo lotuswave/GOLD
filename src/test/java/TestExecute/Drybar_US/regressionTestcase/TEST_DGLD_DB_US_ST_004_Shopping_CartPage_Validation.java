@@ -20,10 +20,10 @@ public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
 
 		try {
 			Drybar.Verify_Homepage();
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Configurable Product");
 			Drybar.Configurable_addtocart("Configurable Product");
+			Drybar.HairTools_headerlinks("Hair Tools"); 
+			Drybar.addtocart("PLP Product");
 			Drybar.click_minicart();
 			Drybar.minicart_viewcart();
             Drybar.Remove_Product("Configurable Product");
