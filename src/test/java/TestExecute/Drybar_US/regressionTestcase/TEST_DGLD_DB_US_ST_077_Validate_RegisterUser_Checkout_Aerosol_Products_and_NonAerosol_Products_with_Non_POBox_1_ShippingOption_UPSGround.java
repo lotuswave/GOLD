@@ -26,6 +26,10 @@ public class TEST_DGLD_DB_US_ST_077_Validate_RegisterUser_Checkout_Aerosol_Produ
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
+			Drybar.addDeliveryAddress_Guestuser("PO Box Address");
+			Drybar.selectshippingmethod("POBox Shipping method");
+			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.updatePaymentAndSubmitOrder("CCDiscovercard");
 			
 		
 		} catch (Exception e) {
