@@ -10689,17 +10689,20 @@ public void validate_reviews_AskQuestions_PDP() {
 	try {
 		Thread.sleep(6000);
 	
-		int size=Common.findElements("xpath", "//div[@class='main-widget yotpo-display-wrapper ']").size();
+		int size=Common.findElements("xpath", "//span[@class='yotpo-display-wrapper']").size();
 		if(size>0) {
 		
 		Thread.sleep(6000);
-		Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
-		Common.javascriptclickElement("xpath", "//span[text()='Write A Review']");
-		Sync.waitPageLoad();
-		Thread.sleep(3000);
+		
+//		Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
+//		
+//		Common.javascriptclickElement("xpath", "//span[text()='Write A Review']");
+//		Sync.waitPageLoad();
+//		Thread.sleep(3000);
 		
 		Sync.waitElementPresent(30, "xpath", "//span[text()='Write A Review']");
-		Common.clickElementStale("xpath", "//span[text()='Write A Review']");
+		Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
+		Common.clickElement("xpath", "//span[text()='Write A Review']");
 		int Write = Common
 				.findElements("xpath", "//h2[text()='WRITE A REVIEW']").size();
 		System.out.println(Write);
