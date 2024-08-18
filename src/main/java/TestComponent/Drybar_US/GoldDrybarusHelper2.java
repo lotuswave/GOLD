@@ -3939,7 +3939,7 @@ public class GoldDrybarusHelper2 {
 			String productquantity = Common.findElement("xpath", "(//select[@title='Qty'])[1]")
 					.getAttribute("value");
 			System.out.println(productquantity);
-			String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hidden lg:inline']").getText().replace("  Items  in your cart", "");
+			String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hf:title-2xs hidden lg:inline']").getText().trim().replace("Items", "");
 			System.out.println(items);
 			Common.assertionCheckwithReport(productquantity.equals(quantity) || productquantity.equals(items),
 					"validating the update quantity in shopping cart page",
