@@ -2207,7 +2207,7 @@ public class GoldDrybarusHelper2 {
 							String currentUrl=Common.getCurrentURL();
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
-									currentUrl.contains("ustomer/account/edit/")||currentUrl.contains("/customer/address/")||currentUrl.contains("sales/order/history/")||currentUrl.contains("rma/returns/history/")||currentUrl.contains("/wishlist/")||currentUrl.contains("/storecredit/info/")||currentUrl.contains("customer/paymentmethods/")||currentUrl.contains("newsletter/manage/")
+									currentUrl.contains("ustomer/account/edit/")||currentUrl.contains("/customer/address/")||currentUrl.contains("sales/order/history/")||currentUrl.contains("rma/returns/history/")||currentUrl.contains("/wishlist/")||currentUrl.contains("stock/index/")||currentUrl.contains("customer/paymentmethods/")||currentUrl.contains("newsletter/manage/")
 								  ||Common.getPageTitle().contains("My Subscriptions")||currentUrl.contains("customer/account/logoutSuccess/"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
