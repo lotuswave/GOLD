@@ -2636,8 +2636,8 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
-			Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(8000);
 			String size=Common.findElement("xpath", "//*[contains(@id,'attribute-label-71902-1346')]/span[2]").getText().toUpperCase();
 			System.out.println(size);
@@ -3538,22 +3538,22 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitElementPresent("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']");
 			String minicart = Common.findElement("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").getText();
-			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
-			Common.clickElement("xpath", "//a[@title='View Cart']");
+			Sync.waitElementPresent("xpath", "//a[@title='View Bag']");
+			Common.clickElement("xpath", "//a[@title='View Bag']");
 			String viewcart = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			Common.assertionCheckwithReport(
 					viewcart.contains(minicart) || Common.getCurrentURL().contains("/checkout/cart/"),
-					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
-					"Successfully navigates to the view cart page",
+					"validating the navigation to the View Bag", "User should able to navigate to the View Bag page",
+					"Successfully navigates to the View Bag page",
 					"Failed to navigate to the view and edit cart page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the navigation to the view cart",
-					"User should able to navigate to the view cart page", "unable to  navigates to the view cart page",
-					Common.getscreenShot("Failed to navigate to the view cart page"));
+			ExtenantReportUtils.addFailedLog("validating the navigation to the View Bag",
+					"User should able to navigate to the View Bag page", "unable to  navigates to the View Bag page",
+					Common.getscreenShot("Failed to navigate to the View Bag page"));
 
 			Assert.fail();
 
@@ -8820,8 +8820,8 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 	String Yourfav=Common.findElement("xpath", "//h2[@class='t-cart__favorites-heading']").getText();
 	System.out.println(Yourfav);
 	Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
-			"validating the favorites in view cart page", "Favorites should be in the view cart page",
-			"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
+			"validating the favorites in View Bag page", "Favorites should be in the View Bag page",
+			"Sucessfully Favorites has been displayed in the View Bag page ", "failed to display the favorites in the View Bag page");
 	Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 	Common.clickElement("xpath", "//span[text()='Add to Cart']");
 	Sync.waitPageLoad();
