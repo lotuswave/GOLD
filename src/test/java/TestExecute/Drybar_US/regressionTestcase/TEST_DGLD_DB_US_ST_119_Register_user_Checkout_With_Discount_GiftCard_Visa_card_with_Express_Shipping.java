@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card {
+public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card_with_Express_Shipping {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
@@ -22,11 +22,11 @@ public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCar
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
+			Drybar.search_product("Product");
+            Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
-			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.selectshippingmethod("Express method");
 			Drybar.discountCode("Discount");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.gitCard("GiftCode");

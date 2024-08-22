@@ -571,8 +571,8 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
-			Sync.waitPageLoad();
-			Thread.sleep(9000);
+			//Sync.waitPageLoad();
+			Thread.sleep(5000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
 					.getAttribute("ui-id");
 			System.out.println(message);
