@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_on_Checkout_Page {
+public class TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
@@ -29,7 +29,8 @@ public class TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_on_Checkout_Page {
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.gitCard("GiftCode");
-			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			//Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			Drybar.giftCardSubmitOrder();
 			
 			
 
