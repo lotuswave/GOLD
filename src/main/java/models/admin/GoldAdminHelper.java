@@ -57,8 +57,8 @@ public class GoldAdminHelper {
                 Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
             } 
             Sync.waitPageLoad(30);
-            Sync.waitElementPresent("name", "loginfmt");
-            Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
+            Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
+            Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']", data.get(dataSet).get("UserName"));
             Common.clickElement("id", "idSIButton9");
             Sync.waitPageLoad();
             Thread.sleep(3000);
@@ -7206,7 +7206,7 @@ public class GoldAdminHelper {
 		try {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("id", "menu-magento-sales-sales");
-			Common.clickElement("id", "menu-magento-sales-sales");
+			Common.clickElement("id", "menu-magento-sales-sales"); // this line clicks on sale option in magento
 			Thread.sleep(2000);
 			String Sales = Common.findElement("xpath", "//li[@class='item-sales-order    level-2']").getText();
 			System.out.println(Sales);
@@ -7219,7 +7219,7 @@ public class GoldAdminHelper {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			report.addFailedLog("To verify the sales menu ",
+			ExtenantReportUtils.addFailedLog("To verify the sales menu ",
 					"After clicking the sales menu it will display menu options ",
 					"Successfully clicked the sales menu and it displayed the sales options",
 					Common.getscreenShotPathforReport("Failed to click on the sales menu"));
@@ -7776,7 +7776,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 
 				Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
 				Common.clickElement("xpath", "//button[@title='Add to Order']");
-
+               Common.implicitWait();
 				Sync.waitElementVisible("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]");
 				String[] SKU = Common.findElement("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]").getText()
 						.split(" ");
@@ -8295,9 +8295,9 @@ public void delet_existing_Coupon(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(2000);
-
-			Sync.waitElementPresent("xpath", "//input[@title='Default Payment']");
-			Common.clickElement("xpath", "//input[@title='Default Payment']");
+          Common.scrollIntoView("xpath", "//input[@id='p_method_stripe_payments']");
+			Sync.waitElementPresent("xpath", "//input[@id='p_method_stripe_payments']");
+			Common.clickElement("xpath", "//input[@id='p_method_stripe_payments']");
 			Thread.sleep(3000);
 
 			Sync.waitPageLoad();
