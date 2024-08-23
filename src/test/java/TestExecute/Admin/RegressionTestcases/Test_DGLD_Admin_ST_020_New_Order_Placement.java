@@ -23,7 +23,7 @@ public class Test_DGLD_Admin_ST_020_New_Order_Placement {
     	Admin.Click_Orders_Salesmenu();
     	Admin.Click_CreatNewOrders(); 
     	Admin.Click_CreatNewCustomer();
-        Admin.Select_astore();
+        Admin.Select_store("Store_Selection");
         Admin.Add_product_SKU("Details");
         Admin.Guestuser_shippingaddress("Details");
  	    Admin.Default_Payment_method("Details");
@@ -41,7 +41,7 @@ public class Test_DGLD_Admin_ST_020_New_Order_Placement {
     @AfterTest
     public void clearBrowser()
     {
-//      Common.closeAll();
+      Common.closeAll();
 
     }
 

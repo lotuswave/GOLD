@@ -7311,6 +7311,7 @@ public class GoldAdminHelper {
 
 	public void Select_astore() {
 		// TODO Auto-generated method stub
+		
 		try {
 			Thread.sleep(2000);
 
@@ -7338,6 +7339,38 @@ public class GoldAdminHelper {
 	
 	}
 
+	
+	public void Select_store(String dataSet) {
+		// TODO Auto-generated method stub
+		String Stores =  data.get(dataSet).get("Store");
+		try {
+			Thread.sleep(2000);
+
+			Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']");
+			Common.clickElement("xpath",  "//label[text()='" + Stores + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+			System.out.println(title);
+			Common.assertionCheckwithReport(title.contains("Items Ordered"),
+					"To Validate the Items Ordered page is displayed",
+					"should display the Items Orderedpage after clicking on the store",
+					"Items Ordered page is displayed after a click on the store button",
+					"Failed to display Items Ordered page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the Items Ordered page is displayed",
+					"should display the Items OrderedT page after clicking on the store",
+					"unable to display Items OrderedT page after a click on the store button",
+					"Failed to display Items Ordered page");
+			Assert.fail();
+		}
+
+	
+	}
+	
+	
 	public void payment_method(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
