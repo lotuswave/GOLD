@@ -56,30 +56,30 @@ public class GoldAdminHelper {
                 Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
                 Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
             } 
-            Sync.waitPageLoad(30);
-            Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
-            Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']", data.get(dataSet).get("UserName"));
-            Common.clickElement("id", "idSIButton9");
-            Sync.waitPageLoad();
-            Thread.sleep(3000);
-            Sync.waitElementPresent(30, "name", "passwd");
-            Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
-            Common.clickElement("id", "idSIButton9");
-            Sync.waitPageLoad();
-
- 
-
-            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
-            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
-                Common.javascriptclickElement("id", "KmsiCheckboxField");
-            }
-            Sync.waitElementClickable("id", "idSIButton9");
-            Common.mouseOverClick("id", "idSIButton9");
-            Sync.waitPageLoad();
-            Thread.sleep(5000);
-            Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
-
- 
+//            Sync.waitPageLoad(30);
+//            Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
+//            Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']", data.get(dataSet).get("UserName"));
+//            Common.clickElement("id", "idSIButton9");
+//            Sync.waitPageLoad();
+//            Thread.sleep(3000);
+//            Sync.waitElementPresent(30, "name", "passwd");
+//            Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
+//            Common.clickElement("id", "idSIButton9");
+//            Sync.waitPageLoad();
+//
+// 
+//
+//            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
+//            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
+//                Common.javascriptclickElement("id", "KmsiCheckboxField");
+//            }
+//            Sync.waitElementClickable("id", "idSIButton9");
+//            Common.mouseOverClick("id", "idSIButton9");
+//            Sync.waitPageLoad();
+//            Thread.sleep(5000);
+//            Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
+//
+// 
 
             Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
                     "To Validate the Admin is landing on the Dashboard after successfull Signin",
@@ -7114,6 +7114,9 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "(//div[@class='data-grid-filters-action-wrap'])[1]");
 			Common.clickElement("xpath", "(//div[@class='data-grid-filters-action-wrap'])[1]");
 			Common.javascriptclickElement("xpath", "(//button[@class='action-tertiary action-clear'])[1]");
+			Thread.sleep(3000);
+//			Common.javascriptclickElement("xpath", "//button[text()='Filters']");
+			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", email);
 			Thread.sleep(3000);
@@ -7772,7 +7775,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 			Sync.waitPageLoad();
 
 			String page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-
+			Thread.sleep(5000);
 			Common.assertionCheckwithReport(page.contains(Website),
 					"To Validate the create new order page is displayed",
 					"should display the create new order page after clicking on the store",
@@ -7798,7 +7801,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 
 			for (int i = 0; i < SKUnumber.length; i++) {
 				System.out.println(SKUnumber[i]);
-
+				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
 				Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
 				Thread.sleep(2000);
