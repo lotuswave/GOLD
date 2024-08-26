@@ -24,7 +24,7 @@ public class Test_DGLD_Admin_ST_020_New_Order_Placement {
     	Admin.Click_CreatNewOrders(); 
     	Admin.Click_CreatNewCustomer();
         Admin.Select_store("Store_Selection");
-        Admin.Add_product_SKU("Details");
+        Admin.Add_product_SKU("HFWebsite");    // Based on website testdata for SU should change
         Admin.Guestuser_shippingaddress("Details");
  	    Admin.Default_Payment_method("Details");
     	

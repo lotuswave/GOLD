@@ -81,7 +81,7 @@ public class GoldAdminHelper {
 //
 // 
 
-            Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+            Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
                     "To Validate the Admin is landing on the Dashboard after successfull Signin",
                     "After clicking on sigin button admin should navigate to the dashboard",
                     "Admin Sucessfully navigate to the dashboard after clicking on the signin button",
