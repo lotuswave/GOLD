@@ -165,6 +165,7 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 			Common.actionsKeyPress(Keys.ENTER);
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Thread.sleep(4000);
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			if (records.equals("0 records found")) {
 				Sync.waitElementPresent("xpath", "//button[@title='Add New Customer']");
@@ -200,6 +201,7 @@ public class GoldAdminHelper {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//button[@title='Delete Customer']");
 			Common.javascriptclickElement("xpath", "//button[@title='Delete Customer']");
+			Thread.sleep(4000);
 			String message = Common
 					.findElement("xpath", "//aside[contains(@class,'confirm _show')]//div[@class='modal-content']")
 					.getText();
@@ -311,7 +313,7 @@ public class GoldAdminHelper {
 			System.out.println(records);
 			if (records.equals("1 records found")) {
 				Common.clickElement("xpath", "//a[text()='Edit']");
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("testing qa / Customers"),
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Testing Qa / Customers"),
 						"Validating the edit button on the customers page",
 						"After clicking edit button it should navigate to the selected page",
 						"Successfully navigate to the selected page when we click on edit button",
@@ -579,6 +581,7 @@ public class GoldAdminHelper {
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 			Common.actionsKeyPress(Keys.ENTER);
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			if (records.equals("1 records found")) {
@@ -587,6 +590,7 @@ public class GoldAdminHelper {
 				Assert.fail();
 			}
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@title='Delete Customer']");
 			Common.clickElement("xpath", "//button[@title='Delete Customer']");
 			Sync.waitPageLoad();
