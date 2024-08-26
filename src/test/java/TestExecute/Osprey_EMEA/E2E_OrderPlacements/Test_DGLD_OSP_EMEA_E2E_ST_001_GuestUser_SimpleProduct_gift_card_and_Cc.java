@@ -10,7 +10,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_84_Placeorder_GuestUser_checkout_with_gift_card_X_MAS_GIFT_CARD {
+public class Test_DGLD_OSP_EMEA_E2E_ST_001_GuestUser_SimpleProduct_gift_card_and_Cc {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_E2EHelper Osprey_ReEu = new OspreyEMEA_E2EHelper(datafile,"Checkout payments");
