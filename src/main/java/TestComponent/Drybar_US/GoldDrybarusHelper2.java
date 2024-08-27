@@ -10913,6 +10913,79 @@ public void Support(String Dataset) {
 
 }
 
+public void learn_videos() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'Learn')]");
+		Common.clickElement("xpath", "//span[contains(text(),'Learn')]");
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//span[text()='Videos']");
+		Common.clickElement("xpath", "//span[text()='Videos']");
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("how-to/videos"), "validating the user navigate to the videos",
+				"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
+				"failed to Navigate to the videos page");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the user navigate to the videos",
+				"After clicking on the vidoes CTA it should navigate to the videos page", "Unable to Navigated to the videos page ",
+				Common.getscreenShot("failed to Navigate to the videos page"));
+		Assert.fail();
+	}
+	
+}
+
+public void videos_validation() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementPresent("xpath", "//div[@x-data='videoModal()']");
+		List<WebElement> videos = Common.findElements("xpath",
+				"//div[@x-data='videoModal()']");
+		System.out.println(videos);
+	
+		for(int i=0;i<videos.size()-68;i++)
+		{
+			int value = i + 1;
+			List<WebElement> ListOfSubvideos = Common.findElements("xpath",
+					"(//div[@x-data='videoModal()']//span[contains(@class,'cursor-pointer')])[" + value + "]");
+		
+			Common.clickElement("xpath",
+					"(//div[@x-data='videoModal()']//span[contains(@class,'cursor-pointer')])[" + value + "]");
+		   Thread.sleep(3000);
+		   Common.switchFrames("xpath", "//div[@x-data='video()']//iframe");
+		   Thread.sleep(3000);
+		   Sync.waitElementPresent("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+		   Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+		   Thread.sleep(3000);
+		   String Video=Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']").getAttribute("type");
+		   Common.assertionCheckwithReport(Video.contains("button"), "validating the user navigate to the videos",
+					"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
+					"failed to Navigate to the videos page");
+		   Thread.sleep(3000);
+		   Common.switchToDefault();
+		   Sync.waitElementPresent("xpath", "//button[contains(@class,'text-white')]");
+		   Common.clickElement("xpath", "//button[contains(@class,'text-white')]");
+		  
+		  
+		}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the user navigate to the videos",
+				"After clicking on the vidoes CTA it should navigate to the videos page", "Unable to Navigated to the videos page ",
+				Common.getscreenShot("failed to Navigate to the videos page"));
+		Assert.fail();
+	}
+	
+}
+
 }
 
 
