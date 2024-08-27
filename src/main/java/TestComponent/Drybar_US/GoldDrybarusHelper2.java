@@ -5954,9 +5954,9 @@ public void FUll_Payment(String dataSet) {
     		try {
     			Sync.waitPageLoad();
     			for (int i = 0; i <= 10; i++) {
-    				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+    				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
     				List<WebElement> webelementslist = Common.findElements("xpath",
-    						"//img[contains(@class,'m-product-card__image')]");
+    						"//img[@class='group-hover/item-image:block hidden']");
 
     				String s = webelementslist.get(i).getAttribute("src");
     				System.out.println(s);
@@ -5967,21 +5967,21 @@ public void FUll_Payment(String dataSet) {
     				}
     			}
     			Thread.sleep(9000);
-    			if (Common.getCurrentURL().contains("stage")) {
-    				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
-    				Common.scrollIntoView("xpath", "//img[contains(@alt,'" + products + "')]");
-    				Common.mouseOver("xpath", "//img[contains(@alt,'" + products + "')]");
+    			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
+    				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+    				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+    				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
     				Thread.sleep(4000);
-    				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace(symbol,"").replace(".00", "");
-    				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
+    				String productprice = Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span").getText().replace(symbol,"").replace(".00", "");
+    				Common.clickElement("xpath", "//img[@alt='" + products + "']");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
     				String PLPprice = Common
-    						.findElement("xpath","//div[@class='m-product-overview__prices']//span[contains(@class,'price-wrapper')]")
-    						.getAttribute("data-price-amount");
+    						.findElement("xpath","//span[@class='price-wrapper']//span")
+    						.getAttribute("data-price-final-amount--finalprice");
     				System.out.println(PLPprice);
     				System.out.println(productprice);
-    				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+    				String name = Common.findElement("xpath", "//span[@itemprop='name']").getText();
     				Common.assertionCheckwithReport(productprice.equals(PLPprice),
     						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
     						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
@@ -5997,7 +5997,7 @@ public void FUll_Payment(String dataSet) {
     				Common.clickElement("xpath", "//div[@data-option-label='" + productsize + "']");
     				}
     				Thread.sleep(4000);
-    				Common.clickElement("xpath", "//a[@class='action alert']");
+    				Common.clickElement("xpath", "//button[@title='Notify Me When Available']");
     				Sync.waitPageLoad(40);
     				Thread.sleep(5000);
     				String newsubcribe = Common.findElement("xpath", "//div[@class='a-message__container-inner']")
