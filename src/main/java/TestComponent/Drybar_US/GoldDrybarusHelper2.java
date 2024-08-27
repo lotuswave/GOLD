@@ -61,7 +61,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			Close_Geolocation();
-//			acceptPrivacy();
+			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -6673,19 +6673,21 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
 					System.out.println(title);
+					
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					String products=Common.getText("xpath", "//div[@class='text-sm']");
 					System.out.println(products);
+					products = products.replace(" Items", ""); // Remove Items
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
@@ -6729,18 +6731,19 @@ public void FUll_Payment(String dataSet) {
 						Common.clickElement("xpath", "//span[contains(text(),'"+bag+"')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
+					String products=Common.getText("xpath", "//div[@class='text-sm']");
 					System.out.println(title);
 					System.out.println(breadcrumbs);
 					System.out.println(products);
 					
+					products = products.replace(" Items", ""); // Remove Items
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
@@ -6788,16 +6791,21 @@ public void FUll_Payment(String dataSet) {
 						
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
+					Thread.sleep(4000);
+					String products=Common.getText("xpath", "//div[@class='text-sm']");
+					System.out.println(title);
+					System.out.println(breadcrumbs);
 					System.out.println(products);
+					products = products.replace(" Items", ""); // Remove Items
 					int Number = Integer.parseInt(products);
+					
 					int j=0;
 					if(Number>j)
 					{
@@ -6844,19 +6852,21 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
+					String products=Common.getText("xpath", "//div[@class='text-sm']");
 					System.out.println(title);
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					//String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
+					products = products.replace(" Items", ""); // Remove Items
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>=j)
@@ -6903,19 +6913,20 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
+					String products=Common.getText("xpath", "//div[@class='text-sm']");
 					System.out.println(title);
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
 					System.out.println(products);
+					products = products.replace(" Items", ""); // Remove Items
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
@@ -6949,7 +6960,7 @@ public void FUll_Payment(String dataSet) {
 		
 		public void header_New(String Dataset) {
 
-			String names = data.get(Dataset).get("New");
+			String names = data.get(Dataset).get("Howtoinspo");
 			String[] Links = names.split(",");
 			
 			String New=data.get(Dataset).get("headers");
@@ -6962,19 +6973,21 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
+					String products=Common.getText("xpath", "//div[@class='text-sm']");
 					System.out.println(title);
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					
 					System.out.println(products);
+					products = products.replace(" Items", ""); // Remove Items
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>j)
@@ -7021,13 +7034,13 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String title = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]").getText();
+					String breadcrumbs = Common.findElement("xpath", "(//span[contains(text(),'" + Links[i] + "')])[2]").getText();
 					System.out.println(title);
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
