@@ -7549,8 +7549,8 @@ public void FUll_Payment(String dataSet) {
 		    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    				}
 	    				else {
-	    				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
-	    				Common.clickElement("xpath", "//a[@title='My Favorites']");
+	    				Sync.waitElementPresent(30, "xpath", "//span[text()='Wish List']");
+	    				Common.clickElement("xpath", "//span[text()='Wish List']");
 	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") || Common.getPageTitle().equals("Wish List Sharing"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
