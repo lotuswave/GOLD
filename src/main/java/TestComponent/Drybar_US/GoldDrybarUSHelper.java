@@ -65,7 +65,7 @@ public class GoldDrybarUSHelper {
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Drybar")
-							|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar - Home page"),
+							|| Common.getPageTitle().contains("Drybar | Premium Hair Care Created for the Perfect Blowout") || Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar - Home page"),
 					"validating store logo", "System directs the user to the Homepage",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		}
@@ -112,7 +112,7 @@ public class GoldDrybarUSHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
@@ -444,9 +444,9 @@ public class GoldDrybarUSHelper {
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[normalize-space(text())='Sign In'] ");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -471,13 +471,13 @@ public class GoldDrybarUSHelper {
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
         Thread.sleep(3000);
-        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
+        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
             Thread.sleep(4000);
-            Sync.waitElementPresent("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
-            Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+            Sync.waitElementPresent("xpath", "//div[@id='ltkpopup-close-button']");
+            Common.clickElement("xpath", "//div[@id='ltkpopup-close-button']");
         }
         else {
 
@@ -4864,10 +4864,10 @@ Thread.sleep(5000);
 			
 				try {
 				
-				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
-				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
+				Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+				Common.clickElement("xpath", "//button[@id='customer-menu']");
+				Sync.waitElementPresent("xpath", "//a[normalize-space(text())='My Account']");
+				String MyId=Common.findElement("xpath","//a[normalize-space(text())='My Account']").getAttribute("id");
 				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -4876,19 +4876,19 @@ Thread.sleep(5000);
 				
 				System.out.println(MyAccount);
 				
-				Common.assertionCheckwithReport(MyAccount.equals("My Account"),
+				Common.assertionCheckwithReport(MyAccount.equals("Dashboard"),
     					"validating the order summary in the payment page",
     					"Order summary should be display in the payment page and all fields should display",
     					"Successfully Order summary is displayed in the payment page and fields are displayed",
     					"Failed to display the order summary and fileds under order summary");
 				
 				
-				Sync.waitElementPresent("xpath", "//a[text ()='Communication Preferences']");
-				Common.clickElement("xpath", "//a[text ()='Communication Preferences']");
+				Sync.waitElementPresent("xpath", "//span[text ()='Communication Preferences']");
+				Common.clickElement("xpath", "//span[text ()='Communication Preferences']");
 
-				String Communication = Common.getText("xpath", "//h1[text()='Communication Preferences']");
+				String Communication = Common.getText("xpath", "//h1//span[text()='Communication Preferences']");
 
-				String Storefront_Text = "Communication Preferences";
+				String Storefront_Text = "COMMUNICATION PREFERENCES";
 
 				Assert.assertEquals(Communication, Storefront_Text);
 				System.out.println(Communication);
