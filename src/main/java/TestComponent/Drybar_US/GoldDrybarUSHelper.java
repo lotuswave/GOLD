@@ -4896,24 +4896,42 @@ Thread.sleep(5000);
 				
 				
 				WebElement checkBox = Common.findElement("xpath", "//input[@id='subscription']");
-				WebElement Save = Common.findElement("xpath", "//span[text()='Save']");
+				WebElement Save = Common.findElement("xpath", "//button[@title='Save']");
                 
 				if(checkBox.isSelected())
 				{
 					
 					System.out.println("Checkbox is Selected");
 					Common.clickElement("xpath", "//label[@for='subscription']");
+					Thread.sleep(4000);
 					Save.click();
+					Thread.sleep(4000);
+					String Message=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+					Common.assertionCheckwithReport(Message.equals("We have removed your newsletter subscription."),
+	    					"validating the newsletter subcription message",
+	    					"User should able to see the success message after clicking on the newsletter subcription",
+	    					"Successfully success message has been dispalyed after clicking on the save button",
+	    					"Failed to display the success message for the newsletter subcription");
+					
 				}
 				
 				else {
 					
 					System.out.println("Checkbox is Not-Selected");
 					Common.clickElement("xpath", "//label[@for='subscription']");	
+					Thread.sleep(4000);
+					
 				
 				}
 				
 				Save.click();
+				Thread.sleep(4000);
+				String Message=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				Common.assertionCheckwithReport(Message.equals("We have saved your newsletter subscription."),
+    					"validating the newsletter subcription message",
+    					"User should able to see the success message after clicking on the newsletter subcription",
+    					"Successfully success message has been dispalyed after clicking on the save button",
+    					"Failed to display the success message for the newsletter subcription");
 				
 		  
 		    		} catch (Exception | Error e) {
