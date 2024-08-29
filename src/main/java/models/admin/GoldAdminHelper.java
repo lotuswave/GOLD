@@ -57,14 +57,14 @@ public class GoldAdminHelper {
                 Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
             } 
             Sync.waitPageLoad(30);
-            Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
+      /*      Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
             Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']", data.get(dataSet).get("UserName"));
             Common.clickElement("id", "idSIButton9");
             Sync.waitPageLoad();
             Thread.sleep(3000);
             Sync.waitElementPresent(30, "name", "passwd");
             Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
-            Common.clickElement("id", "idSIButton9");
+            Common.clickElement("id", "idSIButton9");*/
             Sync.waitPageLoad();
 
  
@@ -73,8 +73,8 @@ public class GoldAdminHelper {
             if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
                 Common.javascriptclickElement("id", "KmsiCheckboxField");
             }
-            Sync.waitElementClickable("id", "idSIButton9");
-            Common.mouseOverClick("id", "idSIButton9");
+           // Sync.waitElementClickable("id", "idSIButton9");
+          //  Common.mouseOverClick("id", "idSIButton9");
             Sync.waitPageLoad();
             Thread.sleep(5000);
             Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
@@ -4581,7 +4581,7 @@ public class GoldAdminHelper {
 	public void Click_SearchProduct() {
 		try {
 
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			Common.clickElement("xpath", "//tr[contains(@class,'data-row')]");
 			Thread.sleep(5000);
 
@@ -4662,7 +4662,7 @@ public class GoldAdminHelper {
 
 	}
 
-	public void open_website(String Dataset) {
+	public void open_website(String Dataset)     {
 		String pagetitle = data.get(Dataset).get("pageTitle");
 		try {
 			Sync.waitPageLoad(60);
@@ -4677,14 +4677,13 @@ public class GoldAdminHelper {
 
 			Sync.waitPageLoad(40);
 
-			String uname = Common.getPageTitle();
-			Common.assertionCheckwithReport(uname.contains("Home Page ") || uname.contains("Hydro Flask") || uname.contains("OXO"),
+			String uname = Common.getPageTitle();Common.assertionCheckwithReport(uname.contains("Hydro Flask | Vacuum Insulated Stainless Steel Water Bottles"),
 					"Validating the User lands to the Hydroflask page",
 					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
 					"Failed to navigate to the hydroflask page");
 
 			ClosADD();
-			AcceptAll();
+			//AcceptAll();
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -4858,7 +4857,7 @@ public class GoldAdminHelper {
 			System.out.println(text);
 			Thread.sleep(2000);
 
-			Common.assertionCheckwithReport(text.contains("Cart Price Rules") || text.contains("QATEST product"), "To Validate the pagetitle is displayed",
+			Common.assertionCheckwithReport(text.contains("Catalog") || text.contains("QA Testing Product"), "To Validate the pagetitle is displayed",
 					"should display the pagetitle after clicking on the switchtofirsttab",
 					"pagetitle is displayed after a click on the switchtofirsttab", "Failed to display pagetitle");
 
@@ -7537,11 +7536,10 @@ public class GoldAdminHelper {
 			Common.clickElement("xpath", "//a[text()='Edit']");
 			Thread.sleep(6000);
 			
-			int pages = Common.findElements("xpath", "//h1[text()='QATEST product']").size();
+			int pages = Common.findElements("xpath", "//h1[text()='QA Testing Product']").size();
 			System.out.println(pages);
 			
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
@@ -7574,8 +7572,8 @@ ExtenantReportUtils.addFailedLog("To validate the page is deleted successfully a
 			Common.textBoxInput("xpath", "(//input[@name='product[special_price]'])",data.get(dataSet).get("SpecialPrice"));
 			Thread.sleep(3000);
 			
-			//Sync.waitElementPresent("xpath", "//span[text()='Add']");
-			//Common.clickElement("xpath", "//span[text()='Add']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add']");
+			Common.clickElement("xpath", "//span[text()='Add']");
 			
 			Thread.sleep(2000);
 			Common.dropdown("xpath", "(//select[@name='product[tier_price][0][cust_group]'])", 
@@ -7598,7 +7596,7 @@ ExtenantReportUtils.addFailedLog("To validate the page is deleted successfully a
 			System.out.println(pages);
 			
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
@@ -7624,7 +7622,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 			Sync.waitElementPresent("xpath", "(//span[@class='a-icon-text-btn__container'])[3]");
 			Common.clickElement("xpath", "(//span[@class='a-icon-text-btn__container'])[3]");
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@id='search'])",data.get(dataSet).get("search"));
+			Common.textBoxInput("xpath", "(//input[@id='autocomplete-0-input'])",data.get(dataSet).get("search"));
 			Thread.sleep(6000);
 			Common.clickElement("xpath", "(//span[@class='icon-header__search--desktop a-icon-text-btn__icon'])[3]");
 			int pages = Common.findElements("xpath", "//span[text()='QATest Product']").size();
@@ -7647,7 +7645,7 @@ ExtenantReportUtils.addFailedLog("To saearch product in the  the home page succe
 
 		try {
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//mark[text()='QATEST']");
+			Common.clickElement("xpath", "//mark[text()='QA']");
 			Thread.sleep(2000);
 			int pages = Common.findElements("xpath", "//p[text()='QATEST product']").size();
 			System.out.println(pages);
@@ -7683,6 +7681,8 @@ ExtenantReportUtils.addFailedLog("To saearch product in the  the home page succe
 			Sync.waitElementPresent("xpath", "//span[text()='Add']");
 			Common.clickElement("xpath", "//span[text()='Add']");
 			
+			Sync.waitElementPresent("xpath", "//span[text()='Advanced Pricing']");
+			Common.clickElement("xpath", "//span[text()='Advanced Pricing']");
 			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "(//input[@name='product[special_price]'])",data.get(dataSet).get("SpecialPrice"));
 			
@@ -7695,7 +7695,7 @@ ExtenantReportUtils.addFailedLog("To saearch product in the  the home page succe
 			
 			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "(//input[@name='product[tier_price][1][price_qty]'])",data.get(dataSet).get("Qty"));
-			
+			Common.textBoxInput("xpath", "(//input[@class='admin__control-text'])[24]",data.get(dataSet).get("Qty"));
 			Thread.sleep(5000);
 			//Common.textBoxInput("xpath", "(//select[@name='product[tier_price][1][value_type]'])",data.get(dataSet).get("QtyPrice1"));
 			
@@ -7713,7 +7713,7 @@ ExtenantReportUtils.addFailedLog("To saearch product in the  the home page succe
 			System.out.println(pages);
 			
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("QATEST product / Products / Inventory / Catalog / Magento Admin"),
+					Common.getPageTitle().contains("Products / Inventory / Catalog / Magento Admin"),
 					"To Validate the QATEST product is displayed",
 					"should display the QATEST product after clicking on the prouct",
 					"QATEST product is displayed after a click on the product", "Failed to display QATEST product");
