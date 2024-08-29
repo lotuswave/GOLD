@@ -23,13 +23,13 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 			Admin.click_Sales();
 			Admin.Click_Orders_Salesmenu();
 			Admin.Click_CreatNewOrders();
-			Admin.Select_ExistingUser_email("OXOWebsite");
-			Admin.Select_Store("OXOWebsite");
-			Admin.Add_product_SKU("OXOWebsite");
+			Admin.Select_ExistingUser_email("GRASUSWebsite");
+			Admin.Select_Store("GRASUSWebsite");
+			Admin.Add_product_SKU("GRASUSWebsite");
 			Admin.update_customprice("LowPriceOverride");
-			Admin.shippingaddress("OXOWebsite");
+			Admin.shippingaddress("GRASUSWebsite");
 			Admin.Select_Shipping_method();
-			Admin.Update_StoreCredit_ExistingCustomer("OXOWebsite");
+			Admin.Update_StoreCredit_ExistingCustomer("GRASUSWebsite");
 			Admin.Select_Storecredit_payment_method();
 			Admin.Submit_RetailOrder_Success();
 			 
@@ -41,7 +41,7 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

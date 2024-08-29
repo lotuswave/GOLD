@@ -53,18 +53,25 @@ public class GoldAdminHelper {
 
         try {
             if (Common.getCurrentURL().contains("preprod")) {
-                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
-            } 
+            	
+            }
+            	Thread.sleep(5000);
+            	
+            	Common.textBoxInput("xpath", "//input[@id='username']", data.get(dataSet).get("UserName"));
+            	
+            	Common.textBoxInput("xpath", "//input[@id='login']", data.get(dataSet).get("Password"));
+                Sync.waitElementClickable("xpath", "//button[@class='action-login action-primary']");
+                Common.javascriptclickElement("xpath", "//button[@class='action-login action-primary']");
+          
             Sync.waitPageLoad(30);
-      /*      Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
-            Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']", data.get(dataSet).get("UserName"));
+          /*  Sync.waitElementPresent("name", "loginfmt");
+            Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
             Common.clickElement("id", "idSIButton9");
             Sync.waitPageLoad();
             Thread.sleep(3000);
             Sync.waitElementPresent(30, "name", "passwd");
             Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
-            Common.clickElement("id", "idSIButton9");*/
+            Common.clickElement("id", "idSIButton9");
             Sync.waitPageLoad();
 
  
@@ -72,9 +79,8 @@ public class GoldAdminHelper {
             Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
             if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
                 Common.javascriptclickElement("id", "KmsiCheckboxField");
-            }
-           // Sync.waitElementClickable("id", "idSIButton9");
-          //  Common.mouseOverClick("id", "idSIButton9");
+            }*/
+            
             Sync.waitPageLoad();
             Thread.sleep(5000);
             Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
@@ -7105,12 +7111,13 @@ public class GoldAdminHelper {
 
 	public void SelectCustomer_Edit(String dataset) {
 		String email=data.get(dataset).get("Email");
-		String storeview = data.get(dataset).get("Store");
-		String website = data.get(dataset).get("Website");
+		String storeview = data.get(dataset).get("OXOStore");
+		String website = data.get(dataset).get("OXOWebsite");
 		try {
-			
-			Thread.sleep(2000);
+			Sync.waitPageLoad();
+			Thread.sleep(10000);
 			Sync.waitElementPresent("xpath", "(//div[@class='data-grid-filters-action-wrap'])[1]");
+			Thread.sleep(5000);
 			Common.clickElement("xpath", "(//div[@class='data-grid-filters-action-wrap'])[1]");
 			Common.javascriptclickElement("xpath", "(//button[@class='action-tertiary action-clear'])[1]");
 			Common.scrollIntoView("xpath", "//input[@name='email']");
@@ -7160,7 +7167,6 @@ public class GoldAdminHelper {
 
 		}
 	}
-
 
 	public void Edit_Customer_StoreCredit(String dataset) {
 
@@ -7430,12 +7436,12 @@ public class GoldAdminHelper {
 			Thread.sleep(2000);
 
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//input[@id='s_method_tablerate_bestway']");
-			Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
+			Sync.waitElementPresent("xpath", "(//li[@class='admin__field-option']//input[@name='order[shipping_method]'])[1]");
+			Common.clickElement("xpath", "(//li[@class='admin__field-option']//input[@name='order[shipping_method]'])[1]");
 
 			Sync.waitPageLoad();
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			int selectedshippingmethods = Common.findElements("xpath", "//dd[contains(text(),'Ground')]").size();
+			int selectedshippingmethods = Common.findElements("xpath", "(//dd[@class='admin__order-shipment-methods-options'])[2]").size();
 			System.out.println(selectedshippingmethods);
 			int changeshippingmethods = Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
 			System.out.println(changeshippingmethods);
@@ -7456,6 +7462,7 @@ public class GoldAdminHelper {
 		}
 
 	}
+
 
 	public void Select_Storecredit_payment_method() {
 		// TODO Auto-generated method stub
@@ -7761,17 +7768,19 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 	public void Select_Store(String dataSet) {
 		// TODO Auto-generated method stub
 
-		String Website = data.get(dataSet).get("Store");
+		String Website = data.get(dataSet).get("OXOStore");
 
 		try {
 			Common.findElement("xpath", "//label[text()='" + Website + "']");
 			Common.clickElement("xpath", "//label[text()='" + Website + "']");
 
-			Thread.sleep(3000);
+			
 
 			Sync.waitPageLoad();
-
+			Thread.sleep(10000);
 			String page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
+			System.out.println(page);
+			Thread.sleep(3000);
 
 			Common.assertionCheckwithReport(page.contains(Website),
 					"To Validate the create new order page is displayed",
@@ -7793,12 +7802,13 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 		// TODO Auto-generated method stub
 		try {
 
-			String[] SKUnumber = data.get(dataSet).get("SKUNumber").split(",");
+			String[] SKUnumber = data.get(dataSet).get("OXOSKU").split(",");
 			String[] Quantity = data.get(dataSet).get("Quantity").split(",");
 
 			for (int i = 0; i < SKUnumber.length; i++) {
 				System.out.println(SKUnumber[i]);
-
+				Sync.waitPageLoad();
+				Thread.sleep(10000);
 				Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
 				Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
 				Thread.sleep(2000);
@@ -7806,11 +7816,12 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 				Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']", SKUnumber[i]);
 
 				Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']", Quantity[i]);
-
+				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
+				Common.mouseOver("xpath", "//button[@title='Add to Order']");
 				Common.clickElement("xpath", "//button[@title='Add to Order']");
-               Common.implicitWait();
-				Sync.waitElementVisible("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]");
+				Thread.sleep(2000);
+				//Sync.waitElementVisible("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]");
 				String[] SKU = Common.findElement("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]").getText()
 						.split(" ");
 				System.out.println(SKU[1]);
@@ -7830,6 +7841,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 		}
 
 	}
+
 
 	public void shippingaddress(String dataSet) {
 		// TODO Auto-generated method stub
@@ -9375,22 +9387,24 @@ public void delet_existing_Coupon(String dataSet) {
 			
 		
 			for(int i=1;i<=customprices;i++) {
-				String newhighprice[] = data.get(dataSet).get("highprice").split(",");
-				Float New_Price = Float.valueOf(newhighprice[i-1]);	
+				String newhighprice = data.get(dataSet).get("highprice");
+				Thread.sleep(5000);
+				
+				Float New_Price = Float.valueOf(newhighprice);	
 			System.out.println(New_Price);
 			Common.clickElement("xpath", "(//input[contains(@id,'use_custom_price')])["+i+"]");
 			
 			Common.textBoxInput("xpath", "(//input[contains(@name,'custom_price')])["+i+"]",
-					newhighprice[i-1]);	
+					newhighprice);	
 			
 			Common.clickElement("xpath", "//span[text()='Update Items and Quantities']");
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 			Sync.waitElementVisible("xpath", "(//td[@class='col-price']/span)["+i+"]");
 			
 			updatedhighprice = Common.findElement("xpath", "(//td[@class='col-price']/span)["+i+"]").getText().replace("$", "");
 			Float updated_highprice = Float.valueOf(updatedhighprice);
 			System.out.println(updated_highprice);
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			Common.assertionCheckwithReport(updated_highprice.equals(New_Price), "To Validate the custom price override with High Value",
 					"The original price should be Override to higher value", "The original price is Overrided to higher value",
 					"Failed to override the custom price");
@@ -9754,12 +9768,14 @@ public void delet_existing_Coupon(String dataSet) {
 			try {
 				
 				Common.switchToFirstTab();
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
 				//Common.scrollIntoView("xpath", "//span[text()='Click to change shipping method']");
 				Sync.waitElementVisible("xpath", "//span[text()='Click to change shipping method']");
-				Common.doubleClick("xpath", "//span[text()='Click to change shipping method']");
-				Thread.sleep(3000);
-				Sync.waitElementVisible("xpath", "//label[@for='s_method_tablerate_bestway']//span[text()='$0.00']");
-				Common.doubleClick("xpath", "//label[@for='s_method_tablerate_bestway']//span[text()='$0.00']");
+				Common.clickElement("xpath", "//span[text()='Click to change shipping method']");
+				Thread.sleep(5000);
+				Sync.waitElementVisible("xpath", "(//li//label[@class='admin__field-label'])[1]");
+				Common.clickElement("xpath", "(//li//label[@class='admin__field-label'])[1]");
 				Thread.sleep(3000);
 				Sync.waitElementVisible("xpath", "//label[text()='Use Store Credit (']");
 				int storecrdeit = Common.findElements("xpath", "//label[text()='Use Store Credit (']").size();
@@ -9781,13 +9797,12 @@ public void delet_existing_Coupon(String dataSet) {
 			
 			
 		}
-
 		public void Select_ExistingUser_email(String dataSet) {
 			// TODO Auto-generated method stub
 
-			String storeview = data.get(dataSet).get("Store");
+			String storeview = data.get(dataSet).get("OXOStore");
 			String email = data.get(dataSet).get("Email");
-			String website = data.get(dataSet).get("Website");
+			String website = data.get(dataSet).get("OXOWebsite");
 			try {
 				Common.textBoxInput("xpath", "//input[@name='email']", email);
 				//Thread.sleep(5000);
@@ -9828,7 +9843,6 @@ public void delet_existing_Coupon(String dataSet) {
 
 		}
 		
-		
 		public String update_customprice_withhighprice(String dataSet) throws Exception {
 			String updatedprice = "";
 			try {
@@ -9853,15 +9867,21 @@ public void delet_existing_Coupon(String dataSet) {
 				 * "(//input[@class='input-text item-price admin__control-text'])[3]",
 				 * data.get(dataSet).get("highprice"));
 				 */
-				Thread.sleep(3000);
+				
 				Common.clickElement("xpath", "//span[contains(text(),'Update Items and Quantities')]");
-				Thread.sleep(3000);
-				updatedprice = Common.getText("xpath", "(//span[contains(text(),'$50.99')])[1]").replace("$", "");
-				Float updated_price = Float.valueOf(updatedprice);
-				System.out.println(updated_price);
-				Thread.sleep(3000);
+				Thread.sleep(8000);
+				 updatedprice = Common.findElement("xpath", "(//td[@class='col-price']/span)[1]").getText().replace("$", "");
+				 
+				//updatedhighprice = Common.findElement("xpath", "(//td[@class='col-price']/span)["+i+"]").getText().replace("$", "");
+				System.out.println(updatedprice);
+				
+				//Float updated_price = Float.valueOf(updatedprice);
+				
+				
+			//	System.out.println(updated_price);
+				Thread.sleep(5000);
 
-				Common.assertionCheckwithReport(updatedprice.contains("50.99"), "To Validate the custom price override with High Value",
+				Common.assertionCheckwithReport(updatedprice.contains("119.00"), "To Validate the custom price override with High Value",
 						"should able to update the Custom price ", "Successfully price updated",
 						"passed to update custom price");
 
@@ -9875,6 +9895,7 @@ public void delet_existing_Coupon(String dataSet) {
 			return updatedprice;
 
 		}
+
 
 		public void page_Cache(String Dataset) {
 			// TODO Auto-generated method stub
