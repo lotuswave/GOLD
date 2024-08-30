@@ -41,7 +41,7 @@ public class Test_DGLD_Admin_ST_020_New_Order_Placement {
     @AfterTest
     public void clearBrowser()
     {
-      Common.closeAll();
+//      Common.closeAll();
 
     }
 
