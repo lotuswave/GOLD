@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US Smoke Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+        <test name="TEST_DGLD_DB_US_ST_001_Create_Account" testid="DQA-3587" priority="P1" description="This test case validate the create account functionality.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_001_Create_Account" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation" testid="DTG-3577" priority="P1" description="This Test case is to validate the cart page-related functionality.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_on_Checkout_Page" testid="DQA-3660" priority="P1" description="This test case is to Verify the Checkout functionality with applying Gift Card in payment page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page" testid="DQA-3659" priority="P1" description="This Test case is to verify Drybar Reset password from shipping page functionality.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser" testid="DQA-3612" priority="P1" description="This testcase is to Validate the Homepage Header options functionality.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method" testid="DQA-3621" priority="P1" description="This test case is to verify the Guest user checkout functionality with Expedited shipping method.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_035_Validate_PLP_page" testid="DQA-3611" priority="P1" description="This test case is to validate the functionality of different types of filters, the collection of products, and the display of 'Add to Cart,' color swatches, 'Add to Compare,' and 'Add to Wishlist' options.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_035_Validate_PLP_page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_038_Configurable_Product_Checkout" testid="DQA-3673" priority="P1" description="This test case is to verify the functionality of the configurable product in PDP for Checkout.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_038_Configurable_Product_Checkout" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Standard_shipping" testid="DQA-3687" priority="P1" description="This test case is to validate After Pay checkout payment with a Standard shipping cost for a Registered user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Standard_shipping" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment" testid="DQA-3688" priority="P1" description="This test case is to verify Guest user checkout with Simple, Configurable, Non Aerosol with multiple Qty products with different billing address and standard shipping with klarna payment method.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card" testid="DQA-3697" priority="P1" description="This test case is to validate the checkout functionality using Gift Code Full Redeem for Register user with discount applied in shipping page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card_with_Express_Shipping" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page" testid="DQA-3759" priority="P1" description="This test case is to validate the login functionality by entering data in the required fields on the Shipping Page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page" testid="DQA-3760" priority="P1" description="This test case is to validate the Search functionality, both with valid and invalid inputs, including search suggestions and the display of the search results page, across all pages..">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DQA-3768" priority="P1" description="This test case is used to verify that all the left rail navigations displayed on the 'My Account' page correctly navigate to their respective pages.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation" testid="DQA-3770" priority="P1" description="This test case is to Validate the Edit, delete, and update product functionality on Mini Cart.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page" testid="DQA-3640" priority="P1" description="This test case is to verify the functionality of PDP page, verifying the videos and updating the quantity of products.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_011_Footer_Link_Validation" testid="DQA-3632" priority="P1" description="This test case is to Verify Footer content links functionality.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_011_Footer_Link_Validation" />
+		</classes>
+	 </test> 
+	 
+	 
+	 
+          
+</suite>  

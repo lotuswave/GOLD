@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+           <test name="TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC" testid="DQA-3783" priority="P1" description="This test case is to validate the Checkout functionality with Aerosol and Non Aerosol products with PO Box Address using Ground shipping method CC Master Card Payment method.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_After_pay_payment_method_Express_shipping" testid="DQA-3781" priority="P1" description="This test case is use to verify with register user checkout with After pay payment method with Express shipping.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_After_pay_payment_method_Express_shipping" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_165__Guest_User_Create_Account_from_OrderConfirmation_Page" testid="DQA-3774" priority="P1" description="This test case is to validate place an order by using the guest user then create account from the order Confirmation page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_165__Guest_User_Create_Account_from_OrderConfirmation_Page" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_164_Account_Registration_Create_Account_With_Cart" testid="DQA-3772" priority="P1" description="This test case is to validate create account after product is Added to Cart.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_164_Account_Registration_Create_Account_With_Cart" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_162_Miscellaneous_Pages" testid="DQA-3772" priority="P1" description="This testcase to validate the Miscellaneous pages.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_162_Miscellaneous_Pages" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_155_Checkout_as_Registereduser_with_simple_Product_GC_Partial_CC" testid="DQA-3763" priority="P1" description="This test case is to validate the Register user checkout with a Gift Card code partial redemption and use any CC payment.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_155_Checkout_as_Registereduser_with_simple_Product_GC_Partial_CC" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_154_Checkout_Placeorder_Guest_user_Checkout_with_Simple_Configurable_Giftcode_Full_redeem_with_Discount" testid="DQA-3761" priority="P1" description="This test case is to validate the Checkout with multiple products with the full payment by using a gift card code.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_154_Checkout_Placeorder_Guest_user_Checkout_with_Simple_Configurable_Giftcode_Full_redeem_with_Discount" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_148_Validate_RegisterUser_Checkout_Aerosol_Product_VisaCC_with_PO_Box" testid="DQA-3756" priority="P1" description="This test case is to validate Register user Checkout functionality with PO Box.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_148_Validate_RegisterUser_Checkout_Aerosol_Product_VisaCC_with_PO_Box" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_147_Validation_Shipping_Address_form_for_GuestUser" testid="DQA-3755" priority="P1" description="This test case is to validate the shipping Address form for Guest user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_147_Validation_Shipping_Address_form_for_GuestUser" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_144_Add_to_Cart_from_Sticky_Cart_in_PDP_Page" testid="DQA-3752" priority="P1" description="This test case is to validate ADD TO CART from the sticky cart on the PDP page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_144_Add_to_Cart_from_Sticky_Cart_in_PDP_Page" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_138_Checkout_RegisterUserCC_configurable_Simple" testid="DQA-3747" priority="P1" description="This test case is to validate the registered user checkout with a simple and configurable product, select any shipping method, and use any CC payment method.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_138_Checkout_RegisterUserCC_configurable_Simple" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_134_Order_with_2_items_with_10_qty_each_one_the_order_total_should_be_cover_with_a_gift_card_redemption" testid="DQA-3628" priority="P1" description="This test case is used to validate the checkout with with 2 items with 10 qty each one, the order total should be cover with a gift card redemption.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_134_Order_with_2_items_with_10_qty_each_one_the_order_total_should_be_cover_with_a_gift_card_redemption" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_131_Validate_Share_Whishlist_Funtionality" testid="DQA-3752" priority="P1" description="This test case is to Validate the registered user Add the products to My Favorites and Share the Wishlist with another user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_131_Validate_Share_Whishlist_Funtionality" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_123_Track_My_Order_For_Guest_User" testid="DQA-3731" priority="P1" description="This test case is to validate track order for guest user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_123_Track_My_Order_For_Guest_User" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_122_Guestuser_checkout_with_3Ds_Authentication_Payment" testid="DQA-3730" priority="P1" description="This test case is to verify the flow of placing order functionality with 3D Secure Payment method as Guest User.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_122_Guestuser_checkout_with_3Ds_Authentication_Payment" />
+		</classes>
+	 </test>
+	 
+	  <test name="TEST_DGLD_DB_US_ST_121_Registeruser_checkout_with_3Ds_Authentication_Payment" testid="DQA-3729" priority="P1" description="This test case is to verify the flow of placing order functionality with 3D Secure Payment method as Register User.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_121_Registeruser_checkout_with_3Ds_Authentication_Payment" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_120_Track_My_Order_For_Register_User" testid="DQA-3728" priority="P1" description="This test case is to validate the Track My Order Functionality for the Register User.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_120_Track_My_Order_For_Register_User" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_114_Guest_user_checkout_Non_Aerosol_PO_Box_USPS_Ground_Giftcard_payment_Full" testid="DQA-3692" priority="P1" description="This test case is use to verify the Guest user checkout with Non Aerosol products with PO Box Address using Ground shipping method with Gift Card.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_114_Guest_user_checkout_Non_Aerosol_PO_Box_USPS_Ground_Giftcard_payment_Full" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_111_Registeruser_multiple_item_Discount_Klarna_Checkout_with_Expedited_shipping" testid="DQA-3689" priority="P1" description="This test case is to validate the process for a registered user checkout selecting Expedited shipping method with discount code using Klarna saved payment.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_111_Registeruser_multiple_item_Discount_Klarna_Checkout_with_Expedited_shipping" />
+		</classes>
+	 </test>
+	 
+	  <test name="TEST_DGLD_DB_US_ST_098_Guest_user_Checkout_Klarna_Checkout_Payment" testid="DQA-3675" priority="P1" description="This test case is used to validate the checkout functionality using Klarna payment for Guest user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_098_Guest_user_Checkout_Klarna_Checkout_Payment" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_046_RegisterUser_Checkout_AmexCC_Tax_Multiple_Products_with_same_Billing_and_shipping" testid="DQA-3671" priority="P1" description="This test case is to validate the Register user checkout process with multiple products and Tax using the AmexCC payment method with the Same Billing and Shipping address.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_046_RegisterUser_Checkout_AmexCC_Tax_Multiple_Products_with_same_Billing_and_shipping" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_047_Validate_GuestUser_Checkout_DiscoverCC_Tax_Multiple_Products_with_same_Billing_and_shipping" testid="DQA-3670" priority="P1" description="This test case is to validate the Guest user checkout process with multiple products and Tax using the DiscoverCC payment method with the Same Billing and Shipping address.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_047_Validate_GuestUser_Checkout_DiscoverCC_Tax_Multiple_Products_with_same_Billing_and_shipping" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_065_Registeruser_checkout_Aerosol_Non_Aerosol_with_invalid_3Ds_Authentication_Payment" testid="DQA-3669" priority="P1" description="This test case is to verify the flow of placing order functionality with 3D Secure Payment method as Register User with invalid details.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_065_Registeruser_checkout_Aerosol_Non_Aerosol_with_invalid_3Ds_Authentication_Payment" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_048_Validate_Registeruser_Checkout_VisaCC_NoTax_Single_Product_with_Different_Billing_and_Shipping" testid="DQA-3668" priority="P1" description="This test case is to validate the Register user checkout process with a single product and NoTax using VisaCC payment method with Different Billing and Shipping addresses.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_048_Validate_Registeruser_Checkout_VisaCC_NoTax_Single_Product_with_Different_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_064_Guestuser_checkout_Aerosol_Non_Aerosol_with_invalid_3Ds_Authentication_Payment" testid="DQA-3667" priority="P1" description="This test case is to verify the flow of placing order functionality with 3D Secure Payment method as Guest User with invalid details.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_064_Guestuser_checkout_Aerosol_Non_Aerosol_with_invalid_3Ds_Authentication_Payment" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_067_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle_products_GC_partialreedem_CC" testid="DQA-3665" priority="P1" description="This test case is to Validate the checkout functionality for Register users with simple and configurable product grouped prodcut and bundle product .">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_067_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle_products_GC_partialreedem_CC" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_045_Validate_GuestUser_Checkout_MastercardCC_Tax_with_Multiple_Products_Freight_Shipping_with_Different_Billing_and_Shipping" testid="DQA-3664" priority="P1" description="This test case is to validate the Guest user checkout process with Multiple products and Tax using MasterCC payment method with different shipping methods for Different Billing and Shipping addresses.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_045_Validate_GuestUser_Checkout_MastercardCC_Tax_with_Multiple_Products_Freight_Shipping_with_Different_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_037_Guest_User_Checkout_with_Product_Search_Results_Using_Visa_Credit_Card" testid="DQA-3663" priority="P1" description="This test case is to Verify the Guest User Paymetric Payment Method Checkout functionality in Drybar with Product Search Results using Visa Credit card.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_037_Guest_User_Checkout_with_Product_Search_Results_Using_Visa_Credit_Card" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_036_Registered_User_Checkout_with_Product_Search_Results_using_Visa_Credit_Card" testid="DQA-3662" priority="P1" description="This test case is used to validate the Registered User Pay metric Payment Method Checkout functionality in Drybar with Product Search Results using Visa Credit card.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_036_Registered_User_Checkout_with_Product_Search_Results_using_Visa_Credit_Card" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_086_Guestuser_Checkout_VisaCC_Two_Bundles_include_same_SKUs_in_each_Bundle" testid="DQA-3661" priority="P1" description="This test case is to validate the Guest user Checkout process with VisaCC using Two Bundles (same or different) that include the same SKUs in each bundle.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_086_Guestuser_Checkout_VisaCC_Two_Bundles_include_same_SKUs_in_each_Bundle" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping" testid="DQA-3657" priority="P1" description="This test case is to validate the Guest user checkout process with multiple products and NoTax using VisaCC pay metric payment method with the Same Billing and Shipping address.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_052_Validate_GuestUser_Checkout_VisaCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscription" testid="DQA-3656" priority="P1" description="This test case is to Validate of Back in stock Subscription in PDP.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscription" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User" testid="DQA-3652" priority="P1" description="This test case is to Validate the Homepage Header options functionality in the Drybar website for Registered user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_068_Validate_RegisterUser_Checkout_Aerosol_Product_with_POBox_1_ShippingOption_USPSGround" testid="DQA-3651" priority="P1" description="This test case is used to validate the Register user checkout process for Aerosol products using the Visa CC payment method with PO Box Address with one shipping option USPS Ground.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_068_Validate_RegisterUser_Checkout_Aerosol_Product_with_POBox_1_ShippingOption_USPSGround" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_075_Validate_GuestUser_Checkout_Aerosol_Product_and_Non_Aerosol_Product_with_POBox_Alaska_No_Shipping_Methods" testid="DQA-3649" priority="P1" description="This test case is used to validate the Guestuser checkout process for Aerosol products and Non Aerosol Products using PO Box Address with No shipping methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_075_Validate_GuestUser_Checkout_Aerosol_Product_and_Non_Aerosol_Product_with_POBox_Alaska_No_Shipping_Methods" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_076_Validate_RegisterUser_Chechout_Aerosol_Products_and_Non_Aerosol_Products_with_POBox_Hawaii_with_No_Shipping_Methods" testid="DQA-3647" priority="P1" description="This test case is to verify the Register user Checkout for Aerosol products and Non-Aerosol Products using PO Box Address with No shipping Methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_076_Validate_RegisterUser_Chechout_Aerosol_Products_and_Non_Aerosol_Products_with_POBox_Hawaii_with_No_Shipping_Methods" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_028_Travel_Size_checkout_with_Master_Creditcard" testid="DQA-3646" priority="P1" description="This test case is to verify the Checkout with Travel size product using Guest user and Pay metric Payment Method of Mastercard CC.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_028_Travel_Size_checkout_with_Master_Creditcard" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_074_Validate_RegisterUser_Checkout_Aerosol_Products_with_NonAerosol_Products_and_POBox_1_ShippingOption_USPSGround" testid="DQA-3645" priority="P1" description="This test case is to verify the Register user checkout process for Aerosol products and non-aerosol products using Visa CC payment method with PO Box Address with one shipping option USPS Ground.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_074_Validate_RegisterUser_Checkout_Aerosol_Products_with_NonAerosol_Products_and_POBox_1_ShippingOption_USPSGround" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_013_Communication_Preferences_Subscription" testid="DQA-3643" priority="P1" description="This Test case is to verify the Communication preferences subscription functionality.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_013_Communication_Preferences_Subscription" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_080_Validate_GuestUser_Checkout_Non_Aerosol_Product_with_PO_Box_Alaska_No_Shipping_Methods" testid="DQA-3642" priority="P1" description="This test case is to verify the Guest user checkout process for non-aerosol product using PO Box Address and Alaska with No shipping methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_080_Validate_GuestUser_Checkout_Non_Aerosol_Product_with_PO_Box_Alaska_No_Shipping_Methods" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_081_Validate_RegisterUser_Checkout_Non_Aerosol_Product_with_POBox_Hawaii_No_Shipping_Methods" testid="DQA-3641" priority="P1" description="This test case is to verify the Register user checkout process for non-aerosol product using PO Box Address and Hawaii with No shipping methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_081_Validate_RegisterUser_Checkout_Non_Aerosol_Product_with_POBox_Hawaii_No_Shipping_Methods" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_079_Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Hawaii_no_Shipping_Methods" testid="DQA-3639" priority="P1" description="This test case is used to validate the Registeruser checkout process for Aerosol products and Non Aerosol Products using with Non PO Box Address and Hawaii with No shipping methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_079_Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Hawaii_no_Shipping_Methods" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_070_Validate_RegisterUser_Aerosol_Products_with_POBox_Hawaii_with_No_Shipping_Methods" testid="DQA-3637" priority="P1" description="This test case is used to validate the Register user Checkout for Aerosol products using Box Address with No shipping Methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_070_Validate_RegisterUser_Aerosol_Products_with_POBox_Hawaii_with_No_Shipping_Methods" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_069_Validate_GuestUser_Checkout_Aerosol_Products_with_POBox_Alaska_No_Shipping_Methods" testid="DQA-3635" priority="P1" description="This test case is to validate the Guest user checkout process for Aerosol products using PO Box Address with No shipping methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_069_Validate_GuestUser_Checkout_Aerosol_Products_with_POBox_Alaska_No_Shipping_Methods" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_078_Validate_GuestUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Alaska_no_Shipping_Methods" testid="DQA-3634" priority="P1" description="This test case is to validate the Guest user checkout process for Aerosol products and Non Aerosol Products using with Non PO Box Address and Alaska with No shipping methods.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_078_Validate_GuestUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Alaska_no_Shipping_Methods" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation" testid="DQA-3633" priority="P1" description="This Test case is to Validate Forgot Password functionality in Sign in page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_025_Article_links_validation" testid="DQA-3630" priority="P1" description="This test case is to validate Verification of Article links .">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_025_Article_links_validation" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_024_Order_ID_Verification" testid="DQA-3629" priority="P1" description="This test case is to validate the verification of order ID with My orders Order ID.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_024_Order_ID_Verification" />
+		</classes>
+	 </test>
+	 
+	 <test name="TEST_DGLD_DB_US_ST_022_Change_Email_and_password_of_the_Registered_User" testid="DQA-3627" priority="P1" description="This test case is used to verify the functionality of changing the Password and Email for the registered user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_022_Change_Email_and_password_of_the_Registered_User" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_082_Validate_RegisterUser_Checkout_NonAerosol_Products_with_Non_POBox_Hawaii_ShippingOption_UPSExpedited_UPSExpress" testid="DQA-3624" priority="P1" description="This test case is to verify Register user checkout process for Non Aerosol Products using the Non PO Box Address and Hawaii with  UPS2day and UPS Nextday shipping method of Drybar Website.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_082_Validate_RegisterUser_Checkout_NonAerosol_Products_with_Non_POBox_Hawaii_ShippingOption_UPSExpedited_UPSExpress" />
+		</classes>
+	 </test> 
+
+	 
+	    <test name="TEST_DGLD_DB_US_ST_049_Validate_GuestUser_Checkout_MastercardCC_NoTax_Single_Product_with_Same_Billing_and_Shipping" testid="DQA-3622" priority="P1" description="This test case is used to verify the Guest user checkout process with a Single product and NoTax State Address using the Master CC payment method with the Same Billing and Shipping address for Drybar.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_049_Validate_GuestUser_Checkout_MastercardCC_NoTax_Single_Product_with_Same_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_016_Registered_User_checkout_with_Discover_Credit_card" testid="DQA-3620" priority="P1" description="This test case is to verify the Registered User Checkout functionality using Paymetric Payment Method in Drybar website with Discover credit card.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_016_Registered_User_checkout_with_Discover_Credit_card" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_040_Guest_Checkout_VisaCC_Tax_with_same_Billing_and_Shipping" testid="DQA-3618" priority="P1" description="This test case is to validate the Guest User checkout process with a single product and tax using Visa CC with the same Billing and shipping address for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_040_Guest_Checkout_VisaCC_Tax_with_same_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_015_Registered_User_checkout_with_Master_Credit_card" testid="DQA-3617" priority="P1" description="This test case is to Validate the Registered User Pay metric Payment Method Checkout functionality with Master credit card for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_015_Registered_User_checkout_with_Master_Credit_card" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_042_Validate_GuestUser_Checkout_AmexCC_Tax_Single_Product_with_Diff_Billing_and_shipping_Address" testid="DQA-3616" priority="P1" description="This test case is to validate the Guest user checkout process with a single product and Tax using AmexCC pay metric payment method with Different Billing and Shipping addresses for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_042_Validate_GuestUser_Checkout_AmexCC_Tax_Single_Product_with_Diff_Billing_and_shipping_Address" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_018_Guest_user_checkout_with_Express_Shipping_method" testid="DQA-3613" priority="P1" description="This test case will verify the Guest user checkout functionality with Express shipping method for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_018_Guest_user_checkout_with_Express_Shipping_method" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_054_Validate_GuestUser_Checkout_AmexCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping" testid="DQA-3610" priority="P1" description="This test case is to validate the Guest user checkout process with Multiple products and No Tax using the AmexCC payment method with the same Billing and Shipping address for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_054_Validate_GuestUser_Checkout_AmexCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping" />
+		</classes>
+	 </test> 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_062_Validate_RegisterUser_Checkout_VisaCC_with_PO_Box" testid="DQA-3609" priority="P1" description="This test case is to validate Register user checkout process using Visa CC payment method with PO Box for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_062_Validate_RegisterUser_Checkout_VisaCC_with_PO_Box" />
+		</classes>
+	 </test> 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_055_Validate_RegisterUser_Checkout_DiscoverCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping" testid="DQA-3608" priority="P1" description="This test case is to validate the Register user checkout process with multiple products and NoTax using the Discover CC payment method with the Same Billing and Shipping address for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_055_Validate_RegisterUser_Checkout_DiscoverCC_NoTax_Multiple_Products_with_Same_Billing_and_shipping" />
+		</classes>
+	 </test> 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_063_Validate_GuestUser_Checkout_AmexCC_with_PO_Box" testid="DQA-3607" priority="P1" description="This test case is to validate the Guest user checkout process using the AmexCC payment method with PO Box address for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_063_Validate_GuestUser_Checkout_AmexCC_with_PO_Box" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_Discount_Promotion_Single_Product_with_Different_Billing_and_shipping" testid="DQA-3605" priority="P1" description="This test case is to validate the Register user checkout process with a Single product and Tax using the Master CC payment method with Discount/Promotion for Different Billing and Shipping addresses ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_057_Validate_RegisterUser_Checkout_MasterCC_Tax_Discount_Promotion_Single_Product_with_Different_Billing_and_shipping" />
+		</classes>
+	    </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_053_Validate_RegisterUser_Checkout_MasterCC_NoTax_Multiple_Products_with_Different_Billing_and_shipping" testid="DQA-3603" priority="P1" description="This test case is to validate the Register user checkout process with multiple products and No Tax using Master CC payment method with Different Billing and Shipping address">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_053_Validate_RegisterUser_Checkout_MasterCC_NoTax_Multiple_Products_with_Different_Billing_and_shipping" />
+		</classes>
+	 </test> 
+        
+	<test name="TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_DiscoverCC_Tax_with_Same_Billing_and_Shipping" testid="DQA-3601" priority="P1" description="This test case is to validate the Register user checkout process with  Discover CC with tax, Same Billing and Shipping addresses and verify the tax calculation in payment page ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_DiscoverCC_Tax_with_Same_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+          
+          <test name="TEST_DGLD_DB_US_ST_014_Registered_user_checkout_with_Amex_Credit_card" testid="DQA-3600" priority="P1" description="This test case is to validate the Register user checkout process with  Discover CC with tax, Same Billing and Shipping addresses and verify the tax calculation in payment page ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_014_Registered_user_checkout_with_Amex_Credit_card" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_005_Guest_user_Checkout_with_Invalid_Credit_card" testid="DQA-3597" priority="P1" description="This test case is to validate the Register user checkout process with  Discover CC with tax, Same Billing and Shipping addresses and verify the tax calculation in payment page ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_005_Guest_user_Checkout_with_Invalid_Credit_card" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_051_Validate_GuestUser_Checkout_DiscoverCC_NoTax_Single_Product_Freight_Shipping_with_Same_Billing_and_shipping" testid="DQA-3596" priority="P1" description="This test case is to validate the Register user checkout process with  Discover CC with tax, Same Billing and Shipping addresses and verify the tax calculation in payment page ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_051_Validate_GuestUser_Checkout_DiscoverCC_NoTax_Single_Product_Freight_Shipping_with_Same_Billing_and_shipping" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeem" testid="DQA-3594" priority="P1" description="This test case is to verify the Register user Checkout process with Master CC using Single Bundle product SKU1 and Regular Item with same SKU1 as an item from Bundle">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeem" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Simple_Configurable_AerosolBundle_Add_SameSKU_fromBundle_Discount_Giftcode_partialredeem" testid="DQA-3595" priority="P1" description="This test case is to verify the Register user Checkout process with Master CC using Single Bundle product SKU1 and Regular Item with same SKU1 as an item from Bundle">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Simple_Configurable_AerosolBundle_Add_SameSKU_fromBundle_Discount_Giftcode_partialredeem" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_083_Registeruser_Checkout_with_VisaCC_Single_Bundle_Product" testid="DQA-3593" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_083_Registeruser_Checkout_with_VisaCC_Single_Bundle_Product" />
+		</classes>
+	 </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_044_Validate_RegisterUser_Checkout_VisaCC_Tax_Multiple_product_Freight_Shipping_with_Same_Billing_and_Shipping" testid="DQA-3592" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_044_Validate_RegisterUser_Checkout_VisaCC_Tax_Multiple_product_Freight_Shipping_with_Same_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+	 
+	    <test name="TEST_DGLD_DB_US_ST_050_Validate_Registeruser_Checkout_AmexCC_NoTax_Single_Product_Freight_Shipping_with_Different_Billing_and_Shipping" testid="DQA-3591" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_050_Validate_Registeruser_Checkout_AmexCC_NoTax_Single_Product_Freight_Shipping_with_Different_Billing_and_Shipping" />
+		</classes>
+	    </test> 
+	 
+	 <test name="TEST_DGLD_DB_US_ST_056_Validate_GuestUser_Checkout_CC_withsimple_configurable_products_Discount_GCpartialredeem_with_Same_Billing_and_shipping" testid="DQA-3590" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_056_Validate_GuestUser_Checkout_CC_withsimple_configurable_products_Discount_GCpartialredeem_with_Same_Billing_and_shipping" />
+		</classes>
+	    </test>
+	    
+
+	    
+	    <test name="TEST_DGLD_DB_US_ST_059_Validate_RegisterUser_Checkout_DiscoverCC_Tax_Multiple_Products_Discount_Promotion_with_Different_Billing_and_shipping" testid="DQA-3588" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_059_Validate_RegisterUser_Checkout_DiscoverCC_Tax_Multiple_Products_Discount_Promotion_with_Different_Billing_and_shipping" />
+		</classes>
+	    </test>
+	    
+	    
+	    <test name="TEST_DGLD_DB_US_ST_002_Registered_User_Checkout_with_Visa_Credit_Card" testid="DQA-3586" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_002_Registered_User_Checkout_with_Visa_Credit_Card" />
+		</classes>
+	    </test>
+	    
+	    <test name="TEST_DGLD_DB_US_ST_071_Validate_GuestUser_Checkout_Aerosol_Products_with_Non_POBox_and_Alaska_no_Shipping_Methods" testid="DQA-3584" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_071_Validate_GuestUser_Checkout_Aerosol_Products_with_Non_POBox_and_Alaska_no_Shipping_Methods" />
+		</classes>
+	    </test>
+	    
+	    <test name="TEST_DGLD_DB_US_ST_006_Registered_Checkout_with_Invalid_Creditcard" testid="DQA-3581" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_006_Registered_Checkout_with_Invalid_Creditcard" />
+		</classes>
+	    </test>
+	    
+	    <test name="TEST_DGLD_DB_US_ST_072_Validate_RegisterUser_Checkout_Non_Aerosol_Products_with_Non_POBox_Alaska_ShippingOption_UPSExpedite_And_UPSExpress" testid="DQA-3580" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_072_Validate_RegisterUser_Checkout_Non_Aerosol_Products_with_Non_POBox_Alaska_ShippingOption_UPSExpedite_And_UPSExpress" />
+		</classes>
+	    </test>
+	    
+	    
+	     <test name="TEST_DGLD_DB_US_ST_174_Register_user_Checkout_With_Subscription_with_single_product_using_Visa_card" testid="DQA-4062" priority="P1" description="This test case is to verify the Register User Checkout process with Visa CC using Single Bundle Product ">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_174_Register_user_Checkout_With_Subscription_with_single_product_using_Visa_card" />
+		</classes>
+	    </test> 
+	    
+	    <test name="TEST_DGLD_DB_US_ST_175_Register_user_Checkout_With_simple_bundle_configurble_subcribtion_prodcut_using_CC" testid="DQA-4072" priority="P1" description="This test case is used to verify the Register_user_Checkout_With_Subscription_with_simple_bundle_product_using_CC">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_175_Register_user_Checkout_With_simple_bundle_configurble_subcribtion_prodcut_using_CC" />
+		</classes>
+	 </test> 
+	
+	 <test name="TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription" testid="DQA-4081" priority="P1" description="This test case is to validate out of stock product subcription as a guest user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_117_Checkout_with_PP_as_Guestuser_with_Multiple_Products_GC_Partial" testid="DQA-4092" priority="P1" description="This test case is used to verify the functionality of the SMS opt-in checkbox and communication preferences in the Drybar account address book.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_117_Checkout_with_PP_as_Guestuser_with_Multiple_Products_GC_Partial" />
+		</classes>
+	 </test> 
+	
+	 <test name="TEST_DGLD_DB_US_ST_178_Change_Address_In_AddressBook" testid="DQA-4094" priority="P1" description="This test case aims to verify that a registered user can successfully navigate to the My Account Dashboard and update their address in the Address Book section.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_178_Change_Address_In_AddressBook" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_179_Register_User_Multiple_Items_QTY_checkout_AddGCFulRedeem_Cancel_Applied_GC_Verify_PaymentMethods_Place_Order_with_CC_Verify_Order_details_in_MY_OrdersPage" testid="DQA-3658" priority="P1" description="This test case aims to verify the checkout functionality for registered users with multiple items and quantities in the cart, along with adding a gift card (fully redeemed) and canceling the applied gift card. The validation includes checking various payment methods, proceeding to place an order using a credit card, and confirming order details on the 'My Orders' page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_179_Register_User_Multiple_Items_QTY_checkout_AddGCFulRedeem_Cancel_Applied_GC_Verify_PaymentMethods_Place_Order_with_CC_Verify_Order_details_in_MY_OrdersPage" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_163_WebPageLinkValidation" testid="DQA-3773" priority="P1" description="This test case is to validate the page link validation for all products navigate to the respective page">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_163_WebPageLinkValidation" />
+		</classes>
+	 </test> 
+	 
+	
+	 
+	  <test name="TEST_DGLD_DB_US_ST_160_Footer_Newsletter_Subcription" testid="DQA-3769" priority="P1" description="This test case is to verify the user newsletter subscription Signup on the Footer section.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_160_Footer_Newsletter_Subcription" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_149_Validation_Shipping_Address_form_for_registerUser" testid="DQA-3758" priority="P1" description="This test case is to validate the shipping address details in the required field form as a Register user.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_149_Validation_Shipping_Address_form_for_registerUser" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_143_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products" testid="DQA-3751" priority="P1" description="Register user, Products are added to the Wish list from the PLP page, and Check out from the Shopping Cart page with Your favorite products.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_143_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_142_Write_a_Review_and_ask_a_question" testid="DQA-3750" priority="P1" description="This test case is to validate the Write a Review and Ask a question on the PDP page.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_142_Write_a_Review_and_ask_a_question" />
+		</classes>
+	 </test> -->
+	 
+	 <test name="TEST_DGLD_DB_US_ST_140_RegisterUser_Products_are_added_to_the_WishList_from_the_PDP_page_and_CheckOut_from_the_ShoppingCart_page_with_Your_Favorites_Products" testid="DQA-3748" priority="P1" description="Register user Products are added to the wish list from the PDP page and Check out from the Shopping Cart page with Your Favorites Products">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_140_RegisterUser_Products_are_added_to_the_WishList_from_the_PDP_page_and_CheckOut_from_the_ShoppingCart_page_with_Your_Favorites_Products" />
+		</classes>
+	 </test> 
+        
+	  <test name="TEST_DGLD_DB_US_ST_137_Stored_Payment_For_Register_User" testid="DQA-3746" priority="P1" description="This test case is to validate the place order with the registered user. Navigate to the My Account page click on the stored payment methods and verify the Stored Payments">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_137_Stored_Payment_For_Register_User" />
+		</classes>
+	 </test> 
+	
+	 <test name="TEST_DGLD_DB_US_ST_061_Validate_RegisterUser_Checkout_AmexCC_NoTax_Employee_Discount_with_Different_Billing_and_shipping" testid="DQA-3672" priority="P1" description="This test case is to validate the Register user checkout process with Employee Discount and No Tax using the AmexCC payment method for Different billing and Shipping addresses in Drybar GOLD">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_061_Validate_RegisterUser_Checkout_AmexCC_NoTax_Employee_Discount_with_Different_Billing_and_shipping" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_060_Validate_RegisterUser_Checkout_VisaCC_Tax_Employee_Discount_with_Same_Billing_and_Shipping" testid="DQA-3648" priority="P1" description="This test is to verify the Register user checkout process with Employee Discount and Tax using Visa CC payment method for the same Billing and Shipping address for Drybar GOLD">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_060_Validate_RegisterUser_Checkout_VisaCC_Tax_Employee_Discount_with_Same_Billing_and_Shipping" />
+		</classes>
+	 </test> 
+          
+           <test name="TEST_DGLD_DB_US_ST_094_My_Orders_Bundle_product_Re_order_Functionality" testid="DQA-3644" priority="P1" description="This Test case is To Verify the Register user Checkout functionality with Visa CC using Bundle products Re-order Functionality for Drybar GOLD">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_094_My_Orders_Bundle_product_Re_order_Functionality" />
+		</classes>
+	 </test> 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_077_Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_1_ShippingOption_UPSGround" testid="DQA-3636" priority="P1" description="This test case is to validate the Register user checkout process for Aerosol products and Non Aerosol Products using the Non PO Box Address with one shipping option Standard Shipping for Drybar GOLD">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_077_Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_1_ShippingOption_UPSGround" />
+		</classes>
+	 </test> 
+	 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_019_Product_Review" testid="DQA-3625" priority="P1" description="This test case is to verify the product Review functionality of a product in Product details page">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_019_Product_Review" />
+		</classes>
+	 </test> 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_039_GuestUser_Add_product_from_pdp_to_wishlist_signin_and_checkout_from_wishlist_page" testid="DQA-3619" priority="P1" description="This test case is to validate the functionality for Adding a product to cart from PDP to wishlist and sign in and place order for Drybar Gold.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_039_GuestUser_Add_product_from_pdp_to_wishlist_signin_and_checkout_from_wishlist_page" />
+		</classes>
+	 </test> 
+	 
+	  <test name=".TEST_DGLD_DB_US_ST_087_Validation_of_Videospage" testid="DQA-3585" priority="P1" description="This test case is to verify the Videos pages in Drybar GOLD">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_087_Validation_of_Videospage" />
+		</classes>
+	 </test> 
+	 
+	   <test name="TEST_DGLD_DB_US_ST_124_Newsletter_Subcription_and_Un_Subcription_from_The_My_Account_Page" testid="DQA-3732" priority="P1" description="This test case is to validate newsletter Subscription and Un Subscription by entering valid details in the required fields on the 'My Account' page">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_124_Newsletter_Subcription_and_Un_Subcription_from_The_My_Account_Page" />
+		</classes>
+	 </test> 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_191_GuestUser_Simple_product_Checkout_with_GiftCode_FullRedeem" testid="DQA-4110" priority="P1" description="This test case is to verify the checkout functionality for a guest user purchasing a single simple product and fully redeemption with a gift code">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_191_GuestUser_Simple_product_Checkout_with_GiftCode_FullRedeem" />
+		</classes>
+	 </test> 
+	 
+	 
+	  <test name="TEST_DGLD_DB_US_ST_192_RegUser_Simple_AerosolBundle_Configurable_AerosolProduct_NonAerosolBundle_Checkout_Discount_GiftCode_FullRedeem" testid="DQA-4109" priority="P1" description="This test case is to verify the checkout functionality for registered users with multiple types of products in the cart, including Simple, Aerosol Bundle, Configurable, Aerosol Product, and Non-Aerosol Bundle. It includes applying a discount code and fully redeeming a gift code.">
+		<classes>
+			<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_192_RegUser_Simple_AerosolBundle_Configurable_AerosolProduct_NonAerosolBundle_Checkout_Discount_GiftCode_FullRedeem" />
+		</classes>
+	 </test> 
+	    
+	 
+	 
+	
+	 
+          
+</suite>  
