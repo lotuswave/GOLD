@@ -23,8 +23,8 @@ public class Test_DGLD_Admin_ST_020_New_Order_Placement {
     	Admin.Click_Orders_Salesmenu();
     	Admin.Click_CreatNewOrders(); 
     	Admin.Click_CreatNewCustomer();
-        Admin.Select_store("Store_Selection");
-        Admin.Add_product_SKU("Details");
+        Admin.Select_store("HF_Store");
+        Admin.Add_product_SKU("HF_Store");
         Admin.Guestuser_shippingaddress("Details");
  	    Admin.Default_Payment_method("Details");
     	
