@@ -38,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_003_Guest_User_Checkout_with_Visa_Credit_Card {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
