@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_079_Validate_RegisterUser_Checkout_Aerosol_Produ
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

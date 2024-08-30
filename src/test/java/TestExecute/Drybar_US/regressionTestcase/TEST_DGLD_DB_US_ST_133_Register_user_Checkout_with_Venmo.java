@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_133_Register_user_Checkout_with_Venmo {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}
