@@ -186,4 +186,10 @@
 	</test>
 	
 	
+	<test name="Test_DGLD_OXO_ST_023_Validation_My_Orders_For_Register_User" testid="DTG-2538" priority="P1" description="This script will cover valiating My orders for register user">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_023_Validation_My_Orders_For_Register_User"/>
+</classes>
+</test>
+	
 	</suite>  
