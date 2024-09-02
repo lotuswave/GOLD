@@ -86,6 +86,12 @@
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_004_Minicart_Validation" />
 		</classes>
 	</test>
+	
+	<test name="Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-1238" priority="P1" description="This script will cover validating Guest User Checkout Funtionality Visa Card">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" />
+</classes>
+</test>
          
 	
           
