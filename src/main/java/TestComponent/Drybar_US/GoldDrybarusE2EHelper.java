@@ -528,14 +528,12 @@ public class GoldDrybarusE2EHelper {
      	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
         serachbar.sendKeys(product);
         Common.actionsKeyPress(Keys.ENTER);
-    	Sync.waitPageLoad();
-    	Thread.sleep(4000);
+   
 //			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 //			System.out.println(productsearch);
 //			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
 //					"enter product name will display in the search box", "user enter the product name in  search box",
 //					"Failed to see the product name");
-			Thread.sleep(8000);
              }  
 		 catch (Exception | Error e) {
 			e.printStackTrace();
@@ -574,9 +572,7 @@ public class GoldDrybarusE2EHelper {
 			String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
 			
 			System.out.println(name);
-			Thread.sleep(4000);
 			product_quantity(Dataset);
-			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
 			//Sync.waitPageLoad();
@@ -701,7 +697,7 @@ public class GoldDrybarusE2EHelper {
 		try {
 			Thread.sleep(2000);
 //			click_minicart();
-			Thread.sleep(4000);
+	
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
@@ -785,7 +781,6 @@ public class GoldDrybarusE2EHelper {
 		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
-			Thread.sleep(5000);
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
@@ -809,19 +804,15 @@ public class GoldDrybarusE2EHelper {
 					data.get(dataSet).get("LastName"));
 			Common.clickElement("id", "shipping-street-0");
 			Common.textBoxInput("id", "shipping-street-0", address);
-			Thread.sleep(5000);
 			Common.scrollIntoView("id", "shipping-country_id");
 		    Common.dropdown("id", "shipping-country_id",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
-			Thread.sleep(2000);
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
 			Common.findElement("id", "shipping-city").clear();
 			Common.textBoxInput("id", "shipping-city",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
 			  if(Common.getCurrentURL().contains("gb"))
               {
 				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
@@ -837,14 +828,13 @@ public class GoldDrybarusE2EHelper {
                         .getAttribute("value");
                 System.out.println(Shippingvalue);
 			}
-			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(8000);
 	        
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@name='telephone']");
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
-			Thread.sleep(3000);
+
 			
 			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
@@ -1222,18 +1212,11 @@ public class GoldDrybarusE2EHelper {
 		String expectedResult = "It redirects to order confirmation page";
 
 		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(4000);
+			
 			addPaymentDetails(dataSet);
 		}
 
-		Thread.sleep(3000);
-//		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
-//		System.out.println(placeordercount);
-//		if (placeordercount > 1) {
-//			Thread.sleep(4000);
-//
-//			Common.clickElement("xpath", "//span[text()='Place Order']");
-//			Common.refreshpage();
+		
 //		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
