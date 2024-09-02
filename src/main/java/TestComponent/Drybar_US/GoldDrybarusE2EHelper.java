@@ -875,12 +875,12 @@ public class GoldDrybarusE2EHelper {
 		System.out.println(method);
 
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			System.out.println(size);
 			if (size > 0  ) {
 				
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				Sync.waitElementPresent("xpath", "//div[contains(text(),'"+ method +"')]");
 				Common.clickElement("xpath", "//div[contains(text(),'"+ method +"')]");
 			}
