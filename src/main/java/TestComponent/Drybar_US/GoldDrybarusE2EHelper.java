@@ -1226,7 +1226,7 @@ public class GoldDrybarusE2EHelper {
 
 		else {
 			try {
-				Thread.sleep(3000);
+//				Thread.sleep(3000);
 				Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 				String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 
@@ -1234,20 +1234,15 @@ public class GoldDrybarusE2EHelper {
 			
 
 				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
-					Thread.sleep(4000);
+					Thread.sleep(2000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
-					Thread.sleep(4000);
+					Thread.sleep(2000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
-					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-					System.out.println(order);
-
-				}
 			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
