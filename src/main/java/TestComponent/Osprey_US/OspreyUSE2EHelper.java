@@ -10552,9 +10552,9 @@ public void Verify_OrderTotal() {
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+//				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 						{
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
@@ -10766,7 +10766,7 @@ public void Verify_OrderTotal() {
 		//String fileOut="";
 	try{
 		
-		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Osprey_US/OspreyUS_E2E_orderDetails.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;
@@ -10818,13 +10818,13 @@ public void Verify_OrderTotal() {
 		cell = row.createCell(3);
 		cell.setCellType(CellType.NUMERIC);
 		cell.setCellValue(OrderIdNumber);
-		cell = row.createCell(4);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue("Order placed Successfully");
-		
-		cell = row.createCell(5);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue("Processing");
+//		cell = row.createCell(4);
+//		cell.setCellType(CellType.STRING);
+//		cell.setCellValue("Order placed Successfully");
+//		
+//		cell = row.createCell(5);
+//		cell.setCellType(CellType.STRING);
+//		cell.setCellValue("Processing");
 
 //		cell = row.createCell(6);
 //		cell.setCellType(CellType.NUMERIC);
