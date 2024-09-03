@@ -41,7 +41,7 @@ public class Test_DGLD_DB_E2E_003_Guest_User_Checkout_Master_Card_2Day_Shippment
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

@@ -906,7 +906,7 @@ public class GoldDrybarusE2EHelper {
 		try{
 
 
-			File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/"+fileName);
+			File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Osprey_EMEA/"+fileName);
 			XSSFWorkbook workbook;
 			XSSFSheet sheet;
 			Row row;
