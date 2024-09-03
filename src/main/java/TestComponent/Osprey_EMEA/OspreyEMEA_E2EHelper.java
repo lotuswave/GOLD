@@ -3522,9 +3522,10 @@ public class OspreyEMEA_E2EHelper {
 
 	}
 
-	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
+	public String addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		String address = data.get(dataSet).get("Street");
 		String symbol=data.get(dataSet).get("Symbol");
+		String Emailid = data.get(dataSet).get("Email");
 
 		try {
 			Thread.sleep(5000);
@@ -3615,7 +3616,7 @@ public class OspreyEMEA_E2EHelper {
 			Assert.fail();
 
 		}
-
+		return Emailid;
 	}
 
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
@@ -3636,7 +3637,7 @@ public class OspreyEMEA_E2EHelper {
 		if (placeordercount > 1) {
 			Thread.sleep(2000);
 			Common.clickElement("xpath", "//button[@class='action primary checkout']");
-			
+
 		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -3664,10 +3665,8 @@ public class OspreyEMEA_E2EHelper {
 					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
 					System.out.println(order);
-				
 
 				}
-			
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -15009,7 +15008,7 @@ public void prepareOrdersData(String fileName) {
 		Font f = workbook.createFont();
 		f.setBold(true);
 		cs.setFont(f);
-		cs.setAlignment(HorizontalAlignment.RIGHT);
+		cs.setAlignment(HorizontalAlignment.LEFT);
 		row = sheet.createRow(0);
 		cell = row.createCell(0);
 		cell.setCellStyle(cs);
@@ -15033,9 +15032,9 @@ public void prepareOrdersData(String fileName) {
 		cell = row.createCell(4);
 		cell.setCellStyle(cs);
 		cell.setCellValue("Gift Card QTY ");
-//		cell = row.createCell(5);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Order Status Magento");
+		cell = row.createCell(5);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Email id");
 		
 //		cell = row.createCell(4);
 //		cell.setCellStyle(cs);
@@ -15104,7 +15103,7 @@ public void prepareOrdersData(String fileName) {
 		}
 }
 
-public void writeOrderNumber(String OrderIdNumber,String Description,String Giftcard_Used) throws FileNotFoundException, IOException
+public void writeOrderNumber(String OrderIdNumber,String Description,String Giftcard_Used, String Emailid) throws FileNotFoundException, IOException
 {
 	//String fileOut="";
 try{
@@ -15164,10 +15163,10 @@ try{
 	cell = row.createCell(4);
 	cell.setCellType(CellType.STRING);
 	cell.setCellValue(Giftcard_Used);
-//	
-//	cell = row.createCell(5);
-//	cell.setCellType(CellType.STRING);
-//	cell.setCellValue("Processing");
+	
+	cell = row.createCell(5);
+	cell.setCellType(CellType.STRING);
+	cell.setCellValue(Emailid);
 
 //	cell = row.createCell(6);
 //	cell.setCellType(CellType.NUMERIC);
