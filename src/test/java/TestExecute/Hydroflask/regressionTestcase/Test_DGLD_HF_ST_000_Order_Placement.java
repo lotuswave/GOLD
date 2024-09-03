@@ -41,7 +41,7 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 //			String website = Hydro.website();
 		    Hydro.reorder();
 	        Hydro.minicart_Checkout();
-	        Hydro.RegaddDeliveryAddress(Account);
+//	        Hydro.RegaddDeliveryAddress(Account);
             Hydro.selectshippingaddress(Account);
             Hydro.clickSubmitbutton_Shippingpage();
 			String Ordernumber= Hydro.updatePaymentAndSubmitOrder(Account);
@@ -65,8 +65,8 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
         Login.signIn();
-        Hydro.close_add();
-        Hydro.acceptPrivacy();
+//        Hydro.close_add();
+//        Hydro.acceptPrivacy();
 
 	}
 

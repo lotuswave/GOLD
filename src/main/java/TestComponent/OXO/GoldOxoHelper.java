@@ -876,13 +876,13 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		  }
 		 	
 		Thread.sleep(3000);
-		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
-		if (placeordercount > 1) {
-			Thread.sleep(4000);
-			
-			Common.clickElement("xpath", "//span[text()='Place Order']");
-			Common.refreshpage();
-		}
+//		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
+//		if (placeordercount > 1) {
+//			Thread.sleep(4000);
+//			
+//			Common.clickElement("xpath", "//span[text()='Place Order']");
+//			Common.refreshpage();
+//		}
 
 		String url=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		
@@ -951,9 +951,9 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		System.out.println(payment);
 		if(payment>0)
 		{
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-			Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-			Common.clickElement("xpath", "//span[text()='New payment method']");
+//			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//			Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+//			Common.clickElement("xpath", "//span[text()='New payment method']");
 			Thread.sleep(4000);
 			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 			Thread.sleep(5000);

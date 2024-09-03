@@ -682,13 +682,13 @@ public class GoldHydroHelper {
 		}
 
 		Thread.sleep(3000);
-		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
-		if (placeordercount > 1) {
-			Thread.sleep(4000);
-
-			Common.clickElement("xpath", "//span[text()='Place Order']");
-			Common.refreshpage();
-		}
+//		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
+//		if (placeordercount > 1) {
+//			Thread.sleep(4000);
+//
+//			Common.clickElement("xpath", "//span[text()='Place Order']");
+//			Common.refreshpage();
+//		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
@@ -786,7 +786,7 @@ public class GoldHydroHelper {
            	   {
            		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
            		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-           		   Thread.sleep(5000);
+           		   Thread.sleep(6000);
            		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
                	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
            		   
@@ -837,7 +837,7 @@ public class GoldHydroHelper {
 	              	   {
 	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
 	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-	              		   Thread.sleep(5000);
+	              		   Thread.sleep(6000);
 	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                  	   Thread.sleep(8000);
@@ -5037,7 +5037,7 @@ public class GoldHydroHelper {
 			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-//			validating_BundleProducts();
+			validating_BundleProducts();
 			product_quantity(Dataset);
 			//bundle_color("Black");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");

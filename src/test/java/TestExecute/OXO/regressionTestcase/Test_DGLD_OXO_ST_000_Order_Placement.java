@@ -30,17 +30,16 @@ public class Test_DGLD_OXO_ST_000_Order_Placement {
 			int colcount=sheet.getRow(1).getLastCellNum();
 			Oxo.prepareTaxData("Oxo_OrderNumbers.xlsx");
 			Oxo.verifingHomePage();
-			
+			Oxo.click_singinButton();
+			Oxo.Usersignin("AccountDetails");
 			 for(int i=1;i<=rowcount;i++)
 			 {
 				 
 			XSSFRow celldata=sheet.getRow(i);
 			String Account=celldata.getCell(0).getStringCellValue();
 		    Thread.sleep(10000);
-			Oxo.search_product(Account);
-			Oxo.addtocart(Account);
+		    Oxo.reorder();
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress_Guest(Account);
 			Oxo.select_Shipping_Method(Account);
 			Oxo.clickSubmitbutton_Shippingpage();
 			String Ordernumber= Oxo.updatePaymentAndSubmitOrder(Account);
@@ -57,7 +56,7 @@ public class Test_DGLD_OXO_ST_000_Order_Placement {
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
