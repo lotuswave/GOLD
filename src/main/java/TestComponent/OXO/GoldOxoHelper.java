@@ -891,6 +891,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		
 		else{
 			try{
+				Thread.sleep(8000);	
 		String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
 
 		
