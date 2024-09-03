@@ -841,6 +841,7 @@ public class GoldHydroHelper {
 	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                  	   Thread.sleep(8000);
+	                  	   
 	                  	 String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
 		              	    System.out.println(sucessmessage);
 	              		   
