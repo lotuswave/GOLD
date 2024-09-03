@@ -875,7 +875,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		  addPaymentDetails(dataSet);
 		  }
 		 	
-		Thread.sleep(3000);
+		Thread.sleep(6000);
 //		int placeordercount = Common.findElements("xpath", "//span[text()='Place Order']").size();
 //		if (placeordercount > 1) {
 //			Thread.sleep(4000);
