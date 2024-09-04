@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_006_Registered_Checkout_with_Invalid_Creditcard 
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}

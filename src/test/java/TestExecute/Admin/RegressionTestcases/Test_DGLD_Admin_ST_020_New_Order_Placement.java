@@ -13,7 +13,7 @@ public class Test_DGLD_Admin_ST_020_New_Order_Placement {
 	String datafile = "Admin\\GoldAdminTestData.xlsx";    
 	GoldAdminHelper Admin = new GoldAdminHelper(datafile,"Mogento,orderplacement");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-    public void Catalog_product_update () throws Exception {
+    public void Guest_User_New_Order_Placement () throws Exception {
     try {
     	
     	

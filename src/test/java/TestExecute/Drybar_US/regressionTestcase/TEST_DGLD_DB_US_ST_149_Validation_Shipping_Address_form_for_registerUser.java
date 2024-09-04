@@ -40,7 +40,7 @@ public class TEST_DGLD_DB_US_ST_149_Validation_Shipping_Address_form_for_registe
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

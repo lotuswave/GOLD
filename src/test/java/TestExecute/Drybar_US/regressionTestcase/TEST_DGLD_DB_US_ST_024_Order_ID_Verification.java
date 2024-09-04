@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_024_Order_ID_Verification {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

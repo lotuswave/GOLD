@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_Non
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}

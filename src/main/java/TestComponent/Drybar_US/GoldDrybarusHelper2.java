@@ -59,9 +59,9 @@ public class GoldDrybarusHelper2 {
 		try
 		{
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Thread.sleep(4000);
 //			Close_Geolocation();
-//			acceptPrivacy();
+			acceptPrivacy();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -82,9 +82,18 @@ public class GoldDrybarusHelper2 {
 	}
 	
 	public void acceptPrivacy() {
-
-		Common.clickElement("id", "truste-consent-button");
+		try {
+			
+			Sync.waitElementPresent("id", "truste-consent-button");
+			Common.clickElement("id", "truste-consent-button");
+		}
+	catch(Exception | Error e)
+	{
+	e.printStackTrace();
+	Assert.fail();	
+	
 	}
+}
 	
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
@@ -1485,7 +1494,7 @@ public class GoldDrybarusHelper2 {
 		String header=data.get(Dataset).get("headers");
 		try {
 
-			Thread.sleep(3000);
+		  
 			Sync.waitElementPresent("xpath",
 					"//a[@title='"+ header +"']//span[contains(text(),'"+ header +"')]");
 			
