@@ -55,7 +55,7 @@ public class Test_DGLD_HF_E2E_001_RegUser_Checkout_standard_shipping_method_with
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

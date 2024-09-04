@@ -541,6 +541,7 @@ public class GoldHydroHelper_E2E {
 
 				}
 			
+				
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
