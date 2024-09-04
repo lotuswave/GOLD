@@ -12,49 +12,47 @@ import TestLib.Login;
 public class TEST_DGLD_DB_US_ST_067_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle_products_GC_partialreedem_CC {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile, "Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle_products_GC_partialreedem_CC () throws Exception {
+	public void Validate_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle_products_GC_partialreedem_CC()
+			throws Exception {
 
 		try {
-		
+
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.search_product("Bundle Product");  
+			Drybar.search_product("Bundle Product");
 			Drybar.Addtocart_Bundle("Bundle Product");
-			Drybar.search_product("Product");  
+			Drybar.search_product("Product");
 			Drybar.addtocart("Product");
 			Drybar.search_product("Configurable Product");
 			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
+			String rewardpoints = Drybar.fivepercent_Reward_Points();
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.gitCard("GiftCode");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
-			
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-	
+
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-		
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
-        Login.signIn();
-        Drybar.close_add();
-        
+		Login.signIn();
+		Drybar.close_add();
 
 	}
 
