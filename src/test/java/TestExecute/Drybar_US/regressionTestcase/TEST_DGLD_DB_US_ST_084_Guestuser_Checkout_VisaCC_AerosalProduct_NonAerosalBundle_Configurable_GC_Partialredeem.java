@@ -9,19 +9,22 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_Single_Bundle_Product_SKU1_Regular_Item_Different_SKU_Than_Bundle_Items {
+public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeem {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Guestuser_Checkout_VisaCC_Single_Bundle_Product_SKU1_Regular_Item_Different_SKU_Than_Bundle_Items () throws Exception {
+	public void Guestuser_Checkout_VisaCC_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeems () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Bundle Product");  
-			Drybar.Addtocart_Bundle("Bundle Product"); 
+			Drybar.add_aerosolproduct("Aerosol");
+			Drybar.search_product("Configurable Product");
+			Drybar.Configurable_addtocart("Configurable Product");
+			Drybar.search_product("Bundle 1");  
+			Drybar.Addtocart_Bundle("Bundle 1"); 
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
@@ -38,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_Single_Bundle_Prod
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}

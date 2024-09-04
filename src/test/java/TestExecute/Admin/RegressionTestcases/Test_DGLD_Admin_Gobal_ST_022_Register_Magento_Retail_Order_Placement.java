@@ -9,27 +9,24 @@ import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
 
-public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue {
-
-
+public class Test_DGLD_Admin_Gobal_ST_022_Register_Magento_Retail_Order_Placement {
 	String datafile = "Admin\\GoldAdminTestData.xlsx";
 	GoldAdminHelper Admin = new GoldAdminHelper(datafile, "Retailer OrderPlacement");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Admin_RetailerOrder_PriceOverride_LowerValue() throws Exception {
+	public void Catalog_product_update() throws Exception {
 		try {
 
 			Admin.Admin_signin("AccountDetails");
 			Admin.click_Sales();
 			Admin.Click_Orders_Salesmenu();
 			Admin.Click_CreatNewOrders();
-			Admin.Select_ExistingUser_email("GRASUSWebsite");
-			Admin.Select_Store("GRASUSWebsite");
-			Admin.Add_product_SKU("GRASUSWebsite");
-			Admin.update_customprice("LowPriceOverride");
-			Admin.shippingaddress("GRASUSWebsite");
+			Admin.Select_ExistingUser_email("HYFWebsite");
+			Admin.Select_Store("HYFWebsite");
+			Admin.Add_product_SKU("HYFWebsite");
+			Admin.shippingaddress("HYFWebsite");
 			Admin.Select_Shipping_method();
-			Admin.Update_StoreCredit_ExistingCustomer("GRASUSWebsite");
+			Admin.Update_StoreCredit_ExistingCustomer("HYFWebsite");
 			Admin.Select_Storecredit_payment_method();
 			Admin.Submit_RetailOrder_Success();
 			 
@@ -41,7 +38,7 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		 Common.closeAll();
 
 	}
 
@@ -51,7 +48,4 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 		Login.signIn();
 
 	}
-	
-	
-	
 }

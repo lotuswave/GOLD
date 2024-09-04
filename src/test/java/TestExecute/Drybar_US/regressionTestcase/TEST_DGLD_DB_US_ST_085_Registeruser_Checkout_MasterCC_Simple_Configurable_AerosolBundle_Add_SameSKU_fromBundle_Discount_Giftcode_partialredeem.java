@@ -6,30 +6,37 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Single_Bundle_product_SKU1_Regular_Item_Same_SKU1_From_Bundle {
+public class TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Simple_Configurable_AerosolBundle_Add_SameSKU_fromBundle_Discount_Giftcode_partialredeem {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Bundles");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Registeruser_Checkout_MasterCC_Single_Bundle_product_SKU1_Regular_Item_Same_SKU1_From_Bundle  () throws Exception {
+	public void Validate_Registeruser_Checkout_MasterCC_Simple_Configurable_AerosolBundle_Add_SameSKU_fromBundle_Discount_Giftcode_partialredeem  () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.search_product("Bundle child Product");  
-			Drybar.Addtocart_Bundle("Bundle child Product");
-			Drybar.search_product("Child Product");  
-			Drybar.addtocart("Child Product");
+			Drybar.search_product("Configurable Product");
+			Drybar.Configurable_addtocart("Configurable Product");
+			Drybar.search_product("AerosolBundle");  
+			Drybar.Addtocart_Bundle("AerosolBundle");
+			Drybar.search_product("Aerosol");  
+			Drybar.addtocart("Aerosol");
+			Drybar.HairTools_headerlinks("Hair Tools"); 
+			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.discountCode("Discount");
+			Drybar.gitCard("GiftCode");
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 
 		} catch (Exception e) {

@@ -5,44 +5,37 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
-import TestLib.Common;
 import TestLib.Login;
+import TestLib.Common;
 
-public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
-
+public class TEST_DGLD_DB_US_ST_191_GuestUser_Simple_product_Checkout_with_GiftCode_FullRedeem {
+	
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Shopping_cart_Page_Functionality () throws Exception {
+	public void Validate_GuestUser_Simple_product_Checkout_with_GiftCode_FullRedeem () throws Exception {
 
 		try {
+		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Configurable Product");
-			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
-			Drybar.click_minicart();
-			Drybar.minicart_viewcart();
-            Drybar.Remove_Product("Configurable Product");
-            Drybar.update_shoppingcart("Product Qunatity");
-            Drybar.minicart_Checkout();
-            Drybar.addDeliveryAddress_Guestuser("Address");
-            Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.minicart_Checkout();
+			Drybar.addDeliveryAddress_Guestuser("Address");
+			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.Shoppingcart_page();
-			Drybar.minicart_ordersummary_discount("Discount");
-            
- 
+			Drybar.gitCard("GiftCode");
+			Drybar.giftCardSubmitOrder();
+			
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
-
+	
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();

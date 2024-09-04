@@ -9,19 +9,20 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription {
+public class TEST_DGLD_DB_US_ST_011_Footer_Link_Validation {
+	
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Footer");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void validate_Guest_User_Product_Back_in_Subscription() throws Exception {
+	public void Validating_Create_Account () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Outof Stock Product");  
-			Drybar.outofstock_subcription("Outof Stock Product");
-			
+			Drybar.Company("Company");
+			Drybar.Support("support");
+			Drybar.Information("information");
 
 		} catch (Exception e) {
 
@@ -32,6 +33,7 @@ public class TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
+		
 
 	}
 
@@ -43,5 +45,4 @@ public class TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription
         
 
 	}
-
 }

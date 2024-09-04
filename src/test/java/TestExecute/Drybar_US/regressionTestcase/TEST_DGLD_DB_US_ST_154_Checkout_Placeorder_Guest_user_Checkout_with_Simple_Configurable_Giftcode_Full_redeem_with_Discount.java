@@ -5,34 +5,32 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarusHelper2;
+import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_Visa_card {
+public class TEST_DGLD_DB_US_ST_154_Checkout_Placeorder_Guest_user_Checkout_with_Simple_Configurable_Giftcode_Full_redeem_with_Discount {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
+	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_User_Checkout_With_Discount_Visa_card () throws Exception {
+	public void Validate_Checkout_Placeorder_Guest_user_Checkout_with_multiple_products_gift_card_code_full_Payment ()  throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
-			Drybar.login_Drybar("AccountDetails");
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
+	    	Drybar.search_product("Product");  
+			Drybar.addtocart("Product");
+			Drybar.search_product("Configurable Product");
+			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.discountCode("Discount");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
-			
-
-			
+			Drybar.discountCode("Discount");
+			Drybar.gitCard("GiftCode Full Redeem");
+			Drybar.giftCardSubmitOrder();
 
 		} catch (Exception e) {
 
@@ -43,7 +41,6 @@ public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_Visa_ca
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-		
 
 	}
 
@@ -57,4 +54,3 @@ public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_Visa_ca
 	}
 
 }
-

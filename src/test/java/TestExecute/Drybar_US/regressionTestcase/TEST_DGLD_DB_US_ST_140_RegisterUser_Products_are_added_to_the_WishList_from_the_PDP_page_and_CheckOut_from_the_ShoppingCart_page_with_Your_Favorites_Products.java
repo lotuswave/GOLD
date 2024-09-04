@@ -5,47 +5,48 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
+public class TEST_DGLD_DB_US_ST_140_RegisterUser_Products_are_added_to_the_WishList_from_the_PDP_page_and_CheckOut_from_the_ShoppingCart_page_with_Your_Favorites_Products {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Shopping_cart_Page_Functionality () throws Exception {
+	public void Validate_RegisterUser_Products_are_added_to_the_WishList_from_the_PDP_page_and_CheckOut_from_the_ShoppingCart_page_with_Your_Favorites_Products () throws Exception {
 
 		try {
+		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Configurable Product");
-			Drybar.Configurable_addtocart("Configurable Product");
-			Drybar.HairTools_headerlinks("Hair Tools"); 
-			Drybar.addtocart("PLP Product");
+			Drybar.click_singinButton();
+			Drybar.login_Drybar("AccountDetails");
+			Drybar.My_Favorites();
+			Drybar.Add_To_MyFavorities("Product");
+			Drybar.search_product("Product");  
+			Drybar.addtocart("Product");
 			Drybar.click_minicart();
 			Drybar.minicart_viewcart();
-            Drybar.Remove_Product("Configurable Product");
-            Drybar.update_shoppingcart("Product Qunatity");
-            Drybar.minicart_Checkout();
-            Drybar.addDeliveryAddress_Guestuser("Address");
-            Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.fav_from_shoppingcart();
+			Drybar.minicart_Checkout();
+			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.Shoppingcart_page();
-			Drybar.minicart_ordersummary_discount("Discount");
-            
- 
+			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			
+			
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
-
+	
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
+		
 
 	}
 

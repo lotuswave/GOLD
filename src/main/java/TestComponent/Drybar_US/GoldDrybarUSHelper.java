@@ -60,7 +60,7 @@ public class GoldDrybarUSHelper {
 		{
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Close_Geolocation();
+//			Close_Geolocation();
 			Sync.waitPageLoad();
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			Common.assertionCheckwithReport(
@@ -814,7 +814,7 @@ public class GoldDrybarUSHelper {
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			
