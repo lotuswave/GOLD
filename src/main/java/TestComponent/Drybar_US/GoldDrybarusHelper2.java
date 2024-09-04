@@ -836,19 +836,19 @@ public class GoldDrybarusHelper2 {
 					data.get(dataSet).get("LastName"));
 			Common.clickElement("id", "shipping-street-0");
 			Common.textBoxInput("id", "shipping-street-0", address);
-			Thread.sleep(5000);
+//			Thread.sleep(5000);
 			Common.scrollIntoView("id", "shipping-country_id");
 		    Common.dropdown("id", "shipping-country_id",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+//			Thread.sleep(5000);
 			Common.findElement("id", "shipping-city").clear();
 			Common.textBoxInput("id", "shipping-city",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
+//			Thread.sleep(3000);
 			  if(Common.getCurrentURL().contains("gb"))
               {
 				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
@@ -891,10 +891,7 @@ public class GoldDrybarusHelper2 {
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			}*/
 
-			Sync.waitPageLoad();
-			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
-					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
-					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+			
 
 		}
 
@@ -10992,6 +10989,86 @@ public void videos_validation() {
 		ExtenantReportUtils.addFailedLog("validating the user navigate to the videos",
 				"After clicking on the vidoes CTA it should navigate to the videos page", "Unable to Navigated to the videos page ",
 				Common.getscreenShot("failed to Navigate to the videos page"));
+		Assert.fail();
+	}
+	
+}
+
+public String fifteenpercent_Reward_Points() {
+	// TODO Auto-generated method stub
+	String rewardpointsused="";
+	try
+	{
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Thread.sleep(4000);
+		String rewardpoints=Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim().replace("YOU HAVE ", "").replace(" POINTS", "");
+		System.out.println(rewardpoints);
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//div[@class='vs__actions']");
+		Common.clickElement("xpath", "//div[@class='vs__actions']");
+		Thread.sleep(4000);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ENTER);
+		Common.clickElement("xpath","//button[@aria-label='Apply']");
+ 		Sync.waitForLoad();
+ 		Thread.sleep(6000);
+ 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Thread.sleep(4000);
+		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
+		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		System.out.println(off);
+		System.out.println(discount);
+		   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
+					"After clicking on the apply button reward points should be apply", "Sucessfully reward points has been applied",
+					"failed to apply the reward point in the order summary page");
+		   rewardpointsused=Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim().replace("YOU HAVE ", "").replace(" POINTS", "");
+		   System.out.println(rewardpointsused);
+ 		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the reward points redeem in the order summary page",
+				"After clicking on the apply button reward points should be apply", "unable to apply reward points on the order summary page",
+				Common.getscreenShot("failed to apply the reward point in the order summary page"));
+		Assert.fail();
+	}
+	return rewardpointsused;
+}
+
+public void verify_RewardPoints(String rewardpoints) {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'Rewards')]");
+		Common.clickElement("xpath", "//span[contains(text(),'Rewards')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//div[@class='yotpo-customized-text yotpo-description-points-balance']//div[@class='yotpo-inner-text']");
+		Common.scrollIntoView("xpath", "//div[@class='yotpo-customized-text yotpo-description-points-balance']//div[@class='yotpo-inner-text']");
+		String Rewardpoints=Common.findElement("xpath", "//div[@class='yotpo-customized-text yotpo-description-points-balance']//div[@class='yotpo-inner-text']").getText().trim().replace(" points", "");
+		System.out.println(Rewardpoints);
+		Sync.waitElementPresent("xpath", "//button[contains(text(),'POINTS HISTORY')]");
+		Common.clickElement("xpath", "//button[contains(text(),'POINTS HISTORY')]");
+		Thread.sleep(4000);
+		String rewardhistroy=Common.findElement("xpath", "//div[text()='Rewards History']").getText();
+		System.out.println(rewardhistroy);
+		Common.assertionCheckwithReport(rewardhistroy.equals("Rewards History"), "validating the reward points redeem in the order summary page",
+				"After clicking on the apply button reward points should be apply", "sucessfully reward points applied on the order summary page",
+				"failed to apply the reward point in the order summary page");
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the reward points redeem in the order summary page",
+				"After clicking on the apply button reward points should be apply", "unable to apply reward points on the order summary page",
+				Common.getscreenShot("failed to apply the reward point in the order summary page"));
 		Assert.fail();
 	}
 	

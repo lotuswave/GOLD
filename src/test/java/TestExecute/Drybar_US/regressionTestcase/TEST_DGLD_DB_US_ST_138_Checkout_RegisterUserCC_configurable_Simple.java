@@ -29,7 +29,9 @@ public class TEST_DGLD_DB_US_ST_138_Checkout_RegisterUserCC_configurable_Simple 
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			String rewardpoints=Drybar.fifteenpercent_Reward_Points();
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
+			Drybar.verify_RewardPoints(rewardpoints);
 			
 
 		} catch (Exception e) {
