@@ -7256,11 +7256,11 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(2000);
-			Sync.waitElementPresent("xpath", "//button[@class='action- scalable primary']");
-			Common.clickElement("xpath", "//button[@class='action- scalable primary']");
+			Sync.waitElementPresent("xpath", "//button[@class='action- scalable add']");
+			Common.clickElement("xpath", "//button[@class='action- scalable add']");
 			Sync.waitPageLoad();
 			String text = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-			Common.assertionCheckwithReport(text.contains("Create New Order for New Customer"),
+			Common.assertionCheckwithReport(text.contains("Create New Order for "),
 					"To Validate the Create New Order for New Customer page is displayed",
 					"should display the Create New Order for New Customer page after clicking on the create new order",
 					"Create New Order for New Customer page is displayed after a click on the create new order button",
@@ -7837,6 +7837,8 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 						// Sync.waitElementPresent("xpath",
 			// "//label[@for='order-billing_address_firstname']");
 			//Common.textBoxInputClear("xpath", "//input[@id='order-billing_address_firstname']");
+			Thread.sleep(4000);
+			Common.textBoxInputClear("xpath", "//input[@id='order-billing_address_firstname']");
 			Common.textBoxInput("xpath", "//input[@id='order-billing_address_firstname']",
 					data.get(dataSet).get("FirstName"));
 
@@ -7867,7 +7869,24 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 			Common.textBoxInput("xpath", "//input[@id='order-billing_address_telephone']",
 					data.get(dataSet).get("Phonenumber"));
 			Thread.sleep(3000);
-			
+			Sync.waitElementPresent("xpath", "//div[@id='order-shipping-method-summary']/a");
+
+			Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and rates')]");
+			Thread.sleep(2000);
+
+			Thread.sleep(8000);
+			Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
+
+			Sync.waitPageLoad();
+			// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
+			// @style='display: none;']");
+			String text = Common.findElement("xpath", "//span[text()='Click to change shipping method']").getText();
+			System.out.println(text);
+			Common.assertionCheckwithReport(text.contains("Click to change shipping method"),
+					"To Validate the displayed click to change shipping method",
+					"should display the click to change shipping method after clicking on the standard shipping",
+					"click to change shipping method is displayed after a click on the standard shipping",
+					"Failed to display click to change shipping method");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7877,46 +7896,10 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 					"Failed to display click to change shipping method");
 			Assert.fail();
 
-		}}
-
-	
-
-	public void Add_Group_Product_sku(String dataSet) {
-		// TODO Auto-generated method stub
-		String Noticemessage = data.get(dataSet).get("message");
-		try {
-			Sync.waitElementPresent("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
-			Common.clickElement("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
-			Thread.sleep(2000);
-
-			Sync.waitElementPresent("xpath", "//td[@class='col-sku']//input[@name='sku']");
-			Common.textBoxInput("xpath", "//td[@class='col-sku']//input[@name='sku']",
-					data.get(dataSet).get("SKUNumber"));
-
-			Common.textBoxInput("xpath", "//div[@class='input-box']//input[@name='qty']",
-					data.get(dataSet).get("Quantity"));
-
-			Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
-			Common.clickElement("xpath", "//button[@title='Add to Order']");
-			Sync.waitPageLoad();
-			String noticemessage = Common.findElement("xpath", "//div[@class='message message-notice']").getText();
-			Common.assertionCheckwithReport(noticemessage.equals(Noticemessage),
-					"To Validate the group product item sku is added and display a notice message to configure child products",
-					"should add group product item sku and displays a notice message to configure child products",
-					"group product item sku is added successfully and display a notice message to configure child products",
-					"Failed to add group product item sku and not dispalying notice message to configure child products");
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To Validate the group product item sku is added and display a notice message to configure child products",
-					"To Validate the group product item sku is added and display a notice message to configure child products ",
-					"unable to add group product item sku and not displays a notice message to configure child products",
-					"Failed to add group product item sku and not dispalying notice message to configure child products");
-			Assert.fail();
 		}
 
 	}
+
 
 	public void Configure_child_Products(String dataSet) {
 		// TODO Auto-generated method stub
