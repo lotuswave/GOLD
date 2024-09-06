@@ -23,10 +23,10 @@ public class TEST_DGLD_DB_US_ST_138_Checkout_RegisterUserCC_configurable_Simple 
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-//			Drybar.search_product("Configurable Product");
-//			Drybar.Configurable_addtocart("Configurable Product");
+			Drybar.search_product("Configurable Product");
+			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.minicart_Checkout();
-//			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			String rewardpoints=Drybar.fifteenpercent_Reward_Points("$15 Off (300 points)");
@@ -42,7 +42,7 @@ public class TEST_DGLD_DB_US_ST_138_Checkout_RegisterUserCC_configurable_Simple 
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}
