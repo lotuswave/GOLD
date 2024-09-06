@@ -15031,10 +15031,8 @@ public void prepareOrdersData(String fileName) {
 		
 		cell = row.createCell(4);
 		cell.setCellStyle(cs);
-		cell.setCellValue("Gift Card QTY ");
-		cell = row.createCell(5);
-		cell.setCellStyle(cs);
 		cell.setCellValue("Email id");
+		
 		
 //		cell = row.createCell(4);
 //		cell.setCellStyle(cs);
@@ -15103,7 +15101,7 @@ public void prepareOrdersData(String fileName) {
 		}
 }
 
-public void writeOrderNumber(String OrderIdNumber,String Description,String Giftcard_Used, String Emailid) throws FileNotFoundException, IOException
+public void writeOrderNumber(String OrderIdNumber,String Description, String Emailid) throws FileNotFoundException, IOException
 {
 	//String fileOut="";
 try{
@@ -15162,11 +15160,11 @@ try{
 	cell.setCellValue(OrderIdNumber);
 	cell = row.createCell(4);
 	cell.setCellType(CellType.STRING);
-	cell.setCellValue(Giftcard_Used);
-	
-	cell = row.createCell(5);
-	cell.setCellType(CellType.STRING);
 	cell.setCellValue(Emailid);
+	
+//	cell = row.createCell(5);
+//	cell.setCellType(CellType.STRING);
+//	cell.setCellValue(Emailid);
 
 //	cell = row.createCell(6);
 //	cell.setCellType(CellType.NUMERIC);

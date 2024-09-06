@@ -10,23 +10,22 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OSP_EMEA_E2E_ST_001_GuestUser_SimpleProduct_gift_card_and_Cc {
+public class Test_DGLD_OSP_EMEA_E2E_009_UK_Guest_Regular_item_giftcard_product_ordertotal_cover_with_creditcard_StandardShipping {
 
 	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
 	OspreyEMEA_E2EHelper Osprey_ReEu = new OspreyEMEA_E2EHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_User_Checkout_Discover_Card () throws Exception {
+	public void Verifying_Guest_Regular_item_giftcard_product_ordertotal_cover_with_creditcard_StandardShipping () throws Exception {
 
 		try {
 			
 			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
-			String Description = "GuestUser_Add checkout with giftcard + simple item + cc";
+			String Description = "UK store -1 REG + 1 GC PURCHASE + CC";
 			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("Giftcard");
 			Osprey_ReEu.Gift_cards("Giftcard");
 			Osprey_ReEu.Card_Value("price");
-			String Giftcard_Used = "Giftcard-1 QTY  ";
 			Osprey_ReEu.search_product("Product");
 			Osprey_ReEu.simple_addtocart("Product");
 			Osprey_ReEu.minicart_Checkout();
@@ -34,7 +33,7 @@ public class Test_DGLD_OSP_EMEA_E2E_ST_001_GuestUser_SimpleProduct_gift_card_and
 			Osprey_ReEu.selectshippingmethod("GroundShipping method");
 			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			String OrderNumber = Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");
-//			Osprey_ReEu.writeOrderNumber(OrderNumber, Description, Giftcard_Used, Emailid);
+			Osprey_ReEu.writeOrderNumber(OrderNumber, Description, Emailid);
         
 		} catch (Exception e) {
 
@@ -45,7 +44,7 @@ public class Test_DGLD_OSP_EMEA_E2E_ST_001_GuestUser_SimpleProduct_gift_card_and
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
