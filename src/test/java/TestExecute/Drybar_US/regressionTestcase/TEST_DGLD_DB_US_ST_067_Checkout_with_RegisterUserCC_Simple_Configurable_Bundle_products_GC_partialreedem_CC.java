@@ -31,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_067_Checkout_with_RegisterUserCC_Simple_Configur
 			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
-			String rewardpoints = Drybar.fivepercent_Reward_Points();
+			String rewardpoints = Drybar.fivepercent_Reward_Points("$5 Off (300 points)");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.gitCard("GiftCode");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");

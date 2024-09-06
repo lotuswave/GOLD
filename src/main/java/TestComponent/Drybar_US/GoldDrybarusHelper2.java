@@ -11046,9 +11046,10 @@ public String fifteenpercent_Reward_Points(String Dataset) {
 	return rewardpointsused;
 }
 
-public String Ten_percent_Reward_Points() {
+public String Ten_percent_Reward_Points(String Dataset) {
 	// TODO Auto-generated method stub
 	String rewardpointsused="";
+	String points=data.get(Dataset).get("Discountcode");
 	try
 	{
 		Thread.sleep(4000);
@@ -11063,6 +11064,12 @@ public String Ten_percent_Reward_Points() {
 		Thread.sleep(4000);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ENTER);
+		
+		 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
+		 Thread.sleep(4000);
+		 rewardpointsused=pointsused.replace(pointsused, points);
+		 System.out.println(rewardpointsused);
+		
 		Common.clickElement("xpath","//button[@aria-label='Apply']");
  		Sync.waitForLoad();
  		Thread.sleep(6000);
@@ -11092,9 +11099,10 @@ public String Ten_percent_Reward_Points() {
 }
 
 
-public String fivepercent_Reward_Points() {
+public String fivepercent_Reward_Points(String Dataset) {
 	// TODO Auto-generated method stub
 	String rewardpointsused = "";
+	String points=data.get(Dataset).get("Discountcode");
 	try {
 		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
