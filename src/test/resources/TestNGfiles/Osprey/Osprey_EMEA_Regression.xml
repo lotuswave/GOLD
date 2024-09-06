@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<suite name="Gold-Osprey EMEA Regression Suite">
+
+      <listeners>
+
+      <listener class-name="Utilities.TestListener"/>
+
+   </listeners>
+
+     <test name="Test_DGLD_OS_COMMON_003_Footer_Newsletter_Subcription" testid="DQA-1948" priority="P1" description="This test case validate the Footer Newsletter Subcription.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_003_Footer_Newsletter_Subcription"/>
+
+    </classes>
+
+   </test>
+
+     <test name="Test_DGLD_OS_COMMON_006_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-2690" priority="P1" description="This test case validate the Create and Edit Gift Registery For Register User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_006_Create_and_Edit_Gift_Registery_For_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_007_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-2709" priority="P1" description="This test case validate the Create share and Delete Gift Registery For Register User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_007_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_008_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DQA-2710" priority="P1" description="This test case validate the Create Manageitems and invalid Details Gift Registery For Register User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_008_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_009_Add_To_Cart_and_Checkout_from_My_Favorites" testid="DQA-2651" priority="P1" description="This test case validate the Add To Cart and Checkout from My Favorites.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_009_Add_To_Cart_and_Checkout_from_My_Favorites"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_010_Find_a_Dealer" testid="DQA-1979" priority="P1" description="This test case validate the Find a Dealer.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_010_Find_a_Dealer"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_011_Stored_Payment_For_Register_User" testid="DQA-1980" priority="P1" description="This test case validate the Stored Payment For Register User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_011_Stored_Payment_For_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_012_Register_user_Checkout_Amex_card" testid="DQA-2381" priority="P1" description="This test case validate the Register user Checkout Amex card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_012_Register_user_Checkout_Amex_card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_014_Validate_Country_Selector" testid="DQA-2736" priority="P1" description="This test case validate the Country Selector.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_014_Validate_Country_Selector"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_015_Social_Links" testid="DQA-2156" priority="P1" description="This test case validate the Validate Social Links">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_015_Social_Links"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_016_Validation_Shipping_Address_form_for_GuestUser" testid="DQA-2733" priority="P1" description="This test case validate the Shipping Address form for GuestUser.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_016_Validation_Shipping_Address_form_for_GuestUser"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_017_Miscellaneous_Pages" testid="DQA-2700" priority="P1" description="This test case validate the Miscellaneous Pages.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_017_Miscellaneous_Pages"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_018_WebPageLinkValidation" testid="DQA-2692" priority="P1" description="This test case validate the WebPageLink Validation.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_018_WebPageLinkValidation"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_019_Forgot_password_from_Shipping_page" testid="DQA-1947" priority="P1" description="This test case validate the Forgot password from Shipping page.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_019_Forgot_password_from_Shipping_page"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_021_Checkout_RegisterUserCC_configurable_Simple" testid="DQA-2697" priority="P1" description="This test case validate the Checkout RegisterUserCC configurable Simple.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_021_Checkout_RegisterUserCC_configurable_Simple"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_022_Register_user_Checkout_Discover_card" testid="DQA-2356" priority="P1" description="This test case validate the Register user Checkout Discover card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_022_Register_user_Checkout_Discover_card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_023__Register_User_Checkout_with_invalid_CC_Credentials" testid="DQA-1971" priority="P1" description="This test case validate the Register User Checkout with invalid CC Credentials.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_023__Register_User_Checkout_with_invalid_CC_Credentials"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page" testid="DQA-2649" priority="P1" description="This test case validate Add to Cart from Sticky Cart in PDP Page.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card" testid="DQA-2336" priority="P1" description="This test case validate the Register user Checkout Visa card .">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_026_URL_verification_of_PDP" testid="DQA-2685" priority="P1" description="This test case validate the URL verification of PDP.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_026_URL_verification_of_PDP"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_027_Guest_User_Checkout_Master_Card" testid="DQA-2354" priority="P1" description="This test case validate the Guest User Checkout Master Card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_027_Guest_User_Checkout_Master_Card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_028_Guest_user_Checkout_Amex_card" testid="DQA-2355" priority="P1" description="This test case validate the Guest user Checkout Amex card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_028_Guest_user_Checkout_Amex_card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_029_validate_Share_Whishlist_Funtionality" testid="DQA-1974" priority="P1" description="This test case validate the Share Whishlist Funtionality.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_029_validate_Share_Whishlist_Funtionality"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_030_Validating_the_product_video_in_PDP_page" testid="DQA-2678" priority="P1" description="This test case validateing the product video in PDP page.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_030_Validating_the_product_video_in_PDP_page"/>
+
+    </classes>
+
+   </test>
+
+    <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This test case validate the Register user Checkout with Paypal.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_034_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DQA-2373" priority="P1" description="This test case validate the Guest User Checkout With Different Billing and Different Shipping.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_034_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_035_Track_My_Order_For_Register_User" testid="DQA-2760" priority="P1" description="This test case validate the Track My Order For Register Use.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_035_Track_My_Order_For_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_036_Register_User_Back_In_stock_Subcription" testid="DQA-2761" priority="P1" description="This test case validate the Register User Back In stock Subcription.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_036_Register_User_Back_In_stock_Subcription"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_037_Guest_User_Checkout_Discover_Card" testid="DQA-2364" priority="P1" description="This test case validate the Guest User Checkout Discover Card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_037_Guest_User_Checkout_Discover_Card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_038_Register_User_Checkout_Master_Card" testid="DQA-2403" priority="P1" description="This test case validate the Register User Checkout Master Card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_038_Register_User_Checkout_Master_Card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_039_Register_User_place_an_order_by_using_reorder_functionality" testid="DQA-2390" priority="P1" description="This test case validate the Register User place an order by using reorder functionality.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_039_Register_User_place_an_order_by_using_reorder_functionality"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Cart" testid="DQA-1962" priority="P1" description="This test case validate the Account Registration Create Account With Cart.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Cart"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_046_Guest_User_Create_Account_from_OrderConfirmation_Page" testid="DQA-2653" priority="P1" description="This test case validate the Guest User Create Account from OrderConfirmation Page.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_046_Guest_User_Create_Account_from_OrderConfirmation_Page"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_047_guestCheckoutwith_invalid_CC_Credentials" testid="DQA-1988" priority="P1" description="This test case validate the guestCheckoutwith invalid CC Credentials.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_047_guestCheckoutwith_invalid_CC_Credentials"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_048_changeAddressIn_AddressBook" testid="DQA-1970" priority="P1" description="This test case validate the changeAddressIn AddressBook.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_048_changeAddressIn_AddressBook"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_049_Track_My_Order_For_Guest_User" testid="DQA-1966" priority="P1" description="This test case validateing the Track My Order For Guest User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_049_Track_My_Order_For_Guest_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_050_Validation_My_Orders_For_Register_User" testid="DQA-2375" priority="P1" description="This test case validate the My Orders For Register User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_050_Validation_My_Orders_For_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_051_Write_a_Review_and_ask_a_question" testid="DQA-1955" priority="P1" description="This test case validate the Write a Review and ask a question.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_051_Write_a_Review_and_ask_a_question"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_057_Register_user_Checkout_with_2Day_Shipping_method" testid="DQA-2345" priority="P1" description="This test case validate the Register user Checkout with 2Day Shippin method.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_057_Register_user_Checkout_with_2Day_Shipping_method"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_058_Guest_User_Back_In_stock_Subcription" testid="DQA-2727" priority="P1" description="This test case validate the Guest User Back In stock Subcription.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_058_Guest_User_Back_In_stock_Subcription"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_059_Contactus_form" testid="DQA-2740" priority="P1" description="This test case validateing the Contactus form.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_062_Guest_User_Checkout_Gift_Card_Code" testid="DQA-2715" priority="P1" description="This test case validate the Guest User Checkout Gift Card Code.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_062_Guest_User_Checkout_Gift_Card_Code"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_063_Register_user_Checkout_Gift_card_Code" testid="DQA-2752" priority="P1" description="This test case validate the Register user Checkout Gift card Code">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_063_Register_user_Checkout_Gift_card_Code"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_066_Register_Users_Checkout_Gift_Card_Simple_Product_With_Partial_payment" testid="DQA-2659" priority="P1" description="This test case validate the Register Users Checkout Gift Card Simple Product With Partial payment.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_066_Register_Users_Checkout_Gift_Card_Simple_Product_With_Partial_payment"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_067_Whishlist_Funtionality" testid="DQA-2746" priority="P1" description="This test case validate Whishlist Funtionality.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_067_Whishlist_Funtionality"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_068_User_Selects_to_Apply_to_ProDeal_Missing_Invalid_Fields" testid="DQA-2701" priority="P1" description="This test case validateing the User Selects to Apply to ProDeal Missing Invalid Fields.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_068_User_Selects_to_Apply_to_ProDeal_Missing_Invalid_Fields"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_069_Pro_Deal_Application_for_Register_User" testid="DQA-2702" priority="P1" description="This test case validateing the Pro Deal Application for Register User.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_069_Pro_Deal_Application_for_Register_User"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_071_Register_User_Add_to_Compare_Products_to_Wishlist_Functionality" testid="DQA-2708" priority="P1" description="This test case validate the Register User Add to Compare Products to Wishlist Functionality.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_071_Register_User_Add_to_Compare_Products_to_Wishlist_Functionality"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_072_Guest_User_Add_to_Compare_Products_to_Wishlist_Functionality" testid="DQA-2655" priority="P1" description="This test case validate the Guest User Add to Compare Products to Wishlist Functionality.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_072_Guest_User_Add_to_Compare_Products_to_Wishlist_Functionality"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_074_Guest_user_Checkout_With_Discount_Amex_card" testid="DQA-2753" priority="P1" description="This test case validate the Guest user Checkout With Discount Amex card.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_074_Guest_user_Checkout_With_Discount_Amex_card"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_075_Validate_ChatBot" testid="DQA-2749" priority="P1" description="This test case validateing the Validate ChatBot">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_075_Validate_ChatBot"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_081_Register_user_Configure_gift_card_in_PDP_and_checkout" testid="DQA-2660" priority="P1" description="This test case validate the Register user Configure gift card in PDP and checkout.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_081_Register_user_Configure_gift_card_in_PDP_and_checkout"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_083_RegisterUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout" testid="DQA-2668" priority="P1" description="This test case validate the RegisterUser Add Other Amount To GiftCard In PDP And Checkout.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_083_RegisterUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_084_Placeorder_GuestUser_checkout_with_gift_card_X_MAS_GIFT_CARD" testid="DQA-2642" priority="P1" description="This test case validate the GuestUser checkout with gift card X MAS GIFT CARD.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_084_Placeorder_GuestUser_checkout_with_gift_card_X_MAS_GIFT_CARD"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_085_Placeorder_Guest_user_multiple_products_with_Giftcode_as_full_payment" testid="DQA-2643" priority="P1" description="This test case validate the Placeorder Guest user multiple products with Giftcode a full payment.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_085_Placeorder_Guest_user_multiple_products_with_Giftcode_as_full_payment"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_086_Guest_gift_card_add_to_My_favourites_and_Guest_create_account_with_My_Favourites_Gift_card_added" testid="DQA-2646" priority="P1" description="This test case validate the Guest gift card add to My favourites and Guest create account with My Favourites Gift card added .">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_086_Guest_gift_card_add_to_My_favourites_and_Guest_create_account_with_My_Favourites_Gift_card_added"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_087_Add_Giftcard_checkout_with_Promo_code_and_Configurable_Product" testid="DQA-2720" priority="P1" description="This test case validate the Add_Giftcard checkout with Promo code and Configurable Product">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_087_Add_Giftcard_checkout_with_Promo_code_and_Configurable_Product"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_088_Warrenty_Return_Authorization_Empty_and_invalid_Data" testid="DQA-2673" priority="P1" description="This test case validateing the Warrenty Return Authorization Empty and invalid Data.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_088_Warrenty_Return_Authorization_Empty_and_invalid_Data"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_090_Warrenty_Return_Authorization_Valid_Data" testid="DQA-2658" priority="P1" description="This test case validateing the Warrenty Return Authorization Valid Data.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_090_Warrenty_Return_Authorization_Valid_Data"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_092_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_at_Payment_Page_and_Place_an_Order" testid="DQA-2732" priority="P1" description="This test case validate the Add Gift Card Code in My Account Page and Select the Gift Card at Payment Page and Place an Order.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_092_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_at_Payment_Page_and_Place_an_Order"/>
+
+    </classes>
+
+   </test>
+
+   <test name="Test_DGLD_OS_COMMON_094_Guest_UsersCheckout_Gift_Card_code_and_discount_With_Full_payment" testid="DQA-2718" priority="P1" description="This test case validate the Guest UsersCheckout Gift Card code and discount With Full payment .">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_094_Guest_UsersCheckout_Gift_Card_code_and_discount_With_Full_payment"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_095_Register_user_adds_a_giftcard_to_the_Wishlist" testid="DQA-2705" priority="P1" description="This test case validateing the Register user adds a giftcard to the Wishlist.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_095_Register_user_adds_a_giftcard_to_the_Wishlist"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_096_RegisterUser_validate_Giftcard_PLP_page" testid="DQA-2706" priority="P1" description="This test case validate the RegisterUser validate Giftcard PLP page.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_096_RegisterUser_validate_Giftcard_PLP_page"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_097_Guest_Users_Checkout_Gift_Card_configurable_Product_With_Partial_payment" testid="DQA-2703" priority="P1" description="This test case validate the Guest Users Checkout Gift Card configurable Product With Partial payment.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_097_Guest_Users_Checkout_Gift_Card_configurable_Product_With_Partial_payment"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_102_RegisterUser_CC_Express_PayPal" testid="DQA-2681" priority="P1" description="This test case validate the RegisterUser CC Express PayPal">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_102_RegisterUser_CC_Express_PayPal"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_103_GuestUser_CC_Express_PayPal" testid="DQA-2683" priority="P1" description="This test case validate the GuestUser CC Express PayPal">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_103_GuestUser_CC_Express_PayPal"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_104_Pro_user_checkout_with_simple_configurable_with_Klarna_Payment" testid="DQA-2640" priority="P1" description="This test case validate the Pro user checkout with simple configurable with Klarna Payment.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_104_Pro_user_checkout_with_simple_configurable_with_Klarna_Payment"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_105_Pro_user_checkout_with_configurable_product_simple_with_discount" testid="DQA-2641" priority="P1" description="This test case validate the Pro user checkout with configurable product simple with discount.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_105_Pro_user_checkout_with_configurable_product_simple_with_discount"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_106_Placeorder_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping" testid="DQA-2644" priority="P1" description="This test case validate the Register user checkout PP with Multiple products with Discount differentbilling and shipping.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_106_Placeorder_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_107_Guestuser_Checkout_with_Paypal" testid="DQA-2645" priority="P1" description="This test case validate the Guestuser Checkout with Paypal.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_107_Guestuser_Checkout_with_Paypal"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_108_GuestUser_checkout_OrderTotal_LessThan50_Klarna_SavedPayment_Standard_Shipping_Cost_Amount" testid="DQA-2647" priority="P1" description="This test case validate the GuestUser checkout OrderTotal LessThan50 Klarna SavedPayment Standard Shipping Cost Amount.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_108_GuestUser_checkout_OrderTotal_LessThan50_Klarna_SavedPayment_Standard_Shipping_Cost_Amount"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_109_RegisterUser_checkout_Klarna_SavedPayment_Standard_Shipping" testid="DQA-2384" priority="P1" description="This test case validate the RegisterUser checkout Klarna SavedPayment Standard Shipping.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_109_RegisterUser_checkout_Klarna_SavedPayment_Standard_Shipping"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_110_PROCustomer_Checkout_with_Multiple_Items_using_CC_with_Gift_Code_Partial" testid="DQA-2675" priority="P1" description="This test case validate the PROCustomer Checkout with Multiple Item using CC with Gift Code Partial.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_110_PROCustomer_Checkout_with_Multiple_Items_using_CC_with_Gift_Code_Partial"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_111_PRO_Customer_Checkout_with_Giftcard_single_Item_Using_CC" testid="DQA-2662" priority="P1" description="This test case validate the PRO Customer Checkout with Giftcard single Item Using CC.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_111_PRO_Customer_Checkout_with_Giftcard_single_Item_Using_CC"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_112_PRO_Customer_Checkout_with_Gift_card_Multiple_Line_Item_Using_CC" testid="DQA-2657" priority="P1" description="This test case validate the PRO Customer Checkout with Gift card Multiple Line Item Using CC.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_112_PRO_Customer_Checkout_with_Gift_card_Multiple_Line_Item_Using_CC"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_113_PRO_Customer_Checkout_with_Gift_card_one_Line_Item_Using_CC_Gift_Code_Partial_Redemtion" testid="DQA-2667" priority="P1" description="This test case validate the PRO Customer Checkout with Gift card one Line Item Using CC Gift Code Partial Redemtion.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_113_PRO_Customer_Checkout_with_Gift_card_one_Line_Item_Using_CC_Gift_Code_Partial_Redemtion"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_120_PRO_Customer_Checkout_With_SingleItem_Using_CC" testid="DQA-2719" priority="P1" description="This test case validate the PRO Customer Checkout With SingleItem Using CC.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_120_PRO_Customer_Checkout_With_SingleItem_Using_CC"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_121_PROCustomer_Checkout_Single_Item_with_Paypal" testid="DQA-2723" priority="P1" description="This test case validate the PROCustomer Checkout Single Item with Paypal.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_121_PROCustomer_Checkout_Single_Item_with_Paypal"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_122_PRO_Customer_Checkout_Multiple_Products_with_PayPal" testid="DQA-2722" priority="P1" description="This test case validate the PRO Customer Checkout Multiple Products with PayPal.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_122_PRO_Customer_Checkout_Multiple_Products_with_PayPal"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_123_PRO_Customer_Checkout_Single_Item_Using_CC_with_Promotion" testid="DQA-2714" priority="P1" description="This test case validate the PRO Customer Checkout Single Item Using CC with Promotion.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_123_PRO_Customer_Checkout_Single_Item_Using_CC_with_Promotion"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_Using_Paypal_method" testid="DQA-2716" priority="P1" description="This test case validate the PRO Customer Checkout with Gift card Item Using Paypal method.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_Using_Paypal_method"/>
+
+    </classes>
+
+   </test>
+
+    <test name="TEST_DGLD_OS_COMMON_126_Product_Registration_form" testid="DQA-2698" priority="P1" description="This test case validate the Product Registration form.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_126_Product_Registration_form"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_127_Register_user_Products_are_added_to_the_Wishlist_from_the_PDP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products" testid="DQA-3528" priority="P1" description="This test case validate the Register user Products are added to the Wishlist from the PDP page and Checkout from the ShoppingCart page with Your Favorites Products.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_127_Register_user_Products_are_added_to_the_Wishlist_from_the_PDP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products"/>
+
+    </classes>
+
+   </test>
+
+   <test name="TEST_DGLD_OS_COMMON_128_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_YourFavorites_Products" testid="DQA-3529" priority="P1" description="This test case validate the Registeruser Products are added to the Wishlist from the PLP page and Checkout from the ShoppingCart page with YourFavorites Products.">
+
+    <classes>
+
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_128_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_YourFavorites_Products"/>
+
+    </classes>
+
+   </test>
