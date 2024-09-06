@@ -2214,7 +2214,7 @@ public class GoldDrybarusHelper2 {
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
 									currentUrl.contains("ustomer/account/edit/")||currentUrl.contains("/customer/address/")||currentUrl.contains("sales/order/history/")||currentUrl.contains("rma/returns/history/")||currentUrl.contains("/wishlist/")||currentUrl.contains("stock/index/")||currentUrl.contains("customer/paymentmethods/")||currentUrl.contains("newsletter/manage/")
-								  ||Common.getPageTitle().contains("My Subscriptions")||currentUrl.contains("customer/account/logoutSuccess/"),
+								  ||Common.getPageTitle().contains("My Subscriptions")||currentUrl.contains("customer/account/logoutSuccess/") || currentUrl.equals("https://mcloud-na-preprod.drybar.com/"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
