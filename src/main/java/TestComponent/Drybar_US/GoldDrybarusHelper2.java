@@ -10994,9 +10994,11 @@ public void videos_validation() {
 	
 }
 
-public String fifteenpercent_Reward_Points() {
+public String fifteenpercent_Reward_Points(String Dataset) {
 	// TODO Auto-generated method stub
 	String rewardpointsused="";
+	String points=data.get(Dataset).get("Discountcode");
+	
 	try
 	{
 		Thread.sleep(4000);
@@ -11012,6 +11014,10 @@ public String fifteenpercent_Reward_Points() {
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ENTER);
+		 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
+		 Thread.sleep(4000);
+		 rewardpointsused=pointsused.replace(pointsused, points);
+		 System.out.println(rewardpointsused);
 		Common.clickElement("xpath","//button[@aria-label='Apply']");
  		Sync.waitForLoad();
  		Thread.sleep(6000);
@@ -11025,8 +11031,8 @@ public String fifteenpercent_Reward_Points() {
 		   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
 					"After clicking on the apply button reward points should be apply", "Sucessfully reward points has been applied",
 					"failed to apply the reward point in the order summary page");
-		   rewardpointsused=Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim().replace("YOU HAVE ", "").replace(" POINTS", "");
-		   System.out.println(rewardpointsused);
+		  Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim().replace("YOU HAVE ", "").replace(" POINTS", "");
+		   
  		
 	}
 	catch(Exception | Error e)
@@ -11154,7 +11160,10 @@ public void verify_RewardPoints(String rewardpoints) {
 		Thread.sleep(4000);
 		String rewardhistroy=Common.findElement("xpath", "//div[text()='Rewards History']").getText();
 		System.out.println(rewardhistroy);
-		Common.assertionCheckwithReport(rewardhistroy.equals("Rewards History"), "validating the reward points redeem in the order summary page",
+		String pointusing=Common.findElement("xpath", "(//div[@aria-colindex='4']//div[@class='yotpo-inner-text'])[5]").getText().trim().replace("-", "");
+		System.out.println(pointusing);
+		System.out.println(rewardpoints);
+		Common.assertionCheckwithReport(rewardhistroy.equals("Rewards History") && rewardpoints.equals(pointusing) , "validating the reward points redeem in the order summary page",
 				"After clicking on the apply button reward points should be apply", "sucessfully reward points applied on the order summary page",
 				"failed to apply the reward point in the order summary page");
 		
