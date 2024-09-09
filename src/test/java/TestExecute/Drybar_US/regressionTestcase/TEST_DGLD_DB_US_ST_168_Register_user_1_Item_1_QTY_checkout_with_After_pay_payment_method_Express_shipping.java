@@ -28,7 +28,7 @@ public class TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_Aft
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("Express method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			String rewardpoints = Drybar.Ten_percent_Reward_Points("$10 Off (300 points)");
+			String rewardpoints = Drybar.Ten_percent_Reward_Points("$10 Off (200 points)");
 			Drybar.After_Pay_payment("Afterpay");
 
 		} catch (Exception e) {
@@ -39,7 +39,7 @@ public class TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_Aft
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

@@ -30,6 +30,7 @@ public class TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page {
 			String newaddress= Drybar.shipping_new_Address("BillingDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			String rewardpoints = Drybar.Twenty_percent_Reward_Points("$20 Off (400 points)");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			Drybar.Verify_Address(newaddress);
 			
