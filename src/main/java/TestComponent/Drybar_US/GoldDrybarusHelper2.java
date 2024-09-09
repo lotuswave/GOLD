@@ -11186,6 +11186,83 @@ public void verify_RewardPoints(String rewardpoints) {
 	}
 	
 }
+
+public void Add_to_cart_Whishlist() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//span[@x-text='options.label']");
+		String Instock=Common.findElement("xpath", "//span[@x-text='options.label']").getText().trim();
+		System.out.println(Instock);
+		if(Instock.equals("In stock"))
+		{
+			Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
+			Common.clickElement("xpath", "//button[@data-role='tocart']");
+			Thread.sleep(5000);
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+					.getAttribute("ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+		}
+		else
+		{
+			Sync.waitElementPresent("xpath", "//button[@data-role='remove']");
+			Common.clickElement("xpath", "//button[@data-role='remove']");
+			Thread.sleep(5000);
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+					.getAttribute("ui-id");
+			System.out.println(message);
+			Common.assertionCheckwithReport(message.contains("success"), "Validating the product removed from the Whishlist",
+					"After clicking on the delete button product should be removed from the whishlist", "Sucessfully product removed from the whishlist",
+					"failed to remove the product from the whishlist");
+			
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Hair Products')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Hair Products')]");
+			Sync.waitElementPresent("xpath", "//span[text()='All Hair Products']");
+			Common.clickElement("xpath", "//span[text()='All Hair Products']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[@class='absolute right-0 top-0 flex flex-col']");
+			Common.clickElement("xpath", "//div[@class='absolute right-0 top-0 flex flex-col']");
+			Thread.sleep(5000);
+			String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']")
+					.getAttribute("ui-id");
+			System.out.println(message1);
+			Common.assertionCheckwithReport(message1.contains("success"), "validating the  product add to the whishlist",
+					"Product should be whishlist", "Sucessfully product added to the whishlist ",
+					"failed product added to the Whishlist");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[contains(text(),'Wish List')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Wish List')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
+			Common.clickElement("xpath", "//button[@data-role='tocart']");
+			Thread.sleep(5000);
+			String message2 = Common.findElement("xpath", "//div[@ui-id='message-success']")
+					.getAttribute("ui-id");
+			System.out.println(message2);
+			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+					"Product should be add to cart", "Sucessfully product added to the cart ",
+					"failed to add product to the cart");
+			
+			
+			
+		}
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		Assert.fail();
+	}
+	
+}
  
 }
 

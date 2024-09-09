@@ -25,7 +25,12 @@ public class TEST_DGLD_DB_US_ST_039_GuestUser_Add_product_from_pdp_to_wishlist_s
 		    Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
 			Drybar.My_Favorites();       // need to add to checkout also present it is not dispalying in my fav
-			
+			Drybar.Add_to_cart_Whishlist();
+			Drybar.minicart_Checkout();
+			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.selectshippingmethod("GroundShipping method");
+			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 			
 
 		} catch (Exception e) {
