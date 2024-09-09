@@ -11250,8 +11250,6 @@ public void Add_to_cart_Whishlist() {
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 			
-			
-			
 		}
 	}
 	catch(Exception | Error e)

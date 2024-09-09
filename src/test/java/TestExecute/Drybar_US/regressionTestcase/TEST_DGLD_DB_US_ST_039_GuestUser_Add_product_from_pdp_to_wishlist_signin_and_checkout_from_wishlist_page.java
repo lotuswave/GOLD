@@ -31,7 +31,6 @@ public class TEST_DGLD_DB_US_ST_039_GuestUser_Add_product_from_pdp_to_wishlist_s
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
-			
 
 		} catch (Exception e) {
 
