@@ -28,7 +28,7 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 			Admin.Add_product_SKU("OXOWebsite");
 			Admin.update_customprice("LowPriceOverride");
 			Admin.shippingaddress("OXOWebsite");
-			Admin.Select_Shipping_method();
+			Admin.Select_Shipping_method("OXOWebsite");
 			Admin.Update_StoreCredit_ExistingCustomer("OXOWebsite");
 			Admin.Select_Storecredit_payment_method();
 			Admin.Submit_RetailOrder_Success();

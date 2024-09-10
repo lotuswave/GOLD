@@ -7419,8 +7419,11 @@ public class GoldAdminHelper {
 	}
 
 
-	public void Select_Shipping_method() {
+	public void Select_Shipping_method(String dataSet) {
 		// TODO Auto-generated method stub
+		
+		String Website = data.get(dataSet).get("Store");
+		
 		try {
 			
 			//Common.scrollIntoView("xpath", "//div[@id='order-shipping-method-summary']/a");
@@ -7429,11 +7432,29 @@ public class GoldAdminHelper {
 
 			Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and rates')]");
 			Thread.sleep(2000);
-
+			
+			if(Website.contains("Drybar Store View"))
+			{
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//input[@id='s_method_amstrates_amstrates31']");
+				Common.clickElement("xpath", "//input[@id='s_method_amstrates_amstrates31']");
+				Sync.waitPageLoad();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				// need to add the second shipment after shipments are avaliable
+			}
+			else if(Website.contains("Osprey US English"))
+			{
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//input[@id='s_method_amstrates_amstrates1']");
+				Common.clickElement("xpath", "//input[@id='s_method_amstrates_amstrates1']");
+				Sync.waitPageLoad();
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			}
+			else
+			{
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//input[@id='s_method_tablerate_bestway']");
 			Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
-
 			Sync.waitPageLoad();
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			int selectedshippingmethods = Common.findElements("xpath", "//dd[contains(text(),'Ground')]").size();
@@ -7446,6 +7467,8 @@ public class GoldAdminHelper {
 					"Shipping methods should be selected and change the shipping methods link should be displayed",
 					"Shipping methods are selected and change the shipping methods link is displayed",
 					"Failed to select Shipping methods and change the shipping methods link is not displayed");
+			}
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7855,6 +7878,7 @@ ExtenantReportUtils.addFailedLog("To validate the page price successfully and su
 					Common.textBoxInput("xpath", "//input[@id='order-billing_address_street0']",
 							data.get(dataSet).get("streetaddress"));
 
+					Thread.sleep(4000);
 					Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_country_id']");
 					Common.dropdown("xpath", "//select[@id='order-billing_address_country_id']", Common.SelectBy.TEXT,
 							data.get(dataSet).get("Country"));

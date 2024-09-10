@@ -29,7 +29,7 @@ public class Test_DGLD_Admin_ST_022_Register_Magento_Retail_Order_Placement {
     	Admin.Select_astore();
         Admin.Add_product_SKU("RetailOrder");
     	Admin.shippingaddress("RetailOrder");
-    	Admin.Select_Shipping_method();
+    	Admin.Select_Shipping_method("RetailOrder");
     	Admin.Select_Storecredit_payment_method();
     	Admin.Submit_RetailOrder_Success();
     	

@@ -28,7 +28,7 @@ public class Test_DGLD_Admin_ST_036_HF_WarrantyOrderPlacement {
         Admin.Add_configurableproduct_SKU("HFProducts");
         Admin.update_customprice("CustomPrice");
         Admin.shippingaddress("OXOWebsite");
-        Admin.Select_Shipping_method();
+        Admin.Select_Shipping_method("HFWebsite");
 	     Admin.Submit_Replacement_Success();
     	
            

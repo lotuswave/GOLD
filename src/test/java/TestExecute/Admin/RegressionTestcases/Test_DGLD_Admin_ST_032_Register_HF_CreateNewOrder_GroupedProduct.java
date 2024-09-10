@@ -26,7 +26,7 @@ public class Test_DGLD_Admin_ST_032_Register_HF_CreateNewOrder_GroupedProduct {
 			Admin.AddProduct_By_SKU_Group_Product("HFGroupproduct");
 			Admin.AddProduct_By_SKU_Configure_child_Products("HFGroupproduct");
 			Admin.shippingaddress("Details");
-			Admin.Select_Shipping_method();
+			Admin.Select_Shipping_method("HFWebsite");
 			Admin.Default_Payment_method("Details");
 
 		} catch (Exception e) {

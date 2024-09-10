@@ -25,7 +25,7 @@ public class Test_DGLD_Admin_Gobal_ST_022_Register_Magento_Retail_Order_Placemen
 			Admin.Select_Store("HYFWebsite");
 			Admin.Add_product_SKU("HYFWebsite");
 			Admin.shippingaddress("HYFWebsite");
-			Admin.Select_Shipping_method();
+			Admin.Select_Shipping_method("HYFWebsite");
 			Admin.Update_StoreCredit_ExistingCustomer("HYFWebsite");
 			Admin.Select_Storecredit_payment_method();
 			Admin.Submit_RetailOrder_Success();

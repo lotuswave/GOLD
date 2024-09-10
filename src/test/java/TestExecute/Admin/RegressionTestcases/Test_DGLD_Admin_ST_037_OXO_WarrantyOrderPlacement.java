@@ -27,7 +27,7 @@ public class Test_DGLD_Admin_ST_037_OXO_WarrantyOrderPlacement {
          Admin.Add_configurableproduct_SKU("OXOProducts");
          Admin.update_customprice("CustomPrice");
          Admin.shippingaddress("OXOWebsite");
-         Admin.Select_Shipping_method();
+         Admin.Select_Shipping_method("OXOWebsite");
 	     Admin.Submit_Replacement_Success();
            
         }
