@@ -22,24 +22,17 @@ public class Test_DGLD_Admin_ST_023_Promotion_Cart_Rule_Prices {
 			Admin.select_cart_price_rule();
 			Admin.Click_AddNewRule("AccountDetails");
 			Admin.Rule_information("AccountDetails");
-			Admin.open_website("Address");
-			Admin.search_product("Product");
-			Admin.addtocart("Product");
-			Admin.minicart_Checkout();
-			Admin.addDeliveryAddress_Guestuser("Addressbook");
-			Admin.clickSubmitbutton_Shippingpage();
-			Admin.discountCode("Discount");
-			Admin.updatePaymentAndSubmitOrder("PaymentDetails");
 			Admin.open_website("OXO");
-			Admin.coffee_headerlinks("Coffee & Beverage");
-			Admin.addtocart("addproduct");
+			Admin.search_product("OXO");
+			Admin.addtocart("OXO");
 			Admin.minicart_Checkout();
-			Admin.addDeliveryAddress_Guestuser("Addressbook");
+			Admin.addDeliveryAddress_Guestuser("OXO");
 			Admin.clickSubmitbutton_Shippingpage();
-			Admin.discountCode("Discount");
-			Admin.updatePaymentAndSubmitOrder("PaymentDetails");
-			Admin.Backto_magento_admin();
-			Admin.delet_existing_Coupon("AccountDetails");
+			Admin.discountCode("OXO");
+			Admin.updatePaymentAndSubmitOrder("OXO");
+			
+//			Admin.Backto_magento_admin();
+//			Admin.delet_existing_Coupon("AccountDetails");
 
 		} catch (Exception e) {
 
