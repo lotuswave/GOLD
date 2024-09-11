@@ -9592,8 +9592,11 @@ public void delet_existing_Coupon(String dataSet) {
 	}
 		
 		public void Update_StoreCredit_ExistingCustomer(String DataSet) {
+			
+			String Symbol=data.get(DataSet).get("Symbol");
+			System.out.println(Symbol);
 			String grandtotal = Common.findElement("xpath", "//td[@class='admin__total-amount']/strong").getText()
-					.replace("$", "");
+					.replace(Symbol, "");
 			System.out.println("Website"+grandtotal);
 			float GrandTotal = Float.parseFloat(grandtotal);
 
