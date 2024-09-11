@@ -4680,10 +4680,11 @@ public class GoldAdminHelper {
 				Common.oppenURL(data.get(Dataset).get("prodURL"));
 				Common.oppenURL(data.get(Dataset).get("prodURL"));
 			}
-
+   
 			Sync.waitPageLoad(40);
 
-			String uname = Common.getPageTitle();Common.assertionCheckwithReport(uname.contains("Hydro Flask | Vacuum Insulated Stainless Steel Water Bottles"),
+			String uname = Common.getPageTitle();
+			Common.assertionCheckwithReport(uname.contains("Hydro Flask | Vacuum Insulated Stainless Steel Water Bottles"),
 					"Validating the User lands to the Hydroflask page",
 					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
 					"Failed to navigate to the hydroflask page");
@@ -7702,7 +7703,7 @@ ExtenantReportUtils.addFailedLog("To saearch product in the  the home page succe
 			
 			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "(//input[@name='product[tier_price][1][price_qty]'])",data.get(dataSet).get("Qty"));
-			Common.textBoxInput("xpath", "(//input[@class='admin__control-text'])[24]",data.get(dataSet).get("Qty"));
+			Common.textBoxInput("xpath", "//input[@name='product[tier_price][1][price_qty]']",data.get(dataSet).get("Qty"));
 			Thread.sleep(5000);
 			//Common.textBoxInput("xpath", "(//select[@name='product[tier_price][1][value_type]'])",data.get(dataSet).get("QtyPrice1"));
 			
