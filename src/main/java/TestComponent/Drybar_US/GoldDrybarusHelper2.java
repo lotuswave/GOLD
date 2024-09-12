@@ -7542,8 +7542,8 @@ public void FUll_Payment(String dataSet) {
 		    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    				}
 	    				else {
-	    				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
-	    				Common.clickElement("xpath", "//a[@title='My Favorites']");
+	    				Sync.waitElementPresent(30, "xpath", "//span[text()='Wish List']");
+	    				Common.clickElement("xpath", "//span[text()='Wish List']");
 	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") || Common.getPageTitle().equals("Wish List Sharing"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
@@ -7672,11 +7672,11 @@ public void FUll_Payment(String dataSet) {
 	    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
 	    				Sync.waitPageLoad();
-//	    				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-//	    				System.out.println(message);
-//	    				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
-//	    						"validating the  product add to the Whishlist", "Product should be add to whishlist",
-//	    						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+	    				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	    				System.out.println(message);
+	    				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
+	    						"validating the  product add to the Whishlist", "Product should be add to whishlist",
+	    						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 	    				
 	    				}
 	    				whishlist_share_Button("share whishlist");
