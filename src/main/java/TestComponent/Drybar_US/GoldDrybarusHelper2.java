@@ -7592,13 +7592,13 @@ public void FUll_Payment(String dataSet) {
 	    				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 	    				Common.javascriptclickElement("xpath", "//button[contains(text(),'Share Wish List')]");
 	    				Thread.sleep(8000);
-//	    				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-//	    				System.out.println(message1);
-//	    				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
-//	    						"validating the shared whishlist functionality",
-//	    						"sucess message should display after share whishlist",
-//	    						"Sucessfully message has been displayed for whishlist",
-//	    						"failed to display the message for whishlist");
+	    				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	    				System.out.println(message1);
+	    				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
+	    						"validating the shared whishlist functionality",
+	    						"sucess message should display after share whishlist",
+	    						"Sucessfully message has been displayed for whishlist",
+	    						"failed to display the message for whishlist");
 	    			
 	    			}
 	    			else
@@ -7644,12 +7644,12 @@ public void FUll_Payment(String dataSet) {
 	    				Common.javascriptclickElement("xpath", "(//span[contains(@class, 'group-hover/wishlist')])[1]");
 	    				if(Common.getCurrentURL().contains("stage"))
 	                    {
-//	                        Sync.waitPageLoad();
-//	                        String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-//	                        System.out.println(message);
-//	                        Common.assertionCheckwithReport(message.contains("has been added to your Favourites"),
-//	                                "validating the  product add to the Favorites", "Product should be add to Favorites",
-//	                                "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
+	                        Sync.waitPageLoad();
+	                        String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	                        System.out.println(message);
+	                        Common.assertionCheckwithReport(message.contains("has been added to your Favourites"),
+	                                "validating the  product add to the Favorites", "Product should be add to Favorites",
+	                                "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
 	                        whishlist_share_Button("share whishlist");
 
 	                    }
