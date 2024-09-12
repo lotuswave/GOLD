@@ -6679,9 +6679,9 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
@@ -11118,6 +11118,10 @@ public String fivepercent_Reward_Points(String Dataset) {
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.actionsKeyPress(Keys.ENTER);
+		 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
+		 Thread.sleep(4000);
+		 rewardpointsused=pointsused.replace(pointsused, points);
+		 System.out.println(rewardpointsused);
 		Common.clickElement("xpath", "//button[@aria-label='Apply']");
 		Sync.waitForLoad();
 		Thread.sleep(8000);
