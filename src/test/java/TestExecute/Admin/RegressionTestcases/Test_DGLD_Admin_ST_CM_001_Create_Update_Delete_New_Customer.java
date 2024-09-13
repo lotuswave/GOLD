@@ -43,7 +43,7 @@ public class Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

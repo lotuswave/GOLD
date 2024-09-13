@@ -68,11 +68,11 @@ public class GoldAdminHelper {
             Sync.waitPageLoad();
 
  
-
-            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
-            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
-                Common.javascriptclickElement("id", "KmsiCheckboxField");
-            }
+//
+//            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
+//            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
+//                Common.javascriptclickElement("id", "KmsiCheckboxField");
+//            }
            // Sync.waitElementClickable("id", "idSIButton9");
           //  Common.mouseOverClick("id", "idSIButton9");
             Sync.waitPageLoad();
@@ -159,12 +159,50 @@ public class GoldAdminHelper {
 
 	public void Newcustomer(String Dataset) {
 		// TODO Auto-generated method stub
+		String website=data.get(Dataset).get("website");
+		System.out.println(website);
 		try {
+			int filters=Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+			if(filters>0)
+			{
+				Common.clickElement("xpath", "//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+				Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+				Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+				Common.clickElement("xpath", "//div[@class='admin__form-field-control']//option[text()='"+ website +"']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[@class='action-secondary']//span[text()='Apply Filters']");
+				Thread.sleep(3000);
+//				Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+				String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
+				if (records.equals("0 records found")) {
+					Sync.waitElementPresent("xpath", "//button[@title='Add New Customer']");
+					Common.clickElement("xpath", "//button[@title='Add New Customer']");
+				} else {
+					Delete_exiting_customer(Dataset);
+					Sync.waitElementPresent("xpath", "//button[@title='Add New Customer']");
+					Common.clickElement("xpath", "//button[@title='Add New Customer']");
+				}
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().equals("New Customer / Customers / Customers / Magento Admin"),
+						"Validating the new customer page  ",
+						"Click on the new customer it should  navigate to the new customer page",
+						"Successfully navigate to new Customer page", "Failed to navigate to New Customer page");
+				
+			}
+			else
+			{
 			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.actionsKeyPress(Keys.ENTER);
-			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//div[@class='admin__form-field-control']//option[text()='"+ website +"']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//button[@class='action-secondary']//span[text()='Apply Filters']");
+			Thread.sleep(3000);
+//			Common.clickElement("x
+//			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			if (records.equals("0 records found")) {
 				Sync.waitElementPresent("xpath", "//button[@title='Add New Customer']");
@@ -180,7 +218,7 @@ public class GoldAdminHelper {
 					"Validating the new customer page  ",
 					"Click on the new customer it should  navigate to the new customer page",
 					"Successfully navigate to new Customer page", "Failed to navigate to New Customer page");
-
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the new customer page  ",
@@ -194,16 +232,28 @@ public class GoldAdminHelper {
 
 	public void Delete_exiting_customer(String Dataset) {
 		// TODO Auto-generated method stub
+		String email=data.get(Dataset).get("Email");
+		System.out.println(email);
 		try {
 
 			Common.clickElement("xpath", "//a[text()='Edit']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[text()='Account Information']");
+			Common.clickElement("xpath", "//span[text()='Account Information']");
+			Thread.sleep(4000);
+			String customeremail=Common.findElement("xpath", "//input[@name='customer[email]']").getAttribute("value");
+			System.out.println(customeremail);
+			if(customeremail.equals(email))
+			{
 			Sync.waitElementPresent("xpath", "//button[@title='Delete Customer']");
 			Common.javascriptclickElement("xpath", "//button[@title='Delete Customer']");
+			Thread.sleep(4000);
 			String message = Common
 					.findElement("xpath", "//aside[contains(@class,'confirm _show')]//div[@class='modal-content']")
 					.getText();
 			if (message.contains("Are you sure you want to do this?")) {
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='OK']");
 
 			} else {
@@ -219,7 +269,11 @@ public class GoldAdminHelper {
 					"after clicking save button it will navigate Customer filed page and message should be displayed",
 					"Successfully navigate to Customer filed page and message is dispalyed",
 					"Failed to navigate to Customer filed page");
-
+			}
+			else
+			{
+				Assert.fail();
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation ",
@@ -294,24 +348,23 @@ public class GoldAdminHelper {
 	}
 
 	public void Updatedetails(String Dataset) {
-
+		String website=data.get(Dataset).get("website");
+		System.out.println(website);
 		try {
-			int existingfilters = Common
-					.findElements("xpath", "//div[@class='sticky-header']//ul[contains(@class,'current-filters-list')]")
-					.size();
-			if (existingfilters > 0) {
-				Common.javascriptclickElement("xpath", "//div[@class='sticky-header']//button[@class='action-remove']");
-			}
+			Common.clickElement("xpath", "//div[@class='admin__current-filters-actions-wrap']//button[text()='Clear all']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.actionsKeyPress(Keys.ENTER);
-			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//div[@class='admin__form-field-control']//option[text()='"+ website +"']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//button[@class='action-secondary']//span[text()='Apply Filters']");
+			Thread.sleep(3000);
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			System.out.println(records);
 			if (records.equals("1 records found")) {
 				Common.clickElement("xpath", "//a[text()='Edit']");
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("testing qa / Customers"),
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Testing Qa / Customers"),
 						"Validating the edit button on the customers page",
 						"After clicking edit button it should navigate to the selected page",
 						"Successfully navigate to the selected page when we click on edit button",
