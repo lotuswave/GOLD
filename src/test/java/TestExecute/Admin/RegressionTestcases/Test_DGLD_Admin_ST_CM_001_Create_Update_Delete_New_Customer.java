@@ -23,18 +23,20 @@ public class Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer {
 			Admin.Admin_signin("AccountDetails");
 			Admin.Customers();
 			Admin.Allcustomers();
-			Admin.Newcustomer("Customer");
-			Admin.Customerdetails("Customer");
-			 Admin.Updatedetails("Customer");
+			Admin.Newcustomer("HYFCustomer");
+			Admin.Customerdetails("HYFCustomer");
+			 Admin.Updatedetails("HYFCustomer");
 		     Admin.Address("Address");
-		     Admin.Orders("Orders"); 
-		     Admin.Returns("Orders");
+		     Admin.Orders("HYFCustomer"); 
+		     Admin.Returns("HYFCustomer");
 //		     Admin.shoppingcart("shoppingid");
-		     Admin.Whishlist("Whishlist");
+		     Admin.Whishlist("HYFCustomer");
 		     Admin.Newsletter();
 		     Admin.Savecustomer();
-		     Admin.Delete_customer("Customer");
+		     Admin.Delete_customer("HYFCustomer");
 		     
+		     
+		     //HYFCustomer OxoCustomer OSPUSCustomer DRYCustomer change customer name as per the website
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

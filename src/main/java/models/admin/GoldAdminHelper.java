@@ -315,8 +315,27 @@ public class GoldAdminHelper {
 			Common.actionsKeyPress(Keys.END);
 			Sync.waitElementPresent("xpath", "//select[@name='customer[prodeal_status]']");
 			Common.clickElement("xpath", "//select[@name='customer[prodeal_status]']");
+			String websitename=Common.findElement("xpath", "//select[@name='customer[website_id]']").getAttribute("value");
+			System.out.println(websitename);
+			if(websitename.equals("Hydroflask Website"))
+			{
 			Common.dropdown("xpath", "//select[@name='customer[prodeal_status]']", Common.SelectBy.TEXT,
 					data.get(Dataset).get("ProDeal"));
+			Common.clickElement("xpath", "//button[@title='Save Customer']");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//div[@data-ui-id='messages-message-success']");
+			String savemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("Customers / Customers / Magento Admin")
+							&& savemessage.equals("You saved the customer."),
+					"To validate the customers Field page navigation and saved message ",
+					"After clicking save button it will navigate Customer Field page and it should be display save message",
+					"Successfully navigate to Customer field page and save message has displayed",
+					"Unable to navigate to the Customer field page and save message is not displayed");
+			}
+			else
+			{
 
 //			Sync.waitElementPresent("xpath", "//input[@name='customer[prodeal_accept_date]']");
 //			Common.clickElement("xpath", "//input[@name='customer[prodeal_accept_date]']");
@@ -335,7 +354,7 @@ public class GoldAdminHelper {
 					"After clicking save button it will navigate Customer Field page and it should be display save message",
 					"Successfully navigate to Customer field page and save message has displayed",
 					"Unable to navigate to the Customer field page and save message is not displayed");
-
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate customers field page navigation and saved message ",
@@ -574,11 +593,13 @@ public class GoldAdminHelper {
 		try {
 
 			Common.clickElement("xpath", "//a[@id='tab_newsletter_content']");
+			Thread.sleep(3000);
 			String newsletter = Common.findElement("xpath", "//label[@class='label admin__field-label']").getText();
+			System.out.println(newsletter);
 			if (newsletter.equals("Subscribed to Newsletter")) {
 				Sync.waitElementPresent("xpath", "//label[@class='label admin__field-label']");
 				Common.clickElement("xpath", "//label[@class='label admin__field-label']");
-				String checkbox = Common.findElement("xpath", "//input[@name='subscription_status[1]']")
+				String checkbox = Common.findElement("xpath", "//input[contains(@name,'subscription_status')]")
 						.getAttribute("value");
 				Common.assertionCheckwithReport(checkbox.equals("true"), "Validating the newsletter checkbox clicked",
 						"newsletter checkbox should be selected the checkbox",
@@ -626,13 +647,25 @@ public class GoldAdminHelper {
 
 	public void Delete_customer(String Dataset) {
 		// TODO Auto-generated method stub
+		String email=data.get(Dataset).get("Email");
+		System.out.println(email);
+		String website=data.get(Dataset).get("website");
+		System.out.println(website);
 		try {
+			int filters=Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+			if(filters>0)
+			{
+				Common.clickElement("xpath", "//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Thread.sleep(4000);
+			}
 
 			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.actionsKeyPress(Keys.ENTER);
-			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			Common.clickElement("xpath", "//div[@class='admin__form-field-control']//option[text()='"+ website +"']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//button[@class='action-secondary']//span[text()='Apply Filters']");
+			Thread.sleep(4000);
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
 			if (records.equals("1 records found")) {
 				Common.clickElement("xpath", "//a[text()='Edit']");
@@ -640,11 +673,22 @@ public class GoldAdminHelper {
 				Assert.fail();
 			}
 			Sync.waitPageLoad();
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[text()='Account Information']");
+			Common.clickElement("xpath", "//span[text()='Account Information']");
+			Thread.sleep(4000);
+			String customeremail=Common.findElement("xpath", "//input[@name='customer[email]']").getAttribute("value");
+			System.out.println(customeremail);
+			if(customeremail.equals(email))
+			{
 			Sync.waitElementPresent("xpath", "//button[@title='Delete Customer']");
 			Common.clickElement("xpath", "//button[@title='Delete Customer']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@class='modal-content']").getText();
 			if (message.equals("Are you sure you want to do this?")) {
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[text()='OK']");
 
 			} else {
@@ -661,7 +705,11 @@ public class GoldAdminHelper {
 					"after clicking save button it will navigate Customer filed page and message should be dispalyed",
 					"Successfully navigate to Customer filed page and message is dispalyed",
 					"Failed to navigate to Customer filed page");
-
+			}
+			else
+			{
+				Assert.fail();
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating customers filed page navigation ",
