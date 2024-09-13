@@ -634,6 +634,7 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "//button[@data-ui-id='save-button']");
 			Common.clickElement("xpath", "//button[@data-ui-id='save-button']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			String savemessage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 			System.out.println(savemessage);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
