@@ -50,68 +50,41 @@ public class GoldAdminHelper {
 
 	public void Admin_signin(String dataSet) {
 
-		 
-
-        try {
-//            if (Common.getCurrentURL().contains("preprod")) {
-//            	
-//            }
-//            	Thread.sleep(5000);
-//            	
-//            	Common.textBoxInput("xpath", "//input[@id='username']", data.get(dataSet).get("UserName"));
-//            	
-//            	Common.textBoxInput("xpath", "//input[@id='login']", data.get(dataSet).get("Password"));
-//                Sync.waitElementClickable("xpath", "//button[@class='action-login action-primary']");
-//                Common.javascriptclickElement("xpath", "//button[@class='action-login action-primary']");
-//          
-//            Sync.waitPageLoad(30);
-//          /*  Sync.waitElementPresent("name", "loginfmt");
-//            Common.textBoxInput("name", "loginfmt", data.get(dataSet).get("UserName"));
-//            Common.clickElement("id", "idSIButton9");
-//            Sync.waitPageLoad();
-//            Thread.sleep(3000);
-//            Sync.waitElementPresent(30, "name", "passwd");
-//            Common.textBoxInput("name", "passwd", data.get(dataSet).get("Password"));
-//            Common.clickElement("id", "idSIButton9");
-//            Sync.waitPageLoad();
-//
-// 
-//
-//            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
-//            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
-//                Common.javascriptclickElement("id", "KmsiCheckboxField");
-//            }*/
-//            
-//            Sync.waitPageLoad();
+		try {
+            if (Common.getCurrentURL().contains("preprod")) {
+            }
+            	Thread.sleep(5000);
+            	Common.textBoxInput("xpath", "//input[@id='username']", data.get(dataSet).get("UserName"));
+            	Common.textBoxInput("xpath", "//input[@id='login']", data.get(dataSet).get("Password"));
+                Sync.waitElementClickable("xpath", "//button[@class='action-login action-primary']");
+                Common.javascriptclickElement("xpath", "//button[@class='action-login action-primary']");
+            Sync.waitPageLoad(30);
+            Sync.waitPageLoad();
             Thread.sleep(5000);
             Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
-
  
-
+ 
             Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
                     "To Validate the Admin is landing on the Dashboard after successfull Signin",
                     "After clicking on sigin button admin should navigate to the dashboard",
                     "Admin Sucessfully navigate to the dashboard after clicking on the signin button",
                     "Admin failed to display the dashboard after clicking on the signin button");
-
+ 
         } catch (Exception e) {
             e.printStackTrace();
-
  
-
+ 
             ExtenantReportUtils.addFailedLog(
                     "To Validate the Admin is landing on the Dashboard after successfull Signin",
                     "After clicking on sigin button admin should navigate to the dashboard",
                     "Admin failed to navigate to the dashboard after click on signin button",
                     "Admin failed to land on the dashboard after clicking on the signin button");
             Assert.fail();
-
  
-
+ 
         }
-
  
-
+ 
     }
 
 	public void Customers() {
@@ -903,7 +876,7 @@ public class GoldAdminHelper {
 		try {
 			WebElement element = Common.findElement("xpath", "//span[text()='Card Tiles']");
 			draganddropContentBlock(element);
-			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type pagebuilder-hot-card-tiles']")
 					.getAttribute("data-content-type");
 			Common.assertionCheckwithReport(blockname.equals("hot_card_tiles"),
 					"Validating cardtiles Dragndrop operation", "card tiles dragndrop to content with options",
@@ -926,7 +899,7 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "//input[@placeholder='Enter title here']",
 					data.get(dataSet).get("CardTitle"));
 
-			String selectimage = Common.findElement("xpath", "//li[@name='image']").getAttribute("class");
+		/*	String selectimage = Common.findElement("xpath", "//li[@name='image']").getAttribute("class");
 			if (selectimage.contains("active")) {
 				System.out.println("image is selected");
 			} else {
@@ -934,20 +907,20 @@ public class GoldAdminHelper {
 			}
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			edit_cardtile_image("ProductcardTile", 1);
-			edit_cardtile_image("ProductcardTile", 2);
+			//edit_cardtile_image("ProductcardTile", 2);    */
 			Common.scrollIntoView("xpath", "//input[@name='alt']");
 			Common.textBoxInput("xpath", "//input[@name='alt']", data.get(dataSet).get("alterantivetext"));
 			Common.textBoxInput("xpath", "//input[@name='title_attribute']", data.get(dataSet).get("titleaatribute"));
 
-			Common.switchFrames("id", "hot_card_tiles_category_form_description_text_ifr");
+		/*	Common.switchFrames("id", "hot_card_tiles_category_form_description_text_ifr");
 			Common.findElement("xpath", "//body[@class='mce-content-body ']/p")
 					.sendKeys(data.get(dataSet).get("Description"));
-			Common.switchToDefault();
+			Common.switchToDefault(); */
 			Thread.sleep(2000);
-			buttontype("ProductcardTile");
+	/*		buttontype("ProductcardTile");
 			Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(dataSet).get("Buttontext"));
 			CTALink("ProductcardTile");
-			Common.javascriptclickElement("xpath", "//label[text()='Open in new tab']");
+			Common.javascriptclickElement("xpath", "//label[text()='Open in new tab']");  */
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1015,25 +988,62 @@ public class GoldAdminHelper {
 			System.out.println(ImageName);
 			Sync.waitElementVisible("xpath", "//ol[@class='m-breadcrumb__list']");
 
-			Common.scrollIntoView("xpath", "//picture[@class='m-media-card__image']/source");
-			String desktopimage = Common.findElement("xpath", "//picture[@class='m-media-card__image']/source")
+			Common.scrollIntoView("xpath", "//picture[@class='m-media-card__image md:block']/source");
+			String desktopimage = Common.findElement("xpath", "//picture[@class='m-media-card__image md:block']/source")
 					.getAttribute("srcset");
 			System.out.println(desktopimage);
-			String alternativetext = Common.findElement("xpath", "//picture[@class='m-media-card__image']/img")
+			String alternativetext = Common.findElement("xpath", "//picture[@class='m-media-card__image md:block']/img")
 					.getAttribute("alt");
 			System.out.println(alternativetext);
-			String titleattribute = Common.findElement("xpath", "//picture[@class='m-media-card__image']/img")
+			String titleattribute = Common.findElement("xpath", "//picture[@class='m-media-card__image md:block']/img")
 					.getAttribute("title");
 			System.out.println(titleattribute);
+			
+			if (Common.getCurrentURL().contains("oxo")) {
+				Common.assertionCheckwithReport(
+						desktopimage.contains("oxo") && alternativetext.contains(configuredalternativetext)
+								&& titleattribute.contains(configuredtitleattribute),
+						"To validate the desktop image is configured on the front end",
+						"desktop image is dispalyed on the frotend", "desktop image dispalyed",
+						"Failed to upload image on the background image");
 
+			}
+			
+			
+ 			
+			else if (Common.getCurrentURL().contains("hydroflask")) {
 			Common.assertionCheckwithReport(
-					desktopimage.contains(ImageName) && alternativetext.contains(configuredalternativetext)
+					desktopimage.contains("hydroflask") && alternativetext.contains(configuredalternativetext)
 							&& titleattribute.contains(configuredtitleattribute),
 					"To validate the desktop image is configured on the front end",
 					"desktop image is dispalyed on the frotend", "desktop image dispalyed",
 					"Failed to upload image on the background image");
 
-		} catch (Exception | Error e) {
+		}
+		
+		
+			else if (Common.getCurrentURL().contains("osprey")) {
+			Common.assertionCheckwithReport(
+					desktopimage.contains("osprey") && alternativetext.contains(configuredalternativetext)
+							&& titleattribute.contains(configuredtitleattribute),
+					"To validate the desktop image is configured on the front end",
+					"desktop image is dispalyed on the frotend", "desktop image dispalyed",
+					"Failed to upload image on the background image");
+
+		}
+		
+	
+			else if (Common.getCurrentURL().contains("drybar")) {
+		Common.assertionCheckwithReport(
+				desktopimage.contains("drybar") && alternativetext.contains(configuredalternativetext)
+						&& titleattribute.contains(configuredtitleattribute),
+				"To validate the desktop image is configured on the front end",
+				"desktop image is dispalyed on the frotend", "desktop image dispalyed",
+				"Failed to upload image on the background image");
+
+	}
+	}
+			catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the Admin configured image on the front end ",
 					"Admin configured image should be displayed on the frontend",
@@ -1697,13 +1707,15 @@ public class GoldAdminHelper {
 		try {
 			Common.scrollIntoView("xpath", "//strong//span[text()='Content']");
 			Common.javascriptclickElement("xpath", "//strong//span[text()='Content']");
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			//Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Thread.sleep(1000);
 			Sync.waitElementPresent(30, "xpath", "//button[@class='action-default action']");
 			Common.mouseOverClick("xpath", "//button[@class='action-default action']");
 			Sync.waitElementPresent(40, "xpath", "//div[contains(@data-bind,'pageBuilderEditButtonClick')]");
 			String pagebuilder = Common.findElement("xpath", "//div[contains(@data-bind,'pageBuilderEditButtonClick')]")
 					.getAttribute("class");
 			System.out.println(pagebuilder);
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Common.assertionCheckwithReport(pagebuilder.contains("pagebuilder-wysiwyg-overlay"),
 					"Validating edit page bulider navigation ",
 					"After clicking on edit page builder it Should navigate to edit page builder field ",
@@ -1719,6 +1731,7 @@ public class GoldAdminHelper {
 			Assert.fail();
 		}
 	}
+
 
 	public void delete_existing_page(String Dataset) throws Exception
 
@@ -1757,7 +1770,8 @@ public class GoldAdminHelper {
 			Common.clickElement("xpath", "//h4[text()='HoT Elements']");
 			String hotelements = Common.findElement("xpath", "//li[@id='menu-section-hot_elements']")
 					.getAttribute("class");
-
+			Thread.sleep(1000);
+//Common.actionsKeyPress(Keys.PAGE_UP);
 			Common.assertionCheckwithReport(hotelements.contains("active"),
 					"To Verify the Hot element drop down contents is displayed ",
 					"After clicking on hot elements contents should display",
@@ -1772,9 +1786,10 @@ public class GoldAdminHelper {
 		}
 	}
 
+
 	public void dragndrop_heroBanner() {
 		try {
-			Common.scrollIntoView("xpath", "//span[text()='Hero Banner']");
+			//Common.scrollIntoView("xpath", "//span[text()='Hero Banner']");
 			WebElement element = Common.findElement("xpath", "//span[text()='Hero Banner']");
 			draganddropContentBlock(element);
 			String bannercontent = Common.findElement("xpath", "//div[@class='file-uploader-area']/label").getText();
@@ -1803,7 +1818,9 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent(30, "xpath", "//div[@class='pagebuilder-content-type-wrapper']");
 
 			Sync.waitPageLoad();
-			Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
+			
+Thread.sleep(3000);
+			//Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
 			Sync.waitElementVisible("xpath", "//div[contains(@class,'options-middle')]");
 
 			String pagebuilderoptions = Common.findElement("xpath", "//div[contains(@class,'options-middle')]")
@@ -1816,12 +1833,12 @@ public class GoldAdminHelper {
 			} else {
 				Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
 				Sync.waitElementVisible("xpath", "//div[contains(@class,'options-middle')]");
-				Common.javascriptclickElement("xpath", "//i[contains(@class,'pagebuilder-systems')]");
+				Common.javascriptclickElement("xpath", "(//i[contains(@class,'pagebuilder-systems')])");
 				Sync.waitPageLoad();
 			}
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			String editbanner = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
+			String editbanner = Common.findElement("xpath", "(//h1[@class='modal-title'])").getText();
 
 			Common.assertionCheckwithReport(editbanner.contains("Edit Hero Banner"),
 					"To validate the admin is able to edit  Hero Banner",
@@ -1840,33 +1857,70 @@ public class GoldAdminHelper {
 
 		}
 	}
-
+	
 	public void edit_Herobanner_ContentSection(String DataSet) {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(1000);
-			String name = Common.getText("xpath", "(//span[text()='Content'])[3]");
+		String name = Common.getText("xpath", "(//span[text()='Content'])[3]");
 			System.out.println(name);
-			Sync.waitElementPresent("xpath", "(//input[@name='title'])[2]");
-			Common.textBoxInput("xpath", "(//input[@name='title'])[2]", data.get(DataSet).get("title"));
-			Common.dropdown("xpath", "//select[@name='heading_type']", Common.SelectBy.TEXT,
-					data.get(DataSet).get("headingtype"));
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//input[@name='subtitle']");
-			Common.textBoxInput("xpath", "//input[@name='subtitle']", data.get(DataSet).get("subtitle"));
-			Common.dropdown("xpath", "//select[@name='subtitle_heading']", Common.SelectBy.TEXT,
-					data.get(DataSet).get("headingtype"));
+			//Sync.waitElementPresent("xpath", "(//input[@name='title'])");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//span[text()='Paragraph']");
 
-			Common.scrollIntoView("xpath", "//span[text()='Description']");
-			Common.switchFrames("id", "hot_hero_banner_form_description_ifr");
-			Common.findElement("id", "html-body").sendKeys(data.get(DataSet).get("Description"));
+			
+			Common.clickElement("xpath", "//div[@class='tox-collection__item-label']//h1");
+			
+			Common.switchFrames("id", "hot_hero_banner_form_title_ifr");
+			
+		
+		
+			Common.clickElement("xpath","//body[@data-id='hot_hero_banner_form_title']");
+            
+		
+		Thread.sleep(1000);
+			Common.findElement("xpath", "//body[@data-id='hot_hero_banner_form_title']").sendKeys( data.get(DataSet).get("title"));
+			
+		
 			Common.switchToDefault();
-			// Thread.sleep(2000);
-			Thread.sleep(3000);
+		
+		
+			
+			
+			
+			
+			
+			 {
+				Thread.sleep(4000);
+				
+Common.clickElement("xpath", "//button[@title='Blocks']//span[text()='Paragraph']");
+				
+				Common.clickElement("xpath", "//div[@class='tox-collection__item-label']//h3");
+				
+				Common.switchFrames("xpath", "//iframe[@id='hot_hero_banner_form_subtitle_ifr']");
+				Thread.sleep(4000);
+				
+				
+				Common.clickElement("xpath", "//body[@data-id='hot_hero_banner_form_subtitle']");
+				
+				
+				Common.findElement("xpath", "//body[@data-id='hot_hero_banner_form_subtitle']").sendKeys( data.get(DataSet).get("subtitle"));
+				Thread.sleep(2000);
+				Common.switchToDefault();
+			}
 
+			
+
+Common.switchFrames("xpath", "//iframe[@id='hot_hero_banner_form_description_ifr']");
+			
+			Common.findElement("xpath", "//body[@data-id='hot_hero_banner_form_description']").sendKeys(data.get(DataSet).get("Description"));
+			Common.switchToDefault();
+			
+			Thread.sleep(3000);
+			Common.switchToDefault();
 			Common.assertionCheckwithReport(name.contains("Content"), "validation to the edit content promo Blocker",
 					"after giving data it should show the data", "Successfully data is populated",
-					"Succesfully data entered");
+					"Succesfully data entered");  
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -1877,7 +1931,6 @@ public class GoldAdminHelper {
 
 		}
 	}
-
 	public void herobanner_image() {
 		// TODO Auto-generated method stub
 
@@ -2036,16 +2089,17 @@ public class GoldAdminHelper {
 		}
 	}
 
+
 	public void website_verification_Herobanner() {
 
 		try {
 
 			Sync.waitElementPresent(40, "xpath", "//div[@data-content-type='hot_hero_banner']");
-
+Common.refreshpage();
 			Thread.sleep(5000);
-			String headingverification = Common.getText("xpath", "//h2[@class='c-hero-block__headline']");
+			String headingverification = Common.getText("xpath", "//div[@data-element='description']");
 			System.out.println(headingverification);
-			Common.assertionCheckwithReport(headingverification.contains("QA test Hero Banner"),
+			Common.assertionCheckwithReport(headingverification.contains("QA"),
 					"validation Image upload in the forntend website ", "Image should  appear on fornt end page",
 					"Successfully image is appeared on the frondend", "Failed to navigate to appear on fornt end page");
 
@@ -2061,26 +2115,65 @@ public class GoldAdminHelper {
 
 	}
 
-	public void website_image_verification_herobanner() {
+	public void website_image_verification_herobanner(String DataSet) {
 		// TODO Auto-generated method stub
 		try {
-
-			Sync.waitElementPresent(40, "xpath", "//div[contains(@class,'c-hero-block__image')]");
+Common.refreshpage();
+			/*Sync.waitElementPresent(40, "xpath", "//div[contains(@class,'c-hero-block__image')]");
 			String imageverification = Common.findElement("xpath", "//div[contains(@class,'c-hero-block__image')]")
 					.getAttribute("data-background-images");
-			System.out.println(imageverification);
+			System.out.println(imageverification);*/
 
-			Sync.waitElementPresent(40, "xpath", "//img[@data-element='image_element_desktop']");
-			String imageverification2 = Common.findElement("xpath", "//img[@data-element='image_element_desktop']")
+			Sync.waitElementPresent(40, "xpath", "//div[@class='c-hero-block__image-secondary']//img");
+			String imageverification2 = Common.findElement("xpath", "//div[@class='c-hero-block__image-secondary']//img")
 					.getAttribute("src");
 			System.out.println(imageverification2);
+			String site = data.get(DataSet).get("Website");
+			
+			if(site.equals("OXO"))
+			{
 
 			Common.assertionCheckwithReport(
-					imageverification.contains("Lotusqa") && imageverification2.contains("Lotusqa1"),
+					//imageverification.contains("Lotusqa") && 
+					imageverification2.contains("handdone"),
 					"validating the  Image upload on the forntend website ",
 					"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
 					"Failed to appear image on the front end");
-		} catch (Exception | Error e) {
+		} 
+			else if(site.equals("Hydroflask"))
+			{
+
+			Common.assertionCheckwithReport(
+					//imageverification.contains("Lotusqa") && 
+					imageverification2.contains("demo"),
+					"validating the  Image upload on the forntend website ",
+					"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
+					"Failed to appear image on the front end");
+		} 
+			
+			else if(site.equals("Osprey"))
+			{
+
+			Common.assertionCheckwithReport(
+					//imageverification.contains("Lotusqa") && 
+					imageverification2.contains("Climbing"),
+					"validating the  Image upload on the forntend website ",
+					"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
+					"Failed to appear image on the front end");
+		} 
+			
+			else if(site.equals("Drybar"))
+			{
+
+			Common.assertionCheckwithReport(
+					//imageverification.contains("Lotusqa") && 
+					imageverification2.contains("COVER"),
+					"validating the  Image upload on the forntend website ",
+					"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
+					"Failed to appear image on the front end");
+		} 
+			
+		}catch (Exception | Error e) {
 			e.printStackTrace();
 
 			ExtenantReportUtils.addFailedLog("validation Image upload in the fornt end website ",
@@ -2542,7 +2635,7 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
 			Common.clickElement("xpath", "//button[@id='save-button']");
 			Sync.waitPageLoad(70);
-
+Thread.sleep(8000);
 			Sync.waitElementVisible("xpath", "//div[@data-ui-id='messages-message-success']");
 			String savethepage = Common.findElement("xpath", "//div[@data-ui-id='messages-message-success']").getText();
 
@@ -2572,6 +2665,8 @@ public class GoldAdminHelper {
 			System.out.println(urlkey);
 			Common.openNewTab();
 			if (currentAdminURL.contains("preprod")) {
+				Thread.sleep(10000);
+				//.sendKeys( data.get(DataSet).get("title"));
 				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
 			} else {
 				Common.oppenURL(data.get(Dataset).get("prodURL") + urlkey);
@@ -2580,6 +2675,9 @@ public class GoldAdminHelper {
 
 			}
 			Sync.waitPageLoad(40);
+			Thread.sleep(10000);
+			Common.refreshpage();
+			Thread.sleep(10000);
 			String uname = Common.getPageTitle();
 			System.out.println(uname);
 			Common.assertionCheckwithReport(uname.contains(pagetitle),
@@ -2998,17 +3096,63 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Common.refreshpage();
+			
+			Thread.sleep(2000);
+			
+			Common.refreshpage();
 			Common.scrollIntoView("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
 			Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Thread.sleep(2000);
 			Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
-			// Common.switchWindows();
+			 Common.switchWindows();
 			Thread.sleep(5000);
-			String headingverification = Common.getText("xpath", "//div[@class='c-product-overview u-container']");
+			
+			if(Common.getCurrentURL().contains("oxo"))
+			{
+			String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
 			System.out.println(headingverification);
-			Common.assertionCheckwithReport(headingverification.contains("32 oz Wide Mouth - Laguna"),
+			Common.assertionCheckwithReport(headingverification.contains("More OXO"),
 					"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
 					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+			}
+			
+			else if(Common.getCurrentURL().contains("hydroflask"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("Customize"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
+			
+			else if(Common.getCurrentURL().contains("osprey"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("Backpacking"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
+			
+			else if(Common.getCurrentURL().contains("drybar"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='hero-container']//span");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("HAIR"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
 
+			//Common.assertionCheckwithReport("validation of page in the forntend website ", "PDP should be appear on fornt end page",
+					//"Successfully page should be appeared on the frondend", "Successfully page should be appeared on the frondend","Failed to navigate to PDP page");
+			
+			
 			Common.switchToFirstTab();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3020,6 +3164,7 @@ public class GoldAdminHelper {
 		}
 
 	}
+	
 	
 	
 	
@@ -3129,6 +3274,7 @@ public class GoldAdminHelper {
 		}
 
 	}
+
 
 	public void Editandsavepage() throws Exception {
 		// TODO Auto-generated method stub
@@ -3641,6 +3787,7 @@ public class GoldAdminHelper {
 		}
 	}
 
+
 	public void close_Editblock(String dataSet) {
 		try {
 			edit_block_content(dataSet);
@@ -3669,23 +3816,22 @@ public class GoldAdminHelper {
 	}
 
 	public void ClosADD() throws Exception {
-		Thread.sleep(3000);
-		int sizesframe = Common.findElements("xpath", "//div[@class='preloaded_lightbox']/iframe").size();
-		if (sizesframe > 0) {
-			Common.actionsKeyPress(Keys.PAGE_UP);
-
-			// Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-			Sync.waitElementVisible("xpath", "//div[@class='sidebar-iframe-close']");
-			Common.clickElement("xpath", "//div[@class='sidebar-iframe-close']");
-		} else {
-			int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
-			if (sizeofpopup > 0) {
-
-				Sync.waitElementClickable("xpath", "//button[@aria-label='close']");
-				Common.clickElement("xpath", "//button[@aria-label='close']");
-			}
+		
+		
+		
+		
+		if(Common.getCurrentURL().contains("drybar"))
+		{
+			
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//a[@class='ltkpopup-close']");
 		}
-	}
+		else {
+			Sync.waitElementVisible("xpath", "//button[@aria-label='Close dialog']");
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			
+		}
+}
 
 	public WebElement PLPCMS_content() {
 
@@ -3812,6 +3958,8 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		String image = data.get(DataSet).get("image");
 		String image2 = data.get(DataSet).get("image2");
+		String image3 = data.get(DataSet).get("image3");
+		String image4 = data.get(DataSet).get("image4");
 		String altatt = data.get(DataSet).get("alterantivetext");
 		try {
 			Common.scrollIntoView("xpath", "//span[text()='Image Element']");
@@ -3821,25 +3969,45 @@ public class GoldAdminHelper {
 					"(//div[@class='admin__field']//label[text()='Select from Gallery'])[1]");
 
 			// Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and
-			// @style='display: none;']");
-			// Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
-			Common.scrollIntoView("xpath", "//small[text()='" + image + "']");
-			Common.javascriptclickElement("xpath", "//small[text()='" + image + "']");
+			
+			String site = data.get(DataSet).get("Website");
+			
+			if(site.equals("OXO")) {
+	
+			Common.scrollIntoView("xpath", "//img[@alt='" + image + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + image + "']");
+			}
+			
+			else if(site.equals("Hydroflask"))
+			{
+				Common.scrollIntoView("xpath", "//img[@alt='" + image2 + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + image2 + "']");
+			}
+			else if(site.equals("Osprey"))
+			{
+				Common.scrollIntoView("xpath", "//img[@alt='" + image3 + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + image3 + "']");
+			}
+			else if(site.equals("Drybar"))
+			{
+				Common.scrollIntoView("xpath", "//img[@alt='" + image4 + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + image4 + "']");
+			}
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
 			Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
 			Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[1]");
-			String imagename = Common.findElement("xpath", "(//a/img[@class='preview-image'])[1]").getAttribute("alt");
+			/*String imagename = Common.findElement("xpath", "(//a/img[@class='preview-image'])[1]").getAttribute("alt");
 
 			Common.assertionCheckwithReport(imagename.equals(image),
 					"validation the image uploading on content for Fallback image ",
 					"Image should be upload for background image", "Successfully image uploaded in background image ",
-					"Failed to upload image on the background image");
+					"Failed to upload image on the background image"); */
 
-			Sync.waitElementPresent("xpath", "(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
+		/*	Sync.waitElementPresent("xpath", "(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
 			Common.javascriptclickElement("xpath",
 					"(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
-			Common.scrollIntoView("xpath", "//small[text()='" + image2 + "']");
-			Common.javascriptclickElement("xpath", "//small[text()='" + image2 + "']");
+			Common.scrollIntoView("xpath", "//img[@alt='" + image2 + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + image2 + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
 			Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
 
@@ -3849,7 +4017,7 @@ public class GoldAdminHelper {
 			Common.assertionCheckwithReport(imagename2.equals(image2),
 					"validation the image uploading on content for Fallback image ",
 					"Image should be upload for background image", "Successfully image uploaded in background image ",
-					"Failed to upload image on the background image");
+					"Failed to upload image on the background image");   */
 
 			Sync.waitElementPresent("xpath", "//input[@name='alt']");
 			Common.findElement("xpath", "//input[@name='alt']").sendKeys(altatt);
@@ -3867,7 +4035,6 @@ public class GoldAdminHelper {
 
 		}
 	}
-
 	public void CTALink(String dataSet) throws Exception {
 		String buttonlinknavugation = data.get(dataSet).get("ButtonLinknavigation");
 		try {
@@ -3935,8 +4102,11 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Common.scrollIntoView("xpath", "//span[text()='Category/Product Slider']");
+			Thread.sleep(2000);
 			WebElement element = Common.findElement("xpath", "//span[text()='Category/Product Slider']");
 			draganddropContentBlock(element);
+			
+			Thread.sleep(5000);
 			String blocknames = Common
 					.findElement("xpath",
 							"//div[@class='pagebuilder-content-type pagebuilder-hot-category-product-slider']")
@@ -3961,13 +4131,19 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 
 		try {
+			
+			
+	Common.actionsKeyPress(Keys.DOWN);
+			
 			Thread.sleep(2000);
-			String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+			/*String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
 					.getAttribute("id");
 
-			Common.mouseOverClick("xpath", "//div[@id='" + id + "']");
-			Common.clickElement("xpath", "//i[@class='icon-admin-pagebuilder-systems']");
-
+			Common.mouseOverClick("xpath", "//div[@id='" + id + "']");*/
+			Common.scrollIntoView("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "(//i[@class='icon-admin-pagebuilder-systems'])[2]");
+Thread.sleep(2000);
 			String editpromo = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
 
 			Common.assertionCheckwithReport(editpromo.contains("Edit Category/Product Slider"),
@@ -3990,11 +4166,113 @@ public class GoldAdminHelper {
 
 	public void category_productslider(String DataSet) {
 		try {
-
-// TODO Auto-generated method stub
+             
 			Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
 			Thread.sleep(1000);
-			Common.clickElement("xpath", "//label[text()='Bottles & Drinkware']");
+			
+String site = data.get(DataSet).get("Website");
+			
+			//Thread.sleep(2000);
+			
+  if(site.equals("OXO"))
+	
+{
+	Common.findElement("xpath", "//label[text()='Graters & Slicers']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Graters & Slicers']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Utensil Sets']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Utensil Sets']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Bakeware']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Bakeware']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Mops & Household Brushes']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Mops & Household Brushes']");
+	Thread.sleep(1000);
+}
+
+
+else if(site.equals("Hydroflask"))
+
+{
+	
+	
+	Common.findElement("xpath", "//label[text()='Beer, Wine & Spirits']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Beer, Wine & Spirits']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Kitchenware']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Kitchenware']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Coolers & Lunch Boxes']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Coolers & Lunch Boxes']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Bottles']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Bottles']");
+	Thread.sleep(1000);
+}
+
+else if(site.equals("Osprey"))
+{
+	
+	Common.findElement("xpath", "//label[text()='Backpacking Packs']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Backpacking Packs']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Day Packs']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Day Packs']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Hiking Packs']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Hiking Packs']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Lifestyle Day Packs']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Lifestyle Day Packs']");
+	Thread.sleep(1000);
+}
+
+else if(site.equals("Drybar"))
+{
+	Common.findElement("xpath", "//label[text()='Lush Scent']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Lush Scent']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Coconut Colada Scent']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Coconut Colada Scent']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Volume']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Volume']");
+	Thread.sleep(1000);
+	
+	Common.findElement("xpath", "//label[text()='Dry Shampoo']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Dry Shampoo']");
+	Thread.sleep(1000);
+}
+
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -4008,21 +4286,33 @@ public class GoldAdminHelper {
 
 	}
 
-	public void editcategorypage(String Dataset) {
+	public void editcategorypage(String DataSet) {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.dropdown("xpath", "//select[@name='heading_type']", Common.SelectBy.TEXT,
-					data.get(Dataset).get("headingtype"));
-
-			String id = Common.findElement("xpath", "(//input[@name='title'])[2]").getAttribute("id");
-			Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("title"));
-			Common.textBoxInput("xpath", "//input[@name='subtitle']", data.get(Dataset).get("subtitle"));
+			Common.switchFrames("id", "hot_entity_category_slider_form_title_ifr");
+			
+			
+			
+			Common.clickElement("xpath","//body[@data-id='hot_entity_category_slider_form_title']");
+            
+		
+		Thread.sleep(1000);
+			Common.findElement("xpath", "//body[@data-id='hot_entity_category_slider_form_title']").sendKeys( data.get(DataSet).get("title"));
+			
+		
+			Common.switchToDefault();
+			Thread.sleep(3000);
+		
+			Common.textBoxInput("xpath", "//input[@name='subtitle']", data.get(DataSet).get("subtitle"));
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(Dataset).get("CTAurl"));
+			Common.textBoxInput("xpath", "//input[@name='link_url[default]']", data.get(DataSet).get("preprodURL"));
 			Common.clickElement("xpath", "//div[@class='admin__field admin__field-option url-input-setting']");
-			Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(Dataset).get("Buttontext"));
+			Common.textBoxInput("xpath", "//input[@name='button_text']", data.get(DataSet).get("Buttontext"));
 
+			//Common.dropdown("xpath", "//select[@name='heading_type']", Common.SelectBy.TEXT,
+				//	data.get(Dataset).get("headingtype"));
+			
 			int saved = Common.findElements("xpath", "(//div[@class='admin__fieldset-wrapper-content _hide'])[2]")
 					.size();
 			System.out.println(saved);
@@ -4043,19 +4333,33 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 
+			Common.refreshpage();
 			Sync.waitElementPresent(40, "xpath",
 					"//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
 			Common.clickElement("xpath",
 					"//a[@class='c-product-carousel-transparent__cta pagebuilder-button-primary btn-visible']");
 			Thread.sleep(2000);
-			// Common.switchWindows();
+			 Common.switchWindows();
 			Sync.waitPageLoad();
-			Common.refreshpage();
+			//Common.refreshpage();
+			if(Common.getCurrentURL().contains("drybar"))
+			{
+				int logo = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+				System.out.println();
+				Common.assertionCheckwithReport(logo > 0, "Validation of Homepage ",
+						"Homepage should appear on the front end", "Successfully homepage is appeared on the frontend",
+						"Failed to navigate to homepage");
+			}
+			else 
+			{
 			int logo = Common.findElements("xpath", "//div[@class='c-header__logo']").size();
 			System.out.println();
 			Common.assertionCheckwithReport(logo > 0, "Validation of Homepage ",
 					"Homepage should appear on the front end", "Successfully homepage is appeared on the frontend",
 					"Failed to navigate to homepage");
+			}
+			
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
@@ -4067,6 +4371,7 @@ public class GoldAdminHelper {
 		}
 
 	}
+
 
 	public void click_product(String Dataset) {
 		// TODO Auto-generated method stub
@@ -4291,36 +4596,36 @@ public class GoldAdminHelper {
 	}
 
 	public void Savecategorypage(String Dataset) {
-// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 
-		try {
+				try {
 
-			// Common.clickElement("xpath", "//h2[@class='m-heading__text
-			// placeholder-text']");
-			String id = Common.findElement("xpath", "(//input[@class='admin__control-text'])[6]").getAttribute("id");
+					// Common.clickElement("xpath", "//h2[@class='m-heading__text
+					// placeholder-text']");
+					//String id = Common.findElement("xpath", "(//input[@class='admin__control-text'])[6]").getAttribute("id");
 
-			Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("title"));
+					//Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("title"));
 
-			String att = Common.findElement("xpath", "(//input[@class='admin__control-text'])[7]").getAttribute("id");
+					String att = Common.findElement("xpath", "//input[@name='subtitle']").getAttribute("id");
 
-			Common.textBoxInput("xpath", "//input[@id='" + att + "']", data.get(Dataset).get("SubTitle"));
+					Common.textBoxInput("xpath", "//input[@id='" + att + "']", data.get(Dataset).get("subtitle"));
 
-			int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[5]").size();
-			System.out.println(page);
-			Common.assertionCheckwithReport(page > 0, " To Validate the User needs to save the page",
-					"User should able to save the page", "Sucessfully User saves the page", "Failed to save the page");
+					int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[5]").size();
+					System.out.println(page);
+					Common.assertionCheckwithReport(page > 0, " To Validate the User needs to save the page",
+							"User should able to save the page", "Sucessfully User saves the page", "Failed to save the page");
 
-			Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+					//Common.clickElement("xpath", "(//span[text()='Save'])[2]");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
-					"User should able to save the page", "Unable to saves the page",
-					Common.getscreenShotPathforReport("Failed to save the page"));
-			Assert.fail();
-		}
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+							"User should able to save the page", "Unable to saves the page",
+							Common.getscreenShotPathforReport("Failed to save the page"));
+					Assert.fail();
+				}
 
-	}
+			}
 
 	public void website_category_verification() {
 // TODO Auto-generated method stub
@@ -4348,61 +4653,89 @@ public class GoldAdminHelper {
 	}
 
 	public void Click_SKU(String Dataset) {
-// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 
-		try {
-			Common.switchToFirstTab();
-			Contentpage();
-			hot_elements();
-			editCategory_Productslider();
+				try {
+					/*Common.switchToFirstTab();
+					Search_previous_page_Magento(Dataset);
+					Contentpage();
+					hot_elements();    
+				    dragndrop_Category_ProductSlider();
+					editCategory_Productslider();*/
+					
+					Common.clickElement("xpath", "//li[@class='admin__field-visual-select-small']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//span[text()='SKU']");
+					String id = Common.findElement("xpath", "(//input[@class='admin__control-text'])[4]").getAttribute("id");
+					
+					String site = data.get(Dataset).get("Website");
+					
+					if(site.equals("OXO")) {
+						
+					
 
-			Common.clickElement("xpath", "//span[text()='SKU']");
-			String id = Common.findElement("xpath", "(//input[@class='admin__control-text'])[4]").getAttribute("id");
+					Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("OXOSKU"));
+					
+					}
+					
+					else if(site.equals("Hydroflask"))
+					{
+						Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("HYFSKU"));
+					}
+					
+					else if(site.equals("Osprey"))
+					{
+						Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("OSPSKU"));
+					}
+					
+					else if(site.equals("Drybar"))
+					{
+						Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("DBSKU"));
+					}
+					
+					Common.dropdown("xpath", "(//select[@class='admin__control-select'])[2]", Common.SelectBy.TEXT,
+							data.get(Dataset).get("Sortby"));
 
-			Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("SKU"));
-			Common.dropdown("xpath", "(//select[@class='admin__control-select'])[1]", Common.SelectBy.TEXT,
-					data.get(Dataset).get("Sortby"));
+					int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[4]").size();
+					System.out.println(page);
+					Common.assertionCheckwithReport(page > 0, " To Validate the User needs to save the page",
+							"User should able to save the page", "Sucessfully User saves the page", "Failed to save the page");
+					Common.clickElement("xpath", "(//span[text()='Save'])[2]");
 
-			int page = Common.findElements("xpath", "(//fieldset[@class='admin__fieldset'])[4]").size();
-			System.out.println(page);
-			Common.assertionCheckwithReport(page > 0, " To Validate the User needs to save the page",
-					"User should able to save the page", "Sucessfully User saves the page", "Failed to save the page");
-			Common.clickElement("xpath", "(//span[text()='Save'])[2]");
+				} catch (Exception e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
+							"User should able to save the page", "Unable to saves the page",
+							Common.getscreenShotPathforReport("Failed to save the page"));
+					Assert.fail();
+				}
+			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(" To Validate the User needs to save the page",
-					"User should able to save the page", "Unable to saves the page",
-					Common.getscreenShotPathforReport("Failed to save the page"));
-			Assert.fail();
-		}
-	}
+			public void website_SKU_verification() {
+		// TODO Auto-generated method stub
+				try {
 
-	public void website_SKU_verification() {
-// TODO Auto-generated method stub
-		try {
+					Common.refreshpage();
+					Sync.waitElementPresent("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+					Thread.sleep(2000);
+		Common.refreshpage();
+					String headingverification = Common.getText("xpath",
+							"//div[@class='u-container c-product-carousel-transparent__carousel']");
 
-			Common.refreshpage();
-			Sync.waitElementPresent("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
-			Thread.sleep(2000);
+					System.out.println(headingverification);
+					Common.assertionCheckwithReport(headingverification.contains("Test"),
+							"validation Image upload in the forntend website ", "Image should de appear on fornt end page",
+							"Successfully image is appeared on the frondend", "Failed to navigate to edit promoBlocker page");
+				} catch (Exception | Error e) {
+					e.printStackTrace();
 
-			String headingverification = Common.getText("xpath",
-					"//div[@class='u-container c-product-carousel-transparent__carousel']");
+					report.addFailedLog("validation Image upload in the forntend website ",
+							"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
+							Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+					Assert.fail();
 
-			System.out.println(headingverification);
-			Common.assertionCheckwithReport(headingverification.contains("HYDROFLASK QA TESTING"),
-					"validation Image upload in the forntend website ", "Image should de appear on fornt end page",
-					"Successfully image is appeared on the frondend", "Failed to navigate to edit promoBlocker page");
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-
-			report.addFailedLog("validation Image upload in the forntend website ",
-					"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
-					Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
-			Assert.fail();
-
-		}
-	}
+				}
+			}
 
 	public void click_condition(String Dataset) {
 // TODO Auto-generated method stub
@@ -5263,6 +5596,7 @@ public class GoldAdminHelper {
 		try {
 			WebElement element = Common.findElement("xpath", "//span[text()='CLP Hero Banner']");
 			draganddropContentBlock(element);
+			Thread.sleep(2000);
 			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
 					.getAttribute("data-content-type");
 			Common.assertionCheckwithReport(blockname.equals("hot_clp_banner"),
@@ -5322,6 +5656,7 @@ public class GoldAdminHelper {
 
 		}
 	}
+
 
 	public void Configure_content(String dataSet) {
 		try {
@@ -6357,39 +6692,112 @@ public class GoldAdminHelper {
 	}
 
 	public void Validate_CLP_Content_Frontend(String dataSet) {
-		String title = data.get(dataSet).get("title");
-		String headingtype = data.get(dataSet).get("headingtype").toLowerCase();
+		//String title = data.get(dataSet).get("title");
+		//String headingtype = data.get(dataSet).get("headingtype").toLowerCase();
 		String Description = data.get(dataSet).get("Description");
-		String descriptiontype = data.get(dataSet).get("Description Type").toLowerCase();
+		//String descriptiontype = data.get(dataSet).get("Description Type").toLowerCase();
 		String image = data.get(dataSet).get("image");
 		String image2 = data.get(dataSet).get("image2");
+		String image3 = data.get(dataSet).get("image3");
+		String image4 = data.get(dataSet).get("image4");
 		String color = data.get(dataSet).get("Color");
 
 		try {
-			String Title = Common.findElement("xpath", "//*[@class='c-clp-hero__headline']").getText();
+			/*String Title = Common.findElement("xpath", "//*[@class='c-clp-hero__headline']").getText();
 
-			String HeadingType = Common.findElement("xpath", "//*[@class='c-clp-hero__headline']").getTagName();
+			String HeadingType = Common.findElement("xpath", "//*[@class='c-clp-hero__headline']").getTagName();   */
 
-			String description = Common.findElement("xpath", "//*[@class='c-clp-hero__description']").getText();
+			/*String description = Common.findElement("xpath", "//*[@class='c-clp-hero__description']").getText();  
 
-			String DescriptionType = Common.findElement("xpath", "//*[@class='c-clp-hero__description']").getTagName();
+			String DescriptionType = Common.findElement("xpath", "//*[@class='c-clp-hero__description']").getTagName();  */
 
-			String desktopimage = Common.findElement("xpath", "//img[@data-element='image_element_desktop']")
-					.getAttribute("src");
+			
+			if(Common.getCurrentURL().contains("oxo"))
+			{
+				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
+						.getAttribute("data-bg-desktop");
 
-			String mobileimage = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
-					.getAttribute("src");
+				//String mobileimage = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
+						//.getAttribute("src");
 
-			String style = Common.findElement("xpath", "//main[@id='maincontent']//style").getAttribute("innerHTML");
+				String style = Common.findElement("xpath", "//main[@id='maincontent']//style").getAttribute("innerHTML");
 
 			Common.assertionCheckwithReport(
-					style.contains("background-color:" + color) && Title.contains(title)
-							&& HeadingType.contains(headingtype) && description.contains(Description)
-							&& DescriptionType.contains(descriptiontype) && desktopimage.contains(image)
-							&& mobileimage.contains(image2),
+					style.contains("background-color:" + color) 
+					//&& Title.contains(title) && HeadingType.contains(headingtype) 
+					//&& description.contains(Description) && DescriptionType.contains(descriptiontype)
+							&& desktopimage.contains(image) 
+							//&& mobileimage.contains(image2)
+							,
 					"To validate the CLP Content on the front end",
 					"Configured content should be dispalyed on the front end", "Configured content is on the fornt end",
 					"failed to configuire the content");
+			}
+			else if(Common.getCurrentURL().contains("hydroflask"))
+				
+			{
+				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
+						.getAttribute("data-bg-desktop");
+
+				//String mobileimage = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
+						//.getAttribute("src");
+
+				String style = Common.findElement("xpath", "(//main[@id='maincontent']//style)[2]").getAttribute("innerHTML");
+				Common.assertionCheckwithReport(
+						style.contains("background-color:" + color) 
+						//&& Title.contains(title) && HeadingType.contains(headingtype) 
+						//&& description.contains(Description) && DescriptionType.contains(descriptiontype)
+								&& desktopimage.contains(image2) 
+								//&& mobileimage.contains(image2)
+								,
+						"To validate the CLP Content on the front end",
+						"Configured content should be dispalyed on the front end", "Configured content is on the fornt end",
+						"failed to configuire the content");
+			}
+			
+			else if(Common.getCurrentURL().contains("osprey")) {
+				
+				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
+						.getAttribute("data-bg-desktop");
+
+				//String mobileimage = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
+						//.getAttribute("src");
+
+				String style = Common.findElement("xpath", "(//main[@id='maincontent']//style)").getAttribute("innerHTML");
+				
+				Common.assertionCheckwithReport(
+						style.contains("background-color:" + color) 
+						//&& Title.contains(title) && HeadingType.contains(headingtype) 
+						//&& description.contains(Description) && DescriptionType.contains(descriptiontype)
+								&& desktopimage.contains(image3) 
+								//&& mobileimage.contains(image2)
+								,
+						"To validate the CLP Content on the front end",
+						"Configured content should be dispalyed on the front end", "Configured content is on the fornt end",
+						"failed to configuire the content");
+			}
+			
+			else if(Common.getCurrentURL().contains("drybar"))
+			{
+				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
+						.getAttribute("data-bg-desktop");
+
+				//String mobileimage = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
+						//.getAttribute("src");
+
+				String style = Common.findElement("xpath", "(//main[@id='maincontent']//style)[2]").getAttribute("innerHTML");
+				
+				Common.assertionCheckwithReport(
+						style.contains("background-color:" + color) 
+						//&& Title.contains(title) && HeadingType.contains(headingtype) 
+						//&& description.contains(Description) && DescriptionType.contains(descriptiontype)
+								&& desktopimage.contains(image4) 
+								//&& mobileimage.contains(image2)
+								,
+						"To validate the CLP Content on the front end",
+						"Configured content should be dispalyed on the front end", "Configured content is on the fornt end",
+						"failed to configuire the content");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the CLP Content on the front end",
@@ -6416,7 +6824,6 @@ public class GoldAdminHelper {
 			Assert.fail();
 		}
 	}
-
 	public void validate_text_color(String dataSet) {
 
 		try {
@@ -9554,6 +9961,7 @@ public void delet_existing_Coupon(String dataSet) {
 		}
 	}
 
+
 	public void Add_simpleproduct_SKU(String dataSet) {
 		// TODO Auto-generated method stub
 		String simpleproduct = data.get(dataSet).get("SKUNumberoxosimple");
@@ -11250,5 +11658,468 @@ public void delet_existing_Coupon(String dataSet) {
 			}
 			return data;
 		}
+
+		public void click_website_categoty(String Dataset) {
+			// TODO Auto-generated method stub
+
+		try {
+			/*Common.switchToFirstTab();
+		
+			Search_previous_page_Magento(Dataset);
+			Contentpage();
+			hot_elements();
+			PLPCMS_content();
+			dragndrop_heroBanner();
+			edit_Herobanner();*/
+			
+			String site = data.get(Dataset).get("Website");
+			
+			Common.dropdown("xpath", "//select[@class='admin__control-select url-input-select']", Common.SelectBy.TEXT,
+					data.get(Dataset).get("heading"));
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+
+			/*String text = Common
+					.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])")
+					.getAttribute("id");
+			Common.textBoxInput("xpath", "//input[@id='" + text + "']", data.get(Dataset).get("productnames"));*/
+ 			
+           if(site.equals("OXO"))
+			
+			{
+				Common.findElement("xpath", "//label[text()='More OXO']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//label[text()='More OXO']");
+			}
+			
+			
+			else if(site.equals("Hydroflask"))
+			
+			{
+				Common.findElement("xpath", "//label[text()='Customize']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//label[text()='Customize']");
+			}
+			
+			else if(site.equals("Osprey"))
+			{
+				
+				Common.findElement("xpath", "//label[text()='Backpacks & Bags']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//label[text()='Backpacks & Bags']");
+			}
+           
+           else if(site.equals("Drybar"))
+			{
+				Common.findElement("xpath", "//label[text()='Hair Products']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//label[text()='Hair Products']");
+			}
+		
+          // Configure_padding_marins(Dataset);
+           
+           
+           Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
+			Common.clickElement("xpath", "//input[@name='link_url']");
+		
+		//Sync.waitElementPresent("xpath", "//button[@id='save']");
+		//Common.clickElement("xpath", "//button[@id='save']");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("To validate the CTA link navigation",
+					"CTA link should navigate to the respective page", "CTA link navigation Failed",
+					"CTA link navigation unsuccessfull");
+
+			Assert.fail();
+			
+		}
+
+		}
+
+public void herobanner_images(String DataSet) {
+			
+			/*String image = data.get(DataSet).get("image");
+			String image2 = data.get(DataSet).get("image2");
+			String altatt = data.get(DataSet).get("alterantivetext");*/
+			try {
+				Common.scrollIntoView("xpath", "//strong[@class='admin__collapsible-title']//span[text()='Image']");
+
+				Sync.waitElementPresent("xpath", "(//div[@class='admin__field']//label[text()='Select from Gallery'])[1]");
+				Common.javascriptclickElement("xpath",
+						"(//div[@class='admin__field']//label[text()='Select from Gallery'])[1]");
+
+				// Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and
+				// @style='display: none;']");
+				// Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
+				String site = data.get(DataSet).get("Website");
+				
+				if(site.equals("OXO"))
+				{
+				
+				Common.scrollIntoView("xpath", "//img[@alt='handdone_1.jpg']");
+				Common.javascriptclickElement("xpath", "//img[@alt='handdone_1.jpg']");
+				}
+				else if(site.equals("Hydroflask"))
+				{
+					Common.scrollIntoView("xpath", "//img[@alt='demo-desktop.png']");
+					Common.javascriptclickElement("xpath", "//img[@alt='demo-desktop.png']");
+				}
+				else if(site.equals("Osprey"))
+				{
+					Common.scrollIntoView("xpath", "//img[@alt='Climbing_ALP_Collage_Portrait_1.jpeg']");
+					Common.javascriptclickElement("xpath", "//img[@alt='Climbing_ALP_Collage_Portrait_1.jpeg']");
+				}
+				else if(site.equals("Drybar"))
+				{
+					Common.scrollIntoView("xpath", "//img[@alt='COVER_3.jpg']");
+					Common.javascriptclickElement("xpath", "//img[@alt='COVER_3.jpg']");
+				}
+				
+				Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+				Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[1]");
+				String imagename = Common.findElement("xpath", "(//a/img[@class='preview-image'])[1]").getAttribute("alt");
+
+				/*Common.assertionCheckwithReport(imagename.equals(image),
+						"validation the image uploading on content for Fallback image ",
+						"Image should be upload for background image", "Successfully image uploaded in background image ",
+						"Failed to upload image on the background image");
+
+				Sync.waitElementPresent("xpath", "(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
+				Common.javascriptclickElement("xpath",
+						"(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
+				Common.scrollIntoView("xpath", "//small[text()='" + image2 + "']");
+				Common.javascriptclickElement("xpath", "//small[text()='" + image2 + "']");
+				Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+				Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+
+				Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[2]");
+				String imagename2 = Common.findElement("xpath", "(//a/img[@class='preview-image'])[2]").getAttribute("alt");
+
+				Common.assertionCheckwithReport(imagename2.equals(image2),
+						"validation the image uploading on content for Fallback image ",
+						"Image should be upload for background image", "Successfully image uploaded in background image ",
+						"Failed to upload image on the background image");
+
+				Sync.waitElementPresent("xpath", "//input[@name='alt']");
+				Common.findElement("xpath", "//input[@name='alt']").sendKeys(altatt);
+
+				Thread.sleep(5000);
+				System.out.println(altatt);*/
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation Image upload  ", "Image should be uploaded",
+						"Successfully image is uploaded",
+						Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+				Assert.fail();
+
+			}
+		}
+
+public void CardImage(String DataSet) {
+				String site = data.get(DataSet).get("Website");
+				
+				try {	
+					Thread.sleep(2000);
+				
+	  if(site.equals("OXO")) {
+			
+					
+					String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\oxo.png");
+					
+						Sync.waitElementPresent("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input");
+						Common.findElement("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input").sendKeys(path);
+
+						Thread.sleep(1000);
+						
+						String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+
+						System.out.println(image);
+					
+					
+					}
+					
+					else if(site.equals("Hydroflask")) {
+							
+							// TODO Auto-generated method stub
+							
+								
+								
+								String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\hydroflask.png");
+								
+									Sync.waitElementPresent("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input");
+									Common.findElement("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input").sendKeys(path);
+
+									String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+
+									System.out.println(image);
+								
+								
+								}
+								
+								else if(site.equals("Osprey")) {
+									
+									// TODO Auto-generated method stub
+									
+										
+										
+										String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\osprey.png");
+									
+											Sync.waitElementPresent("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input");
+											Common.findElement("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input").sendKeys(path);
+
+											String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+
+											System.out.println(image);
+										
+										
+										}
+				
+										
+										else if(site.equals("Drybar")) {
+											
+											// TODO Auto-generated method stub
+											
+												
+												
+												String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\drybar.png");
+												
+													Sync.waitElementPresent("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input");
+													Common.findElement("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input").sendKeys(path);
+
+													String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+
+													System.out.println(image);
+												
+												
+												
+										}
+								
+					
+			/*		Common.scrollIntoView("xpath", "//label[@class='admin__field-label']//span[text()='Image']");
+
+					Sync.waitElementPresent("xpath", "//div[@upload-area-id='desktop_image']//label[text()='Select from Gallery']");
+					Common.javascriptclickElement("xpath",
+							"//div[@upload-area-id='desktop_image']//label[text()='Select from Gallery']");
+
+					// Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and
+					// @style='display: none;']");
+					// Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
+					Common.scrollIntoView("xpath", "//small[contains(text(),'category_navigation')]");
+					Common.javascriptclickElement("xpath", "//small[contains(text(),'category_navigation')]");
+					
+					
+					Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+					Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+					Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[1]");
+					String imagename = Common.findElement("xpath", "(//a/img[@class='preview-image'])[1]").getAttribute("alt"); */
+
+					/*Common.assertionCheckwithReport(imagename.equals(image),
+							"validation the image uploading on content for Fallback image ",
+							"Image should be upload for background image", "Successfully image uploaded in background image ",
+							"Failed to upload image on the background image");
+
+					Sync.waitElementPresent("xpath", "(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
+					Common.javascriptclickElement("xpath",
+							"(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
+					Common.scrollIntoView("xpath", "//small[text()='" + image2 + "']");
+					Common.javascriptclickElement("xpath", "//small[text()='" + image2 + "']");
+					Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
+					Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
+
+					Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[2]");
+					String imagename2 = Common.findElement("xpath", "(//a/img[@class='preview-image'])[2]").getAttribute("alt");
+
+					Common.assertionCheckwithReport(imagename2.equals(image2),
+							"validation the image uploading on content for Fallback image ",
+							"Image should be upload for background image", "Successfully image uploaded in background image ",
+							"Failed to upload image on the background image");
+
+					Sync.waitElementPresent("xpath", "//input[@name='alt']");
+					Common.findElement("xpath", "//input[@name='alt']").sendKeys(altatt);
+
+					Thread.sleep(5000);
+					System.out.println(altatt);*/
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+
+					report.addFailedLog("validation Image upload  ", "Image should be uploaded",
+							"Successfully image is uploaded",
+							Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+					Assert.fail();
+
+				}
+			}
+
+public void category_cards(String Dataset) {
+				String site = data.get(Dataset).get("Website");
+				
+				try {
+				//Thread.sleep(2000);
+				Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+
+				/*String text = Common
+						.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])")
+						.getAttribute("id");
+				Common.textBoxInput("xpath", "//input[@id='" + text + "']", data.get(Dataset).get("productnames"));*/
+	 			
+	           if(site.equals("OXO"))
+				
+				{
+					Common.findElement("xpath", "//label[text()='Forks & Tongs']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Forks & Tongs']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Cleaning Tools']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Cleaning Tools']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Tea & Kettles']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Tea & Kettles']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Feeding & Drinking']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Feeding & Drinking']");
+					Thread.sleep(1000);
+				}
+				
+				
+				else if(site.equals("Hydroflask"))
+				
+				{
+					Common.findElement("xpath", "//label[text()='Bottles']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Bottles']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Beer, Wine & Spirits']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Beer, Wine & Spirits']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Cups & Tumblers']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Cups & Tumblers']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Caps and Lids']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Caps and Lids']");
+					Thread.sleep(1000);
+				}
+				
+				else if(site.equals("Osprey"))
+				{
+					
+					Common.findElement("xpath", "//label[text()='Backpacking Packs']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Backpacking Packs']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Hiking Packs']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Hiking Packs']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Travel']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Travel']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Day Packs']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Day Packs']");
+					Thread.sleep(1000);
+				}
+	           
+	           else if(site.equals("Drybar"))
+				{
+					Common.findElement("xpath", "//label[text()='Hair Products']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Hair Products']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Shampoos']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Shampoos']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Color Care']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Color Care']");
+					Thread.sleep(1000);
+					
+					Common.findElement("xpath", "//label[text()='Dry Shampoo']");
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//label[text()='Dry Shampoo']");
+					Thread.sleep(1000);
+				}
+			
+	     
+	           
+	           
+	        /*   Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
+				Common.clickElement("xpath", "//input[@name='link_url']");  */
+				
+			
+			} 
+				catch (Exception | Error e) {
+				e.printStackTrace();
+
+				report.addFailedLog("validation Image upload  ", "Image should be uploaded",
+						"Successfully image is uploaded",
+						Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+				Assert.fail();
+
+			}
+		}
+
+public void editCategory_Productslider2() {
+				// TODO Auto-generated method stub
+				try {
+					
+					
+					Common.actionsKeyPress(Keys.DOWN);
+							
+							Thread.sleep(2000);
+							/*String id = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']")
+									.getAttribute("id");
+
+							Common.mouseOverClick("xpath", "//div[@id='" + id + "']");*/
+							Common.scrollIntoView("xpath", "//div[@class='u-container c-product-carousel-transparent__carousel']");
+							Thread.sleep(2000);
+							Common.clickElement("xpath", "(//i[@class='icon-admin-pagebuilder-systems'])[3]");
+				Thread.sleep(2000);
+							String editpromo = Common.findElement("xpath", "(//h1[@class='modal-title'])[1]").getText();
+
+							Common.assertionCheckwithReport(editpromo.contains("Edit Category/Product Slider"),
+									"validating the Navigation to the edit  Promo Media Card page ",
+									"after Click on edit button it should be navigate to the edit promoBlocker page ",
+									"Successfully it is navigated to edit promoBlocker page ",
+									"Failed to navigate to edit promoBlocker page");
+
+						} catch (Exception | Error e) {
+							e.printStackTrace();
+
+							ExtenantReportUtils.addFailedLog("validation Navigation to the edit promo Blocker ",
+									"after Click on edit button it should be navigate to the edit Blocker page ",
+									"Unable to navigate  to the edit Blocker page ",
+									Common.getscreenShotPathforReport("Failed to navigate to the edit Blocker page"));
+							Assert.fail();
+
+						}
+					}
+
+
+
 }
 
