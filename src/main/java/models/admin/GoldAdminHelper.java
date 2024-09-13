@@ -53,8 +53,8 @@ public class GoldAdminHelper {
 
         try {
             if (Common.getCurrentURL().contains("preprod")) {
-                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+//                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+//                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
             } 
             Sync.waitPageLoad(30);
       /*      Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
@@ -302,9 +302,15 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "//input[@name='customer[dob]']", data.get(Dataset).get("DOB"));
 			Sync.waitElementPresent("xpath", "//div[contains(@class,'ui-datepicker-b')]//button");
 			Common.clickElement("xpath", "//div[contains(@class,'ui-datepicker-b')]//button");
-			Common.clickElement("xpath", "//select[contains(@name,'customer[ex')]");
-			Common.dropdown("xpath", "//select[contains(@name,'customer[ex')]", Common.SelectBy.TEXT,
-					data.get(Dataset).get("State"));
+			String websitename=Common.findElement("xpath", "//select[@name='customer[website_id]']").getAttribute("value");
+			System.out.println(websitename);
+			if(websitename.equals("Hydroflask Website") || websitename.equals("OXO Website") || websitename.equals("Osprey US") || websitename.equals("Drybar Website")  )
+			{
+				Common.clickElement("xpath", "//select[contains(@name,'customer[ex')]");
+				Common.dropdown("xpath", "//select[contains(@name,'customer[ex')]", Common.SelectBy.TEXT,
+						data.get(Dataset).get("State"));
+			}
+			
 			Common.clickElement("xpath", "//select[@name='customer[gender]']");
 			Common.dropdown("xpath", "//select[@name='customer[gender]']", Common.SelectBy.TEXT,
 					data.get(Dataset).get("Gender"));
@@ -315,8 +321,7 @@ public class GoldAdminHelper {
 			Common.actionsKeyPress(Keys.END);
 			Sync.waitElementPresent("xpath", "//select[@name='customer[prodeal_status]']");
 			Common.clickElement("xpath", "//select[@name='customer[prodeal_status]']");
-			String websitename=Common.findElement("xpath", "//select[@name='customer[website_id]']").getAttribute("value");
-			System.out.println(websitename);
+			
 			if(websitename.equals("Hydroflask Website"))
 			{
 			Common.dropdown("xpath", "//select[@name='customer[prodeal_status]']", Common.SelectBy.TEXT,
@@ -437,6 +442,7 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "//a[@id='tab_address']");
 			Common.clickElement("xpath", "//button[contains(@class,'add-new')]");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(Dataset).get("Street"));
 			Common.actionsKeyPress(Keys.END);
@@ -480,6 +486,7 @@ public class GoldAdminHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//a[@id='tab_orders_content']");
 			Common.clickElement("xpath", "//a[@id='tab_orders_content']");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@name='increment_id']");
 			Common.textBoxInput("xpath", "//input[@name='increment_id']", data.get(Dataset).get("ordernumber"));
 			Common.actionsKeyPress(Keys.ENTER);
@@ -517,6 +524,7 @@ public class GoldAdminHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//a[@class='admin__page-nav-link']//span[text()='Returns']");
 			Common.clickElement("xpath", "//a[@class='admin__page-nav-link']//span[text()='Returns']");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@name='order_increment_id']");
 			Common.textBoxInput("xpath", "//input[@name='order_increment_id']", data.get(Dataset).get("ordernumber"));
 			Common.actionsKeyPress(Keys.ENTER);
@@ -556,6 +564,7 @@ public class GoldAdminHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//a[@id='tab_wishlist_content']");
 			Common.clickElement("xpath", "//a[@id='tab_wishlist_content']");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@name='product_name']");
 			Common.textBoxInput("xpath", "//input[@name='product_name']", data.get(Dataset).get("Productname"));
 			Common.actionsKeyPress(Keys.ENTER);

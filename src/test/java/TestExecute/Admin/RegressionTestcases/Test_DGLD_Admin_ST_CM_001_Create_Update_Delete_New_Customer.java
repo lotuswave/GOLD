@@ -26,7 +26,7 @@ public class Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer {
 			Admin.Newcustomer("HYFCustomer");
 			Admin.Customerdetails("HYFCustomer");
 			 Admin.Updatedetails("HYFCustomer");
-		     Admin.Address("Address");
+		     Admin.Address("USAddress");
 		     Admin.Orders("HYFCustomer"); 
 		     Admin.Returns("HYFCustomer");
 //		     Admin.shoppingcart("shoppingid");
@@ -36,7 +36,7 @@ public class Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer {
 		     Admin.Delete_customer("HYFCustomer");
 		     
 		     
-		     //HYFCustomer OxoCustomer OSPUSCustomer DRYCustomer change customer name as per the website
+		     //HYFCustomer OxoCustomer OSPUSCustomer DRYCustomer OPSUKCustomer change customer name as per the website for emea change UKAddress
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -45,7 +45,7 @@ public class Test_DGLD_Admin_ST_CM_001_Create_Update_Delete_New_Customer {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
