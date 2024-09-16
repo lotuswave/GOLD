@@ -50,10 +50,16 @@ public class GoldAdminHelper {
 	public void Admin_signin(String dataSet) {
 
 		try {
-			if (Common.getCurrentURL().contains("preprod")) {
-//                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-//                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
-			}
+
+        	if(Common.getCurrentURL().contains("emea"))
+        	{
+        		System.out.println(Common.getCurrentURL());
+        	}
+        	else if (Common.getCurrentURL().contains("preprod")) {
+                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
+                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
+            } 
+		
 			Sync.waitPageLoad(30);
 			/*
 			 * Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
@@ -7189,20 +7195,22 @@ public class GoldAdminHelper {
 		String email = data.get(dataset).get("Email");
 		String storeview = data.get(dataset).get("Store");
 		String website = data.get(dataset).get("Website");
+		System.out.println(website);
 		try {
 			System.out.println(email);
-			Thread.sleep(2000);
-			Sync.waitElementPresent("xpath", "//button[text()='Filters']");
-			Common.clickElement("xpath", "//button[text()='Filters']");
-			Common.javascriptclickElement("xpath", "//div[@class='admin__form-field-control']//input[@name='email']");
-			Common.scrollIntoView("xpath", "//input[@name='email']");
 			Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//input[@name='email']", email);
-			Thread.sleep(3000);
-			Common.scrollIntoView("name", "website_id");
-			Common.dropdown("name", "website_id", Common.SelectBy.TEXT, website);
-			Common.scrollIntoView("xpath", "//span[text()='Apply Filters']");
-			Common.javascriptclickElement("xpath", "//span[text()='Apply Filters']");
+			int filters=Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+			if(filters>0)
+			{
+				Common.clickElement("xpath", "//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Thread.sleep(4000);
+			}
+				Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+				Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+				Common.textBoxInput("xpath", "//input[@name='email']", data.get(dataset).get("Email"));
+				Common.clickElement("xpath", "//div[@class='admin__form-field-control']//option[text()='"+ website +"']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[@class='action-secondary']//span[text()='Apply Filters']");
 
 			Thread.sleep(5000);
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
@@ -7523,7 +7531,17 @@ public class GoldAdminHelper {
 				Common.clickElement("xpath", "//input[@id='s_method_amstrates_amstrates1']");
 				Sync.waitPageLoad();
 				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			} else {
+			} else if(Website.contains("Osprey Europe"))
+			{
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//input[@id='s_method_tablerate_bestway']");
+				Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
+				Sync.waitPageLoad();
+		        Thread.sleep(4000);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			}
+			else
+			{
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//input[@id='s_method_tablerate_bestway']");
 				Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
@@ -8080,25 +8098,7 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_telephone']");
 			Common.textBoxInput("xpath", "//input[@id='order-billing_address_telephone']",
 					data.get(dataSet).get("Phonenumber"));
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@id='order-shipping-method-summary']/a");
-
-			Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and rates')]");
-			Thread.sleep(2000);
-
-			Thread.sleep(8000);
-			Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
-
-			Sync.waitPageLoad();
-			// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
-			// @style='display: none;']");
-			String text = Common.findElement("xpath", "//span[text()='Click to change shipping method']").getText();
-			System.out.println(text);
-			Common.assertionCheckwithReport(text.contains("Click to change shipping method"),
-					"To Validate the displayed click to change shipping method",
-					"should display the click to change shipping method after clicking on the standard shipping",
-					"click to change shipping method is displayed after a click on the standard shipping",
-					"Failed to display click to change shipping method");
+		
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
