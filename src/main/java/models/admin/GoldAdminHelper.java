@@ -10975,24 +10975,24 @@ public class GoldAdminHelper {
 		String Stores = data.get(dataSet).get("Store");
 		try {
 
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			Common.scrollIntoView("xpath", "//span[text()='Product in Websites']");
 			Common.actionsKeyPress(Keys.ARROW_UP);
 			Sync.waitElementPresent("xpath", "//span[text()='Product in Websites']");
 			Common.clickElement("xpath", "//span[text()='Product in Websites']");
-//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 
-			Thread.sleep(6000);
-			WebElement checkbox = Common.findElementBy("xpath", "//label[text()='" + Stores + "']");
+			Thread.sleep(2000);
+			WebElement checkbox = Common.findElementBy("xpath", "//label[text()='" + Stores + "']//parent::div//input");
 			// Verify if the checkbox is selected
 			boolean isSelected = checkbox.isSelected();
 			System.out.println(isSelected);
 
 			if (isSelected) {
 				System.out.println("The checkbox is already selected.");
-			} else {
-				Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']");
-				Common.clickElement("xpath", "//label[text()='" + Stores + "']");
+			} 
+			else {
+				Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']//parent::div//input");
+				Common.clickElement("xpath", "//label[text()='" + Stores + "']//parent::div//input");
 			}
 
 			Sync.waitPageLoad();
