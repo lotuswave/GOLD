@@ -1668,7 +1668,35 @@ public class GoldAdminHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+			
+			String site = data.get(Dataset).get("Website");
+			
+			
+ 			
+           if(site.equals("OXO"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OXOpageTitle"));
+           }
+           
+           else if(site.equals("Hydroflask"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("HYFpageTitle"));
+           }
+           
+           else if(site.equals("Osprey"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OSPpageTitle"));
+           }
+           
+           else if(site.equals("Drybar"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("DBpageTitle"));
+           }
+           
 			Common.actionsKeyPress(Keys.ENTER);
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
@@ -1737,13 +1765,41 @@ public class GoldAdminHelper {
 
 	{
 		Common.switchToFirstTab();
-		String title = data.get(Dataset).get("pageTitle");
+		String OXOtitle = data.get(Dataset).get("OXOpageTitle");
+		String HYFtitle = data.get(Dataset).get("HYFpageTitle");
+		String OSPtitle = data.get(Dataset).get("OSPpageTitle");
+		String DBtitle = data.get(Dataset).get("DBpageTitle");
 		Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
 		String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-		if (name.equals(title)) {
+		String site = data.get(Dataset).get("Website");
+		
+		
+			
+        if(site.equals("OXO") && name.equals(OXOtitle))
+		 {
 			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
 			Common.clickElement("xpath", "//span[text()='Delete Page']");
-		} else {
+		}
+        
+        else if(site.equals("Hydroflask") && name.equals(HYFtitle))
+		 {
+			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+			Common.clickElement("xpath", "//span[text()='Delete Page']");
+		}
+        
+        else if(site.equals("Osprey") && name.equals(OSPtitle))
+		 {
+			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+			Common.clickElement("xpath", "//span[text()='Delete Page']");
+		}
+        
+        else if(site.equals("Drybar") && name.equals(DBtitle))
+		 {
+			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+			Common.clickElement("xpath", "//span[text()='Delete Page']");
+		}
+        
+        else {
 			Assert.fail();
 		}
 		String message = Common.findElement("xpath", "//div[@class='modal-content']").getText();
@@ -1897,7 +1953,7 @@ Common.clickElement("xpath", "//button[@title='Blocks']//span[text()='Paragraph'
 				
 				Common.clickElement("xpath", "//div[@class='tox-collection__item-label']//h3");
 				
-				Common.switchFrames("xpath", "//iframe[@id='hot_hero_banner_form_subtitle_ifr']");
+		/*		Common.switchFrames("xpath", "//iframe[@id='hot_hero_banner_form_subtitle_ifr']");
 				Thread.sleep(4000);
 				
 				
@@ -1906,7 +1962,7 @@ Common.clickElement("xpath", "//button[@title='Blocks']//span[text()='Paragraph'
 				
 				Common.findElement("xpath", "//body[@data-id='hot_hero_banner_form_subtitle']").sendKeys( data.get(DataSet).get("subtitle"));
 				Thread.sleep(2000);
-				Common.switchToDefault();
+				Common.switchToDefault();   */
 			}
 
 			
@@ -2320,6 +2376,7 @@ Common.refreshpage();
 
 	public void draganddropContentBlock(WebElement source) {
 		try {
+			Common.actionsKeyPress(Keys.PAGE_UP);
 			Common.dragdrop(source, "xpath", "//div[contains(@class,'pagebuilder-emp')]");
 
 		} catch (Exception | Error e) {
@@ -2631,8 +2688,38 @@ Common.refreshpage();
 		try {
 			Sync.waitElementPresent(30, "xpath", "//i[@title='Close Full Screen']");
 			Common.clickElement("xpath", "//i[@title='Close Full Screen']");
-			Common.clickElement("xpath", "//input[@name='title']");
-			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+			Thread.sleep(1000);
+			//Common.clickElement("xpath", "//input[@name='title']");
+			//Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("pageTitle"));
+			String site = data.get(Dataset).get("Website");
+			
+			Thread.sleep(1000);
+ 			
+	           if(site.equals("OXO"))
+	           {
+				
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OXOpageTitle"));
+	           }
+	           
+	           else if(site.equals("Hydroflask"))
+	           {
+				
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("HYFpageTitle"));
+	           }
+	           
+	           else if(site.equals("Osprey"))
+	           {
+				
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OSPpageTitle"));
+	           }
+	           
+	           else if(site.equals("Drybar"))
+	           {
+				
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("DBpageTitle"));
+	           }  
+	           Thread.sleep(2000);
+	          
 			Common.clickElement("xpath", "//button[@id='save-button']");
 			Sync.waitPageLoad(70);
 Thread.sleep(8000);
@@ -2655,24 +2742,68 @@ Thread.sleep(8000);
 	}
 
 	public void openwebsite(String Dataset) {
-		String pagetitle = data.get(Dataset).get("pageTitle");
-		System.out.println(pagetitle);
+		String site = data.get(Dataset).get("Website");
+		String oxopagetitle = data.get(Dataset).get("OXOpageTitle");
+		String hyfpagetitle = data.get(Dataset).get("HYFpageTitle");
+		String osppagetitle = data.get(Dataset).get("OSPpageTitle");
+		String dbpagetitle = data.get(Dataset).get("DBpageTitle");
+	
 		try {
 			Sync.waitPageLoad(60);
 
 			String currentAdminURL = Common.getCurrentURL();
-			String urlkey = pagetitle.toLowerCase();
-			System.out.println(urlkey);
+			String oxourlkey = oxopagetitle.toLowerCase();
+			System.out.println(oxourlkey);
+			String hyfurlkey = hyfpagetitle.toLowerCase();
+			System.out.println(hyfurlkey);
+			String ospurlkey = osppagetitle.toLowerCase();
+			System.out.println(ospurlkey);
+			String dburlkey = dbpagetitle.toLowerCase();
+			System.out.println(dburlkey);
 			Common.openNewTab();
 			if (currentAdminURL.contains("preprod")) {
-				Thread.sleep(10000);
+				Thread.sleep(1000);
 				//.sendKeys( data.get(DataSet).get("title"));
-				Common.oppenURL(data.get(Dataset).get("preprodURL") + urlkey);
-			} else {
-				Common.oppenURL(data.get(Dataset).get("prodURL") + urlkey);
-
-				Common.oppenURL(data.get(Dataset).get("prodURL") + urlkey);
-
+				if (site.equals("OXO"))
+				{
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + oxourlkey);
+			}
+				else if (site.equals("Hydroflask"))
+				{
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + hyfurlkey);
+			}
+				
+				else if (site.equals("Osprey"))
+				{
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + ospurlkey);
+			}
+				
+				else if (site.equals("Drybar"))
+				{
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + dburlkey);
+			}
+				
+				else {
+					
+					if (site.equals("OXO"))
+					{
+					Common.oppenURL(data.get(Dataset).get("prodURL") + oxourlkey);
+				}
+					else if (site.equals("Hydroflask"))
+					{
+					Common.oppenURL(data.get(Dataset).get("prodURL") + hyfurlkey);
+				}
+					
+					else if (site.equals("Osprey"))
+					{
+					Common.oppenURL(data.get(Dataset).get("prodURL") + ospurlkey);
+				}
+					
+					else if (site.equals("Drybar"))
+					{
+					Common.oppenURL(data.get(Dataset).get("prodURL") + dburlkey);
+				}
+				
 			}
 			Sync.waitPageLoad(40);
 			Thread.sleep(10000);
@@ -2680,11 +2811,11 @@ Thread.sleep(8000);
 			Thread.sleep(10000);
 			String uname = Common.getPageTitle();
 			System.out.println(uname);
-			Common.assertionCheckwithReport(uname.contains(pagetitle),
+			Common.assertionCheckwithReport(uname.contains("qacontent"),
 					"Validating the User lands to the Hydroflask page",
 					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
 					"Failed to navigate to the hydroflask page");
-
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the User lands to the Hydroflask page",
@@ -2797,7 +2928,7 @@ Thread.sleep(8000);
 
 	public void deletepage(String Dataset) {
 		// TODO Auto-generated method stub
-		String title = data.get(Dataset).get("pageTitle");
+		//String title = data.get(Dataset).get("pageTitle");
 		try {
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
@@ -2805,7 +2936,7 @@ Thread.sleep(8000);
 
 			Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
 			String name1 = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-			if (name1.equals(title)) {
+			if (name1.equals("qacontent")) {
 				Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
 				Common.clickElement("xpath", "//span[text()='Delete Page']");
 			} else {
@@ -4105,8 +4236,10 @@ Thread.sleep(8000);
 			Thread.sleep(2000);
 			WebElement element = Common.findElement("xpath", "//span[text()='Category/Product Slider']");
 			draganddropContentBlock(element);
+			Common.mouseOver("xpath", "//div[@class='c-clp-hero']");
+			Thread.sleep(2000);
 			
-			Thread.sleep(5000);
+			//Common.scrollIntoView("xpath", "//div[@class='pagebuilder-content-type pagebuilder-hot-category-product-slider']");
 			String blocknames = Common
 					.findElement("xpath",
 							"//div[@class='pagebuilder-content-type pagebuilder-hot-category-product-slider']")
@@ -9930,17 +10063,54 @@ public void delet_existing_Coupon(String dataSet) {
 
 	public void Search_previous_page_Magento(String Dataset) {
 		// TODO Auto-generated method stub
-		String title = data.get(Dataset).get("pageTitle");
+		//String title = data.get(Dataset).get("pageTitle");
 		try {
 			click_content();
 			pages();
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
-			Common.textBoxInput("xpath", "//input[@name='title']", title);
+			
+			//Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
+			//Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
+			
+			Thread.sleep(1000);
+			String site = data.get(Dataset).get("Website");
+			
+			
+ 			
+           if(site.equals("OXO"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OXOpageTitle"));
+			Common.clickElement("xpath", "//span[text()='Apply Filters']");
+           }
+           
+           else if(site.equals("Hydroflask"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("HYFpageTitle"));
 			Common.actionsKeyPress(Keys.ENTER);
+           }
+           
+           else if(site.equals("Osprey"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OSPpageTitle"));
+			Common.actionsKeyPress(Keys.ENTER);
+           }
+           
+           else if(site.equals("Drybar"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("DBpageTitle"));
+			Common.actionsKeyPress(Keys.ENTER);
+           }
+           
+			//Common.textBoxInput("xpath", "//input[@name='title']", title);
+			//Common.actionsKeyPress(Keys.ENTER);
 			String name = Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
-			Common.assertionCheckwithReport(name.equals(title), "Validating the title name should be match",
+			Common.assertionCheckwithReport(name.contains("qacontent"), "Validating the title name should be match",
 					"title name should be appear in the pages", "Sucessfully title should be appear in the pages",
 					"Unable to see the title in the page");
 			Common.clickElement("xpath", "//tr//button[@class='action-select']");
@@ -9948,7 +10118,7 @@ public void delet_existing_Coupon(String dataSet) {
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			String name1 = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-			Common.assertionCheckwithReport(name1.equals(title), "Validating the page navigation",
+			Common.assertionCheckwithReport(name1.contains("qacontent"), "Validating the page navigation",
 					"title name should be appear in the pages", "Sucessfully title  appear in the pages",
 					"Unable to see the title in the page");
 

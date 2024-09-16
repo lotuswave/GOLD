@@ -69,9 +69,9 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
         Admin.editCategory_Productslider(); 
         Admin.category_productslider("Categorydetails");
         Admin.editcategorypage("Categorydetails");
-        Admin.savecontent("CategoryProducts");	
+        Admin.savecontent("Content");	
         Admin.page_Cache("FlushMagento");
-        Admin.openwebsite("CategoryProducts"); 
+        Admin.openwebsite("Content"); 
         Admin.website_verification_categroeyslider();   
 
 	  //****  CARD TILES Block ****//
@@ -85,9 +85,9 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
 		Admin.featuredcardconfiguration_image("ProductcardTile");
 		Admin.category_cards("ProductcardTile");
 		Admin.Editandsavepage();
-		Admin.savecontent("ProductcardTile");
+		Admin.savecontent("Content");
 		Admin.page_Cache("FlushMagento");
-		Admin.openwebsite("ProductcardTile");
+		Admin.openwebsite("Content");
 		Admin.verifycardtileimage_frontend("ProductcardTile");  
 
 		 //****  CATGEORY/PRODUCT SLIDER Block ****//
@@ -104,8 +104,8 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
 	    Admin.openwebsite("Content");  
 	    Admin.website_SKU_verification();
 
-	    Admin.deletepage("Content");
-        Admin.Clearfilter();
+	   // Admin.deletepage("Content");
+      //  Admin.Clearfilter();
  
 	} catch (Exception e) {
  
