@@ -31,7 +31,7 @@ public class Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 			Admin.Flush_Magneto_cache("FlushMagento");
 
 			//Fron end validation
-			Admin.open_website("OXO");
+			Admin.open_website("OXO");  // change to "prodURL" inside this method of executed in prod
 			Admin.Homepage_searchproduct("searchproduct");
 			Admin.clickPLP_product("OXO");
 
