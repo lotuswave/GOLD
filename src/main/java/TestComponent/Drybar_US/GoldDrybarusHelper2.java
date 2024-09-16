@@ -5283,11 +5283,10 @@ public void FUll_Payment(String dataSet) {
 			
 				try {
 				
-				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
-				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
-				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
+				Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+				Common.clickElement("xpath", "//button[@id='customer-menu']");
+				Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+				Common.clickElement("xpath", "//a[@title='My Account']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				
@@ -5295,27 +5294,30 @@ public void FUll_Payment(String dataSet) {
 				
 				System.out.println(MyAccount);
 				
-				Common.assertionCheckwithReport(MyAccount.equals("My Account"),
+				Common.assertionCheckwithReport(MyAccount.equals("Dashboard"),
     					"validating the order summary in the payment page",
     					"Order summary should be display in the payment page and all fields should display",
     					"Successfully Order summary is displayed in the payment page and fields are displayed",
     					"Failed to display the order summary and fileds under order summary");
 				
 				
-				Sync.waitElementPresent("xpath", "//a[text ()='Communication Preferences']");
-				Common.clickElement("xpath", "//a[text ()='Communication Preferences']");
+				Sync.waitElementPresent("xpath", "//span[text ()='Communication Preferences']");
+				Common.clickElement("xpath", "//span[text ()='Communication Preferences']");
 
-				String Communication = Common.getText("xpath", "//h1[text()='Communication Preferences']");
+				
+				Thread.sleep(4000);
+				String Communication = Common.getText("xpath", "//h1//span[@data-ui-id='page-title-wrapper']");
 
-				String Storefront_Text = "Communication Preferences";
+				String Storefront_Text = "COMMUNICATION PREFERENCES";
 
-				Assert.assertEquals(Communication, Storefront_Text);
 				System.out.println(Communication);
 				System.out.println(Storefront_Text);
+				Assert.assertEquals(Communication, Storefront_Text);
+				
 				
 				
 				WebElement checkBox = Common.findElement("xpath", "//input[@id='subscription']");
-				WebElement Save = Common.findElement("xpath", "//span[text()='Save']");
+				WebElement Save = Common.findElement("xpath", "//span[contains(text(),'Save')]");
                 
 				if(checkBox.isSelected())
 				{
