@@ -11321,10 +11321,72 @@ public String Twenty_percent_Reward_Points(String Dataset) {
 	}
 	return rewardpointsused;
 }
+
+public void change_Subscription_Date() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Navigate_to_MyproductSubscription();
+	
+		Sync.waitElementPresent("xpath", "	(//a[contains(text(),'Edit')])[1]");
+		Common.clickElement("xpath", "	(//a[contains(text(),'Edit')])[1]");
+		String date=Common.findElement("xpath", "(//a[@class='hover:underline action aw-sarp2__next-payment-date']//parent::td//parent::tr//td)[1]").getText();
+		System.out.println(date);
+		Sync.waitElementPresent("xpath", "//a[@class='hover:underline action aw-sarp2__next-payment-date']");
+		Common.clickElement("xpath", "//a[@class='hover:underline action aw-sarp2__next-payment-date']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		 Common.assertionCheckwithReport(Common.getPageTitle().equals("Change Next Payment Date"), "validating the page navigated to the change next payment date",
+					"After clicking on the Edit button it should be navigate to the next payment page", "Sucessfully Navigated to the next payment date page",
+					"failed to Navigate to the next payment date page");
+		 
+		 
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	
 }
 
 
+public void Navigate_to_MyproductSubscription()
+{
+	try
+	{
+	
+		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+		Common.clickElement("xpath", "//button[@id='customer-menu']");
+		Thread.sleep(2000);
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'My Account')]");
+		Common.clickElement("xpath", "//a[contains(text(),'My Account')]");
+		Sync.waitForLoad();
+		Thread.sleep(3000);
+		 Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"), "validating the page navigated to the Dashboard page",
+					"After clicking on the My account button it should be navigate to the Dashboard page", "Sucessfully Navigated to the Dashboard  page",
+					"failed to Navigate to the Dashboard  page");
+		Sync.waitElementPresent("xpath", "//span[text()='My Product Subscriptions']");
+		Common.clickElement("xpath", "//span[text()='My Product Subscriptions']");
+		Sync.waitForLoad();
+		Thread.sleep(3000);
+		 Common.assertionCheckwithReport(Common.getPageTitle().equals("My Subscriptions"), "validating the page navigated to the My Subscriptions page",
+					"After clicking on the Product Subscriptions button it should be navigate to the Dashboard page", "Sucessfully Navigated to the My Subscriptions  page",
+					"failed to Navigate to the My Subscriptions  page");
+	
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the page navigated to the My Subscriptions page",
+				"After clicking on the Product Subscriptions button it should be navigate to the Dashboard page", "unable to Navigated to the My Subscriptions  page",
+				Common.getscreenShot("failed to Navigate to the My Subscriptions  page"));
+		Assert.fail();
+	}
+}
 
+}
 			
 
 

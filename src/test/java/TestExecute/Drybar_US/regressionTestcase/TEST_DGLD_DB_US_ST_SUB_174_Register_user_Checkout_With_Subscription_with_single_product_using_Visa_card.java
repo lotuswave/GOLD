@@ -10,7 +10,7 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_174_Register_user_Checkout_With_Subscription_with_single_product_using_Visa_card {
+public class TEST_DGLD_DB_US_ST_SUB_174_Register_user_Checkout_With_Subscription_with_single_product_using_Visa_card {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
@@ -31,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_174_Register_user_Checkout_With_Subscription_wit
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			Drybar.subcription_Profile();
-			
+			Drybar.change_Subscription_Date();   //unable to click the date website issue
 
 		} catch (Exception e) {
 
