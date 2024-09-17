@@ -11386,6 +11386,96 @@ public void Navigate_to_MyproductSubscription()
 	}
 }
 
+public void Subcription_Afterpay_Invalid() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		
+		Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+		Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+		Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");	
+		Common.switchToDefault();
+		Thread.sleep(3000);
+		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+			
+		{ 
+		Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+		Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+		Sync.waitPageLoad();
+		Thread.sleep(6000);
+		Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+		String message = Common.findElement("xpath", "//div[@ui-id='message-error']")
+				.getAttribute("ui-id");
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("error"), "validating the error message for the afterpay payment method",
+				"After clicking on the place order error message should be display", "Sucessfully error messsage has been displayed",
+				"failed to display the error message");
+		Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
+		Common.clickElement("xpath", "//button[@aria-label='Close message']");
+		}
+		else
+		{
+			Assert.fail();
+			}
+		
+	}
+	catch (Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message for the afterpay payment method",
+				"After clicking on the place order error message should be display", "Unable to display the  error messsage after clicking the place order",
+				Common.getscreenShot("failed to display the  error messsage after clicking the place order"));
+		Assert.fail();
+	}
+}
+
+
+public void Subcription_Klarna_Invalid() {
+	// TODO Auto-generated method stub
+	
+	try
+	{
+		Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+		System.out.println("Switch to Frames");
+		Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+		Common.switchToDefault();
+		System.out.println("Switch to Default");
+		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+		
+		{   	 
+            	 Sync.waitElementClickable("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+ 				 Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+ 				Sync.waitPageLoad();
+ 				Thread.sleep(6000);
+ 				Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+ 				String message = Common.findElement("xpath", "//div[@ui-id='message-error']")
+ 						.getAttribute("ui-id");
+ 				System.out.println(message);
+ 				Common.assertionCheckwithReport(message.contains("error"), "validating the error message for the Klarna payment method",
+ 						"After clicking on the place order error message should be display", "Sucessfully error messsage has been displayed",
+ 						"failed to display the error message");
+ 				Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
+ 				Common.clickElement("xpath", "//button[@aria-label='Close message']");
+		}
+		else
+		{
+			Assert.fail();
+		}
+	}
+	
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message for the Klarna payment method",
+				"After clicking on the place order error message should be display", "Unable to display the  error messsage after clicking the place order",
+				Common.getscreenShot("failed to display the  error messsage after clicking the place order"));
+		Assert.fail();
+	}
+	
+}
 }
 			
 
