@@ -11,7 +11,6 @@ import models.admin.GoldAdminHelper;
 
 public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue {
 
-
 	String datafile = "Admin\\GoldAdminTestData.xlsx";
 	GoldAdminHelper Admin = new GoldAdminHelper(datafile, "Retailer OrderPlacement");
 
@@ -32,7 +31,6 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 			Admin.Update_StoreCredit_ExistingCustomer("OXOWebsite");
 			Admin.Select_Storecredit_payment_method();
 			Admin.Submit_RetailOrder_Success();
-			 
 
 		} catch (Exception e) {
 			Assert.fail(e.getMessage(), e);
@@ -51,7 +49,5 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 		Login.signIn();
 
 	}
-	
-	
-	
+
 }

@@ -77,7 +77,7 @@ public class GoldAdminHelper {
 
 				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
 				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
-				Thread.sleep(10000);
+				Thread.sleep(15000);
 				
 				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
@@ -7346,11 +7346,11 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(2000);
-			Sync.waitElementPresent("xpath", "//button[@class='action- scalable add']");
-			Common.clickElement("xpath", "//button[@class='action- scalable add']");
+			Sync.waitElementPresent("xpath", "//span[text()='Create New Order']");
+			Common.clickElement("xpath", "//span[text()='Create New Order']");
 			Sync.waitPageLoad();
 			String text = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-			Common.assertionCheckwithReport(text.contains("Create New Order for"),
+			Common.assertionCheckwithReport(text.contains("Create New Order for New Customer"),
 					"To Validate the Create New Order for New Customer page is displayed",
 					"should display the Create New Order for New Customer page after clicking on the create new order",
 					"Create New Order for New Customer page is displayed after a click on the create new order button",
@@ -7507,7 +7507,9 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 
 		String Website = data.get(dataSet).get("Store");
-
+		 String Shipping=data.get(dataSet).get("Shipping");
+		 System.out.println(Website);
+		 System.out.println(Shipping);
 		try {
 
 			// Common.scrollIntoView("xpath",
@@ -7518,13 +7520,30 @@ public class GoldAdminHelper {
 			Common.doubleClick("xpath", "//span[contains(text(), 'Get shipping methods and rates')]");
 			Thread.sleep(2000);
 
-			if (Website.contains("Drybar Store View")) {
+			if (Website.contains("OXO Store View")) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//input[@id='s_method_amstrates_amstrates31']");
-				Common.clickElement("xpath", "//input[@id='s_method_amstrates_amstrates31']");
+				
+			        System.out.println("Shipping"+Shipping);
+//						Common.switchToFirstTab();
+						int size =Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
+						if(size>0) {
+							Sync.waitElementVisible("xpath", "//span[text()='Click to change shipping method']");
+							Common.doubleClick("xpath", "//span[text()='Click to change shipping method']");
+						}
+						else {
+							Thread.sleep(3000);
+							Sync.waitElementVisible("xpath", "//label[text()='"+Shipping+"']");
+							Common.doubleClick("xpath", "//label[text()='"+Shipping+"']");
+						}
+						
 				Sync.waitPageLoad();
-				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-				// need to add the second shipment after shipments are avaliable
+				Sync.waitElementVisible("xpath", "//label[text()='Use Store Credit (']");
+				int storecrdeit = Common.findElements("xpath", "//label[text()='Use Store Credit (']").size();
+				Common.assertionCheckwithReport(storecrdeit > 0,
+						"To validate the Store credit is reflected on the Admin order page",
+						"Store credit should be displayed on the Create New order page",
+						"Store credit is displayed on the Create New order page",
+						"Store credit failed to displayed on the Create New order page");
 			} else if (Website.contains("Osprey US English")) {
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//input[@id='s_method_amstrates_amstrates1']");
@@ -7573,8 +7592,9 @@ public class GoldAdminHelper {
 	public void Select_Storecredit_payment_method() {
 		// TODO Auto-generated method stub
 		try {
+			 Common.switchToFirstTab();
 			Thread.sleep(2000);
-
+    
 			Sync.waitElementPresent("id", "p_method_use_customerbalance");
 			Common.clickElement("id", "p_method_use_customerbalance");
 			Thread.sleep(5000);
@@ -7891,13 +7911,9 @@ public class GoldAdminHelper {
 			Common.clickElement("xpath", "//label[text()='" + Website + "']");
 
 			Thread.sleep(3000);
-
 			Sync.waitPageLoad();
-
 			String page = Common.findElement("xpath", "//h1[@class='page-title']").getText();
-
-			Thread.sleep(5000);
-
+			Thread.sleep(10000);
 			Common.assertionCheckwithReport(page.contains(Website),
 					"To Validate the create new order page is displayed",
 					"should display the create new order page after clicking on the store",
@@ -9431,6 +9447,7 @@ public class GoldAdminHelper {
 
 	public String update_customprice(String dataSet) throws Exception {
 		String updatedhighprice = "";
+		
 		try {
 
 			Thread.sleep(3000);
@@ -9439,7 +9456,7 @@ public class GoldAdminHelper {
 
 			int customprices = Common.findElements("xpath", "//span[text()='Custom Price*']").size();
 
-			for (int i = 1; i <= customprices; i++) {
+			for (int i =1; i <= customprices; i++) {
 				String newhighprice[] = data.get(dataSet).get("highprice").split(",");
 				Float New_Price = Float.valueOf(newhighprice[i - 1]);
 				System.out.println(New_Price);
@@ -9461,7 +9478,12 @@ public class GoldAdminHelper {
 						"To Validate the custom price override with High Value",
 						"The original price should be Override to higher value",
 						"The original price is Overrided to higher value", "Failed to override the custom price");
+			
+			
+			
+			
 			}
+	
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To Validate the custom price override with High Value",
@@ -9781,65 +9803,8 @@ public class GoldAdminHelper {
 				Common.javascriptclickElement("xpath", "//span[text()='Back']");
 				Sync.waitPageLoad();
 			}
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the Customer is landing on the all customers page",
-					"Admin should land on the All customers page", "Admin lands on the All the customers page",
-					"Failed to land on the All customers page");
-			Assert.fail();
-		}
-
-		/*
-		 * try { String username= Common.findElement("xpath",
-		 * "(//div[@class='data-grid-cell-content'])[2]").getText();
-		 * Common.scrollIntoView("xpath", "//a[text()='Edit']");
-		 * Common.javascriptclickElement("xpath", "//a[text()='Edit']");
-		 * Sync.waitPageLoad(); Thread.sleep(3000); Sync.waitElementVisible("xpath",
-		 * "//h1[@class='page-title']");
-		 * Common.assertionCheckwithReport(Common.getPageTitle().contains(username +
-		 * " / Customers / "), "Validating the edit button on the customers page",
-		 * "After clicking edit button it should navigate to the selected page",
-		 * "Successfully navigate to the selected page when we click on edit button",
-		 * "Failed to navigate to the selected page"); Sync.waitElementPresent("xpath",
-		 * "//span[text()='Store Credit']"); Common.clickElement("xpath",
-		 * "//span[text()='Store Credit']");
-		 * 
-		 * String defaultstorecredit = Common .findElement("xpath",
-		 * "//tr[@class='_clickable']//td[@class=' col-amount a-left  ']").getText()
-		 * .replace("$", ""); float Defaultstoreblnce =
-		 * Float.parseFloat(defaultstorecredit);
-		 * 
-		 * Common.assertionCheckwithReport(Defaultstoreblnce==GrandTotal,
-		 * "To validate the Grand total and store creedit are equal",
-		 * "Store credit and grand total should be equal",
-		 * "Store credit and grand total are equal",
-		 * "Store credit and grand total are not equal");
-		 * 
-		 * }catch (Exception | Error e) { e.printStackTrace(); ExtenantReportUtils.
-		 * addFailedLog("To validate the Grand total and store creedit are equal",
-		 * "Store credit and grand total should be equal",
-		 * "Store credit and grand total are not equal",
-		 * "Store credit is not equal to grand total"); Assert.fail(); }
-		 */
-		try {
-
-			Common.switchToFirstTab();
-			// Common.scrollIntoView("xpath", "//span[text()='Click to change shipping
-			// method']");
-			Sync.waitElementVisible("xpath", "//span[text()='Click to change shipping method']");
-			Common.doubleClick("xpath", "//span[text()='Click to change shipping method']");
-			Thread.sleep(3000);
-			Sync.waitElementVisible("xpath", "//label[@for='s_method_tablerate_bestway']//span[text()='$0.00']");
-			Common.doubleClick("xpath", "//label[@for='s_method_tablerate_bestway']//span[text()='$0.00']");
-			Thread.sleep(3000);
-			Sync.waitElementVisible("xpath", "//label[text()='Use Store Credit (']");
-			int storecrdeit = Common.findElements("xpath", "//label[text()='Use Store Credit (']").size();
-			Common.assertionCheckwithReport(storecrdeit > 0,
-					"To validate the Store credit is reflected on the Admin order page",
-					"Store credit should be displayed on the Create New order page",
-					"Store credit is displayed on the Create New order page",
-					"Store credit failed to displayed on the Create New order page");
+		
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the Store credit is reflected on the Admin order page",
@@ -9859,17 +9824,12 @@ public class GoldAdminHelper {
 		String website = data.get(dataSet).get("Website");
 		try {
 			Common.textBoxInput("xpath", "//input[@name='email']", email);
-			// Thread.sleep(5000);
-			// Common.textBoxInput("name", "website_name", website);
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Sync.waitElementVisible("xpath", "//td[text()='" + email + "']");
 			int numofemails = Common.findElements("xpath", "//td[text()='" + email + "']").size();
-
-			// String name = Common.findElement("xpath",
-			// "(//div[@class='data-grid-cell-content'])[2]").getText();
 
 			if (numofemails > 0) {
 				Common.findElement("xpath", "//td[text()='" + storeview + "']");
