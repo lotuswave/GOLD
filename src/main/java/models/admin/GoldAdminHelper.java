@@ -7539,11 +7539,18 @@ public class GoldAdminHelper {
 				Sync.waitPageLoad();
 			}
 			else if (Website.contains("Osprey US English")) {
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//input[@id='s_method_amstrates_amstrates1']");
-				Common.clickElement("xpath", "//input[@id='s_method_amstrates_amstrates1']");
-				Sync.waitPageLoad();
-				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				int size =Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
+				if(size>0) {
+					Sync.waitElementVisible("xpath", "//span[text()='Click to change shipping method']");
+					Common.doubleClick("xpath", "//span[text()='Click to change shipping method']");
+					Common.doubleClick("xpath", "//label[text()='"+Shipping+"']");
+				}
+				else {
+					Thread.sleep(3000);
+					Sync.waitElementVisible("xpath", "//label[text()='"+Shipping+"']");
+					Common.doubleClick("xpath", "//label[text()='"+Shipping+"']");
+				}
+				
 			} 
 			else if(Website.contains("Osprey Europe"))
 			{
@@ -7620,7 +7627,7 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Common.switchToFirstTab();
-			Common.refreshpage();
+			Common.actionsKeyPress(Keys.F5);
 			Thread.sleep(2000);
 			Sync.waitElementPresent("id", "p_method_use_customerbalance");
 			Common.clickElement("id", "p_method_use_customerbalance");
