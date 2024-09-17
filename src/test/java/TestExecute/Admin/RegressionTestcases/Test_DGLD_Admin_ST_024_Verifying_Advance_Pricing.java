@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestLib.Automation_properties;
 import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
@@ -27,13 +28,13 @@ public class Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 			Admin.QAtest_Advanced_Pricing("AdvancedPricing");
 			Admin.Quantityincrease("Quantity");
 			Admin.stockstatus("Stockstatus");
-			Admin.Website_Selection("OXO");
+			Admin.Website_Selection("OSP_EMEA"); // Change testdata as per Website
 			Admin.Flush_Magneto_cache("FlushMagento");
 
-			//Fron end validation
-			Admin.open_website("OXO");  // change to "prodURL" inside this method of executed in prod
+			// Front end validation
+			Admin.open_website("OSP_EMEA"); // change to "prodURL" inside this method if executed in prod & Testdata
 			Admin.Homepage_searchproduct("searchproduct");
-			Admin.clickPLP_product("OXO");
+			Admin.clickPLP_product("OSP_EMEA");
 
 		} catch (Exception e) {
 

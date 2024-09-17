@@ -50,34 +50,43 @@ public class GoldAdminHelper {
 	public void Admin_signin(String dataSet) {
 
 		try {
-			if (Common.getCurrentURL().contains("preprod")) {
-//                Sync.waitElementClickable("xpath", "//a[@class='action login primary']");
-//                Common.javascriptclickElement("xpath", "//a[@class='action login primary']");
-			}
-			Sync.waitPageLoad(30);
-			/*
-			 * Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
-			 * Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']",
-			 * data.get(dataSet).get("UserName")); Common.clickElement("id", "idSIButton9");
-			 * Sync.waitPageLoad(); Thread.sleep(3000); Sync.waitElementPresent(30, "name",
-			 * "passwd"); Common.textBoxInput("name", "passwd",
-			 * data.get(dataSet).get("Password")); Common.clickElement("id", "idSIButton9");
-			 */
-//            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
-//            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
-//                Common.javascriptclickElement("id", "KmsiCheckboxField");
-//            }
-			// Sync.waitElementClickable("id", "idSIButton9");
-			// Common.mouseOverClick("id", "idSIButton9");
+			if (Common.getCurrentURL().contains("emea-preprod")) {
 
-			Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
-			Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
-			Thread.sleep(10000);
-//			Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
-//					"To Validate the Admin is landing on the Dashboard after successfull Signin",
-//					"After clicking on sigin button admin should navigate to the dashboard",
-//					"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
-//					"Admin failed to display the dashboard after clicking on the signin button");
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("emea-preprod.hele."),
+						"To Validate the Admin is landing on the Dashboard after successfull Signin",
+						"After clicking on sigin button admin should navigate to the dashboard",
+						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+						"Admin failed to display the dashboard after clicking on the signin button");
+			}
+			else {
+				Sync.waitPageLoad(30);
+				/*
+				 * Sync.waitElementPresent("xpath", "//input[@name='loginfmt']");
+				 * Common.clickAndtextBoxInput("xpath", "//input[@name='loginfmt']",
+				 * data.get(dataSet).get("UserName")); Common.clickElement("id", "idSIButton9");
+				 * Sync.waitPageLoad(); Thread.sleep(3000); Sync.waitElementPresent(30, "name",
+				 * "passwd"); Common.textBoxInput("name", "passwd",
+				 * data.get(dataSet).get("Password")); Common.clickElement("id", "idSIButton9");
+				 */
+//	            Sync.waitElementVisible(30, "xpath", "//div[@id='lightbox']");
+//	            if (Common.isElementDisplayed("id", "KmsiCheckboxField")) {
+//	                Common.javascriptclickElement("id", "KmsiCheckboxField");
+//	            }
+				// Sync.waitElementClickable("id", "idSIButton9");
+				// Common.mouseOverClick("id", "idSIButton9");
+
+				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
+				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
+				Thread.sleep(10000);
+				
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
+						"To Validate the Admin is landing on the Dashboard after successfull Signin",
+						"After clicking on sigin button admin should navigate to the dashboard",
+						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+						"Admin failed to display the dashboard after clicking on the signin button");
+			}
+		
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -4748,20 +4757,10 @@ public class GoldAdminHelper {
 	}
 
 	public void open_website(String Dataset) {
-		String pagetitle = data.get(Dataset).get("pageTitle");
-		
-		System.out.println(pagetitle);
 		try {
 			Sync.waitPageLoad(60);
-
 			Common.openNewTab();
 			Common.oppenURL(data.get(Dataset).get("preprodURL"));
-//			if (Common.getCurrentURL().contains("preprod")) {
-//				
-//			} else {
-//				Common.oppenURL(data.get(Dataset).get("prodURL"));
-//				Common.oppenURL(data.get(Dataset).get("prodURL"));
-//			}
 			
 			Sync.waitPageLoad(40);
 
@@ -7728,6 +7727,7 @@ public class GoldAdminHelper {
 	public void Homepage_searchproduct(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "to search product in homepage";
+		String Search= data.get(dataSet).get("search");
 
 		try {
 			Thread.sleep(3000);
@@ -7737,7 +7737,7 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "(//input[@id='autocomplete-0-input'])", data.get(dataSet).get("search"));
 			Thread.sleep(6000);
 			Common.clickElement("xpath", "(//span[@class='icon-header__search--desktop a-icon-text-btn__icon'])[3]");
-			int pages = Common.findElements("xpath", "//span[text()='QATest Product']").size();
+			int pages = Common.findElements("xpath", "//span[text()='"+Search+"']").size();
 			System.out.println(pages);
 
 			ExtenantReportUtils.addPassLog("verifying the search functionality",
@@ -10305,10 +10305,22 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 
+			if(Common.getCurrentURL().contains("na-preprod")) {
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//input[@name='product[quantity_and_stock_status][qty]']");
 			Common.textBoxInput("xpath", "//input[@name='product[quantity_and_stock_status][qty]']",
 					data.get(dataSet).get("Products"));
+			}
+			else {
+				Sync.waitElementPresent("xpath", "//input[@name='sources[assigned_sources][0][quantity]']");
+				Common.textBoxInput("xpath", "//input[@name='sources[assigned_sources][0][quantity]']",
+						data.get(dataSet).get("Products"));
+				Common.textBoxInput("xpath", "//input[@name='sources[assigned_sources][1][quantity]']",
+						data.get(dataSet).get("Products"));
+				Common.textBoxInput("xpath", "//input[@name='sources[assigned_sources][2][quantity]']",
+						data.get(dataSet).get("Products"));
+				
+			}
 
 			ExtenantReportUtils.addFailedLog("To validate the quantity", "the quantity to increase",
 					"to increase the qty the product", Common.getscreenShot("Failed to display"));
@@ -10328,10 +10340,23 @@ public class GoldAdminHelper {
 		String expectedResult = " should navigate to Out of stock";
 		try {
 
-			Thread.sleep(6000);
-			Common.dropdown("xpath", "//select[@name='product[quantity_and_stock_status][is_in_stock]']",
-					Common.SelectBy.TEXT, data.get(dataSet).get("Instock"));
-
+			Thread.sleep(3000);
+			if(Common.getCurrentURL().contains("na-preprod")) {
+				Common.dropdown("xpath", "//select[@name='product[quantity_and_stock_status][is_in_stock]']",
+						Common.SelectBy.TEXT, data.get(dataSet).get("Instock"));
+			}
+			else {
+				
+				Common.scrollIntoView("xpath", "//strong//span[text()='Sources']");
+				Common.dropdown("xpath", "//select[@name='sources[assigned_sources][0][status]']",
+						Common.SelectBy.TEXT, data.get(dataSet).get("Instock"));
+				Common.dropdown("xpath", "//select[@name='sources[assigned_sources][1][status]']",
+						Common.SelectBy.TEXT, data.get(dataSet).get("Instock"));
+				Common.dropdown("xpath", "//select[@name='sources[assigned_sources][2][status]']",
+						Common.SelectBy.TEXT, data.get(dataSet).get("Instock"));
+				
+							}
+		
 	
 			ExtenantReportUtils.addFailedLog("verifying In stock productsin magento", expectedResult,
 					"User failed to login in account  ", Common.getscreenShotPathforReport("login faield"));
@@ -10936,12 +10961,13 @@ public class GoldAdminHelper {
 		String expectedResult = "to validate product PDP";
 		String Symbols = data.get(dataset).get("Symbol");
 		String ActualPrice = data.get(dataset).get("SpecialPrice");
+		String Search= data.get(dataset).get("search");
 
 		try {
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//mark[text()='QA']");
 			Thread.sleep(2000);
-			int pages = Common.findElements("xpath", "//p[text()='QATEST product']").size();
+			int pages = Common.findElements("xpath", "//p[text()='"+Search+"']").size();
 			System.out.println(pages);
 
 			String Special_Price = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])[1]");
@@ -10954,6 +10980,9 @@ public class GoldAdminHelper {
 			} else {
 				Assert.fail();
 			}
+			
+			System.out.println(Special_Price);
+			System.out.println(Price);
 			Common.assertionCheckwithReport(Price.contains(ActualPrice), "To Validate the QATEST product Special Price",
 					"should display the QATEST product Special Price ",
 
@@ -10974,7 +11003,7 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		String Stores = data.get(dataSet).get("Store");
 		try {
-
+			if(Common.getCurrentURL().contains("na-preprod")) {
 			Thread.sleep(2000);
 			Common.scrollIntoView("xpath", "//span[text()='Product in Websites']");
 			Common.actionsKeyPress(Keys.ARROW_UP);
@@ -11003,6 +11032,38 @@ public class GoldAdminHelper {
 
 			int pages = Common.findElements("xpath", "//div[@class='message message-success success']").size();
 			System.out.println(pages);
+			}
+			else {
+				Thread.sleep(2000);
+				Common.scrollIntoView("xpath", "//span[text()='Product in Websites']");
+				Common.actionsKeyPress(Keys.ARROW_UP);
+				Sync.waitElementPresent("xpath", "//span[text()='Product in Websites']");
+				Common.clickElement("xpath", "//span[text()='Product in Websites']");
+
+				Thread.sleep(2000);
+				WebElement checkbox = Common.findElementBy("xpath", "//label[text()='" + Stores + "']//parent::div//input");
+				// Verify if the checkbox is selected
+				boolean isSelected = checkbox.isSelected();
+				System.out.println(isSelected);
+
+				if (isSelected) {
+					System.out.println("The checkbox is already selected.");
+				} 
+				else {
+					Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']//parent::div//input");
+					Common.clickElement("xpath", "//label[text()='" + Stores + "']//parent::div//input");
+				}
+
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Sync.waitElementPresent("xpath", "//span[text()='Save']");
+				Common.clickElement("xpath", "//span[text()='Save']");
+				Thread.sleep(9000);
+
+				int pages = Common.findElements("xpath", "//div[@class='message message-success success']").size();
+				System.out.println(pages);
+				
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
