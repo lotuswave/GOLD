@@ -755,6 +755,42 @@ public class GoldDrybarusHelper2 {
 	}
 	
 	
+	public void Guest_SUB_minicart_Checkout() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(2000);
+//			click_minicart();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+			System.out.println(minicart);
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitPageLoad();
+			Thread.sleep(7000);
+//			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
+//			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
+//			System.out.println(checkout);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Common.assertionCheckwithReport(
+					 Common.getCurrentURL().contains("/customer/account/login/"),
+					"validating the navigation to the Login page after clicking on the checkout button",
+					"After clicking on the checkout button user shoould navigate to Login page", "Successfully navigate to the Login page after clicking on the Checkout button",
+					"Failed to navigate to the Login page after clicking on the checkout button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating the navigation to the Login page after clicking on the checkout button",
+					"After clicking on the checkout button user shoould navigate to Login page", "Unable to navigate to the Login page after clicking on the checkout button",
+					Common.getscreenShot("Failed to navigate to the Login page after clicking on the checkout button"));
+
+			Assert.fail();
+		}
+
+	}
+	
+	
 	public void Validate_Shipping_Options() {
 		// TODO Auto-generated method stub
 		
