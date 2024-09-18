@@ -26,7 +26,7 @@ public class Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_L
     	Admin.Click_Orders_Salesmenu();
     	Admin.Click_CreatNewOrders(); 
     	Admin.Enter_email("RetailOrder");
-    	Admin.Select_astore();
+    	Admin.Select_store("RetailerOrder");
         Admin.Add_product_SKU("RetailOrder");
         String updatedprice = Admin.update_customprice_withLowprice("LowPriceOverride");
     	//Admin.shippingaddress("RetailOrder");

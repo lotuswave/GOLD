@@ -7372,14 +7372,17 @@ public class GoldAdminHelper {
 
 	public void Enter_email(String dataSet) {
 		// TODO Auto-generated method stub
+		String storeview = data.get(dataSet).get("Store");
 		try {
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(dataSet).get("Email"));
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//td[text()='QA TEST']");
-			Common.clickElement("xpath", "//td[text()='QA TEST']");
+//			Sync.waitElementPresent("xpath", "//td[text()='QA TEST']");
+//			Common.clickElement("xpath", "//td[text()='QA TEST']");
+			//Sync.waitElementPresent("xpath", "//td[contains(text(),'" + storeview + "')]");
+			Common.clickElement("xpath", "//td[contains(text(),'" + storeview + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String title = Common.findElement("xpath", "//h1[@id='order-header']").getText();
@@ -9917,15 +9920,19 @@ System.out.println(Website);
 
 	public String update_customprice_withhighprice(String dataSet) throws Exception {
 		String updatedprice = "";
+		String[] high = data.get(dataSet).get("highprice").split(",");
 		try {
+
+		for (int i = 0; i < high.length; i++) {
+			System.out.println(high[i]);
 
 			Thread.sleep(3000);
 
-			Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[1]");
-			Common.clickElement("xpath", "(//span[text()='Custom Price*'])[1]");
+			Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[i]");
+			Common.clickElement("xpath", "(//span[text()='Custom Price*'])[i]");
 			Thread.sleep(2000);
 			Common.textBoxInput("xpath", "(//input[@class='input-text item-price admin__control-text'])[1]",
-					data.get(dataSet).get("highprice"));
+					high[i]);
 			Thread.sleep(3000);
 			/*
 			 * Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[2]");
@@ -9942,14 +9949,15 @@ System.out.println(Website);
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[contains(text(),'Update Items and Quantities')]");
 			Thread.sleep(3000);
-			updatedprice = Common.getText("xpath", "(//span[contains(text(),'$50.99')])[1]").replace("$", "");
+			updatedprice = Common.getText("xpath", "(//span[contains(text(),'" + high[i] + "')])[1]").replace("$", "");
 			Float updated_price = Float.valueOf(updatedprice);
 			System.out.println(updated_price);
 			Thread.sleep(3000);
 
-			Common.assertionCheckwithReport(updatedprice.contains("50.99"),
+			Common.assertionCheckwithReport(updatedprice.contains(high[i]),
 					"To Validate the custom price override with High Value", "should able to update the Custom price ",
 					"Successfully price updated", "passed to update custom price");
+		}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
