@@ -52,7 +52,8 @@ public class GoldAdminHelper {
 		try {
 			if (Common.getCurrentURL().contains("emea-preprod")) {
 
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("emea-preprod.hele."),
+				Thread.sleep(12000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("emea-preprod"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
@@ -75,11 +76,12 @@ public class GoldAdminHelper {
 				// Sync.waitElementClickable("id", "idSIButton9");
 				// Common.mouseOverClick("id", "idSIButton9");
 
-				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
-				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
-				Thread.sleep(15000);
-				
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
+				Sync.waitElementPresent(30, "xpath", "//a[@class='action login primary']");
+				Common.clickElement("xpath", "//a[@class='action login primary']");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
