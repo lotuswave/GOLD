@@ -39,7 +39,7 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

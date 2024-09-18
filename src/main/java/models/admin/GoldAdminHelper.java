@@ -54,8 +54,8 @@ public class GoldAdminHelper {
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("emea-preprod")) {
 				
-				Thread.sleep(10000);
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("emea-preprod.hele."),
+				Thread.sleep(12000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
@@ -82,7 +82,7 @@ public class GoldAdminHelper {
 				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
 				Thread.sleep(15000);
 				
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
@@ -9800,7 +9800,7 @@ System.out.println(Website);
 					.getText().replace(Symbol, "");
 
 			float Defaultstoreblnce = Float.parseFloat(defaultstorecredit);
-			System.out.println("saved store credit " + Defaultstoreblnce);
+			System.out.println("saved store credit :" + Defaultstoreblnce);
 
 			if (Defaultstoreblnce == 0.00) {
 				Common.scrollIntoView("xpath", "//input[@id='_customerbalanceamount_delta']");
@@ -9837,7 +9837,7 @@ System.out.println(Website);
 						"Failed to land on the All customers page");
 
 			} else if (Defaultstoreblnce < GrandTotal) {
-				Float updateprice = GrandTotal - Defaultstoreblnce;
+				Float updateprice = GrandTotal + Defaultstoreblnce;
 				String additionalbalance = Float.toString(updateprice);
 				Common.textBoxInput("id", "_customerbalanceamount_delta", additionalbalance);
 
