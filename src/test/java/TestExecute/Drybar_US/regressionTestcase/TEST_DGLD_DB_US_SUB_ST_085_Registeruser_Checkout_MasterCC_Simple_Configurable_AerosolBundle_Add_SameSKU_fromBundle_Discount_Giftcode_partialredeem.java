@@ -31,8 +31,8 @@ public class TEST_DGLD_DB_US_SUB_ST_085_Registeruser_Checkout_MasterCC_Simple_Co
 			Drybar.addtocart("Aerosol");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
-			Drybar.search_product("Liquid_Glass_Sub_Product");  
-			Drybar.subcribe_product_Add_to_Cart("Liquid_Glass_Sub_Product");
+			Drybar.search_product("Full_Keg_SUB_Product");  
+			Drybar.subcribe_product_Add_to_Cart("Full_Keg_SUB_Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
