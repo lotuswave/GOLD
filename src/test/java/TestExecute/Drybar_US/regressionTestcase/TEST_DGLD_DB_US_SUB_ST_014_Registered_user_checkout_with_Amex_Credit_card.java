@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_014_Registered_user_checkout_with_Amex_Credit_card {
+public class TEST_DGLD_DB_US_SUB_ST_014_Registered_user_checkout_with_Amex_Credit_card {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
@@ -22,12 +22,17 @@ public class TEST_DGLD_DB_US_ST_014_Registered_user_checkout_with_Amex_Credit_ca
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
+			Drybar.search_product("Triple_SUB_Product");  
+			Drybar.subcribe_product_Add_to_Cart("Triple_SUB_Product");
+			Drybar.subscription_One_Time_Purchase();
+			Drybar.search_product("Liquid_Glass_Sub_Product");  
+			Drybar.subcribe_product_Add_to_Cart("Liquid_Glass_Sub_Product");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-//			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 

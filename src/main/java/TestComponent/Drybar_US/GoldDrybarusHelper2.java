@@ -11530,6 +11530,47 @@ public void change_Shipping_address_sub() {
 	
 }
 
+public void subscription_One_Time_Purchase() {
+	// TODO Auto-generated method stub
+	try
+	{
+		Sync.waitElementPresent("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-0']");
+		Common.clickElement("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-0']");
+		String onetimeprice=Common.findElement("xpath", "//div[@x-defer='intersect']//span[@class='price text-sm']").getText();
+		System.out.println(onetimeprice);
+		String PLPPrice=Common.findElement("xpath", "//div[@x-bind='eventListeners']//span[@data-price-type='finalPrice']").getText();
+		System.out.println(PLPPrice);
+		if(onetimeprice.equals(PLPPrice))
+		{
+		Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
+		Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
+		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+		.getAttribute("data-ui-id");
+		System.out.println(message);
+		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+		"Product should be add to cart", "Sucessfully product added to the cart ",
+		"failed to add product to the cart");
+		}
+		else
+		{
+			Assert.fail();
+		}
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart",
+				"Product should be add to cart", "Unable to add the product to the cart ",
+				Common.getscreenShot("Failed to add product to the cart"));
+		Assert.fail();
+	}
+	
+}
+
 }
 			
 
