@@ -11487,6 +11487,7 @@ public void change_Shipping_address_sub() {
 	// TODO Auto-generated method stub
 	try{
 		subcription_Profile();
+		Thread.sleep(4000);
 		String shippingaddress=Common.findElement("xpath", "(//th[text()='Shipping Address']//parent::tr//td)[1]").getText();
 		System.out.println(shippingaddress);
 	    Sync.implicitWait();
@@ -11497,6 +11498,7 @@ public void change_Shipping_address_sub() {
 		Common.clickElement("xpath", "//select[@id='customer_address_id']");
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Thread.sleep(3000);
 		Common.clickElement("xpath", "//button[@title='Save Address']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);

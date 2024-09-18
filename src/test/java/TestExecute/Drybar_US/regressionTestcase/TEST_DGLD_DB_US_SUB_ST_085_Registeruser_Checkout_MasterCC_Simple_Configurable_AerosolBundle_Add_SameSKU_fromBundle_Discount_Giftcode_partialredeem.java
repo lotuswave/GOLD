@@ -10,7 +10,7 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Simple_Configurable_AerosolBundle_Add_SameSKU_fromBundle_Discount_Giftcode_partialredeem {
+public class TEST_DGLD_DB_US_SUB_ST_085_Registeruser_Checkout_MasterCC_Simple_Configurable_AerosolBundle_Add_SameSKU_fromBundle_Discount_Giftcode_partialredeem {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
@@ -31,6 +31,8 @@ public class TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Simple_Config
 			Drybar.addtocart("Aerosol");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
+			Drybar.search_product("Liquid_Glass_Sub_Product");  
+			Drybar.subcribe_product_Add_to_Cart("Liquid_Glass_Sub_Product");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
@@ -38,6 +40,7 @@ public class TEST_DGLD_DB_US_ST_085_Registeruser_Checkout_MasterCC_Simple_Config
 			Drybar.discountCode("Discount");
 			Drybar.gitCard("GiftCode");
 			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
+			Drybar.subcription_Profile();
 
 		} catch (Exception e) {
 
