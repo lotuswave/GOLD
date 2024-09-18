@@ -643,17 +643,23 @@ public class GoldDrybarusHelper2 {
 			Common.assertionCheckwithReport(drop.contains(save), "To ensure that selected text has selected in the product subcription dropdown",
 					"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
 					"failed to select the text from the dropdown");
+			
+			String PLPPrice=Common.findElement("xpath", "//div[@x-defer='intersect']//span[@class='price']").getText();
+			System.out.println(PLPPrice);
 			Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
 			Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
+//			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //			.getAttribute("data-ui-id");
 //	System.out.println(message);
 //	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //			"Product should be add to cart", "Sucessfully product added to the cart ",
 //			"failed to add product to the cart");
-			
+	String MinicartPrice=Common.findElement("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").getText();
+	System.out.println(MinicartPrice);
+	Assert.assertEquals(PLPPrice, MinicartPrice);
 		}
 		catch(Exception | Error e)
 		{
@@ -11476,6 +11482,52 @@ public void Subcription_Klarna_Invalid() {
 	}
 	
 }
+
+public void change_Shipping_address_sub() {
+	// TODO Auto-generated method stub
+	try{
+		subcription_Profile();
+		String shippingaddress=Common.findElement("xpath", "(//th[text()='Shipping Address']//parent::tr//td)[1]").getText();
+		System.out.println(shippingaddress);
+	    Sync.implicitWait();
+		Sync.waitElementPresent("xpath", "//a[@class='hover:underline action aw-sarp2__shipping-address']");
+		Common.clickElement("xpath", "//a[@class='hover:underline action aw-sarp2__shipping-address']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		Common.clickElement("xpath", "//select[@id='customer_address_id']");
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.clickElement("xpath", "//button[@title='Save Address']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String changegaddress=Common.findElement("xpath", "(//th[text()='Shipping Address']//parent::tr//td)[1]").getText();
+		System.out.println(changegaddress);
+		if(shippingaddress!=changegaddress){
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//div[@ui-id='message-success']//span");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span")
+						.getAttribute("ui-id");
+				System.out.println(message);
+				Common.assertionCheckwithReport(message.contains("Shipping Address has been successfully changed."), "validating the address change for the subcription profile",
+						"After clicking on the save address the address should be save ", "Sucessfully address has been changed for the subscription profile id ",
+						"Failed to change the address form the subscription profile id");	
+		}
+		else{
+			Assert.fail();
+		}	
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the address change for the subcription profile",
+				"After clicking on the save address the address should be save ", "Unable to change the shipping address for the subscription profile ID",
+				Common.getscreenShot("Failed to change the address form the subscription profile id"));
+		
+		Assert.fail();
+	}
+	
+}
+
 }
 			
 
