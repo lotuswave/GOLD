@@ -34,6 +34,8 @@ public class TEST_DGLD_DB_US_SUB_ST_014_Registered_user_checkout_with_Amex_Credi
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
+			String Profile_id="2";
+			Drybar.Verify_Profile_ids(Profile_id);
 			
 
 		} catch (Exception e) {

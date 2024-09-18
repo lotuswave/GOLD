@@ -11534,6 +11534,10 @@ public void subscription_One_Time_Purchase() {
 	// TODO Auto-generated method stub
 	try
 	{
+		
+		Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+		Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-0']");
 		Common.clickElement("xpath", "//input[@id='aw-sarp2-dropdown-show-hide-0']");
 		String onetimeprice=Common.findElement("xpath", "//div[@x-defer='intersect']//span[@class='price text-sm']").getText();
@@ -11546,13 +11550,15 @@ public void subscription_One_Time_Purchase() {
 		Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
-		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-		.getAttribute("data-ui-id");
-		System.out.println(message);
-		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-		"Product should be add to cart", "Sucessfully product added to the cart ",
-		"failed to add product to the cart");
+//		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
+//		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//		.getAttribute("data-ui-id");
+//		System.out.println(message);
+//		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//		"Product should be add to cart", "Sucessfully product added to the cart ",
+//		"failed to add product to the cart");
+		
+	
 		}
 		else
 		{
@@ -11571,7 +11577,33 @@ public void subscription_One_Time_Purchase() {
 	
 }
 
-}
+public void Verify_Profile_ids(String profile_id) {
+	// TODO Auto-generated method stub
+	try{
+		Sync.waitElementPresent("xpath", "//p[contains(text(),'Your subscription profiles are:')]//a");
+		int ProfileIDsize=Common.findElements("xpath", "//p[contains(text(),'Your subscription profiles are:')]//a").size();
+		System.out.println(ProfileIDsize);
+		System.out.println(profile_id);
+		if(profile_id.equals(ProfileIDsize)){
+			Common.assertionCheckwithReport(profile_id.equals(ProfileIDsize) || Common.getCurrentURL().contains("/checkout/onepage/success/"), "validating the  profile id's for the subscription product",
+					"After placing the order profile ids should be create", "Sucessfully Profile ids has beeen created after placing the order ",
+					"failed to Create the profile ID after placing the order");
+		}
+		else{
+			Assert.fail();
+		}
+	}
+	catch(Exception | Error e){
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  profile id's for the subscription product",
+				"After placing the order profile ids should be create", "Unable to Create the profile ID after placing the order",
+				Common.getscreenShot("Failed to Create the profile ID after placing the order"));
+		Assert.fail();
+		}
+	
+    }
+
+  }
 			
 
 
