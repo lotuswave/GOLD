@@ -30,7 +30,7 @@ public class Test_DGLD_Admin_ST_050_RMA_Order_Placement_for_Hydroflask {
    	    System.out.println(data);
     	Admin.Address_registeruser("RetailOrder");
     	Admin.Shipping_method("RetailOrder");
-    	Admin.Select_Storecredit_payment_method();
+    	Admin.Select_Storecredit_payment_method("RetailOrder");;
     	String ordernumber=Admin.Submit_RetailOrder_Success();
 //    	String Address=Admin.Address_and_Sku_Validation("RetailOrder");
     	Admin.Login_Kustomerwebsite("AccountDetails");

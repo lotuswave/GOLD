@@ -50,10 +50,12 @@ public class GoldAdminHelper {
 	public void Admin_signin(String dataSet) {
 
 		try {
+			
+			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("emea-preprod")) {
-
-				Thread.sleep(12000);
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("emea-preprod"),
+				
+				Thread.sleep(10000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("emea-preprod.hele."),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
@@ -76,12 +78,11 @@ public class GoldAdminHelper {
 				// Sync.waitElementClickable("id", "idSIButton9");
 				// Common.mouseOverClick("id", "idSIButton9");
 
-				Sync.waitElementPresent(30, "xpath", "//a[@class='action login primary']");
-				Common.clickElement("xpath", "//a[@class='action login primary']");
-				Sync.waitPageLoad();
-				Thread.sleep(5000);
-				Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
+				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
+				Thread.sleep(15000);
+				
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
@@ -7554,14 +7555,19 @@ public class GoldAdminHelper {
 				}
 				
 			} 
-			else if(Website.contains("Osprey Europe"))
+			else if(Website.contains("Osprey UK English Store"))
 			{
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//input[@id='s_method_tablerate_bestway']");
-				Common.clickElement("xpath", "//input[@id='s_method_tablerate_bestway']");
-				Sync.waitPageLoad();
-		        Thread.sleep(4000);
-				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				int size =Common.findElements("xpath", "//span[text()='Click to change shipping method']").size();
+				if(size>0) {
+					Sync.waitElementVisible("xpath", "//span[text()='Click to change shipping method']");
+					Common.doubleClick("xpath", "//span[text()='Click to change shipping method']");
+					Common.doubleClick("xpath", "//label[text()='"+Shipping+"']");
+				}
+				else {
+					Thread.sleep(3000);
+					Sync.waitElementVisible("xpath", "//label[text()='"+Shipping+"']");
+					Common.doubleClick("xpath", "//label[text()='"+Shipping+"']");
+				}
 			}
 			else if (Website.contains("Drybar Store View"))
 			{
@@ -7625,8 +7631,9 @@ public class GoldAdminHelper {
 
 	}
 
-	public void Select_Storecredit_payment_method() {
+	public void Select_Storecredit_payment_method(String DataSet) {
 		// TODO Auto-generated method stub
+		String Symbol = data.get(DataSet).get("Symbol");
 		try {
 			Common.switchToFirstTab();
 			Common.actionsKeyPress(Keys.F5);
@@ -7640,7 +7647,7 @@ public class GoldAdminHelper {
 					.size();
 			Common.scrollIntoView("xpath", "//td[@class='admin__total-amount']/strong");
 			String grandtotal = Common.findElement("xpath", "//td[@class='admin__total-amount']/strong").getText()
-					.replace("$", "");
+					.replace(Symbol, "");
 			System.out.println(grandtotal);
 			float GrandTotal = Float.parseFloat(grandtotal);
 			Common.assertionCheckwithReport(appliedstorecredit > 0 && GrandTotal == 0.00,
@@ -7941,7 +7948,7 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 
 		String Website = data.get(dataSet).get("Store");
-
+System.out.println(Website);
 		try {
 			Common.findElement("xpath", "//label[text()='" + Website + "']");
 			Common.clickElement("xpath", "//label[text()='" + Website + "']");
@@ -8031,13 +8038,26 @@ public class GoldAdminHelper {
 					data.get(dataSet).get("streetaddress"));
 
 			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("emea"))
+			{
+				Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_country_id']");
+				Common.dropdown("xpath", "//select[@id='order-billing_address_country_id']", Common.SelectBy.TEXT,
+						data.get(dataSet).get("Country"));
+				
+				
+				Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_region']");
+				Common.textBoxInput("xpath", "//input[@id='order-billing_address_region']",
+						data.get(dataSet).get("State"));
+			}
+			else {
 			Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_country_id']");
 			Common.dropdown("xpath", "//select[@id='order-billing_address_country_id']", Common.SelectBy.TEXT,
 					data.get(dataSet).get("Country"));
-
 			Sync.waitElementPresent("xpath", "//select[@id='order-billing_address_region_id']");
 			Common.dropdown("xpath", "//select[@id='order-billing_address_region_id']", Common.SelectBy.TEXT,
 					data.get(dataSet).get("State"));
+			}
+			
 
 			Sync.waitElementPresent("xpath", "//input[@id='order-billing_address_city']");
 			Common.textBoxInput("xpath", "//input[@id='order-billing_address_city']", data.get(dataSet).get("City"));
@@ -9484,6 +9504,7 @@ public class GoldAdminHelper {
 
 	public String update_customprice(String dataSet) throws Exception {
 		String updatedhighprice = "";
+		String symbol= data.get(dataSet).get("Symbol");
 		
 		try {
 
@@ -9507,7 +9528,7 @@ public class GoldAdminHelper {
 				Sync.waitElementVisible("xpath", "(//td[@class='col-price']/span)[" + i + "]");
 
 				updatedhighprice = Common.findElement("xpath", "(//td[@class='col-price']/span)[" + i + "]").getText()
-						.replace("$", "");
+						.replace(symbol, "");
 				Float updated_highprice = Float.valueOf(updatedhighprice);
 				System.out.println(updated_highprice);
 				Thread.sleep(3000);
@@ -9776,7 +9797,7 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "(//td[@class=' col-amount a-left  '])[2]");
 
 			String defaultstorecredit = Common.findElement("xpath", "(//td[@class=' col-amount a-left  '])[2]")
-					.getText().replace("$", "");
+					.getText().replace(Symbol, "");
 
 			float Defaultstoreblnce = Float.parseFloat(defaultstorecredit);
 			System.out.println("saved store credit " + Defaultstoreblnce);
@@ -9823,7 +9844,7 @@ public class GoldAdminHelper {
 				Common.scrollIntoView("xpath", "//span[text()='Save Customer']");
 				Common.javascriptclickElement("xpath", "//span[text()='Save Customer']");
 				Sync.waitPageLoad();
-				Sync.waitElementVisible("xpath", "//div[contains(@class,'success')]");
+				Sync.waitElementVisible("xpath", "//div[contains(@class,'success')]/div");
 				String successmessage = Common.findElement("xpath", "//div[contains(@class,'success')]/div").getText();
 				Common.assertionCheckwithReport(
 						successmessage.contains("You saved the customer.")

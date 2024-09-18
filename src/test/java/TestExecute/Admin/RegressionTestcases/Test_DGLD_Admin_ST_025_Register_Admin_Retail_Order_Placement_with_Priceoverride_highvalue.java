@@ -31,7 +31,7 @@ public class Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_P
         String updatedprice = Admin.update_customprice_withhighprice("HighPriceOverride");
     	//Admin.shippingaddress("RetailOrder");
     	Admin.Select_Shipping_method("RetailOrder");
-    	Admin.Select_Storecredit_payment_method();
+    	Admin.Select_Storecredit_payment_method("RetailOrder");
     	Admin.Submit_RetailOrder_Success();
     	Admin.validate_updated_Highpricevalue_in_Order(updatedprice);
     	

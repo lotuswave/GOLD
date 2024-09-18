@@ -22,14 +22,14 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 			Admin.click_Sales();
 			Admin.Click_Orders_Salesmenu();
 			Admin.Click_CreatNewOrders();
-			Admin.Select_ExistingUser_email("OXOWebsite");
-			Admin.Select_Store("OXOWebsite");
-			Admin.Add_product_SKU("OXOWebsite");
-			Admin.update_customprice("LowPriceOverride");
-			Admin.shippingaddress("OXOWebsite");
-			Admin.Select_Shipping_method("OXOWebsite");
-			Admin.Update_StoreCredit_ExistingCustomer("OXOWebsite");
-			Admin.Select_Storecredit_payment_method();
+			Admin.Select_ExistingUser_email("OpsreyEMEAWebsite");
+			Admin.Select_Store("OpsreyEMEAWebsite");
+			Admin.Add_product_SKU("OpsreyEMEAWebsite");
+			Admin.update_customprice("OpsreyEMEAWebsite");
+			Admin.shippingaddress("OpsreyEMEAWebsite");
+			Admin.Select_Shipping_method("OpsreyEMEAWebsite");
+			Admin.Update_StoreCredit_ExistingCustomer("OpsreyEMEAWebsite");
+			Admin.Select_Storecredit_payment_method("OpsreyEMEAWebsite");
 			Admin.Submit_RetailOrder_Success();
 
 		} catch (Exception e) {
@@ -39,7 +39,7 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

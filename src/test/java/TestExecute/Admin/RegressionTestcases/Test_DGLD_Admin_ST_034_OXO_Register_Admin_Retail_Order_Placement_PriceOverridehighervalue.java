@@ -29,7 +29,7 @@ public class Test_DGLD_Admin_ST_034_OXO_Register_Admin_Retail_Order_Placement_Pr
 			Admin.shippingaddress("OXOWebsite");
 			Admin.Select_Shipping_method("OXOWebsite");
 			Admin.Update_StoreCredit_ExistingCustomer("OXOWebsite");
-			Admin.Select_Storecredit_payment_method();
+			Admin.Select_Storecredit_payment_method("OXOWebsite");
 			Admin.Submit_RetailOrder_Success();
 			 
 

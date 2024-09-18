@@ -27,7 +27,7 @@ public class Test_DGLD_Admin_ST_033_OXO_Registeruser_Magento_Retail_Order_Placem
 			Admin.shippingaddress("OXOWebsite");
 			Admin.Select_Shipping_method("OXOWebsite");
 			Admin.Update_StoreCredit_ExistingCustomer("OXOWebsite");
-			Admin.Select_Storecredit_payment_method();
+			Admin.Select_Storecredit_payment_method("OXOWebsite");
 			Admin.Submit_RetailOrder_Success();
 			 
 

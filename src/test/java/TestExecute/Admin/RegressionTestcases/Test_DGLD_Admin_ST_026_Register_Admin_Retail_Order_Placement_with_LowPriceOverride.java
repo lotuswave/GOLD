@@ -31,7 +31,7 @@ public class Test_DGLD_Admin_ST_026_Register_Admin_Retail_Order_Placement_with_L
         String updatedprice = Admin.update_customprice_withLowprice("LowPriceOverride");
     	//Admin.shippingaddress("RetailOrder");
     	Admin.Select_Shipping_method("RetailOrder");
-    	Admin.Select_Storecredit_payment_method();
+    	Admin.Select_Storecredit_payment_method("RetailOrder");
     	Admin.Submit_RetailOrder_Success();
     	Admin.validate_updated_Lowpricevalue_in_Order(updatedprice);
     	
