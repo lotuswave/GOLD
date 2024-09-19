@@ -33,9 +33,11 @@ public class TEST_DGLD_DB_US_SUB_ST_014_Registered_user_checkout_with_Amex_Credi
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			String rewardpoints=Drybar.Twentypercent_Reward_Points("$20 Off (400 points)");
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 			String Profile_id="2";
 			Drybar.Verify_Profile_ids(Profile_id);
+			Drybar.verify_RewardPoints(rewardpoints);
 			
 
 		} catch (Exception e) {
