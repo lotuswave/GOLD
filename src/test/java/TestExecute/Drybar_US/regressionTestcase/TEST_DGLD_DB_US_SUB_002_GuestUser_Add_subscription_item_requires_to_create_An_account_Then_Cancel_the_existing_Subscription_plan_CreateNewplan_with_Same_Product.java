@@ -5,12 +5,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_SUB_002_GuestUser_Add_subscription_item_requires_to_create_An_account_Then_Cancel_the_existing_Subscription_plan_CreateNewplan_with_Same_Product {
+public class TEST_DGLD_DB_US_SUB_002_GuestUser_Add_subscription_item_requires_to_create_An_account_Then_Cancel_the_existing_Subscription_plan_CreateNewplan_with_Same_Product {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile, "DataSet");
@@ -46,7 +45,7 @@ public class TEST_DGLD_DB_SUB_002_GuestUser_Add_subscription_item_requires_to_cr
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
