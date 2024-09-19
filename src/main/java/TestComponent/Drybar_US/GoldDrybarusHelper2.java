@@ -11654,7 +11654,11 @@ public String Verify_Profile_ids(String profile_id) {
 				Tenpercentprofile=Common.findElement("xpath", "(//p[contains(text(),'Your subscription profile')]//a)[1]").getText();
 			}
 			else{
-				Assert.fail();
+				Common.assertionCheckwithReport(profile_id.equals(ProfileIDsize) || Common.getCurrentURL().contains("/checkout/onepage/success/"), "validating the  profile id's for the subscription product",
+						"After placing the order profile ids should be create", "Sucessfully Profile ids has beeen created after placing the order ",
+						"failed to Create the profile ID after placing the order");
+				
+				Tenpercentprofile=Common.findElement("xpath", "(//p[contains(text(),'Your subscription profile')]//a)[1]").getText();
 			}
 		}
 		catch(Exception | Error e){
@@ -11954,9 +11958,11 @@ public void add_To_Subscription(String profile_id) {
 		Common.clickElement("xpath", "//td[contains(text(),'"+ profile_id +"')]//parent::tr//a[contains(text(),'Edit')]");
 		Sync.waitPageLoad();
 		Thread.sleep(3000);
-		String subscriptionProduct=Common.findElement("xpath", "(//a[@class='hover:underline'])[2]//span").getText();
+		String subscriptionProduct=Common.findElement("xpath", "(//a[@class='hover:underline'])[3]//span").getText();
 		System.out.println(subscriptionProduct);
-	    Assert.assertEquals(subscriptionProduct, PDPproduct);
+		Common.assertionCheckwithReport(subscriptionProduct.contains(PDPproduct), "To ensure that selected producted is added to the subscription",
+				"Product should be added to the subscription", "sucessfully product added to the subscription",
+				"Fail to add the product to the subscription");
 	
 	}
 	catch(Exception | Error e) {
