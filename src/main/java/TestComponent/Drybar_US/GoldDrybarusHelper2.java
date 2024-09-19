@@ -11637,32 +11637,36 @@ public void subscription_One_Time_Purchase() {
 	
 }
 
-public void Verify_Profile_ids(String profile_id) {
+public String Verify_Profile_ids(String profile_id) {
 	// TODO Auto-generated method stub
-	try{
-		Sync.waitElementPresent("xpath", "//p[contains(text(),'Your subscription profiles are:')]//a");
-		int ProfileIDsize=Common.findElements("xpath", "//p[contains(text(),'Your subscription profiles are:')]//a").size();
-		System.out.println(ProfileIDsize);
-		System.out.println(profile_id);
-		if(profile_id.equals(ProfileIDsize)){
-			Common.assertionCheckwithReport(profile_id.equals(ProfileIDsize) || Common.getCurrentURL().contains("/checkout/onepage/success/"), "validating the  profile id's for the subscription product",
-					"After placing the order profile ids should be create", "Sucessfully Profile ids has beeen created after placing the order ",
-					"failed to Create the profile ID after placing the order");
+		String Tenpercentprofile="";
+		try{
+			Sync.waitElementPresent("xpath", "//p[contains(text(),'Your subscription profile')]//a");
+			int ProfileIDsize=Common.findElements("xpath", "//p[contains(text(),'Your subscription profile')]//a").size();
+			System.out.println(ProfileIDsize);
+			System.out.println(profile_id);
+			Thread.sleep(6000);
+			if(profile_id.equals(ProfileIDsize)){
+				Common.assertionCheckwithReport(profile_id.equals(ProfileIDsize) || Common.getCurrentURL().contains("/checkout/onepage/success/"), "validating the  profile id's for the subscription product",
+						"After placing the order profile ids should be create", "Sucessfully Profile ids has beeen created after placing the order ",
+						"failed to Create the profile ID after placing the order");
+				
+				Tenpercentprofile=Common.findElement("xpath", "(//p[contains(text(),'Your subscription profile')]//a)[1]").getText();
+			}
+			else{
+				Assert.fail();
+			}
 		}
-		else{
+		catch(Exception | Error e){
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  profile id's for the subscription product",
+					"After placing the order profile ids should be create", "Unable to Create the profile ID after placing the order",
+					Common.getscreenShot("Failed to Create the profile ID after placing the order"));
 			Assert.fail();
-		}
-	}
-	catch(Exception | Error e){
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the  profile id's for the subscription product",
-				"After placing the order profile ids should be create", "Unable to Create the profile ID after placing the order",
-				Common.getscreenShot("Failed to Create the profile ID after placing the order"));
-		Assert.fail();
-		}
-	
-    }
-
+			}
+		return Tenpercentprofile;
+		
+	    }
 public void Guest_Sub_minicart_Checkout() {
 	// TODO Auto-generated method stub
 	try {
@@ -11752,18 +11756,222 @@ public void Change_Subscription() {
 
 }
 
+public void subcribe_product_all_types_plan_Add_to_Cart (String Dataset) {
+	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
+	String save=data.get(Dataset).get("SubscribeSave");
+	String[] Links = save.split(",");
+	System.out.println(Links);
+	int j=0;
+	try
+	{
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) { 
+			Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+			List<WebElement> webelementslist = Common.findElements("xpath","//img[@class='group-hover/item-image:block hidden']");
 
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
 
+			} else {
+				break;
+			}
+		}
+		Thread.sleep(7000);
+		
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+		product_quantity(Dataset);
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
+		Common.clickElement("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
+		//Thread.sleep(2000);
+//		for (j = 0; j < Links.length; j++) 
+//		{
+		for(String page:Links)
+		{
+			System.out.println(page);
+		     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
+				Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, page);
+				Thread.sleep(4000);
+				String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ Links[j] +"')]").getText();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(drop.contains(Links[j]), "To ensure that selected text has selected in the product subcription dropdown",
+						"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
+						"failed to select the text from the dropdown");
+				
+				String PLPPrice=Common.findElement("xpath", "//div[@x-defer='intersect']//span[@class='price']").getText();
+				System.out.println(PLPPrice);
+				Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
+				Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);	
+				String MinicartPrice=Common.findElement("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").getText();
+				System.out.println(MinicartPrice);
+				Assert.assertEquals(PLPPrice, MinicartPrice);
+				Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+		}
+	   
+//		Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']");
+//		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//		.getAttribute("data-ui-id");
+//System.out.println(message);
+//Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//		"Product should be add to cart", "Sucessfully product added to the cart ",
+//		"failed to add product to the cart");
+		}
 
-
-
-
-
-
-
-
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+		Assert.fail();
+	}
 
 }
+
+public void size_selection(String Dataset) {
+	// TODO Auto-generated method stub
+	String scent=data.get(Dataset).get("scent");
+	String Productsize=data.get(Dataset).get("size");
+	String subscription=data.get(Dataset).get("Save Subscription");
+	try
+	{
+		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
+		Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
+		Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
+		Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
+		Thread.sleep(4000);
+	     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
+			Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, subscription);
+			Thread.sleep(4000);
+			String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ subscription +"')]").getText();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(drop.contains(subscription), "To ensure that selected text has selected in the product subcription dropdown",
+					"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
+					"failed to select the text from the dropdown");
+			
+			String PLPPrice=Common.findElement("xpath", "//div[@x-defer='intersect']//span[@class='price']").getText();
+			System.out.println(PLPPrice);
+			Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
+			Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);	
+			String MinicartPrice=Common.findElement("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").getText();
+			System.out.println(MinicartPrice);
+			Assert.assertEquals(PLPPrice, MinicartPrice);
+		
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To ensure that selected text has selected in the product subcription dropdown",
+				"Dropdown should be select for the product subcription", "Unable to select the text from the dropdown",
+				Common.getscreenShot("failed to select the text from the dropdown"));
+		Assert.fail();
+	}
+	
+}
+
+public void selecting_the_Previous_Subscription(String Dataset) {
+	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
+	String save=data.get(Dataset).get("SubscribeSave");
+	System.out.println(save);
+	try
+	{
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) { 
+			Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+			List<WebElement> webelementslist = Common.findElements("xpath","//img[@class='group-hover/item-image:block hidden']");
+
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+		Thread.sleep(7000);
+		
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+		product_quantity(Dataset);
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
+		Common.clickElement("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
+		Thread.sleep(2000);
+	     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
+		Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save);
+		String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ save +"')]").getText();
+		Thread.sleep(4000);
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(drop.contains(save), "To ensure that selected text has selected in the product subcription dropdown",
+				"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
+				"failed to select the text from the dropdown");
+		
+	}
+	catch(Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To ensure that selected text has selected in the product subcription dropdown",
+				"Dropdown should be select for the product subcription", "Unable to select the text from the dropdown", Common.getscreenShot("failed to select the text from the dropdown"));
+		Assert.fail();
+	}
+	
+}
+
+
+public void add_To_Subscription(String profile_id) {
+	// TODO Auto-generated method stub
+	try {
+		String PDPproduct=Common.findElement("xpath", "//span[@itemprop='name']").getText();
+		System.out.println(PDPproduct);
+		Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Subscription']");
+		Common.clickElement("xpath", "//button[@aria-label='Add to Subscription']");
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath", "//td[@data-th='Profile ID']//label[text()='"+ profile_id + "']");
+		Common.clickElement("xpath", "//td[@data-th='Profile ID']//label[text()='"+ profile_id +"']");
+		Sync.waitElementPresent("xpath", "//button[@class='btn btn-primary']");
+		Common.clickElement("xpath", "//button[@class='btn btn-primary']");
+		Navigate_to_MyproductSubscription();
+		Sync.waitElementPresent("xpath", "//td[contains(text(),'"+ profile_id +"')]//parent::tr//a[contains(text(),'Edit')]");
+		Common.clickElement("xpath", "//td[contains(text(),'"+ profile_id +"')]//parent::tr//a[contains(text(),'Edit')]");
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
+		String subscriptionProduct=Common.findElement("xpath", "(//a[@class='hover:underline'])[2]//span").getText();
+		System.out.println(subscriptionProduct);
+	    Assert.assertEquals(subscriptionProduct, PDPproduct);
+	
+	}
+	catch(Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To ensure that selected producted is added to the subscription",
+				"Product should be added to the subscription", "Unable to add the product to the subscription",
+				Common.getscreenShot("Fail to add the product to the subscription"));
+		Assert.fail();
+	}
+	
+}
+
+  }
+
+
 		
 
 
