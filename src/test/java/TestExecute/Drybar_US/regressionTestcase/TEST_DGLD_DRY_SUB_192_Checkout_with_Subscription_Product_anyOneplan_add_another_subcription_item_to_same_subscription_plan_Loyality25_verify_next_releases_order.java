@@ -28,11 +28,15 @@ public class TEST_DGLD_DRY_SUB_192_Checkout_with_Subscription_Product_anyOneplan
 		    Drybar.search_product("Sparkling Soda Shine Mist & UV Shield");  
 		    Drybar.subcribe_product_Add_to_Cart("Save 10% with Daily Shipments");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.RegaddDeliveryAddress("AccountDetails");	
 			Drybar.TwentyFive_percent_Reward_Points("$25 Off (500 point)");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
-           
+			String Profile_id="6";
+			String profileID_Number=Drybar.Verify_Profile_ids(Profile_id);
+			Drybar.search_product("Triple_SUB_Product");
+			Drybar.selecting_the_Previous_Subscription("Triple_SUB_Product");
+			Drybar.add_To_Subscription(profileID_Number);
 		
 
 		} catch (Exception e) {
@@ -43,7 +47,7 @@ public class TEST_DGLD_DRY_SUB_192_Checkout_with_Subscription_Product_anyOneplan
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

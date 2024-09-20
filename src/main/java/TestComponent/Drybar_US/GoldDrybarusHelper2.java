@@ -11986,15 +11986,16 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 		Sync.waitElementPresent("xpath", "//div[@class='item discount']//span[@class='value']");
 		String Before_RWD_discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-$", "");
 //		System.out.println(Before_RWD_discount);
+		Thread.sleep(2000);
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//input[@placeholder='Choose reward']");
+		Common.clickElement("xpath", "//input[@placeholder='Choose reward']");
 		String rewardpoints = Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim()
 				.replace("YOU HAVE ", "").replace(" POINTS", "");
-//		System.out.println(rewardpoints);
-		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//div[@class='vs__actions']");
-		Common.javascriptclickElement("xpath", "//div[@class='vs__actions']");
+		System.out.println(rewardpoints);
+		
 		Thread.sleep(4000);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
@@ -12004,19 +12005,17 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 		 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
 		 Thread.sleep(4000);
 		 rewardpointsused=pointsused.replace(pointsused, points);
-//		 System.out.println(rewardpointsused);
-		Common.clickElement("xpath", "//button[@aria-label='Apply']");
-		Sync.waitForLoad();
-		Thread.sleep(8000);
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
-		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
-		Thread.sleep(4000);
-		String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
-				.replace(" Off", "");
-		String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
-				.trim().replace("-$", "").replace(".00", "");
-//		System.out.println(off);
-//		System.out.println(discount);
+		 System.out.println(rewardpointsused);
+		Common.clickElement("xpath","//button[@aria-label='Apply']");
+ 		Sync.waitForLoad();
+ 		Thread.sleep(4000);
+// 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
+//		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Thread.sleep(3000);
+		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
+		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		System.out.println(off);
+		System.out.println(discount);
 		
 		int size =Common.findElements("xpath", "(//span[normalize-space()='Subscription End Date:'])[3]").size();
 		if (off.contains("$25 off")) {
