@@ -1,5 +1,7 @@
 package TestExecute.Admin.RegressionTestcases;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -28,7 +30,8 @@ public class Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_P
     	Admin.Enter_email("DRYWebsite");
     	Admin.Select_store("DRYWebsite");
         Admin.Add_product_SKU("DRYWebsite");
-        String updatedprice = Admin.update_customprice_withhighprice("DRYWebsite");
+        HashMap<String, String> updatedprice = Admin.update_customprice_withhighprice("DRYWebsite");
+        System.out.println(updatedprice);
     	//Admin.shippingaddress("RetailOrder");
     	Admin.Select_Shipping_method("DRYWebsite");
     	Admin.Select_Storecredit_payment_method("DRYWebsite");

@@ -7378,10 +7378,10 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(dataSet).get("Email"));
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 //			Sync.waitElementPresent("xpath", "//td[text()='QA TEST']");
 //			Common.clickElement("xpath", "//td[text()='QA TEST']");
-			//Sync.waitElementPresent("xpath", "//td[contains(text(),'" + storeview + "')]");
+			Sync.waitElementPresent("xpath", "//td[contains(text(),'" + storeview + "')]");
 			Common.clickElement("xpath", "//td[contains(text(),'" + storeview + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -7442,7 +7442,7 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']");
 			Common.clickElement("xpath", "//label[text()='" + Stores + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
 			System.out.println(title);
 //		//	Common.assertionCheckwithReport(title.contains("Orders"),
@@ -7640,7 +7640,7 @@ public class GoldAdminHelper {
 		try {
 			Common.switchToFirstTab();
 			Common.actionsKeyPress(Keys.F5);
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			Sync.waitElementPresent("id", "p_method_use_customerbalance");
 			Common.clickElement("id", "p_method_use_customerbalance");
 			Thread.sleep(5000);
@@ -9557,31 +9557,55 @@ System.out.println(Website);
 
 	}
 
-	public void validate_updated_Highpricevalue_in_Order(String updatedprice) throws InterruptedException {
+	public HashMap<String, String> validate_updated_Highpricevalue_in_Order(HashMap<String, String> updatedprice) throws InterruptedException {
 
+		HashMap<String, String> CustomPrice=new HashMap();
+		String NewPrice= new String();
 		try {
 			Thread.sleep(3000);
-
-			String updatedprice1 = Common.findElement("xpath", "(//span[contains(text(),'$50.99')])[1]").getText()
-					.replace("$", "");
+		int Length=updatedprice.size();
+		    String Lengthprice=Integer.toString(Length);
+			int size= Common.findElements("xpath", "//td[@class='col-price']//div[@class='price-excl-tax'][1]").size();
+            String Size=Integer.toString(size);
+           
+           if(Lengthprice.equals(Size))
+            {
+             for(int i=0;i<Size.length();i++)
+             {
+            	 Sync.waitElementPresent("xpath", "(//td[@class='col-price']//div[@class='price-excl-tax']//span)["+ (i+1) +"]");
+            	 String updatedprice1 = Common.findElement("xpath", "//td[@class='col-price']//div[@class='price-excl-tax']["+ (i+1) +"]").getText()
+     					.replace("$", "");
+		
 			Float updated_price1 = Float.valueOf(updatedprice1);
 			System.out.println(updated_price1);
 			Thread.sleep(3000);
-			if (updatedprice == updatedprice1) {
+			NewPrice=NewPrice.concat(",").trim();
+			NewPrice=NewPrice.concat(updatedprice1);
+			System.out.println("---------------" +NewPrice);
+			CustomPrice.put("Updated Price", NewPrice);
+             }
+             }
+           
+           
+			if (updatedprice == CustomPrice) {
 				System.out.println("The price is updated");
 			} else {
 				System.out.println("The price is not updated");
 			}
-			Common.assertionCheckwithReport(updatedprice.equals(updatedprice1),
+			Common.assertionCheckwithReport(updatedprice.equals(CustomPrice),
 					"Comparing whether the price is updated or not", "The price should be updated",
 					"The price is not updated", "Failed to updated the price");
+			
 
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To Validate the price is updated", "The price should be updated",
 					"The price is not updated", "Failed to updated the price");
 		}
+		
+		return CustomPrice;
 	}
 
 	public String update_customprice_withLowprice(String dataSet) throws Exception {
@@ -9918,20 +9942,23 @@ System.out.println(Website);
 
 	}
 
-	public String update_customprice_withhighprice(String dataSet) throws Exception {
+	public HashMap<String, String> update_customprice_withhighprice(String dataSet) throws Exception {
 		String updatedprice = "";
 		String[] high = data.get(dataSet).get("highprice").split(",");
+		HashMap<String, String> CustomPrice=new HashMap();
+		String prices=new String();
 		try {
 
-		for (int i = 0; i < high.length; i++) {
+		for (int i = 0; i < high.length; i++)   //for(String lenght:high)
+		{
 			System.out.println(high[i]);
 
 			Thread.sleep(3000);
 
-			Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[i]");
-			Common.clickElement("xpath", "(//span[text()='Custom Price*'])[i]");
+			Sync.waitElementPresent("xpath", "(//span[text()='Custom Price*'])[" + (i + 1) + "]");
+			Common.clickElement("xpath", "(//span[text()='Custom Price*'])[" + (i + 1) + "]");
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@class='input-text item-price admin__control-text'])[1]",
+			Common.textBoxInput("xpath", "(//input[@class='input-text item-price admin__control-text'])[" + (i + 1) + "]",
 					high[i]);
 			Thread.sleep(3000);
 			/*
@@ -9949,11 +9976,15 @@ System.out.println(Website);
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[contains(text(),'Update Items and Quantities')]");
 			Thread.sleep(3000);
-			updatedprice = Common.getText("xpath", "(//span[contains(text(),'" + high[i] + "')])[1]").replace("$", "");
+			updatedprice = Common.getText("xpath", "(//span[contains(text(),'" + high[i] + "')])[" + (i + 1) + "]").replace("$", "");
 			Float updated_price = Float.valueOf(updatedprice);
 			System.out.println(updated_price);
 			Thread.sleep(3000);
-
+			
+			prices=prices.concat(",").trim();
+			prices=prices.concat(updatedprice);
+			System.out.println("---------------" +prices);
+			CustomPrice.put("Updated Price", prices);
 			Common.assertionCheckwithReport(updatedprice.contains(high[i]),
 					"To Validate the custom price override with High Value", "should able to update the Custom price ",
 					"Successfully price updated", "passed to update custom price");
@@ -9966,7 +9997,7 @@ System.out.println(Website);
 			Assert.fail();
 
 		}
-		return updatedprice;
+		return CustomPrice;
 
 	}
 
@@ -11100,5 +11131,7 @@ System.out.println(Website);
 		}
 
 	}
+
+	
 
 }
