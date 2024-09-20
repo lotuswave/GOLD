@@ -9563,17 +9563,18 @@ System.out.println(Website);
 		String NewPrice= new String();
 		try {
 			Thread.sleep(3000);
-		int Length=updatedprice.size();
+		/*int Length=updatedprice.size();
 		    String Lengthprice=Integer.toString(Length);
 			int size= Common.findElements("xpath", "//td[@class='col-price']//div[@class='price-excl-tax'][1]").size();
             String Size=Integer.toString(size);
            
            if(Lengthprice.equals(Size))
-            {
-             for(int i=0;i<Size.length();i++)
+            {*/
+        	  int size= Common.findElements("xpath", "//td[@class='col-price']//div[@class='price-excl-tax'][1]").size();
+             for(int i=0;i<size;i++)
              {
-            	 Sync.waitElementPresent("xpath", "(//td[@class='col-price']//div[@class='price-excl-tax']//span)["+ (i+1) +"]");
-            	 String updatedprice1 = Common.findElement("xpath", "//td[@class='col-price']//div[@class='price-excl-tax']["+ (i+1) +"]").getText()
+            	 Sync.waitElementPresent("xpath", "(//td[@class='col-price']//div[@class='price-excl-tax']//span)[" + (i + 1) + "]");
+            	 String updatedprice1 = Common.findElement("xpath", "(//td[@class='col-price']//div[@class='price-excl-tax']//span)[" + (i + 1) + "]").getText()
      					.replace("$", "");
 		
 			Float updated_price1 = Float.valueOf(updatedprice1);
@@ -9581,13 +9582,14 @@ System.out.println(Website);
 			Thread.sleep(3000);
 			NewPrice=NewPrice.concat(",").trim();
 			NewPrice=NewPrice.concat(updatedprice1);
-			System.out.println("---------------" +NewPrice);
+			System.out.println(" " +NewPrice);
 			CustomPrice.put("Updated Price", NewPrice);
              }
-             }
+            // }
+             System.out.println(updatedprice);
+             System.out.println(CustomPrice);
            
-           
-			if (updatedprice == CustomPrice) {
+			if (updatedprice.equals(CustomPrice)) {
 				System.out.println("The price is updated");
 			} else {
 				System.out.println("The price is not updated");
