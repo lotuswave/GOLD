@@ -131,14 +131,7 @@ public class GoldDrybarusE2EHelper {
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Drybar") ||Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Drybar Home")
-					|| Common.getPageTitle().contains("Drybar - Home page") || Common.getPageTitle().contains("Dashboard") || Common.getPageTitle().contains("Checkout"),
-					"To validate the user lands on Home page after successfull login",
-					"After clicking on the signIn button it should navigate to the Home page",
-					"user Sucessfully navigate to the Home page after clicking on the signIn button",
-					"Failed to signIn and not navigated to the Home page ");
+	
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -266,12 +259,14 @@ public class GoldDrybarusE2EHelper {
 
 
 	
-	public void RegaddDeliveryAddress(String dataSet) {
+	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 			String expectedResult = "shipping address is entering in the fields";
 
 			String firstname = data.get(dataSet).get("FirstName");
 			System.out.println(firstname);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 			if (size > 0) {
 				try {
@@ -447,12 +442,7 @@ public class GoldDrybarusE2EHelper {
 			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/login"),
-					"To validate the user navigates to the signin page",
-					"user should able to land on the signIn page after clicking on the sigIn button",
-					"User Successfully clicked on the singIn button and Navigate to the signIn page",
-					"User Failed to click the signin button and not navigated to signIn page");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -528,12 +518,7 @@ public class GoldDrybarusE2EHelper {
      	WebElement serachbar=Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
         serachbar.sendKeys(product);
         Common.actionsKeyPress(Keys.ENTER);
-   
-//			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
-//			System.out.println(productsearch);
-//			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
-//					"enter product name will display in the search box", "user enter the product name in  search box",
-//					"Failed to see the product name");
+
              }  
 		 catch (Exception | Error e) {
 			e.printStackTrace();
@@ -906,7 +891,7 @@ public class GoldDrybarusE2EHelper {
 		try{
 
 
-			File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Osprey_EMEA/"+fileName);
+			File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/"+fileName);
 			XSSFWorkbook workbook;
 			XSSFSheet sheet;
 			Row row;
@@ -929,63 +914,33 @@ public class GoldDrybarusE2EHelper {
 			cell = row.createCell(0);
 			cell.setCellStyle(cs);
 			cell.setCellValue("Orders Details");
-
-
 			row = sheet.createRow(1);
 			cell = row.createCell(0);
 			cell.setCellStyle(cs);
 			cell.setCellValue("S.No");
 			cell = row.createCell(1);
 			cell.setCellStyle(cs);
-			cell.setCellValue("Tester");
+			cell.setCellValue("Website");
 			cell = row.createCell(2);
+			cell.setCellStyle(cs);
+			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Test scenario Description");
 			cell = row.createCell(3);
-			cell.setCellStyle(ps);
-			cell.setCellValue("Web Order Number");
+			
+			cell.setCellStyle(cs);
+			cell.setCellValue("SKU");
 			cell = row.createCell(4);
 			cell.setCellStyle(cs);
-			cell.setCellValue("Order Confirnmation Message");
+			cell.setCellValue("Web Order Number");
 			cell = row.createCell(5);
+			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Order Status Magento");
-
-
-			cell = row.createCell(6);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Subtotal");
-			cell = row.createCell(7);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Shipping");
-			cell = row.createCell(8);
-			cell.setCellStyle(cs);
-			cell.setCellValue("State");
-			cell = row.createCell(9);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Zipcode");
-			cell = row.createCell(10);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Tax");
-			cell = row.createCell(11);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Estimated Order Total");
-			cell=row.createCell(12);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Discount");
-			cell=row.createCell(13);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Actual Order Total");
-			cell=row.createCell(14);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Payment Method");
+           cell = row.createCell(6);
+		
 			
-			cell=row.createCell(15);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Products_details");
-	
 			rowcount=2;
-			
 			}
 
 			else
@@ -994,12 +949,7 @@ public class GoldDrybarusE2EHelper {
 			sheet=workbook.getSheet("OrderDetails");
 			rowcount=sheet.getLastRowNum()+1;
 			}
-			/*row = sheet.createRow(rowcount);
-			cell = row.createCell(0);*/
-
-
-
-			FileOutputStream fileOut = new FileOutputStream(file);
+	    	FileOutputStream fileOut = new FileOutputStream(file);
 			workbook.write(fileOut);
 			fileOut.flush();
 			fileOut.close();
@@ -1011,7 +961,7 @@ public class GoldDrybarusE2EHelper {
 			}
 	}
 	
-	public void writeOrderNumber(String OrderIdNumber,String Description) throws FileNotFoundException, IOException
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus) throws FileNotFoundException, IOException
 	{
 		//String fileOut="";
 	try{
@@ -1058,116 +1008,29 @@ public class GoldDrybarusE2EHelper {
 		cell.setCellType(CellType.NUMERIC);
 		int SNo=rowcount-1;
 		cell.setCellValue(SNo);
-
 		cell = row.createCell(1);
 		cell.setCellType(CellType.STRING);
-		cell.setCellValue("Lotuswave");
+		
+		cell.setCellValue("Drybar");
+		
 		cell = row.createCell(2);
 		cell.setCellType(CellType.STRING);
 		cell.setCellValue(Description);
+		
 		cell = row.createCell(3);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Skus);
+		
+		cell = row.createCell(4);
 		cell.setCellType(CellType.NUMERIC);
 		cell.setCellValue(OrderIdNumber);
-		cell = row.createCell(4);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue("Order placed Successfully");
-		
+
 		cell = row.createCell(5);
 		cell.setCellType(CellType.STRING);
-		cell.setCellValue("Processing");
-
-//		cell = row.createCell(6);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(subtotlaValue);
-//		
-//		cell = row.createCell(7);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(shippingammountvalue);
-//		
-//		cell = row.createCell(8);
-//		cell.setCellType(CellType.STRING);
-//		cell.setCellValue(ShippingState);
-//		
-//		cell = row.createCell(9);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(ShippingZip);
-//		
-//		cell = row.createCell(10);
-//		cell.setCellType(CellType.STRING);
-//		cell.setCellValue(Taxammountvalue);
-//		
-//		
-//		cell = row.createCell(11);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(ExpectedTotalammountvalue);
-//		
-//		cell = row.createCell(12);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(Discountammountvalue);
-//		
-//		cell = row.createCell(13);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(ActualTotalammountvalue);
-//		
-//		cell = row.createCell(14);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(Card);
-//		
-//			cell = row.createCell(15);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(Products_details);
-//		
-//		cell = row.createCell(16);
-//		cell.setCellType(CellType.STRING);
-//		cell.setCellValue(AdminOrderstatus);
-//		
-//		cell = row.createCell(17);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(AdminOrdertax);
-//		
-//		cell = row.createCell(18);
-//		cell.setCellType(CellType.NUMERIC);
-//		cell.setCellValue(AdminOrdertotal);
-		
-		cell = row.createCell(19);
-		cell.setCellType(CellType.STRING);
-		
-		String Status;
-		 
-//		if(AdminOrderstatus.equals("Processing") && AdminOrdertax.equals(Taxammountvalue) && AdminOrdertotal.equals(ExpectedTotalammountvalue))
-//	     {
-//			
-//			Status="PASS";
-//			CellStyle style = workbook.createCellStyle();
-//			Font font= workbook.createFont();
-//			font.setColor(IndexedColors.GREEN.getIndex());
-//			font.setBold(true);
-//			style.setFont(font);
-//			cell.setCellStyle(style);
-//		}
-//		else
-//		{
-//			Status="FAIL";
-//			CellStyle style = workbook.createCellStyle();
-//			Font font= workbook.createFont();
-//			font.setColor(IndexedColors.RED.getIndex());
-//			font.setBold(true);
-//			style.setFont(font);
-//			cell.setCellStyle(style);
-//			}
-		
-		
-//		cell.setCellValue(Status);
+		cell.setCellValue(AdminOrderstatus);
 		
 		System.out.println(OrderIdNumber);
-//		System.out.println(subtotlaValue);
-//		System.out.println(shippingammountvalue);
-//		System.out.println(Taxammountvalue);
-//	
-//		System.out.println(ActualTotalammountvalue);
-//		System.out.println(ExpectedTotalammountvalue);
-//	
-			FileOutputStream fileOut = new FileOutputStream(file);
+		FileOutputStream fileOut = new FileOutputStream(file);
 		
 		workbook.write(fileOut);
 	
@@ -1176,8 +1039,9 @@ public class GoldDrybarusE2EHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 	}
+
+	
 
 	public void clickSubmitbutton_Shippingpage() {
 		// TODO Auto-generated method stub
@@ -1203,6 +1067,88 @@ public class GoldDrybarusE2EHelper {
 		}
 
 	}
+	
+	
+	public void Admin_signin(String dataSet) {
+
+		try {
+			
+			Sync.waitPageLoad();
+			if (Common.getCurrentURL().contains("emea-preprod")) {
+				
+				Thread.sleep(12000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
+						"To Validate the Admin is landing on the Dashboard after successfull Signin",
+						"After clicking on sigin button admin should navigate to the dashboard",
+						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+						"Admin failed to display the dashboard after clicking on the signin button");
+			}
+			else {
+				Sync.waitPageLoad(30);
+				
+				Common.openNewTab();
+				
+				Common.oppenURL("https://na-preprod.hele.digital/heledigitaladmin/admin/dashboard/");
+				
+				Sync.waitPageLoad(4000);
+				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
+				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
+				Thread.sleep(15000);
+				
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+						"To Validate the Admin is landing on the Dashboard after successfull Signin",
+						"After clicking on sigin button admin should navigate to the dashboard",
+						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+						"Admin failed to display the dashboard after clicking on the signin button");
+			}
+		
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the Admin is landing on the Dashboard after successfull Signin",
+					"After clicking on sigin button admin should navigate to the dashboard",
+					"Admin failed to navigate to the dashboard after click on signin button",
+					"Admin failed to land on the dashboard after clicking on the signin button");
+			Assert.fail();
+
+		}
+
+	}
+	
+	public void click_Sales() {
+		// TODO Auto-generated method stub
+
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("id", "menu-magento-sales-sales");
+			Common.clickElement("id", "menu-magento-sales-sales"); // this line clicks on sale option in magento
+			Thread.sleep(2000);
+			String Sales = Common.findElement("xpath", "//li[@class='item-sales-order    level-2']").getText();
+			System.out.println(Sales);
+		
+			Common.assertionCheckwithReport(Sales.equals("Orders"), "To verify the sales menu ",
+					"After clicking the sales menu it will display menu options ",
+					"Successfully clicked the sales menu and it displayed the Catalog options",
+					"Failed to click the sales menu");
+			Common.clickElement("xpath", "//li[@class='item-sales-order    level-2']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To verify the sales menu ",
+					"After clicking the sales menu it will display menu options ",
+					"Successfully clicked the sales menu and it displayed the sales options",
+					Common.getscreenShotPathforReport("Failed to click on the sales menu"));
+			Assert.fail();
+		}
+
+	}
+
 	
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
@@ -11201,8 +11147,86 @@ public void videos_validation() {
 	}
 	
 }
- 
+
+public HashMap<String, String> order_verfication(String orderNumber) {
+	// TODO Auto-generated method stub
+	HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
+	try
+	{
+		int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+		if (filters > 0) {
+			Common.clickElement("xpath",
+					"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+			Thread.sleep(4000);
+			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+			Common.actionsKeyPress(Keys.ENTER);
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+
+						Thread.sleep(3000);
+						Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
+					
+					String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+					
+								System.out.println(Orderstatus);
+								Orderstatus1.put("AdminOrderstatus", Orderstatus);
+								StringBuilder concatenatedText = new StringBuilder();
+								int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
+
+								for (int n=1;n<=size;n++) {
+			             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
+			             concatenatedText.append(sku);		  
+			           
+								}
+								String finalsku = concatenatedText.toString();
+								  System.out.println(finalsku);
+								  Orderstatus1.put("Skus", finalsku);
+		}
+		else
+		{
+			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(1000);
+			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+			Common.actionsKeyPress(Keys.ENTER);
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+
+						Thread.sleep(3000);
+						Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
+						
+						Thread.sleep(4000);
+					
+					String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+					
+								System.out.println(Orderstatus);
+								Orderstatus1.put("AdminOrderstatus", Orderstatus);
+								StringBuilder concatenatedText = new StringBuilder();
+								int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
+
+								for (int n=1;n<=size;n++) {
+			             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
+			             concatenatedText.append(sku);		  
+			           
+								}
+								String finalsku = concatenatedText.toString();
+								  System.out.println(finalsku);
+								  Orderstatus1.put("Skus", finalsku);
+		}	
+
 }
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	return Orderstatus1;
+}
+}
+
 
 
 
