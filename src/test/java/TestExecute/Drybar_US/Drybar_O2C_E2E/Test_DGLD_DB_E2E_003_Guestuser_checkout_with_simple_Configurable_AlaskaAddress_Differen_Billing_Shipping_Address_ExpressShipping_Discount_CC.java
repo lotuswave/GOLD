@@ -11,26 +11,23 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_007_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem_Partial_CC {
+public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_AlaskaAddress_Differen_Billing_Shipping_Address_ExpressShipping_Discount_CC {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem () throws Exception {
+	public void Verifying_Guestuser_checkout_simple_Configurable_AlaskaAddress_Differen_Billing_Shipping () throws Exception {
 
 		try {
 			Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
 			String Description="Guest user checkout with 3 items + Expedited shipping + Gift Code redeeem Partial + CC";
 			Drybar.Verify_Homepage();
-			Drybar.search_product("900-0700-4 Product");
-	        Drybar.addtocart("900-0700-4 Product");
-	        Drybar.search_product("900-2230-1 Product");
+			Drybar.search_product("900-2230-1 Product");
 	        Drybar.addtocart("900-2230-1 Product");
-	        Drybar.search_product("900-0630-1 Product");
-	        Drybar.addtocart("900-0630-1 Product");
+	        Drybar.Configurable_addtocart("Configurable Product");
 	        Drybar.minicart_Checkout();
-	        String Used_GiftCode= Drybar.Gift_Card_Enter("DRY-PRPD-TEST-QA");
+	        String Used_GiftCode= ""; //No giftcide used
 	        Drybar.addDeliveryAddress_Guestuser("Address");
 	        Drybar.selectshippingmethod("ExpeditedShipping method");
 	        Drybar.clickSubmitbutton_Shippingpage();
