@@ -50,7 +50,7 @@ public class Test_DGLD_DB_E2E_010_RegisterUser_checkout_with_Bundleitem_same_chi
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
