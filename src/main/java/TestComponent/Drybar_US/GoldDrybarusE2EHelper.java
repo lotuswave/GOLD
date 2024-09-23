@@ -11153,10 +11153,14 @@ public HashMap<String, String> order_verfication(String orderNumber) {
 			Common.actionsKeyPress(Keys.ENTER);
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
-
+       
+		String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
+		System.out.println(Number);
+			 if(Number.equals(orderNumber))
+			 {
 						Thread.sleep(3000);
 						Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
-					
+			 }
 					String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
 					
 								System.out.println(Orderstatus);
@@ -11182,10 +11186,13 @@ public HashMap<String, String> order_verfication(String orderNumber) {
 			Common.actionsKeyPress(Keys.ENTER);
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
-
-						Thread.sleep(3000);
-						Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
-						
+			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
+			System.out.println(Number);
+				 if(Number.equals(orderNumber))
+				 {
+							Thread.sleep(3000);
+							Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
+				 }				
 						Thread.sleep(4000);
 					
 					String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
