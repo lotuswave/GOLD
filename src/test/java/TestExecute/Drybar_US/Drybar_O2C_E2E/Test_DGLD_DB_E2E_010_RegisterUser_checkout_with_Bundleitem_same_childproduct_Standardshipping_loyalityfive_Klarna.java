@@ -11,32 +11,32 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_standard_Shiping_CCMaster_PO_Box_address {
+public class Test_DGLD_DB_E2E_010_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Registeruser_checkout_with_MultipleItems_standard_Shiping_CCMaster_PO_Box_address () throws Exception {
+	public void Verifying_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna () throws Exception {
 
 		try {
 		Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
-		String Description="Register user checkout with Multiple Items + standard Shiping +  CC Master + P.O Box address";
+		String Description="Register User checkout with Bundle item + same child product + Standard shipping + loyality 5$ + Klarna";
 		Drybar.Verify_Homepage();
         Drybar.click_singinButton();
         Drybar.login_Drybar("AccountDetails");
         Drybar.search_product("900-0700-4 Product");
         Drybar.addtocart("900-0700-4 Product");
-        Drybar.search_product("900-2230-1 Product");
-        Drybar.addtocart("900-2230-1 Product");
-        Drybar.search_product("900-0630-1 Product");
-        Drybar.addtocart("900-0630-1 Product");
+        Drybar.search_product("Bundle E2E");
+        Drybar.addtocart("Bundle E2E");
         Drybar.minicart_Checkout();
-        Drybar.RegaddDeliveryAddress("PO Box Address");
+        Drybar.RegaddDeliveryAddress("AccountDetails");
         Drybar.selectshippingmethod("GroundShipping method");
-        String Used_GiftCode = ""; // Indicating no gift code used  
+        Drybar.fivepercent_Reward_Points("$5 Off (100 points)");
         Drybar.clickSubmitbutton_Shippingpage();
-        String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
+        String Used_GiftCode = ""; // Indicating no gift code used 
+        Drybar.Kalrna_Payment("Klarna Visa Payment");
+        String OrderNumber=Drybar.ordernumber();
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
         HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
