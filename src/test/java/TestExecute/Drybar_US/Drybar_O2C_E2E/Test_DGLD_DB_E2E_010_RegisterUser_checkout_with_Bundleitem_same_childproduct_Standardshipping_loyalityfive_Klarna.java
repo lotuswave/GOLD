@@ -11,7 +11,7 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna {
+public class Test_DGLD_DB_E2E_010_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
@@ -50,7 +50,7 @@ public class RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshi
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
