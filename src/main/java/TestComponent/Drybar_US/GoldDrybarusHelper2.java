@@ -4885,7 +4885,7 @@ public void FUll_Payment(String dataSet) {
 			Thread.sleep(8000);
 //			Common.mouseOverClick("xpath", "//form[@id='form-70051']//button[@title='ADD TO BAG']");
 			 Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
-			 Thread.sleep(9000);
+			 Thread.sleep(5000);
 			 
 			 String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
 						.getAttribute("ui-id");
