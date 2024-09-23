@@ -35,8 +35,7 @@ public class Test_DGLD_DB_E2E_008_Guestuser_checkout_with_Simple_aerosalBundle_C
         Drybar.clickSubmitbutton_Shippingpage();
         Drybar.discountCode("Discount");
         Drybar.gitCard("GiftCode Full Redeem");
-		Drybar.giftCardSubmitOrder();
-        String OrderNumber=Drybar.ordernumber();
+        String OrderNumber=Drybar.giftCardSubmitOrder();
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
         HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
