@@ -5390,7 +5390,9 @@ public void FUll_Payment(String dataSet) {
 					// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 					// "')]");
 					String method1=Common.findElement("xpath", "//div[@class='pl-3 pr-1']").getText();
-					String shipping1= Common.findElement("xpath", "//span[@class='price-including-tax']").getText();
+					Thread.sleep(3000);
+					String shipping1= Common.findElement("xpath", "//span[@class='flex items-center']").getText();
+					//String shipping1= Common.findElement("xpath", "//span[@class='price-including-tax']").getText();
 					//String method2=Common.findElement("xpath", "//td[@id='label_method_amstrates4_amstrates-label_carrier_amstrates4_amstrates']").getText();
 					//String shipping2= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[2]").getText();
 					
