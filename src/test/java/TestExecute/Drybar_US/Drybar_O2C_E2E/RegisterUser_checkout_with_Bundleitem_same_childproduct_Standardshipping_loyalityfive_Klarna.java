@@ -11,13 +11,13 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_010_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyality5$_Klarna {
+public class RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyality5$_Klarna () throws Exception {
+	public void Verifying_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna () throws Exception {
 
 		try {
 		Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
