@@ -900,11 +900,11 @@ public class GoldDrybarusE2EHelper {
 			if(!(file.exists()))
 			{
 			workbook = new XSSFWorkbook();
-			sheet = workbook.createSheet("OrderDetails");
+			sheet = workbook.createSheet("DrybarUS-O2C-E2E-Testing");
 			CellStyle cs = workbook.createCellStyle();
 			CellStyle ps = workbook.createCellStyle();
 			cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+			cs.setFillForegroundColor(IndexedColors.GOLD.getIndex());
 			ps.setFillForegroundColor(IndexedColors.RED.getIndex());
 			Font f = workbook.createFont();
 			f.setBold(true);
@@ -913,7 +913,7 @@ public class GoldDrybarusE2EHelper {
 			row = sheet.createRow(0);
 			cell = row.createCell(0);
 			cell.setCellStyle(cs);
-			cell.setCellValue("Orders Details");
+			cell.setCellValue("DRYBAR US - PREPROD - GRAS Release - O2C-E2E Test Execution Plan");
 			row = sheet.createRow(1);
 			cell = row.createCell(0);
 			cell.setCellStyle(cs);
@@ -951,7 +951,7 @@ public class GoldDrybarusE2EHelper {
 			else
 			{
 			workbook = new XSSFWorkbook(new FileInputStream(file));
-			sheet=workbook.getSheet("OrderDetails");
+			sheet=workbook.getSheet("DrybarUS-O2C-E2E-Testing");
 			rowcount=sheet.getLastRowNum()+1;
 			}
 	    	FileOutputStream fileOut = new FileOutputStream(file);
