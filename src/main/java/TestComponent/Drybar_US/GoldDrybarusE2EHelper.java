@@ -816,7 +816,7 @@ public class GoldDrybarusE2EHelper {
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 	        
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Common.clickElement("xpath", "//input[@name='telephone']");
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 
