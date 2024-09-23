@@ -34,13 +34,12 @@ public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_stand
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("PO Box Address");
         Drybar.selectshippingmethod("GroundShipping method");
-        String Used_GiftCode_No = ""; // Indicating no gift code used  
         Drybar.clickSubmitbutton_Shippingpage();
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
         HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
-        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode_No);
+        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"));
         
 		} catch (Exception e) {
 

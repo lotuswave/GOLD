@@ -767,8 +767,8 @@ public class GoldDrybarusE2EHelper {
 
 		try {
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("xpath", "//input[@id='guest_details-email_address']");
-				Common.textBoxInput("xpath", "//input[@id='guest_details-email_address']", data.get(dataSet).get("Email"));
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 			} else {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
@@ -816,7 +816,7 @@ public class GoldDrybarusE2EHelper {
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 	        
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@name='telephone']");
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 
@@ -866,10 +866,9 @@ public class GoldDrybarusE2EHelper {
 			if (size > 0  ) {
 				
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//div[normalize-space()='"+ method +"']//parent::label");
-				Common.clickElement("xpath", "//div[normalize-space()='"+ method +"']//parent::label");
-			}  
-			
+				Sync.waitElementPresent("xpath", "//div[contains(text(),'"+ method +"')]");
+				Common.clickElement("xpath", "//div[contains(text(),'"+ method +"')]");
+			}
 			else
 			{
 				Assert.fail();
@@ -939,10 +938,6 @@ public class GoldDrybarusE2EHelper {
 			cell.setCellStyle(cs);
 			cell.setCellValue("Order Status Magento");
            cell = row.createCell(6);
-           
-           cell.setCellStyle(cs);
-			cell.setCellValue("Used GiftCode");
-          cell = row.createCell(7);
 		
 			
 			rowcount=2;
@@ -966,7 +961,7 @@ public class GoldDrybarusE2EHelper {
 			}
 	}
 	
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Used_GiftCode) throws FileNotFoundException, IOException
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus) throws FileNotFoundException, IOException
 	{
 		//String fileOut="";
 	try{
@@ -1033,12 +1028,6 @@ public class GoldDrybarusE2EHelper {
 		cell = row.createCell(5);
 		cell.setCellType(CellType.STRING);
 		cell.setCellValue(AdminOrderstatus);
-		
-		cell = row.createCell(6);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Used_GiftCode);
-		
-		
 		
 		System.out.println(OrderIdNumber);
 		FileOutputStream fileOut = new FileOutputStream(file);
@@ -11235,38 +11224,6 @@ public HashMap<String, String> order_verfication(String orderNumber) {
 		Assert.fail();
 	}
 	return Orderstatus1;
-}
-
-public String Gift_Card_Enter(String dataset) throws Exception {
-	// TODO Auto-generated method stub
-	String code = data.get(dataset).get("GiftCode");
-	System.out.println(code);
-	String pin= data.get(dataset).get("Pin");
-	try {
-		
-		
-		Sync.waitElementVisible("xpath", "//div[contains(@class,'giftcard-field-container -code')]");
-		Common.clickElement("xpath", "//div[contains(@class,'giftcard-field-container -code')]");
-		Sync.waitElementVisible("id", "card-code-input");
-		Common.textBoxInput("id", "card-code-input", code);
-		Common.textBoxInput("id", "card-pin-input", pin);
-		
-		Sync.waitElementVisible("xpath", "//span[normalize-space()='Add Code']");
-		Common.clickElement("xpath", "//span[normalize-space()='Add Code']");
-		Sync.waitPageLoad();
-		String Message = Common.getText("xpath", "//span[text()='Gift Card  was added.']");
-		
-		 Common.assertionCheckwithReport(Message.contains("Gift Card was added."), "validating the Success message after applying giftcode",
-					"After clicking on add buton Success message after applying giftcode", "Sucessfully displayed after adding Giftcode ",
-					"failed to displayed displayed success message after adding Giftcode");
-	}
-	catch(Exception | Error e) {
-		ExtenantReportUtils.addFailedLog("validating the Success message after applying giftcode",
-				"After clicking on add buton Success message after applying giftcode", "Sucessfully displayed after adding Giftcode ",
-				"failed to displayed displayed success message after adding Giftcode");
-	}
-	
-	return code;
 }
 }
 
