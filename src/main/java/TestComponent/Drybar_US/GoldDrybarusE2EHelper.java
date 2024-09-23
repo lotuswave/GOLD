@@ -4824,6 +4824,7 @@ public void FUll_Payment(String dataSet) {
 		try{
 			String URL = Common.getCurrentURL();
 			String Giftcode = data.get(Dataset).get("GiftCardCode");
+			System.out.println(Giftcode);
 			System.out.println(URL);
 			if(URL.contains("stage")&&URL.contains("/gb") || URL.contains("preprod")&&URL.contains("/gb")) {
 			Thread.sleep(5000);
@@ -4862,7 +4863,7 @@ public void FUll_Payment(String dataSet) {
 
     Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
    Thread.sleep(5000);
-	Common.textBoxInput("xpath","//input[@id='card-code-input']",data.get(Dataset).get(Giftcode));
+	Common.textBoxInput("xpath","//input[@id='card-code-input']",data.get(Dataset).get("GiftCardCode"));
 		Common.textBoxInput("xpath","//input[@id='card-pin-input']",data.get(Dataset).get("GiftCardPin"));
 		Thread.sleep(6000);
 		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Add Code']");
