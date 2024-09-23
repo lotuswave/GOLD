@@ -8531,7 +8531,7 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 	
 }
 
-public void After_Pay_payment(String dataSet) throws Exception {
+public String After_Pay_payment(String dataSet) throws Exception {
 	// TODO Auto-generated method stub
 	String order = "";
 	Sync.waitPageLoad();
@@ -8548,13 +8548,6 @@ public void After_Pay_payment(String dataSet) throws Exception {
 				"User unable to land o n the paymentpage");
 		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-//		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-//		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
-//		System.out.println(payment);
-//		if (payment > 0) {
-			//Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-			//Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-			//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
 			Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
@@ -8567,14 +8560,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			Thread.sleep(3000);
-			
-//			Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
-//			Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
-//			Thread.sleep(3000);	
-//			
-//			Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
-//			Common.clickElement("xpath", "//button[@class='action primary checkout']");
-//			
+
 			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
@@ -8639,6 +8625,8 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			Assert.fail();
 		}
 	}
+	
+	return order;
 }
 
 public void subcription_Profile() {
