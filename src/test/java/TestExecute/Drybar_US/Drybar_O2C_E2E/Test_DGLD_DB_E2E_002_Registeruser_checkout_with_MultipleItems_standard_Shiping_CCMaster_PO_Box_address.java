@@ -11,7 +11,7 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_001_Registeruser_checkout_with_MultipleItems_standard_Shiping_CCMaster_PO_Box_address {
+public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_standard_Shiping_CCMaster_PO_Box_address {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
