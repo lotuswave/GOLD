@@ -33,7 +33,7 @@ public class Test_DGLD_DB_E2E_009_Registeruser_checkout_with_multiple_Expediteds
         Drybar.addtocart("900-0630-1 Product");
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("AccountDetails");
-        Drybar.selectshippingmethod("GroundShipping method");
+        Drybar.selectshippingmethod("Expedited_method");
         Drybar.clickSubmitbutton_Shippingpage();
         String OrderNumber=Drybar.After_Pay_payment("Afterpay");
         Drybar.Admin_signin("AccountDetails");
@@ -50,7 +50,7 @@ public class Test_DGLD_DB_E2E_009_Registeruser_checkout_with_multiple_Expediteds
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
