@@ -821,7 +821,7 @@ public class GoldDrybarusE2EHelper {
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 
 			
-			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])").getText().replace(symbol, "").replace(".", "");
+			String subtotal=Common.findElement("xpath", " (//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
 			System.out.println(subtotal);
 			subtotal = subtotal.trim();
 			subtotal = subtotal.substring(0,subtotal.length() - 2);
@@ -2115,6 +2115,11 @@ public class GoldDrybarusE2EHelper {
 				Sync.waitElementPresent("xpath", "//input[@id='billing-as-shipping']");	
 				Common.javascriptclickElement("xpath", "//input[@id='billing-as-shipping']");
 				Thread.sleep(5000);
+				
+				int size =Common.findElements("xpath", "(//button[contains(text(),'New Address')])[2]").size();
+				if(size>0) {
+					
+				
 				Sync.waitElementPresent("xpath", "(//button[contains(text(),'New Address')])[2]");
 				Common.clickElement("xpath", "(//button[contains(text(),'New Address')])[2]");
 				Thread.sleep(3000);
@@ -2147,69 +2152,53 @@ public class GoldDrybarusE2EHelper {
 				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				//update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
-				//System.out.println("update"+update);
-				/*Common.assertionCheckwithReport(
-						update.equals(Shipping),
-						"verifying the Billing address form in payment page",
-						"Billing address should be saved in the payment page",
-						"Sucessfully Billing address form should be Display ",
-						"Failed to display the Billing address in payment page");*/
+				}
+				else {
+					
+					Common.textBoxInputClear("xpath", "//input[@id='billing-firstname']");
+					Common.textBoxInput("xpath", "//input[@id='billing-firstname']", data.get(dataSet).get("FirstName"));
+					
+					Common.textBoxInputClear("xpath", "(//input[@name='lastname'])[2]");
+					Common.textBoxInput("xpath", "(//input[@name='lastname'])[2]", data.get(dataSet).get("LastName"));
+					Common.textBoxInputClear("xpath", "//input[@name='street[0]']");
+					Common.textBoxInput("xpath", "(//input[@name='street[0]'])[2]", data.get(dataSet).get("Street"));
+					Thread.sleep(4000);
+					
+					
+					String text = Common.findElement("xpath", "(//input[@name='street[0]'])[2]").getAttribute("value");
+					Sync.waitPageLoad();
+					Thread.sleep(5000);
+					Common.textBoxInputClear("xpath", "(//input[@name='city'])[2]");
+					Common.textBoxInput("xpath", "(//input[@name='city'])[2]", data.get(dataSet).get("City"));
+					System.out.println(data.get(dataSet).get("City"));
+
+						 Thread.sleep(4000);
+		                 Common.scrollIntoView("xpath", "(//select[@name='region'])[2]");
+		                 Common.dropdown("xpath", "(//select[@name='region'])[2]",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+		                 Thread.sleep(3000);
+		                 String Shippingvalue = Common.findElement("xpath", "(//select[@name='region'])[2]")
+		                         .getAttribute("value");
+		                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+//			              System.out.println(Shipping);
+//		                 System.out.println(Shippingvalue);
+					Thread.sleep(2000);
+					
+					Common.textBoxInputClear("xpath", "(//input[@name='postcode'])[2]");
+					Common.textBoxInput("xpath", "(//input[@name='postcode'])[2]",
+							data.get(dataSet).get("postcode"));
+					Thread.sleep(5000);
+
+					Common.textBoxInput("xpath", "//input[@id='billing-telephone']",
+							data.get(dataSet).get("phone"));
+					
+					Thread.sleep(5000);
+					
+				}
+				
 			}
 				
 				
-			/*Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-					"payment section should be displayed", "sucessfully payment section has been displayed",
-					"Failed to displayed the payment section");
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//input[@id='billing-address-same-as-shipping-stripe_payments']");
-			Common.clickElement("xpath", "//input[@id='billing-address-same-as-shipping-stripe_payments']");
-			if(Common.findElement("xpath", "(//select[@name='billing_address_id'])[3]").getAttribute("id").contains("billing-address-id"))
-			{
-				Sync.waitElementPresent("xpath", "(//select[@name='billing_address_id'])[3]");
-				Common.dropdown("xpath", "(//select[@name='billing_address_id'])[3]", Common.SelectBy.TEXT,"New Address");
-				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
-				Thread.sleep(4000);
-				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
-				Sync.waitPageLoad();
-				Thread.sleep(5000);
-				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
-				System.out.println(data.get(dataSet).get("City"));
-
-					 Thread.sleep(4000);
-	                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
-	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-	                 Thread.sleep(3000);
-	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-	                         .getAttribute("value");
-	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
-		              System.out.println(Shipping);
-	                 System.out.println(Shippingvalue);
-				Thread.sleep(2000);
-				Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
-						data.get(dataSet).get("postcode"));
-				Thread.sleep(5000);
-
-				Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
-						data.get(dataSet).get("phone"));
-				Common.clickElement("xpath", "//span[text()='Update']");
-				Sync.waitPageLoad();
-				Thread.sleep(5000);
-				update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
-				System.out.println("update"+update);
-				Common.assertionCheckwithReport(
-						update.equals(Shipping),
-						"verifying the Billing address form in payment page",
-						"Billing address should be saved in the payment page",
-						"Sucessfully Billing address form should be Display ",
-						"Failed to display the Billing address in payment page");
-			}*/
+	
 			else
 			{
 		Sync.waitElementPresent("xpath", "(//button[contains(text(),' New Address ')])[2]");
@@ -2258,15 +2247,6 @@ public class GoldDrybarusE2EHelper {
 					"Failed to display the Billing address in payment page");*/
 			}
 			
-			/*else
-			{
-				Common.assertionCheckwithReport(box.equals("false"),
-						"To validate the billing and shipping address are different",
-						"user should able to see different billing and shipping on payment page",
-						"User Successfully able to see the same billing and shipping on the payment page",
-						"User Failed to see the same billing and shipping address on the payment page");
-			}*/
-
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page",
@@ -2761,43 +2741,7 @@ public class GoldDrybarusE2EHelper {
 					break;
 				}
 			}
-			if(Common.getCurrentURL().contains("/gb"))
-			{
-				Sync.waitPageLoad(30);
-				Thread.sleep(6000);
-				Thread.sleep(4000);
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
-				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
-				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
-				Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
-				String size=Common.findElement("xpath", "(//span[contains(@class,'m-swatch-group__header s')])[2]").getText().toUpperCase();
-				System.out.println(size);
-				String size1= data.get(Dataset).get("size").toUpperCase();
-				System.out.println(size1);
-				Common.assertionCheckwithReport(
-						size.equals(size1),
-						"Verifying the the size of the product is selected in the PDP",
-						"after clicking on the size product size should be selected",
-						"successfully Product size has been selected on the PDP",
-						"Failed to select the product price on the PDP");
-				product_quantity(Dataset);
-				Thread.sleep(4000);
-				
-				Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
-				Sync.waitPageLoad();
-				Thread.sleep(6000);
-//				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//						.getAttribute("data-ui-id");
-//				System.out.println(message);
-//				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//						"Product should be add to cart", "Sucessfully product added to the cart ",
-//						"failed to add product to the cart");
-			}
-			else
-			{
+			
 				
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
@@ -2832,7 +2776,7 @@ public class GoldDrybarusE2EHelper {
 //					"Product should be add to cart", "Sucessfully product added to the cart ",
 //					"failed to add product to the cart");
 		}
-		}
+		
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();

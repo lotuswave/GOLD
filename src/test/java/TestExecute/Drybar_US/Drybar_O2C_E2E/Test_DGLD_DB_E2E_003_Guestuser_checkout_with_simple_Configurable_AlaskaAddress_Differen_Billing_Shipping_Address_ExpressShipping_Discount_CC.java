@@ -21,16 +21,18 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 
 		try {
 			Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
-			String Description="Guest user checkout with 3 items + Expedited shipping + Gift Code redeeem Partial + CC";
+			String Description="Guest user checkout with simple + Configurable + Alaska Address +Different Billing and Shipping Address+ Express Shipping + Discount + CC";
 			Drybar.Verify_Homepage();
 			Drybar.search_product("900-2230-1 Product");
 	        Drybar.addtocart("900-2230-1 Product");
-	        Drybar.Configurable_addtocart("Configurable Product");
+//	        Drybar.search_product("Configurable Product");
+//	        Drybar.Configurable_addtocart("Configurable Product");
 	        Drybar.minicart_Checkout();
 	        String Used_GiftCode= ""; //No giftcide used
-	        Drybar.addDeliveryAddress_Guestuser("Address");
-	        Drybar.selectshippingmethod("ExpeditedShipping method");
-	        Drybar.clickSubmitbutton_Shippingpage();
+	        Drybar.addDeliveryAddress_Guestuser("Alaska Address");
+	        Drybar.BillingAddress("AccountDetails");
+	        Drybar.selectshippingmethod("ExpressShipping method");
+	        Drybar.clickSubmitbutton_Shippingpage(); 
 	        String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 	        Drybar.Admin_signin("AccountDetails");
 	        Drybar.click_Sales();
@@ -46,7 +48,7 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
