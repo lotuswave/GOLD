@@ -10330,6 +10330,9 @@ public void Join(String Dataset) {
 		Sync.waitElementPresent(30, "id", "subscribe-email");
 		Common.clickElement("id", "subscribe-email");
 		Common.textBoxInput("id", "subscribe-email", data.get(Dataset).get("Email"));
+		Thread.sleep(2000);
+		Common.clickElement("id", "sms_opt_in");
+		Thread.sleep(2000);
 		Common.clickElement("xpath", "//span[text()='Join']");
 		
 		int successmessage = Common.findElements("xpath", "//div[@ui-id='message-success']").size();

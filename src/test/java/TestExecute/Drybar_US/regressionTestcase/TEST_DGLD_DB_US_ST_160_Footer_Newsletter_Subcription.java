@@ -33,7 +33,7 @@ public class TEST_DGLD_DB_US_ST_160_Footer_Newsletter_Subcription {
 		
 		@AfterTest
 		public void clearBrowser() {
-			//Common.closeAll();
+			Common.closeAll();
 			
 
 		}
