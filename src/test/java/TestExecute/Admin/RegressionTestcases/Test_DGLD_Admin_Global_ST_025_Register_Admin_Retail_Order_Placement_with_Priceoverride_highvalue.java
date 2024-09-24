@@ -11,7 +11,7 @@ import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
 
-public class Test_DGLD_Admin_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue {
+public class Test_DGLD_Admin_Global_ST_025_Register_Admin_Retail_Order_Placement_with_Priceoverride_highvalue {
 	
 	String datafile = "Admin\\GoldAdminTestData.xlsx";    
 	GoldAdminHelper Admin = new GoldAdminHelper(datafile,"Retailer OrderPlacement");
