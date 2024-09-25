@@ -33,6 +33,7 @@ public class Test_DGLD_DB_E2E_004_RegisterUser_checkout_with_Aerosalproduct_Stan
         Drybar.selectshippingmethod("StandardShipping method");
        
         Drybar.clickSubmitbutton_Shippingpage();
+       // Drybar.tax_validation_Paymentpage("Address");
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();

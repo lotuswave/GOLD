@@ -36,6 +36,7 @@ public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_stand
         Drybar.selectshippingmethod("GroundShipping method");
         String Used_GiftCode = ""; // Indicating no gift code used  
         Drybar.clickSubmitbutton_Shippingpage();
+        Drybar.tax_validation_Paymentpage("Address");
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();

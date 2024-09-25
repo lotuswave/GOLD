@@ -36,6 +36,7 @@ public class Test_DGLD_DB_E2E_009_Registeruser_checkout_with_multiple_Expediteds
         Drybar.selectshippingmethod("Expedited_method");
         String Used_GiftCode = ""; // Indicating no gift code used 
         Drybar.clickSubmitbutton_Shippingpage();
+        Drybar.tax_validation_Paymentpage("Address");
         String OrderNumber=Drybar.After_Pay_payment("Afterpay");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();

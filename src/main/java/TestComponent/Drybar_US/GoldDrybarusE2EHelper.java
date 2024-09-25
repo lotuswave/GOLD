@@ -1056,7 +1056,7 @@ public class GoldDrybarusE2EHelper {
 		// TODO Auto-generated method stub
 		String expectedResult = "click the submit button to navigate to payment page";
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 			System.out.println(expectedResult);
 //			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
 //			Sync.waitPageLoad();
@@ -1856,6 +1856,27 @@ public class GoldDrybarusE2EHelper {
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
+			//int size= Common.findElements("xpath", "//div[@class='item discount']//span[@class='value']").size();
+			if(!ExpectedTotalAmmount2.equals(ordertotal)) {
+				Thread.sleep(3000);
+				String discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
+						.replace(Symbol, "");
+				Float discountvalue = Float.parseFloat(discount);
+				Float newTotal = (Total + discountvalue);
+				String ExpectedTotalAmmount3 = new BigDecimal(newTotal).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+				Thread.sleep(4000);
+				System.out.println(ExpectedTotalAmmount3);
+				System.out.println(ordertotal);
+				Common.assertionCheckwithReport(ExpectedTotalAmmount3.equals(ordertotal),
+						"validating the Tax on the payment page",
+						"On the order summary tax should be display on the payment page",
+						"Successfully Tax should be display in the order summary",
+						"Failed to display the tax on the order summary");
+				
+				
+				
+			}
+			else {
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 					"validating the Tax on the payment page",
 					"On the order summary tax should be display on the payment page",
@@ -1863,6 +1884,7 @@ public class GoldDrybarusE2EHelper {
 					"Failed to display the tax on the order summary");
 
 		}
+			}
 		}
 		
 		catch(Exception | Error e)
@@ -11106,6 +11128,7 @@ public HashMap<String, String> order_verfication(String orderNumber) {
 			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
 			Thread.sleep(1000);
 			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(1000);
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
 			Thread.sleep(3000);
@@ -11242,11 +11265,13 @@ public String fivepercent_Reward_Points(String Dataset) {
 		Thread.sleep(8000);
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 		String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
 				.replace(" Off", "");
+		Thread.sleep(3000);
 		String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
 				.trim().replace("-", "").replace(".00", "");
+		Thread.sleep(3000);
 		System.out.println(off);
 		System.out.println(discount);
 		Common.assertionCheckwithReport(off.equals(discount),
@@ -11254,6 +11279,7 @@ public String fivepercent_Reward_Points(String Dataset) {
 				"After clicking on the apply button reward points should be apply",
 				"Sucessfully reward points has been applied",
 				"failed to apply the reward point in the order summary page");
+		Thread.sleep(3000);
 		rewardpointsused = Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim()
 				.replace("YOU HAVE ", "").replace(" POINTS", "");
 		System.out.println(rewardpointsused);

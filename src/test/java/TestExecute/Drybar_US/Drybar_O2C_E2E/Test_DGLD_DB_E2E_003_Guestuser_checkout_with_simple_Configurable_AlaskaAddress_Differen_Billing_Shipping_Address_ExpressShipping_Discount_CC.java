@@ -33,6 +33,7 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 	        Drybar.BillingAddress("AccountDetails");
 	        Drybar.selectshippingmethod("ExpressShipping method");
 	        Drybar.clickSubmitbutton_Shippingpage(); 
+	        Drybar.tax_validation_Paymentpage("Address");
 	        String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 	        Drybar.Admin_signin("AccountDetails");
 	        Drybar.click_Sales();
@@ -48,7 +49,7 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
