@@ -5,7 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -14,7 +14,7 @@ public class TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User 
 	
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"Header");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Header");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Header_Links_Validation_For_Registered_User () throws Exception {

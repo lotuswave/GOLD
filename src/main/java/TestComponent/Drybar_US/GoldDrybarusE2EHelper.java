@@ -977,11 +977,11 @@ public class GoldDrybarusE2EHelper {
 		Row row;
 		Cell cell;
 		int rowcount;
-		sheet = workbook.getSheet("OrderDetails");
+		sheet = workbook.getSheet("DrybarUS-O2C-E2E-Testing");
 		
-		if((workbook.getSheet("OrderDetails"))==null)
+		if((workbook.getSheet("DrybarUS-O2C-E2E-Testing"))==null)
 		{
-		sheet = workbook.createSheet("OrderDetails");
+		sheet = workbook.createSheet("DrybarUS-O2C-E2E-Testing");
 		CellStyle cs = workbook.createCellStyle();
 		cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 		cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
@@ -992,7 +992,7 @@ public class GoldDrybarusE2EHelper {
 		row = sheet.createRow(0);
 		cell = row.createCell(0);
 		cell.setCellStyle(cs);
-		cell.setCellValue("Orders Details");
+		cell.setCellValue("DrybarUS-O2C-E2E-Testing");
 		
 		row = sheet.createRow(1);
 		cell = row.createCell(0);
@@ -1005,7 +1005,7 @@ public class GoldDrybarusE2EHelper {
 		else
 		{
 		
-		sheet=workbook.getSheet("OrderDetails");	
+		sheet=workbook.getSheet("DrybarUS-O2C-E2E-Testing");	
 		rowcount=sheet.getLastRowNum()+1;
 		}
 		row = sheet.createRow(rowcount);

@@ -5971,15 +5971,15 @@ public void FUll_Payment(String dataSet) {
     		String prod = data.get(Dataset).get("prod product");
     		String productsize = data.get(Dataset).get("Size");
     		String symbol= data.get(Dataset).get("Symbol");
-    		System.out.println(symbol);
+    		System.out.println(products);
     		String price = "";
 
     		try {
     			Sync.waitPageLoad();
     			for (int i = 0; i <= 10; i++) {
-    				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+    				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
     				List<WebElement> webelementslist = Common.findElements("xpath",
-    						"//img[contains(@class,'m-product-card__image')]");
+    						"//img[@class='group-hover/item-image:block hidden']");
 
     				String s = webelementslist.get(i).getAttribute("src");
     				System.out.println(s);
@@ -5989,14 +5989,15 @@ public void FUll_Payment(String dataSet) {
     					break;
     				}
     			}
+    			System.out.println(products);
     			Thread.sleep(9000);
-    			if (Common.getCurrentURL().contains("stage")) {
-    				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
-    				Common.scrollIntoView("xpath", "//img[contains(@alt,'" + products + "')]");
-    				Common.mouseOver("xpath", "//img[contains(@alt,'" + products + "')]");
+    			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
+    				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+    				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+    				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
     				Thread.sleep(4000);
     				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText().replace(symbol,"").replace(".00", "");
-    				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
+    				Common.clickElement("xpath", "//img[@alt='" + products + "']");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
     				String PLPprice = Common
@@ -6867,24 +6868,27 @@ public void FUll_Payment(String dataSet) {
 					
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-					System.out.println(title);
+					int size=Common.findElements("xpath", "//div[contains(@class,'category-view')]//h1//span").size();
+					if(size==0)
+					{
+					
+					String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']//li//span[@aria-current='page']").getText();
+					
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					String products=Common.getText("xpath", "(//div[@class='text-sm']//span)[1]");
 					System.out.println(products);
 					int Number = Integer.parseInt(products);
 					int j=0;
 					if(Number>=j)
 					{
-						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+						Common.assertionCheckwithReport(Common.getCurrentURL().contains("cleanse-condition")|| breadcrumbs.contains(Links[i]),
 								"verifying the header link " + Links[i] + "Under Benfits",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -6897,6 +6901,36 @@ public void FUll_Payment(String dataSet) {
 								Common.getscreenShot("Failed to see products in PLP"));
 						Assert.fail();
 					}
+				}
+					else
+					{
+						String title = Common.findElement("xpath", "//div[contains(@class,'category-view')]//h1//span").getText().trim();
+						String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']//li//span[@aria-current='page']").getText();
+						System.out.println(title);
+						System.out.println(breadcrumbs);
+						System.out.println(Links[i]);
+						Thread.sleep(4000);
+						String products=Common.getText("xpath", "(//div[@class='text-sm']//span)[1]");
+						System.out.println(products);
+						int Number = Integer.parseInt(products);
+						int j=0;
+						if(Number>=j)
+						{
+							Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || Common.getCurrentURL().contains("treatments-heat-protection"),
+									"verifying the header link " + Links[i] + "Under Benfits",
+									"user should navigate to the " + Links[i] + " page",
+									"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+						}
+						else
+						{
+							ExtenantReportUtils.addFailedLog(
+									"validating the the products in the plp ",
+									"User should able to see the products in plp", "unable to see the products in the PLP",
+									Common.getscreenShot("Failed to see products in PLP"));
+							Assert.fail();
+					}
+				}
+				
 				}
 			}
 
