@@ -32,6 +32,7 @@ public class GoldAdminHelper {
 	String datafile;
 	ExcelReader excelData;
 	Map<String, Map<String, String>> data = new HashMap<>();
+	private int i;
 	static ExtenantReportUtils report;
 	static Automation_properties automation_properties = Automation_properties.getInstance();
 
@@ -51,8 +52,8 @@ public class GoldAdminHelper {
 	public void Admin_signin(String dataSet) {
 
 		try {
-            if (Common.getCurrentURL().contains("preprod")) {
-            }
+            if (Common.getCurrentURL().contains("na")) {
+            
             	Thread.sleep(5000);
             	Common.textBoxInput("xpath", "//input[@id='username']", data.get(dataSet).get("UserName"));
             	Common.textBoxInput("xpath", "//input[@id='login']", data.get(dataSet).get("Password"));
@@ -64,11 +65,32 @@ public class GoldAdminHelper {
             Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
  
  
+            
             Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
                     "To Validate the Admin is landing on the Dashboard after successfull Signin",
                     "After clicking on sigin button admin should navigate to the dashboard",
                     "Admin Sucessfully navigate to the dashboard after clicking on the signin button",
                     "Admin failed to display the dashboard after clicking on the signin button");
+		}
+            
+            else {
+            	Thread.sleep(5000);
+            	
+            	Sync.waitPageLoad(30);
+                Sync.waitPageLoad();
+                Thread.sleep(5000);
+                Sync.waitElementPresent(30, "xpath", "//h1[@class='page-title']");
+     
+     
+                
+                Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+                        "To Validate the Admin is landing on the Dashboard after successfull Signin",
+                        "After clicking on sigin button admin should navigate to the dashboard",
+                        "Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+                        "Admin failed to display the dashboard after clicking on the signin button");
+                
+            	
+            }
  
         } catch (Exception e) {
             e.printStackTrace();
@@ -998,8 +1020,11 @@ public class GoldAdminHelper {
 			String titleattribute = Common.findElement("xpath", "//picture[@class='m-media-card__image md:block']/img")
 					.getAttribute("title");
 			System.out.println(titleattribute);
-			
-			if (Common.getCurrentURL().contains("oxo")) {
+			String site = data.get(dataSet).get("Website");
+
+				
+				if(Common.getCurrentURL().contains("oxo") && site.equals("OXO"))
+			{
 				Common.assertionCheckwithReport(
 						desktopimage.contains("oxo") && alternativetext.contains(configuredalternativetext)
 								&& titleattribute.contains(configuredtitleattribute),
@@ -1011,7 +1036,7 @@ public class GoldAdminHelper {
 			
 			
  			
-			else if (Common.getCurrentURL().contains("hydroflask")) {
+			else if (Common.getCurrentURL().contains("hydroflask") && site.equals("Hydroflask")) {
 			Common.assertionCheckwithReport(
 					desktopimage.contains("hydroflask") && alternativetext.contains(configuredalternativetext)
 							&& titleattribute.contains(configuredtitleattribute),
@@ -1022,7 +1047,7 @@ public class GoldAdminHelper {
 		}
 		
 		
-			else if (Common.getCurrentURL().contains("osprey")) {
+			else if (Common.getCurrentURL().contains("osprey") && site.equals("Osprey")) {
 			Common.assertionCheckwithReport(
 					desktopimage.contains("osprey") && alternativetext.contains(configuredalternativetext)
 							&& titleattribute.contains(configuredtitleattribute),
@@ -1033,7 +1058,7 @@ public class GoldAdminHelper {
 		}
 		
 	
-			else if (Common.getCurrentURL().contains("drybar")) {
+			else if (Common.getCurrentURL().contains("drybar") && site.equals("Drybar")) {
 		Common.assertionCheckwithReport(
 				desktopimage.contains("drybar") && alternativetext.contains(configuredalternativetext)
 						&& titleattribute.contains(configuredtitleattribute),
@@ -1042,6 +1067,16 @@ public class GoldAdminHelper {
 				"Failed to upload image on the background image");
 
 	}
+			
+			else if (Common.getCurrentURL().contains("gb") && site.equals("OspreyEMEA")) {
+				Common.assertionCheckwithReport(
+						desktopimage.contains("ospreyemea") && alternativetext.contains(configuredalternativetext)
+								&& titleattribute.contains(configuredtitleattribute),
+						"To validate the desktop image is configured on the front end",
+						"desktop image is dispalyed on the frotend", "desktop image dispalyed",
+						"Failed to upload image on the background image");
+
+			}
 	}
 			catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1618,6 +1653,7 @@ public class GoldAdminHelper {
 		// TODO Auto-generated method stub
 		try {
 			Common.switchToFirstTab();
+			Thread.sleep(5000);
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//li[@id='menu-magento-backend-content']");
 			Sync.waitElementPresent("xpath", "//li[@id='menu-magento-backend-content']");
@@ -1697,6 +1733,12 @@ public class GoldAdminHelper {
 			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("DBpageTitle"));
            }
            
+           else if(site.equals("OspreyEMEA"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OSPEpageTitle"));
+           }
+           
 			Common.actionsKeyPress(Keys.ENTER);
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			String records = Common.findElement("xpath", "//div[@class='admin__control-support-text']").getText();
@@ -1769,6 +1811,7 @@ public class GoldAdminHelper {
 		String HYFtitle = data.get(Dataset).get("HYFpageTitle");
 		String OSPtitle = data.get(Dataset).get("OSPpageTitle");
 		String DBtitle = data.get(Dataset).get("DBpageTitle");
+		String OSPEtitle = data.get(Dataset).get("OSPEpageTitle");
 		Sync.waitElementPresent(40, "xpath", "//h1[@class='page-title']");
 		String name = Common.findElement("xpath", "//h1[@class='page-title']").getText();
 		String site = data.get(Dataset).get("Website");
@@ -1794,6 +1837,12 @@ public class GoldAdminHelper {
 		}
         
         else if(site.equals("Drybar") && name.equals(DBtitle))
+		 {
+			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
+			Common.clickElement("xpath", "//span[text()='Delete Page']");
+		}
+        
+        else if(site.equals("OspreyEMEA") && name.equals(OSPEtitle))
 		 {
 			Sync.waitElementPresent(40, "xpath", "//span[text()='Delete Page']");
 			Common.clickElement("xpath", "//span[text()='Delete Page']");
@@ -1848,6 +1897,7 @@ public class GoldAdminHelper {
 			//Common.scrollIntoView("xpath", "//span[text()='Hero Banner']");
 			WebElement element = Common.findElement("xpath", "//span[text()='Hero Banner']");
 			draganddropContentBlock(element);
+			Thread.sleep(2000);
 			String bannercontent = Common.findElement("xpath", "//div[@class='file-uploader-area']/label").getText();
 			System.out.println(bannercontent);
 			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
@@ -1876,7 +1926,7 @@ public class GoldAdminHelper {
 			Sync.waitPageLoad();
 			
 Thread.sleep(3000);
-			//Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
+			Common.mouseOver("xpath", "//div[contains(@class,'c-hero-block')]");
 			Sync.waitElementVisible("xpath", "//div[contains(@class,'options-middle')]");
 
 			String pagebuilderoptions = Common.findElement("xpath", "//div[contains(@class,'options-middle')]")
@@ -2224,6 +2274,17 @@ Common.refreshpage();
 			Common.assertionCheckwithReport(
 					//imageverification.contains("Lotusqa") && 
 					imageverification2.contains("COVER"),
+					"validating the  Image upload on the forntend website ",
+					"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
+					"Failed to appear image on the front end");
+		} 
+			
+			else if(site.equals("OspreyEMEA"))
+			{
+
+			Common.assertionCheckwithReport(
+					//imageverification.contains("Lotusqa") && 
+					imageverification2.contains("hero"),
 					"validating the  Image upload on the forntend website ",
 					"Image should de appear on the fornt end page", "Successfully image is appeared on the frond end",
 					"Failed to appear image on the front end");
@@ -2717,7 +2778,13 @@ Common.refreshpage();
 	           {
 				
 				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("DBpageTitle"));
-	           }  
+	           } 
+	           
+	           else if(site.equals("OspreyEMEA"))
+	           {
+				
+				Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OSPEpageTitle"));
+	           }
 	           Thread.sleep(2000);
 	          
 			Common.clickElement("xpath", "//button[@id='save-button']");
@@ -2747,6 +2814,7 @@ Thread.sleep(8000);
 		String hyfpagetitle = data.get(Dataset).get("HYFpageTitle");
 		String osppagetitle = data.get(Dataset).get("OSPpageTitle");
 		String dbpagetitle = data.get(Dataset).get("DBpageTitle");
+		String ospepagetitle = data.get(Dataset).get("OSPEpageTitle");
 	
 		try {
 			Sync.waitPageLoad(60);
@@ -2760,6 +2828,8 @@ Thread.sleep(8000);
 			System.out.println(ospurlkey);
 			String dburlkey = dbpagetitle.toLowerCase();
 			System.out.println(dburlkey);
+			String ospeurlkey = ospepagetitle.toLowerCase();
+			System.out.println(ospeurlkey);
 			Common.openNewTab();
 			if (currentAdminURL.contains("preprod")) {
 				Thread.sleep(1000);
@@ -2767,20 +2837,30 @@ Thread.sleep(8000);
 				if (site.equals("OXO"))
 				{
 				Common.oppenURL(data.get(Dataset).get("preprodURL") + oxourlkey);
+				
 			}
 				else if (site.equals("Hydroflask"))
 				{
 				Common.oppenURL(data.get(Dataset).get("preprodURL") + hyfurlkey);
+				
 			}
 				
 				else if (site.equals("Osprey"))
 				{
 				Common.oppenURL(data.get(Dataset).get("preprodURL") + ospurlkey);
+				
 			}
 				
 				else if (site.equals("Drybar"))
 				{
 				Common.oppenURL(data.get(Dataset).get("preprodURL") + dburlkey);
+				
+			}
+				
+
+				else if (site.equals("OspreyEMEA"))
+				{
+				Common.oppenURL(data.get(Dataset).get("preprodURL") + ospeurlkey);
 			}
 				
 				else {
@@ -2788,10 +2868,12 @@ Thread.sleep(8000);
 					if (site.equals("OXO"))
 					{
 					Common.oppenURL(data.get(Dataset).get("prodURL") + oxourlkey);
+					
 				}
 					else if (site.equals("Hydroflask"))
 					{
 					Common.oppenURL(data.get(Dataset).get("prodURL") + hyfurlkey);
+					
 				}
 					
 					else if (site.equals("Osprey"))
@@ -2804,6 +2886,10 @@ Thread.sleep(8000);
 					Common.oppenURL(data.get(Dataset).get("prodURL") + dburlkey);
 				}
 				
+					else if (site.equals("OspreyEMEA"))
+					{
+					Common.oppenURL(data.get(Dataset).get("prodURL") + ospeurlkey);
+				}
 			}
 			Sync.waitPageLoad(40);
 			Thread.sleep(10000);
@@ -3223,7 +3309,7 @@ Thread.sleep(8000);
 		}
 	}
 
-	public void Websiteverification_hero_product() {
+	public void Websiteverification_hero_category(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 			Common.refreshpage();
@@ -3237,8 +3323,9 @@ Thread.sleep(8000);
 			Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
 			 Common.switchWindows();
 			Thread.sleep(5000);
+			String site = data.get(Dataset).get("Website");
 			
-			if(Common.getCurrentURL().contains("oxo"))
+			if(Common.getCurrentURL().contains("oxo") && site.equals("OXO"))
 			{
 			String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
 			System.out.println(headingverification);
@@ -3247,7 +3334,7 @@ Thread.sleep(8000);
 					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
 			}
 			
-			else if(Common.getCurrentURL().contains("hydroflask"))
+			else if(Common.getCurrentURL().contains("hydroflask") && site.equals("Hydroflask"))
 			{
 				
 				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
@@ -3258,7 +3345,7 @@ Thread.sleep(8000);
 				
 			}
 			
-			else if(Common.getCurrentURL().contains("osprey"))
+			else if(Common.getCurrentURL().contains("osprey.com/gb") && site.equals("OspreyEMEA"))
 			{
 				
 				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
@@ -3269,7 +3356,9 @@ Thread.sleep(8000);
 				
 			}
 			
-			else if(Common.getCurrentURL().contains("drybar"))
+			
+			
+			else if(Common.getCurrentURL().contains("drybar") && site.equals("Drybar"))
 			{
 				
 				String headingverification = Common.getText("xpath", "//div[@class='hero-container']//span");
@@ -3280,6 +3369,16 @@ Thread.sleep(8000);
 				
 			}
 
+			else if(Common.getCurrentURL().contains("osprey") && site.equals("Osprey"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("Backpacking"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
 			//Common.assertionCheckwithReport("validation of page in the forntend website ", "PDP should be appear on fornt end page",
 					//"Successfully page should be appeared on the frondend", "Successfully page should be appeared on the frondend","Failed to navigate to PDP page");
 			
@@ -3957,10 +4056,14 @@ Thread.sleep(8000);
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "//a[@class='ltkpopup-close']");
 		}
-		else {
+		else if(Common.getCurrentURL().contains("oxo") || Common.getCurrentURL().contains("hydroflask") || Common.getCurrentURL().contains("osprey"))
+				{
 			Sync.waitElementVisible("xpath", "//button[@aria-label='Close dialog']");
 			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 			
+		}
+		else {
+			AcceptAll();
 		}
 }
 
@@ -4091,6 +4194,7 @@ Thread.sleep(8000);
 		String image2 = data.get(DataSet).get("image2");
 		String image3 = data.get(DataSet).get("image3");
 		String image4 = data.get(DataSet).get("image4");
+		String image5 = data.get(DataSet).get("image5");
 		String altatt = data.get(DataSet).get("alterantivetext");
 		try {
 			Common.scrollIntoView("xpath", "//span[text()='Image Element']");
@@ -4123,6 +4227,11 @@ Thread.sleep(8000);
 			{
 				Common.scrollIntoView("xpath", "//img[@alt='" + image4 + "']");
 				Common.javascriptclickElement("xpath", "//img[@alt='" + image4 + "']");
+			}
+			else if(site.equals("OspreyEMEA"))
+			{
+				Common.scrollIntoView("xpath", "//img[@alt='" + image5 + "']");
+				Common.javascriptclickElement("xpath", "//img[@alt='" + image5 + "']");
 			}
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
 			Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
@@ -4298,116 +4407,119 @@ Thread.sleep(2000);
 	}
 
 	public void category_productslider(String DataSet) {
+		
 		try {
-             
 			Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
 			Thread.sleep(1000);
-			
 String site = data.get(DataSet).get("Website");
-			
 			//Thread.sleep(2000);
-			
   if(site.equals("OXO"))
-	
 {
 	Common.findElement("xpath", "//label[text()='Graters & Slicers']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Graters & Slicers']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Utensil Sets']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Utensil Sets']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Bakeware']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Bakeware']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Mops & Household Brushes']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Mops & Household Brushes']");
 	Thread.sleep(1000);
 }
-
-
+ 
+ 
 else if(site.equals("Hydroflask"))
-
+ 
 {
-	
-	
+
 	Common.findElement("xpath", "//label[text()='Beer, Wine & Spirits']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Beer, Wine & Spirits']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Kitchenware']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Kitchenware']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Coolers & Lunch Boxes']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Coolers & Lunch Boxes']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Bottles']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Bottles']");
 	Thread.sleep(1000);
 }
-
+ 
 else if(site.equals("Osprey"))
 {
-	
 	Common.findElement("xpath", "//label[text()='Backpacking Packs']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Backpacking Packs']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Day Packs']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Day Packs']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Hiking Packs']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Hiking Packs']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Lifestyle Day Packs']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Lifestyle Day Packs']");
 	Thread.sleep(1000);
 }
-
+ 
 else if(site.equals("Drybar"))
 {
 	Common.findElement("xpath", "//label[text()='Lush Scent']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Lush Scent']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Coconut Colada Scent']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Coconut Colada Scent']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Volume']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Volume']");
 	Thread.sleep(1000);
-	
 	Common.findElement("xpath", "//label[text()='Dry Shampoo']");
 	Thread.sleep(1000);
 	Common.clickElement("xpath", "//label[text()='Dry Shampoo']");
 	Thread.sleep(1000);
 }
+ 
+else if(site.equals("OspreyEMEA"))
+{
+	Common.findElement("xpath", "//label[text()='Gifts for Travellers']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Gifts for Travellers']");
+	Thread.sleep(1000);
+	Common.findElement("xpath", "//label[text()='Featured']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Featured']");
+	Thread.sleep(1000);
+	Common.findElement("xpath", "//label[text()='Gifts for Everyday']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Gifts for Everyday']");
+	Thread.sleep(1000);
+	Common.findElement("xpath", "//label[text()='Gifts for Walkers']");
+	Thread.sleep(1000);
+	Common.clickElement("xpath", "//label[text()='Gifts for Walkers']");
+	Thread.sleep(1000);
+}
 
-			
-
-		} catch (Exception | Error e) {
+ 
+		
+		}
+		catch (Exception | Error e) {
 			e.printStackTrace();
 
 			report.addFailedLog("validation Image upload in the forntend website ",
@@ -4824,6 +4936,11 @@ else if(site.equals("Drybar"))
 					else if(site.equals("Drybar"))
 					{
 						Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("DBSKU"));
+					}
+					
+					else if(site.equals("OspreyEMEA"))
+					{
+						Common.textBoxInput("xpath", "//input[@id='" + id + "']", data.get(Dataset).get("OSPESKU"));
 					}
 					
 					Common.dropdown("xpath", "(//select[@class='admin__control-select'])[2]", Common.SelectBy.TEXT,
@@ -6833,7 +6950,9 @@ else if(site.equals("Drybar"))
 		String image2 = data.get(dataSet).get("image2");
 		String image3 = data.get(dataSet).get("image3");
 		String image4 = data.get(dataSet).get("image4");
+		String image5 = data.get(dataSet).get("image5");
 		String color = data.get(dataSet).get("Color");
+		String site = data.get(dataSet).get("Website");
 
 		try {
 			/*String Title = Common.findElement("xpath", "//*[@class='c-clp-hero__headline']").getText();
@@ -6845,8 +6964,10 @@ else if(site.equals("Drybar"))
 			String DescriptionType = Common.findElement("xpath", "//*[@class='c-clp-hero__description']").getTagName();  */
 
 			
-			if(Common.getCurrentURL().contains("oxo"))
+			if(Common.getCurrentURL().contains("oxo") && site.equals("OXO"))
+		
 			{
+				ClosADD();
 				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
 						.getAttribute("data-bg-desktop");
 
@@ -6866,9 +6987,10 @@ else if(site.equals("Drybar"))
 					"Configured content should be dispalyed on the front end", "Configured content is on the fornt end",
 					"failed to configuire the content");
 			}
-			else if(Common.getCurrentURL().contains("hydroflask"))
+			else if(Common.getCurrentURL().contains("hydroflask") && site.equals("Hydroflask"))
 				
 			{
+				ClosADD();
 				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
 						.getAttribute("data-bg-desktop");
 
@@ -6888,7 +7010,8 @@ else if(site.equals("Drybar"))
 						"failed to configuire the content");
 			}
 			
-			else if(Common.getCurrentURL().contains("osprey")) {
+			else if(Common.getCurrentURL().contains("osprey") && site.equals("Osprey")) {
+				//ClosADD();
 				
 				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
 						.getAttribute("data-bg-desktop");
@@ -6910,8 +7033,9 @@ else if(site.equals("Drybar"))
 						"failed to configuire the content");
 			}
 			
-			else if(Common.getCurrentURL().contains("drybar"))
+			else if(Common.getCurrentURL().contains("drybar") && site.equals("Drybar"))
 			{
+				ClosADD();
 				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
 						.getAttribute("data-bg-desktop");
 
@@ -6925,6 +7049,28 @@ else if(site.equals("Drybar"))
 						//&& Title.contains(title) && HeadingType.contains(headingtype) 
 						//&& description.contains(Description) && DescriptionType.contains(descriptiontype)
 								&& desktopimage.contains(image4) 
+								//&& mobileimage.contains(image2)
+								,
+						"To validate the CLP Content on the front end",
+						"Configured content should be dispalyed on the front end", "Configured content is on the fornt end",
+						"failed to configuire the content");
+			}
+			
+else if(Common.getCurrentURL().contains("gb") && site.equals("OspreyEMEA")) {
+				
+				String desktopimage = Common.findElement("xpath", "//div[@data-content-type='hot_clp_banner']")
+						.getAttribute("data-bg-desktop");
+
+				//String mobileimage = Common.findElement("xpath", "//img[@data-element='image_element_mobile']")
+						//.getAttribute("src");
+
+				String style = Common.findElement("xpath", "(//main[@id='maincontent']//style)").getAttribute("innerHTML");
+				
+				Common.assertionCheckwithReport(
+						style.contains("background-color:" + color) 
+						//&& Title.contains(title) && HeadingType.contains(headingtype) 
+						//&& description.contains(Description) && DescriptionType.contains(descriptiontype)
+								&& desktopimage.contains(image5) 
 								//&& mobileimage.contains(image2)
 								,
 						"To validate the CLP Content on the front end",
@@ -10107,6 +10253,12 @@ public void delet_existing_Coupon(String dataSet) {
 			Common.actionsKeyPress(Keys.ENTER);
            }
            
+           else if(site.equals("OspreyEMEA"))
+           {
+			
+			Common.textBoxInput("xpath", "//input[@name='title']", data.get(Dataset).get("OSPEpageTitle"));
+			Common.actionsKeyPress(Keys.ENTER);
+           }
 			//Common.textBoxInput("xpath", "//input[@name='title']", title);
 			//Common.actionsKeyPress(Keys.ENTER);
 			String name = Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
@@ -11885,6 +12037,14 @@ public void delet_existing_Coupon(String dataSet) {
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//label[text()='Hair Products']");
 			}
+           
+           else if(site.equals("OspreyEMEA"))
+			{
+				
+				Common.findElement("xpath", "//label[text()='Backpacks & Bags']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//label[text()='Backpacks & Bags']");
+			}
 		
           // Configure_padding_marins(Dataset);
            
@@ -11945,6 +12105,12 @@ public void herobanner_images(String DataSet) {
 				{
 					Common.scrollIntoView("xpath", "//img[@alt='COVER_3.jpg']");
 					Common.javascriptclickElement("xpath", "//img[@alt='COVER_3.jpg']");
+				}
+				
+				else if(site.equals("OspreyEMEA"))
+				{
+					Common.scrollIntoView("xpath", "//img[@alt='hero_banner2.png']");
+					Common.javascriptclickElement("xpath", "//img[@alt='hero_banner2.png']");
 				}
 				
 				Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
@@ -12069,6 +12235,23 @@ public void CardImage(String DataSet) {
 												
 										}
 								
+										else if(site.equals("OspreyEMEA")) {
+											
+											// TODO Auto-generated method stub
+											
+												
+												
+												String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Admin\\ospreyemea.png");
+											
+													Sync.waitElementPresent("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input");
+													Common.findElement("xpath", "//div[@upload-area-id='desktop_image']//div[@class='uppy-Dashboard-AddFiles']//input").sendKeys(path);
+
+													String image = Common.findElement("xpath", "//div[@class='file-uploader-filename']").getText();
+
+													System.out.println(image);
+												
+												
+												}
 					
 			/*		Common.scrollIntoView("xpath", "//label[@class='admin__field-label']//span[text()='Image']");
 
@@ -12126,132 +12309,128 @@ public void CardImage(String DataSet) {
 				}
 			}
 
-public void category_cards(String Dataset) {
-				String site = data.get(Dataset).get("Website");
-				
-				try {
-				//Thread.sleep(2000);
-				Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+public void category_cards(String DataSet) {
+	try {
+		Common.clickElement("xpath", "//div[@class='admin__action-multiselect-text']");
+		Thread.sleep(1000);
+String site = data.get(DataSet).get("Website");
+		//Thread.sleep(2000);
+if(site.equals("OXO"))
+{
+Common.findElement("xpath", "//label[text()='Forks & Tongs']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Forks & Tongs']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Cleaning Tools']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Cleaning Tools']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Tea & Kettles']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Tea & Kettles']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Feeding & Drinking']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Feeding & Drinking']");
+Thread.sleep(1000);
+}
 
-				/*String text = Common
-						.findElement("xpath", "(//input[@class='admin__control-text admin__action-multiselect-search'])")
-						.getAttribute("id");
-				Common.textBoxInput("xpath", "//input[@id='" + text + "']", data.get(Dataset).get("productnames"));*/
-	 			
-	           if(site.equals("OXO"))
-				
-				{
-					Common.findElement("xpath", "//label[text()='Forks & Tongs']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Forks & Tongs']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Cleaning Tools']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Cleaning Tools']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Tea & Kettles']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Tea & Kettles']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Feeding & Drinking']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Feeding & Drinking']");
-					Thread.sleep(1000);
-				}
-				
-				
-				else if(site.equals("Hydroflask"))
-				
-				{
-					Common.findElement("xpath", "//label[text()='Bottles']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Bottles']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Beer, Wine & Spirits']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Beer, Wine & Spirits']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Cups & Tumblers']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Cups & Tumblers']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Caps and Lids']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Caps and Lids']");
-					Thread.sleep(1000);
-				}
-				
-				else if(site.equals("Osprey"))
-				{
-					
-					Common.findElement("xpath", "//label[text()='Backpacking Packs']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Backpacking Packs']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Hiking Packs']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Hiking Packs']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Travel']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Travel']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Day Packs']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Day Packs']");
-					Thread.sleep(1000);
-				}
-	           
-	           else if(site.equals("Drybar"))
-				{
-					Common.findElement("xpath", "//label[text()='Hair Products']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Hair Products']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Shampoos']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Shampoos']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Color Care']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Color Care']");
-					Thread.sleep(1000);
-					
-					Common.findElement("xpath", "//label[text()='Dry Shampoo']");
-					Thread.sleep(1000);
-					Common.clickElement("xpath", "//label[text()='Dry Shampoo']");
-					Thread.sleep(1000);
-				}
-			
-	     
-	           
-	           
-	        /*   Common.textBoxInput("xpath", "(//input[@name='link_text'])", data.get(Dataset).get("Buttontext"));
-				Common.clickElement("xpath", "//input[@name='link_url']");  */
-				
-			
-			} 
-				catch (Exception | Error e) {
-				e.printStackTrace();
 
-				report.addFailedLog("validation Image upload  ", "Image should be uploaded",
-						"Successfully image is uploaded",
-						Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
-				Assert.fail();
+else if(site.equals("Hydroflask"))
 
-			}
-		}
+{
+
+Common.findElement("xpath", "//label[text()='Beer, Wine & Spirits']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Beer, Wine & Spirits']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Bottles']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Bottles']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Cups & Tumblers']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Cups & Tumblers']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Caps and Lids']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Caps and Lids']");
+Thread.sleep(1000);
+}
+
+else if(site.equals("Osprey"))
+{
+Common.findElement("xpath", "//label[text()='Backpacking Packs']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Backpacking Packs']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Day Packs']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Day Packs']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Hiking Packs']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Hiking Packs']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Travel']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Travel']");
+Thread.sleep(1000);
+}
+
+else if(site.equals("Drybar"))
+{
+Common.findElement("xpath", "//label[text()='Hair Products']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Hair Products']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Shampoos']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Shampoos']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Color Care']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Color Care']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Dry Shampoo']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Dry Shampoo']");
+Thread.sleep(1000);
+}
+
+else if(site.equals("OspreyEMEA"))
+{
+Common.findElement("xpath", "//label[text()='Backpacks & Bags']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Backpacks & Bags']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Gifts under £50']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Gifts under £50']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Gifts under £100']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Gifts under £100']");
+Thread.sleep(1000);
+Common.findElement("xpath", "//label[text()='Gifts under £150']");
+Thread.sleep(1000);
+Common.clickElement("xpath", "//label[text()='Gifts under £150']");
+Thread.sleep(1000);
+}
+	}
+	
+	catch (Exception | Error e) {
+		e.printStackTrace();
+
+		report.addFailedLog("validation Image upload in the forntend website ",
+				"Image should de appear on fornt end page", "Successfully image is appeared on the frondend",
+				Common.getscreenShotPathforReport("Failed to navigate to edit promoBlocker page"));
+		Assert.fail();
+
+	}
+
+}
+
 
 public void editCategory_Productslider2() {
 				// TODO Auto-generated method stub
@@ -12289,7 +12468,90 @@ public void editCategory_Productslider2() {
 						}
 					}
 
+public void Websiteverification_hero_product() {
+		// TODO Auto-generated method stub
+		try {
+			Common.refreshpage();
+			
+			Thread.sleep(2000);
+			
+			Common.refreshpage();
+			Common.scrollIntoView("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Sync.waitElementPresent(40, "xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//a[@class='a-btn pagebuilder-button-primary']");
+			 Common.switchWindows();
+			Thread.sleep(5000);
+			
+			if(Common.getCurrentURL().contains("oxo"))
+			{
+			String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+			System.out.println(headingverification);
+			Common.assertionCheckwithReport(headingverification.contains("More OXO"),
+					"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+					"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+			}
+			
+			else if(Common.getCurrentURL().contains("hydroflask"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("Customize"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
+			
+			else if(Common.getCurrentURL().contains("osprey"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("Backpacking"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
+			
+			else if(Common.getCurrentURL().contains("drybar"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='hero-container']//span");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("HAIR"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
 
+			else if(Common.getCurrentURL().contains("gb"))
+			{
+				
+				String headingverification = Common.getText("xpath", "//div[@class='c-plp-hero__content-wrapper u-container']//h1");
+				System.out.println(headingverification);
+				Common.assertionCheckwithReport(headingverification.contains("Backpacking"),
+						"validation of PDP page in the forntend website ", "PDP should be appear on fornt end page",
+						"Successfully PDP is appeared on the frondend", "Failed to navigate to PDP page");
+				
+			}
+			//Common.assertionCheckwithReport("validation of page in the forntend website ", "PDP should be appear on fornt end page",
+					//"Successfully page should be appeared on the frondend", "Successfully page should be appeared on the frondend","Failed to navigate to PDP page");
+			
+			
+			Common.switchToFirstTab();
+		} catch (Exception | Error e) {
+			e.printStackTrace();
 
+			report.addFailedLog("validation of PDP page in the forntend website ",
+					"PDP should de appear on fornt end page", "Successfully image is appeared on the frondend",
+					Common.getscreenShotPathforReport("Failed to navigate to PDP page"));
+			Assert.fail();
+		}
+
+	}
+	
 }
+
+
 

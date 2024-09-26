@@ -23,6 +23,7 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
 		Admin.Admin_signin("AccountDetails");
 		Admin.click_content();
 	    Admin.pages();
+	    Admin.Clearfilter();
 	    Admin.newpageCTA("Content");
 	    Admin.Contentpage();
 		Admin.hot_elements();
@@ -42,7 +43,7 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
         Admin.openwebsite("Content");
         Admin.website_verification_Herobanner();
         Admin.website_image_verification_herobanner("Content");
-        Admin.Websiteverification_hero_product();  
+        Admin.Websiteverification_hero_category("Content");  
         
        // ***** CLP HERO BANNER Block ******//
         Admin.Search_previous_page_Magento("Content");
@@ -56,7 +57,7 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
 		Admin.savecontent("CLPHerobanner");
 		Admin.page_Cache("FlushMagento");
 		Admin.openwebsite("CLPHerobanner");
-		Admin.ClosADD();
+		//Admin.ClosADD();
 		Admin.AcceptAll();
 		Admin.validate_content_alignment("left");
 		Admin.Validate_CLP_Content_Frontend("CLPHerobanner");  
@@ -75,7 +76,7 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
         Admin.website_verification_categroeyslider();   
 
 	  //****  CARD TILES Block ****//
-	    Admin.Search_previous_page_Magento("Content");
+        	    Admin.Search_previous_page_Magento("Content");
 	    Admin.Contentpage();
 	    Admin.hot_elements();
 	    Admin.Cardtile_content();
@@ -89,7 +90,7 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
 		Admin.page_Cache("FlushMagento");
 		Admin.openwebsite("Content");
 		Admin.verifycardtileimage_frontend("ProductcardTile");  
-
+		
 		 //****  CATGEORY/PRODUCT SLIDER Block ****//
         Admin.Search_previous_page_Magento("Content");
 	    Admin.Contentpage();
@@ -102,10 +103,11 @@ public class Test_DGLD_Admin_ST_011_Configure_and_validate_Page_Content {
 	    Admin.savecontent("Content");
 	    Admin.page_Cache("FlushMagento");
 	    Admin.openwebsite("Content");  
-	    Admin.website_SKU_verification();
+	    Admin.website_SKU_verification();    
 
 	   // Admin.deletepage("Content");
       //  Admin.Clearfilter();
+ 
  
 	} catch (Exception e) {
  
