@@ -12106,60 +12106,59 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 
 public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) throws Exception{
 	// TODO Auto-generated method stub
-	String email=data.get(dataSet).get("UserName");
-	String Running=data.get(dataSet).get("interests");
+	String email = data.get(dataSet).get("UserName");
+	String Running = data.get(dataSet).get("interests");
 	try {
-	Sync.waitPageLoad();
+		Sync.waitPageLoad();
 //	Thread.sleep(4000);
 //	Close_Geolocation();
 //	acceptPrivacy();
-	//Sync.waitPageLoad();
-	int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-	Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Drybar")
-			|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home")
-			|| Common.getPageTitle().contains("Drybar"), "validating store logo",
-			"System directs the user to the Homepage", "Sucessfully user navigates to the home page",
-			"Failed to navigate to the homepage");
-	
-	
-		 
-	        int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
-	        System.out.println(sizesframe);
-	        if (sizesframe > 0) {
-	            Common.actionsKeyPress(Keys.PAGE_UP);
-	            Thread.sleep(4000);
-	            Common.textBoxInput("id", "ltkpopup-email",email);
-	            Thread.sleep(2000);
-	            Common.clickElement("id", "ltkpopup-submit");
-	            Thread.sleep(3000);
-	            Sync.waitElementPresent("id", "ltkpopup-phone");
-	            Common.textBoxInput("id", "ltkpopup-phone", data.get(dataSet).get("Phone"));
-	            Thread.sleep(3000);
-	            Common.clickElement("id", "ltkpopup-faux-submit");
-	            Thread.sleep(5000);
-	            int sizes = Common.findElements("xpath", "//a[text()='CREATE ACCOUNT']").size();
-	            if(sizes>0) {
-	            	
-	            	Sync.waitElementPresent("xpath", "//a[text()='CREATE ACCOUNT']");
-		            Common.clickElement("xpath", "//a[text()='CREATE ACCOUNT']");
-		            
-		            Thread.sleep(5000);
-		            String text = Common.getCurrentURL();
-		            
-		            Common.assertionCheckwithReport(text.contains("/customer/account/create/"), "verifying create Account CTA navigation",
-							"user should navigate to the create Account page",
-							"user successfully Navigated to the Create Account page", "Failed navigate to the Create An ccount page" );
-	            	
-	            }
-	            else {
-	            	Assert.fail();
-	            }
-	                      
-	        }else {
-	        	
-	        }
-		} catch (Exception e) {
-	
+		// Sync.waitPageLoad();
+		int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+		Common.assertionCheckwithReport(
+				size > 0 && Common.getPageTitle().contains("Home Drybar")
+						|| Common.getPageTitle().contains("Home Drybar")
+						|| Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar"),
+				"validating store logo", "System directs the user to the Homepage",
+				"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
+
+		int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
+		System.out.println(sizesframe);
+		if (sizesframe > 0) {
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			Thread.sleep(4000);
+			Common.textBoxInput("id", "ltkpopup-email", email);
+			Thread.sleep(2000);
+			Common.clickElement("id", "ltkpopup-submit");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("id", "ltkpopup-phone");
+			Common.textBoxInput("id", "ltkpopup-phone", data.get(dataSet).get("Phone"));
+			Thread.sleep(3000);
+			Common.clickElement("id", "ltkpopup-faux-submit");
+			Thread.sleep(5000);
+			int sizes = Common.findElements("xpath", "//a[text()='CREATE ACCOUNT']").size();
+			if (sizes > 0) {
+
+				Sync.waitElementPresent("xpath", "//a[text()='CREATE ACCOUNT']");
+				Common.clickElement("xpath", "//a[text()='CREATE ACCOUNT']");
+
+				Thread.sleep(5000);
+				String text = Common.getCurrentURL();
+
+				Common.assertionCheckwithReport(text.contains("/customer/account/create/"),
+						"verifying create Account CTA navigation", "user should navigate to the create Account page",
+						"user successfully Navigated to the Create Account page",
+						"Failed navigate to the Create An ccount page");
+
+			} else {
+				Assert.fail();
+			}
+
+		} else {
+
+		}
+	} catch (Exception e) {
+
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("To validate the user open to ewsletter Subcription popup",
 				"After clicking on the signin button it should navigate to ewsletter Subcription popup",
@@ -12171,11 +12170,7 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 	close_add();
 }
 
-
-
-
 }
-
 		
 
 
