@@ -21,6 +21,13 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 		try {
 			
 			curlsmith.verify_Homepage();
+			curlsmith.search_product("Product");
+			curlsmith.Configurable_addtocart("Configurable Product");
+			curlsmith.minicart_Checkout();
+			curlsmith.addDeliveryAddress_Guestuser("Address");
+//			selectshippingmethod("GroundShipping method");
+//			clickSubmitbutton_Shippingpage();
+//			updatePaymentAndSubmitOrder("PaymentDetails");
 		
 		} catch (Exception e) {
 
@@ -31,7 +38,7 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
