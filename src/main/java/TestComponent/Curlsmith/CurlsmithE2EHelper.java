@@ -59,13 +59,17 @@ public class CurlsmithE2EHelper {
 	public void verify_Homepage() {
 		// TODO Auto-generated method stub
 		
-		try
-		{
-			
-		}
-		catch(Exception | Error e)
-		{
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			int size = Common.findElements("xpath", "//a[@class='site-header__logo-link']").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Curlsmith USA Dev"), "validating the Navigation to the Home page",
+					"System directs the user to the Homepage", "Sucessfully user navigates to the home page",
+					"Failed to navigate to the homepage");
+		} catch (Exception | Error e) {
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Home page", "System directs the user to the Homepage",
+					" user unable navigates to the home page", "Failed to navigate to the homepage");
 			Assert.fail();
 		}
 		
