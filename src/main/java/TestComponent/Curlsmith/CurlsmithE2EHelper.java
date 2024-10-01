@@ -326,14 +326,8 @@ public class CurlsmithE2EHelper {
 			Sync.waitElementPresent("xpath", "//input[@name='postalCode' and @placeholder]");
 			Common.textBoxInput("xpath", "//input[@name='postalCode' and @placeholder]",
 					data.get(dataSet).get("postcode"));
-			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Continue to shipping']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-
-			Sync.waitPageLoad();
-			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
-					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
-					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
 
 		}
 
@@ -346,6 +340,62 @@ public class CurlsmithE2EHelper {
 
 		}
 
+	}
+
+	public void select_Shipping_Method() {
+		// TODO Auto-generated method stub
+		
+		try {
+			Sync.waitElementPresent("xpath", "//button[@type='submit']//span[text()='Continue to shipping']");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Continue to shipping']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//button[@type='submit']//span[text()='Continue to payment']");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Continue to payment']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating user navigated to the payment page",
+					"After clicking on the continue to payment it should navigate to the payment page", "User unable to navigate to the payment page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the payment page after clicking on the continue payment"));
+			Assert.fail();
+		}
+		
+	}
+
+	public String CC_payment_method(String Dataset) {
+		// TODO Auto-generated method stub
+		String ConfirmationNumber="";
+		try {
+			Common.switchFrames("xpath", "//iframe[@class='card-fields-iframe' and contains(@name,'card-fields-number')]");
+			Common.textBoxInput("xpath", "//input[@id='number' and @placeholder]", data.get(Dataset).get("cardNumber"));
+			Common.switchToDefault();
+			Common.switchFrames("xpath", "//iframe[@class='card-fields-iframe' and contains(@name,'card-fields-expiry')]");
+			Common.textBoxInput("xpath", "//input[@id='expiry' and @placeholder]", data.get(Dataset).get("ExpMonthYear"));
+			Common.switchToDefault();
+			Common.switchFrames("xpath", "//iframe[@class='card-fields-iframe' and contains(@name,'card-fields-verification_value')]");
+			Common.textBoxInput("xpath", "//input[@id='verification_value' and @placeholder]", data.get(Dataset).get("cvv"));
+			Common.switchToDefault();
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Pay now']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			 ConfirmationNumber=Common.findElement("xpath", "(//div[@class='_1fragem1y _1fragemlj']//p)[1]").getText().replace("Confirmation ", "");
+			System.out.println(ConfirmationNumber);
+		
+		}
+		catch(Exception | Error e){
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating user navigated to the summary page",
+					"After clicking on the continue to payment it should navigate to the summary page", "User unable to navigate to the summary page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the summary page after clicking on the continue payment"));
+			Assert.fail();
+
+		}
+		return ConfirmationNumber;
+		
 	}
 }
 

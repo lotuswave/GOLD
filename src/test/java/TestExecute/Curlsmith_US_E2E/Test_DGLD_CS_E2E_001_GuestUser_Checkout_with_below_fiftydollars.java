@@ -25,9 +25,8 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 			curlsmith.Configurable_addtocart("Configurable Product");
 			curlsmith.minicart_Checkout();
 			curlsmith.addDeliveryAddress_Guestuser("Address");
-//			selectshippingmethod("GroundShipping method");
-//			clickSubmitbutton_Shippingpage();
-//			updatePaymentAndSubmitOrder("PaymentDetails");
+			curlsmith.select_Shipping_Method();
+			String ConfirmationNumber=curlsmith.CC_payment_method("Visa Payment");
 		
 		} catch (Exception e) {
 
