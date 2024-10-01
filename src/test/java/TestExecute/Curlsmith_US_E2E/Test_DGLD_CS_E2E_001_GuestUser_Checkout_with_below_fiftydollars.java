@@ -13,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 
 	String datafile = "Curlsmith/CurlsmithTestData.xlsx";
-	CurlsmithE2EHelper curlsmith = new CurlsmithE2EHelper(datafile,"Dataset");;
+	CurlsmithE2EHelper curlsmith = new CurlsmithE2EHelper(datafile,"Dataset");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_GuestUser_Checkout_with_below_fiftydollar () throws Exception {
@@ -35,10 +35,9 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 		}
 	}
 
-
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
