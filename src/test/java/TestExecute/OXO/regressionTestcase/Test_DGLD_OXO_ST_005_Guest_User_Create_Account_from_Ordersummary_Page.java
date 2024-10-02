@@ -24,9 +24,10 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.newuseraddDeliveryAddress("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			Oxo.createAccountFromOrderSummaryPage("AccountDetails");
-			Oxo.newsletter_subscription();
+//			Oxo.newsletter_subscription();
 			
 	
 
@@ -38,7 +39,7 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
