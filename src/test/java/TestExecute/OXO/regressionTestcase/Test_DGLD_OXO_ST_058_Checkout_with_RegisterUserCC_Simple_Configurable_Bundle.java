@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_058_Checkout_with_RegisterUserCC_Simple_Configurable_Bundle {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_RegisterUserCC_Simple_Configurable_Bundle() throws Exception {
 
@@ -31,10 +31,7 @@ public class Test_DGLD_OXO_ST_058_Checkout_with_RegisterUserCC_Simple_Configurab
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
-			
-			
-			
-
+	
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
