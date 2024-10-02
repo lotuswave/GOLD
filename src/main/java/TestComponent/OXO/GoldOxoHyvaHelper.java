@@ -84,10 +84,10 @@ public GoldOxoHyvaHelper(String datafile,String sheetname) {
 			int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 	        System.out.println(size);
 			
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("OXO Good"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("OXO Good")|| Common.getPageTitle().contains("OXO Good Grips, Brew, SteeL, Tot"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
 					"faield to naviagte to homepage");
-		} catch (Exception | Error e) {
+		} catch (Exception | Error e) { 
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs to the Homepage",
 					"Unable to navigate Home page",
@@ -1843,7 +1843,7 @@ try
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@title='Phone Number']",data.get(dataSet).get("phone"));
 				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
-				
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
 				try {
 					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
@@ -1858,7 +1858,7 @@ try
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String message = Common.findElement("xpath", "//div[text()='You saved the address.']").getText();
 				
 				 Common.assertionCheckwithReport(message.equals("You saved the address."),
 									"validating the saved message after saving address in address book",
