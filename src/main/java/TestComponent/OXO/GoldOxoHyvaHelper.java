@@ -1037,7 +1037,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Thread.sleep(40000);
+	             	   Thread.sleep(8000);
 	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
 	                  	 String sucessmessage=Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
@@ -1087,10 +1087,10 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 	}
 	
 	public void click_singinButton() {
+		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-
 			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -1110,6 +1110,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 							"Failed to click signIn button and not Navigated to the signIn page"));
 			Assert.fail();
 		}
+
 	}
 	public void Usersignin(String dataSet)  {
 
@@ -1153,7 +1154,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 				Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",	data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']']",data.get(dataSet).get("Street"));
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']",data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
@@ -1177,8 +1178,8 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
 				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
-				String Shippingstate = Common.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']").getText();
+				String Shippingvalue = Common.findElement("xpath", "//select[@id='shipping-region']").getAttribute("value");
+				String Shippingstate = Common.findElement("xpath", "//select[@id='shipping-region']//option[@value='" + Shippingvalue + "']").getText();
 
 				System.out.println(Shippingstate);
 				
@@ -1188,25 +1189,25 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 						data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(2000);
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
+				Common.textBoxInputClear("id", "shipping-postcode");
+				Common.textBoxInput("id", "shipping-postcode",
 						data.get(dataSet).get("postcode"));
-				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
+				String ShippingZip = Common.findElement("id", "shipping-postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
 				
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 				
-				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
-				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
+//				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
+//				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
 
                 Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
@@ -1285,9 +1286,8 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 
 			}
 		}
-	
-
 	}
+
 
 	
 	public void addDeliveryAddress_RegUser(String dataSet) {
