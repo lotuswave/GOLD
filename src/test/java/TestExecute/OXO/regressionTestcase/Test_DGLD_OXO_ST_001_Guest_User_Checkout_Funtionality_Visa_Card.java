@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_Card() throws Exception {
 //       for(int i=0;i<3;i++)
@@ -23,8 +23,6 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 			Oxo.addtocart("addproduct");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
-//			Oxo.search_product("Productwarranty");
-//			Oxo.addtocart("Productwarranty");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
@@ -43,7 +41,7 @@ public class Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
