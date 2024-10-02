@@ -1122,6 +1122,7 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+			
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("OXO")
@@ -1943,30 +1944,30 @@ try
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='street[0]']",
 					data.get(dataSet).get("Street"));
-			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			String Text = Common.getText("xpath", "//div[contains(@class,'grid')]//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Common.findElement("xpath", "//div[contains(@class,'grid')]//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 //			Common.textBoxInputClear("name", "postcode");
@@ -1989,40 +1990,7 @@ try
 			Assert.fail();
 
 		}
-		try {
-
-			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
-			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
-				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
-			}
-
-			expectedResult = "shipping address is filled in to the fields";
-			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
-
-			int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
-
-			if (errorsize >= 0) {
-				ExtenantReportUtils.addPassLog("validating the shipping address field with valid Data", expectedResult,
-						"Filled the shipping address", Common.getscreenShotPathforReport("shippingaddresspass"));
-			} else {
-
-				ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas",
-						expectedResult, "failed to add a addres in the filled",
-						Common.getscreenShotPathforReport("failed to add a address"));
-
-				Assert.fail();
-			}
-		}
-
-		catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the shipping address field with valid Datas", expectedResult,
-					"failed to add a addres in the filled",
-					Common.getscreenShotPathforReport("failed to add a address"));
-
-			Assert.fail();
-		}
+		
 
 	}
 	
