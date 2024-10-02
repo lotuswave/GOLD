@@ -397,6 +397,72 @@ public class CurlsmithE2EHelper {
 		return ConfirmationNumber;
 		
 	}
+
+	public void admin_Sigin(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad(30);
+			
+			Common.openNewTab();
+			
+			Common.oppenURL("https://www.shopify.com/logout?dest=default");
+			
+			Common.clickElement("xpath", "//a[text()='Log in']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("UserName"));
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30,"xpath", "//button[@type='submit']");
+			Common.clickElement("xpath", "//button[@type='submit']");
+			Sync.waitPageLoad();
+			Common.textBoxInput("xpath", "//input[@id='account_password']", data.get(Dataset).get("Password"));
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//button[@type='submit']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+//			Common.textBoxInput("xpath", "//input[@id='account_tfa_code']",)
+			Common.clickElement("xpath", "//button[@type='submit']");
+			
+			
+	}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating navigation the the magneto Home page",
+					"After clicking on theLogin button it should navigate to the home page", "User unable to navigate to the magento home page",
+					Common.getscreenShotPathforReport("Failed to to navigate to the magento home page"));
+			Assert.fail();
+		}
+}
+
+	public void search_order(String confirmationNumber) {
+		// TODO Auto-generated method stub
+		try {
+			if(Common.getCurrentURL().equals("https://admin.shopify.com/store/curlsmith-usa-dev/orders")) {
+				Common.clickElement("xpath", "//button[@aria-label='Search and filter orders']");
+				Common.textBoxInput("xpath", "//input[@placeholder='Searching all orders']", confirmationNumber);
+				Thread.sleep(4000);
+				int size=Common.findElements("xpath", "//tr[@class='Polaris-IndexTable__TableRow']").size();
+				if(size==1) {
+					Common.clickElement("xpath", "//tr[@class='Polaris-IndexTable__TableRow']");
+					Sync.waitPageLoad();
+					Thread.sleep(2000);
+					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").trim();
+					Assert.assertEquals(Number,confirmationNumber);
+				}
+				else {
+					Assert.fail();
+				}
+			}
+			else {
+				Assert.fail();
+			}
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
 }
 
 

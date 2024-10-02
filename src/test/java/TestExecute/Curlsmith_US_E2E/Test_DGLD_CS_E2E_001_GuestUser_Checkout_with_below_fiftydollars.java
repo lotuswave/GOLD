@@ -19,7 +19,7 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 	public void Verifying_GuestUser_Checkout_with_below_fiftydollar () throws Exception {
 
 		try {
-			
+			String Description="Guest user checkout with below 50 $";
 			curlsmith.verify_Homepage();
 			curlsmith.search_product("Product");
 			curlsmith.Configurable_addtocart("Configurable Product");
@@ -27,6 +27,8 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
 			curlsmith.addDeliveryAddress_Guestuser("Address");
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber=curlsmith.CC_payment_method("Visa Payment");
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.search_order(ConfirmationNumber);
 		
 		} catch (Exception e) {
 
