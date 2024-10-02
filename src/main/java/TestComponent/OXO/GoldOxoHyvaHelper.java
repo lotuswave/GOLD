@@ -1090,6 +1090,12 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
+
+			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
+			Sync.waitPageLoad();
+
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -4973,31 +4979,31 @@ public void socialLinkValidation(String dataSet){
 	try{
 	for(i=0;i<socallinksarry.length;i++){
 		Common.actionsKeyPress(Keys.END);
-		Common.clickElement("xpath", "//span[text()='"+socallinksarry[i]+"']");
+		Common.clickElement("xpath", "//a[contains(@href,'"+socallinksarry[i]+"')]");
 		Common.switchWindows();
 		System.out.println(Common.getCurrentURL());
 		
-		if(socallinksarry[i].equals("Instagram")){
+		if(socallinksarry[i].equals("instagram")){
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
 		}
 		
-		  else if(socallinksarry[i].equals("Facebook")){
+		  else if(socallinksarry[i].equals("facebook")){
 		  Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.facebook.com"),"Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i],"successfully navigating to social link  "+socallinksarry[i],"Failed to navigate to social link "+socallinksarry[i]);
 		  Common.closeCurrentWindow(); Common.switchToFirstTab(); }
 		 
-   else	if(socallinksarry[i].equals("Twitter")){
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("twitter"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
+   else	if(socallinksarry[i].equals("x.com")){
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/x.com"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
 		}
-   else	if(socallinksarry[i].equals("YouTube")){
+   else	if(socallinksarry[i].equals("youtube")){
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
 			Common.closeCurrentWindow();
 			Common.switchToFirstTab();
 		}
-   else	if(socallinksarry[i].equals("Pinterest")){
+   else	if(socallinksarry[i].equals("pinterest")){
 		Common.assertionCheckwithReport(Common.getCurrentURL().contains("pinterest"), "Verifying Social link  "+socallinksarry[i],"User click the social "+socallinksarry[i], "successfully navigating to social link  "+socallinksarry[i], "Failed to navigate to social link "+socallinksarry[i]);
 		Common.closeCurrentWindow();
 		Common.switchToFirstTab();
