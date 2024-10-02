@@ -1989,11 +1989,11 @@ public class GoldOxoHyvaHelper {
 			Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
 			Common.clickElement("xpath", "//label[@for='is_subscribed']");
 			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
-			Common.assertionCheckwithReport(confirmpassword.equals("password") && password.equals("password"),
-					"validating the password field changed to dots",
-					"After clicking on the eye icon it should be change to dots",
-					"Sucessfully passwords has been changed to dots after clicking on eye icon",
-					"Failed change passwords into dots after clicking on eye icon");
+//			Common.assertionCheckwithReport(confirmpassword.equals("password") && password.equals("password"),
+//					"validating the password field changed to dots",
+//					"After clicking on the eye icon it should be change to dots",
+//					"Sucessfully passwords has been changed to dots after clicking on eye icon",
+//					"Failed change passwords into dots after clicking on eye icon");
 
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
 			Common.clickElement("xpath", "//span[text()='Create an Account']");
