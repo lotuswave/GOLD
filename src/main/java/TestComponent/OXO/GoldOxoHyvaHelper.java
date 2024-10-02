@@ -1088,14 +1088,15 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 	
 	public void click_singinButton() {
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
+			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-			     Common.getText("xpath", "//h1[@id='block-customer-login-heading']").equals("Sign In"),
+					Common.getCurrentURL().contains("customer/account/login"),
 					"To validate the user navigates to the signin page",
-					"user should able to land on the signIn page after clicking on the sigin button",
+					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
 					"User Failed to click the signin button and not navigated to signIn page");
 
@@ -1111,39 +1112,32 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 	}
 	public void Usersignin(String dataSet)  {
 
-		try
-		{
-		Sync.waitPageLoad();
-		Thread.sleep(2000);
-		if(Common.getCurrentURL().contains("preprod"))
-		{
-		Sync.waitPageLoad();
-		Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-		}
-		else {
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Prod Email"));
-		}
-		
-		Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-		Common.clickElement("xpath", "//button[contains(@class,'action lo')]");
-		Sync.waitPageLoad();
-		Thread.sleep(4000);
-		String login=Common.findElement("xpath", "//div[@class='m-account-nav__welcome']//span[@class='a-icon-text-btn__label']").getText();
-		
-		Thread.sleep(2000);
-		
-		Common.assertionCheckwithReport(login.contains("Welcome"),
-				"Validating My Account page navigation", "user sign in and navigate to my account page",
-					"Successfully navigate to my account page", "Failed to navigate my account page ");
-	
-	}
-		catch(Exception | Error e)
-		{
+		try {
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("OXO")
+					 || Common.getPageTitle().contains("My Wish List")
+					|| Common.getPageTitle().contains("Dashboard") || Common.getPageTitle().contains("Checkout"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating My Account page navigation", "user sign in and navigate to my account page",
-					"Unable to navigate to the my account page",
-					Common.getscreenShotPathforReport(
-							"Failed to navigate to the my account page "));
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
 			Assert.fail();
 		}
 
@@ -1152,25 +1146,25 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 	public void addDeliveryAddress_registerUser(String dataSet) {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
-        int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
+        int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 		if (size > 0) {
         	try { 
-				Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",	data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",data.get(dataSet).get("Street"));
+				Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",	data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']']",data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
 				try {
 					Common.clickElement("xpath",
-							"//form[@id='co-shipping-form']//input[@name='street[0]']");
+							"//form[@id='shipping']//input[@name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
 					Common.clickElement("xpath",
-							"//form[@id='co-shipping-form']//input[@name='street[0]']");
+							"//form[@id='shipping']//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -1179,41 +1173,41 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 				
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));
+				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
+				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
 				String Shippingstate = Common.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']").getText();
 
 				System.out.println(Shippingstate);
-
+				
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+				Common.textBoxInput("id", "shipping-city",
 						data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(2000);
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
+				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
 				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
 				
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='telephone']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 				
 				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
 				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
 
-                Common.clickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
+                Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
