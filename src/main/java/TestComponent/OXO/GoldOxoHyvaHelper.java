@@ -1093,11 +1093,6 @@ public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 
 			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
-
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
-			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("customer/account/login"),
