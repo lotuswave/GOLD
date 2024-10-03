@@ -453,10 +453,11 @@ public class CurlsmithE2EHelper {
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.scrollIntoView("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]");
-					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").trim();
+					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").replace("Confirmation ", "").trim();
+					System.out.println(Number);
 					Assert.assertEquals(Number,confirmationNumber);
+					Common.scrollIntoView("xpath", "//h1[@class='Polaris-Header-Title']//span");
 					Ordernumber=Common.findElement("xpath", "//h1[@class='Polaris-Header-Title']//span").getText();
-					
 				}
 				else {
 					Assert.fail();
@@ -584,7 +585,7 @@ public class CurlsmithE2EHelper {
 		}
 		return Orderstatus1;
 	}
-	
+
 	
 	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Discountcode) throws FileNotFoundException, IOException
 	{
