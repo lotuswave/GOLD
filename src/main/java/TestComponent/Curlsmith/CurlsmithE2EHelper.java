@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -406,7 +407,8 @@ public class CurlsmithE2EHelper {
 			Common.openNewTab();
 			
 			Common.oppenURL("https://www.shopify.com/logout?dest=default");
-			
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//a[text()='Log in']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -443,7 +445,8 @@ public class CurlsmithE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getCurrentURL());
-			if(Common.getCurrentURL().equals("https://admin.shopify.com/store/curlsmith-usa-dev/orders")) {
+			if(Common.getCurrentURL().contains("https://admin.shopify.com/store/curlsmith-usa-dev")) {
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@aria-label='Search and filter orders']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Searching all orders']", confirmationNumber);
 				Thread.sleep(4000);
@@ -453,8 +456,10 @@ public class CurlsmithE2EHelper {
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.scrollIntoView("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]");
-					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").trim();
+					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").replace("Confirmation ","").trim();
+					System.out.println(Number);
 					Assert.assertEquals(Number,confirmationNumber);
+					Common.scrollIntoView("xpath", "//h1[@class='Polaris-Header-Title']//span");
 					Ordernumber=Common.findElement("xpath", "//h1[@class='Polaris-Header-Title']//span").getText();
 					
 				}
@@ -561,6 +566,7 @@ public class CurlsmithE2EHelper {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
 		try {
+			Thread.sleep(4000);
 			String Orderstatus=Common.findElement("xpath", "//span[@class='Polaris-Badge Polaris-Badge--toneInfo Polaris-Badge--withPrefix']//span[@class='Polaris-Text--root Polaris-Text--bodySm']").getText();
 			System.out.println(Orderstatus);
 			Orderstatus1.put("AdminOrderStatus", Orderstatus);
@@ -591,7 +597,7 @@ public class CurlsmithE2EHelper {
 		//String fileOut="";
 	try{
 		
-		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Crulsmith/CurlsmithUS_E2E_orderDetails.xlsxs.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;
