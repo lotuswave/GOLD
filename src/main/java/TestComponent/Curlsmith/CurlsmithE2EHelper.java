@@ -411,15 +411,17 @@ public class CurlsmithE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("UserName"));
-			Thread.sleep(3000);
+			Thread.sleep(9000);
 			Sync.waitElementPresent(30,"xpath", "//button[@type='submit']");
 			Common.clickElement("xpath", "//button[@type='submit']");
 			Sync.waitPageLoad();
-			Common.textBoxInput("xpath", "//input[@id='account_password']", data.get(Dataset).get("Password"));
 			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "//input[@id='account_password']", data.get(Dataset).get("Password"));
+			Thread.sleep(9000);
+			Sync.waitElementPresent(30,"xpath", "//button[@type='submit']");
 			Common.clickElement("xpath", "//button[@type='submit']");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Thread.sleep(9000);
 //			Common.textBoxInput("xpath", "//input[@id='account_tfa_code']",)
 			Common.clickElement("xpath", "//button[@type='submit']");
 			
@@ -437,6 +439,9 @@ public class CurlsmithE2EHelper {
 	public void search_order(String confirmationNumber) {
 		// TODO Auto-generated method stub
 		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			System.out.println(Common.getCurrentURL());
 			if(Common.getCurrentURL().equals("https://admin.shopify.com/store/curlsmith-usa-dev/orders")) {
 				Common.clickElement("xpath", "//button[@aria-label='Search and filter orders']");
 				Common.textBoxInput("xpath", "//input[@placeholder='Searching all orders']", confirmationNumber);
@@ -445,7 +450,8 @@ public class CurlsmithE2EHelper {
 				if(size==1) {
 					Common.clickElement("xpath", "//tr[@class='Polaris-IndexTable__TableRow']");
 					Sync.waitPageLoad();
-					Thread.sleep(2000);
+					Thread.sleep(4000);
+					Common.scrollIntoView("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]");
 					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").trim();
 					Assert.assertEquals(Number,confirmationNumber);
 				}
@@ -462,6 +468,87 @@ public class CurlsmithE2EHelper {
 			Assert.fail();
 		}
 		
+	}
+	
+	
+	public void prepareOrdersData(String fileName) {
+		// TODO Auto-generated method stub
+		try{
+
+
+			File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Curlsmith/"+fileName);
+			XSSFWorkbook workbook;
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			if(!(file.exists()))
+			{
+			workbook = new XSSFWorkbook();
+			sheet = workbook.createSheet("CurlsmithUS-O2C-E2E-Testing");
+			CellStyle cs = workbook.createCellStyle();
+			CellStyle ps = workbook.createCellStyle();
+			cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			cs.setFillForegroundColor(IndexedColors.GOLD.getIndex());
+			ps.setFillForegroundColor(IndexedColors.RED.getIndex());
+			Font f = workbook.createFont();
+			f.setBold(true);
+			cs.setFont(f);
+			cs.setAlignment(HorizontalAlignment.RIGHT);
+			row = sheet.createRow(0);
+			cell = row.createCell(0);
+			cell.setCellStyle(cs);
+			cell.setCellValue("Curlsmith US O2C-E2E Test Execution Plan");
+			row = sheet.createRow(1);
+			cell = row.createCell(0);
+			cell.setCellStyle(cs);
+			cell.setCellValue("S.No");
+			cell = row.createCell(1);
+			cell.setCellStyle(cs);
+			cell.setCellValue("Website");
+			cell = row.createCell(2);
+			cell.setCellStyle(cs);
+			
+			cell.setCellStyle(cs);
+			cell.setCellValue("Test scenario Description");
+			cell = row.createCell(3);
+			
+			cell.setCellStyle(cs);
+			cell.setCellValue("SKU");
+			cell = row.createCell(4);
+			cell.setCellStyle(cs);
+			cell.setCellValue("Web Order Number");
+			cell = row.createCell(5);
+			
+			cell.setCellStyle(cs);
+			cell.setCellValue("Order Status Magento");
+           cell = row.createCell(6);
+		
+           cell.setCellStyle(cs);
+			cell.setCellValue("Discount code");
+         cell = row.createCell(7);
+
+           
+			
+			rowcount=2;
+			}
+
+			else
+			{
+			workbook = new XSSFWorkbook(new FileInputStream(file));
+			sheet=workbook.getSheet("DrybarUS-O2C-E2E-Testing");
+			rowcount=sheet.getLastRowNum()+1;
+			}
+	    	FileOutputStream fileOut = new FileOutputStream(file);
+			workbook.write(fileOut);
+			fileOut.flush();
+			fileOut.close();
+
+
+
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
 	}
 }
 

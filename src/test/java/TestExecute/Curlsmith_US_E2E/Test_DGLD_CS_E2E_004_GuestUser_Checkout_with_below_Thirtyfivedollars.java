@@ -19,7 +19,8 @@ public class Test_DGLD_CS_E2E_004_GuestUser_Checkout_with_below_Thirtyfivedollar
 	public void Verifying_GuestUser_Checkout_with_below_fiftydollar () throws Exception {
 
 		try {
-			String Description="Guest user checkout with below 50 $";
+			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
+			String Description="Guest user checkout with below 50 $";	
 			curlsmith.verify_Homepage();
 			curlsmith.search_product("Product");
 			curlsmith.Configurable_addtocart("Configurable Product");
