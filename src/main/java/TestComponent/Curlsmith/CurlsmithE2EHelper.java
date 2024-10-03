@@ -122,6 +122,35 @@ public class CurlsmithE2EHelper {
 		}
 	}
 
+	
+	public void Bundle_product(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		System.out.println(product);
+		try {
+			Common.clickElement("xpath", "//span[text()='Search']//parent::a");
+			String open = Common.findElement("xpath", "//div[@class='site-header__search']//form").getAttribute("class");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(open.contains("is-active"), "User searches using the search field",
+					"User should able to click on the search button", "Search expands to the full page",
+					"Sucessfully search bar should be expand");
+			WebElement serachbar = Common.findElement("xpath", "//input[@class='site-header__search-input']");
+			serachbar.sendKeys(product);
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			Thread.sleep(8000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter product name will display in the search box",
+					" unable to enter the product name in  search box",
+					Common.getscreenShot("Failed to see the product name"));
+			Assert.fail();
+		}
+	}
+	
+	
+	
 	public void Configurable_addtocart(String Dataset) {
 		// TODO Auto-generated method stub
 		
@@ -701,6 +730,67 @@ public class CurlsmithE2EHelper {
 		}
 	}
 
+	public void Bundle_Addtocart(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+
+		try {
+			Sync.waitElementPresent(30,"xpath","//a[contains(@href,'"+products+"')]");
+			Common.clickElement("xpath", "//a[contains(@href,'"+products+"')]");
+			
+			product_quantity(Dataset);
+			Thread.sleep(4000);
+			
+			Sync.waitElementPresent("xpath", "//span[normalize-space()='Add to bag']//parent::button");
+			Common.clickElement("xpath", "//span[normalize-space()='Add to bag']//parent::button");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	public void Register_user_Login(String Dataset) {
+		  // TODO Auto-generated method stub
+		  try {
+		   Sync.waitElementPresent("xpath", "//a[@class='site-nav__link site-nav__link--icon']//img[@loading='lazy']");
+		   Common.clickElement("xpath", "//a[@class='site-nav__link site-nav__link--icon']//img[@loading='lazy']");
+		   Sync.waitPageLoad();
+		   Thread.sleep(4000);
+		   Sync.waitElementPresent("xpath", "//input[@id='account_email']");
+		   Common.textBoxInput("xpath", "//input[@id='account_email']", data.get(Dataset).get("UserName"));
+		   Thread.sleep(3000);
+		   Common.clickElement("xpath", "//span[text()='Continue']");
+		   Thread.sleep(15000);
+		//   Common.textBoxInput("xpath", "//input[@placeholder='6-digit code']", data.get(Dataset).get(""));
+		   Common.clickElement("xpath", "//button[@type='submit']");
+		   Sync.waitPageLoad();
+		   Thread.sleep(4000);
+		   Common.clickElement("xpath", "//span[text()='Go to store']");
+		   Sync.waitPageLoad();
+		   Thread.sleep(4000);
+		  
+		  }
+		  catch(Exception | Error e) {
+		   e.printStackTrace();
+		   ExtenantReportUtils.addFailedLog("validating the Navigation to the Home page",
+		     "System directs the user to the Homepage", " user unable navigates to the home page",
+		     "Failed to navigate to the homepage");
+		   Assert.fail();
+		  }
+		  
+		 }
+	
+	
+	
 	public void DFF_Billing_Shipping(String dataSet) {
 		String address = data.get(dataSet).get("Street");
 
@@ -743,6 +833,12 @@ public class CurlsmithE2EHelper {
 		
 	}
 
+	
+	
+	
+	
+	
+	
 }
 
 
