@@ -563,7 +563,7 @@ public class CurlsmithE2EHelper {
 		try {
 			String Orderstatus=Common.findElement("xpath", "//span[@class='Polaris-Badge Polaris-Badge--toneInfo Polaris-Badge--withPrefix']//span[@class='Polaris-Text--root Polaris-Text--bodySm']").getText();
 			System.out.println(Orderstatus);
-			Orderstatus1.put("AdminOrderStatus", Orderstatus);
+			Orderstatus1.put("AdminOrderstatus", Orderstatus);
 			StringBuilder concatenatedText = new StringBuilder();
 			int size = Common.findElements("xpath", "//div[@class='_ProductDetails_pqnpf_4']//div//span[contains(@class,'Polaris-Text--root Polaris-Text--bodySm Polaris-Text--br')]").size();
 			for (int n=1;n<=size;n++) {
@@ -591,7 +591,7 @@ public class CurlsmithE2EHelper {
 		//String fileOut="";
 	try{
 		
-		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Curlsmith/CurlsmithUS_E2E_orderDetails.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;
