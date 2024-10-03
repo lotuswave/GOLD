@@ -700,6 +700,48 @@ public class CurlsmithE2EHelper {
 		}
 	}
 
+	public void DFF_Billing_Shipping(String dataSet) {
+		String address = data.get(dataSet).get("Street");
+
+		try {
+			
+			int size = Common.findElements("xpath", "//h2[text()='Billing address']").size();
+			if(size>0) {
+				Sync.waitElementPresent("xpath", "//label[text()='Use a different billing address']");
+				Common.clickElement("xpath", "//label[text()='Use a different billing address']");
+				Sync.waitElementPresent("xpath", "//input[@name='firstName' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='firstName' and @placeholder]",
+						data.get(dataSet).get("FirstName"));
+				Sync.waitElementPresent("xpath", "//input[@name='lastName' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='lastName' and @placeholder]",
+						data.get(dataSet).get("LastName"));
+				Sync.waitElementPresent("xpath", "//input[@name='address1' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='address1' and @placeholder]", address);
+				Sync.waitElementPresent("xpath", "//input[@name='city' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='city' and @placeholder]", data.get(dataSet).get("City"));
+				Sync.waitElementPresent("xpath", "//select[@id='Select3']");
+				Common.dropdown("xpath", "//select[@id='Select3']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Sync.waitElementPresent("xpath", "//input[@name='postalCode' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='postalCode' and @placeholder]",
+						data.get(dataSet).get("postcode"));
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+           Common.clickElement("xpath", "//span[text()='Pay now']");
+				
+			}
+			else {
+				
+				Assert.fail();
+			}
+				
+		}
+		catch(Exception| Error e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
+
 }
 
 
