@@ -1,6 +1,8 @@
 package TestExecute.Curlsmith_US_E2E;
 
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -26,10 +28,14 @@ public class Test_DGLD_CS_E2E_004_GuestUser_Checkout_with_below_Thirtyfivedollar
 			curlsmith.Configurable_addtocart("Configurable Product");
 			curlsmith.minicart_Checkout();
 			curlsmith.addDeliveryAddress_Guestuser("Address");
+			String Discountcode="Null";
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber=curlsmith.CC_payment_method("Visa Payment");
 			curlsmith.admin_Sigin("Admin Account Details");
-			curlsmith.search_order(ConfirmationNumber);
+			String OrderNumber=curlsmith.search_order(ConfirmationNumber);
+			 HashMap<String, String> Orderstatus1=curlsmith.orderverification(OrderNumber);
+			 curlsmith.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Discountcode);
+			   
 		
 		} catch (Exception e) {
 

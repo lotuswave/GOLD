@@ -436,8 +436,9 @@ public class CurlsmithE2EHelper {
 		}
 }
 
-	public void search_order(String confirmationNumber) {
+	public String search_order(String confirmationNumber) {
 		// TODO Auto-generated method stub
+		String Ordernumber="";
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -454,6 +455,8 @@ public class CurlsmithE2EHelper {
 					Common.scrollIntoView("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]");
 					String Number=Common.findElement("xpath", "(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]").getText().replace("was generated for this order.", "").trim();
 					Assert.assertEquals(Number,confirmationNumber);
+					Ordernumber=Common.findElement("xpath", "//h1[@class='Polaris-Header-Title']//span").getText();
+					
 				}
 				else {
 					Assert.fail();
@@ -465,9 +468,12 @@ public class CurlsmithE2EHelper {
 		}
 		catch(Exception | Error e) {
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating navigation the the order status page",
+					"After clicking on theorder number it should navigate to the order status page", "User unable to navigate to the order status page",
+					Common.getscreenShotPathforReport("Failed to to navigate to the order status page"));
 			Assert.fail();
 		}
-		
+		return Ordernumber;
 	}
 	
 	
@@ -550,6 +556,122 @@ public class CurlsmithE2EHelper {
 			e.printStackTrace();
 			}
 	}
+
+	public HashMap<String, String> orderverification(String orderNumber) {
+		// TODO Auto-generated method stub
+		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
+		try {
+			String Orderstatus=Common.findElement("xpath", "//span[@class='Polaris-Badge Polaris-Badge--toneInfo Polaris-Badge--withPrefix']//span[@class='Polaris-Text--root Polaris-Text--bodySm']").getText();
+			System.out.println(Orderstatus);
+			Orderstatus1.put("AdminOrderStatus", Orderstatus);
+			StringBuilder concatenatedText = new StringBuilder();
+			int size = Common.findElements("xpath", "//div[@class='_ProductDetails_pqnpf_4']//div//span[contains(@class,'Polaris-Text--root Polaris-Text--bodySm Polaris-Text--br')]").size();
+			for (int n=1;n<=size;n++) {
+			     String sku=Common.findElement("xpath", "(//span[contains(@class,'Polaris-Text--root Polaris-Text--bodySm Polaris-Text--br')])["+n+"]").getText().replace("SKU: ", "");
+	             concatenatedText.append(sku);
+			}
+			String finalsku = concatenatedText.toString();
+			  System.out.println(finalsku);
+			  Orderstatus1.put("Skus", finalsku);
+			
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating navigation the the order status page",
+					"After clicking on theorder number it should navigate to the order status page", "User unable to navigate to the order status page",
+					Common.getscreenShotPathforReport("Failed to to navigate to the order status page"));
+			Assert.fail();
+		}
+		return Orderstatus1;
+	}
+	
+	
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Discountcode) throws FileNotFoundException, IOException
+	{
+		//String fileOut="";
+	try{
+		
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
+		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+		XSSFSheet sheet;
+		Row row;
+		Cell cell;
+		int rowcount;
+		sheet = workbook.getSheet("CurlsmithUS-O2C-E2E-Testing");
+		
+		if((workbook.getSheet("CurlsmithUS-O2C-E2E-Testing"))==null)
+		{
+		sheet = workbook.createSheet("CurlsmithUS-O2C-E2E-Testing");
+		CellStyle cs = workbook.createCellStyle();
+		cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+		cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+		Font f = workbook.createFont();
+		f.setBold(true);
+		cs.setFont(f);	 
+		cs.setAlignment(HorizontalAlignment.RIGHT);
+		row = sheet.createRow(0);
+		cell = row.createCell(0);
+		cell.setCellStyle(cs);
+		cell.setCellValue("CurlsmithUS-O2C-E2E-Testing");
+		
+		row = sheet.createRow(1);
+		cell = row.createCell(0);
+		cell.setCellStyle(cs);
+		cell.setCellValue("Web Order Number");
+		rowcount=2;
+		
+		}
+		
+		else
+		{
+		
+		sheet=workbook.getSheet("CurlsmithUS-O2C-E2E-Testing");	
+		rowcount=sheet.getLastRowNum()+1;
+		}
+		row = sheet.createRow(rowcount);
+		cell = row.createCell(0);
+		cell.setCellType(CellType.NUMERIC);
+		int SNo=rowcount-1;
+		cell.setCellValue(SNo);
+		cell = row.createCell(1);
+		cell.setCellType(CellType.STRING);
+		
+		cell.setCellValue("Curlsmith");
+		
+		cell = row.createCell(2);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Description);
+		
+		cell = row.createCell(3);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Skus);
+		
+		cell = row.createCell(4);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(OrderIdNumber);
+
+		cell = row.createCell(5);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(AdminOrderstatus);
+		
+		cell = row.createCell(6);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Discountcode);
+		
+		
+		
+		System.out.println(OrderIdNumber);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		
+		workbook.write(fileOut);
+	
+		fileOut.flush();
+		fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
 }
 
 
