@@ -10,7 +10,7 @@ import TestComponent.Curlsmith.CurlsmithE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_below_fiftydollars {
+public class Test_DGLD_CS_E2E_004_GuestUser_Checkout_with_below_Thirtyfivedollars {
 
 	String datafile = "Curlsmith/CurlsmithTestData.xlsx";
 	CurlsmithE2EHelper curlsmith = new CurlsmithE2EHelper(datafile,"Dataset");
