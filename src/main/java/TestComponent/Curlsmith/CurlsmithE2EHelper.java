@@ -406,7 +406,7 @@ public class CurlsmithE2EHelper {
 			Common.openNewTab();
 			
 			Common.oppenURL("https://www.shopify.com/logout?dest=default");
-			
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//a[text()='Log in']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -671,7 +671,35 @@ public class CurlsmithE2EHelper {
             e.printStackTrace();
         }
 	}
-	
+
+	public void Simple_Addtocart(String Dataset) {
+		String products = data.get(Dataset).get("Products");
+
+		try {
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			
+			product_quantity(Dataset);
+			Thread.sleep(4000);
+			
+			Sync.waitElementPresent("xpath", "//span[normalize-space()='Add to bag']//parent::button");
+			Common.clickElement("xpath", "//span[normalize-space()='Add to bag']//parent::button");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
+			
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
 }
 
 

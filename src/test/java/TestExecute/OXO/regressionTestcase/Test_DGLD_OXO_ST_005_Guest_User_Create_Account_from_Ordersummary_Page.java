@@ -39,7 +39,7 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
