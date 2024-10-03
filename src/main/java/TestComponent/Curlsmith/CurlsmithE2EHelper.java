@@ -769,7 +769,7 @@ public class CurlsmithE2EHelper {
 		   Common.textBoxInput("xpath", "//input[@id='account_email']", data.get(Dataset).get("UserName"));
 		   Thread.sleep(3000);
 		   Common.clickElement("xpath", "//span[text()='Continue']");
-		   Thread.sleep(15000);
+		   Thread.sleep(9000);
 		//   Common.textBoxInput("xpath", "//input[@placeholder='6-digit code']", data.get(Dataset).get(""));
 		   Common.clickElement("xpath", "//button[@type='submit']");
 		   Sync.waitPageLoad();
@@ -818,6 +818,8 @@ public class CurlsmithE2EHelper {
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
            Common.clickElement("xpath", "//span[text()='Pay now']");
+         String Return_Shipping = Common.getText("xpath", "//span[text()='Return to shipping']");
+         System.out.println(Return_Shipping);
 				
 			}
 			else {
@@ -828,8 +830,35 @@ public class CurlsmithE2EHelper {
 		}
 		catch(Exception| Error e) {
 			e.printStackTrace();
+			
+			ExtenantReportUtils.addFailedLog("validating the user enters billing Address",
+				     "user enters billing Address", " user unable user enters billing Address",
+				     "Failed to user enters billing Address");
 			Assert.fail();
 		}
+		
+	}
+
+	public void FreeItem() {
+		try {
+			int size = Common.findElements("xpath", "//div[text()='Choose a Free Sample']").size();
+			if(size>0) {
+				Sync.waitElementPresent("xpath", "(//button[@title='Add to bag'])[2]");
+				Common.clickElement("xpath", "(//button[@title='Add to bag'])[2]");
+				System.out.println("Free Item Added");
+			}
+			else {
+				Assert.fail();
+			}
+		}
+		catch(Exception| Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Free Item Add to cart",
+				     "user add Free Item Add to cart", " user unable add Free Item Add to cart",
+				     "Failed to add Free Item Add to cart");
+			Assert.fail();
+		}
+		
 		
 	}
 
