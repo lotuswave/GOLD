@@ -37,7 +37,6 @@ public class Test_DGLD_CS_E2E_012_Guestuser_checkout_simpleitem_add_and_delete_f
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Discountcode);
-			   
 		
 		} catch (Exception e) {
 

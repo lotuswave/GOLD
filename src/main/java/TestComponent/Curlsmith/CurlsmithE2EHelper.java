@@ -843,8 +843,9 @@ public class CurlsmithE2EHelper {
 		try {
 			int size = Common.findElements("xpath", "//div[text()='Choose a Free Sample']").size();
 			if(size>0) {
-				Sync.waitElementPresent("xpath", "(//button[@title='Add to bag'])[2]");
-				Common.clickElement("xpath", "(//button[@title='Add to bag'])[2]");
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[@class='grid-item__meta']//button[@title='Add to bag']");
+				Common.clickElement("xpath", "//div[@class='grid-item__meta']//button[@title='Add to bag']");
 				System.out.println("Free Item Added");
 			}
 			else {
@@ -866,12 +867,16 @@ public class CurlsmithE2EHelper {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(4000);
-			for (int i = 0; i <= 10; i++) {
+			int size=Common.findElements("xpath",
+					"//span[@class='cart__price']//span[@class='visually-hidden']").size();
+			System.out.println(size);
+					for (int i = 0; i < size; i++) {
 			List<WebElement> webelementslist = Common.findElements("xpath",
-					"//span[@class='cart__price']//span[@class='visually-hidden']");
+					"//span[@class='cart__price']//span[@aria-hidden='true']/following-sibling::span");
 			String price=webelementslist.get(i).
 					getText().replace("$", "");
-			if(price=="0.00")
+			System.out.println(price);
+			if(price.equals("0.00"))
 			{
 				Common.clickElement("xpath", "//a[@class='text-link js-remove-cart-item']");
 				
