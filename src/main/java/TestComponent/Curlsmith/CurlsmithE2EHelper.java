@@ -350,8 +350,8 @@ public class CurlsmithE2EHelper {
 			Common.textBoxInput("xpath", "//input[@name='address1' and @placeholder]", address);
 			Sync.waitElementPresent("xpath", "//input[@name='city' and @placeholder]");
 			Common.textBoxInput("xpath", "//input[@name='city' and @placeholder]", data.get(dataSet).get("City"));
-			Sync.waitElementPresent("xpath", "//select[@id='Select1']");
-			Common.dropdown("xpath", "//select[@id='Select1']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Sync.waitElementPresent("xpath", "//select[@id='Select2']");
+			Common.dropdown("xpath", "//select[@id='Select2']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			Sync.waitElementPresent("xpath", "//input[@name='postalCode' and @placeholder]");
 			Common.textBoxInput("xpath", "//input[@name='postalCode' and @placeholder]",
 					data.get(dataSet).get("postcode"));
@@ -862,12 +862,59 @@ public class CurlsmithE2EHelper {
 		
 	}
 
-	
-	
-	
-	
-	
-	
+
+	public void RegaddDeliveryAddress(String dataSet) {
+		// TODO Auto-generated method stub
+		String expectedResult = "shipping address is entering in the fields";
+		String address = data.get(dataSet).get("Street");
+		String firstname = data.get(dataSet).get("FirstName");
+		System.out.println(firstname);
+		
+		try {
+		Sync.waitElementClickable(30, "xpath", "//select[@id='Select0']");
+		Common.clickElement("xpath", "//select[@id='Select0']");
+		
+		int size = Common.findElements(By.xpath("//option[text()='Use a new address']")).size();
+		if (size > 0) {
+		
+				Common.dropdown("xpath", "//select[@id='Select0']",  Common.SelectBy.TEXT,"Use a new address");
+
+				Sync.waitElementPresent("xpath", "//input[@name='firstName' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='firstName' and @placeholder]",
+						data.get(dataSet).get("FirstName"));
+				Sync.waitElementPresent("xpath", "//input[@name='lastName' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='lastName' and @placeholder]",
+						data.get(dataSet).get("LastName"));
+				Sync.waitElementPresent("xpath", "//input[@name='address1' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='address1' and @placeholder]", address);
+				Sync.waitElementPresent("xpath", "//input[@name='city' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='city' and @placeholder]", data.get(dataSet).get("City"));
+				Sync.waitElementPresent("xpath", "//select[@id='Select2']");
+				Common.dropdown("xpath", "//select[@id='Select2']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Sync.waitElementPresent("xpath", "//input[@name='postalCode' and @placeholder]");
+				Common.textBoxInput("xpath", "//input[@name='postalCode' and @placeholder]",
+						data.get(dataSet).get("postcode"));
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+			
+			}
+			else {
+				
+				Assert.fail();
+			}
+		
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validating adding  address", expectedResult,
+						"User unabel add shipping address",
+						Common.getscreenShotPathforReport("shipping address faield"));
+
+				Assert.fail();
+
+			}
+
+		}
 }
 
 

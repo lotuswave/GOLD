@@ -32,7 +32,7 @@ public class Test_DGLD_CS_E2E_005_RegisterUser_Simple_ConfigurableProduct_Bundle
 			curlsmith.search_product("Product");
 			curlsmith.Configurable_addtocart("Configurable Product");
 			curlsmith.minicart_Checkout();
-			curlsmith.addDeliveryAddress_Guestuser("Address");
+			curlsmith.RegaddDeliveryAddress("AccountDetails");
 			String Discountcode = "Null";
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber =curlsmith.CC_payment_method("Visa Payment");
