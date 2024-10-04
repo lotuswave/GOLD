@@ -1,6 +1,5 @@
 package TestExecute.Curlsmith_US_E2E;
 
-
 import java.util.HashMap;
 
 import org.testng.Assert;
@@ -15,19 +14,18 @@ import TestLib.Login;
 public class Test_DGLD_CS_E2E_008_RegisterUser_Checkout_2line_Item_Price_Above35Dollars_freeshipping_CC {
 
 	String datafile = "Curlsmith/CurlsmithTestData.xlsx";
-	CurlsmithE2EHelper curlsmith = new CurlsmithE2EHelper(datafile,"Dataset");
+	CurlsmithE2EHelper curlsmith = new CurlsmithE2EHelper(datafile, "Dataset");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_RegisterUserCheckout_2line_Item_Price_Above35Dollars_freeshipping_CC () throws Exception {
+	public void Verifying_RegisterUserCheckout_2line_Item_Price_Above35Dollars_freeshipping_CC() throws Exception {
 
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
-			String Description="Register user checkout with 2line item + Price >35$ + freeshipping +CC";	
+			String Description = "Register user checkout with 2line item + Price >35$ + freeshipping +CC";
 			curlsmith.verify_Homepage();
 			curlsmith.Register_user_Login("AccountDetails");
 			curlsmith.search_product("Configurable Product_2");
 			curlsmith.Configurable_addtocart("Configurable Product_2");
-			
 			curlsmith.search_product("Configurable Product");
 			curlsmith.Configurable_addtocart("Configurable Product");
 			curlsmith.minicart_Checkout();
@@ -35,13 +33,13 @@ public class Test_DGLD_CS_E2E_008_RegisterUser_Checkout_2line_Item_Price_Above35
 			String Discountcode = "Null";
 			curlsmith.select_Shipping_Method();
 			curlsmith.Validating_FreeShipping();
-			String ConfirmationNumber =curlsmith.CC_payment_method("Visa Payment");
+			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
 			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
-			curlsmith.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Discountcode);
-			   
-		
+			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),
+					Orderstatus1.get("AdminOrderstatus"), Discountcode);
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -50,19 +48,15 @@ public class Test_DGLD_CS_E2E_008_RegisterUser_Checkout_2line_Item_Price_Above35
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Curlsmith\\config.properties");
-        Login.signIn();
-       
-        
+		Login.signIn();
 
 	}
 
 }
-
-
