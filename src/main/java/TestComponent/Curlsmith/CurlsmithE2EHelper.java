@@ -208,13 +208,13 @@ public class CurlsmithE2EHelper {
 				
 			Sync.waitPageLoad(30);
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Productsize + "']");
-			Common.javascriptclickElement("xpath", "//img[@alt='" + Productsize + "']");
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//label[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//label[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(8000);
-			String size=Common.findElement("xpath", "(//div[@class='variant-input']/label)[1]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//div[@class='variant-input']/label)[2]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -938,6 +938,28 @@ public class CurlsmithE2EHelper {
 			ExtenantReportUtils.addFailedLog("validating removing the free gift product",
 				     "user should delete the free gift product", " user unable to delete the free gift product",
 				     "Failed to delete the free gift product");
+			Assert.fail();
+		}
+		
+	}
+
+	public void Validating_FreeShipping() {
+		try {
+			
+			String Freeshipping = Common.findElement("xpath", "//span[text()='Free']//parent::div").getText();
+			System.out.println(Freeshipping+"Shipping");
+			
+			Common.assertionCheckwithReport(
+					Freeshipping.equals("FREE"),
+					"validating the Free shipping text is displayed the order total is above 35$",
+					"Free shipping text Should be displayed if the order total is above 35$", "Successfully Free shipping text is displayed after order total is above 35$",
+					"Failed to display Free shipping text if order total is above 35$");
+		}
+		catch(Exception| Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating Free shipping is selected if Product Price above 35$",
+				     "Free shipping is selected if Product Price above 35$", " Free shipping is unable to selected and display",
+				     "Failed to select Free shpping ");
 			Assert.fail();
 		}
 		
