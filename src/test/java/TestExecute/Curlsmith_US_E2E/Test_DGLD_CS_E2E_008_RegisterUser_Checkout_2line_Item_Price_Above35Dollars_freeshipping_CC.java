@@ -50,7 +50,7 @@ public class Test_DGLD_CS_E2E_008_RegisterUser_Checkout_2line_Item_Price_Above35
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

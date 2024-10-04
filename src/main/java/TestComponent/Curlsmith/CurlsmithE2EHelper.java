@@ -944,10 +944,24 @@ public class CurlsmithE2EHelper {
 	}
 
 	public void Validating_FreeShipping() {
+		String Freeshipping="";
 		try {
 			
-			String Freeshipping = Common.findElement("xpath", "//span[text()='Free']//parent::div").getText();
-			System.out.println(Freeshipping+"Shipping");
+			String Price = Common.findElement("xpath", "//strong[@translate='no' and contains(@class, '_19gi7yt0')]").getText();
+			
+			double price = Double.parseDouble(Price.replace("$", "").trim());  
+
+			if (price > 35) {  
+			  
+			    System.out.println("The price is greater than 35.");
+			     Freeshipping = Common.findElement("xpath", "//span[text()='Free']//parent::div").getText();
+				System.out.println(Freeshipping+"Shipping");
+			} else {  
+			    
+			    System.out.println("The price is not greater than 35."); 
+			    Assert.fail();
+			}  
+			
 			
 			Common.assertionCheckwithReport(
 					Freeshipping.equals("FREE"),
