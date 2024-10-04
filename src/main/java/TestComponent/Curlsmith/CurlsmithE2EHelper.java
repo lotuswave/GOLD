@@ -862,6 +862,33 @@ public class CurlsmithE2EHelper {
 		
 	}
 
+	public void delete_FreeItem() {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(4000);
+			for (int i = 0; i <= 10; i++) {
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//span[@class='cart__price']//span[@class='visually-hidden']");
+			String price=webelementslist.get(i).
+					getText().replace("$", "");
+			if(price=="0.00")
+			{
+				Common.clickElement("xpath", "//a[@class='text-link js-remove-cart-item']");
+				
+			}
+			
+		}
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating removing the free gift product",
+				     "user should delete the free gift product", " user unable to delete the free gift product",
+				     "Failed to delete the free gift product");
+			Assert.fail();
+		}
+		
+	}
+
 	
 	
 	
