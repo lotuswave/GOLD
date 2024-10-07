@@ -7646,9 +7646,9 @@ public void FUll_Payment(String dataSet) {
 	    				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 	    				Common.javascriptclickElement("xpath", "//button[contains(text(),'Share Wish List')]");
 	    				Thread.sleep(8000);
-	    				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	    				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 	    				System.out.println(message1);
-	    				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
+	    				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
 	    						"validating the shared whishlist functionality",
 	    						"sucess message should display after share whishlist",
 	    						"Sucessfully message has been displayed for whishlist",
