@@ -5627,7 +5627,8 @@ public void FUll_Payment(String dataSet) {
 				Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 				Thread.sleep(6000);
 				Sync.waitPageLoad();
-				
+				Common.clickElement("xpath", "//span[text()='Pay now']");
+				Thread.sleep(4000);
 				String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
 				if(klarna.contains("Choose how to pay"))
 				{
