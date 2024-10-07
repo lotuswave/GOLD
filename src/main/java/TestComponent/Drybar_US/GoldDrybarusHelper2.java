@@ -6011,6 +6011,7 @@ public void FUll_Payment(String dataSet) {
     				System.out.println(PLPprice);
     				System.out.println(productprice);
     				String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+ 
     				Common.assertionCheckwithReport(productprice.equals(PLPprice),
     						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
     						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
@@ -6026,10 +6027,11 @@ public void FUll_Payment(String dataSet) {
 //    				Common.clickElement("xpath", "//div[@data-option-label='" + productsize + "']");
     				
     				Thread.sleep(2000);
+    				Common.scrollIntoView("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
     				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
 //    				Sync.waitPageLoad(10);   				
     				Thread.sleep(1000);
-    				String newsubcribe = Common.findElement("xpath", "//span[text()='Alert subscription has been saved.']")
+    				String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span")
     						.getText();
     				System.out.println(newsubcribe);
     				Common.assertionCheckwithReport(
@@ -6048,7 +6050,7 @@ public void FUll_Payment(String dataSet) {
     				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
 //    				Sync.waitPageLoad();
     				Thread.sleep(1000);
-    				String oldsubcribe = Common.findElement("xpath", "//span[text()='Thank you! You are already subscribed to this product.']").getText();
+    				String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
     				System.out.println(oldsubcribe);
     				Common.assertionCheckwithReport(
     						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
@@ -6136,8 +6138,8 @@ public void FUll_Payment(String dataSet) {
     					"after clicking on the my account it should navigate to the my account page",
     					"Sucessfully Navigated to the my account page", "failed to Navigate to the my account page");
     			
-    			Sync.waitElementPresent("xpath", "//span[text()='My Out of Stock Subscriptions']");
-    			Common.clickElement("xpath", "//span[text()='My Out of Stock Subscriptions']");
+    			Sync.waitElementPresent("xpath", "//span[text()='Back In Stock Alerts']");
+    			Common.clickElement("xpath", "//span[text()='Back In Stock Alerts']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
     			Sync.waitElementPresent(20, "xpath", "//td[@class='p-2']//a[@title='"+products+"']");
@@ -6175,6 +6177,7 @@ public void FUll_Payment(String dataSet) {
     				Thread.sleep(4000);
     				Common.clickElement("xpath", "//a[@title='Remove This Item']");
     				//Common.implicitWait();
+    				Thread.sleep(3000);
     				Common.alerts("Ok");
 
     			} else {
