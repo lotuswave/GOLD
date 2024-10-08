@@ -967,4 +967,39 @@ public class CurlsmithE2EHelper {
 
 	}
 
+	public void discount_code(String discountcode) {
+		// TODO Auto-generated method stub
+		try {
+			Thread.sleep(3000);
+			String subtotal=Common.findElement("xpath", "(//div[@class='_1qy6ue6b']//span)[1]").getText().replace("$", "");
+			System.out.println(subtotal);
+			Float subtotalvalue = Float.parseFloat(subtotal);
+			Sync.waitElementPresent("xpath", "//input[@placeholder='Discount code']");
+			Common.textBoxInput("xpath", "//input[@placeholder='Discount code']", discountcode);
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Apply Discount Code']");
+			Common.clickElement("xpath", "//button[@aria-label='Apply Discount Code']");
+			Thread.sleep(4000);
+			float discount =(subtotalvalue * 20 / 100);
+			String discountvalue = String.valueOf(discount);
+			Float value = Float.parseFloat(discountvalue);
+			String s=String.valueOf(value); 
+			String websitediscount=Common.findElement("xpath", "//strong[contains(@class,'_19gi7yt0 _19gi7ytw _19gi7ytv _1fragemnu _19gi7yt2 ')]").getText().replace("$", "");
+			System.out.println(websitediscount);
+			System.out.println(s);
+			Common.assertionCheckwithReport(websitediscount.equals(s),
+					"verifying the discount on the webiste",
+					"user should able to see the discount on the website",
+					"user successfully able to apply the discount", "Failed to apply the discount for the user");
+		
+		}
+		catch(Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the discount on the webiste",
+					"user should able to see the discount on the website",
+					"unable to add the discount on the website", "Failed to apply the discount for the user");
+			Assert.fail();
+		}
+		
+	}
+
 }
