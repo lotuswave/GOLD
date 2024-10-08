@@ -464,7 +464,7 @@ public class GoldOxoHyvaHelper {
 	public void minicart_Checkout() {
 
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 //			click_minicart();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
@@ -472,7 +472,7 @@ public class GoldOxoHyvaHelper {
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
-			Thread.sleep(7000);
+			Thread.sleep(6000);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
@@ -686,7 +686,7 @@ public class GoldOxoHyvaHelper {
 	public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
@@ -716,7 +716,7 @@ public class GoldOxoHyvaHelper {
 			String Text = Common.getText("id", "shipping-street-0");
 
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			Common.findElement("id", "shipping-city").clear();
 			Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
@@ -736,7 +736,7 @@ public class GoldOxoHyvaHelper {
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 
@@ -762,25 +762,25 @@ public class GoldOxoHyvaHelper {
 		String method = data.get(Dataset).get("methods");
 
 		try {
-			Thread.sleep(6000);
+			Thread.sleep(15000);
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'" + method + "')]");
-				Common.clickElement("xpath", "//div[contains(text(),'" + method + "')]");
+				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
+				Common.clickElement("xpath", "//span[text()='" + method + "']");
 			} else {
 
 				Common.refreshpage();
 				Thread.sleep(5000);
-				Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'" + method + "')]");
-				Common.clickElement("xpath", "//div[contains(text(),'" + method + "')]");
+				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
+				Common.clickElement("xpath", "//span[text()='" + method + "']");
 
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Standed shipping method",
-					"Select the Standed shipping method in shipping page ",
-					"failed to select the Standed shipping method ",
-					Common.getscreenShotPathforReport("failed select Standed shipping method"));
+			ExtenantReportUtils.addFailedLog("validating the " + method +" shipping method",
+					"Select the " + method +" shipping method in shipping page ",
+					"failed to select the " + method +" shipping method ",
+					Common.getscreenShotPathforReport("failed select " + method +" shipping method"));
 
 			Assert.fail();
 		}
@@ -850,7 +850,7 @@ public class GoldOxoHyvaHelper {
 			addPaymentDetails(dataSet);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
 		if (!url.contains("stage") && !url.contains("preprod")) {
@@ -858,7 +858,7 @@ public class GoldOxoHyvaHelper {
 
 		else {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 				String sucessMessage = Common.getText("xpath",
 						" //h1[normalize-space()='Thank you for your purchase!']");
@@ -873,21 +873,15 @@ public class GoldOxoHyvaHelper {
 
 				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 						.size() > 0) {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-						.size() > 0) {
-					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-					System.out.println(order);
-
-				}
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -914,7 +908,7 @@ public class GoldOxoHyvaHelper {
 
 		try {
 			Sync.waitPageLoad();
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
@@ -930,7 +924,7 @@ public class GoldOxoHyvaHelper {
 			if (payment > 0) {
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -1129,18 +1123,18 @@ public class GoldOxoHyvaHelper {
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']']",
+				Common.textBoxInput("xpath", "//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
 				try {
-					Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]']");
+					Common.clickElement("xpath", "//input[@name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]']");
+					Common.clickElement("xpath", "//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -1153,24 +1147,24 @@ public class GoldOxoHyvaHelper {
 				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
-				String Shippingstate = Common
-						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
-						.getText();
+//				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
+//				String Shippingstate = Common
+//						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
+//						.getText();
 
-				System.out.println(Shippingstate);
+//				System.out.println(Shippingstate);
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
 							data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(2000);
-					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
 							data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
@@ -1184,8 +1178,8 @@ public class GoldOxoHyvaHelper {
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
-				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
-				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
+				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
+				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
