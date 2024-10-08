@@ -486,6 +486,11 @@ public class CurlsmithE2EHelper {
 									"(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]")
 							.getText().replace("was generated for this order.", "").replace("Confirmation ", "").trim();
 					System.out.println(Number);
+					Common.assertionCheckwithReport(Number.equals(confirmationNumber) || Number.contains("Order confirmation email was sent to you"),
+							"To validate the order number in the magneto",
+							"user should able to see the order number in the admin",
+							"User Successfully see the order number in the admin",
+							"User Failed to see the order number in the admin");
 //					Assert.assertEquals(Number, confirmationNumber);
 					Common.scrollIntoView("xpath", "//h1[@class='Polaris-Header-Title']//span");
 					Ordernumber = Common.findElement("xpath", "//h1[@class='Polaris-Header-Title']//span").getText();
@@ -584,7 +589,7 @@ public class CurlsmithE2EHelper {
 		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
 		try {
 			String Orderstatus = Common.findElement("xpath",
-					"//span[@class='Polaris-Badge Polaris-Badge--toneInfo Polaris-Badge--withPrefix']//span[@class='Polaris-Text--root Polaris-Text--bodySm']")
+					"(//div[@class='Polaris-InlineStack']//span[@class='Polaris-Text--root Polaris-Text--bodySm'])[2]")
 					.getText();
 			System.out.println(Orderstatus);
 			Orderstatus1.put("AdminOrderstatus", Orderstatus);
