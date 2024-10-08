@@ -935,8 +935,8 @@ public class GoldDrybarusHelper2 {
 			if (size > 0) {
 
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//div[contains(text(),'" + method + "')]");
-				Common.clickElement("xpath", "//div[contains(text(),'" + method + "')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + method + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'" + method + "')]");
 			} else {
 				Assert.fail();
 
