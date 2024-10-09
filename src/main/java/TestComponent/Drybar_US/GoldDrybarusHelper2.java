@@ -4773,7 +4773,8 @@ public void FUll_Payment(String dataSet) {
 		Thread.sleep(8000);
 		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 		//Thread.sleep(4000);
-		order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
+		//order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
+		order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 		System.out.println(order);
    }
    else
@@ -5391,9 +5392,12 @@ public void FUll_Payment(String dataSet) {
 				if (size == 1) {
 					// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 					// "')]");
-					String method1=Common.findElement("xpath", "//div[@class='pl-3 pr-1']").getText();
+//					String method1=Common.findElement("xpath", "//div[@class='pl-3 pr-1']").getText();
+//					Thread.sleep(2000);
+//					String shipping1= Common.findElement("xpath", "//span[@class='flex items-center']").getText();
+					String method1=Common.findElement("xpath", "//div[@class='pl-3 pr-1 dr:order-1']").getText();
 					Thread.sleep(2000);
-					String shipping1= Common.findElement("xpath", "//span[@class='flex items-center']").getText();
+					String shipping1= Common.findElement("xpath", "//span[@class='price-including-tax']").getText();
 					
 					//String shipping1= Common.findElement("xpath", "//span[@class='price-including-tax']").getText();
 					//String method2=Common.findElement("xpath", "//td[@id='label_method_amstrates4_amstrates-label_carrier_amstrates4_amstrates']").getText();
@@ -10586,7 +10590,7 @@ public void ClickCreateAccount() {
 		Common.clickElement("xpath", "//a[contains(text(),'Create an Account')]");
 		Sync.waitPageLoad();
 		Thread.sleep(5000);
-		Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Account"),
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
 				"Validating Create New Customer Account page navigation",
 				"after Clicking on Create New Customer Account page it will navigate account creation page",
 				"Successfully navigate to the create account page",
