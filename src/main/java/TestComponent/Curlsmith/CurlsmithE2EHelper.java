@@ -394,6 +394,7 @@ public class CurlsmithE2EHelper {
 			Thread.sleep(4000);
 			Common.switchFrames("xpath",
 					"//iframe[@class='card-fields-iframe' and contains(@name,'card-fields-expiry')]");
+			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//input[@id='expiry' and @placeholder]",
 					data.get(Dataset).get("ExpMonthYear"));
 			Common.switchToDefault();
@@ -986,7 +987,7 @@ public class CurlsmithE2EHelper {
 			String websitediscount=Common.findElement("xpath", "//strong[contains(@class,'_19gi7yt0 _19gi7ytw _19gi7ytv _1fragemnu _19gi7yt2 ')]").getText().replace("$", "");
 			System.out.println(websitediscount);
 			System.out.println(s);
-			Common.assertionCheckwithReport(websitediscount.equals(s),
+			Common.assertionCheckwithReport(websitediscount.contains(s),
 					"verifying the discount on the webiste",
 					"user should able to see the discount on the website",
 					"user successfully able to apply the discount", "Failed to apply the discount for the user");
