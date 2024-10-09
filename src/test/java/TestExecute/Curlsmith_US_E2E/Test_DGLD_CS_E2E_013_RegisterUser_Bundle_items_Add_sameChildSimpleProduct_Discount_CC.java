@@ -36,7 +36,7 @@ public class Test_DGLD_CS_E2E_013_RegisterUser_Bundle_items_Add_sameChildSimpleP
 			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
-			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),
+			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),
 					Orderstatus1.get("AdminOrderstatus"), Discountcode);
 
 		} catch (Exception e) {

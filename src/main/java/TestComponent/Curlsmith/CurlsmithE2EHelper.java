@@ -555,17 +555,27 @@ public class CurlsmithE2EHelper {
 				cell.setCellStyle(cs);
 				cell.setCellValue("SKU");
 				cell = row.createCell(4);
+				
 				cell.setCellStyle(cs);
-				cell.setCellValue("Web Order Number");
+				cell.setCellValue("Order Confirmation Number");
 				cell = row.createCell(5);
 
 				cell.setCellStyle(cs);
-				cell.setCellValue("Order Status Magento");
+				cell.setCellValue("Web Order Number");
 				cell = row.createCell(6);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Cutomer PO");
+				cell = row.createCell(7);
+				
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Shopify Admin Status");
+				cell = row.createCell(8);
 
 				cell.setCellStyle(cs);
 				cell.setCellValue("Discount code");
-				cell = row.createCell(7);
+				cell = row.createCell(9);
 
 				rowcount = 2;
 			}
@@ -608,6 +618,12 @@ public class CurlsmithE2EHelper {
 			String finalsku = concatenatedText.toString();
 			System.out.println(finalsku);
 			Orderstatus1.put("Skus", finalsku);
+			
+			String CutomerPO= Common.findElement("xpath",
+					"//h1[@class='Polaris-Header-Title']//span")
+					.getText().replace("#USDEV", "");
+			System.out.println(CutomerPO);
+			Orderstatus1.put("CustomerPO", CutomerPO);
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -620,8 +636,8 @@ public class CurlsmithE2EHelper {
 		return Orderstatus1;
 	}
 
-	public void writeOrderNumber(String Description, String OrderIdNumber, String Skus, String AdminOrderstatus,
-			String Discountcode) throws FileNotFoundException, IOException {
+	public void writeOrderNumber(String Description, String OrderIdNumber, String Skus,String ConfirmationNumber, String AdminOrderstatus,
+			String CustomerPO,String Discountcode) throws FileNotFoundException, IOException {
 		// String fileOut="";
 		try {
 
@@ -678,16 +694,24 @@ public class CurlsmithE2EHelper {
 			cell = row.createCell(3);
 			cell.setCellType(CellType.STRING);
 			cell.setCellValue(Skus);
-
+			
 			cell = row.createCell(4);
 			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(OrderIdNumber);
+			cell.setCellValue(ConfirmationNumber);
 
 			cell = row.createCell(5);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(AdminOrderstatus);
-
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(OrderIdNumber);
+			
 			cell = row.createCell(6);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(AdminOrderstatus);
+			
+			cell = row.createCell(7);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(CustomerPO);
+
+			cell = row.createCell(8);
 			cell.setCellType(CellType.STRING);
 			cell.setCellValue(Discountcode);
 
