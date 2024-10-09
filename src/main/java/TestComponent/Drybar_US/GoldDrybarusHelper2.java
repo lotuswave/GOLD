@@ -12151,7 +12151,7 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 				Thread.sleep(5000);
 				String text = Common.getCurrentURL();
 
-				Common.assertionCheckwithReport(text.contains("/customer/account/create/"),
+				Common.assertionCheckwithReport(text.contains("/account/login/referer/"),
 						"verifying create Account CTA navigation", "user should navigate to the create Account page",
 						"user successfully Navigated to the Create Account page",
 						"Failed navigate to the Create An ccount page");
@@ -12173,7 +12173,7 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 
 		Assert.fail();
 	}
-	close_add();
+//	close_add();
 }
 
 }
