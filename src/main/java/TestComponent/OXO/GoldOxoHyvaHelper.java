@@ -78,8 +78,6 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			// Common.clickElement("xpath", "//button[@class='needsclick klaviyo-close-form
-			// kl-private-reset-css-Xuajs1']");
 
 			int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 			System.out.println(size);
@@ -777,10 +775,10 @@ public class GoldOxoHyvaHelper {
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the " + method +" shipping method",
-					"Select the " + method +" shipping method in shipping page ",
-					"failed to select the " + method +" shipping method ",
-					Common.getscreenShotPathforReport("failed select " + method +" shipping method"));
+			ExtenantReportUtils.addFailedLog("validating the " + method + " shipping method",
+					"Select the " + method + " shipping method in shipping page ",
+					"failed to select the " + method + " shipping method ",
+					Common.getscreenShotPathforReport("failed select " + method + " shipping method"));
 
 			Assert.fail();
 		}
@@ -881,7 +879,6 @@ public class GoldOxoHyvaHelper {
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
-
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -1123,8 +1120,7 @@ public class GoldOxoHyvaHelper {
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//input[@name='street[0]']",
-						data.get(dataSet).get("Street"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
@@ -1419,11 +1415,10 @@ public class GoldOxoHyvaHelper {
 	public void click_Createaccount() {
 
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='nav item']//a[text()='Create an Account']");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[@title='Create an Account']");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
 					"Validating Create New Customer Account page navigation",
 					"after Clicking on Create New Customer Account page it will navigate account creation page",
 					"Successfully navigate to the create account page",
@@ -1961,25 +1956,25 @@ public class GoldOxoHyvaHelper {
 					data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "(//button[@title='Show Password'])[1]");
 //			String accounttext=Common.findElement("xpath", "//div[@data-appearance='full-bleed']//p").getText();
-			String accounttext = Common.findElement("xpath", "//div[@class='order-success-registration-form']/h3").getText();
+			String accounttext = Common.findElement("xpath", "//div[@class='order-success-registration-form']/h3")
+					.getText();
 			String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
 					.getAttribute("type");
-			String password = Common.findElement("xpath", "//input[@name='password']")
-					.getAttribute("type");
+			String password = Common.findElement("xpath", "//input[@name='password']").getAttribute("type");
 //			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 //			String Greencolor = Color.fromString(Message).asHex();
 //			System.out.println(Greencolor);
 //			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
 //			System.out.println(Message1);
 			Common.assertionCheckwithReport(
-							shopping.contains("/shop/coffee-beverage") && kitchen.contains("kitchenware")
+					shopping.contains("/shop/coffee-beverage") && kitchen.contains("kitchenware")
 							&& confirmpassword.equals("text") && password.equals("text")
 							&& accounttext.contains("Create an Account"),
 					"validating the order confirmation page",
 					"User should able to view all details in the order confirmation page",
 					"Sucessfully all details has been displayed in the order confirmation",
 					"Failed to display all details in the order confirmation page");
-		
+
 			Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
 			Common.clickElement("xpath", "//label[@for='is_subscribed']");
 			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
@@ -1994,9 +1989,11 @@ public class GoldOxoHyvaHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[text()='Thank you for registering with OXO Store.']");
-			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO Store.']").getText();
+			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO Store.']")
+					.getText();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Dashboard") && message.contains("Thank you for registering with OXO Store."),
+					Common.getPageTitle().equals("Dashboard")
+							&& message.contains("Thank you for registering with OXO Store."),
 					"validating the  my Account page Navigation when user clicks on signin button",
 					"User should able to navigate to the my account page after clicking on Signin button",
 					"Sucessfully navigate to the My account page after clicking on signin button ",
@@ -5445,17 +5442,19 @@ public class GoldOxoHyvaHelper {
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
-			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+			Common.clickElement("xpath", "//a[normalize-space()='Forgot Password?']");
+			String forgotpassword = Common.findElement("xpath", "//h2[normalize-space()='Forgot Your Password?']")
+					.getText();
 			System.out.println(forgotpassword);
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
-			Common.clickElement("xpath", "//span[text()='Reset My Password']");
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
-			String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
+			Sync.waitPageLoad();
+			Common.textBoxInput("xpath", "//input[@id='email_address']", Utils.getEmailid());
+			Common.clickElement("xpath", "//button[normalize-space()='Reset My Password']");
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message-success')]//span");
+			String message = Common.findElement("xpath", "//div[contains(@ui-id,'message-success')]//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("We received too many requests for password resets")
-							|| message.contains("If there is an account associated"),
+							|| message.contains("If there is an account associated with"),
 					"To validate the user is navigating to Forgot Password page",
 					"user should naviagte to forgot password page", "User lands on Forgot Password page",
 					"User failed to navigate to forgot password page");

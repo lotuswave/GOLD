@@ -46,7 +46,7 @@ public class Test_DGLD_CS_E2E_011_RegisterUser_Configurable_Item_Free_ItemPurcha
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
