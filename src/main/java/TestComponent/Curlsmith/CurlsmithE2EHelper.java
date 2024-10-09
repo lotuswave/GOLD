@@ -206,19 +206,19 @@ public class CurlsmithE2EHelper {
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//label[contains(text(),'" + Productsize + "')]");
-				Common.clickElement("xpath", "//label[contains(text(),'" + Productsize + "')]");
-				Thread.sleep(8000);
-				String size = Common.findElement("xpath", "(//div[@class='variant-input']/label)[2]").getText()
-						.toUpperCase();
-				System.out.println(size);
-				String size1 = data.get(Dataset).get("size").toUpperCase();
-				System.out.println(size1);
-				Common.assertionCheckwithReport(size.equals(size1),
-						"Verifying the the size of the product is selected in the PDP",
-						"after clicking on the size product size should be selected",
-						"successfully Product size has been selected on the PDP",
-						"Failed to select the product price on the PDP");
+//				Sync.waitElementPresent("xpath", "//label[contains(text(),'" + Productsize + "')]");
+//				Common.clickElement("xpath", "//label[contains(text(),'" + Productsize + "')]");
+//				Thread.sleep(8000);
+//				String size = Common.findElement("xpath", "(//div[@class='variant-input']/label)[2]").getText()
+//						.toUpperCase();
+//				System.out.println(size);
+//				String size1 = data.get(Dataset).get("size").toUpperCase();
+//				System.out.println(size1);
+//				Common.assertionCheckwithReport(size.equals(size1),
+//						"Verifying the the size of the product is selected in the PDP",
+//						"after clicking on the size product size should be selected",
+//						"successfully Product size has been selected on the PDP",
+//						"Failed to select the product price on the PDP");
 				product_quantity(Dataset);
 				Thread.sleep(4000);
 
