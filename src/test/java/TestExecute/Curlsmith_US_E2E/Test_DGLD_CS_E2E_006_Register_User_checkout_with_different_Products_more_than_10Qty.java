@@ -26,7 +26,7 @@ public class Test_DGLD_CS_E2E_006_Register_User_checkout_with_different_Products
 			curlsmith.Register_user_Login("AccountDetails");
 			curlsmith.search_product("Simple_product_10qty");
 			curlsmith.Simple_Addtocart("Simple_product_10qty");
-			curlsmith.search_product("Configurable Product_10qty");
+			curlsmith.search_product("Configurable Product");
 			curlsmith.Configurable_addtocart("Configurable Product_10qty");
 			curlsmith.minicart_Checkout();
 			curlsmith.RegaddDeliveryAddress("AccountDetails");

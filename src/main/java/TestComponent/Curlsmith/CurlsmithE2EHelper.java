@@ -487,7 +487,7 @@ public class CurlsmithE2EHelper {
 									"(//div[contains(@class,'_PrimaryMessage')]//p[contains(@class,'_Message')])[2]")
 							.getText().replace("was generated for this order.", "").replace("Confirmation ", "").trim();
 					System.out.println(Number);
-					Common.assertionCheckwithReport(Number.equals(confirmationNumber) || Number.contains("Order confirmation email was sent to you"),
+					Common.assertionCheckwithReport(Number.equals(confirmationNumber) || Number.contains("Order confirmation email was sent to"),
 							"To validate the order number in the magneto",
 							"user should able to see the order number in the admin",
 							"User Successfully see the order number in the admin",
@@ -707,8 +707,8 @@ public class CurlsmithE2EHelper {
 		String products = data.get(Dataset).get("Products");
 
 		try {
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent(30, "xpath", "//div[@data-product-handle='"+ products + "']");
+			Common.clickElement("xpath", "//div[@data-product-handle='"+ products + "']");
 
 			product_quantity(Dataset);
 			Thread.sleep(4000);
