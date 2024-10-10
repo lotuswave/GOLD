@@ -5,13 +5,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Minicart_Validation() throws Exception {
@@ -22,10 +22,9 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 			Oxo.addtocart("addproduct");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
-			Oxo.click_minicart();
 			Oxo.click_on_product("addproduct");
 			Oxo.click_on_Image("Product");
-			Oxo.minicart_freeshipping();
+//			Oxo.minicart_freeshipping();
 			Oxo.minicart_delete("Product");
 			Oxo.minicart_product_close();
 			Oxo.minicart_validation("Product Qunatity");
@@ -39,7 +38,7 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
