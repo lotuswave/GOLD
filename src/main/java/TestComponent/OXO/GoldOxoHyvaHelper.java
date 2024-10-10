@@ -84,7 +84,7 @@ public class GoldOxoHyvaHelper {
 
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("OXO Good")
-							|| Common.getPageTitle().contains("OXO Good Grips, Brew, SteeL, Tot"),
+							|| Common.getPageTitle().contains("Homepage OXO"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
 					"faield to naviagte to homepage");
 		} catch (Exception | Error e) {
@@ -139,19 +139,19 @@ public class GoldOxoHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+				Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
-			Common.clickElement("xpath", "//span[text()=' Feeding & Drinking']");
+			Common.clickElement("xpath", "//span[text()='Feeding & Drinking']");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
@@ -177,10 +177,11 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@class='group-hover/item-image:block hidden']");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -228,9 +229,9 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
+						"//img[@class='group-hover/item-image:block hidden']");
 				String s = webelementslist.get(i).getAttribute("src");
 				Thread.sleep(3000);
 				System.out.println(s);
@@ -3163,115 +3164,68 @@ public class GoldOxoHyvaHelper {
 		// TODO Auto-generated method stub
 		String order = "";
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
-		String email = data.get(dataSet).get("Email");
-		String fullname = data.get(dataSet).get("FirstName");
+		Thread.sleep(3000);	
 		String expectedResult = "User should able to proceed the afterpay payment method";
 
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementClickable("xpath", "//label[@for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
-			System.out.println(payment);
-			if (payment > 0) {
-				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
-				Sync.waitPageLoad();
+//			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+//			System.out.println(payment);
+//			if (payment > 0) {
+				//Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				//Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+						{
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
+//				
+				Common.switchToDefault();
 				Thread.sleep(3000);
-				Sync.waitPageLoad();
-				Sync.waitElementPresent(30, "xpath",
-						"//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
-
-				Common.clickElement("xpath",
-						"//div[@aria-label='Payment Methods']//button[@value='afterpay_clearpay']");
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-//				Common.dropdown("xpath", "//select[@name='country']", Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
-//				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
-//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//				Common.assertionCheckwithReport(
-//						details.equals(email),
-//						"validating the email field for the Afterpay Payment Method",
-//						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
-//						"Failed to enter email in the Afterpay Payment");
-				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Common.clickElement("xpath", "//span[text()='Place Order']");
-					Sync.waitPageLoad();
-					Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
-
-				} else {
-					Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Thread.sleep(3000);
+				
+//				Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+//				Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+//				Thread.sleep(3000);	
+//				
+//				Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
+//				Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//				
+				Thread.sleep(3000);
+				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
+				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+						}
+				else
+				{
+					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String afterpay = Common.findElement("xpath", "//button[@value='afterpay_clearpay']//span")
-							.getText();
-					System.out.println(afterpay);
-					Common.assertionCheckwithReport(afterpay.contains("Afterpay"),
-							"validating the selection of the afterpay method in production environment",
-							"After pay should be select in the production environment",
-							"After pay is selected in the production environment",
-							"Failed to select the after pay method in the production environment");
-					Common.switchToDefault();
-
-				}
-			} else {
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='email']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='email']", email);
-//				Common.clickElement("xpath", "//div[@class='p-Input']//input[@name='name']");
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='name']", fullname);
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='addressLine1']", data.get(dataSet).get("Street"));
-//				Common.textBoxInput("xpath", "//div[@class='p-Input']//input[@name='locality']", data.get(dataSet).get("City"));
-//				Common.dropdown("xpath", "//select[@name='administrativeArea']", Common.SelectBy.TEXT, data.get(dataSet).get("State"));
-//				String details=Common.findElement("xpath", "//div[@class='p-Input']//input[@name='email']").getAttribute("value");
-//				Common.assertionCheckwithReport(
-//						details.equals(email),
-//						"validating the email field for the Afterpay Payment Method",
-//						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
-//						"Failed to enter email in the Afterpay Payment");
-				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					Thread.sleep(4000);
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					Common.clickElement("xpath", "//span[text()='Place Order']");
-					Sync.waitPageLoad();
-					Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+					Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+					Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
+					String Afterpay=Common.findElement("xpath", "//button[@id='afterpay_clearpay-tab']").getAttribute("data-testid");
+					System.out.println(Afterpay);
+					Common.assertionCheckwithReport(
+							Afterpay.contains("afterpay_clearpay"),
+							"validating the selection of the Afterpay method",
+							"Afterpay should be selected ","Afterpay is selected",
+							"Failed to select the Afterpay method in the production environment");
 					Common.switchToDefault();
-
-				} else {
-					Thread.sleep(4000);
-					String afterpay = Common.findElement("xpath", "//button[@value='afterpay_clearpay']//span")
-							.getText();
-					System.out.println(afterpay);
-					Common.assertionCheckwithReport(afterpay.contains("Afterpay"),
-							"validating the selection of the afterpay method in production environment",
-							"After pay should be select in the production environment",
-							"After pay is selected in the production environment",
-							"Failed to select the after pay method in the production environment");
-
 				}
-			}
 		}
+		
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3287,19 +3241,19 @@ public class GoldOxoHyvaHelper {
 		else {
 			try {
 				Thread.sleep(5000);
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				String sucessMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1").trim();
 
-				int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				int size = Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//h1").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unable to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
+				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
 					order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
 					System.out.println(order);
 				}
-				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
 					order = Common.getText("xpath", "//a[@class='order-number']/strong");
 					System.out.println(order);
 				}
@@ -3313,7 +3267,6 @@ public class GoldOxoHyvaHelper {
 
 				Assert.fail();
 			}
-
 		}
 	}
 
