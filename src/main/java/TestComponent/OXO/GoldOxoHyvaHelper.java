@@ -2826,19 +2826,12 @@ public class GoldOxoHyvaHelper {
 			System.out.println(payment);
 			if (payment > 0) {
 				Thread.sleep(2000);
-				
-				//Common.refreshpage();
-//				Common.scrollIntoView("xpath", "//div[@class='stripe-dropdown-selection']");
-//				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-//				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-//				Thread.sleep(4000);
-//				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+	
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				System.out.println("Switch to Frames");
 				Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
-//				Sync.waitElementPresent(30, "xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
-//				Common.clickElement("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+
 
 				Common.switchToDefault();
 				System.out.println("Switch to Default");
@@ -2998,10 +2991,12 @@ public class GoldOxoHyvaHelper {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
-			Thread.sleep(6000);
 			Sync.waitPageLoad();
+			Thread.sleep(8000);
+			
 			Common.clickElement("xpath", "//span[text()='Pay now']");
 			Thread.sleep(4000);
+			Common.refreshpage();
 			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
 			if(klarna.contains("Choose how to pay"))
 			{
