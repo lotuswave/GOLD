@@ -45,7 +45,7 @@ public class Test_DGLD_OXO_ST_002_Register_User_Checkout_Funtionality_Visa_Card 
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
