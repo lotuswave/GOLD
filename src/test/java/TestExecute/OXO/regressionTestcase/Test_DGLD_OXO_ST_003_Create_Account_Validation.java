@@ -22,7 +22,7 @@ public class Test_DGLD_OXO_ST_003_Create_Account_Validation {
 			Oxo.verifingHomePage();
 			Oxo.click_Createaccount();
 			Oxo.createaccount_verfication("Invalid details");
-			Oxo.create_account("AccountDetails");
+			Oxo.create_account("New Account Details");
 
 		} catch (Exception e) {
 
@@ -32,7 +32,7 @@ public class Test_DGLD_OXO_ST_003_Create_Account_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
