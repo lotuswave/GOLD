@@ -1620,20 +1620,17 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+	
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+		
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
@@ -1647,20 +1644,54 @@ public class GoldOxoHyvaHelper {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				expectedResult = "credit card fields are filled with the data";
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				String errorTexts = Common.findElement("xpath", "//p[contains(@id,'numberError')]").getText();
-				System.out.println(errorTexts);
-				String experror = Common.findElement("xpath", "//p[contains(@id,'expiryError')]").getText();
-				System.out.println(experror);
-				String cvcerror = Common.findElement("xpath", "//p[contains(@id,'cvcError')]").getText();
-				System.out.println(cvcerror);
-				Common.assertionCheckwithReport(
-						errorTexts.isEmpty() || errorTexts.contains("Your card number is incomplete."),
-						"validating the credit card information with valid data", expectedResult,
-						"Filled the Card details", "missing field data its showing error");
+				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+
+					Thread.sleep(1000);
+					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	             	  Thread.sleep(10000);
+	             	 if(Common.findElement("xpath", "//div[contains(@class,'error')]").getText().contains("Please complete your payment details."))
+	             	 {
+	             		expectedResult = "credit card fields are filled with the data";
+						String errorTexts = Common.findElement("xpath", "errorText").getText();
+						Common.assertionCheckwithReport(
+								errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+								"validating the credit card information with valid data", expectedResult,
+								"Filled the Card detiles", "missing field data it showinng error");
+	             	 }
+	             	 else if(Common.getCurrentURL().contains("/checkout/#payment"))
+	           	   {
+	           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+	           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+	           		   Thread.sleep(5000);
+	           		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	               	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	               	expectedResult = "credit card fields are filled with the data";
+					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+					Common.assertionCheckwithReport(
+							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+							"validating the credit card information with valid data", expectedResult,
+							"Filled the Card detiles", "missing field data it showinng error");
+	           	   }
+	             	  
+	             	   else
+	             	   {
+	             		   Assert.fail();
+	             	   }
+					
+				} else {
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
+							"");
+					System.out.println(Cardnumber);
+					Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+							"To validate the card details entered in the production environment",
+							"user should able to see the card details in the production environment",
+							"User Successfully able to see the card details enterd in the production environment ",
+							"User Failed to see the card deails in prod environemnt");
+					Common.switchToDefault();
+
+				}
 
 			} else {
 				Thread.sleep(4000);
@@ -1676,20 +1707,60 @@ public class GoldOxoHyvaHelper {
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				Thread.sleep(1000);
-				Common.clickElement("xpath", "//span[text()='Place Order']");
-				expectedResult = "credit card fields are filled with the data";
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				String errorTexts = Common.findElement("xpath", "//p[contains(@id,'numberError')]").getText();
-				System.out.println(errorTexts);
-				String experror = Common.findElement("xpath", "//p[contains(@id,'expiryError')]").getText();
-				System.out.println(experror);
-				String cvcerror = Common.findElement("xpath", "//p[contains(@id,'cvcError')]").getText();
-				System.out.println(cvcerror);
-				Common.assertionCheckwithReport(
-						errorTexts.isEmpty() || errorTexts.contains("Your card number is incomplete."),
-						"validating the credit card information with valid data", expectedResult,
-						"Filled the Card detiles", "missing field data it showinng error");
+				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+
+					Thread.sleep(1000);
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+	             	  Thread.sleep(10000);
+	             		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+	    				Thread.sleep(5000);
+	             	 String errorText = Common.findElement("xpath", "//p[@class='p-FieldError Error']").getText();
+						Common.assertionCheckwithReport(
+								errorText.isEmpty() || errorText.contains("Your card number is incomplete."),
+								"validating the credit card information with valid data", expectedResult,
+								"Filled the Card detiles", "missing field data it showinng error");
+						Common.switchToDefault();
+	             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
+	           	   {
+	           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+	           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+	           		   Thread.sleep(5000);
+	           		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+	               	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	               	expectedResult = "credit card fields are filled with the data";
+					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+					Common.assertionCheckwithReport(
+							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+							"validating the credit card information with valid data", expectedResult,
+							"Filled the Card detiles", "missing field data it showinng error");
+	           	   }
+	             	  else if(Common.getCurrentURL().contains("/checkout/#payment"))
+	             	  {
+	             			expectedResult = "credit card fields are filled with the data";
+	    					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+	    					Common.assertionCheckwithReport(
+	    							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
+	    							"validating the credit card information with valid data", expectedResult,
+	    							"Filled the Card detiles", "missing field data it showinng error"); 
+	             	  }
+	             	   else
+	             	   {
+	             		   System.out.println(errorText);
+	             	   }
+				} else {
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
+							"");
+					System.out.println(Cardnumber);
+					Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+							"To validate the card details entered in the production environment",
+							"user should able to see the card details in the production environment",
+							"User Successfully able to see the card details enterd in the production environment ",
+							"User Failed to see the card deails in prod environemnt");
+					Common.switchToDefault();
+
+				}
 
 			}
 
@@ -1703,6 +1774,7 @@ public class GoldOxoHyvaHelper {
 					Common.getscreenShotPathforReport("Cardinfromationfail"));
 			Assert.fail();
 		}
+
 
 	}
 
