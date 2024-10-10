@@ -1533,13 +1533,13 @@ public class GoldOxoHyvaHelper {
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
-			Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+//			Common.clickElement("xpath", "(//select[@name='qty'])[2]");
 			Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
 
 			Thread.sleep(6000);
-			Sync.waitElementPresent("xpath", "//span[@x-html='item.product_price']//span[@class='price']");
-			String cart = Common.findElement("xpath", "//span[@x-html='item.product_price']//span[@class='price']").getText();
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String cart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(cart);
 			String Subtotal2 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
@@ -8335,6 +8335,7 @@ catch(Exception | Error e)
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if (productname.equals(deleteproduct)) {
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
 						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
 				Common.clickElement("xpath",
