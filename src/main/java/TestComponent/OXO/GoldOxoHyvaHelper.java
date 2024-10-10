@@ -4323,7 +4323,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
 			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']").isSelected();
 			System.out.println(checkbox);
-			Thread.sleep(7000);
+			Thread.sleep(8000);
 			String box=Boolean.toString(checkbox);
 			if(box.contains("true"))
 			{
@@ -4369,6 +4369,7 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//input[@name='telephone' and @data-form='billing']");
 			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
 					data.get(dataSet).get("phone"));
 
