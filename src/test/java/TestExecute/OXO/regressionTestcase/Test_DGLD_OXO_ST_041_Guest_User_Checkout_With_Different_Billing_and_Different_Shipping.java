@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping() throws Exception {
@@ -25,7 +25,7 @@ public class Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
-			Oxo.BillingAddress("BillingDetails");
+			Oxo.Guest_BillingAddress("BillingDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 
 			
