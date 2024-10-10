@@ -38,7 +38,7 @@ public class Test_DGLD_OXO_ST_069_Validate_PDP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

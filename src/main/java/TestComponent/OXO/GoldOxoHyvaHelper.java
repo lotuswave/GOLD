@@ -8692,11 +8692,11 @@ catch(Exception | Error e)
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			// Common.refreshpage();
-			Thread.sleep(8000);
+			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//div[contains(@class,'paypal-button-lab')]");
 			Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
 			Common.switchToDefault();
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
 			if (size > 0) {
@@ -8724,7 +8724,7 @@ catch(Exception | Error e)
 			Common.clickElement("id", "btnNext");
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
-
+			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 
@@ -8735,6 +8735,7 @@ catch(Exception | Error e)
 				Thread.sleep(5000);
 				Paypal_Address_Verification("Express Paypal");
 				Thread.sleep(4000);
+				
 				if (Common.getCurrentURL().contains(""))
 					Common.clickElement("id", "payment-submit-btn");
 				Thread.sleep(8000);
@@ -8746,38 +8747,36 @@ catch(Exception | Error e)
 						Common.getscreenShotPathforReport(expectedResult));
 				Assert.fail();
 			}
-			Thread.sleep(2000);
-			express_paypal_shipping("PaypalDetails");
-			Thread.sleep(2000);
-			if (Common.getCurrentURL().contains("preprod")) {
-				Common.scrollIntoView("xpath", "//button[@value='Place Order']");
+			Thread.sleep(5000);
+//			express_paypal_shipping("PaypalDetails");
+			
+			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			Thread.sleep(3000);
+			select_Shipping_Method("GroundShipping method");
+			Thread.sleep(4000);
+			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
+				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
-				Thread.sleep(2000);
+				
 
-				Common.clickElement("xpath", "//button[@value='Place Order']");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			}
-			// Tell_Your_FriendPop_Up();//To close the Pop-up
-			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			if (!!url1.contains("preprod")) {
-			}
-
-			else {
 				try {
 					Thread.sleep(6000);
-					String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+					String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
 					System.out.println(sucessMessage);
 
-					int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+					int size = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
 					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 							"verifying the product confirmation", expectedResult,
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unable to go orderconformation page");
 
-					if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
-						order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]/p/span").size() > 0) {
+						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/span");
 						System.out.println(order);
 					}
-					if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+					else if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
 						order = Common.getText("xpath", "//a[@class='order-number']/strong");
 						System.out.println(order);
 					}
@@ -8792,7 +8791,6 @@ catch(Exception | Error e)
 					Assert.fail();
 				}
 			}
-		}
 		return order;
 
 	}
