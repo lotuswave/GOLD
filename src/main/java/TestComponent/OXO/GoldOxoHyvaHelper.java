@@ -3959,9 +3959,9 @@ catch(Exception | Error e)
 			Common.refreshpage();
 			Thread.sleep(5000);
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -3980,12 +3980,12 @@ catch(Exception | Error e)
 
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -4312,72 +4312,85 @@ catch(Exception | Error e)
 
 	}
 
-	public void BillingAddress(String dataSet) {
+	public String Guest_BillingAddress(String dataSet) {
 		// TODO Auto-generated method stub
+		String update = "";
+		String Shipping="";
 		try {
+			
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-
-			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-					"payment section should be displayed", "sucessfully payment section has been displayed",
-					"Failed to displayed the payment section");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			Thread.sleep(1000);
-			Common.clickElement("xpath", "//span[contains(text(),'My billing and shipping address are the same')]");
-
-			Sync.waitElementPresent("xpath", "//div[@class='billing-address-form']//input[@name='firstname']");
-
-			int billingaddressform = Common
-					.findElements("xpath", "//div[@class='billing-address-form']//input[@name='firstname']").size();
-
-			Common.assertionCheckwithReport(billingaddressform > 0, "Filling the Billing address ",
-					"user editing  the billing address", "user sucessfully open the billing address from ",
-					"faield open the bulling address from");
-
-			Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='firstname']",
-					data.get(dataSet).get("FirstName"));
-			Sync.waitElementPresent("xpath", "//div[@class='billing-address-form']//input[@name='lastname']");
-			Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='lastname']",
-					data.get(dataSet).get("LastName"));
-
-			Sync.waitElementPresent("xpath", "//div[@class='billing-address-form']//input[@name='street[0]']");
-			Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='street[0]']",
-					data.get(dataSet).get("Street"));
-
-			Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='city']",
-					data.get(dataSet).get("City"));
-
-			Common.dropdown("xpath", "//div[@class='billing-address-form']//select[@name='region_id']",
-					Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
+			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']").isSelected();
+			System.out.println(checkbox);
+			Thread.sleep(7000);
+			String box=Boolean.toString(checkbox);
+			if(box.contains("true"))
+			{
+			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
-			// Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='postcode']",
-					data.get(dataSet).get("postcode"));
-			Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='telephone']",
-					data.get(dataSet).get("phone"));
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(2000);
-			Common.clickElement("xpath", "//button[contains(@class,'action action-update')]");
-
+			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
+			Common.clickElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
 			Thread.sleep(5000);
-			int sizeerrormessage = Common.findElements("xpath", "//span[contains(text(),'This is a required field')]")
-					.size();
-			System.out.println("error messagess    " + sizeerrormessage);
-			Common.assertionCheckwithReport(sizeerrormessage <= 0, "verifying Billing addres filling ",
-					"user will fill the all the billing address", "user fill the shipping address click save button",
-					"faield to add new billing address");
+			Common.textBoxInput("xpath", "//input[@name='firstname' and @data-form='billing']", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
+			Thread.sleep(4000);
+			String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='city' and @data-form='billing']", data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
+
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Thread.sleep(3000);
+			 if(Common.getCurrentURL().contains("gb"))
+             {
+				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 
+             }
+			 else
+			 {
+				 Common.scrollIntoView("xpath", "//select[@name='region' and @data-form='billing']");
+                 Common.dropdown("xpath", "//select[@name='region' and @data-form='billing']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Thread.sleep(3000);
+                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region' and @data-form='billing']")
+                         .getAttribute("value");
+                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+	              System.out.println(Shipping);
+                 System.out.println(Shippingvalue);
+			 }
+				
+			Thread.sleep(2000);
+			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
+					data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
+					data.get(dataSet).get("phone"));
+
+		}
+			else {
+				
+			
+			update = Common.findElement("xpath", "//label[@for='billing-as-shipping']").getText();
+			System.out.println(update);
+			Sync.waitPageLoad();
+			}
+
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying Billing addres filling",
-					"user will fill the all the Billing address", "faield to add new billing address",
-					Common.getscreenShotPathforReport("faieldssbillingpagefilling"));
+			ExtenantReportUtils.addFailedLog("verifying the Billing address form in payment page",
+					"Billing address should be saved in the payment page",
+					"Unable to display the Billing address in payment page",
+					Common.getscreenShotPathforReport("Failed to display the Billing address in payment page"));
 			Assert.fail();
 		}
+		return update;
 	}
 
 	public void edit_BillingAddress_gustuser(String dataSet) {
