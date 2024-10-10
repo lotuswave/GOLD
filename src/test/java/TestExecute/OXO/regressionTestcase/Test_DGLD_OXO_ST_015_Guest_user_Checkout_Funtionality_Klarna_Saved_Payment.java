@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment() throws Exception {
@@ -25,7 +25,7 @@ public class Test_DGLD_OXO_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
-			Oxo.Klarna_Saved_Payment("Klarna Visa Payment");
+			Oxo.Kalrna_Payment("Klarna Visa Payment");
 			
 		} catch (Exception e) {
 
