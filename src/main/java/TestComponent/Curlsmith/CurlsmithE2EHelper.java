@@ -387,6 +387,7 @@ public class CurlsmithE2EHelper {
 		// TODO Auto-generated method stub
 		String ConfirmationNumber = "";
 		try {
+			Thread.sleep(4000);
 			Common.switchFrames("xpath",
 					"//iframe[@class='card-fields-iframe' and contains(@name,'card-fields-number')]");
 			Common.textBoxInput("xpath", "//input[@id='number' and @placeholder]", data.get(Dataset).get("cardNumber"));
@@ -394,7 +395,7 @@ public class CurlsmithE2EHelper {
 			Thread.sleep(4000);
 			Common.switchFrames("xpath",
 					"//iframe[@class='card-fields-iframe' and contains(@name,'card-fields-expiry')]");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@id='expiry' and @placeholder]",
 					data.get(Dataset).get("ExpMonthYear"));
 			Common.switchToDefault();

@@ -496,12 +496,12 @@ public class GoldOxoHyvaHelper {
 
 			Thread.sleep(9000);
 //			Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
 //			Common.javascriptclickElement("xpath", "//a[contains(@class,'c-mini')]");
-			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+			String openminicart = Common.findElement("xpath", "//button[@id='menu-cart-icon']").getAttribute("aria-expanded");
 			System.out.println(openminicart);
-			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
+			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
 					"Should display the mini cart", "Mini cart is displayed", "mini cart is not displayed");
 
 		} catch (Exception | Error e) {
@@ -1526,23 +1526,23 @@ public class GoldOxoHyvaHelper {
 	public void minicart_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
+		String symbol=data.get(Dataset).get("Symbol");
 		try {
 
-			String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("$", "");
+			String Subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
+					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
+			Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
+//			Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+			Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
 
-			Common.clickElement("xpath", "//span[text()='Update']");
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+			Thread.sleep(6000);
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String cart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(cart);
-			String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("$", "");
+			String Subtotal2 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
+					.replace(symbol, "");
 			System.out.println(Subtotal2);
 			Float subtotalvalue2 = Float.parseFloat(Subtotal2);
 			Float Total = subtotalvalue * 3;
@@ -1566,7 +1566,6 @@ public class GoldOxoHyvaHelper {
 		}
 
 	}
-
 	public void discountCode(String dataSet) throws Exception {
 		String expectedResult = "It should opens textbox input.";
 
@@ -8251,8 +8250,8 @@ catch(Exception | Error e)
 		String products = data.get(Dataset).get("Products");
 		try {
 			String minicartproduct = Common
-					.findElement("xpath", "//a[@class='a-product-name' and @title='" + products + "']").getText();
-			Common.clickElement("xpath", "//a[@class='a-product-name' and @title='" + products + "']");
+					.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
+			Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
@@ -8268,8 +8267,8 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 
-	}
 
+	}
 	public void click_on_Image(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
@@ -8295,12 +8294,13 @@ catch(Exception | Error e)
 
 	}
 
+
 	public void minicart_freeshipping() {
 		// TODO Auto-generated method stub
 		try {
-			click_minicart();
+//			click_minicart();
 			String Freeshipping = Common
-					.findElement("xpath", "//div[@class='m-progress-bar false']//div[contains(@class,'label-')]")
+					.findElement("xpath", "//div[@class='flex items-center']//p")
 					.getText();
 			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
 					"validating the free shipping in mini cart",
@@ -8320,34 +8320,37 @@ catch(Exception | Error e)
 	public void minicart_delete(String Dataset) {
 		// TODO Auto-generated method stub
 		String deleteproduct = data.get(Dataset).get("Products");
+		String symbol=data.get(Dataset).get("Symbol");
 
 		try {
-			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__subtotal-amount']//span");
-			String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("$", "");
+			click_minicart();
+			Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span");
+			String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
+					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[1]")
+					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace("$",
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if (productname.equals(deleteproduct)) {
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
+						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
 				Common.clickElement("xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
-				Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
+						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
+				Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			} else {
 				Assert.fail();
 			}
 			Thread.sleep(6000);
-			String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
-					.replace("$", "");
+			String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
+					.replace(symbol, "");
 			Float subtotal1value = Float.parseFloat(subtotal1);
 			Thread.sleep(8000);
-			String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace("$", "");
+			String productamount = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol, "");
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue - productamount1value;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -8369,35 +8372,37 @@ catch(Exception | Error e)
 
 	}
 
+
 	public void minicart_product_close() {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
-			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
-			String minicartpopup = Common.findElement("xpath", "//div[@class='modal-popup confirm _show']")
-					.getAttribute("class");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			String minicartpopup = Common.findElement("xpath", "//div[@x-ref='removeItemConfirm']")
+					.getAttribute("aria-modal");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+			Common.assertionCheckwithReport(minicartpopup.contains("true"),
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
-			String popup = Common.findElement("xpath", "//h2[contains(text(),'Remove')]").getText();
+			String popup = Common.findElement("xpath", "//h2[@x-ref='modalHeader' and contains(text(),'Remove Item')]").getText().trim();
 			if (popup.equals("Remove Item")) {
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
+				Common.clickElement("xpath", "//button[@aria-label='Close']");
 			} else {
 				Assert.fail();
 			}
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
-			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+			Common.assertionCheckwithReport(minicartpopup.contains("true"),
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
+			
 			if (popup.equals("Remove Item")) {
 
-				Common.clickElement("xpath", "//button[@data-role='closeBtn' and @aria-label='Close']");
+				Common.clickElement("xpath", "//button[contains(text(),'Cancel')]");
 			} else {
 				Assert.fail();
 			}

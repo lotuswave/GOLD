@@ -24,10 +24,10 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 			Oxo.addtocart("Product");
 			Oxo.click_on_product("addproduct");
 			Oxo.click_on_Image("Product");
-//			Oxo.minicart_freeshipping();
 			Oxo.minicart_delete("Product");
 			Oxo.minicart_product_close();
 			Oxo.minicart_validation("Product Qunatity");
+			Oxo.minicart_freeshipping();
 			
 			
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
