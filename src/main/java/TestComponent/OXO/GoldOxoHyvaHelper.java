@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -2227,6 +2228,71 @@ public class GoldOxoHyvaHelper {
 
 	}
 
+	
+	public void Sort_By(String Dataset) throws InterruptedException {
+			// TODO Auto-generated method stub
+			String symbol = data.get(Dataset).get("Price_Symbol");
+			String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
+			System.out.println(PriceFilter);
+			System.out.println(symbol);
+			try {
+				Sync.waitPageLoad();
+
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+
+				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+				List<String> Beforefilterpricelist = new ArrayList<String>();
+
+				for (WebElement p : BeforeFilterprice) {
+					Beforefilterpricelist.add(p.getText().replace(symbol, " "));
+					System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
+				}
+				Thread.sleep(4000);
+				Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
+				
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath",
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+				List<WebElement> AfterFilterprice = Common.findElements("xpath",
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+				List<String> Afterfilterpricelist = new ArrayList<String>();
+
+				for (WebElement p : AfterFilterprice) {
+					Afterfilterpricelist.add(p.getText().replace(symbol, " "));
+					System.out.println("Afterfilterpricelist" + Afterfilterpricelist);
+				}
+
+				if (PriceFilter.equals("Highest price")) {
+					Collections.sort(Beforefilterpricelist);
+					System.out.println("Beforefilterpricelist Highest " + Beforefilterpricelist);
+					Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+							"To validate the Sort in Product Listing Page",
+							"User should able to Sort in Product Listing Page",
+							"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+				} else {
+					if (PriceFilter.equals("Lowest price")) {
+						Collections.sort(Beforefilterpricelist, Collections.reverseOrder());
+						System.out.println("Beforefilterpricelist Lowest" + Beforefilterpricelist);
+						Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+								"To validate the Sort in Product Listing Page",
+								"User should able to Sort in Product Listing Page",
+								"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+					}
+
+				}
+				Thread.sleep(2000);
+			} catch (NumberFormatException | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the Sort by functionality",
+						"Products should be display as per selected sort option ",
+						" Unable to display the Products as per selected sort option",
+						Common.getscreenShot("Failed to sort_by"));
+				Assert.fail();
+			}
+
+		}
+	
 	public void giftCreation(String Dataset) {
 		// TODO Auto-generated method stub
 
@@ -4880,18 +4946,21 @@ public class GoldOxoHyvaHelper {
 	public void search_results(String search) {
 
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-					"User should able to click on the search button", "Search expands to the full page",
-					"Sucessfully search bar should be expand");
-			Common.textBoxInput("xpath", "//input[@id='search']", search);
+			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
+			String open = Common.findElement("xpath", "//input[@enterkeyhint='search']").getAttribute("placeholder");
+			Common.assertionCheckwithReport(open.contains("I am searching for..."),
+					"To validate the global search box is opened when we click on the search icon",
+					"User should able to click on the search icon and search box opens",
+					"Sucessfully the gobal search box opend when user clicks on search icon",
+					"Failed to open the search box when user clicks on the search icon");
+			Common.textBoxInput("xpath", "//input[@enterkeyhint='search']", search);
+			
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+			String productsearch = Common.findElement("xpath", "//div[@class='no-results pt-3']//b").getText();
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("Sorry, your search"),
+			Common.assertionCheckwithReport(productsearch.contains("No products for query "),
 					"validating the search functionality",
 					"enter any search term will display no results in the search box",
 					"user enter the search term in  search box", "Failed to see the search term");
@@ -4907,9 +4976,9 @@ public class GoldOxoHyvaHelper {
 
 		try {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Common.scrollIntoView("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']");
+			Common.scrollIntoView("xpath", "//a[text()='FAQ']");
 			String contact = Common
-					.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']").getText();
+					.findElement("xpath", "//a[text()='FAQ']").getText();
 			Thread.sleep(4000);
 			System.out.println(contact);
 			Common.assertionCheckwithReport(contact.contains("FAQ"), "validating the customer service information",
@@ -4989,41 +5058,41 @@ public class GoldOxoHyvaHelper {
 		}
 	}
 
-	public void Validating_search(String search) {
+	public void Invalid_search_product(String Dataset) {
 		// TODO Auto-generated method stub
+		String invalidproduct = data.get(Dataset).get("Products");
+		System.out.println(invalidproduct);
 		try {
+		Common.clickElement("xpath", "//span[@x-show='!searchOpen']");
+			String open = Common.findElement("xpath", "//input[contains(@id, 'autocomplete-0-input')]").getAttribute("type");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(open.contains("search"), "User searches using the search field",
+					"User should able to click on the search button", "Search expands to the full page",
+					"Sucessfully search bar should be expand");
+			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']",
+					data.get(Dataset).get("Products"));
+			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"),
-					"To validate the global search box is opened when we click on the search icon",
-					"User should able to click on the search icon and search box opens",
-					"Sucessfully the gobal search box opend when user clicks on search icon",
-					"Failed to open the search box when user clicks on the search icon");
-			Common.textBoxInput("xpath", "//input[@id='search']", search);
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String close = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(close.contains("c-header-search"),
-					"To validate the global search box is Closed when user click on the close icon",
-					"User should able to click on the close icon and search box should be closed",
-					"Sucessfully the gobal search box closed when user clicks on close icon",
-					"Failed to close the search box when user clicks on the close icon");
+			Thread.sleep(4000);
+			String productsearch = Common.findElement("id", "instant-empty-results-container").getText();
+			//String searchproduct=Common.findElement("id", "instant-empty-results-container").getAttribute("class");
+			//System.out.println(searchproduct);
+			System.out.println(productsearch);
+			Common.assertionCheckwithReport(productsearch.contains("No products for query"),
+					"validating the search functionality", "enter Invalid product name will display in the search box",
+					"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
+			Thread.sleep(8000);
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To validate the global search box is Closed when user click on the close icon",
-					"User should able to click on the close icon and search box should be closed",
-					"Unable to close the gobal search box when user clicks on close icon",
-					Common.getscreenShotPathforReport(
-							"Failed to close the search box when user clicks on the close icon"));
-
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter Invalid product name will display in the search box",
+					" unable to enter the Invalid product name in  search box",
+					Common.getscreenShot("Failed to see the Invalid product name"));
 			Assert.fail();
 		}
-
 	}
+	
 
 	public void click_Shop() {
 
@@ -10621,4 +10690,49 @@ public class GoldOxoHyvaHelper {
 
 	}
 
+	public void Filter() throws InterruptedException {
+			// TODO Auto-generated method stub
+			try {
+
+				Common.scrollIntoView("xpath", "//div[@class='ais-HierarchicalMenu']//span[text()='Shop']");
+				Sync.waitElementPresent("xpath", "//div[@class='ais-HierarchicalMenu']//span[text()='Shop']");
+				Common.clickElement("xpath", "//div[@class='ais-HierarchicalMenu']//span[text()='Shop']");
+				Sync.waitElementPresent("xpath", "//span[text()='Bundles']");
+				Common.clickElement("xpath", "//span[text()='Bundles']");
+				Thread.sleep(4000);
+				String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
+				System.out.println(SelectedFilter);
+				System.out.println("SelectedFilter:" + SelectedFilter);
+				String RetrivedValue = "Set Bundle";
+				if (SelectedFilter.equals("Bundles")) {
+
+					List<WebElement> Series_Filters = Common.findElements("xpath",
+							"//div[contains(@class,'group/item-image')]//a//img");
+
+					for (WebElement Filter : Series_Filters) {
+						// System.out.println(Filter);
+						String AttributeValue = Filter.getAttribute("alt");
+
+						if (AttributeValue.contains(RetrivedValue)) {
+
+							System.out.println("Attribute '" + AttributeValue + "' contains the text '" + RetrivedValue
+									+ "' for product: " + AttributeValue);
+
+						} else {
+
+							System.out.println("Attribute '" + AttributeValue + "' does not contain the text '"
+									+ RetrivedValue + "' for product: " + AttributeValue);
+							Assert.fail();
+						}
+					}
+				}
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the Filter functionality",
+						"Products should be display as per selected Filter option ",
+						" Unable to display the Products as per selected Filter option",
+						Common.getscreenShot("Failed to Filter"));
+				Assert.fail();
+			}
+		}
 }
