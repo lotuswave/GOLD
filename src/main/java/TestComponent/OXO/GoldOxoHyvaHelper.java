@@ -3343,7 +3343,7 @@ catch(Exception | Error e)
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				
 //				Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
 //				Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
@@ -3352,7 +3352,8 @@ catch(Exception | Error e)
 //				Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
 //				Common.clickElement("xpath", "//button[@class='action primary checkout']");
 //				
-				Thread.sleep(3000);
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
 				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 						}
