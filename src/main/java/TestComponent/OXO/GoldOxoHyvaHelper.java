@@ -1441,6 +1441,7 @@ public class GoldOxoHyvaHelper {
 
 	public String create_account(String Dataset) {
 		String email="";
+		String Product=data.get(Dataset).get("Products");
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -1462,7 +1463,7 @@ public class GoldOxoHyvaHelper {
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
-					message.contains("Thank you for registering") ,
+					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing")&& message.contains(Product+ " has been added to your Favorites. Click here to view your Favorites") ,
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
 					"Sucessfully user navigates to the My account page after clickng on thr signup button",
