@@ -8648,11 +8648,11 @@ catch(Exception | Error e)
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
 			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
 			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
-			String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
-			String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
-			String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
+			String shippingAdd = Common.findElement("xpath", "//p[text()='Shipping Address']").getText();
+			String billingAdd = Common.findElement("xpath", "//p[text()='Billing Address']").getText();
+			String shippingmethod = Common.findElement("xpath", "//p[text()='Shipping Method']").getText();
+			
+			String itemsordered = Common.findElement("xpath", "//span[@class='text-sm']").getText();
 			System.out.println(itemsordered);
 
 			Common.assertionCheckwithReport(
