@@ -294,8 +294,8 @@ public class GoldOxoHyvaHelper {
 
 //			click_UGC();
 			product_quantity(Dataset);
-			Common.scrollIntoView("xpath", "//button[@title='Add to Cart']");
-			Common.clickElement("xpath", "//button[@title='Add to Cart']");
+			Common.scrollIntoView("xpath", "(//button[@title='Add to Cart'])[1]");
+			Common.clickElement("xpath", "(//button[@title='Add to Cart'])[1]");
 			Thread.sleep(4000);
 //			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
@@ -309,11 +309,11 @@ public class GoldOxoHyvaHelper {
 					"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
 			Assert.fail();
 		}
-//		click_UGC();
+
 
 	}
-
-	// Grouped
+	
+	
 	public void group_Addtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
@@ -5430,32 +5430,28 @@ catch(Exception | Error e)
 		String product = data.get(Dataset).get("Colorproduct");
 		String productcolor = data.get(Dataset).get("Color");
 		try {
+			
 			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
-					break;
-				}
+			int size = Common.findElements("xpath", "//div[@id='cart-drawer-title']").size();
+			if(size>0) {
+				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+				Thread.sleep(3000);
+				Common.actionsKeyPress(Keys.END);
+				Sync.waitElementPresent("xpath", "//div[@x-data='stickyBar()']//div[@aria-label='Color']//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@x-data='stickyBar()']//div[@aria-label='Color']//div[@data-option-label='" + productcolor +"']");
+				Common.clickElement("xpath", "//div[@x-data='stickyBar()']//button[@title='Add to Cart']");
+				Thread.sleep(3000);
+				Common.actionsKeyPress(Keys.PAGE_UP);
+			  int Opencart = Common.findElements("xpath", "//div[@id='cart-drawer-title']").size();
+				Common.assertionCheckwithReport(Opencart>0, "validating the  product add to the cart",
+						"Product should be add to cart", "Sucessfully product added to the cart ",
+						"failed to add product to the cart");	
+				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 			}
-
-			Sync.waitPageLoad();
-			Common.actionsKeyPress(Keys.END);
-			Sync.waitElementPresent("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[contains(@id,'sticky') and @aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
-			Thread.sleep(4000);
-			Common.actionsKeyPress(Keys.PAGE_UP);
-			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+			else {
+				
+				Assert.fail();
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5471,15 +5467,15 @@ catch(Exception | Error e)
 		String products = data.get(Dataset).get("Products");
 		try {
 
-			Common.scrollIntoView("xpath", "//a[text()='Reviews']");
-			Sync.waitElementPresent("xpath", "//div[@id='tab-label-product.yotpo.reviews']/a");
-			String form = Common.findElement("xpath", "//div[@id='tab-label-product.yotpo.reviews']/a").getText();
+			Common.scrollIntoView("xpath", "//a[text()='Write a review']");
+			Sync.waitElementPresent("xpath", "//a[text()='Write a review']");
+			String form = Common.findElement("xpath", "//a[text()='Write a review']").getText();
 			System.out.println(form);
-			Common.assertionCheckwithReport(form.equals("Reviews"), "verifying the write a review button",
+			Common.assertionCheckwithReport(form.equals("Write a review"), "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Reviews']");
+			Common.clickElement("xpath", "//a[text()='Write a review']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
 
@@ -5496,23 +5492,23 @@ catch(Exception | Error e)
 	public void Recommended_for_you() {
 
 		try {
-			Sync.waitElementPresent("xpath", "//h2[@data-bind='text: storefrontLabel']");
+			Common.scrollIntoView("xpath", "//h2[normalize-space()='Recommended Products']");
 
-			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__right']");
-			Common.clickElement("xpath", "//span[@class='icon-carousel__left']");
+//			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
+			Common.clickElement("xpath", "(//button[@aria-label='Scroll right']//parent::button)[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Scroll right']//parent::button)[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Scroll left']//parent::button)[1]");
 
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
 			String text = Common
 					.findElement("xpath",
-							"//div[@class='u-container c-product-carousel__carousel js-slick-product-carousel']")
+							"//h2[normalize-space()='Recommended Products']")
 					.getText();
 			System.out.println(text);
 
-			Common.assertionCheckwithReport(text.contains("Recommended"),
+			Common.assertionCheckwithReport(text.contains("Recommended Products"),
 					"To Validate the Recommended for you is displayed",
 					"should display the Recommended for you after scroll down the PDP page",
 					"update Recommended for you are displayed after scroll down the PDP page", "Failed to display  ");
