@@ -5820,7 +5820,8 @@ catch(Exception | Error e)
 					.replace(".00", "");
 			System.out.println(lastvalue);
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
