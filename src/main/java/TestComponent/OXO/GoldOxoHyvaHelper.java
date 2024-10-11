@@ -3546,30 +3546,28 @@ catch(Exception | Error e)
 		Accont_Information();
 		try {
 
-			Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
-
-			Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
+			
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//div//input[@id='current-password'])");
-			Common.textBoxInput("xpath", "(//input[@id='current-password'])", data.get(dataSet).get("Password"));
-			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
-			Common.textBoxInput("xpath", "//input[@id='password-confirmation']",
-					data.get(dataSet).get("Confirm Password"));
-			String message = Common.findElement("id", "validation-classes").getCssValue("color");
+			Common.clickElement("xpath", "//label[@for='change-password']");
+			Common.textBoxInput("xpath", "//input[@id='current-password']", data.get(dataSet).get("Current Password"));
+			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Password"));
+			Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
+			
+			String message = Common.findElement("xpath", "//div[@class='password-strength-meter']").getCssValue("background-color");
 			String greencolor = Color.fromString(message).asHex();
-			String message1 = Common.findElement("id", "validation-length").getAttribute("class");
-
-			Common.assertionCheckwithReport(greencolor.equals("#2f741f") && message1.contains("complete"),
+			
+			System.out.println(greencolor);
+			Common.assertionCheckwithReport(greencolor.equals("#f1f1f1"),
 					"validating the cureent password and new password fields",
 					"User should able enter data in current password and new password",
 					"Sucessfully the data has been entered in new password and current password",
 					"Failed to enter data in current password and new password fields");
 
-			Common.clickElement("xpath", "//button[@title='Save']");
+			Common.clickElement("xpath", "//button[@title='Save Account Information']");
 			Thread.sleep(4000);
-			String sucessmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getText();
+			String sucessmessage = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(sucessmessage);
-			Common.assertionCheckwithReport(sucessmessage.contains("You saved the account"),
+			Common.assertionCheckwithReport(sucessmessage.contains("You saved the account information."),
 					"Validating the saved account information", "Account information should be saved for the user",
 					"Sucessfully account information has been saved ", "failed to save the account information");
 
@@ -3582,7 +3580,6 @@ catch(Exception | Error e)
 
 		}
 	}
-
 	public void changed_password(String Dataset) {
 		// TODO Auto-generated method stub
 
@@ -3591,9 +3588,9 @@ catch(Exception | Error e)
 			Common.textBoxInput("id", "email", Dataset);
 			Common.textBoxInput("id", "pass", "Lotuswave@1234");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
 					"To validate the user lands on My Account page after successfull login",
 					"After clicking on the signIn button it should navigate to the My Account page",
 					"user Sucessfully navigate to the My Account page after clicking on the signIn button",
@@ -3615,8 +3612,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementPresent("xpath", "//a[text()='Account Information']");
-			Common.clickElement("xpath", "//a[text()='Account Information']");
+			Sync.waitElementPresent("xpath", "//a[@title='Account Information']");
+			Common.clickElement("xpath", "//a[@title='Account Information']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
 					"validating the Navigation to the Account information page",

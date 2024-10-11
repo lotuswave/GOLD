@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Create_Account_and_Change_Password() throws Exception {
@@ -20,7 +20,7 @@ public class Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page 
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_Createaccount();
-			String NewDetails = Oxo.create_account("AccountDetails");
+			String NewDetails = Oxo.create_account("New Account Details");
 			Oxo.edit_Account_info("NewDetails");
 			Oxo.changed_password(NewDetails);
 			
