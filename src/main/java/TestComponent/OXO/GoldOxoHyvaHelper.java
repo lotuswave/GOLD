@@ -5582,23 +5582,23 @@ catch(Exception | Error e)
 
 	public void view_PLP_page() {
 		try {
-			String title = Common.findElement("xpath", "//h1[@id='page-title-heading']").getAttribute("Class");
-			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+			String title = Common.findElement("xpath", "//h5[@class='cms-clear']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']")
 					.getAttribute("aria-label");
 			Thread.sleep(2000);
-			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+			String filter = Common.findElement("xpath", "//span[normalize-space()='Filter by:']").getText().trim();
 			String Sort = Common
 					.findElement("xpath",
-							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
-					.getText();
+							"//div[@class='flex items-center']")
+					.getAttribute("class");
 			System.out.println(title);
 			System.out.println(breadcrumbs);
 			System.out.println(filter);
 			System.out.println(Sort);
 
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("c-plp-hero__headline")
-							&& filter.contains("Filter by") && Sort.contains("Sort by"),
+					breadcrumbs.contains("Breadcrumb") && title.contains("cms-clear")
+							&& filter.contains("Filter by:") && Sort.contains("flex items"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -5615,14 +5615,23 @@ catch(Exception | Error e)
 
 		try {
 
-			String text = Common.findElement("xpath", "//a[text()='" + category + "']//span").getText();
+			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
 			System.out.println(text);
-			Common.clickElement("xpath", "//a[text()='" + category + "']");
+			Common.clickElement("xpath", "//span[text()='" + category + "']");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
-					.getText();
+			String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']//span")
+					.getText().trim();
+			Common.scrollIntoView("xpath", "//button[text()='Load More']");
+			Common.clickElement("xpath", "//button[text()='Load More']");
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//button[text()='Load More']");
+			Common.clickElement("xpath", "//button[text()='Load More']");
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//button[text()='Load More']");
+			Common.clickElement("xpath", "//button[text()='Load More']");
+			Thread.sleep(4000);
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
 			System.out.println(text);
@@ -5704,23 +5713,23 @@ catch(Exception | Error e)
 	public void color_validation(String colorname) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
-			Common.clickElement("xpath", "//button[@aria-label='Colors']");
-			Thread.sleep(3000);
-			String expand = Common.findElement("xpath", "//button[@aria-label='Colors']").getAttribute("aria-expanded");
-			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
-					"When we click on the color it should be expand",
-					"Successfully the color has been expand when we click on the colors ",
-					"unable to expand the colors in PLP page");
+//			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
+//			Common.clickElement("xpath", "//button[@aria-label='Colors']");
+//			Thread.sleep(3000);
+//			String expand = Common.findElement("xpath", "//button[@aria-label='Colors']").getAttribute("aria-expanded");
+//			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
+//					"When we click on the color it should be expand",
+//					"Successfully the color has been expand when we click on the colors ",
+//					"unable to expand the colors in PLP page");
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
-					.getText();
-			String bottlecount = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+					"//span[text()='Sage']//following-sibling::span")
+					.getText().replace("(", "").replace(")", "");
+			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",

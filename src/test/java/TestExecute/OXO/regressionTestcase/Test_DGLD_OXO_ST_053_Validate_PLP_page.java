@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_053_Validate_PLP_page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_PLP_Page() throws Exception {
 
@@ -21,7 +21,7 @@ public class Test_DGLD_OXO_ST_053_Validate_PLP_page {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.view_PLP_page();
 			Oxo.sort_By("SortBy");
-			Oxo.filter_By("Barware ");
+			Oxo.filter_By("Barware");
 			Oxo.color_validation("Sage");
 			Oxo.price_filter_validation();
 			
