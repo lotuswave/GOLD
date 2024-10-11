@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Account_Registration_Create_Account_With_Cart() throws Exception {
 
@@ -24,7 +24,7 @@ public class Test_DGLD_OXO_ST_006_Account_Registration_Create_Account_With_Cart 
 			Oxo.MyFavorites_Guestuser("Product");
 			String minicart = Oxo.minicart_items();
 			Oxo.click_Createaccount();
-			Oxo.create_account("AccountDetails");
+			Oxo.create_account("New Account Details");
 			Oxo.minicart_products(minicart);
 			
 			

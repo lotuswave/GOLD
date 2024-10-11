@@ -1419,6 +1419,8 @@ public class GoldOxoHyvaHelper {
 
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='Create an Account']");
 			Common.clickElement("xpath", "//a[@title='Create an Account']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -2080,21 +2082,21 @@ public class GoldOxoHyvaHelper {
 		// TODO Auto-generated method stub
 		String items = "";
 		try {
-			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__counter']");
-			items = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			Sync.waitElementPresent("xpath", "//div[@x-text='cartSummaryCount']");
+			items = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 			System.out.println(items);
-			Common.clickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String miniitems = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong")
-					.getText();
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String miniitems = Common.findElement("xpath", "//span[@x-text='totalCartAmount']")
+					.getText().trim();
 			System.out.println(miniitems);
 			Common.assertionCheckwithReport(items.contains(miniitems),
 					"Vaildating the products count in the mini cart ",
 					"Products count shsould be display in the mini cart",
 					"Sucessfully products count has displayed in the mini cart",
 					"failed to display products count in the mini cart");
-			Sync.waitElementPresent("xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -2113,11 +2115,11 @@ public class GoldOxoHyvaHelper {
 	public void minicart_products(String minicart) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-			Common.mouseOverClick("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.mouseOverClick("xpath", "//button[@id='menu-cart-icon']");
 
-			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__counter']");
-			String cartproducts = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[@x-text='cartSummaryCount']");
+			String cartproducts = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 
 			Common.assertionCheckwithReport(cartproducts.equals(minicart),
 					"validating the products in the cart after creating new account ",
@@ -8511,11 +8513,11 @@ catch(Exception | Error e)
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 			Common.actionsKeyPress(Keys.DOWN);
 			Common.mouseOver("xpath", "//img[@alt='" + product + "']");
-			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(@x-data,'initWishlistOnProductList')]");
+			Common.clickElement("xpath", "//button[contains(@x-data,'initWishlistOnProductList')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Customer Login")
 							&& message.contains("You must login or register to add items to your wishlist."),
