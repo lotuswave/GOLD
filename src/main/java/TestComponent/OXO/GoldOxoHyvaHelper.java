@@ -140,9 +140,9 @@ public class GoldOxoHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
+			Common.clickElement("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Thread.sleep(3000);
 
 			try {
