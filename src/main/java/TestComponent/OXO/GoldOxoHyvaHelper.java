@@ -3425,12 +3425,12 @@ catch(Exception | Error e)
 
 	public void click_trackorder() {
 		try {
-			Common.actionsKeyPress(Keys.END);
-			Common.scrollIntoView("xpath", "//a[contains(text(),'Track Your')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Track Your')]");
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//a[@title='Track My Order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
@@ -3450,10 +3450,10 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		click_trackorder();
 		String ordernumber = data.get(dataSet).get("OrderID");
-		String prodordernumber = data.get(dataSet).get("ProdOrderID");
+		String prodordernumber = data.get(dataSet).get("prod order");
 
 		try {
-			if (Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitElementPresent("id", "oar-order-id");
 				Common.textBoxInput("id", "oar-order-id", ordernumber);
 			} else {
@@ -3466,13 +3466,16 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("id", "oar_email");
 			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
 
-			Sync.waitElementPresent("xpath", "//button[@title='Search']");
-			Common.clickElement("xpath", "//button[@title='Search']");
+			Sync.waitElementPresent("xpath", "//button[@type='submit']//span[text()='Search']");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Search']");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			String orderid = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			Thread.sleep(4000);
+			String orderid = Common.findElement("xpath", "//span[@class='title-lg']").getText();
 			System.out.println(orderid);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid), "verifying order status form",
+			String ID=Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("Order #", "");
+			System.out.println(ID);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
+					
 					"order tracking information page navigation", "successfully order tracking information page ",
 					"Failed to navigate tracking order page infromation");
 
