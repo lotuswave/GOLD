@@ -39,7 +39,7 @@ public class Test_DGLD_OXO_ST_038_Guest_User_Checkout_Functionality_Afterpay_Pay
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
