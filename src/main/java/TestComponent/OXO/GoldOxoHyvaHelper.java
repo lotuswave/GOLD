@@ -3427,7 +3427,7 @@ catch(Exception | Error e)
 		try {
 			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
 			Common.clickElement("xpath", "//button[@aria-label='My Account']");
-			Common.clickElement("xpath", "//a[@title='Track My Order']");
+			Common.clickElement("xpath", "//a[contains(text(),'My Orders')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
@@ -3498,7 +3498,7 @@ catch(Exception | Error e)
 
 		try {
 			Sync.waitPageLoad();
-			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			int size = Common.findElements("xpath", "//div[@class='column main']").size();
 			Common.assertionCheckwithReport(size > 0, "Verifying the order numbers in my orders page ",
 					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
 					"successfully order numbers has been displayed in the my orders page",
@@ -8638,16 +8638,16 @@ catch(Exception | Error e)
 
 		try {
 			Sync.waitPageLoad();
-			String number = Common.findElement("xpath", "//a[@title='View Order']").getText();
+			String number = Common.findElement("xpath", "//span[text()='View Order']").getText();
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(40, "xpath", "//h1[@data-ui-id='page-title-wrapper']");
-			String Ordernumber = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
-			Common.findElement("xpath", "//span[contains(@class,'order-status ')]");
-			String reorder = Common.findElement("xpath", "//a[contains(@class,'action or')]//span").getText();
-			String backCTA = Common.findElement("xpath", "//a[contains(@class,'action back')]//span[2]").getText();
-			String orderdate = Common.findElement("xpath", "//div[@class='order-info']/p").getText();
+			Sync.waitElementPresent(40, "xpath", "//span[@class='title-lg']");
+			String Ordernumber = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
+			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
+			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
+			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
 			String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
 			String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
 			String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
@@ -8656,7 +8656,7 @@ catch(Exception | Error e)
 			System.out.println(itemsordered);
 
 			Common.assertionCheckwithReport(
-					reorder.contains("Reorder") && backCTA.contains("Back") && orderdate.contains("Date")
+					reorder.contains("Reorder") && backCTA.contains("Back ") && orderdate.contains("Order Date")
 							&& reorder.contains("Reorder"),
 					"validating the order details ",
 					"After Clicking on view Order it should be navigate to the order details page ",
