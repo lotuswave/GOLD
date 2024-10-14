@@ -6423,8 +6423,8 @@ catch(Exception | Error e)
 	public void reorder() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
-			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[normalize-space()='My Orders']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='View Order']");
