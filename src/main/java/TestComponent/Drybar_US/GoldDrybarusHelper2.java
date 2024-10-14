@@ -6008,7 +6008,7 @@ public void FUll_Payment(String dataSet) {
     				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
     				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
     				Thread.sleep(4000);
-    				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='specialPrice'])[2]").getText().replace(symbol,"").replace(".00", "");
+    				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='normalPrice'])[2]").getText().replace(symbol,"").replace(".00", "");
     				Common.clickElement("xpath", "//img[@alt='" + products + "']");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
