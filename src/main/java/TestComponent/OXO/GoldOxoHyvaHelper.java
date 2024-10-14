@@ -1575,9 +1575,9 @@ public class GoldOxoHyvaHelper {
 
 		try {
 
-			Sync.waitElementClickable("id", "block-discount-heading");
-			Common.scrollIntoView("id", "block-discount-heading");
-			Common.clickElement("id", "block-discount-heading");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Common.scrollIntoView("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 			if (Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -1590,13 +1590,13 @@ public class GoldOxoHyvaHelper {
 			int size = Common.findElements("id", "discount-code").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
+			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
 
