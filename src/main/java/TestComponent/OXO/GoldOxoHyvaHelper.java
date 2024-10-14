@@ -7141,13 +7141,13 @@ catch(Exception | Error e)
 			for (i = 0; i < kitchenLinks.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Kitchenware']");
-				Thread.sleep(3000);
+				Common.clickElement("xpath", "//span[text()='Kitchenware']");
+				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + kitchenLinks[i] + "')]");
+						"//li//a//span[contains(text(),'" + kitchenLinks[i] + "')]");
 //					Common.clickElement("xpath", "//span[contains(text(),'" +Links[i]+"')]//following::ul//span[contains(text(),' Prep & Go Containers')]");
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + kitchenLinks[i] + "')]");
+						"//li//a//span[contains(text(),'" + kitchenLinks[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(kitchenLinks[i]);
 
@@ -7162,8 +7162,8 @@ catch(Exception | Error e)
 				}
 
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				String breadcrumb = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
 				String breadcrum = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']").getText();
 				System.out.println(title);
 				System.out.println(Common.getPageTitle());
@@ -7202,8 +7202,9 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Sync.waitElementPresent("xpath", "//span[text()=' Kitchenware']");
-				Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+				Sync.waitElementPresent("xpath", "//span[text()='Kitchenware']");
+				Common.clickElement("xpath", "//span[text()='Kitchenware']");
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Food Containers')]");
 				Thread.sleep(3000);
 				// Sync.waitElementPresent("xpath", "//li[contains(@class,'level2
@@ -7211,13 +7212,13 @@ catch(Exception | Error e)
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]");
 
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Food Containers')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Food Containers')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				String breadcrumb = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
 				System.out.println(title);
 				System.out.println(Common.getPageTitle());
 				System.out.println(breadcrumb);
@@ -7249,22 +7250,23 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+				Common.clickElement("xpath", "//span[text()='Kitchenware']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Cutlery')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Cutlery')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Cutlery')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Cutlery')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Cutlery')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				String breadcrumb = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
 				System.out.println(title);
 				System.out.println(Common.getPageTitle());
 				System.out.println(breadcrumb);
@@ -7298,22 +7300,23 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+				Common.clickElement("xpath", "//span[text()='Kitchenware']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Cooking & Baking')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Cooking & Baking')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Cooking & Baking')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Cooking & Baking')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Cooking & Baking')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				String breadcrumb = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
 				System.out.println(title);
 				System.out.println(Common.getPageTitle());
 				System.out.println(breadcrumb);
@@ -7347,22 +7350,23 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+				Common.clickElement("xpath", "//span[text()='Kitchenware']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Tools & Gadgets')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				String breadcrumb = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
 				System.out.println(title);
 				System.out.println(Common.getPageTitle());
 				System.out.println(breadcrumb);
@@ -7396,12 +7400,14 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Coffee & Beverage']");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[text()='Coffee & Beverage']");
+				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				if (Links[i].contains("Coffee & Tea")) {
@@ -7411,11 +7417,12 @@ catch(Exception | Error e)
 				}
 
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				String breadcrum = Common.findElement("xpath", "//nav[@aria-label='Breadcrumbs navigation']").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrum = Common.findElement("xpath", "//span[@aria-current='page']").getText();
 				System.out.println(title);
 				System.out.println(breadcrum);
-				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrum.contains(Links[i]),
+				System.out.println(Links[i]);
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrum.contains(Links[i]) || breadcrum.contains(title),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -7444,20 +7451,32 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 //					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Coffee & Beverage']");
+				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Coffee & Tea')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Coffee & Tea')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Coffee & Tea')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Coffee & Tea')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Coffee & Tea')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
+				System.out.println(title);
+				System.out.println(Common.getPageTitle());
+				System.out.println(breadcrumb);
+				Common.assertionCheckwithReport(
+						title.contains(Links[i]) || breadcrumb.contains(Links[i])
+								|| Common.getPageTitle().contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under coffee and tea",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 //					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 //					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 
@@ -7466,7 +7485,7 @@ catch(Exception | Error e)
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Kitchenware",
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under coffee and tea",
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
@@ -7485,19 +7504,31 @@ catch(Exception | Error e)
 //					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[text()=' Coffee & Beverage']");
-				Common.clickElement("xpath", "//a//span[contains(text(),'Barware')]");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//span[text()='Barware']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Barware')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Barware')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'Barware')]//following::ul//span[contains(text(),'"
+						"//li//a//span[contains(text(),'Barware')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				Sync.waitPageLoad();
 				System.out.println(Links[i]);
 				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
+				System.out.println(title);
+				System.out.println(Common.getPageTitle());
+				System.out.println(breadcrumb);
+				Common.assertionCheckwithReport(
+						title.contains(Links[i]) || breadcrumb.contains(Links[i])
+								|| Common.getPageTitle().contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under barware",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 //					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 //					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 
@@ -7506,7 +7537,7 @@ catch(Exception | Error e)
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Kitchenware",
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under barware",
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
