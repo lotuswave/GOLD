@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"Header");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"Header");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Header_Links() throws Exception {
@@ -23,12 +23,13 @@ public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 			Oxo.header_CoffeeAndBeverage("Coffee & Beverage");
 			Oxo.header_CleaningAndOrganization("Cleaning & Organization");
 			Oxo.header_BabyandToddler("BabyAndToddler");
+			Oxo.header_CampandGrill("CampandGrill");
 			Oxo.header_ShopAll("ShopAll");
 			Oxo.header_WeAre_Oxo("WeAreOXO");
 			Oxo.header_1_Percent_Planet();
 			Oxo.header_Menu_ImageItemblocksLinks("ShopAll");
 			
-//			Oxo.header_Shop("Shop");
+			Oxo.header_Shop("Shop");
 			
 		} catch (Exception e) {
 

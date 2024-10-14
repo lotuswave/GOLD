@@ -7724,14 +7724,30 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Baby & Toddler']");
+				Common.clickElement("xpath", "//span[text()='Baby & Toddler']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
+				String breadcrum = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']").getText();
+				System.out.println(title);
+				System.out.println(Common.getPageTitle());
+				System.out.println(breadcrumb);
+				System.out.println(Links[i]);
+				System.out.println(breadcrum);
+
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrum.contains(Links[i])
+						|| breadcrumb.contains(Links[i]) || Common.getPageTitle().contains(Links[i]) ||title.contains(breadcrumb) ,
+						"verifying the header link " + Links[i] + "Under Baby and Toddler",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i],
+						"Failed to navigate to the " + Links[i]);
+
 //					String title=Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 //					Common.assertionCheckwithReport(title.contains(Links[i]), "verifying the header link "+Links[i]+ "Under Kitchenware","user should navigate to the "+Links[i]+" page", "user successfully Navigated to the "+Links[i],"Failed to navigate to the "+Links[i]);
 
@@ -7740,7 +7756,7 @@ catch(Exception | Error e)
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Kitchenware",
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Baby and Toddler",
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
@@ -7748,6 +7764,8 @@ catch(Exception | Error e)
 		}
 
 	}
+
+
 
 	public void header_ShopAll(String Dataset) {
 		// TODO Auto-generated method stub
@@ -11160,6 +11178,54 @@ catch(Exception | Error e)
 	            Common.getscreenShot("Failed to navigate to " + footerLinks[footerLinks.length - 1] + " link."));  
 	        Assert.fail();  
 	    }  
+	}
+
+	public void header_CampandGrill(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Camp and Grill");
+		String[] Links = names.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Common.clickElement("xpath", "//span[text()='Camp & Grill']");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//li//a//span[text()='" + Links[i] + "']");
+				Common.clickElement("xpath",
+						"//li//a//span[text()='" + Links[i] + "']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
+				String breadcrum = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']").getText();
+				System.out.println(title);
+				System.out.println(Common.getPageTitle());
+				System.out.println(breadcrumb);
+				System.out.println(Links[i]);
+				System.out.println(breadcrum);
+
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrum.contains(Links[i])
+						|| breadcrumb.contains(Links[i]) || Common.getPageTitle().contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Baby and Toddler",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i],
+						"Failed to navigate to the " + Links[i]);
+
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Baby and Toddler",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+		
 	}
 	
 	
