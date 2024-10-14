@@ -6649,16 +6649,16 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 
-			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Chefs in Residence']");
+			Common.clickElement("xpath", "//span[normalize-space()='Chefs in Residence']");
 			Sync.waitPageLoad();
 
 			for (i = 0; i < Chef.length; i++) {
 				Sync.waitPageLoad();
 				String link = Common
-						.findElement("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='" + Chef[i] + "']")
+						.findElement("xpath", "//a[normalize-space()='"+Chef[i]+"']")
 						.getText();
 				System.out.println(link);
-				Common.clickElement("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='" + Chef[i] + "']");
+				Common.clickElement("xpath", "//a[normalize-space()='"+Chef[i]+"']");
 				System.out.println(Chef[i]);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(Common.getPageTitle().contains(Chef[i]),
@@ -6689,14 +6689,14 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			for (i = 0; i < Alumni.length; i++) {
 				Common.clickElement("xpath",
-						"//a[@class='level-top ui-corner-all']//span[text()=' Chefs in Residence']");
+						"//span[normalize-space()='Chefs in Residence']");
 				Sync.waitPageLoad();
-				Common.mouseOver("xpath", "//button[text()='Alumni Chefs']");
+				Common.mouseOver("xpath", "//a[text()='Alumni Chefs']");
 				Common.mouseOverClick("xpath",
-						"//div[@class='c_chefs-in-residence_nav']//a[text()='" + Alumni[i] + "']");
+						"//a[normalize-space()='" + Alumni[i] + "']");
 
 				String link = Common
-						.findElement("xpath", "//div[@class='c_chefs-in-residence_nav']//a[text()='" + Alumni[i] + "']")
+						.findElement("xpath", "//a[normalize-space()='" + Alumni[i] + "']")
 						.getText();
 				System.out.println(link);
 				System.out.println(Alumni[i]);
