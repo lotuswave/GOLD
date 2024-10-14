@@ -7780,10 +7780,13 @@ catch(Exception | Error e)
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[text()='Shop All']");
+				Common.clickElement("xpath", "//span[text()='Shop All']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-				Common.assertionCheckwithReport(title.contains(Links[i]),
+				String breadcrumb = Common.findElement("xpath", "//span[@aria-current='page']").getText();
+				Common.assertionCheckwithReport( breadcrumb.contains(Links[i]),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -7801,6 +7804,8 @@ catch(Exception | Error e)
 		}
 
 	}
+
+
 
 	public void header_Kitchenware_ShopAll(String Dataset) {
 		// TODO Auto-generated method stub
@@ -7924,7 +7929,7 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//a[@data-link-type]//span[contains(text(),'" + Link[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
 
 				Common.assertionCheckwithReport(title.contains(Link[i]) || Common.getPageTitle().contains(Link[i]),
 						"verifying the header image link " + Link[i] + "Under Featured",
@@ -7946,6 +7951,7 @@ catch(Exception | Error e)
 
 	}
 
+
 	public void header_WeAre_Oxo(String Dataset) {
 		String Headerlinks = data.get(Dataset).get("We Are OXO");
 		String[] header = Headerlinks.split(",");
@@ -7954,7 +7960,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			for (i = 0; i < header.length; i++) {
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//span[text()=' We Are OXO']");
+				Common.clickElement("xpath", "//span[contains(text(),' We Are OXO')]");
 				Sync.waitElementPresent("xpath",
 						"//div[contains(@class,'megamenu')]//span[contains(text(),'" + header[i] + "')]");
 				Common.clickElement("xpath",
@@ -7987,8 +7993,8 @@ catch(Exception | Error e)
 		String Links1 = "Corporate Responsibility";
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[text()=' We Are OXO']");
-			Common.clickElement("xpath", "//span[text()=' FAQ']");
+			Common.clickElement("xpath", "//span[contains(text(),' We Are OXO')]");
+			Common.clickElement("xpath", "//span[text()='FAQ']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Knowledge Base"),
 					"Validate the header link " + Links,
@@ -8008,8 +8014,8 @@ catch(Exception | Error e)
 		// corporate
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[text()=' We Are OXO']");
-			Common.clickElement("xpath", "//span[text()=' Corporate Responsibility']");
+			Common.clickElement("xpath", "//span[contains(text(),' We Are OXO')]");
+			Common.clickElement("xpath", "//span[text()='Corporate Responsibility']");
 //				  Common.clickElement("xpath","//a[contains(@aria-label,'Corporate Responsibility')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Corporate Responsibility"),
@@ -8028,12 +8034,13 @@ catch(Exception | Error e)
 		}
 	}
 
-	public void header_1_Percent_Planet() {
+
+public void header_1_Percent_Planet() {
 		String Links = "1% For The Planet";
 		try {
-			Common.clickElement("xpath", "//a[contains(@href,'1-percent') and contains(@class,'level-top')]");
+			Common.clickElement("xpath", "//a[contains(@href,'1-percent') and contains(@class,'level-0')]");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("The Planet"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("1% For The Planet"),
 					"Validate the header link " + Links,
 					"Click the header link " + Links + "it will navigate to page" + Links,
 					"successfully navigating to " + Links + "page ", "Failed to navigate to" + Links + "page");
@@ -8047,7 +8054,6 @@ catch(Exception | Error e)
 
 		}
 	}
-
 	public void Ask_a_question(String Dataset) {
 		// TODO Auto-generated method stub
 		String Question = data.get(Dataset).get("Comments");
