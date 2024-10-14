@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_037_Write_a_Review {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"Forms");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"Forms");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Write_a_Review() throws Exception {
@@ -21,9 +21,6 @@ public class Test_DGLD_OXO_ST_037_Write_a_Review {
 			Oxo.verifingHomePage();
 			Oxo.search_product("Product");
 			Oxo.review("review");
-//			Oxo.Ask_a_question("Ask a question");
-//			Oxo.filter_validation("Filters");
-//			Oxo.search_filter("Filters");
 			
 		} catch (Exception e) {
 

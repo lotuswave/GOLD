@@ -4078,19 +4078,20 @@ catch(Exception | Error e)
 		try {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//a[text()='Reviews']");
-			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
-			String form = Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
-			System.out.println(form);
-			Common.assertionCheckwithReport(form.contains("Review"), "verifying the write a review button",
-					"Write a review should be appear in the PDP page",
-					"Sucessfully write a review button has been displayed in PDP page",
-					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Reviews']");
-			Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
-			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Sync.waitElementPresent(30, "xpath", "//span[@class='yotpo-stars']");
+				Common.clickElement("xpath", "//span[@class='yotpo-stars']");
+				Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+				String form = Common.getText("xpath", "//span[text()='Write A Review']");
+				System.out.println(form);
+				Common.assertionCheckwithReport(form.contains("Write A Review"), "verifying the write a review button",
+						"Write a review should be appear in the PDP page",
+						"Sucessfully write a review button has been displayed in PDP page",
+						"Failed to display the write a review button in PDP page");
+				Common.clickElement("xpath", "//span[text()='Write A Review']");
+				
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
