@@ -4116,65 +4116,65 @@ public void addtocart_PLP(String Dataset) {
 
 public void review(String Dataset) {
 	// TODO Auto-generated method stub
-	String products=data.get(Dataset).get("Products");
-	try
-	{
+	String products = data.get(Dataset).get("Products");
+	try {
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 		Common.clickElement("xpath", "//img[@alt='" + products + "']");
-		Thread.sleep(4000);
-		Common.scrollIntoView("xpath", "//a[text()='Reviews']");
-		Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
-		String form=Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
-		System.out.println(form);
-		Common.assertionCheckwithReport(form.contains("Review"),
-				"verifying the write a review button", "Write a review should be appear in the PDP page",
-				"Sucessfully write a review button has been displayed in PDP page", "Failed to display the write a review button in PDP page");
-		Common.clickElement("xpath", "//a[text()='Reviews']");
-		Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
-		Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-		Common.clickElement("xpath", "//span[text()='Write A Review']");
-	
-	}
-	catch(Exception | Error e)
-	{
+		
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		Sync.waitElementPresent(30, "xpath", "//span[@class='yotpo-stars']");
+			Common.clickElement("xpath", "//span[@class='yotpo-stars']");
+			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+			String form = Common.getText("xpath", "//span[text()='Write A Review']");
+			System.out.println(form);
+			Common.assertionCheckwithReport(form.contains("Write A Review"), "verifying the write a review button",
+					"Write a review should be appear in the PDP page",
+					"Sucessfully write a review button has been displayed in PDP page",
+					"Failed to display the write a review button in PDP page");
+			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			
+
+	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
-				"User Unable to click write review option  ", Common.getscreenShotPathforReport("User Failed to click write review option "));
+				"User Unable to click write review option  ",
+				Common.getscreenShotPathforReport("User Failed to click write review option "));
 		Assert.fail();
 	}
-	try
-	{
-		String expectedResult="Sucessfully title input box has been displayed";
+	try {
+		String expectedResult = "Sucessfully title input box has been displayed";
 		score(data.get(Dataset).get("score"));
 		Common.actionsKeyPress(Keys.DOWN);
 		Common.actionsKeyPress(Keys.DOWN);
 		Sync.waitElementPresent("xpath", "//input[@name='review_title']");
 		Common.scrollIntoView("xpath", "//input[@name='review_title']");
-		int title=Common.findElements("xpath", "//input[@name='review_title']").size();
-		Common.assertionCheckwithReport(title > 0, "verifying the title page", "title input box should be displayed",
-				expectedResult, "User Unable to display the title box");
-//		Common.textBoxInput("xpath", "//input[@name='review_title']",data.get(Dataset).get("title"));
-		Common.clickAndtextBoxInput("xpath", "//input[@name='review_title']",data.get(Dataset).get("title"));
+		int title = Common.findElements("xpath", "//input[@name='review_title']").size();
+		Common.assertionCheckwithReport(title > 0, "verifying the title page",
+				"title input box should be displayed", expectedResult, "User Unable to display the title box");
+//	Common.textBoxInput("xpath", "//input[@name='review_title']",data.get(Dataset).get("title"));
+		Common.clickAndtextBoxInput("xpath", "//input[@name='review_title']", data.get(Dataset).get("title"));
 		Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
 		Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
 		Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 		Common.clickElement("xpath", "//input[@value='Post']");
 		Thread.sleep(4000);
-		String message=Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
+		String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
 		Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
-				"verifying the post for the product review", "product review should be submit after clicking on post",
+				"verifying the post for the product review",
+				"product review should be submit after clicking on post",
 				"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
-		
-	}
-	catch(Exception | Error e)
-	{
+
+	} catch (Exception | Error e) {
 		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("verifying the post for the product review", "product review should be submit after clicking on post",
-				"Unable to display the Thank you message after clickng on post ", Common.getscreenShotPathforReport("Failed to display the thank you message"));
+		ExtenantReportUtils.addFailedLog("verifying the post for the product review",
+				"product review should be submit after clicking on post",
+				"Unable to display the Thank you message after clickng on post ",
+				Common.getscreenShotPathforReport("Failed to display the thank you message"));
 		Assert.fail();
-		
+
 	}
-	
+
 }
 
 

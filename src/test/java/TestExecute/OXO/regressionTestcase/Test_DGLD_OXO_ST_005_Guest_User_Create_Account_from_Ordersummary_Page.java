@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
 import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
@@ -27,7 +26,6 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			Oxo.createAccountFromOrderSummaryPage("AccountDetails");
-//			Oxo.newsletter_subscription();
 			
 	
 
@@ -39,7 +37,7 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
