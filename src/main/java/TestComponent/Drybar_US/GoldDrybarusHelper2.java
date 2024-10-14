@@ -181,16 +181,23 @@ public class GoldDrybarusHelper2 {
 				Thread.sleep(4000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(4000);
-			  if(Productsize.contains(Common.findElement("xpath", "(//input[@name='super_attribute[1346]'])[3]").getAttribute("aria-label")))
+			  if(Productsize.contains(Common.findElement("xpath", "(//input[@name='super_attribute[1346]'])[5]").getAttribute("aria-label")))
 			  {
-				Sync.waitElementPresent("xpath",
-						"//input[@aria-label='" + Productsize + "']");
-				Common.clickElement("xpath",
-						"//input[@aria-label='" + Productsize + "']");
+				  
+				  System.out.println(products);
+				//Sync.waitElementPresent("xpath","(//input[@aria-label='" + Productsize + "'])[3]");
+				//Common.clickElement("xpath","(//input[@aria-label='" + Productsize + "'])[3]");
+				Thread.sleep(3000);
 			  }
 			  else
 			  {
-				  System.out.println(products);
+				 // System.out.println(products);
+				  
+				//Sync.waitElementPresent("xpath","(//input[@aria-label='" + Productsize + "'])[3]");
+					Common.clickElement("xpath",
+							"(//input[@aria-label='" + Productsize + "'])[3]");
+					Thread.sleep(3000);
+				  
 			  }
 				Sync.waitElementPresent("xpath", "(//button[@form='product_addtocart_form'])[2]");
 				Common.clickElement("xpath", "(//button[@form='product_addtocart_form'])[2]");
