@@ -7503,7 +7503,7 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 //					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Coffee & Beverage']");
+				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Barware']");
 				Thread.sleep(3000);
@@ -7827,13 +7827,13 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[text()=' Coffee & Beverage']");
+				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),' " + Links[i] + "')]");
 				Common.clickElement("xpath", "//a[contains(@aria-label,'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
+				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
 				Common.assertionCheckwithReport(title.contains(Links[i]),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
