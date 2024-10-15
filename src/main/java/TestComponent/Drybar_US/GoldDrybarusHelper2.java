@@ -128,8 +128,8 @@ public class GoldDrybarusHelper2 {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page")
-					|| Common.getPageTitle().contains("Drybar") || Common.getPageTitle().contains("My Wish List")
-					|| Common.getPageTitle().contains("Drybar Home")
+					|| Common.getPageTitle().contains("Drybar") || Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("Wish List")
+					|| Common.getPageTitle().contains("Dryba Home")
 					|| Common.getPageTitle().contains("Drybar - Home page")
 					|| Common.getPageTitle().contains("Dashboard") || Common.getPageTitle().contains("Checkout"),
 					"To validate the user lands on Home page after successfull login",
