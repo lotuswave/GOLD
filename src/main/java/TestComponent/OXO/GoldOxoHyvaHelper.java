@@ -3008,8 +3008,10 @@ public class GoldOxoHyvaHelper {
 				
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 				{
+					Thread.sleep(5000);
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Sync.waitPageLoad();
+				Thread.sleep(4000);
 				klarna_Details(dataSet);
 				}
 				else
