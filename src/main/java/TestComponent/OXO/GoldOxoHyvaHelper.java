@@ -8873,7 +8873,7 @@ public void header_1_Percent_Planet() {
 
 			// Common.refreshpage();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//div[contains(@class,'paypal-button-lab')]");
+			Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
 			Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
 			Common.switchToDefault();
 			Thread.sleep(4000);
@@ -8930,9 +8930,9 @@ public void header_1_Percent_Planet() {
 			Thread.sleep(5000);
 //			express_paypal_shipping("PaypalDetails");
 			
-			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			Thread.sleep(3000);
-			select_Shipping_Method("GroundShipping method");
+//			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+//			Thread.sleep(3000);
+//			select_Shipping_Method("GroundShipping method");
 			Thread.sleep(4000);
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
