@@ -22,7 +22,7 @@ public class TEST_DGLD_DB_US_ST_039_GuestUser_Add_product_from_pdp_to_wishlist_s
 			Drybar.Verify_Homepage();
 			Drybar.search_product("Product");  
 		    Drybar.pdp_add_myfav("Product");
-		    Drybar.click_singinButton();
+		   // Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
 			Drybar.My_Favorites();       // need to add to checkout also present it is not dispalying in my fav
 			Drybar.Add_to_cart_Whishlist();
