@@ -3650,10 +3650,10 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
-			Common.switchFrames("xpath", "//iframe[@title='OXO Gold Footer Signup']");
-			Sync.waitElementClickable(30, "xpath", "//input[@id='form_input_email']");
-			Common.textBoxInput("xpath", "//input[@id='form_input_email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//button[text()='Submit']");
+//			Common.switchFrames("xpath", "//iframe[@title='OXO Gold Footer Signup']");
+			Sync.waitElementClickable(30, "xpath", "//input[@id='subscribe-email']");
+			Common.textBoxInput("xpath", "//input[@id='subscribe-email']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//span[text()='Submit']");
 			String Errormessage = Common.findElement("xpath", "//span[@class='error-message']").getText();
 			System.out.println(Errormessage); // Error: Please enter a valid email address. (previous error)
 			Common.assertionCheckwithReport(Errormessage.equals("Your Email is in an invalid format."),
@@ -3702,13 +3702,12 @@ catch(Exception | Error e)
 			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//input[@id='form_input_email']");
-			Common.clickElement("xpath", "//input[@id='form_input_email']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Enter email address']", Utils.getEmailid());
+			Sync.waitElementClickable(30, "xpath", "//input[@id='subscribe-email']");
+			Common.textBoxInput("xpath", "//input[@id='subscribe-email']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//button[text()='Submit']");
+			Common.clickElement("xpath", "//span[text()='Submit']");
 			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//div[@id='thxtext1']");
+			String Text = Common.getText("xpath", "//span[text()='Thank you for your subscription.']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
 
