@@ -1177,8 +1177,8 @@ public class GoldOxoHyvaHelper {
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
-				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
-				Common.clickElement("xpath", "//input[@id='shipping-save']");
+//				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
+//				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
