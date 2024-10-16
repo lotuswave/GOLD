@@ -8273,17 +8273,22 @@ public void header_1_Percent_Planet() {
 
 		String names = data.get(Dataset).get("blog");
 		String[] Blog = names.split(",");
+		
+		
 		int i = 0;
 		try {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),' Good Tips Blog')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Good Tips Blog')]");
+			Common.clickElement("xpath", "(//span[text()='Good Tips Blog'])[1]");
+			
 			for (i = 0; i < Blog.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),' Good Tips Blog')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Good Tips Blog')]");
+				
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//span[contains(text(),' " + Blog[i] + "')]");
-				Common.clickElement("xpath", "//span[contains(text(),' " + Blog[i] + "')]");
+				Sync.waitElementPresent("xpath", "//a[normalize-space()='" + Blog[i] +"']");
+				Common.clickElement("xpath", "//a[normalize-space()='" + Blog[i] +"']");
 //						Common.clickElement("xpath", "//a[contains(@aria-label,'" +Blog[i]+ "')]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
 				Common.assertionCheckwithReport(title.contains(Blog[i]),
 						"verifying the header link " + Blog[i] + "Under Featured",
@@ -8308,30 +8313,20 @@ public void header_1_Percent_Planet() {
 
 		try {
 
-			Common.clickElement("xpath", "//a[contains(text(),'Good Tips')]");
+			Common.clickElement("xpath", "//span[contains(text(),' Good Tips Blog')]");
 			Sync.waitPageLoad();
-
-			String blogcategory = Common
-					.findElement("xpath", "//div[contains(@class,'hero')]//span[@class='a-btn-tertiary__label']")
-					.getText();
-			String blogcategories = Common
-					.findElement("xpath",
-							"//div[contains(@class,'hero')]//a[contains(@class,'m-blog-card__categories-anchor')]")
-					.getAttribute("class");
-			System.out.println(blogcategory);
-			int blogtitle = Common.findElements("xpath",
-					"//div[contains(@class,'hero')]//h2[@class='m-blog-base-list__content-title']").size();
-			String blogcarousel = Common.findElement("xpath", "//div[contains(@class,'js-slick-carousel-wrapper')]")
-					.getAttribute("aria-roledescription");
-
+			Common.clickElement("xpath", "(//span[text()='Good Tips Blog'])[1]");
+			int blogcategory = Common
+					.findElements("xpath", "(//div[contains(@class,'hf:shadow-blog-hero block')])[1]")
+					.size();
+   System.out.println(blogcategory);
 			Common.assertionCheckwithReport(
-					blogcategories.contains("categories") && blogtitle > 0 && blogcarousel.contains("carousel"),
+					blogcategory > 0,
 					"To validate the Blog page", "user should able to see the Blog Article",
 					"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
-			Common.clickElement("xpath", "//button//span[@class='icon-carousel__right']");
-			Common.clickElement("xpath", "//button//span[@class='icon-carousel__left']");
-			Common.scrollIntoView("xpath", "//div[contains(@class,'hero')]//span[text()='Read Article']");
-			Common.clickElement("xpath", "//div[contains(@class,'hero')]//span[text()='Read Article']");
+			
+			Common.scrollIntoView("xpath", "(//span[text()='Read Article'])[1]");
+			Common.clickElement("xpath", "(//span[text()='Read Article'])[1]");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8347,15 +8342,15 @@ public void header_1_Percent_Planet() {
 	public void blog_article_page() {
 
 		try {
-			String blogbreadcrumb = Common.findElement("xpath", "//ol[@class='m-breadcrumb__list']").getText();
+			String blogbreadcrumb = Common.findElement("id", "breadcrumbs").getText();
 			System.out.println(blogbreadcrumb);
-			int blogarticle = Common.findElements("xpath", "//div[@class='m-blog-post-meta__name-date']").size();
+			int blogarticle = Common.findElements("xpath", "//div[contains(@class,'m-blog-post-meta')]").size();
 			Common.assertionCheckwithReport(blogbreadcrumb.contains("Good Tips Blog") && blogarticle > 0,
 					"To validate the Blog page", "user should able to see the Blog Article",
 					"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
 
-			Common.scrollIntoView("xpath", "//ul[@class='m-social-links']/li/button");
-			List<WebElement> blogsocial = Common.findElements("xpath", "//ul[@class='m-social-links']/li/button");
+			Common.scrollIntoView("xpath", "//ul[@class='flex items-center']");
+			List<WebElement> blogsocial = Common.findElements("xpath", "//ul[@class='flex items-center']//li//button");
 			for (WebElement blog : blogsocial) {
 
 				System.out.println(blog.getText());
@@ -8380,18 +8375,27 @@ public void header_1_Percent_Planet() {
 	public void blog_article_comments() {
 
 		try {
-
+			
+			Common.scrollIntoView("xpath",  "//iframe[@title='Disqus']");
 			Common.switchFrames("xpath", "//iframe[@title='Disqus']");
 			String comment = Common.findElement("xpath", "//span[@class='comment-count']").getText();
 			System.out.println(comment);
-			Common.clickElement("xpath", "//div[@aria-label='Start the discussion…']");
+			Common.clickElement("xpath", "//div[text()='Start the discussion…']");
+			
+			
+			List<WebElement> blogsocial = Common.findElements("xpath", "//ul[@data-role='login-menu']/li/button");  
 
-			String disqus = Common.findElement("xpath", "//ul[@data-role='login-menu']/li/button")
-					.getAttribute("aria-label");
-			System.out.println(disqus);
-			Common.assertionCheckwithReport(comment.contains("Comments") && disqus.contains("Disqus"),
-					"To validate the Blog page", "user should able to see the Blog Article",
-					"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+			List<String> ariaLabels = new ArrayList<>();  
+			for (WebElement element : blogsocial) {  
+			    String ariaLabel = element.getAttribute("aria-label"); 
+			    Thread.sleep(1000);
+			    ariaLabels.add(ariaLabel); 
+			    System.out.println(ariaLabels);
+				Common.assertionCheckwithReport(comment.contains("Comments") && ariaLabels.contains("Login with Disqus")||ariaLabels.contains("Apple")||ariaLabels.contains("Facebook")||ariaLabels.contains("Twitter")||ariaLabels.contains("Google")||ariaLabels.contains("Microsoft"),
+						"To validate the Blog page", "user should able to see the Blog Article",
+						"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
+			}  
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the Blog page", "user should able to see the Blog Article",
