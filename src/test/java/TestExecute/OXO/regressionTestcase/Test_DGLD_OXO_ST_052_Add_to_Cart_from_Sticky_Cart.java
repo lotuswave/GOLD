@@ -23,7 +23,7 @@ public class Test_DGLD_OXO_ST_052_Add_to_Cart_from_Sticky_Cart {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.Sticky_Add_to_Cart("addproduct");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 			
