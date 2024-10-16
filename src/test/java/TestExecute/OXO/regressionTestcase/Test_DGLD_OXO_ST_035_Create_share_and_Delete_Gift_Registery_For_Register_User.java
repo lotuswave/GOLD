@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Register_User {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"Forms");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"Forms");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Create_share_and_Delete_Gift_Registery_For_Register_User() throws Exception {
