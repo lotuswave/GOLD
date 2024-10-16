@@ -2320,7 +2320,9 @@ public class GoldOxoHyvaHelper {
 
 	public void giftCreation(String Dataset) {
 		// TODO Auto-generated method stub
-
+        String Month = data.get(Dataset).get("EventMonth");
+        String Year =  data.get(Dataset).get("EventYear");
+        String Date = data.get(Dataset).get("EventDate");
 		try {
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
@@ -2346,16 +2348,21 @@ public class GoldOxoHyvaHelper {
 			Common.textBoxInput("xpath", "//textarea[@id='message']", data.get(Dataset).get("Message"));
 			Common.dropdown("xpath", "//select[@id='is_public']", SelectBy.TEXT, data.get(Dataset).get("privacy"));
 			Common.dropdown("xpath", "//select[@id='is_active']", SelectBy.TEXT, data.get(Dataset).get("Status"));
+			
 			String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 			if (eventname.equals("Birthday")) {
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
 						data.get(Dataset).get("Region"));
-				Thread.sleep(4000);
-//				System.out.println(data.get(Dataset).get("Date"));
-//				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
-				Common.clickElement("xpath", "//input[@id='event_date']");
-				Thread.sleep(3000);
-				Common.clickElement("xapth", "//button[text()='30']");
+				Thread.sleep(1000);
+				Common.scrollIntoView("id", "event_date");
+				Common.clickElement("id", "event_date");
+				
+				Common.dropdown("xpath", "//select[@name='datepicker_month']", SelectBy.TEXT,Month);
+				Common.dropdown("xpath", "//select[@name='datepicker_year']", SelectBy.TEXT,Year);
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//button[text()='"+Date+"']");
+				
+				
 			} else if (eventname.equals("Wedding")) {
 
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
@@ -2432,7 +2439,7 @@ public class GoldOxoHyvaHelper {
 			Common.dropdown("id", "type_id", SelectBy.TEXT, data.get(Dataset).get("Type"));
 			Common.clickElement("id", "submit.next");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 			System.out.println(eventname);
 			Thread.sleep(6000);
@@ -2476,7 +2483,7 @@ public class GoldOxoHyvaHelper {
 	}
 
 	public void Registrant_Information(String Dataset) {
-		String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
+		String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 		try {
 			if (eventname.equals("Birthday")) {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][firstname]']",
