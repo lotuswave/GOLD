@@ -2321,10 +2321,10 @@ public class GoldOxoHyvaHelper {
 		// TODO Auto-generated method stub
 
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -2345,7 +2345,7 @@ public class GoldOxoHyvaHelper {
 			Common.textBoxInput("xpath", "//textarea[@id='message']", data.get(Dataset).get("Message"));
 			Common.dropdown("xpath", "//select[@id='is_public']", SelectBy.TEXT, data.get(Dataset).get("privacy"));
 			Common.dropdown("xpath", "//select[@id='is_active']", SelectBy.TEXT, data.get(Dataset).get("Status"));
-			String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
+			String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 			if (eventname.equals("Birthday")) {
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
 						data.get(Dataset).get("Region"));
@@ -2366,13 +2366,19 @@ public class GoldOxoHyvaHelper {
 			}
 //	        Baby_Registry("Baby Registry");
 			Registrant_Information("Birthday");
-			String shipping = Common.findElement("xpath", "(//select[@name='address_type_or_id']//option)[2]")
-					.getAttribute("value");
-			Common.dropdown("xpath", "//select[@name='address_type_or_id']", Common.SelectBy.VALUE, shipping);
+			Thread.sleep(3000);
+			Common.textBoxInput("xpath", "//input[@id='firstname']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
+			Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
+			Common.dropdown("xpath", "//select[@id='address_region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
+			Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
+			
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
 //	        Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
@@ -2393,8 +2399,8 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[text()='Gift Registry']");
-			Common.clickElement("xpath", "//a[text()='Gift Registry']");
+			Sync.waitElementPresent("xpath", "//span[text()='Gift Registry']");
+			Common.clickElement("xpath", "//span[text()='Gift Registry']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry"),
@@ -2414,14 +2420,14 @@ public class GoldOxoHyvaHelper {
 	public void newregistry_CTA(String Dataset) {
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
-			Common.clickElement("xpath", "//span[text()='Create New Registry']");
+			Sync.waitElementPresent("xpath", "//a[contains(text(),'Create New Registry')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Create New Registry')]");
 			Sync.waitPageLoad();
 			Common.dropdown("id", "type_id", SelectBy.TEXT, data.get(Dataset).get("Type"));
 			Common.clickElement("id", "submit.next");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
+			String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 			System.out.println(eventname);
 			Thread.sleep(6000);
 			Common.assertionCheckwithReport(
@@ -2472,7 +2478,7 @@ public class GoldOxoHyvaHelper {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][lastname]']",
 						data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][email]']", data.get(Dataset).get("Email"));
-				Common.clickElement("id", "add-registrant-button");
+				Common.clickElement("xpath", "//button[contains(text(),'Add Registrant')]");
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][firstname]']",
 						data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][lastname]']",
@@ -2497,8 +2503,8 @@ public class GoldOxoHyvaHelper {
 				Common.dropdown("xpath", "//select[@name='registrant[1][role]']", Common.SelectBy.TEXT,
 						data.get(Dataset).get("Role"));
 			}
-			String registry = Common.findElement("xpath", "(//fieldset[@class='recipients section']//span)[1]")
-					.getText();
+			String registry = Common.findElement("xpath", "//div[@x-data='giftRegistry()']//legend")
+					.getText().trim();
 			Common.assertionCheckwithReport(registry.equals("Registrant Information"),
 					"validating the Registrant Information filed ",
 					"It should display Registrant Information in gift registry",
@@ -2518,14 +2524,14 @@ public class GoldOxoHyvaHelper {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//a[contains(text(),'Edit')]");
 			Sync.waitPageLoad();
-			Common.scrollIntoView("xpath", "//input[@title='Zip/Postal Code']");
-			Common.textBoxInput("xpath", "//input[@title='Zip/Postal Code']", data.get(Dataset).get("postcode"));
+			Common.scrollIntoView("xpath", "//input[@id='address_postcode']");
+			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
@@ -2579,11 +2585,13 @@ public class GoldOxoHyvaHelper {
 	public void delete_giftcard() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[@title='Delete']");
-			Common.clickElement("xpath", "//button[@class='a-btn a-btn--primary action-primary action-accept']");
+			Common.clickElement("xpath", " //a[contains(text(),'Delete')]");
+			Thread.sleep(3000);
+			 Common.alerts("Ok");
+			
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.contains("You deleted this gift registry."),
 					"validating the deleting functionality in the gift registry",
 					"After clicking on the delete button it should delete from the gift registry",
