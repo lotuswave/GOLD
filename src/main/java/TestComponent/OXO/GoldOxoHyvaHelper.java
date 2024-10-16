@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -2349,7 +2350,12 @@ public class GoldOxoHyvaHelper {
 			if (eventname.equals("Birthday")) {
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
 						data.get(Dataset).get("Region"));
-				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
+				Thread.sleep(4000);
+//				System.out.println(data.get(Dataset).get("Date"));
+//				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
+				Common.clickElement("xpath", "//input[@id='event_date']");
+				Thread.sleep(3000);
+				Common.clickElement("xapth", "//button[text()='30']");
 			} else if (eventname.equals("Wedding")) {
 
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
@@ -11641,6 +11647,32 @@ Assert.fail();
 
 return Number;
 }
+
+	public void click_singin_Shippingpage() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Sign in')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Sign in')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/login"),
+					"To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigIn button",
+					"User Successfully clicked on the singIn button and Navigate to the signIn page",
+					"User Failed to click the signin button and not navigated to signIn page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"Unable to click on the singIn button and not Navigated to the signIn page",
+					Common.getscreenShotPathforReport(
+							"Failed to click signIn button and not Navigated to the signIn page"));
+			Assert.fail();
+		}
+
+	}
 	
 	
 }

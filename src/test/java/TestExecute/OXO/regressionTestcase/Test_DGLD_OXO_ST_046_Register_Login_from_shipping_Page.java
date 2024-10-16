@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_046_Register_Login_from_shipping_Page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Register_Login_from_shipping_Page() throws Exception {
@@ -22,10 +22,9 @@ public class Test_DGLD_OXO_ST_046_Register_Login_from_shipping_Page {
 			Oxo.search_product("Product");
 			Oxo.addtocart_PLP("Product");
 			Oxo.minicart_Checkout();
-			Oxo.Signin_Checkoutpage("AccountDetails");
-			Oxo.selectStandedshippingaddress();
-			Oxo.ordersummary_validation();
-			Oxo.clickSubmitbutton_Shippingpage();
+			Oxo.click_singin_Shippingpage();
+			Oxo.Usersignin("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 		} catch (Exception e) {
