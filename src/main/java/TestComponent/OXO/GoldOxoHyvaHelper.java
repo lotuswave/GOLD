@@ -946,11 +946,7 @@ public class GoldOxoHyvaHelper {
 
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
-					int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
 					
-					if(link>0) {
-						Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
-					}
 				}
 
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
@@ -998,10 +994,15 @@ public class GoldOxoHyvaHelper {
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
+				Thread.sleep(4000);
+				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+				System.out.println(Number);
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
+				
+				
 
 				int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
 				System.out.println(zipcode);
@@ -1010,6 +1011,11 @@ public class GoldOxoHyvaHelper {
 
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+				}
+				int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
+				
+				if(link>0) {
+					Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
 				}
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
