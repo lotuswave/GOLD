@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -2349,7 +2350,12 @@ public class GoldOxoHyvaHelper {
 			if (eventname.equals("Birthday")) {
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
 						data.get(Dataset).get("Region"));
-				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
+				Thread.sleep(4000);
+//				System.out.println(data.get(Dataset).get("Date"));
+//				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
+				Common.clickElement("xpath", "//input[@id='event_date']");
+				Thread.sleep(3000);
+				Common.clickElement("xapth", "//button[text()='30']");
 			} else if (eventname.equals("Wedding")) {
 
 				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
