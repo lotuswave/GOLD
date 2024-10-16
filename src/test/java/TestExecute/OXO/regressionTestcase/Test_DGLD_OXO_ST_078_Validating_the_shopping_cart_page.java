@@ -39,7 +39,7 @@ public class Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

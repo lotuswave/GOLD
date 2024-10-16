@@ -35,7 +35,7 @@ public class Test_DGLD_OXO_ST_086_Place_an_Order_Using_Reorder {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

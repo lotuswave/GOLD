@@ -37,7 +37,7 @@ public class Test_DGLD_OXO_ST_097_Guest_User_Checkout_with_Gift_Message {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
