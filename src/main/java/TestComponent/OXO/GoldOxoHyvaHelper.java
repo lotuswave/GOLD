@@ -8424,9 +8424,9 @@ public void header_1_Percent_Planet() {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -8435,30 +8435,34 @@ public void header_1_Percent_Planet() {
 					break;
 				}
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			System.out.println(product);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			String name = Common.findElement("xpath", "//span[@itemprop='name']").getText().trim();
+			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			Common.scrollIntoView("xpath", "(//div[contains(@class,'video-thumb')])/div/img");
-			Common.actionsKeyPress(Keys.PAGE_UP);
-			String vid = Common.findElement("xpath", "(//div[contains(@class,'video-thumb')])/div/img")
-					.getAttribute("alt");
-			System.out.println(vid);
-//					Common.clickElement("xpath", "//div[contains(@class,'video-thumb')]//img[@alt='"+product+"']");
-			Common.mouseOverClick("xpath", "(//div[contains(@class,'video-thumb')])/div/img");
-			Thread.sleep(4000);
-			Common.javascriptclickElement("xpath", "//button[@title='Play']//span[@class='vjs-icon-placeholder']");
+			
+			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[9]");
+			Common.scrollIntoView(video);
+	
+//			Common.actionsKeyPress(Keys.UP);
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//span[@itemprop='name']");
+			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[9]");	
+			Common.clickElement("xpath", "//button[@title='Play video']");
 //					Sync.waitElementPresent(30, "xpath", "//button[@title='Play Video']");
 //					Common.clickElement("xpath", "//button[@title='Play Video']");
 			Sync.waitForLoad();
-			String video = Common.findElement("xpath", "//button[contains(@class,'vjs-play-con')]")
-					.getAttribute("title");
-			System.out.println(video);
-			Common.assertionCheckwithReport(video.equals("Pause"), "validating the video in PDP page",
+			
+			String video1 = Common.findElement("xpath", "//button[@title='Pause video']")
+					.getAttribute("aria-label");
+			System.out.println(video1);
+			Common.assertionCheckwithReport(video1.equals("Pause video"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
 
