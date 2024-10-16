@@ -6562,9 +6562,9 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 
 				Thread.sleep(5000);
-				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
 
-				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
 				List<String> Beforefilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : BeforeFilterprice) {
@@ -6576,9 +6576,9 @@ public void FUll_Payment(String dataSet) {
 				
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
 				List<WebElement> AfterFilterprice = Common.findElements("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
 				List<String> Afterfilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : AfterFilterprice) {
