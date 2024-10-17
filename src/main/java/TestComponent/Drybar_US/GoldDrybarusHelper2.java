@@ -5778,12 +5778,12 @@ public void FUll_Payment(String dataSet) {
 			
 			try {
 				
-				Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'"+ expected +"')]");
-				String Expedited = Common.getText("xpath", "//div[contains(text(),'"+ expected +"')]");
+				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'"+ expected +"')]");
+				String Expedited = Common.getText("xpath", "//span[contains(text(),'"+ expected +"')]");
 				System.out.println(Expedited);
 				System.out.println(expected);
-				Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'"+ epress +"')]");
-				String Express = Common.getText("xpath", "//div[contains(text(),'"+ epress +"')]");
+				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'"+ epress +"')]");
+				String Express = Common.getText("xpath", "//span[contains(text(),'"+ epress +"')]");
 				System.out.println(Express);
 				System.out.println(epress);
 				
@@ -11778,7 +11778,7 @@ public void Change_Subscription() {
 
 		// Now get the last three digits
 		String extractedNumbers = numericOnly.toString();
-		String lastThreeDigits = extractedNumbers.substring(extractedNumbers.length() - 4);
+		String lastThreeDigits = extractedNumbers.substring(extractedNumbers.length() - 5);
 		System.out.println(lastThreeDigits);
 
 		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
@@ -11787,7 +11787,7 @@ public void Change_Subscription() {
 		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
 		Common.clickElement("xpath", "//a[@title='My Account']");
 
-		Common.clickElement("xpath", "//a[@title='My Product Subscriptions']");
+		Common.clickElement("xpath", "//a[@title='My Subscriptions']");
 
 		String Profile_id = Common.findElement("xpath", "//a[normalize-space()='Edit']").getAttribute("href");
 		Thread.sleep(4000);

@@ -20,7 +20,7 @@ public class TEST_DGLD_DB_US_SUB_002_GuestUser_Add_subscription_item_requires_to
 		try { 
 		
 			Drybar.Verify_Homepage();
-		    Drybar.search_product("Sparkling Soda Shine Mist & UV Shield");  
+		    Drybar.search_product("Save 10% with Daily Shipments");  
 		    Drybar.subcribe_product_Add_to_Cart("Save 10% with Daily Shipments");
 			Drybar.Guest_Sub_minicart_Checkout();
 			Drybar.login_Drybar("AccountDetails");
@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_US_SUB_002_GuestUser_Add_subscription_item_requires_to
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			Drybar.Change_Subscription();
-			Drybar.search_product("Sparkling Soda Shine Mist & UV Shield");  
+			Drybar.search_product("Save 15% with a Daily Shipment for 3 days");  
 			Drybar.subcribe_product_Add_to_Cart("Save 15% with a Daily Shipment for 3 days");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");
