@@ -11492,8 +11492,8 @@ public void Navigate_to_MyproductSubscription()
 		 Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"), "validating the page navigated to the Dashboard page",
 					"After clicking on the My account button it should be navigate to the Dashboard page", "Sucessfully Navigated to the Dashboard  page",
 					"failed to Navigate to the Dashboard  page");
-		Sync.waitElementPresent("xpath", "//span[text()='My Product Subscriptions']");
-		Common.clickElement("xpath", "//span[text()='My Product Subscriptions']");
+		Sync.waitElementPresent("xpath", "//a[@title='My Subscriptions']");
+		Common.clickElement("xpath", "//a[@title='My Subscriptions']");
 		Sync.waitForLoad();
 		Thread.sleep(3000);
 		 Common.assertionCheckwithReport(Common.getPageTitle().equals("My Subscriptions"), "validating the page navigated to the My Subscriptions page",
@@ -11778,7 +11778,7 @@ public void Change_Subscription() {
 
 		// Now get the last three digits
 		String extractedNumbers = numericOnly.toString();
-		String lastThreeDigits = extractedNumbers.substring(extractedNumbers.length() - 5);
+		String lastThreeDigits = extractedNumbers.substring(extractedNumbers.length() - 3);
 		System.out.println(lastThreeDigits);
 
 		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
