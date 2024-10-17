@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_019_Validation_ShippingAddress_form_for_RegisterUser {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validation_ShippingAddress_form_for_RegisterUser() throws Exception {
 
@@ -24,8 +24,6 @@ public class Test_DGLD_OXO_ST_019_Validation_ShippingAddress_form_for_RegisterUs
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_RegUser("Invalid details");
-//			Oxo.selectStandedshippingaddress();
-//			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.validatingErrormessageShippingpage_negative();
 			
 			
