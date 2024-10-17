@@ -5053,6 +5053,8 @@ catch(Exception | Error e)
 			if (Common.getCurrentURL().contains("pre")) {
 
 				Common.oppenURL((strArray[i]));
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
 
