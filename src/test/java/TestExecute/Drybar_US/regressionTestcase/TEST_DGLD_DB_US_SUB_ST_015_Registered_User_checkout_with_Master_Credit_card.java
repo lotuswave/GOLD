@@ -42,7 +42,7 @@ public class TEST_DGLD_DB_US_SUB_ST_015_Registered_User_checkout_with_Master_Cre
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}
