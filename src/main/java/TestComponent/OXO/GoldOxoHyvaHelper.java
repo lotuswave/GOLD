@@ -4208,14 +4208,13 @@ catch(Exception | Error e)
 		try {
 			Common.refreshpage();
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[text()='Write to Us']");
+			Common.clickElement("xpath", "//a[text()='Write to Us']");
 			Thread.sleep(2000);
-			Sync.waitElementPresent(40, "xpath", "//iframe[(@id='contact-us-form')]");
-			Common.switchFrames("xpath", "//iframe[(@id='contact-us-form')]");
+			Sync.waitElementPresent(40, "xpath", "//iframe[@id='inventor-submission-form']");
+			Common.switchFrames("xpath", "//iframe[@id='inventor-submission-form']");
 
-			Sync.waitElementPresent("xpath", "//input[contains(@data-label,'How can we')]");
-			Common.textBoxInput("xpath", "//input[contains(@data-label,'How can we')]",
-					data.get(dataSet).get("Comments"));
+			Sync.waitElementPresent("xpath", "//input[@name='messageSubject']");
+			Common.textBoxInput("xpath", "//input[@name='messageSubject']",data.get(dataSet).get("Comments"));
 
 			Common.clickElement("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
@@ -4225,6 +4224,9 @@ catch(Exception | Error e)
 
 			Sync.waitElementPresent("xpath", "//input[@name='customerLastName']");
 			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
+			
+			Common.clickElement("xpath", "//input[@id='customerEmailConfirm']");
+			Common.textBoxInput("xpath", "//input[@id='customerEmailConfirm']", data.get(dataSet).get("Email"));
 
 //		Sync.waitElementPresent("xpath", "//input[@name='company']");
 //		Common.textBoxInput("xpath", "//input[@name='company']", data.get(dataSet).get("Company"));
@@ -4251,7 +4253,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@data-label='Zip Code']");
 			Common.textBoxInput("xpath", "//input[@data-label='Zip Code']", data.get(dataSet).get("postcode"));
 
-			Common.clickElement("xpath", "//button[text()='Submit']");
+//			Common.clickElement("xpath", "//button[text()='Submit']");
 
 			Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
 			Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
@@ -6221,80 +6223,7 @@ catch(Exception | Error e)
 
 	}
 
-	public void outofstock_subcription(String Dataset) {
-		// TODO Auto-generated method stub
-		String products = data.get(Dataset).get("Products");
-		String email = data.get(Dataset).get("Notifyme");
-		try {
-			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
-
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
-					break;
-				}
-			}
-			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
-					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
-					"failed to Navigate to the PDP page");
-
-			Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
-			Common.clickElement("xpath", "//span[text()='Subscribe']");
-			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			String newsubs = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(newsubs);
-			String newsubscribe = Common.findElementBy("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			System.out.println(newsubscribe);
-			Common.assertionCheckwithReport(
-					newsubscribe.contains("Alert subscription has been saved.")
-							|| newsubscribe.contains("Thank you! You are already subscribed to this product.")
-							|| newsubs.contains("success"),
-					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
-					"Sucessfully message has been displayed when we click on the subcribe button ",
-					"Failed to display the message after subcribtion");
-			Common.actionsKeyPress(Keys.END);
-
-			Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
-			Common.clickElement("xpath", "//span[text()='Subscribe']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String oldsubscribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			System.out.println(oldsubscribe);
-			Common.assertionCheckwithReport(
-					oldsubscribe.contains("Thank you! You are already subscribed to this product."),
-					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
-					"Sucessfully message has been displayed when we click on the subcribe button ",
-					"Failed to display the message after subcribtion");
-
-		} catch (Exception | Error e) {
-
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription",
-					"after click on subcribe button message should be appear",
-					"Unable to display the message after subcribtion ",
-					Common.getscreenShot("Failed to display the message after subcribtion"));
-			Assert.fail();
-
-		}
-
-	}
-
+	
 	public String reg_outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
@@ -6303,9 +6232,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[@alt='Steel Wine Chiller']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[@alt='Steel Wine Chiller']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -6318,28 +6247,31 @@ catch(Exception | Error e)
 			Thread.sleep(6000);
 			if (Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
-						.getAttribute("data-price-amount");
+				String productprice = Common.findElement("xpath", "//span[@class=' simple']")
+						.getText().replace("$", "");
+				System.out.println(productprice);
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String PlpPrice = Common
 						.findElement("xpath",
-								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
-						.getAttribute("data-price-amount");
-				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+								"//span[@class='price']")
+						.getText().replace("$", "");
+				System.out.println(PlpPrice);
+				String name = Common.findElement("xpath", "//span[@itemprop='name']").getText();
+				System.out.println(name);
 				Common.assertionCheckwithReport(
 						name.contains(products) && productprice.equals(PlpPrice)
 								|| name.contains(prod) && productprice.equals(PlpPrice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String newsubs = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-						.getAttribute("data-ui-id");
+				String newsubs = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
+						.getText();
 //			System.out.println(newsubs);
-				String newsubscribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div")
+				String newsubscribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
 						.getText();
 				Common.assertionCheckwithReport(
 						newsubscribe.contains("Alert subscription has been saved.")
@@ -6350,10 +6282,10 @@ catch(Exception | Error e)
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+				Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String oldsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 				Common.assertionCheckwithReport(
 						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 						"verifying the out of stock subcription",
@@ -6418,6 +6350,7 @@ catch(Exception | Error e)
 		return price;
 
 	}
+
 
 	public void My_order_subcribtion(String Dataset) {
 		// TODO Auto-generated method stub
@@ -10166,79 +10099,7 @@ public void header_1_Percent_Planet() {
 
 	}
 
-	public void Addtocart(String Dataset) {
-
-		String products = data.get(Dataset).get("Products");
-		System.out.println(products);
-		try {
-			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-//							Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
-					break;
-				}
-			}
-			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-//						Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-			Common.assertionCheckwithReport(products.contains(name), "validating the  product navigates to PDP page",
-					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
-					"failed to Navigate to the PDP page");
-
-			/*
-			 * int size=Common.findElements("xpath",
-			 * "//h1[@class='m-product-overview__title u-hidden--lg-down']").size();
-			 * if(size>0) {
-			 * 
-			 * product1=Common.getText("xpath",
-			 * "//h1[@class='m-product-overview__title u-hidden--lg-down']"); } else{
-			 * product1=Common.getText("xpath",
-			 * "//h1[@class='m-product-overview__title u-hidden--lg-down']"); }
-			 * 
-			 * System.out.println(product1); System.out.println("Product:"+product1);
-			 */
-
-			productquantity(Dataset);
-			Sync.waitPageLoad();
-
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
-
-			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			/*
-			 * String message = Common.findElement("xpath",
-			 * "//div[@data-ui-id='message-success']") .getAttribute("data-ui-id");
-			 * Common.clickElement("xpath",
-			 * "//button[@class='a-icon-text-btn a-icon-text-btn--icon-only a-message__close']"
-			 * ); System.out.println(message);
-			 * Common.assertionCheckwithReport(message.contains("success"),
-			 * "validating the  product add to the cart", "Product should be add to cart",
-			 * "Sucessfully product added to the cart ",
-			 * "failed to add product to the cart");
-			 */
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
-					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-
-			Assert.fail();
-		}
-		// return product1;
-	}
-
+	
 	public void productquantity(String Dataset) {
 		// String product1="";
 		// TODO Auto-generated method stub
@@ -11961,48 +11822,122 @@ return Number;
 
 	}
 
-	public void discountCode(String dataSet) throws Exception {
-		String expectedResult = "It should opens textbox input.";
 
+public void outofstock_subcription(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String email = data.get(Dataset).get("Notifyme");
 		try {
+			Sync.waitPageLoad();
+			for (int i = 0; i <= 10; i++) {
+				Sync.waitElementPresent("xpath", "//img[@alt='Steel Wine Chiller']");
+				List<WebElement> webelementslist = Common.findElements("xpath",
+						"//img[@alt='Steel Wine Chiller']");
 
-			Sync.waitElementClickable("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
-			Common.scrollIntoView("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
-			Common.clickElement("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
-			if (Common.getCurrentURL().contains("preprod")) {
-				Sync.waitElementPresent("xpath", "//div/input[@placeholder='Enter discount code']");
+				String s = webelementslist.get(i).getAttribute("src");
+				System.out.println(s);
+				if (s.isEmpty()) {
 
-				Common.textBoxInput("xpath", "//div/input[@placeholder='Enter discount code']", data.get(dataSet).get("Discountcode"));
-			} else {
-				Sync.waitElementPresent("xpath", "//div/input[@placeholder='Enter discount code']");
-
-				Common.textBoxInput("xpath", "//div/input[@placeholder='Enter discount code']", data.get(dataSet).get("ProdDiscountcode"));
+				} else {
+					break;
+				}
 			}
-			int size = Common.findElements("id", "discount-code").size();
-			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
-					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//div[contains(@class, 'coupon-code field')]//button[@type='button']");
-			Common.clickElement("xpath", "//div[contains(@class, 'coupon-code field')]//button[@type='button']");
+			Thread.sleep(6000);
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			String name = Common.findElement("xpath", "//div[@class='product-info-main']").getText();
+			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+					"failed to Navigate to the PDP page");
+
+			Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])[1]");
+			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+			Common.clickElement("xpath", "//span[text()='Subscribe']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			String newsubs = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
+					.getAttribute("class");
+			System.out.println(newsubs);
+			String newsubscribe = Common.findElementBy("xpath","//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+			System.out.println(newsubscribe);
+			Common.assertionCheckwithReport(
+					newsubscribe.contains("Alert subscription has been saved.")
+							|| newsubscribe.contains("Thank you! You are already subscribed to this product.")
+							|| newsubs.contains("success"),
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ",
+					"Failed to display the message after subcribtion");
+			Common.actionsKeyPress(Keys.END);
+
+			Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])[1]");
+			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[@class='w-full text-center pr-10']");
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
-					"verifying pomocode", expectedResult, "promotion code working as expected",
-					"Promation code is not applied");
+			String oldsubscribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+			System.out.println(oldsubscribe);
+			Common.assertionCheckwithReport(
+					oldsubscribe.contains("Thank you! You are already subscribed to this product."),
+					"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+					"Sucessfully message has been displayed when we click on the subcribe button ",
+					"Failed to display the message after subcribtion");
 
-		}
+		} catch (Exception | Error e) {
 
-		catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
-					"User failed to proceed with discountcode",
-					Common.getscreenShotPathforReport("discountcodefailed"));
-
+			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription",
+					"after click on subcribe button message should be appear",
+					"Unable to display the message after subcribtion ",
+					Common.getscreenShot("Failed to display the message after subcribtion"));
 			Assert.fail();
 
 		}
+
 	}
 
+public void discountCode(String dataSet) throws Exception {
+	String expectedResult = "It should opens textbox input.";
+
+	try {
+
+		Sync.waitElementClickable("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
+		Common.scrollIntoView("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
+		Common.clickElement("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
+		if (Common.getCurrentURL().contains("preprod")) {
+			Sync.waitElementPresent("xpath", "//div/input[@placeholder='Enter discount code']");
+
+			Common.textBoxInput("xpath", "//div/input[@placeholder='Enter discount code']", data.get(dataSet).get("Discountcode"));
+		} else {
+			Sync.waitElementPresent("xpath", "//div/input[@placeholder='Enter discount code']");
+
+			Common.textBoxInput("xpath", "//div/input[@placeholder='Enter discount code']", data.get(dataSet).get("ProdDiscountcode"));
+		}
+		int size = Common.findElements("id", "discount-code").size();
+		Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+				"Successfully open the discount input box", "User unable enter Discount Code");
+		Sync.waitElementClickable("xpath", "//div[contains(@class, 'coupon-code field')]//button[@type='button']");
+		Common.clickElement("xpath", "//div[contains(@class, 'coupon-code field')]//button[@type='button']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+		String discountcodemsg = Common.getText("xpath", "//span[@class='w-full text-center pr-10']");
+		Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
+				"verifying pomocode", expectedResult, "promotion code working as expected",
+				"Promation code is not applied");
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+				"User failed to proceed with discountcode",
+				Common.getscreenShotPathforReport("discountcodefailed"));
+
+		Assert.fail();
+
+	}
+}
 	
 }
