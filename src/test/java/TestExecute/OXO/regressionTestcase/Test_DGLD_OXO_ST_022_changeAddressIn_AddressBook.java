@@ -24,7 +24,6 @@ public class Test_DGLD_OXO_ST_022_changeAddressIn_AddressBook {
 			Oxo.Usersignin("AccountDetails");
 			Oxo.ChangeAddress_AddressBook("AddressBook");
 			
-			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -33,7 +32,7 @@ public class Test_DGLD_OXO_ST_022_changeAddressIn_AddressBook {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

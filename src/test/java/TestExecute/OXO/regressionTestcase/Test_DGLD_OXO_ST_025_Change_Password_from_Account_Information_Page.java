@@ -9,6 +9,7 @@ import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
+
 public class Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
@@ -20,7 +21,7 @@ public class Test_DGLD_OXO_ST_025_Change_Password_from_Account_Information_Page 
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_Createaccount();
-			String NewDetails = Oxo.create_account("New Account Details");
+			String NewDetails = Oxo.create_account("AccountDetails");
 			Oxo.edit_Account_info("NewDetails");
 			Oxo.changed_password(NewDetails);
 			
