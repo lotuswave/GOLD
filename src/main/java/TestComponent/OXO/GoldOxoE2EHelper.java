@@ -437,6 +437,7 @@ public class GoldOxoE2EHelper {
 		}
 	}
 
+
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
