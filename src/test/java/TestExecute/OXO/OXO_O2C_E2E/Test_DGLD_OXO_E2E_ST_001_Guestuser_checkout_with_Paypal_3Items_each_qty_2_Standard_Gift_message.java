@@ -24,8 +24,8 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 			Oxo.verifingHomePage();
 			Oxo.search_product("SKU-11244200 - 2QTY");
 			Oxo.addtocart("SKU-11244200 - 2QTY");
-//			Oxo.search_product("SKU-12171000 - 2QTY");
-//			Oxo.addtocart("SKU-12171000 - 2QTY");
+			Oxo.search_product("SKU-12171000 - 2QTY");
+			Oxo.addtocart("SKU-12171000 - 2QTY");
 			Oxo.search_product("SKU-9109200 - 2QTY");
 			Oxo.addtocart("SKU-9109200 - 2QTY");
 			Oxo.minicart_viewcart();
