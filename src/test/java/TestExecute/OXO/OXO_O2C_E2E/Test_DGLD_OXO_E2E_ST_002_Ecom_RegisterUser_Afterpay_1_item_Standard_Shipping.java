@@ -7,13 +7,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
-import TestLib.Login;
+import TestComponent.OXO.GoldOxoE2EHelper;
+import TestLib.Common;
+import TestLib.*;
 
 public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard_Shipping {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"E2E");
+	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_RegisterUser_Afterpay_1_item_Standard_Shipping() throws Exception {
 //       for(int i=0;i<3;i++)
@@ -25,22 +26,18 @@ public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
-			Oxo.search_E2E_product("SKU-11332600");
-			Oxo.Addtocart("SKU-11332600");
-		    Oxo.minicart_Checkout();
-			String Products_details=Oxo.shipping_order_details();
-			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");
+			Oxo.search_product("SKU-8710100 - 1QTY");
+			Oxo.addtocart("SKU-8710100 - 1QTY");
+			Oxo.minicart_Checkout();
+		    Oxo.addDeliveryAddress_registerUser("AccountDetails");
+		    String Used_GiftCode = "NULL";
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
-			HashMap<String,String> data=Oxo.OrderSummaryValidation();
-			HashMap<String,String> AfterPayment=Oxo.AfterPayment("Afterpay");
-			String OrderIdNumber= Oxo.Verify_order_page();
-			System.out.println(OrderIdNumber);
-			Oxo.Admin("Login Details");
+			String OrderNumber=Oxo.After_Pay_payment("Afterpay");
+			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
-			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderIdNumber);
-			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),AfterPayment.get("Card"),Products_details,Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("AdminOrdertax"),Orderstatus1.get("AdminOrdertotal"));
-
+			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
 			
 			
 			
@@ -54,7 +51,7 @@ public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

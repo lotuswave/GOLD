@@ -1099,6 +1099,8 @@ public class GoldOxoE2EHelper {
 		}
 	}
 
+
+
 	public void Usersignin(String dataSet) {
 
 		try {
@@ -1287,6 +1289,7 @@ public class GoldOxoE2EHelper {
 		}
 
 	}
+
 
 	public void addDeliveryAddress_RegUser(String dataSet) {
 		// TODO Auto-generated method stub
@@ -3363,7 +3366,7 @@ catch(Exception | Error e)
 		return order;
 	}
 
-	public void After_Pay_payment(String dataSet) throws Exception {
+	public String After_Pay_payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String order = "";
 		Sync.waitPageLoad();
@@ -3395,7 +3398,7 @@ catch(Exception | Error e)
 				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
 //				
 				Common.switchToDefault();
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Thread.sleep(4000);
@@ -3454,11 +3457,11 @@ catch(Exception | Error e)
 						"User unable to go orderconformation page");
 
 				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//a");
 					System.out.println(order);
 				}
 				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//a");
 					System.out.println(order);
 				}
 
@@ -3472,6 +3475,7 @@ catch(Exception | Error e)
 				Assert.fail();
 			}
 		}
+		return order;
 	}
 
 	public void acceptPrivacy() throws Exception {
