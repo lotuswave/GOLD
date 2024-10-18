@@ -6424,20 +6424,20 @@ catch(Exception | Error e)
 		String products = data.get(Dataset).get("Products");
 		String prod = data.get(Dataset).get("prod product");
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Sync.waitElementPresent("xpath", "//div[@class='hidden lg:flex h-full']");
+			Common.clickElement("xpath", "//div[@class='hidden lg:flex h-full']");
+			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
 					"validating the page navigation to the my account",
 					"after clicking on the my account it should navigate to the my account page",
 					"Sucessfully Navigated to the my account page", "failed to Navigate to the my account page");
-			Sync.waitElementPresent("xpath", "//a[text()='My Out of Stock Subscriptions']");
-			Common.clickElement("xpath", "//a[text()='My Out of Stock Subscriptions']");
+			Sync.waitElementPresent("xpath", "//span[text()='My Out of Stock Subscriptions']");
+			Common.clickElement("xpath", "//span[text()='My Out of Stock Subscriptions']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(20, "xpath", "//span[@class='a-product-name']");
-			String name = Common.findElement("xpath", "(//span[@class='a-product-name'])[1]").getText();
+			Sync.waitElementPresent(20, "xpath", "//a[@title='Steel Wine Chiller']");
+			String name = Common.findElement("xpath", "//a[@title='Steel Wine Chiller']").getText();
 			Common.assertionCheckwithReport(name.equals(products) || name.equals(prod),
 					"validating the outofstock produt in the subcribtion page",
 					"Product should be display in the subcribtion page",
@@ -6479,6 +6479,7 @@ catch(Exception | Error e)
 		}
 
 	}
+
 
 	public void share_whishlist(String Dataset) {
 		// TODO Auto-generated method stub

@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_074_Register_User_Back_In_stock_Subcription {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"Outofstock");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"Outofstock");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Register_User_Back_In_stock_Subcription() throws Exception {
 

@@ -5,13 +5,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page {
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Create_Account() throws Exception {
@@ -21,7 +21,8 @@ public class Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page {
             Oxo.babytoddler_headerlinks("Baby & Toddler");
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 		    Oxo.minicart_Checkout();
-			Oxo.Shipping_Forgot_Password("AccountDetails");
+//			Oxo.Shipping_Forgot_Password("AccountDetails");
+		    Oxo.click_singin_Shippingpage();
 			Oxo.Forgot_password("AccountDetails");
 		} catch (Exception e) {
 
@@ -43,6 +44,3 @@ public class Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page {
 	}
 
 }
-
-
-
