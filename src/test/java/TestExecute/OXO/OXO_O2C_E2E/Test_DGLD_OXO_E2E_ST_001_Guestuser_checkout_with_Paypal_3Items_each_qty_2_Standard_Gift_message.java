@@ -9,7 +9,7 @@ import TestComponent.OXO.GoldOxoE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_E2E_ST_001_GuestUser_Paypal_2_Items_Standard_Shipping {
+public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each_qty_2_Standard_Gift_message {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
@@ -19,14 +19,13 @@ public class Test_DGLD_OXO_E2E_ST_001_GuestUser_Paypal_2_Items_Standard_Shipping
 //       {
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
-			Thread.sleep(5000);
 			//String Website=Oxo.URL();
-			String Description ="GuestUser_Paypal_2_Items_Standard_Shipping";
+			String Description ="Guest user checkout with Paypal- 3 Items, each qty -2 - Standard + Gift mwssage(lessthan 50 Charecters)";
 			Oxo.verifingHomePage();
 			Oxo.search_product("SKU-11244200 - 2QTY");
 			Oxo.addtocart("SKU-11244200 - 2QTY");
-			Oxo.search_product("SKU-12171000 - 2QTY");
-			Oxo.addtocart("SKU-12171000 - 2QTY");
+//			Oxo.search_product("SKU-12171000 - 2QTY");
+//			Oxo.addtocart("SKU-12171000 - 2QTY");
 			Oxo.search_product("SKU-9109200 - 2QTY");
 			Oxo.addtocart("SKU-9109200 - 2QTY");
 			Oxo.minicart_viewcart();
