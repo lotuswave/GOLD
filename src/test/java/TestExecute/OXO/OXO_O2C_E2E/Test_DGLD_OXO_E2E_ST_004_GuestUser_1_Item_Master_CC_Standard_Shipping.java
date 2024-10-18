@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_E2E_ST_004_GuestUser_1_Item_Master_CC_Standard_Shipping {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"E2E");
+	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_GuestUser_1_Item_Master_CC_Standard_Shipping() throws Exception {
 //       for(int i=0;i<3;i++)
@@ -23,22 +23,22 @@ public class Test_DGLD_OXO_E2E_ST_004_GuestUser_1_Item_Master_CC_Standard_Shippi
 			//String Website=Oxo.URL();
 			String Description ="GuestUser_1_Item_Master_CC_Standard_Shipping";
 			Oxo.verifingHomePage();
-			Oxo.search_E2E_product("SKU-21081");
-			Oxo.Addtocart("SKU-21081");
+			Oxo.search_product("SKU-11320400 - 2QTY");
+			Oxo.addtocart("SKU-11320400 - 2QTY");
+			Oxo.search_product("SKU-11303000 - 2QTY");
+			Oxo.addtocart("SKU-11303000 - 2QTY");
+			Oxo.search_product("SKU-11219400 - 2QTY");
+			Oxo.addtocart("SKU-11219400 - 2QTY");
 			Oxo.minicart_Checkout();
-			String Products_details=Oxo.shipping_order_details();
-			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
+			String Used_GiftCode = "NULL";
 			Oxo.clickSubmitbutton_Shippingpage();
-			HashMap<String,String> data=Oxo.OrderSummaryValidation();
-			HashMap<String,String> Payment=Oxo.creditCard_payment("CCMastercard");
-			String OrderIdNumber= Oxo.Verify_order_page();
-			System.out.println(OrderIdNumber);
-			Oxo.Admin("Login Details");
+			String OrderNumber=Oxo.updatePaymentAndSubmitOrder("CCMastercard"); 
+			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
-			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderIdNumber);
-			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),Payment.get("Card"),Products_details,Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("AdminOrdertax"),Orderstatus1.get("AdminOrdertotal"));
-
+			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
 			
 			
 			
@@ -52,7 +52,7 @@ public class Test_DGLD_OXO_E2E_ST_004_GuestUser_1_Item_Master_CC_Standard_Shippi
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
