@@ -3544,10 +3544,27 @@ catch(Exception | Error e)
 
 		String expectedResult = "It should open paypal site window.";
 		try {
-			Thread.sleep(2000);
-            Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
-			Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
-			Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+			Thread.sleep(3000);
+			int cancelpayment=Common.findElements("xpath", "//button[@title='Cancel']").size();
+			System.out.println(cancelpayment);
+			if(cancelpayment>0)
+			{
+				
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Cancel Payment')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Cancel Payment')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
+				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				
+			}
+			else
+			{
+				Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
+				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
+				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+			}
+            
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
