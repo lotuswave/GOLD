@@ -9058,14 +9058,39 @@ public void header_1_Percent_Planet() {
 
 	public void Gift_Message(String Dataset) {
 		// TODO Auto-generated method stub
-		String message = data.get(Dataset).get("message");
-		try {
+		String message=data.get(Dataset).get("message");
+		try
+		{
 			Common.scrollIntoView("xpath", "//button[normalize-space()='Add Gift Message']");
 			Sync.waitElementPresent(40, "xpath", "//button[normalize-space()='Add Gift Message']");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
+			String gift=Common.findElement("xpath", "//span[@x-text='savedFormMessage.message']").getText().trim();
+			System.out.println(gift);
+			if(gift.contains(""))
+			{
+			Thread.sleep(3000);
+
+			Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
+			Common.textBoxInput("id", "recipient-1", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("id", "sender-1", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("id", "message-1", message);
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad(40);
+			Thread.sleep(2000);
+			Sync.waitElementPresent(40, "xpath", "//span[@x-text='savedFormMessage.message']");
+			String Messgae = Common.findElement("xpath", "//span[@x-text='savedFormMessage.message']").getText()
+					.replace("Message: ", "");
+			System.out.println(Messgae);
+			Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
+					"Gift card message should be applied", "Sucessfully gift message has been applied ",
+					"failed to apply the gift message");
 			
-			
-				Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
+			}
+			else
+			{
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[contains(text(),'Delete')]");
+				Sync.waitPageLoad(40);
 				Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
 				Common.textBoxInput("id", "recipient-1", data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("id", "sender-1", data.get(Dataset).get("LastName"));
@@ -9078,11 +9103,11 @@ public void header_1_Percent_Planet() {
 						.replace("Message: ", "");
 				System.out.println(Messgae);
 				Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
-						"Gift card message should be applied", "Sucessfully gift message has been applied ",
-						"failed to apply the gift message");
-				
-			
-		} catch (Exception | Error e) {
+						"Gift card message should be applied", "Sucessfully gift message has been applied ","failed to apply the gift message");
+			}
+		}
+		catch(Exception | Error e)
+		{
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
 					"Unabled to apply the gift message", Common.getscreenShot("failed to apply the gift message"));
