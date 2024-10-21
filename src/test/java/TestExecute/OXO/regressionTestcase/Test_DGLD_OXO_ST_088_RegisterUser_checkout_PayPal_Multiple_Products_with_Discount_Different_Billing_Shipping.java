@@ -5,7 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -13,7 +13,7 @@ public class Test_DGLD_OXO_ST_088_RegisterUser_checkout_PayPal_Multiple_Products
 
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo = new GoldOxoHelper(datafile,"DataSet");
+	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Register_User_Checkout_With_Different_Billing_and_Different_Shipping() throws Exception {
@@ -33,9 +33,9 @@ public class Test_DGLD_OXO_ST_088_RegisterUser_checkout_PayPal_Multiple_Products
 //			Oxo.search_product("Group");
 //			Oxo.addtocart("Group");
 			Oxo.minicart_Checkout();
-			Oxo.discountCode("Discount");
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.discountCode("Discount");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.register_billingAddress("BillingDetails");
 			Oxo.payPal_Payment("PaypalDetails");

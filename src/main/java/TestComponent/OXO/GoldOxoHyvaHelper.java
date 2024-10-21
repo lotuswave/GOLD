@@ -3608,8 +3608,9 @@ catch(Exception | Error e)
 
 			else {
 				try {
+					Thread.sleep(6000);
+					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 					
-					Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 
 					Thread.sleep(6000);
