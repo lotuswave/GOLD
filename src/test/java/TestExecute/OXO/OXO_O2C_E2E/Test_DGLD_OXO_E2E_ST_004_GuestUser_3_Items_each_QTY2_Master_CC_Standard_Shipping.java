@@ -9,7 +9,7 @@ import TestComponent.OXO.GoldOxoE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_E2E_ST_004_GuestUser_1_Item_Master_CC_Standard_Shipping {
+public class Test_DGLD_OXO_E2E_ST_004_GuestUser_3_Items_each_QTY2_Master_CC_Standard_Shipping {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
@@ -21,7 +21,7 @@ public class Test_DGLD_OXO_E2E_ST_004_GuestUser_1_Item_Master_CC_Standard_Shippi
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
 			Thread.sleep(5000);
 			//String Website=Oxo.URL();
-			String Description ="GuestUser_1_Item_Master_CC_Standard_Shipping";
+			String Description ="Guest user checkout with Mastercard (standard) - 3 Items, each qty -2";
 			Oxo.verifingHomePage();
 			Oxo.search_product("SKU-11320400 - 2QTY");
 			Oxo.addtocart("SKU-11320400 - 2QTY");
