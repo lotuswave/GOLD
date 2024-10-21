@@ -10248,14 +10248,14 @@ public void close_successmessage() {
 public void webpagelinks_validation(String Dataset) throws Exception, IOException {
 	// TODO Auto-generated method stub
 	
-	String links = data.get(Dataset).get("Links");
+	String links = data.get(Dataset).get("PreprodLinks");
 	int j = 0;
 
 	String[] strArray = links.split("\\r?\\n");
 	for (int i = 0; i < strArray.length; i++) {
 		System.out.println(strArray[i]);
 
-		if (Common.getCurrentURL().contains("stage4")) {
+		if (Common.getCurrentURL().contains("preprod")) {
 
 			Common.oppenURL((strArray[i]));
 			Thread.sleep(4000);

@@ -9058,14 +9058,39 @@ public void header_1_Percent_Planet() {
 
 	public void Gift_Message(String Dataset) {
 		// TODO Auto-generated method stub
-		String message = data.get(Dataset).get("message");
-		try {
+		String message=data.get(Dataset).get("message");
+		try
+		{
 			Common.scrollIntoView("xpath", "//button[normalize-space()='Add Gift Message']");
 			Sync.waitElementPresent(40, "xpath", "//button[normalize-space()='Add Gift Message']");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
+			String gift=Common.findElement("xpath", "//span[@x-text='savedFormMessage.message']").getText().trim();
+			System.out.println(gift);
+			if(gift.contains(""))
+			{
+			Thread.sleep(3000);
+
+			Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
+			Common.textBoxInput("id", "recipient-1", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("id", "sender-1", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("id", "message-1", message);
+			Common.clickElement("xpath", "//span[text()='Update']");
+			Sync.waitPageLoad(40);
+			Thread.sleep(2000);
+			Sync.waitElementPresent(40, "xpath", "//span[@x-text='savedFormMessage.message']");
+			String Messgae = Common.findElement("xpath", "//span[@x-text='savedFormMessage.message']").getText()
+					.replace("Message: ", "");
+			System.out.println(Messgae);
+			Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
+					"Gift card message should be applied", "Sucessfully gift message has been applied ",
+					"failed to apply the gift message");
 			
-			
-				Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
+			}
+			else
+			{
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[contains(text(),'Delete')]");
+				Sync.waitPageLoad(40);
 				Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
 				Common.textBoxInput("id", "recipient-1", data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("id", "sender-1", data.get(Dataset).get("LastName"));
@@ -9078,11 +9103,11 @@ public void header_1_Percent_Planet() {
 						.replace("Message: ", "");
 				System.out.println(Messgae);
 				Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
-						"Gift card message should be applied", "Sucessfully gift message has been applied ",
-						"failed to apply the gift message");
-				
-			
-		} catch (Exception | Error e) {
+						"Gift card message should be applied", "Sucessfully gift message has been applied ","failed to apply the gift message");
+			}
+		}
+		catch(Exception | Error e)
+		{
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
 					"Unabled to apply the gift message", Common.getscreenShot("failed to apply the gift message"));
@@ -11887,9 +11912,26 @@ public void outofstock_subcription(String Dataset) {
 		String expectedResult = "It should opens textbox input to enter discount.";
 
 		try {
+			
+			int discountordersummary=Common.findElements("xpath", "//div[@class='item discount']//span[contains(@class,'value')]").size();
+			System.out.println(discountordersummary);
+			if(discountordersummary>0)
+			{
 
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Cancel Coupon')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+			}
+			else
+			{
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				
+				
+			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -11901,6 +11943,7 @@ public void outofstock_subcription(String Dataset) {
 			}
 
 			int size = Common.findElements("id", "discount-code").size();
+			System.out.println(size);
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
@@ -11946,6 +11989,7 @@ public void outofstock_subcription(String Dataset) {
 					"Failed to display the order summary and fileds under order summary");
 
 		}
+			
 
 		catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
