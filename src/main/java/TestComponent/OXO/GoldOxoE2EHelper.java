@@ -192,9 +192,10 @@ public class GoldOxoE2EHelper {
 					break;
 				}
 			}
-			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-//			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+		
+				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+//				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();

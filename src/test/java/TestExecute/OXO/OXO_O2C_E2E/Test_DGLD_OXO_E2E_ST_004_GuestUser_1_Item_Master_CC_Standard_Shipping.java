@@ -27,8 +27,8 @@ public class Test_DGLD_OXO_E2E_ST_004_GuestUser_1_Item_Master_CC_Standard_Shippi
 			Oxo.addtocart("SKU-11320400 - 2QTY");
 			Oxo.search_product("SKU-11303000 - 2QTY");
 			Oxo.addtocart("SKU-11303000 - 2QTY");
-			Oxo.search_product("SKU-11219400 - 2QTY");
-			Oxo.addtocart("SKU-11219400 - 2QTY");
+			Oxo.search_product("SKU-9109200 - 2QTY");
+			Oxo.addtocart("SKU-9109200 - 2QTY");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
