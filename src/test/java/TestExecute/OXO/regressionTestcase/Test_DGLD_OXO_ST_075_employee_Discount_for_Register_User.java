@@ -27,9 +27,9 @@ public class Test_DGLD_OXO_ST_075_employee_Discount_for_Register_User {
 //			Oxo.search_product("Product");
 //			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
-			Oxo.discountCode("EmployeeDiscount");
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.discountCode("EmployeeDiscount");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 		

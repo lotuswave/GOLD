@@ -22,9 +22,9 @@ public class Test_DGLD_OXO_ST_007_Guest_user_Checkout_Funtionality_With_Discount
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("Discount");
 			Oxo.minicart_Checkout();
-			Oxo.discountCode("Discount");
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.discountCode("Discount");
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			

@@ -11875,7 +11875,7 @@ public void subcribe_product_all_types_plan_Add_to_Cart (String Dataset) {
 				Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
 				Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);	
+				Thread.sleep(5000);	
 				String MinicartPrice=Common.findElement("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").getText();
 				System.out.println(MinicartPrice);
 				Assert.assertEquals(PLPPrice, MinicartPrice);
