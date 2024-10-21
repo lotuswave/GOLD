@@ -9140,13 +9140,37 @@ public void header_1_Percent_Planet() {
 
 		try {
 			Thread.sleep(3000);
-			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+			int cancelpayment=Common.findElements("xpath", "//button[@title='Cancel']").size();
+			System.out.println(cancelpayment);
+			if(cancelpayment>0)
+			{
+				
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Cancel Payment')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Cancel Payment')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Thread.sleep(3000);
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
-			// Common.refreshpage();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
-			Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
-			Common.switchToDefault();
+				// Common.refreshpage();
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.switchToDefault();
+				
+			}
+			else
+			{
+				Thread.sleep(3000);
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+
+				// Common.refreshpage();
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.switchToDefault();
+			}
+			
 			Thread.sleep(4000);
 			Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
