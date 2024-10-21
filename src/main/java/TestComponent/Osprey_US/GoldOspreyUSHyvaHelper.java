@@ -118,10 +118,10 @@ public class GoldOspreyUSHyvaHelper {
 //			Close_Geolocation();
 //			close_add();
 		     acceptPrivacy();
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey") || size > 0,
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey Home Page") || size > 0,
 					"validating store logo on the homwpage",
 					"System directs the user to the Homepage and store logo should display",
 					"Sucessfully user navigates to the home page and logo has been displayed",
@@ -316,13 +316,13 @@ public class GoldOspreyUSHyvaHelper {
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+
+			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/login"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customer/account/login"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -470,7 +470,7 @@ public class GoldOspreyUSHyvaHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
@@ -1933,10 +1933,10 @@ public class GoldOspreyUSHyvaHelper {
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
+			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
+			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
+			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Products"));
@@ -1973,9 +1973,9 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -1995,23 +1995,23 @@ public class GoldOspreyUSHyvaHelper {
 			Thread.sleep(6000);
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+			Sync.waitElementPresent("xpath", "(//div//div[@data-option-label='" + Productsize + "'])[1]");
+			Common.javascriptclickElement("xpath", "(//div//div[@data-option-label='" + Productsize + "'])[1]");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Common.scrollIntoView("xpath", "//div[@class='m-product-overview__info-top']//h1");
-			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Common.scrollIntoView("xpath", "//span[@itemprop='name']");
+			Sync.waitElementVisible(30, "xpath", "//span[@itemprop='name']");
+			String name = Common.findElement("xpath", "//span[@itemprop='name']").getText();
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			product_quantity(Dataset);
 			Thread.sleep(4000);
-			String country=Common.findElement("xpath", "(//span[@class='a-icon-text-btn__label'])[1]").getText();
+			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 			System.out.println(country);
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			
@@ -2056,10 +2056,10 @@ public class GoldOspreyUSHyvaHelper {
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.findElement("xpath", "//select[@class='a-select-menu']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+			Common.findElement("xpath", "//select[@name='qty']");
+			Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
-			String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
+			String value = Common.findElement("xpath", "//select[@name='qty']").getAttribute("value");
 			Common.assertionCheckwithReport(value.equals(Quantity),
 					"validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page",
