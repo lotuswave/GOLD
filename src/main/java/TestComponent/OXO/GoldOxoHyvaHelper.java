@@ -61,6 +61,8 @@ public class GoldOxoHyvaHelper {
 
 		return r;
 	}
+	
+   
 
 	public GoldOxoHyvaHelper(String datafile, String sheetname) {
 
@@ -6781,7 +6783,6 @@ catch(Exception | Error e)
 	
 	
 	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
-		// TODO Auto-generated method stub
 		String links = data.get(Dataset).get("Links");
 		int j = 0;
 
@@ -6792,6 +6793,8 @@ catch(Exception | Error e)
 			if (Common.getCurrentURL().contains("preprod")) {
 
 				Common.oppenURL((strArray[i]));
+//				Thread.sleep(10000);
+				Sync.waitImplicit(100000);
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
 
@@ -6825,7 +6828,7 @@ catch(Exception | Error e)
 					j++;
 
 					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 40 error",
+							"page configured with products ", "unable to find page it showing error" + responcecode,
 							Common.getscreenShotPathforReport("link" + i));
 
 				}
@@ -6833,33 +6836,14 @@ catch(Exception | Error e)
 		}
 
 		if (j > 1) {
-			Assert.fail();
+			Assert.fail("There were " + j + " failures in URL validation.");
 		}
 
 	}
 
-	public void signout() {
-		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementClickable("xpath", "//a[@id='customer.header.sign.out.link']");
-
-			Common.javascriptclickElement("xpath", "//a[@id='customer.header.sign.out.link']");
-
-//			Common.assertionCheckwithReport(
-//					Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
-//					"Validating My Account page navigation", "user sign in and navigate to my account page",
-//					"Successfully navigate to my account page", "Failed to navigate my account page ");
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
-					"after clinking signout user signout fro the page", "user Successfully signout  ",
-					Common.getscreenShotPathforReport("user Failed to signout"));
-			Assert.fail();
-		}
-
-	}
+	
+	
+	
 
 	public void orderprodcut_search(String search) {
 		// TODO Auto-generated method stub
