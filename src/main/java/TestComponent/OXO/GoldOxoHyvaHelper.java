@@ -11898,47 +11898,78 @@ public void outofstock_subcription(String Dataset) {
 
 	}
 
-public void discountCode(String dataSet) throws Exception {
-	String expectedResult = "It should opens textbox input.";
 
-	try {
+	public void discountCode(String dataSet) throws Exception {
+		String expectedResult = "It should opens textbox input to enter discount.";
 
-		Sync.waitElementClickable("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
-		Common.scrollIntoView("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
-		Common.clickElement("xpath", "(//header[@class='mt-4 title-panel-links']/button)[1]");
-		if (Common.getCurrentURL().contains("preprod")) {
-			Sync.waitElementPresent("xpath", "//div/input[@placeholder='Enter discount code']");
+		try {
 
-			Common.textBoxInput("xpath", "//div/input[@placeholder='Enter discount code']", data.get(dataSet).get("Discountcode"));
-		} else {
-			Sync.waitElementPresent("xpath", "//div/input[@placeholder='Enter discount code']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
+				Sync.waitElementPresent("id", "discount-code");
 
-			Common.textBoxInput("xpath", "//div/input[@placeholder='Enter discount code']", data.get(dataSet).get("ProdDiscountcode"));
+				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+			} else {
+				Sync.waitElementPresent("id", "discount-code");
+
+				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
+			}
+
+			int size = Common.findElements("id", "discount-code").size();
+			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+					"Successfully open the discount input box", "User unable enter Discount Code");
+			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
+			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
+			System.out.println(discountcodemsg);
+			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
+					"verifying pomocode", expectedResult, "promotion code working as expected",
+					"Promation code is not applied");
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
+					"").trim();
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'flex items')]")
+					.replace("$", "").trim();
+			Float shippingvalue = Float.parseFloat(shipping);
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
+			Float Taxvalue = Float.parseFloat(Tax);
+			Thread.sleep(4000);
+			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]")
+					.replace("$", "").trim();
+			Float Discountvalue = Float.parseFloat(Discount);
+			System.out.println(Discountvalue);
+
+			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
+					.replace("$", "").trim();
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			Thread.sleep(4000);
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			Thread.sleep(4000);
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(ordertotal);
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Successfully Order summary is displayed in the payment page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
+
 		}
-		int size = Common.findElements("id", "discount-code").size();
-		Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
-				"Successfully open the discount input box", "User unable enter Discount Code");
-		Sync.waitElementClickable("xpath", "//div[contains(@class, 'coupon-code field')]//button[@type='button']");
-		Common.clickElement("xpath", "//div[contains(@class, 'coupon-code field')]//button[@type='button']");
-		Sync.waitPageLoad();
-		Thread.sleep(4000);
-		expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-		String discountcodemsg = Common.getText("xpath", "//span[@class='w-full text-center pr-10']");
-		Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
-				"verifying pomocode", expectedResult, "promotion code working as expected",
-				"Promation code is not applied");
 
-	}
+		catch (Exception | Error e) {
+			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
+					"User failed to proceed with discountcode",
+					Common.getscreenShotPathforReport("discountcodefailed"));
 
-	catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
-				"User failed to proceed with discountcode",
-				Common.getscreenShotPathforReport("discountcodefailed"));
+			Assert.fail();
 
-		Assert.fail();
-
-	}
+		}
 }
-	
 }
