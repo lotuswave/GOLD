@@ -9210,6 +9210,8 @@ public void header_1_Percent_Planet() {
 			System.out.println(rewards);
 			if(rewards==0)
 			{
+				Common.scrollIntoView("name", "telephone");
+				Thread.sleep(5000);
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			}
 			
@@ -9217,7 +9219,7 @@ public void header_1_Percent_Planet() {
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 				
-
+				Thread.sleep(8000);
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			}
 				try {
