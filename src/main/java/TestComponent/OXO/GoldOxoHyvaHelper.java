@@ -11956,4 +11956,29 @@ public void outofstock_subcription(String Dataset) {
 
 		}
 }
+
+
+
+	public void signout() {
+		try {
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementClickable("xpath", "//a[@id='customer.header.sign.out.link']");
+
+			Common.javascriptclickElement("xpath", "//a[@id='customer.header.sign.out.link']");
+
+//			Common.assertionCheckwithReport(
+//					Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
+//					"Validating My Account page navigation", "user sign in and navigate to my account page",
+//					"Successfully navigate to my account page", "Failed to navigate my account page ");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+					"after clinking signout user signout fro the page", "user Successfully signout  ",
+					Common.getscreenShotPathforReport("user Failed to signout"));
+			Assert.fail();
+		}
+
+	}
 }
