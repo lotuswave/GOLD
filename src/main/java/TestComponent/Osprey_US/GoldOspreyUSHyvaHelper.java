@@ -80,7 +80,7 @@ public class GoldOspreyUSHyvaHelper {
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Backpacks"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -90,10 +90,10 @@ public class GoldOspreyUSHyvaHelper {
 			{
 				close_add();
 				 acceptPrivacy();
-				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Backpacks"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -475,7 +475,7 @@ public class GoldOspreyUSHyvaHelper {
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("My Wish List")
+					Common.getPageTitle().contains("Backpacks") || Common.getPageTitle().contains("My Wish List")
 							|| Common.getPageTitle().contains("Osprey"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
@@ -8035,8 +8035,8 @@ public class GoldOspreyUSHyvaHelper {
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
             Thread.sleep(4000);
-            Sync.waitElementPresent("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
-            Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
+            Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
+            Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
         }
         else {
 
