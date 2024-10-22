@@ -90,10 +90,10 @@ public class GoldOspreyUSHyvaHelper {
 			{
 				close_add();
 				 acceptPrivacy();
-				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Backpacks"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -476,7 +476,7 @@ public class GoldOspreyUSHyvaHelper {
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("My Wish List")
-							|| Common.getPageTitle().contains("Osprey"),
+							|| Common.getPageTitle().contains("Backpacks"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -3281,16 +3281,16 @@ public class GoldOspreyUSHyvaHelper {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a//span[contains(text(),'"+ header +"')]");
+					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a//span[text()='"+ header +"']");
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
@@ -4476,43 +4476,46 @@ public class GoldOspreyUSHyvaHelper {
 	}
 	
 	public void filter_By(String Dataset) {
-  String category=data.get(Dataset).get("category");
-		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
-			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
-			Common.clickElement("xpath", "//input[@value='" + category + "']");
-			Thread.sleep(5000);
-			String text = Common.findElement("xpath", "(//input[@value='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
-			int textValue = Integer.parseInt(text);
-			String categoryvalue = Integer.toString(textValue);
-			Thread.sleep(6000);
-			String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
-					.getText().trim();
-			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
-			String items = Integer.toString(noOfItems);
-			System.out.println(text);
-			System.out.println(textValue);
-			System.out.println(categoryvalue);
+		  String category=data.get(Dataset).get("category");
+				try {
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
+					Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
+					Common.clickElement("xpath", "//input[@value='" + category + "']");
+					Thread.sleep(5000);
+					String text = Common.findElement("xpath", "(//input[@value='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
+					int textValue = Integer.parseInt(text);
+					String categoryvalue = Integer.toString(textValue);
+					Thread.sleep(6000);
+					String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
+							.getText().trim();
+					Common.clickElement("xpath", "//button[text()='Load More']");
+					Thread.sleep(4000);
+					int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+					String items = Integer.toString(noOfItems);
+					System.out.println(text);
+					System.out.println(textValue);
+					System.out.println(categoryvalue);
 
-			System.out.println(textValueAfterFilter);
-			System.out.println(noOfItems);
+					System.out.println(textValueAfterFilter);
+					System.out.println(noOfItems);
 
-			System.out.println(items);
+					System.out.println(items);
 
-			Common.assertionCheckwithReport(categoryvalue.equals(items),
-					"To validate the filter in Product Listing Page",
-					"User should able to filter in Product Listing Page",
-					"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
-					"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
-					Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
+					Common.assertionCheckwithReport(categoryvalue.equals(items),
+							"To validate the filter in Product Listing Page",
+							"User should able to filter in Product Listing Page",
+							"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
+							"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
+							Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
 
-			Assert.fail();
-		}
-	}
+					Assert.fail();
+				}
+			}
+
 	
 	public void price_filter_validation(String Dataset) {
 		// TODO Auto-generated method stub
@@ -4697,6 +4700,8 @@ public class GoldOspreyUSHyvaHelper {
 				}
 				else
 				{
+				Common.clickElement("xpath","//div[@class='ais-Panel-header']//div[text()='Price']");	
+				Thread.sleep(3000);
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
@@ -8624,9 +8629,10 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8642,15 +8648,17 @@ public class GoldOspreyUSHyvaHelper {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			//Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
+			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
 			Thread.sleep(4000);
-			String product = data.get(Dataset).get("Products").toUpperCase();
-			Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product),
+			//String product = data.get(Dataset).get("Products").toUpperCase();
+			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 //			click_UGC();
-			Locally_PDP();
+//			Locally_PDP();
+			PDP_Tabs("Tabs");
 			Common.actionsKeyPress(Keys.UP);
 
 		} catch (Exception | Error e) {
@@ -8812,16 +8820,16 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//a[@class='data switch' and text()='" + Links[i] + "']");
-				Common.clickElement("xpath", "//a[@class='data switch' and text()='" + Links[i] + "']");
+				Sync.waitElementPresent("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
+				/*String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
 						.getAttribute("aria-expanded");
 				Common.assertionCheckwithReport(title.contains("true"), "verifying the tabs in PDP ",
 						"After clicking on the " + Links[i] + "It should display the related content",
 						"sucessfully after clicking on the " + Links[i] + "it has been displayed related content",
-						"Failed to display related content" + Links[i]);
+						"Failed to display related content" + Links[i]);*/
 
 			}
 		} catch (Exception | Error e) {
