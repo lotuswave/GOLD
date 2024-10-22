@@ -3331,16 +3331,16 @@ public class GoldOspreyUSHyvaHelper {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-top')]//span[contains(text(),'"+ header +"')]");
+					"//a//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//a//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
+				Common.clickElement("xpath", "//a//span[text()='"+ header +"']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
@@ -4506,23 +4506,23 @@ public class GoldOspreyUSHyvaHelper {
 	
 	public void view_PLP_page() {
 		try {
-			Thread.sleep(4000);
-			String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
-			System.out.println(title);
-			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+			String title = Common.findElement("xpath", "//div[@class='c-clp-hero__content']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']")
 					.getAttribute("aria-label");
-			System.out.println(breadcrumbs);
-			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
-			System.out.println(filter);
+			Thread.sleep(2000);
+			String filter = Common.findElement("xpath", "//span[normalize-space()='Filter by:']").getText().trim();
 			String Sort = Common
 					.findElement("xpath",
-							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
-					.getText();
+							"//select[@class='ais-SortBy-select']")
+					.getAttribute("class");
+			System.out.println(title);
+			System.out.println(breadcrumbs);
+			System.out.println(filter);
 			System.out.println(Sort);
-			Thread.sleep(4000);
+
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane") && title.contains("c-clp-hero")
-							&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
+					breadcrumbs.contains("Breadcrumb") && title.contains("c-clp-hero__content")
+							&& filter.contains("Filter by:") && Sort.contains("ais-SortBy"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -4539,14 +4539,16 @@ public class GoldOspreyUSHyvaHelper {
   String category=data.get(Dataset).get("category");
 		try {
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[contains(text(),'" + category + "')]");
-			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//a[contains(text(),'" + category + "')]//span").getText();
+			Sync.waitElementPresent("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
+			Common.clickElement("xpath", "//input[@value='" + category + "']");
+			Thread.sleep(5000);
+			String text = Common.findElement("xpath", "(//input[@value='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
-					.getText();
+			String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
+					.getText().trim();
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
 			System.out.println(text);
@@ -5033,24 +5035,19 @@ public class GoldOspreyUSHyvaHelper {
 			}
 			else
 			{
-			Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
-			Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
+			Sync.waitElementPresent("xpath", "//div[@class='ais-Panel-header']//div[text()='Color']");
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Color']");
 			Thread.sleep(3000);
-			String expand = Common.findElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']").getAttribute("aria-expanded");
-			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
-					"When we click on the color it should be expand",
-					"Successfully the color has been expand when we click on the colors ",
-					"unable to expand the colors in PLP page");
 			}
 			Sync.waitElementPresent("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+					"//input[@value='"+ colorname +"']");
 			Common.clickElement("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+					"//input[@value='"+ colorname +"']");
 			Thread.sleep(3000);
 			String colorcount = Common.findElement("xpath",
-					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
-					.getText();
-			String bottlecount = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+					"(//input[@value='Black']//following-sibling::span)[3]")
+					.getText().replace("(", "").replace(")", "");
+			String bottlecount = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]").getText().trim();
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -15153,6 +15150,34 @@ public String Secure_Payment_details(String dataSet) throws Exception {
 
 	}
 	return order;
+}
+
+public void sort_By(String dataSet) {
+	// TODO Auto-generated method stub
+	String sort = data.get(dataSet).get("Sort");
+	try {
+
+		Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
+		Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
+
+
+		String low = Common
+				.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
+				.getText();
+
+		Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+				"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+				"Failed to Sort  in Product Listing Page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the Sort  in Product Listing Page",
+				"User should able to Sort  in Product Listing Page", "Unable to Sort the Product Listing Page",
+				Common.getscreenShotPathforReport("Failed to Sort  Product listing Page"));
+
+		Assert.fail();
+	}
+	
 }
 }
 
