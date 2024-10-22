@@ -93,7 +93,7 @@ public class GoldOspreyUSHyvaHelper {
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Backpacks"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -476,7 +476,7 @@ public class GoldOspreyUSHyvaHelper {
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("My Wish List")
-							|| Common.getPageTitle().contains("Osprey"),
+							|| Common.getPageTitle().contains("Backpacks"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
