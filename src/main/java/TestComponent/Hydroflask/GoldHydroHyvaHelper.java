@@ -137,10 +137,10 @@ public class GoldHydroHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
 
 			Thread.sleep(3000);
 
@@ -151,7 +151,7 @@ public class GoldHydroHyvaHelper {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()=' Bottles']");
+			Common.clickElement("xpath", "//span[text()='Bottles']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
@@ -240,13 +240,13 @@ public class GoldHydroHyvaHelper {
 		try {
 			Thread.sleep(8000);
 			Common.actionsKeyPress(Keys.UP);
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
 			
-			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+			String openminicart = Common.findElement("xpath", "//div[contains(@class,'fixed inset-y-0')]").getAttribute("aria-modal");
 			System.out.println(openminicart);
-			if(openminicart.contains("active")) {
-			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
+			if(openminicart.contains("true")) {
+			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
 					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
 			} else {
 			Thread.sleep(3000);
@@ -265,6 +265,7 @@ public class GoldHydroHyvaHelper {
 
 		}
 	}
+
 
 	public void minicart_Checkout() {
 
@@ -978,13 +979,13 @@ public class GoldHydroHyvaHelper {
 
 	public void click_singinButton() {
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//li[@class='m-account-nav__log-in']//a[text()='Sign In']");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[@title='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getText("xpath", "//h1[@id='block-customer-login-heading']").equals("Sign In"),
+					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -1000,6 +1001,7 @@ public class GoldHydroHyvaHelper {
 			Assert.fail();
 		}
 	}
+
 
 	public void login_Hydroflask(String dataSet) {
 
@@ -1148,9 +1150,9 @@ public class GoldHydroHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+				Sync.waitElementPresent("xpath", "(//img[contains(@class,'group-hover/item-image:hidden')])[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
+						"(//img[contains(@class,'group-hover/item-image:hidden')])[1]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -1163,24 +1165,25 @@ public class GoldHydroHyvaHelper {
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			String name = Common.findElement("xpath", "//span[contains(@itemprop,'name')]").getText();
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 			product_quantity(Dataset);
+			System.out.println(productcolor);
 //			click_UGC();
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitElementPresent("xpath", "(//button[contains(@title,'Add to Cart')]//span)");
+			Common.clickElement("xpath", "(//button[contains(@title,'Add to Cart')]//span)");
 
 			Thread.sleep(4000);
-			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+			String message2 = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
+					.getText();
+			Common.assertionCheckwithReport(message2.contains("You added"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
 					"failed to add product to the cart");
 
@@ -1192,7 +1195,6 @@ public class GoldHydroHyvaHelper {
 		}
 
 	}
-
 	public void minicart_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
@@ -3331,11 +3333,11 @@ public class GoldHydroHyvaHelper {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
-			Sync.waitElementPresent("xpath", "//span[text()='View Cart']");
-			Common.clickElement("xpath", "//span[text()='View Cart']");
-			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
+			Sync.waitElementPresent("xpath", "(//div[@id='cart-drawer-title']//span)[1]");
+			String minicart = Common.findElement("xpath", "(//div[@id='cart-drawer-title']//span)[1]").getText();
+			Sync.waitElementPresent("xpath", "//a[contains(text(),'View Cart')]");
+			Common.clickElement("xpath", "//a[contains(text(),'View Cart')]");
+			String viewcart = Common.findElement("xpath", "//div[contains(@class,'flex items-center')]//h1").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 //			Common.assertionCheckwithReport(
@@ -5805,22 +5807,22 @@ catch(Exception | Error e)
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
-			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
 			Thread.sleep(4000);
-			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.clickElement("xpath", "//span[text()='Reset My Password']");
+			Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
+			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
-			String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
+			String message = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("We received too many requests for password resets")
-							|| message.contains("If there is an account associated"),
+							|| message.contains("reCAPTCHA verification failed."),
 					"To validate the user is navigating to Forgot Password page",
 					"user should naviagte to forgot password page", "User lands on Forgot Password page",
 					"User failed to navigate to forgot password page");
@@ -7493,14 +7495,14 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.clickElement("xpath", "//select[@class='a-form-elem a-select-menu']");
-			Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, quantity);
+			Common.clickElement("xpath", "(//div[@class='flex h-full']//select)[1]");
+			Common.dropdown("xpath", "(//div[@class='flex h-full']//select)[1]", Common.SelectBy.VALUE, quantity);
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productquantity = Common.findElement("xpath", "//select[@class='a-form-elem a-select-menu']")
+			String productquantity = Common.findElement("xpath", "(//div[@class='flex h-full']//select)[1]")
 					.getAttribute("value");
 			System.out.println(productquantity);
 			Common.assertionCheckwithReport(productquantity.equals(quantity),
@@ -7519,23 +7521,24 @@ catch(Exception | Error e)
 		}
 
 	}
-	public void updateproductcolor_shoppingcart(String Dataset) {
+
+public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		String productcolor = "White";
-		System.out.println(productcolor);
+		String productcolor1 = "Stone";
+		System.out.println(productcolor1);
 		try {
-			Common.clickElement("xpath", "//td//span[@class='icon-cart__edit a-icon-text-btn__icon']");
+			Common.clickElement("xpath", "//div[@class='flex justify-end']//a");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
+			Common.clickElement("xpath", "//input[@aria-label='" + productcolor1 + "']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()='Update Cart']");
+			Common.clickElement("xpath", "//span[contains(text(),'Update item')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String getProductColor =Common.findElement("xpath","//td//span[@class='a-product-attribute__value']").getText().trim();
+			String getProductColor =Common.findElement("xpath","(//div[@class='mt-2 title-xs hf:title-2xs os:text-sm']//span)[2]").getText().trim();
 			System.out.println(getProductColor);
-			Common.assertionCheckwithReport(productcolor.equals(getProductColor),
+			Common.assertionCheckwithReport(productcolor1.equals(getProductColor),
 					"validating the update color in shopping cart page",
 					"color should be update in the shopping cart page",
 					"color has been updated in the shopping cart page",
@@ -7551,31 +7554,8 @@ catch(Exception | Error e)
 		}
 
 	}
-	public void deleteProduct_shoppingcart() {
-		// TODO Auto-generated method stub
-		
-		try {
-			Common.clickElement("xpath", "//tr//span[@class='icon-cart__remove a-icon-text-btn__icon']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String getText =Common.findElement("xpath","//p[@role='alert']").getText();
-			
-			Common.assertionCheckwithReport(getText.equals("You have no items in your shopping cart."),
-					"validating the delete product in shopping cart page",
-					"color should be delete in the shopping cart page",
-					"color has been deleted in the shopping cart page",
-					"Failed to delete the product  in the shopping cart page");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the delete product in shopping cart page",
-					"color should be delete in the shopping cart page",
-					"Unable to delete the product  in the shopping cart page",
-					Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
-			Assert.fail();
-		}
 
-	}
 
 	public void addtocart_PLP(String Dataset) {
 		// TODO Auto-generated method stub
@@ -7711,8 +7691,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub.
 		String expectedResult = "It should opens textbox input to enter discount.";
 		try {
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Add Discount Code']");
-			Common.clickElement("xpath", "//button[@aria-label='Add Discount Code']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -7723,16 +7703,16 @@ catch(Exception | Error e)
 			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Add']");
-			Common.clickElement("xpath", "//button[@value='Add']");
+			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
+			Common.clickElement("xpath", "//button[@value='Apply Discount']");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("preprod")) {
-				String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']");
+				String discountcodemsg = Common.getText("xpath", "///div[@class='container']//div[@class='relative flex w-full']/span");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
-				String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']//div");
+				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			}
@@ -7778,7 +7758,6 @@ catch(Exception | Error e)
 		}
 
 	}
-
 	public void reorder() {
 		// TODO Auto-generated method stub
 		try {
@@ -11217,9 +11196,34 @@ catch(Exception | Error e)
 			}
 
 		}
-	
+
+		public void deleteProduct_shoppingcart() {
+		// TODO Auto-generated method stub
+		
+		try {
+			Common.clickElement("xpath", "//button[contains(@class,'group p-2.5 text-black')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
+			String getText =Common.findElement("xpath","(//div[@class='cart-empty container min-h-75']//p)[1]").getText();
+			
+			Common.assertionCheckwithReport(getText.equals("You have no items in your shopping cart."),
+					"validating the delete product in shopping cart page",
+					"color should be delete in the shopping cart page",
+					"color has been deleted in the shopping cart page",
+					"Failed to delete the product  in the shopping cart page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the delete product in shopping cart page",
+					"color should be delete in the shopping cart page",
+					"Unable to delete the product  in the shopping cart page",
+					Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
+			Assert.fail();
+		}
 
 	}
+}
 		
 
 

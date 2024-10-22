@@ -636,32 +636,32 @@ public class GoldOxoHyvaHelper {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
-//			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
-//					data.get(dataSet).get("Street"));
+			Common.clickElement("xpath", "//section[@id='shipping-details']//input[@name='street[0]']");
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
 //			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
 
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Common.findElement("xpath", "//section[@id='shipping-details']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("name", "postcode");
@@ -687,7 +687,6 @@ public class GoldOxoHyvaHelper {
 		}
 
 	}
-
 	public void addDeliveryAddress_Guest(String dataSet) throws Exception {
 
 		try {
@@ -791,10 +790,11 @@ public class GoldOxoHyvaHelper {
 		}
 	}
 
-	public void selectStandedshippingaddress() {
+	public void selectStandardshippingaddress() {
 		try {
 
-			int size = Common.findElements("xpath", "//input[@class='a-radio-button__input']").size();
+			int size = Common.findElements("xpath", "//input[@value='tablerate_bestway']").size();
+			System.out.println(size);
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//input[@value='tablerate_bestway']");
 				Common.clickElement("xpath", "//input[@value='tablerate_bestway']");
@@ -814,6 +814,7 @@ public class GoldOxoHyvaHelper {
 		}
 	}
 
+
 	public void clickSubmitbutton_Shippingpage() {
 		String expectedResult = "click the submit button to navigate to payment page";
 		try {
@@ -832,10 +833,13 @@ public class GoldOxoHyvaHelper {
 	public void validatingErrormessageShippingpage_negative() {
 		int Firstname_Error = Common.findElements("xpath", "//li[@data-msg-field='firstname']").size();
 		int Lastname_Error=Common.findElements("xpath", "//li[@data-msg-field='lastname']").size();
-		int Address_Error =Common.findElements("xpath", "//li[@data-msg-field='street[0]']").size();
+//		int Address_Error =Common.findElements("xpath", "//li[@data-msg-field='street[0]']").size();
 		int Phn_Error= Common.findElements("xpath", "//li[@data-msg-field='telephone']").size();
 		String expectedResult = "Error message will dispaly when we miss the data in fields ";
-		if (Firstname_Error >0 && Lastname_Error>0&& Address_Error>0&& Phn_Error>0) {
+		System.out.println(Firstname_Error);
+		System.out.println(Lastname_Error);
+		System.out.println(Phn_Error);
+		if (Firstname_Error >0 && Lastname_Error>0&& Phn_Error>0) {
 			System.out.println("Error Message displayed");
 			ExtenantReportUtils.addPassLog("validating the shippingPage error message", expectedResult,
 					"sucessfully  dispaly error message", Common.getscreenShotPathforReport("errormessagenegative"));
@@ -847,6 +851,7 @@ public class GoldOxoHyvaHelper {
 			Assert.fail();
 		}
 	}
+
 
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub

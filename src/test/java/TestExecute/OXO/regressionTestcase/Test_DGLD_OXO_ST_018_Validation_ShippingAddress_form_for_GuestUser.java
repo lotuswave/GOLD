@@ -22,7 +22,7 @@ public class Test_DGLD_OXO_ST_018_Validation_ShippingAddress_form_for_GuestUser 
 			Oxo.addtocart("addproduct");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Gustuser("Invalid details");
-			Oxo.selectStandedshippingaddress();
+			Oxo.selectStandardshippingaddress();
 			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.validatingErrormessageShippingpage_negative();
 			
