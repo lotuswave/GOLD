@@ -2606,13 +2606,6 @@ public class GoldOspreyUSHyvaHelper {
 				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
-//				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
-//				String Shippingstate = Common
-//						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
-//						.getText();
-
-//				System.out.println(Shippingstate);
-
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
@@ -8987,8 +8980,8 @@ public class GoldOspreyUSHyvaHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
-			Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
-			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+			Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
+			Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -9002,102 +8995,71 @@ public class GoldOspreyUSHyvaHelper {
 			int size = Common.findElements("id", "discount-code").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Thread.sleep(3000);
+			Sync.waitElementClickable("xpath", "//span[contains(text(), 'Apply Code')]");
+			Common.clickElement("xpath", "//span[contains(text(), 'Apply Code')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+			Common.scrollIntoView("xpath", "//span[text()='Your coupon was successfully applied.']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
 			System.out.println(discountcodemsg);
 			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
-			if(Common.getCurrentURL().contains("che_")||Common.getCurrentURL().contains("se_sv")||Common.getCurrentURL().contains("fr"))
-			{
-				Thread.sleep(4000);
-				Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
-				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
-						"").replace(",", ".");
-				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
-						.replace(Symbol, "").replace(",", ".");
-				Float shippingvalue = Float.parseFloat(shipping);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "").replace(",", ".");
-				Float Taxvalue = Float.parseFloat(Tax);
-				Thread.sleep(4000);
-				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-						.replace(Symbol, "").replace(",", ".");
-				Float Discountvalue = Float.parseFloat(Discount);
-				System.out.println(Discountvalue);
 
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
-						.replace(Symbol, "").replace(",", ".");
-				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Thread.sleep(4000);
-				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				Thread.sleep(4000);
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-						"validating the order summary in the payment page",
-						"Order summary should be display in the payment page and all fields should display",
-						"Successfully Order summary is displayed in the payment page and fields are displayed",
-						"Failed to display the order summary and fileds under order summary");
-			}
-			else 
-			{
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+			Common.scrollIntoView("xpath", "(//div[@class='item subtotal']//span[2])[2]");
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[2])[2]").replace(Symbol,
 					"");
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
-					.replace(Symbol, "");
-			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
-			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(4000);
-			String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-					.replace(Symbol, "");
-			Float Discountvalue = Float.parseFloat(Discount);
-			System.out.println(Discountvalue);
+			
+			double subtotalvalue = Double.parseDouble(Subtotal);
+//			Float subtotalvalue = Float.parseFloat(Subtotal);
+			System.out.println("subtotalvalue" + subtotalvalue);
 
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[2])[2]").replace(Symbol,
+					"");
+			double shippingvalue = Double.parseDouble(shipping);
+			System.out.println("shippingvalue" + shippingvalue);
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[2])[2]").replace(Symbol, "");
+			double Taxvalue = Double.parseDouble(Tax);
+			System.out.println("Taxvalue" + Taxvalue);
+			Thread.sleep(4000);
+			String Discount = Common.getText("xpath", "(//div[@class='item discount']//span[2])[2]").replace(Symbol,
+					"");
+			double Discountvalue = Double.parseDouble(Discount);
+			System.out.println("Discountvalue" + Discountvalue);
+
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[2])[2]")
 					.replace(Symbol, "");
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			double ordertotalvalue = Double.parseDouble(ordertotal);
 			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("gb"))
-			{
-			Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
+
+			double Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
-			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+
+			double expectedTotalvalue = Double.parseDouble(ExpectedTotalAmmount2);
+double tolarance =0.01;
+			System.out.println("expectedTotalvalue" + expectedTotalvalue);
+			System.out.println("ordertotalvalue" + ordertotalvalue);
+if(Math.abs(expectedTotalvalue - ordertotalvalue) == 0 ) {
+			Common.assertionCheckwithReport(Math.abs(expectedTotalvalue - ordertotalvalue) == 0,
 					"validating the order summary in the payment page",
 					"Order summary should be display in the payment page and all fields should display",
 					"Successfully Order summary is displayed in the payment page and fields are displayed",
 					"Failed to display the order summary and fileds under order summary");
-			}
-			else
-			{
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				Thread.sleep(4000);
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-						"validating the order summary in the payment page",
-						"Order summary should be display in the payment page and all fields should display",
-						"Successfully Order summary is displayed in the payment page and fields are displayed",
-						"Failed to display the order summary and fileds under order summary");
-			}
-			}
 
 		}
+else {
+	
+	Common.assertionCheckwithReport(Math.abs(expectedTotalvalue - ordertotalvalue) >=tolarance,
+			"validating the order summary in the payment page",
+			"Order summary should be display in the payment page and all fields should display",
+			"Successfully Order summary is displayed in the payment page and fields are displayed",
+			"Failed to display the order summary and fileds under order summary");
 
+}
+		}
 		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
@@ -9962,13 +9924,13 @@ public class GoldOspreyUSHyvaHelper {
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(3000);
 			
-     	Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-     	Common.clickElement("xpath","//span[text()='Add Gift Card']");
-		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard3_Stage"));
+     	Common.scrollIntoView("xpath", "//button[contains(text(), 'Add Gift Card')]");
+     	Common.clickElement("xpath","//button[contains(text(), 'Add Gift Card')]");
+		Common.textBoxInput("id","amcard-input", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
-		Common.clickElement("xpath","//span[text()='Add Code']");
+		Common.clickElement("xpath","//span[contains(text(),'Add Code')]");
 		Thread.sleep(2000);
-		String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 	    System.out.println(successmsg);	
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
