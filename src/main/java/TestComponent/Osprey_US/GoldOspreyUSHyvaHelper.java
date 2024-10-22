@@ -4483,43 +4483,46 @@ public class GoldOspreyUSHyvaHelper {
 	}
 	
 	public void filter_By(String Dataset) {
-  String category=data.get(Dataset).get("category");
-		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
-			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
-			Common.clickElement("xpath", "//input[@value='" + category + "']");
-			Thread.sleep(5000);
-			String text = Common.findElement("xpath", "(//input[@value='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
-			int textValue = Integer.parseInt(text);
-			String categoryvalue = Integer.toString(textValue);
-			Thread.sleep(6000);
-			String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
-					.getText().trim();
-			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
-			String items = Integer.toString(noOfItems);
-			System.out.println(text);
-			System.out.println(textValue);
-			System.out.println(categoryvalue);
+		  String category=data.get(Dataset).get("category");
+				try {
+					Thread.sleep(3000);
+					Sync.waitElementPresent("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
+					Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Features']");
+					Common.clickElement("xpath", "//input[@value='" + category + "']");
+					Thread.sleep(5000);
+					String text = Common.findElement("xpath", "(//input[@value='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
+					int textValue = Integer.parseInt(text);
+					String categoryvalue = Integer.toString(textValue);
+					Thread.sleep(6000);
+					String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
+							.getText().trim();
+					Common.clickElement("xpath", "//button[text()='Load More']");
+					Thread.sleep(4000);
+					int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+					String items = Integer.toString(noOfItems);
+					System.out.println(text);
+					System.out.println(textValue);
+					System.out.println(categoryvalue);
 
-			System.out.println(textValueAfterFilter);
-			System.out.println(noOfItems);
+					System.out.println(textValueAfterFilter);
+					System.out.println(noOfItems);
 
-			System.out.println(items);
+					System.out.println(items);
 
-			Common.assertionCheckwithReport(categoryvalue.equals(items),
-					"To validate the filter in Product Listing Page",
-					"User should able to filter in Product Listing Page",
-					"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
-					"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
-					Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
+					Common.assertionCheckwithReport(categoryvalue.equals(items),
+							"To validate the filter in Product Listing Page",
+							"User should able to filter in Product Listing Page",
+							"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("To validate the filter in Product Listing Page",
+							"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
+							Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
 
-			Assert.fail();
-		}
-	}
+					Assert.fail();
+				}
+			}
+
 	
 	public void price_filter_validation(String Dataset) {
 		// TODO Auto-generated method stub
@@ -4704,6 +4707,8 @@ public class GoldOspreyUSHyvaHelper {
 				}
 				else
 				{
+				Common.clickElement("xpath","//div[@class='ais-Panel-header']//div[text()='Price']");	
+				Thread.sleep(3000);
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
