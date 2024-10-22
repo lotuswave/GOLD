@@ -1448,7 +1448,8 @@ public class GoldOxoHyvaHelper {
 
 	}
 
-	public void click_Createaccount() {
+
+public void click_Createaccount() {
 
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
@@ -1471,19 +1472,21 @@ public class GoldOxoHyvaHelper {
 			Assert.fail();
 		}
 	}
-
-	public String create_account(String Dataset) {
-		String email="";
-		String Product=data.get(Dataset).get("Products");
+public String create_account(String Dataset) {
+//	String email="";
+	
+		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		
+		String Product = data.get(Dataset).get("Products");
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-//			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
 			
-			
-			Common.textBoxInput("xpath", "//input[@id='email_address']", data.get(Dataset).get("UserName"));
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			// Using the generated email for account creation
+			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
+
+			// Removed previous logic that was retrieving the value from the field
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			System.out.println(data.get(Dataset).get("Password"));
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
@@ -1496,10 +1499,10 @@ public class GoldOxoHyvaHelper {
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
-					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing")&& message.contains(Product+ " has been added to your Favorites. Click here to view your Favorites") ,
+					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
-					"Sucessfully user navigates to the My account page after clickng on thr signup button",
+					"Successfully user navigates to the My account page after clicking on the signup button",
 					"Failed to navigate to the My account page after clicking on the signup button");
 
 		} catch (Exception | Error e) {
@@ -3944,41 +3947,48 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		Accont_Information();
 		try {
+			
+			String email = Common.genrateRandomEmail(data.get(dataSet).get("Email"));
 
-			//Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
-			//Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
+			// Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
+			// Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
+			
+			Sync.waitElementPresent("xpath", "//input[@id='change-email']");
+			Common.clickElement("xpath", "//input[@id='change-email']");
+			
+			Common.clickElement("xpath", "//input[@id='email']");
+			Common.findElement("xpath", "//input[@id='email']").clear();
+			
+			Common.textBoxInput("xpath", "//input[@id='email']", email);
 			
 			Sync.waitElementPresent("xpath", "//label[@for='change-password']");
 			Common.clickElement("xpath", "//label[@for='change-password']");
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "(//div//input[@id='current-password'])");
-			Common.textBoxInput("xpath", "(//input[@id='current-password'])", data.get(dataSet).get("CurrentPassword"));
-			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
-			Common.textBoxInput("xpath", "//input[@id='password-confirmation']",
-					data.get(dataSet).get("Confirm Password"));
-//			
-
+			Common.textBoxInput("xpath", "(//input[@id='current-password'])", data.get(dataSet).get("Current Password"));
+			
+			Common.clickElement("xpath", "//input[@id='password']");
+			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Password"));
+			
+			Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
+			
 			Common.clickElement("xpath", "//button[@title='Save Account Information']");
 			Thread.sleep(10000);
-			String sucessmessage = Common.findElement("xpath", "//div/span[text()='You saved the account information.']").getText();
+			String successMessage = Common.findElement("xpath", "//div/span[text()='You saved the account information.']").getText();
 			Thread.sleep(10000);
-			System.out.println(sucessmessage);
-			Common.assertionCheckwithReport(sucessmessage.contains("You saved the account"),
+			System.out.println(successMessage);
+			Common.assertionCheckwithReport(successMessage.contains("You saved the account"),
 					"Validating the saved account information", "Account information should be saved for the user",
-					"Sucessfully account information has been saved ", "failed to save the account information");
+					"Successfully account information has been saved ", "failed to save the account information");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the change passwordfor the register user",
-					"User enter the valid password", "User failed to proceed to change passowrd ",
+			ExtenantReportUtils.addFailedLog("verifying the change password for the registered user",
+					"User enters the valid password", "User failed to proceed to change password",
 					Common.getscreenShotPathforReport("emailpasswordnew"));
 			Assert.fail();
-
 		}
 	}
-
-
-
 
 	public void Accont_Information() {
 		// TODO Auto-generated method stub
@@ -12080,5 +12090,35 @@ public void outofstock_subcription(String Dataset) {
 			Assert.fail();
 		}
 
+	}
+
+
+
+	public void Change_Password_and_Email(String Dataset) {
+		// TODO Auto-generated method stub
+
+		try {
+			Sync.waitPageLoad();
+			Common.textBoxInput("id", "email", "testqa@000gmail.com");
+			Common.textBoxInput("id", "pass","Lotuswave@123");
+			Thread.sleep(3000);
+			Common.clickElement("xpath", "//button/span[text()='Sign In']");
+			Sync.waitPageLoad();
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
+					"To validate the user lands on My Account page after successfull login",
+					"After clicking on the signIn button it should navigate to the My Account page",
+					"user Sucessfully navigate to the My Account page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the My Account page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to My Account page after successfull login",
+					"After clicking on the signin button it should navigate to the My Account page",
+					"Unable to navigate the user to the My Account after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the My Account page "));
+
+			Assert.fail();
+
+		}
 	}
 }
