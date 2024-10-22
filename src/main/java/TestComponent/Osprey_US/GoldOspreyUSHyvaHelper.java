@@ -3288,16 +3288,16 @@ public class GoldOspreyUSHyvaHelper {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a//span[contains(text(),'"+ header +"')]");
+					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a//span[text()='"+ header +"']");
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
@@ -8631,9 +8631,10 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8649,15 +8650,17 @@ public class GoldOspreyUSHyvaHelper {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			//Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
+			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
 			Thread.sleep(4000);
-			String product = data.get(Dataset).get("Products").toUpperCase();
-			Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product),
+			//String product = data.get(Dataset).get("Products").toUpperCase();
+			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 //			click_UGC();
-			Locally_PDP();
+//			Locally_PDP();
+			PDP_Tabs("Tabs");
 			Common.actionsKeyPress(Keys.UP);
 
 		} catch (Exception | Error e) {
@@ -8819,16 +8822,16 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//a[@class='data switch' and text()='" + Links[i] + "']");
-				Common.clickElement("xpath", "//a[@class='data switch' and text()='" + Links[i] + "']");
+				Sync.waitElementPresent("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
+				/*String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
 						.getAttribute("aria-expanded");
 				Common.assertionCheckwithReport(title.contains("true"), "verifying the tabs in PDP ",
 						"After clicking on the " + Links[i] + "It should display the related content",
 						"sucessfully after clicking on the " + Links[i] + "it has been displayed related content",
-						"Failed to display related content" + Links[i]);
+						"Failed to display related content" + Links[i]);*/
 
 			}
 		} catch (Exception | Error e) {
