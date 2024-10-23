@@ -3997,7 +3997,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 
 		try {
 			Sync.waitPageLoad();
-			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			int size = Common.findElements("xpath", "//div[@class='column main']").size();
 			Common.assertionCheckwithReport(size > 0, "Verifying the order numbers in my orders page ",
 					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
 					"successfully order numbers has been displayed in the my orders page",
@@ -4009,34 +4009,31 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
 					"Unable to see the order numbers on my orders page",
 					Common.getscreenShotPathforReport("Failed to Display the order number in my orders page"));
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
-
 	}
 
 	public void click_Myorders() {
 
 		try {
-			Sync.waitElementVisible(40, "xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "(//ul[@class='m-account-nav__links']//a)[4]");
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//a[contains(text(),'My Orders')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders") || Common.getCurrentURL().contains("order/history/"),
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
 					"Failed to Navigate to the orders and return page");
-			
-
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"Unable to  Navigated to the orders and return page",
 					Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 	}
@@ -4081,39 +4078,37 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			String number = Common.findElement("xpath", "//a[@title='View Order']").getText();
+			String number = Common.findElement("xpath", "//span[text()='View Order']").getText();
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(40, "xpath", "//h1[@data-ui-id='page-title-wrapper']");
-			String Ordernumber = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
-			Common.findElement("xpath", "//span[contains(@class,'order-status ')]");
-			String reorder = Common.findElement("xpath", "//a[contains(@class,'action or')]//span").getText();
-			String backCTA = Common.findElement("xpath", "//a[contains(@class,'action back')]//span[2]").getText();
-			String orderdate = Common.findElement("xpath", "//div[@class='order-info']/p").getText();
+			Sync.waitElementPresent(40, "xpath", "//span[@class='title-lg']");
+			String Ordernumber = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
+			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
+			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
+			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
 			String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
 			String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
 			String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
 			String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
 			String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
 			System.out.println(itemsordered);
-			System.out.println(reorder);
-			System.out.println(backCTA);
-			System.out.println(orderdate);
+
 			Common.assertionCheckwithReport(
-					reorder.contains("REORDER") && backCTA.contains("BACK") && orderdate.contains("Order Date")
-							&& reorder.contains("REORDER"),
+					reorder.contains("Reorder") && backCTA.contains("Back ") && orderdate.contains("Order Date")
+							&& reorder.contains("Reorder"),
 					"validating the order details ",
 					"After Clicking on view Order it should be navigate to the order details page ",
 					"Sucessfully navigated to the orders detail page", "Failed to Navigate to the orders detail page");
-
+//	
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the order summary and UGC carasol ",
-					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
-					"Unable to Navigate to the orders page and UGC Casrol is not displayed ",
-					Common.getscreenShot("Failed to Navigate to the orders page and UGC Casrol is not displayed "));
-			AssertJUnit.fail();
+			ExtenantReportUtils.addFailedLog("validating the order Details ",
+					"After Clicking on view Order it should be navigate to the order details page ",
+					"Unable to Navigate to the orders details page  ",
+					Common.getscreenShot("Failed to Navigate to the orders details page "));
+			Assert.fail();
 
 		}
 
