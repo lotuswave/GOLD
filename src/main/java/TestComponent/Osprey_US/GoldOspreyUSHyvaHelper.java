@@ -1,5 +1,6 @@
 package TestComponent.Osprey_US;
 
+import org.testng.AssertJUnit;
 import static org.testng.Assert.fail;
 
 import java.io.IOException;
@@ -134,7 +135,7 @@ public class GoldOspreyUSHyvaHelper {
 						"Unable to navigate to the homepage and logo is not displayed",
 						"Failed to navigate to the homepage and logo is not displayed");
 
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		
@@ -188,7 +189,7 @@ public class GoldOspreyUSHyvaHelper {
 				"Unable to navigate to the homepage and logo is not displayed",
 				"Failed to navigate to the homepage and logo is not displayed");
 
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 		try {
@@ -227,7 +228,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to navigate the user to the home after clicking on the ewsletter Subcription popup",
 					Common.getscreenShotPathforReport("Failed to open to newsletter Subcription popup "));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		close_add();
 }
@@ -266,7 +267,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the My account page after clicking on the Signup",
 					"Unable to navigate to the My account page after clicking on the signup button",
 					"Failed to navigate to the My account page after clicking on the signup button");
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		return email;
 	}
@@ -309,7 +310,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to get an error message when user used the existing email",
 					Common.getscreenShotPathforReport(
 							"Failed to get an error message when user used the existing email"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -336,7 +337,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to click on the singIn button and not Navigated to the signIn page",
 					Common.getscreenShotPathforReport(
 							"Failed to click signIn button and not Navigated to the signIn page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -369,7 +370,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page",
 					"user should navigate to forgot password page", "User failed to land on Forgot Password page",
 					Common.getscreenShotPathforReport("failed  to naviagte forgot password page "));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -396,7 +397,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("Validate the Error message ",
 					"Should display Error: Please enter a valid email address.", "Failed to dispaly the Error message ",
 					Common.getscreenShotPathforReport("User unable to see an error message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -427,7 +428,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
 					"User faield to subscrption for newLetter  ",
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -455,7 +456,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Should display error Please enter a valid email address.", "Failed to display the error message",
 					Common.getscreenShotPathforReport("Failed to see an error message"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -490,7 +491,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to navigate the user to the home after clicking on the SignIn button",
 					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -546,7 +547,7 @@ public class GoldOspreyUSHyvaHelper {
 								"user should Navigate to the " + Account[i] + " page",
 								"User unable to navigate to the " + Account[i],
 								Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 				} else {
 					String Accountlinks = data.get(Dataset).get("Prod Account Links");
@@ -581,7 +582,7 @@ public class GoldOspreyUSHyvaHelper {
 								"user should Navigate to the " + Account[i] + " page",
 								"User unable to navigate to the " + Account[i],
 								Common.getscreenShotPathforReport("user Failed to Navigate to the respective page"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 				}
 
@@ -633,7 +634,7 @@ public class GoldOspreyUSHyvaHelper {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				
 			
@@ -671,7 +672,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -718,7 +719,7 @@ public class GoldOspreyUSHyvaHelper {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				
 				}
@@ -752,7 +753,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 					
 				}
@@ -767,7 +768,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -813,7 +814,7 @@ public class GoldOspreyUSHyvaHelper {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 
 			}
@@ -825,7 +826,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -870,7 +871,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -882,7 +883,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 		else
@@ -935,7 +936,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 		
@@ -985,7 +986,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -997,7 +998,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 		else
@@ -1040,7 +1041,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 				}
 			}
@@ -1051,7 +1052,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 
@@ -1102,7 +1103,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -1113,7 +1114,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 		else
@@ -1157,7 +1158,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -1168,7 +1169,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 		}
 	
 
@@ -1218,7 +1219,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -1229,7 +1230,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 		else
@@ -1273,7 +1274,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -1284,7 +1285,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 		}
 	
 
@@ -1337,7 +1338,7 @@ public class GoldOspreyUSHyvaHelper {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 
 			}
@@ -1349,7 +1350,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1394,7 +1395,7 @@ public class GoldOspreyUSHyvaHelper {
 								"validating the the products in the plp ",
 								"User should able to see the products in plp", "unable to see the products in the PLP",
 								Common.getscreenShot("Failed to see products in PLP"));
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				}
@@ -1406,7 +1407,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 		else
@@ -1446,7 +1447,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User should navigate to the " + Links[i] + "pages",
 						" unable to navigate to the " + Links[i] + "pages",
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 
@@ -1496,7 +1497,7 @@ public class GoldOspreyUSHyvaHelper {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 
 			}
@@ -1508,7 +1509,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1550,7 +1551,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1593,7 +1594,7 @@ public class GoldOspreyUSHyvaHelper {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 			}
 		}
@@ -1604,7 +1605,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1627,7 +1628,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		click_giftcard();
 		newregistry_CTA("Birthday");
@@ -1694,7 +1695,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking on save button It should be able to navigate to the gift registry page ",
 					"unable to Navigated to the gift registry page",
 					Common.getscreenShot("Failed to Navigate to the gift registry page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1720,7 +1721,7 @@ public class GoldOspreyUSHyvaHelper {
 					"It should display the baby gender under the gift registry",
 					"unable to display the baby gender under the gift registry",
 					Common.getscreenShot("failed to display the baby gender under gift registry"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -1772,7 +1773,7 @@ public class GoldOspreyUSHyvaHelper {
 					"It should display Registrant Information in gift registry",
 					"Unable to display the Registrant Informationin gift registry",
 					Common.getscreenShot("failed to display the Registrant Information under gift registry"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1811,7 +1812,7 @@ public class GoldOspreyUSHyvaHelper {
 					"It should be able to navigate to Respective event page  ",
 					"Unable to navigate to the selected Respective event page",
 					Common.getscreenShot("failed to Navigate to the respective event page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -1834,7 +1835,7 @@ public class GoldOspreyUSHyvaHelper {
 					"It should be able to navigate to the gift registry page ",
 					"Unable to Navigated to the gift registry page",
 					Common.getscreenShot("Failed to Navigate to the gift registry page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -1864,7 +1865,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking on save button It should be able to navigate to the gift registry page ",
 					"Unable to navigate to the gift registry page",
 					Common.getscreenShot("failed to Navigate to the gift registry page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -1890,7 +1891,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking on the delete button it should delete from the gift registry",
 					"Unable to delete from the gift registry",
 					Common.getscreenShot("failed to delete from the gift registry"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -1923,7 +1924,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking on save button It should be able to navigate to the gift registry page ",
 					"Unable to navigate to the gift registry page",
 					Common.getscreenShot("failed to Navigate to the gift registry page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -1957,7 +1958,7 @@ public class GoldOspreyUSHyvaHelper {
 					"enter product name will display in the search box",
 					" unable to enter the product name in  search box",
 					Common.getscreenShot("Failed to see the product name"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2057,7 +2058,7 @@ public class GoldOspreyUSHyvaHelper {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2082,7 +2083,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity",
 					Common.getscreenShot("failed to update the product quantity"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2128,7 +2129,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Error message should be dispaly if the requested quantity is not avaliable",
 					"Unable to display the error message if requested quantity is not avaliable",
 					Common.getscreenShot("failed to display the error message if requested quantity is not avaliable"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -2154,7 +2155,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should able to navigate to the view cart page", "unable to  navigates to the view cart page",
 					Common.getscreenShot("Failed to navigate to the view cart page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -2179,7 +2180,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"Unable to Navigated to the Manage Gift Registry",
 					Common.getscreenShot("failed to Navigate to the Manage Gift Registry"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		try {
@@ -2205,7 +2206,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After Upadting the quantity to zero the eroor message should be display",
 					"Unable to Display the error message for the when quantity changed to zero",
 					Common.getscreenShot("failed to Display the error message for the when quantity changed to zero"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -2247,7 +2248,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to display the  products in the gift registry",
 					Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2285,7 +2286,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking hare button with invalid email error message should be display",
 					"Unable to see the error message has been dispalyed ",
 					Common.getscreenShot("failed to display the error message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		try {
 			Sync.waitElementPresent(30, "xpath", "//strong[text()='Gift Registry']");
@@ -2307,7 +2308,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After clicking Gift registry it should navigate to the gift registry page",
 					"Unable to  Navigate  to the gift registry page ",
 					Common.getscreenShot("Failed to Navigate to the gift rigistry page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2346,7 +2347,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to Navigates the user to My Favorites page after clicking on the My Favorites CTA",
 					Common.getscreenShot(
 							"Failed to Navigate to the My Favorites page after Clicking on My Favorites CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2397,7 +2398,7 @@ public class GoldOspreyUSHyvaHelper {
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Favorites") ,
 						"validating the Navigation to the My Favorites page",
@@ -2434,7 +2435,7 @@ public class GoldOspreyUSHyvaHelper {
 					minicart_Checkout();
 				
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 
 			} else {
@@ -2453,7 +2454,7 @@ public class GoldOspreyUSHyvaHelper {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add  product to the cart ", Common.getscreenShot("failed to add product to the cart"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2516,7 +2517,7 @@ public class GoldOspreyUSHyvaHelper {
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
 						"validating the Navigation to the My Favorites page",
@@ -2557,7 +2558,7 @@ public class GoldOspreyUSHyvaHelper {
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2587,7 +2588,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
 					Common.getscreenShot("Failed to navigate to the shipping page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -2607,7 +2608,7 @@ public class GoldOspreyUSHyvaHelper {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "the mini cart is displayed",
 					"unable to  dislay the mini cart", Common.getscreenShot("Failed to display the mini cart"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -2689,7 +2690,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 
@@ -2754,7 +2755,7 @@ public class GoldOspreyUSHyvaHelper {
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 		}
@@ -2785,7 +2786,7 @@ public class GoldOspreyUSHyvaHelper {
 					"failed to select the " + method + " shipping method ",
 					Common.getscreenShotPathforReport("failed select " + method + " shipping method"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -2808,7 +2809,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the shipping page submitbutton", expectedResult,
 					"failed to click the submitbutton",
 					Common.getscreenShotPathforReport("failed submitbuttonshippingpage"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2831,7 +2832,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
 					"after clinking signout user signout fro the page", "user Successfully signout  ",
 					Common.getscreenShotPathforReport("user Failed to signout"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2865,7 +2866,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("To validate the yopto popup in when we click on the UGC",
 					"user should able to display the yopto popup", "unable to Displayed the yopto popup",
 					Common.getscreenShotPathforReport("Failed to Displayed the yopto popup"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -2888,7 +2889,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to Find a Store",
 					"unable to go back to the Find a Store page",
 					Common.getscreenShotPathforReport("faield to get back to Find a Store"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -2921,7 +2922,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating Retailers page",
 					"System directs the user back to Retailers page", "unable to user go back to Retailers page",
 					Common.getscreenShotPathforReport("faield to get back to Retailers page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2946,7 +2947,7 @@ public class GoldOspreyUSHyvaHelper {
 					"unable to user back to the hours page",
 					Common.getscreenShotPathforReport("Failed to get back to hours page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -2973,7 +2974,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating browser page",
 					"System directs the user back to the Browser page", "failed user back to the browser page",
 					Common.getscreenShotPathforReport("Failed to get back to browser page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3006,7 +3007,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Should visible the RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
 					"failed to display RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
 					Common.getscreenShotPathforReport("faield to display the tabs"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3033,7 +3034,7 @@ public class GoldOspreyUSHyvaHelper {
 					"To display the retailers for the current location",
 					"Failed to display retailers for the current location",
 					Common.getscreenShotPathforReport("faield to display the retailers for current location"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3069,7 +3070,7 @@ public class GoldOspreyUSHyvaHelper {
 					"retailers should be visible for the given location",
 					"Failed to display retailers for the given location",
 					Common.getscreenShotPathforReport("faield to display the available retailers"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3113,7 +3114,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating available retailer store locations",
 					"retailers store locations should be visible", "Failed to display retailers store locations",
 					Common.getscreenShotPathforReport("faield to display retailer store locations"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -3140,7 +3141,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating reviews page", "System directs the user back to reviews page",
 					"unable to user go back to reviews page",
 					Common.getscreenShotPathforReport("faield to get back to reviews page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3168,7 +3169,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating google maps page",
 					"System directs the user back to google maps page", "unable to user go back to google maps page",
 					Common.getscreenShotPathforReport("faield to get back to google maps page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -3193,7 +3194,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating instock page",
 					"System directs the user back to the instock page", "unale user to go  back to thr instock page",
 					Common.getscreenShotPathforReport("failed to get back to instock page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3220,7 +3221,7 @@ public class GoldOspreyUSHyvaHelper {
 					"System directs the user back to the product listing page",
 					"unable user back to product listing page",
 					Common.getscreenShotPathforReport("failed to get back product listing page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3251,7 +3252,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Shipping page",
 					"user should navigate to Shipping page", "User failed to land on Shipping page",
 					Common.getscreenShotPathforReport("failed  to naviagte Shipping page "));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -3308,7 +3309,7 @@ public class GoldOspreyUSHyvaHelper {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add product to the cart ", Common.getscreenShot("Failed to add product to the cart"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3353,7 +3354,7 @@ public class GoldOspreyUSHyvaHelper {
 					expectedResult, "Unable to Selected the " + Dataset + " category",
 					Common.getscreenShot("Failed to click on the" + Dataset + ""));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3417,7 +3418,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("Verifying Social link ",
 					"click the social links it will navigating to particular page",
 					"User unable to navigate Social link page", Common.getscreenShotPathforReport("socialpage"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -3445,7 +3446,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to Display the Address book in shipping page after click on login",
 					Common.getscreenShotPathforReport(
 							"Failed to Display the Address book in shipping page after click on login"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3481,7 +3482,7 @@ public class GoldOspreyUSHyvaHelper {
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
@@ -3511,88 +3512,58 @@ public class GoldOspreyUSHyvaHelper {
 					"sucess message should display after share whishlist",
 					"Unable to display the message for whishlist",
 					Common.getscreenShot("failed to display the message for whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
 
 	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
-		String address = data.get(dataSet).get("Street");
-		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
 			Thread.sleep(5000);
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("xpath", "//input[@type='email']");
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
-			} else {
-				Sync.waitElementVisible("xpath", "//input[@type='email']");
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
-			}
+			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
 			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']", address);
+			Common.clickElement("xpath", "//section[@id='shipping-details']//input[@name='street[0]']");
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='street[0]']",
+					data.get(dataSet).get("Street"));
+//			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Common.findElement("xpath", "//section[@id='shipping-details']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			  if(Common.getCurrentURL().contains("gb"))
-              {
-				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-              }
-			  else
-			  {
-				
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                Thread.sleep(3000);
-                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                        .getAttribute("value");
-                System.out.println(Shippingvalue);
+			try {
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-			Thread.sleep(3000);
-			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(2000);
+			Common.textBoxInputClear("name", "postcode");
+			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
-	
+
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			
-			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-			System.out.println(subtotal);
-			subtotal = subtotal.trim();
-			subtotal = subtotal.substring(0,subtotal.length() - 2);
-		    System.out.println(subtotal);  
-			int amount=Integer.parseInt(subtotal);
-			System.out.println(amount);
-			if(amount>199 && symbol.equals("$"))
-			{
-				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
-			else
-			{
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
 
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
@@ -3606,7 +3577,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating shipping address",
 					"shipping address is filled in to the fields", "user faield to fill the shipping address",
 					Common.getscreenShotPathforReport("shipingaddressfaield"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -3660,7 +3631,7 @@ public class GoldOspreyUSHyvaHelper {
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 						"User failed to navigate  to order confirmation page",
 						Common.getscreenShotPathforReport("failednavigatepage"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		}
@@ -3740,7 +3711,7 @@ public class GoldOspreyUSHyvaHelper {
 						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
 						System.out.println(sucessmessage);
 					} else {
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				} else {
@@ -3804,7 +3775,7 @@ public class GoldOspreyUSHyvaHelper {
 								" //h1[normalize-space()='Thank you for your purchase!']");
 						System.out.println(sucessmessage);
 					} else {
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				} else {
@@ -3831,7 +3802,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
 					"failed  to fill the Credit Card infromation",
 					Common.getscreenShotPathforReport("Cardinfromationfail"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		expectedResult = "credit card fields are filled with the data";
@@ -3913,7 +3884,7 @@ public class GoldOspreyUSHyvaHelper {
 						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
 						System.out.println(sucessmessage);
 					} else {
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				} else {
@@ -3977,7 +3948,7 @@ public class GoldOspreyUSHyvaHelper {
 								" //h1[normalize-space()='Thank you for your purchase!']");
 						System.out.println(sucessmessage);
 					} else {
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 
 				} else {
@@ -4004,7 +3975,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
 					"failed  to fill the Credit Card infromation",
 					Common.getscreenShotPathforReport("Cardinfromationfail"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		expectedResult = "credit card fields are filled with the data";
@@ -4032,7 +4003,7 @@ public class GoldOspreyUSHyvaHelper {
 					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
 					"Unable to see the order numbers on my orders page",
 					Common.getscreenShotPathforReport("Failed to Display the order number in my orders page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -4059,7 +4030,7 @@ public class GoldOspreyUSHyvaHelper {
 					"after clicking on the track order it should navigate to the orders and return page",
 					"Unable to  Navigated to the orders and return page",
 					Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -4093,7 +4064,7 @@ public class GoldOspreyUSHyvaHelper {
 						"after clicking on the track order it should navigate to the orders and return page",
 						"Unable to  Navigated to the orders and return page",
 						Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 		
@@ -4136,7 +4107,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
 					"Unable to Navigate to the orders page and UGC Casrol is not displayed ",
 					Common.getscreenShot("Failed to Navigate to the orders page and UGC Casrol is not displayed "));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -4193,7 +4164,7 @@ public class GoldOspreyUSHyvaHelper {
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 						"User failed to navigate  to order confirmation page",
 						Common.getscreenShotPathforReport("failednavigatepage"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		}
@@ -4220,7 +4191,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		try {
 			Sync.waitPageLoad();
@@ -4245,7 +4216,7 @@ public class GoldOspreyUSHyvaHelper {
 						"Sucessfully payment method is appeared in my payments methods",
 						"Failed to display the payment methods in the my payments methods");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		} catch (Exception | Error e) {
@@ -4254,7 +4225,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After Clicking the delete button we need to get the error message",
 					"Unable to display the error message when we clcik on the delete message",
 					Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -4270,7 +4241,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the shippingPage error message", expectedResult,
 					"failed to display error message", Common.getscreenShotPathforReport("failederrormessage"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -4341,7 +4312,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating shipping address",
 					"shipping address is filled in to the fields", "user faield to fill the shipping address",
 					Common.getscreenShotPathforReport("shipingaddressfaield"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -4374,7 +4345,7 @@ public class GoldOspreyUSHyvaHelper {
 					"User should able to open Product Listing Page", "Unable to view the Product Listing Page",
 					Common.getscreenShotPathforReport("Failed to view Product listing Page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -4415,7 +4386,7 @@ public class GoldOspreyUSHyvaHelper {
 							"User should able to filter in Product Listing Page", "Unable to filter the Product Listing Page",
 							Common.getscreenShotPathforReport("Failed to filter Product listing Page"));
 
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 			}
 
@@ -4500,7 +4471,7 @@ public class GoldOspreyUSHyvaHelper {
 										"Successfully are displayed in the pricing range",
 										"unable to display the procing range after pricing filter applied");
 							} else {
-								Assert.fail();
+								AssertJUnit.fail();
 							}
 						}
 							
@@ -4529,7 +4500,7 @@ public class GoldOspreyUSHyvaHelper {
 												"Successfully are displayed in the pricing range",
 												"unable to display the procing range after pricing filter applied");
 									} else {
-										Assert.fail();
+										AssertJUnit.fail();
 									}
 							{
 								
@@ -4558,7 +4529,7 @@ public class GoldOspreyUSHyvaHelper {
 									"Successfully are displayed in the pricing range",
 									"unable to display the procing range after pricing filter applied");
 						} else {
-							Assert.fail();
+							AssertJUnit.fail();
 						}
 					}
 					}
@@ -4642,7 +4613,7 @@ public class GoldOspreyUSHyvaHelper {
 										"Successfully are displayed in the pricing range",
 										"unable to display the procing range after pricing filter applied");
 							} else {
-								Assert.fail();
+								AssertJUnit.fail();
 							}
 						}
 						else
@@ -4667,7 +4638,7 @@ public class GoldOspreyUSHyvaHelper {
 											"Successfully are displayed in the pricing range",
 											"unable to display the procing range after pricing filter applied");
 								} else {
-									Assert.fail();
+									AssertJUnit.fail();
 								}
 									}
 							else
@@ -4692,7 +4663,7 @@ public class GoldOspreyUSHyvaHelper {
 												"Successfully are displayed in the pricing range",
 												"unable to display the procing range after pricing filter applied");
 									} else {
-										Assert.fail();
+										AssertJUnit.fail();
 									}
 															
 								}
@@ -4756,7 +4727,7 @@ public class GoldOspreyUSHyvaHelper {
 									"Successfully are displayed in the pricing range",
 									"unable to display the procing range after pricing filter applied");
 						} else {
-							Assert.fail();
+							AssertJUnit.fail();
 						}
 				
 			}
@@ -4770,7 +4741,7 @@ public class GoldOspreyUSHyvaHelper {
 					"unable to display the procing range after pricing filter applied",
 					Common.getscreenShotPathforReport(
 							"unable to display the procing range after pricing filter applied"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -4862,7 +4833,7 @@ public class GoldOspreyUSHyvaHelper {
 		} catch (Exception | Error e) {
 
 			e.printStackTrace();
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -4906,7 +4877,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("verifying the color bar has been expand",
 					"When we click on the color it should be expand", "unable to expand the colors in PLP page",
 					Common.getscreenShotPathforReport("Failed to expand the colors in PLP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -4981,7 +4952,7 @@ public class GoldOspreyUSHyvaHelper {
 	             	  
 	             	   else
 	             	   {
-	             		   Assert.fail();
+	             		   AssertJUnit.fail();
 	             	   }
 					
 				} else {
@@ -5043,7 +5014,7 @@ public class GoldOspreyUSHyvaHelper {
 	             	  }
 	             	   else
 	             	   {
-	             		   Assert.fail();
+	             		   AssertJUnit.fail();
 	             	   }
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
@@ -5069,7 +5040,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
 					"failed  to fill the Credit Card infromation",
 					Common.getscreenShotPathforReport("Cardinfromationfail"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -5110,7 +5081,7 @@ public class GoldOspreyUSHyvaHelper {
 					"order tracking information page navigation",
 					"User unable to navigate to the order tracking information page",
 					Common.getscreenShotPathforReport("Failed to navigate tracking order page infromation"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -5133,7 +5104,7 @@ public class GoldOspreyUSHyvaHelper {
 					"after clicking on the track order it should navigate to the orders and return page",
 					"Unable to  Navigated to the orders and return page",
 					Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -5201,7 +5172,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating shipping address",
 					"shipping address is filled in to the fields", "user faield to fill the shipping address",
 					Common.getscreenShotPathforReport("shipingaddressfaield"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -5274,7 +5245,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Unable to  navigate to the My account page after clicking on signin button ",
 					Common.getscreenShotPathforReport(
 							"Failed to navigates to My Account Page after clicking on Signin button"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -5297,7 +5268,7 @@ public class GoldOspreyUSHyvaHelper {
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		try {
 			Sync.waitPageLoad();
@@ -5324,7 +5295,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Order Number should be display in the MY Order page",
 					"Unable to Display the Order Number in the My orders page",
 					Common.getscreenShot("Failed to Display My order Number in the My orders page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -5360,7 +5331,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", " unable to Navigates Product to the PDP page",
 					Common.getscreenShot("Failed to Navigates Product to the PDP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -5384,7 +5355,7 @@ public class GoldOspreyUSHyvaHelper {
 					"Free shipping should be avaliable for selected products",
 					"unable to apply free shipping for the selected products",
 					Common.getscreenShot("Failed to see free shipping bar"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -5413,7 +5384,7 @@ public void minicart_delete(String Dataset) {
 				Sync.waitElementPresent("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
 				Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Thread.sleep(6000);
 			String subtotal1 = Common.getText("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']")
@@ -5437,7 +5408,7 @@ public void minicart_delete(String Dataset) {
 					"The product should be delete from mini cart and subtotal should change",
 					"unable to delete product from the mini cart and subtotal has not changed", Common.getscreenShot(
 							"Failed to delete the product from the mini cart and subtotal has not changed"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -5458,7 +5429,7 @@ public void minicart_product_close() {
 		if (popup.equals("Remove Item")) {
 			Common.clickElement("xpath", "//button[@aria-label='Close']");
 		} else {
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 		Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
@@ -5471,7 +5442,7 @@ public void minicart_product_close() {
 
 			Common.clickElement("xpath", "//button[contains(text(),'Cancel')]");
 		} else {
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	} catch (Exception | Error e) {
 		e.printStackTrace();
@@ -5480,7 +5451,7 @@ public void minicart_product_close() {
 				"unable to click on close and cancel button",
 				Common.getscreenShot("Failed to Click on close and cancel button"));
 
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -5525,7 +5496,7 @@ public void minicart_validation(String Dataset) {
 				"The product Quantity should be update in mini cart and subtotal should change",
 				"unable to update the product quantity and subtotal has not be changed",
 				Common.getscreenShot("Failed to update the product quantity from cart and subtotal not changed"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -5558,7 +5529,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
 					"User Unable to click write review option  ",
 					Common.getscreenShotPathforReport("User Failed to click write review option "));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		try {
 			String expectedResult = "Sucessfully title input box has been displayed";
@@ -5603,7 +5574,7 @@ public void minicart_validation(String Dataset) {
 					"product review should be submit after clicking on post",
 					"Unable to display the Thank you message after clickng on post ",
 					Common.getscreenShotPathforReport("Failed to display the thank you message"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -5663,7 +5634,7 @@ public void minicart_validation(String Dataset) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the question submit form", "Ask a form should be submit",
 					"Unable to subit question post", Common.getscreenShot("failed to subit question post"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -5686,7 +5657,7 @@ public void minicart_validation(String Dataset) {
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		Sync.waitPageLoad();
 		Common.clickElement("xpath", "//a[text()='Address Book']");
@@ -5733,7 +5704,7 @@ public void minicart_validation(String Dataset) {
 						"unable to save the adreess in the address book",
 						Common.getscreenShotPathforReport("Failed to save the address in the address book"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 		}
@@ -5777,7 +5748,7 @@ public void minicart_validation(String Dataset) {
 						"enter the valid address without any validation",
 						"User failed to enter data in my address book",
 						Common.getscreenShotPathforReport("faield to save the address in addressbook"));
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 		}
@@ -5815,7 +5786,7 @@ public void minicart_validation(String Dataset) {
 						"Sucessfully address has been saved in the address book",
 						"Failed to save the address in the address book");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		} catch (Exception | Error e) {
@@ -5824,7 +5795,7 @@ public void minicart_validation(String Dataset) {
 					"After saving the address for Register user no extra address should be there in address book",
 					"Unable to see no address in the address book",
 					Common.getscreenShotPathforReport("Failed to see no address in the address book"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -5871,7 +5842,7 @@ public void minicart_validation(String Dataset) {
 					"After saving the address for Register user no extra address should be there in address book",
 					"Unable to see no address in the address book",
 					Common.getscreenShotPathforReport("Failed to see no address in the address book"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -5938,7 +5909,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
 					Common.getscreenShot(
 							"Failed to display checkbox for billing address and fail to display text for shipping address"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6006,7 +5977,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
 					Common.getscreenShot(
 							"Failed to display checkbox for billing address and fail to display text for shipping address"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6071,7 +6042,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to display the checkbox for the billing address and text is not displayed for the shipping address",
 					Common.getscreenShot(
 							"Failed to display checkbox for billing address and fail to display text for shipping address"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6146,7 +6117,7 @@ public void minicart_validation(String Dataset) {
 					"Sucessfully checkbox is displayed for the shipping address and text is displayed for the billing address",
 					Common.getscreenShot(
 							"Failed to display checkbox for shipping address and fail to display text for billing address"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6218,11 +6189,11 @@ public void minicart_validation(String Dataset) {
 							"Sucessfully address has been Deleted in the address book",
 							"Failed to Delete the address in the address book");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		} catch (Exception | Error e) {
@@ -6232,7 +6203,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to  Delete the address in the address book",
 					Common.getscreenShot("Failed to Delete the address in the address book"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6369,7 +6340,7 @@ public void minicart_validation(String Dataset) {
 					"after click on subcribe button message should be appear",
 					"Unable to display the message after subcribtion ",
 					Common.getscreenShot("Failed to display the message after subcribtion"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		return price;
 
@@ -6409,7 +6380,7 @@ public void minicart_validation(String Dataset) {
 					"Product should be display in the subcribtion page",
 					"Unable to see the product in subcribtion page",
 					Common.getscreenShot("Failed to see the product in subcribtion page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6435,7 +6406,7 @@ public void minicart_validation(String Dataset) {
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6470,7 +6441,7 @@ public void minicart_validation(String Dataset) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
@@ -6503,7 +6474,7 @@ public void minicart_validation(String Dataset) {
 				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 						"User failed to proceed with paypal payment",
 						Common.getscreenShotPathforReport(expectedResult));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			// Tell_Your_FriendPop_Up();//To close the Pop-up
 			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -6538,7 +6509,7 @@ public void minicart_validation(String Dataset) {
 							"User failed to proceed to the order confirmation page",
 							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 			}
 		}
@@ -6577,7 +6548,7 @@ public void minicart_validation(String Dataset) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
 					"User failed to proceed with venmo payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		Sync.waitElementPresent("xpath", "//div[@class='max-width-wrapper']/img");
@@ -6616,7 +6587,7 @@ public void minicart_validation(String Dataset) {
 				ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
 						"User failed to proceed with venmo payment",
 						Common.getscreenShotPathforReport(expectedResult));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			express_paypal_shipping("Paypal Shipping");
 			// Tell_Your_FriendPop_Up();//To close the Pop-up
@@ -6652,7 +6623,7 @@ public void minicart_validation(String Dataset) {
 							"User failed to proceed to the order confirmation page",
 							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 			}
 		}
@@ -6699,7 +6670,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("verifying the change passwordfor the register user",
 					"User enter the valid password", "User failed to proceed to change passowrd ",
 					Common.getscreenShotPathforReport("emailpasswordnew"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -6726,7 +6697,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to navigate the user to the My Account after clicking on the SignIn button",
 					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the My Account page "));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -6751,7 +6722,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to Navigates the user to Account information page after clicking on the Account information CTA",
 					Common.getscreenShot(
 							"Failed to Navigate to the Account information page after Clicking on Account information CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -6845,7 +6816,7 @@ public void minicart_validation(String Dataset) {
 					"After clicking on the signIn button it should navigate to the My Account",
 					"Unable to signIn and not navigated to the My Account",
 					Common.getscreenShot(" Failed to signIn and not navigated to the My Account"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		return oldemail;
 	}
@@ -6896,7 +6867,7 @@ public void minicart_validation(String Dataset) {
 					"After clicking on the signIn button it should navigate to the My Account",
 					"Unable to signIn and not navigated to the My Account",
 					Common.getscreenShot(" Failed to signIn and not navigated to the My Account"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6925,7 +6896,7 @@ public void minicart_validation(String Dataset) {
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Unable to Navigate to the shopping cart page",
 					Common.getscreenShot("Failed to Navigate to the shopping cart page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -6967,7 +6938,7 @@ public void minicart_validation(String Dataset) {
 					"validating the navigation to the shipping page when we click on the checkout ",
 					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
 					Common.getscreenShot("Failed to navigate to the shipping page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -6986,7 +6957,7 @@ public void minicart_validation(String Dataset) {
 					"System directs the user to the Homepage and store logo should display",
 					"Unable to navigate to the homepage and logo is not displayed",
 					"Failed to navigate to the homepage and logo is not displayed");
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -7031,7 +7002,7 @@ public void minicart_validation(String Dataset) {
 					Common.getscreenShot(
 							"Failed to Navigate to the Customer Login page after Clicking on My Favorites button"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -7063,7 +7034,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to display the  products count in the mini cart",
 					Common.getscreenShot("failed to display products count in the mini cart"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 		return items;
@@ -7090,7 +7061,7 @@ public void minicart_validation(String Dataset) {
 					"after Clicking on Create New Customer Account page it will navigate account creation page",
 					"unable to navigate to the craete account page",
 					Common.getscreenShotPathforReport("Failed to navigate to the account create page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -7172,7 +7143,7 @@ public void minicart_validation(String Dataset) {
 					"User should able to navigate to the my account page after clicking on Signin button",
 					"Unable to navigate to the My account page after clicking on signin button ",
 					Common.getscreenShot("Failed to navigates to My Account Page after clicking on Signin button"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 		return email;
@@ -7204,7 +7175,7 @@ public void minicart_validation(String Dataset) {
 					Common.getscreenShot(
 							"failed to display the products in mini cart after the create account with cart"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -7284,7 +7255,7 @@ public void minicart_validation(String Dataset) {
 					"Billing address should be saved in the payment page",
 					"Unable to display the Billing address in payment page",
 					Common.getscreenShotPathforReport("Failed to display the Billing address in payment page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		return update;
 	}
@@ -7314,7 +7285,7 @@ public void minicart_validation(String Dataset) {
 					"Billing address should be saved in the Address book",
 					"Unable to display the Billing address in Address book",
 					Common.getscreenShotPathforReport("Failed to display the Billing address in Address book"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -7405,7 +7376,7 @@ public void minicart_validation(String Dataset) {
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 
@@ -7497,14 +7468,14 @@ public void minicart_validation(String Dataset) {
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 
 			}
 		} catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("validating adding  address", "User should able to add the address",
 					"User unabel add shipping address",
 					Common.getscreenShotPathforReport("failed to save the shipping address"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -7558,7 +7529,7 @@ public void minicart_validation(String Dataset) {
 						"Sucessfully address has been Deleted in the address book",
 						"Failed to Delete the address in the address book");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		} catch (Exception | Error e) {
@@ -7567,7 +7538,7 @@ public void minicart_validation(String Dataset) {
 					"Delete address message should be displayed after the address delete in address book",
 					"Unable to Delete the address in the address book",
 					Common.getscreenShotPathforReport("Failed to Delete the address in the address book"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -7705,7 +7676,7 @@ public void minicart_validation(String Dataset) {
 					"after click on subcribe button message should be appear",
 					"Unable to display the message after subcribtion ",
 					Common.getscreenShot("Failed to display the message after subcribtion"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -7774,7 +7745,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("verifying the error message for invalid password",
 					"after click on signin button with un registered email error message should appear",
 					"Unable to display the error message", Common.getscreenShot("Failed to display the error message"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -7872,7 +7843,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -7932,7 +7903,7 @@ public void minicart_validation(String Dataset) {
 						"failed to save the data and success message is not displayed");
 
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		} catch (Exception | Error e) {
@@ -7941,7 +7912,7 @@ public void minicart_validation(String Dataset) {
 					"After clicking on save changes sucess message should appear",
 					"Unable to save the data and success message is not displayed",
 					Common.getscreenShot("failed to save the data and success message is not displayed"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -7964,7 +7935,7 @@ public void minicart_validation(String Dataset) {
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
@@ -7985,7 +7956,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("validating the  product add to the Whishlist",
 					"Product should be add to whishlist", "Unable to add product to the Whishlist",
 					Common.getscreenShot("failed to add product to the Whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8021,7 +7992,7 @@ public void minicart_validation(String Dataset) {
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				Sync.waitPageLoad(40);
 				Thread.sleep(4000);
@@ -8050,7 +8021,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("validating the  product add to the Whishlist",
 					"Product should be add to whishlist", "Unable to add product to the Whishlist",
 					Common.getscreenShot("failed to add product to the Whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -8076,7 +8047,7 @@ public void minicart_validation(String Dataset) {
 						"new whishlist should be delete sucessfully", "Sucessfully new whishlist has been deleted",
 						"failed to delete the new whishlist");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8084,7 +8055,7 @@ public void minicart_validation(String Dataset) {
 					"Product should be added to the whishlist",
 					"Unable to to copy the whishlist to the exsiting whishlist",
 					Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -8114,7 +8085,7 @@ public void minicart_validation(String Dataset) {
 					"Product should be added to the whishlist",
 					"Unable to to copy the whishlist to the exsiting whishlist",
 					Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8147,7 +8118,7 @@ public void minicart_validation(String Dataset) {
 				Common.clickElement("xpath", "//a[text()='Testing']");
 				Delete_Whishlist();
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		} catch (Exception | Error e) {
@@ -8156,7 +8127,7 @@ public void minicart_validation(String Dataset) {
 					"Product should be added to the whishlist",
 					"Unable to to copy the whishlist to the exsiting whishlist",
 					Common.getscreenShot("Failed to to copy the whishlist to the exsiting whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -8247,7 +8218,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to navigate to the respective country page after clicking on the selected country",
 					Common.getscreenShot(
 							"Failed to navigate to the respective country page after clicking on the selected country"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -8271,7 +8242,7 @@ public void minicart_validation(String Dataset) {
 					"after click on edit button from payment page it should navigate to the shiiping page",
 					"Unable  to Navigate to the shipping page",
 					Common.getscreenShot("failed to Navigate to the shipping page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8348,7 +8319,7 @@ public void minicart_validation(String Dataset) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
 					"Unabled to apply the gift message", Common.getscreenShot("failed to apply the gift message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8379,7 +8350,7 @@ public void minicart_validation(String Dataset) {
 					"Quantity should be update in the shopping cart page",
 					"Unable to update the product quantity in the shopping cart page",
 					Common.getscreenShot("Failed to update the product quantity in the shopping cart page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8403,10 +8374,12 @@ public void minicart_validation(String Dataset) {
 			System.out.println(ExpectedTotalAmmount2);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Remove " + products + "']");
 			Common.clickElement("xpath", "//button[@aria-label='Remove " + products + "']");
+			Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			Sync.waitPageLoad(30);
 			Thread.sleep(5000);
 			String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 					.replace(Symbol, "");
+			System.out.println("ordertotal"+    ordertotal);
 			Thread.sleep(4000);
 			Float ordervalue = Float.parseFloat(ordertotal);
 			System.out.println(ExpectedTotalAmmount2);
@@ -8422,7 +8395,7 @@ public void minicart_validation(String Dataset) {
 					"Product should be remove form the shopping cart page",
 					"Unable to remove the product from the shopping cart page",
 					Common.getscreenShot("Failed to remove the product from the shopping cart page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8522,7 +8495,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	public void Simple_PDP(String Dataset) {
@@ -8569,7 +8542,7 @@ public void minicart_validation(String Dataset) {
 			ExtenantReportUtils.addFailedLog("validating the PDP page", "In PDP fav ugc all should be appear",
 					"Unable to see few things in the PDP",
 					Common.getscreenShot("Failed to see few things in the PDP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8598,7 +8571,7 @@ public void minicart_validation(String Dataset) {
 					"when we click on the locally maps should be opened",
 					"Unable to open the google maps when we click on the Find Locally",
 					Common.getscreenShot("Failed to open the google maps when we click on the Find Locally"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8650,7 +8623,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to see few things in the PDP",
 					Common.getscreenShot("Failed to see few things in the PDP page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8702,7 +8675,7 @@ public void minicart_validation(String Dataset) {
 						"failed to add product to the cart");
 
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8710,7 +8683,7 @@ public void minicart_validation(String Dataset) {
 					"Products should be add from the similar products from PDP page",
 					"Unable to add the products from the similar products",
 					Common.getscreenShot("Failed to add the products from the similar products"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8742,7 +8715,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to display the content in  " + Links[i],
 					Common.getscreenShot("Failed to display related content" + Links[i]));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8777,7 +8750,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to Navigated to the my Returns page",
 					Common.getscreenShot("Failed to Navigated to the my Returns page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8860,7 +8833,7 @@ public void minicart_validation(String Dataset) {
 					"After clicking on my account it should navigate to RMA Print page",
 					"Unable to Navigated to RMA Print page",
 					Common.getscreenShot("Failed to Navigated to RMA Print page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8878,7 +8851,7 @@ public void minicart_validation(String Dataset) {
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -8977,7 +8950,7 @@ else {
 					"User failed to proceed with discountcode",
 					Common.getscreenShotPathforReport("discountcodefailed"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -9012,7 +8985,7 @@ else {
 				String Shoppping = Common.findElement("xpath", "//a[text()='shopping cart']").getText();
 
 				System.out.println(Shoppping);
-				Assert.assertEquals(Shoppping, "shopping cart");
+				AssertJUnit.assertEquals(Shoppping, "shopping cart");
 			} else {
 				System.out.println("Insufficient number of products for comparison.");
 
@@ -9023,7 +8996,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating Compare Products",
 					"Products added to Compare list successfull", "failed to add product to compareList",
 					Common.getscreenShotPathforReport("CompareProductfail"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9062,7 +9035,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
 					"Products added to Compare list successfull", "failed to add product to wishlist",
 					Common.getscreenShotPathforReport("Wishlistfail"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -9071,7 +9044,7 @@ else {
 		
 		try {
 		String Wishlist = Common.findElement("xpath", "//h1[text()='My Favourites']").getText();		
-		Assert.assertEquals(Wishlist, "My Favourites");
+		AssertJUnit.assertEquals(Wishlist, "My Favourites");
 	   
 		    Sync.waitElementPresent(30, "xpath", "//button[@class='action tocart a-btn a-btn--secondary']");
 			Common.mouseOverClick("xpath", "//button[@class='action tocart a-btn a-btn--secondary']");
@@ -9084,7 +9057,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating Adding to cart from wishlist ",
 					"Products added to cart successfull", "failed to add Products to cart",
 					Common.getscreenShotPathforReport("AddtoCartfail"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9108,7 +9081,7 @@ else {
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Unable to Navigate to the shopping cart page",
 					Common.getscreenShotPathforReport("Failed to Navigate to the shopping cart page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9121,7 +9094,6 @@ else {
 			Common.clickElement("xpath", "//button[@id='discount-form-toggle']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-
 			Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
 
 			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
@@ -9131,6 +9103,7 @@ else {
 			Common.clickElement("xpath", "//button[@value='Apply Discount']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
+			Common.scrollIntoView("xpath", "//span[@x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
 			Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
@@ -9141,39 +9114,28 @@ else {
 					"Promocode should be apply in the shopping cart page",
 					"Unable to display the promocode in the shopping cart page",
 					Common.getscreenShot("Failed to display the promocode in the shopping cart page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		try {
-	/*		String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace("$",
-					"");
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-//			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
-//					.replace("$", "");
-//			Float shippingvalue = Float.parseFloat(shipping);
-			String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']")
-					.replace("$", "").replace("- ", "");
-			Float Discountvalue = Float.parseFloat(Discount);
-
-			String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
-					.replace("$", "");
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Float Total = (subtotalvalue) - Discountvalue;
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			BigDecimal tolerance = new BigDecimal("0.01");
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);*/
-			 String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace("$", "");  
-		        String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']").replace("$", "").replace("- ", "");  
-		        String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']").replace("$", "");  
-
-		        BigDecimal subtotalValue = new BigDecimal(Subtotal).setScale(2, BigDecimal.ROUND_HALF_UP);  
-		        BigDecimal discountValue = new BigDecimal(Discount).setScale(2, BigDecimal.ROUND_HALF_UP);  
-		        BigDecimal orderTotalValue = new BigDecimal(ordertotal).setScale(2, BigDecimal.ROUND_HALF_UP);  
-
-		        BigDecimal Total = subtotalValue.subtract(discountValue).setScale(2, BigDecimal.ROUND_HALF_UP); 
+	            Common.actionsKeyPress(Keys.PAGE_UP);
+			    String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace("$", ""); 
+			    BigDecimal subtotalValue = new BigDecimal(Subtotal).setScale(2, BigDecimal.ROUND_HALF_UP); 
+			    
+		        String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']").replace("$", "").replace("- ", "");
+		        BigDecimal discountValue = new BigDecimal(Discount).setScale(2, BigDecimal.ROUND_HALF_UP);
+		        
+		        String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']").replace("$", ""); 
+		        BigDecimal orderTotalValue = new BigDecimal(ordertotal).setScale(2, BigDecimal.ROUND_HALF_UP);
+		        
+		        String Shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]").replace("$", "");  
+		        BigDecimal ShippingValue = new BigDecimal(Shipping).setScale(2, BigDecimal.ROUND_HALF_UP);
+		        Thread.sleep(3000);
+		        
+		        BigDecimal Total = (subtotalValue.add(ShippingValue)).subtract(discountValue).setScale(2, BigDecimal.ROUND_HALF_UP); 
 		        
 		        System.out.println("Subtotal: " + subtotalValue);  
-		        System.out.println("Discount: " + discountValue);  
+		        System.out.println("Discount: " + discountValue);
+		        System.out.println("Shipping:"  +ShippingValue);
 		        System.out.println("Total: " + Total);  
 		        System.out.println("Order Total Value: " + orderTotalValue); 
 		        
@@ -9197,7 +9159,7 @@ else {
 					"Order summary should be display in the payment page and all fields should display",
 					"Unabel to display the Order summary and fields are not displayed in the payment page",
 					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9231,7 +9193,7 @@ else {
 					"Error message should be display in the payment page",
 					"unable to display the  error message should in the payment page",
 					Common.getscreenShot("Failed to display the error message in the payment page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9265,7 +9227,7 @@ else {
 					"after clicking on the particular tooltip message should appear",
 					"Unable to display the Tooltip in the payment page",
 					Common.getscreenShot("Failed to display the Tooltip in the payment page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -9288,7 +9250,7 @@ else {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Gift cart message", "Gift card message should be applied",
 					"Unable to dapply the gift message", Common.getscreenShot("Failed to apply the gift message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -9326,7 +9288,7 @@ else {
 					"enter Invalid product name will display in the search box",
 					" unable to enter the Invalid product name in  search box",
 					Common.getscreenShot("Failed to see the Invalid product name"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -9362,7 +9324,7 @@ else {
 
 						System.out.println("Attribute '" + AttributeValue + "' does not contain the text '"
 								+ RetrivedValue + "' for product: " + AttributeValue);
-						Assert.fail();
+						AssertJUnit.fail();
 					}
 				}
 			}
@@ -9372,7 +9334,7 @@ else {
 					"Products should be display as per selected Filter option ",
 					" Unable to display the Products as per selected Filter option",
 					Common.getscreenShot("Failed to Filter"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -9430,7 +9392,7 @@ else {
 		}
 
 		if (j > 1) {
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9483,7 +9445,7 @@ else {
 					"After clicking on the gift card it should navigate to the PDP",
 					"Unable to Navigate the Gift card to the PDP page",
 					Common.getscreenShot("Failed to Navigate the Gift card to the PDP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 			
 		
 		}
@@ -9534,7 +9496,7 @@ else {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9580,7 +9542,7 @@ else {
 					"Message should be dispaly for the Gift card",
 					"Unable to display the gift message for the Gift Card",
 					Common.getscreenShot("Failed to display the gift message for the Gift Card"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -9661,7 +9623,7 @@ else {
 				ExtenantReportUtils.addFailedLog("validating shipping address",
 						"shipping address is filled in to the fields", "user faield to fill the shipping address",
 						Common.getscreenShotPathforReport("shipingaddressfaield"));
-				Assert.fail();
+				AssertJUnit.fail();
 
 			
 			}
@@ -9714,7 +9676,7 @@ else {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -9744,7 +9706,7 @@ else {
 					"Message should be dispaly for the Gift card",
 					"Unable to display the gift message for the Gift Card",
 					Common.getscreenShot("Failed to display the gift message for the Gift Card"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -9794,7 +9756,7 @@ else {
 					"Success message should be displayed after the applying of gift card",
 					"Sucessfully gift card has been applyed",
 					Common.getscreenShotPathforReport("Failed to apply the gift card"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -9822,7 +9784,7 @@ else {
 					"error message should be displayed after the applying of gift card",
 					"Sucessfully gift card has been not applyed",
 					Common.getscreenShotPathforReport("Failed to apply the gift card"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -9844,7 +9806,7 @@ else {
    }
    else
    {
-	   Assert.fail();
+	   AssertJUnit.fail();
    }
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -9884,7 +9846,7 @@ else {
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 						"User failed to navigate  to order confirmation page",
 						Common.getscreenShotPathforReport("failednavigatepage"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		}
@@ -9938,7 +9900,7 @@ else {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -9994,7 +9956,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the shared whishlist functionality",
 					"sucess message should display after share whishlist",
 					"Unable to display the message for whishlist", Common.getscreenShot("Failed to display the message for whishlist"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -10019,7 +9981,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the check money order in payment page",
 					"Check money order radio button should be selected",
 					"Unable to select the check mony order", Common.getscreenShot("Failed to select the check mony order"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		String order = "";
 		String expectedResult = "It redirects to order confirmation page";
@@ -10069,7 +10031,7 @@ else {
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 						"User failed to navigate  to order confirmation page",
 						Common.getscreenShotPathforReport("failednavigatepage"));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 
 		}
@@ -10098,7 +10060,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the Gift code  order in payment page",
 					"Check Gift code applied and Fullpayment is applied",
 					"Unable add the Giftcode", Common.getscreenShot("Failed to add Giftcoder"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -10116,7 +10078,7 @@ else {
 			Common.clickElement("xpath", "//a[text()='Gift Cards']");
 			
 			
-			Assert.assertEquals("Gift Cards / My Account", Common.getPageTitle());
+			AssertJUnit.assertEquals("Gift Cards / My Account", Common.getPageTitle());
 			
 			
 			Sync.waitElementPresent("xpath", "//input[@id='amcard-code-input']");
@@ -10145,7 +10107,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the Gift code applied in Myaccount page",
 					"Check Gift code applied in Myaccount page",
 					"Unable add the Giftcode", Common.getscreenShot("Failed to add Giftcoder in Myaccount page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -10175,7 +10137,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the Gift code Selected in Payment page",
 					"Check Gift code Selected in Payment page",
 					"Unable add the Giftcode in Payment page", Common.getscreenShot("Failed to add Giftcoder in Payment page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -10192,7 +10154,7 @@ else {
 			Common.clickElement("xpath", "//a[text()='Gift Cards']");
 			
 			
-			Assert.assertEquals("Gift Cards / My Account", Common.getPageTitle());
+			AssertJUnit.assertEquals("Gift Cards / My Account", Common.getPageTitle());
 	        Common.clickElement("xpath", "//span[text()='Remove']");
 	        
 	        Common.clickElement("xpath", "//button[contains(@class,'ction-accept')]");
@@ -10212,7 +10174,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the Gift code applied in Myaccount page",
 					"Check Gift code applied in Myaccount page",
 					"Unable add the Giftcode", Common.getscreenShot("Failed to add Giftcoder in Myaccount page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -10267,7 +10229,7 @@ else {
 			ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
 					"Check Price In PLp page",
 					"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -10310,7 +10272,7 @@ public void Verify_OrderTotal() {
 			ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
 					"Check Price In PLp page",
 					"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}	
 	
@@ -10408,7 +10370,7 @@ public void Verify_OrderTotal() {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
 					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -10442,7 +10404,7 @@ public void Verify_OrderTotal() {
 						"User failed to proceed to the order confirmation page",
 						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 	}
@@ -10617,7 +10579,7 @@ public void Verify_OrderTotal() {
 			ExtenantReportUtils.addFailedLog("verifying the product confirmation", "User Should able to Navigate to the order confirmation page",
 					"User failed to navigate  to order confirmation page",
 					Common.getscreenShotPathforReport("failednavigatepage"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 		
@@ -10742,7 +10704,7 @@ public void Verify_OrderTotal() {
 			ExtenantReportUtils.addFailedLog("verifying the card details enter in the Kalrna payment", "User Should able to Enter Card Details in Klarna Payment",
 					"User Unable to enter Card details in the Klarna payment",
 					Common.getscreenShotPathforReport("Failed to enter Card details in the Klarna payment"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		String url1=automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 		if(!url1.contains("stage") && !url1.contains("preprod")){
@@ -10777,7 +10739,7 @@ catch(Exception | Error e)
  ExtenantReportUtils.addFailedLog("verifying the order confirmartion page", "It should navigate to the order confirmation page",
 			"User failed to proceed to the order confirmation page", Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
  
- Assert.fail();
+ AssertJUnit.fail();
 }
 	}
 	}
@@ -10834,7 +10796,7 @@ catch(Exception | Error e)
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
@@ -10871,7 +10833,7 @@ catch(Exception | Error e)
 				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 						"User failed to proceed with paypal payment",
 						Common.getscreenShotPathforReport(expectedResult));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Sync.waitForLoad();
 			Thread.sleep(5000);
@@ -10924,7 +10886,7 @@ catch(Exception | Error e)
 							"User failed to proceed to the order confirmation page",
 							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 			}
 		return order;
@@ -10970,7 +10932,7 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("validating the address selection from the drop down",
 					"Address should be select from the dropdown ","Unable to select the Address from the dropdown",
 					Common.getscreenShotPathforReport("Failed to select the Address from the dropdown"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -10986,7 +10948,7 @@ catch(Exception | Error e)
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -11066,7 +11028,7 @@ catch(Exception | Error e)
 					"Billing address should be saved in the payment page",
 					"Unable to display the Billing address in payment page",
 					Common.getscreenShotPathforReport("Failed to display the Billing address in payment page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		return update;
 	}
@@ -11083,7 +11045,7 @@ catch(Exception | Error e)
 	}catch(Exception | Error e)
 	{
 		e.printStackTrace();
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 
@@ -11146,7 +11108,7 @@ catch(Exception | Error e)
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
 					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -11182,7 +11144,7 @@ catch(Exception | Error e)
 						"User failed to proceed to the order confirmation page",
 						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 	}
@@ -11272,7 +11234,7 @@ catch(Exception | Error e)
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
 					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -11306,7 +11268,7 @@ catch(Exception | Error e)
 						"User failed to proceed to the order confirmation page",
 						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 	}
@@ -11396,7 +11358,7 @@ catch(Exception | Error e)
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
 					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -11430,7 +11392,7 @@ catch(Exception | Error e)
 						"User failed to proceed to the order confirmation page",
 						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 	}
@@ -11511,7 +11473,7 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("validating the video in PDP page", "video should be play in the PDP page",
 					"Unable to play the the video on the PDP page",
 					Common.getscreenShot("failed to play the video in PDP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -11561,7 +11523,7 @@ catch(Exception | Error e)
 					"User should lands to the prodeal application ",
 					"Unable to navigates to the prodeal application form",
 					Common.getscreenShotPathforReport("Failed to navigate to the prodeal application form "));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		String expectedResult = "After clicking hare button with invalid email error message should be display";
@@ -11597,7 +11559,7 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("validating the error message with invalid email ", expectedResult,
 					"Unable to see the error message has been dispalyed ",
 					Common.getscreenShot("failed to display the error message"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -11630,7 +11592,7 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("To validate the Pro Deal Application",
 					"Should display the Pro Deal Application ", "Unable to displays the Pro Deal Application",
 					Common.getscreenShot("Failed to  display the Pro Deal Application"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -11670,7 +11632,7 @@ catch(Exception | Error e)
 					"User should lands to the prodeal application ",
 					"Unable to navigates to the prodeal application form",
 					Common.getscreenShotPathforReport("Failed to navigate to the prodeal application form "));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 		String expectedResult = "User is redirected to Pro Deal application page";
@@ -11722,7 +11684,7 @@ catch(Exception | Error e)
 					"User field to fill the prodeal aplication ",
 					"user to get the success message for the pro deal submission",
 					Common.getscreenShotPathforReport("Failed to get the success message for the pro deal submission"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -11783,7 +11745,7 @@ catch(Exception | Error e)
 					"Should display the success message", "Unable to displays the success message",
 					Common.getscreenShot("Failed to  display the Pro Deal success message"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
@@ -11825,7 +11787,7 @@ catch(Exception | Error e)
 					"After clicking on prodeal information should be displayed ",
 					"Unable to display the  prodeal information for the register user",
 					Common.getscreenShot("failed to display the prodeal information for the register user"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -11867,7 +11829,7 @@ catch(Exception | Error e)
 					"After clicking on storecredit it should navigate to the storecredit page",
 					"Unable Navigated to the storecredit page",
 					Common.getscreenShot("Failed to Navigate to the storecredit page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		return Price;
 	}
@@ -11927,7 +11889,7 @@ catch(Exception | Error e)
 				}
 				else
 				{
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 //			}
 //			else
@@ -11983,7 +11945,7 @@ catch(Exception | Error e)
 			ExtenantReportUtils.addFailedLog("validating the store credit balance applied sucess message",
 					"After adding the store credit success message should display", "Unable to Display the success message",
 					Common.getscreenShot("failed to Display the success message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -12059,7 +12021,7 @@ catch(Exception | Error e)
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -12085,7 +12047,7 @@ catch(Exception | Error e)
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Unable to Navigates the user to My account page after clicking on the my account CTA",
 					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		try {
 			Sync.waitPageLoad();
@@ -12125,7 +12087,7 @@ catch(Exception | Error e)
 					"After Clicking the delete button we need to get the error message",
 					"Unable to display the error message when we clcik on the delete message",
 					Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 		return balance;
@@ -12172,7 +12134,7 @@ public void select_Store_Credit_Payment(String dataSet) {
 	    			
 	       }else
 	       {
-	    	   Assert.fail();
+	    	   AssertJUnit.fail();
 	       }
 		
 	
@@ -12185,7 +12147,7 @@ public void select_Store_Credit_Payment(String dataSet) {
 			giftCardSubmitOrder();
 		}
 		else {
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		}
    
@@ -12196,7 +12158,7 @@ public void select_Store_Credit_Payment(String dataSet) {
 					"Success message should be displayed after the applying of gift card",
 					"Sucessfully gift card has been applyed",
 					Common.getscreenShotPathforReport("Failed to apply the gift card"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 }	
 	
@@ -12247,7 +12209,7 @@ public void validate_GIFT_CARD_PLP() {
                 visibleProductCount++;
             }
             else {
-            	Assert.fail();
+            	AssertJUnit.fail();
             	
             }
         }
@@ -12262,7 +12224,7 @@ public void validate_GIFT_CARD_PLP() {
 				"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
 				"Sucessfully It has been navigated to the Gift card PLP ",
 				Common.getscreenShot("Failed to Navigate to the Gift card PLP"));
-		Assert.fail();
+		AssertJUnit.fail();
 		
 	
 	}
@@ -12322,7 +12284,7 @@ public void Card_Value_for_my_fav(String Dataset) {
 		e.printStackTrace();
 		/*	ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));*/
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		
 	}
@@ -12364,7 +12326,7 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 		ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
 				"Products added to Compare list successfull", "failed to add product to wishlist",
 				Common.getscreenShotPathforReport("Wishlistfail"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -12400,7 +12362,7 @@ public String Create_Account_for_Guest_my_fav(String Dataset) {
 				"User should navigate to the My account page after clicking on the Signup",
 				"Unable to navigate to the My account page after clicking on the signup button",
 				"Failed to navigate to the My account page after clicking on the signup button");
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	return email;
 }
@@ -12426,7 +12388,7 @@ public void Verify_ShippingAmount_Lessthan_Or_Equal49() {
 			"Shippping method ammount should display $5",
 			"Unable to display $5 in shipping page",
 			"Failed to  display $5 in shipping page ");
-	Assert.fail();
+	AssertJUnit.fail();
 }
 }
 
@@ -12449,7 +12411,7 @@ public void Verify_ShippingAmount_Greater_than49() {
 			"Shippping method ammount should display $5",
 			"Unable to display $5 in shipping page",
 			"Failed to  display $5 in shipping page ");
-	Assert.fail();
+	AssertJUnit.fail();
 }
 }
 
@@ -12480,7 +12442,7 @@ public String Express_Venmo_Payment(String dataSet) throws Exception {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
 				"User failed to proceed with venmo payment", Common.getscreenShotPathforReport(expectedResult));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 	Sync.waitElementPresent("xpath", "//div[@class='max-width-wrapper']/img");
@@ -12519,7 +12481,7 @@ public String Express_Venmo_Payment(String dataSet) throws Exception {
 			ExtenantReportUtils.addFailedLog("verifying the venmo payment ", expectedResult,
 					"User failed to proceed with venmo payment",
 					Common.getscreenShotPathforReport(expectedResult));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 		express_paypal_shipping(dataSet);
 		if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
@@ -12562,7 +12524,7 @@ public String Express_Venmo_Payment(String dataSet) throws Exception {
 						"User failed to proceed to the order confirmation page",
 						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 		}
 	}
@@ -12602,7 +12564,7 @@ public void Verify_Prouser_Shipping_lessthan100() {
 		}
 		else {
 			
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
       catch (Exception | Error e) {
@@ -12610,7 +12572,7 @@ public void Verify_Prouser_Shipping_lessthan100() {
 		ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
 				"Check Price In PLp page",
 				"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -12640,7 +12602,7 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 			
 		} else {
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	} catch (Exception | Error e) {
@@ -12649,7 +12611,7 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 				"Verifying Shipping methods in Shipping page","Failed verifed Standard and Expedited shipping method",
 				Common.getscreenShotPathforReport("failed verify shipping methods"));
 
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -12683,7 +12645,7 @@ public void validateChatboxOptions(String Dataset) {
 				"Unable to  click on the ChatBot and not displayed the Chat conversation ",
 				Common.getscreenShotPathforReport(
 						"Unable to display the chat conversation when user click on the chat option"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -12720,7 +12682,7 @@ public void Kustomer_Links(String Dataset) {
 				"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 				Kustomerlinks[i] + "Unable to Navigated to the" + Kustomerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + Kustomerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -12771,7 +12733,7 @@ public void Footer_validation(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -12846,7 +12808,7 @@ public void Footer_Links(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -12879,13 +12841,13 @@ public void warrenty_Replacement() {
 		}
 		else
 		{
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	catch(Exception | Error e)
 	{
 		e.printStackTrace();
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -12927,7 +12889,7 @@ public void Empty_Details_warrenty_return(String Dataset) {
 				"After clicking hare button with empty data error message should be display",
 				"Unable to display the error message ",
 				Common.getscreenShot("Failed to display the error message"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -12974,7 +12936,7 @@ public void warrenty_return() {
 				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
 				"Unable to Navigate to the Return authorization form",
 				Common.getscreenShot("Failed to Navigate to the Return authorization form"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -12997,7 +12959,7 @@ public void clickContact() throws Exception {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating contact us page", expectedResult,
 				"unable to load the contact page", Common.getscreenShotPathforReport("Contact us page link"));
-		Assert.fail();
+		AssertJUnit.fail();
 
 	}
 }
@@ -13116,7 +13078,7 @@ public void contactUsPage(String dataSet) throws Exception {
 		ExtenantReportUtils.addFailedLog("verifying email us from",
 				"contact us form data enter without any error message", "Contact us page getting error ",
 				Common.getscreenShotPathforReport("Contact us page"));
-		Assert.fail();
+		AssertJUnit.fail();
 
 	}
 
@@ -13194,7 +13156,7 @@ public void warrenty_Return_Form(String Dataset) {
 				"After clicking Submit button waranty and return Success message should be display",
 				"Unable to display the Success message ",
 				Common.getscreenShot("Failed to display the Successful message"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -13217,7 +13179,7 @@ public void click_Product_Registration() throws Exception {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating Product Registration  page", expectedResult,
 				"unable to load the Product Registration page", Common.getscreenShotPathforReport("Product Registration page link"));
-		Assert.fail();
+		AssertJUnit.fail();
 
 	}
 }
@@ -13359,7 +13321,7 @@ public void product_Registration(String dataSet) {
 		ExtenantReportUtils.addFailedLog("verifying Product registration  form",
 				"Product registration form data enter without any error message", "Product registration  page getting error ",
 				Common.getscreenShotPathforReport("Product registration  page"));
-		Assert.fail();
+		AssertJUnit.fail();
 
 	}
 
@@ -13434,7 +13396,7 @@ public void Giftcard_Add_from_My_fav(String Dataset) {
 				"After clicking on the value amount should be appear in PDP",
 				"Failed to selected amount is matched for the gift card",
 				Common.getscreenShotPathforReport("Failed to appear amount for the gift card"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -13517,7 +13479,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 
 				//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 				
 
 			}
@@ -13533,7 +13495,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 		ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
 				"failed  to fill the Credit Card infromation",
 				Common.getscreenShotPathforReport("Cardinfromationfail"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 	expectedResult = "credit card fields are filled with the data";
@@ -13593,7 +13555,7 @@ public void newtab_footerlinks(String Dataset) {
 	catch(Exception | Error e)
 	{
 		e.printStackTrace();
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -13630,7 +13592,7 @@ public void Prevent_Shipping() {
 				"After clicking on the next button it should display the error message",
 				"Unable to display the error message",
 				Common.getscreenShotPathforReport("Failed to display the error message"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -13660,7 +13622,7 @@ public void proAce_Error_Payment(String dataSet) {
 				"After clicking on the place order button it should display the error message",
 				"Unable to display the error message",
 				Common.getscreenShotPathforReport("Failed to display the error message"));
-		Assert.fail();
+		AssertJUnit.fail();
 
 	}
 }
@@ -13721,7 +13683,7 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 		}
 
 		if (j > 1) {
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 
@@ -13796,7 +13758,7 @@ public void Remove_Products_from_Shoppingcart() {
 				"After products cleared in the your cart empty message should display",
 				"Successfully empty cart empty message should be dispalyed",
 				Common.getscreenShotPathforReport("Failed to display the error message"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -13839,7 +13801,7 @@ public void validate_price_PLP_and_PDP() {
 				"After clicking on the giftcard it should navigate to the PDP page",
 				"Unable to validate the PLP and PDP price",
 				Common.getscreenShotPathforReport("Failed to validate the PLP and PDP price"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -13892,7 +13854,7 @@ public void Footer_Links_Company(String Dataset) {
 				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
 						"Page configured Properly with any issues", "Unable to get the proper response from the page",
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + Termlinks[j]));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -13941,7 +13903,7 @@ public void Footer_Links_Company(String Dataset) {
 				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
 						"Page configured Properly with any issues", "Unable to get the proper response from the page",
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -13958,7 +13920,7 @@ public void Footer_Links_Company(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -14017,7 +13979,7 @@ public void Footer_Links_CustomerSupport(String Dataset) {
 				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
 						"Page configured Properly with any issues", "Unable to get the proper response from the page",
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -14034,7 +13996,7 @@ public void Footer_Links_CustomerSupport(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -14092,7 +14054,7 @@ public void Footer_Links_Resources(String Dataset) {
 				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
 						"Page configured Properly with any issues", "Unable to get the proper response from the page",
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -14109,7 +14071,7 @@ public void Footer_Links_Resources(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -14165,7 +14127,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
 						"Page configured Properly with any issues", "Unable to get the proper response from the page",
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -14182,7 +14144,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -14231,7 +14193,7 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 				"After Clicking on" + footerlinks[i] + "it should navigate to the",
 				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
 				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }
@@ -14265,7 +14227,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 				"validating the the products in the plp ",
 				"User should able to see the products in plp", "unable to see the products in the PLP",
 				Common.getscreenShot("Failed to see products in PLP"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	}
 	else
@@ -14279,7 +14241,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 				"verifying the header link PACKFINDER",
 				"user should navigate to the PACKFINDER page",
 				"user successfully Navigated to the PACKFINDER page", "Failed to navigate to the PACKFINDER page");
-		Assert.fail();
+		AssertJUnit.fail();
 		
 	}
 	
@@ -14318,7 +14280,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 							"validating the the products in the plp ",
 							"User should able to see the products in plp", "unable to see the products in the PLP",
 							Common.getscreenShot("Failed to see products in PLP"));
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 
 			}
@@ -14330,7 +14292,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	else
@@ -14365,7 +14327,7 @@ public void image_ShopAll(String Dataset) throws Exception {
 					"User should navigate to the " + Links[i] + "pages",
 					" unable to navigate to the " + Links[i] + "pages",
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 	}
 	
@@ -14456,7 +14418,7 @@ public void header_Explore(String Dataset) {
 				"User should navigate to the " + Links[i] + "pages",
 				" unable to navigate to the " + Links[i] + "pages",
 				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 }	
@@ -14519,7 +14481,7 @@ public void AddtoCart_Disable_PLP(String Dataset) {
 	{
 		e.printStackTrace();
 		
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -14558,7 +14520,7 @@ public void url_color_validation(String Dataset) {
 				"When we click on the product is should navigate to the PDP page",
 				"Unable to Navigate the product to the PDP page",
 				Common.getscreenShot("Failed to Navigate the product to the PDP page"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 	
@@ -14589,7 +14551,7 @@ public void url_color_validation(String Dataset) {
 				"When we click on the color the color name should reflect in url",
 				"Unable to display thee color name in the url",
 				Common.getscreenShot("Failed to display thee color name in the url"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -14639,7 +14601,7 @@ public void Add_To_MyFavorities(String Dataset) {
 					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
-					Assert.fail();
+					AssertJUnit.fail();
 				}
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Favorites") ,
 						"validating the Navigation to the My Favorites page",
@@ -14664,7 +14626,7 @@ public void Add_To_MyFavorities(String Dataset) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the products added to the whishlist form PDP", "Product should be add to fav from the PDP",
 				"Unable to add  product to the My Faviorates from the PDP ", Common.getscreenShot("failed to add  product to the My Faviorates from the PDP"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -14698,7 +14660,7 @@ public void Add_Favorites_product_from_View_Cart() {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -14744,7 +14706,7 @@ public void Add_Favorites_from_PLP(String Dataset) {
 				Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
 				Common.clickElement("xpath", "//button[@title='Add To List']");
 			} else {
-				Assert.fail();
+				AssertJUnit.fail();
 			}
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List") ||Common.getPageTitle().equals("My Favorites") ,
 					"validating the Navigation to the My Favorites page",
@@ -14769,7 +14731,7 @@ catch(Exception | Error e)
 	e.printStackTrace();
 	ExtenantReportUtils.addFailedLog("validating the products added to the whishlist form PDP", "Product should be add to fav from the PDP",
 			"Unable to add  product to the My Faviorates from the PDP ", Common.getscreenShot("failed to add  product to the My Faviorates from the PDP"));
-	Assert.fail();
+	AssertJUnit.fail();
 }
 
 }
@@ -14822,7 +14784,7 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -14888,7 +14850,7 @@ public String Secure_Payment_details(String dataSet) throws Exception {
 			ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 					"User failed to navigate  to order confirmation page",
 					Common.getscreenShotPathforReport("failednavigatepage"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -14918,7 +14880,7 @@ public void sort_By(String dataSet) {
 				"User should able to Sort  in Product Listing Page", "Unable to Sort the Product Listing Page",
 				Common.getscreenShotPathforReport("Failed to Sort  Product listing Page"));
 
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
 }
@@ -14985,7 +14947,7 @@ public void Sort_By(String Dataset) throws InterruptedException {
 					"Products should be display as per selected sort option ",
 					" Unable to display the Products as per selected sort option",
 					Common.getscreenShot("Failed to sort_by"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}

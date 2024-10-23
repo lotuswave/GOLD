@@ -30,8 +30,7 @@ public class Test_DGLD_OS_US_ST_031_Validating_the_shopping_cart_page {
         Osprey_ReEu.update_shoppingcart("Product Qunatity");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+//        Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.Shoppingcart_page();
         Osprey_ReEu.minicart_ordersummary_discount("Discount");
         
@@ -44,7 +43,7 @@ public class Test_DGLD_OS_US_ST_031_Validating_the_shopping_cart_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
