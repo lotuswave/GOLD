@@ -10,18 +10,22 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_US_ST_003_Footer_Newsletter_Subcription {
+public class Test_DGLD_OS_ST_037_Guest_User_Checkout_Discover_Card {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Newsletters");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_Guest_User_Checkout_Discover_Card () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-
-        Osprey_ReEu.stayIntouch();
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");
         
 		} catch (Exception e) {
 
