@@ -3611,11 +3611,11 @@ public class GoldOspreyUSHyvaHelper {
 				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 						.size() > 0) {
 					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
 					System.out.println(order);
 				} else {
 					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
 					System.out.println(order);
 				}
 
@@ -3759,6 +3759,7 @@ public class GoldOspreyUSHyvaHelper {
 					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 					Thread.sleep(8000);
 					if (Common.getCurrentURL().contains("/checkout")) {
+						Thread.sleep(4000);
 						String sucessmessage = Common.getText("xpath",
 								"//div[contains(@class,'checkout-success')]//h1");
 						System.out.println(sucessmessage);
