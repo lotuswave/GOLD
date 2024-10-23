@@ -2779,7 +2779,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			Thread.sleep(15000);
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
+				Sync.waitElementPresent(30, "xpath", "//span[text()='"+ method +"']");
 				Common.clickElement("xpath", "//span[text()='" + method + "']");
 			} else {
 
