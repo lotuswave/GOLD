@@ -4088,11 +4088,11 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
 			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
 			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
-			String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
-			String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
-			String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
+			String shippingAdd = Common.findElement("xpath", "//P[text()='Shipping Address']//parent::div").getText();
+			String billingAdd = Common.findElement("xpath", "//P[text()='Billing Address']//parent::div").getText();
+			String shippingmethod = Common.findElement("xpath", "//P[text()='Shipping Method']//parent::div").getText();
+			String ordersummary = Common.findElement("xpath", "//P[text()='Shipping Method']//parent::div").getText();
+			String itemsordered = Common.findElement("xpath", "//span[@class='text-sm']//span").getText();
 			System.out.println(itemsordered);
 
 			Common.assertionCheckwithReport(
