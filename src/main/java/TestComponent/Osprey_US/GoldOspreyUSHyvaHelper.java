@@ -3620,7 +3620,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//a")
 						.size() > 0) {
 					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
@@ -4146,22 +4146,22 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 
 		else {
 			try {
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				String sucessMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//h1").trim();
 				// Tell_Your_FriendPop_Up();
 
-				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				int sizes = Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//h1").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//a//strong").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success']//a//strong");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//a").size() > 0) {
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
-					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//a").size() > 0) {
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
 					System.out.println(order);
 				}
 
