@@ -402,24 +402,24 @@ public class GoldOspreyUSHyvaHelper {
 
 	}
 
-	public void stayIntouch(String Dataset) {
-		// TODO Auto-generated method stub
+	public void stayIntouch() throws Exception {
+
 		try {
 			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//form[@class='m-newsletter-signup__form']");
-			Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']",data.get(Dataset).get("UserName"));
+			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
+			Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//span[@class='icon-arrow a-icon_icon']");
-			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//div[@class='a-message__container-inner']");
+			String Text = Common.getText("xpath", "//span[text()='Thanks for subscribing!']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
-			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription."),
-					"verifying newsletter subscription", expectedResult, Text,
+
+			Common.assertionCheckwithReport(Text.contains("Thanks for subscribing!"),
+					"verifying newsletter subscription",
+					"User get confirmation message if new email if it used mail it showing error message ", Text,
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
 		} catch (Exception | Error e) {
@@ -428,11 +428,9 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
 					"User faield to subscrption for newLetter  ",
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
-
 	}
-
 	public void Invalid_email_newsletter(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
@@ -3367,11 +3365,11 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='" + socallinksarry[i] + "']");
+				Common.clickElement("xpath", "//a[contains(@href,'" + socallinksarry[i] + "')]");
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 
-				if (socallinksarry[i].equals("Instagram")) {
+				if (socallinksarry[i].equals("instagram")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -3380,7 +3378,7 @@ public class GoldOspreyUSHyvaHelper {
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].equals("Facebook")) {
+				else if (socallinksarry[i].equals("facebook")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.facebook.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -3389,37 +3387,38 @@ public class GoldOspreyUSHyvaHelper {
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].equals("Twitter")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("twitter"),
+				else if (socallinksarry[i].equals("x.com")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("x.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].equals("YouTube")) {
+				} else if (socallinksarry[i].equals("youtube")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].equals("Pinterest")) {
+				} else if (socallinksarry[i].equals("pinterest")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("pinterest"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
+					Thread.sleep(1000);
 					Common.switchToFirstTab();
 				}
-
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Verifying Social link ",
-					"click the social links it will navigating to particular page",
-					"User unable to navigate Social link page", Common.getscreenShotPathforReport("socialpage"));
-			AssertJUnit.fail();
+					"click the socal links it will navigating to particular page",
+					"User unabel to navigate Social page", Common.getscreenShotPathforReport("socialpage"));
+			Assert.fail();
 		}
+
 	}
 
 	public void Signin_Checkoutpage(String Dataset) {
