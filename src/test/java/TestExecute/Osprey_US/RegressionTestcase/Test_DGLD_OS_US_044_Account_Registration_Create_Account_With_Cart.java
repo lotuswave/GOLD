@@ -19,8 +19,6 @@ public class Test_DGLD_OS_US_044_Account_Registration_Create_Account_With_Cart {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");    
         Osprey_ReEu.MyFavorites_Guestuser("Product");

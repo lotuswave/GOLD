@@ -256,7 +256,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitImplicit(30);
 			Thread.sleep(8000);
-			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText().trim();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering") || Common.getPageTitle().contains("Favorites Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),
