@@ -350,18 +350,18 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
-			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.clickElement("xpath", "//span[text()='Reset My Password']");
+			Common.clickElement("xpath", "//button[contains(text(), 'Reset My Password')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
-			String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message')]");
+			String message = Common.findElement("xpath", "//div[contains(@ui-id,'message')]").getText();
 			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
@@ -379,6 +379,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		}
 
 	}
+	
 
 	public void Empty_Email() {
 		// TODO Auto-generated method stub
@@ -3212,33 +3213,26 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 	public void Shipping_Forgot_Password(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			Common.textBoxInput("xpath", "//input[@name='username']", data.get(dataSet).get("UserName"));
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
-			String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
-			System.out.println(shipping);
-			Common.clickElement("xpath", "//span[text()='Items in Cart']");
-			String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
-			System.out.println(QTY);
-			String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
-			System.out.println(Price);
-			Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
-			String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
-			System.out.println(Color);
-			String Size = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[4]").getText();
-			System.out.println(Size);
-			Common.assertionCheckwithReport(shipping.equals("Shipping"),
-					"To validate the user is navigating to Shipping page", "user should naviagte to Shipping page",
-					"User lands on Shippingd page", "User failed to navigate to Shipping page");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Sign in')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Sign in')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/login"),
+					"To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigIn button",
+					"User Successfully clicked on the singIn button and Navigate to the signIn page",
+					"User Failed to click the signin button and not navigated to signIn page");
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Shipping page",
-					"user should navigate to Shipping page", "User failed to land on Shipping page",
-					Common.getscreenShotPathforReport("failed  to naviagte Shipping page "));
-			AssertJUnit.fail();
-
+			ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"Unable to click on the singIn button and not Navigated to the signIn page",
+					Common.getscreenShotPathforReport(
+							"Failed to click signIn button and not Navigated to the signIn page"));
+			Assert.fail();
 		}
-
 	}
 
 	public void Configurable_addtocart_pdp(String Dataset) {
