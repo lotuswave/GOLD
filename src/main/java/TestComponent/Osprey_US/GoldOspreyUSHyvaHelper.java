@@ -8539,9 +8539,10 @@ public void minicart_validation(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8559,15 +8560,17 @@ public void minicart_validation(String Dataset) {
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+//			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+//			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
+			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
 
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 //			click_UGC();
-			Locally_PDP();
-			Common.actionsKeyPress(Keys.UP);
+			//Locally_PDP();
+			//Common.actionsKeyPress(Keys.UP);
 //			add_simplarproducts("configurable product");
 			 PDP_Tabs("Tabs");  
 			
