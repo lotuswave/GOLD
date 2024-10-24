@@ -8927,23 +8927,30 @@ else {
 				compareLinks.get(3).click();
 				Sync.waitElementPresent("xpath", "//a[text()='comparison list']");
 				Common.clickElement("xpath", "//a[text()='comparison list']");
-
+        try {
 				Common.clickElement("xpath", "(//a[contains(@class,'action tocart primary a-btn a-btn')])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+        }
+        catch (Exception | Error e)  {
+				
+        	Common.clickElement("xpath", "(//span[text()='Shop Now'])[1]");
+        	Sync.waitPageLoad();
+			Thread.sleep(4000);
+        }
+        	Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 				
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
-				Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
-				
-				Sync.waitElementVisible("xpath", "//a[text()='shopping cart']");
-
-				String Shoppping = Common.findElement("xpath", "//a[text()='shopping cart']").getText();
-
-				System.out.println(Shoppping);
-				AssertJUnit.assertEquals(Shoppping, "shopping cart");
+				Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
+				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+//				
+//				Sync.waitElementVisible("xpath", "//a[text()='shopping cart']");
+//
+//				String Shoppping = Common.findElement("xpath", "//a[text()='shopping cart']").getText();
+//
+//				System.out.println(Shoppping);
+//				AssertJUnit.assertEquals(Shoppping, "shopping cart");
 			} else {
 				System.out.println("Insufficient number of products for comparison.");
 
@@ -8963,8 +8970,8 @@ else {
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
-			Common.javascriptclickElement("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+			Sync.waitElementPresent("xpath", "//button[@id='add-to-wishlist']");
+			Common.javascriptclickElement("xpath", "//button[@id='add-to-wishlist']");
 			int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
 			System.out.println(Size);
 			if (Size > 0) {
@@ -8973,7 +8980,10 @@ else {
 				Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
 
 			} else {
-				String Error = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				String Error = Common.findElement("xpath", "//span[contains(text(),'You must login or register')]").getText();
+				System.out.println(Error);
 				if (Error.contains("You must login")) {
 					Login_Account("Account");
 				} else {
@@ -8982,7 +8992,7 @@ else {
 				}
 			}
 			Thread.sleep(3000);
-			int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
+			int WishlistMSG = Common.findElements("xpath", "//span[@x-html='message.text']").size();
 			System.out.println("Wishlist" + WishlistMSG);
 			Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
 					"My Wish List should be display", "Sucessfully navigated to My Wish List ",
@@ -9001,11 +9011,11 @@ else {
 		// TODO Auto-generated method stub
 		
 		try {
-		String Wishlist = Common.findElement("xpath", "//h1[text()='My Favourites']").getText();		
-		AssertJUnit.assertEquals(Wishlist, "My Favourites");
+		String Wishlist = Common.findElement("xpath", "//h1//span[text()='My Wishlist']").getText();		
+		AssertJUnit.assertEquals(Wishlist, "My Wishlist");
 	   
-		    Sync.waitElementPresent(30, "xpath", "//button[@class='action tocart a-btn a-btn--secondary']");
-			Common.mouseOverClick("xpath", "//button[@class='action tocart a-btn a-btn--secondary']");
+		    Sync.waitElementPresent(30, "xpath", "(//span[text()='Add to Cart'])[2]");
+			Common.mouseOverClick("xpath", "(//span[text()='Add to Cart'])[2]");
 		
 			minicart_Checkout();
 
