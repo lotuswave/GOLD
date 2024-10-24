@@ -259,7 +259,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
-					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),
+					message.contains("Thank you for registering") || Common.getPageTitle().contains("Favorites Sharing") && message.contains(Product + " has been added to your Favorites. Click here to view your Favorites"),
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
 					"Successfully user navigates to the My account page after clicking on the signup button",
@@ -6973,21 +6973,21 @@ public void minicart_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String items = "";
 		try {
-			Sync.waitElementPresent("xpath", "//span[@class='c-mini-cart__counter']");
-			items = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			Sync.waitElementPresent("xpath", "//div[@x-text='cartSummaryCount']");
+			items = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 			System.out.println(items);
-			Common.clickElement("xpath", "//div[@class='c-mini-cart js-mini-cart']");
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String miniitems = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong")
-					.getText();
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String miniitems = Common.findElement("xpath", "//span[@x-text='totalCartAmount']")
+					.getText().trim();
 			System.out.println(miniitems);
 			Common.assertionCheckwithReport(items.contains(miniitems),
 					"Vaildating the products count in the mini cart ",
 					"Products count shsould be display in the mini cart",
 					"Sucessfully products count has displayed in the mini cart",
 					"failed to display products count in the mini cart");
-			Sync.waitElementPresent("xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -6996,7 +6996,7 @@ public void minicart_validation(String Dataset) {
 					"Unable to display the  products count in the mini cart",
 					Common.getscreenShot("failed to display products count in the mini cart"));
 
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 		return items;

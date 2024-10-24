@@ -10,7 +10,7 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_ST_046_Guest_User_Create_Account_from_OrderConfirmation_Page {
+public class Test_DGLD_OS_US_ST_046_Guest_User_Create_Account_from_OrderConfirmation_Page {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
