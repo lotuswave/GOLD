@@ -6968,14 +6968,14 @@ public void minicart_validation(String Dataset) {
 			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-			Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(@x-data,'initWishlistOnProductList')]");
+			Common.clickElement("xpath", "//button[contains(@x-data,'initWishlistOnProductList')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Customer Login")
-							&& message.contains("You must login or register to add items"),
+							&& message.contains("You must login or register to add items to your wishlist."),
 					"validating the Navigation to the Customer Login page",
 					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
@@ -7173,27 +7173,34 @@ public void minicart_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String update = "";
 		String Shipping="";
+		String firstname = data.get(dataSet).get("FirstName");
+		String secondname = data.get(dataSet).get("LastName");
+		String address = data.get(dataSet).get("Street");
+		String phonenumber = data.get(dataSet).get("phone");
+		String City = data.get(dataSet).get("City");
+		String region = data.get(dataSet).get("Region");
+		String zipcode = data.get(dataSet).get("postcode");
+		String shipping = data.get(dataSet).get("Shipping address");
 		try {
+			
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-					"payment section should be displayed", "sucessfully payment section has been displayed",
-					"Failed to displayed the payment section");
-			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
-			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
-			System.out.println(data.get(dataSet).get("City"));
+
+			String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
+			if (newaddress.contains("You have no other address")) {
+				Common.clickElement("xpath", "//button[@title='Add New Address']");
+				Sync.waitPageLoad();
+				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
+				Common.clickElement("xpath", "//input[@name='firstname']");
+				Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
+				Common.clickElement("xpath", "//input[@name='lastname']");
+				Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
+				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
+				Common.clickElement("xpath", "//input[@title='Phone Number']");
+				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
+				Common.clickElement("xpath", "//input[@title='Address Line 1']");
+				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+				Common.clickElement("xpath", "//input[@title='City']");
+				Common.textBoxInput("xpath", "//input[@title='City']", City);
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
@@ -7207,7 +7214,7 @@ public void minicart_validation(String Dataset) {
 			 {
 				 Thread.sleep(4000);
                  Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));  
                  Thread.sleep(3000);
                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
                          .getAttribute("value");
@@ -7217,26 +7224,16 @@ public void minicart_validation(String Dataset) {
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
-					data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
-
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
-					data.get(dataSet).get("phone"));
-			Thread.sleep(4000);		
-			Common.clickElement("xpath", "//span[text()='Update']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-			Thread.sleep(5000);
-			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
-			System.out.println("update"+update);
-			Common.assertionCheckwithReport(
-					update.equals(Shipping),
-					"verifying the Billing address form in payment page",
-					"Billing address should be saved in the payment page",
-					"Sucessfully Billing address form should be Display ",
-					"Failed to display the Billing address in payment page");
+			Common.clickElement("xpath", "//input[@name='postcode']");
+			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+			Common.clickElement("xpath", "//button[@title='Save Address']");
+			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.assertionCheckwithReport(message.equals("You saved the address."),
+					"validating the saved message after saving address in address book",
+					"Save address message should be displayed after the address saved in address book",
+					"Sucessfully address has been saved in the address book",
+					"Failed to save the address in the address book");
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7253,13 +7250,13 @@ public void minicart_validation(String Dataset) {
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent("xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.scrollIntoView("xpath", "(//div[contains(@class,'box box-billing')]//br)[2]");
-			String Address = Common.findElement("xpath", "(//div[contains(@class,'box box-billing')]//br)[2]")
-					.getText();
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+			Common.scrollIntoView("xpath", "(//address[@class='not-italic']//br)[1]");
+			String Address = Common.findElement("xpath", "(//address[@class='not-italic']//br)[1]")
+					.getText().trim();
 			System.out.println(Address);
 			System.out.println(Dataset);
 			Common.assertionCheckwithReport(Address.contains(Dataset) || Dataset.contains("935 The Horsley Dr"),
