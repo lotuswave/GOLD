@@ -6938,18 +6938,19 @@ public void minicart_validation(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+			
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Sync.waitElementPresent(30, "xpath", "//button[contains(@x-data,'initWishlistOnProductList')]");
-			Common.clickElement("xpath", "//button[contains(@x-data,'initWishlistOnProductList')]");
+			Sync.waitElementPresent(30, "xpath", "//button[@id='add-to-wishlist']");
+			Common.clickElement("xpath", "//button[@id='add-to-wishlist']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Customer Login")
-							&& message.contains("You must login or register to add items to your wishlist."),
+							&& message.contains("You must login or register to add items"),
 					"validating the Navigation to the Customer Login page",
 					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
 					"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
@@ -7115,20 +7116,17 @@ public void minicart_validation(String Dataset) {
 	public void minicart_products(String minicart) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-			Common.javascriptclickElement("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.mouseOverClick("xpath", "//button[@id='menu-cart-icon']");
 
-			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__counter']");
-			String cartproducts = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[@x-text='cartSummaryCount']");
+			String cartproducts = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 
 			Common.assertionCheckwithReport(cartproducts.equals(minicart),
 					"validating the products in the cart after creating new account ",
 					"Products should be displayed in the mini cart after Create account with Cart",
 					"Sucessfully after create account with cart products should be display in mini cart",
 					"failed to display the products in mini cart after the create account with cart");
-
-			Sync.waitElementVisible("xpath", "//div[contains(@class,'c-mini-cart__close-btn')]");
-			Common.clickElement("xpath", "//div[contains(@class,'c-mini-cart__close-btn')]");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7138,7 +7136,7 @@ public void minicart_validation(String Dataset) {
 					Common.getscreenShot(
 							"failed to display the products in mini cart after the create account with cart"));
 
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
