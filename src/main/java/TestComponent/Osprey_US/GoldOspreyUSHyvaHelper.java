@@ -2131,15 +2131,13 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']");
-			String minicart = Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText();
-			Sync.waitElementPresent("xpath", "//a[normalize-space()='View Cart']");
-			Common.clickElement("xpath", "//a[normalize-space()='View Cart']");
-			String viewcart = Common.findElement("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']").getText();
-			Sync.waitPageLoad();
-			Thread.sleep(8000);
+			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
+			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
+			Common.clickElement("xpath", "//a[@title='View Cart']");
+			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
 			Common.assertionCheckwithReport(
-					viewcart.contains(minicart) || Common.getCurrentURL().contains("/checkout/cart/"),
+					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
 					"Successfully navigates to the view cart page",
 					"Failed to navigate to the view and edit cart page");
@@ -2150,7 +2148,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 					"User should able to navigate to the view cart page", "unable to  navigates to the view cart page",
 					Common.getscreenShot("Failed to navigate to the view cart page"));
 
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 
@@ -2160,40 +2158,44 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@type='submit']//span[@class='a-btn__label']");
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//button[contains(text(),'Add All To Gift Registry')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry Items") || Common.getPageTitle().equals("Manage Gift Registry"),
+			Thread.sleep(6000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry Items"),
 					"validating navigation to the Manage Gift Registry page ",
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"successfully Navigated to the Manage Gift Registry",
 					"failed to Navigate to the Manage Gift Registry");
+//			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating navigation to the Manage Gift Registry page ",
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"Unable to Navigated to the Manage Gift Registry",
 					Common.getscreenShot("failed to Navigate to the Manage Gift Registry"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 		try {
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
-			Common.clickElement("xpath", "//div[@class='control m-text-input']");
-			Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']",
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//input[@type='number']");
+			Common.textBoxInput("xpath", "//input[@type='number']",
 					data.get(Dataset).get("Quantity"));
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Update Items']");
-			Common.clickElement("xpath", "//span[text()='Update Items']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
-			String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-			Common.assertionCheckwithReport(errormessage.contains("Please enter a number greater than 0"),
-					"validating nthe error message validation for the prodcuts in gift registry ",
-					"After Upadting the quantity to zero the eroor message should be display",
-					"successfully quantity has been changed to zero and error message has been displayed",
-					"failed to Display the error message for the when quantity changed to zero");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Update Gift Registry ')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Update Gift Registry ')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']//span");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+			Common.assertionCheckwithReport(message.contains("You updated the gift registry items."),
+					"validating nthe  message validation for the prodcuts in gift registry ",
+					"After Upadting the quantity the message should be display",
+					"successfully quantity has been changed  message has been displayed",
+					"failed to Display the message for the when quantity changed");
 
+			Common.clickElement("xpath", "//a[@title='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
@@ -2201,9 +2203,10 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 					"After Upadting the quantity to zero the eroor message should be display",
 					"Unable to Display the error message for the when quantity changed to zero",
 					Common.getscreenShot("failed to Display the error message for the when quantity changed to zero"));
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
+
 
 	}
 
@@ -2253,48 +2256,31 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//a[@title='Share']");
-			Common.clickElement("xpath", "//a[@title='Share']");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Share')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Share')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']");
-			Common.clickElement("xpath", "//button[@type='submit']");
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
-			String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
-			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-error']//span");
+			String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
+			Common.assertionCheckwithReport(errormessage.contains("You need to enter sender data."),
 					"validating the error message with empty fields ",
 					"After clicking hare button with empty data error message should be display",
 					"successfully error message has been dispalyed ", "failed to display the error message");
-			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//button[@type='submit']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
-			String invalidemail = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-			Common.assertionCheckwithReport(invalidemail.contains("Please enter a valid email address"),
-					"validating the error message with invalid email ",
-					"After clicking hare button with invalid email error message should be display",
-					"successfully error message has been dispalyed ", "failed to display the error message");
-
+			Common.clickElement("xpath", "//a[@title='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the error message with invalid email ",
 					"After clicking hare button with invalid email error message should be display",
 					"Unable to see the error message has been dispalyed ",
 					Common.getscreenShot("failed to display the error message"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 		try {
-			Sync.waitElementPresent(30, "xpath", "//strong[text()='Gift Registry']");
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
-			Sync.waitImplicit(40);
-			Common.maximizeImplicitWait();
-			Thread.sleep(2000);
-			String page = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-			Common.assertionCheckwithReport(page.contains("Gift Registry"),
-					"validating the gift registry page navigation ",
-					"After clicking Gift registry it should navigate to the gift registry page",
-					"successfully Navigated to the gift registry page ",
-					"failed to Navigate to the gift rigistry page");
+			
 			delete_giftcard();
 
 		} catch (Exception | Error e) {
