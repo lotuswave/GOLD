@@ -39,7 +39,7 @@ public class Test_DGLD_OS_US_ST_072_Guest_User_Add_to_Compare_Products_to_Wishli
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
   

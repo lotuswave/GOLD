@@ -480,7 +480,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home page")||Common.getPageTitle().contains("Osprey Home Page") || Common.getPageTitle().contains("My Wish List")
+					Common.getPageTitle().contains("Home page")||Common.getPageTitle().contains("Favorites Sharing") || Common.getPageTitle().contains("My Wish List")
 							|| Common.getPageTitle().contains("Backpacks"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
