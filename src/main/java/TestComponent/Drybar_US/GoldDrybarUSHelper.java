@@ -8713,11 +8713,11 @@ public void Navigate_to_addressbook() {
 	
 	try
 	{
-		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
+		Sync.waitElementPresent("id", "customer-menu");
+		Common.clickElement("id", "customer-menu");
 		Thread.sleep(3000);
-		Sync.waitElementPresent("xpath", "//ul[@class='m-account-nav__links']//a[text()='My Account']");
-		Common.clickElement("xpath", "//ul[@class='m-account-nav__links']//a[text()='My Account']");
+		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+		Common.clickElement("xpath", "//a[@title='My Account']");
 		Thread.sleep(3000);
 		Common.assertionCheckwithReport(
 				Common.getCurrentURL().contains("account"),
@@ -8725,13 +8725,13 @@ public void Navigate_to_addressbook() {
 				"after clicking on the my account user should able to navigate to the account page",
 				"Sucessfully user navigated to the My account page",
 				"Failed to navigate to the My account page after clicking on the My account button");
-		Sync.waitElementPresent("xpath", "//a[text()='Address Book']");
-		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Sync.waitElementPresent("xpath", "//a[@title='Address Book']");
+		Common.clickElement("xpath", "//a[@title='Address Book']");
 		Thread.sleep(3000);
-		String title=Common.getText("xpath", "//h1[@class='page-title-wrapper h2']");
+		String title=Common.getText("xpath", "//span[@data-ui-id='page-title-wrapper']");
 		System.out.println(title);
 		Common.assertionCheckwithReport(
-				title.contains("Address Book"),
+				title.contains("ADDRESS BOOK"),
 				"verifying the user navigates to the Address Book page",
 				"after clicking on the Address Book user should able to navigate to the Address Book page",
 				"Sucessfully user navigated to the Address Book page",
@@ -8756,13 +8756,13 @@ public String Add_New_AddressBook(String dataSet) {
 	try {
 		
 		Navigate_to_addressbook();
-		Sync.waitElementVisible(30, "xpath", "//button[@title='Add New Address']");
-		Common.clickElement("xpath", "//button[@title='Add New Address']");
+		Sync.waitElementVisible(30, "xpath", "//a[contains(text(), 'Add New Address')]");
+		Common.clickElement("xpath", "//a[contains(text(), 'Add New Address')]");
 		Thread.sleep(4000);
 		Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
 		numer=Common.findElement("xpath", "//input[@title='Phone Number']").getAttribute("value");
 		System.out.println(numer);
-		Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+		Common.textBoxInput("xpath", "//input[@title='Street Address']", data.get(dataSet).get("Street"));
 		Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 		Thread.sleep(4000);
 		 if(Common.getCurrentURL().contains("/gb"))
@@ -8782,13 +8782,13 @@ public String Add_New_AddressBook(String dataSet) {
 
 		Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
          Thread.sleep(4000);
-         Sync.waitElementPresent("xpath", "//div[@id='ltksmsfield']//input");
-         Common.clickElement("xpath", "//div[@id='ltksmsfield']//input");
-         Thread.sleep(3000);
+//         Sync.waitElementPresent("xpath", "//div[@id='ltksmsfield']//input");
+//         Common.clickElement("xpath", "//div[@id='ltksmsfield']//input");
+//         Thread.sleep(3000);
          
 		Common.clickElement("xpath", "//button[@title='Save Address']");
 		Thread.sleep(5000);
-		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(message.contains("You saved the address."),
 				"validating the saved message after saving address in address book",
@@ -8814,12 +8814,12 @@ public void communication_Prefrence(String phonenumber) {
 	
 	try
 	{
-		Sync.waitElementPresent("xpath", "//a[text()='Communication Preferences']");
-		Common.clickElement("xpath", "//a[text()='Communication Preferences']");
+		Sync.waitElementPresent("xpath", "//a[@title='Communication Preferences']");
+		Common.clickElement("xpath", "//a[@title='Communication Preferences']");
 		Thread.sleep(4000);
-		String Title=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+		String Title=Common.findElement("xpath", "//span[@data-ui-id='page-title-wrapper']").getText();
 		System.out.println(Title);
-		Common.assertionCheckwithReport(Title.contains("Communication Preferences"),
+		Common.assertionCheckwithReport(Title.contains("COMMUNICATION PREFERENCES"),
 				"verifying the user navigates to the Communication Preferences page",
 				"after clicking on the Communication Preferences user should able to navigate to the Communication Preferences page",
 				"Sucessfully user navigated to the Communication Preferences page",
@@ -8867,18 +8867,18 @@ public void Delete_Address() {
 	// TODO Auto-generated method stub
 	try
 	{
-		Sync.waitElementPresent("xpath", "//a[text()='Address Book']");
-		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Sync.waitElementPresent("xpath", "//a[@title='Address Book']");
+		Common.clickElement("xpath", "//a[@title='Address Book']");
 		Thread.sleep(4000);
-		Common.scrollIntoView("xpath", "//span[text()='Delete']");
-		Sync.waitElementPresent("xpath", "//span[text()='Delete']");
-		Common.clickElement("xpath", "//span[text()='Delete']");
+		Common.scrollIntoView("xpath", "//a[@title='Delete']");
+		Sync.waitElementPresent("xpath", "//a[@title='Delete']");
+		Common.clickElement("xpath", "//a[@title='Delete']");
 		Thread.sleep(4000);
 		String popmessage = Common.findElement("xpath", "//div[contains(text(),'Are you ')]").getText();
 		if (popmessage.contains("Are you sure you want to delete this address?")) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
 			Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-			String Delmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div")
+			String Delmessage = Common.findElement("xpath", "//div[@ui-id='message-success']")
 					.getText();
 			System.out.println(Delmessage);
 			Common.assertionCheckwithReport(Delmessage.contains("You deleted the address."),
@@ -8909,19 +8909,19 @@ public String edit_MobileNumber(String dataSet) {
 	String numer="";
 	try
 	{
-		Sync.waitElementPresent("xpath", "//a[text()='Address Book']");
-		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Sync.waitElementPresent("xpath", "//a[@title='Address Book']");
+		Common.clickElement("xpath", "//a[@title='Address Book']");
 		Thread.sleep(4000);
-		Common.scrollIntoView("xpath", "//a[@class='action edit']");
-		Sync.waitElementPresent("xpath", "//a[@class='action edit']");
-		Common.clickElement("xpath", "//a[@class='action edit']");
+		Common.scrollIntoView("xpath", "//a[@title='Edit']");
+		Sync.waitElementPresent("xpath", "//a[@title='Edit']");
+		Common.clickElement("xpath", "//a[@title='Edit']");
 		Thread.sleep(4000);
 		Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone1"));
 		numer=Common.findElement("xpath", "//input[@title='Phone Number']").getAttribute("value");
 		System.out.println(numer);
 		Common.clickElement("xpath", "//button[@title='Save Address']");
 		Thread.sleep(5000);
-		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(message.contains("You saved the address."),
 				"validating the saved message after saving address in address book",
@@ -8943,8 +8943,6 @@ public String edit_MobileNumber(String dataSet) {
 	}
 	return numer;
 }
-
-
 
 public void Add_Address(String dataSet) {
 	// TODO Auto-generated method stub
