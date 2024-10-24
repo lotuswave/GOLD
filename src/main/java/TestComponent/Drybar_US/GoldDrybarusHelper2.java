@@ -3963,6 +3963,7 @@ public class GoldDrybarusHelper2 {
 			String productquantity = Common.findElement("xpath", "(//select[@title='Qty'])[1]")
 					.getAttribute("value");
 			System.out.println(productquantity);
+			//String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hf:title-2xs hidden lg:inline']").getText().trim().replace("Items", "");
 			String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hf:title-2xs hidden lg:inline']").getText().trim().replace("Items", "");
 			System.out.println(items);
 			Common.assertionCheckwithReport(productquantity.equals(quantity) || productquantity.equals(items),
