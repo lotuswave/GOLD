@@ -11411,13 +11411,14 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//img[@alt='Sustainable design']");
 			Sync.waitElementPresent("xpath", "//img[@alt='Sustainable design']");
+			Common.clickElement("xpath", "//img[@alt='Sustainable design']");
 			Thread.sleep(3000);
 			Common.switchFrames("xpath", "//iframe[@title='Vimeo video player']");
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
-			Thread.sleep(4000);
-			String video2 = Common.findElement("xpath", "//svg[@data-pause-icon='true']")
-					.getAttribute("data-pause-icon");
+			Thread.sleep(8000);
+			String video2 = Common.findElement("xpath", "//button[@data-play-button='true']")
+					.getAttribute("data-play-button");
 			Common.assertionCheckwithReport(video2.contains("true"), "validating the video in PDP page",
 					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
 					"failed to Pause the video in PDP page");
