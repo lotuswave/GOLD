@@ -476,7 +476,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Sign In']");
+			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
@@ -2554,8 +2554,8 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(), 'Checkout') or contains(text(), 'Caja')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Checkout') or contains(text(),'Caja')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
@@ -3642,7 +3642,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 			System.out.println(payment);
 			if (payment > 0) {
 				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Campo de entrada seguro para el pago'or @title='Secure payment input frame']");
 				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
@@ -3706,7 +3706,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 
 			} else {
 				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Campo de entrada seguro para el pago'or @title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
@@ -8932,9 +8932,17 @@ public void Continue_Shopping() {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-
-			Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
+			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
+		       if (size1>0) {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   
+		       } 
+		       else {
+					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
+					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
+		       }
+			
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -8949,15 +8957,15 @@ public void Continue_Shopping() {
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Thread.sleep(3000);
-			Sync.waitElementClickable("xpath", "//span[contains(text(), 'Apply Code')]");
-			Common.clickElement("xpath", "//span[contains(text(), 'Apply Code')]");
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//span[text()='Your coupon was successfully applied.']");
+			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
 			System.out.println(discountcodemsg);
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
 
