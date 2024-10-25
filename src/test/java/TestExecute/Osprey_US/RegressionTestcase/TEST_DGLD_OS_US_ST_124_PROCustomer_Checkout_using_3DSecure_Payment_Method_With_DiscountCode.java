@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
+import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_OS_US_ST_124_PROCustomer_Checkout_using_3DSecure_Payment_Method_With_DiscountCode {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_PRO_Customer_Checkout_With_SingleItem_Using_CC () throws Exception {
@@ -23,6 +23,7 @@ public class TEST_DGLD_OS_US_ST_124_PROCustomer_Checkout_using_3DSecure_Payment_
         Osprey_ReEu.Login_Account("prouser");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.Prouser_Discount();
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.discountCode("Discount");
