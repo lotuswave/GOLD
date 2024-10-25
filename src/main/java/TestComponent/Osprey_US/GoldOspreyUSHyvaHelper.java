@@ -10886,6 +10886,7 @@ catch(Exception | Error e)
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
+			Common.clickElement("xpath","//p[@class='secondaryLink ']");
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
 			
