@@ -8961,58 +8961,37 @@ public void Continue_Shopping() {
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
 
+			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
+					"").trim();
+			Float subtotalvalue = Float.parseFloat(Subtotal);
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+					.replace("$", "").trim();
+			Float shippingvalue = Float.parseFloat(shipping);
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
+			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "(//div[@class='item subtotal']//span[2])[2]");
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[2])[2]").replace(Symbol,
-					"");
-			
-			double subtotalvalue = Double.parseDouble(Subtotal);
-//			Float subtotalvalue = Float.parseFloat(Subtotal);
-			System.out.println("subtotalvalue" + subtotalvalue);
+			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]")
+					.replace("$", "").trim();
+			Float Discountvalue = Float.parseFloat(Discount);
+			System.out.println(Discountvalue);
 
-			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[2])[2]").replace(Symbol,
-					"");
-			double shippingvalue = Double.parseDouble(shipping);
-			System.out.println("shippingvalue" + shippingvalue);
-			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[2])[2]").replace(Symbol, "");
-			double Taxvalue = Double.parseDouble(Tax);
-			System.out.println("Taxvalue" + Taxvalue);
+			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
+					.replace("$", "").trim();
+			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			String Discount = Common.getText("xpath", "(//div[@class='item discount']//span[2])[2]").replace(Symbol,
-					"");
-			double Discountvalue = Double.parseDouble(Discount);
-			System.out.println("Discountvalue" + Discountvalue);
-
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[2])[2]")
-					.replace(Symbol, "");
-			double ordertotalvalue = Double.parseDouble(ordertotal);
-			Thread.sleep(4000);
-
-			double Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-
-			double expectedTotalvalue = Double.parseDouble(ExpectedTotalAmmount2);
-double tolarance =0.01;
-			System.out.println("expectedTotalvalue" + expectedTotalvalue);
-			System.out.println("ordertotalvalue" + ordertotalvalue);
-if(Math.abs(expectedTotalvalue - ordertotalvalue) == 0 ) {
-			Common.assertionCheckwithReport(Math.abs(expectedTotalvalue - ordertotalvalue) == 0,
+			Thread.sleep(4000);
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(ordertotal);
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 					"validating the order summary in the payment page",
 					"Order summary should be display in the payment page and all fields should display",
 					"Successfully Order summary is displayed in the payment page and fields are displayed",
 					"Failed to display the order summary and fileds under order summary");
-
 		}
-else {
-	
-	Common.assertionCheckwithReport(Math.abs(expectedTotalvalue - ordertotalvalue) >=tolarance,
-			"validating the order summary in the payment page",
-			"Order summary should be display in the payment page and all fields should display",
-			"Successfully Order summary is displayed in the payment page and fields are displayed",
-			"Failed to display the order summary and fileds under order summary");
 
-}
-		}
 		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
