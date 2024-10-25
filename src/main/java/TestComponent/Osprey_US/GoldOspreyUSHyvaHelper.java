@@ -6830,11 +6830,12 @@ public void minicart_validation(String Dataset) {
 
 	}
 
-	public void reorder() {
+
+public void reorder() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
-			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[normalize-space()='My Orders']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='View Order']");
@@ -6854,72 +6855,71 @@ public void minicart_validation(String Dataset) {
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Unable to Navigate to the shopping cart page",
 					Common.getscreenShot("Failed to Navigate to the shopping cart page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
+public void Navigate_back_to_Shoppingcart_page(String Dataset) {
+	// TODO Auto-generated method stub
 
-	public void Navigate_back_to_Shoppingcart_page(String Dataset) {
-		// TODO Auto-generated method stub
+	try {
+		Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
+		Common.clickElement("xpath", "//span[text()='Back to Cart']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+				"validating the navigates to the shopping cart page",
+				"After clicking on the reorder it should navigate to the shopping cart page",
+				"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
 
-		try {
-			Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
-			Common.clickElement("xpath", "//span[text()='Back to Cart']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
-					"validating the navigates to the shopping cart page",
-					"After clicking on the reorder it should navigate to the shopping cart page",
-					"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+		String Cart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title')]").getText().trim()
+				.replace("Items", "");
+		String checkout = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText().trim();
+		System.out.println(checkout);
+		System.out.println(Cart);
+		Sync.waitElementVisible(30, "xpath", "//a[@id='checkout-link-button']");
+		Common.clickElement("xpath", "//a[@id='checkout-link-button']");
+		Sync.waitPageLoad();
+		Thread.sleep(7000);
 
-			String Cart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText()
-					.replace(" Item(s)", "");
-			System.out.println(Cart);
-			Sync.waitElementVisible(30, "xpath", "//button[@data-role='proceed-to-checkout']");
-			Common.clickElement("xpath", "//button[@data-role='proceed-to-checkout']");
-			Sync.waitPageLoad();
-			Thread.sleep(7000);
-			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
-			System.out.println(checkout);
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(
-					checkout.equals(Cart) && Common.getCurrentURL().contains("checkout/#shipping"),
-					"validating the navigation to the shipping page when we click on the checkout",
-					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
-					"Failed to navigate to the shipping page");
-			selectshippingmethod(Dataset);
-			clickSubmitbutton_Shippingpage();
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"validating the navigation to the shipping page when we click on the checkout ",
-					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
-					Common.getscreenShot("Failed to navigate to the shipping page"));
-			AssertJUnit.fail();
-
-		}
-	}
-
-	public void Continue_Shopping() {
-		// TODO Auto-generated method stub
-		try {
-			Sync.waitElementVisible("xpath", "//span[@class='a-btn-tertiary__label']");
-			Common.clickElement("xpath", "//span[@class='a-btn-tertiary__label']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			verifingHomePage();
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating store logo on the homwpage",
-					"System directs the user to the Homepage and store logo should display",
-					"Unable to navigate to the homepage and logo is not displayed",
-					"Failed to navigate to the homepage and logo is not displayed");
-			AssertJUnit.fail();
-		}
+		Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+		Common.assertionCheckwithReport(
+				checkout.equals(Cart) || Common.getCurrentURL().contains("checkout/"),
+				"validating the navigation to the shipping page when we click on the checkout",
+				"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
+				"Failed to navigate to the shipping page");
+		selectshippingmethod(Dataset);
+		clickSubmitbutton_Shippingpage();
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating the navigation to the shipping page when we click on the checkout ",
+				"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
+				Common.getscreenShot("Failed to navigate to the shipping page"));
+		AssertJUnit.fail();
 
 	}
+}
 
+
+public void Continue_Shopping() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementVisible("xpath", "//span[text()='Continue Shopping']");
+		Common.clickElement("xpath", "//span[text()='Continue Shopping']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		verifingHomePage();
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating store logo on the homwpage",
+				"System directs the user to the Homepage and store logo should display",
+				"Unable to navigate to the homepage and logo is not displayed",
+				"Failed to navigate to the homepage and logo is not displayed");
+		AssertJUnit.fail();
+	}
+
+}
 	public void MyFavorites_Guestuser(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
