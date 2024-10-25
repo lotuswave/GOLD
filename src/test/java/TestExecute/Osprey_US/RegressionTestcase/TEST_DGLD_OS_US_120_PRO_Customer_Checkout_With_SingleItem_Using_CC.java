@@ -9,7 +9,7 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_US_ST_124_PROCustomer_Checkout_using_3DSecure_Payment_Method_With_DiscountCode {
+public class TEST_DGLD_OS_US_120_PRO_Customer_Checkout_With_SingleItem_Using_CC {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
@@ -26,10 +26,9 @@ public class TEST_DGLD_OS_US_ST_124_PROCustomer_Checkout_using_3DSecure_Payment_
         Osprey_ReEu.Prouser_Discount();
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.discountCode("Discount");
-        Osprey_ReEu.selectshippingmethod("ProShippingMethod");
+        Osprey_ReEu.selectshippingmethod("ProShippingMethod");         //ProShippingMethod while executing us change this to proshipping method
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Secure_Payment_details("3d_Secure");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 

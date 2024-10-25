@@ -2578,20 +2578,30 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 	public void click_minicart() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(5000);
-			Common.actionsKeyPress(Keys.PAGE_UP);
+			Thread.sleep(8000);
+			Common.actionsKeyPress(Keys.UP);
 			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
 			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
-			String openminicart = Common.findElement("xpath", "//div[@aria-labelledby='cart-drawer-title']").getAttribute("aria-modal");
+			
+			String openminicart = Common.findElement("xpath", "//button[@id='menu-cart-icon']").getAttribute("aria-expanded");
 			System.out.println(openminicart);
+			if(openminicart.contains("true")) {
 			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
 					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
-
+			} else {
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			String openminicart1 = Common.findElement("xpath", "//button[@id='menu-cart-icon']").getAttribute("aria-expanded");
+			System.out.println(openminicart1);
+			Common.assertionCheckwithReport(openminicart1.contains("true"), "To validate the minicart popup",
+					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "the mini cart is displayed",
 					"unable to  dislay the mini cart", Common.getscreenShot("Failed to display the mini cart"));
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 
@@ -15010,6 +15020,44 @@ public void Sort_By(String Dataset) throws InterruptedException {
 		}
 
 	}
+
+public void Prouser_Discount() {
+	// TODO Auto-generated method stub
+	try
+	{
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+	Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+	Thread.sleep(3000);
+	String originalprice = Common.getText("xpath", "//span[@class='price line-through hf:font-bold md:hf:font-normal']").replace("$", "");
+	//String originalprice = Common.getText("xpath", "//div[contains(@class,'old-price')]//span[@class='price line-through']").replace("$", "");
+	Float originalvalue = Float.parseFloat(originalprice);
+	String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "");
+	Float pricevalue = Float.parseFloat(Newprice);
+	Thread.sleep(4000);
+	float discount = originalvalue - (originalvalue * 40 / 100);
+	String discountvalue = String.valueOf(discount).replace("$", "");
+	Float value = Float.parseFloat(discountvalue);
+	String s=String.valueOf(value); 
+	System.out.println(discountvalue);
+	System.out.println(value);
+	Common.assertionCheckwithReport(discountvalue.contains(s),
+			"verifying the discount for the Pro user discount ",
+			"user should able to see the discount for the Pro user",
+			"user successfully able to apply the discount", "Failed to apply the discount for the pro user");
+	click_minicart();
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the discount for the pro user discount ",
+				"user should able to see the discount for the pro user",
+				"Unable to apply the discount for the pro user",
+				Common.getscreenShotPathforReport("Failed to apply the discount for the pro user"));
+		Assert.fail();
+	}
+	
+}
 
 
 }
