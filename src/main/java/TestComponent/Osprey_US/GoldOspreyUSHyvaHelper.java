@@ -2601,10 +2601,10 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 	public void RegaddDeliveryAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
-		int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
+		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
-				Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
+				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
@@ -2666,7 +2666,7 @@ String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
-				Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
