@@ -38,7 +38,7 @@ public class Test_DGLD_OS_US_ST_016_Validation_Shipping_Address_form_for_Registe
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

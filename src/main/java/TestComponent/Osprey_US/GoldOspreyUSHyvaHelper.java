@@ -7883,7 +7883,7 @@ public void Continue_Shopping() {
 	
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
-        Thread.sleep(3000);
+        Thread.sleep(4000);
         int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
