@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_068_Checkout_RegisterUserCC_configurable_Simple_with_2_day_shipping {
+public class Test_DGLD_OS_US_ST_068_Checkout_RegisterUserCC_configurable_Simple_with_2_day_shipping {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
