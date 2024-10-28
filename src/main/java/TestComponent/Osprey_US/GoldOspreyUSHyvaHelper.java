@@ -9490,6 +9490,9 @@ public void Continue_Shopping() {
 		try
 		{
 			for (int i = 0; i <= 10; i++) {
+				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
+				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
+				Common.clickElement("xpath", "//span[text()='Gift Cards']");
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@itemprop ,'image')]");
