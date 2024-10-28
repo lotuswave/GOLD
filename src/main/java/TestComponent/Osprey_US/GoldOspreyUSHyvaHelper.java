@@ -315,15 +315,14 @@ public class GoldOspreyUSHyvaHelper {
 	}
 
 	public void click_singinButton() {
-		// TODO Auto-generated method stub
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//div//a[@title='Sign In']");
+			Common.clickElement("xpath", "//a[@title='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/login"),
+					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -338,8 +337,45 @@ public class GoldOspreyUSHyvaHelper {
 							"Failed to click signIn button and not Navigated to the signIn page"));
 			Assert.fail();
 		}
+	}
+
+
+
+public void Login_Account(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			} else {
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+			}
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary w-full mb-3 os:btn-secondary')]//span");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Backpacks, Luggage & Travel")
+							|| Common.getPageTitle().contains("Osprey"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
 
 	}
+
+
 
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
@@ -460,39 +496,7 @@ public class GoldOspreyUSHyvaHelper {
 
 	}
 
-	public void Login_Account(String dataSet) {
-		// TODO Auto-generated method stub
-		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
-				Sync.waitPageLoad();
-				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
-			} else {
-				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
-			}
-			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "(//button[contains(@type, 'submit')])[2]");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Backpacks, Luggage & Travel Gear Since 1974") || Common.getPageTitle().contains("My Wish List")
-							|| Common.getPageTitle().contains("Osprey"),
-					"To validate the user lands on Home page after successfull login",
-					"After clicking on the signIn button it should navigate to the Home page",
-					"user Sucessfully navigate to the Home page after clicking on the signIn button",
-					"Failed to signIn and not navigated to the Home page ");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
-					"After clicking on the signin button it should navigate to the Home page",
-					"Unable to navigate the user to the home after clicking on the SignIn button",
-					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
-
-			Assert.fail();
-		}
-
-	}
+	
 
 
 
@@ -2867,10 +2871,10 @@ public class GoldOspreyUSHyvaHelper {
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath", "//span[contains(@class,'icon-location')]");
 
-			String find = Common.findElement("xpath", "//h1[@class='u-container']").getText();
+			String find = Common.findElement("xpath", "//div[contains(@class,'row-full-width-inner')]//h1").getText();
 			System.out.println(find);
 
-			Common.assertionCheckwithReport(find.equals("Find a Store"), "validating Find a Store page",
+			Common.assertionCheckwithReport(find.equals("Store Locator"), "validating Find a Store page",
 					"user navigates to Find a Store page", "Sucessfully user navigate to Find a Store page",
 					"faield to navigate to Find a Store page");
 
@@ -2879,27 +2883,32 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to Find a Store",
 					"unable to go back to the Find a Store page",
 					Common.getscreenShotPathforReport("faield to get back to Find a Store"));
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 	}
 
-	public void click_Retailer() {
+
+
+public void click_Retailer() {
 		// TODO Auto-generated method stub
-		String store = "Trek Bicycle San Antonio South";
+		String store = "Whole Earth Provision Co.";
 
 		try {
 
 			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
+			Common.clickElement("xpath", "//a[contains(@id,'dealer-navigation-retailers')]");
 
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-			String id = Common.findElement("xpath", "//div[contains(@aria-label,\"" + store + " \")]")
-					.getAttribute("id");
-			// Common.clickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting
-			// ")]");
+//			String id = Common.findElement("xpath", "//h3[contains(text(),'" + store + "')]")
+//					.getText();
+			Common.clickElement("xpath", "//div[contains(@class,'conv-section-details')]//h3[contains(text(),'Whole Earth Provision Co.')]");
+//			 	.getText();
+//			System.out.println(id);
+//			 Common.clickElement("xpath", "//div[contains(@aria-label,'DICK'S Sporting')]");
 
-			Common.findElement("xpath", "//div[@id='" + id + "']").click();
+//			Common.findElement("xpath", "//div[@id='" + id + "']").click();
 			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
 			int storeSize = Common.findElements("xpath", "//img[@class='store-info-logo']").size();
 			System.out.println(storeSize);
@@ -2912,12 +2921,14 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating Retailers page",
 					"System directs the user back to Retailers page", "unable to user go back to Retailers page",
 					Common.getscreenShotPathforReport("faield to get back to Retailers page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
 
-	public void verifingRetailerHours() {
+
+
+public void verifingRetailerHours() {
 		// TODO Auto-generated method stub
 		String hours = "hours";
 		try {
@@ -2937,11 +2948,12 @@ public class GoldOspreyUSHyvaHelper {
 					"unable to user back to the hours page",
 					Common.getscreenShotPathforReport("Failed to get back to hours page"));
 
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 	}
 
-	public void verifingRetailerBrowser() {
+
+public void verifingRetailerBrowser() {
 		// TODO Auto-generated method stub
 		String browse = "Browse";
 		try {
@@ -2964,12 +2976,12 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating browser page",
 					"System directs the user back to the Browser page", "failed user back to the browser page",
 					Common.getscreenShotPathforReport("Failed to get back to browser page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
 
-	public void Validate_store_sidebar() {
+public void Validate_store_sidebar() {
 		// TODO Auto-generated method stub
 		try {
 			// Common.switchFrames("xpath",
@@ -2997,10 +3009,11 @@ public class GoldOspreyUSHyvaHelper {
 					"Should visible the RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
 					"failed to display RetailersTab InstockTab Locationsearch UsemylocationCTA Retailersmap",
 					Common.getscreenShotPathforReport("faield to display the tabs"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
+
 
 	public void CLick_Usemylocation() {
 		// TODO Auto-generated method stub
@@ -3010,7 +3023,7 @@ public class GoldOspreyUSHyvaHelper {
 			Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
 			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
 			Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
-			Common.scrollIntoView("id", "current-location-indicator");
+//			Common.scrollIntoView("id", "current-location-indicator");
 			int currentlocation = Common.findElements("id", "current-location-indicator").size();
 
 			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
@@ -3024,12 +3037,13 @@ public class GoldOspreyUSHyvaHelper {
 					"To display the retailers for the current location",
 					"Failed to display retailers for the current location",
 					Common.getscreenShotPathforReport("faield to display the retailers for current location"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
 
-	public void Validate_AvailableRetailers() {
+
+public void Validate_AvailableRetailers() {
 		// TODO Auto-generated method stub
 		try {
 			Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
@@ -3060,12 +3074,13 @@ public class GoldOspreyUSHyvaHelper {
 					"retailers should be visible for the given location",
 					"Failed to display retailers for the given location",
 					Common.getscreenShotPathforReport("faield to display the available retailers"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
 
-	public void Validate_retailerlocations() {
+
+public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
@@ -3104,7 +3119,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating available retailer store locations",
 					"retailers store locations should be visible", "Failed to display retailers store locations",
 					Common.getscreenShotPathforReport("faield to display retailer store locations"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 	}
 
@@ -3184,7 +3199,7 @@ public class GoldOspreyUSHyvaHelper {
 			ExtenantReportUtils.addFailedLog("validating instock page",
 					"System directs the user back to the instock page", "unale user to go  back to thr instock page",
 					Common.getscreenShotPathforReport("failed to get back to instock page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
@@ -3211,10 +3226,12 @@ public class GoldOspreyUSHyvaHelper {
 					"System directs the user back to the product listing page",
 					"unable user back to product listing page",
 					Common.getscreenShotPathforReport("failed to get back product listing page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
+
+
 
 	public void Shipping_Forgot_Password(String dataSet) {
 		// TODO Auto-generated method stub
@@ -12913,6 +12930,8 @@ public void Empty_Details_warrenty_return(String Dataset) {
 	}
 }
 
+
+
 public void warrenty_return() {
 	// TODO Auto-generated method stub
 	try
@@ -12964,6 +12983,7 @@ public void warrenty_return() {
 	}
 	
 }
+
 
 public void clickContact() throws Exception {
 	String expectedResult = "It should land successfully on the contact page";
@@ -13131,8 +13151,22 @@ public void warrenty_Return_Form(String Dataset) {
 	String Description =data.get(Dataset).get("description");
 	String issue=data.get(Dataset).get("issue");
 	String POnumber=data.get(Dataset).get("Ponumber");
+	String DOP=data.get(Dataset).get("Descriptions");
+	String Frame=data.get(Dataset).get("frame1");
+	String YOP=data.get(Dataset).get("Yopurchase");
+	String Country="United States";
+	System.out.println(DOP);
+	System.out.println(YOP);
+	System.out.println(Frame);
+	
+	
 	try
 	{
+		Common.findElement("xpath", "//select[@id='country_id']");
+		Common.clickElement("xpath", "//select[@id='country_id']");
+		Thread.sleep(4000);
+		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, Country);
+//		Common.clickElement("xpath", "//select[@id='country_id']//option[@value='US']");
 		Sync.waitElementPresent(30,"xpath", "//input[@id='telephone']");
 		Common.scrollIntoView("xpath", "//input[@id='telephone']");
 		Common.textBoxInput("xpath", "//input[@id='telephone']", phonenumber);
@@ -13146,21 +13180,29 @@ public void warrenty_Return_Form(String Dataset) {
 		Common.clickElement("xpath", "//select[@name='region']");
 		Thread.sleep(4000);
 		Common.dropdown("xpath", "//select[@name='region']", SelectBy.TEXT, State);
-		Common.textBoxInput("xpath", "//input[@id='zip']", zipcode);
+		Common.textBoxInput("xpath", "//input[@id='postcode']", zipcode);
 		
-		Common.textBoxInput("xpath", "//input[@id='packName']", Packname);
-		Common.textBoxInput("xpath", "//input[@id='colorSize']", Color);
+		Common.findElement("xpath", "//select[@id='frame_size']");
+		Common.clickElement("xpath", "//select[@id='frame_size']");
+		Thread.sleep(4000);
+	//	Common.dropdown("xpath", "//select[@id='frame_size']", SelectBy.TEXT, Frame);
+		Common.dropdown("xpath", "//select[@id='frame_size']", SelectBy.TEXT, Frame);
+		Common.textBoxInput("xpath", "//input[@id='approx_year_purchase']", YOP);
+		Common.textBoxInput("xpath", "//textarea[@id='description_part']", DOP);
+		
+		Common.textBoxInput("xpath", "//input[@id='pack_and_volume']", Packname);
+		Common.textBoxInput("xpath", "//input[@id='color_and_frame']", Color);
 		Common.textBoxInput("xpath", "//textarea[@id='description']", Description);
 		
-		Common.textBoxInput("xpath", "//input[@id='prNumber']", issue);
-		Common.textBoxInput("xpath", "//textarea[@id='location']", POnumber);
+		Common.textBoxInput("xpath", "//input[@id='pr_po_number']",POnumber);
+		Common.textBoxInput("xpath", "//textarea[@id='location_function_part']", issue);
 		
 		Thread.sleep(4000);
 		
 		String path = System.getProperty("user.dir")
 				+ ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\Guarantee.png");
-		Sync.waitElementPresent(40, "xpath", "//input[@id='photoUpload']");
-		Common.findElement("xpath", "//input[@id='photoUpload']").sendKeys(path);
+		Sync.waitElementPresent(40, "xpath", "//input[@id='photoOne']");
+		Common.findElement("xpath", "//input[@id='photoOne']").sendKeys(path);
 
 		Common.clickElement("xpath", "//input[@id='gdpr_confirm']");
 		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
@@ -13182,10 +13224,9 @@ public void warrenty_Return_Form(String Dataset) {
 				"After clicking Submit button waranty and return Success message should be display",
 				"Unable to display the Success message ",
 				Common.getscreenShot("Failed to display the Successful message"));
-		AssertJUnit.fail();
+		Assert.fail();
 	}
 }
-
 
 public void click_Product_Registration() throws Exception {
 	String expectedResult = "It should land successfully on the Product Registration";
