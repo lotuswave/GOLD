@@ -9960,7 +9960,7 @@ public void Continue_Shopping() {
 		
 	}
 	
-	public void Gift_card(String dataSet) {
+public void Gift_card(String dataSet) {
 		
 		try
 		{
@@ -9969,13 +9969,13 @@ public void Continue_Shopping() {
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(3000);
 			
-     	Common.scrollIntoView("xpath", "//button[contains(text(), 'Add Gift Card')]");
-     	Common.clickElement("xpath","//button[contains(text(), 'Add Gift Card')]");
-		Common.textBoxInput("id","amcard-input", data.get(dataSet).get("GiftCard3_Stage"));
+		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
-		Common.clickElement("xpath","//span[contains(text(),'Add Code')]");
+		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		Thread.sleep(2000);
-		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 	    System.out.println(successmsg);	
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
@@ -9984,13 +9984,13 @@ public void Continue_Shopping() {
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-				Common.clickElement("xpath","//span[text()='Add Gift Card']");
-				Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard_Prod"));
+				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
+				Common.clickElement("xpath","//button[contains(text(),'Add Gift Card')]");
+				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
 //				Common.actionsKeyPress(Keys.ARROW_UP);
-				Common.clickElement("xpath","//span[text()='Add Code']");
+				Common.clickElement("xpath","//button[@aria-label='Add Code']");
 				Thread.sleep(2000);
-				String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			    System.out.println(successmsg);	
 				Common.assertionCheckwithReport(successmsg.contains("added"),
 						"validating the success message after applying gift card",
@@ -10005,10 +10005,9 @@ public void Continue_Shopping() {
 					"Success message should be displayed after the applying of gift card",
 					"Sucessfully gift card has been applyed",
 					Common.getscreenShotPathforReport("Failed to apply the gift card"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 	}
-
 	public void invalid_Gift_card(String dataSet) {
 		try
 		{
