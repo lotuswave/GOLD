@@ -10308,20 +10308,20 @@ public void Verify_OrderTotal() {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementClickable("xpath", "//label[@for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
-			System.out.println(payment);
-			if (payment > 0) {
-				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
+//			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+//			System.out.println(payment);
+//			if (payment > 0) {
+				//Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+				//Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+				//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 						{
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
@@ -10331,9 +10331,19 @@ public void Verify_OrderTotal() {
 //				
 				Common.switchToDefault();
 				Thread.sleep(3000);
-				Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
-				Common.clickElement("xpath", "//button[@class='action primary checkout']");
+				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Thread.sleep(3000);
+				
+//				Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+//				Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+//				Thread.sleep(3000);	
+//				
+//				Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
+//				Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//				
+				Thread.sleep(3000);
+				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 						}
 				else
@@ -10352,45 +10362,14 @@ public void Verify_OrderTotal() {
 							"Failed to select the Afterpay method in the production environment");
 					Common.switchToDefault();
 				}
-
-			} else {
-				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
-				{
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
-				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
-//				
-				Common.switchToDefault();
-				Common.clickElement("xpath", "//button[@class='action primary checkout']");
-				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
-			}
-				else
-				{
-					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					Thread.sleep(4000);
-					Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
-					Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
-					String Afterpay=Common.findElement("xpath", "//button[@value='afterpay_clearpay']").getAttribute("data-testid");
-					System.out.println(Afterpay);
-					Common.assertionCheckwithReport(
-							Afterpay.contains("afterpay_clearpay"),
-							"validating the selection of the Afterpay method",
-							"Afterpay should be selected ","Afterpay is selected",
-							"Failed to select the Afterpay method in the production environment");
-					Common.switchToDefault();
-				}
 		}
-		}
+		
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Afterpay payment ", expectedResult,
 					"User failed to proceed with After payment", Common.getscreenShotPathforReport(expectedResult));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -10400,9 +10379,9 @@ public void Verify_OrderTotal() {
 		else {
 			try {
 				Thread.sleep(5000);
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				String sucessMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1").trim();
 
-				int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				int size = Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//h1").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
@@ -10424,7 +10403,7 @@ public void Verify_OrderTotal() {
 						"User failed to proceed to the order confirmation page",
 						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
 
-				AssertJUnit.fail();
+				Assert.fail();
 			}
 		}
 	}
