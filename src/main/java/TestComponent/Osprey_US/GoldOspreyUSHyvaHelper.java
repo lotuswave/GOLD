@@ -10340,8 +10340,9 @@ public void Verify_OrderTotal() {
 				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
 //				
 				Common.switchToDefault();
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Thread.sleep(3000);
 				
