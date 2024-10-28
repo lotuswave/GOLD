@@ -3573,23 +3573,23 @@ public void Validate_retailerlocations() {
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 			
-			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-			System.out.println(subtotal);
-			subtotal = subtotal.trim();
-			subtotal = subtotal.substring(0,subtotal.length() - 2);
-		    System.out.println(subtotal);  
-			int amount=Integer.parseInt(subtotal);
-			System.out.println(amount);
-			if(amount>199 && symbol.equals("$"))
-			{
-				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
-			else
-			{
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
+//			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+//			System.out.println(subtotal);
+//			subtotal = subtotal.trim();
+//			subtotal = subtotal.substring(0,subtotal.length() - 2);
+//		    System.out.println(subtotal);  
+//			int amount=Integer.parseInt(subtotal);
+//			System.out.println(amount);
+//			if(amount>199 && symbol.equals("$"))
+//			{
+//				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+//				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+//				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+//			}
+//			else
+//			{
+//				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+//			}
 
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
@@ -10219,7 +10219,7 @@ public void Continue_Shopping() {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 		     
 			Thread.sleep(4000);
-			String Price = Common.findElement("xpath", "//div[@class='product-info-price']//span[contains(@id,'product-price')]//span").getText();
+			String Price = Common.findElement("xpath", "//div[@aria-label='Price']//span[contains(@id,'product-price')]//span").getText();
 			System.out.println(Price);
 			
 			if(Common.getCurrentURL().contains("/gb")) {
@@ -10244,8 +10244,7 @@ public void Continue_Shopping() {
 			
 			Thread.sleep(4000);
 			
-			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+			
 			
 //			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -10269,7 +10268,7 @@ public void Verify_OrderTotal() {
 	
 		try {
       	
-			String Ordertotal = Common.findElement("xpath", "//td[@data-th='Order Total']").getText();
+			String Ordertotal = Common.findElement("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]").getText().trim();
 			System.out.println(Ordertotal);
 			
 			if(Common.getCurrentURL().contains("gb")) {
