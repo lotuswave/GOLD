@@ -1013,7 +1013,7 @@ public class GoldHydroHyvaHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -7847,10 +7847,10 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
-		Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-		Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-		Sync.waitElementPresent("xpath", "//a[text()='My Account']");
-		Common.clickElement("xpath", "//a[text()='My Account']");
+		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+		Common.clickElement("xpath", "//button[@id='customer-menu']");
+		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+		Common.clickElement("xpath", "//a[@title='My Account']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		if (Common.getCurrentURL().contains("preprod")) {
@@ -7860,19 +7860,35 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			try {
 				for (i = 0; i < Account.length; i++) {
 					Sync.waitElementPresent("xpath",
-							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
+							"//a[@title='" + Account[i] + "']");
 					Common.clickElement("xpath",
-							"//div[@class='content account-nav-content']//a[text()='" + Account[i] + "']");
+							"//a[@title='" + Account[i] + "']");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+					int size=Common.findElements("xpath", "//h1[@class='title-2xl']//span").size();
+					if(size>0)
+					{
+					String title = Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText();
 					System.out.println(title);
-					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Payment Methods") || title.contains("Newsletter Subscription"),
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Out Of Stock Subscriptions") || title.contains("My Payment Methods") 
+							|| title.contains("Newsletter Subscription"),
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
 							"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+					}
+					else
+					{
+						Common.getPageTitle();
+						Common.assertionCheckwithReport(Common.getPageTitle().contains(Account[i]),
+								"verifying Account page links " + Account[i],
+								"user should navigate to the " + Account[i] + " page",
+								"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
+					}
+					
 
 				}
+				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
+				Common.clickElement("xpath", "//a[@title='Sign Out']");
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
