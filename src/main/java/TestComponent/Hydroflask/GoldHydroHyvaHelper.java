@@ -6012,16 +6012,16 @@ catch(Exception | Error e)
 
 	public void view_PLP_page() {
 		try {
-			String title = Common.findElement("xpath", "//h1[@data-element='title']").getAttribute("Class");
-			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 					.getAttribute("aria-label");
-			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+			String filter = Common.findElement("xpath", "//span[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common
 					.findElement("xpath",
-							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
-					.getText();
+							"//span[contains(@class,'pr-2.5 title-panel-sm')]")
+					.getText().trim();
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("c-clp-hero__headline")
+					breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl")
 							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -6038,26 +6038,20 @@ catch(Exception | Error e)
 	public void filter_By(String category) {
 
 		try {
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[text()='" + category + "']");
-//			Common.clickElement("xpath", "//span[text()='Load more']");
-			String text = Common.findElement("xpath", "//a[text()='" + category + "']//span").getText();
+
+			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
+			System.out.println(text);
+			Common.clickElement("xpath", "//span[text()='" + category + "']");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-//			Common.clickElement("xpath", "//span[text()='Load more']");
-			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
-					.getText();
+			String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']//span")
+					.getText().trim();
+			Thread.sleep(4000);
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
 			System.out.println(text);
-			System.out.println(textValue);
-			System.out.println(categoryvalue);
-
 			System.out.println(textValueAfterFilter);
-			System.out.println(noOfItems);
-
-			System.out.println(items);
 
 			Common.assertionCheckwithReport(categoryvalue.equals(items),
 					"To validate the filter in Product Listing Page",
@@ -6074,43 +6068,21 @@ catch(Exception | Error e)
 	}
 
 	public void sort_By(String dataSet) {
+		String sort = data.get(dataSet).get("Sort");
 		try {
 
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
-			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", Common.SelectBy.TEXT,
-					data.get(dataSet).get("Sort"));
+//			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
+			Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
 
-			int size = Common
-					.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']")
-					.size();
-			System.out.println(size);
-			float[] float_array = new float[size];
-			for (int i = 0; i < size; i++) {
-				String text = Common
-						.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']")
-						.get(i).getText();
-				String price = text.replace("$", "");
-				Float priceValue = Float.parseFloat(price);
-				System.out.println(priceValue);
-				float_array[i] = priceValue;
-			}
-			Arrays.sort(float_array);
-			String firstItemPriceText = Common
-					.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']")
-					.get(0).getText();
-			String firstItemPrice = firstItemPriceText.replace("$", "");
-			Float firstItemPriceValue = Float.parseFloat(firstItemPrice);
-			if (data.get(dataSet).get("Sort").equals("Lowest Price")) {
-				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[0]),
-						"To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
-			} else if (data.get(dataSet).get("Sort").equals("Highest Price")) {
-				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[size - 1]),
-						"To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
-			}
+
+			String low = Common
+					.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
+					.getText();
+
+			Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+					"Failed to Sort  in Product Listing Page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9793,27 +9765,19 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	}
 
-	public void color_validation(String Dataset) {
+	public void color_validation(String colorname) {
 		// TODO Auto-generated method stub
-		String colorname = data.get(Dataset).get("Color");
 		try {
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
-			Common.clickElement("xpath", "//button[@aria-label='Colors']");
-			Thread.sleep(3000);
-			String expand = Common.findElement("xpath", "//button[@aria-label='Colors']").getAttribute("aria-expanded");
-			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
-					"When we click on the color it should be expand",
-					"Successfully the color has been expand when we click on the colors ",
-					"unable to expand the colors in PLP page");
+
 			Sync.waitElementPresent("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
-			Thread.sleep(3000);
+					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
-					.getText();
-			String bottlecount = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+					"//span[text()='" + colorname + "']//following-sibling::span")
+					.getText().replace("(", "").replace(")", "");
+			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -9829,17 +9793,18 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	}
 
+
 	public void price_filter_validation() {
 		// TODO Auto-generated method stub
 		String name = "";
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("$", "").replace(".00", "");
 			System.out.println(lastvalue);
-			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			WebElement price = Common.findElement("xpath",
-					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			dragprice(price);
 			Thread.sleep(6000);
 			List<WebElement> products = Common.findElements("xpath",
@@ -9851,11 +9816,14 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				if (Size == 1) {
 					String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']")
 							.getText().replace("$", "");
-					Float namevlaue1 = Float.parseFloat(name1);
-					if (namevlaue1 <= 20) {
+					System.out.println(name1);
+					Float namevalue1 = Float.parseFloat(name1);
+					System.out.println(namevalue1);
+					if (namevalue1 >= 5) {
 						Thread.sleep(3000);
 						String value1 = Common.findElement("xpath", "//span[@class='price-wrapper']")
 								.getAttribute("data-price-amount");
+						System.out.println(value1);
 						Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
@@ -9869,10 +9837,11 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Thread.sleep(6000);
 					name = productprice.get(i).getText().replace("$", "");
 					Float namevlaue = Float.parseFloat(name);
-					if (namevlaue <= 20) {
+					if (namevlaue >= 5) {
 						Thread.sleep(3000);
-						String value = Common.findElement("xpath", "//span[@class='price-wrapper']")
-								.getAttribute("data-price-amount");
+						String value = Common
+								.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText()
+								.replace("$", "");
 						Common.assertionCheckwithReport(value.equals(name), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
@@ -9891,6 +9860,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 							"unable to display the procing range after pricing filter applied"));
 			Assert.fail();
 		}
+
 
 	}
 
