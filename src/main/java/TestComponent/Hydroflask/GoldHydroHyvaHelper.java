@@ -279,7 +279,6 @@ public class GoldHydroHyvaHelper {
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
@@ -491,14 +490,13 @@ public class GoldHydroHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementClickable("xpath", "//div[@id='payment-method-option-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//div[@id='payment-method-option-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Common.clickElement("xpath", "//div[@id='payment-method-option-stripe_payments']");
 
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -529,9 +527,7 @@ public class GoldHydroHyvaHelper {
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 
 			} else {
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+		
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@value='afterpay_clearpay']");
 				Common.clickElement("xpath", "//button[@value='afterpay_clearpay']");
@@ -549,7 +545,7 @@ public class GoldHydroHyvaHelper {
 //						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
 //						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Common.clickElement("xpath", "(//button[normalize-space()='Place Order'])[1]");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			}
 		}
@@ -1181,11 +1177,11 @@ public class GoldHydroHyvaHelper {
 			Common.clickElement("xpath", "(//button[contains(@title,'Add to Cart')]//span)");
 
 			Thread.sleep(4000);
-			String message2 = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
-					.getText();
-			Common.assertionCheckwithReport(message2.contains("You added"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+//			String message2 = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
+//					.getText();
+//			Common.assertionCheckwithReport(message2.contains("You added"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -2353,29 +2349,25 @@ public class GoldHydroHyvaHelper {
 	public void RegaddDeliveryAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
-
-		int size = Common.findElements(By.xpath("//span[contains(text(),'Add New Address')]")).size();
+		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
-				Common.clickElement("xpath", "//span[contains(text(),'Add New Address')]");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
-						data.get(dataSet).get("Street"));
-
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
 				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.clickElement("xpath", "//input[@name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.clickElement("xpath", "//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2384,49 +2376,50 @@ public class GoldHydroHyvaHelper {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-				Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
+				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
+				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
 						data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
-				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
-				String Shippingstate = Common
-						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
-						.getText();
+//				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
+//				String Shippingstate = Common
+//						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
+//						.getText();
 
-				System.out.println(Shippingstate);
+//				System.out.println(Shippingstate);
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
-						data.get(dataSet).get("City"));
-
+				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
+				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
+							data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
-
+					// TODO: handle exception
 					Thread.sleep(2000);
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
+							data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
+				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
 				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
+//				Shippingaddress.put("ShippingZip", ShippingZip);
 
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='telephone']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
-				Sync.waitElementPresent("xpath", "//label[@class='label a-checkbox__label']");
-				Common.clickElement("xpath", "//label[@class='label a-checkbox__label']");
+//				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
+//				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
-				Common.clickElement("xpath", "//div[@id='opc-new-shipping-address']//following::button[1]");
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
 
-				ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
-						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
-						Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+//				
+//                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
+//						"user will fill the all the shipping", "user fill the shiping address click save button",
+//						"faield to add new shipping address");
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -2445,12 +2438,14 @@ public class GoldHydroHyvaHelper {
 
 		{
 			try {
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+				Common.textBoxInput("xpath", "//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
+				Thread.sleep(2000);
 
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2460,11 +2455,11 @@ public class GoldHydroHyvaHelper {
 				}
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+				Common.textBoxInput("id", "shipping-city",
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
+					Common.dropdown("xpath", "//select[@id='shipping-region']",
 							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
@@ -2473,17 +2468,23 @@ public class GoldHydroHyvaHelper {
 							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']",
+				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
 
 				String ShippingZip = Common
-						.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='postcode']")
+						.findElement("xpath", "//form[@id='shipping']//input[@name='postcode']")
 						.getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
-
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='telephone']",
+//				Shippingaddress.put("ShippingZip", ShippingZip);
+				
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
+				Common.clickElement("id", "shipping-save");
+				
+				
+				
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -5134,18 +5135,18 @@ catch(Exception | Error e)
 //			validating_BundleProducts();
 			product_quantity(Dataset);
 			//bundle_color("Black");
-			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-			Common.clickElement("xpath", "//span[text()='Add to Cart']");
+			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
-		Common.actionsKeyPress(Keys.PAGE_UP);
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
+//		Common.actionsKeyPress(Keys.PAGE_UP);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",

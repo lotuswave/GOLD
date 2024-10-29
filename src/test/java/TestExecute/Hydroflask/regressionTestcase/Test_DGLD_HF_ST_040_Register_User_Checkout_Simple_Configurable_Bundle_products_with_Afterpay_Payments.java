@@ -10,25 +10,30 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment {
+public class Test_DGLD_HF_ST_040_Register_User_Checkout_Simple_Configurable_Bundle_products_with_Afterpay_Payments {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile, "Bundle");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment() throws Exception {
+	public void Validating_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products() throws Exception {
 
 		try {
+
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");   
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+
+			Hydro.search_product("Product");
 			Hydro.addtocart("Product");
+			Hydro.bottles_headerlinks("Bottles & Drinkware");
+			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.search_product("Bundle product");
+			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.Klarna_Saved_Payment("Klarna Visa Payment");
-          
-            
+			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.selectshippingaddress("GroundShipping method");
+			Hydro.After_Pay_payment("Afterpay");
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -44,9 +49,9 @@ public class Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_P
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-       Login.signIn();
-       Hydro.close_add();
-       Hydro.acceptPrivacy();
+		Login.signIn();
+		Hydro.close_add();
+		Hydro.acceptPrivacy();
 
 	}
 
