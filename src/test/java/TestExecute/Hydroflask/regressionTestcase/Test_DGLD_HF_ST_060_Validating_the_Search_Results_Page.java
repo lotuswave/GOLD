@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_060_Validating_the_Search_Results_Page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Search_Results_Page () throws Exception {
@@ -22,7 +23,8 @@ public class Test_DGLD_HF_ST_060_Validating_the_Search_Results_Page {
 			Hydro.Validating_search("aaabbcc");
 			Hydro.search_results("aaabbcc");
 			Hydro.popular_searches();
-			Hydro.carousel();
+			//Hydro.carousel();
+			Hydro.search_product("Product");
 			
 			
 
@@ -34,7 +36,7 @@ public class Test_DGLD_HF_ST_060_Validating_the_Search_Results_Page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

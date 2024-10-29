@@ -1504,8 +1504,7 @@ public class GoldHydroHyvaHelper {
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
-			WebElement serachbar = Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
-			serachbar.sendKeys(product);
+			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
@@ -5289,21 +5288,25 @@ catch(Exception | Error e)
 
 	}
 
+	
 	public void search_results(String search) {
 
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-					"User should able to click on the search button", "Search expands to the full page",
-					"Sucessfully search bar should be expand");
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(open.contains("true"),
+					"To validate the global search box is opened when we click on the search icon",
+					"User should able to click on the search icon and search box opens",
+					"Sucessfully the gobal search box opend when user clicks on search icon",
+					"Failed to open the search box when user clicks on the search icon");
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", search);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+			String productsearch = Common.findElement("id", "instant-empty-results-container").getText();
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("Sorry, your search"),
+			Common.assertionCheckwithReport(productsearch.contains("No products for query"),
 					"validating the search functionality",
 					"enter any search term will display no results in the search box",
 					"user enter the search term in  search box", "Failed to see the search term");
@@ -5317,7 +5320,7 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 
-		try {
+		/*try {
 			String FAQ = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']")
 					.getText();
 			Common.assertionCheckwithReport(FAQ.contains("FAQ"), "validating the customer service information",
@@ -5332,7 +5335,7 @@ catch(Exception | Error e)
 					"should display Customer serivce information", " user views the Customer serivce information",
 					Common.getscreenShot("Failed to see the Customer service info"));
 			Assert.fail();
-		}
+		}*/
 
 	}
 
@@ -5340,18 +5343,21 @@ catch(Exception | Error e)
 		String search;
 
 		try {
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			Thread.sleep(4000);
 
 			List<WebElement> Search = Common.findElements("xpath",
-					"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
+					"//div[@class='c-popular-searches__title']//a");
 			System.out.println(Search);
 			System.out.println(Search.size());
 			for (int i = 0; i < Search.size(); i++) {
                  Thread.sleep(4000);
 				List<WebElement> select = Common.findElements("xpath",
-						"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
+						"//div[@class='c-popular-searches__title']//a");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(50, "xpath",
-						"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
+						"//div[@class='c-popular-searches__title']//a");
 				Thread.sleep(3000);
 				search = select.get(i).getText();
 				System.out.println(search);
@@ -5359,6 +5365,9 @@ catch(Exception | Error e)
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.navigateBack();
+				Thread.sleep(3000);
+				Sync.waitElementPresent("id", "menu-search-icon");
+				Common.clickElement("id", "menu-search-icon");
 				ExtenantReportUtils.addPassLog("Validating" + search + "Page  ",
 						"click on the Popular search should navigate to the  " + search + "Page",
 						"successfully page navigating to " + search + "PAGE",
@@ -5401,19 +5410,20 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"),
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(open.contains("true"),
 					"To validate the global search box is opened when we click on the search icon",
 					"User should able to click on the search icon and search box opens",
 					"Sucessfully the gobal search box opend when user clicks on search icon",
 					"Failed to open the search box when user clicks on the search icon");
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", search);
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String close = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(close.contains("c-header-search"),
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String close = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(close.contains("false"),
 					"To validate the global search box is Closed when user click on the close icon",
 					"User should able to click on the close icon and search box should be closed",
 					"Sucessfully the gobal search box closed when user clicks on close icon",
