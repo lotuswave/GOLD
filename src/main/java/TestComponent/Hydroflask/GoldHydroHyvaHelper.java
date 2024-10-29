@@ -1450,12 +1450,12 @@ public class GoldHydroHyvaHelper {
 			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
 			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
 					"").trim();
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'flex items')]")
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'value')]")
 					.replace("$", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
