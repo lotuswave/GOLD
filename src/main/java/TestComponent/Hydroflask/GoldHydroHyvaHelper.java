@@ -1626,14 +1626,12 @@ public class GoldHydroHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+			Sync.waitElementClickable("xpath", "//div[@id='payment-method-option-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//div[@id='payment-method-option-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unable to land o n the paymentpage");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-
-			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			Common.clickElement("xpath", "//div[@id='payment-method-option-stripe_payments']");
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -1654,7 +1652,8 @@ public class GoldHydroHyvaHelper {
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//button[@value='klarna']");
 				Common.switchToDefault();
-				Common.clickElement("xpath", "//span[text()='Place Order']");
+				Thread.sleep(1000);
+				Common.javascriptclickElement("xpath", "(//button[normalize-space()='Place Order'])[1]");
 				klarna_Saved_Details(dataSet);
 			}
 
@@ -1680,25 +1679,25 @@ public class GoldHydroHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			Common.switchWindows();
-			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
+//			Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 			Sync.waitElementPresent("xpath", "//input[@name='phone']");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='Phone number']");
 			WebElement clear = Common.findElement("xpath", "//input[@name='phone']");
 			clear.sendKeys(Keys.CONTROL + "a");
 			clear.sendKeys(Keys.DELETE);
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='phone']").sendKeys(number);
-			Common.clickElement("xpath", "//div[@id='onContinue__icon-wrapper']");
+			Common.clickElement("xpath", "//span[@id='onContinue__text']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Thread.sleep(6000);
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
-			int paymenttype = Common.findElements("xpath", "//p[@id='funding-source-card-issuer']").size();
+			Common.clickElement("xpath", "//span[text()='Visa']");
+			int paymenttype = Common.findElements("xpath", "//div[contains(text(),'Change payment method')]").size();
 			if (paymenttype > 0) {
-				Common.clickElement("xpath", "//p[@id='funding-source-card-number']");
+//				Common.clickElement("xpath", "//p[@id='funding-source-card-number']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[text()='Add new']");
@@ -1719,7 +1718,7 @@ public class GoldHydroHyvaHelper {
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+//				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
 			} else {
 				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
 				Sync.waitPageLoad();
