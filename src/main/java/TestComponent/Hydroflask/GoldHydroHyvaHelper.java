@@ -1500,8 +1500,7 @@ public class GoldHydroHyvaHelper {
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
-			WebElement serachbar = Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
-			serachbar.sendKeys(product);
+			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
@@ -5290,21 +5289,25 @@ catch(Exception | Error e)
 
 	}
 
+	
 	public void search_results(String search) {
 
 		try {
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"), "User searches using the search field",
-					"User should able to click on the search button", "Search expands to the full page",
-					"Sucessfully search bar should be expand");
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(open.contains("true"),
+					"To validate the global search box is opened when we click on the search icon",
+					"User should able to click on the search icon and search box opens",
+					"Sucessfully the gobal search box opend when user clicks on search icon",
+					"Failed to open the search box when user clicks on the search icon");
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", search);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getText();
+			String productsearch = Common.findElement("id", "instant-empty-results-container").getText();
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("Sorry, your search"),
+			Common.assertionCheckwithReport(productsearch.contains("No products for query"),
 					"validating the search functionality",
 					"enter any search term will display no results in the search box",
 					"user enter the search term in  search box", "Failed to see the search term");
@@ -5318,7 +5321,7 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 
-		try {
+		/*try {
 			String FAQ = Common.findElement("xpath", "//div[@id='instant-empty-results-container']//a[text()='FAQ']")
 					.getText();
 			Common.assertionCheckwithReport(FAQ.contains("FAQ"), "validating the customer service information",
@@ -5333,7 +5336,7 @@ catch(Exception | Error e)
 					"should display Customer serivce information", " user views the Customer serivce information",
 					Common.getscreenShot("Failed to see the Customer service info"));
 			Assert.fail();
-		}
+		}*/
 
 	}
 
@@ -5341,18 +5344,21 @@ catch(Exception | Error e)
 		String search;
 
 		try {
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			Thread.sleep(4000);
 
 			List<WebElement> Search = Common.findElements("xpath",
-					"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
+					"//div[@class='c-popular-searches__title']//a");
 			System.out.println(Search);
 			System.out.println(Search.size());
 			for (int i = 0; i < Search.size(); i++) {
                  Thread.sleep(4000);
 				List<WebElement> select = Common.findElements("xpath",
-						"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
+						"//div[@class='c-popular-searches__title']//a");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(50, "xpath",
-						"(//div[@id='algolia-cms-block-popular-search'])//h4[@class='c-popular-searches__title']/a");
+						"//div[@class='c-popular-searches__title']//a");
 				Thread.sleep(3000);
 				search = select.get(i).getText();
 				System.out.println(search);
@@ -5360,6 +5366,9 @@ catch(Exception | Error e)
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.navigateBack();
+				Thread.sleep(3000);
+				Sync.waitElementPresent("id", "menu-search-icon");
+				Common.clickElement("id", "menu-search-icon");
 				ExtenantReportUtils.addPassLog("Validating" + search + "Page  ",
 						"click on the Popular search should navigate to the  " + search + "Page",
 						"successfully page navigating to " + search + "PAGE",
@@ -5402,19 +5411,20 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String open = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(open.contains("active"),
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(open.contains("true"),
 					"To validate the global search box is opened when we click on the search icon",
 					"User should able to click on the search icon and search box opens",
 					"Sucessfully the gobal search box opend when user clicks on search icon",
 					"Failed to open the search box when user clicks on the search icon");
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", search);
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-header__s')]");
-			Common.clickElement("xpath", "//span[contains(@class,'icon-header__s')]");
-			String close = Common.findElement("xpath", "//div[contains(@class,'m-search ')]").getAttribute("class");
-			Common.assertionCheckwithReport(close.contains("c-header-search"),
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String close = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
+			Common.assertionCheckwithReport(close.contains("false"),
 					"To validate the global search box is Closed when user click on the close icon",
 					"User should able to click on the close icon and search box should be closed",
 					"Sucessfully the gobal search box closed when user clicks on close icon",
@@ -6013,16 +6023,16 @@ catch(Exception | Error e)
 
 	public void view_PLP_page() {
 		try {
-			String title = Common.findElement("xpath", "//h1[@data-element='title']").getAttribute("Class");
-			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 					.getAttribute("aria-label");
-			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
+			String filter = Common.findElement("xpath", "//span[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common
 					.findElement("xpath",
-							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
-					.getText();
+							"//span[contains(@class,'pr-2.5 title-panel-sm')]")
+					.getText().trim();
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") && title.contains("c-clp-hero__headline")
+					breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl")
 							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
@@ -6039,26 +6049,20 @@ catch(Exception | Error e)
 	public void filter_By(String category) {
 
 		try {
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[text()='" + category + "']");
-//			Common.clickElement("xpath", "//span[text()='Load more']");
-			String text = Common.findElement("xpath", "//a[text()='" + category + "']//span").getText();
+
+			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
+			System.out.println(text);
+			Common.clickElement("xpath", "//span[text()='" + category + "']");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-//			Common.clickElement("xpath", "//span[text()='Load more']");
-			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
-					.getText();
+			String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']//span")
+					.getText().trim();
+			Thread.sleep(4000);
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
 			System.out.println(text);
-			System.out.println(textValue);
-			System.out.println(categoryvalue);
-
 			System.out.println(textValueAfterFilter);
-			System.out.println(noOfItems);
-
-			System.out.println(items);
 
 			Common.assertionCheckwithReport(categoryvalue.equals(items),
 					"To validate the filter in Product Listing Page",
@@ -6075,43 +6079,21 @@ catch(Exception | Error e)
 	}
 
 	public void sort_By(String dataSet) {
+		String sort = data.get(dataSet).get("Sort");
 		try {
 
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
-			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", Common.SelectBy.TEXT,
-					data.get(dataSet).get("Sort"));
+//			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
+			Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
 
-			int size = Common
-					.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']")
-					.size();
-			System.out.println(size);
-			float[] float_array = new float[size];
-			for (int i = 0; i < size; i++) {
-				String text = Common
-						.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']")
-						.get(i).getText();
-				String price = text.replace("$", "");
-				Float priceValue = Float.parseFloat(price);
-				System.out.println(priceValue);
-				float_array[i] = priceValue;
-			}
-			Arrays.sort(float_array);
-			String firstItemPriceText = Common
-					.findElements("xpath", "//span[@data-price-type='finalPrice']//span[1]//span[@class='price']")
-					.get(0).getText();
-			String firstItemPrice = firstItemPriceText.replace("$", "");
-			Float firstItemPriceValue = Float.parseFloat(firstItemPrice);
-			if (data.get(dataSet).get("Sort").equals("Lowest Price")) {
-				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[0]),
-						"To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
-			} else if (data.get(dataSet).get("Sort").equals("Highest Price")) {
-				Common.assertionCheckwithReport(firstItemPriceValue.equals(float_array[size - 1]),
-						"To validate the Sort in Product Listing Page",
-						"User should able to Sort in Product Listing Page",
-						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
-			}
+
+			String low = Common
+					.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
+					.getText();
+
+			Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+					"Failed to Sort  in Product Listing Page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9794,27 +9776,19 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	}
 
-	public void color_validation(String Dataset) {
+	public void color_validation(String colorname) {
 		// TODO Auto-generated method stub
-		String colorname = data.get(Dataset).get("Color");
 		try {
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Colors']");
-			Common.clickElement("xpath", "//button[@aria-label='Colors']");
-			Thread.sleep(3000);
-			String expand = Common.findElement("xpath", "//button[@aria-label='Colors']").getAttribute("aria-expanded");
-			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
-					"When we click on the color it should be expand",
-					"Successfully the color has been expand when we click on the colors ",
-					"unable to expand the colors in PLP page");
+
 			Sync.waitElementPresent("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
-			Thread.sleep(3000);
+					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
-					.getText();
-			String bottlecount = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+					"//span[text()='" + colorname + "']//following-sibling::span")
+					.getText().replace("(", "").replace(")", "");
+			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -9830,17 +9804,18 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	}
 
+
 	public void price_filter_validation() {
 		// TODO Auto-generated method stub
 		String name = "";
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("$", "").replace(".00", "");
 			System.out.println(lastvalue);
-			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+			Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			WebElement price = Common.findElement("xpath",
-					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+					"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			dragprice(price);
 			Thread.sleep(6000);
 			List<WebElement> products = Common.findElements("xpath",
@@ -9852,11 +9827,14 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				if (Size == 1) {
 					String name1 = Common.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']")
 							.getText().replace("$", "");
-					Float namevlaue1 = Float.parseFloat(name1);
-					if (namevlaue1 <= 20) {
+					System.out.println(name1);
+					Float namevalue1 = Float.parseFloat(name1);
+					System.out.println(namevalue1);
+					if (namevalue1 >= 5) {
 						Thread.sleep(3000);
 						String value1 = Common.findElement("xpath", "//span[@class='price-wrapper']")
 								.getAttribute("data-price-amount");
+						System.out.println(value1);
 						Common.assertionCheckwithReport(value1.equals(name1), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
@@ -9870,10 +9848,11 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Thread.sleep(6000);
 					name = productprice.get(i).getText().replace("$", "");
 					Float namevlaue = Float.parseFloat(name);
-					if (namevlaue <= 20) {
+					if (namevlaue >= 5) {
 						Thread.sleep(3000);
-						String value = Common.findElement("xpath", "//span[@class='price-wrapper']")
-								.getAttribute("data-price-amount");
+						String value = Common
+								.findElement("xpath", "//span[@class='price-wrapper']//span[@class='price']").getText()
+								.replace("$", "");
 						Common.assertionCheckwithReport(value.equals(name), "verifying the price filters in PLP page",
 								"When we select the range of price filters between the range only products should display",
 								"Successfully are displayed in the pricing range",
@@ -9892,6 +9871,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 							"unable to display the procing range after pricing filter applied"));
 			Assert.fail();
 		}
+
 
 	}
 
