@@ -5827,19 +5827,20 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		try {
-
-			Common.scrollIntoView("xpath", "//a[text()='Write a review']");
-			Sync.waitElementPresent("xpath", "//a[text()='Write a review']");
-			String form = Common.findElement("xpath", "//a[text()='Write a review']").getText();
+			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
+			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
+			Common.scrollIntoView("xpath", "//span[contains(text(),'Write A Review')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Write A Review')]");
+			String form = Common.findElement("xpath", "//span[contains(text(),'Write A Review')]").getText();
 			System.out.println(form);
-			Common.assertionCheckwithReport(form.equals("Write a review"), "verifying the write a review button",
-					"Write a review should be appear in the PDP page",
+			Common.assertionCheckwithReport(form.equals("Write A Review"), "verifying the Write A Review button",
+					"Write A Review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Write a review']");
-			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
-
+			Common.clickElement("xpath", "//span[contains(text(),'Write A Review')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Write A Review')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Write A Review')]");
+ 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the Write a review button", "select the write review option",
@@ -5847,7 +5848,6 @@ catch(Exception | Error e)
 					Common.getscreenShotPathforReport("User Failed to click write review option "));
 			Assert.fail();
 		}
-
 	}
 
 	public void Recommended_for_you() {
