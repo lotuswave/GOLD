@@ -2766,8 +2766,8 @@ public void Login_Account(String dataSet) {
 			Thread.sleep(15000);
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'shipping-method-option-amstrates')]//span[text()='"+ method +"']");
-				Common.clickElement("xpath", "//div[contains(@id,'shipping-method-option-amstrates')]//span[text()='"+ method +"']");;
+				Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'shipping-method-option-amstrates')]//div[2]//span[text()='"+ method +"']");
+				Common.clickElement("xpath", "//div[contains(@id,'shipping-method-option-amstrates')]//div[2]//span[text()='"+ method +"']");;
 			} else {
 
 				Common.refreshpage();
@@ -9314,13 +9314,15 @@ public void Continue_Shopping() {
 
 			Sync.waitElementPresent("xpath", "//button[@id='add-to-wishlist']");
 			Common.javascriptclickElement("xpath", "//button[@id='add-to-wishlist']");
-			int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
+			int Size = Common.findElements("xpath", "//span[@x-html=\"message.text\"]").size();
 			System.out.println(Size);
 			if (Size > 0) {
 
-				Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
-				Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
-
+				Sync.waitElementPresent("xpath", "//button[@id='add-to-wishlist']");
+				Common.javascriptclickElement("xpath", "//button[@id='add-to-wishlist']");
+              
+				Common.clickElement("id", "customer-menu");
+				Common.clickElement("id", "customer.header.wishlist.link");
 			} else {
 				Sync.waitPageLoad();
 				Thread.sleep(6000);

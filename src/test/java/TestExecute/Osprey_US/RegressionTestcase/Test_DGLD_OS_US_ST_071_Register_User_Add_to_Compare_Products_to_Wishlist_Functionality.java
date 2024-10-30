@@ -10,24 +10,27 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_US_ST_108_GuestUser_checkout_OrderTotal_LessThan50_Klarna_SavedPayment_Standard_Shipping_Cost_Amount {
+public class Test_DGLD_OS_US_ST_071_Register_User_Add_to_Compare_Products_to_Wishlist_Functionality {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Compare_Products");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_User_Checkout_Klarna_Payment () throws Exception {
+	public void Verifying_Add_to_Compare_Products_to_Wishlist_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product<50");
-        Osprey_ReEu.Verify_Price("Product<50");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
+        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.Compare_Products();
+        Osprey_ReEu.Add_Wishlist();
+        Osprey_ReEu.AddtoCart_Wishlist();
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.Verify_OrderTotal();
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Kalrna_Payment("Klarna Visa Payment");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+   
         
 		} catch (Exception e) {
 
