@@ -1475,7 +1475,7 @@ public void click_Createaccount() {
 public String create_account(String Dataset) {
 //	String email="";
 	
-		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+		String email = data.get(Dataset).get("Email");
 		
 		String Product = data.get(Dataset).get("Products");
 		try {
