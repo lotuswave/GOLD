@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_106_Checkout_with_PP_as_Registeruser_with_PO_Box {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Address");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Address");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Checkout_with_PP_as_Registeruser_with_PO_Box () throws Exception {
