@@ -3609,12 +3609,20 @@ catch(Exception | Error e)
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
+			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			if(size>0) {
+				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			}
+			else {
+				
+			
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
-
+			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
-
+			}
 			try {
 				Common.clickElement("id", "btnLogin");
 				Thread.sleep(5000);
