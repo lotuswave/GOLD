@@ -545,6 +545,7 @@ public class GoldHydroHyvaHelper {
 //						"Email should be entered in the email field in Afterpay payment method","Email has been dispalyed in the Afterpay payment",
 //						"Failed to enter email in the Afterpay Payment");
 				Common.switchToDefault();
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "(//button[normalize-space()='Place Order'])[1]");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			}
@@ -563,33 +564,38 @@ public class GoldHydroHyvaHelper {
 
 		else {
 			try {
-				Thread.sleep(5000);
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				Thread.sleep(1000);
+				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				String sucessMessage = Common.getText("xpath",
+						" //h1[normalize-space()='Thank you for your purchase!']");
 
-				int size = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				// Tell_Your_FriendPop_Up();
+				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+						.size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
-						"User unable to go orderconformation page");
+						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']/p/span").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success']/p/span");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+						.size() > 0) {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
-				}
-				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
-					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+				} else {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
-						"It should navigate to the order confirmation page",
-						"User failed to proceed to the order confirmation page",
-						Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
-
+				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+						"User failed to navigate  to order confirmation page",
+						Common.getscreenShotPathforReport("failednavigatepage"));
 				Assert.fail();
 			}
+
 		}
 	}
 
