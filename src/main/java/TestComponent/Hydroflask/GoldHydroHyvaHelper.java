@@ -1447,6 +1447,7 @@ public class GoldHydroHyvaHelper {
 			int size = Common.findElements("id", "discount-code").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
+			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
 			Sync.waitPageLoad();
