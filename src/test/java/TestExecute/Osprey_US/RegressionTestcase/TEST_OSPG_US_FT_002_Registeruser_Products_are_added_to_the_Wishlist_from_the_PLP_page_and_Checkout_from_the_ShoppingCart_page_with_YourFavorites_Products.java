@@ -45,7 +45,7 @@ public class TEST_OSPG_US_FT_002_Registeruser_Products_are_added_to_the_Wishlist
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

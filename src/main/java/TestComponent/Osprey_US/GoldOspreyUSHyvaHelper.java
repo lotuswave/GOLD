@@ -14889,30 +14889,21 @@ public void Add_To_MyFavorities(String Dataset) {
 
 public void Add_Favorites_product_from_View_Cart() {
 	// TODO Auto-generated method stub
-	try
-	{
+	try {
 		Common.maximizeImplicitWait();
-		Common.actionsKeyPress(Keys.END);
-		String Yourfav=Common.findElement("xpath", "//h2[@class='t-cart__favorites-heading']").getText();
+		Common.scrollIntoView("xpath", "//span[text()='Your Favorites']");
+		String Yourfav = Common.findElement("xpath", "//span[text()='Your Favorites']").getText();
 		System.out.println(Yourfav);
 		Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
 				"validating the favorites in view cart page", "Favorites should be in the view cart page",
-				"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
-		Sync.waitElementPresent("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
-		Common.clickElement("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
+				"Sucessfully Favorites has been displayed in the view cart page ",
+				"failed to display the favorites in the view cart page");
+		Sync.waitElementPresent("xpath", "//div[@class='product-item-details flex-1']//strong");
+		Common.clickElement("xpath", "//div[@class='product-item-details flex-1']//strong");
 		Sync.waitPageLoad();
 		Thread.sleep(6000);
-//		Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-//		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//				.getAttribute("data-ui-id");
-//		System.out.println(message);
-//		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//				"Product should be add to cart", "Sucessfully product added to the cart ",
-//				"failed to add product to the cart");
-		
-	}
-	catch(Exception | Error e)
-	{
+
+	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 				"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));

@@ -31,7 +31,7 @@ public class TEST_OSPG_US_FT_001_Register_user_Products_are_added_to_the_Wishlis
         Osprey_ReEu.Add_Favorites_product_from_View_Cart();
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("ExpeditedShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
 
@@ -45,7 +45,7 @@ public class TEST_OSPG_US_FT_001_Register_user_Products_are_added_to_the_Wishlis
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
