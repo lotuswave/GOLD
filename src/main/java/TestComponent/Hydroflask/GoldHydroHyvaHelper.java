@@ -6572,33 +6572,6 @@ catch(Exception | Error e)
 
 		else {
 			try {
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
-//				Tell_Your_FriendPop_Up();
-
-				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-						"verifying the product confirmation", expectedResult,
-						"Successfully It redirects to order confirmation page Order Placed",
-						"User unabel to go orderconformation page");
-
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//a//strong").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success']//a//strong");
-					System.out.println(order);
-				}
-
-				if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
-					order = Common.getText("xpath", "//a[@class='order-number']/strong");
-					System.out.println(order);
-				}
-
-			} catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
-						"User failed to navigate  to order confirmation page",
-						Common.getscreenShotPathforReport("failednavigatepage"));
-				Assert.fail();
-			}
-			try {
 				Thread.sleep(1000);
 				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 				String sucessMessage = Common.getText("xpath",
@@ -6630,6 +6603,7 @@ catch(Exception | Error e)
 						Common.getscreenShotPathforReport("failednavigatepage"));
 				Assert.fail();
 			}
+
 		}
 		return order;
 	}
