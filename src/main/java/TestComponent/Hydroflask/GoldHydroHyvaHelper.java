@@ -6732,52 +6732,51 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			Sync.waitElementClickable("xpath", "//label[@for='billing-as-shipping']");
+			int sizes = Common.findElements("xpath", "//label[@for='billing-as-shipping']").size();
+			Common.clickElement("xpath", "//label[@for='billing-as-shipping']");
 			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
 					"payment section should be displayed", "sucessfully payment section has been displayed",
 					"Failed to displayed the payment section");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Edit']");
-			Common.clickElement("xpath", "//span[text()='Edit']");
-			Common.clickElement("xpath", "//select[@name='billing_address_id']");
-			Common.dropdown("xpath", "//select[@name='billing_address_id']", Common.SelectBy.TEXT, "New Address");
-			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
-			Thread.sleep(4000);
-			String Text = Common
-					.findElement("xpath", "//div[@class='checkout-billing-address']//input[@name='street[0]']")
-					.getAttribute("value");
-			System.out.println(Text);
-
+			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
+			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
+           
+ 
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
+					data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+			
+			
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='postcode']",
-					data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
-
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.textBoxInput("xpath", "//input[@id='billing-postcode']", data.get(dataSet).get("postcode"));
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.clickElement("xpath", "//button[normalize-space()='Save']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-
-			String update = Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
+			Thread.sleep(5000);
+			String update = Common.findElement("xpath", "//select[@id='address-list']").getText();
 			System.out.println(update);
-			Common.assertionCheckwithReport(
-					update.contains("6 Walnut Valley Dr") || Text.contains("6 Walnut Valley Dr"),
+			System.out.println(data.get(dataSet).get("Street"));
+			Common.assertionCheckwithReport(update.contains(data.get(dataSet).get("Street")),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -6791,6 +6790,7 @@ catch(Exception | Error e)
 					Common.getscreenShot("Failed to display the Billing address in payment page"));
 			Assert.fail();
 		}
+
 
 	}
 
@@ -7840,8 +7840,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void reorder() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
-			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[normalize-space()='My Orders']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='View Order']");
@@ -7863,6 +7863,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.getscreenShot("Failed to Navigate to the shopping cart page"));
 			Assert.fail();
 		}
+
 
 	}
 
