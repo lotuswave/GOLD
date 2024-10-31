@@ -9165,6 +9165,7 @@ public void header_1_Percent_Planet() {
 
 	public String Express_Paypal(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		String order = "";
 
 		String expectedResult = "It should open paypal site window.";
@@ -9228,11 +9229,21 @@ public void header_1_Percent_Planet() {
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
+			int size1 = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			if(size1>0) {
+				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			}
+			else {
+				
+			
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
 			
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
+			}
+			
 
 			try {
 				Common.clickElement("id", "btnLogin");
@@ -9308,7 +9319,6 @@ public void header_1_Percent_Planet() {
 				}
 			}
 		return order;
-
 	}
 
 	public void express_paypal_shipping(String Dataset) {

@@ -11088,7 +11088,6 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	
 	public String Express_Paypal(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 				String order = "";
 
 				String expectedResult = "It should open paypal site window.";
