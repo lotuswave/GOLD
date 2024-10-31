@@ -9,27 +9,23 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_101_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping {
+public class Test_DGLD_HF_ST_124_Register_User_checkout_with_Express_paypal {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Bundle");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping () throws Exception {
+	public void Validate_Register_User_checkout_with_Express_paypal () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");  
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-			Hydro.Configurable_addtocart_pdp("Product"); 
+			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-            Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.discountCode("Discount");
-            Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.payPal_Payment("PaypalDetails");
-
+			Hydro.Express_Paypal("PaypalDetails");
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
