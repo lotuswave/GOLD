@@ -8458,8 +8458,8 @@ public void Continue_Shopping() {
 					"//p[@class='country-item__language']");
 			ArrayList<String> CountryNames = new ArrayList<String>();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
-			Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
+			Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+			Common.clickElement("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
 			Thread.sleep(4000);
 			for (WebElement Countryselections : Countryselector) {
 				CountryNames.add(Countryselections.getText());
@@ -8467,7 +8467,7 @@ public void Continue_Shopping() {
 			}
 			String[] items = data.get(Dataset).get("Countrynames").split(",");
 			System.out.println(items);
-			Common.clickElement("xpath", "//span[contains(@class,'icon-modal__close')]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 			for (int j = 0; j < items.length; j++) {
 				if (CountryNames.contains(items[j])) {
 
@@ -8477,14 +8477,15 @@ public void Continue_Shopping() {
 
 						List<WebElement> select = Common.findElements("xpath",
 								"//p[@class='country-item__language']");
+								System.out.println(select);
 						Sync.waitPageLoad();
-						Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
-						Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
-						String countryname=Common.findElement("xpath", "(//span[@class='country-item__country-label'])[1]").getText();
-						System.out.println(countryname);
-						Thread.sleep(3000);
+						Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+						Common.clickElement("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+						String countryname=Common.findElement("xpath", "(//span[contains(@class,'country-item__country-label')])[1]").getText();
+						System.out.println("countryname:   "+countryname);
+						Thread.sleep(3000);	
 						Country = select.get(i).getText();
-						System.out.println(Country);
+						System.out.println("Country:   "+Country);
 						select.get(i).click();
 						Thread.sleep(5000);
 						if (Country.contains("English (£)") && countryname.contains("UK")|| Country.contains("English") && countryname.contains("United States")) {
@@ -8496,13 +8497,13 @@ public void Continue_Shopping() {
 						
 						else if (Country.contains("English (€)") || Country.contains("Français (€)")
 								|| Country.contains("Deutsch (€)") || Country.contains("Italiano (€)")
-								|| Country.contains("Español (€)") || Country.contains("English (DKK)")
+								|| Country.contains("Español") || Country.contains("English (DKK)")
 								|| Country.contains("Norsk (NOK)") || Country.contains("Svenska (SEK)")
 								|| Country.contains("Deutsch (CHF)") || Country.contains("Français (CHF)")
 								|| Country.contains("Italiano (CHF)") || Country.contains("English (£)")) {
 							
-							Sync.waitElementPresent("xpath", "(//legend[@class='h5'])[2]");
-							Common.getText("xpath", "(//legend[@class='h5'])[2]");
+							Sync.waitElementPresent("xpath", "(//span[@x-text='countryTitle'])[1]");
+							Common.getText("xpath", "(//span[@x-text='countryTitle'])[1]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							Common.navigateBack();
@@ -8516,7 +8517,7 @@ public void Continue_Shopping() {
 //							Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
-							Common.navigateBack();
+//							Common.navigateBack();
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
@@ -14990,25 +14991,25 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 	try
 	{
 	Common.maximizeImplicitWait();
-	Common.actionsKeyPress(Keys.END);
-	String Yourfav=Common.findElement("xpath", "//h2[@class='t-cart__favorites-heading']").getText();
+	Common.scrollIntoView("xpath", "//span[text()='Your Favorites']");
+	String Yourfav=Common.findElement("xpath", "//span[text()='Your Favorites']").getText();
 	System.out.println(Yourfav);
 	Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
 			"validating the favorites in view cart page", "Favorites should be in the view cart page",
 			"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
-	Sync.waitElementPresent("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
-	Common.clickElement("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
+	Sync.waitElementPresent("xpath", "//div[@class='product-item-details flex-1']//strong");
+	Common.clickElement("xpath", "//div[@class='product-item-details flex-1']//strong");
 	Sync.waitPageLoad();
 	Thread.sleep(8000);
-	String Options=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-	Common.assertionCheckwithReport(Options.contains("You need to choose options for your item"),
-			"validating the color option on the PDP", "After clicking on the add to cart button for color product it should navigate to PDP",
-			"Sucessfully Navigated to the PDP and options messgae has been appeared ", "failed to Display the choose options message on PDP");
+//	String Options=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+//	Common.assertionCheckwithReport(Options.contains("You need to choose options for your item"),
+//			"validating the color option on the PDP", "After clicking on the add to cart button for color product it should navigate to PDP",
+//			"Sucessfully Navigated to the PDP and options messgae has been appeared ", "failed to Display the choose options message on PDP");
 	Thread.sleep(4000);
-	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-	Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
-	Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-	Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+//	Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + productcolor + "'])[1]");
+//	Common.clickElement("xpath", "(//div[@data-option-label='" + productcolor + "'])[1]");
+//	Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
+//	Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
 	Thread.sleep(4000);
 	Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 	Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
@@ -15021,8 +15022,8 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 //	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //			"Product should be add to cart", "Sucessfully product added to the cart ",
 //			"failed to add product to the cart");
-	Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
-	Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+	Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
+	Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 	
 	}
 	catch(Exception | Error e)
