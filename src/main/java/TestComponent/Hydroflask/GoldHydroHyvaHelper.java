@@ -1113,6 +1113,7 @@ public class GoldHydroHyvaHelper {
 	public String create_account(String Dataset) {
 		String email="";
 		String Product=data.get(Dataset).get("Products");
+		String Email = data.get(Dataset).get("Email");
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -1120,7 +1121,7 @@ public class GoldHydroHyvaHelper {
 //			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
 			
 			
-			Common.textBoxInput("xpath", "//input[@id='email_address']", data.get(Dataset).get("UserName"));
+			Common.textBoxInput("xpath", "//input[@id='email_address']", Email);
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			System.out.println(data.get(Dataset).get("Password"));
@@ -4454,13 +4455,11 @@ catch(Exception | Error e)
 
 	public void Stored_Payment(String Dataset) {
 		// TODO Auto-generated method stub
-
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -4476,50 +4475,40 @@ catch(Exception | Error e)
 		}
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Sync.waitElementPresent("xpath", "//a[@title='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[@title='Stored Payment Methods']");
 			Sync.waitPageLoad(30);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			int size = Common.findElements("xpath", "//div[@class='divide-y divide-border']").size();
 			if (size > 0) {
-				String number = Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText()
+				Thread.sleep(5000);
+				String number = Common.findElement("xpath", "//div[@class='flex items-center']//span").getText()
 						.replace("•••• ", "");
-				Thread.sleep(4000);
+				System.out.println(number);
+				System.out.println(Dataset);
+				Thread.sleep(5000);
 				Common.assertionCheckwithReport(number.contains("4242") && Dataset.contains("4242"),
 						"validating the card details in the my orders page",
 						"After Clicking on My payments methods and payment method should be appear in payment methods",
 						"Sucessfully payment method is appeared in my payments methods",
 						"Failed to display the payment methods in the my payments methods");
-//				Thread.sleep(4000);
-//				Sync.waitElementPresent("xpath", "//a[contains(@class,'stripe-payments')]");
-//				Common.clickElement("xpath", "//a[contains(@class,'stripe-payments')]");
-//				Common.switchToTopFrame();
-//				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-//				Common.switchToDefault();
-//				Thread.sleep(4000);
-//				String message=Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
-//				Common.assertionCheckwithReport(message.contains("Sorry, it is not possible to delete this payment method"),
-//						"validating the error message for delete card",
-//						"After Clicking the delete button we need to get the error message",
-//						"Sucessfully the error has been displayed when we click on the delete",
-//						"Failed to display the error message when we clcik on the delete message");
-//				
 			} else {
 				Assert.fail();
 			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the error message for delete card",
-					"After Clicking the delete button we need to get the error message",
-					"Unable to display the error message when we clcik on the delete message",
-					Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
+			ExtenantReportUtils.addFailedLog("validating the card details in the my orders page",
+					"After Clicking on My payments methods and payment method should be appear in payment methods",
+					"Unable to display the payment methods in the my payments methods",
+					Common.getscreenShot("Failed to display the payment methods in the my payments methods"));
 			Assert.fail();
 		}
+
 
 	}
 
@@ -6609,7 +6598,38 @@ catch(Exception | Error e)
 						Common.getscreenShotPathforReport("failednavigatepage"));
 				Assert.fail();
 			}
+			try {
+				Thread.sleep(1000);
+				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				String sucessMessage = Common.getText("xpath",
+						" //h1[normalize-space()='Thank you for your purchase!']");
 
+				// Tell_Your_FriendPop_Up();
+				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+						.size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unabel to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+						.size() > 0) {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+					System.out.println(order);
+				} else {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+					System.out.println(order);
+				}
+
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+						"User failed to navigate  to order confirmation page",
+						Common.getscreenShotPathforReport("failednavigatepage"));
+				Assert.fail();
+			}
 		}
 		return order;
 	}
@@ -9212,36 +9232,18 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	public void empty_storedpayment() {
 		// TODO Auto-generated method stub
-		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
-					"validating the Navigation to the My account page",
-					"After Clicking on My account CTA user should be navigate to the my account page",
-					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
-					"Failed to Navigate to the MY account page after Clicking on my account button");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
-					"After Clicking on My account CTA user should be navigate to the my account page",
-					"Unable to Navigates the user to My account page after clicking on the my account CTA",
-					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
-		}
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Sync.waitElementPresent("xpath", "//a[@title='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[@title='Stored Payment Methods']");
 			Sync.waitPageLoad(30);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			String card = Common.findElement("xpath", "//div[@class='message info empty']//span").getText();
+			String card = Common.findElement("xpath", "//div[@class='w-full']//p").getText().trim();
 			Common.assertionCheckwithReport(card.contains("You do not have any saved payment methods."),
 					"validating the no saved payments in stored credit card",
 					"After Clicking on stored methods CTA stored credit cart should be empty",
