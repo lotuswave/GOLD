@@ -2477,12 +2477,14 @@ public class GoldHydroHyvaHelper {
 //				Shippingaddress.put("ShippingZip", ShippingZip);
 
 				Thread.sleep(6000);
+				Sync.waitElementPresent("xpath", "//form[@id='shipping']//input[@name='telephone']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
 
 //				
