@@ -1000,6 +1000,12 @@ public class GoldOxoHyvaHelper {
 
 			} else {
 				Thread.sleep(4000);
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
@@ -1032,6 +1038,7 @@ public class GoldOxoHyvaHelper {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+					Thread.sleep(4000);
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 					Thread.sleep(40000);
