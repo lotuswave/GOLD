@@ -3990,7 +3990,6 @@ public void Validate_retailerlocations() {
 					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 					Thread.sleep(8000);
 					if (Common.getCurrentURL().contains("/checkout")) {
-						
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
 						Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
