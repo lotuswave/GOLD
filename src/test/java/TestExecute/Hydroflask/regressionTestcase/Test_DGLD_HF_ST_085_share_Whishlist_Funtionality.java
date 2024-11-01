@@ -33,7 +33,7 @@ public class Test_DGLD_HF_ST_085_share_Whishlist_Funtionality {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
