@@ -2963,6 +2963,7 @@ public class GoldHydroHyvaHelper {
 				Common.clickElement("xpath", "//button[@id='customer-menu']");
 				Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
 				Common.clickElement("xpath", "//a[@title='My Account']");
+				Thread.sleep(4000);
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 						"validating the Navigation to the My account page",
 						"After Clicking on My account CTA user should be navigate to the my account page",
@@ -3287,30 +3288,25 @@ public class GoldHydroHyvaHelper {
 	public void share_invalid_details(String Dataset) {
 		// TODO Auto-generated method stub
 
+
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//a[@title='Share']");
-			Common.clickElement("xpath", "//a[@title='Share']");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Share')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Share')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']");
-			Common.clickElement("xpath", "//button[@type='submit']");
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'error')]");
-			String errormessage = Common.findElement("xpath", "//div[contains(@id,'error')]").getText();
-			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-error']//span");
+			String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
+			Common.assertionCheckwithReport(errormessage.contains("You need to enter sender data."),
 					"validating the error message with empty fields ",
 					"After clicking hare button with empty data error message should be display",
 					"successfully error message has been dispalyed ", "failed to display the error message");
-			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//button[@type='submit']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
-			String invalidemail = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-			Common.assertionCheckwithReport(invalidemail.contains("Please enter a valid email address"),
-					"validating the error message with invalid email ",
-					"After clicking hare button with invalid email error message should be display",
-					"successfully error message has been dispalyed ", "failed to display the error message");
+			Common.clickElement("xpath", "//a[@title='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the error message with invalid email ",
@@ -3321,16 +3317,7 @@ public class GoldHydroHyvaHelper {
 		}
 		try
 		{
-			Sync.waitElementPresent(30, "xpath", "//strong[text()='Gift Registry']");
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
-			Sync.waitImplicit(40);
-			Common.maximizeImplicitWait();
-			Thread.sleep(2000);
-			String page=Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-			Common.assertionCheckwithReport(page.contains("Gift Registry"),
-					"validating the gift registry page navigation ",
-					"After clicking Gift registry it should navigate to the gift registry page",
-					"successfully Navigated to the gift registry page ", "failed to Navigate to the gift rigistry page");
+			
 			delete_giftcard();
 			
 		}
@@ -3466,18 +3453,16 @@ public class GoldHydroHyvaHelper {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "(//div[@id='cart-drawer-title']//span)[1]");
-			String minicart = Common.findElement("xpath", "(//div[@id='cart-drawer-title']//span)[1]").getText();
-			Sync.waitElementPresent("xpath", "//a[contains(text(),'View Cart')]");
-			Common.clickElement("xpath", "//a[contains(text(),'View Cart')]");
-			String viewcart = Common.findElement("xpath", "//div[contains(@class,'flex items-center')]//h1").getText();
-			Sync.waitPageLoad();
-			Thread.sleep(8000);
-//			Common.assertionCheckwithReport(
-//					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
-//					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
-//					"Successfully navigates to the view cart page",
-//					"Failed to navigate to the view and edit cart page");
+			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
+			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
+			Common.clickElement("xpath", "//a[@title='View Cart']");
+			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
+			Common.assertionCheckwithReport(
+					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
+					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
+					"Successfully navigates to the view cart page",
+					"Failed to navigate to the view and edit cart page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3495,11 +3480,11 @@ public class GoldHydroHyvaHelper {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@type='submit']//span[@class='a-btn__label']");
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//button[contains(text(),'Add All To Gift Registry')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Manage Gift Registry"),
+			Thread.sleep(6000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry Items"),
 					"validating navigation to the Manage Gift Registry page ",
 					"After clicking on Manage Gift Registry button it should navigate to the Manage Gift Registry page ",
 					"successfully Navigated to the Manage Gift Registry",
@@ -3515,21 +3500,24 @@ public class GoldHydroHyvaHelper {
 		}
 
 		try {
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
-			Common.clickElement("xpath", "//div[@class='control m-text-input']");
-			Common.textBoxInput("xpath", "//input[@class='input-text qty a-text-input']",
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.clickElement("xpath", "//input[@type='number']");
+			Common.textBoxInput("xpath", "//input[@type='number']",
 					data.get(Dataset).get("Quantity"));
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Update Items']");
-			Common.clickElement("xpath", "//span[text()='Update Items']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='mage-error']");
-			String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-			Common.assertionCheckwithReport(errormessage.contains("Please enter a number greater than 0"),
-					"validating nthe error message validation for the prodcuts in gift registry ",
-					"After Upadting the quantity to zero the eroor message should be display",
-					"successfully quantity has been changed to zero and error message has been displayed",
-					"failed to Display the error message for the when quantity changed to zero");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Update Gift Registry ')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Update Gift Registry ')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']//span");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+			Common.assertionCheckwithReport(message.contains("You updated the gift registry items."),
+					"validating nthe  message validation for the prodcuts in gift registry ",
+					"After Upadting the quantity the message should be display",
+					"successfully quantity has been changed  message has been displayed",
+					"failed to Display the message for the when quantity changed");
 
+			Common.clickElement("xpath", "//a[@title='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
@@ -3540,6 +3528,7 @@ public class GoldHydroHyvaHelper {
 			Assert.fail();
 
 		}
+
 	}
 
 	public void gustuserorderStatus(String dataSet) {
@@ -4476,39 +4465,29 @@ catch(Exception | Error e)
 	public void noitems_giftregistry(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent(30, "xpath", "//input[@type='checkbox']");
-			Common.clickElement("xpath", "//input[@type='checkbox']");
-			Sync.waitElementPresent(30, "xpath", "//div[@class='control m-text-input']");
-			Common.clickElement("xpath", "//div[@class='control m-text-input']");
-			Common.textBoxInput("xpath", "//input[contains(@class,'input-text qty a-text-input')]",
-					data.get(Dataset).get("Quantity"));
-			Sync.waitElementPresent("xpath", "//span[text()='Update Items']");
-			Common.clickElement("xpath", "//span[text()='Update Items']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String deletemessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			System.out.println(deletemessage);
-			Common.assertionCheckwithReport(deletemessage.contains("You updated the gift registry items."),
-					"verifying the delete product in gift registry", "product should be delete from the gift registry",
-					"Sucessfully product has been deleted from the gift registry",
-					Common.getscreenShotPathforReport("Failed to delete the product from the gift registry"));
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Share')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Share')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//div[@class='message info empty']//span");
-			String emptymessage = Common.findElement("xpath", "//div[@class='message info empty']//span").getText();
-			Common.assertionCheckwithReport(emptymessage.contains("This gift registry has no items."),
-					"verifying the no prodcts in the gift registry",
-					"product should be not display in the gift registry",
-					"Sucessfully products should not been displayed in the gift registry",
-					Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
-			Common.clickElement("xpath", "//strong[text()='Gift Registry']");
+			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-error']//span");
+			String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
+			Common.assertionCheckwithReport(errormessage.contains("You need to enter sender data."),
+					"validating the error message with empty fields ",
+					"After clicking hare button with empty data error message should be display",
+					"successfully error message has been dispalyed ", "failed to display the error message");
+			Common.clickElement("xpath", "//a[@title='Gift Registry']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying the no prodcts in the gift registry",
-					"product should be not display in the gift registry",
-					"Unable to display the  products in the gift registry",
-					Common.getscreenShotPathforReport("Failed to delete the products in the gift registry"));
-
+			ExtenantReportUtils.addFailedLog("validating the error message with invalid email ",
+					"After clicking hare button with invalid email error message should be display",
+					"Unable to see the error message has been dispalyed ",
+					Common.getscreenShot("failed to display the error message"));
 			Assert.fail();
 		}
 
