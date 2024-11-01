@@ -25,8 +25,8 @@ public class Test_DGLD_HF_ST_021_Checkout_RegisterUserCC_configurable_Simple {
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-//			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-//			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");

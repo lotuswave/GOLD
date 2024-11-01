@@ -8042,10 +8042,12 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void employee_discount() {
 		// TODO Auto-generated method stub
 		try {
-
-			String originalprice = Common.getText("xpath", "//span[contains(@id,'old-price')]//span").replace("$", "");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+			Thread.sleep(4000);
+			String originalprice = Common.getText("xpath", "//span[@class='price line-through hf:font-bold md:hf:font-normal']").replace("$", "").trim();
 			Float originalvalue = Float.parseFloat(originalprice);
-			String Newprice = Common.getText("xpath", "//span[contains(@id,'product')]//span").replace("$", "");
+			String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "").trim();
 			Float pricevalue = Float.parseFloat(Newprice);
 			Thread.sleep(4000);
 			float discount = originalvalue - (originalvalue * 65 / 100);
@@ -8055,7 +8057,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"verifying the discount for the employee discount ",
 					"user should able to see the discount for the employee",
 					"user successfully able to apply the discount", "Failed to apply the discount for the employee");
-
+			click_minicart();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the discount for the employee discount ",
