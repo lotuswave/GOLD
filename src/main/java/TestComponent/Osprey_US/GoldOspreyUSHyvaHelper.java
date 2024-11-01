@@ -163,10 +163,10 @@ public class GoldOspreyUSHyvaHelper {
 		else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 		{
 			
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Page"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Backpacks, Luggage & Travel Gear Since 1974"),
 					"validating store logo on the homwpage",
 					"System directs the user to the Homepage and store logo should display",
 					"Sucessfully user navigates to the home page and logo has been displayed",
