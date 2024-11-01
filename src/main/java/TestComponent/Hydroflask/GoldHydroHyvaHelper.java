@@ -3586,15 +3586,38 @@ public class GoldHydroHyvaHelper {
 		}
 	}
 
+	public void click_regtrackorder() {
+		try {
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//a[contains(text(),'My Orders')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
+					"Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"successfully Navigated to the orders and return page",
+					"Failed to Navigate to the orders and return page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"Unable to  Navigated to the orders and return page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
+			Assert.fail();
+
+		}
+	}
 	public void regiter_userorder_status() {
 		// TODO Auto-generated method stub
 		click_singinButton();
 		login_Hydroflask("AccountDetails");
-		click_trackorder();
+		click_regtrackorder();
 
 		try {
 			Sync.waitPageLoad();
-			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			int size = Common.findElements("xpath", "//div[@class='column main']").size();
 			Common.assertionCheckwithReport(size > 0, "Verifying the order numbers in my orders page ",
 					"after clicking on the track my orders order numbers  should be displayed in the my orders page",
 					"successfully order numbers has been displayed in the my orders page",
@@ -4530,47 +4553,40 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			String number = Common.findElement("xpath", "//a[@title='View Order']").getText();
+			String number = Common.findElement("xpath", "//span[text()='View Order']").getText();
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(40, "xpath", "//h1[@data-ui-id='page-title-wrapper']");
-			String Ordernumber = Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
-			Common.findElement("xpath", "//span[contains(@class,'order-status ')]");
-			String reorder = Common.findElement("xpath", "//a[contains(@class,'action or')]//span").getText();
-			String backCTA = Common.findElement("xpath", "//a[contains(@class,'action back')]//span[2]").getText();
-			String orderdate = Common.findElement("xpath", "//div[@class='order-info']/p").getText();
-			String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
-			String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
-			String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
+			Sync.waitElementPresent(40, "xpath", "//span[contains(@class,'title-lg')]");
+			String Ordernumber = Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText();
+			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
+			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
+			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
+			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
+			String shippingAdd = Common.findElement("xpath", "//p[contains(text(),'Shipping Address')]").getText();
+			String billingAdd = Common.findElement("xpath", "//p[contains(text(),'Billing Address')]").getText();
+			String shippingmethod = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
+			String ordersummary = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
+			String itemsordered = Common.findElement("xpath", "//span[@class='text-sm']").getText();
 			System.out.println(itemsordered);
 
 			Common.assertionCheckwithReport(
-					reorder.contains("Reorder") && backCTA.contains("Back") && orderdate.contains("Date")
+					reorder.contains("Reorder") && backCTA.contains("Back ") && orderdate.contains("Order Date")
 							&& reorder.contains("Reorder"),
 					"validating the order details ",
 					"After Clicking on view Order it should be navigate to the order details page ",
 					"Sucessfully navigated to the orders detail page", "Failed to Navigate to the orders detail page");
-//			
-//
-//			Common.clickElement("xpath", "//div[@aria-label='Next']");
-//			Common.assertionCheckwithReport(reorder.contains("Reorder"),
-//					"validating the order summary and UGC carasol ",
-//					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
-//					"Sucessfully UGC Carsol is displayed and navigated to the orders page",
-//					"Failed to Navigate to the orders page and UGC Casrol is not displayed ");
-
+//	
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the order summary and UGC carasol ",
-					"After Clicking on view Order it should be navigate to the order page and UGC carasol should be displayed",
-					"Unable to Navigate to the orders page and UGC Casrol is not displayed ",
-					Common.getscreenShot("Failed to Navigate to the orders page and UGC Casrol is not displayed "));
+			ExtenantReportUtils.addFailedLog("validating the order Details ",
+					"After Clicking on view Order it should be navigate to the order details page ",
+					"Unable to Navigate to the orders details page  ",
+					Common.getscreenShot("Failed to Navigate to the orders details page "));
 			Assert.fail();
 
 		}
+
 
 	}
 
