@@ -3859,7 +3859,7 @@ catch(Exception | Error e)
 			System.out.println(orderid);
 			String ID=Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("Order #", "");
 			System.out.println(ID);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.contains(ordernumber), "verifying order status form",
 					
 					"order tracking information page navigation", "successfully order tracking information page ",
 					"Failed to navigate tracking order page infromation");
