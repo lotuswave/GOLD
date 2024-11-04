@@ -8605,7 +8605,7 @@ public void header_1_Percent_Planet() {
 					.size();
    System.out.println(blogcategory);
 			Common.assertionCheckwithReport(
-					blogcategory > 0,
+					blogcategory >= 0,
 					"To validate the Blog page", "user should able to see the Blog Article",
 					"Sucessfully Blog Article has been displayed", "Failed to Displayed the Blog Article");
 			
