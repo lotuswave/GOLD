@@ -20,7 +20,7 @@ public class TEST_DGLD_OS_US_017_Miscellaneous_Pages {
 
 		try {
 			Osprey_ReEu.verifingHomePage();
-			Osprey_ReEu.verfy_miscellaneous_pages("Invalid details");
+			Osprey_ReEu.verfy_miscellaneous_pages("Links");
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
