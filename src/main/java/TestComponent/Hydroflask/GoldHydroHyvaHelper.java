@@ -4794,8 +4794,8 @@ catch(Exception | Error e)
 		Common.actionsKeyPress(Keys.END);
 		try {
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[text()='Dealer Central']");
-			Common.clickElement("xpath", "//a[text()='Dealer Central']");
+			Sync.waitElementPresent("xpath", "//a[contains(@title,'Dealer Central')]");
+			Common.clickElement("xpath", "//a[contains(@title,'Dealer Central')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("dealer"),
@@ -4835,6 +4835,7 @@ catch(Exception | Error e)
 
 	public void new_Account_Inquiry_DealerCentral(String dataSet) {
 		// TODO Auto-generated method stub
+
 
 		String expectedResult = "Email us form is visible in tab";
 		String country = data.get(dataSet).get("Country");
@@ -4966,7 +4967,7 @@ catch(Exception | Error e)
 		Common.actionsKeyPress(Keys.PAGE_UP);
 		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
 		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-		Common.assertionCheckwithReport(Text.contains("Your submission was successful,"),
+		Common.assertionCheckwithReport(Text.contains("Your submission was successful."),
 				"verifying contact us confirmation message", expectedResult,
 				"User gets confirmation under the same tab", "unable to load the confirmation form");
 
