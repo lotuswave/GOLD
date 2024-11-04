@@ -5497,6 +5497,10 @@ catch(Exception | Error e)
 						Common.getscreenShotPathforReport(search));
 
 			}
+			Sync.waitElementPresent("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			Thread.sleep(3000);
+			
 		}
 
 		catch (Exception | Error e) {
