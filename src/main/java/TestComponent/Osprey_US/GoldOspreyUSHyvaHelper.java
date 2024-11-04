@@ -12032,8 +12032,8 @@ catch(Exception | Error e)
 					"After clicking on My account it should navigate to the my account page",
 					"successfully Navigated to the My account page",
 					"Failed to Navigate to the My account page");
-			Sync.waitElementPresent("xpath", "//a[@title='Store Credit']");
-			Common.clickElement("xpath", "//a[@title='Store Credit']");
+			Sync.waitElementPresent("xpath", "//span[text()='Store Credit']");
+			Common.clickElement("xpath", "//span[text()='Store Credit']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("storecredit"),
@@ -12103,53 +12103,7 @@ catch(Exception | Error e)
 				{
 					AssertJUnit.fail();
 				}
-//			}
-//			else
-//			{
-//				Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-checkout__back')]");
-//				Common.clickElement("xpath", "//span[contains(@class,'icon-checkout__back')]");
-//				Sync.waitPageLoad();
-//				Thread.sleep(3000);
-//				Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/") ,"validating the shopping cart page",
-//						"After clciking on back to cart it should navigate to shopping cart page", "Sucessfully Navigated to the shopping cart page",
-//						"failed to Navigate to the shopping cart page");
-//				Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, "3");
-//				Common.clickElement("xpath", "//button[@name='update_cart_action']");
-//				Sync.waitPageLoad();
-//				Thread.sleep(3000);
-//				System.out.println(ordertotalvalue);
-//				System.out.println(Pricevalue);
-//				if(Pricevalue>ordertotalvalue)
-//				{
-//					minicart_Checkout();
-//				    selectshippingmethod("GroundShipping method");
-//				    clickSubmitbutton_Shippingpage();
-//				    Thread.sleep(4000);
-//				    Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
-//					Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
-//					String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
-//					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
-//					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
-//					String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'checkout-cart')]")
-//							.getAttribute("id");
-//					Thread.sleep(4000);
-//					System.out.println(message);
-//					System.out.println(Price);
-//					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
-//					System.out.println(storeorder);
-//					Common.assertionCheckwithReport(message.contains("success") || storeorder.equals(Price) ,"validating the store credit balance applied sucess message",
-//							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
-//							"failed to Display the success message");
-//				    
-//				}
-//				else
-//				{
-//					Assert.fail();
-//				}
-//				
-//				
-//			}
-					
+			
 		}
 		catch(Exception | Error e)
 		{
