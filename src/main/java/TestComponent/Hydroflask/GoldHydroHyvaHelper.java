@@ -6066,7 +6066,7 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementClickable("xpath", "//a[@class='a-logo']");
+			Sync.waitElementClickable("xpath", "//img[@alt='Store logo']");
 			Common.switchFrames("id", "kustomer-ui-sdk-iframe");
 			Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
 			Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
