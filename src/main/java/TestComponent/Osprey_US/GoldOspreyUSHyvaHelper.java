@@ -12798,18 +12798,24 @@ public void Kustomer_Links(String Dataset) {
 	try {
 		for (i = 0; i < Kustomerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("lang/en_us/")
+					Common.getCurrentURL().contains("en_us")
 							|| Common.getCurrentURL().contains("contact/product-registration-form")
-							|| Common.getCurrentURL().contains("guarantee-faqs"),
+							|| Common.getCurrentURL().contains("guarantee") 
+							|| Common.getCurrentURL().contains("knowledge")
+							|| Common.getCurrentURL().contains("order/status")
+							|| Common.getCurrentURL().contains("size-fit")
+							|| Common.getCurrentURL().contains("warranty")
+							|| Common.getCurrentURL().contains("catalog")
+							|| Common.getCurrentURL().contains(Kustomerlinks[i]),
 					"validating the Kustomer links navigation from footer Links",
 					"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 					Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
@@ -12827,60 +12833,10 @@ public void Kustomer_Links(String Dataset) {
 
 }
 
-public void Footer_validation(String Dataset) {
-	// TODO Auto-generated method stub
-	String footer = data.get(Dataset).get("Footer Links");
-	String[] footerlinks = footer.split(",");
-	int i = 0;
-	try {
-		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),\""+footerlinks[i] +"\" )]");
-			Thread.sleep(3000);
-			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),\""+footerlinks[i] +"\" )]");
-			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),\""+footerlinks[i] +"\" )]");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String Bread = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText().toLowerCase();
-			System.out.println(Bread);
-			System.out.println(footerlinks[i]);
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("student-beans")
-							|| Common.getCurrentURL().contains("gift-cards")
-							|| Common.getCurrentURL().contains("track/order/status")
-							|| Common.getCurrentURL().contains("owners-manual")
-							|| Common.getCurrentURL().contains("repairs-fabric-claims")
-							|| Common.getCurrentURL().contains("/osprey-europe-limited-tax-strategy"),
-					"validating the links navigation from footer Links",
-					"After Clicking on" + footerlinks[i] + "it should navigate to the",
-					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
-					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-			Thread.sleep(5000);
-			Common.navigateBack();
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
-			
-
-		}
-	} catch (Exception | Error e) {
-		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-				"After Clicking on" + footerlinks[i] + "it should navigate to the",
-				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
-				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-		AssertJUnit.fail();
-	}
-
-}
 
 public void Footer_Links(String Dataset) {
 	// TODO Auto-generated method stub
-	String footer = data.get(Dataset).get("Footer Links");
+	String footer = data.get(Dataset).get("Company_Links");
 	String Terms=data.get(Dataset).get("Terms");
 	String[] footerlinks = footer.split(",");
 	String[] Termlinks = Terms.split(",");
@@ -12890,12 +12846,12 @@ public void Footer_Links(String Dataset) {
 		
 		for(j = 0; j < Termlinks.length; j++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Common.clickElement("xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'" + Termlinks[j] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Termlinks[j] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -12915,12 +12871,12 @@ public void Footer_Links(String Dataset) {
 		}
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -12952,6 +12908,7 @@ public void Footer_Links(String Dataset) {
 	}
 
 }
+
 
 public void warrenty_Replacement() {
 	// TODO Auto-generated method stub
@@ -14185,12 +14142,12 @@ public void Footer_Links_Resources(String Dataset) {
 		
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -14249,6 +14206,7 @@ public void Footer_Links_Resources(String Dataset) {
 }
 
 
+
 public void Footer_Links_BrandTeam(String Dataset) {
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("BrandTeam_Links");
@@ -14261,12 +14219,12 @@ public void Footer_Links_BrandTeam(String Dataset) {
 		for (i = 0; i < footerlinks.length; i++) {
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -14321,6 +14279,66 @@ public void Footer_Links_BrandTeam(String Dataset) {
 
 }
 
+
+public void Footer_validation(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("breadcrumbs");
+	String[] footerlinks = footer.split(",");
+	String footers = data.get(Dataset).get("breadcrumbs").toUpperCase();
+	String[] footerlink = footers.split(",");
+	int i = 0;
+	try {
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent(30, "xpath",
+					"//li[contains(@class,'cmsb2641-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//li[contains(@class,'cmsb2641-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//li[contains(@class,'cmsb2641-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String Bread = Common.findElement("xpath", "//nav[contains(@aria-label,'Breadcrumb')]").getText();
+			String title = "";
+			if (Common.findElements("xpath", "//h1[contains(@class,'cms-clear')]").size() > 0) {
+			    title = Common.findElement("xpath", "//h1[contains(@class,'cms-clear')]").getText();
+			} else {
+			    String currentURL = Common.getCurrentURL().toUpperCase();
+			    System.out.println("Redirecting to URL: " + currentURL);
+			}		
+			String page = Common.getPageTitle().toUpperCase();
+			System.out.println(page);
+			System.out.println(Bread);
+			System.out.println(footerlinks[i]);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || title.contains(footerlink[i]) || Bread.contains(page)
+							|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("status"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+			Thread.sleep(5000);
+			Common.navigateBack();
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+			
+
+		}
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		AssertJUnit.fail();
+	}
+
+}
+
+
+
 public void Footer_Links_Repari_And_Replacement(String Dataset) {
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("Repair&Replacement");
@@ -14330,20 +14348,21 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 
 	try {
 		
+		click_singinButton();
+		Login_Account("Account");
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("/athletes")
-							|| Common.getCurrentURL().contains("coming-soon"),
+							|| Common.getCurrentURL().contains("form"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -14369,7 +14388,6 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 	}
 
 }
-
 public void image_ShopAll(String Dataset) throws Exception {
 	// TODO Auto-generated method stub
 	//Prod
@@ -15452,9 +15470,124 @@ public void MyAccount_Subscription() {
 		}
 	}
 
+
+
+
+public void warrenty_return_Authorization() {
+	// TODO Auto-generated method stub
+	try {
+
+		Common.scrollIntoView("xpath",
+				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
+		Common.clickElement("xpath",
+				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
+		String Url = Common.getCurrentURL();
+		System.out.println(Url);
+		Common.scrollIntoView("xpath", "//div[@class='pagebuilder-button-primary']");
+		Common.clickElement("xpath", "//div[@class='pagebuilder-button-primary']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("form"),
+				"validating the page navigates to the Return authorization form",
+				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
+				"successfully navigated to the Return authorization form",
+				"failed to Navigate to the Return authorization form");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the page navigates to the Return authorization form",
+				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
+				"Unable to Navigate to the Return authorization form",
+				Common.getscreenShot("Failed to Navigate to the Return authorization form"));
+		Assert.fail();
+	}
+
 }
 
+public void warrent_Return_Auth_Form(String Dataset) {
+	// TODO Auto-generated method stub
+	String phonenumber = data.get(Dataset).get("Phone");
+	String zipcode = data.get(Dataset).get("postcode");
+	String Address = data.get(Dataset).get("Street");
+	String City = data.get(Dataset).get("City");
+	String State = data.get(Dataset).get("Region");
+	System.out.println(State);
+	String Packname = data.get(Dataset).get("PackageName");
+	String Color = data.get(Dataset).get("Color");
+	String Description = data.get(Dataset).get("description");
+	String issue = data.get(Dataset).get("issue");
+	String POnumber = data.get(Dataset).get("Ponumber");
+	String DOP = data.get(Dataset).get("Descriptions");
+	String Frame = data.get(Dataset).get("frame1");
+	String YOP = data.get(Dataset).get("Yopurchase");
+	String Country = "United States";
+	System.out.println(DOP);
+	System.out.println(YOP);
+	System.out.println(Frame);
 
+	try {
+		Common.findElement("xpath", "//select[@id='country_id']");
+		Common.clickElement("xpath", "//select[@id='country_id']");
+		Thread.sleep(4000);
+		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, Country);
+		Sync.waitElementPresent(30, "xpath", "//input[@id='telephone']");
+		Common.scrollIntoView("xpath", "//input[@id='telephone']");
+		Common.textBoxInput("xpath", "//input[@id='telephone']", phonenumber);
+		Common.textBoxInput("xpath", "//input[@id='address']", Address);
+
+		Common.textBoxInput("xpath", "//input[@id='city']", City);
+		Thread.sleep(4000);
+		Common.findElement("xpath", "//select[@name='region']");
+		Common.clickElement("xpath", "//select[@name='region']");
+		Thread.sleep(4000);
+		Common.dropdown("xpath", "//select[@name='region']", SelectBy.TEXT, State);
+		Common.textBoxInput("xpath", "//input[@id='postcode']", zipcode);
+
+		Common.findElement("xpath", "//select[@id='frame_size']");
+		Common.clickElement("xpath", "//select[@id='frame_size']");
+		Thread.sleep(4000);
+		Common.dropdown("xpath", "//select[@id='frame_size']", SelectBy.TEXT, Frame);
+		Common.textBoxInput("xpath", "//input[@id='approx_year_purchase']", YOP);
+
+		Sync.waitElementPresent(20, "xpath", "//input[@id='sentimental-unrepaired']");
+		Common.clickElement("xpath", "//input[@id='sentimental-unrepaired']");
+		Common.textBoxInput("xpath", "//textarea[@id='description_part']", DOP);
+
+		Common.textBoxInput("xpath", "//input[@id='pack_and_volume']", Packname);
+		Common.textBoxInput("xpath", "//input[@id='color_and_frame']", Color);
+		Common.textBoxInput("xpath", "//textarea[@id='description']", Description);
+
+		Common.textBoxInput("xpath", "//input[@id='pr_po_number']", POnumber);
+		Common.textBoxInput("xpath", "//textarea[@id='location_function_part']", issue);
+
+		Thread.sleep(4000);
+
+		String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\Guarantee.png");
+		Sync.waitElementPresent(40, "xpath", "//input[@id='photoOne']");
+		Common.findElement("xpath", "//input[@id='photoOne']").sendKeys(path);
+
+		Common.clickElement("xpath", "//input[@id='gdpr_confirm']");
+		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
+
+		Thread.sleep(4000);
+		String Successmsg = Common.findElement("xpath", "//div[@class='return-authorization-success']//h2").getText();
+		System.out.println(Successmsg);
+		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Parts Request."),
+				"validating the waranty and return Success message",
+				"After clicking Submit button waranty and return Success message should be display",
+				"successfully  message has been dispalyed ", "failed to display the Successfull message");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the waranty and return Success message ",
+				"After clicking Submit button waranty and return Success message should be display",
+				"Unable to display the Success message ",
+				Common.getscreenShot("Failed to display the Successful message"));
+		Assert.fail();
+	}
+}
+
+}
 
 
 
