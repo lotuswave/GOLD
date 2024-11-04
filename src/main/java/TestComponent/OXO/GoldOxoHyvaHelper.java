@@ -9055,16 +9055,16 @@ public void header_1_Percent_Planet() {
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(40, "xpath", "//span[contains(@class,'title-lg')]");
-			String Ordernumber = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			String Ordernumber = Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText();
 			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
 			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
 			String orderdate = Common.findElement("xpath", "//div[@class='mt-1']//span").getText();
-			String shippingAdd = Common.findElement("xpath", "//div[contains(@class,'shipping-address')]").getText();
-			String billingAdd = Common.findElement("xpath", "//div[contains(@class,'billing-address')]").getText();
-			String shippingmethod = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String ordersummary = Common.findElement("xpath", "//div[contains(@class,'shipping-method')]").getText();
-			String itemsordered = Common.findElement("xpath", "//div[@class='product-name-wrapper']").getText();
+			String shippingAdd = Common.findElement("xpath", "//p[contains(text(),'Shipping Address')]").getText();
+			String billingAdd = Common.findElement("xpath", "//p[contains(text(),'Billing Address')]").getText();
+			String shippingmethod = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
+			String ordersummary = Common.findElement("xpath", "//p[contains(text(),'Shipping Method')]").getText();
+			String itemsordered = Common.findElement("xpath", "//span[@class='text-sm']").getText();
 			System.out.println(itemsordered);
 
 			Common.assertionCheckwithReport(
