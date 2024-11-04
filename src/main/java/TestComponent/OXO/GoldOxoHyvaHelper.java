@@ -3836,6 +3836,29 @@ catch(Exception | Error e)
 
 		}
 	}
+	public void click_regtrackorder() {
+		try {
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//a[contains(text(),'My Orders')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
+					"Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"successfully Navigated to the orders and return page",
+					"Failed to Navigate to the orders and return page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verifying the track order page navigation ",
+					"after clicking on the track order it should navigate to the orders and return page",
+					"Unable to  Navigated to the orders and return page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the orders and return page"));
+			Assert.fail();
+
+		}
+	}
 
 	public void guestuserorderStatus(String dataSet) {
 		// TODO Auto-generated method stub
@@ -3885,7 +3908,7 @@ catch(Exception | Error e)
 
 		click_singinButton();
 		Usersignin("AccountDetails");
-		click_trackorder();
+		click_regtrackorder();
 
 		try {
 			Sync.waitPageLoad();
@@ -9031,7 +9054,7 @@ public void header_1_Percent_Planet() {
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(40, "xpath", "//span[@class='title-lg']");
+			Sync.waitElementPresent(40, "xpath", "//span[contains(@class,'title-lg')]");
 			String Ordernumber = Common.findElement("xpath", "//span[@class='title-lg']").getText();
 			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
