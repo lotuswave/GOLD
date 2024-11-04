@@ -6239,7 +6239,7 @@ catch(Exception | Error e)
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath", "//a[text()='Find a Store']");
 
-			String find = Common.findElement("xpath", "//h1[@class='u-container']").getText();
+			String find = Common.findElement("xpath", "//span[contains(@class,'base')]").getText();
 			System.out.println(find);
 
 			Common.assertionCheckwithReport(find.equals("Find a Store"), "validating Find a Store page",
@@ -6254,24 +6254,25 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 
+
 	}
 
 	public void click_Retailer() {
 		// TODO Auto-generated method stub
 
-		String store = "DICK'S Sporting Goods  - San Antonio | Curbside Contactless Pickup Available - 5.3 mi";
+		String store = "Whole Earth Provision Co.";
 
 		try {
 
 			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
-
+			Common.clickElement("xpath", "//a[contains(@id,'dealer-navigation-retailers')]");
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-			String id = Common.findElement("xpath", "//div[contains(@aria-label,\"" + store + " \")]")
-					.getAttribute("id");
+//			String id = Common.findElement("xpath", "//div[contains(@aria-label,'" + store + "')]")
+//					.getAttribute("id");
 //            Common.clickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting ")]");
-
-			Common.findElement("xpath", "//div[@id='" + id + "']").click();
+			Common.clickElement("xpath", "//div[contains(@class,'conv-section-main-info')]//h3[contains(text(),'Whole Earth Provision Co.')]");
+//			Common.findElement("xpath", "//div[@id='" + id + "']").click();
 			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
 			int storeSize = Common.findElements("xpath", "//img[@class='store-info-logo']").size();
 			System.out.println(storeSize);
@@ -6286,7 +6287,6 @@ catch(Exception | Error e)
 					Common.getscreenShotPathforReport("faield to get back to Retailers page"));
 			Assert.fail();
 		}
-
 	}
 
 	public void Validate_store_sidebar() {
@@ -6392,7 +6392,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(Retailerlogo > 0 && locations > 0 && Hours > 0 || Links > 0,
 					"To validate the store info content displayed ", "store info content should be displayed",
 					"store info content is displayed", "Failed to display the store info content ");
-			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText();
+			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText().toUpperCase();
 			System.out.println(Storename);
 			Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
@@ -6421,7 +6421,6 @@ catch(Exception | Error e)
 					Common.getscreenShotPathforReport("faield to display retailer store locations"));
 			Assert.fail();
 		}
-
 	}
 
 	public void verifingRetailerHours() {
