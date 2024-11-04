@@ -10068,7 +10068,7 @@ public void Gift_card(String dataSet) {
 			Thread.sleep(4000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
-			Common.clickElement("xpath", "//button[@class='action primary checkout']");
+			Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 			//Common.refreshpage();
 		Thread.sleep(3000);
    }
@@ -10084,27 +10084,28 @@ public void Gift_card(String dataSet) {
 
 		else {
 			try {
-				String sucessMessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']").trim();
+				Thread.sleep(10000);
+				String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
 
 //				Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", "//h1[@class='page-title-wrapper']").size();
+				int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//p//span").size() > 0) {
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//span");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
 					Thread.sleep(4000);
-					order = Common.getText("xpath", "//div[@class='checkout-success']//p//strong");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success']//span").size() > 0) {
-					Common.getText("xpath", "//div[@class='checkout-success']//span");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 
 				}
@@ -10120,6 +10121,7 @@ public void Gift_card(String dataSet) {
 		}
 		return order;
 	}
+
 
 	public void Other_Amount(String Dataset) {
 		// TODO Auto-generated method stub
@@ -12077,9 +12079,11 @@ catch(Exception | Error e)
 			System.out.println(ordertotalvalue);
 			Sync.waitElementPresent("xpath", "//button[@title='Show items']//div[contains(text(),'Apply Store Credit')]");
 			Common.clickElement("xpath", "//button[@title='Show items']//div[contains(text(),'Apply Store Credit')]");
-			Thread.sleep(4000);
-			String Balance=Common.findElement("xpath", "//div[contains(@class,'customer-balance')]//span").getText().replace("credit available", "").replace(symbol, "").trim();
-			
+			Thread.sleep(5000);
+			String Balance=Common.findElement("xpath", "//div[contains(@class,'customer-balance')]//span").getText().replace("credit available","").trim();
+			Balance.replace(symbol, "");
+			System.out.println(Balance);
+			System.out.println(Price);
 				if(Balance.equals(Price))
 				{
 					String total=Common.findElement("xpath", "(//div[@class='item grand_total']//span)[4]").getText().trim();
@@ -12103,7 +12107,53 @@ catch(Exception | Error e)
 				{
 					AssertJUnit.fail();
 				}
-			
+//			}
+//			else
+//			{
+//				Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-checkout__back')]");
+//				Common.clickElement("xpath", "//span[contains(@class,'icon-checkout__back')]");
+//				Sync.waitPageLoad();
+//				Thread.sleep(3000);
+//				Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/") ,"validating the shopping cart page",
+//						"After clciking on back to cart it should navigate to shopping cart page", "Sucessfully Navigated to the shopping cart page",
+//						"failed to Navigate to the shopping cart page");
+//				Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, "3");
+//				Common.clickElement("xpath", "//button[@name='update_cart_action']");
+//				Sync.waitPageLoad();
+//				Thread.sleep(3000);
+//				System.out.println(ordertotalvalue);
+//				System.out.println(Pricevalue);
+//				if(Pricevalue>ordertotalvalue)
+//				{
+//					minicart_Checkout();
+//				    selectshippingmethod("GroundShipping method");
+//				    clickSubmitbutton_Shippingpage();
+//				    Thread.sleep(4000);
+//				    Sync.waitElementPresent("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+//					Common.clickElement("xpath", "(//span[@class='m-accordion__title-label'])[1]");
+//					String balance=Common.getText("xpath", "//strong[contains(@id,'customerbalance')]");
+//					Common.clickElement("xpath", "//button[@id='use-customer-balance']");
+//					Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'checkout-cart')]");
+//					String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'checkout-cart')]")
+//							.getAttribute("id");
+//					Thread.sleep(4000);
+//					System.out.println(message);
+//					System.out.println(Price);
+//					String storeorder=Common.findElement("xpath", "//tr[@class='totals balance']//span[@class='price']").getText().replace("-", "");
+//					System.out.println(storeorder);
+//					Common.assertionCheckwithReport(message.contains("success") || storeorder.equals(Price) ,"validating the store credit balance applied sucess message",
+//							"After adding the store credit success message should display", "Sucessfully success message has been displayed",
+//							"failed to Display the success message");
+//				    
+//				}
+//				else
+//				{
+//					Assert.fail();
+//				}
+//				
+//				
+//			}
+					
 		}
 		catch(Exception | Error e)
 		{
@@ -12115,82 +12165,6 @@ catch(Exception | Error e)
 		}
 		
 	}
-
-	public void Partial_Payment(String Dataset) {
-		// TODO Auto-generated method stub
-		String symbol=data.get(Dataset).get("Symbol");
-		System.out.println(symbol);
-		try
-		{
-//			Thread.sleep(3000);
-//			Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-//			Common.clickElement("xpath","//span[text()='Add Gift Card']");
-//			Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(Dataset).get("GiftCard_Prod"));
-//			Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary am')]");
-			Thread.sleep(4000);
-			String status=Common.getText("xpath", "//td[@class='col balance']//span").replace(symbol, "");
-			String giftorder=Common.getText("xpath", "//tr[@class='totals']//td[@class='amount']//span[@class='price']").replace(symbol, "").replace("-", "");
-		/*	Common.assertionCheckwithReport(status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
-					"After adding the gift card code it should be applied in the order summary", "Sucessfully gift car code has been applied in order summary",
-					"failed to apply the gift card code in the order summary");*/
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']").replace(symbol, "");
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			if(ordertotalvalue>0)
-			{
-				updatePaymentAndSubmitOrder("CCVisacard");
-			}
-			else
-			{
-				Sync.waitElementPresent("xpath", "//span[contains(@class,'icon-checkout__back')]");
-				Common.clickElement("xpath", "//span[contains(@class,'icon-checkout__back')]");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout/cart/") ,"validating the shopping cart page",
-						"After clciking on back to cart it should navigate to shopping cart page", "Sucessfully Navigated to the shopping cart page",
-						"failed to Navigate to the shopping cart page");
-				Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, "3");
-				Common.clickElement("xpath", "//button[@name='update_cart_action']");
-				Sync.waitPageLoad();
-				Thread.sleep(6000);
-				System.out.println(ordertotalvalue);
-				if(ordertotalvalue>10)
-				{
-					minicart_Checkout();
-				    selectshippingmethod("GroundShipping method");
-				    clickSubmitbutton_Shippingpage();
-				    Thread.sleep(4000);
-					Common.assertionCheckwithReport( status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
-							"After adding the gift card code it should be applied in the order summary", "Sucessfully gift car code has been applied in order summary",
-							"failed to apply the gift card code in the order summary");
-					updatePaymentAndSubmitOrder("CCVisacard");
-				    
-				}
-				else
-				{
-					Common.dropdown("xpath", "//select[@class='a-form-elem a-select-menu']", Common.SelectBy.VALUE, "8");
-					Common.clickElement("xpath", "//button[@name='update_cart_action']");
-					Sync.waitPageLoad();
-					Thread.sleep(6000);
-					minicart_Checkout();
-				    selectshippingmethod("GroundShipping method");
-				    clickSubmitbutton_Shippingpage();
-				    Thread.sleep(4000);
-					Common.assertionCheckwithReport( status.equals(giftorder) ,"validating the gift card amount applied in the order summary",
-							"After adding the gift card code it should be applied in the order summary", "Sucessfully gift car code has been applied in order summary",
-							"failed to apply the gift card code in the order summary");
-					updatePaymentAndSubmitOrder("CCVisacard");
-					
-				}
-				
-			}
-		}
-		catch(Exception | Error e)
-		{
-			e.printStackTrace();
-			AssertJUnit.fail();
-		}
-	}
-	
 	public String store_Credit(String Dataset) {
 		// TODO Auto-generated method stub
 		String balance= "";
