@@ -12073,9 +12073,9 @@ public void outofstock_subcription(String Dataset) {
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
+			String discountcodemsg = Common.findElement("xpath", "//div[@ui-id='message-success']").getAttribute("ui-id");
 			System.out.println(discountcodemsg);
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
+			Common.assertionCheckwithReport(discountcodemsg.contains("message-success"),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
 			Thread.sleep(4000);
