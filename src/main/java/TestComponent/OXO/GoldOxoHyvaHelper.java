@@ -12054,7 +12054,7 @@ public void outofstock_subcription(String Dataset) {
 			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
 					"").trim();
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'flex items')]")
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'value')]")
 					.replace("$", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
