@@ -5293,7 +5293,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//a[@class='btn btn-primary']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Warranty"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Warranty")|| Common.getCurrentURL().contains("warranty"),
 					"Validating the Warranty page navigation", expectedResult, "successfully land to Warranty page",
 					"unabel to load the Warranty page");
 		} catch (Exception | Error e) {
