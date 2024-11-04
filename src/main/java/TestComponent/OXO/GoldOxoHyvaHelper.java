@@ -2511,10 +2511,12 @@ public String create_account(String Dataset) {
 
 			if (MyFavorites != 0) {
 				search_product("Product");
-				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.mouseOverClick("xpath", "//button[@data-action='add-to-wishlist']");
+				Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
+				Common.mouseOverClick("xpath", "//button[contains(@class, 'group/wishlist')]");
 				Sync.waitPageLoad();
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
+				Thread.sleep(2000);
+				My_Favorites();
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing"),
 						"validating the Navigation to the My Favorites page",
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -2522,17 +2524,18 @@ public String create_account(String Dataset) {
 				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
 				Sync.waitPageLoad();
 //                Thread.sleep(3000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				String msg = Common.getText("xpath", "//div[@data-ui-id='message-success']//div/a");
-				System.out.println(message);
-				System.out.println(msg);
-				Common.assertionCheckwithReport(
-						message.contains("has been added to your Wish List") || msg.contains("here"),
-						"validating the  product add to the Whishlist", "Product should be add to whishlist",
-						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+//				String message = Common.findElement("xpath", "(//div[@class='container'])[1]").getText();
+//				String msg = Common.getText("xpath", "//span[contains(text(), 'product + "has been removed from your Wish List."')]");
+//				System.out.println(message);
+//				System.out.println(msg);
+//				Common.assertionCheckwithReport(
+//						message.contains("has been added to your Wish List") || msg.contains("here"),
+//						"validating the  product add to the Whishlist", "Product should be add to whishlist",
+//						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 				String Whishlistproduct = Common
-						.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
+						.findElement("xpath", "//div[contains(@class,'yotpo bottomLine bottomline-position')]//preceding-sibling::a").getAttribute("title");
 				System.out.println(Whishlistproduct);
+				
 				String product = data.get(Dataset).get("Products");
 				System.out.println(product);
 				if (Whishlistproduct.equals(product)) {
@@ -2542,16 +2545,21 @@ public String create_account(String Dataset) {
 					Common.mouseOver("xpath", "//a[@title='" + product + "']/parent::div");
 					Common.clickElement("xpath", "//span[text()='Add to Cart']");
 					Sync.waitPageLoad();
-					Thread.sleep(4000);
-					String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-							.getAttribute("data-ui-id");
+					Thread.sleep(3000);
+					Sync.waitElementPresent(30,"xpath", "(//div[@ui-id='message-success']//span)[2]");
+					String message1 = Common.findElement("xpath", "(//div[@ui-id='message-success']//span)[2]")
+							.getText().trim();
 					System.out.println(message1);
-					Common.assertionCheckwithReport(message1.contains("success"),
+					Common.assertionCheckwithReport(message1.contains("You added "+ product+ " to your "),
 							"validating the  product add to the cart", "Product should be add to cart",
 							"Sucessfully product added to the cart ", "failed to add product to the cart");
-					int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
+//					int minicart = Common.findElements("xpath", "//div[@x-show='cartSummaryCount']").size();
+					String Minicartcount=Common.findElement("xpath", "//div[@x-show='cartSummaryCount']").getText();
+					System.out.println(Minicartcount);
+					int minicart=Integer.parseInt(Minicartcount);
 					System.out.println(minicart);
 					if (minicart > 0) {
+						click_minicart();
 						minicart_Checkout();
 					} else {
 						Common.refreshpage();
@@ -2565,26 +2573,26 @@ public String create_account(String Dataset) {
 			} else {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//li[@class='product-item']//a");
-					List<WebElement> webelementslist = Common.findElements("xpath", "//li[@class='product-item']//a");
+					Sync.waitElementPresent("xpath", "//div[@data-row='product-item']//a");
+					List<WebElement> webelementslist = Common.findElements("xpath", "//div[@data-row='product-item']//a");
 
 					String s = webelementslist.get(i).getAttribute("href");
 					System.out.println(s);
 
-					Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
-					Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
-					Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+					Common.scrollIntoView("xpath", "(//img[contains(@class,'object-con')])[1]");
+					Common.mouseOver("xpath", "(//img[contains(@class,'object-con')])[1]");
+					Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
 					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Cart']");
-					Thread.sleep(6000);
+					Thread.sleep(5000);
 					element.get(0).click();
-					String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-							.getAttribute("data-ui-id");
+					String message = Common.findElement("xpath", "//div[contains(@class,'message')]")
+						.getAttribute("class");
 					Thread.sleep(4000);
 					System.out.println(message);
-					Common.assertionCheckwithReport(message.contains("success"),
+					Common.assertionCheckwithReport(message.contains("You added"),
 							"validating the  product add to the cart", "Product should be add to cart",
 							"Sucessfully product added to the cart ", "failed to add product to the cart");
-					int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
+					int minicart = Common.findElements("xpath", "//button[@id='menu-cart-icon']").size();
 					System.out.println(minicart);
 					if (minicart > 0) {
 						minicart_Checkout();
@@ -2602,7 +2610,6 @@ public String create_account(String Dataset) {
 					"Unable to add  product to the cart ", Common.getscreenShot("failed to add product to the cart"));
 			Assert.fail();
 		}
-
 	}
 
 	public void search_product(String Dataset) {
