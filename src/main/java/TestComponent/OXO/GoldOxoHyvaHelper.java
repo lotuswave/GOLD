@@ -4988,22 +4988,24 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.END);
-			List<WebElement> country = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+
+			List<WebElement> country = Common.findElements("xpath", "(//div[@class='country-list__item'])[1]");
 			System.out.println(country.size());
 			for (int i = 0; i < country.size(); i++) {
 
-				List<WebElement> select = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
+				List<WebElement> select = Common.findElements("xpath", "(//div[@class='country-list__item'])[1]");
 				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent(50, "xpath", "//img[contains(@src,'country-selector')]");
-				Common.scrollIntoView("xpath", "//img[contains(@src,'country-selector')]");
-				Common.clickElement("xpath", "//img[contains(@src,'country-selector')]");
+				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+				Common.scrollIntoView("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+				Common.clickElement("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
 				Thread.sleep(3000);
 				Country = select.get(i).getText();
+			      System.out.println(Country);
 				select.get(i).click();
 				if (Country.contains("United States")) {
 
-					Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 							"click on the country should navigate to the  " + Country + "Page",
 							"successfully page navigating to " + Country + "PAGE",
