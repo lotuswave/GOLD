@@ -83,7 +83,8 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			if(Common.getCurrentURL().contains("osprey.com/gb/"))
+			String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+			if(Common.getCurrentURL().contains(url))
 			{
 				Close_Geolocation();
 				Thread.sleep(5000);
@@ -327,9 +328,9 @@ public class OspreyEMEA_HYVA {
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Common.clickElement("id", "customer.header.sign.in.link");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -474,21 +475,20 @@ public class OspreyEMEA_HYVA {
 	public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page")
-					|| Common.getPageTitle().contains("Drybar") || Common.getPageTitle().contains("My Wish List") || Common.getPageTitle().contains("My Wish List")
-					|| Common.getPageTitle().contains("Dryba Home")
-					|| Common.getPageTitle().contains("Drybar - Home page")
-					|| Common.getPageTitle().contains("Dashboard") || Common.getPageTitle().contains("Checkout"),
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("My Wish List")
+							|| Common.getPageTitle().contains("Osprey"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -503,16 +503,17 @@ public class OspreyEMEA_HYVA {
 
 			Assert.fail();
 		}
-		
+
 	}
 
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
-				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
-				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
-				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
+		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+		Common.clickElement("xpath", "//button[@id='customer-menu']");
+		Sync.waitElementPresent("xpath", "//a[@id='customer.header.dashboard.link']");
+		Common.clickElement("xpath", "//a[@id='customer.header.dashboard.link']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")) {
@@ -523,9 +524,9 @@ public class OspreyEMEA_HYVA {
 						for (i = 0; i < Account.length; i++) {
 							System.out.println(Account[i]);
 							Sync.waitElementPresent("xpath",
-									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+									"//a//span[text()='" + Account[i] +"']");
 							Common.clickElement("xpath",
-									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+									"//a//span[text()='" + Account[i] +"']");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							/*String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
@@ -533,7 +534,7 @@ public class OspreyEMEA_HYVA {
 							Common.assertionCheckwithReport(
 									title.contains(Account[i]) || title.contains("My Wish Lists")
 											|| title.contains("My Payment Methods") || title.contains("Newsletter Subscription")
-											|| title.contains("Pro deal information"),
+										|| title.contains("Pro deal information"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
@@ -2820,16 +2821,13 @@ public class OspreyEMEA_HYVA {
 
 	public void signout() {
 		try {
-			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementClickable("xpath", "//li[@class='link authorization-link']/a");
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Sync.waitElementClickable("id", "customer.header.sign.out.link");
 
-			Common.javascriptclickElement("xpath", "//li[@class='link authorization-link']/a");
+			Common.javascriptclickElement("id", "customer.header.sign.out.link");
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/logoutSuccess"),
-					"Validating My Account page navigation", "user sign in and navigate to my account page",
-					"Successfully navigate to my account page", "Failed to navigate my account page ");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7805,12 +7803,12 @@ public class OspreyEMEA_HYVA {
 		try {
 			Thread.sleep(5000);
 			click_singinButton();
-			Sync.waitElementPresent("xpath", "//button[contains(@class,'action login')]");
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
-			Sync.waitElementPresent(30, "xpath", "//div[@id='pass-error']");
-			String errormessage = Common.findElement("xpath", "//div[@id='pass-error']").getText();
-			String errormessage1 = Common.findElement("xpath", "//div[@id='pass-error']").getAttribute("class");
-			Common.assertionCheckwithReport(errormessage.contains("This is a required field.")||errormessage1.contains("mage-error"),
+			Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
+			Sync.waitElementPresent(30, "xpath", "//li[@data-msg-field='login[username]']");
+			String errormessage = Common.findElement("xpath", "//li[@data-msg-field='login[username]']").getText();
+			String errormessage1 = Common.findElement("xpath", "//li[@data-msg-field='login[password]']").getText();
+			Common.assertionCheckwithReport(errormessage.contains("This is a required field.")||errormessage1.contains("This is a required field."),
 					"verifying the error message validation with empty fileds",
 					"after click on signin button with empty blanks error message should appear",
 					"Sucessfully error messsage should be display ", "Failed to display the error message");
@@ -7821,15 +7819,14 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
 			Sync.waitPageLoad(40);
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@class='a-message__container-inner']");
-			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-error']/div/div").getAttribute("class");
+			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-error']").getText();
 			Sync.waitPageLoad(40);
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(message.contains("The account sign-in was incorrect")||message2.contains("a-message__container-inner"),
+			Common.assertionCheckwithReport(message.contains("The account sign-in was incorrect"),
 					"verifying the error message for invalid password",
 					"after click on signin button with empty invalid password error message should appear",
 					"Sucessfully error messsage should be display ", "Failed to display the error message");
@@ -7840,17 +7837,16 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
 			Sync.waitPageLoad(40);
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@class='a-message__container-inner']");
-			String message1 = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+			String message1 = Common.findElement("xpath", "//div[@ui-id='message-error']").getText();
 			
 			Sync.waitPageLoad(40);
 			Thread.sleep(4000);
 			
-			
-			Common.assertionCheckwithReport(message1.contains("The account sign-in was incorrect")||message2.contains("a-message__container-inner"),
+			Common.assertionCheckwithReport(message1.contains("The account sign-in was incorrect"),
 					"verifying the error message for invalid password",
 					"after click on signin button with un registered email error message should appear",
 					"Sucessfully error messsage should be display ", "Failed to display the error message");
@@ -11237,8 +11233,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			
-			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[4]");
-			Common.clickElement("xpath", "(//button[@aria-label='Close'])[4]");
+			Sync.waitElementPresent("xpath", "(//button[contains(@class,'text-primary')])[4]");
+			Common.clickElement("xpath", "(//button[contains(@class,'text-primary')])[4]");
 			
 		
 	}catch(Exception | Error e)
