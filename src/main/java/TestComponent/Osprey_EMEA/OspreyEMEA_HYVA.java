@@ -2656,8 +2656,8 @@ public class OspreyEMEA_HYVA {
 				}
 				else
 				{
-					Common.dropdown("xpath", "//select[@name='region']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Thread.sleep(4000);
+					Common.dropdown("xpath", "//select[@id='shipping-region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 					
 				}
 				Thread.sleep(3000);
@@ -3757,7 +3757,7 @@ public class OspreyEMEA_HYVA {
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
-					Common.switchFrames("xpath", "(//iframe[@role='presentation'])[2]");
+					Common.switchFrames("xpath", "(//iframe[@role='presentation'])[1]");
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -3823,7 +3823,7 @@ public class OspreyEMEA_HYVA {
 				}
 				else
 				{
-				Common.switchFrames("xpath", "//iframe[@role='presentation']");
+				Common.switchFrames("xpath", "(//iframe[@role='presentation'])[2]");
 				Thread.sleep(9000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
