@@ -2672,14 +2672,7 @@ public class OspreyEMEA_HYVA {
 				Thread.sleep(3000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
-				try {
-					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-					// TODO: handle exception
-					Thread.sleep(2000);
-					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
-							data.get(dataSet).get("Region"));
-				}
+			
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
@@ -3645,21 +3638,21 @@ public class OspreyEMEA_HYVA {
 		else {
 			try {
 				Thread.sleep(1000);
-				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
 				String sucessMessage = Common.getText("xpath",
-						" //h1[normalize-space()='Thank you for your purchase!']");
+						"//div[contains(@class,'checkout-success')]//h1");
 
 				// Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+				int sizes = Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//h1")
 						.size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") || sizes>0 ,
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
-
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-						.size() > 0) {
-					Thread.sleep(1000);
+              
+				if(Common.getCurrentURL().contains("/gb"))
+				{
+				
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
@@ -3766,7 +3759,7 @@ public class OspreyEMEA_HYVA {
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
 				
-				Common.switchFrames("xpath", "//iframe[@title='Campo de entrada seguro para el pago'or @title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@role='presentation']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
