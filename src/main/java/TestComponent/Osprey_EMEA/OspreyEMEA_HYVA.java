@@ -2034,27 +2034,27 @@ public class OspreyEMEA_HYVA {
 //	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //			"Product should be add to cart", "Sucessfully product added to the cart ",
 //			"failed to add product to the cart");
-	String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-	System.out.println(price);
-	Thread.sleep(5000);
-	price = price.trim();
-	price = price.substring(0,price.length() - 2);
-    System.out.println(price);  
-	int amount=Integer.parseInt(price);
-	System.out.println(amount);
-	
-	if(amount>199 && country.contains("US | EN"))
-	{
-//		Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-///				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
-		Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-	}
-	else
-	{
-		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-	}
+//	String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+//	System.out.println(price);
+//	Thread.sleep(5000);
+//	price = price.trim();
+//	price = price.substring(0,price.length() - 2);
+//    System.out.println(price);  
+//	int amount=Integer.parseInt(price);
+//	System.out.println(amount);
+//	
+//	if(amount>199 && country.contains("US | EN"))
+//	{
+////		Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+/////				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+//		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
+//		Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+//	}
+//	else
+//	{
+//		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
+//		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
+//	}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -3757,10 +3757,74 @@ public class OspreyEMEA_HYVA {
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.switchFrames("xpath", "(//iframe[@role='presentation'])[2]");
+					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+					Thread.sleep(4000);
+					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+					System.out.println(Number);
+					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+					Thread.sleep(2000);
+					
+					
+
+					int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+					System.out.println(zipcode);
+
+					if (zipcode > 0) {
+
+						Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+						Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+					}
+					int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
+					
+					if(link>0) {
+						Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
+					}
+					Common.actionsKeyPress(Keys.ARROW_DOWN);
+					Common.switchToDefault();
+					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+						Thread.sleep(8000);
+						if (Common.getCurrentURL().contains("/checkout")) {
+							Sync.waitPageLoad();
+							Thread.sleep(4000);
+							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
+							String sucessmessage = Common.getText("xpath",
+									"//div[contains(@class,'checkout-success')]//h1");
+							System.out.println(sucessmessage);
+
+						} else if (Common.getCurrentURL().contains("/success/")) {
+							String sucessmessage = Common.getText("xpath",
+									" //h1[normalize-space()='Thank you for your purchase!']");
+							System.out.println(sucessmessage);
+						} else {
+							AssertJUnit.fail();
+						}
+
+					} else {
+						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+						String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
+								"");
+						System.out.println(Cardnumber);
+						Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+								"To validate the card details entered in the production environment",
+								"user should able to see the card details in the production environment",
+								"User Successfully able to see the card details enterd in the production environment ",
+								"User Failed to see the card deails in prod environemnt");
+						Common.switchToDefault();
+
+					}
 				}
-				
+				else
+				{
 				Common.switchFrames("xpath", "//iframe[@role='presentation']");
-				Thread.sleep(5000);
+				Thread.sleep(9000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -3824,6 +3888,7 @@ public class OspreyEMEA_HYVA {
 
 				}
 
+			}
 			}
 
 		}
