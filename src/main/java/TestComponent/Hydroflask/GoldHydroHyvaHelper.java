@@ -5717,13 +5717,15 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		try {
-			Sync.waitElementPresent("xpath", "//a[text()='Write A Review']");
-			Common.clickElement("xpath", "//a[text()='Write A Review']");
-			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//span[text()='Write a review']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//a[text()='Write a review']");
+			Common.clickElement("xpath", "//a[text()='Write a review']");
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Thread.sleep(3000);
-			String form = Common.findElement("xpath", "//form[@aria-label='Write A Review Form']").getAttribute("class");
+			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			Thread.sleep(4000);
+			String form = Common.findElement("xpath", "//form[@aria-label='Write A Review Form']//div[contains(@class, 'write-review-wrapper')]").getAttribute("class");
 			System.out.println(form);
 			Common.assertionCheckwithReport(form.contains("visible"), "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
@@ -5784,6 +5786,7 @@ catch(Exception | Error e)
 			
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
 			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+			Thread.sleep(5000);
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
