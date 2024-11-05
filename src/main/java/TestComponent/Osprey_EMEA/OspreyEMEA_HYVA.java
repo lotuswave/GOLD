@@ -355,18 +355,18 @@ public class OspreyEMEA_HYVA {
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot')]");
-			String forgotpassword = Common.findElement("xpath", "//h1[text()='Forgot Your Password?']").getText();
+			Common.clickElement("xpath", "//a[contains(@class, 'link link-primary ')]");
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(@class,'text-3xl md:text')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.clickElement("xpath", "//span[text()='Reset My Password']");
+			Common.clickElement("xpath", "//button[@type='submit']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath", "//div[contains(@data-ui-id,'message')]//div");
-			String message = Common.findElement("xpath", "//div[contains(@data-ui-id,'message')]//div").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message')]");
+			String message = Common.findElement("xpath", "//div[contains(@ui-id,'message')]").getText();
 			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
@@ -384,6 +384,7 @@ public class OspreyEMEA_HYVA {
 		}
 
 	}
+
 
 	public void Empty_Email() {
 		// TODO Auto-generated method stub
