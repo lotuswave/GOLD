@@ -2019,9 +2019,9 @@ public class OspreyEMEA_HYVA {
 			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 			System.out.println(country);
 			Thread.sleep(4000);
-
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+//
+//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
@@ -2066,10 +2066,10 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.findElement("xpath", "//select[@class='a-select-menu']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, Quantity);
+			Common.findElement("xpath", "//div//select[@name='qty']");
+			Common.dropdown("xpath", "//div//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
-			String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
+			String value = Common.findElement("xpath", "//div//select[@name='qty']").getAttribute("value");
 			Common.assertionCheckwithReport(value.equals(Quantity),
 					"validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page",
@@ -2081,7 +2081,7 @@ public class OspreyEMEA_HYVA {
 			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity",
 					Common.getscreenShot("failed to update the product quantity"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -2565,7 +2565,7 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(4000);
-			click_minicart();
+//			click_minicart();
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
@@ -2649,9 +2649,7 @@ public class OspreyEMEA_HYVA {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
-				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
-						data.get(dataSet).get("Region"));
+				Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 //				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
 //				String Shippingstate = Common
@@ -2665,8 +2663,7 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
-							data.get(dataSet).get("Region"));
+					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(2000);
@@ -2732,8 +2729,8 @@ public class OspreyEMEA_HYVA {
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("xpath", "//select[@id='shipping-region']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					
+					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
@@ -2781,8 +2778,8 @@ public class OspreyEMEA_HYVA {
 			Thread.sleep(15000);
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			if (size > 0) {
-				Sync.waitElementPresent(30, "xpath", "//div[contains(@id,'shipping-method-option-amstrates')]//div[2]//span[text()='"+ method +"']");
-				Common.clickElement("xpath", "//div[contains(@id,'shipping-method-option-amstrates')]//div[2]//span[text()='"+ method +"']");;
+				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
+				Common.clickElement("xpath", "//span[text()='" + method + "']");;
 			} else {
 
 				Common.refreshpage();
