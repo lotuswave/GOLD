@@ -482,7 +482,7 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
+			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
@@ -2650,7 +2650,16 @@ public class OspreyEMEA_HYVA {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+				if(Common.getCurrentURL().contains("/gb"))
+				{
+					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+				}
+				else
+				{
+					Common.dropdown("xpath", "//select[@name='region']",
+							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					
+				}
 				Thread.sleep(3000);
 //				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
 //				String Shippingstate = Common
@@ -2735,7 +2744,7 @@ public class OspreyEMEA_HYVA {
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
-					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
+					Common.dropdown("xpath", "//select[@name='region']",
 							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
@@ -7985,7 +7994,7 @@ public class OspreyEMEA_HYVA {
 
 	public void acceptPrivacy() {
 
-		Common.clickElement("xpath", "//button[text()='Accept All']");
+		Common.clickElement("xpath", "//button[@id='truste-consent-button']");
 	}
 
 	public void Edit_Name(String Dataset) {
@@ -11233,8 +11242,9 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			
-			Sync.waitElementPresent("xpath", "(//button[contains(@class,'text-primary')])[4]");
-			Common.clickElement("xpath", "(//button[contains(@class,'text-primary')])[4]");
+
+			Sync.waitElementPresent("xpath", "//div[@x-ref='ip-detection-modal']//button");
+			Common.clickElement("xpath", "//div[@x-ref='ip-detection-modal']//button");
 			
 		
 	}catch(Exception | Error e)

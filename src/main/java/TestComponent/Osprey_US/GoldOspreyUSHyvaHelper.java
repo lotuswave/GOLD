@@ -352,7 +352,8 @@ public void Login_Account(String dataSet) {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary w-full mb-3 os:btn-secondary')]//span");
+
+			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
@@ -8198,7 +8199,7 @@ public void Continue_Shopping() {
 
 	public void acceptPrivacy() {
 
-		Common.clickElement("id", "truste-consent-button");
+		Common.clickElement("xpath", "//button[@id='truste-consent-button']");
 	}
 
 	public void Edit_Name(String Dataset) {
@@ -11272,8 +11273,8 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			
-			Sync.waitElementPresent("xpath", "(//button[@data-role='closeBtn'])[2]");
-			Common.clickElement("xpath", "(//button[@data-role='closeBtn'])[2]");
+			Sync.waitElementPresent("xpath", "//div[@x-ref='ip-detection-modal']//button");
+			Common.clickElement("xpath", "//div[@x-ref='ip-detection-modal']//button");
 			
 		
 	}catch(Exception | Error e)
