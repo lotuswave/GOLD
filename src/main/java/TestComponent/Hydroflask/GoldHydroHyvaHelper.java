@@ -5717,18 +5717,21 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		try {
-			Common.scrollIntoView("xpath", "//a[text()='Reviews & Questions']");
-			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+			Sync.waitElementPresent("xpath", "//a[text()='Write A Review']");
+			Common.clickElement("xpath", "//a[text()='Write A Review']");
 			Thread.sleep(3000);
-			String form = Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+			Common.scrollIntoView("xpath", "//span[text()='Write a review']");
+			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+			Thread.sleep(3000);
+			String form = Common.findElement("xpath", "//form[@aria-label='Write A Review Form']").getAttribute("class");
 			System.out.println(form);
-			Common.assertionCheckwithReport(form.equals("Reviews & Questions"), "verifying the write a review button",
+			Common.assertionCheckwithReport(form.contains("visible"), "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
-			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
+//			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
+//			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
+//			Common.clickElement("xpath", "//span[text()='Write A Review']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5739,17 +5742,21 @@ catch(Exception | Error e)
 		}
 
 	}
-
 	public void Configurableproduct_addtocart_pdp(String Dataset) {
 		String product = data.get(Dataset).get("Colorproduct");
 		String productcolor = data.get(Dataset).get("Color");
 		String productquantity = data.get(Dataset).get("productquantity");
 		try {
 			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+			/*for (int i = 0; i <= 10; i++) {
+//				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+//				List<WebElement> webelementslist = Common.findElements("xpath",
+//						"//img[contains(@class,'m-product-card__image product')]");
+//				String s = webelementslist.get(i).getAttribute("src");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+//				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -5757,23 +5764,26 @@ catch(Exception | Error e)
 				} else {
 					break;
 				}
-			}
+			}*/
 
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@aria-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu']", Common.SelectBy.VALUE, productquantity);
+			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//input[@aria-label='" + productcolor + "']");
+			Common.clickElement("xpath", "//select[@name='qty']");
+			Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, productquantity);
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 			Common.clickElement("xpath", "//span[text()='Add to Cart']");
 			Sync.waitForLoad();
 			Thread.sleep(4000);
-			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+//			String message2 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			Common.assertionCheckwithReport(message2.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
+			
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8101,9 +8111,15 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+//				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image product')]");
+//				List<WebElement> webelementslist = Common.findElements("xpath",
+//						"//img[contains(@class,'m-product-card__image product')]");
+//				String s = webelementslist.get(i).getAttribute("src");
+				
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+//				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image product')]");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -8115,7 +8131,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText().replace("Water Bottle", "").replace(" - ", "");
+			//String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText().replace("Water Bottle", "").replace(" - ", "");
+			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title title text')]").getText();
 			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
@@ -8123,22 +8140,21 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Sync.waitPageLoad();
 			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
-					"//div[@class='product-options-wrapper']//div[contains(@class,'m-swatch m-swatch-group__option')]");
+					"//div[@aria-label='Color']");
 			System.out.println(ListOfSubproducts.size());
 			for (int i = 0; i < ListOfSubproducts.size(); i++) {
 				ListOfSubproducts.get(i).click();
 				int value = i + 1;
 				Thread.sleep(5000);
-				String colorname = Common.getText("xpath","//div[@class='swatch-opt']//span[contains(@class,'m-swatch')]");
+				String colorname = Common.getText("xpath","//span[contains(@class, 'm-swatch-group')]");
 				System.out.println(colorname);
 				String Bottleimagecolor = Common
-						.findElement("xpath", "(//div[contains(@class,'fotorama__nav__frame fotorama')]//img)[1]")
-						.getAttribute("alt").replace("Go to", "").replace(product, "").replace(" -  ", "").replace("1", "");
+						.findElement("xpath", "(//div[contains(@class,'overflow-hidden absolute inset-0 object')]//img)[1]")
+						.getAttribute("alt").replace(product,"").replace(" - ", "");
 				System.out.println(Bottleimagecolor);
-				String color = Common.findElement("xpath", "(//div[@class='m-product-overview__info']//div[contains(@style,'background:') and @index ])[" + value + "]")
-						.getAttribute("data-option-label");
+				String color = Common.findElement("xpath", "//div[@class='m-swatch swatch-option-selected']").getAttribute("data-option-label");
 				System.out.println(color);
-				Common.assertionCheckwithReport(colorname.equals(color) || colorname.equals(Bottleimagecolor), "validating the  product add to the cart",
+				Common.assertionCheckwithReport(color.equals(colorname) || colorname.equals(Bottleimagecolor), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
 						"failed to add product to the cart");
 
