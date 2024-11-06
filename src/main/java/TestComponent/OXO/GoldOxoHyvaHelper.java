@@ -3731,12 +3731,25 @@ catch(Exception | Error e)
 				//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 						{
+					int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
+					if(savedcard==2)
+					{
+						Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+						Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
-				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
-//				
+				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");			
 				Common.switchToDefault();
+					}
+					else
+					{
+						Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+						Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+						Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");						
+						Common.switchToDefault();
+					}
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
@@ -3800,7 +3813,7 @@ catch(Exception | Error e)
 					System.out.println(order);
 				}
 				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-					order = Common.getText("xpath", "//a[@class='order-number']/strong");
+					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//p/a");
 					System.out.println(order);
 				}
 
