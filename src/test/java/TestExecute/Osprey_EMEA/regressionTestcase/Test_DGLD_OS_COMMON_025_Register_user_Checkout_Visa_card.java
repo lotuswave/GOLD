@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card {
 
-	String datafile = "Osprey_EMEA//GoldOspreySweden.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
