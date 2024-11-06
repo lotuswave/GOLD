@@ -5588,8 +5588,11 @@ public void FUll_Payment(String dataSet) {
 					
 					if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
+						Thread.sleep(3000);
+					Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");	
 					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 					Sync.waitPageLoad();
+					Thread.sleep(3000);
 					klarna_Details(dataSet);
 					}
 					else
