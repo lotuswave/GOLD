@@ -2808,7 +2808,7 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		String expectedResult = "click the submit button to navigate to payment page";
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			Common.getPageTitle();
 		}
 
@@ -3542,64 +3542,34 @@ public class OspreyEMEA_HYVA {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+//			Common.findElement("xpath", "//div[@class='w-full relative required']//input[@placeholder='Last name']").clear();
+			Common.textBoxInput("xpath", "//div[contains(@class,'field relative flex items')]//input[@placeholder='Last name']", 
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']", address);
+			Common.clickElement("xpath", "//section[@id='shipping-details']//input[@name='street[0]']");
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='street[0]']", address);
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Thread.sleep(3000);
+			Common.findElement("xpath", "//section[@id='shipping-details']//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			  if(Common.getCurrentURL().contains("gb"))
-              {
-				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-              }
-			  else
-			  {
-				
-				Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                Thread.sleep(3000);
-                String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
-                        .getAttribute("value");
-                System.out.println(Shippingvalue);
-			}
-			Thread.sleep(3000);
+			  
+				  Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
+					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			
-			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-			System.out.println(subtotal);
-			subtotal = subtotal.trim();
-			subtotal = subtotal.substring(0,subtotal.length() - 2);
-		    System.out.println(subtotal);  
-			int amount=Integer.parseInt(subtotal);
-			System.out.println(amount);
-			if(amount>199 && symbol.equals("$"))
-			{
-				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
-			else
-			{
-				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			}
-
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
@@ -3651,17 +3621,11 @@ public class OspreyEMEA_HYVA {
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
               
-				if(Common.getCurrentURL().contains("/gb"))
-				{
 				
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
-					System.out.println(order);
-				} else {
 					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
-				}
-
+			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
@@ -3680,6 +3644,7 @@ public class OspreyEMEA_HYVA {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		String Number = "";
+		String code = data.get(dataSet).get("postcode");
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
@@ -3694,18 +3659,16 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
-			String code =Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("class");
-			
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Common.switchFrames("xpath", "//iframe[@title='Campo de entrada seguro para el pago'or @title='Secure payment input frame']");
 				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Thread.sleep(4000);
+				Thread.sleep(43000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 
@@ -9042,9 +9005,17 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-
-			Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
-			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
+		       if (size1>0) {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   
+		       } 
+		       else {
+					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
+					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
+		       }
+			
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent("id", "discount-code");
 
@@ -9058,75 +9029,39 @@ public class OspreyEMEA_HYVA {
 			int size = Common.findElements("id", "discount-code").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
+			Thread.sleep(3000);
+			Sync.waitElementClickable("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart-validation')]");
+			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
 			System.out.println(discountcodemsg);
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully"),
+			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
-			if(Common.getCurrentURL().contains("che_")||Common.getCurrentURL().contains("se_sv")||Common.getCurrentURL().contains("fr"))
-			{
-				Thread.sleep(4000);
-				Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
-				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
-						"").replace(",", ".");
-				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
-						.replace(Symbol, "").replace(",", ".");
-				Float shippingvalue = Float.parseFloat(shipping);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "").replace(",", ".");
-				Float Taxvalue = Float.parseFloat(Tax);
-				Thread.sleep(4000);
-				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-						.replace(Symbol, "").replace(",", ".");
-				Float Discountvalue = Float.parseFloat(Discount);
-				System.out.println(Discountvalue);
 
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
-						.replace(Symbol, "").replace(",", ".");
-				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Thread.sleep(4000);
-				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				Thread.sleep(4000);
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-						"validating the order summary in the payment page",
-						"Order summary should be display in the payment page and all fields should display",
-						"Successfully Order summary is displayed in the payment page and fields are displayed",
-						"Failed to display the order summary and fileds under order summary");
-			}
-			else 
-			{
-			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//tr[@class='totals sub']//span[@class='price']");
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
-					"");
+			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
+					"").trim();
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[contains(@class,'totals shipping')]//span[@class='price']")
-					.replace(Symbol, "");
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+					.replace("$", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
-			String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-					.replace(Symbol, "");
+			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]")
+					.replace("$", "").trim();
 			Float Discountvalue = Float.parseFloat(Discount);
 			System.out.println(Discountvalue);
 
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
-					.replace(Symbol, "");
+			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
+					.replace("$", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("gb"))
-			{
-			Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
@@ -9136,22 +9071,6 @@ public class OspreyEMEA_HYVA {
 					"Order summary should be display in the payment page and all fields should display",
 					"Successfully Order summary is displayed in the payment page and fields are displayed",
 					"Failed to display the order summary and fileds under order summary");
-			}
-			else
-			{
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				Thread.sleep(4000);
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-						"validating the order summary in the payment page",
-						"Order summary should be display in the payment page and all fields should display",
-						"Successfully Order summary is displayed in the payment page and fields are displayed",
-						"Failed to display the order summary and fileds under order summary");
-			}
-			}
-
 		}
 
 		catch (Exception | Error e) {
@@ -9160,7 +9079,7 @@ public class OspreyEMEA_HYVA {
 					"User failed to proceed with discountcode",
 					Common.getscreenShotPathforReport("discountcodefailed"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
