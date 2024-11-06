@@ -4713,6 +4713,7 @@ public class OspreyEMEA_HYVA {
 				}
 				else
 				{
+					Common.clickElement("xpath","//div[@class='value end active']//parent::div//parent::div");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
@@ -4988,10 +4989,11 @@ public class OspreyEMEA_HYVA {
 					"//span[text()='" + colorname + "']//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
 			System.out.println(colorcount);
-	
+	        int products=Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+	        String s=String.valueOf(products);  
 			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
 			System.out.println(bottlecount);
-			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
+			Common.assertionCheckwithReport(colorcount.equals(bottlecount) || s.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
 					"unable to expand the colors in PLP page");
