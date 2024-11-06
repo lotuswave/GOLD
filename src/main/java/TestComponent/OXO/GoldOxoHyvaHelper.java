@@ -6624,7 +6624,7 @@ catch(Exception | Error e)
 			System.out.println(data.get(dataSet).get("City"));
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			try {
 				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
@@ -6632,10 +6632,12 @@ catch(Exception | Error e)
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
+		
 			Common.textBoxInput("xpath", "//input[@id='billing-postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[normalize-space()='Save']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
