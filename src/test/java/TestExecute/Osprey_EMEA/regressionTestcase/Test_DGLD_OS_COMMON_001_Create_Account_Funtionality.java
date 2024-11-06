@@ -34,7 +34,7 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

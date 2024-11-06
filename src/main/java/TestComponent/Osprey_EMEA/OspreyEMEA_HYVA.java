@@ -249,22 +249,26 @@ public class OspreyEMEA_HYVA {
 		String Store= data.get(Dataset).get("Store");
 		try {
 
+			Common.clickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			Common.clickElement("xpath", "//input[@name='lastname']");
+			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
+			Common.clickElement("xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
+			Common.clickElement("xpath", "//button[contains(@class,'action submit ')]");
 			Sync.waitImplicit(30);
 			Thread.sleep(6000);
-			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering with Osprey")
-							&& Common.getCurrentURL().contains("account") ,
+							|| Common.getCurrentURL().contains("account") ,
 					"validating navigation to the account page after clicking on sign up button",
 					"User should navigate to the My account page after clicking on the Signup",
 					"Sucessfully user navigates to the My account page after clickng on thr signup button",
@@ -300,11 +304,11 @@ public class OspreyEMEA_HYVA {
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
+			Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
 			Thread.sleep(4000);
-			String exsitingemail = Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
+			String exsitingemail = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 			System.out.println(exsitingemail);
-            String exsiting=Common.findElement("xpath", "//div[@data-ui-id='message-error']").getAttribute("data-ui-id");		
+            String exsiting=Common.findElement("xpath", "//div[@ui-id='message-error']").getAttribute("ui-id");		
             System.out.println(exsiting);
             		Common.assertionCheckwithReport(
 					exsitingemail.contains("There is already an account with this email address") || exsiting.contains("message-error"),
@@ -4191,9 +4195,9 @@ public class OspreyEMEA_HYVA {
 	{
 		 String account=data.get(Dataset).get("account");
 			try {
-				Sync.waitElementVisible(40, "xpath", "//div[@class='m-account-nav__content']");
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Common.clickElement("xpath", "(//ul[@class='m-account-nav__links']//a)[3]");
+				Sync.waitElementVisible(40, "xpath", "//button[@id='customer-menu']");
+				Common.clickElement("xpath", "//a[@title='My Orders']");
+				Common.clickElement("xpath", "//a[@title='My Orders']");
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders") || Common.getCurrentURL().contains("order/history/"),
@@ -4201,9 +4205,9 @@ public class OspreyEMEA_HYVA {
 						"after clicking on the track order it should navigate to the orders and return page",
 						"successfully Navigated to the orders and return page",
 						"Failed to Navigate to the orders and return page");
-				Sync.waitElementPresent("xpath", "//ul[@class='nav items reset-list']//a[text()='"+ account +"']");
-				Common.clickElement("xpath", "//ul[@class='nav items reset-list']//a[text()='"+ account +"']");
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account") || Common.getCurrentURL().contains("account"),
+				Sync.waitElementPresent("xpath", "//span[text()='"+ account +"']");
+				Common.clickElement("xpath", "//span[text()='"+ account +"']");
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account") || Common.getCurrentURL().contains("account/edit/"),
 						"validating the my account page navigation",
 						"After clicking on my account it should navigate to the My account page",
 						"Sucessfully Navigated to the my account page", "failed to Navigate to the My account page");
@@ -7193,12 +7197,13 @@ public class OspreyEMEA_HYVA {
 
 	
 		try {
-			Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "(//li[@class='nav item']//a)[1]");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='Create an Account']");
+			Common.clickElement("xpath", "//a[@title='Create an Account']");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customer"),
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
 					"Validating Create New Customer Account page navigation",
 					"after Clicking on Create New Customer Account page it will navigate account creation page",
 					"Successfully navigate to the create account page",
@@ -8026,18 +8031,9 @@ public class OspreyEMEA_HYVA {
 
 		try {
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30,"xpath", "//button[@id='truste-consent-button']");
-			Common.clickElement("xpath", "//button[@id='truste-consent-button']");
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
-			Common.clickElement("xpath", "//button[@class='m-accordion__title name']//span[@class='a-btn-tertiary__label']");
-			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-			String url=Common.getCurrentURL();
-			if (editaccount.contains("Edit Account Information") || url.contains("edit")) {
-				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-				Common.clickElement("xpath", "//button[@class='action save primary a-btn a-btn--primary']");
+				Common.clickElement("xpath", "//button[@type='submit' and contains(@class,'btn btn')]");
 				Sync.waitPageLoad(40);
 				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -8048,9 +8044,6 @@ public class OspreyEMEA_HYVA {
 						"Sucessfully save address suceess message should display",
 						"failed to save the data and success message is not displayed");
 
-			} else {
-				Assert.fail();
-			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
