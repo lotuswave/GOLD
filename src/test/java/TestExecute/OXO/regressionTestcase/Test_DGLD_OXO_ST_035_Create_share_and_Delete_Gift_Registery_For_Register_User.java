@@ -34,7 +34,7 @@ public class Test_DGLD_OXO_ST_035_Create_share_and_Delete_Gift_Registery_For_Reg
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
