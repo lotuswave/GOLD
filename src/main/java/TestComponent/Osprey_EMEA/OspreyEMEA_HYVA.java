@@ -3333,16 +3333,16 @@ public class OspreyEMEA_HYVA {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-top')]//span[contains(text(),'"+ header +"')]");
+					"//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-top')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
+				Common.clickElement("xpath", "//span[text()='"+ header +"']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
@@ -4475,23 +4475,17 @@ public class OspreyEMEA_HYVA {
 	
 	public void view_PLP_page() {
 		try {
-			Thread.sleep(4000);
-			String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
-			System.out.println(title);
-			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'m-breadcrumb u-container')]")
+			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
+			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 					.getAttribute("aria-label");
-			System.out.println(breadcrumbs);
-			String filter = Common.findElement("xpath", "//div[@class='c-filter__block']").getText();
-			System.out.println(filter);
+			String filter = Common.findElement("xpath", "//span[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common
 					.findElement("xpath",
-							"//div[@class='m-list-toolbar__sorter']//div[@class='m-select-menu m-form-elem'] ")
-					.getText();
-			System.out.println(Sort);
-			Thread.sleep(4000);
+							"//span[contains(@class,'pr-2.5 title-panel-sm')]")
+					.getText().trim();
 			Common.assertionCheckwithReport(
-					breadcrumbs.contains("Breadcrumb") || breadcrumbs.contains("Migaja de pan") || breadcrumbs.contains("Fil d'Ariane") && title.contains("c-clp-hero")
-							&& filter.contains("Filter by") || filter.contains("Filtrado por") || filter.contains("Filtres") && Sort.contains("Sort by") || Sort.contains("Ordenar por") || Sort.contains("Trier par"),
+					breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl")
+							&& filter.contains("Filter by") && Sort.contains("Sort by"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -4507,25 +4501,20 @@ public class OspreyEMEA_HYVA {
 	public void filter_By(String Dataset) {
   String category=data.get(Dataset).get("category");
 		try {
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "//a[contains(text(),'" + category + "')]");
-			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//a[contains(text(),'" + category + "')]//span").getText();
+
+			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
+			System.out.println(text);
+			Common.clickElement("xpath", "//span[text()='" + category + "']");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-			String textValueAfterFilter = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']")
-					.getText();
+			String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']//span")
+					.getText().trim();
+			Thread.sleep(4000);
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
 			System.out.println(text);
-			System.out.println(textValue);
-			System.out.println(categoryvalue);
-
 			System.out.println(textValueAfterFilter);
-			System.out.println(noOfItems);
-
-			System.out.println(items);
 
 			Common.assertionCheckwithReport(categoryvalue.equals(items),
 					"To validate the filter in Product Listing Page",
@@ -4989,37 +4978,19 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		String colorname = data.get(Dataset).get("Color");
 		try {
-			if(Common.getCurrentURL().contains("/gb"))
-			{
-				Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
-				Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
-				Thread.sleep(3000);
-				String expand = Common.findElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']").getAttribute("aria-expanded");
-				Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
-						"When we click on the color it should be expand",
-						"Successfully the color has been expand when we click on the colors ",
-						"unable to expand the colors in PLP page");
-			}
-			else
-			{
-			Sync.waitElementPresent("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
-			Common.clickElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']");
-			Thread.sleep(3000);
-			String expand = Common.findElement("xpath", "//button[@aria-labelledby='facet_header_osprey_common_color']").getAttribute("aria-expanded");
-			Common.assertionCheckwithReport(expand.contains("true"), "verifying the color bar has been expand",
-					"When we click on the color it should be expand",
-					"Successfully the color has been expand when we click on the colors ",
-					"unable to expand the colors in PLP page");
-			}
+
 			Sync.waitElementPresent("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
+					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//span[@data-color='" + colorname + "']");
-			Thread.sleep(3000);
+					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//label[@class='ais-RefinementList-label checked']//span[@class='ais-RefinementList-count']")
-					.getText();
-			String bottlecount = Common.findElement("xpath", "//span[@class='a-toolbar-info__number']").getText();
+					"//span[text()='" + colorname + "']//following-sibling::span")
+					.getText().replace("(", "").replace(")", "");
+			System.out.println(colorcount);
+	
+			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+			System.out.println(bottlecount);
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -5032,7 +5003,6 @@ public class OspreyEMEA_HYVA {
 					Common.getscreenShotPathforReport("Failed to expand the colors in PLP page"));
 			Assert.fail();
 		}
-
 	}
 
 	public void Paymentcreditcard_WithInvalidData(String dataSet) throws Exception {
