@@ -5992,7 +5992,7 @@ catch(Exception | Error e)
 					.getText();
 			System.out.println(forgotpassword);
 			Sync.waitPageLoad();
-			Common.textBoxInput("xpath", "//input[@id='email_address']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@id='email_address']", data.get(DateSet).get("Email"));
 			Common.clickElement("xpath", "//button[normalize-space()='Reset My Password']");
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message-success')]//span");
 			String message = Common.findElement("xpath", "//div[contains(@ui-id,'message-success')]//span").getText();
