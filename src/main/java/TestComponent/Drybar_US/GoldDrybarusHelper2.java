@@ -1378,6 +1378,12 @@ public class GoldDrybarusHelper2 {
 //				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 //				Common.clickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
@@ -1432,6 +1438,12 @@ public class GoldDrybarusHelper2 {
 
 			} else {
 				Thread.sleep(4000);
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
@@ -5049,7 +5061,7 @@ public void FUll_Payment(String dataSet) {
 			Common.clickElement("xpath", "//a[@title='Create an Account']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create New Customer Account") || Common.getPageTitle().equals("Create New Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account") || Common.getPageTitle().equals("Create an Account"),
 					"Validating Create New Customer Account page navigation",
 					"after Clicking on Create New Customer Account page it will navigate account creation page",
 					"Successfully navigate to the create account page",
@@ -8479,6 +8491,13 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
+				Thread.sleep(3000);
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 			Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 			Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");

@@ -31,6 +31,7 @@ public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_Non
 			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.gitCard("GiftCode");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
