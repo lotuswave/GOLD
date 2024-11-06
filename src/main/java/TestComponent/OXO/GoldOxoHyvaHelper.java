@@ -156,8 +156,10 @@ public class GoldOxoHyvaHelper {
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 //			Common.clickElement("xpath", "//span[text()='Shop All']");
 			Common.clickElement("xpath", "//span[text()='Feeding & Drinking']");
+			Thread.sleep(4000);
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			System.out.println(sizebotteles);
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
