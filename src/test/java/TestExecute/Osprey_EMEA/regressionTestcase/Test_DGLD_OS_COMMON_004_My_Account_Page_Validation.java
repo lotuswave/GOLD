@@ -12,8 +12,8 @@ import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-//	String datafile="Osprey_EMEA//GoldOspreySE_SV.xlsx";
+//	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile="Osprey_EMEA//GoldOspreySE_SV.xlsx";
 //	String datafile="Osprey_EMEA//GoldOspreyES.xlsx";
 //	String datafile="Osprey_EMEA//GoldOspreyemeaDK_EN.xlsx";
 //	String datafile="Osprey_EMEA//GoldOspreyemeaEU_IT.xlsx";
