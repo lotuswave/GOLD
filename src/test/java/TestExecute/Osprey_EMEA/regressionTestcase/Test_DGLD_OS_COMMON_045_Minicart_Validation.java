@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_045_Minicart_Validation {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Minicart");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Minicart");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_the_Create_account_Funtionality () throws Exception {
@@ -22,8 +22,7 @@ public class Test_DGLD_OS_COMMON_045_Minicart_Validation {
         Osprey_ReEu.search_product("Product");      
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.simple_addtocart("Simple product"); 
-        Osprey_ReEu.click_minicart();
+        Osprey_ReEu.simple_addtocart("Simple product");
         Osprey_ReEu.clickontheproduct_and_image("Product");
         Osprey_ReEu.minicart_freeshipping();
         Osprey_ReEu.minicart_delete("Product");
