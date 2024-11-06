@@ -3654,7 +3654,7 @@ public class OspreyEMEA_HYVA {
 				if(Common.getCurrentURL().contains("/gb"))
 				{
 				
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
 					System.out.println(order);
 				} else {
 					Thread.sleep(1000);
@@ -3753,12 +3753,13 @@ public class OspreyEMEA_HYVA {
 
 			} else {
 				Thread.sleep(4000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
-				if(savedcard>0)
+				int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
+				if(savedcard==2)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
-					Common.switchFrames("xpath", "(//iframe[@role='presentation'])[1]");
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Thread.sleep(9000);
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -3822,9 +3823,9 @@ public class OspreyEMEA_HYVA {
 
 					}
 				}
-				else
-				{
-				Common.switchFrames("xpath", "(//iframe[@role='presentation'])[2]");
+				else {
+			
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(9000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
@@ -3891,6 +3892,7 @@ public class OspreyEMEA_HYVA {
 
 			}
 			}
+	
 
 		}
 
