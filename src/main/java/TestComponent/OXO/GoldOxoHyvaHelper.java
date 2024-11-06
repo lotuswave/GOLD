@@ -4997,29 +4997,26 @@ catch(Exception | Error e)
 
 		String Country;
 		try {
-			Common.refreshpage();
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
-			Common.refreshpage();
+			
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.END);
-
-			List<WebElement> country = Common.findElements("xpath", "(//div[@class='country-list__item'])[1]");
+            
+			List<WebElement> country = Common.findElements("xpath", "//div[@class='country-list__item']");
 			System.out.println(country.size());
-			for (int i = 0; i < country.size(); i++) {
+			for (int i = 1; i < country.size(); i++) {
 
-				List<WebElement> select = Common.findElements("xpath", "(//div[@class='country-list__item'])[1]");
+				List<WebElement> select = Common.findElements("xpath", "//span[contains(@class,'country-item__country-label')]");
 				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'country-selector-button')])[1]");
-				Common.scrollIntoView("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
-				Common.clickElement("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+				Common.scrollIntoView("xpath", "//button[contains(@class,'country-selector-button')]");
+				Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
 				Thread.sleep(3000);
 				Country = select.get(i).getText();
 			      System.out.println(Country);
 				select.get(i).click();
-				if (Country.contains("United States")) {
+				if (Country.contains("UK")) {
 
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
@@ -5027,7 +5024,7 @@ catch(Exception | Error e)
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				} else {
-					Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+					Common.clickElement("xpath", "(//p[@class='country-item__language'])[" + i +"]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.navigateBack();
