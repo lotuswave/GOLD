@@ -1986,11 +1986,11 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//a[@class='product-image-link']");
 
-				String s = webelementslist.get(i).getAttribute("src");
+				String s = webelementslist.get(i).getAttribute("data-role");
 				System.out.println(s);
 				if (s.isEmpty()) {
 
@@ -2033,33 +2033,7 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//			.getAttribute("data-ui-id");
-//	System.out.println(message);
-//	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//			"Product should be add to cart", "Sucessfully product added to the cart ",
-//			"failed to add product to the cart");
-//	String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-//	System.out.println(price);
-//	Thread.sleep(5000);
-//	price = price.trim();
-//	price = price.substring(0,price.length() - 2);
-//    System.out.println(price);  
-//	int amount=Integer.parseInt(price);
-//	System.out.println(amount);
-//	
-//	if(amount>199 && country.contains("US | EN"))
-//	{
-////		Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-/////				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-//		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
-//		Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-//	}
-//	else
-//	{
-//		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-//		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-//	}
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -3333,9 +3307,9 @@ public class OspreyEMEA_HYVA {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//span[contains(text(),'"+ header +"')]");
+					"//a[contains(@id,'category-node')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//a[contains(@id,'category-node')]//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
@@ -8517,11 +8491,11 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						" //a[@class='product-image-link']");
 
-				String s = webelementslist.get(i).getAttribute("src");
+				String s = webelementslist.get(i).getAttribute("data-role");
 				System.out.println(s);
 				if (s.isEmpty()) {
 
@@ -8531,73 +8505,12 @@ public class OspreyEMEA_HYVA {
 			}
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			// int Amount=Common.findElements("xpath",
-			// "//div[@data-role='priceBox']").size();
-			// for (int i = 0; i < Amount; i++) {
-			// int value = i + 1;
-			// Thread.sleep(2000);
-			// List<WebElement> Price=Common.findElements("xpath",
-			// "(//span[@data-price-type='finalPrice']//span[@class='price'])["+value+"]");
-			// System.out.println(Price);
-			// for(WebElement amount : Price)
-			// {
-			// String priceamount=amount.getText().replace("£", "");
-			// Thread.sleep(2000);
-			// Float PRICE =Float.parseFloat(priceamount);
-			// System.out.println(PRICE);
-			//
-			// if(PRICE>0)
-			// {
-			// Common.mouseOver("xpath",
-			// "(//span[@data-price-type='finalPrice']//span[@class='price'])["+value+"]");
-			// Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-			// Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
-			// Sync.waitPageLoad();
-			// Thread.sleep(4000);
-			// Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-			// String message = Common.findElement("xpath",
-			// "//div[@data-ui-id='message-success']")
-			// .getAttribute("data-ui-id");
-			// System.out.println(message);
-			// Common.assertionCheckwithReport(message.contains("success"), "validating the
-			// product add to the cart",
-			// "Product should be add to cart", "Sucessfully product added to the cart ",
-			// "failed to add product to the cart");
-			// }
-			// else
-			// {
-			//
-			// }      
-			// }
-			// }
-			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-//			Sync.waitPageLoad(30);
-//			Thread.sleep(6000);
-//			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-//			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-//			System.out.println(name);
-//			Thread.sleep(4000);
-//			String product = data.get(Dataset).get("Products").toUpperCase();
-//			System.out.println(product);
-//			Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product),
-//					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
-//					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-//			product_quantity(Dataset);
-			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			Sync.waitElementPresent(50, "xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
+			Thread.sleep(2000);
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();

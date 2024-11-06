@@ -25,7 +25,8 @@ public class TEST_DGLD_OS_COMMON_033_Guest_user_checkout_PP_with_Multiple_produc
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
+        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+        Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.addDeliveryAddress_Guestuser("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.payPal_Payment("PaypalDetails");
