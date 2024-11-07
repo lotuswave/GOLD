@@ -5410,7 +5410,7 @@ public class OspreyEMEA_HYVA {
 		System.out.println(color);
 		try {
 			String minicartproduct = Common
-					.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ product +"']").getText();
+					.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ product +"']").getText().toUpperCase();
 			Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ product +"']");
 			
 			Sync.waitPageLoad();
@@ -5428,7 +5428,7 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//img[contains(@alt,'" + product + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			String title1=Common.getPageTitle().replace("Osprey ", "").toUpperCase();
+			String title1=Common.getPageTitle().replace("Osprey ", "");
 			Common.assertionCheckwithReport(title1.contains(product),
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
