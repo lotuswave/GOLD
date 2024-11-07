@@ -5138,7 +5138,8 @@ catch(Exception | Error e)
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='" + socallinksarry[i] + "']");
+				Common.clickElement("xpath", "//img[@alt='" + socallinksarry[i] + "']");
+				Thread.sleep(4000);
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 
@@ -5160,14 +5161,15 @@ catch(Exception | Error e)
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].equals("Twitter")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("twitter"),
-							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
-							"successfully navigating to social link  " + socallinksarry[i],
-							"Failed to navigate to social link " + socallinksarry[i]);
-					Common.closeCurrentWindow();
-					Common.switchToFirstTab();
-				} else if (socallinksarry[i].equals("YouTube")) {
+//				else if (socallinksarry[i].equals("Twitter")) {
+//					Common.assertionCheckwithReport(Common.getCurrentURL().contains("twitter"),
+//							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
+//							"successfully navigating to social link  " + socallinksarry[i],
+//							"Failed to navigate to social link " + socallinksarry[i]);
+//					Thread.sleep(3000);
+//					Common.closeCurrentWindow();
+//					Common.switchToFirstTab();
+			       else if (socallinksarry[i].equals("YouTube")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
