@@ -12,10 +12,10 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_033_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping {
 
-	String datafile = "Osprey_EU//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA\\GoldOspreyemea.xlsx";
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
-	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
+	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class) 
 	public void Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping () throws Exception {
 
 		try {

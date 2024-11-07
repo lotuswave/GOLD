@@ -5,14 +5,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	String datafile = "Osprey_EMEA\\GoldOspreyemea.xlsx";
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Register_user_Checkout_with_Paypal () throws Exception {
@@ -38,7 +39,7 @@ public class Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
