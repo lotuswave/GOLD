@@ -3599,11 +3599,16 @@ public class OspreyEMEA_HYVA {
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
-              
-				
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+						.size() > 0) {
 					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
+				} else {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+					System.out.println(order);
+				}
 			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -3732,6 +3737,9 @@ public class OspreyEMEA_HYVA {
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
 					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+						Sync.waitElementPresent("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
+						Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
+						Thread.sleep(3000);
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Thread.sleep(8000);
@@ -3829,13 +3837,9 @@ public class OspreyEMEA_HYVA {
 							"User Successfully able to see the card details enterd in the production environment ",
 							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
-
 				}
-
 			}
 			}
-	
-
 		}
 
 		catch (Exception | Error e) {
@@ -3851,7 +3855,6 @@ public class OspreyEMEA_HYVA {
 
 		return Number;
 	}
-	
 	
 	public String ThreedPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub

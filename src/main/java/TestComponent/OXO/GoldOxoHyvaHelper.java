@@ -5016,7 +5016,7 @@ catch(Exception | Error e)
 				Country = select.get(i).getText();
 			      System.out.println(Country);
 				select.get(i).click();
-				if (Country.contains("UK")) {
+				if (Country.contains("United States")) {
 
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
