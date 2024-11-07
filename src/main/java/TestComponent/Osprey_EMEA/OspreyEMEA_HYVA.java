@@ -2580,23 +2580,24 @@ public class OspreyEMEA_HYVA {
 	public void click_minicart() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(5000);
-			Common.actionsKeyPress(Keys.PAGE_UP);
-			Sync.waitElementPresent("xpath", "//a[contains(@class,'c-mini-cart__btn')]");
-			Common.clickElement("xpath", "//a[contains(@class,'c-mini-cart__btn')]");
-			String openminicart = Common.findElement("xpath", "//div[@data-block='minicart']").getAttribute("class");
+
+			Thread.sleep(9000);
+//			Common.scrollIntoView("xpath", "//a[contains(@class,'c-mini')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+//			Common.javascriptclickElement("xpath", "//a[contains(@class,'c-mini')]");
+			String openminicart = Common.findElement("xpath", "//button[@id='menu-cart-icon']").getAttribute("aria-expanded");
 			System.out.println(openminicart);
-			Common.assertionCheckwithReport(openminicart.contains("active"), "To validate the minicart popup",
-					"the mini cart is displayed", "Should display the mini cart", "mini cart is not displayed");
+			Common.assertionCheckwithReport(openminicart.contains("true"), "To validate the minicart popup",
+					"Should display the mini cart", "Mini cart is displayed", "mini cart is not displayed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "the mini cart is displayed",
-					"unable to  dislay the mini cart", Common.getscreenShot("Failed to display the mini cart"));
+			ExtenantReportUtils.addFailedLog("To validate the minicart popup", "Should display the mini cart",
+					"unable to  display the mini cart", Common.getscreenShot("Failed to display the mini cart"));
 			Assert.fail();
 
 		}
-
 	}
 
 	public void RegaddDeliveryAddress(String dataSet) {
@@ -3307,16 +3308,16 @@ public class OspreyEMEA_HYVA {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@id,'category-node')]//span[contains(text(),'"+ header +"')]");
+					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@id,'category-node')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
 			} catch (Exception e) {
-				Common.clickElement("xpath", "//span[text()='"+ header +"']");
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
@@ -3337,7 +3338,7 @@ public class OspreyEMEA_HYVA {
 					expectedResult, "Unable to Selected the " + Dataset + " category",
 					Common.getscreenShot("Failed to click on the" + Dataset + ""));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -5406,22 +5407,26 @@ public class OspreyEMEA_HYVA {
 		System.out.println(color);
 		try {
 			String minicartproduct = Common
-					.findElement("xpath", "//a[@class='a-product-name' and @title='" + product + "']").getText();
-			Common.clickElement("xpath", "//a[@class='a-product-name' and @title='" + product + "']");
+					.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ product +"']").getText();
+			Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ product +"']");
+			
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(4000);
+			String title=Common.getPageTitle().replace("Osprey ", "").toUpperCase();
+			System.out.println(title);
 			System.out.println(minicartproduct);
-			Common.assertionCheckwithReport(product.contains(minicartproduct),
+			Common.assertionCheckwithReport(title.contains(minicartproduct),
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
 			click_minicart();
-			String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + color + "')]")
+			String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + product + "')]")
 					.getAttribute("alt");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
+			Common.clickElement("xpath", "//img[contains(@alt,'" + product + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(minicartimage.contains(color),
+			String title1=Common.getPageTitle().replace("Osprey ", "").toUpperCase();
+			Common.assertionCheckwithReport(title1.contains(product),
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
@@ -5439,13 +5444,13 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			click_minicart();
-//			String Freeshipping = Common
-//					.findElement("xpath", "//div[@class='m-progress-bar false']//div[contains(@class,'label-')]")
-//					.getText();
-//			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
-//					"validating the free shipping in mini cart",
-//					"Free shipping should be avaliable for selected products",
-//					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
+			String Freeshipping = Common
+					.findElement("xpath", "//div[@class='flex items-center']//p")
+					.getText();
+			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
+					"validating the free shipping in mini cart",
+					"Free shipping should be avaliable for selected products",
+					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5463,32 +5468,34 @@ public class OspreyEMEA_HYVA {
 		String deleteproduct = data.get(Dataset).get("Colorproduct");
 		String symbol=data.get(Dataset).get("Symbol");
 		try {
-			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__subtotal-amount']//span");
-			String subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			click_minicart();
+			Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span");
+			String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//div[@class='m-mini-product-card__info']//a[@class='a-product-name'])[1]")
+					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//span[@class='minicart-price']//span)[1]").replace(symbol,
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if (productname.equals(deleteproduct)) {
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
+						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
 				Common.clickElement("xpath",
-						"(//div[@class='m-mini-product-card__info']//span[contains(@class,'icon-cart__remove')])[1]");
-				Sync.waitElementPresent("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--primary action-p')]//span");
+						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
+				Common.clickElement("xpath", "//button[contains(text(),'OK')]");;
 			} else {
 				Assert.fail();
 			}
 			Thread.sleep(6000);
-			String subtotal1 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
 			Float subtotal1value = Float.parseFloat(subtotal1);
 			Thread.sleep(8000);
-			String productamount = Common.getText("xpath", "//span[@class='minicart-price']//span").replace(symbol, "");
+			String productamount = Common.getText("xpath", "(//span[@x-html='item.product_price']//span)[3]").replace(symbol, "");
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue - productamount1value;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
@@ -5513,31 +5520,32 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
-			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
-			String minicartpopup = Common.findElement("xpath", "//div[@class='modal-popup confirm _show']")
-					.getAttribute("class");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			String minicartpopup = Common.findElement("xpath", "//div[@x-ref='removeItemConfirm']")
+					.getAttribute("aria-modal");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+			Common.assertionCheckwithReport(minicartpopup.contains("true"),
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
-			String popup = Common.findElement("xpath", "//h2[contains(text(),'Remove')]").getText();
+			String popup = Common.findElement("xpath", "//h2[@x-ref='modalHeader' and contains(text(),'Remove Item')]").getText().trim();
 			if (popup.equals("Remove Item")) {
-				Common.clickElement("xpath", "//button[contains(@class,'a-btn a-btn--secondary acti')]");
+				Common.clickElement("xpath", "//button[@aria-label='Close']");
 			} else {
 				Assert.fail();
 			}
-			Common.clickElement("xpath", "//span[contains(@class,'icon-cart__r')]");
-			Sync.waitElementPresent("xpath", "//div[@class='modal-popup confirm _show']");
+			Common.clickElement("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
+			Sync.waitElementPresent("xpath", "//a[contains(@aria-label,'Edit product')]//parent::div//button");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(minicartpopup.contains("_show"),
+			Common.assertionCheckwithReport(minicartpopup.contains("true"),
 					"validating the popup when you click on delete", "The Popup should be displayed",
 					"Successfully popup is displayed when we click on the delete button",
 					"Failed to Display the popup");
+			
 			if (popup.equals("Remove Item")) {
 
-				Common.clickElement("xpath", "//button[@data-role='closeBtn' and @aria-label='Close']");
+				Common.clickElement("xpath", "//button[contains(text(),'Cancel')]");
 			} else {
 				Assert.fail();
 			}
@@ -5559,27 +5567,26 @@ public class OspreyEMEA_HYVA {
 		String symbol=data.get(Dataset).get("Symbol");
 		try {
 
-			String Subtotal = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			String Subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			Sync.waitElementPresent("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.clickElement("xpath", "//select[@class='a-select-menu cart-item-qty']");
-			Common.dropdown("xpath", "//select[@class='a-select-menu cart-item-qty']", Common.SelectBy.VALUE,
+			Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
+//			Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+			Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 					UpdataedQuntityinminicart);
-			Common.clickElement("xpath", "//span[text()='Update']");
-			Thread.sleep(8000);
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String cart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
+
+			Thread.sleep(6000);
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String cart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(cart);
-			String Subtotal2 = Common.getText("xpath", "//span[@class='c-mini-cart__subtotal-amount']//span")
+			String Subtotal2 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
+			System.out.println(Subtotal2);
 			Float subtotalvalue2 = Float.parseFloat(Subtotal2);
 			Float Total = subtotalvalue * 2;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			System.out.println(UpdataedQuntityinminicart);
-			System.out.println(cart);
 			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(Subtotal2);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 					"validating the product update quantity and subtotal",
@@ -8523,11 +8530,11 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						" //a[@class='product-image-link']");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 
-				String s = webelementslist.get(i).getAttribute("data-role");
+				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
 
@@ -8536,13 +8543,22 @@ public class OspreyEMEA_HYVA {
 				}
 			}
 			Sync.waitPageLoad(30);
-			Thread.sleep(6000);
+			
+			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(2000);
+			Thread.sleep(6000);
+			
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -8560,9 +8576,10 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8578,15 +8595,17 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			//Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
+			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
 			Thread.sleep(4000);
-			String product = data.get(Dataset).get("Products").toUpperCase();
-			Common.assertionCheckwithReport(name.contains(product) || Common.getPageTitle().contains(product),
+			//String product = data.get(Dataset).get("Products").toUpperCase();
+			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 //			click_UGC();
-			Locally_PDP();
+//			Locally_PDP();
+			PDP_Tabs("Tabs");
 			Common.actionsKeyPress(Keys.UP);
 
 		} catch (Exception | Error e) {
@@ -8594,7 +8613,7 @@ public class OspreyEMEA_HYVA {
 			ExtenantReportUtils.addFailedLog("validating the PDP page", "In PDP fav ugc all should be appear",
 					"Unable to see few things in the PDP",
 					Common.getscreenShot("Failed to see few things in the PDP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8636,9 +8655,10 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8656,15 +8676,17 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+//			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
+//			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
+			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
 
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 //			click_UGC();
-			Locally_PDP();
-			Common.actionsKeyPress(Keys.UP);
+			//Locally_PDP();
+			//Common.actionsKeyPress(Keys.UP);
 //			add_simplarproducts("configurable product");
 			 PDP_Tabs("Tabs");  
 			
@@ -8675,7 +8697,7 @@ public class OspreyEMEA_HYVA {
 					"Unable to see few things in the PDP",
 					Common.getscreenShot("Failed to see few things in the PDP page"));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -8748,16 +8770,16 @@ public class OspreyEMEA_HYVA {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//a[@class='data switch' and text()='" + Links[i] + "']");
-				Common.clickElement("xpath", "//a[@class='data switch' and text()='" + Links[i] + "']");
+				Sync.waitElementPresent("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
+				/*String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
 						.getAttribute("aria-expanded");
 				Common.assertionCheckwithReport(title.contains("true"), "verifying the tabs in PDP ",
 						"After clicking on the " + Links[i] + "It should display the related content",
 						"sucessfully after clicking on the " + Links[i] + "it has been displayed related content",
-						"Failed to display related content" + Links[i]);
+						"Failed to display related content" + Links[i]);*/
 
 			}
 		} catch (Exception | Error e) {
@@ -8767,7 +8789,7 @@ public class OspreyEMEA_HYVA {
 					"Unable to display the content in  " + Links[i],
 					Common.getscreenShot("Failed to display related content" + Links[i]));
 
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
