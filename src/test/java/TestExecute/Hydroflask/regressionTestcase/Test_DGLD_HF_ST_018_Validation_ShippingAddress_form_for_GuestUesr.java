@@ -3,13 +3,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 public class Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr {
     String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 //   Sheet name
-    GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Sheet1");
+    GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Sheet1");
     @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
     public void Validation_ShippingAddress_form_for_GuestUesr_with_Errormessages() throws Exception {
         try {
@@ -18,7 +18,7 @@ public class Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr {
             Hydro.addtocart("Product");                    
             Hydro.minicart_Checkout();
             Hydro.addDeliveryAddress_Gustuser("InvalidAddress");
-            Hydro.selectStandedshippingaddress();
+            Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.validatingErrormessageShippingpage_negative();
         } catch (Exception e) {
