@@ -6614,7 +6614,7 @@ public class OspreyEMEA_HYVA {
 				try {
 					Thread.sleep(6000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-					
+					Common.clickElement("xpath", "//input[contains(@id,'agreement')]");
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 
 					Thread.sleep(6000);

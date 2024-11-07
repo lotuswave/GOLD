@@ -39,7 +39,7 @@ public class Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
