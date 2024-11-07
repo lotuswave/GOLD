@@ -7952,6 +7952,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				System.out.println(responcecode);
 
 				if (responcecode == 200) {
+					
 					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
 							"successfully page configured with products",
 							Common.getscreenShotPathforReport("link" + i));
