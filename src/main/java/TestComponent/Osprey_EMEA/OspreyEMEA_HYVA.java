@@ -3303,14 +3303,14 @@ public class OspreyEMEA_HYVA {
 		String expectedResult = "User should click the" + Dataset;
 		String out = data.get(Dataset).get("outdoor");
 		String Trail = data.get(Dataset).get("Trail");
-		String header=data.get(Dataset).get("headers");
+		String header=data.get(Dataset).get("header");
 		try {
 
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
-					"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+					"//span[contains(text(),'"+ header +"')]");
 			
-			Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + header + "')]");
 
 			Thread.sleep(3000);
 
@@ -6569,7 +6569,7 @@ public class OspreyEMEA_HYVA {
 			Assert.fail();
 		}
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
+        System.out.println(url);
 		if (!url.contains("stage") & !url.contains("preprod")) {
 
 			int sizeofelement = Common.findElements("id", "email").size();
