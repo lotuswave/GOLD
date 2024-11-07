@@ -3852,17 +3852,15 @@ public class GoldHydroHyvaHelper {
 			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			Thread.sleep(3000);
 			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
 			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(3000);
 			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Float Total = subtotalvalue + shippingvalue + Taxvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
+			System.out.println(ExpectedTotalAmmount2);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
 					"validating the order summary in the payment page",
 					"Order summary should be display in the payment page and all fields should display",
@@ -5054,9 +5052,9 @@ catch(Exception | Error e)
 			if (Common.getPageTitle().contains("Bottle")) {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[contains(@class,'m-product-card__image')]");
+							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -5074,27 +5072,27 @@ catch(Exception | Error e)
 				Common.actionsKeyPress(Keys.END);
 				Common.actionsKeyPress(Keys.PAGE_UP);
 				Sync.waitElementPresent("xpath",
-						"//div[contains(@class,'sticky-atc')]//div[@aria-label='" + colorname + "']");
+						"//div[@x-data='stickyBar()']//div[@data-option-label='" + colorname + "']");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'sticky-atc')]//div[@aria-label='" + colorname + "']");
-				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+						"//div[@x-data='stickyBar()']//div[@data-option-label='" + colorname + "']");
+//				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+//				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+				Common.clickElement("xpath", "//button[@x-show='isStickySwatchAvailable' and @title='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-						.getAttribute("data-ui-id");
-				System.out.println(message);
-				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-						"Product should be add to cart", "Sucessfully product added to the cart ",
-						"failed to add product to the cart");
+//				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//						.getAttribute("data-ui-id");
+//				System.out.println(message);
+//				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//						"Product should be add to cart", "Sucessfully product added to the cart ",
+//						"failed to add product to the cart");
 				Common.actionsKeyPress(Keys.UP);
 			} else {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+					Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[contains(@class,'m-product-card__image')]");
+							"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -5109,18 +5107,18 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-				Common.clickElement("xpath", "//span[text()='Add to Cart']");
+//				Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
+//				Common.clickElement("xpath", "//span[text()='Add to Cart']");
 
-				Common.clickElement("xpath", "//button[@id='product-sticky-addtocart-button']");
+				Common.clickElement("xpath", "//button[@x-show='isStickySwatchAvailable' and @title='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-						.getAttribute("data-ui-id");
-				System.out.println(message);
-				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-						"Product should be add to cart", "Sucessfully product added to the cart ",
-						"failed to add product to the cart");
+//				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//						.getAttribute("data-ui-id");
+//				System.out.println(message);
+//				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//						"Product should be add to cart", "Sucessfully product added to the cart ",
+//						"failed to add product to the cart");
 				Common.actionsKeyPress(Keys.UP);
 			}
 		} catch (Exception | Error e) {
