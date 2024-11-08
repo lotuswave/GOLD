@@ -21,13 +21,14 @@ public class Test_DGLD_HF_ST_113_Register_User_Checkout_PP_with_Graphic_Engravin
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Engraving Product"); 
+			Hydro.bottles_headerlinks("Bottles & Drinkware");
 			Hydro.Graphic_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Graphic");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.payPal_Payment("PaypalDetails");
+            
 
 		} catch (Exception e) {
 
