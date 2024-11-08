@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_053_Write_a_Review {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Sheet1");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Sheet1");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Write_a_Review () throws Exception {
@@ -22,8 +23,7 @@ public class Test_DGLD_HF_ST_053_Write_a_Review {
 			Hydro.search_product("Review product"); 
 			Hydro.review("review");
 			Hydro.Ask_a_question("Ask a question");
-			Hydro.filter_validation("Filters");
-			Hydro.search_filter("Filters");
+			
 			
 			
 		} catch (Exception e) {

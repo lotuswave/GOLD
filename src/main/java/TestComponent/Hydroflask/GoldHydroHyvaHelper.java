@@ -4015,16 +4015,16 @@ public class GoldHydroHyvaHelper {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 
-			Common.scrollIntoView("xpath", "//a[text()='Reviews & Questions']");
-			Sync.waitElementPresent("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+			Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
+			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
+			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
 			Thread.sleep(3000);
-			String form = Common.getText("xpath", "//a[@id='tab-label-product.yotpo.reviews-title']");
+			int form = Common.findElements("xpath", "//div[@id='write-review-tabpanel-main-widget']").size();
 			System.out.println(form);
-			Common.assertionCheckwithReport(form.equals("Reviews & Questions"), "verifying the write a review button",
+			Common.assertionCheckwithReport(form>0, "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
-			Common.clickElement("xpath", "//a[text()='Reviews & Questions']");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
 
