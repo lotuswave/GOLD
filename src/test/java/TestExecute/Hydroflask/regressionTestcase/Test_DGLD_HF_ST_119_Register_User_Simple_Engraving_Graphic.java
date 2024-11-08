@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Engraving");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_User_Simple_Engraving_Graphic () throws Exception {
@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.bottles_headerlinks("Bottles & Drinkware");  
 			Hydro.search_product("Simple Engraving"); 
 			Hydro.Graphic_Engraving("Simple Engraving");
 			Hydro.enraving_Checkout("Graphic");
