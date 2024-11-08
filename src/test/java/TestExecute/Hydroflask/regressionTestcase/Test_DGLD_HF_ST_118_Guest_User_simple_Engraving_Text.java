@@ -5,21 +5,21 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_118_Guest_User_simple_Engraving_Text {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Engraving");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_User_simple_Engraving_Text () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Simple Engraving");   
+			Hydro.bottles_headerlinks("Bottles & Drinkware");  
 			Hydro.Text_Engraving("Simple Engraving");
 			Hydro.enraving_Checkout("Horizontal Text");
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
