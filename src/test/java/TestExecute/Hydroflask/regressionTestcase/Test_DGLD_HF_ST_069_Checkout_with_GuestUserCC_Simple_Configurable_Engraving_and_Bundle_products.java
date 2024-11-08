@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_069_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_and_Bundle_products {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Engraving");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_and_Bundle_products () throws Exception {
@@ -25,7 +25,7 @@ public class Test_DGLD_HF_ST_069_Checkout_with_GuestUserCC_Simple_Configurable_E
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
-			Hydro.search_product("Engraving Product");   
+			Hydro.bottles_headerlinks("Bottles & Drinkware");      
 			Hydro.Text_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Horizontal Text");
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
