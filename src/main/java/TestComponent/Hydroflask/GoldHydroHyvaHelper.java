@@ -5927,20 +5927,9 @@ catch(Exception | Error e)
 	public void Shipping_Forgot_Password(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			Common.textBoxInput("xpath", "//input[@name=\"username\"]", data.get(dataSet).get("UserName"));
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
-			String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
-			System.out.println(shipping);
-			Common.clickElement("xpath", "//span[text()='Item in Cart']");
-			String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
-			System.out.println(QTY);
-			String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
-			System.out.println(Price);
-			Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
-			String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
-			System.out.println(Color);
-			Common.assertionCheckwithReport(shipping.equals("Shipping"),
+			Common.clickElement("xpath", "//span[contains(text(),'Sign in')]");
+			
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customer/account/login/"),
 					"To validate the user is navigating to Shipping page", "user should naviagte to Shipping page",
 					"User lands on Shippingd page", "User failed to navigate to Shipping page");
 		} catch (Exception | Error e) {
@@ -5957,22 +5946,22 @@ catch(Exception | Error e)
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Forgot Password?')]");
 			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
-			Common.textBoxInput("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
+			Common.textBoxInput("id", "email_address", Utils.getEmailid());
 			Thread.sleep(4000);
-			Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
+			Common.findElement("id", "email_address").getAttribute("value");
 			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
-			String message = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("We received too many requests for password resets")
-							|| message.contains("reCAPTCHA verification failed."),
+							|| message.contains("you will receive an email with a link to reset your password."),
 					"To validate the user is navigating to Forgot Password page",
 					"user should naviagte to forgot password page", "User lands on Forgot Password page",
 					"User failed to navigate to forgot password page");
@@ -6851,9 +6840,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[@itemprop='image']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -6867,7 +6856,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			if (Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
+				String productprice = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 						.getAttribute("data-price-amount");
 				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 				Sync.waitPageLoad();
