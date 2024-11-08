@@ -6638,7 +6638,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[normalize-space()='Save']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			String update = Common.findElement("xpath", "//select[@id='address-list']").getText();
+			String update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='0']").getText();
 			System.out.println(update);
 			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr"),
 					"verifying the Billing address form in payment page",
