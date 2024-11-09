@@ -3906,7 +3906,7 @@ public class GoldHydroHyvaHelper {
 
 		try {
 
-			Common.clickElement("xpath", "//span[text()='Write to Us']");
+			Common.clickElement("xpath", "//button[contains(text(),'Write to Us')]");
 			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
 			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
 
