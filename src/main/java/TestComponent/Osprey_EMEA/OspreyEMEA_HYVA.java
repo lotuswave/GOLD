@@ -356,17 +356,18 @@ public class OspreyEMEA_HYVA {
 
 	}
 
+	
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[contains(@class, 'link link-primary ')]");
-			String forgotpassword = Common.findElement("xpath", "//h2[contains(@class,'text-3xl md:text')]").getText();
+			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.clickElement("xpath", "//button[@type='submit']");
+			Common.clickElement("xpath", "//button[contains(text(), 'Reset My Password')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message')]");
@@ -384,9 +385,8 @@ public class OspreyEMEA_HYVA {
 			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page",
 					"user should navigate to forgot password page", "User failed to land on Forgot Password page",
 					Common.getscreenShotPathforReport("failed  to naviagte forgot password page "));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
-
 	}
 
 
@@ -3212,34 +3212,29 @@ public class OspreyEMEA_HYVA {
 	public void Shipping_Forgot_Password(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			Common.textBoxInput("xpath", "//input[@name='username']", data.get(dataSet).get("UserName"));
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Toggle password visibility']");
-			String shipping = Common.findElement("xpath", "(//span[text()='Shipping'])[1]").getText();
-			System.out.println(shipping);
-			Common.clickElement("xpath", "//span[text()='Items in Cart']");
-			String QTY = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[1]").getText();
-			System.out.println(QTY);
-			String Price = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[2]").getText();
-			System.out.println(Price);
-			Common.clickElement("xpath", "(//span[text()='View Details'])[2]");
-			String Color = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[3]").getText();
-			System.out.println(Color);
-			String Size = Common.findElement("xpath", "(//span[@class='a-product-attribute__value'])[4]").getText();
-			System.out.println(Size);
-			Common.assertionCheckwithReport(shipping.equals("Shipping"),
-					"To validate the user is navigating to Shipping page", "user should naviagte to Shipping page",
-					"User lands on Shippingd page", "User failed to navigate to Shipping page");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Sign in')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Sign in')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/login"),
+					"To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigIn button",
+					"User Successfully clicked on the singIn button and Navigate to the signIn page",
+					"User Failed to click the signin button and not navigated to signIn page");
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Shipping page",
-					"user should navigate to Shipping page", "User failed to land on Shipping page",
-					Common.getscreenShotPathforReport("failed  to naviagte Shipping page "));
+			ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+					"user should able to land on the signIn page after clicking on the sigin button",
+					"Unable to click on the singIn button and not Navigated to the signIn page",
+					Common.getscreenShotPathforReport(
+							"Failed to click signIn button and not Navigated to the signIn page"));
 			Assert.fail();
-
 		}
-
 	}
+
+
 
 	public void Configurable_addtocart_pdp(String Dataset) {
 		// TODO Auto-generated method stub
@@ -4369,8 +4364,13 @@ public class OspreyEMEA_HYVA {
 
 	}
 
-	public void validatingErrormessageShippingpage_negative() {
-		int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+	public void validatingErrormessageShippingpage_negative() throws Exception {
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+		Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+		Thread.sleep(5000);
+		
+		int errorsize = Common.findElements("xpath", "//ul[@class='messages']").size();
 		String expectedResult = "Error message will dispaly when we miss the data in fields ";
 		if (errorsize >= 0) {
 			ExtenantReportUtils.addPassLog("validating the shippingPage error message", expectedResult,
@@ -4398,19 +4398,19 @@ public class OspreyEMEA_HYVA {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+			Common.textBoxInput("xpath", "//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+			Common.textBoxInput("xpath", "//input[@name='lastname']",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Common.clickElement("xpath", "//input[@name='street[0]']");
 
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+			Common.findElement("xpath", "//input[@name='city']").clear();
+			Common.textBoxInput("xpath", "//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
@@ -4419,8 +4419,8 @@ public class OspreyEMEA_HYVA {
 			
 			  if(Common.getCurrentURL().contains("gb"))
               {
-				  Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				  Common.scrollIntoView("xpath", "//input[@name='region']");
+					Common.textBoxInput("xpath", "//input[@name='region']", data.get(dataSet).get("Region"));
               }
 			  else
 			  {
