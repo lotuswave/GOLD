@@ -2660,13 +2660,14 @@ public class OspreyEMEA_HYVA {
 				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
-
+				
+				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
-
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
 
 //				
