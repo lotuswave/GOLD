@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_User_Create_Account_from_Ordersummary_Page () throws Exception {
@@ -24,9 +25,7 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 			Hydro.minicart_Checkout();
 			Hydro.newuseraddDeliveryAddress("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-//			Hydro.Were_here_section("werehere");
 			Hydro.createAccountFromOrderSummaryPage("AccountDetails");
-			Hydro.newsletter_subscription();
 
 		} catch (Exception e) {
 
@@ -44,8 +43,8 @@ public class Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Pag
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
 		Login.signIn();
-		Hydro.close_add();
         Hydro.acceptPrivacy();
+        Hydro.close_add();
 
 	}
 

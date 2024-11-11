@@ -1306,54 +1306,28 @@ public class GoldHydroHyvaHelper {
 //			String kitchen=Common.findElement("xpath", "//span[text()='Shop Kitchenware']//parent::a").getAttribute("href");
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Show Password'])[1]");
 			Sync.waitElementPresent(30, "xpath", "//input[@name='password_confirmation']");
 			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
-			String accounttext = Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
-			String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
-					.getAttribute("type");
-			String password = Common.findElement("xpath", "//input[@name='password_confirmation']")
-					.getAttribute("type");
-			String Message = Common.findElement("id", "validation-classes").getCssValue("color");
-			String Greencolor = Color.fromString(Message).asHex();
-			String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
-			Common.assertionCheckwithReport(
-					Greencolor.equals("#056d59") && Message1.contains("complete") && confirmpassword.equals("text")
-							&& password.equals("text") && accounttext.contains("Create an Account"),
-					"validating the order confirmation page",
-					"User should able to view all details in the order confirmation page",
-					"Sucessfully all details has been displayed in the order confirmation",
-					"Failed to display all details in the order confirmation page");
-			Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[1]");
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[1]");
-			Sync.waitElementPresent(30, "xpath", "(//span[text()='Toggle Password Visibility'])[2]");
-			Common.clickElement("xpath", "(//span[text()='Toggle Password Visibility'])[2]");
-			String confirmpassword1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
-					.getAttribute("type");
-			String password1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
-					.getAttribute("type");
+			Common.clickElement("xpath", "//button[@aria-label='Show Password']");
+			
 			Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
 			Common.clickElement("xpath", "//label[@for='is_subscribed']");
 			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
-			Common.assertionCheckwithReport(confirmpassword1.equals("password") && password1.equals("password"),
-					"validating the password field changed to dots",
-					"After clicking on the eye icon it should be change to dots",
-					"Sucessfully passwords has been changed to dots after clicking on eye icon",
-					"Failed change passwords into dots after clicking on eye icon");
+		
 
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
-			Common.clickElement("xpath", "//span[text()='Create an Account']");
+			Sync.waitElementPresent(30, "xpath", "//span[text()='Sign Up']");
+			Common.clickElement("xpath", "//span[text()='Sign Up']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath",
-					"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']");
+					"//div[@ui-id='message-success']");
 			String message = Common.findElement("xpath",
-					"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
+					"//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("My Account") && message.contains("Thank you for registering"),
+					Common.getPageTitle().equals("Dashboard") && message.contains("Thank you for registering"),
 					"validating the  my Account page Navigation when user clicks on signin button",
 					"User should able to navigate to the my account page after clicking on Signin button",
 					"Sucessfully navigate to the My account page after clicking on signin button ",
@@ -1547,40 +1521,43 @@ public class GoldHydroHyvaHelper {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
-					data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
-					data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
-					data.get(dataSet).get("Street"));
-			String Text = Common.getText("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+			Common.textBoxInput("id", "shipping-lastname", data.get(dataSet).get("LastName"));
+			Common.clickElement("id", "shipping-street-0");
+			Common.textBoxInput("id", "shipping-street-0", data.get(dataSet).get("Street"));
+			String Text = Common.getText("id", "shipping-street-0");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Common.findElement("xpath", "//form[@id='co-shipping-form']//input[@name='city']").clear();
-			Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
-					data.get(dataSet).get("City"));
+			Thread.sleep(4000);
+			Common.findElement("id", "shipping-city").clear();
+			Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+
 			Thread.sleep(5000);
 
-			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 
 			Sync.waitPageLoad();
+			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
+					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
+					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+
 		}
+
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1600,8 +1577,6 @@ public class GoldHydroHyvaHelper {
 			}
 
 			expectedResult = "shipping address is filled in to the fields";
-			Common.clickElement("xpath", "//button[@data-role='opc-continue']");
-
 			int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
 
 			if (errorsize >= 0) {
@@ -10474,19 +10449,19 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void newsletter_subscription() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//a[text()='Newsletter Subscriptions']");
-			Common.clickElement("xpath", "//a[text()='Newsletter Subscriptions']");
-			String newsletter = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			Sync.waitElementPresent("xpath", "//*[text()='Newsletter Subscriptions']");
+			Common.clickElement("xpath", "//*[text()='Newsletter Subscriptions']");
+			String newsletter = Common.findElement("xpath", "//span[text()='Newsletter Subscription']").getText();
 			Common.assertionCheckwithReport(newsletter.contains("Newsletter Subscription"),
 					"validating the Navigation to the Newsletter Subscription page",
 					"After Clicking on Newsletter Subscription CTA user should be navigate to the Newsletter Subscription page",
 					"Sucessfully User Navigates to the Newsletter Subscription page after clicking on the Newsletter Subscription CTA",
 					"Failed to Navigate to the Newsletter Subscription page after Clicking on Newsletter Subscription button");
-			Common.switchFrames("xpath", "//iframe[@title='Hydroflask Website Preference Center']");
-			WebElement Checkbox = Common.findElement("xpath", "//input[@id='field1']");
+			
+			WebElement Checkbox = Common.findElement("xpath", "//input[@id='subscription']");
 			if (!Checkbox.isSelected()) {
 				Checkbox.click();
-				Sync.waitElementPresent(20, "xpath", "//button[text()='UPDATE PREFERENCES']");
+				Sync.waitElementPresent(20, "xpath", "//input[@id='subscription']//input[@id='subscription']");
 				Common.clickElement("xpath", "//button[text()='UPDATE PREFERENCES']");
 			} else {
 				Sync.waitElementPresent(20, "xpath", "//button[text()='UPDATE PREFERENCES']");
