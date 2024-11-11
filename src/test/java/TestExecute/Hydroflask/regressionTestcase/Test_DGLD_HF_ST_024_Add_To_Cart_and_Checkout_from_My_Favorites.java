@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Add_To_Cart_and_Checkout_from_My_Favorites () throws Exception {
@@ -27,7 +28,7 @@ public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-			
+//			
 
 		} catch (Exception e) {
 
@@ -37,7 +38,7 @@ public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

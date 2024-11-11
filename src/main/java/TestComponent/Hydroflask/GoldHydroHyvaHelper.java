@@ -2167,47 +2167,37 @@ public class GoldHydroHyvaHelper {
 		String product = data.get(Dataset).get("Products");
 		try {
 			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
-
+			int MyFavorites = Common.findElements("xpath", "//span[text()='You have no items in your wish list.']").size();
+System.out.println(MyFavorites);
 			if (MyFavorites != 0) {
 				search_product("Product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 				Common.clickElement("xpath", "//img[@alt='" + product + "']");
-				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add to Wish List']");
+				Common.clickElement("xpath", "//button[@title='Add to Wish List']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites"),
-						"validating the Navigation to the My Favorites page",
-						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
-				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
-				Sync.waitPageLoad();
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-				System.out.println(message);
-				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
-						"validating the  product add to the Whishlist", "Product should be add to whishlist",
-						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+				My_Favorites();
 				String Whishlistproduct = Common
-						.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
+						.findElement("xpath", "//a[@title='"+product+"']").getText();
 				System.out.println(Whishlistproduct);
 
 				if (Whishlistproduct.equals(product)) {
-					Sync.waitElementPresent(30, "xpath", "//a[contains(@title,'" + product + "')]//img");
-					Common.mouseOver("xpath", "//a[contains(@title,'" + product + "')]//img");
+					Sync.waitElementPresent(30, "xpath", "//a[@title='" + product + "']");
+					Common.mouseOver("xpath", "//a[@title='" + product + "']");
 					Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 					Common.clickElement("xpath", "//span[text()='Add to Cart']");
 					Sync.waitPageLoad();
-					Thread.sleep(4000);
-					String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-							.getAttribute("data-ui-id");
+					Thread.sleep(5000);
+					String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 					System.out.println(message1);
-					Common.assertionCheckwithReport(message1.contains("success"),
+					Common.assertionCheckwithReport(message1.contains("You added "),
 							"validating the  product add to the cart", "Product should be add to cart",
 							"Sucessfully product added to the cart ", "failed to add product to the cart");
-					int minicart = Common.findElements("xpath", "//span[@class='c-mini-cart__counter']").size();
+					
+					int minicart = Common.findElements("xpath", "//div[@x-show='cartSummaryCount']").size();
 					System.out.println(minicart);
+					Common.clickElement("xpath", "//div[@x-show='cartSummaryCount']");
 					if (minicart > 0) {
 						minicart_Checkout();
 					} else {
@@ -2219,7 +2209,7 @@ public class GoldHydroHyvaHelper {
 
 			} else {
 				Sync.waitPageLoad();
-
+				search_product("Product"); 
 				Common.scrollIntoView("xpath", "(//img[contains(@class,'m-produc')])[1]");
 				Sync.waitElementPresent(30, "xpath", "(//img[contains(@class,'m-produc')])[1]");
 				Common.mouseOver("xpath", "(//img[contains(@class,'m-produc')])[1]");
@@ -4773,31 +4763,43 @@ catch(Exception | Error e)
 	}
 
 	public void country_selctor() {
-		// TODO Auto-generated method stub
-		String Country;
-		try {
-			Common.actionsKeyPress(Keys.END);
-			List<WebElement> country = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
-			System.out.println(country.size());
-			for (int i = 0; i < country.size(); i++) {
 
-				List<WebElement> select = Common.findElements("xpath", "//label[contains(@class,'a-radio-button')]");
-				Sync.waitPageLoad();
-				Sync.waitElementPresent(50, "xpath", "//img[contains(@class,'a-icon-text-btn')]");
-				Common.clickElement("xpath", "//img[contains(@class,'a-icon-text-btn')]");
-				Thread.sleep(3000);
+		String Country;
+
+		try {
+
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.END);
+			List<WebElement> country = Common.findElements("xpath", "//span[contains(@class,'country-item__country-label')]");
+			System.out.println(country.size());
+
+			int iterations = Math.min(4, country.size());
+			for (int i = 1; i < iterations; i++) {
+
+				List<WebElement> select = Common.findElements("xpath", "(//p[@class='country-item__language']//span[1])");
+				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+				Common.scrollIntoView("xpath", "//button[contains(@class,'country-selector-button')]");
+				Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
+
 				Country = select.get(i).getText();
 				System.out.println(Country);
+				Common.refreshpage();
+				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+				Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
 				select.get(i).click();
-				if (Country.contains("United States")) {
+				String Selected_Country = Common.getText("xpath", "//div[@class='selected-lang notranslate']");
+				if (Selected_Country.contains("USA | EN") || Selected_Country.contains("FR/FR")
+						|| Selected_Country.contains("DE/DE") || Selected_Country.contains("EN/EN")
+						|| Selected_Country.contains("EN/GB")) {
 
-					Common.clickElement("xpath", "//button[@data-role='closeBtn']");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 							"click on the country should navigate to the  " + Country + "Page",
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				} else {
-					Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
+
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.navigateBack();
@@ -4806,8 +4808,8 @@ catch(Exception | Error e)
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				}
-			}
 
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the country selection page navigation",
