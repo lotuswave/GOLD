@@ -5183,7 +5183,7 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//button[@title='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
+			String orderid = Common.findElement("xpath", "//span[@class='title-xs md:title-lg']").getText().replace("#", "# ");
 			System.out.println(orderid);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid), "verifying order status form",
 					"order tracking information page navigation", "successfully order tracking information page ",
@@ -5202,12 +5202,12 @@ public class OspreyEMEA_HYVA {
 
 	public void click_trackorder() {
 		try {
-			Sync.waitElementPresent(30, "xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//a[text()='Track my order']");
+			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//button[@aria-label='My Account']");
+			Common.clickElement("xpath", "//a[@title='Track My Order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders"),
+					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders") || Common.getCurrentURL().contains("track/order/status"),
 					"Verifying the track order page navigation ",
 					"after clicking on the track order it should navigate to the orders and return page",
 					"successfully Navigated to the orders and return page",
