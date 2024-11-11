@@ -4046,9 +4046,10 @@ public class OspreyEMEA_HYVA {
 
 					 if(Common.getCurrentURL().contains("/gb"))
 	                 {
+						 Thread.sleep(4000);
 	              	   Sync.waitElementPresent("xpath", "//input[@id='agreement_5']");
 	              	   Common.clickElement("xpath", "//input[@id='agreement_5']");
-	              	   
+	              	 Thread.sleep(4000);
 	              	   Sync.waitElementPresent("xpath", "(//button[contains(text(),'Place Order')])[1]");
 	              	   Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[1]");
 	              	 Thread.sleep(8000);
