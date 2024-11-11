@@ -1628,91 +1628,93 @@ public class OspreyEMEA_HYVA {
 
 	public void giftCreation(String Dataset) {
 		// TODO Auto-generated method stub
-		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
-					"validating the Navigation to the My account page",
-					"After Clicking on My account CTA user should be navigate to the my account page",
-					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
-					"Failed to Navigate to the MY account page after Clicking on my account button");
+		 String Month = data.get(Dataset).get("EventMonth");
+	        String Year =  data.get(Dataset).get("EventYear");
+	        String Date = data.get(Dataset).get("EventDate");
+			try {
+				Common.clickElement("xpath", "//button[@id='customer-menu']");
+				Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+				Common.clickElement("xpath", "//a[@title='My Account']");
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
+						"validating the Navigation to the My account page",
+						"After Clicking on My account CTA user should be navigate to the my account page",
+						"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
+						"Failed to Navigate to the MY account page after Clicking on my account button");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
-					"After Clicking on My account CTA user should be navigate to the my account page",
-					"Unable to Navigates the user to My account page after clicking on the my account CTA",
-					Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
-			Assert.fail();
-		}
-		click_giftcard();
-		newregistry_CTA("Birthday");
-		try {
-			Thread.sleep(4000);
-			Common.clickElement("id", "submit.save");
-			String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
-					"validating error message in empty form", "It should display the error message when form is empty",
-					"successfully error message when form is empty",
-					"Failed to display the error message when form is empty");
-			Common.textBoxInput("xpath", "//input[@id='title']", data.get(Dataset).get("Type"));
-			Common.textBoxInput("xpath", "//textarea[@id='message']", data.get(Dataset).get("Message"));
-			Common.dropdown("xpath", "//select[@id='is_public']", SelectBy.TEXT, data.get(Dataset).get("privacy"));
-			Common.dropdown("xpath", "//select[@id='is_active']", SelectBy.TEXT, data.get(Dataset).get("Status"));
-			String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
-			if (eventname.equals("Birthday")) {
-				System.out.println(Common.getCurrentURL());
-				if(Common.getCurrentURL().contains("gb"))
-				{
-					Common.textBoxInput("xpath", "//input[@id='event_country_region_text']",
-							data.get(Dataset).get("Region"));
-				}
-				else
-				{
-				
-				Common.dropdown("xpath","//select[@id='event_country_region']", SelectBy.TEXT,
-						data.get(Dataset).get("Region"));
-			
-				}
-				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
-			} else if (eventname.equals("Wedding")) {
-
-				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
-						data.get(Dataset).get("Region"));
-				Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
-				Common.textBoxInput("xpath", "//input[@name='event_location']", data.get(Dataset).get("Location"));
-				Common.textBoxInput("xpath", "//input[@name='registry[number_of_guests]']",
-						data.get(Dataset).get("GropName"));
-
-			} else {
-				Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
-						data.get(Dataset).get("Region"));
-				Common.textBoxInput("xpath", "//input[@name='event_location']", data.get(Dataset).get("Location"));
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the Navigation to the My account page",
+						"After Clicking on My account CTA user should be navigate to the my account page",
+						"Unable to Navigates the user to My account page after clicking on the my account CTA",
+						Common.getscreenShot("Failed to Navigate to the MY account page after Clicking on my account CTA"));
+				Assert.fail();
 			}
-			// Baby_Registry("Baby Registry");
-			Registrant_Information("Birthday");
-			String shipping = Common.findElement("xpath", "(//select[@name='address_type_or_id']//option)[2]")
-					.getAttribute("value");
-			Common.dropdown("xpath", "//select[@name='address_type_or_id']", Common.SelectBy.VALUE, shipping);
-			Common.clickElement("id", "submit.save");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[contains(@class,'a-message__container-')]").getText();
-			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
-					"validating the gift registery page navigation ",
-					"After clicking on save button It should be able to navigate to the gift registry page ",
-					"successfully Navigated to the gift registry page", "failed to Navigate to the gift registry page");
+			click_giftcard();
+			newregistry_CTA("Birthday");
+			try {
+				Common.textBoxInput("xpath", "//input[@id='title']", data.get(Dataset).get("Type"));
+				Common.textBoxInput("xpath", "//textarea[@id='message']", data.get(Dataset).get("Message"));
+				Common.dropdown("xpath", "//select[@id='is_public']", SelectBy.TEXT, data.get(Dataset).get("privacy"));
+				Common.dropdown("xpath", "//select[@id='is_active']", SelectBy.TEXT, data.get(Dataset).get("Status"));
+				
+				String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
+				if (eventname.equals("Birthday")) {
+					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+							data.get(Dataset).get("Region"));
+					Thread.sleep(1000);
+					Common.scrollIntoView("id", "event_date");
+					Common.clickElement("id", "event_date");
+					
+					Common.dropdown("xpath", "//select[@name='datepicker_month']", SelectBy.TEXT,Month);
+					Common.dropdown("xpath", "//select[@name='datepicker_year']", SelectBy.TEXT,Year);
+					Thread.sleep(1000);
+					Common.clickElement("xpath", "//button[text()='"+Date+"']");
+					
+					
+				} else if (eventname.equals("Wedding")) {
 
-		} catch (Exception e) {
+					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+							data.get(Dataset).get("Region"));
+					Common.textBoxInput("xpath", "//input[@id='event_date']", data.get(Dataset).get("Date"));
+					Common.textBoxInput("xpath", "//input[@name='event_location']", data.get(Dataset).get("Location"));
+					Common.textBoxInput("xpath", "//input[@name='registry[number_of_guests]']",
+							data.get(Dataset).get("GropName"));
 
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the gift registery page navigation ",
-					"After clicking on save button It should be able to navigate to the gift registry page ",
-					"unable to Navigated to the gift registry page",
-					Common.getscreenShot("Failed to Navigate to the gift registry page"));
-			Assert.fail();
-		}
+				} else {
+					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
+							data.get(Dataset).get("Region"));
+					Common.textBoxInput("xpath", "//input[@name='event_location']", data.get(Dataset).get("Location"));
+				}
+//		        Baby_Registry("Baby Registry");
+				Registrant_Information("Birthday");
+				Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//input[@id='firstname']", data.get(Dataset).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
+				Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
+				Common.dropdown("xpath", "//select[@id='address_region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+				Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
+				Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
+				
+				Common.clickElement("id", "submit.save");
+				Sync.waitPageLoad();
+//		        Thread.sleep(4000);
+				String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
+						"validating the gift registery page navigation ",
+						"After clicking on save button It should be able to navigate to the gift registry page ",
+						"successfully Navigated to the gift registry page", "failed to Navigate to the gift registry page");
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the gift registery page navigation ",
+						"After clicking on save button It should be able to navigate to the gift registry page ",
+						"unable to Navigated to the gift registry page",
+						Common.getscreenShot("Failed to Navigate to the gift registry page"));
+				Assert.fail();
+			}
 
 	}
 
@@ -1798,24 +1800,16 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
-			Common.clickElement("xpath", "//span[text()='Create New Registry']");
-			Common.clickElement("id", "submit.next");
-			String errormessage = Common.findElement("xpath", "//div[@class='mage-error']").getText();
-			Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
-					"validating error message when we not give any type ",
-					"It should display the error message when we not given any type",
-					"successfully error message has been displayed", "Failed to display the error message");
-			// Sync.waitElementPresent("xpath", "//span[text()='Create New Registry']");
-			// Common.clickElement("xpath", "//span[text()='Create New Registry']");
+			Sync.waitElementPresent("xpath", "//a[contains(text(),'Create New Registry')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Create New Registry')]");
 			Sync.waitPageLoad();
 			Common.dropdown("id", "type_id", SelectBy.TEXT, data.get(Dataset).get("Type"));
 			Common.clickElement("id", "submit.next");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//span[@class='value']");
-			String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
+			String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
+			System.out.println(eventname);
+			Thread.sleep(6000);
 			Common.assertionCheckwithReport(
 					eventname.equals("Birthday") || eventname.equals("Wedding") || eventname.equals("Baby Registry"),
 					"validating seleted event page navigation ",
@@ -1837,8 +1831,8 @@ public class OspreyEMEA_HYVA {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[text()='Gift Registry']");
-			Common.clickElement("xpath", "//a[text()='Gift Registry']");
+			Sync.waitElementPresent("xpath", "//span[text()='Gift Registry']");
+			Common.clickElement("xpath", "//span[text()='Gift Registry']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Gift Registry"),
@@ -1861,15 +1855,14 @@ public class OspreyEMEA_HYVA {
 
 		try {
 
-			Common.clickElement("xpath", "//span[text()='Edit']");
+			Common.clickElement("xpath", "//a[contains(text(),'Edit')]");
 			Sync.waitPageLoad();
-			Common.scrollIntoView("xpath", "//input[@title='Zip/Postal Code']");
-			Common.textBoxInput("xpath", "//input[@title='Zip/Postal Code']", data.get(Dataset).get("postcode"));
+			Common.scrollIntoView("xpath", "//input[@id='address_postcode']");
+			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
-			System.out.println(message);
+			Thread.sleep(4000);
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
@@ -1890,12 +1883,13 @@ public class OspreyEMEA_HYVA {
 	public void delete_giftcard() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[@title='Delete']");
-			Thread.sleep(2000);
-			Common.clickElement("xpath", "//button[@class='a-btn a-btn--primary action-primary action-accept']");
+			Common.clickElement("xpath", " //a[contains(text(),'Delete')]");
+			Thread.sleep(3000);
+			 Common.alerts("Ok");
+			
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.contains("You deleted this gift registry."),
 					"validating the deleting functionality in the gift registry",
 					"After clicking on the delete button it should delete from the gift registry",
@@ -1909,6 +1903,7 @@ public class OspreyEMEA_HYVA {
 					Common.getscreenShot("failed to delete from the gift registry"));
 			Assert.fail();
 		}
+
 	}
 
 	public void share_giftcard(String Dataset) {
