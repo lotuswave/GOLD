@@ -14665,7 +14665,7 @@ public void url_color_validation(String Dataset) {
 	try
 	{
 		List<WebElement> pdpcolors = Common.findElements("xpath",
-				"//div[@aria-label='Color']//div[@x-id]");
+				"//div[@aria-label='Colour']//div[@x-id]");
 		for (int i = 0; i < pdpcolors.size(); i++) {
 
 			pdpcolors.get(i).click();

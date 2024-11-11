@@ -32,7 +32,7 @@ public class TEST_DGLD_OS_COMMON_026_URL_verification_of_PDP {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
