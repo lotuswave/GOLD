@@ -2897,23 +2897,31 @@ public class GoldHydroHyvaHelper {
 		return order;
 	}
 
-	public void access_for_prodeal(String Dataset) {
+	public void access_for_prodeal( ) {
 		// TODO Auto-generated method stub
 		click_Prodeal();
 		try {
-			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//input[@name='access_code']//parent::div");
-			Common.textBoxInput("xpath", "//input[@name='access_code']", data.get(Dataset).get("Access code"));
-			Common.clickElement("xpath", "//button[@title='Submit']");
-			Sync.waitPageLoad();
+			
 			Thread.sleep(6000);
-			String successmessage = Common.findElement("xpath", "//div[contains(@class,'message-notice')]//div")
+			String Pro_Account_Heading = Common.findElement("xpath", "//h1[text()='Hydro Flask Pro Account']")
 					.getText();
 
-			System.out.println(successmessage);
-			Common.assertionCheckwithReport(successmessage.contains("Enjoy Pro Deal pricing on select products."),
-					"validating the Pro Deal success message ", "should display the success message",
-					"successfully display the success message", "failed to display the success message");
+			System.out.println(Pro_Account_Heading);
+			
+			int Categories = Common.findElements("xpath", "//h3[@class='programs-heading']").size();
+			if(Categories>0) {
+				Common.clickElement("xpath", "//span[text()='Helen of Troy Employees']");
+				Common.clickElement("xpath", "//span[text()='Very & Save']");
+				Common.switchFrames("xpath", "//iframe[@class='sid-modal__iframe']");
+				int size =Common.findElements("xpath", "//div[@id='sid-step-employee-personal-info']").size();
+				Common.assertionCheckwithReport(size>0,
+						"validating the Employe personal Info Form is displayed successfully ", "should display Employe personal Info Form",
+						"successfully Employe personal Info Form is displayed ", "failed to display Employe personal Info Form ");
+			}
+			else {
+				Assert.fail();
+			}
+			
 		}
 
 		catch (Exception | Error e) {
