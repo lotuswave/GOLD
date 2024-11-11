@@ -4660,6 +4660,7 @@ return Number;
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
 			Common.clickElement("xpath", "//a[@title='My Account']");
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",

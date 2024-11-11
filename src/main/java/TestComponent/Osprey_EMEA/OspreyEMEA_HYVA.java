@@ -3735,9 +3735,11 @@ public class OspreyEMEA_HYVA {
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
 					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+						Thread.sleep(4000);
 						Sync.waitElementPresent("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
 						Common.clickElement("xpath", "//div[@class='flex items-center']//input[@type='checkbox']");
 						Thread.sleep(3000);
+						
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Thread.sleep(8000);
@@ -4306,11 +4308,11 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -4326,21 +4328,22 @@ public class OspreyEMEA_HYVA {
 		}
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//a[text()='Stored Payment Methods']");
-			Common.clickElement("xpath", "//a[text()='Stored Payment Methods']");
+			Sync.waitElementPresent("xpath", "//a[@title='Stored Payment Methods']");
+			Common.clickElement("xpath", "//a[@title='Stored Payment Methods']");
 			Sync.waitPageLoad(30);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Payment Methods"),
 					"validating the Navigation to the My Payment Methods page",
 					"After Clicking on stored methods CTA user should be navigate to the My Payment Methods page",
 					"Sucessfully User Navigates to the My Payment Methods page after clicking on the stored methods  CTA",
 					"Failed to Navigate to the My Payment Methods page after Clicking on my stored methods  CTA");
-			int size = Common.findElements("xpath", "//tbody[@class='m-table__body']").size();
+			int size = Common.findElements("xpath", "//div[@class='divide-y divide-border']").size();
 			if (size > 0) {
-				String number = Common.findElement("xpath", "//td[@data-th='Payment Method']//label").getText()
+				Thread.sleep(5000);
+				String number = Common.findElement("xpath", "//div[@class='flex items-center']//span").getText()
 						.replace("•••• ", "");
 				System.out.println(number);
 				System.out.println(Dataset);
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				Common.assertionCheckwithReport(number.contains("4242") && Dataset.contains("4242"),
 						"validating the card details in the my orders page",
 						"After Clicking on My payments methods and payment method should be appear in payment methods",
@@ -4352,10 +4355,10 @@ public class OspreyEMEA_HYVA {
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the error message for delete card",
-					"After Clicking the delete button we need to get the error message",
-					"Unable to display the error message when we clcik on the delete message",
-					Common.getscreenShot("Failed to display the error message when we clcik on the delete message"));
+			ExtenantReportUtils.addFailedLog("validating the card details in the my orders page",
+					"After Clicking on My payments methods and payment method should be appear in payment methods",
+					"Unable to display the payment methods in the my payments methods",
+					Common.getscreenShot("Failed to display the payment methods in the my payments methods"));
 			Assert.fail();
 		}
 
