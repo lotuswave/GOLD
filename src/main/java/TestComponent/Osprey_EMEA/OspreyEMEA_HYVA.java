@@ -3628,7 +3628,6 @@ public class OspreyEMEA_HYVA {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		String Number = "";
-		String code = data.get(dataSet).get("postcode");
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
@@ -3643,6 +3642,9 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
+			String code = Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
+			System.out.println(code);
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
