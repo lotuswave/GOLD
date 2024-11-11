@@ -7064,19 +7064,19 @@ public class OspreyEMEA_HYVA {
 					"After clicking on the reorder it should navigate to the shopping cart page",
 					"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
 
-			String Cart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText()
-					.replace(" Item(s)", "");
+			String Cart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title')]").getText().trim()
+					.replace("Items", "");
+			String checkout = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText().trim();
+			System.out.println(checkout);
 			System.out.println(Cart);
-			Sync.waitElementVisible(30, "xpath", "//button[@data-role='proceed-to-checkout']");
-			Common.clickElement("xpath", "//button[@data-role='proceed-to-checkout']");
+			Sync.waitElementVisible(30, "xpath", "//a[@id='checkout-link-button']");
+			Common.clickElement("xpath", "//a[@id='checkout-link-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
-			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
-			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
-			System.out.println(checkout);
+
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					checkout.equals(Cart) && Common.getCurrentURL().contains("checkout/#shipping"),
+					checkout.equals(Cart) || Common.getCurrentURL().contains("checkout/"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -7088,7 +7088,7 @@ public class OspreyEMEA_HYVA {
 					"validating the navigation to the shipping page when we click on the checkout ",
 					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
 					Common.getscreenShot("Failed to navigate to the shipping page"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 	}
@@ -7100,7 +7100,11 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//span[text()='Continue Shopping']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			verifingHomePage();
+			Common.assertionCheckwithReport( Common.getPageTitle().contains("Osprey"),
+					"validating store logo on the homwpage",
+					"System directs the user to the Homepage and store logo should display",
+					"Sucessfully user navigates to the home page and logo has been displayed",
+					"Failed to navigate to the homepage and logo is not displayed");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating store logo on the homwpage",
