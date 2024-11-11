@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_039_Register_User_place_an_order_by_using_reorder_functionality {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Register_User_place_an_order_by_using_reorder_functionality() throws Exception {

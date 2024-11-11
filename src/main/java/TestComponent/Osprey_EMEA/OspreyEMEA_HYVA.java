@@ -7025,8 +7025,8 @@ public class OspreyEMEA_HYVA {
 	public void reorder() {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__welcome']");
-			Common.clickElement("xpath", "//a[text()='My Orders']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//a[normalize-space()='My Orders']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='View Order']");
@@ -7096,8 +7096,8 @@ public class OspreyEMEA_HYVA {
 	public void Continue_Shopping() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementVisible("xpath", "//span[@class='a-btn-tertiary__label']");
-			Common.clickElement("xpath", "//span[@class='a-btn-tertiary__label']");
+			Sync.waitElementVisible("xpath", "//span[text()='Continue Shopping']");
+			Common.clickElement("xpath", "//span[text()='Continue Shopping']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			verifingHomePage();
@@ -7107,8 +7107,9 @@ public class OspreyEMEA_HYVA {
 					"System directs the user to the Homepage and store logo should display",
 					"Unable to navigate to the homepage and logo is not displayed",
 					"Failed to navigate to the homepage and logo is not displayed");
-			Assert.fail();
+			AssertJUnit.fail();
 		}
+
 
 	}
 
