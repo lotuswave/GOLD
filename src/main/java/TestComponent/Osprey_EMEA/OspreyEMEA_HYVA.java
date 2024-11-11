@@ -2290,23 +2290,26 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(2000);
+		
 			if(Common.getCurrentURL().contains("preprod")&&Common.getCurrentURL().contains("/gb") )
 			{
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favourites']");
-				Common.clickElement("xpath", "//a[text()='My Favourites']");
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favourites"),
-						"validating the Navigation to the My Favorites page",
-						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+			Common.clickElement("id", "customer-menu");
+			Sync.waitElementPresent(30, "xpath", "//a[@title='My Favourites']");
+			Common.clickElement("xpath", "//a[@title='My Favourites']");
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Favourites Sharing"),
+					"validating the Navigation to the My Favorites page",
+					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 			}
 			else
 			{
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent(30, "xpath", "//a[text()='My Favorites']");
-				Common.clickElement("xpath", "//a[text()='My Favorites']");
-				Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
+				Common.clickElement("id", "customer-menu");
+				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
+				Common.clickElement("xpath", "//a[@title='My Favorites']");
+				Thread.sleep(2000);
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Favorites Sharing"),
 						"validating the Navigation to the My Favorites page",
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
@@ -2320,7 +2323,7 @@ public class OspreyEMEA_HYVA {
 					"Unable to Navigates the user to My Favorites page after clicking on the My Favorites CTA",
 					Common.getscreenShot(
 							"Failed to Navigate to the My Favorites page after Clicking on My Favorites CTA"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
 
 	}
@@ -3435,55 +3438,52 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			int MyFavorites = Common.findElements("xpath", "//form[@class='form-wishlist-items']//div[contains(@class,'message')]//span").size();
+			int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
 
 			if (MyFavorites != 0) {
 				search_product("Product");
-				Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
-				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
-				if(Common.getCurrentURL().contains("stage3"))
-                {
-                    Sync.waitPageLoad();
-                    String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-                    System.out.println(message);
-                    Common.assertionCheckwithReport(message.contains("has been added to your Favourites"),
-                            "validating the  product add to the Favorites", "Product should be add to Favorites",
-                            "Sucessfully product added to the Favorites ", "failed to add product to the Favorites");
-                    whishlist_share_Button("share whishlist");
-
-                }
-				else
-				{
-				Sync.waitElementVisible(30, "xpath", "//h4");
-				String whishlistpopup = Common.findElement("xpath", "//h4").getText();
-				System.out.println(whishlistpopup);
-				if (whishlistpopup.contains("Add to Wishlist")) {
-					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
-					Common.clickElement("xpath", "//button[@title='Add To List']");
-				} else {
-					Assert.fail();
-				}
-				Sync.waitPageLoad();
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
-						"validating the Navigation to the My Favorites page",
-						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+				Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
+				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
+				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
+				My_Favorites();
 				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
 				Sync.waitPageLoad();
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				Thread.sleep(4000);
+				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
 				System.out.println(message);
-				Common.assertionCheckwithReport(message.contains("has been added to your Wish List"),
+				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
-				
-				}
-				whishlist_share_Button("share whishlist");
-				
-				
+				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+				Common.clickElement("xpath", "//button[@title='Share Wish List']");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
+				System.out.println(message1);
+				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+						"validating the shared whishlist functionality",
+						"sucess message should display after share whishlist",
+						"Sucessfully message has been displayed for whishlist",
+						"failed to display the message for whishlist");
 			} else {
-				whishlist_share_Button("share whishlist");
+				Common.clickElement("xpath", "//div[@class='column main']//button");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+				Common.clickElement("xpath", "//button[@title='Share Favourites']");
+				Thread.sleep(4000);
+				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				System.out.println(message1);
+				Common.assertionCheckwithReport(message1.contains("Your Favourites have been shared"),
+						"validating the shared whishlist functionality",
+						"sucess message should display after share whishlist",
+						"Sucessfully message has been displayed for whishlist",
+						"failed to display the message for whishlist");
 
 			}
 		} catch (Exception | Error e) {
@@ -3494,6 +3494,7 @@ public class OspreyEMEA_HYVA {
 					Common.getscreenShot("failed to display the message for whishlist"));
 			Assert.fail();
 		}
+
 
 	}
 
