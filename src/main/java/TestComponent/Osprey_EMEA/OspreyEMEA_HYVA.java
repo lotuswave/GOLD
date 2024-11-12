@@ -15045,6 +15045,46 @@ public String Secure_Payment_details(String dataSet) throws Exception {
 	}
 	return order;
 }
+
+public void Prouser_Discount() {
+	// TODO Auto-generated method stub
+	try
+	{
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
+	Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+	Thread.sleep(3000);
+	String originalprice = Common.getText("xpath", "//span[@class='price line-through hf:font-bold md:hf:font-normal']").replace("£", "");
+	//String originalprice = Common.getText("xpath", "//div[contains(@class,'old-price')]//span[@class='price line-through']").replace("$", "");
+	Float originalvalue = Float.parseFloat(originalprice);
+	String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("£", "");
+	Float pricevalue = Float.parseFloat(Newprice);
+	Thread.sleep(4000);
+	float discount = originalvalue - (originalvalue * 40 / 100);
+	String discountvalue = String.valueOf(discount).replace("£", "");
+	Float value = Float.parseFloat(discountvalue);
+	String s=String.valueOf(value); 
+	System.out.println(discountvalue);
+	System.out.println(value);
+	Common.assertionCheckwithReport(discountvalue.contains(s),
+			"verifying the discount for the Pro user discount ",
+			"user should able to see the discount for the Pro user",
+			"user successfully able to apply the discount", "Failed to apply the discount for the pro user");
+	click_minicart();
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the discount for the pro user discount ",
+				"user should able to see the discount for the pro user",
+				"Unable to apply the discount for the pro user",
+				Common.getscreenShotPathforReport("Failed to apply the discount for the pro user"));
+		Assert.fail();
+	}
+	
+}
+	
+
 }
 
 
