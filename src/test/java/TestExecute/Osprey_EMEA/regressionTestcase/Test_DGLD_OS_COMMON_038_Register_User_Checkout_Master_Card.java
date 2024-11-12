@@ -28,7 +28,6 @@ public class Test_DGLD_OS_COMMON_038_Register_User_Checkout_Master_Card {
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCMastercard");
-        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

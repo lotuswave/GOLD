@@ -27,7 +27,6 @@ public class Test_DGLD_OS_COMMON_027_Guest_User_Checkout_Master_Card {
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.invalid_Discount("Discount");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCMastercard");
-        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
