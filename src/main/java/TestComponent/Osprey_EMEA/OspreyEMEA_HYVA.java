@@ -11021,6 +11021,12 @@ catch(Exception | Error e)
 			}
 			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
+				
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//input[@id='agreement_5']");
+				Common.clickElement("xpath", "//input[@id='agreement_5']");
+				
+				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 				
