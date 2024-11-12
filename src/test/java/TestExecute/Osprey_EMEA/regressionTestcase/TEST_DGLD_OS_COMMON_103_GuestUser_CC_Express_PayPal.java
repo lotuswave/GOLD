@@ -24,7 +24,6 @@ public class TEST_DGLD_OS_COMMON_103_GuestUser_CC_Express_PayPal {
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.Express_Paypal("PaypalDetails");
        
-        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
