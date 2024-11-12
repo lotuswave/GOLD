@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
@@ -12,8 +13,8 @@ import TestLib.Login;
 public class Test_DGLD_OS_COMMON_015_Social_Links {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"DataSet");
-
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"DataSet");
+	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_the_Social_Links_Funtionality () throws Exception {
 

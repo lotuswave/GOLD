@@ -3346,11 +3346,11 @@ public class OspreyEMEA_HYVA {
 		try {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
-				Common.clickElement("xpath", "//span[text()='" + socallinksarry[i] + "']");
+				Common.clickElement("xpath", "//img[contains(@src,'" + socallinksarry[i] + "')]");
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 
-				if (socallinksarry[i].equals("Instagram")) {
+				if (socallinksarry[i].equals("instagram")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -3359,7 +3359,7 @@ public class OspreyEMEA_HYVA {
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].equals("Facebook")) {
+				else if (socallinksarry[i].equals("facebook")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.facebook.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -3368,37 +3368,38 @@ public class OspreyEMEA_HYVA {
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].equals("Twitter")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("twitter"),
+				else if (socallinksarry[i].equals("x.svg")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("x.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].equals("YouTube")) {
+				} else if (socallinksarry[i].equals("youtube")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].equals("Pinterest")) {
+				} else if (socallinksarry[i].equals("pinterest")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("pinterest"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
+					Thread.sleep(1000);
 					Common.switchToFirstTab();
 				}
-
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Verifying Social link ",
-					"click the social links it will navigating to particular page",
-					"User unable to navigate Social link page", Common.getscreenShotPathforReport("socialpage"));
+					"click the socal links it will navigating to particular page",
+					"User unabel to navigate Social page", Common.getscreenShotPathforReport("socialpage"));
 			Assert.fail();
 		}
+
 	}
 
 	public void Signin_Checkoutpage(String Dataset) {
