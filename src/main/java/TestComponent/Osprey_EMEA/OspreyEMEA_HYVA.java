@@ -15050,6 +15050,7 @@ public void Prouser_Discount() {
 	// TODO Auto-generated method stub
 	try
 	{
+		
 	Thread.sleep(4000);
 	Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
 	Common.clickElement("xpath", "//button[@aria-label='Close minicart']");

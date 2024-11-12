@@ -30,6 +30,7 @@ public class TEST_DGLD_OS_COMMON_120_PRO_Customer_Checkout_With_SingleItem_Using
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
+        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
