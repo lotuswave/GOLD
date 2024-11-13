@@ -3636,9 +3636,7 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
-			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-			String code = Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
-			System.out.println(code);
+		
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -3721,6 +3719,9 @@ public class OspreyEMEA_HYVA {
 					System.out.println(zipcode);
 
 					if (zipcode > 0) {
+						Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
+						String code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
+						System.out.println(code);
 
 						Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 						Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
@@ -3793,6 +3794,9 @@ public class OspreyEMEA_HYVA {
 				System.out.println(zipcode);
 
 				if (zipcode > 0) {
+					Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
+					String code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
+					System.out.println(code);
 
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
@@ -9713,8 +9717,9 @@ return Number;
 		}
 	}
 	
-	public void DeliveryAddress_Guestuser_Gift(String dataSet) throws Exception {
+	public String DeliveryAddress_Guestuser_Gift(String dataSet) throws Exception {
 		String address = data.get(dataSet).get("Street");
+		String Shipping="";
 
 		try {
 			Thread.sleep(5000);
@@ -9736,51 +9741,32 @@ return Number;
 
 			try {
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-				Common.clickElement("xpath", "//label[@for='stripe_payments']");
-				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='firstname']",
-						data.get(dataSet).get("FirstName"));
-				int size = Common.findElements("xpath", "//input[@type='email']").size();
-				Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
-						"Filled Email address", "unable to fill the email address");
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='lastname']",
-						data.get(dataSet).get("LastName"));
-				Common.clickElement("xpath", "//div[@class='billing-address-form']//input[@name='street[0]']");
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='street[0]']", address);
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				Common.findElement("xpath", "//div[@class='billing-address-form']//input[@name='city']").clear();
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='city']",
-						data.get(dataSet).get("City"));
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
 				System.out.println(data.get(dataSet).get("City"));
 
-				
-				Thread.sleep(3000);
-				try {
-					Common.scrollIntoView("xpath", "//select[@name='region_id']");
-					 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-
-				} catch (ElementClickInterceptedException e) {
-					Thread.sleep(3000);
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-				}
-
-				Thread.sleep(3000);
-//				Common.textBoxInputClear("xpath", "//div[@class='billing-address-form']//input[@name='postcode']");
-				String id=Common.findElement("xpath", "(//input[@name='postcode'])[2]").getAttribute("id");
-				System.out.println(id);
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@id='"+ id +"']", data.get(dataSet).get("postcode"));
+					 Thread.sleep(4000);
+	                 Common.scrollIntoView("xpath", "//select[@name='region']");
+	                 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Thread.sleep(3000);
+	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region']")
+	                         .getAttribute("value");
+	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+		              System.out.println(Shipping);
+	                 System.out.println(Shippingvalue);
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "//input[@name='postcode']",
+						data.get(dataSet).get("postcode"));
 				Thread.sleep(5000);
 
-				Common.textBoxInput("xpath", "//div[@class='billing-address-form']//input[@name='telephone']", data.get(dataSet).get("phone"));
-				
-				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//span[text()='Update']");
-				
-				ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
-						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
-						Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+				Common.textBoxInput("xpath", "//input[@name='telephone']",
+						data.get(dataSet).get("phone"));
 
 			
 		}
@@ -9790,12 +9776,13 @@ return Number;
 				ExtenantReportUtils.addFailedLog("validating shipping address",
 						"shipping address is filled in to the fields", "user faield to fill the shipping address",
 						Common.getscreenShotPathforReport("shipingaddressfaield"));
-				Assert.fail();
+				AssertJUnit.fail();
 
 			
 			}
+			return Shipping;
 		}
-	
+
 
 	public void Card_Value(String Dataset) {
 		// TODO Auto-generated method stub
