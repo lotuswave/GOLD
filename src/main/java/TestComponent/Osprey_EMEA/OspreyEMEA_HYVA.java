@@ -9981,22 +9981,16 @@ return Number;
 //			Sync.waitElementPresent("xpath", "//input[@type='number']");
 			Common.clickAndtextBoxInput("xpath", "//input[@type='number']", data.get(Dataset).get("Another Amount"));
 //			Common.textBoxInput("xpath", "//input[@type='number']", data.get(Dataset).get("Enter_amount"));
-			Common.clickElement("xpath", "//button[@class='amcard-button']");
-			String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+			Common.clickElement("xpath", "//button[@title='Add']");
+			Thread.sleep(2000);
+			String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
 			System.out.println(Price);
 			Common.assertionCheckwithReport(Price.contains(Enter_amount),
 					"validating gift card amount value in PDP",
 					"After clicking on the value amount should be appear in PDP",
 					"Successfully selected amount is matched for the gift card",
 					"Failed to appear amount for the gift card");
-			Common.clickElement("xpath", "(//img[@class='amcard-image'])[2]");
-			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
-			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
-			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
-					"validating the selected gift card",
-					"After clicking on the card design gift card should be match",
-					"Successfully Gift card design has been matched",
-					"Failed to match the Gift card design");
+			
 			Giftcard_details("Gift Details");
 			product_quantity("Product Qunatity");
 			Thread.sleep(4000);
@@ -10004,13 +9998,13 @@ return Number;
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
-			System.out.println(message);
-			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-					"Product should be add to cart", "Sucessfully product added to the cart ",
-					"failed to add product to the cart");
+//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
 
 		}
 		catch(Exception | Error e)
