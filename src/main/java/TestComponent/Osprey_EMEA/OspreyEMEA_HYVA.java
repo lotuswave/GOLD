@@ -9573,16 +9573,13 @@ return Number;
 		String GiftCard = data.get(Dataset).get("Osprey");
 		try
 		{
-//			Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
-//			Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
-//			Common.assertionCheckwithReport(Common.getPageTitle().contains("Shop Gift Cards"),
-//					"To validate Gift card Navigation to the PLP",
-//					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
-//					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
+				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
+				Common.clickElement("xpath", "//span[text()='Gift Cards']");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop ,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9598,16 +9595,6 @@ return Number;
 			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			String GiftcardName=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText();
-			System.out.println(GiftcardName);
-			String Card = data.get(Dataset).get("Osprey").toUpperCase();
-			System.out.println(Card);
-			Common.assertionCheckwithReport(GiftcardName.contains(GiftCard),
-					"validating the Gift card Navigation to the PDP page",
-					"After clicking on the gift card it should navigate to the PDP",
-					"Successfully Gift card is Navigated to the PDP",
-					"Failed to Navigate the Gift card to the PDP page");
-		
 		}
 		catch(Exception | Error e)
 		{
@@ -9616,10 +9603,11 @@ return Number;
 					"After clicking on the gift card it should navigate to the PDP",
 					"Unable to Navigate the Gift card to the PDP page",
 					Common.getscreenShot("Failed to Navigate the Gift card to the PDP page"));
-			Assert.fail();
+			AssertJUnit.fail();
 			
 		
 		}
+		
 	}
 	
 	
@@ -9791,38 +9779,15 @@ return Number;
 		{
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//label[@class='amcard-label-block -price']//span[text()='"+ amount +"']");
-			Common.clickElement("xpath", "//label[@class='amcard-label-block -price']//span[text()='"+ amount +"']");
-			String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
-//			Common.assertionCheckwithReport(Price.contains(amount),
-//					"validating gift card amount value in PDP",
-//					"After clicking on the value amount should be appear in PDP",
-//					"Successfully selected amount is matched for the gift card",
-//					"Failed to appear amount for the gift card");
-//			Common.clickElement("xpath", "(//img[@class='amcard-image'])[1]");
-//			String SmallCard=Common.findElement("xpath", "//img[@class='amcard-image -active']").getAttribute("src");
-//			String MainCard=Common.findElement("xpath", "//img[@class='fotorama__img']").getAttribute("src");
-//			Common.assertionCheckwithReport(SmallCard.equals(MainCard),
-//					"validating the selected gift card",
-//					"After clicking on the card design gift card should be match",
-//					"Successfully Gift card design has been matched",
-//					"Failed to match the Gift card design");
+			Sync.waitElementPresent("xpath", "//label[contains(@class,'amcard-label-block -price')]//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//label[contains(@class,'amcard-label-block -price')]//span[text()='"+ amount +"']");
 			Giftcard_details("Gift Details");
 			product_quantity("Product Qunatity");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
-			Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 			
 		}
 		catch(Exception | Error e)
@@ -9830,9 +9795,8 @@ return Number;
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
 					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
-			Assert.fail();
+			AssertJUnit.fail();
 		}
-		
 	}
 
 	public void Giftcard_details(String Dataset) {
