@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
@@ -12,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Cart {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MyFavorites");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"MyFavorites");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Account_Registration_Create_Account_With_Cart () throws Exception {
@@ -45,7 +46,7 @@ public class Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Ca
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
