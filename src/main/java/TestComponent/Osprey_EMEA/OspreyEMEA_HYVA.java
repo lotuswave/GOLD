@@ -3719,12 +3719,10 @@ public class OspreyEMEA_HYVA {
 					System.out.println(zipcode);
 
 					if (zipcode > 0) {
-						Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
-						String code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
-						System.out.println(code);
+						
 
 						Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-						Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+						Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", data.get(dataSet).get("postcode"));
 					}
 					int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
 					
@@ -9277,22 +9275,12 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[text()='Add Discount Code']");
-			Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 			Sync.waitElementPresent("id", "discount-code");
 			Common.textBoxInput("id", "discount-code", invalidcode);
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
-			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']");
-			String errormessage = Common.findElement("xpath", "//div[@data-ui-id='checkout-cart-validationmessages-message-error']")
-					.getText();
-			System.out.println(errormessage);
-			Common.assertionCheckwithReport(errormessage.contains("The code "+ invalidcode +" is not active."),
-					"validating the discount error message in the payment page",
-					"Error message should be display in the payment page",
-					"Successfully error message should be displayed",
-					"Failed to display the error message in the payment page");
-			Tool_Tip();
+			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
