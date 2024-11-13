@@ -5911,19 +5911,20 @@ return Number;
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementVisible(30, "xpath", "//a[text()='Address Book']");
-			Common.clickElement("xpath", "//a[text()='Address Book']");
-			Thread.sleep(4000);
+			Sync.waitElementVisible(30, "xpath", "//a[@title='Address Book']");
+			Common.clickElement("xpath", "//a[@title='Address Book']");
+			Thread.sleep(3000);
+	   
 			Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
-			Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+			Common.textBoxInput("xpath", "//input[@id='street_1']", data.get(dataSet).get("Street"));
 			Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
 			Thread.sleep(4000);
 			 if(Common.getCurrentURL().contains("preprod"))
              {
                  
-                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+                 Common.textBoxInput("xpath", "//input[@name='region']", data.get(dataSet).get("Region"));
                  Thread.sleep(3000);
-                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                 String Shippingvalue = Common.findElement("xpath", "//input[@name='region']")
                          .getAttribute("value");
                  System.out.println(Shippingvalue);
              }
@@ -5936,7 +5937,7 @@ return Number;
 
 			Common.clickElement("xpath", "//button[@title='Save Address']");
 			Thread.sleep(5000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You saved the address."),
 					"validating the saved message after saving address in address book",
@@ -5968,9 +5969,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 
-			String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
-			if (newaddress.contains("You have no other address")) {
-				Common.clickElement("xpath", "//button[@title='Add New Address']");
+			String newaddress = Common.findElement("xpath", "//h1[contains(@class,'title')]//span").getText();
+			if (newaddress.contains("Address Book")) {
+				Common.clickElement("xpath", "//a [contains(text(),'Add New Address ')]");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
 				Common.clickElement("xpath", "//input[@name='firstname']");
@@ -5980,14 +5981,14 @@ return Number;
 				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
 				Common.clickElement("xpath", "//input[@title='Phone Number']");
 				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
-				Common.clickElement("xpath", "//input[@title='Address Line 1']");
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+				Common.clickElement("xpath", "//input[@id='street_1']");
+				Common.textBoxInput("xpath", "//input[@id='street_1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
 				Thread.sleep(4000);
 				if(Common.getCurrentURL().contains("preprod"))
 	             { 
-	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+	                 Common.textBoxInput("xpath", "//input[@name='region']",data.get(Dataset).get("Region"));  
 	             }
 				else
 				{
@@ -5998,14 +5999,14 @@ return Number;
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				Common.clickElement("xpath", "//label[@for='primary_shipping']");
 				Common.clickElement("xpath", "//button[@title='Save Address']");
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 
 				Common.assertionCheckwithReport(message.contains("You saved the address."),
 						"validating the saved message after saving address in address book",
 						"Save address message should be displayed after the address saved in address book",
 						"Sucessfully address has been saved in the address book",
 						"Failed to save the address in the address book");
-				Shippingaddress_Addressbook("New ShippingAddress");
+				//Shippingaddress_Addressbook("New ShippingAddress");
 			} else {
 				Shippingaddress_Addressbook("New ShippingAddress");
 			}
@@ -6092,6 +6093,7 @@ return Number;
 
 	public void change_Billingaddress_Addressbook(String Dataset) {
 		// TODO Auto-generated method stub
+
 		String firstname = data.get(Dataset).get("FirstName");
 		String secondname = data.get(Dataset).get("LastName");
 		String address = data.get(Dataset).get("Street");
@@ -6104,9 +6106,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 
-			String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
-			if (newaddress.contains("You have no other address")) {
-				Common.clickElement("xpath", "//button[@title='Add New Address']");
+			String newaddress = Common.findElement("xpath", "//h1[contains(@class,'title')]//span").getText();
+			if (newaddress.contains("Address Book")) {
+				Common.clickElement("xpath", "//a [contains(text(),'Add New Address ')]");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
 				Common.clickElement("xpath", "//input[@name='firstname']");
@@ -6116,13 +6118,14 @@ return Number;
 				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
 				Common.clickElement("xpath", "//input[@title='Phone Number']");
 				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
-				Common.clickElement("xpath", "//input[@title='Address Line 1']");
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+				Common.clickElement("xpath", "//input[@id='street_1']");
+				Common.textBoxInput("xpath", "//input[@id='street_1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
 				if(Common.getCurrentURL().contains("preprod"))
 	             { 
-	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+	                 //Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));
+	                 Common.textBoxInput("xpath", "//input[@name='region']", data.get(Dataset).get("Region"));
 	             }
 				else
 				{
@@ -6131,14 +6134,15 @@ return Number;
 				}
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
+				
 				Common.clickElement("xpath", "//button[@title='Save Address']");
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 				Common.assertionCheckwithReport(message.equals("You saved the address."),
 						"validating the saved message after saving address in address book",
 						"Save address message should be displayed after the address saved in address book",
 						"Sucessfully address has been saved in the address book",
 						"Failed to save the address in the address book");
-				Billingaddress_Addressbook(Dataset);
+				//Billingaddress_Addressbook(Dataset);
 			} else {
 				Billingaddress_Addressbook(Dataset);
 			}
@@ -6232,7 +6236,6 @@ return Number;
 
 	public void Edit_Delete_Address(String Dataset) {
 		// TODO Auto-generated method stub
-
 		String firstname = data.get(Dataset).get("FirstName");
 		String secondname = data.get(Dataset).get("LastName");
 		String address = data.get(Dataset).get("Street");
@@ -6242,10 +6245,10 @@ return Number;
 		String zipcode = data.get(Dataset).get("postcode");
 		String shipping = data.get(Dataset).get("Shipping address");
 		try {
-			String addressbook = Common.findElement("xpath", "//span[@class='toolbar-number']").getText();
+			int addressbook = Common.findElements("xpath", "//table[@id='my-address-table']").size();
 			System.out.println(addressbook);
-			if (addressbook.contains("1 Item")) {
-				Common.clickElement("xpath", "//span[text()='Edit']");
+			if (addressbook>0) {
+				Common.clickElement("xpath", "//a[@title='Edit']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
 				Common.clickElement("xpath", "//input[@name='firstname']");
@@ -6255,24 +6258,27 @@ return Number;
 				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
 				Common.clickElement("xpath", "//input[@title='Phone Number']");
 				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
-				Common.clickElement("xpath", "//input[@title='Address Line 1']");
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
+				Common.clickElement("xpath", "//input[@id='street_1']");
+				Common.textBoxInput("xpath", "//input[@id='street_1']", address);
 				Common.clickElement("xpath", "//input[@title='City']");
 				Common.textBoxInput("xpath", "//input[@title='City']", City);
-				if(Common.getCurrentURL().contains("preprod"))
+				if(Common.getCurrentURL().contains("/gb"))
 	             { 
-	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region"));  
+//					Common.clickElement("xpath", "//input[@placeholder='State/Province']");
+//					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
+					Common.textBoxInput("xpath", "//input[@name='region']", data.get(Dataset).get("Region")); 
+	                
 	             }
 				else
 				{
-				Common.clickElement("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", region);
+					// Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(Dataset).get("Region")); 
+					 Common.textBoxInput("xpath", "//input[@name='region']", data.get(Dataset).get("Region")); 
 				}
 				Common.clickElement("xpath", "//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
 				// Common.clickElement("xpath", "//label[@for='primary_shipping']");
 				Common.clickElement("xpath", "//button[@title='Save Address']");
-				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String message = Common.findElement("xpath", "//span[text()='You saved the address.']").getText();
 
 				Common.assertionCheckwithReport(message.contains("You saved the address."),
 						"validating the saved message after saving address in address book",
@@ -6284,21 +6290,21 @@ return Number;
 				Sync.waitElementPresent("xpath", "//span[text()='Delete']");
 				Common.clickElement("xpath", "//span[text()='Delete']");
 				Thread.sleep(4000);
-				String popmessage = Common.findElement("xpath", "//div[contains(text(),'Are you ')]").getText();
-				if (popmessage.contains("Are you sure you want to delete this address?")) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
-					Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-					String Delmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div")
-							.getText();
-					System.out.println(Delmessage);
-					Common.assertionCheckwithReport(Delmessage.contains("You deleted the address."),
+				Common.acceptAlert(2000);
+//				String popmessage = Common.findElement("xpath", "//div[contains(text(),'Are you ')]").getText();
+//				if (popmessage.contains("Are you sure you want to delete this address?")) {
+//					Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
+//					Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+				String Delmessage = Common.findElement("xpath", "//span[text()='You deleted the address.']").getText();
+				System.out.println(Delmessage);
+				Common.assertionCheckwithReport(Delmessage.contains("You deleted the address."),
 							"validating the Delete message after Deleting address in address book",
 							"Delete address message should be displayed after the address delete in address book",
 							"Sucessfully address has been Deleted in the address book",
 							"Failed to Delete the address in the address book");
-				} else {
-					Assert.fail();
-				}
+//				} else {
+//					Assert.fail();
+//				}
 
 			} else {
 				Assert.fail();
