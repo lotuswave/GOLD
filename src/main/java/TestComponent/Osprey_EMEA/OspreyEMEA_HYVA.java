@@ -6617,7 +6617,9 @@ return Number;
 				try {
 					Thread.sleep(6000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
+					Thread.sleep(4000);
 					Common.clickElement("xpath", "//input[contains(@id,'agreement')]");
+					Thread.sleep(4000);
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 
 					Thread.sleep(6000);
