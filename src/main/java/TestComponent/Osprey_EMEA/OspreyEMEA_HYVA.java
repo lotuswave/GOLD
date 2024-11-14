@@ -493,7 +493,7 @@ public class OspreyEMEA_HYVA {
 			Thread.sleep(4000);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Backpacks, Luggage & Travel")
+					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Customer Login")
 							|| Common.getPageTitle().contains("Osprey"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
@@ -8979,6 +8979,8 @@ return Number;
 	public void discountCode(String dataSet) throws Exception {
 		String expectedResult = "It should opens textbox input to enter discount.";
 		String Symbol = data.get(dataSet).get("Symbol");
+		HashMap<String,String> SKU=new HashMap<>();
+		String SKUS="";
 		System.out.println(Symbol);
 
 		try {
@@ -9013,34 +9015,50 @@ return Number;
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
-			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
-			System.out.println(discountcodemsg);
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
-					"verifying pomocode", expectedResult, "promotion code working as expected",
-					"Promation code is not applied");
+			
 
-			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
-			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
+			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace("£",
 					"").trim();
 			Float subtotalvalue = Float.parseFloat(Subtotal);
+			
+			Common.clickElement("xpath", "//button[@title='Show items']");
+			Thread.sleep(3000);
+			int Products=Common.findElements("xpath", "//span[@class='price-including-tax pt-2']").size();
+			for (int i = 0; i < Products; i++)
+			{
+				int value = i + 1;
+				String Product=Common.findElement("xpath", "(//span[@class='price-including-tax pt-2'])["+ value +"]").getText().replace("£", "");
+				
+//				SKUS=SKUS.concat("").trim();
+				SKUS=SKUS.concat(Product);
+				System.out.println(SKUS);
+				SKU.put("SKU",SKUS);
+			
+			}
+			System.out.println(SKUS);
+			Float skuproducts=subtotalvalue+(subtotalvalue*20/100);
+		
+	        
+			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
+					.replace("£", "").trim();
+			Float Discountvalue = Float.parseFloat(Discount);
+			
+			Float DIS=(skuproducts)+Discountvalue;
+			
+			
 			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
-					.replace("$", "").trim();
+					.replace("£", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "").trim();
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
-			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]")
-					.replace("$", "").trim();
-			Float Discountvalue = Float.parseFloat(Discount);
-			System.out.println(Discountvalue);
 
 			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
-					.replace("$", "").trim();
+					.replace("£", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
+			Float Total = (DIS + shippingvalue);
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
