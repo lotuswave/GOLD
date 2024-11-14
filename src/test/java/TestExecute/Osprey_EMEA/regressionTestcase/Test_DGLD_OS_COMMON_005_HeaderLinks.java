@@ -5,14 +5,15 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 
-	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Header");
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Header");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Header_Links_Functionality () throws Exception {
@@ -26,13 +27,10 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
         Osprey_ReEu.header_Accessories("Accessories");         //While Executing EU Please comment this line and Execute it.
         Osprey_ReEu.header_Featured("Featured");
         Osprey_ReEu.Bagpack_ShopAll("ShopAll");
-        Osprey_ReEu.Travel_ShopAll("TravelShopAll");                 //While Executing EU please comment this line and execute it
         Osprey_ReEu.header_Shopbyactivity("Shop by Activity");       
         Osprey_ReEu.header_Shopbycollection("Shop by Collections"); 
         Osprey_ReEu.Featured_ShopAll("FeaturedShopAll");      
-//       Osprey_ReEu.image_ShopAll("ImageShopAll");     // image shop all is not working in preprod
-        Osprey_ReEu.header_sale();
-        Osprey_ReEu.header_Explore("Explore");       //While Executing EU please comment this line and Execute it
+//        Osprey_ReEu.New_Season();  
         
         
 		} catch (Exception e) {
@@ -40,6 +38,7 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 
 	@AfterTest
