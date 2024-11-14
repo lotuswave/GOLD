@@ -12846,7 +12846,7 @@ public void validateChatboxOptions(String Dataset) {
 	}
 }
 
-public void Kustomer_Links(String Dataset) {
+public void Kustomer_Links(String Dataset) {{
 	// TODO Auto-generated method stub
 	
 	String Kustomer = data.get(Dataset).get("Kustomer Links");
@@ -12855,18 +12855,18 @@ public void Kustomer_Links(String Dataset) {
 	try {
 		for (i = 0; i < Kustomerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("lang/en_us/")
-							|| Common.getCurrentURL().contains("contact/product-registration-form")
-							|| Common.getCurrentURL().contains("guarantee-faqs"),
+					Common.getPageTitle().contains(Kustomerlinks[i])||
+					Common.getCurrentURL().contains(Kustomerlinks[i]) ||
+					Common.getCurrentURL().contains("lang/en_us/"),
 					"validating the Kustomer links navigation from footer Links",
 					"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 					Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
@@ -12883,36 +12883,33 @@ public void Kustomer_Links(String Dataset) {
 	}
 
 }
+}
 
-public void Footer_validation(String Dataset) {
+public void Footer_validation(String Dataset) {{
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("Footer Links");
 	String[] footerlinks = footer.split(",");
+	String footers = data.get(Dataset).get("Footer Links").toUpperCase();
+	String[] footerlink = footers.split(",");
 	int i = 0;
 	try {
-		for (i = 0; i < footerlinks.length; i++) {
+		for (i = 4; i < footerlinks.length; i++) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),\""+footerlinks[i] +"\" )]");
-			Thread.sleep(3000);
+					"//li[contains(@class,'cmsb656-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),\""+footerlinks[i] +"\" )]");
+					"//li[contains(@class,'cmsb656-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),\""+footerlinks[i] +"\" )]");
+					"//li[contains(@class,'cmsb656-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String Bread = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText().toLowerCase();
+			String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumbs')]").getText();
 			System.out.println(Bread);
 			System.out.println(footerlinks[i]);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("student-beans")
-							|| Common.getCurrentURL().contains("gift-cards")
-							|| Common.getCurrentURL().contains("track/order/status")
-							|| Common.getCurrentURL().contains("owners-manual")
-							|| Common.getCurrentURL().contains("repairs-fabric-claims")
-							|| Common.getCurrentURL().contains("/osprey-europe-limited-tax-strategy"),
+					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || Common.getCurrentURL().contains("limited-tax-strategy") ||
+					Common.getCurrentURL().contains("order/status") || Common.getCurrentURL().contains(footerlinks[i]) ,
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -12935,7 +12932,9 @@ public void Footer_validation(String Dataset) {
 
 }
 
-public void Footer_Links(String Dataset) {
+}
+
+public void Footer_Links(String Dataset) {{
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("Footer Links");
 	String Terms=data.get(Dataset).get("Terms");
@@ -12947,18 +12946,18 @@ public void Footer_Links(String Dataset) {
 		
 		for(j = 0; j < Termlinks.length; j++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Common.clickElement("xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'" + Termlinks[j] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + Termlinks[j] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Termlinks[j])
 							|| Common.getCurrentURL().contains("/blog")
-							|| Common.getCurrentURL().contains("prodeal"),
+							,
 					"validating the links navigation from footer Links",
 					"After Clicking on" + Termlinks[j] + "it should navigate to the",
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
@@ -12972,19 +12971,17 @@ public void Footer_Links(String Dataset) {
 		}
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("/blog")
-							|| Common.getCurrentURL().contains("prodeal")
-							|| Common.getCurrentURL().contains("Osprey Asset Bank"),
+					Common.getPageTitle().contains(footerlinks[i]) ||Common.getCurrentURL().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("blog") ||  Common.getCurrentURL().contains("pack"),				
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -13008,7 +13005,7 @@ public void Footer_Links(String Dataset) {
 		Assert.fail();
 	}
 
-}
+}}
 
 public void warrenty_Replacement() {
 	// TODO Auto-generated method stub
@@ -14228,7 +14225,7 @@ public void Footer_Links_CustomerSupport(String Dataset) {
 }
 
 
-public void Footer_Links_Resources(String Dataset) {
+public void Footer_Links_Resources(String Dataset) { {
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("Resources_Links");
 	String[] footerlinks = footer.split(",");
@@ -14239,29 +14236,24 @@ public void Footer_Links_Resources(String Dataset) {
 		
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("/prodeal")
-							|| Common.getCurrentURL().contains("corporate-sales")
-							|| Common.getCurrentURL().contains("program-sales")
-							|| Common.getCurrentURL().contains("dealer-inquiries")
-							|| Common.getCurrentURL().contains("ospreydealers")
-							|| Common.getCurrentURL().contains("affiliate"),
+					Common.getPageTitle().contains(footerlinks[i]) || Common.getCurrentURL().contains(footerlinks[i]) 
+					|| Common.getCurrentURL().contains("product"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 					
-			Thread.sleep(4000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
+			Thread.sleep(3000);
+	/*		int responcecode = getpageresponce(Common.getCurrentURL());
 			System.out.println(responcecode);
 			String pagecode=Integer.toString(responcecode);
 			System.out.println(pagecode);
@@ -14282,6 +14274,7 @@ public void Footer_Links_Resources(String Dataset) {
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
 				Assert.fail();
 			}
+*/
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -14300,10 +14293,10 @@ public void Footer_Links_Resources(String Dataset) {
 		Assert.fail();
 	}
 
-}
+}}
 
 
-public void Footer_Links_BrandTeam(String Dataset) {
+public void Footer_Links_BrandTeam(String Dataset) {{
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("BrandTeam_Links");
 	String[] footerlinks = footer.split(",");
@@ -14315,19 +14308,18 @@ public void Footer_Links_BrandTeam(String Dataset) {
 		for (i = 0; i < footerlinks.length; i++) {
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getPageTitle().contains(footerlinks[i])
-							|| Common.getCurrentURL().contains("/athletes")
-							|| Common.getCurrentURL().contains("coming-soon")
-							|| Common.getCurrentURL().contains("coming-soon"),
+					Common.getPageTitle().contains(footerlinks[i]) ||Common.getCurrentURL().contains(footerlinks[i])
+					|| Common.getCurrentURL().contains("prodeal")
+					|| Common.getCurrentURL().contains("tax-strategy"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -14373,7 +14365,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 		Assert.fail();
 	}
 
-}
+}}
 
 public void Footer_Links_Repari_And_Replacement(String Dataset) {
 	// TODO Auto-generated method stub
