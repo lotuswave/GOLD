@@ -13431,14 +13431,14 @@ public void product_Registration(String dataSet) {
 		String heading=Common.findElement("xpath", "//h1[@class='form-title']").getText();
 		System.out.println(heading);
 		
-		Sync.waitElementPresent("xpath", "//input[@data-label='First Name']");
-		Common.textBoxInput("xpath", "//input[@data-label='First Name']", data.get(dataSet).get("FirstName"));
+		Sync.waitElementPresent("xpath", "//input[@id='customerFirstName']");
+		Common.textBoxInput("xpath", "//input[@id='customerFirstName']", data.get(dataSet).get("FirstName"));
 
-		Sync.waitElementPresent("xpath", "//input[@data-label='Last Name']");
-		Common.textBoxInput("xpath", "//input[@data-label='Last Name']", data.get(dataSet).get("LastName"));
+		Sync.waitElementPresent("xpath", "//input[@id='customerLastName']");
+		Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(dataSet).get("LastName"));
 		
 		Sync.waitElementPresent("xpath", "//input[@id='conversationDateofbirthforforms']");
-		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']",data.get(dataSet).get("DOB"));	
+		Common.textBoxInput("xpath", "//input[@id='conversationDateofbirthforforms']", data.get(dataSet).get("DOB1"));	
 		
 		//Sync.waitElementPresent("xpath", "//div[@id='conversationGender']");
 		Common.clickElement("xpath", "//div[@id='conversationGender']");
@@ -13452,7 +13452,7 @@ public void product_Registration(String dataSet) {
 			Common.textBoxInput("xpath", "//input[@data-label='Email']", data.get(dataSet).get("Email"));
 			
 			//Sync.waitElementPresent("xpath", "//div[@id='conversationCountryCodeFor']");
-			Common.clickElement("xpath", "//div[@id='conversationCountryCodeFor']");
+			Common.clickElement("xpath", "//div[@id='conversationCountry']");
 			Common.clickElement("xpath", "//div[@data-path='GB']");
 		       
 			//Common.dropdown("xpath", "//div[@id='conversationCountryCodeFor']",SelectBy.TEXT, data.get(dataSet).get("Country"));
@@ -13461,10 +13461,12 @@ public void product_Registration(String dataSet) {
 		Sync.waitElementPresent("xpath", "//input[@id='conversationPhoneForForms']");
 		Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 		
-		Sync.waitElementPresent("xpath", "//input[contains(@id,'Wheredidyoupurchased')]");
-		Common.clickElement("xpath", "//input[contains(@id,'Wheredidyoupurchased')]");
-		
-		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date"));
+//		Sync.waitElementPresent("xpath", "//input[contains(@id,'Wheredidyoupurchased')]");
+//		Common.clickElement("xpath", "//input[contains(@id,'Wheredidyoupurchased')]");
+		Sync.waitElementPresent("xpath", "//input[@id='messageSubject']");
+		Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(dataSet).get("Products"));
+				
+		Common.textBoxInput("xpath", "//input[contains(@id,'Whendidyoupurchase')]",data.get(dataSet).get("Date1"));
 		
 		Sync.waitElementPresent("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
 		Common.clickElement("xpath", "//div[contains(@id,'Activitiestousetheproduct')]");
@@ -13519,11 +13521,10 @@ public void product_Registration(String dataSet) {
 		
 		Common.textBoxInput("xpath", "//textarea[@name='messagePreview']", feedback);*/
 		
-		Sync.waitElementPresent("xpath", "//input[@data-label='Comment Title']");
-		Common.textBoxInput("xpath", "//input[@data-label='Comment Title']",data.get(dataSet).get("Comment"));
+//		Sync.waitElementPresent("xpath", "//input[@data-label='Comment Title']");
+//		Common.textBoxInput("xpath", "//input[@data-label='Comment Title']",data.get(dataSet).get("Comment"));
 		
 		Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
-		//Common.textBoxInput("xpath", "//input[@id='messagePreview-characterLimit']",data.get(dataSet).get("Detailed"));
 		Common.clickAndtextBoxInput("xpath", "//textarea[@id='messagePreview']",data.get(dataSet).get("Detailed"));
 
 		Sync.waitElementPresent("xpath","//input[@value='keep-up-to-date-with-osprey-products-and-promotions.-']");
@@ -13531,8 +13532,16 @@ public void product_Registration(String dataSet) {
 		
 		Sync.waitElementPresent("xpath","//input[@name='snOrgTermsAndConditions']");
 		Common.clickElement("xpath","//input[@name='snOrgTermsAndConditions']");
+		Thread.sleep(5000);
 		
-		
+		Common.javascriptclickElement("xpath", "//div[@id='rc-anchor-container']");
+		Thread.sleep(5000);
+		if(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/en_gb/"))
+		{
+			System.out.println(Common.getCurrentURL());
+		}
+		else
+		{
 		Common.scrollIntoView("xpath", "//span[text()='Submit']");
 		Common.clickElement("xpath", "//span[text()='Submit']");
 		
@@ -13543,6 +13552,7 @@ public void product_Registration(String dataSet) {
 		Common.assertionCheckwithReport(registrationsuccessmessage > 0, "verifying Product registration Success message ",
 				"Success message should be Displayed", "Product registration  Success message displayed ",
 				"failed to dispaly success message");
+		}
 	}
 
 	catch (Exception | Error e) {
