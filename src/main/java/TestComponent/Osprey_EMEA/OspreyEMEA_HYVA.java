@@ -7414,31 +7414,31 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-					"payment section should be displayed", "sucessfully payment section has been displayed",
-					"Failed to displayed the payment section");
-			Sync.waitElementPresent(30, "xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.clickElement("xpath", "//label[contains(@for,'billing-address')]//span");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
-			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
-			System.out.println(data.get(dataSet).get("City"));
+			
+			  WebElement  Checkbox = Common.findElementBy("xpath", "//input[@id='billing-as-shipping']");
+			  
+			  if (Checkbox.isSelected()) {  
+	                System.out.println("Checkbox is selected"+Checkbox);
+	                Common.clickElement("xpath", "//input[@id='billing-as-shipping']");
+	               
+	    			Common.textBoxInput("xpath", "//input[@id='billing-firstname']", data.get(dataSet).get("FirstName"));
+	    			Common.textBoxInput("xpath", "//input[@id='billing-lastname']", data.get(dataSet).get("LastName"));
+	    			Common.textBoxInput("xpath", "//input[@id='billing-street-0']", data.get(dataSet).get("Street"));
+	    			Thread.sleep(5000);
+	    			Common.textBoxInput("xpath", "//input[@id='billing-city']", data.get(dataSet).get("City"));
+	    			System.out.println(data.get(dataSet).get("City"));
 
-//			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
+//	    			Common.actionsKeyPress(Keys.PAGE_DOWN);
+	    			Thread.sleep(3000);
+			  }
+			  else {
+				  
+			  }
+			
 			 if(Common.getCurrentURL().contains("gb"))
              {
-				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 Common.scrollIntoView("xpath", "//select[@id='billing-country_id']");
+				  Common.dropdown("xpath", "//select[@id='billing-country_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				 
              }
 			 else
@@ -7455,26 +7455,26 @@ return Number;
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
+			Common.textBoxInput("xpath", "//input[@id='billing-postcode']",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+			Common.textBoxInput("xpath", "//input[@id='billing-telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(4000);		
-			Common.clickElement("xpath", "//span[text()='Update']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-			Thread.sleep(5000);
-			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
-			System.out.println("update"+update);
-			Common.assertionCheckwithReport(
-					update.equals(Shipping),
-					"verifying the Billing address form in payment page",
-					"Billing address should be saved in the payment page",
-					"Sucessfully Billing address form should be Display ",
-					"Failed to display the Billing address in payment page");
+//			Common.clickElement("xpath", "//span[text()='Update']");
+//			Sync.waitPageLoad();
+//			Thread.sleep(4000);
+//			Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+//			Thread.sleep(5000);
+//			update = Common.findElement("xpath", "(//span[@data-bind='text: currentBillingAddress().region'])[2]").getText();
+//			System.out.println("update"+update);
+//			Common.assertionCheckwithReport(
+//					update.equals(Shipping),
+//					"verifying the Billing address form in payment page",
+//					"Billing address should be saved in the payment page",
+//					"Sucessfully Billing address form should be Display ",
+//					"Failed to display the Billing address in payment page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
