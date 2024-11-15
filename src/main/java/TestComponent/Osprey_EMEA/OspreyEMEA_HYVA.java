@@ -2070,27 +2070,27 @@ public class OspreyEMEA_HYVA {
 //					"Product should be add to cart", "Sucessfully product added to the cart ",
 //					"failed to add product to the cart");
 			Thread.sleep(2000);
-			String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-			System.out.println(price);
-			Thread.sleep(5000);
-			price = price.trim();
-			price = price.substring(0,price.length() - 2);
-		    System.out.println(price);  
-			int amount=Integer.parseInt(price);
-			System.out.println(amount);
-			
-			if(amount>100 && country.contains("UK | EN"))
-			{
-//				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-//				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-				Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
-				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-			}
-			else
-			{
-				Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-				Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-			}
+//			String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+//			System.out.println(price);
+//			Thread.sleep(5000);
+//			price = price.trim();
+//			price = price.substring(0,price.length() - 2);
+//		    System.out.println(price);  
+//			int amount=Integer.parseInt(price);
+//			System.out.println(amount);
+//			
+//			if(amount>100 && country.contains("UK | EN"))
+//			{
+////				Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+////				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+//				Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
+//				Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+//			}
+//			else
+//			{
+//				Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
+//				Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
+//			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
