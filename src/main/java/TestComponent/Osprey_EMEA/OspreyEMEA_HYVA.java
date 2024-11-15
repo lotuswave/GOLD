@@ -12376,7 +12376,7 @@ public void validate_GIFT_CARD_PLP() {
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
 		Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
 		Thread.sleep(5000);
-		String GIFTCARDtitle = Common.getText("xpath", "//h1[@id='page-title-heading']");
+		String GIFTCARDtitle = Common.getText("xpath", "//h1[@class='title-2xl min-w-56']//span");
 	    System.out.println(GIFTCARDtitle);	
 		Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("gift cards"),
 				"To validate Gift card Navigation to the PLP",
@@ -12390,17 +12390,17 @@ public void validate_GIFT_CARD_PLP() {
 			"Sort by options should visible",
 			"Sort by options are visibled", "Failed to visible the sort by options");
 	      
-	    Sync.waitElementPresent("xpath", "//div[@id='filter-by-title']");
-	    String FILTERSBY = Common.getText("xpath", "//div[@id='filter-by-title']");
+	    Sync.waitElementPresent("xpath", "//span[contains(@class,'flex-grow title-panel')]");
+	    String FILTERSBY = Common.getText("xpath", "//span[contains(@class,'flex-grow title-panel')]").trim();
 	    System.out.println(FILTERSBY);
-	    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by"),
+	    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by:"),
 			"Verifying the filterby options are visible or not",
 			"filter by options should visible",
 			"filter by options are visibled", "Failed to visible the filter by options");
-	    Sync.waitElementPresent("xpath", "//span[contains(text(),'Categories')]");
-	    String Categorysection = Common.getText("xpath", "//span[contains(text(),'Categories')]");
+	    Sync.waitElementPresent("xpath", "(//div[@class='name'])[2]");
+	    String Categorysection = Common.getText("xpath", "(//div[@class='name'])[2]").trim();
 	    System.out.println(Categorysection);
-	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories:"),
+	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories"),
 			"Verifying the filterby options are visible or not",
 			"filter by options should visible",
 			"filter by options are visibled", "Failed to visible the filter by options");
@@ -13997,21 +13997,21 @@ public void validate_price_PLP_and_PDP() {
 	
 	try
 	{
-		int Products= Common.findElements("xpath","//img[contains(@class,'m-product-card')]").size();
+		int Products= Common.findElements("xpath","//img[@itemprop='image']").size();
 		System.out.println(Products);
 		for(int i=0;i<Products;i++) 
 		{
 			Thread.sleep(4000);
 			int value = i + 1;
 			WebElement ListOfSubproducts = Common.findElement("xpath",
-					"(//div[contains(@class,'m-product-card m-produ')]//span[@class='price'])[" + value + "]");
-			String PLPprice=ListOfSubproducts.getText().replace("From ", "");
+					"(//span[@x-ref='normalPrice'])[" + value + "]");
+			String PLPprice=ListOfSubproducts.getText();
 		    System.out.println(PLPprice);
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//img[contains(@class,'m-product-card')])["+ value + "]");
+			Common.clickElement("xpath", "(//img[@itemprop='image'])["+ value + "]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			String PDPPrice=Common.getText("xpath", "(//label[@class='amcard-label-block -price']//span)[1]");
+			String PDPPrice=Common.getText("xpath", "(//span[@x-text='item.price'])[1]");
 			System.out.println(PDPPrice);
 			Common.assertionCheckwithReport(PLPprice.equals(PDPPrice),
 					"validating the Price for the Gift card in the PDP",
