@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_COMMON_092_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_at_Payment_Page_and_Place_an_Order {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA  Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Giftcard Payments");
+	OspreyEMEA_HYVA  Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_register_user_Add_Gift_Code_My_Account_And_Place_an_Order () throws Exception {
@@ -25,11 +25,11 @@ public class Test_DGLD_OS_COMMON_092_Add_Gift_Card_Code_in_My_Account_Page_and_S
 			Osprey_ReEu.search_product("Product");
 			Osprey_ReEu.addtocart("Product");  
 			Osprey_ReEu.minicart_Checkout();
-			Osprey_ReEu.RegaddDeliveryAddress("Account");;
+			Osprey_ReEu.RegaddDeliveryAddress("Account");
 			Osprey_ReEu.selectshippingmethod("GroundShipping method");
 			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			Osprey_ReEu.Select_Gift_Code("Giftcard");
-			Osprey_ReEu. giftCardSubmitOrder();
+			Osprey_ReEu.giftCardSubmitOrder();
 			Osprey_ReEu.Remove_GiftCode();
 
 		} catch (Exception e) {
@@ -47,7 +47,7 @@ public class Test_DGLD_OS_COMMON_092_Add_Gift_Card_Code_in_My_Account_Page_and_S
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_us\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
 		Login.signIn();
 
 
