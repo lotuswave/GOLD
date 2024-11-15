@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
@@ -12,7 +13,7 @@ import TestLib.Login;
 public class TEST_DGLD_OS_COMMON_127_Register_user_Products_are_added_to_the_Wishlist_from_the_PDP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"MyFavorites");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"MyFavorites");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Add_To_Cart_and_from_your_cart_Favorites_List () throws Exception {
@@ -44,7 +45,7 @@ public class TEST_DGLD_OS_COMMON_127_Register_user_Products_are_added_to_the_Wis
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

@@ -2173,10 +2173,10 @@ public class OspreyEMEA_HYVA {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//p[@class='c-mini-cart__total-counter']//strong");
-			String minicart = Common.findElement("xpath", "//p[@class='c-mini-cart__total-counter']//strong").getText();
-			Sync.waitElementPresent("xpath", "//span[text()='View Cart']");
-			Common.clickElement("xpath", "//span[text()='View Cart']");
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
+			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
