@@ -308,9 +308,16 @@ public class GoldOxoHyvaHelper {
 						"Sucessfully product added to the cart ", "failed to add product to the cart");
 
 			}
-
+           if(Common.getCurrentURL().contains("preprod"))
+           {
+        		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+    			Common.doubleClick("xpath", "//div[@data-option-label='" + productcolor + "']");
+           }
+           else
+           {
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+           }
 
 //			click_UGC();
 			product_quantity(Dataset);
@@ -3585,7 +3592,6 @@ catch(Exception | Error e)
 	}
 
 	public String payPal_Payment(String dataSet) throws Exception {
-
 		String order = "";
 
 		String expectedResult = "It should open paypal site window.";
@@ -3721,6 +3727,7 @@ catch(Exception | Error e)
 		}
 		return order;
 	}
+
 
 	public void After_Pay_payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
