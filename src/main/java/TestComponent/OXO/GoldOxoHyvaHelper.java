@@ -11401,7 +11401,9 @@ public void header_1_Percent_Planet() {
 								|| Common.getCurrentURL().contains("accessibility-statement")
 								|| Common.getCurrentURL().contains("privacy")
 								|| Common.getCurrentURL().contains("terms")
-								|| Common.getCurrentURL().contains("oxo-rewards-terms-and-conditions"),
+								|| Common.getCurrentURL().contains("oxo-rewards-terms-and-conditions")
+								|| Common.getCurrentURL().contains("faq"),
+								
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -11423,7 +11425,6 @@ public void header_1_Percent_Planet() {
 		}
 
 	}
-
 	public void Product_Support(String Dataset) {
 		String footer = data.get(Dataset).get("Footer Links");
 		String[] footerlinks = footer.split(",");
