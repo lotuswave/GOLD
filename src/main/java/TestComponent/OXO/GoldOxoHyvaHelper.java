@@ -6739,8 +6739,14 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[@id='discount-form-toggle']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-
+            if(Common.getCurrentURL().contains("preprod"))
+            {
 			Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
+            }
+            else
+            {
+            	Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("ProdDiscountcode"));
+            }
 
 			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
