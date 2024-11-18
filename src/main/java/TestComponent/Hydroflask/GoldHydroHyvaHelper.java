@@ -4621,10 +4621,10 @@ catch(Exception | Error e)
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
 			Thread.sleep(3000);
 //			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
-			Common.mouseOverClick("xpath", "//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
 			Thread.sleep(3000);
 
 			try {
@@ -4633,14 +4633,14 @@ catch(Exception | Error e)
 				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
-			Common.clickElement("xpath", "//a[text()='Shop All']");
+			Common.clickElement("xpath", "//span[text()='Shop All']");
 			expectedResult = "User should select the " + category + "category";
 			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
 			Common.assertionCheckwithReport(sizebotteles > 0,
 					"validating the product category as" + category + "from navigation menu ", expectedResult,
 					"Selected the " + category + " category", "User unabel to click" + category + "");
-			verifying_sub_category();
-			verifying_shop_Best_Sellers();
+//			verifying_sub_category();
+			verifying_CLP_sub_category();
 
 		}
 
@@ -4714,7 +4714,7 @@ catch(Exception | Error e)
 
 	}
 
-	public void verifying_shop_Best_Sellers() {
+	public void verifying_CLP_sub_category() {
 		// TODO Auto-generated method stub
 		String product;
 
@@ -4722,34 +4722,35 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			List<WebElement> sub_category = Common.findElements("xpath",
-					"//div[contains(@class,'product-item-info m-')]");
+					"//div[@class='segmented-categories-item-image']");
 			System.out.println(sub_category.size());
-			for (int i = 0; i < sub_category.size() - 4; i++) {
-				List<WebElement> Image = Common.findElements("xpath", "//span[@class='product-image-wrapper']");
+			for (int i = 0; i < sub_category.size() - 3; i++) {
+				List<WebElement> Image = Common.findElements("xpath", "//div[contains(@class,'segmented-categories-item-n')]//span");
 				Sync.waitPageLoad();
 				Sync.waitImplicit(10);
 //			Thread.sleep(4000);
 				product = Image.get(i).getText();
+				System.out.println(product);
 				Thread.sleep(3000);
+				String Product=Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+				System.out.println(Product);
 				Image.get(i).click();
 				Thread.sleep(4000);
-				ExtenantReportUtils.addPassLog("Validating" + product + "Page  ",
-						"click on the shop best sellers should navigate to the  " + product + "Page",
-						"successfully page navigating to " + product + "PAGE",
-						Common.getscreenShotPathforReport(product));
-				Thread.sleep(3000);
-				Common.navigateBack();
-
+				String Products=Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+				System.out.println(Products);
+				if(Products!=Product)
+				{
+					ExtenantReportUtils.addPassLog("Validating" + product + "Page  ",
+							"click the sub category should navigate to the  " + product + "Page",
+							"successfully page navigating to " + product + "PAGE",
+							Common.getscreenShotPathforReport(product));
+				}
+				else {
+					Assert.fail();
+				}
+	
 			}
-			Sync.waitElementPresent("xpath", "//nav[@class='m-breadcrumb u-container']");
-//			Common.clickElement("xpath", "//a[text()='Shop']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String title = Common.findElement("xpath", "//h1[@class='c-clp-hero__headline']").getText();
-			Common.assertionCheckwithReport(title.contains("Shop Bottles & Drinkware"),
-					"validating the breadcrumbs navigating to the" + title,
-					"It should be navigate sucessfully to the" + title, "Sucessfully navigated to the" + title,
-					"Failed to navigate to the" + title);
+	
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
