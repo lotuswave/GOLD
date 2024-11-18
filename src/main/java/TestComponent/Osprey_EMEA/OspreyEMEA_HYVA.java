@@ -494,7 +494,7 @@ public class OspreyEMEA_HYVA {
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Customer Login")
-							|| Common.getPageTitle().contains("Osprey"),
+							|| Common.getPageTitle().contains("Osprey") || Common.getPageTitle().contains("Favourites Sharing"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
@@ -9129,11 +9129,9 @@ return Number;
 
 			Sync.waitElementPresent("xpath", "//button[@id='add-to-wishlist']");
 			Common.javascriptclickElement("xpath", "//button[@id='add-to-wishlist']");
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			
-			Common.clickElement("id", "customer-menu");
-			Common.clickElement("id", "customer.header.wishlist.link");
-			/*int Size = Common.findElements("xpath", "//span[@x-html='message.text']").size();
+			int Size = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
 			System.out.println(Size);
 			if (Size > 0) {
 
@@ -9142,6 +9140,8 @@ return Number;
               
 				Common.clickElement("id", "customer-menu");
 				Common.clickElement("id", "customer.header.wishlist.link");
+				Thread.sleep(3000);
+				
 			} else {
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
@@ -9153,7 +9153,7 @@ return Number;
 					System.out.println("no Error message displayed");
 
 				}
-			}*/
+			}
 			Thread.sleep(3000);
 			String WishlistMSG = Common.getText("xpath", "//span[@x-text='wishlistCount']").replace("Items", "");
 			System.out.println("Wishlist" + WishlistMSG);
