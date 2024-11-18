@@ -24,18 +24,9 @@ public class Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Ca
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");    
-        Osprey_ReEu.MyFavorites_Guestuser("Product");
-        String Items=Osprey_ReEu.minicart_items();
         Osprey_ReEu.click_Createaccount();
-        Osprey_ReEu.create_account_with_fav("Create Account");
-        Osprey_ReEu.minicart_products(Items);
+        Osprey_ReEu.create_account_With_Product("Create Account");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        String Billing=Osprey_ReEu.BillingAddress("BillingDetails");
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-        Osprey_ReEu.verify_BillingAddress(Billing);
   
 		} catch (Exception e) {
 

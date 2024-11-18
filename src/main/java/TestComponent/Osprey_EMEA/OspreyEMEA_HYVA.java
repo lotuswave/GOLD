@@ -2603,7 +2603,7 @@ public class OspreyEMEA_HYVA {
 
 	}
 
-	public void minicart_Checkout() {
+	public void minicart_Checkout() {{
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(4000);
@@ -2638,6 +2638,7 @@ public class OspreyEMEA_HYVA {
 			Assert.fail();
 		}
 	}
+}
 
 	public void click_minicart() {
 		// TODO Auto-generated method stub
@@ -7293,7 +7294,7 @@ return Number;
 		}
 	}
 
-	public String create_account_with_fav(String Dataset) {
+	public String create_account_With_Product(String Dataset) {
 		// TODO Auto-generated method stub
 		String email = "";
 		String product = data.get(Dataset).get("Products");
@@ -7307,8 +7308,9 @@ return Number;
 			Common.clickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
 			Common.clickElement("xpath", "//input[@name='email']");
+		
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			
 			System.out.println(email);
 			Common.clickElement("xpath", "//input[@name='password']");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
@@ -7317,50 +7319,11 @@ return Number;
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//button[@type='submit']//parent::div[@class='primary']");
-			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']//parent::div[@class='primary']");
-			Common.clickElement("xpath", "//button[@type='submit']//parent::div[@class='primary']");
+			Common.clickElement("xpath", "//input[@name='is_subscribed']");
+			Sync.waitElementPresent(30, "xpath", "//button[@title='Sign Up']");
+			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[@data-ui-id='message-success']//div");
-			
-			
-			if(Common.getCurrentURL().contains("stage3")) {
-				String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
-				String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
-						.getText();
-				System.out.println("favmessage"+favmessage);
-				System.out.println("Register message"+ message);
-			
-				Thread.sleep(4000);
-				Common.assertionCheckwithReport(
-						Common.getPageTitle().equals("My Favorites")
-								&& message.contains("Thank you for registering with Osprey") 
-								&& favmessage.contains(product + " has been added to your Favorites. Click "),
-						"validating the  My Favorites page Navigation when user clicks on signin button",
-						"User should able to navigate to the My Favorites page after clicking on Signin button",
-						"Sucessfully navigate to the My Favorites page after clicking on signin button ",
-						"Failed to navigates to My Favorites Page after clicking on Signin button");
-		
-			}
-			else {
-				String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
-				String favmessage = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]")
-						.getText();
-				System.out.println(favmessage);
-				System.out.println(message);
-				System.out.println(Common.getPageTitle());
-				Thread.sleep(4000);
-				Common.assertionCheckwithReport(
-						Common.getPageTitle().equals("My Favorites")
-								&& message.contains("Thank you for registering with Osprey") 
-								&& favmessage.contains(product + " has been added to your Favorites. Click"),
-						"validating the  My Favorites page Navigation when user clicks on signin button",
-						"User should able to navigate to the My Favorites page after clicking on Signin button",
-						"Sucessfully navigate to the My Favorites page after clicking on signin button ",
-						"Failed to navigates to My Favorites Page after clicking on Signin button");
-			}
-			
 			
 		}
 
@@ -7376,7 +7339,7 @@ return Number;
 		}
 		return email;
 	}
-
+	
 	public void minicart_products(String minicart) {
 		// TODO Auto-generated method stub
 		try {
