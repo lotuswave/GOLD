@@ -11253,6 +11253,8 @@ public void header_1_Percent_Planet() {
 			// TODO Auto-generated method stub
 			String symbol = data.get(Dataset).get("Price_Symbol");
 			String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
+			String ProdPriceFilter = data.get(Dataset).get("Sortby_Dropdown_Prod");
+			
 			System.out.println(PriceFilter);
 			System.out.println(symbol);
 			try {
@@ -11269,9 +11271,18 @@ public void header_1_Percent_Planet() {
 					System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 				}
 				Thread.sleep(4000);
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("Stage3"))
+				{
+				
 				Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
 				
 				Thread.sleep(5000);
+				}
+				else
+				{
+					Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,ProdPriceFilter);
+					Thread.sleep(5000);
+				}
 				Common.scrollIntoView("xpath",
 						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
 				List<WebElement> AfterFilterprice = Common.findElements("xpath",
@@ -11320,14 +11331,14 @@ public void header_1_Percent_Planet() {
 			Common.scrollIntoView("xpath", "//div[@class='ais-HierarchicalMenu']//span[text()='Shop']");
 			Sync.waitElementPresent("xpath", "//div[@class='ais-HierarchicalMenu']//span[text()='Shop']");
 			Common.clickElement("xpath", "//div[@class='ais-HierarchicalMenu']//span[text()='Shop']");
-			Sync.waitElementPresent("xpath", "//span[text()='Bundles']");
-			Common.clickElement("xpath", "//span[text()='Bundles']");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Bundle')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Bundle')]");
 			Thread.sleep(4000);
 			String SelectedFilter = Common.findElement("xpath", "//ul[@class='ais-CurrentRefinements-list']//li[@class='ais-CurrentRefinements-item']//span[@class='ais-CurrentRefinements-category']//span").getText();
 			System.out.println(SelectedFilter);
 			System.out.println("SelectedFilter:" + SelectedFilter);
 			String RetrivedValue = "Set Bundle";
-			if (SelectedFilter.equals("Bundles")) {
+			if (SelectedFilter.contains("Bundle")) {
 
 				List<WebElement> Series_Filters = Common.findElements("xpath",
 						"//div[contains(@class,'group/item-image')]//a//img");
