@@ -9369,13 +9369,14 @@ public void header_1_Percent_Planet() {
 //			Thread.sleep(3000);
 //			select_Shipping_Method("GroundShipping method");
 			Thread.sleep(4000);
-			int rewards=Common.findElements("xpath", "//button[contains(text(),'Your Reward Points')]").size();
+			int rewards=Common.findElements("xpath", "//span[contains(text(),'Sign in')]").size();
 			System.out.println(rewards);
-			if(rewards==0)
+			if(rewards==1)
 			{
-				Common.scrollIntoView("name", "telephone");
 				Thread.sleep(5000);
+				Common.scrollIntoView("name", "telephone");
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Thread.sleep(4000);
 			}
 			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
