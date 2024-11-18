@@ -3366,7 +3366,7 @@ public String create_account(String Dataset) {
 				{
 					Thread.sleep(4000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']").getAttribute("data-testid");
+					String klarna=Common.findElement("xpath", "//button[@id='klarna-tab']").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
 							klarna.contains("klarna"),
