@@ -6057,6 +6057,8 @@ catch(Exception | Error e)
 			Thread.sleep(6000);
 			String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']//span")
 					.getText().trim();
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.scrollIntoView("xpath", "//button[text()='Load More']");
 			Common.clickElement("xpath", "//button[text()='Load More']");
 			Thread.sleep(3000);
@@ -6065,6 +6067,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//button[text()='Load More']");
 			Common.clickElement("xpath", "//button[text()='Load More']");
+			}
 			Thread.sleep(4000);
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
@@ -6087,11 +6090,33 @@ catch(Exception | Error e)
 
 	public void sort_By(String dataSet) {
 		String sort = data.get(dataSet).get("Sort");
+		String pordsort=data.get(dataSet).get("Prod Sort");
 		try {
 
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
 //			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
+			String low = Common
+					.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
+					.getText();
+
+			Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+					"Failed to Sort  in Product Listing Page");
+			}
+			else
+			{
+				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + pordsort + "')]");
+				String low = Common
+						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + pordsort + "')]")
+						.getText();
+
+				Common.assertionCheckwithReport(low.contains(pordsort), "To validate the Sort in Product Listing Page",
+						"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+						"Failed to Sort  in Product Listing Page");
+			}
 
 //			int size = Common.findElements("xpath", "//span[@data-price-type='finalPrice']/span[1]").size();
 //			System.out.println("size ="+size);
@@ -6126,13 +6151,7 @@ catch(Exception | Error e)
 //			}
 			//////
 
-			String low = Common
-					.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
-					.getText();
-
-			Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
-					"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
-					"Failed to Sort  in Product Listing Page");
+		
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
