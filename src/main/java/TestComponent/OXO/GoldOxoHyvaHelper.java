@@ -4899,6 +4899,7 @@ catch(Exception | Error e)
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath", "//input[@name='telephone' and @data-form='billing']");
+			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
 					data.get(dataSet).get("phone"));
 
@@ -4922,6 +4923,8 @@ catch(Exception | Error e)
 		}
 		return update;
 	}
+
+
 
 	public void edit_BillingAddress_gustuser(String dataSet) {
 
@@ -6158,7 +6161,7 @@ catch(Exception | Error e)
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//span[text()='Sage']//following-sibling::span")
+					"//span[contains(text(),'Sage')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
 			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
