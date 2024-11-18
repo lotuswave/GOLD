@@ -248,7 +248,22 @@ public class GoldOxoHyvaHelper {
 				}
 			}
 			Sync.waitPageLoad();
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			}
+			else
+			{
+				Common.scrollIntoView("xpath", "//button[text()='Load More']");
+				Common.clickElement("xpath", "//button[text()='Load More']");
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//button[text()='Load More']");
+				Common.clickElement("xpath", "//button[text()='Load More']");
+				Thread.sleep(4000);
+//				Common.clickElement("xpath", "//button[@id='customer-menu']");
+//				Thread.sleep(3000);
+				Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			}
 
 			Thread.sleep(4000);
 //			String Productname = Common.findElement("xpath", "//button[@id='product-addtocart-button']/span").getText();
@@ -1129,7 +1144,6 @@ public class GoldOxoHyvaHelper {
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
-
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
