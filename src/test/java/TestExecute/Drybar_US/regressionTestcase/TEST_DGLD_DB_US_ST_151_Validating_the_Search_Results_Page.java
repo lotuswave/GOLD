@@ -45,7 +45,7 @@ public class TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}

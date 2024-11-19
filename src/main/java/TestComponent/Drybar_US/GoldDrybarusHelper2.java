@@ -542,7 +542,7 @@ public class GoldDrybarusHelper2 {
 
 	}
 
-	public void search_product(String Dataset) {
+	public void search_product(String Dataset) {{
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
@@ -567,8 +567,8 @@ public class GoldDrybarusHelper2 {
 			Assert.fail();
 		}
 	}
-	
-	public void addtocart(String Dataset) {
+	}
+	public void addtocart(String Dataset) {{
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
 	
@@ -588,8 +588,8 @@ public class GoldDrybarusHelper2 {
 				}
 			}
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+			Sync.waitElementPresent(30, "xpath", "(//img[@alt='" + products + "'])[2]|//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "(//img[@alt='" + products + "'])[2]|//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
@@ -619,7 +619,7 @@ public class GoldDrybarusHelper2 {
 			Assert.fail();
 		}
 	}
-
+	}
 	
 	
 	
@@ -6603,7 +6603,7 @@ public void FUll_Payment(String dataSet) {
 			}
 		}
 		
-		public void Sort_By(String Dataset) throws InterruptedException {
+		public void Sort_By(String Dataset) throws InterruptedException {{
 			// TODO Auto-generated method stub
 			String symbol = data.get(Dataset).get("Price_Symbol");
 			String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
@@ -6613,9 +6613,9 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 
 				Thread.sleep(5000);
-				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
+				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
 
-				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
+				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
 				List<String> Beforefilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : BeforeFilterprice) {
@@ -6627,9 +6627,9 @@ public void FUll_Payment(String dataSet) {
 				
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
 				List<WebElement> AfterFilterprice = Common.findElements("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='normalPrice']");
+						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
 				List<String> Afterfilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : AfterFilterprice) {
@@ -6665,6 +6665,7 @@ public void FUll_Payment(String dataSet) {
 				Assert.fail();
 			}
 
+		}
 		}
 		
 		public void Filter() throws InterruptedException {
@@ -6714,7 +6715,7 @@ public void FUll_Payment(String dataSet) {
 		}
 
 		
-		public void Invalid_search_product(String Dataset) {
+		public void Invalid_search_product(String Dataset) {{
 			// TODO Auto-generated method stub
 			String invalidproduct = data.get(Dataset).get("Products");
 			System.out.println(invalidproduct);
@@ -6747,6 +6748,7 @@ public void FUll_Payment(String dataSet) {
 						Common.getscreenShot("Failed to see the Invalid product name"));
 				Assert.fail();
 			}
+		}
 		}
 		
 		
