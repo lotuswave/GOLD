@@ -20,7 +20,7 @@ public class Test_DGLD_OS_US_011_Stored_Payment_For_Register_User {
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_Createaccount();
-        Osprey_ReEu.Create_Account("New Account Details");
+        Osprey_ReEu.create_account("New Account Details");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();

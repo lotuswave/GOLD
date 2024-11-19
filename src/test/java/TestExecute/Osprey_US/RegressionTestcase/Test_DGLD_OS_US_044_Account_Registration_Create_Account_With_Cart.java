@@ -24,7 +24,7 @@ public class Test_DGLD_OS_US_044_Account_Registration_Create_Account_With_Cart {
         Osprey_ReEu.MyFavorites_Guestuser("Product");
         String Items=Osprey_ReEu.minicart_items();
         Osprey_ReEu.click_Createaccount();
-        Osprey_ReEu.Create_Account("New Account Details");
+        Osprey_ReEu.create_account("New Account Details");
         Osprey_ReEu.minicart_products(Items);
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");

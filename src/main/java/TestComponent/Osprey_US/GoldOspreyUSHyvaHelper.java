@@ -90,8 +90,8 @@ public class GoldOspreyUSHyvaHelper {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-				close_add();
-				 acceptPrivacy();
+//				close_add();
+//				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
@@ -260,87 +260,7 @@ public class GoldOspreyUSHyvaHelper {
 		close_add();
 }
 
-	public String Create_Account(String Dataset) {
-		// TODO Auto-generated method stub
-		String email = "";
-		String Store= data.get(Dataset).get("Store");
-		try {
-
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
-					data.get(Dataset).get("Confirm Password"));
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[contains(@class,'action submit secondary btn')]");
-			Sync.waitImplicit(30);
-			Thread.sleep(6000);
-			String message = Common.findElement("xpath", "//div[contains(@class,'relative flex')]/span").getText();
-			System.out.println(message);
-			Common.assertionCheckwithReport(
-					message.contains("Thank you for registering with Osprey US Store.")
-							&& Common.getCurrentURL().contains("account") ,
-					"validating navigation to the account page after clicking on sign up button",
-					"User should navigate to the My account page after clicking on the Signup",
-					"Sucessfully user navigates to the My account page after clickng on thr signup button",
-					"Failed to navigate to the My account page after clicking on the signup button");
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"validating navigation to the account page after clicking on sign up button",
-					"User should navigate to the My account page after clicking on the Signup",
-					"Unable to navigate to the My account page after clicking on the signup button",
-					"Failed to navigate to the My account page after clicking on the signup button");
-			Assert.fail();
-		}
-		return email;
-	}
-	public void createaccount_exitingemail(String Dataset) {
-		// TODO Auto-generated method stub
-		try {
-			click_Createaccount();
-			Sync.waitPageLoad();
-
-			Common.clickElement("xpath", "//input[@name='firstname']");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.clickElement("xpath", "//input[@name='lastname']");
-			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@name='password']");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
-			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
-					data.get(Dataset).get("Confirm Password"));
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "//button[@class='action submit primary a-btn a-btn--primary']");
-			Thread.sleep(4000);
-			String exsitingemail = Common.findElement("xpath", "//div[@data-ui-id='message-error']//div[@class='a-message__container-inner']").getText();
-			System.out.println(exsitingemail);
-            String exsiting=Common.findElement("xpath", "//div[@data-ui-id='message-error']").getAttribute("data-ui-id");		
-            System.out.println(exsiting);
-            		Common.assertionCheckwithReport(
-					exsitingemail.contains("There is already an account with this email address") || exsiting.contains("message-error"),
-					"validating the error messages for existing email",
-					"User should able to get error message when we given exsiting email",
-					"Sucessfully error message has been displayed when user use the existing email",
-					"Failed to get an error message when user used the existing email");
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the error messages for existing email",
-					"User should able to get error message when we given exsiting email",
-					"Unable to get an error message when user used the existing email",
-					Common.getscreenShotPathforReport(
-							"Failed to get an error message when user used the existing email"));
-			AssertJUnit.fail();
-
-		}
-	}
-
+	
 	public void click_singinButton() {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
@@ -15972,7 +15892,95 @@ public void header_Holiday_Gift_Guide(String Dataset) {
 		}
 
 }
+
+public void createaccount_verfication(String Dataset) {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitPageLoad();
+		Common.clickElement("xpath", "//input[@name='firstname']");
+		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+		Common.clickElement("xpath", "//input[@name='lastname']");
+		Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
+		Common.clickElement("xpath", "//input[@name='email']");
+		Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
+		Common.clickElement("xpath", "//input[@name='password']");
+		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+		Common.clickElement("xpath", "//input[@name='password_confirmation']");
+		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+				data.get(Dataset).get("Confirm Password"));
+		Common.clickElement("xpath", "//button[@title='Sign Up']");
+//		String message = Common.findElement("id", "validation-classes").getCssValue("color");
+//		String redcolor = Color.fromString(message).asHex();
+//		System.out.println(redcolor);
+//		String message1 = Common.findElement("id", "validation-length").getCssValue("color");
+//		String greencolor = Color.fromString(message1).asHex();
+//		System.out.println(greencolor);
+		String emailmessage = Common.findElement("xpath", "//li[@data-msg-field='email']").getText();
+		System.out.println(emailmessage);
+		String confirmpassword = Common.findElement("xpath", "//li[@data-msg-field='password_confirmation']").getText();
+		System.out.println(confirmpassword);
+	
+		Common.assertionCheckwithReport(
+				emailmessage.equals("Please enter a valid email address.") && confirmpassword.contains("This field value must be the same as") ,
+				"validating the error messages with invalid date in accout creation form",
+				"User should able to get error message when used the invaild data",
+				"Sucessfully error message has been displayed when user use the invalid data",
+				"Failed to get an error message when user used the invalid data");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error messages with invalid date in accout creation form",
+				"User should able to get error message when used the invaild data",
+				"Unable to get error message has been displayed when user use the invalid data",
+				Common.getscreenShotPathforReport(
+						"Failed to get an error message when user used the invalid data"));
+		Assert.fail();
+
 	}
+}
 
+public String create_account(String Dataset) {
+	String email="";
+	String Product=data.get(Dataset).get("Products");
+	String Email = data.get(Dataset).get("Email");
+	try {
 
+		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+		Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+		Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+		
+		
+//		Common.textBoxInput("xpath", "//input[@id='email_address']", Email);
+		email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+		System.out.println(data.get(Dataset).get("Password"));
+		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
+				data.get(Dataset).get("Confirm Password"));
+		System.out.println(data.get(Dataset).get("Confirm Password"));
+		Thread.sleep(4000);
+		Common.clickElement("xpath", "//button[@title='Sign Up']");
+		Thread.sleep(2000);
+		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+		System.out.println(message);
+		Common.assertionCheckwithReport(
+				message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing")&& message.contains(Product+ " has been added to your Favorites. Click here to view your Favorites") ,
+				"validating navigation to the account page after clicking on sign up button",
+				"User should navigate to the My account page after clicking on the Signup",
+				"Sucessfully user navigates to the My account page after clickng on thr signup button",
+				"Failed to navigate to the My account page after clicking on the signup button");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog(
+				"validating navigation to the account page after clicking on sign up button",
+				"User should navigate to the My account page after clicking on the Signup",
+				"Unable to navigate to the My account page after clicking on the signup button",
+				"Failed to navigate to the My account page after clicking on the signup button");
+		Assert.fail();
+	}
+	return email;
+}
+	
+
+}
 
