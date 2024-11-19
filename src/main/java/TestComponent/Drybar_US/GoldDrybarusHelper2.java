@@ -7357,21 +7357,28 @@ public void FUll_Payment(String dataSet) {
 				// TODO Auto-generated method stub
 				String products = data.get(Dataset).get("Products");
 				System.out.println(products);
+				String color=data.get(Dataset).get("Products1");
 				
 				try {
-					Thread.sleep(4000);
-					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-					Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
-					
-					Thread.sleep(20000);
-					String PDP_ProductTitle = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title title')]").getText();
-					System.out.println(PDP_ProductTitle);
-					Common.assertionCheckwithReport(products.contains(PDP_ProductTitle),
+					String minicartproduct = Common
+							.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
+					Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']");
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
 							"validating the product navigating to the PDP page",
 							"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 							"Failed to Navigates Product to the PDP page");
-					
-					
+					click_minicart();
+					String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + color + "')]")
+							.getAttribute("alt");
+					Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
+					Sync.waitPageLoad();
+					Thread.sleep(3000);
+					Common.assertionCheckwithReport(Common.getPageTitle().contains(color),
+							"validating the product navigating to the PDP page",
+							"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+							"Failed to Navigates Product to the PDP page");
 				} catch (Exception | Error e) {
 					e.printStackTrace();
 					ExtenantReportUtils.addFailedLog("validating the product navigating to the PDP page",
@@ -7379,6 +7386,7 @@ public void FUll_Payment(String dataSet) {
 							Common.getscreenShot("Failed to Navigates Product to the PDP page"));
 					Assert.fail();
 				}
+
 
 			}
 		 
@@ -7496,44 +7504,42 @@ public void FUll_Payment(String dataSet) {
 		 public void minicart_delete(String Dataset) {
 				// TODO Auto-generated method stub
 				String deleteproduct = data.get(Dataset).get("Products");
+				System.out.println(deleteproduct);
 				String symbol=data.get(Dataset).get("Symbol");
 				try {
 					click_minicart();
-					Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span[@class='price']");
-					String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']").replace(symbol, "");
+					Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span");
+					String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
+							.replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(subtotal);
 					String productname = Common
-							.findElement("xpath", "//p[@class='title-sm']//a[text()='" + deleteproduct + "']").getText();
-					String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,"");
+							.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[1]")
+							.getText();
+					String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
+							"");
 					Float productamount1value = Float.parseFloat(productamount1);
+					System.out.println(productname);
 					if (productname.equals(deleteproduct)) {
-						Sync.waitElementPresent(30, "xpath","//button[contains(@aria-label,'" + deleteproduct + "')]");
-						Common.clickElement("xpath","//button[contains(@aria-label,'" + deleteproduct + "')]");
-						Thread.sleep(3000);
-						Common.clickElement("xpath","//button[contains(text(),'OK')]");
-					
+						Thread.sleep(4000);
+						Sync.waitElementPresent(30, "xpath",
+								"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						Common.clickElement("xpath",
+								"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+						Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
+						Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 					} else {
 						Assert.fail();
 					}
 					Thread.sleep(6000);
-					String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']")
+					String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 							.replace(symbol, "");
 					Float subtotal1value = Float.parseFloat(subtotal1);
 					Thread.sleep(8000);
 					String productamount = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol, "");
 					Float productamountvalue = Float.parseFloat(productamount);
-					Float deletedproductamount = subtotalvalue - subtotal1value;
-					Float Total = subtotalvalue - deletedproductamount;
+					Float Total = subtotalvalue - productamount1value;
 					String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 					Thread.sleep(4000);
-					System.out.println(subtotalvalue);
-					System.out.println(subtotal1value);
-					System.out.println(deletedproductamount);
-					System.out.println(productamount);
-					System.out.println(productamount1value);
-					System.out.println(Total);
-					System.out.println(ExpectedTotalAmmount2);
-					System.out.println(subtotal1);
 					Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
 							"validating the delete operation and subtotal",
 							"The product should be delete from mini cart and subtotal should change",
@@ -7596,32 +7602,31 @@ public void FUll_Payment(String dataSet) {
 
 			public void minicart_validation(String Dataset) {
 				// TODO Auto-generated method stub
-				String UpdataedQuntityinminicart = data.get(Dataset).get("Quantity");
+				String UpdataedQuntityinminicart = data.get(Dataset).get("Minicart_Quantity");
 				String symbol=data.get(Dataset).get("Symbol");
 				try {
 
-					String Subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']")
+					String Subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 							.replace(symbol, "");
 					Float subtotalvalue = Float.parseFloat(Subtotal);
+					System.out.println(subtotalvalue);
 					Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
-					Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+//					Common.clickElement("xpath", "(//select[@name='qty'])[2]");
 					Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 							UpdataedQuntityinminicart);
-					//Common.clickElement("xpath", "//span[text()='Update']");
-					Thread.sleep(8000);
+
+					Thread.sleep(6000);
 					Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 					String cart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 					System.out.println(cart);
-					String Subtotal2 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span[@class='price']")
+					String Subtotal2 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 							.replace(symbol, "");
-					Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-					Float Total = subtotalvalue;
-					String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-					System.out.println(subtotalvalue);
-					System.out.println(UpdataedQuntityinminicart);
-					System.out.println(cart);
-					System.out.println(ExpectedTotalAmmount2);
 					System.out.println(Subtotal2);
+					Float subtotalvalue2 = Float.parseFloat(Subtotal2);
+					Float Total = subtotalvalue * 2;
+					String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+					System.out.println(ExpectedTotalAmmount2);
+					Thread.sleep(2000);
 					Common.assertionCheckwithReport(
 							UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 							"validating the product update quantity and subtotal",
@@ -7639,6 +7644,8 @@ public void FUll_Payment(String dataSet) {
 				}
 
 			}
+
+
 			public void My_Favorites() {
 	    		// TODO Auto-generated method stub
 	    		try {

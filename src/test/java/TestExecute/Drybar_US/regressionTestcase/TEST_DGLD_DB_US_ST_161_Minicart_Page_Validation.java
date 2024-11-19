@@ -24,9 +24,8 @@ public class TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation {
 			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
-			Drybar.click_minicart();
 			Drybar.clickontheproduct_and_image("Product");
-			Drybar.minicart_delete("PLP Product");
+			Drybar.minicart_delete("Product");
 			Drybar.minicart_validation("Product");
             
  
