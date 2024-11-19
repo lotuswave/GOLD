@@ -150,6 +150,31 @@ public class OspreyEMEA_HYVA {
 		}
 
 	}
+	
+	
+	public void Verify_Homepage() {
+		try {
+			close_add();
+		int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+		System.out.println(size);
+		System.out.println(Common.getPageTitle());
+		Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
+				"validating store logo on the homwpage",
+				"System directs the user to the Homepage and store logo should display",
+				"Sucessfully user navigates to the home page and logo has been displayed",
+				"Failed to navigate to the homepage and logo is not displayed");
+		}
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating store logo on the homwpage",
+					"System directs the user to the Homepage and store logo should display",
+					"Unable to navigate to the homepage and logo is not displayed",
+					"Failed to navigate to the homepage and logo is not displayed");
+
+			Assert.fail();
+		}
+		
+	}
 	public void verifingHomePage_and_NewsletterSubcription(String dataSet) throws Exception{
 		// TODO Auto-generated method stub
 		String email=data.get(dataSet).get("UserName");
@@ -8045,6 +8070,10 @@ return Number;
 	public void acceptPrivacy() {
 
 		Common.clickElement("xpath", "//button[@id='truste-consent-button']");
+	}
+
+	public void Decline_All() {
+		Common.clickElement("xpath", "//button[@id='truste-consent-required']");
 	}
 
 	public void Edit_Name(String Dataset) {
