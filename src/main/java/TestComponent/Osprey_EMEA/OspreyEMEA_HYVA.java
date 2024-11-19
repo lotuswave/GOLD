@@ -154,8 +154,8 @@ public class OspreyEMEA_HYVA {
 	
 	public void Verify_Homepage() {
 		try {
-			close_add();
-		int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			close_add();
+		int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 		System.out.println(size);
 		System.out.println(Common.getPageTitle());
 		Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),

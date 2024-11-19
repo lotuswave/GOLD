@@ -19,6 +19,7 @@ public class Test_DGLD_OS_COMMON_136_Decline_All_Create_Account_Login_and_checko
 
 		try {
         Osprey_ReEu.Verify_Homepage();
+        Osprey_ReEu.click_Createaccount();
         Osprey_ReEu.Create_Account("Create Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
