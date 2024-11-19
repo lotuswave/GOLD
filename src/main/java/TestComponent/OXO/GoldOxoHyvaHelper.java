@@ -3858,6 +3858,10 @@ catch(Exception | Error e)
 		Common.clickElementStale("id", "truste-consent-button");
 	}
 
+	public void DeclinePrivacy() throws Exception {
+		close_Pop_up();
+		Common.clickElement("id", "truste-consent-required");
+	}
 	public void click_trackorder() {
 		try {
 			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
@@ -12216,7 +12220,7 @@ public void outofstock_subcription(String Dataset) {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Sync.waitElementClickable("xpath", "//a[@id='customer.header.sign.out.link']");
-
+          
 			Common.javascriptclickElement("xpath", "//a[@id='customer.header.sign.out.link']");
 
 //			Common.assertionCheckwithReport(
