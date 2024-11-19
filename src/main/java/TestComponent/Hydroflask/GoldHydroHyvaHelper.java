@@ -1802,6 +1802,10 @@ public class GoldHydroHyvaHelper {
 
 		Common.clickElement("id", "truste-consent-button");
 	}
+	
+	public void decline_All() {
+		Common.clickElement("id", "truste-consent-required");
+	}
 
 	public void updtePayementcrditcard_WithInvalidData(String dataSet) throws Exception {
 		Sync.waitPageLoad();
@@ -11744,6 +11748,32 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	return Number;
 	}
+
+		public void Logout() {
+			// TODO Auto-generated method stub
+			try
+			{
+				Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+				Common.clickElement("xpath", "//button[@id='customer-menu']");
+				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
+				Common.clickElement("xpath", "//a[@title='Sign Out']");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				Common.assertionCheckwithReport(
+						size > 0 && Common.getPageTitle().contains("Home Page")
+								|| Common.getPageTitle().contains("Hydro Flask"),
+						"validating store logo", "System directs the user to the Homepage",
+						"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+
+				ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user to the Homepage",
+						" user unable navigates to the home page", "Failed to navigate to the homepage");
+				Assert.fail();
+			}
+			
+		}
 }
 		
 
