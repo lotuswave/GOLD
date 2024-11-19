@@ -2303,19 +2303,15 @@ public class GoldDrybarusHelper2 {
 					try {
 						for (i = 0; i < Account.length; i++) {
 							System.out.println(Account[i]);
-							Sync.waitElementPresent("xpath",
-									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
-							Common.clickElement("xpath",
-									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+							Sync.waitElementPresent("xpath","//span[text()='"+Account[i]+"']");
+							Common.clickElement("xpath","//span[text()='"+Account[i]+"']");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							String currentUrl=Common.getCurrentURL();
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
-									currentUrl.contains("rma/returns/history/")|| currentUrl.contains("wishlist")||currentUrl.contains("customer/address")
-									|| currentUrl.contains("appointments")|| currentUrl.contains("customer/account/edit")|| currentUrl.contains("barflymembership")
-									|| currentUrl.contains("storecredit/info")|| currentUrl.contains("profile")|| currentUrl.contains("giftregistry")
-									,
+									currentUrl.contains("ustomer/account/edit/")||currentUrl.contains("/customer/address/")||currentUrl.contains("sales/order/history/")||currentUrl.contains("rma/returns/history/")||currentUrl.contains("/wishlist/")||currentUrl.contains("stock/index/")||currentUrl.contains("customer/paymentmethods/")||currentUrl.contains("newsletter/manage/")
+								  ||Common.getPageTitle().contains("My Subscriptions")||currentUrl.contains("customer/account/logoutSuccess/") || currentUrl.equals("https://www.drybar.com/"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
