@@ -9353,17 +9353,18 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			for (i = 0; i < Kustomerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 				Common.clickElement("xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(Kustomerlinks[i])
-								|| Common.getPageTitle().contains("Frequently Asked Questions"),
+						Common.getPageTitle().contains(Kustomerlinks[i]) || Common.getCurrentURL().contains(Kustomerlinks[i])
+						|| Common.getPageTitle().contains("Store Locator")
+						|| Common.getPageTitle().contains("Frequently Asked Questions"),		
 						"validating the Kustomer links navigation from footer Links",
 						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 						Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
@@ -9378,7 +9379,6 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.getscreenShot("Failed to Navigated to the" + Kustomerlinks[i] + "Links"));
 			Assert.fail();
 		}
-
 	}
 
 	public void Footer_Links(String Dataset) {
@@ -9389,21 +9389,20 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
 				Common.clickElement("xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(@title,'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(footerlinks[i])
+						Common.getPageTitle().contains(footerlinks[i]) || Common.getCurrentURL().contains(footerlinks[i])
 								|| Common.getPageTitle().contains("We are Hydro Flask")
-								|| Common.getPageTitle().contains("Store Locator")
-								|| Common.getPageTitle().contains("Corporate Purchasing")
-								|| Common.getPageTitle().contains("Trade"),
+								|| Common.getPageTitle().contains("Refer-A-Friend")
+								|| Common.getPageTitle().contains("Corporate Purchasing"),
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -9427,25 +9426,25 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
 		String footer = data.get(Dataset).get("Footer Links");
 		String[] footerlinks = footer.split(",");
+		String footers = data.get(Dataset).get("Footer Links").toUpperCase();
+		String[] footerlink = footers.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
 				Common.clickElement("xpath",
-						"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				String Bread = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+				System.out.println(Common.getPageTitle().contains(Bread));				
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(footerlinks[i])
-								|| Common.getPageTitle().contains("We are Hydro Flask")
-								|| Common.getPageTitle().contains("Store Locator")
-								|| Common.getPageTitle().contains("Corporate Purchasing")
-								|| Common.getPageTitle().contains("Parks For All"),
+						Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || Common.getCurrentURL().contains("/refer/")
+						|| Common.getCurrentURL().contains("track/order") || Common.getPageTitle().contains(Bread),
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -9463,6 +9462,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
 			Assert.fail();
 		}
+
 
 	}
 
@@ -9608,8 +9608,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void Terms_and_privacy() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//p//a[contains(text(),'Privacy Policy')]");
-			Common.clickElement("xpath", "//p//a[contains(text(),'Privacy Policy')]");
+			Sync.waitElementPresent("xpath", "//span//a[contains(text(),'Privacy Policy')]");
+			Common.clickElement("xpath", "//span//a[contains(text(),'Privacy Policy')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Privacy Policy"),
@@ -9623,6 +9623,50 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"After Clicking Terms and privacy it should navigate to the respective page",
 					"Unable to Navigate to the Privacy Policy page",
 					Common.getscreenShot("Failed Navigate to the Privacy Policy page"));
+			Assert.fail();
+		}
+
+
+	}
+	
+	
+	public void Footer_Dogood(String Dataset) {
+		// TODO Auto-generated method stub
+		String footer = data.get(Dataset).get("Footer Links");
+		String[] footerlinks = footer.split(",");
+		String footers = data.get(Dataset).get("Footer Links").toUpperCase();
+		String[] footerlink = footers.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < footerlinks.length; i++) {
+				Sync.waitElementPresent(30, "xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+				Thread.sleep(3000);
+				Common.findElement("xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+				Common.clickElement("xpath",
+						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+				System.out.println(Common.getPageTitle().contains(Bread));				
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i])
+			            || Common.getPageTitle().contains(Bread),
+						"validating the links navigation from footer Links",
+						"After Clicking on" + footerlinks[i] + "it should navigate to the",
+						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+				Thread.sleep(4000);
+				Common.navigateBack();
+
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+					Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
 			Assert.fail();
 		}
 

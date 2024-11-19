@@ -20,9 +20,10 @@ public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 
 		try {
 			Hydro.verifingHomePage();
-//			Hydro.Kustomer_Links("Kustomer");
+			Hydro.Kustomer_Links("Kustomer");
 			Hydro.Footer_Links("Footer");
 			Hydro.Footer_validation("Breadcrumbs");
+			Hydro.Footer_Dogood("Do Good");
 			Hydro.Terms_and_privacy();
 			
 			} catch (Exception e) {
@@ -34,7 +35,7 @@ public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
