@@ -248,7 +248,7 @@ public class GoldOxoHyvaHelper {
 				}
 			}
 			Sync.waitPageLoad();
-			if(Common.getCurrentURL().contains("preprod"))
+			if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("https://www.oxo.com/ca"))
 			{
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			}
@@ -308,7 +308,7 @@ public class GoldOxoHyvaHelper {
 						"Sucessfully product added to the cart ", "failed to add product to the cart");
 
 			}
-           if(Common.getCurrentURL().contains("preprod"))
+           if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("/www.oxo.com"))
            {
         		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
     			Common.doubleClick("xpath", "//div[@data-option-label='" + productcolor + "']");
