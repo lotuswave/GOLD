@@ -15,7 +15,7 @@ import TestLib.Login;
 public class TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_user_checkout_with_Expedited_shipping_method () throws Exception {
@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_
 			Drybar.addDeliveryAddress_Guestuser("Address");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.selectshippingmethod("Expedited_method");
-//			Drybar.clickSubmitbutton_Shippingpage();
+			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 
@@ -49,7 +49,7 @@ public class TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+       Drybar.close_add();
         
 
 	}
