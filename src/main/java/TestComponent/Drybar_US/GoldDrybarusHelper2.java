@@ -3766,8 +3766,9 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementVisible(30, "xpath", "//a[@class='flex items-center link']");
-			Common.clickElement("xpath", "//a[@class='flex items-center link']");
+			Common.scrollIntoView("xpath", "//span[text()='Back to Cart']");
+			Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
+			Common.clickElement("xpath", "//span[text()='Back to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -3965,8 +3966,9 @@ public class GoldDrybarusHelper2 {
 					}
 					Sync.waitPageLoad(40);
 			Thread.sleep(10000);
-			Common.refreshpage();
+//			Common.refreshpage();
 			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']");
 			String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 					.replace(Symbol, "");
 			Thread.sleep(4000);
@@ -4008,7 +4010,7 @@ public class GoldDrybarusHelper2 {
 					.getAttribute("value");
 			System.out.println(productquantity);
 			//String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hf:title-2xs hidden lg:inline']").getText().trim().replace("Items", "");
-			String items=Common.findElement("xpath", "//span[@class='ml-7 title-xs hf:title-2xs hidden lg:inline']").getText().trim().replace("Items", "");
+			String items=Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf')]").getText().trim().replace("Items", "");
 			System.out.println(items);
 			Common.assertionCheckwithReport(productquantity.equals(quantity) || productquantity.equals(items),
 					"validating the update quantity in shopping cart page",
