@@ -45,7 +45,7 @@ public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
@@ -53,7 +53,7 @@ public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-//        Drybar.close_add();
+        Drybar.close_add();
         
 
 	}
