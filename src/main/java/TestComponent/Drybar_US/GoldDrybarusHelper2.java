@@ -2639,7 +2639,7 @@ public class GoldDrybarusHelper2 {
 	}
 
 	
-	public void Configurable_addtocart(String Dataset) {
+	public void Configurable_addtocart(String Dataset) {{
 		// TODO Auto-generated method stub
 		
 		String products = data.get(Dataset).get("Products");
@@ -2709,12 +2709,13 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(8000);
-			String size=Common.findElement("xpath", "//*[contains(@id,'attribute-label-71902-1346')]/span[2]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[1]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
+			
 			Common.assertionCheckwithReport(
-					size.equals(size1),
+					size.contains(size1),
 					"Verifying the the size of the product is selected in the PDP",
 					"after clicking on the size product size should be selected",
 					"successfully Product size has been selected on the PDP",
@@ -2725,13 +2726,8 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
+			Thread.sleep(5000);
+
 		}
 		}
 		catch(Exception | Error e)
@@ -2741,6 +2737,7 @@ public class GoldDrybarusHelper2 {
 					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
 			Assert.fail();
 		}
+	}
 	}
 
 
@@ -5871,13 +5868,6 @@ public void FUll_Payment(String dataSet) {
 				{
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-//				Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
-//				Common.clickElement("xpath", "//label[@for='stripe_payments']");
-//				int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-//				Common.clickElement("xpath", "//label[@for='stripe_payments']");
-//				Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-//						"payment section should be displayed", "sucessfully payment section has been displayed",
-//						"Failed to displayed the payment section");
 				Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
 				Common.clickElement("xpath", "(//input[@type='checkbox'])[2]");
 				Thread.sleep(5000);

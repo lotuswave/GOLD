@@ -23,8 +23,8 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 			Drybar.Verify_Homepage();
 			Drybar.search_product("Configurable Product");
 			Drybar.addtocart("Configurable Product");
-//			Drybar.HairTools_headerlinks("Hair Tools");
-//			Drybar.addtocart("PLP Product");
+			Drybar.HairTools_headerlinks("Hair Tools");
+			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.click_singin_Shippingpage();
 			Drybar.Forgot_password("AccountDetails");
@@ -38,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 	
 	@AfterTest
 	public void clearBrowser() {
-//    Common.closeAll();
+    Common.closeAll();
 
 	}
 

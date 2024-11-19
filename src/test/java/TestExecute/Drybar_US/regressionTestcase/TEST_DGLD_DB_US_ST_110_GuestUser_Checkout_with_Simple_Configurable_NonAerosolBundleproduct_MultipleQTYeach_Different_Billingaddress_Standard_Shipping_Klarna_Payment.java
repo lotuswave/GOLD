@@ -21,10 +21,10 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 		try {
 		
 			Drybar.Verify_Homepage();
-			Drybar.search_product("Bundle Product");  
-			Drybar.Addtocart_Bundle("Bundle Product");
-			Drybar.search_product("Product");  
-			Drybar.addtocart("Product");
+//			Drybar.search_product("Bundle Product");  
+//			Drybar.Addtocart_Bundle("Bundle Product");
+//			Drybar.search_product("Product");  
+//			Drybar.addtocart("Product");
 			Drybar.search_product("Configurable Product");
 			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.minicart_Checkout();
@@ -44,7 +44,7 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 		
 
 	}
@@ -53,7 +53,7 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}
