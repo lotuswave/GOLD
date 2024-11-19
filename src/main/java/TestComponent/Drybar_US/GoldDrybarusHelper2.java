@@ -2189,14 +2189,14 @@ public class GoldDrybarusHelper2 {
 	
 	public void signout() {
 		try {
-			Sync.waitElementClickable("xpath", "//div[@class='m-account-nav__content']");
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementClickable("xpath", "//li[@class='link authorization-link']/a");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 
-			Common.javascriptclickElement("xpath", "//li[@class='link authorization-link']/a");
+			Common.clickElement("xpath", "//a[@title='Sign Out']");
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/logoutSuccess"),
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
 					"Successfully navigate to my account page", "Failed to navigate my account page ");
 
