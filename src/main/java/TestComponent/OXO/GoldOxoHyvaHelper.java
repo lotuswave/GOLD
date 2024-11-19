@@ -12219,14 +12219,14 @@ public void outofstock_subcription(String Dataset) {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementClickable("xpath", "//a[@id='customer.header.sign.out.link']");
-          
-			Common.javascriptclickElement("xpath", "//a[@id='customer.header.sign.out.link']");
+			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 
-//			Common.assertionCheckwithReport(
-//					Common.getText("xpath", "//h1[contains(text(),'You are signed out')]").equals("You are signed out"),
-//					"Validating My Account page navigation", "user sign in and navigate to my account page",
-//					"Successfully navigate to my account page", "Failed to navigate my account page ");
+			Common.clickElement("xpath", "//a[@title='Sign Out']");
+			Thread.sleep(3000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
+					"Validating My Account page navigation", "user sign in and navigate to my account page",
+					"Successfully navigate to my account page", "Failed to navigate my account page ");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();

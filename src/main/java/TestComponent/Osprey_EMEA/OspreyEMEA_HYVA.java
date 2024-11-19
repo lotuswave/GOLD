@@ -2894,13 +2894,16 @@ public class OspreyEMEA_HYVA {
 
 	public void signout() {
 		try {
-			Sync.waitElementPresent("id", "customer-menu");
-			Common.clickElement("id", "customer-menu");
-			Sync.waitElementClickable("id", "customer.header.sign.out.link");
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 
-			Common.javascriptclickElement("id", "customer.header.sign.out.link");
+			Common.clickElement("xpath", "//a[@title='Sign Out']");
 			Thread.sleep(3000);
-			
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
+					"Validating My Account page navigation", "user sign in and navigate to my account page",
+					"Successfully navigate to my account page", "Failed to navigate my account page ");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
