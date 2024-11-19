@@ -7243,21 +7243,9 @@ public void FUll_Payment(String dataSet) {
 				System.out.println(textValueAfterFilter);
 				System.out.println(items);
 				System.out.println(categoryvalue);
-				if(categoryvalue!=items)
+				if(categoryvalue.equals(items))
 				{
-					Common.actionsKeyPress(Keys.END);
-					Thread.sleep(6000);
-					Common.scrollIntoView("xpath", "//button[text()='Load More']");
-					Sync.waitElementPresent("xpath", "//button[text()='Load More']");
-					Common.javascriptclickElement("xpath", "//button[text()='Load More']");
-					Thread.sleep(4000);
-					Sync.waitPageLoad();
-					Common.actionsKeyPress(Keys.PAGE_UP);
-					int noOfItems1 = Common.findElements("xpath", "//ol//li[@class='ais-InfiniteHits-item']").size();
-					String items1=Integer.toString(noOfItems1);
-					System.out.println(items1);
-					System.out.println(categoryvalue);
-					Common.assertionCheckwithReport(categoryvalue.equals(items1),
+					Common.assertionCheckwithReport(categoryvalue.equals(items),
 							"To validate the filter in Product Listing Page",
 							"User should able to filter in Product Listing Page",
 							"Sucessfully filters in the Product Listing Page",
@@ -7266,7 +7254,20 @@ public void FUll_Payment(String dataSet) {
 				}
 				else
 				{
-			Common.assertionCheckwithReport(categoryvalue.equals(items),
+			
+			Common.actionsKeyPress(Keys.END);
+			Thread.sleep(6000);
+			Common.scrollIntoView("xpath", "//button[text()='Load More']");
+			Sync.waitElementPresent("xpath", "//button[text()='Load More']");
+			Common.javascriptclickElement("xpath", "//button[text()='Load More']");
+			Thread.sleep(4000);
+			Sync.waitPageLoad();
+			Common.actionsKeyPress(Keys.PAGE_UP);
+			int noOfItems1 = Common.findElements("xpath", "//ol//li[@class='ais-InfiniteHits-item']").size();
+			String items1=Integer.toString(noOfItems1);
+			System.out.println(items1);
+			System.out.println(categoryvalue);
+			Common.assertionCheckwithReport(categoryvalue.equals(items1),
 					"To validate the filter in Product Listing Page",
 					"User should able to filter in Product Listing Page",
 					"Sucessfully filters in the Product Listing Page",
@@ -7287,7 +7288,8 @@ public void FUll_Payment(String dataSet) {
 	    	String name = "";
 			try {
 				Thread.sleep(4000);
-//				Common.clickElement("xpath", "(//button[@class='ais-Panel-collapseButton'])[2]");
+				Common.clickElement("xpath", "//div[text()='Price']");
+				Thread.sleep(4000);
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace("$", "").replace(".00", "");
 				System.out.println(lastvalue);
