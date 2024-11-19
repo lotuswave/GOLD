@@ -78,6 +78,23 @@ public class GoldDrybarusHelper2 {
 
 	}
 	
+	public void verify_Homepage() {
+		try {
+			Sync.waitPageLoad();
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home Drybar")
+					|| Common.getPageTitle().contains("Home Drybar") || Common.getPageTitle().contains("Drybar Home")
+					|| Common.getPageTitle().contains("Drybar"), "validating store logo",
+					"System directs the user to the Homepage", "Sucessfully user navigates to the home page",
+					"Failed to navigate to the homepage");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user to the Homepage",
+					" user unable navigates to the home page", "Failed to navigate to the homepage");
+			Assert.fail();
+		}
+	}
+	
 	public void acceptPrivacy() {
 		try {
 			
@@ -91,6 +108,21 @@ public class GoldDrybarusHelper2 {
 	
 	}
 }
+	
+	
+	public void Decline_All() {
+	try {
+			
+			Sync.waitElementPresent("id", "truste-consent-required");
+			Common.clickElement("id", "truste-consent-required");
+		}
+	catch(Exception | Error e)
+	{
+	e.printStackTrace();
+	Assert.fail();	
+	
+	}	
+	}
 	
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
