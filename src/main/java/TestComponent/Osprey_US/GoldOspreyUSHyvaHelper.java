@@ -5712,6 +5712,7 @@ return Number;
 		System.out.println(product);
 		String color = data.get(Dataset).get("Colorproduct");
 		System.out.println(color);
+		String Prod=data.get(Dataset).get("Prod Product");
 		try {
 			
 			String minicartproduct = Common.findElement("xpath", "//img[@alt='" + product + "']").getText();
@@ -5724,6 +5725,8 @@ return Number;
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
 			click_minicart();
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + color + "')]")
 					.getAttribute("alt");
 			Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
@@ -5733,6 +5736,20 @@ return Number;
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
+			}
+			else
+			{
+				String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + Prod + "')]")
+						.getAttribute("alt");
+				Common.clickElement("xpath", "//img[contains(@alt,'" + Prod + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				Common.assertionCheckwithReport(minicartimage.contains(Prod),
+						"validating the product navigating to the PDP page",
+						"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+						"Failed to Navigates Product to the PDP page");
+				
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the product navigating to the PDP page",
@@ -5768,9 +5785,10 @@ return Number;
 	}
 
 
-public void minicart_delete(String Dataset) {
+	public void minicart_delete(String Dataset) {
 		// TODO Auto-generated method stub
 		String deleteproduct = data.get(Dataset).get("Colorproduct");
+		String Proddelete=data.get(Dataset).get("Prod Product");
 		String symbol=data.get(Dataset).get("Symbol");
 		try {
 			Sync.waitElementPresent(30, "xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']");
@@ -5783,6 +5801,8 @@ public void minicart_delete(String Dataset) {
 			String productamount1 = Common.getText("xpath", "(//p//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
 						"(//button[contains(@title,'Remove product')])[1]");
@@ -5792,6 +5812,20 @@ public void minicart_delete(String Dataset) {
 				Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
 			} else {
 				AssertJUnit.fail();
+			}
+			}
+			else
+			{
+				if (Proddelete.equals(productname)) {
+					Sync.waitElementPresent(30, "xpath",
+							"(//button[contains(@title,'Remove product')])[1]");
+					Common.clickElement("xpath",
+							"(//button[contains(@title,'Remove product')])[1]");
+					Sync.waitElementPresent("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
+					Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
+				} else {
+					AssertJUnit.fail();
+				}
 			}
 			Thread.sleep(6000);
 			String subtotal1 = Common.getText("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']")
@@ -5818,7 +5852,6 @@ public void minicart_delete(String Dataset) {
 			AssertJUnit.fail();
 		}
 	}
-
 public void minicart_product_close() {
 	// TODO Auto-generated method stub
 	try {
@@ -8809,6 +8842,7 @@ public void Continue_Shopping() {
 
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
+		String Prodprod=data.get(Dataset).get("Prod Product");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -8866,8 +8900,23 @@ public void Continue_Shopping() {
 			// }
 			// }
 			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//button[text()='Load More']");
+				Common.clickElement("xpath", "//button[text()='Load More']");
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//button[text()='Load More']");
+				Common.clickElement("xpath", "//button[text()='Load More']");
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
+				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
+				
+			}
 //			Sync.waitPageLoad(30);
 //			Thread.sleep(6000);
 //			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
