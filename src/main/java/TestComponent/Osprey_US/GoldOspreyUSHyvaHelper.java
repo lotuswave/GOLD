@@ -295,7 +295,7 @@ public void Login_Account(String dataSet) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
-				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod Email"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 
@@ -15185,19 +15185,31 @@ public String Secure_Payment_details(String dataSet) throws Exception {
 public void sort_By(String dataSet) {
 	// TODO Auto-generated method stub
 	String sort = data.get(dataSet).get("Sort");
+	String Prodsort=data.get(dataSet).get("ProdSort");
 	try {
 
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 		Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
 		Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
-
-
 		String low = Common
 				.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]")
 				.getText();
-
 		Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
 				"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
 				"Failed to Sort  in Product Listing Page");
+		}
+		else
+		{
+			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
+			Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]");
+			String low = Common
+					.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]")
+					.getText();
+			Common.assertionCheckwithReport(low.contains(Prodsort), "To validate the Sort in Product Listing Page",
+					"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+					"Failed to Sort  in Product Listing Page");
+		}
 
 	} catch (Exception | Error e) {
 		e.printStackTrace();
