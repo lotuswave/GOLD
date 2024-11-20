@@ -90,8 +90,8 @@ public class GoldOspreyUSHyvaHelper {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-//				close_add();
-//				 acceptPrivacy();
+				close_add();
+				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
@@ -450,14 +450,9 @@ public void Login_Account(String dataSet) {
 
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
-				Sync.waitElementPresent("xpath", "//div[@class='m-account-nav__content']");
-				Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-				Sync.waitElementPresent("xpath", "(//ul[@class='m-account-nav__links']//li//a)[1]");
-				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
-				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")) {
+				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("www.osprey.com")) {
 					String Accountlinks = data.get(Dataset).get("Account Links");
 					String[] Account = Accountlinks.split(",");
 					int i = 0;
@@ -465,29 +460,18 @@ public void Login_Account(String dataSet) {
 						for (i = 0; i < Account.length; i++) {
 							System.out.println(Account[i]);
 							Sync.waitElementPresent("xpath",
-									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+									"//span[text()='" + Account[i] +"']");
 							Common.clickElement("xpath",
-									"//div[@class='content account-nav-content']//a[text()=\"" + Account[i] +"\"]");
+									"//span[text()='" + Account[i] +"']");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
-							/*String title = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-							System.out.println(title);
-							Common.assertionCheckwithReport(
-									title.contains(Account[i]) || title.contains("My Wish Lists")
-											|| title.contains("My Payment Methods") || title.contains("Newsletter Subscription")
-											|| title.contains("Pro deal information"),
-									"verifying Account page links " + Account[i],
-									"user should navigate to the " + Account[i] + " page",
-									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
-		                 */
 							String currentUrl=Common.getCurrentURL();
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
-									currentUrl.contains("sales/order/history")|| currentUrl.contains("wishlist")||currentUrl.contains("customer/address")
-									|| currentUrl.contains("customer/address/index")|| currentUrl.contains("customer/account/edit")|| currentUrl.contains("stripe/customer/paymentmethods")
-									|| currentUrl.contains("storecredit/info")|| currentUrl.contains("reward/customer/info")|| currentUrl.contains("giftregistry")
-									|| currentUrl.contains("xnotif/stock/index")|| currentUrl.contains("newsletter")|| currentUrl.contains("amgcard/account")|| currentUrl.contains("prodeal/application/account")
-									|| currentUrl.contains("/all-mighty-guarantee"),
+									currentUrl.contains("customer/account/edit/")|| currentUrl.contains("customer/address/new/")||currentUrl.contains("sales/order/history")
+									|| currentUrl.contains("giftregistry/")|| currentUrl.contains("wishlist")|| currentUrl.contains("amgcard/account/")
+									|| currentUrl.contains("stock/index/")|| currentUrl.contains("storecredit/info/")|| currentUrl.contains("customer/paymentmethods/")
+									|| currentUrl.contains("newsletter/manage/")|| currentUrl.contains("klaviyo/customer/newsletter/"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
@@ -2904,9 +2888,9 @@ public void header_Travel(String Dataset) {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
+			Sync.waitElementPresent("xpath", "(//a[@title='Sign Out'])[1]");
 
-			Common.clickElement("xpath", "//a[@title='Sign Out']");
+			Common.clickElement("xpath", "(//a[@title='Sign Out'])[1]");
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
