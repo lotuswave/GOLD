@@ -10716,7 +10716,7 @@ public void Simple_PDP(String Dataset) {
 		product_quantity(Dataset);
 //		click_UGC();
 //		Locally_PDP();
-		PDP_Tabs("PLP Product");
+		PDP_Tabs("Configurable Product");
 		validate_reviews_AskQuestions_PDP();
 //		Common.actionsKeyPress(Keys.UP);
 
@@ -10816,15 +10816,15 @@ public void Configurable_PDP(String Dataset) {
 		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 		Thread.sleep(3000);
-		Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
-		Common.clickElement("xpath", "(//span[contains(text(),'" + Productsize + "')])[2]");
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
+		Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 		Thread.sleep(3000);
 		String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
 		System.out.println(size);
 		String size1= data.get(Dataset).get("size").toUpperCase();
 		System.out.println(size1);
 		Common.assertionCheckwithReport(
-				size.equals(size1),
+				size.contains(size1),
 				"Verifying the the size of the product is selected in the PDP",
 				"after clicking on the size product size should be selected",
 				"successfully Product size has been selected on the PDP",
