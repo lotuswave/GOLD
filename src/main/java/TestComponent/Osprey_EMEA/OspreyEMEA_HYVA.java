@@ -8041,10 +8041,10 @@ return Number;
         }
         else {
 
-            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
-            Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
-            Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
-            Common.switchToDefault();
+//            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+            Sync.waitElementPresent("xpath", "//button[@aria-label='Close']");
+            Common.clickElement("xpath", "//button[@aria-label='Close']");
+//            Common.switchToDefault();
             }
 
  
@@ -8313,9 +8313,9 @@ return Number;
 			Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
 			Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
 			Thread.sleep(4000);
-			List<WebElement> country = Common.findElements("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']");
+			List<WebElement> country = Common.findElements("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
 			List<WebElement> Countryselector = Common.findElements("xpath",
-					"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']");
+					"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
 			ArrayList<String> CountryNames = new ArrayList<String>();
 			Thread.sleep(4000);
 			for (WebElement Countryselections : Countryselector) {
@@ -8344,7 +8344,7 @@ return Number;
 						System.out.println(Country);
 						select.get(i).click();
 						Thread.sleep(5000);
-						if (Country.contains("English (£)") && countryname.contains("UK")|| Country.contains("English") && countryname.contains("United States")) {
+						if (Country.contains("English (£)") && countryname.contains("UK")|| Country.contains("English (£)") && countryname.contains("United Kingdom")) {
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
@@ -8356,10 +8356,10 @@ return Number;
 								|| Country.contains("Español (€)") || Country.contains("English (DKK)")
 								|| Country.contains("Norsk (NOK)") || Country.contains("Svenska (SEK)")
 								|| Country.contains("Deutsch (CHF)") || Country.contains("Français (CHF)")
-								|| Country.contains("Italiano (CHF)") || Country.contains("English (£)")) {
+								|| Country.contains("Italiano (CHF)")) {
 							
-							Sync.waitElementPresent("xpath", "(//legend[@class='h5'])[2]");
-							Common.getText("xpath", "(//legend[@class='h5'])[2]");
+							Sync.waitElementPresent("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
+							Common.getText("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							Common.navigateBack();
@@ -8367,7 +8367,8 @@ return Number;
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
 									Common.getscreenShotPathforReport(Country));
-							
+							Thread.sleep(5000);
+							close_add();
 						}
 						else {
 //							Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
@@ -8378,6 +8379,8 @@ return Number;
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
 									Common.getscreenShotPathforReport(Country));
+							
+							
 
 						}
 					}
