@@ -8309,13 +8309,14 @@ return Number;
 		String Country;
 		try {
 			Common.actionsKeyPress(Keys.END);
-			List<WebElement> country = Common.findElements("xpath", "//p[@class='country-item__language']");
-			List<WebElement> Countryselector = Common.findElements("xpath",
-					"//p[@class='country-item__language']");
-			ArrayList<String> CountryNames = new ArrayList<String>();
+			
+			Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
+			Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
 			Thread.sleep(4000);
-			Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
-			Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
+			List<WebElement> country = Common.findElements("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']");
+			List<WebElement> Countryselector = Common.findElements("xpath",
+					"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']");
+			ArrayList<String> CountryNames = new ArrayList<String>();
 			Thread.sleep(4000);
 			for (WebElement Countryselections : Countryselector) {
 				CountryNames.add(Countryselections.getText());
@@ -8323,7 +8324,7 @@ return Number;
 			}
 			String[] items = data.get(Dataset).get("Countrynames").split(",");
 			System.out.println(items);
-			Common.clickElement("xpath", "//span[contains(@class,'icon-modal__close')]");
+			Common.clickElement("xpath", "//button[@aria-label='Close']");
 			for (int j = 0; j < items.length; j++) {
 				if (CountryNames.contains(items[j])) {
 
@@ -8332,11 +8333,11 @@ return Number;
 					for (int i = 0; i < country.size(); i++) {
 
 						List<WebElement> select = Common.findElements("xpath",
-								"//p[@class='country-item__language']");
+								"(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
 						Sync.waitPageLoad();
-						Sync.waitElementPresent(50, "xpath", "//button[@data-trigger='country_selector' and @type='button']");
-						Common.clickElement("xpath", "//button[@data-trigger='country_selector' and @type='button']");
-						String countryname=Common.findElement("xpath", "(//span[@class='country-item__country-label'])[1]").getText();
+						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
+						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
+						String countryname=Common.findElement("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']").getText();
 						System.out.println(countryname);
 						Thread.sleep(3000);
 						Country = select.get(i).getText();
