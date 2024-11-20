@@ -1716,8 +1716,7 @@ public class OspreyEMEA_HYVA {
 				
 				String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 				if (eventname.equals("Birthday")) {
-					Common.dropdown("xpath", "//select[@id='event_country_region']", SelectBy.TEXT,
-							data.get(Dataset).get("Region"));
+					Common.textBoxInput("xpath", "//input[@id='event_region']", data.get(Dataset).get("Region"));
 					Thread.sleep(1000);
 					Common.scrollIntoView("id", "event_date");
 					Common.clickElement("id", "event_date");
@@ -1749,7 +1748,7 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
 				Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
-				Common.dropdown("xpath", "//select[@id='address_region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+				Common.textBoxInput("xpath", "//input[@id='region']",data.get(Dataset).get("Region"));
 				Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 				Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
 				
@@ -1801,7 +1800,7 @@ public class OspreyEMEA_HYVA {
 
 	public void Registrant_Information(String Dataset) {
 		// TODO Auto-generated method stub
-		String eventname = Common.findElement("xpath", "//span[@class='value']").getText();
+		String eventname = Common.findElement("xpath", "(//p[contains(@class,'giftregistry-type text')]//span)[2]").getText();
 		try {
 			if (eventname.equals("Birthday")) {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][firstname]']",
@@ -1809,7 +1808,7 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][lastname]']",
 						data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][email]']", data.get(Dataset).get("Email"));
-				Common.clickElement("id", "add-registrant-button");
+				Common.clickElement("xpath", "//button[contains(text(),'Add Registrant')]");
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][firstname]']",
 						data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][lastname]']",
@@ -1834,8 +1833,8 @@ public class OspreyEMEA_HYVA {
 				Common.dropdown("xpath", "//select[@name='registrant[1][role]']", Common.SelectBy.TEXT,
 						data.get(Dataset).get("Role"));
 			}
-			String registry = Common.findElement("xpath", "(//fieldset[@class='recipients section']//span)[1]")
-					.getText();
+			String registry = Common.findElement("xpath", "//div[@x-data='giftRegistry()']//legend")
+					.getText().trim();
 			Common.assertionCheckwithReport(registry.equals("Registrant Information"),
 					"validating the Registrant Information filed ",
 					"It should display Registrant Information in gift registry",
