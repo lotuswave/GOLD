@@ -151,7 +151,7 @@ public class GoldHydroHyvaHelper {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()='Bottles']");
+			Common.clickElement("xpath", "//span[text()='Coffee & Tea']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + category + "category";
@@ -6250,10 +6250,13 @@ catch(Exception | Error e)
 
 	public void sort_By(String dataSet) {
 		String sort = data.get(dataSet).get("Sort");
+		String Prodsort=data.get(dataSet).get("ProdSort");
 		try {
 
 			Common.clickElement("xpath", "//select[@class='ais-SortBy-select']");
 //			Common.dropdown("xpath", "//option[@class='ais-SortBy-option']", Common.SelectBy.TEXT, sort);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + sort + "')]");
 
 
@@ -6264,6 +6267,20 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(low.contains(sort), "To validate the Sort in Product Listing Page",
 					"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
 					"Failed to Sort  in Product Listing Page");
+			}
+			else
+			{
+				Common.clickElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]");
+
+
+				String low = Common
+						.findElement("xpath", "//div[@id='algolia-sorts']//option[contains(text(),'" + Prodsort + "')]")
+						.getText();
+
+				Common.assertionCheckwithReport(low.contains(Prodsort), "To validate the Sort in Product Listing Page",
+						"User should able to Sort in Product Listing Page", "Sucessfully Sorts in the Product Listing Page",
+						"Failed to Sort  in Product Listing Page");
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -11314,6 +11331,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Assert.fail();
 				}
 				String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+				System.out.println(url);
 
 				if (!url.contains("stage") & !url.contains("preprod")) {
 
