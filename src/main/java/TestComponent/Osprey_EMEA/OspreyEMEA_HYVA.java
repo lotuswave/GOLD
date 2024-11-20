@@ -1964,19 +1964,20 @@ public class OspreyEMEA_HYVA {
 	public void share_giftcard(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[@title='Share']");
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("Email"));
-			Common.clickElement("id", "add-recipient-button");
-			Common.textBoxInput("xpath", "//input[@name='recipients[1][name]']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
-			Common.clickElement("xpath", "//button[@type='submit']");
+			Common.clickElement("xpath", "//a[contains(text(),'Share')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(50, "xpath", "//div[@data-ui-id='message-success']//div");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Common.textBoxInput("xpath", "//textarea[@id='sender_message']", data.get(Dataset).get("Message"));
+			Common.textBoxInput("xpath", "//input[@name='recipients[0][name]']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='recipients[0][email]']", data.get(Dataset).get("Email"));
+			Common.clickElement("xpath", "//button[contains(text(),'Add Invitee')]");
+			Common.textBoxInput("xpath", "//input[@name='recipients[1][name]']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
+			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
+			Sync.waitPageLoad();
+			 Thread.sleep(4000);
+			Sync.waitElementPresent(20, "xpath", "//div[@ui-id='message-success']//span");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You shared the gift registry"),
 					"validating the gift registery page navigation ",
