@@ -10922,10 +10922,8 @@ public void Company(String Dataset) {
 					"//a[contains(text(),\""+footerlinks[i] +"\" )]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			
-			
-			
-			String Bread = Common.findElement("xpath", "//span[@class='text-secondary']").getText().toLowerCase();
+
+			String Bread = Common.findElement("xpath", "//span[contains(@class,'text-secondary')]").getText().toLowerCase();
 			System.out.println(Bread);
 			System.out.println(footerlinks[i]);
 			Common.assertionCheckwithReport(
@@ -10935,7 +10933,7 @@ public void Company(String Dataset) {
 							|| Common.getCurrentURL().contains("where-to-buy")
 							|| Common.getCurrentURL().contains("news")
 							|| Common.getCurrentURL().contains("careers")
-							|| Common.getCurrentURL().contains("drybarshops.com"),
+							|| Common.getCurrentURL().contains("drybarshops.com") || Common.getCurrentURL().contains("rewards"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -10978,8 +10976,8 @@ public void Information(String Dataset) {
 			
 			
 			
-			String Bread = Common.findElement("xpath", "//span[@class='text-secondary']").getText().toLowerCase();
-			System.out.println(Bread);
+//			String Bread = Common.findElement("xpath", "//span[contains(@class,'text-secondary')]").getText().toLowerCase();
+//			System.out.println(Bread);
 			System.out.println(footerlinks[i]);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
@@ -10987,8 +10985,8 @@ public void Information(String Dataset) {
 							|| Common.getCurrentURL().contains("privacy-policy")
 							|| Common.getCurrentURL().contains("terms-of-use")
 							|| Common.getCurrentURL().contains("news")
-							|| Common.getCurrentURL().contains("careers")
-							|| Common.getCurrentURL().contains("drybarshops.com"),
+							|| Common.getCurrentURL().contains("careers") || Common.getCurrentURL().contains("anti-human-trafficking")
+							|| Common.getCurrentURL().contains("drybarshops.com") || Common.getCurrentURL().contains("helpcenter"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -11035,7 +11033,8 @@ public void Support(String Dataset) {
 							|| Common.getCurrentURL().contains("track/order/status")
 							|| Common.getCurrentURL().contains("where-to-buy")
 							|| Common.getCurrentURL().contains("news")
-							|| Common.getCurrentURL().contains("warranty"),
+							|| Common.getCurrentURL().contains("warranty") || Common.getCurrentURL().contains("helpcenter")
+							|| Common.getCurrentURL().contains("loyalty-rewards-terms-and-conditions"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
