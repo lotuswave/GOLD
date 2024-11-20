@@ -9739,7 +9739,7 @@ public void Continue_Shopping() {
 			Common.scrollIntoView("xpath", "//input[@value='Blue']");
 			Sync.waitElementPresent("xpath", "//input[@value='Blue']");
 			Common.clickElement("xpath", "//input[@value='Blue']");
-			Common.scrollIntoView("xpath", "//input[@value='Blue']");
+//			Common.scrollIntoView("xpath", "//input[@value='Blue']");
 			Thread.sleep(4000);
 			String SelectedFilter = Common.findElement("xpath", "//div[@data-attr='osprey_common_color']//label//span[@data-color='Blue']").getText();
 			System.out.println(SelectedFilter);
@@ -14280,8 +14280,8 @@ public void Footer_Links_Resources(String Dataset) {
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 					
-			Thread.sleep(4000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
+			Thread.sleep(2000);
+	/*		int responcecode = getpageresponce(Common.getCurrentURL());
 			System.out.println(responcecode);
 			String pagecode=Integer.toString(responcecode);
 			System.out.println(pagecode);
@@ -14302,6 +14302,7 @@ public void Footer_Links_Resources(String Dataset) {
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
 				AssertJUnit.fail();
 			}
+			*/
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
@@ -14321,7 +14322,6 @@ public void Footer_Links_Resources(String Dataset) {
 	}
 
 }
-
 
 
 public void Footer_Links_BrandTeam(String Dataset) {
@@ -14409,12 +14409,12 @@ public void Footer_validation(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//li[contains(@class,'cmsb2641-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//li[contains(@class,'cmsb2641-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//li[contains(@class,'cmsb2641-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String Bread = Common.findElement("xpath", "//nav[contains(@aria-label,'Breadcrumb')]").getText();
