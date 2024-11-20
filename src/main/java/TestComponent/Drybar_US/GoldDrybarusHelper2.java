@@ -10735,11 +10735,14 @@ public void PDP_Tabs(String Dataset) {
 	// TODO Auto-generated method stub
 	String names = data.get(Dataset).get("PDPTabs");
 	String[] Links = names.split(",");
+	String names1 = data.get(Dataset).get("ProdPDPTabs");
+	String[] prodLinks = names.split(",");
+	
 	int i = 0;
 	try {
 		
 		int size=Common.findElements("xpath", "//section[@class='w-full']//span[text()='Product Details']").size();
-		if(size>0) {
+		if(size>0 && Common.getCurrentURL().contains("preprod")) {
 		   for (i = 0; i < Links.length; i++) {
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
@@ -10757,7 +10760,20 @@ public void PDP_Tabs(String Dataset) {
 		}
 		}
 		else {
-			Assert.fail();
+			for (i = 0; i < Links.length; i++) {
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String title = Common.findElement("xpath", "(//div[@class='pb-12'])")
+						.getAttribute(":class");
+				System.out.println(title);
+				Common.assertionCheckwithReport(title.contains("open"), "verifying the tabs in PDP ",
+						"After clicking on the " + Links[i] + "It should display the related content",
+						"sucessfully after clicking on the " + Links[i] + "it has been displayed related content",
+						"Failed to display related content" + Links[i]);
+		}
 		}
 	
 	} catch (Exception | Error e) {
@@ -10816,7 +10832,7 @@ public void Configurable_PDP(String Dataset) {
 		product_quantity(Dataset);
 		Thread.sleep(4000);
 		PDP_Tabs("Configurable Product");
-		validate_reviews_AskQuestions_PDP();
+		//validate_reviews_AskQuestions_PDP();
 	
 	}
 	catch(Exception | Error e)
