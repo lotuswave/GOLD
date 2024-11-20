@@ -2202,7 +2202,7 @@ public class OspreyEMEA_HYVA {
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
-			String viewcart = Common.findElement("xpath", "//span[@class='t-cart__items-count']").getText();
+			String viewcart = Common.findElement("xpath", "(//span[contains(text(),'Items')])[1]").getText();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			Common.assertionCheckwithReport(
