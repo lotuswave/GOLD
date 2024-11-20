@@ -20,7 +20,6 @@ public class Test_DGLD_OS_US_ST_003_Footer_Newsletter_Subcription {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-
         Osprey_ReEu.stayIntouch();
         
 		} catch (Exception e) {

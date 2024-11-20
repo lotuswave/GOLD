@@ -442,24 +442,25 @@ public class OspreyEMEA_HYVA {
 
 	}
 
-	public void stayIntouch(String Dataset) {
-		// TODO Auto-generated method stub
+	public void stayIntouch() {
+
 		try {
 			Thread.sleep(5000);
-			Common.actionsKeyPress(Keys.END);
+			Common.scrollIntoView("xpath", "//input[@aria-label='Enter your email']");
 			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//form[@class='m-newsletter-signup__form']");
-			Common.clickElement("xpath", "//form[@class='m-newsletter-signup__form']");
-			Common.textBoxInput("xpath", "//input[@placeholder='Enter Email Address']",data.get(Dataset).get("UserName"));
+			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter your email']");
+			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//span[@class='icon-arrow a-icon_icon']");
-			Sync.waitPageLoad();
+			Common.clickElement("xpath", "//label[contains(@class,'needsclick')]");
+			Common.clickElement("xpath", "//button[text()='Subscribe']");
 			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//div[@class='a-message__container-inner']");
+			String Text = Common.getText("xpath", "//span[text()='Check your inbox']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
-			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription."),
-					"verifying newsletter subscription", expectedResult, Text,
+
+			Common.assertionCheckwithReport(Text.contains("Check your inbox"),
+					"verifying newsletter subscription",
+					"User get confirmation message if new email if it used mail it showing error message ", Text,
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 
 		} catch (Exception | Error e) {
@@ -470,7 +471,6 @@ public class OspreyEMEA_HYVA {
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
 			Assert.fail();
 		}
-
 	}
 
 	public void Invalid_email_newsletter(String Dataset) {
