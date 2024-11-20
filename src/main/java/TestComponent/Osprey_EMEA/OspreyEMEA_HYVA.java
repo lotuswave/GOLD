@@ -14997,13 +14997,13 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 	{
 	Common.maximizeImplicitWait();
 	Common.actionsKeyPress(Keys.END);
-	String Yourfav=Common.findElement("xpath", "//h2[@class='t-cart__favorites-heading']").getText();
+	String Yourfav=Common.findElement("xpath", "//h2[@id='wishlist-checkout']//span").getText();
 	System.out.println(Yourfav);
 	Common.assertionCheckwithReport(Yourfav.contains("Your Favorites"),
 			"validating the favorites in view cart page", "Favorites should be in the view cart page",
 			"Sucessfully Favorites has been displayed in the view cart page ", "failed to display the favorites in the view cart page");
-	Sync.waitElementPresent("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
-	Common.clickElement("xpath", "//a[@class='action tocart primary a-btn a-btn--secondary']");
+	Sync.waitElementPresent("xpath", "(//a[text()='Shop now'])[1]");
+	Common.clickElement("xpath", "(//a[text()='Shop now'])[1]");
 	Sync.waitPageLoad();
 	Thread.sleep(8000);
 	String Options=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
@@ -15027,8 +15027,8 @@ public void Fav_Seeoption_from_View_cart(String Dataset) {
 //	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //			"Product should be add to cart", "Sucessfully product added to the cart ",
 //			"failed to add product to the cart");
-	Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
-	Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+//	Sync.waitElementPresent(30, "xpath", "//div[@class='c-mini-cart__close-btn']");
+//	Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
 	
 	}
 	catch(Exception | Error e)
