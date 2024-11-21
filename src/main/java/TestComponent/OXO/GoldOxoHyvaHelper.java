@@ -311,7 +311,14 @@ public class GoldOxoHyvaHelper {
            if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("/www.oxo.com"))
            {
         		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-    			Common.doubleClick("xpath", "//div[@data-option-label='" + productcolor + "']");
+        		Thread.sleep(2000);
+    			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+    			String color=Common.findElement("xpath", "//span[contains(@class,'text-secondary-70')]").getText();
+    			System.out.println(color);
+    			if(color=="")
+    			{
+    				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+    			}
            }
            else
            {
