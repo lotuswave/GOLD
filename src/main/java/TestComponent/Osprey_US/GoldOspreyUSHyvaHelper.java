@@ -90,7 +90,7 @@ public class GoldOspreyUSHyvaHelper {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-				close_add();
+//				close_add();
 				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
@@ -8272,7 +8272,7 @@ public void Continue_Shopping() {
 	
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
-        Thread.sleep(4000);
+        Thread.sleep(6000);
         int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
@@ -8283,6 +8283,7 @@ public void Continue_Shopping() {
         }
         else {
 
+        	Thread.sleep(4000);
             Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
             Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
             Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
@@ -8563,13 +8564,13 @@ public void Continue_Shopping() {
 		String Country;
 		try {
 			Common.actionsKeyPress(Keys.END);
-			List<WebElement> country = Common.findElements("xpath", "//p[@class='country-item__language']");
-			List<WebElement> Countryselector = Common.findElements("xpath",
-					"//p[@class='country-item__language']");
-			ArrayList<String> CountryNames = new ArrayList<String>();
+			Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
+			Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
 			Thread.sleep(4000);
-			Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'country-selector-button')])[1]");
-			Common.clickElement("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
+			List<WebElement> country = Common.findElements("xpath", "(//legend[text()='North America']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
+			List<WebElement> Countryselector = Common.findElements("xpath",
+					"(//legend[text()='North America']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
+			ArrayList<String> CountryNames = new ArrayList<String>();
 			Thread.sleep(4000);
 			for (WebElement Countryselections : Countryselector) {
 				CountryNames.add(Countryselections.getText());
@@ -8577,7 +8578,7 @@ public void Continue_Shopping() {
 			}
 			String[] items = data.get(Dataset).get("Countrynames").split(",");
 			System.out.println(items);
-			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "//button[@aria-label='Close']");
 			for (int j = 0; j < items.length; j++) {
 				if (CountryNames.contains(items[j])) {
 
@@ -8586,18 +8587,19 @@ public void Continue_Shopping() {
 					for (int i = 0; i < country.size(); i++) {
 
 						List<WebElement> select = Common.findElements("xpath",
-								"//p[@class='country-item__language']");
+								"(//legend[text()='North America']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
 								System.out.println(select);
 						Sync.waitPageLoad();
-						Sync.waitElementPresent(50, "xpath", "(//button[contains(@class,'country-selector-button')])[1]");
-						Common.clickElement("xpath", "(//button[contains(@class,'country-selector-button')])[1]");
-						String countryname=Common.findElement("xpath", "(//span[contains(@class,'country-item__country-label')])[1]").getText();
+						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
+						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
+						String countryname=Common.findElement("xpath", "(//legend[text()='North America']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']").getText();
 						System.out.println("countryname:   "+countryname);
 						Thread.sleep(3000);	
 						Country = select.get(i).getText();
 						System.out.println("Country:   "+Country);
 						select.get(i).click();
 						Thread.sleep(5000);
+				
 						if (Country.contains("English (£)") && countryname.contains("UK")|| Country.contains("English") && countryname.contains("United States")) {
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
@@ -8605,15 +8607,12 @@ public void Continue_Shopping() {
 									Common.getscreenShotPathforReport(Country));
 						} 
 						
-						else if (Country.contains("English (€)") || Country.contains("Français (€)")
-								|| Country.contains("Deutsch (€)") || Country.contains("Italiano (€)")
-								|| Country.contains("Español") || Country.contains("English (DKK)")
-								|| Country.contains("Norsk (NOK)") || Country.contains("Svenska (SEK)")
-								|| Country.contains("Deutsch (CHF)") || Country.contains("Français (CHF)")
-								|| Country.contains("Italiano (CHF)") || Country.contains("English (£)")) {
+						else if (Country.contains("Español") || Country.contains("English")
+								|| Country.contains("Français") || Country.contains("Español"))
+								 {
 							
-							Sync.waitElementPresent("xpath", "(//span[@x-text='countryTitle'])[1]");
-							Common.getText("xpath", "(//span[@x-text='countryTitle'])[1]");
+							Sync.waitElementPresent("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
+							Common.getText("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							Common.navigateBack();
@@ -8621,6 +8620,9 @@ public void Continue_Shopping() {
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
 									Common.getscreenShotPathforReport(Country));
+							Thread.sleep(6000);
+							   Sync.waitElementPresent("xpath", "//button[@aria-label='Close']");
+					            Common.clickElement("xpath", "//button[@aria-label='Close']");
 							
 						}
 						else {

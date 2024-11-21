@@ -31,7 +31,7 @@ public class Test_DGLD_OS_US_ST_014_Validate_Country_Selector {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
