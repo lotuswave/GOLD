@@ -15303,7 +15303,7 @@ public void Prouser_Discount() {
 	String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "");
 	Float pricevalue = Float.parseFloat(Newprice);
 	Thread.sleep(4000);
-	float discount = originalvalue - (originalvalue * 40 / 100);
+	float discount = originalvalue - (originalvalue * 50 / 100);
 	String discountvalue = String.valueOf(discount).replace("$", "");
 	Float value = Float.parseFloat(discountvalue);
 	String s=String.valueOf(value); 
