@@ -11390,10 +11390,10 @@ public void Add_to_cart_Whishlist() {
 	try
 	{
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//span[@x-text='options.label']");
-		String Instock=Common.findElement("xpath", "//span[@x-text='options.label']").getText().trim();
-		System.out.println(Instock);
-		if(Instock.equals("In stock"))
+		Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
+		int size =Common.findElements("xpath", "//button[@data-role='tocart']").size();
+		System.out.println(size);
+		if(size>0)
 		{
 			Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
 			Common.clickElement("xpath", "//button[@data-role='tocart']");
