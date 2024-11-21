@@ -9535,7 +9535,12 @@ public void Continue_Shopping() {
 			Common.clickElement("xpath", "//button[@id='discount-form-toggle']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-			Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
+			if(Common.getCurrentURL().contains("https://www.osprey.com/checkout/")) {
+				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
+			}else {
+				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("ProdDiscountcode"));
+			}
+			
 
 			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
@@ -16019,6 +16024,49 @@ public String create_account(String Dataset) {
 		Assert.fail();
 	}
 	return email;
+}
+
+public void Accessories_Header(String Dataset) {
+	// TODO Auto-generated method stub
+	String expectedResult = "User should click the" + Dataset;
+	String out = data.get(Dataset).get("outdoor");
+	String header=data.get(Dataset).get("headers");
+	try {
+
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath",
+				"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+		
+		Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+
+		Thread.sleep(3000);
+
+		try {
+			Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
+		} catch (Exception e) {
+			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
+		}
+		Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
+
+		Sync.waitPageLoad();
+		Thread.sleep(6000);
+		expectedResult = "User should select the " + Dataset + "category";
+		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
+		Common.assertionCheckwithReport(sizebotteles > 0,
+				"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
+				"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
+
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product category as" + Dataset + "from navigation menu ",
+				expectedResult, "Unable to Selected the " + Dataset + " category",
+				Common.getscreenShot("Failed to click on the" + Dataset + ""));
+
+		AssertJUnit.fail();
+	}
+
 }
 	
 

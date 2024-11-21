@@ -18,20 +18,19 @@ public class Test_DGLD_OS_US_ST_031_Validating_the_shopping_cart_page {
 	public void Verifying_Checkout_RegisterUserCC_configurable_Simple () throws Exception {
 
 		try {
-        Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.simple_addtocart("Simple product");  
-        Osprey_ReEu.search_product("Product");     
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.click_minicart();
-        Osprey_ReEu.minicart_viewcart();
-        Osprey_ReEu.Remove_Product("Product");
-        Osprey_ReEu.update_shoppingcart("Product Qunatity");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-//        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.Shoppingcart_page();
-        Osprey_ReEu.minicart_ordersummary_discount("Discount");
+			Osprey_ReEu.verifingHomePage();
+	        Osprey_ReEu.Accessories_Header("Accessories");
+	        Osprey_ReEu.simple_addtocart("Simple product");  
+	        Osprey_ReEu.search_product("Product");     
+	        Osprey_ReEu.addtocart("Product");
+	        Osprey_ReEu.click_minicart();
+	        Osprey_ReEu.minicart_viewcart();
+	        Osprey_ReEu.Remove_Product("Product");
+	        Osprey_ReEu.update_shoppingcart("Product Qunatity");
+	        Osprey_ReEu.minicart_Checkout();
+	        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+	        Osprey_ReEu.Shoppingcart_page();
+	        Osprey_ReEu.minicart_ordersummary_discount("Discount");
         
 		} catch (Exception e) {
 
