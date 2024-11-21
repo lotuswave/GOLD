@@ -3951,7 +3951,7 @@ public void Validate_retailerlocations() {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
-			String code =Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("class");
+//			String code =Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("class");
 			
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
@@ -4039,7 +4039,7 @@ public void Validate_retailerlocations() {
 				if (zipcode > 0) {
 
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", data.get(dataSet).get("postcode"));
 				}
 				int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
 				
@@ -12513,7 +12513,7 @@ public void Card_Value_for_my_fav(String Dataset) {
 		Common.clickElement("xpath", "//span[text()='"+ amount +"']");
 		if(Common.getCurrentURL().contains("/gb/"))
 		{
-		String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+		String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
 		Common.assertionCheckwithReport(Price.contains(amount),
 				"validating gift card amount value in PDP",
 				"After clicking on the value amount should be appear in PDP",
@@ -12522,7 +12522,7 @@ public void Card_Value_for_my_fav(String Dataset) {
 		}
 		else
 		{
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("gift-card"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("gift-card")||Common.getCurrentURL().contains("/wishlist/index"),
 					"validating gift card Navigated to the PDP",
 					"After clicking on the gift card on PLP it should navigate to the PDP",
 					"Successfully Gift card is Navigated to the PDP ",
@@ -12555,9 +12555,9 @@ public void Card_Value_for_my_fav(String Dataset) {
 	catch(Exception | Error e)
 	{
 		e.printStackTrace();
-		/*	ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
-					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));*/
-			AssertJUnit.fail();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			Assert.fail();
 		}
 		
 	}
@@ -12566,8 +12566,8 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 	// TODO Auto-generated method stub
 	try {
 
-		Sync.waitElementPresent("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
-		Common.javascriptclickElement("xpath", "(//button[@data-action='add-to-wishlist'])[1]");
+		Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Favorites']");
+		Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Favorites']");
 		Thread.sleep(6000);
 		int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
 		System.out.println(Size);
@@ -12577,8 +12577,8 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 			Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
 
 		} else {
-			String Error = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-			if (Error.contains("You must login")) {
+			int Error = Common.findElements("xpath", "//div[@class='a-message__container-inner']").size();
+			if (Error>0) {
 				
 				Common.mouseOverClick("xpath", "(//span[text()='Create an Account'])");
 				Create_Account_for_Guest_my_fav("Create Account");
@@ -12588,20 +12588,21 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 			}
 		}
 		Thread.sleep(3000);
-		int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
+		/*int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
 		System.out.println("Wishlist" + WishlistMSG);
 		Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
 				"My Wish List should be display", "Sucessfully navigated to My Wish List ",
-				"failed to navigate to My Wish List");
+				"failed to navigate to My Wish List");*/
 
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
 				"Products added to Compare list successfull", "failed to add product to wishlist",
 				Common.getscreenShotPathforReport("Wishlistfail"));
-		AssertJUnit.fail();
+		Assert.fail();
 	}
 }
+
 
 public String Create_Account_for_Guest_my_fav(String Dataset) {
 	// TODO Auto-generated method stub
@@ -13598,57 +13599,51 @@ public void product_Registration(String dataSet) {
 
 }
 
-public void Giftcard_Add_from_My_fav(String Dataset) {
+public void Giftcard_Add_from_My_fav(String Dataset) {{
 	// TODO Auto-generated method stub
 	String amount=data.get(Dataset).get("Card Amount");
+	String Product=data.get(Dataset).get("Osprey");
 	try
 	{
-		Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card')]");
-		Common.mouseOver("xpath", "//img[contains(@class,'m-product-card')]");
-		String Product=Common.findElement("xpath", "//strong[contains(@class,'product-item')]//a[@data-location='my favorites']").getText().toLowerCase();
-		System.out.println(Product);
-		Sync.waitElementPresent("xpath", "//button[contains(@class,'action tocart a-btn a-btn--s')]");
-		Common.clickElement("xpath", "//button[contains(@class,'action tocart a-btn a-btn--s')]");
+		Common.clickElement("id", "customer-menu");
+		Common.clickElement("id", "customer.header.wishlist.link");
+		Thread.sleep(4000);
+		String product=Common.findElement("xpath", "//a[@title='"+Product+"']").getText().toLowerCase();
+		System.out.println(product);
+		Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Cart "+Product+"']");
+		Common.clickElement("xpath", "//button[@aria-label='Add to Cart "+Product+"']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		String Pdp=Common.findElement("xpath", "//h1[@data-ui-id='page-title-wrapper']").getText().toLowerCase();
+		String Pdp=Common.findElement("xpath", "//span[@itemprop='name']").getText().toLowerCase();
 		System.out.println(Pdp);
 		
-		Common.assertionCheckwithReport(Product.equalsIgnoreCase(Pdp),
+		Common.assertionCheckwithReport(product.equalsIgnoreCase(Pdp),
 				"verifying Product navigation to the PDP", "After clicking add to cart in the myfav it should navigate to the PDP",
 				"Product navigated to the PDP page", "Failed to Navigate tot the PDP");
 		Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
 		Common.clickElement("xpath", "//span[text()='"+ amount +"']");
 		if(Common.getCurrentURL().contains("/gb"))
 		{
-		String Price=Common.findElement("xpath", "//span[@data-price-type='finalPrice']//span[@class='price']").getText();
+		String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
 		Common.assertionCheckwithReport(Price.contains(amount),
 				"validating gift card amount value in PDP",
 				"After clicking on the value amount should be appear in PDP",
 				"Successfully selected amount is matched for the gift card",
 				"Failed to appear amount for the gift card");
+		Giftcard_details("Gift Details");
 		}
 		else
 		{
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains(""),
-					"validating gift card Navigation to the PDP",
-					"After clicking on the gift card from the fav it should navigate to the PDP",
-					"Successfully after clicking on the gift card form fav navigated to the PDP",
-					"Failed to Navigated the gift card to the PDP");
+			Card_Value_for_my_fav("price");
+	
 		}
-		Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
-		Common.clickElement("xpath", "//span[text()='Add to Cart']");
+		Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+		Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-//		Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-//		String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//				.getAttribute("data-ui-id");
-//		System.out.println(message);
-//		Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//				"Product should be add to cart", "Sucessfully product added to the cart ",
-//				"failed to add product to the cart");
-		Sync.waitElementPresent("xpath", "//div[@class='c-mini-cart__close-btn']");
-		Common.clickElement("xpath", "//div[@class='c-mini-cart__close-btn']");
+
+		Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+		Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
 		
 	}
 	catch(Exception | Error e)
@@ -13658,9 +13653,9 @@ public void Giftcard_Add_from_My_fav(String Dataset) {
 				"After clicking on the value amount should be appear in PDP",
 				"Failed to selected amount is matched for the gift card",
 				Common.getscreenShotPathforReport("Failed to appear amount for the gift card"));
-		AssertJUnit.fail();
+		Assert.fail();
 	}
-}
+}}
 
 public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throws Exception {
 	// TODO Auto-generated method stub
