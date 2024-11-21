@@ -270,15 +270,13 @@ public class GoldHydroHyvaHelper {
 	public void minicart_Checkout() {
 
 		try {
-			Thread.sleep(1000);
-//			click_minicart();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
@@ -602,7 +600,7 @@ public class GoldHydroHyvaHelper {
 		String method = data.get(Dataset).get("methods");
 
 		try {
-			Thread.sleep(15000);
+			Thread.sleep(5000);
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
@@ -3629,7 +3627,7 @@ System.out.println(MyFavorites);
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 	
 		String fullname=data.get(dataSet).get("FirstName");
 		String expectedResult = "land on the payment section";
@@ -3756,9 +3754,9 @@ System.out.println(MyFavorites);
 				}
 				else
 				{
-					Thread.sleep(4000);
+					Thread.sleep(2000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
 							klarna.contains("klarna"),
