@@ -2753,7 +2753,7 @@ public class GoldDrybarusHelper2 {
 	     Common.assertionCheckwithReport(Common.getCurrentURL().contains("order_id"), "validating the navigated to the my orders page",
 					"when we click on the order number it is navigate to the My orders page", "Sucessfully Navigated to the My orders page ",
 					"failed to Navigate to the My orders page");
-	    String Order_ID= Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("ORDER #", "");
+	    String Order_ID= Common.findElement("xpath", "//span[contains(@class,'title-xs')]").getText().replace("ORDER #", "");
 	    System.out.println(Order_ID);
 	    Common.assertionCheckwithReport(Ordernumber.equals(Order_ID), "Validating the order number in the my orders page",
 				"Order Number should be display on the My Orders page", "Sucessfully Order Number io displayed in the My orders page",
@@ -11390,10 +11390,10 @@ public void Add_to_cart_Whishlist() {
 	try
 	{
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//span[@x-text='options.label']");
-		String Instock=Common.findElement("xpath", "//span[@x-text='options.label']").getText().trim();
-		System.out.println(Instock);
-		if(Instock.equals("In stock"))
+		Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
+		int size =Common.findElements("xpath", "//button[@data-role='tocart']").size();
+		System.out.println(size);
+		if(size>0)
 		{
 			Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
 			Common.clickElement("xpath", "//button[@data-role='tocart']");
