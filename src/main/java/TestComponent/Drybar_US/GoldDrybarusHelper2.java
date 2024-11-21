@@ -1786,13 +1786,13 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		try
 		{
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").replace("$",
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").replace("$",
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
 			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[@class='value text-right title-sm text-sale-font'])[2]")
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value text-right')])[1]")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
