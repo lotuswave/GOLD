@@ -5257,7 +5257,7 @@ public void FUll_Payment(String dataSet) {
     			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
     					"");
     			Float subtotalvalue = Float.parseFloat(Subtotal);
-    			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='flex items-center']")
+    			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
     					.replace(Symbol, "");
     			Float shippingvalue = Float.parseFloat(shipping);
     			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
