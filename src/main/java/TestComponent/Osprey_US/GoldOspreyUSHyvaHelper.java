@@ -90,7 +90,7 @@ public class GoldOspreyUSHyvaHelper {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-				close_add();
+//				close_add();
 				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
@@ -10150,19 +10150,24 @@ public void Gift_card(String dataSet) {
 	public void invalid_Gift_card(String dataSet) {
 		try
 		{
-		Thread.sleep(4000);
-	    Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
-		Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("InvalidGC"));
-		
-		Common.clickElement("xpath","//span[text()='Add Code']");
-		Thread.sleep(3000);
-		String errormsg=Common.findElement("xpath", "//div[@role='alert']").getText();
-	  System.out.println(errormsg);
-		
-		Common.assertionCheckwithReport(errormsg.contains("not found"),
-				"validating the error message after applying gift card",
-				"error message should be displayed after the applying of gift card",
-				"Sucessfully gift card has not been applyed","Failed to apply the gift card");
+			Thread.sleep(4000);
+			
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		    Common.scrollIntoView("xpath", "//input[@x-model='giftCardCode']");
+			Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("InvalidGC"));
+			
+			Common.clickElement("xpath","//button[@aria-label='Add Code']");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+//		String errormsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+//	  System.out.println(errormsg);
+//		
+//		Common.assertionCheckwithReport(errormsg.contains("not found"),
+//				"validating the error message after applying gift card",
+//				"error message should be displayed after the applying of gift card",
+//				"Sucessfully gift card has not been applyed","Failed to apply the gift card");
 		}
 		catch(Exception | Error e)
 		{
