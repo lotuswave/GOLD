@@ -10192,7 +10192,11 @@ public void Gift_card(String dataSet) {
 			Thread.sleep(4000);
    if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
    {
-			Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+//	   Common.refreshpage();
+	   Thread.sleep(4000);
+	   Common.clickElement("xpath", "//input[@id='payment-method-free']");
+	   Thread.sleep(4000);
+	   Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 			//Common.refreshpage();
 		Thread.sleep(3000);
    }
