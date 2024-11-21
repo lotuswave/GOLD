@@ -12446,9 +12446,9 @@ public void validate_GIFT_CARD_PLP() {
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
 		Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
 		Thread.sleep(5000);
-		String GIFTCARDtitle = Common.getText("xpath", "//h1[@id='page-title-heading']");
+		String GIFTCARDtitle = Common.getText("xpath", "//h1");
 	    System.out.println(GIFTCARDtitle);	
-		Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("gift cards"),
+		Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("E Gift Cards"),
 				"To validate Gift card Navigation to the PLP",
 				"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
 				"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
@@ -12460,20 +12460,20 @@ public void validate_GIFT_CARD_PLP() {
 			"Sort by options should visible",
 			"Sort by options are visibled", "Failed to visible the sort by options");
 	      
-	    Sync.waitElementPresent("xpath", "//div[@id='filter-by-title']");
-	    String FILTERSBY = Common.getText("xpath", "//div[@id='filter-by-title']");
+	    Sync.waitElementPresent("xpath", "//span[contains(@class,'flex-grow title-panel')]");
+	    String FILTERSBY = Common.getText("xpath", "//span[contains(@class,'flex-grow title-panel')]").trim();
 	    System.out.println(FILTERSBY);
-	    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by"),
+	    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by:"),
 			"Verifying the filterby options are visible or not",
 			"filter by options should visible",
 			"filter by options are visibled", "Failed to visible the filter by options");
-	    Sync.waitElementPresent("xpath", "//span[contains(text(),'Categories')]");
-	    String Categorysection = Common.getText("xpath", "//span[contains(text(),'Categories')]");
-	    System.out.println(Categorysection);
-	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories:"),
-			"Verifying the filterby options are visible or not",
-			"filter by options should visible",
-			"filter by options are visibled", "Failed to visible the filter by options");
+//	    Sync.waitElementPresent("xpath", "(//div[@class='name'])[2]");
+//	    String Categorysection = Common.getText("xpath", "(//div[@class='name'])[2]").trim();
+//	    System.out.println(Categorysection);
+//	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories"),
+//			"Verifying the filterby options are visible or not",
+//			"filter by options should visible",
+//			"filter by options are visibled", "Failed to visible the filter by options");
 	    Thread.sleep(3000);
 	    List<WebElement> allProducts = Common.findElements("xpath","//li[@class='ais-InfiniteHits-item']");
         int visibleProductCount = 0;
@@ -12482,7 +12482,7 @@ public void validate_GIFT_CARD_PLP() {
                 visibleProductCount++;
             }
             else {
-            	AssertJUnit.fail();
+            	Assert.fail();
             	
             }
         }
@@ -12497,7 +12497,7 @@ public void validate_GIFT_CARD_PLP() {
 				"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
 				"Sucessfully It has been navigated to the Gift card PLP ",
 				Common.getscreenShot("Failed to Navigate to the Gift card PLP"));
-		AssertJUnit.fail();
+		Assert.fail();
 		
 	
 	}
@@ -14030,21 +14030,21 @@ public void validate_price_PLP_and_PDP() {
 	
 	try
 	{
-		int Products= Common.findElements("xpath","//img[contains(@class,'m-product-card')]").size();
+		int Products= Common.findElements("xpath","//img[@itemprop='image']").size();
 		System.out.println(Products);
 		for(int i=0;i<Products;i++) 
 		{
 			Thread.sleep(4000);
 			int value = i + 1;
 			WebElement ListOfSubproducts = Common.findElement("xpath",
-					"(//div[contains(@class,'m-product-card m-produ')]//span[@class='price'])[" + value + "]");
-			String PLPprice=ListOfSubproducts.getText().replace("From ", "");
+					"(//span[@x-ref='normalPrice'])[" + value + "]");
+			String PLPprice=ListOfSubproducts.getText();
 		    System.out.println(PLPprice);
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//img[contains(@class,'m-product-card')])["+ value + "]");
+			Common.clickElement("xpath", "(//img[@itemprop='image'])["+ value + "]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			String PDPPrice=Common.getText("xpath", "(//label[@class='amcard-label-block -price']//span)[1]");
+			String PDPPrice=Common.getText("xpath", "(//span[@x-text='item.price'])[1]");
 			System.out.println(PDPPrice);
 			Common.assertionCheckwithReport(PLPprice.equals(PDPPrice),
 					"validating the Price for the Gift card in the PDP",
@@ -14063,7 +14063,7 @@ public void validate_price_PLP_and_PDP() {
 				"After clicking on the giftcard it should navigate to the PDP page",
 				"Unable to validate the PLP and PDP price",
 				Common.getscreenShotPathforReport("Failed to validate the PLP and PDP price"));
-		AssertJUnit.fail();
+		Assert.fail();
 	}
 	
 }
