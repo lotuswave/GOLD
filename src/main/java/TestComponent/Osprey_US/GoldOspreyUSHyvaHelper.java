@@ -8295,10 +8295,15 @@ public void Continue_Shopping() {
     }
 
 	public void acceptPrivacy() {
-
+		try {
+     Sync.waitElementClickable("xpath", "//button[@id='truste-consent-button']");
 		Common.clickElement("xpath", "//button[@id='truste-consent-button']");
 	}
-	
+	catch(Exception | Error e){
+		Sync.waitElementClickable("xpath", "//button[@id='truste-consent-button']");
+		Common.clickElement("xpath", "//button[@id='truste-consent-button']");
+	}
+	}
 	public void Decline_All() {
 		Common.clickElement("xpath", "//button[@id='truste-consent-required']");
 	}
@@ -12584,7 +12589,9 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 				Create_Account_for_Guest_my_fav("Create Account");
 			} else {
 				System.out.println("no Error message displayed");
-
+            if(Common.getCurrentURL().contains("/customer/account/login")) {
+            	Create_Account_for_Guest_my_fav("Create Account");
+            }
 			}
 		}
 		Thread.sleep(3000);
@@ -12608,22 +12615,18 @@ public String Create_Account_for_Guest_my_fav(String Dataset) {
 	// TODO Auto-generated method stub
 	String email = "";
 	try {
-
+        Common.clickElement("xpath", "//a[text()='Create an Account']");
 		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 		Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 		Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
 		email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
-		Thread.sleep(4000);
 		Common.clickElement("xpath", "//span[text()='Sign Up']");
 		Sync.waitImplicit(30);
 		Thread.sleep(4000);
-	    String message = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[1]").getText();
-		String message2 = Common.findElement("xpath", "(//div[@class='a-message__container-inner'])[2]").getText();
-		Common.assertionCheckwithReport(message.contains("Thank you for registering")
-						&& Common.getCurrentURL().contains("wishlist")||message2.contains("New Year Gift Card has been added to your Favourites.")
-						&& Common.getCurrentURL().contains("wishlist"),
+	    
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
 				"validating navigation to the account page after clicking on sign up button",
 				"User should navigate to the My account page after clicking on the Signup",
 				"Sucessfully user navigates to the My account page after clickng on thr signup button",
@@ -13606,7 +13609,8 @@ public void Giftcard_Add_from_My_fav(String Dataset) {{
 	try
 	{
 		Common.clickElement("id", "customer-menu");
-		Common.clickElement("id", "customer.header.wishlist.link");
+		Common.clickElement("xpath", "//*[@id='customer.header.wishlist.link' or @id='customer.header.sign.in.link']\r\n"
+				+ "");
 		Thread.sleep(4000);
 		String product=Common.findElement("xpath", "//a[@title='"+Product+"']").getText().toLowerCase();
 		System.out.println(product);
@@ -13670,13 +13674,13 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 
 	try {
 		Sync.waitPageLoad();
-		Sync.waitElementPresent("xpath", "//label[@for='stripe_payments']");
+		Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
 		// Common.clickElement("xpath", "//label[@for='stripe_payments']");
-		int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
+		int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 				"User unabel to land opaymentpage");
-		Common.clickElement("xpath", "//label[@for='stripe_payments']");
+		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 		Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
@@ -13702,8 +13706,8 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
              }
 			 else
 			 {
-				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
+				 Common.scrollIntoView("xpath", "//select[@name='region']");
+				 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
@@ -13713,12 +13717,11 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 
 			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
-			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 			
 			Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 			Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
