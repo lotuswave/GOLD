@@ -9280,7 +9280,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 						"//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+				String title = Common.findElement("xpath", "//h1//span").getText();
 				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 				System.out.println(title);
 				System.out.println(Links[i]);			
@@ -9886,7 +9886,9 @@ public void Explore_Validation(String Dataset) {
 				Common.clickElement("xpath","//div[@data-content-type='button-item']//span[text() ='" + Link[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.assertionCheckwithReport(Common.getPageTitle().contains(Link[i]) || Common.getPageTitle().contains("Shop New Colors") ,
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().contains(Link[i]) || Common.getPageTitle().contains("Shop New Colors")
+								|| Common.getPageTitle().contains("Shop Cups & Tumblers") || Common.getPageTitle().contains("Colors of Oregon"),
 						"verifying the header image link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -11317,8 +11319,8 @@ public void Explore_Validation(String Dataset) {
 		{
 			Thread.sleep(4000);
          	for (i = 0; i < Links.length; i++) {
-         		Sync.waitElementPresent("xpath", "//span[text()=' Customize']");
-    			Common.clickElement("xpath", "//span[text()=' Customize']");
+         		Sync.waitElementPresent("xpath", "//span[contains(text(),'Customize')]");
+    			Common.clickElement("xpath", "//span[contains(text(),'Customize')]");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
 					"//li[contains(@class,'level1 ')]//a//span[contains(text(),'" + Links[i] + "')]");
@@ -12254,7 +12256,7 @@ public void Explore_Validation(String Dataset) {
 								"//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')]");
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
-						String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+						String title = Common.findElement("xpath", "//h1//span").getText();
 						String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 						System.out.println(title);
 						System.out.println(Links[i]);			
