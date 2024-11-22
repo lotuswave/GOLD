@@ -36,7 +36,7 @@ public class TEST_DGLD_OS_US_ST_086_Guest_gift_card_add_to_My_favourites_and_Gue
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

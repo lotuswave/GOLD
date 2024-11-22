@@ -13697,7 +13697,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 			 if(Common.getCurrentURL().contains("stage3"))
              {
 				  Thread.sleep(4000);
-                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
+                 Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
                  Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
                  Thread.sleep(3000);
                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
@@ -13711,11 +13711,11 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 			}
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//div[contains(@name,'payments.postcode')]//input[@name='postcode']",
+			Common.textBoxInput("xpath", "//input[@name='postcode']",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+			Common.textBoxInput("xpath", "//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
@@ -13733,11 +13733,12 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.textBoxInput("xpath", "//input[@name='postalCode']",data.get(dataSet).get("postcode"));
 			Common.switchToDefault();
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
-				Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 
-				//Common.clickElement("xpath", "//button[@class='action primary checkout']");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 			} else {
 				AssertJUnit.fail();
 				
