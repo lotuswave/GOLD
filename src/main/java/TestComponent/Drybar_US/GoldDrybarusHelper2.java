@@ -5126,7 +5126,7 @@ public void FUll_Payment(String dataSet) {
     			Thread.sleep(4000);
     			Common.clickElement("xpath", "//button[@title='Sign Up']");
     			Sync.waitImplicit(30);
-    			Thread.sleep(8000);
+    			Thread.sleep(5000);
     			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
     			System.out.println(message);
     			Common.assertionCheckwithReport(
@@ -7895,7 +7895,7 @@ public void FUll_Payment(String dataSet) {
 	    		
 	    		try {
 	    			Thread.sleep(4000);
-	    			String subtotal=Common.findElement("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
+	    			String subtotal=Common.findElement("xpath", "(//div[@class='item subtotal']//span[@class='value'])[1]").getText().replace(symbol, "").replace(".", "");
 	    			System.out.println(subtotal);
 	    			subtotal = subtotal.trim();
 	    			subtotal = subtotal.substring(0,subtotal.length() - 2);
