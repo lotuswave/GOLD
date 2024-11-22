@@ -9190,16 +9190,16 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-					Common.clickElement("xpath", "//span[text()=' Kitchenware']");
+					Common.clickElement("xpath", "//span[text()='Kitchenware']");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+							"//a//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//h1[contains(@class,'c')]").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+					String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					System.out.println(title);
 					System.out.println(Links[i]);
 					Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
