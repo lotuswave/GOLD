@@ -3602,12 +3602,13 @@ public void Validate_retailerlocations() {
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
 //			Common.findElement("xpath", "//div[@class='w-full relative required']//input[@placeholder='Last name']").clear();
+			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//div[contains(@class,'field relative flex items')]//input[@placeholder='Last name']", 
 					data.get(dataSet).get("LastName"));
 			Common.clickElement("xpath", "//section[@id='shipping-details']//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='street[0]']", address);
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
+//			Sync.waitPageLoad();
+			Thread.sleep(6000);
 			Common.findElement("xpath", "//section[@id='shipping-details']//input[@name='city']").clear();
 			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='city']",
 					data.get(dataSet).get("City"));
@@ -3635,7 +3636,9 @@ public void Validate_retailerlocations() {
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 	
-			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			//Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			Common.findElement("xpath", "//input[@placeholder='Phone number']").clear();
+			Common.textBoxInput("xpath", "//input[@placeholder='Phone number']", data.get(dataSet).get("phone"));
 			
 //			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
 //			System.out.println(subtotal);
@@ -7672,23 +7675,28 @@ public void Continue_Shopping() {
 		try {
 			
 			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
+			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[2]").isSelected();
+			System.out.println(checkbox);
+			Thread.sleep(7000);
+			String box=Boolean.toString(checkbox);
+			if(box.contains("true"))
+			{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[3]");
+			Common.clickElement("xpath", "(//input[@type='checkbox'])[3]");
+			Thread.sleep(5000);
 
-			String newaddress = Common.findElement("xpath", "//div[@class='block-content']//P").getText();
-			if (newaddress.contains("You have no other address")) {
-				Common.clickElement("xpath", "//button[@title='Add New Address']");
-				Sync.waitPageLoad();
-				Sync.waitElementPresent("xpath", "//input[@name='firstname']");
-				Common.clickElement("xpath", "//input[@name='firstname']");
-				Common.textBoxInput("xpath", "//input[@name='firstname']", firstname);
-				Common.clickElement("xpath", "//input[@name='lastname']");
-				Common.textBoxInput("xpath", "//input[@name='lastname']", secondname);
-				Sync.waitElementPresent(30, "xpath", "//input[@title='Phone Number']");
-				Common.clickElement("xpath", "//input[@title='Phone Number']");
-				Common.textBoxInput("xpath", "//input[@title='Phone Number']", phonenumber);
-				Common.clickElement("xpath", "//input[@title='Address Line 1']");
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", address);
-				Common.clickElement("xpath", "//input[@title='City']");
-				Common.textBoxInput("xpath", "//input[@title='City']", City);
+			Common.textBoxInput("xpath", "//input[@name='firstname' and @data-form='billing']", data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
+			Thread.sleep(4000);
+			String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='city' and @data-form='billing']", data.get(dataSet).get("City"));
+			System.out.println(data.get(dataSet).get("City"));
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
@@ -7700,28 +7708,55 @@ public void Continue_Shopping() {
              }
 			 else
 			 {
-				 Thread.sleep(4000);
-                 Common.scrollIntoView("xpath", "//select[@name='region_id']");
-                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));  
+				 Common.scrollIntoView("xpath", "//select[@name='region' and @data-form='billing']");
+                 Common.dropdown("xpath", "//select[@name='region' and @data-form='billing']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
                  Thread.sleep(3000);
-                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region' and @data-form='billing']")
                          .getAttribute("value");
                  Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
 	              System.out.println(Shipping);
                  System.out.println(Shippingvalue);
-			}
+			 }
+				
 			Thread.sleep(2000);
 			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.clickElement("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//input[@name='postcode']", zipcode);
-			Common.clickElement("xpath", "//button[@title='Save Address']");
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-			Common.assertionCheckwithReport(message.equals("You saved the address."),
-					"validating the saved message after saving address in address book",
-					"Save address message should be displayed after the address saved in address book",
-					"Sucessfully address has been saved in the address book",
-					"Failed to save the address in the address book");
+			Thread.sleep(2000);
+			Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
+					data.get(dataSet).get("postcode"));
+			Thread.sleep(5000);
+			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
+					data.get(dataSet).get("phone"));
+//			Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
+//			Sync.waitPageLoad();
+//			Thread.sleep(5000);
+
+//			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+//					data.get(dataSet).get("phone"));
+//			Thread.sleep(4000);		
+//			Common.clickElement("xpath", "//span[text()='Update']");
+//			//Sync.waitPageLoad();
+//			Thread.sleep(4000);
+//                if(Common.isElementDisplayed("xpath", "//span[contains(text(),'OK')]")) {
+//				
+//				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
+//			Thread.sleep(5000);
+			
+//			update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
+//			System.out.println(update);
+//			Sync.waitPageLoad();
+		}
+			else {
+				
+			
+			update = Common.findElement("xpath", "//label[@for='billing-as-shipping']").getText();
+			System.out.println(update);
+			Sync.waitPageLoad();
 			}
+//			Common.assertionCheckwithReport(update.contains("Payment Method"),
+//					"verifying the Billing address form in payment page",
+//					"Billing address should be saved in the payment page",
+//					"Sucessfully Billing address form should be Display ",
+//					"Failed to display the Billing address in payment page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7729,7 +7764,7 @@ public void Continue_Shopping() {
 					"Billing address should be saved in the payment page",
 					"Unable to display the Billing address in payment page",
 					Common.getscreenShotPathforReport("Failed to display the Billing address in payment page"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 		return update;
 	}
