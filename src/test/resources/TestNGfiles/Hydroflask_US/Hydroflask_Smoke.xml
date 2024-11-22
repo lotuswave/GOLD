@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF GG Sprint  smoke execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    <test name="Test_DGLD_HF_ST_034_Guest_user_Checkout_Funtionality_with_Paypal" testid="DTG-928" priority="P1" description="This script will cover validating Guest user Checkout Funtionality with Paypal">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_034_Guest_user_Checkout_Funtionality_with_Paypal"/>
+        </classes>
+        </test> 
+        
+          <test name="Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-928" priority="P1" description="This script will cover validating  Register user Checkout Funtionality with Paypal">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal"/>
+        </classes>
+        </test>
+         
+           <test name="Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card" testid="DTG-928" priority="P1" description="This script will cover Guestuser checkout functionality of Hydroflask using Visa Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card"/>
+        </classes>
+        </test> 
+         
+         <test name="Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using Discover Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card"/>
+        </classes>
+        </test> 
+        
+        
+        
+        
+          <test name="Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card" testid="DTG-963" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using AMEX Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card"/>
+        </classes>
+        </test> 
+       
+        <test name="Test_DGLD_HF_ST_003_Create_Account_Validation" testid="DTG-932" priority="P1" description="This script will cover Account Creation Functionality of Hydroflask">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_003_Create_Account_Validation"/>
+        </classes>
+        </test>
+        
+        <test name="Test_DGLD_HF_ST_008_Guest_user_Checkout_Funtionality_Master_card" testid="DTG-963" priority="P1" description="This script will cover validating Guest user Checkout Funtionality Master card">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_008_Guest_user_Checkout_Funtionality_Master_card"/>
+</classes>
+</test>
+        
+        
+        
+           <test name="Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment" testid="DTG-1230" priority="P1" description="This script will cover Register user Checkout Klarna Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_029_Register_user_Checkout_Klarna_Payment"/>
+        </classes>
+        </test>
+        
+        
+        
+           <test name="Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card" testid="DTG-1230" priority="P1" description="This script will cover Guet user Checkout Discount Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_Visa_card"/>
+        </classes>
+        </test>
+        
+        
+        
+           <test name="Test_DGLD_HF_ST_044_Register_User_Checkout_Afterpay_Payments" testid="DTG-1230" priority="P1" description="This script will cover Register user Checkout Afterpay Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_044_Register_User_Checkout_Afterpay_Payments"/>
+        </classes>
+        </test>
+        
+            <test name="Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment" testid="DTG-1230" priority="P1" description="This script will cover Guest user Checkout Klarna saved Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_015_Guest_user_Checkout_Funtionality_Klarna_Saved_Payment"/>
+        </classes>
+        </test>
+          
+            <test name="Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page" testid="DTG-1230" priority="P1" description="This script will cover Register Login from shipping_Page">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_050_Register_Login_from_shipping_Page"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_ST_032_Header_Links_Validation" testid="DTG-633" priority="P1" description="Validating the Header Links Functionality">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_032_Header_Links_Validation"/>
+        </classes>
+        </test>
+        
+         <test name="Test_DGLD_HF_ST_074_Forgot_password_from_SignIn_page" testid="DTG-2199" priority="P1" description="Validating the Forgot password functionality from Signin page">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_074_Forgot_password_from_SignIn_page"/>
+        </classes>
+        </test>
+        
+           <test name="Test_DGLD_HF_ST_088_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products" testid="DTG-2392" priority="P1" description="Validating the Guest user checkout functionality with simple, configurable, engraving, grouped, my hydro and bundle products">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_088_Checkout_with_GuestUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products"/>
+        </classes>
+        </test>
+        
+          <test name="Test_DGLD_HF_ST_107_My_Account_Page_Validation" testid="DTG-2526" priority="P1" description="This script will cover the validation of the my account page ">
+       <classes>
+            <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_107_My_Account_Page_Validation"/>
+        </classes>
+        </test>
+        
+        <test name="Test_DGLD_HF_ST_033_Footer_Links_Validation" testid="DTG-464" priority="P1" description="This script will cover Footer Links Validation">
+    <classes>
+    <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_033_Footer_Links_Validation" />
+    </classes>
+      </test>
+        
+        
+</suite>  
