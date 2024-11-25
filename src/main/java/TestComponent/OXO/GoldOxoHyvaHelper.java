@@ -3300,7 +3300,9 @@ public String create_account(String Dataset) {
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				System.out.println("Switch to Frames");
-				Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Common.scrollIntoView("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Common.clickElement("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Thread.sleep(5000);
 
 
 				Common.switchToDefault();
@@ -3311,7 +3313,7 @@ public String create_account(String Dataset) {
 					{
 						 Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
 	                	 Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-	                	 
+	                	 Thread.sleep(4000);
 	                	 Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
 	     				 Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 	     				Thread.sleep(10000);
@@ -3389,6 +3391,12 @@ public String create_account(String Dataset) {
 			}
 			else
 			{
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//span[text()='Klarna']");
@@ -3406,7 +3414,7 @@ public String create_account(String Dataset) {
 				{
 					Thread.sleep(4000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']").getAttribute("data-testid");
+					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
 							klarna.contains("klarna"),
@@ -3417,9 +3425,7 @@ public String create_account(String Dataset) {
 					
 				}
 			}
-			
-			
-			
+		
 		
 	}
 		catch(Exception | Error e)
