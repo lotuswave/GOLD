@@ -8048,7 +8048,7 @@ public void header_1_Percent_Planet() {
 //			Common.actionsKeyPress(Keys.UP);
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//span[@itemprop='name']");
-			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[9]");	
+			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[14]");	
 			Common.clickElement("xpath", "//button[@title='Play video']");
 //					Sync.waitElementPresent(30, "xpath", "//button[@title='Play Video']");
 //					Common.clickElement("xpath", "//button[@title='Play Video']");
