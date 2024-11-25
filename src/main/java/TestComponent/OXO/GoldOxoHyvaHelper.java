@@ -3875,7 +3875,7 @@ catch(Exception | Error e)
 		try {
 			Sync.waitElementPresent(30, "xpath", "//button[@aria-label='My Account']");
 			Common.clickElement("xpath", "//button[@aria-label='My Account']");
-			Common.clickElement("xpath", "//a[contains(text(),'My Orders')]");
+			Common.clickElement("xpath", "//a[@title='Track My Order']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Tracking & Returns") || Common.getPageTitle().equals("My Orders"),
@@ -3941,9 +3941,9 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			String orderid = Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText();
 			System.out.println(orderid);
-			String ID=Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("Order #", "");
+			String ID=Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText().replace("Order #", "");
 			System.out.println(ID);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.contains(ordernumber), "verifying order status form",
 					
