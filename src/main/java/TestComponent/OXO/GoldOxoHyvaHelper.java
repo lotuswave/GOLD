@@ -6909,9 +6909,9 @@ catch(Exception | Error e)
 		try {
 			for (i = 0; i < Account.length; i++) {
 				Sync.waitElementPresent("xpath",
-						"//a//span[text()='" + Account[i] + "']");
+						"//span[text()='" + Account[i] + "']");
 				Common.clickElement("xpath",
-						"//a//span[text()='" + Account[i] + "']");
+						"//span[text()='" + Account[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				try {
@@ -11423,7 +11423,7 @@ public void outofstock_subcription(String Dataset) {
 			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 
 			Common.clickElement("xpath", "//a[@title='Sign Out']");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
