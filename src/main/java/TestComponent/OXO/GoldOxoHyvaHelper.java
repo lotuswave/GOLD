@@ -2737,7 +2737,7 @@ public String create_account(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
 			Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
-			Common.dropdown("xpath", "//select[@id='region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+			Common.dropdown("xpath", "//select[@id='address_region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
 			
@@ -5053,7 +5053,7 @@ catch(Exception | Error e)
 				Country = select.get(i).getText();
 			      System.out.println(Country);
 				select.get(i).click();
-				if (Country.contains("United States")) {
+				if (Country.contains("UK")) {
 
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
