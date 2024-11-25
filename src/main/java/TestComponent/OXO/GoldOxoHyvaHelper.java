@@ -6614,6 +6614,7 @@ catch(Exception | Error e)
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
