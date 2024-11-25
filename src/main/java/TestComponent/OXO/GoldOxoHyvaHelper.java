@@ -5305,14 +5305,14 @@ catch(Exception | Error e)
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String Productname = Common.getText("xpath", "//a[contains(text(),'Write a review')]").trim();
+			String Productname = Common.getText("xpath", "//a[contains(text(),'Reviews')]").trim();
 
 			Thread.sleep(4000);
 			System.out.println(Productname);
 			String Breadcrumb = Common.getText("xpath", "//nav[@id='breadcrumbs']//ol");
 			System.out.println(Breadcrumb);
 //		Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
-			Common.assertionCheckwithReport(Productname.contains("Write a review") && Breadcrumb.contains("Home"),
+			Common.assertionCheckwithReport(Productname.contains("Reviews") && Breadcrumb.contains("Home"),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
