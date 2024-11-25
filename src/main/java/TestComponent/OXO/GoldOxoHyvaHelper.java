@@ -775,6 +775,7 @@ public class GoldOxoHyvaHelper {
 
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
 
+			Thread.sleep(5000);
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
@@ -3398,7 +3399,7 @@ public String create_account(String Dataset) {
 					Thread.sleep(5000);
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(8000);
 				klarna_Details(dataSet);
 				}
 				else
@@ -3453,6 +3454,7 @@ public String create_account(String Dataset) {
 			System.out.println(number);
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
+			Thread.sleep(6000);
 			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
