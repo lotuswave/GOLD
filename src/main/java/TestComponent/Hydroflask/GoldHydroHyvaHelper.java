@@ -5289,8 +5289,9 @@ catch(Exception | Error e)
 		String Product = data.get(Dataset).get("Products");
 		try {
 			Sync.waitPageLoad();
+			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//img[@alt='" + Product + "']");
-			Common.clickElement("xpath", "//img[@alt='" + Product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + Product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			validating_BundleProducts();

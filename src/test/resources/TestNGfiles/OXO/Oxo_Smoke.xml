@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO Smoke Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+    <test name="Test_DGLD_OXO_ST_053_Validate_PLP_page" testid="DTG-984" priority="P1" description="This script will cover validating the PLP (Product Listing Page) functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_053_Validate_PLP_page" />
+        </classes>
+    </test> 
+        
+    <test name="Test_DGLD_OXO_ST_004_Minicart_Validation" testid="DTG-986" priority="P1" description="This script will cover validating the Minicart functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_004_Minicart_Validation" />
+        </classes>
+    </test> 
+    
+    <test name="Test_DGLD_OXO_ST_003_Create_Account_Validation" testid="DTG-1244" priority="P1" description="This script will cover validating the Create Account functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_003_Create_Account_Validation" />
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page" testid="DTG-1245" priority="P1" description="This script will cover validating the Forgot Password functionality on the Sign-In page.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page" />
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_OXO_ST_031_Footer_Links_Validation" testid="DTG-1248" priority="P1" description="This script will cover validating the Footer Links functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_031_Footer_Links_Validation" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OXO_ST_030_Header_Links_Validation" testid="DTG-1250" priority="P1" description="This script will cover validating the Header Links functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_030_Header_Links_Validation" />
+        </classes>
+    </test> 
+    
+    <test name="Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" testid="DTG-1786" priority="P1" description="This script will cover validating Register User Checkout functionality with PayPal.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OXO_ST_040_Register_User_Checkout_with_Afterpay_Payments" testid="DTG-1253" priority="P1" description="This script will cover validating Register User Checkout functionality with Afterpay.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_040_Register_User_Checkout_with_Afterpay_Payments" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" testid="DTG-1348" priority="P1" description="This script will cover validating Guest User Checkout functionality with Klarna Payment.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_026_Guest_user_Checkout_Klarna_Payment" />
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_OXO_ST_099_Guest_User_Checkout_with_Express_Paypal" testid="DTG-1351" priority="P1" description="This script will cover validating Guest User Checkout functionality with Express PayPal.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_099_Guest_User_Checkout_with_Express_Paypal" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OXO_ST_054_Validate_Search_Results_Page" testid="DTG-1886" priority="P1" description="This script will cover validating the Search Results Page functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_054_Validate_Search_Results_Page" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OXO_ST_069_Validate_PDP_page" testid="DTG-1931" priority="P1" description="This script will cover validating the PDP (Product Detail Page) functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_069_Validate_PDP_page" />
+        </classes>
+    </test>
+     
+    <test name="Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DTG-1931" priority="P1" description="This script will cover validating Guest User Checkout functionality with different billing and shipping addresses.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" />
+        </classes>
+    </test>
+     
+    <test name="Test_DGLD_OXO_ST_103_Employeeuser_checkout_with_CC_Below_Fifty_price" testid="DTG-1931" priority="P1" description="This script will cover validating Employee User Checkout functionality with credit card transactions below fifty dollars.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_103_Employeeuser_checkout_with_CC_Below_Fifty_price" />
+        </classes>
+    </test>
+     
+    <test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DTG-1931" priority="P1" description="This script will cover validating the Shopping Cart page functionality.">
+        <classes>
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" />
+        </classes>
+    </test>
+          
+</suite>
