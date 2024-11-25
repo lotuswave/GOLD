@@ -2616,8 +2616,9 @@ public String create_account(String Dataset) {
 					List<WebElement> element = Common.findElements("xpath", "//span[text()='Add to Cart']");
 					Thread.sleep(5000);
 					element.get(0).click();
-					String message = Common.findElement("xpath", "//div[contains(@class,'message')]")
-						.getAttribute("class");
+					Thread.sleep(6000);
+					String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span")
+						.getText();
 					Thread.sleep(4000);
 					System.out.println(message);
 					Common.assertionCheckwithReport(message.contains("You added"),
