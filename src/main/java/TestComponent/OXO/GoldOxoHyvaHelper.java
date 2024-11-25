@@ -10949,14 +10949,7 @@ public void header_1_Percent_Planet() {
 		String symbol=data.get(dataSet).get("Symbol");
 		
 		try {
-			Thread.sleep(4000);
-			String subtotal=Common.findElement("xpath", "(//div[@class='item subtotal']//span[@class='value'])[2]").getText().replace(symbol, "").replace(".", "");
-			System.out.println(subtotal);
-			subtotal = subtotal.trim();
-			subtotal = subtotal.substring(0,subtotal.length() - 2);
-		    System.out.println(subtotal);  
-			int amount=Integer.parseInt(subtotal);
-			System.out.println(amount);
+		
 			
 			Sync.waitPageLoad();
 		    Common.actionsKeyPress(Keys.PAGE_DOWN);
@@ -10978,10 +10971,7 @@ public void header_1_Percent_Planet() {
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 //				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				Thread.sleep(4000);
-				if(amount>199 && symbol.equals("$"))
-				{
-					Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-					Common.clickElement("xpath", "//div[@class='ampromo-close']");
+			
 					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
 					Thread.sleep(5000);
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
@@ -10996,25 +10986,7 @@ public void header_1_Percent_Planet() {
 					Thread.sleep(2000);
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
-				
-				}
-				else
-				{
-					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
-					Thread.sleep(5000);
-					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
-					System.out.println(Number);
 
-					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
-
-					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-					Thread.sleep(2000);
-					Common.actionsKeyPress(Keys.ARROW_DOWN);
-					Common.switchToDefault();
-				}
 				
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 	                   if(Common.getCurrentURL().contains("/gb"))
@@ -11127,6 +11099,12 @@ public void header_1_Percent_Planet() {
 
 			} else {
 				Thread.sleep(4000);
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
@@ -11214,7 +11192,6 @@ ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expec
 		Common.getscreenShotPathforReport("Cardinfromationfail"));
 Assert.fail();
 }
-
 
 return Number;
 }
