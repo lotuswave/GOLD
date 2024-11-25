@@ -4,105 +4,99 @@
         <listener class-name="Utilities.TestListener"/>
     </listeners>
 
-    <test name="TEST_DGLD_DB_US_ST_001_Create_Account" testid="DTG-928" priority="P1" description="This script will cover creating a new user account">
+    <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DTG-928" priority="P1" description="This script will cover creating a new user account">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_001_Create_Account"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
         </classes>
     </test> 
-    
-    <test name="TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation" testid="DTG-928" priority="P1" description="This script will cover validating the shopping cart functionality">
+
+    <test name="Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page" testid="DTG-928" priority="P1" description="This script will cover the forgot password functionality from the sign-in page">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page" testid="DTG-928" priority="P1" description="This script will cover applying a gift card and full redeem on the checkout page">
+
+    <test name="Test_DGLD_OS_COMMON_004_My_Account_Page_Validation" testid="DTG-928" priority="P1" description="This script will cover validating the My Account page">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_004_My_Account_Page_Validation"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page" testid="DTG-963" priority="P1" description="This script will cover resetting the password from the shipping page">
+
+    <test name="Test_DGLD_OS_COMMON_005_HeaderLinks" testid="DTG-963" priority="P1" description="This script will cover validating the header links functionality">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_005_HeaderLinks"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser" testid="DTG-963" priority="P1" description="This script will cover header validation for a guest user">
+
+    <test name="Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card" testid="DTG-963" priority="P1" description="This script will cover registered user checkout with Visa card">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method" testid="DTG-932" priority="P1" description="This script will cover guest user checkout with the expedited shipping method">
+
+    <test name="Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page" testid="DTG-932" priority="P1" description="This script will cover validating the shopping cart page">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_035_Validate_PLP_page" testid="DTG-963" priority="P1" description="This script will cover validating the product listing page functionality">
+
+    <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DTG-963" priority="P1" description="This script will cover registered user checkout with PayPal">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_035_Validate_PLP_page"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_038_Configurable_Product_Checkout" testid="DTG-1230" priority="P1" description="This script will cover adding a configurable product to the cart and checking out as a guest user">
+
+    <test name="TEST_DGLD_OS_COMMON_033_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping" testid="DTG-1230" priority="P1" description="This script will cover guest user checkout with multiple products using PayPal and discounts, same billing and shipping address">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_038_Configurable_Product_Checkout"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_033_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Standard_shipping" testid="DTG-1230" priority="P1" description="This script will cover registered user checkout using AfterPay with standard shipping">
+
+    <test name="Test_DGLD_OS_COMMON_042_Login_from_Shipping_page" testid="DTG-1230" priority="P1" description="This script will cover login from the shipping page">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Standard_shipping"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_042_Login_from_Shipping_page"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment" testid="DTG-1230" priority="P1" description="This script will cover guest user checkout with simple, configurable, and non-aerosol bundle products with multiple quantities, different billing address, standard shipping, and Klarna payment">
+
+    <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card" testid="DTG-1230" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card_with_Express_Shipping" testid="DTG-1230" priority="P1" description="This script will cover registered user checkout with a discount, gift card, Visa card, and express shipping">
+
+    <test name="Test_DGLD_OS_COMMON_045_Minicart_Validation" testid="DTG-1230" priority="P1" description="This script will cover validating the mini cart functionality">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card_with_Express_Shipping"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_045_Minicart_Validation"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page" testid="DTG-1230" priority="P1" description="This script will cover login from the shipping page">
+
+    <test name="TEST_DGLD_OS_COMMON_053_Validate_PLP_page" testid="DTG-1230" priority="P1" description="This script will cover validating the product listing page (PLP)">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_053_Validate_PLP_page"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page" testid="DTG-633" priority="P1" description="This script will cover validating the search results page functionality">
+
+    <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DTG-633" priority="P1" description="This script will cover validating the product details page (PDP)">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_054_Validating_the_PDP_page"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DTG-2199" priority="P1" description="This script will cover validating the My Account page">
+
+    <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DTG-2199" priority="P1" description="This script will cover validating the search results page">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation" testid="DTG-2392" priority="P1" description="This script will cover validating the minicart page functionality">
+
+    <test name="TEST_DGLD_OS_COMMON_099_Validate_Footer_links" testid="DTG-2392" priority="P1" description="This script will cover validating the footer links">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_099_Validate_Footer_links"/>
         </classes>
     </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page" testid="DTG-2526" priority="P1" description="This script will cover validating the product details page">
+
+    <test name="TEST_DGLD_OS_COMMON_118_RegisterUser_Store_CreditCheckout_Partial_with_Klarna_and_validate_the_StoreCredit_balance_in_MYAccount_page" testid="DTG-2526" priority="P1" description="This script will cover registered user store credit checkout partial with Klarna and validating the store credit balance in My Account page">
         <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page"/>
-        </classes>
-    </test>
-    
-    <test name="TEST_DGLD_DB_US_ST_011_Footer_Link_Validation" testid="DTG-464" priority="P1" description="This script will cover footer links validation">
-        <classes>
-            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_011_Footer_Link_Validation"/>
+            <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_118_RegisterUser_Store_CreditCheckout_Partial_with_Klarna_and_validate_the_StoreCredit_balance_in_MYAccount_page"/>
         </classes>
     </test>
 
