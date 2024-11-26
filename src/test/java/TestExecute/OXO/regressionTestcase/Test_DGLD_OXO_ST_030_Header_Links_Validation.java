@@ -27,8 +27,7 @@ public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
 			Oxo.header_ShopAll("ShopAll");
 			Oxo.header_WeAre_Oxo("WeAreOXO");
 			Oxo.header_1_Percent_Planet();
-			Oxo.header_Menu_ImageItemblocksLinks("ShopAll");
-			
+			Oxo.header_Menu_ImageItemblocksLinks("ShopAll");	
 			Oxo.header_Shop("Shop");
 			
 		} catch (Exception e) {
