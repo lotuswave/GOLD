@@ -3532,7 +3532,7 @@ System.out.println(MyFavorites);
 			Thread.sleep(4000);
 			String orderid = Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText().trim();
 			System.out.println(orderid);
-			String ID=Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText().replace("Order #", "");
+			String ID=Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText().replace("Order #", "").trim();
 			System.out.println(ID);
 			System.out.println(ordernumber);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
