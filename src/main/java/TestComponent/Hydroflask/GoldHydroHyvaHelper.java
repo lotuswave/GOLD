@@ -2902,8 +2902,8 @@ System.out.println(MyFavorites);
 			
 			int Categories = Common.findElements("xpath", "//h3[@class='programs-heading']").size();
 			if(Categories>0) {
-				Common.clickElement("xpath", "//span[text()='Helen of Troy Employees']");
-				Common.clickElement("xpath", "//span[text()='Very & Save']");
+				Common.clickElement("xpath", "//span[text()='Helen of Troy Associates']");
+				Common.clickElement("xpath", "(//span[text()='Verify & Save'])[8]");
 				Common.switchFrames("xpath", "//iframe[@class='sid-modal__iframe']");
 				int size =Common.findElements("xpath", "//div[@id='sid-step-employee-personal-info']").size();
 				Common.assertionCheckwithReport(size>0,
