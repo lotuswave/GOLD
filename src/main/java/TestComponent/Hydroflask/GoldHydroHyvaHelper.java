@@ -1183,8 +1183,23 @@ public class GoldHydroHyvaHelper {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 
 			Sync.waitPageLoad();
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+			String color=Common.findElement("xpath", "//span[contains(@class,'text-secondary-70')]").getText();
+			System.out.println(color);
+			if(color=="")
+			{
+				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+			}
+       }
+       else
+       {
+		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+		Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+       }
+
 			product_quantity(Dataset);
 			System.out.println(productcolor);
 //			click_UGC();
@@ -4768,33 +4783,25 @@ catch(Exception | Error e)
 	public void country_selctor() {
 
 		String Country;
-
 		try {
-
+			
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.END);
-			List<WebElement> country = Common.findElements("xpath", "//span[contains(@class,'country-item__country-label')]");
+			Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+			Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
+			Thread.sleep(3000);
+			List<WebElement> country = Common.findElements("xpath", "//div[@class='country-list__item']");
 			System.out.println(country.size());
+			for (int i = 1; i < country.size(); i++) {
 
-			int iterations = Math.min(4, country.size());
-			for (int i = 1; i < iterations; i++) {
-
-				List<WebElement> select = Common.findElements("xpath", "(//p[@class='country-item__language']//span[1])");
-				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
-				Common.scrollIntoView("xpath", "//button[contains(@class,'country-selector-button')]");
-				Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
-
+				List<WebElement> select = Common.findElements("xpath", "//span[contains(@class,'country-item__country-label')]");
+				Sync.waitPageLoad();
+				
 				Country = select.get(i).getText();
-				System.out.println(Country);
-				Common.refreshpage();
-				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
-				Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
+			      System.out.println(Country);
 				select.get(i).click();
-				String Selected_Country = Common.getText("xpath", "//div[@class='selected-lang notranslate']");
-				if (Selected_Country.contains("USA | EN") || Selected_Country.contains("FR/FR")
-						|| Selected_Country.contains("DE/DE") || Selected_Country.contains("EN/EN")
-						|| Selected_Country.contains("EN/GB")) {
+				if (Country.contains("UK")) {
 
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
@@ -4802,7 +4809,7 @@ catch(Exception | Error e)
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				} else {
-
+					Common.clickElement("xpath", "(//p[@class='country-item__language'])[" + i +"]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.navigateBack();
@@ -4824,6 +4831,7 @@ catch(Exception | Error e)
 		}
 
 	}
+
 
 	public void clickDealer_Central() throws Exception {
 		String expectedResult = "It should land successfully on the Delear Central page";
@@ -12079,7 +12087,6 @@ public void Explore_Validation(String Dataset) {
 			Common.getscreenShotPathforReport("Cardinfromationfail"));
 	Assert.fail();
 	}
-
 
 	return Number;
 	}
