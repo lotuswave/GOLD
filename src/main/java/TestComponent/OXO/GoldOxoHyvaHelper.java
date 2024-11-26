@@ -231,6 +231,7 @@ public class GoldOxoHyvaHelper {
 
 	public void Configurable_addtocart_pdp(String Dataset) {
 		String product = data.get(Dataset).get("Colorproduct");
+		String product1 = data.get(Dataset).get("Colorproduct1");
 		String productcolor = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
@@ -247,23 +248,26 @@ public class GoldOxoHyvaHelper {
 					break;
 				}
 			}
+			
 			Sync.waitPageLoad();
-			if(Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("https://www.oxo.com/ca"))
+			if (Common.getCurrentURL().contains("preprod"))
 			{
-			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			    Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			} 
+			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
+			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
 			}
-			else
-			{
-				Common.scrollIntoView("xpath", "//button[text()='Load More']");
-				Common.clickElement("xpath", "//button[text()='Load More']");
-				Thread.sleep(4000);
-				Common.scrollIntoView("xpath", "//button[text()='Load More']");
-				Common.clickElement("xpath", "//button[text()='Load More']");
-				Thread.sleep(4000);
-//				Common.clickElement("xpath", "//button[@id='customer-menu']");
-//				Thread.sleep(3000);
-				Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			
+			else {
+			    Common.scrollIntoView("xpath", "//button[text()='Load More']");
+			    Common.clickElement("xpath", "//button[text()='Load More']");
+			    Thread.sleep(4000);
+			    Common.scrollIntoView("xpath", "//button[text()='Load More']");
+			    Common.clickElement("xpath", "//button[text()='Load More']");
+			    Thread.sleep(4000);
+			    Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			}
+
 
 			Thread.sleep(4000);
 //			String Productname = Common.findElement("xpath", "//button[@id='product-addtocart-button']/span").getText();
@@ -346,7 +350,6 @@ public class GoldOxoHyvaHelper {
 
 
 	}
-	
 	
 	public void group_Addtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
