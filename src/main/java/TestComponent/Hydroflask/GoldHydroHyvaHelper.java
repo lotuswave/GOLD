@@ -3821,15 +3821,15 @@ System.out.println(MyFavorites);
 	public void ordersummary_validation() {
 		// TODO Auto-generated method stub
 		try {
-			String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace("$",
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[2])[2]").replace("$",
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[2])[4]")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace("$", "");
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[2])[2]").replace("$", "");
 			Float Taxvalue = Float.parseFloat(Tax);
-			String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[2])[2]")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Float Total = subtotalvalue + shippingvalue + Taxvalue;
@@ -5182,7 +5182,7 @@ catch(Exception | Error e)
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 
-				if (socallinksarry[i].equals("Instagram")) {
+				if (socallinksarry[i].equals("instagram")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -5191,7 +5191,7 @@ catch(Exception | Error e)
 					Common.switchToFirstTab();
 				}
 
-				else if (socallinksarry[i].equals("Facebook")) {
+				else if (socallinksarry[i].equals("facebook")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.facebook.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
@@ -5208,14 +5208,14 @@ catch(Exception | Error e)
 //					Thread.sleep(3000);
 //					Common.closeCurrentWindow();
 //					Common.switchToFirstTab();
-			       else if (socallinksarry[i].equals("YouTube")) {
+			       else if (socallinksarry[i].equals("youtube")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
-				} else if (socallinksarry[i].equals("Pinterest")) {
+				} else if (socallinksarry[i].equals("pinterest")) {
 					Common.assertionCheckwithReport(Common.getCurrentURL().contains("pinterest"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
