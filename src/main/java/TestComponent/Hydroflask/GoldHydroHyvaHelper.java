@@ -9804,8 +9804,8 @@ public void Explore_Validation(String Dataset) {
 	public void Terms_and_privacy() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span//a[contains(text(),'Privacy Policy')]");
-			Common.clickElement("xpath", "//span//a[contains(text(),'Privacy Policy')]");
+			Sync.waitElementPresent("xpath", "//a[contains(text(),'Privacy Policy')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Privacy Policy')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Hydro Flask Privacy Policy"),
