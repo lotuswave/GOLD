@@ -174,6 +174,48 @@ public class GoldHydroHyvaHelper {
 	}
 	
 	
+	
+	public void Bottles_headerlinks(String category) {
+		// TODO Auto-generated method stub
+		String expectedResult = "User should click the" + category;
+		try {
+
+			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Thread.sleep(3000);
+//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+
+			Thread.sleep(3000);
+
+			try {
+				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+			} catch (Exception e) {
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			}
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[text()='Bottles']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			expectedResult = "User should select the " + category + "category";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			Common.assertionCheckwithReport(sizebotteles > 0,
+					"validating the product category as" + category + "from navigation menu ", expectedResult,
+					"Selected the " + category + " category", "User unabel to click" + category + "");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+					expectedResult, "Unable to Selected the " + category + " category",
+					Common.getscreenShot("Failed to click on the" + category + ""));
+
+			Assert.fail();
+		}
+
+	}
+	
 	public void bottles_headerlinks_Shoppall(String category) {
 		// TODO Auto-generated method stub
 		String expectedResult = "User should click the" + category;
@@ -8572,8 +8614,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Validating the " + engraving + "for the bottle", engraving + "should apply for the bottle ",
 					"Sucessfully" + engraving + "has been applied for the bottle",
 					"failed apply the" + engraving + "for the bottle");
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Checkout']");
-			Common.clickElement("xpath", "//button[@title='Checkout']");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')");
+			Common.clickElement("xpath", "//a[contains(text(),'Checkout')");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");

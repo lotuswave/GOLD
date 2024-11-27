@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_120_Guest_User_Engraving_multiple_line_Text {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottles_headerlinks("Bottles & Drinkware");  
+			Hydro.Bottles_headerlinks("Bottles & Drinkware");  
 			Hydro.multiline_Engraving("Multiline Engraving");
 			Hydro.enraving_Checkout("Multiline Engraving");	
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
