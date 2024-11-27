@@ -2010,6 +2010,7 @@ public void header_Travel(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
+		String Prod=data.get(Dataset).get("Prod Product");
 		try {
 			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
 			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("id");
@@ -2017,6 +2018,8 @@ public void header_Travel(String Dataset) {
 			Common.assertionCheckwithReport(open.contains("search"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Products"));
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
@@ -2027,6 +2030,21 @@ public void header_Travel(String Dataset) {
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
 			Thread.sleep(8000);
+			}
+			else
+			{
+				Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Prod Product"));
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+				System.out.println(productsearch);
+				Common.assertionCheckwithReport(productsearch.contains(Prod), "validating the search functionality",
+						"enter product name will display in the search box", "user enter the product name in  search box",
+						"Failed to see the product name");
+				Thread.sleep(8000);
+			}
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9896,8 +9914,17 @@ public void Continue_Shopping() {
 		{
 			for (int i = 0; i <= 10; i++) {
 				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
+				if(Common.getCurrentURL().contains("preprod"))
+				{
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
+				}
+				else
+				{
+					Sync.waitElementPresent("xpath", "//span[text()='E Gift Cards']");
+					Common.clickElement("xpath", "//span[text()='E Gift Cards']");
+				}
+				
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@itemprop ,'image')]");
