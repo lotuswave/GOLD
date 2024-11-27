@@ -10819,7 +10819,7 @@ public void Configurable_PDP(String Dataset) {
 		product_quantity(Dataset);
 		Thread.sleep(4000);
 		PDP_Tabs("Configurable Product");
-		//validate_reviews_AskQuestions_PDP();
+		validate_reviews_AskQuestions_PDP();
 	
 	}
 	catch(Exception | Error e)
@@ -10835,7 +10835,8 @@ public void validate_reviews_AskQuestions_PDP() {
 	
 	try {
 		Thread.sleep(6000);
-	
+	     if(Common.getCurrentURL().contains("preprod"))
+	     {
 		int size=Common.findElements("xpath", "//span[@class='yotpo-display-wrapper']").size();
 		if(size>0) {
 		
@@ -10868,6 +10869,36 @@ Thread.sleep(3000);
 			Assert.fail();
 		}
 }
+	
+	else
+	{
+		Common.scrollIntoView("xpath", "//div[@class='yotpo-bottom-line-basic-text']");
+		int size=Common.findElements("xpath", "//div[@class='yotpo-bottom-line-basic-text']").size();
+		if(size>0) {
+			Sync.waitElementPresent(30, "xpath", "//button[text()='Write A Review']");
+			Common.clickElement("xpath", "//button[text()='Write A Review']");
+			Thread.sleep(2000);
+			int Write = Common
+					.findElements("xpath", "//h2[text()='Share your thoughts']").size();
+			System.out.println(Write);
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//div[@class='modal-close-btn-wrapper']");
+			Thread.sleep(2000);
+	Common.clickElement("xpath", "//div[text()='Q&A']");
+	Sync.waitElementPresent(30, "xpath", "//span[text()='Ask a question']");
+	Common.clickElement("xpath", "//span[text()='Ask a question']");
+	Thread.sleep(2000);
+	int question = Common
+			.findElements("xpath", "//h4[text()='Ask a question']").size();
+	System.out.println(question);
+	Common.clickElement("xpath", "//div[@class='close-btn-wrapper']");
+		}
+		else
+		{
+			Assert.fail();
+		}
+	}
+	}
 	catch(Exception | Error e)
 	{
 		e.printStackTrace();
