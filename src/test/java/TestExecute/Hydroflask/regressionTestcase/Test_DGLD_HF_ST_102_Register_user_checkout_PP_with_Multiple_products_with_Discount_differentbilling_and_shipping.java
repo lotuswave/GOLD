@@ -19,6 +19,8 @@ public class Test_DGLD_HF_ST_102_Register_user_checkout_PP_with_Multiple_product
 
 		try {
 			Hydro.verifingHomePage();
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
 //			Hydro.search_product("Myhydro Product"); 
