@@ -967,6 +967,7 @@ public class GoldDrybarusHelper2 {
 	public void selectshippingmethod(String Dataset) {
 		// TODO Auto-generated method stub4
 		String method = data.get(Dataset).get("methods");
+		String prodmethod=data.get(Dataset).get("Prodmethods");
 		System.out.println(method);
 
 		try {
@@ -974,10 +975,17 @@ public class GoldDrybarusHelper2 {
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			System.out.println(size);
 			if (size > 0) {
-
+                if(Common.getCurrentURL().contains("preprod"))
+                {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + method + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),'" + method + "')]");
+                }
+				else
+				{
+					Sync.waitElementPresent("xpath", "//span[contains(text(),'" + prodmethod + "')]");
+					Common.clickElement("xpath", "//span[contains(text(),'" + prodmethod + "')]");
+				}
 			} else {
 				Assert.fail();
 
@@ -5628,10 +5636,11 @@ public void FUll_Payment(String dataSet) {
 					{
 						Thread.sleep(4000);
 						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+						Thread.sleep(4000);
 						String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
 						System.out.println(klarna);
 						Common.assertionCheckwithReport(
-								klarna.contains("klarna"),
+								klarna.contains("klarna") || klarna.contains("Klarna"),
 								"validating the selection of the klarna method",
 								"klarna should be selected ","klarna is selected",
 								"Failed to select the klarna method in the production environment");
@@ -5910,9 +5919,10 @@ public void FUll_Payment(String dataSet) {
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 						data.get(dataSet).get("postcode"));
-				Thread.sleep(5000);
+				Thread.sleep(6000);
 				Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
 						data.get(dataSet).get("phone"));
+				Thread.sleep(2000);
 //				Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
 //				Sync.waitPageLoad();
 //				Thread.sleep(5000);
