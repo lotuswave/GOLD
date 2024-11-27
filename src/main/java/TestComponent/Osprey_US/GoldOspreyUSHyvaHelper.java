@@ -2077,7 +2077,9 @@ public void header_Travel(String Dataset) {
 	public void addtocart(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
+		String prodproduct = data.get(Dataset).get("Prod Product");
 		String productcolor = data.get(Dataset).get("Color");
+		String prodcolor = data.get(Dataset).get("ProdColor");
 		String Productsize = data.get(Dataset).get("Size");
 		String symbol=data.get(Dataset).get("Symbol");
 		System.out.println(symbol);
@@ -2102,13 +2104,25 @@ public void header_Travel(String Dataset) {
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
 			
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-//			Sync.waitPageLoad();
-			Thread.sleep(6000);
-
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+			if(Common.getCurrentURL().contains("preprod")) {
+				
+				
+				
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+//				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+				}
+				else {
+					
+					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
+					Common.clickElement("xpath", "//img[@alt='" + prodproduct + "']");
+					Thread.sleep(6000);
+					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
+					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
+				}
 			
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
