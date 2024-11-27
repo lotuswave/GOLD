@@ -8886,6 +8886,7 @@ public void Continue_Shopping() {
 			}
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
+			
 			// int Amount=Common.findElements("xpath",
 			// "//div[@data-role='priceBox']").size();
 			// for (int i = 0; i < Amount; i++) {
@@ -8930,6 +8931,11 @@ public void Continue_Shopping() {
 			{
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			}
+			else if(Common.findElement("xpath","(//a[@class='link no-underline text-black'])[2]").getText().contains("ACCESSORIES"))
+			{
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
+				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
 			}
 			else
 			{
