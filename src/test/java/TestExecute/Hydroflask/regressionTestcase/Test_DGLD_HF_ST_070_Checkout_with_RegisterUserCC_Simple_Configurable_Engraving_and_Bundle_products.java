@@ -28,7 +28,7 @@ public class Test_DGLD_HF_ST_070_Checkout_with_RegisterUserCC_Simple_Configurabl
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware");   
+			Hydro.Bottles_headerlinks("Bottles & Drinkware");   
 			Hydro.Text_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Horizontal Text");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
