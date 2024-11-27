@@ -1173,7 +1173,7 @@ public class GoldHydroHyvaHelper {
 				}
 
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
 			String name = Common.findElement("xpath", "//span[contains(@itemprop,'name')]").getText();
