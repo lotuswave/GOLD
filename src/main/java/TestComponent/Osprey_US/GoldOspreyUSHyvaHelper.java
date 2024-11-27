@@ -3679,10 +3679,10 @@ public void Validate_retailerlocations() {
 			Thread.sleep(3000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 	
 			//Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			Common.findElement("xpath", "//input[@placeholder='Phone number']").clear();
+			//Common.findElement("xpath", "//input[@placeholder='Phone number']").clear();
 			Common.textBoxInput("xpath", "//input[@placeholder='Phone number']", data.get(dataSet).get("phone"));
 			
 //			String subtotal=Common.findElement("xpath", "//tr[@class='totals sub']//span[@class='price']").getText().replace(symbol, "").replace(".", "");
