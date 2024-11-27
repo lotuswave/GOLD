@@ -22,7 +22,7 @@ public class Test_DGLD_HF_ST_068_Register_User_Checkout_with_Text_Engraving_prod
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.bottles_headerlinks("Bottles & Drinkware");   
+			Hydro.Bottles_headerlinks("Bottles & Drinkware");   
 			Hydro.Text_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Horizontal Text");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
