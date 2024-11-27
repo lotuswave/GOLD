@@ -172,6 +172,48 @@ public class GoldHydroHyvaHelper {
 		}
 
 	}
+	
+	
+	public void bottles_headerlinks_Shoppall(String category) {
+		// TODO Auto-generated method stub
+		String expectedResult = "User should click the" + category;
+		try {
+
+			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Thread.sleep(3000);
+//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+
+			Thread.sleep(3000);
+
+			try {
+				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
+			} catch (Exception e) {
+				Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()=' Shop']");
+			}
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//a[contains(@href,'bottles-drinkware')]//span[text()='Shop All']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			expectedResult = "User should select the " + category + "category";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			Common.assertionCheckwithReport(sizebotteles > 0,
+					"validating the product category as" + category + "from navigation menu ", expectedResult,
+					"Selected the " + category + " category", "User unabel to click" + category + "");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+					expectedResult, "Unable to Selected the " + category + " category",
+					Common.getscreenShot("Failed to click on the" + category + ""));
+
+			Assert.fail();
+		}
+
+	}
 
 	public void addtocart(String Dataset) {
 
@@ -8516,10 +8558,10 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		String text = data.get(Dataset).get("Engraving");
 		System.out.println(text);
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 //			click_minicart();
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "(//span[@class='dr:title-xs dr:font-sans'])[2]");
+			Thread.sleep(8000);
+			Sync.waitElementPresent(50, "xpath", "(//span[@class='dr:title-xs dr:font-sans'])[2]");
 			String engraving = Common.findElement("xpath", "(//span[@class='dr:title-xs dr:font-sans'])[2]")
 					.getText();
 			System.out.println(engraving);
