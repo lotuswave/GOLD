@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_112_Guest_User_Checkout_with_Graphic_Engraving_prod
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.bottles_headerlinks("Bottles & Drinkware");
+			Hydro.Bottles_headerlinks("Bottles & Drinkware");
 			Hydro.Graphic_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Graphic");
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
