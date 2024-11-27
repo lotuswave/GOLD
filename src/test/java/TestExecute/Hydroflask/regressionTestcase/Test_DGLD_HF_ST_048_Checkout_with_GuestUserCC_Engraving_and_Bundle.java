@@ -21,7 +21,7 @@ public class Test_DGLD_HF_ST_048_Checkout_with_GuestUserCC_Engraving_and_Bundle 
 			Hydro.verifingHomePage();
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");  
-			Hydro.bottles_headerlinks("Bottles & Drinkware");  
+			Hydro.Bottles_headerlinks("Bottles & Drinkware");  
 			Hydro.Graphic_Engraving("Engraving Product");
 			Hydro.enraving_Checkout("Graphic");
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
