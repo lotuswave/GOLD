@@ -18,8 +18,6 @@ public class Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr {
             Hydro.addtocart("Product");                    
             Hydro.minicart_Checkout();
             Hydro.addDeliveryAddress_Gustuser("InvalidAddress");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
             Hydro.validatingErrormessageShippingpage_negative();
         } catch (Exception e) {
             Assert.fail(e.getMessage(), e);

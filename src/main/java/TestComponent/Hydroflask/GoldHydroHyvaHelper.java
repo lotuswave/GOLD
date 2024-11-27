@@ -725,9 +725,16 @@ public class GoldHydroHyvaHelper {
 	}
 
 	public void validatingErrormessageShippingpage_negative() {
-		int errorsize = Common.findElements("xpath", "//div[contains(@id,'error')]").size();
+		int Firstname_Error = Common.findElements("xpath", "//li[@data-msg-field='firstname']").size();
+		int Lastname_Error=Common.findElements("xpath", "//li[@data-msg-field='lastname']").size();
+//		int Address_Error =Common.findElements("xpath", "//li[@data-msg-field='street[0]']").size();
+		int Phn_Error= Common.findElements("xpath", "//li[@data-msg-field='telephone']").size();
 		String expectedResult = "Error message will dispaly when we miss the data in fields ";
-		if (errorsize >= 0) {
+		System.out.println(Firstname_Error);
+		System.out.println(Lastname_Error);
+		System.out.println(Phn_Error);
+		if (Firstname_Error >0 && Lastname_Error>0&& Phn_Error>0) {
+			System.out.println("Error Message displayed");
 			ExtenantReportUtils.addPassLog("validating the shippingPage error message", expectedResult,
 					"sucessfully  dispaly error message", Common.getscreenShotPathforReport("errormessagenegative"));
 		} else {
@@ -2428,23 +2435,23 @@ System.out.println(MyFavorites);
 
 		{
 			try {
-				Common.clickElement("xpath", "//a[@class='action action-show-popup checkout-add-address-popup-link']");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout')]");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(3000);
 				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
+					Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]");
+					Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2454,15 +2461,15 @@ System.out.println(MyFavorites);
 				}
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='city']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='city']",
 						data.get(dataSet).get("City"));
 
 				try {
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(3000);
-					Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("name", "postcode");
@@ -2472,6 +2479,8 @@ System.out.println(MyFavorites);
 				System.out.println("*****" + ShippingZip + "*******");
 
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+			    Common.clickElement("xpath","//button[@class='btn btn-primary w-full']");
+				
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
