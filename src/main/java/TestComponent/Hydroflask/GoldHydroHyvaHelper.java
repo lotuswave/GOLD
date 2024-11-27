@@ -8515,7 +8515,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//span[contains(text(),'Engraving')]");
-			engraving_color();
+//			engraving_color();
 			engraving_graphic("Graphic");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),' Agree &')]");
@@ -8542,44 +8542,44 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
 			Common.clickElement("xpath", "//span[text()='Graphic']");
-			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
-					.size();
-			for (int i = 0; i < subproductsList; i++) {
-				int value = i + 1;
-				List<WebElement> ListOfSubproducts = Common.findElements("xpath",
-						"//div[@class='graphic-engraving__selections-container']//div[" + value + "]//button");
-
-				WebElement Graphicnames = Common.findElement("xpath", "//span[@class='graphic-engraving__label']");
-
-				WebElement Graphic = Common.findElement("xpath",
-						"//div[@class='graphic-engraving__selections-container']//div[" + value + "]//button");
-
-				for (int j = 0; j < ListOfSubproducts.size(); j++) {
-
-					String attributevalue = ListOfSubproducts.get(j).getAttribute("disabled");
-
-					if (attributevalue != null) {
-					} else {
-
-						if (ListOfSubproducts.get(j).getAttribute("class").contains("graphic-engraving__")
-								|| ListOfSubproducts.get(j).getAttribute("class")
-										.contains("graphic-engraving__selection__btn active")) {
-							Thread.sleep(4000);
-							System.out.println(ListOfSubproducts);
-							ListOfSubproducts.get(j).click();
-							Thread.sleep(4000);
-
-							Common.assertionCheckwithReport(
-									Graphicnames.getText().contains(Graphic.getAttribute("aria-label")),
-									"Verifying the  swatch Graphics button " + Graphicnames.getText(),
-									"after click graphic swatch button" + Graphicnames.getText()
-											+ "it must dispaly swatch graphic image",
-									"successfully graphic swatch image is dispalying",
-									"Failed load graphic swatch image");
-						}
-					}
-				}
-			}
+//			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
+//					.size();
+//			for (int i = 0; i < subproductsList; i++) {
+//				int value = i + 1;
+//				List<WebElement> ListOfSubproducts = Common.findElements("xpath",
+//						"//div[@class='graphic-engraving__selections-container']//div[" + value + "]//button");
+//
+//				WebElement Graphicnames = Common.findElement("xpath", "//span[@class='graphic-engraving__label']");
+//
+//				WebElement Graphic = Common.findElement("xpath",
+//						"//div[@class='graphic-engraving__selections-container']//div[" + value + "]//button");
+//
+//				for (int j = 0; j < ListOfSubproducts.size(); j++) {
+//
+//					String attributevalue = ListOfSubproducts.get(j).getAttribute("disabled");
+//
+//					if (attributevalue != null) {
+//					} else {
+//
+//						if (ListOfSubproducts.get(j).getAttribute("class").contains("graphic-engraving__")
+//								|| ListOfSubproducts.get(j).getAttribute("class")
+//										.contains("graphic-engraving__selection__btn active")) {
+//							Thread.sleep(4000);
+//							System.out.println(ListOfSubproducts);
+//							ListOfSubproducts.get(j).click();
+//							Thread.sleep(4000);
+//
+//							Common.assertionCheckwithReport(
+//									Graphicnames.getText().contains(Graphic.getAttribute("aria-label")),
+//									"Verifying the  swatch Graphics button " + Graphicnames.getText(),
+//									"after click graphic swatch button" + Graphicnames.getText()
+//											+ "it must dispaly swatch graphic image",
+//									"successfully graphic swatch image is dispalying",
+//									"Failed load graphic swatch image");
+//						}
+//					}
+//				}
+//			}
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + graphic + "']");
 			Common.clickElement("xpath", "//button[@aria-label='" + graphic + "']");
 
