@@ -638,8 +638,8 @@ public void Login_Account(String dataSet) {
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-				String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-				String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+				String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
+				String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 				System.out.println(products);
 				int Number = Integer.parseInt(products);
 				int j=0;
@@ -672,8 +672,8 @@ public void Login_Account(String dataSet) {
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
-					String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-					String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+					String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
+					String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 					System.out.println(products);
 					int Number = Integer.parseInt(products);
 					int j=0;
@@ -728,6 +728,7 @@ public void Login_Account(String dataSet) {
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li//a//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(4000);
 				Common.clickElement("xpath",
 						"//li//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -1308,6 +1309,8 @@ public void header_Travel(String Dataset) {
 	    String[] Links = names.split(",");
 	    String name = data.get(Dataset).get("Accessories").toUpperCase();
 	    String[] Link = name.split(",");
+	    String name1= data.get(Dataset).get("Prod Accessories");
+	    String[] Link1 = name1.split(",");
 	    String Access = data.get(Dataset).get("Access");
 	    String Access1 = data.get(Dataset).get("Accesso");
 	    System.out.println(Access);
@@ -1320,10 +1323,20 @@ public void header_Travel(String Dataset) {
 	            Common.clickElement("xpath", "//span[contains(text(),'" + Access + "')]");
 
 	            Thread.sleep(3000);
+	            if(Common.getCurrentURL().contains("preprod"))
+	            {
 	            Sync.waitElementPresent("xpath", "//li//a[contains(@href,'" + Access1 + "')]//span[contains(text(),'" + Links[i] + "')]");
 	            Common.clickElement("xpath", "//li//a[contains(@href,'" + Access1 + "')]//span[contains(text(),'" + Links[i] + "')]");
 	            Sync.waitPageLoad();
 	            Thread.sleep(4000);
+	            }
+	            else
+	            {
+	            	Sync.waitElementPresent("xpath", "//li//a[contains(@href,'" + Access1 + "')]//span[contains(text(),'" + Link1[i] + "')]");
+		            Common.clickElement("xpath", "//li//a[contains(@href,'" + Access1 + "')]//span[contains(text(),'" + Link1[i] + "')]");
+		            Sync.waitPageLoad();
+		            Thread.sleep(4000);
+	            }
 	            
 	            String title = "";
 	            if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
@@ -1341,7 +1354,7 @@ public void header_Travel(String Dataset) {
 	            int j = 0;
 	            if (Number > j) {
 	                Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) 
-	                		|| breadcrumbs.contains(Link[i]) || Common.getCurrentURL().contains(Access1),
+	                		|| breadcrumbs.contains(Link[i]) || Common.getCurrentURL().contains(Access),
 	                        "verifying the header link " + Links[i] + "Under Accessories",
 	                        "user should navigate to the " + Links[i] + " page",
 	                        "user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -15820,6 +15833,8 @@ public void header_ChildCarrier(String Dataset) {
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
 			Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent("xpath", "(//a[contains(@title,'" + child + "')])[1]");
 			Common.clickElement("xpath", "(//a[contains(@title,'" + child + "')])[1]");
 			Thread.sleep(3000);
@@ -15827,6 +15842,13 @@ public void header_ChildCarrier(String Dataset) {
 					"//a/span[contains(text(),'" + Links[i] + "')]");
 			Common.clickElement("xpath",
 					"//a/span[contains(text(),'" + Links[i] + "')]");
+			}
+			else
+			{
+				Sync.waitElementPresent("xpath", "(//a[contains(@title,'" + child + "')])[1]");
+				Common.clickElement("xpath", "(//a[contains(@title,'" + child + "')])[1]");
+				Thread.sleep(3000);
+			}
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
