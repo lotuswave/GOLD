@@ -7266,6 +7266,7 @@ catch(Exception | Error e)
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
@@ -7277,14 +7278,15 @@ catch(Exception | Error e)
 						"Sucessfully message has been displayed for whishlist",
 						"failed to display the message for whishlist");
 			} else {
-				Common.clickElement("xpath", "//button[@aria-haspopup='dialog' and @type]");
+				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
 				Thread.sleep(4000);
-				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
 				Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
 						"validating the shared whishlist functionality",
@@ -7301,7 +7303,6 @@ catch(Exception | Error e)
 					Common.getscreenShot("failed to display the message for whishlist"));
 			Assert.fail();
 		}
-
 	}
 
 	public void Add_Myhydro(String Dataset) {
