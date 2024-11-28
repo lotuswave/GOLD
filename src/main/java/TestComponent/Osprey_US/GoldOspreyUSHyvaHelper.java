@@ -1059,6 +1059,7 @@ public void header_Travel(String Dataset) {
 				}
 					else
 					{
+						for (i = 0 ; i < Link1.length; i++) {
 						Sync.waitElementPresent("xpath",
 								"//li//a//span[contains(text(),'" + Link1[i] + "')]");
 						Common.clickElement("xpath",
@@ -1097,6 +1098,7 @@ public void header_Travel(String Dataset) {
 									"User should able to see the products in plp", "unable to see the products in the PLP",
 									Common.getscreenShot("Failed to see products in PLP"));
 						}
+					}
 					}
 			}
 			}
@@ -1181,16 +1183,20 @@ public void header_Travel(String Dataset) {
 					String[] Link = name.split(",");
 					String name1 = data.get(Dataset).get("Featureds").toLowerCase();
 					String[] link = name1.split(",");
+					String Name = data.get(Dataset).get("Prod  Featureds");
+					String[] Link1 = Name.split(",");
 					String Featured=data.get(Dataset).get("Feature");
 					String collections=data.get(Dataset).get("Activity");
 					String Asser="shop-by-collections";
 					int i = 0;
 					try {
-						for (i = 6; i < Links.length; i++) {
+						for (i = 0; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Featured+ "')]");
 							Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
 							Common.clickElement("xpath", "//span[contains(text(),'"+ collections +"')]");
 							Thread.sleep(3000);
+							if(Common.getCurrentURL().contains("preprod"))
+							{
 							Sync.waitElementPresent("xpath",
 									"//li//a//span[contains(text(),'" + Links[i] + "')]");
 							Common.clickElement("xpath",
@@ -1236,7 +1242,60 @@ public void header_Travel(String Dataset) {
 								Assert.fail();
 							}
 						}
+							else
+							{
+								for (i = 0; i < Link1.length; i++) {
+								Sync.waitElementPresent("xpath",
+										"//li//a//span[contains(text(),'" + Link1[i] + "')]");
+								Common.clickElement("xpath",
+										"//li//a//span[contains(text(),'" + Link1[i] + "')]");
+								Sync.waitPageLoad();
+								Thread.sleep(4000);
+								String title = "";
+								if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
+								    title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText().toLowerCase();
+								} else {
+								    String currentURL = Common.getCurrentURL();
+								    System.out.println("Redirecting to URL: " + currentURL);
+								}
+								String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+								String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
+								System.out.println(products);
+								System.out.println(title);
+								System.out.println(Link1[i]);
+								System.out.println(Link1[i]);
+								System.out.println(breadcrumbs);
+								System.out.println(breadcrumbs.contains(Link1[i]));
+								System.out.println(Common.getCurrentURL().contains(Link1[i]));
+								System.out.println(Link1[i]);
+								System.out.println(Common.getCurrentURL().contains(Asser));
+								System.out.println(Common.getPageTitle().contains(collections));
+								
+								int Number = Integer.parseInt(products);
+								int j=0;
+								if(Number>=j)
+								{
+								Common.assertionCheckwithReport(title.contains(Link1[i]) || breadcrumbs.contains(Link1[i]) ||  breadcrumbs.contains(Link1[i]) ||
+										Common.getCurrentURL().contains(Asser) || Common.getCurrentURL().contains(Link1[i]),
+										"verifying the header link " + Link1[i] + "Under the Featured",
+										"user should navigate to the " + Link1[i] + " page",
+										"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Link1[i]);
+								}
+								else
+								{
+									ExtenantReportUtils.addFailedLog(
+											"validating the the products in the plp ",
+											"User should able to see the products in plp", "unable to see the products in the PLP",
+											Common.getscreenShot("Failed to see products in PLP"));
+									Assert.fail();
+								}
+								
+							}
+							
+						}
+						}
 					}
+						
 
 					catch (Exception | Error e) {
 						e.printStackTrace();
