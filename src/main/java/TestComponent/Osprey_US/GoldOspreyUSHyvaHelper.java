@@ -15548,6 +15548,7 @@ public void Sort_By(String Dataset) throws InterruptedException {
 		// TODO Auto-generated method stub
 		String symbol = data.get(Dataset).get("Price_Symbol");
 		String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
+		String priceFliter= data.get(Dataset).get("SortBy");
 		System.out.println(PriceFilter);
 		System.out.println(symbol);
 		try {
@@ -15566,9 +15567,16 @@ public void Sort_By(String Dataset) throws InterruptedException {
 				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 			}
 			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("preprd"))
+			{
 			Common.dropdown("xpath", "//div/select[@class='ais-SortBy-select']", SelectBy.TEXT,
 					PriceFilter);
-			
+			}
+			else
+			{
+				Common.dropdown("xpath", "//div/select[@class='ais-SortBy-select']", SelectBy.TEXT,
+						priceFliter);
+			}
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath",
 					"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
