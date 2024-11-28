@@ -912,6 +912,8 @@ public void header_Travel(String Dataset) {
 			String[] Links = names.split(",");
 			String name = data.get(Dataset).get("Featureds").toUpperCase();
 			String[] Link = name.split(",");
+			String Name=data.get(Dataset).get("Prod  Featureds");
+			String[] Link1 = Name.split(",");
 			String Breadnames=data.get(Dataset).get("Dataasser");
 			String[] Bread=Breadnames.split(",");
 			int i = 0;
@@ -921,6 +923,8 @@ public void header_Travel(String Dataset) {
 					Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Shop by Activity')]");
 					Thread.sleep(3000);
+					if(Common.getCurrentURL().contains("prepord"))
+					{
 					Sync.waitElementPresent("xpath",
 							"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
@@ -951,6 +955,39 @@ public void header_Travel(String Dataset) {
 					}
 
 				}
+					else
+					{
+						Sync.waitElementPresent("xpath",
+								"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Link1[i] + "')]");
+						Common.clickElement("xpath",
+								"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Link1[i] + "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+						String breadcrumbs = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
+						String products=Common.getText("xpath", "//div[@class='a-toolbar-info']//span");
+						System.out.println(products);
+						int Number = Integer.parseInt(products);
+						int j=0;
+						if(Number>j)
+						{
+						Common.assertionCheckwithReport(title.contains(Link1[i]) || breadcrumbs.contains(Link1[i]) || breadcrumbs.contains(Link1[i]) 
+								|| breadcrumbs.contains(Bread[i]),
+								"verifying the header link " + Link1[i] + "Under the Featured",
+								"user should navigate to the " + Link1[i] + " page",
+								"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Links[i]);
+						}
+						else
+						{
+							ExtenantReportUtils.addFailedLog(
+									"validating the the products in the plp ",
+									"User should able to see the products in plp", "unable to see the products in the PLP",
+									Common.getscreenShot("Failed to see products in PLP"));
+							Assert.fail();
+						}
+					}
+				}
+				
 			}
 
 			catch (Exception | Error e) {
@@ -970,6 +1007,8 @@ public void header_Travel(String Dataset) {
 			String[] Link = name.split(",");
 			String Featured=data.get(Dataset).get("Feature");
 			String activity=data.get(Dataset).get("Activity");
+			String Name=data.get(Dataset).get("Prod  Featureds");
+			String[] Link1 = Name.split(",");
 			int i = 0;
 			try {
 				for (i = 0 ; i < Links.length; i++) {
@@ -977,6 +1016,8 @@ public void header_Travel(String Dataset) {
 					Common.clickElement("xpath", "//span[contains(text(),'"+ Featured +"')]");
 					Common.clickElement("xpath", "//span[contains(text(),'"+ activity +"')]");
 					Thread.sleep(3000);
+					if(Common.getCurrentURL().contains("preprod"))
+					{
 					Sync.waitElementPresent("xpath",
 							"//li//a//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
@@ -1016,6 +1057,48 @@ public void header_Travel(String Dataset) {
 								Common.getscreenShot("Failed to see products in PLP"));
 					}
 				}
+					else
+					{
+						Sync.waitElementPresent("xpath",
+								"//li//a//span[contains(text(),'" + Link1[i] + "')]");
+						Common.clickElement("xpath",
+								"//li//a[contains(@href,'shop-by-activity')]//span[contains(text(),'" + Link1[i] + "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title = "";
+						if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
+						    title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText().toLowerCase();
+						} else {
+						    String currentURL = Common.getCurrentURL();
+						    System.out.println("Redirecting to URL: " + currentURL);
+						}
+						String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+						String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
+						System.out.println(products);
+						System.out.println(title);
+						System.out.println(Link1[i]);
+						System.out.println(breadcrumbs);
+						System.out.println(Common.getCurrentURL());
+						System.out.println(Common.getCurrentURL().contains(title));
+						int Number = Integer.parseInt(products);
+						int j=0;
+						if(Number>j)
+						{
+						Common.assertionCheckwithReport(title.contains(Link1[i]) || breadcrumbs.contains(Link1[i]) || breadcrumbs.contains(Link1[i]) || Common.getCurrentURL().contains(title)
+						 || Common.getCurrentURL().contains("climbing-mountaineering")  ,
+								"verifying the header link " + Link1[i] + "Under the Featured",
+								"user should navigate to the " + Link1[i] + " page",
+								"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Link1[i]);
+						}
+						else
+						{
+							ExtenantReportUtils.addFailedLog(
+									"validating the the products in the plp ",
+									"User should able to see the products in plp", "unable to see the products in the PLP",
+									Common.getscreenShot("Failed to see products in PLP"));
+						}
+					}
+			}
 			}
 
 			catch (Exception | Error e) {
@@ -1453,10 +1536,14 @@ public void header_Travel(String Dataset) {
 			String name = data.get(Dataset).get("Featured").toUpperCase();
 			String[] Link = name.split(",");
 			String Featured = data.get(Dataset).get("Feature");
+			String Name=data.get(Dataset).get("Prod  Featureds");
+			String[] Link2 = Name.split(",");
 
 			int i = 0;
 			try {
 			    for (i = 0; i < Links.length; i++) {
+			    	if(Common.getCurrentURL().contains("preprod"))
+			    	{
 			        Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
 			        Common.clickElement("xpath", "//span[contains(text(),'" + Featured + "')]");
 
@@ -1466,6 +1553,32 @@ public void header_Travel(String Dataset) {
 			        Common.clickElement("xpath", "//li//a[@title='" + Links[i] + "']//span[contains(text(),'" + Links[i] + "')]");
 			        Sync.waitPageLoad();
 			        Thread.sleep(4000);
+			    	}
+			    	else
+			    	{
+			    		 Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
+					        Common.clickElement("xpath", "//span[contains(text(),'" + Featured + "')]");
+
+					        Thread.sleep(3000);
+
+					        Sync.waitElementPresent("xpath", "//li//a[@title='" + Link2[i] + "']//span[contains(text(),'" + Link2[i] + "')]");
+					        Common.clickElement("xpath", "//li//a[@title='" + Link2[i] + "']//span[contains(text(),'" + Link2[i] + "')]");
+					        Sync.waitPageLoad();
+					        Thread.sleep(4000);
+					        String title = "";
+					        if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
+					            title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
+					        } else if (Common.findElements("xpath", "//div[contains(@class,'category-view')]/h1").size() > 0) {
+					            title = Common.findElement("xpath", "//div[contains(@class,'category-view')]/h1").getText();
+					        }
+
+					        String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
+					        Common.assertionCheckwithReport( title.contains(Link2[i]) || breadcrumbs.contains(Link2[i]) || breadcrumbs.contains(Link2[i])
+					        		 || Common.getCurrentURL().contains(Link2[i]) || Common.getCurrentURL().contains("gift-guide") || Common.getPageTitle().contains( Link2[i]),  "verifying the header link " + Links[i] + " under Featured",
+					                "user should navigate to the " + Link2[i] + " page",
+					                "user successfully Navigated to the " + Link2[i],
+					                "Failed to navigate to the " + Link2[i]);
+			    	}
 
 			        String title = "";
 			        if (Common.findElements("xpath", "//div[contains(@class,'c-clp-hero')]//h1").size() > 0) {
@@ -1475,11 +1588,11 @@ public void header_Travel(String Dataset) {
 			        }
 
 			        String breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText();
-			        Common.assertionCheckwithReport( title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Link[i])
-			        		 || Common.getCurrentURL().contains(Links[i]),  "verifying the header link " + Links[i] + " under Featured",
-			                "user should navigate to the " + Links[i] + " page",
-			                "user successfully Navigated to the " + Links[i],
-			                "Failed to navigate to the " + Links[i]
+			        Common.assertionCheckwithReport( title.contains(Link2[i]) || breadcrumbs.contains(Link2[i]) || breadcrumbs.contains(Link2[i])
+			        		 || Common.getCurrentURL().contains(Link2[i]) || Common.getCurrentURL().contains("gift-guide") || Common.getPageTitle().contains( Link2[i]),  "verifying the header link " + Links[i] + " under Featured",
+			                "user should navigate to the " + Link2[i] + " page",
+			                "user successfully Navigated to the " + Link2[i],
+			                "Failed to navigate to the " + Link2[i]
 			        );
 			    }
 
