@@ -9373,8 +9373,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Sync.waitElementPresent("xpath", "(//span[normalize-space()='Shop'])[1]");
+				Common.clickElement("xpath", "(//span[normalize-space()='Shop'])[1]");
 				Common.clickElement("xpath", "//span[text()='Featured']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
@@ -9990,10 +9990,10 @@ public void Explore_Validation(String Dataset) {
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(Link[i]) || Common.getPageTitle().contains("Shop New Colors")
-								|| Common.getPageTitle().contains("Shop Cups & Tumblers") || Common.getPageTitle().contains("Colors of Oregon"),
+						Common.getPageTitle().contains(Link[i]) || Common.getPageTitle().contains("Outdoor Kitchen")||Common.getPageTitle().contains("New Colors")||Common.getPageTitle().contains("Soft Coolers")
+								|| Common.getPageTitle().contains("Shop Cups & Tumblers") || Common.getPageTitle().contains("Silicone Boots")|| Common.getPageTitle().contains("Colors of Oregon"),
 						"verifying the header image link " + Links[i] + "Under Featured",
-						"user should navigate to the " + Links[i] + " page",
+						"user should navigate to the " + Links[i] + " page", 
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 
 			}
@@ -10080,8 +10080,8 @@ public void Explore_Validation(String Dataset) {
 		{
 			Thread.sleep(4000);
          	for (i = 0; i < Links.length; i++) {
-         		Sync.waitElementPresent("xpath", "(//span[normalize-space()='Holiday Shop'])[1]");
-    			Common.clickElement("xpath", "(//span[normalize-space()='Holiday Shop'])[1]");
+         		Sync.waitElementPresent("xpath", "(//span[normalize-space()='Holiday Sale'])[1]");
+    			Common.clickElement("xpath", "(//span[normalize-space()='Holiday Sale'])[1]");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
 					"//span[contains(text(),'" + Links[i] + "')]");
