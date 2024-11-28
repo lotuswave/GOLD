@@ -2153,27 +2153,27 @@ public void header_Travel(String Dataset) {
 //	Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //			"Product should be add to cart", "Sucessfully product added to the cart ",
 //			"failed to add product to the cart");
-	String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
-	System.out.println(price);
-	Thread.sleep(5000);
-	price = price.trim();
-	price = price.substring(0,price.length() - 2);
-    System.out.println(price);  
-	int amount=Integer.parseInt(price);
-	System.out.println(amount);
-	
-	if(amount>199 && country.contains("US | EN"))
-	{
-//		Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
-///				Common.clickElement("xpath", "//div[@class='ampromo-close']");
-		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
-		Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
-	}
-	else
-	{
-		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
-	}
+//	String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
+//	System.out.println(price);
+//	Thread.sleep(5000);
+//	price = price.trim();
+//	price = price.substring(0,price.length() - 2);
+//    System.out.println(price);  
+//	int amount=Integer.parseInt(price);
+//	System.out.println(amount);
+//	
+//	if(amount>199 && country.contains("US | EN"))
+//	{
+////		Sync.waitElementPresent(30, "xpath", "//div[@class='ampromo-close']");
+/////				Common.clickElement("xpath", "//div[@class='ampromo-close']");
+//		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Close minicart']");
+//		Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+//	}
+//	else
+//	{
+//		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
+//		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
+//	}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -9937,6 +9937,7 @@ public void Continue_Shopping() {
 	public void Gift_cards(String Dataset) {
 		// TODO Auto-generated method stub
 		String GiftCard = data.get(Dataset).get("Osprey");
+		String prodgiftcard=data.get(Dataset).get("Prod Product");
 		try
 		{
 			for (int i = 0; i <= 10; i++) {
@@ -9965,11 +9966,20 @@ public void Continue_Shopping() {
 				}
 			}
 			Sync.waitPageLoad(30);
-			Thread.sleep(6000);
+			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
+				Common.clickElement("xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
+				Sync.waitPageLoad();
+			}
+			Thread.sleep(4000);
 		}
 		catch(Exception | Error e)
 		{
