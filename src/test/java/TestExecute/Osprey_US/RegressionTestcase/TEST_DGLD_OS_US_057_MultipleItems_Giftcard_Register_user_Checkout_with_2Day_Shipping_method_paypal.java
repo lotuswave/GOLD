@@ -13,7 +13,7 @@ import TestLib.Login;
 public class TEST_DGLD_OS_US_057_MultipleItems_Giftcard_Register_user_Checkout_with_2Day_Shipping_method_paypal {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Register_user_Checkout_with_2Day_Shipping_method_Multipleitems_PP_GC () throws Exception {
@@ -22,9 +22,8 @@ public class TEST_DGLD_OS_US_057_MultipleItems_Giftcard_Register_user_Checkout_w
 			    Osprey_ReEu.verifingHomePage();
 			    Osprey_ReEu.click_singinButton();
 			    Osprey_ReEu.Login_Account("Account");
-			    Osprey_ReEu.search_product("Gift Details1");
-			    Osprey_ReEu.Gift_cards("OS_Giftcard");
-	            Osprey_ReEu.Card_Value("Price");
+			    Osprey_ReEu.Gift_cards("Osprey Gift Card");
+	            Osprey_ReEu.Card_Value("Gift Details");
 	            Osprey_ReEu.search_product("poco Product");
 	        	Osprey_ReEu.addtocart("poco Product");
 	       	 	Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
@@ -44,7 +43,7 @@ public class TEST_DGLD_OS_US_057_MultipleItems_Giftcard_Register_user_Checkout_w
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
