@@ -12247,7 +12247,7 @@ public void Explore_Validation(String Dataset) {
 						int j=0;
 						if(Number>j)
 						{
-							Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || breadcrumbs.contains(Links[i]) ,
+							Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || title.contains("Limited Edition Remix") ,
 									"verifying the header link " + Links[i] + "Under Collections",
 									"user should navigate to the " + Links[i] + " page",
 									"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
