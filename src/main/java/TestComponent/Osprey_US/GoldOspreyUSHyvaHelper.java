@@ -14976,6 +14976,8 @@ public void header_Explore(String Dataset) {{
 	String activity=data.get(Dataset).get("Activity");
 	int i = 0;
 	try {
+		if(Common.getCurrentURL().contains("preprod"))
+		{
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
@@ -15016,6 +15018,50 @@ public void header_Explore(String Dataset) {{
 				"user should navigate to the stories page",
 				"user successfully Navigated to the stories page", "Failed to navigate to the stories page");
 		
+	}
+		else
+		{
+			
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Common.clickElement("xpath", "//a//span[contains(text(),'" + activity + "')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//a//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath",
+						"//li//a//span[contains(text(),'" + Links[i] + "')]");		
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String breadcrumbs="";
+				if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+				    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+				} else {
+				    String currentURL = Common.getCurrentURL();
+				    System.out.println("Redirecting to URL: " + currentURL);
+				} 
+				System.out.println(breadcrumbs);
+				System.out.println(Links[i]);
+				System.out.println(Link[i]);
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
+						||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("50years")
+						|| Common.getPageTitle().contains(Links[i]) ,
+						"verifying the header link " + Links[i] + "Under Accessories",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Stories')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Stories')]");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("stories"),
+					"verifying the header link stories Under Explore",
+					"user should navigate to the stories page",
+					"user successfully Navigated to the stories page", "Failed to navigate to the stories page");
+			}
 	}
 
 	catch (Exception | Error e) {
