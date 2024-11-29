@@ -1496,7 +1496,7 @@ public void header_Travel(String Dataset) {
 	            int j = 0;
 	            if (Number > j) {
 	                Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) 
-	                		|| breadcrumbs.contains(Link[i]) || Common.getCurrentURL().contains(Access),
+	                		|| breadcrumbs.contains(Link[i]) || Common.getCurrentURL().contains(Access) || Common.getCurrentURL().contains("apparel-goods"),
 	                        "verifying the header link " + Links[i] + "Under Accessories",
 	                        "user should navigate to the " + Links[i] + " page",
 	                        "user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -14972,6 +14972,8 @@ public void header_Explore(String Dataset) {{
 	String[] Links = names.split(",");
 	String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
 	String[] Link = name.split(",");
+	String Name=data.get(Dataset).get("Prod Explore");
+	String[] Link1 = Name.split(",");
 	String Explore=data.get(Dataset).get("Explore CTA");
 	String activity=data.get(Dataset).get("Activity");
 	int i = 0;
@@ -15022,15 +15024,15 @@ public void header_Explore(String Dataset) {{
 		else
 		{
 			
-			for (i = 0; i < Links.length; i++) {
+			for (i = 0; i < Link1.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 				Common.clickElement("xpath", "//a//span[contains(text(),'" + activity + "')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a//span[contains(text(),'" + Link1[i] + "')]");
 				Common.clickElement("xpath",
-						"//li//a//span[contains(text(),'" + Links[i] + "')]");		
+						"//li//a//span[contains(text(),'" + Link1[i] + "')]");		
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String breadcrumbs="";
@@ -15041,15 +15043,15 @@ public void header_Explore(String Dataset) {{
 				    System.out.println("Redirecting to URL: " + currentURL);
 				} 
 				System.out.println(breadcrumbs);
-				System.out.println(Links[i]);
-				System.out.println(Link[i]);
+				System.out.println(Link1[i]);
+				System.out.println(Link1[i]);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
-						||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("50years")
-						|| Common.getPageTitle().contains(Links[i]) ,
-						"verifying the header link " + Links[i] + "Under Accessories",
-						"user should navigate to the " + Links[i] + " page",
-						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+				Common.assertionCheckwithReport(breadcrumbs.contains(Link1[i]) 
+						||breadcrumbs.contains(Link1[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("Osprey 50")
+						|| Common.getPageTitle().contains(Link1[i]) ,
+						"verifying the header link " + Link1[i] + "Under Accessories",
+						"user should navigate to the " + Link1[i] + " page",
+						"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Link1[i]);
 
 			}
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");

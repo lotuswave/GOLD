@@ -22,7 +22,7 @@ public class Test_DGLD_OSP_US_BCST_005_HeaderLinks {
 			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.header_OutdoorPacks("Outdoor Packs");
 			Osprey_ReEu.header_KidsPacks("Kids Packs Carriers");
-			Osprey_ReEu.header_ChildCarrier("Child Carriers");  //need to work
+			Osprey_ReEu.header_ChildCarrier("Child Carriers");  
 			Osprey_ReEu.header_DayPacks("Day Packs");
 			Osprey_ReEu.header_Travel("Travel");
 			Osprey_ReEu.header_Luggage("Travel");
