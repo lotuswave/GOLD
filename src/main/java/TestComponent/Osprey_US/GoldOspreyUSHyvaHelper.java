@@ -15027,69 +15027,69 @@ public void header_Explore(String Dataset) {{
 		else
 		{
 			
-			for (i = 0; i < Link1.length; i++) {
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
-				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
-				Common.clickElement("xpath", "//a//span[contains(text(),'" + activity + "')]");
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"//a//span[contains(text(),'" + Link1[i] + "')]");
-				Common.clickElement("xpath",
-						"//li//a//span[contains(text(),'" + Link1[i] + "')]");		
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String breadcrumbs="";
-				if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
-				    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
-				} else {
-				    String currentURL = Common.getCurrentURL();
-				    System.out.println("Redirecting to URL: " + currentURL);
-				} 
-				System.out.println(breadcrumbs);
-				System.out.println(Link1[i]);
-				System.out.println(Link1[i]);
-				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(breadcrumbs.contains(Link1[i]) 
-						||breadcrumbs.contains(Link1[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("Osprey 50")
-						|| Common.getPageTitle().contains(Link1[i]) ,
-						"verifying the header link " + Link1[i] + "Under Accessories",
-						"user should navigate to the " + Link1[i] + " page",
-						"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Link1[i]);
-
-			}
-			for(i = 0; i < Link2.length; i++)
-			{
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
-				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
-				Common.clickElement("xpath", "//a//span[contains(text(),'" + ExpertAdvice + "')]");
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"//a//span[contains(text(),'" + Link2[i] + "')]");
-				Common.clickElement("xpath",
-						"//li//a//span[contains(text(),'" + Link2[i] + "')]");		
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String breadcrumbs="";
-				if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
-				    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
-				} else {
-				    String currentURL = Common.getCurrentURL();
-				    System.out.println("Redirecting to URL: " + currentURL);
-				} 
-				System.out.println(breadcrumbs);
-				System.out.println(Link2[i]);
-				System.out.println(Link2[i]);
-				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(
-						breadcrumbs.contains(Link2[i]) || breadcrumbs.contains(Link2[i])
-								|| Common.getCurrentURL().contains("fitting-learning/size-fit")
-								|| Common.getCurrentURL().contains("how-to-pack-your-pack")
-								|| Common.getPageTitle().contains(Link2[i]) || Common.getCurrentURL().contains("suspension") || Common.getCurrentURL().contains("kustomer"),
-						"verifying the header link " + Link2[i] + "Under Accessories",
-						"user should navigate to the " + Link2[i] + " page",
-						"user successfully Navigated to the " + Link2[i], "Failed to navigate to the " + Link2[i]);
-			}
-			Common.navigateBack();
+//			for (i = 0; i < Link1.length; i++) {
+//				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+//				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+//				Common.clickElement("xpath", "//a//span[contains(text(),'" + activity + "')]");
+//				Thread.sleep(3000);
+//				Sync.waitElementPresent("xpath",
+//						"//a//span[contains(text(),'" + Link1[i] + "')]");
+//				Common.clickElement("xpath",
+//						"//li//a//span[contains(text(),'" + Link1[i] + "')]");		
+//				Sync.waitPageLoad();
+//				Thread.sleep(4000);
+//				String breadcrumbs="";
+//				if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+//				    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+//				} else {
+//				    String currentURL = Common.getCurrentURL();
+//				    System.out.println("Redirecting to URL: " + currentURL);
+//				} 
+//				System.out.println(breadcrumbs);
+//				System.out.println(Link1[i]);
+//				System.out.println(Link1[i]);
+//				System.out.println(Common.getPageTitle());
+//				Common.assertionCheckwithReport(breadcrumbs.contains(Link1[i]) 
+//						||breadcrumbs.contains(Link1[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("Osprey 50")
+//						|| Common.getPageTitle().contains(Link1[i]) ,
+//						"verifying the header link " + Link1[i] + "Under Accessories",
+//						"user should navigate to the " + Link1[i] + " page",
+//						"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Link1[i]);
+//
+//			}
+//			for(i = 0; i < Link2.length; i++)
+//			{
+//				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+//				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+//				Common.clickElement("xpath", "//a//span[contains(text(),'" + ExpertAdvice + "')]");
+//				Thread.sleep(3000);
+//				Sync.waitElementPresent("xpath",
+//						"//a//span[contains(text(),'" + Link2[i] + "')]");
+//				Common.clickElement("xpath",
+//						"//li//a//span[contains(text(),'" + Link2[i] + "')]");		
+//				Sync.waitPageLoad();
+//				Thread.sleep(4000);
+//				String breadcrumbs="";
+//				if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+//				    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+//				} else {
+//				    String currentURL = Common.getCurrentURL();
+//				    System.out.println("Redirecting to URL: " + currentURL);
+//				} 
+//				System.out.println(breadcrumbs);
+//				System.out.println(Link2[i]);
+//				System.out.println(Link2[i]);
+//				System.out.println(Common.getPageTitle());
+//				Common.assertionCheckwithReport(
+//						breadcrumbs.contains(Link2[i]) || breadcrumbs.contains(Link2[i])
+//								|| Common.getCurrentURL().contains("fitting-learning/size-fit")
+//								|| Common.getCurrentURL().contains("how-to-pack-your-pack")
+//								|| Common.getPageTitle().contains(Link2[i]) || Common.getCurrentURL().contains("suspension") || Common.getCurrentURL().contains("kustomer"),
+//						"verifying the header link " + Link2[i] + "Under Accessories",
+//						"user should navigate to the " + Link2[i] + " page",
+//						"user successfully Navigated to the " + Link2[i], "Failed to navigate to the " + Link2[i]);
+//			}
+//			Common.navigateBack();
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Stories')]");
@@ -15100,8 +15100,10 @@ public void header_Explore(String Dataset) {{
 					"user should navigate to the stories page",
 					"user successfully Navigated to the stories page", "Failed to navigate to the stories page");
 			}
+		sale();
+		packfinder();
 	}
-
+	
 	catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Accessories",
@@ -15111,7 +15113,68 @@ public void header_Explore(String Dataset) {{
 		Assert.fail();
 	}
 
-}	}	
+}	}
+
+public void sale() {
+	try
+	{
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'SALE')]");
+		Common.clickElement("xpath", "//span[contains(text(),'SALE')]");
+		String breadcrumbs="";
+		if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+		    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+		} else {
+		    String currentURL = Common.getCurrentURL();
+		    System.out.println("Redirecting to URL: " + currentURL);
+		} 
+		Common.assertionCheckwithReport(
+				breadcrumbs.contains("SALE")|| Common.getCurrentURL().contains("featured/sale")
+						|| Common.getPageTitle().contains("Sale Prices"),
+				"verifying the header link SALE Under Accessories",
+				"user should navigate to the SALE page",
+				"user successfully Navigated to the SALE ", "Failed to navigate to the SALE ");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link SALE Under Accessories",
+				"User should navigate to the SALE pages",
+				" unable to navigate to the SALE pages",
+				Common.getscreenShot("Failed to navigate to the SALE pages"));
+		Assert.fail();
+		
+	}
+}
+
+public void packfinder() {
+	try
+	{
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'PACKFINDER')]");
+		Common.clickElement("xpath", "//span[contains(text(),'PACKFINDER')]");
+		String breadcrumbs="";
+		if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+		    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+		} else {
+		    String currentURL = Common.getCurrentURL();
+		    System.out.println("Redirecting to URL: " + currentURL);
+		} 
+		Common.assertionCheckwithReport(
+				breadcrumbs.contains("PACKFINDER")|| Common.getCurrentURL().contains("packfinder")
+						|| Common.getPageTitle().contains("Packfinder"),
+				"verifying the header link PACKFINDER Under Accessories",
+				"user should navigate to the PACKFINDER page",
+				"user successfully Navigated to the PACKFINDER ", "Failed to navigate to the PACKFINDER ");
+	}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link PACKFINDER Under Accessories",
+				"User should navigate to the PACKFINDER pages",
+				" unable to navigate to the PACKFINDER pages",
+				Common.getscreenShot("Failed to navigate to the PACKFINDER pages"));
+		Assert.fail();
+	}
+}
 
 public void AddtoCart_Disable_PLP(String Dataset) {
 	// TODO Auto-generated method stub
