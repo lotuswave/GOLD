@@ -14974,8 +14974,11 @@ public void header_Explore(String Dataset) {{
 	String[] Link = name.split(",");
 	String Name=data.get(Dataset).get("Prod Explore");
 	String[] Link1 = Name.split(",");
+	String Name1=data.get(Dataset).get("Prod Expert");
+	String[] Link2 = Name1.split(",");
 	String Explore=data.get(Dataset).get("Explore CTA");
 	String activity=data.get(Dataset).get("Activity");
+	String ExpertAdvice=data.get(Dataset).get("Expert Advice");
 	int i = 0;
 	try {
 		if(Common.getCurrentURL().contains("preprod"))
@@ -15054,6 +15057,39 @@ public void header_Explore(String Dataset) {{
 						"user successfully Navigated to the " + Link1[i], "Failed to navigate to the " + Link1[i]);
 
 			}
+			for(i = 0; i < Link2.length; i++)
+			{
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Common.clickElement("xpath", "//a//span[contains(text(),'" + ExpertAdvice + "')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//a//span[contains(text(),'" + Link2[i] + "')]");
+				Common.clickElement("xpath",
+						"//li//a//span[contains(text(),'" + Link2[i] + "')]");		
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String breadcrumbs="";
+				if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+				    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+				} else {
+				    String currentURL = Common.getCurrentURL();
+				    System.out.println("Redirecting to URL: " + currentURL);
+				} 
+				System.out.println(breadcrumbs);
+				System.out.println(Link2[i]);
+				System.out.println(Link2[i]);
+				System.out.println(Common.getPageTitle());
+				Common.assertionCheckwithReport(
+						breadcrumbs.contains(Link2[i]) || breadcrumbs.contains(Link2[i])
+								|| Common.getCurrentURL().contains("fitting-learning/size-fit")
+								|| Common.getCurrentURL().contains("how-to-pack-your-pack")
+								|| Common.getPageTitle().contains(Link2[i]) || Common.getCurrentURL().contains("suspension") || Common.getCurrentURL().contains("kustomer"),
+						"verifying the header link " + Link2[i] + "Under Accessories",
+						"user should navigate to the " + Link2[i] + " page",
+						"user successfully Navigated to the " + Link2[i], "Failed to navigate to the " + Link2[i]);
+			}
+			Common.navigateBack();
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Stories')]");
