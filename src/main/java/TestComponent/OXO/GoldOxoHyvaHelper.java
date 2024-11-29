@@ -254,9 +254,9 @@ public class GoldOxoHyvaHelper {
 			{
 			    Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			} 
-			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
-			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
-			}
+//			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
+//			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
+//			}
 			
 			else {
 			    Common.scrollIntoView("xpath", "//button[text()='Load More']");
@@ -823,6 +823,66 @@ public class GoldOxoHyvaHelper {
 
 			Assert.fail();
 		}
+	}
+	
+	public void Shoppingcart_page() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@title='Back to Cart']");
+			Sync.waitElementVisible(30, "xpath", "(//a[@title='Back to Cart'])[2]");
+			Common.clickElement("xpath", "(//a[@title='Back to Cart'])[2]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+					"validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Unable to Navigate to the shopping cart page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the shopping cart page"));
+			Assert.fail();
+		}
+
+	}
+	
+	
+	public void updateproductcolor_shoppingcart(String Dataset) {
+		// TODO Auto-generated method stub
+		String productcolor1 = "Pink";
+		String product = data.get(Dataset).get("Colorproduct");
+		System.out.println(productcolor1);
+		try {
+			Common.clickElement("xpath", "//div[@class='flex justify-end']//a");      // need to click on the color product
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
+			Common.clickElement("xpath", "//input[@aria-label='" + productcolor1 + "']");
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//span[contains(text(),'Update item')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String getProductColor =Common.findElement("xpath","(//div[@class='mt-2 title-xs hf:title-2xs os:text-sm']//span)[2]").getText().trim();
+			System.out.println(getProductColor);
+			Common.assertionCheckwithReport(productcolor1.equals(getProductColor),
+					"validating the update color in shopping cart page",
+					"color should be update in the shopping cart page",
+					"color has been updated in the shopping cart page",
+					"Failed to update the product color in the shopping cart page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the update color in shopping cart page",
+					"color should be update in the shopping cart page",
+					"Unable to update the product color in the shopping cart page",
+					Common.getscreenShot("Failed to update the product color in the shopping cart page"));
+			Assert.fail();
+		}
+
 	}
 
 	public void selectStandardshippingaddress() {

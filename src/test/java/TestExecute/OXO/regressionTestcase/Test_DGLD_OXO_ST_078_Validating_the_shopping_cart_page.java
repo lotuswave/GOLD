@@ -28,7 +28,12 @@ public class Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page {
 			Oxo.click_minicart();
 			Oxo.minicart_viewcart();
 			Oxo.update_shoppingcart("Product Qunatity");
+			Oxo.minicart_Checkout();
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.select_Shipping_Method("GroundShipping method");
+			Oxo.Shoppingcart_page();
 			Oxo.minicart_ordersummary_discount("Discount");
+			Oxo.updateproductcolor_shoppingcart("ConfigProduct");
 			
 			
 		} catch (Exception e) {
