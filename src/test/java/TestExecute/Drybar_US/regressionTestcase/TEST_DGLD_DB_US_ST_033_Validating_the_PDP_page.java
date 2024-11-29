@@ -38,7 +38,7 @@ public class TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page {
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}
