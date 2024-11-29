@@ -5858,13 +5858,12 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		try {
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[text()='Write a review']");
-			Common.clickElement("xpath", "//a[text()='Write a review']");
-			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
+			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
 			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 			Common.clickElement("xpath", "//span[text()='Write A Review']");
+			//Common.scrollIntoView("xpath", "//span[text()='Write A Review']");
 			Thread.sleep(4000);
 			String form = Common.findElement("xpath", "//form[@aria-label='Write A Review Form']//div[contains(@class, 'write-review-wrapper')]").getAttribute("class");
 			System.out.println(form);
@@ -7813,7 +7812,7 @@ catch(Exception | Error e)
 
 public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		String productcolor1 = "Stone";
+		String productcolor1 = "Indigo";
 		System.out.println(productcolor1);
 		try {
 			Common.clickElement("xpath", "//div[@class='flex justify-end']//a");
@@ -7984,6 +7983,30 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.getscreenShot("failed to play the video in PDP page"));
 			Assert.fail();
 		}
+	}
+	public void Shoppingcart_page() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@title='Back to Cart']");
+			Sync.waitElementVisible(30, "xpath", "(//a[@title='Back to Cart'])[2]");
+			Common.clickElement("xpath", "(//a[@title='Back to Cart'])[2]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
+					"validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Successfully navigated to the shopping cart page", "Failed to Navigate to the shopping cart page");
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the navigates to the shopping cart page",
+					"After clicking on the reorder it should navigate to the shopping cart page",
+					"Unable to Navigate to the shopping cart page",
+					Common.getscreenShotPathforReport("Failed to Navigate to the shopping cart page"));
+			Assert.fail();
+		}
+
 	}
 
 	public void minicart_ordersummary_discount(String Dataset) {

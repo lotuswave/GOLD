@@ -25,6 +25,10 @@ public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 			Hydro.click_minicart();
 			Hydro.minicart_viewcart();
 			Hydro.update_shoppingcart("Product Qunatity");
+			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+			Hydro.Shoppingcart_page();
 			Hydro.minicart_ordersummary_discount("Discount");
 			Hydro.updateproductcolor_shoppingcart("Color Product");
 		    Hydro.deleteProduct_shoppingcart();
