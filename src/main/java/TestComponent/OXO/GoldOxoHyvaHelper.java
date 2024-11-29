@@ -10576,79 +10576,79 @@ public void header_1_Percent_Planet() {
 	}
 
 	public void Sort_By(String Dataset) throws InterruptedException {
-			// TODO Auto-generated method stub
-			String symbol = data.get(Dataset).get("Price_Symbol");
-			String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
-			String ProdPriceFilter = data.get(Dataset).get("Sortby_Dropdown_Prod");
+		// TODO Auto-generated method stub
+		String symbol = data.get(Dataset).get("Price_Symbol");
+		String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
+		String ProdPriceFilter = data.get(Dataset).get("Sortby_Dropdown_Prod");
+		
+		System.out.println(PriceFilter);
+		System.out.println(symbol);
+		try {
+			Sync.waitPageLoad();
+
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']");
+
+			List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']");
+			List<String> Beforefilterpricelist = new ArrayList<String>();
+
+			for (WebElement p : BeforeFilterprice) {
+				Beforefilterpricelist.add(p.getText().replace(symbol, " "));
+				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
+			}
+			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("Stage3"))
+			{
 			
-			System.out.println(PriceFilter);
-			System.out.println(symbol);
-			try {
-				Sync.waitPageLoad();
-
+			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
+			
+			Thread.sleep(5000);
+			}
+			else
+			{
+				Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,ProdPriceFilter);
 				Thread.sleep(5000);
-				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
+			}
+			Common.scrollIntoView("xpath",
+					"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']");
+			List<WebElement> AfterFilterprice = Common.findElements("xpath",
+					"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']");
+			List<String> Afterfilterpricelist = new ArrayList<String>();
 
-				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
-				List<String> Beforefilterpricelist = new ArrayList<String>();
+			for (WebElement p : AfterFilterprice) {
+				Afterfilterpricelist.add(p.getText().replace(symbol, " "));
+				System.out.println("Afterfilterpricelist" + Afterfilterpricelist);
+			}
 
-				for (WebElement p : BeforeFilterprice) {
-					Beforefilterpricelist.add(p.getText().replace(symbol, " "));
-					System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
-				}
-				Thread.sleep(4000);
-				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("Stage3"))
-				{
-				
-				Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
-				
-				Thread.sleep(5000);
-				}
-				else
-				{
-					Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,ProdPriceFilter);
-					Thread.sleep(5000);
-				}
-				Common.scrollIntoView("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
-				List<WebElement> AfterFilterprice = Common.findElements("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@class=' old-price ']");
-				List<String> Afterfilterpricelist = new ArrayList<String>();
-
-				for (WebElement p : AfterFilterprice) {
-					Afterfilterpricelist.add(p.getText().replace(symbol, " "));
-					System.out.println("Afterfilterpricelist" + Afterfilterpricelist);
-				}
-
-				if (PriceFilter.equals("Highest price")) {
-					Collections.sort(Beforefilterpricelist);
-					System.out.println("Beforefilterpricelist Highest " + Beforefilterpricelist);
+			if (PriceFilter.equals("Highest price")) {
+				Collections.sort(Beforefilterpricelist);
+				System.out.println("Beforefilterpricelist Highest " + Beforefilterpricelist);
+				Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
+						"To validate the Sort in Product Listing Page",
+						"User should able to Sort in Product Listing Page",
+						"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
+			} else {
+				if (PriceFilter.equals("Lowest price")) {
+					Collections.sort(Beforefilterpricelist, Collections.reverseOrder());
+					System.out.println("Beforefilterpricelist Lowest" + Beforefilterpricelist);
 					Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
 							"To validate the Sort in Product Listing Page",
 							"User should able to Sort in Product Listing Page",
 							"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
-				} else {
-					if (PriceFilter.equals("Lowest price")) {
-						Collections.sort(Beforefilterpricelist, Collections.reverseOrder());
-						System.out.println("Beforefilterpricelist Lowest" + Beforefilterpricelist);
-						Common.assertionCheckwithReport(Beforefilterpricelist.equals(Afterfilterpricelist),
-								"To validate the Sort in Product Listing Page",
-								"User should able to Sort in Product Listing Page",
-								"Sucessfully Sorts in the Product Listing Page", "Failed to Sort  in Product Listing Page");
-					}
-
 				}
-				Thread.sleep(2000);
-			} catch (NumberFormatException | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("validating the Sort by functionality",
-						"Products should be display as per selected sort option ",
-						" Unable to display the Products as per selected sort option",
-						Common.getscreenShot("Failed to sort_by"));
-				Assert.fail();
-			}
 
+			}
+			Thread.sleep(2000);
+		} catch (NumberFormatException | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Sort by functionality",
+					"Products should be display as per selected sort option ",
+					" Unable to display the Products as per selected sort option",
+					Common.getscreenShot("Failed to sort_by"));
+			Assert.fail();
 		}
+
+	}
 
 	public void Filter() throws InterruptedException {
 		// TODO Auto-generated method stub
