@@ -511,7 +511,7 @@ public class OspreyEMEA_HYVA {
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
-//			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
@@ -1975,8 +1975,8 @@ public class OspreyEMEA_HYVA {
 			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
 			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
 			Sync.waitPageLoad();
-			 Thread.sleep(4000);
-			Sync.waitElementPresent(20, "xpath", "//div[@ui-id='message-success']//span");
+//			 Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//div[@ui-id='message-success']//span");
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You shared the gift registry"),
@@ -3716,7 +3716,12 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
-		
+			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//input[contains(@id,'postcode')]");
+			Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
+			String code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
+			System.out.println(code);
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -3802,7 +3807,7 @@ public class OspreyEMEA_HYVA {
 						
 
 						Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-						Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", data.get(dataSet).get("postcode"));
+						Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
 					}
 					int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
 					
@@ -3872,9 +3877,7 @@ public class OspreyEMEA_HYVA {
 				System.out.println(zipcode);
 
 				if (zipcode > 0) {
-					Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
-					String code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
-					System.out.println(code);
+					
 
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
