@@ -9078,7 +9078,7 @@ return Number;
 					.replace("£", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total = (DIS + shippingvalue);
+			Float Total = subtotalvalue+Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
@@ -9647,8 +9647,8 @@ return Number;
 		{
 			for (int i = 0; i <= 10; i++) {
 				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
-				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
-				Common.clickElement("xpath", "//span[text()='Gift Cards']");
+				Sync.waitElementPresent("xpath", "//span[text()='Gift Card']");
+				Common.clickElement("xpath", "//span[text()='Gift Card']");
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@itemprop ,'image')]");
@@ -9998,7 +9998,7 @@ return Number;
    {
 	   Common.refreshpage();
 	   Thread.sleep(4000);
-	   Common.clickElement("xpath", "//input[@id='agreement_5']");
+	   Common.clickElement("xpath", "(//input[contains(@id,'agreement_5')])[3]");
 	   Thread.sleep(4000);
 	   Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 			//Common.refreshpage();
