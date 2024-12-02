@@ -3996,8 +3996,8 @@ public class OspreyEMEA_HYVA {
 	                   if(Common.getCurrentURL().contains("/gb"))
 	                   {
 	                	   Thread.sleep(5000);
-//	                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
-//	                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
+	                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
+	                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
 	                	   
 	                	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
@@ -4135,8 +4135,8 @@ public class OspreyEMEA_HYVA {
 					 if(Common.getCurrentURL().contains("/gb"))
 	                 {
 						 Thread.sleep(4000);
-	              	   Sync.waitElementPresent("xpath", "//input[@id='agreement_5']");
-	              	   Common.clickElement("xpath", "//input[@id='agreement_5']");
+	              	   Sync.waitElementPresent("xpath", "(//input[contains(@id,'agreement_5')])[3]");
+	              	   Common.clickElement("xpath", "(//input[contains(@id,'agreement_5')])[3]");
 	              	 Thread.sleep(4000);
 	              	   Sync.waitElementPresent("xpath", "(//button[contains(text(),'Place Order')])[1]");
 	              	   Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[1]");
