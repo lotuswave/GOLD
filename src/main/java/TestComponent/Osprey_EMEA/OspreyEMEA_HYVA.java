@@ -511,7 +511,7 @@ public class OspreyEMEA_HYVA {
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
-			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+//			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
@@ -3427,7 +3427,7 @@ public class OspreyEMEA_HYVA {
 				System.out.println(Common.getCurrentURL());
 
 				if (socallinksarry[i].equals("instagram")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram.com/ospreypacks/"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
@@ -5806,6 +5806,8 @@ return Number;
 		String Name = data.get(Dataset).get("FirstName");
 		String Email = data.get(Dataset).get("Email");
 		try {
+			Thread.sleep(2000);
+			Common.actionsKeyPress(Keys.PAGE_UP);
 			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");
 			Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
 			Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
