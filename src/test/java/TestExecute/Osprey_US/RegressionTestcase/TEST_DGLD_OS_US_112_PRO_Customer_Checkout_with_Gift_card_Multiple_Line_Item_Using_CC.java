@@ -23,6 +23,7 @@ public class TEST_DGLD_OS_US_112_PRO_Customer_Checkout_with_Gift_card_Multiple_L
         Osprey_ReEu.Login_Account("prouser");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.Prouser_Discount();
         Osprey_ReEu.search_product("Osprey Gift Card");
         Osprey_ReEu.Gift_cards("Osprey Gift Card");
         Osprey_ReEu.Card_Value("price");
