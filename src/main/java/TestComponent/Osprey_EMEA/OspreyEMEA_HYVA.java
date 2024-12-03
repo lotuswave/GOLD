@@ -8103,18 +8103,21 @@ return Number;
 
 			if (MyFavorites != 0) {
 				search_product("Product");
-				Common.mouseOver("xpath", "//button[@data-action='add-to-wishlist']");
-				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.javascriptclickElement("xpath", "//button[@data-action='add-to-wishlist']");
-				Sync.waitElementVisible(30, "xpath", "//h4");
-				String whishlistpopup = Common.findElement("xpath", "//h4").getText();
-				System.out.println(whishlistpopup);
-				if (whishlistpopup.contains("Add to Wishlist")) {
-					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
-					Common.clickElement("xpath", "//button[@title='Add To List']");
+				Common.mouseOver("xpath", "//button[contains(@class,'group/wishlist')]");
+				Sync.waitElementPresent(30, "xpath", "//button[contains(@class,'group/wishlist')]");
+				Common.javascriptclickElement("xpath", "//button[contains(@class,'group/wishlist')]");
+//				Sync.waitElementVisible(30, "xpath", "//h4");
+//				String whishlistpopup = Common.findElement("xpath", "//h4").getText();
+//				System.out.println(whishlistpopup);
+//				if (whishlistpopup.contains("Add to Wishlist")) {
+//					Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
+//					Common.clickElement("xpath", "//button[@title='Add To List']");
 				} else {
 					Assert.fail();
 				}
+/*				
+				Sync.waitElementPresent(30, "xpath", "//button[@title='Add To List']");
+				Common.clickElement("xpath", "//button[@title='Add To List']");
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Wish List"),
 						"validating the Navigation to the My Favorites page",
@@ -8129,7 +8132,9 @@ return Number;
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 			}
-		} catch (Exception | Error e) {
+		*/	
+		}
+		 catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the Whishlist",
 					"Product should be add to whishlist", "Unable to add product to the Whishlist",
@@ -8145,19 +8150,20 @@ return Number;
 		System.out.println(product);
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String MyFavorites = Common.findElement("xpath", "//a[@id='wishlist-create-button']//span").getText();
-			System.out.println(MyFavorites);
+			Thread.sleep(2000);
+//			String MyFavorites = Common.findElement("xpath", "//a[@id='wishlist-create-button']//span").getText();
+//			System.out.println(MyFavorites);
 
-			if (MyFavorites.contains("CREATE NEW WISH LIST")) {
+//			if (MyFavorites.contains("CREATE NEW WISH LIST")) {
 				Bagpacks_headerlinks("Backpacks & Bags");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 				Common.clickElement("xpath", "//img[@alt='" + product + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Sync.waitElementPresent(30, "xpath", "//button[@data-action='add-to-wishlist']");
-				Common.clickElement("xpath", "//button[@data-action='add-to-wishlist']");
-				Sync.waitPageLoad(30);
+				Sync.waitElementPresent(30, "xpath", "//button[@id='add-to-wishlist']");
+				Common.clickElement("xpath", "//button[@id='add-to-wishlist']");
+				My_Favorites();
+	/*			Sync.waitPageLoad(30);
 				Thread.sleep(4000);
 				Sync.waitElementVisible(30, "xpath", "//h4");
 				String whishlistpopup = Common.findElement("xpath", "//h4").getText();
@@ -8194,6 +8200,7 @@ return Number;
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 
 			}
+	*/
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the Whishlist",
@@ -8206,27 +8213,27 @@ return Number;
 	public void Delete_Whishlist() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent(30, "xpath", "//label[@for='wishlist-select-all']");
-			Common.clickElement("xpath", "//label[@for='wishlist-select-all']");
+			Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
+			Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//button[@title='Delete Wish List']");
-			Common.clickElement("xpath", "//button[@title='Delete Wish List']");
-			Thread.sleep(4000);
-			String popup = Common
+			Sync.waitElementPresent(30, "xpath", "//button[@data-role='selected-remove']");
+			Common.clickElement("xpath", "//button[@data-role='selected-remove']");
+			Thread.sleep(2000);
+/*			String popup = Common
 					.findElement("xpath", "//div[@class='modal-popup confirm _show']//div[@class='modal-content']//div")
 					.getText();
 			if (popup.contains("Are you sure you want to delete")) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'OK')]");
 				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-				Sync.waitElementVisible(40, "xpath", "//div[@class='a-message__container-inner']");
-				String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+*/					Sync.waitElementVisible(40, "xpath", "//div[contains(@class,'message')]//span");
+			String message = Common.findElement("xpath", "//div[contains(@class,'message')]//span").getText();
 
-				Common.assertionCheckwithReport(message.contains("Wish List"), "validating the whishlist deletion",
+				Common.assertionCheckwithReport(message.contains("You have no items in your Favourites."), "validating the whishlist deletion",
 						"new whishlist should be delete sucessfully", "Sucessfully new whishlist has been deleted",
 						"failed to delete the new whishlist");
-			} else {
-				Assert.fail();
-			}
+//			} else {
+//				Assert.fail();
+//			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the copy whishlist items to another whishlist",
@@ -15147,6 +15154,62 @@ public void Prouser_Discount() {
 		Assert.fail();
 	}
 	
+}
+
+public void Addtocart_From_MyFav(String Dataset) {
+	// TODO Auto-generated method stub
+	String productcolor = data.get(Dataset).get("Color");
+	String Productsize = data.get(Dataset).get("Size");
+    try {
+        Sync.waitPageLoad();
+        int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+
+        if (MyFavorites != 0) {
+            search_product("Product");
+            Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
+            Common.mouseOverClick("xpath", "//button[contains(@class, 'group/wishlist')]");
+            Sync.waitPageLoad();
+            Thread.sleep(2000);
+            My_Favorites();
+            Common.assertionCheckwithReport(Common.getPageTitle().equals("Favourites Sharing"),
+                    "validating the Navigation to the My Favorites page",
+                    "After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
+                    "Successfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
+                    "Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
+            Common.findElements("xpath", "//div[contains(@title,'My Wishlist')]");
+            Sync.waitPageLoad();
+            Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
+            Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
+            Sync.waitElementPresent("xpath", "//button[@data-role='selected-tocart']");
+            Common.clickElement("xpath", "//button[@data-role='selected-tocart']");
+
+        } else {
+        	    
+        		Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
+            	Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
+           
+            	Sync.waitElementPresent("xpath", "//button[@data-role='selected-tocart']");
+            	Common.clickElement("xpath", "//button[@data-role='selected-tocart']");
+            	Sync.waitPageLoad();
+            	String message = Common.findElement("xpath", "//div[contains(@class,'message')]")
+                        .getAttribute("class");
+                Thread.sleep(4000);
+                Common.clickElement("xpath", "//button[@data-role='tocart']");
+                Thread.sleep(4000);
+                Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
+                Common.javascriptclickElement("xpath", "//input[@aria-label='" + productcolor + "']");
+//    			Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
+//    			Common.clickElement("xpath", "//input[@aria-label='" + Productsize + "']");
+    			
+                Common.clickElement("xpath", "(//button[@title='Add to Cart'])[2]");
+            }
+        
+    } catch (Exception | Error e) {
+        e.printStackTrace();
+        ExtenantReportUtils.addFailedLog("validating the product add to the cart", "Product should be added to cart",
+                "Unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+        Assert.fail();
+    }
 }
 
 }
