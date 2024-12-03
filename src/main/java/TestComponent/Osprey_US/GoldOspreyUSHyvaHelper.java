@@ -11113,10 +11113,12 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			if (payment > 0) {
 				Thread.sleep(2000);
 	
-				Sync.waitElementPresent(30, "xpath", "//iframe[contains(@name,'__privateStripeFrame')]");
-				Common.switchFrames("xpath", "//iframe[contains(@name,'__privateStripeFrame')]");
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				System.out.println("Switch to Frames");
-				Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Common.scrollIntoView("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Common.clickElement("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Thread.sleep(5000);
 
 
 				Common.switchToDefault();
@@ -11127,7 +11129,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 					{
 						 Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
 	                	 Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-	                	 
+	                	 Thread.sleep(4000);
 	                	 Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
 	     				 Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 	     				Thread.sleep(10000);
@@ -11189,8 +11191,8 @@ public void After_Pay_payment(String dataSet) throws Exception {
 				else
 				{
 					Thread.sleep(4000);
-					Common.switchFrames("xpath", "//iframe[contains(@name,'__privateStripeFrame')]");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']").getAttribute("data-testid");
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String klarna=Common.findElement("xpath", "//button[@id='klarna-tab']").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
 							klarna.contains("klarna"),
@@ -11205,8 +11207,14 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			}
 			else
 			{
-				Sync.waitElementPresent(30, "xpath", "//iframe[contains(@name,'__privateStripeFrame')]");
-				Common.switchFrames("xpath", "//iframe[contains(@name,'__privateStripeFrame')]");
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//span[text()='Klarna']");
 				Common.switchToDefault();
 				
@@ -11215,13 +11223,13 @@ public void After_Pay_payment(String dataSet) throws Exception {
 					Thread.sleep(5000);
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(8000);
 				klarna_Details(dataSet);
 				}
 				else
 				{
 					Thread.sleep(4000);
-					Common.switchFrames("xpath", "///iframe[contains(@name,'__privateStripeFrame')]");
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
@@ -11233,9 +11241,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 					
 				}
 			}
-			
-			
-			
+		
 		
 	}
 		catch(Exception | Error e)
@@ -15746,13 +15752,13 @@ public void Prouser_Discount() {
 	String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "");
 	Float pricevalue = Float.parseFloat(Newprice);
 	Thread.sleep(4000);
-	float discount = originalvalue - (originalvalue * 50 / 100);
+	float discount = originalvalue - (originalvalue * 40 / 100);
 	String discountvalue = String.valueOf(discount).replace("$", "");
 	Float value = Float.parseFloat(discountvalue);
 	String s=String.valueOf(value); 
-	System.out.println(discountvalue);
-	System.out.println(value);
-	Common.assertionCheckwithReport(discountvalue.contains(s),
+	System.out.println(s);
+	System.out.println(Newprice);
+	Common.assertionCheckwithReport(Newprice.contains(s),
 			"verifying the discount for the Pro user discount ",
 			"user should able to see the discount for the Pro user",
 			"user successfully able to apply the discount", "Failed to apply the discount for the pro user");
