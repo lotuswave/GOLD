@@ -21,7 +21,7 @@ public class TEST_DGLD_OS_US_125_Pro_user_Mutilple_products_with_storecredit_gif
 			  Osprey_ReEu.verifingHomePage();
 		        Osprey_ReEu.click_singinButton();
 		        Osprey_ReEu.Login_Account("prouser");
-		        String Price= Osprey_ReEu.Store_Credit_balance();
+//		        String Price= Osprey_ReEu.Store_Credit_balance();
 		        Osprey_ReEu.search_product("Product");
 		        Osprey_ReEu.addtocart("Product");
 		        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
@@ -31,8 +31,8 @@ public class TEST_DGLD_OS_US_125_Pro_user_Mutilple_products_with_storecredit_gif
 		        Osprey_ReEu.selectshippingmethod("ProShippingMethod");                       
 		        Osprey_ReEu.clickSubmitbutton_Shippingpage();
 		        Osprey_ReEu.discountCode("Discount");
-//		        Osprey_ReEu.Gift_card("Partial Giftcard");
-		        Osprey_ReEu.Apply_Store_Credit(Price);
+		        Osprey_ReEu.Gift_card("Giftcard");
+//		        Osprey_ReEu.Apply_Store_Credit(Price);
 		        Osprey_ReEu.giftCardSubmitOrder();
         
 		} catch (Exception e) {
