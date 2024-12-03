@@ -3047,8 +3047,8 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 			System.out.println(size);
 			if (size > 0  ) {
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//span[text()='"+ method +"']");
-				Common.clickElement("xpath", "//span[text()='"+ method +"']");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ method +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
 			}
 			else
 			{
