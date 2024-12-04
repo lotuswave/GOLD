@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_036_Register_User_Back_In_stock_Subcription {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

@@ -6917,8 +6917,8 @@ public void minicart_validation(String Dataset) {
 //				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				Thread.sleep(4000);
 				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent("xpath" , "(//button[@title='Notify Me When Available']//span)[3]");
-				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[3]");
+				Sync.waitElementPresent("xpath" , "(//button[@title='Notify Me When Available']//span)[2]");
+				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[2]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
