@@ -13096,11 +13096,11 @@ public void Verify_Prouser_Shipping_lessthan100() {
 	
 	try {
 
-		String shipping= Common.findElement("xpath", "//span[@class='shipping-method__radio']").getText();
+		String shipping= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[1]").getText();
 		System.out.println(shipping);
-		String method= Common.findElement("xpath", "//td[@id='label_method_amstrates16_amstrates-label_carrier_amstrates16_amstrates']").getText();
+		String method= Common.findElement("xpath", "//span[text()='Standard']").getText();
 		System.out.println(method);   	
-		String Price = Common.findElement("xpath", "//td[@data-th='Order Total']").getText().replace("$", "");
+		String Price = Common.findElement("xpath", "(//span[contains(@class,'value text-right text-sale-font')])[1]").getText().replace("$", "");
 		
 		double totalPrice = Double.parseDouble(Price);
 		System.out.println(totalPrice);
