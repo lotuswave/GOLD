@@ -41,7 +41,7 @@ public class Test_DGLD_OS_005_PlaceOrder_ValidateShipping_Methods_For_NonPro_Emp
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
