@@ -13137,15 +13137,15 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 
 	try {
 		Thread.sleep(3000);
-		int size = Common.findElements("xpath", "//label[@class='a-radio-button__label']").size();
+		int size = Common.findElements("xpath", "//div[@id='shipping-methods']").size();
 		System.out.println(size);
 		if (size > 0) {
 			// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 			// "')]");
-			String method1=Common.findElement("xpath", "//td[@id='label_method_amstrates1_amstrates-label_carrier_amstrates1_amstrates']").getText();
-			String shipping1= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[1]").getText();
-			String method2=Common.findElement("xpath", "//td[@id='label_method_amstrates4_amstrates-label_carrier_amstrates4_amstrates']").getText();
-			String shipping2= Common.findElement("xpath", "(//span[@class='shipping-method__radio'])[2]").getText();
+			String method1=Common.findElement("xpath", "//span[text()='Standard']").getText();
+			String shipping1= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[1]").getText();
+			String method2=Common.findElement("xpath", "//span[text()='Expedited']").getText();
+			String shipping2= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[2]").getText();
 			
 			Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Standard")&&shipping2.equals("$50.00")&&method2.contains("Expedited"),
 					"validating the standard shipping method",
