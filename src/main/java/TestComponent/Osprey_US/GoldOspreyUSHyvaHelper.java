@@ -8314,8 +8314,11 @@ public void Continue_Shopping() {
 //				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				Common.actionsKeyPress(Keys.END);
+				Sync.waitElementPresent("xpath",
+						"(//button[@title='Notify Me When Available']//span)[2]");
 				Common.clickElement("xpath",
-						"(//button[@title='Notify Me When Available']//span)[3]");
+						"(//button[@title='Notify Me When Available']//span)[2]");
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
