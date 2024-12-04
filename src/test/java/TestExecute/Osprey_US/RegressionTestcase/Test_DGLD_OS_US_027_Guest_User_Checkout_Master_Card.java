@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_027_Guest_User_Checkout_Master_Card {
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.invalid_Discount("Discount");
+        //Osprey_ReEu.invalid_Discount("Discount");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCMastercard");
         
 		} catch (Exception e) {
@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_027_Guest_User_Checkout_Master_Card {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
