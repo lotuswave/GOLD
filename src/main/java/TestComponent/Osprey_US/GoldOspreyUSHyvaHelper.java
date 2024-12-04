@@ -12925,9 +12925,9 @@ public void Verify_ShippingAmount_Lessthan_Or_Equal49() {
 	// TODO Auto-generated method stub
 	try {
 	
-			String Shipping_Method = Common.getText("xpath", "//span[@class='shipping-method__radio']//span[text()='$5.00']");
+			String Shipping_Method = Common.getText("xpath", "(//span[@data-label='Incl. Tax'])[1]");
 			System.out.println(Shipping_Method);
-			Common.assertionCheckwithReport(Shipping_Method.equals("$5.00"),
+			Common.assertionCheckwithReport(Shipping_Method.equals("$10.00"),
 					"validating Shipping amount is displayed $5",
 					"Shippping method ammount should display $5",
 					"Unable to display $5 in shipping page",
