@@ -11455,7 +11455,7 @@ public void outofstock_subcription(String Dataset) {
 			} else {
 				Sync.waitElementPresent("id", "discount-code");
 
-				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
+				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("ProdDiscountcode"));
 			}
 
 			int size = Common.findElements("id", "discount-code").size();
