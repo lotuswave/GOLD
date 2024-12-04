@@ -12950,7 +12950,7 @@ public void Verify_ShippingAmount_Greater_than49() {
 	// TODO Auto-generated method stub
 	try {
 		
-		String Shipping_Method = Common.getText("xpath", "//span[@class='shipping-method__radio']//span[text()='$0.00']");
+		String Shipping_Method = Common.getText("xpath", "(//span[@data-label='Incl. Tax'])[1]");
 		System.out.println(Shipping_Method);
 		Common.assertionCheckwithReport(Shipping_Method.equals("$0.00"),
 				"validating Shipping amount is displayed $0",
