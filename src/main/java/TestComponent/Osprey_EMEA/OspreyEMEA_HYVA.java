@@ -8073,11 +8073,11 @@ return Number;
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 				Common.clickElement("xpath", "//button[@type='submit' and contains(@class,'btn btn')]");
-				Sync.waitPageLoad(40);
-				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-				String message1 = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getAttribute("class");
-				Common.assertionCheckwithReport(message.contains("You saved the account information.") || message1.contains("a-message"),
+				Sync.waitPageLoad();
+//				Thread.sleep(2000);
+				String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getAttribute("class");
+				Common.assertionCheckwithReport(message.contains("You saved the account information.") || message1.contains("success"),
 						"validating the edit account information",
 						"After clicking oon save changes sucess message should appear",
 						"Sucessfully save address suceess message should display",
