@@ -9923,10 +9923,16 @@ return Number;
 			String URL = Common.getCurrentURL();
 			System.out.println(URL);
 			if(URL.contains("stage")|| URL.contains("preprod")) {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		String GiftCrad= Common.findElementBy("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title");
+		if (GiftCrad=="Show items") {
+			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");	
+		}
+		else {
+			System.out.println();
+		}
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
