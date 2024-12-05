@@ -37,7 +37,7 @@ public class Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Ca
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
