@@ -10260,7 +10260,7 @@ return Number;
 		try {
 			String  GiftCard=data.get(dataSet).get("GiftCard2");
 			Thread.sleep(6000);
-			String Total_Incl_Tax =Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text-right title-sm text-sale-font')]").replace(Symbl,"");
+			String Total_Incl_Tax =Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text-right text-sale-font')]").replace(Symbl,"");
 			
 			System.out.println("Total_Incl_Tax :"+Total_Incl_Tax);
 			Common.assertionCheckwithReport(Total_Incl_Tax.equals("0.00"),
