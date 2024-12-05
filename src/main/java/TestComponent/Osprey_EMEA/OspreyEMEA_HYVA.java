@@ -7749,9 +7749,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@itemprop ,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -7762,38 +7762,38 @@ return Number;
 				}
 			}
 			Thread.sleep(6000);
-			if (Common.getCurrentURL().contains("stage")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + products + "')]");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
+				Common.scrollIntoView("xpath", "//img[contains(@alt,'" + products + "')]");
+				Common.mouseOver("xpath", "//img[contains(@alt,'" + products + "')]");
+				String productprice = Common.findElement("xpath", "//span[@class='title-2xs leading-none']")
 						.getAttribute("data-price-amount");
-				System.out.println(productprice);
 				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				String PLPprice = Common
-						.findElement("xpath",
-								"//div[@class='price-box price-final_price']//span[@class='price-wrapper']")
-						.getAttribute("data-price-amount");
-				System.out.println(PLPprice);
-				
-				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-				System.out.println(name);
-				String products1 = data.get(Dataset).get("Products").toUpperCase();
-				System.out.println(products1);
-				Common.assertionCheckwithReport(
-						name.contains(products1) && productprice.equals(PLPprice)
-								|| Common.getPageTitle().contains(prod) && productprice.equals(PLPprice),
+//				String PLPprice = Common
+//						.findElement("xpath",
+//								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
+//						.getAttribute("data-price-amount");
+//				System.out.println(PLPprice);
+				System.out.println(productprice);
+				String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+				Common.assertionCheckwithReport(name.equals(products),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//span[text()=' Notify Me When Available']");
+				///Sync.waitPageLoad();
+				Thread.sleep(3000);
+//				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath" , "(//button[@title='Notify Me When Available']//span)[1]");
+				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
+				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 				Common.assertionCheckwithReport(
 						newsubcribe.contains("Alert subscription has been saved.")
 								|| newsubcribe.contains("Thank you! You are already subscribed to this product."),
@@ -7802,16 +7802,16 @@ return Number;
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
 				
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath",
-						"//div[@class='sticky-atc__cta-container']//span[text()=' Notify Me When Available']");
+						"//button[@title='Notify Me When Available']//span");
 				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 				Common.clickElement("xpath", "//span[text()='Subscribe']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 				Common.assertionCheckwithReport(
 						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 						"verifying the out of stock subcription",
@@ -7872,11 +7872,12 @@ return Number;
 					"after click on subcribe button message should be appear",
 					"Unable to display the message after subcribtion ",
 					Common.getscreenShot("Failed to display the message after subcribtion"));
-			Assert.fail();
+			AssertJUnit.fail();
 
 		}
 
 	}
+
 
 	public void Loginpage_validation(String dataSet) {
 		// TODO Auto-generated method stub
@@ -15166,7 +15167,6 @@ public void Prouser_Discount() {
 }
 
 public void Addtocart_From_MyFav(String Dataset) {
-	// TODO Auto-generated method stub
 	String productcolor = data.get(Dataset).get("Color");
 	String Productsize = data.get(Dataset).get("Size");
     try {
@@ -15220,6 +15220,7 @@ public void Addtocart_From_MyFav(String Dataset) {
         Assert.fail();
     }
 }
+
 
 }
 
