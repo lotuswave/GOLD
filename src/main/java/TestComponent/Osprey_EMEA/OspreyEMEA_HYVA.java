@@ -9827,13 +9827,13 @@ return Number;
 				System.out.println(data.get(dataSet).get("City"));
 
 					 Thread.sleep(4000);
-	                 Common.scrollIntoView("xpath", "//select[@name='region']");
-	                 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Common.scrollIntoView("xpath", "//input[@id='billing-region']");
+	                 Common.textBoxInput("xpath", "//input[@id='billing-region']", data.get(dataSet).get("Region"));
 	                 Thread.sleep(3000);
-	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region']")
+	                 String Shippingvalue = Common.findElement("xpath", "//input[@id='billing-region']")
 	                         .getAttribute("value");
-	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
-		              System.out.println(Shipping);
+//	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+//		              System.out.println(Shipping);
 	                 System.out.println(Shippingvalue);
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@name='postcode']",
@@ -11067,22 +11067,17 @@ catch(Exception | Error e)
 //			Thread.sleep(3000);
 //			select_Shipping_Method("GroundShipping method");
 			Thread.sleep(4000);
-			int rewards=Common.findElements("xpath", "//button[contains(text(),'Your Reward Points')]").size();
+			int rewards=Common.findElements("xpath", "//span[contains(text(),'Sign in')]").size();
 			System.out.println(rewards);
-			if(rewards==0)
+			if(rewards==1)
 			{
-				Common.scrollIntoView("name", "telephone");
 				Thread.sleep(5000);
+				Common.scrollIntoView("name", "telephone");
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Thread.sleep(4000);
 			}
 			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
-				
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//input[@id='agreement_5']");
-				Common.clickElement("xpath", "//input[@id='agreement_5']");
-				
-				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 				
