@@ -4574,9 +4574,12 @@ return Number;
   String category=data.get(Dataset).get("category");
 		try {
 
-			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
+			Sync.waitElementPresent("xpath", "//div[text()='Categories']");
+			Common.clickElement("xpath", "//div[text()='Categories']");
+			Thread.sleep(3000);
+			String text = Common.findElement("xpath", "//span[contains(text(),'"+ category + "')]//following-sibling::span").getText().replace("(", "").replace(")", "");
 			System.out.println(text);
-			Common.clickElement("xpath", "//span[text()='" + category + "']");
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
@@ -5051,14 +5054,17 @@ return Number;
 		// TODO Auto-generated method stub
 		String colorname = data.get(Dataset).get("Color");
 		try {
-
+      
+			
+			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
+			Common.clickElement("xpath", "//div[text()='Colour']");
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//span[text()='" + colorname + "']//following-sibling::span")
+					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
 			System.out.println(colorcount);
 	        int products=Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
@@ -5568,6 +5574,8 @@ return Number;
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
+			System.out.println(deleteproduct);
+			System.out.println(productname);
 			if (productname.equals(deleteproduct)) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
