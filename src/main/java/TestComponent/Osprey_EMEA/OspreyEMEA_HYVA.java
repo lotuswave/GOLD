@@ -13093,27 +13093,27 @@ public void warrenty_return() {
 	{
 		if(Common.getCurrentURL().contains("gb"))
 		{
-			Common.scrollIntoView("xpath", "(//div[contains(@class,'footer-grid-osprey-guarantee')]//a)[4]");
-			Common.clickElement("xpath", "(//div[contains(@class,'footer-grid-osprey-guarantee')]//a)[4]");
+		Common.scrollIntoView("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Pack Repair?']");
+		Common.clickElement("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Pack Repair?']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee/form"),
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee"),
 				"validating the page navigates to the mighty guarantee",
 				"After clicking on mighty guarantee from footer it should navigate to the mighty guarantee page",
 				"successfully navigated to the mighty guarantee page", "failed to Navigate to the mighty guarantee page");
-		Common.scrollIntoView("xpath", "(//div[@class='pagebuilder-button-primary'])[2]");
-		Common.clickElement("xpath", "(//div[@class='pagebuilder-button-primary'])[2]");
+		Common.scrollIntoView("xpath", "(//div[@class='pagebuilder-button-primary'])[1]");
+		Common.clickElement("xpath", "(//div[@class='pagebuilder-button-primary'])[1]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("all-mighty-guarantee/form"),
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("form"),
 				"validating the page navigates to the Return authorization form",
 				"After clicking on authorization from mighty gurantee it should navigate to the Return authorization form ",
 				"successfully navigated to the Return authorization form", "failed to Navigate to the Return authorization form");
 		}
 		else
 		{
-			Common.scrollIntoView("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
-			Common.clickElement("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
+			Common.scrollIntoView("xpath", "//ul[@class='m-footer-links__list']//a[text()='Need a Pack Repair?']");
+			Common.clickElement("xpath", "//ul[@class='m-footer-links__list']//a[text()='Need a Pack Repair?']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("return-authorization"),
@@ -13139,15 +13139,13 @@ public void Empty_Details_warrenty_return(String Dataset) {
 	// TODO Auto-generated method stub
 	String phonenumber=data.get(Dataset).get("Phone");
 	String zipcode=data.get(Dataset).get("Zipcode");
-	String country =data.get(Dataset).get("Country");
-	
+	String Country = "United Kingdom";
 	try
 	{
 		Common.findElement("xpath", "//select[@id='country_id']");
 		Common.clickElement("xpath", "//select[@id='country_id']");
-		Thread.sleep(2000);
-		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, country);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
+		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, Country);
 		Sync.waitElementPresent(30,"xpath", "//button[contains(@class,'action submit')]");
 		Common.scrollIntoView("xpath", "//button[contains(@class,'action submit')]");
 		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
@@ -13165,7 +13163,7 @@ public void Empty_Details_warrenty_return(String Dataset) {
 		Thread.sleep(5000);
 		String mobileerror=Common.findElement("xpath", "//ul[@class='messages']//li").getText();
 		String ziperror=Common.findElement("xpath", "//ul[@class='messages']//li").getText();
-		Common.assertionCheckwithReport(mobileerror.contains("Please enter a phone number that is 10 digits in length.") || ziperror.contains("Invalid postal code format for the selected country.") ||
+		Common.assertionCheckwithReport(mobileerror.contains("Please enter a phone number that is 10 digits in length.") && ziperror.contains("Provided Zip/Postal Code seems to be invalid") ||
 				mobileerror.contains("This is a required field."),
 				"validating the error message with Invalid fields ",
 				"After clicking hare button with invalid data error message should be display",
@@ -13183,7 +13181,6 @@ public void Empty_Details_warrenty_return(String Dataset) {
 		Assert.fail();
 	}
 }
-
 
 public void clickContact() throws Exception {
 	String expectedResult = "It should land successfully on the contact page";
@@ -13357,80 +13354,79 @@ public void contactUsPage(String dataSet) throws Exception {
 
 public void warrenty_Return_Form(String Dataset) {{
 	// TODO Auto-generated method stub
-	String phonenumber=data.get(Dataset).get("Phone");
-	String zipcode=data.get(Dataset).get("postcode");
-	String Address =data.get(Dataset).get("Street");
-	String City =data.get(Dataset).get("City");
-	String State =data.get(Dataset).get("Region");
-	String Packname =data.get(Dataset).get("PackageName");
-	String Color =data.get(Dataset).get("Color");
-	String Description =data.get(Dataset).get("description");
-	String issue=data.get(Dataset).get("issue");
-	String POnumber=data.get(Dataset).get("Ponumber");
-	String DOP=data.get(Dataset).get("Descriptions");
-	String Frame=data.get(Dataset).get("frame");
-	String YOP=data.get(Dataset).get("Yopurchase");
-	String country=data.get(Dataset).get("Country");
-	
-	try
-	{
+	String phonenumber = data.get(Dataset).get("Phone");
+	String zipcode = data.get(Dataset).get("postcode");
+	String Address = data.get(Dataset).get("Street");
+	String City = data.get(Dataset).get("City");
+	String State = data.get(Dataset).get("Region");
+	System.out.println(State);
+	String Packname = data.get(Dataset).get("PackageName");
+	String Color = data.get(Dataset).get("Color");
+	String Description = data.get(Dataset).get("description");
+	String issue = data.get(Dataset).get("issue");
+	String POnumber = data.get(Dataset).get("Ponumber");
+	String DOP = data.get(Dataset).get("Descriptions");
+	String Frame = data.get(Dataset).get("frame1");
+	String YOP = data.get(Dataset).get("Yopurchase");
+	String Country = "United Kingdom";
+	System.out.println(DOP);
+	System.out.println(YOP);
+	System.out.println(Frame);
+
+	try {
 		Common.findElement("xpath", "//select[@id='country_id']");
 		Common.clickElement("xpath", "//select[@id='country_id']");
 		Thread.sleep(4000);
-		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, country);
-		Sync.waitElementPresent(30,"xpath", "//input[@id='telephone']");
+		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, Country);
+		Sync.waitElementPresent(30, "xpath", "//input[@id='telephone']");
 		Common.scrollIntoView("xpath", "//input[@id='telephone']");
 		Common.textBoxInput("xpath", "//input[@id='telephone']", phonenumber);
 		Common.textBoxInput("xpath", "//input[@id='address']", Address);
-		
-		
+
 		Common.textBoxInput("xpath", "//input[@id='city']", City);
-//		Common.("xpath", "//input[@name='region']", State);
 		Thread.sleep(4000);
 		Common.findElement("xpath", "//select[@name='region']");
-		Common.clickElement("xpath", "//select[@name='region']");
+//		Common.clickElement("xpath", "//input[@name='region']");
 		Thread.sleep(4000);
-//		Common.dropdown("xpath", "//input[@name='region']", SelectBy.TEXT, State);
 		Common.textBoxInput("xpath", "//input[@name='region']", State);
 		Common.textBoxInput("xpath", "//input[@id='postcode']", zipcode);
-		
+
 		Common.findElement("xpath", "//select[@id='frame_and_size']");
 		Common.clickElement("xpath", "//select[@id='frame_and_size']");
 		Thread.sleep(4000);
-		Common.dropdown("xpath", "//select[@id='frame_and_size']", SelectBy.TEXT, Frame);
+		Common.clickElement("xpath", "//select[@id='frame_and_size']//option[@value='XS - Men’s Extra Small']");
+//		Common.dropdown("xpath", "//select[@id='frame_size']", SelectBy.TEXT, Frame);
 		Common.textBoxInput("xpath", "//input[@id='approx_year_purchase']", YOP);
-		Common.textBoxInput("xpath", "//textarea[@id='description_part']", DOP);
-		
+
+		Sync.waitElementPresent(20, "xpath", "//input[@id='sentimental-unrepaired']");
+		Common.clickElement("xpath", "//input[@id='sentimental-unrepaired']");
+		Common.textBoxInput("xpath", "//textarea[@id='description']", DOP);
+
 		Common.textBoxInput("xpath", "//input[@id='pack_and_volume']", Packname);
 		Common.textBoxInput("xpath", "//input[@id='color_and_frame']", Color);
 		Common.textBoxInput("xpath", "//textarea[@id='description']", Description);
-		
-		Common.textBoxInput("xpath", "//input[@id='pr_po_number']",POnumber);
+
+		Common.textBoxInput("xpath", "//input[@id='pr_po_number']", POnumber);
 		Common.textBoxInput("xpath", "//textarea[@id='location_function_part']", issue);
-		
+
 		Thread.sleep(4000);
-		
-		String path = System.getProperty("user.dir")
-				+ ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\Guarantee.png");
+
+		String path = System.getProperty("user.dir") + ("\\src\\test\\resources\\TestData\\Osprey_EMEA\\Guarantee.png");
 		Sync.waitElementPresent(40, "xpath", "//input[@id='photoOne']");
 		Common.findElement("xpath", "//input[@id='photoOne']").sendKeys(path);
 
 		Common.clickElement("xpath", "//input[@id='gdpr_confirm']");
 		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
-		
+
 		Thread.sleep(4000);
-		String Successmsg =Common.findElement("xpath", "//section[contains(@class,'return-authorization-success')]//h2").getText();
-	System.out.println(Successmsg);
-		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Part Request."),
-				
+		String Successmsg = Common.findElement("xpath", "//section[contains(@class,'return-authorization-success')]//h2").getText();
+		System.out.println(Successmsg);
+		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting"),
 				"validating the waranty and return Success message",
 				"After clicking Submit button waranty and return Success message should be display",
 				"successfully  message has been dispalyed ", "failed to display the Successfull message");
-		
-		
-		}
-	catch(Exception | Error e)
-	{
+
+	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the waranty and return Success message ",
 				"After clicking Submit button waranty and return Success message should be display",
@@ -13438,7 +13434,8 @@ public void warrenty_Return_Form(String Dataset) {{
 				Common.getscreenShot("Failed to display the Successful message"));
 		Assert.fail();
 	}
-}}
+}
+}
 
 
 public void click_Product_Registration() throws Exception {
