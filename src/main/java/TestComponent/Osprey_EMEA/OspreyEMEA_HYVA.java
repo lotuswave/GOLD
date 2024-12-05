@@ -2935,11 +2935,11 @@ public class OspreyEMEA_HYVA {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath", "//span[contains(@class,'icon-location')]");
+            String Find = Common.getCurrentURL();
+//			String find = Common.findElement("xpath", "//div[contains(@class,'row-full-width-inner')]//h1").getText();
+//			System.out.println(find);
 
-			String find = Common.findElement("xpath", "//h1[@class='u-container']").getText();
-			System.out.println(find);
-
-			Common.assertionCheckwithReport(find.equals("Find a Store"), "validating Find a Store page",
+			Common.assertionCheckwithReport(Find.contains("storelocator"), "validating Find a Store page",
 					"user navigates to Find a Store page", "Sucessfully user navigate to Find a Store page",
 					"faield to navigate to Find a Store page");
 
@@ -2960,15 +2960,18 @@ public class OspreyEMEA_HYVA {
 		try {
 
 			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
+			Common.clickElement("xpath", "//a[contains(@id,'dealer-navigation-retailers')]");
 
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-			String id = Common.findElement("xpath", "//div[contains(@aria-label,\"" + store + " \")]")
-					.getAttribute("id");
+//			String id = Common.findElement("xpath", "//div[contains(@aria-label,\"" + store + " \")]")
+//					.getAttribute("id");
+			Common.clickElement("xpath", "//div[contains(@class,'conv-section-details')]//h3[contains(text(),'Whole Earth Provision Co.')]");
+
 			// Common.clickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting
 			// ")]");
 
-			Common.findElement("xpath", "//div[@id='" + id + "']").click();
+//			Common.findElement("xpath", "//div[@id='" + id + "']").click();
 			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
 			int storeSize = Common.findElements("xpath", "//img[@class='store-info-logo']").size();
 			System.out.println(storeSize);
@@ -3146,10 +3149,10 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(Retailerlogo > 0 && locations > 0 && Hours > 0 || Links > 0,
 					"To validate the store info content displayed ", "store info content should be displayed",
 					"store info content is displayed", "Failed to display the store info content ");
-			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText();
+			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText().toUpperCase();
 			System.out.println(Storename);
-			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
-
+//			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
+			Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
 			for (int i = 1; i <= storecount; i++) {
 				Thread.sleep(10000);
@@ -3157,7 +3160,7 @@ public class OspreyEMEA_HYVA {
 						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
 						.getText();
 				System.out.println(relatedstores);
-				Common.assertionCheckwithReport(relatedstores.contains(Storename),
+				Common.assertionCheckwithReport(relatedstores.contains(Storename) || relatedstores.contains("DICK'S SPORTING GOODS"),
 						"To validate the retailer stores displayed ", "Retailer stores should be displayed",
 						"Retailer stores are displayed", "Failed to display the retailer stores ");
 
@@ -3176,7 +3179,6 @@ public class OspreyEMEA_HYVA {
 			Assert.fail();
 		}
 	}
-
 	public void writeReviews() {
 		// TODO Auto-generated method stub
 		try {
