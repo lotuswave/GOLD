@@ -1916,7 +1916,7 @@ public class OspreyEMEA_HYVA {
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Thread.sleep(2000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
@@ -4574,9 +4574,12 @@ return Number;
   String category=data.get(Dataset).get("category");
 		try {
 
-			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
+			Sync.waitElementPresent("xpath", "//div[text()='Categories']");
+			Common.clickElement("xpath", "//div[text()='Categories']");
+			Thread.sleep(3000);
+			String text = Common.findElement("xpath", "//span[contains(text(),'"+ category + "')]//following-sibling::span").getText().replace("(", "").replace(")", "");
 			System.out.println(text);
-			Common.clickElement("xpath", "//span[text()='" + category + "']");
+			Common.clickElement("xpath", "//span[contains(text(),'" + category + "')]");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
@@ -5051,14 +5054,17 @@ return Number;
 		// TODO Auto-generated method stub
 		String colorname = data.get(Dataset).get("Color");
 		try {
-
+      
+			
+			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
+			Common.clickElement("xpath", "//div[text()='Colour']");
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//span[text()='" + colorname + "']//following-sibling::span")
+					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
 			System.out.println(colorcount);
 	        int products=Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
@@ -5568,6 +5574,8 @@ return Number;
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
+			System.out.println(deleteproduct);
+			System.out.println(productname);
 			if (productname.equals(deleteproduct)) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
@@ -9819,13 +9827,13 @@ return Number;
 				System.out.println(data.get(dataSet).get("City"));
 
 					 Thread.sleep(4000);
-	                 Common.scrollIntoView("xpath", "//select[@name='region']");
-	                 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Common.scrollIntoView("xpath", "//input[@id='billing-region']");
+	                 Common.textBoxInput("xpath", "//input[@id='billing-region']", data.get(dataSet).get("Region"));
 	                 Thread.sleep(3000);
-	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region']")
+	                 String Shippingvalue = Common.findElement("xpath", "//input[@id='billing-region']")
 	                         .getAttribute("value");
-	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
-		              System.out.println(Shipping);
+//	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+//		              System.out.println(Shipping);
 	                 System.out.println(Shippingvalue);
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//input[@name='postcode']",
@@ -11059,22 +11067,17 @@ catch(Exception | Error e)
 //			Thread.sleep(3000);
 //			select_Shipping_Method("GroundShipping method");
 			Thread.sleep(4000);
-			int rewards=Common.findElements("xpath", "//button[contains(text(),'Your Reward Points')]").size();
+			int rewards=Common.findElements("xpath", "//span[contains(text(),'Sign in')]").size();
 			System.out.println(rewards);
-			if(rewards==0)
+			if(rewards==1)
 			{
-				Common.scrollIntoView("name", "telephone");
 				Thread.sleep(5000);
+				Common.scrollIntoView("name", "telephone");
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Thread.sleep(4000);
 			}
 			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
-				
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//input[@id='agreement_5']");
-				Common.clickElement("xpath", "//input[@id='agreement_5']");
-				
-				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 				
