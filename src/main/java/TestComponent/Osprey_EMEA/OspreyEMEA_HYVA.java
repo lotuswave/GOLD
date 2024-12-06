@@ -2069,9 +2069,9 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Common.scrollIntoView("xpath", "//span[contains(@class,'pdp-grid-title')]");
-			Sync.waitElementVisible(30, "xpath", "//span[contains(@class,'pdp-grid-title')]");
-			String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+			Common.scrollIntoView("xpath", "//span[contains(@class,'text-4xl hidden ox:lg')]");
+			Sync.waitElementVisible(30, "xpath", "//span[contains(@class,'text-4xl hidden ox:lg')]");
+			String name = Common.findElement("xpath", "//span[contains(@class,'text-4xl hidden ox:lg')]").getText();
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
@@ -3703,6 +3703,7 @@ public class OspreyEMEA_HYVA {
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		String code="";
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
@@ -3718,12 +3719,17 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
-			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//input[contains(@id,'postcode')]");
-			Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
-			String code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
-			System.out.println(code);
+			int shipping=Common.findElements("xpath", "//div[@class='item shipping']//span[contains(@class,'hidden lg:')]").size();
+			if(shipping > 0)
+			{
+				Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//input[contains(@id,'postcode')]");
+				Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
+				 code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
+				System.out.println(code);
+			}
+			
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -13256,12 +13262,12 @@ public void contactUsPage(String dataSet) throws Exception {
 //		Sync.waitElementPresent("xpath", "//input[@name='conversationCompany']");
 //		Common.textBoxInput("xpath", "//input[@name='conversationCompany']", data.get(dataSet).get("Company"));
 
-		Sync.waitElementPresent("xpath", "//input[@name='conversationPhoneForForms']");
-		Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+//		Sync.waitElementPresent("xpath", "//input[@name='conversationPhoneForForms']");
+//		Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 		
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//div[@id='conversationCountryForForms']");
-		Common.clickElement("xpath", "//div[@id='conversationCountryForForms']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationCountryCodeFor']");
+		Common.clickElement("xpath", "//div[@id='conversationCountryCodeFor']");
 		Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
 		Common.clickElement("xpath", "//div[text()='" + country + "']");
 		
