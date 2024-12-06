@@ -2069,9 +2069,10 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Common.scrollIntoView("xpath", "//span[contains(@class,'text-4xl hidden ox:lg')]");
-			Sync.waitElementVisible(30, "xpath", "//span[contains(@class,'text-4xl hidden ox:lg')]");
-			String name = Common.findElement("xpath", "//span[contains(@class,'text-4xl hidden ox:lg')]").getText();
+			Common.scrollIntoView("xpath", "//h1[contains(@class,'pdp-grid-title')]");
+//			Sync.waitElementVisible(30, "xpath", "//h1[contains(@class,'pdp-grid-title')]");
+			String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title')]").getText().trim();
+			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
@@ -9103,7 +9104,7 @@ return Number;
 					.replace("£", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
-			Float Total = subtotalvalue+Discountvalue;
+			Float Total = subtotalvalue+shippingvalue+Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
