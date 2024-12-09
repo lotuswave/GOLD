@@ -4271,8 +4271,8 @@ public void Validate_retailerlocations() {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 					Thread.sleep(8000);
 					if (Common.getCurrentURL().contains("/checkout")) {
 						Sync.waitPageLoad();
