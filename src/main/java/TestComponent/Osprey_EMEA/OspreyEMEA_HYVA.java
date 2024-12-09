@@ -11826,7 +11826,7 @@ catch(Exception | Error e)
 			Common.scrollIntoView("xpath", "//a[text()='Osprey Pro']");
 			Sync.waitElementPresent("xpath", "//a[text()='Osprey Pro']");
 			Common.clickElement("xpath", "//a[text()='Osprey Pro']");
-			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
+			Sync.waitElementVisible("xpath", "//h1[contains(@class,'page-title-wrapper')]");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
 					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
 					"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
@@ -11836,7 +11836,7 @@ catch(Exception | Error e)
 				Common.scrollIntoView("xpath", "//a[text()='Pro Sales']");
 				Sync.waitElementPresent("xpath", "//a[text()='Pro Sales']");
 				Common.clickElement("xpath", "//a[text()='Pro Sales']");
-				Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
+				Sync.waitElementVisible("xpath", "//h1[contains(@class,'page-title-wrapper')]");
 				Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
 						"To validate the Pro Deal", "Should be display the Pro Deal Application ",
 						"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
@@ -11855,7 +11855,7 @@ catch(Exception | Error e)
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or Apply']");
+			Common.clickElement("xpath", "//a[@title='Sign in or register']");
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitPageLoad();
@@ -11864,9 +11864,9 @@ catch(Exception | Error e)
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application")||Common.getCurrentURL().contains("prodeal/application"),
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
 					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
@@ -11915,8 +11915,9 @@ catch(Exception | Error e)
 
 			Sync.waitElementPresent("id", "group_id");
 			Common.clickElement("xpath", "//select[@id='group_id']");
-			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("GropName"));
-
+//			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("Group Name"));
+			
+			Common.clickElement("xpath", "//option[@name='Services']");
 			Sync.waitElementPresent("id", "comment");
 			Common.textBoxInput("id", "comment", data.get(dataSet).get("Comments"));
 
@@ -11942,6 +11943,8 @@ catch(Exception | Error e)
 
 		}
 	}
+
+
 	public void access_for_prodeal(String Dataset) {
 		// TODO Auto-generated method stub
 		click_Prodeal();
