@@ -4677,7 +4677,7 @@ return Number;
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(40, "xpath", "//span[@class='title-lg']");
-			String Ordernumber = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			String Ordernumber = Common.findElement("xpath", "//span[@class='title-xs md:title-lg'])").getText();
 			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
 			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
@@ -5679,9 +5679,9 @@ return Number;
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			String orderid = Common.findElement("xpath", "//span[@class='title-xs md:title-lg']) ").getText();
 			System.out.println(orderid);
-			String ID=Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("Order #", "");
+			String ID=Common.findElement("xpath", "//span[@class='title-xs md:title-lg']) ").getText().replace("Order #", "");
 			System.out.println(ID);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
 					
@@ -12070,8 +12070,8 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			
 			
-			Sync.waitElementPresent(40, "xpath", "//button[@aria-label='Play video']");
-			Common.clickElement("xpath", "//button[@aria-label='Play video']");
+			Sync.waitElementPresent(40, "xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
+			Common.clickElement("xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
 			Thread.sleep(2000);
 			Sync.waitForLoad();
 			String video = Common.findElement("xpath", "//button[@aria-label='Pause video']")
@@ -13433,8 +13433,8 @@ public void warrenty_return() {
 		}
 		else
 		{
-			Common.scrollIntoView("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
-			Common.clickElement("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
+			Common.scrollIntoView("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
+			Common.clickElement("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
 			String Url=Common.getCurrentURL();
 			System.out.println(Url);
 			Common.scrollIntoView("xpath", "(//div[@class='pagebuilder-button-primary'])[2]");
@@ -16061,9 +16061,9 @@ public void warrenty_return_Authorization() {
 	try {
 
 		Common.scrollIntoView("xpath",
-				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
+				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
 		Common.clickElement("xpath",
-				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacements?']");
+				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
 		String Url = Common.getCurrentURL();
 		System.out.println(Url);
 		Common.scrollIntoView("xpath", "//div[@class='pagebuilder-button-primary']");
@@ -16153,9 +16153,9 @@ public void warrent_Return_Auth_Form(String Dataset) {
 		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
 
 		Thread.sleep(4000);
-		String Successmsg = Common.findElement("xpath", "//div[@class='return-authorization-success']//h2").getText();
+		String Successmsg = Common.findElement("xpath", "//section[contains(@class,'return-authorization-success')]").getText();
 		System.out.println(Successmsg);
-		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Parts Request."),
+		Common.assertionCheckwithReport(Successmsg.contains("Thanks for submitting your Repair Request."),
 				"validating the waranty and return Success message",
 				"After clicking Submit button waranty and return Success message should be display",
 				"successfully  message has been dispalyed ", "failed to display the Successfull message");
