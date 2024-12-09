@@ -6473,7 +6473,7 @@ return Number;
 //						.getAttribute("data-price-amount");
 //				System.out.println(PLPprice);
 				System.out.println(productprice);
-				String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+				String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title')]").getText();
 				Common.assertionCheckwithReport(name.equals(products),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
@@ -7793,7 +7793,7 @@ return Number;
 //						.getAttribute("data-price-amount");
 //				System.out.println(PLPprice);
 				System.out.println(productprice);
-				String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+				String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title')]").getText();
 				Common.assertionCheckwithReport(name.equals(products),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
