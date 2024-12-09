@@ -11098,6 +11098,9 @@ catch(Exception | Error e)
 			}
 			
 			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
+				Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[1]");
+				Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[1]");
+				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 				
