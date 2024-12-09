@@ -6049,7 +6049,7 @@ return Number;
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
 			Common.clickElement("xpath", "//button[@title='Save Address']");
-			Thread.sleep(5000);
+//			Thread.sleep(5000);
 			String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You saved the address."),
