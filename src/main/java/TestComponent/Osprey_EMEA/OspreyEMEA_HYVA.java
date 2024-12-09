@@ -9937,13 +9937,16 @@ return Number;
 			Thread.sleep(5000);
 			
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		String GiftCrad= Common.findElementBy("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title");
-		if (GiftCrad=="Show items") {
+		Thread.sleep(4000);
+		String GiftCrad= Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title");
+		System.out.println(GiftCrad);
+		if (GiftCrad.equals("Show items")) {
 			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");	
 		}
 		else {
 			System.out.println();
 		}
+		
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
