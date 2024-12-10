@@ -3196,7 +3196,7 @@ public void header_Shopbycollection(String Dataset) { {
 
 
 
-public void click_Retailer() {
+	public void click_Retailer() {
 		// TODO Auto-generated method stub
 		String store = "Whole Earth Provision Co.";
 
@@ -3321,32 +3321,31 @@ public void Validate_store_sidebar() {
 	}
 
 
-	public void CLick_Usemylocation() {
-		// TODO Auto-generated method stub
-		try {
-			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
-			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
-			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
-			Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
-//			Common.scrollIntoView("id", "current-location-indicator");
-			int currentlocation = Common.findElements("id", "current-location-indicator").size();
+public void CLick_Usemylocation() {
+	try {
+		Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
+		Thread.sleep(4000);
+		Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
+//		Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
+		Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
+		Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
+		int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
+		System.out.println(currentlocation);
+		String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
+		Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
+				"validating current location ", "Should visible retailers in the current location",
+				"Current location Displayed", "Failed to display the current location");
 
-			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
-			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
-					"validating current location ", "Should visible retailers in the current location",
-					"Current location Displayed", "Failed to display the current location");
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating Users based on Current Location",
-					"To display the retailers for the current location",
-					"Failed to display retailers for the current location",
-					Common.getscreenShotPathforReport("faield to display the retailers for current location"));
-			Assert.fail();
-		}
-
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating Users based on Current Location",
+				"To display the retailers for the current location",
+				"Failed to display retailers for the current location",
+				Common.getscreenShotPathforReport("faield to display the retailers for current location"));
+		Assert.fail();
 	}
+
+}
 
 
 public void Validate_AvailableRetailers() {
@@ -3387,47 +3386,47 @@ public void Validate_AvailableRetailers() {
 
 
 public void Validate_retailerlocations() {
-		// TODO Auto-generated method stub
-		try {
-			Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
-			Sync.waitElementVisible("xpath", "//div[@class='square-image-container']");
-			int Retailerlogo = Common.findElements("xpath", "//div[@class='square-image-container']").size();
-			int locations = Common.findElements("xpath", "//a[contains(@class,'tab-locations')]").size();
-			int Hours = Common.findElements("xpath", "//a[contains(@class,'tab-hours')]").size();
-			int Links = Common.findElements("xpath", "//a[contains(@class,'tab-links')]").size();
-			Common.assertionCheckwithReport(Retailerlogo > 0 && locations > 0 && Hours > 0 || Links > 0,
-					"To validate the store info content displayed ", "store info content should be displayed",
-					"store info content is displayed", "Failed to display the store info content ");
-			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText();
-			System.out.println(Storename);
-			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
+	try {
+		Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
+		Sync.waitElementVisible("xpath", "//div[@class='square-image-container']");
+		int Retailerlogo = Common.findElements("xpath", "//div[@class='square-image-container']").size();
+		int locations = Common.findElements("xpath", "//a[contains(@class,'tab-locations')]").size();
+		int Hours = Common.findElements("xpath", "//a[contains(@class,'tab-hours')]").size();
+		int Links = Common.findElements("xpath", "//a[contains(@class,'tab-links')]").size();
+		Common.assertionCheckwithReport(Retailerlogo > 0 && locations > 0 && Hours > 0 || Links > 0,
+				"To validate the store info content displayed ", "store info content should be displayed",
+				"store info content is displayed", "Failed to display the store info content ");
+		String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText().toUpperCase();
+		System.out.println(Storename);
+		Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
-			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
-			for (int i = 1; i <= storecount; i++) {
-				Thread.sleep(10000);
-				String relatedstores = Common
-						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
-						.getText();
-				System.out.println(relatedstores);
-				Common.assertionCheckwithReport(relatedstores.contains(Storename),
-						"To validate the retailer stores displayed ", "Retailer stores should be displayed",
-						"Retailer stores are displayed", "Failed to display the retailer stores ");
+		int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]//h3").size();
+		for (int i = 1; i <= storecount; i++) {
+			Thread.sleep(3000);
+			String relatedstores = Common
+					.findElement("xpath", "(//a[contains(@class,'conv-section-store')]//h3)[" + i + "]")
+					.getText();
+			System.out.println(relatedstores);
+			Common.assertionCheckwithReport(relatedstores.contains(Storename),
+					"To validate the retailer stores displayed ", "Retailer stores should be displayed",
+					"Retailer stores are displayed", "Failed to display the retailer stores ");
 
-			}
-			Thread.sleep(2000);
-			Common.clickElement("xpath", "//a[@class='nav-bar-back']");
-			Click_Direction();
-			Thread.sleep(2000);
-			writeReviews();
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating available retailer store locations",
-					"retailers store locations should be visible", "Failed to display retailers store locations",
-					Common.getscreenShotPathforReport("faield to display retailer store locations"));
-			Assert.fail();
 		}
+		Thread.sleep(2000);
+		Common.clickElement("xpath", "//a[@class='nav-bar-back']");
+		Click_Direction();
+		Thread.sleep(2000);
+		writeReviews();
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating available retailer store locations",
+				"retailers store locations should be visible", "Failed to display retailers store locations",
+				Common.getscreenShotPathforReport("faield to display retailer store locations"));
+		Assert.fail();
 	}
+
+}
 
 	public void writeReviews() {
 		// TODO Auto-generated method stub
