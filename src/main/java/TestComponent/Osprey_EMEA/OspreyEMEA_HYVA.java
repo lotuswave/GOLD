@@ -8624,8 +8624,9 @@ return Number;
 		// TODO Auto-generated method stub
 
 		String products = data.get(Dataset).get("Products");
-		String prodproduct = data.get(Dataset).get("Prod Product");
 		System.out.println(products);
+		String ProdProducts=data.get(Dataset).get("Prod Products");
+		System.out.println(ProdProducts);
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -8644,18 +8645,18 @@ return Number;
 			Sync.waitPageLoad(30);
 			
 			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("preprod")) {
-				
-				
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Thread.sleep(4000);
+			}
+			else
+			{
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + ProdProducts + "']");
+				Common.clickElement("xpath", "//img[@alt='" + ProdProducts + "']");
 				Thread.sleep(4000);
-				}
-				else {
-					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
-					Common.clickElement("xpath", "//img[@alt='" + prodproduct + "']");
-					Thread.sleep(6000);
-				}
+			}
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();

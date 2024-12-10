@@ -15,14 +15,14 @@ public class Test_DGLD_OS_COMMON_045_Minicart_Validation {
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Minicart");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_the_Minicart_Validation () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");      
-        Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
         Osprey_ReEu.simple_addtocart("Simple product");
+        Osprey_ReEu.search_product("Product");      
+        Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.clickontheproduct_and_image("Product");
         Osprey_ReEu.minicart_freeshipping();
         Osprey_ReEu.minicart_delete("Product");
