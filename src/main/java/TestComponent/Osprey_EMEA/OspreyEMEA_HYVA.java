@@ -8705,8 +8705,8 @@ return Number;
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
 			//Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
-			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
-			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
+			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
+			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
 			Thread.sleep(4000);
 			//String product = data.get(Dataset).get("Products").toUpperCase();
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
@@ -8787,8 +8787,8 @@ return Number;
 			Thread.sleep(6000);
 //			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
 //			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
-			Sync.waitElementVisible(30, "xpath", "//span[contains(@class, 'pdp-grid-title')]");
-			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title')]").getText();
+			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
+			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
 
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
