@@ -6431,19 +6431,22 @@ catch(Exception | Error e)
 
 	public void click_Retailer() {
 		// TODO Auto-generated method stub
-
 		String store = "Whole Earth Provision Co.";
 
 		try {
 
 			Common.switchFrames("xpath", "//iframe[@id='lcly-embedded-iframe-inner-0']");
 			Common.clickElement("xpath", "//a[contains(@id,'dealer-navigation-retailers')]");
+
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-//			String id = Common.findElement("xpath", "//div[contains(@aria-label,'" + store + "')]")
-//					.getAttribute("id");
-//            Common.clickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting ")]");
-			Common.clickElement("xpath", "//div[contains(@class,'conv-section-main-info')]//h3[contains(text(),'Whole Earth Provision Co.')]");
+//			String id = Common.findElement("xpath", "//h3[contains(text(),'" + store + "')]")
+//					.getText();
+			Common.clickElement("xpath", "//div[contains(@class,'conv-section-details')]//h3[contains(text(),'Whole Earth Provision Co.')]");
+//			 	.getText();
+//			System.out.println(id);
+//			 Common.clickElement("xpath", "//div[contains(@aria-label,'DICK'S Sporting')]");
+
 //			Common.findElement("xpath", "//div[@id='" + id + "']").click();
 			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
 			int storeSize = Common.findElements("xpath", "//img[@class='store-info-logo']").size();
@@ -6459,6 +6462,7 @@ catch(Exception | Error e)
 					Common.getscreenShotPathforReport("faield to get back to Retailers page"));
 			Assert.fail();
 		}
+
 	}
 
 	public void Validate_store_sidebar() {
@@ -6497,11 +6501,11 @@ catch(Exception | Error e)
 			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
 			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
-			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
+//			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
 			Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
-			Common.scrollIntoView("id", "current-location-indicator");
-			int currentlocation = Common.findElements("id", "current-location-indicator").size();
-
+			Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
+			int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
+			System.out.println(currentlocation);
 			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
 			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
 					"validating current location ", "Should visible retailers in the current location",
@@ -6568,11 +6572,11 @@ catch(Exception | Error e)
 			System.out.println(Storename);
 			Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
-			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
+			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]//h3").size();
 			for (int i = 1; i <= storecount; i++) {
 				Thread.sleep(3000);
 				String relatedstores = Common
-						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
+						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]//h3)[" + i + "]")
 						.getText();
 				System.out.println(relatedstores);
 				Common.assertionCheckwithReport(relatedstores.contains(Storename),
@@ -6593,6 +6597,7 @@ catch(Exception | Error e)
 					Common.getscreenShotPathforReport("faield to display retailer store locations"));
 			Assert.fail();
 		}
+
 	}
 
 	public void verifingRetailerHours() {
