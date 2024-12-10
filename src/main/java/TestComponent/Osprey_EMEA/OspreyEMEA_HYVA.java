@@ -8624,6 +8624,7 @@ return Number;
 		// TODO Auto-generated method stub
 
 		String products = data.get(Dataset).get("Products");
+		String prodproduct = data.get(Dataset).get("Prod Product");
 		System.out.println(products);
 		try {
 			Sync.waitPageLoad();
@@ -8643,9 +8644,18 @@ return Number;
 			Sync.waitPageLoad(30);
 			
 			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("preprod")) {
+				
+				
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				Thread.sleep(4000);
+				}
+				else {
+					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
+					Common.clickElement("xpath", "//img[@alt='" + prodproduct + "']");
+					Thread.sleep(6000);
+				}
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
