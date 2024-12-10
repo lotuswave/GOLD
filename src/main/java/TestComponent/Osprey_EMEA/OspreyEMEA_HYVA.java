@@ -2962,7 +2962,7 @@ public class OspreyEMEA_HYVA {
 
 	public void click_Retailer() {
 		// TODO Auto-generated method stub
-		String store = "Trek Bicycle San Antonio South";
+		String store = "Whole Earth Provision Co.";
 
 		try {
 
@@ -2971,12 +2971,12 @@ public class OspreyEMEA_HYVA {
 
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-//			String id = Common.findElement("xpath", "//div[contains(@aria-label,\"" + store + " \")]")
-//					.getAttribute("id");
+//			String id = Common.findElement("xpath", "//h3[contains(text(),'" + store + "')]")
+//					.getText();
 			Common.clickElement("xpath", "//div[contains(@class,'conv-section-details')]//h3[contains(text(),'Whole Earth Provision Co.')]");
-
-			// Common.clickElement("xpath", "//div[contains(@aria-label,"DICK'S Sporting
-			// ")]");
+//			 	.getText();
+//			System.out.println(id);
+//			 Common.clickElement("xpath", "//div[contains(@aria-label,'DICK'S Sporting')]");
 
 //			Common.findElement("xpath", "//div[@id='" + id + "']").click();
 			Sync.waitElementPresent("xpath", "//img[@class='store-info-logo']");
@@ -3082,16 +3082,15 @@ public class OspreyEMEA_HYVA {
 	}
 
 	public void CLick_Usemylocation() {
-		// TODO Auto-generated method stub
 		try {
 			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
 			Thread.sleep(4000);
 			Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
-			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
+//			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
 			Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
-			Common.scrollIntoView("id", "current-location-indicator");
-			int currentlocation = Common.findElements("id", "current-location-indicator").size();
-
+			Common.scrollIntoView("xpath", "//div[@class='dl-location-detector-container ']");
+			int currentlocation = Common.findElements("xpath", "//div[@class='dl-location-detector-container ']").size();
+			System.out.println(currentlocation);
 			String address = Common.findElement("xpath", "//h5[contains(@class,'store-address')]").getText();
 			Common.assertionCheckwithReport(currentlocation > 0 && address.contains("TX"),
 					"validating current location ", "Should visible retailers in the current location",
@@ -3145,7 +3144,6 @@ public class OspreyEMEA_HYVA {
 	}
 
 	public void Validate_retailerlocations() {
-		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("xpath", "//h3[@class='section-title dl-store-name']");
 			Sync.waitElementVisible("xpath", "//div[@class='square-image-container']");
@@ -3158,16 +3156,16 @@ public class OspreyEMEA_HYVA {
 					"store info content is displayed", "Failed to display the store info content ");
 			String Storename = Common.findElement("xpath", "//h2[contains(@class,'store-name-inner')]").getText().toUpperCase();
 			System.out.println(Storename);
-//			Common.javascriptclickElement("xpath", "//a[@class='nav-bar-back']");
 			Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
-			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]/div/h3").size();
+
+			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]//h3").size();
 			for (int i = 1; i <= storecount; i++) {
-				Thread.sleep(10000);
+				Thread.sleep(3000);
 				String relatedstores = Common
-						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]/div/h3)[" + i + "]")
+						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]//h3)[" + i + "]")
 						.getText();
 				System.out.println(relatedstores);
-				Common.assertionCheckwithReport(relatedstores.contains(Storename) || relatedstores.contains("DICK'S SPORTING GOODS"),
+				Common.assertionCheckwithReport(relatedstores.contains(Storename),
 						"To validate the retailer stores displayed ", "Retailer stores should be displayed",
 						"Retailer stores are displayed", "Failed to display the retailer stores ");
 
@@ -3185,6 +3183,7 @@ public class OspreyEMEA_HYVA {
 					Common.getscreenShotPathforReport("faield to display retailer store locations"));
 			Assert.fail();
 		}
+
 	}
 	public void writeReviews() {
 		// TODO Auto-generated method stub
@@ -12565,7 +12564,7 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {{
 			if (Error>0) {
 				
 				Common.mouseOverClick("xpath", "(//span[text()='Create an Account'])");
-				Create_Account_for_Guest_my_fav("Create Account");
+				Create_Account("Create Account");
 			} else {
 				System.out.println("no Error message displayed");
 
