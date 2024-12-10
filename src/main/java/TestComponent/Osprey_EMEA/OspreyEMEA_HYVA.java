@@ -4802,7 +4802,7 @@ return Number;
 				}
 				else
 				{
-					Common.clickElement("xpath","//div[@class='value end active']//parent::div//parent::div");
+					Common.clickElement("xpath","//div[@data-attr='price.GBP.group_0']");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
