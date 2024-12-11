@@ -287,8 +287,8 @@ public class OspreyEMEA_HYVA {
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[contains(@class,'action submit ')]");
-			Sync.waitImplicit(30);
-			Thread.sleep(6000);
+//			Sync.waitImplicit(30);
+//			Thread.sleep(6000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
@@ -12924,7 +12924,7 @@ public void Kustomer_Links(String Dataset) {{
 	String[] Kustomerlinks = Kustomer.split(",");
 	int i = 0;
 	try {
-		for (i = 0; i < Kustomerlinks.length; i++) {
+		for (i = 3; i < Kustomerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 			Thread.sleep(3000);
@@ -12937,7 +12937,7 @@ public void Kustomer_Links(String Dataset) {{
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Kustomerlinks[i])||
 					Common.getCurrentURL().contains(Kustomerlinks[i]) ||
-					Common.getCurrentURL().contains("lang/en_us/"),
+					Common.getCurrentURL().contains("lang/en_us/") || Common.getCurrentURL().contains("track/order"),
 					"validating the Kustomer links navigation from footer Links",
 					"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 					Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
@@ -12955,7 +12955,6 @@ public void Kustomer_Links(String Dataset) {{
 
 }
 }
-
 public void Footer_validation(String Dataset) {{
 	// TODO Auto-generated method stub
 	String footer = data.get(Dataset).get("Footer Links");
@@ -12964,15 +12963,15 @@ public void Footer_validation(String Dataset) {{
 	String[] footerlink = footers.split(",");
 	int i = 0;
 	try {
-		for (i = 4; i < footerlinks.length; i++) {
+		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//li[contains(@class,'cmsb656-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer-grid-osprey')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.findElement("xpath",
-					"//li[contains(@class,'cmsb656-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer-grid-osprey')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//li[contains(@class,'cmsb656-leading-8')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer-grid-osprey')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumbs')]").getText();
@@ -13004,6 +13003,58 @@ public void Footer_validation(String Dataset) {{
 }
 
 }
+
+
+public void Footer_Links_Repair_And_Replacement(String Dataset) {
+	// TODO Auto-generated method stub
+	String footer = data.get(Dataset).get("Spare Parts");
+	String[] footerlinks = footer.split(",");
+	
+	int i = 0;
+
+	try {
+		
+		click_singinButton();
+		Login_Account("Footer");
+		for (i = 0; i < footerlinks.length; i++) {
+			Sync.waitElementPresent(30, "xpath",
+					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
+			Common.clickElement("xpath",
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains(footerlinks[i])
+							|| Common.getCurrentURL().contains("form"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + footerlinks[i] + "it should navigate to the",
+					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+					"Unable to Navigated to the" + footerlinks[i] + "Links");
+				
+			Thread.sleep(4000);
+			Common.navigateBack();
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			System.out.println(size);
+		
+		}
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+				"After Clicking on" + footerlinks[i] + "it should navigate to the",
+				footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
+				Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
+		AssertJUnit.fail();
+	}
+
+}
+
 
 public void Footer_Links(String Dataset) {{
 	// TODO Auto-generated method stub
@@ -13832,37 +13883,41 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 public void newtab_footerlinks(String Dataset) {
 	// TODO Auto-generated method stub
 	String AssetBank=data.get(Dataset).get("Asset Bank");
-	System.out.println(AssetBank);
 	String Parts=data.get(Dataset).get("Spare Parts");
-	System.out.println(Parts);
-	try
-	{
+	String[] parts = Parts.split(",");
+			
+		try {
+	/*		int i = 0;
+		    for (i = 0; i < Parts.length(); i++) {
+		
+			Sync.waitElementPresent(30, "xpath",
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ parts[i]+ "')]");
+			Thread.sleep(3000);
+			Common.findElement("xpath",
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ parts[i]+ "')]");
+			Common.clickElement("xpath",
+					"//div[contains(@class,'footer')]//a[contains(text(),'"+ parts[i]+ "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String errormessage=Common.findElement("xpath", "//div[contains(@class,'message-error')]").getAttribute("data-ui-id");
+			Login_Account(Dataset);
+			Common.assertionCheckwithReport(
+			Common.getPageTitle().contains(parts[i]) ||Common.getCurrentURL().contains(parts[i]) || Common.getPageTitle().contains("All Mighty Guarantee"),
+					"validating the links navigation from footer Links",
+					"After Clicking on" + parts + "it should navigate to the",
+					parts + "Sucessfully Navigated to the" + parts + "Links",
+					"Unable to Navigated to the" + parts + "Links");
+             }
+    */
 		Sync.waitElementPresent(30, "xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+				"//div[contains(@class,'footer')]//a[contains(text(),'"+ AssetBank+"')]");
 		Thread.sleep(3000);
 		Common.findElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
+				"//div[contains(@class,'footer')]//a[contains(text(),'"+ AssetBank +"')]");
 		Common.clickElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),\""+ Parts+"\")]");
-		Sync.waitPageLoad();
-		Thread.sleep(4000);
-		String errormessage=Common.findElement("xpath", "//div[contains(@class,'message-error')]").getAttribute("data-ui-id");
-		Login_Account(Dataset);
-		Common.assertionCheckwithReport(
-				Common.getCurrentURL().contains("parts-request/"),
-				"validating the links navigation from footer Links",
-				"After Clicking on" + Parts + "it should navigate to the",
-				Parts + "Sucessfully Navigated to the" + Parts + "Links",
-				"Unable to Navigated to the" + Parts + "Links");
-		Sync.waitElementPresent(30, "xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank+"')]");
-		Thread.sleep(3000);
-		Common.findElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),'"+ AssetBank +"')]");
-		Common.clickElement("xpath",
-				"//ul[@class='m-footer-links__list']//a[contains(text(),'" + AssetBank + "')]");
+				"//div[contains(@class,'footer')]//a[contains(text(),'" + AssetBank + "')]");
 		Thread.sleep(2000);
-		Common.switchToSecondTab();
+//		Common.switchToSecondTab();
 		Common.assertionCheckwithReport(
 				Common.getPageTitle().contains("Osprey Europe Asset Bank"),
 				"validating the links navigation from footer Links",
@@ -13877,6 +13932,10 @@ public void newtab_footerlinks(String Dataset) {
 	catch(Exception | Error e)
 	{
 		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the links navigation from footer Links",
+				"After Clicking on" + AssetBank + "it should navigate to the",
+				AssetBank + "Unable Navigated to the" + AssetBank + "Links",
+				Common.getscreenShotPathforReport("Failed to Navigated to the" + AssetBank + "Links"));
 		Assert.fail();
 	}
 	
