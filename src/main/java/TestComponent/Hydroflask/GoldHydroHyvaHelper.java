@@ -1270,11 +1270,22 @@ public class GoldHydroHyvaHelper {
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+			}
+			else
+			{
+				String name = Common.findElement("xpath", "//span[@itemprop='name']").getText().trim();
+				Common.assertionCheckwithReport(name.contains(product),
+						"validating the product should navigate to the PDP page",
+						"When we click on the product is should navigate to the PDP page",
+						"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
+			}
 
 			Sync.waitPageLoad();
 			if(Common.getCurrentURL().contains("preprod"))
@@ -11951,12 +11962,19 @@ public void Explore_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 		
 		try {
-			Common.clickElement("xpath", "//button[contains(@class,'group p-2.5 text-black')]");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
-			String getText =Common.findElement("xpath","(//div[@class='cart-empty container min-h-75']//p)[1]").getText();
 			
+			int size=Common.findElements("xpath", "//tr[contains(@class,'item-info align')]").size();
+			System.out.println(size);
+			for(int i=0;i<size;i++)
+			{
+				int value=i+1;
+			Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])['" +value+ "']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			}
+			String getText =Common.findElement("xpath","(//div[@class='cart-empty container min-h-75']//p)[1]").getText();
 			Common.assertionCheckwithReport(getText.equals("You have no items in your shopping cart."),
 					"validating the delete product in shopping cart page",
 					"color should be delete in the shopping cart page",
