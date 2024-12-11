@@ -1270,7 +1270,7 @@ public class GoldHydroHyvaHelper {
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
-			String name = Common.findElement("xpath", "//span[contains(@itemprop,'name')]").getText();
+			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
@@ -8744,8 +8744,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Validating the " + engraving + "for the bottle", engraving + "should apply for the bottle ",
 					"Sucessfully" + engraving + "has been applied for the bottle",
 					"failed apply the" + engraving + "for the bottle");
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(7000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
@@ -12571,6 +12571,58 @@ public void Explore_Validation(String Dataset) {
 			Assert.fail();
 		}
 
+	}
+
+	public void Edit_Engraving_to_Graphic(String Dataset) {
+		// TODO Auto-generated method stub
+		String products = data.get(Dataset).get("Products");
+		String Graphic="Better Lake Than Never";
+		try
+		{
+			Sync.waitElementPresent("xpath", "//a[contains(@title,'Edit "+ products  +"')]");
+			Common.clickElement("xpath", "//a[contains(@title,'Edit "+ products  +"')]");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			Sync.waitElementPresent("xpath", "//button[@aria-controls='graphic-panel']");
+			Common.clickElement("xpath", "//button[@aria-controls='graphic-panel']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Graphic +"']");
+			Common.clickElement("xpath", "//button[@aria-label='"+ Graphic +"']");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", " //span[contains(text(),'Update Cart')]");
+			Common.clickElement("xpath", " //span[contains(text(),'Update Cart')]");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", " //span[contains(text(),' Agree & Proceed')]");
+			Common.clickElement("xpath", " //span[contains(text(),' Agree & Proceed')]");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			String graphic=Common.findElement("xpath", "(//span[text()='Engraving:']//following::span[text()='Better Lake Than Never'])[2]").getText();
+			System.out.println(graphic);
+			Common.assertionCheckwithReport(graphic.contains(Graphic) ,
+					"verifying the graphic engraving has been applied",
+					"user should see the grpahic engraving",
+					"user successfully able to see the graphic engraving", "Failed to see to add the graphic engraving");
+			Sync.waitElementPresent("xpath", "//button[@title='Remove']");
+			Common.clickElement("xpath", "//button[@title='Remove']");
+			Sync.waitPageLoad();
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getAttribute("ui-id");
+			Common.assertionCheckwithReport(message.contains("message"),
+					"validating the deleting functionality in the gift registry",
+					"After clicking on the delete button it should delete from the gift registry",
+					"successfully it has been deleted from the gift registry",
+					"failed to delete from the gift registry");
+			Common.findElement("xpath", "//a[contains(@aria-label,'Add Engraving')]");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the Grphic engraving removed for the bottle",
+					"user should able to remove the graphic engraving", "user Unable to Remove the Graphic Engraving",
+					Common.getscreenShot(" Failed to Remove the Graphic Engraving"));
+			Assert.fail();
+		}
+		
 	}
 		
 
