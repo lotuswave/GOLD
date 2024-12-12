@@ -33,6 +33,7 @@ public class TEST_DGLD_DB_UK_ST_004_Cart_Page_Validation {
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Shoppingcart_page();
 			Drybar.minicart_ordersummary_discount("Discount");
+			Drybar.deleteProduct_shoppingcart();
             
  
 		} catch (Exception e) {
