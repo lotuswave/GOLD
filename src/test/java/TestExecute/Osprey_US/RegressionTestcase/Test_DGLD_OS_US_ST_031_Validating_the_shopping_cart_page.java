@@ -31,6 +31,7 @@ public class Test_DGLD_OS_US_ST_031_Validating_the_shopping_cart_page {
 	        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
 	        Osprey_ReEu.Shoppingcart_page();
 	        Osprey_ReEu.minicart_ordersummary_discount("Discount");
+	        Osprey_ReEu.deleteProduct_shoppingcart();
         
 		} catch (Exception e) {
 
