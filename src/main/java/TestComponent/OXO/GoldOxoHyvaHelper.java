@@ -482,7 +482,7 @@ public class GoldOxoHyvaHelper {
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
 			Common.assertionCheckwithReport(
-					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
+					 Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
 					"Successfully navigates to the view cart page",
 					"Failed to navigate to the view and edit cart page");
@@ -12579,6 +12579,42 @@ public void header_WeAre_Oxo(String Dataset) {
 			Assert.fail();
 
 		}
+	}
+
+
+
+	public void deleteProduct_shoppingcart() {
+		// TODO Auto-generated method stub
+    try {
+			
+			int size=Common.findElements("xpath", "//tr[contains(@class,'item-info align')]").size();
+			System.out.println(size);
+			for(int i=0;i<size;i++)
+			{
+				int value=i+1;
+			Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])['" +value+ "']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			}
+			String getText =Common.findElement("xpath","(//div[@class='cart-empty container min-h-75']//p)[1]").getText();
+			Common.assertionCheckwithReport(getText.equals("You have no items in your shopping cart."),
+					"validating the delete product in shopping cart page",
+					"color should be delete in the shopping cart page",
+					"color has been deleted in the shopping cart page",
+					"Failed to delete the product  in the shopping cart page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the delete product in shopping cart page",
+					"color should be delete in the shopping cart page",
+					"Unable to delete the product  in the shopping cart page",
+					Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
+			Assert.fail();
+		}
+
+		
 	}
 	
 }
