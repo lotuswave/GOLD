@@ -33,6 +33,7 @@ public class Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page {
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Shoppingcart_page();
         Osprey_ReEu.minicart_ordersummary_discount("Discount");
+        Osprey_ReEu.deleteProduct_shoppingcart();
         
 		} catch (Exception e) {
 
