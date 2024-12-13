@@ -7881,9 +7881,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "(//img[contains(@class,'group-hover/item-image:hidden')])[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"(//img[contains(@class,'group-hover/item-image:hidden')])[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -7898,10 +7898,11 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
 			Common.clickElement("xpath", "//span[text()='Add to Cart']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-					.getAttribute("data-ui-id");
+//			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
+					.getAttribute("ui-id");
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 					"Product should be add to cart", "Sucessfully product added to the cart ",
