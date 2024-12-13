@@ -9379,7 +9379,7 @@ return Number;
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
 				Float subvalue=subtotalvalue+shippingvalue;
-				Float Total = subvalue-subvalue*20/100;
+				Float Total = (subvalue-subvalue*20/100)+Discountvalue;
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				System.out.println(ExpectedTotalAmmount2);
 				System.out.println(ordertotal);
