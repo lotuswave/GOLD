@@ -4912,13 +4912,13 @@ catch(Exception | Error e)
 			System.out.println(country.size());
 			for (int i = 1; i < country.size(); i++) {
 
-				List<WebElement> select = Common.findElements("xpath", "//span[contains(@class,'country-item__country-label')]");
+				List<WebElement> select = Common.findElements("xpath", "//legend[text()='Europe']//parent::fieldset//div[@class='country-item flex gap-3']//p");
 				Sync.waitPageLoad();
 				
 				Country = select.get(i).getText();
 			      System.out.println(Country);
 				select.get(i).click();
-				if (Country.contains("UK")) {
+				if (Country.equals("English")) {
 
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",

@@ -24,7 +24,7 @@ public class Test_DGLD_HF_ST_070_Checkout_with_RegisterUserCC_Simple_Configurabl
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Product");     
 			Hydro.addtocart("Product");
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
