@@ -1954,10 +1954,10 @@ public class GoldHydroHelper {
 	public void ChangeAddress_AddressBook(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//div[@class='m-account-nav__content']");
-			Sync.waitElementPresent(30, "xpath", "//a[text()='My Account']");
-			Common.clickElement("xpath", "//a[text()='My Account']");
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Account"),
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'My Account')]");
+			Common.clickElement("xpath", "//a[contains(text(),'My Account')]");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Dashboard"),
 					"validating the Navigation to the My account page",
 					"After Clicking on My account CTA user should be navigate to the my account page",
 					"Sucessfully User Navigates to the My account page after clicking on the my account CTA",
@@ -1972,7 +1972,7 @@ public class GoldHydroHelper {
 			Assert.fail();
 		}
 		Sync.waitPageLoad();
-		Common.clickElement("xpath", "//a[text()='Address Book']");
+		Common.clickElement("xpath", "//span[text()='Address Book']");
 		Sync.waitPageLoad();
 		Common.assertionCheckwithReport(Common.getPageTitle().equals("Address Book"),
 				"validating the Navigation to the Address Book page",
@@ -1980,7 +1980,7 @@ public class GoldHydroHelper {
 				"Sucessfully User Navigates to the Address Book page after clicking on the Address Book CTA",
 				"Failed to Navigate to the Address Book page after Clicking on Address Book CTA");
 
-		String PageTitle = Common.getText("xpath", "//h1[@class='page-title-wrapper h2']");
+		String PageTitle = Common.getText("xpath", "//span[@data-ui-id='page-title-wrapper']");
 		if (PageTitle.contains("New")) {
 			try {
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
@@ -2027,7 +2027,7 @@ public class GoldHydroHelper {
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
+				Common.textBoxInput("xpath", "//input[@title='Street Address']", data.get(dataSet).get("Street"));
 
 				try {
 					Common.dropdown("xpath", "//select[@name='region_id']", Common.SelectBy.TEXT,
@@ -2043,7 +2043,7 @@ public class GoldHydroHelper {
 
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@class='u-container a-message__container']//div").getText();
+				String message = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 
 				Common.assertionCheckwithReport(message.equals("You saved the address."),
 						"validating the saved message after saving address in address book",
