@@ -9,13 +9,13 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeem {
+public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_PayPal_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeem {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Bundles");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Guestuser_Checkout_VisaCC_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeems () throws Exception {
+	public void Guestuser_Checkout_PayPal_AerosalProduct_NonAerosalBundle_Configurable_GC_Partialredeems () throws Exception {
 
 		try {
 		
@@ -32,7 +32,7 @@ public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_Non
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.gitCard("GiftCode");
-			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			Drybar.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
@@ -42,7 +42,7 @@ public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_Non
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 		
 
 	}
@@ -51,7 +51,7 @@ public class TEST_DGLD_DB_US_ST_084_Guestuser_Checkout_VisaCC_AerosalProduct_Non
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+       // Drybar.close_add();
         
 
 	}
