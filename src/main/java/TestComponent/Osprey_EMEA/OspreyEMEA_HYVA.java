@@ -9321,7 +9321,7 @@ return Number;
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
-				String discountcodemsg = Common.getText("xpath", "//div[@data-ui-id='message-success']//div");
+				String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			}
@@ -9364,21 +9364,22 @@ return Number;
 			}
 			else
 			{
-				String Subtotal = Common.getText("xpath", "//tr[@class='totals sub']//span[@class='price']").replace(Symbol,
+				String Subtotal = Common.getText("xpath", "//div[contains(@class,'text-right md:w-auto text-sm')]").replace(Symbol,
 						"");
 				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping excl']//span[@class='price']")
+				String shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]")
 						.replace(Symbol, "");
 				Float shippingvalue = Float.parseFloat(shipping);
-				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-						.replace(Symbol, "");
+				String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']")
+						.replace(Symbol, "").replace("-", "");
 				Float Discountvalue = Float.parseFloat(Discount);
-				String Tax = Common.getText("xpath", "//tr[@class='totals-tax']//span[@class='price']").replace(Symbol, "");
+				String Tax = Common.getText("xpath", "(//div[contains(@class,'w-5/12 text-right md:w-auto')])[3]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
-				String ordertotal = Common.getText("xpath", "//tr[@class='grand totals']//span[@class='price']")
+				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
+				Float subvalue=subtotalvalue+shippingvalue;
+				Float Total = subvalue-subvalue*20/100;
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				System.out.println(ExpectedTotalAmmount2);
 				System.out.println(ordertotal);
