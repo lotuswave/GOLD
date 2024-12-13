@@ -25,7 +25,6 @@ public class Test_DGLD_OS_COMMON_031_Validating_the_shopping_cart_page {
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.click_minicart();
         Osprey_ReEu.minicart_viewcart();
-        Osprey_ReEu.Remove_Product("Product");
         Osprey_ReEu.update_shoppingcart("Product Qunatity");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
