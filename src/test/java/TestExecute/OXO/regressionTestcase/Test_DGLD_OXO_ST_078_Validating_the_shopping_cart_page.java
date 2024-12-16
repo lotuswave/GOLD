@@ -34,6 +34,7 @@ public class Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page {
 			Oxo.Shoppingcart_page();
 			Oxo.minicart_ordersummary_discount("Discount");
 			Oxo.updateproductcolor_shoppingcart("ConfigProduct");
+			Oxo.deleteProduct_shoppingcart();
 			
 			
 		} catch (Exception e) {
