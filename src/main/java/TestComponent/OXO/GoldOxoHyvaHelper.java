@@ -4245,7 +4245,7 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@id='subscribe-email']", Utils.getEmailid());
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "//span[text()='Submit']");
-			Thread.sleep(5000);
+			Thread.sleep(2000);
 			String Text = Common.getText("xpath", "//span[text()='Thank you for your subscription.']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
