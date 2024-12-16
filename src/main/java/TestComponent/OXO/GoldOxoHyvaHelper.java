@@ -1601,8 +1601,7 @@ public String create_account(String Dataset) {
 			System.out.println(data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
-			Sync.waitImplicit(30);
-			Thread.sleep(8000);
+			Sync.waitImplicit(5);
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
