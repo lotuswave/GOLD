@@ -831,8 +831,8 @@ public class GoldOxoHyvaHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//a[@title='Back to Cart']");
-			Sync.waitElementVisible(30, "xpath", "(//a[@title='Back to Cart'])[2]");
-			Common.clickElement("xpath", "(//a[@title='Back to Cart'])[2]");
+			Sync.waitElementVisible(30, "xpath", "(//a[@title='Back to Cart'])[1]");
+			Common.clickElement("xpath", "(//a[@title='Back to Cart'])[1]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
