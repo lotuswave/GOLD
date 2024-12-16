@@ -2800,7 +2800,7 @@ public String create_account(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
 			Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
-			Common.dropdown("xpath", "//select[@id='address_region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+			Common.dropdown("xpath", "//select[@id='region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
 			
@@ -2992,7 +2992,7 @@ public String create_account(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
 			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
 			Sync.waitPageLoad();
-			 Thread.sleep(4000);
+			 Thread.sleep(2000);
 			Sync.waitElementPresent(20, "xpath", "//div[@ui-id='message-success']//span");
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(message);
