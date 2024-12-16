@@ -4038,15 +4038,15 @@ public void Gift_card(String dataSet) {
 	public void ordersummary_validation() {
 		// TODO Auto-generated method stub
 		try {
-			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[2])[2]").replace("$",
+			String Subtotal = Common.getText("xpath", "(//div[@class='item subtotal']//span[2])[1]").replace("$",
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[2])[4]")
+			String shipping = Common.getText("xpath", "(//div[@class='item shipping']//span[2])[2]")
 					.replace("$", "");
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[2])[2]").replace("$", "");
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[2])[1]").replace("$", "");
 			Float Taxvalue = Float.parseFloat(Tax);
-			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[2])[2]")
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[2])[1]")
 					.replace("$", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Float Total = subtotalvalue + shippingvalue + Taxvalue;
