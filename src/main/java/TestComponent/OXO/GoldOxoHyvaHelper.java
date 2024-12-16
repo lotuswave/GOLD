@@ -4356,8 +4356,8 @@ catch(Exception | Error e)
 			Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'newConversationButton')]");
 			Common.mouseOverClick("xpath", "//button[contains(@class,'newConversationButton')]");
 
-			Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
-			String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+			Sync.waitElementVisible("xpath", "(//div[@data-kt='inboundMessageBubbleText']//div//p)[1]");
+			String welcomemsg = Common.findElement("xpath", "(//div[@data-kt='inboundMessageBubbleText']//div//p)[1]").getText();
 			System.out.println(welcomemsg);
 			Common.assertionCheckwithReport(chat.contains("Chat") || welcomemsg.contains("Welcome to OXO!"),
 					"To validate the Chat Conversation when user click on the chat option",
