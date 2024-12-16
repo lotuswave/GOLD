@@ -6476,7 +6476,7 @@ catch(Exception | Error e)
 			Thread.sleep(6000);
 			if (Common.getCurrentURL().contains("preprod")) {
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				String productprice = Common.findElement("xpath", "//span[@class=' simple']")
+				String productprice = Common.findElement("xpath", "//span[@x-ref='normalPrice']")
 						.getText().replace("$", "");
 				System.out.println(productprice);
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
