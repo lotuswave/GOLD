@@ -3537,20 +3537,19 @@ public String create_account(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			
-			Common.clickElement("xpath", "//span[text()='Pay now']");
-			Thread.sleep(4000);
-			Common.refreshpage();
-			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
-			if(klarna.contains("Choose how to pay"))
+			
+			String klarna=Common.findElement("xpath", "//h1[@id='summary-title']").getText();
+			Thread.sleep(3000);
+			if(klarna.contains("Confirm and pay"))
 			{
-				Thread.sleep(4000);
-			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
-				Common.clickElement("xpath", "//label[@for='pay_now__label']");
-				
-				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
-				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
+//				Thread.sleep(4000);
+//			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+//				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+//				Common.clickElement("xpath", "//label[@for='pay_now__label']");
+//				
+//				Thread.sleep(2000);
+				Sync.waitElementPresent("xpath", "//span[text()='Continue']");
+				Common.doubleClick("xpath", "//span[text()='Continue']");
 				Thread.sleep(4000);
 				//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
