@@ -3361,8 +3361,8 @@ public void Gift_card(String dataSet) {
 			Common.scrollIntoView("xpath", "//input[@id='address_postcode']");
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Sync.waitPageLoad();
+//			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
