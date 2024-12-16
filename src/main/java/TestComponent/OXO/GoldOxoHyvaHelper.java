@@ -1973,7 +1973,7 @@ public String create_account(String Dataset) {
 
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				Sync.waitPageLoad();
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 
 				Common.assertionCheckwithReport(message.equals("You saved the address."),
