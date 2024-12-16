@@ -4385,7 +4385,7 @@ public void Validate_retailerlocations() {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 //				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 			
 					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
 					Thread.sleep(5000);
@@ -4407,9 +4407,7 @@ public void Validate_retailerlocations() {
 	                   if(Common.getCurrentURL().contains("/gb"))
 	                   {
 	                	   Thread.sleep(5000);
-//	                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
-//	                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-	                	   
+
 	                	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                	   Thread.sleep(8000);
@@ -4435,11 +4433,6 @@ public void Validate_retailerlocations() {
 	                	   }                    	
 	                	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
 	                	   {
-//	                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-//	                   		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-//	                   		Thread.sleep(5000);
-//	                   		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-//	                       	Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                       	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
 	                       	System.out.println(frameid);
 //	                       	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
@@ -15580,10 +15573,10 @@ public String Secure_Payment_details(String dataSet) throws Exception {
 		Thread.sleep(4000);
 		
 		Common.clickElement("xpath", "//button[@class='action primary checkout']");
-		Thread.sleep(8000);
+		Thread.sleep(6000);
 		Sync.waitElementPresent(50, "xpath", "//iframe[@id='challengeFrame']");
 		Common.switchFrames("xpath", "//iframe[@id='challengeFrame']");
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 		Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
 		Common.switchToDefault();
 	}
@@ -15607,11 +15600,11 @@ public String Secure_Payment_details(String dataSet) throws Exception {
 					"User unabel to go orderconformation page");
 
 			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 				System.out.println(order);
 			} else {
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 				System.out.println(order);
 			}
