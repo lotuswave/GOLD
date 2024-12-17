@@ -20,6 +20,8 @@ public class Test_DGLD_HYF_US_ST_003_GuestUser_Add_GiftCard_To_MyWishlist_Create
 
 		try {
         Hydro.verifingHomePage();
+        Hydro.click_singinButton();
+		Hydro.login_Hydroflask("AccountDetails");
         Hydro.Gift_cards("Hydro Gift Card");
         Hydro.Card_Value_for_my_fav("price");
         Hydro.Guest_Add_Wishlist_Create_account();
