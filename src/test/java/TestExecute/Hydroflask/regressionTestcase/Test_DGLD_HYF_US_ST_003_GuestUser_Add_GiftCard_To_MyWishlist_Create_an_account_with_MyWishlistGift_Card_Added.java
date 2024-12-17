@@ -23,9 +23,9 @@ public class Test_DGLD_HYF_US_ST_003_GuestUser_Add_GiftCard_To_MyWishlist_Create
         Hydro.Gift_cards("Hydro Gift Card");
         Hydro.Card_Value_for_my_fav("price");
         Hydro.Guest_Add_Wishlist_Create_account();
-//        Hydro.Giftcard_Add_from_My_fav("price");
-//        Hydro.minicart_Checkout();
-//        Hydro.addBillingDetails_PaymentDetails_SubmitOrder("CCAmexcard");
+        Hydro.Giftcard_Add_from_My_fav("price");
+        Hydro.minicart_Checkout();
+        Hydro.addBillingDetails_PaymentDetails_SubmitOrder("CCAmexcard");
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -35,7 +35,7 @@ public class Test_DGLD_HYF_US_ST_003_GuestUser_Add_GiftCard_To_MyWishlist_Create
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
