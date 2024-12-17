@@ -12906,6 +12906,109 @@ public void Explore_Validation(String Dataset) {
 		}
 		
 	}
+
+	public void Guest_Add_Wishlist_Create_account() {
+		// TODO Auto-generated method stub
+		try {
+
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Wish List']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Wish List']");
+			Thread.sleep(3000);
+			int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
+			System.out.println(Size);
+			if (Size > 0) {
+
+				Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
+				Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
+
+			} else if(Common.getCurrentURL().contains("/customer/account/login")) {
+	            	Create_Account_for_Guest_my_fav("Create Account");
+	            }
+				
+			}
+
+	catch(Exception|Error e)
+	{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
+					"Products added to Compare list successfull", "failed to add product to wishlist",
+					Common.getscreenShotPathforReport("Wishlistfail"));
+			Assert.fail();
+		}
+}
+
+	private String Create_Account_for_Guest_my_fav(String Dataset) {
+		// TODO Auto-generated method stub
+		String email = "";
+		try {
+	        Common.clickElement("xpath", "//a[text()='Create an Account']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//span[text()='Sign Up']");
+			Sync.waitImplicit(30);
+			Thread.sleep(4000);
+		    
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
+					"validating navigation to the account page after clicking on sign up button",
+					"User should navigate to the My account page after clicking on the Signup",
+					"Sucessfully user navigates to the My account page after clickng on thr signup button",
+					"Failed to navigate to the My account page after clicking on the signup button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating navigation to the account page after clicking on sign up button",
+					"User should navigate to the My account page after clicking on the Signup",
+					"Unable to navigate to the My account page after clicking on the signup button",
+					"Failed to navigate to the My account page after clicking on the signup button");
+			AssertJUnit.fail();
+		}
+		return email;
+}
+
+	public void Card_Value_for_my_fav(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			if(Common.getCurrentURL().contains("/gb/"))
+			{
+			String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
+			Common.assertionCheckwithReport(Price.contains(amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			}
+			else
+			{
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("gift-card")||Common.getCurrentURL().contains("/wishlist/index"),
+						"validating gift card Navigated to the PDP",
+						"After clicking on the gift card on PLP it should navigate to the PDP",
+						"Successfully Gift card is Navigated to the PDP ",
+						"Failed to navigate the gift card to the PDP");
+			}
+			
+			Giftcard_details("Gift Details");
+		
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+						"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+				Assert.fail();
+			}
+			
+		}
 		
 
 }
