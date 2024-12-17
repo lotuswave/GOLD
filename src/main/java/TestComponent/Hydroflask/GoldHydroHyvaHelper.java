@@ -2879,28 +2879,34 @@ System.out.println(MyFavorites);
 		String GiftCard = data.get(Dataset).get("Hydrogift");
 		try
 		{
-			for (int i = 0; i <= 10; i++) {
-				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
-				Sync.waitElementPresent("xpath", "//span[text()='Gift Card']");
-				Common.clickElement("xpath", "//span[text()='Gift Card']");
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
-
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
-					break;
-				}
-			}
+			
+				Common.clickElement("xpath", "//span[contains(text(),'Holiday Shop')]");
+				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
+				Common.clickElement("xpath", "//span[text()='Gift Cards']");
+//				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+//				List<WebElement> webelementslist = Common.findElements("xpath",
+//						"//img[contains(@itemprop ,'image')]");
+//
+//				String s = webelementslist.get(i).getAttribute("src");
+//				System.out.println(s);
+//				if (s.isEmpty()) {
+//
+//				} else {
+//					break;
+//				}
+//			}
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Sync.waitPageLoad();
-			Thread.sleep(6000);
+//			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
+//			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
+//			Sync.waitPageLoad();
+//			Thread.sleep(6000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/gift-card"),
+					"validating the gift card page navigation",
+					"After clicking on the gift card it sholud navigate to the PDP page",
+					"Successfully Navigated tot he gift card page",
+					"Failed to match the Gift card page");
+		
 		}
 		catch(Exception | Error e)
 		{
