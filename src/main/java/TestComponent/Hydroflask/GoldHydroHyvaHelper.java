@@ -1235,6 +1235,8 @@ public class GoldHydroHyvaHelper {
 		// TODO Auto-generated method stub
 		String Giftcard = data.get(dataSet).get("GiftCard2");
 		try {
+			
+			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
 			Common.clickElement("xpath", "//input[@placeholder='Enter your Code']");
  
 			//			Common.dropdown("xpath", "//input[@name='amcard-field -datalist']", Common.SelectBy.TEXT, "GiftCard2");
@@ -1267,7 +1269,7 @@ public void FUll_Payment(String dataSet) {
 		try {
 			String  GiftCard=data.get(dataSet).get("GiftCard2");
 			Thread.sleep(6000);
-			String Total_Incl_Tax =Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text-right text-sale-font')]").replace(Symbl,"");
+			String Total_Incl_Tax =Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value text-right text-sale-font')])[1]").replace(Symbl,"");
 			
 			System.out.println("Total_Incl_Tax :"+Total_Incl_Tax);
 			Common.assertionCheckwithReport(Total_Incl_Tax.equals("0.00"),
