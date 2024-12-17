@@ -13079,38 +13079,61 @@ public void Explore_Validation(String Dataset) {
 		}
 }
 
-	private String Create_Account_for_Guest_my_fav(String Dataset) {
-		// TODO Auto-generated method stub
-		String email = "";
-		try {
-	        Common.clickElement("xpath", "//a[text()='Create an Account']");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//span[text()='Sign Up']");
-			Sync.waitImplicit(30);
-			Thread.sleep(4000);
-		    
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
-					"validating navigation to the account page after clicking on sign up button",
-					"User should navigate to the My account page after clicking on the Signup",
-					"Sucessfully user navigates to the My account page after clickng on thr signup button",
-					"Failed to navigate to the My account page after clicking on the signup button");
+	public void Create_Account_for_Guest_my_fav(String DataSet) {
+		   
+	    try {
+	        // Check if Dataset exists in the data map
+	        if (data.get(DataSet) == null) {
+	            throw new IllegalArgumentException("Dataset not found: " + DataSet);
+	        }
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"validating navigation to the account page after clicking on sign up button",
-					"User should navigate to the My account page after clicking on the Signup",
-					"Unable to navigate to the My account page after clicking on the signup button",
-					"Failed to navigate to the My account page after clicking on the signup button");
-			AssertJUnit.fail();
-		}
-		return email;
-}
+	        // Check required keys in the dataset
+	        if (!data.get(DataSet).containsKey("FirstName") || 
+	            !data.get(DataSet).containsKey("LastName") || 
+	            !data.get(DataSet).containsKey("UserName") || 
+	            !data.get(DataSet).containsKey("Password") || 
+	            !data.get(DataSet).containsKey("Confirm Password")) {
+	            throw new IllegalArgumentException("Missing required keys in the dataset: " + DataSet);
+	        }
+
+	        Common.clickElement("xpath", "//a[text()='Create an Account']");
+	        Common.clickElement("xpath", "//input[@name='firstname']");
+	        Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(DataSet).get("FirstName"));
+	        Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(DataSet).get("LastName"));
+	        Common.textBoxInput("xpath", "//input[@name='email']", Common.genrateRandomEmail(data.get(DataSet).get("UserName")));
+	        Common.textBoxInput("xpath", "//input[@name='password']", data.get(DataSet).get("Password"));
+	        Common.textBoxInput("xpath", "//input[@name='password_confirmation']", data.get(DataSet).get("Confirm Password"));
+	        Common.clickElement("xpath", "//span[text()='Sign Up']");
+	        Sync.waitImplicit(30);
+	        Thread.sleep(4000);
+
+	        Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
+	                "Validating navigation to the account page after clicking on sign up button",
+	                "User should navigate to the My account page after clicking on the Sign Up",
+	                "Successfully navigated to the My account page after clicking on the Sign Up button",
+	                "Failed to navigate to the My account page after clicking on the Sign Up button");
+
+	    } catch (IllegalArgumentException e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	                "Dataset validation",
+	                "Valid dataset should be provided",
+	                e.getMessage(),
+	                "Failed due to invalid dataset");
+	        AssertJUnit.fail(e.getMessage());
+
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	                "Validating navigation to the account page after clicking on sign up button",
+	                "User should navigate to the My account page after clicking on the Sign Up",
+	                "Unable to navigate to the My account page after clicking on the Sign Up button",
+	                "Failed to navigate to the My account page after clicking on the Sign Up button");
+	        AssertJUnit.fail();
+	    }
+	    
+	}
+
 
 	public void Card_Value_for_my_fav(String Dataset) {
 		// TODO Auto-generated method stub
