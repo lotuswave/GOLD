@@ -2631,13 +2631,13 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("id", "oar_email");
 			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
 
-			Sync.waitElementPresent("xpath", "//button[@title='Continue']");
-			Common.clickElement("xpath", "//button[@title='Continue']");
+			Sync.waitElementPresent("xpath", "//button[@title='Search']");
+			Common.clickElement("xpath", "//button[@title='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("xpath", "//span[@class='title-lg']").getText();
+			String orderid = Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText();
 			System.out.println(orderid);
-			String ID=Common.findElement("xpath", "//span[@class='title-lg']").getText().replace("ORDER #", "");
+			String ID=Common.findElement("xpath", "//span[contains(@class,'title-lg')]").getText().replace("ORDER #", "");
 			System.out.println("ID");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
 					
@@ -2654,6 +2654,7 @@ public class GoldDrybarusHelper2 {
 
 		}
 	}
+
 	
 	public void click_trackorder() {
 		try {
