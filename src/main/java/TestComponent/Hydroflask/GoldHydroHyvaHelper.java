@@ -3210,13 +3210,16 @@ public void Gift_card(String dataSet) {
 			System.out.println(URL);
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(3000);
-			
+			if(Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
+			{
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
 		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+			}
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
-//		Thread.sleep(2000);
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 	    System.out.println(successmsg);	
 		Common.assertionCheckwithReport(successmsg.contains("added"),
