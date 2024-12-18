@@ -423,6 +423,73 @@ public class GoldHydroHyvaHelper {
 		}
 
 	}
+	
+	public String DeliveryAddress_Guestuser_Gift(String dataSet) throws Exception {
+		String address = data.get(dataSet).get("Street");
+		String Shipping="";
+
+		try {
+			Thread.sleep(5000);
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("preprod")) {
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+			} else {
+				Sync.waitElementVisible("xpath", "//input[@type='email']");
+				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+			}
+
+		} catch (NoSuchElementException e) {
+			minicart_Checkout();
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+		}
+		String expectedResult = "email field will have email address";
+
+		int Size =Common.findElements("xpath", "//span[text()='Review & Payments']").size();
+
+			try {
+				Thread.sleep(4000);
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+
+					 Thread.sleep(4000);
+	                 Common.scrollIntoView("xpath", "//select[@id='billing-region']");
+	                 Common.dropdown("xpath", "//select[@id='billing-region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Thread.sleep(3000);
+	                 String Shippingvalue = Common.findElement("xpath", "//select[@id='billing-region']")
+	                         .getAttribute("value");
+//	                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+//		              System.out.println(Shipping);
+	                 System.out.println(Shippingvalue);
+				Thread.sleep(2000);
+				Common.textBoxInput("xpath", "//input[@name='postcode']",
+						data.get(dataSet).get("postcode"));
+				Thread.sleep(5000);
+
+				Common.textBoxInput("xpath", "//input[@name='telephone']",
+						data.get(dataSet).get("phone"));
+
+			
+		}
+
+			catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating shipping address",
+						"shipping address is filled in to the fields", "user faield to fill the shipping address",
+						Common.getscreenShotPathforReport("shipingaddressfaield"));
+				AssertJUnit.fail();
+
+			
+			}
+			return Shipping;
+		}
+
 
 
 	public void addDeliveryAddress_Gustuser(String dataSet) throws Exception {
@@ -961,7 +1028,7 @@ public class GoldHydroHyvaHelper {
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
-
+				Thread.sleep(3000);
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
 				
@@ -971,8 +1038,10 @@ public class GoldHydroHyvaHelper {
 				System.out.println(zipcode);
 
 				if (zipcode > 0) {
+					Common.actionsKeyPress(Keys.HOME);
+					Common.scrollIntoView("xpath", "//input[@id='shipping-postcode']");
 					Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-					String code = Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
+					String code = Common.findElement("xpath", "//input[@id='shipping-postcode' or @id='billing-postcode']").getAttribute("value");
 					System.out.println(code);
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
