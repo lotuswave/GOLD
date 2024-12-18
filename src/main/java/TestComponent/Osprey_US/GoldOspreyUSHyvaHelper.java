@@ -2302,8 +2302,8 @@ public void header_Shopbycollection(String Dataset) { {
 					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
 				}
 			
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 //			Sync.waitPageLoad(30);
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//span[contains(@class,'pdp-grid-title')]");
