@@ -130,7 +130,7 @@ public class OspreyEMEA_HYVA {
 //			Close_Geolocation();
 //			close_add();
 		     acceptPrivacy();
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey") || size > 0,
@@ -4633,8 +4633,8 @@ return Number;
 
 			if(Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/") )
 			{
-				
-				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(",00", "").trim();
+				Common.clickElement("xpath", "//div[text()='Price']");
+				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 				WebElement price = Common.findElement("xpath",
