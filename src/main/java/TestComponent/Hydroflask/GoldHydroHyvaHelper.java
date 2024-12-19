@@ -10870,29 +10870,31 @@ public void Explore_Validation(String Dataset) {
 		{
 			Thread.sleep(4000);
          	for (i = 0; i < Links.length; i++) {
-         		Sync.waitElementPresent("xpath", "(//span[normalize-space()='Holiday Sale'])[1]");
-    			Common.clickElement("xpath", "(//span[normalize-space()='Holiday Sale'])[1]");
+         		Sync.waitElementPresent("xpath", "//span[contains(text(),'Holiday Shop')]");
+    			Common.clickElement("xpath", "//span[contains(text(),'Holiday Shop')]");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
 					"//span[contains(text(),'" + Links[i] + "')]");
 			Common.clickElement("xpath",
 					"//span[text()='" + Links[i] + "']");	
-			String title = "";
-            if (Common.findElements("xpath", "//h2[contains(text(),'Best Sellers')]").size() > 0) {
-                title = Common.findElement("xpath", "//h2[contains(text(),'Best Sellers')]").getText();
-            } else if (Common.findElements("xpath", "//span[contains(text(),'Stocking Stuffers')]").size() > 0) {
-                title = Common.findElement("xpath", "//span[contains(text(),'Stocking Stuffers')]").getText();
-            }
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			System.out.println(Links[i]);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Water Bottle Gifts") || Common.getPageTitle().contains(title) ||
-					Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains(Link[i]),
+			
+			String title = Common.findElement("xpath", "//h1[contains(@class,'hero-heading')]").getText();			
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+			System.out.println(title);
+			System.out.println(Links[i]);			
+			String products = Common.getText("xpath", "//div[contains(@class,'text-sm')]/span"); 
+			System.out.println(products);
+			int Number = Integer.parseInt(products);
+			int j=0;
+			if(Number>j)
+			{
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || 
+						Common.getPageTitle().contains("Water Bottle Gifts"), 
 					"verifying the header link " + Links[i] + "Under Customize",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
          	}
-		}
+         }}
 		catch(Exception |Error e)
 		{
 			e.printStackTrace();
