@@ -8402,7 +8402,9 @@ return Number;
 							Common.getText("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
-							Common.navigateBack();
+//							Common.navigateBack();
+							Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary os:btn-secondary')])[1]");
+							
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 									"click on the country should navigate to the  " + Country + "Page",
 									"successfully page navigating to " + Country + "PAGE",
