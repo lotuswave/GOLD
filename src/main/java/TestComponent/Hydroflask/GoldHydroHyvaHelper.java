@@ -280,17 +280,36 @@ public class GoldHydroHyvaHelper {
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 //			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-
+			Thread.sleep(3000);
+			
+            String PLPprice=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[1]").getText();
+            System.out.println(PLPprice);
+            if(PLPprice.contains(""))
+            {
+            	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
+            	   System.out.println(PLPprice1);
+            	   Common.clickElement("xpath", "//img[@alt='" + products + "']");
+       			Sync.waitPageLoad();
+       			Thread.sleep(2000);
+            	   product_quantity(Dataset);
+       			Sync.waitPageLoad();
+       			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
+                System.out.println(PDPprice);
+//                Assert.assertEquals(PLPprice1, PDPprice);
+            }
+            else {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
 			product_quantity(Dataset);
 			Sync.waitPageLoad();
-
+            String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
+            System.out.println(PDPprice);
+            Assert.assertEquals(PLPprice, PDPprice);
+            }
 			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
 			Common.clickElement("xpath", "//button[@title='Add to Cart']");
-
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
@@ -397,10 +416,15 @@ public class GoldHydroHyvaHelper {
 	}
 
 
-	public void minicart_Checkout() {
-
+	public String minicart_Checkout() {
+            String Checkoutprice="";
 		try {
 			Thread.sleep(4000);
+			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
+            System.out.println(PDPprice);
+            String Minicartprice=Common.findElement("xpath", "//span[contains(@class,'text-sm leading')]//span[@class='price']").getText();
+            System.out.println(Minicartprice);
+            Assert.assertEquals(PDPprice, Minicartprice);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
@@ -411,6 +435,9 @@ public class GoldHydroHyvaHelper {
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
+			Checkoutprice=Common.findElement("xpath", "//span[@class='text-xs']//span[contains(@class,'price')]").getText().trim();
+			  Assert.assertEquals(Checkoutprice, Minicartprice);
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -421,6 +448,7 @@ public class GoldHydroHyvaHelper {
 
 			Assert.fail();
 		}
+		return Checkoutprice;
 
 	}
 	
@@ -1345,6 +1373,113 @@ public class GoldHydroHyvaHelper {
 		}
 	}
 	
+	
+	public void validate_GIFT_CARD_PLP() {
+		
+		try
+		{
+			Common.clickElement("xpath", "//span[contains(text(),'Holiday Shop')]");
+			Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
+			Common.clickElement("xpath", "//span[text()='Gift Cards']");
+			Thread.sleep(5000);
+			String GIFTCARDtitle = Common.getText("xpath", "//h1");
+		    System.out.println(GIFTCARDtitle);	
+			Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("E Gift Cards"),
+					"To validate Gift card Navigation to the PLP",
+					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+					"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
+		     Sync.waitElementPresent("xpath", "(//span[contains(text(),'Sort by')])[1]");
+		    String Sortingoptions = Common.getText("xpath", "(//span[contains(text(),'Sort by')])[1]");
+		    System.out.println(Sortingoptions);
+		    Common.assertionCheckwithReport(Sortingoptions.equalsIgnoreCase("Sort by:"),
+				"Verifying the sorting options are visible or not",
+				"Sort by options should visible",
+				"Sort by options are visibled", "Failed to visible the sort by options");
+		      
+		    Sync.waitElementPresent("xpath", "//span[contains(@class,'flex-grow title-panel')]");
+		    String FILTERSBY = Common.getText("xpath", "//span[contains(@class,'flex-grow title-panel')]").trim();
+		    System.out.println(FILTERSBY);
+		    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by:"),
+				"Verifying the filterby options are visible or not",
+				"filter by options should visible",
+				"filter by options are visibled", "Failed to visible the filter by options");
+//		    Sync.waitElementPresent("xpath", "(//div[@class='name'])[2]");
+//		    String Categorysection = Common.getText("xpath", "(//div[@class='name'])[2]").trim();
+//		    System.out.println(Categorysection);
+//		    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories"),
+//				"Verifying the filterby options are visible or not",
+//				"filter by options should visible",
+//				"filter by options are visibled", "Failed to visible the filter by options");
+		    Thread.sleep(3000);
+		    List<WebElement> allProducts = Common.findElements("xpath","//li[@class='ais-InfiniteHits-item']");
+	        int visibleProductCount = 0;
+	        for (WebElement product : allProducts) {
+	            if (product.isDisplayed()) {
+	                visibleProductCount++;
+	            }
+	            else {
+	            	Assert.fail();
+	            	
+	            }
+	        }
+	        System.out.println("Number of visible products: " + visibleProductCount);
+		
+		}
+		
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate Gift card Navigation to the PLP",
+					"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
+					"Sucessfully It has been navigated to the Gift card PLP ",
+					Common.getscreenShot("Failed to Navigate to the Gift card PLP"));
+			Assert.fail();
+			
+		
+		}
+	}
+	public void validate_price_PLP_and_PDP() {
+		// TODO Auto-generated method stub
+		
+		try
+		{
+			int Products= Common.findElements("xpath","//img[@itemprop='image']").size();
+			System.out.println(Products);
+			for(int i=0;i<Products;i++) 
+			{
+				Thread.sleep(4000);
+				int value = i + 1;
+				WebElement ListOfSubproducts = Common.findElement("xpath",
+						"(//span[@x-ref='normalPrice'])[" + value + "]");
+				String PLPprice=ListOfSubproducts.getText();
+			    System.out.println(PLPprice);
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "(//img[@itemprop='image'])["+ value + "]");
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+				String PDPPrice=Common.getText("xpath", "(//span[@x-text='item.price'])[1]");
+				System.out.println(PDPPrice);
+				Common.assertionCheckwithReport(PLPprice.equals(PDPPrice),
+						"validating the Price for the Gift card in the PDP",
+						"After clicking on the giftcard it should navigate to the PDP page",
+						"Successfully PLP and PDP price should be equal", "Failed to validate the PLP and PDP price");
+				Thread.sleep(4000);
+				Common.navigateBack();
+		
+			}
+		
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Price for the Gift card in the PDP",
+					"After clicking on the giftcard it should navigate to the PDP page",
+					"Unable to validate the PLP and PDP price",
+					Common.getscreenShotPathforReport("Failed to validate the PLP and PDP price"));
+			Assert.fail();
+		}
+		
+	}
 	
 	public void Select_Gift_Code(String dataSet) {
 		// TODO Auto-generated method stub
@@ -13459,6 +13594,25 @@ public void Explore_Validation(String Dataset) {
 			}
 			
 		}
+
+	public void myorders_price_validation(String price) {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[contains(@class,'price-excluding-tax block dr:font-bold')]//span");
+			String Orderprice=Common.findElement("xpath", "//span[contains(@class,'price-excluding-tax block dr:font-bold')]//span").getText();
+			System.out.println(Orderprice);
+			Assert.assertEquals(Orderprice, price);
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product price in the orders page", "Product price should be same in orders page",
+					"price is different in the orders summary price", Common.getscreenShot("Failed the product price in the order summary page"));
+			Assert.fail();
+		}
+		
+	}
 		
 
 }
