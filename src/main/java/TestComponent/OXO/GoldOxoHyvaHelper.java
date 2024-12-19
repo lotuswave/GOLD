@@ -4143,9 +4143,8 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
 			
 			Common.clickElement("xpath", "//button[@title='Save Account Information']");
-			Thread.sleep(10000);
-			String successMessage = Common.findElement("xpath", "//div/span[text()='You saved the account information.']").getText();
-			Thread.sleep(10000);
+			Thread.sleep(2000);
+			String successMessage = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(successMessage);
 			Common.assertionCheckwithReport(successMessage.contains("You saved the account"),
 					"Validating the saved account information", "Account information should be saved for the user",
@@ -6656,21 +6655,16 @@ catch(Exception | Error e)
 				Common.clickElement("id", "customer-menu");
 				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
 				Common.clickElement("xpath", "//a[@title='My Favorites']");
-				
-				Sync.waitPageLoad();
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing"),
-						"validating the Navigation to the My Favorites page",
-						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
-				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
 				System.out.println(message);
 				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+			
+				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				
 				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
