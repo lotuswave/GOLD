@@ -2959,7 +2959,7 @@ public String create_account(String Dataset) {
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
