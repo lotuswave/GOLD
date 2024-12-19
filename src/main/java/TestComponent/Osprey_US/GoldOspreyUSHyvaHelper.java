@@ -2302,13 +2302,13 @@ public void header_Shopbycollection(String Dataset) { {
 					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
 				}
 			
-//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 //			Sync.waitPageLoad(30);
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//span[contains(@class,'pdp-grid-title')]");
-			Sync.waitElementVisible(30, "xpath", "//span[contains(@class,'pdp-grid-title')]");
-			String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
+			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
+			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
@@ -2975,12 +2975,14 @@ public void header_Shopbycollection(String Dataset) { {
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
 
+				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
 
 //				
@@ -14125,11 +14127,11 @@ public void Prevent_Shipping() {
 	try
 	{
 		Thread.sleep(4000);
-		String standard=Common.findElement("xpath", "(//div[@class='message error restriction-error']//div)[1]").getText();
-		String Expedited=Common.findElement("xpath", "(//div[@class='message error restriction-error']//div)[2]").getText();
+		String standard=Common.findElement("xpath", "(//p[contains(@class,'message error ')])[1]").getText();
+		String Expedited=Common.findElement("xpath", "(//p[contains(@class,'message error ')])[2]").getText();
 		Common.assertionCheckwithReport(
-				standard.contains("Poco products and Ace 38 & 50 are not available for shipment to California")
-						|| Expedited.contains("Poco products and Ace 38 & 50 are not available for shipment to California"),
+				standard.contains("At this time, Poco products and Ace 38 & 50 are not available for shipment to California and Colorado.")
+						|| Expedited.contains("At this time, Poco products and Ace 38 & 50 are not available for shipment to California and Colorado."),
 				"validating the the error meesgage in shipments while adding the poco and ace products",
 				"After adding poco and ace products shipping methods should not display",
 				"Sucessfully shipping methods are not displayed",

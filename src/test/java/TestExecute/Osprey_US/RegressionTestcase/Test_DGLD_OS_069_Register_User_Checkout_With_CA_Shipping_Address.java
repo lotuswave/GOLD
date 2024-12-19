@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
+import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	OspreyRegressionEMEA Osprey_ReEu = new OspreyRegressionEMEA(datafile,"Checkout payments");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Register_User_Checkout_With_CA_Shipping_Address () throws Exception {
@@ -28,7 +28,8 @@ public class Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address {
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("CAAccount");
         Osprey_ReEu.Prevent_Shipping();
-        Osprey_ReEu.Remove_Products_from_Shoppingcart(); 
+        Osprey_ReEu.Shoppingcart_page();
+        Osprey_ReEu.deleteProduct_shoppingcart();
         
         
         
@@ -41,7 +42,7 @@ public class Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
