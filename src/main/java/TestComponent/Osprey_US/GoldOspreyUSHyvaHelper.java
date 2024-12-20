@@ -4307,11 +4307,20 @@ public void Validate_retailerlocations() {
 					if (Common.getCurrentURL().contains("/checkout")) {
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
-						Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
+						if(Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText().contains("At this time, Poco products and Ace 38 & 50 are not available for shipment"))
+						{
+							Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']//span");
+							String errormessage = Common.getText("xpath",
+									"//div[@ui-id='message-error']//span");
+							System.out.println(errormessage);
+						}
+						else
+						{
+							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
 						String sucessmessage = Common.getText("xpath",
 								"//div[contains(@class,'checkout-success')]//h1");
 						System.out.println(sucessmessage);
-
+						}
 					} else if (Common.getCurrentURL().contains("/success/")) {
 						String sucessmessage = Common.getText("xpath",
 								" //h1[normalize-space()='Thank you for your purchase!']");
@@ -7892,21 +7901,21 @@ public void Continue_Shopping() {
 		String zipcode = data.get(dataSet).get("postcode");
 		String shipping = data.get(dataSet).get("Shipping address");
 		try {
-			
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[2]");
-			Boolean checkbox=Common.findElement("xpath", "(//input[@type='checkbox'])[2]").isSelected();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
+			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']").isSelected();
 			System.out.println(checkbox);
-			Thread.sleep(7000);
+			Thread.sleep(8000);
 			String box=Boolean.toString(checkbox);
 			if(box.contains("true"))
 			{
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "(//input[@type='checkbox'])[3]");
-			Common.clickElement("xpath", "(//input[@type='checkbox'])[3]");
-			Thread.sleep(5000);
 
+			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
+			Common.clickElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
+			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='firstname' and @data-form='billing']", data.get(dataSet).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
@@ -7943,26 +7952,11 @@ public void Continue_Shopping() {
 			Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
+			Sync.waitElementPresent("xpath", "//input[@name='telephone' and @data-form='billing']");
+			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
 					data.get(dataSet).get("phone"));
-//			Common.clickElement("xpath", "//button[contains(text(),' Save ')]");
-//			Sync.waitPageLoad();
-//			Thread.sleep(5000);
 
-//			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
-//					data.get(dataSet).get("phone"));
-//			Thread.sleep(4000);		
-//			Common.clickElement("xpath", "//span[text()='Update']");
-//			//Sync.waitPageLoad();
-//			Thread.sleep(4000);
-//                if(Common.isElementDisplayed("xpath", "//span[contains(text(),'OK')]")) {
-//				
-//				Common.clickElement("xpath", "//span[contains(text(),'OK')]");
-//			Thread.sleep(5000);
-			
-//			update = Common.findElement("xpath", "//h2[text()='Payment Method']").getText();
-//			System.out.println(update);
-//			Sync.waitPageLoad();
 		}
 			else {
 				
@@ -7971,11 +7965,7 @@ public void Continue_Shopping() {
 			System.out.println(update);
 			Sync.waitPageLoad();
 			}
-//			Common.assertionCheckwithReport(update.contains("Payment Method"),
-//					"verifying the Billing address form in payment page",
-//					"Billing address should be saved in the payment page",
-//					"Sucessfully Billing address form should be Display ",
-//					"Failed to display the Billing address in payment page");
+
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -14165,13 +14155,10 @@ public void proAce_Error_Payment(String dataSet) {
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 
-		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(4000);
-			addPaymentDetails(dataSet);
-		}
+		
 		Thread.sleep(4000);
-		String errormessage=Common.findElement("xpath", "//div[contains(@data-ui-id,'checkout-cart')]").getText();
-		Common.assertionCheckwithReport(errormessage.contains("not available for shipment to California"),
+		String errormessage=Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
+		Common.assertionCheckwithReport(errormessage.contains("At this time, Poco products and Ace 38 & 50 are not available for shipment to California and Colorado."),
 				"validating the error message after click Place order button",
 				"After clicking on the place order button it should display the error message",
 				"Successfully Error message has been displayed", "Failed to display the error message");
