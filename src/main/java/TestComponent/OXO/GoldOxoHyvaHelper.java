@@ -1032,7 +1032,72 @@ public void Gift_card(String dataSet) {
 		}
 	}
 	
-	
+public String giftCardSubmitOrder() throws Exception {
+	// TODO Auto-generated method stub
+
+	String order = "";
+	String expectedResult = "It redirects to order confirmation page";
+	Common.actionsKeyPress(Keys.PAGE_UP);
+	Thread.sleep(3000);
+	int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
+		Thread.sleep(4000);
+if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
+{
+//   Common.refreshpage();
+   Thread.sleep(4000);
+   Common.clickElement("xpath", "//input[@id='payment-method-free']");
+   Thread.sleep(4000);
+   Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+		//Common.refreshpage();
+	Thread.sleep(3000);
+}
+else
+{
+   AssertJUnit.fail();
+}
+
+	String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+	if (!url.contains("stage") && !url.contains("preprod")) {
+	}
+
+	else {
+		try {
+			Thread.sleep(10000);
+			String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
+			int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
+			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+					"verifying the product confirmation", expectedResult,
+					"Successfully It redirects to order confirmation page Order Placed",
+					"User unabel to go orderconformation page");
+
+			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+				Thread.sleep(4000);
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+				System.out.println(order);
+			} else {
+				Thread.sleep(4000);
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+				System.out.println(order);
+			}
+
+			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+				Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+				System.out.println(order);
+
+			}
+		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+					"User failed to navigate  to order confirmation page",
+					Common.getscreenShotPathforReport("failednavigatepage"));
+			AssertJUnit.fail();
+		}
+
+	}
+	return order;
+}
 	
 
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
