@@ -12866,6 +12866,295 @@ public void header_WeAre_Oxo(String Dataset) {
 
 		
 	}
+
+
+
+	public void Card_Value_for_my_fav(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			if(Common.getCurrentURL().contains("/gb/"))
+			{
+			String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
+			Common.assertionCheckwithReport(Price.contains(amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			}
+			else
+			{
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("gift-card")||Common.getCurrentURL().contains("/wishlist/index"),
+						"validating gift card Navigated to the PDP",
+						"After clicking on the gift card on PLP it should navigate to the PDP",
+						"Successfully Gift card is Navigated to the PDP ",
+						"Failed to navigate the gift card to the PDP");
+			}
+			
+			Giftcard_details("Gift Details");
+		
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+						"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+				Assert.fail();
+			}
+			
+		}
+
+
+
+	public void Guest_Add_Wishlist_Create_account() {
+		// TODO Auto-generated method stub
+		try {
+
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Favorites']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Favorites']");
+			Thread.sleep(6000);
+			int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
+			System.out.println(Size);
+			if (Size > 0) {
+
+				Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
+				Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
+
+			} else {
+				int Error = Common.findElements("xpath", "//div[@class='a-message__container-inner']").size();
+				if (Error>0) {
+					
+					Common.mouseOverClick("xpath", "(//span[text()='Create an Account'])");
+					Create_Account_for_Guest_my_fav("Create Account");
+				} else {
+					System.out.println("no Error message displayed");
+	            if(Common.getCurrentURL().contains("/customer/account/login")) {
+	            	Create_Account_for_Guest_my_fav("Create Account");
+	            }
+				}
+			}
+			Thread.sleep(3000);
+			/*int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
+			System.out.println("Wishlist" + WishlistMSG);
+			Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
+					"My Wish List should be display", "Sucessfully navigated to My Wish List ",
+					"failed to navigate to My Wish List");*/
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
+					"Products added to Compare list successfull", "failed to add product to wishlist",
+					Common.getscreenShotPathforReport("Wishlistfail"));
+			Assert.fail();
+		}
+}
+
+	public String Create_Account_for_Guest_my_fav(String Dataset) {
+		// TODO Auto-generated method stub
+		String email = "";
+		try {
+	        Common.clickElement("xpath", "//a[text()='Create an Account']");
+			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
+			Common.clickElement("xpath", "//span[text()='Sign Up']");
+			Sync.waitImplicit(30);
+			Thread.sleep(4000);
+		    
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
+					"validating navigation to the account page after clicking on sign up button",
+					"User should navigate to the My account page after clicking on the Signup",
+					"Sucessfully user navigates to the My account page after clickng on thr signup button",
+					"Failed to navigate to the My account page after clicking on the signup button");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog(
+					"validating navigation to the account page after clicking on sign up button",
+					"User should navigate to the My account page after clicking on the Signup",
+					"Unable to navigate to the My account page after clicking on the signup button",
+					"Failed to navigate to the My account page after clicking on the signup button");
+			AssertJUnit.fail();
+		}
+		return email;
+	}
+
+
+	public void Giftcard_Add_from_My_fav(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		String Product=data.get(Dataset).get("Osprey");
+		try
+		{
+			Common.clickElement("id", "customer-menu");
+			Common.clickElement("xpath", "//*[@id='customer.header.wishlist.link' or @id='customer.header.sign.in.link']\r\n"
+					+ "");
+			Thread.sleep(4000);
+			String product=Common.findElement("xpath", "//a[@title='"+Product+"']").getText().toLowerCase();
+			System.out.println(product);
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Cart "+Product+"']");
+			Common.clickElement("xpath", "//button[@aria-label='Add to Cart "+Product+"']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String Pdp=Common.findElement("xpath", "//span[@itemprop='name']").getText().toLowerCase();
+			System.out.println(Pdp);
+			
+			Common.assertionCheckwithReport(product.equalsIgnoreCase(Pdp),
+					"verifying Product navigation to the PDP", "After clicking add to cart in the myfav it should navigate to the PDP",
+					"Product navigated to the PDP page", "Failed to Navigate tot the PDP");
+			Sync.waitElementPresent("xpath", "//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//span[text()='"+ amount +"']");
+			if(Common.getCurrentURL().contains("/gb"))
+			{
+			String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
+			Common.assertionCheckwithReport(Price.contains(amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			Giftcard_details("Gift Details");
+			}
+			else
+			{
+				Card_Value_for_my_fav("price");
+		
+			}
+			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Failed to selected amount is matched for the gift card",
+					Common.getscreenShotPathforReport("Failed to appear amount for the gift card"));
+			Assert.fail();
+		}
+	}
+
+
+
+	public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String Number = "";
+		String cardnumber = data.get(dataSet).get("cardNumber");
+		System.out.println(cardnumber);
+		String expectedResult = "land on the payment section";
+		// Common.refreshpage();
+
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+			// Common.clickElement("xpath", "//label[@for='stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
+
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+					"User unabel to land opaymentpage");
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+			Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+
+//				Common.actionsKeyPress(Keys.PAGE_DOWN);
+				Thread.sleep(3000);
+				 if(Common.getCurrentURL().contains("stage3"))
+	             {
+					  Thread.sleep(4000);
+	                 Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
+	                 Common.dropdown("xpath", "//select[@name='region_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+	                 Thread.sleep(3000);
+	                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']")
+	                         .getAttribute("value");
+	                 System.out.println(Shippingvalue);
+	             }
+				 else
+				 {
+					 Common.scrollIntoView("xpath", "//select[@name='region']");
+					 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				Thread.sleep(2000);
+				// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//input[@name='postcode']",
+						data.get(dataSet).get("postcode"));
+				Thread.sleep(5000);
+
+				Common.textBoxInput("xpath", "//input[@name='telephone']",
+						data.get(dataSet).get("phone"));
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				
+				Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
+				Thread.sleep(2000);
+				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+				System.out.println(Number);
+
+				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.ARROW_DOWN);
+				Common.textBoxInput("xpath", "//input[@name='postalCode']",data.get(dataSet).get("postcode"));
+				Common.switchToDefault();
+				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+
+					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+				} else {
+					AssertJUnit.fail();
+					
+
+				}
+
+			
+			
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+					"failed  to fill the Credit Card infromation",
+					Common.getscreenShotPathforReport("Cardinfromationfail"));
+			AssertJUnit.fail();
+		}
+
+		expectedResult = "credit card fields are filled with the data";
+		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+
+		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+
+		return Number;
+	}
 	
 }
 
