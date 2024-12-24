@@ -143,6 +143,7 @@ public class GoldOxoHyvaHelper {
 		try
 		{
 			
+			Common.actionsKeyPress(Keys.DOWN);
 				Sync.waitElementPresent("xpath", "//a[text()='Gift Card']");
 				Common.clickElement("xpath", "//a[text()='Gift Card']");
 //				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
