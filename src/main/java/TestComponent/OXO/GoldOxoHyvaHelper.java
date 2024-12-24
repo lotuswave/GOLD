@@ -13180,7 +13180,7 @@ public void header_WeAre_Oxo(String Dataset) {
 	public void Giftcard_Add_from_My_fav(String Dataset) {
 		// TODO Auto-generated method stub
 		String amount=data.get(Dataset).get("Card Amount");
-		String Product=data.get(Dataset).get("Osprey");
+		String Product=data.get(Dataset).get("Prodcts");
 		try
 		{
 			Common.clickElement("id", "customer-menu");

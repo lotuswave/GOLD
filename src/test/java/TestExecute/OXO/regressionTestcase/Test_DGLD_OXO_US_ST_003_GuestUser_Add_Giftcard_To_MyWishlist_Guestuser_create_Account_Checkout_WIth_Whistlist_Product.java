@@ -18,7 +18,7 @@ public class Test_DGLD_OXO_US_ST_003_GuestUser_Add_Giftcard_To_MyWishlist_Guestu
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.Gift_card("Giftcard");
+			Oxo.Gift_cards("Giftcard");
 			Oxo.Card_Value_for_my_fav("price");
 			Oxo.Guest_Add_Wishlist_Create_account();
 			Oxo.Giftcard_Add_from_My_fav("price");
