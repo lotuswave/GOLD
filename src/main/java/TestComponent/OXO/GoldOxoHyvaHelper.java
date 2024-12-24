@@ -185,6 +185,53 @@ public class GoldOxoHyvaHelper {
 		
 	}
 	
+	public void Other_Amount(String Dataset) {
+		// TODO Auto-generated method stub
+		String Enter_amount=data.get(Dataset).get("Another Amount");
+		System.out.println(Enter_amount);
+		try
+		{
+			Sync.waitPageLoad();
+//			Sync.waitElementPresent("xpath", "//input[@type='number']");
+			Common.clickAndtextBoxInput("xpath", "//input[@type='number']", data.get(Dataset).get("Another Amount"));
+//			Common.textBoxInput("xpath", "//input[@type='number']", data.get(Dataset).get("Enter_amount"));
+			Common.clickElement("xpath", "//button[@title='Add']");
+			Thread.sleep(2000);
+			String Price=Common.findElement("xpath", "//div[@class='final-price inline-block']//span[@class='price']").getText();
+			System.out.println(Price);
+			Common.assertionCheckwithReport(Price.contains(Enter_amount),
+					"validating gift card amount value in PDP",
+					"After clicking on the value amount should be appear in PDP",
+					"Successfully selected amount is matched for the gift card",
+					"Failed to appear amount for the gift card");
+			
+			Giftcard_details("Gift Details");
+			product_quantity("Product Qunatity");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
+//					.getAttribute("data-ui-id");
+//			System.out.println(message);
+//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+//					"Product should be add to cart", "Sucessfully product added to the cart ",
+//					"failed to add product to the cart");
+
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			Assert.fail();
+		}
+
+	}
+
+	
 	public void Card_Value(String Dataset) {
 		// TODO Auto-generated method stub
 		String amount=data.get(Dataset).get("Card Amount");
