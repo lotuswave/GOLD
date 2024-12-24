@@ -12915,8 +12915,8 @@ public void header_WeAre_Oxo(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Favorites']");
-			Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Favorites']");
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Wish List']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Wish List']");
 			Thread.sleep(6000);
 			int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
 			System.out.println(Size);
