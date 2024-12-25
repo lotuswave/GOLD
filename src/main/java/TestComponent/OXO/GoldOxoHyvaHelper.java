@@ -13180,7 +13180,7 @@ public void header_WeAre_Oxo(String Dataset) {
 	public void Giftcard_Add_from_My_fav(String Dataset) {
 		// TODO Auto-generated method stub
 		String amount=data.get(Dataset).get("Card Amount");
-		String Product=data.get(Dataset).get("Prodcts");
+		String Product=data.get(Dataset).get("Products");
 		try
 		{
 			Common.clickElement("id", "customer-menu");
@@ -13258,6 +13258,61 @@ public void header_WeAre_Oxo(String Dataset) {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+			int Size= Common.findElements("xpath", "//button[contains(text(),'New Address')]").size();
+			if(Size>0) {
+				Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
+				
+				Thread.sleep(3000);
+				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Thread.sleep(4000);
+				String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+				Sync.waitPageLoad();
+				Thread.sleep(5000);
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+				System.out.println(data.get(dataSet).get("City"));
+				
+				 Common.scrollIntoView("xpath", "//select[@name='region']");
+				 Common.dropdown("xpath", "//select[@name='region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			
+			Common.textBoxInput("xpath", "//input[@name='postcode']",
+					data.get(dataSet).get("postcode"));
+			Thread.sleep(2000);
+
+			Common.textBoxInput("xpath", "//input[@name='telephone']",
+					data.get(dataSet).get("phone"));
+Common.clickElement("xpath", "//button[contains(text(),'Save')]");
+
+Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
+Thread.sleep(2000);
+Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
+Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+System.out.println(Number);
+
+Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+Thread.sleep(2000);
+Common.actionsKeyPress(Keys.ARROW_DOWN);
+
+Common.switchToDefault();
+if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
+	Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+
+	Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+} else {
+	AssertJUnit.fail();
+	
+
+}
+
+
+
+			} else
+			{
 			Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
@@ -13269,7 +13324,6 @@ public void header_WeAre_Oxo(String Dataset) {
 				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
 				System.out.println(data.get(dataSet).get("City"));
 
-//				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
 				 if(Common.getCurrentURL().contains("stage3"))
 	             {
@@ -13296,7 +13350,7 @@ public void header_WeAre_Oxo(String Dataset) {
 						data.get(dataSet).get("phone"));
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				
+			}
 				Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
 				Thread.sleep(2000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
@@ -13310,7 +13364,14 @@ public void header_WeAre_Oxo(String Dataset) {
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
-				Common.textBoxInput("xpath", "//input[@name='postalCode']",data.get(dataSet).get("postcode"));
+				WebElement element = Common.findElement("xpath", "//input[@name='postalCode']");
+				if(element.isDisplayed()) {
+					element.sendKeys(data.get(dataSet).get("postcode"));
+					
+				}
+				else { 
+					System.out.println("Element found but not displayed: " + element); 
+					}
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
@@ -13344,6 +13405,29 @@ public void header_WeAre_Oxo(String Dataset) {
 
 		return Number;
 	}
+
+
+
+	public void Reg_Add_Wishlist_Create_account() {
+		// TODO Auto-generated method stub
+		try {
+
+			Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Wish List']");
+			Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Wish List']");
+			Thread.sleep(6000);
+			int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
+			System.out.println(Size);
+			
+			Thread.sleep(3000);
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
+					"Products added to Compare list successfull", "failed to add product to wishlist",
+					Common.getscreenShotPathforReport("Wishlistfail"));
+			Assert.fail();
+		}
+}
 	
 }
 
