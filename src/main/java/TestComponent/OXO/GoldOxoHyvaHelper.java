@@ -13364,13 +13364,13 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
-				WebElement element = Common.findElement("xpath", "//input[@name='postalCode']");
-				if(element.isDisplayed()) {
-					element.sendKeys(data.get(dataSet).get("postcode"));
+				int PostCode = Common.findElements("xpath", "//input[@name='postalCode']").size();
+				if(PostCode>0) {
+					Common.textBoxInput("xpath", "//input[@name='postalCode']",data.get(dataSet).get("postcode"));
 					
 				}
 				else { 
-					System.out.println("Element found but not displayed: " + element); 
+					System.out.println("Element found but not displayed: " + PostCode); 
 					}
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
