@@ -13313,6 +13313,10 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 
 			} else
 			{
+				int size = Common.findElements("xpath", "//input[@name='email_address']").size();
+				if(size>0) {
+					Common.textBoxInput("xpath", "//input[@name='email_address']", data.get(dataSet).get("UserName"));
+				}
 			Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
