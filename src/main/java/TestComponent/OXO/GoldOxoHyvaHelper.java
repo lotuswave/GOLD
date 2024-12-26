@@ -664,7 +664,6 @@ public class GoldOxoHyvaHelper {
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
@@ -13243,6 +13242,7 @@ public void header_WeAre_Oxo(String Dataset) {
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		String order="";
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
@@ -13387,28 +13387,41 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 
 				}
 
+				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				String sucessMessage = Common.getText("xpath",
+						" //h1[normalize-space()='Thank you for your purchase!']");
+
+				// Tell_Your_FriendPop_Up();
+				int size = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+						.size();
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+						"verifying the product confirmation", expectedResult,
+						"Successfully It redirects to order confirmation page Order Placed",
+						"User unabel to go orderconformation page");
+
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+						.size() > 0) {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+					System.out.println(order);
+				} else {
+					Thread.sleep(1000);
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+					System.out.println(order);
+				}
 			
-			
 
-		}
+		
 
-		catch (Exception | Error e) {
-			e.printStackTrace();
-
-			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
-					"failed  to fill the Credit Card infromation",
-					Common.getscreenShotPathforReport("Cardinfromationfail"));
-			AssertJUnit.fail();
-		}
-
-		expectedResult = "credit card fields are filled with the data";
-		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-
-		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
-				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
-
-		return Number;
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
+				"Products added to Compare list successfull", "failed to add product to wishlist",
+				Common.getscreenShotPathforReport("Wishlistfail"));
+		Assert.fail();
 	}
+		return Number;
+}
 
 
 
