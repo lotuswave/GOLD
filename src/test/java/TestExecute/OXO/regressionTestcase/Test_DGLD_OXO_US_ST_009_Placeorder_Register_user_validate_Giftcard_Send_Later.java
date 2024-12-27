@@ -24,10 +24,8 @@
 				Oxo.Usersignin("AccountDetails");
 				Oxo.Gift_cards("Oxo Gift Card");
 				Oxo.Send_LaterCard_Value("price");
-//				Oxo.minicart_Checkout();
-//				Oxo.select_Shipping_Method("GroundShipping method");
-//				Oxo.clickSubmitbutton_Shippingpage();
-//				Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
+				Oxo.minicart_Checkout();
+				Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 				
 				
 				
@@ -41,7 +39,7 @@
 
 		@AfterTest
 		public void clearBrowser() {
-//			Common.closeAll();
+			Common.closeAll();
 
 		}
 

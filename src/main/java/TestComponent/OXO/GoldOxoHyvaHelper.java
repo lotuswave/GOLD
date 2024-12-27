@@ -13465,9 +13465,9 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Giftcard_details("Gift Details");
 			product_quantity("Product Qunatity");
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//label[contains(text(),'Send later')]");
+			Sync.waitElementPresent("xpath", "(//input[@id='is_date_delivery'])[2]");
 			
-			Common.clickElement("xpath", "//label[contains(text(),'Send later')]");
+			Common.clickElement("xpath", "(//input[@id='is_date_delivery'])[2]");
 			
 			Common.textBoxInput("name", "am_giftcard_date_delivery", data.get(Dataset).get("DeliveryDate"));
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
