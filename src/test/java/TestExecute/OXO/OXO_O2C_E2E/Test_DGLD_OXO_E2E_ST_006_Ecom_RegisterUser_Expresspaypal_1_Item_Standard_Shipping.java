@@ -5,6 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.OXO.GoldOxoE2EHelper;
 import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Common;
 import TestLib.Login;
@@ -12,21 +13,30 @@ import TestLib.Login;
 public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Standard_Shipping {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"E2E");
+	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void RegisterUser_Expresspaypal_1_Item_Standard_Shipping() throws Exception {
 
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
 			Thread.sleep(5000);
-			//String Website=Oxo.URL();
-			String Description ="RegisterUser_Expresspaypal_1_Item_Standard_Shipping";
+			String Description ="Guest User Multiple Item + Giftcard item + GC Partial redeem (GC Redeem Should be applied to only Regular item and not for GC Item) + Express PayPal - Standard Shipping";
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
-			Oxo.search_E2E_product("SKU-1130780");
-			Oxo.Addtocart("SKU-1130780");
+			Oxo.search_product("SKU-11244200 - 1QTY");
+			Oxo.addtocart("SKU-11244200 - 1QTY");
+			
+			Oxo.search_product("SKU-11261400 - 2QTY");
+			Oxo.addtocart("SKU-11261400 - 2QTY");
+			Oxo.search_product("SKU-11301800-1QTY");
+			Oxo.addtocart("SKU-11301800-1QTY");
+			
+			Oxo.Gift_cards();
+			Oxo.Card_Value("price");
+			
 			Oxo.minicart_Checkout();
+			String Used_GiftCode= Oxo.Gift_card("Giftcard");
 			String Products_details=Oxo.shipping_order_details();
 			HashMap<String,String> Payment= Oxo.ExpressPaypal("PaypalDetails");
 			Oxo.Paypal_Address();
@@ -36,13 +46,13 @@ public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Sta
 			Oxo.ExpressOrder();
 			String OrderIdNumber= Oxo.Verify_order_page();
 			System.out.println(OrderIdNumber);
-			Oxo.Admin("Login Details");
+		/*	Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderIdNumber);
 			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),Payment.get("Card"),Products_details,Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("AdminOrdertax"),Orderstatus1.get("AdminOrdertotal"));
 
 			
-			
+	*/		
 			
 
 		} catch (Exception e) {
