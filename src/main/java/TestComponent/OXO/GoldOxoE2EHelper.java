@@ -9228,7 +9228,7 @@ public void header_1_Percent_Planet() {
 			cell = row.createCell(1);
 			cell.setCellType(CellType.STRING);
 			
-			cell.setCellValue("Drybar");
+			cell.setCellValue("Oxo");
 			
 			cell = row.createCell(2);
 			cell.setCellType(CellType.STRING);
