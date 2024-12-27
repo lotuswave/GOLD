@@ -13448,6 +13448,42 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Assert.fail();
 		}
 }
+
+
+
+	public void Send_LaterCard_Value(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//label[contains(@class,'amcard-label-block -price')]//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//label[contains(@class,'amcard-label-block -price')]//span[text()='"+ amount +"']");
+			String Amount=Common.findElement("xpath", "(//span[@class='price'])[1]").getText();
+			Assert.assertEquals(Amount,amount);
+			Giftcard_details("Gift Details");
+			product_quantity("Product Qunatity");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//label[contains(text(),'Send later')]");
+			
+			Common.clickElement("xpath", "//label[contains(text(),'Send later')]");
+			
+			Common.textBoxInput("name", "am_giftcard_date_delivery", data.get(Dataset).get("DeliveryDate"));
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			AssertJUnit.fail();
+		}
+	}
+	
 	
 }
 
