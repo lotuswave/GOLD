@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import TestComponent.OXO.GoldOxoHelper;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_E2E_ST_009_Ecom_RegisterUser_Paypal_3_Items_Standard_Shipping {
+public class Test_DGLD_OXO_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCode_full_redemption {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"E2E");
