@@ -29,7 +29,7 @@ public class Test_DGLD_OXO_E2E_ST_005_Ecom_RegisterUser_Klarna_2_Items_Standard_
 			Oxo.minicart_Checkout();
 //			String Products_details=Oxo.shipping_order_details();
 //			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");
-			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("PO box Address");
 			 String Used_GiftCode = "NULL";
 			 Oxo.select_Shipping_Method("GroundShipping method");
 //			HashMap<String,String> data=Oxo.OrderSummaryValidation();
