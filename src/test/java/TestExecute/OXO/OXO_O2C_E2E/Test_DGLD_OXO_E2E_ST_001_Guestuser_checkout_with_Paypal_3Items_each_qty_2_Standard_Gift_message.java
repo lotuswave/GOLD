@@ -15,8 +15,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_GuestUser_Paypal_2_Items_Standard_Shipping() throws Exception {
-//       for(int i=0;i<3;i++)
-//       {
+
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
 			//String Website=Oxo.URL();
@@ -26,8 +25,8 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 			Oxo.addtocart("SKU-11244200 - 2QTY");
 			Oxo.search_product("SKU-12171000 - 2QTY");
 			Oxo.addtocart("SKU-12171000 - 2QTY");
-			Oxo.search_product("SKU-9109200 - 2QTY");
-			Oxo.addtocart("SKU-9109200 - 2QTY");
+			Oxo.search_product("SKU-11320400 - 2QTY");
+			Oxo.addtocart("SKU-11320400 - 2QTY");
 			Oxo.minicart_viewcart();
 			Oxo.Gift_Message("GiftMessage");
 			Oxo.minicart_Checkout();
@@ -50,7 +49,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-//	}
+
 	
 	@AfterTest
 	public void clearBrowser() {
