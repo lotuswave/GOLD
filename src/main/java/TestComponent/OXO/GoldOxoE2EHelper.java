@@ -227,7 +227,7 @@ public class GoldOxoE2EHelper {
 	}
 
 	public void Configurable_addtocart_pdp(String Dataset) {
-		String product = data.get(Dataset).get("Colorproduct");
+		String product = data.get(Dataset).get("Products");
 		String productcolor = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
@@ -247,49 +247,7 @@ public class GoldOxoE2EHelper {
 			Sync.waitPageLoad();
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 
-			Thread.sleep(4000);
-//			String Productname = Common.findElement("xpath", "//button[@id='product-addtocart-button']/span").getText();
-//			Thread.sleep(3000);
-//			String stars = Common.findElement("xpath", "//span[@class='yotpo-stars']").getAttribute("class");
-//
-//			Sync.waitPageLoad();
-//			Thread.sleep(7000);
-//			System.out.println(Productname);
-////			Common.assertionCheckwithReport(Common.getPageTitle().contains(product),
-//			Common.assertionCheckwithReport(Productname.contains("Add") && stars.contains("stars"),
-//					"validating the product should navigate to the PDP page",
-//					"When we click on the product is should navigate to the PDP page",
-//					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-
 			Sync.waitPageLoad();
-
-			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
-					"//div[@class='product-options-wrapper']//div[contains(@class,'m-swatch m-swatch-group__option')]");
-			System.out.println(ListOfSubproducts.size());
-			for (int i = 0; i < ListOfSubproducts.size(); i++) {
-
-				ListOfSubproducts.get(i).click();
-
-				int value = i + 1;
-				Thread.sleep(5000);
-				String colorname = Common.getText("xpath",
-						"(//div//label[@class='m-swatch-group__header swatch-attribute-selected-option'])[1]");
-				System.out.println(colorname);
-				String imagecolor = Common
-						.findElement("xpath", "(//div[contains(@class,'fotorama__nav__frame fotorama')]//img)[1]")
-						.getAttribute("alt").replace("Go to", "").replace(product, "").replace(" -  ", "")
-						.replace("1", "");
-				System.out.println(imagecolor);
-				String color = Common.findElement("xpath",
-						"(//div[@class='m-product-overview__info']//div[contains(@style,'background') and @index ])["
-								+ value + "]")
-						.getAttribute("data-option-label");
-				System.out.println(color);
-				Common.assertionCheckwithReport(colorname.equals(color) || colorname.equals(imagecolor),
-						"validating the  product add to the cart", "Product should be add to cart",
-						"Sucessfully product added to the cart ", "failed to add product to the cart");
-
-			}
 
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
@@ -2931,11 +2889,12 @@ public class GoldOxoE2EHelper {
 
 	}
 
-	public void Kalrna_Payment(String dataSet) throws Exception {
+	public String Kalrna_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		String Order="";
 	
 		String fullname=data.get(dataSet).get("FirstName");
 		String expectedResult = "land on the payment section";
@@ -2958,7 +2917,9 @@ public class GoldOxoE2EHelper {
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				System.out.println("Switch to Frames");
-				Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Common.scrollIntoView("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Common.clickElement("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
+				Thread.sleep(5000);
 
 
 				Common.switchToDefault();
@@ -2969,7 +2930,7 @@ public class GoldOxoE2EHelper {
 					{
 						 Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
 	                	 Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-	                	 
+	                	 Thread.sleep(4000);
 	                	 Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
 	     				 Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 	     				Thread.sleep(10000);
@@ -2983,7 +2944,7 @@ public class GoldOxoE2EHelper {
 								Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 								Thread.sleep(4000);
 								Sync.waitPageLoad();
-								klarna_Details(dataSet);
+								Order=klarna_Details(dataSet);
 	     				 }
 	     				 else if(Common.getCurrentURL().contains("/success/"))
 	     				 {
@@ -2994,7 +2955,7 @@ public class GoldOxoE2EHelper {
 	     				 {
 	     					 Thread.sleep(4000);
 	     					Sync.waitPageLoad();
-		    				klarna_Details(dataSet);
+	     					Order=klarna_Details(dataSet);
 	     					
 	     				 }
 	     				
@@ -3013,7 +2974,7 @@ public class GoldOxoE2EHelper {
 							Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 							Thread.sleep(4000);
 							Sync.waitPageLoad();
-							klarna_Details(dataSet);
+							Order=klarna_Details(dataSet);
                   	   }
 						 else if(Common.getCurrentURL().contains("/success/"))
 						 {
@@ -3024,9 +2985,47 @@ public class GoldOxoE2EHelper {
 						 {
 							 Thread.sleep(4000);
 		     					Sync.waitPageLoad();
-			    				klarna_Details(dataSet);
+		     					Order=klarna_Details(dataSet);
 						 }
 					}
+				}
+				else
+				{
+					Thread.sleep(4000);
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String klarna=Common.findElement("xpath", "//button[@id='klarna-tab']").getAttribute("data-testid");
+					System.out.println(klarna);
+					Common.assertionCheckwithReport(
+							klarna.contains("klarna"),
+							"validating the selection of the klarna method",
+							"klarna should be selected ","klarna is selected",
+							"Failed to select the klarna method in the production environment");
+					Common.switchToDefault();
+					
+				}
+				
+				
+			}
+			else
+			{
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
+				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Common.clickElement("xpath", "//span[text()='Klarna']");
+				Common.switchToDefault();
+				
+				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+				{
+					Thread.sleep(5000);
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Sync.waitPageLoad();
+				Thread.sleep(8000);
+				Order=klarna_Details(dataSet);
 				}
 				else
 				{
@@ -3042,42 +3041,8 @@ public class GoldOxoE2EHelper {
 					Common.switchToDefault();
 					
 				}
-				
-				
 			}
-			else
-			{
-				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Common.clickElement("xpath", "//span[text()='Klarna']");
-				Common.switchToDefault();
-				
-				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
-				{
-					Thread.sleep(5000);
-				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				klarna_Details(dataSet);
-				}
-				else
-				{
-					Thread.sleep(4000);
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
-					System.out.println(klarna);
-					Common.assertionCheckwithReport(
-							klarna.contains("klarna"),
-							"validating the selection of the klarna method",
-							"klarna should be selected ","klarna is selected",
-							"Failed to select the klarna method in the production environment");
-					Common.switchToDefault();
-					
-				}
-			}
-			
-			
-			
+		
 		
 	}
 		catch(Exception | Error e)
@@ -3088,9 +3053,10 @@ public class GoldOxoE2EHelper {
 					Common.getscreenShotPathforReport("failednavigatepage"));
 			Assert.fail();
 		}
+		return Order;
 	}
 
-	public void klarna_Details(String Dataset) {
+	public String klarna_Details(String Dataset) {
 		// TODO Auto-generated method stub
 		String order="";
 		String phone=data.get(Dataset).get("phone");
@@ -3112,6 +3078,7 @@ public class GoldOxoE2EHelper {
 			System.out.println(number);
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
+			Thread.sleep(6000);
 			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
@@ -3124,20 +3091,19 @@ public class GoldOxoE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			
-			Common.clickElement("xpath", "//span[text()='Pay now']");
-			Thread.sleep(4000);
-			Common.refreshpage();
-			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
-			if(klarna.contains("Choose how to pay"))
+			
+			String klarna=Common.findElement("xpath", "//h1[@id='summary-title']").getText();
+			Thread.sleep(3000);
+			if(klarna.contains("Confirm and pay"))
 			{
 				Thread.sleep(4000);
-			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
-				Common.clickElement("xpath", "//label[@for='pay_now__label']");
-				
-				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
-				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
+				Common.clickElement("xpath", "//div[@data-testid='summary.payment_preview']");
+//				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+//				Common.clickElement("xpath", "//label[@for='pay_now__label']");
+//				
+//				Thread.sleep(2000);
+				Sync.waitElementPresent("xpath", "//span[text()='Continue']");
+				Common.doubleClick("xpath", "//span[text()='Continue']");
 				Thread.sleep(4000);
 				//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
@@ -3234,12 +3200,12 @@ public class GoldOxoE2EHelper {
 			"Successfully It redirects to order confirmation page Order Placed",
 			"User unable to go orderconformation page");
 	
-	if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size()>0) {
-		order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+	if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p/a").size()>0) {
+		order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p/a");
 		System.out.println(order);
 	}
-	if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
-		order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+	if(Common.findElements("xpath","//div[contains(@class,'checkout-success container')]//p/a").size()>0) {
+		order=	Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p/a");
 		System.out.println(order);
 	}
 	
@@ -3255,8 +3221,8 @@ catch(Exception | Error e)
  Assert.fail();
 }
 	}
+		return order;
 	}
-
 	public String payPal_Payment(String dataSet) throws Exception {
 
 		String order = "";
