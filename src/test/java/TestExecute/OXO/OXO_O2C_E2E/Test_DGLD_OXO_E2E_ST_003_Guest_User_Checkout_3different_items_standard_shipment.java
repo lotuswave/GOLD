@@ -18,15 +18,14 @@ public class Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_stand
 
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
-			//String Website=Oxo.URL();
 			String Description ="Guest user checkout with CC- 3 different items  each qty - 3 (Standard) ";
 			Oxo.verifingHomePage();
 			Oxo.search_product("SKU-12171000 - 3QTY");
 			Oxo.addtocart("SKU-12171000 - 3QTY");
-			Oxo.search_product("SKU-9109200 - 3QTY");
-			Oxo.addtocart("SKU-9109200 - 3QTY");
-			Oxo.search_product("SKU-11309200 -3QTY");
-			Oxo.addtocart("SKU-11309200 -3QTY");
+			Oxo.search_product("SKU-11320400 - 3QTY");
+			Oxo.addtocart("SKU-11320400 - 3QTY");
+			Oxo.search_product("SKU-11219400 - 3QTY");
+			Oxo.addtocart("SKU-11219400 - 3QTY");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
@@ -37,16 +36,11 @@ public class Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_stand
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
 			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
-			
-			
-			
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-//	}
 	
 	@AfterTest
 	public void clearBrowser() {
