@@ -1205,6 +1205,8 @@ public class GoldOxoE2EHelper {
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
+				
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
 //				
@@ -3393,13 +3395,26 @@ catch(Exception | Error e)
 				//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 						{
+					int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
+					if(savedcard==2)
+					{
+						Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+						Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
-				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
-//				
+				Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");			
 				Common.switchToDefault();
-				Thread.sleep(5000);
+					}
+					else
+					{
+						Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+						Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+						Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");						
+						Common.switchToDefault();
+					}
+				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Thread.sleep(4000);
@@ -3457,12 +3472,12 @@ catch(Exception | Error e)
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unable to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//a");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
 				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//a");
+					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//p/a");
 					System.out.println(order);
 				}
 

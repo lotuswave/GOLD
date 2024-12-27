@@ -17,8 +17,6 @@ public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard
 	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_RegisterUser_Afterpay_1_item_Standard_Shipping() throws Exception {
-//       for(int i=0;i<3;i++)
-//       {
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
 			Thread.sleep(5000);
@@ -38,17 +36,13 @@ public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
 			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
-			
-			
-			
-
+		
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
 
-	
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
@@ -60,9 +54,7 @@ public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard
 		 System.setProperty("configFile", "oxo\\config.properties");
 		  Login.signIn();
 		  Oxo.acceptPrivacy();
-
 	}
-
 }
 
 
