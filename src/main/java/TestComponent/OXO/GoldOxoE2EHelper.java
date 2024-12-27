@@ -1250,6 +1250,128 @@ public class GoldOxoE2EHelper {
 		}
 
 	}
+	
+public String Gift_card(String dataSet) {
+		String code="";
+		try
+		{
+			String URL = Common.getCurrentURL();
+			System.out.println(URL);
+			if(URL.contains("stage")|| URL.contains("preprod")) {
+			Thread.sleep(3000);
+			if(Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
+			{
+		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
+		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+			}
+		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
+		code=data.get(dataSet).get("GiftCard_Preprod");
+		Common.actionsKeyPress(Keys.ARROW_UP);
+		Common.clickElement("xpath","//button[@aria-label='Add Code']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+	    System.out.println(successmsg);	
+		Common.assertionCheckwithReport(successmsg.contains("added"),
+				"validating the success message after applying gift card",
+				"Success message should be displayed after the applying of gift card",
+				"Sucessfully gift card has been applyed","Failed to apply the gift card");
+			}
+			else
+			{
+				Common.scrollIntoView("xpath", "//button[contains(text(),'Add Gift Card')]");
+				Common.clickElement("xpath","//button[contains(text(),'Add Gift Card')]");
+				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
+				Common.clickElement("xpath","//button[@aria-label='Add Code']");
+				Thread.sleep(2000);
+				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+			    System.out.println(successmsg);	
+				Common.assertionCheckwithReport(successmsg.contains("added"),
+						"validating the success message after applying gift card",
+						"Success message should be displayed after the applying of gift card",
+						"Sucessfully gift card has been applyed","Failed to apply the gift card");
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the gift card",
+					"Success message should be displayed after the applying of gift card",
+					"Sucessfully gift card has been applyed",
+					Common.getscreenShotPathforReport("Failed to apply the gift card"));
+			Assert.fail();
+		}
+		return code;
+	}
+	
+public String giftCardSubmitOrder() throws Exception {
+	// TODO Auto-generated method stub
+
+	String order = "";
+	String expectedResult = "It redirects to order confirmation page";
+	Common.actionsKeyPress(Keys.PAGE_UP);
+	Thread.sleep(3000);
+	int placeordercount = Common.findElements("xpath", "//button[@class='action primary checkout']").size();
+		Thread.sleep(4000);
+if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
+{
+//   Common.refreshpage();
+   Thread.sleep(4000);
+   Common.clickElement("xpath", "//input[@id='payment-method-free']");
+   Thread.sleep(4000);
+   Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+		//Common.refreshpage();
+	Thread.sleep(3000);
+}
+else
+{
+   AssertJUnit.fail();
+}
+
+	String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+
+	if (!url.contains("stage") && !url.contains("preprod")) {
+	}
+
+	else {
+		try {
+			Thread.sleep(10000);
+			String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
+			int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
+			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+					"verifying the product confirmation", expectedResult,
+					"Successfully It redirects to order confirmation page Order Placed",
+					"User unabel to go orderconformation page");
+
+			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+				Thread.sleep(4000);
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+				System.out.println(order);
+			} else {
+				Thread.sleep(4000);
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+				System.out.println(order);
+			}
+
+			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+				Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+				System.out.println(order);
+
+			}
+		
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+					"User failed to navigate  to order confirmation page",
+					Common.getscreenShotPathforReport("failednavigatepage"));
+			AssertJUnit.fail();
+		}
+
+	}
+	return order;
+}
+	
+
 
 
 	public void addDeliveryAddress_RegUser(String dataSet) {

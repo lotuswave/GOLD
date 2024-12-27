@@ -7,48 +7,38 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
-import TestLib.Login;
+import TestComponent.OXO.GoldOxoE2EHelper;
+import TestLib.*;
 
 public class Test_DGLD_OXO_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCode_full_redemption {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"E2E");
+	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_RegisterUser_Paypal_3_Items_Standard_Shipping() throws Exception {
-//       for(int i=0;i<3;i++)
-//       {
+	public void Validate_Registeruser_checkout_MultipleItems_GiftCode_full_redemption() throws Exception {
+
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
-			Thread.sleep(5000);
-			//String Website=Oxo.URL();
-			String Description ="RegisterUser_Paypal_3_Items_Standard_Shipping";
+			String Description ="Register user checkout Multiple Items + Gift Code full redemption";
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
-			Oxo.search_E2E_product("SKU-1130900");
-			Oxo.Addtocart("SKU-1130900");
-			Oxo.search_E2E_product("SKU-11312500");
-			Oxo.Addtocart("SKU-11312500");
-			Oxo.search_E2E_product("SKU-61138800");
-			Oxo.Addtocart("SKU-61138800");
+			Oxo.search_product("SKU-11244200 - 2QTY");
+			Oxo.addtocart("SKU-11244200 - 2QTY");
+			Oxo.search_product("SKU-1155901- 3QTY");
+			Oxo.Configurable_addtocart_pdp("SKU-1155901- 3QTY");
+			Oxo.search_product("SKU-1334480V1");
+			Oxo.addtocart("SKU-1334480V1");
 			Oxo.minicart_Checkout();
-			String Products_details=Oxo.shipping_order_details();
-			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");
-			Oxo.select_Shipping_Method("GroundShipping method");
-			Oxo.clickSubmitbutton_Shippingpage();
-			HashMap<String,String> data=Oxo.OrderSummaryValidation();
-			HashMap<String,String> Payment=Oxo.payPalPayment("PaypalDetails");
-			String OrderIdNumber= Oxo.Verify_order_page();
-			System.out.println(OrderIdNumber);
-			Oxo.Admin("Login Details");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			 Oxo.select_Shipping_Method("GroundShipping method");
+			 String Used_GiftCode =  Oxo.Gift_card("Full_RedeemGiftcard");
+			String  OrderNumber=Oxo.giftCardSubmitOrder();
+			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
-			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderIdNumber);
-			Oxo.writeOrderNumber(OrderIdNumber, Description, data.get("subtotlaValue"),data.get("shippingammountvalue"),data.get("Taxammountvalue"),data.get("ActualTotalammountvalue"),data.get("ExpectedTotalAmmountvalue"),data.get("Discountammountvalue"),Shipping.get("ShippingState"),Shipping.get("ShippingZip"),Payment.get("Card"),Products_details,Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("AdminOrdertax"),Orderstatus1.get("AdminOrdertotal"));
-
-			
-			
-			
+			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
+		
 
 		} catch (Exception e) {
 
@@ -59,7 +49,7 @@ public class Test_DGLD_OXO_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
