@@ -12025,11 +12025,14 @@ public void outofstock_subcription(String Dataset) {
 				Float pricevalue = Float.parseFloat(Newprice);
 				Thread.sleep(4000);
 				float discount = originalvalue - (originalvalue * 65 / 100);
-				String discountvalue = String.valueOf(discount).replace("$", "");
-				Float value = Float.parseFloat(discountvalue);
-				System.out.println(discountvalue);
+//			
+//				String discountvalue = String.valueOf(discount).replace("$", "");
+				String ExpectedTotalAmmount2 = new BigDecimal(discount).setScale(2, BigDecimal.ROUND_HALF_UP).toString().replace("$", "");
+				System.out.println(ExpectedTotalAmmount2);
+				Float value = Float.parseFloat(ExpectedTotalAmmount2);
+				System.out.println(ExpectedTotalAmmount2);
 				System.out.println(Newprice);
-				Common.assertionCheckwithReport(discountvalue.contains(Newprice),
+				Common.assertionCheckwithReport(ExpectedTotalAmmount2.contains(Newprice),
 						"verifying the discount for the employee discount ",
 						"user should able to see the discount for the employee",
 						"user successfully able to apply the discount", "Failed to apply the discount for the employee");
