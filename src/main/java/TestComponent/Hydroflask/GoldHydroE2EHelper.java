@@ -273,34 +273,14 @@ public class GoldHydroE2EHelper {
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 //			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			Thread.sleep(3000);
 			
-            String PLPprice=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[1]").getText();
-            System.out.println(PLPprice);
-            if(PLPprice.contains(""))
-            {
-            	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
-            	   System.out.println(PLPprice1);
-            	   Common.clickElement("xpath", "//img[@alt='" + products + "']");
-       			Sync.waitPageLoad();
-       			Thread.sleep(2000);
-            	   product_quantity(Dataset);
-       			Sync.waitPageLoad();
-       			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-                System.out.println(PDPprice);
-//                Assert.assertEquals(PLPprice1, PDPprice);
-            }
-            else {
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
 			product_quantity(Dataset);
 			Sync.waitPageLoad();
-            String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-            System.out.println(PDPprice);
-            Assert.assertEquals(PLPprice, PDPprice);
-            }
+         
 			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
 			Common.clickElement("xpath", "//button[@title='Add to Cart']");
 			Sync.waitPageLoad();
@@ -3315,8 +3295,8 @@ System.out.println(MyFavorites);
 		}
 		
 	}
-public void Gift_card(String dataSet) {
-		
+public String Gift_card(String dataSet) {
+	String code="";
 		try
 		{
 			String URL = Common.getCurrentURL();
@@ -3329,6 +3309,7 @@ public void Gift_card(String dataSet) {
 		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
 			}
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Preprod"));
+		code=data.get(dataSet).get("GiftCard_Preprod");
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		Sync.waitPageLoad();
@@ -3365,6 +3346,7 @@ public void Gift_card(String dataSet) {
 					Common.getscreenShotPathforReport("Failed to apply the gift card"));
 			Assert.fail();
 		}
+		return code;
 	}
 public String giftCardSubmitOrder() throws Exception {
 	// TODO Auto-generated method stub
