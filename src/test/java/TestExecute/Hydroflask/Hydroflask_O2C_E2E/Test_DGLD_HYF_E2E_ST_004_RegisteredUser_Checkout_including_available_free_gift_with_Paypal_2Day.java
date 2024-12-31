@@ -11,29 +11,29 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_003_GuestUser_Checkout_with_AmexCC_2Day_3different_Items_including_inlineEngaving {
+public class Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_available_free_gift_with_Paypal_2Day {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_GuestUser_Checkout_with_AmexCC_2Day_3different_Items_including_inlineEngaving () throws Exception {
+	public void Validating_RegisteredUser_Checkout_including_available_free_gift_with_Paypal_2Day () throws Exception {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Guest user checkout with Amex CC - 2Day + 3 different Items including inline engaving, each qty -3";
+			String Description ="Registered User Checkout including  available free gift with Paypal - 2Day ";
 			Hydro.verifingHomePage();
-			Hydro.search_product("SKU-BC128001 -3QTY");     
-			Hydro.addtocart("SKU-BC128001 -3QTY");
-			Hydro.search_product("SKU-T28CPB612 -3QTY");     
-			Hydro.Text_Engraving("SKU-T28CPB612 -3QTY");
-			Hydro.search_product("SKU-K12474 -3QTY");     
-			Hydro.Configurable_addtocart_pdp("SKU-K12474 -3QTY");
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("SKU-TT32PS678");     
+			Hydro.addtocart("SKU-TT32PS678");
+			Hydro.search_product("SKU-BC128001");     
+			Hydro.addtocart("SKU-BC128001");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("2 Day method");
-            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCAmexcard");
+            String OrderNumber=Hydro.payPal_Payment("PaypalDetails");
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
 			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
