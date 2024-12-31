@@ -10355,17 +10355,29 @@ public void header_1_Percent_Planet() {
 			System.out.println(Card);
 
 			Common.switchToDefault();
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			Common.switchWindows();
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
-			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			Common.clickElement("id", "btnLogin");
+			
+			String otp = "111111";
+			for (int i = 0; i < otp.length(); i++) {
+				WebElement otpField = Common.findElement("id","otp" + (i + 1));
+				otpField.sendKeys(String.valueOf(otp.charAt(i)));
+			}
+			
+//			Common.clickElement("xpath", "(//a[text()='Try another way'])[1]");
+//			Common.clickElement("xpath", "(//div[text()='Log in with your password'])[1]");
+//			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Password"));
+//			Common.clickElement("id", "btnLogin");
 
 			Thread.sleep(3000);
 			// Paypal_Address_Verification("Express Paypal");
-
+			
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
+			Thread.sleep(8000);
+			Common.switchToFirstTab();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
@@ -10399,11 +10411,11 @@ public void header_1_Percent_Planet() {
 		// return null;
 	}
 
-	public void ExpressOrder() {
+	public String ExpressOrder() {
 
 		String expectedResult = "";
 		String order = "";
-
+      
 		if (Common.getCurrentURL().contains("preprod")) {
 			Common.scrollIntoView("xpath", "//button[@value='Place Order']");
 			// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
@@ -10448,6 +10460,7 @@ public void header_1_Percent_Planet() {
 				Assert.fail();
 			}
 		}
+		return order;
 	}
 
 	public HashMap<String, String> ExpressShipingdetails(String dataSet) throws Exception {

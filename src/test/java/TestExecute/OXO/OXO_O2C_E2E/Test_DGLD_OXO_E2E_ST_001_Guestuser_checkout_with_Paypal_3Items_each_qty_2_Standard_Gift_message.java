@@ -31,7 +31,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 			Oxo.Gift_Message("GiftMessage");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
-			String Used_GiftCode = "NULL";
+			String Used_GiftCode="YES";
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
 			String OrderNumber=Oxo.payPal_Payment("PaypalDetails");
