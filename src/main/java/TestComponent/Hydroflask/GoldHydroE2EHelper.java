@@ -9116,13 +9116,20 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 //			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 //			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 //					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 //					"failed to Navigate to the PDP page");
+			if(Common.findElement("xpath", "//span[contains(@x-text,'getSwatchText')]").getText().equals(color))
+			{
+				System.out.println(color);
+			}
+			else
+			{
 			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
+			}
 			Common.clickElement("xpath", "//span[contains(text(),'Engraving')]");
 			Thread.sleep(6000);
 //			engraving_color();
