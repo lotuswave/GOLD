@@ -24,16 +24,16 @@ public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Sta
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
-//			Oxo.search_product("SKU-11244200 - 1QTY");
-//			Oxo.addtocart("SKU-11244200 - 1QTY");
-//			
-//			Oxo.search_product("SKU-11261400 - 2QTY");
-//			Oxo.addtocart("SKU-11261400 - 2QTY");
-//			Oxo.search_product("SKU-11301800-1QTY");
-//			Oxo.addtocart("SKU-11301800-1QTY");
+			Oxo.search_product("SKU-11244200 - 1QTY");
+			Oxo.addtocart("SKU-11244200 - 1QTY");
+			
+			Oxo.search_product("SKU-11261400 - 2QTY");
+			Oxo.addtocart("SKU-11261400 - 2QTY");
+			Oxo.search_product("SKU-11301800-1QTY");
+			Oxo.addtocart("SKU-11301800-1QTY");
 				
 			Oxo.minicart_Checkout();
-//		    Oxo.Gift_card("Giftcard");
+		    Oxo.Gift_card("Giftcard");
 		    
 		    String Used_GiftCode="YES";
 //			String Products_details=Oxo.shipping_order_details();
@@ -44,11 +44,11 @@ public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Sta
 			String OrderNumber =Oxo.ExpressOrder();
 //			String OrderIdNumber= Oxo.Verify_order_page();
 //			System.out.println(OrderNumber);
-//			Oxo.Admin_signin("Login Details");
-//			Oxo.click_Sales();
-//			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-//			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
-//	
+			Oxo.Admin_signin("Login Details");
+			Oxo.click_Sales();
+			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
+	
 	
 			
 
@@ -61,7 +61,7 @@ public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Sta
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

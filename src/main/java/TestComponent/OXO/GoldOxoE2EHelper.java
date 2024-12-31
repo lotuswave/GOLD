@@ -10375,7 +10375,7 @@ public void header_1_Percent_Planet() {
 			Thread.sleep(3000);
 			// Paypal_Address_Verification("Express Paypal");
 			
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
+			Common.clickElement("xpath", "//button[text()='Complete Purchase']");
 			Thread.sleep(8000);
 			Common.switchToFirstTab();
 		} catch (Exception | Error e) {
@@ -10417,11 +10417,11 @@ public void header_1_Percent_Planet() {
 		String order = "";
       
 		if (Common.getCurrentURL().contains("preprod")) {
-			Common.scrollIntoView("xpath", "//button[@value='Place Order']");
+			Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 			// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
 			// Thread.sleep(2000);
 
-			Common.clickElement("xpath", "//button[@value='Place Order']");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 		}
 
 		// Tell_Your_FriendPop_Up();//To close the Pop-up
