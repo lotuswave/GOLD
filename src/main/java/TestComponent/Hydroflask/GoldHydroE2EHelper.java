@@ -668,7 +668,7 @@ public class GoldHydroE2EHelper {
 		}
 	}
 
-	public void After_Pay_payment(String dataSet) throws Exception {
+	public String After_Pay_payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String order = "";
 		Sync.waitPageLoad();
@@ -790,6 +790,7 @@ public class GoldHydroE2EHelper {
 				Assert.fail();
 			}
 		}
+		return order;
 	}
 
 	public void selectshippingaddress(String Dataset) {
@@ -1564,7 +1565,7 @@ public void FUll_Payment(String dataSet) {
 		return email;
 	}
 	public void Configurable_addtocart_pdp(String Dataset) {
-		String product = data.get(Dataset).get("Colorproduct");
+		String product = data.get(Dataset).get("Products");
 		String productcolor = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
