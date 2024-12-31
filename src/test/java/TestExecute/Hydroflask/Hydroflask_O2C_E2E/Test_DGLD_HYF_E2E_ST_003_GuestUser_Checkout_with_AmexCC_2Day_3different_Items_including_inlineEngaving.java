@@ -32,7 +32,7 @@ public class Test_DGLD_HYF_E2E_ST_003_GuestUser_Checkout_with_AmexCC_2Day_3diffe
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.selectshippingaddress("2 Day method");
             String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCAmexcard");
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
