@@ -4358,11 +4358,12 @@ public void Remove_GiftCode() {
 
 	}
 
-	public void Kalrna_Payment(String dataSet) throws Exception {
+	public String Kalrna_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(3000);
+		String Order="";
 	
 		String fullname=data.get(dataSet).get("FirstName");
 		String expectedResult = "land on the payment section";
@@ -4410,7 +4411,7 @@ public void Remove_GiftCode() {
 								Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 								Thread.sleep(4000);
 								Sync.waitPageLoad();
-								klarna_Details(dataSet);
+								Order=klarna_Details(dataSet);
 	     				 }
 	     				 else if(Common.getCurrentURL().contains("/success/"))
 	     				 {
@@ -4421,7 +4422,7 @@ public void Remove_GiftCode() {
 	     				 {
 	     					 Thread.sleep(4000);
 	     					Sync.waitPageLoad();
-		    				klarna_Details(dataSet);
+	     					Order=klarna_Details(dataSet);
 	     					
 	     				 }
 	     				
@@ -4440,7 +4441,7 @@ public void Remove_GiftCode() {
 							Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 							Thread.sleep(4000);
 							Sync.waitPageLoad();
-							klarna_Details(dataSet);
+							Order=klarna_Details(dataSet);
                   	   }
 						 else if(Common.getCurrentURL().contains("/success/"))
 						 {
@@ -4451,7 +4452,7 @@ public void Remove_GiftCode() {
 						 {
 							 Thread.sleep(4000);
 		     					Sync.waitPageLoad();
-			    				klarna_Details(dataSet);
+		     					Order=klarna_Details(dataSet);
 						 }
 					}
 				}
@@ -4495,7 +4496,7 @@ public void Remove_GiftCode() {
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				klarna_Details(dataSet);
+				Order=klarna_Details(dataSet);
 				}
 				else
 				{
@@ -4525,6 +4526,7 @@ public void Remove_GiftCode() {
 					Common.getscreenShotPathforReport("failednavigatepage"));
 			Assert.fail();
 		}
+		return Order;
 	}
 
 	public void Signin_Checkoutpage(String Dataset) {
@@ -5065,7 +5067,7 @@ public void Remove_GiftCode() {
 		}
 	}
 
-	public void klarna_Details(String Dataset) {
+	public String klarna_Details(String Dataset) {
 		// TODO Auto-generated method stub
 		String order="";
 		String phone=data.get(Dataset).get("phone");
@@ -5209,8 +5211,8 @@ public void Remove_GiftCode() {
 			"Successfully It redirects to order confirmation page Order Placed",
 			"User unable to go orderconformation page");
 	
-	if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size()>0) {
-		order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+	if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//a").size()>0) {
+		order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
 		System.out.println(order);
 	}
 	if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
@@ -5230,6 +5232,7 @@ catch(Exception | Error e)
  Assert.fail();
 }
 	}
+		return order;
 	}
 
 	public void noitems_giftregistry(String Dataset) {
