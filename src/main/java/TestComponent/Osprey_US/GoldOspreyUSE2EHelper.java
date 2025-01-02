@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16885,6 +16886,92 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
             e.printStackTrace();
         }
 	}
+
+public String TwentyFive_percent_Reward_Points(String Dataset) {
+	// TODO Auto-generated method stub
+	String rewardpointsused = "";
+	String points=data.get(Dataset).get("Discountcode");
+	System.out.println(points);
+	try {
+		Thread.sleep(6000);
+		Sync.waitElementPresent("xpath", "//div[@class='item discount']//span[@class='value']");
+		String Before_RWD_discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-$", "");
+//		System.out.println(Before_RWD_discount);
+		Thread.sleep(2000);
+		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Thread.sleep(4000);
+		Sync.waitElementPresent("xpath", "//input[@placeholder='Choose reward']");
+		Common.clickElement("xpath", "//input[@placeholder='Choose reward']");
+		String rewardpoints = Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim()
+				.replace("YOU HAVE ", "").replace(" POINTS", "");
+		System.out.println(rewardpoints);
+		
+		Thread.sleep(4000);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.actionsKeyPress(Keys.ENTER);
+		 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
+		 Thread.sleep(4000);
+		 rewardpointsused=pointsused.replace(pointsused, points);
+		 System.out.println(rewardpointsused);
+		Common.clickElement("xpath","//button[@aria-label='Apply']");
+ 		Sync.waitForLoad();
+ 		Thread.sleep(4000);
+// 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
+//		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+		Thread.sleep(3000);
+		String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
+		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
+		System.out.println(off);
+		System.out.println(discount);
+		
+		int size =Common.findElements("xpath", "(//span[normalize-space()='Subscription End Date:'])[3]").size();
+		if (off.contains("$25 off")) {
+
+			double Before_RWD_discount_value = Double.parseDouble(Before_RWD_discount);
+			double discountValue = Before_RWD_discount_value + 25;
+
+			DecimalFormat df = new DecimalFormat("#.00");
+			String discount1 = df.format(discountValue);
+
+			Common.assertionCheckwithReport(discount1.equals(discount),
+					"validating the reward points redeem in the order summary page",
+					"After clicking on the apply button reward points should be apply",
+					"Sucessfully reward points has been applied",
+					"failed to apply the reward point in the order summary page");
+
+		} 
+		else {
+			
+			
+		
+		Common.assertionCheckwithReport(off.equals(discount),
+				"validating the reward points redeem in the order summary page",
+				"After clicking on the apply button reward points should be apply",
+				"Sucessfully reward points has been applied",
+				"failed to apply the reward point in the order summary page");
+		}
+		rewardpointsused = Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim()
+				.replace("YOU HAVE ", "").replace(" POINTS", "");
+		
+//		System.out.println(rewardpointsused);
+		
+		
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the reward points redeem in the order summary page",
+				"After clicking on the apply button reward points should be apply",
+				"unable to apply reward points on the order summary page",
+				Common.getscreenShot("failed to apply the reward point in the order summary page"));
+		Assert.fail();
+	}
+	return rewardpointsused;
+}
 
 
 }
