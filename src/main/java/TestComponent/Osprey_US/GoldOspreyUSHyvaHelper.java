@@ -1951,7 +1951,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.textBoxInput("xpath", "//input[@id='lastname']", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@id='address_street1']", data.get(Dataset).get("Street"));
 			Common.textBoxInput("xpath", "//input[@id='address_city']", data.get(Dataset).get("City"));
-			Common.dropdown("xpath", "//select[@id='address_region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
+			Common.dropdown("xpath", "//select[@id='region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
 			
@@ -2117,7 +2117,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Thread.sleep(2000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
