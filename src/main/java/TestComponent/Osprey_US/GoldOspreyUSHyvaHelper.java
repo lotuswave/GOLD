@@ -4307,7 +4307,8 @@ public void Validate_retailerlocations() {
 					if (Common.getCurrentURL().contains("/checkout")) {
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
-						if(Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText().contains("At this time, Poco products and Ace 38 & 50 are not available for shipment"))
+						int error=Common.findElements("xpath", "//div[@ui-id='message-error']//span").size();
+						if(error>0)
 						{
 							Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']//span");
 							String errormessage = Common.getText("xpath",
@@ -11061,7 +11062,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 					"User unable to go orderconformation page");
 
 			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
-				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 				System.out.println(order);
 			}
 			if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
