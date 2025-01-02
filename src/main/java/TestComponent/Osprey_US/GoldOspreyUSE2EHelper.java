@@ -4310,7 +4310,8 @@ public void Validate_retailerlocations() {
 					if (Common.getCurrentURL().contains("/checkout")) {
 						Sync.waitPageLoad();
 						Thread.sleep(4000);
-						if(Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText().contains("At this time, Poco products and Ace 38 & 50 are not available for shipment"))
+						int error=Common.findElements("xpath", "//div[@ui-id='message-error']//span").size();
+						if(error>0)
 						{
 							Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']//span");
 							String errormessage = Common.getText("xpath",
