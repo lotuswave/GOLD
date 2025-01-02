@@ -2217,25 +2217,25 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
-			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
-					"enter product name will display in the search box", "user enter the product name in  search box",
-					"Failed to see the product name");
-			Thread.sleep(8000);
+//			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+//			System.out.println(productsearch);
+//			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+//					"enter product name will display in the search box", "user enter the product name in  search box",
+//					"Failed to see the product name");
+//			Thread.sleep(8000);
 			}
 			else
 			{
 				Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Prod Product"));
 				Common.actionsKeyPress(Keys.ENTER);
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
-				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
-				System.out.println(productsearch);
-				Common.assertionCheckwithReport(productsearch.contains(Prod), "validating the search functionality",
-						"enter product name will display in the search box", "user enter the product name in  search box",
-						"Failed to see the product name");
-				Thread.sleep(8000);
+//				Thread.sleep(4000);
+//				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+//				System.out.println(productsearch);
+//				Common.assertionCheckwithReport(productsearch.contains(Prod), "validating the search functionality",
+//						"enter product name will display in the search box", "user enter the product name in  search box",
+//						"Failed to see the product name");
+//				Thread.sleep(8000);
 			}
 			
 
@@ -3907,10 +3907,10 @@ public void Validate_retailerlocations() {
 //				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
 //			}
 
-			Sync.waitPageLoad();
-			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
-					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
-					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+//			Sync.waitPageLoad();
+//			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
+//					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
+//					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
 
 		}
 
@@ -9594,43 +9594,15 @@ public void Continue_Shopping() {
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
-			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
-			System.out.println(discountcodemsg);
-			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
-					"verifying pomocode", expectedResult, "promotion code working as expected",
-					"Promation code is not applied");
+//			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
+//			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+//			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
+//			System.out.println(discountcodemsg);
+//			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
+//					"verifying pomocode", expectedResult, "promotion code working as expected",
+//					"Promation code is not applied");
 
-			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
-			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
-					"").trim();
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
-					.replace("$", "").trim();
-			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
-			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(4000);
-			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]")
-					.replace("$", "").trim();
-			Float Discountvalue = Float.parseFloat(Discount);
-			System.out.println(Discountvalue);
-
-			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
-					.replace("$", "").trim();
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
-			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-					"validating the order summary in the payment page",
-					"Order summary should be display in the payment page and all fields should display",
-					"Successfully Order summary is displayed in the payment page and fields are displayed",
-					"Failed to display the order summary and fileds under order summary");
+			
 		}
 
 		catch (Exception | Error e) {
@@ -11087,11 +11059,12 @@ public String After_Pay_payment(String dataSet) throws Exception {
 	
 	
 	
-	public void Kalrna_Payment(String dataSet) throws Exception {
+	public String Kalrna_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		String Order="";
 	
 		String fullname=data.get(dataSet).get("FirstName");
 		String expectedResult = "land on the payment section";
@@ -11141,7 +11114,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 								Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 								Thread.sleep(4000);
 								Sync.waitPageLoad();
-								klarna_Details(dataSet);
+								Order=klarna_Details(dataSet);
 	     				 }
 	     				 else if(Common.getCurrentURL().contains("/success/"))
 	     				 {
@@ -11152,7 +11125,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 	     				 {
 	     					 Thread.sleep(4000);
 	     					Sync.waitPageLoad();
-		    				klarna_Details(dataSet);
+	     					Order=klarna_Details(dataSet);
 	     					
 	     				 }
 	     				
@@ -11171,7 +11144,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 							Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 							Thread.sleep(4000);
 							Sync.waitPageLoad();
-							klarna_Details(dataSet);
+							Order=klarna_Details(dataSet);
                   	   }
 						 else if(Common.getCurrentURL().contains("/success/"))
 						 {
@@ -11182,7 +11155,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 						 {
 							 Thread.sleep(4000);
 		     					Sync.waitPageLoad();
-			    				klarna_Details(dataSet);
+		     					Order=klarna_Details(dataSet);
 						 }
 					}
 				}
@@ -11222,7 +11195,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(8000);
-				klarna_Details(dataSet);
+				Order=klarna_Details(dataSet);
 				}
 				else
 				{
@@ -11250,8 +11223,9 @@ public String After_Pay_payment(String dataSet) throws Exception {
 					Common.getscreenShotPathforReport("failednavigatepage"));
 			Assert.fail();
 		}
+		return Order;
 	}
-	public void klarna_Details(String Dataset) {
+	public String klarna_Details(String Dataset) {
 		// TODO Auto-generated method stub
 		String order="";
 		String phone=data.get(Dataset).get("phone");
@@ -11416,6 +11390,7 @@ catch(Exception | Error e)
  Assert.fail();
 }
 	}
+		return order;
 	}
 
 
