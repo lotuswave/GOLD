@@ -35,12 +35,12 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
 		     String Used_GiftCode="NULL";
 		     Osprey_ReEu.TwentyFive_percent_Reward_Points("$25 Off (500 point)");
-//		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
-//		     String OrderNumber= Osprey_ReEu.payPal_Payment("PaypalDetails");
-//		     Osprey_ReEu.Admin_signin("Login Details");
-//		     Osprey_ReEu.click_Sales();
-//			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
-//			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
+		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
+		     String OrderNumber= Osprey_ReEu.payPal_Payment("PaypalDetails");
+		     Osprey_ReEu.Admin_signin("Login Details");
+		     Osprey_ReEu.click_Sales();
+			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
+			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
 //		    
 //	 
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

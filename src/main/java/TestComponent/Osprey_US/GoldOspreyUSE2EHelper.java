@@ -2265,7 +2265,7 @@ public void header_Shopbycollection(String Dataset) { {
 		String symbol=data.get(Dataset).get("Symbol");
 		System.out.println(symbol);
 		System.out.println(products);
-		System.out.println(Productsize);
+		System.out.println(productcolor);
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -2330,8 +2330,8 @@ public void header_Shopbycollection(String Dataset) { {
 			System.out.println(country);
 			Thread.sleep(4000);
 
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
