@@ -2295,7 +2295,16 @@ public void header_Shopbycollection(String Dataset) { {
 //				Thread.sleep(6000);
 //				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+				String ClrOption= Common.findElement("xpath", "(//div[@class='m-swatch swatch-option-selected'])[1]").getAttribute("class");
+				if(ClrOption.contains("option-selected")) {
+					System.out.println("Color Option Already selected");
+				}else {
+					
+					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				}
+			}
+				
 				else {
 					
 					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
