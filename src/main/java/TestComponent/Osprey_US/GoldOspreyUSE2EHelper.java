@@ -2251,10 +2251,6 @@ public void header_Shopbycollection(String Dataset) { {
 
 	}
 
-
-
-
-
 	public void addtocart(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
