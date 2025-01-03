@@ -866,8 +866,8 @@ public class GoldDrybarusE2EHelper {
 			if (size > 0  ) {
 				
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//div[contains(text(),'"+ method +"')]");
-				Common.clickElement("xpath", "//div[contains(text(),'"+ method +"')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ method +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
 			}
 			else
 			{
@@ -1347,9 +1347,12 @@ public class GoldDrybarusE2EHelper {
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				
+//				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+//				Common.clickElement("xpath", "//span[text()='New payment method']");
+				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-		
+				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -1404,15 +1407,26 @@ public class GoldDrybarusE2EHelper {
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
 					System.out.println(Cardnumber);
-					
+					Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+							"To validate the card details entered in the production environment",
+							"user should able to see the card details in the production environment",
+							"User Successfully able to see the card details enterd in the production environment ",
+							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
 
 				}
 
 			} else {
-			
+				Thread.sleep(4000);
+				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				if(savedcard>0)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
+
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-			
+				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -1420,7 +1434,7 @@ public class GoldDrybarusE2EHelper {
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-			
+				Thread.sleep(2000);
 				
 				int zipcode=Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
 				System.out.println(zipcode);
@@ -1439,7 +1453,12 @@ public class GoldDrybarusE2EHelper {
 	             	   Thread.sleep(40000);
 	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
-//	              		
+//	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+//	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+//	              		   Thread.sleep(3000);
+//	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+//	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//	                  	   Thread.sleep(4000);
 	                  	 String sucessmessage=Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
 		              	    System.out.println(sucessmessage);
 	              		   
@@ -1459,6 +1478,11 @@ public class GoldDrybarusE2EHelper {
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
 					System.out.println(Cardnumber);
+					Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
+							"To validate the card details entered in the production environment",
+							"user should able to see the card details in the production environment",
+							"User Successfully able to see the card details enterd in the production environment ",
+							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
 
 				}
@@ -4787,9 +4811,10 @@ public void FUll_Payment(String dataSet) {
 	
 	
 	public String gitCard(String Dataset) throws Exception{
+		String Giftcode="";
 		try{
 			String URL = Common.getCurrentURL();
-			String Giftcode = data.get(Dataset).get("GiftCardCode");
+			 Giftcode = data.get(Dataset).get("GiftCardCode");
 			System.out.println(URL);
 			if(URL.contains("stage")&&URL.contains("/gb") || URL.contains("preprod")&&URL.contains("/gb")) {
 			Thread.sleep(5000);
@@ -4828,7 +4853,7 @@ public void FUll_Payment(String dataSet) {
 
     Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
    Thread.sleep(5000);
-	Common.textBoxInput("xpath","//input[@id='card-code-input']",data.get(Dataset).get(Giftcode));
+	Common.textBoxInput("xpath","//input[@id='card-code-input']",Giftcode);
 		Common.textBoxInput("xpath","//input[@id='card-pin-input']",data.get(Dataset).get("GiftCardPin"));
 		Thread.sleep(6000);
 		Sync.waitElementPresent(30, "xpath", "//button[@aria-label='Add Code']");
@@ -4847,10 +4872,8 @@ public void FUll_Payment(String dataSet) {
 			ExtenantReportUtils.addFailedLog("validating the gift card","Gift Card was added.","User faield to to add gift card",Common.getscreenShotPathforReport("gitcard"));
 	        Assert.fail();
 	        }
-		return Dataset;
+		return Giftcode;
 
-		
-		
 	}
 	
 	public void select_noPayment_method() throws Exception {
@@ -11115,91 +11138,91 @@ public void videos_validation() {
 	
 }
 
-public HashMap<String, String> order_verfication(String orderNumber) {
-	// TODO Auto-generated method stub
-	HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
-	try
-	{
-		int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
-		if (filters > 0) {
-			Common.clickElement("xpath",
-					"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
-			Thread.sleep(4000);
-			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(1000);
-			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(1000);
-			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
-			Common.actionsKeyPress(Keys.ENTER);
-			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
-       
-		String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
-		System.out.println(Number);
-			 if(Number.equals(orderNumber))
-			 {
-						Thread.sleep(3000);
-						Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
-			 }
-					String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
-					
-								System.out.println(Orderstatus);
-								Orderstatus1.put("AdminOrderstatus", Orderstatus);
-								StringBuilder concatenatedText = new StringBuilder();
-								int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
-
-								for (int n=1;n<=size;n++) {
-			             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
-			             concatenatedText.append(sku);		  
-			           
-								}
-								String finalsku = concatenatedText.toString();
-								  System.out.println(finalsku);
-								  Orderstatus1.put("Skus", finalsku);
-		}
-		else
+	public HashMap<String, String> order_verfication(String orderNumber) {
+		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
+		try
 		{
-			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(1000);
-			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
-			Common.actionsKeyPress(Keys.ENTER);
-			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+			int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+			if (filters > 0) {
+				Common.clickElement("xpath",
+						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Thread.sleep(4000);
+				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(1000);
+				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+				Common.actionsKeyPress(Keys.ENTER);
+				Thread.sleep(3000);
+				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
 							Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
-				 }				
-						Thread.sleep(4000);
-					
-					String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
-					
-								System.out.println(Orderstatus);
-								Orderstatus1.put("AdminOrderstatus", Orderstatus);
-								StringBuilder concatenatedText = new StringBuilder();
-								int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
+				 }
+						String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+						
+									System.out.println(Orderstatus);
+									Orderstatus1.put("AdminOrderstatus", Orderstatus);
+									StringBuilder concatenatedText = new StringBuilder();
+									int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
 
-								for (int n=1;n<=size;n++) {
-			             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
-			             concatenatedText.append(sku);		  
-			           
-								}
-								String finalsku = concatenatedText.toString();
-								  System.out.println(finalsku);
-								  Orderstatus1.put("Skus", finalsku);
-		}	
+									for (int n=1;n<=size;n++) {
+				             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
+				             concatenatedText.append(sku);		  
+				           
+									}
+									String finalsku = concatenatedText.toString();
+									  System.out.println(finalsku);
+									  Orderstatus1.put("Skus", finalsku);
+			}
+			else
+			{
+				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+				Common.actionsKeyPress(Keys.ENTER);
+				Thread.sleep(3000);
+				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
+				System.out.println(Number);
+					 if(Number.equals(orderNumber))
+					 {
+								Thread.sleep(3000);
+								Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
+					 }				
+							Thread.sleep(4000);
+						
+						String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+						
+									System.out.println(Orderstatus);
+									Orderstatus1.put("AdminOrderstatus", Orderstatus);
+									StringBuilder concatenatedText = new StringBuilder();
+									int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
 
-}
-	catch(Exception | Error e)
-	{
-		e.printStackTrace();
-		Assert.fail();
+									for (int n=1;n<=size;n++) {
+				             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
+				             concatenatedText.append(sku);		  
+				           
+									}
+									String finalsku = concatenatedText.toString();
+									  System.out.println(finalsku);
+									  Orderstatus1.put("Skus", finalsku);
+			}	
+
 	}
-	return Orderstatus1;
-}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		return Orderstatus1;
+	}
+
 
 public String ordernumber() {
 	// TODO Auto-generated method stub
