@@ -11,7 +11,7 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_005_Registeruser_checkout_with_Non_aerosal_bundleItem_Aerosalproduct_config_StandardShipping_differentbilling_and_ShippingAddress_Discount_Giftcode_PartialRedeem_CC_Discover {
+public class Test_DGLD_DB_E2E_004_Registeruser_checkout_with_Non_aerosal_bundleItem_Aerosalproduct_config_StandardShipping_differentbilling_and_ShippingAddress_Discount_Giftcode_PartialRedeem_CC_Discover {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
@@ -25,18 +25,18 @@ public class Test_DGLD_DB_E2E_005_Registeruser_checkout_with_Non_aerosal_bundleI
 		Drybar.Verify_Homepage();
         Drybar.click_singinButton();
         Drybar.login_Drybar("AccountDetails");
-        Drybar.search_product("900-3020-1 Product");
-        Drybar.addtocart("900-3020-1 Product"); 
-        Drybar.search_product("Refresh Bundle");
-        Drybar.addtocart("Refresh Bundle");
-        Drybar.search_product("900-2930-1 Product");
-        Drybar.addtocart("900-2930-1 Product");
+        Drybar.search_product("Perfect blow Bundle E2E");
+        Drybar.addtocart("Perfect blow Bundle E2E"); 
+        Drybar.search_product("900-1515-1-N2");
+        Drybar.addtocart("900-1515-1-N2");
+        Drybar.search_product("CURE-LIQUEUR- product");
+        Drybar.addtocart("CURE-LIQUEUR- product");
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("AccountDetails");
         Drybar.discountCode("Discount");
-        Drybar.BillingAddress("AccountDetails");
+        Drybar.BillingAddress("6 walnut address");
         Drybar.selectshippingmethod("StandardShipping method");
-        String Used_GiftCode = Drybar.Gift_Card_Enter("DRY-PRPD-TEST-QA"); 
+        String Used_GiftCode = Drybar.Gift_Card_Enter("GiftCode Partial Redeem"); 
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
