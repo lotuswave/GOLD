@@ -11,7 +11,7 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_008_Guestuser_checkout_with_Simple_aerosalBundle_Configurableitem_Standardshipping_Discount_GiftCode_RedeemFull {
+public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_Configurableitem_Standardshipping_Discount_GiftCode_RedeemFull {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
@@ -25,10 +25,10 @@ public class Test_DGLD_DB_E2E_008_Guestuser_checkout_with_Simple_aerosalBundle_C
 		Drybar.Verify_Homepage();
         Drybar.search_product("900-2230-1 Product");
         Drybar.addtocart("900-2230-1 Product");
+        Drybar.search_product("CURE-LIQUEUR- product");
+        Drybar.addtocart("CURE-LIQUEUR- product");
         Drybar.search_product("Refresh Bundle");
-        Drybar.addtocart("Refresh Bundle");
-        Drybar.search_product("900-3020-1 Product");
-    	Drybar.Configurable_addtocart("900-3020-1 Product");
+    	Drybar.addtocart("Refresh Bundle");
         Drybar.minicart_Checkout();
         Drybar.addDeliveryAddress_Guestuser("Address");
         Drybar.selectshippingmethod("GroundShipping method");
