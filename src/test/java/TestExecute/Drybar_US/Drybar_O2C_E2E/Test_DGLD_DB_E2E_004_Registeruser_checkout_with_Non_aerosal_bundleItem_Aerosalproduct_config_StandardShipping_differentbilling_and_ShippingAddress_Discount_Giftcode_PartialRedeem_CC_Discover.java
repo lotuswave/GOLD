@@ -36,7 +36,7 @@ public class Test_DGLD_DB_E2E_004_Registeruser_checkout_with_Non_aerosal_bundleI
         Drybar.discountCode("Discount");
         Drybar.BillingAddress("6 walnut address");
         Drybar.selectshippingmethod("StandardShipping method");
-        String Used_GiftCode = Drybar.Gift_Card_Enter("GiftCode Partial Redeem"); 
+        String Used_GiftCode = Drybar.gitCard("GiftCode Partial Redeem"); 
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
