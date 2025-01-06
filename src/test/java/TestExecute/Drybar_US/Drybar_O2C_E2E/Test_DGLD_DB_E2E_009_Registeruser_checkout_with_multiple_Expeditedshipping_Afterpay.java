@@ -32,9 +32,9 @@ public class Test_DGLD_DB_E2E_009_Registeruser_checkout_with_multiple_Expediteds
         Drybar.search_product("900-0630-1 Product");
         Drybar.addtocart("900-0630-1 Product");
         Drybar.minicart_Checkout();
-        Drybar.RegaddDeliveryAddress("2 Dream address");
-        Drybar.selectshippingmethod("Expedited_method");
-        String Used_GiftCode = ""; // Indicating no gift code used 
+        Drybar.RegaddDeliveryAddress("Address");
+//        Drybar.selectshippingmethod("Expedited_method");
+        String Used_GiftCode = ""; 
         Drybar.clickSubmitbutton_Shippingpage();
         Drybar.tax_validation_Paymentpage("Address");
         String OrderNumber=Drybar.After_Pay_payment("Afterpay");
@@ -52,7 +52,7 @@ public class Test_DGLD_DB_E2E_009_Registeruser_checkout_with_multiple_Expediteds
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

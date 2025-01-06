@@ -262,9 +262,6 @@ public class GoldDrybarusE2EHelper {
 	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 			String expectedResult = "shipping address is entering in the fields";
-
-			String firstname = data.get(dataSet).get("FirstName");
-			System.out.println(firstname);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
@@ -1861,17 +1858,17 @@ public class GoldDrybarusE2EHelper {
 			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='flex items-center']")
+			String shipping = Common.getText("xpath", "(//span[@class='value'])[2]")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
 			
 			
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace(Symbol, "");
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='value'])[1]").replace(Symbol, "");
 			
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
-			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value')]")
+			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[1]")
 					.replace(Symbol, "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
