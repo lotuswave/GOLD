@@ -11,7 +11,7 @@ import TestComponent.Drybar_US.GoldDrybarusE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_DB_E2E_007_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem_Partial_CC {
+public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem_Partial_Paypal {
 
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarusE2EHelper Drybar = new GoldDrybarusE2EHelper(datafile,"Drybar_E2E");;
@@ -21,20 +21,20 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_3items_Expeditedshipping_Gi
 
 		try {
 			Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
-			String Description="Guest user checkout with 3 items + Expedited shipping + Gift Code redeeem Partial + CC";
+			String Description="Guest user checkout with 3 items + Expedited shipping + Gift Code redeeem Partial + Paypal";
 			Drybar.Verify_Homepage();
-			Drybar.search_product("900-0700-4 Product");
-	        Drybar.addtocart("900-0700-4 Product");
-	        Drybar.search_product("900-2230-1 Product");
+			Drybar.search_product("900-2230-1 Product");
 	        Drybar.addtocart("900-2230-1 Product");
 	        Drybar.search_product("900-0630-1 Product");
 	        Drybar.addtocart("900-0630-1 Product");
+	        Drybar.search_product("900-0700-4 Product");
+	        Drybar.addtocart("900-0700-4 Product");
 	        Drybar.minicart_Checkout();
-	        String Used_GiftCode= Drybar.Gift_Card_Enter("DRY-PRPD-TEST-QA");
 	        Drybar.addDeliveryAddress_Guestuser("Address");
+	        String Used_GiftCode= Drybar.gitCard("GiftCode Partial Redeem");
 	        Drybar.selectshippingmethod("ExpeditedShipping method");
 	        Drybar.clickSubmitbutton_Shippingpage();
-	        String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
+	        String OrderNumber=Drybar.payPal_Payment("PaypalDetails");
 	        Drybar.Admin_signin("AccountDetails");
 	        Drybar.click_Sales();
 	        HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
