@@ -41,8 +41,8 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 		     Osprey_ReEu.click_Sales();
 			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
 			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
-//		    
-//	 
+		    
+	 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

@@ -2292,12 +2292,13 @@ public void header_Shopbycollection(String Dataset) { {
 //				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				String ClrOption= Common.findElement("xpath", "(//div[@class='m-swatch swatch-option-selected'])[1]").getAttribute("class");
-				if(ClrOption.contains("option-selected")) {
+				String Clr= Common.findElement("xpath", "(//div[@class='m-swatch swatch-option-selected'])[1]").getAttribute("data-option-label");
+				if(ClrOption.contains("option-selected") && Clr.contains(data.get(Dataset).get("Color")) ) {
 					System.out.println("Color Option Already selected");
 				}else {
 //					
-//					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-//					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				}
 			}
 				
@@ -2313,7 +2314,7 @@ public void header_Shopbycollection(String Dataset) { {
 //			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 //			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 //			Sync.waitPageLoad(30);
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
 			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
