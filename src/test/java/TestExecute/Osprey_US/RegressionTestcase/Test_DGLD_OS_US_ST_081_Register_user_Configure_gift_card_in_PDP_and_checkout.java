@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
@@ -25,7 +24,7 @@ public class Test_DGLD_OS_US_ST_081_Register_user_Configure_gift_card_in_PDP_and
         Osprey_ReEu.Gift_cards("Osprey Gift Card");
         Osprey_ReEu.Card_Value("price");
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.updatePaymentAndSubmit_Gift_Order("CCAmexcard");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 
