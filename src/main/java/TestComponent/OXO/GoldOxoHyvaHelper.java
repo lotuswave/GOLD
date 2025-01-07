@@ -4883,8 +4883,8 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@data-label='Phone']");
 			Common.textBoxInput("xpath", "//input[@data-label='Phone']", data.get(dataSet).get("phone"));
 
-			Sync.waitElementPresent("xpath", "//input[@data-label='Country']");
-			Common.clickElement("xpath", "//input[@data-label='Country']");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+			Common.clickElement("xpath", "//div[@id='conversationCountry']");
 			Sync.waitElementPresent("xpath", "//div[text()='United States']");
 			Common.clickElement("xpath", "//div[text()='United States']");
 			Sync.waitElementPresent("xpath", "//input[@data-label='Address']");
@@ -4893,8 +4893,8 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@data-label='City']");
 			Common.textBoxInput("xpath", "//input[@data-label='City']", data.get(dataSet).get("City"));
 
-			Sync.waitElementPresent("xpath", "//input[contains(@data-label,'State')]");
-			Common.clickElement("xpath", "//input[contains(@data-label,'State')]");
+			Sync.waitElementPresent("xpath", "//div[@id='conversationStateProvince']");
+			Common.clickElement("xpath", "//div[@id='conversationStateProvince']");
 
 			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
 			Common.clickElement("xpath", "//div[text()='Alabama']");
