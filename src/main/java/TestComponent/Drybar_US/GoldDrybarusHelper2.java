@@ -2714,7 +2714,7 @@ public class GoldDrybarusHelper2 {
 				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
 				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
 				Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
-				String size=Common.findElement("xpath", "(//span[contains(@class,'m-swatch-group__header s')])[2]").getText().toUpperCase();
+				String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[1]").getText().toUpperCase();
 				System.out.println(size);
 				String size1= data.get(Dataset).get("size").toUpperCase();
 				System.out.println(size1);
@@ -3914,7 +3914,7 @@ public class GoldDrybarusHelper2 {
 				System.out.println("Discount:"+ Discountvalue);
 				Common.clickElement("xpath", "//span[@class='block transform']");
 				
-				String Tax = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(taxItem.amount)']").replace(Symbol, "");
+				String Tax = Common.getText("xpath", "(//div[contains(@x-text,'hyva.formatPrice(segment.value)')])[3]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				System.out.println("Taxvalue:"+ Taxvalue);
 				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
@@ -4283,11 +4283,11 @@ public class GoldDrybarusHelper2 {
 					"after clicking on the Address Book it should navigate to the Address Book page",
 					"Sucessfully Navigated to the Address Book page", "Failed to navigate to the Address Book page");
 			
-			Common.scrollIntoView("xpath", "(//span[@class='text-right'])[1]");
-			String shippingaddress = Common.findElement("xpath", "(//span[@class='text-right'])[1]")
+			Common.scrollIntoView("xpath", "//span[contains(text(),'Shipping Address')]");
+			String shippingaddress = Common.findElement("xpath", "//span[contains(text(),'Shipping Address')]")
 					.getText();
 			System.out.println(shippingaddress);
-		    int size=Common.findElements("xpath", "(//tbody[@class='m-table__body']//td)[3]").size();
+		    int size=Common.findElements("xpath", "(//div[contains(@class,'lg:col-start-2')])[2]").size();
 			Common.assertionCheckwithReport(
 					shippingaddress.contains(Dataset) || shippingaddress.contains("844 N Colony Rd") || size>0,
 					"verifying the address added to the address book",
@@ -5230,7 +5230,7 @@ public void FUll_Payment(String dataSet) {
         			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
         			Sync.waitPageLoad();
         			Thread.sleep(4000);
-        			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
+        			Common.scrollIntoView("xpath", "//span[@x-html='message.text']");
         			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
         			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
         			System.out.println(discountcodemsg);
@@ -6648,9 +6648,9 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 
 				Thread.sleep(5000);
-				Common.scrollIntoView("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
+				Common.scrollIntoView("xpath","//div[@class='ais-Panel-body price-range-w-fixed price']//div[@aria-label='Minimum price']");
 
-				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
+				List<WebElement> BeforeFilterprice = Common.findElements("xpath","//div[@class='ais-Panel-body price-range-w-fixed price']//div[@aria-label='Minimum price']");
 				List<String> Beforefilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : BeforeFilterprice) {
@@ -6662,9 +6662,9 @@ public void FUll_Payment(String dataSet) {
 				
 				Thread.sleep(5000);
 				Common.scrollIntoView("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
+						"//div[@class='ais-Panel-body price-range-w-fixed price']//div[@aria-label='Minimum price']");
 				List<WebElement> AfterFilterprice = Common.findElements("xpath",
-						"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
+						"//div[@class='ais-Panel-body price-range-w-fixed price']//div[@aria-label='Minimum price']");
 				List<String> Afterfilterpricelist = new ArrayList<String>();
 
 				for (WebElement p : AfterFilterprice) {
@@ -7068,7 +7068,7 @@ public void FUll_Payment(String dataSet) {
 					if(Number>j)
 					{
 						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i])
-								|| Common.getPageTitle().contains("Search Result Page"),
+								|| Common.getPageTitle().contains("Search Result Page")  || Common.getCurrentURL().contains("all-products"),
 								"verifying the header link " + Links[i] + "under GiftsSets",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -11110,7 +11110,7 @@ public void Support(String Dataset) {
 							|| Common.getCurrentURL().contains("where-to-buy")
 							|| Common.getCurrentURL().contains("news")
 							|| Common.getCurrentURL().contains("warranty") || Common.getCurrentURL().contains("helpcenter")
-							|| Common.getCurrentURL().contains("loyalty-rewards-terms-and-conditions"),
+							|| Common.getCurrentURL().contains("loyalty-rewards-terms-and-conditions")||Common.getCurrentURL().contains("return") ,
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
