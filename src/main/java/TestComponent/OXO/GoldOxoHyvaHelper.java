@@ -4685,16 +4685,16 @@ catch(Exception | Error e)
 			Thread.sleep(5000);
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
-			Sync.waitElementClickable(30, "xpath", "//input[@id='subscribe-email']");
-			Common.textBoxInput("xpath", "//input[@id='subscribe-email']", Utils.getEmailid());
+			Sync.waitElementClickable(30, "xpath", "//input[@name='email']");
+			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//span[text()='Submit']");
+			Common.clickElement("xpath", "//button[text()='Submit']");
 			Thread.sleep(2000);
-			String Text = Common.getText("xpath", "//span[text()='Thank you for your subscription.']");
+			String Text = Common.getText("xpath", "//span[text()='Thanks for subscribing!']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text.contains("Thank you for your subscription"),
+			Common.assertionCheckwithReport(Text.contains("Thanks for subscribing!"),
 					"verifying newsletter subscription",
 					"User get confirmation message if new email if it used mail it showing error message ", Text,
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
