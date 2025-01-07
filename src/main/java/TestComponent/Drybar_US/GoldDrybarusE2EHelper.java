@@ -263,7 +263,7 @@ public class GoldDrybarusE2EHelper {
 		// TODO Auto-generated method stub
 			String expectedResult = "shipping address is entering in the fields";
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 			if (size > 0) {
 				try {
@@ -1856,8 +1856,10 @@ public class GoldDrybarusE2EHelper {
 			else
 			{
 			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
-					"");
+					"").replace(",", "");
+			
 			Float subtotalvalue = Float.parseFloat(Subtotal);
+			
 			String shipping = Common.getText("xpath", "(//span[@class='value'])[2]")
 					.replace(Symbol, "");
 			Float shippingvalue = Float.parseFloat(shipping);
@@ -1869,7 +1871,7 @@ public class GoldDrybarusE2EHelper {
 			Thread.sleep(4000);
 
 			String ordertotal = Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value')])[1]")
-					.replace(Symbol, "");
+					.replace(Symbol, "").replace(",", "");
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
 			Thread.sleep(4000);
 			Float Total = (subtotalvalue + shippingvalue + Taxvalue);
@@ -5603,12 +5605,13 @@ public void FUll_Payment(String dataSet) {
 				{
 					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Common.clickElement("xpath", "(//input[@name='use_saved_stripe_method'])[2]");
 					Common.clickElement("xpath", "//span[text()='Klarna']");
 					Common.switchToDefault();
 					
 					if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
-					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 					Sync.waitPageLoad();
 					klarna_Details(dataSet);
 					}
