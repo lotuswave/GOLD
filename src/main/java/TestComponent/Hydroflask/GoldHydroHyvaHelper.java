@@ -967,7 +967,8 @@ public class GoldHydroHyvaHelper {
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
 			
-			
+			String code = Common.findElement("xpath", "//input[@name='postcode']").getAttribute("value");
+			System.out.println(code);
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
@@ -991,9 +992,7 @@ public class GoldHydroHyvaHelper {
 				
 
 				if (zipcode > 0) {
-					Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-					String code = Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
-					System.out.println(code);
+				
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
 					
@@ -1066,11 +1065,7 @@ public class GoldHydroHyvaHelper {
 				System.out.println(zipcode);
 
 				if (zipcode > 0) {
-					Common.actionsKeyPress(Keys.HOME);
-					Common.scrollIntoView("xpath", "//input[@id='shipping-postcode']");
-					Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-					String code = Common.findElement("xpath", "//input[@id='shipping-postcode' or @id='billing-postcode']").getAttribute("value");
-					System.out.println(code);
+				
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
 				}
