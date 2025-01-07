@@ -2731,12 +2731,7 @@ public class GoldDrybarusHelper2 {
 				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 				Sync.waitPageLoad();
 				Thread.sleep(6000);
-//				String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//						.getAttribute("data-ui-id");
-//				System.out.println(message);
-//				Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//						"Product should be add to cart", "Sucessfully product added to the cart ",
-//						"failed to add product to the cart");
+//				
 			}
 			else
 			{
@@ -2750,7 +2745,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(5000);
-			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[1]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -3884,7 +3879,7 @@ public class GoldDrybarusHelper2 {
 				Float Discountvalue = Float.parseFloat(Discount);
 				System.out.println("Discount:"+ Discountvalue);
 				Common.clickElement("xpath", "//span[@class='block transform']");
-				String Tax = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(taxItem.amount)']").replace(Symbol, "");
+				String Tax = Common.getText("xpath", "//div[contains(@x-text,'hyva.formatPrice(segment.value)')])[3]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				System.out.println("Tax:"+  Taxvalue);
 				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
