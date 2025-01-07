@@ -32,7 +32,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_003_Partial_Gift_Code_Redemption_CC {
         Osprey_ReEu.selectshippingmethod("GroundShipping method");      
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Used_GiftCode=Osprey_ReEu.Gift_card("Partial Giftcard");
-        String OrderNumber=Osprey_ReEu.payPal_Payment("PaypalDetails");
+        String OrderNumber=Osprey_ReEu.addPaymentDetails("CCVisacard");
         Osprey_ReEu.Admin_signin("Login Details");
         Osprey_ReEu.click_Sales();
 		HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
