@@ -9142,6 +9142,7 @@ public void Continue_Shopping() {
 			Thread.sleep(4000);
 			if(Common.getCurrentURL().contains("preprod"))
 			{
+		
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			}
