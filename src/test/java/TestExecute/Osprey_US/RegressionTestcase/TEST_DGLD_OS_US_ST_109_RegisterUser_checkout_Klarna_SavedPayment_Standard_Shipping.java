@@ -41,7 +41,7 @@ public class TEST_DGLD_OS_US_ST_109_RegisterUser_checkout_Klarna_SavedPayment_St
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
