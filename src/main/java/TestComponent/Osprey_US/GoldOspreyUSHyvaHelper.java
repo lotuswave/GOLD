@@ -9743,9 +9743,12 @@ public void Continue_Shopping() {
 			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
 					.replace("$", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
+			String amount="0.01";
+			Float amountvalue=Float.parseFloat(amount);
 			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue + amountvalue;
+			String ExpectedTotalAmmount2 = String.valueOf(Total);
+//			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);

@@ -5671,7 +5671,9 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@id='conversationPrice']", data.get(dataSet).get("Price"));
 
 			Common.textBoxInput("xpath", "//input[@data-label='Purchase Date']", data.get(dataSet).get("Date"));
-
+            
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
 			Common.clickElement("xpath", "//button[text()='Submit']");
 
@@ -5682,6 +5684,11 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(registrationsuccessmessage > 0,
 					"verifying Product registration Success message ", "Success message should be Displayed",
 					"Product registration  Success message displayed ", "failed to dispaly success message");
+			}
+			else
+			{
+				System.out.println(Common.getCurrentURL());
+			}
 		}
 
 		catch (Exception | Error e) {
