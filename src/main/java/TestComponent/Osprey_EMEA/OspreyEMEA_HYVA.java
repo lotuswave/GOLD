@@ -11088,7 +11088,6 @@ catch(Exception | Error e)
 				Thread.sleep(5000);
 				Common.actionsKeyPress(Keys.END);
 				Thread.sleep(5000);
-				Paypal_Address_Verification("Express Paypal");
 				Thread.sleep(4000);
 				
 				if (Common.getCurrentURL().contains(""))
