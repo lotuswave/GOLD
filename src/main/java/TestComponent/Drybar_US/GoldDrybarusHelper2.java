@@ -5714,10 +5714,12 @@ public void FUll_Payment(String dataSet) {
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
+			
 				WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
+				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//input[@name='phone']", phone);
 				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
@@ -5725,13 +5727,13 @@ public void FUll_Payment(String dataSet) {
 				Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 				Thread.sleep(6000);
 				Sync.waitPageLoad();
-				Common.clickElement("xpath", "//span[text()='Pay now']");
+				Common.clickElement("xpath", "//span[text()='Pay in full']");
 				Thread.sleep(4000);
 				String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
 				if(klarna.contains("Choose how to pay"))
 				{
 					Thread.sleep(4000);
-				//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+					Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
 					Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
 					Common.clickElement("xpath", "//label[@for='pay_now__label']");
 					
@@ -5739,7 +5741,7 @@ public void FUll_Payment(String dataSet) {
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
 					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
 					Thread.sleep(4000);
-					//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
+					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 					Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 					Common.clickElement("xpath", "//span[text()='Pay with']");
 					Sync.waitPageLoad();
