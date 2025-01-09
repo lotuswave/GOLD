@@ -6104,7 +6104,7 @@ public void FUll_Payment(String dataSet) {
     				
     				System.out.println(PLPprice);
     				System.out.println(productprice);
-    				String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+    				String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
  
     				Common.assertionCheckwithReport(productprice.equals(PLPprice),
     						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
