@@ -1933,11 +1933,11 @@ public void FUll_Payment(String dataSet) {
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
-//			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-//					"validating the order summary in the payment page",
-//					"Order summary should be display in the payment page and all fields should display",
-//					"Successfully Order summary is displayed in the payment page and fields are displayed",
-//					"Failed to display the order summary and fileds under order summary");
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Successfully Order summary is displayed in the payment page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
 
 		}
 
@@ -2600,6 +2600,9 @@ public void FUll_Payment(String dataSet) {
 					"Order Number should be display in the MY Order page",
 					"Sucessfully Order Number is displayed in the My orders page",
 					"Failed to Display My order Number in the My orders page");
+			
+			Sync.waitElementPresent("xpath", "//a[@aria-label='View order "+Ordernumber +"']");
+			Common.clickElement("xpath", "//a[@aria-label='View order "+Ordernumber +"']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -13596,6 +13599,8 @@ public void Explore_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 		try
 		{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//span[contains(@class,'price-excluding-tax block dr:font-bold')]//span");
 			String Orderprice=Common.findElement("xpath", "//span[contains(@class,'price-excluding-tax block dr:font-bold')]//span").getText();
 			System.out.println(Orderprice);
