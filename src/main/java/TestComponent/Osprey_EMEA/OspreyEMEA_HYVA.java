@@ -15317,17 +15317,19 @@ public void Addtocart_From_MyFav(String Dataset) {
 
         } else {
         	    
-        		Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
-            	Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
+        		Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]//input[@type='checkbox']");
+            	Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]//input[@type='checkbox']");
            
             	Sync.waitElementPresent("xpath", "//button[@data-role='selected-tocart']");
             	Common.clickElement("xpath", "//button[@data-role='selected-tocart']");
             	Sync.waitPageLoad();
-            	String message = Common.findElement("xpath", "//div[contains(@class,'message')]")
-                        .getAttribute("class");
-                Thread.sleep(4000);
+//            	String message = Common.findElement("xpath", "//div[contains(@class,'message')]")
+//                        .getAttribute("class");
+                Thread.sleep(2000);
                 Common.clickElement("xpath", "//button[@data-role='tocart']");
                 Thread.sleep(4000);
+                Common.clickElement("xpath", "//div[contains(@class,'product-item-content')]");
+                Sync.waitPageLoad();
                 Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
                 Common.javascriptclickElement("xpath", "//input[@aria-label='" + productcolor + "']");
 //    			Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
