@@ -11882,8 +11882,8 @@ catch(Exception | Error e)
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
-			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application")||Common.getCurrentURL().contains("prodeal/application"),
+		Thread.sleep(3000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application")||Common.getCurrentURL().contains("prodeal/application/form/"),
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
 					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
