@@ -1969,11 +1969,11 @@ public void FUll_Payment(String dataSet) {
 			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
-//			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-//					"validating the order summary in the payment page",
-//					"Order summary should be display in the payment page and all fields should display",
-//					"Successfully Order summary is displayed in the payment page and fields are displayed",
-//					"Failed to display the order summary and fileds under order summary");
+			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+					"validating the order summary in the payment page",
+					"Order summary should be display in the payment page and all fields should display",
+					"Successfully Order summary is displayed in the payment page and fields are displayed",
+					"Failed to display the order summary and fileds under order summary");
 
 		}
 
@@ -8007,7 +8007,7 @@ catch(Exception | Error e)
 						"Sucessfully message has been displayed for whishlist",
 						"failed to display the message for whishlist");
 			} else {
-				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
+				Common.clickElement("xpath", "//button[@aria-haspopup='dialog']//parent::div[contains(@x-data,'hyva')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
