@@ -2401,50 +2401,50 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
 			
-			if(Common.getCurrentURL().contains("preprod")) {
-				
-				
-				
+//			if(Common.getCurrentURL().contains("preprod")) {
+//				
+//				
+//				
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
-//				Sync.waitPageLoad();
-//				Thread.sleep(6000);
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
-				String ClrOption= Common.findElement("xpath", "(//div[@class='m-swatch swatch-option-selected'])[1]").getAttribute("class");
-				if(ClrOption.contains("option-selected")) {
-					System.out.println("Color Option Already selected");
-				}else {
-					
-					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
-				}
-			}
-				
-				else {
-					
-					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
-					Common.clickElement("xpath", "//img[@alt='" + prodproduct + "']");
-					Thread.sleep(6000);
-					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
-					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
-				}
-			
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-//			Sync.waitPageLoad(30);
-			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
-			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
-			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
-			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
-					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
-					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-			product_quantity(Dataset);
-			Thread.sleep(4000);
-			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
-			System.out.println(country);
-			Thread.sleep(4000);
+				Sync.waitPageLoad();
+				Thread.sleep(6000);
+//				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				String ClrOption= Common.findElement("xpath", "(//div[@class='m-swatch swatch-option-selected'])[1]").getAttribute("class");
+//				if(ClrOption.contains("option-selected")) {
+//					System.out.println("Color Option Already selected");
+//				}else {
+//					
+//					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+//					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+//				}
+//			}
+//				
+//				else {
+//					
+//					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
+//					Common.clickElement("xpath", "//img[@alt='" + prodproduct + "']");
+//					Thread.sleep(6000);
+//					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
+//					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
+//				}
+//			
+//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+////			Sync.waitPageLoad(30);
+//			Thread.sleep(4000);
+//			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
+//			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
+//			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
+//			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
+//					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
+//					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
+//			product_quantity(Dataset);
+//			Thread.sleep(4000);
+//			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
+//			System.out.println(country);
+//			Thread.sleep(4000);
 
 //			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 //			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
@@ -5888,10 +5888,10 @@ return Number;
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 
 		}
 		String expectedResult = "email field will have email address";
@@ -10209,16 +10209,23 @@ public void Continue_Shopping() {
 		try
 		{
 			for (int i = 0; i <= 10; i++) {
-				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
-				if(Common.getCurrentURL().contains("preprod"))
+				if(Common.getCurrentURL().contains("/us/es/"))
 				{
-				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
-				Common.clickElement("xpath", "//span[text()='Gift Cards']");
+					Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Destacados')]");
 				}
 				else
 				{
-					Sync.waitElementPresent("xpath", "//span[text()='E Gift Cards']");
-					Common.clickElement("xpath", "//span[text()='E Gift Cards']");
+				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
+				}
+				if(Common.getCurrentURL().contains("preprod") && Common.getCurrentURL().contains("/us/es/") )
+				{
+				Sync.waitElementPresent("xpath", "//span[text()='Tarjetas de regalo']");
+				Common.clickElement("xpath", "//span[text()='Tarjetas de regalo']");
+				}
+				else
+				{
+					Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
+					Common.clickElement("xpath", "//span[text()='Gift Cards']");
 				}
 				
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
