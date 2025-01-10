@@ -6974,7 +6974,7 @@ catch(Exception | Error e)
 						.getAttribute("data-price-amount");
 			} else {
 				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
-				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper']")
+				String productprice = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 						.getAttribute("data-price-amount");
 				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
 				Sync.waitPageLoad();
