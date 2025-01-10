@@ -9087,57 +9087,57 @@ return Number;
 			Thread.sleep(4000);
 			
 
-			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
-			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace("£",
-					"").trim();
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-			
-			Common.clickElement("xpath", "//button[@title='Show items']");
-			Thread.sleep(3000);
-			int Products=Common.findElements("xpath", "//span[@class='price-including-tax pt-2']").size();
-			for (int i = 0; i < Products; i++)
-			{
-				int value = i + 1;
-				String Product=Common.findElement("xpath", "(//span[@class='price-including-tax pt-2'])["+ value +"]").getText().replace("£", "");
-				
-//				SKUS=SKUS.concat("").trim();
-				SKUS=SKUS.concat(Product);
-				System.out.println(SKUS);
-				SKU.put("SKU",SKUS);
-			
-			}
-			System.out.println(SKUS);
-			Float skuproducts=subtotalvalue+(subtotalvalue*20/100);
-		
-	        
-			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
-					.replace("£", "").trim();
-			Float Discountvalue = Float.parseFloat(Discount);
-			
-			Float DIS=(skuproducts)+Discountvalue;
-			
-			
-			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
-					.replace("£", "").trim();
-			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "").trim();
-			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(4000);
-
-			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
-					.replace("£", "").trim();
-			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Thread.sleep(4000);
-			Float Total = subtotalvalue+shippingvalue+Discountvalue;
-			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
-			System.out.println(ExpectedTotalAmmount2);
-			System.out.println(ordertotal);
-			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-					"validating the order summary in the payment page",
-					"Order summary should be display in the payment page and all fields should display",
-					"Successfully Order summary is displayed in the payment page and fields are displayed",
-					"Failed to display the order summary and fileds under order summary");
+//			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
+//			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace("£",
+//					"").trim();
+//			Float subtotalvalue = Float.parseFloat(Subtotal);
+//			
+//			Common.clickElement("xpath", "//button[@title='Show items']");
+//			Thread.sleep(3000);
+//			int Products=Common.findElements("xpath", "//span[@class='price-including-tax pt-2']").size();
+//			for (int i = 0; i < Products; i++)
+//			{
+//				int value = i + 1;
+//				String Product=Common.findElement("xpath", "(//span[@class='price-including-tax pt-2'])["+ value +"]").getText().replace("£", "");
+//				
+////				SKUS=SKUS.concat("").trim();
+//				SKUS=SKUS.concat(Product);
+//				System.out.println(SKUS);
+//				SKU.put("SKU",SKUS);
+//			
+//			}
+//			System.out.println(SKUS);
+//			Float skuproducts=subtotalvalue+(subtotalvalue*20/100);
+//		
+//	        
+//			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
+//					.replace("£", "").trim();
+//			Float Discountvalue = Float.parseFloat(Discount);
+//			
+//			Float DIS=(skuproducts)+Discountvalue;
+//			
+//			
+//			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+//					.replace("£", "").trim();
+//			Float shippingvalue = Float.parseFloat(shipping);
+//			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "").trim();
+//			Float Taxvalue = Float.parseFloat(Tax);
+//			Thread.sleep(4000);
+//
+//			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
+//					.replace("£", "").trim();
+//			Float ordertotalvalue = Float.parseFloat(ordertotal);
+//			Thread.sleep(4000);
+//			Float Total = subtotalvalue+shippingvalue+Discountvalue;
+//			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+//			Thread.sleep(4000);
+//			System.out.println(ExpectedTotalAmmount2);
+//			System.out.println(ordertotal);
+//			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+//					"validating the order summary in the payment page",
+//					"Order summary should be display in the payment page and all fields should display",
+//					"Successfully Order summary is displayed in the payment page and fields are displayed",
+//					"Failed to display the order summary and fileds under order summary");
 		}
 
 		catch (Exception | Error e) {

@@ -35,7 +35,7 @@ public class TEST_DGLD_OSP_DEN_E2E_015_Register_user_checkout_with_Multiple_Prod
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Used_GiftCode="NULL";
-        String OrderNumber=Osprey_ReEu.payPal_Payment("PaypalDetails");
+        String OrderNumber=Osprey_ReEu.addPaymentDetails("CCVisacard");
         Osprey_ReEu.Admin_signin("Login Details");
         Osprey_ReEu.click_Sales();
 		HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
