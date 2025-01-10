@@ -9125,11 +9125,11 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					break;
 				}
 			}
-			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
 			System.out.println(product);
 			//String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText().replace("Water Bottle", "").replace(" - ", "");
-			String name = Common.findElement("xpath", "//span[contains(@class, 'pdp-grid-title title text')]").getText();
+			String name = Common.findElement("xpath", "//h1[contains(@class, 'pdp-grid-title title text')]").getText();
 			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
