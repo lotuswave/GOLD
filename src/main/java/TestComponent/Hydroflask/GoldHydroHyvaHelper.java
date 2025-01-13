@@ -8067,7 +8067,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//span[text()='Customize now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
-			hydro_bottle_color("Black");
+			hydro_bottle_color("Clementine");
 			hydro_cap_color("White");
 			hydro_strap_color("Black");
 			hydro_boot_color("White");
@@ -9509,7 +9509,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.clickElement("xpath", "//span[text()='Customize now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
-			hydro_bottle_color("Black");
+			hydro_bottle_color("Clementine");
 			hydro_cap_color("White");
 			hydro_strap_color("Black");
 			hydro_boot_color("White");
