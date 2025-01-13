@@ -12,7 +12,7 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Paypal_Payment {
+public class TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Paypal_Payment {
 
 	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
 	OspreyEMEA_E2EHelper Osprey_ReEu = new OspreyEMEA_E2EHelper(datafile,"Checkout payments");

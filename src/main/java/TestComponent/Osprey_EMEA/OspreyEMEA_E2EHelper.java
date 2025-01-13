@@ -2565,15 +2565,15 @@ public class OspreyEMEA_E2EHelper {
 			Sync.waitElementPresent(30, "xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Common.clickElement("xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Sync.waitPageLoad();
-			Thread.sleep(7000);
+			Thread.sleep(9000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
 //			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
 //			System.out.println(checkout);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
-					/* checkout.equals(minicart) && */ Common.getCurrentURL().contains("checkout/#shipping")
+					 Common.getCurrentURL().contains("checkout/#shipping")
 							|| Common.getCurrentURL().contains("/checkout/#payment")
-							|| Common.getCurrentURL().contains("/checkout/"),
+							|| Common.getCurrentURL().contains("checkout/"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
 					"Failed to navigate to the shipping page");
@@ -3572,8 +3572,17 @@ public class OspreyEMEA_E2EHelper {
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			  
+			if(Common.getCurrentURL().contains("de")) {
+				
+				 Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
+				 Common.dropdown("xpath", "//select[@id='shipping-region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+					
+				
+			} else {
 				  Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
 					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+					
+			}
 			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
@@ -8957,28 +8966,38 @@ public class OspreyEMEA_E2EHelper {
 		HashMap<String,String> SKU=new HashMap<>();
 		String SKUS="";
 		System.out.println(Symbol);
-
+		String URL= Common.getCurrentURL();
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
+			 
+	if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				
-				  if(Common.getCurrentURL().contains("no_nb")) {
+				  if(URL.contains("no_nb")) {
 					  Sync.waitElementPresent("xpath", "//button[contains(text(),'Legg til rabattkode')]");
 					 Common.clickElement("xpath", "//button[contains(text(),'Legg til rabattkode')]");
 					 
 					  Sync.waitElementPresent("id", "discount-code");
 					  Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+					  
+				  }
+				  else if(URL.contains("de")) {
+						  Sync.waitElementPresent("xpath", "//button[contains(text(),'Rabattcode hinzufügen')]");
+							 Common.clickElement("xpath", "//button[contains(text(),'Rabattcode hinzufügen')]");
+							 
+							  Sync.waitElementPresent("id", "discount-code");
+							  Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+					  }
 				  }  
-				  else {
+	  else if(URL.contains("gb")) {
 					  Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
 						Common.clickElement("xpath", "//span[text()='Add Discount Code']");
                       
 						Sync.waitElementPresent("id", "discount-code");
 						Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
 				  }
-			} else {
+//} 
+		else {
 				Sync.waitElementPresent("id", "discount-code");
 
 				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
