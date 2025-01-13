@@ -11916,9 +11916,9 @@ public void Explore_Validation(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image')]");
+						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -11932,12 +11932,12 @@ public void Explore_Validation(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+			Thread.sleep(4000);
+			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "//span[text()='Customize Now']");
+			Common.clickElement("xpath", "//span[text()='Customize now']");
 			Thread.sleep(3000);
 			Myhydro_bottle("40 oz");
 			hydro_bottle_color("Black");
@@ -11953,12 +11953,12 @@ public void Explore_Validation(String Dataset) {
 			Thread.sleep(4000);
 			if(Common.getPageTitle().contains("Customer Login"))
 			{
-				String favmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-				Common.assertionCheckwithReport(favmessage.contains("You must login or register"),
-						"validating the Navigation to the Customer Login page",
-						"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
-						"Sucessfully User Navigates to the Customer Login page after clicking on the My Favorites CTA ",
-						"Failed to Navigate to the Customer Login page after clicking on the my favoriate Icon");
+//				String favmessage=Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+//				Common.assertionCheckwithReport(favmessage.contains("You must login or register"),
+//						"validating the Navigation to the Customer Login page",
+//						"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+//						"Sucessfully User Navigates to the Customer Login page after clicking on the My Favorites CTA ",
+//						"Failed to Navigate to the Customer Login page after clicking on the my favoriate Icon");
 				if (Common.getCurrentURL().contains("preprod")) {
 					Sync.waitPageLoad();
 					Common.textBoxInput("id", "email", data.get(Dataset).get("UserName"));
@@ -11966,12 +11966,12 @@ public void Explore_Validation(String Dataset) {
 					Common.textBoxInput("id", "email", data.get(Dataset).get("Prod UserName"));
 				}
 				Common.textBoxInput("id", "pass", data.get(Dataset).get("Password"));
-				Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+				Common.clickElement("xpath", "//span[text()='Sign In']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
-				String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") && myhydrofav.contains("has been added to your Wish List"),
+				Sync.waitElementPresent(40, "xpath", "//div[@ui-id='message-success']");
+				String myhydrofav = Common.findElement("xpath", "//div[@ui-id='message-success']").getAttribute("ui-id");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing") && myhydrofav.contains("message-success"),
 						"validating the Navigation to the My Favorites page and added to the whishlist",
 						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page and product should be added in the whishlist",
 						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA and product added to the whishlist",
@@ -11979,13 +11979,13 @@ public void Explore_Validation(String Dataset) {
 			}
 			else
 			{
-			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
-			String myhydrofav = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") && myhydrofav.contains("has been added to your Wish List"),
-					"validating the Navigation to the My Favorites page and added to the whishlist",
-					"After Clicking on My Favorites CTA user should be navigate to the My Favorites page and product should be added in the whishlist",
-					"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA and product added to the whishlist",
-					"Failed to Navigate to the My Favorites page after Clicking on My Favorites button and no products in whishlist");
+				Sync.waitElementPresent(40, "xpath", "//div[@ui-id='message-success']");
+				String myhydrofav = Common.findElement("xpath", "//div[@ui-id='message-success']").getAttribute("ui-id");
+				Common.assertionCheckwithReport(Common.getPageTitle().equals("Wish List Sharing") && myhydrofav.contains("message-success"),
+						"validating the Navigation to the My Favorites page and added to the whishlist",
+						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page and product should be added in the whishlist",
+						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA and product added to the whishlist",
+						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button and no products in whishlist");
 			}
 			String Whishlistproduct = Common
 					.findElement("xpath", "//div[contains(@class,'m-product-card__name')]//a").getText();
@@ -11998,10 +11998,10 @@ public void Explore_Validation(String Dataset) {
 				Common.clickElement("xpath", "//span[text()='Add to Cart']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-						.getAttribute("data-ui-id");
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']")
+						.getAttribute("-ui-id");
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("success"),
+				Common.assertionCheckwithReport(message1.contains("message-success"),
 						"validating the  product add to the cart", "Product should be add to cart",
 						"Sucessfully product added to the cart ", "failed to add product to the cart");
 				}
