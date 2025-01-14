@@ -37,7 +37,7 @@ public class Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
 			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
-			Hydro.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
+			Hydro.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode);
 
 		} catch (Exception e) {
 

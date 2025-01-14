@@ -13634,10 +13634,14 @@ public void Explore_Validation(String Dataset) {
 				cell.setCellStyle(cs);
 				cell.setCellValue("Order Status Magento");
 	           cell = row.createCell(6);
+	           
+	           cell.setCellStyle(cs);
+				cell.setCellValue("Workato Status");
+	           cell = row.createCell(7);
 			
 	           cell.setCellStyle(cs);
 				cell.setCellValue("Used GiftCode");
-	         cell = row.createCell(7);
+	         cell = row.createCell(8);
 
 
 				/*
@@ -13787,6 +13791,9 @@ public void Explore_Validation(String Dataset) {
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
+			
+			String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("warkato", Warkatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -13810,15 +13817,20 @@ public void Explore_Validation(String Dataset) {
 			}
 			else
 			{
-				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
 				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
+				
+				String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+				Orderstatus1.put("warkato", Warkatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);
@@ -13852,7 +13864,7 @@ public void Explore_Validation(String Dataset) {
 		return Orderstatus1;
 	}
 	
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Used_GiftCode)
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode)
 			throws FileNotFoundException, IOException {
 		// String fileOut="";
 		try {
@@ -13920,6 +13932,10 @@ public void Explore_Validation(String Dataset) {
 			cell.setCellValue(AdminOrderstatus);
 			
 			cell = row.createCell(6);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(warkato);
+			
+			cell = row.createCell(7);
 			cell.setCellType(CellType.STRING);
 			cell.setCellValue(Used_GiftCode);
 			
