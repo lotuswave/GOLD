@@ -16882,11 +16882,15 @@ public void prepareOrdersData(String fileName) {
 			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Order Status Magento");
-           cell = row.createCell(6);
+	       cell = row.createCell(6);
+	       
+	       cell.setCellStyle(cs);
+			cell.setCellValue("Workato Status");
+	       cell = row.createCell(7);
 		
-           cell.setCellStyle(cs);
+	       cell.setCellStyle(cs);
 			cell.setCellValue("Used GiftCode");
-         cell = row.createCell(7);
+	     cell = row.createCell(8);
 
 
 			/*
@@ -16935,9 +16939,9 @@ public void prepareOrdersData(String fileName) {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-}
+	}
 
-public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Used_GiftCode)
+public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus,String workato, String Used_GiftCode)
 		throws FileNotFoundException, IOException {
 	// String fileOut="";
 	try {
@@ -17006,6 +17010,10 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
 		
 		cell = row.createCell(6);
 		cell.setCellType(CellType.STRING);
+		cell.setCellValue(workato);
+		
+		cell = row.createCell(7);
+		cell.setCellType(CellType.STRING);
 		cell.setCellValue(Used_GiftCode);
 		
 		
@@ -17021,6 +17029,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
             e.printStackTrace();
         }
 	}
+
 
 public String TwentyFive_percent_Reward_Points(String Dataset) {
 	// TODO Auto-generated method stub

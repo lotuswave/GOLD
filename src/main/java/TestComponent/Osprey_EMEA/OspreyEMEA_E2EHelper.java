@@ -15128,93 +15128,90 @@ public void prepareOrdersData(String fileName) {
 		cell.setCellValue("S.No");
 		cell = row.createCell(1);
 		cell.setCellStyle(cs);
-		cell.setCellValue("Tester");
+		cell.setCellValue("Website");
 		cell = row.createCell(2);
+		cell.setCellStyle(cs);
+		
 		cell.setCellStyle(cs);
 		cell.setCellValue("Test scenario Description");
 		cell = row.createCell(3);
-		cell.setCellStyle(ps);
-		cell.setCellValue("Web Order Number");
 		
+		cell.setCellStyle(cs);
+		cell.setCellValue("SKU");
 		cell = row.createCell(4);
 		cell.setCellStyle(cs);
-		cell.setCellValue("Email id");
+		cell.setCellValue("Web Order Number");
+		cell = row.createCell(5);
 		
-		
-//		cell = row.createCell(4);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Order Confirnmation Message");
-//		cell = row.createCell(5);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Order Status Magento");
-//
-//
-//		cell = row.createCell(6);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Subtotal");
-//		cell = row.createCell(7);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Shipping");
-//		cell = row.createCell(8);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("State");
-//		cell = row.createCell(9);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Zipcode");
-//		cell = row.createCell(10);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Tax");
-//		cell = row.createCell(11);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Estimated Order Total");
-//		cell=row.createCell(12);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Discount");
-//		cell=row.createCell(13);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Actual Order Total");
-//		cell=row.createCell(14);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Payment Method");
-//		
-//		cell=row.createCell(15);
-//		cell.setCellStyle(cs);
-//		cell.setCellValue("Products_details");
+		cell.setCellStyle(cs);
+		cell.setCellValue("Order Status Magento");
+       cell = row.createCell(6);
+       
+       cell.setCellStyle(cs);
+		cell.setCellValue("Workato Status");
+       cell = row.createCell(7);
+	
+       cell.setCellStyle(cs);
+		cell.setCellValue("Used GiftCode");
+     cell = row.createCell(8);
 
-		rowcount=2;
-		
-		}
 
-		else
-		{
+		/*
+		 * cell=row.createCell(17); cell.setCellStyle(cs);
+		 * cell.setCellValue("Productqty1");
+		 * 
+		 * cell=row.createCell(18); cell.setCellStyle(cs);
+		 * cell.setCellValue("Product2");
+		 * 
+		 * cell=row.createCell(19); cell.setCellStyle(cs);
+		 * cell.setCellValue("Productqty2");
+		 * 
+		 * cell=row.createCell(20); cell.setCellStyle(cs);
+		 * cell.setCellValue("Product3");
+		 * 
+		 * 
+		 * cell=row.createCell(21); cell.setCellStyle(cs);
+		 * cell.setCellValue("Productqty3");
+		 * 
+		 * 
+		 * cell=row.createCell(22); cell.setCellStyle(cs);
+		 * cell.setCellValue("Product4");
+		 * 
+		 * 
+		 * cell=row.createCell(23); cell.setCellStyle(cs);
+		 * cell.setCellValue("Productqty4");
+		 */
+		rowcount = 2;
+
+	}
+
+	else {
 		workbook = new XSSFWorkbook(new FileInputStream(file));
-		sheet=workbook.getSheet("OrderDetails");
-		rowcount=sheet.getLastRowNum()+1;
-		}
-		/*row = sheet.createRow(rowcount);
-		cell = row.createCell(0);*/
+		sheet = workbook.getSheet("OrderDetails");
+		rowcount = sheet.getLastRowNum() + 1;
+	}
+	/*
+	 * row = sheet.createRow(rowcount); cell = row.createCell(0);
+	 */
 
+	FileOutputStream fileOut = new FileOutputStream(file);
+	workbook.write(fileOut);
+	fileOut.flush();
+	fileOut.close();
 
-
-		FileOutputStream fileOut = new FileOutputStream(file);
-		workbook.write(fileOut);
-		fileOut.flush();
-		fileOut.close();
-
-
-
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
+} catch (Exception e) {
+	e.printStackTrace();
+}
 }
 
-public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Used_GiftCode)
+
+public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode)
 		throws FileNotFoundException, IOException {
 	// String fileOut="";
 	try {
 
 		File file = new File(
-				System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_US/OspreyUS_E2E_orderDetails.xlsx");
+				System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_EMEA/OspreyUS_E2E_orderDetails.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;
@@ -15257,7 +15254,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
 		cell = row.createCell(1);
 		cell.setCellType(CellType.STRING);
 		
-		cell.setCellValue("Osprey US");
+		cell.setCellValue("Osprey EU");
 		
 		cell = row.createCell(2);
 		cell.setCellType(CellType.STRING);
@@ -15277,6 +15274,10 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
 		
 		cell = row.createCell(6);
 		cell.setCellType(CellType.STRING);
+		cell.setCellValue(workato);
+		
+		cell = row.createCell(7);
+		cell.setCellType(CellType.STRING);
 		cell.setCellValue(Used_GiftCode);
 		
 		
@@ -15292,6 +15293,9 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
             e.printStackTrace();
         }
 	}
+
+
+
 
 
 public void Admin_signin(String dataSet) {
@@ -15313,11 +15317,11 @@ public void Admin_signin(String dataSet) {
 			
 			Common.openNewTab();
 			
-			Common.oppenURL("https://emea-preprod.hele.digital/ospreyeuadmin/admin/");
+			Common.oppenURL("https://emea-preprod.hele.digital/ospreyeuadmin/admin/dashboard/");
 			
 			Sync.waitPageLoad(4000);
-			Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
-			Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
+//			Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
+//			Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
 			Thread.sleep(15000);
 			
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
@@ -15363,6 +15367,9 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
        
 		String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 		System.out.println(Number);
+		
+		String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+		Orderstatus1.put("workato", Workatostatus);
 			 if(Number.equals(orderNumber))
 			 {
 						Thread.sleep(3000);
@@ -15386,15 +15393,20 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 		}
 		else
 		{
-			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 			Thread.sleep(1000);
 			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
+			
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("workato", Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
