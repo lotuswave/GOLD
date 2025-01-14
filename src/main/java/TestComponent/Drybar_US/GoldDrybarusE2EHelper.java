@@ -934,41 +934,72 @@ public class GoldDrybarusE2EHelper {
 			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Order Status Magento");
-           cell = row.createCell(6);
+	       cell = row.createCell(6);
+	       
+	       cell.setCellStyle(cs);
+			cell.setCellValue("Workato Status");
+	       cell = row.createCell(7);
 		
-           cell.setCellStyle(cs);
+	       cell.setCellStyle(cs);
 			cell.setCellValue("Used GiftCode");
-         cell = row.createCell(7);
+	     cell = row.createCell(8);
 
-           
-			
-			rowcount=2;
-			}
 
-			else
-			{
+			/*
+			 * cell=row.createCell(17); cell.setCellStyle(cs);
+			 * cell.setCellValue("Productqty1");
+			 * 
+			 * cell=row.createCell(18); cell.setCellStyle(cs);
+			 * cell.setCellValue("Product2");
+			 * 
+			 * cell=row.createCell(19); cell.setCellStyle(cs);
+			 * cell.setCellValue("Productqty2");
+			 * 
+			 * cell=row.createCell(20); cell.setCellStyle(cs);
+			 * cell.setCellValue("Product3");
+			 * 
+			 * 
+			 * cell=row.createCell(21); cell.setCellStyle(cs);
+			 * cell.setCellValue("Productqty3");
+			 * 
+			 * 
+			 * cell=row.createCell(22); cell.setCellStyle(cs);
+			 * cell.setCellValue("Product4");
+			 * 
+			 * 
+			 * cell=row.createCell(23); cell.setCellStyle(cs);
+			 * cell.setCellValue("Productqty4");
+			 */
+			rowcount = 2;
+
+		}
+
+		else {
 			workbook = new XSSFWorkbook(new FileInputStream(file));
-			sheet=workbook.getSheet("DrybarUS-O2C-E2E-Testing");
-			rowcount=sheet.getLastRowNum()+1;
-			}
-	    	FileOutputStream fileOut = new FileOutputStream(file);
-			workbook.write(fileOut);
-			fileOut.flush();
-			fileOut.close();
+			sheet = workbook.getSheet("OrderDetails");
+			rowcount = sheet.getLastRowNum() + 1;
+		}
+		/*
+		 * row = sheet.createRow(rowcount); cell = row.createCell(0);
+		 */
 
+		FileOutputStream fileOut = new FileOutputStream(file);
+		workbook.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
 
-
-			} catch (Exception e) {
-			e.printStackTrace();
-			}
+	} catch (Exception e) {
+		e.printStackTrace();
 	}
+	}
+
 	
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Used_GiftCode) throws FileNotFoundException, IOException
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode) throws FileNotFoundException, IOException
 	{
 		//String fileOut="";
 	try{
 		
-		File file=new File(System.getProperty("user.dir")+"/src/test/resources//TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;
@@ -1013,7 +1044,7 @@ public class GoldDrybarusE2EHelper {
 		cell = row.createCell(1);
 		cell.setCellType(CellType.STRING);
 		
-		cell.setCellValue("Drybar");
+		cell.setCellValue("Osprey EU");
 		
 		cell = row.createCell(2);
 		cell.setCellType(CellType.STRING);
@@ -1033,6 +1064,10 @@ public class GoldDrybarusE2EHelper {
 		
 		cell = row.createCell(6);
 		cell.setCellType(CellType.STRING);
+		cell.setCellValue(workato);
+		
+		cell = row.createCell(7);
+		cell.setCellType(CellType.STRING);
 		cell.setCellValue(Used_GiftCode);
 		
 		
@@ -1048,6 +1083,8 @@ public class GoldDrybarusE2EHelper {
             e.printStackTrace();
         }
 	}
+
+
 	
 	public void clickSubmitbutton_Shippingpage() {
 		// TODO Auto-generated method stub
