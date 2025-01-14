@@ -32,7 +32,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_EU_DE_011_RegularItems_MultipleQty_Discount_
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Europe_Germany-GuestAddress");
 //			Osprey_ReEu.selectshippingmethod("GroundShipping method");
-			String Used_GiftCode="";
+			String Used_GiftCode="NO";
 			Osprey_ReEu.discountCode("Discount");
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			String OrderNumber = Osprey_ReEu.payPal_Payment("PaypalDetails");

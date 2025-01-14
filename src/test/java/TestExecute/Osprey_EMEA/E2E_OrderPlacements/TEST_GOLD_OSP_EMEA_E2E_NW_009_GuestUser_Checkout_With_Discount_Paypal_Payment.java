@@ -22,7 +22,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Payp
 
 		try {
 			
-			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
+	     	Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Norway Store  -Discount + Paypal";
 			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10002926 -3QTY");
@@ -30,10 +30,10 @@ public class TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Payp
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Norway-GuestAddress");
 //			Osprey_ReEu.selectshippingmethod("GroundShipping method");
-			String Used_GiftCode="";
+			String Used_GiftCode="NO";
 			Osprey_ReEu.discountCode("Discount");
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
-			String OrderNumber = Osprey_ReEu.payPal_Payment("PaypalDetails");
+			String OrderNumber =Osprey_ReEu.payPal_Payment("PaypalDetails");
 			Osprey_ReEu.Admin_signin("Login Details");
 		    Osprey_ReEu.click_Sales();
 			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
@@ -49,7 +49,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Payp
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

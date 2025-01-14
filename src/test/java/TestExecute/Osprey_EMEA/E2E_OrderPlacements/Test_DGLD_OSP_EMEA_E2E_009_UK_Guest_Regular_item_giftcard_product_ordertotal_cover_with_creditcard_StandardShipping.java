@@ -29,11 +29,11 @@ public class Test_DGLD_OSP_EMEA_E2E_009_UK_Guest_Regular_item_giftcard_product_o
 			Osprey_ReEu.search_product("Product");
 			Osprey_ReEu.simple_addtocart("Product");
 			Osprey_ReEu.minicart_Checkout();
-			String Emailid=	Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+				Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
 			Osprey_ReEu.selectshippingmethod("GroundShipping method");
 			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			String OrderNumber = Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");
-			Osprey_ReEu.writeOrderNumber(OrderNumber, Description, Emailid);
+//			Osprey_ReEu.writeOrderNumber(OrderNumber, Description);
         
 		} catch (Exception e) {
 

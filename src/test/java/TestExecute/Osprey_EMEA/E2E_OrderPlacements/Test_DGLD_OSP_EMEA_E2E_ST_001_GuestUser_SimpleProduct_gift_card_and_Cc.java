@@ -30,7 +30,7 @@ public class Test_DGLD_OSP_EMEA_E2E_ST_001_GuestUser_SimpleProduct_gift_card_and
 			Osprey_ReEu.search_product("Product");
 			Osprey_ReEu.simple_addtocart("Product");
 			Osprey_ReEu.minicart_Checkout();
-			String Emailid=	Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+			Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
 			Osprey_ReEu.selectshippingmethod("GroundShipping method");
 			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			String OrderNumber = Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");

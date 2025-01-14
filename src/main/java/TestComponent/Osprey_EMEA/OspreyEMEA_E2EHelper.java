@@ -15211,7 +15211,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
 	try {
 
 		File file = new File(
-				System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_EMEA/OspreyUS_E2E_orderDetails.xlsx");
+				System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_EMEA/OspreyEU_E2E_orderDetails.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;
