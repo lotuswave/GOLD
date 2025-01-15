@@ -25,8 +25,8 @@ public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Discover_CC_2Day {
 			Hydro.verifingHomePage();
 			Hydro.search_product("SKU-TT40PS474");     
 			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
-			Hydro.search_product("P-S21001-1"); 
-			Hydro.Add_Myhydro("P-S21001-1");
+			Hydro.search_product("SKU-P-S21001 - 1"); 
+			Hydro.Add_Myhydro("SKU-P-S21001 - 1");
 			Hydro.search_product("SKU-SCS415 -1QTY");     
 			Hydro.addtocart("SKU-SCS415 -1QTY");
 			Hydro.minicart_Checkout();
