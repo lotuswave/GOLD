@@ -11,29 +11,34 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Discover_CC_2Day {
+public class Test_DGLD_HYF_E2E_ST_015_Register_User_with_Applied_loyalty_Coupon_VISA_CC {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_GuestUser_without_Tax_Discover_CC_2Day () throws Exception {
+	public void Validating__Register_User_with_Applied_loyalty_Coupon_VISA_CC () throws Exception {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Guest User without Tax - Discover CC - 2Day";
+			String Description ="Register User with  Applied loyalty  Coupon  - VISA CC";
 			Hydro.verifingHomePage();
-			Hydro.search_product("SKU-TT40PS474");     
-			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
-			Hydro.search_product("P-S21001-1"); 
-			Hydro.Add_Myhydro("P-S21001-1");
-			Hydro.search_product("SKU-SCS415 -1QTY");     
-			Hydro.addtocart("SKU-SCS415 -1QTY");
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("SKU-TT40PS110 -2QTY");     
+			Hydro.Configurable_addtocart_pdp("SKU-TT40PS110 -2QTY");
+			Hydro.search_product("SKU-TT32PS112 -2QTY");     
+			Hydro.Configurable_addtocart_pdp("SKU-TT32PS112 -2QTY");   
+			Hydro.search_product("SKU-BO56 -1QTY");     
+			Hydro.addtocart("SKU-BO56 -1QTY");
+			Hydro.search_product("SKU-P-S21001 - 2QTY"); 
+			Hydro.multiline_Engraving("SKU-P-S21001 - 2QTY");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("No Tax Address");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("2 Day method");
-            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCDiscovercard");
+			Hydro.selectshippingaddress("GroundShipping method");
+			Hydro.fivepercent_Reward_Points("$5 Off (100 points)");
+            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
 			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
