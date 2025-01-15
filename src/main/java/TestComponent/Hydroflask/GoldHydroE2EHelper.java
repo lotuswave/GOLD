@@ -9424,7 +9424,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			}
 			Thread.sleep(8000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
