@@ -53,7 +53,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
