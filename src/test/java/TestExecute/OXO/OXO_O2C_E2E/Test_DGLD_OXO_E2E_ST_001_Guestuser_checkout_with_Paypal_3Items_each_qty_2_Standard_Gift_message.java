@@ -38,7 +38,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
 
 			
 			
@@ -53,7 +53,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
