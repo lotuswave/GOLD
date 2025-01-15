@@ -38,7 +38,7 @@ public class Test_DGLD_HYF_E2E_ST_011_RegisterUser_checkout_including_engraving_
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("GroundShipping method");
-            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
+            String OrderNumber=Hydro.payPal_Payment("PaypalDetails");
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
 			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
