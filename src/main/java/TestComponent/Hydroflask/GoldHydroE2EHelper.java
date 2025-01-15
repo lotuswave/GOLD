@@ -7544,6 +7544,7 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
 		try {
+			Thread.sleep(4000);
 			Common.findElement("xpath", "//select[@class='quantity-dropdown']");
 //			Common.clickElement("xpath", "//select[@class='a-select-menu']");
 			Common.dropdown("xpath", "//select[@class='quantity-dropdown']", Common.SelectBy.VALUE, Quantity);

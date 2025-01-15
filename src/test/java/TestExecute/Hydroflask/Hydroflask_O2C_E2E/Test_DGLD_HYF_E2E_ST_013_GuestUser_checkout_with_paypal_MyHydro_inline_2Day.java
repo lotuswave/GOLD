@@ -25,8 +25,8 @@ public class Test_DGLD_HYF_E2E_ST_013_GuestUser_checkout_with_paypal_MyHydro_inl
 			Hydro.verifingHomePage();
 			Hydro.search_product("SKU-TT40PS474 -2QTY");     
 			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474 -2QTY");
-			Hydro.search_product("SKU-P-S21001 - 1"); 
-			Hydro.Add_Myhydro("SKU-P-S21001 - 1");
+			Hydro.search_product("SKU-P-S21001 - 2QTY"); 
+			Hydro.Add_Myhydro("SKU-P-S21001 - 2QTY");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
 			String Used_GiftCode = "NULL";
