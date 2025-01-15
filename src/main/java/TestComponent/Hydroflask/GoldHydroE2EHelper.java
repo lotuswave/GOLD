@@ -13984,7 +13984,7 @@ public void Explore_Validation(String Dataset) {
 			Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Thread.sleep(5000);
 			String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
-					.replace(" Off", "");
+					.replace(" OFF", "");
 			Thread.sleep(3000);
 			String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
 					.trim().replace("-", "").replace(".00", "");
