@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Osprey_EMEA.OspreyEMEA_E2EHelper;
+import TestComponent.Osprey_EMEA.OspreyEMEA_E2E_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
@@ -15,7 +16,7 @@ import TestLib.Login;
 public class TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Paypal_Payment {
 
 	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
-	OspreyEMEA_E2EHelper Osprey_ReEu = new OspreyEMEA_E2EHelper(datafile,"Checkout payments");
+	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Guest_Discount_Paypal_Payment () throws Exception {
