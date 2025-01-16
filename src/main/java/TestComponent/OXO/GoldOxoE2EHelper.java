@@ -10549,9 +10549,10 @@ public void header_1_Percent_Planet() {
 				
 				Common.openNewTab();
 				
-				Common.oppenURL("https://na-preprod.hele.digital/heledigitaladmin/admin/dashboard/");
+				Common.oppenURL("https://na-preprod.hele.digital/heledigitaladmin/admin");
 				
-				Sync.waitPageLoad(4000);
+				Sync.waitPageLoad(8000);
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
 				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
 				Thread.sleep(15000);
@@ -10620,9 +10621,9 @@ public void header_1_Percent_Planet() {
 						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
 				Thread.sleep(4000);
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(1000);
+				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
 				Thread.sleep(3000);
@@ -10654,8 +10655,9 @@ public void header_1_Percent_Planet() {
 			else
 			{
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(1000);
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
 				Thread.sleep(3000);
