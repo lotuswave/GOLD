@@ -2003,7 +2003,7 @@ public class OspreyEMEA_E2E_HYVA {
 
 	}
 
-	public void search_product(String Dataset) {{
+	public void search_product(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
@@ -2033,7 +2033,6 @@ public class OspreyEMEA_E2E_HYVA {
 					Common.getscreenShot("Failed to see the product name"));
 			Assert.fail();
 		}
-	}
 	}
 
 	public void addtocart(String Dataset) { {
@@ -3664,6 +3663,63 @@ public class OspreyEMEA_E2E_HYVA {
 
 	}
 
+	
+	
+	
+	public void Enter_Gift_card(String dataSet) {
+		String GiftCode = data.get(dataSet).get("GiftCard");
+			try
+			{
+				String URL = Common.getCurrentURL();
+				System.out.println(URL);
+				if(URL.contains("stage")|| URL.contains("preprod")) {
+				Thread.sleep(3000);
+				
+				if(Common.getCurrentURL().contains("no_nb")) {
+					  Sync.waitElementPresent("xpath", "//button[contains(text(),'Legg til gavekort')]");
+					 Common.clickElement("xpath", "//button[contains(text(),'Legg til gavekort')]");
+					 
+					  Sync.waitElementPresent("id", "amcard-input");
+					  Common.textBoxInput("id", "amcard-input", GiftCode);
+				  }  
+				  else {
+					  Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
+						Common.clickElement("xpath", "//span[text()='Add Discount Code']");
+	                
+						Sync.waitElementPresent("id", "discount-code");
+						Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
+				  }
+	     
+				 Sync.waitElementClickable("xpath", "(//button[@class='btn btn-primary'])[1]");
+					Common.clickElement("xpath", "(//button[@class='btn btn-primary'])[1]");
+				}
+				else
+				{
+					Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
+					Common.clickElement("xpath","//span[text()='Add Gift Card']");
+					Common.textBoxInput("xpath","//input[@name='amcard-field -datalist']", data.get(dataSet).get("GiftCard_Prod"));
+//					Common.actionsKeyPress(Keys.ARROW_UP);
+					Common.clickElement("xpath","//span[text()='Add Code']");
+					Thread.sleep(2000);
+					String successmsg=Common.findElement("xpath", "//div[@role='alert']").getText();
+				    System.out.println(successmsg);	
+					Common.assertionCheckwithReport(successmsg.contains("added"),
+							"validating the success message after applying gift card",
+							"Success message should be displayed after the applying of gift card",
+							"Sucessfully gift card has been applyed","Failed to apply the gift card");
+				}
+			}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("validating the gift card",
+						"Success message should be displayed after the applying of gift card",
+						"Sucessfully gift card has been applyed",
+						Common.getscreenShotPathforReport("Failed to apply the gift card"));
+				Assert.fail();
+			}
+		}
+	
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 
@@ -15652,11 +15708,15 @@ public void prepareOrdersData(String fileName) {
 			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Order Status Magento");
-           cell = row.createCell(6);
+	       cell = row.createCell(6);
+	       
+	       cell.setCellStyle(cs);
+			cell.setCellValue("Workato Status");
+	       cell = row.createCell(7);
 		
-           cell.setCellStyle(cs);
+	       cell.setCellStyle(cs);
 			cell.setCellValue("Used GiftCode");
-         cell = row.createCell(7);
+	     cell = row.createCell(8);
 
 
 			/*
@@ -15705,8 +15765,7 @@ public void prepareOrdersData(String fileName) {
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-}
-
+	}
 public void Admin_signin(String dataSet) {
 
 	try {
@@ -15856,87 +15915,96 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 	return Orderstatus1;
 }
 
-public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String Used_GiftCode)
+public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode)
 		throws FileNotFoundException, IOException {
 	// String fileOut="";
 	try {
+		// String fileOut="";
+		try {
 
-		File file = new File(
-		System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_EMEA/OSP_E2E_orderDetails.xlsx");
-		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
-		XSSFSheet sheet;
-		Row row;
-		Cell cell;
-		int rowcount;
-		sheet = workbook.getSheet("OrderDetails");
-
-		if ((workbook.getSheet("OrderDetails")) == null) {
-			sheet = workbook.createSheet("OrderDetails");
-			CellStyle cs = workbook.createCellStyle();
-			cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
-			Font f = workbook.createFont();
-			f.setBold(true);
-			cs.setFont(f);
-			cs.setAlignment(HorizontalAlignment.RIGHT);
-			row = sheet.createRow(0);
-			cell = row.createCell(0);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Orders Details");
-
-			row = sheet.createRow(1);
-			cell = row.createCell(0);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Web Order Number");
-			rowcount = 2;
-
-		}
-
-		else {
-
+			File file = new File(
+					System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_EMEA/OspreyEU_E2E_orderDetails.xlsx");
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
 			sheet = workbook.getSheet("OrderDetails");
-			rowcount = sheet.getLastRowNum() + 1;
-		}
-		row = sheet.createRow(rowcount);
-		cell = row.createCell(0);
-		cell.setCellType(CellType.NUMERIC);
-		int SNo=rowcount-1;
-		cell.setCellValue(SNo);
-		cell = row.createCell(1);
-		cell.setCellType(CellType.STRING);
-		
-		cell.setCellValue("Osprey EMEA");
-		
-		cell = row.createCell(2);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Description);
-		
-		cell = row.createCell(3);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Skus);
-		
-		cell = row.createCell(4);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(OrderIdNumber);
 
-		cell = row.createCell(5);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(AdminOrderstatus);
+			if ((workbook.getSheet("OrderDetails")) == null) {
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				rowcount = 2;
+
+			}
+
+			else {
+
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			row = sheet.createRow(rowcount);
+			cell = row.createCell(0);
+			cell.setCellType(CellType.NUMERIC);
+			int SNo=rowcount-1;
+			cell.setCellValue(SNo);
+			cell = row.createCell(1);
+			cell.setCellType(CellType.STRING);
+			
+			cell.setCellValue("Osprey EU");
+			
+			cell = row.createCell(2);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Description);
+			
+			cell = row.createCell(3);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Skus);
+			
+			cell = row.createCell(4);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(OrderIdNumber);
+
+			cell = row.createCell(5);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(AdminOrderstatus);
+			
+			cell = row.createCell(6);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(workato);
+			
+			cell = row.createCell(7);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Used_GiftCode);
+			
+			
+			
+			System.out.println(OrderIdNumber);
+			FileOutputStream fileOut = new FileOutputStream(file);
+			
+			workbook.write(fileOut);
 		
-		cell = row.createCell(6);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Used_GiftCode);
-		
-		
-		
-		System.out.println(OrderIdNumber);
-		FileOutputStream fileOut = new FileOutputStream(file);
-		
-		workbook.write(fileOut);
-	
-		fileOut.flush();
-		fileOut.close();
-        } catch (Exception e) {
+			fileOut.flush();
+			fileOut.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		} catch (Exception e) {
             e.printStackTrace();
         }
 	}

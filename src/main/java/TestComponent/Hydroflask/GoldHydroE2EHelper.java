@@ -2820,9 +2820,11 @@ System.out.println(MyFavorites);
 
 	}
 
-	public void RegaddDeliveryAddress(String dataSet) {
+	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
+		Common.actionsKeyPress(Keys.PAGE_DOWN);
+		Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
@@ -9109,9 +9111,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					break;
 				}
 			}
-			Thread.sleep(6000);
+			Thread.sleep(8000);
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 //			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -13784,17 +13786,18 @@ public void Explore_Validation(String Dataset) {
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(1000);
+				Thread.sleep(2000);
+				Common.actionsKeyPress(Keys.PAGE_UP);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
 			
-			String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-			Orderstatus1.put("warkato", Warkatostatus);
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
+			Orderstatus1.put("warkato", Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -13830,8 +13833,8 @@ public void Explore_Validation(String Dataset) {
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
 				
-				String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-				Orderstatus1.put("warkato", Warkatostatus);
+				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+				Orderstatus1.put("warkato", Workatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);
@@ -13865,7 +13868,7 @@ public void Explore_Validation(String Dataset) {
 		return Orderstatus1;
 	}
 	
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode)
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode)
 			throws FileNotFoundException, IOException {
 		// String fileOut="";
 		try {
@@ -13934,7 +13937,7 @@ public void Explore_Validation(String Dataset) {
 			
 			cell = row.createCell(6);
 			cell.setCellType(CellType.STRING);
-			cell.setCellValue(warkato);
+			cell.setCellValue(workato);
 			
 			cell = row.createCell(7);
 			cell.setCellType(CellType.STRING);

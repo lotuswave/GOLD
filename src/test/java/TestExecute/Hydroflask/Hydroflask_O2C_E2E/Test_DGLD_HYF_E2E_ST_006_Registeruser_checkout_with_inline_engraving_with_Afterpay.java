@@ -32,7 +32,7 @@ public class Test_DGLD_HYF_E2E_ST_006_Registeruser_checkout_with_inline_engravin
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("GroundShipping method");
+//            Hydro.selectshippingaddress("GroundShipping method");
             String OrderNumber=Hydro.After_Pay_payment("Afterpay");
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
