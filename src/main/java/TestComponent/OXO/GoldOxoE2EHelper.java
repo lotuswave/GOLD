@@ -193,11 +193,11 @@ public class GoldOxoE2EHelper {
 				}
 			}
 		
-				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+				Common.scrollIntoView("xpath", "//img[contains(@alt,'" + products + "')]");
+				Sync.waitElementPresent(30,"xpath", "//img[contains(@alt,'" + products + "')]");
 //				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
@@ -10627,12 +10627,13 @@ public void header_1_Percent_Planet() {
 				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
-				Thread.sleep(3000);
-				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+				Thread.sleep(6000);
+				Common.findElement("xpath", "//div[@class='data-grid-cell-content']");
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
 			String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			System.out.println(Warkatostatus);
 			Orderstatus1.put("warkato", Warkatostatus);
 				 if(Number.equals(orderNumber))
 				 {
@@ -10658,14 +10659,13 @@ public void header_1_Percent_Planet() {
 			else
 			{
 				Thread.sleep(6000);
-				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(4000);
-				Common.actionsKeyPress(Keys.PAGE_UP);
 				Common.javascriptclickElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
-				Thread.sleep(3000);
+				Thread.sleep(6000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
