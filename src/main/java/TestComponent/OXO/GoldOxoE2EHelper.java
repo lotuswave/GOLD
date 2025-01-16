@@ -10631,6 +10631,8 @@ public void header_1_Percent_Planet() {
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
+			String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("warkato", Warkatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -10664,6 +10666,8 @@ public void header_1_Percent_Planet() {
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
+				String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+				Orderstatus1.put("warkato", Warkatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);
