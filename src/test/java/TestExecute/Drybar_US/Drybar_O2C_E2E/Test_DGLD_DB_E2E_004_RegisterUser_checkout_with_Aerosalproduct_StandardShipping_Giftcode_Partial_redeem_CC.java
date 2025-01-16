@@ -57,7 +57,7 @@ public class Test_DGLD_DB_E2E_004_RegisterUser_checkout_with_Aerosalproduct_Stan
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}

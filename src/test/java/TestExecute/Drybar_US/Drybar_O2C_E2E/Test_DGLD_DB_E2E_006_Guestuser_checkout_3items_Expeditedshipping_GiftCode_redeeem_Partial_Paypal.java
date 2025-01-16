@@ -31,9 +31,8 @@ public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_Gi
 	        Drybar.addtocart("900-0700-4 Product");
 	        Drybar.minicart_Checkout();
 	        Drybar.addDeliveryAddress_Guestuser("Address");
-	        String Used_GiftCode= Drybar.gitCard("GiftCode Partial Redeem");
+	        String Used_GiftCode= Drybar.gitCard("DRY-PRPD-TEST-QA");
 	        Drybar.selectshippingmethod("ExpeditedShipping method");
-	        Drybar.clickSubmitbutton_Shippingpage();
 	        String OrderNumber=Drybar.payPal_Payment("PaypalDetails");
 	        Drybar.Admin_signin("AccountDetails");
 	        Drybar.click_Sales();
@@ -57,7 +56,7 @@ public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_Gi
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}

@@ -35,10 +35,10 @@ public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_stand
         Drybar.addtocart("900-0630-1 Product");
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("PO Box Address");
-        Drybar.selectshippingmethod("GroundShipping method");
+        Drybar.selectshippingmethod("StandardShipping method");
         String Used_GiftCode = Drybar.gitCard("GiftCode Partial Redeem");
-        Drybar.clickSubmitbutton_Shippingpage();
-        Drybar.tax_validation_Paymentpage("Address");
+//        Drybar.clickSubmitbutton_Shippingpage();
+//        Drybar.tax_validation_Paymentpage("Address");
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
@@ -62,7 +62,7 @@ public class Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_stand
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}

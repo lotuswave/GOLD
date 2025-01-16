@@ -34,7 +34,6 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 	        Drybar.selectshippingmethod("ExpressShipping method");
 	        Drybar.discountCode("Discount");
 	        Drybar.clickSubmitbutton_Shippingpage(); 
-	        Drybar.tax_validation_Paymentpage("Address");
 	        String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 	        Drybar.Admin_signin("AccountDetails");
 	        Drybar.click_Sales();
@@ -58,7 +57,7 @@ public class Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_Al
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}

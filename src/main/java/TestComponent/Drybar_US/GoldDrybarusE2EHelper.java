@@ -555,8 +555,8 @@ public class GoldDrybarusE2EHelper {
 			
 			System.out.println(name);
 			product_quantity(Dataset);
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
-			Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'ADD TO BAG')])[1]");
+			Common.clickElement("xpath", "(//span[contains(text(),'ADD TO BAG')])[1]");
 			//Sync.waitPageLoad();
 		
 		} catch (Exception | Error e) {
@@ -784,8 +784,8 @@ public class GoldDrybarusE2EHelper {
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("id", "shipping-lastname",
 					data.get(dataSet).get("LastName"));
-			Common.clickElement("id", "shipping-street-0");
-			Common.textBoxInput("id", "shipping-street-0", address);
+			Common.clickElement("xpath", "//input[@id='shipping-street-0']");
+			Common.textBoxInput("xpath", "//input[@id='shipping-street-0']", address);
 			Common.scrollIntoView("id", "shipping-country_id");
 		    Common.dropdown("id", "shipping-country_id",Common.SelectBy.TEXT, data.get(dataSet).get("Country"));
 			Sync.waitPageLoad();
@@ -861,10 +861,14 @@ public class GoldDrybarusE2EHelper {
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			System.out.println(size);
 			if (size > 0  ) {
-				
+				try {
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ method +"')]");
-				Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
+				Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ method +"')])[3]");
+				Common.clickElement("xpath", "(//span[contains(text(),'"+ method +"')])[3]");
+				}
+				catch (Exception | Error e) {
+					Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
+				}
 			}
 			else
 			{
@@ -2242,7 +2246,7 @@ public class GoldDrybarusE2EHelper {
 					
 					Common.textBoxInputClear("xpath", "(//input[@name='lastname'])[2]");
 					Common.textBoxInput("xpath", "(//input[@name='lastname'])[2]", data.get(dataSet).get("LastName"));
-					Common.textBoxInputClear("xpath", "//input[@name='street[0]']");
+					Common.textBoxInputClear("xpath", "(//input[@name='street[0]'])[2]");
 					Common.textBoxInput("xpath", "(//input[@name='street[0]'])[2]", data.get(dataSet).get("Street"));
 					Thread.sleep(4000);
 					
@@ -11103,6 +11107,7 @@ public void videos_validation() {
 				Thread.sleep(1000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(1000);
+				Common.actionsKeyPress(Keys.PAGE_UP);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
 				Thread.sleep(3000);
@@ -11110,6 +11115,9 @@ public void videos_validation() {
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
+			
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
+			Orderstatus1.put("workato", Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -11142,6 +11150,9 @@ public void videos_validation() {
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
+				
+				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
+				Orderstatus1.put("workato", Workatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);

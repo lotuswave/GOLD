@@ -15787,6 +15787,8 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
        
 		String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 		System.out.println(Number);
+		String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
+		Orderstatus1.put("workato", Workatostatus);
 			 if(Number.equals(orderNumber))
 			 {
 						Thread.sleep(3000);
@@ -15819,6 +15821,8 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
+			Orderstatus1.put("workato", Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);

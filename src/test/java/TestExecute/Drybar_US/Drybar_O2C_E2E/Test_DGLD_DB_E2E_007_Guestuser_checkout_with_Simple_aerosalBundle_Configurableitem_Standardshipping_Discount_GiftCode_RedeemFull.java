@@ -31,8 +31,7 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
     	Drybar.addtocart("Refresh Bundle");
         Drybar.minicart_Checkout();
         Drybar.addDeliveryAddress_Guestuser("Address");
-        Drybar.selectshippingmethod("GroundShipping method");
-        Drybar.clickSubmitbutton_Shippingpage();
+        Drybar.selectshippingmethod("StandardShipping method");
         Drybar.discountCode("Discount");
         String Used_GiftCode= Drybar.gitCard("GiftCode Full Redeem");
         String OrderNumber=Drybar.giftCardSubmitOrder();
@@ -50,7 +49,7 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
@@ -58,7 +57,7 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}
