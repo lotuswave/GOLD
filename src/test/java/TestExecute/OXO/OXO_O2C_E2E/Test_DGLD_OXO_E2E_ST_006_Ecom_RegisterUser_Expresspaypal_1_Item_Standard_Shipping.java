@@ -22,8 +22,6 @@ public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Sta
 			Thread.sleep(5000);
 			String Description ="Guest User Multiple Item + GC Partial redeem + Express PayPal - Standard Shipping";
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
 			Oxo.search_product("SKU-11244200 - 1QTY");
 			Oxo.addtocart("SKU-11244200 - 1QTY");
 			
@@ -33,17 +31,8 @@ public class Test_DGLD_OXO_E2E_ST_006_Ecom_RegisterUser_Expresspaypal_1_Item_Sta
 			Oxo.addtocart("SKU-11301800-1QTY");
 				
 			Oxo.minicart_Checkout();
-		    Oxo.Gift_card("Giftcard");
-		    
-		    String Used_GiftCode="YES";
-//			String Products_details=Oxo.shipping_order_details();
-			HashMap<String,String> Payment= Oxo.ExpressPaypal("PaypalDetails");
-//			HashMap<String,String> Shipping=Oxo.ExpressShipingdetails("AccountDetails");
-//			Oxo.express_paypal_shipping("PaypalDetails");
-//			HashMap<String,String> data=Oxo.OrderSummaryValidation();
-			String OrderNumber =Oxo.ExpressOrder();
-//			String OrderIdNumber= Oxo.Verify_order_page();
-//			System.out.println(OrderNumber);
+			 String Used_GiftCode= Oxo.Gift_card("Giftcard");
+			String OrderNumber= Oxo.ExpressPaypal("PaypalDetails");
 			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);

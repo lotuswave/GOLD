@@ -9178,8 +9178,8 @@ public void header_1_Percent_Planet() {
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unable to go orderconformation page");
 
-					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]/p/span").size() > 0) {
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/span");
+					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]/p/a").size() > 0) {
+						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/a");
 						System.out.println(order);
 					}
 					else if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {

@@ -10341,9 +10341,7 @@ public void header_1_Percent_Planet() {
 
 	}
 
-	public HashMap<String, String> ExpressPaypal(String dataSet) {
-
-		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+	public String ExpressPaypal(String dataSet) throws Exception {
 
 		String order = "";
 
@@ -10351,51 +10349,154 @@ public void header_1_Percent_Planet() {
 
 		try {
 			Thread.sleep(3000);
-			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+			int cancelpayment=Common.findElements("xpath", "//button[@title='Cancel']").size();
+			System.out.println(cancelpayment);
+			if(cancelpayment>0)
+			{
+				
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Cancel Payment')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Cancel Payment')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Thread.sleep(3000);
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
-			// Common.refreshpage();
-			Thread.sleep(8000);
-			Sync.waitElementClickable("xpath", "//div[contains(@class,'paypal-button-lab')]");
-			Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				// Common.refreshpage();
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.switchToDefault();
+				
+			}
+			else
+			{
+				Thread.sleep(3000);
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
-			String Card = "ExpressPayPal";
-
-			Paymentmethod.put("Card", Card);
-
-			System.out.println(Card);
-
-			Common.switchToDefault();
-			Thread.sleep(4000);
-			Common.switchWindows();
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			
-			String otp = "111111";
-			for (int i = 0; i < otp.length(); i++) {
-				WebElement otpField = Common.findElement("id","otp" + (i + 1));
-				otpField.sendKeys(String.valueOf(otp.charAt(i)));
+				// Common.refreshpage();
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
+				Common.switchToDefault();
 			}
 			
-//			Common.clickElement("xpath", "(//a[text()='Try another way'])[1]");
-//			Common.clickElement("xpath", "(//div[text()='Log in with your password'])[1]");
-//			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Password"));
-//			Common.clickElement("id", "btnLogin");
+			Thread.sleep(4000);
+			Common.switchWindows();
+			int size = Common.findElements("id", "acceptAllButton").size();
+			if (size > 0) {
 
-			Thread.sleep(3000);
-			// Paypal_Address_Verification("Express Paypal");
-			
-			Common.clickElement("xpath", "//button[text()='Complete Purchase']");
-			Thread.sleep(8000);
-			Common.switchToFirstTab();
+				Common.clickElement("id", "acceptAllButton");
+
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
 			Assert.fail();
 		}
+		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
-		return Paymentmethod;
+		if (!url.contains("stage") & !url.contains("preprod")) {
+
+			int sizeofelement = Common.findElements("id", "email").size();
+			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
+					"open paypal site window", "faild to open paypal account");
+		} else {
+
+			Common.clickElement("id", "login_emaildiv");
+			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
+			Common.clickElement("id", "btnNext");
+			int size1 = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			if(size1>0) {
+				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			}
+			else {
+				
+			
+			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			int sizeemail = Common.findElements("id", "email").size();
+			
+			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
+					"open paypal site window", "faild to open paypal account");
+			}
+			
+
+			try {
+				Common.clickElement("id", "btnLogin");
+				Thread.sleep(5000);
+				Common.actionsKeyPress(Keys.END);
+				Thread.sleep(5000);
+				Paypal_Address_Verification("Express Paypal");
+				Thread.sleep(4000);
+				
+				if (Common.getCurrentURL().contains(""))
+					Common.clickElement("id", "payment-submit-btn");
+				Thread.sleep(8000);
+				Common.switchToFirstTab();
+			} catch (Exception | Error e) {
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
+						"User failed to proceed with paypal payment",
+						Common.getscreenShotPathforReport(expectedResult));
+				Assert.fail();
+			}
+			Sync.waitForLoad();
+			Thread.sleep(5000);
+//			express_paypal_shipping("PaypalDetails");
+			
+//			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+//			Thread.sleep(3000);
+//			select_Shipping_Method("GroundShipping method");
+			Thread.sleep(4000);
+			int rewards=Common.findElements("xpath", "//span[contains(text(),'Sign in')]").size();
+			System.out.println(rewards);
+			if(rewards==1)
+			{
+				Thread.sleep(5000);
+				Common.scrollIntoView("name", "telephone");
+				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
+				Thread.sleep(4000);
+			}
+			
+			if (Common.getText("xpath", "//div[@id='payment-method-view-paypal_express']//p[2]").contains("Paypal")||Common.getCurrentURL().contains("preprod")) {
+				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				// Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
+				
+				Thread.sleep(8000);
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+			}
+				try {
+					Thread.sleep(6000);
+					String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
+					System.out.println(sucessMessage);
+
+					int size = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+							"verifying the product confirmation", expectedResult,
+							"Successfully It redirects to order confirmation page Order Placed",
+							"User unable to go orderconformation page");
+
+					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]/p/a").size() > 0) {
+						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/a");
+						System.out.println(order);
+					}
+					else if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
+						order = Common.getText("xpath", "//a[@class='order-number']/strong");
+						System.out.println(order);
+					}
+
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
+							"It should navigate to the order confirmation page",
+							"User failed to proceed to the order confirmation page",
+							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
+
+					Assert.fail();
+				}
+			}
+		return order;
 	}
 
 	// public HashMap<String, String> Paypal_Address(String string)
