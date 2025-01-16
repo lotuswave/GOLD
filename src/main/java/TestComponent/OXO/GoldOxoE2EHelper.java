@@ -10615,14 +10615,15 @@ public void header_1_Percent_Planet() {
 		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
 		try
 		{
+			Thread.sleep(6000);
 			int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
 			if (filters > 0) {
 				Common.clickElement("xpath",
 						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
 				Thread.sleep(4000);
-				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Common.javascriptclickElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
@@ -10656,9 +10657,11 @@ public void header_1_Percent_Planet() {
 			}
 			else
 			{
+				Thread.sleep(6000);
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Common.actionsKeyPress(Keys.PAGE_UP);
+				Common.javascriptclickElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
