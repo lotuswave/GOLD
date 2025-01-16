@@ -13501,7 +13501,8 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 		{
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+			Thread.sleep(4000);
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Thread.sleep(4000);
 			String rewardpoints=Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim().replace("YOU HAVE ", "").replace(" POINTS", "");
 			System.out.println(rewardpoints);

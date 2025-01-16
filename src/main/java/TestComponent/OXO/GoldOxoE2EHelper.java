@@ -8999,6 +8999,7 @@ public void header_1_Percent_Planet() {
 				Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
 						"Gift card message should be applied", "Sucessfully gift message has been applied ",
 						"failed to apply the gift message");
+				Thread.sleep(4000);
 				
 			
 		} catch (Exception | Error e) {
@@ -9179,7 +9180,7 @@ public void header_1_Percent_Planet() {
 
 	}
 
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode)
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode)
 			throws FileNotFoundException, IOException {
 		// String fileOut="";
 		try {
@@ -9248,7 +9249,7 @@ public void header_1_Percent_Planet() {
 			
 			cell = row.createCell(6);
 			cell.setCellType(CellType.STRING);
-			cell.setCellValue(workato);
+			cell.setCellValue(warkato);
 			
 			cell = row.createCell(7);
 			cell.setCellType(CellType.STRING);
