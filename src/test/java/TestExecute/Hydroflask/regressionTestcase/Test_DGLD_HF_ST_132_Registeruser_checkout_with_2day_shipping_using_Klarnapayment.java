@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_HF_ST_132_Registeruser_checkout_with_2day_shipping_using_Klarnapayment {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Bundle");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validating_Registeruser_checkout_with_2day_shipping_using_Klarnapayment () throws Exception {
@@ -23,7 +23,6 @@ public class Test_DGLD_HF_ST_132_Registeruser_checkout_with_2day_shipping_using_
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.employee_discount();
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("2 Day method");
