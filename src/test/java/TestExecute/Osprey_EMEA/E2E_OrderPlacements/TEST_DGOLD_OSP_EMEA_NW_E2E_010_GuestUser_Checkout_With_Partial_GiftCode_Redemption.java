@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Osprey_EMEA.OspreyEMEA_E2EHelper;
+import TestComponent.Osprey_EMEA.OspreyEMEA_E2E_HYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
@@ -15,7 +16,7 @@ import TestLib.Login;
 public class TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_GiftCode_Redemption {
 
 	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
-	OspreyEMEA_E2EHelper Osprey_ReEu = new OspreyEMEA_E2EHelper(datafile,"Checkout payments");
+	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void GuestUser_Checkout_With_Partial_GiftCode_Redemption_Product_QTY2 () throws Exception {
@@ -49,7 +50,7 @@ public class TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_Gift
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
