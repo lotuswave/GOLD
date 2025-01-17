@@ -13784,20 +13784,22 @@ public void Explore_Validation(String Dataset) {
 						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
 				Thread.sleep(4000);
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(1000);
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(2000);
-				Common.actionsKeyPress(Keys.PAGE_UP);
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
-				Thread.sleep(4000);
+				Thread.sleep(6000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
-			
-			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
 			Orderstatus1.put("warkato", Workatostatus);
+			System.out.println(Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -13832,9 +13834,11 @@ public void Explore_Validation(String Dataset) {
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
-				
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div");
 				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
 				Orderstatus1.put("warkato", Workatostatus);
+				System.out.println(Workatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);
