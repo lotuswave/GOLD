@@ -24,13 +24,8 @@ public class Test_DGLD_OXO_US_ST_004_Register_user_Configure_gift_card_in_PDP_an
 			Oxo.Gift_cards("Oxo Gift Card");
 			Oxo.Card_Value("price");
 			Oxo.minicart_Checkout();
-			Oxo.select_Shipping_Method("GroundShipping method");
-			Oxo.clickSubmitbutton_Shippingpage();
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
-			
-			
-			
-
+		
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

@@ -13786,7 +13786,7 @@ public void Explore_Validation(String Dataset) {
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(4000);
+				Thread.sleep(6000);
 				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);

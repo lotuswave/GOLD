@@ -1328,8 +1328,8 @@ else
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-			String code = Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
+			Sync.waitElementPresent("xpath", "//input[@name='postcode']");
+			String code = Common.findElement("xpath", "//input[@name='postcode']").getAttribute("value");
 			System.out.println(code);
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
