@@ -21,8 +21,6 @@ public class TEST_DGLD_OXO_US_ST_021_EmployeeCustomer_Checkout_with_Multiple_Ite
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("Employeeuser");
-			Oxo.Gift_cards("Oxo Gift Card");
-			Oxo.Card_Value("price");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
 			Oxo.employee_discount();
