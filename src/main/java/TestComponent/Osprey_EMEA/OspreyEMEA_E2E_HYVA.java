@@ -3626,16 +3626,20 @@ public class OspreyEMEA_E2E_HYVA {
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			  
 			if(Common.getCurrentURL().contains("/gb"))
 			{
 				  Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
-					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+				  Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
 			}
-			else
+			else if (Common.getCurrentURL().contains("no_nb"))
 			{
+				Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
+				Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+			}
+			else {
 				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
 				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
@@ -3674,24 +3678,28 @@ public class OspreyEMEA_E2E_HYVA {
 				System.out.println(URL);
 				if(URL.contains("stage")|| URL.contains("preprod")) {
 				Thread.sleep(3000);
-				
-				if(Common.getCurrentURL().contains("no_nb")) {
+					if(Common.getCurrentURL().contains("no_nb")) {
 					  Sync.waitElementPresent("xpath", "//button[contains(text(),'Legg til gavekort')]");
-					 Common.clickElement("xpath", "//button[contains(text(),'Legg til gavekort')]");
+					  Common.clickElement("xpath", "//button[contains(text(),'Legg til gavekort')]");
 					 
 					  Sync.waitElementPresent("id", "amcard-input");
 					  Common.textBoxInput("id", "amcard-input", GiftCode);
-				  }  
-				  else {
-					  Sync.waitElementClickable("xpath", "//span[text()='Add Discount Code']");
-						Common.clickElement("xpath", "//span[text()='Add Discount Code']");
-	                
-						Sync.waitElementPresent("id", "discount-code");
-						Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
-				  }
+					  }  else {
+						  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
+						  Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+						 
+						  Sync.waitElementPresent("id", "amcard-input");
+						  Common.textBoxInput("id", "amcard-input", GiftCode);
+						  }
 	     
-				 Sync.waitElementClickable("xpath", "(//button[@class='btn btn-primary'])[1]");
-					Common.clickElement("xpath", "(//button[@class='btn btn-primary'])[1]");
+				     Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
+					 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
+					 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+					 System.out.println(successmsg);	
+					 Common.assertionCheckwithReport(successmsg.contains("added"),
+								"validating the success message after applying gift card",
+								"Success message should be displayed after the applying of gift card",
+								"Sucessfully gift card has been applyed","Failed to apply the gift card");
 				}
 				else
 				{
