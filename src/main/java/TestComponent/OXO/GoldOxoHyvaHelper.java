@@ -13512,7 +13512,6 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Thread.sleep(4000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ENTER);
 			 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
 			 Thread.sleep(4000);
