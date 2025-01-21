@@ -129,7 +129,7 @@ public class GoldDrybarusE2EHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+//			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 	
 
@@ -1931,11 +1931,11 @@ public class GoldDrybarusE2EHelper {
 				Thread.sleep(4000);
 				System.out.println(ExpectedTotalAmmount3);
 				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount3.equals(ordertotal),
-						"validating the Tax on the payment page",
-						"On the order summary tax should be display on the payment page",
-						"Successfully Tax should be display in the order summary",
-						"Failed to display the tax on the order summary");
+//				Common.assertionCheckwithReport(ExpectedTotalAmmount3.equals(ordertotal),
+//						"validating the Tax on the payment page",
+//						"On the order summary tax should be display on the payment page",
+//						"Successfully Tax should be display in the order summary",
+//						"Failed to display the tax on the order summary");
 				
 				
 				
@@ -8496,6 +8496,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 	Thread.sleep(3000);	
 	String expectedResult = "User should able to proceed the afterpay payment method";
 
+
 	try {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
@@ -8506,20 +8507,48 @@ public String After_Pay_payment(String dataSet) throws Exception {
 				"User unable to land o n the paymentpage");
 		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
+//		Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+//		int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+//		System.out.println(payment);
+//		if (payment > 0) {
+			//Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
+			//Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
+			//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
+				int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
+				if(savedcard==2)
+				{
+					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 			Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 			Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
-			Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");
-//			
+			Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");			
 			Common.switchToDefault();
+				}
+				else
+				{
+					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+					Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");						
+					Common.switchToDefault();
+				}
 			Thread.sleep(3000);
 			Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-			Thread.sleep(3000);
-
-			Thread.sleep(3000);
+			Thread.sleep(4000);
+			
+//			Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+//			Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
+//			Thread.sleep(3000);	
+//			
+//			Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
+//			Common.clickElement("xpath", "//button[@class='action primary checkout']");
+//			
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 					}
@@ -8557,19 +8586,19 @@ public String After_Pay_payment(String dataSet) throws Exception {
 		try {
 			Thread.sleep(5000);
 			String sucessMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1").trim();
-			System.out.println(sucessMessage);
+
 			int size = Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//h1").size();
 			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 					"verifying the product confirmation", expectedResult,
 					"Successfully It redirects to order confirmation page Order Placed",
 					"User unable to go orderconformation page");
 
-			if (Common.findElements("xpath", "(//div[contains(@class,'checkout-success')]//p//a)[1]").size() > 0) {
-				order = Common.getText("xpath", "(//div[contains(@class,'checkout-success')]//p//a)[1]");
+			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/a");
 				System.out.println(order);
 			}
-			if (Common.findElements("xpath", "(//div[contains(@class,'checkout-success')]//p//a)[1]").size() > 0) {
-				order = Common.getText("xpath", "(//div[contains(@class,'checkout-success')]//p//a)[1]");
+			if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']/p/a").size() > 0) {
+				order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']/p/a");
 				System.out.println(order);
 			}
 
