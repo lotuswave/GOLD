@@ -56,7 +56,7 @@ public class Test_DGLD_DB_E2E_010_Admin_Register_User_simple_Bundle_Configurable
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+//        Drybar.close_add();
         
 
 	}

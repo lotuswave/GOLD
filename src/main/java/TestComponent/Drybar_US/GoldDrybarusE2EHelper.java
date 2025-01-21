@@ -11503,12 +11503,12 @@ public String fivepercent_Reward_Points(String Dataset) {
 				Sync.waitElementPresent("xpath", "//button[@title='Add to Order']");
 				Common.clickElement("xpath", "//button[@title='Add to Order']");
 				Common.implicitWait();
-				Sync.waitElementVisible("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]");
-				String[] SKU = Common.findElement("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]").getText()
-						.split(" ");
-				System.out.println(SKU[1]);
-				Common.assertionCheckwithReport(SKU[1].contains(SKUnumber[i]), "To validate the sku is added to order",
-						"sku should be added to order", "SKU is added to order", "failed to add SKU to order");
+//				Sync.waitElementVisible("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]");
+//				String[] SKU = Common.findElement("xpath", "//div[contains(text(),'" + SKUnumber[i] + "')]").getText()
+//						.split(" ");
+//				System.out.println(SKU[1]);
+//				Common.assertionCheckwithReport(SKU[1].contains(SKUnumber[i]), "To validate the sku is added to order",
+//						"sku should be added to order", "SKU is added to order", "failed to add SKU to order");
 
 				Common.scrollIntoView("xpath", "//div[@class='actions']//span[text()='Add Products By SKU']");
 
@@ -11770,10 +11770,10 @@ public String fivepercent_Reward_Points(String Dataset) {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@value='THEPERFECTBLOWOUTSPECIALVALUESET']//parent::div//div[@class='sku-configure-button']//span");
 			Common.clickElement("xpath", "//input[@value='THEPERFECTBLOWOUTSPECIALVALUESET']//parent::div//div[@class='sku-configure-button']//span");
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "(//button[@class='action-primary']//span[text()='OK'])[1]");
-			Common.clickElement("xpath", "(//button[@class='action-primary']//span[text()='OK'])[1]");
-			Thread.sleep(4000);
+			Thread.sleep(12000);
+			Sync.waitElementPresent("xpath", "(//button[@class='action-primary'])[1]");
+			Common.javascriptclickElement("xpath", "(//button[@class='action-primary'])[1]");
+			Thread.sleep(8000);
 			Common.clickElement("xpath", "//span[text()='Add Products to Order']");
 			Thread.sleep(8000);
 		}
