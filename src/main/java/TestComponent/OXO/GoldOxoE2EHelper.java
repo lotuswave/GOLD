@@ -10717,26 +10717,28 @@ public void header_1_Percent_Planet() {
 		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
 		try
 		{
-			Thread.sleep(6000);
 			int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
 			if (filters > 0) {
 				Common.clickElement("xpath",
 						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
 				Thread.sleep(4000);
+				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
 				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(3000);
-				Common.javascriptclickElement("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
 				Thread.sleep(6000);
-				Common.findElement("xpath", "//div[@class='data-grid-cell-content']");
+				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
-			String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-			System.out.println(Warkatostatus);
-			Orderstatus1.put("warkato", Warkatostatus);
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("warkato", Workatostatus);
+			System.out.println(Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -10760,19 +10762,22 @@ public void header_1_Percent_Planet() {
 			}
 			else
 			{
-				Thread.sleep(6000);
+				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
-				Thread.sleep(4000);
-				Common.javascriptclickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(1000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
-				Thread.sleep(6000);
+				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
-				String Warkatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-				Orderstatus1.put("warkato", Warkatostatus);
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div");
+				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+				Orderstatus1.put("warkato", Workatostatus);
+				System.out.println(Workatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);

@@ -38,7 +38,7 @@ public class Test_DGLD_OXO_E2E_ST_004_GuestUser_3_Items_each_QTY2_Master_CC_Stan
 			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode);
 			
 			
 			

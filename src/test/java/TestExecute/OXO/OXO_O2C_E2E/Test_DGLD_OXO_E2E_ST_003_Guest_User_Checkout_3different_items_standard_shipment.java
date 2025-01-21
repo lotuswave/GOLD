@@ -35,7 +35,7 @@ public class Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_stand
 			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode);
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
