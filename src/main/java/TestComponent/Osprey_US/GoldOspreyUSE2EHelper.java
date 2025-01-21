@@ -16756,16 +16756,22 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 					"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(1000);
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(1000);
+			Thread.sleep(6000);
+			Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
-			Thread.sleep(3000);
+			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
        
 		String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 		System.out.println(Number);
+		Thread.sleep(4000);
+		Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
+		String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+		Orderstatus1.put("warkato", Workatostatus);
+		System.out.println(Workatostatus);
 			 if(Number.equals(orderNumber))
 			 {
 						Thread.sleep(3000);
@@ -16789,15 +16795,22 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 		}
 		else
 		{
-			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(5000);
+			Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 			Thread.sleep(1000);
 			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
-			Thread.sleep(3000);
+			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div");
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("warkato", Workatostatus);
+			System.out.println(Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -16882,15 +16895,15 @@ public void prepareOrdersData(String fileName) {
 			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Order Status Magento");
-	       cell = row.createCell(6);
-	       
-	       cell.setCellStyle(cs);
+           cell = row.createCell(6);
+           
+           cell.setCellStyle(cs);
 			cell.setCellValue("Workato Status");
-	       cell = row.createCell(7);
+           cell = row.createCell(7);
 		
-	       cell.setCellStyle(cs);
+           cell.setCellStyle(cs);
 			cell.setCellValue("Used GiftCode");
-	     cell = row.createCell(8);
+         cell = row.createCell(8);
 
 
 			/*
@@ -16990,7 +17003,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Skus
 		cell = row.createCell(1);
 		cell.setCellType(CellType.STRING);
 		
-		cell.setCellValue("Osprey US");
+		cell.setCellValue("OspreyUS");
 		
 		cell = row.createCell(2);
 		cell.setCellType(CellType.STRING);
