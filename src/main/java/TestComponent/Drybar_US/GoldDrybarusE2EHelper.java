@@ -11147,7 +11147,7 @@ public void videos_validation() {
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
 			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-			Orderstatus1.put("warkato", Workatostatus);
+			Orderstatus1.put("workato", Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -11183,7 +11183,7 @@ public void videos_validation() {
 				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
 				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-				Orderstatus1.put("warkato", Workatostatus);
+				Orderstatus1.put("workato", Workatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);
