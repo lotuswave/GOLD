@@ -11802,8 +11802,8 @@ public String fivepercent_Reward_Points(String Dataset) {
 			Sync.waitElementPresent("xpath", "//input[@value='THEPERFECTBLOWOUTSPECIALVALUESET']//parent::div//div[@class='sku-configure-button']//span");
 			Common.clickElement("xpath", "//input[@value='THEPERFECTBLOWOUTSPECIALVALUESET']//parent::div//div[@class='sku-configure-button']//span");
 			Thread.sleep(12000);
-			Sync.waitElementPresent("xpath", "(//button[@class='action-primary'])[1]");
-			Common.javascriptclickElement("xpath", "(//button[@class='action-primary'])[1]");
+			Sync.waitElementPresent("xpath", "(//button[@class='action-primary'])[1]//span");
+			Common.javascriptclickElement("xpath", "(//button[@class='action-primary'])[1]//span");
 			Thread.sleep(8000);
 			Common.clickElement("xpath", "//span[text()='Add Products to Order']");
 			Thread.sleep(8000);
