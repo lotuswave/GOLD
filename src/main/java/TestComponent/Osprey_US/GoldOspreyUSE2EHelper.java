@@ -11171,11 +11171,11 @@ public String After_Pay_payment(String dataSet) throws Exception {
 					"User unable to go orderconformation page");
 
 			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
-				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/a");
 				System.out.println(order);
 			}
-			if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-				order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//p/a");
+			if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']/p/a").size() > 0) {
+				order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']/p/a");
 				System.out.println(order);
 			}
 
