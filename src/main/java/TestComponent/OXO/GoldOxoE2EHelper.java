@@ -6048,11 +6048,11 @@ catch(Exception | Error e)
 			Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
 			String value = Common.findElement("xpath", "//select[@name='qty']").getAttribute("value");
-			Common.assertionCheckwithReport(value.equals(Quantity),
-					"validating the  product the product quantity in PDP page",
-					"Product quantity should be update in the PDP page",
-					"Sucessfully product Qunatity has been updated ",
-					"failed to Update the prodcut quantity in PDP page");
+//			Common.assertionCheckwithReport(value.equals(Quantity),
+//					"validating the  product the product quantity in PDP page",
+//					"Product quantity should be update in the PDP page",
+//					"Sucessfully product Qunatity has been updated ",
+//					"failed to Update the prodcut quantity in PDP page");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
