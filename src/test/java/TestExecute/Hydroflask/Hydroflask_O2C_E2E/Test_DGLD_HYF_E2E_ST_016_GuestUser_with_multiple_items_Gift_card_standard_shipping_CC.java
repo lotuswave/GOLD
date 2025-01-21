@@ -26,8 +26,8 @@ public class Test_DGLD_HYF_E2E_ST_016_GuestUser_with_multiple_items_Gift_card_st
 			Hydro.search_product("SKU-P-S21001 - 1"); 
 			Hydro.Myhydro_Graphic("SKU-P-S21001 - 1");
 			Hydro.enraving_Checkout("Graphic");
-			Hydro.search_product("TT40PS474");     
-			Hydro.Configurable_addtocart_pdp("TT40PS474");
+			Hydro.search_product("SKU-TT40PS474");     
+			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
 			Hydro.search_product("SKU-CFX001");     
 			Hydro.addtocart("SKU-CFX001");
 			Hydro.search_product("SKU-BO56 -1QTY");     

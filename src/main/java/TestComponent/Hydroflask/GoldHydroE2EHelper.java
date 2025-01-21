@@ -3192,7 +3192,7 @@ System.out.println(MyFavorites);
 		try
 		{
 			
-				Common.clickElement("xpath", "//span[contains(text(),'Holiday Shop')]");
+				Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
 //				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
