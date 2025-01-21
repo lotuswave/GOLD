@@ -16770,7 +16770,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 		Thread.sleep(4000);
 		Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
 		String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-		Orderstatus1.put("warkato", Workatostatus);
+		Orderstatus1.put("workato", Workatostatus);
 		System.out.println(Workatostatus);
 			 if(Number.equals(orderNumber))
 			 {
@@ -16809,7 +16809,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div");
 			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
-			Orderstatus1.put("warkato", Workatostatus);
+			Orderstatus1.put("workato", Workatostatus);
 			System.out.println(Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
