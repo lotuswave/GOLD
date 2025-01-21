@@ -11505,12 +11505,12 @@ public String After_Pay_payment(String dataSet) throws Exception {
 			"Successfully It redirects to order confirmation page Order Placed",
 			"User unable to go orderconformation page");
 	
-	if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size()>0) {
-		order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+	if(Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]/p/a").size()>0) {
+		order=Common.getText("xpath", "//div[contains(@class,'checkout-success container')]/p/a");
 		System.out.println(order);
 	}
-	if(Common.findElements("xpath","//a[@class='order-number']/strong").size()>0) {
-		order=	Common.getText("xpath", "//a[@class='order-number']/strong");
+	if(Common.findElements("xpath","//div[contains(@class,'checkout-success container')]/p/span").size()>0) {
+		order=	Common.getText("xpath", "//div[contains(@class,'checkout-success container')]/p/span");
 		System.out.println(order);
 	}
 	
