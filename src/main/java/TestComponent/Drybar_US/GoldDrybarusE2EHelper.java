@@ -1048,7 +1048,7 @@ public class GoldDrybarusE2EHelper {
 		cell = row.createCell(1);
 		cell.setCellType(CellType.STRING);
 		
-		cell.setCellValue("Osprey EU");
+		cell.setCellValue("Drybar US");
 		
 		cell = row.createCell(2);
 		cell.setCellType(CellType.STRING);
@@ -11115,9 +11115,10 @@ public void videos_validation() {
 	       
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
-			
-			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
-			Orderstatus1.put("workato", Workatostatus);
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("warkato", Workatostatus);
 				 if(Number.equals(orderNumber))
 				 {
 							Thread.sleep(3000);
@@ -11150,9 +11151,10 @@ public void videos_validation() {
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 				System.out.println(Number);
-				
-				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div").getText();
-				Orderstatus1.put("workato", Workatostatus);
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
+				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+				Orderstatus1.put("warkato", Workatostatus);
 					 if(Number.equals(orderNumber))
 					 {
 								Thread.sleep(3000);
