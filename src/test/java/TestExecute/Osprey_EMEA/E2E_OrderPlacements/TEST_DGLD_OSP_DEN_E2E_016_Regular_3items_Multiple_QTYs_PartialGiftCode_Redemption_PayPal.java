@@ -13,7 +13,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OSP_DEN_E2E_016_Regular_3items_Multiple_QTYs_PartialGiftCode_Redemption_PayPal {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
 	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Osprey_E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)

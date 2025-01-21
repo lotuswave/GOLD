@@ -3670,7 +3670,7 @@ public class OspreyEMEA_E2E_HYVA {
 	
 	
 	
-	public void Enter_Gift_card(String dataSet) {
+	public String Enter_Gift_card(String dataSet) {
 		String GiftCode = data.get(dataSet).get("GiftCard");
 			try
 			{
@@ -3726,8 +3726,9 @@ public class OspreyEMEA_E2E_HYVA {
 						Common.getscreenShotPathforReport("Failed to apply the gift card"));
 				Assert.fail();
 			}
-		}
-	
+		
+	return GiftCode;
+	}
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 
@@ -6816,21 +6817,40 @@ return Number;
 					Thread.sleep(6000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 					Thread.sleep(4000);
+					
 					Common.clickElement("xpath", "//input[contains(@id,'agreement')]");
 					Thread.sleep(4000);
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-
+					int size1= Common.findElements("xpath", "(//button[contains(text(),'Använd den angivna')])[1]").size();
+					
+					if( size1>0) {
+						Common.clickElement("xpath", "(//button[contains(text(),'Använd den angivna')])[1]");
+					}
 					Thread.sleep(6000);
+					try {
 					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
 					String sucessMessage = Common.getText("xpath",
 							" //h1[normalize-space()='Thank you for your purchase!']");
                       System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-							.size();
-					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-							"verifying the product confirmation", expectedResult,
-							"Successfully It redirects to order confirmation page Order Placed",
-							"User unabel to go orderconformation page");
+                      int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+  							.size();
+  					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+  							"verifying the product confirmation", expectedResult,
+  							"Successfully It redirects to order confirmation page Order Placed",
+  							"User unabel to go orderconformation page");
+					}
+					catch(Exception | Error e) {
+						String sucessMessage = Common.getText("xpath",
+								"//h1[contains(text(),'Tack för ditt köp!')]");
+	                      System.out.println(sucessMessage);
+	                      int sizes = Common.findElements("xpath", "//h1[contains(text(),'Tack för ditt köp!')]")
+	  							.size();
+	  					Common.assertionCheckwithReport(sucessMessage.contains("Tack för ditt köp!"),
+	  							"verifying the product confirmation", expectedResult,
+	  							"Successfully It redirects to order confirmation page Order Placed",
+	  							"User unabel to go orderconformation page");
+					}
+					
 
 					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 							.size() > 0) {
@@ -8141,13 +8161,14 @@ return Number;
         Thread.sleep(3000);
         int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
         System.out.println(sizesframe);
+        int size= Common.findElements("xpath", "//button[@aria-label='Close']").size();
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
             Thread.sleep(4000);
             Sync.waitElementPresent("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
             Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]");
         }
-        else {
+        else if (size>0) {
 
 //            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
             Sync.waitElementPresent("xpath", "//button[@aria-label='Close']");
@@ -8738,6 +8759,8 @@ return Number;
 				Common.clickElement("xpath", "//img[@alt='" + ProdProducts + "']");
 				Thread.sleep(4000);
 			}
+			
+			product_quantity(Dataset);
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
@@ -9130,11 +9153,16 @@ return Number;
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
+			int size2= Common.findElements("xpath", "//button[contains(text(), 'Lägg till rabattkod')]").size();
 		       if (size1>0) {
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
 		    	   
 		       } 
+		       else if(size2>0) {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Lägg till rabattkod')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(), 'Lägg till rabattkod')]");
+		       }
 		       else {
 					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");

@@ -13,30 +13,29 @@ import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_GOLD_OSP_EMEA_E2E_SW_013_GuestUser_Checkout_With_Discount_Paypal_Payment2 {
+public class TEST_GOLD_OSP_EMEA_E2E_SW_014_Multiple_Items_Multiple_Qty_PartialGC_Redeem_CC2 {
 
 	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
 	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_Discount_Paypal_Payment () throws Exception {
+	public void Verify_Two_Items_Qty2_PartialGC_Redeem () throws Exception {
 
 		try {
 			
-	     	Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
-			String Description = "Sweden Store  -Discount + Paypal";
-//			Osprey_ReEu.verifingHomePage();
-			Osprey_ReEu.search_product("SKU-10005861 -3QTY");
-			Osprey_ReEu.simple_addtocart("SKU-10005861 -3QTY");  
-			Osprey_ReEu.search_product("SKU-10003324 -3QTY");
-			Osprey_ReEu.simple_addtocart("SKU-10003324 -3QTY"); 
+			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
+			String Description = "Sweden Store-Multiple Items + Multiple Qty + Partial GC redeem (The gift code should be placed above the product 1 quantity price)+ CC";
+			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.search_product("SKU-10004993 -3QTY");
+			Osprey_ReEu.simple_addtocart("SKU-10004993 -3QTY");
+			Osprey_ReEu.search_product("SKU-10004966 -3QTY");
+			Osprey_ReEu.simple_addtocart("SKU-10004966 -3QTY");
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Sweden-GuestAddress");
 //			Osprey_ReEu.selectshippingmethod("GroundShipping method");
-			String Used_GiftCode="NO";
-			Osprey_ReEu.discountCode("Discount");
+			String Used_GiftCode=Osprey_ReEu.Enter_Gift_card("Partial_Giftcard");
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
-			String OrderNumber =Osprey_ReEu.payPal_Payment("PaypalDetails");
+			String OrderNumber =Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");
 			Osprey_ReEu.Admin_signin("Login Details");
 		    Osprey_ReEu.click_Sales();
 			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
