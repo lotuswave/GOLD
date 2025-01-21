@@ -7979,7 +7979,7 @@ catch(Exception | Error e)
 			}
 			Thread.sleep(6000);
 			Sync.waitElementPresent("xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
