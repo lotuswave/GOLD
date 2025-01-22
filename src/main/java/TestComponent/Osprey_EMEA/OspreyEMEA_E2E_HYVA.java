@@ -3791,6 +3791,7 @@ public class OspreyEMEA_E2E_HYVA {
 		Thread.sleep(4000);
 		String code="";
 		String Number = "";
+		String order = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
 		String expectedResult = "land on the payment section";
@@ -3932,9 +3933,22 @@ public class OspreyEMEA_E2E_HYVA {
 									" //h1[normalize-space()='Thank you for your purchase!']");
 							System.out.println(sucessmessage);
 						} else {
+						
 							AssertJUnit.fail();
 						}
-
+						if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+							Thread.sleep(4000);
+							order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+							String ordernumber = Common.getText("xpath",
+									"//div[contains(@class,'checkout-success container')]//p//span");
+							System.out.println(ordernumber);
+						} else {
+							Thread.sleep(4000);
+							order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//a");
+							String ordernumber = Common.getText("xpath",
+									"//div[contains(@class,'checkout-success container')]//p//a");
+							System.out.println(ordernumber);
+						}
 					} else {
 						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 						String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -4030,10 +4044,9 @@ public class OspreyEMEA_E2E_HYVA {
 
 		expectedResult = "credit card fields are filled with the data";
 
-		return Number;
+		return order;
 	}
 	}
-	
 	public String ThreedPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
@@ -9154,6 +9167,7 @@ return Number;
 			Thread.sleep(4000);
 			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
 			int size2= Common.findElements("xpath", "//button[contains(text(), 'Lägg till rabattkod')]").size();
+			int size3= Common.findElements("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]").size();
 		       if (size1>0) {
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
@@ -9162,8 +9176,10 @@ return Number;
 		       else if(size2>0) {
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Lägg till rabattkod')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Lägg till rabattkod')]");
-		       }
-		       else {
+		       }else if(size3>0) {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]");
+		       } else {
 					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
 		       }
