@@ -20,7 +20,7 @@ public class TEST_DGLD_OSP_DEN_E2E_016_Regular_3items_Multiple_QTYs_PartialGiftC
 	public void Verifying_Regular_3items_Multiple_QTYs_PartialGiftCode_Redemption_PayPal () throws Exception {
 
 		try {
-		Osprey_ReEu.prepareOrdersData("OSP_E2E_orderDetails.xlsx");	
+		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Regular 3 items + Multiple QTYs + Partial Gift Code Redemption + PayPal";
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.search_product("10004993- 2");

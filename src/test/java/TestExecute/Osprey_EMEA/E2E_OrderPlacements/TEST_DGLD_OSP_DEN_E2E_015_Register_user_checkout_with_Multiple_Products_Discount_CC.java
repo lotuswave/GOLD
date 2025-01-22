@@ -20,7 +20,7 @@ public class TEST_DGLD_OSP_DEN_E2E_015_Register_user_checkout_with_Multiple_Prod
 	public void Verifying_Register_user_checkout_with_Multiple_Products_Discount_CC () throws Exception {
 
 		try {
-		Osprey_ReEu.prepareOrdersData("OSP_E2E_orderDetails.xlsx");	
+		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Register user+ multiple prodcuts + discount + CC";
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();

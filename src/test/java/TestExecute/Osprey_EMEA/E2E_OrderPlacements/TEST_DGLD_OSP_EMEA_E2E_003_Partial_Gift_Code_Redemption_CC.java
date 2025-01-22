@@ -20,7 +20,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_003_Partial_Gift_Code_Redemption_CC {
 	public void Verifying_Partial_Gift_Code_Redemption_CC  () throws Exception {
 
 		try {
-		Osprey_ReEu.prepareOrdersData("OSP_E2E_orderDetails.xlsx");	
+		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Partial Gift Code Redemption(The gift code should be placed above the product 1 quantity price) + CC";
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();

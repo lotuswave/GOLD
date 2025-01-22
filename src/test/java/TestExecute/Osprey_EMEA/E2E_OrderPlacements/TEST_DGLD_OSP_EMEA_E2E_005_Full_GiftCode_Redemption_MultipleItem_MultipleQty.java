@@ -20,7 +20,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_005_Full_GiftCode_Redemption_MultipleItem_Mu
 	public void Verifying_Full_GiftCode_Redemption_MultipleItem_MultipleQty  () throws Exception {
 
 		try {
-		Osprey_ReEu.prepareOrdersData("OSP_E2E_orderDetails.xlsx");	
+		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Full Gift Code Redemption + Multiple Item + Multiple Qty";
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
