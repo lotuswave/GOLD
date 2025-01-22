@@ -3684,15 +3684,25 @@ public class OspreyEMEA_E2E_HYVA {
 					 
 					  Sync.waitElementPresent("id", "amcard-input");
 					  Common.textBoxInput("id", "amcard-input", GiftCode);
-					  }  else {
-						  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
-						  Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+					  }
+					else if(Common.getCurrentURL().contains("se_sv")){
+						
+						  Sync.waitElementPresent("xpath", "//button[contains(text(),'Lägg till presentkort')]");
+						  Common.clickElement("xpath", "//button[contains(text(),'Lägg till presentkort')]");
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
-						  }
-	     
-				     Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
+					}
+						else {
+
+							  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
+							  Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+							 
+							  Sync.waitElementPresent("id", "amcard-input");
+							  Common.textBoxInput("id", "amcard-input", GiftCode);
+							  }
+		     
+					Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
 					 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
 					 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 					 System.out.println(successmsg);	
@@ -3700,7 +3710,10 @@ public class OspreyEMEA_E2E_HYVA {
 								"validating the success message after applying gift card",
 								"Success message should be displayed after the applying of gift card",
 								"Sucessfully gift card has been applyed","Failed to apply the gift card");
-				}
+						
+					}
+				
+				
 				else
 				{
 					Common.scrollIntoView("xpath", "//input[@name='amcard-field -datalist']");
@@ -3728,6 +3741,7 @@ public class OspreyEMEA_E2E_HYVA {
 			}
 		
 	return GiftCode;
+	
 	}
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
