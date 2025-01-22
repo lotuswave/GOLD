@@ -28,7 +28,7 @@ public class Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 			Hydro.search_product("SKU-CFX001");     
 			Hydro.addtocart("SKU-CFX001");
 			Hydro.search_product("SKU-T20CPB001");     
-			Hydro.addtocart("SKU-T20CPB001");
+			Hydro.Configurable_addtocart_pdp("SKU-T20CPB001");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = Hydro.Gift_card("Full_RedeemGiftcard");
