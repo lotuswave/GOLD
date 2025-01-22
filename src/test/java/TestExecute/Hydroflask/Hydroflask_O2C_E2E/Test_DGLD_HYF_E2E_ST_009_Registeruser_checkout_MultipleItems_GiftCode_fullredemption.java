@@ -21,7 +21,7 @@ public class Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Registered user checkout with Master CC + 4 Items, each qty - 2 + Gift message + Standard";
+			String Description ="Register user checkout Multiple Items + Gift Code full redemption";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
