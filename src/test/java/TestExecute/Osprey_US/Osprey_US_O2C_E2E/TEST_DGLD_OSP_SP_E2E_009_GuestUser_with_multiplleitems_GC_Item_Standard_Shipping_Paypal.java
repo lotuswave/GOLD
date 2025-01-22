@@ -50,7 +50,7 @@ public class TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Stan
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
