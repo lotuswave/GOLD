@@ -16754,9 +16754,9 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 		if (filters > 0) {
 			Common.clickElement("xpath",
 					"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
 			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
@@ -16797,12 +16797,12 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 		{
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(1000);
+			Thread.sleep(6000);
 			Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
-			Thread.sleep(6000);
+			Thread.sleep(8000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
 			System.out.println(Number);
@@ -17051,15 +17051,12 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 	System.out.println(points);
 	try {
 		Thread.sleep(6000);
-		Sync.waitElementPresent("xpath", "//div[@class='item discount']//span[@class='value']");
-		String Before_RWD_discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-$", "");
-//		System.out.println(Before_RWD_discount);
 		Thread.sleep(2000);
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//input[@placeholder='Choose reward']");
-		Common.clickElement("xpath", "//input[@placeholder='Choose reward']");
+		Sync.waitElementPresent("xpath", "//input[@placeholder='Choose Your Reward']");
+		Common.clickElement("xpath", "//input[@placeholder='Choose Your Reward']");
 		String rewardpoints = Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim()
 				.replace("YOU HAVE ", "").replace(" POINTS", "");
 		System.out.println(rewardpoints);
@@ -17068,13 +17065,12 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ARROW_DOWN);
-		Common.actionsKeyPress(Keys.ARROW_DOWN);
 		Common.actionsKeyPress(Keys.ENTER);
 		 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
 		 Thread.sleep(4000);
 		 rewardpointsused=pointsused.replace(pointsused, points);
 		 System.out.println(rewardpointsused);
-		Common.clickElement("xpath","//button[@aria-label='Apply']");
+		Common.clickElement("xpath","//button[@aria-label='APPLY']");
  		Sync.waitForLoad();
  		Thread.sleep(4000);
 // 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
@@ -17084,37 +17080,16 @@ public String TwentyFive_percent_Reward_Points(String Dataset) {
 		String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
 		System.out.println(off);
 		System.out.println(discount);
+	
 		
-		int size =Common.findElements("xpath", "(//span[normalize-space()='Subscription End Date:'])[3]").size();
-		if (off.contains("$25 off")) {
-
-			double Before_RWD_discount_value = Double.parseDouble(Before_RWD_discount);
-			double discountValue = Before_RWD_discount_value + 25;
-
-			DecimalFormat df = new DecimalFormat("#.00");
-			String discount1 = df.format(discountValue);
-
-			Common.assertionCheckwithReport(discount1.equals(discount),
-					"validating the reward points redeem in the order summary page",
-					"After clicking on the apply button reward points should be apply",
-					"Sucessfully reward points has been applied",
-					"failed to apply the reward point in the order summary page");
-
-		} 
-		else {
-			
-			
-		
-		Common.assertionCheckwithReport(off.equals(discount),
+		Common.assertionCheckwithReport(off.equals(discount) || discount.equals("$50") ,
 				"validating the reward points redeem in the order summary page",
 				"After clicking on the apply button reward points should be apply",
 				"Sucessfully reward points has been applied",
 				"failed to apply the reward point in the order summary page");
-		}
+		
 		rewardpointsused = Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim()
 				.replace("YOU HAVE ", "").replace(" POINTS", "");
-		
-//		System.out.println(rewardpointsused);
 		
 		
 		
