@@ -31,7 +31,7 @@ public class TEST_DGLD_OSP_DEN_E2E_015_Register_user_checkout_with_Multiple_Prod
         Osprey_ReEu.addtocart("10005000 - 3");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Den Address");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method"); 
+        Osprey_ReEu.selectshippingmethod("Den shipping method"); 
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Used_GiftCode="NULL";
