@@ -47,7 +47,6 @@ public class TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_Gift
 		}
 	}
 
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
