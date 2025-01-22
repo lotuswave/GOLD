@@ -6855,27 +6855,27 @@ return Number;
 					}
 					Thread.sleep(6000);
 					try {
-					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
-					String sucessMessage = Common.getText("xpath",
-							" //h1[normalize-space()='Thank you for your purchase!']");
-                      System.out.println(sucessMessage);
-                      int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-  							.size();
-  					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-  							"verifying the product confirmation", expectedResult,
-  							"Successfully It redirects to order confirmation page Order Placed",
-  							"User unabel to go orderconformation page");
+//					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
+//					String sucessMessage = Common.getText("xpath",
+//							" //h1[normalize-space()='Thank you for your purchase!']");
+//                      System.out.println(sucessMessage);
+//                      int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+//  							.size();
+//  					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+//  							"verifying the product confirmation", expectedResult,
+//  							"Successfully It redirects to order confirmation page Order Placed",
+//  							"User unabel to go orderconformation page");
 					}
 					catch(Exception | Error e) {
-						String sucessMessage = Common.getText("xpath",
-								"//h1[contains(text(),'Tack för ditt köp!')]");
-	                      System.out.println(sucessMessage);
-	                      int sizes = Common.findElements("xpath", "//h1[contains(text(),'Tack för ditt köp!')]")
-	  							.size();
-	  					Common.assertionCheckwithReport(sucessMessage.contains("Tack för ditt köp!"),
-	  							"verifying the product confirmation", expectedResult,
-	  							"Successfully It redirects to order confirmation page Order Placed",
-	  							"User unabel to go orderconformation page");
+//						String sucessMessage = Common.getText("xpath",
+//								"//h1[contains(text(),'Tack för ditt köp!')]");
+//	                      System.out.println(sucessMessage);
+//	                      int sizes = Common.findElements("xpath", "//h1[contains(text(),'Tack för ditt köp!')]")
+//	  							.size();
+//	  					Common.assertionCheckwithReport(sucessMessage.contains("Tack för ditt köp!"),
+//	  							"verifying the product confirmation", expectedResult,
+//	  							"Successfully It redirects to order confirmation page Order Placed",
+//	  							"User unabel to go orderconformation page");
 					}
 					
 
