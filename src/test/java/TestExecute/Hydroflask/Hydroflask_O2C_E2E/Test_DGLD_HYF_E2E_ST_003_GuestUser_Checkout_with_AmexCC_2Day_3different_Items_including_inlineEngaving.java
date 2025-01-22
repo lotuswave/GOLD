@@ -25,8 +25,8 @@ public class Test_DGLD_HYF_E2E_ST_003_GuestUser_Checkout_with_AmexCC_2Day_3diffe
 			Hydro.verifingHomePage();
 			Hydro.search_product("SKU-BC128001 -3QTY");     
 			Hydro.addtocart("SKU-BC128001 -3QTY");
-			Hydro.search_product("SKU-T28CPB612 -3QTY");     
-			Hydro.Text_Engraving("SKU-T28CPB612 -3QTY");
+			Hydro.search_product("SKU-T28CPB001 -3QTY");     
+			Hydro.Text_Engraving("SKU-T28CPB001 -3QTY");
 			Hydro.search_product("SKU-K12474 -3QTY");     
 			Hydro.Configurable_addtocart_pdp("SKU-K12474 -3QTY");
 			Hydro.minicart_Checkout();
