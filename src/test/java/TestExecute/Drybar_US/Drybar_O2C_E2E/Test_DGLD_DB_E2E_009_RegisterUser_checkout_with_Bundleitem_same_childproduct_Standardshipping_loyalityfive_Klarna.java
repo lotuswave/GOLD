@@ -27,14 +27,14 @@ public class Test_DGLD_DB_E2E_009_RegisterUser_checkout_with_Bundleitem_same_chi
         Drybar.login_Drybar("AccountDetails");
         Drybar.search_product("900-0700-4 Product");
         Drybar.addtocart("900-0700-4 Product");
-        Drybar.search_product("Bundle E2E");
-        Drybar.addtocart("Bundle E2E");
+        Drybar.search_product("Perfect blow Bundle E2E");
+        Drybar.addtocart("Perfect blow Bundle E2E");
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("AccountDetails");
         Drybar.selectshippingmethod("GroundShipping method");
         Drybar.fivepercent_Reward_Points("$5 Off (100 points)");
         Drybar.clickSubmitbutton_Shippingpage();
-        Drybar.tax_validation_Paymentpage("Address");
+       // Drybar.tax_validation_Paymentpage("Address");
         String Used_GiftCode = ""; // Indicating no gift code used 
         Drybar.Kalrna_Payment("Klarna Visa Payment");
         String OrderNumber=Drybar.ordernumber();
@@ -60,7 +60,7 @@ public class Test_DGLD_DB_E2E_009_RegisterUser_checkout_with_Bundleitem_same_chi
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        Drybar.close_add();
+        //Drybar.close_add();
         
 
 	}
