@@ -22,17 +22,17 @@ public class Test_DGLD_CS_E2E_002_RegisterUser_checkout_with_Simpleitem_and_Quan
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
 			String Description = "Register User checkout with Simple item and Quantity 1 Each + discount + CC";
-			curlsmith.verify_Homepage();
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.online_Store();
 			curlsmith.Register_user_Login("AccountDetails");
-			curlsmith.search_product("Simple_Product");
-			curlsmith.Simple_Addtocart("Simple_Product");
+			curlsmith.search_product("Bundle_Product");
+			curlsmith.Simple_Addtocart("Bundle_Product");
 			curlsmith.minicart_Checkout();
 			curlsmith.RegaddDeliveryAddress("AccountDetails");
 			String Discountcode = "TESTOD";
 			curlsmith.select_Shipping_Method();
 			curlsmith.discount_code(Discountcode);
 			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
-			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),

@@ -431,7 +431,7 @@ public class CurlsmithE2EHelper {
 		try {
 			Sync.waitPageLoad(30);
 
-			Common.openNewTab();
+//			Common.openNewTab();
 
 			Common.oppenURL("https://www.shopify.com/logout?dest=default");
 			Thread.sleep(3000);
@@ -439,7 +439,7 @@ public class CurlsmithE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("UserName"));
-			Thread.sleep(9000);
+			Thread.sleep(16000);
 			Sync.waitElementPresent(30, "xpath", "//button[@type='submit']");
 			Common.clickElement("xpath", "//button[@type='submit']");
 			Sync.waitPageLoad();
@@ -467,6 +467,7 @@ public class CurlsmithE2EHelper {
 		// TODO Auto-generated method stub
 		String Ordernumber = "";
 		try {
+			Common.switchToFirstTab();
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
 			System.out.println(Common.getCurrentURL());
@@ -791,8 +792,8 @@ public class CurlsmithE2EHelper {
 			Common.clickElement("xpath", "//a[@class='site-nav__link site-nav__link--icon']//img[@loading='lazy']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//input[@id='account_email']");
-			Common.textBoxInput("xpath", "//input[@id='account_email']", data.get(Dataset).get("UserName"));
+			Sync.waitElementPresent("xpath", "//input[@id='email']");
+			Common.textBoxInput("xpath", "//input[@id='email']", data.get(Dataset).get("UserName"));
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='Continue']");
 			Thread.sleep(9000);
@@ -1023,6 +1024,30 @@ public class CurlsmithE2EHelper {
 			ExtenantReportUtils.addFailedLog("verifying the discount on the webiste",
 					"user should able to see the discount on the website",
 					"unable to add the discount on the website", "Failed to apply the discount for the user");
+			Assert.fail();
+		}
+		
+	}
+
+	public void online_Store() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Sales channels')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Sales channels')]");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//div[contains(text(),'Online Store')]");
+			Common.clickElement("xpath", "//div[contains(text(),'Online Store')]");
+			Thread.sleep(4000);
+			Common.switchToSecondTab();
+			verify_Homepage();
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the Navigation to the Home page",
+					"System directs the user to the Homepage", " user unable navigates to the home page",
+					"Failed to navigate to the homepage");
 			Assert.fail();
 		}
 		
