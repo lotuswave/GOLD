@@ -6849,9 +6849,11 @@ return Number;
 					Thread.sleep(4000);
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 					int size1= Common.findElements("xpath", "(//button[contains(text(),'Använd den angivna')])[1]").size();
-					
+					int Size_Norway = Common.findElements("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]").size();
 					if( size1>0) {
 						Common.clickElement("xpath", "(//button[contains(text(),'Använd den angivna')])[1]");
+					}else if(Size_Norway>0) {
+						Common.clickElement("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]");
 					}
 					Thread.sleep(6000);
 					try {
@@ -9182,6 +9184,7 @@ return Number;
 			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
 			int size2= Common.findElements("xpath", "//button[contains(text(), 'Lägg till rabattkod')]").size();
 			int size3= Common.findElements("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]").size();
+			int size4= Common.findElements("xpath", "//button[contains(text(), 'Legg til rabattkode')]").size();
 		       if (size1>0) {
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
@@ -9193,6 +9196,10 @@ return Number;
 		       }else if(size3>0) {
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]");
+		       }else if(size4>0) {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Legg til rabattkode')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(), 'Legg til rabattkode')]");
+		    	   
 		       } else {
 					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
@@ -9281,6 +9288,7 @@ return Number;
 
 		}
 	}
+
 
 	public void Compare_Products() throws Exception {
 
