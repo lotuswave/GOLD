@@ -35,7 +35,7 @@ public class Test_DGLD_DB_E2E_009_RegisterUser_checkout_with_Bundleitem_same_chi
         Drybar.fivepercent_Reward_Points("$5 Off (100 points)");
         Drybar.clickSubmitbutton_Shippingpage();
        // Drybar.tax_validation_Paymentpage("Address");
-        String Used_GiftCode = ""; // Indicating no gift code used 
+        String Used_GiftCode = "NO"; // Indicating no gift code used 
         Drybar.Kalrna_Payment("Klarna Visa Payment");
         String OrderNumber=Drybar.ordernumber();
         Drybar.Admin_signin("AccountDetails");
