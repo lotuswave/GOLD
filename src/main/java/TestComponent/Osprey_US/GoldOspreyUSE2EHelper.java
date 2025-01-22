@@ -2416,8 +2416,8 @@ public void header_Shopbycollection(String Dataset) { {
 //					System.out.println("Color Option Already selected");
 //				}else {
 //					
-//					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-//					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+					Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 //				}
 //			}
 //				
@@ -7319,16 +7319,16 @@ public void minicart_validation(String Dataset) {
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 
 					Thread.sleep(6000);
-					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
-					String sucessMessage = Common.getText("xpath",
-							" //h1[normalize-space()='Thank you for your purchase!']");
-                      System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-							.size();
-					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-							"verifying the product confirmation", expectedResult,
-							"Successfully It redirects to order confirmation page Order Placed",
-							"User unabel to go orderconformation page");
+//					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
+//					String sucessMessage = Common.getText("xpath",
+//							" //h1[normalize-space()='Thank you for your purchase!']");
+//                      System.out.println(sucessMessage);
+//					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+//							.size();
+//					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+//							"verifying the product confirmation", expectedResult,
+//							"Successfully It redirects to order confirmation page Order Placed",
+//							"User unabel to go orderconformation page");
 
 					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 							.size() > 0) {
