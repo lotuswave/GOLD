@@ -1252,61 +1252,7 @@ else
 }
 	
 
-	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
-		// TODO Auto-generated method stub
-		String order = "";
-		addPaymentDetails(dataSet);
-		String expectedResult = "It redirects to order confirmation page";
-
-		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(2000);
-			addPaymentDetails(dataSet);
-		}
-
-		Thread.sleep(2000);
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
-		if (!url.contains("stage") && !url.contains("preprod")) {
-		}
-
-		else {
-			try {
-				Thread.sleep(1000);
-				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
-				String sucessMessage = Common.getText("xpath",
-						" //h1[normalize-space()='Thank you for your purchase!']");
-
-				// Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-						.size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-						"verifying the product confirmation", expectedResult,
-						"Successfully It redirects to order confirmation page Order Placed",
-						"User unabel to go orderconformation page");
-
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-						.size() > 0) {
-					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-					System.out.println(order);
-				} else {
-					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
-					System.out.println(order);
-				}
-
-			} catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
-						"User failed to navigate  to order confirmation page",
-						Common.getscreenShotPathforReport("failednavigatepage"));
-				Assert.fail();
-			}
-
-		}
-		return order;
-	}
-
+	
 	public String addPaymentDetails(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
@@ -4113,8 +4059,8 @@ catch(Exception | Error e)
 	}
 	}
 
-	public String payPal_Payment(String dataSet) throws Exception {
-		String order = "";
+public void payPal_Payment(String dataSet) throws Exception {
+		
 
 		String expectedResult = "It should open paypal site window.";
 		try {
@@ -4143,10 +4089,7 @@ catch(Exception | Error e)
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
 			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-//			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-
 			Thread.sleep(8000);
-			
 			Common.switchToDefault();
 			Thread.sleep(5000);
 			Common.switchWindows();
@@ -4156,99 +4099,46 @@ catch(Exception | Error e)
 				Common.clickElement("id", "acceptAllButton");
 
 			}
+			int sizeofelement = Common.findElements("id", "login_emaildiv").size();
+			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
+					"open paypal site window", "faild to open paypal account");
+		
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
 			Assert.fail();
 		}
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
+	}
 
-		if (!url.contains("stage") & !url.contains("preprod")) {
 
-			int sizeofelement = Common.findElements("id", "email").size();
-			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
-					"open paypal site window", "faild to open paypal account");
-		} else {
 
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
-			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
-				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			}
-			else {
-				
-			
-			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			int sizeemail = Common.findElements("id", "email").size();
-			
-			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
-					"open paypal site window", "faild to open paypal account");
-			}
+public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
+		
+		addPaymentDetails(dataSet);
+		String expectedResult = "It redirects to order confirmation page";
+
+		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
+			Thread.sleep(2000);
+			addPaymentDetails(dataSet);
+		}
+
+		Thread.sleep(2000);
+		
 			try {
-				Common.clickElement("id", "btnLogin");
-				Thread.sleep(5000);
-				Common.actionsKeyPress(Keys.END);
-				Thread.sleep(5000);
-				Common.clickElement("id", "payment-submit-btn");
-				Thread.sleep(8000);
-				Common.switchToFirstTab();
+				
+				System.out.println("Card Details Enter");
+
 			} catch (Exception | Error e) {
 				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
-						"User failed to proceed with paypal payment",
-						Common.getscreenShotPathforReport(expectedResult));
+				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
+						"User failed to navigate  to order confirmation page",
+						Common.getscreenShotPathforReport("failednavigatepage"));
 				Assert.fail();
 			}
-			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			if (!url1.contains("stage") && !url1.contains("preprod")) {
-			}
 
-			else {
-				try {
-					Thread.sleep(6000);
-					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-					
-					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-
-					Thread.sleep(6000);
-					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
-					String sucessMessage = Common.getText("xpath",
-							" //h1[normalize-space()='Thank you for your purchase!']");
-                      System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-							.size();
-					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-							"verifying the product confirmation", expectedResult,
-							"Successfully It redirects to order confirmation page Order Placed",
-							"User unabel to go orderconformation page");
-
-					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-							.size() > 0) {
-						Thread.sleep(1000);
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-						System.out.println(order);
-					} else {
-						Thread.sleep(1000);
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
-						System.out.println(order);
-					}
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
-							"It should navigate to the order confirmation page",
-							"User failed to proceed to the order confirmation page",
-							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
-
-					Assert.fail();
-				}
-			}
 		}
-		return order;
-	}
+
 
 
 	public void After_Pay_payment(String dataSet) throws Exception {
