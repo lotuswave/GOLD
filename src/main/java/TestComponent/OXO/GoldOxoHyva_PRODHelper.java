@@ -11965,6 +11965,10 @@ public void outofstock_subcription(String Dataset) {
 
 	public void signout() {
 		try {
+			Sync.waitElementPresent("xpath", "//img[@alt='Store logo']");
+			Common.clickElement("xpath", "//img[@alt='Store logo']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
