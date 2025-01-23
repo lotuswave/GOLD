@@ -3880,6 +3880,15 @@ public class OspreyEMEA_E2E_HYVA {
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Thread.sleep(8000);
+						
+						int size1= Common.findElements("xpath", "(//button[contains(text(),'Använd den angivna')])[1]").size();
+						int Size_Norway = Common.findElements("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]").size();
+						if( size1>0) {
+							Common.clickElement("xpath", "(//button[contains(text(),'Använd den angivna')])[1]");
+						}else if(Size_Norway>0) {
+							Common.clickElement("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]");
+						}
+						
 						if (Common.getCurrentURL().contains("/checkout")) {
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
