@@ -5,12 +5,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestComponent.OXO.GoldOxoHyva_PRODHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_030_Header_Links_Validation {
+public class Test_DGLD_OXO_ST_003_Header_Links_Validation {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHyva_PRODHelper Oxo = new GoldOxoHyva_PRODHelper(datafile,"Header");
