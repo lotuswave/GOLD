@@ -164,7 +164,7 @@ public class GoldOxoHyva_PRODHelper {
 //			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
 //			Sync.waitPageLoad();
 //			Thread.sleep(6000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/oxo-gift-card"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/gift-card"),
 					"validating the gift card page navigation",
 					"After clicking on the gift card it sholud navigate to the PDP page",
 					"Successfully Navigated tot he gift card page",
@@ -184,7 +184,6 @@ public class GoldOxoHyva_PRODHelper {
 		}
 		
 	}
-	
 	public void Other_Amount(String Dataset) {
 		// TODO Auto-generated method stub
 		String Enter_amount=data.get(Dataset).get("Another Amount");
@@ -407,9 +406,9 @@ public class GoldOxoHyva_PRODHelper {
 			{
 			    Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			} 
-//			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
-//			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
-//			}
+			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
+			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
+			}
 			
 			else {
 			    Common.scrollIntoView("xpath", "//button[text()='Load More']");
@@ -503,7 +502,6 @@ public class GoldOxoHyva_PRODHelper {
 
 
 	}
-	
 	public void group_Addtocart(String Dataset) {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
