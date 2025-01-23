@@ -23,10 +23,10 @@ public class TEST_DGLD_OSP_E2E_001_GuestUser_checkout_multipleitems_CC_Discount_
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Guest user checkout  multiple items + CC + Discount + standard";
-		     Osprey_ReEu.search_product("SKU-10005235 -2QTY");
-		     Osprey_ReEu.addtocart("SKU-10005235 -2QTY");
-		     Osprey_ReEu.search_product("SKU-10005151");
-		     Osprey_ReEu.addtocart("SKU-10005151");
+		     Osprey_ReEu.search_product("SKU-10005235 -3QTY");
+		     Osprey_ReEu.addtocart("SKU-10005235 -3QTY");
+		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
+		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
 		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
