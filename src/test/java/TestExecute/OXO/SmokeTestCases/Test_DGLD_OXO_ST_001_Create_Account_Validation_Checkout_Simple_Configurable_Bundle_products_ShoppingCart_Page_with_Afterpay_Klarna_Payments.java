@@ -32,7 +32,7 @@ public class Test_DGLD_OXO_ST_001_Create_Account_Validation_Checkout_Simple_Conf
 			Oxo.minicart_viewcart();
 			Oxo.update_shoppingcart("Product Qunatity");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress_Guest("AccountDetails");
+			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.Shoppingcart_page();
 			Oxo.minicart_ordersummary_discount("Discount");
