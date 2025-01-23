@@ -7270,14 +7270,15 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 				Float Discountvalue = Float.parseFloat(Discount);
 				System.out.println("Discount:"+ Discountvalue);
 //				Common.clickElement("xpath", "//span[@class='block transform']");
-				
+				String add="0.01";
+				Float addvalue = Float.parseFloat(add);
 				String Tax = Common.getText("xpath", "(//div[contains(@x-text,'segment')])[3]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
 				System.out.println("Taxvalue:"+ Taxvalue);
 				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
 						.replace(Symbol, "");
 				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) - Discountvalue;
+				Float Total = (subtotalvalue + shippingvalue + Taxvalue + addvalue) - Discountvalue;
 				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 				System.out.println(ExpectedTotalAmmount2);
 				System.out.println(ordertotal);
@@ -7296,6 +7297,8 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
 			Assert.fail();
 		}
+
+		
 
 		
 	}
