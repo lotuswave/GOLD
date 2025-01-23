@@ -26,10 +26,10 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 		      Osprey_ReEu.Login_Account("Account");
 		     Osprey_ReEu.search_product("SKU-10005235 -2QTY");
 		     Osprey_ReEu.addtocart("SKU-10005235 -2QTY");
-		     Osprey_ReEu.search_product("SKU-10003319-1QTY");
-		     Osprey_ReEu.addtocart_Configurable("SKU-10003319-1QTY");
-		     Osprey_ReEu.search_product("SKU-10000486-1QTY");
-		     Osprey_ReEu.addtocart("SKU-10000486-1QTY");
+		     Osprey_ReEu.search_product("SKU-10003319-2QTY");
+		     Osprey_ReEu.addtocart_Configurable("SKU-10003319-2QTY");
+		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
+		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
 		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
