@@ -7709,6 +7709,34 @@ catch(Exception | Error e)
 
 
 	}
+	
+	public void signout() {
+		try {
+			Sync.waitElementPresent("xpath", "//img[@alt='Store logo']");
+			Common.clickElement("xpath", "//img[@alt='Store logo']");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+			Common.clickElement("xpath", "//button[@id='customer-menu']");
+			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
+
+			Common.clickElement("xpath", "//a[@title='Sign Out']");
+			Sync.waitPageLoad();
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/") || Common.getPageTitle().contains("Hydro Flask"),
+					"Validating My Account page navigation", "user sign in and navigate to my account page",
+					"Successfully navigate to my account page", "Failed to navigate my account page ");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating sign out navigation ",
+					"after clinking signout user signout fro the page", "user Successfully signout  ",
+					Common.getscreenShotPathforReport("user Failed to signout"));
+			Assert.fail();
+		}
+
+	}
 
 	public void outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
