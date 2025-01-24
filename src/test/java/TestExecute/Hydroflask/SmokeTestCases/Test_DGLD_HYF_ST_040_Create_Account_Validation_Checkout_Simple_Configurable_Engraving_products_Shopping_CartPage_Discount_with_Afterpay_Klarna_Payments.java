@@ -38,6 +38,7 @@ public class Test_DGLD_HYF_ST_040_Create_Account_Validation_Checkout_Simple_Conf
             Hydro.back_to_cart();
 			Hydro.minicart_ordersummary_discount("Discount");
 			Hydro.updateproductcolor_shoppingcart("Color Product");
+			Hydro.click_minicart();
 			Hydro.minicart_Checkout();
 			Hydro.After_Pay_payment("Afterpay");
 			Hydro.Kalrna_Payment("Klarna Visa Payment");
