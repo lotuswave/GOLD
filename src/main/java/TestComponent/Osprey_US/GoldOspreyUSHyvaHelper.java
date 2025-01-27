@@ -9161,7 +9161,7 @@ public void Continue_Shopping() {
 		String products = data.get(dataSet).get("Products");
 
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			String subtotal = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText().replace(Symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			System.out.println(subtotalvalue);
@@ -9176,8 +9176,9 @@ public void Continue_Shopping() {
 			Common.clickElement("xpath", "//button[@aria-label='Remove " + products + "']");
 			Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			Sync.waitPageLoad(30);
-			Thread.sleep(5000);
-			String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
+			Thread.sleep(12000);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			String ordertotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']")
 					.replace(Symbol, "");
 			System.out.println("ordertotal"+    ordertotal);
 			Thread.sleep(4000);
