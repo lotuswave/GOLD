@@ -21,7 +21,7 @@ public class TEST_DGLD_OSP_E2E_008_Register_User_Checkout_with_Mutliple_items_an
 
 		try {
 			 
-			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
+			 Osprey_ReEu.prepareOrdersData1("OspreyUS_Admin_E2E_orderDetails.xlsx");
 			 String Description ="Admin  user checkout with 4 Items - 2 QTY each -  from Colorado address with standard shipping  CC";
 			  Osprey_ReEu.Admin_signin("Login Details");
 			  Osprey_ReEu.Customers();
@@ -36,8 +36,8 @@ public class TEST_DGLD_OSP_E2E_008_Register_User_Checkout_with_Mutliple_items_an
 	          String OrderNumber= Osprey_ReEu.Default_Payment_method("CCMastercard");
              Osprey_ReEu.click_Sales();
 			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
-			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
-		    
+			 Osprey_ReEu.writeOrderNumber1(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("workato"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode,Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));  
+			 
 	 
 		} catch (Exception e) {
 

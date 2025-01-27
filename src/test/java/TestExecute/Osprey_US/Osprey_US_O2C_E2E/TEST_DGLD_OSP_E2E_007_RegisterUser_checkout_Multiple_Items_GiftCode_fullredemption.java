@@ -32,13 +32,14 @@ public class TEST_DGLD_OSP_E2E_007_RegisterUser_checkout_Multiple_Items_GiftCode
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
 		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
-		     String Used_GiftCode=Osprey_ReEu.Gift_card("Full_RedeemGiftcard");;
+		     String Used_GiftCode=Osprey_ReEu.Gift_card("Full_RedeemGiftcard");
+		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
 		     String OrderNumber= Osprey_ReEu.giftCardSubmitOrder();
 		     Osprey_ReEu.Admin_signin("Login Details");
 		     Osprey_ReEu.click_Sales();
 			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
-			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
-		    
+			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("workato"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));  
+			 
 	 
 		} catch (Exception e) {
 
