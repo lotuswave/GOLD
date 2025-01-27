@@ -25,12 +25,12 @@ public void Validating_Register_user_Checkout_MultipleItems_MyHydro_Product_Bund
 		Hydro.verifingHomePage();
 		Hydro.click_singinButton();
 		Hydro.login_Hydroflask("AccountDetails"); 
-//		Hydro2.search_product("Myhydro Product");   
-//		Hydro2.Add_Myhydro("Myhydro Product");
-		Hydro1.search_product("Product");       
-		Hydro1.addtocart("Product"); 
+		Hydro2.search_product("Myhydro Product");   
+		Hydro2.Add_Myhydro("Myhydro Product");
 		Hydro1.search_product("Bundle product"); 
 		Hydro1.Addtocart_Bundle("Bundle product");
+		Hydro1.search_product("Product");       
+		Hydro1.addtocart("Product"); 
 		Hydro1.bottles_headerlinks("Bottles & Drinkware");
 		Hydro1.Configurable_addtocart_pdp("Product");
 		Hydro.minicart_Checkout();
@@ -47,7 +47,7 @@ public void Validating_Register_user_Checkout_MultipleItems_MyHydro_Product_Bund
 	    }
 @AfterTest
 public void clearBrowser() {
-//	Common.closeAll();
+	Common.closeAll();
 
 }
 
