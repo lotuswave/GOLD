@@ -9720,7 +9720,9 @@ public void Continue_Shopping() {
 			Sync.waitElementClickable("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			Thread.sleep(6000);
+		
 //			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
 //			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 //			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
@@ -16762,6 +16764,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 			Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
        
@@ -16825,6 +16828,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 			Thread.sleep(6000);
 			Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Thread.sleep(8000);
 			Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
@@ -17764,8 +17768,8 @@ public void Select_store(String dataSet) {
 		Common.clickElement("xpath", "//label[text()='" + Stores + "']");
 		Sync.waitPageLoad();
 		Thread.sleep(5000);
-		String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
-		System.out.println(title);
+//		String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+//		System.out.println(title);
 //	//	Common.assertionCheckwithReport(title.contains("Orders"),
 //				"To Validate the Items Ordered page is displayed",
 //				"should display the Items Orderedpage after clicking on the store",
