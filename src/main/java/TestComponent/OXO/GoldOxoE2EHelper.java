@@ -9450,6 +9450,119 @@ public void header_1_Percent_Planet() {
 	        }
 		}
 
+	
+	public void writeOrderNumber1(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email)
+			throws FileNotFoundException, IOException {
+		// String fileOut="";
+		try {
+
+			File file = new File(
+					System.getProperty("user.dir") + "/src/test/resources//TestData/OXO/OXO_Admin_E2E_orderDetails.xlsx");
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			sheet = workbook.getSheet("OrderDetails");
+
+			if ((workbook.getSheet("OrderDetails")) == null) {
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				rowcount = 2;
+
+			}
+
+			else {
+
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			row = sheet.createRow(rowcount);
+			cell = row.createCell(0);
+			cell.setCellType(CellType.NUMERIC);
+			int SNo=rowcount-1;
+			cell.setCellValue(SNo);
+			cell = row.createCell(1);
+			cell.setCellType(CellType.STRING);
+			
+			cell.setCellValue("Oxo");
+			
+			cell = row.createCell(2);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Description);
+			
+			cell = row.createCell(3);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Skus);
+			
+			cell = row.createCell(4);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(OrderIdNumber);
+
+			cell = row.createCell(5);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(AdminOrderstatus);
+			
+			cell = row.createCell(6);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(warkato);
+			
+			cell = row.createCell(7);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Used_GiftCode);
+			
+			cell = row.createCell(8);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Adminsubtotal);
+			
+			cell = row.createCell(9);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Adminshipping);
+			
+			cell = row.createCell(10);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Admintax);
+			
+			cell = row.createCell(11);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(AdminDis);
+			
+			cell = row.createCell(12);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Admintotal);
+			
+			cell = row.createCell(13);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Email);
+			
+			
+			System.out.println(OrderIdNumber);
+			FileOutputStream fileOut = new FileOutputStream(file);
+			
+			workbook.write(fileOut);
+		
+			fileOut.flush();
+			fileOut.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		}
+
 
 
 	public void prepareOrdersData(String fileName) {
@@ -9627,6 +9740,143 @@ public void header_1_Percent_Planet() {
 			e.printStackTrace();
 		}
 		}
+	
+	public void prepareOrdersData1(String fileName) {
+		// TODO Auto-generated method stub
+		try {
+
+			File file = new File(System.getProperty("user.dir") + "/src/test/resources/TestData/OXO/" + fileName);
+			XSSFWorkbook workbook;
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			if (!(file.exists())) {
+				workbook = new XSSFWorkbook();
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				CellStyle ps = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				ps.setFillForegroundColor(IndexedColors.RED.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("S.No");
+				cell = row.createCell(1);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Website");
+				cell = row.createCell(2);
+				cell.setCellStyle(cs);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Test scenario Description");
+				cell = row.createCell(3);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("SKU");
+				cell = row.createCell(4);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				cell = row.createCell(5);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Order Status Magento");
+		       cell = row.createCell(6);
+		       
+		       cell.setCellStyle(cs);
+				cell.setCellValue("Workato Status");
+		       cell = row.createCell(7);
+			
+		       cell.setCellStyle(cs);
+				cell.setCellValue("Used GiftCode");
+		     cell = row.createCell(8);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Adminsubtotal");
+		     cell = row.createCell(9);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Adminshipping");
+		     cell = row.createCell(10);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Admintax");
+		     cell = row.createCell(11);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("AdminDis");
+		     cell = row.createCell(12);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Admintotal");
+		     cell = row.createCell(13);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Email");
+		     cell = row.createCell(14);
+		     
+		     
+		    
+
+				/*
+				 * cell=row.createCell(17); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty1");
+				 * 
+				 * cell=row.createCell(18); cell.setCellStyle(cs);
+				 * cell.setCellValue("Product2");
+				 * 
+				 * cell=row.createCell(19); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty2");
+				 * 
+				 * cell=row.createCell(20); cell.setCellStyle(cs);
+				 * cell.setCellValue("Product3");
+				 * 
+				 * 
+				 * cell=row.createCell(21); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty3");
+				 * 
+				 * 
+				 * cell=row.createCell(22); cell.setCellStyle(cs);
+				 * cell.setCellValue("Product4");
+				 * 
+				 * 
+				 * cell=row.createCell(23); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty4");
+				 */
+				rowcount = 2;
+
+			}
+
+			else {
+				workbook = new XSSFWorkbook(new FileInputStream(file));
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			/*
+			 * row = sheet.createRow(rowcount); cell = row.createCell(0);
+			 */
+
+			FileOutputStream fileOut = new FileOutputStream(file);
+			workbook.write(fileOut);
+			fileOut.flush();
+			fileOut.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		}
+
 
 	public String URL() throws InterruptedException {
 		String Website = "";
@@ -12272,9 +12522,9 @@ return Number;
 			Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']");
 			Common.clickElement("xpath", "//label[text()='" + Stores + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
-			System.out.println(title);
+			Thread.sleep(8000);
+//			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+//			System.out.println(title);
 //		//	Common.assertionCheckwithReport(title.contains("Orders"),
 //					"To Validate the Items Ordered page is displayed",
 //					"should display the Items Orderedpage after clicking on the store",
