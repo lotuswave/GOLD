@@ -3118,12 +3118,15 @@ public void header_Shopbycollection(String Dataset) { {
 
 	public void signout() {
 		try {
+			Sync.waitElementPresent("xpath", "//img[@alt='Store logo']");
+			Common.clickElement("xpath", "//img[@alt='Store logo']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Sync.waitElementPresent("xpath", "(//a[@title='Sign Out'])[1]");
 
 			Common.clickElement("xpath", "(//a[@title='Sign Out'])[1]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
