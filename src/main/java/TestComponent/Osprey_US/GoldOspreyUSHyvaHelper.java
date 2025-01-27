@@ -2982,8 +2982,8 @@ public void header_Shopbycollection(String Dataset) { {
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
-				Thread.sleep(3000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
@@ -9747,7 +9747,7 @@ public void Continue_Shopping() {
 			String amount="0.01";
 			Float amountvalue=Float.parseFloat(amount);
 			Thread.sleep(4000);
-			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue + amountvalue;
+			Float Total = (subtotalvalue + shippingvalue + Taxvalue+amountvalue) + Discountvalue ;
 			String ExpectedTotalAmmount2 = String.valueOf(Total);
 //			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			Thread.sleep(4000);
