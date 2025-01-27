@@ -20,7 +20,7 @@ public class Test_DGLD_HYF_E2E_ST_005_Register_User_Checkout_with_different_Item
 	public void Validating_Register_User_Checkout_with_different_Items_with_Amex_Card () throws Exception {
 
 		try {
-			Hydro.prepareOrdersData1("HYF_E2E_orderDetails.xlsx");
+			Hydro.prepareOrdersData1("HYF_Admin_E2E_orderDetails.xlsx");
 			String Description ="CS order via Admin with Amex (Standard) - 3 differents Items, each qty -2";
 			String Used_GiftCode = "NULL";
             Hydro.Admin_signin("Login Details");
