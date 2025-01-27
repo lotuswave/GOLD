@@ -20,7 +20,7 @@ public class Test_DGLD_HYF_E2E_ST_005_Register_User_Checkout_with_different_Item
 	public void Validating_Register_User_Checkout_with_different_Items_with_Amex_Card () throws Exception {
 
 		try {
-			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
+			Hydro.prepareOrdersData1("HYF_E2E_orderDetails.xlsx");
 			String Description ="CS order via Admin with Amex (Standard) - 3 differents Items, each qty -2";
 			String Used_GiftCode = "NULL";
             Hydro.Admin_signin("Login Details");
@@ -35,7 +35,7 @@ public class Test_DGLD_HYF_E2E_ST_005_Register_User_Checkout_with_different_Item
             String OrderNumber= Hydro.Default_Payment_method("CCAmexcard");
             Hydro.click_Sales();
 			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
-			Hydro.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode);
+			Hydro.writeOrderNumber1(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
 
 		} catch (Exception e) {
 

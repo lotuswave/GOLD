@@ -33,11 +33,12 @@ public class Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = Hydro.Gift_card("Full_RedeemGiftcard");
             Hydro.selectshippingaddress("GroundShipping method");
+            HashMap<String,String> Details=Hydro.ordersummary_Details();
             String OrderNumber=Hydro.giftCardSubmitOrder();
             Hydro.Admin_signin("Login Details");
             Hydro.click_Sales();
 			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
-			Hydro.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode);
+			Hydro.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
 
 		} catch (Exception e) {
 
