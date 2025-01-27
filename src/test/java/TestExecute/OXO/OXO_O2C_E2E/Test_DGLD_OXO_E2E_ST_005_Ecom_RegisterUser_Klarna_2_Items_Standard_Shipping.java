@@ -32,6 +32,7 @@ public class Test_DGLD_OXO_E2E_ST_005_Ecom_RegisterUser_Klarna_2_Items_Standard_
 			Oxo.addDeliveryAddress_registerUser("PO box Address");
 			 String Used_GiftCode = "NULL";
 			 Oxo.select_Shipping_Method("GroundShipping method");
+			 HashMap<String,String> Details=Oxo.ordersummary_Details();
 //			HashMap<String,String> data=Oxo.OrderSummaryValidation();
 			String OrderNumber= Oxo.Kalrna_Payment("Klarna Visa Payment");
 //			String OrderIdNumber= Oxo.Verify_order_page();
@@ -39,8 +40,8 @@ public class Test_DGLD_OXO_E2E_ST_005_Ecom_RegisterUser_Klarna_2_Items_Standard_
 			Oxo.Admin_signin("Login Details");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode);
-		} catch (Exception e) {
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
+	         } catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}

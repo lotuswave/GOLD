@@ -9180,7 +9180,7 @@ public void header_1_Percent_Planet() {
 
 	}
 
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode)
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode,String Subtotal,String shipping,String Tax,String Discount,String ordertotal,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email)
 			throws FileNotFoundException, IOException {
 		// String fileOut="";
 		try {
@@ -9255,6 +9255,187 @@ public void header_1_Percent_Planet() {
 			cell.setCellType(CellType.STRING);
 			cell.setCellValue(Used_GiftCode);
 			
+			cell = row.createCell(8);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Subtotal);
+			
+			cell = row.createCell(9);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(shipping);
+			
+			cell = row.createCell(10);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Tax);
+			
+			cell = row.createCell(11);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Discount);
+			
+			cell = row.createCell(12);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(ordertotal);
+			
+			cell = row.createCell(13);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Adminsubtotal);
+			
+			cell = row.createCell(14);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Adminshipping);
+			
+			cell = row.createCell(15);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Admintax);
+			
+			cell = row.createCell(16);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(AdminDis);
+			
+			cell = row.createCell(17);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Admintotal);
+			
+			cell = row.createCell(18);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Email);
+			
+			cell = row.createCell(19);
+			cell.setCellType(CellType.STRING);
+			String Subtotalstatus;
+			if(Subtotal.equals(Adminsubtotal))
+			{
+
+				Subtotalstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Subtotalstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Subtotalstatus);
+			
+			cell = row.createCell(20);
+			cell.setCellType(CellType.STRING);
+			String Shippingstatus;
+			if(shipping.equals(Adminshipping))
+			{
+
+				Shippingstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Shippingstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Shippingstatus);
+			
+			cell = row.createCell(21);
+			cell.setCellType(CellType.STRING);
+			String Taxstatus;
+			if(Tax.equals(Admintax))
+			{
+
+				Taxstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Taxstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Taxstatus);
+			
+			
+			cell = row.createCell(22);
+			cell.setCellType(CellType.STRING);
+			String Disstatus;
+			if(Discount.equals(AdminDis))
+			{
+
+				Disstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Disstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Disstatus);
+			
+
+			cell = row.createCell(23);
+			cell.setCellType(CellType.STRING);
+			String Orderstatus;
+			if(ordertotal.equals(Admintotal))
+			{
+
+				Orderstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Orderstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Orderstatus);
+		
 			
 			
 			System.out.println(OrderIdNumber);
@@ -9331,6 +9512,72 @@ public void header_1_Percent_Planet() {
 		       cell.setCellStyle(cs);
 				cell.setCellValue("Used GiftCode");
 		     cell = row.createCell(8);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Subtotal");
+		     cell = row.createCell(9);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("shipping");
+		     cell = row.createCell(10);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Tax");
+		     cell = row.createCell(11);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Discount");
+		     cell = row.createCell(12);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("ordertotal");
+		     cell = row.createCell(13);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Adminsubtotal");
+		     cell = row.createCell(14);
+		     
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Adminshipping");
+		     cell = row.createCell(15);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Admintax");
+		     cell = row.createCell(16);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("AdminDis");
+		     cell = row.createCell(17);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Admintotal");
+		     cell = row.createCell(18);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Email");
+		     cell = row.createCell(19);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&Adminsubtotal status");
+		     cell = row.createCell(20);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&AdminShipping Status");
+		     cell = row.createCell(21);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&AdminTax Status");
+		     cell = row.createCell(22);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&AdminDiscount Status");
+		     cell = row.createCell(23);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&Adminordertotal Status");
+		     cell = row.createCell(24);
+		     
 
 
 				/*
@@ -10759,6 +11006,31 @@ public void header_1_Percent_Planet() {
 									String finalsku = concatenatedText.toString();
 									  System.out.println(finalsku);
 									  Orderstatus1.put("Skus", finalsku);
+									  
+			String Subtotal=Common.findElement("xpath", "//td[contains(text(),'Subtotal')]//parent::tr//span[@class='price']").getText().trim();
+			Orderstatus1.put("Adminsubtotal", Subtotal);
+			String Shipping=Common.getText("xpath", "//td[contains(text(),'Shipping & Handling')]//parent::tr//span[@class='price']").trim();
+			Orderstatus1.put("Adminshipping", Shipping);
+			String Tax=Common.getText("xpath", "//div[contains(text(),'Tax')]//parent::td//parent::tr//span[@class='price']").trim();
+			Orderstatus1.put("Admintax", Tax);
+			int dis=Common.findElements("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").size();
+			if(dis>0)
+			{
+				String Discount=Common.getText("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").trim();
+				Orderstatus1.put("AdminDis", Discount);
+				
+			}
+			else
+			{
+				String Discount="Null";
+				Orderstatus1.put("AdminDis", Discount);
+			}
+			String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+			Orderstatus1.put("Admintotal", OrderTotal);
+			
+			String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
+			Orderstatus1.put("Email", Email);
+			
 			}
 			else
 			{
@@ -10800,6 +11072,28 @@ public void header_1_Percent_Planet() {
 									String finalsku = concatenatedText.toString();
 									  System.out.println(finalsku);
 									  Orderstatus1.put("Skus", finalsku);
+									  String Subtotal=Common.findElement("xpath", "//td[contains(text(),'Subtotal')]//parent::tr//span[@class='price']").getText().trim();
+										Orderstatus1.put("Adminsubtotal", Subtotal);
+										String Shipping=Common.getText("xpath", "//td[contains(text(),'Shipping & Handling')]//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Adminshipping", Shipping);
+										String Tax=Common.getText("xpath", "//div[contains(text(),'Tax')]//parent::td//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Admintax", Tax);
+										int dis=Common.findElements("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").size();
+										if(dis>0)
+										{
+											String Discount=Common.getText("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").trim();
+											Orderstatus1.put("AdminDis", Discount);
+											
+										}
+										else
+										{
+											String Discount="Null";
+											Orderstatus1.put("AdminDis", Discount);
+										}
+										String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Admintotal", OrderTotal);
+										String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
+										Orderstatus1.put("Email", Email);						
 			}	
 
 	}
@@ -12307,6 +12601,40 @@ return Number;
 			Assert.fail();
 		}
 		
+	}
+
+	public HashMap<String, String> ordersummary_Details() {
+		// TODO Auto-generated method stub
+		HashMap<String, String> details=new HashMap<String, String>();
+		try
+		{
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").trim();
+			details.put("Subtotal", Subtotal);
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'value')]").trim();
+			details.put("shipping", shipping);
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").trim();
+			details.put("Tax", Tax);
+			Thread.sleep(4000);
+			int Discounts=Common.findElements("xpath", "//div[@class='item discount']//span[contains(@class,'value')]").size();
+			if(Discounts>0)
+			{
+				String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]").trim();
+				details.put("Discount", Discount);
+			}
+			else
+			{
+				String Discount="Null";
+				details.put("Discount", Discount);		
+			}
+			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]").trim();
+			details.put("ordertotal", ordertotal);
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		return details;
 	}
 
 }

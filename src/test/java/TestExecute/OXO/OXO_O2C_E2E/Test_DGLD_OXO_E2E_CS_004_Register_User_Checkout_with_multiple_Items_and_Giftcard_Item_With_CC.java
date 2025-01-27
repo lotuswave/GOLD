@@ -30,11 +30,12 @@ public class Test_DGLD_OXO_E2E_CS_004_Register_User_Checkout_with_multiple_Items
 			 Oxo.Configure_GiftCard("Gift Details");
 			 Oxo.Guestuser_shippingaddress("AccountDetails");
 			 Oxo.Select_Shipping_method("AccountDetails");
+			 HashMap<String,String> Details=Oxo.ordersummary_Details();
 	         String OrderNumber= Oxo.Default_Payment_method("CCAmexcard");
 			Oxo.click_Sales();
 			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
-		} catch (Exception e) {
+			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
+          } catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
