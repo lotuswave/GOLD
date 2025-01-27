@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OSP_US_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	GoldOspreyUS_PRODHyvaHelper Osprey_ReEu = new GoldOspreyUS_PRODHyvaHelper(datafile, "CreateAccount");
+	GoldOspreyUS_PRODHyvaHelper Osprey_ReEu = new GoldOspreyUS_PRODHyvaHelper(datafile, "Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments() throws Exception {
