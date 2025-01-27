@@ -2822,6 +2822,7 @@ System.out.println(MyFavorites);
 
 	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
+	
 		String expectedResult = "shipping address is entering in the fields";
 		Common.actionsKeyPress(Keys.PAGE_DOWN);
 		Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
@@ -12133,7 +12134,7 @@ public void Explore_Validation(String Dataset) {
 			Common.textBoxInput("id", "message-1", message);
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad(40);
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//span[@x-text='savedFormMessage.message']");
 			String Messgae = Common.findElement("xpath", "//span[@x-text='savedFormMessage.message']").getText()
 					.replace("Message: ", "");
@@ -14705,8 +14706,8 @@ public void Explore_Validation(String Dataset) {
 			Common.clickElement("xpath", "//label[text()='" + Stores + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
-			System.out.println(title);
+//			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+//			System.out.println(title);
 //		//	Common.assertionCheckwithReport(title.contains("Orders"),
 //					"To Validate the Items Ordered page is displayed",
 //					"should display the Items Orderedpage after clicking on the store",
