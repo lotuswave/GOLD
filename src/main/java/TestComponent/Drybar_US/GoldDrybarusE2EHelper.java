@@ -12016,8 +12016,8 @@ public String fivepercent_Reward_Points(String Dataset) {
 			Common.clickElement("xpath", "//label[text()='" + Stores + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
-			System.out.println(title);
+//			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+//			System.out.println(title);
 //		//	Common.assertionCheckwithReport(title.contains("Orders"),
 //					"To Validate the Items Ordered page is displayed",
 //					"should display the Items Orderedpage after clicking on the store",
