@@ -35,14 +35,15 @@ public class Test_DGLD_DB_E2E_009_RegisterUser_checkout_with_Bundleitem_same_chi
         Drybar.fivepercent_Reward_Points("$5 Off (100 points)");
         Drybar.clickSubmitbutton_Shippingpage();
        // Drybar.tax_validation_Paymentpage("Address");
-        String Used_GiftCode = "NO"; // Indicating no gift code used 
+        String Used_GiftCode = "NULL"; // Indicating no gift code used 
+    	HashMap<String,String> Details=Drybar.ordersummary_Details();
         Drybar.Kalrna_Payment("Klarna Visa Payment");
         String OrderNumber=Drybar.ordernumber();
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
         HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
-        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
-        
+        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
+          
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

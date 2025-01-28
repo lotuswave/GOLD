@@ -13982,6 +13982,7 @@ public void Explore_Validation(String Dataset) {
 			if (filters > 0) {
 				Common.clickElement("xpath",
 						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 				Thread.sleep(8000);
 				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
 				Thread.sleep(6000);
@@ -13990,6 +13991,7 @@ public void Explore_Validation(String Dataset) {
 				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 				Thread.sleep(8000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 	       
@@ -14054,6 +14056,7 @@ public void Explore_Validation(String Dataset) {
 				Thread.sleep(6000);
 				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
 				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 				Thread.sleep(6000);
 				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
 				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();

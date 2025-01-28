@@ -37,11 +37,12 @@ public class Test_DGLD_DB_E2E_004_Registeruser_checkout_with_Non_aerosal_bundleI
         Drybar.BillingAddress("6 walnut address");
         Drybar.selectshippingmethod("StandardShipping method");
         String Used_GiftCode = Drybar.gitCard("GiftCode Partial Redeem"); 
+    	HashMap<String,String> Details=Drybar.ordersummary_Details();
         String OrderNumber=Drybar.updatePaymentAndSubmitOrder("CCMastercard");
         Drybar.Admin_signin("AccountDetails");
         Drybar.click_Sales();
         HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
-        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
+        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
         
 		} catch (Exception e) {
 
