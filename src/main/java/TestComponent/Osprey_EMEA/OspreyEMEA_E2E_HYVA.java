@@ -2749,7 +2749,7 @@ public class OspreyEMEA_E2E_HYVA {
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
@@ -16357,7 +16357,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 										String Discount="Null";
 										Orderstatus1.put("AdminDis", Discount);
 									}
-									String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+									String OrderTotal=Common.getText("xpath", "//strong[contains(text(),'Grand Total')]//parent::td//parent::tr//span[@class='price']").trim();
 									Orderstatus1.put("Admintotal", OrderTotal);
 									
 									String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
@@ -16418,7 +16418,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 										String Discount="Null";
 										Orderstatus1.put("AdminDis", Discount);
 									}
-									String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+									String OrderTotal=Common.getText("xpath", "//strong[contains(text(),'Grand Total')]//parent::td//parent::tr//span[@class='price']").trim();
 									Orderstatus1.put("Admintotal", OrderTotal);
 									
 									String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
@@ -16974,8 +16974,8 @@ public void Select_store(String dataSet) {
 		Common.clickElement("xpath", "//label[text()='" + Stores + "']");
 		Sync.waitPageLoad();
 		Thread.sleep(5000);
-		String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
-		System.out.println(title);
+//		String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
+//		System.out.println(title);
 //	//	Common.assertionCheckwithReport(title.contains("Orders"),
 //				"To Validate the Items Ordered page is displayed",
 //				"should display the Items Orderedpage after clicking on the store",
@@ -17260,7 +17260,7 @@ public String Default_Payment_method(String dataSet) {
 				"should display the sucess message after clicking on the sudmitorder",
 				"sucess message is displayed after a click on the sudmitorder button",
 				"Failed to display sucess message");
-		Thread.sleep(6000);
+		Thread.sleep(12000);
 		ordernumber=Common.findElement("xpath", "//h1[@class='page-title']").getText().replace("#", "");
 
 	} catch (Exception | Error e) {

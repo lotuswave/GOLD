@@ -20,7 +20,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_008_Admin_Register_User_dicount_gift_Card_Re
 	public void Verifying_Admin_Register_User_dicount_gift_Card_Redeem_CC  () throws Exception {
 
 		try {
-		Osprey_ReEu.prepareOrdersData1("OSP_Admin_E2E_orderDetails.xlsx");	
+		Osprey_ReEu.prepareOrdersData1("OspreyEU_Admin_E2E_orderDetails.xlsx");	
 		String Description ="Full Gift Code Redemption + Multiple Item + Multiple Qty";
         Osprey_ReEu.Admin_signin("Login Details");
         Osprey_ReEu.Customers();
