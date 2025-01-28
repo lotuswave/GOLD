@@ -15,13 +15,13 @@ public class Test_DGLD_DB_US_ST_033_Register_user_Checkout_with_Multiple_Items_A
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
 	GoldDrybarus_PRODHyvaHelper Drybar = new GoldDrybarus_PRODHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_with_Non_POBox_1_ShippingOption_UPSGround () throws Exception {
+	public void Validate_RegisterUser_Checkout_Aerosol_Products_and_NonAerosol_with_Bundle_different_Shipping_Methods_and () throws Exception {
 
 		try {
 		
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
-//			Drybar.login_Drybar("AccountDetails");
+			Drybar.login_Drybar("AccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Bundle Product");  
