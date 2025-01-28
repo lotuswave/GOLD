@@ -34,11 +34,12 @@ public class TEST_DGLD_OSP_EMEA_E2E_002_RegisterUser_Partial_Gift_Code_Redemptio
         Osprey_ReEu.selectshippingmethod("GroundShipping method");      
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Used_GiftCode=Osprey_ReEu.Gift_card("Partial Giftcard");
+        HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
         String OrderNumber=Osprey_ReEu.payPal_Payment("PaypalDetails");
         Osprey_ReEu.Admin_signin("Login Details");
         Osprey_ReEu.click_Sales();
 		HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
-		Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode);
+		Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
  
 		} catch (Exception e) {
 
