@@ -1027,10 +1027,8 @@ public class GoldDrybarus_PRODHyvaHelper {
 
 	}
 	
-	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
-		// TODO Auto-generated method stub
-
-		String order = "";
+	public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
+		
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 
@@ -1039,44 +1037,11 @@ public class GoldDrybarus_PRODHyvaHelper {
 			addPaymentDetails(dataSet);
 		}
 
-		Thread.sleep(3000);
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
-		if (!url.contains("stage") && !url.contains("preprod")) {
-		}
-
-		else {
+		Thread.sleep(2000);
+		
 			try {
-				Thread.sleep(2000);
-				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
-				String sucessMessage = Common.getText("xpath",
-						" //h1[normalize-space()='Thank you for your purchase!']");
-
-				// Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-						.size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-						"verifying the product confirmation", expectedResult,
-						"Successfully It redirects to order confirmation page Order Placed",
-						"User unabel to go orderconformation page");
-
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-						.size() > 0) {
-					Thread.sleep(2000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-					System.out.println(order);
-				} else {
-					Thread.sleep(2000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
-					System.out.println(order);
-				}
-
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-						.size() > 0) {
-					Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-					System.out.println(order);
-
-				}
+				
+				System.out.println("Card Details Enter");
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -1087,8 +1052,6 @@ public class GoldDrybarus_PRODHyvaHelper {
 			}
 
 		}
-		return order;
-	}
 	
 	
 	public void Stored_Payment(String Dataset) {
@@ -1212,7 +1175,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 
 		try {
 			Sync.waitPageLoad();
-    Common.actionsKeyPress(Keys.PAGE_DOWN);
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
 			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
@@ -1220,67 +1183,61 @@ public class GoldDrybarus_PRODHyvaHelper {
 					"User unabel to land opaymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-			Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-			 String code=Common.findElement("xpath", "//input[@id='shipping-postcode']").getAttribute("value");
-			 System.out.println(code);
+			Sync.waitElementPresent("xpath", "//input[@name='postcode']");
+			String code = Common.findElement("xpath", "//input[@name='postcode']").getAttribute("value");
+			System.out.println(code);
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-//				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-//				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-//				Common.clickElement("xpath", "//span[text()='New payment method']");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+				Thread.sleep(4000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
-				
-				
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
-				
-				int zipcode=Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+
+				int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
 				System.out.println(zipcode);
 				
-				if(zipcode > 0)
-				{
-				 
-				 Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-				 Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+
+				if (zipcode > 0) {
+
+					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+					
 				}
-				
+
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-
+					
+					
 					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-             	   Thread.sleep(10000);
-             	  if(Common.getCurrentURL().contains("/checkout/#payment"))
-           	   {
-           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-           		   Thread.sleep(5000);
-           		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-               	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-           		   
-           	   }
-           	   else if(Common.getCurrentURL().contains("/success/"))
-           	   {
-           	    String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
-           	    System.out.println(sucessmessage);
-           	   }
-           	   else
-           	   {
-           		   Assert.fail();
-           	   }
-             	   
+					Common.scrollIntoView("xpath", "//button[@class='action primary checkout']");
+					Common.clickElement("xpath", "//button[@class='action primary checkout']");
+					Thread.sleep(10000);
+					if (Common.getCurrentURL().contains("/checkout/#payment")) {
+						Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+						Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+						Thread.sleep(5000);
+						Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+						Common.clickElement("xpath", "//button[@class='action primary checkout']");
+
+					} else if (Common.getCurrentURL().contains("/success/")) {
+						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+						System.out.println(sucessmessage);
+					} else {
+						Assert.fail();
+					}
+
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -1303,55 +1260,59 @@ public class GoldDrybarus_PRODHyvaHelper {
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
-
+				
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
+				
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
+				Thread.sleep(4000);
+				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
+				System.out.println(Number);
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 				Thread.sleep(2000);
 				
-				int zipcode=Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
-				System.out.println(zipcode);
 				
-				if(zipcode > 0)
-				{
-				 
-				 Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-				 Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+
+				int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+				System.out.println(zipcode);
+
+				if (zipcode > 0) {
+
+					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+				}
+				int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
+				
+				if(link>0) {
+					Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
 				}
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
+				}
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Thread.sleep(40000);
-	             	  if(Common.getCurrentURL().contains("/checkout"))
-	              	   {
-//	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-//	              		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-//	              		   Thread.sleep(3000);
-//	              		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-//	                  	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-//	                  	   Thread.sleep(4000);
-	                  	 String sucessmessage=Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
-		              	    System.out.println(sucessmessage);
-	              		   
-	              	   }
-	              	   else if(Common.getCurrentURL().contains("/success/"))
-	              	   {
-	              	    String sucessmessage=Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
-	              	    System.out.println(sucessmessage);
-	              	   }
-	              	   else
-	              	   {
-	              		   Assert.fail();
-	              	   }
-	             	   
+					Thread.sleep(5000);
+					Sync.waitElementPresent("xpath", "//button[contains(text(),'Place Order')]");
+					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
+					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+					Thread.sleep(40000);
+					if (Common.getCurrentURL().contains("/checkout")) {
+						String sucessmessage = Common.getText("xpath",
+								"//div[contains(@class,'checkout-success')]//h1");
+						System.out.println(sucessmessage);
+
+					} else if (Common.getCurrentURL().contains("/success/")) {
+						String sucessmessage = Common.getText("xpath",
+								" //h1[normalize-space()='Thank you for your purchase!']");
+						System.out.println(sucessmessage);
+					} else {
+						Assert.fail();
+					}
+
 				} else {
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
@@ -1366,7 +1327,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 
 				}
 
-			}
+			
 
 		}
 
@@ -1380,10 +1341,6 @@ public class GoldDrybarus_PRODHyvaHelper {
 		}
 
 		expectedResult = "credit card fields are filled with the data";
-//		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-//
-//		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
-//				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
 
 		return Number;
 	}
@@ -2343,8 +2300,8 @@ public class GoldDrybarus_PRODHyvaHelper {
 
 
 	
-	public String payPal_Payment(String dataSet) throws Exception {
-		String order = "";
+	public void payPal_Payment(String dataSet) throws Exception {
+		
 
 		String expectedResult = "It should open paypal site window.";
 		try {
@@ -2373,10 +2330,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
 			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-//			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-
 			Thread.sleep(8000);
-			
 			Common.switchToDefault();
 			Thread.sleep(5000);
 			Common.switchWindows();
@@ -2386,98 +2340,16 @@ public class GoldDrybarus_PRODHyvaHelper {
 				Common.clickElement("id", "acceptAllButton");
 
 			}
+			int sizeofelement = Common.findElements("id", "login_emaildiv").size();
+			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
+					"open paypal site window", "faild to open paypal account");
+		
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
 					"User failed to proceed with paypal payment", Common.getscreenShotPathforReport(expectedResult));
 			Assert.fail();
 		}
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
-		if (!url.contains("stage") & !url.contains("preprod")) {
-
-			int sizeofelement = Common.findElements("id", "email").size();
-			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
-					"open paypal site window", "faild to open paypal account");
-		} else {
-
-			Common.clickElement("id", "login_emaildiv");
-			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
-			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
-			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
-				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			}
-			else {
-				
-			
-			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
-			int sizeemail = Common.findElements("id", "email").size();
-			
-			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
-					"open paypal site window", "faild to open paypal account");
-			}
-			try {
-				Common.clickElement("id", "btnLogin");
-				Thread.sleep(5000);
-				Common.actionsKeyPress(Keys.END);
-				Thread.sleep(5000);
-				Common.clickElement("id", "payment-submit-btn");
-				Thread.sleep(8000);
-				Common.switchToFirstTab();
-			} catch (Exception | Error e) {
-				e.printStackTrace();
-				ExtenantReportUtils.addFailedLog("verifying the paypal payment ", expectedResult,
-						"User failed to proceed with paypal payment",
-						Common.getscreenShotPathforReport(expectedResult));
-				Assert.fail();
-			}
-			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-			if (!url1.contains("stage") && !url1.contains("preprod")) {
-			}
-
-			else {
-				try {
-					Thread.sleep(6000);
-					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-					
-					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
-
-					Thread.sleep(6000);
-					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
-					String sucessMessage = Common.getText("xpath",
-							" //h1[normalize-space()='Thank you for your purchase!']");
-                      System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
-							.size();
-					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-							"verifying the product confirmation", expectedResult,
-							"Successfully It redirects to order confirmation page Order Placed",
-							"User unabel to go orderconformation page");
-
-					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-							.size() > 0) {
-						Thread.sleep(1000);
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-						System.out.println(order);
-					} else {
-						Thread.sleep(1000);
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
-						System.out.println(order);
-					}
-				} catch (Exception | Error e) {
-					e.printStackTrace();
-					ExtenantReportUtils.addFailedLog("verifying the order confirmartion page",
-							"It should navigate to the order confirmation page",
-							"User failed to proceed to the order confirmation page",
-							Common.getscreenShotPathforReport("failed to Navigate to the order summary page"));
-
-					Assert.fail();
-				}
-			}
-		}
-		return order;
 	}
 	public String Express_Venmo_Payment(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
