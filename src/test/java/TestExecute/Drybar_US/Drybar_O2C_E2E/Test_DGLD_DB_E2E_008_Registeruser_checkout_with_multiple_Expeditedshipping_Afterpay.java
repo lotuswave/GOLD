@@ -53,7 +53,7 @@ public class Test_DGLD_DB_E2E_008_Registeruser_checkout_with_multiple_Expediteds
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
