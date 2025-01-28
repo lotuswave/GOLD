@@ -12131,6 +12131,26 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 //	close_add();
 }
 
+public void paypal_close() {
+              // TODO Auto-generated method stub
+		    try {
+		           Common.closeCurrentWindow();
+		           Common.switchToFirstTab();
+		           String open = Common.getCurrentURL(); 
+		          Common.assertionCheckwithReport(open.contains("checkout"),
+		            "Validating navigation back to the checkout page",
+		            "The user should be redirected to the checkout page successfully",
+		            "User successfully navigated back to the checkout page",
+		            "Navigation to the checkout page validated successfully"  );
+		    } catch (Exception | Error e) {
+		                ExtenantReportUtils.addFailedLog(
+		            "Validating navigation back to the checkout page",
+		            "Entering into the checkout page",
+		            Common.getscreenShot("Failed to navigate to the checkout page")
+		        );
+		        Assert.fail();
+		    }
+		}
 }
 		
 

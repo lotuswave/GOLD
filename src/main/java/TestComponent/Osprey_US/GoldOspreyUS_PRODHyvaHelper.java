@@ -3739,11 +3739,11 @@ public void Validate_retailerlocations() {
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
 			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//input[@name='password']");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//button[@data-action='checkout-method-login']");
+			Sync.waitElementPresent("xpath", "//input[@name='login[password]']");
+			Common.textBoxInput("xpath", "//input[@name='login[password]']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
-			int regsiteruser = Common.findElements("xpath", "//div[contains(@class,'shipping-address-item ')]").size();
+			int regsiteruser = Common.findElements("xpath", "//h2[contains(text(),'Shipping Address')]").size();
 			Common.assertionCheckwithReport(regsiteruser > 0,
 					"Verifying the login functionality from the shipping page",
 					"after clicking on the login button it should login and address should be display",
@@ -5939,55 +5939,44 @@ return Number;
 
 	public void minicart_delete(String Dataset) {
 		// TODO Auto-generated method stub
-		String deleteproduct = data.get(Dataset).get("Colorproduct");
-		String Proddelete=data.get(Dataset).get("Prod Product");
+		String deleteproduct = data.get(Dataset).get("Prod Product");
 		String symbol=data.get(Dataset).get("Symbol");
 		try {
-			Sync.waitElementPresent(30, "xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']");
-			String subtotal = Common.getText("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']")
+			click_minicart();
+			Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span");
+			String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//div[contains(@class,'ustify-betwee')]/p/a)[1]")
+					.findElement("xpath", "(//p[@class='text-md font-bold dr:title-sm']//a)[2]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//p//span[@class='price'])[1]").replace(symbol,
+			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
-			if(Common.getCurrentURL().contains("preprod"))
-			{
+			System.out.println(deleteproduct);
+			System.out.println(productname);
 			if (productname.equals(deleteproduct)) {
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
-						"(//button[contains(@title,'Remove product')])[1]");
+						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
 				Common.clickElement("xpath",
-						"(//button[contains(@title,'Remove product')])[1]");
-				Sync.waitElementPresent("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
-				Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
+						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'OK')]");
+				Common.clickElement("xpath", "//button[contains(text(),'OK')]");;
 			} else {
-				AssertJUnit.fail();
-			}
-			}
-			else
-			{
-				if (Proddelete.equals(productname)) {
-					Sync.waitElementPresent(30, "xpath",
-							"(//button[contains(@title,'Remove product')])[1]");
-					Common.clickElement("xpath",
-							"(//button[contains(@title,'Remove product')])[1]");
-					Sync.waitElementPresent("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
-					Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
-				} else {
-					AssertJUnit.fail();
-				}
+				Assert.fail();
 			}
 			Thread.sleep(6000);
-			String subtotal1 = Common.getText("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']")
+			String subtotal1 = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
 			Float subtotal1value = Float.parseFloat(subtotal1);
 			Thread.sleep(8000);
-			String productamount = Common.getText("xpath", "(//p//span[@class='price'])[1]").replace(symbol, "");
+			String productamount = Common.getText("xpath", "(//span[@x-html='item.product_price']//span)[3]").replace(symbol, "");
 			Float productamountvalue = Float.parseFloat(productamount);
 			Float Total = subtotalvalue - productamount1value;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(subtotal1);
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(subtotal1),
 					"validating the delete operation and subtotal",
@@ -6001,7 +5990,7 @@ return Number;
 					"The product should be delete from mini cart and subtotal should change",
 					"unable to delete product from the mini cart and subtotal has not changed", Common.getscreenShot(
 							"Failed to delete the product from the mini cart and subtotal has not changed"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 	}
 public void minicart_product_close() {
@@ -16506,7 +16495,52 @@ public void deleteProduct_shoppingcart() {
 	}
 	
 }
-	
+
+
+public void paypal_close() {
+    // TODO Auto-generated method stub
+    try {
+           Common.closeCurrentWindow();
+           Common.switchToFirstTab();
+           String open = Common.getCurrentURL(); 
+          Common.assertionCheckwithReport(open.contains("checkout"),
+            "Validating navigation back to the checkout page","The user should be redirected to the checkout page successfully",
+            "User successfully navigated back to the checkout page","Navigation to the checkout page validated successfully"  );
+    } catch (Exception | Error e) {
+                ExtenantReportUtils.addFailedLog(
+            "Validating navigation back to the checkout page",
+            "Entering into the checkout page",
+            Common.getscreenShot("Failed to navigate to the checkout page")
+        );
+        Assert.fail();
+    }
+}
+
+public void click_singin_Shippingpage() {
+	// TODO Auto-generated method stub
+	try {
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'Sign in')]");
+		Common.clickElement("xpath", "//span[contains(text(),'Sign in')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(
+				Common.getCurrentURL().contains("customer/account/login"),
+				"To validate the user navigates to the signin page",
+				"user should able to land on the signIn page after clicking on the sigIn button",
+				"User Successfully clicked on the singIn button and Navigate to the signIn page",
+				"User Failed to click the signin button and not navigated to signIn page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user navigates to the signin page",
+				"user should able to land on the signIn page after clicking on the sigin button",
+				"Unable to click on the singIn button and not Navigated to the signIn page",
+				Common.getscreenShotPathforReport(
+						"Failed to click signIn button and not Navigated to the signIn page"));
+		Assert.fail();
+	}
+
+}
 
 }
 
