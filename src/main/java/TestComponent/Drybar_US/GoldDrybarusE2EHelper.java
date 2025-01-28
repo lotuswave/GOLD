@@ -1447,7 +1447,7 @@ public class GoldDrybarusE2EHelper {
 		//String fileOut="";
 	try{
 		
-		File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
+		File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/Drybar_Admin_E2E_orderDetails.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 		XSSFSheet sheet;
 		Row row;

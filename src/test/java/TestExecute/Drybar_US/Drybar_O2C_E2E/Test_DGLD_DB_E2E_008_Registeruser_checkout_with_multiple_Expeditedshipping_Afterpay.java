@@ -34,7 +34,7 @@ public class Test_DGLD_DB_E2E_008_Registeruser_checkout_with_multiple_Expediteds
         Drybar.minicart_Checkout();
         Drybar.RegaddDeliveryAddress("Address");
         Drybar.selectshippingmethod("Expedited_method");
-        String Used_GiftCode = ""; 
+        String Used_GiftCode = "NULL"; 
         Drybar.clickSubmitbutton_Shippingpage();
 //        Drybar.tax_validation_Paymentpage("Address");
       	HashMap<String,String> Details=Drybar.ordersummary_Details();
