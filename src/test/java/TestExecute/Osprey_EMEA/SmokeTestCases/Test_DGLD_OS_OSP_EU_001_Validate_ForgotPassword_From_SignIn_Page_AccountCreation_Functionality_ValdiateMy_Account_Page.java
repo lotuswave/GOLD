@@ -1,0 +1,5 @@
+package TestExecute.Osprey_EMEA.SmokeTestCases;
+
+public class Test_DGLD_OS_OSP_EU_001_Validate_ForgotPassword_From_SignIn_Page_AccountCreation_Functionality_ValdiateMy_Account_Page {
+
+}

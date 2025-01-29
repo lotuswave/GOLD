@@ -3653,7 +3653,7 @@ public class OspreyEMEA_PRODHYVA {
 
 	}
 
-	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
+	public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 
 		String order = "";
@@ -3666,47 +3666,23 @@ public class OspreyEMEA_PRODHYVA {
 		}
 
 		Thread.sleep(2000);
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
-		if (!url.contains("stage") && !url.contains("preprod")) {
-		}
-
-		else {
+		
 			try {
-				Thread.sleep(1000);
-				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
-				String sucessMessage = Common.getText("xpath",
-						"//div[contains(@class,'checkout-success')]//h1");
+				
+				System.out.println("Card Details Enter");
 
-				// Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//h1")
-						.size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") || sizes>0 ,
-						"verifying the product confirmation", expectedResult,
-						"Successfully It redirects to order confirmation page Order Placed",
-						"User unabel to go orderconformation page");
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
-						.size() > 0) {
-					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
-					System.out.println(order);
-				} else {
-					Thread.sleep(1000);
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
-					System.out.println(order);
-				}
-			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 						"User failed to navigate  to order confirmation page",
 						Common.getscreenShotPathforReport("failednavigatepage"));
-				AssertJUnit.fail();
+				Assert.fail();
 			}
 
 		}
-		return order;
-	}
+
+
+
 
 	public String addPaymentDetails(String dataSet) throws Exception {{
 		// TODO Auto-generated method stub
@@ -3760,28 +3736,7 @@ public class OspreyEMEA_PRODHYVA {
 				
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					
-					
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-					Common.scrollIntoView("xpath", "//button[@class='action primary checkout']");
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
-					Thread.sleep(10000);
-					if (Common.getCurrentURL().contains("/checkout/#payment")) {
-						Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-						Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-						Thread.sleep(5000);
-						Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-						Common.clickElement("xpath", "//button[@class='action primary checkout']");
-
-					} else if (Common.getCurrentURL().contains("/success/")) {
-						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
-						System.out.println(sucessmessage);
-					} else {
-						AssertJUnit.fail();
-					}
-
-				} else {
+				
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
@@ -3793,7 +3748,7 @@ public class OspreyEMEA_PRODHYVA {
 							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
 
-				}
+				
 
 			} else {
 				Thread.sleep(4000);
@@ -3834,32 +3789,7 @@ public class OspreyEMEA_PRODHYVA {
 					}
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
-					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-						Thread.sleep(4000);
-						Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[1]");
-						Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[1]");
-						Thread.sleep(3000);
-						
-						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-						Thread.sleep(8000);
-						if (Common.getCurrentURL().contains("/checkout")) {
-							Sync.waitPageLoad();
-							Thread.sleep(4000);
-							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
-							String sucessmessage = Common.getText("xpath",
-									"//div[contains(@class,'checkout-success')]//h1");
-							System.out.println(sucessmessage);
-
-						} else if (Common.getCurrentURL().contains("/success/")) {
-							String sucessmessage = Common.getText("xpath",
-									" //h1[normalize-space()='Thank you for your purchase!']");
-							System.out.println(sucessmessage);
-						} else {
-							AssertJUnit.fail();
-						}
-
-					} else {
+					
 						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 						String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 								"");
@@ -3871,7 +3801,7 @@ public class OspreyEMEA_PRODHYVA {
 								"User Failed to see the card deails in prod environemnt");
 						Common.switchToDefault();
 
-					}
+					
 				}
 				else {
 			
@@ -3907,27 +3837,7 @@ public class OspreyEMEA_PRODHYVA {
 				}
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-					Thread.sleep(8000);
-					if (Common.getCurrentURL().contains("/checkout")) {
-						Sync.waitPageLoad();
-						Thread.sleep(4000);
-						Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
-						String sucessmessage = Common.getText("xpath",
-								"//div[contains(@class,'checkout-success')]//h1");
-						System.out.println(sucessmessage);
-
-					} else if (Common.getCurrentURL().contains("/success/")) {
-						String sucessmessage = Common.getText("xpath",
-								" //h1[normalize-space()='Thank you for your purchase!']");
-						System.out.println(sucessmessage);
-					} else {
-						AssertJUnit.fail();
-					}
-
-				} else {
+				
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
@@ -3938,7 +3848,7 @@ public class OspreyEMEA_PRODHYVA {
 							"User Successfully able to see the card details enterd in the production environment ",
 							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
-				}
+				
 			}
 			}
 		}
