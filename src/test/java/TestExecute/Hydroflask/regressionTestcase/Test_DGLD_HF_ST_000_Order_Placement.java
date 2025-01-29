@@ -5,7 +5,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import java.io.FileInputStream;
 import TestLib.Login;
@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 public class Test_DGLD_HF_ST_000_Order_Placement {
 
 	String datafile = "Hydroflask//GoldHydroTestData1.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"order_Placement");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"order_Placement");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
