@@ -10,14 +10,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.OXO.GoldOxoHelper;
+import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OXO_ST_000_Order_Placement {
 
 	String datafile = "OXO//GoldOxoTestData1.xlsx";	
-	GoldOxoHelper Oxo=new GoldOxoHelper(datafile,"order_Placement");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"order_Placement");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_Card() throws Exception {
 
@@ -30,6 +30,8 @@ public class Test_DGLD_OXO_ST_000_Order_Placement {
 			int colcount=sheet.getRow(1).getLastCellNum();
 			Oxo.prepareTaxData("Oxo_OrderNumbers.xlsx");
 			Oxo.verifingHomePage();
+			Oxo.click_singinButton();
+			Oxo.Usersignin("AccountDetails");
 			
 			 for(int i=1;i<=rowcount;i++)
 			 {
@@ -37,12 +39,11 @@ public class Test_DGLD_OXO_ST_000_Order_Placement {
 			XSSFRow celldata=sheet.getRow(i);
 			String Account=celldata.getCell(0).getStringCellValue();
 		    Thread.sleep(10000);
-			Oxo.search_product(Account);
-			Oxo.addtocart(Account);
-			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress_Guest(Account);
-			Oxo.select_Shipping_Method(Account);
-			Oxo.clickSubmitbutton_Shippingpage();
+		    Oxo.reorder();
+		    Oxo.minicart_Checkout();
+		    Oxo.addDeliveryAddress_registerUser(Account);
+		    Oxo.select_Shipping_Method(Account);
+		    Oxo.clickSubmitbutton_Shippingpage();
 			String Ordernumber= Oxo.updatePaymentAndSubmitOrder(Account);
 			Oxo.writeResultstoXLSx(Ordernumber);
 			
