@@ -4546,9 +4546,9 @@ return Number;
 				Common.clickElement("xpath", "//div[text()='Price']");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(".00", "").trim();
 				System.out.println(lastvalue);
-				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+				Sync.waitElementPresent("xpath", "//div[@aria-valuenow='" + lastvalue + "' and @data-handle-key='0']");
 				WebElement price = Common.findElement("xpath",
-						"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+						"//div[@aria-valuenow='" + lastvalue + "' and @data-handle-key='0']");
 				dragprice(price);
 				Thread.sleep(6000);
 				List<WebElement> products = Common.findElements("xpath",
@@ -4906,9 +4906,9 @@ return Number;
 						.replace(".00", "").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
-				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
-				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
-				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuenow='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuenow='" + lastvalue + "' and @data-handle-key='0']");
+				Common.dragdrop(price, "xpath", "//div[@aria-valuenow='" + lastvalue + "' and @data-handle-key='0']");
 			}
 			else if (Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/"))
 			{

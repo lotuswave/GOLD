@@ -10545,6 +10545,11 @@ public void Simple_PDP(String Dataset) {
 				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 				"failed to Navigate to the PDP page");
 		product_quantity(Dataset);
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
+		Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
+		Thread.sleep(5000);
+		Common.clickElement("xpath","//button[@aria-label='Close minicart']");
+		Thread.sleep(2000);
 //		click_UGC();
 //		Locally_PDP();
 		PDP_Tabs("Configurable Product");
@@ -10661,7 +10666,11 @@ public void Configurable_PDP(String Dataset) {
 				"successfully Product size has been selected on the PDP",
 				"Failed to select the product price on the PDP");
 		product_quantity(Dataset);
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'ADD TO BAG')]");
+		Common.clickElement("xpath", "//span[contains(text(),'ADD TO BAG')]");
 		Thread.sleep(4000);
+		Common.clickElement("xpath","//button[@aria-label='Close minicart']");
+		Thread.sleep(2000);
 		PDP_Tabs("Configurable Product");
 		validate_reviews_AskQuestions_PDP();
 	
