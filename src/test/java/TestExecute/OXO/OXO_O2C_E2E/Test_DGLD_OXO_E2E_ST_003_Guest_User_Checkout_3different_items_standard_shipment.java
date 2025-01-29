@@ -14,7 +14,7 @@ public class Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_stand
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void GuestUser_Klarna_2_Items_Standard_Shipping() throws Exception {
+	public void Validate_Guest_User_Checkout_3different_items_standard_shipment() throws Exception {
 
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
