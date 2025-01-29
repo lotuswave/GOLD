@@ -3239,7 +3239,7 @@ System.out.println(MyFavorites);
 		try
 		{
 			
-				Common.clickElement("xpath", "//span[contains(text(),'Holiday Shop')]");
+				Common.clickElement("xpath", "//a[contains(@title,'Shop')]");
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
 //				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
@@ -6933,7 +6933,7 @@ catch(Exception | Error e)
 			System.out.println(categoryvalue);
 			System.out.println(items);
 
-			Common.assertionCheckwithReport(categoryvalue.equals(items),
+			Common.assertionCheckwithReport(categoryvalue.equals(textValueAfterFilter),
 					"To validate the filter in Product Listing Page",
 					"User should able to filter in Product Listing Page",
 					"Sucessfully filters in the Product Listing Page", "Failed to filter in Product Listing Page");
