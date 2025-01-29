@@ -14,7 +14,7 @@ public class Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoE2EHelper Oxo=new GoldOxoE2EHelper(datafile,"E2E");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_GuestUser_Paypal_2_Items_Standard_Shipping() throws Exception {
+	public void Validate_Guestuser_checkout_with_Paypal_3Items_each_qty_2_Standard_Gift_message() throws Exception {
 
 		try {
 			Oxo.prepareOrdersData("OXO_E2E_orderDetails.xlsx");
