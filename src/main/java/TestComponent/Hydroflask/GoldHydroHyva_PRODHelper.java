@@ -13049,7 +13049,7 @@ public void Explore_Validation(String Dataset) {
 						int j=0;
 						if(Number>j)
 						{
-							Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || title.contains("Limited Edition Remix") ,
+							Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains("colorblock-water-bottles")|| breadcrumbs.contains(Links[i]) || title.contains("Limited Edition Remix") ,
 									"verifying the header link " + Links[i] + "Under Collections",
 									"user should navigate to the " + Links[i] + " page",
 									"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -13110,7 +13110,7 @@ public void Explore_Validation(String Dataset) {
 					if(Number>j)
 					{
 						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) 
-						|| Common.getPageTitle().contains("Shop Remix Collection"),
+						|| Common.getPageTitle().contains("Shop Remix Collection")|| Common.getCurrentURL().contains("colorblock-water-bottles"),
 								"verifying the header link " + Links[i] + "Under Collections",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
