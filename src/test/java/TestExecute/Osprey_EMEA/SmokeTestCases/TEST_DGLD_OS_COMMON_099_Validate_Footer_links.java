@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
+import TestComponent.Osprey_EMEA.OspreyEMEA_PRODHYVA;
 import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
@@ -14,7 +15,7 @@ public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
 
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Footer Links");
+	OspreyEMEA_PRODHYVA Osprey_ReEu = new OspreyEMEA_PRODHYVA(datafile,"Footer Links");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_the_Footer_Links_Funtionality () throws Exception {
