@@ -12898,12 +12898,8 @@ return Number;
 			String remove="Remove";
 			for(int i=0;i<size;i++)
 			{
-				
 				Thread.sleep(4000);
-				  int products=Common.findElements("xpath", "//div[@id='order-items_grid']//tbody").size();
-				    for(int j=0;j<products;j++)
-				    {
-				    	int value=j+1;
+					int value=i+1;
 				System.out.println(value);
 				String free_Item=Common.findElement("xpath", "(//div[@id='order-items_grid']//tbody//td[@class='col-subtotal col-price']//span)["+ value +"]").getText().trim().replace("$", "");
 				System.out.println(free_Item);
@@ -12915,8 +12911,7 @@ return Number;
 					System.out.println("(//div[@id='order-items_grid']//tbody//td[@class='col-actions last']//select)["+ value +"]");
 					Common.dropdown("xpath", "(//div[@id='order-items_grid']//tbody//td[@class='col-actions last']//select)["+ value +"]", Common.SelectBy.TEXT, remove);
 					Thread.sleep(4000);
-					Common.clickElement("xpath", "//button[@title='Update Items and Quantities']");
-					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");	
+					
 					
 					
 				}
@@ -12925,7 +12920,9 @@ return Number;
 					System.out.println(free);
 				}
 		}
-			}
+				
+			Common.clickElement("xpath", "//button[@title='Update Items and Quantities']");
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 		}
 		catch(Exception | Error e)
 		{
