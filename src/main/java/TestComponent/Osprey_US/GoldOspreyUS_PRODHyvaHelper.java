@@ -14309,12 +14309,12 @@ public void Footer_Links_Company(String Dataset) {
 		
 		for(j = 0; j < Termlinks.length; j++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+					"//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'"+ Termlinks[j] +"')]");
+					"//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Common.clickElement("xpath",
-					"//p[@class='c-footer__copyright']//a[contains(text(),'" + Termlinks[j] + "')]");
+					"//a[contains(text(),'" + Termlinks[j] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 				Common.assertionCheckwithReport(
@@ -14355,12 +14355,12 @@ public void Footer_Links_Company(String Dataset) {
 		}
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -14427,12 +14427,12 @@ public void Footer_Links_CustomerSupport(String Dataset) {
 		
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[@class='c-footer__container c-footer__items-wrapper u-container']//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[2]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//ul[@class='m-footer-links__list']//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
