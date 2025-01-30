@@ -26,6 +26,8 @@ public class Test_DGLD_OXO_E2E_ST_005_RegisterUser_Klarna_2_Items_Standard_Shipp
 			Oxo.addtocart("SKU-11244200 - 4QTY");
 			Oxo.search_product("SKU-1155901- 4QTY");
 			Oxo.Configurable_addtocart_pdp("SKU-1155901- 4QTY");
+			Oxo.minicart_viewcart();
+			Oxo.remove_Free_Product_website();
 			Oxo.minicart_Checkout();
 //			String Products_details=Oxo.shipping_order_details();
 //			HashMap<String,String> Shipping=Oxo.Shipingdetails("AccountDetails");

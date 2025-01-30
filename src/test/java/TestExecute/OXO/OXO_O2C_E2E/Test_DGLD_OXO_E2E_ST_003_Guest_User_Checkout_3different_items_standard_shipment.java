@@ -26,6 +26,8 @@ public class Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_stand
 			Oxo.addtocart("SKU-11320400 - 3QTY");
 			Oxo.search_product("SKU-11219400 - 3QTY");
 			Oxo.addtocart("SKU-11219400 - 3QTY");
+			Oxo.minicart_viewcart();
+			Oxo.remove_Free_Product_website();
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");

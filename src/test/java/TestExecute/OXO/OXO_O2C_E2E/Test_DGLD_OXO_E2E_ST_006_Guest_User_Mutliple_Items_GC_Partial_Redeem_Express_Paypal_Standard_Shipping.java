@@ -28,7 +28,8 @@ public class Test_DGLD_OXO_E2E_ST_006_Guest_User_Mutliple_Items_GC_Partial_Redee
 			Oxo.addtocart("SKU-11261400 - 2QTY");
 			Oxo.search_product("SKU-11301800-1QTY");
 			Oxo.addtocart("SKU-11301800-1QTY");
-				
+			Oxo.minicart_viewcart();
+			Oxo.remove_Free_Product_website();
 			Oxo.minicart_Checkout();
 			 String Used_GiftCode= Oxo.Gift_card("Giftcard");
 			 HashMap<String,String> Details=Oxo.ordersummary_Details();

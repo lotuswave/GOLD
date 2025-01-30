@@ -12911,9 +12911,7 @@ return Number;
 					System.out.println("(//div[@id='order-items_grid']//tbody//td[@class='col-actions last']//select)["+ value +"]");
 					Common.dropdown("xpath", "(//div[@id='order-items_grid']//tbody//td[@class='col-actions last']//select)["+ value +"]", Common.SelectBy.TEXT, remove);
 					Thread.sleep(4000);
-					
-					
-					
+				
 				}
 				else
 				{
@@ -12929,5 +12927,33 @@ return Number;
 			e.printStackTrace();
 			Assert.fail();
 		}
+	}
+
+	public void remove_Free_Product_website() {
+		// TODO Auto-generated method stub
+		try
+		{
+			int products=Common.findElements("xpath", "//button[contains(@aria-label,'Remove FREE')]").size();
+			for(int i=0;i<products;i++)
+			{
+				Thread.sleep(6000);
+					Common.clickElement("xpath", "//button[contains(@aria-label,'Remove FREE')]");
+					Thread.sleep(6000);
+					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
+					Sync.waitPageLoad();
+					Thread.sleep(7000);
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Thread.sleep(4000);
+					
+				}
+			System.out.println("free Products Removed or products are not avaliable");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
 	}
 }

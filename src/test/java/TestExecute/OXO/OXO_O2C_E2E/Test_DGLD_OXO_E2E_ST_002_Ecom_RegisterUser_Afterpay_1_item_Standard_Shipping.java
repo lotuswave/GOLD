@@ -26,6 +26,8 @@ public class Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard
 			Oxo.Usersignin("AccountDetails");
 			Oxo.search_product("SKU-8710100 - 1QTY");
 			Oxo.addtocart("SKU-8710100 - 1QTY");
+			Oxo.minicart_viewcart();
+			Oxo.remove_Free_Product_website();
 			Oxo.minicart_Checkout();
 		    Oxo.addDeliveryAddress_registerUser("AccountDetails");
 		    String Used_GiftCode = "NULL";

@@ -29,6 +29,8 @@ public class Test_DGLD_OXO_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 			Oxo.Configurable_addtocart_pdp("SKU-1155901- 3QTY");
 			Oxo.search_product("SKU-1334480V1");
 			Oxo.addtocart("SKU-1334480V1");
+			Oxo.minicart_viewcart();
+			Oxo.remove_Free_Product_website();
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			 Oxo.select_Shipping_Method("GroundShipping method");

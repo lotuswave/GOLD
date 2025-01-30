@@ -28,6 +28,7 @@ public class Test_DGLD_OXO_E2E_ST_007_GuestUser_checkout_with_CC_2Day_with_Multi
 			Oxo.addtocart("Bundle Product");
 			Oxo.minicart_viewcart();
 			Oxo.Gift_Message("Giftmessage50letters");
+			Oxo.remove_Free_Product_website();
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 		    Oxo.select_Shipping_Method("2 Day method");
