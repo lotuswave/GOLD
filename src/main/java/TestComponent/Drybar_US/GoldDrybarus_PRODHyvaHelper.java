@@ -12160,6 +12160,131 @@ public void paypal_close() {
 		        Assert.fail();
 		    }
 		}
+
+public void Hairproducts_Shop_by_size(String Dataset) {
+
+	String names = data.get(Dataset).get("Shop by Size");
+	String[] Links = names.split(",");
+	
+	String hair=data.get(Dataset).get("headers");
+	
+	int i = 0;
+	try {
+		for (i = 0; i < Links.length; i++) {
+			Sync.waitElementPresent("xpath", "//a[@title='Hair Products']");
+			Common.clickElement("xpath", "//a[@title='Hair Products']");				
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
+			Common.clickElement("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
+			
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+		System.out.println(title);
+			System.out.println(breadcrumbs);
+			System.out.println(Links[i]);
+			Thread.sleep(4000);
+			String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
+			System.out.println(products);
+			int Number = Integer.parseInt(products);
+			int j=0;
+		if(Number>j)
+			{
+				Common.assertionCheckwithReport(title.contains(Links[i]) ||breadcrumbs.contains(Links[i]) 
+						||Common.getCurrentURL().contains("travel-size-products-tools"),
+						"verifying the header link " + Links[i] + "Under shop by size",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+			}
+			else
+			{
+				ExtenantReportUtils.addFailedLog(
+						"validating the the products in the plp ",
+						"User should able to see the products in plp", "unable to see the products in the PLP",
+					Common.getscreenShot("Failed to see products in PLP"));
+				Assert.fail();
+			}
+		}
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Hairproducts shop by size",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+	}
+
+}
+
+public void Benefits_Ingredients (String Dataset) {
+
+	String names = data.get(Dataset).get("Ingredients");
+	String[] Links = names.split(",");
+	String hair=data.get(Dataset).get("headers");
+	
+	int i = 0;
+	try {
+		for (i = 0; i < Links.length; i++) {
+			Sync.waitElementPresent("xpath", "//a[@title='Benefits']");
+			Common.clickElement("xpath", "//a[@title='Benefits']");				
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
+			Common.clickElement("xpath", "(//span[contains(text(),'"+ hair +"')])[1]");
+			
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+		System.out.println(title);
+			System.out.println(breadcrumbs);
+			System.out.println(Links[i]);
+			Thread.sleep(4000);
+			String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
+			System.out.println(products);
+			int Number = Integer.parseInt(products);
+			int j=0;
+		if(Number>j)
+			{
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i])
+						|| Common.getPageTitle().contains("Nut Free Shampoos"),
+						"verifying the header link " + Links[i] + "Under Benifits Ingredents",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+			}
+			else
+			{
+				ExtenantReportUtils.addFailedLog(
+						"validating the the products in the plp ",
+						"User should able to see the products in plp", "unable to see the products in the PLP",
+					Common.getscreenShot("Failed to see products in PLP"));
+				Assert.fail();
+			}
+		}
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Benifits Ingredents",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+	}
+
+}
+
+
 }
 		
 

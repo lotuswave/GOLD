@@ -26,14 +26,14 @@ public class TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User 
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
 			Drybar.header_Hairproducts("Hair Products");
+			Drybar.Hairproducts_Shop_by_size("Shop by Size");
+			Drybar.Benefits_Ingredients("Ingredients");		
 			Drybar.header_HairTools("Hair Tools");
 			Drybar.header_Brushes("HTBrushes");
 			Drybar.header_Benfits("HeaderBenfits");
 			Drybar.header_GiftsSets("Gifts and Sets");
-			Drybar.header_New("HeaderNew");
 			Drybar.header_HowToInspo("How To Inspo");
-			
-			
+						
 
 		} catch (Exception e) {
 
