@@ -1613,9 +1613,9 @@ public void header_Shopbycollection(String Dataset) { {
 			        Common.clickElement("xpath", "//span[contains(text(),'" + Featured + "')]");
 
 			        Thread.sleep(3000);
-
-			        Sync.waitElementPresent("xpath", "//li//a[@title='" + Links[i] + "']//span[contains(text(),'" + Links[i] + "')]");
-			        Common.clickElement("xpath", "//li//a[@title='" + Links[i] + "']//span[contains(text(),'" + Links[i] + "')]");
+			      
+			        Sync.waitElementPresent("xpath", "//a[contains(@href,'featured')]//following::ul//span[contains(text(),'" + Links[i] +"')]");
+			        Common.clickElement("xpath", "//a[contains(@href,'featured')]//following::ul//span[contains(text(),'" + Links[i] +"')]");
 			        Sync.waitPageLoad();
 			        Thread.sleep(4000);
 			    	}
@@ -1626,8 +1626,8 @@ public void header_Shopbycollection(String Dataset) { {
 
 					        Thread.sleep(3000);
 
-					        Sync.waitElementPresent("xpath", "//li//a[@title='" + Link2[i] + "']//span[contains(text(),'" + Link2[i] + "')]");
-					        Common.clickElement("xpath", "//li//a[@title='" + Link2[i] + "']//span[contains(text(),'" + Link2[i] + "')]");
+					        Sync.waitElementPresent("xpath", "//a[contains(@href,'featured')]//following::ul//span[contains(text(),'" + Link2[i] +"')]");
+					        Common.clickElement("xpath", "//a[contains(@href,'featured')]//following::ul//span[contains(text(),'" + Link2[i] +"')]");
 					        Sync.waitPageLoad();
 					        Thread.sleep(4000);
 					        String title = "";
