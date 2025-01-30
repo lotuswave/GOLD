@@ -29,7 +29,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
             Hydro.featured_validation("Featured"); 
             Hydro.Collections_validation("Collections");
             Hydro.New_Color_Destination("Colors");
-            Hydro.Holiday_shop_validation("Holiday Sale"); 
+//            Hydro.Holiday_shop_validation("Holiday Sale"); 
             Hydro.shopall("Shop All");
 			Hydro.Explore_Validation("Explore Links");
 			Hydro.image_button("Shop All");

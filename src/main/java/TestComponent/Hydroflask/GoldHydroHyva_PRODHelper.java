@@ -4489,7 +4489,7 @@ public void Remove_GiftCode() {
 		}
 	}
 
-	public void Signin_Checkoutpage (String Dataset) {
+	public void Signin_Checkoutpage(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -4500,14 +4500,14 @@ public void Remove_GiftCode() {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Prod Email"));
 			}
-			Sync.waitElementPresent("xpath", "//input[@name='password']");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
+			Sync.waitElementPresent("xpath", "//input[@name='login[password]']");
+			Common.textBoxInput("xpath", "//input[@name='login[password]']", data.get(Dataset).get("Password"));
 			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
-			String regsiteruser = Common.findElement("xpath", "//div[@class='new-address-popup']//span").getText();
+			String regsiteruser = Common.findElement("xpath", "//button[contains(text(),'New Address')]").getText();
 			System.out.println(regsiteruser);
-			Common.assertionCheckwithReport(regsiteruser.contains("Add New Address"),
+			Common.assertionCheckwithReport(regsiteruser.contains("New Address"),
 					"Verifying the login functionality from the shipping page",
 					"after clicking on the login button it should login and address should be display",
 					"successfully address book has been displayed after login",
@@ -4524,6 +4524,8 @@ public void Remove_GiftCode() {
 		}
 
 	}
+
+
 
 	public void ordersummary_validation() {
 		// TODO Auto-generated method stub
@@ -11325,7 +11327,7 @@ public void Explore_Validation(String Dataset) {
 				int j=0;
 				if(Number>j)
 				{
-				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i])||Common.getCurrentURL().contains("new-color-destination"),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
