@@ -28,6 +28,7 @@ public class Test_DGLD_OXO_E2E_CS_004_Register_User_Checkout_with_multiple_Items
 			 Oxo.Select_store("OXO_Store");
 			 Oxo.Add_product_SKU("OXO_Store");
 			 Oxo.Configure_GiftCard("Gift Details");
+			 Oxo.Remove_Free_Product();
 			 Oxo.Guestuser_shippingaddress("AccountDetails");
 			 Oxo.Select_Shipping_method("AccountDetails");
 	         String OrderNumber= Oxo.Default_Payment_method("CCAmexcard");

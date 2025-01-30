@@ -12549,6 +12549,7 @@ return Number;
 			String[] SKUnumber = data.get(dataSet).get("SKUNumber").split(",");
 			String[] Quantity = data.get(dataSet).get("Quantity").split(",");
 
+			Sync.waitElementInvisible(11, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			for (int i = 0; i < SKUnumber.length; i++) {
 				System.out.println(SKUnumber[i]);
 
@@ -12887,4 +12888,49 @@ return Number;
 		return details;
 	}
 
+	public void Remove_Free_Product() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+			int size=Common.findElements("xpath", "//div[@id='order-items_grid']//tbody").size();
+			System.out.println(size);
+			String remove="Remove";
+			for(int i=0;i<size;i++)
+			{
+				
+				Thread.sleep(4000);
+				  int products=Common.findElements("xpath", "//div[@id='order-items_grid']//tbody").size();
+				    for(int j=0;j<products;j++)
+				    {
+				    	int value=j+1;
+				System.out.println(value);
+				String free_Item=Common.findElement("xpath", "(//div[@id='order-items_grid']//tbody//td[@class='col-subtotal col-price']//span)["+ value +"]").getText().trim().replace("$", "");
+				System.out.println(free_Item);
+				System.out.println("(//div[@id='order-items_grid']//tbody//td[@class='col-subtotal col-price']//span)[" + value +"]");
+				Float free=Float.valueOf(free_Item);
+				System.out.println(free);
+				if(free==0.0)
+				{
+					System.out.println("(//div[@id='order-items_grid']//tbody//td[@class='col-actions last']//select)["+ value +"]");
+					Common.dropdown("xpath", "(//div[@id='order-items_grid']//tbody//td[@class='col-actions last']//select)["+ value +"]", Common.SelectBy.TEXT, remove);
+					Thread.sleep(4000);
+					Common.clickElement("xpath", "//button[@title='Update Items and Quantities']");
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");	
+					
+					
+				}
+				else
+				{
+					System.out.println(free);
+				}
+		}
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
 }
