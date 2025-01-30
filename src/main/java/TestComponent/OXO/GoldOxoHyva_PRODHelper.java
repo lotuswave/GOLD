@@ -11143,56 +11143,66 @@ public void header_1_Percent_Planet() {
 	}
 	
 	
-	public void WeAre_Oxo(String Dataset) {
-		String footer = data.get(Dataset).get("Footer Links");
-		String[] footerlinks = footer.split(",");
-		int i = 0;
-		try {
-			for (i = 0; i < footerlinks.length; i++) {
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				Sync.waitElementPresent(30, "xpath",
-						"//a[text()='"+footerlinks[i] +"']");
-				Thread.sleep(1000);
-				Common.findElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
-				Common.clickElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
-			
-				System.out.println(footerlinks[i]);
-				Common.assertionCheckwithReport(
-						Common.getPageTitle().contains(footerlinks[i])
-								|| Common.getCurrentURL().contains("/aboutus/")
-								|| Common.getCurrentURL().contains("chefs-in-residence")
-								|| Common.getCurrentURL().contains("Blog")
-								|| Common.getCurrentURL().contains("inventor-submissions")
-								|| Common.getCurrentURL().contains("oxo-affiliate-program")
-								|| Common.getCurrentURL().contains("1-percent/")
-								|| Common.getCurrentURL().contains("corporate-responsibility")
-								|| Common.getCurrentURL().contains("exclusive-savings"),
-						"validating the links navigation from footer Links",
-						"After Clicking on" + footerlinks[i] + "it should navigate to the",
-						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
-						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-				Thread.sleep(3000);
-				Common.navigateBack();
-				int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
-				System.out.println(size);
-				
-
-			}
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
-					"After Clicking on" + footerlinks[i] + "it should navigate to the",
-					footerlinks[i] + "Unable to Navigated to the" + footerlinks[i] + "Links",
-					Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
-			Assert.fail();
-		}
-
+	public void WeAre_Oxo(String dataset) {
+	    // Retrieve footer links from the dataset
+	    String footerLinksData = data.get(dataset).get("Footer Links");
+	    String[] footerLinks = footerLinksData.split(",");
+	    
+	    try {
+	        for (String linkText : footerLinks) {
+	            
+	            Sync.waitPageLoad();
+	            Sync.waitElementPresent(30, "xpath", String.format("//a[text()='%s']", linkText));
+	            
+	           
+	            Common.clickElement("xpath", String.format("//a[text()='%s']", linkText));
+	            Sync.waitPageLoad();
+	            
+	            // Log the link being tested
+	            System.out.println("Testing footer link: " + linkText);
+	            
+	            // Validate the navigation
+	            boolean isNavigationSuccessful = Common.getPageTitle().contains(linkText) ||
+	                                             Common.getCurrentURL().contains("/aboutus/") ||
+	                                             Common.getCurrentURL().contains("chefs-in-residence") ||
+	                                             Common.getCurrentURL().contains("Blog") ||
+	                                             Common.getCurrentURL().contains("inventor-submissions") ||
+	                                             Common.getCurrentURL().contains("oxo-affiliate-program") ||
+	                                             Common.getCurrentURL().contains("1-percent/") ||
+	                                             Common.getCurrentURL().contains("corporate-responsibility") ||
+	                                             Common.getCurrentURL().contains("exclusive-savings");
+	            
+	            Common.assertionCheckwithReport(
+	                isNavigationSuccessful,
+	                "Validating navigation from footer link",
+	                "After clicking on '" + linkText + "', it should navigate to the correct page.",
+	                "Successfully navigated to '" + linkText + "' page.",
+	                "Unable to navigate to '" + linkText + "' page."
+	            );
+	            
+	            // Navigate back to the previous page
+	            Common.navigateBack();
+	            Sync.waitPageLoad();
+	        }
+	    } catch (NoSuchElementException e) {
+	        ExtenantReportUtils.addFailedLog(
+	            "Element not found",
+	            "Expected footer link to be present",
+	            "Footer link '" + footerLinksData + "' not found.",
+	            Common.getscreenShot("FooterLinkNotFound")
+	        );
+	        Assert.fail("Footer link '" + footerLinksData + "' not found.", e);
+	    } catch (Exception e) {
+	        ExtenantReportUtils.addFailedLog(
+	            "Exception occurred",
+	            "Unexpected exception during footer link validation",
+	            e.getMessage(),
+	            Common.getscreenShot("ExceptionDuringFooterLinkValidation")
+	        );
+	        Assert.fail("Exception during footer link validation.", e);
+	    }
 	}
+
 	
 	
 	public void Newtab_Footerlinks(String dataset) {  
