@@ -1306,28 +1306,7 @@ else
 
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					
-					
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-					Common.scrollIntoView("xpath", "//button[@class='action primary checkout']");
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
-					Thread.sleep(10000);
-					if (Common.getCurrentURL().contains("/checkout/#payment")) {
-						Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-						Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-						Thread.sleep(5000);
-						Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-						Common.clickElement("xpath", "//button[@class='action primary checkout']");
-
-					} else if (Common.getCurrentURL().contains("/success/")) {
-						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
-						System.out.println(sucessmessage);
-					} else {
-						Assert.fail();
-					}
-
-				} else {
+				
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
@@ -1339,7 +1318,7 @@ else
 							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
 
-				}
+			
 
 			} else {
 				Thread.sleep(4000);
@@ -1383,26 +1362,7 @@ else
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				}
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Thread.sleep(5000);
-					Sync.waitElementPresent("xpath", "//button[contains(text(),'Place Order')]");
-					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
-					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
-					Thread.sleep(40000);
-					if (Common.getCurrentURL().contains("/checkout")) {
-						String sucessmessage = Common.getText("xpath",
-								"//div[contains(@class,'checkout-success')]//h1");
-						System.out.println(sucessmessage);
-
-					} else if (Common.getCurrentURL().contains("/success/")) {
-						String sucessmessage = Common.getText("xpath",
-								" //h1[normalize-space()='Thank you for your purchase!']");
-						System.out.println(sucessmessage);
-					} else {
-						Assert.fail();
-					}
-
-				} else {
+			
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
@@ -1414,9 +1374,6 @@ else
 							"User Failed to see the card deails in prod environemnt");
 					Common.switchToDefault();
 
-				}
-
-			
 
 		}
 
