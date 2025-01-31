@@ -3673,7 +3673,7 @@ public class OspreyEMEA_HYVA {
 
 		else {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(8000);
 				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
 				String sucessMessage = Common.getText("xpath",
 						"//div[contains(@class,'checkout-success')]//h1");
@@ -3835,10 +3835,10 @@ public class OspreyEMEA_HYVA {
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
 					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-						Thread.sleep(4000);
-						Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[1]");
-						Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[1]");
-						Thread.sleep(3000);
+						Thread.sleep(6000);
+						Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
+						Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
+						Thread.sleep(6000);
 						
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
