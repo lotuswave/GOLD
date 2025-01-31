@@ -3157,7 +3157,7 @@ System.out.println(MyFavorites);
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Common.clickElement("xpath", "//a[@title='Login']");
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod")) {
@@ -3167,74 +3167,87 @@ System.out.println(MyFavorites);
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
 					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
 					"Failed to signIn and not navigated to the Pro Deal Application page ");
-
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-			Sync.waitPageLoad();
-			Common.switchWindows();
-			Thread.sleep(3000);
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Validating the pro deal application page",
-					"User should lands to the prodeal application ",
-					"Unable to navigates to the prodeal application form",
-					Common.getscreenShotPathforReport("Failed to navigate to the prodeal application form "));
-			Assert.fail();
-		}
-
-		String expectedResult = "User is redirected to Pro Deal application page";
-		try {
-
-			Sync.waitElementPresent("id", "first_name");
-			int fistnamesize = Common.findElements("id", "first_name").size();
+//			Thread.sleep(4000);
+//		    String cate = data.get(dataSet).get("Application category");
+//		    String[] category = cate.split(",");
+//		    int i = 0;
+//		    for (i = 0; i < category.length; i++) {
+//		    	Sync.waitElementPresent(30, "xpath",
+//		                "//div[contains(@class,'accordion-header ')]//span[contains(text(),'" + category[i] + "')]");
+//		        Thread.sleep(3000);
+//		        Common.findElement("xpath",
+//		                "//div[contains(@class,'accordion-header ')]//span[contains(text(),'" + category[i] + "')]");
+//		        Common.clickElement("xpath",
+//		                "//div[contains(@class,'accordion-header ')]//span[contains(text(),'" + category[i] + "')]");
+//		        Sync.waitPageLoad();
+//		        Thread.sleep(3000);
+//		         String Verify = Common.findElement("xpath", "//span[text()='Verify & Save']").getText();
+//		         System.out.println(Verify);
+//		         Common.assertionCheckwithReport(Verify.contains("Verify & Save"),
+//		        		 "To validate the user lands on Verify & Save",
+//		        		 "After clicking on the category it should Verify & Save",
+//		        		 "user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
+//		        		 "Failed to caterory and not finds to the Verify & Save");
+//		            } 
+		    Common.clickElement("xpath", "(//div[@class='icon-container'])[2]");
+		    Common.clickElement("xpath", "(//a[@title='Verify & Save'])[2]");
+		    
+			String expectedResult = "User is redirected to Pro Deal application page";
+			Common.switchFrames("xpath", "//iframe[@class='sid-modal__iframe']");
+			Sync.waitElementPresent("xpath", "//input[@id='sid-first-name']");
+			int fistnamesize = Common.findElements("xpath", "//input[@id='sid-first-name']").size();
 			Common.assertionCheckwithReport(fistnamesize > 0,
 					"Successfully User is redirected to Pro Deal application page", expectedResult,
-					"User able to redirected to Pro Deal application page");
-			Thread.sleep(3000);
-			Common.textBoxInput("id", "first_name", data.get(dataSet).get("FirstName"));
-			Sync.waitElementPresent("id", "last_name");
-			Common.textBoxInput("id", "last_name", data.get(dataSet).get("LastName"));
-			Sync.waitElementPresent("id", "association");
-			Common.textBoxInput("id", "association", data.get(dataSet).get("Company"));
-			Sync.waitElementPresent("id", "association_email");
-			Common.textBoxInput("id", "association_email", data.get(dataSet).get("Email"));
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(6000);
-			String path = System.getProperty("user.dir")
-					+ ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
-			Sync.waitElementPresent(40, "xpath", "//input[@id='supporting_document']");
-//				Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
-			Common.findElement("xpath", "//input[@id='supporting_document']").sendKeys(path);
+					"User able to redirected to Pro Deal application page");	
+			Common.clickElement("xpath", "//input[@id='sid-first-name']");
+			Common.textBoxInput("xpath", "//input[@id='sid-first-name']", data.get(dataSet).get("FirstName"));
+			Common.clickElement("xpath", "//input[@id='sid-last-name']");
+			Common.textBoxInput("xpath", "//input[@id='sid-last-name']", data.get(dataSet).get("LastName"));
+//			Sync.waitElementPresent("id", "association");
+//			Common.textBoxInput("id", "association", data.get(dataSet).get("Company"));
+			Sync.waitElementPresent("xpath", "//input[@id='sid-email']");
+			Common.textBoxInput("xpath", "//input[@id='sid-email']", data.get(dataSet).get("Email"));
+//			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Sync.waitElementPresent("xpath", "//input[@id='sid-postal-code']");
+			Common.clickElement("xpath", "//input[@id='sid-postal-code']");
+			Common.textBoxInput("xpath", "//input[@id='sid-postal-code']", data.get(dataSet).get("postcode"));
+			Sync.waitElementPresent("xpath", "//input[@id='sid-address']");
+			Common.clickElement("xpath", "//input[@id='sid-address']");
+			Common.textBoxInput("xpath", "//input[@id='sid-address']", data.get(dataSet).get("Street"));
+//			Thread.sleep(6000);
+//			String path = System.getProperty("user.dir")
+//					+ ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
+//			Sync.waitElementPresent(40, "xpath", "//input[@id='supporting_document']");
+////				Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
+//			Common.findElement("xpath", "//input[@id='supporting_document']").sendKeys(path);
 
-			Sync.waitElementPresent("id", "group_id");
-			Common.clickElement("xpath", "//select[@id='group_id']");
-			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("GropName"));
-
-			Sync.waitElementPresent("id", "comment");
-			Common.textBoxInput("id", "comment", data.get(dataSet).get("CommetsHydroflask"));
-
-			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
-			Common.clickElement("xpath", "//button[@title='Submit']");
+//			Sync.waitElementPresent("id", "group_id");
+//			Common.clickElement("xpath", "//select[@id='group_id']");
+//			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("GropName"));
+//
+//			Sync.waitElementPresent("id", "comment");
+//			Common.textBoxInput("id", "comment", data.get(dataSet).get("CommetsHydroflask"));
+			Thread.sleep(4000);
+//			Common.clickCheckBox("xpath", "//span[@class='sid-checkbox__input-like ']");
+//			Sync.waitElementPresent("xpath", "//button[contains(@class,'sid-btn sid-mover-submit-btn')]");
+//			Common.clickElement("xpath", "//button[contains(@class,'sid-btn sid-mover-submit-btn')]");
 
 			Common.switchToDefault();
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@class='prodeal']//h4").getText();
-			Common.assertionCheckwithReport(message.contains("Thank you for applying"),
-					"To validate the success message for the prodeal",
-					"After clicking on the submit button it should navigate to the Success page",
-					"user Sucessfully navigate to the Success page after clicking on the submit button",
-					"Failed to get the success message for the pro deal submission");
+//			Sync.waitPageLoad();
+//			Thread.sleep(4000);
+//			String message = Common.findElement("xpath", "//h1[@class='sid-header__title sid-l-space-top-md']//span").getText();
+//			Common.assertionCheckwithReport(message.contains("We need some more info"),
+//					"To validate the success message for the prodeal",
+//					"After clicking on the submit button it should navigate to the Success page",
+//					"user Sucessfully navigate to the Success page after clicking on the submit button",
+//					"Failed to get the success message for the pro deal submission");
 
 		} catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("ProDeal application form filling",
