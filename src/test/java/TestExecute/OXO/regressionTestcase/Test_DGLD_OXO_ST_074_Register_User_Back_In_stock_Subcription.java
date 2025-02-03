@@ -35,7 +35,7 @@ public class Test_DGLD_OXO_ST_074_Register_User_Back_In_stock_Subcription {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

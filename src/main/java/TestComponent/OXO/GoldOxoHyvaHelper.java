@@ -8612,7 +8612,7 @@ public void header_1_Percent_Planet() {
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			
-			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[9]");
+			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[14]");
 			Common.scrollIntoView(video);
 	
 //			Common.actionsKeyPress(Keys.UP);
