@@ -4208,7 +4208,8 @@ catch(Exception | Error e)
 
 			else {
 				try {
-					Thread.sleep(6000);
+					Sync.waitPageLoad();
+					Thread.sleep(8000);
 					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
 					
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
