@@ -7038,6 +7038,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//div[@class='hidden lg:flex h-full']");
 			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
 			Common.clickElement("xpath", "//a[@title='My Account']");
+			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
 					"validating the page navigation to the my account",
 					"after clicking on the my account it should navigate to the my account page",
@@ -7046,8 +7047,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//span[text()='My Out of Stock Subscriptions']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(20, "xpath", "//a[@title='Steel Wine Chiller']");
-			String name = Common.findElement("xpath", "//a[@title='Steel Wine Chiller']").getText();
+			Sync.waitElementPresent(20, "xpath", "//a[@title='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
+			String name = Common.findElement("xpath", "//a[@title='OXO Ceramic Professional Non-Stick 12-Inch Frypan']").getText();
 			Common.assertionCheckwithReport(name.equals(products) || name.equals(prod),
 					"validating the outofstock produt in the subcribtion page",
 					"Product should be display in the subcribtion page",
@@ -8611,7 +8612,7 @@ public void header_1_Percent_Planet() {
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			
-			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[9]");
+			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[14]");
 			Common.scrollIntoView(video);
 	
 //			Common.actionsKeyPress(Keys.UP);
