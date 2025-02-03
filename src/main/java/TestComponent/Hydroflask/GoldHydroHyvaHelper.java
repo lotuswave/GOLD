@@ -427,6 +427,7 @@ public class GoldHydroHyvaHelper {
 //            Assert.assertEquals(PDPprice, Minicartprice);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+			Thread.sleep(6000);
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
@@ -5618,7 +5619,7 @@ catch(Exception | Error e)
 			System.out.println(country.size());
 			for (int i = 1; i < country.size(); i++) {
 
-				List<WebElement> select = Common.findElements("xpath", "//legend[text()='Europe']//parent::fieldset//div[@class='country-item flex gap-3']//p");
+				List<WebElement> select = Common.findElements("xpath", "//div[@class='country-list__item']//p//span");
 				Sync.waitPageLoad();
 				
 				Country = select.get(i).getText();
