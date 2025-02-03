@@ -26,6 +26,7 @@ public class Test_DGLD_DB_US_ST_046_Reset_Password_Validate_search_Guest_Checkou
 			Drybar.addtocart("PLP Product");
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
+			Drybar.remove_Free_Product_website();
 			Drybar.clickontheproduct_and_image("Product");
 			Drybar.minicart_delete("Product");                    
 			Drybar.minicart_validation("Product");	

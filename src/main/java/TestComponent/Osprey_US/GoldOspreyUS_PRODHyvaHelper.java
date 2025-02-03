@@ -3078,8 +3078,8 @@ public void header_Shopbycollection(String Dataset) { {
 			System.out.println(size);
 			if (size > 0  ) {
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ method +"')]");
-				Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
+				Sync.waitElementPresent("xpath", "//div[@id='shipping-method-list']///span[contains(text(),'"+ method +"')]");
+				Common.clickElement("xpath", "//div[@id='shipping-method-list']///span[contains(text(),'"+ method +"')]");
 			}
 			else
 			{

@@ -5887,6 +5887,35 @@ public void FUll_Payment(String dataSet) {
     		}
 
     	}
+        
+        
+        public void remove_Free_Product_website() {
+    		// TODO Auto-generated method stub
+    		try
+    		{
+    			int products=Common.findElements("xpath", "//button[contains(@aria-label,'Remove FREE')]").size();
+    			for(int i=0;i<products;i++)
+    			{
+    				Thread.sleep(6000);
+    					Common.clickElement("xpath", "//button[contains(@aria-label,'Remove FREE')]");
+    					Thread.sleep(6000);
+    					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
+    					Sync.waitPageLoad();
+    					Thread.sleep(7000);
+    					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+    					Thread.sleep(4000);
+    					
+    				}
+    			System.out.println("free Products Removed or products are not avaliable");
+    			
+    		}
+    		catch(Exception | Error e)
+    		{
+    			e.printStackTrace();
+    			Assert.fail();
+    		}
+    		
+    	}
         public String reg_outofstock_subcription(String Dataset) {
     		// TODO Auto-generated method stub
     		String products = data.get(Dataset).get("oss Product");

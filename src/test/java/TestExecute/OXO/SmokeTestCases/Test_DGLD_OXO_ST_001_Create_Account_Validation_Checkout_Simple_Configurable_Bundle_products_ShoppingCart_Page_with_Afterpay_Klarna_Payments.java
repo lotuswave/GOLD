@@ -25,7 +25,7 @@ public class Test_DGLD_OXO_ST_001_Create_Account_Validation_Checkout_Simple_Conf
 			Oxo.create_account("New Account Details");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
-			Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.search_product("ConfigProduct");
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 			Oxo.search_product("Bundle");
 			Oxo.addtocart("Bundle");
