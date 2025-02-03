@@ -9896,8 +9896,8 @@ public void Continue_Shopping() {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
-			Common.clickElement("xpath", "//span[text()='Back to Cart']");
+			Sync.waitElementVisible(30, "xpath", "//span[text()='Back To Cart']");
+			Common.clickElement("xpath", "//span[text()='Back To Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
