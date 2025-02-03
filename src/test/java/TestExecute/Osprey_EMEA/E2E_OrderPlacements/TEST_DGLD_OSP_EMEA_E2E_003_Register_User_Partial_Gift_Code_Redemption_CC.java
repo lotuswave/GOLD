@@ -11,17 +11,17 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_E2E_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OSP_EMEA_E2E_003_Partial_Gift_Code_Redemption_CC {
+public class TEST_DGLD_OSP_EMEA_E2E_003_Register_User_Partial_Gift_Code_Redemption_CC {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Osprey_E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Partial_Gift_Code_Redemption_CC  () throws Exception {
+	public void Verifying_Register_User_Partial_Gift_Code_Redemption_CC  () throws Exception {
 
 		try {
 		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
-		String Description ="Partial Gift Code Redemption(The gift code should be placed above the product 1 quantity price) + CC";
+		String Description ="Register_User_Partial Gift Code Redemption(The gift code should be placed above the product 1 quantity price) + CC";
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
