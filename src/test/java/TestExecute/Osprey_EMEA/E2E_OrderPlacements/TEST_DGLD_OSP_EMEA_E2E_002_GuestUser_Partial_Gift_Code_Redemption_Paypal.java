@@ -23,10 +23,10 @@ public class TEST_DGLD_OSP_EMEA_E2E_002_GuestUser_Partial_Gift_Code_Redemption_P
 		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Guest user - Partial Gift Code Redemption(The gift code should be placed above the product 1 quantity price) + Paypal";
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("10002928 - 1");
-        Osprey_ReEu.addtocart("10002928 - 1");
-        Osprey_ReEu.search_product("10004998 -1");
-        Osprey_ReEu.addtocart("10004998 -1");
+        Osprey_ReEu.search_product("10002928 - 2");
+        Osprey_ReEu.addtocart("10002928 - 2");
+        Osprey_ReEu.search_product("10004998 -2");
+        Osprey_ReEu.addtocart("10004998 -2");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");      

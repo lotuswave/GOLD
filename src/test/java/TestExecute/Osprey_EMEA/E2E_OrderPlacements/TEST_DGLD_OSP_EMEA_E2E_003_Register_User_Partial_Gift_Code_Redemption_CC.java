@@ -25,8 +25,10 @@ public class TEST_DGLD_OSP_EMEA_E2E_003_Register_User_Partial_Gift_Code_Redempti
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("10004998 -10");
-        Osprey_ReEu.addtocart("10004998 -10");
+        Osprey_ReEu.search_product("10002928 - 2");
+        Osprey_ReEu.addtocart("10002928 - 2");
+        Osprey_ReEu.search_product("10004998 -2");
+        Osprey_ReEu.addtocart("10004998 -2");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");      
