@@ -7348,8 +7348,8 @@ catch(Exception | Error e)
 		try {
 			Common.findElement("xpath", "//a[@aria-label='" + browse + "']").click();
 			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//div[@class='cat-active-filter-container']");
-			int filterSize = Common.findElements("xpath", "//div[@class='cat-active-filter-container']").size();
+			Sync.waitElementPresent("xpath", "//header[@aria-label='Department Filters']");
+			int filterSize = Common.findElements("xpath", "//header[@aria-label='Department Filters']").size();
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Sync.waitPageLoad();
