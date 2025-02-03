@@ -420,10 +420,10 @@ public class GoldHydroHyvaHelper {
             String Checkoutprice="";
 		try {
 			Thread.sleep(4000);
-			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-            System.out.println(PDPprice);
-            String Minicartprice=Common.findElement("xpath", "//span[contains(@class,'text-sm leading')]//span[@class='price']").getText();
-            System.out.println(Minicartprice);
+//			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
+//            System.out.println(PDPprice);
+//            String Minicartprice=Common.findElement("xpath", "//span[contains(@class,'text-sm leading')]//span[@class='price']").getText();
+//            System.out.println(Minicartprice);
 //            Assert.assertEquals(PDPprice, Minicartprice);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
