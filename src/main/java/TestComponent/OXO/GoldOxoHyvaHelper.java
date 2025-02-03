@@ -651,6 +651,34 @@ public class GoldOxoHyvaHelper {
 		}
 
 	}
+	
+	public void remove_Free_Product_website() {
+		// TODO Auto-generated method stub
+		try
+		{
+			int products=Common.findElements("xpath", "//button[contains(@aria-label,'Remove FREE')]").size();
+			for(int i=0;i<products;i++)
+			{
+				Thread.sleep(6000);
+					Common.clickElement("xpath", "//button[contains(@aria-label,'Remove FREE')]");
+					Thread.sleep(6000);
+					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
+					Sync.waitPageLoad();
+					Thread.sleep(7000);
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Thread.sleep(4000);
+					
+				}
+			System.out.println("free Products Removed or products are not avaliable");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
 
 	public void minicart_Checkout() {
 
@@ -1011,8 +1039,9 @@ public class GoldOxoHyvaHelper {
 		try {
 			Common.clickElement("xpath", "//div[@class='flex justify-end']//a[@title='Edit Perch Booster Seat With Straps']");      // need to click on the color product
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//input[@aria-label='" + productcolor1 + "']");
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[contains(text(),'Update item')]");

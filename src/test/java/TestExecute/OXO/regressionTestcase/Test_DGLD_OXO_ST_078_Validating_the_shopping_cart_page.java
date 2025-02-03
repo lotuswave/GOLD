@@ -27,6 +27,7 @@ public class Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page {
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 			Oxo.click_minicart();
 			Oxo.minicart_viewcart();
+			Oxo.remove_Free_Product_website();
 			Oxo.update_shoppingcart("Product Qunatity");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
