@@ -2257,7 +2257,7 @@ public void header_Shopbycollection(String Dataset) { {
 		String products = data.get(Dataset).get("Products");
 		String prodproduct = data.get(Dataset).get("Prod Product");
 		String productcolor = data.get(Dataset).get("Color");
-		String prodcolor = data.get(Dataset).get("ProdColor");
+		String prodcolor = data.get(Dataset).get("Colorproduct");
 		String Productsize = data.get(Dataset).get("Size");
 		String symbol=data.get(Dataset).get("Symbol");
 		System.out.println(symbol);
