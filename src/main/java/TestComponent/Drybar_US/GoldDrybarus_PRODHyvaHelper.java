@@ -2572,7 +2572,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(5000);
-			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[1]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
