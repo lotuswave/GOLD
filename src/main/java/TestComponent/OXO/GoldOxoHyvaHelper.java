@@ -2787,9 +2787,8 @@ public String create_account(String Dataset) {
 
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Sign Up']");
 			Common.clickElement("xpath", "//span[text()='Sign Up']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[text()='Thank you for registering with OXO Store.']");
+		
+			Sync.waitElementVisible(50,"xpath", "//span[text()='Thank you for registering with OXO Store.']");
 			String message = Common.findElement("xpath", "//span[text()='Thank you for registering with OXO Store.']")
 					.getText();
 			Common.assertionCheckwithReport(
