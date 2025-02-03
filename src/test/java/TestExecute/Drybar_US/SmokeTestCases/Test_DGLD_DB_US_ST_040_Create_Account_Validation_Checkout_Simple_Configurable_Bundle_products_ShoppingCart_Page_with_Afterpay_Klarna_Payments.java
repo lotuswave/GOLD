@@ -36,7 +36,7 @@ public class Test_DGLD_DB_US_ST_040_Create_Account_Validation_Checkout_Simple_Co
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.Shoppingcart_page();
-			Drybar.minicart_ordersummary_discount("Discount");
+//			Drybar.minicart_ordersummary_discount("Discount"); As discount code is not available this method has been commented
 			Drybar.minicart_Checkout();
 			Drybar.Kalrna_Payment("Klarna Visa Payment");
 	        Drybar.After_Pay_payment("Afterpay");
