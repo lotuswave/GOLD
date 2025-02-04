@@ -15476,7 +15476,7 @@ public void deleteProduct_shoppingcart() {
 		for(int i=0;i<size;i++)
 		{
 			int value=i+1;
-		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])['" +value+ "']");
+		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])[1']");
 		Thread.sleep(2000);
 		Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
 		Sync.waitPageLoad();
@@ -15497,7 +15497,26 @@ public void deleteProduct_shoppingcart() {
 				Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
 		Assert.fail();
 	}
-	
+}
+	public void paypal_close() {
+        // TODO Auto-generated method stub
+	    try {
+	           Common.closeCurrentWindow();
+	           Common.switchToFirstTab();
+	           String open = Common.getCurrentURL(); 
+	          Common.assertionCheckwithReport(open.contains("checkout"),
+	            "Validating navigation back to the checkout page",
+	            "The user should be redirected to the checkout page successfully",
+	            "User successfully navigated back to the checkout page",
+	            "Navigation to the checkout page validated successfully"  );
+	    } catch (Exception | Error e) {
+	                ExtenantReportUtils.addFailedLog(
+	            "Validating navigation back to the checkout page",
+	            "Entering into the checkout page",
+	            Common.getscreenShot("Failed to navigate to the checkout page")
+	        );
+	        Assert.fail();
+	    }
 }
 }
 

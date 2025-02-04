@@ -5,14 +5,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
+import TestComponent.Osprey_EMEA.OspreyEMEA_PRODHYVA;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_EU_006_Guest_user_checkout_PayPal_with_Multiple_products_Validate_the_ShoppingCart_with_Discount_samebilling_and_shipping_Login_from_Shipping_Page_Registeruser_Checkout_with_PayPal {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
+	OspreyEMEA_PRODHYVA Osprey_ReEu = new OspreyEMEA_PRODHYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Guest_user_checkout_PayPal_with_Multiple_products_Validate_the_ShoppingCart_with_Discount_samebilling_and_shipping_Login_from_Shipping_Page_Registeruser_Checkout_with_PayPal () throws Exception {
