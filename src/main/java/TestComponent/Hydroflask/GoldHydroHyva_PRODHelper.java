@@ -8972,10 +8972,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					
 
 				}
-				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
-				Common.clickElement("xpath", "//a[@title='Sign Out']");
-				Thread.sleep(4000);
-				verifingHomePage();
+			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 				ExtenantReportUtils.addFailedLog("validating the account page links " + Account[i],
