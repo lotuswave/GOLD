@@ -31,20 +31,18 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 		      Osprey_ReEu.header_Shopbyactivity("Shop by Activity");       
 		      Osprey_ReEu.header_Shopbycollection("Shop by Collections"); 
 		      Osprey_ReEu.Featured_ShopAll("FeaturedShopAll");                        
-		      Osprey_ReEu.header_ChristmasGift("ChristmasGift");                               
+		   //   Osprey_ReEu.header_ChristmasGift("ChristmasGift");             //please comment this line                          
 		      Osprey_ReEu.header_Icons("Icons");
 		      Osprey_ReEu.header_Shopby_Litres("Shop by Litres");
 		      Osprey_ReEu.header_Explore("Explore");
 		      Osprey_ReEu.header_New_Season();  
-		      Osprey_ReEu.header_sale();  
+		      Osprey_ReEu.Header_Sale("Sale");
 		        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
-
 
 	@AfterTest
 	public void clearBrowser() {
@@ -54,7 +52,7 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
         
 

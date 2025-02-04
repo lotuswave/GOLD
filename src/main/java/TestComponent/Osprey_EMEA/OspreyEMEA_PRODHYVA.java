@@ -2702,15 +2702,15 @@ public class OspreyEMEA_PRODHYVA {
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
-//				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
-//				Common.clickElement("xpath", "//input[@id='shipping-save']");
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
+				int Size= Common.findElements("id", "shipping-save").size();
+				if (Size>0) {
+					Common.clickElement("id", "shipping-save");
+				}
+				else {
+				System.out.println("New Registered User");	
+				}
+//				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
 
-//				
-//                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
-//						"user will fill the all the shipping", "user fill the shiping address click save button",
-//						"faield to add new shipping address");
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -15433,7 +15433,7 @@ public void deleteProduct_shoppingcart() {
 		for(int i=0;i<size;i++)
 		{
 			int value=i+1;
-		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])[1']");
+		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])[1]");
 		Thread.sleep(2000);
 		Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
 		Sync.waitPageLoad();
@@ -15474,6 +15474,60 @@ public void deleteProduct_shoppingcart() {
 	        );
 	        Assert.fail();
 	    }
+}
+
+	public void Header_Sale(String Dataset) {{
+
+	String names = data.get(Dataset).get("Sale");
+	String[] Links = names.split(",");
+	String name = data.get(Dataset).get("Sale").toUpperCase();
+	String[] Link = name.split(",");
+	int i = 0;
+	try {
+		    for (i = 0; i < Links.length; i++) {
+		    Sync.waitElementPresent("xpath", "//span[contains(text(),'Sale')]");
+		    Common.clickElement("xpath", "//span[contains(text(),'Sale')]");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.findElement("xpath", "//div[contains(@class,'hero')]//h1").getText();
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+			Thread.sleep(4000);
+			String products=Common.getText("xpath", "(//div[@id='algolia-stats-top']//span)[1]");
+			System.out.println(products);			
+			int Number = Integer.parseInt(products);
+			int j=0;
+			if(Number>j)
+			{
+			Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || 
+					 breadcrumbs.contains(Link[i])||Common.getCurrentURL().contains("sale"),
+					"verifying the header link " + Links[i] + "Under Sale",
+					"user should navigate to the " + Links[i] + " page",
+					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+			}
+			else
+			{
+				ExtenantReportUtils.addFailedLog(
+						"validating the the products in the plp ",
+						"User should able to see the products in plp", "unable to see the products in the PLP",
+						Common.getscreenShot("Failed to see products in PLP"));
+				Assert.fail();
+			}
+		}
+	}
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Sale",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+		}
+	}
 }
 }
 
