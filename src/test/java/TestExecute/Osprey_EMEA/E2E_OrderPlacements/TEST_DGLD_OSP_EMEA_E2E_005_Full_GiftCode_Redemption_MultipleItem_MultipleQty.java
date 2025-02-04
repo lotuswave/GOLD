@@ -25,8 +25,12 @@ public class TEST_DGLD_OSP_EMEA_E2E_005_Full_GiftCode_Redemption_MultipleItem_Mu
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("10003675-2");
-        Osprey_ReEu.addtocart("10003675-2");
+        Osprey_ReEu.search_product("10002925-2");
+        Osprey_ReEu.addtocart("10002925-2");
+        Osprey_ReEu.search_product("10002926 -2");
+        Osprey_ReEu.addtocart("10002926 -2");
+        Osprey_ReEu.search_product("10004993- 2");
+        Osprey_ReEu.addtocart("10004993- 2");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");      
