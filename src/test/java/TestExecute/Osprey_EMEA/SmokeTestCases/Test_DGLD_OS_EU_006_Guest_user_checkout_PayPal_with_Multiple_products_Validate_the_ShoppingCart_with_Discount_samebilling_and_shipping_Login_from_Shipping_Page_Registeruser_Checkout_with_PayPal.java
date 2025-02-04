@@ -33,8 +33,11 @@ public class Test_DGLD_OS_EU_006_Guest_user_checkout_PayPal_with_Multiple_produc
         Osprey_ReEu.Shoppingcart_page();
         Osprey_ReEu.minicart_ordersummary_discount("Discount");
         Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.payPal_Payment("PaypalDetails");
+        Osprey_ReEu.paypal_close();
         Osprey_ReEu.Signin_Checkoutpage("Account");
         Osprey_ReEu.payPal_Payment("PaypalDetails");
+        Osprey_ReEu.paypal_close();
         Osprey_ReEu.Shoppingcart_page();
         Osprey_ReEu.deleteProduct_shoppingcart();
         
