@@ -3285,7 +3285,7 @@ System.out.println(MyFavorites);
 		try
 		{
 			
-				Common.clickElement("xpath", "//span[contains(text(),'Holiday Shop')]");
+				Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Cards']");
 				Common.clickElement("xpath", "//span[text()='Gift Cards']");
 //				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
@@ -3357,6 +3357,41 @@ System.out.println(MyFavorites);
 			AssertJUnit.fail();
 		}
 	}
+	
+	public void Send_LaterCard_Value(String Dataset) {
+		// TODO Auto-generated method stub
+		String amount=data.get(Dataset).get("Card Amount");
+		try
+		{
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//label[contains(@class,'amcard-label-block -price')]//span[text()='"+ amount +"']");
+			Common.clickElement("xpath", "//label[contains(@class,'amcard-label-block -price')]//span[text()='"+ amount +"']");
+			String Amount=Common.findElement("xpath", "(//span[@class='price'])[1]").getText();
+			Assert.assertEquals(Amount,amount);
+			Giftcard_details("Gift Details");
+			product_quantity("Product Qunatity");
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "(//input[@id='is_date_delivery'])[2]");
+			
+			Common.clickElement("xpath", "(//input[@id='is_date_delivery'])[2]");
+			
+			Common.textBoxInput("name", "am_giftcard_date_delivery", data.get(Dataset).get("DeliveryDate"));
+			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
+					"Unable to add the product to the cart", Common.getscreenShot("Failed the product Add to cart from the PDP"));
+			AssertJUnit.fail();
+		}
+	}
+	
+	
 	public void Giftcard_details(String Dataset) {
 		// TODO Auto-generated method stub
 		String Giftmessage=data.get(Dataset).get("message");
