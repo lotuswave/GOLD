@@ -2257,7 +2257,7 @@ public void header_Shopbycollection(String Dataset) { {
 		String products = data.get(Dataset).get("Products");
 		String prodproduct = data.get(Dataset).get("Prod Product");
 		String productcolor = data.get(Dataset).get("Color");
-		String prodcolor = data.get(Dataset).get("Colorproduct");
+		String prodcolor = data.get(Dataset).get("Prodcolor");
 		String Productsize = data.get(Dataset).get("Size");
 		String symbol=data.get(Dataset).get("Symbol");
 		System.out.println(symbol);
@@ -3050,11 +3050,15 @@ public void header_Shopbycollection(String Dataset) { {
 				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
-				Common.clickElement("id", "shipping-save");
-				
-				
-				
-
+				int Size= Common.findElements("id", "shipping-save").size();
+				if (Size>0) {
+					Common.clickElement("id", "shipping-save");
+				}
+				else {
+					
+				System.out.println("New Registered User");	
+				}
+			
 			} catch (Exception | Error e) {
 				e.printStackTrace();
 
@@ -9045,8 +9049,11 @@ public void Continue_Shopping() {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
 		String Prodprod=data.get(Dataset).get("Prod Product");
+		String BreadCrum= "";
 		try {
 			Sync.waitPageLoad();
+			
+			BreadCrum =Common.findElement("xpath","(//a[@class='no-underline text-black hover:underline'])[2]").getText();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
@@ -9071,7 +9078,8 @@ public void Continue_Shopping() {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			}
-			else if(Common.findElement("xpath","(//a[@class='no-underline text-black hover:underline'])[2]").getText().contains("BACKPACKS & BAGS"))
+			 
+			else if(BreadCrum.contains("BACKPACKS & BAGS")|| BreadCrum.contains("ACCESSORIES"))
 			{
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
 				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
@@ -9718,8 +9726,8 @@ public void Continue_Shopping() {
 					"Successfully open the discount input box", "User unable enter Discount Code");
 			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
 			Common.clickElement("xpath", "//button[@value='Apply Discount']");
-			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			
+			Sync.waitElementVisible(50,"xpath", "//span[@x-html='message.text']");
 			Common.scrollIntoView("xpath", "//span[@x-html='message.text']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[@x-html='message.text']");
@@ -9738,7 +9746,7 @@ public void Continue_Shopping() {
 			    String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace("$", ""); 
 			    BigDecimal subtotalValue = new BigDecimal(Subtotal).setScale(2, BigDecimal.ROUND_HALF_UP); 
 			    
-		        String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']").replace("$", "").replace("- ", "");
+		        String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']").replace("-$", "");
 		        BigDecimal discountValue = new BigDecimal(Discount).setScale(2, BigDecimal.ROUND_HALF_UP);
 		        
 		        String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']").replace("$", ""); 
@@ -9746,13 +9754,17 @@ public void Continue_Shopping() {
 		        
 		        String Shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]").replace("$", "");  
 		        BigDecimal ShippingValue = new BigDecimal(Shipping).setScale(2, BigDecimal.ROUND_HALF_UP);
+		        
+		        String Tax = Common.getText("xpath", "//div[@class='w-5/12 text-right md:w-auto' and @x-text=\"segment.value == 0 ? '-' : hyva.formatPrice(segment.value)\"]").replace("$", "");  
+		        BigDecimal TaxValue = new BigDecimal(Tax).setScale(2, BigDecimal.ROUND_HALF_UP);
 		        Thread.sleep(3000);
 		        
-		        BigDecimal Total = (subtotalValue.add(ShippingValue)).subtract(discountValue).setScale(2, BigDecimal.ROUND_HALF_UP); 
+		        BigDecimal Total = (subtotalValue.add(ShippingValue).add(TaxValue)).subtract(discountValue).setScale(2, BigDecimal.ROUND_HALF_UP); 
 		        
 		        System.out.println("Subtotal: " + subtotalValue);  
 		        System.out.println("Discount: " + discountValue);
 		        System.out.println("Shipping:"  +ShippingValue);
+		        System.out.println("Tax:"  +TaxValue);
 		        System.out.println("Total: " + Total);  
 		        System.out.println("Order Total Value: " + orderTotalValue); 
 		        
@@ -11113,7 +11125,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 				{
 					Thread.sleep(4000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
+					String klarna=Common.findElement("xpath", "//button[@id='klarna-tab']").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
 							klarna.contains("klarna"),
