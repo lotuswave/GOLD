@@ -33,7 +33,7 @@ public class Test_DGLD_HYF_ST_040_Create_Account_Validation_Checkout_Simple_Conf
 			Hydro.update_shoppingcart("Product Qunatity");
 			Hydro.Edit_Engraving_to_Graphic("Engraving Product");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.back_to_cart();
 			Hydro.minicart_ordersummary_discount("Discount");
