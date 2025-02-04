@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HYF_ST_022_Guest_User_Checkout_with_Gift_Card_Code {
+public class TEST_DGLD_HYF_ST_022_Guest_User_Checkout_with_Multiple_Gift_Card_Codes {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
@@ -29,6 +29,7 @@ public class TEST_DGLD_HYF_ST_022_Guest_User_Checkout_with_Gift_Card_Code {
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.invalid_Gift_card("Giftcard");         
             Hydro.Gift_card("Giftcard");
+            Hydro.Gift_card("Giftcard1");
 			Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
