@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO Prod Smoke Suite" parallel="false" thread-count="2">
+	<listeners>
+		<listener class-name="Utilities.TestListener" />
+	</listeners>
+	
+		<test name="smoke Test 1">
+		<!--  <parameter  name="browser" value="chrome" /> -->
+		<classes>
+		<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" />
+		</classes>
+		</test>
+		
+		 <test name="smoke Test 2">
+		<!--  <parameter  name="browser" value="chrome" /> -->
+		<classes>
+		<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_033_Register_user_Checkout_with_Different_Shipping_Methods_and_validate_CC_and_PayPal" />
+		</classes>
+		</test>  
+		
+		 <test name="smoke Test 3">
+		<!--  <parameter  name="browser" value="chrome" /> -->
+		<classes>
+		<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase" />
+		</classes>
+		</test>
+		
+		
+ 		</suite>
