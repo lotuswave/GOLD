@@ -5074,7 +5074,7 @@ catch(Exception | Error e)
 			}
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+			Common.mouseOverClick("xpath", "//img[@alt='" + products + "']");
 
 //		Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add to Cart']");
