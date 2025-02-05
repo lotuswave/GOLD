@@ -19,7 +19,7 @@ public class Test_DGLD_HF_ST_000_Order_Placement {
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"order_Placement");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_Guest_Checkout_Funtionality_Visa_card () {
 
 		try {
 			FileInputStream datafile = new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\resources\\TestData\\Hydroflask\\GoldHydroTestData1.xlsx");

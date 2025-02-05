@@ -2905,9 +2905,14 @@ System.out.println(MyFavorites);
 	public void RegaddDeliveryAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
+		
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
+				if(Common.getCurrentURL().contains("stage"))
+				{
+					Thread.sleep(8000);
+				}
 				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
@@ -12528,7 +12533,7 @@ public void Explore_Validation(String Dataset) {
 	cell.setCellValue("Lotuswave");
 	
 	String status;
-	if(Ordernumber.contains("400"))
+	if(Ordernumber.contains("HYFUSSTG40"))
 	{
 
 	status="PASS";
