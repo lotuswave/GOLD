@@ -2940,7 +2940,7 @@ System.out.println(MyFavorites);
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full']");
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
