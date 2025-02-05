@@ -7133,16 +7133,19 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
 				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
 				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.clickElement("xpath","//span[text()='Welcome, Qa']");
-				Common.clickElement("id", "customer-menu");
-				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
-				Common.clickElement("xpath", "//a[@title='My Favorites']");
-				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
+				
+				Sync.waitElementPresent(30, "xpath", "//span[@x-html='message.text']");
+				String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 				System.out.println(message);
 				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
 						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 			
+				Common.clickElement("xpath","//span[@x-text='customerGreeting']");
+				Common.clickElement("id", "customer-menu");
+				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
+				Common.clickElement("xpath", "//a[@title='My Favorites']");
+				
 				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
@@ -7154,8 +7157,7 @@ catch(Exception | Error e)
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Sync.waitElementPresent(30, "xpath", "//span[text()='Your wish list has been shared.']");
 				String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
 				System.out.println(message1);
 				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
