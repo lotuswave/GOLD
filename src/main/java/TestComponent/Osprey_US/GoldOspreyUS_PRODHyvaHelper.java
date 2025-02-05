@@ -468,9 +468,9 @@ public void Login_Account(String dataSet) {
 						for (i = 0; i < Account.length; i++) {
 							System.out.println(Account[i]);
 							Sync.waitElementPresent("xpath",
-									"//div[@class='content account-nav-content']//a[text()=" + Account[i] +"]");
+									"//aside[@class='sidebar sidebar-main']//span[text()='" + Account[i] +"']");
 							Common.clickElement("xpath",
-									"//div[@class='content account-nav-content']//a[text()=" + Account[i] +"]");
+									"//aside[@class='sidebar sidebar-main']//span[text()='" + Account[i] +"']");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							String currentUrl=Common.getCurrentURL();
@@ -479,7 +479,7 @@ public void Login_Account(String dataSet) {
 									currentUrl.contains("sales/order/history")|| currentUrl.contains("wishlist")||currentUrl.contains("customer/address")
 									|| currentUrl.contains("customer/address")|| currentUrl.contains("customer/account/edit")|| currentUrl.contains("stripe/customer/paymentmethods")
 									|| currentUrl.contains("storecredit/info")|| currentUrl.contains("reward/customer/info")|| currentUrl.contains("giftregistry")
-									|| currentUrl.contains("xnotif/stock/index")|| currentUrl.contains("newsletter/manage")|| currentUrl.contains("amgcard/account")|| currentUrl.contains("prodeal/application/account"),
+									|| currentUrl.contains("xnotif/stock/index")|| currentUrl.contains("newsletter")|| currentUrl.contains("amgcard/account")|| currentUrl.contains("prodeal/application/account"),
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
