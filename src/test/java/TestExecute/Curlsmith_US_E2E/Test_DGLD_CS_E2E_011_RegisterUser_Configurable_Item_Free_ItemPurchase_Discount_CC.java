@@ -22,6 +22,8 @@ public class Test_DGLD_CS_E2E_011_RegisterUser_Configurable_Item_Free_ItemPurcha
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
 			String Description = "Register user Configurable Item + Free item Purchase + Discount (Should be applied to Regular item only) + CC";
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.online_Store();
 			curlsmith.verify_Homepage();
 			curlsmith.Register_user_Login("AccountDetails");
 			curlsmith.search_product("Configurable Product");
@@ -32,7 +34,6 @@ public class Test_DGLD_CS_E2E_011_RegisterUser_Configurable_Item_Free_ItemPurcha
 			String Discountcode = "TESTOD";
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
-			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),

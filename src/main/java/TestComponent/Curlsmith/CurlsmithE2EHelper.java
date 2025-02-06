@@ -338,8 +338,8 @@ public class CurlsmithE2EHelper {
 			Common.textBoxInput("xpath", "//input[@name='address1' and @placeholder]", address);
 			Sync.waitElementPresent("xpath", "//input[@name='city' and @placeholder]");
 			Common.textBoxInput("xpath", "//input[@name='city' and @placeholder]", data.get(dataSet).get("City"));
-			Sync.waitElementPresent("xpath", "//select[@id='Select1']");
-			Common.dropdown("xpath", "//select[@id='Select1']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			Sync.waitElementPresent("xpath", "//select[@name='zone']");
+			Common.dropdown("xpath", "//select[@name='zone']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			Sync.waitElementPresent("xpath", "//input[@name='postalCode' and @placeholder]");
 			Common.textBoxInput("xpath", "//input[@name='postalCode' and @placeholder]",
 					data.get(dataSet).get("postcode"));

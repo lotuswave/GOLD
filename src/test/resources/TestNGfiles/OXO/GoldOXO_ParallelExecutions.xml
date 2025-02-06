@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-OXO Prod Smoke Suite" parallel="false" thread-count="2">
+<suite name="Gold-OXO Prod Smoke Suite" parallel="tests" thread-count="2">
 	<listeners>
 		<listener class-name="Utilities.TestListener" />
 	</listeners>

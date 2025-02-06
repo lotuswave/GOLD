@@ -22,6 +22,8 @@ public class Test_DGLD_CS_E2E_013_RegisterUser_Bundle_items_Add_sameChildSimpleP
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
 			String Description = "Register User Bundle items + Add same Child Simple Product + Discount + CC";
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.online_Store();
 			curlsmith.verify_Homepage();
 			curlsmith.Register_user_Login("AccountDetails");
 			curlsmith.search_product("Bundle_Product");
@@ -33,7 +35,6 @@ public class Test_DGLD_CS_E2E_013_RegisterUser_Bundle_items_Add_sameChildSimpleP
 			String Discountcode = "TESTOD";
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
-			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),

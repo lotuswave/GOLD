@@ -22,6 +22,8 @@ public class Test_DGLD_CS_E2E_008_RegisterUser_Checkout_2line_Item_Price_Above35
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
 			String Description = "Register user checkout with 2line item + Price >35$ + freeshipping +CC";
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.online_Store();
 			curlsmith.verify_Homepage();
 			curlsmith.Register_user_Login("AccountDetails");
 			curlsmith.search_product("Configurable Product_2");
@@ -34,7 +36,6 @@ public class Test_DGLD_CS_E2E_008_RegisterUser_Checkout_2line_Item_Price_Above35
 			curlsmith.select_Shipping_Method();
 			curlsmith.Validating_FreeShipping();
 			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
-			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),

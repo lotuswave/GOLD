@@ -22,6 +22,8 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_Simple_Configurable_Pr
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
 			String Description = "Guest user checkout with Simple + Configurable products with Quantity one each + CC";
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.online_Store();
 			curlsmith.verify_Homepage();
 			curlsmith.search_product("Simple_Product");
 			curlsmith.Simple_Addtocart("Simple_Product");
@@ -32,7 +34,6 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_Simple_Configurable_Pr
 			String Discountcode = "Null";
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
-			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),
@@ -46,7 +47,7 @@ public class Test_DGLD_CS_E2E_001_GuestUser_Checkout_with_Simple_Configurable_Pr
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

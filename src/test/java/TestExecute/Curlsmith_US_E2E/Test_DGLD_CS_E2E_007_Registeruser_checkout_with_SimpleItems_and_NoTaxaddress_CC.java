@@ -22,6 +22,8 @@ public class Test_DGLD_CS_E2E_007_Registeruser_checkout_with_SimpleItems_and_NoT
 		try {
 			curlsmith.prepareOrdersData("CurlsmithUS_E2E_orderDetails.xlsx");
 			String Description = "Registeruser_checkout_with_SimpleItems_and_NoTaxaddress_CC";
+			curlsmith.admin_Sigin("Admin Account Details");
+			curlsmith.online_Store();
 			curlsmith.verify_Homepage();
 			curlsmith.Register_user_Login("AccountDetails");
 			curlsmith.search_product("Simple_Product");
@@ -31,7 +33,6 @@ public class Test_DGLD_CS_E2E_007_Registeruser_checkout_with_SimpleItems_and_NoT
 			String Discountcode = "Null";
 			curlsmith.select_Shipping_Method();
 			String ConfirmationNumber = curlsmith.CC_payment_method("Visa Payment");
-			curlsmith.admin_Sigin("Admin Account Details");
 			String OrderNumber = curlsmith.search_order(ConfirmationNumber);
 			HashMap<String, String> Orderstatus1 = curlsmith.orderverification(OrderNumber);
 			curlsmith.writeOrderNumber(Description, OrderNumber, Orderstatus1.get("Skus"),ConfirmationNumber, Orderstatus1.get("CustomerPO"),
