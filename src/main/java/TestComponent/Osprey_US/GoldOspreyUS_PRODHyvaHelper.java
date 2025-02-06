@@ -8788,7 +8788,7 @@ public void Continue_Shopping() {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			}
 			 
-			else if(BreadCrum.contains("BACKPACKS & BAGS")|| BreadCrum.contains("ACCESSORIES"))
+			else if(Common.getCurrentURL().contains("https://www.oxo.com"))
 			{
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
 				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
