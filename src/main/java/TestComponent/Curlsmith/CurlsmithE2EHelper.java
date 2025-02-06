@@ -795,14 +795,14 @@ public class CurlsmithE2EHelper {
 			Sync.waitElementPresent("xpath", "//input[@id='email']");
 			Common.textBoxInput("xpath", "//input[@id='email']", data.get(Dataset).get("UserName"));
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//span[text()='Continue']");
-			Thread.sleep(9000);
-			// Common.textBoxInput("xpath", "//input[@placeholder='6-digit code']",
-			// data.get(Dataset).get(""));
+			Common.clickElement("xpath", "//button[@type='submit']");
+			Thread.sleep(20000);
+//			 Common.textBoxInput("xpath", "//input[@placeholder='6-digit code']",
+//			 data.get(Dataset).get(""));
 			Common.clickElement("xpath", "//button[@type='submit']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[text()='Go to store']");
+			Common.clickElement("xpath", "//img[@alt='Curlsmith USA Dev logo']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
