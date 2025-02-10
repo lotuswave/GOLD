@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,34 +9,33 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HYF_ST_022_Guest_User_Checkout_with_Multiple_Gift_Card_Codes {
+public class Test_DGLD_HF_ST_084_employee_Discount_for_Register_User {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Bundle");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Guest_User_Checkout_with_Gift_Card_Code () throws Exception {
-
+	public void Validating_employee_Discount_for_Register_User () throws Exception {
+		
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");  
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("Employee_id");
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-			Hydro.Configurable_addtocart_pdp("Product");                   
+			Hydro.Configurable_addtocart_pdp("Product");
+			Hydro.employee_discount();
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("Employee_id");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.invalid_Gift_card("Giftcard");         
-            Hydro.Gift_card("Giftcard");
-            Hydro.Gift_card("Giftcard1");
-			Hydro.payPal_Payment("PaypalDetails");
+			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 	@AfterTest
 	public void clearBrowser() {
@@ -47,8 +46,8 @@ public class TEST_DGLD_HYF_ST_022_Guest_User_Checkout_with_Multiple_Gift_Card_Co
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		Login.signIn();
-		Hydro.close_add();
+        Login.signIn();
+        Hydro.close_add();
         Hydro.acceptPrivacy();
 	}
 

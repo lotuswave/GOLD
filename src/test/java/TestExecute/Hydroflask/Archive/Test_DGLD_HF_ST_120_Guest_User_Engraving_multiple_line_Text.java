@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,24 +9,25 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_131_GuestCheckout_Promocode_with_Afterpay {
+public class Test_DGLD_HF_ST_120_Guest_User_Engraving_multiple_line_Text {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products() throws Exception {
+	public void Validating_Guest_User_Engraving_multiple_line_Text () throws Exception {
+		
 
 		try {
-
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");
-			Hydro.addtocart("Product");
-			Hydro.minicart_Checkout();
+			Hydro.Bottles_headerlinks("Bottles & Drinkware");  
+			Hydro.multiline_Engraving("Multiline Engraving");
+			Hydro.enraving_Checkout("Multiline Engraving");	
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-			Hydro.selectshippingaddress("GroundShipping method");
-		     Hydro.discountCode("Discount");
-			Hydro.After_Pay_payment("Afterpay");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.clickSubmitbutton_Shippingpage();
+			Hydro.updatePaymentAndSubmitOrder("CCMastercard");
+
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

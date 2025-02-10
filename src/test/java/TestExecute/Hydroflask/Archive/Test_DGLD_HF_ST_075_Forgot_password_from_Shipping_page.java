@@ -1,31 +1,30 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import TestComponent.Hydroflask.GoldHydroHelper;
 import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_124_Register_User_checkout_with_Express_paypal {
+public class Test_DGLD_HF_ST_075_Forgot_password_from_Shipping_page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_User_checkout_with_Express_paypal () throws Exception {
+	public void Validate_Forgot_password_from_Shipping_page () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
-			Hydro.Express_Paypal("PaypalDetails");
-			
+			Hydro.Shipping_Forgot_Password("AccountDetails");
+			Hydro.Forgot_password("AccountDetails");
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -41,9 +40,10 @@ public class Test_DGLD_HF_ST_124_Register_User_checkout_with_Express_paypal {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		Login.signIn();
-		Hydro.close_add();
+        Login.signIn();
+        Hydro.close_add();
         Hydro.acceptPrivacy();
+
 	}
 
 }

@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,13 +9,13 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card {
+public class Test_DGLD_HF_ST_012_Register_user_Checkout_Funtionality_Amex_card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Register_user_Checkout_Funtionality_Discover_card () throws Exception {
+	public void Validating_Register_user_Checkout_Funtionality_Amex_card () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
@@ -27,7 +27,7 @@ public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_ca
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("CCDiscovercard");
+			Hydro.updatePaymentAndSubmitOrder("CCAmexcard");
 
 		} catch (Exception e) {
 
@@ -44,10 +44,9 @@ public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_ca
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-        Login.signIn();
-        Hydro.close_add();
+		Login.signIn();
+		Hydro.close_add();
         Hydro.acceptPrivacy();
-
 	}
 
 }

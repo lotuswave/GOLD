@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,34 +9,31 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_HYF_ST_018_EmployeeCustomer_Checkout_with_Giftcard_Item_Using_Paypalmethod {
+public class Test_DGLD_HF_ST_013_Register_user_Checkout_Funtionality_Discover_card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_employee_Discount_for_Register_User () throws Exception {
-		
+	public void Validating_Register_user_Checkout_Funtionality_Discover_card () throws Exception {
+
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("Employee_id");
-			Hydro.Gift_cards("Hydro Gift Card");
-			Hydro.Card_Value("price");
-			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.employee_discount();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("Product");      
+			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("Employee_id");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.payPal_Payment("PaypalDetails");
+            Hydro.clickSubmitbutton_Shippingpage();
+			Hydro.updatePaymentAndSubmitOrder("CCDiscovercard");
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
 
 	@AfterTest
 	public void clearBrowser() {
@@ -50,6 +47,7 @@ public class TEST_DGLD_HYF_ST_018_EmployeeCustomer_Checkout_with_Giftcard_Item_U
         Login.signIn();
         Hydro.close_add();
         Hydro.acceptPrivacy();
+
 	}
 
 }

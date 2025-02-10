@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Archive;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,23 +9,25 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_008_Guest_user_Checkout_Funtionality_Master_card {
+public class Test_DGLD_HF_ST_097_Register_user_Checkout_With_Bundle_product_Paypal {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Bundle");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_user_Checkout_Funtionality_Master_card () throws Exception {
+	public void Validating_Register_user_Checkout_With_Bundle_product_Paypal () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("Bundle product"); 
+			Hydro.Addtocart_Bundle("Bundle product");                   
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("CCMastercard");
+			Hydro.payPal_Payment("PaypalDetails");
 
 		} catch (Exception e) {
 
