@@ -22,7 +22,7 @@ public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.view_PLP_page();
 			Hydro.sort_By("SortBy");
-			Hydro.filter_By("Collections");
+			Hydro.filter_By("Accessories");
 			Hydro.color_validation("Black");
 			Hydro.price_filter_validation();
 //			Hydro.sort_By("SortBy");

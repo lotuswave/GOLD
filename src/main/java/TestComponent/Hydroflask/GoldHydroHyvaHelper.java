@@ -11293,15 +11293,19 @@ public void Explore_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//span//div[text()='Colors']");
+			Sync.implicitWait();
 			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
-					"//span[text()='" + colorname + "']//following-sibling::span")
+					"(//span[@data-color='" + colorname + "']//following-sibling::span)[2]")
 					.getText().replace("(", "").replace(")", "");
+			System.out.println(colorcount);
 			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+			System.out.println(bottlecount);
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -11322,6 +11326,7 @@ public void Explore_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String name = "";
 		try {
+			Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Price']");
 			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("$", "").replace(".00", "");
