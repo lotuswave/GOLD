@@ -38,7 +38,7 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
