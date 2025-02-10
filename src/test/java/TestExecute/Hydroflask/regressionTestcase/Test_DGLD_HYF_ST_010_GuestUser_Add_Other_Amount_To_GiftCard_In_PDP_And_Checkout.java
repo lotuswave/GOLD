@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_ST_010_RegisterUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout {
+public class Test_DGLD_HYF_ST_010_GuestUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
@@ -19,11 +19,10 @@ public class Test_DGLD_HYF_ST_010_RegisterUser_Add_Other_Amount_To_GiftCard_In_P
 		
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.Gift_cards("Hydro Gift Card");
 			Hydro.Other_Amount("price");
 		    Hydro.minicart_Checkout();
+			Hydro.DeliveryAddress_Guestuser_Gift("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
