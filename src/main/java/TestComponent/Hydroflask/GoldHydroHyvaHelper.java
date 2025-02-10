@@ -1615,8 +1615,7 @@ public void FUll_Payment(String dataSet) {
 			System.out.println(data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
-			Sync.waitImplicit(30);
-			Thread.sleep(3000);
+			Sync.waitElementPresent(50, "xpath", "//span[@x-html='message.text']");
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(

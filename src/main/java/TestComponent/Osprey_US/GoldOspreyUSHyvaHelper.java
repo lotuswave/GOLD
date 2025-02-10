@@ -11411,90 +11411,90 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-//			
-//			Common.clickElement("xpath", "//span[text()='Pay now']");
-//			Thread.sleep(4000);
-//			Common.refreshpage();
-//			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
-//			if(klarna.contains("Choose how to pay"))
-//			{
-//				Thread.sleep(4000);
-//			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-//				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
-//				Common.clickElement("xpath", "//label[@for='pay_now__label']");
-//				
-//				Thread.sleep(2000);
-//				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
-//				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
-//				Thread.sleep(4000);
-				//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
+			
+			Common.clickElement("xpath", "//span[text()='Pay now']");
+			Thread.sleep(4000);
+			Common.refreshpage();
+			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
+			if(klarna.contains("Choose how to pay"))
+			{
+				Thread.sleep(4000);
+			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+				Common.clickElement("xpath", "//label[@for='pay_now__label']");
+				
+				Thread.sleep(2000);
+				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
+				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
+				Thread.sleep(4000);
+				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 				Common.clickElement("xpath", "//span[text()='Pay with']");
 				Sync.waitPageLoad();
 				
 					
-//				
-//			}
-//			else
-//			{
-//				
-////				String klarna1=Common.findElement("xpath", "//h2[@role='status']").getText();
-//				
-//				Common.clickElement("xpath", "//button[@id='onContinue']");
-//				Sync.waitPageLoad();
-//				Common.clickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
-//				Common.findElement("xpath","//input[@id='addressCollector-date_of_birth']").sendKeys(DOB);
-//				
-//
-//				Common.javascriptclickElement("xpath", "//div[@id='preview-address__link-wrapper']");
-//				
-//				WebElement clearStreet=Common.findElement("xpath", "//input[@name='street_address']");
-//				clearStreet.sendKeys(Keys.CONTROL+"a");
-//	            Common.findElement("xpath","//input[@name='street_address']").sendKeys(data.get(Dataset).get("Street"));
-//				
-//	            WebElement clearcity=Common.findElement("xpath", "//input[@name='city']");
-//				clearStreet.sendKeys(Keys.CONTROL+"a");
-//				
-//				 WebElement clearPostcode=Common.findElement("xpath", "//input[@name='postal_code']");
-//				clearStreet.sendKeys(Keys.CONTROL+"a");
-//				
-//				Common.findElement("xpath","//input[@name='region']").sendKeys(data.get(Dataset).get("Region"));
-//				
-//				Common.clickElement("xpath", "//div[@id='addressCollector-postal_code__label']");
-//				Common.findElement("xpath","//input[@name='postal_code']").sendKeys(data.get(Dataset).get("postcode"));
-//				Common.clickElement("xpath", "//div[@id='terms_checkbox__box']");
-//				Common.clickElement("xpath", "//span[text()='Continue']");
-//				Sync.waitPageLoad();
-//				Common.clickElement("xpath", "//span[contains(text(),'continue')]");
-//				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'Continue')]");
-//				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
-//				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='pick-plan']");
-//				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
-//				Sync.waitPageLoad();
-//				Thread.sleep(4000);
-//				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
-//				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
-//				Thread.sleep(4000);
-//				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
-//				Thread.sleep(4000);	
-//				Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
-//				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
-//				Common.findElement("xpath","//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
-//				Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
-//				Common.findElement("xpath","//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
-//				Common.switchToDefault();
-//				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-//				Thread.sleep(4000);
-//		//		Thread.sleep(4000);
-//				Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-//				Thread.sleep(8000);
-//				Common.javascriptclickElement("xpath", "(//span[contains(text(),'Continue')])[1]");
-//				Thread.sleep(4000);
-//				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
-//				Sync.waitPageLoad();
-//				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
-//				
-//			}
+				
+			}
+			else
+			{
+				
+//				String klarna1=Common.findElement("xpath", "//h2[@role='status']").getText();
+				
+				Common.clickElement("xpath", "//button[@id='onContinue']");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//div[@id='addressCollector-date_of_birth__container']");
+				Common.findElement("xpath","//input[@id='addressCollector-date_of_birth']").sendKeys(DOB);
+				
+
+				Common.javascriptclickElement("xpath", "//div[@id='preview-address__link-wrapper']");
+				
+				WebElement clearStreet=Common.findElement("xpath", "//input[@name='street_address']");
+				clearStreet.sendKeys(Keys.CONTROL+"a");
+	            Common.findElement("xpath","//input[@name='street_address']").sendKeys(data.get(Dataset).get("Street"));
+				
+	            WebElement clearcity=Common.findElement("xpath", "//input[@name='city']");
+				clearStreet.sendKeys(Keys.CONTROL+"a");
+				
+				 WebElement clearPostcode=Common.findElement("xpath", "//input[@name='postal_code']");
+				clearStreet.sendKeys(Keys.CONTROL+"a");
+				
+				Common.findElement("xpath","//input[@name='region']").sendKeys(data.get(Dataset).get("Region"));
+				
+				Common.clickElement("xpath", "//div[@id='addressCollector-postal_code__label']");
+				Common.findElement("xpath","//input[@name='postal_code']").sendKeys(data.get(Dataset).get("postcode"));
+				Common.clickElement("xpath", "//div[@id='terms_checkbox__box']");
+				Common.clickElement("xpath", "//span[text()='Continue']");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//span[contains(text(),'continue')]");
+				Sync.waitElementPresent(30, "xpath", "//span[contains(text(),'Continue')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Continue')]");
+				Sync.waitElementPresent(30, "xpath", "//button[@data-testid='pick-plan']");
+				Common.clickElement("xpath", "//button[@data-testid='pick-plan']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath", "//iframe[@id='payment-gateway-frame']");
+				Common.switchFrames("xpath", "//iframe[@id='payment-gateway-frame']");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//input[@id='cardNumber']//parent::div");
+				Thread.sleep(4000);	
+				Common.findElement("xpath","//input[@id='cardNumber']//self::input").sendKeys(Cardnumber);
+				Common.javascriptclickElement("xpath", "//input[@id='expire']//parent::div");
+				Common.findElement("xpath","//input[@id='expire']").sendKeys(data.get(Dataset).get("ExpMonthYear"));
+				Common.javascriptclickElement("xpath", "//input[@id='securityCode']//parent::div");
+				Common.findElement("xpath","//input[@id='securityCode']").sendKeys(data.get(Dataset).get("cvv"));
+				Common.switchToDefault();
+				Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
+				Thread.sleep(4000);
+		//		Thread.sleep(4000);
+				Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+				Thread.sleep(8000);
+				Common.javascriptclickElement("xpath", "(//span[contains(text(),'Continue')])[1]");
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//span[contains(text(),'Pay $')]");
+				Sync.waitPageLoad();
+				Common.clickElement("xpath", "//button[@data-testid='PushFavoritePayment:skip-favorite-selection']");
+				
+			}
 		
 		}
 		catch(Exception |Error e)
