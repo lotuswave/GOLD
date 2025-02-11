@@ -6049,7 +6049,7 @@ catch(Exception | Error e)
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath", "//img[@alt='" + socallinksarry[i] + "']");
-				Thread.sleep(4000);
+				Sync.waitPageLoad();
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
 
@@ -6857,17 +6857,14 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password?')]");
-			String forgotpassword = Common.findElement("xpath", "//span[contains(text(),'Forgot Password?')]").getText();
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
 			Common.textBoxInput("id", "email_address", Utils.getEmailid());
-			Thread.sleep(4000);
 			Common.findElement("id", "email_address").getAttribute("value");
 			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
+			
 			Sync.waitElementPresent(50, "xpath", "//span[@x-html='message.text']");
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
-			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("We received too many requests for password resets")
@@ -9034,7 +9031,6 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
 		Common.clickElement("xpath", "//a[@title='My Account']");
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
 		if (Common.getCurrentURL().contains("preprod")) {
 			String Accountlinks = data.get(Dataset).get("Account Links");
 			String[] Account = Accountlinks.split(",");
@@ -9046,7 +9042,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.clickElement("xpath",
 							"//a[@title='" + Account[i] + "']");
 					Sync.waitPageLoad();
-					Thread.sleep(4000);
+					
 					int size=Common.findElements("xpath", "//h1[@class='title-2xl']//span").size();
 					if(size>0)
 					{
@@ -9071,7 +9067,6 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				}
 				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
-				Thread.sleep(4000);
 				verifingHomePage();
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -9092,7 +9087,6 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.clickElement("xpath",
 							"//a[@title='" + Account[i] + "']");
 					Sync.waitPageLoad();
-					Thread.sleep(4000);
 					int size=Common.findElements("xpath", "//h1[@class='title-2xl']//span").size();
 					if(size>0)
 					{
@@ -9117,7 +9111,6 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				}
 				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
-				Thread.sleep(4000);
 				verifingHomePage();
 			} catch (Exception | Error e) {
 				e.printStackTrace();
