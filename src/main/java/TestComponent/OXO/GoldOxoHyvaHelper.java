@@ -2337,8 +2337,7 @@ public String create_account(String Dataset) {
 				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
 				Common.clickElement("xpath", "//button[@title='Save Address']");
-				Sync.waitPageLoad();
-				Thread.sleep(5000);
+				Sync.waitElementPresent(30,"xpath", "//div[text()='You saved the address.']");
 				String message = Common.findElement("xpath", "//div[text()='You saved the address.']").getText();
 
 				Common.assertionCheckwithReport(message.equals("You saved the address."),
@@ -4601,7 +4600,8 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
 			
 			Common.clickElement("xpath", "//button[@title='Save Account Information']");
-			Thread.sleep(2000);
+			
+			Sync.waitElementPresent(40, "xpath", "//div[@ui-id='message-success']//span");
 			String successMessage = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(successMessage);
 			Common.assertionCheckwithReport(successMessage.contains("You saved the account"),
@@ -4695,14 +4695,13 @@ catch(Exception | Error e)
 	public void stayIntouch() throws Exception {
 
 		try {
-			Thread.sleep(5000);
+			
 			Common.actionsKeyPress(Keys.END);
-			Thread.sleep(5000);
-			Sync.waitElementClickable(30, "xpath", "//input[@name='email']");
+			
+			Sync.waitElementClickable(60, "xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
-			Thread.sleep(5000);
 			Common.clickElement("xpath", "//button[text()='Submit']");
-			Thread.sleep(2000);
+			Sync.waitElementClickable(30, "xpath", "//span[text()='Thanks for subscribing!']");
 			String Text = Common.getText("xpath", "//span[text()='Thanks for subscribing!']");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
@@ -5089,8 +5088,7 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
-			Sync.waitElementPresent(30, "xpath", "//span[@class='yotpo-stars']");
+			Sync.waitElementPresent(60, "xpath", "//span[@class='yotpo-stars']");
 				Common.clickElement("xpath", "//span[@class='yotpo-stars']");
 				Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
 				String form = Common.getText("xpath", "//span[text()='Write A Review']");
@@ -5125,7 +5123,8 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
 			Common.clickElement("xpath", "//input[@value='Post']");
-			Thread.sleep(4000);
+			
+			Sync.waitElementPresent(30,"xpath", "//div[@class='yotpo-thank-you']");
 			String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
 			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
 					"verifying the post for the product review",
@@ -12012,7 +12011,6 @@ public void outofstock_subcription(String Dataset) {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", "testqa@000gmail.com");
 			Common.textBoxInput("id", "pass","Lotuswave@123");
-			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button/span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
