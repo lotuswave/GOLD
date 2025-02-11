@@ -27,8 +27,6 @@ public class Test_DGLD_OXO_ST_005_Guest_User_Create_Account_from_Ordersummary_Pa
 			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
 			Oxo.createAccountFromOrderSummaryPage("AccountDetails");
 			
-	
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

@@ -36,7 +36,7 @@ public class Test_DGLD_OXO_ST_008_Guest_user_Checkout_Funtionality_Master_card {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

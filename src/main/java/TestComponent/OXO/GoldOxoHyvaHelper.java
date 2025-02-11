@@ -106,10 +106,9 @@ public class GoldOxoHyvaHelper {
 		String expectedResult = "User should click the" + category;
 		try {
 
-			Sync.waitElementClickable("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
-			Thread.sleep(3000);
+			Sync.waitElementClickable(30,"xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
 			Common.mouseOverClick("xpath", "//a[contains(@class,'level-0-link')]//span[contains(text(),' Shop')]");
-			Thread.sleep(3000);
+			
 
 			try {
 				Common.mouseOver("xpath", "//span[contains(text(),'" + category + "')]");
@@ -336,8 +335,7 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent(30,"xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
 						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
@@ -359,9 +357,7 @@ public class GoldOxoHyvaHelper {
 
 			Sync.waitElementPresent(50,"xpath", "//button[@title='Add to Cart']");
 			Common.clickElement("xpath", "//button[@title='Add to Cart']");
-
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Sync.waitImplicit(5);
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
 //			
@@ -678,33 +674,36 @@ public class GoldOxoHyvaHelper {
 	}
 
 	public void minicart_Checkout() {
+	    try {
+	        // Wait for the totalCartAmount element to be present
+	        Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+	        String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
+	        System.out.println("Minicart total: " + minicart);
 
-		try {
-			Thread.sleep(1000);
-//			click_minicart();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
-			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
-			Sync.waitPageLoad();
-			Thread.sleep(6000);
-			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
-					"validating the navigation to the shipping page when we click on the checkout",
-					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
-					"Failed to navigate to the shipping page");
+	        Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+	        Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
+	       Thread.sleep(5000);
+	        
+	        String currentURL = Common.getCurrentURL();
+	        System.out.println("Current URL after clicking Checkout: " + currentURL);
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"validating the navigation to the shipping page when we click on the checkout ",
-					"User should able to navigate to the shipping  page", "unable to navigate to the shipping page",
-					Common.getscreenShot("Failed to navigate to the shipping page"));
+	        // Assert the navigation to the shipping page
+	        Common.assertionCheckwithReport(currentURL.contains("checkout"),
+	                "validating the navigation to the shipping page when we click on the checkout",
+	                "User should be able to navigate to the shipping page", "Successfully navigate to the shipping page",
+	                "Failed to navigate to the shipping page");
 
-			Assert.fail();
-		}
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog(
+	                "validating the navigation to the shipping page when we click on the checkout",
+	                "User should be able to navigate to the shipping page", "unable to navigate to the shipping page",
+	                Common.getscreenShot("Failed to navigate to the shipping page"));
 
+	        Assert.fail();
+	    }
 	}
+
 
 	public void click_minicart() {
 		try {
@@ -1913,17 +1912,15 @@ public String create_account(String Dataset) {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-			
-			// Using the generated email for account creation
 			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
 
-			// Removed previous logic that was retrieving the value from the field
+			
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			System.out.println(data.get(Dataset).get("Password"));
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			System.out.println(data.get(Dataset).get("Confirm Password"));
-			Thread.sleep(4000);
+			Sync.waitElementClickable("xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitImplicit(5);
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
@@ -2704,8 +2701,8 @@ public String create_account(String Dataset) {
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(5000);
-			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			
+			Sync.waitElementVisible(20,"xpath", "//input[@type='email']");
 			Common.textBoxInput("xpath", "//input[@type='email']", Utils.getEmailid());
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
@@ -2724,30 +2721,26 @@ public String create_account(String Dataset) {
 			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='street[0]']",
 					data.get(dataSet).get("Street"));
 			String Text = Common.getText("xpath", "//div[contains(@class,'grid')]//input[@name='street[0]']");
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			
+			Sync.waitElementPresent("xpath", "//div[contains(@class,'grid')]//input[@name='city']");
 			Common.findElement("xpath", "//div[contains(@class,'grid')]//input[@name='city']").clear();
 			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
+//			Thread.sleep(3000);
 			try {
 				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
 				Common.dropdown("name", "region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-			Thread.sleep(2000);
 			Common.textBoxInputClear("xpath", "(//input[@name='postcode'])");
 			Common.textBoxInput("xpath", "(//input[@name='postcode'])", data.get(dataSet).get("postcode"));
-
-			Thread.sleep(5000);
-
+            Sync.waitElementClickable(40, "name", "telephone");
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-            Thread.sleep(5000);
-			Sync.waitPageLoad();
+           
 		}
 
 		catch (Exception | Error e) {
@@ -7495,19 +7488,18 @@ catch(Exception | Error e)
 		Sync.waitElementPresent("xpath", "//a[normalize-space()='My Account']");
 		Common.clickElement("xpath", "//a[normalize-space()='My Account']");
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
 
 		String Accountlinks = data.get(Dataset).get("Account Links");
 		String[] Account = Accountlinks.split(",");
 		int i = 0;
 		try {
 			for (i = 0; i < Account.length; i++) {
-				Sync.waitElementPresent("xpath",
+				Sync.waitElementPresent(50,"xpath",
 						"//span[text()='" + Account[i] + "']");
 				Common.clickElement("xpath",
 						"//span[text()='" + Account[i] + "']");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				
 				try {
 				String title = Common.findElement("xpath", "//h1[@class='title-2xl']").getText();
                  System.out.println(title);
@@ -11226,16 +11218,16 @@ public void header_1_Percent_Planet() {
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+//				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath",
 						"//a[text()='"+footerlinks[i] +"']");
-				Thread.sleep(1000);
+//				Thread.sleep(1000);
 				Common.findElement("xpath",
 						"//a[text()='"+footerlinks[i] +"']");
 				Common.clickElement("xpath",
 						"//a[text()='"+footerlinks[i] +"']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			
 				System.out.println(footerlinks[i]);
 				Common.assertionCheckwithReport(
@@ -11326,16 +11318,16 @@ public void header_1_Percent_Planet() {
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				Sync.waitElementPresent(30, "xpath",
+//				Thread.sleep(3000);
+				Sync.waitElementPresent(50, "xpath",
 						"//a[text()='"+footerlinks[i] +"']");
-				Thread.sleep(1000);
+//				Thread.sleep(1000);
 				Common.findElement("xpath",
 						"//a[text()='"+footerlinks[i] +"']");
 				Common.clickElement("xpath",
 						"//a[text()='"+footerlinks[i] +"']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			
 				System.out.println(footerlinks[i]);
 				Common.assertionCheckwithReport(
@@ -11352,7 +11344,7 @@ public void header_1_Percent_Planet() {
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
 						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				Common.navigateBack();
 				int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 				System.out.println(size);
