@@ -6856,8 +6856,8 @@ catch(Exception | Error e)
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[contains(text(),'Forgot Password?')]");
-			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
+			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password?')]");
+			String forgotpassword = Common.findElement("xpath", "//span[contains(text(),'Forgot Password?')]").getText();
 			System.out.println(forgotpassword);
 			Common.textBoxInput("id", "email_address", Utils.getEmailid());
 			Thread.sleep(4000);
@@ -6865,8 +6865,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[contains(text(),'Reset My Password')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
-			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+			Sync.waitElementPresent(50, "xpath", "//span[@x-html='message.text']");
+			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			Thread.sleep(4000);
 			System.out.println(message);
 			Common.assertionCheckwithReport(
@@ -13465,7 +13465,7 @@ public void Explore_Validation(String Dataset) {
 	public void Edit_Engraving_to_Graphic(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
-		String Graphic="Better Lake Than Never";
+		String Graphic="Beach Vibes";
 		try
 		{
 			Sync.waitElementPresent("xpath", "//a[contains(@title,'Edit "+ products  +"')]");
@@ -13475,8 +13475,8 @@ public void Explore_Validation(String Dataset) {
 			Sync.waitElementPresent("xpath", "//button[@aria-controls='graphic-panel']");
 			Common.clickElement("xpath", "//button[@aria-controls='graphic-panel']");
 			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//button[@aria-label='"+ Graphic +"']");
-			Common.clickElement("xpath", "//button[@aria-label='"+ Graphic +"']");
+			Sync.waitElementPresent("xpath", " //button[contains(text(),'"+ Graphic +"')]");
+			Common.clickElement("xpath", " //button[contains(text(),'"+ Graphic +"')]");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", " //span[contains(text(),'Update Cart')]");
 			Common.clickElement("xpath", " //span[contains(text(),'Update Cart')]");
