@@ -5656,15 +5656,15 @@ catch(Exception | Error e)
 			Thread.sleep(3000);
 			List<WebElement> country = Common.findElements("xpath", "//div[@class='country-list__item']");
 			System.out.println(country.size());
-			for (int i = 1; i < country.size(); i++) {
+			for (int i = 0; i < country.size()-8; i++) {
 
-				List<WebElement> select = Common.findElements("xpath", "//div[@class='country-list__item']//p//span");
+				List<WebElement> select = Common.findElements("xpath", "//div[@class='country-list__item']//p//parent::a");
 				Sync.waitPageLoad();
 				
-				Country = select.get(i).getText();
+				Country = select.get(i).getAttribute("data-country-code");
 			      System.out.println(Country);
-				select.get(i).click();
-				if (Country.equals("English")) {
+					
+				if (Country.equals("us")) {
 
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
@@ -5672,7 +5672,11 @@ catch(Exception | Error e)
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				} else {
-					Common.clickElement("xpath", "(//p[@class='country-item__language'])[" + i +"]");
+					Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+					Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
+					int j=i+1;
+					 System.out.println("(//p[@class='country-item__language'])[" + j +"]");
+					Common.clickElement("xpath", "(//p[@class='country-item__language'])[" + j +"]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.navigateBack();
@@ -5680,6 +5684,7 @@ catch(Exception | Error e)
 							"click on the country should navigate to the  " + Country + "Page",
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
+					
 				}
 
 			}

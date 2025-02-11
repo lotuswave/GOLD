@@ -29,7 +29,7 @@ public class Test_DGLD_HF_ST_052_Validate_Country_Selector {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
