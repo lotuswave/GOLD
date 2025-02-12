@@ -11,7 +11,7 @@ import TestComponent.Curlsmith.CurlsmithE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_CS_E2E_002_RegisterUser_checkout_with_Simpleitem_and_Quantity_One_Each_with_added_discount_CC {
+public class Test_DGLD_CS_E2E_002_RegisterUser_checkout_with_Configitem_and_Quantity_One_Each_with_added_discount_CC {
 
 	String datafile = "Curlsmith/CurlsmithTestData.xlsx";
 	CurlsmithE2EHelper curlsmith = new CurlsmithE2EHelper(datafile, "Dataset");
@@ -25,8 +25,8 @@ public class Test_DGLD_CS_E2E_002_RegisterUser_checkout_with_Simpleitem_and_Quan
 			curlsmith.admin_Sigin("Admin Account Details");
 			curlsmith.online_Store();
 			curlsmith.Register_user_Login("AccountDetails");
-			curlsmith.search_product("Bundle_Product");
-			curlsmith.Simple_Addtocart("Bundle_Product");
+			curlsmith.search_product("Product");
+			curlsmith.Configurable_addtocart("Configurable Product");
 			curlsmith.minicart_Checkout();
 			curlsmith.RegaddDeliveryAddress("AccountDetails");
 			String Discountcode = "TESTOD";
