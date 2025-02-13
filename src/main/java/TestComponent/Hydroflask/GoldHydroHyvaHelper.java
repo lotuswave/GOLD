@@ -627,7 +627,6 @@ public class GoldHydroHyvaHelper {
 		String address = data.get(dataSet).get("Street");
 
 		try {
-			Thread.sleep(2000);
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
@@ -656,31 +655,23 @@ public class GoldHydroHyvaHelper {
 			Common.textBoxInput("id", "shipping-street-0", data.get(dataSet).get("Street"));
 			String Text = Common.getText("id", "shipping-street-0");
 
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Common.findElement("id", "shipping-city").clear();
 			Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
 			try {
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
-				Thread.sleep(3000);
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-			Thread.sleep(2000);
 //			Common.textBoxInputClear("name", "postcode");
 //			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
 
 			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-
-			Thread.sleep(5000);
-
+			Thread.sleep(2000);
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
-
 			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
@@ -1006,7 +997,6 @@ public class GoldHydroHyvaHelper {
 			int payment = Common.findElements("css", "div[class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Thread.sleep(2000);
 				Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 				Common.scrollIntoView("css", "label[for='Field-numberInput']");
 				Common.clickElement("css", "label[for='Field-numberInput']");
@@ -1037,11 +1027,11 @@ public class GoldHydroHyvaHelper {
 					Sync.waitElementPresent("css", "button[class='action primary checkout']");
 					Common.scrollIntoView("css", "button[class='action primary checkout']");
 					Common.clickElement("css", "button[class='action primary checkout']");
-					Thread.sleep(4000);
+					Thread.sleep(2000);
 					if (Common.getCurrentURL().contains("/checkout/#payment")) {
 						Sync.waitElementPresent("css", "label[for='stripe-new-payments']");
 						Common.clickElement("css", "label[for='stripe-new-payments']");
-						Thread.sleep(4000);
+						Thread.sleep(2000);
 						Sync.waitElementPresent("css", "button[class='action primary checkout']");
 						Common.clickElement("css", "button[class='action primary checkout']");
 
