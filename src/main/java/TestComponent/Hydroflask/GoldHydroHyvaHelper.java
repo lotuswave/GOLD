@@ -81,7 +81,7 @@ public class GoldHydroHyvaHelper {
 	public void verifingHomePage() {
 		try {
 			Sync.waitPageLoad();
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			int size = Common.findElements("css", "img[alt='Store logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Page")
 							|| Common.getPageTitle().contains("Hydro Flask"),
@@ -261,6 +261,7 @@ public class GoldHydroHyvaHelper {
 
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
+	
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -277,8 +278,8 @@ public class GoldHydroHyvaHelper {
 					break;
 				}
 			}
-			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			Common.scrollIntoView("css", "img[alt='" + products + "']");
+			Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
 //			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
 			Thread.sleep(3000);
 			
@@ -288,7 +289,7 @@ public class GoldHydroHyvaHelper {
             {
             	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
             	   System.out.println(PLPprice1);
-            	   Common.clickElement("xpath", "//img[@alt='" + products + "']");
+            	   Common.clickElement("css", "img[alt='" + products + "']");
        			Sync.waitPageLoad();
        			Thread.sleep(2000);
             	   product_quantity(Dataset);
@@ -298,7 +299,7 @@ public class GoldHydroHyvaHelper {
 //                Assert.assertEquals(PLPprice1, PDPprice);
             }
             else {
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
+			Common.clickElement("css", "img[alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
@@ -308,10 +309,10 @@ public class GoldHydroHyvaHelper {
             System.out.println(PDPprice);
             Assert.assertEquals(PLPprice, PDPprice);
             }
-			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
-			Common.clickElement("xpath", "//button[@title='Add to Cart']");
+			Sync.waitElementPresent("css", "button[title='Add to Cart']");
+			Common.clickElement("css", "button[title='Add to Cart']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
 //			
@@ -419,19 +420,19 @@ public class GoldHydroHyvaHelper {
 	public String minicart_Checkout() {
             String Checkoutprice="";
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 //			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
 //            System.out.println(PDPprice);
 //            String Minicartprice=Common.findElement("xpath", "//span[contains(@class,'text-sm leading')]//span[@class='price']").getText();
 //            System.out.println(Minicartprice);
 //            Assert.assertEquals(PDPprice, Minicartprice);
-			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
-			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
-			Thread.sleep(6000);
+			Sync.waitElementPresent("css", "span[x-text='totalCartAmount']");
+			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
+		
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+		Thread.sleep(2000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
@@ -865,15 +866,15 @@ public class GoldHydroHyvaHelper {
 		String method = data.get(Dataset).get("methods");
 
 		try {
-			Thread.sleep(5000);
-			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
+			Thread.sleep(3000);
+			int size = Common.findElements("css", "label[for*='shipping-method']").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
 				Common.clickElement("xpath", "//span[text()='" + method + "']");
 			} else {
 
 				Common.refreshpage();
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
 				Common.clickElement("xpath", "//span[text()='" + method + "']");
 
@@ -932,9 +933,7 @@ public class GoldHydroHyvaHelper {
 		String order = "";
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
-
 		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(2000);
 			addPaymentDetails(dataSet);
 		}
 
@@ -946,7 +945,7 @@ public class GoldHydroHyvaHelper {
 
 		else {
 			try {
-				Thread.sleep(1000);
+				
 				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 				String sucessMessage = Common.getText("xpath",
 						" //h1[normalize-space()='Thank you for your purchase!']");
@@ -958,14 +957,12 @@ public class GoldHydroHyvaHelper {
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
-
+                
 				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
 						.size() > 0) {
-					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				} else {
-					Thread.sleep(1000);
 					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
 					System.out.println(order);
 				}
@@ -996,34 +993,31 @@ public class GoldHydroHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
+			Sync.waitElementPresent("css", "label[for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("css", "label[for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+			Common.clickElement("css", "label[for='payment-method-stripe_payments']");
 
 			
-			String code = Common.findElement("xpath", "//input[@name='postcode']").getAttribute("value");
+			String code = Common.findElement("css", "input[name='postcode']").getAttribute("value");
 			System.out.println(code);
-			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
+			int payment = Common.findElements("css", "div[class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(4000);
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Thread.sleep(2000);
+				Common.switchFrames("css", "iframe[title='Secure payment input frame']");
+				Common.scrollIntoView("css", "label[for='Field-numberInput']");
+				Common.clickElement("css", "label[for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Thread.sleep(4000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-				Thread.sleep(2000);
-
+				
 				int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
 				System.out.println(zipcode);
 				
@@ -1040,26 +1034,26 @@ public class GoldHydroHyvaHelper {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					
 					
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-					Common.scrollIntoView("xpath", "//button[@class='action primary checkout']");
-					Common.clickElement("xpath", "//button[@class='action primary checkout']");
-					Thread.sleep(10000);
+					Sync.waitElementPresent("css", "button[class='action primary checkout']");
+					Common.scrollIntoView("css", "button[class='action primary checkout']");
+					Common.clickElement("css", "button[class='action primary checkout']");
+					Thread.sleep(4000);
 					if (Common.getCurrentURL().contains("/checkout/#payment")) {
-						Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-						Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-						Thread.sleep(5000);
-						Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-						Common.clickElement("xpath", "//button[@class='action primary checkout']");
+						Sync.waitElementPresent("css", "label[for='stripe-new-payments']");
+						Common.clickElement("css", "label[for='stripe-new-payments']");
+						Thread.sleep(4000);
+						Sync.waitElementPresent("css", "button[class='action primary checkout']");
+						Common.clickElement("css", "button[class='action primary checkout']");
 
 					} else if (Common.getCurrentURL().contains("/success/")) {
-						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+						String sucessmessage = Common.getText("css", "h1[class='page-title-wrapper']");
 						System.out.println(sucessmessage);
 					} else {
 						Assert.fail();
 					}
 
 				} else {
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
 					System.out.println(Cardnumber);
@@ -1073,36 +1067,29 @@ public class GoldHydroHyvaHelper {
 				}
 
 			} else {
-				Thread.sleep(4000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("css", "select[x-model='savedMethodId']").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
 				
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 				
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
+				Common.scrollIntoView("css", "label[for='Field-numberInput']");
+				Common.clickElement("css", "label[for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
-				Thread.sleep(4000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
-				Thread.sleep(3000);
-				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-				Thread.sleep(2000);
-				
-				
-
-				int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+		        Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+		        
+		        int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
 				System.out.println(zipcode);
 
 				if (zipcode > 0) {
-				
+					
 					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
 					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
 				}
@@ -1115,11 +1102,11 @@ public class GoldHydroHyvaHelper {
 				Common.switchToDefault();
 				}
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Thread.sleep(5000);
 					Sync.waitElementPresent("xpath", "//button[contains(text(),'Place Order')]");
 					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
-					Thread.sleep(40000);
+					Sync.waitPageLoad();
+					Thread.sleep(2000);
 					if (Common.getCurrentURL().contains("/checkout")) {
 						String sucessmessage = Common.getText("xpath",
 								"//div[contains(@class,'checkout-success')]//h1");
@@ -1134,7 +1121,7 @@ public class GoldHydroHyvaHelper {
 					}
 
 				} else {
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					Common.switchFrames("css", "iframe[title='Secure payment input frame']");
 					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
 							"");
 					System.out.println(Cardnumber);
@@ -1147,9 +1134,8 @@ public class GoldHydroHyvaHelper {
 
 				}
 
-			
-
 		}
+
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1261,11 +1247,10 @@ public class GoldHydroHyvaHelper {
 
 	public void click_singinButton() {
 		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//a[@title='Sign In']");
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Common.clickElement("css", "a[title='Sign In']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In"),
 					"To validate the user navigates to the signin page",
@@ -1297,7 +1282,6 @@ public class GoldHydroHyvaHelper {
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask"),
 					"To validate the user lands on Home page after successfull login",
@@ -1993,16 +1977,14 @@ public void FUll_Payment(String dataSet) {
 		System.out.println(product);
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
-			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
-			Thread.sleep(4000);
+			Common.clickElement("id", "menu-search-icon");
+			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
-			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", product);
+			Common.textBoxInput("id", "autocomplete-0-input", product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
-			Thread.sleep(8000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the search functionality",
@@ -2281,12 +2263,12 @@ public void FUll_Payment(String dataSet) {
 
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
-        Thread.sleep(3000);
+       Sync.waitImplicit(2000);
         int sizesframe = Common.findElements("xpath", "//div[@aria-label='POPUP Form']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
-            Thread.sleep(4000);
+            Sync.waitImplicit(2000);
             Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
             Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
             Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
@@ -2912,22 +2894,20 @@ System.out.println(MyFavorites);
 				{
 					Thread.sleep(8000);
 				}
-				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
+				Common.clickElement("css", "button[class*='btn dr:btn-secondary-checkout hf:btn-primary']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
-				Thread.sleep(2000);
+				Common.textBoxInput("css", "input[name='street[0]']", data.get(dataSet).get("Street"));
 				Common.actionsKeyPress(Keys.SPACE);
-				Thread.sleep(2000);
 				try {
-					Common.clickElement("xpath", "//input[@name='street[0]']");
+					Common.clickElement("css", "input[name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//input[@name='street[0]']");
+					Common.clickElement("css", "input[name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -2936,10 +2916,9 @@ System.out.println(MyFavorites);
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
-				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
+				Common.scrollIntoView("id", "shipping-region");
+				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT,
 						data.get(dataSet).get("Region"));
-				Thread.sleep(3000);
 //				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
 //				String Shippingstate = Common
 //						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
@@ -2948,19 +2927,18 @@ System.out.println(MyFavorites);
 //				System.out.println(Shippingstate);
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
-				Thread.sleep(3000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
+					Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT,
 							data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
-					Thread.sleep(2000);
-					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT,
+
+					Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT,
 							data.get(dataSet).get("Region"));
 				}
-				Thread.sleep(2000);
+				
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
 						data.get(dataSet).get("postcode"));
@@ -2968,7 +2946,6 @@ System.out.println(MyFavorites);
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
 
-				Thread.sleep(6000);
 				Sync.waitElementPresent("xpath", "//form[@id='shipping']//input[@name='telephone']");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
@@ -2976,8 +2953,8 @@ System.out.println(MyFavorites);
 //				Sync.waitElementPresent("xpath", "//input[@id='shipping-save']");
 //				Common.clickElement("xpath", "//input[@id='shipping-save']");
 
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+				Thread.sleep(2000);
+				Common.clickElement("css", "button[class='btn btn-primary w-full os:uppercase']");
 
 //				
 //                ExtenantReportUtils.addPassLog("verifying shipping addres filling ",
