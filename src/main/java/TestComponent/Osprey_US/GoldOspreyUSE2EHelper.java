@@ -11396,22 +11396,22 @@ public String After_Pay_payment(String dataSet) throws Exception {
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
-			
-			Common.clickElement("xpath", "//span[text()='Pay now']");
-			Thread.sleep(4000);
-			Common.refreshpage();
+//			
+//			Common.clickElement("xpath", "//span[text()='Pay now']");
+//			Thread.sleep(4000);
+//			Common.refreshpage();
 			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
 			if(klarna.contains("Choose how to pay"))
 			{
 				Thread.sleep(4000);
 			//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
-				Common.clickElement("xpath", "//label[@for='pay_now__label']");
-				
-				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
-				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
-				Thread.sleep(4000);
+//				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+//				Common.clickElement("xpath", "//label[@for='pay_now__label']");
+//				
+//				Thread.sleep(2000);
+//				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
+//				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
+//				Thread.sleep(4000);
 				//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 				Common.clickElement("xpath", "//span[text()='Pay with']");
