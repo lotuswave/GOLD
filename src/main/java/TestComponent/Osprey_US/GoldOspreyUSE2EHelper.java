@@ -7279,8 +7279,14 @@ public void minicart_validation(String Dataset) {
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
 			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			int size1 = Common.findElements("xpath", "//a[text()='Iniciar sesión con una contraseña']").size();
 			if(size>0) {
 				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			}
+			else if(size1>0){
+				
+				Common.clickElement("xpath", "//a[text()='Iniciar sesión con una contraseña']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {

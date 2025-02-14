@@ -30,8 +30,8 @@ public class TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Stan
 		     Osprey_ReEu.Gift_cards("Osprey Gift Card");
 		     Osprey_ReEu.Card_Value("price");
 		     Osprey_ReEu.minicart_Checkout();
-		     Osprey_ReEu.newuseraddDeliveryAddress("sp address");
-		     Osprey_ReEu.selectshippingmethod("Sp Shipping Method");
+		     Osprey_ReEu.newuseraddDeliveryAddress("GroundShipping method");
+		     Osprey_ReEu.selectshippingmethod("GroundShipping method");
 		     String Used_GiftCode="NULL";
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
 		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
