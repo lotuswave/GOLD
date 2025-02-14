@@ -268,6 +268,7 @@ public class GoldDrybarusE2EHelper {
 			int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 			if (size > 0) {
 				try {
+					Thread.sleep(3000);
 					Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
 					
 					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
@@ -12012,8 +12013,8 @@ public String fivepercent_Reward_Points(String Dataset) {
 		try {
 			Thread.sleep(2000);
 
-			Sync.waitElementPresent("xpath", "//label[text()='" + Stores + "']");
-			Common.clickElement("xpath", "//label[text()='" + Stores + "']");
+			Sync.waitElementPresent("xpath", "//label[contains(text(),'" + Stores + "')]");
+			Common.clickElement("xpath", "//label[contains(text(),'" + Stores + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 //			String title = Common.findElement("xpath", "//strong[text()='Items Ordered']").getText();
@@ -12206,8 +12207,8 @@ public String fivepercent_Reward_Points(String Dataset) {
 					}
 					else {
 						Thread.sleep(3000);
-						Sync.waitElementVisible("xpath", "//label[text()='"+Shipping+"']");
-						Common.doubleClick("xpath", "//label[text()='"+Shipping+"']");
+						Sync.waitElementVisible("xpath", "//label[contains(text(),'"+Shipping+"')]");
+						Common.doubleClick("xpath", "//label[contains(text(),'"+Shipping+"')]");
 					}
 				
 			}
