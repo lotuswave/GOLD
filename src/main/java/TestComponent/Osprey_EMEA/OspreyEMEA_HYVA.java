@@ -385,7 +385,7 @@ public class OspreyEMEA_HYVA {
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Forgot Y')]");
 			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(5000);
