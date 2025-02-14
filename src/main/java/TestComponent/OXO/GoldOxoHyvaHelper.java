@@ -4353,12 +4353,12 @@ catch(Exception | Error e)
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unable to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				}
-				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-					order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//p/a");
+				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+					order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 					System.out.println(order);
 				}
 
