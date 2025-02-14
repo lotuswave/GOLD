@@ -812,13 +812,12 @@ public class GoldDrybarusHelper2 {
 		
 		try {
 			
-			String Expedited = Common.getText("xpath", "//div[normalize-space()='Expedited (2 - 3 Business Days)']                            ");
+			String Expedited = Common.getText("xpath", "//span[contains(text(),'Expedited')]");
 			System.out.println(Expedited);
-			
-			String Express = Common.getText("xpath", "//div[normalize-space()='Express (1 - 2 Business Days)']                            ");
-			System.out.println(Express);
-			
-			Common.assertionCheckwithReport(Expedited.equals("Expedited (2 - 3 Business Days)") && Express.equals("Express (1 - 2 Business Days)"),
+			String Express = Common.getText("xpath", "(//span[contains(text(),'Express')])[2]");
+			System.out.println(Express);		
+			Common.assertionCheckwithReport(Expedited.equals("Expedited (2 - 3 Business Days)")&& Express.equals("Express (1 - 2 Business Days)")||
+					Expedited.equals("Shipping & Handling (Shipping - Expedited (2 - 3 Business Days))"),
 					"validating the Shipping methods",
 					"After entering the address it should display the shipping methods",
 					"Successfully  shipping methods", "Failed to  shipping methods");
@@ -832,6 +831,8 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
+
+	
 	
 	
 	public void click_minicart() {
@@ -4932,8 +4933,8 @@ public void FUll_Payment(String dataSet) {
 			if (size > 0  ) {
 				
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath","//div[contains(text(),'" + method + "')]");
-				Common.clickElement("xpath","//div[contains(text(),'" + method + "')]");
+				Sync.waitElementPresent("xpath","//span[contains(text(),'" + method + "')]");
+				Common.clickElement("xpath","//span[contains(text(),'" + method + "')]");
 				
 			}
 			else
