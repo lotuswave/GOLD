@@ -9427,6 +9427,7 @@ return Number;
 			int size2= Common.findElements("xpath", "//button[contains(text(), 'Lägg till rabattkod')]").size();
 			int size3= Common.findElements("xpath", "//button[contains(text(), 'Rabattcode hinzufügen')]").size();
 			int size4= Common.findElements("xpath", "//button[contains(text(), 'Legg til rabattkode')]").size();
+			int size5=Common.findElements("xpath", "//button[contains(text(), 'Aggiungi un codice sconto')]").size();
 		       if (size1>0) {
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
@@ -9442,8 +9443,12 @@ return Number;
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Legg til rabattkode')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Legg til rabattkode')]");
 		    	   
-		       } else {
-					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
+		       }
+		       else if(size5>0){
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Aggiungi un codice sconto')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(), 'Aggiungi un codice sconto')]");
+		       }
+		       else {	Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
 		       }
 			
