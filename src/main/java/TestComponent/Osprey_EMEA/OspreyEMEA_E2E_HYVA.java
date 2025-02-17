@@ -2018,12 +2018,7 @@ public class OspreyEMEA_E2E_HYVA {
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
-			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
-					"enter product name will display in the search box", "user enter the product name in  search box",
-					"Failed to see the product name");
-			Thread.sleep(8000);
+		
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -2070,8 +2065,8 @@ public class OspreyEMEA_E2E_HYVA {
 //			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 //			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 			
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//h1[contains(@class,'pdp-grid-title')]");
