@@ -49,7 +49,7 @@ public class TEST_DGLD_OSP_CHE_FR_E2E_018_Guest_User_Multiple_Item_Full_Gift_cod
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

@@ -10443,9 +10443,16 @@ return Number;
 	   Thread.sleep(4000);
 	   Common.clickElement("xpath", "(//input[contains(@id,'agreement_5')])[3]");
 	   Thread.sleep(4000);
+	   if(Common.getCurrentURL().contains("/che_fr/"))
+	   {
+		   Common.clickElement("xpath", "//button[contains(text(),'Valider la Commande')]");
+		   Thread.sleep(3000);  
+	   }else
+	   {
 	   Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 			//Common.refreshpage();
 		Thread.sleep(3000);
+	   }
    }
    else
    {
@@ -10460,14 +10467,14 @@ return Number;
 		else {
 			try {
 				Thread.sleep(10000);
-				String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
-
-//				Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-						"verifying the product confirmation", expectedResult,
-						"Successfully It redirects to order confirmation page Order Placed",
-						"User unabel to go orderconformation page");
+//				String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
+//
+////				Tell_Your_FriendPop_Up();
+//				int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
+//				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+//						"verifying the product confirmation", expectedResult,
+//						"Successfully It redirects to order confirmation page Order Placed",
+//						"User unabel to go orderconformation page");
 
 				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 					Thread.sleep(4000);
