@@ -3727,7 +3727,14 @@ public class OspreyEMEA_E2E_HYVA {
 						  Sync.waitElementClickable("xpath", "//button[@aria-label='Aggiungi codice']");
 							 Common.clickElement("xpath", "//button[@aria-label='Aggiungi codice']");
 					}
-						else {
+					else if(Common.getCurrentURL().contains("/che_de")){
+						
+						  Sync.waitElementPresent("xpath", "//button[contains(text(),'Geschenkkarte hinzufügen')]");
+						  Common.clickElement("xpath", "//button[contains(text(),'Geschenkkarte hinzufügen')]");
+						 
+						  Sync.waitElementPresent("id", "amcard-input");
+						  Common.textBoxInput("id", "amcard-input", GiftCode);
+					}else {
 
 							  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
 							  Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
