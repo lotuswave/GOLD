@@ -4375,8 +4375,9 @@ catch(Exception | Error e)
 	}
 
 	public void acceptPrivacy() throws Exception {
-		close_Pop_up();
 		Common.clickElementStale("id", "truste-consent-button");
+		close_Pop_up();
+		
 	}
 
 	public void DeclinePrivacy() throws Exception {
@@ -13195,8 +13196,7 @@ public void header_WeAre_Oxo(String Dataset) {
 		try
 		{
 			Common.clickElement("id", "customer-menu");
-			Common.clickElement("xpath", "//*[@id='customer.header.wishlist.link' or @id='customer.header.sign.in.link']\r\n"
-					+ "");
+			Common.clickElement("xpath", "//a[@title='My Favorites']");
 			Thread.sleep(4000);
 			String product=Common.findElement("xpath", "//a[@title='"+Product+"']").getText().toLowerCase();
 			System.out.println(product);

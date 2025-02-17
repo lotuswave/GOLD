@@ -19,11 +19,11 @@ public class Test_DGLD_OXO_US_ST_011_RegisterUser_Adds_GiftCard_To_MyFavorites {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
 			Oxo.Gift_cards("Oxo Gift Card");
 			Oxo.Card_Value_for_my_fav("price");
 			Oxo.Reg_Add_Wishlist_Create_account();
+			Oxo.click_Createaccount();
+			Oxo.create_account("New Account Details");
 			Oxo.Giftcard_Add_from_My_fav("price");
 			Oxo.minicart_Checkout();
 			Oxo.addBillingDetails_PaymentDetails_SubmitOrder("CCAmexcard");
@@ -41,7 +41,7 @@ public class Test_DGLD_OXO_US_ST_011_RegisterUser_Adds_GiftCard_To_MyFavorites {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
