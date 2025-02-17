@@ -2081,8 +2081,8 @@ public class OspreyEMEA_E2E_HYVA {
 			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 			System.out.println(country);
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+//			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
@@ -3679,6 +3679,14 @@ public class OspreyEMEA_E2E_HYVA {
 					 
 					  Sync.waitElementPresent("id", "amcard-input");
 					  Common.textBoxInput("id", "amcard-input", GiftCode);
+					  Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
+						 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
+						 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+						 System.out.println(successmsg);	
+						 Common.assertionCheckwithReport(successmsg.contains("added"),
+									"validating the success message after applying gift card",
+									"Success message should be displayed after the applying of gift card",
+									"Sucessfully gift card has been applyed","Failed to apply the gift card");
 					  }
 					else if(Common.getCurrentURL().contains("se_sv")){
 						
@@ -3687,6 +3695,26 @@ public class OspreyEMEA_E2E_HYVA {
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
+						  Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
+							 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
+							 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+							 System.out.println(successmsg);	
+							 Common.assertionCheckwithReport(successmsg.contains("added"),
+										"validating the success message after applying gift card",
+										"Success message should be displayed after the applying of gift card",
+										"Sucessfully gift card has been applyed","Failed to apply the gift card");
+					}
+					else if(Common.getCurrentURL().contains("che_fr")){
+						
+						Sync.waitElementPresent("xpath", "//button[contains(text(),'Ajouter une carte-cadeau')]");
+						  Common.clickElement("xpath", "//button[contains(text(),'Ajouter une carte-cadeau')]");
+						 
+						  Sync.waitElementPresent("id", "amcard-input");
+						  Common.textBoxInput("id", "amcard-input", GiftCode);
+						  Sync.waitElementClickable("xpath", "//button[@aria-label='Ajouter un code']");
+							 Common.clickElement("xpath", "//button[@aria-label='Ajouter un code']");
+							
+						
 					}
 						else {
 
@@ -3695,16 +3723,17 @@ public class OspreyEMEA_E2E_HYVA {
 							 
 							  Sync.waitElementPresent("id", "amcard-input");
 							  Common.textBoxInput("id", "amcard-input", GiftCode);
+							  Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
+								 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
+								 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+								 System.out.println(successmsg);	
+								 Common.assertionCheckwithReport(successmsg.contains("added"),
+											"validating the success message after applying gift card",
+											"Success message should be displayed after the applying of gift card",
+											"Sucessfully gift card has been applyed","Failed to apply the gift card");
 							  }
 		     
-					Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
-					 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
-					 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
-					 System.out.println(successmsg);	
-					 Common.assertionCheckwithReport(successmsg.contains("added"),
-								"validating the success message after applying gift card",
-								"Success message should be displayed after the applying of gift card",
-								"Sucessfully gift card has been applyed","Failed to apply the gift card");
+					
 						
 					}
 				
