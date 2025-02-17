@@ -9,20 +9,18 @@ import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OXO_US_ST_019_EmployeeCustomer_Checkout_with_Giftcard_1LineItem_UsingCC_Gift_Code {
+public class TEST_DGLD_OXO_US_ST_019_EmployeeCustomer_Checkout_with_1LineItem_UsingCC_Gift_Code {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_EmployeeCustomer_Checkout_with_Giftcard_1LineItem_UsingCC_Gift_Code() throws Exception {
+	public void Validating_EmployeeCustomer_Checkout_with_1LineItem_UsingCC_Gift_Code() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
 			Oxo.Usersignin("Employeeuser");
-			Oxo.Gift_cards("Oxo Gift Card");
-			Oxo.Card_Value("price");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
 			Oxo.employee_discount();
