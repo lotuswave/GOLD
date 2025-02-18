@@ -302,12 +302,19 @@ public class GoldDrybarusHelper2 {
 
 
 	
-	public void RegaddDeliveryAddress(String dataSet) {
+	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
 
 		String firstname = data.get(dataSet).get("FirstName");
 //		System.out.println(firstname);
+		
+		Thread.sleep(4000);
+		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
 		int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 		if (size > 0) {
 			try {
