@@ -3989,8 +3989,8 @@ public void FUll_Payment(String dataSet) {
 //				Common.clickElement("xpath", "//label[@for='pay_now__label']");
 //				
 //				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//span[text()='Continue']");
-				Common.doubleClick("xpath", "//span[text()='Continue']");
+//				Sync.waitElementPresent("xpath", "//span[text()='Continue']");
+//				Common.doubleClick("xpath", "//span[text()='Continue']");
 				Thread.sleep(4000);
 				//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 				Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
