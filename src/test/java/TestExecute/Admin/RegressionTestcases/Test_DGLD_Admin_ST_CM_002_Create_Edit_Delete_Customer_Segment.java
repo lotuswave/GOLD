@@ -12,7 +12,7 @@ import models.admin.Adminhelper;
 public class Test_DGLD_Admin_ST_CM_002_Create_Edit_Delete_Customer_Segment {
 	
 	 String datafile = "Admin//AdminTestData.xlsx";    
-	 Adminhelper Admin = new Adminhelper(datafile,"DataSet");
+	 Adminhelper Admin = new Adminhelper(datafile,"customer");
         @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
         public void Admin_Create_Edit_Delete_Customer_Segment() throws Exception {
 

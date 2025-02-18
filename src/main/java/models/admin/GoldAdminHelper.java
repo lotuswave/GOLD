@@ -4778,15 +4778,27 @@ public class GoldAdminHelper {
 
 	public void open_website(String Dataset) {
 		try {
-			Sync.waitPageLoad(60);
-			Common.openNewTab();
-			Common.oppenURL(data.get(Dataset).get("preprodURL"));
-			
-			Sync.waitPageLoad(40);
+			 Sync.waitPageLoad(60);
+			if (Common.getCurrentURL().contains("emea")) {
+				Common.openNewTab();
+				Common.oppenURL(data.get(Dataset).get("preprodURL_Emea"));
+
+				Sync.waitPageLoad(40);
+			} else {
+				Common.openNewTab();
+				Common.oppenURL(data.get(Dataset).get("preprodURL"));
+
+				Sync.waitPageLoad(40);
+			}
 
 			String uname = Common.getPageTitle();
-			Common.assertionCheckwithReport(uname.contains("Osprey: Backpacks, Luggage & Travel Gear Since 1974 | Osprey")
-					||uname.contains("Hydro Flask | Vacuum Insulated Stainless Steel Water Bottles")||uname.contains("OXO Good Grips, Brew, SteeL, Tot")||uname.contains("Osprey | Premium Outdoor Backpacks & Bags Since 1974")||uname.contains("Drybar | Premium Hair Care Created for the Perfect Blowout"),
+			Common.assertionCheckwithReport(
+					uname.contains("Osprey: Backpacks, Luggage & Travel Gear Since 1974 | Osprey")
+							|| uname.contains("Osprey UK | Premium Outdoor Backpacks & Bags Since 1974 (English)")
+							|| uname.contains("Hydro Flask | Vacuum Insulated Stainless Steel Water Bottles")
+							|| uname.contains("OXO Good Grips, Brew, SteeL, Tot")
+							|| uname.contains("Osprey | Premium Outdoor Backpacks & Bags Since 1974")
+							|| uname.contains("Drybar | Premium Hair Care Created for the Perfect Blowout"),
 					"Validating the User lands to the Hydroflask page",
 					"User should able to land on the Hydroflask page", "Sucessfully User lands on the Hydroflask page",
 					"Failed to navigate to the hydroflask page");
