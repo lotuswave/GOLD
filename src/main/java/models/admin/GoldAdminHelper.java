@@ -8311,11 +8311,14 @@ System.out.println(Website);
 					data.get(dataSet).get("FinanceCategory"));
 
 			Thread.sleep(2000);
-			Sync.waitElementPresent("xpath", "//span[text()='Actions']");
-			Common.clickElement("xpath", "//span[text()='Actions']");
+			Sync.waitElementPresent("xpath", "//div//strong//span[text()='Actions']");
+			Common.javascriptclickElement("xpath", "//div//span[text()='Actions']");
+			Common.clickElementStale("xpath", "//div//span[text()='Actions']");
+			
 
 			Sync.waitElementPresent("xpath", "//select[@name='simple_action']");
 			Common.clickElement("xpath", "//select[@name='simple_action']");
+			
 
 			// Sync.waitElementPresent("xpath", "//option[@data-title='Fixed amount
 			// discount']");
