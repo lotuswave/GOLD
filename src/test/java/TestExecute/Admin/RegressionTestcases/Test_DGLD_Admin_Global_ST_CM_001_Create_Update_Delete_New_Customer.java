@@ -36,7 +36,7 @@ public class Test_DGLD_Admin_Global_ST_CM_001_Create_Update_Delete_New_Customer 
 		     Admin.Delete_customer("HYFCustomer");
 		     
 		     
-		     //HYFCustomer OxoCustomer OSPUSCustomer DRYCustomer OPSUKCustomer change customer name as per the website for emea change UKAddress
+		     //HYFCustomer OxoCustomer OSPUSCustomer DRYCustomer OPSUKCustomer USAddress change customer name as per the website for emea change UKAddress
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
