@@ -886,6 +886,13 @@ public class GoldDrybarusHelper2 {
 		}
 		String expectedResult = "email field will have email address";
 		try {
+			Thread.sleep(3000);
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
+			
 			Common.textBoxInput("id", "shipping-firstname",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
