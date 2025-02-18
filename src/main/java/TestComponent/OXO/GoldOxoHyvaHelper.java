@@ -349,7 +349,6 @@ public class GoldOxoHyvaHelper {
 			}
 			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-
 			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			product_quantity(Dataset);
 			
