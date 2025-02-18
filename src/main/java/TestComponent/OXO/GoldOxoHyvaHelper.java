@@ -4374,7 +4374,8 @@ catch(Exception | Error e)
 	}
 
 	public void acceptPrivacy() throws Exception {
-		Common.clickElementStale("id", "truste-consent-button");
+		Thread.sleep(4000);
+		Common.clickElement("css", "button[id='truste-consent-button']");
 		close_Pop_up();
 		
 	}
