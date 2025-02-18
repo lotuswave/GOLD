@@ -1026,7 +1026,7 @@ public class GoldOxoHyvaHelper {
 	
 	public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		String productcolor1 = "Pink";
+		String productcolor1 = "Taupe";
 		String product = data.get(Dataset).get("Colorproduct");
 		System.out.println(productcolor1);
 		try {
