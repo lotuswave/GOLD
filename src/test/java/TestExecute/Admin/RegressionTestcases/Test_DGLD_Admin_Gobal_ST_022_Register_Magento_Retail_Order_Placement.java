@@ -21,7 +21,7 @@ public class Test_DGLD_Admin_Gobal_ST_022_Register_Magento_Retail_Order_Placemen
 			Admin.click_Sales();
 			Admin.Click_Orders_Salesmenu();
 			Admin.Click_CreatNewOrders();
-			Admin.Select_ExistingUser_email("HYFWebsite");
+			Admin.Select_ExistingUser_email("HYFWebsite");       //HYFWebsite,OXOWebsite,OpsreyUSWebsite,DRYWebsite
 			Admin.Select_Store("HYFWebsite");
 			Admin.Add_product_SKU("HYFWebsite");
 			Admin.shippingaddress("HYFWebsite");

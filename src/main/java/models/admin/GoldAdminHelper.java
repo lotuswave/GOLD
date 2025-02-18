@@ -7656,7 +7656,7 @@ public class GoldAdminHelper {
 		String Symbol = data.get(DataSet).get("Symbol");
 		try {
 			Common.switchToFirstTab();
-			Common.actionsKeyPress(Keys.F5);
+			Common.refreshpage();
 			Thread.sleep(5000);
 			Sync.waitElementPresent("id", "p_method_use_customerbalance");
 			Common.clickElement("id", "p_method_use_customerbalance");
@@ -9799,10 +9799,11 @@ System.out.println(Website);
 		}
 	}
 
-	public void Update_StoreCredit_ExistingCustomer(String DataSet) {
+	public void Update_StoreCredit_ExistingCustomer(String DataSet) throws Exception {
 
 		String Symbol = data.get(DataSet).get("Symbol");
 		System.out.println(Symbol);
+		Thread.sleep(6000);
 		String grandtotal = Common.findElement("xpath", "//td[@class='admin__total-amount']/strong").getText()
 				.replace(Symbol, "");
 		System.out.println("Website" + grandtotal);
