@@ -16659,7 +16659,7 @@ public void deleteProduct_shoppingcart() {
 		{
 			int value=i+1;
 			Thread.sleep(4000);
-		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])['" +value+ "']");
+		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])[1]");
 		Thread.sleep(2000);
 		Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
 		Sync.waitPageLoad();

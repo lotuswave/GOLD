@@ -42,7 +42,7 @@ public class Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
