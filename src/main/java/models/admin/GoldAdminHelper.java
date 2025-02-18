@@ -881,6 +881,7 @@ public class GoldAdminHelper {
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Delete')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Delete')]");
+			Sync.waitElementClickable(50, "xpath", "(//div[@class='modal-content'])[2]");
 			String message = Common.getText("xpath", "(//div[@class='modal-content'])[2]");
 			if (message.equals("Are you sure you want to do this?")) {
 
@@ -953,8 +954,12 @@ public class GoldAdminHelper {
 					data.get(dataSet).get("customergroupname"));
 
 			Select_taxclass("Createcustomergroup");
-
-			Select_website("Websites");
+ if(Common.getCurrentURL().contains("emea")) {
+	 System.out.println("All Stores will Select which are included in Dropdown");
+ }else {
+	 Select_website("Websites");
+ }
+			
 
 			Sync.waitElementVisible(30, "xpath", "//button[@id='save']");
 			Common.clickElement("xpath", "//button[@id='save']");
@@ -982,16 +987,28 @@ public class GoldAdminHelper {
 
 	public void Select_website(String dataSet) throws Exception {
 
+		if(Common.getCurrentURL().contains("emea")) {
+			String[] websites = data.get(dataSet).get("emeaWebsite").split(",");
+
+			for (int i = 0; i < websites.length; i++) {
+				System.out.println(websites[i]);
+				Sync.waitElementClickable("xpath", "//option[text()='" + websites[i] + "']");
+				Common.clickElement("xpath", "//option[text()='" + websites[i] + "']");
+			}
+			
+		}else {
+			
+		
 		String[] websites = data.get(dataSet).get("website").split(",");
 
 		for (int i = 0; i < websites.length; i++) {
 			System.out.println(websites[i]);
 			Sync.waitElementClickable("xpath", "//option[text()='" + websites[i] + "']");
 			Common.clickElement("xpath", "//option[text()='" + websites[i] + "']");
-
 		}
+		
 	}
-
+	}
 	public WebElement Cardtile_content() {
 
 		WebElement element = Common.findElement("xpath", "//span[text()='Card Tiles']");
