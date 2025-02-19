@@ -9,7 +9,7 @@ import TestLib.Common;
 import TestLib.Login;
 import models.admin.GoldAdminHelper;
 
-public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue {
+public class Test_DGLD_Admin_ST_035_Guest_Magento_Retail_Order_Placement_PriceOverride_Lowervalue {
 
 	String datafile = "Admin\\GoldAdminTestData.xlsx";
 	GoldAdminHelper Admin = new GoldAdminHelper(datafile, "Retailer OrderPlacement");
