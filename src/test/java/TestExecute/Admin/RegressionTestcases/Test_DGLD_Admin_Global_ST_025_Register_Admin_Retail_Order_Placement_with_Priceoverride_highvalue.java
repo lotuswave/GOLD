@@ -22,19 +22,19 @@ public class Test_DGLD_Admin_Global_ST_025_Register_Admin_Retail_Order_Placement
     	Admin.Admin_signin("AccountDetails");
     	Admin.Customers();
     	Admin.Allcustomers();
-    	Admin.SelectCustomer_Edit("DRYWebsite");
-    	Admin.Edit_Customer_StoreCredit("DRYWebsite");
+    	Admin.SelectCustomer_Edit("HYFWebsite");
+    	Admin.Edit_Customer_StoreCredit("HYFWebsite");
     	Admin.click_Sales();
     	Admin.Click_Orders_Salesmenu();
     	Admin.Click_CreatNewOrders(); 
-    	Admin.Enter_email("DRYWebsite");
-    	Admin.Select_store("DRYWebsite");
-        Admin.Add_product_SKU("DRYWebsite");
-        HashMap<String, String> updatedprice = Admin.update_customprice_withhighprice("DRYWebsite");
+    	Admin.Enter_email("HYFWebsite");
+    	Admin.Select_store("HYFWebsite");                                                                //HYFWebsite,OXOWebsite,OpsreyUSWebsite,DRYWebsite
+        Admin.Add_product_SKU("HYFWebsite");
+        HashMap<String, String> updatedprice = Admin.update_customprice_withhighprice("HYFWebsite");
         System.out.println(updatedprice);
     	//Admin.shippingaddress("RetailOrder");
-    	Admin.Select_Shipping_method("DRYWebsite");
-    	Admin.Select_Storecredit_payment_method("DRYWebsite");
+    	Admin.Select_Shipping_method("HYFWebsite");
+    	Admin.Select_Storecredit_payment_method("HYFWebsite");
     	Admin.Submit_RetailOrder_Success();
     	Admin.validate_updated_Highpricevalue_in_Order(updatedprice);
     	
@@ -53,7 +53,7 @@ public class Test_DGLD_Admin_Global_ST_025_Register_Admin_Retail_Order_Placement
     @AfterTest
     public void clearBrowser()
     {
-    // Common.closeAll();
+     Common.closeAll();
 
     }
 
