@@ -9550,7 +9550,7 @@ System.out.println(Website);
 			int customprices = Common.findElements("xpath", "//span[text()='Custom Price*']").size();
 
 			for (int i =1; i <= customprices; i++) {
-				String newhighprice[] = data.get(dataSet).get("highprice").split(",");
+				String newhighprice[] = data.get(dataSet).get("lowprice").split(",");
 				Float New_Price = Float.valueOf(newhighprice[i - 1]);
 				System.out.println(New_Price);
 				Common.clickElement("xpath", "(//input[contains(@id,'use_custom_price')])[" + i + "]");

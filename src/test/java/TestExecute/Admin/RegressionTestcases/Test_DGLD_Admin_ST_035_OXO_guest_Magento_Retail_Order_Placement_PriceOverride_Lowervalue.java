@@ -22,14 +22,14 @@ public class Test_DGLD_Admin_ST_035_OXO_guest_Magento_Retail_Order_Placement_Pri
 			Admin.click_Sales();
 			Admin.Click_Orders_Salesmenu();
 			Admin.Click_CreatNewOrders();
-			Admin.Select_ExistingUser_email("OpsreyEMEAWebsite");
-			Admin.Select_Store("OpsreyEMEAWebsite");
-			Admin.Add_product_SKU("OpsreyEMEAWebsite");
-			Admin.update_customprice("OpsreyEMEAWebsite");
-			Admin.shippingaddress("OpsreyEMEAWebsite");
-			Admin.Select_Shipping_method("OpsreyEMEAWebsite");
-			Admin.Update_StoreCredit_ExistingCustomer("OpsreyEMEAWebsite");
-			Admin.Select_Storecredit_payment_method("OpsreyEMEAWebsite");
+			Admin.Select_ExistingUser_email("HYFWebsite");
+			Admin.Select_Store("HYFWebsite");                          //HYFWebsite,OXOWebsite,OpsreyUSWebsite,DRYWebsite
+			Admin.Add_product_SKU("HYFWebsite");
+			Admin.update_customprice("HYFWebsite");
+			Admin.shippingaddress("HYFWebsite");
+			Admin.Select_Shipping_method("HYFWebsite");
+			Admin.Update_StoreCredit_ExistingCustomer("HYFWebsite");
+			Admin.Select_Storecredit_payment_method("HYFWebsite");
 			Admin.Submit_RetailOrder_Success();
 
 		} catch (Exception e) {
