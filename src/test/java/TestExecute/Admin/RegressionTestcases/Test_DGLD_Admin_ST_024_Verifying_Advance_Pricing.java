@@ -28,13 +28,12 @@ public class Test_DGLD_Admin_ST_024_Verifying_Advance_Pricing {
 			Admin.QAtest_Advanced_Pricing("AdvancedPricing");
 			Admin.Quantityincrease("Quantity");
 			Admin.stockstatus("Stockstatus");
-			Admin.Website_Selection("OSP_EMEA"); // Change testdata as per Website
+			Admin.Website_Selection("Hydroflask");         //OSP_EMEA,OXO,Hydroflask,OSP_US,DRY_US
 			Admin.Flush_Magneto_cache("FlushMagento");
-
 			// Front end validation
-			Admin.open_website("OSP_EMEA"); // change to "prodURL" inside this method if executed in prod & Testdata
-			Admin.Homepage_searchproduct("searchproduct");
-			Admin.clickPLP_product("OSP_EMEA");
+			Admin.open_website("Hydroflask"); // change to "prodURL" inside this method if executed in prod & Testdata
+			Admin.Homepage_searchproduct("Hydroflask");
+			Admin.clickPLP_product("Hydroflask");
 
 		} catch (Exception e) {
 

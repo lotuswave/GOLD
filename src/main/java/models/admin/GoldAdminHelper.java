@@ -4781,7 +4781,7 @@ public class GoldAdminHelper {
 			 Sync.waitPageLoad(60);
 			if (Common.getCurrentURL().contains("emea")) {
 				Common.openNewTab();
-				Common.oppenURL(data.get(Dataset).get("preprodURL_Emea"));
+				Common.oppenURL(data.get(Dataset).get("preprodURL"));
 
 				Sync.waitPageLoad(40);
 			} else {
@@ -7825,20 +7825,16 @@ public class GoldAdminHelper {
 		String Search= data.get(dataSet).get("search");
 
 		try {
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "(//span[@class='a-icon-text-btn__container'])[3]");
-			Common.clickElement("xpath", "(//span[@class='a-icon-text-btn__container'])[3]");
-			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "(//input[@id='autocomplete-0-input'])", data.get(dataSet).get("search"));
-			Thread.sleep(6000);
-			Common.clickElement("xpath", "(//span[@class='icon-header__search--desktop a-icon-text-btn__icon'])[3]");
-			int pages = Common.findElements("xpath", "//span[text()='"+Search+"']").size();
-			System.out.println(pages);
-
-			ExtenantReportUtils.addPassLog("verifying the search functionality",
-					"Should get the  product name in search field",
-					"user successfully Entered the product name in search field",
-					Common.getscreenShotPathforReport("searched productname successfully"));
+			Thread.sleep(4000);
+			Common.clickElement("xpath", "//button[@id='menu-search-icon']"); 
+			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("id");
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(dataSet).get("search"));
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
+			System.out.println(productsearch);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
@@ -11065,7 +11061,7 @@ System.out.println(Website);
 			String Price = Special_Price.replace(Symbols, " ");
 
 			int Addtocart = Common
-					.findElements("xpath", "//form[@id='product_addtocart_form']//button[@title='Add to Cart']").size();
+					.findElements("xpath", "//button[@id='product-addtocart-button']").size();
 			if (Addtocart > 0) {
 				System.out.println("Add to cart Button is displaying");
 			} else {
