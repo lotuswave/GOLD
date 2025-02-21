@@ -656,7 +656,7 @@ public class GoldDrybarusHelper2 {
 			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title')").getText();
+			String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title')]").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
