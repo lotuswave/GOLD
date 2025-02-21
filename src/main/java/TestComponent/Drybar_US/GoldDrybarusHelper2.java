@@ -656,7 +656,7 @@ public class GoldDrybarusHelper2 {
 			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			String name = Common.findElement("xpath", "//span[contains(@class,'pdp-grid-title')]").getText();
+			String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title')").getText();
 			Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
@@ -2729,7 +2729,7 @@ public class GoldDrybarusHelper2 {
 				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
 				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
 				Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
-				String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[1]").getText().toUpperCase();
+				String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
 				System.out.println(size);
 				String size1= data.get(Dataset).get("size").toUpperCase();
 				System.out.println(size1);
