@@ -899,6 +899,8 @@ public class GoldOxoHyvaHelper {
 
 		try {
 			Thread.sleep(2000);
+			
+			
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("id", "guest_details-email_address");
 				Common.textBoxInput("id", "guest_details-email_address", data.get(dataSet).get("Email"));
@@ -918,6 +920,13 @@ public class GoldOxoHyvaHelper {
 		}
 		String expectedResult = "email field will have email address";
 		try {
+			Thread.sleep(3000);
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
+			
 			Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
@@ -1557,9 +1566,17 @@ else
 
 	}
 
-	public void addDeliveryAddress_registerUser(String dataSet) {
+	public void addDeliveryAddress_registerUser(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
+		
+		
+		Thread.sleep(4000);
+		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
 		int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 		if (size > 0) {
 			try {
