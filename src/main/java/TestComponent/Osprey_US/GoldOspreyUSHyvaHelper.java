@@ -3123,7 +3123,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitElementPresent("xpath", "(//a[@title='Sign Out'])[1]");
 
 			Common.clickElement("xpath", "(//a[@title='Sign Out'])[1]");
-			Thread.sleep(3000);
+		
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
