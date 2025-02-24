@@ -1,5 +1,6 @@
 package models.admin;
 
+import java.io.*;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
@@ -25,7 +28,6 @@ import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
 import groovyjarjarantlr4.v4.parse.ANTLRParser.sync_return;
-
 public class GoldAdminHelper {
 
 	String datafile;
@@ -7509,12 +7511,15 @@ public class GoldAdminHelper {
 			Thread.sleep(2000);
 			String Sales = Common.findElement("xpath", "//li[@class='item-sales-order    level-2']").getText();
 			System.out.println(Sales);
-			// Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and
-			// @style='display: none;']");
+		
 			Common.assertionCheckwithReport(Sales.equals("Orders"), "To verify the sales menu ",
 					"After clicking the sales menu it will display menu options ",
 					"Successfully clicked the sales menu and it displayed the Catalog options",
 					"Failed to click the sales menu");
+			Common.clickElement("xpath", "//li[@class='item-sales-order    level-2']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7526,6 +7531,7 @@ public class GoldAdminHelper {
 		}
 
 	}
+
 
 	public void Click_Orders_Salesmenu() {
 		// TODO Auto-generated method stub
@@ -11341,6 +11347,297 @@ System.out.println(Website);
 
 	}
 
+	public void prepareTaxData(String fileName) {
+		// TODO Auto-generated method stub
+		
+			try{
+				
+				File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Admin/"+fileName);
+				XSSFWorkbook workbook;
+				XSSFSheet sheet;
+				Row row;
+				Cell cell;
+				int rowcount;
+				if(!(file.exists()))
+				{
+				workbook = new XSSFWorkbook();
+				sheet = workbook.createSheet("Order ID");
+				CellStyle cs = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.GOLD.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Invoice_OrderDetails");
+
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("S.No");
+				cell = row.createCell(1);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Order Status");
+				cell=row.createCell(2);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Invoice Number");
+				cell=row.createCell(3);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Shipment Number");
+				rowcount=2;
+				}
+
+				else
+				{
+				workbook = new XSSFWorkbook(new FileInputStream(file));
+				sheet=workbook.getSheet("Order ID");
+				rowcount=sheet.getLastRowNum()+1;
+				}
+				/*row = sheet.createRow(rowcount);
+				cell = row.createCell(0);*/
+
+
+
+				FileOutputStream fileOut = new FileOutputStream(file);
+				workbook.write(fileOut);
+				fileOut.flush();
+				fileOut.close();
+
+
+
+				} catch (Exception e) {
+				e.printStackTrace();
+				}
+				}
+
+	public String Invoice_Number(String Dataset) {
+		// TODO Auto-generated method stub
+		String orderNumber=data.get(Dataset).get("OrderNumber");
+		String Invoice_Number="";
+		try
+		{
+			Thread.sleep(4000);
+			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
+			System.out.println(Number);
+			if(Number.equals(orderNumber))
+			 {
+						Thread.sleep(3000);
+						Common.clickElement("xpath", "//td//a[@class='action-menu-item']");	
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						Common.assertionCheckwithReport(Common.getCurrentURL().contains("/sales/order/view"), "To Validate the navigatd to the order details page",
+								"It should navigate to order details page",
+								"Sucessfully navigate to the order details page",
+								"Failed to Navigate to the order deatils page");
+			 }
+			Common.clickElement("xpath", "//li[@id='sales_order_view_tabs_order_invoices']");
+			 Invoice_Number=Common.findElement("xpath", "(//tr[@class='data-row']//td//div)[1]").getText().trim();
+			System.out.println(Invoice_Number);
+		    	
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the navigatd to the order details page",
+					"It should navigate to order details page",
+					"Unable navigate to the order details page",
+					"Failed to Navigate to the order details page");
+			Assert.fail();
+		}
+		return Invoice_Number;
+		
+	}
+
+	public String Shipment_Number() {
+		// TODO Auto-generated method stub
+		String Shipment_Number="";
+		try
+		{
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//a[@id='sales_order_view_tabs_order_shipments']");
+			Common.clickElement("xpath", "//a[@id='sales_order_view_tabs_order_shipments']");
+			Thread.sleep(2000);
+			Common.assertionCheckwithReport(Common.findElement("xpath", "(//th[@class='data-grid-th _sortable _draggable _ascend']//span[@class='data-grid-cell-content'])[2]").getText().contains("Shipment"), "To Validate the navigatd to the shipment page",
+					"It should navigate to Shipment details page",
+					"Sucessfully navigate to the Shipment details page",
+					"Failed to Navigate to the order Shipment page");
+			 Shipment_Number=Common.findElement("xpath", "((//tr[@class='data-row'])[2]//td//div)[1]").getText().trim();
+			System.out.println(Shipment_Number);
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the navigatd to the Shipment details page",
+					"It should navigate to Shipment details page",
+					"Unable navigate to the Shipment details page",
+					"Failed to Navigate to the Shipment details page");
+			Assert.fail();
+		}
+		return Shipment_Number;
+		
+	}
+
+	public void Information_Page() {
+		// TODO Auto-generated method stub
+		try
+		{
+			Thread.sleep(2000);
+			Sync.waitElementPresent("xpath", "//a[@id='sales_order_view_tabs_order_info']");
+			Common.clickElement("xpath", "//a[@id='sales_order_view_tabs_order_info']");
+			int size=Common.findElements("xpath", "//table[@class='data-table admin__table-primary edit-order-table']//tbody//table//tr").size();
+			System.out.println(size);
+			for(int i=0;i<size;i++)
+			{
+				int value=i+1;
+				String details=Common.findElement("xpath", "(//table[@class='data-table admin__table-primary edit-order-table']//tbody//table//tr)['"+ value +"']").getText().trim();
+				System.out.println(details);
+				Common.assertionCheckwithReport(details.contains("Ordered") || details.contains("Invoiced") || details.contains("Shipped") , "To Validate the shipment and invoice is displayed",
+						"It should display shippment and invoice for the order",
+						"Sucessfully shipment and invoice has been displayed for thee orders",
+						"Failed to display the shipment and invoice for the orders");
+				
+			}
+		Common.clickElement("xpath", "//button[@title='Back']");
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("/sales/order/"), "To Validate navigated to the order page",
+				"should navigate sucessfully to the orders page ","Successfullt user navigated to the orders page",
+				"Failed to Navigate to the order details page");
+		
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To Validate the navigatd to the order details page",
+					"It should navigate to order details page",
+					"Unable navigate to the order details page",
+					"Failed to Navigate to the order details page");
+			Assert.fail();
+		}
+		
+	}
+	
+	
+	public void writeOrderNumber(String Status,String Invoice,String Shipment)
+			throws FileNotFoundException, IOException {
+		// String fileOut="";
+		try {
+
+			File file = new File(
+					System.getProperty("user.dir") + "/src/test/resources//TestData//Admin//Admin_Invoice_OrderNumbers.xlsx");
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			sheet = workbook.getSheet("Order ID");
+
+			if ((workbook.getSheet("Order ID")) == null) {
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Order ID");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				rowcount = 2;
+
+			}
+
+			else {
+
+				sheet = workbook.getSheet("Order ID");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			row = sheet.createRow(rowcount);
+			cell = row.createCell(0);
+			cell.setCellType(CellType.NUMERIC);
+			int SNo=rowcount-1;
+			cell.setCellValue(SNo);
+			cell = row.createCell(1);
+			cell.setCellType(CellType.STRING);
+			
+			cell.setCellValue(Status);
+			
+			cell = row.createCell(2);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Invoice);
+			
+			cell = row.createCell(3);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Shipment);
+			
+			
+			System.out.println(Shipment);
+			FileOutputStream fileOut = new FileOutputStream(file);
+			
+			workbook.write(fileOut);
+		
+			fileOut.flush();
+			fileOut.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		}
+	
+	public String ordersearch_status(String Dataset) {
+		// TODO Auto-generated method stub
+		String orderNumber=data.get(Dataset).get("OrderNumber");
+		String Status="";
+		try
+		{
+			int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+			if (filters > 0) {
+				Common.clickElement("xpath",
+						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Thread.sleep(8000);
+				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
+				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Thread.sleep(8000);
+			    Status=Common.findElement("xpath", "(//tr[@class='data-row']//child::td)[9]//div").getText();
+				System.out.println(Status);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("/sales/order/"), "To Validate navigated to the order page",
+						"should navigate sucessfully to the orders page ","Successfullt user navigated to the orders page",
+						"Failed to Navigate to the order details page");
+		}
+		}
+			catch(Exception | Error e)
+			{
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("To Validate the navigatd to the order details page",
+						"It should navigate to order details page",
+						"Unable navigate to the order details page",
+						"Failed to Navigate to the order details page");
+				Assert.fail();
+			}
+	
+		return Status;
+	
+
+}
 	
 
 }
