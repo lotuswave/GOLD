@@ -9,7 +9,7 @@ import TestComponent.OXO.GoldOxoHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OXO_ST_075_employee_Discount_for_Register_User {
+public class Test_DGLD_OXO_ST_075_GuestUser_checkout_one_line_Item_2_QTY_with_gift_code_Full_redemption {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
@@ -20,18 +20,14 @@ public class Test_DGLD_OXO_ST_075_employee_Discount_for_Register_User {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.click_singinButton();
-			Oxo.Usersignin("EmpAccountDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
-//			Oxo.search_product("Product");
-//			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
-			Oxo.addDeliveryAddress_registerUser("AccountDetails");
+			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
-			Oxo.discountCode("EmployeeDiscount");
-			Oxo.clickSubmitbutton_Shippingpage();
-			Oxo.updatePaymentAndSubmitOrder("PaymentDetails");
+			Oxo.clickSubmitbutton_Shippingpage();       
+			Oxo.Gift_card("Full_RedeemGiftcard");
+			Oxo.giftCardSubmitOrder();
 		
 
 		} catch (Exception e) {
