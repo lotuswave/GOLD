@@ -25,7 +25,6 @@ public class Test_DGLD_OXO_ST_053_Validate_PLP_page {
 			Oxo.filter_By("Barware");
 			Oxo.color_validation("Sage");
 			Oxo.price_filter_validation();
-			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
