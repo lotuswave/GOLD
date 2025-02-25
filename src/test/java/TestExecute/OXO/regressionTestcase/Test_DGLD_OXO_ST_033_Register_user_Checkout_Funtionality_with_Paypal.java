@@ -26,6 +26,8 @@ public class Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypa
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
+			Oxo.Gift_cards("Oxo Gift Card");
+			Oxo.Card_Value("price");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
