@@ -13,7 +13,7 @@ import TestLib.Login;
 public class Test_DGLD_OXO_ST_053_Validate_PLP_page {
 
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
-	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"PDP");
+	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_PLP_Page() throws Exception {
 
