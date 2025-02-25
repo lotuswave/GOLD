@@ -6773,6 +6773,7 @@ catch(Exception | Error e)
 
 		String name = "";
 		try {
+			Common.clickElement("xpath","//div[text()='Price']");
 			Thread.sleep(3000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("$", "").replace(".00", "");
