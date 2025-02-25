@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_BCST_016_Validation_Shipping_Address_form_for_Guest
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

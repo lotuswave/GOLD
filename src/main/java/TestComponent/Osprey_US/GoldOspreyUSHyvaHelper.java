@@ -11427,7 +11427,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //				Thread.sleep(2000);
 //				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
 //				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
-//				Thread.sleep(4000);
+				Thread.sleep(4000);
 //				Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 //				Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 				Common.clickElement("xpath", "//span[text()='Pay with']");
