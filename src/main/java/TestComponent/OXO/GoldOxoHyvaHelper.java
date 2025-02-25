@@ -380,9 +380,9 @@ public class GoldOxoHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[@itemprop='image']");
 				String s = webelementslist.get(i).getAttribute("src");
 				Thread.sleep(3000);
 				System.out.println(s);
@@ -396,6 +396,7 @@ public class GoldOxoHyvaHelper {
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod"))
 			{
+				Thread.sleep(2000);
 			    Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			} 
 //			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
