@@ -23,30 +23,27 @@ public class Test_DGLD_Admin_ST_010_Create_NewPage_And_Update_Details {
 		Admin.Admin_signin("AccountDetails");
 		Admin.click_content();
 	    Admin.pages();
-	    Admin.Clearfilter();
-	    Admin.newpageCTA("Content");
-	    Admin.Contentpage();
-		Admin.hot_elements();
+//	    Admin.Clearfilter();
+//	    Admin.newpageCTA("Content");
+//	    Admin.Contentpage();
+//		Admin.hot_elements();
 
 		//**** HERO BANNER Block ****//
-		Admin.PLPCMS_content();
-		Admin.dragndrop_heroBanner();
-		Admin.edit_Herobanner();
-		Admin.edit_Herobanner_ContentSection("Content");
-		Admin.click_website_categoty("Content");
-		Admin.herobanner_images("Content");
-        Admin.edit_HeroBanner_ContentAlignment("Content");
-        Admin.edit_Hero_Banner_content_color("Content");
-        Admin.allbackground("Content");
-        Admin.savecontent("Content");
+//		Admin.PLPCMS_content();
+//		Admin.dragndrop_heroBanner();
+//		Admin.edit_Herobanner();
+//		Admin.edit_Herobanner_ContentSection("Content");
+//		Admin.click_website_categoty("Content");
+//		Admin.herobanner_images("Content");
+//        Admin.edit_HeroBanner_ContentAlignment("Content");
+//        Admin.edit_Hero_Banner_content_color("Content");
+//        Admin.allbackground("Content");
+//        Admin.savecontent("Content");
 //        Admin.page_Cache("FlushMagento");
-//        Admin.openwebsite("Content");
-//        Admin.website_verification_Herobanner();
-//        Admin.website_image_verification_herobanner("Content");
-//        Admin.Websiteverification_hero_category("Content"); 
+//        
         
        // ***** CLP HERO BANNER Block ******//
-/*      Admin.Search_previous_page_Magento("Content");
+        Admin.Search_previous_page_Magento("Content");
 		Admin.Contentpage();
 		Admin.hot_elements();
 		Admin.PLPCMS_content();
@@ -56,11 +53,7 @@ public class Test_DGLD_Admin_ST_010_Create_NewPage_And_Update_Details {
 		Admin.Editandsavepage();
 		Admin.savecontent("CLPHerobanner");
 		Admin.page_Cache("FlushMagento");
-		Admin.openwebsite("CLPHerobanner");
-		//Admin.ClosADD();
-		Admin.AcceptAll();
-		Admin.validate_content_alignment("left");
-		Admin.Validate_CLP_Content_Frontend("CLPHerobanner");  */
+		
 		
 		//****  CATGEORY/PRODUCT SLIDER Block ****//
     /*  Admin.Search_previous_page_Magento("Content");
@@ -105,6 +98,20 @@ public class Test_DGLD_Admin_ST_010_Create_NewPage_And_Update_Details {
 	    Admin.openwebsite("Content");  
 	    Admin.website_SKU_verification();    */
 
+		
+		///*** WebSite Validations***///
+//		Admin.openwebsite("Content");
+//      Admin.website_verification_Herobanner();
+//      Admin.website_image_verification_herobanner("Content");
+//      Admin.Websiteverification_hero_category("Content"); 
+		
+//		Admin.openwebsite("CLPHerobanner");
+//		//Admin.ClosADD();
+//		Admin.AcceptAll();
+//		Admin.validate_content_alignment("left");
+//		Admin.Validate_CLP_Content_Frontend("CLPHerobanner");  
+		
+		
 	   // Admin.deletepage("Content");
       //  Admin.Clearfilter();
  

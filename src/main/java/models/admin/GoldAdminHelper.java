@@ -82,9 +82,7 @@ public class GoldAdminHelper {
 
 				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
 				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
-				Thread.sleep(15000);
-				
-				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
 						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
@@ -1899,29 +1897,22 @@ public class GoldAdminHelper {
 	}
 
 	public void click_content() {
-		// TODO Auto-generated method stub
+
 		try {
-			Common.switchToFirstTab();
-			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//li[@id='menu-magento-backend-content']");
-			Sync.waitElementPresent("xpath", "//li[@id='menu-magento-backend-content']");
-			String content = Common.findElement("xpath", "//strong[contains(text(),'Content')]").getText();
-			System.out.println(content);
+			Sync.waitElementPresent("xpath", "//span[text()='Pages']");
+			Common.clickElement("xpath", "//span[text()='Pages']");
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Common.assertionCheckwithReport(content.equals("Content"),
-					"To validate the content menu after admin clicks on the content from the main menu",
-					"After clicking the content Admin should display the content menu options",
-					"Admin successfully clicked the content and it displayed the Content Menu",
-					"Admin failed to click the Content menu");
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Pages / Magento Admin"),
+					"Validating content field page navigation ", "After clicking on pages it will navigate page field ",
+					"Successfully navigate to the page field ", "Failed to navigate to the page filed");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog(
-					"To validate the content menu after admin clicks on the content from the main menu",
-					"After clicking the content Admin should display the content menu options",
-					"Admin failed to click the content from the mail menu",
-					Common.getscreenShotPathforReport("Admin failed to click on the content menu"));
+			ExtenantReportUtils.addFailedLog("Validating content filed page navigation ",
+					"after clicking on pages it will navigate page filed ", "Unable to navigate to the page filed ",
+					Common.getscreenShotPathforReport("Failed to navigate to the page filed"));
 			Assert.fail();
+
 		}
 
 	}
@@ -2152,7 +2143,7 @@ public class GoldAdminHelper {
 			Thread.sleep(3000);
 			Common.switchFrames("id","hot_hero_banner_form_subtitle_ifr");
 			Sync.waitElementPresent("xpath", "//body[@data-id='hot_hero_banner_form_subtitle']");
-			Common.textBoxInput("xpath", "//body[@data-id='hot_hero_banner_form_subtitle']", data.get(DataSet).get("subtitle"));
+			Common.clickAndtextBoxInput("xpath", "//body[@data-id='hot_hero_banner_form_subtitle']", data.get(DataSet).get("subtitle"));
 //			Common.dropdown("xpath", "(//button[@title='Format Paragraph'])[2]", Common.SelectBy.TEXT,
 //					data.get(DataSet).get("headingtype"));
 			Common.switchToDefault();
@@ -2526,6 +2517,8 @@ public class GoldAdminHelper {
 
 	public void draganddropContentBlock(WebElement source) {
 		try {
+			
+			Sync.waitElementClickable("xpath", "//div[contains(@class,'pagebuilder-emp')]");
 			Common.dragdrop(source, "xpath", "//div[contains(@class,'pagebuilder-emp')]");
 
 		} catch (Exception | Error e) {
@@ -4111,8 +4104,15 @@ public class GoldAdminHelper {
 			// Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and
 			// @style='display: none;']");
 			// Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
-			Common.scrollIntoView("xpath", "//small[text()='" + image + "']");
-			Common.javascriptclickElement("xpath", "//small[text()='" + image + "']");
+			WebElement element = Common.findElementBy("xpath", "//div[@class='popup popup-loading']");
+			if(element.isDisplayed()) {
+				Sync.waitElementInvisible("xpath", "//div[@class='popup popup-loading']");
+			}
+			else {
+				Sync.waitPageLoad();
+			}
+			Common.scrollIntoView("xpath", "//img[@alt='" + image + "']");
+			Common.javascriptclickElement("xpath", "//img[@alt='" + image + "']");		
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
 			Common.javascriptclickElement("xpath", "//span[text()='Add Selected']");
 			Common.scrollIntoView("xpath", "(//a/img[@class='preview-image'])[1]");
@@ -5552,8 +5552,9 @@ public class GoldAdminHelper {
 	public void dragndrop_CLP_Hero_Content() {
 		try {
 			WebElement element = Common.findElement("xpath", "//span[text()='CLP Hero Banner']");
-			draganddropContentBlock(element);
-			String blockname = Common.findElement("xpath", "//div[@class='pagebuilder-content-type-wrapper']/div")
+			draganddrop_CLP_ContentBlock(element);
+			Sync.waitElementPresent(60,"xpath", "(//div[@class='pagebuilder-content-type-wrapper']/div)[1]");
+			String blockname = Common.findElement("xpath", "(//div[@class='pagebuilder-content-type-wrapper']/div)[1]")
 					.getAttribute("data-content-type");
 			Common.assertionCheckwithReport(blockname.equals("hot_clp_banner"),
 					"Validating cardtiles Dragndrop operation", "CLP banner dragndrop to content with options",
@@ -5570,6 +5571,16 @@ public class GoldAdminHelper {
 		}
 	}
 
+	public void draganddrop_CLP_ContentBlock(WebElement source) {
+		try {
+			
+			Sync.waitElementClickable("xpath", "(//div[contains(@class,'pagebuilder-image-uploader')])[1]");
+			Common.dragdrop(source, "xpath", "(//div[contains(@class,'pagebuilder-image-uploader')])[1]");
+
+		} catch (Exception | Error e) {
+
+		}
+	}
 	public void edit_CLP_block_content(String dataSet) {
 		String Editpagetitle = data.get(dataSet).get("Editpagetitle");
 		String component = data.get(dataSet).get("component");
@@ -9541,13 +9552,13 @@ System.out.println(Website);
 		// TODO Auto-generated method stub
 		String title = data.get(Dataset).get("pageTitle");
 		try {
-			click_content();
-			pages();
+//			click_content();
+//			pages();
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.clickElement("xpath", "//button[@data-action='grid-filter-expand']");
 			Common.textBoxInput("xpath", "//input[@name='title']", title);
-			Common.actionsKeyPress(Keys.ENTER);
+			Common.clickElement("xpath", "//button[@class='action-secondary']");
 			String name = Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[2]").getText();
 			Common.assertionCheckwithReport(name.equals(title), "Validating the title name should be match",
 					"title name should be appear in the pages", "Sucessfully title should be appear in the pages",
