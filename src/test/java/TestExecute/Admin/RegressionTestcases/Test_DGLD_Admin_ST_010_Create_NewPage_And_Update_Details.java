@@ -23,23 +23,23 @@ public class Test_DGLD_Admin_ST_010_Create_NewPage_And_Update_Details {
 		Admin.Admin_signin("AccountDetails");
 		Admin.click_content();
 	    Admin.pages();
-//	    Admin.Clearfilter();
-//	    Admin.newpageCTA("Content");
-//	    Admin.Contentpage();
-//		Admin.hot_elements();
+	    Admin.Clearfilter();
+	    Admin.newpageCTA("Content");
+	    Admin.Contentpage();
+		Admin.hot_elements();
 
 		//**** HERO BANNER Block ****//
-//		Admin.PLPCMS_content();
-//		Admin.dragndrop_heroBanner();
-//		Admin.edit_Herobanner();
-//		Admin.edit_Herobanner_ContentSection("Content");
-//		Admin.click_website_categoty("Content");
-//		Admin.herobanner_images("Content");
-//        Admin.edit_HeroBanner_ContentAlignment("Content");
-//        Admin.edit_Hero_Banner_content_color("Content");
-//        Admin.allbackground("Content");
-//        Admin.savecontent("Content");
-//        Admin.page_Cache("FlushMagento");
+		Admin.PLPCMS_content();
+		Admin.dragndrop_heroBanner();
+		Admin.edit_Herobanner();
+		Admin.edit_Herobanner_ContentSection("Content");
+		Admin.click_website_categoty("Content");
+		Admin.herobanner_images("Content");
+        Admin.edit_HeroBanner_ContentAlignment("Content");
+        Admin.edit_Hero_Banner_content_color("Content");
+        Admin.allbackground("Content");
+        Admin.savecontent("Content");
+        Admin.page_Cache("FlushMagento");
 //        
         
        // ***** CLP HERO BANNER Block ******//
