@@ -82,6 +82,7 @@ public class GoldAdminHelper {
 
 				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
 				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
+				Thread.sleep(15000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
@@ -4104,13 +4105,7 @@ public class GoldAdminHelper {
 			// Sync.waitElementInvisible("xpath", "//div[@class='loading-mask' and
 			// @style='display: none;']");
 			// Common.isElementVisibleOnPage(30, "xpath", "//div[@id='contents']");
-			WebElement element = Common.findElementBy("xpath", "//div[@class='popup popup-loading']");
-			if(element.isDisplayed()) {
-				Sync.waitElementInvisible("xpath", "//div[@class='popup popup-loading']");
-			}
-			else {
-				Sync.waitPageLoad();
-			}
+			Thread.sleep(30000);
 			Common.scrollIntoView("xpath", "//img[@alt='" + image + "']");
 			Common.javascriptclickElement("xpath", "//img[@alt='" + image + "']");		
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
@@ -4126,6 +4121,11 @@ public class GoldAdminHelper {
 			Sync.waitElementPresent("xpath", "(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
 			Common.javascriptclickElement("xpath",
 					"(//div[@class='admin__field']//label[text()='Select from Gallery'])[2]");
+			
+			Thread.sleep(60000);
+			Common.scrollIntoView("xpath", "//small[text()='" + image2 + "']");
+		      Common.scrollToElementAndClick("xpath", "//small[text()='" + image2 + "']");
+        
 			Common.scrollIntoView("xpath", "//small[text()='" + image2 + "']");
 			Common.javascriptclickElement("xpath", "//small[text()='" + image2 + "']");
 			Sync.waitElementPresent("xpath", "//span[text()='Add Selected']");
