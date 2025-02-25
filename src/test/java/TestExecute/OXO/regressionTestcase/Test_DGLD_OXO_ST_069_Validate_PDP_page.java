@@ -18,8 +18,8 @@ public class Test_DGLD_OXO_ST_069_Validate_PDP_page {
 
 		try {
 			Oxo.verifingHomePage();
-			Oxo.search_product("Product");
-			Oxo.Configurable_addtocart_pdp("Product");
+			Oxo.babytoddler_headerlinks("Baby & Toddler");
+			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 			Oxo.click_UGC();
 			Oxo.PDP_cofigurable_product();
 			Oxo.configurableproduct_Sticky_add_to_cart("ConfigProduct");
