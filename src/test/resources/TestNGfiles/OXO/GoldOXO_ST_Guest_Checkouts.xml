@@ -146,6 +146,6 @@
 		<classes>
 			<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_095_Guest_User_Checkout_with_APO_Address"/>
 		</classes>
-	</test>
+	</test> 
 
 </suite>  

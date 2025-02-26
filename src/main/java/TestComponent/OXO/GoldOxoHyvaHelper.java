@@ -1571,8 +1571,9 @@ else
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
 		
-		
+		Sync.waitPageLoad();
 		Thread.sleep(4000);
+//		Sync.waitElementVisible(20, "xpath", "(//header[@data-sticky='sticky-enabled'])[1]");
 		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
 		{
 			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
@@ -4189,9 +4190,12 @@ catch(Exception | Error e)
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
-			int size = Common.findElements("xpath", "//a[text()='Log in with a password instead']").size();
+			Thread.sleep(2000);
+			int size = Common.findElements("xpath", "(//a[text()='Try another way'])[1]").size();
 			if(size>0) {
-				Common.clickElement("xpath", "//a[text()='Log in with a password instead']");
+				String otp=Common.findElement("xpath", "(//a[text()='Try another way'])[1]").getText();
+				System.out.println(otp);
+				Common.clickElement("xpath", "(//a[text()='Try another way'])[1]");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
