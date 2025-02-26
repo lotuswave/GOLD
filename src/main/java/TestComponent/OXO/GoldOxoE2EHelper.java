@@ -3391,11 +3391,21 @@ catch(Exception | Error e)
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
+			int size = Common.findElements("xpath", "(//a[text()='Try another way'])[1]").size();
+			if(size>0) {
+				String otp=Common.findElement("xpath", "(//a[text()='Try another way'])[1]").getText();
+				System.out.println(otp);
+				Common.clickElement("xpath", "(//a[text()='Try another way'])[1]");
+				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
+			}
+			else
+			{
 			Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			int sizeemail = Common.findElements("id", "email").size();
 
 			Common.assertionCheckwithReport(sizeemail > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
+			}
 
 			try {
 				Common.clickElement("id", "btnLogin");
