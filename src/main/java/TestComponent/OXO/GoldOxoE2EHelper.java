@@ -11163,10 +11163,18 @@ public void header_1_Percent_Planet() {
 				
 				Sync.waitPageLoad(8000);
 				Thread.sleep(4000);
-				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
-				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
-				Thread.sleep(15000);
+				////**Uncomment below 2 Lines pff code If execute in VM**///
+//				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
+//				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
 				
+				Sync.waitElementPresent("id", "username");
+				 Common.clickAndtextBoxInput("id", "username",data.get(dataSet).get("UserName"));
+				 Sync.waitElementPresent(30, "name","login[password]");
+				 Common.textBoxInput("name", "login[password]",data.get(dataSet).get("Password"));
+				 Sync.waitElementClickable("xpath", "//button[@class='action-login action-primary']");
+					 Common.mouseOverClick("xpath", "//button[@class='action-login action-primary']");
+//				Thread.sleep(15000);
+					 Thread.sleep(5000);
 				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
 						"To Validate the Admin is landing on the Dashboard after successfull Signin",
 						"After clicking on sigin button admin should navigate to the dashboard",
