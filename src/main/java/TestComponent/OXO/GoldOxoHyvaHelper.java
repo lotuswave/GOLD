@@ -11250,7 +11250,8 @@ public void header_1_Percent_Planet() {
 								|| Common.getCurrentURL().contains("privacy")
 								|| Common.getCurrentURL().contains("terms")
 								|| Common.getCurrentURL().contains("oxo-rewards-terms-and-conditions")
-								|| Common.getCurrentURL().contains("faq"),
+								|| Common.getCurrentURL().contains("faq")
+								|| Common.getCurrentURL().contains("oxo-gift-card"),
 								
 						"validating the links navigation from footer Links",
 						"After Clicking on" + footerlinks[i] + "it should navigate to the",
