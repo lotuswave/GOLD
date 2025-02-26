@@ -23,6 +23,7 @@ public class TEST_DGLD_DB_US_ST_011_Footer_Link_Validation {
 			Drybar.Company("Company");
 			Drybar.Support("support");
 			Drybar.Information("information");
+			Drybar.newtab_FooterLinks("newtab_Footer");
 
 		} catch (Exception e) {
 

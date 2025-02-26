@@ -12319,6 +12319,51 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 //	close_add();
 }
 
+public void newtab_FooterLinks(String Dataset) {
+	// TODO Auto-generated method stub
+	
+		String footer = data.get(Dataset).get("Footer Links");
+		String[] footerlinks = footer.split(",");
+		int i = 0;
+		try {
+			for (i = 0; i < footerlinks.length; i++) {
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Sync.waitElementPresent(30, "xpath",
+						"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+				Thread.sleep(3000);
+				Common.findElement("xpath",
+						"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+				   Common.switchWindowsAfterClick("xpath",
+						"//a[contains(text(),\""+footerlinks[i] +"\" )]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+			
+				System.out.println(footerlinks[i]);
+				
+				Common.assertionCheckwithReport(
+						Common.getPageTitle().contains(footerlinks[i])
+								|| Common.getCurrentURL().contains("kustomer") ,
+						"validating the links navigation from footer Links",
+						"After Clicking on" + footerlinks[i] + "it should navigate to the",
+						footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
+						"Unable to Navigated to the" + footerlinks[i] + "Links"); 
+				Thread.sleep(5000);
+			    Common.closeCurrentWindow(); 
+		           Common.switchToFirstTab();
+				Thread.sleep(2000);
+				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				System.out.println(size);
+	}
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		Assert.fail();
+	}
+	
+}
+
 }
 		
 
