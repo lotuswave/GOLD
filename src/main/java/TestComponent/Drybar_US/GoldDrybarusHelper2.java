@@ -7221,6 +7221,7 @@ public void FUll_Payment(String dataSet) {
 				Thread.sleep(4000);
 //				String title = Common.findElement("xpath","//div[contains(@class,'c-clp-hero')]").getAttribute("Class");
 //				System.out.println(title);
+				Common.scrollIntoView("xpath", "//nav[@id='breadcrumbs']");
 				String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 						.getAttribute("aria-label");
 				System.out.println(breadcrumbs);
@@ -7228,7 +7229,7 @@ public void FUll_Payment(String dataSet) {
 				System.out.println(filter);
 				String Sort = Common
 						.findElement("xpath",
-								"//div[@class='flex items-center']//span")
+								"//div[@id='algolia_instant_sorter']//span")
 						.getText();
 				System.out.println(Sort);
 				Thread.sleep(4000);
@@ -7260,7 +7261,6 @@ public void FUll_Payment(String dataSet) {
 				System.out.println(textValue); // This will print: 14
 				
 				Common.clickElement("xpath", "//a[text()='"+category+"']");
-				
 				Thread.sleep(4000);
 //				int textValue = Integer.parseInt(text);
 				String categoryvalue=Integer.toString(textValue);
@@ -7271,11 +7271,11 @@ public void FUll_Payment(String dataSet) {
 				String items=Integer.toString(noOfItems);
 				System.out.println(text);
 				System.out.println(textValueAfterFilter);
-				System.out.println(items);
+				System.out.println("noOfItems_:" +items);
 				System.out.println(categoryvalue);
-				if(categoryvalue.equals(items))
+				if(textValueAfterFilter.equals(items))
 				{
-					Common.assertionCheckwithReport(categoryvalue.equals(items),
+					Common.assertionCheckwithReport(textValueAfterFilter.equals(items),
 							"To validate the filter in Product Listing Page",
 							"User should able to filter in Product Listing Page",
 							"Sucessfully filters in the Product Listing Page",
@@ -7297,7 +7297,7 @@ public void FUll_Payment(String dataSet) {
 			String items1=Integer.toString(noOfItems1);
 			System.out.println(items1);
 			System.out.println(categoryvalue);
-			Common.assertionCheckwithReport(categoryvalue.equals(items1),
+			Common.assertionCheckwithReport(textValueAfterFilter.equals(items1),
 					"To validate the filter in Product Listing Page",
 					"User should able to filter in Product Listing Page",
 					"Sucessfully filters in the Product Listing Page",
