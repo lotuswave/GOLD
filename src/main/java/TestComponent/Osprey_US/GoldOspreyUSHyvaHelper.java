@@ -6012,18 +6012,18 @@ return Number;
 					.replace(symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			String productname = Common
-					.findElement("xpath", "(//div[contains(@class,'ustify-betwee')]/p/a)[1]")
+					.findElement("xpath", "(//div[contains(@class,'ustify-betwee')]/p/a)[2]")
 					.getText();
-			String productamount1 = Common.getText("xpath", "(//p//span[@class='price'])[1]").replace(symbol,
+			String productamount1 = Common.getText("xpath", "(//p//span[@class='price'])[2]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
 			if(Common.getCurrentURL().contains("preprod"))
 			{
 			if (productname.equals(deleteproduct)) {
 				Sync.waitElementPresent(30, "xpath",
-						"(//button[contains(@title,'Remove product')])[1]");
+						"(//button[contains(@title,'Remove product')])[2]");
 				Common.clickElement("xpath",
-						"(//button[contains(@title,'Remove product')])[1]");
+						"(//button[contains(@title,'Remove product')])[2]");
 				Sync.waitElementPresent("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
 				Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary') and contains(text(),'OK')]");
 			} else {

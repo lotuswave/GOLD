@@ -3817,9 +3817,9 @@ public class GoldDrybarusHelper2 {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//span[text()='Back to Cart']");
-			Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
-			Common.clickElement("xpath", "//span[text()='Back to Cart']");
+			Common.scrollIntoView("xpath", "//span[text()='Back To Cart']");
+			Sync.waitElementVisible(30, "xpath", "//span[text()='Back To Cart']");
+			Common.clickElement("xpath", "//span[text()='Back To Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -5747,15 +5747,15 @@ public void FUll_Payment(String dataSet) {
 				String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
 				if(klarna.contains("Choose how to pay"))
 				{
-					Thread.sleep(4000);
-					Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-					Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
-					Common.clickElement("xpath", "//label[@for='pay_now__label']");
-					
-					Thread.sleep(2000);
-					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
-					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
-					Thread.sleep(4000);
+					Thread.sleep(3000);
+//					Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+//					Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+//					Common.clickElement("xpath", "//label[@for='pay_now__label']");
+//					
+//					Thread.sleep(2000);
+//					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
+//					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
+//					Thread.sleep(4000);
 					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
 					Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 					Common.clickElement("xpath", "//span[text()='Pay with']");
@@ -7185,8 +7185,17 @@ public void FUll_Payment(String dataSet) {
 					Common.clickElement("xpath",
 							"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
-					Thread.sleep(4000);
-					String title = Common.findElement("xpath", "//div/h1[@data-content-type='heading']").getText();
+					Thread.sleep(3000);
+					String title = "";
+					if 
+		            (Common.findElements("xpath", "//div/h1[@data-content-type='heading']").size() > 0) {
+		                title = Common.findElement("xpath", "//div/h1[@data-content-type='heading']").getText();
+		            } 
+		            else if (Common.findElements("xpath", "//div/h2[@data-content-type='heading']").size() > 0) {
+		                title = Common.findElement("xpath","//div/h2[@data-content-type='heading']").getText();
+		            }
+	
+					//String title = Common.findElement("xpath", "//div/h1[@data-content-type='heading']").getText();
 					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					System.out.println(title);
 					System.out.println(breadcrumbs);
@@ -7196,7 +7205,7 @@ public void FUll_Payment(String dataSet) {
 					//System.out.println(products);
 					
 						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || 
-								Common.getCurrentURL().contains("inspiration"),
+								 Common.getCurrentURL().contains("Articles"),
 								"verifying the header link " + Links[i] + "Under HowToInspo",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -7651,7 +7660,7 @@ public void FUll_Payment(String dataSet) {
 					Float subtotalvalue = Float.parseFloat(Subtotal);
 					System.out.println(subtotalvalue);
 					Sync.waitElementPresent("xpath", "(//select[@name='qty'])[2]");
-//					Common.clickElement("xpath", "(//select[@name='qty'])[2]");
+					Common.clickElement("xpath", "(//select[@name='qty'])[2]");
 					Common.dropdown("xpath", "(//select[@name='qty'])[2]", Common.SelectBy.VALUE,
 							UpdataedQuntityinminicart);
 
