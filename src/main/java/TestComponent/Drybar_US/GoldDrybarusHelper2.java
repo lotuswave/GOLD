@@ -2760,7 +2760,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(5000);
-			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[1]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -6767,7 +6767,7 @@ public void FUll_Payment(String dataSet) {
 			String invalidproduct = data.get(Dataset).get("Products");
 			System.out.println(invalidproduct);
 			try {
-			Common.clickElement("xpath", "//span[@x-show='!searchOpen']");
+			Common.clickElement("xpath", "//button[@x-show='!searchOpen']");
 				String open = Common.findElement("xpath", "//input[contains(@id, 'autocomplete-0-input')]").getAttribute("type");
 				Thread.sleep(4000);
 				Common.assertionCheckwithReport(open.contains("search"), "User searches using the search field",
