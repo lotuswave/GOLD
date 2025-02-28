@@ -91,7 +91,7 @@ public class GoldOspreyUSHyvaHelper {
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
 //				close_add();
-				 acceptPrivacy();
+//				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
@@ -15405,9 +15405,12 @@ public void url_color_validation(String Dataset) {
 	
 	try
 	{
+		Thread.sleep(4000);
 		List<WebElement> pdpcolors = Common.findElements("xpath",
 				"//div[@aria-label='Color']//div[@x-id]");
 		 Common.clickElement("xpath", "//div[@aria-label='Color']//div[@x-id]");
+		 Common.actionsKeyPress(Keys.TAB);
+		 Common.actionsKeyPress(Keys.ENTER);
 		for (int i = 0; i < pdpcolors.size(); i++) { 
            Thread.sleep(4000);
 			pdpcolors.get(i).click();
