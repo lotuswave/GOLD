@@ -92,24 +92,10 @@ public class GoldOspreyUSHyvaHelper {
 			{
 //				close_add();
 				 acceptPrivacy();
-				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Backpacks"),
-						"validating store logo on the homwpage",
-						"System directs the user to the Homepage and store logo should display",
-						"Sucessfully user navigates to the home page and logo has been displayed",
-						"Failed to navigate to the homepage and logo is not displayed");
-			}
-			else if(Common.getCurrentURL().contains("preprod.osprey.com/gb/"))
-			{
-				
-				 acceptPrivacy();
-				 Close_Geolocation();
-				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-				System.out.println(size);
-				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
