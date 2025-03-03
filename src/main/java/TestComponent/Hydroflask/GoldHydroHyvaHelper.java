@@ -80,8 +80,7 @@ public class GoldHydroHyvaHelper {
 
 	public void verifingHomePage() {
 		try {
-			Sync.waitPageLoad();
-			int size = Common.findElements("css", "img[alt='Store logo']").size();
+			int size = Common.findElements("css", "img[alt='Hydroflask store logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Page")
 							|| Common.getPageTitle().contains("Hydro Flask"),
@@ -290,28 +289,22 @@ public class GoldHydroHyvaHelper {
             	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
             	   System.out.println(PLPprice1);
             	   Common.clickElement("css", "img[alt='" + products + "']");
-       			Sync.waitPageLoad();
        			Thread.sleep(2000);
             	   product_quantity(Dataset);
-       			Sync.waitPageLoad();
        			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
                 System.out.println(PDPprice);
 //                Assert.assertEquals(PLPprice1, PDPprice);
             }
             else {
 			Common.clickElement("css", "img[alt='" + products + "']");
-			Sync.waitPageLoad();
 			Thread.sleep(2000);
-
 			product_quantity(Dataset);
-			Sync.waitPageLoad();
             String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
             System.out.println(PDPprice);
             Assert.assertEquals(PLPprice, PDPprice);
             }
 			Sync.waitElementPresent("css", "button[title='Add to Cart']");
 			Common.clickElement("css", "button[title='Add to Cart']");
-			Sync.waitPageLoad();
 			Thread.sleep(2000);
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
@@ -672,7 +665,6 @@ public class GoldHydroHyvaHelper {
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(2000);
 			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
-			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
@@ -1966,7 +1958,6 @@ public void FUll_Payment(String dataSet) {
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
 		try {
-			Sync.waitPageLoad();
 			Common.clickElement("id", "menu-search-icon");
 			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
@@ -1974,7 +1965,6 @@ public void FUll_Payment(String dataSet) {
 					"Sucessfully search bar should be expand");
 			Common.textBoxInput("id", "autocomplete-0-input", product);
 			Common.actionsKeyPress(Keys.ENTER);
-			Sync.waitPageLoad();
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the search functionality",
@@ -2253,12 +2243,12 @@ public void FUll_Payment(String dataSet) {
 
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
-       Sync.waitImplicit(2000);
+      Thread.sleep(2000);
         int sizesframe = Common.findElements("xpath", "//div[@aria-label='POPUP Form']").size();
         System.out.println(sizesframe);
         if (sizesframe > 0) {
             Common.actionsKeyPress(Keys.PAGE_UP);
-            Sync.waitImplicit(2000);
+            Thread.sleep(2000);
             Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
             Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
             Sync.waitElementPresent("xpath", "//button[@aria-label='Close dialog']");
