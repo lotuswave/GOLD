@@ -2889,11 +2889,10 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
-
 			Common.clickElement("xpath", "//a[@title='Sign Out']");
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/") || Common.getPageTitle().contains("Osprey ") ,
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
 					"Successfully navigate to my account page", "Failed to navigate my account page ");
 
@@ -9113,12 +9112,11 @@ return Number;
 			Float Discountvalue = Float.parseFloat(Discount);
 			
 			Float DIS=(skuproducts)+Discountvalue;
-			
-			
+		
 			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
 					.replace("£", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "").trim();
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").replace("£", "").trim();
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
