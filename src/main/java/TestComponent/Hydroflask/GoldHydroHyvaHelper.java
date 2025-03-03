@@ -929,12 +929,12 @@ public class GoldHydroHyvaHelper {
 		else {
 			try {
 				
-				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");
+				Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success container px')]//h1 ");
 				String sucessMessage = Common.getText("xpath",
-						" //h1[normalize-space()='Thank you for your purchase!']");
+						"//div[contains(@class,'checkout-success container px')]//h1 ");
 
 				// Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+				int sizes = Common.findElements("xpath", "//div[contains(@class,'checkout-success container px')]//h1 ")
 						.size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 						"verifying the product confirmation", expectedResult,
@@ -1004,12 +1004,12 @@ public class GoldHydroHyvaHelper {
 				System.out.println(zipcode);
 				
 
-				if (zipcode > 0) {
-				
-					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
-					
-				}
+//				if (zipcode > 0) {
+//				
+//					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+//					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+//					
+//				}
 
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
@@ -1067,19 +1067,19 @@ public class GoldHydroHyvaHelper {
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 		        Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 		        
-		        int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
-				System.out.println(zipcode);
-
-				if (zipcode > 0) {
-					
-					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
-				}
-				int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
-				
-				if(link>0) {
-					Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
-				}
+//		        int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
+//				System.out.println(zipcode);
+//
+//				if (zipcode > 0) {
+//					
+//					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
+//					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
+//				}
+//				int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
+//				
+//				if(link>0) {
+//					Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
+//				}
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				}
@@ -1096,7 +1096,7 @@ public class GoldHydroHyvaHelper {
 
 					} else if (Common.getCurrentURL().contains("/success/")) {
 						String sucessmessage = Common.getText("xpath",
-								" //h1[normalize-space()='Thank you for your purchase!']");
+								"//div[contains(@class,'checkout-success container px')]//h1 ");
 						System.out.println(sucessmessage);
 					} else {
 						Assert.fail();
