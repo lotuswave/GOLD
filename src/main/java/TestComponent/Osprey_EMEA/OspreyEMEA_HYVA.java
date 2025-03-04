@@ -9116,7 +9116,7 @@ return Number;
 			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
 					.replace("£", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").replace("£", "").trim();
+			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").replace("Including £", "").replace("in taxes", "").trim();
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
