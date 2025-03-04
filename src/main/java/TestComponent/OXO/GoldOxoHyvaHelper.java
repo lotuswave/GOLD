@@ -7572,7 +7572,7 @@ catch(Exception | Error e)
 
 				}
 
-			} else if (Common.getCurrentURL().contains("www.oxo.com")) {
+			} else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
 
 				Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
 
