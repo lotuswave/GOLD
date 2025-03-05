@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_Using_Paypal_method {
 
-	String datafile = "Osprey_EU//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -42,7 +42,7 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EU\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
         
 
