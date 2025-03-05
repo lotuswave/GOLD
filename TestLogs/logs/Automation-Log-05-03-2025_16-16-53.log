@@ -1,0 +1,21 @@
+2025-03-05 16:16:59 INFO  log4j:53 - BaseDriver-StartBrowser-LineNo:197-Chrome Driver Stared Successfully
+2025-03-05 16:17:10 INFO  log4j:53 - Login-signIn-LineNo:72-Logged in with User: 
+2025-03-05 16:17:12 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:17:26 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:17:26 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Backpacks & Bags')]    with attrubuteBy  xpath    is  28  milliseconds
+2025-03-05 16:17:26 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:17:32 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Kids Packs')]    with attrubuteBy  xpath    is  119  milliseconds
+2025-03-05 16:17:32 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:17:45 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:17:53 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:17:54 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Backpacks & Bags')]    with attrubuteBy  xpath    is  22  milliseconds
+2025-03-05 16:17:54 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:17:57 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Child Carriers')]    with attrubuteBy  xpath    is  17  milliseconds
+2025-03-05 16:17:57 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:18:06 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:18:14 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:18:14 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Backpacks & Bags')]    with attrubuteBy  xpath    is  15  milliseconds
+2025-03-05 16:18:14 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:18:16 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator (//a[contains(@title,'Child Carriers')])[1]    with attrubuteBy  xpath    is  98  milliseconds
+2025-03-05 16:18:16 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:19:15 INFO  log4j:53 - Common-getscreenShot-LineNo:701-screenshot saved successfully

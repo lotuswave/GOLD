@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-03-05T11:12:16Z" name="Default suite" finished-at="2025-03-05T11:14:12Z" duration-ms="116050">
+    <groups>
+    </groups>
+    <test started-at="2025-03-05T11:12:16Z" name="Default test" finished-at="2025-03-05T11:14:12Z" duration-ms="116050">
+      <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr">
+        <test-method is-config="true" signature="startTest()[pri:0, instance:TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr@36074e47]" started-at="2025-03-05T16:42:16Z" name="startTest" finished-at="2025-03-05T16:42:40Z" duration-ms="24170" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startTest -->
+        <test-method signature="Validation_ShippingAddress_form_for_RegisterUesr()[pri:0, instance:TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr@36074e47]" started-at="2025-03-05T16:42:40Z" name="Validation_ShippingAddress_form_for_RegisterUesr" finished-at="2025-03-05T16:44:12Z" duration-ms="91862" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- Validation_ShippingAddress_form_for_RegisterUesr -->
+        <test-method is-config="true" signature="clearBrowser()[pri:0, instance:TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr@36074e47]" started-at="2025-03-05T16:44:12Z" name="clearBrowser" finished-at="2025-03-05T16:44:12Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearBrowser -->
+      </class> <!-- TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -2846,7 +2846,7 @@ System.out.println(MyFavorites);
 				System.out.println("*****" + ShippingZip + "*******");
 
 				Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			    Common.clickElement("xpath","//button[@class='btn btn-primary w-full']");
+			    Common.clickElement("xpath","//button[@class='btn btn-primary w-full os:uppercase']");
 				
 
 			} catch (Exception | Error e) {

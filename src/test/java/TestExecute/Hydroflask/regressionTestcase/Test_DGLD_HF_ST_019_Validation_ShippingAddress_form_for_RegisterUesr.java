@@ -28,7 +28,7 @@ public class Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUes
     }
     @AfterTest
     public void clearBrowser() {
-        Common.closeAll();
+  //      Common.closeAll();
     }
     @BeforeTest
     public void startTest() throws Exception {

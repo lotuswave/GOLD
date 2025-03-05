@@ -1,0 +1,36 @@
+2025-03-05 16:35:30 INFO  log4j:53 - BaseDriver-StartBrowser-LineNo:197-Chrome Driver Stared Successfully
+2025-03-05 16:35:35 INFO  log4j:53 - Login-signIn-LineNo:72-Logged in with User: 
+2025-03-05 16:35:43 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //button[@aria-label='Close dialog']    with attrubuteBy  xpath    is  122  milliseconds
+2025-03-05 16:35:43 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:35:44 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //button[@aria-label='Close dialog']    with attrubuteBy  xpath    is  20  milliseconds
+2025-03-05 16:35:44 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:35:44 INFO  log4j:53 - Common-clickOnHiddenElement-LineNo:476-Click on hidden element completed.
+2025-03-05 16:35:54 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:35:54 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator customer-menu    with attrubuteBy  id    is  56  milliseconds
+2025-03-05 16:35:54 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:35:55 INFO  log4j:53 - Common-clickOnHiddenElement-LineNo:476-Click on hidden element completed.
+2025-03-05 16:35:55 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:36:06 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:36:06 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:36:10 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:36:15 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:36:19 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:36:22 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:36:25 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //a[contains(@class,'product-image-link')]//img    with attrubuteBy  xpath    is  27  milliseconds
+2025-03-05 16:36:25 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:36:25 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator img[alt='Straw Cleaning Set']    with attrubuteBy  css    is  38  milliseconds
+2025-03-05 16:36:25 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:36:40 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator button[title='Add to Cart']    with attrubuteBy  css    is  13  milliseconds
+2025-03-05 16:36:40 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:36:45 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator span[x-text='totalCartAmount']    with attrubuteBy  css    is  16  milliseconds
+2025-03-05 16:36:45 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:36:45 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //a[contains(text(),'Checkout')]    with attrubuteBy  xpath    is  14  milliseconds
+2025-03-05 16:36:45 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:36:45 INFO  log4j:53 - Common-clickOnHiddenElement-LineNo:476-Click on hidden element completed.
+2025-03-05 16:36:45 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:37:03 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:37:18 INFO  log4j:53 - Sync-waitImplicit-LineNo:69-Sync waitImplicit Completed successfully
+2025-03-05 16:37:18 INFO  log4j:53 - Sync-waitImplicit-LineNo:69-Sync waitImplicit Completed successfully
+2025-03-05 16:37:18 INFO  log4j:53 - Sync-waitAndReturnWebElement-LineNo:944- Time taken to i < staleEliminatorIteration  is  186 milliseconds
+2025-03-05 16:37:18 INFO  log4j:53 - Sync-waitAndReturnWebElement-LineNo:882- Time taken to Function<? super WebDriver, WebElement> isTrue  is  193 milliseconds
+2025-03-05 16:38:19 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully

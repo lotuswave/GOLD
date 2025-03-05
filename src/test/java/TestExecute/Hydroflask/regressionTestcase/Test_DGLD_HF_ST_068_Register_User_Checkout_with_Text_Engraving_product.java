@@ -39,7 +39,7 @@ public class Test_DGLD_HF_ST_068_Register_User_Checkout_with_Text_Engraving_prod
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	//   	Common.closeAll();
 
 	}
 

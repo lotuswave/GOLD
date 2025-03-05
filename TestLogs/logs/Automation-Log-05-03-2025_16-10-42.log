@@ -1,0 +1,13 @@
+2025-03-05 16:10:46 INFO  log4j:53 - BaseDriver-StartBrowser-LineNo:197-Chrome Driver Stared Successfully
+2025-03-05 16:10:55 INFO  log4j:53 - Login-signIn-LineNo:72-Logged in with User: 
+2025-03-05 16:10:55 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:11:05 INFO  log4j:53 - Common-getscreenShotPathforReport-LineNo:716-screenshot saved successfully
+2025-03-05 16:11:05 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Backpacks & Bags')]    with attrubuteBy  xpath    is  30  milliseconds
+2025-03-05 16:11:05 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:11:08 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //span[contains(text(),'Outdoor')]    with attrubuteBy  xpath    is  144  milliseconds
+2025-03-05 16:11:08 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:11:12 INFO  log4j:53 - Sync-waitElementPresent-LineNo:393- Time taken to waitElementPresent  with locator //li//a//span[contains(text(),'Backpacking Packs')]    with attrubuteBy  xpath    is  16  milliseconds
+2025-03-05 16:11:12 INFO  log4j:53 - Sync-waitElementPresent-LineNo:396-Sync waitElementPresent completed successfully
+2025-03-05 16:11:18 INFO  log4j:53 - Sync-waitPageLoad-LineNo:57-Sync waitPageLoad Completed successfully
+2025-03-05 16:11:27 INFO  log4j:53 - Common-getscreenShot-LineNo:701-screenshot saved successfully
+2025-03-05 16:11:28 INFO  log4j:53 - Common-getscreenShot-LineNo:701-screenshot saved successfully

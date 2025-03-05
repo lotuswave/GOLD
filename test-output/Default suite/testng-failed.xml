@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="none" name="Failed suite [Default suite]">
+  <test parallel="none" name="Default test(failed)">
+    <classes>
+      <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr">
+        <methods>
+          <include name="startTest"/>
+          <include name="clearBrowser"/>
+          <include name="Validation_ShippingAddress_form_for_RegisterUesr"/>
+        </methods>
+      </class> <!-- TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_019_Validation_ShippingAddress_form_for_RegisterUesr -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
