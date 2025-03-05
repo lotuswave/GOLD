@@ -46,7 +46,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
     	MagentoOrder_ID="";
-    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/oxo/V1/orders/"+MagentoOrder_ID+"/";
+    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -82,7 +82,7 @@ public class Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach
 
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/oxo/V1/order/" + MagentoOrder_ID + "/ship";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/order/" + MagentoOrder_ID + "/ship";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");

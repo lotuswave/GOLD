@@ -23,11 +23,8 @@ public class Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_wit
     public String customerEmail;
     public String increment_id;
     public String MagentoOrder_ID;
-   public String deliveryNumber;
-   
-   
+    public String deliveryNumber;
   
- 
     @Test(priority = 1)
     public void generateApiKey() {
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/V1/integration/admin/token";
@@ -62,7 +59,6 @@ public class Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_wit
         String formattedJson = JsonFormatter.formatJson(jsonResponse);
 
 //      System.out.println("Get Order Copy Response: " + formattedJson);
-
         orderNumber = response.path("increment_id");
         System.out.println("OderNumber: " + orderNumber);
         customerEmail = response.path("customer_email");

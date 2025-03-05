@@ -23,11 +23,12 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
     public Integer QTYOrder;
     public String customerEmail;
     public String increment_id;
-
+    public String MagentoOrder_ID;
+    public String deliveryNumber;
  
     @Test(priority = 1)
     public void generateApiKey() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/integration/admin/token";
+    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/integration/admin/token";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -45,7 +46,8 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/orders/12797318/";
+    	MagentoOrder_ID="";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -78,8 +80,89 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
             Assert.fail("No items found in the order copy");
         }
     }
-
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
+    public void shipOrder() {
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/order/" + MagentoOrder_ID + "/ship";
+
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "Bearer " + apiKey);
+
+        String deliveryNumberBase = "02102";
+        String deliveryNumberSuffix = generateRandomNumber(4);
+        deliveryNumber = deliveryNumberBase + deliveryNumberSuffix;
+        String trackingNumberBase = "1025433";
+        String trackingNumberSuffix = generateRandomNumber(6);
+        String trackingNumber = trackingNumberBase + trackingNumberSuffix;
+
+        String requestBody = "{\n" +
+                "    \"notify\": \"false\",\n" +
+                "    \"items\": [\n" +
+                "        {\n" +
+                "            \"order_item_id\": " + itemId + ",\n" +
+                "            \"qty\": 1.0\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"tracks\": [\n" +
+                "        {\n" +
+                "            \"track_number\": \"" + trackingNumber + "\",\n" +
+                "            \"title\": \"FedEx\",\n" +
+                "            \"carrier_code\": \"fedex\"\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"arguments\": {\n" +
+                "        \"extension_attributes\": {\n" +
+                "            \"delivery_number\": \"" + deliveryNumber + "\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        request.body(requestBody);
+
+        Response response = request.post();
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
+        System.out.println("Ship Order Response: " + response.getBody().asString());
+        System.out.println("Request Body: " + requestBody);
+    }
+
+    @Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder"})
+    public void invoice() {
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/order/" + MagentoOrder_ID + "/invoice";
+
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "Bearer " + apiKey);
+
+        String requestBody = "{\n" +
+                "    \"items\": [\n" +
+                "        {\n" +
+                "            \"order_item_id\": " + itemId + ",\n" +
+                "            \"qty\": " + QTYOrder + ".0\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"notify\": false,\n" +
+                "    \"appendComment\": false,\n" +
+                "    \"capture\": true,\n" +
+                "    \"arguments\": {\n" +
+                "        \"extension_attributes\": {\n" +
+                "            \"delivery_number\": \"" + deliveryNumber + "\",\n" +
+                "            \"oracle_customer_number\": \"\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        request.body(requestBody);
+
+        Response response = request.post();
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Invoice creation failed");
+        System.out.println("Invoice Response: " + response.getBody().asString());
+        System.out.println("Request Body: " + requestBody);
+    }
+
+    
+  /*  @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder_And_InvoiceOrder() {
         RestAssured.baseURI = "https://webhooks.workato.com/webhooks/rest/74179468-e8a5-424f-a369-4dbcd03db8f1/new_shipment";
 
@@ -134,13 +217,13 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
         System.out.println("Generated Tracking Number: " + trackingNumber);
     
     }
-
+*/
 	
 	
 	///***Create RMA***///
-    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder_And_InvoiceOrder"})
+    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-    Thread.sleep(30000);
+    Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
@@ -179,16 +262,6 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 
      request.body(requestBody);
 
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
-     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
@@ -229,7 +302,7 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 	
 	
 	///****Post Credit Memo****///
-	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder_And_InvoiceOrder","createRma"})
+	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
  public void postCreditMemo() {
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
 

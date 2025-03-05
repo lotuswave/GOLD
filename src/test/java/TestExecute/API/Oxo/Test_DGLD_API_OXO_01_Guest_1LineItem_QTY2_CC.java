@@ -46,8 +46,8 @@ public class Test_DGLD_API_OXO_01_Guest_1LineItem_QTY2_CC {
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
-    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/oxo/V1/orders/"+MagentoOrder_ID+"/";
+    	MagentoOrder_ID="12799364";
+    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + apiKey);
@@ -82,7 +82,7 @@ public class Test_DGLD_API_OXO_01_Guest_1LineItem_QTY2_CC {
 
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/oxo/V1/order/" + MagentoOrder_ID + "/ship";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/order/" + MagentoOrder_ID + "/ship";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
