@@ -265,10 +265,10 @@ public class GoldHydroHyvaHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//a[contains(@class,'product-image-link')]//img");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//a[contains(@class,'product-image-link')]//img");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
