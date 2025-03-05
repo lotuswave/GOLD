@@ -23,7 +23,8 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
     public Integer QTYOrder;
     public String customerEmail;
     public String increment_id;
-
+     public String deliveryNumber;
+     public String MagentoOrder_ID;
  
     @Test(priority = 1)
     public void generateApiKey() {
@@ -78,8 +79,89 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
             Assert.fail("No items found in the order copy");
         }
     }
-
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
+    public void shipOrder() {
+        RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/order/"+MagentoOrder_ID+"/ship";
+
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "Bearer " + apiKey);
+
+        // Assuming itemId, deliveryNumber, and trackingNumber are available
+        String deliveryNumberBase = "02102"; 
+        String deliveryNumberSuffix = generateRandomNumber(4); 
+        deliveryNumber = deliveryNumberBase + deliveryNumberSuffix;
+        String trackingNumberBase = "1025433";
+        String trackingNumberSuffix = generateRandomNumber(6); 
+        String trackingNumber = trackingNumberBase + trackingNumberSuffix;
+
+        String requestBody = "{\n" +
+                "    \"notify\": \"false\",\n" +
+                "    \"items\": [\n" +
+                "        {\n" +
+                "            \"order_item_id\": " + itemId + ",\n" +
+                "            \"qty\": 1.0\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"tracks\": [\n" +
+                "        {\n" +
+                "            \"track_number\": \"" + trackingNumber + "\",\n" +
+                "            \"title\": \"FedEx\",\n" +
+                "            \"carrier_code\": \"fedex\"\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"arguments\": {\n" +
+                "        \"extension_attributes\": {\n" +
+                "            \"delivery_number\": \"" + deliveryNumber + "\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        request.body(requestBody);
+
+        Response response = request.post();
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
+        System.out.println("Ship Order Response: " + response.getBody().asString());
+        System.out.println("Request Body: " + requestBody); // print request body for debugging.
+    }
+    
+    @Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder"})
+    public void invoice() {
+        RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/order/"+MagentoOrder_ID+"/invoice";
+
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        request.header("Authorization", "Bearer " + apiKey);
+        
+        String requestBody = "{\n" +
+                "    \"items\": [\n" +
+                "        {\n" +
+                "            \"order_item_id\": " + itemId + ",\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
+                "        }\n" +
+                "    ],\n" +
+                "    \"notify\": false,\n" +
+                "    \"appendComment\": false,\n" +
+                "    \"capture\": true,\n" +
+                "    \"arguments\": {\n" +
+                "        \"extension_attributes\": {\n" +
+                "            \"delivery_number\": \"" + deliveryNumber + "\",\n" +
+                "            \"oracle_customer_number\": \"\"\n" +
+                "        }\n" +
+                "    }\n" +
+                "}";
+
+        request.body(requestBody);
+
+        Response response = request.post();
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
+        System.out.println("Ship Order Response: " + response.getBody().asString());
+        System.out.println("Request Body: " + requestBody); // print request body for debugging.
+    }
+    
+  /*  @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder_And_InvoiceOrder() {
         RestAssured.baseURI = "https://webhooks.eu.workato.com/webhooks/rest/22a30675-6e14-4d17-b1ff-50a3d6535479/new_shipment";
 
@@ -138,7 +220,7 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
 	
 	
 	///***Create RMA***///
-    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder_And_InvoiceOrder"})
+    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
     Thread.sleep(15000);
 	System.out.println(apiKey);
@@ -229,7 +311,7 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
 	
 	
 	///****Post Credit Memo****///
-	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder_And_InvoiceOrder","createRma"})
+	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
  public void postCreditMemo() {
      RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
 
