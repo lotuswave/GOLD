@@ -100,7 +100,7 @@ public class Test_DGLD_API_HF_US_01_01_Guest_1LineItem_QTY2_CC {
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
