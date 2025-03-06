@@ -24,8 +24,9 @@ public class Test_DGLD_API_002_RegisterUser_CheckoutTwo_LineItemGiftcard_OneQty_
     public String customerEmail;
     public String increment_id;
     public String deliveryNumber;
-public String MagentoOrder_ID;
- 
+    public String MagentoOrder_ID;
+    public Integer firstItemId;
+    public Integer SecondItemId;
     @Test(priority = 1)
     public void generateApiKey() {
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/V1/integration/admin/token";
@@ -46,7 +47,7 @@ public String MagentoOrder_ID;
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="902324";
+    	MagentoOrder_ID="902357";
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/ospreyuken/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -58,7 +59,6 @@ public String MagentoOrder_ID;
         Assert.assertEquals(response.getStatusCode(), 200, "Get Order Copy failed");
         String jsonResponse = response.getBody().asString();
         String formattedJson = JsonFormatter.formatJson(jsonResponse);
-
         System.out.println("Get Order Copy Response: " + formattedJson);
 
         orderNumber = response.path("increment_id");
@@ -66,20 +66,31 @@ public String MagentoOrder_ID;
          customerEmail = response.path("customer_email");
         System.out.println("Customer Email: " + customerEmail);
         List<Map<String, Object>> items = response.jsonPath().getList("items");
-
         if (items != null && !items.isEmpty()) {
-            Map<String, Object> firstItem = items.get(0); // Get the first item
-            itemId = (Integer) firstItem.get("item_id");
-            System.out.println("item_id: " + itemId);
-             QTYOrder = (Integer) firstItem.get("qty_ordered");
-            System.out.println("QTY_Ordered: " + QTYOrder);
-            sku = (String) firstItem.get("sku");
-            System.out.println("SKU: " + sku);
+            if (items.size() >= 3) { 
+                 firstItemId = (Integer) items.get(0).get("item_id");
+                if (firstItemId != null) {
+                    System.out.println("First item_id: " + firstItemId);
+                } else {
+                    System.out.println("First item_id is null.");
+                }
+                 SecondItemId = (Integer) items.get(2).get("item_id");
+                if (SecondItemId != null) {
+                    System.out.println("Third item_id: " + SecondItemId);
+                } else {
+                    System.out.println("Third item_id is null.");
+                }
+            } else {
+                System.out.println("Not enough items to get the first and Second item_id.");
+            }
         } else {
             System.out.println("No items found in the response.");
             Assert.fail("No items found in the order copy");
         }
     }
+        
+    
+
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder() {
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/order/"+MagentoOrder_ID+"/ship";
@@ -97,10 +108,14 @@ public String MagentoOrder_ID;
         String trackingNumber = trackingNumberBase + trackingNumberSuffix;
 
         String requestBody = "{\n" +
-                "    \"notify\": \"false\",\n" +
+                "    \"notify\": false,\n" + // Corrected: notify should be boolean, not string
                 "    \"items\": [\n" +
                 "        {\n" +
-                "            \"order_item_id\": " + itemId + ",\n" +
+                "            \"order_item_id\": " + firstItemId + ",\n" +
+                "            \"qty\": 1.0\n" +
+                "        },\n" + 
+                "        {\n" +
+                "            \"order_item_id\": " + SecondItemId + ",\n" +
                 "            \"qty\": 1.0\n" +
                 "        }\n" +
                 "    ],\n" +
@@ -117,7 +132,6 @@ public String MagentoOrder_ID;
                 "        }\n" +
                 "    }\n" +
                 "}";
-
         request.body(requestBody);
 
         Response response = request.post();
@@ -138,8 +152,12 @@ public String MagentoOrder_ID;
         String requestBody = "{\n" +
                 "    \"items\": [\n" +
                 "        {\n" +
-                "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": "+QTYOrder+".0\n" +
+                "            \"order_item_id\": " + firstItemId + ",\n" +
+                "            \"qty\": 1.0\n" +
+                "        },\n" + 
+                "        {\n" + 
+                "            \"order_item_id\": " + SecondItemId + ",\n" +
+                "            \"qty\": 1.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"notify\": false,\n" +
@@ -241,7 +259,7 @@ public String MagentoOrder_ID;
     	        "    \"customer_custom_email\": \"" + customerEmail + "\",\n" + // Use customerEmail variable
     	        "    \"items\": [\n" +
     	        "        {\n" +
-    	        "            \"order_item_id\": "+itemId+",\n" +
+    	        "            \"order_item_id\": "+firstItemId+",\n" +
     	        "            \"quantity_to_return\": 1,\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
@@ -261,16 +279,6 @@ public String MagentoOrder_ID;
 
      request.body(requestBody);
 
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
-     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
@@ -324,22 +332,12 @@ public String MagentoOrder_ID;
              "    \"order_item_ids\": [\n" +
              "        {\n" +
              "            \"qty\": \"1.0\",\n" +
-             "            \"order_item_id\": \""+itemId+"\"\n" +
+             "            \"order_item_id\": \""+firstItemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
              "}";
-
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
+ 
      request.body(requestBody);
 
      Response response = request.post();

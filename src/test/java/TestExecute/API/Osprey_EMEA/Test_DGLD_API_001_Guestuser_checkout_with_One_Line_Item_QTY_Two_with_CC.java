@@ -46,7 +46,7 @@ public class Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_wit
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
         
-    	MagentoOrder_ID="901535";
+    	MagentoOrder_ID="902351";
     	RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/ospreyuken/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -101,7 +101,7 @@ public class Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_wit
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -224,7 +224,7 @@ public class Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_wit
 	///***Create RMA***///
     	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-    		Thread.sleep(30000);
+    		Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
