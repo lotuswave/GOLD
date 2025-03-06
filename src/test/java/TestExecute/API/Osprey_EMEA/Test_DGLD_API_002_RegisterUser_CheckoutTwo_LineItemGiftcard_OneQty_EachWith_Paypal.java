@@ -46,7 +46,8 @@ public String MagentoOrder_ID;
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-        RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/ospreyuken/V1/orders/900884/";
+    	MagentoOrder_ID="902324";
+        RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/ospreyuken/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
