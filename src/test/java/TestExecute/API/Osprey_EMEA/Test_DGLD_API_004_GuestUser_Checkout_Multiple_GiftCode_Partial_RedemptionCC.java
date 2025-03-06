@@ -242,16 +242,6 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
              "    \"refund_shipping\": false\n" +
              "}";
 
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
      request.body(requestBody);
 
      Response response = request.post();

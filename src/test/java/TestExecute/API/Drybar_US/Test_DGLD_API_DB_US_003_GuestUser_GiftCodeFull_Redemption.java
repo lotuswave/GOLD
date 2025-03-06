@@ -166,7 +166,7 @@ public class Test_DGLD_API_DB_US_003_GuestUser_GiftCodeFull_Redemption {
 	///***Create RMA***///
     	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-    Thread.sleep(30000);
+    Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
@@ -204,16 +204,6 @@ public class Test_DGLD_API_DB_US_003_GuestUser_GiftCodeFull_Redemption {
     
 
      request.body(requestBody);
-
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
      
      Response response = request.post();
      String jsonResponse = response.getBody().asString();

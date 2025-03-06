@@ -204,18 +204,7 @@ public class Test_DGLD_API_DB_US_004_RegisterUser_Checkout_MultipleItems_GiftCod
     	        "}";
     
 
-     request.body(requestBody);
-
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
-     
+     request.body(requestBody);     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 

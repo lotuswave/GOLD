@@ -99,7 +99,6 @@ public class Test_DGLD_API_002_RegisterUser_CheckoutTwo_LineItemGiftcard_OneQty_
         request.header("Content-Type", "application/json");
         request.header("Authorization", "Bearer " + apiKey);
 
-        // Assuming itemId, deliveryNumber, and trackingNumber are available
         String deliveryNumberBase = "02102"; 
         String deliveryNumberSuffix = generateRandomNumber(4); 
         deliveryNumber = deliveryNumberBase + deliveryNumberSuffix;
@@ -240,7 +239,7 @@ public class Test_DGLD_API_002_RegisterUser_CheckoutTwo_LineItemGiftcard_OneQty_
 	///***Create RMA***///
     	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-		Thread.sleep(30000);
+		Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/all/V1/returns/create-rma";
 

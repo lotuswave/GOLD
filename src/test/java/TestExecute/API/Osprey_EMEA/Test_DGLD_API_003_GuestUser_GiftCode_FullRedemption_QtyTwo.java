@@ -263,22 +263,12 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
     
 
      request.body(requestBody);
-
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
      
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-//System.out.println(jsonObject);
+     //System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -286,8 +276,6 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
      Assert.assertEquals(jsonObject.getString("increment_id"), increment_id, "Increment ID mismatch");
      Assert.assertEquals(jsonObject.getString("order_increment_id"), orderNumber, "Order increment ID mismatch");
      Assert.assertEquals(jsonObject.getString("status"), "authorized", "Status mismatch");
-//     Assert.assertEquals(jsonObject.getJSONArray("items").getJSONObject(0).getInt("order_item_id"), itemId, "Order item ID mismatch");
-
      System.out.println("Create RMA Response: " + jsonObject.toString(4));
  }
      
