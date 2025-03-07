@@ -11,7 +11,7 @@ import org.json.JSONTokener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_02_Registered_SimpleGiftcard_1QTYeach_PayPal.JsonFormatter;
+import TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTYeach_PayPal.JsonFormatter;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -204,22 +204,11 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
     
 
      request.body(requestBody);
-
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
-     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-//System.out.println(jsonObject);
+     //System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -272,18 +261,7 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
              "        }\n" +
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
-             "}";
-
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
+             "}"; 
      request.body(requestBody);
 
      Response response = request.post();
@@ -311,8 +289,7 @@ public class Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna {
      System.out.println("Post Credit Memo Response: " + jsonObject.toString(4));
  }
      
- 	
-
+ 
 	
 private String generateRandomNumber(int length) {
     Random random = new Random();

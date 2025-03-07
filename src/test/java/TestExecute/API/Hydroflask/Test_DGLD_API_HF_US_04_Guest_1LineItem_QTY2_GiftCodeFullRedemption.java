@@ -101,7 +101,7 @@ public class Test_DGLD_API_HF_US_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption 
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": 2.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -206,22 +206,11 @@ public class Test_DGLD_API_HF_US_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption 
     
 
      request.body(requestBody);
-
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
-     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
      JSONObject jsonObject = new JSONObject(jsonResponse);
-//System.out.println(jsonObject);
+    //System.out.println(jsonObject);
      Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
 
      // Validations
@@ -275,22 +264,10 @@ public class Test_DGLD_API_HF_US_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption 
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
              "}";
-
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
+ 
      request.body(requestBody);
-
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
-
      JSONObject jsonObject = new JSONObject(jsonResponse);
 
      Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed");
