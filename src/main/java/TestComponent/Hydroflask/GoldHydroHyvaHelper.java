@@ -265,10 +265,10 @@ public class GoldHydroHyvaHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//a[contains(@class,'product-image-link')]//img");
+				Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//a[contains(@class,'product-image-link')]//img");
+				List<WebElement> webelementslist = Common.findElements("css",
+						"a[class*=roduct-image-link]>img");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -305,14 +305,11 @@ public class GoldHydroHyvaHelper {
             }
 			Sync.waitElementPresent("css", "button[title='Add to Cart']");
 			Common.clickElement("css", "button[title='Add to Cart']");
-			Thread.sleep(2000);
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
-//			
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
+			Thread.sleep(3000);
+			String openminicart = Common.findElement("xpath", "//div[contains(@class,'fixed inset-y-0')]").getAttribute("aria-modal");
+			System.out.println(openminicart);
+			Common.assertionCheckwithReport(openminicart.contains("true"), "validating the  product add to the cart and mini cart should be open",
+					"Product should be add to cart and mini cart should be open", "Success message should be displayed and minicart should be open", "success message should be displayed and mini cart");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -337,8 +334,8 @@ public class GoldHydroHyvaHelper {
 		try {
 			Thread.sleep(8000);
 			Common.actionsKeyPress(Keys.UP);
-			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
-			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
+			Sync.waitElementPresent("css", "#menu-cart-icon");
+			Common.clickElement("css", "#menu-cart-icon");
 			
 			String openminicart = Common.findElement("xpath", "//div[contains(@class,'fixed inset-y-0')]").getAttribute("aria-modal");
 			System.out.println(openminicart);
@@ -621,26 +618,26 @@ public class GoldHydroHyvaHelper {
 
 		try {
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("xpath", "//input[@type='email']");
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+				Sync.waitElementVisible("css", "input[type='email']");
+				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
 
 			} else {
-				Sync.waitElementVisible("xpath", "//input[@type='email']");
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+				Sync.waitElementVisible("css", "input[type='email']");
+				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Prod Email"));
 			}
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
 			if (Common.getCurrentURL().contains("preprod")) {
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
+				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
 			} else {
-				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
+				Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Prod Email"));
 			}
 
 		}
 		String expectedResult = "email field will have email address";
 		try {
 			Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
-			int size = Common.findElements("xpath", "//input[@type='email']").size();
+			int size = Common.findElements("css", "input[type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
 			Common.textBoxInput("id", "shipping-lastname", data.get(dataSet).get("LastName"));
@@ -661,10 +658,10 @@ public class GoldHydroHyvaHelper {
 //			Common.textBoxInputClear("name", "postcode");
 //			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
 
-			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+			Common.textBoxInputClear("css", "input[name='postcode']");
+			Common.textBoxInput("css", "input[name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
+			Common.textBoxInput("css", "input[name='telephone']", data.get(dataSet).get("phone"));
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
@@ -1910,7 +1907,6 @@ public void FUll_Payment(String dataSet) {
 			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully applied."),
 					"verifying pomocode", expectedResult, "promotion code working as expected",
 					"Promation code is not applied");
-			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
 			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").replace("$",
 					"").trim();
@@ -1920,7 +1916,6 @@ public void FUll_Payment(String dataSet) {
 			Float shippingvalue = Float.parseFloat(shipping);
 			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").replace("$", "").trim();
 			Float Taxvalue = Float.parseFloat(Tax);
-			Thread.sleep(4000);
 			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]")
 					.replace("$", "").trim();
 			Float Discountvalue = Float.parseFloat(Discount);
@@ -1929,10 +1924,8 @@ public void FUll_Payment(String dataSet) {
 			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
 					.replace("$", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
-			Thread.sleep(4000);
 			Float Total = (subtotalvalue + shippingvalue + Taxvalue) + Discountvalue;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-			Thread.sleep(4000);
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
 			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
