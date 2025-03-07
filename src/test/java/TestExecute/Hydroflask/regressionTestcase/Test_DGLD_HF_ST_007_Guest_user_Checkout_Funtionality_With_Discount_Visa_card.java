@@ -27,19 +27,15 @@ public class Test_DGLD_HF_ST_007_Guest_user_Checkout_Funtionality_With_Discount_
             Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-
 	}
-
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
