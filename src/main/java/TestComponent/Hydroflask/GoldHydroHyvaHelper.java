@@ -84,12 +84,12 @@ public class GoldHydroHyvaHelper {
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Page")
 							|| Common.getPageTitle().contains("Hydro Flask"),
-					"validating store logo", "System directs the user to the Homepage",
+					"validating the home page navigation", "User should be navigate to the Home page",
 					"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 
-			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user to the Homepage",
+			ExtenantReportUtils.addFailedLog("validating the home page navigation", "User should be navigate to the Home page",
 					" user unable navigates to the home page", "Failed to navigate to the homepage");
 			Assert.fail();
 		}
@@ -425,8 +425,8 @@ public class GoldHydroHyvaHelper {
 		Thread.sleep(2000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
-					"User should able to navigate to the shipping  page", "Successfully navigate to the shipping page",
-					"Failed to navigate to the shipping page");
+					"User should able to navigate to the shipping  page after clicking on the checkout page", "Successfully navigate to the shipping page after clicking on the checkout page",
+					"Failed to navigate to the shipping page after clicking on the checkout button");
 			Checkoutprice=Common.findElement("xpath", "//span[@class='text-xs']//span[contains(@class,'price')]").getText().trim();
 //			  Assert.assertEquals(Checkoutprice, Minicartprice);
 			
@@ -634,12 +634,12 @@ public class GoldHydroHyvaHelper {
 			}
 
 		}
-		String expectedResult = "email field will have email address";
+		String expectedResult = "email field should be enter in the textbox filed";
 		try {
 			Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("css", "input[type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
-					"Filled Email address", "unable to fill the email address");
+					"Successfully email has been entered to textbox filed", "unable to fill the email address in the textbox filed");
 			Common.textBoxInput("id", "shipping-lastname", data.get(dataSet).get("LastName"));
 			Common.clickElement("id", "shipping-street-0");
 			Common.textBoxInput("id", "shipping-street-0", data.get(dataSet).get("Street"));
@@ -655,9 +655,6 @@ public class GoldHydroHyvaHelper {
 			} catch (ElementClickInterceptedException e) {
 				Common.dropdown("id", "shipping-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-//			Common.textBoxInputClear("name", "postcode");
-//			Common.textBoxInput("name", "postcode", data.get(dataSet).get("postcode"));
-
 			Common.textBoxInputClear("css", "input[name='postcode']");
 			Common.textBoxInput("css", "input[name='postcode']", data.get(dataSet).get("postcode"));
 			Thread.sleep(2000);
@@ -851,12 +848,18 @@ public class GoldHydroHyvaHelper {
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
 				Common.clickElement("xpath", "//span[text()='" + method + "']");
+				ExtenantReportUtils.addPassLog("validating shipping methods selections on checkout page",
+						"Shipping methods should be select on the checkout page", "user should able to select the shipping method",
+						Common.getscreenShotPathforReport("Sucessfully shipping method should be selected"));
 			} else {
 
 				Common.refreshpage();
 				Thread.sleep(2000);
 				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
 				Common.clickElement("xpath", "//span[text()='" + method + "']");
+				ExtenantReportUtils.addPassLog("validating shipping methods selections on checkout page",
+						"Shipping methods should be select on the checkout page", "user should able to select the shipping method",
+						Common.getscreenShotPathforReport("Sucessfully shipping method should be selected"));
 
 			}
 		} catch (Exception | Error e) {
@@ -967,7 +970,7 @@ public class GoldHydroHyvaHelper {
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
-		String expectedResult = "land on the payment section";
+		String expectedResult = "user should be land on the payment section";
 		// Common.refreshpage();
 
 		try {
@@ -977,7 +980,7 @@ public class GoldHydroHyvaHelper {
 			int sizes = Common.findElements("css", "label[for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
-					"User unabel to land opaymentpage");
+					"Successfully land on the payment section","Failed to Navigate to the Payment sections");
 			Common.clickElement("css", "label[for='payment-method-stripe_payments']");
 
 			
@@ -1954,8 +1957,8 @@ public void FUll_Payment(String dataSet) {
 			Common.clickElement("id", "menu-search-icon");
 			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
-					"User should able to click on the search button", "Search expands to the full page",
-					"Sucessfully search bar should be expand");
+					"User should able to click on the search button", "Sucessfully search bar should be expand",
+					"Failed to open the search bar");
 			Common.textBoxInput("id", "autocomplete-0-input", product);
 			Common.actionsKeyPress(Keys.ENTER);
 		} catch (Exception | Error e) {
