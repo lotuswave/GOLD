@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF GG Sprint  smoke execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    
+      <test name="Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card" testid="DTG-928" priority="P1" description="This script will cover Guestuser checkout functionality of Hydroflask using Visa Payment">
+       <classes>
+            <class name="TestExecute.Hydroflask.Archive.Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card"/>
+        </classes>
+        </test> 
+  
+</suite>  

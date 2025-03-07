@@ -22,14 +22,9 @@ public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");   
-//			Hydro.search_product("simple warranty");      
-//			Hydro.addtocart("simple warranty"); 
-//			Hydro.search_product("New Product");      
-//			Hydro.addtocart("New Product");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {

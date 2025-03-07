@@ -937,7 +937,7 @@ public class GoldHydroHyvaHelper {
 				int sizes = Common.findElements("xpath", "//div[contains(@class,'checkout-success container px')]//h1 ")
 						.size();
 				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
-						"verifying the product confirmation", expectedResult,
+						"verifying the Order confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
                 
