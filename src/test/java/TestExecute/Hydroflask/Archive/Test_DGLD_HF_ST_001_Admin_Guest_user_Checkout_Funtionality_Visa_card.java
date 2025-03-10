@@ -40,7 +40,7 @@ public class Test_DGLD_HF_ST_001_Admin_Guest_user_Checkout_Funtionality_Visa_car
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 	}
 	
 	@BeforeTest
