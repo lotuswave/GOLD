@@ -13,26 +13,25 @@ public class Test_DGLD_HF_ST_001_Guest_user_Checkout_Funtionality_Visa_card {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
-
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Guest_Checkout_Funtionality_Visa_card () throws Exception {
-//      for(int i=0;i<3;i++)
-//      {
+
 		try {
+			Hydro.prepareTaxData("Hydro_OrderNumbers.xlsx");
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");   
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+			String Ordernumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+			Hydro.writeResultstoXLSx(Ordernumber);
 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-//}
 
 	@AfterTest
 	public void clearBrowser() {

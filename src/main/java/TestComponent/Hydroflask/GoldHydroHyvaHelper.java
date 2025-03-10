@@ -12488,7 +12488,7 @@ public void Explore_Validation(String Dataset) {
 	cell.setCellValue("Lotuswave");
 	
 	String status;
-	if(Ordernumber.contains("HYFUSSTG40"))
+	if(Ordernumber.contains("400"))
 	{
 
 	status="PASS";
