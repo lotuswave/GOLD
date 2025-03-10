@@ -2,10 +2,7 @@ package TestComponent.Hydroflask;
 
 import static org.testng.Assert.fail;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -909,6 +906,537 @@ public class GoldHydroHyvaHelper {
 
 			Assert.fail();
 		}
+	}
+	
+	public void Admin_signin(String dataSet) {
+
+		try {
+			
+			Sync.waitPageLoad();
+			if (Common.getCurrentURL().contains("emea-preprod")) {
+				
+				Thread.sleep(20000);
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("admin/dashboard/"),
+						"To Validate the Admin is landing on the Dashboard after successfull Signin",
+						"After clicking on sigin button admin should navigate to the dashboard",
+						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+						"Admin failed to display the dashboard after clicking on the signin button");
+			}
+			else {
+				Sync.waitPageLoad(30);
+				
+				Common.openNewTab();
+				
+				Common.oppenURL("https://na-preprod.hele.digital/heledigitaladmin/admin/dashboard/");
+				
+				Sync.waitPageLoad(4000);
+				Sync.waitElementPresent(30, "xpath", "//a[text()='Login via Identity Provider']");
+				Common.clickElement("xpath", "//a[text()='Login via Identity Provider']");
+				Thread.sleep(15000);
+				
+				Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard / Magento Admin"),
+						"To Validate the Admin is landing on the Dashboard after successfull Signin",
+						"After clicking on sigin button admin should navigate to the dashboard",
+						"Admin Sucessfully navigate to the dashboard after clicking on the signin button",
+						"Admin failed to display the dashboard after clicking on the signin button");
+			}
+		
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog(
+					"To Validate the Admin is landing on the Dashboard after successfull Signin",
+					"After clicking on sigin button admin should navigate to the dashboard",
+					"Admin failed to navigate to the dashboard after click on signin button",
+					"Admin failed to land on the dashboard after clicking on the signin button");
+			Assert.fail();
+
+		}
+
+	}
+	
+
+	public void click_Sales() {
+		// TODO Auto-generated method stub
+
+		try {
+			Sync.waitPageLoad();
+			Sync.waitElementPresent("id", "menu-magento-sales-sales");
+			Common.clickElement("id", "menu-magento-sales-sales"); // this line clicks on sale option in magento
+			Thread.sleep(2000);
+			String Sales = Common.findElement("xpath", "//li[@class='item-sales-order    level-2']").getText();
+			System.out.println(Sales);
+		
+			Common.assertionCheckwithReport(Sales.equals("Orders"), "To verify the sales menu ",
+					"After clicking the sales menu it will display menu options ",
+					"Successfully clicked the sales menu and it displayed the Catalog options",
+					"Failed to click the sales menu");
+			Common.clickElement("xpath", "//li[@class='item-sales-order    level-2']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To verify the sales menu ",
+					"After clicking the sales menu it will display menu options ",
+					"Successfully clicked the sales menu and it displayed the sales options",
+					Common.getscreenShotPathforReport("Failed to click on the sales menu"));
+			Assert.fail();
+		}
+
+	}
+	public HashMap<String, String> Admin_Order_Details(String orderNumber) {
+		HashMap<String, String> Orderstatus1 = new HashMap<String, String>();
+		try
+		{
+			int filters = Common.findElements("xpath", "//div[@class='admin__data-grid-filters-current _show']").size();
+			if (filters > 0) {
+				Common.clickElement("xpath",
+						"//div[@class='admin__data-grid-filters-current _show']//button[text()='Clear all']");
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Thread.sleep(8000);
+				Common.findElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
+				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Thread.sleep(8000);
+				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+	       
+			String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
+			System.out.println(Number);
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div");
+			String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+			Orderstatus1.put("warkato", Workatostatus);
+			System.out.println(Workatostatus);
+				 if(Number.equals(orderNumber))
+				 {
+							Thread.sleep(3000);
+							Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
+				 }
+						String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+						
+									System.out.println(Orderstatus);
+									Orderstatus1.put("AdminOrderstatus", Orderstatus);
+									StringBuilder concatenatedText = new StringBuilder();
+									int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
+
+									for (int n=1;n<=size;n++) {
+				             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
+				             concatenatedText.append(sku);		  
+				           
+									}
+									String finalsku = concatenatedText.toString();
+									  System.out.println(finalsku);
+									  Orderstatus1.put("Skus", finalsku);
+									  
+									  String Subtotal=Common.findElement("xpath", "//td[contains(text(),'Subtotal')]//parent::tr//span[@class='price']").getText().trim();
+										Orderstatus1.put("Adminsubtotal", Subtotal);
+										String Shipping=Common.getText("xpath", "//td[contains(text(),'Shipping & Handling')]//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Adminshipping", Shipping);
+										String Tax=Common.getText("xpath", "//div[contains(text(),'Tax')]//parent::td//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Admintax", Tax);
+										int dis=Common.findElements("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").size();
+										if(dis>0)
+										{
+											String Discount=Common.getText("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").trim();
+											Orderstatus1.put("AdminDis", Discount);
+											
+										}
+										else
+										{
+											String Discount="Null";
+											Orderstatus1.put("AdminDis", Discount);
+										}
+										String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Admintotal", OrderTotal);
+										
+										String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
+										Orderstatus1.put("Email", Email);
+			}
+			else
+			{
+				Thread.sleep(5000);
+				Common.scrollIntoView("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
+				Common.clickElement("xpath", "//input[@aria-label='Search by keyword']");
+				Thread.sleep(6000);
+				Common.textBoxInput("xpath", "//input[@aria-label='Search by keyword']", orderNumber);
+				Common.actionsKeyPress(Keys.ENTER);
+				Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+				Thread.sleep(6000);
+				Common.scrollIntoView("xpath", "//div[@class='data-grid-cell-content']");
+				String Number=Common.findElement("xpath", "(//div[@class='data-grid-cell-content'])[1]").getText();
+				System.out.println(Number);
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[3]//div");
+				String Workatostatus=Common.findElement("xpath", "//a[@class='action-menu-item']//parent::td/following-sibling::td[2]//div").getText();
+				Orderstatus1.put("warkato", Workatostatus);
+				System.out.println(Workatostatus);
+					 if(Number.equals(orderNumber))
+					 {
+								Thread.sleep(3000);
+								Common.clickElement("xpath", "//td//a[@class='action-menu-item']");
+					 }				
+							Thread.sleep(4000);
+						
+						String Orderstatus = Common.findElement("xpath", "//span[@id='order_status']").getText();
+						
+									System.out.println(Orderstatus);
+									Orderstatus1.put("AdminOrderstatus", Orderstatus);
+									StringBuilder concatenatedText = new StringBuilder();
+									int size = Common.findElements("xpath", "//div[@class='product-sku-block']").size();
+
+									for (int n=1;n<=size;n++) {
+				             String sku=Common.findElement("xpath", "(//div[@class='product-sku-block'])["+n+"]").getText().replace("SKU:", "");
+				             concatenatedText.append(sku);		  
+				           
+									}
+									String finalsku = concatenatedText.toString();
+									  System.out.println(finalsku);
+									  Orderstatus1.put("Skus", finalsku);
+									  String Subtotal=Common.findElement("xpath", "//td[contains(text(),'Subtotal')]//parent::tr//span[@class='price']").getText().trim();
+										Orderstatus1.put("Adminsubtotal", Subtotal);
+										String Shipping=Common.getText("xpath", "//td[contains(text(),'Shipping & Handling')]//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Adminshipping", Shipping);
+										String Tax=Common.getText("xpath", "//div[contains(text(),'Tax')]//parent::td//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Admintax", Tax);
+										int dis=Common.findElements("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").size();
+										if(dis>0)
+										{
+											String Discount=Common.getText("xpath", "//td[contains(text(),'Discount')]//parent::tr//span[@class='price']").trim();
+											Orderstatus1.put("AdminDis", Discount);
+											
+										}
+										else
+										{
+											String Discount="Null";
+											Orderstatus1.put("AdminDis", Discount);
+										}
+										String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+										Orderstatus1.put("Admintotal", OrderTotal);
+										
+										String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
+										Orderstatus1.put("Email", Email);
+			}	
+
+	}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		return Orderstatus1;
+	}
+	
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode,String Subtotal,String shipping,String Tax,String Discount,String ordertotal,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email)
+			throws FileNotFoundException, IOException {
+		// String fileOut="";
+		try {
+
+			File file = new File(
+					System.getProperty("user.dir") + "/src/test/resources//TestData/Hydroflask/HYF_E2E_orderDetails.xlsx");
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			sheet = workbook.getSheet("OrderDetails");
+
+			if ((workbook.getSheet("OrderDetails")) == null) {
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				rowcount = 2;
+
+			}
+
+			else {
+
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			row = sheet.createRow(rowcount);
+			cell = row.createCell(0);
+			cell.setCellType(CellType.NUMERIC);
+			int SNo=rowcount-1;
+			cell.setCellValue(SNo);
+			cell = row.createCell(1);
+			cell.setCellType(CellType.STRING);
+			
+			cell.setCellValue("Hydroflask");
+			
+			cell = row.createCell(2);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Description);
+			
+			cell = row.createCell(3);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Skus);
+			
+			cell = row.createCell(4);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(OrderIdNumber);
+
+			cell = row.createCell(5);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(AdminOrderstatus);
+			
+			cell = row.createCell(6);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(workato);
+			
+			cell = row.createCell(7);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Used_GiftCode);
+			
+			cell = row.createCell(8);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Subtotal);
+			
+			cell = row.createCell(9);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(shipping);
+			
+			cell = row.createCell(10);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Tax);
+			
+			cell = row.createCell(11);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Discount);
+			
+			cell = row.createCell(12);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(ordertotal);
+			
+			cell = row.createCell(13);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Adminsubtotal);
+			
+			cell = row.createCell(14);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Adminshipping);
+			
+			cell = row.createCell(15);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Admintax);
+			
+			cell = row.createCell(16);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(AdminDis);
+			
+			cell = row.createCell(17);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Admintotal);
+			
+			cell = row.createCell(18);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Email);
+			
+			cell = row.createCell(19);
+			cell.setCellType(CellType.STRING);
+			String Subtotalstatus;
+			if(Subtotal.equals(Adminsubtotal))
+			{
+
+				Subtotalstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Subtotalstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Subtotalstatus);
+			
+			cell = row.createCell(20);
+			cell.setCellType(CellType.STRING);
+			String Shippingstatus;
+			if(shipping.equals(Adminshipping))
+			{
+
+				Shippingstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Shippingstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Shippingstatus);
+			
+			cell = row.createCell(21);
+			cell.setCellType(CellType.STRING);
+			String Taxstatus;
+			if(Tax.equals(Admintax))
+			{
+
+				Taxstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Taxstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Taxstatus);
+			
+			
+			cell = row.createCell(22);
+			cell.setCellType(CellType.STRING);
+			String Disstatus;
+			if(Discount.equals(AdminDis))
+			{
+
+				Disstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Disstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Disstatus);
+			
+
+			cell = row.createCell(23);
+			cell.setCellType(CellType.STRING);
+			String Orderstatus;
+			if(ordertotal.equals(Admintotal))
+			{
+
+				Orderstatus="PASS";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.GREEN.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+			else
+			{
+				Orderstatus="FAIL";
+			CellStyle style = workbook.createCellStyle();
+			Font font= workbook.createFont();
+			font.setColor(IndexedColors.RED.getIndex());
+			font.setBold(true);
+			style.setFont(font);
+			cell.setCellStyle(style);
+			}
+
+			cell.setCellValue(Orderstatus);
+			
+			
+			System.out.println(OrderIdNumber);
+			FileOutputStream fileOut = new FileOutputStream(file);
+			
+			workbook.write(fileOut);
+		
+			fileOut.flush();
+			fileOut.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		}
+	
+	public HashMap<String, String> ordersummary_Details() {
+		// TODO Auto-generated method stub
+		HashMap<String, String> details=new HashMap<String, String>();
+		try
+		{
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").trim();
+			details.put("Subtotal", Subtotal);
+			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'value')]").trim();
+			details.put("shipping", shipping);
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").trim();
+			details.put("Tax", Tax);
+			Thread.sleep(4000);
+			int Discounts=Common.findElements("xpath", "//div[@class='item discount']//span[contains(@class,'value')]").size();
+			if(Discounts>0)
+			{
+				String Discount = Common.getText("xpath", "//div[@class='item discount']//span[contains(@class,'value')]").trim();
+				details.put("Discount", Discount);
+			}
+			else
+			{
+				String Discount="Null";
+				details.put("Discount", Discount);		
+			}
+			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]").trim();
+			details.put("ordertotal", ordertotal);
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		return details;
 	}
 
 	public String updatePaymentAndSubmitOrder(String dataSet) throws Exception {
@@ -13777,6 +14305,152 @@ public void Explore_Validation(String Dataset) {
 			Assert.fail();
 		}
 		
+	}
+	
+	public void Admin_prepareOrdersData(String fileName) {
+		// TODO Auto-generated method stub
+		try {
+
+			File file = new File(System.getProperty("user.dir") + "/src/test/resources/TestData/Hydroflask/" + fileName);
+			XSSFWorkbook workbook;
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			if (!(file.exists())) {
+				workbook = new XSSFWorkbook();
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				CellStyle ps = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				ps.setFillForegroundColor(IndexedColors.RED.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("S.No");
+				cell = row.createCell(1);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Website");
+				cell = row.createCell(2);
+				cell.setCellStyle(cs);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Test scenario Description");
+				cell = row.createCell(3);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("SKU");
+				cell = row.createCell(4);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				cell = row.createCell(5);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Order Status Magento");
+	           cell = row.createCell(6);
+	           
+	           cell.setCellStyle(cs);
+				cell.setCellValue("Workato Status");
+	           cell = row.createCell(7);
+			
+	           cell.setCellStyle(cs);
+				cell.setCellValue("Used GiftCode");
+	         cell = row.createCell(8);
+	         
+	         cell.setCellStyle(cs);
+				cell.setCellValue("Subtotal");
+		     cell = row.createCell(9);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("shipping");
+		     cell = row.createCell(10);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Tax");
+		     cell = row.createCell(11);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Discount");
+		     cell = row.createCell(12);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("ordertotal");
+		     cell = row.createCell(13);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Adminsubtotal");
+		     cell = row.createCell(14);
+		     
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Adminshipping");
+		     cell = row.createCell(15);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Admintax");
+		     cell = row.createCell(16);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("AdminDis");
+		     cell = row.createCell(17);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Admintotal");
+		     cell = row.createCell(18);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Email");
+		     cell = row.createCell(19);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&Adminsubtotal status");
+		     cell = row.createCell(20);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&AdminShipping Status");
+		     cell = row.createCell(21);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&AdminTax Status");
+		     cell = row.createCell(22);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&AdminDiscount Status");
+		     cell = row.createCell(23);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Website&Adminordertotal Status");
+		     cell = row.createCell(24);
+
+				rowcount = 2;
+
+			}
+
+			else {
+				workbook = new XSSFWorkbook(new FileInputStream(file));
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			
+			FileOutputStream fileOut = new FileOutputStream(file);
+			workbook.write(fileOut);
+			fileOut.flush();
+			fileOut.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 		
 
