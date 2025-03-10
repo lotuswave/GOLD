@@ -857,7 +857,6 @@ public class GoldHydroHyvaHelper {
 				ExtenantReportUtils.addPassLog("validating shipping methods selections on checkout page",
 						"Shipping methods should be select on the checkout page", "user should able to select the shipping method",
 						Common.getscreenShotPathforReport("Sucessfully shipping method should be selected"));
-
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -1410,8 +1409,10 @@ public class GoldHydroHyvaHelper {
 		HashMap<String, String> details=new HashMap<String, String>();
 		try
 		{
+		    Thread.sleep(6000);
 			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]").trim();
 			details.put("Subtotal", Subtotal);
+			Thread.sleep(8000);
 			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'value')]").trim();
 			details.put("shipping", shipping);
 			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").trim();
