@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US smoke execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+
+    <test name="TEST_DGLD_DB_US_ST_001_Create_Account" testid="DTG-928" priority="P1" description="This script will cover creating a new user account">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_001_Create_Account"/>
+        </classes>
+    </test> 
+    
+    <test name="TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation" testid="DTG-928" priority="P1" description="This script will cover validating the shopping cart functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page" testid="DTG-928" priority="P1" description="This script will cover applying a gift card and full redeem on the checkout page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page" testid="DTG-963" priority="P1" description="This script will cover resetting the password from the shipping page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser" testid="DTG-963" priority="P1" description="This script will cover header validation for a guest user">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_012_Header_Validation_for_GuestUser"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method" testid="DTG-932" priority="P1" description="This script will cover guest user checkout with the expedited shipping method">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_method"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_035_Validate_PLP_page" testid="DTG-963" priority="P1" description="This script will cover validating the product listing page functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_035_Validate_PLP_page"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_038_Configurable_Product_Checkout" testid="DTG-1230" priority="P1" description="This script will cover adding a configurable product to the cart and checking out as a guest user">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_038_Configurable_Product_Checkout"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Standard_shipping" testid="DTG-1230" priority="P1" description="This script will cover registered user checkout using AfterPay with standard shipping">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_109_RegisterUser_checkout_AfterPay_Payment_Standard_shipping"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment" testid="DTG-1230" priority="P1" description="This script will cover guest user checkout with simple, configurable, and non-aerosol bundle products with multiple quantities, different billing address, standard shipping, and Klarna payment">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_NonAerosolBundleproduct_MultipleQTYeach_Different_Billingaddress_Standard_Shipping_Klarna_Payment"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card_with_Express_Shipping" testid="DTG-1230" priority="P1" description="This script will cover registered user checkout with a discount, gift card, Visa card, and express shipping">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCard_Visa_card_with_Express_Shipping"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page" testid="DTG-1230" priority="P1" description="This script will cover login from the shipping page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page" testid="DTG-633" priority="P1" description="This script will cover validating the search results page functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_151_Validating_the_Search_Results_Page"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DTG-2199" priority="P1" description="This script will cover validating the My Account page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation" testid="DTG-2392" priority="P1" description="This script will cover validating the minicart page functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page" testid="DTG-2526" priority="P1" description="This script will cover validating the product details page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page"/>
+        </classes>
+    </test>
+    
+    <test name="TEST_DGLD_DB_US_ST_011_Footer_Link_Validation" testid="DTG-464" priority="P1" description="This script will cover footer links validation">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_011_Footer_Link_Validation"/>
+        </classes>
+    </test>
+
+</suite>
