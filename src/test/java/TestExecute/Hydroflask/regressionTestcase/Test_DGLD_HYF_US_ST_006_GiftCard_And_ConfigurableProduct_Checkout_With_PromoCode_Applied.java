@@ -35,7 +35,6 @@ public class Test_DGLD_HYF_US_ST_006_GiftCard_And_ConfigurableProduct_Checkout_W
 		}
 	}
 
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
