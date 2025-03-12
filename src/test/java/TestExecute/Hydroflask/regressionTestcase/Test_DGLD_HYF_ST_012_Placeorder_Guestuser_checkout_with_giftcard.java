@@ -32,7 +32,7 @@ public class Test_DGLD_HYF_ST_012_Placeorder_Guestuser_checkout_with_giftcard {
 	}
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
