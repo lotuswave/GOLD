@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-HydroFlask Regression Suite">
+<suite name="Gold-Oxo Regression Suite">
     <listeners>
 		<listener class-name="Utilities.TestListener" />
 	</listeners>
