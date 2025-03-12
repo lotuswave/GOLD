@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Drybar_US.GoldDrybarUSHelper;
+import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_112_Registeruser_StoreCredit_Checkout_Partial_with_Klarna_and_valdiat_the_Storecredit_balance_in_MY_Account_Page {
 	
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarUSHelper Drybar = new GoldDrybarUSHelper(datafile,"DataSet");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Register_User_Checkout_Funtionality_store_credit_Partial_Klarna () throws Exception {
