@@ -223,7 +223,7 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
 	
 	
 	///***Create RMA***///
-    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrde","invoice"})
+    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
     Thread.sleep(30000);
 	System.out.println(apiKey);
