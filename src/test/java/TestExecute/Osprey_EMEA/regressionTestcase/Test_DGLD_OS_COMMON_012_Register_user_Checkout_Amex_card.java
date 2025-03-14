@@ -39,7 +39,7 @@ public class Test_DGLD_OS_COMMON_012_Register_user_Checkout_Amex_card {
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

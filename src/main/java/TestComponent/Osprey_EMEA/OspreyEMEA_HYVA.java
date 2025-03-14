@@ -2680,9 +2680,14 @@ public class OspreyEMEA_HYVA {
 		}
 	}
 
-	public void RegaddDeliveryAddress(String dataSet) {
+	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
+		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
