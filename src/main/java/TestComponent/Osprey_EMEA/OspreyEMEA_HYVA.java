@@ -9707,8 +9707,8 @@ return Number;
 				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
 				if(Common.getCurrentURL().contains("preprod"))
 				{
-				Sync.waitElementPresent("xpath", "//span[text()='Osprey ']//mark");
-				Common.clickElement("xpath", "//span[text()='Osprey ']//mark");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Card')]");
+				Common.clickElement("xpath", "//span[contains(text(),'Gift Card')]");
 				}
 				else
 				{
