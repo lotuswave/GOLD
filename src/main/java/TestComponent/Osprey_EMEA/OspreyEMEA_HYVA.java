@@ -8383,6 +8383,11 @@ return Number;
 						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
 						String countryname=Common.findElement("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']").getText();
 						System.out.println(countryname);
+						int size=Common.findElements("xpath", "//button[@aria-label='Close dialog']").size();
+						if(size>0)
+						{
+							Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+						}
 						Thread.sleep(3000);
 						Country = select.get(i).getText();
 						System.out.println(Country);
