@@ -8381,6 +8381,7 @@ return Number;
 						Sync.waitPageLoad();
 						Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
 						Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
+						Thread.sleep(4000);
 						String countryname=Common.findElement("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//span[@class='country-item__country-label title-xs font-bold']").getText();
 						System.out.println(countryname);
 						int size=Common.findElements("xpath", "//button[@aria-label='Close dialog']").size();
@@ -8388,7 +8389,7 @@ return Number;
 						{
 							Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 						}
-						Thread.sleep(3000);
+						Thread.sleep(4000);
 						Country = select.get(i).getText();
 						System.out.println(Country);
 						select.get(i).click();
@@ -8411,7 +8412,7 @@ return Number;
 							Common.getText("xpath", "(//legend[@class='title-sm font-bold h5 mb-2.5'])[1]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
-//							Common.navigateBack();
+							Common.navigateBack();
 							Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary os:btn-secondary')])[1]");
 							
 							ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
@@ -8419,7 +8420,11 @@ return Number;
 									"successfully page navigating to " + Country + "PAGE",
 									Common.getscreenShotPathforReport(Country));
 							Thread.sleep(5000);
+							int size1=Common.findElements("xpath", "//button[contains(@class,'needsclick klaviyo-close-form kl-private-reset-css-Xuajs1')]").size();
+							if(size1>0)
+							{
 							close_add();
+							}
 						}
 						else {
 //							Common.clickElement("xpath", "//span[contains(text(),'Confirm')]");
