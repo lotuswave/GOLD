@@ -47,7 +47,7 @@ public class Test_DGLD_API_HF_US_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption 
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="12805813";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/hydroflask/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -246,7 +246,7 @@ public class Test_DGLD_API_HF_US_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption 
 	
 	
 	///****Post Credit Memo****///
-	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder_And_InvoiceOrder","createRma"})
+	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy","shipOrder","invoice", "createRma"})
  public void postCreditMemo() {
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
 
