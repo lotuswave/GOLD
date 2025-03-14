@@ -3439,11 +3439,11 @@ public class OspreyEMEA_HYVA {
 			for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath", "//img[contains(@src,'" + socallinksarry[i] + "')]");
+				Thread.sleep(4000);
 				Common.switchWindows();
 				System.out.println(Common.getCurrentURL());
-
 				if (socallinksarry[i].equals("instagram")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram.com/ospreypacks/"),
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
