@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_ST_074_Guest_user_Checkout_With_Discount_Amex_card 
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

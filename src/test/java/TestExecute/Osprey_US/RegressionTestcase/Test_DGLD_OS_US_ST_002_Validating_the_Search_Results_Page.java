@@ -35,7 +35,7 @@ public class Test_DGLD_OS_US_ST_002_Validating_the_Search_Results_Page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

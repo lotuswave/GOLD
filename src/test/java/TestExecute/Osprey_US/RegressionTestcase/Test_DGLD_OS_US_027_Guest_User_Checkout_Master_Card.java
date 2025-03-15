@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_027_Guest_User_Checkout_Master_Card {
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
