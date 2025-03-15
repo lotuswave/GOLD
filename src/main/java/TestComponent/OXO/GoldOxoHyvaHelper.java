@@ -927,7 +927,6 @@ public class GoldOxoHyvaHelper {
 				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
 				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 			}
-			
 			Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
@@ -966,8 +965,14 @@ public class GoldOxoHyvaHelper {
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close dialog'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close dialog'])[1]");
+			}
 
 		}
+		
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5415,6 +5420,17 @@ catch(Exception | Error e)
 		String Shipping="";
 		try {
 			
+			try {
+				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+				{
+					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+				}
+			}
+			catch(NoSuchElementException e)
+			{
+				System.out.println("Popup didn't appear");
+			}
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
