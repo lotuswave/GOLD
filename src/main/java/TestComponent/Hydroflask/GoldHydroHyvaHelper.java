@@ -1578,7 +1578,7 @@ public class GoldHydroHyvaHelper {
 				}
 
 			} else {
-				int savedcard=Common.findElements("css", "select[x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");

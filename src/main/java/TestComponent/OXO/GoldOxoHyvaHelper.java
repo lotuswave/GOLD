@@ -1390,7 +1390,6 @@ else
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					
-					
 					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 					Common.scrollIntoView("xpath", "//button[@class='action primary checkout']");
 					Common.clickElement("xpath", "//button[@class='action primary checkout']");
@@ -1461,7 +1460,7 @@ else
 				Common.switchToDefault();
 				}
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					
+					Thread.sleep(4000);
 					Sync.waitElementPresent(60,"xpath", "//button[contains(text(),'Place Order')]");
 					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
