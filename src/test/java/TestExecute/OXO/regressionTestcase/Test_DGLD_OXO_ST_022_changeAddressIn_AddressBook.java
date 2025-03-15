@@ -32,7 +32,7 @@ public class Test_DGLD_OXO_ST_022_changeAddressIn_AddressBook {
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

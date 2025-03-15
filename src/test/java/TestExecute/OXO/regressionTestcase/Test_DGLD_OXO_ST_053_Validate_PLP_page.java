@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.OXO.GoldOxoHyvaHelper;
-import TestComponent.OXO.GoldOxoHyva_PRODHelper;
 import TestLib.Common;
 import TestLib.Login;
 
