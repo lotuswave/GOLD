@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
@@ -50,7 +49,7 @@ public class TEST_DGLD_DB_US_ST_180_Register_User_Multiple_Items_Add_WC_and_Canc
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 

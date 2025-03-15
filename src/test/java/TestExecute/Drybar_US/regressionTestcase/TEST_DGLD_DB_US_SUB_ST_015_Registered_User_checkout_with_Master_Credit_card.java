@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Drybar_US.GoldDrybarUSHelper;
 import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
@@ -42,7 +41,7 @@ public class TEST_DGLD_DB_US_SUB_ST_015_Registered_User_checkout_with_Master_Cre
 	
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 		
 
 	}
