@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
-import TestComponent.Osprey_EMEA.OspreyRegressionEMEA;
 import TestLib.Common;
 import TestLib.Login;
 
@@ -45,7 +44,7 @@ public class TEST_DGLD_OS_COMMON_127_Register_user_Products_are_added_to_the_Wis
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
