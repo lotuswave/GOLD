@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Hydroflask.GoldHydroHelper;
 import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
@@ -38,7 +37,7 @@ public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
