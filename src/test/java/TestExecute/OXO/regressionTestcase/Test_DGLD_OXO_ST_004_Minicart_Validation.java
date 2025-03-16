@@ -21,7 +21,7 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.search_product("Product");
-			Oxo.addtocart("Product");
+			Oxo.addtocart_PLP("Product");
 			Oxo.click_on_product("addproduct");
 			Oxo.click_on_Image("Product");
 			Oxo.minicart_delete("Product");

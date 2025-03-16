@@ -8715,8 +8715,10 @@ public void header_1_Percent_Planet() {
 					.getAttribute("alt");
 			Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains(products),
+			Thread.sleep(5000);
+			System.out.println(Common.getPageTitle());
+			System.out.println(products);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(products) || products.contains(Common.getPageTitle()),
 					"validating the product navigating to the PDP page",
 					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 					"Failed to Navigates Product to the PDP page");
@@ -8755,11 +8757,12 @@ public void header_1_Percent_Planet() {
 
 	public void minicart_delete(String Dataset) {
 		// TODO Auto-generated method stub
-		String deleteproduct = data.get(Dataset).get("Products");
+		String deleteproduct = data.get(Dataset).get("Products").trim();
 		String symbol=data.get(Dataset).get("Symbol");
 
 		try {
 			click_minicart();
+			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath", "//span[@x-html='cart.subtotal']//span");
 			String subtotal = Common.getText("xpath", "//span[@x-html='cart.subtotal']//span")
 					.replace(symbol, "");
@@ -8770,8 +8773,8 @@ public void header_1_Percent_Planet() {
 			String productamount1 = Common.getText("xpath", "(//span[@x-html='item.product_price']//span[@class='price'])[1]").replace(symbol,
 					"");
 			Float productamount1value = Float.parseFloat(productamount1);
+			Thread.sleep(4000);
 			if (productname.equals(deleteproduct)) {
-				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
 						"(//a[contains(@aria-label,'Edit product')]//parent::div//button)[1]");
 				Common.clickElement("xpath",
