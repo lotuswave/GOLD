@@ -3064,8 +3064,8 @@ public void header_Shopbycollection(String Dataset) { {
 			System.out.println(size);
 			if (size > 0  ) {
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ method +"')]");
-				Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
+				Sync.waitElementPresent("xpath", "//label[contains(@class,'flex w-full')]//span[contains(text(),'"+ method +"')]");
+				Common.clickElement("xpath", "//label[contains(@class,'flex w-full')]//span[contains(text(),'"+ method +"')]");
 			}
 			else
 			{
@@ -16562,15 +16562,14 @@ public void createaccount_verfication(String Dataset) {
 public String create_account(String Dataset) {
 	String email="";
 	String Product=data.get(Dataset).get("Products");
-	String Email = data.get(Dataset).get("Email");
+	String Email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
 	try {
 
 		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 		Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-		Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+	//	Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+		Common.textBoxInput("xpath", "//input[@name='email']", Email);
 		
-		
-//		Common.textBoxInput("xpath", "//input[@id='email_address']", Email);
 		email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 		System.out.println(data.get(Dataset).get("Password"));
