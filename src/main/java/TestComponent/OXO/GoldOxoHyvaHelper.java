@@ -11261,12 +11261,12 @@ public void header_1_Percent_Planet() {
 				Sync.waitPageLoad();
 //				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[@title='"+footerlinks[i] +"']");
 //				Thread.sleep(1000);
 				Common.findElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[@title='"+footerlinks[i] +"']");
 				Common.clickElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[@title='"+footerlinks[i] +"']");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
 			
@@ -11295,6 +11295,17 @@ public void header_1_Percent_Planet() {
 				
 
 			}
+			Common.clickElement("xpath", "//a[text()='Gift Card']");
+			Common.assertionCheckwithReport( Common.getCurrentURL().contains("oxo-gift-card"),"validating the links navigation from footer Links",
+							"After Clicking on Gift Card it should navigate to the Gift card page",
+							 "Sucessfully Navigated to the gift card Links",
+							"Unable to Navigated to the Gift card page Links");
+			Thread.sleep(2000);
+			Common.navigateBack();
+			int size = Common.findElements("xpath", "//*[@id='logo']").size();
+			System.out.println(size);
+			
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
@@ -11314,12 +11325,12 @@ public void header_1_Percent_Planet() {
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[@title='"+footerlinks[i] +"']");
 				Thread.sleep(1000);
 				Common.findElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[@title='"+footerlinks[i] +"']");
 				Common.clickElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[@title='"+footerlinks[i] +"']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 			
@@ -11362,12 +11373,12 @@ public void header_1_Percent_Planet() {
 				Sync.waitPageLoad();
 //				Thread.sleep(3000);
 				Sync.waitElementPresent(50, "xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[contains(text(),'"+footerlinks[i] +"')]");
 //				Thread.sleep(1000);
 				Common.findElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[contains(text(),'"+footerlinks[i] +"')]");
 				Common.clickElement("xpath",
-						"//a[text()='"+footerlinks[i] +"']");
+						"//a[contains(text(),'"+footerlinks[i] +"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
 			
