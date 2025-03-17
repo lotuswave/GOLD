@@ -2021,10 +2021,14 @@ public String create_account(String Dataset) {
 					.replace(symbol, "");
 			System.out.println(Subtotal2);
 			Float subtotalvalue2 = Float.parseFloat(Subtotal2);
-			Float Total = subtotalvalue * 3;
+			Float Total = subtotalvalue * 5;
 			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
 			System.out.println(ExpectedTotalAmmount2);
 			Thread.sleep(2000);
+			System.out.println(cart);
+			System.out.println(UpdataedQuntityinminicart);
+			System.out.println(ExpectedTotalAmmount2);
+			System.out.println(Subtotal2);
 			Common.assertionCheckwithReport(
 					UpdataedQuntityinminicart.equals(cart) && ExpectedTotalAmmount2.equals(Subtotal2),
 					"validating the product update quantity and subtotal",
