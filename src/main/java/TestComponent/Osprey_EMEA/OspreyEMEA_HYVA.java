@@ -270,24 +270,18 @@ public class OspreyEMEA_HYVA {
 
 	public String Create_Account(String Dataset) {
 		// TODO Auto-generated method stub
-		String email = "";
+		//String email = "";
+		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		String Store= data.get(Dataset).get("Store");
 		try {
-
-			Common.clickElement("xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.clickElement("xpath", "//input[@name='lastname']");
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.clickElement("xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@name='password']");
+			Common.textBoxInput("xpath", "//input[@id='email_address']", email);		
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//input[@name='password_confirmation']");
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//button[contains(@class,'action submit ')]");
-//			Sync.waitImplicit(10);
 			Thread.sleep(1000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(message);
