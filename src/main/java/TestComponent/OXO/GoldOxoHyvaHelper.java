@@ -6769,6 +6769,10 @@ catch(Exception | Error e)
 //					"Successfully the color has been expand when we click on the colors ",
 //					"unable to expand the colors in PLP page");
 			Sync.waitElementPresent("xpath",
+					"//div[contains(text(),'Colors')]");
+			Common.clickElement("xpath",
+					"//div[contains(text(),'Colors')]");
+			Sync.waitElementPresent("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Common.clickElement("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
@@ -6777,6 +6781,8 @@ catch(Exception | Error e)
 					"//span[contains(text(),'Sage')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
 			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+			System.out.println(colorcount);
+			System.out.println(bottlecount);
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -6797,7 +6803,7 @@ catch(Exception | Error e)
 		String name = "";
 		try {
 			Common.clickElement("xpath","//div[text()='Price']");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("$", "").replace(".00", "");
 			System.out.println(lastvalue);
@@ -6864,12 +6870,15 @@ catch(Exception | Error e)
 
 	public void dragprice(WebElement price) {
 		try {
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//div[@class='value end active']");
 			String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace("$", "")
 					.replace(".00", "");
 			System.out.println(lastvalue);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+			Thread.sleep(4000);
 			Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 		} catch (Exception | Error e) {
 			e.printStackTrace();
