@@ -23,8 +23,8 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
         Osprey_ReEu.Create_Account("Create Account");
         Osprey_ReEu.Click_Myorders_and_Account("Edit contactinfo");          
         Osprey_ReEu.Edit_Name("Edit contactinfo");
-        Osprey_ReEu.Account_page_Validation("Account validation");
-        Osprey_ReEu.signout();
+       // Osprey_ReEu.Account_page_Validation("Account validation");  //covered in My_Account_page_Validation testcase
+       // Osprey_ReEu.signout();
        
         
 		} catch (Exception e) {

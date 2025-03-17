@@ -19,7 +19,7 @@ public class Test_DGLD_OS_COMMON_045_Minicart_Validation {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.search_product("Simple product");
         Osprey_ReEu.simple_addtocart("Simple product");
         Osprey_ReEu.search_product("Product");      
         Osprey_ReEu.addtocart("Product");
