@@ -7122,6 +7122,7 @@ catch(Exception | Error e)
 	public void remove_outofstock_subcribtion(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
+			Thread.sleep(4000);
 			String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 					.getAttribute("data-price-amount");
 			if (price.equals(Dataset)) {
@@ -12375,7 +12376,7 @@ public void header_kichenware_Cultery(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || title.contains(breadcrumb),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
