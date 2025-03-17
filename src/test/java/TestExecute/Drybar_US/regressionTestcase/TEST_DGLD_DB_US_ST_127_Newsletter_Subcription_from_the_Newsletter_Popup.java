@@ -39,7 +39,7 @@ public class TEST_DGLD_DB_US_ST_127_Newsletter_Subcription_from_the_Newsletter_P
 		public void startTest() throws Exception {
 			System.setProperty("configFile", "Drybar_US\\config.properties");
 			Login.signIn();
-			// Drybar.close_add();
+			 Drybar.close_add();
 
 		}
 

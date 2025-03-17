@@ -25,9 +25,7 @@ public class TEST_DGLD_DB_US_ST_138_Checkout_RegisterUserCC_configurable_Simple 
 			Drybar.search_product("Configurable Product");
 			Drybar.Configurable_addtocart("Configurable Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.clickSubmitbutton_Shippingpage();
 			String rewardpoints=Drybar.fifteenpercent_Reward_Points("$15 Off (300 points)");
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 			Drybar.verify_RewardPoints(rewardpoints);

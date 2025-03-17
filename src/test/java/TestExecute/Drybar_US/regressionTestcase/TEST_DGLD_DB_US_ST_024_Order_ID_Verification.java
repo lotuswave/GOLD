@@ -25,7 +25,6 @@ public class TEST_DGLD_DB_US_ST_024_Order_ID_Verification {
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			String Ordernumber=Drybar.updatePaymentAndSubmitOrder("PaymentDetails");

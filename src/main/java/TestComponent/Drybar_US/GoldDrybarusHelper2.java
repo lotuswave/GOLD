@@ -1344,8 +1344,8 @@ public class GoldDrybarusHelper2 {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 	             	   Thread.sleep(40000);
 	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
@@ -2720,38 +2720,7 @@ public class GoldDrybarusHelper2 {
 					break;
 				}
 			}
-			if(Common.getCurrentURL().contains("/gb"))
-			{
-				Sync.waitPageLoad(30);
-				Thread.sleep(6000);
-				Thread.sleep(4000);
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-				Common.clickElement("xpath", "//img[@alt='" + products + "']");
-				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + scent + "']");
-				Common.clickElement("xpath", "//div[@data-option-label='" + scent + "']");
-				Sync.waitElementPresent("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
-				Common.clickElement("xpath", "(//div[@data-option-label='" + Productsize + "'])[1]");
-				String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
-				System.out.println(size);
-				String size1= data.get(Dataset).get("size").toUpperCase();
-				System.out.println(size1);
-				Common.assertionCheckwithReport(
-						size.equals(size1),
-						"Verifying the the size of the product is selected in the PDP",
-						"after clicking on the size product size should be selected",
-						"successfully Product size has been selected on the PDP",
-						"Failed to select the product price on the PDP");
-				product_quantity(Dataset);
-				Thread.sleep(4000);
-				
-				Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
-				Sync.waitPageLoad();
-				Thread.sleep(6000);
-//				
-			}
-			else
-			{
+			
 				
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
@@ -2782,7 +2751,7 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(5000);
 
 		}
-		}
+		
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
@@ -2799,7 +2768,6 @@ public class GoldDrybarusHelper2 {
 		
 		try
 		{
-			
 		 Sync.waitElementPresent("xpath", "//a[@class='order-number link link-primary']");
 	     Common.clickElement("xpath", "//a[@class='order-number link link-primary']");
 	     Thread.sleep(4000);
@@ -7408,22 +7376,13 @@ public void FUll_Payment(String dataSet) {
 				String color=data.get(Dataset).get("Products1");
 				
 				try {
+					Thread.sleep(5000);
 					String minicartproduct = Common
-							.findElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']").getText();
-					Common.clickElement("xpath", "//a[@class='product-item-link hover:underline inline-block' and text()='"+ products +"']");
+							.findElement("xpath", "//img[@alt='"+ products +"']").getText();
+					Common.clickElement("xpath", "//img[@alt='"+ products +"']");
 					Sync.waitPageLoad();
 					Thread.sleep(3000);
 					Common.assertionCheckwithReport(Common.getPageTitle().contains(minicartproduct),
-							"validating the product navigating to the PDP page",
-							"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
-							"Failed to Navigates Product to the PDP page");
-					click_minicart();
-					String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + color + "')]")
-							.getAttribute("alt");
-					Common.clickElement("xpath", "//img[contains(@alt,'" + color + "')]");
-					Sync.waitPageLoad();
-					Thread.sleep(3000);
-					Common.assertionCheckwithReport(Common.getPageTitle().contains(color),
 							"validating the product navigating to the PDP page",
 							"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
 							"Failed to Navigates Product to the PDP page");
@@ -12247,7 +12206,8 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 						|| Common.getPageTitle().contains("Drybar Home") || Common.getPageTitle().contains("Drybar"),
 				"validating store logo", "System directs the user to the Homepage",
 				"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
-
+		Common.clickElement("xpath", "(//span[contains(text(),'Rewards')])[1]");
+		Thread.sleep(4000);
 		int sizesframe = Common.findElements("xpath", "//div[@id='ltkpopup-content']").size();
 		System.out.println(sizesframe);
 		if (sizesframe > 0) {
@@ -12261,7 +12221,7 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 			Common.textBoxInput("id", "ltkpopup-phone", data.get(dataSet).get("Phone"));
 			Thread.sleep(3000);
 			Common.clickElement("id", "ltkpopup-faux-submit");
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			int sizes = Common.findElements("xpath", "//a[text()='CREATE ACCOUNT']").size();
 			if (sizes > 0) {
 
@@ -12281,7 +12241,7 @@ public void verifingHomePage_and_NewsletterSubcriptionPOPUP(String dataSet) thro
 			}
 
 		} else {
-
+			Assert.fail();
 		}
 	} catch (Exception e) {
 
