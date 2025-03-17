@@ -91,7 +91,7 @@ public class GoldOspreyUSHyvaHelper {
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
 //				close_add();
-//				 acceptPrivacy();
+				acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());

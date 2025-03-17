@@ -287,8 +287,8 @@ public class OspreyEMEA_HYVA {
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[contains(@class,'action submit ')]");
-			Sync.waitImplicit(10);
-			Thread.sleep(2000);
+//			Sync.waitImplicit(10);
+			Thread.sleep(1000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
@@ -330,7 +330,7 @@ public class OspreyEMEA_HYVA {
 					data.get(Dataset).get("Confirm Password"));
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
-			Thread.sleep(4000);
+	//		Thread.sleep(4000);
 			String exsitingemail = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 			System.out.println(exsitingemail);
             String exsiting=Common.findElement("xpath", "//div[@ui-id='message-error']").getAttribute("ui-id");		
@@ -541,8 +541,8 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 		Common.clickElement("xpath", "//button[@id='customer-menu']");
-		Sync.waitElementPresent("xpath", "//a[@id='customer.header.dashboard.link']");
-		Common.clickElement("xpath", "//a[@id='customer.header.dashboard.link']");
+		Sync.waitElementPresent("xpath", "//a[@id='customer.header.sign.in.link']");
+		Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 				Sync.waitPageLoad();
