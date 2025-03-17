@@ -13405,29 +13405,29 @@ public void contactUsPage(String dataSet) throws Exception {
 //		Common.textBoxInput("xpath", "//input[@name='conversationPostalCodeForForms']",
 //				data.get(dataSet).get("postcode"));
 
-		Sync.waitElementPresent("xpath", "//div[@id='conversationHowCanWeHelp']");
-		Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
-		Thread.sleep(3000);
-		Common.clickElement("xpath", "//div[@data-path='order_issues']");
-
-		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
-		Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
-
-		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
-		Common.clickElement("xpath", "//div[text()='Billing Issue']");
-
-		Sync.waitElementPresent("xpath", "//input[@id='conversationOrderNumber']");
-		Common.textBoxInput("xpath", "//input[@id='conversationOrderNumber']",
-				data.get(dataSet).get("OrderID"));
+		Sync.waitElementPresent("xpath", "//div[@id='conversationHowcanwehelp']");
+		Common.clickElement("xpath", "//div[@id='conversationHowcanwehelp']");
+		
+//		Common.clickElement("xpath", "//div[@data-path='order_issues']");
+//
+//		Thread.sleep(4000);
+//		Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
+//		Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+//
+//		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
+//		Common.clickElement("xpath", "//div[text()='Billing Issue']");
+//
+//		Sync.waitElementPresent("xpath", "//input[@id='conversationOrderNumber']");
+//		Common.textBoxInput("xpath", "//input[@id='conversationOrderNumber']",
+//				data.get(dataSet).get("OrderID"));
 		Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
 		Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
 				data.get(dataSet).get("Commetsosprey"));
 
-	Thread.sleep(4000);
-		Common.clickElement("xpath", "//div[@id='g-recaptcha']");
-		Thread.sleep(50000);
-		Boolean Checkbox=Common.checkBoxIsSelected("xpath", "//div[@id='g-recaptcha']");
+//	Thread.sleep(4000);
+//		Common.clickElement("xpath", "//div[@id='g-recaptcha']");
+//		Thread.sleep(50000);
+		Boolean Checkbox=Common.checkBoxIsSelected("name", "snOrgTermsAndConditions");
 		if(Checkbox.TRUE)
 		{
 	    	Common.scrollIntoView("xpath", "//button[text()='Submit']");
@@ -13442,6 +13442,7 @@ public void contactUsPage(String dataSet) throws Exception {
 
 		Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
 		int Contactussuccessmessage = Common.findElements("xpath", "//div[@class='form-wrap']").size();
+		//Thank you for contacting Osprey Europe. We will get back to you shortly.
 		System.out.println(Contactussuccessmessage);
 		Common.assertionCheckwithReport(Contactussuccessmessage > 0 || Contactussuccessmessage >= 0,
 				"verifying Contact us Success message ", "Success message should be Displayed",

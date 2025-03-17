@@ -3,13 +3,13 @@
 <suite parallel="none" name="Failed suite [Default suite]">
   <test parallel="none" name="Default test(failed)">
     <classes>
-      <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_042_Login_from_Shipping_page">
+      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form">
         <methods>
-          <include name="Verifying_Login_from_Shipping_page"/>
           <include name="startTest"/>
           <include name="clearBrowser"/>
+          <include name="Verifying_Contactus_form"/>
         </methods>
-      </class> <!-- TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_042_Login_from_Shipping_page -->
+      </class> <!-- TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
