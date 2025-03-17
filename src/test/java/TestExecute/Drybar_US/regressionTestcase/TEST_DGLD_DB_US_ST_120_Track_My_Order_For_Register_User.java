@@ -25,9 +25,6 @@ public class TEST_DGLD_DB_US_ST_120_Track_My_Order_For_Register_User {
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
-			Drybar.selectshippingmethod("GroundShipping method");
-			Drybar.clickSubmitbutton_Shippingpage();
 			String order=Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			Drybar.My_Orders_Page(order);
 			

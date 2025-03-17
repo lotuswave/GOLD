@@ -16,7 +16,7 @@ public class TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page {
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Register_User_Checkout_Funtionality_Visa_card () throws Exception {
+	public void Validate_Product_Details_Page_Functionality () throws Exception {
 
 		try {
 		

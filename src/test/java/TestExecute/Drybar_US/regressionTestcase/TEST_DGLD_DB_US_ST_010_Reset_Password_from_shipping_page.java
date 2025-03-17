@@ -45,7 +45,7 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-//        Drybar.close_add();
+        Drybar.close_add();
         
 	}
 }

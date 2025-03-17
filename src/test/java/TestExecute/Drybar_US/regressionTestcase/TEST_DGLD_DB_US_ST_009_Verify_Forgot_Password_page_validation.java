@@ -26,7 +26,7 @@ public class TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation {
 			Drybar.HairTools_headerlinks("Hair Tools");
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
-			//Drybar.Shipping_Forgot_Password("AccountDetails");
+			Drybar.Shipping_Forgot_Password("AccountDetails");
 			Drybar.click_singin_Shippingpage();
 			Drybar.Forgot_password("AccountDetails");
 			
@@ -47,7 +47,7 @@ public class TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation {
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-        //Drybar.close_add();
+        Drybar.close_add();
         
 	}
 
