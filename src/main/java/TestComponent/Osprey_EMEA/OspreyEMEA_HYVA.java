@@ -8181,7 +8181,8 @@ return Number;
 //			System.out.println(MyFavorites);
 
 //			if (MyFavorites.contains("CREATE NEW WISH LIST")) {
-				Bagpacks_headerlinks("Backpacks & Bags");
+				//Bagpacks_headerlinks("Backpacks & Bags");
+				search_product("Simple product");
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 				Common.clickElement("xpath", "//img[@alt='" + product + "']");
 				Sync.waitPageLoad();
