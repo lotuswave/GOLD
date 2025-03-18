@@ -885,7 +885,8 @@ public class GoldHydroHyvaHelper {
 		}
 	}
 
-	public void validatingErrormessageShippingpage_negative() {
+	public void validatingErrormessageShippingpage_negative() throws InterruptedException {
+		Thread.sleep(2000);
 		int Firstname_Error = Common.findElements("xpath", "//li[@data-msg-field='firstname']").size();
 		int Lastname_Error=Common.findElements("xpath", "//li[@data-msg-field='lastname']").size();
 //		int Address_Error =Common.findElements("xpath", "//li[@data-msg-field='street[0]']").size();
