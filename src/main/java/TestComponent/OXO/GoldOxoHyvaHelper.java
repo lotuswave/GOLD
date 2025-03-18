@@ -1645,7 +1645,7 @@ else
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
-
+				Thread.sleep(3000);
 				Sync.waitElementPresent(50,"xpath", "//button[contains(text(),'Ship Here')]");
 				Common.clickElement("xpath", "//button[contains(text(),'Ship Here')]");
 
