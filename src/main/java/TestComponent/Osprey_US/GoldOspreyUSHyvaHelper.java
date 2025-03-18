@@ -2905,6 +2905,12 @@ public void header_Shopbycollection(String Dataset) { {
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
+				Thread.sleep(3000);
+				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+				{
+					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+				}
 				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
@@ -2993,7 +2999,12 @@ public void header_Shopbycollection(String Dataset) { {
 
 		{
 			try {
-
+				Thread.sleep(3000);
+				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+				{
+					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+				}
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
@@ -3829,7 +3840,12 @@ public void Validate_retailerlocations() {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(3000);
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
 			Common.textBoxInput("css", "section#shipping-details input[name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("id", "guest_details-email_address").size();
