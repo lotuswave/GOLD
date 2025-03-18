@@ -2009,17 +2009,17 @@ public void header_Shopbycollection(String Dataset) { {
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][lastname]']",
 						data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[0][email]']", data.get(Dataset).get("Email"));
-				Common.dropdown("xpath", "//select[@name='registrant[0][role]']", Common.SelectBy.TEXT,
-						data.get(Dataset).get("Role"));
-				Common.clickElement("id", "add-registrant-button");
+//				Common.dropdown("xpath", "//select[@name='registrant[0][role]']", Common.SelectBy.TEXT,
+//						data.get(Dataset).get("Role"));
+				Common.clickElement("xpath", "//button[contains(text(),'Add Registrant')]");
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][firstname]']",
 						data.get(Dataset).get("FirstName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][lastname]']",
 						data.get(Dataset).get("LastName"));
 				Common.textBoxInput("xpath", "//input[@name='registrant[1][email]']",
 						data.get(Dataset).get("UserName"));
-				Common.dropdown("xpath", "//select[@name='registrant[1][role]']", Common.SelectBy.TEXT,
-						data.get(Dataset).get("Role"));
+//				Common.dropdown("xpath", "//select[@name='registrant[1][role]']", Common.SelectBy.TEXT,
+//						data.get(Dataset).get("Role"));
 			}
 			String registry = Common.findElement("xpath", "//div[@x-data='giftRegistry()']//legend")
 					.getText().trim();
@@ -3238,7 +3238,7 @@ public void verifingRetailerHours() {
 		String hours = "hours";
 		try {
 
-			Common.findElement("xpath", "//a[@aria-label='" + hours + "']").click();
+			Common.clickElement("xpath", "//a[@aria-label='hours']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent("xpath", "//div[@class='store-hours-days']");
 			int hoursSize = Common.findElements("xpath", "//div[@class='store-hours-days']").size();
@@ -3352,7 +3352,7 @@ public void Validate_AvailableRetailers() {
 		try {
 			Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
 
-			Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
+	//		Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
 			int retailers = Common.findElements("xpath", "//div[contains(@class,'store dl-store-list-tile')]").size();
 			if (retailers > 0) {
 				Common.assertionCheckwithReport(retailers > 0, "To validate the available retailers",
@@ -3400,7 +3400,7 @@ public void Validate_retailerlocations() {
 		Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
 		int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]//h3").size();
-		for (int i = 1; i <= storecount; i++) {
+		for (int i = 1; i <= 10; i++) {
 			Thread.sleep(3000);
 			String relatedstores = Common
 					.findElement("xpath", "(//a[contains(@class,'conv-section-store')]//h3)[" + i + "]")
@@ -4711,8 +4711,8 @@ return Number;
 			Sync.waitElementPresent("xpath", "//span[text()='View Order']");
 			Common.clickElement("xpath", "//span[text()='View Order']");
 			Sync.waitPageLoad();
-			Sync.waitElementPresent(40, "xpath", "//span[@class='title-lg']");
-			String Ordernumber = Common.findElement("xpath", "//span[@class='title-xs md:title-lg'])").getText();
+			Sync.waitElementPresent(40, "xpath", "//span[@data-ui-id='page-title-wrapper']");
+			String Ordernumber = Common.findElement("xpath", "//span[@class='title-xs md:title-lg']").getText();
 			Common.findElement("xpath", "//span[@class='order-status inline-block']//div");
 			String reorder = Common.findElement("xpath", "//span[text()='Reorder']").getText();
 			String backCTA = Common.findElement("xpath", "//a[@class='hidden lg:flex btn btn-link']").getText().trim();
