@@ -5349,15 +5349,16 @@ return Number;
 	}
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
-		// TODO Auto-generated method stub
+		String email = Common.genrateRandomEmail(data.get(dataSet).get("UserName"));
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("UserName"));
+			//Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("UserName"));
+			Common.textBoxInput("xpath", "//input[@type='email']", email);
 		} catch (NoSuchElementException e) {
 			minicart_Checkout();
-			Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("UserName"));
-
+			//Common.textBoxInput("xpath", "//input[@type='email']",data.get(dataSet).get("UserName"));
+			Common.textBoxInput("xpath", "//input[@type='email']", email);
 		}
 		String expectedResult = "email field will have email address";
 		try {
