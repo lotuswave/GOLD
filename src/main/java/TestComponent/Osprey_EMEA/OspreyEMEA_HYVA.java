@@ -11803,29 +11803,26 @@ catch(Exception | Error e)
 			}
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("UserName"));
+				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
-				Common.textBoxInput("xpath", "//input[@id='email']", data.get(dataSet).get("Prod Email"));
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[@name='send']");
-			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//a[@title='Osprey Pro']");
+			Common.clickElement("xpath", "//a[@title='Osprey Pro']");
+//			Common.switchWindows();
+//			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--secondary']");
+			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--secondary']");
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application")||Common.getCurrentURL().contains("prodeal/application/form/"),
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
 					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
 					"Failed to signIn and not navigated to the Pro Deal Application page ");
-
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-//			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-//			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-//			Sync.waitPageLoad();
-//			Common.switchWindows();
-//			Thread.sleep(3000);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Validating the pro deal application page",
@@ -11838,11 +11835,10 @@ catch(Exception | Error e)
 		String expectedResult = "After clicking hare button with invalid email error message should be display";
 		try {
 			
-			Sync.waitElementPresent("xpath", "//a[@title='APPLY HERE']");
-			Common.clickElement("xpath", "//a[@title='APPLY HERE']");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-
+//			Sync.waitElementPresent("xpath", "//a[@title='APPLY HERE']");
+//			Common.clickElement("xpath", "//a[@title='APPLY HERE']");
+//			Sync.waitPageLoad();
+			Thread.sleep(2000);
 			Sync.waitElementPresent("xpath", "//button[@title='Submit']");
 			Common.clickElement("xpath", "//button[@title='Submit']");
 			Thread.sleep(4000);
