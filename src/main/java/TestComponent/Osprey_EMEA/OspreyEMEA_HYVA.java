@@ -11326,7 +11326,7 @@ catch(Exception | Error e)
 			Thread.sleep(5000);
 			 update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='0']").getText().trim();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("6 Sillerton House") ,
+			Common.assertionCheckwithReport(update.contains("Chorley") ,
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -12938,13 +12938,15 @@ public void validateChatboxOptions(String Dataset) {
 	
 		Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
 		Common.mouseOverClick("xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
+		
+		Common.mouseOverClick("xpath","//div[@aria-label='Chat']");        //need to add
 		Sync.waitElementClickable(30, "xpath", "//button[contains(@class,'newConversationButton')]");
 		Common.mouseOverClick("xpath", "//button[contains(@class,'newConversationButton')]");
 
-		Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[1]");
-		String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[1]").getText();
+		Sync.waitElementVisible("xpath", "(//div[contains(@class,'markdownBody')])[2]");
+		String welcomemsg = Common.findElement("xpath", "(//div[contains(@class,'markdownBody')])[2]").getText();
 		System.out.println(welcomemsg);
-		Common.assertionCheckwithReport( welcomemsg.contains("Welcome to Osprey"),
+		Common.assertionCheckwithReport( welcomemsg.contains("Welcome to Osprey!"),
 				"To validate the Chat Conversation when user click on the chat option",
 				"It should Open the Chat conversation in ChatBot",
 				"Sucessfully click on the ChatBot and display the Chat conversation ",
