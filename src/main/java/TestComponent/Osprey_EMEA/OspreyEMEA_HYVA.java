@@ -2197,6 +2197,11 @@ public class OspreyEMEA_HYVA {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
@@ -2617,7 +2622,11 @@ public class OspreyEMEA_HYVA {
 	public void minicart_Checkout() {{
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(4000);
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
 //			click_minicart();
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
@@ -3605,6 +3614,12 @@ public class OspreyEMEA_HYVA {
 		}
 		String expectedResult = "email field will have email address";
 		try {
+			Thread.sleep(3000);
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
 			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
