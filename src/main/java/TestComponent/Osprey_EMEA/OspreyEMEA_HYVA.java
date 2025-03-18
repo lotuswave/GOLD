@@ -11916,7 +11916,7 @@ catch(Exception | Error e)
 		click_Prodeal();
 		try {
 			Sync.waitPageLoad();
-			Common.clickElement("xpath", "//a[@title='Sign in or register']");
+			Common.clickElement("xpath", "//a[@title='LOG IN']");
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") ) {
 				Sync.waitPageLoad();
@@ -11926,20 +11926,18 @@ catch(Exception | Error e)
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
-		Thread.sleep(3000);
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//a[@title='Osprey Pro']");
+			Common.clickElement("xpath", "//a[@title='Osprey Pro']");
+//			Common.switchWindows();
+//			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--secondary']");
+			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--secondary']");
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application")||Common.getCurrentURL().contains("prodeal/application/form/"),
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
 					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
 					"Failed to signIn and not navigated to the Pro Deal Application page ");
-
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-//			Sync.waitElementPresent("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-//			Common.clickElement("xpath", "//a[@class='pro-deal-link a-btn a-btn--tertiary']");
-//			Sync.waitPageLoad();
-			Common.switchWindows();
-			Thread.sleep(3000);
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
