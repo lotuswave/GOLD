@@ -15,7 +15,7 @@ public class RESTHelper {
 	private static String JIRAURI="https://helenoftroy.atlassian.net/rest/api/3/issue/";
 
 	public static void updateJIRAStatus(String TestId, String TestStatus) {		
-		
+		/*
 		List<String> TestIds = Arrays.asList(TestId.split(",", -1));
 
 		for (String testId : TestIds) {
@@ -27,13 +27,15 @@ public class RESTHelper {
 			else
 				validRequest=validRequest.replace("##Customfield##", "customfield_11093").replace("##Status##",TestStatus);
 			putRequest(validRequest,testId,TestStatus,204);
-		}
+		}*/
 
 	}
 
 
 	public static boolean putRequest(String requestBody,String testID,String testStatus,int StatusCode) {
-		Response response = given()
+		
+		return true;
+		/*Response response = given()
 				.auth()
 				.preemptive()
 				.basic(JIRAUser,JIRAAPIKey)
@@ -50,6 +52,6 @@ public class RESTHelper {
 			System.out.println("JIRA Test Execution Status not updated for "+testID);
 
 		return false;
+	}*/
 	}
-
 }

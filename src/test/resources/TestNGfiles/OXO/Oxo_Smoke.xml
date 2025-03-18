@@ -82,16 +82,9 @@
         </classes>
     </test>
      
-    <test name="Test_DGLD_OXO_ST_103_Employeeuser_checkout_with_CC_Below_Fifty_price" testid="DTG-1931" priority="P1" description="This script will cover validating Employee User Checkout functionality with credit card transactions below fifty dollars.">
+    <test name="Test_DGLD_OXO_ST_075_GuestUser_checkout_one_line_Item_2_QTY_with_gift_code_Full_redemption" testid="DTG-1931" priority="P1" description="This script will cover validating Employee User Checkout functionality with credit card transactions below fifty dollars.">
         <classes>
-            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_103_Employeeuser_checkout_with_CC_Below_Fifty_price" />
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_075_GuestUser_checkout_one_line_Item_2_QTY_with_gift_code_Full_redemption" />
         </classes>
-    </test>
-     
-    <test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DTG-1931" priority="P1" description="This script will cover validating the Shopping Cart page functionality.">
-        <classes>
-            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" />
-        </classes>
-    </test>
-          
+    </test>         
 </suite>

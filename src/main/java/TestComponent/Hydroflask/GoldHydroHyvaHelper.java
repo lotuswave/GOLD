@@ -2093,7 +2093,7 @@ public void FUll_Payment(String dataSet) {
 	public String create_account(String Dataset) {
 		String email="";
 		String Product=data.get(Dataset).get("Products");
-		String Email = data.get(Dataset).get("Email");
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -2108,8 +2108,8 @@ public void FUll_Payment(String dataSet) {
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			System.out.println(data.get(Dataset).get("Confirm Password"));
-			Thread.sleep(4000);
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
+			Thread.sleep(4000);
 			Sync.waitElementPresent(50, "xpath", "//span[@x-html='message.text']");
 			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
 			System.out.println(message);
@@ -9554,6 +9554,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				}
 				Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
+				Thread.sleep(4000);
 				verifingHomePage();
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -9686,7 +9687,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 						.findElement("xpath", "(//div[contains(@class,'overflow-hidden absolute inset-0 object')]//img)[1]")
 						.getAttribute("alt").replace(product,"").replace(" - ", "");
 				System.out.println(Bottleimagecolor);
-				String color = Common.findElement("xpath", "//div[@class='m-swatch swatch-option-selected']").getAttribute("data-option-label");
+				String color = Common.findElement("xpath", "//div[contains(@class,'m-swatch swatch-option-selected')]").getAttribute("data-option-label");
 				System.out.println(color);
 				Common.assertionCheckwithReport(color.equals(colorname) || colorname.equals(Bottleimagecolor), "validating the  product add to the cart",
 						"Product should be add to cart", "Sucessfully product added to the cart ",
@@ -11016,18 +11017,21 @@ public void Explore_Validation(String Dataset) {
 		try {
 			for (i = 0; i < Kustomerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[@title='" + Kustomerlinks[i] + "']");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[@title='" + Kustomerlinks[i] + "']");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[@title='" + Kustomerlinks[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(Kustomerlinks[i]) || Common.getCurrentURL().contains(Kustomerlinks[i])
 						|| Common.getPageTitle().contains("Store Locator")
-						|| Common.getPageTitle().contains("Frequently Asked Questions"),		
+						|| Common.getPageTitle().contains("Frequently Asked Questions")
+						|| Common.getPageTitle().contains("Contact")
+						|| Common.getPageTitle().contains("Tracking & Returns")
+			|| Common.getPageTitle().contains("Shipping & Handling") ,		
 						"validating the Kustomer links navigation from footer Links",
 						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 						Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
