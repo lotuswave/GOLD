@@ -11870,9 +11870,9 @@ public void outofstock_subcription(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@alt='Steel Wine Chiller']");
+				Sync.waitElementPresent("xpath", "//img[@alt='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@alt='Steel Wine Chiller']");
+						"//img[@alt='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -11892,7 +11892,7 @@ public void outofstock_subcription(String Dataset) {
 					"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
 					"failed to Navigate to the PDP page");
 
-			Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])[1]");
+			Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[1]");
 			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
@@ -11911,7 +11911,7 @@ public void outofstock_subcription(String Dataset) {
 					"Failed to display the message after subcribtion");
 			Common.actionsKeyPress(Keys.END);
 
-			Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])[2]");
+			Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[1]");
 			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
