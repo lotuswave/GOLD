@@ -5087,13 +5087,14 @@ return Number;
 		try {
 			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
 			Common.javascriptclickElement("xpath", "//div[text()='Colour']");
-			Thread.sleep(4000);
-//			Sync.waitElementPresent("xpath",
-//					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
-//			Common.javascriptclickElement("xpath",
-//					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			Thread.sleep(3000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.scrollIntoView("xpath", "//div[@class='algolia-instant-selector-results']");
+			Sync.waitElementPresent("xpath",
+			"//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value'" + colorname + "']");
+			Common.javascriptclickElement("xpath",
+			"//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value'" + colorname + "']");			
+			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
 					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
