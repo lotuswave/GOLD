@@ -23,7 +23,6 @@ public class Test_DGLD_HF_ST_104_place_an_order_by_using_reorder {
 			Hydro.login_Hydroflask("AccountDetails");
 	        Hydro.reorder();
 	        Hydro.minicart_Checkout();
-            Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 		} catch (Exception e) {

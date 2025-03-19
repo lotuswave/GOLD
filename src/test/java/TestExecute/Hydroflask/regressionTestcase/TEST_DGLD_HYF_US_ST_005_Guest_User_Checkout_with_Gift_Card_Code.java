@@ -24,7 +24,7 @@ public class TEST_DGLD_HYF_US_ST_005_Guest_User_Checkout_with_Gift_Card_Code {
         Hydro.selectshippingaddress("GroundShipping method");
         Hydro.clickSubmitbutton_Shippingpage();
         Hydro.Gift_card("Giftcard");
-        Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
+        Hydro.updatePaymentAndSubmitOrder("CCMastercard");
         
 		} catch (Exception e) {
 

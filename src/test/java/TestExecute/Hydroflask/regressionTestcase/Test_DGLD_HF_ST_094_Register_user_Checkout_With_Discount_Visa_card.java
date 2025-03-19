@@ -21,10 +21,11 @@ public class Test_DGLD_HF_ST_094_Register_user_Checkout_With_Discount_Visa_card 
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.discountCode("Discount");

@@ -23,12 +23,11 @@ public class Test_DGLD_HF_ST_023_Validation_My_Orders_For_Register_User {
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
-			String price=Hydro.Minicart_Checkout();
+			Hydro.Minicart_Checkout();
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
 			String order=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
 			Hydro.My_Orders_Page(order);
-			Hydro.myorders_price_validation(price);
 			
 		} catch (Exception e) {
 

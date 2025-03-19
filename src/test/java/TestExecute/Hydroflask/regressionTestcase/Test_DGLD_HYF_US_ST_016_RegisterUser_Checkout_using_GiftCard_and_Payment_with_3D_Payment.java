@@ -24,10 +24,10 @@ public class Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Pa
 			Hydro.search_product("Product");       
 			Hydro.addtocart("Product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+//			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.Gift_card("Giftcard");
+            Hydro.Gift_card("Giftcard_Partial_2");
             Hydro.Secure_Payment_details("3d_Secure");
 
 		} catch (Exception e) {

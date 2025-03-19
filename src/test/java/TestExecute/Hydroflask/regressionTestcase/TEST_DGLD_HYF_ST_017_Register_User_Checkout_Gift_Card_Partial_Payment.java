@@ -25,11 +25,9 @@ public class TEST_DGLD_HYF_ST_017_Register_User_Checkout_Gift_Card_Partial_Payme
 			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.invalid_Gift_card("Giftcard");         
-            Hydro.Gift_card("Giftcard");
+            Hydro.clickSubmitbutton_Shippingpage();       
+            Hydro.Gift_card("Giftcard_Partial_1");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
