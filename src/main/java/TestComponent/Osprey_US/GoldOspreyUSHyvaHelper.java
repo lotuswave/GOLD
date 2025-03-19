@@ -389,11 +389,11 @@ public void Login_Account(String dataSet) {
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//span[text()='Thanks for subscribing!']");
+			String Text = Common.getText("xpath", "//span[contains(text(),'Success')]");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text.contains("Thanks for subscribing!"),
+			Common.assertionCheckwithReport(Text.contains("Success! An email should be on its way."),
 					"verifying newsletter subscription",
 					"User get confirmation message if new email if it used mail it showing error message ", Text,
 					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
