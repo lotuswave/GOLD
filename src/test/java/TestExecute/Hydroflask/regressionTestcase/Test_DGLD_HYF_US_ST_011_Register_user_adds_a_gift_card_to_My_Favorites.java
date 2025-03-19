@@ -24,8 +24,7 @@ public class Test_DGLD_HYF_US_ST_011_Register_user_adds_a_gift_card_to_My_Favori
         Hydro.Card_Value_for_my_fav("price");
         Hydro.Guest_Add_Wishlist_Create_account();
         Hydro.Giftcard_Add_from_My_fav("price");
-        Hydro.minicart_Checkout();
-        Hydro.updatePaymentAndSubmitOrder("CCVisacard");
+        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

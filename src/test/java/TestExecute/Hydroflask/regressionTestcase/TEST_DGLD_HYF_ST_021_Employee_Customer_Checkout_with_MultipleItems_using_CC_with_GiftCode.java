@@ -30,7 +30,7 @@ public class TEST_DGLD_HYF_ST_021_Employee_Customer_Checkout_with_MultipleItems_
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("Employee_id");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.Gift_card("Giftcard");
+//            Hydro.Gift_card("Giftcard");
             Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {

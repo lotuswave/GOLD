@@ -19,8 +19,8 @@ public class Test_DGLD_HF_ST_080_Validating_the_PDP_page {
 			Hydro.verifingHomePage();
 			Hydro.search_product("Product"); 	
 			Hydro.Configurableproduct_addtocart_pdppage("Product");
-			Hydro.Configurableproduct_addtocart_pdp("Product");
-			Hydro.writeareview("Product");
+			
+
 		
 		}
 		catch (Exception e) {

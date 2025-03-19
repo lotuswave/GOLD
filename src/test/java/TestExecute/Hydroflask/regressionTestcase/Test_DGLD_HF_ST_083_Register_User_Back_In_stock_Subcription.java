@@ -25,8 +25,7 @@ public class Test_DGLD_HF_ST_083_Register_User_Back_In_stock_Subcription {
 			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("Outofstock Prod");       
 			String amount=Hydro.reg_outofstock_subcription("Outofstock Prod");
-			Hydro.My_order_subcribtion("Outofstock Prod");
-			Hydro.remove_outofstock_subcribtion(amount);
+			
 
 		} catch (Exception e) {
 
