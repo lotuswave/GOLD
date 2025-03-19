@@ -8481,7 +8481,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
 				Thread.sleep(3000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("xpath", "//div[contains(@class,'form-select flex')]").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
