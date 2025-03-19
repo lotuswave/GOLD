@@ -9134,7 +9134,7 @@ public void outofstock_subcription(String Dataset) {
 	String products = data.get(Dataset).get("Products");
 	System.out.println(products);
 	String email = data.get(Dataset).get("UserName");
-	String prod = data.get(Dataset).get("prod product");
+	String prod = data.get(Dataset).get("Products1");
 	//String productcolor = data.get(Dataset).get("Color");
 	try {
 		Sync.waitPageLoad();
@@ -9184,7 +9184,7 @@ public void outofstock_subcription(String Dataset) {
 			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[1]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(newsubcribe);
 			Common.assertionCheckwithReport(
@@ -9214,28 +9214,30 @@ public void outofstock_subcription(String Dataset) {
 					"Failed to display the message after subcribtion");
 
 		} else {
-			Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
-			String productprice = Common.findElement("xpath", "//span[@class='price-wrapper is-special-price']")
+			Sync.waitElementPresent(30, "xpath", "//span[@class='title-2xs leading-none']");
+			String productprice = Common.findElement("xpath", "//span[@class='title-2xs leading-none']")
 					.getAttribute("data-price-amount");
-			Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo']");
+			Common.clickElement("xpath", "//img[@class='group-hover/item-image:hidden']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
+			System.out.println(prod);
 			String PLPprice = Common
 					.findElement("xpath",
-							"//div[@class='m-product-overview__prices']//span[@class='price-wrapper is-special-price']")
-					.getAttribute("data-price-amount");
-			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+							"(//span[@class='price-wrapper']//span)[2]")
+					.getText().replace("$", "").replace(".00", "");
+			System.out.println(PLPprice);
+			String name = Common.findElement("xpath", "//h1[contains(@class,'pdp-grid-title title')]").getText();
 			Common.assertionCheckwithReport(
 					name.contains(products) && productprice.equals(PLPprice)
 							|| name.contains(prod) && productprice.equals(PLPprice),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-			Common.clickElement("xpath", "(//span[text()=' Notify Me When Available'])[1]");
-			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+			Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])");
+			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[1]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Thread.sleep(2000);
+			String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(
 					newsubcribe.contains("Alert subscription has been saved.")
 							|| newsubcribe.contains("Thank you! You are already subscribed to this product."),
@@ -9244,12 +9246,12 @@ public void outofstock_subcription(String Dataset) {
 					"Sucessfully message has been displayed when we click on the subcribe button ",
 					"Failed to display the message after subcribtion");
 			Common.actionsKeyPress(Keys.END);
-			Common.clickElement("xpath", "(//span[text()=' Notify Me When Available'])[1]");
-			Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+			Common.clickElement("xpath", "(//span[text()='Notify Me When Available'])");
+			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[1]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(
 					oldsubcribe.contains("Thank you! You are already subscribed to this product."),
 					"verifying the out of stock subcription",
@@ -9271,6 +9273,7 @@ public void outofstock_subcription(String Dataset) {
 	}
 
 }
+
 
 public void Verify_OrderTotal() {
 	
