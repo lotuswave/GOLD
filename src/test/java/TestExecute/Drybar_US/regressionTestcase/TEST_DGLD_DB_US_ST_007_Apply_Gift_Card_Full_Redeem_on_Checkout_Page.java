@@ -28,7 +28,7 @@ public class TEST_DGLD_DB_US_ST_007_Apply_Gift_Card_Full_Redeem_on_Checkout_Page
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.gitCard("GiftCode");
+			Drybar.gitCard("GiftCode Full Redeem");
 			//Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			Drybar.giftCardSubmitOrder();
 			

@@ -31,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_056_Validate_GuestUser_Checkout_CC_withsimple_co
 			Drybar.tax_validation_Paymentpage("Address");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.discountCode("Discount");
-			Drybar.gitCard("GiftCode");
+			Drybar.gitCard("GiftCode Partial Redeem");
 			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 
 			
