@@ -5085,15 +5085,9 @@ return Number;
 		// TODO Auto-generated method stub
 		String colorname = data.get(Dataset).get("Color");
 		try {
-      
-			
-			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
-			Common.javascriptclickElement("xpath", "//div[text()='Colour']");
-			Sync.waitElementPresent("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
-			
-			Common.javascriptclickElement("xpath",
-					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			Common.scrollIntoView("xpath", "//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='Green']");
+			Sync.waitElementVisible(60,"xpath", "//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='Green']");
+			Common.javascriptclickElement("xpath","//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='Green']");
 			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
 					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
