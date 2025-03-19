@@ -11745,7 +11745,7 @@ public void header_1_Percent_Planet() {
 
 			} else {
 				Thread.sleep(4000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
