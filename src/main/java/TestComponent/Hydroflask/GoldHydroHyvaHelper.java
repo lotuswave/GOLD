@@ -7470,7 +7470,6 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			Sync.waitElementClickable("xpath", "//img[@alt='Store logo']");
 			Thread.sleep(3000);
 			Common.switchFrames("xpath", "//iframe[@id='kustomer-ui-sdk-iframe']");
 			Sync.waitElementVisible(30, "xpath", "//div[@class='chatRootIcon__pointer___QslJf']");
@@ -7485,6 +7484,7 @@ catch(Exception | Error e)
 
 			Common.clickElement("xpath", "//div[contains(@class,'footer__itemContainer')]/p");
 		} catch (Exception | Error e) {
+			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validate the ChatBot on the home page",
 					"Open the ChatBot and answers option should be displayed",
 					"Unable click on the ChatBot and answers are not displayed",
@@ -7659,9 +7659,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			Common.actionsKeyPress(Keys.END);
-			Common.clickElement("xpath", "//a[text()='Find a Store']");
+			Common.clickElement("xpath", "//a[contains(@href,'storelocator')]");
 
-			String find = Common.findElement("xpath", "//span[contains(@class,'base')]").getText();
+			String find = Common.findElement("xpath", "(//span[contains(@class,'base')])[1]").getText();
 			System.out.println(find);
 
 			Common.assertionCheckwithReport(find.equals("Find a Store"), "validating Find a Store page",
