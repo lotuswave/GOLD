@@ -31,7 +31,7 @@ public class TEST_DGLD_DB_US_ST_179_Register_User_Multiple_Items_QTY_checkout_Ad
 			Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.gitCard("GiftCode");
+			Drybar.gitCard("GiftCode Full Redeem");
 			Drybar.Cancel_Giftcard();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			

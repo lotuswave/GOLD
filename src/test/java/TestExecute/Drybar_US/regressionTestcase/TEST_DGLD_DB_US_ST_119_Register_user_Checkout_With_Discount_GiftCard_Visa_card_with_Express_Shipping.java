@@ -29,7 +29,7 @@ public class TEST_DGLD_DB_US_ST_119_Register_user_Checkout_With_Discount_GiftCar
 			Drybar.selectshippingmethod("Express method");
 			Drybar.discountCode("Discount");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.gitCard("GiftCode");
+			Drybar.gitCard("GiftCode Partial Redeem");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			
 

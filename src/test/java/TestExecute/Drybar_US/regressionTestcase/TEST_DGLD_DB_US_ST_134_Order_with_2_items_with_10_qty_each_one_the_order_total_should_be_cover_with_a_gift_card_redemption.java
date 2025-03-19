@@ -30,7 +30,7 @@ public class  TEST_DGLD_DB_US_ST_134_Order_with_2_items_with_10_qty_each_one_the
 	    	Drybar.RegaddDeliveryAddress("AccountDetails");
 	    	Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();			
-			Drybar.gitCard("GiftCode");
+			Drybar.gitCard("GiftCode Full Redeem");
 			Drybar.giftCardSubmitOrder();
 
 		
