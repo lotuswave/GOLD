@@ -18,7 +18,7 @@ public class TEST_DGLD_OS_US_099_Validate_Footer_links {
 	public void Verifying_the_Footer_Links_Funtionality () throws Exception {
 
 		try {
-			 Osprey_ReEu.verifingHomePage();
+			   Osprey_ReEu.verifingHomePage();
 		        Osprey_ReEu.Kustomer_Links("Kustomer");
 		        Osprey_ReEu.Footer_validation("Breadcrumbs");
 		        Osprey_ReEu.Footer_Links("Footer");
