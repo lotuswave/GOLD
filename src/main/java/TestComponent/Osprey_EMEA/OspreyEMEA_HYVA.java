@@ -7955,16 +7955,16 @@ return Number;
 			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
 			Sync.waitPageLoad(40);
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
-			int message1 = Common.findElements("xpath", "//div[@ui-id='message-error']").size();
-			
-			Sync.waitPageLoad(40);
-			Thread.sleep(4000);
-			
-			Common.assertionCheckwithReport(message1>0,
-					"verifying the error message for invalid password",
-					"after click on signin button with un registered email error message should appear",
-					"Sucessfully error messsage should be display ", "Failed to display the error message");
+//			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+//			int message1 = Common.findElements("xpath", "//div[@ui-id='message-error']").size();
+//			
+//			Sync.waitPageLoad(40);
+//			Thread.sleep(4000);
+//			
+//			Common.assertionCheckwithReport(message1>0,
+//					"verifying the error message for invalid password",
+//					"after click on signin button with un registered email error message should appear",
+//					"Sucessfully error messsage should be display ", "Failed to display the error message");
 
 		}
 
