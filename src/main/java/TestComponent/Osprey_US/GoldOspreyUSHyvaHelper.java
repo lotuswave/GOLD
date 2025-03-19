@@ -14901,7 +14901,7 @@ public void Footer_validation(String Dataset) {
 	String[] footerlink = footers.split(",");
 	int i = 0;
 	try {
-		for (i = 8; i < footerlinks.length; i++) {
+		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
@@ -14975,12 +14975,12 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 		Login_Account("Account");
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
