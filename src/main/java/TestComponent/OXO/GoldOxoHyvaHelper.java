@@ -4154,24 +4154,32 @@ catch(Exception | Error e)
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@class='component-frame visible']");
+				Common.clickElement("xpath", "//div[@id='buttons-container']//div[@aria-label='PayPal']");
+				Common.switchToDefault();
 				
 			}
 			else
-			{
+			{  Thread.sleep(4000);
 				Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@class='component-frame visible']");
+				Common.clickElement("xpath", "//div[@id='buttons-container']//div[@aria-label='PayPal']");
+				Common.switchToDefault();
 			}
             
 			
-			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-
-			Thread.sleep(8000);
-			
-			Common.switchToDefault();
+//			Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+//			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+////			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+//
+//			Thread.sleep(8000);
+//			
+//			Common.switchToDefault();
 			Thread.sleep(5000);
 			Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
@@ -4199,11 +4207,11 @@ catch(Exception | Error e)
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
 			Thread.sleep(2000);
-			int size = Common.findElements("xpath", "(//a[text()='Try another way'])[1]").size();
+			int size = Common.findElements("xpath", "(//a[contains(text(),'Try another way')])[1]").size();
 			if(size>0) {
-				String otp=Common.findElement("xpath", "(//a[text()='Try another way'])[1]").getText();
+				String otp=Common.findElement("xpath", "(//a[contains(text(),'Try another way')])[1]").getText();
 				System.out.println(otp);
-				Common.clickElement("xpath", "(//a[text()='Try another way'])[1]");
+				Common.clickElement("xpath", "(//a[contains(text(),'Try another way')])[1]");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
