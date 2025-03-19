@@ -24,7 +24,7 @@ public class Test_DGLD_HF_ST_025_Change_Password_and_Email_from_AccountInformati
             String NewDetail=Hydro.create_account("AccountDetails");
             Hydro.edit_Account_info("NewDetails");
             Hydro.changed_password(NewDetail);
-           String newemail=Hydro.change_Email("NewDetails");
+            String newemail=Hydro.change_Email("NewDetails");
             Hydro.Change_to_Existingemail(newemail);
 			
 		} catch (Exception e) {

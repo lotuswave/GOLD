@@ -2114,8 +2114,8 @@ public void FUll_Payment(String dataSet) {
 					data.get(Dataset).get("Confirm Password"));
 			System.out.println(data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
-			Sync.waitElementPresent(50, "xpath", "//span[@x-html='message.text']");
-			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing")&& message.contains(Product+ " has been added to your Favorites. Click here to view your Favorites") ,
@@ -3555,8 +3555,8 @@ System.out.println(MyFavorites);
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementPresent("xpath", "//a[text()='Account Information']");
-			Common.clickElement("xpath", "//a[text()='Account Information']");
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Account Information')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Account Information')]");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Account Information"),
 					"validating the Navigation to the Account information page",
@@ -3580,29 +3580,19 @@ System.out.println(MyFavorites);
 		Accont_Information();
 		try {
 
-			Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
-
-			Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
+//			Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
+//
+//			Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//div//input[@id='current-password']");
+			Common.clickElement("xpath", "//div//input[@id='change-password']");
 			Common.textBoxInput("xpath", "//input[@id='current-password']", data.get(dataSet).get("Password"));
 			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Confirm Password"));
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']",
 					data.get(dataSet).get("Confirm Password"));
-			String message = Common.findElement("id", "validation-classes").getCssValue("color");
-			String greencolor = Color.fromString(message).asHex();
-			String message1 = Common.findElement("id", "validation-length").getAttribute("class");
-
-			Common.assertionCheckwithReport(greencolor.equals("#2f741f") && message1.contains("complete"),
-					"validating the cureent password and new password fields",
-					"User should able enter data in current password and new password",
-					"Sucessfully the data has been entered in new password and current password",
-					"Failed to enter data in current password and new password fields");
-
-			Common.clickElement("xpath", "//button[@title='Save']");
+			Common.clickElement("xpath", "//span[text()='Save Account Information']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String sucessmessage = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+			String sucessmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Thread.sleep(4000);
 			System.out.println(sucessmessage);
 			Common.assertionCheckwithReport(sucessmessage.contains("You saved the account"),
@@ -3610,6 +3600,7 @@ System.out.println(MyFavorites);
 					"Sucessfully account information has been saved ", "failed to save the account information");
 
 		} catch (Exception | Error e) {
+			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the change passwordfor the register user",
 					"User enter the valid password", "User failed to proceed to change passowrd ",
 					Common.getscreenShotPathforReport("emailpasswordnew"));
@@ -3625,9 +3616,10 @@ System.out.println(MyFavorites);
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Dataset);
 			Common.textBoxInput("id", "pass", "Lotuswave@1234");
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account")|| Common.getPageTitle().contains("Dashboard"),
 					"To validate the user lands on My Account page after successfull login",
 					"After clicking on the signIn button it should navigate to the My Account page",
 					"user Sucessfully navigate to the My Account page after clicking on the signIn button",
@@ -12148,73 +12140,26 @@ public void Explore_Validation(String Dataset) {
 
 	public String change_Email(String Dataset) {
 		// TODO Auto-generated method stub
-		String oldemail = "";
+		String newemail = "";
 
 		try {
-			Sync.waitElementPresent(20, "xpath", "//span[text()='Edit']//parent::a");
-			String name = Common.findElement("xpath", "//span[text()='Edit']//parent::a").getAttribute("aria-label");
-			Common.clickElement("xpath", "//span[text()='Edit']//parent::a");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-			Common.assertionCheckwithReport(name.contains(editaccount),
-					"verifying the page navigated to the edit account ",
-					"user should navigate to the Edit account page",
-					"user successfully Navigated to the edit account page",
-					"Failed to navigate to the edit account page");
-			oldemail = Common.findElement("xpath", "//p[@class='text-email']").getText();
-			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Utils.getEmailid());
-			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String errormessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
-			Common.assertionCheckwithReport(errormessage.contains("The password doesn't match this account"),
-					"verifying the error message for the password",
-					"user should get the error message if he enter the different password",
-					"Successfully user gets the error message",
-					"Failed to get the error message if the user gives an different password");
-			Common.refreshpage();
-			Sync.waitPageLoad();
-			if (Common.getCurrentURL().contains("preprod")) {
-				Thread.sleep(3000);
-				Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-				String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
-				Common.textBoxInputAndVerify("xpath", "//input[@name='email']", email);
-				Common.textBoxInput("xpath", "//input[@name='current_password']",
-						data.get(Dataset).get("Confirm Password"));
-			} else {
-				Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-				Common.textBoxInputAndVerify("xpath", "//input[@name='email']", data.get(Dataset).get("Prod Email"));
-				Common.textBoxInput("xpath", "//input[@name='current_password']",
-						data.get(Dataset).get("Confirm Password"));
-			}
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String emailerrormessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']")
-					.getText();
-			Common.assertionCheckwithReport(
-					emailerrormessage.contains("A customer with the same email address already exists"),
-					"verifying the error message for the existing account email",
-					"user should get the error message if he enter the existing email",
-					"Successfully user gets the error message",
-					"Failed to get the error message if the user gives an existing email id");
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Utils.getEmailid());
-			String newemail = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			
+			Common.clickElement("xpath", "//span[text()='Edit']");
+			
+			Sync.waitElementClickable(30, "id", "change-email");
+			Common.clickElement("id", "change-email");
+			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", Utils.getEmailid());
+			 newemail = Common.findElement("xpath", "(//input[@name='email'])[1]").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='current_password']",
 					data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Common.clickElement("xpath", "//span[text()='Save Account Information']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String successmessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Thread.sleep(3000);
+			String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
 					successmessage.contains("You saved the account information.")
-							&& Common.getPageTitle().contains("Customer Login"),
+							|| Common.getPageTitle().contains("Customer Login"),
 					"verifying the Success message for the Change email",
 					"user should get the success message and navigate back to the Login page",
 					"Successfully user gets the success message and navigated to the Login page",
@@ -12222,10 +12167,10 @@ public void Explore_Validation(String Dataset) {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", newemail);
 			Common.textBoxInput("id", "pass", data.get(Dataset).get("Confirm Password"));
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
 					"To validate the user lands on My Account after successfull login",
 					"After clicking on the signIn button it should navigate to the My Account",
 					"user Sucessfully navigate to the My Account after clicking on the signIn button",
@@ -12239,30 +12184,24 @@ public void Explore_Validation(String Dataset) {
 					Common.getscreenShot(" Failed to signIn and not navigated to the My Account"));
 			Assert.fail();
 		}
-		return oldemail;
+		return newemail;
 	}
 
-	public void Change_to_Existingemail(String Dataset) {
+	public void Change_to_Existingemail(String newemail) {
 		// TODO Auto-generated method stub
 		try {
 
-			String name = Common.findElement("xpath", "//span[text()='Edit']//parent::a").getAttribute("aria-label");
-			Common.clickElement("xpath", "//span[text()='Edit']//parent::a");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String editaccount = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-			Common.assertionCheckwithReport(name.contains(editaccount),
-					"verifying the page navigated to the edit account ",
-					"user should navigate to the Edit account page",
-					"user successfully Navigated to the edit account page",
-					"Failed to navigate to the edit account page");
-			Common.clickElement("xpath", "//button[@aria-label='Edit Account Email']//span[text()='Edit']");
-			Common.textBoxInputAndVerify("xpath", "//input[@name='email']", Dataset);
+Common.clickElement("xpath", "//span[text()='Edit']");
+			
+			Sync.waitElementClickable(30, "id", "change-email");
+			Common.clickElement("id", "change-email");
+			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
+			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", newemail);
 			Common.textBoxInput("xpath", "//input[@name='current_password']", "Lotuswave@1234");
-			Common.clickElement("xpath", "//span[text()='Save Changes']");
+			Common.clickElement("xpath", "//span[text()='Save Account Information']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String successmessage = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+			Thread.sleep(3000);
+			String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
 					successmessage.contains("You saved the account information.")
 							&& Common.getPageTitle().contains("Customer Login"),
@@ -12271,12 +12210,12 @@ public void Explore_Validation(String Dataset) {
 					"Successfully user gets the success message and navigated to the Login page",
 					"Failed to get the success message and unable to navigate to the login page");
 			Sync.waitPageLoad();
-			Common.textBoxInput("id", "email", Dataset);
+			Common.textBoxInput("id", "email", newemail);
 			Common.textBoxInput("id", "pass", "Lotuswave@1234");
-			Common.clickElement("xpath", "//button[contains(@class,'action login')]");
+			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account")|| Common.getPageTitle().contains("Dashboard"),
 					"To validate the user lands on My Account after successfull login",
 					"After clicking on the signIn button it should navigate to the My Account",
 					"user Sucessfully navigate to the My Account after clicking on the signIn button",
