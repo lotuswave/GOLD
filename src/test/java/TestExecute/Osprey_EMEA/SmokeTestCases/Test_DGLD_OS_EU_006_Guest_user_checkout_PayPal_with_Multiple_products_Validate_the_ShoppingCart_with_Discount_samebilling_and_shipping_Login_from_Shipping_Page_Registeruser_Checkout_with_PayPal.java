@@ -19,7 +19,8 @@ public class Test_DGLD_OS_EU_006_Guest_user_checkout_PayPal_with_Multiple_produc
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+       // Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.search_product("Simple product");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.search_product("Product");     
         Osprey_ReEu.addtocart("Product");

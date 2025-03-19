@@ -21,7 +21,8 @@ public class Test_DGLD_OSEU_Guest_user_Checkout_Visa_card_Validate_Minicart {
 
 		try {
 			Osprey_ReEu.verifingHomePage();                          
-	        	Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+	        	//Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+				Osprey_ReEu.search_product("Simple product");
 	        	Osprey_ReEu.simple_addtocart("Simple product");
 	        	Osprey_ReEu.search_product("Product");      
 	        	Osprey_ReEu.addtocart("Product");                                        
