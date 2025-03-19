@@ -9614,10 +9614,10 @@ return Number;
 			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
 			Common.clickElement("xpath", "//div[text()='Colour']");
 
-			Common.scrollIntoView("xpath", "//input[@value='Blue']");
-			Sync.waitElementPresent("xpath", "//input[@value='Blue']");
-			Common.clickElement("xpath", "//input[@value='Blue']");
-			Common.scrollIntoView("xpath", "//input[@value='Blue']");
+			Common.scrollIntoView("xpath", "//input[@value='Black']");
+			Sync.waitElementPresent("xpath", "//input[@value='Black']");
+			Common.clickElement("xpath", "//input[@value='Black']");
+			Common.scrollIntoView("xpath", "//input[@value='Black']");
 			Thread.sleep(4000);
 			String SelectedFilter = Common.findElement("xpath", "//span[@class='ais-CurrentRefinements-categoryLabel']").getText();
 			System.out.println(SelectedFilter);
