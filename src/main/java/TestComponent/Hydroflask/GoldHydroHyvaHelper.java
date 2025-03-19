@@ -5270,7 +5270,7 @@ public void Remove_GiftCode() {
 			Sync.waitElementPresent("xpath", "//span[text()='Select Country']");
 			Common.clickElement("xpath", "//span[text()='Select Country']");
 			Sync.waitElementPresent("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='"+ country +"']");
-			Common.clickElement("xpath", "//div[@class='form-field-tree-options-overlay'//div[text()='"+ country +"']");
+			Common.clickElement("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='"+ country +"']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
@@ -5281,31 +5281,36 @@ public void Remove_GiftCode() {
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCountry']");
 			Common.clickElement("xpath", "//input[@name='conversationCountry']");
-
-			Sync.waitElementPresent("xpath", "//div[text()='United States']");
-			Common.clickElement("xpath", "//div[text()='United States']");
+			
+					Common.clickElement("xpath", "(//span[@class='form-field-tree-option-placeholder'])[1]");
+			Sync.waitElementPresent("xpath", "//div[text()='Connecticut']");
+			Common.clickElement("xpath", "//div[text()='Connecticut']");
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationState']");
 			Common.clickElement("xpath", "//input[@name='conversationState']");
 
-			Sync.waitElementPresent("xpath", "//div[text()='Alabama']");
-			Common.clickElement("xpath", "//div[text()='Alabama']");
-
 			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeforforms']");
 			Common.textBoxInput("xpath", "//input[@name='conversationZipCodeforforms']",
 					data.get(dataSet).get("postcode"));
+			
+			Sync.waitElementPresent("xpath", "//span[@class='form-field-tree-option-placeholder']");
+			Common.clickElement("xpath", "//span[@class='form-field-tree-option-placeholder']");
+			
+			Sync.waitElementPresent("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='Order Issues']");
+			Common.clickElement("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='Order Issues']");
+			
+			Sync.waitElementPresent("xpath", "//span[@class='form-field-tree-option-placeholder']");
+			Common.clickElement("xpath", "//span[@class='form-field-tree-option-placeholder']");
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationHowCanWeHelp']");
-			Common.clickElement("xpath", "//input[@name='conversationHowCanWeHelp']");
+			Sync.waitElementPresent("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='Billing Issue']");
+			Common.clickElement("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='Billing Issue']");
 			Thread.sleep(3000);
-			Common.clickElement("xpath", "//div[@data-path='order_issues']");
+//			Common.clickElement("xpath", "//div[@data-path='order_issues']");
 
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
-			Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+//			Thread.sleep(4000);
+			
 
-			Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
-			Common.clickElement("xpath", "//div[text()='Billing Issue']");
+//			
 
 			Sync.waitElementPresent("xpath", "//input[@class='form-base' and @id='conversationOrder']");
 			Common.textBoxInput("xpath", "//input[@class='form-base' and @id='conversationOrder']",
@@ -9013,9 +9018,11 @@ catch(Exception | Error e)
 		
 		try
 		{
+			
 			List<WebElement> pdpcolors = Common.findElements("xpath",
 					"//div[@aria-label='Color']//div[@x-id]");
-			 Common.clickElement("xpath", "//div[@aria-label='Color']//div[@x-id]");
+//			 Common.clickElement("xpath", "//div[@aria-label='Color']//div[@x-id]");
+			Common.actionsKeyPress(Keys.PAGE_UP);
 			for (int i = 0; i < pdpcolors.size(); i++) { 
 	           Thread.sleep(4000);
 				pdpcolors.get(i).click();
