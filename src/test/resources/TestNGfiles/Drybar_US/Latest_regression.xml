@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US Latest Regression Suite">
+<listeners>
+<listener class-name="Utilities.TestListener"/>
+</listeners>
+<test name="TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC" testid="DQA-3783" priority="P1" description="This test case is to validate the Checkout functionality with Aerosol and Non Aerosol products with PO Box Address using Ground shipping method CC Master Card Payment method.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC"/>
+</classes>
+</test>
+</suite> <!-- Suite -->
