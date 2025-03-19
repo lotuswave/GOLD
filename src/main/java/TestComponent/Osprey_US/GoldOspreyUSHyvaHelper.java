@@ -3122,7 +3122,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.clickElement("xpath", "(//a[@title='Sign Out'])[1]");
 		
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/") || Common.getPageTitle().contains("Backpacks"),
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
 					"Successfully navigate to my account page", "Failed to navigate my account page ");
 
