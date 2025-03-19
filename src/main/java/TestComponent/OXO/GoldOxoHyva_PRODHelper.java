@@ -6385,9 +6385,11 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 
 	public void Forgot_password(String DateSet) throws Exception {
 		// TODO Auto-generated method stub
+		
 		try {
-			Common.clickElement("xpath", "//a[normalize-space()='Forgot Password?']");
-			String forgotpassword = Common.findElement("xpath", "//h2[normalize-space()='Forgot Your Password?']")
+			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password')]");
+			Thread.sleep(4000);
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password')]")
 					.getText();
 			System.out.println(forgotpassword);
 			Sync.waitPageLoad();
