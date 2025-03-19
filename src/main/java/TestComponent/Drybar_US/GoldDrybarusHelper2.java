@@ -7172,7 +7172,7 @@ public void FUll_Payment(String dataSet) {
 					//System.out.println(products);
 					
 						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]) || 
-								 Common.getCurrentURL().contains("Articles"),
+								 Common.getCurrentURL().contains("article") || Common.getCurrentURL().contains("how-to/inspiration"),
 								"verifying the header link " + Links[i] + "Under HowToInspo",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
