@@ -52,7 +52,7 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
         Login.signIn();
         
 
