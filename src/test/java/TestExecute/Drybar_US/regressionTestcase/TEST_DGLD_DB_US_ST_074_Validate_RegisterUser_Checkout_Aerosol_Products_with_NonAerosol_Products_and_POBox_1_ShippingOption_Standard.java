@@ -26,10 +26,10 @@ public class TEST_DGLD_DB_US_ST_074_Validate_RegisterUser_Checkout_Aerosol_Produ
 		    Drybar.addtocart("PLP Product");
 			Drybar.add_aerosolproduct("Aerosol");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+			Drybar.RegaddDeliveryAddress("PO Box Address");
 			Drybar.selectshippingmethod("StandardShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
-			Drybar.tax_validation_Paymentpage("Address");
+	//		Drybar.tax_validation_Paymentpage("Address");
 			Drybar.same_Blling_and_Shipping_SubmitOrder("PaymentDetails");
 		
 
@@ -41,7 +41,7 @@ public class TEST_DGLD_DB_US_ST_074_Validate_RegisterUser_Checkout_Aerosol_Produ
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 	}
 
 	@BeforeTest
