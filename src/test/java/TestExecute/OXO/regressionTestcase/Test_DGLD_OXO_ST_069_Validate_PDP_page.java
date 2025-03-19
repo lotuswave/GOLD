@@ -24,7 +24,7 @@ public class Test_DGLD_OXO_ST_069_Validate_PDP_page {
 			Oxo.PDP_cofigurable_product();
 			Oxo.configurableproduct_Sticky_add_to_cart("ConfigProduct");
 			Oxo.writeareview("Product");
-			Oxo.Recommended_for_you();
+			Oxo.Relatedproducts();
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

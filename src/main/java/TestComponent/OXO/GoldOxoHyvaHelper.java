@@ -6514,26 +6514,24 @@ catch(Exception | Error e)
 		}
 	}
 
-	public void Recommended_for_you() {
+	public void Relatedproducts() {
 
 		try {
-			Common.scrollIntoView("xpath", "//h2[normalize-space()='Recommended Products']");
+			Common.scrollIntoView("xpath", "//h2[normalize-space()='Related products']");
 
 //			Common.clickElement("xpath", "//h2[@data-bind='text: storefrontLabel']");
 			Common.clickElement("xpath", "(//button[@aria-label='Scroll right']//parent::button)[1]");
 			Common.clickElement("xpath", "(//button[@aria-label='Scroll right']//parent::button)[1]");
-			Common.clickElement("xpath", "(//button[@aria-label='Scroll left']//parent::button)[1]");
-
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
 			String text = Common
 					.findElement("xpath",
-							"//h2[normalize-space()='Recommended Products']")
-					.getText();
+							"//h2[normalize-space()='Related products']")
+					.getText().trim();
 			System.out.println(text);
 
-			Common.assertionCheckwithReport(text.contains("Recommended Products"),
+			Common.assertionCheckwithReport(text.contains("Related products"),
 					"To Validate the Recommended for you is displayed",
 					"should display the Recommended for you after scroll down the PDP page",
 					"update Recommended for you are displayed after scroll down the PDP page", "Failed to display  ");
@@ -13641,7 +13639,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Thread.sleep(8000);
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			String off = Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim()
 					.replace(" Off", "");
 			String discount = Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText()
