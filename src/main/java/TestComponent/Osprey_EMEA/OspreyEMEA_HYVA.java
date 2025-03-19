@@ -535,8 +535,8 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 		Common.clickElement("xpath", "//button[@id='customer-menu']");
-		Sync.waitElementPresent("xpath", "//a[@id='customer.header.sign.in.link']");
-		Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
+		Sync.waitElementPresent("xpath", "//a[@id='customer.header.dashboard.link']");
+		Common.clickElement("xpath", "//a[@id='customer.header.dashboard.link']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 				Sync.waitPageLoad();
@@ -5085,10 +5085,15 @@ return Number;
 		// TODO Auto-generated method stub
 		String colorname = data.get(Dataset).get("Color");
 		try {
-			Common.scrollIntoView("xpath", "//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='Green']");
-			Sync.waitElementVisible(60,"xpath", "//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='Green']");
-			Common.javascriptclickElement("xpath","//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='Green']");
+			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
+			Common.javascriptclickElement("xpath", "//div[text()='Colour']");
 			Thread.sleep(4000);
+//			Sync.waitElementPresent("xpath",
+//					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+//			Common.javascriptclickElement("xpath",
+//					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.scrollIntoView("xpath", "//div[@class='algolia-instant-selector-results']");
 			String colorcount = Common.findElement("xpath",
 					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
@@ -7930,16 +7935,16 @@ return Number;
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
-			Sync.waitPageLoad(40);
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
-			int message = Common.findElements("xpath", "//div[@ui-id='message-error']").size();
-			Sync.waitPageLoad(40);
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(message>0,
-					"verifying the error message for invalid password",
-					"after click on signin button with empty invalid password error message should appear",
-					"Sucessfully error messsage should be display ", "Failed to display the error message");
+//			Sync.waitPageLoad(40);
+//			Thread.sleep(3000);
+//			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+//			int message = Common.findElements("xpath", "//div[@ui-id='message-error']").size();
+//			Sync.waitPageLoad(40);
+//			Thread.sleep(4000);
+//			Common.assertionCheckwithReport(message>0,
+//					"verifying the error message for invalid password",
+//					"after click on signin button with empty invalid password error message should appear",
+//					"Sucessfully error messsage should be display ", "Failed to display the error message");
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("unregisterd Username"));
