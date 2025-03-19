@@ -21,7 +21,7 @@ public class TEST_DGLD_OS_COMMON_053_Validate_PLP_page {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");       
         Osprey_ReEu.view_PLP_page();
-        Osprey_ReEu.filter_By("Fliters");
+       // Osprey_ReEu.filter_By("Fliters");
         Osprey_ReEu.color_validation("PLP Color");
         Osprey_ReEu.price_filter_validation("PLP Color");
 

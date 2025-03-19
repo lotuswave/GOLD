@@ -5088,11 +5088,12 @@ return Number;
       
 			
 			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
-			Common.clickElement("xpath", "//div[text()='Colour']");
+			Common.javascriptclickElement("xpath", "//div[text()='Colour']");
 			Sync.waitElementPresent("xpath",
-					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
-			Common.clickElement("xpath",
-					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
+			
+			Common.javascriptclickElement("xpath",
+					"//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Thread.sleep(4000);
 			String colorcount = Common.findElement("xpath",
 					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
