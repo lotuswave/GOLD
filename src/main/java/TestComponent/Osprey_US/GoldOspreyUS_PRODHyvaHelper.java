@@ -328,8 +328,10 @@ public void Login_Account(String dataSet) {
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
-			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
+			Common.clickElement("xpath", "//span[contains(text(),'Forgot Password')]");
+			Thread.sleep(4000);
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password')]")
+					.getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
@@ -1975,9 +1977,9 @@ public void header_Shopbycollection(String Dataset) { {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//img[@itemprop='image']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8764,9 +8766,9 @@ public void Continue_Shopping() {
 			
 			BreadCrum =Common.findElement("xpath","(//a[@class='no-underline text-black hover:underline'])[2]").getText();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//img[@itemprop='image']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
