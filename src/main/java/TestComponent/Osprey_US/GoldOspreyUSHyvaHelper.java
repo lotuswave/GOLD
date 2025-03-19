@@ -2167,7 +2167,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.textBoxInput("xpath", "//input[@name='recipients[1][email]']", data.get(Dataset).get("UserName"));
 			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
 			Sync.waitPageLoad();
-			 Thread.sleep(4000);
+//			 Thread.sleep(4000);
 			Sync.waitElementPresent(20, "xpath", "//div[@ui-id='message-success']//span");
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(message);
