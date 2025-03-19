@@ -91,6 +91,7 @@ public class GoldOspreyUSHyvaHelper {
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
 //				close_add();
+				close_countryselector();
 				acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
@@ -105,6 +106,7 @@ public class GoldOspreyUSHyvaHelper {
 			{
 //			Close_Geolocation();
 //			close_add();
+				close_countryselector();
 				acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
@@ -127,8 +129,12 @@ public class GoldOspreyUSHyvaHelper {
 
 		
 	}
-	
-	
+
+	public void close_countryselector() throws Exception{
+		
+		Sync.waitElementPresent("xpath", "(//button[@aria-label='Close, button.'])[4]");
+		Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[4]");
+	}
 	
 	public void Verify_HomePage() 
 	{
