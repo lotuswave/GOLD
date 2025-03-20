@@ -6579,10 +6579,13 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 			Common.clickElement("xpath",
 					"//ul[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");
 			Thread.sleep(4000);
+			Common.clickElement("xpath", "//div[text()='Colors']");
 			String colorcount = Common.findElement("xpath",
 					"//span[contains(text(),'Sage')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
 			String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+			System.out.println(colorcount);
+			System.out.println(bottlecount);
 			Common.assertionCheckwithReport(colorcount.equals(bottlecount), "verifying the color bar has been expand",
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
@@ -6597,7 +6600,7 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		}
 
 	}
-
+	
 	public void price_filter_validation() {
 
 		String name = "";
@@ -10894,7 +10897,7 @@ public void header_1_Percent_Planet() {
 		String invalidproduct = data.get(Dataset).get("Products");
 		System.out.println(invalidproduct);
 		try {
-		Common.clickElement("xpath", "//span[@x-show='!searchOpen']");
+		Common.clickElement("xpath", "//button[@id='menu-search-icon']");
 			String open = Common.findElement("xpath", "//input[contains(@id, 'autocomplete-0-input')]").getAttribute("type");
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(open.contains("search"), "User searches using the search field",
