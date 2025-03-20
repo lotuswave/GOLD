@@ -11068,13 +11068,13 @@ public void learn_videos() {
 	
 	try
 	{
-		Sync.waitElementPresent("xpath", "//span[contains(text(),'Learn')]");
-		Common.clickElement("xpath", "//span[contains(text(),'Learn')]");
+		Sync.waitElementPresent("xpath", "//a[contains(text(),'Learn')]");
+		Common.clickElement("xpath", "//a[contains(text(),'Learn')]");
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//span[text()='Videos']");
-		Common.clickElement("xpath", "//span[text()='Videos']");
+		Sync.waitElementPresent("xpath", "//span[contains(@class,'custom-play-button')]");
+		Common.javascriptclickElement("xpath", "//span[contains(@class,'custom-play-button')]");
 		Thread.sleep(4000);
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("how-to/videos"), "validating the user navigate to the videos",
+		Common.assertionCheckwithReport(Common.getCurrentURL().contains("next-in-blowouts"), "validating the user navigate to the videos",
 				"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
 				"failed to Navigate to the videos page");
 		
@@ -11094,9 +11094,9 @@ public void videos_validation() {
 	// TODO Auto-generated method stub
 	try
 	{
-		Sync.waitElementPresent("xpath", "//div[@x-data='videoModal()']");
+		Sync.waitElementPresent("xpath", "//div[contains(@class,'play-pause-wrapper')]");
 		List<WebElement> videos = Common.findElements("xpath",
-				"//div[@x-data='videoModal()']");
+				"//div[contains(@class,'play-pause-wrapper')]");
 		System.out.println(videos);
 	
 		for(int i=0;i<videos.size()-68;i++)
