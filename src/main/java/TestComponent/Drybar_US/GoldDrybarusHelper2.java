@@ -6943,8 +6943,7 @@ public void FUll_Payment(String dataSet) {
 		public void header_Benfits(String Dataset) {
 
 			String names = data.get(Dataset).get("Benfits");
-			String[] Links = names.split(",");
-			
+			String[] Links = names.split(",");	
 			String benfits=data.get(Dataset).get("headers");
 			
 			int i = 0;
