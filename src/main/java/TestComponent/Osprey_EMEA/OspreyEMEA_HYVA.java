@@ -2009,7 +2009,7 @@ public class OspreyEMEA_HYVA {
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Products"));
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 			System.out.println(productsearch);
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
@@ -9523,11 +9523,11 @@ return Number;
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productsearch = Common.findElement("xpath", "//div[@id='instant-empty-results-container']").getText();
+			String productsearch = Common.findElement("xpath", "//span[@data-index='products']").getText();
 			//String searchproduct=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getAttribute("class");
 			//System.out.println(searchproduct);
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("No products for query"),
+			Common.assertionCheckwithReport(productsearch.contains("Related Products (0)"),
 					"validating the search functionality", "enter Invalid product name will display in the search box",
 					"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
 			Thread.sleep(8000);
