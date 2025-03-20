@@ -6746,11 +6746,11 @@ public void FUll_Payment(String dataSet) {
 				Common.actionsKeyPress(Keys.ENTER);
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String productsearch = Common.findElement("id", "instant-empty-results-container").getText();
+				String productsearch = Common.findElement("xpath", "//span[contains(@class,'relative pb-3 mx-6 cursor-pointer')]").getText();
 				//String searchproduct=Common.findElement("id", "instant-empty-results-container").getAttribute("class");
 				//System.out.println(searchproduct);
 				System.out.println(productsearch);
-				Common.assertionCheckwithReport(productsearch.contains("No products for query"),
+				Common.assertionCheckwithReport(productsearch.contains("Related Products (0)"),
 						"validating the search functionality", "enter Invalid product name will display in the search box",
 						"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
 				Thread.sleep(8000);
