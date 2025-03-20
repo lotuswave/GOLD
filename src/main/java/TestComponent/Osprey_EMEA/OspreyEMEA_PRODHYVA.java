@@ -9250,9 +9250,9 @@ return Number;
 //						"Order summary should be display in the payment page and all fields should display",
 //						"Successfully Order summary is displayed in the payment page and fields are displayed",
 //						"Failed to display the order summary and fileds under order summary");
-//			}
+			}
 
-	//	}
+		}
 			catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the order summary in the payment page",
