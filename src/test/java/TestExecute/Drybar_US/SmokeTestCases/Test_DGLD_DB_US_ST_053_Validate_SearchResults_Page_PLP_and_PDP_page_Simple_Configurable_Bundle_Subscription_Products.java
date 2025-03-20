@@ -55,7 +55,7 @@ public class Test_DGLD_DB_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	//	Common.closeAll();
 
 	}
 
