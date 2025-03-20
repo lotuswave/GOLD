@@ -44,7 +44,7 @@ public class Test_DGLD_DB_US_ST_033_Register_user_Checkout_with_Multiple_Items_A
 	
 	@AfterTest
 	public void clearBrowser() {
-	//	Common.closeAll();
+		Common.closeAll();
 		
  
 	}
