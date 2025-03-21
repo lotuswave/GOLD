@@ -24,6 +24,7 @@ public class Test_DGLD_HYF_ST_004_Register_user_Configure_gift_card_in_PDP_and_c
 			Hydro.Gift_cards("Hydro Gift Card");
 			Hydro.Card_Value("price");
 		    Hydro.minicart_Checkout();
+		    Hydro.GiftCard_RegaddDeliveryAddress("AccountDetails");
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {

@@ -43,7 +43,7 @@ public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
