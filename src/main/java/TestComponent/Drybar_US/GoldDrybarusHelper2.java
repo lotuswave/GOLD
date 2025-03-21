@@ -2732,7 +2732,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(5000);
-			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[2]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -3893,7 +3893,7 @@ public class GoldDrybarusHelper2 {
 				
 				Float Discountvalue = Float.parseFloat(Discount);
 				System.out.println("Discount:"+ Discountvalue);
-				Common.clickElement("xpath", "//span[@class='block transform']");
+	//			Common.clickElement("xpath", "//span[@class='block transform']");
 				
 				String Tax = Common.getText("xpath", "(//div[contains(@x-text,'hyva.formatPrice(segment.value)')])[3]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
