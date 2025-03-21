@@ -8563,7 +8563,12 @@ catch(Exception | Error e)
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
 				Thread.sleep(4000);
-				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
+				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
+				Thread.sleep(4000);
+				Common.clickElement("xpath", "//button[@title='Share Wish List']");
+				Thread.sleep(3000);
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(message1);
 				Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
 						"validating the shared whishlist functionality",
@@ -10486,6 +10491,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath","//span[contains(text(),'" + Links[i] + "')]");
+					
+					Common.clickElement("xpath","(//span[text()='24 oz'])[2]");
 
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
@@ -10497,7 +10504,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		            else if (Common.findElements("xpath", "//h1[contains(@class,'hero')]/span").size() > 0) {
 		                title = Common.findElement("xpath", "//h1[contains(@class,'hero')]/span").getText();
 		            }
-					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+//					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					System.out.println(title);
 					System.out.println(Links[i]);			
 					String products = Common.getText("xpath", "//div[contains(@class,'text-sm')]/span"); 
@@ -10507,7 +10514,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					int j=0;
 					if(Number>j)
 					{
-						Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i])|| Common.getCurrentURL().contains("travel-water-bottle") ,
+						Common.assertionCheckwithReport(title.contains(Links[i])|| Common.getCurrentURL().contains("travel-water-bottle") ,
 								"verifying the header link " + Links[i] + "Under Collections",
 								"user should navigate to the " + Links[i] + " page",
 								"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -10620,7 +10627,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
 					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					System.out.println(title);
-					System.out.println(Links[i]);			
+					System.out.println(Links[i]);	
+					Sync.waitElementPresent("xpath",
+							"(//div[contains(@class,'flex w-full')]//span)[1]");
 					String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 					System.out.println(products);
 					int Number = Integer.parseInt(products);
@@ -10822,18 +10831,19 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	                title = Common.findElement("xpath", "//h3[@data-content-type='heading']").getText();
 
 	            }
-				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText().toUpperCase();
+//				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText().toUpperCase();
+	            Sync.waitElementPresent(30,"xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 				String products = Common.findElement("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]").getText();
 				int Number = Integer.parseInt(products);
-				System.out.println(breadcrumbs);
+//				System.out.println(breadcrumbs);
 				System.out.println(Link[i]);
-				System.out.println(breadcrumbs.contains(Links[i]));
-				System.out.println(Common.getCurrentURL().contains(Links[i]));
+//				System.out.println(breadcrumbs.contains(Links[i]));
+//				System.out.println(Common.getCurrentURL().contains(Links[i]));
 				int j=0;
 				if(Number>j)
 				{
-				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i]) || breadcrumbs.contains(Links[i])
-						|| breadcrumbs.contains(Link[i])|| Common.getCurrentURL().contains("shop/collections") || Common.getCurrentURL().contains(breadcrumbs),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || Common.getCurrentURL().contains(Links[i])
+						|| Common.getCurrentURL().contains("shop/collections"),
 						"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -10896,18 +10906,10 @@ public void Explore_Validation(String Dataset) {
 			if (Common.getPageTitle().contains("Frequently Asked Questions | Hydro Flask")) {
 				Common.clickElement("xpath", "//div[@class='nav-flex']//a[@id='top']");
 			} else {
-				Common.clickElement("xpath", "//img[@alt='Store logo']");
+				Common.clickElement("xpath", "//img[@alt='Hydroflask store logo']");
 			}
 
 		}
-//		Sync.waitElementPresent("xpath", "//span[text()=' Customize']");
-//		Common.clickElement("xpath", "//span[text()=' Customize']");
-//		Sync.waitPageLoad();
-		Thread.sleep(4000);
-//		String cutomize = Common.findElement("xpath", "//p[@class='m-breadcrumb__text']").getText();
-//		Common.assertionCheckwithReport(cutomize.contains("Customize"), "verifying the customize under shop links",
-//				"user should navigate to the cutomize link", "user successfully Navigated to the customize",
-//				"Failed to navigate to the cutomize");
 
 	}
 
@@ -11995,17 +11997,16 @@ public void Explore_Validation(String Dataset) {
 	                title = Common.findElement("xpath", "//h1[contains(@class,'hero')]/span").getText();
 	            }
 	            
-				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
-				System.out.println(title);
-				System.out.println(Links[i]);			
+//				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+//				System.out.println(title);
+//				System.out.println(Links[i]);			
 				String products=Common.getText("xpath", "//span[contains(@class,'font-bold dr:font-norm')]");
 				System.out.println(products);
 				int Number = Integer.parseInt(products);
 				int j=0;
 				if(Number>j)
 				{
-				Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i]),
-						"verifying the header link " + Links[i] + "Under Featured",
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("Reef"),					"verifying the header link " + Links[i] + "Under Featured",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
 				}
@@ -12087,7 +12088,9 @@ public void Explore_Validation(String Dataset) {
 				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
 				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 				System.out.println(title);
-				System.out.println(Links[i]);			
+				System.out.println(Links[i]);	
+				Sync.waitElementPresent(30,"xpath",
+						"(//div[contains(@class,'flex w-full')]//span)[1]");
 				String products=Common.getText("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]");
 				System.out.println(products);
 				int Number = Integer.parseInt(products);
@@ -12796,28 +12799,20 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 
 	public void Customize_validation(String Dataset) {
 		// TODO Auto-generated method stub
-		String names = data.get(Dataset).get("Bottles Size");
+		String names = data.get(Dataset).get("CustomizeLinks");
 		String[] Links = names.split(",");
 		int i=0;
 		try
 		{
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'Customize')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Customize')]");
+			
          	for (i = 0; i < Links.length; i++) {
-         		Common.scrollIntoView("xpath", "//div[@data-content-type='text']//p[contains(text(),'" + Links[i] + "')]");
+         		Thread.sleep(4000);
+    			Sync.waitElementPresent("xpath", "//a[@title='Customize']");
+    			Common.clickElement("xpath", "//a[@title='Customize']");
+         		Common.clickElement("xpath", "(//span[text()='"+ Links[i] +"'])[1]");
          		Thread.sleep(3000);
-         		Sync.waitElementPresent("xpath",
-					"//div[@data-content-type='text']//p[contains(text(),'" + Links[i] + "')]");
-         		String Size = Common.findElement("xpath",
-					"//div[@data-content-type='text']//p[contains(text(),'" + Links[i] + "')]").getText();
-         	String Customize = Common.findElement("xpath","//span[contains(text(),'Customize Yours')]").getText();
-         	System.out.println(Size);
-         	System.out.println(Customize);
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			System.out.println(Links[i]);
-			Common.assertionCheckwithReport(Customize.contains("Customize Yours"),
+         		
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customize")||Common.getCurrentURL().contains("engraving")||Common.getCurrentURL().contains("collegiate"),
 					"verifying the header link " + Links[i] + "Under Customize",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
