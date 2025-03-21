@@ -4979,9 +4979,17 @@ public void Remove_GiftCode() {
 					Common.switchToDefault();
 					System.out.println("Switch to Default");
 					
-				
+					Common.scrollIntoView("xpath","(//button[contains(@class,'btn btn-primary place-order')])[2]");
 					Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+					
 					Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+					
+					Thread.sleep(4000);
+					int size=Common.findElements("xpath","(//button[contains(@class,'btn btn-primary place-order')])[2]").size();
+					
+					if(size>0) {
+						Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+					}
 					klarna_Details(dataSet);
 					
 					
@@ -5730,7 +5738,7 @@ public void Remove_GiftCode() {
 			Thread.sleep(5000);
 //			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-			Sync.waitElementPresent(40,"xpath", "//input[@id='phonePasskey']");
+			Sync.waitElementPresent(50,"xpath", "//input[@id='phonePasskey']");
 		/*	Common.clickElement("xpath", "//input[@name='phone']");
 			
 			int number=Common.genrateRandomNumber();
