@@ -4407,7 +4407,7 @@ public void Validate_retailerlocations() {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 //				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 			
 					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
 					Thread.sleep(5000);
@@ -4429,7 +4429,9 @@ public void Validate_retailerlocations() {
 	                   if(Common.getCurrentURL().contains("/gb"))
 	                   {
 	                	   Thread.sleep(5000);
-
+//	                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
+//	                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
+	                	   
 	                	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                	   Thread.sleep(8000);
@@ -4455,6 +4457,11 @@ public void Validate_retailerlocations() {
 	                	   }                    	
 	                	   else if (Common.getCurrentURL().contains("/checkout/#payment"))
 	                	   {
+//	                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
+//	                   		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
+//	                   		Thread.sleep(5000);
+//	                   		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
+//	                       	Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                       	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
 	                       	System.out.println(frameid);
 //	                       	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
@@ -4529,7 +4536,7 @@ public void Validate_retailerlocations() {
 
 			} else {
 				Thread.sleep(4000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
@@ -4580,8 +4587,8 @@ public void Validate_retailerlocations() {
 	                 else
 	                 {
 	                	 Thread.sleep(4000);
-	              	   Sync.waitElementPresent(30,"xpath", "(//button[contains(text(),'Place Order')])[2]");
-	              	   Common.clickElement("xpath", "(//button[contains(text(),'Place Order')])[2]");
+	              	   Sync.waitElementPresent(30,"xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
+	              	   Common.clickElement("xpath", "(//button[@type='button'][normalize-space()='Place Order'])[1]");
 	              	 Thread.sleep(8000);
 	                 Sync.waitElementPresent(30,"xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]");
 	                 Sync.waitElementVisible("xpath", "(//iframe[@role='presentation' and contains(@src,'https://js.stripe.com/v3/three-ds')])[1]");
@@ -4624,7 +4631,7 @@ Assert.fail();
 }
 
 return Number;
-	}
+}
 
 	public void Register_userorder_status() {
 		// TODO Auto-generated method stub
