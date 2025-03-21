@@ -4386,8 +4386,6 @@ public void Validate_retailerlocations() {
 		String symbol=data.get(dataSet).get("Symbol");
 		
 		try {
-		
-			
 			Sync.waitPageLoad();
 		    Common.actionsKeyPress(Keys.PAGE_DOWN);
 					Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
