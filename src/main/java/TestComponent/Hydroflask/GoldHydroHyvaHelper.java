@@ -172,6 +172,39 @@ public class GoldHydroHyvaHelper {
 
 	}
 	
+	public void bottle_Accessories_headerlinks(String Dataset) {
+		// TODO Auto-generated method stub
+		String category =data.get(Dataset).get("Category");
+		String expectedResult = "User should click the" + category;
+		try {
+
+			Sync.waitElementPresent("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+			Thread.sleep(3000);
+//			Common.scrollIntoView("xpath","//a[contains(@class,'level-top')]//span[text()=' Shop']");
+			Common.clickElement("xpath", "(//a[contains(@title,'Shop')]//span[contains(text(),'Shop')])[1]");
+
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + category + "')])[2]");
+			Common.clickElement("xpath", "(//span[contains(text(),'" + category + "')])[2]");
+			Thread.sleep(6000);
+			expectedResult = "User should select the " + category + "category";
+			int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'" + category + "')]").size();
+			Common.assertionCheckwithReport(sizebotteles > 0,
+					"validating the product category as" + category + "from navigation menu ", expectedResult,
+					"Selected the " + category + " category", "User unabel to click" + category + "");
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the product category as" + category + "from navigation menu ",
+					expectedResult, "Unable to Selected the " + category + " category",
+					Common.getscreenShot("Failed to click on the" + category + ""));
+
+			Assert.fail();
+		}
+
+	}
 	
 	
 	public void Bottles_headerlinks(String category) {
@@ -7609,19 +7642,20 @@ catch(Exception | Error e)
 
 		try {
 
-			String text = Common.findElement("xpath", "//span[text()='" + category + "']//following-sibling::span").getText().replace("(", "").replace(")", "");
+			String text = Common.findElement("xpath", "(//span[text()='" + category + "']//following-sibling::span)[2]").getText().replace("(", "").replace(")", "");
 			System.out.println(text);
 			Common.clickElement("xpath", "//span[text()='" + category + "']");
 			int textValue = Integer.parseInt(text);
 			String categoryvalue = Integer.toString(textValue);
 			Thread.sleep(6000);
-			String textValueAfterFilter = Common.findElement("xpath", "//div[@class='text-sm']//span")
+			String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
 					.getText().trim();
+			System.out.println("textValueAfterFilter:" +textValueAfterFilter);
 			Thread.sleep(4000);
 			int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 			String items = Integer.toString(noOfItems);
-			System.out.println(categoryvalue);
-			System.out.println(items);
+			System.out.println("categoryvalue:"+categoryvalue);
+			System.out.println("items:"+ items);
 
 			Common.assertionCheckwithReport(categoryvalue.equals(textValueAfterFilter),
 					"To validate the filter in Product Listing Page",
