@@ -15,7 +15,7 @@ public class TEST_DGLD_OS_US_ST_127_Guest_user_Checkout_using_3D_Secure_Payment_
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_User_Checkout_Visa_Card () throws Exception {
+	public void Verifying_Guest_user_Checkout_using_3D_Secure_Payment_Method_With_DiscountCode () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
@@ -37,7 +37,7 @@ public class TEST_DGLD_OS_US_ST_127_Guest_user_Checkout_using_3D_Secure_Payment_
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

@@ -2266,6 +2266,11 @@ public void header_Shopbycollection(String Dataset) { {
 		System.out.println(Productsize);
 		try {
 			Sync.waitPageLoad();
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
+	
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
@@ -3859,10 +3864,9 @@ public void Validate_retailerlocations() {
 		String expectedResult = "email field will have email address";
 		try {
 			Thread.sleep(3000);
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
 			{
-				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
 			}
 			Common.textBoxInput("css", "section#shipping-details input[name='firstname']",
 					data.get(dataSet).get("FirstName"));
