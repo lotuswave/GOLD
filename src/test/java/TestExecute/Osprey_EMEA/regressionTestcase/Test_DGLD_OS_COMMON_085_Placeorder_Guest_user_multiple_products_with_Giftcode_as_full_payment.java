@@ -22,7 +22,7 @@ public class Test_DGLD_OS_COMMON_085_Placeorder_Guest_user_multiple_products_wit
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
      //   Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.search_product("Product"); 
+        Osprey_ReEu.search_product("Simple product");
         Osprey_ReEu.simple_addtocart("Simple product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
