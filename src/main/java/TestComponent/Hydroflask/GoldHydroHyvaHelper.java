@@ -77,7 +77,7 @@ public class GoldHydroHyvaHelper {
 
 	public void verifingHomePage() {
 		try {
-			Sync.waitElementPresent("css", "img[alt='Hydroflask store logo']");		
+			Sync.waitElementPresent(60,"css", "img[alt='Hydroflask store logo']");		
 			int size = Common.findElements("css", "img[alt='Hydroflask store logo']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Page")
@@ -1838,8 +1838,10 @@ public class GoldHydroHyvaHelper {
 //			String message1 = Common.findElement("id", "validation-length").getCssValue("color");
 //			String greencolor = Color.fromString(message1).asHex();
 //			System.out.println(greencolor);
+			Sync.waitElementPresent("xpath", "//li[@data-msg-field='email']");
 			String emailmessage = Common.findElement("xpath", "//li[@data-msg-field='email']").getText();
 			System.out.println(emailmessage);
+			Sync.waitElementPresent("xpath", "//li[@data-msg-field='password_confirmation']");
 			String confirmpassword = Common.findElement("xpath", "//li[@data-msg-field='password_confirmation']").getText();
 			System.out.println(confirmpassword);
 		
@@ -3646,11 +3648,12 @@ System.out.println(MyFavorites);
 			Sync.waitPageLoad();
 			Sync.waitPageLoad();
 			if (Common.getCurrentURL().contains("preprod")) {
-				Sync.waitPageLoad();
+				Sync.waitElementVisible(60, "id", "email");
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
+			Sync.waitElementVisible(30, "id", "pass");
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
@@ -3658,29 +3661,7 @@ System.out.println(MyFavorites);
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
 					"user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
-					"Failed to signIn and not navigated to the Pro Deal Application page ");
-//			Thread.sleep(4000);
-//		    String cate = data.get(dataSet).get("Application category");
-//		    String[] category = cate.split(",");
-//		    int i = 0;
-//		    for (i = 0; i < category.length; i++) {
-//		    	Sync.waitElementPresent(30, "xpath",
-//		                "//div[contains(@class,'accordion-header ')]//span[contains(text(),'" + category[i] + "')]");
-//		        Thread.sleep(3000);
-//		        Common.findElement("xpath",
-//		                "//div[contains(@class,'accordion-header ')]//span[contains(text(),'" + category[i] + "')]");
-//		        Common.clickElement("xpath",
-//		                "//div[contains(@class,'accordion-header ')]//span[contains(text(),'" + category[i] + "')]");
-//		        Sync.waitPageLoad();
-//		        Thread.sleep(3000);
-//		         String Verify = Common.findElement("xpath", "//span[text()='Verify & Save']").getText();
-//		         System.out.println(Verify);
-//		         Common.assertionCheckwithReport(Verify.contains("Verify & Save"),
-//		        		 "To validate the user lands on Verify & Save",
-//		        		 "After clicking on the category it should Verify & Save",
-//		        		 "user Sucessfully navigate to the Pro Deal Application page after clicking on the signIn button",
-//		        		 "Failed to caterory and not finds to the Verify & Save");
-//		            } 
+					"Failed to signIn and not navigated to the Pro Deal Application page "); 
 		    Common.clickElement("xpath", "(//div[@class='icon-container'])[2]");
 		    Common.clickElement("xpath", "(//a[@title='Verify & Save'])[2]");
 		    
@@ -3705,40 +3686,18 @@ System.out.println(MyFavorites);
 			Common.textBoxInput("xpath", "//input[@id='sid-postal-code']", data.get(dataSet).get("postcode"));
 			Sync.waitElementPresent("xpath", "//input[@id='sid-address']");
 			Common.clickElement("xpath", "//input[@id='sid-address']");
-			Common.textBoxInput("xpath", "//input[@id='sid-address']", data.get(dataSet).get("Street"));
-//			Thread.sleep(6000);
-//			String path = System.getProperty("user.dir")
-//					+ ("\\src\\test\\resources\\TestData\\Hydroflask\\TestScreen.png");
-//			Sync.waitElementPresent(40, "xpath", "//input[@id='supporting_document']");
-////				Common.fileUpLoad("xpath", "//input[@id='supporting_document']", path);
-//			Common.findElement("xpath", "//input[@id='supporting_document']").sendKeys(path);
-
-//			Sync.waitElementPresent("id", "group_id");
-//			Common.clickElement("xpath", "//select[@id='group_id']");
-//			Common.dropdown("xpath", "//select[@id='group_id']", SelectBy.VALUE, data.get(dataSet).get("GropName"));
-//
-//			Sync.waitElementPresent("id", "comment");
-//			Common.textBoxInput("id", "comment", data.get(dataSet).get("CommetsHydroflask"));
+			Common.textBoxInput("xpath", "//input[@id='sid-address']", data.get(dataSet).get("Street"));		
 			Thread.sleep(4000);
-//			Common.clickCheckBox("xpath", "//span[@class='sid-checkbox__input-like ']");
-//			Sync.waitElementPresent("xpath", "//button[contains(@class,'sid-btn sid-mover-submit-btn')]");
-//			Common.clickElement("xpath", "//button[contains(@class,'sid-btn sid-mover-submit-btn')]");
-
 			Common.switchToDefault();
-//			Sync.waitPageLoad();
-//			Thread.sleep(4000);
-//			String message = Common.findElement("xpath", "//h1[@class='sid-header__title sid-l-space-top-md']//span").getText();
-//			Common.assertionCheckwithReport(message.contains("We need some more info"),
-//					"To validate the success message for the prodeal",
-//					"After clicking on the submit button it should navigate to the Success page",
-//					"user Sucessfully navigate to the Success page after clicking on the submit button",
-//					"Failed to get the success message for the pro deal submission");
-
+			ExtenantReportUtils.addPassLog("ProDeal application form filling",
+					"User field to fill the prodeal aplication ",
+					"user to get the success message for the pro deal submission",
+					Common.getscreenShotPathforReport("Pro deal Form filled successfully"));
 		} catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("ProDeal application form filling",
 					"User field to fill the prodeal aplication ",
 					"user to get the success message for the pro deal submission",
-					Common.getscreenShotPathforReport("Failed to get the success message for the pro deal submission"));
+					Common.getscreenShotPathforReport("Failed  fill Pro deal Form"));
 			Assert.fail();
 
 		}
@@ -3747,11 +3706,11 @@ System.out.println(MyFavorites);
 	public void click_Prodeal() {
 		// TODO Auto-generated method stub
 		try {
-			Common.scrollIntoView("xpath", "//a[text()='Pro Deal']");
-			Sync.waitElementPresent("xpath", "//a[text()='Pro Deal']");
-			Common.clickElement("xpath", "//a[text()='Pro Deal']");
-			Sync.waitElementVisible("xpath", "//h1[@class='page-title-wrapper']");
-			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
+			Common.scrollIntoView("xpath", "//a[@title='Pro Deal']");
+			Sync.waitElementPresent("xpath", "//a[@title='Pro Deal']");
+			Common.clickElement("xpath", "//a[@title='Pro Deal']");
+			
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("/prodeal/application"),
 					"To validate the Pro Deal", "Should be display the Pro Deal Application ",
 					"Successfully display the Pro Deal Application", "Failed to  display the Pro Deal Application");
 		} catch (Exception | Error e) {
