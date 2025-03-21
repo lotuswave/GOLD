@@ -11135,12 +11135,12 @@ public void Explore_Validation(String Dataset) {
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
@@ -11343,12 +11343,12 @@ public void Explore_Validation(String Dataset) {
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
