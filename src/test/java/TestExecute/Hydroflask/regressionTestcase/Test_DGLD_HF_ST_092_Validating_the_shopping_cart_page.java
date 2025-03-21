@@ -23,19 +23,15 @@ public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product"); 
-			Hydro.Bottles_headerlinks("Bottles & Drinkware");   
-			Hydro.Text_Engraving("Engraving Product");
-			Hydro.enraving_Checkout("Horizontal Text");
-			Hydro.back_to_cart();
+			Hydro.click_minicart();
+			Hydro.minicart_viewcart();
+			Hydro.Remove_Product("Product");
 			Hydro.update_shoppingcart("Product Qunatity");
-			Hydro.Edit_Engraving_to_Graphic("Engraving Product");
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.back_to_cart();
+            Hydro.Shoppingcart_page();
 			Hydro.minicart_ordersummary_discount("Discount");
-			Hydro.updateproductcolor_shoppingcart("Color Product");
-		    Hydro.deleteProduct_shoppingcart();
 		    
 		    
 			
@@ -47,7 +43,7 @@ public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

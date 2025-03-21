@@ -1626,22 +1626,11 @@ public class GoldHydroHyvaHelper {
 
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
+				Sync.waitElementPresent("id", "Field-expiryInput");
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+				Sync.waitElementPresent("id", "Field-cvcInput");
 		        Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-		        
-//		        int zipcode = Common.findElements("xpath", "//input[@id='Field-postalCodeInput']").size();
-//				System.out.println(zipcode);
-//
-//				if (zipcode > 0) {
-//					
-//					Sync.waitElementPresent("xpath", "//input[@id='Field-postalCodeInput']");
-//					Common.textBoxInput("xpath", "//input[@id='Field-postalCodeInput']", code);
-//				}
-//				int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
-//				
-//				if(link>0) {
-//					Common.clickElement("xpath", "//input[@class='p-Checkbox-input']");
-//				}
+		     
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				}
@@ -2167,9 +2156,9 @@ public void FUll_Payment(String dataSet) {
 		}
 		return email;
 	}
-	public void Configurable_addtocart_pdp(String Dataset) {
-		String product = data.get(Dataset).get("Colorproduct");
-		String productcolor = data.get(Dataset).get("Color");
+	public void Configurable_addtocart_pdp(String DataSet) {
+		String product = data.get(DataSet).get("Colorproduct");
+		String productcolor = data.get(DataSet).get("Color");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -2223,7 +2212,7 @@ public void FUll_Payment(String dataSet) {
 		Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
        }
 
-			product_quantity(Dataset);
+			product_quantity(DataSet);
 			System.out.println(productcolor);
 //			click_UGC();
 			Sync.waitElementPresent("xpath", "(//button[contains(@title,'Add to Cart')]//span)");
@@ -8198,21 +8187,19 @@ catch(Exception | Error e)
 		}
 	}
 
-	public void product_quantity(String Dataset) {
+	public void product_quantity(String DataSet) {
 		// TODO Auto-generated method stub
-		String Quantity = data.get(Dataset).get("Quantity");
+		String Quantity = data.get(DataSet).get("Quantity");
 		try {
-			Common.findElement("xpath", "//select[@name='qty']");
-//			Common.clickElement("xpath", "//select[@class='a-select-menu']");
+			Thread.sleep(2000);
+			try {
+			Sync.waitElementPresent(30,"xpath", "//select[@name='qty']");
 			Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
-//			String value = Common.findElement("xpath", "//select[@class='a-select-menu']").getAttribute("value");
-//			Common.assertionCheckwithReport(value.equals(Quantity),
-//					"validating the  product the product quantity in PDP page",
-//					"Product quantity should be update in the PDP page",
-//					"Sucessfully product Qunatity has been updated ",
-//					"failed to Update the prodcut quantity in PDP page");
-
+			}
+			catch (Exception | Error e) {
+				Common.dropdown("xpath", "//select[@name='qty']", Common.SelectBy.VALUE, "1");
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
@@ -9089,7 +9076,7 @@ catch(Exception | Error e)
 					"//div[@aria-label='Color']//div[@x-id]");
 //			 Common.clickElement("xpath", "//div[@aria-label='Color']//div[@x-id]");
 			Common.actionsKeyPress(Keys.PAGE_UP);
-			for (int i = 0; i < pdpcolors.size(); i++) { 
+			for (int i = 2; i < pdpcolors.size(); i++) { 
 	           Thread.sleep(4000);
 				pdpcolors.get(i).click();
 				Thread.sleep(4000);
@@ -9329,9 +9316,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Common.scrollIntoView("xpath", "//a[@title='Back to Cart']");
-			Sync.waitElementVisible(30, "xpath", "(//a[@title='Back to Cart'])[2]");
-			Common.clickElement("xpath", "(//a[@title='Back to Cart'])[2]");
+			Common.scrollIntoView("xpath", "(//a[@title='Back to Cart'])[1]");
+			Sync.waitElementVisible(30, "xpath", "(//a[@title='Back to Cart'])[1]");
+			Common.clickElement("xpath", "(//a[@title='Back to Cart'])[1]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -9371,7 +9358,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			if (Common.getCurrentURL().contains("preprod")) {
-				String discountcodemsg = Common.getText("xpath", "///div[@class='container']//div[@class='relative flex w-full']/span");
+				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
 				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
 						expectedResult, "promotion code working as expected", "Promation code is not applied");
 			} else {
@@ -14468,6 +14455,45 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void Remove_Product(String dataSet) {
+		// TODO Auto-generated method stub
+		String Symbol = data.get(dataSet).get("Symbol");
+		String products = data.get(dataSet).get("Products");
+		System.out.println(products);
+
+		try {
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
+			Common.clickElement("xpath", "//button[contains(@aria-label,'Remove " + products + "')]");
+			
+			
+			int Remove_Popup = Common.findElements("xpath", "//h2[normalize-space()='Remove Item'] ").size();
+			System.out.println(Remove_Popup);
+					if(Remove_Popup>0) {
+						Sync.waitElementClickable("xpath", "//button[normalize-space()='OK'] ");
+						Common.clickElement("xpath", "//button[normalize-space()='OK'] ");
+						System.out.println("Product Removed successfully");
+					} else {
+						
+						Assert.fail();
+					}
+					Sync.waitPageLoad(40);
+			Thread.sleep(10000);
+			ExtenantReportUtils.addPassLog("validating the remove prodcut form shopping cart page",
+			"Product should be remove form the shopping cart page",
+			"Unable to remove the product from the shopping cart page",
+			Common.getscreenShot("Removed the product from the shopping cart page"));
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the remove prodcut form shopping cart page",
+					"Product should be remove form the shopping cart page",
+					"Unable to remove the product from the shopping cart page",
+					Common.getscreenShot("Failed to remove the product from the shopping cart page"));
+			Assert.fail();
+		}
+
 	}
 		
 

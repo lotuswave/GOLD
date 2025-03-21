@@ -31,7 +31,7 @@ public class TEST_DGLD_HYF_ST_014_Placeorder_Employee_user_multipleproducts_with
 			Hydro.RegaddDeliveryAddress("Employee_id");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.discountCode("Discount");
-            Hydro.Gift_card("Giftcard");
+            Hydro.Gift_card("Giftcard_Partial_1");  // Beforre executing Partial Gift code needs to be Added in Testdata
             Hydro.Secure_Payment_details("3d_Secure");
 
 		} catch (Exception e) {
