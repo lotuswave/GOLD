@@ -296,7 +296,10 @@ public void Login_Account(String dataSet) {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -2322,7 +2325,11 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(10000);
+			Thread.sleep(4000);
+			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
+{
+	Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
+}
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //			.getAttribute("data-ui-id");
 //	System.out.println(message);
@@ -2918,10 +2925,9 @@ public void header_Shopbycollection(String Dataset) { {
 		if (size > 0) {
 			try {
 				Thread.sleep(3000);
-				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+				if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
 				{
-					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+					Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
 				}
 				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",

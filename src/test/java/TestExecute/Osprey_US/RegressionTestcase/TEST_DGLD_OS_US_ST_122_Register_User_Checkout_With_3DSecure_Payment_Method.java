@@ -15,14 +15,14 @@ public class TEST_DGLD_OS_US_ST_122_Register_User_Checkout_With_3DSecure_Payment
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_RegisterUser_StoreCredit_Checkout_Partial_with_AfterPay_and_valdiate_the_StoreCredit_balance_in_MY_Account_page () throws Exception {
+	public void Verifying_Register_User_Checkout_With_3DSecure_Payment_Method () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-       Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-       Osprey_ReEu.simple_addtocart("Simple product");  
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
@@ -34,8 +34,6 @@ public class TEST_DGLD_OS_US_ST_122_Register_User_Checkout_With_3DSecure_Payment
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
