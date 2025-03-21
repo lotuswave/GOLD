@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US prod_smoke execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+
+    <test name="TEST_DGLD_DB_US_ST_011_Footer_Link_Validation" testid="DTG-928" priority="P1" description="This script will cover creating a new user account">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.TEST_DGLD_DB_US_ST_011_Footer_Link_Validation"/>
+        </classes>
+    </test> 
+    
+    <test name="TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User" testid="DTG-928" priority="P1" description="This script will cover validating the shopping cart functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User"/>
+        </classes>
+    </test>
+    
+    
+    
+    
+   
+    
+    <test name="TEST_DGLD_DB_US_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_ShoppingCart_Page_with_Afterpay_Klarna_Payments" testid="DTG-963" priority="P1" description="This script will cover resetting the password from the shipping page">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.Test_DGLD_DB_US_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_ShoppingCart_Page_with_Afterpay_Klarna_Payments"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_US_ST_046_Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal" testid="DTG-963" priority="P1" description="This script will cover header validation for a guest user">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.Test_DGLD_DB_US_ST_046_Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Simple_Configurable_Bundle_Subscription_Products" testid="DTG-932" priority="P1" description="This script will cover guest user checkout with the expedited shipping method">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.Test_DGLD_DB_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Simple_Configurable_Bundle_Subscription_Products"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_US_ST_094_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" testid="DTG-963" priority="P1" description="This script will cover validating the product listing page functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.Test_DGLD_DB_US_ST_094_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount"/>
+        </classes>
+    </test>
+    
+   
+      <test name="Test_DGLD_DB_US_ST_033_Register_user_Checkout_with_Multiple_Items_Aerosal_Non_AerosalRegular_items_Bundle_different_Shipping_Methods_and_validate_CC_and_PayPal" testid="DTG-928" priority="P1" description="This script will cover validating the shopping cart functionality">
+        <classes>
+            <class name="TestExecute.Drybar_US.SmokeTestCases.Test_DGLD_DB_US_ST_033_Register_user_Checkout_with_Multiple_Items_Aerosal_Non_AerosalRegular_items_Bundle_different_Shipping_Methods_and_validate_CC_and_PayPal"/>
+        </classes>
+    </test>
+   
+
+</suite>

@@ -9,7 +9,7 @@ import TestComponent.Drybar_US.GoldDrybarusHelper2;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_DB_US_ST_192_RegUser_Simple_AerosolBundle_Configurable_AerosolProduct_NonAerosolBundle_Checkout_Discount_GiftCode_FullRedeem {
+public class TEST_DGLD_DB_US_ST_195_RegUser_Simple_AerosolBundle_Configurable_AerosolProduct_NonAerosolBundle_Checkout_Discount_GiftCode_FullRedeem {
 
 	
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
