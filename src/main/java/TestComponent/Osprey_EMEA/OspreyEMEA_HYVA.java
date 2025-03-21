@@ -14941,16 +14941,20 @@ public void url_color_validation(String Dataset) {
 				"When we click on the product is should navigate to the PDP page",
 				"Unable to Navigate the product to the PDP page",
 				Common.getscreenShot("Failed to Navigate the product to the PDP page"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 
 	
 	try
 	{
+		Thread.sleep(4000);
 		List<WebElement> pdpcolors = Common.findElements("xpath",
-				"//div[@aria-label='Colour']//div[@x-id]");
-		for (int i = 0; i < pdpcolors.size(); i++) {
-
+				"//div[@aria-label='Color']//div[@x-id]");
+		 Common.clickElement("xpath", "//div[@aria-label='Colour']//div[@x-id]");
+		 Common.actionsKeyPress(Keys.TAB);
+		 Common.actionsKeyPress(Keys.ENTER);
+		for (int i = 0; i < pdpcolors.size(); i++) { 
+           Thread.sleep(4000);
 			pdpcolors.get(i).click();
 			Thread.sleep(4000);
 			String clicked_Color = pdpcolors.get(i).getAttribute("data-option-label");
@@ -14974,7 +14978,7 @@ public void url_color_validation(String Dataset) {
 				"When we click on the color the color name should reflect in url",
 				"Unable to display thee color name in the url",
 				Common.getscreenShot("Failed to display thee color name in the url"));
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 }
 
@@ -15321,61 +15325,118 @@ public void Prouser_Discount() {
 }
 
 public void Addtocart_From_MyFav(String Dataset) {
+	
+	String product = data.get(Dataset).get("Products");
+	System.out.println(product);
 	String productcolor = data.get(Dataset).get("Color");
+	System.out.println(productcolor);
 	String Productsize = data.get(Dataset).get("Size");
-    try {
-        Sync.waitPageLoad();
-        int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
+		
+	    try {	        
+	        Sync.waitPageLoad();
+	        int MyFavorites = Common.findElements("xpath", "//div[contains(@class,'message')]//span").size();
 
-        if (MyFavorites != 0) {
-            search_product("Product");
-            Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
-            Common.mouseOverClick("xpath", "//button[contains(@class, 'group/wishlist')]");
-            Sync.waitPageLoad();
-            Thread.sleep(2000);
-            My_Favorites();
-            Common.assertionCheckwithReport(Common.getPageTitle().equals("Favourites Sharing"),
-                    "validating the Navigation to the My Favorites page",
-                    "After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
-                    "Successfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
-                    "Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
-            Common.findElements("xpath", "//div[contains(@title,'My Wishlist')]");
-            Sync.waitPageLoad();
-            Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
-            Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]");
-            Sync.waitElementPresent("xpath", "//button[@data-role='selected-tocart']");
-            Common.clickElement("xpath", "//button[@data-role='selected-tocart']");
+	        if (MyFavorites != 0) {
+	            search_product("Product");
+	            Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
+	            Common.mouseOverClick("xpath", "//button[contains(@class, 'group/wishlist')]");
+	            Sync.waitPageLoad();
+	            Thread.sleep(2000);
+	            My_Favorites();	     
+	            Common.findElements("xpath", "//div[contains(@title,'My Wishlist')]");
+	            Sync.waitPageLoad();
+	            String Whishlistproduct = Common
+	                    .findElement("xpath", "//div[contains(@class,'yotpo bottomLine bottomline-position')]//preceding-sibling::a")
+	                    .getAttribute("title").trim();
+	            System.out.println(Whishlistproduct);
 
-        } else {
-        	    
-        		Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]//input[@type='checkbox']");
-            	Common.clickElement("xpath", "//div[contains(@class,'wishlist-toolbar-select a-checkbox')]//input[@type='checkbox']");
-           
-            	Sync.waitElementPresent("xpath", "//button[@data-role='selected-tocart']");
-            	Common.clickElement("xpath", "//button[@data-role='selected-tocart']");
-            	Sync.waitPageLoad();
-//            	String message = Common.findElement("xpath", "//div[contains(@class,'message')]")
-//                        .getAttribute("class");
-                Thread.sleep(2000);
-                Common.clickElement("xpath", "//button[@data-role='tocart']");
-                Thread.sleep(4000);
-                Common.clickElement("xpath", "//div[contains(@class,'product-item-content')]");
-                Sync.waitPageLoad();
-                Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
-                Common.javascriptclickElement("xpath", "//input[@aria-label='" + productcolor + "']");
-//    			Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
-//    			Common.clickElement("xpath", "//input[@aria-label='" + Productsize + "']");
-    			
-                Common.clickElement("xpath", "(//button[@title='Add to Cart'])[2]");
-            }
-        
-    } catch (Exception | Error e) {
-        e.printStackTrace();
-        ExtenantReportUtils.addFailedLog("validating the product add to the cart", "Product should be added to cart",
-                "Unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
-        Assert.fail();
-    }
-}
+	            product = data.get(Dataset).get("Products").trim();
+	            System.out.println(product);
+
+	            if (Whishlistproduct.equals(product)) {
+	                Sync.waitElementPresent(30, "xpath", "//a[@title='" + product + "']/parent::div");
+	                Common.mouseOver("xpath", "//a[@title='" + product + "']/parent::div");
+	                Common.clickElement("xpath", "//a[contains(@title,'Show options')]");
+	                
+	                Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+					Common.clickElement("xpath", "//img[@alt='" + product + "']");
+					Sync.waitPageLoad();
+					Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
+					Common.clickElement("xpath", "//input[@aria-label='" + productcolor + "']");
+				//	Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
+				//	Common.clickElement("xpath", "//input[@aria-label='" + Productsize + "']");
+	                Sync.waitPageLoad();
+	                Thread.sleep(3000);
+
+	                Common.clickElement("xpath", "(//button[@title='Add to Cart'])[2]");	        
+	                click_minicart();
+	                String Minicartcount = Common.findElement("xpath", "//div[@x-show='cartSummaryCount']").getText();
+	                System.out.println(Minicartcount);
+	                int minicart = Integer.parseInt(Minicartcount);
+	                System.out.println(minicart);
+
+	                if (minicart > 0) {
+	                    click_minicart();
+	                    minicart_Checkout();
+	                } else {
+	                    Common.refreshpage();
+	                    Sync.waitPageLoad();
+	                    minicart_Checkout();
+	                }
+	            } else {
+	                Assert.fail();
+	            }
+	        } else { 
+	      
+	        	    Sync.waitPageLoad();
+	        	    List<WebElement> webelementslist = Common.findElements("xpath", "//div[@data-row='product-item']//a");
+	        	    int productCount = webelementslist.size();
+
+	        	    for (int i = 0; i < productCount; i++)
+	        	    {        	        
+	        	        Common.scrollIntoView("xpath", "//img[contains(@class,'object-con')]");
+	        	        Common.mouseOver("xpath", "//img[contains(@class,'object-con')]");
+	        	        Sync.waitElementPresent(30, "xpath", "//button[@id='menu-cart-icon']");
+	        	        List<WebElement> element = Common.findElements("xpath", "//a[contains(@title,'Show options')]");
+	        	        element.get(0).click();
+	        	        Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+						Common.clickElement("xpath", "//img[@alt='" + product + "']");
+						Sync.waitPageLoad();
+						Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
+						Common.clickElement("xpath", "//input[@aria-label='" + productcolor + "']");
+					//	Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
+					//	Common.clickElement("xpath", "//input[@aria-label='" + Productsize + "']");
+		                Sync.waitPageLoad();
+	        	        Thread.sleep(2000);
+	        	       
+	        	        String message = Common.findElement("xpath", "//div[contains(@class,'message')]").getText();
+	        	        if (message.contains("You added")) {
+	        	            webelementslist.get(i).click();
+	        	            }
+	        	        Sync.waitElementPresent(30,"xpath", "(//button[@title='Add to Cart'])[2]");
+        	            Common.clickElement("xpath", "(//button[@title='Add to Cart'])[2]");
+	        	        
+	        	        int minicart = Common.findElements("xpath", "//button[@id='menu-cart-icon']").size();
+	        	        if (minicart > 0) {
+	        	            minicart_Checkout();
+	        	            break;
+	        	        }
+	        	        else {
+	        	            Common.refreshpage();
+	        	            Sync.waitPageLoad();
+	        	            minicart_Checkout();
+	        	            break;
+	        	        }
+	        	    }
+	 }}
+	     catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("Validating product add to cart", "Product should be added to cart",
+	                "Unable to add product to cart", Common.getscreenShot("failed to add product to cart"));
+	        Assert.fail();
+	    }
+	}
+
 
 public void header_ChristmasGift(String Dataset) {
 		
