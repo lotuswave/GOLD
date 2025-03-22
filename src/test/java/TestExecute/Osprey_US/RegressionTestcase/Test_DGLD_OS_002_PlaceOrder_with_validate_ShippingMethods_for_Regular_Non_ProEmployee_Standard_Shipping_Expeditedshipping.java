@@ -15,7 +15,7 @@ public class Test_DGLD_OS_002_PlaceOrder_with_validate_ShippingMethods_for_Regul
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping () throws Exception {
+	public void Verifying_PlaceOrder_with_validate_ShippingMethods_for_Regular_Non_ProEmployee_Standard_Shipping_Expeditedshipping () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
