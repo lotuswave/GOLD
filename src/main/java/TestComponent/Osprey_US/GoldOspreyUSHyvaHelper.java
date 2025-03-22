@@ -11371,7 +11371,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			}
 			else
 			{
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
@@ -16261,12 +16261,17 @@ public void MyAccount_Subscription() {
 			"Failed to display the  Dashboard page");
 	
 	 Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
+	 Thread.sleep(4000);
+	 if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+		{
+		Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+		}
     Common.switchFrames("xpath", "//iframe[@id='klaviyo_subscribe_page_1']");
     String Subscribe_to_Osprey = Common.getText("xpath", "//span[text()='Subscribe to Osprey emails']");
     System.out.println(Subscribe_to_Osprey);
 
     if(Subscribe_to_Osprey.contains("Subscribe to Osprey emails")) {
-    	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "qatest@gmail.com");
+    	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "rrendla@helenoftroy.com");
     	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "qa");
     	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "test");
     	Common.clickCheckBox("xpath", "//button[text()='Subscribe']");
@@ -16282,14 +16287,18 @@ public void MyAccount_Subscription() {
     else {
     	Assert.fail();
     }
-    
-    Common.clickCheckBox("xpath", " (//div[@id='subscribe_section'])[2]");
+    Common.clickElement("xpath", "//a[@title='Dashboard']");
+    Sync.waitPageLoad();
+    Thread.sleep(3000);
+    Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
+    Thread.sleep(4000);
+//    Common.clickCheckBox("xpath", " (//div[@id='subscribe_section'])[2]");
     Common.switchFrames("xpath", "//iframe[@id='klaviyo_subscribe_page_2']");
     String UnSubscribe = Common.getText("xpath", "//button[text()='Unsubscribe']");
     System.out.println(UnSubscribe);
 
     if(UnSubscribe.contains("Unsubscribe")) {
-    	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "qatest@gmail.com");
+    	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "rrendla@helenoftroy.com");
  
     	Common.clickCheckBox("xpath", "//button[text()='Unsubscribe']");
     	Thread.sleep(3000);
