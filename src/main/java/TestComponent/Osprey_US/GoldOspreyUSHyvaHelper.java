@@ -13293,14 +13293,14 @@ public void Verify_Prouser_Shipping_lessthan100() {
 
 		String shipping= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[1]").getText();
 		System.out.println(shipping);
-		String method= Common.findElement("xpath", "//span[text()='Standard']").getText();
+		String method= Common.findElement("xpath", "//span[text()='Pro Deal Ground Shipping']").getText();
 		System.out.println(method);   	
 		String Price = Common.findElement("xpath", "(//span[contains(@class,'value text-right text-sale-font')])[1]").getText().replace("$", "");
 		
 		double totalPrice = Double.parseDouble(Price);
 		System.out.println(totalPrice);
 		
-		if(shipping.contains("10")&&method.contains("Standard")&&totalPrice<=100) {
+		if(shipping.contains("10")&&method.contains("Pro Deal Ground Shipping")&&totalPrice<=100) {
 			
 			clickSubmitbutton_Shippingpage();
 			
