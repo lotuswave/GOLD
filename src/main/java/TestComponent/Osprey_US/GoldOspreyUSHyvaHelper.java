@@ -394,6 +394,10 @@ public void Login_Account(String dataSet) {
 
 		try {
 			Thread.sleep(5000);
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Common.actionsKeyPress(Keys.END);
 			Thread.sleep(5000);
 			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
@@ -401,14 +405,14 @@ public void Login_Account(String dataSet) {
 			Thread.sleep(5000);
 			Common.clickElement("xpath", "//button[text()='Sign Up']");
 			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//span[contains(text(),'Success')]");
+			String Text = Common.getText("xpath", "//span[contains(text(),'Thanks for')]");
 			System.out.println(Text);
 			String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text.contains("Success! An email should be on its way."),
-					"verifying newsletter subscription",
-					"User get confirmation message if new email if it used mail it showing error message ", Text,
-					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+			Common.assertionCheckwithReport(Text.contains("Thanks for subscribing!"),
+					"verifying newsletter subscription from the footers",
+					"User should able to enter the email in the stay in touch input filed", Text,
+					Common.getscreenShotPathforReport("sucessfully newsletter subscription has been subscribed"));
 
 		} catch (Exception | Error e) {
 
@@ -13334,12 +13338,12 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 		if (size > 0) {
 			// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 			// "')]");
-			String method1=Common.findElement("xpath", "//span[text()='Standard']").getText();
+			String method1=Common.findElement("xpath", "//span[text()='Free Ground Shipping']").getText();
 			String shipping1= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[1]").getText();
 			String method2=Common.findElement("xpath", "//span[text()='Expedited']").getText();
 			String shipping2= Common.findElement("xpath", "(//span[@data-label='Incl. Tax'])[2]").getText();
 			
-			Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Standard")&&shipping2.equals("$50.00")&&method2.contains("Expedited"),
+			Common.assertionCheckwithReport(shipping1.equals("$0.00")&&method1.contains("Free Ground Shipping")&&shipping2.equals("$50.00")&&method2.contains("Expedited"),
 					"validating the standard shipping method",
 					"Verifying Shipping methods in Shipping page",
 					"Successfully verifed Standard and Expedited shipping method",
@@ -13348,7 +13352,7 @@ public void Validateshippingmethods_Reguleruser(String Dataset) {
 			
 		} else {
 
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 	} catch (Exception | Error e) {
