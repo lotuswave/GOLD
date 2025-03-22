@@ -2505,7 +2505,6 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Update Gift Registry ')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Update Gift Registry ')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']//span");
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.contains("You updated the gift registry items."),
@@ -2582,7 +2581,6 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitElementPresent(30, "xpath", "//button[contains(text(),'Share Gift Registry')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Share Gift Registry')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-error']//span");
 			String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
 			Common.assertionCheckwithReport(errormessage.contains("You need to enter sender data."),
