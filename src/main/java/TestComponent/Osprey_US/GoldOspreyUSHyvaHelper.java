@@ -11037,7 +11037,7 @@ public void Gift_card(String dataSet) {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 		     
 			Thread.sleep(4000);
-			String Price = Common.findElement("xpath", "//div[@aria-label='Price']//span[contains(@id,'product-price')]//span").getText();
+			String Price = Common.findElement("xpath", "//div[@aria-label='Price']//span[contains(@id,'product-price')]//span[@class='price']").getText();
 			System.out.println(Price);
 			
 			if(Common.getCurrentURL().contains("/gb")) {
@@ -11454,7 +11454,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			Common.clickElement("xpath", "//span[text()='Pay now']");
 //			Thread.sleep(4000);
 //			Common.refreshpage();
-			String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
+			String klarna=Common.findElement("xpath", "//h1[@id='summary-title']").getText();
 			System.out.println(klarna);
 			if(klarna.contains("Choose how to pay"))
 			{
@@ -11474,6 +11474,11 @@ public void After_Pay_payment(String dataSet) throws Exception {
 				
 					
 				
+			}
+			else if(Common.findElement("xpath", "//h1[@id='summary-title']").getText().contains("Confirm and pay"))
+			{
+				Common.clickElement("xpath", "//span[text()='Pay with']");
+				Sync.waitPageLoad();
 			}
 			else
 			{
