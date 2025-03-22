@@ -19,7 +19,6 @@ public class Test_DGLD_OS_006_PlaceOrder_Validate_Shipping_Method_for_Pro_subtot
 	public void Verifying_PlaceOrder_Validate_Shipping_Method_for_Pro_subtotal_amount_lessthan100_Standard_Shipping10 () throws Exception {
 
 		try {
-        
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("prouser");
@@ -29,8 +28,6 @@ public class Test_DGLD_OS_006_PlaceOrder_Validate_Shipping_Method_for_Pro_subtot
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.Verify_Prouser_Shipping_lessthan100();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-        
-        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
