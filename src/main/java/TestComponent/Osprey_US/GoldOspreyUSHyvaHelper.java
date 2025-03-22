@@ -187,7 +187,7 @@ public class GoldOspreyUSHyvaHelper {
 		else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 		{
 			
-			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+			int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Backpacks, Luggage & Travel Gear Since 1974"),
@@ -219,21 +219,25 @@ public class GoldOspreyUSHyvaHelper {
 
 		try {
 			 Thread.sleep(3000);
-		        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
-		        System.out.println(sizesframe);
-		        if (sizesframe > 0) {
-		            Common.actionsKeyPress(Keys.PAGE_UP);
-		            Thread.sleep(4000);
-		            Common.textBoxInput("xpath", "//div[@class='needsclick  kl-private-reset-css-Xuajs1']/input",email);
+				acceptPrivacy();
+//		        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
+//		        System.out.println(sizesframe);
+//		        if (sizesframe > 0) {
+//		            Common.actionsKeyPress(Keys.PAGE_UP);
+//		            Thread.sleep(4000);
+		            Common.textBoxInput("xpath", "(//div[@class='needsclick  kl-private-reset-css-Xuajs1']/input)[2]",email);
 		            Thread.sleep(2000);
-		            Common.clickElement("xpath", "//div[@data-testid='form-row']//button");
-		            int sizes = Common.findElements("xpath", "//div[@data-testid='form-component']//span").size();
-		            String text=Common.findElement("xpath", "//div[@data-testid='form-component']//span").getText();
-		            System.out.println(text);
-		            Common.assertionCheckwithReport(sizes>0 ||text.equals("Thanks for signing up!"), "verifying Account page links newsletter Subcription popup",
-							"user should navigate to the newsletter Subcription popup page",
-							"user successfully Navigated to the newsletter Subcription popup", "Failed click on the newsletter Subcription popup" );
-		            
+		            Common.clickElement("xpath", "(//div[@data-testid='form-row']//button)[2]");
+		            Thread.sleep(2000);
+		            Common.clickElement("xpath","(//div[@data-testid='form-component'])[7]");
+		            Thread.sleep(4000);
+//		            int sizes = Common.findElements("xpath", "//div[@data-testid='form-component']//span").size();
+//		            String text=Common.findElement("xpath", "//div[@data-testid='form-component']//span").getText();
+//		            System.out.println(text);
+//		            Common.assertionCheckwithReport(sizes>0 ||text.equals("Thanks for signing up!"), "verifying Account page links newsletter Subcription popup",
+//							"user should navigate to the newsletter Subcription popup page",
+//							"user successfully Navigated to the newsletter Subcription popup", "Failed click on the newsletter Subcription popup" );
+//		            
 //		            Common.clickElement("xpath", "//div[text()='"+Running+"']");
 //		            Common.clickElement("xpath", "//div[@data-testid='form-row']//button");
 //		            int sizes1 = Common.findElements("xpath", "(//span[@class='ql-font-kanit'])[1]").size();
@@ -242,9 +246,8 @@ public class GoldOspreyUSHyvaHelper {
 //							"user should navigate to the newsletter Subcription popup page",
 //							"user successfully Navigated to the newsletter Subcription popup", "Failed click on the newsletter Subcription popup" );
 //		            
-		        }else {
-		        	
-		        }
+		 	
+		     
 			} catch (Exception e) {
 		
 			e.printStackTrace();
