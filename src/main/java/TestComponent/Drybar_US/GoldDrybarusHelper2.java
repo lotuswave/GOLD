@@ -319,12 +319,13 @@ public class GoldDrybarusHelper2 {
 		if (size > 0) {
 			try {
 				Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
-
+				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='street[0]']",
 						data.get(dataSet).get("Street"));
 
@@ -2955,9 +2956,14 @@ public class GoldDrybarusHelper2 {
 				}
 
 			} else {
+				Thread.sleep(2000);
+				int savecard = Common.findElements("xpath","//div[contains(@class,'form-select flex')]").size();
+				if(savecard > 0) {
+					Sync.waitElementPresent(30,"xpath", "(//input[@class='checkbox mr-4'])[2]");
+					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				}
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -4962,10 +4968,9 @@ public void FUll_Payment(String dataSet) {
 					"Failed to see the product name");*/
 			Thread.sleep(8000);
 //			Common.mouseOverClick("xpath", "//form[@id='form-70051']//button[@title='ADD TO BAG']");
-			 Common.clickElement("xpath", "//button[@title='ADD TO BAG']");
-			 
-			 Thread.sleep(5000);
-			 
+			 Common.clickElement("xpath", "//button[@title='ADD TO BAG']");	 
+			 Thread.sleep(4000);
+			 Sync.waitElementPresent(30, "xpath","//div[@ui-id='message-success']");
 			 String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
 						.getAttribute("ui-id");
 				System.out.println(message);
@@ -7660,8 +7665,14 @@ public void FUll_Payment(String dataSet) {
 	    			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 	    			{
 	    				Common.clickElement("xpath", "//button[@aria-label='My Account']");
-	    				Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
-	    				Common.clickElement("xpath", "//a[@title='My Account']");
+	    				int size = Common.findElements("id","customer.header.sign.in.link").size();
+	    				if (size > 0) {
+	    					Common.clickElement("id","customer.header.sign.in.link");
+	    				}
+	    				else {
+	    					Sync.waitElementPresent(30, "xpath", "//a[@title='My Account']");
+		    				Common.clickElement("xpath", "//a[@title='My Account']");
+	    				}
 	    				Thread.sleep(3000);
 	    				
 	    				if (Common.getCurrentURL().contains("/gb")){
@@ -7674,8 +7685,8 @@ public void FUll_Payment(String dataSet) {
 		    						"Failed to Navigate to the My Favorites page after Clicking on My Favorites button");
 	    				}
 	    				else {
-	    				Sync.waitElementPresent(30, "xpath", "//span[text()='Wish List']");
-	    				Common.clickElement("xpath", "//span[text()='Wish List']");
+	    				Sync.waitElementPresent(30, "xpath", "//span[text()='My Wish List']");
+	    				Common.clickElement("xpath", "//span[text()='My Wish List']");
 	    				Common.assertionCheckwithReport(Common.getPageTitle().equals("My Favorites") || Common.getPageTitle().equals("Wish List Sharing"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
@@ -9590,8 +9601,9 @@ public void Add_Address(String dataSet) {
 		Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
 
 		Common.clickElement("xpath", "//button[@title='Save Address']");
-		Thread.sleep(5000);
-		String message = Common.findElement("xpath", "//span[text()='You saved the address.']").getText();
+		Thread.sleep(1000);
+		Sync.waitElementPresent(30,"xpath","//div[@class='container']//div[@class='relative flex w-full']/span");
+		String message = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(message.contains("You saved the address."),
 				"validating the saved message after saving address in address book",
@@ -11599,8 +11611,8 @@ public void Subcription_Afterpay_Invalid() {
 		Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 		Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 		Sync.waitPageLoad();
-		Thread.sleep(6000);
-		Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+		Thread.sleep(5000);
+		Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-error']");
 		String message = Common.findElement("xpath", "//div[@ui-id='message-error']")
 				.getAttribute("ui-id");
 		System.out.println(message);
@@ -11641,11 +11653,11 @@ public void Subcription_Klarna_Invalid() {
 		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 		
 		{   	 
-            	 Sync.waitElementClickable("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+            	 Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				 Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				Sync.waitPageLoad();
- 				Thread.sleep(6000);
- 				Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
+ 				Thread.sleep(5000);
+ 				Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-error']");
  				String message = Common.findElement("xpath", "//div[@ui-id='message-error']")
  						.getAttribute("ui-id");
  				System.out.println(message);
