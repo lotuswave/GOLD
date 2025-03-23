@@ -6531,9 +6531,7 @@ public void minicart_validation(String Dataset) {
 			 }
 
 			Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
-
 			Common.clickElement("xpath", "//button[@title='Save Address']");
-			Thread.sleep(5000);
 			String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 			System.out.println(message);
 			Common.assertionCheckwithReport(message.contains("You saved the address."),
@@ -6565,6 +6563,10 @@ public void minicart_validation(String Dataset) {
 
 		try {
 			Sync.waitPageLoad();
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 
 			String newaddress = Common.findElement("xpath", "//h1[contains(@class,'title')]//span").getText();
 			if (newaddress.contains("Address Book")) {
@@ -6597,7 +6599,6 @@ public void minicart_validation(String Dataset) {
 				Common.clickElement("xpath", "//label[@for='primary_shipping']");
 				Common.clickElement("xpath", "//button[@title='Save Address']");
 				String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
-
 				Common.assertionCheckwithReport(message.contains("You saved the address."),
 						"validating the saved message after saving address in address book",
 						"Save address message should be displayed after the address saved in address book",
@@ -6700,7 +6701,10 @@ public void minicart_validation(String Dataset) {
 
 		try {
 			Sync.waitPageLoad();
-
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			String newaddress = Common.findElement("xpath", "//h1[contains(@class,'title')]//span").getText();
 			if (newaddress.contains("Address Book")) {
 				Common.clickElement("xpath", "//a [contains(text(),'Add New Address ')]");
@@ -6801,7 +6805,6 @@ public void minicart_validation(String Dataset) {
 	*/	
 			Common.clickElement("xpath", "//button[@title='Save Address']");
 			Sync.waitElementPresent("xpath", "//div[@class='relative flex w-full']//span");
-			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@class='relative flex w-full']//span").getText();
 			String shippingaddress = Common
 					.findElement("xpath", "(//address[@class='not-italic'])[2]").getText();
@@ -16734,6 +16737,10 @@ public String create_account(String Dataset) {
 				data.get(Dataset).get("Confirm Password"));
 		System.out.println(data.get(Dataset).get("Confirm Password"));
 		Thread.sleep(4000);
+		if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+		{
+		Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+		}
 		Common.clickElement("xpath", "//button[@title='Sign Up']");
 		Thread.sleep(2000);
 		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();

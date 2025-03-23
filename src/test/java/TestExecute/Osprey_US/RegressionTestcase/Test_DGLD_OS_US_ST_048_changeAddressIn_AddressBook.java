@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
+import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_OS_US_ST_048_changeAddressIn_AddressBook {
@@ -14,7 +15,7 @@ public class Test_DGLD_OS_US_ST_048_changeAddressIn_AddressBook {
 		GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Address Book");
 
 		@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-		public void changeAddressIn_AddressBook () throws Exception {
+		public void Verifying_changeAddressIn_AddressBook () throws Exception {
 
 			try {
 				Osprey_ReEu.verifingHomePage();
@@ -34,7 +35,7 @@ public class Test_DGLD_OS_US_ST_048_changeAddressIn_AddressBook {
 		
 		@AfterTest
 		public void clearBrowser() {
-//			Common.closeAll();
+			Common.closeAll();
 
 		}
 
