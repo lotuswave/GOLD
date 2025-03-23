@@ -7769,8 +7769,12 @@ public void Navigate_back_to_Shoppingcart_page(String Dataset) {
 	// TODO Auto-generated method stub
 
 	try {
-		Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
-		Common.clickElement("xpath", "//span[text()='Back to Cart']");
+		if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
+		{
+			Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
+		}
+		Sync.waitElementVisible(30, "xpath", "//span[text()='Back To Cart']");
+		Common.clickElement("xpath", "//span[text()='Back To Cart']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
 		Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -7815,7 +7819,14 @@ public void Continue_Shopping() {
 		Common.clickElement("xpath", "//span[text()='Continue Shopping']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		verifingHomePage();
+		int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
+		System.out.println(size);
+		System.out.println(Common.getPageTitle());
+		Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Backpacks"),
+				"validating store logo on the homwpage",
+				"System directs the user to the Homepage and store logo should display",
+				"Sucessfully user navigates to the home page and logo has been displayed",
+				"Failed to navigate to the homepage and logo is not displayed");
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating store logo on the homwpage",
@@ -8068,49 +8079,55 @@ public void Continue_Shopping() {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
-			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
-			Common.clickElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='firstname' and @data-form='billing']", data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
-			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
+			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "css", "label[for='billing-as-shipping']");
+			Common.clickElement("css", "label[for='billing-as-shipping']");
+			
+			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
+			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
+           
+ 
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
+					data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='city' and @data-form='billing']", data.get(dataSet).get("City"));
+			
+			
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
-			 if(Common.getCurrentURL().contains("gb"))
-             {
-				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-				 
-             }
-			 else
-			 {
-				 Common.scrollIntoView("xpath", "//select[@name='region' and @data-form='billing']");
-                 Common.dropdown("xpath", "//select[@name='region' and @data-form='billing']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                 Thread.sleep(3000);
-                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region' and @data-form='billing']")
-                         .getAttribute("value");
-                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
-	              System.out.println(Shipping);
-                 System.out.println(Shippingvalue);
-			 }
-				
+			Thread.sleep(4000);
+			try {
+				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
 			Thread.sleep(2000);
-			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
-					data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//input[@name='telephone' and @data-form='billing']");
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
+		
+			Common.textBoxInput("xpath", "//input[@id='billing-postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
+			Thread.sleep(4000);
+			Common.clickElement("css", "label[for='billing-save']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//button[normalize-space()='Save']");
+			Sync.waitPageLoad();
+			Thread.sleep(5000);
+			 update = Common.findElement("xpath", "//select[@id='address-list']//option[last()]").getText();
+			System.out.println(update);
+			Common.assertionCheckwithReport(update.contains("844 N Colony Rd"),
+					"verifying the Billing address form in payment page",
+					"Billing address should be saved in the payment page",
+					"Sucessfully Billing address form should be Display ",
+					"Failed to display the Billing address in payment page");
 
 		}
 			else {
@@ -8137,16 +8154,16 @@ public void Continue_Shopping() {
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
-			Common.clickElement("xpath", "//a[@title='My Account']");
-			Common.scrollIntoView("xpath", "(//address[@class='not-italic']//br)[1]");
-			String Address = Common.findElement("xpath", "(//address[@class='not-italic']//br)[1]")
+			Sync.waitElementPresent("css", "a[class='order-number link link-primary']");
+			Common.clickElement("css", "a[class='order-number link link-primary']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			Common.scrollIntoView("xpath", "//p[text()='Billing Address']//parent::div//div/br[1]");
+			String Address = Common.findElement("xpath", "//p[text()='Billing Address']//parent::div//div/br[1]")
 					.getText().trim();
 			System.out.println(Address);
 			System.out.println(Dataset);
-			Common.assertionCheckwithReport(Address.contains(Dataset) || Dataset.contains("935 The Horsley Dr"),
+			Common.assertionCheckwithReport(Address.contains(Dataset) || Dataset.contains("844 N Colony Rd"),
 					"verifying the Billing address form in Address book",
 					"Billing address should be saved in the Address book",
 					"Sucessfully Billing address form should be Displayed in the Address book",
