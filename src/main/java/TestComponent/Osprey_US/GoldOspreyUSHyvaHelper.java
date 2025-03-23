@@ -14435,6 +14435,10 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 				System.out.println(responcecode);
 				Common.refreshpage();
 				System.out.println(responcecode);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
 
 				if (responcecode == 200) {
 					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
@@ -14445,7 +14449,7 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 					j++;
 
 					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 40 error",
+							"page configured with products ", "unable to find page it showing 404 error",
 							Common.getscreenShotPathforReport("link" + i));
 
 				}
@@ -14466,7 +14470,7 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 					j++;
 
 					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 40 error",
+							"page configured with products ", "unable to find page it showing 404 error",
 							Common.getscreenShotPathforReport("link" + i));
 
 				}
