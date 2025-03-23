@@ -13698,8 +13698,12 @@ public void warrenty_return() {
 		}
 		else
 		{
-			Common.scrollIntoView("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
-			Common.clickElement("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
+			Common.scrollIntoView("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[@title='Need a Part Replacement?']");
+			Common.clickElement("xpath", "//div[contains(@class,'footer-grid-osprey')]//a[@title='Need a Part Replacement?']");
 			String Url=Common.getCurrentURL();
 			System.out.println(Url);
 			Common.scrollIntoView("xpath", "(//div[@class='pagebuilder-button-primary'])[2]");
