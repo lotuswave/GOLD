@@ -5738,13 +5738,17 @@ return Number;
 			Sync.waitElementPresent("id", "oar_email");
 			Common.textBoxInput("id", "oar_email", data.get(dataSet).get("BillingEmail"));
 
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Sync.waitElementPresent("xpath", "//button[@type='submit']//span[text()='Search']");
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Search']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String orderid = Common.findElement("xpath", "//span[@class='title-xs md:title-lg']) ").getText();
+			String orderid = Common.findElement("xpath", "//span[@class='title-xs md:title-lg']").getText();
 			System.out.println(orderid);
-			String ID=Common.findElement("xpath", "//span[@class='title-xs md:title-lg']) ").getText().replace("Order #", "");
+			String ID=Common.findElement("xpath", "//span[@class='title-xs md:title-lg']").getText().replace("Order #", "");
 			System.out.println(ID);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains(orderid) || ID.equals(ordernumber), "verifying order status form",
 					
@@ -12287,21 +12291,22 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
 			Thread.sleep(2000);
 			Sync.waitForLoad();
-			String video = Common.findElement("xpath", "//button[@aria-label='Pause video']")
-					.getAttribute("aria-label");
+			Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
+			String video = Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']")
+					.getAttribute("aria-labelledby");
 			System.out.println(video);
-			Common.assertionCheckwithReport(video.equals("Pause video"), "validating the video in PDP page",
+			Common.assertionCheckwithReport(video.equals("play-button"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
-			Sync.waitElementPresent(40, "xpath", "//button[@aria-label='Pause video']");
-			Common.clickElement("xpath", "//button[@aria-label='Pause video']");
-			String video1 = Common.findElement("xpath", "//button[@aria-label='Play video']")
-					.getAttribute("aria-label");
+			Sync.waitElementPresent(40, "xpath", "(//button[@aria-labelledby='play-button-tooltip'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-labelledby='play-button-tooltip'])[1]");
+			String video1 = Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']")
+					.getAttribute("aria-labelledby");
 			System.out.println(video);
-			Common.assertionCheckwithReport(video1.equals("Play video"), "validating the video in PDP page",
+			Common.assertionCheckwithReport(video1.equals("play-button"), "validating the video in PDP page",
 					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
 					"failed to Pause the video in PDP page");
-			
+			Common.switchToDefault();
 			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//img[@alt='Sustainable design']");
 			Sync.waitElementPresent("xpath", "//img[@alt='Sustainable design']");
