@@ -8472,6 +8472,10 @@ public void Continue_Shopping() {
 				Common.clickElement("xpath", "//img[contains(@alt,'" + products + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
 //				String PLPprice = Common
 //						.findElement("xpath",
 //								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper ']")
