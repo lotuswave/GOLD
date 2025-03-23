@@ -6753,13 +6753,14 @@ return Number;
 
 			else {
 				try {
-//					Thread.sleep(3000);
-//					if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
-//					{
+					Thread.sleep(400);
+					if(Common.findElements("xpath", "//div[@x-ref='address-confirmation-modal-billing']").size()>0)
+					{
 //						Sync.waitElementVisible(60,"xpath", "//div[@x-ref='address-confirmation-modal-billing']");
-//						Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered')])[2]");
-//						Common.clickElement("xpath","(//button[contains(text(),'Use as Entered')])[2]");
-//					}
+						Thread.sleep(3000);
+						Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered')])[2]");
+						Common.clickElement("xpath","(//button[contains(text(),'Use as Entered')])[2]");
+					}
 					Common.findElements("xpath", "(//div[contains(@x-data,'termsAndConditionsComponent')])[2]");
 					Common.clickElement("xpath", "(//label[contains(text(),'I accept Osprey')])[3]");
 					Thread.sleep(5000);
@@ -12585,15 +12586,15 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 	// TODO Auto-generated method stub
 	try {
 
-		Sync.waitElementPresent("xpath", "//button[@aria-label='Remove from Wish List']");
-		Common.javascriptclickElement("xpath", "//button[@aria-label='Remove from Wish List']");
+		Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Favorites']");
+		Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Favorites']");
 		Thread.sleep(6000);
 		int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
 		System.out.println(Size);
 		if (Size > 0) {
 
-			Sync.waitElementPresent("xpath", "(//button[@title='Add to Cart'])[1]");
-			Common.javascriptclickElement("xpath", "(//button[@title='Add to Cart'])[1]");
+			Sync.waitElementPresent("xpath", "(//*[text()='Add To List'])[1]");
+			Common.javascriptclickElement("xpath", "(//*[text()='Add To List'])[1]");
 
 		} else {
 			int Error = Common.findElements("xpath", "//div[@class='a-message__container-inner']").size();
