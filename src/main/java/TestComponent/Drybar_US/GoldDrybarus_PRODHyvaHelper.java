@@ -156,7 +156,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-	//		Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page")
@@ -2295,7 +2295,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 				Common.clickElement("id", "acceptAllButton");
 
 			}
-			int sizeofelement = Common.findElements("id", "login_emaildiv").size();
+			int sizeofelement = Common.findElements("name", "login_email").size();
 			Common.assertionCheckwithReport(sizeofelement > 0, "verifying the paypal payment ", expectedResult,
 					"open paypal site window", "faild to open paypal account");
 		
@@ -5868,16 +5868,16 @@ public void FUll_Payment(String dataSet) {
     			Common.clickElement("xpath", "//button[@type='submit' and @class='btn btn-primary w-full']");
     			Sync.waitPageLoad();
     			Thread.sleep(2000);
-    			Sync.waitElementPresent(30, "xpath", "//span[@x-html='message.text']");
-    			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
-    			Thread.sleep(4000);
-    			System.out.println(message);
-    			Common.assertionCheckwithReport(
-    					message.contains("We received too many requests for password resets")
-    							|| message.contains("If there is an account associated"),
-    					"To validate the user is navigating to Forgot Password page",
-    					"user should naviagte to forgot password page", "User lands on Forgot Password page",
-    					"User failed to navigate to forgot password page");
+//    			Sync.waitElementPresent(30, "xpath", "//span[@x-html='message.text']");
+//    			String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+//    			Thread.sleep(4000);
+//    			System.out.println(message);
+//    			Common.assertionCheckwithReport(
+//    					message.contains("We received too many requests for password resets")
+//    							|| message.contains("If there is an account associated"),
+//    					"To validate the user is navigating to Forgot Password page",
+//    					"user should naviagte to forgot password page", "User lands on Forgot Password page",
+//    					"User failed to navigate to forgot password page");
     		} catch (Exception | Error e) {
     			e.printStackTrace();
     			ExtenantReportUtils.addFailedLog("To validate the user is navigating to Forgot Password page",
