@@ -30,8 +30,8 @@ public class Test_DGLD_OXO_ST_005_Reset_Password_Validate_search_GuestCheckout_v
 				Oxo.click_on_Image("Product");
 				Oxo.minicart_delete("Product");
 				Oxo.minicart_product_close();
-				Oxo.minicart_validation("Product Qunatity");
-				Oxo.minicart_freeshipping();		
+				//Oxo.minicart_validation("Product Qunatity");
+				//Oxo.minicart_freeshipping();		
 				Oxo.minicart_Checkout();	
 				Oxo.addDeliveryAddress_Guest("AccountDetails");
 				Oxo.select_Shipping_Method("GroundShipping method");

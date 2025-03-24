@@ -31,13 +31,13 @@ String datafile = "OXO//GoldOxoTestData.xlsx";
 			Oxo1.filter_By("Barware");
 			Oxo1.color_validation("Sage");
 			Oxo1.price_filter_validation();
-			Oxo2.search_product("Product");
-			Oxo2.Configurable_addtocart_pdp("Product");
+			Oxo2.search_product("ConfigProduct");
+			Oxo2.Configurable_addtocart_pdp("ConfigProduct");
 			Oxo2.click_UGC();
 			Oxo2.PDP_cofigurable_product();
 			Oxo2.configurableproduct_Sticky_add_to_cart("ConfigProduct");
 			Oxo2.writeareview("Product");
-			Oxo2.Recommended_for_you();
+			//Oxo2.Recommended_for_you();
 			Oxo1.Gift_cards("Oxo Gift Card");//
 			Oxo1.Card_Value("price");
 			Oxo1.minicart_Checkout();

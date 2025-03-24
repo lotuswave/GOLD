@@ -41,7 +41,7 @@ public class Test_DGLD_OXO_ST_001_Create_Account_Validation_Checkout_Simple_Conf
 			Oxo.After_Pay_payment("Afterpay");
 			Oxo.Kalrna_Payment("Klarna Visa Payment");
 			Oxo.Shoppingcart_page();
-			Oxo.deleteProduct_shoppingcart();
+			//Oxo.deleteProduct_shoppingcart();
 			
 
 		} catch (Exception e) {

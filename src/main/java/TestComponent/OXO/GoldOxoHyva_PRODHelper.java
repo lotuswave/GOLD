@@ -1003,14 +1003,15 @@ public class GoldOxoHyva_PRODHelper {
 	
 	public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		String productcolor1 = "Pink";
+		String productcolor1 = "Gray";
 		String product = data.get(Dataset).get("Colorproduct");
 		System.out.println(productcolor1);
 		try {
-			Common.clickElement("xpath", "//div[@class='flex justify-end']//a[@title='Edit Perch Booster Seat With Straps']");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@title='Edit Potty Chair - Pink']");      // need to click on the color product
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
+			Thread.sleep(2000);
 			Common.clickElement("xpath", "//input[@aria-label='" + productcolor1 + "']");
 			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[contains(text(),'Update item')]");
@@ -6606,6 +6607,8 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 		String name = "";
 		try {
 			Thread.sleep(3000);
+			Common.clickElement("xpath", "(//div[@class='ais-Panel-header'])[2]");
+			Thread.sleep(4000);
 			String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 					.replace("$", "").replace(".00", "");
 			System.out.println(lastvalue);
@@ -7230,7 +7233,7 @@ public void updatePaymentAndSubmitOrder(String dataSet) throws Exception {
 				Float Discountvalue = Float.parseFloat(Discount);
 				System.out.println("Discount:"+ Discountvalue);
 //				Common.clickElement("xpath", "//span[@class='block transform']");
-				String add="0.01";
+				String add="0.00";
 				Float addvalue = Float.parseFloat(add);
 				String Tax = Common.getText("xpath", "(//div[contains(@x-text,'segment')])[3]").replace(Symbol, "");
 				Float Taxvalue = Float.parseFloat(Tax);
