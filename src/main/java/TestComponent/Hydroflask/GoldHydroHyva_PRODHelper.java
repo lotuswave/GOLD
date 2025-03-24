@@ -81,7 +81,7 @@ public class GoldHydroHyva_PRODHelper {
 	public void verifingHomePage() {
 		try {
 			Sync.waitPageLoad();
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+			int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 			Common.assertionCheckwithReport(
 					size > 0 && Common.getPageTitle().contains("Home Page")
 							|| Common.getPageTitle().contains("Hydro Flask"),
