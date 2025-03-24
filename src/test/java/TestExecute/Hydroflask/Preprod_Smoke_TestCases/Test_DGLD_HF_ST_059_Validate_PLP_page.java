@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Preprod_Smoke_TestCases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,18 +9,24 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_074_Forgot_password_from_SignIn_page {
+public class Test_DGLD_HF_ST_059_Validate_PLP_page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile, "DataSet");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Forgot_password_from_SignIn_page() throws Exception {
+	public void Validate_PLP () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.Forgot_password("AccountDetails");
+			Hydro.bottle_Accessories_headerlinks("Accessories");
+			Hydro.view_PLP_page();
+			Hydro.sort_By("SortBy");
+			Hydro.filter_By("Accessories");
+			Hydro.color_validation("Black");
+			Hydro.price_filter_validation();
+			 
+			
 
 		} catch (Exception e) {
 
@@ -37,9 +43,9 @@ public class Test_DGLD_HF_ST_074_Forgot_password_from_SignIn_page {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-		Login.signIn();
-		Hydro.close_add();
-		Hydro.acceptPrivacy();
+        Login.signIn();
+        Hydro.close_add();
+        Hydro.acceptPrivacy();
 
 	}
 

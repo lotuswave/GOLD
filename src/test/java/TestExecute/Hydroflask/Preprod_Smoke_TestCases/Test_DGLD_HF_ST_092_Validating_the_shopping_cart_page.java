@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Preprod_Smoke_TestCases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,20 +9,31 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_125_Guest_User_checkout_with_Express_paypal {
+public class Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_User_checkout_with_Express_paypal () throws Exception {
+	public void Validating_the_shopping_cart_page() throws Exception {
 
 		try {
-			Hydro.verifingHomePage();
+			Hydro.verifingHomePage();    
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
+			Hydro.addtocart("Product"); 
+			Hydro.click_minicart();
+			Hydro.minicart_viewcart();
+			Hydro.Remove_Product("Product");
+			Hydro.update_shoppingcart("Product Qunatity");
 			Hydro.minicart_Checkout();
-			Hydro.Express_Paypal("PaypalDetails");
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("GroundShipping method");
+            Hydro.Shoppingcart_page();
+			Hydro.minicart_ordersummary_discount("Discount");
+		    
+		    
 			
 		} catch (Exception e) {
 
@@ -42,6 +53,7 @@ public class Test_DGLD_HF_ST_125_Guest_User_checkout_with_Express_paypal {
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();
+
 	}
 
 }

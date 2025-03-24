@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Preprod_Smoke_TestCases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,25 +9,20 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment {
+public class Test_DGLD_HF_ST_003_Create_Account_Validation {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_user_Checkout_Klarna_Payment() throws Exception {
+	public void Validating_Create_Account() throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.search_product("Product");   
-			Hydro.addtocart("Product");
-			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.Guest_Kalrna_Payment("Klarna Visa Payment");
-          
-            
+			Hydro.click_Createaccount();
+			Hydro.createaccount_verfication("Invalid details");
+            Hydro.create_account("New Account Details");
+			
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -43,9 +38,9 @@ public class Test_DGLD_HF_ST_028_Guest_user_Checkout_Klarna_Payment {
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-       Login.signIn();
-       Hydro.close_add();
-       Hydro.acceptPrivacy();
+         Login.signIn();
+         Hydro.close_add();
+         Hydro.acceptPrivacy();
 
 	}
 

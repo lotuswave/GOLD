@@ -1,4 +1,4 @@
-package TestExecute.Hydroflask.regressionTestcase;
+package TestExecute.Hydroflask.Preprod_Smoke_TestCases;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,40 +9,36 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
+public class Test_DGLD_HF_ST_107_My_Account_Page_Validation {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"FooterLinks");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Account page");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Footer_Links_Validation () throws Exception {
+	public void Validating_My_Account_Page () throws Exception {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.Kustomer_Links("Kustomer");
-			Hydro.Footer_Links("Footer");
-			Hydro.Footer_validation("Breadcrumbs");
-			Hydro.Footer_Dogood("Do Good");
-			Hydro.Terms_and_privacy();
-			
-			} catch (Exception e) {
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.Account_page_Validation("Account");
+
+		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
 
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
-
 	}
 
 	@BeforeTest
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Hydroflask\\config.properties");
-        Login.signIn();
-        Hydro.close_add();
+		Login.signIn();
+		Hydro.close_add();
         Hydro.acceptPrivacy();
 
 	}
