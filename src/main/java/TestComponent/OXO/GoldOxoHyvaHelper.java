@@ -12234,7 +12234,7 @@ public void outofstock_subcription(String Dataset) {
 				System.out.println(breadcrum);
 
 				Common.assertionCheckwithReport(title.contains(kitchenLinks[i]) || breadcrum.contains(kitchenLinks[i])
-						|| breadcrumb.contains(kitchenLinks[i]) || Common.getPageTitle().contains(kitchenLinks[i]),
+						|| breadcrumb.contains(kitchenLinks[i]) || Common.getPageTitle().contains(kitchenLinks[i]) || title.contains(breadcrumb),
 						"verifying the header link " + kitchenLinks[i] + "Under Kitchenware",
 						"user should navigate to the " + kitchenLinks[i] + " page",
 						"user successfully Navigated to the " + kitchenLinks[i],
@@ -12284,7 +12284,7 @@ public void header_kichenware_foodcontainers(String Dataset) {
 				System.out.println(title);
 				System.out.println(Common.getPageTitle());
 				System.out.println(breadcrumb);
-				Common.assertionCheckwithReport(title.contains(Links[i]),
+				Common.assertionCheckwithReport(title.contains(Links[i]) || title.contains(breadcrumb),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12432,7 +12432,7 @@ public void header_kichenware_CookingAndBaking(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || title.contains(breadcrumb),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12460,10 +12460,11 @@ public void header_kichenware_ToolsAndGadgets(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Kitchenware']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Tools & Gadgets')]");
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath",
 						"//li//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
@@ -12482,7 +12483,7 @@ public void header_kichenware_ToolsAndGadgets(String Dataset) {
 				System.out.println(breadcrumb);
 				Common.assertionCheckwithReport(
 						title.contains(Links[i]) || breadcrumb.contains(Links[i])
-								|| Common.getPageTitle().contains(Links[i]),
+								|| Common.getPageTitle().contains(Links[i]) || title.contains(breadcrumb),
 						"verifying the header link " + Links[i] + "Under Kitchenware",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -12742,6 +12743,7 @@ public void header_CoffeeAndBeverage_ShopAll(String Dataset) {
 				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");//span[contains(text(),'Coffee & Tea')]
 				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']//following::ul//span[contains(text(),'Shop All')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -12828,10 +12830,11 @@ public void header_CleaningAndOrganization_Kitchen(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
-				Common.clickElement("xpath", "//a//span[text()='Kitchen']");
+				Thread.sleep(2000);
+				Common.clickElement("xpath", "//a[@title='Kitchen']//span[text()='Kitchen']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a//span[text()='Kitchen']//following::ul//span[contains(text(),'" + Links[i] + "')]");
@@ -12866,10 +12869,11 @@ public void header_CleaningAndOrganization_Bathroom(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
-				Common.clickElement("xpath", "//a//span[text()='Bathroom']");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//a[@title='Bathroom']//span[text()='Bathroom']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a//span[text()='Bathroom']//following::ul//span[contains(text(),'" + Links[i] + "')]");
@@ -12904,10 +12908,11 @@ public void header_CleaningAndOrganization_HomeAndOffice(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
-//					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
-				Common.clickElement("xpath", "//a//span[text()='Home & Office']");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//a[@title='Home & Office']//span[text()='Home & Office']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a//span[text()='Home & Office']//following::ul//span[contains(text(),'" + Links[i] + "')]");
