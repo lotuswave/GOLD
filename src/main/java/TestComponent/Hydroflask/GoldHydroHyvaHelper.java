@@ -4409,11 +4409,11 @@ public void Remove_GiftCode() {
 				Common.dropdown("xpath", "//select[@id='region_id']", SelectBy.TEXT, data.get(Dataset).get("Region"));
 				Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 				Common.textBoxInput("xpath", "//input[@id='address_telephone']", data.get(Dataset).get("phone"));
-				
+				Sync.waitElementPresent(30, "id", "submit.save");
 				Common.clickElement("id", "submit.save");
 				Sync.waitPageLoad();
-//		        Thread.sleep(4000);
-				String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
+				String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 						"validating the gift registery page navigation ",
 						"After clicking on save button It should be able to navigate to the gift registry page ",
@@ -4564,9 +4564,8 @@ public void Remove_GiftCode() {
 			Common.scrollIntoView("xpath", "//input[@id='address_postcode']");
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
-//			Sync.waitPageLoad();
-//			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+			Sync.waitElementPresent(40,"xpath", "//div[@ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
 					"After clicking on save button It should be able to navigate to the gift registry page ",
@@ -4838,9 +4837,9 @@ public void Remove_GiftCode() {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
+			Sync.waitElementPresent(60,"xpath", "//div[@id='cart-drawer-title']/span/span");
 			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
-			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
+			Sync.waitElementPresent(30,"xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
 			Common.assertionCheckwithReport(

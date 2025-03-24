@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.GoldHydroHyvaHelper;
+import TestComponent.Hydroflask.GoldHydroHyva_PRODHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"FooterLinks");
+	GoldHydroHyva_PRODHelper Hydro = new GoldHydroHyva_PRODHelper(datafile,"FooterLinks");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Footer_Links_Validation () throws Exception {

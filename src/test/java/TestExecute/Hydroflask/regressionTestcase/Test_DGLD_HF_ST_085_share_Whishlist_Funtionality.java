@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_085_share_Whishlist_Funtionality {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails_2");
 			Hydro.My_Favorites();
 			Hydro.share_whishlist("share whishlist");
 			
