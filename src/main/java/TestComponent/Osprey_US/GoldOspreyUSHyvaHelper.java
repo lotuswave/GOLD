@@ -8662,9 +8662,9 @@ public void Continue_Shopping() {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[contains(@itemprop ,'image')]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -13808,8 +13808,8 @@ public void contactUsPage(String dataSet) throws Exception {
 		Sync.waitElementPresent("xpath", "//div[text()='United States']");
 		Common.clickElement("xpath", "//div[text()='United States']");*/
 
-		Sync.waitElementPresent("xpath", "//input[@name='conversationStateforforms']");
-		Common.clickElement("xpath", "//input[@name='conversationStateforforms']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationStateforforms']");
+		Common.clickElement("xpath", "//div[@id='conversationStateforforms']");
 //        Common.textBoxInput("xpath", "//input[@name='conversationStateforforms']", state);
     	Common.clickElement("xpath", "//div[text()='"+ state +"']");
 	/*	Sync.waitElementPresent("xpath", "//div[text()='"+ state+"']");
@@ -13853,6 +13853,8 @@ public void contactUsPage(String dataSet) throws Exception {
 			Common.clickElement("xpath", "//button[text()='Submit']");
 		}
 */
+		Common.clickElement("xpath", "//input[@name='emailOptIn']");
+		Thread.sleep(3000);
 		Common.scrollIntoView("xpath", "//button[text()='Submit']");
 		Common.clickElement("xpath", "//button[text()='Submit']");
 		
