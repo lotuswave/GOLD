@@ -1,7 +1,7 @@
 <suite name="Gold-Oxo Regression Suite">
 >
 <listeners>
-<listener class-name="Utilities.TestListener"/>
+<listener class-name="Utilities.TestListener"/>          
 </listeners>
 <test name="Test_DGLD_OXO_ST_001_Guest_User_Checkout_Funtionality_Visa_Card" testid="DQA-148" priority="P1" description="This test case is to verify the flow of placing order functionality with VISA CC Payment method as Guest User">
 <classes>
