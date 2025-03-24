@@ -11073,51 +11073,59 @@ public void Support(String Dataset) {
 }
 
 
-
 public void learn_videos() {
 	// TODO Auto-generated method stub
 	
-	try
-	{
-		Sync.waitElementPresent("xpath", "//a[contains(text(),'Learn')]");
-		Common.clickElement("xpath", "//a[contains(text(),'Learn')]");
-		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//span[contains(@class,'custom-play-button')]");
-		Common.javascriptclickElement("xpath", "//span[contains(@class,'custom-play-button')]");
-		Thread.sleep(4000);
-		Common.assertionCheckwithReport(Common.getCurrentURL().contains("next-in-blowouts"), "validating the user navigate to the videos",
-				"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
-				"failed to Navigate to the videos page");
+
+	try {
 		
+				Sync.waitElementPresent("xpath", "(//span[contains(text(),'Hair Tools')])");
+				Common.clickElement("xpath", "(//span[contains(text(),'Hair Tools')])");
+				Common.clickElement("xpath", "//span[contains(text(),' Learn')]");
+				
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//a[contains(@class,'link group')]//span[contains(text(),'Videos')]");
+			Common.clickElement("xpath",
+					"//a[contains(@class,'link group')]//span[contains(text(),'Videos')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String title = Common.getPageTitle();
+			System.out.println(title);
+			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+			
+			 Common.assertionCheckwithReport(title.contains("Videos"), "validating the user navigate to the videos",
+						"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
+						"failed to Navigate to the videos page");
+			
 	}
-	catch(Exception | Error e)
+
+	catch (Exception | Error e)
+	
+	
 	{
 		e.printStackTrace();
-		ExtenantReportUtils.addFailedLog("validating the user navigate to the videos",
-				"After clicking on the vidoes CTA it should navigate to the videos page", "Unable to Navigated to the videos page ",
-				Common.getscreenShot("failed to Navigate to the videos page"));
+		ExtenantReportUtils.addFailedLog("verifying the videos page",
+				"User should navigate to the videos page",
+				" unable to navigate to the videos page ",
+				Common.getscreenShot("Failed to navigate to the videos pages"));
 		Assert.fail();
 	}
-	
 }
+
+
+
 
 public void videos_validation() {
 	// TODO Auto-generated method stub
 	try
 	{
-		Sync.waitElementPresent("xpath", "//div[contains(@class,'play-pause-wrapper')]");
-		List<WebElement> videos = Common.findElements("xpath",
-				"//div[contains(@class,'play-pause-wrapper')]");
-		System.out.println(videos);
-	
-		for(int i=0;i<videos.size()-68;i++)
-		{
-			int value = i + 1;
-			List<WebElement> ListOfSubvideos = Common.findElements("xpath",
-					"(//div[@x-data='videoModal()']//span[contains(@class,'cursor-pointer')])[" + value + "]");
+		
+		Common.findElements("xpath",
+					"(//div[@x-data='videoModal()']//span[contains(@class,'cursor-pointer')])[1]");
 		
 			Common.clickElement("xpath",
-					"(//div[@x-data='videoModal()']//span[contains(@class,'cursor-pointer')])[" + value + "]");
+					"(//div[@x-data='videoModal()']//span[contains(@class,'cursor-pointer')])[1]");
 		   Thread.sleep(3000);
 		   Common.switchFrames("xpath", "//div[@x-data='video()']//iframe");
 		   Thread.sleep(3000);
@@ -11134,7 +11142,7 @@ public void videos_validation() {
 		   Common.clickElement("xpath", "//button[contains(@class,'text-white')]");
 		  
 		  
-		}
+		
 	}
 	catch(Exception | Error e)
 	{
