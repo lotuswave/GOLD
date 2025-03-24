@@ -24,7 +24,7 @@ public class Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_D
 			Oxo.Usersignin("AccountDetails");
 			Oxo.Account_page_Validation("Account");
 			Oxo.search_product("Product");
-			Oxo.addtocart_PLP("Product");
+			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
@@ -43,7 +43,7 @@ public class Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_D
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
