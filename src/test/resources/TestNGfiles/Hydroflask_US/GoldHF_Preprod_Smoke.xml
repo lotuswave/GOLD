@@ -39,7 +39,6 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_125_Guest_User_checkout_with_Express_paypal"/>
 </classes>
 </test>
-
 <test name="Test_DGLD_HF_ST_032_Header_Links_Validation" testid="DQA-165" priority="P1" description="This script will cover header links validation">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_032_Header_Links_Validation"/>
