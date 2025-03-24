@@ -6087,18 +6087,18 @@ public void FUll_Payment(String dataSet) {
 //    						.findElement("xpath","//div[@class='m-product-overview__prices']//span[contains(@class,'price-wrapper')]")
 //    						.getAttribute("data-price-amount");
     				
-    				String PLPprice = Common
-    						.findElement("xpath","(//span[contains(@id,'product-price')]//span)[4]").getText().replace(symbol,"").replace(".00", "");
+    				String PDPprice = Common.findElement("xpath","(//span[@x-html='getFormattedFinalPrice()'])[1]").getText().replace(symbol,"").replace(".00", "");
     				
-    				System.out.println(PLPprice);
+    				System.out.println(PDPprice);
     				System.out.println(productprice);
     				String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
  
-    				Common.assertionCheckwithReport(productprice.equals(PLPprice),
+   				Common.assertionCheckwithReport(productprice.equals(PDPprice),
     						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
     						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
+
     				if(Common.getCurrentURL().contains("/gb"))
     				{
     					System.out.println(name);

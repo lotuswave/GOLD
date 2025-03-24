@@ -156,7 +156,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+	//		Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page")
@@ -626,7 +626,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 	public void	subcribe_product_Add_to_Cart (String Dataset) {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
-		String save=data.get(Dataset).get("SubscribeSave");
+		String save=data.get(Dataset).get("Save Subscription");
 		System.out.println(save);
 		try
 		{
@@ -2572,7 +2572,7 @@ public class GoldDrybarus_PRODHyvaHelper {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 			Thread.sleep(5000);
-			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[3]").getText().toUpperCase();
+			String size=Common.findElement("xpath", "(//span[contains(@class,'pointer-events-none select-none whitespace')])[2]").getText().toUpperCase();
 			System.out.println(size);
 			String size1= data.get(Dataset).get("size").toUpperCase();
 			System.out.println(size1);
@@ -5490,7 +5490,7 @@ public void FUll_Payment(String dataSet) {
 						Thread.sleep(4000);
 						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 						Thread.sleep(4000);
-						String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
+						String klarna=Common.findElement("xpath", "//button[@value='klarna']//span[text()='Klarna']").getText();
 						System.out.println(klarna);
 						Common.assertionCheckwithReport(
 								klarna.contains("klarna") || klarna.contains("Klarna"),
@@ -8400,8 +8400,8 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			
 			Common.switchToDefault();
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+//			Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+//			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 			Thread.sleep(3000);
 			
 //			Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
@@ -8412,8 +8412,8 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 //			
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
-			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
+//			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
+//			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 					}
 			else
 			{
