@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF System Testcase Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	
+    <test name="Test_DGLD_HF_ST_067_Guest_User_Checkout_with_Text_Engraving_product" testid="DQA-197" priority="P1" description="This script will cover Guest User Checkout with Text Engraving product">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_067_Guest_User_Checkout_with_Text_Engraving_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_068_Register_User_Checkout_with_Text_Engraving_product" testid="DQA-195" priority="P1" description="This script will cover Register User Checkout with Text Engraving product">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_068_Register_User_Checkout_with_Text_Engraving_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_086_Guest_User_Checkout_with_My_Hydro_Customize_product" testid="DQA-382" priority="P1" description="This script will cover validating the Guest User Checkout with My Hydro Customize product">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_086_Guest_User_Checkout_with_My_Hydro_Customize_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_071_Checkout_with_RegisterUserCC_Engraving_and_Bundle" testid="DQA-217" priority="P1" description="This script will cover Checkout with RegisterUserCC Engraving and Bundle">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_071_Checkout_with_RegisterUserCC_Engraving_and_Bundle"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_108_Checkout_Guest_User_MyHydro_Engraving_with_PP" testid="DQA-223" priority="P1" description="This script will cover Checkout Guest User MyHydro Engraving with PP">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_108_Checkout_Guest_User_MyHydro_Engraving_with_PP"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_109_Checkout_Register_User_MyHydro_Engraving_with_Discover_Card" testid="DQA-238" priority="P1" description="This script will cover Checkout Register User MyHydro Engraving with Discover Card">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_109_Checkout_Register_User_MyHydro_Engraving_with_Discover_Card"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_112_Guest_User_Checkout_with_Graphic_Engraving_product" testid="DQA-201" priority="P1" description="This script will cover Guest User Checkout with Graphic Engraving product">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_112_Guest_User_Checkout_with_Graphic_Engraving_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_113_Register_User_Checkout_PP_with_Graphic_Engraving_product" testid="DQA-196" priority="P1" description="This script will cover Checkout Register User Checkout PP with Graphic Engraving product">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_113_Register_User_Checkout_PP_with_Graphic_Engraving_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_114_Guest_User_Myhydro_Graphic_Engraving" testid="DQA-267" priority="P1" description="This script will cover Guest User Myhydro Graphic Engraving">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_114_Guest_User_Myhydro_Graphic_Engraving"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_with_Text" testid="DQA-199" priority="P1" description="This script will cover Guest user Checkout Myhydro without engraving">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_116_Guest_user_Checkout_Myhydro_with_Text"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_118_Guest_User_simple_Engraving_Text" testid="DQA-237" priority="P1" description="Validating the checkout functionality with simple Text engraving">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_118_Guest_User_simple_Engraving_Text"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic" testid="DQA-234" priority="P1" description="Validating the checkout functionality with simple Graphic engraving">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_133_GuestUser_place_order_with_Klarna_simple_myhydro_configurable_inline_Engraving" testid="DQA-3841" priority="P1" description="This script will cover guest user place order with klarna simple my hydro configurable inline engraving">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_133_GuestUser_place_order_with_Klarna_simple_myhydro_configurable_inline_Engraving"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_121_Register_User_Customize_Multiple_line_Text" testid="DQA-232" priority="P1" description="Validating Register user Multi line text Engraving">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_121_Register_User_Customize_Multiple_line_Text"/>
+</classes>
+</test>
+
+
+        
+</suite>  

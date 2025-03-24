@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF System Testcase Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	<test name="Test_DGLD_HF_ST_016_guestCheckoutwith_invalid_CC_Credentials" testid="DQA-161" priority="P1" description="This script will cover guest Checkout with invalid CC Credentials">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_016_guestCheckoutwith_invalid_CC_Credentials"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_017_registeredUserCheckoutwith_invalid_CC_Credentials" testid="DQA-162" priority="P1" description="This script will cover registered User Checkout with invalid CC Credentials">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_017_registeredUserCheckoutwith_invalid_CC_Credentials"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr" testid="DQA-163" priority="P1" description="This script will cover Validation ShippingAddress form for GuestUesr">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_018_Validation_ShippingAddress_form_for_GuestUesr"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_022_changeAddressIn_AddressBook" testid="DQA-210" priority="P1" description="This script will cover validating change Address In AddressBook">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_022_changeAddressIn_AddressBook"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites" testid="DQA-174" priority="P1" description="This script will cover validating Add To Cart and Checkout from My Favorites">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_026_Pro_Deal_Application_for_Register_User" testid="DQA-172" priority="P1" description="This script will cover the Pro Deal application for registered users">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_026_Pro_Deal_Application_for_Register_User"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DQA-228" priority="P1" description="This script will cover validating Create share and Delete Gift Registery For Register User">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_037_Create_share_and_Delete_Gift_Registery_For_Register_User"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DQA-227" priority="P1" description="This script will cover validating Create Manageitems and invalid Details Gift Registery For Register User">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_038_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_042_Validate_Store_Locator" testid="DQA-244" priority="P1" description="This script will cover Validate Store Locator">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_042_Validate_Store_Locator"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_040_CorporatePurchasing_UserViews_CorporatePurchasingPage_and_Use_selects_NewCustomers_and_ExistingCustomers_and_ASI_PPAI_Customers_CTA" testid="DQA-233" priority="P1" description="This script will cover Validating the user views corporate purchasing page and user selects the new customer and existing customers ASI/PPAI customers CTA">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_040_CorporatePurchasing_UserViews_CorporatePurchasingPage_and_Use_selects_NewCustomers_and_ExistingCustomers_and_ASI_PPAI_Customers_CTA"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DQA-252" priority="P1" description="This script will cover validating Guest User Checkout With Different Billing and Different Shipping">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_045_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_047_Validate_ChatBot" testid="DQA-250" priority="P1" description="This script will cover validating ChatBot">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_047_Validate_ChatBot"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_051_Miscellaneous_Pages" testid="DQA-215" priority="P1" description="This script will cover Validating Miscellaneous_Pages">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_051_Miscellaneous_Pages"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_052_Validate_Country_Selector" testid="DQA-248" priority="P1" description="This script will cover validating Country Selector">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_052_Validate_Country_Selector"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_56_valiadating_DealerCentral_Page" testid="DQA-230" priority="P1" description="This script will cover validating Dealer Central User Views DealerCentral Page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_056_DealerCentral_Page"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_057_Category_Listing _Page" testid="DQA-249" priority="P1" description="This script will cover validating Category Listing Page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_057_Category_Listing_Page"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_058_Add_to_Cart_from_Sticky_Cart" testid="DQA-265" priority="P1" description="This script will cover validating Add to Cart from Sticky Cart">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_058_Add_to_Cart_from_Sticky_Cart"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_064_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products" testid="DQA-167" priority="P1" description="This script will cover validating the Guest checkout with simple, configurable, bundle products">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_064_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_085_share_Whishlist_Funtionality" testid="DQA-205" priority="P1" description="This script will cover validating share Whishlist Funtionality">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_085_share_Whishlist_Funtionality"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products" testid="DQA-203" priority="P1" description="This script will cover Checkout with Register User CC Simple Configurable Engraving Grouped My Hydro and Bundle products">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page" testid="DQA-252" priority="P1" description="This script will cover validating Validating the product video in PDP page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page" testid="DQA-189" priority="P1" description="This script will cover validating the shopping cart page">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_093_URL_verification_of_PDP" testid="DQA-239" priority="P1" description="This script will cover validating URL verification of PDP">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_093_URL_verification_of_PDP"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_101_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping" testid="DQA-226" priority="P1" description="This script will cover validating checkout PP with Multiple products with Discount samebilling and shipping">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_101_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_103_WebPageLinkValidation" testid="DQA-216" priority="P1" description="This script will cover WebPageLinkValidation">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_103_WebPageLinkValidation"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_105_Checkout_with_AMEX_as_Guestuser_with_PO_Box_2DAY" testid="DQA-219" priority="P1" description="This script will cover validating Checkout with AMEX as Guestuser with PO Box 2DAY">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_105_Checkout_with_AMEX_as_Guestuser_with_PO_Box_2DAY"/>
+</classes>
+</test>
+        
+</suite>  
