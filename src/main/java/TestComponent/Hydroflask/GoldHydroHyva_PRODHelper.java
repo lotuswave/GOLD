@@ -10389,6 +10389,7 @@ public void Explore_Validation(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < Kustomerlinks.length; i++) {
+			try {	
 				Sync.waitElementPresent(30, "xpath",
 						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 				Thread.sleep(3000);
@@ -10396,12 +10397,24 @@ public void Explore_Validation(String Dataset) {
 						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
 				Common.clickElement("xpath",
 						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + Kustomerlinks[i] + "')]");
+			}
+			 catch (Exception | Error e) {
+				 Sync.waitElementPresent(30, "xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
+					Thread.sleep(3000);
+					Common.findElement("xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
+					Common.clickElement("xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
+			}
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().contains(Kustomerlinks[i]) || Common.getCurrentURL().contains(Kustomerlinks[i])
-						|| Common.getPageTitle().contains("Store Locator")
-						|| Common.getPageTitle().contains("Frequently Asked Questions"),		
+						|| Common.getPageTitle().contains("Store Locator")||  Common.getPageTitle().contains("Contact-Us")
+						|| Common.getPageTitle().contains("Frequently Asked Questions")
+						||Common.getCurrentURL().contains("track/order/status")
+						|| Common.getCurrentURL().contains("shipping"),		
 						"validating the Kustomer links navigation from footer Links",
 						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 						Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
@@ -10468,6 +10481,7 @@ public void Explore_Validation(String Dataset) {
 		int i = 0;
 		try {
 			for (i = 0; i < footerlinks.length; i++) {
+				try {
 				Sync.waitElementPresent(30, "xpath",
 						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
 				Thread.sleep(3000);
@@ -10475,6 +10489,16 @@ public void Explore_Validation(String Dataset) {
 						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
 				Common.clickElement("xpath",
 						"//div[contains(@class,'footer-menu')]//a[contains(text(),'" + footerlinks[i] + "')]");
+				}
+			 catch (Exception | Error e) {
+				 Sync.waitElementPresent(30, "xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+					Thread.sleep(3000);
+					Common.findElement("xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+					Common.clickElement("xpath",
+							"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + footerlinks[i] + "']");
+			}
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				String Bread = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();

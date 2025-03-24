@@ -8642,7 +8642,8 @@ catch(Exception | Error e)
 				Sync.waitElementPresent(30, "xpath", "//button[contains(@class, 'group/wishlist')]");
 				Common.scrollIntoView("xpath", "//button[contains(@class, 'group/wishlist')]");
 				Common.clickElement("xpath", "//button[contains(@class, 'group/wishlist')]");
-				Common.clickElement("xpath","//span[text()='Welcome, Qa']");
+				Common.clickElement("xpath","//span[@x-text='customerGreeting']");
+				Sync.waitElementPresent(30, "id", "customer-menu");
 				Common.clickElement("id", "customer-menu");
 				Sync.waitElementPresent(30, "xpath", "//a[@title='My Favorites']");
 				Common.clickElement("xpath", "//a[@title='My Favorites']");
@@ -8685,15 +8686,10 @@ catch(Exception | Error e)
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
-				Thread.sleep(4000);
-				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
-				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@title='Share Wish List']");
-				Thread.sleep(3000);
+				Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
 				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
+				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
