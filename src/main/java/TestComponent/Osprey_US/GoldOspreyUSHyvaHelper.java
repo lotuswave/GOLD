@@ -12299,15 +12299,15 @@ catch(Exception | Error e)
 			String video = Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']")
 					.getAttribute("aria-labelledby");
 			System.out.println(video);
-			Common.assertionCheckwithReport(video.equals("play-button"), "validating the video in PDP page",
+			Common.assertionCheckwithReport(video.equals("play-button-tooltip"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
-			Sync.waitElementPresent(40, "xpath", "(//button[@aria-labelledby='play-button-tooltip'])[1]");
-			Common.clickElement("xpath", "(//button[@aria-labelledby='play-button-tooltip'])[1]");
+			Sync.waitElementPresent(40, "xpath", "//button[@aria-labelledby='play-button-tooltip']");
+			Common.clickElement("xpath", "//div[@class='vp-player-ui-container content-area-sibling-enabled']");
 			String video1 = Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']")
 					.getAttribute("aria-labelledby");
 			System.out.println(video);
-			Common.assertionCheckwithReport(video1.equals("play-button"), "validating the video in PDP page",
+			Common.assertionCheckwithReport(video1.equals("play-button-tooltip"), "validating the video in PDP page",
 					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
 					"failed to Pause the video in PDP page");
 			Common.switchToDefault();

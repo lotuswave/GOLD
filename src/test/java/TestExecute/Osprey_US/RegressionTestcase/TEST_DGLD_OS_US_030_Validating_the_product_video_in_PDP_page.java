@@ -32,7 +32,7 @@ public class TEST_DGLD_OS_US_030_Validating_the_product_video_in_PDP_page {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
