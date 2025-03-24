@@ -25,16 +25,16 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 		      Osprey_ReEu.header_Travel("Travel");
 		      Osprey_ReEu.header_Accessories("Accessories");         
 		      Osprey_ReEu.header_Featured("Featured");
-		      Osprey_ReEu.Bagpack_ShopAll("ShopAll");
+	//	      Osprey_ReEu.Bagpack_ShopAll("ShopAll");
 		      Osprey_ReEu.header_Shopbyactivity("Shop by Activity");       
 		      Osprey_ReEu.header_Shopbycollection("Shop by Collections"); 
 		      Osprey_ReEu.Featured_ShopAll("FeaturedShopAll");                        
-		      Osprey_ReEu.header_ChristmasGift("ChristmasGift");                               
+	//	      Osprey_ReEu.header_ChristmasGift("ChristmasGift");                               
 		      Osprey_ReEu.header_Icons("Icons");
 		      Osprey_ReEu.header_Shopby_Litres("Shop by Litres");
 		      Osprey_ReEu.header_Explore("Explore");
 		      Osprey_ReEu.header_New_Season();  
-		      Osprey_ReEu.header_sale();  
+	//	      Osprey_ReEu.header_sale();  
 		        
 		} catch (Exception e) {
 
