@@ -966,7 +966,7 @@ public class GoldOxoHyvaHelper
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("preprod"))
 			{
 				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close dialog'])[1]");
 				Common.clickElement("xpath", "(//button[@aria-label='Close dialog'])[1]");
