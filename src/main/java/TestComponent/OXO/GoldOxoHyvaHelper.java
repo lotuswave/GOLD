@@ -5599,34 +5599,33 @@ catch(Exception | Error e)
 
 		String Country;
 		try {
-			
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.END);
-            
+			Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+			Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
+			Thread.sleep(3000);
 			List<WebElement> country = Common.findElements("xpath", "//div[@class='country-list__item']");
 			System.out.println(country.size());
-			for (int i = 1; i < country.size(); i++) {
-
-				List<WebElement> select = Common.findElements("xpath", "//span[contains(@class,'country-item__country-label')]");
+			for (int i = 0; i < country.size(); i++) {
+ 
+				List<WebElement> select = Common.findElements("xpath", "//div[@class='country-list__item']//p//parent::a");
 				Sync.waitPageLoad();
-				Common.actionsKeyPress(Keys.END);
-				Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
-				Common.scrollIntoView("xpath", "//button[contains(@class,'country-selector-button')]");
-				Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
-				Thread.sleep(3000);
-				Country = select.get(i).getText();
+				Country = select.get(i).getAttribute("data-country-code");
 			      System.out.println(Country);
-				select.get(i).click();
-				if (Country.contains("UK")) {
-
+				if (Country.equals("us")) {
+          
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 							"click on the country should navigate to the  " + Country + "Page",
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				} else {
-					Common.clickElement("xpath", "(//p[@class='country-item__language'])[" + i +"]");
+					Sync.waitElementPresent(50, "xpath", "//button[contains(@class,'country-selector-button')]");
+					Common.clickElement("xpath", "//button[contains(@class,'country-selector-button')]");
+					int j=i+1;
+					 System.out.println("(//p[@class='country-item__language'])[" + j +"]");
+					Common.clickElement("xpath", "(//p[@class='country-item__language'])[" + j +"]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					Common.navigateBack();
@@ -5635,7 +5634,7 @@ catch(Exception | Error e)
 							"successfully page navigating to " + Country + "PAGE",
 							Common.getscreenShotPathforReport(Country));
 				}
-
+ 
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -9063,7 +9062,7 @@ public void header_1_Percent_Planet() {
 			if(gift.contains(""))
 			{
 			Thread.sleep(3000);
-
+ 
 			Common.javascriptclickElement("xpath", "//button[normalize-space()='Add Gift Message']");
 			Common.textBoxInput("id", "recipient-1", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("id", "sender-1", data.get(Dataset).get("LastName"));
@@ -9078,7 +9077,6 @@ public void header_1_Percent_Planet() {
 			Common.assertionCheckwithReport(Messgae.equals(message), "validating the Gift cart message",
 					"Gift card message should be applied", "Sucessfully gift message has been applied ",
 					"failed to apply the gift message");
-			
 			}
 			else
 			{
