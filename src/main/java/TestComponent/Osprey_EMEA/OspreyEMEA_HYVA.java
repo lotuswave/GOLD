@@ -2905,10 +2905,13 @@ public class OspreyEMEA_HYVA {
 				Thread.sleep(5000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
-				Common.clickElement("id", "shipping-save");
-				
-				
-				
+				int Size= Common.findElements("id", "shipping-save").size();
+				if (Size>0) {
+					Common.clickElement("id", "shipping-save");
+				}
+				else {
+				System.out.println("New Registered User");	
+				}
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
