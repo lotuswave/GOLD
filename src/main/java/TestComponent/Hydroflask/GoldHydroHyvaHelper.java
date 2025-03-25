@@ -78,21 +78,39 @@ public class GoldHydroHyvaHelper {
 	}
 
 	public void verifingHomePage() {
-	    try {
-	        Sync.waitElementPresent(60, "css", "img[alt='Hydroflask store logo']");
-	        int size = Common.findElements("css", "img[alt='Hydroflask store logo']").size();
-
-	        boolean isLogoPresent = size > 0;
-	        boolean isTitleCorrect = Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask");
-
-	        Common.assertionCheckwithReport(
-	                isLogoPresent && isTitleCorrect,
-	                "validating the home page navigation",
-	                "User should be navigate to the Home page",
-	                "Successfully user navigates to the home page",
-	                "Failed to navigate to the homepage");
-
-	    } catch (Exception | Error e) {
+		try {
+	    	if(Common.getCurrentURL().contains("preprod"))
+	    	{
+	    		 Sync.waitElementPresent(60, "css", "img[alt='Hydroflask store logo']");
+	    		  int size = Common.findElements("css", "img[alt='Hydroflask store logo']").size();
+ 
+	  	        boolean isLogoPresent = size > 0;
+	  	        boolean isTitleCorrect = Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask");
+ 
+	  	        Common.assertionCheckwithReport(
+	  	                isLogoPresent && isTitleCorrect,
+	  	                "validating the home page navigation",
+	  	                "User should be navigate to the Home page",
+	  	                "Successfully user navigates to the home page",
+	  	                "Failed to navigate to the homepage");
+	    	}
+	    	else
+	    	{
+	    		 Sync.waitElementPresent(60, "css", "img[alt='Store logo']") ;
+	 	        int size = Common.findElements("css", "img[alt='Store logo']").size();
+ 
+	 	        boolean isLogoPresent = size > 0;
+	 	        boolean isTitleCorrect = Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask");
+ 
+	 	        Common.assertionCheckwithReport(
+	 	                isLogoPresent && isTitleCorrect,
+	 	                "validating the home page navigation",
+	 	                "User should be navigate to the Home page",
+	 	                "Successfully user navigates to the home page",
+	 	                "Failed to navigate to the homepage");
+	    	}
+		}
+	    	catch (Exception | Error e) {
 	        e.printStackTrace();
 	        ExtenantReportUtils.addFailedLog("validating the home page navigation", "User should be navigate to the Home page",
 	                "user unable navigates to the home page", Common.getscreenShotPathforReport("homepage_verification_failed"));
@@ -3746,6 +3764,8 @@ System.out.println(MyFavorites);
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			click_Prodeal();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
 					"To validate the user lands on Pro Deal Application after successfull login",
 					"After clicking on the signIn button it should navigate to the Pro Deal Application",
