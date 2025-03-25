@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OSPREY US Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+    
+     <test name="Test_DGLD_OS_US_006_Create_and_Edit_Gift_Registery_For_Register_User" testid="DTG-3203" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_006_Create_and_Edit_Gift_Registery_For_Register_User" />
+        </classes>
+    </test>
+  
+
+    <test name="Test_DGLD_OS_072_Guest_User_Checkout_With_CA_Billing_Address" testid="DTG-3203" priority="P1" description="This test case is to validate Register user Checkout functionality with Amex card">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_072_Guest_User_Checkout_With_CA_Billing_Address" />
+     </classes>
+    </test>
+
+    
+    <test name="Test_DGLD_OS_US_PO_ST_010_Register_user_Checkout_with_Paypal" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality by using a visa card for the Register user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_PO_ST_010_Register_user_Checkout_with_Paypal" />
+     </classes>
+    </test>
+    
+    
+     <test name="Test_DGLD_OS_US_ST_016_Validation_Shipping_Address_form_for_RegisterUser" testid="DTG-3203" priority="P1" description="This test case is to validate the shipping address details in the required field form as a Register user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_016_Validation_Shipping_Address_form_for_RegisterUser" />
+     </classes>
+    </test>
+    
+    
+    <test name="Test_DGLD_OS_US_025_Register_user_Checkout_Visa_card" testid="DTG-3203" priority="P1" description="Validating create account from the order Confirmation page for New user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_025_Register_user_Checkout_Visa_card"/>
+        </classes>  
+    </test>
+     
+    
+    <test name="Test_DGLD_OS_US_ST_046_Guest_User_Create_Account_from_OrderConfirmation_Page" testid="DTG-3203" priority="P1" description="Validating create account from the order Confirmation page for New user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_046_Guest_User_Create_Account_from_OrderConfirmation_Page"/>
+        </classes>  
+    </test>
+     
+    
+       <test name="Test_DGLD_OS_ST_037_Guest_User_Checkout_Discover_Card" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality using discover card for guest user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_ST_037_Guest_User_Checkout_Discover_Card"/>
+     </classes>  
+    </test>
+    
+    
+     <test name="Test_DGLD_OS_ST_038_Register_User_Checkout_Master_Card" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality using a Master card for register user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_ST_038_Register_User_Checkout_Master_Card"/>
+     </classes>  
+    </test>
+    
+    
+     <test name="Test_DGLD_OS_US_047_guestCheckoutwith_invalid_CC_Credentials" testid="DTG-3203" priority="P1" description="validating the checkout functionality using the invalid credit for Guest user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_047_guestCheckoutwith_invalid_CC_Credentials"/>
+     </classes>  
+    </test> 
+    
+     <test name="Test_DGLD_OS_US_028_Guest_user_Checkout_Amex_card" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality using an Amex card for guest user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_028_Guest_user_Checkout_Amex_card"/>
+     </classes>  
+    </test>
+    
+     <test name="Test_DGLD_OS_US_027_Guest_User_Checkout_Master_Card" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality using the master card for guest user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_027_Guest_User_Checkout_Master_Card" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OS_US_023__Register_User_Checkout_with_invalid_CC_Credentials" testid="DTG-3203" priority="P1" description="This test case is to validate Register user checkout Functionality with invalid CC credentials.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_023__Register_User_Checkout_with_invalid_CC_Credentials" />
+        </classes>
+    </test>
+    
+     <test name="Test_DGLD_OS_US_022_Register_user_Checkout_Discover_card" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality using Discover card for the Register user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_022_Register_user_Checkout_Discover_card" />
+     </classes>
+    </test>
+    
+     <test name="Test_DGLD_OS_US_035_Track_My_Order_For_Register_User" testid="DTG-3203" priority="P1" description="This test case is to validate the Track My Order Functionality for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_035_Track_My_Order_For_Register_User"/>
+        </classes>  
+    </test>
+    
+    <test name="Test_DGLD_OSP_US_ST_009_Add_To_Cart_and_Checkout_from_My_Favorites" testid="DTG-3203" priority="P1" description="This test case is used to validate Add To Cart and Checkout from My Favorites for Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OSP_US_ST_009_Add_To_Cart_and_Checkout_from_My_Favorites" />
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_OS_US_029_validate_Share_Whishlist_Funtionality" testid="DTG-3203" priority="P1" description="This test case is to Validate the Share Wishlist Functionality for the Register user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_029_validate_Share_Whishlist_Funtionality"/>
+     </classes>  
+    </test>
+    
+    <test name="Test_DGLD_OS_US_011_Stored_Payment_For_Register_User" testid="DTG-3203" priority="P1" description="This test case is to validate the stored payment Funtionality for the register user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_011_Stored_Payment_For_Register_User" />
+     </classes>
+    </test>
+    
+    <test name="Test_DGLD_OS_US_ST_010_Find_a_Dealer" testid="DTG-3203" priority="P1" description="This test case is used to validate the Find a Dealer functionality.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_010_Find_a_Dealer" />
+     </classes>
+    </test>
+    
+    <test name="Test_DGLD_OS_ST_015_Social_Links" testid="DTG-3203" priority="P1" description="This test case is used to Validate the article links like Instagram, Facebook, Twitter, YouTube, Pinterest
+ at the end of the home page.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_ST_015_Social_Links" />
+     </classes>
+    </test>
+    
+    <test name="Test_DGLD_OS_US_050_Validation_My_Orders_For_Register_User" testid="DTG-3203" priority="P1" description="Validating the My orders page for the Register User">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_050_Validation_My_Orders_For_Register_User"/>
+        </classes>  
+    </test> 
+    
+     <test name="Test_DGLD_OS_US_ST_048_changeAddressIn_AddressBook" testid="DTG-3203" priority="P1" description="Validating the Change address for the register user in Address Book">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_048_changeAddressIn_AddressBook"/>
+     </classes>  
+    </test> 
+    
+    
+    <test name="Test_DGLD_OS_US_036_Register_User_Back_In_stock_Subcription" testid="DTG-3203" priority="P1" description="This test case is to Validate the Register user back in-stock subscription.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_036_Register_User_Back_In_stock_Subcription"/>
+     </classes>  
+    </test> 
+    
+    <test name="Test_DGLD_OS_US_039_Register_User_place_an_order_by_using_reorder_functionality" testid="DTG-3203" priority="P1" description="This test case is to validate reorder functionality for a Register user by placing a new order or selecting any previously placed 
+Order from the My Orders list which need to be reordered">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_039_Register_User_place_an_order_by_using_reorder_functionality"/>
+     </classes>  
+    </test> 
+   
+    <test name="Test_DGLD_OS_US_044_Account_Registration_Create_Account_With_Cart" testid="DTG-3203" priority="P1" description="This test case is Validating create account from the order Confirmation page for New user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_044_Account_Registration_Create_Account_With_Cart"/>
+     </classes>  
+    </test> 
+     
+    <test name="Test_DGLD_OS_US_058_Guest_User_Back_In_stock_Subcription" testid="DTG-3203" priority="P1" description="Validating the guest user back in stock subcription">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_058_Guest_User_Back_In_stock_Subcription"/>
+     </classes>  
+    </test> 
+    
+    <test name="Test_DGLD_OS_US_ST_021_Checkout_RegisterUserCC_configurable_Simple" testid="DTG-3203" priority="P1" description="This test case is to validate the checkout functionality for Register user with simple and configurable product">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_021_Checkout_RegisterUserCC_configurable_Simple"/>
+     </classes>  
+    </test> 
+  
+    <test name="Test_DGLD_OS_US_ST_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page" testid="DTG-3203" priority="P1" description="This test case is to validate ADD TO CART from the sticky cart on the PDP page.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page"/>
+     </classes>  
+    </test> 
+     
+    <test name="Test_DGLD_OS_US_ST_014_Validate_Country_Selector" testid="DTG-3203" priority="P1" description="This testcase is to verify the Country Selector in the Header and Footer CMS Content.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_014_Validate_Country_Selector"/>
+     </classes>  
+    </test> 
+    
+        
+    <test name="Test_DGLD_OS_US_ST_074_Guest_user_Checkout_With_Discount_Amex_card" testid="DTG-3203" priority="P1" description="This testcase is to validate the checkout functionality using Amex card for Guest user with discount applied in Payment page">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_074_Guest_user_Checkout_With_Discount_Amex_card"/>
+     </classes>  
+    </test> 
+   
+    
+     <test name="Test_DGLD_OS_US_018_WebPageLinkValidation" testid="DTG-3203" priority="P1" description ="This test case is to validate the page link validation for all products navigate to the respective page">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_018_WebPageLinkValidation"/>
+     </classes>  
+    </test> 
+    
+       <test name="TEST_DGLD_OS_US_017_Miscellaneous_Pages" testid="DTG-3203" priority="P1" description ="This testcase to validate the Miscellaneous pages">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_017_Miscellaneous_Pages"/>
+     </classes>  
+    </test> 
+    
+    
+      <test name="TEST_DGLD_OS_US_026_URL_verification_of_PDP" testid="DTG-3203" priority="P1" description ="This test case is to Validate the color name in the URL on the PDP page.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_026_URL_verification_of_PDP"/>
+     </classes>  
+    </test> 
+    
+      
+      <test name="TEST_DGLD_OS_US_030_Validating_the_product_video_in_PDP_page" testid="DTG-3203" priority="P1" description ="This test case is to validate the product video on the PDP page.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_030_Validating_the_product_video_in_PDP_page"/>
+     </classes>  
+    </test> 
+    
+     <test name="TEST_DGLD_OS_US_049_Track_My_Order_For_Guest_User" testid="DTG-3203" priority="P1" description ="This test case is to validate the Track My Order Functionality for the Guest User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_049_Track_My_Order_For_Guest_User"/>
+     </classes>  
+    </test> 
+    
+     <test name="Test_DGLD_OS_US_ST_059_Contactus_form" testid="DTG-3203" priority="P1" description ="Validating the Contact Us form page">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_059_Contactus_form"/>
+     </classes>  
+    </test> 
+    
+         <test name="Test_DGLD_OS_US_ST__090_Warrenty_Return_Authorization_Valid_Data" testid="DTG-3203" priority="P1" description ="This test case is to validate the Warranty form for parts replacement by using valid data.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST__090_Warrenty_Return_Authorization_Valid_Data"/>
+     </classes>  
+    </test> 
+    
+    
+    <test name="Test_DGLD_OS_US_ST_089_Warranty_Parts_Replacement_Empty_And_Invalid_Data" testid="DTG-3203" priority="P1" description ="This test case is to validate the Warranty form for parts replacement by using valid data.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_089_Warranty_Parts_Replacement_Empty_And_Invalid_Data"/>
+     </classes>  
+    </test> 
+    
+      <test name="Test_DGLD_OS_US_ST_088_Warrenty_Return_Authorization_Empty_invalid_Data" testid="DTG-3203" priority="P1" description ="This test case validate the warranty return authorization form by using empty and invalid data">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_088_Warrenty_Return_Authorization_Empty_invalid_Data"/>
+     </classes>  
+    </test> 
+    
+   
+    <test name="TEST_DGLD_OS_US_102_RegisterUser_CC_Express_PayPal" testid="DTG-3203" priority="P1" description ="This test case is to verify the RegistertUser Express PayPal ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_102_RegisterUser_CC_Express_PayPal"/>
+     </classes>  
+    </test>
+    
+    <test name="TEST_DGLD_OS_US_103_GuestUser_CC_Express_PayPal" testid="DTG-3203" priority="P1" description ="This test case is to verify the GuestUser Express PayPal ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_103_GuestUser_CC_Express_PayPal"/>
+     </classes>  
+    </test>
+  
+       <test name=" TEST_DGLD_OS_US_ST_107_Guestuser_Checkout_with_Paypal" testid="DTG-3203" priority="P1" description ="This test case is to validate the checkout functionality using Paypal as payment method for a guestuser">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_107_Guestuser_Checkout_with_Paypal"/>
+     </classes>  
+    </test>
+    
+    
+     <test name=" TEST_DGLD_OS_US_120_PRO_Customer_Checkout_With_SingleItem_Using_CC" testid="DTG-3203" priority="P1" description = "This test case is to validate the checkout functionality using any cc payment method with Pro customer">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_120_PRO_Customer_Checkout_With_SingleItem_Using_CC"/>
+     </classes>  
+    </test>
+    
+     <test name=" TEST_DGLD_OS_US_130_PROCustomer_Checkout_Single_Item_with_Paypal" testid="DTG-3203" priority="P1" description = "This test case is to validate the checkout functionality using PayPal payment method with Pro customer">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_130_PROCustomer_Checkout_Single_Item_with_Paypal"/>
+     </classes>  
+    </test>
+    
+     <test name=" TEST_DGLD_OS_US_131_PROCustomer_Checkout_Single_Item_with_Paypal" testid="DTG-3203" priority="P1" description = "This testcase is to validate the Pro Customer checkout functionality, multiple products with PayPal method">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_131_PROCustomer_Checkout_Single_Item_with_Paypal"/>
+     </classes>  
+    </test>
+    
+    
+      <test name=" TEST_DGLD_OS_US_129_PRO_Customer_Checkout_Single_Item_Using_CC_with_Promotion" testid="DTG-3203" priority="P1" description = "This testcase is to validate the checkout functionality using visa card for Pro customer user with
+ discount applied in shipping page">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_129_PRO_Customer_Checkout_Single_Item_Using_CC_with_Promotion"/>
+     </classes>  
+    </test>
+   
+    
+     <test name=" Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page" testid="DTG-3203" priority="P1" description = "This test case covers validating the newsletter subscription and un subscription from the my account page">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page"/>
+     </classes>  
+    </test>
+    
+     <test name=" TEST_DGLD_OS_US_ST_056_Newsletter_Subcription_from_the_Newletter_Popup" testid="DTG-3203" priority="P1" description ="This test case covers validating newsletter subscription from the newsletter popup">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_056_Newsletter_Subcription_from_the_Newletter_Popup"/>
+     </classes>  
+    </test>
+    
+     <test name=" Test_DGLD_OS_US_ST_011_Guest_User_Checkout_with_APO_Address" testid="DTG-3203" priority="P1" description ="This test case is to Validate the Guest user checkout Functionality with the APO address selected on Shipping 
+Address page through AVS Suggestions">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_011_Guest_User_Checkout_with_APO_Address"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_US_ST_014_Register_User_Checkout_with_APO_Address" testid="DTG-3203" priority="P1" description ="This test case is to validate the register user checkout with APO address.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_014_Register_User_Checkout_with_APO_Address"/>
+     </classes>  
+    </test>
+    
+    
+    <test name=" TEST_DGLD_OS_056_Guest_user_Checkout_with_2_Day_shipping_method" testid="DTG-3203" priority="P1" description ="This test case covers validating guest user checkout with 2-day shipping method.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_056_Guest_user_Checkout_with_2_Day_shipping_method"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address" testid="DTG-3203" priority="P1" description ="Register User Checkout With CA Shipping Address on shipping page">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_069_Register_User_Checkout_With_CA_Shipping_Address"/>
+     </classes>  
+    </test>
+    
+     <test name=" Test_DGLD_OS_070_Guest_User_Checkout_With_CA_Shipping_Address" testid="DTG-3203" priority="P1" description ="Guest user Checkout with CA shipping Address on Shipping page.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_070_Guest_User_Checkout_With_CA_Shipping_Address"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_071_Register_User_Checkout_With_CA_Billing_Address" testid="DTG-3203" priority="P1" description ="Guest user Checkout with CA shipping Address on Shipping page.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_071_Register_User_Checkout_With_CA_Billing_Address"/>
+     </classes>  
+    </test>
+    
+      <test name=" Test_DGLD_OS_US_ST_121_Guest_user_Checkout_With_3DSecure_Payment_Method" testid="DTG-3203" priority="P1" description =" This test case is to validate the checkout functionality using a 3D secure payment method for a guest user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_121_Guest_user_Checkout_With_3DSecure_Payment_Method"/>
+     </classes>  
+    </test>
+    
+    <test name=" TEST_DGLD_OS_US_ST_123_PROCustomer_Checkout_With_3DSecure_Payment_Method" testid="DTG-3203" priority="P1" description =" This test case is to validate the Pro customer Checkout with the 3D Secure Payment method.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_123_PROCustomer_Checkout_With_3DSecure_Payment_Method"/>
+     </classes>  
+    </test>
+    
+      <test name=" TEST_DGLD_OS_US_ST_122_Register_User_Checkout_With_3DSecure_Payment_Method" testid="DTG-3203" priority="P1" description =" This test case is to validate the checkout functionality using 3D secure Payment method for a Register user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_122_Register_User_Checkout_With_3DSecure_Payment_Method"/>
+     </classes>  
+    </test>
+    
+    
+      <test name=" TEST_DGLD_OS_US_ST_124_PROCustomer_Checkout_using_3DSecure_Payment_Method_With_DiscountCode" testid="DTG-3203" priority="P1" description =" This test case is to validate the Pro customer Checkout with the Discount Code and the 3D Secure Payment method.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_124_PROCustomer_Checkout_using_3DSecure_Payment_Method_With_DiscountCode"/>
+     </classes>  
+    </test>
+    
+    
+      <test name=" TEST_DGLD_OS_US_ST_127_Guest_user_Checkout_using_3D_Secure_Payment_Method_With_DiscountCode" testid="DTG-3203" priority="P1" description =" This test case is to validate the guest user checkout using 3D Secure payment method with discount code.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_127_Guest_user_Checkout_using_3D_Secure_Payment_Method_With_DiscountCode"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_US_ST_081_Register_user_Configure_gift_card_in_PDP_and_checkout" testid="DTG-3203" priority="P1" description ="This testcase is to validate Configure gift card in PDP and checkout for authenticated user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_081_Register_user_Configure_gift_card_in_PDP_and_checkout"/>
+        </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_US_062_Guest_User_Checkout_Gift_Card_Code" testid="DTG-3203" priority="P1" description ="validating the Guest_User_Checkout_with_Gift_Card_code.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_062_Guest_User_Checkout_Gift_Card_Code"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_US_063_Register_user_Checkout_Gift_card_Code" testid="DTG-3203" priority="P1" description ="validating the Register_User_Checkout_with_Gift_Card_code">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_063_Register_user_Checkout_Gift_card_Code"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_US_087_Add_Giftcard_checkout_with_Promo_code_and_Configurable_Product" testid="DTG-3203" priority="P1" description ="This test case is to validate the Add Gift-card checkout with Promo code and configurable product ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_087_Add_Giftcard_checkout_with_Promo_code_and_Configurable_Product"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_US_085_Placeorder_Guest_user_multiple_products_with_Giftcode_as_full_payment" testid="DTG-3203" priority="P1" description ="This testcase is to validate the multiple products checkouts with the full payment using gift card code ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_085_Placeorder_Guest_user_multiple_products_with_Giftcode_as_full_payment"/>
+     </classes>  
+    </test>
+     
+    <test name=" Test_DGLD_OS_US_084_Placeorder_GuestUser_checkout_with_gift_card_X_MAS_GIFT_CARD" testid="DTG-3203" priority="P1" description ="This testcase is to validate X-MAS GIFT CARD for an unauthenticated user ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_084_Placeorder_GuestUser_checkout_with_gift_card_X_MAS_GIFT_CARD"/>
+     </classes>  
+    </test>
+     
+    <test name=" Test_DGLD_OS_US_092_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_at_Payment_Page_and_Place_an_Order" testid="DTG-3203" priority="P1" description ="This test case is to validate the Add Gift Card code in My Account page and Select the gift card at payment page and 
+Place an Order. ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_092_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_at_Payment_Page_and_Place_an_Order"/>
+     </classes>  
+    </test>
+
+    
+      
+    <test name=" TEST_DGLD_OS_US_096_RegisterUser_validate_Giftcard_PLP_page" testid="DTG-3203" priority="P1" description ="This test case is to validate the registered user validate Gift Card PLP page. ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_096_RegisterUser_validate_Giftcard_PLP_page"/>
+     </classes>  
+    </test>
+     
+    
+      <test name="Test_DGLD_OS_US_ST_003_Footer_Newsletter_Subcription" testid="DTG-3203" priority="P1" description="This test case is to verify the user newsletter subscription Signup on the Footer section.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_003_Footer_Newsletter_Subcription" />
+        </classes>
+    </test>
+     
+         <test name="Test_DGLD_OS_US_007_Create_share_and_Delete_Gift_Registery_For_Register_User" testid="DTG-3203" priority="P1" description="This test case is used to Validate the Gift Registry create share and delete for the Registered user.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_007_Create_share_and_Delete_Gift_Registery_For_Register_User" />
+        </classes>
+    </test> 
+    
+     <test name="Test_DGLD_OS_US_008_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" testid="DTG-3203" priority="P1" description="This test case is used to validate the Gift Registry Create Manage items and invalid Details for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_008_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User" />
+        </classes>
+    </test>
+    
+    
+    <test name="Test_DGLD_OS_US_ST_068_Checkout_RegisterUserCC_configurable_Simple_with_2_day_shipping" testid="DTG-3203" priority="P1" description="This test case is used to validate the Gift Registry Create Manage items and invalid Details for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_068_Checkout_RegisterUserCC_configurable_Simple_with_2_day_shipping" />
+        </classes>
+    </test>
+    
+    <test name="TEST_OSPG_US_FT_001_Register_user_Products_are_added_to_the_Wishlist_from_the_PDP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products" testid="DTG-3203" priority="P1" description="This test case is used to validate the Gift Registry Create Manage items and invalid Details for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_OSPG_US_FT_001_Register_user_Products_are_added_to_the_Wishlist_from_the_PDP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products" />
+        </classes>
+    </test>
+    
+    <test name="TEST_OSPG_US_FT_002_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_YourFavorites_Products" testid="DTG-3203" priority="P1" description="This test case is used to validate the Gift Registry Create Manage items and invalid Details for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_OSPG_US_FT_002_Registeruser_Products_are_added_to_the_Wishlist_from_the_PLP_page_and_Checkout_from_the_ShoppingCart_page_with_YourFavorites_Products" />
+        </classes>
+    </test>
+    
+   <test name="TEST_DGLD_OS_US_112_PRO_Customer_Checkout_with_Gift_card_Multiple_Line_Item_Using_CC" testid="DTG-3203" priority="P1" description ="This test case is used to validate Checkout with Gift card and one item using cc for PRO customers. ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_112_PRO_Customer_Checkout_with_Gift_card_Multiple_Line_Item_Using_CC"/>
+     </classes>  
+    </test>
+      
+    <test name="Test_DGLD_OS_US_ST_013_Checkout_with_PP_as_Registeruser_with_PO_Box" testid="DTG-3203" priority="P1" description ="This test case is used to validate Checkout with Gift card and one item using cc for PRO customers. ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_013_Checkout_with_PP_as_Registeruser_with_PO_Box"/>
+     </classes>  
+    </test>
+    
+    <test name="TEST_DGLD_OS_US_ST_086_Guest_gift_card_add_to_My_favourites_and_Guest_create_account_with_My_Favourites_Gift_card_added" testid="DTG-3203" priority="P1" description ="This test case is to validate Guest user add a gift card to My Favourites and Guest user creates an account with a 
+My Favourites Gift card added">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_086_Guest_gift_card_add_to_My_favourites_and_Guest_create_account_with_My_Favourites_Gift_card_added"/>
+     </classes>  
+    </test>
+    
+    
+     <test name="Test_DGLD_OS_US_ST_071_Register_User_Add_to_Compare_Products_to_Wishlist_Functionality" testid="DTG-3203" priority="P1" description ="This test case is to validate the Register user add to compare products
+ to the Wishlist functionality.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_071_Register_User_Add_to_Compare_Products_to_Wishlist_Functionality"/>
+     </classes>  
+    </test> 
+    
+     <test name="Test_DGLD_OS_US_ST_072_Guest_User_Add_to_Compare_Products_to_Wishlist_Functionality" testid="DTG-3203" priority="P1" description ="This test case is to validate the guest user checkout with Add to 
+Compare products by using Credit card.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_072_Guest_User_Add_to_Compare_Products_to_Wishlist_Functionality"/>
+     </classes>  
+    </test> 
+
+<test name="TEST_DGLD_OS_US_ST_095_Register_user_adds_a_giftcard_to_the_Wishlist" testid="DTG-3203" priority="P1" description ="This test case is to validate that Register_user adds a gift card to the Wishlist and checkout ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_095_Register_user_adds_a_giftcard_to_the_Wishlist"/>
+     </classes>  
+    </test> 
+     
+    
+     <test name="TEST_DGLD_OS_US_097_Guest_Users_Checkout_Gift_Card_configurable_Product_With_Partial_payment" testid="DTG-3203" priority="P1" description ="This test case is to validate Guest_User_Checkout_Gift_Card_With_Partial_payment ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_097_Guest_Users_Checkout_Gift_Card_configurable_Product_With_Partial_payment"/>
+     </classes>  
+    </test>  
+    
+    <test name=" TEST_DGLD_OS_US_105_Pro_user_checkout_with_configurable_product_simple_with_discount" testid="DTG-3203" priority="P1" description ="This test case is to verify Pro-user checkout with simple and configurable product with discount code">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_105_Pro_user_checkout_with_configurable_product_simple_with_discount"/>
+     </classes>  
+    </test>
+    
+      <test name=" TEST_DGLD_OS_US_ST_106_Placeorder_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping" testid="DTG-3203" priority="P1" description ="This testcase is to validate the Register checkout functionality with discount applied in payment
+ page multiple products different billing and shipping">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_106_Placeorder_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping"/>
+     </classes>  
+    </test>
+    
+     <test name=" TEST_DGLD_OS_US_112_PRO_Customer_Checkout_with_Gift_card_Multiple_Line_Item_Using_CC" testid="DTG-3203" priority="P1" description = "This test case is used to validate Checkout with Gift card and multiple line items using cc for PRO customers.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_112_PRO_Customer_Checkout_with_Gift_card_Multiple_Line_Item_Using_CC"/>
+     </classes>  
+    </test>
+    
+
+ <test name=" Test_DGLD_OS_US_094_Guest_UsersCheckout_Gift_Card_code_and_discount_With_Full_payment" testid="DTG-3203" priority="P1" description = "This test case is to validate Guest_User_Checkout_Gift_Card_Code_and _discount_With_Full_payment">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_094_Guest_UsersCheckout_Gift_Card_code_and_discount_With_Full_payment"/>
+     </classes>  
+    </test>
+    
+    <test name=" Test_DGLD_OS_002_PlaceOrder_with_validate_ShippingMethods_for_Regular_Non_ProEmployee_Standard_Shipping_Expeditedshipping" testid="DTG-3203" priority="P1" description ="This testcase is to verify the enabled Shipping methods (Standard shipping method $0 and Expedited 
+shipping $50) when a customer is Regular or Non-Pro/Employee">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_002_PlaceOrder_with_validate_ShippingMethods_for_Regular_Non_ProEmployee_Standard_Shipping_Expeditedshipping"/>
+     </classes>  
+    </test>
+        
+    <test name=" Test_DGLD_OS_004_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Lessthan_OR_Equal_49StandardShipping5" testid="DTG-3203" priority="P1" description ="This testcase is to verify enabled the Shipping methods when a customer is Non-Pro/Employee, 
+Non-Continental US and the sub total amount is ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_004_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Lessthan_OR_Equal_49StandardShipping5"/>
+     </classes>  
+    </test>
+    
+  
+      <test name=" Test_DGLD_OS_005_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Greaterthan_49Shipping0" testid="DTG-3203" priority="P1" description = "This test case is to validate the Shipping Methods for Non-Pro/Employee, Non-Continental US, 
+subtotal amount >$49: Standard Shipping ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_005_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Greaterthan_49Shipping0"/>
+     </classes>  
+    </test>
+    
+     <test name=" Test_DGLD_OS_006_PlaceOrder_Validate_Shipping_Method_for_Pro_subtotal_amount_lessthan100_Standard_Shipping10" testid="DTG-3203" priority="P1" description ="This test case is to validate the Shipping Methods for Pro, subtotal amount  Standard Shipping ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_006_PlaceOrder_Validate_Shipping_Method_for_Pro_subtotal_amount_lessthan100_Standard_Shipping10"/>
+     </classes>  
+    </test>
+    
+    <test name=" TEST_DGLD_OS_US_110_PROCustomer_Checkout_with_Multiple_Items_using_CC_with_Gift_Code_Partial" testid="DTG-3203" priority="P1" description ="This test case is used to validate  Checkout with multiple items using cc with gift code(partial) for PRO customers. ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_110_PROCustomer_Checkout_with_Multiple_Items_using_CC_with_Gift_Code_Partial"/>
+     </classes> 
+    </test>
+    
+    <!-- 
+		     <test name="TEST_DGLD_OS_US_098_PRO_Customer_Checkout_with_Multiple_Items_Using_Afterpay" testid="DTG-3203" priority="P1" description ="This test case is used to validate Afterpay Checkout with multiple items for PRO customers.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_098_PRO_Customer_Checkout_with_Multiple_Items_Using_Afterpay"/>
+     </classes>  
+    </test>  
+    
+    
+     <test name="TEST_DGLD_OS_US_100_RegisterUser_checkout_AfterPay_Payment_Standard_shipping" testid="DTG-3203" priority="P1" description ="This test case is to validate After Pay checkout payment with a Standard shipping cost for a Registered user">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_100_RegisterUser_checkout_AfterPay_Payment_Standard_shipping"/>
+     </classes>  
+    </test>  
+    
+    
+     <test name="TEST_DGLD_OS_US_101_GuestUser_checkout_OrderTotal_Lessthan50_AfterPay_Payment_Standard_shipping_CostAmount" testid="DTG-3203" priority="P1" description ="This test case is to validate After Pay checkout payment with a Standard shipping cost ensuring by some amount value if the order total is ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_101_GuestUser_checkout_OrderTotal_Lessthan50_AfterPay_Payment_Standard_shipping_CostAmount"/>
+     </classes>  
+    </test>  
+    
+
+  
+    <test name="TEST_DGLD_OS_US_104_Pro_user_checkout_with_simple_configurable_with_Klarna_Payment" testid="DTG-3203" priority="P1" description ="This test case is to verify Register user checkout with simple and configurable product with klarna payment ">
+        <classes>
+            <class name= "TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_104_Pro_user_checkout_with_simple_configurable_with_Klarna_Payment"/>
+     </classes>  
+    </test>
+    
+      
+    
+
+<test name=" TEST_DGLD_OS_US_ST_108_GuestUser_checkout_OrderTotal_LessThan50_Klarna_SavedPayment_Standard_Shipping_Cost_Amount" testid="DTG-3203" priority="P1" description ="This test case is to validate Klarna checkout payment with a Standard shipping cost ensuring
+ by some amount value if the order total is ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_108_GuestUser_checkout_OrderTotal_LessThan50_Klarna_SavedPayment_Standard_Shipping_Cost_Amount"/>
+     </classes>  
+    </test>
+    
+      <test name=" TEST_DGLD_OS_US_ST_109_RegisterUser_checkout_Klarna_SavedPayment_Standard_Shipping" testid="DTG-3203" priority="P1" description ="This test case is to validate Klarna checkout payment with a Standard shipping cost for a Registered user ">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_109_RegisterUser_checkout_Klarna_SavedPayment_Standard_Shipping"/>
+     </classes>  
+    </test>
+    
+    
+    
+     <test name=" Test_DGLD_OS_US_ST_093_Placeorder_Register_user_multipleproducts_with_store_credit_giftcardcode_discount_and_CC" testid="DTG-3203" priority="P1" description = "This test case is to validate Register_User_Checkout_multiple-products_with_storecredit_
+giftcardcode_discount_partial_payment">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_093_Placeorder_Register_user_multipleproducts_with_store_credit_giftcardcode_discount_and_CC"/>
+     </classes>  
+    </test>
+	
+	 <test name="Test_DGLD_OSP_US_PO_ST_002_Registeruser_StoreCredit_Checkout_and_validate_the_Storecredit_balance_in_MYAccount_page" testid="DTG-3203" priority="P1" description="This test case is used to validate the Gift Registry Create Manage items and invalid Details for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OSP_US_PO_ST_002_Registeruser_StoreCredit_Checkout_and_validate_the_Storecredit_balance_in_MYAccount_page" />
+        </classes>
+    </test>
+
+   
+   <test name=" TEST_DGLD_OS_US_ST_126_Placeorder_Register_user_multipleproducts_with_store_credit_giftcardcode_discount_and_3DSecure_Payment_Method" testid="DTG-3203" priority="P1" description =" This test case is used to validate the place o Register user Checkout with multiple products by using store credit_ gift
+card code, discount, and 3D Secure Payment method.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_126_Placeorder_Register_user_multipleproducts_with_store_credit_giftcardcode_discount_and_3DSecure_Payment_Method"/>
+     </classes>  
+    </test>
+
+
+ <test name="TEST_DGLD_OS_US_125_Pro_user_Mutilple_products_with_storecredit_giftcardcode_discount_full_payment" testid="DTG-3203" priority="P1" description="This test case is used to validate the Gift Registry Create Manage items and invalid Details for the Register User.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_125_Pro_user_Mutilple_products_with_storecredit_giftcardcode_discount_full_payment" />
+        </classes>
+    </test>
+
+ <test name=" TEST_DGLD_OS_US_ST_128_Placeorder_Pro_user_multipleproducts_with_store_credit_giftcardcode_discount_and_3DSecure_Payment_Method" testid="DTG-3203" priority="P1" description ="This test case is used to validate the place Order with Pro user Checkout with multiple products by using store credit_ gift 
+card code, discount, and 3D Secure Payment method.">
+        <classes>
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OS_US_ST_128_Placeorder_Pro_user_multipleproducts_with_store_credit_giftcardcode_discount_and_3DSecure_Payment_Method"/>
+     </classes>  
+    </test>
+
+	-->
+   
+
+</suite>
+    
