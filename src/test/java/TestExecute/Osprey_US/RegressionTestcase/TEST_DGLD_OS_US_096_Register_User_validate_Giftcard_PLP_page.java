@@ -9,20 +9,18 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_US_029_validate_Share_Whishlist_Funtionality {
+public class TEST_DGLD_OS_US_096_Register_User_validate_Giftcard_PLP_page {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
-	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"ShareWhishList");
+	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Giftcard Payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Share_Whishlist_Funtionality () throws Exception {
+	public void Verifying_RegisterUser_validate_Giftcard_PLP_page () throws Exception {
 
 		try {
-        Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.My_Favorites();    
-        Osprey_ReEu.share_whishlist("share whishlist");
+        Osprey_ReEu.verifingHomePage();  
+        Osprey_ReEu.validate_GIFT_CARD_PLP();
+        Osprey_ReEu.validate_price_PLP_and_PDP();
         
 		} catch (Exception e) {
 
