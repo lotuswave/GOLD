@@ -4626,7 +4626,7 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@id='password']", data.get(dataSet).get("Password"));
 			
 			Common.textBoxInput("xpath", "//input[@id='password-confirmation']", data.get(dataSet).get("Confirm Password"));
-			
+			System.out.println(data.get(dataSet).get("Confirm Password"));
 			Common.clickElement("xpath", "//button[@title='Save Account Information']");
 			
 			Sync.waitElementPresent(40, "xpath", "//div[@ui-id='message-success']//span");
@@ -12074,7 +12074,7 @@ public void outofstock_subcription(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", storedEmail);
-			Common.textBoxInput("id", "pass","Stage@1234");
+			Common.textBoxInput("id", "pass","Lotuswave@1234");
 			Common.clickElement("xpath", "//button/span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
