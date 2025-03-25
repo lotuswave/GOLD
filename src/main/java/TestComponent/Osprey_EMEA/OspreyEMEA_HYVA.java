@@ -5660,7 +5660,7 @@ return Number;
 			String Freeshipping = Common
 					.findElement("xpath", "//div[@class='flex items-center']//p")
 					.getText();
-			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
+			Common.assertionCheckwithReport(Freeshipping.equals("Only £17.40 left for Free Shipping."),
 					"validating the free shipping in mini cart",
 					"Free shipping should be avaliable for selected products",
 					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
