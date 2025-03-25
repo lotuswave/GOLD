@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_010_Reset_Password_from_shipping_page {
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_user_checkout_with_Expedited_shipping_method () throws Exception {
+	public void Validate_Reset_Password_ShippingPage () throws Exception {
 
 		try {
 		

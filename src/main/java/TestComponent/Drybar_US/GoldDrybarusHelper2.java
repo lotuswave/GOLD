@@ -2278,8 +2278,16 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 				Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 				Common.clickElement("xpath", "//button[@id='customer-menu']");
-				Sync.waitElementPresent("xpath", "//a[@title='My Account']");
-				Common.clickElement("xpath", "//a[@title='My Account']");
+				Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+				Common.clickElement("xpath", "//button[@id='customer-menu']");
+				if (Common.findElements("xpath","//a[@title='Sign In']").size() > 0 ) {
+					Sync.waitElementPresent("xpath", "//a[@title='Sign In']");
+					Common.clickElement("xpath","//a[@title='Sign In']");	
+				} else {
+					Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+					Common.clickElement("xpath", "//a[@title='My Account']");
+				}
+
 //				String MyId=Common.findElement("xpath","(//ul[@class='m-account-nav__links']//li//a)[1]").getAttribute("id");
 //				Common.clickElement("xpath", "//a[@id='"+MyId+"']");
 				Sync.waitPageLoad();
@@ -11133,7 +11141,7 @@ public void videos_validation() {
 		   Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
 		   Thread.sleep(3000);
 		   String Video=Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']").getAttribute("type");
-		   Common.assertionCheckwithReport(Video.contains("button"), "validating the user navigate to the videos",
+		   Common.assertionCheckwithReport(Video.contains("button"), "validating the user navigate to the video page",
 					"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
 					"failed to Navigate to the videos page");
 		   Thread.sleep(3000);
