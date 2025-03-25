@@ -5614,7 +5614,7 @@ catch(Exception | Error e)
 				Country = select.get(i).getAttribute("data-country-code");
 			      System.out.println(Country);
 				if (Country.equals("us")) {
-      
+          
 					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
 					ExtenantReportUtils.addPassLog("Validating" + Country + "Page  ",
 							"click on the country should navigate to the  " + Country + "Page",
