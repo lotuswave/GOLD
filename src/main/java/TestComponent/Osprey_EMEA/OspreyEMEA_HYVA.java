@@ -913,9 +913,9 @@ public class OspreyEMEA_HYVA {
 					Common.clickElement("xpath", "//span[contains(text(),'Shop by Activity')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//span[contains(text(),'" + Links[i] + "')]");
+							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//span[contains(text(),'" + Links[i] + "')]");
+							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(3000);
 					if(Common.getPageTitle().contains("404"))
@@ -977,9 +977,11 @@ public class OspreyEMEA_HYVA {
 					Common.clickElement("xpath", "//span[contains(text(),'" + activity + "')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
+							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
+							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");			
+					
+			//		Common.clickElement("xpath","(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
 					Sync.waitPageLoad();
 					if(Common.getPageTitle().contains("404"))
 					{
@@ -1053,9 +1055,9 @@ public class OspreyEMEA_HYVA {
 							Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
 							Thread.sleep(3000);
 							Sync.waitElementPresent("xpath",
-									"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Common.clickElement("xpath",
-									"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							String title = Common.findElement("xpath", "//div[contains(@class,'c-clp-hero')]//h1").getText();
@@ -1108,9 +1110,9 @@ public class OspreyEMEA_HYVA {
 							Common.clickElement("xpath", "//span[contains(text(),'" + collections + "')]");
 							Thread.sleep(3000);
 							Sync.waitElementPresent("xpath",
-									"//li//a//span[contains(text(),'" + Links[i] + "')]");
+									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Common.clickElement("xpath",
-									"//span[contains(text(),'" + Links[i] + "')]");
+									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							//li//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
