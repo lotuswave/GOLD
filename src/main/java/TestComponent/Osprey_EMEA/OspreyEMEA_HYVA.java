@@ -846,10 +846,9 @@ public class OspreyEMEA_HYVA {
 				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitElementPresent("xpath","//a[contains(@href,'day-packs')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@href,'day-packs')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				if(Common.getPageTitle().contains("404"))
