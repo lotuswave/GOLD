@@ -13591,7 +13591,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Sync.waitElementPresent("xpath", "//div[@class='vs__actions']");
 			Common.clickElement("xpath", "//div[@class='vs__actions']");
 			Thread.sleep(4000);
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.actionsKeyPress(Keys.ARROW_DOWN); 
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ENTER);
