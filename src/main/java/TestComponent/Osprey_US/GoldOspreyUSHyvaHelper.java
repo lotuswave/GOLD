@@ -4162,7 +4162,7 @@ public void Validate_retailerlocations() {
 		String expectedResult = "It redirects to order confirmation page";
 
 		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			addPaymentDetails(dataSet);
 		}
 

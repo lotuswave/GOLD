@@ -5074,9 +5074,9 @@ catch(Exception | Error e)
 			Common.refreshpage();
 			Thread.sleep(5000);
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'') or @loading='lazy' and @itemprop]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[contains(@class,'') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -13591,7 +13591,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Sync.waitElementPresent("xpath", "//div[@class='vs__actions']");
 			Common.clickElement("xpath", "//div[@class='vs__actions']");
 			Thread.sleep(4000);
-			Common.actionsKeyPress(Keys.ARROW_DOWN); 
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ENTER);
