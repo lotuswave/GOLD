@@ -35,7 +35,7 @@ public class Test_DGLD_HF_ST_065_Checkout_with_Register_UserCC_Simple_Configurab
 //			Hydro.search_product("simple warranty");      
 //			Hydro.addtocart("simple warranty");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+//			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
