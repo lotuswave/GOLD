@@ -37,7 +37,7 @@ public class TEST_DGLD_DB_US_ST_195_RegUser_Simple_AerosolBundle_Configurable_Ae
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.discountCode("Discount");
-			Drybar.gitCard("GiftCode");
+			Drybar.gitCard("GiftCode Full Redeem");
 			Drybar.giftCardSubmitOrder();
 
 		} catch (Exception e) {
