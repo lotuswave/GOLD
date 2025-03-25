@@ -11133,7 +11133,7 @@ public void videos_validation() {
 		   Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
 		   Thread.sleep(3000);
 		   String Video=Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']").getAttribute("type");
-		   Common.assertionCheckwithReport(Video.contains("button"), "validating the user navigate to the videos",
+		   Common.assertionCheckwithReport(Video.contains("button"), "validating the user navigate to the video page",
 					"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
 					"failed to Navigate to the videos page");
 		   Thread.sleep(3000);
