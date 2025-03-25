@@ -11,7 +11,7 @@ import TestComponent.Hydroflask.GoldHydroHyva_PRODHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_ST_046_Reset_Password_Validate_search_GuestCheckout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal {
+public class Test_DGLD_HYF_ST_046_Reset_Password_and_Validate_search_results_Page {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyva_PRODHelper Hydro = new GoldHydroHyva_PRODHelper(datafile,"DataSet");

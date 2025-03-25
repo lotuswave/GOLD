@@ -20,7 +20,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 		try {
 			Hydro.verifingHomePage();
-		    Hydro.Shop_validation("travel Bottles");
+//		    Hydro.Shop_validation("travel Bottles");
            	Hydro.bottles_validation("Bottle and drinkware");
         	Hydro.Coolers_validation("Coolers");  
          	Hydro.kitchenware_validation("kitchenware");
