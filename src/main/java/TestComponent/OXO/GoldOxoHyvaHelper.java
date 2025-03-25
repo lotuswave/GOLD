@@ -60,7 +60,7 @@ public class GoldOxoHyvaHelper {
 		int r = c.getResponseCode();
 
 		return r;
-	}
+	}  
 	
    
 
