@@ -7240,7 +7240,7 @@ catch(Exception | Error e)
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
 			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
-           
+             Thread.sleep(4000);
  
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
 					data.get(dataSet).get("FirstName"));
