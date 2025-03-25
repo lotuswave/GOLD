@@ -13,7 +13,7 @@ public class Test_DGLD_OS_US_BCST_016_Validation_Shipping_Address_form_for_Guest
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validation_Shipping_Address_form_for_GuestUserCheckout_WithDifferentBilling_and_DifferentShipping_Klarna_playment () throws Exception {
+	public void Validation_Shipping_Address_form_for_GuestUser_Checkout_WithDifferentBilling_and_DifferentShipping_Klarna_playment () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
@@ -37,7 +37,7 @@ public class Test_DGLD_OS_US_BCST_016_Validation_Shipping_Address_form_for_Guest
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
