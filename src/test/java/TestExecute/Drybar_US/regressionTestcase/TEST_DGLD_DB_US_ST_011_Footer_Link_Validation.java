@@ -15,7 +15,7 @@ public class TEST_DGLD_DB_US_ST_011_Footer_Link_Validation {
 	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Footer");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_Account () throws Exception {
+	public void Validating_Footer_Links () throws Exception {
 
 		try {
 		
