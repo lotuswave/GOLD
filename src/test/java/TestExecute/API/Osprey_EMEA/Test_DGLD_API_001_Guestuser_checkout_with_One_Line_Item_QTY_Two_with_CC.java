@@ -25,7 +25,6 @@ public class Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_wit
     public String MagentoOrder_ID;
     public String deliveryNumber;
   
-    
     @Test(priority = 1)
     public void generateApiKey() {
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/V1/integration/admin/token";
