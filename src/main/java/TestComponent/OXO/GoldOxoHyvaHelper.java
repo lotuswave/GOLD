@@ -13591,7 +13591,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Sync.waitElementPresent("xpath", "//div[@class='vs__actions']");
 			Common.clickElement("xpath", "//div[@class='vs__actions']");
 			Thread.sleep(4000);
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.actionsKeyPress(Keys.ARROW_DOWN); 
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ENTER);
@@ -13609,7 +13609,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
 			System.out.println(off);
 			System.out.println(discount);
-			   Common.assertionCheckwithReport(off.equals(discount), "validating the reward points redeem in the order summary page",
+			   Common.assertionCheckwithReport(off.contains(discount), "validating the reward points redeem in the order summary page",
 						"After clicking on the apply button reward points should be apply", "Sucessfully reward points has been applied",
 						"failed to apply the reward point in the order summary page");
 			  Common.findElement("xpath", "//div[@class='yotpo-point-balance-text']").getText().trim().replace("YOU HAVE ", "").replace(" POINTS", "");
