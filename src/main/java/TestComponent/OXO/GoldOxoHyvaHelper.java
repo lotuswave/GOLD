@@ -45,8 +45,9 @@ import Utilities.ExcelReader;
 import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
 
-public class GoldOxoHyvaHelper {
-	String storedEmail;
+public class GoldOxoHyvaHelper
+{
+	String storedEmail; 
 	String datafile;
 	ExcelReader excelData;
 	Map<String, Map<String, String>> data = new HashMap<>();
