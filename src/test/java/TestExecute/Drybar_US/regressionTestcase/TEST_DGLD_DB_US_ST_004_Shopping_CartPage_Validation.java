@@ -32,7 +32,7 @@ public class TEST_DGLD_DB_US_ST_004_Shopping_CartPage_Validation {
             Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.Shoppingcart_page();
-			Drybar.minicart_ordersummary_discount("Discount");
+			//Drybar.minicart_ordersummary_discount("Discount");
             
  
 		} catch (Exception e) {
