@@ -46,7 +46,7 @@ import Utilities.ExtenantReportUtils;
 import Utilities.Utils;
 
 public class GoldOxoHyvaHelper {
-
+	String storedEmail;
 	String datafile;
 	ExcelReader excelData;
 	Map<String, Map<String, String>> data = new HashMap<>();
@@ -4602,7 +4602,8 @@ catch(Exception | Error e)
 		try {
 			
 			String email = Common.genrateRandomEmail(data.get(dataSet).get("Email"));
-
+			storedEmail = email;
+			System.out.println(email);
 			// Sync.waitElementPresent("xpath", "//span[@class='m-accordion__title-label']");
 			// Common.clickElement("xpath", "//span[@class='m-accordion__title-label']");
 			
@@ -4613,6 +4614,7 @@ catch(Exception | Error e)
 			Common.findElement("xpath", "//input[@id='email']").clear();
 			
 			Common.textBoxInput("xpath", "//input[@id='email']", email);
+			
 			
 			Sync.waitElementPresent("xpath", "//label[@for='change-password']");
 			Common.clickElement("xpath", "//label[@for='change-password']");
@@ -4642,6 +4644,7 @@ catch(Exception | Error e)
 			Assert.fail();
 		}
 	}
+
 
 	public void Accont_Information() {
 		// TODO Auto-generated method stub
@@ -12070,8 +12073,8 @@ public void outofstock_subcription(String Dataset) {
 
 		try {
 			Sync.waitPageLoad();
-			Common.textBoxInput("id", "email", "testqa@000gmail.com");
-			Common.textBoxInput("id", "pass","Lotuswave@123");
+			Common.textBoxInput("id", "email", storedEmail);
+			Common.textBoxInput("id", "pass","Stage@1234");
 			Common.clickElement("xpath", "//button/span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
