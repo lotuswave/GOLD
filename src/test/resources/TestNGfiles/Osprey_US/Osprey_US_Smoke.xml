@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<suite name="Gold-Osprey US Smoke Suite">
+<suite name="Gold-Osprey US Preprod Smoke Suite">
 <listeners>
 <listener class-name="Utilities.TestListener"/>
 </listeners>
