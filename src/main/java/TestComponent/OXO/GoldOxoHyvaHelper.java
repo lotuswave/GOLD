@@ -1464,7 +1464,7 @@ else
 					Sync.waitElementPresent(60,"xpath", "//button[contains(text(),'Place Order')]");
 					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
-					Thread.sleep(40000);
+					Thread.sleep(4000);
 					if (Common.getCurrentURL().contains("/checkout")) {
 						String sucessmessage = Common.getText("xpath",
 								"//div[contains(@class,'checkout-success')]//h1");
@@ -3985,7 +3985,7 @@ public void FUll_Payment(String dataSet) {
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-			Sync.waitElementPresent("xpath", "//input[@name='phone']");
+			Sync.waitElementPresent("xpath", "//input[@name='phonePasskey']");
 		/*	Common.clickElement("xpath", "//input[@name='phone']");
 			
 			int number=Common.genrateRandomNumber();
@@ -3993,11 +3993,11 @@ public void FUll_Payment(String dataSet) {
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
 			Thread.sleep(6000);
-			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
+			WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
 			System.out.println(phone);
-			Common.textBoxInput("xpath", "//input[@name='phone']", phone);
+			Common.textBoxInput("xpath", "//input[@name='phonePasskey']", phone);
 			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
@@ -13594,6 +13594,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			Thread.sleep(4000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
 			Common.actionsKeyPress(Keys.ENTER);
 			 String pointsused=Common.findElement("xpath", "//span[@class='vs__selected']").getText().trim();
 			 Thread.sleep(4000);
@@ -13605,7 +13606,7 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 	 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Thread.sleep(4000);
-			String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace(" Off", "");
+			String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace("Off", "");
 			String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
 			System.out.println(off);
 			System.out.println(discount);
