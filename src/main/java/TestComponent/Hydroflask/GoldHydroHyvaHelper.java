@@ -3764,7 +3764,7 @@ System.out.println(MyFavorites);
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			click_Prodeal();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Pro Deal Application"),
 					"To validate the user lands on Pro Deal Application after successfull login",
