@@ -19,16 +19,10 @@ public class Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation 
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.Account_page_Validation("Account");
-			Hydro.search_product("Product");      
-			Hydro.addtocart("Product");                    
-			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.clickSubmitbutton_Shippingpage();
-            Hydro.register_billingAddress("BillingDetails");
+			Hydro.click_Createaccount();
+			Hydro.createaccount_verfication("Invalid details");
+            Hydro.create_account("New Account Details");
+            Hydro.Account_page_Validation("Account");
             Hydro.signout();
 			
 			
@@ -40,7 +34,7 @@ public class Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation 
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+   Common.closeAll();
 
 	}
 
