@@ -16,6 +16,7 @@ public class Test_DGLD_OS_EU_PO_ST_094_Register_Giropay_payment_method {
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Register_Giropay_payment_method  () throws Exception {
+		
 
 		try {
         Osprey_ReEu.verifingHomePage();
