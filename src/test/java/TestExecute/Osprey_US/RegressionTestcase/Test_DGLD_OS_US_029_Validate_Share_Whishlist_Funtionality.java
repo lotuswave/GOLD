@@ -9,7 +9,7 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_US_029_validate_Share_Whishlist_Funtionality {
+public class Test_DGLD_OS_US_029_Validate_Share_Whishlist_Funtionality {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"ShareWhishList");
