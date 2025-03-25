@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OXO Smoke Suite">
+<listeners>
+<listener class-name="Utilities.TestListener"/>
+</listeners>
+   <test name="Test_DGLD_OXO_ST_001_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_ShoppingCart_Page_with_Afterpay_Klarna_Payments" testid="DQA-4360" priority="P1" description="This test case is used to validate the functionality of Create Account and Checkout with Simple Bundle Config products from Shopping Cart page and using Discount with Afterpay Klarna Payments.">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_001_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_ShoppingCart_Page_with_Afterpay_Klarna_Payments" />
+</classes>
+</test>
+ <test name="Test_DGLD_OXO_ST_004_Footer_Links_Validation" testid="DQA-4361" priority="P1" description="This test case is used to validate the functionality of Footer Links.">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_004_Footer_Links_Validation" />
+</classes>
+</test>
+
+
+   <test name="Test_DGLD_OXO_ST_033_Register_user_Checkout_with_Different_Shipping_Methods_and_validate_CC_and_PayPal" testid="DQA-4359" priority="P1" description="This test case is used to validate the functionality of Register User Checkout with Different Shipping Methods and Validating with CC and Paypal.">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_033_Register_user_Checkout_with_Different_Shipping_Methods_and_validate_CC_and_PayPal" />
+</classes>
+</test> 
+
+<test name="Test_DGLD_OXO_ST_003_Header_Links_Validation" testid="DQA-4362" priority="P1" description="This test case is used to validate the functionality of Header Links.">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_003_Header_Links_Validation" />
+</classes>
+</test>
+<test name="Test_DGLD_OXO_ST_005_Reset_Password_Validate_search_GuestCheckout_validate_Minicart_and_Login_from_shipping_Page" testid="DQA-4363" priority="P1" description="This test case is used to validate the functionality of Reset Password and  Checkout as a Guest User, Validating the MiniCart  and  LoginIn fromShipping Page.">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_005_Reset_Password_Validate_search_GuestCheckout_validate_Minicart_and_Login_from_shipping_Page" />
+</classes>
+</test>
+<test name="Test_DGLD_OXO_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase" testid="DQA-4364" priority="P1" description="This test case is used to validate the functionality of Search Results Page,PLPand PDP Page for both Regular items and GC Purchase.">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase" />
+</classes>
+</test> 
+<test name="Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" testid="DQA-4365" priority="P1" description="This test case is used to validate the functionality of My Account Page and Checkout with Different Billing and Shipping and Validating with Discount">
+<classes>
+<class name="TestExecute.OXO.SmokeTestCases.Test_DGLD_OXO_ST_007_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" />
+</classes>
+</test>  
+</suite>
