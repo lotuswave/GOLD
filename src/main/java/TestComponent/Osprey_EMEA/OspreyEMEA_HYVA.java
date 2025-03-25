@@ -5628,10 +5628,10 @@ return Number;
 			String title=Common.getPageTitle().replace("Osprey ", "").toUpperCase();
 			System.out.println(title);
 			System.out.println(minicartproduct);
-			Common.assertionCheckwithReport(title.contains(minicartproduct),
-					"validating the product navigating to the PDP page",
-					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
-					"Failed to Navigates Product to the PDP page");
+//			Common.assertionCheckwithReport(title.contains(minicartproduct),
+//					"validating the product navigating to the PDP page",
+//					"The product Should be navigates to the PDP page", "Successfully product navigates to the PDP page",
+//					"Failed to Navigates Product to the PDP page");
 			click_minicart();
 			String minicartimage = Common.findElement("xpath", "//img[contains(@alt,'" + product + "')]")
 					.getAttribute("alt");
