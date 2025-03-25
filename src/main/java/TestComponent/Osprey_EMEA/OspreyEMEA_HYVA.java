@@ -9636,29 +9636,32 @@ return Number;
 
 	public void Sort_By(String Dataset) throws InterruptedException {
 		// TODO Auto-generated method stub
-		String symbol = data.get(Dataset).get("Price_Symbol");
+	//	String symbol = data.get(Dataset).get("Price_Symbol");
+		String symbol ="£";
 		String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
 		System.out.println(PriceFilter);
 		System.out.println(symbol);
 		try {
 			Sync.waitPageLoad();
-
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			Common.scrollIntoView("xpath",
-					"//span[@data-price-type='finalPrice']");
-
+					"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']");
+			String price = Common.findElement("xpath",
+					"//div[@data-role='priceBox']//span[@data-price-type='finalPrice']//span[@x-ref='specialPrice']").getText();
+			System.out.println(price);
 			List<WebElement> BeforeFilterprice = Common.findElements("xpath",
-					"//span[@data-price-type='finalPrice']");
+					"//div[@data-role='priceBox']//span[@class='text-sale-font pr-1 text-red font-bold']");
+				
 			List<String> Beforefilterpricelist = new ArrayList<String>();
 
 			for (WebElement p : BeforeFilterprice) {
-				Beforefilterpricelist.add(p.getText().replace(symbol, " "));
+				Beforefilterpricelist.add(p.getText().replace(symbol, ""));
 				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 			}
 			Thread.sleep(4000);
 			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
 			
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.scrollIntoView("xpath",
 					"//span[@data-price-type='finalPrice']");
 			List<WebElement> AfterFilterprice = Common.findElements("xpath",
