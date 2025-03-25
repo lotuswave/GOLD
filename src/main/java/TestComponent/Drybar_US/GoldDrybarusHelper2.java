@@ -5140,14 +5140,14 @@ public void FUll_Payment(String dataSet) {
         public String create_account(String Dataset) {
         	
     		String Store= data.get(Dataset).get("Store");
-    		String email = null;
+    		String email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
     		try {
 
     			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
     			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-//    			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
+    			Common.textBoxInput("xpath", "//input[@name='email']", email);
     			
-    			 email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
+    //			 email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
     			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
     			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
     			System.out.println(data.get(Dataset).get("Password"));
@@ -10796,7 +10796,7 @@ public void Configurable_PDP(String Dataset) {
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Productsize + "')]");
 		Common.clickElement("xpath", "//span[contains(text(),'" + Productsize + "')]");
 		Thread.sleep(3000);
-		String size=Common.findElement("xpath", "//span[contains(@class,'text-secondary-700')]").getText().toUpperCase();
+		String size=Common.findElement("xpath", "(//div[contains(@class,'flex items-end text-sm')])[2]").getText().toUpperCase();
 		System.out.println(size);
 		String size1= data.get(Dataset).get("size").toUpperCase();
 		System.out.println(size1);
