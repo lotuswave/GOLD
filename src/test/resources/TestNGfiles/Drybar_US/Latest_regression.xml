@@ -3,21 +3,25 @@
 <listeners>
 <listener class-name="Utilities.TestListener"/>
 </listeners>
-<test name="TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC" testid="DQA-3783" priority="P1" description="This test case is to validate the Checkout functionality with Aerosol and Non Aerosol products with PO Box Address using Ground shipping method CC Master Card Payment method.">
-<classes>
-<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC"/>
-</classes>
-</test>
-<test name="TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_After_pay_payment_method_Express_shipping" testid="DQA-3781" priority="P1" description="This test case is use to verify with register user checkout with After pay payment method with Express shipping.">
-<classes>
-<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_After_pay_payment_method_Express_shipping"/>
-</classes>
-</test>
 <test name="TEST_DGLD_DB_US_ST_165__Guest_User_Create_Account_from_OrderConfirmation_Page" testid="DQA-3774" priority="P1" description="This test case is to validate place an order by using the guest user then create account from the order Confirmation page.">
 <classes>
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_165__Guest_User_Create_Account_from_OrderConfirmation_Page"/>
 </classes>
 </test>
+
+<test name="TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC" testid="DQA-3783" priority="P1" description="This test case is to validate the Checkout functionality with Aerosol and Non Aerosol products with PO Box Address using Ground shipping method CC Master Card Payment method.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_169_Guest_user_checkout_Aerosol_Non_Aerosol_PO_Box_USPS_Ground_MasterCC"/>
+</classes>
+</test>
+
+<test name="TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_After_pay_payment_method_Express_shipping" testid="DQA-3781" priority="P1" description="This test case is use to verify with register user checkout with After pay payment method with Express shipping.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_168_Register_user_1_Item_1_QTY_checkout_with_After_pay_payment_method_Express_shipping"/>
+</classes>
+</test>
+
+
 <test name="TEST_DGLD_DB_US_ST_164_Account_Registration_Create_Account_With_Cart" testid="DQA-3772" priority="P1" description="This test case is to validate create account after product is Added to Cart.">
 <classes>
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_164_Account_Registration_Create_Account_With_Cart"/>

@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHyva_PRODHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Engraving_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments {
+public class Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_products_Discount_with_Afterpay_Klarna_Payments {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyva_PRODHelper Hydro = new GoldHydroHyva_PRODHelper(datafile,"DataSet");
