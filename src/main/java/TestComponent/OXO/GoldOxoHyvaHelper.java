@@ -8675,7 +8675,8 @@ public void header_1_Percent_Planet() {
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[14]");
 			Common.scrollIntoView(video);
 	
@@ -8694,6 +8695,25 @@ public void header_1_Percent_Planet() {
 			Common.assertionCheckwithReport(video1.equals("Pause video"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
+			}
+			else
+			{
+				WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div//button)[12]");
+				Common.scrollIntoView(video);
+				Thread.sleep(3000);
+				Common.scrollIntoView("xpath", "//span[@itemprop='name']");
+				Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div//button)[12]");
+				Common.clickElement("xpath", "//button[@title='Play video']");
+				Sync.waitForLoad();
+								String video1 = Common.findElement("xpath", "//button[@title='Pause video']")
+
+						.getAttribute("aria-label");
+				System.out.println(video1);
+				Common.assertionCheckwithReport(video1.equals("Pause video"), "validating the video in PDP page",
+						"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
+						"failed to play the video in PDP page");
+				
+			}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
