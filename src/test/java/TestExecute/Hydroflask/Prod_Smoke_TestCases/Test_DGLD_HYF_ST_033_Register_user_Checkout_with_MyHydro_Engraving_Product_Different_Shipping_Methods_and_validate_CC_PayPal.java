@@ -14,8 +14,9 @@ public class Test_DGLD_HYF_ST_033_Register_user_Checkout_with_MyHydro_Engraving_
 
 String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 GoldHydroHyva_PRODHelper Hydro = new GoldHydroHyva_PRODHelper(datafile,"DataSet");
-GoldHydroHyvaHelper Hydro1 = new GoldHydroHyvaHelper(datafile,"Bundle");
-GoldHydroHyvaHelper Hydro2 = new GoldHydroHyvaHelper(datafile,"MyHydro");
+GoldHydroHyva_PRODHelper Hydro1 = new GoldHydroHyva_PRODHelper(datafile,"Engraving");
+GoldHydroHyva_PRODHelper Hydro2 = new GoldHydroHyva_PRODHelper(datafile,"MyHydro");
+
 
 @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 public void Validating_Register_user_Checkout__MyHydro_Engraving_Product_ () throws Exception {
