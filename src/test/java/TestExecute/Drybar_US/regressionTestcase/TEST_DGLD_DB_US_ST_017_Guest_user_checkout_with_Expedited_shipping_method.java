@@ -26,7 +26,7 @@ public class TEST_DGLD_DB_US_ST_017_Guest_user_checkout_with_Expedited_shipping_
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.addDeliveryAddress_Guestuser("Address");
-			Drybar.selectshippingmethod("GroundShipping method");
+//			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.selectshippingmethod("Expedited_method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");

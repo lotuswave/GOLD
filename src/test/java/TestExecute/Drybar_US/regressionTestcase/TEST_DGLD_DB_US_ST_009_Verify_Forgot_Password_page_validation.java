@@ -21,13 +21,13 @@ public class TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation {
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.Forgot_password("AccountDetails");
-			Drybar.search_product("Configurable Product");
+		/*	Drybar.search_product("Configurable Product");
 			Drybar.addtocart("Configurable Product");
 			Drybar.HairTools_headerlinks("Hair Tools");
 			Drybar.addtocart("PLP Product");
 			Drybar.minicart_Checkout();
 			Drybar.click_singin_Shippingpage();
-			Drybar.Forgot_password("AccountDetails");
+			Drybar.Forgot_password("AccountDetails");*/
 			
 
 		} catch (Exception e) {

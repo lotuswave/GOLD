@@ -1008,8 +1008,8 @@ public class GoldDrybarusHelper2 {
                 }
 				else
 				{
-					Sync.waitElementPresent("xpath", "//span[contains(text(),'" + prodmethod + "')]");
-					Common.clickElement("xpath", "//span[contains(text(),'" + prodmethod + "')]");
+					Sync.waitElementPresent("xpath", "//label[contains(@class,'flex w-full')]//span[contains(text(),'" + prodmethod + "')]");
+					Common.clickElement("xpath", "//label[contains(@class,'flex w-full')]//span[contains(text(),'" + prodmethod + "')]");
 				}
 			} else {
 				Assert.fail();
