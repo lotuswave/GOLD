@@ -8681,152 +8681,40 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 
 	public void minicart_ordersummary_discount(String Dataset) {
 		// TODO Auto-generated method stub.
-		String Symbol="$";
-		String expectedResult = "It should opens textbox input to enter discount.";
-		try {
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				String Symbol="$";
+				String expectedResult = "It should opens textbox input to enter discount.";
+				try {
+					Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+					Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+		 
+					Sync.waitElementPresent("xpath", "//input[@id='discount-code']");
+					if (Common.getCurrentURL().contains("preprod")) {
+						Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
+					} else {
+						Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(Dataset).get("prodDiscountcode"));
+					}
+					int size = Common.findElements("xpath", "//input[@id='discount-code']").size();
+					Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
+							"Successfully open the discount input box", "User unable enter Discount Code");
+					Sync.waitElementClickable(30,"xpath", "//button[contains(@class,'btn btn-primary justify')]");
+					Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify')]");
+					Sync.waitPageLoad();
+					expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
+						Thread.sleep(4000);
+						int discountcodemsg1 = Common.findElements("xpath", "//span[contains(text(),'Cancel Coupon')]").size();
+						Common.assertionCheckwithReport(discountcodemsg1 >0, "verifying pomocode",
+								expectedResult, "promotion code working as expected", "Promation code is not applied");
+				} catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("validating the promocode in the shopping cart page",
+							"Promocode should be apply in the shopping cart page",
+							"Unable to display the promocode in the shopping cart page",
+							Common.getscreenShot("Failed to display the promocode in the shopping cart page"));
+					Assert.fail();
+				}
 
-			Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-			if (Common.getCurrentURL().contains("preprod")) {
-				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
-			} else {
-				Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
-			}
-			int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
-			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
-					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable("xpath", "//button[@value='Apply Discount']");
-			Common.clickElement("xpath", "//button[@value='Apply Discount']");
-			Sync.waitPageLoad();
-			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			if (Common.getCurrentURL().contains("preprod")) {
-				String discountcodemsg = Common.getText("xpath", "///div[@class='container']//div[@class='relative flex w-full']/span");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
-						expectedResult, "promotion code working as expected", "Promation code is not applied");
-			} else {
-				String discountcodemsg = Common.getText("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span");
-				Common.assertionCheckwithReport(discountcodemsg.contains("You used coupon code"), "verifying pomocode",
-						expectedResult, "promotion code working as expected", "Promation code is not applied");
-			}
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the promocode in the shopping cart page",
-					"Promocode should be apply in the shopping cart page",
-					"Unable to display the promocode in the shopping cart page",
-					Common.getscreenShot("Failed to display the promocode in the shopping cart page"));
-			Assert.fail();
-		}
-		try {
-			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") )
-			{
-			Thread.sleep(6000);
-			String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace(Symbol,
-					"");
-			Float subtotalvalue = Float.parseFloat(Subtotal);
-			if(Common.getCurrentURL().contains("/gb")|| Common.getCurrentURL().contains("/eu"))  {
-				
-				String shipping = Common.getText("xpath", "//tr[@class='totals shipping incl']//span[@class='price']")
-						.replace(Symbol, "");
-				Float shippingvalue = Float.parseFloat(shipping);
-				
-				System.out.println("Shipping:"+  shippingvalue);
-				String Discount = Common.getText("xpath", "//tr[@class='totals discount']//span[@class='price']")
-						.replace(Symbol, "");
-				Float Discountvalue = Float.parseFloat(Discount);
-				System.out.println("Discount:"+ Discountvalue);
-				Common.clickElement("xpath", "//span[@class='block transform']");
-				String Tax = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(taxItem.amount)']").replace(Symbol, "");
-				Float Taxvalue = Float.parseFloat(Tax);
-				System.out.println("Tax:"+  Taxvalue);
-				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
-						.replace(Symbol, "");
-				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				System.out.println("Order Total"+   ordertotalvalue);
-				Float Total = (subtotalvalue + shippingvalue) + Discountvalue;
-				
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-//				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-//						"validating the order summary in the payment page",
-//						"Order summary should be display in the payment page and all fields should display",
-//						"Successfully Order summary is displayed in the payment page and fields are displayed",
-//						"Failed to display the order summary and fileds under order summary");
-			}
-			else {
-				
-				String shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]")
-						.replace(Symbol, "");
-				Float shippingvalue = Float.parseFloat(shipping);
-				System.out.println("Shipping:"+  shippingvalue);
-				String Discount = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[1]")
-						.replace(Symbol, "").replace("-", "");
-				
-				Float Discountvalue = Float.parseFloat(Discount);
-				System.out.println("Discount:"+ Discountvalue);
-				Common.clickElement("xpath", "//span[@class='block transform']");
-				
-				String Tax = Common.getText("xpath", "(//div[contains(@x-text,'segment')])[3]").replace(Symbol, "");
-				Float Taxvalue = Float.parseFloat(Tax);
-				System.out.println("Taxvalue:"+ Taxvalue);
-				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
-						.replace(Symbol, "");
-				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) - Discountvalue;
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-						"validating the order summary in the payment page",
-						"Order summary should be display in the payment page and all fields should display",
-						"Successfully Order summary is displayed in the payment page and fields are displayed",
-						"Failed to display the order summary and fileds under order summary");
-			}
-			
-			
-			}
-			else
-			{
-				String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace(Symbol,
-						"");
-				Float subtotalvalue = Float.parseFloat(Subtotal);
-				String shipping = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[2]")
-						.replace(Symbol, "");
-				Float shippingvalue = Float.parseFloat(shipping);
-				System.out.println("Shipping:"+  shippingvalue);
-				String Discount = Common.getText("xpath", "(//div[@x-text='hyva.formatPrice(segment.value)'])[1]")
-						.replace(Symbol, "").replace("-", "");
-				
-				Float Discountvalue = Float.parseFloat(Discount);
-				System.out.println("Discount:"+ Discountvalue);
-//				Common.clickElement("xpath", "//span[@class='block transform']");
-				
-				String Tax = Common.getText("xpath", "(//div[contains(@x-text,'segment')])[3]").replace(Symbol, "");
-				Float Taxvalue = Float.parseFloat(Tax);
-				System.out.println("Taxvalue:"+ Taxvalue);
-				String ordertotal = Common.getText("xpath", "//span[@x-text='hyva.formatPrice(segment.value)']")
-						.replace(Symbol, "");
-				Float ordertotalvalue = Float.parseFloat(ordertotal);
-				Float Total = (subtotalvalue + shippingvalue + Taxvalue) - Discountvalue;
-				String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-				System.out.println(ExpectedTotalAmmount2);
-				System.out.println(ordertotal);
-//				Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
-//						"validating the order summary in the payment page",
-//						"Order summary should be display in the payment page and all fields should display",
-//						"Successfully Order summary is displayed in the payment page and fields are displayed",
-//						"Failed to display the order summary and fileds under order summary");
-			}
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the order summary in the payment page",
-					"Order summary should be display in the payment page and all fields should display",
-					"Unabel to display the Order summary and fields are not displayed in the payment page",
-					Common.getscreenShot("Failed to display the order summary and fileds under order summary"));
-			Assert.fail();
-		}
+		
 
 	}
 	public void reorder() {

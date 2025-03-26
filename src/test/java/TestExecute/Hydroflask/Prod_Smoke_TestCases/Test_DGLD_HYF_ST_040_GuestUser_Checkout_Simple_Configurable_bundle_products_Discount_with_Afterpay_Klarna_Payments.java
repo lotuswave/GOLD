@@ -15,35 +15,23 @@ public class Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_
 	GoldHydroHyva_PRODHelper Hydro = new GoldHydroHyva_PRODHelper(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_Create_Account() throws Exception {
-
+	public void Validating_GuestUser_Checkout_Simple_Configurable_bundle_products_Discount_with_Afterpay_Klarna_Payments() throws Exception {
+		 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_Createaccount();
-			Hydro.createaccount_verfication("Invalid details");
-            Hydro.create_account("New Account Details");
-            Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+		    Hydro.bottles_headerlinks("Bottles & Drinkware"); 
 			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.search_product("Product");      
-			Hydro.addtocart("Product"); 
-			Hydro.Bottles_headerlinks("Bottles & Drinkware");   
-			Hydro.Text_Engraving("Engraving Product");
-			Hydro.enraving_Checkout("Horizontal Text");
-			Hydro.back_to_cart();
-			Hydro.update_shoppingcart("Product Qunatity");
-			Hydro.Edit_Engraving_to_Graphic("Engraving Product");
+			Hydro.addtocart("Product");
+			Hydro.search_product("Bundle product"); 
+			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
-            Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.back_to_cart();
 			Hydro.minicart_ordersummary_discount("Discount");
-			Hydro.updateproductcolor_shoppingcart("Color Product");
-			Hydro.click_minicart();
-			Hydro.minicart_Checkout();
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+            Hydro.selectshippingaddress("2 Day method");
+            Hydro.clickSubmitbutton_Shippingpage();
 			Hydro.After_Pay_payment("Afterpay");
 			Hydro.Kalrna_Payment("Klarna Visa Payment");
-			Hydro.back_to_cart();
-			Hydro.deleteProduct_shoppingcart();
 			
 		} catch (Exception e) {
 
