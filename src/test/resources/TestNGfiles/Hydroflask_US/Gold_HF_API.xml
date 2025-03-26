@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF API Execution">
+
+    <test name="Test_DGLD_HF_ST_001_Guest_1LineItem_QTY2_CC" testid="DQA-3446" priority="P1" description="This script will cover Guest user checkout functionality with 1 Line Item of QTY 2 using Credit Card">
+        <classes>
+            <class name="TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_01_01_Guest_1LineItem_QTY2_CC"/>
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_HF_ST_002_Registered_Simple_And_Lineitem_Giftcard_1QTYeach_PayPal" testid="DQA-3447" priority="P1" description="This script will cover Registered user checkout functionality with Simple and Line Item Gift Card using PayPal">
+        <classes>
+            <class name="TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_02_Registered_Simple_And_Lineitem_Giftcard_1QTYeach_PayPal"/>
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_HF_ST_003_Guest_ConfigurableItem_1QTY_Klarna" testid="DQA-4107" priority="P1" description="This script will cover Guest user checkout functionality for a Configurable Item with 1 Quantity using Klarna">
+        <classes>
+            <class name="TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_03_Guest_ConfigurableItem_1QTY_Klarna"/>
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_HF_ST_004_Guest_1LineItem_QTY2_GiftCodeFullRedemption" testid="DQA-34441" priority="P1" description="This script will cover Guest user checkout functionality with 1 Line Item of QTY 2 using Gift Code for Full Redemption">
+        <classes>
+            <class name="TestExecute.API.Hydroflask.Test_DGLD_API_HF_US_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption"/>
+        </classes>
+    </test>
+
+</suite>
