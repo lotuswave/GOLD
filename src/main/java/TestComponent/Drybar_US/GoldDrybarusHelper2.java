@@ -7023,14 +7023,78 @@ public void FUll_Payment(String dataSet) {
 
 		
 		public void header_GiftsSets(String Dataset) {
-			 
-			String names = data.get(Dataset).get("GiftsSets");
+
+			if(Common.getCurrentURL().contains("preprod"))
+			{
+				String names = data.get(Dataset).get("GiftsSets");
+				String[] Links = names.split(",");
+				String gifts=data.get(Dataset).get("headers");
+				int i = 0;
+				try {
+
+					for (i = 0; i < Links.length; i++) {
+						Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ gifts +"')])");
+						Common.clickElement("xpath", "(//span[contains(text(),'"+ gifts +"')])");
+						Thread.sleep(3000);
+						Sync.waitElementPresent("xpath",
+								"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
+						Common.clickElement("xpath",
+								"//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')]");
+						Sync.waitPageLoad();
+						Thread.sleep(4000);
+						String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
+//						String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+						String breadcrumbs = "";
+						if (Common.findElements("xpath", "//nav[contains(@class,'breadcrumb')]").size() > 0) {
+						    breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+						} else {
+						    String currentURL = Common.getCurrentURL();
+						    System.out.println("Redirecting to URL: " + currentURL);
+						}	
+						System.out.println(title);
+						System.out.println(breadcrumbs);
+						System.out.println(Links[i]);
+						Thread.sleep(4000);
+						String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
+						System.out.println(products);
+						int Number = Integer.parseInt(products);
+						int j=0;
+						if(Number>j)
+						{
+							Common.assertionCheckwithReport(title.contains(Links[i]) || breadcrumbs.contains(Links[i])
+									|| Common.getPageTitle().contains("Search Result Page")  || Common.getCurrentURL().contains("all-products"),
+									"verifying the header link " + Links[i] + "under GiftsSets",
+									"user should navigate to the " + Links[i] + " page",
+									"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+						}
+						else
+						{
+							ExtenantReportUtils.addFailedLog(
+									"validating the the products in the plp ",
+									"User should able to see the products in plp", "unable to see the products in the PLP",
+									Common.getscreenShot("Failed to see products in PLP"));
+							Assert.fail();
+						}
+					}
+				}
+				catch (Exception | Error e) {
+					e.printStackTrace();
+					ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "under GiftsSets",
+							"User should navigate to the " + Links[i] + "pages",
+							" unable to navigate to the " + Links[i] + "pages",
+							Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+					Assert.fail();
+				}
+			}
+			else
+			{
+			String names = data.get(Dataset).get("Prod GiftsSets");
 			String[] Links = names.split(",");
 			String gifts=data.get(Dataset).get("headers");
 			int i = 0;
 			try {
 
-				for (i = 0; i < Links.length; i++) {
+				for (i = 2; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'"+ gifts +"')])");
 					Common.clickElement("xpath", "(//span[contains(text(),'"+ gifts +"')])");
 					Thread.sleep(3000);
@@ -7044,7 +7108,7 @@ public void FUll_Payment(String dataSet) {
 //					String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					String breadcrumbs = "";
 					if (Common.findElements("xpath", "//nav[contains(@class,'breadcrumb')]").size() > 0) {
-					    title = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
+					    breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();
 					} else {
 					    String currentURL = Common.getCurrentURL();
 					    System.out.println("Redirecting to URL: " + currentURL);
@@ -7053,9 +7117,15 @@ public void FUll_Payment(String dataSet) {
 					System.out.println(breadcrumbs);
 					System.out.println(Links[i]);
 					Thread.sleep(4000);
-					String products=Common.getText("xpath", "//div[contains(@class,'flex w-full')]//span");
+					String products = "";
+					if (Common.findElements("xpath", "//span[@id='algolia-tab-products-counter']").size() > 0) {
+					    products = Common.findElement("xpath", "//span[@id='algolia-tab-products-counter']").getText();
+					} else if(Common.findElements("xpath", "//div[contains(@class,'flex w-full')]//span").size() > 0) {
+						products = Common.findElement("xpath", "(//div[contains(@class,'flex w-full')]//span)[1]").getText();
+					}	
+					
 					System.out.println(products);
-					int Number = Integer.parseInt(products);
+					int Number = Integer.parseInt(products.replaceAll("[^0-9]", ""));
 					int j=0;
 					if(Number>j)
 					{
@@ -7084,6 +7154,8 @@ public void FUll_Payment(String dataSet) {
 				Assert.fail();
 			}
 		}
+		}
+
 
 		
 		public void header_New(String Dataset) {
