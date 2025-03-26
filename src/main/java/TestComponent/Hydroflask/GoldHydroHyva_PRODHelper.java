@@ -9819,7 +9819,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				Sync.waitElementPresent("xpath", "//span[normalize-space()='Shop']");
 				Common.clickElement("xpath", "//span[normalize-space()='Shop']");
 				Common.clickElement("xpath", "(//span[contains(text(),'Bottles & Drinkware')])[1]");
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath",
 						"//a[contains(@href,'bottles-drinkware')]/span[contains(text(),'" + Links[i] + "')]");
 				
@@ -11241,12 +11241,11 @@ public void Explore_Validation(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
-				Common.clickElement("xpath", "//span[contains(text(),'New Colors')]");
+				Thread.sleep(2000);
+				Common.clickElement("xpath", "(//span[contains(text(),'New Colors')])[2]");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"//a[contains(@href,'new-color')]//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
-						"//a//span[text()='New Colors']//following::ul//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitElementPresent("xpath","//a[@title='" + Links[i] + "']");
+				Common.clickElement("xpath","//a[@title='" + Links[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				
@@ -12112,28 +12111,22 @@ public void Explore_Validation(String Dataset) {
 
 	public void Customize_validation(String Dataset) {
 		// TODO Auto-generated method stub
-		String names = data.get(Dataset).get("Bottles Size");
+		String names = data.get(Dataset).get("CustomizeLinks");
 		String[] Links = names.split(",");
 		int i=0;
 		try
 		{
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'Customize')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Customize')]");
+			
          	for (i = 0; i < Links.length; i++) {
-         		Common.scrollIntoView("xpath", "//div[@data-content-type='text']//p[contains(text(),'" + Links[i] + "')]");
-         		Thread.sleep(3000);
-         		Sync.waitElementPresent("xpath",
-					"//div[@data-content-type='text']//p[contains(text(),'" + Links[i] + "')]");
-         		String Size = Common.findElement("xpath",
-					"//div[@data-content-type='text']//p[contains(text(),'" + Links[i] + "')]").getText();
-         	String Customize = Common.findElement("xpath","//span[contains(text(),'Customize Yours')]").getText();
-         	System.out.println(Size);
-         	System.out.println(Customize);
+         		Thread.sleep(4000);
+    			Sync.waitElementPresent("xpath", "//span[contains(text(),'Customize')]");
+    			Common.clickElement("xpath", "//span[contains(text(),'Customize')]");
+         		Sync.waitElementPresent("xpath","//a[@title='" + Links[i] + "']");
+         		Common.clickElement("xpath","//a[@title='" + Links[i] + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(Links[i]);
-			Common.assertionCheckwithReport(Customize.contains("Customize Yours"),
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customize")||Common.getCurrentURL().contains("engraving")||Common.getCurrentURL().contains("collegiate"),
 					"verifying the header link " + Links[i] + "Under Customize",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
