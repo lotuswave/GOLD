@@ -46,7 +46,7 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="905879";
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/ospreyuken/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -101,7 +101,7 @@ public class Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_Rede
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +

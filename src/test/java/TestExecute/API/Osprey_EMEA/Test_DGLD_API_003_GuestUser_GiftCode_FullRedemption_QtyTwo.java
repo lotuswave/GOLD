@@ -47,7 +47,7 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="901535";
+    	MagentoOrder_ID="905873";
         RestAssured.baseURI = "https://emea-preprod.hele.digital/rest/ospreyuken/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -103,7 +103,7 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -163,62 +163,7 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
         System.out.println("Ship Order Response: " + response.getBody().asString());
         System.out.println("Request Body: " + requestBody); // print request body for debugging.
     }
-/*
-    @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
-    public void shipOrder_And_InvoiceOrder() {
-        RestAssured.baseURI = "https://webhooks.eu.workato.com/webhooks/rest/22a30675-6e14-4d17-b1ff-50a3d6535479/new_shipment";
 
-        RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", "Bearer " + apiKey);
-
-        String trackingNumberBase = "279492"; // Base tracking number
-        String trackingNumberSuffix = generateRandomNumber(6); // Generate 6 random digits
-        String trackingNumber = trackingNumberBase + trackingNumberSuffix;
-
-        String requestBody = "{\n" +
-                "    \"attribute1\": \"\",\n" +
-                "    \"attribute2\": \"\",\n" +
-                "    \"attribute3\": \"\",\n" +
-                "    \"attribute4\": \"\",\n" +
-                "    \"attribute5\": \"\",\n" +
-                "    \"delivery_number\": \"\",\n" +
-                "    \"magento_customer_number\": \"\",\n" +
-                "    \"magento_order_number\": \""+orderNumber+"  \",\n" +
-                "    \"oracle_customer_number\": \"\",\n" +
-                "    \"oracle_order_number\": \"\",\n" +
-                "    \"shipments\": [\n" +
-                "        {\n" +
-                "            \"carrier\": \"GLS\",\n" +
-                "            \"items\": [\n" +
-                "                {\n" +
-                "                    \"attribute1\": \"\",\n" +
-                "                    \"attribute2\": \"\",\n" +
-                "                    \"attribute3\": \"\",\n" +
-                "                    \"attribute4\": \"\",\n" +
-                "                    \"attribute5\": \"\",\n" +
-                "                    \"magento_order_item_id\":"+itemId+",\n" +
-                "                    \"quantity\": "+QTYOrder+",\n" +
-                "                    \"quantity_cancelled\": \"\",\n" +
-                "                    \"recipe_id\": \"\",\n" +
-                "                    \"sku_ordered\": \"" +sku+"\",\n" +
-                "                    \"sku_shipped\": \"" +sku+"\"\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            \"tracking_number\": \""+trackingNumber +"\"\n" +
-                "        }\n" +
-                "    ],\n" +
-                "    \"website_id\": \"OSPREYUK\"\n" +
-                "}";
-        request.body(requestBody);
-
-        Response response = request.post();
-
-        Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
-        System.out.println("Ship Order Response: " + response.getBody().asString());
-        System.out.println("Generated Tracking Number: " + trackingNumber);
-    
-    }
 
 	
 	
@@ -321,16 +266,7 @@ public class Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo {
              "    \"refund_shipping\": false\n" +
              "}";
 
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
+
      request.body(requestBody);
 
      Response response = request.post();
