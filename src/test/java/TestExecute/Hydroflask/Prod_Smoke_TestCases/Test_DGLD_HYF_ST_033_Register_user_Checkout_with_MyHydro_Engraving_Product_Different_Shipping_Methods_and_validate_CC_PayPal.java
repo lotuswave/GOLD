@@ -18,7 +18,7 @@ GoldHydroHyvaHelper Hydro1 = new GoldHydroHyvaHelper(datafile,"Bundle");
 GoldHydroHyvaHelper Hydro2 = new GoldHydroHyvaHelper(datafile,"MyHydro");
 
 @Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-public void Validating_Register_user_Checkout_MultipleItems_MyHydro_Product_Bundle () throws Exception {
+public void Validating_Register_user_Checkout__MyHydro_Engraving_Product_ () throws Exception {
 	
 	    
 	try {
@@ -27,12 +27,8 @@ public void Validating_Register_user_Checkout_MultipleItems_MyHydro_Product_Bund
 		Hydro.login_Hydroflask("AccountDetails"); 
 		Hydro2.search_product("Myhydro Product");   
 		Hydro2.Add_Myhydro("Myhydro Product");
-		Hydro1.search_product("Bundle product"); 
-		Hydro1.Addtocart_Bundle("Bundle product");
-		Hydro1.search_product("Product");       
-		Hydro1.addtocart("Product"); 
-		Hydro1.bottles_headerlinks("Bottles & Drinkware");
-		Hydro1.Configurable_addtocart_pdp("Product");
+		Hydro.Bottles_headerlinks("Bottles & Drinkware");
+		Hydro.Graphic_Engraving("Engraving Product");
 		Hydro.minicart_Checkout();
 		Hydro.RegaddDeliveryAddress("AccountDetails");
 		Hydro.selectshippingaddress("GroundShipping method"); // Need to add 2-day once enabled
@@ -53,7 +49,7 @@ public void clearBrowser() {
 
 @BeforeTest
 public void startTest() throws Exception {
-	System.setProperty("configFile", "Hydroflask\\config.properties");
+	System.setProperty("configFile", "Hydroflask\\prodconfig.properties");
     Login.signIn();
     Hydro.close_add();
     Hydro.acceptPrivacy();

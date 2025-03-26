@@ -40,7 +40,7 @@ public class Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation 
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
+		System.setProperty("configFile", "Hydroflask\\prodconfig.properties");
          Login.signIn();
          Hydro.close_add();
          Hydro.acceptPrivacy();

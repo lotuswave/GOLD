@@ -59,7 +59,7 @@ public class Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
+		System.setProperty("configFile", "Hydroflask\\prodconfig.properties");
          Login.signIn();
          Hydro.close_add();
          Hydro.acceptPrivacy();

@@ -44,7 +44,7 @@ public class Test_DGLD_HYF_ST_046_Reset_Password_and_Validate_search_results_Pag
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
+		System.setProperty("configFile", "Hydroflask\\prodconfig.properties");
 		Login.signIn();
 		Hydro.close_add();
         Hydro.acceptPrivacy();

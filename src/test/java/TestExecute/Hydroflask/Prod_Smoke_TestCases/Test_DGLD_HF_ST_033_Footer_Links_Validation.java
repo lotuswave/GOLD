@@ -41,7 +41,7 @@ public class Test_DGLD_HF_ST_033_Footer_Links_Validation {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Hydroflask\\config.properties");
+		System.setProperty("configFile", "Hydroflask\\prodconfig.properties");
         Login.signIn();
         Hydro.close_add();
         Hydro.acceptPrivacy();
