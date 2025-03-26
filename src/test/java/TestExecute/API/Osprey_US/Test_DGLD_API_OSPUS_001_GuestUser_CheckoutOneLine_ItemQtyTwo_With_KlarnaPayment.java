@@ -101,7 +101,7 @@ public class Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_K
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -162,63 +162,6 @@ public class Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_K
         System.out.println("Request Body: " + requestBody);
     }
 
-    
-  /*  @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
-    public void shipOrder_And_InvoiceOrder() {
-        RestAssured.baseURI = "https://webhooks.workato.com/webhooks/rest/74179468-e8a5-424f-a369-4dbcd03db8f1/new_shipment";
-
-        RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
-        request.header("Authorization", "Bearer " + apiKey);
-
-        String trackingNumberBase = "379492"; 
-        String trackingNumberSuffix = generateRandomNumber(6); 
-        String trackingNumber = trackingNumberBase + trackingNumberSuffix;
-
-        String requestBody = "{\n" +
-                "    \"attribute1\": \"\",\n" +
-                "    \"attribute2\": \"\",\n" +
-                "    \"attribute3\": \"\",\n" +
-                "    \"attribute4\": \"\",\n" +
-                "    \"attribute5\": \"\",\n" +
-                "    \"delivery_number\": \"2373575\",\n" +
-                "    \"magento_order_number\": \""+orderNumber+"  \",\n" +
-                "    \"oracle_customer_number\": \"\",\n" +
-                "    \"oracle_order_number\": \"\",\n" +
-                "    \"shipments\": [\n" +
-                "        {\n" +
-                "            \"carrier\": \"Standard - Fedex Ground Home Deliver\",\n" +
-                "            \"items\": [\n" +
-                "                {\n" +
-                "                    \"attribute1\": \"\",\n" +
-                "                    \"attribute2\": \"\",\n" +
-                "                    \"attribute3\": \"\",\n" +
-                "                    \"attribute4\": \"\",\n" +
-                "                    \"attribute5\": \"\",\n" +
-                "                    \"magento_order_item_id\": "+itemId+",\n" +
-                "                    \"quantity\": "+QTYOrder+",\n" +
-                "                    \"quantity_cancelled\": \"\",\n" +
-                "                    \"recipe_id\": \"\",\n" +
-                "                    \"sku_ordered\": \""+sku+"\",\n" +
-                "                    \"sku_shipped\": \""+sku+"\"\n" +
-                "                }\n" +
-                "            ],\n" +
-                "            \"tracking_number\": \""+trackingNumber+"\"\n" +
-                "        }\n" +
-                "    ],\n" +
-                "    \"website_id\": \"OSPREYNA\"\n" +
-                "}";
-        request.body(requestBody);
-
-        Response response = request.post();
-
-        Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
-        System.out.println("Ship Order Response: " + response.getBody().asString());
-        System.out.println("Generated Tracking Number: " + trackingNumber);
-    
-    }
-
-	*/
 	
 	///***Create RMA***///
     @Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder", "invoice"})
@@ -286,8 +229,8 @@ public class Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_K
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
 
      RequestSpecification request = RestAssured.given();
-     request.header("Content-Type", "application/json"); // Or "text/plain" as in your Postman
-     request.header("Authorization", "Bearer " + apiKey);// Use the provided token
+     request.header("Content-Type", "application/json"); 
+     request.header("Authorization", "Bearer " + apiKey);
 
      String requestBody = "{\n" +
              "    \"type\": \"approved_return\",\n" +
