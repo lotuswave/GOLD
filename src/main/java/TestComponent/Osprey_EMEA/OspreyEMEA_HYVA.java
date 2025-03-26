@@ -5661,7 +5661,7 @@ return Number;
 			String Freeshipping = Common
 					.findElement("xpath", "//div[@class='flex items-center']//p")
 					.getText();
-			Common.assertionCheckwithReport(Freeshipping.equals("Only £17.40 left for Free Shipping."),
+			Common.assertionCheckwithReport(Freeshipping.equals("Good news: your order will be delivered for Free."),
 					"validating the free shipping in mini cart",
 					"Free shipping should be avaliable for selected products",
 					"Successfully free shipping is appiled for selected products", "Failed to see free shipping");
@@ -9637,8 +9637,7 @@ return Number;
 
 	public void Sort_By(String Dataset) throws InterruptedException {
 		// TODO Auto-generated method stub
-	//	String symbol = data.get(Dataset).get("Price_Symbol");
-		String symbol ="£";
+		String symbol = data.get(Dataset).get("Price_Symbol");
 		String PriceFilter = data.get(Dataset).get("Sortby_Dropdown");
 		System.out.println(PriceFilter);
 		System.out.println(symbol);
