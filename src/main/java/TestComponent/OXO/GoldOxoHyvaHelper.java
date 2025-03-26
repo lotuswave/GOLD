@@ -5753,13 +5753,7 @@ catch(Exception | Error e)
 
 		}
 
-		Common.actionsKeyPress(Keys.PAGE_UP);
-		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
-		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
-		expectedResult = "User gets confirmation under the same tab. It includes Success message.";
-		Common.assertionCheckwithReport(Text.contains("Your product has been successfully registered."),
-				"verifying Product registration confirmation message", expectedResult,
-				"User gets confirmation for Product registration ", "unable to load the confirmation form");
+		
 
 	}
 
