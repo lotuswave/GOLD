@@ -7778,9 +7778,9 @@ public void FUll_Payment(String dataSet) {
 	    			else
 	    			{
 	    				Common.clickElement("xpath", "//button[@aria-label='My Account']");
-	    				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'My Favorites')]");
-	    				Common.clickElement("xpath", "//a[contains(text(),'My Favorites')]");
-	    				Common.assertionCheckwithReport(Common.getCurrentURL().contains("Wish List Sharing"),
+	    				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'My Wish List')]");
+	    				Common.clickElement("xpath", "//a[contains(text(),'My Wish List')]");
+	    				Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
 	    						"validating the Navigation to the My Favorites page",
 	    						"After Clicking on My Favorites CTA user should be navigate to the My Favorites page",
 	    						"Sucessfully User Navigates to the My Favorites page after clicking on the My Favorites CTA",
