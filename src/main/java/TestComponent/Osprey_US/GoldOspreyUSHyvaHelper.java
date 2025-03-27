@@ -4342,12 +4342,10 @@ public void Validate_retailerlocations() {
 					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 					Thread.sleep(40000);
-					if (Common.getCurrentURL().contains("/checkout")) {
-						if(Common.findElement("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").getText().contains("Please double check your address"))
-				        {
+					if (Common.findElement("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").getText().contains("Please double check your address")) {
+						
 				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
 				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
-				        }
 						Thread.sleep(4000);
 						Sync.waitElementPresent(30,"xpath", "//button[contains(text(),'Place Order')]");
 						Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
@@ -14169,8 +14167,7 @@ public void Giftcard_Add_from_My_fav(String Dataset) {{
 	try
 	{
 		Common.clickElement("id", "customer-menu");
-		Common.clickElement("xpath", "//*[@id='customer.header.wishlist.link' or @id='customer.header.sign.in.link']\r\n"
-				+ "");
+		Common.clickElement("xpath", "//a[@title='My Favorites']");
 		Thread.sleep(4000);
 		String product=Common.findElement("xpath", "//a[@title='"+Product+"']").getText().toLowerCase();
 		System.out.println(product);
@@ -14178,7 +14175,7 @@ public void Giftcard_Add_from_My_fav(String Dataset) {{
 		Common.clickElement("xpath", "//button[@aria-label='Add to Cart "+Product+"']");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
-		String Pdp=Common.findElement("xpath", "//span[@itemprop='name']").getText().toLowerCase();
+		String Pdp=Common.findElement("xpath", "//h1[@itemprop='name']").getText().toLowerCase();
 		System.out.println(Pdp);
 		
 		Common.assertionCheckwithReport(product.equalsIgnoreCase(Pdp),
@@ -14293,22 +14290,39 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 			Thread.sleep(2000);
 			Common.actionsKeyPress(Keys.ARROW_DOWN);
-			Common.textBoxInput("xpath", "//input[@name='postalCode']",data.get(dataSet).get("postcode"));
 			Common.switchToDefault();
-			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
-				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				Thread.sleep(4000);
+				Sync.waitElementPresent(60,"xpath", "//button[contains(text(),'Place Order')]");
+				Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
+				Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+				Thread.sleep(40000);
+				if (Common.findElement("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").getText().contains("Please double check your address")) {
+					
+			        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+			        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+			        	Thread.sleep(4000);
+						Sync.waitElementPresent(30,"xpath", "//button[contains(text(),'Place Order')]");
+						Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
+						Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+			        }
+		
+					
 
-				Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
-			} else {
-				AssertJUnit.fail();
-				
+				} else if (Common.getCurrentURL().contains("/success/")) {
+					Sync.waitElementPresent(30, "xpath",
+							" //h1[normalize-space()='Thank you for your purchase!']");
+					String sucessmessage = Common.getText("xpath",
+							" //h1[normalize-space()='Thank you for your purchase!']");
+					System.out.println(sucessmessage);
+				} else {
+					Assert.fail();
+				}
 
+		
 			}
 
-		
-		
-
-	}
+	
 
 	catch (Exception | Error e) {
 		e.printStackTrace();
@@ -14327,6 +14341,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 
 	return Number;
 }
+
 
 public void newtab_footerlinks(String Dataset) {
 	// TODO Auto-generated method stub
