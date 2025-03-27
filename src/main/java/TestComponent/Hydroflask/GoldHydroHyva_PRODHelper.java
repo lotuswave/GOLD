@@ -11339,12 +11339,11 @@ public void Explore_Validation(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[normalize-space()='Shop']");
 				Common.clickElement("xpath", "//span[normalize-space()='Shop']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Accessories']");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath",
-						"//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
-						"//a[contains(@title,'" + Links[i] + "')]//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitElementPresent("xpath","//a[contains(@title,'" + Links[i] + "')]");
+				Common.clickElement("xpath","//a[contains(@title,'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				String title = Common.findElement("xpath", "//h1[contains(@class,'title')]").getText();
