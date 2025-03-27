@@ -8093,9 +8093,15 @@ public void Continue_Shopping() {
 			Sync.waitElementPresent(30, "css", "label[for='billing-as-shipping']");
 			Common.clickElement("css", "label[for='billing-as-shipping']");
 			
+			if(Common.findElements("xpath", "//label[@for='guest_details-email_address']").size()>0)
+			{
+				Common.findElement("xpath", "//label[@for='guest_details-email_address']").getText();
+			}
+			else
+			{
 			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
 			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
-           
+			}
  
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
 					data.get(dataSet).get("FirstName"));
@@ -8126,6 +8132,12 @@ public void Continue_Shopping() {
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(4000);
+			if(Common.findElements("xpath", "//label[@for='guest_details-email_address']").size()>0)
+			{
+				Common.findElement("xpath", "//label[@for='guest_details-email_address']").getText();
+			}
+			else
+			{
 			Common.clickElement("css", "label[for='billing-save']");
 			Thread.sleep(2000);
 			Common.clickElement("xpath", "//button[normalize-space()='Save']");
@@ -8138,6 +8150,7 @@ public void Continue_Shopping() {
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
 					"Failed to display the Billing address in payment page");
+			}
 
 		}
 			else {
@@ -11513,6 +11526,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 			}
 			else if(Common.findElement("xpath", "//h1[@id='summary-title']").getText().contains("Confirm and pay"))
 			{
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[text()='Pay with']");
 				Sync.waitPageLoad();
 			}
