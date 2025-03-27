@@ -47,7 +47,7 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="12799367";
+    	MagentoOrder_ID="12817461";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -109,11 +109,11 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":"+QTYOrder+".0\n" +
                 "        },\n" + 
                 "        {\n" +
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":"+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -150,11 +150,11 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        },\n" + 
                 "        {\n" + 
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":"+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"notify\": false,\n" +
@@ -201,7 +201,7 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
     	        "    \"items\": [\n" +
     	        "        {\n" +
     	        "            \"order_item_id\": "+firstItemId+",\n" +
-    	        "            \"quantity_to_return\": 1,\n" +
+    	        "            \"quantity_to_return\": 2,\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"reason\",\n" +
@@ -209,7 +209,7 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
     	        "                },\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"compensationMethod\",\n" +
-    	        "                    \"value\": \"return-for-refund\"\n" +
+    	        "                    \"value\": \"no-return-for-refund\"\n" +
     	        "                }\n" +
     	        "            ],\n" +
     	        "            \"selected_custom_attributes\": []\n" +

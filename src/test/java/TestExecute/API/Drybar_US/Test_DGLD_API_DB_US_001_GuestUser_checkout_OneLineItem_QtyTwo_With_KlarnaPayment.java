@@ -47,7 +47,7 @@ public class Test_DGLD_API_DB_US_001_GuestUser_checkout_OneLineItem_QtyTwo_With_
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
         
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="12816882";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -101,7 +101,7 @@ public class Test_DGLD_API_DB_US_001_GuestUser_checkout_OneLineItem_QtyTwo_With_
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\":"+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -193,7 +193,7 @@ public class Test_DGLD_API_DB_US_001_GuestUser_checkout_OneLineItem_QtyTwo_With_
     	        "                },\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"compensationMethod\",\n" +
-    	        "                    \"value\": \"return-for-refund\"\n" +
+    	        "                    \"value\": \"no-return-for-refund\"\n" +
     	        "                }\n" +
     	        "            ],\n" +
     	        "            \"selected_custom_attributes\": []\n" +
@@ -223,7 +223,7 @@ public class Test_DGLD_API_DB_US_001_GuestUser_checkout_OneLineItem_QtyTwo_With_
 	
 	
 	///****Post Credit Memo****///
-	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","nvoice","createRma"})
+	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
  public void postCreditMemo() {
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
 
