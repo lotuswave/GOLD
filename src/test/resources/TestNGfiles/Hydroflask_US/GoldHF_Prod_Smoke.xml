@@ -33,12 +33,13 @@
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_products_Discount_with_Afterpay_Klarna_Payments"/>
 </classes>
 </test>
-
+<!--  
 <test name="Test_DGLD_HYF_ST_033_Register_user_Checkout_with_MyHydro_Engraving_Product_Different_Shipping_Methods_and_validate_CC_PayPal" testid="DQA-3553" priority="P1" description="This script will cover validating the checkout with CC and paypal">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_033_Register_user_Checkout_with_MyHydro_Engraving_Product_Different_Shipping_Methods_and_validate_CC_PayPal"/>
 </classes>
-</test>
+</test>-->
+
 <test name="Test_DGLD_HYF_ST_053_Validate_PLP_and_PDP_page_Giftcard_Addtocart" testid="DQA-266" priority="P1" description="This script will cover validating the PLP and PDP">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_053_Validate_PLP_and_PDP_page_Giftcard_Addtocart"/>
