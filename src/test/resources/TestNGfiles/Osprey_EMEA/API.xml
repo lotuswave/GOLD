@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Osprey EMEA API Execution">
+    
+
+    <test name="Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_with_CC" testid="DQA-3442" priority="P1" description="This script will cover guestuser checkout with one line item 2 quantity with CC">
+        <classes>
+            <class name="TestExecute.API.Osprey_EMEA.Test_DGLD_API_001_Guestuser_checkout_with_One_Line_Item_QTY_Two_with_CC"/>
+        </classes>
+    </test> 
+
+    <test name="Test_DGLD_API_002_RegisterUser_CheckoutTwo_LineItemGiftcard_OneQty_EachWith_Paypal" testid="DQA-3444" priority="P1" description="This script will cover the registeruser 2line item giftcard one quantity each with paypal">
+        <classes>
+            <class name="TestExecute.API.Osprey_EMEA.Test_DGLD_API_002_RegisterUser_CheckoutTwo_LineItemGiftcard_OneQty_EachWith_Paypal"/>
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo" testid="DQA-3510" priority="P1" description="This script will cover validating the guestuser giftcode full redemption with qunatity 2">
+        <classes>
+            <class name="TestExecute.API.Osprey_EMEA.Test_DGLD_API_003_GuestUser_GiftCode_FullRedemption_QtyTwo"/>
+        </classes>
+    </test>
+
+    <test name="Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_RedemptionCC" testid="DQA-3443" priority="P1" description="This script will cover validating GuestUser Checkout Multiple GiftCod _Partial Redemption with CC">
+        <classes>
+            <class name="TestExecute.API.Osprey_EMEA.Test_DGLD_API_004_GuestUser_Checkout_Multiple_GiftCode_Partial_RedemptionCC"/>
+        </classes>
+    </test>
+    
+</suite>
