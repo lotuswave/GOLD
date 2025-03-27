@@ -13474,26 +13474,14 @@ public void Kustomer_Links(String Dataset) {
 					"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
 					Kustomerlinks[i] + "Sucessfully Navigated to the" + Kustomerlinks[i] + "Links",
 					"Unable to Navigated to the" + Kustomerlinks[i] + "Links");
-			int responcecode = getpageresponce(Common.getCurrentURL());
-			System.out.println(responcecode);
-			String pagecode=Integer.toString(responcecode);
-			System.out.println(pagecode);
-			
-			if(pagecode.equals("200"))
+			if(Common.getPageTitle().contains("404"))
 			{
+				Assert.fail();
+				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+						"After Clicking on" + Kustomerlinks[i] + "it should navigate to the",
+						Kustomerlinks[i] + "Navigated to the 404 page" + Kustomerlinks[i] + "Links",
+						Common.getscreenShot("Failed to Navigated to the" + Kustomerlinks[i] + "Links"));
 				
-				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
-				  ,"Page configured Properly with any issues"
-				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
-				 }
-			else
-			{
-				i++;
-				
-				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
-						"Page configured Properly with any issues", "Unable to get the proper response from the page",
-						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + Kustomerlinks[i]));
-				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 		}
@@ -14862,26 +14850,14 @@ public void Footer_Links_Resources(String Dataset) {
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 					
 			Thread.sleep(2000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
-			System.out.println(responcecode);
-			String pagecode=Integer.toString(responcecode);
-			System.out.println(pagecode);
-			
-			if(pagecode.equals("200"))
+			if(Common.getPageTitle().contains("404"))
 			{
+				Assert.fail();
+				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+						"After Clicking on" + footerlinks[i] + "it should navigate to the",
+						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
+						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
 				
-				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
-				  ,"Page configured Properly with any issues"
-				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
-				 }
-			else
-			{
-				i++;
-				
-				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
-						"Page configured Properly with any issues", "Unable to get the proper response from the page",
-						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -14935,26 +14911,14 @@ public void Footer_Links_BrandTeam(String Dataset) {
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
 			Thread.sleep(4000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
-			System.out.println(responcecode);
-			String pagecode=Integer.toString(responcecode);
-			System.out.println(pagecode);
-			
-			if(pagecode.equals("200"))
+			if(Common.getPageTitle().contains("404"))
 			{
+				Assert.fail();
+				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+						"After Clicking on" + footerlinks[i] + "it should navigate to the",
+						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
+						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
 				
-				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
-				  ,"Page configured Properly with any issues"
-				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
-				 }
-			else
-			{
-				i++;
-				
-				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
-						"Page configured Properly with any issues", "Unable to get the proper response from the page",
-						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
@@ -15076,26 +15040,14 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
 			Thread.sleep(4000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
-			System.out.println(responcecode);
-			String pagecode=Integer.toString(responcecode);
-			System.out.println(pagecode);
-			
-			if(pagecode.equals("200"))
+			if(Common.getPageTitle().contains("404"))
 			{
+				Assert.fail();
+				ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
+						"After Clicking on" + footerlinks[i] + "it should navigate to the",
+						footerlinks[i] + "Navigated to the 404 page" + footerlinks[i] + "Links",
+						Common.getscreenShot("Failed to Navigated to the" + footerlinks[i] + "Links"));
 				
-				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
-				  ,"Page configured Properly with any issues"
-				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
-				 }
-			else
-			{
-				i++;
-				
-				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
-						"Page configured Properly with any issues", "Unable to get the proper response from the page",
-						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				AssertJUnit.fail();
 			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
