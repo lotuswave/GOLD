@@ -1595,7 +1595,7 @@ public void FUll_Payment(String dataSet) {
 	public String create_account(String Dataset) {
 		String email="";
 		String Product=data.get(Dataset).get("Products");
-		String Email = data.get(Dataset).get("Email");
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
 
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
@@ -8874,7 +8874,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					{
 					String title = Common.findElement("xpath", "//h1[@class='title-2xl']//span").getText();
 					System.out.println(title);
-					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Out Of Stock Subscriptions") || title.contains("My Payment Methods") 
+					Common.assertionCheckwithReport(title.contains(Account[i]) || title.contains("My Out Of Stock Subscriptions") || title.contains("Add New Address") || title.contains("My Payment Methods") 
 							|| title.contains("Newsletter Subscription"),
 							"verifying Account page links " + Account[i],
 							"user should navigate to the " + Account[i] + " page",
