@@ -11503,9 +11503,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			Common.clickElement("xpath", "//span[text()='Pay now']");
 //			Thread.sleep(4000);
 //			Common.refreshpage();
-			String klarna=Common.findElement("xpath", "//h1[@id='summary-title']").getText();
-			System.out.println(klarna);
-			if(klarna.contains("Choose how to pay"))
+			if(Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText().contains("Choose how to pay"))
 			{
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
