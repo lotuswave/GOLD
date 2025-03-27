@@ -898,28 +898,48 @@ public class GoldOxoHyvaHelper
 
 	}
 	public void addDeliveryAddress_Guest(String dataSet) throws Exception {
-
+		 
 		try {
-			Thread.sleep(2000);
-			
-			
+
+			Thread.sleep(5000);
+			Sync.waitPageLoad();
+			if (Common.findElements("xpath", "(//button[@aria-label='Close'])[1]").size()>0)
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+			}
+
+
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-				Sync.waitElementVisible("id", "guest_details-email_address");
-				Common.textBoxInput("id", "guest_details-email_address", data.get(dataSet).get("Email"));
 
+				Sync.waitElementVisible("xpath", "//input[@name='email_address']");
+
+				Common.textBoxInput("xpath", "//input[@name='email_address']", data.get(dataSet).get("Email"));
+ 
 			} else {
+
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
+
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Prod Email"));
-			}
-		} catch (NoSuchElementException e) {
-			minicart_Checkout();
-			if (Common.getCurrentURL().contains("preprod")) {
-				Common.textBoxInput("id", "guest_details-email_address", data.get(dataSet).get("Email"));
-			} else {
-				Common.textBoxInput("id", "guest_details-email_address", data.get(dataSet).get("Prod Email"));
+
 			}
 
+		} catch (NoSuchElementException e) {
+
+			minicart_Checkout();
+
+			if (Common.getCurrentURL().contains("preprod")) {
+
+				Common.textBoxInput("xpath", "//input[@name='email_address']", data.get(dataSet).get("Email"));
+
+			} else {
+
+				Common.textBoxInput("xpath", "//input[@name='email_address']", data.get(dataSet).get("Prod Email"));
+
+			}
+ 
 		}
+ 
 		String expectedResult = "email field will have email address";
 		try {
 			Thread.sleep(3000);
@@ -1576,10 +1596,9 @@ else
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
 		
+		Thread.sleep(5000);
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
-//		Sync.waitElementVisible(20, "xpath", "(//header[@data-sticky='sticky-enabled'])[1]");
-		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		if (Common.findElements("xpath", "(//button[@aria-label='Close'])[1]").size()>0)
 		{
 			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
 			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
