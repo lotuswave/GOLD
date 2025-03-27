@@ -3373,8 +3373,7 @@ public class OspreyEMEA_PRODHYVA {
 			}
 			Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "//span[contains(text(),'Accessories')]");
-		//	Common.clickElement("xpath", "//span[contains(text(),'" + Trail + "')]");
+			Common.clickElement("xpath", "//span[contains(text(),'" + Trail + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			expectedResult = "User should select the " + Dataset + "category";
