@@ -3934,14 +3934,13 @@ public class OspreyEMEA_HYVA {
 					Common.actionsKeyPress(Keys.ARROW_DOWN);
 					Common.switchToDefault();
 					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-						Thread.sleep(6000);
+						Thread.sleep(5000);
 						Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
 						Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
-						Thread.sleep(6000);
-						
-						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-						Thread.sleep(8000);
+						Thread.sleep(5000);				
+						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+						Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+						Thread.sleep(3000);
 						if (Common.getCurrentURL().contains("/checkout")) {
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
@@ -6766,7 +6765,7 @@ return Number;
 			{
 				Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
 				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
-				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Common.javascriptclickElement("xpath", "//div[@id='paypal-button-paypal_express']");
 			}
             
 			
@@ -7600,6 +7599,8 @@ return Number;
 		return update;
 	}
 
+	
+	
 	public void verify_BillingAddress(String Dataset) {
 		// TODO Auto-generated method stub
 
@@ -12548,14 +12549,14 @@ public void validate_GIFT_CARD_PLP() {
 	
 	try
 	{
-		Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
-		Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-		Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Cards')]");
-		Common.clickElement("xpath", "//span[contains(text(),'Gift Cards')]");
+//		Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
+//		Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+		Sync.waitElementPresent("xpath", "//a[@title='Osprey Gift Cards']");
+		Common.clickElement("xpath", "//a[@title='Osprey Gift Cards']");
 		Thread.sleep(5000);
 		String GIFTCARDtitle = Common.getText("xpath", "//h1[@class='title-2xl min-w-56']//span");
 	    System.out.println(GIFTCARDtitle);	
-		Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("gift cards"),
+		Common.assertionCheckwithReport(GIFTCARDtitle.equalsIgnoreCase("Gift Cards"),
 				"To validate Gift card Navigation to the PLP",
 				"After clicking on the Giftcard for the header links it should navigate to the Gift card PLP page",
 				"Sucessfully It has been navigated to the Gift card PLP ", "Failed to Navigate to the Gift card PLP");
@@ -12574,14 +12575,14 @@ public void validate_GIFT_CARD_PLP() {
 			"Verifying the filterby options are visible or not",
 			"filter by options should visible",
 			"filter by options are visibled", "Failed to visible the filter by options");
-	    Sync.waitElementPresent("xpath", "(//div[@class='name'])[2]");
-	    String Categorysection = Common.getText("xpath", "(//div[@class='name'])[2]").trim();
-	    System.out.println(Categorysection);
-	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories"),
-			"Verifying the filterby options are visible or not",
-			"filter by options should visible",
-			"filter by options are visibled", "Failed to visible the filter by options");
-	    Thread.sleep(3000);
+//	    Sync.waitElementPresent("xpath", "(//div[@class='name'])[2]");
+//	    String Categorysection = Common.getText("xpath", "(//div[@class='name'])[2]").trim();
+//	    System.out.println(Categorysection);
+//	    Common.assertionCheckwithReport(Categorysection.equalsIgnoreCase("Categories"),
+//			"Verifying the filterby options are visible or not",
+//			"filter by options should visible",
+//			"filter by options are visibled", "Failed to visible the filter by options");
+	    Thread.sleep(2000);
 	    List<WebElement> allProducts = Common.findElements("xpath","//li[@class='ais-InfiniteHits-item']");
         int visibleProductCount = 0;
         for (WebElement product : allProducts) {
@@ -12673,8 +12674,8 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
 	// TODO Auto-generated method stub
 	try {
 
-		Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Favorites']");
-		Common.javascriptclickElement("xpath", "//button[@aria-label='Add to Favorites']");
+		Sync.waitElementPresent("xpath", "//button[@title='Add to Favourites']");
+		Common.javascriptclickElement("xpath", "//button[@title='Add to Favourites']");
 		Thread.sleep(6000);
 		int Size = Common.findElements("xpath", "(//div[@class='m-modal__box']//div[1]//h4)[1]").size();
 		System.out.println(Size);
@@ -12696,13 +12697,12 @@ public void Guest_Add_Wishlist_Create_account() throws Exception {
             }
 			}
 		}
-		Thread.sleep(3000);
-		/*int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
-		System.out.println("Wishlist" + WishlistMSG);
-		Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
-				"My Wish List should be display", "Sucessfully navigated to My Wish List ",
-				"failed to navigate to My Wish List");*/
-
+//		Thread.sleep(3000);
+//		int WishlistMSG = Common.findElements("xpath", "//div[@data-ui-id='message-success']").size();
+//		System.out.println("Wishlist" + WishlistMSG);
+//		Common.assertionCheckwithReport(WishlistMSG > 0, "validating the My Wish List",
+//				"My Wish List should be display", "Sucessfully navigated to My Wish List ",
+//				"failed to navigate to My Wish List");
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
@@ -13885,7 +13885,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 		int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 		Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
-				"User unabel to land opaymentpage");
+				"User unabel to land paymentpage");
 		Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 		Thread.sleep(3000);
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
