@@ -17420,7 +17420,7 @@ public HashMap<String, String> ordersummary_Details() {
 		details.put("Subtotal", Subtotal);
 		String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[contains(@class,'value')]").trim();
 		details.put("shipping", shipping);
-		String Tax = Common.getText("xpath", "//div[@class='item tax']//span[contains(@class,'value')]").trim();
+		String Tax = Common.getText("xpath", "(//span[@class='label'])[4]").trim();
 		details.put("Tax", Tax);
 		Thread.sleep(4000);
 		int Discounts=Common.findElements("xpath", "//div[@class='item discount']//span[contains(@class,'value')]").size();
@@ -17445,4 +17445,3 @@ public HashMap<String, String> ordersummary_Details() {
 	return details;
 }
 }
-
