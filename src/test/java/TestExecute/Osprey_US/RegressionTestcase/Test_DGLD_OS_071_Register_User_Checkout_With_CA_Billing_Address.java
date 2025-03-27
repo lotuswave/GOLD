@@ -31,6 +31,7 @@ public class Test_DGLD_OS_071_Register_User_Checkout_With_CA_Billing_Address {
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Reg_BillingAddress("CABilling Details");
         Osprey_ReEu.proAce_Error_Payment("CCAmexcard");
+        Osprey_ReEu.Shoppingcart_page();
         Osprey_ReEu.deleteProduct_shoppingcart(); 
         
         
@@ -44,7 +45,7 @@ public class Test_DGLD_OS_071_Register_User_Checkout_With_CA_Billing_Address {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
