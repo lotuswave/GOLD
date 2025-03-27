@@ -46,7 +46,7 @@ public class Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_K
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="12816063";
         RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -57,13 +57,11 @@ public class Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_K
         Assert.assertEquals(response.getStatusCode(), 200, "Get Order Copy failed");
         String jsonResponse = response.getBody().asString();
         String formattedJson = JsonFormatter.formatJson(jsonResponse);
-
+        System.out.println(formattedJson);
         orderNumber = response.path("increment_id");
         System.out.println("OderNumber: " + orderNumber);
         customerEmail = response.path("customer_email");
         System.out.println("Customer Email: " + customerEmail);
-        MagentoOrder_ID = response.path("entity_id");
-        System.out.println("Magento Order ID: "+ MagentoOrder_ID);
 
         List<Map<String, Object>> items = response.jsonPath().getList("items");
 
