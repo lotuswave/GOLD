@@ -13452,12 +13452,12 @@ public void Kustomer_Links(String Dataset) {
 	try {
 		for (i = 0; i < Kustomerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + Kustomerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + Kustomerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + Kustomerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			Common.assertionCheckwithReport(
@@ -14953,12 +14953,12 @@ public void Footer_validation(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String Bread = Common.findElement("xpath", "//nav[contains(@aria-label,'Breadcrumb')]").getText();
