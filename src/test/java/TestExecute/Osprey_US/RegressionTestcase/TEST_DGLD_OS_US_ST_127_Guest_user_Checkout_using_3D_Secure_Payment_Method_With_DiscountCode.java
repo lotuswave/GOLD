@@ -37,7 +37,7 @@ public class TEST_DGLD_OS_US_ST_127_Guest_user_Checkout_using_3D_Secure_Payment_
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

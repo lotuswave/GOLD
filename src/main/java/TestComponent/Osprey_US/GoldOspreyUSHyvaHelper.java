@@ -459,8 +459,9 @@ public void Login_Account(String dataSet) {
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")|| Common.getCurrentURL().contains("www.osprey.com")) {
+					Thread.sleep(3000);
 					String Accountlinks = data.get(Dataset).get("Account Links");
 					String[] Account = Accountlinks.split(",");
 					int i = 0;
@@ -3854,6 +3855,11 @@ public void Validate_retailerlocations() {
 
 		try {
 			Thread.sleep(5000);
+			Thread.sleep(3000);
+			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
+			{
+				Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
+			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("id", "guest_details-email_address");
 				Common.textBoxInput("id", "guest_details-email_address", data.get(dataSet).get("Email"));
@@ -3868,11 +3874,7 @@ public void Validate_retailerlocations() {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Thread.sleep(3000);
-			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
-			{
-				Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
-			}
+		
 			Common.textBoxInput("css", "section#shipping-details input[name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("id", "guest_details-email_address").size();
