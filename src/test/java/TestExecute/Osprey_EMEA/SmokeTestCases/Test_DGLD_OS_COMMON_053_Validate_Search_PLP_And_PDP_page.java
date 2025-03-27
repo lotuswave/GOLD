@@ -23,14 +23,14 @@ public class Test_DGLD_OS_COMMON_053_Validate_Search_PLP_And_PDP_page {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Invalid_search_product("Invalid_Product");
         Osprey_ReEu.search_product("Product");
-//        Osprey_ReEu.Sort_By("SortBy");
-//        Osprey_ReEu.Filter();
+        Osprey_ReEu.Sort_By("SortBy");
+//      Osprey_ReEu.Filter();
         Osprey_ReEu1.Bagpacks_headerlinks("Backpacks & Bags");       
         Osprey_ReEu1.view_PLP_page();
 //        Osprey_ReEu1.filter_By("Fliters");
         Osprey_ReEu1.color_validation("PLP Color");
-        Osprey_ReEu1.price_filter_validation("PLP Color");//
-        Osprey_ReEu1.Bagpacks_headerlinks("Backpacks & Bags");       
+        Osprey_ReEu1.price_filter_validation("PLP Color");
+        Osprey_ReEu.search_product("Product");
         Osprey_ReEu1.Simple_PDP("Simple product");
         Osprey_ReEu1.search_product("Product");  
         Osprey_ReEu1.Configurable_PDP("Product");

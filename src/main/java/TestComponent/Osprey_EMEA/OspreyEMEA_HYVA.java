@@ -8909,7 +8909,7 @@ return Number;
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Sync.waitPageLoad(30);
-			Thread.sleep(6000);
+			Thread.sleep(5000);
 //			Sync.waitElementVisible(30, "xpath", "//div[@class='m-product-overview__info-top']//h1");
 //			String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
 			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
