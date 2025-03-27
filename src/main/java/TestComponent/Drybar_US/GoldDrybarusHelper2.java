@@ -5658,7 +5658,7 @@ public void FUll_Payment(String dataSet) {
 						Thread.sleep(4000);
 						Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 						Thread.sleep(4000);
-						String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
+						String klarna=Common.findElement("xpath", "//button[@value='klarna']").getAttribute("data-testid");
 						System.out.println(klarna);
 						Common.assertionCheckwithReport(
 								klarna.contains("klarna") || klarna.contains("Klarna"),
