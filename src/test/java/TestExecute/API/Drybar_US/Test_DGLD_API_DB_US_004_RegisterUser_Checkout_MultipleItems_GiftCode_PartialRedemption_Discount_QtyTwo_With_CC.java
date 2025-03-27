@@ -213,7 +213,7 @@ public class Test_DGLD_API_DB_US_004_RegisterUser_Checkout_MultipleItems_GiftCod
   	        "                },\n" +
   	        "                {\n" +
   	        "                    \"attribute_code\": \"compensationMethod\",\n" +
-  	        "                    \"value\": \"return-for-refund\"\n" +
+  	        "                    \"value\": \"no-return-for-refund\"\n" +
   	        "                }\n" +
   	        "            ],\n" +
   	        "            \"selected_custom_attributes\": []\n" +

@@ -47,7 +47,7 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="12817461";
+    	MagentoOrder_ID="12817764";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/drybar/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -68,18 +68,18 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
         System.out.println("Customer Email: " + customerEmail);
         List<Map<String, Object>> items = response.jsonPath().getList("items");
         if (items != null && !items.isEmpty()) {
-            if (items.size() >= 3) { 
+            if (items.size() >= 2) { 
                  firstItemId = (Integer) items.get(0).get("item_id");
                 if (firstItemId != null) {
                     System.out.println("First item_id: " + firstItemId);
                 } else {
                     System.out.println("First item_id is null.");
                 }
-                 SecondItemId = (Integer) items.get(2).get("item_id");
+                 SecondItemId = (Integer) items.get(1).get("item_id");
                 if (SecondItemId != null) {
-                    System.out.println("Third item_id: " + SecondItemId);
+                    System.out.println("Second item_id: " + SecondItemId);
                 } else {
-                    System.out.println("Third item_id is null.");
+                    System.out.println("Second item_id is null.");
                 }
             } else {
                 System.out.println("Not enough items to get the first and Second item_id.");
@@ -109,11 +109,11 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\":"+QTYOrder+".0\n" +
+                "            \"qty\":2.0\n" +
                 "        },\n" + 
                 "        {\n" +
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\":"+QTYOrder+".0\n" +
+                "            \"qty\":2.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -150,11 +150,11 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + firstItemId + ",\n" +
-                "            \"qty\": "+QTYOrder+".0\n" +
+                "            \"qty\": 2.0\n" +
                 "        },\n" + 
                 "        {\n" + 
                 "            \"order_item_id\": " + SecondItemId + ",\n" +
-                "            \"qty\":"+QTYOrder+".0\n" +
+                "            \"qty\":2.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"notify\": false,\n" +
@@ -271,7 +271,7 @@ public class Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_
              "    \"type\": \"approved_return\",\n" +
              "    \"order_item_ids\": [\n" +
              "        {\n" +
-             "            \"qty\": \"1.0\",\n" +
+             "            \"qty\": 2,\n" +
              "            \"order_item_id\": \""+firstItemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
