@@ -10897,8 +10897,8 @@ public void validate_reviews_AskQuestions_PDP() {
 	
 	try {
 		Thread.sleep(6000);
-	     if(Common.getCurrentURL().contains("preprod"))
-	     {
+	/*     if(Common.getCurrentURL().contains("preprod"))
+	     {*/
 		int size=Common.findElements("xpath", "//span[@class='yotpo-display-wrapper']").size();
 		if(size>0) {
 		
@@ -10930,7 +10930,7 @@ Thread.sleep(3000);
 		else {
 			Assert.fail();
 		}
-}
+/*}
 	
 	else
 	{
@@ -10959,7 +10959,7 @@ Thread.sleep(3000);
 		{
 			Assert.fail();
 		}
-	}
+	}*/
 	}
 	catch(Exception | Error e)
 	{
