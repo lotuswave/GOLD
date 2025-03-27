@@ -4987,6 +4987,10 @@ return Number;
 	}
 	public void view_PLP_page() {
 		try {
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0 && Common.getCurrentURL().contains("preprod"))
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			String title = Common.findElement("xpath", "//div[@class='c-clp-hero__content']").getAttribute("Class");
 			String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']")
 					.getAttribute("aria-label");
@@ -5030,7 +5034,6 @@ return Number;
 					Thread.sleep(6000);
 					String textValueAfterFilter = Common.findElement("xpath", "(//div[@class='text-sm']//span)[1]")
 							.getText().trim();
-					Common.clickElement("xpath", "//button[text()='Load More']");
 					Thread.sleep(4000);
 					int noOfItems = Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
 					String items = Integer.toString(noOfItems);
