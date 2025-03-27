@@ -100,7 +100,7 @@ public class Test_DGLD_API_OSPUS_004_GuestUser_Checkout_OneLineItem_QtyTwo_With_
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": "+QTYOrder+".0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -260,17 +260,6 @@ public class Test_DGLD_API_OSPUS_004_GuestUser_Checkout_OneLineItem_QtyTwo_With_
     
 
      request.body(requestBody);
-
-//     Response response = request.post();
-//     System.out.println(response.getBody().asString());
-//     String jsonResponse = response.getBody().asString();
-//     
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     
-//     Assert.assertEquals(response.getStatusCode(), 200, "Create RMA failed");
-////     System.out.println("Create RMA Response: " + response.getBody().asString());
-//     System.out.println("Create RMA Response: " + formattedJson);
-     
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
@@ -329,17 +318,7 @@ public class Test_DGLD_API_OSPUS_004_GuestUser_Checkout_OneLineItem_QtyTwo_With_
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
              "}";
-
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
+     
      request.body(requestBody);
 
      Response response = request.post();
