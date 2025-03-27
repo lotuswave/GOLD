@@ -20,15 +20,15 @@ public class TEST_DGLD_DRY_SUB_192_Checkout_with_Subscription_Product_anyOneplan
 		try { 
 		
 		    Drybar.Verify_Homepage();
-			Drybar.click_singinButton();
+		    Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.search_product("Same_10%_Plan_Diff_Prdt"); 
-			Drybar.subcribe_product_Add_to_Cart("Same_10%_Plan_Diff_Prdt");
+			Drybar.search_product("Detox_SUB_Product"); 
+			Drybar.subcribe_product_Add_to_Cart("Detox_SUB_Product");
 		    Drybar.search_product("Sparkling Soda Shine Mist & UV Shield");  
-		    Drybar.subcribe_product_Add_to_Cart("Save 10% with Daily Shipments");
+		    Drybar.subcribe_product_Add_to_Cart("Sparkling Soda Shine Mist & UV Shield");
 			Drybar.minicart_Checkout();
 			Drybar.RegaddDeliveryAddress("AccountDetails");	
-			Drybar.TwentyFive_percent_Reward_Points("$25 Off (500 point)");
+			String rewardpoints=Drybar.Twentypercent_Reward_Points("$20 Off (400 points)");;
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
 			String Profile_id="6";
