@@ -2936,9 +2936,9 @@ public void header_Shopbycollection(String Dataset) { {
 		if (size > 0) {
 			try {
 				Thread.sleep(5000);
-				if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[2]").size()>0)
+				if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
 				{
-					Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[2]");
+					Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
 				}
 				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
@@ -3856,9 +3856,9 @@ public void Validate_retailerlocations() {
 		try {
 			Thread.sleep(5000);
 			Thread.sleep(3000);
-			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[2]").size()>0)
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
 			{
-				Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[2]");
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
 			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("id", "guest_details-email_address");
