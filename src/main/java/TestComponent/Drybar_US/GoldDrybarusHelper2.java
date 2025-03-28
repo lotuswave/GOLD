@@ -7417,7 +7417,7 @@ public void FUll_Payment(String dataSet) {
 						String name1 = Common.findElement("xpath", "//span[@class='title-2xs leading-none']").getText().replace("$", "").replace(".00","");
 						System.out.println("Name:"+name1);
 					 if (name != null && !name.isEmpty()) {
-						    Float namevlaue = Float.parseFloat(name);
+						 Float namevlaue = Float.parseFloat(name);
 						if (namevlaue <= 20) {
 							Thread.sleep(3000);
 							String value = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
@@ -7431,7 +7431,7 @@ public void FUll_Payment(String dataSet) {
 							Assert.fail();
 						}
 					}
-				}}
+			}}
 			} catch (Exception | Error e) {
 				
 				ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page",
