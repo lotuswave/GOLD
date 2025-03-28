@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="GOLD API OXO Tests">
+<test name="Guest Checkout - 1 Line Item QTY2 - CC">
+<classes>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_01_Guest_1LineItem_QTY2_CC"/>
+</classes>
+</test>
+<test name="Regster Checkout SimpleConfigurableGiftcard Item QTY1 PP - CC">
+<classes>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_02_Registered_SimpleConfigurableGiftcard_1QTYeach_PayPal"/>
+</classes>
+</test>
+<test name="Guest Checkout onfigurableItem Item QTY1 - Klarna">
+<classes>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_03_Guest_ConfigurableItem_1QTY_Klarna"/>
+</classes>
+</test>
+<test name="Guest Checkout - 1 Line Item QTY2 - CC with _GiftCodeFullRedemption">
+<classes>
+<class name="TestExecute.API.Oxo.Test_DGLD_API_OXO_04_Guest_1LineItem_QTY2_GiftCodeFullRedemption"/>
+</classes>
+</test>
+</suite>

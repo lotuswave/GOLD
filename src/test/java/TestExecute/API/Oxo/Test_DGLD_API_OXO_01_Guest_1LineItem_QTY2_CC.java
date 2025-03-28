@@ -46,7 +46,7 @@ public class Test_DGLD_API_OXO_01_Guest_1LineItem_QTY2_CC {
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="12799364";
+    	MagentoOrder_ID="12818964";
     	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/orders/"+MagentoOrder_ID+"/";
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -100,7 +100,7 @@ public class Test_DGLD_API_OXO_01_Guest_1LineItem_QTY2_CC {
                 "    \"items\": [\n" +
                 "        {\n" +
                 "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"qty\": 2.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
