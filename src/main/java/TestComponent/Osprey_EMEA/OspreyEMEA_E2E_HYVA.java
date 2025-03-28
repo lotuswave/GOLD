@@ -16043,47 +16043,47 @@ public void prepareOrdersData(String fileName) {
 			
 			cell.setCellStyle(cs);
 			cell.setCellValue("Test scenario Description");
-//			cell = row.createCell(3);
-//			
+			cell = row.createCell(3);
+			
 //			cell.setCellStyle(cs);
 //			cell.setCellValue("SKU");
-			cell = row.createCell(4);
+//			cell = row.createCell(4);
 			cell.setCellStyle(cs);
 			cell.setCellValue("Web Order Number");
-			cell = row.createCell(5);
+			cell = row.createCell(4);
 			
 //			cell.setCellStyle(cs);
 //			cell.setCellValue("Order Status Magento");
-//	       cell = row.createCell(6);
-//	       
-//	       cell.setCellStyle(cs);
+//           cell = row.createCell(6);
+//           
+//           cell.setCellStyle(cs);
 //			cell.setCellValue("Workato Status");
-//	       cell = row.createCell(7);
+//           cell = row.createCell(7);
 		
-	       cell.setCellStyle(cs);
+           cell.setCellStyle(cs);
 			cell.setCellValue("Used GiftCode");
-	     cell = row.createCell(8);
-	     
-	     cell.setCellStyle(cs);
+         cell = row.createCell(5);
+         
+         cell.setCellStyle(cs);
 			cell.setCellValue("Subtotal");
-	     cell = row.createCell(9);
+	     cell = row.createCell(6);
 	     
 	     cell.setCellStyle(cs);
 			cell.setCellValue("shipping");
-	     cell = row.createCell(10);
+	     cell = row.createCell(7);
 	     
 	     cell.setCellStyle(cs);
 			cell.setCellValue("Tax");
-	     cell = row.createCell(11);
+	     cell = row.createCell(8);
 	     
 	     cell.setCellStyle(cs);
 			cell.setCellValue("Discount");
-	     cell = row.createCell(12);
+	     cell = row.createCell(9);
 	     
 	     cell.setCellStyle(cs);
 			cell.setCellValue("ordertotal");
-	     cell = row.createCell(13);
-//	     
+	     cell = row.createCell(10);
+	     
 //	     cell.setCellStyle(cs);
 //			cell.setCellValue("Adminsubtotal");
 //	     cell = row.createCell(14);
@@ -16110,23 +16110,23 @@ public void prepareOrdersData(String fileName) {
 //	     cell = row.createCell(19);
 //	     
 //	     cell.setCellStyle(cs);
-//			cell.setCellValue("Website&Adminsubtotal status");
+//			cell.setCellValue("Website & Adminsubtotal status");
 //	     cell = row.createCell(20);
 //	     
 //	     cell.setCellStyle(cs);
-//			cell.setCellValue("Website&AdminShipping Status");
+//			cell.setCellValue("Website & AdminShipping Status");
 //	     cell = row.createCell(21);
 //	     
 //	     cell.setCellStyle(cs);
-//			cell.setCellValue("Website&AdminTax Status");
+//			cell.setCellValue("Website & AdminTax Status");
 //	     cell = row.createCell(22);
 //	     
 //	     cell.setCellStyle(cs);
-//			cell.setCellValue("Website&AdminDiscount Status");
+//			cell.setCellValue("Website & AdminDiscount Status");
 //	     cell = row.createCell(23);
 //	     
 //	     cell.setCellStyle(cs);
-//			cell.setCellValue("Website&Adminordertotal Status");
+//			cell.setCellValue("Website & Adminordertotal Status");
 //	     cell = row.createCell(24);
 
 
@@ -16504,6 +16504,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 			int rowcount;
 			sheet = workbook.getSheet("OrderDetails");
 
+
 			if ((workbook.getSheet("OrderDetails")) == null) {
 				sheet = workbook.createSheet("OrderDetails");
 				CellStyle cs = workbook.createCellStyle();
@@ -16539,7 +16540,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 			cell = row.createCell(1);
 			cell.setCellType(CellType.STRING);
 			
-			cell.setCellValue("Osprey EU");
+			cell.setCellValue("OspreyEMEA");
 			
 			cell = row.createCell(2);
 			cell.setCellType(CellType.STRING);
@@ -16548,8 +16549,8 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			cell = row.createCell(3);
 //			cell.setCellType(CellType.STRING);
 //			cell.setCellValue(Skus);
-//			
-			cell = row.createCell(4);
+			
+			cell = row.createCell(3);
 			cell.setCellType(CellType.NUMERIC);
 			cell.setCellValue(OrderIdNumber);
 
@@ -16561,27 +16562,27 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			cell.setCellType(CellType.STRING);
 //			cell.setCellValue(workato);
 			
-			cell = row.createCell(7);
+			cell = row.createCell(4);
 			cell.setCellType(CellType.STRING);
 			cell.setCellValue(Used_GiftCode);
 			
-			cell = row.createCell(8);
+			cell = row.createCell(5);
 			cell.setCellType(CellType.NUMERIC);
 			cell.setCellValue(Subtotal);
 			
-			cell = row.createCell(9);
+			cell = row.createCell(6);
 			cell.setCellType(CellType.NUMERIC);
 			cell.setCellValue(shipping);
 			
-			cell = row.createCell(10);
+			cell = row.createCell(7);
 			cell.setCellType(CellType.NUMERIC);
 			cell.setCellValue(Tax);
 			
-			cell = row.createCell(11);
+			cell = row.createCell(8);
 			cell.setCellType(CellType.NUMERIC);
 			cell.setCellValue(Discount);
 			
-			cell = row.createCell(12);
+			cell = row.createCell(9);
 			cell.setCellType(CellType.NUMERIC);
 			cell.setCellValue(ordertotal);
 			
@@ -16614,7 +16615,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			String Subtotalstatus;
 //			if(Subtotal.equals(Adminsubtotal))
 //			{
-//
+	//
 //				Subtotalstatus="PASS";
 //			CellStyle style = workbook.createCellStyle();
 //			Font font= workbook.createFont();
@@ -16633,7 +16634,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			style.setFont(font);
 //			cell.setCellStyle(style);
 //			}
-//
+	//
 //			cell.setCellValue(Subtotalstatus);
 //			
 //			cell = row.createCell(20);
@@ -16641,7 +16642,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			String Shippingstatus;
 //			if(shipping.equals(Adminshipping))
 //			{
-//
+	//
 //				Shippingstatus="PASS";
 //			CellStyle style = workbook.createCellStyle();
 //			Font font= workbook.createFont();
@@ -16660,7 +16661,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			style.setFont(font);
 //			cell.setCellStyle(style);
 //			}
-//
+	//
 //			cell.setCellValue(Shippingstatus);
 //			
 //			cell = row.createCell(21);
@@ -16668,7 +16669,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			String Taxstatus;
 //			if(Tax.equals(Admintax))
 //			{
-//
+	//
 //				Taxstatus="PASS";
 //			CellStyle style = workbook.createCellStyle();
 //			Font font= workbook.createFont();
@@ -16687,7 +16688,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			style.setFont(font);
 //			cell.setCellStyle(style);
 //			}
-//
+	//
 //			cell.setCellValue(Taxstatus);
 //			
 //			
@@ -16696,7 +16697,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			String Disstatus;
 //			if(Discount.equals(AdminDis))
 //			{
-//
+	//
 //				Disstatus="PASS";
 //			CellStyle style = workbook.createCellStyle();
 //			Font font= workbook.createFont();
@@ -16715,16 +16716,16 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			style.setFont(font);
 //			cell.setCellStyle(style);
 //			}
-//
+	//
 //			cell.setCellValue(Disstatus);
 //			
-//
+	//
 //			cell = row.createCell(23);
 //			cell.setCellType(CellType.STRING);
 //			String Orderstatus;
 //			if(ordertotal.equals(Admintotal))
 //			{
-//
+	//
 //				Orderstatus="PASS";
 //			CellStyle style = workbook.createCellStyle();
 //			Font font= workbook.createFont();
@@ -16743,10 +16744,8 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 //			style.setFont(font);
 //			cell.setCellStyle(style);
 //			}
-//
+
 //			cell.setCellValue(Orderstatus);
-//			
-//			
 			
 			System.out.println(OrderIdNumber);
 			FileOutputStream fileOut = new FileOutputStream(file);

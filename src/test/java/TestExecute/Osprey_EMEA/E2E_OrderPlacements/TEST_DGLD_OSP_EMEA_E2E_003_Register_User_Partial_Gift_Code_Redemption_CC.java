@@ -36,9 +36,9 @@ public class TEST_DGLD_OSP_EMEA_E2E_003_Register_User_Partial_Gift_Code_Redempti
         String Used_GiftCode=Osprey_ReEu.Gift_card("Partial Giftcard");
         HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
         String OrderNumber=Osprey_ReEu.addPaymentDetails("CCVisacard");
-        Osprey_ReEu.Admin_signin("Login Details");
-        Osprey_ReEu.click_Sales();
-		HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
+//        Osprey_ReEu.Admin_signin("Login Details");
+//        Osprey_ReEu.click_Sales();
+//		HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
 		Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 		 
 		} catch (Exception e) {

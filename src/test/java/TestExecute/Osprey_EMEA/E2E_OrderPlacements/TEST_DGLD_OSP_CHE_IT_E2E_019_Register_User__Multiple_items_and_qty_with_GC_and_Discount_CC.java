@@ -56,8 +56,9 @@ public class TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
-        Login.signIn(); 
+		String url = "https://mcloud-na-preprod.osprey.com/che_it/";
+		System.setProperty("url", url);
+        Login.signIn();
 
 	}
 

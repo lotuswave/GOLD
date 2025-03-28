@@ -36,9 +36,9 @@ public class TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redempt
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			  HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
 			String OrderNumber =Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
-			Osprey_ReEu.Admin_signin("Login Details");
-		    Osprey_ReEu.click_Sales();
-			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
+//			Osprey_ReEu.Admin_signin("Login Details");
+//		    Osprey_ReEu.click_Sales();
+//			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
 			Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 			
 			

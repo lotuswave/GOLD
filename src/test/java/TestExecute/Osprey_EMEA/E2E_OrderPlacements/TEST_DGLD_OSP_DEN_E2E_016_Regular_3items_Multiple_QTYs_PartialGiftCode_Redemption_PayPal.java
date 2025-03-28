@@ -55,8 +55,9 @@ public class TEST_DGLD_OSP_DEN_E2E_016_Regular_3items_Multiple_QTYs_PartialGiftC
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
-        Login.signIn(); 
+		String url = "https://mcloud-na-preprod.osprey.com/dk_en/";
+		System.setProperty("url", url);
+        Login.signIn();
 
 	}
 
