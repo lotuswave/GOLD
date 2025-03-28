@@ -21,10 +21,9 @@ public class Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Pa
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("Product");       
-			Hydro.addtocart("Product");
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.Configurable_addtocart_pdp("Product");
 			Hydro.minicart_Checkout();
-//			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.Gift_card("Giftcard_Partial_2");
@@ -39,7 +38,7 @@ public class Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 

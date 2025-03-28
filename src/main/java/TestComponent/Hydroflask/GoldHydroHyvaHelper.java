@@ -2308,16 +2308,10 @@ public void FUll_Payment(String dataSet) {
 
 			product_quantity(DataSet);
 			System.out.println(productcolor);
-//			click_UGC();
-			Sync.waitElementPresent("xpath", "(//button[contains(@title,'Add to Cart')]//span)");
-			Common.clickElement("xpath", "(//button[contains(@title,'Add to Cart')]//span)");
+			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+			Common.javascriptclickElement("xpath", "//button[@id='product-addtocart-button']");
 
 			Thread.sleep(4000);
-//			String message2 = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span")
-//					.getText();
-//			Common.assertionCheckwithReport(message2.contains("You added"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -13475,8 +13469,6 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					Thread.sleep(3000);
 					Sync.waitElementPresent(30,"xpath", " //h1[normalize-space()='Thank you for your purchase!']");
 					String sucessMessage = Common.getText("xpath", " //h1[normalize-space()='Thank you for your purchase!']");
-
-					//Tell_Your_FriendPop_Up();
 					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']").size();
 					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
 							"verifying the product confirmation", expectedResult,
@@ -13674,14 +13666,21 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 
 				} else {
 					Thread.sleep(4000);
-					int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+					int savedcard=Common.findElements("xpath", "(//input[@class='checkbox mr-4'])[2]").size();
 					if(savedcard>0)
 					{
 						Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 						Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					}
+					
+					
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					Thread.sleep(5000);
+					String Isselected = Common.findElementBy("id", "card-tab").getAttribute("aria-selected");
+					if(Isselected.contains("false")) {
+						Sync.waitElementPresent("id", "card-tab");
+						Common.clickElement("id", "card-tab");
+					}
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
