@@ -301,7 +301,11 @@ public void Login_Account(String dataSet) {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-
+			Thread.sleep(4000);
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -2206,6 +2210,11 @@ public void header_Shopbycollection(String Dataset) { {
 		System.out.println(product);
 		String Prod=data.get(Dataset).get("Prod Product");
 		try {
+			Thread.sleep(4000);
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
 			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("id");
 			Thread.sleep(4000);
@@ -2989,7 +2998,11 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Thread.sleep(3000);
+			Thread.sleep(4000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
 			Sync.waitElementPresent(30, "xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Common.clickElement("xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Sync.waitPageLoad();
@@ -3047,6 +3060,10 @@ public void header_Shopbycollection(String Dataset) { {
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
+				if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+				{
+					Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+				}
 				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
@@ -3957,6 +3974,10 @@ public void Validate_retailerlocations() {
 
 		try {
 			Thread.sleep(5000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
