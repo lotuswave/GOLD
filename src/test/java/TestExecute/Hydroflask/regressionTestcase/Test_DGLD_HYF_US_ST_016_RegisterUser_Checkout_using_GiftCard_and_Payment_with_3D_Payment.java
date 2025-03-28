@@ -38,7 +38,7 @@ public class Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
