@@ -57,9 +57,11 @@ public class TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Stan
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_US\\config.properties");
+		//System.setProperty("configFile", "Osprey_US\\config.properties");
+		
+		String url = "https://mcloud-na-preprod.osprey.com/us/es/";  
+		System.setProperty("url", url);
         Login.signIn();
-        
 
 	}
 	
