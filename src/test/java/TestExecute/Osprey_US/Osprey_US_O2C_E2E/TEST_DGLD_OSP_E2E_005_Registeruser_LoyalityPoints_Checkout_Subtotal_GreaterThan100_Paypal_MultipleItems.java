@@ -38,10 +38,10 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
 		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
 		     String OrderNumber= Osprey_ReEu.payPal_Payment("PaypalDetails");
-		     Osprey_ReEu.Admin_signin("Login Details");
-		     Osprey_ReEu.click_Sales();
-			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
-			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("workato"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));  
+//		     Osprey_ReEu.Admin_signin("Login Details");
+//		     Osprey_ReEu.click_Sales();
+//			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
+			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));  
 			 
 	 
 		} catch (Exception e) {

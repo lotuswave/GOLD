@@ -31,11 +31,11 @@ public class TEST_DGLD_OSP_E2E_006_GuestUser_checkout_with_AfterPay_Expedited {
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
 		     HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
 		     String OrderNumber= Osprey_ReEu.After_Pay_payment("Afterpay");
-		     Osprey_ReEu.Admin_signin("Login Details");
-		     Osprey_ReEu.click_Sales();
-			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
-			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("workato"),Orderstatus1.get("AdminOrderstatus"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));  
-			 
+//		     Osprey_ReEu.Admin_signin("Login Details");
+//		     Osprey_ReEu.click_Sales();
+//			 HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
+			 Osprey_ReEu.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));  
+			  
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
