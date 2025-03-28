@@ -38,9 +38,6 @@ public class Test_DGLD_HYF_E2E_ST_010_GuestUser_checkout_including_inline_and_my
             Hydro.selectshippingaddress("GroundShipping method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();
             String OrderNumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-            Hydro.Admin_signin("Login Details");
-            Hydro.click_Sales();
-			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
 		} catch (Exception e) {

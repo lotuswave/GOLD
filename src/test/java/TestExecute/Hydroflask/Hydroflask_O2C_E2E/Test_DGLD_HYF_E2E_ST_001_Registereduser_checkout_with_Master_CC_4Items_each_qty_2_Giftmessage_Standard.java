@@ -41,7 +41,6 @@ public class Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4It
             Hydro.selectshippingaddress("GroundShipping method");
         	HashMap<String,String> Details=Hydro.ordersummary_Details();
             String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
-//			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
 		} catch (Exception e) {
@@ -52,7 +51,7 @@ public class Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4It
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
