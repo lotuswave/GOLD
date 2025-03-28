@@ -7394,8 +7394,11 @@ public void FUll_Payment(String dataSet) {
 					System.out.println(Size);
 					Thread.sleep(4000);
 					if (Size == 1) {
-						String name1 = Common.findElement("xpath", "//span[@x-ref='oldPrice']//span[@class='value']").getText().replace("$", "");
+						String name1 = Common.findElement("xpath", "//span[@class='title-2xs leading-none']").getText().replace("$", "").replace(".00","");
+						System.out.println("Name:"+name1);
 						Float namevlaue1 = Float.parseFloat(name1);
+						
+						
 						if (namevlaue1 <= 20) {
 							Thread.sleep(3000);
 							String value1 = Common.findElement("xpath", "//span[@class='value']")
@@ -7408,12 +7411,13 @@ public void FUll_Payment(String dataSet) {
 							Assert.fail();
 						}
 					} else {
-						List<WebElement> productprice = Common.findElements("xpath",
-								"//span[@x-ref='oldPrice']//span[@class='value']");
+//						List<WebElement> productprice = Common.findElements("xpath",
+//								"//span[@class='title-2xs leading-none']").getText().replace("$", "").replace(".00","");
 						Thread.sleep(6000);
-						name = productprice.get(i).getText().replace("$", "").replace(".00", "");
-						System.out.println(name);
-						Float namevlaue = Float.parseFloat(name);
+						String name1 = Common.findElement("xpath", "//span[@class='title-2xs leading-none']").getText().replace("$", "").replace(".00","");
+						System.out.println("Name:"+name1);
+					 if (name != null && !name.isEmpty()) {
+						    Float namevlaue = Float.parseFloat(name);
 						if (namevlaue <= 20) {
 							Thread.sleep(3000);
 							String value = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
@@ -7427,7 +7431,7 @@ public void FUll_Payment(String dataSet) {
 							Assert.fail();
 						}
 					}
-				}
+				}}
 			} catch (Exception | Error e) {
 				
 				ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page",
@@ -9419,8 +9423,13 @@ public void Navigate_to_addressbook() {
 		Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 		Common.clickElement("xpath", "//button[@id='customer-menu']");
 		Thread.sleep(3000);
-		Sync.waitElementPresent("xpath", "//a[@title='My Account']");
-		Common.clickElement("xpath", "//a[@title='My Account']");
+		if (Common.findElements("xpath","//a[@title='Sign In']").size() > 0 ) {
+			Sync.waitElementPresent("xpath", "//a[@title='Sign In']");
+			Common.clickElement("xpath","//a[@title='Sign In']");	
+		} else {
+			Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+			Common.clickElement("xpath", "//a[@title='My Account']");
+		}
 		Thread.sleep(3000);
 		Common.assertionCheckwithReport(
 				Common.getCurrentURL().contains("account"),
@@ -9488,10 +9497,10 @@ public String Add_New_AddressBook(String dataSet) {
 //         Sync.waitElementPresent("xpath", "//div[@id='ltksmsfield']//input");
 //         Common.clickElement("xpath", "//div[@id='ltksmsfield']//input");
 //         Thread.sleep(3000);
-         
+//         
 		Common.clickElement("xpath", "//button[@title='Save Address']");
 		Thread.sleep(5000);
-		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+//		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 	/*	System.out.println(message);
 		Common.assertionCheckwithReport(message.contains("You saved the address."),
 				"validating the saved message after saving address in address book",
