@@ -47,7 +47,7 @@ public class Test_DGLD_API_OSPUS_002_RegisterUser_Checkout_SimpleLineItem_GiftCa
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="12819909";
         RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -257,7 +257,7 @@ public class Test_DGLD_API_OSPUS_002_RegisterUser_Checkout_SimpleLineItem_GiftCa
     	        "    \"customer_custom_email\": \"" + customerEmail + "\",\n" + // Use customerEmail variable
     	        "    \"items\": [\n" +
     	        "        {\n" +
-    	        "            \"order_item_id\": "+itemId+",\n" +
+    	        "            \"order_item_id\": "+firstItemId+",\n" +
     	        "            \"quantity_to_return\": 1,\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
@@ -329,7 +329,7 @@ public class Test_DGLD_API_OSPUS_002_RegisterUser_Checkout_SimpleLineItem_GiftCa
              "    \"order_item_ids\": [\n" +
              "        {\n" +
              "            \"qty\": \"1.0\",\n" +
-             "            \"order_item_id\": \""+itemId+"\"\n" +
+             "            \"order_item_id\": \""+firstItemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
