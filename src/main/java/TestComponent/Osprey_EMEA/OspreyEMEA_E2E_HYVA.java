@@ -9021,9 +9021,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[contains(@itemprop ,'image')]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
