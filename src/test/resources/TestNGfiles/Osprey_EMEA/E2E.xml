@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Osprey E2E execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+
+    <test name="TEST_DGLD_OSP_EMEA_E2E_002_GuestUser_Partial_Gift_Code_Redemption_Paypal" testid="DQA-3481" priority="P1" description="This test case verifies that a guest user can successfully place an order on the Osprey EMEA website using a gift code for partial payment and completing the remaining balance through PayPal.">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_EMEA_E2E_002_GuestUser_Partial_Gift_Code_Redemption_Paypal"/>
+        </classes>
+    </test> 
+
+    <test name="TEST_DGLD_OSP_EMEA_E2E_003_Register_User_Partial_Gift_Code_Redemption_CC" testid="DQA-1953" priority="P1" description="Validate partial gift code redemption with Credit Card (CC) for a registered user on the Osprey EMEA website.">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_EMEA_E2E_003_Register_User_Partial_Gift_Code_Redemption_CC"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_EMEA_E2E_005_Full_GiftCode_Redemption_MultipleItem_MultipleQty" testid="DQA-1949" priority="P1" description="Validate full gift code redemption for a multiple-item, multiple-quantity order on the Osprey EMEA website">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_EMEA_E2E_005_Full_GiftCode_Redemption_MultipleItem_MultipleQty"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_EMEA_E2E_008_Admin_Register_User_dicount_gift_Card_Redeem_CC" testid="DQA-1986" priority="P1" description="Validate discount and gift card redemption by an admin-registered user, with the remaining balance paid via Credit Card (CC) on the Osprey EMEA website.">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_EMEA_E2E_008_Admin_Register_User_dicount_gift_Card_Redeem_CC"/>
+        </classes>
+    </test>
+
+    <test name="TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Paypal_Payment" testid="DQA-2336" priority="P1" description="Validate guest user checkout using a discount and completing payment via PayPal">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Paypal_Payment"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_GiftCode_Redemption" testid="DQA-1972" priority="P1" description="Validate guest user checkout with partial gift code redemption, paying the remaining balance through another payment method on the Osprey EMEA website">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_GiftCode_Redemption"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_EMEA_E2E_EU_DE_011_RegularItems_MultipleQty_Discount_PayPal" testid="DQA-2276" priority="P1" description="Validate checkout for regular items with multiple quantities, applying a discount, and completing payment via PayPal on the Osprey EMEA website (EU/DE region).">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_EMEA_E2E_EU_DE_011_RegularItems_MultipleQty_Discount_PayPal"/>
+        </classes>
+    </test>
+
+    <test name="TEST_GOLD_OSP_EMEA_E2E_EU_EN_012_Two_Items_Qty2_PartialGC_Redeem_CC" testid="DQA-2371" priority="P1" description="Validate checkout for two items with quantity 2, using partial gift code redemption, and paying the remaining balance via Credit Card (CC) on the Osprey EMEA website (EU/EN region).">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_GOLD_OSP_EMEA_E2E_EU_EN_012_Two_Items_Qty2_PartialGC_Redeem_CC"/>
+        </classes>
+    </test>
+
+    <test name="TEST_GOLD_OSP_EMEA_E2E_SW_013_GuestUser_Checkout_With_Discount_Paypal_Payment2" testid="DQA-1975" priority="P1" description="Validate guest user checkout with a discount and payment via PayPal on the Osprey EMEA website (SW region)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_GOLD_OSP_EMEA_E2E_SW_013_GuestUser_Checkout_With_Discount_Paypal_Payment2"/>
+        </classes>
+    </test>
+
+    <test name="TEST_GOLD_OSP_EMEA_E2E_SW_014_Multiple_Items_Multiple_Qty_PartialGC_Redeem_CC2" testid="DQA-2347" priority="P1" description="Validate checkout for multiple items with multiple quantities, using partial gift code redemption, and paying the remaining balance via Credit Card (CC) on the Osprey EMEA website (SW region)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_GOLD_OSP_EMEA_E2E_SW_014_Multiple_Items_Multiple_Qty_PartialGC_Redeem_CC2"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_DEN_E2E_015_Register_user_checkout_with_Multiple_Products_Discount_CC" testid="DQA-1965" priority="P1" description="Validate registered user checkout with multiple products, applying a discount, and completing payment via Credit Card (CC) on the Osprey DEN website">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_DEN_E2E_015_Register_user_checkout_with_Multiple_Products_Discount_CC"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_DEN_E2E_016_Regular_3items_Multiple_QTYs_PartialGiftCode_Redemption_PayPal" testid="DQA-1981" priority="P1" description="Validate checkout for three regular items with multiple quantities, using partial gift code redemption, and paying the remaining balance via PayPal on the Osprey DEN website">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_DEN_E2E_016_Regular_3items_Multiple_QTYs_PartialGiftCode_Redemption_PayPal"/>
+        </classes>
+    </test>
+
+    <test name="TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redemption_CC" testid="DQA-1977" priority="P1" description="Validate guest user checkout with partial gift code redemption, paying the remaining balance via Credit Card (CC) on the Osprey EMEA website (CHE/DE region)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redemption_CC"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_CHE_FR_E2E_018_Guest_User_Multiple_Item_Full_Gift_code_Redeem_with_Multiple_QTY" testid="DQA-1958" priority="P1" description="Validate guest user checkout for multiple items with multiple quantities, using full gift code redemption on the Osprey CHE/FR website">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_CHE_FR_E2E_018_Guest_User_Multiple_Item_Full_Gift_code_Redeem_with_Multiple_QTY"/>
+        </classes>
+    </test>
+
+    <test name="TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_with_GC_and_Discount_CC" testid="DQA-3256" priority="P1" description="Validate registered user checkout for multiple items with multiple quantities, applying gift code redemption and a discount, with the remaining balance paid via Credit Card (CC) on the Osprey CHE/IT website">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.E2E_OrderPlacements.TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_with_GC_and_Discount_CC"/>
+        </classes>
+    </test>
+
+</suite>
