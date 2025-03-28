@@ -1689,7 +1689,6 @@ public class GoldDrybarusE2EHelper {
 			
 			addPaymentDetails(dataSet);
 		}
-
 		
 //		}
 
@@ -1897,11 +1896,14 @@ public class GoldDrybarusE2EHelper {
 				
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
+				Thread.sleep(5000);
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
+					Sync.waitElementPresent(30,"xpath", "//button[@class='action primary checkout']");
+             	   Common.javascriptclickElement("xpath", "//button[@class='action primary checkout']");
              	   Thread.sleep(10000);
+             	   
+             	   
              	  if(Common.getCurrentURL().contains("/checkout/#payment"))
            	   {
            		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
@@ -1937,7 +1939,7 @@ public class GoldDrybarusE2EHelper {
 
 			} else {
 				Thread.sleep(4000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+				int savedcard=Common.findElements("xpath", "//div[contains(@class,'form-select flex gap')]").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
@@ -1967,9 +1969,10 @@ public class GoldDrybarusE2EHelper {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	   Thread.sleep(40000);
+					Sync.waitElementPresent(30,"xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+	             	 Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+	             	 Thread.sleep(5000);
+	             	   Thread.sleep(15000);
 	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
 //	              		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
