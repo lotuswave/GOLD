@@ -13545,12 +13545,12 @@ public void Footer_Links(String Dataset) {
 		}
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitElementPresent(30, "xpath",
-					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
@@ -14930,7 +14930,8 @@ public void Footer_Links_BrandTeam(String Dataset) {
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/athletes")
 							|| Common.getCurrentURL().contains("coming-soon")
-							|| Common.getCurrentURL().contains("coming-soon"),
+							|| Common.getCurrentURL().contains("coming-soon")
+							|| Common.getCurrentURL().contains("thru-hike"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -15002,7 +15003,7 @@ public void Footer_validation(String Dataset) {
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || title.contains(footerlink[i]) || Bread.contains(page)
 							|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("status")|| Common.getPageTitle().contains("Request")||Common.getPageTitle().contains("Affiliate")
-							|| Common.getPageTitle().contains("Page"),
+							|| Common.getPageTitle().contains("Page") || Common.getPageTitle().contains("Thru-Hike") ,
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
