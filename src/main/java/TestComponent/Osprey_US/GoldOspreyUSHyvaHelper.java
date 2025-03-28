@@ -4342,7 +4342,7 @@ public void Validate_retailerlocations() {
 					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 					Thread.sleep(40000);
-					if (Common.findElement("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").getText().contains("Please double check your address")) {
+					if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0) {
 						
 				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
 				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
