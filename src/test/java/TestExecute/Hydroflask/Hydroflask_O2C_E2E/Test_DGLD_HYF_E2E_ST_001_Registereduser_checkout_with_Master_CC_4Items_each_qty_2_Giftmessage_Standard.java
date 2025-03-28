@@ -41,10 +41,8 @@ public class Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4It
             Hydro.selectshippingaddress("GroundShipping method");
         	HashMap<String,String> Details=Hydro.ordersummary_Details();
             String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
-            Hydro.Admin_signin("Login Details");
-            Hydro.click_Sales();
-			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
-			Hydro.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
+//			HashMap<String,String> Orderstatus1 = Hydro.Admin_Order_Details(OrderNumber);
+			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
 		} catch (Exception e) {
 
@@ -54,7 +52,7 @@ public class Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4It
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
