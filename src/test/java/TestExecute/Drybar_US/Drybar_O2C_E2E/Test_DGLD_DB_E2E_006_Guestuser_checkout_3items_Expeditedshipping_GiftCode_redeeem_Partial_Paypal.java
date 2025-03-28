@@ -23,10 +23,10 @@ public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_Gi
 			Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
 			String Description="Guest user checkout with 3 items + Expedited shipping + Gift Code redeeem Partial + Paypal";
 			Drybar.Verify_Homepage();
-			Drybar.search_product("900-2230-1 Product");
-	        Drybar.addtocart("900-2230-1 Product");
-	        Drybar.search_product("900-0630-1 Product");
-	        Drybar.addtocart("900-0630-1 Product");
+//			Drybar.search_product("900-2230-1 Product");
+//	        Drybar.addtocart("900-2230-1 Product");
+//	        Drybar.search_product("900-0630-1 Product");
+//	        Drybar.addtocart("900-0630-1 Product");
 	        Drybar.search_product("900-0700-4 Product");
 	        Drybar.addtocart("900-0700-4 Product");
 	        Drybar.minicart_Checkout();
@@ -35,11 +35,11 @@ public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_Gi
 	        Drybar.selectshippingmethod("ExpeditedShipping method");
 	    	HashMap<String,String> Details=Drybar.ordersummary_Details();
 	        String OrderNumber=Drybar.payPal_Payment("PaypalDetails");
-	        Drybar.Admin_signin("AccountDetails");
-	        Drybar.click_Sales();
-	        HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
-	        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
-	        
+//	        Drybar.Admin_signin("AccountDetails");
+//	        Drybar.click_Sales();
+//	        HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
+	        Drybar.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
+	         
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

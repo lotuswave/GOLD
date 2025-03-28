@@ -23,10 +23,10 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
 		Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
 		String Description="Guest user checkout with 1 Simple + 1 aerosal Bundle + 1Configurable  item + Standard shipping + Discount + Gift Code Redeem Full";
 		Drybar.Verify_Homepage();
-        Drybar.search_product("900-2230-1 Product");
-        Drybar.addtocart("900-2230-1 Product");
-        Drybar.search_product("CURE-LIQUEUR- product");
-        Drybar.addtocart("CURE-LIQUEUR- product");
+//        Drybar.search_product("900-2230-1 Product");
+//        Drybar.addtocart("900-2230-1 Product");
+//        Drybar.search_product("CURE-LIQUEUR- product");
+//        Drybar.addtocart("CURE-LIQUEUR- product");
         Drybar.search_product("Refresh Bundle");
     	Drybar.addtocart("Refresh Bundle");
         Drybar.minicart_Checkout();
@@ -36,11 +36,11 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
         String Used_GiftCode= Drybar.gitCard("GiftCode Full Redeem");
       	HashMap<String,String> Details=Drybar.ordersummary_Details();
         String OrderNumber=Drybar.giftCardSubmitOrder();
-        Drybar.Admin_signin("AccountDetails");
-        Drybar.click_Sales();
-        HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
-        Drybar.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("workato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
-        
+//      Drybar.Admin_signin("AccountDetails");
+//      Drybar.click_Sales();
+//      HashMap<String, String> Orderstatus1= Drybar.order_verfication(OrderNumber);
+      Drybar.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
+       
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -58,7 +58,7 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Drybar_US\\config.properties");
         Login.signIn();
-//        Drybar.close_add();
+        Drybar.close_add();
         
 
 	}

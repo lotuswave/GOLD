@@ -120,15 +120,17 @@ public class GoldDrybarusE2EHelper {
 	}
 	
 	public void login_Drybar(String dataSet) {
-
+	
 		try {
 			if (Common.getCurrentURL().contains("preprod") ||Common.getCurrentURL().contains("stage") ) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
+			
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
+			
 			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
@@ -269,6 +271,12 @@ public class GoldDrybarusE2EHelper {
 			if (size > 0) {
 				try {
 					Thread.sleep(3000);
+					Thread.sleep(6000);
+					if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+					{
+						Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+					}
+					Thread.sleep(5000);
 					Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
 					
 					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
@@ -765,6 +773,12 @@ public class GoldDrybarusE2EHelper {
 		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
+			Thread.sleep(6000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
+			Thread.sleep(5000);
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@id='guest_details-email_address']");
 				Common.textBoxInput("xpath", "//input[@id='guest_details-email_address']", data.get(dataSet).get("Email"));
@@ -891,179 +905,179 @@ public class GoldDrybarusE2EHelper {
 	
 	public void prepareOrdersData(String fileName) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 
-
-			File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/"+fileName);
+			File file = new File(System.getProperty("user.dir") + "/src/test/resources/TestData/Osprey_US/" + fileName);
 			XSSFWorkbook workbook;
 			XSSFSheet sheet;
 			Row row;
 			Cell cell;
 			int rowcount;
-			if(!(file.exists()))
-			{
-			workbook = new XSSFWorkbook();
-			sheet = workbook.createSheet("DrybarUS-O2C-E2E-Testing");
-			CellStyle cs = workbook.createCellStyle();
-			CellStyle ps = workbook.createCellStyle();
-			cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			cs.setFillForegroundColor(IndexedColors.GOLD.getIndex());
-			ps.setFillForegroundColor(IndexedColors.RED.getIndex());
-			Font f = workbook.createFont();
-			f.setBold(true);
-			cs.setFont(f);
-			cs.setAlignment(HorizontalAlignment.RIGHT);
-			row = sheet.createRow(0);
-			cell = row.createCell(0);
-			cell.setCellStyle(cs);
-			cell.setCellValue("DRYBAR US - PREPROD - GRAS Release - O2C-E2E Test Execution Plan");
-			row = sheet.createRow(1);
-			cell = row.createCell(0);
-			cell.setCellStyle(cs);
-			cell.setCellValue("S.No");
-			cell = row.createCell(1);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Website");
-			cell = row.createCell(2);
-			cell.setCellStyle(cs);
+			if (!(file.exists())) {
+				workbook = new XSSFWorkbook();
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				CellStyle ps = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				ps.setFillForegroundColor(IndexedColors.RED.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("S.No");
+				cell = row.createCell(1);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Website");
+				cell = row.createCell(2);
+				cell.setCellStyle(cs);
+				
+				cell.setCellStyle(cs);
+				cell.setCellValue("Test scenario Description");
+				cell = row.createCell(3);
+				
+//				cell.setCellStyle(cs);
+//				cell.setCellValue("SKU");
+//				cell = row.createCell(4);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				cell = row.createCell(4);
+				
+//				cell.setCellStyle(cs);
+//				cell.setCellValue("Order Status Magento");
+//	           cell = row.createCell(6);
+//	           
+//	           cell.setCellStyle(cs);
+//				cell.setCellValue("Workato Status");
+//	           cell = row.createCell(7);
 			
-			cell.setCellStyle(cs);
-			cell.setCellValue("Test scenario Description");
-			cell = row.createCell(3);
-			
-			cell.setCellStyle(cs);
-			cell.setCellValue("SKU");
-			cell = row.createCell(4);
-			cell.setCellStyle(cs);
-			cell.setCellValue("Web Order Number");
-			cell = row.createCell(5);
-			
-			cell.setCellStyle(cs);
-			cell.setCellValue("Order Status Magento");
-	       cell = row.createCell(6);
-	       
-	       cell.setCellStyle(cs);
-			cell.setCellValue("Workato Status");
-	       cell = row.createCell(7);
-		
-	       cell.setCellStyle(cs);
-			cell.setCellValue("Used GiftCode");
-	     cell = row.createCell(8);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Subtotal");
-	     cell = row.createCell(9);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("shipping");
-	     cell = row.createCell(10);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Tax");
-	     cell = row.createCell(11);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Discount");
-	     cell = row.createCell(12);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("ordertotal");
-	     cell = row.createCell(13);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Adminsubtotal");
-	     cell = row.createCell(14);
-	     
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Adminshipping");
-	     cell = row.createCell(15);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Admintax");
-	     cell = row.createCell(16);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("AdminDis");
-	     cell = row.createCell(17);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Admintotal");
-	     cell = row.createCell(18);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Email");
-	     cell = row.createCell(19);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Website&Adminsubtotal status");
-	     cell = row.createCell(20);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Website&AdminShipping Status");
-	     cell = row.createCell(21);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Website&AdminTax Status");
-	     cell = row.createCell(22);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Website&AdminDiscount Status");
-	     cell = row.createCell(23);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Website&Adminordertotal Status");
-	     cell = row.createCell(24);
+	           cell.setCellStyle(cs);
+				cell.setCellValue("Used GiftCode");
+	         cell = row.createCell(5);
+	         
+	         cell.setCellStyle(cs);
+				cell.setCellValue("Subtotal");
+		     cell = row.createCell(6);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("shipping");
+		     cell = row.createCell(7);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Tax");
+		     cell = row.createCell(8);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("Discount");
+		     cell = row.createCell(9);
+		     
+		     cell.setCellStyle(cs);
+				cell.setCellValue("ordertotal");
+		     cell = row.createCell(10);
+		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Adminsubtotal");
+//		     cell = row.createCell(14);
+//		     
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Adminshipping");
+//		     cell = row.createCell(15);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Admintax");
+//		     cell = row.createCell(16);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("AdminDis");
+//		     cell = row.createCell(17);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Admintotal");
+//		     cell = row.createCell(18);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Email");
+//		     cell = row.createCell(19);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Website & Adminsubtotal status");
+//		     cell = row.createCell(20);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Website & AdminShipping Status");
+//		     cell = row.createCell(21);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Website & AdminTax Status");
+//		     cell = row.createCell(22);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Website & AdminDiscount Status");
+//		     cell = row.createCell(23);
+//		     
+//		     cell.setCellStyle(cs);
+//				cell.setCellValue("Website & Adminordertotal Status");
+//		     cell = row.createCell(24);
 
 
+				/*
+				 * cell=row.createCell(17); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty1");
+				 * 
+				 * cell=row.createCell(18); cell.setCellStyle(cs);
+				 * cell.setCellValue("Product2");
+				 * 
+				 * cell=row.createCell(19); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty2");
+				 * 
+				 * cell=row.createCell(20); cell.setCellStyle(cs);
+				 * cell.setCellValue("Product3");
+				 * 
+				 * 
+				 * cell=row.createCell(21); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty3");
+				 * 
+				 * 
+				 * cell=row.createCell(22); cell.setCellStyle(cs);
+				 * cell.setCellValue("Product4");
+				 * 
+				 * 
+				 * cell=row.createCell(23); cell.setCellStyle(cs);
+				 * cell.setCellValue("Productqty4");
+				 */
+				rowcount = 2;
 
+			}
+
+			else {
+				workbook = new XSSFWorkbook(new FileInputStream(file));
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
 			/*
-			 * cell=row.createCell(17); cell.setCellStyle(cs);
-			 * cell.setCellValue("Productqty1");
-			 * 
-			 * cell=row.createCell(18); cell.setCellStyle(cs);
-			 * cell.setCellValue("Product2");
-			 * 
-			 * cell=row.createCell(19); cell.setCellStyle(cs);
-			 * cell.setCellValue("Productqty2");
-			 * 
-			 * cell=row.createCell(20); cell.setCellStyle(cs);
-			 * cell.setCellValue("Product3");
-			 * 
-			 * 
-			 * cell=row.createCell(21); cell.setCellStyle(cs);
-			 * cell.setCellValue("Productqty3");
-			 * 
-			 * 
-			 * cell=row.createCell(22); cell.setCellStyle(cs);
-			 * cell.setCellValue("Product4");
-			 * 
-			 * 
-			 * cell=row.createCell(23); cell.setCellStyle(cs);
-			 * cell.setCellValue("Productqty4");
+			 * row = sheet.createRow(rowcount); cell = row.createCell(0);
 			 */
-			rowcount = 2;
 
+			FileOutputStream fileOut = new FileOutputStream(file);
+			workbook.write(fileOut);
+			fileOut.flush();
+			fileOut.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		}
 
-		else {
-			workbook = new XSSFWorkbook(new FileInputStream(file));
-			sheet = workbook.getSheet("OrderDetails");
-			rowcount = sheet.getLastRowNum() + 1;
-		}
-		/*
-		 * row = sheet.createRow(rowcount); cell = row.createCell(0);
-		 */
-
-		FileOutputStream fileOut = new FileOutputStream(file);
-		workbook.write(fileOut);
-		fileOut.flush();
-		fileOut.close();
-
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	}
 	
 	public void prepareOrdersData1(String fileName) {
 		// TODO Auto-generated method stub
@@ -1107,48 +1121,48 @@ public class GoldDrybarusE2EHelper {
 			cell.setCellValue("Test scenario Description");
 			cell = row.createCell(3);
 			
-			cell.setCellStyle(cs);
-			cell.setCellValue("SKU");
-			cell = row.createCell(4);
+//			cell.setCellStyle(cs);
+//			cell.setCellValue("SKU");
+//			cell = row.createCell(4);
 			cell.setCellStyle(cs);
 			cell.setCellValue("Web Order Number");
 			cell = row.createCell(5);
 			
-			cell.setCellStyle(cs);
-			cell.setCellValue("Order Status Magento");
-	       cell = row.createCell(6);
-	       
-	       cell.setCellStyle(cs);
-			cell.setCellValue("Workato Status");
-	       cell = row.createCell(7);
+//			cell.setCellStyle(cs);
+//			cell.setCellValue("Order Status Magento");
+//	       cell = row.createCell(6);
+//	       
+//	       cell.setCellStyle(cs);
+//			cell.setCellValue("Workato Status");
+//	       cell = row.createCell(7);
 		
 	       cell.setCellStyle(cs);
 			cell.setCellValue("Used GiftCode");
 	     cell = row.createCell(8);
 	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Adminsubtotal");
-	     cell = row.createCell(9);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Adminshipping");
-	     cell = row.createCell(10);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Admintax");
-	     cell = row.createCell(11);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("AdminDis");
-	     cell = row.createCell(12);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Admintotal");
-	     cell = row.createCell(13);
-	     
-	     cell.setCellStyle(cs);
-			cell.setCellValue("Email");
-	     cell = row.createCell(14);
+//	     cell.setCellStyle(cs);
+//			cell.setCellValue("Adminsubtotal");
+//	     cell = row.createCell(9);
+//	     
+//	     cell.setCellStyle(cs);
+//			cell.setCellValue("Adminshipping");
+//	     cell = row.createCell(10);
+//	     
+//	     cell.setCellStyle(cs);
+//			cell.setCellValue("Admintax");
+//	     cell = row.createCell(11);
+//	     
+//	     cell.setCellStyle(cs);
+//			cell.setCellValue("AdminDis");
+//	     cell = row.createCell(12);
+//	     
+//	     cell.setCellStyle(cs);
+//			cell.setCellValue("Admintotal");
+//	     cell = row.createCell(13);
+//	     
+//	     cell.setCellStyle(cs);
+//			cell.setCellValue("Email");
+//	     cell = row.createCell(14);
 	     
 			rowcount = 2;
 
@@ -1174,274 +1188,273 @@ public class GoldDrybarusE2EHelper {
 	}
 
 	
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode,String Subtotal,String shipping,String Tax,String Discount,String ordertotal,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email) throws FileNotFoundException, IOException
-	{
-		//String fileOut="";
-	try{
-		
-		File file=new File(System.getProperty("user.dir")+"/src/test/resources/TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
-		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
-		XSSFSheet sheet;
-		Row row;
-		Cell cell;
-		int rowcount;
-		sheet = workbook.getSheet("DrybarUS-O2C-E2E-Testing");
-		
-		if((workbook.getSheet("DrybarUS-O2C-E2E-Testing"))==null)
-		{
-		sheet = workbook.createSheet("DrybarUS-O2C-E2E-Testing");
-		CellStyle cs = workbook.createCellStyle();
-		cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
-		Font f = workbook.createFont();
-		f.setBold(true);
-		cs.setFont(f);	 
-		cs.setAlignment(HorizontalAlignment.RIGHT);
-		row = sheet.createRow(0);
-		cell = row.createCell(0);
-		cell.setCellStyle(cs);
-		cell.setCellValue("DrybarUS-O2C-E2E-Testing");
-		
-		row = sheet.createRow(1);
-		cell = row.createCell(0);
-		cell.setCellStyle(cs);
-		cell.setCellValue("Web Order Number");
-		rowcount=2;
-		
-		}
-		
-		else
-		{
-		
-		sheet=workbook.getSheet("DrybarUS-O2C-E2E-Testing");	
-		rowcount=sheet.getLastRowNum()+1;
-		}
-		row = sheet.createRow(rowcount);
-		cell = row.createCell(0);
-		cell.setCellType(CellType.NUMERIC);
-		int SNo=rowcount-1;
-		cell.setCellValue(SNo);
-		cell = row.createCell(1);
-		cell.setCellType(CellType.STRING);
-		
-		cell.setCellValue("Drybar US");
-		
-		cell = row.createCell(2);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Description);
-		
-		cell = row.createCell(3);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Skus);
-		
-		cell = row.createCell(4);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(OrderIdNumber);
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Used_GiftCode,String Subtotal,String shipping,String Tax,String Discount,String ordertotal)
+			throws FileNotFoundException, IOException {
+		// String fileOut="";
+		try {
 
-		cell = row.createCell(5);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(AdminOrderstatus);
-		
-		cell = row.createCell(6);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(workato);
-		
-		cell = row.createCell(7);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Used_GiftCode);
-		
-		cell = row.createCell(8);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Subtotal);
-		
-		cell = row.createCell(9);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(shipping);
-		
-		cell = row.createCell(10);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Tax);
-		
-		cell = row.createCell(11);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Discount);
-		
-		cell = row.createCell(12);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(ordertotal);
-		
-		cell = row.createCell(13);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Adminsubtotal);
-		
-		cell = row.createCell(14);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Adminshipping);
-		
-		cell = row.createCell(15);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Admintax);
-		
-		cell = row.createCell(16);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(AdminDis);
-		
-		cell = row.createCell(17);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Admintotal);
-		
-		cell = row.createCell(18);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Email);
-		
-		cell = row.createCell(19);
-		cell.setCellType(CellType.STRING);
-		String Subtotalstatus;
-		if(Subtotal.equals(Adminsubtotal))
-		{
+			File file = new File(
+					System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_US/OspreyUS_E2E_orderDetails.xlsx");
+			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+			XSSFSheet sheet;
+			Row row;
+			Cell cell;
+			int rowcount;
+			sheet = workbook.getSheet("OrderDetails");
 
-			Subtotalstatus="PASS";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.GREEN.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
+			if ((workbook.getSheet("OrderDetails")) == null) {
+				sheet = workbook.createSheet("OrderDetails");
+				CellStyle cs = workbook.createCellStyle();
+				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+				Font f = workbook.createFont();
+				f.setBold(true);
+				cs.setFont(f);
+				cs.setAlignment(HorizontalAlignment.RIGHT);
+				row = sheet.createRow(0);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Orders Details");
+
+				row = sheet.createRow(1);
+				cell = row.createCell(0);
+				cell.setCellStyle(cs);
+				cell.setCellValue("Web Order Number");
+				rowcount = 2;
+
+			}
+
+			else {
+
+				sheet = workbook.getSheet("OrderDetails");
+				rowcount = sheet.getLastRowNum() + 1;
+			}
+			row = sheet.createRow(rowcount);
+			cell = row.createCell(0);
+			cell.setCellType(CellType.NUMERIC);
+			int SNo=rowcount-1;
+			cell.setCellValue(SNo);
+			cell = row.createCell(1);
+			cell.setCellType(CellType.STRING);
+			
+			cell.setCellValue("OspreyUS");
+			
+			cell = row.createCell(2);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Description);
+			
+//			cell = row.createCell(3);
+//			cell.setCellType(CellType.STRING);
+//			cell.setCellValue(Skus);
+			
+			cell = row.createCell(3);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(OrderIdNumber);
+
+//			cell = row.createCell(5);
+//			cell.setCellType(CellType.STRING);
+//			cell.setCellValue(AdminOrderstatus);
+//			
+//			cell = row.createCell(6);
+//			cell.setCellType(CellType.STRING);
+//			cell.setCellValue(workato);
+			
+			cell = row.createCell(4);
+			cell.setCellType(CellType.STRING);
+			cell.setCellValue(Used_GiftCode);
+			
+			cell = row.createCell(5);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Subtotal);
+			
+			cell = row.createCell(6);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(shipping);
+			
+			cell = row.createCell(7);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Tax);
+			
+			cell = row.createCell(8);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(Discount);
+			
+			cell = row.createCell(9);
+			cell.setCellType(CellType.NUMERIC);
+			cell.setCellValue(ordertotal);
+			
+//			cell = row.createCell(13);
+//			cell.setCellType(CellType.NUMERIC);
+//			cell.setCellValue(Adminsubtotal);
+//			
+//			cell = row.createCell(14);
+//			cell.setCellType(CellType.NUMERIC);
+//			cell.setCellValue(Adminshipping);
+//			
+//			cell = row.createCell(15);
+//			cell.setCellType(CellType.NUMERIC);
+//			cell.setCellValue(Admintax);
+//			
+//			cell = row.createCell(16);
+//			cell.setCellType(CellType.NUMERIC);
+//			cell.setCellValue(AdminDis);
+//			
+//			cell = row.createCell(17);
+//			cell.setCellType(CellType.NUMERIC);
+//			cell.setCellValue(Admintotal);
+//			
+//			cell = row.createCell(18);
+//			cell.setCellType(CellType.STRING);
+//			cell.setCellValue(Email);
+//			
+//			cell = row.createCell(19);
+//			cell.setCellType(CellType.STRING);
+//			String Subtotalstatus;
+//			if(Subtotal.equals(Adminsubtotal))
+//			{
+	//
+//				Subtotalstatus="PASS";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.GREEN.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+//			else
+//			{
+//				Subtotalstatus="FAIL";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.RED.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+	//
+//			cell.setCellValue(Subtotalstatus);
+//			
+//			cell = row.createCell(20);
+//			cell.setCellType(CellType.STRING);
+//			String Shippingstatus;
+//			if(shipping.equals(Adminshipping))
+//			{
+	//
+//				Shippingstatus="PASS";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.GREEN.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+//			else
+//			{
+//				Shippingstatus="FAIL";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.RED.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+	//
+//			cell.setCellValue(Shippingstatus);
+//			
+//			cell = row.createCell(21);
+//			cell.setCellType(CellType.STRING);
+//			String Taxstatus;
+//			if(Tax.equals(Admintax))
+//			{
+	//
+//				Taxstatus="PASS";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.GREEN.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+//			else
+//			{
+//				Taxstatus="FAIL";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.RED.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+	//
+//			cell.setCellValue(Taxstatus);
+//			
+//			
+//			cell = row.createCell(22);
+//			cell.setCellType(CellType.STRING);
+//			String Disstatus;
+//			if(Discount.equals(AdminDis))
+//			{
+	//
+//				Disstatus="PASS";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.GREEN.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+//			else
+//			{
+//				Disstatus="FAIL";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.RED.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+	//
+//			cell.setCellValue(Disstatus);
+//			
+	//
+//			cell = row.createCell(23);
+//			cell.setCellType(CellType.STRING);
+//			String Orderstatus;
+//			if(ordertotal.equals(Admintotal))
+//			{
+	//
+//				Orderstatus="PASS";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.GREEN.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+//			else
+//			{
+//				Orderstatus="FAIL";
+//			CellStyle style = workbook.createCellStyle();
+//			Font font= workbook.createFont();
+//			font.setColor(IndexedColors.RED.getIndex());
+//			font.setBold(true);
+//			style.setFont(font);
+//			cell.setCellStyle(style);
+//			}
+
+//			cell.setCellValue(Orderstatus);
+			
+			System.out.println(OrderIdNumber);
+			FileOutputStream fileOut = new FileOutputStream(file);
+			
+			workbook.write(fileOut);
+		
+			fileOut.flush();
+			fileOut.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 		}
-		else
-		{
-			Subtotalstatus="FAIL";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.RED.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-
-		cell.setCellValue(Subtotalstatus);
-		
-		cell = row.createCell(20);
-		cell.setCellType(CellType.STRING);
-		String Shippingstatus;
-		if(shipping.equals(Adminshipping))
-		{
-
-			Shippingstatus="PASS";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.GREEN.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-		else
-		{
-			Shippingstatus="FAIL";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.RED.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-
-		cell.setCellValue(Shippingstatus);
-		
-		cell = row.createCell(21);
-		cell.setCellType(CellType.STRING);
-		String Taxstatus;
-		if(Tax.equals(Admintax))
-		{
-
-			Taxstatus="PASS";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.GREEN.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-		else
-		{
-			Taxstatus="FAIL";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.RED.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-
-		cell.setCellValue(Taxstatus);
-		
-		
-		cell = row.createCell(22);
-		cell.setCellType(CellType.STRING);
-		String Disstatus;
-		if(Discount.equals(AdminDis))
-		{
-
-			Disstatus="PASS";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.GREEN.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-		else
-		{
-			Disstatus="FAIL";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.RED.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-
-		cell.setCellValue(Disstatus);
-		
-
-		cell = row.createCell(23);
-		cell.setCellType(CellType.STRING);
-		String Orderstatus;
-		if(ordertotal.equals(Admintotal))
-		{
-
-			Orderstatus="PASS";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.GREEN.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-		else
-		{
-			Orderstatus="FAIL";
-		CellStyle style = workbook.createCellStyle();
-		Font font= workbook.createFont();
-		font.setColor(IndexedColors.RED.getIndex());
-		font.setBold(true);
-		style.setFont(font);
-		cell.setCellStyle(style);
-		}
-
-		cell.setCellValue(Orderstatus);
-		
-		System.out.println(OrderIdNumber);
-		FileOutputStream fileOut = new FileOutputStream(file);
-		
-		workbook.write(fileOut);
-	
-		fileOut.flush();
-		fileOut.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
 
 	public void writeOrderNumber1(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String workato, String Used_GiftCode,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email) throws FileNotFoundException, IOException
 	{
@@ -6111,7 +6124,7 @@ public void FUll_Payment(String dataSet) {
 				else
 				{
 					Thread.sleep(4000);
-					int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
+					int savedcard=Common.findElements("xpath", "//div[contains(@class,'form-select flex gap')]").size();
 					if(savedcard>0)
 					{
 						Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
@@ -6123,11 +6136,13 @@ public void FUll_Payment(String dataSet) {
 					Common.clickElement("xpath", "//span[text()='Klarna']");
 					Common.switchToDefault();
 					
+					
 					if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
-					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
-					Sync.waitPageLoad();
-					klarna_Details(dataSet);
+						Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+						Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+						Sync.waitPageLoad();
+						klarna_Details(dataSet);
 					}
 					else
 					{
@@ -6177,44 +6192,53 @@ public void FUll_Payment(String dataSet) {
 				Sync.waitPageLoad();
 				Common.switchWindows();
 				//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-				Sync.waitElementPresent("xpath", "//input[@name='phone']");
+				Sync.waitElementPresent("xpath", "//input[@name='phonePasskey']");
 			/*	Common.clickElement("xpath", "//input[@name='phone']");
 				
 				int number=Common.genrateRandomNumber();
 				System.out.println(number);
 				String mobile=Integer.toString(number);
 				String phone="+91"+"95862"+mobile;*/
-				WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
+				WebElement clear=Common.findElement("xpath", "//input[@name='phonePasskey']");
 			    clear.sendKeys(Keys.CONTROL+"a");
 			    clear.sendKeys(Keys.DELETE);
 				System.out.println(phone);
-				Common.textBoxInput("xpath", "//input[@name='phone']", phone);
+				Common.textBoxInput("xpath", "//input[@name='phonePasskey']", phone);
 				Common.clickElement("xpath", "//button[@id='onContinue']");
 				Sync.waitPageLoad();
 				Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 				Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
-				Thread.sleep(6000);
 				Sync.waitPageLoad();
+				Thread.sleep(8000);
 				
-				String klarna=Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText();
-				if(klarna.contains("Choose how to pay"))
+//				Common.clickElement("xpath", "//span[text()='Pay now']");
+//				Thread.sleep(4000);
+//				Common.refreshpage();
+				if(Common.findElements("xpath", "//h2[@id='stacked-selection-title']").size()>0)
 				{
+					Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText().contains("Choose how to pay");
 					Thread.sleep(4000);
-				//	Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
-					Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
-					Common.clickElement("xpath", "//label[@for='pay_now__label']");
-					
-					Thread.sleep(2000);
-					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
-					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
+					Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
+//					Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
+//					Common.clickElement("xpath", "//label[@for='pay_now__label']");
+//					
+//					Thread.sleep(2000);
+//					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Continue')])[1]");
+//					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[1]");
 					Thread.sleep(4000);
-					//Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
-					Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
+//					Common.doubleClick("xpath", "(//span[contains(text(),'Continue')])[2]");
+//					Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 					Common.clickElement("xpath", "//span[text()='Pay with']");
 					Sync.waitPageLoad();
 					
 						
 					
+				}
+				else if(Common.findElement("xpath", "//h1[@id='summary-title']").getText().contains("Confirm and pay"))
+				{
+					Thread.sleep(4000);
+					Common.clickElement("xpath", "//span[text()='Pay with']");
+					Sync.waitPageLoad();
 				}
 				else
 				{
