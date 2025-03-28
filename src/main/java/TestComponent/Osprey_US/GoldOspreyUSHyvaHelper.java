@@ -2935,7 +2935,7 @@ public void header_Shopbycollection(String Dataset) { {
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[2]").size()>0)
 				{
 					Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[2]");
@@ -11510,8 +11510,9 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			Common.clickElement("xpath", "//span[text()='Pay now']");
 //			Thread.sleep(4000);
 //			Common.refreshpage();
-			if(Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText().contains("Choose how to pay"))
+			if(Common.findElements("xpath", "//h2[@id='stacked-selection-title']").size()>0)
 			{
+				Common.findElement("xpath", "//h2[@id='stacked-selection-title']").getText().contains("Choose how to pay");
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "(//span[contains(text(),'Continue')])[2]");
 //				Sync.waitElementPresent("xpath", "//label[@for='pay_now__label']");
