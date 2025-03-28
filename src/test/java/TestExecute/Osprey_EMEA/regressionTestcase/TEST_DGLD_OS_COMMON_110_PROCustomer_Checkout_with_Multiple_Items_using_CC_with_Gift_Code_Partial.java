@@ -24,7 +24,8 @@ public class TEST_DGLD_OS_COMMON_110_PROCustomer_Checkout_with_Multiple_Items_us
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.Prouser_Discount();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+//      Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.search_product("Simple product");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.Prouser_Discount();
         Osprey_ReEu.minicart_Checkout();

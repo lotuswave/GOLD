@@ -4158,6 +4158,7 @@ public void Remove_GiftCode() {
 			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
 			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
+			Sync.waitElementPresent(30,"xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
 			Common.assertionCheckwithReport(
 					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
@@ -8687,21 +8688,21 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 		 
-					Sync.waitElementPresent("xpath", "//input[@id='discount-code']");
+					Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
 					if (Common.getCurrentURL().contains("preprod")) {
 						Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
 					} else {
-						Common.textBoxInput("xpath", "//input[@id='discount-code']", data.get(Dataset).get("prodDiscountcode"));
+						Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
 					}
-					int size = Common.findElements("xpath", "//input[@id='discount-code']").size();
+					int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
 					Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 							"Successfully open the discount input box", "User unable enter Discount Code");
-					Sync.waitElementClickable(30,"xpath", "//button[contains(@class,'btn btn-primary justify')]");
-					Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify')]");
+					Sync.waitElementClickable(30,"xpath", "//span[text()='Apply Discount']");
+					Common.clickElement("xpath", "//span[text()='Apply Discount']");
 					Sync.waitPageLoad();
 					expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 						Thread.sleep(4000);
-						int discountcodemsg1 = Common.findElements("xpath", "//span[contains(text(),'Cancel Coupon')]").size();
+						int discountcodemsg1 = Common.findElements("xpath", "//button[@value='Cancel Coupon']").size();
 						Common.assertionCheckwithReport(discountcodemsg1 >0, "verifying pomocode",
 								expectedResult, "promotion code working as expected", "Promation code is not applied");
 				} catch (Exception | Error e) {

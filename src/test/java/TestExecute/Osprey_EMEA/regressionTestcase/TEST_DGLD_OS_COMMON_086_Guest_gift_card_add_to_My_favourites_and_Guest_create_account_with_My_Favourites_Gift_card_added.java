@@ -26,7 +26,6 @@ public class TEST_DGLD_OS_COMMON_086_Guest_gift_card_add_to_My_favourites_and_Gu
         Osprey_ReEu.Giftcard_Add_from_My_fav("price");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addBillingDetails_PaymentDetails_SubmitOrder("CCAmexcard");
-//        Osprey_ReEu.giftCardSubmitOrder();
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

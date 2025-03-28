@@ -22,11 +22,9 @@ public class TEST_DGLD_OS_US_ST_095_Register_user_adds_a_giftcard_to_the_Wishlis
         Osprey_ReEu.Gift_cards("Osprey Gift Card");
         Osprey_ReEu.Card_Value_for_my_fav("price");
         Osprey_ReEu.Guest_Add_Wishlist_Create_account();
-        Osprey_ReEu.click_Createaccount();
-        Osprey_ReEu.create_account("New Account Details");
         Osprey_ReEu.Giftcard_Add_from_My_fav("price");
         Osprey_ReEu.minicart_Checkout();
-    	Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+    	Osprey_ReEu.addBillingDetails_PaymentDetails_SubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 
