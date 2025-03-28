@@ -40,38 +40,10 @@
 <class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_E2E_008_Register_User_Checkout_with_Mutliple_items_and_qty_with_Colorado_Address_CC" />
 </classes>
 </test>
-
-<test name="TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal" testid="DQA-3281" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
-<classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal" />
-</classes>
-</test>
-<test name="TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_shipping_CC" testid="DQA-3281" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
-<classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_shipping_CC" />
-</classes>
-</test>
-
-<test name="TEST_DGLD_OSP_E2E_002_Registeruser_checkout_with_Klarna_Standard_shipping" testid="DQA-3281" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
-<classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_E2E_002_Registeruser_checkout_with_Klarna_Standard_shipping" />
-</classes>
-</test>
  
-<test name="TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal_GreaterThan100_Paypal_MultipleItems" testid="DQA-3281" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
+<test name="TTEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal" testid="DTG-3203" priority="P1" description="Validate_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal">
 <classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal_GreaterThan100_Paypal_MultipleItems" />
-</classes>
-</test>
- 
-<test name="TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_shipping_CC" testid="DQA-3281" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
-<classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_shipping_CC" />
-</classes>
-</test>
-<test name="TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal" testid="DTG-3203" priority="P1" description="Validate_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal">
-<classes>
-<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal."/>
+<class name="TestExecute.Osprey_US.Osprey_US_O2C_E2E.TEST_DGLD_OSP_SP_E2E_009_GuestUser_with_multiplleitems_GC_Item_Standard_Shipping_Paypal"/>
 </classes>
 </test>
 <test name="TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_shipping_CC" testid="DTG-3203" priority="P1" description="Validate_RegisterUser_with_multipleitems_standard_shipping_CC">
