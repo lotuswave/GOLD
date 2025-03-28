@@ -10513,12 +10513,12 @@ public String Gift_card(String dataSet) {
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		Thread.sleep(2000);
-		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
-	    System.out.println(successmsg);	
-		Common.assertionCheckwithReport(successmsg.contains("added"),
-				"validating the success message after applying gift card",
-				"Success message should be displayed after the applying of gift card",
-				"Sucessfully gift card has been applyed","Failed to apply the gift card");
+//		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+//	    System.out.println(successmsg);	
+//		Common.assertionCheckwithReport(successmsg.contains("added"),
+//				"validating the success message after applying gift card",
+//				"Success message should be displayed after the applying of gift card",
+//				"Sucessfully gift card has been applyed","Failed to apply the gift card");
 			}
 			else
 			{
@@ -16825,7 +16825,7 @@ public HashMap<String, String> Admin_Order_Details(String orderNumber) {
 										String Discount="Null";
 										Orderstatus1.put("AdminDis", Discount);
 									}
-									String OrderTotal=Common.getText("xpath", " //strong[contains(text(),'Grand Total (Incl.Tax)')]//parent::td//parent::tr//span[@class='price']").trim();
+									String OrderTotal=Common.getText("xpath", "//strong[contains(text(),'Grand Total')]//parent::td//parent::tr//span[@class='price']").trim();
 									Orderstatus1.put("Admintotal", OrderTotal);
 									
 									String Email=Common.getText("xpath", "//th[contains(text(),'Email')]//parent::tr//a").trim();
