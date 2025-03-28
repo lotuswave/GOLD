@@ -4923,6 +4923,11 @@ return Number;
 		try {
 			Thread.sleep(5000);
 			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Thread.sleep(5000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
 			Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
 
 		} catch (NoSuchElementException e) {
