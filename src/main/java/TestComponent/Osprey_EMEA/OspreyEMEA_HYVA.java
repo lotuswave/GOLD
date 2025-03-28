@@ -6082,19 +6082,24 @@ return Number;
 		// TODO Auto-generated method stub
 
 		try {
-			Sync.waitElementVisible(30, "xpath", "//button[@title='Add New Address']");
-			Common.clickElement("xpath", "//button[@title='Add New Address']");
-			String newaddress = Common.findElement("xpath", "//h1[@class='page-title-wrapper h2']").getText();
-			if (newaddress.contains("Add New Address")) {
-				Common.textBoxInput("xpath", "//input[@title='Phone Number']", data.get(dataSet).get("phone"));
-				Common.textBoxInput("xpath", "//input[@title='Address Line 1']", data.get(dataSet).get("Street"));
-				Common.textBoxInput("xpath", "//input[@title='City']", data.get(dataSet).get("City"));
+			Sync.waitElementVisible(30, "xpath", "//button[normalize-space()='New Address']");
+			Common.clickElement("xpath", "//button[normalize-space()='New Address']");
+			String newaddress = Common.findElement("xpath", "//h2[@x-data='addressForm()']").getText();
+			if (newaddress.contains("New Address")) {
+				//form[@id='billing']//input[@name='firstname']
+				Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='firstname']",
+						data.get(dataSet).get("FirstName"));
+				Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
+						data.get(dataSet).get("LastName"));
+				Common.textBoxInput("xpath", "//input[@id='billing-telephone']", data.get(dataSet).get("phone"));
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
 				try {
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
+					Common.textBoxInput("xpath", "//form[@id='billing']//input[@placeholder='State/Province']",
 							data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					Thread.sleep(3000);
-					Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@placeholder='State/Province']",
+					Common.textBoxInput("xpath", "//form[@id='billing']//input[@placeholder='State/Province']",
 							data.get(dataSet).get("Region"));
 				}
 
