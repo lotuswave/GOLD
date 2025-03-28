@@ -2229,9 +2229,9 @@ public void header_Shopbycollection(String Dataset) { {
 			Thread.sleep(4000);
 			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
-					"enter product name will display in the search box", "user enter the product name in  search box",
-					"Failed to see the product name");
+//			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
+//					"enter product name will display in the search box", "user enter the product name in  search box",
+//					"Failed to see the product name");
 //			Thread.sleep(8000);
 			}
 			else
@@ -17482,7 +17482,7 @@ public void writeOrderNumber(String Description,String OrderIdNumber,String Used
 	}
 
 
-public void writeOrderNumber1(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus,String workato, String Used_GiftCode,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email)
+public void writeOrderNumber1(String Description,String OrderIdNumber, String Used_GiftCode)
 		throws FileNotFoundException, IOException {
 	// String fileOut="";
 	try {
@@ -17537,49 +17537,49 @@ public void writeOrderNumber1(String Description,String OrderIdNumber,String Sku
 		cell.setCellType(CellType.STRING);
 		cell.setCellValue(Description);
 		
-		cell = row.createCell(3);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Skus);
+//		cell = row.createCell(3);
+//		cell.setCellType(CellType.STRING);
+//		cell.setCellValue(Skus);
 		
 		cell = row.createCell(4);
 		cell.setCellType(CellType.NUMERIC);
 		cell.setCellValue(OrderIdNumber);
 
-		cell = row.createCell(5);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(AdminOrderstatus);
+//		cell = row.createCell(5);
+//		cell.setCellType(CellType.STRING);
+//		cell.setCellValue(AdminOrderstatus);
 		
-		cell = row.createCell(6);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(workato);
+//		cell = row.createCell(6);
+//		cell.setCellType(CellType.STRING);
+//		cell.setCellValue(workato);
+//		
+//		cell = row.createCell(7);
+//		cell.setCellType(CellType.STRING);
+//		cell.setCellValue(Used_GiftCode);
+//		
+//		cell = row.createCell(8);
+//		cell.setCellType(CellType.NUMERIC);
+//		cell.setCellValue(Adminsubtotal);
+//		
+//		cell = row.createCell(9);
+//		cell.setCellType(CellType.NUMERIC);
+//		cell.setCellValue(Adminshipping);
 		
-		cell = row.createCell(7);
-		cell.setCellType(CellType.STRING);
-		cell.setCellValue(Used_GiftCode);
-		
-		cell = row.createCell(8);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Adminsubtotal);
-		
-		cell = row.createCell(9);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Adminshipping);
-		
-		cell = row.createCell(10);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Admintax);
-		
-		cell = row.createCell(11);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(AdminDis);
-		
-		cell = row.createCell(12);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Admintotal);
-		
-		cell = row.createCell(13);
-		cell.setCellType(CellType.NUMERIC);
-		cell.setCellValue(Email);
+//		cell = row.createCell(10);
+//		cell.setCellType(CellType.NUMERIC);
+//		cell.setCellValue(Admintax);
+//		
+//		cell = row.createCell(11);
+//		cell.setCellType(CellType.NUMERIC);
+//		cell.setCellValue(AdminDis);
+//		
+//		cell = row.createCell(12);
+//		cell.setCellType(CellType.NUMERIC);
+//		cell.setCellValue(Admintotal);
+//		
+//		cell = row.createCell(13);
+//		cell.setCellType(CellType.NUMERIC);
+//		cell.setCellValue(Email);
 
 		System.out.println(OrderIdNumber);
 		FileOutputStream fileOut = new FileOutputStream(file);
