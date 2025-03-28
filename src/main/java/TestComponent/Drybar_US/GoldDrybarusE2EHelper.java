@@ -272,9 +272,9 @@ public class GoldDrybarusE2EHelper {
 				try {
 					Thread.sleep(3000);
 					Thread.sleep(6000);
-					if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+					if(Common.findElements("xpath", "//div[@x-ref='freegift']").size()>0)
 					{
-						Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+						Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
 					}
 					Thread.sleep(5000);
 					Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
@@ -774,11 +774,7 @@ public class GoldDrybarusE2EHelper {
 
 		try {
 			Thread.sleep(6000);
-			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
-			{
-				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
-			}
-			Thread.sleep(5000);
+			
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@id='guest_details-email_address']");
 				Common.textBoxInput("xpath", "//input[@id='guest_details-email_address']", data.get(dataSet).get("Email"));
@@ -793,6 +789,12 @@ public class GoldDrybarusE2EHelper {
 		}
 		String expectedResult = "email field will have email address";
 		try {
+			Thread.sleep(3000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+			}
+			Thread.sleep(5000);
 			Common.textBoxInput("id", "shipping-firstname",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("xpath", "//input[@type='email']").size();
@@ -907,7 +909,7 @@ public class GoldDrybarusE2EHelper {
 		// TODO Auto-generated method stub
 		try {
 
-			File file = new File(System.getProperty("user.dir") + "/src/test/resources/TestData/Osprey_US/" + fileName);
+			File file = new File(System.getProperty("user.dir") + "/src/test/resources/TestData/Drybar_US/" + fileName);
 			XSSFWorkbook workbook;
 			XSSFSheet sheet;
 			Row row;
@@ -1010,23 +1012,23 @@ public class GoldDrybarusE2EHelper {
 //		     cell = row.createCell(19);
 //		     
 //		     cell.setCellStyle(cs);
-//				cell.setCellValue("Website & Adminsubtotal status");
+//				cell.setCellValue("Website&Adminsubtotal status");
 //		     cell = row.createCell(20);
 //		     
 //		     cell.setCellStyle(cs);
-//				cell.setCellValue("Website & AdminShipping Status");
+//				cell.setCellValue("Website&AdminShipping Status");
 //		     cell = row.createCell(21);
 //		     
 //		     cell.setCellStyle(cs);
-//				cell.setCellValue("Website & AdminTax Status");
+//				cell.setCellValue("Website&AdminTax Status");
 //		     cell = row.createCell(22);
 //		     
 //		     cell.setCellStyle(cs);
-//				cell.setCellValue("Website & AdminDiscount Status");
+//				cell.setCellValue("Website&AdminDiscount Status");
 //		     cell = row.createCell(23);
 //		     
 //		     cell.setCellStyle(cs);
-//				cell.setCellValue("Website & Adminordertotal Status");
+//				cell.setCellValue("Website&Adminordertotal Status");
 //		     cell = row.createCell(24);
 
 
@@ -1076,8 +1078,8 @@ public class GoldDrybarusE2EHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		}
-
+	}
+	
 	
 	public void prepareOrdersData1(String fileName) {
 		// TODO Auto-generated method stub
@@ -1194,7 +1196,7 @@ public class GoldDrybarusE2EHelper {
 		try {
 
 			File file = new File(
-					System.getProperty("user.dir") + "/src/test/resources//TestData/Osprey_US/OspreyUS_E2E_orderDetails.xlsx");
+					System.getProperty("user.dir") + "/src/test/resources//TestData/Drybar_US/Drybar_E2E_orderDetails.xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
 			XSSFSheet sheet;
 			Row row;
@@ -1237,7 +1239,7 @@ public class GoldDrybarusE2EHelper {
 			cell = row.createCell(1);
 			cell.setCellType(CellType.STRING);
 			
-			cell.setCellValue("OspreyUS");
+			cell.setCellValue("DrybarUS");
 			
 			cell = row.createCell(2);
 			cell.setCellType(CellType.STRING);
@@ -6141,6 +6143,7 @@ public void FUll_Payment(String dataSet) {
 					{
 						Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 						Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+						Thread.sleep(5000);
 						Sync.waitPageLoad();
 						klarna_Details(dataSet);
 					}
