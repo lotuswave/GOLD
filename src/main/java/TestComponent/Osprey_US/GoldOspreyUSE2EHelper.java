@@ -11251,6 +11251,7 @@ public String After_Pay_payment(String dataSet) throws Exception {
 	
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Common.clickElement("xpath", "//iframe[@title='Secure payment input frame']");
 				System.out.println("Switch to Frames");
 				Common.scrollIntoView("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
 				Common.clickElement("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
@@ -11405,24 +11406,24 @@ public String After_Pay_payment(String dataSet) throws Exception {
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-			Sync.waitElementPresent("xpath", "//input[@name='phone']");
+			Sync.waitElementPresent("xpath", "//input[@aria-label='Phone number']");
 		/*	Common.clickElement("xpath", "//input[@name='phone']");
 			
 			int number=Common.genrateRandomNumber();
 			System.out.println(number);
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
-			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
+			WebElement clear=Common.findElement("xpath", "//input[@aria-label='Phone number']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
 			System.out.println(phone);
-			Common.textBoxInput("xpath", "//input[@name='phone']", phone);
+			Common.textBoxInput("xpath", "//input[@aria-label='Phone number']", phone);
 			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
 			Common.textBoxInput("xpath", "//input[@id='otp_field']", otp);
 			Sync.waitPageLoad();
-			Thread.sleep(8000);
+			Thread.sleep(7000);
 //			
 //			Common.clickElement("xpath", "//span[text()='Pay now']");
 //			Thread.sleep(4000);
