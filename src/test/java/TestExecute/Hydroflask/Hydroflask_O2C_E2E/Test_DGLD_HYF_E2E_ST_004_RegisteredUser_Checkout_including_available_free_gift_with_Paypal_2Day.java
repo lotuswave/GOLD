@@ -30,6 +30,7 @@ public class Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_availabl
 			Hydro.search_product("SKU-BC128001 -2QTY");     
 			Hydro.addtocart("SKU-BC128001 -2QTY");
 			Hydro.minicart_Checkout();
+			Hydro.Add_Free_Gift();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("2 Day method");
