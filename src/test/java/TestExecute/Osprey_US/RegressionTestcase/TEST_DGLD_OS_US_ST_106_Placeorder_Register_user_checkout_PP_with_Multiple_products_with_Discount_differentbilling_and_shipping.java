@@ -23,7 +23,7 @@ public class TEST_DGLD_OS_US_ST_106_Placeorder_Register_user_checkout_PP_with_Mu
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.Accessories_Header("Accessories");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");

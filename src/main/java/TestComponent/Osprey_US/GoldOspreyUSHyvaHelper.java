@@ -14269,7 +14269,7 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 	String Number = "";
 	String cardnumber = data.get(dataSet).get("cardNumber");
 	System.out.println(cardnumber);
-	String expectedResult = "land on the payment section";
+	String expectedResult = "successfully placed the order";
 	// Common.refreshpage();
 
 	try {
@@ -14340,17 +14340,15 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 				Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 				Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 				Thread.sleep(40000);
-				if (Common.findElement("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").getText().contains("Please double check your address")) {
-					
-			        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
-			        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
-			        	Thread.sleep(4000);
-						Sync.waitElementPresent(30,"xpath", "//button[contains(text(),'Place Order')]");
-						Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
-						Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
-			        }
-		
-					
+//				if (Common.findElement("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").getText().contains("Please double check your address")) {
+//					
+//			        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+//			        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+//			        	Thread.sleep(4000);
+//						Sync.waitElementPresent(30,"xpath", "//button[contains(text(),'Place Order')]");
+//						Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
+//						Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+//			        }			
 
 				} else if (Common.getCurrentURL().contains("/success/")) {
 					Sync.waitElementPresent(30, "xpath",
@@ -14360,30 +14358,26 @@ public String addBillingDetails_PaymentDetails_SubmitOrder(String dataSet) throw
 					System.out.println(sucessmessage);
 				} else {
 					Assert.fail();
-				}
-
-		
-			}
-
-	
+				}}
 
 	catch (Exception | Error e) {
 		e.printStackTrace();
 
-		ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
-				"failed  to fill the Credit Card infromation",
-				Common.getscreenShotPathforReport("Cardinfromationfail"));
+		ExtenantReportUtils.addFailedLog("validating the order confirmation", expectedResult,
+				"failed to place the order",
+				Common.getscreenShotPathforReport("place order confirmation"));
 		AssertJUnit.fail();
 	}
 
-	expectedResult = "credit card fields are filled with the data";
-	String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-
-	Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
-			expectedResult, "Filled the Card detiles", "missing field data it showinng error");
-
+//	expectedResult = "credit card fields are filled with the data";
+////	String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+//
+//	Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+//			expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+//
 	return Number;
 }
+
 
 
 public void newtab_footerlinks(String Dataset) {

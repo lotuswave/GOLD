@@ -23,7 +23,7 @@ public class TEST_DGLD_OS_US_101_GuestUser_checkout_OrderTotal_Lessthan50_AfterP
         Osprey_ReEu.Verify_Price("After_Pay");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
+        Osprey_ReEu.selectshippingmethod("Below fifty shipping method");
         Osprey_ReEu.Verify_OrderTotal();
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.After_Pay_payment("Afterpay");
