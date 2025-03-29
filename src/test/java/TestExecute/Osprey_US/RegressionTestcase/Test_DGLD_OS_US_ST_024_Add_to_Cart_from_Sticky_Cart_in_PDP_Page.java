@@ -21,7 +21,7 @@ public class Test_DGLD_OS_US_ST_024_Add_to_Cart_from_Sticky_Cart_in_PDP_Page {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.search_product("Product");     
         Osprey_ReEu.Sticky_Add_to_Cart("Product");
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");  
+        Osprey_ReEu.Accessories_Header("Accessories"); 
         Osprey_ReEu.Sticky_Add_to_Cart("Simple product");        
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
