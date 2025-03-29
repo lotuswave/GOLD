@@ -13,7 +13,7 @@ import TestLib.Login;
 
 public class TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redemption_CC {
 
-	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Osprey_E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
@@ -31,7 +31,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redempt
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Switzerland_Germany-GuestAddress");
 //			Osprey_ReEu.selectshippingmethod("GroundShipping method");
-			Osprey_ReEu.Enter_Gift_card("Partial_Giftcard");
+			Osprey_ReEu.Enter_Gift_card("sizz_ger_Partial_Giftcard");
 			String Used_GiftCode="Yes";
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			  HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
