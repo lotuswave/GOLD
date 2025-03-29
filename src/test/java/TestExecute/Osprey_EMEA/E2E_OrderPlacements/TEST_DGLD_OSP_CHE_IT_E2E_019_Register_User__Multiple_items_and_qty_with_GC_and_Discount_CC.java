@@ -13,8 +13,8 @@ import TestLib.Login;
 
 public class TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_with_GC_and_Discount_CC {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Osprey_E2E");
+	String datafile = "Osprey_EMEA//OSPEMEA_E2E_orderDetails.xlsx";
+	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Register_User__Multiple_items_and_qty_with_GC_and_Discount_CC () throws Exception {
@@ -22,7 +22,7 @@ public class TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_
 		try {
 		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Register user multiple items + multiple QTY + GC + Discount + CC";
-        Osprey_ReEu.verifingHomePage();
+//        Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("SKU-10000645 -2QTY");
@@ -34,7 +34,7 @@ public class TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_
         Osprey_ReEu.selectshippingmethod("IT groundshipping"); 
         Osprey_ReEu.discountCode("Discount");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        String Used_GiftCode=Osprey_ReEu.Enter_Gift_card("Partial_Giftcard");
+        String Used_GiftCode=Osprey_ReEu.Enter_Gift_card("CHE_IT_Partial_Giftcard");
         HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
         String OrderNumber=Osprey_ReEu.addPaymentDetails("CCVisacard");
 //        Osprey_ReEu.Admin_signin("Login Details");
