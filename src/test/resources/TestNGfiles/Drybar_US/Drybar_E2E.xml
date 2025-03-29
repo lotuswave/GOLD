@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US E2E execution">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+
+    <test name="Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_standard_Shiping_with_Aerosal_Product_Gift_code_Partial_Redeem_CCMaster_PO_Box_address" testid="DQA3707" priority="P1" description="This script will cover Reg with Aerosal Product Gift code Partial Redeem CCMaster PO Box address">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_002_Registeruser_checkout_with_MultipleItems_standard_Shiping_with_Aerosal_Product_Gift_code_Partial_Redeem_CCMaster_PO_Box_address"/>
+        </classes>
+    </test> 
+    
+    <test name="Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_AlaskaAddress_Differen_Billing_Shipping_Address_ExpressShipping_Discount_CC" testid="DQA-3700" priority="P1" description="This script will cover Guest simple Configurable AlaskaAddress Differen Billing Shipping Address ExpressShipping Discount CC">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_003_Guestuser_checkout_with_simple_Configurable_AlaskaAddress_Differen_Billing_Shipping_Address_ExpressShipping_Discount_CC"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_E2E_004_Reg  Non_aerosal bundleItem Aerosalproduct config StandardShipping differentbilling and ShippingAddress Discount Giftcode PartialRedeem CC Discover">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_004_Registeruser_checkout_with_Non_aerosal_bundleItem_Aerosalproduct_config_StandardShipping_differentbilling_and_ShippingAddress_Discount_Giftcode_PartialRedeem_CC_Discover"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem_Partial_Paypal" testid="DQA-3703" priority="P1" description="This script will cover Guestuser checkout 3items Expeditedshipping GiftCode redeeem Partial Paypal">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_GiftCode_redeeem_Partial_Paypal"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_Configurableitem_Standardshipping_Discount_GiftCode_RedeemFull" testid="DQA-3712" priority="P1" description="This script will cover Guestuser checkout with Simple aerosalBundle Configurableitem Standardshipping Discount GiftCode RedeemFull">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_Configurableitem_Standardshipping_Discount_GiftCode_RedeemFull"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_E2E_008_Registeruser_checkout_with_multiple_Expeditedshipping_Afterpay" testid="DQA-3621" priority="P1" description="This script will cover Registeruser_checkout with multiple Expeditedshipping Afterpay">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_008_Registeruser_checkout_with_multiple_Expeditedshipping_Afterpay"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_E2E_009_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna" testid="DQA-3611" priority="P1" description="This script will cover RegisterUser checkout with Bundleitem same childproduct Standardshipping loyalityfive Klarna">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_009_RegisterUser_checkout_with_Bundleitem_same_childproduct_Standardshipping_loyalityfive_Klarna"/>
+        </classes>
+    </test>
+    
+    <test name="Test_DGLD_DB_E2E_010_Admin_Register_User_simple_Bundle_Configurable_Expedited_Discount_with_CC" testid="DQA-3687" priority="P1" description="This script will cover registered Admin_Register User simple Bundle Configurable Expedited Discount with CC">
+        <classes>
+            <class name="TestExecute.Drybar_US.Drybar_O2C_E2E.Test_DGLD_DB_E2E_010_Admin_Register_User_simple_Bundle_Configurable_Expedited_Discount_with_CC"/>
+        </classes>
+    </test>
+    
+
+
+</suite>
