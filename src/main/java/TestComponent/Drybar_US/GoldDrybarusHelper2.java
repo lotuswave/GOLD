@@ -394,7 +394,7 @@ public class GoldDrybarusHelper2 {
 						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 						Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
 
-				close_successmessage();
+			//	close_successmessage();
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -1325,11 +1325,11 @@ public class GoldDrybarusHelper2 {
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
 
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(5000);
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+				Thread.sleep(2000);
+				Common.clickElement("xpath", "//input[@id='Field-numberInput']");
+				Common.textBoxInput("id", "Field-numberInput",cardnumber);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
@@ -4874,7 +4874,7 @@ public void FUll_Payment(String dataSet) {
 			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 			Thread.sleep(5000);
 
-			Common.javascriptclickElement("xpath", "//input[@id='Field-numberInput']");
+			Common.clickElement("xpath", "//input[@id='Field-numberInput']");
 			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -4913,30 +4913,29 @@ public void FUll_Payment(String dataSet) {
 		String priceText = Common.getText("xpath", "(//div[@class='item grand_total']//span)[2]").trim();
 		double price = Double.parseDouble(priceText.replace("$", "").trim());
 		System.out.println(price);
-		if (price == 0.50) {  
+		if (price == 0.5) {  
 			GiftCardSumbitOrderPayments("PaymentDetails");
 		} else {
 			select_noPayment_method();
 		}
 		
-		int placeordercount = Common.findElements("xpath", "(//button[contains(@class,'btn-place-order')])[2]").size();
-			Thread.sleep(5000);
-			Common.actionsKeyPress(Keys.ARROW_DOWN);
-			Common.switchToDefault();
+		Thread.sleep(5000);
+		Common.actionsKeyPress(Keys.ARROW_DOWN);
+		Common.switchToDefault();
 		if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-             	   Thread.sleep(10000);
-		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
-		//Thread.sleep(4000);
-		//order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
-		order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
-		System.out.println(order);
-   }
-   else
-   {
-	   Assert.fail();
-   }
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+         	    Thread.sleep(40000);
+	//Common.clickElement("xpath", "//button[@class='action primary checkout']");
+	//Thread.sleep(4000);
+	//order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
+         	    order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+         	    System.out.println(order);
+		}
+		else
+		{
+				Assert.fail();
+		}
  
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
  
