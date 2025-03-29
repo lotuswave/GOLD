@@ -15,7 +15,6 @@ public class TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redempt
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_E2E_HYVA Osprey_ReEu = new OspreyEMEA_E2E_HYVA(datafile,"Osprey_E2E");
-
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void GuestUser_Checkout_With_Partial_GiftCode_Redemption_Product_QTY2 () throws Exception {
 
