@@ -45,7 +45,7 @@ public class Test_DGLD_OS_071_Register_User_Checkout_With_CA_Billing_Address {
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 

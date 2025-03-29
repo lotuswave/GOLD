@@ -3951,15 +3951,17 @@ public class OspreyEMEA_HYVA {
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Thread.sleep(3000);
-						if (Common.getCurrentURL().contains("/checkout")) {
-							Sync.waitPageLoad();
-							Thread.sleep(4000);
-							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
-							String sucessmessage = Common.getText("xpath",
-									"//div[contains(@class,'checkout-success')]//h1");
-							System.out.println(sucessmessage);
+						if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0) {
+							
+				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+						Thread.sleep(4000);
+						Sync.waitElementPresent(30,"xpath", "//button[contains(text(),'Place Order')]");
+						Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
+						Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
+						
 
-						} else if (Common.getCurrentURL().contains("/success/")) {
+					}else if (Common.getCurrentURL().contains("/success/")) {
 							String sucessmessage = Common.getText("xpath",
 									" //h1[normalize-space()='Thank you for your purchase!']");
 							System.out.println(sucessmessage);
