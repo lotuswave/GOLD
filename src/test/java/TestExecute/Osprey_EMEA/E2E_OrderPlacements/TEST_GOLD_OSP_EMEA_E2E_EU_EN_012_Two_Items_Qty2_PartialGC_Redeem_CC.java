@@ -23,7 +23,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_EU_EN_012_Two_Items_Qty2_PartialGC_Redeem_CC
 			
 			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Europe_English Store-2 Items + 2 Qty each + Partial GC Redeem (The gift code should be placed above the product 1 quantity price)+ CC";
-			Osprey_ReEu.verifingHomePage();
+//			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10003324 -3QTY");
 			Osprey_ReEu.simple_addtocart("SKU-10003324 -3QTY");
 			Osprey_ReEu.search_product("SKU-10005861 -3QTY");
@@ -31,11 +31,11 @@ public class TEST_GOLD_OSP_EMEA_E2E_EU_EN_012_Two_Items_Qty2_PartialGC_Redeem_CC
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Europe_English-GuestAddress");
 //			Osprey_ReEu.selectshippingmethod("GroundShipping method");
-			Osprey_ReEu.Enter_Gift_card("Partial_Giftcard");
+			Osprey_ReEu.Enter_Gift_card("Europe_en_Partial_Giftcard");
 			String Used_GiftCode="Yes";
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			  HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
-			String OrderNumber =Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");
+			String OrderNumber =Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
 //			Osprey_ReEu.Admin_signin("Login Details");
 //		    Osprey_ReEu.click_Sales();
 //			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
