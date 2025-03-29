@@ -3104,8 +3104,8 @@ public void header_Shopbycollection(String Dataset) { {
 			System.out.println(size);
 			if (size > 0  ) {
 				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//label[contains(@class,'flex w-full')]//span[contains(text(),'"+ method +"')]");
-				Common.clickElement("xpath", "//label[contains(@class,'flex w-full')]//span[contains(text(),'"+ method +"')]");
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ method +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ method +"')]");
 			}
 			else
 			{
@@ -3799,7 +3799,7 @@ public void Validate_retailerlocations() {
 				My_Favorites();
 				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+			//	Thread.sleep(4000);
 				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
 				System.out.println(message);
 				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
@@ -3812,10 +3812,10 @@ public void Validate_retailerlocations() {
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Common.clickElement("xpath", "//button[@title='Share Wish List']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
-				String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
+			//	Thread.sleep(3000);
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
@@ -3827,10 +3827,11 @@ public void Validate_retailerlocations() {
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Common.clickElement("xpath", "//button[@title='Share Favorites']");
-				Thread.sleep(4000);
-				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+			//	Thread.sleep(4000);
+				Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your Favorites have been shared"),
+				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
@@ -3848,7 +3849,6 @@ public void Validate_retailerlocations() {
 
 
 	}
-
 	public void addDeliveryAddress_Guestuser(String dataSet) throws Exception {
 		String address = data.get(dataSet).get("Street");
 		String symbol=data.get(dataSet).get("Symbol");
@@ -5892,10 +5892,10 @@ return Number;
 			Common.clickElement("xpath", "//label[@for='is_subscribed']");
 			Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
 
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Create an Account']");
-			Common.clickElement("xpath", "//span[text()='Create an Account']");
+			Sync.waitElementPresent(30, "xpath", "(//button[@type='submit'])[2]");
+			Common.clickElement("xpath", "(//button[@type='submit'])[2]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Thank you for registering')]");
 			String message = Common.findElement("xpath", "//span[contains(text(),'Thank you for registering')]")
 					.getText();
