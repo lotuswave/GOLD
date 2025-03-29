@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class Test_DGLD_OS_US_ST_074_Guest_user_Checkout_With_Discount_Amex_card {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
