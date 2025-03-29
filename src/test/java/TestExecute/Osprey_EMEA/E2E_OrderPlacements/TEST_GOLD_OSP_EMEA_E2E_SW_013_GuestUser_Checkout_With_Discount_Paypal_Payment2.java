@@ -46,8 +46,6 @@ public class TEST_GOLD_OSP_EMEA_E2E_SW_013_GuestUser_Checkout_With_Discount_Payp
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
