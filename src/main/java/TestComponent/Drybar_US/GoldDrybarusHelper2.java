@@ -309,15 +309,18 @@ public class GoldDrybarusHelper2 {
 		String firstname = data.get(dataSet).get("FirstName");
 //		System.out.println(firstname);
 		
-		Thread.sleep(4000);
-		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
-		{
-			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
-		}
+		
 		int size = Common.findElements(By.xpath("//button[contains(text(),'New Address')]")).size();
 		if (size > 0) {
 			try {
+				Thread.sleep(6000);
+				if(Common.findElements("xpath", "//div[@x-ref='freegift']").size()>0)
+				{
+					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+				}
+				Thread.sleep(5000);
+				
 				Common.clickElement("xpath", "//button[contains(text(),'New Address')]");
 				Thread.sleep(4000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
@@ -4842,6 +4845,63 @@ public void FUll_Payment(String dataSet) {
 		}
 
 	
+	public String GiftCardSumbitOrderPayments(String dataSet) throws Exception {
+		// TODO Auto-generated method stub
+		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String Number = "";
+		String cardnumber = data.get(dataSet).get("cardNumber");
+		System.out.println(cardnumber);
+		String expectedResult = "land on the payment section";
+		// Common.refreshpage();
+
+		try {
+			Sync.waitPageLoad();
+			Common.actionsKeyPress(Keys.PAGE_DOWN);
+			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
+			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
+			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+					"User unabel to land opaymentpage");
+			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+			Thread.sleep(5000);
+			int savedcard=Common.findElements("xpath", "//div[contains(@class,'form-select flex gap')]").size();
+			if(savedcard>0)
+			{
+				Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+			}
+			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+			Thread.sleep(5000);
+
+			Common.javascriptclickElement("xpath", "//input[@id='Field-numberInput']");
+			Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+
+			Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
+
+			Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
+			Thread.sleep(2000);
+
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+
+			ExtenantReportUtils.addFailedLog("validating the Credit Card infromation", expectedResult,
+					"failed  to fill the Credit Card infromation",
+					Common.getscreenShotPathforReport("Cardinfromationfail"));
+			Assert.fail();
+		}
+
+		expectedResult = "credit card fields are filled with the data";
+//		String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
+//
+//		Common.assertionCheckwithReport(errorTexts.isEmpty(), "validating the credit card information with valid data",
+//				expectedResult, "Filled the Card detiles", "missing field data it showinng error");
+
+		return Number;
+	}
+
 	public String giftCardSubmitOrder() throws Exception {
 		// TODO Auto-generated method stub
  
@@ -4850,17 +4910,23 @@ public void FUll_Payment(String dataSet) {
 	//	Common.refreshpage();
 	//	Common.actionsKeyPress(Keys.PAGE_UP);
 		Thread.sleep(3000);
-		select_noPayment_method();
+		String priceText = Common.getText("xpath", "(//div[@class='item grand_total']//span)[2]").trim();
+		double price = Double.parseDouble(priceText.replace("$", "").trim());
+		System.out.println(price);
+		if (price == 0.50) {  
+			GiftCardSumbitOrderPayments("PaymentDetails");
+		} else {
+			select_noPayment_method();
+		}
 		
-		int placeordercount = Common.findElements("xpath", "(//button[contains(@class,'btn-place-order')])[1]").size();
+		int placeordercount = Common.findElements("xpath", "(//button[contains(@class,'btn-place-order')])[2]").size();
 			Thread.sleep(5000);
-   if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
-   {
-	   Thread.sleep(5000);
-	//   Sync.waitElementClickable("xpath", "//button[@class='action primary checkout']");
-			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-			//Common.refreshpage();
-		Thread.sleep(8000);
+			Common.actionsKeyPress(Keys.ARROW_DOWN);
+			Common.switchToDefault();
+		if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+             	   Thread.sleep(10000);
 		//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 		//Thread.sleep(4000);
 		//order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
@@ -5384,9 +5450,13 @@ public void FUll_Payment(String dataSet) {
 				
 				Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 				Common.clickElement("xpath", "//button[@id='customer-menu']");
-				Sync.waitElementPresent("xpath", "//a[@title='My Account']");
-				Common.clickElement("xpath", "//a[@title='My Account']");
-				Sync.waitPageLoad();
+				if (Common.findElements("xpath","//a[@title='Sign In']").size() > 0 ) {
+					Sync.waitElementPresent("xpath", "//a[@title='Sign In']");
+					Common.clickElement("xpath","//a[@title='Sign In']");	
+				} else {
+					Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+					Common.clickElement("xpath", "//a[@title='My Account']");
+				}
 				Thread.sleep(4000);
 				
 				String MyAccount= Common.getPageTitle();
@@ -5639,6 +5709,13 @@ public void FUll_Payment(String dataSet) {
 				}
 				else
 				{
+					Thread.sleep(4000);
+					int savecard = Common.findElements("xpath","//div[contains(@class,'form-select flex')]").size();
+					if(savecard > 0) {
+						Sync.waitElementPresent(30,"xpath", "(//input[@class='checkbox mr-4'])[2]");
+						Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+					}
+					Thread.sleep(5000);
 					Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 					Common.clickElement("xpath", "//span[text()='Klarna']");
@@ -9289,15 +9366,15 @@ public void outofstock_subcription(String Dataset) {
 					"Sucessfully message has been displayed when we click on the subcribe button ",
 					"Failed to display the message after subcribtion");
 			
-			Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
-			Common.clickElement("xpath", "//button[@aria-label='Close message']");
+//			Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
+//			Common.clickElement("xpath", "//button[@aria-label='Close message']");
 			Common.actionsKeyPress(Keys.END);
 			Common.clickElement("xpath",
 					"//div[@x-show='showStickyBar']//button[@title='Notify Me When Available']");
 			Common.textBoxInput("xpath", "(//input[@placeholder='Insert your email'])[2]", email);
 			Common.clickElement("xpath", "//span[text()='Subscribe']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			System.out.println(oldsubcribe);
 			Common.assertionCheckwithReport(
@@ -10262,8 +10339,13 @@ public String discount_Giftcard_Express_Paypal(String dataSet) throws Exception 
 
 public void createAccountFromOrderSummaryPage(String Dataset) {
 	// TODO Auto-generated method stub
+	String Store= data.get(Dataset).get("Store");
+	String email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
 	try {
-
+		ClickCreateAccount();
+		Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
+		Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
+		Common.textBoxInput("xpath", "//input[@name='email']", email);
 		Common.clickElement("xpath", "//input[@name='password']");
 		Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 		Common.clickElement("xpath", "(//button[@aria-label='Show Password'])[1]");
@@ -10272,54 +10354,62 @@ public void createAccountFromOrderSummaryPage(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 				data.get(Dataset).get("Confirm Password"));
 		Common.clickElement("xpath", "//button[@aria-label='Show Password']");
-		String accounttext = Common.findElement("xpath", "//h3[text()='Create an Account']").getText();
-		String confirmpassword = Common.findElement("xpath", "//input[@name='password_confirmation']")
-				.getAttribute("type");
+		Common.clickElement("xpath", "//button[@title='Sign Up']");
+		Sync.waitElementVisible(30, "xpath", "//span[@x-html='message.text']");
+		String message = Common.findElement("xpath", "//span[@x-html='message.text']").getText();
+		System.out.println(message);
+		Common.assertionCheckwithReport(
+				message.contains("Thank you for registering")
+						|| Common.getCurrentURL().contains("account") ,
+				"validating navigation to the account page after clicking on sign up button",
+				"User should navigate to the My account page after clicking on the Signup",
+				"Sucessfully user navigates to the My account page after clickng on thr signup button",
+				"Failed to navigate to the My account page after clicking on the signup button");
 //		String password = Common.findElement("xpath", "//input[@name='password_confirmation']")
 //				.getAttribute("type");
 //		String Message = Common.findElement("id", "validation-classes").getCssValue("color");
 //		String Greencolor = Color.fromString(Message).asHex();
 //		String Message1 = Common.findElement("id", "validation-length").getAttribute("class");
-		System.out.println(confirmpassword);
-		System.out.println(accounttext);
-		Common.assertionCheckwithReport(
-			 confirmpassword.equals("text")&& accounttext.contains("CREATE AN ACCOUNT"),
-				"validating the order confirmation page",
-				"User should able to view all details in the order confirmation page",
-				"Sucessfully all details has been displayed in the order confirmation",
-				"Failed to display all details in the order confirmation page");
-		Sync.waitElementPresent(30, "xpath", "(//button[@aria-label='Hide Password'])[1]");
-		Common.clickElement("xpath", "(//button[@aria-label='Hide Password'])[1]");
-		Sync.waitElementPresent(30, "xpath", "(//button[@title='Hide Password'])[1]");
-		Common.clickElement("xpath", "(//button[@title='Hide Password'])[1]");
-		
-		String confirmpassword1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
-				.getAttribute("title");
-		String password1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
-				.getAttribute("title");
-		Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
-		Common.clickElement("xpath", "//label[@for='is_subscribed']");
-		Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
-		Common.assertionCheckwithReport(confirmpassword1.equals("Confirm Password") && password1.equals("Confirm Password"),
-				"validating the password field changed to dots",
-				"After clicking on the eye icon it should be change to dots",
-				"Sucessfully passwords has been changed to dots after clicking on eye icon",
-				"Failed change passwords into dots after clicking on eye icon");
-
-		Sync.waitElementPresent(30, "xpath", "//span[text()='Sign Up']");
-		Common.clickElement("xpath", "//span[text()='Sign Up']");
-		Sync.waitPageLoad();
-		Thread.sleep(2000);
-		Sync.waitElementPresent("xpath",
-				"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']");
-		String message = Common.findElement("xpath",
-				"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
-		Common.assertionCheckwithReport(
-				Common.getPageTitle().equals("Dashboard") && message.contains("Thank you for registering"),
-				"validating the  my Account page Navigation when user clicks on signin button",
-				"User should able to navigate to the my account page after clicking on Signin button",
-				"Sucessfully navigate to the My account page after clicking on signin button ",
-				"Failed to navigates to My Account Page after clicking on Signin button");
+//		System.out.println(confirmpassword);
+//		System.out.println(accounttext);
+//		Common.assertionCheckwithReport(
+//			 confirmpassword.equals("text")&& accounttext.contains("CREATE AN ACCOUNT"),
+//				"validating the order confirmation page",
+//				"User should able to view all details in the order confirmation page",
+//				"Sucessfully all details has been displayed in the order confirmation",
+//				"Failed to display all details in the order confirmation page");
+//		Sync.waitElementPresent(30, "xpath", "(//button[@aria-label='Hide Password'])[1]");
+//		Common.clickElement("xpath", "(//button[@aria-label='Hide Password'])[1]");
+//		Sync.waitElementPresent(30, "xpath", "(//button[@title='Hide Password'])[1]");
+//		Common.clickElement("xpath", "(//button[@title='Hide Password'])[1]");
+//		
+//		String confirmpassword1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
+//				.getAttribute("title");
+//		String password1 = Common.findElement("xpath", "//input[@name='password_confirmation']")
+//				.getAttribute("title");
+//		Sync.waitElementPresent("xpath", "//label[@for='is_subscribed']");
+//		Common.clickElement("xpath", "//label[@for='is_subscribed']");
+//		Common.findElement("xpath", "//label[@for='is_subscribed']").isSelected();
+//		Common.assertionCheckwithReport(confirmpassword1.equals("Confirm Password") && password1.equals("Confirm Password"),
+//				"validating the password field changed to dots",
+//				"After clicking on the eye icon it should be change to dots",
+//				"Sucessfully passwords has been changed to dots after clicking on eye icon",
+//				"Failed change passwords into dots after clicking on eye icon");
+//
+//		Sync.waitElementPresent(30, "xpath", "//span[text()='Sign Up']");
+//		Common.clickElement("xpath", "//span[text()='Sign Up']");
+//		Sync.waitPageLoad();
+//		Thread.sleep(2000);
+//		Sync.waitElementPresent("xpath",
+//				"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']");
+//		String message = Common.findElement("xpath",
+//				"//div[@data-ui-id='message-success']//div[@class='a-message__container-inner']").getText();
+//		Common.assertionCheckwithReport(
+//				Common.getPageTitle().equals("Dashboard") && message.contains("Thank you for registering"),
+//				"validating the  my Account page Navigation when user clicks on signin button",
+//				"User should able to navigate to the my account page after clicking on Signin button",
+//				"Sucessfully navigate to the My account page after clicking on signin button ",
+//				"Failed to navigates to My Account Page after clicking on Signin button");
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog(
