@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-Drybar US API Suite">
+
+<test name="Test_DGLD_API_DB_US_001_GuestUser_checkout_OneLineItem_QtyTwo_With_KlarnaPayment" testid="DQA-3779" priority="P1" description="This test case is to validate the Checkout with multiple products with the full payment by using a gift card code.">
+<classes>
+<class name="TestExecute.API.Drybar_US.Test_DGLD_API_DB_US_001_GuestUser_checkout_OneLineItem_QtyTwo_With_KlarnaPayment"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_API_DB_US_Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_With_Paypal" testid="DQA-3778" priority="P1" description="This test case is to validate the Checkout with multiple products with the full payment by using a gift card code.">
+<classes>
+<class name="TestExecute.API.Drybar_US.Test_DGLD_API_DB_US_002_RegisterUser_Checkout_MultipleItems_QtyTwo_With_Paypal"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_API_DB_US_Test_DGLD_API_DB_US_003_GuestUser_GiftCodeFull_Redemption" testid="DQA-3788" priority="P1" description="This test case is to validate the Checkout with multiple products with the full payment by using a gift card code.">
+<classes>
+<class name="TestExecute.API.Drybar_US.Test_DGLD_API_DB_US_003_GuestUser_GiftCodeFull_Redemption"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_API_DB_US_Test_DGLD_API_DB_US_004_RegisterUser_Checkout_MultipleItems_GiftCode_PartialRedemption_Discount_QtyTwo_With_CC" testid="DQA-3787" priority="P1" description="This test case is to validate the Checkout with multiple products with the full payment by using a gift card code.">
+<classes>
+<class name="TestExecute.API.Drybar_US.Test_DGLD_API_DB_US_004_RegisterUser_Checkout_MultipleItems_GiftCode_PartialRedemption_Discount_QtyTwo_With_CC"/>
+</classes>
+</test>
+
+</suite>
