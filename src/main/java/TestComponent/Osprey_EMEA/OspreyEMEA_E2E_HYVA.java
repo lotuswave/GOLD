@@ -3704,8 +3704,8 @@ public class OspreyEMEA_E2E_HYVA {
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
-						  Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary']");
-							 Common.clickElement("xpath", "//button[@class='btn btn-primary']");
+						  Sync.waitElementClickable("xpath", "//button[@class='btn btn-primary os:uppercase']");
+							 Common.clickElement("xpath", "//button[@class='btn btn-primary os:uppercase']");
 							 String successmsg=Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 							 System.out.println(successmsg);	
 							 Common.assertionCheckwithReport(successmsg.contains("added"),
