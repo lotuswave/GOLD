@@ -30,7 +30,7 @@ public class TEST_DGLD_OSP_CHE_FR_E2E_018_Guest_User_Multiple_Item_Full_Gift_cod
 			Osprey_ReEu.addtocart("SKU-10000645 -2QTY");
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Sweden-fr Address");
-			String Used_GiftCode=Osprey_ReEu.Enter_Gift_card("Full Gift card");
+			String Used_GiftCode=Osprey_ReEu.Enter_Gift_card("CHE_FR_Full Gift Card");
 			Osprey_ReEu.selectshippingmethod("CHE groundshipping");
 			HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
 			String OrderNumber=Osprey_ReEu.giftCardSubmitOrder();
