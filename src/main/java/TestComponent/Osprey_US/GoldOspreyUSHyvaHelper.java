@@ -10273,63 +10273,100 @@ catch (Exception | Error e) {
 	}
 
 
-	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
-		// TODO Auto-generated method stub
-		String links = data.get(Dataset).get("Links");
-		int j = 0;
+//	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
+//	// TODO Auto-generated method stub
+//	String links = data.get(Dataset).get("Links");
+//	int j = 0;
+//
+//	String[] strArray = links.split("\\r?\\n");
+//	for (int i = 0; i < strArray.length; i++) {
+//		System.out.println(strArray[i]);
+//
+//		if (Common.getCurrentURL().contains("preprod")) {
+//
+//			Common.oppenURL((strArray[i]));
+//			int responcecode = getpageresponce(Common.getCurrentURL());
+//			System.out.println(responcecode);
+//
+//			if (responcecode == 200) {
+//				ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+//						"successfully page configured with products",
+//						Common.getscreenShotPathforReport("link" + i));
+//			} else {
+//
+//				j++;
+//
+//				ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+//						"page configured with products ", "unable to find page it showing 404 error",
+//						Common.getscreenShotPathforReport("link" + i));
+//
+//			}
+//
+//		} else if (Common.getCurrentURL().contains("https://www.osprey.com/gb/")) {
+//
+//			Common.oppenURL(strArray[i].replace("mcloud-na-stage", "osprey"));
+//
+//			int responcecode = getpageresponce(Common.getCurrentURL());
+//			System.out.println(responcecode);
+//
+//			if (responcecode == 200) {
+//				ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+//						"successfully page configured with products",
+//						Common.getscreenShotPathforReport("link" + i));
+//			} else {
+//
+//				j++;
+//
+//				ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+//						"page configured with products ", "unable to find page it showing 40 error",
+//						Common.getscreenShotPathforReport("link" + i));
+//
+//			}
+//		}
+//	}
+//
+//	if (j > 1) {
+//		AssertJUnit.fail();
+//	}
+//
+//}
 
-		String[] strArray = links.split("\\r?\\n");
-		for (int i = 0; i < strArray.length; i++) {
-			System.out.println(strArray[i]);
-
-			if (Common.getCurrentURL().contains("preprod")) {
-
-				Common.oppenURL((strArray[i]));
-				int responcecode = getpageresponce(Common.getCurrentURL());
-				System.out.println(responcecode);
-
-				if (responcecode == 200) {
-					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-							"successfully page configured with products",
-							Common.getscreenShotPathforReport("link" + i));
-				} else {
-
-					j++;
-
-					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 404 error",
-							Common.getscreenShotPathforReport("link" + i));
-
-				}
-
-			} else if (Common.getCurrentURL().contains("https://www.osprey.com/gb/")) {
-
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "osprey"));
-
-				int responcecode = getpageresponce(Common.getCurrentURL());
-				System.out.println(responcecode);
-
-				if (responcecode == 200) {
-					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-							"successfully page configured with products",
-							Common.getscreenShotPathforReport("link" + i));
-				} else {
-
-					j++;
-
-					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 40 error",
-							Common.getscreenShotPathforReport("link" + i));
-
-				}
-			}
-		}
-
-		if (j > 1) {
-			AssertJUnit.fail();
-		}
-
-	}
+public void webpagelinks_validation(String Dataset) throws Exception, IOException {
+    String links = data.get(Dataset).get("Links");
+    int failedCount = 0;
+    String[] strArray = links.split("\\r?\\n");
+    for (int i = 0; i < strArray.length; i++) {
+        String currentLink = strArray[i].trim();
+        System.out.println("Checking URL: " + currentLink);
+        try {
+            Common.oppenURL(currentLink);
+            String currentURL = Common.getCurrentURL();
+            System.out.println("Current URL after opening: " + currentURL);
+            int responseCode = getpageresponce(currentURL);
+            System.out.println("Response Code: " + responseCode);
+            if (responseCode == 200) {
+                ExtenantReportUtils.addPassLog("Validating Page URL", "Page should be accessible",
+                        "Successfully accessed: " + currentURL, Common.getscreenShotPathforReport("link" + i));
+            } else if (responseCode == 404) {
+                ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
+                        "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
+            } else {
+                failedCount++;
+                ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
+                        "Unexpected response code (" + responseCode + ") for: " + currentURL,
+                        Common.getscreenShotPathforReport("error" + i));
+            }
+        } catch (Exception e) {
+            failedCount++;
+            System.out.println("Exception while checking: " + currentLink + " - " + e.getMessage());
+            ExtenantReportUtils.addFailedLog("Exception occurred", "Error while validating page",
+                    "Exception: " + e.getMessage(), Common.getscreenShotPathforReport("error" + i));
+        }
+    }
+    if (failedCount > 0) {
+        Assert.fail(failedCount + " link(s) failed validation.");
+    }
+}
 
 	public void Gift_cards(String Dataset) {
 		// TODO Auto-generated method stub
@@ -16371,9 +16408,9 @@ public void warrenty_return_Authorization() {
 	try {
 
 		Common.scrollIntoView("xpath",
-				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
+				"//a[@title='Need a Part Replacement?']");
 		Common.clickElement("xpath",
-				"//div[contains(@class,'footer-grid-osprey')]//a[text()='Need a Part Replacement?']");
+				"//a[@title='Need a Part Replacement?']");
 		String Url = Common.getCurrentURL();
 		System.out.println(Url);
 		Common.scrollIntoView("xpath", "//div[@class='pagebuilder-button-primary']");
@@ -16479,6 +16516,7 @@ public void warrent_Return_Auth_Form(String Dataset) {
 		Assert.fail();
 	}
 }
+
 
 public void header_ChildCarrier(String Dataset) {
 
