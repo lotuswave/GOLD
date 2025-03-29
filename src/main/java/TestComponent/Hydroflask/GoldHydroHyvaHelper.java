@@ -668,9 +668,11 @@ public class GoldHydroHyvaHelper {
 
 	    try {
 	    	Thread.sleep(4000);
-	    	if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+	    	if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
 			{
-				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+	    		System.out.println("Free Gift Pop Displayed");
+	    		 Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
 			}
 	        if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 	            Sync.waitElementVisible("css", "input[type='email']");
@@ -1532,7 +1534,7 @@ public class GoldHydroHyvaHelper {
 	        try {
 	            Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success container px')]//h1");
 	            String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success container px')]//h1");
-
+                  System.out.println("successMessage");
 	            Common.assertionCheckwithReport(successMessage.contains("Thank you for your purchase!"),
 	                    "verifying the Order confirmation", expectedResult,
 	                    "Successfully It redirects to order confirmation page Order Placed",
