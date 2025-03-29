@@ -11344,12 +11344,13 @@ public String After_Pay_payment(String dataSet) throws Exception {
 			}
 			else
 			{
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
-				if(savedcard>0)
-				{
-					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				Thread.sleep(4000);
+				int savecard = Common.findElements("xpath","//div[contains(@class,'form-select flex')]").size();
+				if(savecard > 0) {
+					Sync.waitElementPresent(30,"xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
+				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Common.clickElement("xpath", "//span[text()='Klarna']");

@@ -24,7 +24,7 @@ public class TEST_DGLD_OS_US_110_PROCustomer_Checkout_with_Multiple_Items_using_
         Osprey_ReEu.search_product("Product");     
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.Prouser_Discount();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.Accessories_Header("Accessories");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.Prouser_Discount();
         Osprey_ReEu.minicart_Checkout();
@@ -44,7 +44,7 @@ public class TEST_DGLD_OS_US_110_PROCustomer_Checkout_with_Multiple_Items_using_
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	Common.closeAll();
 
 	}
 

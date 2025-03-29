@@ -21,7 +21,7 @@ public class TEST_DGLD_OS_US_129_PRO_Customer_Checkout_Single_Item_Using_CC_with
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("prouser");
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.Accessories_Header("Accessories");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.Prouser_Discount();
         Osprey_ReEu.minicart_Checkout();

@@ -27,7 +27,7 @@ public class TEST_DGLD_OS_US_112_PRO_Customer_Checkout_with_Gift_card_Multiple_L
         Osprey_ReEu.search_product("Osprey Gift Card");
         Osprey_ReEu.Gift_cards("Osprey Gift Card");
         Osprey_ReEu.Card_Value("price");
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
+        Osprey_ReEu.Accessories_Header("Accessories");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
