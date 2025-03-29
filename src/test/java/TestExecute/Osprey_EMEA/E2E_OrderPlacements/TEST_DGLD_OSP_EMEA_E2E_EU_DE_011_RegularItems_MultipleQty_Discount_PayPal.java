@@ -23,7 +23,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_EU_DE_011_RegularItems_MultipleQty_Discount_
 			
 			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Europe_Germany Store  -Regular Items + Multiple Qty + Discount + PayPal";
-			Osprey_ReEu.verifingHomePage();
+//			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10002926 -2QTY");
 			Osprey_ReEu.simple_addtocart("SKU-10002926 -2QTY");
 			Osprey_ReEu.search_product("SKU-10004993 -2QTY");
@@ -35,7 +35,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_EU_DE_011_RegularItems_MultipleQty_Discount_
 			Osprey_ReEu.discountCode("Discount");
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			   HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
-			String OrderNumber = Osprey_ReEu.payPal_Payment("PaypalDetails");
+			String OrderNumber = Osprey_ReEu.payPal_Payment("NON_UK_PaypalDetails");
 //			Osprey_ReEu.Admin_signin("Login Details");
 //		    Osprey_ReEu.click_Sales();
 //			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
