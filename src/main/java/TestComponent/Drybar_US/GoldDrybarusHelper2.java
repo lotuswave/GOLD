@@ -2470,9 +2470,9 @@ public class GoldDrybarusHelper2 {
 			else {
 				try {
 					Thread.sleep(6000);
-					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
+					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 					
-					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
+					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 
 					Thread.sleep(6000);
 					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
@@ -3124,10 +3124,10 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(4000);
 			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod") )
 			{
-				Common.scrollIntoView("xpath", "//button[@value='Place Order']");
-				Sync.waitElementPresent("xpath", "//button[@value='Place Order']");
+				Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//button[@value='Place Order']");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 			}
 			// Tell_Your_FriendPop_Up();//To close the Pop-up
 			String url1 = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
@@ -5723,8 +5723,8 @@ public void FUll_Payment(String dataSet) {
 					if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 					{
 						Thread.sleep(3000);
-					Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");	
-					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[2]");	
+					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 					Sync.waitPageLoad();
 					Thread.sleep(3000);
 					klarna_Details(dataSet);
@@ -8671,8 +8671,8 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			
 			Common.switchToDefault();
 			Thread.sleep(3000);
-			Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+			Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+			Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 			Thread.sleep(3000);
 			
 //			Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
