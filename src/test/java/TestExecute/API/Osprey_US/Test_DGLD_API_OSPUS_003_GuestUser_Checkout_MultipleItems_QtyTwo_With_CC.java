@@ -11,12 +11,13 @@ import org.json.JSONTokener;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import TestExecute.API.Osprey_US.Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_With_CC.JsonFormatter;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_With_CC {
-    private String apiKey;
+	private String apiKey;
     private String orderNumber;
     public Integer itemId;
     public String sku;
@@ -25,10 +26,12 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
     public String increment_id;
     public String MagentoOrder_ID;
     public String deliveryNumber;
+    public Integer firstItemId;
+    public Integer SecondItemId;
  
     @Test(priority = 1)
     public void generateApiKey() {
-    	RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/integration/admin/token";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/integration/admin/token";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -37,7 +40,6 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
         request.body(requestBody);
 
         Response response = request.post();
-
         Assert.assertEquals(response.getStatusCode(), 200, "API Key generation failed");
 
         apiKey = response.getBody().asString().replaceAll("^\"|\"$", "");
@@ -46,7 +48,7 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 
     @Test(priority = 2, dependsOnMethods = "generateApiKey")
     public void getOrderCopy() {
-    	MagentoOrder_ID="";
+    	MagentoOrder_ID="12819696";
         RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/orders/"+MagentoOrder_ID+"/";
 
         RequestSpecification request = RestAssured.given();
@@ -66,23 +68,33 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
          customerEmail = response.path("customer_email");
         System.out.println("Customer Email: " + customerEmail);
         List<Map<String, Object>> items = response.jsonPath().getList("items");
-
         if (items != null && !items.isEmpty()) {
-            Map<String, Object> firstItem = items.get(0); // Get the first item
-            itemId = (Integer) firstItem.get("item_id");
-            System.out.println("item_id: " + itemId);
-             QTYOrder = (Integer) firstItem.get("qty_ordered");
-            System.out.println("QTY_Ordered: " + QTYOrder);
-            sku = (String) firstItem.get("sku");
-            System.out.println("SKU: " + sku);
+            if (items.size() >= 3) { 
+                 firstItemId = (Integer) items.get(0).get("item_id");
+                if (firstItemId != null) {
+                    System.out.println("First item_id: " + firstItemId);
+                } else {
+                    System.out.println("First item_id is null.");
+                }
+                 SecondItemId = (Integer) items.get(2).get("item_id");
+                if (SecondItemId != null) {
+                    System.out.println("Third item_id: " + SecondItemId);
+                } else {
+                    System.out.println("Third item_id is null.");
+                }
+            } else {
+                System.out.println("Not enough items to get the first and Second item_id.");
+            }
         } else {
             System.out.println("No items found in the response.");
             Assert.fail("No items found in the order copy");
         }
     }
+        
+    
     @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder() {
-        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/order/" + MagentoOrder_ID + "/ship";
+        RestAssured.baseURI = "https://na-preprod.hele.digital/rest/ospreyusen/V1/order/" + MagentoOrder_ID + "/ship";
 
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
@@ -99,8 +111,12 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
                 "    \"notify\": \"false\",\n" +
                 "    \"items\": [\n" +
                 "        {\n" +
-                "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": 1.0\n" +
+                "            \"order_item_id\": " + firstItemId + ",\n" +
+                "            \"qty\": 2.0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"order_item_id\": " + SecondItemId + ",\n" +
+                "            \"qty\": 2.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"tracks\": [\n" +
@@ -137,8 +153,12 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
         String requestBody = "{\n" +
                 "    \"items\": [\n" +
                 "        {\n" +
-                "            \"order_item_id\": " + itemId + ",\n" +
-                "            \"qty\": " + QTYOrder + ".0\n" +
+                "            \"order_item_id\": " + firstItemId + ",\n" +
+                "            \"qty\": 2.0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"order_item_id\": " + SecondItemId + ",\n" +
+                "            \"qty\": 2.0\n" +
                 "        }\n" +
                 "    ],\n" +
                 "    \"notify\": false,\n" +
@@ -160,8 +180,6 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
         System.out.println("Invoice Response: " + response.getBody().asString());
         System.out.println("Request Body: " + requestBody);
     }
-
-    
   /*  @Test(priority = 3, dependsOnMethods = {"generateApiKey", "getOrderCopy"})
     public void shipOrder_And_InvoiceOrder() {
         RestAssured.baseURI = "https://webhooks.workato.com/webhooks/rest/74179468-e8a5-424f-a369-4dbcd03db8f1/new_shipment";
@@ -173,6 +191,7 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
         String trackingNumberBase = "379492"; // Base tracking number
         String trackingNumberSuffix = generateRandomNumber(6); // Generate 6 random digits
         String trackingNumber = trackingNumberBase + trackingNumberSuffix;
+        System.out.println("Generated Tracking Number: " + trackingNumber);
 
         String requestBody = "{\n" +
                 "    \"attribute1\": \"\",\n" +
@@ -181,7 +200,7 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
                 "    \"attribute4\": \"\",\n" +
                 "    \"attribute5\": \"\",\n" +
                 "    \"delivery_number\": \"2373575\",\n" +
-                "    \"magento_customer_number\": \"2373575\",\n" +
+                "    \"magento_customer_number\": \"\",\n" +
                 "    \"magento_order_number\": \""+orderNumber+"  \",\n" +
                 "    \"oracle_customer_number\": \"\",\n" +
                 "    \"oracle_order_number\": \"\",\n" +
@@ -214,16 +233,14 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 
         Assert.assertEquals(response.getStatusCode(), 200, "Ship order failed");
         System.out.println("Ship Order Response: " + response.getBody().asString());
-        System.out.println("Generated Tracking Number: " + trackingNumber);
-    
+      
     }
-*/
-	
-	
+	*/
+    
 	///***Create RMA***///
-    	@Test(priority = 4, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
+    	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice"})
  public void createRma() throws InterruptedException {
-    Thread.sleep(15000);
+		Thread.sleep(15000);
 	System.out.println(apiKey);
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/all/V1/returns/create-rma";
 
@@ -242,8 +259,8 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
     	        "    \"customer_custom_email\": \"" + customerEmail + "\",\n" + // Use customerEmail variable
     	        "    \"items\": [\n" +
     	        "        {\n" +
-    	        "            \"order_item_id\": "+itemId+",\n" +
-    	        "            \"quantity_to_return\": "+QTYOrder+",\n" +
+    	        "            \"order_item_id\": "+firstItemId+",\n" +
+    	        "            \"quantity_to_return\": 1,\n" +
     	        "            \"entered_custom_attributes\": [\n" +
     	        "                {\n" +
     	        "                    \"attribute_code\": \"reason\",\n" +
@@ -261,7 +278,6 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
     
 
      request.body(requestBody);
-
      Response response = request.post();
      String jsonResponse = response.getBody().asString();
 
@@ -289,7 +305,7 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 //     request.header("Content-Type", "application/json"); // Or "text/plain" as in Postman
 //     request.header("Authorization", "Bearer" + apiKey); // Use the provided token
 //
-//     String requestBody = "{\r\n" + // ... (your request body) ...
+//     String requestBody = "{\r\n" + 
 //             "}";
 //
 //     request.body(requestBody);
@@ -302,7 +318,7 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
 	
 	
 	///****Post Credit Memo****///
-	@Test(priority = 5, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
+	@Test(priority = 6, dependsOnMethods = {"generateApiKey", "getOrderCopy", "shipOrder","invoice","createRma"})
  public void postCreditMemo() {
      RestAssured.baseURI = "https://na-preprod.hele.digital/rest/V1/returns/"+increment_id+"/refund";
 
@@ -314,23 +330,14 @@ public class Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_Wit
              "    \"type\": \"approved_return\",\n" +
              "    \"order_item_ids\": [\n" +
              "        {\n" +
-             "            \"qty\": \""+QTYOrder+".0\",\n" +
-             "            \"order_item_id\": \""+itemId+"\"\n" +
+             "            \"qty\": \"1.0\",\n" +
+             "            \"order_item_id\": \""+firstItemId+"\"\n" +
              "        }\n" +
              "    ],\n" +
              "    \"refund_shipping\": false\n" +
              "}";
 
-//     request.body(requestBody); // Use this line in your RestAssured or Selenium API request
-//
-//     
-//     Response response = request.post();
-//    String jsonResponse =response.getBody().asString();
-//     String formattedJson = JsonFormatter.formatJson(jsonResponse);
-//     Assert.assertEquals(response.getStatusCode(), 200, "Post Credit Memo failed"); // Or the expected status code
-//     System.out.println("Post Credit Memo Response: " + response.getBody().asString());
-//     
-//     System.out.println(formattedJson); 
+
      request.body(requestBody);
 
      Response response = request.post();
