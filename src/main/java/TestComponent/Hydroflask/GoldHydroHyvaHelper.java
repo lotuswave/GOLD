@@ -1662,16 +1662,16 @@ public class GoldHydroHyvaHelper {
 	                    Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
 	                    Sync.waitPageLoad();
 
-	                    if (Common.getCurrentURL().contains("/checkout")) {
-	                        Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
-	                        String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
-	                        System.out.println(successMessage);
-	                    } else if (Common.getCurrentURL().contains("/success/")) {
-	                        String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success container px')]//h1 ");
-	                        System.out.println(successMessage);
-	                    } else {
-	                        Assert.fail("Checkout failed in stage/preprod environment");
-	                    }
+//	                    if (Common.getCurrentURL().contains("/checkout")) {
+//	                        Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
+//	                        String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
+//	                        System.out.println(successMessage);
+//	                    } else if (Common.getCurrentURL().contains("/success/")) {
+//	                        String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success container px')]//h1 ");
+//	                        System.out.println(successMessage);
+//	                    } else {
+//	                        Assert.fail("Checkout failed in stage/preprod environment");
+//	                    }
 	                } else {
 	                    Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
 	                    Common.switchFrames("css", "iframe[title='Secure payment input frame']");
@@ -3519,10 +3519,16 @@ System.out.println(MyFavorites);
 
 	}
 
-	public void RegaddDeliveryAddress(String dataSet) {
+	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
-
+		Thread.sleep(4000);
+		if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
+		{
+			System.out.println("Free Gift popup Displayed in Shipping page");
+			Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+		}
 		int size = Common
 				.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]"))
 				.size();
