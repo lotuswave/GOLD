@@ -647,6 +647,11 @@ public class OspreyEMEA_HYVA {
 				Common.clickElement("xpath",
 						"//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+					Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
 				if(Common.getPageTitle().contains("404"))
 				{
 					Assert.fail();
@@ -842,13 +847,14 @@ public class OspreyEMEA_HYVA {
 		int i = 0;
 		try {
 			for (i = 0; i < Links.length; i++) {
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
-				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath","//a[contains(@href,'day-packs')]//span[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath",
-						"//a[contains(@href,'day-packs')]//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
+				Thread.sleep(5000);
+				Sync.waitElementPresent("xpath","//a[@title='"+ Links[i] +"']//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath","//a[@title='"+ Links[i] +"']//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				if(Common.getPageTitle().contains("404"))
@@ -912,9 +918,9 @@ public class OspreyEMEA_HYVA {
 					Common.clickElement("xpath", "//span[contains(text(),'Shop by Activity')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
-							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
+							"//a[@title='" + Links[i] +"']//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
+							"//a[@title='" + Links[i] +"']//span[contains(text(),'" + Links[i] + "')]");
 					Sync.waitPageLoad();
 					Thread.sleep(3000);
 					if(Common.getPageTitle().contains("404"))
@@ -971,14 +977,16 @@ public class OspreyEMEA_HYVA {
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
+					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
 					Common.clickElement("xpath", "//span[contains(text(),'" + Featured + "')]");
-					Common.clickElement("xpath", "//span[contains(text(),'" + activity + "')]");
 					Thread.sleep(3000);
+					Common.clickElement("xpath", "//span[contains(text(),'" + activity + "')]");
+					Thread.sleep(5000);
 					Sync.waitElementPresent("xpath",
-							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
+							"//a[@title='" + Links[i] +"'and contains(@class,'ink group')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
-							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");			
+							"//a[@title='" + Links[i] +"'and contains(@class,'ink group')]//span[contains(text(),'" + Links[i] + "')]");			
 					
 			//		Common.clickElement("xpath","(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
 					Sync.waitPageLoad();
@@ -1107,8 +1115,10 @@ public class OspreyEMEA_HYVA {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
 							Common.clickElement("xpath", "//span[contains(text(),'" + Featured + "')]");
 							Common.clickElement("xpath", "//span[contains(text(),'" + collections + "')]");
-							Thread.sleep(3000);
+							Thread.sleep(4000);
 							Sync.waitElementPresent("xpath",
+									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
+							Common.scrollIntoView("xpath",
 									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Common.clickElement("xpath",
 									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
@@ -15572,13 +15582,15 @@ public void header_Icons(String Dataset) {
 	int i = 0;
 	try {
 	for (i = 0; i < Links.length; i++) {
+		Thread.sleep(3000);
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 		Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-		Common.clickElement("xpath", "//a[@title='Icons']");
 		Thread.sleep(3000);
+		Common.clickElement("xpath", "//a[@title='Icons']");
+		Thread.sleep(5000);
 		Sync.waitElementPresent("xpath",
 				"(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
-		Common.javascriptclickElement("xpath",
+		Common.clickElement("xpath",
 				"(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
