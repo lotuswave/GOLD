@@ -15,7 +15,7 @@ public class Test_DGLD_OS_COMMON_003_Footer_Newsletter_Subcription {
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Newsletters");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_the_Footer_Newsletter_Subcription () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();

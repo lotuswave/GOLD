@@ -445,7 +445,7 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter your email']");
 			Common.textBoxInput("xpath", "//input[@aria-label='Enter your email']", Utils.getEmailid());
 			Thread.sleep(5000);
-			Common.clickElement("xpath", "//label[contains(@class,'needsclick')]");
+			Common.clickElement("xpath", "(//label[@class='needsclick go3431972610 kl-private-reset-css-Xuajs1'])[2]");
 			Common.clickElement("xpath", "//button[text()='Subscribe']");
 			Thread.sleep(5000);
 			String Text = Common.getText("xpath", "//span[text()='Check your inbox']");
