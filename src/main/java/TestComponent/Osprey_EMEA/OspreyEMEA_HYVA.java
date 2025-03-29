@@ -15020,10 +15020,14 @@ public void url_color_validation(String Dataset) {
 	
 	try
 	{
+		if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+		{
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+		}
 		Thread.sleep(4000);
 		List<WebElement> pdpcolors = Common.findElements("xpath",
-				"//div[@aria-label='Color']//div[@x-id]");
-		 Common.clickElement("xpath", "//div[@aria-label='Colour']//div[@x-id]");
+				"//div[@show='showSwatches']//div[@class='m-swatch']");
+		 Common.clickElement("xpath", "//div[@show='showSwatches']//div[@class='m-swatch']");
 		 Common.actionsKeyPress(Keys.TAB);
 		 Common.actionsKeyPress(Keys.ENTER);
 		for (int i = 0; i < pdpcolors.size(); i++) { 
