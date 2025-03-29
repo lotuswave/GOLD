@@ -35,7 +35,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_SW_013_GuestUser_Checkout_With_Discount_Payp
 			Osprey_ReEu.discountCode("Discount");
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			  HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
-			String OrderNumber =Osprey_ReEu.payPal_Payment("PaypalDetails");
+			String OrderNumber =Osprey_ReEu.payPal_Payment("NON_UK_PaypalDetails");
 //			Osprey_ReEu.Admin_signin("Login Details");
 //		    Osprey_ReEu.click_Sales();
 //			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
