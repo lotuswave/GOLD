@@ -667,6 +667,11 @@ public class GoldHydroHyvaHelper {
 	    String address = data.get(dataSet).get("Street");
 
 	    try {
+	    	Thread.sleep(4000);
+	    	if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
 	        if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 	            Sync.waitElementVisible("css", "input[type='email']");
 	            Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
