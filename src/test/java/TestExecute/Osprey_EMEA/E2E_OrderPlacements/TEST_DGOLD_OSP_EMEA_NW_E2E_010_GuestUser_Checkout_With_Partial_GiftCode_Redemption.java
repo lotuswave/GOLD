@@ -29,11 +29,11 @@ public class TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_Gift
 			Osprey_ReEu.minicart_Checkout();
 			Osprey_ReEu.addDeliveryAddress_Guestuser("Norway-GuestAddress");
 //			Osprey_ReEu.selectshippingmethod("GroundShipping method");
-			Osprey_ReEu.Enter_Gift_card("Partial_Giftcard");
+			Osprey_ReEu.Enter_Gift_card("NW_Partial_GiftCard");
 			String Used_GiftCode="Yes";
 //			Osprey_ReEu.clickSubmitbutton_Shippingpage();
 			  HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
-			String OrderNumber =Osprey_ReEu.updatePaymentAndSubmitOrder("CCDiscovercard");
+			String OrderNumber =Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
 //			Osprey_ReEu.Admin_signin("Login Details");
 //		    Osprey_ReEu.click_Sales();
 //			HashMap<String,String> Orderstatus1 = Osprey_ReEu.Admin_Order_Details(OrderNumber);
