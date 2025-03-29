@@ -5895,10 +5895,9 @@ return Number;
 			Sync.waitElementPresent(30, "xpath", "(//button[@type='submit'])[2]");
 			Common.clickElement("xpath", "(//button[@type='submit'])[2]");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'Thank you for registering')]");
-			String message = Common.findElement("xpath", "//span[contains(text(),'Thank you for registering')]")
-					.getText();
+			Thread.sleep(2000);
+			Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Dashboard")
 							&& message.contains("Thank you for registering"),
