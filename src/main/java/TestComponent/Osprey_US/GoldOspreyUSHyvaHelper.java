@@ -2297,9 +2297,13 @@ public void header_Shopbycollection(String Dataset) { {
 			Thread.sleep(6000);
 			
 			if(Common.getCurrentURL().contains("preprod")) {
-				
-				
-				
+				Thread.sleep(3000);
+				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+				{
+					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+				}
+					
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
 //				Sync.waitPageLoad();
@@ -2370,6 +2374,13 @@ public void header_Shopbycollection(String Dataset) { {
 //		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
 //		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
 //	}
+			
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("preprod"))
+			{
+				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close dialog'])[1]");
+				Common.clickElement("xpath", "(//button[@aria-label='Close dialog'])[1]");
+			}
+
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -5916,6 +5927,7 @@ return Number;
 			Assert.fail();
 		}
 	}
+	
 
 	public void My_Orders_Page(String Dataset) {
 		// TODO Auto-generated method stub
@@ -10349,7 +10361,8 @@ public void webpagelinks_validation(String Dataset) throws Exception, IOExceptio
             } else if (responseCode == 404) {
                 ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
                         "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
-            } else {
+            } 
+            else {
                 failedCount++;
                 ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
                         "Unexpected response code (" + responseCode + ") for: " + currentURL,
@@ -11326,12 +11339,12 @@ public void After_Pay_payment(String dataSet) throws Exception {
 					"Successfully It redirects to order confirmation page Order Placed",
 					"User unable to go orderconformation page");
 
-			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
-				order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+			if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p/span").size() > 0) {
+				order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p/span");
 				System.out.println(order);
 			}
-			if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
-				order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//p/a");
+			if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/span").size() > 0) {
+				order = Common.getText("xpath", "//div[@class='checkout-success container px-0 ']//p/span");
 				System.out.println(order);
 			}
 
@@ -14495,71 +14508,83 @@ public void proAce_Error_Payment(String dataSet) {
 }
 
 public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOException {
-		// TODO Auto-generated method stub
+    // TODO Auto-generated method stub
 
-		String urls = data.get(dataSet).get("Links");
-		int j = 0;
+    String urls = data.get(dataSet).get("Links");
+    int j = 0;
 
-		String[] strArray = urls.split("\\r?\\n");
-		for (int i = 0; i < strArray.length; i++) {
-			System.out.println(strArray[i]);
+    String[] strArray = urls.split("\\r?\\n");
+    for (int i = 0; i < strArray.length; i++) {
+        System.out.println(strArray[i]);
 
-			if (Common.getCurrentURL().contains("pre")) {
+        if (Common.getCurrentURL().contains("pre")) {
 
-				Common.oppenURL((strArray[i]));
-				int responcecode = getpageresponce(Common.getCurrentURL());
-				System.out.println(responcecode);
-				Common.refreshpage();
-				System.out.println(responcecode);
-				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-				{
-				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-				}
+            Common.oppenURL((strArray[i]));
+            int responcecode = getpageresponce(Common.getCurrentURL());
+            System.out.println(responcecode);
+            Common.refreshpage();
+            System.out.println(responcecode);
+            
+            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+            }
 
-				if (responcecode == 200) {
-					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-							"successfully page configured with products",
-							Common.getscreenShotPathforReport("link" + i));
-				} else {
+            if (responcecode == 200) {
+                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+                        "successfully page configured with products",
+                        Common.getscreenShotPathforReport("link" + i));
+            }
 
-					j++;
+            Common.oppenURL((strArray[i]));
+            int responcecode1 = getpageresponce(Common.getCurrentURL());
+            System.out.println(responcecode1);
+            Common.refreshpage();
+            System.out.println(responcecode1);
+            
+            if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+                Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+            } 
+            
+            if (responcecode1 == 404) {  
+                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+                        "successfully page configured with products",
+                        Common.getscreenShotPathforReport("link" + i));
+            } 
+            
+        } else {
 
-					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 404 error",
-							Common.getscreenShotPathforReport("link" + i));
+            j++;
 
-				}
+            ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+                    "page configured with products ", "unable to find page it showing 404 error",
+                    Common.getscreenShotPathforReport("link" + i));
+}
 
-			} else if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
+        if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
 
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+            Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
 
-				int responcecode = getpageresponce(Common.getCurrentURL());
-				System.out.println(responcecode);
+            int responcecode = getpageresponce(Common.getCurrentURL());
+            System.out.println(responcecode);
 
-				if (responcecode == 200) {
-					ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
-							"successfully page configured with products",
-							Common.getscreenShotPathforReport("link" + i));
-				} else {
+            if (responcecode == 200) {
+                ExtenantReportUtils.addPassLog("Validating Page URL ", "page configured with products ",
+                        "successfully page configured with products",
+                        Common.getscreenShotPathforReport("link" + i));
+            } else {
 
-					j++;
+                j++;
 
-					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 404 error",
-							Common.getscreenShotPathforReport("link" + i));
+                ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
+                        "page configured with products ", "unable to find page it showing 404 error",
+                        Common.getscreenShotPathforReport("link" + i));
+            } }
+    }
 
-				}
-			}
-		}
-
-		if (j > 1) {
-			AssertJUnit.fail();
-		}
-	}
-
-
-
+    if (j > 1) {
+        AssertJUnit.fail();
+    }
+}
 
 public void verfy_links(String dataSet) throws Exception, IOException {
 	// TODO Auto-generated method stub
