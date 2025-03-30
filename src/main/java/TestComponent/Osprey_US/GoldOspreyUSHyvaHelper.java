@@ -2374,12 +2374,7 @@ public void header_Shopbycollection(String Dataset) { {
 //		Sync.waitElementPresent(30, "xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
 //		Common.clickElement("xpath", "//div[@role='dialog']//button[@aria-label='Close minicart']");
 //	}
-			
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("preprod"))
-			{
-				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close dialog'])[1]");
-				Common.clickElement("xpath", "(//button[@aria-label='Close dialog'])[1]");
-			}
+	
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -16856,10 +16851,18 @@ public void Accessories_Header(String Dataset) {
 		} catch (Exception e) {
 			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
 		}
+		Thread.sleep(2000);
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'" + out + "')]");
 		Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
 
+		Thread.sleep(2000);
+		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
 		Sync.waitPageLoad();
-		Thread.sleep(6000);
+		Thread.sleep(5000);
 		expectedResult = "User should select the " + Dataset + "category";
 		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
 		Common.assertionCheckwithReport(sizebotteles > 0,
@@ -16909,10 +16912,75 @@ public void deleteProduct_shoppingcart() {
 				"Unable to delete the product  in the shopping cart page",
 				Common.getscreenShot("Failed to delete the product  in the shopping cart page"));
 		Assert.fail();
-	}
-	
-}
-	
+	}	
+}	
 
+
+public void Accessories_Header1(String Dataset) {
+	// TODO Auto-generated method stub
+	String expectedResult = "User should click the" + Dataset;
+	String out = data.get(Dataset).get("outdoor");
+	String header=data.get(Dataset).get("headers");
+	try {
+
+		Thread.sleep(3000);
+		Sync.waitElementPresent("xpath",
+				"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+		
+		Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+
+		Thread.sleep(3000);
+
+		try {
+			Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
+		} catch (Exception e) {
+			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
+		}
+		Thread.sleep(2000);
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'" + out + "')]");
+		Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
+
+		Thread.sleep(2000);
+		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
+		Thread.sleep(2000);
+		Sync.waitElementPresent("xpath",
+				"//a[contains(@class,'level-0')]//span[contains(text(),'"+ header +"')]");
+		
+		Common.clickElement("xpath", "//a[contains(@class,'level-0')]//span[contains(text(),'" + header + "')]");
+
+		Thread.sleep(3000);
+
+		try {
+			Common.mouseOver("xpath", "//span[contains(text(),'"+ header +"')]");
+		} catch (Exception e) {
+			Common.clickElement("xpath", "//a[@class='level-top ui-corner-all']//span[text()='"+ header +"']");
+		}
+		Thread.sleep(2000);
+		Sync.waitElementPresent("xpath", "//span[contains(text(),'" + out + "')]");
+		Common.clickElement("xpath", "//span[contains(text(),'" + out + "')]");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		expectedResult = "User should select the " + Dataset + "category";
+		int sizebotteles = Common.findElements("xpath", "//span[contains(text(),'"+ header +"')]").size();
+		Common.assertionCheckwithReport(sizebotteles > 0,
+				"validating the product category as" + Dataset + "from navigation menu ", expectedResult,
+				"Selected the " + Dataset + " category", "User unabel to click" + Dataset + "");
+	}
+
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the product category as" + Dataset + "from navigation menu ",
+				expectedResult, "Unable to Selected the " + Dataset + " category",
+				Common.getscreenShot("Failed to click on the" + Dataset + ""));
+
+		AssertJUnit.fail();
+	}
 }
+}
+
+
 
