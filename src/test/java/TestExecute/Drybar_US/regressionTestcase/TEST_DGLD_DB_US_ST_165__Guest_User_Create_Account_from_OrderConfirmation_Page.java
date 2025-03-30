@@ -27,7 +27,8 @@ public class TEST_DGLD_DB_US_ST_165__Guest_User_Create_Account_from_OrderConfirm
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
-			Drybar.createAccountFromOrderSummaryPage("NewAccountDetails");
+			Drybar.ClickCreateAccount();
+			Drybar.create_account("NewAccountDetails");
 			
 
 		} catch (Exception e) {
