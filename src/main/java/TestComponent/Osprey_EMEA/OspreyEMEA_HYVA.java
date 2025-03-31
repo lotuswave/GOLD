@@ -1117,6 +1117,7 @@ public class OspreyEMEA_HYVA {
 						for (i = 10; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
 							Common.clickElement("xpath", "//span[contains(text(),'" + Featured + "')]");
+							Thread.sleep(4000);
 							Common.clickElement("xpath", "//span[contains(text(),'" + collections + "')]");
 							Thread.sleep(4000);
 							Sync.waitElementPresent("xpath",
@@ -1440,11 +1441,10 @@ public class OspreyEMEA_HYVA {
 				
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + bag + "')]");
                 Common.clickElement("xpath", "//span[contains(text(),'" + bag + "')]");
-
+                Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Access +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ Access +"')]");
-
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath",
 						"(//a[contains(@class,'link group')]//span[contains(text(),'" + Links[i] + "')])[1]");
 				Common.clickElement("xpath",
@@ -7572,8 +7572,8 @@ return Number;
 			
 			 if(Common.getCurrentURL().contains("gb"))
              {
-				 Common.scrollIntoView("xpath", "//select[@id='billing-country_id']");
-				  Common.dropdown("xpath", "//select[@id='billing-country_id']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				 Common.scrollIntoView("xpath", "//input[@id='billing-city']");
+				 Common.textBoxInput("xpath", "//input[@id='billing-city']", data.get(dataSet).get("Region"));
 				 
              }
 			 else
@@ -15601,7 +15601,7 @@ public void header_Icons(String Dataset) {
 		Thread.sleep(3000);
 		Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 		Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		Common.clickElement("xpath", "//a[@title='Icons']");
 		Thread.sleep(5000);
 		Sync.waitElementPresent("xpath",
@@ -15663,8 +15663,9 @@ public void header_Shopby_Litres(String Dataset) {
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+			Thread.sleep(4000);
 			Common.clickElement("xpath", "//span[contains(text(),'Shop by Litres')]");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			Sync.waitElementPresent("xpath",
 					"//span[contains(text(),'" + Links[i] + "')]");
 			Common.clickElement("xpath",
