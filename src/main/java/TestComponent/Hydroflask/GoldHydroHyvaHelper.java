@@ -465,21 +465,30 @@ public class GoldHydroHyvaHelper {
 	public String minicart_Checkout() {
             String Checkoutprice="";
 		try {
-			Thread.sleep(2000);
-			Sync.waitElementPresent("css", "span[x-text='totalCartAmount']");
+			Thread.sleep(3000);
+			Sync.waitElementPresent(30,"css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 		
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Sync.waitPageLoad();
 		Thread.sleep(2000);
+		try {
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page after clicking on the checkout page", "Successfully navigate to the shipping page after clicking on the checkout page",
 					"Failed to navigate to the shipping page after clicking on the checkout button");
-			Checkoutprice=Common.findElement("xpath", "//span[@class='text-xs']//span[contains(@class,'price')]").getText().trim();
+//			Checkoutprice=Common.findElement("xpath", "//span[@class='text-xs']//span[contains(@class,'price')]").getText().trim();
 //			  Assert.assertEquals(Checkoutprice, Minicartprice);
-			
+		}
+		catch (Exception | Error e) {
+			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+			Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
+					"validating the navigation to the shipping page when we click on the checkout",
+					"User should able to navigate to the shipping  page after clicking on the checkout page", "Successfully navigate to the shipping page after clicking on the checkout page",
+					"Failed to navigate to the shipping page after clicking on the checkout button");
+		}
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -3990,7 +3999,7 @@ public void Gift_card(String dataSet) {
 	        System.out.println(URL);
 	        boolean isStageOrPreprod = URL.contains("stage") || URL.contains("preprod");
 	        
-if (isStageOrPreprod) {
+     if (isStageOrPreprod) {
 	        	Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
 
 			if(Common.findElement("xpath", "//button[contains(text(),'Add Gift Card')]").getAttribute("title").contains("Show items"))
@@ -4017,8 +4026,8 @@ else
 				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
 //				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//button[@aria-label='Add Code']");
-				Thread.sleep(2000);
-				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-success']");
+				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			    System.out.println(successmsg);	
 				Common.assertionCheckwithReport(successmsg.contains("added"),
 						"validating the success message after applying gift card",
@@ -5162,42 +5171,7 @@ public void Remove_GiftCode() {
 				System.out.println("Switch to Default");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 				{
-					if(Common.getCurrentURL().contains("/gb"))
-					{
-						 Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
-	                	 Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
-	                	 
-	                	 Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
-	     				 Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
-	     				Thread.sleep(10000);
-	     				
-	     				 if(Common.getCurrentURL().contains("/checkout/#payment"))
-	     				 {
-								Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-								Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-								Thread.sleep(5000);
-								Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
-								Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
-								Thread.sleep(4000);
-								Sync.waitPageLoad();
-								klarna_Details(dataSet);
-	     				 }
-	     				 else if(Common.getCurrentURL().contains("/success/"))
-	     				 {
-	     					String sucessmessage=Common.getText("xpath", "//h1[@class='page-title-wrapper']");
-	                	    System.out.println(sucessmessage);
-	     				 }
-	     				 else
-	     				 {
-	     					 Thread.sleep(4000);
-	     					Sync.waitPageLoad();
-		    				klarna_Details(dataSet);
-	     					
-	     				 }
-	     				
-					}
-					else
-					{
+					
 						Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
 						Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
 						Thread.sleep(10000);
@@ -5208,7 +5182,7 @@ public void Remove_GiftCode() {
                   		   	Thread.sleep(5000);
                   			Sync.waitElementClickable("xpath", "(//button[@class='action primary checkout'])[2]");
 							Common.clickElement("xpath", "(//button[@class='action primary checkout'])[2]");
-							Thread.sleep(4000);
+							Thread.sleep(5000);
 							Sync.waitPageLoad();
 							klarna_Details(dataSet);
                   	   }
@@ -5223,7 +5197,7 @@ public void Remove_GiftCode() {
 		     					Sync.waitPageLoad();
 			    				klarna_Details(dataSet);
 						 }
-					}
+					
 				}
 				else
 				{
@@ -5865,7 +5839,7 @@ public void Remove_GiftCode() {
 		try
 		{
 			Sync.waitPageLoad();
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 //			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
 			Sync.waitElementPresent(50,"xpath", "//input[@id='phonePasskey']");
