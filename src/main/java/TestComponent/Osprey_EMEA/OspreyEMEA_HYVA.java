@@ -6719,7 +6719,7 @@ return Number;
 			Sync.waitElementPresent("xpath", "//a[@title='My Out of Stock Subscriptions']");
 			Common.clickElement("xpath", "//a[@title='My Out of Stock Subscriptions']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			Sync.waitElementPresent(20, "xpath", "//a[@title='" + products + "']");
 			String name = Common.findElement("xpath", "//a[@title='" + products + "']").getText();
 			System.out.println(name);
@@ -6745,10 +6745,10 @@ return Number;
 			String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 					.getAttribute("data-price-amount");
 			//if (price.equals(Dataset)) {
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//a[@title='Remove This Item']");
 				//Common.maximizeImplicitWait();
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				Common.alerts("Cancel");
 				Thread.sleep(4000);
 				Common.clickElement("xpath", "//a[@title='Remove This Item']");
