@@ -668,12 +668,12 @@ public class GoldHydroHyvaHelper {
 
 	    try {
 	    	Thread.sleep(4000);
-	    	if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
-			{
-	    		System.out.println("Free Gift Pop Displayed");
-	    		 Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
-				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
-			}
+//	    	if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
+//			{
+//	    		System.out.println("Free Gift Pop Displayed");
+//	    		 Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+//				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+//			}
 	        if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 	            Sync.waitElementVisible("css", "input[type='email']");
 	            Common.textBoxInput("css", "input[type='email']", data.get(dataSet).get("Email"));
