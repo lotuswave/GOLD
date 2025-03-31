@@ -37,7 +37,7 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
 
 	@AfterTest
 	public void clearBrowser() {
-	//	Common.closeAll();
+		Common.closeAll();
 
 	}
 
