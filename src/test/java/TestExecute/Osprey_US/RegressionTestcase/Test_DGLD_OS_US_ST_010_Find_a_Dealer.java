@@ -20,18 +20,22 @@ public class Test_DGLD_OS_US_ST_010_Find_a_Dealer {
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Find_a_delear();
+        Osprey_ReEu.click_Retailer(); 
+        Osprey_ReEu.Validate_AvailableRetailers();
+        Osprey_ReEu.Validate_retailerlocations();  //need to add locations
+        Osprey_ReEu.Click_Instock();
+        Osprey_ReEu.selectproduct("Daylite Plus");   
+        Osprey_ReEu.Re_click_Find_a_delear();       //Temperary we have added because of the locations section overlap issue
         Osprey_ReEu.click_Retailer();
         Osprey_ReEu.verifingRetailerHours();
         Osprey_ReEu.verifingRetailerBrowser();
         Osprey_ReEu.Validate_store_sidebar();
         Osprey_ReEu.CLick_Usemylocation();
-        Osprey_ReEu.Validate_AvailableRetailers();
-        Osprey_ReEu.Validate_retailerlocations();  //need to add locations
-        Osprey_ReEu.Click_Instock();
-        Osprey_ReEu.selectproduct("Daylite Plus");
+        
+      
         
 		} catch (Exception e) {
-
+			   
 			Assert.fail(e.getMessage(), e);
 		}
 	}

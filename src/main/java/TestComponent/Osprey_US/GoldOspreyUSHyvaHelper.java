@@ -3266,6 +3266,30 @@ public void header_Shopbycollection(String Dataset) { {
 
 	}
 
+	public void Re_click_Find_a_delear() {
+		// TODO Auto-generated method stub
+		try {
+			Common.refreshpage();
+			Sync.waitPageLoad();
+			Common.actionsKeyPress(Keys.END);
+			Common.clickElement("xpath", "//span[contains(@class,'icon-location')]");
+
+			String find = Common.findElement("xpath", "//div[contains(@class,'row-full-width-inner')]//h1").getText();
+			System.out.println(find);
+
+			Common.assertionCheckwithReport(find.equals("Store Locator"), "validating Find a Store page",
+					"user navigates to Find a Store page", "Sucessfully user navigate to Find a Store page",
+					"faield to navigate to Find a Store page");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating store logo", "System directs the user back to Find a Store",
+					"unable to go back to the Find a Store page",
+					Common.getscreenShotPathforReport("faield to get back to Find a Store"));
+			Assert.fail();
+
+		}
+	}
 
 
 public void verifingRetailerHours() {
@@ -7815,6 +7839,12 @@ public void Navigate_back_to_Shoppingcart_page(String Dataset) {
 		String checkout = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText().trim();
 		System.out.println(checkout);
 		System.out.println(Cart);
+		Thread.sleep(2000);
+		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
 		Sync.waitElementVisible(30, "xpath", "//a[@id='checkout-link-button']");
 		Common.clickElement("xpath", "//a[@id='checkout-link-button']");
 		Sync.waitPageLoad();
