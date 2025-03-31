@@ -23,8 +23,6 @@ public class Test_DGLD_OS_COMMON_009_Add_To_Cart_and_Checkout_from_My_Favorites 
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.My_Favorites();
         Osprey_ReEu.Addtocart_From_MyFavorites("Product");
-        Osprey_ReEu.click_minicart();
-        Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();

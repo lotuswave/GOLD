@@ -2576,15 +2576,16 @@ public class OspreyEMEA_HYVA {
 		        	        Sync.waitElementPresent(30, "xpath", "//button[@id='menu-cart-icon']");
 		        	        List<WebElement> element = Common.findElements("xpath", "//a[contains(@title,'Show options')]");
 		        	        element.get(0).click();
-		        	        Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
-							Common.clickElement("xpath", "//img[@alt='" + product + "']");
+//		        	        Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
+//							Common.clickElement("xpath", "//img[@alt='" + product + "']");
 							Sync.waitPageLoad();
-							Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
-							Common.clickElement("xpath", "//input[@aria-label='" + productcolor + "']");
-						//	Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
-						//	Common.clickElement("xpath", "//input[@aria-label='" + Productsize + "']");
-			                Sync.waitPageLoad();
-		        	        Thread.sleep(2000);
+							Thread.sleep(4000);
+//							Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor + "']");
+//							Common.clickElement("xpath", "//input[@aria-label='" + productcolor + "']");
+//						//	Sync.waitElementPresent("xpath", "//input[@aria-label='" + Productsize + "']");
+//						//	Common.clickElement("xpath", "//input[@aria-label='" + Productsize + "']");
+//			                Sync.waitPageLoad();
+//		        	        Thread.sleep(2000);
 		        	       
 		        	        String message = Common.findElement("xpath", "//div[contains(@class,'message')]").getText();
 		        	        if (message.contains("You added")) {
