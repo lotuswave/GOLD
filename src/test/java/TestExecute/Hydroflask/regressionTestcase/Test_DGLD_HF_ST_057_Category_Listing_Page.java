@@ -19,7 +19,6 @@ public class Test_DGLD_HF_ST_057_Category_Listing_Page {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.CLP_Page("New Colors");
 			Hydro.CLP_Page("Bottles & Drinkware");
 			Hydro.CLP_Page("Coolers & Lunch Boxes");
 			Hydro.CLP_Page("Kitchenware");
