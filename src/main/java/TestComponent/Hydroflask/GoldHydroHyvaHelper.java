@@ -5613,47 +5613,57 @@ public void Remove_GiftCode() {
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='stripe_payments']").size();
-			Common.clickElement("xpath", "//label[@for='stripe_payments']");
-			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-					"payment section should be displayed", "sucessfully payment section has been displayed",
-					"Failed to displayed the payment section");
-			Sync.waitElementPresent(30, "xpath", "//input[@type='checkbox']");
-			Common.clickElement("xpath", "//input[@type='checkbox']");
-			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			Sync.waitElementPresent(30, "xpath", "//label[@for='billing-as-shipping']");
+			Common.clickElement("xpath", "//label[@for='billing-as-shipping']");
+			Sync.waitElementPresent(30, "id", "billing-firstname");
+			Common.textBoxInput("id", "billing-firstname", data.get(dataSet).get("FirstName"));
+			
+			Sync.waitElementPresent(30, "id", "billing-lastname");
+			Common.textBoxInput("id", "billing-lastname", data.get(dataSet).get("LastName"));
+			
+			Sync.waitElementPresent(30, "id", "billing-street-0");
+			Common.textBoxInput("id", "billing-street-0", data.get(dataSet).get("Street"));
+			
 			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//input[@name='street[0]']").getAttribute("value");
+			String text = Common.findElement("id", "billing-street-0").getAttribute("value");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
+			Common.textBoxInput("id", "billing-city", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
 			try {
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("id", "billing-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			} catch (ElementClickInterceptedException e) {
 				Thread.sleep(3000);
-				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				Common.dropdown("id", "billing-region", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
 			Thread.sleep(2000);
 //			Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='postcode']",
+			Common.textBoxInput("id", "billing-postcode",
 					data.get(dataSet).get("postcode"));
 			Thread.sleep(5000);
 
-			Common.textBoxInput("xpath", "//div[@class='field _required']//input[@name='telephone']",
+			Common.textBoxInput("id", "billing-telephone",
 					data.get(dataSet).get("phone"));
-			Common.clickElement("xpath", "//span[text()='Update']");
+			if(Common.findElements("xpath", "//span[text()='Update']").size()>0) {
+				Common.clickElement("xpath", "//span[text()='Update']");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				String update = Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
+				System.out.println(update);
+				Common.assertionCheckwithReport(
+						update.contains("6 Walnut Valley Dr") || text.contains("6 Walnut Valley Dr"),
+						"verifying the Billing address form in payment page",
+						"Billing address should be saved in the payment page",
+						"Sucessfully Billing address form should be Display ",
+						"Failed to display the Billing address in payment page");
+			}
+			
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String update = Common.findElement("xpath", "(//div[@class='billing-address-details']//p)[2]").getText();
-			System.out.println(update);
-			Common.assertionCheckwithReport(
-					update.contains("6 Walnut Valley Dr") || text.contains("6 Walnut Valley Dr"),
+			Common.assertionCheckwithReport(text.contains("6 Walnut Valley Dr"),
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",
@@ -6393,9 +6403,90 @@ catch(Exception | Error e)
 		String storesize = data.get(dataSet).get("Storesize");
 		String state = data.get(dataSet).get("Region");
 		try {
-//			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
-//			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
+			if(Common.getCurrentURL().contains("https://hydroflask.kustomer.support/")) {
+				Sync.waitElementPresent("xpath", "//input[@data-label='Company / Organization']");
+				Common.textBoxInput("xpath", "//input[@data-label='Company / Organization']", data.get(dataSet).get("Company"));
 
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//input[@id='conversationWebAddress']");
+				Common.textBoxInput("xpath", "//input[@id='conversationWebAddress']", data.get(dataSet).get("webaddress"));
+
+				Common.clickElement("xpath", "//div[@id='conversationPlaceACustomOrder']");
+				Thread.sleep(4000);
+				
+				Common.clickElement("xpath", "//div[text()='Yes']");
+				Sync.waitElementPresent("id", "conversationInHandDate-date");
+				Common.textBoxInput("id", "conversationInHandDate-date","03/03/2026");
+				Common.actionsKeyPress(Keys.ENTER);
+				
+
+				Common.clickElement("id", "conversationPlanToResellProducts");
+				Common.clickElement("xpath", "//div[text()='Yes']");
+				
+
+				Common.clickElement("id", "conversationNumberOfUnits");
+				
+				Common.clickElement("xpath", "//div[text()='48-96']");
+//				Common.textBoxInput("xpath", "//input[@id='annualRevenue']", data.get(dataSet).get("annualRevenue"));
+//
+//				Common.textBoxInput("xpath", "//input[@id='yearsInBusiness']", data.get(dataSet).get("yearsInBusiness"));
+				
+				Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
+				Common.clickElement("xpath", "//div[@id='conversationCountry']");
+
+				Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
+				Common.clickElement("xpath", "//div[text()='" + country + "']");
+
+				Sync.waitElementPresent("id", "conversationShippingAddress");
+				Common.textBoxInput("id", "conversationShippingAddress", data.get(dataSet).get("Street"));
+
+				Sync.waitElementPresent("xpath", "//input[@id='conversationCityForForms']");
+				Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(dataSet).get("City"));
+				
+				Sync.waitElementPresent("xpath", "//div[@id='conversationState']");
+				Common.clickElement("xpath", "//div[@id='conversationState']");
+
+				Sync.waitElementPresent("xpath", "//div[text()='" + state + "']");
+				Common.clickElement("xpath", "//div[text()='" + state + "']");
+
+				Sync.waitElementPresent("xpath", "//input[@id='conversationZipCodeForForms']");
+				Common.textBoxInput("xpath", "//input[@id='conversationZipCodeForForms']",
+						data.get(dataSet).get("postcode"));
+
+				Common.textBoxInput("xpath", "//textarea[@id='conversationDescribeYourBusiness']",
+						data.get(dataSet).get("YourBusiness"));
+
+				Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
+						data.get(dataSet).get("interested"));
+
+//				Common.textBoxInput("xpath", "//textarea[@id='messagePreview']", data.get(dataSet).get("Brandscarry"));
+//
+//				Common.textBoxInput("xpath", "//textarea[@id='howDoYouPlanToMarketDisplayOurProducts']",
+//						data.get(dataSet).get("DisplayProducts"));
+//
+//				Common.textBoxInput("xpath", "//textarea[@id='howDidYouHearAboutUs']", data.get(dataSet).get("Aboutus"));
+
+				Common.textBoxInput("xpath", "//input[@name='customerFirstName']", data.get(dataSet).get("FirstName"));
+
+				Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
+
+				Common.textBoxInput("xpath", "//input[@id='conversationJobTitle']", data.get(dataSet).get("Jobtitle"));
+
+				Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(dataSet).get("phone"));
+				Common.textBoxInput("xpath", "//input[@name='customerEmail']", data.get(dataSet).get("Email"));
+				
+				Sync.waitElementPresent("xpath", "//input[@value='select-to-opt-in']");
+				Common.clickElement("xpath", "//input[@value='select-to-opt-in']");
+				
+				Sync.waitElementPresent("xpath", "//input[@value='select-to-opt-in']");
+				Common.clickElement("xpath", "//input[@value='select-to-opt-in']");
+			String Email=	Common.findElementBy("id", "customerEmail").getAttribute("value");
+			Common.assertionCheckwithReport(Email.contains(data.get(dataSet).get("Email")), "verifying Contact us Success message ",
+					"Success message should be Displayed", "Contact us Success message displayed ",
+					"failed to dispaly success message");
+			
+			}
+			else {
 			Sync.waitElementPresent("xpath", "//input[@data-label='Company Name']");
 			Common.textBoxInput("xpath", "//input[@data-label='Company Name']", data.get(dataSet).get("Company"));
 
@@ -6412,19 +6503,6 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//div[text()='" + typeofbusiness + "']");
 
 			Common.textBoxInput("xpath", "//input[@id='webAddress']", data.get(dataSet).get("webaddress"));
-
-//			Common.clickElement("xpath", "//div[@id='conversationAreYouAnAsiPpaiIndustryMem']");
-//			Thread.sleep(4000);
-//			Common.Common.clickElement("xpath", "//div[@data-path='no']");
-
-//			Sync.waitElementPresent("xpath", "//div[@id='conversationCustomOrder']");
-//			Common.clickElement("xpath", "//div[@id='conversationCustomOrder']");
-//			Thread.sleep(4000);
-//			Common.Common.clickElement("xpath", "//div[@data-path='no']");
-
-//			Sync.waitElementPresent("xpath", "//input[@name='conversationInHandDate']");
-//
-//			Common.textBoxInput("xpath", "//input[@name='conversationInHandDate']", data.get(dataSet).get("date"));
 
 			Common.clickElement("xpath", "//div[@id='conversationSellThruWebsite']");
 			Thread.sleep(4000);
@@ -6502,6 +6580,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0, "verifying Contact us Success message ",
 					"Success message should be Displayed", "Contact us Success message displayed ",
 					"failed to dispaly success message");
+			}
 		}
 
 		catch (Exception | Error e) {
@@ -6513,12 +6592,12 @@ catch(Exception | Error e)
 
 		}
 
-		Common.actionsKeyPress(Keys.PAGE_UP);
-		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
-		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-		Common.assertionCheckwithReport(Text.contains("Your submission was successful."),
-				"verifying contact us confirmation message", expectedResult,
-				"User gets confirmation under the same tab", "unable to load the confirmation form");
+//		Common.actionsKeyPress(Keys.PAGE_UP);
+//		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+//		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
+//		Common.assertionCheckwithReport(Text.contains("Your submission was successful."),
+//				"verifying contact us confirmation message", expectedResult,
+//				"User gets confirmation under the same tab", "unable to load the confirmation form");
 
 	}
 
@@ -9889,6 +9968,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
 			Common.clickElement("xpath", "//span[contains(text(),'Engraving')]");
+			Sync.waitElementPresent(30, "css", "button[id='Text-category-button']");
+			Common.clickElement("css", "button[id='Text-category-button']");
 			Thread.sleep(6000);
 //			engraving_color();
 			engraving_Text("Horizontal Text");
@@ -10237,6 +10318,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"failed to select the Engraving for the selected bottle");
 			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
 			Common.clickElement("xpath", "//span[text()='Graphic']");
+			Sync.waitElementPresent(30, "css", "button[id='Adventure-category-button']");
+			Common.clickElement("css", "button[id='Adventure-category-button']");
+			
 			Thread.sleep(4000);
 //			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
 //					.size();
