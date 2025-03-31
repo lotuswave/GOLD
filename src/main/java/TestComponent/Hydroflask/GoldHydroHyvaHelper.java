@@ -3525,12 +3525,12 @@ System.out.println(MyFavorites);
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
 		Thread.sleep(4000);
-		if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
-		{
-			System.out.println("Free Gift popup Displayed in Shipping page");
-			Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
-			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
-		}
+//		if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
+//		{
+//			System.out.println("Free Gift popup Displayed in Shipping page");
+//			Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+//			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+//		}
 		int size = Common
 				.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]"))
 				.size();
@@ -9459,12 +9459,31 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
 			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
+			try {
+				Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
+				Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+				Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+				Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
+				Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+				Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+				Sync.waitForLoad();
+
+				String video1 = Common.findElement("xpath", "//span[@id='play-button-tooltip']").getText();
+				Common.switchToDefault();
+				System.out.println(video1);
+				Common.assertionCheckwithReport(video1.equals("Pause"), "validating the video in PDP page",
+						"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
+						"failed to play the video in PDP page");
+			}
+			catch(Exception | Error e) {
+//				Prod:
+				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+			
             Common.switchFrames("xpath","//iframe[contains(@id,'vimeo')]");
-			Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
-			Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+			Sync.waitElementClickable(40,"xpath", "//button[@aria-label='Play video']");
+			Common.clickElement("xpath", "//button[@aria-label='Play video']");
 			Sync.waitForLoad();
-			
-			
 			String video1 = Common.findElement("xpath", "//span[@id='play-button-tooltip']")
 					.getText();
 			Common.switchToDefault();
@@ -9472,7 +9491,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			Common.assertionCheckwithReport(video1.equals("Pause"), "validating the video in PDP page",
 					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 					"failed to play the video in PDP page");
-			
+			}	
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
