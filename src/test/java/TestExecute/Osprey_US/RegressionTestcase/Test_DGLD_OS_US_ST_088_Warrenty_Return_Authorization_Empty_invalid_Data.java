@@ -22,7 +22,7 @@ public class Test_DGLD_OS_US_ST_088_Warrenty_Return_Authorization_Empty_invalid_
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.warrenty_return();
-        Osprey_ReEu.Empty_Details_warrenty_return("Invalid Details");  
+        Osprey_ReEu.Empty_Details_warrenty_return1("Invalid Details");  
        
      
         
