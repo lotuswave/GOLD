@@ -13704,7 +13704,8 @@ public void Empty_Details_warrenty_return(String Dataset) {
 		String DOP = data.get(Dataset).get("Descriptions");
 		String Frame = data.get(Dataset).get("frame1");
 		String YOP = data.get(Dataset).get("Yopurchase");
-		String Country = "United Kingdom";
+		String Country = "United States";
+		System.out.println(Country);
 		System.out.println(DOP);
 		System.out.println(YOP);
 		System.out.println(Frame);
@@ -13772,6 +13773,53 @@ public void Empty_Details_warrenty_return(String Dataset) {
 		}
 	}
 	
+public void Empty_Details_warrenty_return1(String Dataset) {
+	// TODO Auto-generated method stub
+	String phonenumber=data.get(Dataset).get("Phone");
+	String zipcode=data.get(Dataset).get("Zipcode");
+	String Country = "United States";
+	try
+	{
+		Common.findElement("xpath", "//select[@id='country_id']");
+		Common.clickElement("xpath", "//select[@id='country_id']");
+		Thread.sleep(4000);
+		Common.dropdown("xpath", "//select[@id='country_id']", SelectBy.TEXT, Country);
+		Sync.waitElementPresent(30,"xpath", "//button[contains(@class,'action submit')]");
+		Common.scrollIntoView("xpath", "//button[contains(@class,'action submit')]");
+		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
+		Thread.sleep(4000);
+		Sync.waitElementPresent(30, "xpath", "//ul[@class='messages']//li");
+		String errormessage = Common.findElement("xpath", "//ul[@class='messages']//li").getText();
+		Common.assertionCheckwithReport(errormessage.equals("This is a required field."),
+				"validating the error message with empty fields ",
+				"After clicking hare button with empty data error message should be display",
+				"successfully error message has been dispalyed ", "failed to display the error message");
+		Common.textBoxInput("xpath", "//input[@id='telephone']", phonenumber);
+		Common.textBoxInput("xpath", "//input[@id='postcode']", zipcode);
+		Common.scrollIntoView("xpath", "//button[contains(@class,'action submit')]");
+		Common.clickElement("xpath", "//button[contains(@class,'action submit')]");
+		Thread.sleep(5000);
+		String mobileerror=Common.findElement("xpath", "//ul[@class='messages']//li").getText();
+		String ziperror=Common.findElement("xpath", "//ul[@class='messages']//li").getText();
+		Common.assertionCheckwithReport(mobileerror.contains("Please enter a phone number that is 10 digits in length.") && ziperror.contains("Provided Zip/Postal Code seems to be invalid") ||
+				mobileerror.contains("This is a required field."),
+				"validating the error message with Invalid fields ",
+				"After clicking hare button with invalid data error message should be display",
+				"successfully error message has been dispalyed ", "failed to display the error message");
+		
+		
+		}
+	catch(Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message with empty fields ",
+				"After clicking hare button with empty data error message should be display",
+				"Unable to display the error message ",
+				Common.getscreenShot("Failed to display the error message"));
+		Assert.fail();
+	}
+}
+
 public void warrenty_return() {
 	// TODO Auto-generated method stub
 	try
