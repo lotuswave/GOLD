@@ -3272,12 +3272,12 @@ public class OspreyEMEA_HYVA {
 			System.out.println(Storename);
 			Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
-			int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]//h3").size();
+			int storecount = Common.findElements("xpath", "//h2[@class='store-info-title dl-store-name-inner']").size();
 			for (int i = 1; i <= storecount; i++) {
 				Thread.sleep(3000);
 				String relatedstores = Common
-						.findElement("xpath", "(//a[contains(@class,'conv-section-store')]//h3)[" + i + "]")
-						.getText();
+						.findElement("xpath", "(//h2[@class='store-info-title dl-store-name-inner'])[" + i + "]")
+						.getText().toUpperCase();
 				System.out.println(relatedstores);
 				Common.assertionCheckwithReport(relatedstores.contains(Storename),
 						"To validate the retailer stores displayed ", "Retailer stores should be displayed",
