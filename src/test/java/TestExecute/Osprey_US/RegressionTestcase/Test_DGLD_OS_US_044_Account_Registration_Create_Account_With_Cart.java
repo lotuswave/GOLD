@@ -29,7 +29,7 @@ public class Test_DGLD_OS_US_044_Account_Registration_Create_Account_With_Cart {
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+ //     Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Billing=Osprey_ReEu.BillingAddress("BillingDetails");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         Osprey_ReEu.verify_BillingAddress(Billing);

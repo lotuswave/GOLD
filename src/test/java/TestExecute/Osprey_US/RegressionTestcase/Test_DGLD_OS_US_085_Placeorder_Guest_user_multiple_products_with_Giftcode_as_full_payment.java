@@ -26,9 +26,9 @@ public class Test_DGLD_OS_US_085_Placeorder_Guest_user_multiple_products_with_Gi
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.Gift_card("Giftcard_Full");
         Osprey_ReEu.giftCardSubmitOrder();
+     
         
 		} catch (Exception e) {
 

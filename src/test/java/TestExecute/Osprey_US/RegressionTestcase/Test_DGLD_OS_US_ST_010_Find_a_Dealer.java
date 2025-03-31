@@ -25,7 +25,7 @@ public class Test_DGLD_OS_US_ST_010_Find_a_Dealer {
         Osprey_ReEu.Validate_retailerlocations();  //need to add locations
         Osprey_ReEu.Click_Instock();
         Osprey_ReEu.selectproduct("Daylite Plus");   
-        Osprey_ReEu.Re_click_Find_a_delear();       //Temperary we have added because of the locations section overlap issue
+        Osprey_ReEu.Re_click_Find_a_delear();       //Temperary we have added because of the locations section overlap issue throuhg automation
         Osprey_ReEu.click_Retailer();
         Osprey_ReEu.verifingRetailerHours();
         Osprey_ReEu.verifingRetailerBrowser();
@@ -33,7 +33,6 @@ public class Test_DGLD_OS_US_ST_010_Find_a_Dealer {
         Osprey_ReEu.CLick_Usemylocation();
         
       
-        
 		} catch (Exception e) {
 			   
 			Assert.fail(e.getMessage(), e);

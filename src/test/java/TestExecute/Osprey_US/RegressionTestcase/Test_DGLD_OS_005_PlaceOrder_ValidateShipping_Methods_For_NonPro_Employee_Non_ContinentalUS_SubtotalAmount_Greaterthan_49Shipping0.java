@@ -25,10 +25,9 @@ public class Test_DGLD_OS_005_PlaceOrder_ValidateShipping_Methods_For_NonPro_Emp
         Osprey_ReEu.simple_addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Non_Continental");
-//        Osprey_ReEu.addDeliveryAddress_Guestuser("Non_Continental");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.Verify_ShippingAmount_Greater_than49();
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+//        Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
