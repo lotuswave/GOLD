@@ -9482,8 +9482,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Engraving should be select for the bottle",
 					"Sucessfully Engraving  has been selected for the bottle",
 					"failed to select the Engraving for the selected bottle");
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
-			Common.clickElement("xpath", "//span[text()='Graphic']");
+			Sync.waitElementPresent(30, "css", "button[id='Adventure-category-button']");
+			Common.clickElement("css", "button[id='Adventure-category-button']");
 			Thread.sleep(4000);
 //			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
 //					.size();
