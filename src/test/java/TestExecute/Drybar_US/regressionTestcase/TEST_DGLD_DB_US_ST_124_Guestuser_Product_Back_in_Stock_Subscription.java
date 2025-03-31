@@ -19,8 +19,14 @@ public class TEST_DGLD_DB_US_ST_124_Guestuser_Product_Back_in_Stock_Subscription
 		try {
 		
 			Drybar.Verify_Homepage();
+			if(Common.getCurrentURL().contains("preprod")) {
 			Drybar.search_product("Outof Stock Product");  
 			Drybar.outofstock_subcription("Outof Stock Product");
+			}
+			else {
+				Drybar.search_product("Prod Outof Stock Product");  
+				Drybar.outofstock_subcription("Prod Outof Stock Product");
+			}
 			
 
 		} catch (Exception e) {

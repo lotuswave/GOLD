@@ -194,9 +194,9 @@ public class GoldDrybarusHelper2 {
 
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+					Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[@class='group-hover/item-image:block hidden']");
+							"//img[@itemprop='image']");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
