@@ -506,7 +506,10 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -2148,7 +2151,10 @@ public class OspreyEMEA_HYVA {
 
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
-			
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
@@ -8479,6 +8485,10 @@ return Number;
 			
 			Sync.waitElementPresent(50, "xpath", "(//span[@class='country-selector-title'])[3]");
 			Common.clickElement("xpath", "(//span[@class='country-selector-title'])[3]");
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
 			Thread.sleep(4000);
 			List<WebElement> country = Common.findElements("xpath", "(//legend[text()='Europe']//parent::fieldset)[3]//div[@class='country-item flex gap-3']//p");
 			List<WebElement> Countryselector = Common.findElements("xpath",
