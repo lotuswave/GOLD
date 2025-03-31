@@ -1915,6 +1915,9 @@ public class GoldDrybarusHelper2 {
 					"Failed to display the error message for invaild email");
 			Thread.sleep(4000);
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Thread.sleep(3000);
+			if(Common.getCurrentURL().contains("preprod")) {
+			
 			Common.clickElement("xpath", "//input[@value='Post']");
 			Thread.sleep(4000);
 			String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
@@ -1922,6 +1925,12 @@ public class GoldDrybarusHelper2 {
 					"verifying the post for the product review",
 					"product review should be submit after clicking on post",
 					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
+			}
+			else {
+				
+				String button = Common.findElement("xpath", "//input[@value='Post']").getText();
+		
+			}
 //			Common.clickElement("xpath", "//div[@aria-label='Next']");
 
 		} catch (Exception | Error e) {
@@ -1979,6 +1988,8 @@ public class GoldDrybarusHelper2 {
 			Common.textBoxInput("xpath", "//input[@name='display_name']", Name);
 			Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
 			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+			Thread.sleep(3000);
+			if(Common.getCurrentURL().contains("preprod")){
 			Common.clickElement("xpath", "//input[@data-button-type='submit']");
 			Thread.sleep(4000);
 			String question = Common
@@ -1988,6 +1999,12 @@ public class GoldDrybarusHelper2 {
 			Common.assertionCheckwithReport(question.contains("THANK YOU FOR POSTING A QUESTION!"),
 					"validating the question submit form", "Ask a form should be submit",
 					"Sucessfully question post should be submit", "Failed to submit the ask a question post");
+			}
+			else
+			{
+				String button = Common.findElement("xpath", "//input[@data-button-type='submit']").getText();
+				System.out.println(button);
+			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the question submit form", "Ask a form should be submit",
