@@ -351,6 +351,7 @@ public class OspreyEMEA_HYVA {
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//a[@title='Sign In']");
