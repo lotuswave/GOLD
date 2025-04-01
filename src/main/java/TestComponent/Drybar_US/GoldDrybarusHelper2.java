@@ -1889,6 +1889,7 @@ public class GoldDrybarusHelper2 {
 		try {
 			String expectedResult = "Sucessfully title input box has been displayed";
 			Common.clickElement("xpath", "//input[@value='Post']");
+			Sync.waitElementPresent(30,"xpath","//span[@class='form-input-error']");
 			String errormessage = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
 			System.out.println(errormessage);
 			Thread.sleep(4000);
@@ -1980,14 +1981,20 @@ public class GoldDrybarusHelper2 {
 		String Name = data.get(Dataset).get("FirstName");
 		String Email = data.get(Dataset).get("Email");
 		try {
-			Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'ask a question')]");
-			Common.clickElement("xpath", "//button[contains(@aria-label,'ask a question')]");
-			Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_q')]");
-			Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_q')]", Question);
-			Sync.waitElementPresent(30, "xpath", "//input[@name='display_name']");
-			Common.textBoxInput("xpath", "//input[@name='display_name']", Name);
-			Sync.waitElementPresent(30, "xpath", "//input[@name='email']");
-			Common.textBoxInput("xpath", "//input[@name='email']", Utils.getEmailid());
+		
+			Thread.sleep(4000);
+			Common.scrollIntoView("xpath","//span[@class='reviews-qa-label font-color-gray']");
+			Thread.sleep(2000);
+			Sync.waitElementPresent(30,"xpath", "(//div[@class='yotpo-nav-wrapper']//span)[2]");
+			Common.javascriptclickElement("xpath", "(//div[@class='yotpo-nav-wrapper']//span)[2]");
+			Thread.sleep(5000);
+			Common.javascriptclickElement("xpath","//button[contains(@class,'write-first-question-button')]");
+			Sync.waitElementPresent(30, "xpath", "//textarea[contains(@id,'yotpo_input_question_content')]");
+			Common.textBoxInput("xpath", "//textarea[contains(@id,'yotpo_input_question_content')]", Question);
+			Sync.waitElementPresent(30, "xpath", "//input[@id='yotpo_input_question_username']");
+			Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_username']", Name);
+			Sync.waitElementPresent(30, "xpath", "//input[@id='yotpo_input_question_email']");
+			Common.textBoxInput("xpath", "//input[@id='yotpo_input_question_email']", Utils.getEmailid());
 			Thread.sleep(3000);
 			if(Common.getCurrentURL().contains("preprod")){
 			Common.clickElement("xpath", "//input[@data-button-type='submit']");
