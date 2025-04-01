@@ -13291,8 +13291,8 @@ public void Verify_ShippingAmount_Greater_than49() {
 			"Shippping method ammount should display $5",
 			"Unable to display $5 in shipping page",
 			"Failed to  display $5 in shipping page ");
-	AssertJUnit.fail();
-}
+	Assert.fail();
+	}
 }
 
 public String Express_Venmo_Payment(String dataSet) throws Exception {

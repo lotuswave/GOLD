@@ -11430,7 +11430,7 @@ catch(Exception | Error e)
 			Thread.sleep(5000);
 			 update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='0']").getText().trim();
 			System.out.println(update);
-			Common.assertionCheckwithReport(update.contains("Chorley") ,
+			Common.assertionCheckwithReport(update.contains("QA TEST, 80-84 Victoria Road") ,
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
 					"Sucessfully Billing address form should be Display ",

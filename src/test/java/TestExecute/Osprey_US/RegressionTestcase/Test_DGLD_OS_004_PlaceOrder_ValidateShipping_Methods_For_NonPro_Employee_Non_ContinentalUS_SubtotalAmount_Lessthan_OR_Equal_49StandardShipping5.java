@@ -15,7 +15,7 @@ public class Test_DGLD_OS_004_PlaceOrder_ValidateShipping_Methods_For_NonPro_Emp
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Test_DGLD_OS_004_PlaceOrder_ValidateShipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Lessthan_OR_Equal_49StandardShipping5 () throws Exception {
+	public void verifying_Shipping_Methods_For_NonPro_Employee_Non_ContinentalUS_SubtotalAmount_Lessthan_OR_Equal_49StandardShipping5 () throws Exception {
    
 		try {
 			 Osprey_ReEu.verifingHomePage();
