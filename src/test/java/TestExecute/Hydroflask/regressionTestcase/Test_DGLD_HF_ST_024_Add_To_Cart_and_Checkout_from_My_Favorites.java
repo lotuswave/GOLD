@@ -19,10 +19,13 @@ public class Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 
 		try {
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+//			Hydro.click_singinButton();
+//			Hydro.login_Hydroflask("AccountDetails_2");
+			Hydro.click_Createaccount();
+			  Hydro.create_account("New Account Details");
 			Hydro.My_Favorites();
 			Hydro.Addtocart_From_MyFavorites("Product");
+			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
