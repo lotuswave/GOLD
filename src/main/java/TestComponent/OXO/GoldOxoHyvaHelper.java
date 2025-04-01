@@ -4440,6 +4440,8 @@ catch(Exception | Error e)
 
 	public void DeclinePrivacy() throws Exception {
 		close_Pop_up();
+		
+		Thread.sleep(4000);
 		Common.clickElement("id", "truste-consent-required");
 	}
 	public void click_trackorder() {
@@ -4601,8 +4603,8 @@ catch(Exception | Error e)
 			Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
 
 			Thread.sleep(2000);
-			Sync.waitElementVisible("xpath", "//button[@aria-label='Close Modal']");
-			Common.clickElement("xpath", "//button[@aria-label='Close Modal']");
+			Sync.waitElementVisible("xpath", "//button[@aria-label='Close dialog']");
+			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 			Common.switchToDefault();
 		} else {
 			int sizeofpopup = Common.findElements("id", "wpx-newsletter-popup").size();
@@ -9106,7 +9108,7 @@ public void header_1_Percent_Planet() {
 			Common.textBoxInput("id", "message-1", message);
 			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad(40);
-			Thread.sleep(2000);
+			Thread.sleep(6000);
 			Sync.waitElementPresent(40, "xpath", "//span[@x-text='savedFormMessage.message']");
 			String Messgae = Common.findElement("xpath", "//span[@x-text='savedFormMessage.message']").getText()
 					.replace("Message: ", "");

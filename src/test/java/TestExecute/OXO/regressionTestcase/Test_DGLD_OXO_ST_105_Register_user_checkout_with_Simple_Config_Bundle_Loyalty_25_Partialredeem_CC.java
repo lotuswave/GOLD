@@ -19,7 +19,7 @@ public class Test_DGLD_OXO_ST_105_Register_user_checkout_with_Simple_Config_Bund
 		try {
 			Oxo.verifingHomePage();
 			Oxo.click_singinButton();
-			Oxo.Usersignin("AccountDetails");
+			Oxo.Usersignin("LoyaltyDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
 			Oxo.addtocart("addproduct");
 			Oxo.babytoddler_headerlinks("Baby & Toddler");
