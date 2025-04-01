@@ -3795,7 +3795,7 @@ public class GoldDrybarusHelper2 {
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
 			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 			Thread.sleep(4000);
-			String originalprice = Common.getText("xpath", "//span[@class='price line-through hf:font-bold md:hf:font-normal']").replace("$", "");
+			String originalprice = Common.getText("xpath", "//span[@x-html='getFormattedFinalPrice()']").replace("$", "");
 			//String originalprice = Common.getText("xpath", "//div[contains(@class,'old-price')]//span[@class='price line-through']").replace("$", "");
 			Float originalvalue = Float.parseFloat(originalprice);
 			String Newprice = Common.getText("xpath", "(//span[@class='price-wrapper']//span[@class='price'])").replace("$", "");
