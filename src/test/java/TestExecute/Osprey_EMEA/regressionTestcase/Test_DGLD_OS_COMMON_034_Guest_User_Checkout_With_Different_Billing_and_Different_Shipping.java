@@ -26,7 +26,7 @@ public class Test_DGLD_OS_COMMON_034_Guest_User_Checkout_With_Different_Billing_
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.BillingAddress("BillingDetails");
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 
