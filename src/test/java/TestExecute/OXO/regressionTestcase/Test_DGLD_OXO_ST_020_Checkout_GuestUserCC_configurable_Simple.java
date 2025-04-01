@@ -18,7 +18,7 @@ public class Test_DGLD_OXO_ST_020_Checkout_GuestUserCC_configurable_Simple {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.search_product("Product");
-			Oxo.addtocart_PLP("Product");
+			Oxo.addtocart("Product");
 			Oxo.babytoddler_headerlinks("Baby & Toddler");
 			Oxo.Configurable_addtocart_pdp("ConfigProduct");
 //			Oxo.search_product("ConfigProduct1");
