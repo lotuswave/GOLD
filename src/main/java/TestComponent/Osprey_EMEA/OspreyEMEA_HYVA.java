@@ -15751,14 +15751,16 @@ public void deleteProduct_shoppingcart() {
 		
 		int size=Common.findElements("xpath", "//tr[contains(@class,'item-info align')]").size();
 		System.out.println(size);
+		Thread.sleep(4000);
 		for(int i=0;i<size;i++)
 		{
 			int value=i+1;
+			Thread.sleep(2000);
 		Common.clickElement("xpath", "(//button[contains(@class,'group p-2.5 text-black')])[1]");
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary')])[1]");
-	//	Sync.waitPageLoad();
-	//	Thread.sleep(3000);
+		Sync.waitPageLoad();
+		Thread.sleep(3000);
 		}
 //		String getText =Common.findElement("xpath","(//div[@class='cart-empty container min-h-75']//p)[1]").getText();
 //		Common.assertionCheckwithReport(getText.equals("You have no items in your shopping cart."),
