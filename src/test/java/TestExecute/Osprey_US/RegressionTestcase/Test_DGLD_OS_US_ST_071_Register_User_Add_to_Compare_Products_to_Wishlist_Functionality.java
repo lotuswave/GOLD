@@ -27,7 +27,7 @@ public class Test_DGLD_OS_US_ST_071_Register_User_Add_to_Compare_Products_to_Wis
         Osprey_ReEu.AddtoCart_Wishlist();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+       // Osprey_ReEu.clickSubmitbutton_Shippingpage();
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
    
         

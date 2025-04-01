@@ -33,7 +33,7 @@ public class Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_fr
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 

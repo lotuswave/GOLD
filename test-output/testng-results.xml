@@ -2,16 +2,16 @@
 <testng-results total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-17T18:13:40Z" name="Default suite" finished-at="2025-03-17T18:15:13Z" duration-ms="92699">
+  <suite started-at="2025-04-01T14:05:09Z" name="Default suite" finished-at="2025-04-01T14:09:15Z" duration-ms="245838">
     <groups>
     </groups>
-    <test started-at="2025-03-17T18:13:40Z" name="Default test" finished-at="2025-03-17T18:15:13Z" duration-ms="92699">
-      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form">
-        <test-method is-config="true" signature="startTest()[pri:0, instance:TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form@2c42b421]" started-at="2025-03-17T23:43:40Z" name="startTest" finished-at="2025-03-17T23:43:59Z" duration-ms="18893" status="PASS">
+    <test started-at="2025-04-01T14:05:09Z" name="Default test" finished-at="2025-04-01T14:09:15Z" duration-ms="245838">
+      <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page">
+        <test-method is-config="true" signature="startTest()[pri:0, instance:TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page@54534abf]" started-at="2025-04-01T19:35:09Z" name="startTest" finished-at="2025-04-01T19:35:53Z" duration-ms="43901" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startTest -->
-        <test-method signature="Verifying_Contactus_form()[pri:0, instance:TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form@2c42b421]" started-at="2025-03-17T23:43:59Z" name="Verifying_Contactus_form" finished-at="2025-03-17T23:45:13Z" duration-ms="73790" status="FAIL">
+        <test-method signature="Verifying_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page_Funtionality()[pri:0, instance:TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page@54534abf]" started-at="2025-04-01T19:35:53Z" name="Verifying_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page_Funtionality" finished-at="2025-04-01T19:39:15Z" duration-ms="201906" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[null]]>
@@ -20,8 +20,8 @@
               <![CDATA[java.lang.AssertionError: null
 	at org.testng.Assert.fail(Assert.java:94)
 	at org.testng.Assert.fail(Assert.java:101)
-	at TestComponent.Osprey_EMEA.OspreyEMEA_HYVA.contactUsPage(OspreyEMEA_HYVA.java:13456)
-	at TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form.Verifying_Contactus_form(TEST_DGLD_OS_COMMON_059_Contactus_form.java:23)
+	at TestComponent.Osprey_US.GoldOspreyUSHyvaHelper.MyAccount_Subscription(GoldOspreyUSHyvaHelper.java:16553)
+	at TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page.Verifying_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page_Funtionality(Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page.java:24)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -51,12 +51,12 @@
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Verifying_Contactus_form -->
-        <test-method is-config="true" signature="clearBrowser()[pri:0, instance:TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form@2c42b421]" started-at="2025-03-17T23:45:13Z" name="clearBrowser" finished-at="2025-03-17T23:45:13Z" duration-ms="0" status="PASS">
+        </test-method> <!-- Verifying_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page_Funtionality -->
+        <test-method is-config="true" signature="clearBrowser()[pri:0, instance:TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page@54534abf]" started-at="2025-04-01T19:39:15Z" name="clearBrowser" finished-at="2025-04-01T19:39:15Z" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- clearBrowser -->
-      </class> <!-- TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form -->
+      </class> <!-- TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -3,13 +3,13 @@
 <suite parallel="none" name="Failed suite [Default suite]">
   <test parallel="none" name="Default test(failed)">
     <classes>
-      <class name="TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form">
+      <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page">
         <methods>
           <include name="startTest"/>
+          <include name="Verifying_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page_Funtionality"/>
           <include name="clearBrowser"/>
-          <include name="Verifying_Contactus_form"/>
         </methods>
-      </class> <!-- TestExecute.Osprey_EMEA.regressionTestcase.TEST_DGLD_OS_COMMON_059_Contactus_form -->
+      </class> <!-- TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_from_My_Account_Page -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
