@@ -15,7 +15,7 @@ public class Test_DGLD_OS_OSP_EU_001_Validate_ForgotPassword_From_SignIn_Page_Ac
 	OspreyEMEA_PRODHYVA Osprey_ReEu = new OspreyEMEA_PRODHYVA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_ForgotPassword_AccountCreation_aldiateMy_Account_Page () throws Exception {
+	public void Verifying_ForgotPassword_From_SignIn_Page_AccountCreation_Functionality_ValdiateMy_Account_Page () throws Exception {
 
 		try {
 			Osprey_ReEu.verifingHomePage();

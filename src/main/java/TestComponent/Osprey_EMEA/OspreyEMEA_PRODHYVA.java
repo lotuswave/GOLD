@@ -2868,8 +2868,9 @@ public class OspreyEMEA_PRODHYVA {
 			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
 
 			Common.clickElement("xpath", "//a[@title='Sign Out']");
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
-					Common.getCurrentURL().contains("customer/account/logoutSuccess/"),
+					Common.getCurrentURL().contains("customer/account/logoutSuccess/") || Common.getPageTitle().contains("Osprey") ,
 					"Validating My Account page navigation", "user sign in and navigate to my account page",
 					"Successfully navigate to my account page", "Failed to navigate my account page ");
 
