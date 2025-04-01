@@ -5,7 +5,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestComponent.Osprey_EMEA.OspreyEMEA_PRODHYVA;
 import TestLib.Common;
 import TestLib.Login;

@@ -2722,9 +2722,9 @@ public class OspreyEMEA_PRODHYVA {
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
 						data.get(dataSet).get("phone"));
 
-				int Size= Common.findElements("id", "shipping-save").size();
+				int Size= Common.findElements("xpath", "//button[@class='btn btn-primary w-full os:uppercase']").size();
 				if (Size>0) {
-					Common.clickElement("id", "shipping-save");
+					Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 				}
 				else {
 				System.out.println("New Registered User");	
@@ -9004,7 +9004,7 @@ return Number;
 			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
 					.replace("£", "").trim();
 			Float shippingvalue = Float.parseFloat(shipping);
-			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='value']").replace("£", "").trim();
+			String Tax = Common.getText("xpath", "//div[@class='item tax']//span[@class='label']").replace("£", "").trim();
 			Float Taxvalue = Float.parseFloat(Tax);
 			Thread.sleep(4000);
 
