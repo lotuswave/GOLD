@@ -12842,15 +12842,15 @@ public void Kustomer_Links(String Dataset) {
 	int i = 0;
 	try {
 		for (i = 0; i < Kustomerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("en_us")
 							|| Common.getCurrentURL().contains("contact/product-registration-form")
@@ -12920,15 +12920,15 @@ public void Footer_Links(String Dataset) {
 	try {
 		
 		for(j = 0; j < Termlinks.length; j++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'" + Termlinks[j] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Termlinks[j])
 							|| Common.getCurrentURL().contains("/blog")
@@ -12937,23 +12937,23 @@ public void Footer_Links(String Dataset) {
 					"After Clicking on" + Termlinks[j] + "it should navigate to the",
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
 					"Unable to Navigated to the" + Termlinks[j] + "Links");
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		}
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/blog")
@@ -12963,7 +12963,7 @@ public void Footer_Links(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			/*int responcecode = getpageresponce(Common.getCurrentURL());
 			System.out.println(responcecode);
 			String pagecode=Integer.toString(responcecode);
@@ -12995,10 +12995,10 @@ public void Footer_Links(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		
 		}
 		
@@ -14238,15 +14238,15 @@ public void Footer_Links_Resources(String Dataset) {
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/prodeal")
@@ -14292,10 +14292,10 @@ public void Footer_Links_Resources(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		
 		}
 		
@@ -14322,16 +14322,16 @@ public void Footer_Links_BrandTeam(String Dataset) {
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
-			Thread.sleep(4000);
-			Sync.waitElementPresent(30, "xpath",
+			Thread.sleep(2000);
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/athletes")
@@ -14342,7 +14342,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 		/*	int responcecode = getpageresponce(Common.getCurrentURL());
 			System.out.println(responcecode);
 			String pagecode=Integer.toString(responcecode);
@@ -14374,10 +14374,10 @@ public void Footer_Links_BrandTeam(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		
 		}
 		
@@ -14404,16 +14404,16 @@ public void Footer_validation(String Dataset) {
 	try {
 		for (i = 0; i < footerlinks.length; i++) {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			String Bread = Common.findElement("xpath", "//nav[contains(@aria-label,'Breadcrumb')]").getText();
 			String title = "";
 			if (Common.findElements("xpath", "//h1[contains(@class,'cms-clear')]").size() > 0) {
@@ -14434,7 +14434,7 @@ public void Footer_validation(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links"); 
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			if(Common.getPageTitle().contains("404"))
 			{
 				Assert.fail();
@@ -14445,8 +14445,8 @@ public void Footer_validation(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 
 		}
 	} catch (Exception | Error e) {
@@ -14459,7 +14459,6 @@ public void Footer_validation(String Dataset) {
 	}
 
 }
-
 
 
 public void Footer_Links_Repari_And_Replacement(String Dataset) {
@@ -14474,15 +14473,15 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 		click_singinButton();
 		Login_Account("Account");
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-			Thread.sleep(3000);
+			Sync.waitElementPresent(20, "xpath",
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
+			Thread.sleep(2000);
 			Common.findElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
-					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
+					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("form"),
@@ -14491,28 +14490,7 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
-			Thread.sleep(4000);
-		/*	int responcecode = getpageresponce(Common.getCurrentURL());
-			System.out.println(responcecode);
-			String pagecode=Integer.toString(responcecode);
-			System.out.println(pagecode);
-			
-			if(pagecode.equals("200"))
-			{
-				
-				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
-				  ,"Page configured Properly with any issues"
-				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
-				 }
-			else
-			{
-				i++;
-				
-				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
-						"Page configured Properly with any issues", "Unable to get the proper response from the page",
-						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				AssertJUnit.fail();
-			}*/
+			Thread.sleep(2000);
 			if(Common.getPageTitle().contains("404"))
 			{
 				Assert.fail();
@@ -14523,11 +14501,10 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
-		
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		
 		}
 		
@@ -14542,6 +14519,7 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 	}
 
 }
+
 public void image_ShopAll(String Dataset) throws Exception {
 	// TODO Auto-generated method stub
 	//Prod

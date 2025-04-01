@@ -3412,41 +3412,40 @@ public void CLick_Usemylocation() {
 
 
 public void Validate_AvailableRetailers() {
-		// TODO Auto-generated method stub
-		try {
-			Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
+	// TODO Auto-generated method stub
+	try {
+		Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
 
-	//		Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
-			int retailers = Common.findElements("xpath", "//div[contains(@class,'store dl-store-list-tile')]").size();
-			if (retailers > 0) {
-				Common.assertionCheckwithReport(retailers > 0, "To validate the available retailers",
-						"Retailers should be available", "Retailers are available", "Failed to display the retailers");
-			} else {
-				Sync.waitElementVisible("xpath", "//input[@name='location']");
-				Common.textBoxInput("xpath", "//input[@name='location']", "CT 06473");
-				Common.actionsKeyPress(Keys.ENTER);
-				Sync.waitElementVisible(30, "xpath", "//h3[@class='section-title dl-store-name']");
-				int locationRetailers = Common.findElements("xpath", "//h3[@class='section-title dl-store-name']")
-						.size();
+		Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
+		int retailers = Common.findElements("xpath", "//div[contains(@class,'store dl-store-list-tile')]").size();
+		if (retailers > 0) {
+			Common.assertionCheckwithReport(retailers > 0, "To validate the available retailers",
+					"Retailers should be available", "Retailers are available", "Failed to display the retailers");
+		} else {
+			Sync.waitElementVisible("xpath", "//input[@name='location']");
+			Common.textBoxInput("xpath", "//input[@name='location']", "CT 06473");
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitElementVisible(30, "xpath", "//h3[@class='section-title dl-store-name']");
+			int locationRetailers = Common.findElements("xpath", "//h3[@class='section-title dl-store-name']")
+					.size();
 
-				Common.assertionCheckwithReport(locationRetailers > 0,
-						"To validate the available retailers for new location",
-						"Retailers should be available for new location", "Retailers are available for new location",
-						"Failed to display the retailers for new location");
+			Common.assertionCheckwithReport(locationRetailers > 0,
+					"To validate the available retailers for new location",
+					"Retailers should be available for new location", "Retailers are available for new location",
+					"Failed to display the retailers for new location");
 
-			}
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating available retailers page",
-					"retailers should be visible for the given location",
-					"Failed to display retailers for the given location",
-					Common.getscreenShotPathforReport("faield to display the available retailers"));
-			Assert.fail();
 		}
 
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating available retailers page",
+				"retailers should be visible for the given location",
+				"Failed to display retailers for the given location",
+				Common.getscreenShotPathforReport("faield to display the available retailers"));
+		Assert.fail();
 	}
 
+}
 
 public void Validate_retailerlocations() {
 	try {
@@ -3463,12 +3462,12 @@ public void Validate_retailerlocations() {
 		System.out.println(Storename);
 		Common.clickElement("xpath", "//a[contains(@class,'tab-locations')]");
 
-		int storecount = Common.findElements("xpath", "//a[contains(@class,'conv-section-store')]//h3").size();
-		for (int i = 1; i <= 10; i++) {
+		int storecount = Common.findElements("xpath", "//h2[@class='store-info-title dl-store-name-inner']").size();
+		for (int i = 1; i <= storecount; i++) {
 			Thread.sleep(3000);
 			String relatedstores = Common
-					.findElement("xpath", "(//a[contains(@class,'conv-section-store')]//h3)[" + i + "]")
-					.getText();
+					.findElement("xpath", "(//h2[@class='store-info-title dl-store-name-inner'])[" + i + "]")
+					.getText().toUpperCase();
 			System.out.println(relatedstores);
 			Common.assertionCheckwithReport(relatedstores.contains(Storename),
 					"To validate the retailer stores displayed ", "Retailer stores should be displayed",
@@ -3490,7 +3489,6 @@ public void Validate_retailerlocations() {
 	}
 
 }
-
 	public void writeReviews() {
 		// TODO Auto-generated method stub
 		try {
@@ -9918,7 +9916,7 @@ public void Continue_Shopping() {
         try {
 				Common.clickElement("xpath", "(//a[contains(@class,'action tocart primary a-btn a-btn')])[1]");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(3000);
         }
         catch (Exception | Error e)  {
 				
@@ -13557,15 +13555,15 @@ public void Kustomer_Links(String Dataset) {
 	int i = 0;
 	try {
 		for (i = 0; i < Kustomerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + Kustomerlinks[i] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("en_us")
 							|| Common.getCurrentURL().contains("contact/product-registration-form")
@@ -13614,15 +13612,15 @@ public void Footer_Links(String Dataset) {
 	try {
 		
 		for(j = 0; j < Termlinks.length; j++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'"+ Termlinks[j] +"')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(text(),'" + Termlinks[j] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Termlinks[j])
 							|| Common.getCurrentURL().contains("/blog")
@@ -13634,20 +13632,20 @@ public void Footer_Links(String Dataset) {
 			Thread.sleep(4000);
 			Common.navigateBack();
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		}
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/blog")
@@ -13657,7 +13655,7 @@ public void Footer_Links(String Dataset) {
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			int responcecode = getpageresponce(Common.getCurrentURL());
 			System.out.println(responcecode);
 			String pagecode=Integer.toString(responcecode);
@@ -13680,11 +13678,11 @@ public void Footer_Links(String Dataset) {
 				AssertJUnit.fail();
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
-		
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
+//		
 		}
 		
 
@@ -13698,6 +13696,7 @@ public void Footer_Links(String Dataset) {
 	}
 
 }
+
 
 
 public void warrenty_Replacement() {
@@ -15044,15 +15043,15 @@ public void Footer_Links_Resources(String Dataset) {
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/prodeal")
@@ -15077,14 +15076,11 @@ public void Footer_Links_Resources(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
-		
-		}
-		
-
+//			Sync.waitPageLoad();
+//			Thread.sleep(1000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);	
+		}	
 	} catch (Exception | Error e) {
 		e.printStackTrace();
 		ExtenantReportUtils.addFailedLog("validating the  links navigation from footer Links",
@@ -15095,6 +15091,8 @@ public void Footer_Links_Resources(String Dataset) {
 	}
 
 }
+
+
 
 
 public void Footer_Links_BrandTeam(String Dataset) {
@@ -15107,16 +15105,16 @@ public void Footer_Links_BrandTeam(String Dataset) {
 	try {
 		
 		for (i = 0; i < footerlinks.length; i++) {
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[@title='" + footerlinks[i] + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("/athletes")
@@ -15128,7 +15126,7 @@ public void Footer_Links_BrandTeam(String Dataset) {
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			if(Common.getPageTitle().contains("404"))
 			{
 				Assert.fail();
@@ -15139,11 +15137,11 @@ public void Footer_Links_BrandTeam(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
-		
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
+//		
 		}
 		
 
@@ -15157,7 +15155,6 @@ public void Footer_Links_BrandTeam(String Dataset) {
 	}
 
 }
-
 
 public void Footer_validation(String Dataset) {
 	// TODO Auto-generated method stub
@@ -15240,15 +15237,15 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 		click_singinButton();
 		Login_Account("Account");
 		for (i = 0; i < footerlinks.length; i++) {
-			Sync.waitElementPresent(30, "xpath",
+			Sync.waitElementPresent(20, "xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.findElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Common.clickElement("xpath",
 					"//div[contains(@class,'footer')]//a[contains(@title,'" + footerlinks[i] + "')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i])
 							|| Common.getCurrentURL().contains("form"),
@@ -15257,7 +15254,7 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			if(Common.getPageTitle().contains("404"))
 			{
 				Assert.fail();
@@ -15268,10 +15265,10 @@ public void Footer_Links_Repari_And_Replacement(String Dataset) {
 				
 			}
 			Common.navigateBack();
-			Sync.waitPageLoad();
-			Thread.sleep(3000);
-			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-			System.out.println(size);
+//			Sync.waitPageLoad();
+//			Thread.sleep(3000);
+//			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+//			System.out.println(size);
 		
 		}
 		
