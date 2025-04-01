@@ -3956,7 +3956,7 @@ public class OspreyEMEA_HYVA {
 						Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
 						Thread.sleep(5000);				
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-						Common.javascriptclickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Thread.sleep(3000);
 						if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0) {
 							
@@ -4025,8 +4025,8 @@ public class OspreyEMEA_HYVA {
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+					Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 					Thread.sleep(8000);
 					if (Common.getCurrentURL().contains("/checkout")) {
 						Sync.waitPageLoad();
