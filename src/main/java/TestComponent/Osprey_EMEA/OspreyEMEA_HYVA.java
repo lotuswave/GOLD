@@ -6745,12 +6745,12 @@ return Number;
 			String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
 					.getAttribute("data-price-amount");
 			//if (price.equals(Dataset)) {
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				Common.clickElement("xpath", "//a[@title='Remove This Item']");
 				//Common.maximizeImplicitWait();
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				Common.alerts("Cancel");
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				Common.clickElement("xpath", "//a[@title='Remove This Item']");
 				//Common.implicitWait();
 				Common.alerts("Ok");
@@ -6787,9 +6787,15 @@ return Number;
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
-				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
-				Common.javascriptclickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Common.scrollIntoView("xpath", "//label[@for='payment-method-paypal_express']");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//label[@for='payment-method-paypal_express']");
+				Thread.sleep(6000);
+				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Thread.sleep(4000);
+				Common.switchFrames("xpath", "//iframe[@class='component-frame visible']");
+				Common.clickElement("xpath", "//div[@id='buttons-container']//div[@aria-label='PayPal']");
+				Common.switchToDefault();
 			}
             
 			
