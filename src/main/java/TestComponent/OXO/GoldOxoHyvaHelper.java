@@ -8237,10 +8237,12 @@ catch(Exception | Error e)
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//span[text()='Baby & Toddler']");
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				Sync.waitElementPresent("xpath",
 						"//a//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -11513,10 +11515,12 @@ public void header_1_Percent_Planet() {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(2000);
 				Common.clickElement("xpath", "//span[text()='Camp & Grill']");
-				Thread.sleep(3000);
+				
 				Sync.waitElementPresent("xpath",
 						"//li//a//span[text()='" + Links[i] + "']");
+				Thread.sleep(2000);
 				Common.clickElement("xpath",
 						"//li//a//span[text()='" + Links[i] + "']");
 				Sync.waitPageLoad();
@@ -12184,10 +12188,12 @@ public void outofstock_subcription(String Dataset) {
 				for (i = 0; i < kitchenLinks.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+					Thread.sleep(3000);
 					Common.clickElement("xpath", "//span[text()='Kitchenware']");
 					Thread.sleep(4000);
 					Sync.waitElementPresent("xpath",
 						"//a//span[contains(text(),'" + kitchenLinks[i] + "')]");
+					Thread.sleep(3000);
 //					Common.clickElement("xpath", "//span[contains(text(),'" +Links[i]+"')]//following::ul//span[contains(text(),' Prep & Go Containers')]");
 					Common.clickElement("xpath",
 						"//span[contains(text(),'" + kitchenLinks[i] + "')]");
@@ -12307,6 +12313,7 @@ public void header_kichenware_foodcontainers(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[text()='Kitchenware']");
 				Common.clickElement("xpath", "//span[text()='Kitchenware']");
 				Thread.sleep(2000);
@@ -12315,6 +12322,7 @@ public void header_kichenware_foodcontainers(String Dataset) {
 				// Sync.waitElementPresent("xpath", "//li[contains(@class,'level2
 				// ')]//a//span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[contains(text(),'Food Containers')]//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -12354,6 +12362,7 @@ public void header_kichenware_Utensils(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Kitchenware']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'Utensils')]");
@@ -12362,6 +12371,7 @@ public void header_kichenware_Utensils(String Dataset) {
 						"//a//span[text()='Utensils']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[text()='Utensils']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -12403,6 +12413,7 @@ public void header_kichenware_Cultery(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Kitchenware']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'Cutlery')]");
@@ -12411,6 +12422,7 @@ public void header_kichenware_Cultery(String Dataset) {
 						"//a//span[text()='Cutlery']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[text()='Cutlery']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -12451,6 +12463,7 @@ public void header_kichenware_CookingAndBaking(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Kitchenware']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Cooking & Baking')]");
@@ -12460,6 +12473,7 @@ public void header_kichenware_CookingAndBaking(String Dataset) {
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//li//a//span[contains(text(),'Cooking & Baking')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
@@ -12505,12 +12519,13 @@ public void header_kichenware_ToolsAndGadgets(String Dataset) {
 				Common.clickElement("xpath", "//span[text()='Kitchenware']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Tools & Gadgets')]");
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//li//a//span[contains(text(),'Tools & Gadgets')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
@@ -12554,9 +12569,11 @@ if(Common.getCurrentURL().contains("www.oxo.com")) {
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 			Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='Kitchenware']");
 //			Sync.waitElementPresent("xpath", "//a//span[text()='" + Links[i] + "']");
 			Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']//following::ul//span[contains(text(),'Shop All')]");
 			//a//span[text()='Utensils']//following::ul//span[contains(text(),'Shop All')]
 			Sync.waitPageLoad();
@@ -12587,9 +12604,11 @@ if(Common.getCurrentURL().contains("www.oxo.com")) {
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 			Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[text()='Kitchenware']");
 //			Sync.waitElementPresent("xpath", "//a//span[text()='" + Links[i] + "']");
 			Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']//following::ul//span[contains(text(),'Shop All')]");
 			//a//span[text()='Utensils']//following::ul//span[contains(text(),'Shop All')]
 			Sync.waitPageLoad();
@@ -12675,6 +12694,7 @@ public void header_CoffeeAndBeverage_Coffee_Tea(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 //					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[contains(text(),'Coffee & Tea')]");
@@ -12684,6 +12704,7 @@ public void header_CoffeeAndBeverage_Coffee_Tea(String Dataset) {
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//li//a//span[contains(text(),'Coffee & Tea')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
@@ -12728,6 +12749,7 @@ public void header_CoffeeAndBeverage_Barware(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 //					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Barware']");
@@ -12737,6 +12759,7 @@ public void header_CoffeeAndBeverage_Barware(String Dataset) {
 								+ Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//li//a//span[contains(text(),'Barware')]//following::ul//span[contains(text(),'"
 								+ Links[i] + "')]");
@@ -12781,8 +12804,10 @@ public void header_CoffeeAndBeverage_ShopAll(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Coffee & Beverage']");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");//span[contains(text(),'Coffee & Tea')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']//following::ul//span[contains(text(),'Shop All')]");
@@ -12823,11 +12848,13 @@ public void header_CoffeeAndBeverage_ShopAll(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//li//a//span[text()='" + Links[i] + "']");
 				//		"//li[contains(@class,'level2 ')]//a//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//li//a//span[text()='" + Links[i] + "']");
 				Sync.waitPageLoad();
@@ -12873,6 +12900,7 @@ public void header_CleaningAndOrganization_Kitchen(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
 				Thread.sleep(2000);
 				Common.clickElement("xpath", "//a[@title='Kitchen']//span[text()='Kitchen']");
@@ -12881,6 +12909,7 @@ public void header_CleaningAndOrganization_Kitchen(String Dataset) {
 						"//a//span[text()='Kitchen']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[text()='Kitchen']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -12912,6 +12941,7 @@ public void header_CleaningAndOrganization_Bathroom(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a[@title='Bathroom']//span[text()='Bathroom']");
@@ -12920,6 +12950,7 @@ public void header_CleaningAndOrganization_Bathroom(String Dataset) {
 						"//a//span[text()='Bathroom']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[text()='Bathroom']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -12951,6 +12982,7 @@ public void header_CleaningAndOrganization_HomeAndOffice(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a[@title='Home & Office']//span[text()='Home & Office']");
@@ -12959,6 +12991,7 @@ public void header_CleaningAndOrganization_HomeAndOffice(String Dataset) {
 						"//a//span[text()='Home & Office']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				// span[contains(text(),'Food
 				// Containers')]//following::ul//span[contains(text(),'" +Links[i]+"')]
+				Thread.sleep(3000);
 				Common.clickElement("xpath",
 						"//a//span[text()='Home & Office']//following::ul//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
@@ -12991,9 +13024,12 @@ public void header_CleaningAndOrganization_ShopAll(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
 				Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[text()='Cleaning & Organization']");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a//span[text()='" + Links[i] + "']//following::ul//span[contains(text(),'Shop All')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -13075,8 +13111,10 @@ public void header_WeAre_Oxo(String Dataset) {
 			for (i = 0; i < header.length; i++) {
 				Sync.waitPageLoad();
 				Common.clickElement("xpath", "//span[contains(text(),' We Are OXO')]");
+				Thread.sleep(2000);
 				Sync.waitElementPresent("xpath",
 						"//div[contains(@class,'megamenu')]//span[contains(text(),'" + header[i] + "')]");
+				Thread.sleep(2000);
 				Common.clickElement("xpath",
 						"//div[contains(@class,'megamenu')]//span[contains(text(),'" + header[i] + "')]");
 				header[i].toLowerCase();
@@ -13108,6 +13146,7 @@ public void header_WeAre_Oxo(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//span[contains(text(),' We Are OXO')]");
+			Thread.sleep(2000);
 			Common.clickElement("xpath", "//span[text()='FAQ']");
 			Sync.waitPageLoad();
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Knowledge Base")
@@ -13130,6 +13169,7 @@ public void header_WeAre_Oxo(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			Common.clickElement("xpath", "//span[contains(text(),' We Are OXO')]");
+			Thread.sleep(2000);
 			Common.clickElement("xpath", "//span[text()='Corporate Responsibility']");
 //				  Common.clickElement("xpath","//a[contains(@aria-label,'Corporate Responsibility')]");
 			Sync.waitPageLoad();
