@@ -11,7 +11,7 @@ import TestLib.Login;
 
 public class TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscription {
 	String datafile = "Drybar_US//GoldDrybarTestData.xlsx";
-	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"Outofstock");
+	GoldDrybarusHelper2 Drybar = new GoldDrybarusHelper2(datafile,"DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Validate_Product_Back_in_Stock_Subscription () throws Exception {
@@ -21,10 +21,19 @@ public class TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscript
 			Drybar.Verify_Homepage();
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
-			Drybar.search_product("Outofstock Product"); 
-			String amount=Drybar.reg_outofstock_subcription("Outofstock Product");
-			Drybar.My_order_subcribtion("Outofstock Product");
+			
+			if(Common.getCurrentURL().contains("preprod")) {
+			Drybar.search_product("Outof Stock Product"); 
+			String amount=Drybar.reg_outofstock_subcription("Outof Stock Product");
+			Drybar.My_order_subcribtion("Outof Stock Product");
 		    Drybar.remove_outofstock_subcribtion(amount);
+			}
+			else {
+				Drybar.search_product("Prod Outof Stock Product"); 
+				String amount=Drybar.reg_outofstock_subcription("Prod Outof Stock Product");
+				Drybar.My_order_subcribtion("Prod Outof Stock Product");
+			    Drybar.remove_outofstock_subcribtion(amount);
+			}
 			
 			
 
@@ -49,5 +58,6 @@ public class TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscript
         
 
 	}
+
 
 }

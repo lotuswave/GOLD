@@ -23,7 +23,7 @@ public class TEST_DGLD_DB_US_ST_147_Validation_Shipping_Address_form_for_GuestUs
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
-			Drybar.addDeliveryAddress_Gustuser("Invalid details");
+			Drybar.addDeliveryAddress_Guestuser("Invalid details");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.validatingErrormessageShippingpage_negative();

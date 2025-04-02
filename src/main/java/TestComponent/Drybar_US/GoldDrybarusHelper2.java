@@ -6178,8 +6178,8 @@ public void FUll_Payment(String dataSet) {
     	}
         public String reg_outofstock_subcription(String Dataset) {
     		// TODO Auto-generated method stub
-    		String products = data.get(Dataset).get("oss Product");
-    		String prod = data.get(Dataset).get("prod product");
+    		String products = data.get(Dataset).get("Products");
+    		//String prod = data.get(Dataset).get("products1");
     		String productsize = data.get(Dataset).get("Size");
     		String symbol= data.get(Dataset).get("Symbol");
     		System.out.println(products);
@@ -6207,7 +6207,7 @@ public void FUll_Payment(String dataSet) {
     				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
     				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
     				Thread.sleep(4000);
-    				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='normalPrice'])[2]").getText().replace(symbol,"").replace(".00", "");
+    				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='normalPrice'])").getText().replace(symbol,"").replace(".00", "");
     				Common.clickElement("xpath", "//img[@alt='" + products + "']");
     				Sync.waitPageLoad();
     				Thread.sleep(3000);
@@ -6274,26 +6274,32 @@ public void FUll_Payment(String dataSet) {
     			
     			else {
     				
-    				Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
+    				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+    				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+    				Thread.sleep(4000);
+    				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='normalPrice'])").getText().replace(symbol,"").replace(".00", "");
+    				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+    				Sync.waitPageLoad();
+    				
+    			/*	Sync.waitElementPresent(30, "xpath", "//img[@class='m-product-card__image product-image-photo']");
     				String productprice = Common.findElement("xpath", "//span[@class='price-wrapper is-special-price']")
     						.getAttribute("data-price-amount");
     				Common.clickElement("xpath", "//img[@class='m-product-card__image product-image-photo']");
-    				Sync.waitPageLoad();
+    				Sync.waitPageLoad();*/
     				Thread.sleep(3000);
     				String PLPprice = Common
     						.findElement("xpath",
-    								"//div[@class='m-product-overview__prices']//span[@class='price-wrapper is-special-price']")
-    						.getAttribute("data-price-amount");
-    				String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
+    								"(//span[@x-html='getFormattedFinalPrice()'])[1]").getText().replace(symbol,"").replace(".00", "");
+    				
+    				String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
     				Common.assertionCheckwithReport(
-    						name.contains(products) && productprice.equals(PLPprice)
-    								|| name.contains(prod) && productprice.equals(PLPprice),
+    						name.contains(products) && productprice.equals(PLPprice),
     						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
     						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
     				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
     				Sync.waitPageLoad();
     				Thread.sleep(4000);
-    				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+    				String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
     				System.out.println(newsubcribe);
     				Common.assertionCheckwithReport(
     						newsubcribe.contains("Alert subscription has been saved.")
@@ -6306,7 +6312,7 @@ public void FUll_Payment(String dataSet) {
     				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
     				Sync.waitPageLoad();
     				Thread.sleep(4000);
-    				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+    				String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
     				System.out.println(oldsubcribe);
     				Common.assertionCheckwithReport(
     						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
@@ -6314,8 +6320,7 @@ public void FUll_Payment(String dataSet) {
     						"after click on subcribe button message should be appear",
     						"Sucessfully message has been displayed when we click on the subcribe button ",
     						"Failed to display the message after subcribtion");
-    				price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
-    						.getAttribute("data-price-amount");
+    				//price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']").getAttribute("data-price-amount");
     			}
 
     		}
@@ -6331,9 +6336,10 @@ public void FUll_Payment(String dataSet) {
     		return price;
 
     	}
+
         public void My_order_subcribtion(String Dataset) {
     		// TODO Auto-generated method stub
-    		String products = data.get(Dataset).get("oss Product");
+    		String products = data.get(Dataset).get("Products");
     		System.out.println(products);
     		String prod = data.get(Dataset).get("prod product");
     		System.out.println(prod);
@@ -7951,15 +7957,15 @@ public void FUll_Payment(String dataSet) {
 	    			else
 	    			{
 	    				Thread.sleep(4000);
-	    				Common.javascriptclickElement("xpath", "//button[@title='Share Wish List']");
+	    				Common.javascriptclickElement("xpath", "//div[@class='lg:ml-3']//button[@type='button']");
 	    				Sync.waitPageLoad();
 	    				Thread.sleep(4000);
 	    				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 	    				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 	    				Thread.sleep(4000);
-	    				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
+	    				Common.javascriptclickElement("xpath", "//button[contains(text(),'Share Wish List')]");
 	    				Thread.sleep(4000);
-	    				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+	    				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 	    				System.out.println(message1);
 	    				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
 	    						"validating the shared whishlist functionality",
@@ -7967,6 +7973,9 @@ public void FUll_Payment(String dataSet) {
 	    						"Sucessfully message has been displayed for whishlist",
 	    						"failed to display the message for whishlist");
 	    			}
+
+
+
 	    		}
 	    		catch(Exception | Error e)
 	    		{
