@@ -13316,13 +13316,15 @@ public void header_WeAre_Oxo(String Dataset) {
 
 	public String Create_Account_for_Guest_my_fav(String Dataset) {
 		// TODO Auto-generated method stub
-		String email = "";
+		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
+			
+
 	        Common.clickElement("xpath", "//a[text()='Create an Account']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
+			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",data.get(Dataset).get("Confirm Password"));
 			Common.clickElement("xpath", "//span[text()='Sign Up']");
@@ -13345,8 +13347,8 @@ public void header_WeAre_Oxo(String Dataset) {
 			AssertJUnit.fail();
 		}
 		return email;
+	
 	}
-
 
 	public void Giftcard_Add_from_My_fav(String Dataset) {
 		// TODO Auto-generated method stub
