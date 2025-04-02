@@ -400,9 +400,9 @@ public class GoldOxoHyvaHelper
 				Thread.sleep(2000);
 			    Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			} 
-//			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
-//			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
-//			}
+			else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
+			    Common.javascriptclickElement("xpath", "//img[@alt='" + product1 + "']");
+			}
 			
 			else {
 			    Common.scrollIntoView("xpath", "//button[text()='Load More']");
