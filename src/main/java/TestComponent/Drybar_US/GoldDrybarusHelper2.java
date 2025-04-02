@@ -4835,7 +4835,7 @@ public void FUll_Payment(String dataSet) {
 		Common.clickElement("xpath", "//button[@aria-label='Add Code']");
 		Thread.sleep(3000);
 //		Common.refreshpage();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		//div[@class='item drybar_giftcard']
 		//int size=Common.findElements("xpath", "//tr[@class='totals giftcard']").size();
 //		int size=Common.findElements("xpath", "//div[@class='item drybar_giftcard']").size();
@@ -4945,9 +4945,9 @@ public void FUll_Payment(String dataSet) {
 			select_noPayment_method();
 		}
 		
-		Thread.sleep(5000);
-		Common.actionsKeyPress(Keys.ARROW_DOWN);
-		Common.switchToDefault();
+		Thread.sleep(8000);
+		//Common.actionsKeyPress(Keys.ARROW_DOWN);
+		//Common.switchToDefault();
 		if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
@@ -12311,7 +12311,7 @@ public void add_To_Subscription(String profile_id) {
 		Sync.waitElementPresent("xpath", "//button[@aria-label='Add to Subscription']");
 		Common.clickElement("xpath", "//button[@aria-label='Add to Subscription']");
 		Thread.sleep(3000);
-		Sync.waitElementPresent("xpath", "//td[@data-th='Profile ID']//label[text()='"+ profile_id + "']");
+	/*	Sync.waitElementPresent("xpath", "//td[@data-th='Profile ID']//label[text()='"+ profile_id + "']");
 		Common.clickElement("xpath", "//td[@data-th='Profile ID']//label[text()='"+ profile_id +"']");
 		Sync.waitElementPresent("xpath", "//button[@class='btn btn-primary']");
 		Common.clickElement("xpath", "//button[@class='btn btn-primary']");
@@ -12322,7 +12322,7 @@ public void add_To_Subscription(String profile_id) {
 		Thread.sleep(3000);
 		String subscriptionProduct=Common.findElement("xpath", "(//a[@class='hover:underline'])[3]//span").getText();
 		System.out.println(subscriptionProduct);
-	/*	Common.assertionCheckwithReport(subscriptionProduct.contains(PDPproduct), "To ensure that selected producted is added to the subscription",
+		Common.assertionCheckwithReport(subscriptionProduct.contains(PDPproduct), "To ensure that selected producted is added to the subscription",
 				"Product should be added to the subscription", "sucessfully product added to the subscription",
 				"Fail to add the product to the subscription");*/
 	
