@@ -14,7 +14,7 @@ public class Test_DGLD_OXO_ST_099_Guest_User_Checkout_with_Express_Paypal {
 	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile,"DataSet");
 	
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Guest_User_Checkout_with_Paypal() throws Exception {
+	public void Validate_Guest_User_Checkout_with_Express_Paypal() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();

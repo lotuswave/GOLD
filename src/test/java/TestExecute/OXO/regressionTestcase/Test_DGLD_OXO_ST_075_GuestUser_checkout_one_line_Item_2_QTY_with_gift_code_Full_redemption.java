@@ -14,7 +14,7 @@ public class Test_DGLD_OXO_ST_075_GuestUser_checkout_one_line_Item_2_QTY_with_gi
 	String datafile = "OXO//GoldOxoTestData.xlsx";	
 	GoldOxoHyvaHelper Oxo=new GoldOxoHyvaHelper(datafile,"DataSet");
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Register_User_Checkout_Funtionality_Visa_Card() throws Exception {
+	public void Guest_User_Checkout_Full_Redemption() throws Exception {
 		
 		
 

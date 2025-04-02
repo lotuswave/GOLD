@@ -14,7 +14,7 @@ public class Test_DGLD_OXO_ST_061_Forgot_password_SignIn_Page {
 	GoldOxoHyvaHelper Oxo = new GoldOxoHyvaHelper(datafile, "DataSet");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validate_Create_Account() throws Exception {
+	public void Validate_Forgot_Password() throws Exception {
 
 		try {
 			Oxo.verifingHomePage();
