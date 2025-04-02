@@ -785,6 +785,7 @@ public class OspreyEMEA_PRODHYVA {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
+				Thread.sleep(4000);
 				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
@@ -965,15 +966,16 @@ public class OspreyEMEA_PRODHYVA {
 		  
 		if(Common.getCurrentURL().contains("www.osprey.com/gb/"))
 		{
-			String names = data.get(Dataset).get("Featureds");
+			String names = data.get(Dataset).get("featureds");
 			String[] Links = names.split(",");
-			String name = data.get(Dataset).get("Featureds").toUpperCase();
+			String name = data.get(Dataset).get("featureds").toUpperCase();
 			String[] Link = name.split(",");
 			int i = 0;
 			try {
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+					Thread.sleep(3000);
 					Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
@@ -14647,15 +14649,16 @@ public void header_sale() throws Exception {
 public void header_Explore(String Dataset) {
 	// TODO Auto-generated method stub
 	
-	String names = data.get(Dataset).get("Osprey Explore");
+	String names = data.get(Dataset).get("Osprey explore");
 	String[] Links = names.split(",");
-	String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
+	String name = data.get(Dataset).get("Osprey explore").toUpperCase();
 	String[] Link = name.split(",");
 	String Explore=data.get(Dataset).get("Explore CTA");
 	int i = 0;
 	try {
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
 
 			Thread.sleep(3000);
@@ -14672,7 +14675,7 @@ public void header_Explore(String Dataset) {
 			
 			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
 					||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("About Us") 
-					|| Common.getCurrentURL().contains("osprey-50") || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("Sizing & Fit"),
+					|| Common.getPageTitle().contains("Packfinder") || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("Sizing & Fit"),
 					"verifying the header link " + Links[i] + "Under Explore",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -15365,6 +15368,7 @@ public void header_Shopby_Litres(String Dataset) {
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[contains(text(),'Shop by Litres')]");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
