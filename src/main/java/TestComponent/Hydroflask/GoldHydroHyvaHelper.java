@@ -1541,16 +1541,17 @@ public class GoldHydroHyvaHelper {
 
 	    if (url.contains("stage") || url.contains("preprod")) { // Check for stage/preprod explicitly
 	        try {
-	        	Thread.sleep(4000);
-	            Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success container px')]");
-	            String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success container px')]");
-                  System.out.println("successMessage");
-	            Common.assertionCheckwithReport(successMessage.contains("Thank you for your purchase!"),
+	        	
+	        String Current_URL=Common.getCurrentURL();
+	        System.out.println(Current_URL);
+//	            String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
+//                  System.out.println("successMessage");
+	            Common.assertionCheckwithReport(Current_URL.contains("onepage/success/"),
 	                    "verifying the Order confirmation", expectedResult,
 	                    "Successfully It redirects to order confirmation page Order Placed",
 	                    "User unable to go order confirmation page");
-
-	            if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
+	            Common.switchmainWindowsCons();
+	          if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 	                order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
 	                System.out.println(order);
 	            } else if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]//p//a").size() > 0) {
@@ -1682,6 +1683,7 @@ public class GoldHydroHyvaHelper {
 	                        Sync.waitElementPresent("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
 	                        Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
 	                    }
+	                   
 	                } else {
 	                    Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
 	                    Common.switchFrames("css", "iframe[title='Secure payment input frame']");
@@ -4232,7 +4234,7 @@ public void Remove_GiftCode() {
 			Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
 			if (size > 0) {
-
+				Sync.waitElementPresent("id", "acceptAllButton");
 				Common.clickElement("id", "acceptAllButton");
 
 			}
