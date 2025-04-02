@@ -1353,7 +1353,14 @@ public class GoldDrybarusHelper2 {
 				Common.switchToDefault();
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+	             	Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+	             	 Thread.sleep(4000);  
+		  			if(Common.findElements("xpath","//div[@x-ref='address-confirmation-modal-shipping']").size() > 0)
+		  				{
+		  					Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered')])[1]");
+		  					Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered')])[1]");
+		  				 }
+		            
 	             	   Thread.sleep(40000);
 	             	  if(Common.getCurrentURL().contains("/checkout"))
 	              	   {
@@ -1774,7 +1781,8 @@ public class GoldDrybarusHelper2 {
 			}
 			else
 			{
-			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(Symbol,
+			Thread.sleep(4000);
+			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace("$",
 					"");
 			System.out.println(Subtotal);
 			Float subtotalvalue = Float.parseFloat(Subtotal);
