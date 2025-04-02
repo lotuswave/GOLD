@@ -835,7 +835,7 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		
 		try {
-			
+			Thread.sleep(5000);
 			String Expedited = Common.getText("xpath", "//span[contains(text(),'Expedited')]");
 			System.out.println(Expedited);
 			String Express = Common.getText("xpath", "(//span[contains(text(),'Express')])[2]");
