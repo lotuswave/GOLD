@@ -5845,8 +5845,7 @@ public void FUll_Payment(String dataSet) {
 //					Sync.waitElementPresent("xpath", "//span[text()='Pay with']");
 					Common.clickElement("xpath", "//span[text()='Pay with']");
 					Sync.waitPageLoad();
-					
-						
+											
 					
 				}
 				else if(Common.findElement("xpath", "//h1[@id='summary-title']").getText().contains("Confirm and pay"))
