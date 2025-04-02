@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-OspreyUS Preprod API Suite">
+
+<test name="Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_KlarnaPayment" testid="DQA-3275" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
+<classes>
+<class name="TestExecute.API.Osprey_US.Test_DGLD_API_OSPUS_001_GuestUser_CheckoutOneLine_ItemQtyTwo_With_KlarnaPayment" />
+</classes>
+</test>
+
+<test name="Test_DGLD_API_OSPUS_002_RegisterUser_Checkout_SimpleLineItem_GiftCard_OneQtyEach_With_Paypal
+" testid="DQA-3275" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
+<classes>
+<class name="TestExecute.API.Osprey_US.Test_DGLD_API_OSPUS_002_RegisterUser_Checkout_SimpleLineItem_GiftCard_OneQtyEach_With_Paypal" />
+</classes>
+</test>
+
+<test name="Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_With_CC" testid="DQA-3275" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
+<classes>
+<class name="TestExecute.API.Osprey_US.Test_DGLD_API_OSPUS_003_GuestUser_Checkout_MultipleItems_QtyTwo_With_CC" />
+</classes>
+</test>
+
+<test name="Test_DGLD_API_OSPUS_004_GuestUser_Checkout_OneLineItem_QtyTwo_With_MultipleGiftCode_FullRedemption
+" testid="DQA-3275" priority="P1" description="This test case is verify the Gift Registry create and edit for the registered user.">
+<classes>
+<class name="TestExecute.API.Osprey_US.Test_DGLD_API_OSPUS_004_GuestUser_Checkout_OneLineItem_QtyTwo_With_MultipleGiftCode_FullRedemption" />
+</classes>
+</test>
+</suite>
