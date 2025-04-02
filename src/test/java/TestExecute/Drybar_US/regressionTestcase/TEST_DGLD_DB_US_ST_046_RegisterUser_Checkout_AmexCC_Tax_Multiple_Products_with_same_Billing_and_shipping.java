@@ -31,7 +31,8 @@ public class TEST_DGLD_DB_US_ST_046_RegisterUser_Checkout_AmexCC_Tax_Multiple_Pr
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.tax_validation_Paymentpage("Address");
-			Drybar.same_Blling_and_Shipping_SubmitOrder("CCAmexcard");
+//			Drybar.same_Blling_and_Shipping_SubmitOrder("CCAmexcard");
+			Drybar.updatePaymentAndSubmitOrder("CCAmexcard");
 			
 
 		} catch (Exception e) {
