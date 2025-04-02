@@ -1843,8 +1843,8 @@ public class GoldHydroHyvaHelper {
                 Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
 
                 Common.actionsKeyPress(Keys.ARROW_DOWN);
-                Sync.waitElementPresent("id", "Field-linkMobilePhoneInput");
-                Common.textBoxInput("id", "Field-linkMobilePhoneInput", "9899898710");
+                Sync.waitElementPresent("id", "checkbox-linkOptIn");
+                Common.clickElement("id", "checkbox-linkOptIn");
                 Common.switchToDefault();
 
                 if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
@@ -1852,7 +1852,7 @@ public class GoldHydroHyvaHelper {
                     Common.scrollIntoView("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
                     Sync.waitPageLoad();
-
+                    Common.switchmainWindowsCons();
                     if (Common.getCurrentURL().contains("/checkout")) {
                         Sync.waitElementPresent(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
                         String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
@@ -6050,7 +6050,7 @@ catch(Exception | Error e)
 			int size = Common.findElements("xpath", "//div[@class='divide-y divide-border']").size();
 			if (size > 0) {
 				Thread.sleep(5000);
-				String number = Common.findElement("xpath", "//div[@class='flex items-center']//span").getText()
+				String number = Common.findElement("xpath", "(//div[@class='flex items-center']//span)[1]").getText()
 						.replace("•••• ", "");
 				System.out.println(number);
 				System.out.println(Dataset);
