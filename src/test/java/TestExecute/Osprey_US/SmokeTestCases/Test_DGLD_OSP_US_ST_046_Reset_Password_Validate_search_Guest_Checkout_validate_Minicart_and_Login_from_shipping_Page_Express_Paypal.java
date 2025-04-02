@@ -22,12 +22,12 @@ public class Test_DGLD_OSP_US_ST_046_Reset_Password_Validate_search_Guest_Checko
 
 		try {
 
-			Osprey_ReEu.verifingHomePage();
-			Osprey_ReEu.click_singinButton();
+				Osprey_ReEu.verifingHomePage();
+				Osprey_ReEu.click_singinButton();
 	        	Osprey_ReEu.Forgot_password("Account");
 	        	Osprey_ReEu1.search_product("Product");     
 	        	Osprey_ReEu1.addtocart("Product");
-	        	Osprey_ReEu1.Bagpacks_headerlinks("Backpacks & Bags");
+	        	Osprey_ReEu2.Accessories_Header("Accessories");
 	        	Osprey_ReEu1.simple_addtocart("Simple product"); 
 	        	Osprey_ReEu1.click_minicart();
 	        	Osprey_ReEu1.clickontheproduct_and_image("Product");
@@ -49,7 +49,6 @@ public class Test_DGLD_OSP_US_ST_046_Reset_Password_Validate_search_Guest_Checko
 		}
 	}
 
-	
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
