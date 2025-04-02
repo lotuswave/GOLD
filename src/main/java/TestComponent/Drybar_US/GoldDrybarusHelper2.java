@@ -608,11 +608,12 @@ public class GoldDrybarusHelper2 {
             {
             	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
             	   System.out.println(PLPprice1);
+            	   Thread.sleep(2000);
             	   Common.clickElement("css", "img[alt='" + products + "']");
-       			Thread.sleep(2000);
+            	   Thread.sleep(4000);
             	   product_quantity(Dataset);
-       			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[position()=1 or position()=2]").getText();
-                System.out.println(PDPprice);
+       				String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[position()=1 or position()=2]").getText();
+       				System.out.println(PDPprice);
 //                Assert.assertEquals(PLPprice1, PDPprice);
             }
             else {
@@ -644,6 +645,8 @@ public class GoldDrybarusHelper2 {
 		}
 
 	}
+	
+	
 	
 	
 	
