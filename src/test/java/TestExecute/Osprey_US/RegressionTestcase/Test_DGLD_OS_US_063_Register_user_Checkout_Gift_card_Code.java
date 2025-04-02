@@ -27,7 +27,7 @@ public class Test_DGLD_OS_US_063_Register_user_Checkout_Gift_card_Code {
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Gift_card("Giftcard");
+        Osprey_ReEu.Gift_card("Giftcard-1");
         Osprey_ReEu.giftCardSubmitOrder();
         
 		} catch (Exception e) {

@@ -31,7 +31,7 @@ public class TEST_DGLD_OS_US_110_PROCustomer_Checkout_with_Multiple_Items_using_
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("ProShippingMethod");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.Gift_card("Partial Giftcard");
+        Osprey_ReEu.Gift_card("Partial Giftcard-1");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
         
