@@ -694,7 +694,14 @@ public class GoldHydroHyva_PRODHelper {
 		String address = data.get(dataSet).get("Street");
 
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
+			
+//			if(Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size()==0)
+//				{
+//					System.out.println("Free Gift popup Displayed in Shipping page");
+//					Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+//					Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+//				}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
@@ -8685,24 +8692,28 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				String Symbol="$";
 				String expectedResult = "It should opens textbox input to enter discount.";
 				try {
+					Thread.sleep(3000);
+					if(Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size()==0)
+					{
+						System.out.println("Free Gift popup Displayed in Shipping page");
+						Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+						Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close']");
+					}
 					Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 		 
-					Sync.waitElementPresent("xpath", "//input[@name='coupon_code']");
-					if (Common.getCurrentURL().contains("preprod")) {
-						Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("Discountcode"));
-					} else {
-						Common.textBoxInput("xpath", "//input[@name='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
-					}
-					int size = Common.findElements("xpath", "//input[@name='coupon_code']").size();
+					Sync.waitElementPresent(30,"id", "discount-code");
+						Common.textBoxInput("id", "discount-code", data.get(Dataset).get("prodDiscountcode"));
+				
+					int size = Common.findElements("id", "discount-code").size();
 					Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 							"Successfully open the discount input box", "User unable enter Discount Code");
-					Sync.waitElementClickable(30,"xpath", "//span[text()='Apply Discount']");
-					Common.clickElement("xpath", "//span[text()='Apply Discount']");
+					Sync.waitElementClickable(30,"xpath", "//span[contains(text(),'Apply Code')]");
+					Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
 					Sync.waitPageLoad();
 					expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 						Thread.sleep(4000);
-						int discountcodemsg1 = Common.findElements("xpath", "//button[@value='Cancel Coupon']").size();
+						int discountcodemsg1 = Common.findElements("xpath", "//span[contains(text(),'Cancel Coupon')]").size();
 						Common.assertionCheckwithReport(discountcodemsg1 >0, "verifying pomocode",
 								expectedResult, "promotion code working as expected", "Promation code is not applied");
 				} catch (Exception | Error e) {
@@ -9759,7 +9770,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			  	 Thread.sleep(3000);
 		         for (i = 0; i < Links.length; i++) {
-					Sync.waitElementPresent("xpath", "//span[contains(text(),' Shop')]");
+					Sync.waitElementPresent(30,"xpath", "//span[contains(text(),' Shop')]");
 					Common.clickElement("xpath", "//span[contains(text(),' Shop')]");
 			
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
@@ -10030,6 +10041,14 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "(//span[normalize-space()='Shop'])[1]");
 				Common.clickElement("xpath", "(//span[normalize-space()='Shop'])[1]");
+				int size=Common.findElements("xpath", "(//div[@x-init='$nextTick(() => {show = true })'])[2]").size();
+				if(size <=0) 
+				{
+					Common.javascriptclickElement("xpath", "//img[@alt='Hydroflask store logo']");
+				
+				Sync.waitElementPresent(50,"xpath", "//span[normalize-space()='Shop']");
+				Common.javascriptclickElement("xpath", "//span[normalize-space()='Shop']");
+				}
 				Common.clickElement("xpath", "//span[text()='Featured']");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
