@@ -21,7 +21,7 @@ public class Test_DGLD_OS_US_ST_072_Guest_User_Add_to_Compare_Products_to_Wishli
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
         Osprey_ReEu.Compare_Products();
-         Osprey_ReEu.Add_Wishlist();
+        Osprey_ReEu.Add_Wishlist();
         Osprey_ReEu.AddtoCart_Wishlist();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");

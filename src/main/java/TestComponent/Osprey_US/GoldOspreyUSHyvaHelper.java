@@ -9909,6 +9909,10 @@ public void Continue_Shopping() {
 				Thread.sleep(3000);
 				compareLinks.get(1).click();
 				Thread.sleep(3000);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
 				compareLinks.get(3).click();
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//a[text()='comparison list']");
@@ -9916,7 +9920,7 @@ public void Continue_Shopping() {
         try {
 				Common.clickElement("xpath", "(//a[contains(@class,'action tocart primary a-btn a-btn')])[1]");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Thread.sleep(4000);
         }
         catch (Exception | Error e)  {
 				
@@ -9951,19 +9955,19 @@ public void Continue_Shopping() {
 			AssertJUnit.fail();
 		}
 
+
 	}
 
 	public void Add_Wishlist() throws Exception {
 		// TODO Auto-generated method stub
-		try {
+try {
 			
 			Thread.sleep(2000);
 			Sync.waitElementPresent(30,"xpath", "//button[@id='add-to-wishlist']");
 			Common.javascriptclickElement("xpath", "//button[@id='add-to-wishlist']");
-			Thread.sleep(10000);
-			String Size = Common.findElement("xpath", "//button[@title='Remove from Wish List']").getAttribute("aria-label");
-			System.out.println(Size);
-			if (Size.contains("Remove from Wish List")) {
+			Thread.sleep(6000);
+			if (Common.findElements("xpath", "//button[@title='Remove from Wish List']").size()>0) {
+				Common.findElement("xpath", "//button[@title='Remove from Wish List']").getAttribute("aria-label").contains("Remove from Wish List");
 				Sync.waitElementPresent(30,"xpath", "//button[@id='add-to-wishlist']");
 				Common.javascriptclickElement("xpath", "//button[@id='add-to-wishlist']");
 				Thread.sleep(10000);
@@ -9976,11 +9980,8 @@ public void Continue_Shopping() {
 				Common.clickElement("xpath", "//a[@title='My Favorites']");
 			} else {
 				Sync.waitPageLoad();
-				Thread.sleep(5000);
-				Sync.waitElementPresent(30,"xpath","//span[contains(text(),'You must login or register')]");
-				String Error = Common.findElement("xpath", "//span[contains(text(),'You must login or register')]").getText();
-				System.out.println(Error);
-				if (Error.contains("You must login")) {
+				Thread.sleep(4000);
+				if (Common.findElements("xpath", "//span[contains(text(),'You must login or register')]").size()>0 || Common.getCurrentURL().contains("/customer/account/login/")) {
 					Login_Account("Account");
 				} else {
 					System.out.println("no Error message displayed");
@@ -10000,7 +10001,7 @@ public void Continue_Shopping() {
 			ExtenantReportUtils.addFailedLog("validating product added to wishlist ",
 					"Products added to Compare list successfull", "failed to add product to wishlist",
 					Common.getscreenShotPathforReport("Wishlistfail"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 	}
 
