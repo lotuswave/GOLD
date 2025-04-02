@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF System Testcase Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	<test name="Test_DGLD_HYF_ST_004_Register_user_Configure_gift_card_in_PDP_and_checkout" testid="DQA-4243" priority="P1" description="This script will cover register user configure gift card in PDP and checkout">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_ST_004_Register_user_Configure_gift_card_in_PDP_and_checkout"/>
+</classes>
+</test>
+<test name="TEST_DGLD_HYF_US_ST_005_Guest_User_Checkout_with_Gift_Card_Code " testid="DQA-4244" priority="P1" description="This script will cover guest user checkout functionality of Hydroflask giftcardcode">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_US_ST_005_Guest_User_Checkout_with_Gift_Card_Code"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_US_ST_006_GiftCard_And_ConfigurableProduct_Checkout_With_PromoCode_Applied" testid="DQA-4245" priority="P1" description="This script will cover giftcard and configurable product checkout with promo code applied">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_US_ST_006_GiftCard_And_ConfigurableProduct_Checkout_With_PromoCode_Applied"/>
+</classes>
+</test>
+<test name="TEST_DGLD_HYF_ST_007_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order" testid="DQA-4246" priority="P1" description="This script will cover add giftcard code in my account page and select the gift card code at payment page and place order">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_007_Add_Gift_Card_Code_in_My_Account_Page_and_Select_the_Gift_Card_Code_at_Payment_Page_and_Place_an_Order"/>
+</classes>
+</test>
+<test name="TEST_DGLD_HYF_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later" testid="DQA-4248" priority="P1" description="This script will cover Register user order checkout functionality of Hydroflask Giftcard Send Later">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_US_ST_009_Placeorder_Register_user_validate_Giftcard_Send_Later"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_ST_010_GuestUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout" testid="DQA-4249" priority="P1" description="This script will cover guest user add other amount to gift card in PDP and checkout">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_ST_010_GuestUser_Add_Other_Amount_To_GiftCard_In_PDP_And_Checkout"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_US_ST_011_Register_user_adds_a_gift_card_to_My_Favorites" testid="DQA-4250" priority="P1" description="This script will cover register user adds agift card to my favorites">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_US_ST_011_Register_user_adds_a_gift_card_to_My_Favorites"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_US_ST_013_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Payment_using_gift_card_code" testid="DQA-4252" priority="P1" description="This script will cover placeorder guest user checkout with multiple products as full payment using gift card code">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_US_ST_013_Placeorder_Guest_user_Checkout_with_multiple_products_as_full_Payment_using_gift_card_code"/>
+</classes>
+</test>
+<test name="TEST_DGLD_HYF_ST_014_Placeorder_Employee_user_multipleproducts_with_giftcardcode_discount_and_3DSecure_Payment_Method" testid="DQA-4253" priority="P1" description="This script will cover place order employee user multiple products with giftcardcode discount and 3D secure payment method">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_014_Placeorder_Employee_user_multipleproducts_with_giftcardcode_discount_and_3DSecure_Payment_Method"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment " testid="DQA-4255" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using 3D Payment">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment"/>
+</classes>
+</test>
+<test name="TEST_DGLD_HYF_ST_020_EmployeeCustomer_Checkout_with_Gift_card_MultipleLineItem_Using_CC" testid="DQA-4259" priority="P1" description="This script will cover EmployeeCustomer with Gift card MultipleLineItem Using CC">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_020_EmployeeCustomer_Checkout_with_Gift_card_MultipleLineItem_Using_CC"/>
+</classes>
+</test>
+<test name="TEST_DGLD_HYF_ST_021_Employee_Customer_Checkout_with_MultipleItems_using_CC_with_GiftCode " testid="DQA-4260" priority="P1" description="This script will cover Employee Customer with Gift card MultipleLineItem Using CC with GiftCode">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_021_Employee_Customer_Checkout_with_MultipleItems_using_CC_with_GiftCode"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_130_Register_Employee_user_checkout_with_2day_shipment_method_using_Discountcode_with_afterpay" testid="DQA-3838" priority="P1" description="This script will cover register employee user checkout with Two day shipping method using discount code with after pay">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_130_Register_Employee_user_checkout_with_2day_shipment_method_using_Discountcode_with_afterpay"/>
+</classes>
+</test>
+   	
+
+
+        
+</suite>  

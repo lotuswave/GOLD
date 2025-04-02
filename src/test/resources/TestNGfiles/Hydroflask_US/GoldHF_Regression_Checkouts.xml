@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF System Testcase Regression Suite">
+    <listeners>
+        <listener class-name="Utilities.TestListener"/>
+    </listeners>
+   	<test name="Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Page" testid="DQA-256" priority="P1" description="This script will cover Account Creation Functionality from order summary page ">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_005_Guest_User_Create_Account_from_Ordersummary_Page"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_HF_ST_020_Checkout_GuestUserCC_configurable_Simple" testid="DQA-166" priority="P1" description="This script will cover Checkout Guest User CC configurable Simple">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_020_Checkout_GuestUserCC_configurable_Simple"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_021_Checkout_RegisterUserCC_configurable_Simple" testid="DQA-180" priority="P1" description="This script will cover Checkout Register User CC configurable Simple">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_021_Checkout_RegisterUserCC_configurable_Simple"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_023_Validation_My_Orders_For_Register_User" testid="DQA-176" priority="P1" description="This script will cover validating Validation My Orders For Register User">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_023_Validation_My_Orders_For_Register_User"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites" testid="DQA-174" priority="P1" description="This script will cover validating Add To Cart and Checkout from My Favorites">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal" testid="DQA-173" priority="P1" description="This script will cover validating Register user Checkout Funtionality with Paypal">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_035_Register_user_Checkout_Funtionality_with_Paypal"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User" testid="DQA-200" priority="P1" description="This script will cover validating Stored Payment For Register User">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_046_Stored_Payment_For_Register_User"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_061_Register_user_Checkout_With_Bundle_product" testid="DQA-394" priority="P1" description="This script will cover validating the Register user checkout functionality with Bundle product.">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_061_Register_user_Checkout_With_Bundle_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_064_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products" testid="DQA-167" priority="P1" description="This script will cover validating the Guest checkout with simple, configurable, bundle products">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_064_Checkout_with_GuestUserCC_Simple_Configurable_and_Bundle_products"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_065_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products" testid="DQA-177" priority="P1" description="This script will cover validating the register checkout with simple, configurable, bundle products">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_065_Checkout_with_Register_UserCC_Simple_Configurable_and_Bundle_products"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_124_Register_User_checkout_with_Express_paypal" testid="DQA-3552" priority="P1" description="This script will cover Register user checkout with Express Paypal">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_124_Register_User_checkout_with_Express_paypal"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_094_Register_user_Checkout_With_Discount_Visa_card" testid="DQA-240" priority="P1" description="This script will cover validating the Register user Checkout With Discount Visa card ">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_094_Register_user_Checkout_With_Discount_Visa_card"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_098_Guest_User_Checkout_with_Bundle_product_Paypal" testid="DQA-213" priority="P1" description="This script will cover validating Guest User Checkout with Bundle product Paypal">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_098_Guest_User_Checkout_with_Bundle_product_Paypal"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_099_Paypal_checkout_as_a_registereduser_with_Configure_bundle_and_simple_product" testid="DQA-207" priority="P1" description="This script will cover validating Paypal checkout as a registered user with Configure bundle and simple product">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_099_Paypal_checkout_as_a_registereduser_with_Configure_bundle_and_simple_product"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_101_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping" testid="DQA-226" priority="P1" description="This script will cover validating checkout PP with Multiple products with Discount samebilling and shipping">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_101_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_102_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping" testid="DQA-225" priority="P1" description="This script will cover validating Register user checkout PP with Multiple products with Discount differentbilling and shipping">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_102_Register_user_checkout_PP_with_Multiple_products_with_Discount_differentbilling_and_shipping"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_104_place_an_order_by_using_reorder" testid="DQA-229" priority="P1" description="This script will cover validating place an order by using reorder">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_104_place_an_order_by_using_reorder"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_105_Checkout_with_AMEX_as_Guestuser_with_PO_Box_2DAY" testid="DQA-219" priority="P1" description="This script will cover validating Checkout with AMEX as Guestuser with PO Box 2DAY">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_105_Checkout_with_AMEX_as_Guestuser_with_PO_Box_2DAY"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_106_Checkout_with_PP_as_Registeruser_with_PO_Box" testid="DQA-222" priority="P1" description="This script will cover validating Checkout with PP as Registeruser with PO Box">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_106_Checkout_with_PP_as_Registeruser_with_PO_Box"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_110_Guest_User_Checkout_with_APO_Address" testid="DQA-241" priority="P1" description="This script will cover validating Guest User Checkout with APO Address">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_110_Guest_User_Checkout_with_APO_Address"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_111_Register_User_Checkout_APO_Address_PP" testid="DQA-242" priority="P1" description="This script will cover validating Register User Checkout APO Address PP">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_111_Register_User_Checkout_APO_Address_PP"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_122_Guest_User_Checkout_with_Gift_Message" testid="DQA-212" priority="P1" description="This script will cover validating Guest User Checkout with Gift message">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_122_Guest_User_Checkout_with_Gift_Message"/>
+</classes>
+</test>
+
+<test name="Test_DGLD_HF_ST_126_Guestuser_checkout_with_3Ds_Authentication_Payment" testid="DQA-3573" priority="P1" description="This script will cover guest user checkout with 3D authentication payment method">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_126_Guestuser_checkout_with_3Ds_Authentication_Payment"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_130_Register_Employee_user_checkout_with_2day_shipment_method_using_Discountcode_with_afterpay" testid="DQA-3838" priority="P1" description="This script will cover register employee user checkout with Two day shipping method using discount code with after pay">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_130_Register_Employee_user_checkout_with_2day_shipment_method_using_Discountcode_with_afterpay"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_132_Registeruser_checkout_with_2day_shipping_using_Klarnapayment" testid="DQA-3840" priority="P1" description="This script will cover register user checkout with two day shipping using klarnapayment">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_132_Registeruser_checkout_with_2day_shipping_using_Klarnapayment"/>
+</classes>
+</test>
+<test name="Test_DGLD_HF_ST_134_Registeruser_Checkout_with_Gift_Message_using_Klarna_payment" testid="DQA-3842" priority="P1" description="This script will cover register user checkout with gift message using klarna payment">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_134_Registeruser_Checkout_with_Gift_Message_using_Klarna_payment"/>
+</classes>
+</test>
+
+
+        
+</suite>  
