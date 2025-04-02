@@ -8552,6 +8552,14 @@ public void Invalid_ThreedPaymentDetails(String dataSet) throws InterruptedExcep
 
 		} else {
 			Thread.sleep(4000);
+			int savedcard=Common.findElements("xpath", "//div[contains(@class,'form-select flex')]").size();
+			if(savedcard>0)
+			{
+				Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
+			}
+
+			Thread.sleep(5000);
 			Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 			Thread.sleep(5000);
 			Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
