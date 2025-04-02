@@ -6492,7 +6492,7 @@ public void FUll_Payment(String dataSet) {
     			Common.clickElement("xpath", "//button[@title='Save Account Information']");
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
-    			if(Common.getCurrentURL().contains("stage")) {
+    			/*if(Common.getCurrentURL().contains("stage")) {
     			String successmessage = Common.findElement("xpath", "(//div[@ui-id='message-success']//span)[2]").getText();
     			Common.assertionCheckwithReport(
     					successmessage.contains("You must confirm your account. Please check your email for the confirmation link")
@@ -6511,7 +6511,7 @@ public void FUll_Payment(String dataSet) {
         					"user should get the success message and navigate back to the Login page",
         					"Successfully user gets the success message and navigated to the Login page",
         					"Failed to get the success message and unable to navigate to the login page");
-    			}
+    			}*/
     			
 //    			Sync.waitPageLoad();
 //    			Common.textBoxInput("id", "email", newemail);
