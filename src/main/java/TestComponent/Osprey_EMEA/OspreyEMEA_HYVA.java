@@ -2185,7 +2185,11 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
-			Thread.sleep(8000);
+			Thread.sleep(5000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
 			
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //					.getAttribute("data-ui-id");
@@ -2193,7 +2197,6 @@ public class OspreyEMEA_HYVA {
 //			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
 //					"Product should be add to cart", "Sucessfully product added to the cart ",
 //					"failed to add product to the cart");
-			Thread.sleep(2000);
 //			String price=Common.findElement("xpath", "//span[contains(@class, 'flex text-lg')]//span[@class='price']").getText().replace(symbol, "").replace(".", "");
 //			System.out.println(price);
 //			Thread.sleep(5000);
@@ -2791,6 +2794,10 @@ public class OspreyEMEA_HYVA {
 		{
 			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
 			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
+		if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+		{
+			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
 		}
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
@@ -3704,6 +3711,10 @@ public class OspreyEMEA_HYVA {
 
 		try {
 			Thread.sleep(5000);
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			{
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
