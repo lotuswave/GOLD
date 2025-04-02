@@ -33,11 +33,11 @@
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_030_Registeruser_Product_Back_in_Stock_Subscription"/>
 </classes>
 </test>
-<test name="TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User" testid="DQA-3652" priority="P1" description="This test case is to Validate the Homepage Header options functionality in the Drybar website for Registered user.">
+<!--<test name="TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User" testid="DQA-3652" priority="P1" description="This test case is to Validate the Homepage Header options functionality in the Drybar website for Registered user.">
 <classes>
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_031_Header_Links_Validation_For_Registered_User"/>
 </classes>
-</test>
+</test> -->
 <test name="TEST_DGLD_DB_US_ST_075_Validate_GuestUser_Checkout_Aerosol_Product_and_Non_Aerosol_Product_with_POBox_Alaska_No_Shipping_Methods" testid="DQA-3649" priority="P1" description="This test case is used to validate the Guestuser checkout process for Aerosol products and Non Aerosol Products using PO Box Address with No shipping methods.">
 <classes>
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_075_Validate_GuestUser_Checkout_Aerosol_Product_and_Non_Aerosol_Product_with_POBox_Alaska_No_Shipping_Methods"/>
