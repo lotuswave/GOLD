@@ -218,19 +218,21 @@ public class GoldOspreyUSHyvaHelper {
 	}
 
 		try {
-			 Thread.sleep(3000);
-				acceptPrivacy();
+			 Thread.sleep(2000);
+//				acceptPrivacy();
 //		        int sizesframe = Common.findElements("xpath", "//div[@data-testid='POPUP']").size();
 //		        System.out.println(sizesframe);
 //		        if (sizesframe > 0) {
 //		            Common.actionsKeyPress(Keys.PAGE_UP);
 //		            Thread.sleep(4000);
+			        Sync.waitElementVisible(20,"xpath", "(//form[contains(@class,'needsclick klaviyo-form')])[2]"); 
+				    Common.findElement("xpath", "(//form[contains(@class,'needsclick klaviyo-form')])[2]");
 		            Common.textBoxInput("xpath", "(//div[@class='needsclick  kl-private-reset-css-Xuajs1']/input)[2]",email);
-		            Thread.sleep(2000);
+		            Thread.sleep(1000);
 		            Common.clickElement("xpath", "(//div[@data-testid='form-row']//button)[2]");
-		            Thread.sleep(2000);
+		            Thread.sleep(1000);
 		            Common.clickElement("xpath","(//div[@data-testid='form-component'])[7]");
-		            Thread.sleep(4000);
+//		            Thread.sleep(3000);
 //		            int sizes = Common.findElements("xpath", "//div[@data-testid='form-component']//span").size();
 //		            String text=Common.findElement("xpath", "//div[@data-testid='form-component']//span").getText();
 //		            System.out.println(text);
@@ -309,7 +311,7 @@ public void Login_Account(String dataSet) {
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Backpacks, Luggage & Travel")
-							|| Common.getPageTitle().contains("Osprey"),
+							|| Common.getPageTitle().contains("Osprey")||Common.getPageTitle().contains("Favorites Sharing"),
 					"To validate the user lands on Home page after successfull login",
 					"After clicking on the signIn button it should navigate to the Home page",
 					"user Sucessfully navigate to the Home page after clicking on the signIn button",
