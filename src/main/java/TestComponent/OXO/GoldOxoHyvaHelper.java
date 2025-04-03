@@ -7174,7 +7174,7 @@ catch(Exception | Error e)
 			Thread.sleep(4000);
 			String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]")
 					.getAttribute("data-price-amount");
-			if (price.equals(Dataset)) {
+			if (price.equals(Dataset)) {   
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
 				Common.implicitWait();
