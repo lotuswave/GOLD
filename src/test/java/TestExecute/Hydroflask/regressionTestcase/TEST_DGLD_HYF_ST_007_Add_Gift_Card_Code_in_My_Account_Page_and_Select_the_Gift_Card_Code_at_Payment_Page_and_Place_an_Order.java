@@ -25,7 +25,6 @@ public class TEST_DGLD_HYF_ST_007_Add_Gift_Card_Code_in_My_Account_Page_and_Sele
 			Hydro.search_product("Product");      
 			Hydro.addtocart("Product");                    
 			Hydro.minicart_Checkout();
-//			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.Select_Gift_Code("Full_RedeemGiftcard");
             Hydro.giftCardSubmitOrder();

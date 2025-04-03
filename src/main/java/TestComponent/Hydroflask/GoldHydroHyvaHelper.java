@@ -2152,7 +2152,7 @@ public class GoldHydroHyvaHelper {
 			
 			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
 			Common.clickElement("xpath", "//input[@placeholder='Enter your Code']");
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			//			Common.dropdown("xpath", "//input[@name='amcard-field -datalist']", Common.SelectBy.TEXT, "GiftCard2");
 			Common.clickElement("xpath", "//a[text()='"+Giftcard+"']");
 			Common.clickElement("xpath", "//span[contains(text(),'Add Code')]");
