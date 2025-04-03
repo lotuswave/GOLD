@@ -9403,6 +9403,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 	public void PDP_video_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Colorproduct");
+		String color = data.get(Dataset).get("Color");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
@@ -9420,6 +9421,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			
 			Sync.waitElementPresent("xpath", "//img[@alt='" + product + "']");
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
+			Sync.waitElementPresent(30, "xpath", "//div[@data-option-label='" + color + "']");
+			Common.clickElement("xpath", "//div[@data-option-label='" + color + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(product);
@@ -9429,45 +9432,28 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"validating the product should navigate to the PDP page",
 					"When we click on the product is should navigate to the PDP page",
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
-			WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
-			Common.scrollIntoView(video);
-	
-//			Common.actionsKeyPress(Keys.UP);
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
-			Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
-			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[4]");
-			try {
+			if(Common.getCurrentURL().contains("mcloud")) {
+				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
+				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[6]");
+			}else {
+				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
+			}
+			
 				Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
 				Sync.waitElementClickable("xpath", "//button[@aria-labelledby='play-button-tooltip']");
 				Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
 				
-Thread.sleep(3000);
+                Thread.sleep(3000);
 				String video1 = Common.findElement("xpath", "//span[@id='play-button-tooltip']").getText();
 				Common.switchToDefault();
 				System.out.println(video1);
 				Common.assertionCheckwithReport(video1.contains("Pause"), "validating the video in PDP page",
 						"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
 						"failed to play the video in PDP page");
-			}
-			catch(Exception | Error e) {
-//				Prod:
-				e.printStackTrace();
-				Sync.waitElementClickable("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[5]");
-			
-            Common.switchFrames("xpath","//iframe[contains(@id,'vimeo')]");
-			Sync.waitElementClickable(40,"xpath", "//button[@aria-label='Play video']");
-			Common.clickElementStale("xpath", "//button[@aria-label='Play video']");
-			Sync.waitForLoad();
-			String video1 = Common.findElement("xpath", "//span[@id='play-button-tooltip']")
-					.getText();
-			Common.switchToDefault();
-			System.out.println(video1);
-			Common.assertionCheckwithReport(video1.equals("Pause"), "validating the video in PDP page",
-					"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
-					"failed to play the video in PDP page");
-			}	
+
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();

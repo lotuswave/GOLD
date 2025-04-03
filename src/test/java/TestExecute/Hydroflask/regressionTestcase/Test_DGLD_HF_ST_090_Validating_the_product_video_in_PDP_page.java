@@ -18,19 +18,21 @@ public class Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page {
 	public void Validate_the_product_video_in_PDP_page () throws Exception {
 
 		try {
-			String currentUrl = Common.getCurrentURL().trim();
-			System.out.println("Current URL: " + currentUrl);
+//			String currentUrl = Common.getCurrentURL().trim();
+//			System.out.println("Current URL: " + currentUrl);
 			Hydro.verifingHomePage();
-			if(currentUrl.contains("https://www.hydroflask.com/")) {
-				System.out.println("Executing in Prod");
-				Hydro.search_product("Video Product_Prod");      
-				Hydro.Prod_PDP_video_validation("Video Product_Prod"); 
-			}
-			else {
-				System.out.println("Executing in Pre-Prod");
-				Hydro.bottles_headerlinks("Bottles & Drinkware"); 
-				Hydro.PDP_video_validation("Product");
-			}
+			Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+			Hydro.PDP_video_validation("Product");
+//			if(currentUrl.contains("https://www.hydroflask.com/")) {
+//				System.out.println("Executing in Prod");
+//				Hydro.search_product("Video Product_Prod");      
+//				Hydro.Prod_PDP_video_validation("Video Product_Prod"); 
+//			}
+//			else {
+//				System.out.println("Executing in Pre-Prod");
+//				Hydro.bottles_headerlinks("Bottles & Drinkware"); 
+//				Hydro.PDP_video_validation("Product");
+//			}
 			
 		
 
@@ -41,7 +43,7 @@ public class Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page {
 	}
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 
 	}
 
