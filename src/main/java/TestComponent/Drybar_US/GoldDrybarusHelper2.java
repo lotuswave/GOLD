@@ -6281,9 +6281,10 @@ public void FUll_Payment(String dataSet) {
     				}
     			
     			else {
-    				
-    				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-    				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+    				Thread.sleep(3000);
+    				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+    				//Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+    				//Common.mouseOver("xpath", "//img[@alt='" + products + "']");
     				Thread.sleep(4000);
     				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='normalPrice'])").getText().replace(symbol,"").replace(".00", "");
     				Common.clickElement("xpath", "//img[@alt='" + products + "']");
@@ -6304,7 +6305,7 @@ public void FUll_Payment(String dataSet) {
     						name.contains(products) && productprice.equals(PLPprice),
     						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
     						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-    				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+    				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
     				Sync.waitPageLoad();
     				Thread.sleep(4000);
     				String newsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
@@ -6317,7 +6318,7 @@ public void FUll_Payment(String dataSet) {
     						"Sucessfully message has been displayed when we click on the subcribe button ",
     						"Failed to display the message after subcribtion");
     				Common.actionsKeyPress(Keys.END);
-    				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
+    				Common.clickElement("xpath", "(//button[@title='Notify Me When Available']//span)[1]");
     				Sync.waitPageLoad();
     				Thread.sleep(4000);
     				String oldsubcribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
