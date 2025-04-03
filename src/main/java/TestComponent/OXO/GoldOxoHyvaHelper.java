@@ -80,9 +80,9 @@ public class GoldOxoHyvaHelper
 	}
 
 	public void verifingHomePage() {
-		try {
+		try { 
 			Sync.waitPageLoad();
-			
+		 	
               Sync.waitElementClickable(50, "xpath", "//a[@aria-label='Go to Home page']");
 			int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
 			System.out.println(size);
@@ -99,7 +99,7 @@ public class GoldOxoHyvaHelper
 					Common.getscreenShotPathforReport("failed to get back to homepage"));
 			Assert.fail();
 		}
-
+  
 	}
 
 	public void coffee_headerlinks(String category) {
@@ -3049,10 +3049,11 @@ public String create_account(String Dataset) {
 		}
 	}
 
-	public void search_product(String Dataset) {
+	public void search_OOSproduct(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		String product1 = data.get(Dataset).get("Prod Products OOS");
+		
 		System.out.println(product);
 		try {
 			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
@@ -3066,9 +3067,36 @@ public String create_account(String Dataset) {
 			{
 			serachbar.sendKeys(product);
 			}
-			else {
-				serachbar.sendKeys(product1);
+			else{
+				
+			serachbar.sendKeys(product1);
 			}
+			Common.actionsKeyPress(Keys.ENTER);
+			Sync.waitPageLoad();
+			Thread.sleep(8000);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("validating the search functionality",
+					"enter product name will display in the search box",
+					" unable to enter the product name in  search box",
+					Common.getscreenShot("Failed to see the product name"));
+			Assert.fail();
+		}
+ 
+	}
+	public void search_product(String Dataset) {
+		// TODO Auto-generated method stub
+		String product = data.get(Dataset).get("Products");
+		System.out.println(product);
+		try {
+			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
+			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
+					"User should able to click on the search button", "Search expands to the full page",
+					"Sucessfully search bar should be expand");
+			WebElement serachbar = Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
+			serachbar.sendKeys(product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
