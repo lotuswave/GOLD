@@ -24,6 +24,7 @@ public class Test_DGLD_OXO_ST_024_Add_To_Cart_and_Checkout_from_My_Favorites {
 			Oxo.Usersignin("AccountDetails");
 			Oxo.My_Favorites();
 			Oxo.Addtocart_From_MyFavorites("Product");
+			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_registerUser("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
 			Oxo.clickSubmitbutton_Shippingpage();
