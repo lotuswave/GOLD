@@ -692,18 +692,26 @@ public class GoldDrybarusHelper2 {
 				Sync.waitPageLoad();
 			     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
 				Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save);
+				
+				Thread.sleep(4000);
+				String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ save +"')]").getText();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(drop.contains(save), "To ensure that selected text has selected in the product subcription dropdown",
+						"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
+						"failed to select the text from the dropdown");
 			} else {
 				 Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
 				Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save1);
+				
+				Thread.sleep(4000);
+				String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ save1 +"')]").getText();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(drop.contains(save1), "To ensure that selected text has selected in the product subcription dropdown",
+						"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
+						"failed to select the text from the dropdown");
 			}
 		  
-			Thread.sleep(4000);
-			String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ save +"')]").getText();
-			Thread.sleep(4000);
-			Common.assertionCheckwithReport(drop.contains(save), "To ensure that selected text has selected in the product subcription dropdown",
-					"Dropdown should be select for the product subcription", "Sucessfully text has been selected from the dropdown",
-					"failed to select the text from the dropdown");
-			
+			Thread.sleep(2000);
 			String PLPPrice=Common.findElement("xpath", "//div[@x-defer='intersect']//span[@class='price']").getText();
 			System.out.println(PLPPrice);
 			Sync.waitElementPresent("xpath", "//button[@title='ADD TO BAG']");
@@ -11866,9 +11874,9 @@ public void Subcription_Afterpay_Invalid() {
 		Common.javascriptclickElement("xpath", "//button[@id='afterpay_clearpay-tab']");	
 		Common.switchToDefault();
 		Thread.sleep(3000);
-		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+		/*if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 			
-		{ 
+		{ */
 		Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 		Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 		Sync.waitPageLoad();
@@ -11882,11 +11890,11 @@ public void Subcription_Afterpay_Invalid() {
 				"failed to display the error message");
 		Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
 		Common.clickElement("xpath", "//button[@aria-label='Close message']");
-		}
+	/*	}
 		else
 		{
 			Assert.fail();
-			}
+			}*/
 		
 	}
 	catch (Exception | Error e)
@@ -11911,9 +11919,9 @@ public void Subcription_Klarna_Invalid() {
 		Common.scrollToElementAndClick("xpath", "//div[@class='p-PaymentMethodSelector']//button[@id='klarna-tab']");
 		Common.switchToDefault();
 		System.out.println("Switch to Default");
-		if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
+	/*	if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 		
-		{   	 
+		{  */ 	 
             	 Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				 Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				Sync.waitPageLoad();
@@ -11927,11 +11935,11 @@ public void Subcription_Klarna_Invalid() {
  						"failed to display the error message");
  				Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
  				Common.clickElement("xpath", "//button[@aria-label='Close message']");
-		}
+	/*	}
 		else
 		{
 			Assert.fail();
-		}
+		}*/
 	}
 	
 	catch(Exception | Error e)
