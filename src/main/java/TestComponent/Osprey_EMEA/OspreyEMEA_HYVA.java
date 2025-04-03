@@ -13437,7 +13437,7 @@ public void clickContact() throws Exception {
 	String expectedResult = "It should land successfully on the contact page";
 
 	try {
-		if(Common.getCurrentURL().contains("gb"))
+		if(Common.getCurrentURL().contains("preprod"))
 		{
 			Sync.waitElementPresent("xpath", "//a[@title='Help & Support']");
 			Common.clickElement("xpath", "//a[@title='Help & Support']");
@@ -13452,8 +13452,8 @@ public void clickContact() throws Exception {
 		}
 		else
 		{
-			Sync.waitElementPresent("xpath", "//a[contains(@href,'customer-support-center')]");
-			Common.clickElement("xpath", "//a[contains(@href,'customer-support-center')]");
+			Sync.waitElementPresent("xpath", "//a[@title='Customer Service Centre']");
+			Common.clickElement("xpath", "//a[@title='Customer Service Centre']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//a[contains(@href,'contact-us')]");
