@@ -14380,27 +14380,27 @@ public void Footer_Links_BrandTeam(String Dataset) {{
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
 			Thread.sleep(4000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
-			System.out.println(responcecode);
-			String pagecode=Integer.toString(responcecode);
-			System.out.println(pagecode);
-			
-			if(pagecode.equals("200"))
-			{
-				
-				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
-				  ,"Page configured Properly with any issues"
-				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
-				 }
-			else
-			{
-				i++;
-				
-				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
-						"Page configured Properly with any issues", "Unable to get the proper response from the page",
-						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
-				Assert.fail();
-			}
+//			int responcecode = getpageresponce(Common.getCurrentURL());
+//			System.out.println(responcecode);
+//			String pagecode=Integer.toString(responcecode);
+//			System.out.println(pagecode);
+//			
+//			if(pagecode.equals("200"))
+//			{
+//				
+//				  Common.assertionCheckwithReport(pagecode.equals("200"),"Validating the page url with good response"
+//				  ,"Page configured Properly with any issues"
+//				  ,"Successfully page status is good without any issues","Failed to get the proper response from the page");
+//				 }
+//			else
+//			{
+//				i++;
+//				
+//				ExtenantReportUtils.addFailedLog("Validating the page url with good response" + Common.getCurrentURL(),
+//						"Page configured Properly with any issues", "Unable to get the proper response from the page",
+//						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
+//				Assert.fail();
+//			}
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);

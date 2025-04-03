@@ -12,7 +12,7 @@ import TestLib.Login;
 public class Test_DGLD_OS_COMMON_136_Decline_All_Create_Account_Login_and_checkout_as_Register_User {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Verifying_Decline_All_Create_Account_Login_and_checkout_as_Register_User () throws Exception {
