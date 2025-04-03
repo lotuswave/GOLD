@@ -19,10 +19,10 @@ public class Test_DGLD_OXO_ST_004_Minicart_Validation {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
-			Oxo.addtocart("addproduct");
+			Oxo.addtocart("addproduct1");
 			Oxo.search_product("Product");
 			Oxo.addtocart_PLP("Product");
-			Oxo.click_on_product("addproduct");
+			Oxo.click_on_product("addproduct1");
 			Oxo.click_on_Image("Product");
 			Oxo.minicart_delete("Product");
 			Oxo.minicart_product_close();
