@@ -156,7 +156,7 @@ public class GoldDrybarusHelper2 {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+//			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page")
@@ -7874,6 +7874,7 @@ public void FUll_Payment(String dataSet) {
 	    			Thread.sleep(2000);
 	    			if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 	    			{
+	    
 	    				Common.clickElement("xpath", "//button[@aria-label='My Account']");
 	    				int size = Common.findElements("id","customer.header.sign.in.link").size();
 	    				if (size > 0) {
@@ -7908,6 +7909,11 @@ public void FUll_Payment(String dataSet) {
 	    			else
 	    			{
 	    				Common.clickElement("xpath", "//button[@aria-label='My Account']");
+	    				int size = Common.findElements("id","customer.header.sign.in.link").size();
+	    				if (size > 0) {
+	    					Common.clickElement("id","customer.header.sign.in.link");
+	    					Common.clickElement("xpath", "//button[@aria-label='My Account']");
+	    				}
 	    				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'My Wish List')]");
 	    				Common.clickElement("xpath", "//a[contains(text(),'My Wish List')]");
 	    				Common.assertionCheckwithReport(Common.getCurrentURL().contains("wishlist"),
