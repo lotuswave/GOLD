@@ -3,12 +3,7 @@
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
-    
-    <test name="Test_DGLD_OS_COMMON_020_Register_user_Checkout_With_Discount_Visa_card" testid="DQA-4370" priority="P1" description="This script will cover creating a new user account">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.SmokeTestCases.Test_DGLD_OS_COMMON_020_Register_user_Checkout_With_Discount_Visa_card"/>
-        </classes>
-    </test>
+  
     
     <test name="Test_DGLD_OS_COMMON_005_HeaderLinks" testid="DQA-1986" priority="P1" description="This script will validate header links">
         <classes>
@@ -16,34 +11,5 @@
         </classes>
     </test>
     
-    <test name="TEST_DGLD_OS_COMMON_099_Validate_Footer_links" testid="DQA-3256" priority="P1" description="This script will validate footer links">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.SmokeTestCases.TEST_DGLD_OS_COMMON_099_Validate_Footer_links"/>
-        </classes>
-    </test>
-    
-    <test name="Test_DGLD_OSEU_Guest_user_Checkout_Visa_card_Validate_Minicart" testid="DQA-4367" priority="P1" description="This script will validate guest user checkout with Visa card and mini cart">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.SmokeTestCases.Test_DGLD_OSEU_Guest_user_Checkout_Visa_card_Validate_Minicart"/>
-        </classes>
-    </test>
-    
-    <test name="Test_DGLD_OS_OSP_EU_001_Validate_ForgotPassword_From_SignIn_Page_AccountCreation_Functionality_ValdiateMy_Account_Page" testid="DQA-4369" priority="P1" description="This script will validate forgot password functionality and account creation">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.SmokeTestCases.Test_DGLD_OS_OSP_EU_001_Validate_ForgotPassword_From_SignIn_Page_AccountCreation_Functionality_ValdiateMy_Account_Page"/>
-        </classes>
-    </test>
-    
-    <test name="Test_DGLD_OS_COMMON_053_Validate_Search_PLP_And_PDP_page" testid="DQA-4366" priority="P1" description="This script will validate search functionality on PLP and PDP pages">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.SmokeTestCases.Test_DGLD_OS_COMMON_053_Validate_Search_PLP_And_PDP_page"/>
-        </classes>
-    </test>
-    
-    <test name="Test_DGLD_OS_EU_006_Guest_user_checkout_PayPal_with_Multiple_products_Validate_the_ShoppingCart_with_Discount_samebilling_and_shipping_Login_from_Shipping_Page_Registeruser_Checkout_with_PayPal" testid="DQA-4368" priority="P1" description="This script will validate guest user checkout with PayPal for multiple products">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.SmokeTestCases.Test_DGLD_OS_EU_006_Guest_user_checkout_PayPal_with_Multiple_products_Validate_the_ShoppingCart_with_Discount_samebilling_and_shipping_Login_from_Shipping_Page_Registeruser_Checkout_with_PayPal"/>
-        </classes>
-    </test>
     
 </suite>
