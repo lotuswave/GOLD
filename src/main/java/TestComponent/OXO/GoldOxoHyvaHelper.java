@@ -3057,7 +3057,7 @@ public String create_account(String Dataset) {
 		try {
 			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
 			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
