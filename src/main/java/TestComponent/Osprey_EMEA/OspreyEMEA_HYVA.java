@@ -2957,6 +2957,7 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub4
 		String method = data.get(Dataset).get("methods");
 		System.out.println(method);
+		String methods=data.get(Dataset).get("prod methods");
 
 		try {
 			Thread.sleep(3000);
@@ -2965,9 +2966,18 @@ public class OspreyEMEA_HYVA {
 			if (size > 0  ) {
 				// Sync.waitElementPresent(30, "xpath", "//td[contains(text(),'" + method +
 				// "')]");
+				if(Common.getCurrentURL().contains("preprod"))
+				{
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//span[text()='"+ method +"']");
 				Common.clickElement("xpath", "//span[text()='"+ method +"']");
+				}
+				else
+				{
+					Thread.sleep(4000);
+					Sync.waitElementPresent("xpath", "//span[text()='"+ methods +"']");
+					Common.clickElement("xpath", "//span[text()='"+ methods +"']");
+				}
 			}
 			else
 			{
