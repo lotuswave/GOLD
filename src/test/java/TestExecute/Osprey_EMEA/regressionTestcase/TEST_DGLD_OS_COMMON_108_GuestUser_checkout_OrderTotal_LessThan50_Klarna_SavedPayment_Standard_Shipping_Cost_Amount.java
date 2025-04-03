@@ -34,7 +34,6 @@ public class TEST_DGLD_OS_COMMON_108_GuestUser_checkout_OrderTotal_LessThan50_Kl
 		}
 	}
 
-
 	@AfterTest
 	public void clearBrowser() {
 		Common.closeAll();
