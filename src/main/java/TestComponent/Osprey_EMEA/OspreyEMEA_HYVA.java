@@ -513,7 +513,7 @@ public class OspreyEMEA_HYVA {
 			}
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(6000);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Customer Login")
