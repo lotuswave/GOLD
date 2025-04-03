@@ -156,7 +156,7 @@ public class GoldDrybarusHelper2 {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-//			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
+			Common.clickElement("xpath", "//button[@type='submit']//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().contains("Home Page")
@@ -654,6 +654,7 @@ public class GoldDrybarusHelper2 {
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
 		String save=data.get(Dataset).get("SubscribeSave");
+		String save1=data.get(Dataset).get("Save Subscription");
 		System.out.println(save);
 		try
 		{
@@ -687,8 +688,15 @@ public class GoldDrybarusHelper2 {
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "(//input[@name='aw-sarp2-dropdown-show-hide'])[2]");
 //			Thread.sleep(4000);
-		     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
-			Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save);
+			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
+				Sync.waitPageLoad();
+			     Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
+				Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save);
+			} else {
+				 Sync.waitElementPresent("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]");
+				Common.dropdown("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]", Common.SelectBy.TEXT, save1);
+			}
+		  
 			Thread.sleep(4000);
 			String drop=Common.findElement("xpath", "//select[contains(@class,'aw-sarp2-subscription__options-list')]//option[contains(text(),'"+ save +"')]").getText();
 			Thread.sleep(4000);
