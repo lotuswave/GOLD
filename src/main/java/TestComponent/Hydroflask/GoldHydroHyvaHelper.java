@@ -12635,7 +12635,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Common.textBoxInput("xpath", "//input[@name='current_password']", "Lotuswave@1234");
 			Common.clickElement("xpath", "//span[text()='Save Account Information']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			String successmessage = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			Common.assertionCheckwithReport(
 					successmessage.contains("You saved the account information.")
