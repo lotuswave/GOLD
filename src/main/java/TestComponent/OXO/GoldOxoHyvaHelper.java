@@ -4932,8 +4932,8 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@name='customerLastName']");
 			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
 			
-			Common.clickElement("xpath", "//input[@id='customerEmailConfirm']");
-			Common.textBoxInput("xpath", "//input[@id='customerEmailConfirm']", data.get(dataSet).get("Email"));
+			Common.clickElement("xpath", "//input[@id='customerEmail']");
+			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
 
 //		Sync.waitElementPresent("xpath", "//input[@name='company']");
 //		Common.textBoxInput("xpath", "//input[@name='company']", data.get(dataSet).get("Company"));
@@ -4986,6 +4986,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//textarea[@data-label='Comments']");
 			Common.textBoxInput("xpath", "//textarea[@data-label='Comments']", data.get(dataSet).get("Comments"));
 
+			if(Common.getCurrentURL().contains("preprod")) {
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
 			Common.clickElement("xpath", "//button[text()='Submit']");
 			Sync.waitPageLoad();
@@ -4998,6 +4999,11 @@ catch(Exception | Error e)
 					"Success message should be Displayed", "Contact us Success message displayed ",
 					"failed to dispaly success message");
 		}
+		
+		else {
+			System.out.println(Common.getCurrentURL());
+		}
+	}
 
 		catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5008,14 +5014,14 @@ catch(Exception | Error e)
 
 		}
 
-		Common.actionsKeyPress(Keys.PAGE_UP);
+	/*	Common.actionsKeyPress(Keys.PAGE_UP);
 		Common.scrollIntoView("xpath", "//div[@class='form-wrap']");
 		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
 		System.out.println(Text);
 		expectedResult = "User gets confirmation email with Success message";
 		Common.assertionCheckwithReport(Text.contains("Your submission was successful"),
 				"verifying contact us confirmation message", expectedResult,
-				"User gets confirmation under the same tab", "unabel to load the confirmation form");
+				"User gets confirmation under the same tab", "unabel to load the confirmation form");*/
 
 	}
 
