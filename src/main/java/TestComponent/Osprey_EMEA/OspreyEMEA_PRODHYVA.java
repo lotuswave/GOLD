@@ -596,6 +596,7 @@ public class OspreyEMEA_PRODHYVA {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ bag +"')]");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ outdoor +"')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'"+ outdoor +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
@@ -688,7 +689,7 @@ public class OspreyEMEA_PRODHYVA {
 
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + bag + "')]");
 	                        Common.clickElement("xpath", "//span[contains(text(),'" + bag + "')]");
-
+	                        Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'Kids Packs')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
@@ -844,6 +845,7 @@ public class OspreyEMEA_PRODHYVA {
 				for (i = 0; i < Links.length; i++) {
 					Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+					Thread.sleep(3000);
 					Common.clickElement("xpath", "//span[contains(text(),'Shop by Activity')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
@@ -979,6 +981,8 @@ public class OspreyEMEA_PRODHYVA {
 					Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
+							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
+					Common.scrollIntoView("xpath",
 							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 					Common.clickElement("xpath",
 							"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
@@ -1343,7 +1347,7 @@ public class OspreyEMEA_PRODHYVA {
 				
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + bag + "')]");
                 Common.clickElement("xpath", "//span[contains(text(),'" + bag + "')]");
-
+                Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Access +"')]");
 				Common.clickElement("xpath", "//span[contains(text(),'"+ Access +"')]");
 
@@ -1520,6 +1524,7 @@ public class OspreyEMEA_PRODHYVA {
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//a[contains(@class,'btn btn-secondary')]//span");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
@@ -1621,7 +1626,7 @@ public class OspreyEMEA_PRODHYVA {
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
-				
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//a[contains(@class,'btn btn-secondary')]//span");
 				Common.clickElement("xpath", "//a[contains(@class,'btn btn-secondary')]//span");
 				Sync.waitPageLoad();
@@ -15308,9 +15313,12 @@ public void header_Icons(String Dataset) {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//span[contains(text(),'Icons')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Common.scrollIntoView("xpath",
 						"//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
 						"//span[contains(text(),'" + Links[i] + "')]");
@@ -15372,6 +15380,8 @@ public void header_Shopby_Litres(String Dataset) {
 			Common.clickElement("xpath", "//span[contains(text(),'Shop by Litres')]");
 			Thread.sleep(3000);
 			Sync.waitElementPresent("xpath",
+					"//span[contains(text(),'" + Links[i] + "')]");
+			Common.scrollIntoView("xpath",
 					"//span[contains(text(),'" + Links[i] + "')]");
 			Common.clickElement("xpath",
 					"//span[contains(text(),'" + Links[i] + "')]");
