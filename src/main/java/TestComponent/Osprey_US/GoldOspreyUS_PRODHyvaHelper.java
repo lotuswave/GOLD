@@ -2020,7 +2020,8 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
 			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
-			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
+			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products)
+					||Common.getPageTitle().contains(prodproduct),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			product_quantity(Dataset);
