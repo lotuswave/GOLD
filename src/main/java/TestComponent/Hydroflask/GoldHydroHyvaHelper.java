@@ -2010,15 +2010,15 @@ public class GoldHydroHyvaHelper {
 			
 			
 			Sync.waitElementPresent("xpath", "//input[@placeholder='Enter your Code']");
-		    Common.textBoxInput("xpath", "//input[@placeholder='Enter your Code']", data.get(dataSet).get("GiftCard2"));
-			System.out.println(data.get(dataSet).get("GiftCard2"));
+		    Common.textBoxInput("xpath", "//input[@placeholder='Enter your Code']", data.get(dataSet).get("GiftCard_Preprod"));
+			System.out.println(data.get(dataSet).get("GiftCard_Preprod"));
 			Common.clickElement("xpath", "//span[text()='Add']");
 			
 		
 			Thread.sleep(6000);
 		String Applied_Code = Common.findElement("xpath", "(//p[@class='text-sm'])[1]").getText();
 		
-		Common.assertionCheckwithReport(Applied_Code.equals(data.get(dataSet).get("GiftCard2")),
+		Common.assertionCheckwithReport(Applied_Code.equals(data.get(dataSet).get("GiftCard_Preprod")),
 				"validating the Gifcode Applied in My Account",
 				"Giftcode should be Applied",
 				"Sucessfully Giftcode should be Applied",
@@ -2147,12 +2147,12 @@ public class GoldHydroHyvaHelper {
 	
 	public void Select_Gift_Code(String dataSet) {
 		// TODO Auto-generated method stub
-		String Giftcard = data.get(dataSet).get("GiftCard2");
+		String Giftcard = data.get(dataSet).get("GiftCard_Preprod");
 		try {
 			
 			Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
 			Common.clickElement("xpath", "//input[@placeholder='Enter your Code']");
- 
+			Thread.sleep(2000);
 			//			Common.dropdown("xpath", "//input[@name='amcard-field -datalist']", Common.SelectBy.TEXT, "GiftCard2");
 			Common.clickElement("xpath", "//a[text()='"+Giftcard+"']");
 			Common.clickElement("xpath", "//span[contains(text(),'Add Code')]");
@@ -2181,7 +2181,7 @@ public void FUll_Payment(String dataSet) {
 	 	
 		String Symbl = data.get(dataSet).get("Symbol");
 		try {
-			String  GiftCard=data.get(dataSet).get("GiftCard2");
+			String  GiftCard=data.get(dataSet).get("GiftCard_Preprod");
 			Thread.sleep(6000);
 			String Total_Incl_Tax =Common.getText("xpath", "(//div[@class='item grand_total']//span[contains(@class,'value text-right text-sale-font')])[1]").replace(Symbl,"");
 			
