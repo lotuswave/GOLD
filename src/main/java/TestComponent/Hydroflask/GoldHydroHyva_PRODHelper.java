@@ -8708,7 +8708,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					int size = Common.findElements("id", "coupon_code").size();
 					Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 							"Successfully open the discount input box", "User unable enter Discount Code");
-					Sync.waitElementClickable(30,"xpath", "//span[contains(text(),'Apply Code')]");
+					Sync.waitElementClickable(30,"xpath", "//span[contains(text(),'Apply Discount')]");
 					Common.clickElement("xpath", "//span[contains(text(),'Apply Discount')]");
 					Sync.waitPageLoad();
 					expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
