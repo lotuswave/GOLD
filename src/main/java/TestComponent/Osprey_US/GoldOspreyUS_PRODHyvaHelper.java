@@ -1501,7 +1501,6 @@ public void header_Shopbycollection(String Dataset) { {
 
 			}
 		}
-
 		catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "",
