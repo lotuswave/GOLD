@@ -3052,6 +3052,7 @@ public String create_account(String Dataset) {
 	public void search_product(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
+		String product1 = data.get(Dataset).get("Prod Products OOS");
 		System.out.println(product);
 		try {
 			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
@@ -3061,7 +3062,13 @@ public String create_account(String Dataset) {
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
 			WebElement serachbar = Common.findElement("xpath", "//input[@id='autocomplete-0-input']");
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			serachbar.sendKeys(product);
+			}
+			else {
+				serachbar.sendKeys(product1);
+			}
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(8000);
@@ -7067,11 +7074,11 @@ catch(Exception | Error e)
 								|| name.contains(prod) && productprice.equals(PLPprice),
 						"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 						"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				Common.scrollIntoView("xpath", "//span[text()='Notify Me When Available']");
 				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
-				Thread.sleep(2000);
-				String newsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				//Thread.sleep(2000);
+				String newsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 				System.out.println(newsubcribe);
 				Common.assertionCheckwithReport(
 						newsubcribe.contains("Alert subscription has been saved.")
@@ -7080,18 +7087,18 @@ catch(Exception | Error e)
 						"after click on subcribe button message should be appear",
 						"Sucessfully message has been displayed when we click on the subcribe button ",
 						"Failed to display the message after subcribtion");
-//				Common.actionsKeyPress(Keys.END);
-//				Common.clickElement("xpath", "//a[text()='Notify Me When Available']");
-//				Sync.waitPageLoad();
-//				Thread.sleep(4000);
-//				String oldsubcribe = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
-//				System.out.println(oldsubcribe);
-//				Common.assertionCheckwithReport(
-//						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
-//						"verifying the out of stock subcription",
-//						"after click on subcribe button message should be appear",
-//						"Sucessfully message has been displayed when we click on the subcribe button ",
-//						"Failed to display the message after subcribtion");
+				Common.actionsKeyPress(Keys.END);
+				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
+				Sync.waitPageLoad();
+				//Thread.sleep(4000);
+				String oldsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
+				System.out.println(oldsubcribe);
+				Common.assertionCheckwithReport(
+						oldsubcribe.contains("Thank you! You are already subscribed to this product."),
+						"verifying the out of stock subcription",
+						"after click on subcribe button message should be appear",
+						"Sucessfully message has been displayed when we click on the subcribe button ",
+						"Failed to display the message after subcribtion");
 				price = Common.findElement("xpath", "//span[contains(@x-html,'getFormattedFinalPrice')]")
 						.getAttribute("data-price-final-amount--finalprice");
 			}
@@ -7112,7 +7119,7 @@ catch(Exception | Error e)
 	public void My_order_subcribtion(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
-		String prod = data.get(Dataset).get("prod product");
+		String prod = data.get(Dataset).get("Prod Products OOS");
 		try {
 			Sync.waitElementPresent("xpath", "//span[@class='text-xs hidden lg:inline dr:hidden']");
 			Common.clickElement("xpath", "//span[@class='text-xs hidden lg:inline dr:hidden']");
@@ -7127,14 +7134,29 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//span[text()='My Out of Stock Subscriptions']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementPresent(20, "xpath", "//a[@title='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
-			String name = Common.findElement("xpath", "//a[@title='OXO Ceramic Professional Non-Stick 12-Inch Frypan']").getText();
-			Common.assertionCheckwithReport(name.equals(products) || name.equals(prod),
+			if (Common.getCurrentURL().contains("preprod")) 
+			{
+				Sync.waitElementPresent(30, "xpath", "//a[@title='" + products + "']");
+			//Sync.waitElementPresent(20, "xpath", "//a[@title='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
+			String name = Common.findElement("xpath", "//a[@title='" + products + "']").getText();
+			Common.assertionCheckwithReport(name.equals(products),
 					"validating the outofstock produt in the subcribtion page",
 					"Product should be display in the subcribtion page",
 					"Sucessfully product has been appeared in the outofstock subcription page",
 					"Failed to see the product in subcribtion page");
+			}
+			else {
+				Sync.waitElementPresent(30, "xpath", "//a[@title='" + prod + "']");
+				//Sync.waitElementPresent(20, "xpath", "//a[@title='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
+				String name = Common.findElement("xpath", "//a[@title='" + prod + "']").getText();
+				Common.assertionCheckwithReport(name.equals(prod),
+						"validating the outofstock produt in the subcribtion page",
+						"Product should be display in the subcribtion page",
+						"Sucessfully product has been appeared in the outofstock subcription page",
+						"Failed to see the product in subcribtion page");
+			}
 
+ 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the outofstock produt in the subcribtion page",
@@ -7143,22 +7165,22 @@ catch(Exception | Error e)
 					Common.getscreenShot("Failed to see the product in subcribtion page"));
 			Assert.fail();
 		}
-
+ 
 	}
 
 	public void remove_outofstock_subcribtion(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(4000);
-			String price = Common.findElement("xpath", "//span[@data-price-type='finalPrice']")
+			String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]")
 					.getAttribute("data-price-amount");
 			if (price.equals(Dataset)) {
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+				Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
 				Common.implicitWait();
 				Common.alerts("Cancel");
 				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//span[text()='Remove'])[2]");
+				Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
 				Common.implicitWait();
 				Common.alerts("Ok");
 
