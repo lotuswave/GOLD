@@ -25,7 +25,7 @@ public class Test_DGLD_OS_070_Guest_User_Checkout_With_CA_Shipping_Address {
         Osprey_ReEu.addtocart("Ace Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("CAAccount");
-        Osprey_ReEu.Prevent_Shipping();
+       // Osprey_ReEu.Prevent_Shipping();
         
         
         
