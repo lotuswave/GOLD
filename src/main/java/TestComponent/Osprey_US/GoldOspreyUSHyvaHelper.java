@@ -298,7 +298,7 @@ public void Login_Account(String dataSet) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
-				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod Email"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
