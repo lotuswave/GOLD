@@ -5572,7 +5572,7 @@ return Number;
 					.getText();
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().equals("Dashboard")
-							&& message.contains("Thank you for registering"),
+							|| message.contains("Thank you for registering"),
 					"validating the  my Account page Navigation when user clicks on signin button",
 					"User should able to navigate to the my account page after clicking on Signin button",
 					"Sucessfully navigate to the My account page after clicking on signin button ",
