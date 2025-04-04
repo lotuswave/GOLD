@@ -21,7 +21,6 @@ public class TEST_DGLD_OS_COMMON_059_Contactus_form {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.clickContact();
         Osprey_ReEu.contactUsPage("contactusEmail");
-
         
 		} catch (Exception e) {
 
