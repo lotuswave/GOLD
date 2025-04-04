@@ -23,10 +23,10 @@ public class Test_DGLD_DB_E2E_006_Guestuser_checkout_3items_Expeditedshipping_Gi
 			Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
 			String Description="Guest user checkout with 3 items + Expedited shipping + Gift Code redeeem Partial + Paypal";
 			Drybar.Verify_Homepage();
-//			Drybar.search_product("900-2230-1 Product");
-//	        Drybar.addtocart("900-2230-1 Product");
-//	        Drybar.search_product("900-0630-1 Product");
-//	        Drybar.addtocart("900-0630-1 Product");
+			Drybar.search_product("900-2230-1 Product");
+	        Drybar.addtocart("900-2230-1 Product");
+	        Drybar.search_product("900-0630-1 Product");
+	        Drybar.addtocart("900-0630-1 Product");
 	        Drybar.search_product("900-0700-4 Product");
 	        Drybar.addtocart("900-0700-4 Product");
 	        Drybar.minicart_Checkout();

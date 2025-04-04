@@ -23,10 +23,10 @@ public class Test_DGLD_DB_E2E_007_Guestuser_checkout_with_Simple_aerosalBundle_C
 		Drybar.prepareOrdersData("Drybar_E2E_orderDetails.xlsx");
 		String Description="Guest user checkout with 1 Simple + 1 aerosal Bundle + 1Configurable  item + Standard shipping + Discount + Gift Code Redeem Full";
 		Drybar.Verify_Homepage();
-//        Drybar.search_product("900-2230-1 Product");
-//        Drybar.addtocart("900-2230-1 Product");
-//        Drybar.search_product("CURE-LIQUEUR- product");
-//        Drybar.addtocart("CURE-LIQUEUR- product");
+        Drybar.search_product("900-2230-1 Product");
+        Drybar.addtocart("900-2230-1 Product");
+        Drybar.search_product("CURE-LIQUEUR- product");
+        Drybar.addtocart("CURE-LIQUEUR- product");
         Drybar.search_product("Refresh Bundle");
     	Drybar.addtocart("Refresh Bundle");
         Drybar.minicart_Checkout();
