@@ -10927,7 +10927,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					Common.clickElement("xpath","(//span[contains(text(),'New Arrivals')])[1]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]");
-					Common.clickElement("xpath","(//span[contains(text(),'" + Links[i] + "')])[1]");
+					Common.javascriptclickElement("xpath","(//span[contains(text(),'" + Links[i] + "')])[1]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String Page_title = "";
