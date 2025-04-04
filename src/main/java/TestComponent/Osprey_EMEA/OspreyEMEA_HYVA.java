@@ -1179,9 +1179,7 @@ public class OspreyEMEA_HYVA {
 				}
 
 			}}
-	
-	
-	
+
 	public void header_Luggage(String Dataset) {
 	       
 		if(Common.getCurrentURL().contains("www.osprey.com/gb/"))
