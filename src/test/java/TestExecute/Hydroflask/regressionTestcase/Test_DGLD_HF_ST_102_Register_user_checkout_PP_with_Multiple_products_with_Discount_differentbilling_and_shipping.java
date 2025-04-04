@@ -24,9 +24,9 @@ public class Test_DGLD_HF_ST_102_Register_user_checkout_PP_with_Multiple_product
 			Hydro.search_product("Bundle product"); 
 			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.minicart_Checkout();
+			Hydro.discountCode("Discount");
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
-            Hydro.discountCode("Discount");
             Hydro.clickSubmitbutton_Shippingpage();
             Hydro.register_billingAddress("BillingDetails");
             Hydro.payPal_Payment("PaypalDetails");
