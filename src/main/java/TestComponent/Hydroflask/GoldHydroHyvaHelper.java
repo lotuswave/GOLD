@@ -484,6 +484,7 @@ public class GoldHydroHyvaHelper {
 		catch (Exception | Error e) {
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
 			Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
+			Thread.sleep(5000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page after clicking on the checkout page", "Successfully navigate to the shipping page after clicking on the checkout page",
@@ -2539,21 +2540,32 @@ public void FUll_Payment(String dataSet) {
 
 	public void discountCode(String dataSet) throws Exception {
 		String expectedResult = "It should opens textbox input to enter discount.";
-
+ 
 		try {
-
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
+int discountsize = Common.findElements("xpath", "(//span[contains(text(),'Discount (10% off test coupon)')])[1]").size();
+			if(discountsize>0)
+{
+				Thread.sleep(4000);
+	
+Common.findElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
+Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
+			
+}
+			else {
+				Thread.sleep(4000);
+				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 				Sync.waitElementPresent("id", "discount-code");
-
+ 
 				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("Discountcode"));
 			} else {
 				Sync.waitElementPresent("id", "discount-code");
-
+ 
 				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
 			}
-
+ 
 			int size = Common.findElements("id", "discount-code").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
@@ -2561,7 +2573,7 @@ public void FUll_Payment(String dataSet) {
 			Sync.waitElementClickable("xpath", "//span[contains(text(),'Apply Code')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 		/*	Common.scrollIntoView("xpath", "//div[@ui-id='message-success']//span");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']//span");
@@ -2582,7 +2594,7 @@ public void FUll_Payment(String dataSet) {
 					.replace("$", "").trim();
 			Float Discountvalue = Float.parseFloat(Discount);
 			System.out.println(Discountvalue);
-
+ 
 			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
 					.replace("$", "").trim();
 			Float ordertotalvalue = Float.parseFloat(ordertotal);
@@ -2595,16 +2607,16 @@ public void FUll_Payment(String dataSet) {
 					"Order summary should be display in the payment page and all fields should display",
 					"Successfully Order summary is displayed in the payment page and fields are displayed",
 					"Failed to display the order summary and fileds under order summary");*/
-
+ 
 		}
-
+ 
 		catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("validating discount code", expectedResult,
 					"User failed to proceed with discountcode",
 					Common.getscreenShotPathforReport("discountcodefailed"));
-
+ 
 			Assert.fail();
-
+ 
 		}
 	}
 
@@ -8441,8 +8453,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[normalize-space()='Save']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			String update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='0']").getText().trim();
-			System.out.println(update);
+			String update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='4335046']").getText().trim();
+				System.out.println(update);
 			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr") ,
 					"verifying the Billing address form in payment page",
 					"Billing address should be saved in the payment page",
