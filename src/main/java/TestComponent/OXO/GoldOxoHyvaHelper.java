@@ -5023,7 +5023,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@name='customerLastName']");
 			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
 			
-			if (Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("preprod")){
 			Common.clickElement("xpath", "//input[@id='customerEmailConfirm']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmailConfirm']", data.get(dataSet).get("Email"));
 
