@@ -1061,40 +1061,96 @@ public class GoldOxoHyvaHelper
 	
 	
 	public void updateproductcolor_shoppingcart(String Dataset) {
+
 		// TODO Auto-generated method stub
+
 		String productcolor1 = "Taupe";
+		String productcolor2 = "Blossom";
 		String product = data.get(Dataset).get("Colorproduct");
-		System.out.println(productcolor1);
+		String product1 = data.get(Dataset).get("Colorproduct1");
+
+		//System.out.println(productcolor1);
+
 		try {
+
+			if (Common.getCurrentURL().contains("preprod"))
+
+			{
+
 			Common.clickElement("xpath", "//div[@class='flex justify-end']//a[@title='Edit Perch Booster Seat With Straps']");      // need to click on the color product
+
 			Sync.waitPageLoad();
+
 			Thread.sleep(8000);
+
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
+
 			Thread.sleep(4000);
+
 			Common.clickElement("xpath", "//input[@aria-label='" + productcolor1 + "']");
+
 			Thread.sleep(4000);
+
+			}
+
+			else
+
+			{
+
+				Common.clickElement("xpath", "//div[@class='flex justify-end']//a[@title='Edit Stick & Stay Suction Divided Plate']");      // need to click on the color product
+
+				Sync.waitPageLoad();
+
+				Thread.sleep(8000);
+
+				Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor2 + "']");
+
+				Thread.sleep(4000);
+
+				Common.clickElement("xpath", "//input[@aria-label='" + productcolor2 + "']");
+
+				Thread.sleep(4000);
+
+			}
+
 			Common.clickElement("xpath", "//span[contains(text(),'Update item')]");
+
 			Sync.waitPageLoad();
+
 			Thread.sleep(4000);
+
 			String getProductColor =Common.findElement("xpath","(//div[@class='mt-2 title-xs hf:title-2xs os:text-sm']//span)[2]").getText().trim();
+
 			System.out.println(getProductColor);
-			Common.assertionCheckwithReport(productcolor1.equals(getProductColor),
+
+			Common.assertionCheckwithReport(productcolor1.equals(getProductColor) || productcolor2.equals(getProductColor),
+
 					"validating the update color in shopping cart page",
+
 					"color should be update in the shopping cart page",
+
 					"color has been updated in the shopping cart page",
+
 					"Failed to update the product color in the shopping cart page");
-
+ 
 		} catch (Exception | Error e) {
+
 			e.printStackTrace();
+
 			ExtenantReportUtils.addFailedLog("validating the update color in shopping cart page",
+
 					"color should be update in the shopping cart page",
+
 					"Unable to update the product color in the shopping cart page",
+
 					Common.getscreenShot("Failed to update the product color in the shopping cart page"));
+
 			Assert.fail();
+
 		}
-
+ 
 	}
-
+ 
 	public void selectStandardshippingaddress() {
 		try {
 
@@ -4967,9 +5023,17 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//input[@name='customerLastName']");
 			Common.textBoxInput("xpath", "//input[@name='customerLastName']", data.get(dataSet).get("LastName"));
 			
+			if (Common.getCurrentURL().contains("preprod")) {
+			Common.clickElement("xpath", "//input[@id='customerEmailConfirm']");
+			Common.textBoxInput("xpath", "//input[@id='customerEmailConfirm']", data.get(dataSet).get("Email"));
+
+			}
+			else
+			{
+				
+			}
 			Common.clickElement("xpath", "//input[@id='customerEmail']");
 			Common.textBoxInput("xpath", "//input[@id='customerEmail']", data.get(dataSet).get("Email"));
-
 //		Sync.waitElementPresent("xpath", "//input[@name='company']");
 //		Common.textBoxInput("xpath", "//input[@name='company']", data.get(dataSet).get("Company"));
 
@@ -7432,7 +7496,9 @@ catch(Exception | Error e)
 		try {
 			if(Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") )
 			{
-			Thread.sleep(6000);
+				Thread.sleep(6000);
+				Common.scrollIntoView("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']");
+				Thread.sleep(1000);
 			String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace(Symbol,
 					"");
 			Float subtotalvalue = Float.parseFloat(Subtotal);
