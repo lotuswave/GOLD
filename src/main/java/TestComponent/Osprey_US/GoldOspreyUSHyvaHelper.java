@@ -12396,7 +12396,9 @@ catch(Exception | Error e)
 	public void PDP_video_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
+		String Prod = data.get(Dataset).get("Prod Product");
 		try {
+			if(Common.getCurrentURL().contains("preprod")) {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
@@ -12410,8 +12412,10 @@ catch(Exception | Error e)
 					break;
 				}
 			}
+		
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Thread.sleep(4000);
+	
 			
 			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[2]");
 			Thread.sleep(4000);
@@ -12455,7 +12459,63 @@ catch(Exception | Error e)
 			
 			
 		}
-		
+		   else {
+			  Sync.waitPageLoad();
+			  for (int i = 0; i <= 10; i++) {
+					Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+					List<WebElement> webelementslist = Common.findElements("xpath",
+							"//img[contains(@itemprop ,'image')]");
+					String s = webelementslist.get(i).getAttribute("src");
+					System.out.println(s);
+					if (s.isEmpty()) {
+
+					} else {
+						break;
+					}
+				}
+				
+				Common.javascriptclickElement("xpath", "//img[@alt='" + Prod + "']");
+				Thread.sleep(4000);
+
+				Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[2]");
+				Thread.sleep(4000);
+
+				Sync.waitElementPresent(40, "xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
+				Common.clickElement("xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
+				Thread.sleep(2000);
+				Sync.waitForLoad();
+				Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
+				String video = Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']")
+						.getAttribute("aria-labelledby");
+				System.out.println(video);
+				Common.assertionCheckwithReport(video.equals("play-button-tooltip"), "validating the video in PDP page",
+						"video should be play in the PDP page", "Sucessfully the video has been played on the PDP page",
+						"failed to play the video in PDP page");
+				Sync.waitElementPresent(40, "xpath", "//button[@aria-labelledby='play-button-tooltip']");
+				Common.clickElement("xpath", "//div[@class='vp-player-ui-container content-area-sibling-enabled']");
+				String video1 = Common.findElement("xpath", "//button[@aria-labelledby='play-button-tooltip']")
+						.getAttribute("aria-labelledby");
+				System.out.println(video);
+				Common.assertionCheckwithReport(video1.equals("play-button-tooltip"), "validating the video in PDP page",
+						"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
+						"failed to Pause the video in PDP page");
+				Common.switchToDefault();
+				Thread.sleep(4000);
+				Common.scrollIntoView("xpath", "//img[@alt='Sustainable design']");
+				Sync.waitElementPresent("xpath", "//img[@alt='Sustainable design']");
+				Common.clickElement("xpath", "//img[@alt='Sustainable design']");
+				Thread.sleep(3000);
+				Common.switchFrames("xpath", "//iframe[@title='Vimeo video player']");
+				Thread.sleep(3000);
+				Common.clickElement("xpath", "//button[@aria-labelledby='play-button-tooltip']");
+				Thread.sleep(8000);
+				String video2 = Common.findElement("xpath", "//button[@data-play-button='true']")
+						.getAttribute("data-play-button");
+				Common.assertionCheckwithReport(video2.contains("true"), "validating the video in PDP page",
+						"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
+						"failed to Pause the video in PDP page");
+				Common.switchToDefault();
+		  }}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
@@ -12465,7 +12525,6 @@ catch(Exception | Error e)
 			AssertJUnit.fail();
 		}
 	}
-
 	public void prodeler_invalid_details(String dataSet) {
 		// TODO Auto-generated method stub
 		click_Prodeal();
