@@ -11,7 +11,7 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Discover_CC_2Day {
+public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Visa_CC_2Day {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
@@ -34,7 +34,7 @@ public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Discover_CC_2Day {
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("2 Day method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();
-            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCDiscovercard");
+            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
            
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
