@@ -4982,11 +4982,10 @@ public void FUll_Payment(String dataSet) {
 	//Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	//Thread.sleep(4000);
 	//order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//span");
-         	    order = Common.getText("xpath", "(//div[contains(@class,'checkout-success')]//p//a)[1]");
-         	    System.out.println(order);
-         	    
-         	   Common.assertionCheckwithReport(order.contains("DRYUSPRE"), "validating the order confirmation page",
-       				expectedResult, "order placed successfully", "unable to place the order");
+         	   order = Common.getText("xpath", "(//h1[contains(text(),'Thank you')])");
+        	    System.out.println(order);
+        	   Common.assertionCheckwithReport(order.contains("Thank you for your purchase!"), "validating the order confirmation page",
+      				expectedResult, "order placed successfully", "unable to place the order");
 		}
 		else
 		{
