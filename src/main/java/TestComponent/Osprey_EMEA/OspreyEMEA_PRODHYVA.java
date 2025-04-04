@@ -15378,7 +15378,7 @@ public void header_Shopby_Litres(String Dataset) {
 			Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
 			Thread.sleep(3000);
 			Common.clickElement("xpath", "//span[contains(text(),'Shop by Litres')]");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath",
 					"//span[contains(text(),'" + Links[i] + "')]");
 			Common.scrollIntoView("xpath",

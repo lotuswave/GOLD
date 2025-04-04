@@ -1063,9 +1063,12 @@ public class OspreyEMEA_HYVA {
 						for (i = 0; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 							Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-							Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
 							Thread.sleep(3000);
+							Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
+							Thread.sleep(4000);
 							Sync.waitElementPresent("xpath",
+									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
+							Common.scrollIntoView("xpath",
 									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Common.clickElement("xpath",
 									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
