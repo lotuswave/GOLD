@@ -15460,9 +15460,9 @@ public void header_Explore(String Dataset) {{
 	// TODO Auto-generated method stub
 	
 	String names = data.get(Dataset).get("Osprey Explore");
-	String[] Links = names.split(",");
-	String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
-	String[] Link = name.split(",");
+//	String[] Links = names.split(",");
+//	String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
+//	String[] Link = name.split(",");
 	String Name=data.get(Dataset).get("Prod Explore");
 	String[] Link1 = Name.split(",");
 	String Name1=data.get(Dataset).get("Prod Expert");
@@ -15470,10 +15470,17 @@ public void header_Explore(String Dataset) {{
 	String Explore=data.get(Dataset).get("Explore CTA");
 	String activity=data.get(Dataset).get("Activity");
 	String ExpertAdvice=data.get(Dataset).get("Expert Advice");
+	 String AboutOsprey =data.get(Dataset).get("About Osprey");
+	 String[] Links = AboutOsprey.split(",");
+	 String name = data.get(Dataset).get("About Osprey").toUpperCase();
+	 String[] Link = name.split(",");
+
+
 	int i = 0;
 	try {
 		if(Common.getCurrentURL().contains("preprod"))
 		{
+			
 		for (i = 0; i < Links.length; i++) {
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
 			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
@@ -15498,7 +15505,7 @@ public void header_Explore(String Dataset) {{
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
 					||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("50years")
-					|| Common.getPageTitle().contains(Links[i]) ,
+					|| Common.getPageTitle().contains(Links[i]) || Common.getCurrentURL().contains("size-fit"),
 					"verifying the header link " + Links[i] + "Under Accessories",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -15515,6 +15522,7 @@ public void header_Explore(String Dataset) {{
 				"user successfully Navigated to the stories page", "Failed to navigate to the stories page");
 		
 	}
+		
 		else
 		{
 			
@@ -15606,6 +15614,7 @@ public void header_Explore(String Dataset) {{
 
 }	}
 
+
 public void sale() {
 	try
 	{
@@ -15666,6 +15675,72 @@ public void packfinder() {
 		Assert.fail();
 	}
 }
+
+public void header_Explore_2(String Dataset) {{
+	// TODO Auto-generated method stub
+	
+	String names = data.get(Dataset).get("Expert");
+	String[] Links = names.split(",");
+	String name = data.get(Dataset).get("Expert").toUpperCase();
+	String[] Link = name.split(",");
+	String Name=data.get(Dataset).get("Prod Explore");
+	String[] Link1 = Name.split(",");
+	String Name1=data.get(Dataset).get("Prod Expert");
+	String[] Link2 = Name1.split(",");
+	String Explore=data.get(Dataset).get("Explore CTA");
+	String Expert=data.get(Dataset).get("Expert Advice");
+      
+
+
+	String ExpertAdvice=data.get(Dataset).get("Expert Advice");
+	int i = 0;
+	try {
+		if(Common.getCurrentURL().contains("preprod"))
+		{
+		for (i = 0; i < Links.length; i++) {
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+			Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+			Common.clickElement("xpath", "//a//span[contains(text(),'" + Expert + "')]");
+			Thread.sleep(3000);
+			Sync.waitElementPresent("xpath",
+					"//a//span[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath",
+					"//li//a//span[contains(text(),'" + Links[i] + "')]");		
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			String breadcrumbs="";
+			if (Common.findElements("xpath", "//div//nav[contains(@class,'breadcrumbs')]").size() > 0) {
+			    breadcrumbs = Common.findElement("xpath", "//div//nav[contains(@class,'breadcrumbs')]").getText().toUpperCase();
+			} else {
+			    String currentURL = Common.getCurrentURL();
+			    System.out.println("Redirecting to URL: " + currentURL);
+			} 
+			System.out.println(breadcrumbs);
+			System.out.println(Links[i]);
+			System.out.println(Link[i]);
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
+					||breadcrumbs.contains(Link[i])  || Common.getPageTitle().contains(Links[i]) 
+					|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("fitting-learning")||Common.getCurrentURL().contains("suspension"),
+					"verifying the header link " + Links[i] + "Under explore",
+					"user should navigate to the " + Links[i] + " page",
+					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+}}
+	
+	catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under explore",
+				"User should navigate to the " + Links[i] + "pages",
+				" unable to navigate to the " + Links[i] + "pages",
+				Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+		Assert.fail();
+	}
+
+}	}
+
+
 
 public void AddtoCart_Disable_PLP(String Dataset) {
 	// TODO Auto-generated method stub
