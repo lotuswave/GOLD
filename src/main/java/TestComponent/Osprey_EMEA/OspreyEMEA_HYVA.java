@@ -1063,7 +1063,7 @@ public class OspreyEMEA_HYVA {
 						for (i = 0; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 							Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-							Thread.sleep(3000);
+							Thread.sleep(5000);
 							Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
 							Thread.sleep(4000);
 							Sync.waitElementPresent("xpath",
