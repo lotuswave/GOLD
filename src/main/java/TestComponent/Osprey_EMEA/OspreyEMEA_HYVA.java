@@ -1063,9 +1063,9 @@ public class OspreyEMEA_HYVA {
 						for (i = 0; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'Featured')]");
 							Common.clickElement("xpath", "//span[contains(text(),'Featured')]");
-							Thread.sleep(5000);
+							Thread.sleep(3000);
 							Common.clickElement("xpath", "//span[contains(text(),'Shop by Collections')]");
-							Thread.sleep(4000);
+							Thread.sleep(3000);
 							Sync.waitElementPresent("xpath",
 									"//a[contains(@href,'shop-by-collections')]//span[contains(text(),'" + Links[i] + "')]");
 							Common.scrollIntoView("xpath",
@@ -1117,6 +1117,7 @@ public class OspreyEMEA_HYVA {
 					String Featured=data.get(Dataset).get("Feature");
 					String collections=data.get(Dataset).get("Activity");
 					int i = 0;
+					Common.actionsKeyPress(Keys.END);
 					try {
 						for (i = 10; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
