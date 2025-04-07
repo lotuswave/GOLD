@@ -11,31 +11,36 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Visa_CC_2Day {
+public class Test_DGLD_HYF_E2E_ST_012_RegisterUser_checkout_including_engraving_with_Paypal_Gift_message {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_GuestUser_without_Tax_Visa_CC_2Day () throws Exception {
+	public void Validating_RegisterUser_checkout_including_engraving_with_Paypal_Gift_messag () throws Exception {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Guest User without Tax - Discover CC - 2Day";
+			String Description ="Register user checkout including engraving with Paypal (standard)+ Gift message (More than 50 characters)";
 			Hydro.verifingHomePage();
-			Hydro.search_product("SKU-TT40PS474");     
-			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("SKU-P-S21001 - 1"); 
-			Hydro.Add_Myhydro("SKU-P-S21001 - 1");
+			Hydro.Add_Myhydro_Text("SKU-P-S21001 - 1");
+			Hydro.enraving_Checkout("SKU-P-S21001 - 1");
+			Hydro.search_product("SKU-TT32PS678");     
+			Hydro.addtocart("SKU-TT32PS678");
 			Hydro.search_product("SKU-SCS415 -1QTY");     
 			Hydro.addtocart("SKU-SCS415 -1QTY");
+			Hydro.minicart_viewcart();
+			Hydro.Gift_message("Gift Message above 50");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("No Tax Address");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("2 Day method");
+            Hydro.selectshippingaddress("GroundShipping method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();
-            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-           
+            String OrderNumber=Hydro.payPal_Payment("PaypalDetails");
+        
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
 		} catch (Exception e) {

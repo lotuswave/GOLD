@@ -11,7 +11,7 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_010_GuestUser_checkout_including_inline_and_myhydro_engraving_with_CC_Standard {
+public class Test_DGLD_HYF_E2E_ST_011_GuestUser_checkout_including_inline_and_myhydro_engraving_with_CC_Standard {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");

@@ -11,7 +11,7 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_015_Register_User_with_Applied_loyalty_Coupon_VISA_CC {
+public class Test_DGLD_HYF_E2E_ST_016_Register_User_with_Applied_loyalty_Coupon_VISA_CC {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
