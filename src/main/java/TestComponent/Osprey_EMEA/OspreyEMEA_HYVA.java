@@ -4434,8 +4434,7 @@ return Number;
 		 String account=data.get(Dataset).get("account");
 			try {
 				Sync.waitElementVisible(40, "xpath", "//button[@id='customer-menu']");
-				Common.clickElement("xpath", "//a[@title='My Orders']");
-				Common.clickElement("xpath", "//a[@title='My Orders']");
+				Common.clickElement("xpath", "//a[@id='customer.header.orders.link']");
 				Sync.waitPageLoad();
 				Common.assertionCheckwithReport(
 						Common.getPageTitle().equals("Orders and Returns") || Common.getPageTitle().equals("My Orders") || Common.getCurrentURL().contains("order/history/"),
@@ -4443,8 +4442,8 @@ return Number;
 						"after clicking on the track order it should navigate to the orders and return page",
 						"successfully Navigated to the orders and return page",
 						"Failed to Navigate to the orders and return page");
-				Sync.waitElementPresent("xpath", "//span[text()='"+ account +"']");
-				Common.clickElement("xpath", "//span[text()='"+ account +"']");
+				Sync.waitElementPresent("xpath", "//a[@id='account-information-link']");
+				Common.clickElement("xpath", "//a[@id='account-information-link']");
 				Common.assertionCheckwithReport(Common.getPageTitle().contains("My Account") || Common.getCurrentURL().contains("account/edit/"),
 						"validating the my account page navigation",
 						"After clicking on my account it should navigate to the My account page",
@@ -7493,11 +7492,11 @@ return Number;
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementPresent("xpath", "//a[@title='Create an Account']");
-			Common.clickElement("xpath", "//a[@title='Create an Account']");
+			Sync.waitElementPresent("xpath", "//a[@id='customer.header.register.link']");
+			Common.clickElement("xpath", "//a[@id='customer.header.register.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account"),
+			Common.assertionCheckwithReport(Common.getPageTitle().equals("Create an Account") || Common.getCurrentURL().contains("customer/account/create/"),
 					"Validating Create New Customer Account page navigation",
 					"after Clicking on Create New Customer Account page it will navigate account creation page",
 					"Successfully navigate to the create account page",
@@ -14276,14 +14275,14 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 					j++;
 
 					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 40 error",
+							"page configured with products ", "unable to find page it showing as 404 error",
 							Common.getscreenShotPathforReport("link" + i));
 
 				}
 
 			} else if (Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com")) {
 
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+				Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
 
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
@@ -14297,7 +14296,7 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
 					j++;
 
 					ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
-							"page configured with products ", "unable to find page it showing 40 error",
+							"page configured with products ", "unable to find page it showing as 404 error",
 							Common.getscreenShotPathforReport("link" + i));
 
 				}
