@@ -17,7 +17,7 @@ public class Test_DGLD_HYF_E2E_ST_014_GuestUser_without_Tax_Visa_CC_2Day {
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_GuestUser_without_Tax_Discover_CC_2Day () throws Exception {
+	public void Validating_GuestUser_without_Tax_Visa_CC_2Day () throws Exception {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
