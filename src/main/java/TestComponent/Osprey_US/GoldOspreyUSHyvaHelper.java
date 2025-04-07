@@ -7976,51 +7976,57 @@ public void Continue_Shopping() {
 	}
 
 }
-	public void MyFavorites_Guestuser(String Dataset) {
-		// TODO Auto-generated method stub
-		String product = data.get(Dataset).get("Products");
-		System.out.println(product);
-		String productcolor = data.get(Dataset).get("Color");
-		System.out.println(productcolor);
-		String Productsize = data.get(Dataset).get("Size");
-		System.out.println(Productsize);
-		try
+public void MyFavorites_Guestuser(String Dataset) {
+	// TODO Auto-generated method stub
+	String product = data.get(Dataset).get("Products");
+	System.out.println(product);
+	String productcolor = data.get(Dataset).get("Color");
+	System.out.println(productcolor);
+	String Productsize = data.get(Dataset).get("Size");
+	System.out.println(Productsize);
+	String Prod=data.get(Dataset).get("Prod Product");
+	try
 
-		{
-			search_product("Product");
+	{
+		search_product("Product");
+		if(Common.getCurrentURL().contains("preprod")) {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + product + "']");
 			Common.clickElement("xpath", "//img[@alt='" + product + "']");
-			Sync.waitPageLoad();
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
-			
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Sync.waitElementPresent(30, "xpath", "//button[@id='add-to-wishlist']");
-			Common.clickElement("xpath", "//button[@id='add-to-wishlist']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
-			Common.assertionCheckwithReport(
-					Common.getPageTitle().equals("Customer Login")
-							&& message.contains("You must login or register to add items"),
-					"validating the Navigation to the Customer Login page",
-					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
-					"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
-					"Failed to Navigate to the Customer Login page after Clicking on My Favorites button");
+		} else {
+			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prod + "']");
+			Common.clickElement("xpath", "//img[@alt='" + Prod + "']");
+		}		
+		Sync.waitPageLoad();
+		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
+		Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
+		
+		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+		Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+		Sync.waitElementPresent(30, "xpath", "//button[@id='add-to-wishlist']");
+		Common.clickElement("xpath", "//button[@id='add-to-wishlist']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		String message = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
+		Common.assertionCheckwithReport(
+				Common.getPageTitle().equals("Customer Login")
+						&& message.contains("You must login or register to add items"),
+				"validating the Navigation to the Customer Login page",
+				"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+				"Sucessfully User Navigates to the My Favorites page after clicking on the Customer Login CTA",
+				"Failed to Navigate to the Customer Login page after Clicking on My Favorites button");
 
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Navigation to the Customer Login page",
-					"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
-					"Unable to Navigate to the Customer Login page after Clicking on My Favorites button",
-					Common.getscreenShot(
-							"Failed to Navigate to the Customer Login page after Clicking on My Favorites button"));
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the Navigation to the Customer Login page",
+				"After Clicking on My Favorites CTA user should be navigate to the Customer Login page",
+				"Unable to Navigate to the Customer Login page after Clicking on My Favorites button",
+				Common.getscreenShot(
+						"Failed to Navigate to the Customer Login page after Clicking on My Favorites button"));
 
-			AssertJUnit.fail();
-		}
-
+		AssertJUnit.fail();
 	}
+
+}
 
 	public String minicart_items() {
 		// TODO Auto-generated method stub
@@ -15954,6 +15960,7 @@ public void AddtoCart_Disable_PLP(String Dataset) {
 public void url_color_validation(String Dataset) {
 	// TODO Auto-generated method stub
 	String product = data.get(Dataset).get("Products");
+	String Prod=data.get(Dataset).get("Prod Product");
 	try {
 		Sync.waitPageLoad();
 		for (int i = 0; i <= 10; i++) {
@@ -15968,7 +15975,11 @@ public void url_color_validation(String Dataset) {
 				break;
 			}
 		}
-		Common.clickElement("xpath", "//img[@alt='" + product + "']");
+		if(Common.getCurrentURL().contains("preprod")) {
+			Common.clickElement("xpath", "//img[@alt='" + product + "']");
+		} else {
+			Common.clickElement("xpath", "//img[@alt='" + Prod + "']");
+		}
 		Thread.sleep(4000);
 //		System.out.println(product);
 //		String name = Common.findElement("xpath", "//div[@class='m-product-overview__info-top']//h1").getText();
@@ -15994,8 +16005,11 @@ public void url_color_validation(String Dataset) {
 	{
 		Thread.sleep(4000);
 		List<WebElement> pdpcolors = Common.findElements("xpath",
-				"//div[@aria-label='Color']//div[@x-id]");
-		 Common.clickElement("xpath", "//div[@aria-label='Color']//div[@x-id]");
+				"//div[@class='osprey_color']//div[@x-id]");
+		 Common.clickElement("xpath", "//div[@class='osprey_color']//div[@x-id]");
+//		 if(Common.findElements("xpath","(//form[contains(@class,'needsclick klaviyo-form klaviyo-form-version')])[2]").size()>0){
+//			 Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form')]");
+//		 }
 		 Common.actionsKeyPress(Keys.TAB);
 		 Common.actionsKeyPress(Keys.ENTER);
 		for (int i = 0; i < pdpcolors.size(); i++) { 
@@ -16026,7 +16040,6 @@ public void url_color_validation(String Dataset) {
 		AssertJUnit.fail();
 	}
 }
-
 public void Add_To_MyFavorities(String Dataset) {
 	// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
