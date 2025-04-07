@@ -9480,29 +9480,27 @@ public void MyFavorites_Guestuser(String Dataset) {
 			// else
 			// {
 			//
-			// }      
-			// }
-			// }
+			// }   }}
 			Thread.sleep(4000);
 			if(Common.getCurrentURL().contains("preprod"))
 			{
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-			}
-			else if(Common.findElement("xpath","(//a[@class='link no-underline text-black'])[2]").getText().contains("ACCESSORIES"))
-				
-			{
-				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
-				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
+//			}
+//			else if(Common.findElement("xpath","(//a[@class='link no-underline text-black'])[2]").getText().contains("ACCESSORIES"))
+//				
+//			{
+//				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
+//				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
 			}
 			else
 			{
-				Sync.waitElementPresent(30, "xpath", "//button[text()='Load More']");
-				Common.clickElement("xpath", "//button[text()='Load More']");
-				Thread.sleep(4000);
-				Sync.waitElementPresent(30, "xpath", "//button[text()='Load More']");
-				Common.clickElement("xpath", "//button[text()='Load More']");
-				Thread.sleep(4000);
+//				Sync.waitElementPresent(30, "xpath", "//button[text()='Load More']");
+//				Common.clickElement("xpath", "//button[text()='Load More']");
+//				Thread.sleep(4000);
+//				Sync.waitElementPresent(30, "xpath", "//button[text()='Load More']");
+//				Common.clickElement("xpath", "//button[text()='Load More']");
+//				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
 				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
 				
