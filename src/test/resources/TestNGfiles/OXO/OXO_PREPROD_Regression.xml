@@ -304,7 +304,7 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_084_Checkout_with_GuestUser_Simple_Configurable_Bundle_Paypal"/>
 </classes>
 </test>
--->
+
 <test name="Test_DGLD_OXO_ST_085_Checkout_with_RegisterUser_Simple_Configurable_Bundle_Paypal" testid="DQA-87" priority="P1" description="This test case is to verify the flow of placing order functionality with PAYPAL Payment method as a Registered user with simple, Configurable and Bundle Products">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_085_Checkout_with_RegisterUser_Simple_Configurable_Bundle_Paypal"/>
