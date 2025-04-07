@@ -2134,6 +2134,7 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		String productcolor = data.get(Dataset).get("Color");
+		String Prodcolor=data.get(Dataset).get("Prod Color");
 		String Productsize = data.get(Dataset).get("Size");
 		String symbol=data.get(Dataset).get("Symbol");
 		System.out.println(symbol);
@@ -2165,11 +2166,23 @@ public class OspreyEMEA_HYVA {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 			
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+			}
+			else
+			{
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Prodcolor + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + Prodcolor + "']");
+				
+				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
+				Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
+				
+			}
 			Sync.waitPageLoad(30);
 			Thread.sleep(6000);
 			Common.scrollIntoView("xpath", "//h1[contains(@class,'pdp-grid-title')]");
