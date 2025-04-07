@@ -3732,9 +3732,13 @@ public void Validate_retailerlocations() {
 
 		String socalLinks = data.get(dataSet).get("Links");
 		String[] socallinksarry = socalLinks.split(",");
+		String prodsocalLinks = data.get(dataSet).get("Prod Links");
+		String[] prodsocallinksarry = prodsocalLinks.split(",");
+
 		int i = 0;
 		try {
-			for (i = 0; i < socallinksarry.length; i++) {
+              if(Common.getCurrentURL().contains("preprod"))
+                for (i = 0; i < socallinksarry.length; i++) {
 				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath", "//a[contains(@href,'" + socallinksarry[i] + "')]");
 				Common.switchWindows();
@@ -3766,7 +3770,7 @@ public void Validate_retailerlocations() {
 					Common.closeCurrentWindow();
 					Common.switchToFirstTab();
 				} else if (socallinksarry[i].equals("youtube")) {
-					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube"),
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube.com"),
 							"Verifying Social link  " + socallinksarry[i], "User click the social " + socallinksarry[i],
 							"successfully navigating to social link  " + socallinksarry[i],
 							"Failed to navigate to social link " + socallinksarry[i]);
@@ -3782,7 +3786,53 @@ public void Validate_retailerlocations() {
 					Common.switchToFirstTab();
 				}
 			}
-		} catch (Exception | Error e) {
+              
+             else {
+            	for (i = 0; i < prodsocallinksarry.length; i++) {
+				Common.actionsKeyPress(Keys.END);
+				Common.clickElement("xpath", "//a[contains(@href,'" + prodsocallinksarry[i] + "')]");
+				Common.switchWindows();
+				System.out.println(Common.getCurrentURL());
+
+				if (prodsocallinksarry[i].equals("instagram")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("instagram"),
+							"Verifying Social link  " + prodsocallinksarry[i], "User click the social " + prodsocallinksarry[i],
+							"successfully navigating to social link  " + prodsocallinksarry[i],
+							"Failed to navigate to social link " + prodsocallinksarry[i]);
+					Common.closeCurrentWindow();
+					Common.switchToFirstTab();
+				}
+
+				else if (prodsocallinksarry[i].equals("facebook")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("www.facebook.com"),
+							"Verifying Social link  " + prodsocallinksarry[i], "User click the social " + prodsocallinksarry[i],
+							"successfully navigating to social link  " + prodsocallinksarry[i],
+							"Failed to navigate to social link " + prodsocallinksarry[i]);
+					Common.closeCurrentWindow();
+					Common.switchToFirstTab();
+				}
+
+				 else if (prodsocallinksarry[i].equals("youtube")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("youtube.com"),
+							"Verifying Social link  " + prodsocallinksarry[i], "User click the social " + prodsocallinksarry[i],
+							"successfully navigating to social link  " + prodsocallinksarry[i],
+							"Failed to navigate to social link " + prodsocallinksarry[i]);
+					Common.closeCurrentWindow();					
+					Common.switchToFirstTab();
+					
+				} else if (prodsocallinksarry[i].equals("pinterest")) {
+					Common.assertionCheckwithReport(Common.getCurrentURL().contains("pinterest.com"),
+							"Verifying Social link  " + prodsocallinksarry[i], "User click the social " + prodsocallinksarry[i],
+							"successfully navigating to social link  " + prodsocallinksarry[i],
+							"Failed to navigate to social link " + prodsocallinksarry[i]);
+					Common.closeCurrentWindow();
+					Thread.sleep(1000);
+					Common.switchToFirstTab();
+				  }}
+            	}
+              }
+
+		 catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("Verifying Social link ",
 					"click the socal links it will navigating to particular page",
@@ -8780,7 +8830,7 @@ public void Continue_Shopping() {
         else {
 
         	Thread.sleep(4000);
-            Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
+       //     Common.switchFrames("xpath", "//div[@class='preloaded_lightbox']/iframe");
             Sync.waitElementPresent("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
             Common.clickElement("xpath", "//button[contains(@aria-label,'Close') and @id='button3']");
             Common.switchToDefault();
