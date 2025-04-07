@@ -83,7 +83,7 @@ public class GoldOxoHyvaHelper
 		try { 
 			Sync.waitPageLoad();
 		 	
-              Sync.waitElementClickable(50, "xpath", "//a[@aria-label='Takes to OXO homepage']");
+              Sync.waitElementClickable(50, "xpath", "//a[@aria-label='Takes to OXO homepage']"); 
 			int size = Common.findElements("xpath", "//a[@aria-label='Takes to OXO homepage']").size();
 			System.out.println(size);
 
