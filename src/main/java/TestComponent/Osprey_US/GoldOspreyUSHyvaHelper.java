@@ -393,37 +393,63 @@ public void Login_Account(String dataSet) {
 
 	public void stayIntouch() throws Exception {
 
-		try {
-			Thread.sleep(5000);
-			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-			{
-			Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+		  try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
+
+				Thread.sleep(3000);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
+				Common.actionsKeyPress(Keys.END);
+				Thread.sleep(5000);
+				Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
+				Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Utils.getEmailid());
+				Thread.sleep(5000);
+				Common.clickElement("xpath", "//button[text()='Sign Up']");
+				Thread.sleep(5000);
+				String Text = Common.getText("xpath", "//span[contains(text(),'Thanks for')]");
+				System.out.println(Text);
+				String expectedResult = "User gets confirmation message that it was submitted";
+
+				Common.assertionCheckwithReport(Text.contains("Thanks for subscribing!"),
+						"verifying newsletter subscription from the footers",
+						"User should able to enter the email in the stay in touch input filed", Text,
+						Common.getscreenShotPathforReport("sucessfully newsletter subscription has been subscribed"));
 			}
-			Common.actionsKeyPress(Keys.END);
-			Thread.sleep(5000);
-			Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
-			Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Utils.getEmailid());
-			Thread.sleep(5000);
-			Common.clickElement("xpath", "//button[text()='Sign Up']");
-			Thread.sleep(5000);
-			String Text = Common.getText("xpath", "//span[contains(text(),'Thanks for')]");
-			System.out.println(Text);
-			String expectedResult = "User gets confirmation message that it was submitted";
+			else{
+				Thread.sleep(3000);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
+				Common.actionsKeyPress(Keys.END);
+				Thread.sleep(5000);
+				Sync.waitElementClickable(30, "xpath", "//input[@aria-label='Enter Email Address']");
+				Common.textBoxInput("xpath", "//input[@aria-label='Enter Email Address']", Utils.getEmailid());
+				Thread.sleep(5000);
+				Common.clickElement("xpath", "//button[text()='Sign Up']");
+				Thread.sleep(5000);
+				String Text = Common.getText("xpath", "//span[contains(text(),'Success')]");
+				System.out.println(Text);
+				String expectedResult = "User gets confirmation message that it was submitted";
 
-			Common.assertionCheckwithReport(Text.contains("Thanks for subscribing!"),
-					"verifying newsletter subscription from the footers",
-					"User should able to enter the email in the stay in touch input filed", Text,
-					Common.getscreenShotPathforReport("sucessfully newsletter subscription has been subscribed"));
-
-		} catch (Exception | Error e) {
-
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
-					"User faield to subscrption for newLetter  ",
-					Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
-			Assert.fail();
-		}
+				Common.assertionCheckwithReport(Text.contains("Success! An email should be on its way."),
+						"verifying newsletter subscription from the footers",
+						"User should able to enter the email in the stay in touch input filed", Text,
+						Common.getscreenShotPathforReport("sucessfully newsletter subscription has been subscribed"));
 	}
+
+			} catch (Exception | Error e) {
+
+				e.printStackTrace();
+				ExtenantReportUtils.addFailedLog("verifying newsletter subscription", "NewsLetter Subscrption success",
+						"User faield to subscrption for newLetter  ",
+						Common.getscreenShotPathforReport("NewsLetter Subscrptionsuccess"));
+				Assert.fail();
+			}
+		}
+	
 	public void Invalid_email_newsletter(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
@@ -9894,7 +9920,7 @@ public void Continue_Shopping() {
 			} else {
 				Sync.waitElementPresent("id", "discount-code");
 
-				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("prodDiscountcode"));
+				Common.textBoxInput("id", "discount-code", data.get(dataSet).get("ProdDiscountcode"));
 			}
 
 			int size = Common.findElements("id", "discount-code").size();
@@ -9903,8 +9929,8 @@ public void Continue_Shopping() {
 			Thread.sleep(3000);
 			Sync.waitElementClickable("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
-			Sync.waitPageLoad();
-			//Thread.sleep(4000);
+			
+			Sync.waitElementVisible(40,"xpath", "//div[@ui-id='message-success']");
 			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
