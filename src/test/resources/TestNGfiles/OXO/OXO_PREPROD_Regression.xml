@@ -133,6 +133,11 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_032_Guest_user_Checkout_Funtionality_with_Paypal"/>
 </classes>
 </test>
+<test name="Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" testid="DQA-136" priority="P1" description="This script will cover validating Register User Checkout functionality with PayPal.">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" />
+</classes>
+</test>
 <test name="Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User" testid="DQA-95" priority="P1" description="This Testcase is to verify that the Gift Registery create and edit for the register user in my account page">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_034_Create_and_Edit_Gift_Registery_For_Register_User"/>
@@ -278,11 +283,7 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page"/>
 </classes>
 </test>
-<test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DQA-141" priority="P1" description="This test case is to verify the updating the qty, adding coupon code, adding gift message, etc.,. from Shopping cart page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page"/>
-</classes>
-</test>
+
 <test name="Test_DGLD_OXO_ST_079_Register_user_Checkout_With_Discount_Visa_card" testid="DQA-149" priority="P1" description="This test case is to verify the flow of placing order functionality as a  Register user with VISA card  applying discount code.">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_079_Register_user_Checkout_With_Discount_Visa_card"/>

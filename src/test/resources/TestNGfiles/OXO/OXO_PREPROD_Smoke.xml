@@ -40,9 +40,9 @@
         </classes>
     </test> 
     
-    <test name="Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" testid="DQA-136" priority="P1" description="This script will cover validating Register User Checkout functionality with PayPal.">
+    <test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DQA-141" priority="P1" description="This test case is to verify the updating the qty, adding coupon code, adding gift message, etc.,. from Shopping cart page">
         <classes>
-            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_033_Register_user_Checkout_Funtionality_with_Paypal" />
+            <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" />
         </classes>
     </test>
     
