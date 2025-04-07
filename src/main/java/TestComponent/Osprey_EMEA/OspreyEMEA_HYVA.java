@@ -9828,8 +9828,12 @@ return Number;
 	
 	public void webpagelinks_validation(String Dataset) throws Exception, IOException {
 	    String links = data.get(Dataset).get("Links");
+	    String Prodlinks = data.get(Dataset).get("prod Links");
 	    int failedCount = 0;
-	    String[] strArray = links.split("\\r?\\n");
+	  
+	    if(Common.getCurrentURL().contains("preprod"))
+	    {
+	    	  String[] strArray = links.split("\\r?\\n");
 	    for (int i = 0; i < strArray.length; i++) {
 	        String currentLink = strArray[i].trim();
 	        System.out.println("Checking URL: " + currentLink);
@@ -9843,13 +9847,15 @@ return Number;
 	                ExtenantReportUtils.addPassLog("Validating Page URL", "Page should be accessible",
 	                        "Successfully accessed: " + currentURL, Common.getscreenShotPathforReport("link" + i));
 	            } else if (responseCode == 404) {
-	                ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
+	                ExtenantReportUtils.addFailedLog("Validating 404 Page", "Expected 404 error page displayed",
 	                        "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
+	                Assert.fail();
 	            } else {
 	                failedCount++;
 	                ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
 	                        "Unexpected response code (" + responseCode + ") for: " + currentURL,
 	                        Common.getscreenShotPathforReport("error" + i));
+	                Assert.fail();
 	            }
 	        } catch (Exception e) {
 	            failedCount++;
@@ -9860,6 +9866,45 @@ return Number;
 	    }
 	    if (failedCount > 0) {
 	        Assert.fail(failedCount + " link(s) failed validation.");
+	    }
+	}
+	    else
+	    {
+	    	String[] strArray = Prodlinks.split("\\r?\\n");
+		    for (int i = 0; i < strArray.length; i++) {
+		        String currentLink = strArray[i].trim();
+		        System.out.println("Checking URL: " + currentLink);
+		        try {
+		            Common.oppenURL(currentLink);
+		            String currentURL = Common.getCurrentURL();
+		            System.out.println("Current URL after opening: " + currentURL);
+		            int responseCode = getpageresponce(currentURL);
+		            System.out.println("Response Code: " + responseCode);
+		            if (responseCode == 200) {
+		                ExtenantReportUtils.addPassLog("Validating Page URL", "Page should be accessible",
+		                        "Successfully accessed: " + currentURL, Common.getscreenShotPathforReport("link" + i));
+		            } else if (responseCode == 404) {
+		                ExtenantReportUtils.addPassLog("Validating 404 Page", "Expected 404 error page displayed",
+		                        "Verified 404 page for: " + currentURL, Common.getscreenShotPathforReport("404" + i));
+		                Assert.fail();
+		            } else {
+		                failedCount++;
+		                ExtenantReportUtils.addFailedLog("Validating Page URL", "Page should be accessible or return 404",
+		                        "Unexpected response code (" + responseCode + ") for: " + currentURL,
+		                        Common.getscreenShotPathforReport("error" + i));
+		                Assert.fail();
+		            }
+		        } catch (Exception e) {
+		            failedCount++;
+		            System.out.println("Exception while checking: " + currentLink + " - " + e.getMessage());
+		            ExtenantReportUtils.addFailedLog("Exception occurred", "Error while validating page",
+		                    "Exception: " + e.getMessage(), Common.getscreenShotPathforReport("error" + i));
+		        }
+		    }
+		    if (failedCount > 0) {
+		        Assert.fail(failedCount + " link(s) failed validation.");
+		    }
+	    	
 	    }
 	}
 	public void Gift_cards(String Dataset) {
