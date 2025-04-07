@@ -13856,6 +13856,11 @@ public void product_Registration(String dataSet) {
 			
 		{
 			System.out.println(Common.getCurrentURL());
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://osprey-emea-prod.kustomer.support/contact/product-registration"),
+					"verifying the product registration form fileds filled in the production environment", "On production environment in product registration form filleds should be fill",
+					"successfully Product registration form fileds has been filled in the production environmnet", "failed to fill the Product Registration form on the production environment");
+			
+			
 		}
 		else
 		{
