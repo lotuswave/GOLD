@@ -9490,6 +9490,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			}
 			else if(Common.findElement("xpath","(//a[@class='link no-underline text-black'])[2]").getText().contains("ACCESSORIES"))
+				
 			{
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + Prodprod + "']");
 				Common.clickElement("xpath", "//img[@alt='" + Prodprod + "']");
@@ -10818,7 +10819,8 @@ public void Gift_card(String dataSet) {
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
 		//Thread.sleep(2000);
-		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 	    System.out.println(successmsg);	
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
@@ -10832,8 +10834,9 @@ public void Gift_card(String dataSet) {
 				Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard_Prod"));
 //				Common.actionsKeyPress(Keys.ARROW_UP);
 				Common.clickElement("xpath","//button[@aria-label='Add Code']");
-				Thread.sleep(2000);
-				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+//				Thread.sleep(2000);
+				Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+				String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 			    System.out.println(successmsg);	
 				Common.assertionCheckwithReport(successmsg.contains("added"),
 						"validating the success message after applying gift card",
@@ -11281,57 +11284,89 @@ public void Gift_card(String dataSet) {
 	}
 
 	public void Verify_Price(String Dataset) {
-		
-		String products = data.get(Dataset).get("Products");
-		System.out.println(products);
-		try {
-	
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-		     
-			Thread.sleep(4000);
-			String Price = Common.findElement("xpath", "//div[@aria-label='Price']//span[contains(@id,'product-price')]//span[@class='price']").getText();
-			System.out.println(Price);
-			
-			if(Common.getCurrentURL().contains("/gb")) {
 
-				double productPrice = Double.parseDouble(Price.replace("£", ""));
-				System.out.println(productPrice);
-			}
-			else {
-			double productPrice = Double.parseDouble(Price.replace("$", ""));
-			System.out.println(productPrice);
-			}
-			
-			double productPrice = 0;
-			if (productPrice <= 50.0) {
+	    String products = data.get(Dataset).get("Products");
+	    String prodproducts = data.get(Dataset).get("Prod Product");
+	    System.out.println(products);
+	    System.out.println(prodproducts);  
 
-//		            	Common.scrollIntoView("xpath", "//button[@title='Add to Cart']");
-				Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-				Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+	    try {
+	        if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 
-				System.out.println("Product added to cart.");
-		            }
-			
-			Thread.sleep(4000);
-			
-			
-			
-//			Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
-//			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
-//					.getAttribute("data-ui-id");
-//			System.out.println(message);
-//			Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
-//					"Product should be add to cart", "Sucessfully product added to the cart ",
-//					"failed to add product to the cart");
-		}
-		catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
-					"Check Price In PLp page",
-					"Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
-			AssertJUnit.fail();
-		}
+	            Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+	            Common.clickElement("xpath", "//img[@alt='" + products + "']");
+
+	            Thread.sleep(4000);
+	            String Price = Common.findElement("xpath", "//div[@aria-label='Price']//span[contains(@id,'product-price')]//span[@class='price']").getText();
+	            System.out.println(Price);
+
+	            if (Common.getCurrentURL().contains("/gb")) {
+	                double productPrice = Double.parseDouble(Price.replace("£", ""));
+	                System.out.println(productPrice);
+	            } else {
+	                double productPrice = Double.parseDouble(Price.replace("$", ""));
+	                System.out.println(productPrice);
+	            }
+
+	            double productPrice = 0;
+	            if (productPrice <= 50.0) {
+	                Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+	                Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+	                System.out.println("Product added to cart.");
+	            }
+
+	            Thread.sleep(4000);
+	            // Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+	            // String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("data-ui-id");
+	            // System.out.println(message);
+	            // Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+	            //        "Product should be add to cart", "Sucessfully product added to the cart ",
+	            //        "failed to add product to the cart");
+
+	        } else {
+
+	            
+
+	                Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproducts + "']");
+	                Common.clickElement("xpath", "//img[@alt='" + prodproducts + "']");
+
+	                Thread.sleep(4000);
+	                String Price = Common.findElement("xpath", "//div[@aria-label='Price']//span[contains(@id,'product-price')]//span[@class='price']").getText();
+	                System.out.println(Price);
+
+	                if (Common.getCurrentURL().contains("/gb")) {
+	                    double productPrice = Double.parseDouble(Price.replace("£", ""));
+	                    System.out.println(productPrice);
+	                } else {
+	                    double productPrice = Double.parseDouble(Price.replace("$", ""));
+	                    System.out.println(productPrice);
+	                }
+
+	                double productPrice = 0;
+	                if (productPrice <= 50.0) {
+	                    Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
+	                    Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+	                    System.out.println("Product added to cart.");
+	                }
+
+	               // Thread.sleep(4000);
+
+	           
+	                // Sync.waitElementPresent(30, "xpath", "//div[@data-ui-id='message-success']");
+	                // String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']").getAttribute("data-ui-id");
+	                // System.out.println(message);
+	                // Common.assertionCheckwithReport(message.contains("success"), "validating the  product add to the cart",
+	                //        "Product should be add to cart", "Sucessfully product added to the cart ",
+	                //        "failed to add product to the cart");
+	            }     
+	    } 
+	    catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("validating the Price in PLP page",
+	                "Check Price In PLp page",
+	                "Unable validate the Price in PLP ", Common.getscreenShot("Failed toValidate  price in PLP page"));
+	        AssertJUnit.fail();
+	    }
 	}
 
 	
@@ -11647,7 +11682,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 				{
 					Thread.sleep(4000);
 					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String klarna=Common.findElement("xpath", "//button[@value='klarna']//span").getAttribute("data-testid");
+					String klarna=Common.findElement("xpath", "//button[@id='klarna-tab']").getAttribute("data-testid");
 					System.out.println(klarna);
 					Common.assertionCheckwithReport(
 							klarna.contains("klarna"),
