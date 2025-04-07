@@ -14,7 +14,7 @@ public class TEST_DGLD_OS_COMMON_126_Product_Registration_form {
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Forms");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verify_product_registration_form_submission () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
