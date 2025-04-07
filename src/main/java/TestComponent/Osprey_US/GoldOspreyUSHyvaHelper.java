@@ -3106,12 +3106,16 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		}
 
 	}
+	
 
 	public void selectshippingmethod(String Dataset) {
 		// TODO Auto-generated method stub4
 		String method = data.get(Dataset).get("methods");
-
+		String prodmethod = data.get(Dataset).get("Prod methods");
+ 
 		try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
 			Sync.waitElementVisible(30,"xpath", "//section[@id='shipping']");
 	    	int size = Common.findElements("xpath", "//div[@id='shipping-methods']").size();
 	        System.out.println(size);   
@@ -3122,22 +3126,21 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 			}
 			else
 			{
-				Assert.fail();
+				Thread.sleep(2000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ prodmethod +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ prodmethod +"')]");
 			}
-		} catch (Exception | Error e) {
+		}} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the Standed shipping method",
 					"Select the Standed shipping method in shipping page ",
 					"failed to select the Standed shipping method ",
 					Common.getscreenShotPathforReport("failed select Standed shipping method"));
-
+ 
 			Assert.fail();
 		}
-
-	}
-	
-
-
+ 
+	}	
 	public void clickSubmitbutton_Shippingpage() {
 		// TODO Auto-generated method stub
 		String expectedResult = "click the submit button to navigate to payment page";
@@ -3155,7 +3158,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		}
 
 	}
-
+	
 	public void signout() {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
@@ -8774,6 +8777,7 @@ public void Continue_Shopping() {
 	public void Sticky_Add_to_Cart(String Dataset) {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
+		String ProdProduct =data.get(Dataset).get("Prod Product");
 		System.out.println(products);
 		try {
 			Sync.waitPageLoad();
@@ -8789,11 +8793,20 @@ public void Continue_Shopping() {
 					break;
 				}
 			}
-			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+			if(Common.getCurrentURL().contains("preprod")) {
+				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 
-			Common.clickElement("xpath", "//img[@alt='" + products + "']");
-               
+				Common.clickElement("xpath", "//img[@alt='" + products + "']");
+				
+			} else {
+				Common.scrollIntoView("xpath", "//img[@alt='" + ProdProduct + "']");
+				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + ProdProduct + "']");
+
+				Common.clickElement("xpath", "//img[@alt='" + ProdProduct + "']");
+	               
+			}
+		   
 			Common.actionsKeyPress(Keys.END);
 			Sync.waitElementPresent("xpath", "//button[@x-show='isStickySwatchAvailable' and @title='Add to Cart']");
 			Common.clickElement("xpath", "//button[@x-show='isStickySwatchAvailable' and @title='Add to Cart']");
@@ -8815,7 +8828,7 @@ public void Continue_Shopping() {
 		}
 
 	}
-	
+
 	public void close_add() throws Exception {
         // TODO Auto-generated method stub
         Thread.sleep(6000);
@@ -9891,7 +9904,7 @@ public void Continue_Shopping() {
 			Sync.waitElementClickable("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Common.clickElement("xpath", "//button[contains(@class,'btn btn-primary justify-center')]");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
