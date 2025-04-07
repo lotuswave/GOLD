@@ -1117,7 +1117,7 @@ public class OspreyEMEA_HYVA {
 					String Featured=data.get(Dataset).get("Feature");
 					String collections=data.get(Dataset).get("Activity");
 					int i = 0;
-					Common.actionsKeyPress(Keys.UP);
+					Common.actionsKeyPress(Keys.HOME);
 					try {
 						for (i = 10; i < Links.length; i++) {
 							Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Featured + "')]");
