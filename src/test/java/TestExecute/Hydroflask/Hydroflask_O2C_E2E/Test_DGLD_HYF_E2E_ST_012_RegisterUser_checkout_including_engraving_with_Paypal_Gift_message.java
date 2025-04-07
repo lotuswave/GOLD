@@ -11,36 +11,36 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_016_GuestUser_with_multiple_items_Gift_card_standard_shipping_CC {
+public class Test_DGLD_HYF_E2E_ST_012_RegisterUser_checkout_including_engraving_with_Paypal_Gift_message {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_GuestUser_with_multiple_items_Gift_card_standard_shipping_CC () throws Exception {
+	public void Validating_RegisterUser_checkout_including_engraving_with_Paypal_Gift_messag () throws Exception {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Guest User with multiple  items + Gift card+ standard shipping +CC";
+			String Description ="Register user checkout including engraving with Paypal (standard)+ Gift message (More than 50 characters)";
 			Hydro.verifingHomePage();
+			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.search_product("SKU-P-S21001 - 1"); 
-			Hydro.Myhydro_Graphic("SKU-P-S21001 - 1");
-			Hydro.enraving_Checkout("Graphic");
-			Hydro.search_product("SKU-TT40PS474");     
-			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
-			Hydro.search_product("SKU-CFX001");     
-			Hydro.addtocart("SKU-CFX001");
-			Hydro.search_product("SKU-BO56 -1QTY");     
-			Hydro.addtocart("SKU-BO56 -1QTY");
-			Hydro.Gift_cards("Hydro Gift Card");
-			Hydro.Card_Value("price");
+			Hydro.Add_Myhydro_Text("SKU-P-S21001 - 1");
+			Hydro.enraving_Checkout("SKU-P-S21001 - 1");
+			Hydro.search_product("SKU-TT32PS678");     
+			Hydro.addtocart("SKU-TT32PS678");
+			Hydro.search_product("SKU-SCS415 -1QTY");     
+			Hydro.addtocart("SKU-SCS415 -1QTY");
+			Hydro.minicart_viewcart();
+			Hydro.Gift_message("Gift Message above 50");
 			Hydro.minicart_Checkout();
-			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
+			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
-			Hydro.selectshippingaddress("GroundShipping method");
-		    HashMap<String,String> Details=Hydro.ordersummary_Details();
-	        String OrderNumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
-          
+            Hydro.selectshippingaddress("GroundShipping method");
+            HashMap<String,String> Details=Hydro.ordersummary_Details();
+            String OrderNumber=Hydro.payPal_Payment("PaypalDetails");
+        
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
 		} catch (Exception e) {

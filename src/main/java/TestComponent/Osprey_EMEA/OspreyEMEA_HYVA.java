@@ -652,10 +652,6 @@ public class OspreyEMEA_HYVA {
 						"//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
-				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-				{
-					Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-				}
 				if(Common.getPageTitle().contains("404"))
 				{
 					Assert.fail();
@@ -665,6 +661,10 @@ public class OspreyEMEA_HYVA {
 							Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
 				}
 				Thread.sleep(4000);
+				if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+				{
+					Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+				}
 				String title = Common.findElement("xpath", "//div[contains(@class,'hero')]//h1").getText();
 				
 				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();

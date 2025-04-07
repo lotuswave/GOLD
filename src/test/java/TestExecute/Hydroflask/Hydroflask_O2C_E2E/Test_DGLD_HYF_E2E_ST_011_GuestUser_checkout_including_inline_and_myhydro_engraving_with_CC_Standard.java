@@ -11,34 +11,33 @@ import TestComponent.Hydroflask.GoldHydroE2EHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HYF_E2E_ST_012_RegisteredUser_Checkout_with_master_card_2Day {
+public class Test_DGLD_HYF_E2E_ST_011_GuestUser_checkout_including_inline_and_myhydro_engraving_with_CC_Standard {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroE2EHelper Hydro = new GoldHydroE2EHelper(datafile,"E2E");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validating_RegisteredUser_Checkout_with_master_card_2Day () throws Exception {
+	public void Validating_GuestUser_checkout_including_inline_and_myhydro_engraving_with_CC_Standard () throws Exception {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Registered User Checkout with master card- 2Day";
+			String Description ="Guest user checkout including inline & my hydro engraving with CC - Standard";
 			Hydro.verifingHomePage();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("SKU-TT40PS474");     
+			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
 			Hydro.search_product("SKU-P-S21001 - 1"); 
-			Hydro.Add_Myhydro_Text("SKU-P-S21001 - 1");
-			Hydro.enraving_Checkout("SKU-P-S21001 - 1");
-			Hydro.search_product("SKU-T20CPB001 -2QTY");     
-			Hydro.addtocart("SKU-T20CPB001 -2QTY");
-			Hydro.search_product("SKU-CFX001");     
-			Hydro.addtocart("SKU-CFX001");
+			Hydro.Myhydro_Graphic("SKU-P-S21001 - 1");
+			Hydro.enraving_Checkout("Graphic");
+			Hydro.search_product("SKU-SCS415 -1QTY");     
+			Hydro.addtocart("SKU-SCS415 -1QTY");
+			Hydro.search_product("SKU-BO56 -1QTY");     
+			Hydro.addtocart("SKU-BO56 -1QTY");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("2 Day method");
+            Hydro.selectshippingaddress("GroundShipping method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();
-            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("CCMastercard");
-            
+            String OrderNumber=Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 
 		} catch (Exception e) {
