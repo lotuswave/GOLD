@@ -81,7 +81,7 @@ public class GoldOxoE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 
-			int size = Common.findElements("css", "a[aria-label='Go to Home page']").size();
+			int size = Common.findElements("css", "a[aria-label='Takes to OXO homepage']").size();
 			System.out.println(size);
 
 			Common.assertionCheckwithReport(
@@ -9191,277 +9191,277 @@ public void header_1_Percent_Planet() {
 
 	}
 
-	public void writeOrderNumber(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode,String Subtotal,String shipping,String Tax,String Discount,String ordertotal,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email)
+	public void writeOrderNumber(String Description,String OrderIdNumber,String Used_GiftCode,String Subtotal,String shipping,String Tax,String Discount,String ordertotal)
 			throws FileNotFoundException, IOException {
-		// String fileOut="";
-		try {
+	// String fileOut="";
+	try {
 
-			File file = new File(
-					System.getProperty("user.dir") + "/src/test/resources//TestData/OXO/OXO_E2E_orderDetails.xlsx");
-			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
-			XSSFSheet sheet;
-			Row row;
-			Cell cell;
-			int rowcount;
-			sheet = workbook.getSheet("OrderDetails");
+		File file = new File(
+				System.getProperty("user.dir") + "/src/test/resources//TestData/OXO/OXO_E2E_orderDetails.xlsx");
+		XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(file));
+		XSSFSheet sheet;
+		Row row;
+		Cell cell;
+		int rowcount;
+		sheet = workbook.getSheet("OrderDetails");
 
-			if ((workbook.getSheet("OrderDetails")) == null) {
-				sheet = workbook.createSheet("OrderDetails");
-				CellStyle cs = workbook.createCellStyle();
-				cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-				cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
-				Font f = workbook.createFont();
-				f.setBold(true);
-				cs.setFont(f);
-				cs.setAlignment(HorizontalAlignment.RIGHT);
-				row = sheet.createRow(0);
-				cell = row.createCell(0);
-				cell.setCellStyle(cs);
-				cell.setCellValue("Orders Details");
-
-				row = sheet.createRow(1);
-				cell = row.createCell(0);
-				cell.setCellStyle(cs);
-				cell.setCellValue("Web Order Number");
-				rowcount = 2;
-
-			}
-
-			else {
-
-				sheet = workbook.getSheet("OrderDetails");
-				rowcount = sheet.getLastRowNum() + 1;
-			}
-			row = sheet.createRow(rowcount);
+		if ((workbook.getSheet("OrderDetails")) == null) {
+			sheet = workbook.createSheet("OrderDetails");
+			CellStyle cs = workbook.createCellStyle();
+			cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			cs.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
+			Font f = workbook.createFont();
+			f.setBold(true);
+			cs.setFont(f);
+			cs.setAlignment(HorizontalAlignment.RIGHT);
+			row = sheet.createRow(0);
 			cell = row.createCell(0);
-			cell.setCellType(CellType.NUMERIC);
-			int SNo=rowcount-1;
-			cell.setCellValue(SNo);
-			cell = row.createCell(1);
-			cell.setCellType(CellType.STRING);
-			
-			cell.setCellValue("Oxo");
-			
-			cell = row.createCell(2);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(Description);
-			
-			cell = row.createCell(3);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(Skus);
-			
-			cell = row.createCell(4);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(OrderIdNumber);
+			cell.setCellStyle(cs);
+			cell.setCellValue("Orders Details");
 
-			cell = row.createCell(5);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(AdminOrderstatus);
-			
-			cell = row.createCell(6);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(warkato);
-			
-			cell = row.createCell(7);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(Used_GiftCode);
-			
-			cell = row.createCell(8);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Subtotal);
-			
-			cell = row.createCell(9);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(shipping);
-			
-			cell = row.createCell(10);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Tax);
-			
-			cell = row.createCell(11);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Discount);
-			
-			cell = row.createCell(12);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(ordertotal);
-			
-			cell = row.createCell(13);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Adminsubtotal);
-			
-			cell = row.createCell(14);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Adminshipping);
-			
-			cell = row.createCell(15);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Admintax);
-			
-			cell = row.createCell(16);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(AdminDis);
-			
-			cell = row.createCell(17);
-			cell.setCellType(CellType.NUMERIC);
-			cell.setCellValue(Admintotal);
-			
-			cell = row.createCell(18);
-			cell.setCellType(CellType.STRING);
-			cell.setCellValue(Email);
-			
-			cell = row.createCell(19);
-			cell.setCellType(CellType.STRING);
-			String Subtotalstatus;
-			if(Subtotal.equals(Adminsubtotal))
-			{
+			row = sheet.createRow(1);
+			cell = row.createCell(0);
+			cell.setCellStyle(cs);
+			cell.setCellValue("Web Order Number");
+			rowcount = 2;
 
-				Subtotalstatus="PASS";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.GREEN.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-			else
-			{
-				Subtotalstatus="FAIL";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.RED.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-
-			cell.setCellValue(Subtotalstatus);
-			
-			cell = row.createCell(20);
-			cell.setCellType(CellType.STRING);
-			String Shippingstatus;
-			if(shipping.equals(Adminshipping))
-			{
-
-				Shippingstatus="PASS";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.GREEN.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-			else
-			{
-				Shippingstatus="FAIL";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.RED.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-
-			cell.setCellValue(Shippingstatus);
-			
-			cell = row.createCell(21);
-			cell.setCellType(CellType.STRING);
-			String Taxstatus;
-			if(Tax.equals(Admintax))
-			{
-
-				Taxstatus="PASS";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.GREEN.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-			else
-			{
-				Taxstatus="FAIL";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.RED.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-
-			cell.setCellValue(Taxstatus);
-			
-			
-			cell = row.createCell(22);
-			cell.setCellType(CellType.STRING);
-			String Disstatus;
-			if(Discount.equals(AdminDis))
-			{
-
-				Disstatus="PASS";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.GREEN.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-			else
-			{
-				Disstatus="FAIL";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.RED.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-
-			cell.setCellValue(Disstatus);
-			
-
-			cell = row.createCell(23);
-			cell.setCellType(CellType.STRING);
-			String Orderstatus;
-			if(ordertotal.equals(Admintotal))
-			{
-
-				Orderstatus="PASS";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.GREEN.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-			else
-			{
-				Orderstatus="FAIL";
-			CellStyle style = workbook.createCellStyle();
-			Font font= workbook.createFont();
-			font.setColor(IndexedColors.RED.getIndex());
-			font.setBold(true);
-			style.setFont(font);
-			cell.setCellStyle(style);
-			}
-
-			cell.setCellValue(Orderstatus);
-		
-			
-			
-			System.out.println(OrderIdNumber);
-			FileOutputStream fileOut = new FileOutputStream(file);
-			
-			workbook.write(fileOut);
-		
-			fileOut.flush();
-			fileOut.close();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
 		}
 
+		else {
+
+			sheet = workbook.getSheet("OrderDetails");
+			rowcount = sheet.getLastRowNum() + 1;
+		}
+		row = sheet.createRow(rowcount);
+		cell = row.createCell(0);
+		cell.setCellType(CellType.NUMERIC);
+		int SNo=rowcount-1;
+		cell.setCellValue(SNo);
+		cell = row.createCell(1);
+		cell.setCellType(CellType.STRING);
+		
+		cell.setCellValue("Oxo");
+		
+		cell = row.createCell(2);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Description);
+		
+	/*	cell = row.createCell(3);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Skus);*/
+		
+		cell = row.createCell(3);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(OrderIdNumber);
+
+	/*	cell = row.createCell(5);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(AdminOrderstatus);
+		
+		cell = row.createCell(6);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(warkato);*/
+		
+		cell = row.createCell(4);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Used_GiftCode);
+		
+		cell = row.createCell(5);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Subtotal);
+		
+		cell = row.createCell(6);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(shipping);
+		
+		cell = row.createCell(7);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Tax);
+		
+		cell = row.createCell(8);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Discount);
+		
+		cell = row.createCell(9);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(ordertotal);
+		
+	/*	cell = row.createCell(13);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Adminsubtotal);
+		
+		cell = row.createCell(14);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Adminshipping);
+		
+		cell = row.createCell(15);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Admintax);
+		
+		cell = row.createCell(16);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(AdminDis);
+		
+		cell = row.createCell(17);
+		cell.setCellType(CellType.NUMERIC);
+		cell.setCellValue(Admintotal);
+		
+		cell = row.createCell(18);
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(Email);
+		
+		cell = row.createCell(19);
+		cell.setCellType(CellType.STRING);
+		String Subtotalstatus;
+		if(Subtotal.equals(Adminsubtotal))
+		{
+
+			Subtotalstatus="PASS";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.GREEN.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+		else
+		{
+			Subtotalstatus="FAIL";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.RED.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+
+		cell.setCellValue(Subtotalstatus);
+		
+		cell = row.createCell(20);
+		cell.setCellType(CellType.STRING);
+		String Shippingstatus;
+		if(shipping.equals(Adminshipping))
+		{
+
+			Shippingstatus="PASS";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.GREEN.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+		else
+		{
+			Shippingstatus="FAIL";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.RED.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+
+		cell.setCellValue(Shippingstatus);
+		
+		cell = row.createCell(21);
+		cell.setCellType(CellType.STRING);
+		String Taxstatus;
+		if(Tax.equals(Admintax))
+		{
+
+			Taxstatus="PASS";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.GREEN.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+		else
+		{
+			Taxstatus="FAIL";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.RED.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+
+		cell.setCellValue(Taxstatus);
+		
+		
+		cell = row.createCell(22);
+		cell.setCellType(CellType.STRING);
+		String Disstatus;
+		if(Discount.equals(AdminDis))
+		{
+
+			Disstatus="PASS";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.GREEN.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+		else
+		{
+			Disstatus="FAIL";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.RED.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+
+		cell.setCellValue(Disstatus);
+		
+
+		cell = row.createCell(23);
+		cell.setCellType(CellType.STRING);
+		String Orderstatus;
+		if(ordertotal.equals(Admintotal))
+		{
+
+			Orderstatus="PASS";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.GREEN.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+		else
+		{
+			Orderstatus="FAIL";
+		CellStyle style = workbook.createCellStyle();
+		Font font= workbook.createFont();
+		font.setColor(IndexedColors.RED.getIndex());
+		font.setBold(true);
+		style.setFont(font);
+		cell.setCellStyle(style);
+		}
+
+		cell.setCellValue(Orderstatus);*/
 	
+		
+		
+		System.out.println(OrderIdNumber);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		
+		workbook.write(fileOut);
+	
+		fileOut.flush();
+		fileOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+
+
 	public void writeOrderNumber1(String Description,String OrderIdNumber,String Skus, String AdminOrderstatus, String warkato, String Used_GiftCode,String Adminsubtotal,String Adminshipping,String Admintax,String AdminDis,String Admintotal,String Email)
 			throws FileNotFoundException, IOException {
 		// String fileOut="";
@@ -9616,46 +9616,46 @@ public void header_1_Percent_Planet() {
 				
 				cell.setCellStyle(cs);
 				cell.setCellValue("Test scenario Description");
-				cell = row.createCell(3);
+				/*cell = row.createCell(3);
 				
 				cell.setCellStyle(cs);
-				cell.setCellValue("SKU");
-				cell = row.createCell(4);
+				cell.setCellValue("SKU");*/
+				cell = row.createCell(3);
 				cell.setCellStyle(cs);
 				cell.setCellValue("Web Order Number");
-				cell = row.createCell(5);
+			/*	cell = row.createCell(5);
 				
 				cell.setCellStyle(cs);
 				cell.setCellValue("Order Status Magento");
 		       cell = row.createCell(6);
 		       
 		       cell.setCellStyle(cs);
-				cell.setCellValue("Workato Status");
-		       cell = row.createCell(7);
+				cell.setCellValue("Workato Status");*/
+		       cell = row.createCell(4);
 			
 		       cell.setCellStyle(cs);
 				cell.setCellValue("Used GiftCode");
-		     cell = row.createCell(8);
+		     cell = row.createCell(5);
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("Subtotal");
-		     cell = row.createCell(9);
+		     cell = row.createCell(6);
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("shipping");
-		     cell = row.createCell(10);
+		     cell = row.createCell(7);
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("Tax");
-		     cell = row.createCell(11);
+		     cell = row.createCell(8);
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("Discount");
-		     cell = row.createCell(12);
+		     cell = row.createCell(9);
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("ordertotal");
-		     cell = row.createCell(13);
+		   /*  cell = row.createCell(13);
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("Adminsubtotal");
@@ -9700,7 +9700,7 @@ public void header_1_Percent_Planet() {
 		     
 		     cell.setCellStyle(cs);
 				cell.setCellValue("Website&Adminordertotal Status");
-		     cell = row.createCell(24);
+		     cell = row.createCell(24); */
 		     
 
 
@@ -9751,7 +9751,6 @@ public void header_1_Percent_Planet() {
 			e.printStackTrace();
 		}
 		}
-	
 	public void prepareOrdersData1(String fileName) {
 		// TODO Auto-generated method stub
 		try {

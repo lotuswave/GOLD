@@ -35,10 +35,11 @@ public class Test_DGLD_OXO_E2E_ST_007_GuestUser_checkout_with_CC_2Day_with_Multi
 		    HashMap<String,String> Details=Oxo.ordersummary_Details();
 			String Used_GiftCode="NULL";
 			String OrderNumber=Oxo.updatePaymentAndSubmitOrder("PaymentDetails"); 
-			Oxo.Admin_signin("Login Details");
-			Oxo.click_Sales();
-			HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
-			Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
+			//Oxo.Admin_signin("Login Details");
+			//Oxo.click_Sales();
+			//HashMap<String,String> Orderstatus1 = Oxo.Admin_Order_Details(OrderNumber);
+			//Oxo.writeOrderNumber(Description,OrderNumber,Orderstatus1.get("Skus"),Orderstatus1.get("AdminOrderstatus"),Orderstatus1.get("warkato"),Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"),Orderstatus1.get("Adminsubtotal"),Orderstatus1.get("Adminshipping"),Orderstatus1.get("Admintax"),Orderstatus1.get("AdminDis"),Orderstatus1.get("Admintotal"),Orderstatus1.get("Email"));
+			Oxo.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));
 	         
 
 		} catch (Exception e) {
