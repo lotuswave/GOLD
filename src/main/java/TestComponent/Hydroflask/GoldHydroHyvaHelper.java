@@ -8836,18 +8836,19 @@ catch(Exception | Error e)
 			hydro_cap_color("White");
 			hydro_strap_color("Black");
 			hydro_boot_color("White");
-//				Myhydro_Engraving("Myhydro Product");
-			Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
-			Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
+				Myhydro_Engraving("Myhydro Product");
+			//Sync.waitElementPresent("xpath", "//button[@class='nav-buttons__btn next-btn']");
+			//Common.clickElement("xpath", "//button[@class='nav-buttons__btn next-btn']");
 			Myhydro_quantity(Dataset);
 			Sync.waitElementPresent(20, "xpath", "//button[@class='ATC__btn']");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Agree &')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Agree &')]");
+			
 			Thread.sleep(10000);
-//			Sync.waitElementPresent(40, "xpath", "//div[@class='a-message__container-inner']");
-//			String message = Common.findElement("xpath", "//div[@class='a-message__container-inner']").getText();
+//			Sync.waitElementPresent(40, "id", "cart-drawer-title");
+//			String message = Common.findElement("id", "message-success").getText();
 //			System.out.println(message);
 //			Common.assertionCheckwithReport(message.contains("You added"), "validating the  product add to the cart",
 //					"Product should be add to cart", "Sucessfully product added to the cart ",
@@ -9033,7 +9034,7 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(Strap.contains("Strap"), "validating the color selection for bottle",
 					"color should be select for the bottle", "Sucessfully color has been selected for the bottle",
 					"failed to select the color for the selected bottle");
-			hydro_select_strap("Flex Strap - Long");
+			hydro_select_strap("Long Flex Cap Strap");
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='" + Color + "']");
 			Common.clickElement("xpath", "//button[@aria-label='" + Color + "']");
@@ -9174,9 +9175,10 @@ catch(Exception | Error e)
 					"Engraving should be select for the bottle",
 					"Sucessfully Engraving  has been selected for the bottle",
 					"failed to select the Engraving for the selected bottle");
-			Sync.waitElementPresent("xpath", "//textarea[@class='text-engraving__input']");
-			Common.findElement("xpath", "//textarea[@class='text-engraving__input']").sendKeys(engravingtext);
-			String Text = Common.findElement("xpath", "//textarea[contains(@class,'text-engraving__input')]")
+			Common.clickElement("css", "button[id='Text-category-button']");
+			Sync.waitElementPresent("id", "engraving-category-menu");
+			Common.findElement("id", "engraving-category-menu").sendKeys(engravingtext);
+			String Text = Common.findElement("id", "engraving-category-menu")
 					.getAttribute("class");
 			System.out.println(Text);
 			Thread.sleep(4000);
@@ -10200,8 +10202,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
 		String graphic = data.get(Dataset).get("Engraving Graphic");
 		try {
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
-			Common.clickElement("xpath", "//span[text()='Graphic']");
+			Sync.waitElementPresent(30, "css", "button[id='Adventure-category-button']");
+			Common.clickElement("css", "button[id='Adventure-category-button']");
 //			int subproductsList = Common.findElements("xpath", "//div[@class='graphic-engraving__wrapper']//button")
 //					.size();
 //			for (int i = 0; i < subproductsList; i++) {
@@ -10262,7 +10264,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 		
 			Thread.sleep(6000);
-//			click_minicart();
+			click_minicart();
 			Thread.sleep(12000);
 			Sync.waitElementPresent(50, "xpath", "//span[contains(@x-html,'item.engraving.text')]");
 			String engraving = Common.findElement("xpath", "//span[contains(@x-html,'item.engraving.text')]")
@@ -10371,8 +10373,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Engraving should be select for the bottle",
 					"Sucessfully Engraving  has been selected for the bottle",
 					"failed to select the Engraving for the selected bottle");
-			Sync.waitElementPresent(30, "xpath", "//span[text()='Graphic']");
-			Common.clickElement("xpath", "//span[text()='Graphic']");
+			
 			Sync.waitElementPresent(30, "css", "button[id='Adventure-category-button']");
 			Common.clickElement("css", "button[id='Adventure-category-button']");
 			

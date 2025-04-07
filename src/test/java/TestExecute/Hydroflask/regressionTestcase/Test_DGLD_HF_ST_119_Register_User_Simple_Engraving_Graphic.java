@@ -20,6 +20,7 @@ public class Test_DGLD_HF_ST_119_Register_User_Simple_Engraving_Graphic {
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
+			Hydro.login_Hydroflask("AccountDetails");
 			Hydro.bottles_headerlinks_Shoppall("Bottles & Drinkware");  
 			Hydro.Graphic_Engraving("Simple Engraving");
 			Hydro.enraving_Checkout("Graphic");
