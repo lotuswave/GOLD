@@ -9695,7 +9695,7 @@ return Number;
 			//String searchproduct=Common.findElement("xpath", "//h3[@class='c-srp-title__no-results']").getAttribute("class");
 			//System.out.println(searchproduct);
 			System.out.println(productsearch);
-			Common.assertionCheckwithReport(productsearch.contains("Related Products (0)"),
+			Common.assertionCheckwithReport(productsearch.contains("(0)"),
 					"validating the search functionality", "enter Invalid product name will display in the search box",
 					"user enter the Invalid product name in  search box", "Failed to see the Invalid product name");
 			Thread.sleep(8000);
@@ -9733,9 +9733,9 @@ return Number;
 				Beforefilterpricelist.add(p.getText().replace(symbol, ""));
 				System.out.println("Beforefilterpricelist" + Beforefilterpricelist);
 			}
-			Thread.sleep(4000);
-			Common.dropdown("xpath", "//select[@class='ais-SortBy-select']", SelectBy.TEXT,PriceFilter);
-			
+			Thread.sleep(6000);
+			Common.actionsKeyPress(Keys.HOME);
+			Common.dropdown("xpath", "//select[@id='srp-sort-by']", SelectBy.INDEX,"2");
 			Thread.sleep(3000);
 			Common.scrollIntoView("xpath",
 					"//span[@data-price-type='finalPrice']");
@@ -9782,13 +9782,14 @@ return Number;
 		// TODO Auto-generated method stub
 		try {
 			Thread.sleep(3000);			
-			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
-			Common.clickElement("xpath", "//div[text()='Colour']");
+			Sync.waitElementPresent("xpath", "//div[@data-attr='osprey_common_color']");
+			Common.scrollIntoView("xpath", "//div[@data-attr='osprey_common_color']");
+			Common.clickElement("xpath", "//div[@data-attr='osprey_common_color']");
 
-			Common.scrollIntoView("xpath", "//input[@value='Black']");
-			Sync.waitElementPresent("xpath", "//input[@value='Black']");
-			Common.clickElement("xpath", "//input[@value='Black']");
-			Common.scrollIntoView("xpath", "//input[@value='Black']");
+			Common.scrollIntoView("xpath", "(//div[@data-attr='osprey_common_color']//input[@type='checkbox'])[1]");
+			Sync.waitElementPresent("xpath", "(//div[@data-attr='osprey_common_color']//input[@type='checkbox'])[1]");
+			Common.clickElement("xpath", "(//div[@data-attr='osprey_common_color']//input[@type='checkbox'])[1]");
+			Common.scrollIntoView("xpath", "(//div[@data-attr='osprey_common_color']//input[@type='checkbox'])[1]");
 			Thread.sleep(4000);
 			String SelectedFilter = Common.findElement("xpath", "//span[@class='ais-CurrentRefinements-categoryLabel']").getText();
 			System.out.println(SelectedFilter);
