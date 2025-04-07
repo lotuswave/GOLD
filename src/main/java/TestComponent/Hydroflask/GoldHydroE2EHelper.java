@@ -9122,7 +9122,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		String engravetext = data.get(Dataset).get("Engraving");
 		System.out.println(engravetext);
 		try {
-			Sync.waitElementPresent("xpath", "//button[@aria-label='" + font + "']");
+			Sync.waitElementPresent("id", "Text-category-button");
+			Common.clickElement("id", "Text-category-button");
+			Sync.waitElementPresent(40,"xpath", "//button[@aria-label='" + font + "']");
 			Common.clickElement("xpath", "//button[@aria-label='" + font + "']");
 			Thread.sleep(3000);
 			String Font = Common.findElement("xpath", "//span[@class='text-engraving__label']").getText();
