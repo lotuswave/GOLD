@@ -24,14 +24,14 @@ public class Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_availabl
 			String Description ="Registered User Checkout including  available free gift with Paypal - 2Day ";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails_TC4");
 			Hydro.search_product("SKU-TT32PS678");     
 			Hydro.addtocart("SKU-TT32PS678");
 			Hydro.search_product("SKU-BC128001 -2QTY");     
 			Hydro.addtocart("SKU-BC128001 -2QTY");
 			Hydro.minicart_Checkout();
 			Hydro.Add_Free_Gift();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+//			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("2 Day method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();

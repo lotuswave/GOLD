@@ -24,13 +24,13 @@ public class Test_DGLD_HYF_E2E_ST_007_RegisterUser_checkout_with_Klarna_Standard
 			String Description ="Register user checkout with Klarna (Standard) - 2 Item with cart value < $39";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails_TC7");
 			Hydro.search_product("SKU-T20CPB001");     
 			Hydro.addtocart("SKU-T20CPB001");
 			Hydro.search_product("SKU-CFX454");     
 			Hydro.Configurable_addtocart_pdp("SKU-CFX454");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+//			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("GroundShipping method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();

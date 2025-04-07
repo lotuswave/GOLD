@@ -24,7 +24,7 @@ public class Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4It
 			String Description ="Registered user checkout with Master CC + 4 Items, each qty - 2 + Gift message + Standard";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails_TC1");
 			Hydro.search_product("SKU-T28PS110 -2QTY");     
 			Hydro.addtocart("SKU-T28PS110 -2QTY");
 			Hydro.search_product("SKU-T20CPB001 -2QTY");     
@@ -36,7 +36,7 @@ public class Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4It
 			Hydro.minicart_viewcart();
 			Hydro.Gift_message("Gift Message above 50");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+//			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
             Hydro.selectshippingaddress("GroundShipping method");
         	HashMap<String,String> Details=Hydro.ordersummary_Details();
