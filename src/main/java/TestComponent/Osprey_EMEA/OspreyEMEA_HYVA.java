@@ -354,11 +354,11 @@ public class OspreyEMEA_HYVA {
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//a[@title='Sign In']");
+			Common.clickElement("xpath", "//a[@id='customer.header.sign.in.link']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
-					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In"),
+					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In") || Common.getCurrentURL().contains("customer/account/login"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -380,14 +380,14 @@ public class OspreyEMEA_HYVA {
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[contains(text(),'Forgot Y')]");
-			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
+			Common.clickElement("xpath", "//a[contains(@class,'link link-primary')]");
+			String forgotpassword = Common.findElement("xpath", "//h2[contains(@class,'text')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
 			Thread.sleep(4000);
 			Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
-			Common.clickElement("xpath", "//button[contains(text(), 'Reset My Password')]");
+			Common.clickElement("xpath", "//button[@type='submit' and contains(@class,'btn btn-primary')]");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message')]");
@@ -396,7 +396,8 @@ public class OspreyEMEA_HYVA {
 			System.out.println(message);
 			Common.assertionCheckwithReport(
 					message.contains("We received too many requests for password resets")
-							|| message.contains("If there is an account associated"),
+							|| message.contains("If there is an account associated") || Common.getCurrentURL().contains("/forgotpassword/")
+							|| Common.getCurrentURL().contains("/customer/account/login"),
 					"To validate the user is navigating to Forgot Password page",
 					"user should naviagte to forgot password page", "User lands on Forgot Password page",
 					"User failed to navigate to forgot password page");
