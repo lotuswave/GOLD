@@ -9634,7 +9634,7 @@ public void header_1_Percent_Planet() {
 		       cell = row.createCell(4);
 			
 		       cell.setCellStyle(cs);
-				cell.setCellValue("Used GiftCode");
+				cell.setCellValue("Used GiftCode"); 
 		     cell = row.createCell(5);
 		     
 		     cell.setCellStyle(cs);
