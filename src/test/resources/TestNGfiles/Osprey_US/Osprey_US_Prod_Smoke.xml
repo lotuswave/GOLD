@@ -5,44 +5,45 @@
     </listeners>
 
 
-<test name="Test_DGLD_OSP_US_ST_033_Register_user_Checkout_with_Multiple_Items_different_Shipping_Methods_and_validate_CC_and_PayPal" testid="DTG-3203" priority="P1" description="Verifying_Register_user_Checkout_with_2Day_Shipping_method.">
+<test name="Test_DGLD_OSP_US_ST_033_Register_user_Checkout_with_Multiple_Items_different_Shipping_Methods_and_validate_CC_and_PayPal" testid="DQA-3313" priority="P1" description="Verifying_Register_user_Checkout_with_2Day_Shipping_method.">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.Test_DGLD_OSP_US_ST_033_Register_user_Checkout_with_Multiple_Items_different_Shipping_Methods_and_validate_CC_and_PayPal" />
         </classes>
     </test>
-  <test name="TEST_DGLD_OS_US_099_Validate_Footer_links" testid="DTG-3203" priority="P1" description="Verifying_the_Footer_Links_Funtionality">
+  <test name="TEST_DGLD_OS_US_099_Validate_Footer_links" testid="DQA-3258" priority="P1" description="Verifying_the_Footer_Links_Funtionality">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.TEST_DGLD_OS_US_099_Validate_Footer_links" />
         </classes>
     </test>  
     
-     <test name="Test_DGLD_OSP_US_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments" testid="DTG-3203" priority="P1" description="Verifying_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments">
+     <test name="Test_DGLD_OSP_US_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments" testid="DQA-1873" priority="P1" description="Verifying_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.Test_DGLD_OSP_US_ST_040_Create_Account_Validation_Checkout_Simple_Configurable_Bundle_products_Shopping_CartPage_Discount_with_Afterpay_Klarna_Payments" />
         </classes>
     </test>  
     
-    <test name="Test_DGLD_OSP_US_ST_046_Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal" testid="DTG-3203" priority="P1" description="Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal">
+    <test name="Test_DGLD_OSP_US_ST_046_Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal" testid="DQA-3343" priority="P1" description="Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.Test_DGLD_OSP_US_ST_046_Reset_Password_Validate_search_Guest_Checkout_validate_Minicart_and_Login_from_shipping_Page_Express_Paypal" />
         </classes>
     </test>  
-    <test name="Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase" testid="DTG-3203" priority="P1" description="Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase">
+    <test name="Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase" testid="DQA-1882" priority="P1" description="Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_page_Regular_Item_GC_Purchase" />
         </classes>
     </test> 
     
-    <test name="Test_DGLD_OSP_US_ST_094_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" testid="DTG-3203" priority="P1" description="Verifying_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount">
+    <test name="Test_DGLD_OSP_US_ST_094_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" testid="DQA-1879" priority="P1" description="Verifying_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.Test_DGLD_OSP_US_ST_094_My_Account_Page_Validation_and_Checkout_With_Different_Billing_and_Different_Shipping_validate_Discount" />
         </classes>
     </test>  
-    <test name="Test_DGLD_OSP_US_BCST_005_HeaderLinks" testid="DTG-3203" priority="P1" description="Verifying_Header_Links_Functionality">
+    <test name="Test_DGLD_OSP_US_BCST_005_HeaderLinks" testid="DQA-1876" priority="P1" description="Verifying_Header_Links_Functionality">
         <classes>
             <class name="TestExecute.Osprey_US.SmokeTestCases.Test_DGLD_OSP_US_BCST_005_HeaderLinks" />
         </classes>
     </test>  
+
     
     
 </suite>
