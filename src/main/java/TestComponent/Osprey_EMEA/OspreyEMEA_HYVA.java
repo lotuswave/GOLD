@@ -89,7 +89,7 @@ public class OspreyEMEA_HYVA {
 				Close_Geolocation();
 				Thread.sleep(5000);
 			     acceptPrivacy();
-				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
