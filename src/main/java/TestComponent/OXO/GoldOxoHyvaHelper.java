@@ -7677,9 +7677,10 @@ catch(Exception | Error e)
 		try {
 			for (i = 0; i < Account.length; i++) {
 				Sync.waitElementPresent(50,"xpath",
-						"//span[text()='" + Account[i] + "']");
+						"//span[contains(text(),'" + Account[i] + "')]");
+				
 				Common.clickElement("xpath",
-						"//span[text()='" + Account[i] + "']");
+						"//span[contains(text(),'" + Account[i] + "')]");
 				Sync.waitPageLoad();
 				
 				try {
