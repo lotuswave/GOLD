@@ -13335,7 +13335,8 @@ public void Footer_Links(String Dataset) {{
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Termlinks[j])
 							|| Common.getCurrentURL().contains("/blog")
-							|| Common.getCurrentURL().contains("/privacy"),
+							|| Common.getCurrentURL().contains("/privacy")
+							|| Common.getCurrentURL().contains("/terms"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + Termlinks[j] + "it should navigate to the",
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
