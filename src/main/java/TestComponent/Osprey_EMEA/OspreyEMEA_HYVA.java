@@ -13235,7 +13235,7 @@ public void Footer_validation(String Dataset) {{
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || Common.getCurrentURL().contains("limited-tax-strategy") ||
 					Common.getCurrentURL().contains("order/status") || Common.getCurrentURL().contains(footerlinks[i]) ||Common.getCurrentURL().contains("packfinder")
-					|| Common.getCurrentURL().contains("owners-manual"),
+					|| Common.getCurrentURL().contains("owners-manual") || Common.getCurrentURL().contains("about-osprey"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
