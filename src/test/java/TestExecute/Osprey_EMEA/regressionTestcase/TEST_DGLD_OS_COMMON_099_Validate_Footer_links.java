@@ -20,11 +20,11 @@ public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Kustomer_Links("Kustomer");
-        Osprey_ReEu.Footer_validation("Breadcrumbs");
-        Osprey_ReEu.Footer_Links("Footer");
-        Osprey_ReEu.Footer_Links_Resources("Footer");
-        Osprey_ReEu.Footer_Links_BrandTeam("Footer");  
+        Osprey_ReEu.Kustomer_Links("Kustomer");                  //Sw Kustomer
+        Osprey_ReEu.Footer_validation("Breadcrumbs");            //Sw Breadcrumbs
+        Osprey_ReEu.Footer_Links("Footer");        				//Sw Footer
+        Osprey_ReEu.Footer_Links_Resources("Footer");			//Sw Footer
+        Osprey_ReEu.Footer_Links_BrandTeam("Footer");  			//Sw Footer
         Osprey_ReEu.Footer_Links_Repair_And_Replacement("Footer");    //recaptcha issue while login
        
         

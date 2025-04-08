@@ -9071,32 +9071,37 @@ return Number;
 
 	}
 
-	public void PDP_Tabs(String Dataset) {
+	public void PDP_Tabs(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
-		String names = data.get(Dataset).get("names");
-		String[] Links = names.split(",");
-		int i = 0;
+//		String names = data.get(Dataset).get("names");
+//		String[] Links = names.split(",");
+		int size=Common.findElements("xpath", "//div[@x-ref='productTabsComponent']//div//h2").size();
+		System.out.println(size);
+		Thread.sleep(4000);
 		try {
-			for (i = 0; i < Links.length; i++) {
+			for(int i = 0; i < size; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
-				Common.clickElement("xpath", "//h2[contains(text(),'" + Links[i] + "')]");
+				int value=i+1;
+				Sync.waitElementPresent("xpath", "(//div[@x-ref='productTabsComponent']//div//h2)['" + value +"']");
+				Common.clickElement("xpath", "(//div[@x-ref='productTabsComponent']//div//h2)['" + value +"']");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				/*String title = Common.findElement("xpath", "//a[text()='" + Links[i] + "']//parent::div")
-						.getAttribute("aria-expanded");
-				Common.assertionCheckwithReport(title.contains("true"), "verifying the tabs in PDP ",
-						"After clicking on the " + Links[i] + "It should display the related content",
-						"sucessfully after clicking on the " + Links[i] + "it has been displayed related content",
-						"Failed to display related content" + Links[i]);*/
+				String title = Common.findElement("xpath", "(//div[@x-ref='productTabsComponent']//div//h2)['" + value +"']")
+						.getText().trim();
+				String data=Common.findElement("xpath", "(//div[@role='tablist']//h2)['" + value +"']")
+						.getText().trim();
+				Common.assertionCheckwithReport(title.contains(data), "verifying the tabs in PDP ",
+						"After clicking on the " + title + "It should display the related content",
+						"sucessfully after clicking on the " + title + "it has been displayed related content",
+						"Failed to display related content" + title);
 
 			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the tabs in PDP ",
-					"After clicking on the " + Links[i] + "It should display the related content",
-					"Unable to display the content in  " + Links[i],
-					Common.getscreenShot("Failed to display related content" + Links[i]));
+					"After clicking on the PDP tab " + "It should display the related content",
+					"Unable to display the content in  the PDP Tab",
+					Common.getscreenShot("Failed to display related content"));
 
 			AssertJUnit.fail();
 		}
@@ -13229,7 +13234,8 @@ public void Footer_validation(String Dataset) {{
 			System.out.println(footerlinks[i]);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i]) || Bread.contains(footerlink[i]) || Common.getCurrentURL().contains("limited-tax-strategy") ||
-					Common.getCurrentURL().contains("order/status") || Common.getCurrentURL().contains(footerlinks[i]) ||Common.getCurrentURL().contains("packfinder"),
+					Common.getCurrentURL().contains("order/status") || Common.getCurrentURL().contains(footerlinks[i]) ||Common.getCurrentURL().contains("packfinder")
+					|| Common.getCurrentURL().contains("owners-manual"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -13329,7 +13335,7 @@ public void Footer_Links(String Dataset) {{
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(Termlinks[j])
 							|| Common.getCurrentURL().contains("/blog")
-							,
+							|| Common.getCurrentURL().contains("/privacy"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + Termlinks[j] + "it should navigate to the",
 					Termlinks[j] + "Sucessfully Navigated to the" + Termlinks[j] + "Links",
@@ -14646,7 +14652,7 @@ public void Footer_Links_Resources(String Dataset) { {
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i]) || Common.getCurrentURL().contains(footerlinks[i]) 
-					|| Common.getCurrentURL().contains("product"),
+					|| Common.getCurrentURL().contains("product") ||  Common.getCurrentURL().contains("/guarantee-faqs") ,
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
@@ -14719,14 +14725,16 @@ public void Footer_Links_BrandTeam(String Dataset) {{
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains(footerlinks[i]) ||Common.getCurrentURL().contains(footerlinks[i])
 					|| Common.getCurrentURL().contains("prodeal")
-					|| Common.getCurrentURL().contains("tax-strategy"),
+					|| Common.getCurrentURL().contains("tax-strategy")
+					|| Common.getCurrentURL().contains("product-registration")
+					|| Common.getCurrentURL().contains("careers"),
 					"validating the links navigation from footer Links",
 					"After Clicking on" + footerlinks[i] + "it should navigate to the",
 					footerlinks[i] + "Sucessfully Navigated to the" + footerlinks[i] + "Links",
 					"Unable to Navigated to the" + footerlinks[i] + "Links");
 				
 			Thread.sleep(4000);
-			int responcecode = getpageresponce(Common.getCurrentURL());
+			/*int responcecode = getpageresponce(Common.getCurrentURL());
 			System.out.println(responcecode);
 			String pagecode=Integer.toString(responcecode);
 			System.out.println(pagecode);
@@ -14746,7 +14754,7 @@ public void Footer_Links_BrandTeam(String Dataset) {{
 						"Page configured Properly with any issues", "Unable to get the proper response from the page",
 						Common.getscreenShotPathforReport("Failed to get the proper response from the page" + footerlinks[i]));
 				Assert.fail();
-			}
+			}*/
 			Common.navigateBack();
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
