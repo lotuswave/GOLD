@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="GOLD E2E OXO Tests">
+<listeners>
+<listener class-name="Utilities.TestListener"/>          
+</listeners>
+
+<test name="Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each_qty_2_Standard_Gift_message" testid="DQA-1884" priority="P1" description="This test case is to Place an order as a Guest User with Paypal payment method using 3 Items (Qty 2) with Standard shipping method with Gift message less than 50 characters for E2E Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_001_Guestuser_checkout_with_Paypal_3Items_each_qty_2_Standard_Gift_message"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard_Shipping" testid="DQA-3388" priority="P1" description="This Test case is to place an order as Register user checkout with Afterpay payment-using 1 item-standard shipping method for E2E Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_002_Ecom_RegisterUser_Afterpay_1_item_Standard_Shipping"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_standard_shipment" testid="DQA-1886" priority="P1" description="This testcase is to place an order as Guest User using  Master Card with 3 item using Standard shipping method for E2E Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_003_Guest_User_Checkout_3different_items_standard_shipment"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_CS_004_Register_User_Checkout_with_multiple_Items_and_Giftcard_Item_With_CC" testid="DQA-3393" priority="P1" description="This Test case is to place an CS order via admin with AMEX Payment method using Standard shipping method with 1 item for E2E Validation Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_CS_004_Register_User_Checkout_with_multiple_Items_and_Giftcard_Item_With_CC"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_ST_005_RegisterUser_Klarna_2_Items_Standard_Shipping_with_PO_Box_Address" testid="DQA-1888" priority="P1" description="This test case is to place an order as a Register user using 2 Items with Standard shipping method and Klarna payment method for E2E Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_005_RegisterUser_Klarna_2_Items_Standard_Shipping_with_PO_Box_Address"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_ST_006_Guest_User_Mutliple_Items_GC_Partial_Redeem_Express_Paypal_Standard_Shipping" testid="DQA-1889" priority="P1" description="This test case is to place an order as a Guest user with Express paypal Payment method multiple items with Standard shipping method using partial redeem for E2E Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_006_Guest_User_Mutliple_Items_GC_Partial_Redeem_Express_Paypal_Standard_Shipping"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_ST_007_GuestUser_checkout_with_CC_2Day_with_Multipleitems_BundleItem_MultipleQty_Giftmessage" testid="DQA-3389" priority="P1" description="This Test case is to place an order as Guest user with CC payment with multiple products with multiple qty using standard shipping method with Gift message for E2E Process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_007_GuestUser_checkout_with_CC_2Day_with_Multipleitems_BundleItem_MultipleQty_Giftmessage"/>
+</classes>
+</test>
+<test name="Test_DGLD_OXO_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCode_full_redemption" testid="DQA-1885" priority="P1" description="This test case is to place an order as a Register user with Multiple items using Full redemption code for E2E Validation process">
+<classes>
+<class name="TestExecute.OXO.OXO_O2C_E2E.Test_DGLD_OXO_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCode_full_redemption"/>
+</classes>
+</test>
+</suite>
