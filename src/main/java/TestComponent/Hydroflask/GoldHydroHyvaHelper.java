@@ -9939,10 +9939,10 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 			
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(6000);
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[contains(@class,'group-hover/item-image:') or @loading='lazy' and @itemprop]");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[contains(@class,'group-hover/item-image:') or @loading='lazy' and @itemprop]");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -9963,7 +9963,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"Sucessfully Product navigate to the PDP page", "Failed product to the PDP page");
 			Sync.waitPageLoad();
 			List<WebElement> ListOfSubproducts = Common.findElements("xpath",
-					"//div[@aria-label='Color']");
+					"//div[@class='hf_color']//div[@class='m-swatch']");
 			System.out.println(ListOfSubproducts.size());
 			for (int i = 0; i < ListOfSubproducts.size(); i++) {
 				ListOfSubproducts.get(i).click();
@@ -9971,17 +9971,16 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				Thread.sleep(5000);
 				String colorname = Common.getText("xpath","//span[contains(@class, 'm-swatch-group')]");
 				System.out.println(colorname);
-				String Bottleimagecolor = Common
-						.findElement("xpath", "(//div[contains(@class,'overflow-hidden absolute inset-0 object')]//img)[1]")
-						.getAttribute("alt").replace(product,"").replace(" - ", "");
+				String Bottleimagecolor =Common.getText("xpath", "(//span[contains(@x-text,'getSwatchText')])[1]");
 				System.out.println(Bottleimagecolor);
-				String color = Common.findElement("xpath", "//div[contains(@class,'m-swatch swatch-option-selected')]").getAttribute("data-option-label");
-				System.out.println(color);
-				Common.assertionCheckwithReport(color.equals(colorname) || colorname.equals(Bottleimagecolor), "validating the  product add to the cart",
-						"Product should be add to cart", "Sucessfully product added to the cart ",
-						"failed to add product to the cart");
+
+				Common.assertionCheckwithReport(colorname.contains(Bottleimagecolor), "validating the  selected Color Swatch",
+						"User should select the Color swatch", "Sucessfully Color swatch is selected ",
+						"failed to Select The color swatch");
 
 			}
+			Sync.waitElementPresent("css", "button[title='Add to Cart']");
+			Common.javascriptclickElement("css", "button[title='Add to Cart']");
 		}
 
 		catch (Exception | Error e) {
