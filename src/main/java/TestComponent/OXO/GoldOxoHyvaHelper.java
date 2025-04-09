@@ -336,10 +336,10 @@ public class GoldOxoHyvaHelper
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent(30,"xpath", "//img[@itemprop='image']");
+				Sync.waitElementPresent(30,"xpath", "//img[@loading='eager']");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@itemprop='image']");
+						"//img[@loading='eager']");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -381,9 +381,9 @@ public class GoldOxoHyvaHelper
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
+				Sync.waitElementPresent("xpath", "//img[@loading='eager']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@itemprop='image']");
+						"//img[@loading='eager']");
 				String s = webelementslist.get(i).getAttribute("src");
 				Thread.sleep(3000);
 				System.out.println(s);
