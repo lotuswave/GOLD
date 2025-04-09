@@ -23,7 +23,7 @@ public class TEST_DGOLD_OSP_EMEA_NW_E2E_010_GuestUser_Checkout_With_Partial_Gift
 			
 			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Norway Store-Partial Gift Code Redemption(The gift code should be placed above the product 1 quantity price) + CC";
-//			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10004993 -3QTY");
 			Osprey_ReEu.simple_addtocart("SKU-10004993 -3QTY");
 			Osprey_ReEu.minicart_Checkout();

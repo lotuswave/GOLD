@@ -91,20 +91,21 @@ public class OspreyEMEA_E2E_HYVA {
 				Close_Geolocation();
 				Thread.sleep(5000);
 			     acceptPrivacy();
-				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
-				System.out.println(size);
-				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
-						"validating store logo on the homwpage",
-						"System directs the user to the Homepage and store logo should display",
-						"Sucessfully user navigates to the home page and logo has been displayed",
-						"Failed to navigate to the homepage and logo is not displayed");
+			     int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
+					System.out.println(size);
+					System.out.println(Common.getPageTitle());
+					Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
+							"validating store logo on the homwpage",
+							"System directs the user to the Homepage and store logo should display",
+							"Sucessfully user navigates to the home page and logo has been displayed",
+							"Failed to navigate to the homepage and logo is not displayed");
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
+				Close_Geolocation();
 				close_add();
 				 acceptPrivacy();
-				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
@@ -8480,10 +8481,11 @@ return Number;
 
     }
 
-	public void acceptPrivacy() {
-
+	public void acceptPrivacy() throws Exception {
+		Thread.sleep(2000);
 		Common.clickElement("xpath", "//button[@id='truste-consent-button']");
 	}
+
 
 	public void Decline_All() {
 		Common.clickElement("xpath", "//button[@id='truste-consent-required']");

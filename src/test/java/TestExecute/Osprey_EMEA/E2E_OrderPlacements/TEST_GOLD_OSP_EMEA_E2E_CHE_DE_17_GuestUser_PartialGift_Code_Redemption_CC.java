@@ -22,7 +22,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_CHE_DE_17_GuestUser_PartialGift_Code_Redempt
 			
 			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Switzerland - Germany Store-Guest user - Partial Gift Code Redemption(The gift code should be placed above the product 1 quantity price) + CC";
-//			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("10004999 - 2");
 			Osprey_ReEu.Configurable_addtocart_pdp("10004999 - 2");
 			Osprey_ReEu.search_product("10002928 - 2");

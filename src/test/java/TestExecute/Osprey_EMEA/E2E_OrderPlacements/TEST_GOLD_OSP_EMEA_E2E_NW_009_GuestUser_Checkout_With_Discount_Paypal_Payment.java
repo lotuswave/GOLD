@@ -23,7 +23,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_NW_009_GuestUser_Checkout_With_Discount_Payp
 			
 	     	Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Norway Store  -Discount + Paypal";
-//			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10002926 -3QTY");
 			Osprey_ReEu.simple_addtocart("SKU-10002926 -3QTY");
 			Osprey_ReEu.minicart_Checkout();

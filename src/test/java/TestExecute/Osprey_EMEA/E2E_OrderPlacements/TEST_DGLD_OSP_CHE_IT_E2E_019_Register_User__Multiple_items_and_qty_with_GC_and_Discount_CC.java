@@ -22,7 +22,7 @@ public class TEST_DGLD_OSP_CHE_IT_E2E_019_Register_User__Multiple_items_and_qty_
 		try {
 		Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");	
 		String Description ="Register user multiple items + multiple QTY + GC + Discount + CC";
-//        Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("SKU-10000645 -2QTY");

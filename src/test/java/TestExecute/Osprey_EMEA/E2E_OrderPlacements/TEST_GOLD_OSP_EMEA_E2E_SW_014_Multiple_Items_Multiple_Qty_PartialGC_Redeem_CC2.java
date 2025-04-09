@@ -23,7 +23,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_SW_014_Multiple_Items_Multiple_Qty_PartialGC
 			
 			Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Sweden Store-Multiple Items + Multiple Qty + Partial GC redeem (The gift code should be placed above the product 1 quantity price)+ CC";
-//			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10004993 -3QTY");
 			Osprey_ReEu.simple_addtocart("SKU-10004993 -3QTY");
 			Osprey_ReEu.search_product("SKU-10004966 -3QTY");

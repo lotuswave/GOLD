@@ -23,7 +23,7 @@ public class TEST_GOLD_OSP_EMEA_E2E_SW_013_GuestUser_Checkout_With_Discount_Payp
 			
 	     	Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Sweden Store  -Discount + Paypal";
-//			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("SKU-10005861 -3QTY");
 			Osprey_ReEu.simple_addtocart("SKU-10005861 -3QTY");  
 			Osprey_ReEu.search_product("SKU-10003324 -3QTY");

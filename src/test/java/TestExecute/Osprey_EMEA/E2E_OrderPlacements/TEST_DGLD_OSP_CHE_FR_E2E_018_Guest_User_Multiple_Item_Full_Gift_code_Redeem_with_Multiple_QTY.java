@@ -23,7 +23,7 @@ public class TEST_DGLD_OSP_CHE_FR_E2E_018_Guest_User_Multiple_Item_Full_Gift_cod
 			
 	     	Osprey_ReEu.prepareOrdersData("OspreyEU_E2E_orderDetails.xlsx");
 			String Description = "Full Gift Code Redemption + Multiple Item + Multiple Qty ";
-//			Osprey_ReEu.verifingHomePage();
+			Osprey_ReEu.verifingHomePage();
 			Osprey_ReEu.search_product("CHE SKU-10002926");
 			Osprey_ReEu.Configurable_addtocart_pdp("SKU-10002926 -2QTY CHE");
 			Osprey_ReEu.search_product("SKU-10000645 -2QTY");
