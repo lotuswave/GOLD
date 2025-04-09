@@ -17303,7 +17303,8 @@ public String create_account(String Dataset) {
 		Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 		}
 		Common.clickElement("xpath", "//button[@title='Sign Up']");
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
+		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
 		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(
