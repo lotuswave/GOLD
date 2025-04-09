@@ -19,7 +19,7 @@ public class TEST_DGLD_OXO_US_ST_005_Guest_User_Checkout_with_Gift_Card_Code {
 		try {
 			Oxo.verifingHomePage();
 			Oxo.coffee_headerlinks("Coffee & Beverage");
-			Oxo.addtocart("addproduct");
+			Oxo.addtocart("Add Product");
 			Oxo.minicart_Checkout();
 			Oxo.addDeliveryAddress_Guest("AccountDetails");
 			Oxo.select_Shipping_Method("GroundShipping method");
