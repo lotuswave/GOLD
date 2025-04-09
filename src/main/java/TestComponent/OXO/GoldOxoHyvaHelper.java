@@ -13800,9 +13800,10 @@ if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contain
 			 System.out.println(rewardpointsused);
 			Common.clickElement("xpath","//button[@aria-label='Apply']");
 	 		Sync.waitForLoad();
-	 		Thread.sleep(6000);
+	 		Thread.sleep(8000);
 	 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Your Reward Points')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
+	 		Thread.sleep(4000);
+			Common.javascriptclickElement("xpath", "//button[contains(text(),'Your Reward Points')]");
 			Thread.sleep(4000);
 			String off=Common.findElement("xpath", "//div[@class='yotpo-remove-tag-container']//div").getText().trim().replace("Off", "");
 			String discount=Common.findElement("xpath", "//div[@class='item discount']//span[@class='value']").getText().trim().replace("-", "").replace(".00", "");
