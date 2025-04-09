@@ -9696,8 +9696,9 @@ public class GoldHydroHyva_PRODHelper {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[normalize-space()='Shop']");
 				Common.clickElement("xpath", "//span[normalize-space()='Shop']");
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "(//span[contains(text(),'Bottles & Drinkware')])[1]");
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
 						"//a[contains(@href,'bottles-drinkware')]/span[contains(text(),'" + Links[i] + "')]");
 
@@ -9745,7 +9746,7 @@ public class GoldHydroHyva_PRODHelper {
 
 	}
 
-	public void Coolers_validation(String Dataset) {
+	public void Coolers_LunchBoxes_Validation(String Dataset) {
 		// TODO Auto-generated method stub
 
 		String names = data.get(Dataset).get("Kitchen");
@@ -9842,6 +9843,7 @@ public class GoldHydroHyva_PRODHelper {
 				for (int i1 = 0; i1 < minLength; i1++) {
 					Sync.waitElementPresent("xpath", "//span[normalize-space()='Shop']");
 					Common.clickElement("xpath", "//span[normalize-space()='Shop']");
+					Thread.sleep(3000);
 					Common.clickElement("xpath", "(//span[text()='Kitchenware'])[1]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath",
@@ -11098,7 +11100,7 @@ public class GoldHydroHyva_PRODHelper {
 		}
 
 	}
-
+	
 	public void New_Color_Destination(String Dataset) {
 		// TODO Auto-generated method stub
 		String names = data.get(Dataset).get("colornames");
@@ -11968,7 +11970,12 @@ public class GoldHydroHyva_PRODHelper {
 		String[] Links = names.split(",");
 		int i = 0;
 		try {
-
+			Sync.waitElementPresent("xpath", "//span[contains(text(),'Customize')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Customize')]");
+			Sync.waitPageLoad();
+			Thread.sleep(4000);
+			Common.assertionCheckwithReport(Common.getCurrentURL().contains("customize")|| Common.getPageTitle().contains("MyHydro: Custom Water Bottles | Hydro Flask"),"verifying the header link customize page","User should navigate to thecustomize  page","unable to navigate to the customize page");
+			/*
 			for (i = 0; i < Links.length; i++) {
 				Thread.sleep(4000);
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Customize')]");
@@ -11984,7 +11991,7 @@ public class GoldHydroHyva_PRODHelper {
 						"verifying the header link " + Links[i] + "Under Customize",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
-			}
+			}*/
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Customize",

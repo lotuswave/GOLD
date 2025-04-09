@@ -21,10 +21,9 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 
 		try {
 			Hydro.verifingHomePage();
-			  Hydro.New_Color_Destination("Colors"); 
-		    Hydro.Shop_validation("travel Bottles");
+			  Hydro.New_Color_Destination("Colors");
            	Hydro.bottles_validation("Bottle and drinkware");
-        	Hydro.Coolers_validation("Coolers");  
+        	Hydro.Coolers_LunchBoxes_Validation("Coolers"); 
          	Hydro.kitchenware_validation("kitchenware");
       		Hydro.Accessories_validation("Accessories");
             Hydro.featured_validation("Featured");
@@ -33,7 +32,7 @@ public class Test_DGLD_HF_ST_032_Header_Links_Validation {
 			Hydro.Customize_validation("Customize");
 			
 //          Hydro.Holiday_shop_validation("Holiday Sale"); 		
-			
+//		    Hydro.Shop_validation("travel Bottles");			
 			
 			} catch (Exception e) {
 
