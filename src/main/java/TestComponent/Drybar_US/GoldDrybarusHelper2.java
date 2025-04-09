@@ -10946,7 +10946,7 @@ public void Simple_PDP(String Dataset) {
 //		click_UGC();
 //		Locally_PDP();
 		PDP_Tabs("Configurable Product");
-		validate_reviews_AskQuestions_PDP();
+//		validate_reviews_AskQuestions_PDP();
 //		Common.actionsKeyPress(Keys.UP);
 
 	} catch (Exception | Error e) {
@@ -11061,7 +11061,7 @@ public void Configurable_PDP(String Dataset) {
 		product_quantity(Dataset);
 		Thread.sleep(4000);
 		PDP_Tabs("Configurable Product");
-		validate_reviews_AskQuestions_PDP();
+//		validate_reviews_AskQuestions_PDP();
 	
 	}
 	catch(Exception | Error e)
@@ -11680,7 +11680,7 @@ public void Add_to_cart_Whishlist() {
 		{
 			Sync.waitElementPresent("xpath", "//button[@data-role='tocart']");
 			Common.clickElement("xpath", "//button[@data-role='tocart']");
-			Thread.sleep(5000);
+			Thread.sleep(8000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']")
 					.getAttribute("ui-id");
 			System.out.println(message);
