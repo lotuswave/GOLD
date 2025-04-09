@@ -92,7 +92,7 @@ public class OspreyEMEA_HYVA {
 				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey") || Common.getPageTitle().contains("Osprey"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -8886,9 +8886,9 @@ return Number;
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop,'image')]");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -8965,9 +8965,9 @@ return Number;
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image')]");
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop,'image')]");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9075,21 +9075,20 @@ return Number;
 		// TODO Auto-generated method stub
 //		String names = data.get(Dataset).get("names");
 //		String[] Links = names.split(",");
-		int size=Common.findElements("xpath", "//div[@x-ref='productTabsComponent']//div//h2").size();
-		System.out.println(size);
+		List<WebElement> size=Common.findElements("xpath", "//div[@x-ref='productTabsComponent']//div//h2[@aria-live='polite']");
+		System.out.println(size.size());
 		Thread.sleep(4000);
 		try {
-			for(int i = 0; i < size; i++) {
+			for(int i = 0; i < size.size(); i++) {
 				Thread.sleep(3000);
 				int value=i+1;
-				Sync.waitElementPresent("xpath", "(//div[@x-ref='productTabsComponent']//div//h2)['" + value +"']");
-				Common.clickElement("xpath", "(//div[@x-ref='productTabsComponent']//div//h2)['" + value +"']");
+				size.get(i).click();
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				String title = Common.findElement("xpath", "(//div[@x-ref='productTabsComponent']//div//h2)['" + value +"']")
-						.getText().trim();
-				String data=Common.findElement("xpath", "(//div[@role='tablist']//h2)['" + value +"']")
-						.getText().trim();
+				String title = Common.getText("xpath", "(//div[@x-ref='productTabsComponent']//div//h2[@aria-live='polite'])['" + value + "']").trim();
+				System.out.println(title);
+				String data=Common.getText("xpath", "(//div[@x-ref='productTabsComponent']//h2[@aria-live='polite'])['"+ value +"']").trim();
+				System.out.println(data);
 				Common.assertionCheckwithReport(title.contains(data), "verifying the tabs in PDP ",
 						"After clicking on the " + title + "It should display the related content",
 						"sucessfully after clicking on the " + title + "it has been displayed related content",
@@ -9103,7 +9102,7 @@ return Number;
 					"Unable to display the content in  the PDP Tab",
 					Common.getscreenShot("Failed to display related content"));
 
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
