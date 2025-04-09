@@ -21,7 +21,7 @@ public class TEST_DGLD_OXO_US_ST_017_Register_User_Checkout_Gift_Card_Partial_Pa
 			Oxo.click_singinButton();
 			Oxo.Usersignin("AccountDetails");
 			Oxo.coffee_headerlinks("Coffee & Beverage");
-			Oxo.addtocart("addproduct");
+			Oxo.addtocart("Add Product");
 			Oxo.search_product("Product");
 			Oxo.addtocart("Product");
 			Oxo.minicart_Checkout();
@@ -43,7 +43,7 @@ public class TEST_DGLD_OXO_US_ST_017_Register_User_Checkout_Gift_Card_Partial_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
