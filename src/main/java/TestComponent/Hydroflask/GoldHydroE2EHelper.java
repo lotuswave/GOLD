@@ -9592,9 +9592,9 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "(//img[contains(@class,'group-hover/item-image:hidden') or @loading='lazy' and @itemprop])[1]");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"(//img[contains(@class,'group-hover/item-image:hidden') or @loading='lazy' and @itemprop])[1]");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9619,6 +9619,7 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 //			engraving_color();
 			engraving_Text("Multiline Horizontal");
 			product_quantity(Dataset);
+			Sync.waitElementPresent("xpath", "//button[@class='ATC__btn']");
 			Common.clickElement("xpath", "//button[@class='ATC__btn']");
 			Sync.waitElementPresent("xpath", "//span[contains(text(),'Agree &')]");
 			Common.clickElement("xpath", "//span[contains(text(),'Agree &')]");
