@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.regressionTestcase;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -20,12 +20,12 @@ public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Kustomer_Links("Kustomer");                  //Kustomer,Sw Kustomer,es Kustomer,It Kustomer,fr Kustomer
-        Osprey_ReEu.Footer_validation("Breadcrumbs");            //Breadcrumbs,Sw Breadcrumbs,es Breadcrumbs,It Breadcrumbs,fr Breadcrumbs
-        Osprey_ReEu.Footer_Links("Footer");        				//Footer,Sw Footer,es Footer,It Footer,fr Footer
-        Osprey_ReEu.Footer_Links_Resources("Footer");			//Footer,Sw Footer,es Footer,It Footer,fr Footer
-        Osprey_ReEu.Footer_Links_BrandTeam("Footer");  			//Footer,Sw Footer,es Footer,It Footer,fr Footer
-        Osprey_ReEu.Footer_Links_Repair_And_Replacement("Footer");    //recaptcha issue while login
+        Osprey_ReEu.Kustomer_Links("Sw Kustomer");                  //Kustomer,Sw Kustomer,es Kustomer,It Kustomer,fr Kustomer
+        Osprey_ReEu.Footer_validation("Sw Breadcrumbs");            //Breadcrumbs,Sw Breadcrumbs,es Breadcrumbs,It Breadcrumbs,fr Breadcrumbs
+        Osprey_ReEu.Footer_Links("Sw Footer");        				//Footer,Sw Footer,es Footer,It Footer,fr Footer
+        Osprey_ReEu.Footer_Links_Resources("Sw Footer");			//Footer,Sw Footer,es Footer,It Footer,fr Footer
+        Osprey_ReEu.Footer_Links_BrandTeam("Sw Footer");  			//Footer,Sw Footer,es Footer,It Footer,fr Footer
+        Osprey_ReEu.Footer_Links_Repair_And_Replacement("Sw Footer");    //recaptcha issue while login
        
         
 		} catch (Exception e) {
@@ -43,7 +43,8 @@ public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
 
 	@BeforeTest
 	public void startTest() throws Exception {
-		System.setProperty("configFile", "Osprey_EMEA\\config.properties");
+		String url = "https://mcloud-na-preprod.osprey.com/se_sv/";
+		System.setProperty("url", url);
         Login.signIn();
 
 	}

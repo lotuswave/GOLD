@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.regressionTestcase;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;

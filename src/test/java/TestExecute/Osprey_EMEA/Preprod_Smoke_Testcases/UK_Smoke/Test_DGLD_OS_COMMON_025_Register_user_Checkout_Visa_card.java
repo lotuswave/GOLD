@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.regressionTestcase;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,25 +9,25 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_033_Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping {
+public class Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card {
 
-	String datafile = "Osprey_EMEA\\GoldOspreyemea.xlsx";
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
-	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class) 
-	public void Guest_user_checkout_PP_with_Multiple_products_with_Discount_samebilling_and_shipping () throws Exception {
+	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
+	public void Verifying_Register_user_Checkout_Visa_card () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.discountCode("Discount");
+        Osprey_ReEu.RegaddDeliveryAddress("Account");
+        Osprey_ReEu.selectshippingmethod("GroundShipping method");
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.payPal_Payment("PaypalDetails");
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 

@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.regressionTestcase;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,24 +9,18 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card {
+public class Test_DGLD_OS_COMMON_002_Forgot_Password_from_SignIn_page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Guest_User_Checkout_Visa_Card () throws Exception {
+	public void Verifying_the_Forgot_Password_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-//        Osprey_ReEu.discountCode("Discount");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Forgot_password("Account");
         
 		} catch (Exception e) {
 

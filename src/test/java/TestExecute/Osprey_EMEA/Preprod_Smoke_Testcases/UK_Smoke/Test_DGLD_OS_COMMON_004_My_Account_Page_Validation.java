@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.regressionTestcase;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,25 +9,26 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card {
+public class Test_DGLD_OS_COMMON_004_My_Account_Page_Validation {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
+//	String datafile="Osprey_EMEA//GoldOspreySE_SV.xlsx";
+//	String datafile="Osprey_EMEA//GoldOspreyES.xlsx";
+//	String datafile="Osprey_EMEA//GoldOspreyemeaDK_EN.xlsx";
+//	String datafile="Osprey_EMEA//GoldOspreyemeaEU_IT.xlsx";
+//	String datafile="Osprey_EMEA//GoldOspreyemeaEU_FR.xlsx";
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"My AccountPage");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Register_user_Checkout_Visa_card () throws Exception {
+	public void Verifying_the_My_Account_Page_Validation () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Account");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
+        Osprey_ReEu.Account_page_Validation("Account validation");
+        Osprey_ReEu.signout();
+        Osprey_ReEu.Loginpage_validation("Invalid Details");
         
 		} catch (Exception e) {
 
