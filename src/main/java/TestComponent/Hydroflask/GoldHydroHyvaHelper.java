@@ -9203,10 +9203,10 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
-				String s = webelementslist.get(i).getAttribute("src");
+						"//a[@class='product-image-link']");
+				String s = webelementslist.get(i).getAttribute("href");
 				System.out.println(s);
 				if (s.isEmpty()) {
 
