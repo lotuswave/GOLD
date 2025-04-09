@@ -8202,9 +8202,9 @@ return Number;
 			} else {
 				Sync.waitPageLoad();
 				for (int i = 0; i <= 10; i++) {
-					Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
+					Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 					List<WebElement> webelementslist = Common.findElements("xpath",
-							"//img[@itemprop='image']");
+							"//a[@class='product-image-link']//img");
 
 					String s = webelementslist.get(i).getAttribute("src");
 					System.out.println(s);
@@ -8830,9 +8830,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@itemprop='image']");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -14398,7 +14398,7 @@ public void validate_price_PLP_and_PDP() {
 	
 	try
 	{
-		int Products= Common.findElements("xpath","//img[@itemprop='image']").size();
+		int Products= Common.findElements("xpath","//a[@class='product-image-link']//img").size();
 		System.out.println(Products);
 		for(int i=0;i<Products;i++) 
 		{
@@ -14409,7 +14409,7 @@ public void validate_price_PLP_and_PDP() {
 			String PLPprice=ListOfSubproducts.getText();
 		    System.out.println(PLPprice);
 			Thread.sleep(4000);
-			Common.clickElement("xpath", "(//img[@itemprop='image'])["+ value + "]");
+			Common.clickElement("xpath", "(//a[@class='product-image-link']//img)["+ value + "]");
 			Sync.waitPageLoad();
 			Thread.sleep(6000);
 			String PDPPrice=Common.getText("xpath", "(//span[@x-text='item.price'])[1]");
