@@ -9966,12 +9966,12 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 					"//div[@class='hf_color']//div[@class='m-swatch']");
 			System.out.println(ListOfSubproducts.size());
 			for (int i = 0; i < ListOfSubproducts.size(); i++) {
-				ListOfSubproducts.get(i).click();
 				int value = i + 1;
+				ListOfSubproducts.get(i).click();
 				Thread.sleep(5000);
 				String colorname = Common.getText("xpath","//span[contains(@class, 'm-swatch-group')]");
 				System.out.println(colorname);
-				String Bottleimagecolor =Common.getText("xpath", "(//span[contains(@x-text,'getSwatchText')])[1]");
+				String Bottleimagecolor =Common.getText("xpath", "(//span[contains(@x-text,'getSwatchText')])['" + value + "']");
 				System.out.println(Bottleimagecolor);
 
 				Common.assertionCheckwithReport(colorname.contains(Bottleimagecolor), "validating the  selected Color Swatch",
