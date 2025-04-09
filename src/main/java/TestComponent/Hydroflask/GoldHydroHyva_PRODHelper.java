@@ -8562,18 +8562,18 @@ public class GoldHydroHyva_PRODHelper {
 			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
 			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
 
-			Sync.waitElementPresent(30, "id", "coupon_code");
-			Common.textBoxInput("id", "coupon_code", data.get(Dataset).get("prodDiscountcode"));
+			Sync.waitElementPresent(30, "xpath", "//input[@id='discount-code' or @id='coupon_code']");
+			Common.textBoxInput("xpath", "//input[@id='discount-code' or @id='coupon_code']", data.get(Dataset).get("prodDiscountcode"));
 
-			int size = Common.findElements("id", "coupon_code").size();
+			int size = Common.findElements("xpath", "//input[@id='discount-code' or @id='coupon_code']").size();
 			Common.assertionCheckwithReport(size > 0, "verifying the Discount Code label", expectedResult,
 					"Successfully open the discount input box", "User unable enter Discount Code");
-			Sync.waitElementClickable(30, "xpath", "//span[contains(text(),'Apply Discount')]");
-			Common.clickElement("xpath", "//span[contains(text(),'Apply Discount')]");
+			Sync.waitElementClickable(30, "xpath", "//span[contains(text(),'Apply Discount') or contains(text(),'Apply Code')or contains(text(),'Apply')]");
+			Common.clickElement("xpath", "//span[contains(text(),'Apply Discount') or contains(text(),'Apply Code')or contains(text(),'Apply')]");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
 			Thread.sleep(4000);
-			int discountcodemsg1 = Common.findElements("xpath", "//button[contains(text(),'Cancel Coupon')]").size();
+			int discountcodemsg1 = Common.findElements("xpath", "//span[contains(text(),'Cancel Coupon')]").size();
 			Common.assertionCheckwithReport(discountcodemsg1 > 0, "verifying pomocode", expectedResult,
 					"promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
