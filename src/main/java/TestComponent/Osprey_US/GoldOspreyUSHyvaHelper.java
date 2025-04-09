@@ -16829,7 +16829,83 @@ public void MyAccount_Subscription() {
 		}
 	}
 
+public void MyAccount_Subscription_1(String email) {
+    try {
+        Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
+        Common.clickElement("xpath", "//button[@id='customer-menu']");
+        Sync.waitElementPresent("xpath", "//a[@title='My Account']");
+        Common.clickElement("xpath", "//a[@title='My Account']");
+        Sync.waitPageLoad();
+        Thread.sleep(4000);
 
+        String MyAccount = Common.getPageTitle();
+        System.out.println(MyAccount);
+
+        Common.assertionCheckwithReport(MyAccount.equals("Dashboard"),
+                "validating the Dashboard page is displayed",
+                "Dashboard page should be display",
+                "Successfully Dashboard page is displayed",
+                "Failed to display the  Dashboard page");
+
+        Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
+        Thread.sleep(4000);
+
+        if (Common.findElements("xpath", "//button[@aria-label='Close dialog']").size() > 0) {
+            Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+        }
+
+        Common.switchFrames("xpath", "//iframe[@id='klaviyo_subscribe_page_1']");
+        String Subscribe_to_Osprey = Common.getText("xpath", "//span[text()='Subscribe to Osprey emails']");
+        System.out.println(Subscribe_to_Osprey);
+
+        if (Subscribe_to_Osprey.contains("Subscribe to Osprey emails")) {
+            Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", email); 
+            Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "qa");
+            Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "test");
+            Common.clickCheckBox("xpath", "//button[text()='Subscribe']");
+            Thread.sleep(3000);
+            String Subscribed = Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
+            Common.assertionCheckwithReport(Subscribed.equals("Thanks for confirming your email address."),
+                    "validating the User should able to subscribe successfully",
+                    "User should able to subscribe successfully",
+                    "Successfully User subscribed",
+                    "Failed to subscribe in My account page");
+            Common.switchToDefault();
+        } else {
+            Assert.fail();
+        }
+
+        Common.clickElement("xpath", "//a[@title='Dashboard']");
+        Sync.waitPageLoad();
+        Thread.sleep(3000);
+        Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
+        Thread.sleep(4000);
+        Common.switchFrames("xpath", "//iframe[@id='klaviyo_subscribe_page_2']");
+        String UnSubscribe = Common.getText("xpath", "//button[text()='Unsubscribe']");
+        System.out.println(UnSubscribe);
+
+        if (UnSubscribe.contains("Unsubscribe")) {
+            Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", email); 
+            Common.clickCheckBox("xpath", "//button[text()='Unsubscribe']");
+            Thread.sleep(3000);
+            String Subscribed = Common.getText("xpath", "//button[text()='Go to website']");
+            Common.assertionCheckwithReport(Subscribed.equals("Go to website"),
+                    "validating the User should able to subscribe successfully",
+                    "User should able to subscribe successfully",
+                    "Successfully User subscribed",
+                    "Failed to subscribe in My account page");
+            Common.switchToDefault();
+        } else {
+            Assert.fail();
+        }
+
+    } catch (Exception | Error e) {
+        e.printStackTrace();
+        ExtenantReportUtils.addFailedLog("validating the product add to the cart", "Product should be added to cart",
+                "unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+        Assert.fail();
+    }
+}
 
 
 public void warrenty_return_Authorization() {

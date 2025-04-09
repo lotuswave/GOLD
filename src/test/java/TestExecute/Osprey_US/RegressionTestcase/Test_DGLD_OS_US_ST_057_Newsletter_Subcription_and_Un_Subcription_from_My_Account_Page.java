@@ -19,9 +19,9 @@ public class Test_DGLD_OS_US_ST_057_Newsletter_Subcription_and_Un_Subcription_fr
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.MyAccount_Subscription();
+        Osprey_ReEu.click_Createaccount();
+        String email = Osprey_ReEu.create_account("Account");
+        Osprey_ReEu.MyAccount_Subscription_1(email);
    
         
 		} catch (Exception e) {
