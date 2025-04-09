@@ -9421,10 +9421,12 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				//Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']");
+
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
-				String s = webelementslist.get(i).getAttribute("src");
+						"//a[@class='product-image-link']");
+				String s = webelementslist.get(i).getAttribute("href");
 				System.out.println(s);
 				if (s.isEmpty()) {
 
