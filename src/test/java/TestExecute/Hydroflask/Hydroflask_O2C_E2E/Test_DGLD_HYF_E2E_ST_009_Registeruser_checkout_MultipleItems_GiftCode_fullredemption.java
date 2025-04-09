@@ -24,7 +24,7 @@ public class Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 			String Description ="Register user checkout Multiple Items + Gift Code full redemption";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails_TC9");
 			Hydro.search_product("SKU-CFX001");     
 			Hydro.addtocart("SKU-CFX001");
 			Hydro.search_product("SKU-T20CPB001");     
