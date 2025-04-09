@@ -763,10 +763,10 @@ public void Login_Account(String dataSet) {
 				Common.clickElement("xpath", "//span[contains(text(),'"+ day +"')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
-						"//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Thread.sleep(4000);
 				Common.clickElement("xpath",
-						"//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				 String title = "";
@@ -16776,7 +16776,7 @@ public void MyAccount_Subscription() {
     System.out.println(Subscribe_to_Osprey);
 
     if(Subscribe_to_Osprey.contains("Subscribe to Osprey emails")) {
-    	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "rrendla@helenoftroy.com");
+    	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", "anbogi+006@helenoftroy.com");
     	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "qa");
     	Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "test");
     	Common.clickCheckBox("xpath", "//button[text()='Subscribe']");
@@ -16793,6 +16793,7 @@ public void MyAccount_Subscription() {
     	Assert.fail();
     }
     Common.clickElement("xpath", "//a[@title='Dashboard']");
+  //button[text()='Review your email preferences']
     Sync.waitPageLoad();
     Thread.sleep(3000);
     Common.clickElement("xpath", "//span[text()='My Newsletter Subscriptions']");
