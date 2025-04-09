@@ -5976,9 +5976,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[@loading='eager']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[@loading='eager']");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -5991,7 +5991,7 @@ catch(Exception | Error e)
 			Common.javascriptclickElement("xpath", "//img[@alt='" + product + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String Productname = Common.getText("xpath", "//a[contains(text(),'Reviews')]").trim();
+			String Productname = Common.getText("xpath", "//span[@class='yotpo-sr-bottom-line-right-panel']");
 
 			Thread.sleep(4000);
 			System.out.println(Productname);
@@ -6033,9 +6033,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+				Sync.waitElementPresent("xpath", "//img[@loading='eager']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@class,'m-product-card__image') or @loading='lazy' and @itemprop]");
+						"//img[@loading='eager']");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
