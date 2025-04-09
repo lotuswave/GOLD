@@ -16862,6 +16862,10 @@ public void MyAccount_Subscription_1(String email) {
             Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[1]", email); 
             Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[2]", "qa");
             Common.textBoxInput("xpath", "(//input[contains(@id,'kl-consent-page')])[3]", "test");
+            Thread.sleep(2000);
+            if(Common.findElements("xpath","(//form[contains(@class,'needsclick klaviyo-form klaviyo-form-version')])[2]").size()>0){
+   			 Common.clickElement("xpath", "//button[contains(@class,'needsclick klaviyo-close-form')]");
+   		 }
             Common.clickCheckBox("xpath", "//button[text()='Subscribe']");
             Thread.sleep(3000);
             String Subscribed = Common.getText("xpath", "//span[text()='Thanks for confirming your email address.']");
@@ -16938,6 +16942,7 @@ public void warrenty_return_Authorization() {
 	}
 
 }
+
 
 public void warrent_Return_Auth_Form(String Dataset) {
 	// TODO Auto-generated method stub
