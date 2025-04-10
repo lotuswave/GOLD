@@ -4281,11 +4281,11 @@ public void Validate_retailerlocations() {
 		String expectedResult = "It redirects to order confirmation page";
 
 		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			addPaymentDetails(dataSet);
 		}
 
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
 		if (!url.contains("stage") && !url.contains("preprod")) {
@@ -4454,16 +4454,16 @@ public void Validate_retailerlocations() {
 				Common.switchToDefault();
 				}
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-					Thread.sleep(4000);
-					Sync.waitElementPresent(60,"xpath", "//button[contains(text(),'Place Order')]");
+					Thread.sleep(2000);
+					Sync.waitElementPresent(40,"xpath", "//button[contains(text(),'Place Order')]");
 					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
-					Thread.sleep(40000);
+					Thread.sleep(25000);
 					if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0) {
 						
 				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
 				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
-						Thread.sleep(4000);
+						Thread.sleep(3000);
 						Sync.waitElementPresent(30,"xpath", "//button[contains(text(),'Place Order')]");
 						Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 						Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
@@ -4516,7 +4516,7 @@ public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
@@ -4544,10 +4544,10 @@ public void Validate_retailerlocations() {
 				Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
 				Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
 //				Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 			
 					Common.switchFrames("xpath", "//iframe[contains(@src,'elements-inner-payment-')]");
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -4565,29 +4565,29 @@ public void Validate_retailerlocations() {
 				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 	                   if(Common.getCurrentURL().contains("/gb"))
 	                   {
-	                	   Thread.sleep(5000);
+	                	   Thread.sleep(4000);
 //	                	   Sync.waitElementPresent("xpath", "//input[@id='agreement_stripe_payments_5']");
 //	                	   Common.clickElement("xpath", "//input[@id='agreement_stripe_payments_5']");
 	                	   
 	                	   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	                	   Thread.sleep(8000);
+	                	   Thread.sleep(5000);
 	                	   if(Common.getText("xpath", "//div[contains(@data-ui-id,'checkout-cart')]").contains("Please enter your card's security code."))
 	                	   {
 	                		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
 	                  		Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-	                  		Thread.sleep(5000);
+	                  		Thread.sleep(4000);
 	                  		Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 	                      	Common.clickElement("xpath", "//button[@class='action primary checkout']");
 	                      	Thread.sleep(4000);
 	                      	String frameid=Common.findElement("xpath", "(//iframe[@role='presentation'])[1]").getAttribute("name");
 	                          	System.out.println(frameid);
-	                        	Thread.sleep(8000);
+	                        	Thread.sleep(6000);
 	                          	Common.switchFrames("xpath","//iframe[@name='"+ frameid +"']");
-	                          	Thread.sleep(8000);
+	                          	Thread.sleep(5000);
 	                          	Sync.waitElementPresent(30, "xpath", "//iframe[@id='challengeFrame' and @title='3DS Challenge']");
 	                     		Common.switchFrames("xpath", "//iframe[@id='challengeFrame' and @title='3DS Challenge']");
-	                     		Thread.sleep(6000);
+	                     		Thread.sleep(4000);
 	                         	Common.clickElement("xpath", "//button[contains(text(),'Complete')]");
 	                         	Common.switchToDefault();
 	                         	Common.switchToDefault();
@@ -16082,6 +16082,7 @@ public void url_color_validation(String Dataset) {
 		AssertJUnit.fail();
 	}
 }
+
 public void Add_To_MyFavorities(String Dataset) {
 	// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
