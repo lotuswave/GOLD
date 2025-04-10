@@ -3031,7 +3031,7 @@ public String create_account(String Dataset) {
 //						"validating the  product add to the Whishlist", "Product should be add to whishlist",
 //						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
 				String Whishlistproduct = Common
-						.findElement("xpath", "//div[contains(@class,'yotpo bottomLine bottomline-position')]//preceding-sibling::a").getAttribute("title");
+						.findElement("xpath", "//img[@class='object-contain product-image-photo']").getAttribute("title");
 				System.out.println(Whishlistproduct);
 				String product = data.get(Dataset).get("Products");
 				System.out.println(product);
