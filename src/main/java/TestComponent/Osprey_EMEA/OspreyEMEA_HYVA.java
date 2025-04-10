@@ -4025,6 +4025,7 @@ public class OspreyEMEA_HYVA {
 						
 
 					}else if (Common.getCurrentURL().contains("/success/")) {
+						Sync.waitPageLoad();
 						Thread.sleep(4000);
 							String sucessmessage = Common.getText("xpath",
 									"//div[@class='checkout-success container px-0 ']//h1");
@@ -9274,6 +9275,11 @@ return Number;
 		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
 		    	   
 		       } 
+		       else if(Common.getCurrentURL().contains("/fr"))
+		       {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Ajouter un code de réduction')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(),'Ajouter un code de réduction')]");
+		       }
 		       else {
 					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
@@ -9405,7 +9411,7 @@ return Number;
     					"Successfully Order summary is displayed in the payment page and fields are displayed",
     					"Failed to display the order summary and fileds under order summary");
             }
-            else if(Common.getCurrentURL().contains("/es/"))
+            else if(Common.getCurrentURL().contains("/es/") || Common.getCurrentURL().contains("/fr/"))
             {
             	Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
     			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(" €",
@@ -9439,8 +9445,7 @@ return Number;
     			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
     					.replace(" €","").replace(",", ".").trim();
     			Float shippingvalue = Float.parseFloat(shipping);
-    			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").replace("Incluye ", "").replace(" € en impuestos", "").replace(",", ".").trim();
-    			Float Taxvalue = Float.parseFloat(Tax);
+    			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").trim();
     			Thread.sleep(4000);
 
     			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
@@ -9458,6 +9463,7 @@ return Number;
     					"Successfully Order summary is displayed in the payment page and fields are displayed",
     					"Failed to display the order summary and fileds under order summary");
             }
+            
 		}
 
 		catch (Exception | Error e) {
