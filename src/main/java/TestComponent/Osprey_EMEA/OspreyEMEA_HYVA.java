@@ -9280,6 +9280,11 @@ return Number;
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Ajouter un code de réduction')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(),'Ajouter un code de réduction')]");
 		       }
+		       else if(Common.getCurrentURL().contains("/it/"))
+		       {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Aggiungi un codice sconto')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(),'Aggiungi un codice sconto')]");
+		       }
 		       else {
 					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
@@ -9411,7 +9416,7 @@ return Number;
     					"Successfully Order summary is displayed in the payment page and fields are displayed",
     					"Failed to display the order summary and fileds under order summary");
             }
-            else if(Common.getCurrentURL().contains("/es/") || Common.getCurrentURL().contains("/fr/"))
+            else if(Common.getCurrentURL().contains("/es/") || Common.getCurrentURL().contains("/fr/") || Common.getCurrentURL().contains("/it/"))
             {
             	Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
     			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(" €",
