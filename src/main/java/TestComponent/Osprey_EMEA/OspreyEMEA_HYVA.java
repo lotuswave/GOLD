@@ -4013,7 +4013,7 @@ public class OspreyEMEA_HYVA {
 						Thread.sleep(5000);				
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-						Thread.sleep(3000);
+						Thread.sleep(10000);
 						if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0 && Common.getCurrentURL().contains("/gb/")) {
 							
 				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
@@ -4025,6 +4025,7 @@ public class OspreyEMEA_HYVA {
 						
 
 					}else if (Common.getCurrentURL().contains("/success/")) {
+						Thread.sleep(4000);
 							String sucessmessage = Common.getText("xpath",
 									"//div[@class='checkout-success container px-0 ']//h1");
 							System.out.println(sucessmessage);
