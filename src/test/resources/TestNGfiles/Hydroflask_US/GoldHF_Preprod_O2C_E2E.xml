@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<suite name="Gold-HF System Testcase Regression Suite">
+<listeners>
+<listener class-name="Utilities.TestListener"/>
+</listeners>
+ 
+<test name="Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4Items_each_qty_2_Giftmessage_Standard" testid="DQA-197" priority="P1" description="This script will cover Register User Checkout with master">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_001_Registereduser_checkout_with_Master_CC_4Items_each_qty_2_Giftmessage_Standard"/>
+</classes>
+</test>
+ 
+<test name="Test_DGLD_HYF_E2E_ST_002_Registeruser_checkout_with_CC_4Items_each_qty2_Standard_Giftmessage" testid="DQA-197" priority="P1" description="This script will cover register user checkout with cc">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_002_Registeruser_checkout_with_CC_4Items_each_qty2_Standard_Giftmessage"/>
+</classes>
+</test>
+ 
+<test name="Test_DGLD_HYF_E2E_ST_003_GuestUser_Checkout_with_AmexCC_2Day_3different_Items_including_inlineEngaving" testid="DQA-197" priority="P1" description="This script will cover Guest User Checkout with amex">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_003_GuestUser_Checkout_with_AmexCC_2Day_3different_Items_including_inlineEngaving"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_available_free_gift_with_Paypal_2Day" testid="DQA-197" priority="P1" description="This script will cover register User Checkout with paypal">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_available_free_gift_with_Paypal_2Day"/>
+</classes>
+</test>
+ 
+<test name="Test_DGLD_HYF_E2E_ST_007_RegisterUser_checkout_with_Klarna_Standard_2Item_with_cartvalue" testid="DQA-197" priority="P1" description="This script will cover register User Checkout with klarna">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_007_RegisterUser_checkout_with_Klarna_Standard_2Item_with_cartvalue"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCode_fullredemption" testid="DQA-197" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCode_fullredemption"/>
+</classes>
+</test>
+ 
+ 
+
+ <test name="Test_DGLD_HYF_E2E_ST_006_Registeruser_checkout_with_inline_engraving_with_Afterpay" testid="DQA-197" priority="P1" description="This script will cover Registeruser_checkout_with_inline_engraving_with_Afterpay">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_006_Registeruser_checkout_with_inline_engraving_with_Afterpay"/>
+</classes>
+</test>
+
+ <test name="Test_DGLD_HYF_E2E_ST_011_GuestUser_checkout_including_inline_and_myhydro_engraving_with_CC_Standard" testid="DQA-196" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_011_GuestUser_checkout_including_inline_and_myhydro_engraving_with_CC_Standard"/>
+</classes>
+</test>
+ <test name="Test_DGLD_HYF_E2E_ST_012_RegisterUser_checkout_including_engraving_with_Paypal_Gift_message" testid="DQA-189" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_012_RegisterUser_checkout_including_engraving_with_Paypal_Gift_message"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_E2E_ST_014_GuestUser_checkout_with_paypal_MyHydro_inline_2Day" testid="DQA-187" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_014_GuestUser_checkout_with_paypal_MyHydro_inline_2Day"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_E2E_ST_015_GuestUser_without_Tax_Visa_CC_2Day" testid="DQA-197" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_015_GuestUser_without_Tax_Visa_CC_2Day"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_E2E_ST_016_Register_User_with_Applied_loyalty_Coupon_VISA_CC" testid="DQA-184" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_016_Register_User_with_Applied_loyalty_Coupon_VISA_CC"/>
+</classes>
+</test>
+<test name="Test_DGLD_HYF_E2E_ST_017_GuestUser_with_multiple_items_Gift_card_standard_shipping_CC" testid="DQA-185" priority="P1" description="This script will cover register User Checkout with giftcode full redemption">
+<classes>
+<class name="TestExecute.Hydroflask.Hydroflask_O2C_E2E.Test_DGLD_HYF_E2E_ST_017_GuestUser_with_multiple_items_Gift_card_standard_shipping_CC"/>
+</classes>
+</test>
+ 
+ 
+</suite>
