@@ -3754,7 +3754,7 @@ System.out.println(MyFavorites);
 		try {
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", Dataset);
-			Common.textBoxInput("id", "pass", "Lotuswave@1234");
+			Common.textBoxInput("id", "pass", "Hydro@123");
 			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
@@ -7936,7 +7936,7 @@ catch(Exception | Error e)
 	public void Validate_store_sidebar() {
 		try {
 //			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			Sync.waitElementPresent("id", "conversion-sidebar");
 			int RetailersTab = Common.findElements("id", "dealer-navigation-retailers").size();
 			int InstockTab = Common.findElements("id", "dealer-navigation-inventory").size();
@@ -7967,7 +7967,7 @@ catch(Exception | Error e)
 	public void CLick_Usemylocation() {
 		try {
 			Common.switchFrames("xpath", "//iframe[contains(@id,'lcly-embedded-iframe')]");
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Sync.waitElementClickable("xpath", "//a[@id='current-location-detector']");
 //			Common.mouseOverClick("xpath", "//a[@id='current-location-detector']");
 			Sync.waitPresenceOfElementLocated("id", "current-location-indicator");
@@ -8078,7 +8078,7 @@ catch(Exception | Error e)
 			Sync.waitElementPresent("xpath", "//div[@class='store-hours-days']");
 			int hoursSize = Common.findElements("xpath", "//div[@class='store-hours-days']").size();
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(hoursSize > 0, "validating hours page", "user navigates to Hours page ",
 					"Successfully user navigate to hours page", "faield to navigate to hours page");
 
@@ -8103,7 +8103,7 @@ catch(Exception | Error e)
 
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(filterSize > 0, "validating browser page",
 					"user navigates to Browsers page", "Sucessfully user navigate to browser page",
 					"faield to navigate to browser page");
@@ -12872,7 +12872,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 			Common.clickElement("id", "change-email");
 			Common.textBoxInputClear("xpath", "(//input[@name='email'])[1]");
 			Common.textBoxInputAndVerify("xpath", "(//input[@name='email'])[1]", newemail);
-			Common.textBoxInput("xpath", "//input[@name='current_password']", "Lotuswave@1234");
+			Common.textBoxInput("xpath", "//input[@name='current_password']", "Hydro@123");
 			Common.clickElement("xpath", "//span[text()='Save Account Information']");
 			Sync.waitPageLoad();
 			Thread.sleep(1000);
@@ -12886,7 +12886,7 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 					"Failed to get the success message and unable to navigate to the login page");
 			Sync.waitPageLoad();
 			Common.textBoxInput("id", "email", newemail);
-			Common.textBoxInput("id", "pass", "Lotuswave@1234");
+			Common.textBoxInput("id", "pass", "Hydro@123");
 			Common.clickElement("xpath", "//span[text()='Sign In']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
