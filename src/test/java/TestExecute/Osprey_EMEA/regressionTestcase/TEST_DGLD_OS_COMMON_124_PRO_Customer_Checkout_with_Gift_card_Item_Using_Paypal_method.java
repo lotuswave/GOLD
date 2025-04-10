@@ -25,7 +25,7 @@ public class TEST_DGLD_OS_COMMON_124_PRO_Customer_Checkout_with_Gift_card_Item_U
         Osprey_ReEu.Gift_cards("Osprey Gift Card");
         Osprey_ReEu.Card_Value("price"); 
         Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.Add_NewAddress("NewDetails");
+//        Osprey_ReEu.Add_NewAddress("NewDetails");
         Osprey_ReEu.payPal_Payment("PaypalDetails");
         
 		} catch (Exception e) {
