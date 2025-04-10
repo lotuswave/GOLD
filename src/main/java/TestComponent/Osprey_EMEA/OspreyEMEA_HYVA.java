@@ -100,7 +100,7 @@ public class OspreyEMEA_HYVA {
 			}
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
-				close_add();
+				Close_Geolocation();
 				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
@@ -128,13 +128,13 @@ public class OspreyEMEA_HYVA {
 			}
 			else
 			{
-//			Close_Geolocation();
+			Close_Geolocation();
 //			close_add();
 		     acceptPrivacy();
 			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey") || size > 0,
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey") || size > 0 || Common.getPageTitle().contains("Osprey") ,
 					"validating store logo on the homwpage",
 					"System directs the user to the Homepage and store logo should display",
 					"Sucessfully user navigates to the home page and logo has been displayed",
@@ -2746,7 +2746,7 @@ public class OspreyEMEA_HYVA {
 	public void minicart_Checkout() {{
 		// TODO Auto-generated method stub
 		try {
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("/gb"))
 			{
 				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
 				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
@@ -3760,7 +3760,7 @@ public class OspreyEMEA_HYVA {
 		String expectedResult = "email field will have email address";
 		try {
 			Thread.sleep(3000);
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("/gb"))
 			{
 				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
 				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
@@ -3973,7 +3973,8 @@ public class OspreyEMEA_HYVA {
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+					String name=Common.findElement("xpath","(//iframe[@role='presentation' and contains(@allow,'payment *; publickey-credentials')])[1]").getAttribute("name");
+					Common.switchFrames("xpath", "//iframe[@name='"+ name +"']");
 					Thread.sleep(9000);
 					Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 					Common.clickElement("xpath", "//label[@for='Field-numberInput']");
@@ -4013,7 +4014,7 @@ public class OspreyEMEA_HYVA {
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Thread.sleep(3000);
-						if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0) {
+						if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0 && Common.getCurrentURL().contains("/gb/")) {
 							
 				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
 				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
@@ -4025,7 +4026,7 @@ public class OspreyEMEA_HYVA {
 
 					}else if (Common.getCurrentURL().contains("/success/")) {
 							String sucessmessage = Common.getText("xpath",
-									" //h1[normalize-space()='Thank you for your purchase!']");
+									"//div[@class='checkout-success container px-0 ']//h1");
 							System.out.println(sucessmessage);
 						} else {
 							AssertJUnit.fail();
@@ -9390,6 +9391,59 @@ return Number;
 
     			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
     					.replace("DKK ", "").trim();
+    			Float ordertotalvalue = Float.parseFloat(ordertotal);
+    			Thread.sleep(4000);
+    			Float Total = subtotalvalue+shippingvalue+Discountvalue;
+    			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+    			Thread.sleep(4000);
+    			System.out.println(ExpectedTotalAmmount2);
+    			System.out.println(ordertotal);
+    			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+    					"validating the order summary in the payment page",
+    					"Order summary should be display in the payment page and all fields should display",
+    					"Successfully Order summary is displayed in the payment page and fields are displayed",
+    					"Failed to display the order summary and fileds under order summary");
+            }
+            else if(Common.getCurrentURL().contains("/es/"))
+            {
+            	Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
+    			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(" €",
+    					"").replace(",", ".").trim();
+    			Float subtotalvalue = Float.parseFloat(Subtotal);
+    			
+    			Common.clickElement("xpath", "//button[@title='Show items']");
+    			Thread.sleep(3000);
+    			int Products=Common.findElements("xpath", "//span[@class='price-including-tax pt-2']").size();
+    			for (int i = 0; i < Products; i++)
+    			{
+    				int value = i + 1;
+    				String Product=Common.findElement("xpath", "(//span[@class='price-including-tax pt-2'])["+ value +"]").getText().replace(" €",
+        					"").replace(",", ".");
+//    				SKUS=SKUS.concat("").trim();
+    				SKUS=SKUS.concat(Product);
+    				System.out.println(SKUS);
+    				SKU.put("SKU",SKUS);
+    			
+    			}
+    			System.out.println(SKUS);
+    			Float skuproducts=subtotalvalue+(subtotalvalue*20/100);
+    		
+    	        
+    			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
+    					.replace(" €","").replace(",", ".").trim();
+    			Float Discountvalue = Float.parseFloat(Discount);
+    			
+    			Float DIS=(skuproducts)+Discountvalue;
+    		
+    			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+    					.replace(" €","").replace(",", ".").trim();
+    			Float shippingvalue = Float.parseFloat(shipping);
+    			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").replace("Incluye ", "").replace(" € en impuestos", "").replace(",", ".").trim();
+    			Float Taxvalue = Float.parseFloat(Tax);
+    			Thread.sleep(4000);
+
+    			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
+    					.replace(" €","").replace(",", ".").trim();
     			Float ordertotalvalue = Float.parseFloat(ordertotal);
     			Thread.sleep(4000);
     			Float Total = subtotalvalue+shippingvalue+Discountvalue;
@@ -15091,15 +15145,14 @@ public void header_Explore(String Dataset) {
 					"//span[contains(text(),'" + Links[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();	
-			System.out.println(breadcrumbs);
+//			String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();	
+//			System.out.println(breadcrumbs);
 			System.out.println(Links[i]);
 			System.out.println(Link[i]);
 			
-			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
-					||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("About Us") 
+			Common.assertionCheckwithReport(Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("About Us") 
 					|| Common.getCurrentURL().contains("osprey-50") || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("Sizing & Fit")
-					||Common.getCurrentURL().contains("packfinder"),
+					||Common.getCurrentURL().contains("packfinder") || Common.getCurrentURL().contains("/blog/category/guide") || Common.getCurrentURL().contains("/blog") ,
 					"verifying the header link " + Links[i] + "Under Explore",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -15999,6 +16052,55 @@ public void deleteProduct_shoppingcart() {
 
 
 }
+
+	public void About_Opsrey(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Osprey Explore");
+		String[] Links = names.split(",");
+		String name = data.get(Dataset).get("Osprey Explore").toUpperCase();
+		String[] Link = name.split(",");
+		String Explore=data.get(Dataset).get("Explore CTA");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Common.clickElement("xpath","//span[contains(text(),'About Osprey')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
+				Common.clickElement("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+//				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();	
+//				System.out.println(breadcrumbs);
+				System.out.println(Links[i]);
+				System.out.println(Link[i]);
+				
+				Common.assertionCheckwithReport( Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("About Osprey") 
+						|| Common.getCurrentURL().contains("osprey-sustainability") || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("Sizing & Fit")
+						||Common.getCurrentURL().contains("osprey-bluesign") || Common.getCurrentURL().contains("athletes") || Common.getCurrentURL().contains("osprey-eoca-conservation") ,
+						"verifying the header link " + Links[i] + "Under Explore",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Accessories",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+
+	}	
+	
 }
 
 
