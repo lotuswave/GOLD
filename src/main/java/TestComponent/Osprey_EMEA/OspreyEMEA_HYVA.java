@@ -10130,12 +10130,17 @@ return Number;
 		String prodgiftcard=data.get(Dataset).get("Prod Product");
 		try
 		{
-			for (int i = 0; i <= 10; i++) {
+			
 				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
 				if(Common.getCurrentURL().contains("preprod"))
 				{
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Gift Card')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Gift Card')]");
+				Common.assertionCheckwithReport(Common.getCurrentURL().contains("/gift-card"),
+						"validating the Gift card Navigation to the PDP page",
+						"After clicking on the gift card it should navigate to the PDP",
+						"successfully to Navigate the Gift card to the PDP page",
+						"Failed to Navigate the Gift card to the PDP page");
 				}
 				else
 				{
@@ -10143,33 +10148,7 @@ return Number;
 					Common.clickElement("xpath", "//span[text()='E Gift Cards']");
 				}
 				
-				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//a[@class='product-image-link']//img");
-
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
-
-				} else {
-					break;
-				}
-			}
-			Sync.waitPageLoad(30);
-			Thread.sleep(4000);
-			if(Common.getCurrentURL().contains("preprod"))
-			{
-			Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Common.clickElement("xpath", "//img[contains(@alt,'" + GiftCard + "')]");
-			Sync.waitPageLoad();
-			}
-			else
-			{
-				Sync.waitElementPresent(30, "xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
-				Common.clickElement("xpath", "(//img[contains(@alt,'" + prodgiftcard + "')])[3]");
-				Sync.waitPageLoad();
-			}
-			Thread.sleep(4000);
+	
 		}
 		catch(Exception | Error e)
 		{

@@ -3747,6 +3747,8 @@ public class OspreyEMEA_E2E_HYVA {
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
+						Sync.waitElementPresent("xpath", "//button[contains(text(),'Code hinzufügen')]");
+						  Common.clickElement("xpath", "//button[contains(text(),'Code hinzufügen')]");
 					}else {
 
 							  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
@@ -3944,8 +3946,13 @@ public class OspreyEMEA_E2E_HYVA {
 						}else if(Size_Norway>0) {
 							Common.clickElement("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]");
 						}
+						if (Common.getCurrentURL().contains("/success/")) {
+							String sucessmessage = Common.getText("xpath",
+									" //h1[normalize-space()='Thank you for your purchase!']");
+							System.out.println(sucessmessage);
+						}
 						
-						if (Common.getCurrentURL().contains("/checkout")) {
+						else if (Common.getCurrentURL().contains("/checkout")) {
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
 							Common.clickElement("xpath", "(//button[@class='btn btn-primary w-full text-md mb-3 h-14 max-h-14'])[1]");
@@ -3957,11 +3964,7 @@ public class OspreyEMEA_E2E_HYVA {
 									"//div[contains(@class,'checkout-success')]//h1");
 							System.out.println(sucessmessage);
 
-						} else if (Common.getCurrentURL().contains("/success/")) {
-							String sucessmessage = Common.getText("xpath",
-									" //h1[normalize-space()='Thank you for your purchase!']");
-							System.out.println(sucessmessage);
-						} else {
+						}  else {
 						
 							AssertJUnit.fail();
 						}
