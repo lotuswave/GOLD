@@ -4018,7 +4018,9 @@ public class OspreyEMEA_HYVA {
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Thread.sleep(10000);
-						if (Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size()>0 && Common.getCurrentURL().contains("/gb/")) {
+						int address = Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size();
+						System.out.println(address);
+						if (address>0) {
 							
 				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
 				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
