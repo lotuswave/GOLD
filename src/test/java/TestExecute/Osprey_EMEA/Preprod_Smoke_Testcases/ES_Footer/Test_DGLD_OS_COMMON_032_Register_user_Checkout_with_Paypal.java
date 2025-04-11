@@ -46,7 +46,6 @@ public class Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal {
 		String url = "https://mcloud-na-preprod.osprey.com/es/";
 		System.setProperty("url", url);
         Login.signIn();
-        
 
 	}
 
