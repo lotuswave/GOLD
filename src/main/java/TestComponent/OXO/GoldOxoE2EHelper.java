@@ -1282,7 +1282,7 @@ public String Gift_card(String dataSet) {
 		//Sync.waitPageLoad();
 		Thread.sleep(3000);
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
-	    System.out.println(successmsg);	
+	    System.out.println(successmsg);
 	    Thread.sleep(2000);
 	    //Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 		Common.assertionCheckwithReport(successmsg.contains("added"),
