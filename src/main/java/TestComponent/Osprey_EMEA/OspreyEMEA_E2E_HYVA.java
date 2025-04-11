@@ -3932,7 +3932,7 @@ public class OspreyEMEA_E2E_HYVA {
 						
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-						Thread.sleep(8000);
+						Thread.sleep(30000);
 						
 						int size1= Common.findElements("xpath", "(//button[contains(text(),'Använd den angivna')])[1]").size();
 						int Size_Norway = Common.findElements("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]").size();
@@ -3945,6 +3945,10 @@ public class OspreyEMEA_E2E_HYVA {
 						if (Common.getCurrentURL().contains("/checkout")) {
 							Sync.waitPageLoad();
 							Thread.sleep(4000);
+							Common.clickElement("xpath", "(//button[@class='btn btn-primary w-full text-md mb-3 h-14 max-h-14'])[1]");
+							Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+							Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+							Thread.sleep(30000);
 							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
 							String sucessmessage = Common.getText("xpath",
 									"//div[contains(@class,'checkout-success')]//h1");
