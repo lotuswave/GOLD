@@ -4018,24 +4018,24 @@ public class OspreyEMEA_HYVA {
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Thread.sleep(10000);
-						int address = Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size();
-						System.out.println(address);
-						if (address>0) {
-							
-				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
-				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
-						Thread.sleep(4000);
-						Sync.waitElementPresent(30,"xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
-						Common.scrollIntoView("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
-						Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
-						
+						if (Common.getCurrentURL().contains("/onepage/success/")) {
+							Sync.waitPageLoad();
+							Thread.sleep(7000);
+								String sucessmessage = Common.getText("xpath",
+										"//div[@class='checkout-success container px-0 ']//h1");
+								System.out.println(sucessmessage);
+//						int address = Common.findElements("xpath", "(//h2[contains(@class,'cms-clear title-lg l')])[2]").size();
+//						System.out.println(address);
+//						if (address>0) {
+//							if(Common.getCurrentURL())
+//				        	Sync.waitElementPresent("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+//				        	Common.clickElement("xpath", "(//button[contains(text(),'Use as Entered ')])[2]");
+//						Thread.sleep(4000);
+//						Sync.waitElementPresent(30,"xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+//						Common.scrollIntoView("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+//						Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
+//						
 
-					}else if (Common.getCurrentURL().contains("/onepage/success/")) {
-						Sync.waitPageLoad();
-						Thread.sleep(7000);
-							String sucessmessage = Common.getText("xpath",
-									"//div[@class='checkout-success container px-0 ']//h1");
-							System.out.println(sucessmessage);
 						} else {
 							AssertJUnit.fail();
 						}
@@ -4053,6 +4053,7 @@ public class OspreyEMEA_HYVA {
 						Common.switchToDefault();
 
 					}
+			
 				}
 				else {
 			
