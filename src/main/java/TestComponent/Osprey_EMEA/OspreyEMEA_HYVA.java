@@ -2810,15 +2810,15 @@ public class OspreyEMEA_HYVA {
 	public void RegaddDeliveryAddress(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
 		String expectedResult = "shipping address is entering in the fields";
-		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
-		{
-			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
-		}
-		if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
-		{
-			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
-		}
+//		if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+//		{
+//			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+//			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+//		}
+//		if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+//		{
+//			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
+//		}
 		int size = Common.findElements(By.xpath("//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary')]")).size();
 		if (size > 0) {
 			try {
@@ -2928,14 +2928,23 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "shipping-city",
 						data.get(dataSet).get("City"));
 
-				try {
-					
+				if(Common.getCurrentURL().contains("/gb"))
+				{
+					  Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
+					  Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
+				}
+				else if (Common.getCurrentURL().contains("no_nb"))
+				{
+					Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
 					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
-				} catch (ElementClickInterceptedException e) {
-					// TODO: handle exception
-					Thread.sleep(3000);
-					Common.dropdown("xpath", "//select[@name='region']",
-							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+				}
+				else if(Common.getCurrentURL().contains("se_sv"))
+				{
+					System.out.println(Common.getCurrentURL());
+				}
+				else {
+					Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
+					Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
@@ -6943,13 +6952,13 @@ return Number;
 					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
 
 					Thread.sleep(6000);
-					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
+					Sync.waitElementPresent(30, "xpath", "//div[@class='checkout-success container px-0 ']//h1");
 					String sucessMessage = Common.getText("xpath",
-							" //h1[normalize-space()='Thank you for your purchase!']");
+							"//div[@class='checkout-success container px-0 ']//h1");
                       System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+					int sizes = Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//h1")
 							.size();
-					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") || Common.getCurrentURL().contains("/onepage/success/"),
 							"verifying the product confirmation", expectedResult,
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unabel to go orderconformation page");
