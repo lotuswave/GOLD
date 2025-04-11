@@ -31,7 +31,7 @@ public class TEST_DGLD_OSP_DEN_E2E_016_Regular_3items_Multiple_QTYs_PartialGiftC
         Osprey_ReEu.Configurable_addtocart_pdp("10004966- 2");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.addDeliveryAddress_Guestuser("Den Address");
-        Osprey_ReEu.selectshippingmethod("GroundShipping method"); 
+        Osprey_ReEu.selectshippingmethod("Den shipping method"); 
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
         String Used_GiftCode=Osprey_ReEu.Gift_card("Partial Giftcard");
         HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
