@@ -10925,8 +10925,8 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 						Common.javascriptclickElement("xpath", "//span[normalize-space()='Shop']");
 				       }
 					Thread.sleep(3000);	
-					Sync.waitElementPresent("xpath", "(//span[contains(text(),'New Arrivals')])[1]");
-					Common.clickElement("xpath","(//span[contains(text(),'New Arrivals')])[1]");
+					Sync.waitElementPresent("xpath", "(//span[contains(text(),'New & Trending')])[1]");
+					Common.clickElement("xpath","(//span[contains(text(),'New & Trending')])[1]");
 					Thread.sleep(3000);
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]");
 					Common.javascriptclickElement("xpath","(//span[contains(text(),'" + Links[i] + "')])[1]");
