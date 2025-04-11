@@ -7265,27 +7265,36 @@ catch(Exception | Error e)
 	public void remove_outofstock_subcribtion(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(4000);
-			String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]")
-					.getAttribute("data-price-amount");
-			if (price.equals(Dataset)) {   
-				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
-				Common.implicitWait();
-				Common.alerts("Cancel");
-				Thread.sleep(3000);
-				Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
+            if(Common.getCurrentURL().contains("preprod"))
+            {
+            	String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[1]")
+    					.getAttribute("data-price-amount");
+    			System.out.println(price);
+    			Thread.sleep(3000);
+    			Common.clickElement("xpath", "(//a[@title='Remove This Item'])[1]");
+    			Common.implicitWait();
+    			Common.alerts("Ok");
+            }
+            else
+            {
+            	String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]")
+			.getAttribute("data-price-amount");
+	System.out.println(price);
+            	Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
 				Common.implicitWait();
 				Common.alerts("Ok");
+            }
+            ExtenantReportUtils.addPassLog("Validating the removing of product from Subscription page", "Product should be removed successfully ", 
+            		"Unable to remove product", Common.getscreenShot("Successfully product removed from OOS Subscription page"));
 
-			} else {
-
-			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Validating the removing of product from Subscription page",
+					"Product should be removed successfully ",
+					"Unable to remove product",
+					Common.getscreenShot("Failed to remove from OOS Subscription page"));
 			Assert.fail();
 		}
-
 	}
 
 
