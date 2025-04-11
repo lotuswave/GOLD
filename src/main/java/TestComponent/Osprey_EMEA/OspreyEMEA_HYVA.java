@@ -16143,7 +16143,9 @@ public void deleteProduct_shoppingcart() {
 		try {
 			for (i = 0; i < Links.length; i++) {
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				
 				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Thread.sleep(3000);
 				Common.clickElement("xpath","//span[contains(text(),'About Osprey')]");
 				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath",
