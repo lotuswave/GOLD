@@ -81,11 +81,13 @@ public class GoldOxoE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
 
-			int size = Common.findElements("css", "a[aria-label='Takes to OXO homepage']").size();
-			System.out.println(size);
+			Sync.waitElementPresent("xpath", "//img[@alt='OXO logo. Takes to OXO homepage']");
+            
+			String page = Common.findElement("xpath", "//img[@alt='OXO logo. Takes to OXO homepage']").getAttribute("alt");
+			System.out.println(page);
 
 			Common.assertionCheckwithReport(
-					size > 0 && Common.getPageTitle().contains("OXO Good")
+					page.contains("home") && Common.getPageTitle().contains("OXO Good")
 							|| Common.getPageTitle().contains("Homepage OXO"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
 					"faield to naviagte to homepage");
@@ -232,10 +234,10 @@ public class GoldOxoE2EHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
+				Sync.waitElementPresent("xpath", "//img[@loading='eager']");
 				
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@itemprop='image']");
+						"//img[@loading='eager']");
 				String s = webelementslist.get(i).getAttribute("src");
 				Thread.sleep(3000);
 				System.out.println(s);
@@ -670,7 +672,15 @@ public class GoldOxoE2EHelper {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Common.textBoxInput("id", "shipping-firstname", data.get(dataSet).get("FirstName"));
+String popup = Common.findElement("xpath", "//div[@x-ref='freegift']").getAttribute("x-ref");
+			
+			if (popup.contains("free"));
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Close']");
+			}
+			
+			Thread.sleep(4000);
+			Common.textBoxInput("xpath", "//div[contains(@class,'grid')]//input[@name='firstname']", data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("id", "guest_details-email_address").size();
 			Common.assertionCheckwithReport(size > 0, "validating the email address field", expectedResult,
 					"Filled Email address", "unable to fill the email address");
@@ -1269,10 +1279,12 @@ public String Gift_card(String dataSet) {
 		code=data.get(dataSet).get("GiftCard_Preprod");
 		Common.actionsKeyPress(Keys.ARROW_UP);
 		Common.clickElement("xpath","//button[@aria-label='Add Code']");
-		Sync.waitPageLoad();
-		Thread.sleep(4000);
+		//Sync.waitPageLoad();
+		Thread.sleep(3000);
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 	    System.out.println(successmsg);	
+	    Thread.sleep(2000);
+	    //Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
 		Common.assertionCheckwithReport(successmsg.contains("added"),
 				"validating the success message after applying gift card",
 				"Success message should be displayed after the applying of gift card",
@@ -3194,7 +3206,7 @@ else
 			Sync.waitPageLoad();
 			Common.switchWindows();
 			//Common.switchFrames("xpath", "//iframe[@id='klarna-apf-iframe']");
-			Sync.waitElementPresent("xpath", "//input[@name='phone']");
+			Sync.waitElementPresent("xpath", "//input[@id='phonePasskey']");
 		/*	Common.clickElement("xpath", "//input[@name='phone']");
 			
 			int number=Common.genrateRandomNumber();
@@ -3202,11 +3214,11 @@ else
 			String mobile=Integer.toString(number);
 			String phone="+91"+"95862"+mobile;*/
 			Thread.sleep(6000);
-			WebElement clear=Common.findElement("xpath", "//input[@name='phone']");
+			WebElement clear=Common.findElement("xpath", "//input[@id='phonePasskey']");
 		    clear.sendKeys(Keys.CONTROL+"a");
 		    clear.sendKeys(Keys.DELETE);
 			System.out.println(phone);
-			Common.textBoxInput("xpath", "//input[@name='phone']", phone);
+			Common.textBoxInput("xpath", "//input[@id='phonePasskey']", phone);
 			Common.clickElement("xpath", "//button[@id='onContinue']");
 			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//input[@id='otp_field']");
@@ -3391,10 +3403,11 @@ catch(Exception | Error e)
 			Common.clickElement("id", "login_emaildiv");
 			Common.textBoxInput("id", "email", data.get(dataSet).get("Email"));
 			Common.clickElement("id", "btnNext");
+			Thread.sleep(2000);
 			int size = Common.findElements("xpath", "(//a[text()='Try another way'])[1]").size();
 			if(size>0) {
-				String otp=Common.findElement("xpath", "(//a[text()='Try another way'])[1]").getText();
-				System.out.println(otp);
+			//	String otp=Common.findElement("xpath", "(//a[text()='Try another way'])[1]").getText();
+				//System.out.println(otp);
 				Common.clickElement("xpath", "(//a[text()='Try another way'])[1]");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
@@ -10856,7 +10869,7 @@ public void header_1_Percent_Planet() {
 		String expectedResult = "It should open paypal site window.";
 
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(8000);
 			int cancelpayment=Common.findElements("xpath", "//button[@title='Cancel']").size();
 			System.out.println(cancelpayment);
 			if(cancelpayment>0)
@@ -10870,7 +10883,7 @@ public void header_1_Percent_Planet() {
 				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 				// Common.refreshpage();
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
 				Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
 				Common.switchToDefault();
@@ -10882,7 +10895,7 @@ public void header_1_Percent_Planet() {
 				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 				// Common.refreshpage();
-				Thread.sleep(4000);
+				Thread.sleep(5000);
 				Sync.waitElementPresent("xpath", "//div[contains(@class,'paypal-button-lab')]");
 				Common.clickElement("xpath", "//div[contains(@class,'paypal-button-lab')]");
 				Common.switchToDefault();
@@ -10985,8 +10998,8 @@ public void header_1_Percent_Planet() {
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unable to go orderconformation page");
 
-					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]/p/a").size() > 0) {
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/a");
+					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success')]/p/span").size() > 0) {
+						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]/p/span");
 						System.out.println(order);
 					}
 					else if (Common.findElements("xpath", "//a[@class='order-number']/strong").size() > 0) {
@@ -12879,10 +12892,13 @@ return Number;
 		{
 			String Subtotal = Common.getText("css", "div[class='item subtotal'] span[class*='value']").trim();
 			details.put("Subtotal", Subtotal);
+			System.out.println(Subtotal);
 			String shipping = Common.getText("css", "div[class='item shipping'] span[class*='value']").trim();
 			details.put("shipping", shipping);
+			System.out.println(shipping);
 			String Tax = Common.getText("css", "div[class='item tax'] span[class*='value']").trim();
 			details.put("Tax", Tax);
+			System.out.println(Tax);
 			Thread.sleep(4000);
 			int Discounts=Common.findElements("css", "div[class='item discount'] span[class*='value']").size();
 			if(Discounts>0)
@@ -12897,6 +12913,7 @@ return Number;
 			}
 			String ordertotal = Common.getText("css", "div[class='item grand_total'] span[class*='value text']").trim();
 			details.put("ordertotal", ordertotal);
+			System.out.println(ordertotal);
 		}
 		catch(Exception | Error e)
 		{
@@ -12974,4 +12991,26 @@ return Number;
 		}
 		
 	}
+
+/*	public void Freegift_Popup() {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementPresent(datafile, datafile);
+			String popup = Common.findElement("xpath", "//div[@x-ref='freegift']").getAttribute("x-ref");
+			
+			if (popup.contains("free"));
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Close']");
+			}
+			else {
+				Assert.fail();
+			}
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	*/
 }
