@@ -21,7 +21,7 @@ public class Test_DGLD_HYF_E2E_ST_015_GuestUser_without_Tax_Visa_CC_2Day {
 
 		try {
 			Hydro.prepareOrdersData("HYF_E2E_orderDetails.xlsx");
-			String Description ="Guest User without Tax - Discover CC - 2Day";
+			String Description ="Guest User without Tax - Visa CC - 2Day";
 			Hydro.verifingHomePage();
 			Hydro.search_product("SKU-TT40PS474");     
 			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474");
