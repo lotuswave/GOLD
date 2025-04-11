@@ -103,7 +103,8 @@ public class OspreyEMEA_E2E_HYVA {
 			else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 			{
 				Close_Geolocation();
-				close_add();
+				Thread.sleep(5000);
+//				close_add();
 				 acceptPrivacy();
 				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 				System.out.println(size);
@@ -118,6 +119,7 @@ public class OspreyEMEA_E2E_HYVA {
 			{
 				
 				 acceptPrivacy();
+				 Thread.sleep(5000);
 				 Close_Geolocation();
 				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 				System.out.println(size);
@@ -132,6 +134,7 @@ public class OspreyEMEA_E2E_HYVA {
 			{
 //			Close_Geolocation();
 //			close_add();
+				Thread.sleep(5000);
 		     acceptPrivacy();
 			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 			System.out.println(size);
