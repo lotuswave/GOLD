@@ -3947,8 +3947,9 @@ public class OspreyEMEA_E2E_HYVA {
 							Common.clickElement("xpath", "(//button[contains(text(),'Bruk som oppgitt')])[1]");
 						}
 						if (Common.getCurrentURL().contains("/success/")) {
+							Sync.waitPageLoad();
 							String sucessmessage = Common.getText("xpath",
-									" //h1[normalize-space()='Thank you for your purchase!']");
+									"//div[@class='checkout-success container px-0 ']//h1");
 							System.out.println(sucessmessage);
 						}
 						
@@ -3966,7 +3967,7 @@ public class OspreyEMEA_E2E_HYVA {
 
 						}  else {
 						
-							AssertJUnit.fail();
+							Assert.fail();
 						}
 						if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span").size() > 0) {
 							Thread.sleep(4000);
