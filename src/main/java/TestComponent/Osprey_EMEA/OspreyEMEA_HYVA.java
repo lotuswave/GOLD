@@ -4017,10 +4017,10 @@ public class OspreyEMEA_HYVA {
 						Thread.sleep(5000);				
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-						Thread.sleep(10000);
+						Thread.sleep(40000);
 						if (Common.getCurrentURL().contains("/onepage/success/")) {
 							Sync.waitPageLoad();
-							Thread.sleep(7000);
+							Thread.sleep(4000);
 								String sucessmessage = Common.getText("xpath",
 										"//div[@class='checkout-success container px-0 ']//h1");
 								System.out.println(sucessmessage);
