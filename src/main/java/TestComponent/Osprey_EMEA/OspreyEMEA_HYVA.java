@@ -3795,6 +3795,10 @@ public class OspreyEMEA_HYVA {
 				Common.scrollIntoView("xpath", "//input[@id='shipping-region']");
 				Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
 			}
+			else if(Common.getCurrentURL().contains("se_sv"))
+			{
+				System.out.println(Common.getCurrentURL());
+			}
 			else {
 				Common.scrollIntoView("xpath", "//select[@id='shipping-region']");
 				Common.dropdown("xpath", "//select[@id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
@@ -4024,9 +4028,9 @@ public class OspreyEMEA_HYVA {
 						Common.clickElement("xpath", "(//button[contains(@class, 'btn-place-order') and contains(text(), 'Place Order')])[2]");
 						
 
-					}else if (Common.getCurrentURL().contains("/success/")) {
+					}else if (Common.getCurrentURL().contains("/onepage/success/")) {
 						Sync.waitPageLoad();
-						Thread.sleep(4000);
+						Thread.sleep(7000);
 							String sucessmessage = Common.getText("xpath",
 									"//div[@class='checkout-success container px-0 ']//h1");
 							System.out.println(sucessmessage);
@@ -9285,6 +9289,11 @@ return Number;
 		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Aggiungi un codice sconto')]");
 		    	   Common.clickElement("xpath", "//button[contains(text(),'Aggiungi un codice sconto')]");
 		       }
+		       else if(Common.getCurrentURL().contains("/se_sv"))
+		       {
+		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Lägg till rabattkod')]");
+		    	   Common.clickElement("xpath", "//button[contains(text(),'Lägg till rabattkod')]");
+		       }
 		       else {
 					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
 					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
@@ -9455,6 +9464,61 @@ return Number;
 
     			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
     					.replace(" €","").replace(",", ".").trim();
+    			Float ordertotalvalue = Float.parseFloat(ordertotal);
+    			Thread.sleep(4000);
+    			Float Total = subtotalvalue+shippingvalue+Discountvalue;
+    			String ExpectedTotalAmmount2 = new BigDecimal(Total).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+    			Thread.sleep(4000);
+    			System.out.println(ExpectedTotalAmmount2);
+    			System.out.println(ordertotal);
+    			Common.assertionCheckwithReport(ExpectedTotalAmmount2.equals(ordertotal),
+    					"validating the order summary in the payment page",
+    					"Order summary should be display in the payment page and all fields should display",
+    					"Successfully Order summary is displayed in the payment page and fields are displayed",
+    					"Failed to display the order summary and fileds under order summary");
+            }
+            else if(Common.getCurrentURL().contains("se_sv"))
+            {
+            	Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[@class='value']");
+    			String Subtotal = Common.getText("xpath", "//div[@class='item subtotal']//span[@class='value']").replace(" kr",
+    					"").replace(",", ".").trim();
+    			Float subtotalvalue = Float.parseFloat(Subtotal);
+    			
+    			Common.clickElement("xpath", "//button[@title='Show items']");
+    			Thread.sleep(3000);
+    			int Products=Common.findElements("xpath", "//span[@class='price-including-tax pt-2']").size();
+    			for (int i = 0; i < Products; i++)
+    			{
+    				int value = i + 1;
+    				String Product=Common.findElement("xpath", "(//span[@class='price-including-tax pt-2'])["+ value +"]").getText().replace(" kr",
+        					"").replace(",", ".");
+//    				SKUS=SKUS.concat("").trim();
+    				SKUS=SKUS.concat(Product);
+    				System.out.println(SKUS);
+    				SKU.put("SKU",SKUS);
+    			
+    			}
+    			System.out.println(SKUS);
+    			Float skuproducts=subtotalvalue+(subtotalvalue*20/100);
+    		
+    	        Thread.sleep(4000);
+    	    
+    			String Discount = Common.getText("xpath", "//div[@class='item discount']//span[@class='value']")
+    					.replace(" kr","").replace(",", ".").trim();
+    			System.out.println(Discount);
+    			String Discount1=Discount.replace("?", "");
+    			Float Discountvalue = Float.parseFloat(Discount1);
+    		
+    			Float DIS=(skuproducts)+Discountvalue;
+    		
+    			String shipping = Common.getText("xpath", "//div[@class='item shipping']//span[@class='value']")
+    					.replace(" kr","").replace(",", ".").trim();
+    			Float shippingvalue = Float.parseFloat(shipping);
+    			String Tax = Common.getText("xpath", "(//div[@class='item tax']//span[@class='label'])[1]").trim();
+    			Thread.sleep(4000);
+
+    			String ordertotal = Common.getText("xpath", "//div[@class='item grand_total']//span[contains(@class,'value text')]")
+    					.replace(" kr","").replace(",", ".").trim();
     			Float ordertotalvalue = Float.parseFloat(ordertotal);
     			Thread.sleep(4000);
     			Float Total = subtotalvalue+shippingvalue+Discountvalue;
