@@ -1472,8 +1472,6 @@ public void header_Shopbycollection(String Dataset) { {
 						Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
 				Assert.fail();
 		}
-	
-
 		}
 
 	}

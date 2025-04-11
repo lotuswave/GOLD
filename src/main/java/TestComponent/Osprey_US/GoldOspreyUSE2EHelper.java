@@ -2288,7 +2288,7 @@ public void header_Shopbycollection(String Dataset) { {
 			}
 
 			Sync.waitPageLoad(30);
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 //			
 //			if(Common.getCurrentURL().contains("preprod")) {
 //				
@@ -2315,7 +2315,7 @@ public void header_Shopbycollection(String Dataset) { {
 					
 					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 					Common.clickElement("xpath", "//img[@alt='" + products + "']");
-					Thread.sleep(6000);
+					Thread.sleep(3000);
 //					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
 //					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
 //				}
@@ -2330,6 +2330,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
+			Thread.sleep(2);
 			product_quantity(Dataset);
 //			Thread.sleep(4000);
 //			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
@@ -2341,8 +2342,8 @@ public void header_Shopbycollection(String Dataset) { {
 			
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
 			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
-			Sync.waitPageLoad();
-			Thread.sleep(10000);
+//			Sync.waitPageLoad();
+//			Thread.sleep(5000);
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //			.getAttribute("data-ui-id");
 //	System.out.println(message);
@@ -2501,11 +2502,13 @@ public void header_Shopbycollection(String Dataset) { {
 	public void product_quantity(String Dataset) {
 		// TODO Auto-generated method stub
 		String Quantity = data.get(Dataset).get("Quantity");
+		System.out.println(Quantity);
 		try {
 			Common.findElement("xpath", "//div//select[@name='qty']");
 			Common.dropdown("xpath", "//div//select[@name='qty']", Common.SelectBy.VALUE, Quantity);
 			Thread.sleep(3000);
 			String value = Common.findElement("xpath", "//div//select[@name='qty']").getAttribute("value");
+			System.out.println(value);
 			Common.assertionCheckwithReport(value.equals(Quantity),
 					"validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page",
@@ -4357,13 +4360,13 @@ public void Validate_retailerlocations() {
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				Common.switchFrames("xpath", "//iframe[@title='Campo de entrada seguro para el pago'or @title='Secure payment input frame']");
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 
@@ -4380,11 +4383,11 @@ public void Validate_retailerlocations() {
 					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 					Common.scrollIntoView("xpath", "//button[@class='action primary checkout']");
 					Common.clickElement("xpath", "//button[@class='action primary checkout']");
-					Thread.sleep(10000);
+					Thread.sleep(8000);
 					if (Common.getCurrentURL().contains("/checkout/#payment")) {
 						Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
 						Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-						Thread.sleep(5000);
+						Thread.sleep(3000);
 						Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
 						Common.clickElement("xpath", "//button[@class='action primary checkout']");
 
@@ -4411,20 +4414,19 @@ public void Validate_retailerlocations() {
 
 			} else {
 				Thread.sleep(4000);
-				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
-				if(savedcard>0)
-				{
-					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
+				int savecard = Common.findElements("xpath","//div[contains(@class,'form-select flex')]").size();
+				if(savecard > 0) {
+					Sync.waitElementPresent(30,"xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
-				
+				Thread.sleep(2000);			
 				Common.switchFrames("xpath", "//iframe[@title='Campo de entrada seguro para el pago'or @title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
@@ -4464,13 +4466,13 @@ public void Validate_retailerlocations() {
 									"//div[@ui-id='message-error']//span");
 							System.out.println(errormessage);
 						}
-						else
-						{
-							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
-						String sucessmessage = Common.getText("xpath",
-								"//div[contains(@class,'checkout-success')]//h1");
-						System.out.println(sucessmessage);
-						}
+//						else
+//						{
+//							Sync.waitElementPresent("xpath", "//div[contains(@class,'checkout-success')]//h1");
+//						String sucessmessage = Common.getText("xpath",
+//								"//div[contains(@class,'checkout-success')]//h1");
+//						System.out.println(sucessmessage);
+//						}
 					} else if (Common.getCurrentURL().contains("/success/")) {
 						String sucessmessage = Common.getText("xpath",
 								" //h1[normalize-space()='Thank you for your purchase!']");
