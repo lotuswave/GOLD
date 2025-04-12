@@ -2850,6 +2850,10 @@ public class OspreyEMEA_HYVA {
 				{
 					Common.textBoxInput("xpath", "//input[@id='shipping-region']", data.get(dataSet).get("Region"));
 				}
+				else if(Common.getCurrentURL().contains("/se_sv"))
+				{
+					System.out.println(Common.getCurrentURL());
+				}
 				else
 				{
 					Thread.sleep(4000);
