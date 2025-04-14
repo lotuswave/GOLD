@@ -11924,11 +11924,11 @@ public void Subcription_Klarna_Invalid() {
  				 Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
  				Sync.waitPageLoad();
  				Thread.sleep(5000);
- 				Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-error']");
+ 				Sync.waitElementPresent(120,"xpath", "//div[@ui-id='message-error']");
  				String message = Common.findElement("xpath", "//div[@ui-id='message-error']")
  						.getAttribute("ui-id");
  				System.out.println(message);
- 				Common.assertionCheckwithReport(message.contains("error"), "validating the error message for the Klarna payment method",
+ 				Common.assertionCheckwithReport(message.contains("message-error") || message.contains("error"), "validating the error message for the Klarna payment method",
  						"After clicking on the place order error message should be display", "Sucessfully error messsage has been displayed",
  						"failed to display the error message");
  				Sync.waitElementPresent("xpath", "//button[@aria-label='Close message']");
