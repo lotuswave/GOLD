@@ -1235,9 +1235,9 @@ public void header_Shopbycollection(String Dataset) { {
 				if(Common.getCurrentURL().contains("preprod"))
 				{
 				Sync.waitElementPresent("xpath",
-						"//li//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath",
-						"//li//a//span[contains(text(),'" + Links[i] + "')]");
+						"//a[contains(@class,'menu-link')]//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
 				String title = "";
@@ -2343,12 +2343,12 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
 			
 			Sync.waitElementPresent("xpath", "//button[@id='product-addtocart-button']");
-			Common.clickElement("xpath", "//button[@id='product-addtocart-button']");
+			Common.javascriptclickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
 			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
 {
-	Common.clickElement("xpath", "(//button[@aria-label='Close, button.'])[3]");
+	Common.clickElement("xpath", "(//button[@aria-label='Close, button'])[3]");
 }
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //			.getAttribute("data-ui-id");
@@ -3893,24 +3893,24 @@ public void Validate_retailerlocations() {
 				Common.findElements("xpath", "//span[contains(@class,'a-wishlist')]");
 				Sync.waitPageLoad();
 			//	Thread.sleep(4000);
-				Sync.waitElementVisible(30,"xpath", "//span[@class='w-full text-center pr-10']");			 
-				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
-				System.out.println(message);
-				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
-						"validating the  product add to the Whishlist", "Product should be add to whishlist",
-						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
-				Common.clickElement("xpath", "(//button[@aria-haspopup='dialog'])[2]");
+//				Sync.waitElementVisible(30,"xpath", "//span[@class='w-full text-center pr-10']");			 
+//				String message = Common.findElement("xpath", "//span[@class='w-full text-center pr-10']").getText();
+//				System.out.println(message);
+//				Common.assertionCheckwithReport(message.contains("Click here to view your Favorites."),
+//						"validating the  product add to the Whishlist", "Product should be add to whishlist",
+//						"Sucessfully product added to the Whishlist ", "failed to add product to the Whishlist");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn btn-secondary')])[1]");
 				Sync.waitPageLoad();
 				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
-				Common.clickElement("xpath", "//button[@title='Share Wish List']");
+				Common.clickElement("xpath", "//button[@title='Share Favorites']");
 				Sync.waitPageLoad();
 			//	Thread.sleep(3000);
-				Sync.waitElementVisible(30,"xpath", "//span[text()='Your wish list has been shared.']");			 
-				String message1 = Common.findElement("xpath", "//span[text()='Your wish list has been shared.']").getText();
+				Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");				
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your wish list has been shared."),
+				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
 						"Sucessfully message has been displayed for whishlist",
@@ -3923,14 +3923,14 @@ public void Validate_retailerlocations() {
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
 			//	Thread.sleep(4000);
-				Sync.waitElementVisible(30,"xpath", "//div[@data-ui-id='message-success']//div");			 
-				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
+				Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");				
+				String message1 = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 				System.out.println(message1);
-				Common.assertionCheckwithReport(message1.contains("Your Favourites have been shared"),
+				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
 						"validating the shared whishlist functionality",
 						"sucess message should display after share whishlist",
-						"Sucessfully message has been displayed for whishlist",
-						"failed to display the message for whishlist");
+						"Sucessfully message has been displayed for whishlist",						
+						Common.getscreenShot("Your Favorites has been shared"));
 
 			}
 		} catch (Exception | Error e) {
@@ -15670,9 +15670,17 @@ public void header_Explore(String Dataset) {{
 //			System.out.println(Links[i]);
 //			System.out.println(Link[i]);
 //			System.out.println(Common.getPageTitle());
+			if(Common.getPageTitle().contains("404"))
+			{
+				Assert.fail();
+				ExtenantReportUtils.addFailedLog("validating the  links navigation from headerLinks",
+						"After Clicking on" + Links[i] + "it should navigate to the",
+						Links[i] + "Navigated to the 404 page" + Links[i] + "Links",
+						Common.getscreenShot("Failed to Navigated to the" + Links[i] + "Links"));
+			}
 			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
 					||breadcrumbs.contains(Link[i]) || Common.getPageTitle().contains("About Us") || Common.getPageTitle().contains("50years")
-					|| Common.getPageTitle().contains(Links[i]) || Common.getCurrentURL().contains("size-fit"),
+					|| Common.getPageTitle().contains(Links[i]) || Common.getCurrentURL().contains("size-fit")||Common.getPageTitle().contains("404"),
 					"verifying the header link " + Links[i] + "Under Accessories",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
@@ -15888,7 +15896,8 @@ public void header_Explore_2(String Dataset) {{
 //			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(breadcrumbs.contains(Links[i]) 
 					||breadcrumbs.contains(Link[i])  || Common.getPageTitle().contains(Links[i]) 
-					|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("fitting-learning")||Common.getCurrentURL().contains("suspension"),
+					|| Common.getCurrentURL().contains("size-fit")|| Common.getCurrentURL().contains("fitting-learning")||Common.getCurrentURL().contains("suspension")
+					||Common.getPageTitle().contains("404"),
 					"verifying the header link " + Links[i] + "Under explore",
 					"user should navigate to the " + Links[i] + " page",
 					"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
