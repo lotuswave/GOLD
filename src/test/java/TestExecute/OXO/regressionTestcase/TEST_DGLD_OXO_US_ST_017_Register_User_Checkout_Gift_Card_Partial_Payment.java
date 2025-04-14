@@ -43,7 +43,7 @@ public class TEST_DGLD_OXO_US_ST_017_Register_User_Checkout_Gift_Card_Partial_Pa
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
