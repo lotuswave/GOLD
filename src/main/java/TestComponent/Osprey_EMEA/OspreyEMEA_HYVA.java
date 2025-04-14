@@ -4827,7 +4827,14 @@ return Number;
 
 			if(Common.getCurrentURL().contains("/es/") || Common.getCurrentURL().contains("/fr/") )
 			{
+				if(Common.getCurrentURL().contains("/es/") )
+				{
 				Common.clickElement("xpath", "//div[text()='Precio']");
+				}
+				else
+				{
+					Common.clickElement("xpath", "//div[text()='Prix']");
+				}
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(",00", "").trim();
 				System.out.println(lastvalue);
 				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
