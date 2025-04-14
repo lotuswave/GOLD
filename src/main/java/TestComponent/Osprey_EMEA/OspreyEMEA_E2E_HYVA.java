@@ -3747,8 +3747,8 @@ public class OspreyEMEA_E2E_HYVA {
 						 
 						  Sync.waitElementPresent("id", "amcard-input");
 						  Common.textBoxInput("id", "amcard-input", GiftCode);
-						Sync.waitElementPresent("xpath", "//button[contains(text(),'Code hinzufügen')]");
-						  Common.clickElement("xpath", "//button[contains(text(),'Code hinzufügen')]");
+						Sync.waitElementPresent("xpath", "//span[contains(text(),'Code hinzufügen')]");
+						  Common.clickElement("xpath", "//span[contains(text(),'Code hinzufügen')]");
 					}else {
 
 							  Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
