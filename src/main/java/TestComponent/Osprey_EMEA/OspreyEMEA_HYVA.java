@@ -4825,7 +4825,7 @@ return Number;
 		try {
 			Thread.sleep(6000);
 
-			if(Common.getCurrentURL().contains("es/") || Common.getCurrentURL().contains("fr/") )
+			if(Common.getCurrentURL().contains("/es/") || Common.getCurrentURL().contains("/fr/") )
 			{
 				Common.clickElement("xpath", "//div[text()='Price']");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(".00", "").trim();
@@ -4999,6 +4999,21 @@ return Number;
 					dragprice(price);
 				}
 				else
+				{ 
+					if(Common.getCurrentURL().contains("/dk_en"))
+				{
+						Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Price']");
+						Thread.sleep(3000);
+						String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
+								.replace(Symbol, "").replace(",", "").replace(".00","").trim();
+						System.out.println(lastvalue);
+						Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+						WebElement price = Common.findElement("xpath",
+								"//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
+						
+						dragprice(price);
+				}
+				else
 				{
 					Common.clickElement("xpath","//div[@data-attr='price.GBP.group_0']");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
@@ -5159,7 +5174,8 @@ return Number;
 			
 				}
 			}
-		} catch (Exception | Error e) {
+		}
+		}catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the price filters in PLP page",
 					"When we select the range of price filters between the range only products should display",
@@ -5240,6 +5256,19 @@ return Number;
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");	
+			}
+			else if(Common.getCurrentURL().contains("/dk_en"))
+			{
+				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
+				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
+						.replace(",", "").replace(".00","").trim();
+				System.out.println(lastvalue);
+				Thread.sleep(5000);
+				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
+				Thread.sleep(4000);
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");	
 			}
 			else
