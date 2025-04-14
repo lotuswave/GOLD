@@ -9,23 +9,18 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
+public class Test_DGLD_OS_FR_002_Forgot_Password_from_SignIn_page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
 	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_the_Forgot_Password_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.createaccount_exitingemail("Existing details");
-        Osprey_ReEu.Create_Account("Create Account");
-        Osprey_ReEu.Click_Myorders_and_Account("Edit contactinfo");          
-        Osprey_ReEu.Edit_Name("Edit contactinfo");
-       // Osprey_ReEu.Account_page_Validation("Account validation");  //covered in My_Account_page_Validation testcase
-       // Osprey_ReEu.signout();
-       
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Forgot_password("Account");
         
 		} catch (Exception e) {
 
@@ -45,6 +40,7 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 		String url = "https://mcloud-na-preprod.osprey.com/fr/";
 		System.setProperty("url", url);
         Login.signIn();
+        
 
 	}
 

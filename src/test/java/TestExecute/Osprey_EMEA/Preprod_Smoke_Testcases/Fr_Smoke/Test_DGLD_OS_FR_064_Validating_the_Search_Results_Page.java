@@ -8,28 +8,24 @@ import org.testng.annotations.Test;
 import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
-
-public class Test_DGLD_OS_COMMON_054_Validating_the_PDP_page {
+  
+public class Test_DGLD_OS_FR_064_Validating_the_Search_Results_Page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"PDP");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Search");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_PDP_Page () throws Exception {
+	public void Validated_Search_Result_Functionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-     //   Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags"); 
-        Osprey_ReEu.search_product("Simple product");
-        Osprey_ReEu.Simple_PDP("Simple product");
-        Osprey_ReEu.search_product("Product");  
-        Osprey_ReEu.Configurable_PDP("Product");
-
-  
+        Osprey_ReEu.Invalid_search_product("Invalid_Product");
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.Sort_By("SortBy");
+        Osprey_ReEu.Filter();
+         
+    
         
- 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

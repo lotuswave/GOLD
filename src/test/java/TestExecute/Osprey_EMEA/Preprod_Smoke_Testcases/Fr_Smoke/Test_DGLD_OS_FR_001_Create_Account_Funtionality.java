@@ -9,31 +9,30 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal {
+public class Test_DGLD_OS_FR_001_Create_Account_Funtionality {
 
-	String datafile = "Osprey_EMEA\\GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_Register_user_Checkout_with_Paypal () throws Exception {
+	public void Verifying_the_Create_account_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");
-        Osprey_ReEu.minicart_Checkout();
-        Osprey_ReEu.RegaddDeliveryAddress("Fr_Address");
-        Osprey_ReEu.selectshippingmethod("Den shippingmethod");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.payPal_Payment("NON_UK_PaypalDetails");
+        Osprey_ReEu.createaccount_exitingemail("Existing details");
+        Osprey_ReEu.Create_Account("Create Account");
+        Osprey_ReEu.Click_Myorders_and_Account("Edit contactinfo");          
+        Osprey_ReEu.Edit_Name("Edit contactinfo");
+       // Osprey_ReEu.Account_page_Validation("Account validation");  //covered in My_Account_page_Validation testcase
+       // Osprey_ReEu.signout();
+       
         
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
+
 
 	@AfterTest
 	public void clearBrowser() {
