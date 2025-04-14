@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_099_Validate_Footer_links {
+public class TEST_DGLD_OS_IT_099_Validate_Footer_links {
 
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
