@@ -7701,11 +7701,12 @@ return Number;
 	    			Common.textBoxInput("xpath", "//input[@id='billing-lastname']", data.get(dataSet).get("LastName"));
 	    			Common.textBoxInput("xpath", "//input[@id='billing-street-0']", data.get(dataSet).get("Street"));
 	    			Thread.sleep(5000);
+	    			Common.clickElement("xpath", "//input[@id='billing-city']");
 	    			Common.textBoxInput("xpath", "//input[@id='billing-city']", data.get(dataSet).get("City"));
 	    			System.out.println(data.get(dataSet).get("City"));
 
 //	    			Common.actionsKeyPress(Keys.PAGE_DOWN);
-	    			Thread.sleep(3000);
+	    			
 			  }
 			  else {
 				  
@@ -7713,8 +7714,10 @@ return Number;
 			
 			 if(Common.getCurrentURL().contains("gb"))
              {
-				 Common.scrollIntoView("xpath", "//input[@id='billing-city']");
-				 Common.textBoxInput("xpath", "//input[@id='billing-city']", data.get(dataSet).get("Region"));
+				 Thread.sleep(5000);
+				 Common.scrollIntoView("xpath", "//input[@id='billing-region']");
+				 Common.textBoxInput("xpath", "//input[@id='billing-region']", data.get(dataSet).get("Region"));
+				 System.out.println(data.get(dataSet).get("Region"));
 				 
              }
 			 else
