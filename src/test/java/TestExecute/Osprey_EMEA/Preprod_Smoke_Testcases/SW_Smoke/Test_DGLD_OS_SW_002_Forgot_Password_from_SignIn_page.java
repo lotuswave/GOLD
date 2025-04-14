@@ -5,26 +5,23 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA ;
+import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_053_Validate_PLP_page {
+public class Test_DGLD_OS_SW_002_Forgot_Password_from_SignIn_page {
 
-	String datafile = "Osprey_EMEA//GoldOspreySE_SV.xlsx";
-	OspreyEMEA_HYVA  Osprey_ReEu = new OspreyEMEA_HYVA (datafile,"PDP");
+	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_PLP_Page () throws Exception {
+	public void Verifying_the_Forgot_Password_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");       
-        Osprey_ReEu.view_PLP_page();
-       // Osprey_ReEu.filter_By("Fliters");
-        Osprey_ReEu.color_validation("PLP Color");
-        Osprey_ReEu.price_filter_validation("PLP Color");
- 
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Forgot_password("Account");
+        
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);

@@ -9,33 +9,31 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_054_Validating_the_PDP_page {
+public class Test_DGLD_OS_SW_032_Register_user_Checkout_with_Paypal {
 
-	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"PDP");
+	String datafile = "Osprey_EMEA\\GoldOspreyemea.xlsx";
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_PDP_Page () throws Exception {
+	public void Verifying_Register_user_Checkout_with_Paypal () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
-     //   Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags"); 
-        Osprey_ReEu.search_product("Simple product");
-        Osprey_ReEu.Simple_PDP("Simple product");
-        Osprey_ReEu.search_product("Product");  
-        Osprey_ReEu.Configurable_PDP("Product");
-
-  
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.RegaddDeliveryAddress("SW_Address");
+        Osprey_ReEu.selectshippingmethod("Den shippingmethod");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+        Osprey_ReEu.payPal_Payment("NON_UK_PaypalDetails");
         
- 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
 	}
-
 
 	@AfterTest
 	public void clearBrowser() {
@@ -48,7 +46,6 @@ public class Test_DGLD_OS_COMMON_054_Validating_the_PDP_page {
 		String url = "https://mcloud-na-preprod.osprey.com/se_sv/";
 		System.setProperty("url", url);
         Login.signIn();
-        
 
 	}
 
