@@ -4994,10 +4994,12 @@ return Number;
 					
 					dragprice(price);
 				}
-				else if(Common.getCurrentURL().contains("/tw/en/"))
+				else if(Common.getCurrentURL().contains("/it"))
 				{
+					Common.clickElement("xpath", "//div[@class='ais-Panel-header']//div[text()='Prezzo']");
+					Thread.sleep(3000);
 					String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
-							.replace(Symbol, "").replace(",", "").replace(".00","").trim();
+							.replace(Symbol, "").replace(",00","").trim();
 					System.out.println(lastvalue);
 					Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 					WebElement price = Common.findElement("xpath",
@@ -5022,6 +5024,7 @@ return Number;
 				}
 				else
 				{
+	
 					Common.clickElement("xpath","//div[@data-attr='price.GBP.group_0']");
 				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText()
 						.replace(Symbol, "").replace(".00", "").trim();
@@ -5253,12 +5256,12 @@ return Number;
 				Common.scrollIntoView("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 				Common.dragdrop(price, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
 			}
-			else if(Common.getCurrentURL().contains("/tw/en/"))
+			else if(Common.getCurrentURL().contains("/it"))
 			{
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@class='value end active']");
 				String lastvalue = Common.getText("xpath", "//div[@class='value end active']").replace(symbol, "")
-						.replace(",", "").replace(".00","").trim();
+						.replace(",00","").trim();
 				System.out.println(lastvalue);
 				Thread.sleep(5000);
 				Sync.waitElementPresent(40, "xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='0']");
