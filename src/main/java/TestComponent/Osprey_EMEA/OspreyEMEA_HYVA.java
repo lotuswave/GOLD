@@ -4769,7 +4769,7 @@ return Number;
 					.getText().trim();
 			Common.assertionCheckwithReport(
 					breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl")
-							&& filter.contains("Filter by") && Sort.contains("Sort by"),
+							&& filter.contains("Filter by") && Sort.contains("Sort by") || breadcrumbs.contains("Breadcrumb") && title.contains("title-2xl"),
 					"To validate the Product Listing Page", "User should able to open Product Listing Page",
 					"Sucessfully views the Product Listing Page", "Failed to view Product Listing Page");
 		} catch (Exception | Error e) {
@@ -4827,8 +4827,8 @@ return Number;
 
 			if(Common.getCurrentURL().contains("/es/") || Common.getCurrentURL().contains("/fr/") )
 			{
-				Common.clickElement("xpath", "//div[text()='Price']");
-				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(".00", "").trim();
+				Common.clickElement("xpath", "//div[text()='Precio']");
+				String lastvalue = Common.findElement("xpath", "//div[@class='value end active']").getText().replace(Symbol, "").replace(",00", "").trim();
 				System.out.println(lastvalue);
 				Sync.waitElementPresent("xpath", "//div[@aria-valuemax='" + lastvalue + "' and @data-handle-key='1']");
 				WebElement price = Common.findElement("xpath",
@@ -5294,6 +5294,7 @@ return Number;
 	public void color_validation(String Dataset) {
 		// TODO Auto-generated method stub
 		String colorname = data.get(Dataset).get("Color");
+		String escolour="Naranja";
 		try {
 			Sync.waitElementPresent("xpath", "//div[text()='Colour']");
 			Common.javascriptclickElement("xpath", "//div[text()='Colour']");
@@ -5305,6 +5306,24 @@ return Number;
 			Common.javascriptclickElement("xpath",
 			"//div[@class='field choice']//label[contains(@class,'ais-RefinementList')]//input[@value='" + colorname + "']");			
 			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("/es"))
+			{
+				String colorcount = Common.findElement("xpath",
+						"//span[contains(text(),'" + escolour + "')]//following-sibling::span")
+						.getText().replace("(", "").replace(")", "");
+				System.out.println(colorcount);
+				System.out.println(colorcount);
+		        int products=Common.findElements("xpath", "//li[@class='ais-InfiniteHits-item']").size();
+		        String s=String.valueOf(products);  
+				String bottlecount = Common.findElement("xpath", "//div[@class='text-sm']//span").getText().trim();
+				System.out.println(bottlecount);
+				Common.assertionCheckwithReport(colorcount.equals(bottlecount) || s.equals(bottlecount), "verifying the color bar has been expand",
+						"When we click on the color it should be expand",
+						"Successfully the color has been expand when we click on the colors ",
+						"unable to expand the colors in PLP page");
+			}
+			else
+			{
 			String colorcount = Common.findElement("xpath",
 					"//span[contains(text(),'" + colorname + "')]//following-sibling::span")
 					.getText().replace("(", "").replace(")", "");
@@ -5317,6 +5336,8 @@ return Number;
 					"When we click on the color it should be expand",
 					"Successfully the color has been expand when we click on the colors ",
 					"unable to expand the colors in PLP page");
+			}
+		
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
