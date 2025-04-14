@@ -9268,14 +9268,14 @@ catch(Exception | Error e)
 		// TODO Auto-generated method stub
 		String quantity = data.get(Dataset).get("Quantity");
 		try {
-			Common.clickElement("xpath", "(//div[@class='flex h-full relative']//select)[1]");
-			Common.dropdown("xpath", "(//div[@class='flex h-full relative']//select)[1]", Common.SelectBy.VALUE, quantity);
-			Common.clickElement("xpath", "//span[text()='Update']");
+			Common.clickElement("xpath", "(//div[@class='flex h-full']//select)[1]");
+			Common.dropdown("xpath", "(//div[@class='flex h-full']//select)[1]", Common.SelectBy.VALUE, quantity);
+//			Common.clickElement("xpath", "//span[text()='Update']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			String productquantity = Common.findElement("xpath", "(//div[@class='flex h-full relative']//select)[1]")
+			String productquantity = Common.findElement("xpath", "(//div[@class='flex h-full']//select)[1]")
 					.getAttribute("value");
 			System.out.println(productquantity);
 			Common.assertionCheckwithReport(productquantity.equals(quantity),
