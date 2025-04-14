@@ -9,7 +9,7 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA ;
 import TestLib.Common;
 import TestLib.Login;
 
-public class TEST_DGLD_OS_COMMON_053_Validate_PLP_page {
+public class TEST_DGLD_OS_DK_053_Validate_PLP_page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemeadk.xlsx";
 	OspreyEMEA_HYVA  Osprey_ReEu = new OspreyEMEA_HYVA (datafile,"PDP");

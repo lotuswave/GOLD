@@ -9,23 +9,24 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
+public class Test_DGLD_OS_DK_043_Guest_User_Checkout_Discount_Visa_card {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Checkout payments");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_Guest_User_Checkout_Visa_Card () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.createaccount_exitingemail("Existing details");
-        Osprey_ReEu.Create_Account("Create Account");
-        Osprey_ReEu.Click_Myorders_and_Account("Edit contactinfo");          
-        Osprey_ReEu.Edit_Name("Edit contactinfo");
-       // Osprey_ReEu.Account_page_Validation("Account validation");  //covered in My_Account_page_Validation testcase
-       // Osprey_ReEu.signout();
-       
+        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.addtocart("Product");
+        Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.addDeliveryAddress_Guestuser("Den_Address");
+        Osprey_ReEu.selectshippingmethod("Den shippingmethod");
+        Osprey_ReEu.discountCode("Discount");
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();
+        Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
         
 		} catch (Exception e) {
 
@@ -45,6 +46,7 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 		String url = "https://mcloud-na-preprod.osprey.com/dk_en/";
 		System.setProperty("url", url);
         Login.signIn();
+        
 
 	}
 
