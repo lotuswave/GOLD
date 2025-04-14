@@ -77,6 +77,9 @@ public class GoldHydroHyvaHelper {
 		return r;
 	}
 
+	/**
+	 * Verifies the Home Page logo and title based on the environment.
+	 */
 	public void verifingHomePage() {
 		try {
 	    	if(Common.getCurrentURL().contains("preprod"))
@@ -311,70 +314,73 @@ public class GoldHydroHyvaHelper {
 
 	}
 
+	/**
+	 * Adds a product to the cart based on data from a specified dataset.
+	 *
+	 * @param Dataset The key to retrieve product information from the 'data' map.
+	 */
 	public void addtocart(String Dataset) {
+	    String products = data.get(Dataset).get("Products");
+	    System.out.println(products);
 
-		String products = data.get(Dataset).get("Products");
-		System.out.println(products);
-	
-		try {
-			Sync.waitPageLoad();
-			for (int i = 0; i <= 10; i++) {
-				Thread.sleep(4000);
-				Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
-//				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
-				List<WebElement> webelementslist = Common.findElements("css",
-						"a[class*=roduct-image-link]>img");
-				String s = webelementslist.get(i).getAttribute("src");
-				System.out.println(s);
-				if (s.isEmpty()) {
+	    try {
+	        Sync.waitPageLoad();
+	        // Wait for product images to load (up to 10 attempts with 4-second intervals)
+	        for (int i = 0; i <= 10; i++) {
+	            Thread.sleep(4000);
+	            Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
+	            List<WebElement> webelementslist = Common.findElements("css", "a[class*=roduct-image-link]>img");
+	            String imageUrl = webelementslist.get(i).getAttribute("src");
+	            System.out.println(imageUrl);
+	            if (!imageUrl.isEmpty()) {
+	                break; // Exit loop if an image URL is found
+	            }
+	        }
+	        // Scroll to the product image
+	        Common.scrollIntoView("css", "img[alt='" + products + "']");
+	        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
+	        Thread.sleep(3000);
 
-				} else {
-					break;
-				}
-			}
-			Common.scrollIntoView("css", "img[alt='" + products + "']");
-			Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
-//			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			Thread.sleep(3000);
-			
-            String PLPprice=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[1]").getText();
-            System.out.println(PLPprice);
-            if(PLPprice.contains(""))
-            {
-            	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
-            	   System.out.println(PLPprice1);
-            	   Common.clickElement("css", "img[alt='" + products + "']");
-       			Thread.sleep(2000);
-            	   product_quantity(Dataset);
-       			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-                System.out.println(PDPprice);
-//                Assert.assertEquals(PLPprice1, PDPprice);
-            }
-            else {
-			Common.clickElement("css", "img[alt='" + products + "']");
-			Thread.sleep(2000);
-			product_quantity(Dataset);
-            String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-            System.out.println(PDPprice);
-            Assert.assertEquals(PLPprice, PDPprice);
-            }
-			Sync.waitElementPresent("css", "button[title='Add to Cart']");
-			Common.javascriptclickElement("css", "button[title='Add to Cart']");
-			Thread.sleep(3000);
-			String openminicart = Common.findElement("xpath", "//div[contains(@class,'fixed inset-y-0')]").getAttribute("aria-modal");
-			System.out.println(openminicart);
-			Common.assertionCheckwithReport(openminicart.contains("true"), "validating the  product add to the cart and mini cart should be open",
-					"Product should be add to cart and mini cart should be open", "Success message should be displayed and minicart should be open", "success message should be displayed and mini cart");
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
-					"unable to add product to the cart", Common.getscreenShot("failed to add product to the cart"));
+	        // Get the price from the Product Listing Page (PLP)
+	        String PLPprice = Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[1]").getText();
+	        System.out.println(PLPprice);
 
-			Assert.fail();
-		}
-
+	        // Handle cases where there might be a range of prices
+	        if (PLPprice.contains("")) {
+	            String PLPprice1 = Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
+	            System.out.println(PLPprice1);
+	            Common.clickElement("css", "img[alt='" + products + "']");
+	            Thread.sleep(2000);
+	            product_quantity(Dataset); // Assuming this method navigates to the Product Detail Page (PDP) and handles quantity
+	            String PDPprice = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
+	            System.out.println(PDPprice);
+	            Assert.assertEquals(PLPprice, PDPprice);
+	        } else {
+	            Common.clickElement("css", "img[alt='" + products + "']");
+	            Thread.sleep(2000);
+	            product_quantity(Dataset); // Assuming this method navigates to the Product Detail Page (PDP) and handles quantity
+	            String PDPprice = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
+	            System.out.println(PDPprice);
+	            Assert.assertEquals(PLPprice, PDPprice); // Assert that PLP and PDP prices match
+	        }
+	        // Add the product to the cart
+	        Sync.waitElementPresent("css", "button[title='Add to Cart']");
+	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
+	        Thread.sleep(3000);
+	        // Verify the mini cart opens
+	        String openminicart = Common.findElement("xpath", "//div[contains(@class,'fixed inset-y-0')]").getAttribute("aria-modal");
+	        System.out.println(openminicart);
+	        Common.assertionCheckwithReport(openminicart.contains("true"), "Add to cart validation",
+	                "Product should be added to the cart and mini cart should open",
+	                "Product added to cart and mini cart opened successfully",
+	                "Failed to add product to cart and/or open mini cart");
+	    } catch (Exception | Error e) {
+	        e.printStackTrace();
+	        ExtenantReportUtils.addFailedLog("Add to cart validation", "Product should be added to cart",
+	                "Unable to add product to the cart", Common.getscreenShot("failed_to_add_to_cart"));
+	        Assert.fail();
+	    }
 	}
-	
 	
 	public String website() throws Exception {
 		// TODO Auto-generated method stub
@@ -2620,27 +2626,33 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 		}
 	}
 
+	/**
+	 * Searches for a product using data from a specified dataset.
+	 *
+	 * @param Dataset The key to retrieve product information from the 'data' map.
+	 */
 	public void search_product(String Dataset) {
-		// TODO Auto-generated method stub
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
 		try {
+			// Click the search icon
 			Common.clickElement("id", "menu-search-icon");
-			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
-			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
-					"User should able to click on the search button", "Sucessfully search bar should be expand",
+			// Verify the search bar is expanded
+			boolean isSearchOpen = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded")
+					.contains("true");
+			Common.assertionCheckwithReport(isSearchOpen, "Search functionality validation",
+					"User should be able to click the search button", "Search bar expanded successfully",
 					"Failed to open the search bar");
+			// Enter the product name and press Enter
 			Common.textBoxInput("id", "autocomplete-0-input", product);
 			Common.actionsKeyPress(Keys.ENTER);
 		} catch (Exception | Error e) {
 			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("validating the search functionality",
-					"enter product name will display in the search box",
-					" unable to enter the product name in  search box",
-					Common.getscreenShot("Failed to see the product name"));
+			ExtenantReportUtils.addFailedLog("Search functionality validation",
+					"User should be able to enter product name", "Unable to enter the product name in the search box",
+					Common.getscreenShot("Failed to enter product name"));
 			Assert.fail();
 		}
-
 	}
 
 	public void newuseraddDeliveryAddress(String dataSet) throws Exception {
