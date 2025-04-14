@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Footer;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,24 +9,27 @@ import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
+public class Test_DGLD_OS_ES_054_Validating_the_PDP_page {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"PDP");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Verifying_the_Create_account_Funtionality () throws Exception {
+	public void Verifying_the_PDP_Page () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.createaccount_exitingemail("Existing details");
-        Osprey_ReEu.Create_Account("Create Account");
-        Osprey_ReEu.Click_Myorders_and_Account("Edit contactinfo");          
-        Osprey_ReEu.Edit_Name("Edit contactinfo");
-       // Osprey_ReEu.Account_page_Validation("Account validation");  //covered in My_Account_page_Validation testcase
-       // Osprey_ReEu.signout();
-       
+        Osprey_ReEu.click_singinButton();
+        Osprey_ReEu.Login_Account("Account");
+     //   Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags"); 
+        Osprey_ReEu.search_product("Simple product");
+        Osprey_ReEu.Simple_PDP("Simple product");
+        Osprey_ReEu.search_product("Product");  
+        Osprey_ReEu.Configurable_PDP("Product");
+
+  
         
+ 
 		} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
@@ -45,6 +48,7 @@ public class Test_DGLD_OS_COMMON_001_Create_Account_Funtionality {
 		String url = "https://mcloud-na-preprod.osprey.com/es/";
 		System.setProperty("url", url);
         Login.signIn();
+        
 
 	}
 

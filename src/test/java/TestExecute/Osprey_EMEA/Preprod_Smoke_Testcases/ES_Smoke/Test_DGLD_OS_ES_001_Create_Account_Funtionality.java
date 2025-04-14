@@ -1,4 +1,4 @@
-package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Footer;
+package TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -8,23 +8,24 @@ import org.testng.annotations.Test;
 import TestComponent.Osprey_EMEA.OspreyEMEA_HYVA;
 import TestLib.Common;
 import TestLib.Login;
-  
-public class Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page {
+
+public class Test_DGLD_OS_ES_001_Create_Account_Funtionality {
 
 	String datafile = "Osprey_EMEA//GoldOspreyemea.xlsx";
-	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"Search");
+	OspreyEMEA_HYVA Osprey_ReEu = new OspreyEMEA_HYVA(datafile,"CreateAccount");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
-	public void Validated_Search_Result_Functionality () throws Exception {
+	public void Verifying_the_Create_account_Funtionality () throws Exception {
 
 		try {
         Osprey_ReEu.verifingHomePage();
-        Osprey_ReEu.Invalid_search_product("Invalid_Product");
-        Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.Sort_By("SortBy");
-        Osprey_ReEu.Filter();
-         
-    
+        Osprey_ReEu.createaccount_exitingemail("Existing details");
+        Osprey_ReEu.Create_Account("Create Account");
+        Osprey_ReEu.Click_Myorders_and_Account("Edit contactinfo");          
+        Osprey_ReEu.Edit_Name("Edit contactinfo");
+       // Osprey_ReEu.Account_page_Validation("Account validation");  //covered in My_Account_page_Validation testcase
+       // Osprey_ReEu.signout();
+       
         
 		} catch (Exception e) {
 
@@ -44,7 +45,6 @@ public class Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page {
 		String url = "https://mcloud-na-preprod.osprey.com/es/";
 		System.setProperty("url", url);
         Login.signIn();
-        
 
 	}
 
