@@ -22,12 +22,12 @@ public class Test_DGLD_HF_ST_040_Register_User_Checkout_Simple_Configurable_Bund
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.search_product("Bundle product");
+			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.search_product("Product");
 			Hydro.addtocart("Product");
 			Hydro.bottles_headerlinks("Bottles & Drinkware");
 			Hydro.Configurable_addtocart_pdp("Product");
-			Hydro.search_product("Bundle product");
-			Hydro.Addtocart_Bundle("Bundle product");
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			Hydro.selectshippingaddress("GroundShipping method");

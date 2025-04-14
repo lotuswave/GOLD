@@ -824,8 +824,8 @@ public class GoldHydroHyvaHelper {
 				//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 						{
-					int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
-					if(savedcard==2)
+					int savedcard=Common.findElements("xpath", "(//input[@type='radio' and @name='use_saved_stripe_method'])[2]").size();
+					if(savedcard==1)
 					{
 						Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 						Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
@@ -846,7 +846,7 @@ public class GoldHydroHyvaHelper {
 				Thread.sleep(3000);
 				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-				Thread.sleep(4000);
+				Thread.sleep(7000);
 				
 //				Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
 //				Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
@@ -857,7 +857,7 @@ public class GoldHydroHyvaHelper {
 //				
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
+				Sync.waitElementPresent(60, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
 				Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 						}
 				else
