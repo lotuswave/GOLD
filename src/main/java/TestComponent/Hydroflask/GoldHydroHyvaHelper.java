@@ -319,7 +319,7 @@ public class GoldHydroHyvaHelper {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
 				List<WebElement> webelementslist = Common.findElements("css",
@@ -3483,7 +3483,7 @@ System.out.println(MyFavorites);
 
 		{
 			try {
-				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout')]");
+				Common.clickElement("xpath", "//button[contains(@class,'btn dr:btn-secondary-checkout hf:btn-primary ox:btn-primary os:btn-primary w-full justify-center os:uppercase')]");
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
