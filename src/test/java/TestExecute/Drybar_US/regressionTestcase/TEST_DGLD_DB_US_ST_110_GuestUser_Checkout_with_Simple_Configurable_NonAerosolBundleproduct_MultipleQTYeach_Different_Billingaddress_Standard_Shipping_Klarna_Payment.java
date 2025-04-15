@@ -64,7 +64,7 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 		
 
 	}

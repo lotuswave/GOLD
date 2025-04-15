@@ -19,16 +19,31 @@ public class TEST_DGLD_DB_US_ST_033_Validating_the_PDP_page {
 	public void Validate_Product_Details_Page_Functionality () throws Exception {
 
 		try {
-		
+
 			Drybar.Verify_Homepage();
+			String url = Common.getCurrentURL();
+			if(url.contains("preprod"))
+			{
+			
 			Drybar.click_singinButton();
 			Drybar.login_Drybar("AccountDetails");
 			Drybar.HairTools_headerlinks("Hair Tools"); 
 			Drybar.Simple_PDP("PLP Product");
 			Drybar.search_product("Configurable Product");
 			Drybar.Configurable_PDP("Configurable Product");
+			Drybar.search_product("PLP Product");
+			Drybar.PDP_video("PLP Product");
 			
-				
+			}
+			
+			else {
+				Drybar.HairTools_headerlinks("Hair Tools"); 
+				Drybar.Simple_PDP("PLP Product");
+				Drybar.search_product("Configurable Product");
+				Drybar.Configurable_PDP("Configurable Product");
+				Drybar.search_product("PLP Product");
+				Drybar.PDP_video("PLP Product");
+			}
 
 		} catch (Exception e) {
 

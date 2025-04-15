@@ -12661,7 +12661,61 @@ public void Afterpay_and_paypal_prod_validation() throws Exception {
 	}
 }
 
+public void PDP_video(String Dataset) {
+	// TODO Auto-generated method stub
+	String products = data.get(Dataset).get("Products");
+	System.out.println(products);
 
+	try {
+		Sync.waitPageLoad();
+		for (int i = 0; i <= 10; i++) { 
+			Sync.waitElementPresent("xpath", "//img[@class='group-hover/item-image:block hidden']");
+			List<WebElement> webelementslist = Common.findElements("xpath",
+					"//img[@class='group-hover/item-image:block hidden']");
+
+			String s = webelementslist.get(i).getAttribute("src");
+			System.out.println(s);
+			if (s.isEmpty()) {
+
+			} else {
+				break;
+			}
+		}
+		Thread.sleep(6000);
+		Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
+		Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+		Sync.waitPageLoad();
+		Thread.sleep(5000);
+		String name = Common.findElement("xpath", "//span[text()='" + products + "']").getText();
+		
+		System.out.println(name);
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(name.contains(products), "validating the  product navigates to PDP page",
+				"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+				"failed to Navigate to the PDP page");
+
+		Common.clickElement("xpath", "(//span[@x-show=\"image.type === 'video'\"])[1]");
+		
+		   Thread.sleep(1000);
+		   Common.switchFrames("xpath", "//div[@id='vimeo-player']//iframe");
+	
+		   Common.javascriptclickElement("xpath", "//button[contains(@class,'PlayButton')]");
+		   Thread.sleep(5000);
+		   String Video=Common.findElement("xpath", "//div[contains(@class,'PlayButton')]").getAttribute("class");
+		   Common.assertionCheckwithReport(Video.contains("PlayButton"), "validating the user navigate to the video page",
+					"After clicking on the vidoes CTA it should navigate to the videos page", "Sucessfully Navigated to the videos page ",
+					"failed to Navigate to the videos page");
+		
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the PDP page", "In PDP fav ugc all should be appear",
+				"Unable to see few things in the PDP",
+				Common.getscreenShot("Failed to see few things in the PDP page"));
+		Assert.fail();
+	}
+
+}
 
 
 }
