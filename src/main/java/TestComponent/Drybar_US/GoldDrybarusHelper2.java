@@ -6429,6 +6429,7 @@ public void FUll_Payment(String dataSet) {
     			Common.textBoxInput("id", "pass", "Lotuswave@1234");
     			Common.clickElement("xpath", "//span[contains(text(),'Sign In')]");
     			Sync.waitPageLoad();
+    			Thread.sleep(4000);
     			Common.assertionCheckwithReport(Common.getPageTitle().contains("Dashboard"),
     					"To validate the user lands on My Account page after successfull login",
     					"After clicking on the signIn button it should navigate to the My Account page",
@@ -6478,7 +6479,8 @@ public void FUll_Payment(String dataSet) {
     			Common.textBoxInput("xpath", "//input[@name='current_password']", data.get(Dataset).get("Password"));
     			Common.clickElement("xpath", "//button[@title='Save Account Information']");
     			Sync.waitPageLoad();
-    			Thread.sleep(4000);
+    			Thread.sleep(2000);
+    			Sync.waitElementPresent(60,"xpath","//div[@ui-id='message-error']//span");
     			String errormessage = Common.findElement("xpath", "//div[@ui-id='message-error']//span").getText();
     			Common.assertionCheckwithReport(errormessage.contains("The password doesn't match this account"),
     					"verifying the error message for the password",
