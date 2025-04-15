@@ -12625,6 +12625,45 @@ public void newtab_FooterLinks(String Dataset) {
 	}
 	
 }
+
+
+public void Afterpay_and_paypal_prod_validation() throws Exception {
+	try
+	{
+		
+		Sync.waitElementPresent(30, "xpath", "//iframe[@title='Secure payment input frame']");
+		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
+		Sync.waitElementPresent(30, "xpath", "//button[@id='afterpay_clearpay-tab']");
+		String Afterpay=Common.findElement("xpath", "//button[@id='afterpay_clearpay-tab']").getAttribute("data-testid");
+		System.out.println(Afterpay);
+		Common.switchToDefault();
+		Thread.sleep(2000);
+		
+		Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
+		Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
+		Sync.waitElementPresent(30, "xpath", "//div[contains(text(),'Please use PayPal buttons to authorize')]");
+		String s = Common.getText("xpath", "//div[contains(text(),'Please use PayPal buttons to authorize')]");
+		System.out.println(s);
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(s.contains("Please use PayPal buttons to authorize"),
+				"verifying paypal link navigation", "user should see paypal link",
+				"user successfully seen paypal link",
+				"Failed to click paypal button");
+		
+	}
+	catch (Exception | Error e)
+	{
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("validating the error message for the afterpay payment method",
+				"After clicking on the place order error message should be display", "Unable to display the  error messsage after clicking the place order",
+				Common.getscreenShot("failed to display the  error messsage after clicking the place order"));
+		Assert.fail();
+	}
+}
+
+
+
+
 }
 		
 

@@ -50,6 +50,7 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 				Drybar.clickSubmitbutton_Shippingpage();
 				Drybar.guest_BillingAddress("BillingDetails");
 				Drybar.Kalrna_Payment("Klarna Visa Payment");
+				Drybar.Afterpay_and_paypal_prod_validation();
 			}
 			
 			
@@ -63,7 +64,7 @@ public class TEST_DGLD_DB_US_ST_110_GuestUser_Checkout_with_Simple_Configurable_
 	
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+//		Common.closeAll();
 		
 
 	}
