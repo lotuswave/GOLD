@@ -228,11 +228,6 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_060_Social_Article_Links"/>
 </classes>
 </test>
-<test name="Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page" testid="DQA-147" priority="P1" description="This Test case is to verify the Validation of forgot password functionality from shipping page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page"/>
-</classes>
-</test>
 <test name="Test_DGLD_OXO_ST_063_Register_user_Checkout_With_Bundle_product" testid="DQA-146" priority="P1" description="This test case is to verify the flow of placing order functionality as a Register user using Bundle products with CC Payment method">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_063_Register_user_Checkout_With_Bundle_product"/>
