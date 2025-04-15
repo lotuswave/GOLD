@@ -2030,9 +2030,9 @@ public class OspreyEMEA_PRODHYVA {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -6341,9 +6341,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -7661,9 +7661,9 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -9593,9 +9593,9 @@ return Number;
 				Common.clickElement("xpath", "//span[contains(@class, 'flex')and contains(text(), 'Featured')]");
 				Sync.waitElementPresent("xpath", "//span[text()='Gift Card']");
 				Common.clickElement("xpath", "//span[text()='Gift Card']");
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -11570,9 +11570,9 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[contains(@itemprop ,'image')]");
+						"//a[@class='product-image-link']//img");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -14776,9 +14776,9 @@ public void url_color_validation(String Dataset) {
 	try {
 		Sync.waitPageLoad();
 		for (int i = 0; i <= 10; i++) {
-			Sync.waitElementPresent("xpath", "//img[contains(@itemprop ,'image')]");
+			Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 			List<WebElement> webelementslist = Common.findElements("xpath",
-					"//img[contains(@itemprop ,'image')]");
+					"//a[@class='product-image-link']//img");
 			String s = webelementslist.get(i).getAttribute("src");
 			System.out.println(s);
 			if (s.isEmpty()) {
