@@ -78,9 +78,9 @@
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_078_Validate_GuestUser_Checkout_Aerosol_Products_and_NonAerosol_Products_with_Non_POBox_and_Alaska_no_Shipping_Methods"/>
 </classes>
 </test>
-<test name="TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation" testid="DQA-3633" priority="P1" description="This Test case is to Validate Forgot Password functionality in Sign in page.">
+<test name="TEST_DGLD_DB_US_ST_018_Guest_user_checkout_with_Express_Shipping_method" testid="DQA-3613" priority="P1" description="This test case will verify the Guest user checkout functionality with Express shipping method for Drybar Gold.">
 <classes>
-<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_009_Verify_Forgot_Password_page_validation"/>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_018_Guest_user_checkout_with_Express_Shipping_method"/>
 </classes>
 </test>
 <test name="TEST_DGLD_DB_US_ST_025_Article_links_validation" testid="DQA-3630" priority="P1" description="This test case is to validate Verification of Article links .">
@@ -168,6 +168,18 @@
 <test name=".TEST_DGLD_DB_US_ST_087_Validation_of_Videospage" testid="DQA-3585" priority="P1" description="This test case is to verify the Videos pages in Drybar GOLD">
 <classes>
 <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_087_Validation_of_Videospage"/>
+</classes>
+</test>
+
+<test name="TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_DiscoverCC_Tax_with_Same_Billing_and_Shipping" testid="DQA-3601" priority="P1" description="This test case is to validate the Register user checkout process with Paypal, Same Billing and Shipping addresses and verify the tax calculation in payment page for Drybar Gold.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same_Billing_and_Shipping"/>
+</classes>
+</test>
+
+<test name="TEST_DGLD_DB_US_ST_123_Track_My_Order_For_Guest_User" testid="DQA-3731" priority="P1" description="This test case is to validate track order for guest user.">
+<classes>
+<class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_123_Track_My_Order_For_Guest_User"/>
 </classes>
 </test>
 
