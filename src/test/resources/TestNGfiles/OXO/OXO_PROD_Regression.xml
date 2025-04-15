@@ -48,6 +48,11 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_036_Create_Manageitems_and_invalid_Details_Gift_Registery_For_Register_User"/>
 </classes>
 </test>
+<test name="Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping" testid="DQA-152" priority="P1" description="This test case is to verify/validate Chat and Answers section from Chat bot">
+<classes>
+<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_041_Guest_User_Checkout_With_Different_Billing_and_Different_Shipping"/>
+</classes>
+</test>
 <test name="Test_DGLD_OXO_ST_043_Validate_ChatBot" testid="DQA-152" priority="P1" description="This test case is to verify/validate Chat and Answers section from Chat bot">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_043_Validate_ChatBot"/>
