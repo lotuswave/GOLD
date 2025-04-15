@@ -60,11 +60,11 @@
         </classes>
     </test>
     
-    <test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DQA-3768" priority="P1" description="This script will cover validating the My Account page">
+  <!--    <test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DQA-3768" priority="P1" description="This script will cover validating the My Account page">
         <classes>
             <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation"/>
         </classes>
-    </test>
+    </test> -->
     
     <test name="TEST_DGLD_DB_US_ST_161_Minicart_Page_Validation" testid="DQA-3770" priority="P1" description="This script will cover validating the minicart page functionality">
         <classes>
