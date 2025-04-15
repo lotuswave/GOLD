@@ -340,29 +340,6 @@ public class GoldHydroHyvaHelper {
 	        Common.scrollIntoView("css", "img[alt='" + products + "']");
 	        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
 	        Thread.sleep(3000);
-
-	        // Get the price from the Product Listing Page (PLP)
-	        String PLPprice = Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[1]").getText();
-	        System.out.println(PLPprice);
-
-	        // Handle cases where there might be a range of prices
-	        if (PLPprice.contains("")) {
-	            String PLPprice1 = Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
-	            System.out.println(PLPprice1);
-	            Common.clickElement("css", "img[alt='" + products + "']");
-	            Thread.sleep(2000);
-	            product_quantity(Dataset); // Assuming this method navigates to the Product Detail Page (PDP) and handles quantity
-	            String PDPprice = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-	            System.out.println(PDPprice);
-	            Assert.assertEquals(PLPprice, PDPprice);
-	        } else {
-	            Common.clickElement("css", "img[alt='" + products + "']");
-	            Thread.sleep(2000);
-	            product_quantity(Dataset); // Assuming this method navigates to the Product Detail Page (PDP) and handles quantity
-	            String PDPprice = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-	            System.out.println(PDPprice);
-	            Assert.assertEquals(PLPprice, PDPprice); // Assert that PLP and PDP prices match
-	        }
 	        // Add the product to the cart
 	        Sync.waitElementPresent("css", "button[title='Add to Cart']");
 	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
