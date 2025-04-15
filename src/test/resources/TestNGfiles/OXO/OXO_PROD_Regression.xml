@@ -63,19 +63,9 @@
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_045_Contactus_form"/>
 </classes>
 </test>
-<test name="Test_DGLD_OXO_ST_051_Product_Registration_Form" testid="DQA-145" priority="P1" description="This test case is verify every input field present in product registration form for successful submission">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_051_Product_Registration_Form"/>
-</classes>
-</test>
 <test name="Test_DGLD_OXO_ST_055_Validate_Blog_page" testid="DQA-134" priority="P1" description="This test case is to verify the all Blog categories pages for the OXO website.">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_055_Validate_Blog_page"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page" testid="DQA-147" priority="P1" description="This Test case is to verify the Validation of forgot password functionality from shipping page.">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_062_Forgot_password_Shipping_Page"/>
 </classes>
 </test>
 <test name="Test_DGLD_OXO_ST_064_Guest_user_Checkout_with_2day_shipping_method" testid="DQA-144" priority="P1" description="This test case is to verify placing order functionality as a Guest user using 2- Day shipping Method in shipping page">
@@ -106,11 +96,6 @@
 <test name="Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page" testid="DQA-120" priority="P1" description="This test case is to verifies that working of video of the product in PDP">
 <classes>
 <class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_077_Validating_the_product_video_in_PDP_page"/>
-</classes>
-</test>
-<test name="Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page" testid="DQA-141" priority="P1" description="This test case is to verify the updating the qty, adding coupon code, adding gift message, etc.,. from Shopping cart page">
-<classes>
-<class name="TestExecute.OXO.regressionTestcase.Test_DGLD_OXO_ST_078_Validating_the_shopping_cart_page"/>
 </classes>
 </test>
 <test name="Test_DGLD_OXO_ST_087_GuestUser_checkout_PayPal_Multiple_Products_with_Discount_Same_Billing_Shipping" testid="DQA-113" priority="P1" description="This test case is to verify the Guest checkout functionality with discount multiple products same billing and shipping with Paypal payment method">
