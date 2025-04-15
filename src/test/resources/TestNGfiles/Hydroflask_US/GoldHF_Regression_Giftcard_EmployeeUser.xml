@@ -58,11 +58,6 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_020_EmployeeCustomer_Checkout_with_Gift_card_MultipleLineItem_Using_CC"/>
 </classes>
 </test>
-<test name="TEST_DGLD_HYF_ST_021_Employee_Customer_Checkout_with_MultipleItems_using_CC_with_GiftCode " testid="DQA-4260" priority="P1" description="This script will cover Employee Customer with Gift card MultipleLineItem Using CC with GiftCode">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_021_Employee_Customer_Checkout_with_MultipleItems_using_CC_with_GiftCode"/>
-</classes>
-</test>
 <test name="Test_DGLD_HF_ST_130_Register_Employee_user_checkout_with_2day_shipment_method_using_Discountcode_with_afterpay" testid="DQA-3838" priority="P1" description="This script will cover register employee user checkout with Two day shipping method using discount code with after pay">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_130_Register_Employee_user_checkout_with_2day_shipment_method_using_Discountcode_with_afterpay"/>

@@ -161,7 +161,11 @@
 </classes>
 </test>
 
-
+<test name="Test_DGLD_HF_ST_026_Pro_Deal_Application_for_Register_User" testid="DQA-172" priority="P1" description="This script will cover validating Pro Deal allpication form Fro Register User">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_026_Pro_Deal_Application_for_Register_User"/>
+</classes>
+</test>
 <test name="Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page" testid="DQA-252" priority="P1" description="This script will cover validating Validating the product video in PDP page">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page"/>
