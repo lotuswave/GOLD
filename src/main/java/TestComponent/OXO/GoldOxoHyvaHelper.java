@@ -6146,7 +6146,7 @@ catch(Exception | Error e)
 		for (int i = 0; i < strArray.length; i++) {
 			System.out.println(strArray[i]);
 
-			if (Common.getCurrentURL().contains("pre")) {
+			if (Common.getCurrentURL().contains("https://mcloud-na-preprod.oxo.com/")) {
 
 				Common.oppenURL((strArray[i]));
 				Sync.waitPageLoad();
@@ -6168,9 +6168,9 @@ catch(Exception | Error e)
 
 				}
 
-			} else if (Common.getCurrentURL().contains("https://mcloud-na-preprod.oxo.com/")) {
+			} else if (Common.getCurrentURL().contains("https://www.oxo.com/")) {
 
-				Common.oppenURL(strArray[i].replace("mcloud-na-stage", "www"));
+				Common.oppenURL(strArray[i].replace("mcloud-na-preprod", "www"));
 
 				int responcecode = getpageresponce(Common.getCurrentURL());
 				System.out.println(responcecode);
