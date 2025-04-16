@@ -99,11 +99,11 @@ public class GoldHydroHyvaHelper {
 	    	}
 	    	else
 	    	{
-	    		 Sync.waitElementPresent(60, "css", "img[alt='Store logo']") ;
-	 	        int size = Common.findElements("css", "img[alt='Store logo']").size();
+	    		 Sync.waitElementPresent(60, "xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']") ;
+	 	        int size = Common.findElements("xpath", "//img[@alt='Store logo' or @alt='Hydroflask store logo']").size();
  
 	 	        boolean isLogoPresent = size > 0;
-	 	        boolean isTitleCorrect = Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask");
+	 	        boolean isTitleCorrect = Common.getPageTitle().contains("Home Page") || Common.getPageTitle().contains("Hydro Flask")|| Common.getPageTitle().contains("Hydro Flask: Sustainable & Refillable Water Bottles | Hydro Flask");
  
 	 	        Common.assertionCheckwithReport(
 	 	                isLogoPresent && isTitleCorrect,

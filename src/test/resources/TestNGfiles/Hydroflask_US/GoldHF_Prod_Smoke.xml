@@ -3,49 +3,44 @@
     <listeners>
         <listener class-name="Utilities.TestListener"/>
     </listeners>
-    
-    <test name="Test_DGLD_HF_ST_032_Header_Links_Validation" testid="DQA-165" priority="P1" description="This script will cover header links validation">
+    <test name="Test_DGLD_HF_ST_092_Validating_the_shopping_cart_page" testid="DQA-4533" priority="P1" description="This script will cover validating the minicart and shopping cart">
+<classes>
+<class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HF_ST_092_Minicart_and_shopping_cart_page_Validation"/>
+</classes>
+</test>
+   <test name="Test_DGLD_HF_ST_032_Header_Links_Validation" testid="DQA-4531" priority="P1" description="This script will cover header links validation">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HF_ST_032_Header_Links_Validation"/>
 </classes>
 </test>
-
-<test name="Test_DGLD_HF_ST_033_Footer_Links_Validation" testid="DQA-159" priority="P1" description="This script will cover validating the footer links">
+<test name="Test_DGLD_HF_ST_033_Footer_Links_Validation" testid="DQA-4529" priority="P1" description="This script will cover validating the footer links">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HF_ST_033_Footer_Links_Validation"/>
 </classes>
 </test>
-
-<test name="Test_DGLD_HYF_ST_046_Reset_Password_and_Validate_search_results_Page"  testid="DQA-187" priority="P1" description="This script will cover validating the reset password and search results page">
+<test name="Test_DGLD_HYF_ST_046_Reset_Password_and_Validate_search_results_Page" testid="DQA-4530" priority="P1" description="This script will cover validating the reset password and search results page">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_046_Reset_Password_and_Validate_search_results_Page"/>
 </classes>
 </test>
 
-<test name="Test_DGLD_HF_ST_092_Minicart_and_shopping_cart_page_Validation" testid="DQA-189" priority="P1" description="This script will cover validating the minicart and  shopping cart">
-<classes>
-<class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HF_ST_092_Minicart_and_shopping_cart_page_Validation"/>
-</classes>
-</test>
-
-<test name="Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_products_Discount_with_Afterpay_Klarna_Payments" testid="DQA-4288" priority="P1" description="This script will cover validating the after pay and klarna">
+<test name="Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_products_Discount_with_Afterpay_Klarna_Payments" testid="DQA-4534" priority="P1" description="This script will cover validating the after pay and klarna">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_040_GuestUser_Checkout_Simple_Configurable_bundle_products_Discount_with_Afterpay_Klarna_Payments"/>
 </classes>
 </test>
-<!--  
-<test name="Test_DGLD_HYF_ST_033_Register_user_Checkout_with_MyHydro_Engraving_Product_Different_Shipping_Methods_and_validate_CC_PayPal" testid="DQA-3553" priority="P1" description="This script will cover validating the checkout with CC and paypal">
+<!--   
+<test name="Test_DGLD_HYF_ST_033_Register_user_Checkout_with_MyHydro_Engraving_Product_Different_Shipping_Methods_and_validate_CC_PayPal" testid="DQA-4535" priority="P1" description="This script will cover validating the checkout with CC and paypal">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_033_Register_user_Checkout_with_MyHydro_Engraving_Product_Different_Shipping_Methods_and_validate_CC_PayPal"/>
 </classes>
-</test>-->
-
-<test name="Test_DGLD_HYF_ST_053_Validate_PLP_and_PDP_page_Giftcard_Addtocart" testid="DQA-266" priority="P1" description="This script will cover validating the PLP and PDP">
+</test> -->
+<test name="Test_DGLD_HYF_ST_053_Validate_PLP_and_PDP_page_Giftcard_Addtocart" testid="DQA-4528" priority="P1" description="This script will cover validating the PLP and PDP">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_053_Validate_PLP_and_PDP_page_Giftcard_Addtocart"/>
 </classes>
 </test>
-<test name="Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation" testid="DQA-247" priority="P1" description="This script will cover validating the Create account and my account page validation">
+<test name="Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation" testid="DQA-4532" priority="P1" description="This script will cover validating the Create account and my account page validation">
 <classes>
 <class name="TestExecute.Hydroflask.Prod_Smoke_TestCases.Test_DGLD_HYF_ST_094_Create_Account_and_My_Account_Page_Validation"/>
 </classes>

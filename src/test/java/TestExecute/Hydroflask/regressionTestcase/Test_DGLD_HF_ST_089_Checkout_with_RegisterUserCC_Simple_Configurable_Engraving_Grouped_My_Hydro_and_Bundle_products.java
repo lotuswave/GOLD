@@ -6,13 +6,14 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import TestComponent.Hydroflask.GoldHydroHelper;
+import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
 public class Test_DGLD_HF_ST_089_Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
-	GoldHydroHelper Hydro = new GoldHydroHelper(datafile,"Engraving");
+	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"Engraving");
 
 	@Test(retryAnalyzer = Utilities.RetryAnalyzer.class)
 	public void Checkout_with_RegisterUserCC_Simple_Configurable_Engraving_Grouped_My_Hydro_and_Bundle_products () throws Exception {

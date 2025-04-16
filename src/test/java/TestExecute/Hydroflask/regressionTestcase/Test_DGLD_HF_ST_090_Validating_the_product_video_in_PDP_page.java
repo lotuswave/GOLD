@@ -43,7 +43,7 @@ public class Test_DGLD_HF_ST_090_Validating_the_product_video_in_PDP_page {
 	}
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
