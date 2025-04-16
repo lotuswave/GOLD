@@ -606,6 +606,7 @@ public class GoldDrybarusHelper2 {
             System.out.println(PLPprice);
             if(PLPprice.contains(""))
             {
+            	   Thread.sleep(3000);
             	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
             	   System.out.println(PLPprice1);
             	   Thread.sleep(2000);
