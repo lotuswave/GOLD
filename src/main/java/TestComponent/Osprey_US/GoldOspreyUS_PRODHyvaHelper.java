@@ -10042,13 +10042,20 @@ public void Gift_card(String dataSet) {
 		{
 			
 		Thread.sleep(2000);
-			
 		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
 		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
-		System.out.println("Able to Enter Giftcode");
-		}
+		Common.clickElement("xpath","//button[@aria-label='Add Code']");
+		//Thread.sleep(2000);
+		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
+		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+	    System.out.println(successmsg);	
+		Common.assertionCheckwithReport(successmsg.contains("added"),
+				"validating the success message after applying gift card",
+				"Success message should be displayed after the applying of gift card",
+				"Sucessfully gift card has been applyed","Failed to apply the gift card");
+			}
 		catch(Exception | Error e)
 		{
 			e.printStackTrace();
