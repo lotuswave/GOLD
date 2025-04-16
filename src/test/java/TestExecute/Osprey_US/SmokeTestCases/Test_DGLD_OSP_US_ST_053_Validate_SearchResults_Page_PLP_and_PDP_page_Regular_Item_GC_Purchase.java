@@ -28,7 +28,7 @@ public class Test_DGLD_OSP_US_ST_053_Validate_SearchResults_Page_PLP_and_PDP_pag
         Osprey_ReEu.Filter();
         Osprey_ReEu1.Bagpacks_headerlinks("Backpacks & Bags");     
         Osprey_ReEu1.view_PLP_page();
-//        Osprey_ReEu1.sort_By("SortBy");
+        Osprey_ReEu1.sort_By("SortBy");
         Osprey_ReEu1.filter_By("Fliters");
         Osprey_ReEu1.color_validation("PLP Color");
         Osprey_ReEu1.price_filter_validation("PLP Color");

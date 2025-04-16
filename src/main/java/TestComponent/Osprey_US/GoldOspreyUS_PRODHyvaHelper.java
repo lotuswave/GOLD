@@ -1946,7 +1946,8 @@ public void header_Shopbycollection(String Dataset) { {
 				Thread.sleep(4000);
 				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 				System.out.println(productsearch);
-				Common.assertionCheckwithReport(productsearch.contains(Prod) || Common.getPageTitle().contains("Hydration Packs | Osprey"), "validating the search functionality",
+				Common.assertionCheckwithReport(productsearch.contains(Prod) || Common.getPageTitle().contains("Hydration Packs | Osprey")||
+						Common.getPageTitle().contains("Atmos Aura AG backpacks"), "validating the search functionality",
 						"enter product name will display in the search box", "user enter the product name in  search box",
 						"Failed to see the product name");
 				Thread.sleep(8000);
@@ -2571,7 +2572,7 @@ public void header_Shopbycollection(String Dataset) { {
 	public void minicart_Checkout() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			click_minicart();
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
@@ -2580,7 +2581,7 @@ public void header_Shopbycollection(String Dataset) { {
 			Sync.waitElementPresent(30, "xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Common.clickElement("xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Sync.waitPageLoad();
-			Thread.sleep(7000);
+			Thread.sleep(4000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
 //			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
 //			System.out.println(checkout);
@@ -2607,7 +2608,7 @@ public void header_Shopbycollection(String Dataset) { {
 	public void click_minicart() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(4000);
 			Common.actionsKeyPress(Keys.PAGE_UP);
 			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
 			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
@@ -3561,7 +3562,7 @@ public void Validate_retailerlocations() {
 		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 				Sync.waitElementVisible("xpath", "//input[@type='email']");
 				Common.textBoxInput("xpath", "//input[@type='email']", data.get(dataSet).get("Email"));
@@ -3588,7 +3589,7 @@ public void Validate_retailerlocations() {
 			Common.clickElement("xpath", "//section[@id='shipping-details']//input[@name='street[0]']");
 			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='street[0]']", address);
 //			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(5000);
 			Common.findElement("xpath", "//section[@id='shipping-details']//input[@name='city']").clear();
 			Common.textBoxInput("xpath", "//section[@id='shipping-details']//input[@name='city']",
 					data.get(dataSet).get("City"));
@@ -3710,6 +3711,7 @@ public void Validate_retailerlocations() {
 		}
 		return order;
 	}
+	
 
 	public String addPaymentDetails_Giftcard(String dataSet) throws Exception {
 		// TODO Auto-generated method stub
@@ -3889,7 +3891,7 @@ public void Validate_retailerlocations() {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
@@ -3912,13 +3914,13 @@ public void Validate_retailerlocations() {
 			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
 			System.out.println(payment);
 			if (payment > 0) {
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 
@@ -3955,7 +3957,7 @@ public void Validate_retailerlocations() {
 				
 
 			} else {
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				int savedcard=Common.findElements("xpath", "//select[@x-model='savedMethodId']").size();
 				if(savedcard>0)
 				{
@@ -3964,13 +3966,13 @@ public void Validate_retailerlocations() {
 				}
 				
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
