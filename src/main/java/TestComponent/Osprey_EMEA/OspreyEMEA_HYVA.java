@@ -12209,9 +12209,16 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[2]");
 			Thread.sleep(4000);
 			
-			
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Sync.waitElementPresent(40, "xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[3]");
 			Common.clickElement("xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[3]");
+			}
+			else
+			{
+				Sync.waitElementPresent(40, "xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
+				Common.clickElement("xpath", " (//button//span[@class='absolute inset-0 grid place-items-center'])[2]");
+			}
 			Thread.sleep(2000);
 			Sync.waitForLoad();
 			Common.switchFrames("xpath", "//iframe[contains(@id,'vimeo')]");
