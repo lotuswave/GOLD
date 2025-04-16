@@ -23,7 +23,7 @@ public class Test_DGLD_OSP_US_ST_033_Register_user_Checkout_with_Multiple_Items_
         Osprey_ReEu.click_singinButton();
         Osprey_ReEu.Login_Account("Account");
 //        Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
-        Osprey_ReEu.search_product("Product");
+        Osprey_ReEu.search_product("Simple product");
         Osprey_ReEu.simple_addtocart("Simple product"); 
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
@@ -34,6 +34,7 @@ public class Test_DGLD_OSP_US_ST_033_Register_user_Checkout_with_Multiple_Items_
         Osprey_ReEu.Gift_card("Partial Giftcard");
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
         Osprey_ReEu.payPal_Payment("PaypalDetails");
+        
         
 		} catch (Exception e) {
 
