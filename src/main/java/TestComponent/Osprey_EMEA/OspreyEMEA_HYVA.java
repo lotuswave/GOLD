@@ -10213,8 +10213,8 @@ return Number;
 				}
 				else
 				{
-					Sync.waitElementPresent("xpath", "//span[text()='E Gift Cards']");
-					Common.clickElement("xpath", "//span[text()='E Gift Cards']");
+					Sync.waitElementPresent("xpath", "//span[text()='Gift Card']");
+					Common.clickElement("xpath", "//span[text()='Gift Card']");
 				}
 				
 	
