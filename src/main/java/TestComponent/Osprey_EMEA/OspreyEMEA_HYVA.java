@@ -2136,7 +2136,7 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		String products = data.get(Dataset).get("Products");
 		String productcolor = data.get(Dataset).get("Color");
-		String Prodcolor=data.get(Dataset).get("Prod Color");
+		String Prodcolor=data.get(Dataset).get("Prod color");
 		String Productsize = data.get(Dataset).get("Size");
 		String symbol=data.get(Dataset).get("Symbol");
 		System.out.println(symbol);
