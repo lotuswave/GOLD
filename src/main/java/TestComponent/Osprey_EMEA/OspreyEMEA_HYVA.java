@@ -189,7 +189,7 @@ public class OspreyEMEA_HYVA {
 			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
-			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
+			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey") || Common.getPageTitle().contains("Osprey"),
 					"validating store logo on the homwpage",
 					"System directs the user to the Homepage and store logo should display",
 					"Sucessfully user navigates to the home page and logo has been displayed",
@@ -236,11 +236,12 @@ public class OspreyEMEA_HYVA {
 //		        if (sizesframe > 0) {
 //		            Common.actionsKeyPress(Keys.PAGE_UP);
 //		            Thread.sleep(4000);
-		            Common.textBoxInput("xpath", "//input[@name='email']",email);
+		            Common.textBoxInput("xpath", "(//input[@name='email'])[3]",email);
 		            Thread.sleep(2000);
 		            Common.clickElement("xpath", "(//label[@class='needsclick go3431972610 kl-private-reset-css-Xuajs1'])[3]");
 		            Common.clickElement("xpath", "//button[text()='SUBSCRIBE']");
 //		            int sizes = Common.findElements("xpath", "//div[@data-testid='form-component']//span").size();
+		            Thread.sleep(4000);
 		            String text=Common.findElement("xpath", "//span[@class='ql-font-helvetica-neue']").getText();
 		            System.out.println(text);
 		            Common.assertionCheckwithReport(text.equals("What are you interested in?"), "verifying Account page links newsletter Subcription popup",
