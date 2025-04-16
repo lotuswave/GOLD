@@ -18,8 +18,8 @@ public class Test_DGLD_OXO_ST_073_Guest_User_Back_In_stock_Subcription {
 	public void Validate_Guest_User_Back_In_stock_Subcription() throws Exception {
 
 		try {
-			Oxo.verifingHomePage();
-			Oxo.search_product("Outofstock");
+			//Oxo.verifingHomePage();
+			Oxo.search_OOSproduct("Outofstock");
 			Oxo.outofstock_subcription("Outofstock");
 			
 

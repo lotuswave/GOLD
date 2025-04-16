@@ -3535,8 +3535,8 @@ public void FUll_Payment(String dataSet) {
 			Common.scrollIntoView("xpath", "//input[@id='address_postcode']");
 			Common.textBoxInput("xpath", "//input[@id='address_postcode']", data.get(Dataset).get("postcode"));
 			Common.clickElement("id", "submit.save");
-			Sync.waitPageLoad();
-			Thread.sleep(2000);
+			//Sync.waitPageLoad();
+			Thread.sleep(3000);
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
 			Common.assertionCheckwithReport(message.equals("You saved this gift registry."),
 					"validating the gift registery page navigation ",
@@ -12045,14 +12045,15 @@ return Number;
 
 public void outofstock_subcription(String Dataset) {
 		// TODO Auto-generated method stub
-		String products = data.get(Dataset).get("Products");
+	String products = data.get(Dataset).get("Products");
+	String prod = data.get(Dataset).get("Prod Products OOS");
 		String email = data.get(Dataset).get("Notifyme");
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@alt='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
+				Sync.waitElementPresent("xpath", "//img[@itemprop='image']");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@alt='OXO Ceramic Professional Non-Stick 12-Inch Frypan']");
+						"//img[@itemprop='image']");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -12063,6 +12064,7 @@ public void outofstock_subcription(String Dataset) {
 				}
 			}
 			Thread.sleep(6000);
+			if (Common.getCurrentURL().contains("preprod")) {
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
@@ -12104,7 +12106,52 @@ public void outofstock_subcription(String Dataset) {
 					"Sucessfully message has been displayed when we click on the subcribe button ",
 					"Failed to display the message after subcribtion");
 
-		} catch (Exception | Error e) {
+		} 
+			else {
+				Sync.waitElementPresent(30, "xpath", "//img[contains(@alt,'" + prod + "')]");
+				
+				Common.clickElement("xpath", "//img[contains(@alt,'" + prod + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(3000);
+				String name = Common.findElement("xpath", "//div[@class='product-info-main']").getText();
+				Common.assertionCheckwithReport(name.contains(prod), "validating the  product navigates to PDP page",
+						"It should be navigate to the PDP page", "Sucessfully Navigates to the PDP page",
+						"failed to Navigate to the PDP page");
+
+				Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[1]");
+				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+				Common.clickElement("xpath", "//span[text()='Subscribe']");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				String newsubs = Common.findElement("xpath", "//div[@ui-id='message-success']")
+						.getAttribute("ui-id");
+				System.out.println(newsubs);
+				String newsubscribe = Common.findElementBy("xpath","//div[@ui-id='message-success']//span").getText();
+				System.out.println(newsubscribe);
+				Common.assertionCheckwithReport(
+						newsubscribe.contains("Alert subscription has been saved.")
+								|| newsubscribe.contains("Thank you! You are already subscribed to this product.")
+								|| newsubs.contains("success"),
+						"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+						"Sucessfully message has been displayed when we click on the subcribe button ",
+						"Failed to display the message after subcribtion");
+				Common.actionsKeyPress(Keys.END);
+
+				Common.clickElement("xpath", "(//button[@title='Notify Me When Available'])[1]");
+				Common.textBoxInput("xpath", "//input[@placeholder='Insert your email']", email);
+				Common.clickElement("xpath", "//span[text()='Subscribe']");
+				Sync.waitPageLoad();
+				Thread.sleep(2000);
+				String oldsubscribe = Common.findElement("xpath", "//div[@ui-id='message-success']//span").getText();
+				System.out.println(oldsubscribe);
+				Common.assertionCheckwithReport(
+						oldsubscribe.contains("Thank you! You are already subscribed to this product."),
+						"verifying the out of stock subcription", "after click on subcribe button message should be appear",
+						"Sucessfully message has been displayed when we click on the subcribe button ",
+						"Failed to display the message after subcribtion");
+			}
+		}
+			catch (Exception | Error e) {
 
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("verifying the out of stock subcription",
