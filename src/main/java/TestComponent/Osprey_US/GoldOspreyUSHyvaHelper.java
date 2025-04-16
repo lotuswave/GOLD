@@ -114,7 +114,7 @@ public class GoldOspreyUSHyvaHelper {
 //			close_add();
 				close_countryselector();
 				acceptPrivacy();
-				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey Home Page") || size > 0,
@@ -14881,6 +14881,9 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
             } else {
 
                 j++;
+                if(Common.getPageTitle().contains("404"))
+    			{
+    				Assert.fail();
 
                 ExtenantReportUtils.addFailedLog("Validating Page URL  " + Common.getCurrentURL(),
                         "page configured with products ", "unable to find page it showing 404 error",
@@ -14891,7 +14894,7 @@ public void verfy_miscellaneous_pages(String dataSet) throws Exception, IOExcept
     if (j > 1) {
         AssertJUnit.fail();
     }
-}
+}}
 
 public void verfy_links(String dataSet) throws Exception, IOException {
 	// TODO Auto-generated method stub
