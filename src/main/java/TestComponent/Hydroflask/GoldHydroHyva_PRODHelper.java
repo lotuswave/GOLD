@@ -8572,8 +8572,8 @@ public class GoldHydroHyva_PRODHelper {
 			Common.clickElement("xpath", "//span[contains(text(),'Apply Discount') or contains(text(),'Apply Code')or contains(text(),'Apply')]");
 			Sync.waitPageLoad();
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			Thread.sleep(4000);
-			int discountcodemsg1 = Common.findElements("xpath", "//span[contains(text(),'Cancel Coupon')]").size();
+			Thread.sleep(2000);
+			int discountcodemsg1 = Common.findElements("xpath", "//button[contains(text(),'Cancel Coupon')]").size();
 			Common.assertionCheckwithReport(discountcodemsg1 > 0, "verifying pomocode", expectedResult,
 					"promotion code working as expected", "Promation code is not applied");
 		} catch (Exception | Error e) {
