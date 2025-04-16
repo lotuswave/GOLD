@@ -1003,11 +1003,11 @@ public class GoldOxoHyva_PRODHelper {
 	
 	public void updateproductcolor_shoppingcart(String Dataset) {
 		// TODO Auto-generated method stub
-		String productcolor1 = "Gray";
+		String productcolor1 = "Blossom";
 		String product = data.get(Dataset).get("Colorproduct");
 		System.out.println(productcolor1);
 		try {
-			Common.clickElement("xpath", "//a[@title='Edit Potty Chair - Pink']");      // need to click on the color product
+			Common.clickElement("xpath", "//a[@title='Edit Stick & Stay Suction Divided Plate']");      // need to click on the color product
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@aria-label='" + productcolor1 + "']");
@@ -11170,23 +11170,21 @@ public void header_1_Percent_Planet() {
 	            System.out.println("Testing footer link: " + linkText);
 	            
 	            // Validate the navigation
-	            boolean isNavigationSuccessful = Common.getPageTitle().contains(linkText) ||
-	                                             Common.getCurrentURL().contains("/aboutus/") ||
-	                                             Common.getCurrentURL().contains("chefs-in-residence") ||
-	                                             Common.getCurrentURL().contains("Blog") ||
-	                                             Common.getCurrentURL().contains("inventor-submissions") ||
-	                                             Common.getCurrentURL().contains("oxo-affiliate-program") ||
-	                                             Common.getCurrentURL().contains("1-percent/") ||
-	                                             Common.getCurrentURL().contains("corporate-responsibility") ||
-	                                             Common.getCurrentURL().contains("exclusive-savings");
-	            
 	            Common.assertionCheckwithReport(
-	                isNavigationSuccessful,
-	                "Validating navigation from footer link",
-	                "After clicking on '" + linkText + "', it should navigate to the correct page.",
-	                "Successfully navigated to '" + linkText + "' page.",
-	                "Unable to navigate to '" + linkText + "' page."
-	            );
+						Common.getPageTitle().contains(linkText)
+								|| Common.getCurrentURL().contains("/aboutus/")
+								|| Common.getCurrentURL().contains("chefs-in-residence")
+								|| Common.getCurrentURL().contains("Blog")
+								|| Common.getCurrentURL().contains("inventor-submissions")
+								|| Common.getCurrentURL().contains("oxo-affiliate-program")
+								|| Common.getCurrentURL().contains("1-percent/")
+								|| Common.getCurrentURL().contains("corporate-responsibility")
+								|| Common.getCurrentURL().contains("exclusive-savings"),
+						"validating the links navigation from footer Links",
+						"After Clicking on" + linkText + "it should navigate to the",
+						linkText + "Sucessfully Navigated to the" + linkText + "Links",
+						"Unable to Navigated to the" + linkText + "Links"); 
+				Thread.sleep(2000);
 	            
 	            // Navigate back to the previous page
 	            Common.navigateBack();
