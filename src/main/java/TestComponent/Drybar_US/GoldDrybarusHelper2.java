@@ -606,6 +606,7 @@ public class GoldDrybarusHelper2 {
             System.out.println(PLPprice);
             if(PLPprice.contains(""))
             {
+            	
             	   Thread.sleep(3000);
             	   String PLPprice1=Common.findElement("xpath", "(//img[@alt='" + products + "']//parent::a//parent::div//parent::div//div[@data-role='priceBox']//span//span)[2]").getText();
             	   System.out.println(PLPprice1);
@@ -618,6 +619,7 @@ public class GoldDrybarusHelper2 {
 //                Assert.assertEquals(PLPprice1, PDPprice);
             }
             else {
+            Thread.sleep(3000);
 			Common.clickElement("css", "img[alt='" + products + "']");
 			Thread.sleep(2000);
 			product_quantity(Dataset);
