@@ -120,7 +120,7 @@ public class GoldOspreyUS_PRODHyvaHelper {
 //			Close_Geolocation();
 //			close_add();
 				acceptPrivacy();
-				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+				int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();   
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
 				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey Home Page") || size > 0,
@@ -1466,6 +1466,7 @@ public void header_Shopbycollection(String Dataset) { {
 				Sync.waitElementPresent("xpath", "//a//span[contains(text(),'" + Links[i] + "')]");
 				Common.clickElement("xpath", "//a//span[contains(text(),'" + Links[i] + "')]");
 				Sync.waitElementPresent("xpath", "//a[contains(@class,'btn btn-secondary py-3.5')]//span");
+				
 				Common.clickElement("xpath", "//a[contains(@class,'btn btn-secondary py-3.5')]//span");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
