@@ -12238,6 +12238,8 @@ catch(Exception | Error e)
 					"failed to Pause the video in PDP page");
 			Common.switchToDefault();
 			Thread.sleep(4000);
+			if(Common.getCurrentURL().contains("preprod"))
+			{
 			Common.scrollIntoView("xpath", "//img[@alt='Sustainable design']");
 			Sync.waitElementPresent("xpath", "//img[@alt='Sustainable design']");
 			Common.clickElement("xpath", "//img[@alt='Sustainable design']");
@@ -12251,7 +12253,12 @@ catch(Exception | Error e)
 			Common.assertionCheckwithReport(video2.contains("true"), "validating the video in PDP page",
 					"video should be paused in the PDP page", "Sucessfully the video has been paused on the PDP page",
 					"failed to Pause the video in PDP page");
-			Common.switchToDefault();	
+			Common.switchToDefault();
+			}
+			else
+			{
+				System.out.println(Common.getCurrentURL());
+			}
 			
 		}
 		

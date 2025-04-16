@@ -8730,10 +8730,10 @@ public void Continue_Shopping() {
 	public void Remove_Product(String dataSet) {
 		// TODO Auto-generated method stub
 		String Symbol = data.get(dataSet).get("Symbol");
-		String products = data.get(dataSet).get("Products");
+		String products = data.get(dataSet).get("Prod Product");
 
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			String subtotal = Common.findElement("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").getText().replace(Symbol, "");
 			Float subtotalvalue = Float.parseFloat(subtotal);
 			System.out.println(subtotalvalue);
@@ -9414,14 +9414,15 @@ public void Continue_Shopping() {
 		}
 
 	}
+	
 
 	public void Shoppingcart_page() {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementVisible(30, "xpath", "//span[text()='Back to Cart']");
-			Common.clickElement("xpath", "//span[text()='Back to Cart']");
+			Sync.waitElementVisible(30, "xpath", "//span[text()='Back To Cart']");
+			Common.clickElement("xpath", "//span[text()='Back To Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(Common.getPageTitle().equals("Shopping Cart"),
@@ -16084,8 +16085,9 @@ public String create_account(String Dataset) {
 		System.out.println(data.get(Dataset).get("Confirm Password"));
 		Thread.sleep(4000);
 		Common.clickElement("xpath", "//button[@title='Sign Up']");
-		Thread.sleep(2000);
-		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
+	//	Thread.sleep(2000);
+		Sync.waitElementPresent(30, "xpath", "//div[contains(@ui-id,'message')]");
+		String message = Common.findElement("xpath", "//div[contains(@ui-id,'message')]").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(
 				message.contains("Thank you for registering") || Common.getPageTitle().contains("Wish List Sharing")&& message.contains(Product+ " has been added to your Favorites. Click here to view your Favorites") ,

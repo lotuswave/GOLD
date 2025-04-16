@@ -2346,10 +2346,11 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.javascriptclickElement("xpath", "//button[@id='product-addtocart-button']");
 			Sync.waitPageLoad();
 			Thread.sleep(3000);
-			if(Common.findElements("xpath", "(//button[@aria-label='Close, button.'])[3]").size()>0)
-{
-	Common.clickElement("xpath", "(//button[@aria-label='Close, button'])[3]");
-}
+			if(Common.findElements("xpath", "//button[@aria-label='Close minicart']").size()>0)
+				if(Common.findElements("xpath", "//button[@aria-label='Close minicart']").size()>0)
+				{
+					Common.javascriptclickElement("xpath", "//button[@aria-label='Close minicart']");
+				}
 //			String message = Common.findElement("xpath", "//div[@data-ui-id='message-success']")
 //			.getAttribute("data-ui-id");
 //	System.out.println(message);
@@ -10989,6 +10990,7 @@ public void Gift_card(String dataSet) {
 
 	}
 
+	
 	public void whishlist_share_Button(String Dataset) {
 		// TODO Auto-generated method stub
 		
@@ -10997,14 +10999,14 @@ public void Gift_card(String dataSet) {
 			Thread.sleep(4000);
 			if(Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod"))
 			{
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Common.clickElement("xpath", "//button[@title='Share Favorites']");
 				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
-				Thread.sleep(8000);
+				Thread.sleep(6000);
 				String message1 = Common.findElement("xpath", "//div[@data-ui-id='message-success']//div").getText();
 				System.out.println(message1);
 				Common.assertionCheckwithReport(message1.contains("Your Favorites has been shared."),
