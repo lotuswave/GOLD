@@ -197,7 +197,6 @@ public class OspreyEMEA_HYVA {
 		}
 		else if(Common.getCurrentURL().contains("stage3") || Common.getCurrentURL().contains("preprod"))
 		{
-			
 			int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
