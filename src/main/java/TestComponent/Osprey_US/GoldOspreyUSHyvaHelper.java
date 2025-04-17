@@ -3121,7 +3121,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		try {
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
-			Sync.waitElementVisible(30,"xpath", "//section[@id='shipping']");
+			Sync.waitElementVisible(30,"xpath", "//div[@id='shipping-methods']");
 	    	int size = Common.findElements("xpath", "//div[@id='shipping-methods']").size();
 	        System.out.println(size);   
 	        if (size > 0) {
@@ -8445,8 +8445,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 		// TODO Auto-generated method stub
 //		String firstname = data.get(dataSet).get("FirstName");
 		try {
-			Thread.sleep(4000);
-
+			Thread.sleep(2000);
 			Common.javascriptclickElement("xpath", "//button[contains(@title,'Edit Address')]");
 			String expectedResult = "shipping address is entering in the fields";
 
@@ -8482,25 +8481,26 @@ public void MyFavorites_Guestuser(String Dataset) {
 						.getAttribute("value");
 	*/         
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-street-1']");
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-street-1']",
 						data.get(dataSet).get("Region"));	
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-region']");
-					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-region']",
-							data.get(dataSet).get("Region"));
+			//		Common.textBoxInputClear("xpath", "//form[@id='shipping']//select[@id='shipping-region']");
+					Common.dropdown("xpath", "//form[@id='shipping']//select[@id='shipping-region']",
+							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
 					// TODO: handle exception
 					Thread.sleep(2000);
-					Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-region']");
-					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-region']",
-							data.get(dataSet).get("Region"));
-//					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
-//							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+//					Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-region']");
+//					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-region']",
+//							data.get(dataSet).get("Region"));
+					Common.dropdown("xpath", "//form[@id='shipping']//select[@id='shipping-region']",
+							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
 				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");

@@ -27,7 +27,7 @@ public class Test_DGLD_OSP_US_BCST_042_Login_from_Shipping_page {
     	Osprey_ReEu.click_signin_Shippingpage();
     	Osprey_ReEu.Signin_Checkoutpage("Account");
         String newaddress= Osprey_ReEu.shipping_new_Address("BillingDetails");
- //       Osprey_ReEu.Edit_Address_verify("Edit Address");                                  //need to change
+        Osprey_ReEu.Edit_Address_verify("Edit Address");                                  
         Osprey_ReEu.selectshippingmethod("GroundShipping method");    
         Osprey_ReEu.updatePaymentAndSubmitOrder("CCVisacard");
        
@@ -42,7 +42,7 @@ public class Test_DGLD_OSP_US_BCST_042_Login_from_Shipping_page {
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+		//Common.closeAll();
 
 	}
 
