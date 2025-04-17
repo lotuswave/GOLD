@@ -22,10 +22,12 @@ public class Test_DGLD_OS_COMMON_044_Account_Registration_Create_Account_With_Ca
         Osprey_ReEu.Bagpacks_headerlinks("Backpacks & Bags");
         Osprey_ReEu.simple_addtocart("Simple product");  
         Osprey_ReEu.search_product("Product");
-        Osprey_ReEu.addtocart("Product");    
+        Osprey_ReEu.addtocart("Product");
+       String minicart= Osprey_ReEu.minicart_items();
         Osprey_ReEu.click_Createaccount();
         Osprey_ReEu.create_account_With_Product("Create Account");
-        Osprey_ReEu.minicart_Checkout();
+        Osprey_ReEu.minicart_products(minicart);
+
   
 		} catch (Exception e) {
 

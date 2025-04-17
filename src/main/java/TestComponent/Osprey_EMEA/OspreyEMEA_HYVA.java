@@ -7558,17 +7558,16 @@ return Number;
 			Sync.waitElementPresent("xpath", "//div[@x-text='cartSummaryCount']");
 			items = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 			System.out.println(items);
-			Common.clickElement("xpath", "//div[@x-text='cartSummaryCount']");
+			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String miniitems = Common.findElement("xpath", "//span[@x-text='totalCartAmount']")
-					.getText();
+					.getText().trim();
 			System.out.println(miniitems);
 			Common.assertionCheckwithReport(items.contains(miniitems),
 					"Vaildating the products count in the mini cart ",
 					"Products count shsould be display in the mini cart",
 					"Sucessfully products count has displayed in the mini cart",
 					"failed to display products count in the mini cart");
-			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Sync.waitElementPresent("xpath", "//button[@aria-label='Close minicart']");
 			Common.clickElement("xpath", "//button[@aria-label='Close minicart']");
 
@@ -7614,6 +7613,7 @@ return Number;
 	public String create_account_With_Product(String Dataset) {
 		// TODO Auto-generated method stub
 		String email = "";
+		String Email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
 		String product = data.get(Dataset).get("Products");
 		try {
 			Common.refreshpage();
@@ -7626,7 +7626,7 @@ return Number;
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
 			Common.clickElement("xpath", "//input[@name='email']");
 		
-			Common.textBoxInput("xpath", "//input[@name='email']",data.get(Dataset).get("UserName"));
+			Common.textBoxInput("xpath", "//input[@name='email']",Email);
 			
 			System.out.println(email);
 			Common.clickElement("xpath", "//input[@name='password']");
@@ -7660,20 +7660,17 @@ return Number;
 	public void minicart_products(String minicart) {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
-			Common.javascriptclickElement("xpath", "//span[contains(@class,'c-mini-cart__icon')]");
+			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
+			Common.mouseOverClick("xpath", "//button[@id='menu-cart-icon']");
 
-			Sync.waitElementPresent(30, "xpath", "//span[@class='c-mini-cart__counter']");
-			String cartproducts = Common.findElement("xpath", "//span[@class='c-mini-cart__counter']").getText();
+			Sync.waitElementPresent(30, "xpath", "//div[@x-text='cartSummaryCount']");
+			String cartproducts = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
 
 			Common.assertionCheckwithReport(cartproducts.equals(minicart),
 					"validating the products in the cart after creating new account ",
 					"Products should be displayed in the mini cart after Create account with Cart",
 					"Sucessfully after create account with cart products should be display in mini cart",
 					"failed to display the products in mini cart after the create account with cart");
-
-			Sync.waitElementVisible("xpath", "//div[contains(@class,'c-mini-cart__close-btn')]");
-			Common.clickElement("xpath", "//div[contains(@class,'c-mini-cart__close-btn')]");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -7685,6 +7682,7 @@ return Number;
 
 			Assert.fail();
 		}
+
 
 	}
 
