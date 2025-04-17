@@ -42,7 +42,7 @@
 		
 	<test name="Test_DGLD_OS_US_054_Validating_the_PDP_page" testid="DQA-1881" priority="P1" description="This test case will validate the PDP (Product Detail Page) functionality.">
 		<classes>
-			<class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_054_Validating_the_PDP_page" />
+			<class name="TestExecute.Osprey_US.Preprod_SmokeTestcases.Test_DGLD_OSP_US_BCST_054_Validating_the_PDP_page" />
 		</classes>
 	</test>
 	
@@ -72,7 +72,7 @@
      
      <test name="Test_DGLD_OSP_US_BCST_016_Validation_Shipping_Address_form_for_GuestUser_WithDifferentBilling_and_DifferentShipping_Checkout_Klarna_playment" testid="DQA-3521" priority="P1" description="Validation_Shipping_Address_form_for_GuestUserCheckout_WithDifferentBilling_and_DifferentShipping_Klarna_playment">
         <classes>
-            <class name="TestExecute.Osprey_US.RegressionTestcase.Test_DGLD_OS_US_BCST_016_Validation_Shipping_Address_form_for_GuestUser_WithDifferentBilling_and_DifferentShipping_Checkout_Klarna_playment" />
+            <class name="TestExecute.Osprey_US.Preprod_SmokeTestcases.Test_DGLD_OSP_US_BCST_016_Validation_Shipping_Address_form_for_GuestUser_WithDifferentBilling_and_DifferentShipping_Checkout_Klarna_playment" />
         </classes>
     </test>
     

@@ -298,7 +298,7 @@ public void Login_Account(String dataSet) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
-				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod Email"));
+				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod Email")); 
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
 			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
@@ -307,7 +307,8 @@ public void Login_Account(String dataSet) {
 			}
 			Common.clickElement("xpath", "//button[@name='send']");
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Thread.sleep(2000);
+			Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page ");
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Backpacks, Luggage & Travel")
@@ -333,7 +334,7 @@ public void Login_Account(String dataSet) {
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
+			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
 			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(4000);
@@ -2317,9 +2318,9 @@ public void header_Shopbycollection(String Dataset) { {
 					
 					Sync.waitElementPresent(30, "xpath", "//img[@alt='" + prodproduct + "']");
 					Common.clickElement("xpath", "//img[@alt='" + prodproduct + "']");
-					Thread.sleep(4000);
-					Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
-					Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
+			//		Thread.sleep(4000);
+			//		Sync.waitElementPresent("xpath", "//div[@data-option-label='" + prodcolor + "']");
+			//		Common.clickElement("xpath", "//div[@data-option-label='" + prodcolor + "']");
 				}
 			
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
@@ -3849,6 +3850,35 @@ public void Validate_retailerlocations() {
 		}
 
 	}
+
+	public void Signin_Checkoutpage(String Dataset) {
+		// TODO Auto-generated method stub
+		try {
+			Sync.waitElementVisible("xpath", "//input[@type='email']");
+			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
+			Thread.sleep(4000);
+			Sync.waitElementPresent("xpath", "//input[@name='login[password]']");
+			Common.textBoxInput("xpath", "//input[@name='login[password]']", data.get(Dataset).get("Password"));
+			Common.clickElement("xpath", "//button[@name='send']");
+			Sync.waitPageLoad();
+			int regsiteruser = Common.findElements("xpath", "//h2[contains(text(),'Shipping Address')]").size();
+			Common.assertionCheckwithReport(regsiteruser > 0,
+					"Verifying the login functionality from the shipping page",
+					"after clicking on the login button it should login and address should be display",
+					"successfully address book has been displayed after login",
+					"Failed to Display the Address book in shipping page after click on login");
+
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("Verifying the login functionality from the shipping page",
+					"after clicking on the login button it should login and address should be display",
+					"Unable to Display the Address book in shipping page after click on login",
+					Common.getscreenShotPathforReport(
+							"Failed to Display the Address book in shipping page after click on login"));
+			AssertJUnit.fail();
+		}
+
+	}
 	
 	public void click_signin_Shippingpage() {
 		// TODO Auto-generated method stub
@@ -3876,35 +3906,7 @@ public void Validate_retailerlocations() {
 
 	}
 
-	public void Signin_Checkoutpage(String Dataset) {
-		// TODO Auto-generated method stub
-		try {
-			Sync.waitElementVisible("xpath", "//input[@type='email']");
-			Common.textBoxInput("xpath", "//input[@type='email']", data.get(Dataset).get("Email"));
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//input[@name='password']");
-			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
-			Common.clickElement("xpath", "//button[@data-action='checkout-method-login']");
-			Sync.waitPageLoad();
-			int regsiteruser = Common.findElements("xpath", "//div[contains(@class,'shipping-address-item ')]").size();
-			Common.assertionCheckwithReport(regsiteruser > 0,
-					"Verifying the login functionality from the shipping page",
-					"after clicking on the login button it should login and address should be display",
-					"successfully address book has been displayed after login",
-					"Failed to Display the Address book in shipping page after click on login");
-
-		} catch (Exception | Error e) {
-			e.printStackTrace();
-			ExtenantReportUtils.addFailedLog("Verifying the login functionality from the shipping page",
-					"after clicking on the login button it should login and address should be display",
-					"Unable to Display the Address book in shipping page after click on login",
-					Common.getscreenShotPathforReport(
-							"Failed to Display the Address book in shipping page after click on login"));
-			AssertJUnit.fail();
-		}
-
-	}
-
+	
 	public void share_whishlist(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
@@ -8439,37 +8441,32 @@ public void MyFavorites_Guestuser(String Dataset) {
 
 	}
 
-	public void Edit_Address_verify(String dataSet) {
+	public void Edit_Address_verify(String dataSet) {{
 		// TODO Auto-generated method stub
-		String firstname = data.get(dataSet).get("FirstName");
-		System.out.println(firstname);
+//		String firstname = data.get(dataSet).get("FirstName");
 		try {
 			Thread.sleep(4000);
 
-			Common.javascriptclickElement("xpath",
-					"//div[contains(@class,'shipping-address-item n')]//span[text()='Edit Address']");
+			Common.javascriptclickElement("xpath", "//button[contains(@title,'Edit Address')]");
 			String expectedResult = "shipping address is entering in the fields";
 
 			try {
-				Common.clickElement("xpath", "//div[@class='new-address-popup']//button");
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='firstname']",
+	//			Common.clickElement("xpath", "//div[@class='new-address-popup']//button");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='firstname']",
 						data.get(dataSet).get("FirstName"));
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='lastname']",
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='lastname']",
 						data.get(dataSet).get("LastName"));
-
-				Common.textBoxInput("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']",
-						data.get(dataSet).get("Street"));
-
+				Common.textBoxInput("xpath", "//input[@name='street[0]']", data.get(dataSet).get("Street"));
 				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
 				Thread.sleep(2000);
 				try {
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
 					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
-					Common.clickElement("xpath", "//form[@id='co-shipping-form']//input[@name='street[0]']");
+					Common.clickElement("xpath", "//form[@id='shipping']//input[@name='street[0]']");
 				}
 				if (data.get(dataSet).get("StreetLine2") != null) {
 					Common.textBoxInput("name", "street[1]", data.get(dataSet).get("Street"));
@@ -8478,42 +8475,47 @@ public void MyFavorites_Guestuser(String Dataset) {
 					Common.textBoxInput("name", "street[2]", data.get(dataSet).get("Street"));
 				}
 
-				Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
+	/*			Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
 				Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
 				Thread.sleep(3000);
 				String Shippingvalue = Common.findElement("xpath", "//input[@placeholder='State/Province']")
 						.getAttribute("value");
-
+	*/         
+				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-street-1']");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-street-1']",
+						data.get(dataSet).get("Region"));	
+				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
 				Thread.sleep(3000);
-				Common.textBoxInput("xpath", "//input[@name='city']", data.get(dataSet).get("City"));
-
+				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
+				// Common.mouseOverClick("name", "region_id");
 				try {
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-region']");
+					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-region']",
 							data.get(dataSet).get("Region"));
 				} catch (ElementClickInterceptedException e) {
-
+					// TODO: handle exception
 					Thread.sleep(2000);
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']",
+					Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@id='shipping-region']");
+					Common.textBoxInput("xpath", "//form[@id='shipping']//input[@id='shipping-region']",
 							data.get(dataSet).get("Region"));
+//					Common.dropdown("xpath", "//form[@id='co-shipping-form']//select[@name='region_id']",
+//							Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 				}
 				Thread.sleep(2000);
-				Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-				Common.textBoxInput("xpath", "//input[@name='postcode']", data.get(dataSet).get("postcode"));
+				Common.textBoxInputClear("xpath", "//form[@id='shipping']//input[@name='postcode']");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='postcode']",
+						data.get(dataSet).get("postcode"));
 				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 
-				Common.textBoxInput("xpath", "//input[@name='telephone']", data.get(dataSet).get("phone"));
-				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath",
-						"//footer[@class='modal-footer']//span[contains(text(),'Save Address')]");
+				Common.textBoxInput("xpath", "//form[@id='shipping']//input[@name='telephone']",
+						data.get(dataSet).get("phone"));
 
-				Common.javascriptclickElement("xpath",
-						"//footer[@class='modal-footer']//span[contains(text(),'Save Address')]");
+//				Sync.waitElementPresent("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
+//				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 
-				ExtenantReportUtils.addPassLog("validating shipping address filling Fields",
-						"shipping address is filled in to the fields", "user should able to fill the shipping address ",
-						Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
+				Common.clickElement("xpath", "//button[@class='btn btn-primary w-full os:uppercase']");
 
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -8522,18 +8524,19 @@ public void MyFavorites_Guestuser(String Dataset) {
 						"User unabel add shipping address",
 						Common.getscreenShotPathforReport("shipping address faield"));
 
-				AssertJUnit.fail();
+				Assert.fail();
 
 			}
 		} catch (Exception | Error e) {
 			ExtenantReportUtils.addFailedLog("validating adding  address", "User should able to add the address",
 					"User unabel add shipping address",
 					Common.getscreenShotPathforReport("failed to save the shipping address"));
-			AssertJUnit.fail();
+			Assert.fail();
 
 		}
 
-	}
+	}}
+
 
 	public void Verify_Address(String Dataset) {
 		// TODO Auto-generated method stub
@@ -9435,9 +9438,9 @@ public void MyFavorites_Guestuser(String Dataset) {
 		try {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
-				Sync.waitElementPresent("xpath", "//img[@loading='eager']");
+				Sync.waitElementPresent("xpath", "//a[@class='product-image-link']//img");
 				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//img[@loading='eager']");
+						"//a[@class='product-image-link']//img");
 
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
@@ -11028,7 +11031,7 @@ public void Gift_card(String dataSet) {
 				Thread.sleep(3000);
 				Common.clickElement("xpath", "//button[@title='Share Favorites']");
 				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				Common.textBoxInput("xpath", "//textarea[@name='emails']", data.get(Dataset).get("Email"));
 				Common.textBoxInput("xpath", "//textarea[@name='message']", data.get(Dataset).get("message"));
 				Common.javascriptclickElement("xpath", "//button[@title='Share Favorites']");
