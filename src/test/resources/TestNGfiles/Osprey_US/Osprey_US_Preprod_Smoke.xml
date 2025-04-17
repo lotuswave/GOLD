@@ -68,7 +68,7 @@
     </test>
 <test name="TEST_DGLD_OSP_US_BCST_002_Forgot_Password_from_SignIn_page" testid="DQA-3330" priority="P1" description="This testcae is validate the forgot passward fr0m sign in page  ">
         <classes>
-            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OSP_US_BCST_002_Forgot_Password_from_SignIn_paget" />
+            <class name="TestExecute.Osprey_US.RegressionTestcase.TEST_DGLD_OSP_US_BCST_002_Forgot_Password_from_SignIn_page" />
         </classes>
     </test>
 </suite>
