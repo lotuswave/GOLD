@@ -5412,8 +5412,8 @@ public void Remove_GiftCode() {
 			Sync.waitElementPresent("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='"+ country +"']");
 			Common.clickElement("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='"+ country +"']");
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms']");
-			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms']",
+			Sync.waitElementPresent("xpath", "//input[@name='conversationStreetforforms' or @name='conversationStreetForForms']");
+			Common.textBoxInput("xpath", "//input[@name='conversationStreetforforms' or @name='conversationStreetForForms']",
 					data.get(dataSet).get("Street"));
 
 			Sync.waitElementPresent("xpath", "//input[@name='conversationCityForForms']");
@@ -5429,8 +5429,8 @@ public void Remove_GiftCode() {
 			Sync.waitElementPresent("xpath", "//input[@name='conversationState']");
 			Common.clickElement("xpath", "//input[@name='conversationState']");
 
-			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeforforms']");
-			Common.textBoxInput("xpath", "//input[@name='conversationZipCodeforforms']",
+			Sync.waitElementPresent("xpath", "//input[@name='conversationZipCodeforforms' or @name='conversationZipCodeForForms']");
+			Common.textBoxInput("xpath", "//input[@name='conversationZipCodeforforms' or @name='conversationZipCodeForForms']",
 					data.get(dataSet).get("postcode"));
 			
 			Sync.waitElementPresent("xpath", "//span[@class='form-field-tree-option-placeholder']");
@@ -5445,19 +5445,13 @@ public void Remove_GiftCode() {
 			Sync.waitElementPresent("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='Billing Issue']");
 			Common.clickElement("xpath", "//div[@class='form-field-tree-options-overlay']//div[text()='Billing Issue']");
 			Thread.sleep(3000);
-//			Common.clickElement("xpath", "//div[@data-path='order_issues']");
-
-//			Thread.sleep(4000);
-			
-
-//			
-
 			Sync.waitElementPresent("xpath", "//input[@class='form-base' and @id='conversationOrder']");
 			Common.textBoxInput("xpath", "//input[@class='form-base' and @id='conversationOrder']",
 					data.get(dataSet).get("OrderID"));
 			Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
 			Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
 					data.get(dataSet).get("CommetsHydroflask"));
+			System.out.println(Common.getCurrentURL());
 			if(Common.getCurrentURL().contains("preprod")) {
 
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
@@ -5469,6 +5463,12 @@ public void Remove_GiftCode() {
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0 || Contactussuccessmessage >= 0,
 					"verifying Contact us Success message ", "Success message should be Displayed",
 					"Contact us Success message displayed ", "failed to dispaly success message");
+			Common.actionsKeyPress(Keys.PAGE_UP); 
+			String Text = Common.getText("xpath", "//div[@class='form-wrap']");
+			expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
+			Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
+					"verifying contact us conformation message", expectedResult, "Failed to submit the contact us form");
+
 		}
 			else {
 				Common.getscreenShotPathforReport("Contact us page");
@@ -5484,12 +5484,7 @@ public void Remove_GiftCode() {
 
 		}
 
-		Common.actionsKeyPress(Keys.PAGE_UP); 
-		String Text = Common.getText("xpath", "//div[@class='form-wrap']");
-		expectedResult = "User gets confirmation under the same tab. It includes a reference number and email is sent to email provided. No validation errors.";
-		Common.assertionCheckwithReport(Text.contains("Your submission was successful "),
-				"verifying contact us conformation message", expectedResult, "Failed to submit the contact us form");
-
+		
 	}
 
 	public void review(String Dataset) {
