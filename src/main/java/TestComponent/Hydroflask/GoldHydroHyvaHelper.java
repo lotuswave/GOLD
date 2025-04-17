@@ -2929,7 +2929,14 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 	}
 	
 	public void decline_All() {
-		Common.clickElement("id", "truste-consent-required");
+		try {
+			Sync.waitElementPresent("id", "truste-consent-required");
+			Common.clickElement("id", "truste-consent-required");
+			System.out.println("Decline all has been clicked");
+		} catch (Exception e) {
+			Common.clickElement("id", "truste-consent-required");
+		}
+		
 	}
 
 	public void updtePayementcrditcard_WithInvalidData(String dataSet) throws Exception {
@@ -14238,10 +14245,9 @@ Common.clickElement("xpath", "//span[text()='Edit']");
 				Common.clickElement("xpath", "//a[@title='Sign Out']");
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
-				int size = Common.findElements("xpath", "//a[@class='a-logo']").size();
-				Common.assertionCheckwithReport(
-						size > 0 && Common.getPageTitle().contains("Home Page")
-								|| Common.getPageTitle().contains("Hydro Flask"),
+				String homepage= Common.findElementBy("xpath", "//meta[@content='Hydroflask Current Homepage']").getAttribute("content");
+				System.out.println(homepage);
+				Common.assertionCheckwithReport(homepage.contains("Hydroflask Current Homepage") ,
 						"validating store logo", "System directs the user to the Homepage",
 						"Sucessfully user navigates to the home page", "Failed to navigate to the homepage");
 			} catch (Exception | Error e) {
