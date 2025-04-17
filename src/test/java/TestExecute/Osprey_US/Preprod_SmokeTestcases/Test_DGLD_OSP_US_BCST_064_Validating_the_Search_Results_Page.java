@@ -9,7 +9,7 @@ import TestComponent.Osprey_US.GoldOspreyUSHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
   
-public class Test_DGLD_OSP_US_BCST_002_Validating_the_Search_Results_Page {
+public class Test_DGLD_OSP_US_BCST_064_Validating_the_Search_Results_Page {
 
 	String datafile = "Osprey_US//GoldOspreyus.xlsx";
 	GoldOspreyUSHyvaHelper Osprey_ReEu = new GoldOspreyUSHyvaHelper(datafile,"Search");
