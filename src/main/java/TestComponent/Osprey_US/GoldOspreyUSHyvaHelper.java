@@ -333,7 +333,7 @@ public void Login_Account(String dataSet) {
 	public void Forgot_password(String Dataset) {
 		// TODO Auto-generated method stub
 		try {
-			Common.clickElement("xpath", "//a[contains(text(),'Forgot')]");
+			Common.clickElement("xpath", "//span[text()='Forgot Your Password?']");
 			String forgotpassword = Common.findElement("xpath", "//h2[contains(text(),'Forgot Your Password?')]").getText();
 			System.out.println(forgotpassword);
 			Thread.sleep(4000);
