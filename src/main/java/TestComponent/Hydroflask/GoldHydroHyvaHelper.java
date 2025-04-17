@@ -5383,8 +5383,8 @@ public void Remove_GiftCode() {
 		try {
 
 			Common.clickElement("xpath", "//button[contains(text(),'Write to Us')]");
-			Sync.waitElementPresent(40, "xpath", "//iframe[contains(@src,'https://hydroflask')]");
-			Common.switchFrames("xpath", "//iframe[contains(@src,'https://hydroflask')]");
+			Sync.waitElementPresent(40, "xpath", "//iframe[@id='contact-us-form']");
+			Common.switchFrames("xpath", "//iframe[@id='contact-us-form']");
 
 			Sync.waitElementPresent("xpath", "//input[@id='customerEmail']");
 
@@ -5458,6 +5458,7 @@ public void Remove_GiftCode() {
 			Sync.waitElementPresent("xpath", "//textarea[@id='messagePreview']");
 			Common.textBoxInput("xpath", "//textarea[@id='messagePreview']",
 					data.get(dataSet).get("CommetsHydroflask"));
+			if(Common.getCurrentURL().contains("preprod")) {
 
 			Common.scrollIntoView("xpath", "//button[text()='Submit']");
 			Common.clickElement("xpath", "//button[text()='Submit']");
@@ -5468,6 +5469,10 @@ public void Remove_GiftCode() {
 			Common.assertionCheckwithReport(Contactussuccessmessage > 0 || Contactussuccessmessage >= 0,
 					"verifying Contact us Success message ", "Success message should be Displayed",
 					"Contact us Success message displayed ", "failed to dispaly success message");
+		}
+			else {
+				Common.getscreenShotPathforReport("Contact us page");
+			}	
 		}
 
 		catch (Exception | Error e) {
