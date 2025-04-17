@@ -7171,7 +7171,7 @@ catch(Exception | Error e)
 				Thread.sleep(2000);
 				Common.scrollIntoView("xpath", "//span[text()='Notify Me When Available']");
 				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
-				//Thread.sleep(2000);
+				Thread.sleep(3000);
 				String newsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 				System.out.println(newsubcribe);
 				Common.assertionCheckwithReport(
@@ -7183,8 +7183,8 @@ catch(Exception | Error e)
 						"Failed to display the message after subcribtion");
 				Common.actionsKeyPress(Keys.END);
 				Common.clickElement("xpath", "//span[text()='Notify Me When Available']");
-				Sync.waitPageLoad();
-				//Thread.sleep(4000);
+				//Sync.waitPageLoad();
+				Thread.sleep(4000);
 				String oldsubcribe = Common.findElement("xpath", "//div[@class='container']//div[@class='relative flex w-full']/span").getText();
 				System.out.println(oldsubcribe);
 				Common.assertionCheckwithReport(
@@ -7277,10 +7277,10 @@ catch(Exception | Error e)
             }
             else
             {
-            	String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]")
+            	String price = Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])")
 			.getAttribute("data-price-amount");
 	System.out.println(price);
-            	Common.clickElement("xpath", "(//a[@title='Remove This Item'])[2]");
+            	Common.clickElement("xpath", "(//a[@title='Remove This Item'])");
 				Common.implicitWait();
 				Common.alerts("Ok");
             }
