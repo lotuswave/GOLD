@@ -27,10 +27,16 @@ public class Test_DGLD_HF_ST_132_DeclineALL_createaccount_Login_Checkout {
 			Hydro.RegaddDeliveryAddress("AccountDetails");
             Hydro.selectshippingaddress("GroundShipping method");
             Hydro.clickSubmitbutton_Shippingpage();
-			Hydro.updatePaymentAndSubmitOrder("CCMastercard");
-			Hydro.Logout();
-			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+            if(Common.getCurrentURL().contains("https://mcloud-na-preprod.hydroflask.com/")) {
+            	System.out.println("Executed In PRE-PROD");
+            	Hydro.updatePaymentAndSubmitOrder("CCMastercard");
+    			Hydro.Logout();
+    			Hydro.click_singinButton();
+    			Hydro.login_Hydroflask("AccountDetails");
+            }else {
+            	System.out.println("Executed In PROD");
+            }
+			
 			
 		} catch (Exception e) {
 

@@ -7994,6 +7994,7 @@ catch(Exception | Error e)
 
 	public void Validate_AvailableRetailers() {
 		try {
+			Thread.sleep(2000);
 			Common.scrollIntoView("xpath", "//a[contains(@class,'tab-retailers')]");
 
 			Common.mouseOverClick("xpath", "//a[contains(@class,'tab-retailers')]");
