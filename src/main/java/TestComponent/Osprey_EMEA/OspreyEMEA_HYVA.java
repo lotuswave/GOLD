@@ -16249,6 +16249,144 @@ public void deleteProduct_shoppingcart() {
 			Assert.fail();
 		}
 
+	}
+
+	public void Expert_Advice(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Expert Advice");
+		String[] Links = names.split(",");
+		String name = data.get(Dataset).get("Expert Advice").toUpperCase();
+		String[] Link = name.split(",");
+		String Explore=data.get(Dataset).get("Explore CTA");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Thread.sleep(3000);
+				Common.clickElement("xpath","//span[contains(text(),'Expert Advice')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
+				Common.clickElement("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+//				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();	
+//				System.out.println(breadcrumbs);
+				System.out.println(Links[i]);
+				System.out.println(Link[i]);
+				
+				Common.assertionCheckwithReport( Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("About Osprey") 
+						|| Common.getCurrentURL().contains("/packfinder") || Common.getPageTitle().contains(Links[i]) || Common.getPageTitle().contains("Sizing & Fit")
+						||Common.getCurrentURL().contains("/sizing-fit-for-women") || Common.getCurrentURL().contains("blog") || Common.getCurrentURL().contains("osprey-eoca-conservation") 
+						|| Common.getCurrentURL().contains("/osprey-technologies-2"),
+						"verifying the header link " + Links[i] + "Under Explore",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Accessories",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+	}
+
+	public void Guarantee(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Guarantee");
+		String[] Links = names.split(",");
+		String name = data.get(Dataset).get("Guarantee").toUpperCase();
+		String[] Link = name.split(",");
+		String Explore=data.get(Dataset).get("Explore CTA");
+		int i = 0;
+		try {
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				
+				Common.clickElement("xpath", "//span[contains(text(),'"+ Explore +"')]");
+				Thread.sleep(3000);
+				Common.clickElement("xpath","//span[contains(text(),'Guarantee')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Thread.sleep(3000);
+				Common.clickElement("xpath",
+						"//span[contains(text(),'" + Links[i] + "')]");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+//				String breadcrumbs = Common.findElement("xpath", "//nav[contains(@class,'breadcrumb')]").getText();	
+//				System.out.println(breadcrumbs);
+				System.out.println(Links[i]);
+				System.out.println(Link[i]);
+				
+				Common.assertionCheckwithReport( Common.getPageTitle().contains(Links[i])
+						|| Common.getCurrentURL().contains("/all-mighty-guarantee") || Common.getPageTitle().contains(Links[i]),
+						"verifying the header link " + Links[i] + "Under Explore",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+
+			}
+		
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "Under Accessories",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+		}
+		
+	}
+
+	public void Explore_ShopAll(String Dataset) {
+		// TODO Auto-generated method stub
+		String names = data.get(Dataset).get("Shop all");
+		String[] Links = names.split(",");
+		int i = 0;
+		String Explore = data.get(Dataset).get("Explore CTA");
+		try {
+
+			for (i = 0; i < Links.length; i++) {
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Explore + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'" + Explore + "')]");
+				Thread.sleep(3000);
+				Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+				
+				Sync.waitElementPresent("xpath", "//a[contains(@class,'btn btn-secondary')]//span");
+				Common.clickElement("xpath", "//a[contains(@class,'btn btn-secondary')]//span");
+				Sync.waitPageLoad();
+				Thread.sleep(4000);
+				Common.assertionCheckwithReport(Common.getPageTitle().contains(Links[i]) || Common.getCurrentURL().contains(Links[i]) 
+						|| Common.getCurrentURL().contains("/all-mighty-guarantee"),
+						"verifying the header link " + Links[i] + "Under Featured",
+						"user should navigate to the " + Links[i] + " page",
+						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+		
+				
+			}
+		}
+
+		catch (Exception | Error e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("verifying the header link " + Links[i] + "",
+					"User should navigate to the " + Links[i] + "pages",
+					" unable to navigate to the " + Links[i] + "pages",
+					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
+			Assert.fail();
+	}
 	}	
 	
 }

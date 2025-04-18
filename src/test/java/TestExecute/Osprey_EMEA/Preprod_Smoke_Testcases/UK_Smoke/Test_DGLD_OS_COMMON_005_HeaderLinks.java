@@ -34,6 +34,9 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 		      Osprey_ReEu.header_Explore("Explore");
 		      Osprey_ReEu.header_New_Season(); 
 		      Osprey_ReEu.About_Opsrey("about osprey");
+		      Osprey_ReEu.Expert_Advice("Expert Advice");
+		      Osprey_ReEu.Guarantee("Guarantee");
+		 
 	
 		        
 		} catch (Exception e) {
