@@ -340,7 +340,7 @@ public class GoldHydroHyvaHelper {
 	        Common.scrollIntoView("css", "img[alt='" + products + "']");
 	        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
 	        Thread.sleep(3000);
-	        // Add the product to the cart
+	        Common.clickElement("xpath", "//img[@alt='" + products + "']");
 	        Sync.waitElementPresent("css", "button[title='Add to Cart']");
 	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
 	        Thread.sleep(3000);
@@ -4883,8 +4883,8 @@ public void Remove_GiftCode() {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent(60,"xpath", "//div[@id='cart-drawer-title']/span/span");
-			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
+			Sync.waitElementPresent(60,"xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent(30,"xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			String viewcart = Common.findElement("xpath", "//span[contains(@class,'ml-7 title-xs hf:title')]").getText();
@@ -7772,7 +7772,7 @@ catch(Exception | Error e)
 			String title = Common.findElement("xpath", "//h1[@class='title-2xl min-w-56']").getAttribute("Class");
 			String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 					.getAttribute("aria-label");
-			String filter = Common.findElement("xpath", "//span[contains(@class,'flex-grow title')]").getText();
+			String filter = Common.findElement("xpath", "//h3[contains(@class,'flex-grow title')]").getText();
 			String Sort = Common
 					.findElement("xpath",
 							"//span[contains(@class,'pr-2.5 title-panel-sm')]")
@@ -11518,12 +11518,12 @@ public void Explore_Validation(String Dataset) {
 		try {
 			for (i = 0; i < Kustomerlinks.length; i++) {
 				Sync.waitElementPresent(30, "xpath",
-						"//div[contains(@class,'footer-menu')]//a[@title='" + Kustomerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[@title='" + Kustomerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
 				Common.clickElement("xpath",
-						"//div[contains(@class,'footer-menu')]//a[@title='" + Kustomerlinks[i] + "']");
+						"//div[contains(@class,'footer-menu')]//a[normalize-space()='" + Kustomerlinks[i] + "']");
 				Sync.waitPageLoad();
 				Thread.sleep(3000);
 				Common.assertionCheckwithReport(
