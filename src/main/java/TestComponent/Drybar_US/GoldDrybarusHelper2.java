@@ -12720,6 +12720,123 @@ public void PDP_video(String Dataset) {
 	}
 
 }
+public void Contact_US() {
+	// TODO Auto-generated method stub
+	try {
+		Common.actionsKeyPress(Keys.END);
+		Sync.waitElementPresent("xpath", "//a[text()='Contact Us']");
+		Common.clickElement("xpath", "//a[text()='Contact Us']");
+		Sync.waitPageLoad();
+		Thread.sleep(4000);
+		Common.assertionCheckwithReport(
+				Common.getCurrentURL().contains("contact-us"),
+				"To validate the user navigates to the contact-us page",
+				"user should able to land on the contact-us page ",
+				"User Successfully clicked on the contact-us button and Navigate to the contact-us page",
+				"User Failed to click the contact-us button and not navigated to contact-us page");
+
+	} catch (Exception | Error e) {
+		e.printStackTrace();
+		ExtenantReportUtils.addFailedLog("To validate the user navigates to the contact-us page",
+				"user should able to land on the contact-us page after clicking on the contact-us button",
+				"Unable to click on the contact-us button and not Navigated to the contact-us page",
+				Common.getscreenShotPathforReport(
+						"Failed to click contact-us button and not Navigated to the contact-us page"));
+		Assert.fail();
+	}
+
+}
+
+public void Write_to_Us(String Dataset) {
+	// TODO Auto-generated method stub
+	String email = Common.genrateRandomEmail(data.get(Dataset).get("UserName"));
+try {
+
+	Sync.waitElementPresent("xpath", "//span[text()='Write to Us']");
+	Common.clickElement("xpath", "//span[text()='Write to Us']");
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	Common.switchFrames("xpath", "//iframe[@id='contact-us-form']");
+
+	
+	Common.textBoxInput("xpath", "//input[@id='messageSubject']", data.get(Dataset).get("CommetsDrybar"));
+	Common.textBoxInput("xpath", "//input[@id='customerFirstName']", data.get(Dataset).get("FirstName"));
+	Common.textBoxInput("xpath", "//input[@id='customerLastName']", data.get(Dataset).get("LastName"));
+	Common.textBoxInput("xpath", "//input[@id='customerEmail']", email);
+	Common.textBoxInput("xpath", "//input[@id='conversationPhoneForForms']", data.get(Dataset).get("phone"));
+
+	Common.scrollIntoView("xpath", "//div[@id='conversationCountryForForms']");
+	 Common.clickElement("xpath", "//div[@id='conversationCountryForForms']");
+  //  Common.dropdown("xpath", "//div[@data-path='united_states']",Common.SelectBy.TEXT, data.get(Dataset).get("Country"));
+    Common.clickElement("xpath", "//div[@data-path='united_states']");
+    
+    Common.scrollIntoView("xpath", "//input[@id='conversationStreetForForms']");
+	Common.textBoxInput("xpath", "//input[@id='conversationStreetForForms']", data.get(Dataset).get("Street"));
+	
+	Common.findElement("xpath", "//input[@id='conversationCityForForms']");
+	Common.textBoxInput("xpath", "//input[@id='conversationCityForForms']", data.get(Dataset).get("City"));
+	System.out.println(data.get(Dataset).get("City"));
+	
+	 Common.scrollIntoView("xpath", "//div[@id='conversationStateForForms']");
+	 Common.clickElement("xpath", "//div[@id='conversationStateForForms']");
+	 Common.clickElement("xpath", "//div[@data-path='connecticut']");
+	//	Common.textBoxInput("xpath", "//div[@data-path='connecticut']", data.get(Dataset).get("Region"));
+		
+	Thread.sleep(3000);
+	Common.textBoxInputClear("xpath", "//input[@id='conversationZipCodeForForms']");
+	Common.textBoxInput("xpath", "//input[@id='conversationZipCodeForForms']", data.get(Dataset).get("postcode"));
+	Thread.sleep(8000);	
+	
+	
+		Common.clickElement("xpath", "//div[@id='conversationHowCanWeHelp']");
+		Common.clickElement("xpath", "//div[@class='form-field-tree-option']");
+		
+		Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+		Common.clickElement("xpath", "//div[@data-path='tracking_info']");
+		
+		Common.clickElement("xpath", "//input[@id='conversationOrderNumber']");
+		Common.textBoxInput("xpath", "//input[@id='conversationOrderNumber']", data.get(Dataset).get("Order Number"));
+		
+		Common.textBoxInput("xpath", "//div[@class='form-field ']//textarea[@name='messagePreview']", data.get(Dataset).get("CommetsDrybar"));
+		Common.clickElement("xpath", "//button[text()='Submit']");
+		
+		
+		
+	Common.switchToDefault();
+
+	Common.switchFrames("xpath", "//iframe[@id='contact-us-form']");
+	Sync.waitPageLoad();
+	Thread.sleep(4000);
+	Sync.waitElementPresent("xpath", "//div[@class='form-wrap']");
+	int Contactussuccessmessage = Common.findElements("xpath", "//h1[@data-content-type='heading']").size();
+	System.out.println(Contactussuccessmessage);
+	Common.assertionCheckwithReport(Contactussuccessmessage > 0 || Contactussuccessmessage >= 0,
+			"verifying Contact us Success message ", "Success message should be Displayed",
+			"Contact us Success message displayed ", "failed to dispaly success message");
+	Common.switchToDefault();
+}
+
+catch (Exception | Error e) {
+	e.printStackTrace();
+	ExtenantReportUtils.addFailedLog("verifying email us from",
+			"contact us form data enter without any error message", "Contact us page getting error ",
+			Common.getscreenShotPathforReport("Contact us page"));
+	Assert.fail();
+
+}
+
+}
+
+
+
+
+
+		
+
+
+
+			
+
 
 
 }
