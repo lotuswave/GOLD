@@ -4013,7 +4013,7 @@ public void Validate_retailerlocations() {
 			Common.clickElement("css", "section#shipping-details input[name='street[0]']");
 			Common.textBoxInput("css", "section#shipping-details input[name='street[0]']", address);
 //			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(10000);
 			Common.findElement("css", "section[id='shipping-details'] input[name='city']").clear();
 			Common.textBoxInput("css", "section[id='shipping-details'] input[name='city']",
 					data.get(dataSet).get("City"));
@@ -8227,7 +8227,7 @@ public void MyFavorites_Guestuser(String Dataset) {
 			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
 			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']").isSelected();
 			System.out.println(checkbox);
-			Thread.sleep(8000);
+			Thread.sleep(5000);
 			String box=Boolean.toString(checkbox);
 			if(box.contains("true"))
 			{
@@ -8255,8 +8255,8 @@ public void MyFavorites_Guestuser(String Dataset) {
 			
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
 			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
-			Sync.waitPageLoad();
-			Thread.sleep(5000);
+//			Sync.waitPageLoad();
+			Thread.sleep(8000);
 			
 			
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
@@ -8270,10 +8270,10 @@ public void MyFavorites_Guestuser(String Dataset) {
 				Thread.sleep(3000);
 				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-			Thread.sleep(2000);
+			Thread.sleep(8000);
 		
 			Common.textBoxInput("xpath", "//input[@id='billing-postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(4000);
+			Thread.sleep(8000);
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
 			Thread.sleep(4000);
