@@ -461,8 +461,6 @@ public class GoldHydroHyvaHelper {
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page after clicking on the checkout page", "Successfully navigate to the shipping page after clicking on the checkout page",
 					"Failed to navigate to the shipping page after clicking on the checkout button");
-//			Checkoutprice=Common.findElement("xpath", "//span[@class='text-xs']//span[contains(@class,'price')]").getText().trim();
-//			  Assert.assertEquals(Checkoutprice, Minicartprice);
 		}
 		catch (Exception | Error e) {
 			Thread.sleep(5000);
@@ -477,7 +475,18 @@ public class GoldHydroHyvaHelper {
 					"Failed to navigate to the shipping page after clicking on the checkout button");
 		}
 		}
-
+		/**
+		 * Free gift popup handling
+		 */
+		int hiddenPopupElements= Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size();
+		if (hiddenPopupElements > 0) {
+            System.out.println("Free gift popup is not currently displayed.");
+        } else {
+            
+            System.out.println("Free gift popup is likely displayed. Attempting to close...");
+            Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+			Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+        }
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog(
@@ -2961,76 +2970,10 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 					"User unabel to land opaymentpage");
 	
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
-		
-			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
-			System.out.println(payment);
-			if (payment > 0) {
-				Thread.sleep(4000);
+
+				Thread.sleep(3000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-
-				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
-
-				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-				Thread.sleep(2000);
-				Common.actionsKeyPress(Keys.ARROW_DOWN);
-				Common.switchToDefault();
-				if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
-
-					Thread.sleep(1000);
-					Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-	             	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	             	  Thread.sleep(10000);
-	             	 if(Common.findElement("xpath", "//div[contains(@class,'error')]").getText().contains("Please complete your payment details."))
-	             	 {
-	             		expectedResult = "credit card fields are filled with the data";
-						String errorTexts = Common.findElement("xpath", "errorText").getText();
-						Common.assertionCheckwithReport(
-								errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
-								"validating the credit card information with valid data", expectedResult,
-								"Filled the Card detiles", "missing field data it showinng error");
-	             	 }
-	             	 else if(Common.getCurrentURL().contains("/checkout/#payment"))
-	           	   {
-	           		   Sync.waitElementPresent("xpath", "//label[@for='stripe-new-payments']");
-	           		   Common.clickElement("xpath", "//label[@for='stripe-new-payments']");
-	           		   Thread.sleep(5000);
-	           		   Sync.waitElementPresent("xpath", "//button[@class='action primary checkout']");
-	               	   Common.clickElement("xpath", "//button[@class='action primary checkout']");
-	               	expectedResult = "credit card fields are filled with the data";
-					String errorTexts = Common.findElement("xpath", "//div[contains(@class,'error')]").getText();
-					Common.assertionCheckwithReport(
-							errorTexts.isEmpty() || errorTexts.contains("Please complete your payment details."),
-							"validating the credit card information with valid data", expectedResult,
-							"Filled the Card detiles", "missing field data it showinng error");
-	           	   }
-	             	  
-	             	   else
-	             	   {
-	             		   Assert.fail();
-	             	   }
-					
-				} else {
-					Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-					String Cardnumber = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ",
-							"");
-					System.out.println(Cardnumber);
-					Common.assertionCheckwithReport(Cardnumber.equals(cardnumber),
-							"To validate the card details entered in the production environment",
-							"user should able to see the card details in the production environment",
-							"User Successfully able to see the card details enterd in the production environment ",
-							"User Failed to see the card deails in prod environemnt");
-					Common.switchToDefault();
-
-				}
-
-			} else {
-				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
@@ -3046,9 +2989,9 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 					Thread.sleep(1000);
 					Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
 	             	   Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-	             	  Thread.sleep(10000);
+	             	  Thread.sleep(5000);
 	             		Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-	    				Thread.sleep(5000);
+	    				Thread.sleep(3000);
 	             	 String errorText = Common.findElement("xpath", "//p[@class='p-FieldError Error']").getText();
 						Common.assertionCheckwithReport(
 								errorText.isEmpty() || errorText.contains("Your card number is incomplete."),
@@ -3095,8 +3038,6 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 					Common.switchToDefault();
 
 				}
-
-			}
 
 		}
 
