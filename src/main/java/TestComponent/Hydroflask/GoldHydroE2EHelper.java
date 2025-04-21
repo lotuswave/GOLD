@@ -4137,16 +4137,10 @@ public void Remove_GiftCode() {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("xpath", "//div[@id='cart-drawer-title']/span/span");
-			String minicart = Common.findElement("xpath", "//div[@id='cart-drawer-title']/span/span").getText();
-			Sync.waitElementPresent("xpath", "//a[@title='View Cart']");
+			
+			Sync.waitElementPresent(60,"xpath", "//a[@title='View Cart']");
 			Common.clickElement("xpath", "//a[@title='View Cart']");
 			Thread.sleep(8000);
-//			int size= Common.findElements("xpath","//button[@aria-label='Close'])[2]").size();
-//			if(size>0) {
-//				Sync.waitElementPresent("xpath", "//button[@aria-label='Close'])[2]");
-//				Common.clickElement("xpath", "//button[@aria-label='Close'])[2]");
-//			}
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the navigation to the view cart",

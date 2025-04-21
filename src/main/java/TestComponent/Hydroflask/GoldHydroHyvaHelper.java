@@ -2967,7 +2967,7 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
-					"User unabel to land opaymentpage");
+					"User unabel to land on paymentpage");
 	
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
