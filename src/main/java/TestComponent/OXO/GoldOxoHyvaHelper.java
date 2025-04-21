@@ -84,13 +84,13 @@ public class GoldOxoHyvaHelper
 			Sync.waitPageLoad();
 		 	
 
-			Sync.waitElementPresent("xpath", "//img[@alt='OXO logo. Takes to OXO homepage']");
+			Sync.waitElementPresent("xpath", "//img[@alt='Oxo store logo']");
               
-			String page = Common.findElement("xpath", "//img[@alt='OXO logo. Takes to OXO homepage']").getAttribute("alt");
+			String page = Common.findElement("xpath", "//img[@alt='Oxo store logo']").getAttribute("alt");
 			System.out.println(page);
 
 			Common.assertionCheckwithReport(
-					page.contains("home") && Common.getPageTitle().contains("OXO Good")
+					page.contains("Oxo") && Common.getPageTitle().contains("OXO Good")
 							|| Common.getPageTitle().contains("Homepage OXO"),
 					"validating store logo", "System directs to the Homepage", "Sucessfully navigate to home page",
 					"faield to naviagte to homepage");
