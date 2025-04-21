@@ -2217,11 +2217,9 @@ public void FUll_Payment(String dataSet) {
 		String Email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		try {
 
+			Sync.waitElementVisible(30, "xpath", "//input[@name='firstname']");
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));
-//			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			
-			
+			Common.textBoxInput("xpath", "//input[@name='lastname']", data.get(Dataset).get("LastName"));			
 			Common.textBoxInput("xpath", "//input[@id='email_address']", Email);
 			email = Common.findElement("xpath", "//input[@name='email']").getAttribute("value");
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
@@ -2229,6 +2227,8 @@ public void FUll_Payment(String dataSet) {
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
 			System.out.println(data.get(Dataset).get("Confirm Password"));
+			
+			Sync.waitElementVisible(30, "xpath", "//button[@title='Sign Up']");
 			Common.clickElement("xpath", "//button[@title='Sign Up']");
 			Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
 			String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
