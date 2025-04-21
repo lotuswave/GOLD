@@ -430,6 +430,17 @@
 </classes>
 </test>
 
-
+<test name="TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation" testid="DQA-3768" priority="P1" description="This script will cover validating the My Account page">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_158_My_Account_Page_Validation"/>
+        </classes>
+    </test>
+    
+    
+    <test name="TEST_DGLD_DB_US_ST_196 Validate_the_WriteUS_Form" testid="DQA-4537" priority="P1" description="To validate the functionality and behavior of the Contact Us form">
+        <classes>
+            <class name="TestExecute.Drybar_US.regressionTestcase.TEST_DGLD_DB_US_ST_196_Validated_the_Contact_US_in_the_footer_section"/>
+        </classes>
+    </test>
 
 </suite>
