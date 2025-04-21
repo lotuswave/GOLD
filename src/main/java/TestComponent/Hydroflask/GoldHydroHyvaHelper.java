@@ -2477,7 +2477,7 @@ public void FUll_Payment(String dataSet) {
 		try {
 			Sync.waitElementPresent("xpath", "//div[@x-text='cartSummaryCount']");
 			items = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
-			System.out.println(items);
+			System.out.println("items"+items);
 			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String miniitems = Common.findElement("xpath", "//span[@x-text='totalCartAmount']")
@@ -2511,8 +2511,8 @@ public void FUll_Payment(String dataSet) {
 			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
 			Common.mouseOverClick("xpath", "//button[@id='menu-cart-icon']");
 
-			Sync.waitElementPresent(30, "xpath", "//div[@x-text='cartSummaryCount']");
-			String cartproducts = Common.findElement("xpath", "//div[@x-text='cartSummaryCount']").getText();
+			Sync.waitElementPresent(30, "xpath", "//span[@x-text='totalCartAmount']");
+			String cartproducts = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 
 			Common.assertionCheckwithReport(cartproducts.equals(minicart),
 					"validating the products in the cart after creating new account ",
