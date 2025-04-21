@@ -33,7 +33,7 @@ public class TEST_DGLD_OSP_EMEA_E2E_003_Register_User_Partial_Gift_Code_Redempti
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");      
         Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        String Used_GiftCode=Osprey_ReEu.Gift_card("Partial Giftcard");
+        String Used_GiftCode=Osprey_ReEu.Gift_card("Partial Giftcard3");
         HashMap<String,String> Details=Osprey_ReEu.ordersummary_Details();
         String OrderNumber=Osprey_ReEu.addPaymentDetails("CCVisacard");
 //        Osprey_ReEu.Admin_signin("Login Details");
