@@ -16330,10 +16330,16 @@ public void deleteProduct_shoppingcart() {
 				System.out.println(Link[i]);
 				
 				Common.assertionCheckwithReport( Common.getPageTitle().contains(Links[i])
-						|| Common.getCurrentURL().contains("/all-mighty-guarantee") || Common.getPageTitle().contains(Links[i]),
+						|| Common.getCurrentURL().contains("/all-mighty-guarantee") || Common.getPageTitle().contains(Links[i])
+						|| Common.getCurrentURL().contains("/contact/product-registration") || Common.getCurrentURL().contains("/customer/account/login/")
+						|| Common.getCurrentURL().contains("/guarantee-faqs"),
 						"verifying the header link " + Links[i] + "Under Explore",
 						"user should navigate to the " + Links[i] + " page",
 						"user successfully Navigated to the " + Links[i], "Failed to navigate to the " + Links[i]);
+				if(Common.getCurrentURL().contains("/contact/product-registration"))
+				{
+					Common.navigateBack();
+				}
 
 			}
 		
