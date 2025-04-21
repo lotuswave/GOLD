@@ -7433,7 +7433,7 @@ public void FUll_Payment(String dataSet) {
 				String breadcrumbs = Common.findElement("xpath", "//nav[@id='breadcrumbs']")
 						.getAttribute("aria-label");
 				System.out.println(breadcrumbs);
-				String filter = Common.findElement("xpath", "//span[normalize-space()='Filter by:']").getText();
+				String filter = Common.findElement("xpath", "//h3[normalize-space()='Filter by:']").getText();
 				System.out.println(filter);
 				String Sort = Common
 						.findElement("xpath",
@@ -8764,7 +8764,7 @@ public void After_Pay_payment(String dataSet) throws Exception {
 //			Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
 //			Common.clickElement("xpath", "//button[@class='action primary checkout']");
 //			
-			Thread.sleep(3000);
+			Thread.sleep(8000);
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
 			Common.clickElement("xpath", "//a[contains(text(),'Authorize Test Payment')]");
 					}
@@ -10975,12 +10975,12 @@ public void PDP_Tabs(String Dataset) {
 	int i = 0;
 	try {
 		
-		int size=Common.findElements("xpath", "//section[@class='w-full']//span[text()='Product Details']").size();
+		int size=Common.findElements("xpath", "//section[@class='w-full']//h2[text()='Product Details']").size();
 		if(size>0 && Common.getCurrentURL().contains("preprod")) {
 		   for (i = 0; i < Links.length; i++) {
 			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[contains(text(),'" + Links[i] + "')]");
-			Common.clickElement("xpath", "//span[contains(text(),'" + Links[i] + "')]");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'" + Links[i] + "')]");
+			Common.clickElement("xpath", "//h3[contains(text(),'" + Links[i] + "')]");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			String title = Common.findElement("xpath", "(//div[@class='pb-12'])")
