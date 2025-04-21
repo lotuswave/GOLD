@@ -27,8 +27,8 @@ public class TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_s
 		     Osprey_ReEu.Login_Account("Account");
 		     Osprey_ReEu.search_product("SKU-10005235 -2QTY");
 		     Osprey_ReEu.addtocart("SKU-10005235 -2QTY");
-		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
-		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
+		     Osprey_ReEu.search_product("SKU-10003319-2QTY");
+		     Osprey_ReEu.addtocart("SKU-10003319-2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("sp address");
 		     Osprey_ReEu.selectshippingmethod("Sp Shipping Method");

@@ -25,8 +25,8 @@ public class TEST_DGLD_OSP_E2E_002_Registeruser_checkout_with_Klarna_Standard_sh
 			 String Description ="Register user checkout with Klarna  + Standard shipping";
 			 Osprey_ReEu.click_singinButton();
 		     Osprey_ReEu.Login_Account("Account");
-		     Osprey_ReEu.search_product("SKU-10005235 -3QTY");
-		     Osprey_ReEu.addtocart("SKU-10005235 -3QTY");
+		     Osprey_ReEu.search_product("SKU-10005235 -4QTY");
+		     Osprey_ReEu.addtocart("SKU-10005235 -4QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.RegaddDeliveryAddress("Account");
 		     Osprey_ReEu.selectshippingmethod("GroundShipping method");

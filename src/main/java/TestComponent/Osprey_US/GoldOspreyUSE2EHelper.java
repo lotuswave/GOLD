@@ -2330,8 +2330,9 @@ public void header_Shopbycollection(String Dataset) { {
 			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-			Thread.sleep(2);
+			Thread.sleep(1000);
 			product_quantity(Dataset);
+			
 //			Thread.sleep(4000);
 //			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 //			System.out.println(country);
@@ -2450,7 +2451,9 @@ public void header_Shopbycollection(String Dataset) { {
 //			Common.assertionCheckwithReport(name.contains(products) || Common.getPageTitle().contains(products),
 //					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 //					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
-//			product_quantity(Dataset);
+					
+			product_quantity(Dataset);
+			
 //			Thread.sleep(4000);
 //			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 //			System.out.println(country);
