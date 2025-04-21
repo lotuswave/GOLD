@@ -97,10 +97,10 @@
     </test> 
 
   <test name="Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card" testid="DQA-2336" priority="P1" description="This test case is to validate the checkout functionality by using a visa card for the Register user.">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card"/>
-        </classes>
-    </test>    
+<classes>
+<class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke.Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card"/>
+</classes>
+</test>   
 
  <test name="Test_DGLD_OS_COMMON_027_Guest_User_Checkout_Master_Card" testid="DQA-2354" priority="P1" description="This test case is to validate the checkout functionality using the master card for guest user.">
         <classes>
@@ -183,7 +183,7 @@ PRO Customer Checkout with Gift card Item Using Paypal method">
  
 <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover Verifying Register user Checkout with Paypal">
 <classes>
-<class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
+<class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke.Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
 </classes>
 </test>
  
