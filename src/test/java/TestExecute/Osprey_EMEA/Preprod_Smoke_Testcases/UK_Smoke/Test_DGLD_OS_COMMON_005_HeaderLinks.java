@@ -37,7 +37,6 @@ public class Test_DGLD_OS_COMMON_005_HeaderLinks {
 		      Osprey_ReEu.Expert_Advice("Expert Advice");
 		      Osprey_ReEu.Guarantee("Guarantee");
 		 
-	
 		        
 		} catch (Exception e) {
 
