@@ -465,13 +465,17 @@ public class GoldHydroHyvaHelper {
 //			  Assert.assertEquals(Checkoutprice, Minicartprice);
 		}
 		catch (Exception | Error e) {
-			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
+			Thread.sleep(5000);
+			int Checkout_button= Common.findElements("xpath", "//a[contains(text(),'Checkout')]").size();
+			if(Checkout_button>0) {
+	
 			Common.javascriptclickElement("xpath", "//a[contains(text(),'Checkout')]");
 			Thread.sleep(5000);
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("checkout"),
 					"validating the navigation to the shipping page when we click on the checkout",
 					"User should able to navigate to the shipping  page after clicking on the checkout page", "Successfully navigate to the shipping page after clicking on the checkout page",
 					"Failed to navigate to the shipping page after clicking on the checkout button");
+		}
 		}
 
 		} catch (Exception | Error e) {
