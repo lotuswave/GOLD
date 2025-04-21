@@ -34,7 +34,7 @@ public class TEST_DGLD_DB_US_ST_196_Validated_the_Contact_US_in_the_footer_secti
 		
 		@AfterTest
 		public void clearBrowser() {
-			//Common.closeAll();
+			Common.closeAll();
 			
 
 		}
