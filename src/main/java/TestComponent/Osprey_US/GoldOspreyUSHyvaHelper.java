@@ -2942,8 +2942,35 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		}
 
 	}
+	
+	public void Remove_minicart_Free_Product() {
+		// TODO Auto-generated method stub
+		try
+		{
+			int products=Common.findElements("xpath", "//button[contains(@aria-label, 'FREE')]").size();
+			for(int i=0;i<products;i++)
+			{
+				Thread.sleep(5000);
+					Common.clickElement("xpath", "//button[contains(@aria-label, 'FREE')]");
 
-
+					Thread.sleep(5000);
+					Common.clickElement("xpath", "//button[contains(text(),'OK')]");
+					Sync.waitPageLoad();
+					Thread.sleep(5000);
+					Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+					Thread.sleep(3000);
+					
+				}
+			System.out.println("free Products Removed or products are not avaliable");
+			
+		}
+		catch(Exception | Error e)
+		{
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
+	}
 
 	public void RegaddDeliveryAddress(String dataSet) {
 		// TODO Auto-generated method stub
@@ -9406,12 +9433,12 @@ public void MyFavorites_Guestuser(String Dataset) {
 			Common.clickElement("xpath", "//button[@aria-label='Remove " + products + "']");
 			Common.clickElement("xpath", "//button[contains(text(),'OK')]");
 			Sync.waitPageLoad(30);
-			Thread.sleep(12000);
+			Thread.sleep(14000);
 			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			String ordertotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']")
 					.replace(Symbol, "");
 			System.out.println("ordertotal"+    ordertotal);
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			Float ordervalue = Float.parseFloat(ordertotal);
 			System.out.println(ExpectedTotalAmmount2);
 			System.out.println(ordertotal);
@@ -10203,7 +10230,11 @@ try {
 		}
 		try {
 			Common.actionsKeyPress(Keys.PAGE_UP);
+			Thread.sleep(2000);
 		    String Subtotal = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(totalsData.subtotal)']").replace("$", ""); 
+		    Common.actionsKeyPress(Keys.PAGE_UP);
+		    System.out.println(Subtotal);
+		    Thread.sleep(2000);
 		    BigDecimal subtotalValue = new BigDecimal(Subtotal).setScale(2, BigDecimal.ROUND_HALF_UP); 
 		    
 	        String Discount = Common.getText("xpath", "//div[@x-text='hyva.formatPrice(segment.value)']").replace("$", "").replace("-", "");

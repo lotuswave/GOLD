@@ -24,6 +24,7 @@ public class Test_DGLD_OSP_US_BCST_045_Minicart_Validation {
 			    Osprey_ReEu.search_product("Simple product");                   
 			    Osprey_ReEu.simple_addtocart("Simple product");            
 			    Osprey_ReEu.click_minicart();
+			    Osprey_ReEu.Remove_minicart_Free_Product();                 //use only whenever we have free products
 			    Osprey_ReEu.clickontheproduct_and_image("Product");
 			    Osprey_ReEu.minicart_freeshipping();
 			    Osprey_ReEu.minicart_delete("Product");
