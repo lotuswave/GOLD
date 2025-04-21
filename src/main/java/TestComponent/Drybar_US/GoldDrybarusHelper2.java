@@ -11194,12 +11194,12 @@ public void Company(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Common.clickElement("xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 
@@ -11245,12 +11245,12 @@ public void Information(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Common.clickElement("xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			
@@ -11297,14 +11297,15 @@ public void Support(String Dataset) {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			Sync.waitElementPresent(30, "xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Thread.sleep(3000);
 			Common.findElement("xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Common.clickElement("xpath",
-					"//a[@title='"+ footerlinks[i] +"']");
+					"//ul//a[normalize-space()='"+ footerlinks[i] +"']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
+
 		
 			System.out.println(footerlinks[i]);
 			Common.assertionCheckwithReport(
@@ -12559,14 +12560,15 @@ public void newtab_FooterLinks(String Dataset) {
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
 				Sync.waitElementPresent(30, "xpath",
-						"//a[@title='"+ footerlinks[i] +"']");
+						"//ul//a[contains(text(),'"+ footerlinks[i] +"')]");
 				Thread.sleep(3000);
 				Common.findElement("xpath",
-						"//a[@title='"+ footerlinks[i] +"']");
+						"//ul//a[contains(text(),'"+ footerlinks[i] +"')]");
 				   Common.switchWindowsAfterClick("xpath",
-						"//a[@title='"+ footerlinks[i] +"']");
+						   "//ul//a[contains(text(),'"+ footerlinks[i] +"')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
+
 			
 				System.out.println(footerlinks[i]);
 				
