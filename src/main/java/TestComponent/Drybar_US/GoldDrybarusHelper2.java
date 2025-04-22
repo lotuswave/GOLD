@@ -6223,7 +6223,7 @@ public void FUll_Payment(String dataSet) {
     			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod") ) {
     				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
     				Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-    				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
+//    				Common.mouseOver("xpath", "//img[@alt='" + products + "']");
     				Thread.sleep(4000);
     				String productprice = Common.findElement("xpath", "(//span[@class='title-2xs leading-none']//span[@x-ref='normalPrice'])").getText().replace(symbol,"").replace(".00", "");
     				Common.clickElement("xpath", "//img[@alt='" + products + "']");
