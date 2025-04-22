@@ -130,7 +130,11 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_134_Registeruser_Checkout_with_Gift_Message_using_Klarna_payment"/>
 </classes>
 </test>
-
+<test name="Test_DGLD_HF_ST_131_DeclineALL_createaccount_Login_Checkout" testid="DQA-261" priority="P1" description="This test case is to verify the CCM Banner Functionalities of HYDROFLASK US GOLD.">
+<classes>
+<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HF_ST_131_DeclineALL_createaccount_Login_Checkout"/>
+</classes>
+</test>
 
         
 </suite>  
