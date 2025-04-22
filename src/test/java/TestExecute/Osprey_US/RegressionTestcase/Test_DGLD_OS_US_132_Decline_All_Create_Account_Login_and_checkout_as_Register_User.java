@@ -19,17 +19,25 @@ public class Test_DGLD_OS_US_132_Decline_All_Create_Account_Login_and_checkout_a
 
 		try {
         Osprey_ReEu.Verify_HomePage();
+        Osprey_ReEu.click_Createaccount();
+        Osprey_ReEu.create_account("Create Account");
         Osprey_ReEu.search_product("Product");
         Osprey_ReEu.addtocart("Product");
         Osprey_ReEu.minicart_Checkout();
         Osprey_ReEu.RegaddDeliveryAddress("Account");
         Osprey_ReEu.selectshippingmethod("GroundShipping method");
-        Osprey_ReEu.clickSubmitbutton_Shippingpage();
-        Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
-        Osprey_ReEu.signout();
-        Osprey_ReEu.click_singinButton();
-        Osprey_ReEu.Login_Account("Account");
-		} catch (Exception e) {
+        Osprey_ReEu.clickSubmitbutton_Shippingpage();      
+        if(Common.getCurrentURL().contains("https://mcloud-na-preprod.osprey.com/")) {
+        	System.out.println("Executed In PRE-PROD");
+        	Osprey_ReEu.updatePaymentAndSubmitOrder("CCAmexcard");
+            Osprey_ReEu.signout();
+            Osprey_ReEu.click_singinButton();
+            Osprey_ReEu.Login_Account("Account");
+        }else {
+        	System.out.println("Executed In PROD");  	
+        }
+		
+	} catch (Exception e) {
 
 			Assert.fail(e.getMessage(), e);
 		}
