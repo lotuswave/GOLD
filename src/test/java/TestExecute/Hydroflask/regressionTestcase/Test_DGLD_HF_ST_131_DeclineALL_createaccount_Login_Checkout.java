@@ -9,7 +9,7 @@ import TestComponent.Hydroflask.GoldHydroHyvaHelper;
 import TestLib.Common;
 import TestLib.Login;
 
-public class Test_DGLD_HF_ST_132_DeclineALL_createaccount_Login_Checkout {
+public class Test_DGLD_HF_ST_131_DeclineALL_createaccount_Login_Checkout {
 
 	String datafile = "Hydroflask//GoldHydroTestData.xlsx";
 	GoldHydroHyvaHelper Hydro = new GoldHydroHyvaHelper(datafile,"DataSet");

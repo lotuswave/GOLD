@@ -48,11 +48,6 @@
 <class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_014_Placeorder_Employee_user_multipleproducts_with_giftcardcode_discount_and_3DSecure_Payment_Method"/>
 </classes>
 </test>
-<test name="Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment " testid="DQA-4255" priority="P1" description="This script will cover Registereduser checkout functionality of Hydroflask using 3D Payment">
-<classes>
-<class name="TestExecute.Hydroflask.regressionTestcase.Test_DGLD_HYF_US_ST_016_RegisterUser_Checkout_using_GiftCard_and_Payment_with_3D_Payment"/>
-</classes>
-</test>
 <test name="TEST_DGLD_HYF_ST_020_EmployeeCustomer_Checkout_with_Gift_card_MultipleLineItem_Using_CC" testid="DQA-4259" priority="P1" description="This script will cover EmployeeCustomer with Gift card MultipleLineItem Using CC">
 <classes>
 <class name="TestExecute.Hydroflask.regressionTestcase.TEST_DGLD_HYF_ST_020_EmployeeCustomer_Checkout_with_Gift_card_MultipleLineItem_Using_CC"/>
