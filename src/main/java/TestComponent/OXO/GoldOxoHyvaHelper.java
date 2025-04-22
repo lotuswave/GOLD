@@ -5588,8 +5588,8 @@ catch(Exception | Error e)
 			Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
 			Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
 			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
-			Sync.waitPageLoad();
+			//String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
+			//Sync.waitPageLoad();
 			Thread.sleep(5000);
 			Common.textBoxInput("xpath", "//input[@name='city' and @data-form='billing']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
@@ -5609,7 +5609,7 @@ catch(Exception | Error e)
                  Thread.sleep(3000);
                  String Shippingvalue = Common.findElement("xpath", "//select[@name='region' and @data-form='billing']")
                          .getAttribute("value");
-                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
+                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getText();
 	              System.out.println(Shipping);
                  System.out.println(Shippingvalue);
 			 }
