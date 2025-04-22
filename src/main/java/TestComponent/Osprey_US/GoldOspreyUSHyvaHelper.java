@@ -146,7 +146,7 @@ public class GoldOspreyUSHyvaHelper {
 	{
 		try
 		{
-			int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+			int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 			System.out.println(size);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Backpacks"),
@@ -294,7 +294,7 @@ public class GoldOspreyUSHyvaHelper {
 public void Login_Account(String dataSet) {
 		// TODO Auto-generated method stub
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
@@ -2225,21 +2225,19 @@ public void header_Shopbycollection(String Dataset) { {
 			{
 			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Products"));
 			Common.actionsKeyPress(Keys.ENTER);
-			Sync.waitPageLoad();
 			Thread.sleep(2000);
 			String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 			System.out.println(productsearch);
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
 					"enter product name will display in the search box", "user enter the product name in  search box",
 					"Failed to see the product name");
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			}
 			else
 			{
 				Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", data.get(Dataset).get("Prod Product"));
 				Common.actionsKeyPress(Keys.ENTER);
-				Sync.waitPageLoad();
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				String productsearch = Common.findElement("xpath", "//span[@id='algolia-srp-title']").getText();
 				System.out.println(productsearch);
 //				Common.assertionCheckwithReport(productsearch.contains(Prod), "validating the search functionality",
@@ -2259,9 +2257,6 @@ public void header_Shopbycollection(String Dataset) { {
 		}
 
 	}
-
-
-
 
 
 	public void addtocart(String Dataset) {
@@ -2297,7 +2292,7 @@ public void header_Shopbycollection(String Dataset) { {
 			}
 
 			Sync.waitPageLoad(30);
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			
 			if(Common.getCurrentURL().contains("preprod")) {
 				Thread.sleep(2000);
@@ -2309,8 +2304,7 @@ public void header_Shopbycollection(String Dataset) { {
 					
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
-//				Sync.waitPageLoad();
-				Thread.sleep(4000);
+				Thread.sleep(3000);
 				Sync.waitElementPresent("xpath", "//div[@data-option-label='" + productcolor + "']");
 				Common.clickElement("xpath", "//div[@data-option-label='" + productcolor + "']");
 				}
@@ -2325,8 +2319,7 @@ public void header_Shopbycollection(String Dataset) { {
 			
 			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
 			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-//			Sync.waitPageLoad(30);
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			Sync.waitElementVisible(30, "xpath", "//h1[@itemprop='name']");
 			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
@@ -2335,8 +2328,8 @@ public void header_Shopbycollection(String Dataset) { {
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			product_quantity(Dataset);
-			Thread.sleep(3000);
-			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
+//			Thread.sleep(3000);
+//			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 //	System.out.println(country);
 			Thread.sleep(3000);
 
@@ -2888,7 +2881,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 	public void minicart_Checkout() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			click_minicart();
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
@@ -2897,7 +2890,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 			Sync.waitElementPresent(30, "xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Common.clickElement("xpath", "//a[contains(@class,'inline-flex btn btn-primary text')]");
 			Sync.waitPageLoad();
-			Thread.sleep(7000);
+			Thread.sleep(5000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
 //			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
 //			System.out.println(checkout);
@@ -2924,7 +2917,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 	public void click_minicart() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			Common.actionsKeyPress(Keys.PAGE_UP);
 			Sync.waitElementPresent("xpath", "//button[@id='menu-cart-icon']");
 			Common.clickElement("xpath", "//button[@id='menu-cart-icon']");
@@ -3148,7 +3141,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		String prodmethod = data.get(Dataset).get("Prod methods");
  
 		try {
-			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
+			if (Common.getCurrentURL().contains("stage") ||  Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 			Sync.waitElementVisible(30,"xpath", "//div[@id='shipping-methods']");
 	    	int size = Common.findElements("xpath", "//div[@id='shipping-methods']").size();
@@ -3179,7 +3172,7 @@ public void Addtocart_From_MyFavorites(String Dataset) {
 		// TODO Auto-generated method stub
 		String expectedResult = "click the submit button to navigate to payment page";
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			Common.getPageTitle();
 		}
 
@@ -7322,8 +7315,8 @@ public void minicart_validation(String Dataset) {
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "(//div[@aria-label='PayPal'])[2]");
+			Common.clickElement("xpath", "(//div[@aria-label='PayPal'])[2]");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			Thread.sleep(8000);
@@ -8934,8 +8927,16 @@ public void MyFavorites_Guestuser(String Dataset) {
 	}
 	}
 	public void Decline_All() {
-		Common.clickElement("xpath", "//button[@id='truste-consent-required']");
+		try {
+			Sync.waitElementPresent("id", "truste-consent-required");
+			Common.clickElement("id", "truste-consent-required");
+			System.out.println("Decline all has been clicked");
+		} catch (Exception e) {
+			Common.clickElement("id", "truste-consent-required");
+		}
+		
 	}
+
 
 	public void Edit_Name(String Dataset) {
 		// TODO Auto-generated method stub
@@ -17357,14 +17358,10 @@ public String create_account(String Dataset) {
 		Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 				data.get(Dataset).get("Confirm Password"));
 		System.out.println(data.get(Dataset).get("Confirm Password"));
-		Thread.sleep(4000);
-		if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-		{
-		Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-		}
+		
+		Sync.waitElementVisible(30, "xpath", "//button[@title='Sign Up']");
 		Common.clickElement("xpath", "//button[@title='Sign Up']");
-		//Thread.sleep(2000);
-		Sync.waitElementPresent(30,"xpath", "//div[@ui-id='message-success']");
+		Sync.waitElementPresent(30, "xpath", "//div[@ui-id='message-success']");
 		String message = Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
 		System.out.println(message);
 		Common.assertionCheckwithReport(
