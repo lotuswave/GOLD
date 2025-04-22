@@ -156,7 +156,9 @@ public class OspreyEMEA_HYVA {
 	public void Verify_Homepage() {
 		try {
 //			close_add();
-		int size = Common.findElements("xpath", "//a[@aria-label='Go to Home page']").size();
+			Close_Geolocation();
+			Thread.sleep(5000);
+		int size = Common.findElements("xpath", "//img[@alt='Osprey store logo']").size();
 		System.out.println(size);
 		System.out.println(Common.getPageTitle());
 		Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Home page") || size > 0 && Common.getPageTitle().contains("Osprey"),
@@ -271,13 +273,12 @@ public class OspreyEMEA_HYVA {
 
 	public String Create_Account(String Dataset) {
 		// TODO Auto-generated method stub
-		//String email = "";
 		String email = Common.genrateRandomEmail(data.get(Dataset).get("Email"));
 		String Store= data.get(Dataset).get("Store");
 		try {
 			Common.textBoxInput("xpath", "//input[@name='firstname']", data.get(Dataset).get("FirstName"));
 			Common.textBoxInput("id", "lastname", data.get(Dataset).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@id='email_address']", email);		
+			Common.textBoxInput("xpath", "//input[@id='email_address']", email);
 			Common.textBoxInput("xpath", "//input[@name='password']", data.get(Dataset).get("Password"));
 			Common.textBoxInput("xpath", "//input[@name='password_confirmation']",
 					data.get(Dataset).get("Confirm Password"));
@@ -536,6 +537,45 @@ public class OspreyEMEA_HYVA {
 		}
 
 	}
+	
+	public void Login_with_Create_Account_Email(String dataSet) {
+		// TODO Auto-generated method stub
+		try {
+			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
+				Sync.waitPageLoad();
+				Common.textBoxInput("id", "email", dataSet);
+			} else {
+				Common.textBoxInput("id", "email", dataSet);
+			}
+			Common.textBoxInput("id", "pass", "Lotuswave@123");
+			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+			{
+				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+			}
+			Common.clickElement("xpath", "//button[@name='send']");
+			Sync.waitPageLoad();
+			Thread.sleep(6000);
+			System.out.println(Common.getPageTitle());
+			Common.assertionCheckwithReport(
+					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Customer Login")
+							|| Common.getPageTitle().contains("Osprey") || Common.getPageTitle().contains("Favourites Sharing"),
+					"To validate the user lands on Home page after successfull login",
+					"After clicking on the signIn button it should navigate to the Home page",
+					"user Sucessfully navigate to the Home page after clicking on the signIn button",
+					"Failed to signIn and not navigated to the Home page ");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ExtenantReportUtils.addFailedLog("To validate the user Navigate to Home page after successfull login",
+					"After clicking on the signin button it should navigate to the Home page",
+					"Unable to navigate the user to the home after clicking on the SignIn button",
+					Common.getscreenShotPathforReport("Failed to signIn and not navigated to the Home page "));
+
+			Assert.fail();
+		}
+
+	}
+	
 
 	public void Account_page_Validation(String Dataset) throws Exception {
 		// TODO Auto-generated method stub
@@ -16331,7 +16371,23 @@ public void deleteProduct_shoppingcart() {
 					Common.getscreenShot("Failed to navigate to the " + Links[i] + "pages"));
 			Assert.fail();
 	}
-	}	
+	}
+
+	public String EmailID_from_successpage() {
+		// TODO Auto-generated method stub
+		String Email="";
+		try
+		{
+			 Email=Common.findElement("xpath", "//div[contains(@class,'checkout-success')]//strong").getText().replace("Executed In PRE-PROD", "");
+			System.out.println(Email);
+		}
+		catch(Exception | Error e)
+		{
+			Assert.fail();
+		}
+		return Email;
+	}
+
 	
 }
 
