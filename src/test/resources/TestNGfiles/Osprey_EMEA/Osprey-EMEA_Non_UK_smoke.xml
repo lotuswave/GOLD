@@ -43,9 +43,6 @@
         </classes>
     </test>
 
-
-
-
  <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
         <classes>
             <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
