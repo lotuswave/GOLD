@@ -183,12 +183,15 @@
         <classes>
             <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_023__Register_User_Checkout_with_invalid_CC_Credentials"/>
         </classes>
-    </test> 
-  <test name="Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card" testid="DQA-2336" priority="P1" description="This test case is to validate the checkout functionality by using a visa card for the Register user.">
-<classes>
-<class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke.Test_DGLD_OS_COMMON_025_Register_user_Checkout_Visa_card"/>
-</classes>
-</test>    
+    </test>
+	<test
+		name="Test_DGLD_OS_COMMON_052_Change_Password_and_Email_from_AccountInformation_Page" testid="DQA-1950" priority="P1"
+		description="This test case is to validate the change password and email from account information page.">
+		<classes>
+			<class
+				name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_052_Change_Password_and_Email_from_AccountInformation_Page" />
+		</classes>
+	</test>    
  <test name="Test_DGLD_OS_COMMON_027_Guest_User_Checkout_Master_Card" testid="DQA-3567" priority="P1" description="This test case is to validate the checkout functionality using the master card for guest user.">
         <classes>
             <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_027_Guest_User_Checkout_Master_Card"/>
@@ -465,12 +468,16 @@ Guest userCheckout using 3DSecure Payment Method With DiscountCode">
             <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_035_Track_My_Order_For_Register_User"/>
         </classes>
     </test>
- 
-    <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover Verifying Register user Checkout with Paypal">
-<classes>
-<class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.UK_Smoke.Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
-</classes>
-</test>
+
+	<test
+		name="Test_DGLD_OS_COMMON_136_Decline_All_Create_Account_Login_and_checkout_as_Register_User"
+		testid="DQA-2276" priority="P1"
+		description="This script will cover verifying user flow from cookie decline to checkout as a registered user">
+		<classes>
+			<class
+				name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_136_Decline_All_Create_Account_Login_and_checkout_as_Register_User" />
+		</classes>
+	</test>
  
     <test name="TEST_DGLD_OS_COMMON_127_Register_user_Products_are_added_to_the_Wishlist_from_the_PDP_page_and_Checkout_from_the_ShoppingCart_page_with_Your_Favorites_Products" testid="DQA-3528" priority="P1" description="This script will cover Verifying_Add_To_Cart_and_from_your_cart_Favorites_List">
         <classes>
