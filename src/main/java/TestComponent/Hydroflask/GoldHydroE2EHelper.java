@@ -391,11 +391,6 @@ public class GoldHydroE2EHelper {
             String Checkoutprice="";
 		try {
 			Thread.sleep(4000);
-//			String PDPprice=Common.findElement("xpath", "(//span[@data-price-type='finalPrice'])[2]").getText();
-//            System.out.println(PDPprice);
-//            String Minicartprice=Common.findElement("xpath", "//span[contains(@class,'text-sm leading')]//span[@class='price']").getText();
-//            System.out.println(Minicartprice);
-//            Assert.assertEquals(PDPprice, Minicartprice);
 			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
 			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent(30, "xpath", "//a[contains(text(),'Checkout')]");
@@ -2780,7 +2775,7 @@ System.out.println(MyFavorites);
 
 	public void Add_Free_Gift() throws Exception {
 		try {
-			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
+			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
 			{
 				System.out.println("Free gift Popud Displayed");
 				Sync.waitElementPresent(50, "xpath", "//span[text()='Add to cart']");
@@ -3489,8 +3484,8 @@ public void Remove_GiftCode() {
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button-label')])[1]");
+			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button-label')])[1]");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			Thread.sleep(8000);

@@ -478,7 +478,7 @@ public class GoldHydroHyvaHelper {
 		/**
 		 * Free gift popup handling
 		 */
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		int hiddenPopupElements= Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size();
 		if (hiddenPopupElements > 0) {
             System.out.println("Free gift popup is not currently displayed.");
