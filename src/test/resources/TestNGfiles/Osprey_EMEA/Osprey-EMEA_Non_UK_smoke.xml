@@ -5,120 +5,170 @@
     </listeners>
   
     
-     <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
+     <test name="Test_DGLD_OS_IT_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke\Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke.Test_DGLD_OS_IT_001_Create_Account_Funtionality"/>
+        </classes>
+    </test> 
+
+
+  <test name="Test_DGLD_OS_IT_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke.Test_DGLD_OS_IT_032_Register_user_Checkout_with_Paypal"/>
+        </classes>
+    </test>
+
+ <test name="Test_DGLD_OS_IT_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke.Test_DGLD_OS_IT_043_Guest_User_Checkout_Discount_Visa_card"/>
+        </classes>
+    </test>
+
+  <test name="TEST_DGLD_OS_IT_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke.TEST_DGLD_OS_IT_053_Validate_PLP_page"/>
+        </classes>
+    </test>
+
+ <test name="Test_DGLD_OS_IT_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke.Test_DGLD_OS_IT_054_Validating_the_PDP_page"/>
+        </classes>
+    </test>
+
+
+  <test name="Test_DGLD_OS_IT_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke.Test_DGLD_OS_IT_064_Validating_the_Search_Results_Page"/>
+        </classes>
+    </test>
+
+
+
+
+
+ 
+    <test name="Test_DGLD_OS_DK_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke.Test_DGLD_OS_DK_001_Create_Account_Funtionality"/>
+        </classes>
+    </test> 
+
+
+  <test name="Test_DGLD_OS_DK_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke.Test_DGLD_OS_DK_032_Register_user_Checkout_with_Paypal"/>
+        </classes>
+    </test>
+
+ <test name="Test_DGLD_OS_DK_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke.Test_DGLD_OS_DK_043_Guest_User_Checkout_Discount_Visa_card"/>
+        </classes>
+    </test>
+
+  <test name="TEST_DGLD_OS_DK_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke.TEST_DGLD_OS_DK_053_Validate_PLP_page"/>
+        </classes>
+    </test>
+
+ <test name="Test_DGLD_OS_DK_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke.Test_DGLD_OS_DK_054_Validating_the_PDP_page"/>
+        </classes>
+    </test>
+
+
+  <test name="Test_DGLD_OS_DK_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke.Test_DGLD_OS_DK_064_Validating_the_Search_Results_Page"/>
+        </classes>
+    </test>
+
+
+
+
+
+
+  <test name="Test_DGLD_OS_ES_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke.Test_DGLD_OS_ES_001_Create_Account_Funtionality"/>
+        </classes>
+    </test> 
+
+
+  <test name="Test_DGLD_OS_ES_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke.Test_DGLD_OS_ES_032_Register_user_Checkout_with_Paypal"/>
+        </classes>
+    </test>
+
+ <test name="Test_DGLD_OS_ES_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke.Test_DGLD_OS_ES_043_Guest_User_Checkout_Discount_Visa_card"/>
+        </classes>
+    </test>
+
+  <test name="TEST_DGLD_OS_ES_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke.TEST_DGLD_OS_ES_053_Validate_PLP_page"/>
+        </classes>
+    </test>
+
+ <test name="Test_DGLD_OS_ES_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke.Test_DGLD_OS_ES_054_Validating_the_PDP_page"/>
+        </classes>
+    </test>
+
+
+  <test name="Test_DGLD_OS_ES_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke.Test_DGLD_OS_ES_064_Validating_the_Search_Results_Page"/>
+        </classes>
+    </test>
+
+
+
+
+
+
+<test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
+        <classes>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke.Test_DGLD_OS_FR_001_Create_Account_Funtionality"/>
         </classes>
     </test> 
 
 
   <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke\Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke.Test_DGLD_OS_FR_032_Register_user_Checkout_with_Paypal"/>
         </classes>
     </test>
 
  <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke\Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke.Test_DGLD_OS_FR_043_Guest_User_Checkout_Discount_Visa_card"/>
         </classes>
     </test>
 
   <test name="TEST_DGLD_OS_COMMON_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke\TEST_DGLD_OS_COMMON_053_Validate_PLP_page"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke.TEST_DGLD_OS_FR_053_Validate_PLP_page"/>
         </classes>
     </test>
 
  <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke\Test_DGLD_OS_COMMON_054_Validating_the_PDP_page"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke.Test_DGLD_OS_FR_054_Validating_the_PDP_page"/>
         </classes>
     </test>
 
 
   <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.DK_Smoke\Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
-        </classes>
-    </test> 
-
-
-  <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card"/>
-        </classes>
-    </test>
-
-  <test name="TEST_DGLD_OS_COMMON_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\TEST_DGLD_OS_COMMON_053_Validate_PLP_page"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\Test_DGLD_OS_COMMON_054_Validating_the_PDP_page"/>
-        </classes>
-    </test>
-
-
-  <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.ES_Smoke\Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page"/>
-        </classes>
-    </test>
-
-
-
-
- <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke\Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
-        </classes>
-    </test> 
-
-
-  <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke\Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke\Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card"/>
-        </classes>
-    </test>
-
-  <test name="TEST_DGLD_OS_COMMON_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke\TEST_DGLD_OS_COMMON_053_Validate_PLP_page"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke\Test_DGLD_OS_COMMON_054_Validating_the_PDP_page"/>
-        </classes>
-    </test>
-
-
-  <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke\Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.Fr_Smoke.Test_DGLD_OS_FR_064_Validating_the_Search_Results_Page"/>
         </classes>
     </test>
 
@@ -128,83 +178,40 @@
 
 <test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke\Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke.Test_DGLD_OS_SW_001_Create_Account_Funtionality"/>
         </classes>
     </test> 
 
 
   <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke\Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke.Test_DGLD_OS_SW_032_Register_user_Checkout_with_Paypal"/>
         </classes>
     </test>
 
  <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke\Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke.Test_DGLD_OS_SW_043_Guest_User_Checkout_Visa_card"/>
         </classes>
     </test>
 
   <test name="TEST_DGLD_OS_COMMON_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke\TEST_DGLD_OS_COMMON_053_Validate_PLP_page"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke.TEST_DGLD_OS_SW_053_Validate_PLP_page"/>
         </classes>
     </test>
 
  <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke\Test_DGLD_OS_COMMON_054_Validating_the_PDP_page"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke.Test_DGLD_OS_SW_054_Validating_the_PDP_page"/>
         </classes>
     </test>
 
 
   <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
         <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.It_Smoke\Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page"/>
+            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke.Test_DGLD_OS_SW_064_Validating_the_Search_Results_Page"/>
         </classes>
     </test>
-
-
-
-
-
-<test name="Test_DGLD_OS_COMMON_001_Create_Account_Funtionality" testid="DQA-1951" priority="P1" description="This script will cover creating a new user account">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke\Test_DGLD_OS_COMMON_001_Create_Account_Funtionality"/>
-        </classes>
-    </test> 
-
-
-  <test name="Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal" testid="DQA-2276" priority="P1" description="This script will cover registered user checkout with PayPal">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke\Test_DGLD_OS_COMMON_032_Register_user_Checkout_with_Paypal"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card" testid="DQA-2347" priority="P1" description="This script will cover guest user checkout with discount using Visa card">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke\Test_DGLD_OS_COMMON_043_Guest_User_Checkout_Discount_Visa_card"/>
-        </classes>
-    </test>
-
-  <test name="TEST_DGLD_OS_COMMON_053_Validate_PLP_page" testid="DQA-1981" priority="P1" description="This script will cover validating the product listing page (PLP)">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke\TEST_DGLD_OS_COMMON_053_Validate_PLP_page"/>
-        </classes>
-    </test>
-
- <test name="Test_DGLD_OS_COMMON_054_Validating_the_PDP_page" testid="DQA-1977" priority="P1" description="This script will cover validating the product details page (PDP)">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke\Test_DGLD_OS_COMMON_054_Validating_the_PDP_page"/>
-        </classes>
-    </test>
-
-
-  <test name="Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page" testid="DQA-1958" priority="P1" description="This script will cover validating the search results page">
-        <classes>
-            <class name="TestExecute.Osprey_EMEA.Preprod_Smoke_Testcases.SW_Smoke\Test_DGLD_OS_COMMON_064_Validating_the_Search_Results_Page"/>
-        </classes>
-    </test>
-    
     
 </suite>
