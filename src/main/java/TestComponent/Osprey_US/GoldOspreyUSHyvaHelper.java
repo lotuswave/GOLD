@@ -69,20 +69,19 @@ public class GoldOspreyUSHyvaHelper {
 		return r;
 	}
 
-	
 	public void verifingHomePage() {
 		// TODO Auto-generated method stub
 		try {
 			Sync.waitPageLoad();
-			if(Common.getCurrentURL().contains("osprey.com/gb/"))
+			if(Common.getCurrentURL().contains("us/es/"))
 			{
 				Close_Geolocation();
 				Thread.sleep(5000);
 			     acceptPrivacy();
-				int size = Common.findElements("xpath", "//img[@alt='Store logo']").size();
+				int size = Common.findElements("css", "img[alt='Store logo']").size();
 				System.out.println(size);
 				System.out.println(Common.getPageTitle());
-				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey"),
+				Common.assertionCheckwithReport(size > 0 && Common.getPageTitle().contains("Osprey")|| size > 0 && Common.getPageTitle().contains("Backpacks"),
 						"validating store logo on the homwpage",
 						"System directs the user to the Homepage and store logo should display",
 						"Sucessfully user navigates to the home page and logo has been displayed",
@@ -135,7 +134,6 @@ public class GoldOspreyUSHyvaHelper {
 
 		
 	}
-
 	public void close_countryselector() throws Exception{
 		
 		Sync.waitElementPresent("xpath", "(//button[@aria-label='Close, button.'])[4]");
@@ -268,11 +266,11 @@ public class GoldOspreyUSHyvaHelper {
 		try {
 			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
 			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//a[@title='Sign In']");
+			Common.clickElement("id", "customer.header.sign.in.link");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			Common.assertionCheckwithReport(
-					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In"),
+			String heading = Common.findElement("xpath", "//fieldset[@class='fieldset login']//legend/h2").getText();
+			Common.assertionCheckwithReport(heading.equals("Sign In")|| heading.equals("Ingresar"),
 					"To validate the user navigates to the signin page",
 					"user should able to land on the signIn page after clicking on the sigIn button",
 					"User Successfully clicked on the singIn button and Navigate to the signIn page",
@@ -2290,17 +2288,16 @@ public void header_Shopbycollection(String Dataset) { {
 					break;
 				}
 			}
-
-			Sync.waitPageLoad(30);
-			Thread.sleep(3000);
+			
+			Thread.sleep(2000);
 			
 			if(Common.getCurrentURL().contains("preprod")) {
 				Thread.sleep(2000);
-				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
-				{
-					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
-				}
+//				if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0)
+//				{
+//					Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+//					Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+//				}
 					
 				Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 				Common.clickElement("xpath", "//img[@alt='" + products + "']");
@@ -4322,14 +4319,13 @@ public void Validate_retailerlocations() {
 		else {
 			try {
 				Thread.sleep(1000);
-				Sync.waitElementPresent(30, "xpath", " //h1[normalize-space()='Thank you for your purchase!']");//
-				String sucessMessage = Common.getText("xpath",
-						" //h1[normalize-space()='Thank you for your purchase!']");//
+				Sync.waitElementPresent(30, "css", "div[class*='checkout-success'] h1");
+				String sucessMessage = Common.getText("css", "div[class*='checkout-success'] h1");
 
 				// Tell_Your_FriendPop_Up();
-				int sizes = Common.findElements("xpath", " //h1[normalize-space()='Thank you for your purchase!']")
+				int sizes = Common.findElements("css", "div[class*='checkout-success'] h1")
 						.size();//
-				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
+				Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") ||sucessMessage.contains("Gracias por su compra!"),
 						"verifying the product confirmation", expectedResult,
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unabel to go orderconformation page");
@@ -4423,8 +4419,8 @@ public void Validate_retailerlocations() {
 						Common.clickElement("xpath", "//button[@class='action primary checkout']");
 
 					} else if (Common.getCurrentURL().contains("/success/")) {
-						Sync.waitElementVisible(30, "xpath", "//h1[@class='page-title-wrapper']");
-						String sucessmessage = Common.getText("xpath", "//h1[@class='page-title-wrapper']");
+						Sync.waitElementVisible(30, "xpath", "//div[contains(@class,'checkout-success')]//h1");
+						String sucessmessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
 						System.out.println(sucessmessage);
 					} else {
 						Assert.fail();
@@ -4446,15 +4442,15 @@ public void Validate_retailerlocations() {
 
 			} else {
 				Thread.sleep(1000);
-				int savedcard=Common.findElements("xpath", "//div[@class='mb-4' and @x-show]").size();
+				int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
 				if(savedcard>0)
 				{
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
-				
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				
+
+				Thread.sleep(1000);
+				Common.switchFrames("xpath", "//div[@id='stripe-element']//iframe");
 				
 				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
 				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
@@ -4499,9 +4495,9 @@ public void Validate_retailerlocations() {
 
 					} else if (Common.getCurrentURL().contains("/success/")) {
 						Sync.waitElementPresent(30, "xpath",
-								" //h1[normalize-space()='Thank you for your purchase!']");
+								"//div[contains(@class,'checkout-success')]//h1");
 						String sucessmessage = Common.getText("xpath",
-								" //h1[normalize-space()='Thank you for your purchase!']");
+								"//div[contains(@class,'checkout-success')]//h1");
 						System.out.println(sucessmessage);
 					} else {
 						Assert.fail();
@@ -9981,10 +9977,10 @@ public void MyFavorites_Guestuser(String Dataset) {
 			Sync.waitElementVisible(40,"xpath", "//div[@ui-id='message-success']");
 			Common.scrollIntoView("xpath", "//div[@ui-id='message-success']");
 			expectedResult = "It should apply discount on your price.If user enters invalid promocode it should display coupon code is not valid message.";
-			String discountcodemsg = Common.getText("xpath", "//span[text()='Your coupon was successfully applied.']");
+			String discountcodemsg = Common.getText("xpath", "//div[@ui-id='message-success']");
 			System.out.println(discountcodemsg);
 			Common.assertionCheckwithReport(discountcodemsg.contains("Your coupon was successfully")||discountcodemsg.contains("Su cupón fue aplicado con éxito."),
-					"verifying pomocode", expectedResult, "promotion code working as expected",
+					"verifying pomocode", expectedResult, "promotion code working as expected",                   
 					"Promation code is not applied");
 
 //			Common.scrollIntoView("xpath", "//div[@class='item subtotal']//span[contains(@class,'value')]");
@@ -10859,11 +10855,11 @@ public void Gift_card(String dataSet) {
 			if(URL.contains("stage")|| URL.contains("preprod")) {
 			Thread.sleep(3000);
 			
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");	
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+		Sync.waitElementPresent("xpath", "//div[contains(@class,'amcard-field')]");	
+		Common.clickElement("xpath", "//div[contains(@class,'amcard-field')]");
 		Common.textBoxInput("xpath","//input[@x-model='giftCardCode']", data.get(dataSet).get("GiftCard3_Stage"));
 		Common.actionsKeyPress(Keys.ARROW_UP);
-		Common.clickElement("xpath","//button[@aria-label='Add Code']");
+		Common.clickElement("xpath","(//button[contains(@class,'btn btn-primary')])[2]"); 
 		//Thread.sleep(2000);
 		Sync.waitElementVisible(30,"xpath", "//div[@ui-id='message-success']");
 		String successmsg=Common.findElement("xpath", "//div[@ui-id='message-success']").getText();
