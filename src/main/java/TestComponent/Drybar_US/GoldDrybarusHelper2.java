@@ -8723,6 +8723,12 @@ public void After_Pay_payment(String dataSet) throws Exception {
 	try {
 		Sync.waitPageLoad();
 		Thread.sleep(4000);
+		if(Common.findElements("xpath", "//div[@x-ref='freegift']").size()>0)
+		{
+			Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+			Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+		}
+
 		Sync.waitElementClickable("xpath", "//label[@for='payment-method-stripe_payments']");
 		int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
 
