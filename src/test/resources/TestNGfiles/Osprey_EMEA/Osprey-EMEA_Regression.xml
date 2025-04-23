@@ -508,6 +508,11 @@ Guest userCheckout using 3DSecure Payment Method With DiscountCode">
             <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_057_Register_user_Checkout_with_2Day_Shipping_method"/>
         </classes>
     </test>  
+     <test name="Test_DGLD_OS_COMMON_010_Find_a_Dealer" testid="DQA-1979" priority="P1" description="This script will cover find a Dealer">
+    <classes>
+         <class name="TestExecute.Osprey_EMEA.regressionTestcase.Test_DGLD_OS_COMMON_010_Find_a_Dealer"/>
+    </classes>
+    </test>
     
 </suite>
    
