@@ -87,7 +87,6 @@ public class OspreyEMEA_HYVA {
 			if(Common.getCurrentURL().contains(url))
 			{
 				Close_Geolocation();
-				Thread.sleep(5000);
 			     acceptPrivacy();
 				int size = Common.findElements("css", "img[alt='Osprey store logo']").size();
 				System.out.println(size);
@@ -353,12 +352,11 @@ public class OspreyEMEA_HYVA {
 	public void click_singinButton() {
 		// TODO Auto-generated method stub
 		try {
-			Thread.sleep(4000);
 			Sync.waitElementPresent("id", "customer-menu");
 			Common.clickElement("id", "customer-menu");
 			Common.clickElement("id", "customer.header.sign.in.link");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 			Common.assertionCheckwithReport(
 					Common.getText("xpath", "//fieldset[@class='fieldset login']//legend/h2").equals("Sign In") || Common.getCurrentURL().contains("customer/account/login"),
 					"To validate the user navigates to the signin page",
@@ -504,7 +502,6 @@ public class OspreyEMEA_HYVA {
 		// TODO Auto-generated method stub
 		try {
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("osprey.com/gb/") || Common.getCurrentURL().contains("preprod")) {
-				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
@@ -516,7 +513,7 @@ public class OspreyEMEA_HYVA {
 			}
 			Common.clickElement("css", "button[name='send']");
 			Sync.waitPageLoad();
-			Thread.sleep(6000);
+			Thread.sleep(2000);
 			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Customer Login")
@@ -2146,14 +2143,14 @@ public class OspreyEMEA_HYVA {
 		try {
 			Common.clickElement("id", "menu-search-icon"); 
 			String open = Common.findElement("id", "menu-search-icon").getAttribute("id");
-			Thread.sleep(3000);
+//			Thread.sleep(3000);
 			Common.assertionCheckwithReport(open.contains("search"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
 			Common.textBoxInput("id", "autocomplete-0-input", data.get(Dataset).get("Products"));
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
-			Thread.sleep(3000);
+			Sync.waitElementVisible("id", "algolia-srp-title");
 			String productsearch = Common.findElement("id", "algolia-srp-title").getText();
 			System.out.println(productsearch);
 			Common.assertionCheckwithReport(productsearch.contains(product), "validating the search functionality",
@@ -2197,8 +2194,6 @@ public class OspreyEMEA_HYVA {
 				}
 			}
 
-			Sync.waitPageLoad(30);
-			Thread.sleep(6000);
 			if(Common.findElements("css", "button[aria-label='Close dialog']").size()>0)
 			{
 				Common.clickElement("css", "button[aria-label='Close dialog']");
@@ -2206,7 +2201,6 @@ public class OspreyEMEA_HYVA {
 			Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
 			Common.clickElement("css", "img[alt='" + products + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			if(Common.getCurrentURL().contains("preprod"))
 			{
 			Sync.waitElementPresent("css", "div[data-option-label='" + productcolor + "']");
@@ -2224,8 +2218,7 @@ public class OspreyEMEA_HYVA {
 				Common.clickElement("css", "div[data-option-label='" + Productsize + "']");
 				
 			}
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Sync.waitElementVisible("css", "h1[class*='pdp-grid-title']");
 			Common.scrollIntoView("css", "h1[class*='pdp-grid-title']");
 //			Sync.waitElementVisible(30, "xpath", "//h1[contains(@class,'pdp-grid-title')]");
 			String name = Common.findElement("css", "h1[class*='pdp-grid-title']").getText().trim();
@@ -2234,17 +2227,13 @@ public class OspreyEMEA_HYVA {
 					"validating the  product navigates to PDP page", "It should be navigate to the PDP page",
 					"Sucessfully Navigates to the PDP page", "failed to Navigate to the PDP page");
 			product_quantity(Dataset);
-			Thread.sleep(4000);
 			String country=Common.findElement("xpath", "(//span[@class='country-selector-title'])[1]").getText();
 			System.out.println(country);
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//div[@data-option-label='" + Productsize + "']");
-			Common.clickElement("xpath", "//div[@data-option-label='" + Productsize + "']");
-			
+			Sync.waitElementVisible("css", "div[data-option-label='" + Productsize + "']");
+			Sync.waitElementPresent("css", "div[data-option-label='" + Productsize + "']");
+			Common.clickElement("css", "div[data-option-label='" + Productsize + "']");
 			Sync.waitElementPresent("css", "button[id='product-addtocart-button']");
 			Common.clickElement("css", "button[id='product-addtocart-button']");
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
 			{
 				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
@@ -2293,7 +2282,6 @@ public class OspreyEMEA_HYVA {
 		try {
 			Common.findElement("css", "div select[name='qty']");
 			Common.dropdown("css", "div select[name='qty']", Common.SelectBy.VALUE, Quantity);
-			Thread.sleep(3000);
 			String value = Common.findElement("css", "div select[name='qty']").getAttribute("value");
 			Common.assertionCheckwithReport(value.equals(Quantity),
 					"validating the  product the product quantity in PDP page",
@@ -2306,7 +2294,7 @@ public class OspreyEMEA_HYVA {
 			ExtenantReportUtils.addFailedLog("validating the  product the product quantity in PDP page",
 					"Product quantity should be update in the PDP page", "unable to change the  product Qunatity",
 					Common.getscreenShot("failed to update the product quantity"));
-			AssertJUnit.fail();
+			Assert.fail();
 		}
 
 	}
@@ -2785,24 +2773,24 @@ public class OspreyEMEA_HYVA {
 	public void minicart_Checkout() {{
 		// TODO Auto-generated method stub
 		try {
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("/gb"))
-			{
-				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
-			}
+//			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("/gb"))
+//			{
+//				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+//				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+//			}
 //			click_minicart();
 			Sync.waitElementPresent("css", "span[x-text='totalCartAmount']");
 			String minicart = Common.findElement("css", "span[x-text='totalCartAmount']").getText();
 			System.out.println(minicart);
-			Thread.sleep(3000);
+			Sync.waitElementVisible(30, "css", "a[class*='inline-flex btn btn-primary text']");
 			Sync.waitElementPresent(30, "css", "a[class*='inline-flex btn btn-primary text']");
 			Common.clickElement("css", "a[class*='inline-flex btn btn-primary text']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 //			Sync.waitElementPresent(30, "xpath", "//strong[@role='heading']");
 //			String checkout = Common.findElement("xpath", "//span[contains(@data-bind,'text: getC')]").getText();
 //			System.out.println(checkout);
-			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
+//			Sync.waitElementInvisible(30, "xpath", "//div[@data-role='spinner' and @style='display: none;']");
 			Common.assertionCheckwithReport(
 					/* checkout.equals(minicart) && */ Common.getCurrentURL().contains("checkout/#shipping")
 							|| Common.getCurrentURL().contains("/checkout/#payment")
@@ -2867,14 +2855,11 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("css", "form[id='shipping'] input[name='lastname']",
 						data.get(dataSet).get("LastName"));
 				Common.textBoxInput("css", "input[name='street[0]']", data.get(dataSet).get("Street"));
-				Thread.sleep(2000);
 				Common.actionsKeyPress(Keys.SPACE);
-				Thread.sleep(2000);
 				try {
 					Common.clickElement("css", "input[name='street[0]']");
 				} catch (Exception e) {
 					Common.actionsKeyPress(Keys.BACK_SPACE);
-					Thread.sleep(1000);
 					Common.actionsKeyPress(Keys.SPACE);
 					Common.clickElement("css", "input[name='street[0]']");
 				}
@@ -2895,11 +2880,9 @@ public class OspreyEMEA_HYVA {
 				}
 				else
 				{
-					Thread.sleep(4000);
 					Common.dropdown("css", "select[id='shipping-region']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 					
 				}
-				Thread.sleep(3000);
 //				String Shippingvalue = Common.findElement("xpath", "//select[@name='region_id']").getAttribute("value");
 //				String Shippingstate = Common
 //						.findElement("xpath", "//select[@name='region_id']//option[@value='" + Shippingvalue + "']")
@@ -2908,19 +2891,15 @@ public class OspreyEMEA_HYVA {
 //				System.out.println(Shippingstate);
 
 				Common.actionsKeyPress(Keys.PAGE_DOWN);
-				Thread.sleep(3000);
 				Common.textBoxInput("id", "shipping-city", data.get(dataSet).get("City"));
 				// Common.mouseOverClick("name", "region_id");
-			
-				Thread.sleep(2000);
+		
 				Common.textBoxInputClear("css", "form[id='shipping'] input[name='postcode']");
 				Common.textBoxInput("css", "form[id='shipping'] input[name='postcode']",
 						data.get(dataSet).get("postcode"));
 				String ShippingZip = Common.findElement("name", "postcode").getAttribute("value");
 				System.out.println("*****" + ShippingZip + "*******");
 //				Shippingaddress.put("ShippingZip", ShippingZip);
-				
-				Thread.sleep(4000);
 				Common.textBoxInput("css", "form[id='shipping'] input[name='telephone']",
 						data.get(dataSet).get("phone"));
 
@@ -3032,7 +3011,7 @@ public class OspreyEMEA_HYVA {
 		String methods=data.get(Dataset).get("prod methods");
 
 		try {
-			Thread.sleep(4000);
+			Sync.waitElementVisible("xpath", "//input[@name='shipping-method-option']");
 			int size = Common.findElements("xpath", "//input[@name='shipping-method-option']").size();
 			System.out.println(size);
 			if (size > 0  ) {
@@ -3790,7 +3769,6 @@ public class OspreyEMEA_HYVA {
 		String symbol=data.get(dataSet).get("Symbol");
 
 		try {
-			Thread.sleep(5000);
 			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
 			{
 				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
@@ -3809,12 +3787,11 @@ public class OspreyEMEA_HYVA {
 		}
 		String expectedResult = "email field will have email address";
 		try {
-			Thread.sleep(3000);
-			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("/gb"))
-			{
-				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
-				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
-			}
+//			if(Common.findElements("xpath", "(//header[@data-sticky='sticky-enabled'])[1]").size()>0 && Common.getCurrentURL().contains("/gb"))
+//			{
+//				Sync.waitElementPresent("xpath", "(//button[@aria-label='Close'])[1]");
+//				Common.clickElement("xpath", "(//button[@aria-label='Close'])[1]");
+//			}
 			Common.textBoxInput("css", "section[id='shipping-details'] input[name='firstname']",
 					data.get(dataSet).get("FirstName"));
 			int size = Common.findElements("css", "input[type='email']").size();
@@ -3825,14 +3802,12 @@ public class OspreyEMEA_HYVA {
 					data.get(dataSet).get("LastName"));
 			Common.clickElement("css", "section[id='shipping-details'] input[name='street[0]']");
 			Common.textBoxInput("css", "section[id='shipping-details'] input[name='street[0]']", address);
-			Thread.sleep(2000);
 			Common.findElement("css", "section[id='shipping-details'] input[name='city']").clear();
 			Common.textBoxInput("css", "section[id='shipping-details'] input[name='city']",
 					data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Thread.sleep(3000);
 			  
 			if(Common.getCurrentURL().contains("/gb"))
 			{
@@ -3852,18 +3827,12 @@ public class OspreyEMEA_HYVA {
 				Common.scrollIntoView("css", "select[id='shipping-region']");
 				Common.dropdown("css", "select[id='shipping-region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
 			}
-			Thread.sleep(2000);
 			Common.textBoxInputClear("css", "input[name='postcode']");
 			Common.textBoxInput("css", "input[name='postcode']", data.get(dataSet).get("postcode"));
-			Thread.sleep(3000);
-	
 			Common.textBoxInput("name", "telephone", data.get(dataSet).get("phone"));
-			Sync.waitPageLoad();
 			ExtenantReportUtils.addPassLog("validating shipping address filling Fileds",
 					"shipping address is filled in to the fields", "user should able to fill the shipping address ",
 					Common.getscreenShotPathforReport("Sucessfully shipping address details has been entered"));
-
-
 		}
 
 		catch (Exception | Error e) {
@@ -3872,7 +3841,6 @@ public class OspreyEMEA_HYVA {
 					"shipping address is filled in to the fields", "user faield to fill the shipping address",
 					Common.getscreenShotPathforReport("shipingaddressfaield"));
 			Assert.fail();
-
 		}
 
 	}
@@ -3884,12 +3852,11 @@ public class OspreyEMEA_HYVA {
 		addPaymentDetails(dataSet);
 		String expectedResult = "It redirects to order confirmation page";
 
-		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
-			Thread.sleep(2000);
-			addPaymentDetails(dataSet);
-		}
+//		if (Common.findElements("xpath", "//div[@class='message message-error']").size() > 0) {
+//			Thread.sleep(2000);
+//			addPaymentDetails(dataSet);
+//		}
 
-		Thread.sleep(2000);
 		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
 
 		if (!url.contains("stage") && !url.contains("preprod")) {
@@ -3910,11 +3877,9 @@ public class OspreyEMEA_HYVA {
 						"User unabel to go orderconformation page");
 				if (Common.findElements("css", "div[class*='checkout-success container'] p span")
 						.size() > 0) {
-					Thread.sleep(1000);
 					order = Common.getText("css", "div[class*='checkout-success container'] p span");
 					System.out.println(order);
 				} else {
-					Thread.sleep(1000);
 					order = Common.getText("css", "div[class*='checkout-success container'] p a");
 					System.out.println(order);
 				}
@@ -3924,7 +3889,7 @@ public class OspreyEMEA_HYVA {
 				ExtenantReportUtils.addFailedLog("verifying the product confirmation", expectedResult,
 						"User failed to navigate  to order confirmation page",
 						Common.getscreenShotPathforReport("failednavigatepage"));
-				AssertJUnit.fail();
+				Assert.fail();
 			}
 
 		}
@@ -3934,8 +3899,6 @@ public class OspreyEMEA_HYVA {
 	public String addPaymentDetails(String dataSet) throws Exception {{
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
-		Sync.waitPageLoad();
-		Thread.sleep(4000);
 		String code="";
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
@@ -3944,7 +3907,6 @@ public class OspreyEMEA_HYVA {
 		// Common.refreshpage();
 
 		try {
-			Sync.waitPageLoad();
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Sync.waitElementPresent("css", "label[for='payment-method-stripe_payments']");
 			int sizes = Common.findElements("css", "label[for='payment-method-stripe_payments']").size();
@@ -3952,34 +3914,29 @@ public class OspreyEMEA_HYVA {
 			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
 					"User unabel to land opaymentpage");
 			Common.clickElement("css", "label[for='payment-method-stripe_payments']");
-			int shipping=Common.findElements("xpath", "//div[@class='item shipping']//span[contains(@class,'hidden lg:')]").size();
-			if(shipping > 0)
-			{
-				Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
-				Thread.sleep(4000);
-				Common.scrollIntoView("xpath", "//input[contains(@id,'postcode')]");
-				Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
-				 code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
-				System.out.println(code);
-			}
+//			int shipping=Common.findElements("xpath", "//div[@class='item shipping']//span[contains(@class,'hidden lg:')]").size();
+//			if(shipping > 0)
+//			{
+//				Sync.waitElementPresent("xpath", "//input[@id='shipping-postcode']");
+//				Common.scrollIntoView("xpath", "//input[contains(@id,'postcode')]");
+//				Sync.waitElementPresent("xpath", "//input[contains(@id,'postcode')]");
+//				 code = Common.findElement("xpath", "//input[contains(@id,'postcode')]").getAttribute("value");
+//				System.out.println(code);
+//			}
 			
-			int payment = Common.findElements("css", "div[class='stripe-dropdown-selection']").size();
-			System.out.println(payment);
-			if (payment > 0) {
-				Thread.sleep(3000);
+//			int payment = Common.findElements("css", "div[class='stripe-dropdown-selection']").size();
+//			System.out.println(payment);
+			if (Common.findElements("css", "div[class='stripe-dropdown-selection']").size() > 0) {
 				Common.switchFrames("css", "iframe[title='Campo de entrada seguro para el pago'], iframe[title='Secure payment input frame']");
-				Thread.sleep(4000);
 				Common.scrollIntoView("css", "label[for='Field-numberInput']");
 				Common.clickElement("css", "label[for='Field-numberInput']");
 				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
-				Thread.sleep(4000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 				System.out.println(Number);
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 				Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-				Thread.sleep(2000);
 				
 				Common.actionsKeyPress(Keys.ARROW_DOWN);
 				Common.switchToDefault();
@@ -3989,7 +3946,6 @@ public class OspreyEMEA_HYVA {
 					Sync.waitElementPresent("css", "button[class='action primary checkout']");
 					Common.scrollIntoView("css", "button[class='action primary checkout']");
 					Common.clickElement("css", "button[class='action primary checkout']");
-					Thread.sleep(10000);
 					if (Common.getCurrentURL().contains("/checkout/#payment")) {
 						Sync.waitElementPresent("css", "label[for='stripe-new-payments']");
 						Common.clickElement("css", "label[for='stripe-new-payments']");
@@ -4000,7 +3956,7 @@ public class OspreyEMEA_HYVA {
 						String sucessmessage = Common.getText("css", "h1[class='page-title-wrapper']");
 						System.out.println(sucessmessage);
 					} else {
-						AssertJUnit.fail();
+						Assert.fail();
 					}
 
 				} else {
@@ -4018,7 +3974,6 @@ public class OspreyEMEA_HYVA {
 				}
 
 			} else {
-				Thread.sleep(4000);
 				int savedcard=Common.findElements("xpath", "//input[@type='radio' and @name='use_saved_stripe_method']").size();
 				if(savedcard==2)
 				{
@@ -4031,25 +3986,21 @@ public class OspreyEMEA_HYVA {
 					Common.clickElement("css", "label[for='Field-numberInput']");
 					Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
-					Thread.sleep(4000);
 					Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
 					System.out.println(Number);
 					Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 
 					Common.textBoxInput("id", "Field-cvcInput", data.get(dataSet).get("cvv"));
-					Thread.sleep(2000);
-					
-					
-
-					int zipcode = Common.findElements("css", "input[id='Field-postalCodeInput']").size();
-					System.out.println(zipcode);
-
-					if (zipcode > 0) {
-						
-
-						Sync.waitElementPresent("css", "input[id='Field-postalCodeInput']");
-						Common.textBoxInput("css", "input[id='Field-postalCodeInput']", code);
-					}
+//			
+//					int zipcode = Common.findElements("css", "input[id='Field-postalCodeInput']").size();
+//					System.out.println(zipcode);
+//
+//					if (zipcode > 0) {
+//						
+//
+//						Sync.waitElementPresent("css", "input[id='Field-postalCodeInput']");
+//						Common.textBoxInput("css", "input[id='Field-postalCodeInput']", code);
+//					}
 					int link=Common.findElements("xpath", "//label[@id='Field-linkOptInCheckbox']").size();
 					
 					if(link>0) {
@@ -4060,13 +4011,12 @@ public class OspreyEMEA_HYVA {
 					if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage")) {
 						Sync.waitElementPresent("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
 						Common.clickElement("xpath", "(//div[@class='field choice']//input[@type='checkbox'])[3]");
-						Thread.sleep(5000);				
+						Thread.sleep(4000);				
 						Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 						Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
-						Thread.sleep(20000);
+						Sync.waitElementVisible("css",
+								"div[class='checkout-success container px-0 '] h1");
 						if (Common.getCurrentURL().contains("/onepage/success/")) {
-							Sync.waitPageLoad();
-							Thread.sleep(4000);
 								String sucessmessage = Common.getText("css",
 										"div[class='checkout-success container px-0 '] h1");
 								System.out.println(sucessmessage);
