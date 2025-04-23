@@ -6740,7 +6740,7 @@ catch(Exception | Error e)
 			String breadcrumbs = Common.findElement("xpath", "//nav[@aria-label='Breadcrumb']")
 					.getAttribute("aria-label");
 			Thread.sleep(2000);
-			String filter = Common.findElement("xpath", "//span[normalize-space()='Filter by:']").getText().trim();
+			String filter = Common.findElement("xpath", "//h3[normalize-space()='Filter by:']").getText().trim();
 			String Sort = Common
 					.findElement("xpath",
 							"//div[@class='flex items-center']")
