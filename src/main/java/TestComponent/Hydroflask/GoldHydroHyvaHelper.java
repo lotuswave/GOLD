@@ -478,6 +478,7 @@ public class GoldHydroHyvaHelper {
 		/**
 		 * Free gift popup handling
 		 */
+		Thread.sleep(3000);
 		int hiddenPopupElements= Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size();
 		if (hiddenPopupElements > 0) {
             System.out.println("Free gift popup is not currently displayed.");
@@ -4176,8 +4177,8 @@ public void Remove_GiftCode() {
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button-label')])[1]");
+			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button-label')])[1]");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			Thread.sleep(9000);
