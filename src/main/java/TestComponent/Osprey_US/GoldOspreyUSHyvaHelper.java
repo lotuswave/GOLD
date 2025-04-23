@@ -13325,8 +13325,8 @@ public void validate_GIFT_CARD_PLP() {
 			"Sort by options should visible",
 			"Sort by options are visibled", "Failed to visible the sort by options");
 	      
-	    Sync.waitElementPresent("xpath", "//span[contains(@class,'flex-grow title-panel')]");
-	    String FILTERSBY = Common.getText("xpath", "//span[contains(@class,'flex-grow title-panel')]").trim();
+	    Sync.waitElementPresent("xpath", "//h3[contains(@class,'flex-grow title-panel')]");
+	    String FILTERSBY = Common.getText("xpath", "//h3[contains(@class,'flex-grow title-panel')]").trim();
 	    System.out.println(FILTERSBY);
 	    Common.assertionCheckwithReport(FILTERSBY.equalsIgnoreCase("Filter by:"),
 			"Verifying the filterby options are visible or not",
