@@ -398,7 +398,19 @@ public class GoldHydroE2EHelper {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			
-			
+			/**
+			 * Free gift popup handling
+			 */
+			Thread.sleep(4000);
+			int hiddenPopupElements= Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size();
+			if (hiddenPopupElements > 0) {
+	            System.out.println("Free gift popup is not currently displayed.");
+	        } else {
+	            
+	            System.out.println("Free gift popup is likely displayed. Attempting to close...");
+	            Sync.waitElementVisible("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']");
+	        }
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5155,7 +5167,7 @@ public void Remove_GiftCode() {
 	
 	else{
 		try{
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		Sync.waitElementPresent(60, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
 	String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
 	System.out.println(sucessMessage);
