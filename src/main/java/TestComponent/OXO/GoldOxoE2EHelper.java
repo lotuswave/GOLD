@@ -3442,7 +3442,7 @@ catch(Exception | Error e)
 			else {
 				try {
 					
-					Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
+					Common.scrollIntoView("xpath", "//button[contains(text(),'Place Order')]");
 					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 
 					Thread.sleep(6000);
