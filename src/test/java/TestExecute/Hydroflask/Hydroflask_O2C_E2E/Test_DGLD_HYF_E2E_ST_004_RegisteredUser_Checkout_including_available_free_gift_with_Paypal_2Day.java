@@ -25,10 +25,11 @@ public class Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_availabl
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails_TC4");
-			Hydro.search_product("SKU-TT32PS678");     
+			Hydro.reorder();
+		/*	Hydro.search_product("SKU-TT32PS678");     
 			Hydro.addtocart("SKU-TT32PS678");
 			Hydro.search_product("SKU-BC128001 -2QTY");     
-			Hydro.addtocart("SKU-BC128001 -2QTY");
+			Hydro.addtocart("SKU-BC128001 -2QTY");*/
 			Hydro.minicart_Checkout();
 			Hydro.Add_Free_Gift();
 //			Hydro.RegaddDeliveryAddress("AccountDetails");

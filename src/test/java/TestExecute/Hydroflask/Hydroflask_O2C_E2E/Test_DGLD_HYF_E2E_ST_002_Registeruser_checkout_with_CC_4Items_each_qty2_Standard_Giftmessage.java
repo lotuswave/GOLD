@@ -25,14 +25,15 @@ public class Test_DGLD_HYF_E2E_ST_002_Registeruser_checkout_with_CC_4Items_each_
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
 			Hydro.login_Hydroflask("AccountDetails_TC2");
-			Hydro.search_product("SKU-TT32PS678 -2QTY");     
+			Hydro.reorder();
+			/*Hydro.search_product("SKU-TT32PS678 -2QTY");     
 			Hydro.addtocart("SKU-TT32PS678 -2QTY");
 			Hydro.search_product("SKU-TT40PS474 -2QTY");     
 			Hydro.Configurable_addtocart_pdp("SKU-TT40PS474 -2QTY");
 			Hydro.search_product("SKU-T20CPB464 -2QTY");     
 			Hydro.addtocart("SKU-T20CPB464 -2QTY");
 			Hydro.search_product("SKU-BO56 -2QTY");     
-			Hydro.addtocart("SKU-BO56 -2QTY");
+			Hydro.addtocart("SKU-BO56 -2QTY");*/
 			Hydro.minicart_viewcart();
 			Hydro.Gift_message("GiftMessage");
 			Hydro.minicart_Checkout();
