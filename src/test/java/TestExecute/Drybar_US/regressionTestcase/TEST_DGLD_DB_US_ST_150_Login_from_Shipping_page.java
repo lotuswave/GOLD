@@ -42,7 +42,7 @@ public class TEST_DGLD_DB_US_ST_150_Login_from_Shipping_page {
 	
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
