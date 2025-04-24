@@ -52,7 +52,7 @@ public class Test_DGLD_HYF_E2E_ST_002_Registeruser_checkout_with_CC_4Items_each_
 
 	@AfterTest
 	public void clearBrowser() {
-//		Common.closeAll();
+		Common.closeAll();
 
 	}
 
