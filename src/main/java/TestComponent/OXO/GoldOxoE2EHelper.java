@@ -403,11 +403,13 @@ public class GoldOxoE2EHelper {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("css", "div[id='cart-drawer-title']");
-			String minicart = Common.findElement("css", "div[id='cart-drawer-title']").getText();
+			Sync.waitElementPresent("xpath", "//span[@x-text='totalCartAmount']");
+			String minicart = Common.findElement("xpath", "//span[@x-text='totalCartAmount']").getText();
 			Sync.waitElementPresent("css", "a[title='View Cart']");
 			Common.clickElement("css", "a[title='View Cart']");
+			Thread.sleep(1000);
 			String viewcart = Common.findElement("css", "span[class*='ml-7 title-xs hf:title']").getText();
+			System.out.println(viewcart);
 			Common.assertionCheckwithReport(
 					viewcart.contains(minicart) && Common.getCurrentURL().contains("/checkout/cart/"),
 					"validating the navigation to the view cart", "User should able to navigate to the view cart page",
