@@ -25,7 +25,7 @@ public class TEST_DGLD_DB_US_ST_043_RegisteredUser_Checkout_PayPal_Tax_with_Same
 			Drybar.search_product("Product");  
 			Drybar.addtocart("Product");
 			Drybar.minicart_Checkout();
-			Drybar.RegaddDeliveryAddress("AccountDetails");
+		Drybar.RegaddDeliveryAddress("AccountDetails");
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.tax_validation_Paymentpage("Address");

@@ -2589,8 +2589,8 @@ public class GoldDrybarusHelper2 {
             
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button-label-container')])[1]");
+			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button-label-container')])[1]");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			Thread.sleep(8000);
