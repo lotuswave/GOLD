@@ -5406,7 +5406,7 @@ public void FUll_Payment(String dataSet) {
 			else	{
 		Thread.sleep(5000);
 
-    Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+    Common.clickElement("xpath", "//h3[contains(text(),'Add Gift Card')]");
    Thread.sleep(5000);
 	Common.textBoxInput("xpath","//input[@id='card-code-input']",Giftcode);
 		Common.textBoxInput("xpath","//input[@id='card-pin-input']",data.get(Dataset).get("GiftCardPin"));
@@ -5799,8 +5799,8 @@ public void FUll_Payment(String dataSet) {
     			Sync.waitPageLoad();
     			Thread.sleep(4000);
 
-    			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-    			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+    			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+    			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
     			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
     				Sync.waitElementPresent("id", "discount-code");
 
