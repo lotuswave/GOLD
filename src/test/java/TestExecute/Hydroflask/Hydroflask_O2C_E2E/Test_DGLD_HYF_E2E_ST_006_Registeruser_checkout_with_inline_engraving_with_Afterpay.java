@@ -24,11 +24,12 @@ public class Test_DGLD_HYF_E2E_ST_006_Registeruser_checkout_with_inline_engravin
 			String Description ="Register user checkout with inline engraving with Afterpay  - 2 items - Standard";
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
-			Hydro.search_product("SKU-CFX454");     
+			Hydro.login_Hydroflask("AccountDetails_TC6");
+			Hydro.reorder();
+			/*Hydro.search_product("SKU-CFX454");     
 			Hydro.Configurable_addtocart_pdp("SKU-CFX454");
 			Hydro.search_product("SKU-TT40PS474");     
-			Hydro.Text_Engraving("SKU-TT40PS474");
+			Hydro.Text_Engraving("SKU-TT40PS474");*/
 			Hydro.minicart_Checkout();
 			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
