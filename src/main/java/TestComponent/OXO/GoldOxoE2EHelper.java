@@ -403,8 +403,8 @@ public class GoldOxoE2EHelper {
 	public void minicart_viewcart() {
 		// TODO Auto-generated method stub
 		try {
-			Sync.waitElementPresent("css", "div[id='cart-drawer-title']>span>span");
-			String minicart = Common.findElement("css", "div[id='cart-drawer-title']>span>span").getText();
+			Sync.waitElementPresent("css", "div[id='cart-drawer-title']");
+			String minicart = Common.findElement("css", "div[id='cart-drawer-title']").getText();
 			Sync.waitElementPresent("css", "a[title='View Cart']");
 			Common.clickElement("css", "a[title='View Cart']");
 			String viewcart = Common.findElement("css", "span[class*='ml-7 title-xs hf:title']").getText();
@@ -3370,8 +3370,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
 			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
-			Common.clickElement("xpath", "(//div[contains(@class,'paypal-button paypal-button')])[1]");
+			Sync.waitElementPresent("xpath", "//div[@data-funding-source='paypal']");
+			Common.clickElement("xpath", "//div[@data-funding-source='paypal']");
 //			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			Thread.sleep(8000);
@@ -3443,7 +3443,7 @@ catch(Exception | Error e)
 				try {
 					
 					Common.scrollIntoView("xpath", "//input[@id='payment-method-paypal_express']");
-					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[1]");
+					Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 
 					Thread.sleep(6000);
 					Sync.waitElementPresent(30, "xpath", "//h1[normalize-space()='Thank you for your purchase!']");
