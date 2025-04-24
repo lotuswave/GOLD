@@ -23,6 +23,7 @@ public class TEST_DGLD_OSP_SP_E2E_010_RegisterUser_with_multipleitems_standard_s
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Register User with multiple  items + standard shipping +CC in spanish store ";
+			 Osprey_ReEu.verifingHomePage();
 			 Osprey_ReEu.click_singinButton();
 		     Osprey_ReEu.Login_Account("Account");
 		     Osprey_ReEu.search_product("SKU-10005235 -2QTY");

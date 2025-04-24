@@ -23,6 +23,7 @@ public class TEST_DGLD_OSP_E2E_002_Registeruser_checkout_with_Klarna_Standard_sh
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Register user checkout with Klarna  + Standard shipping";
+			 Osprey_ReEu.verifingHomePage();
 			 Osprey_ReEu.click_singinButton();
 		     Osprey_ReEu.Login_Account("Account");
 		     Osprey_ReEu.search_product("SKU-10005235 -4QTY");

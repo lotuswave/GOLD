@@ -23,6 +23,7 @@ public class TEST_DGLD_OSP_E2E_007_RegisterUser_checkout_Multiple_Items_GiftCode
 			 
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Register user checkout Multiple Items + Gift Code full redemption";
+			 Osprey_ReEu.verifingHomePage();
 			 Osprey_ReEu.click_singinButton();
 		     Osprey_ReEu.Login_Account("Account");
 		     Osprey_ReEu.search_product("SKU-10002926 -2QTY");
@@ -50,7 +51,7 @@ public class TEST_DGLD_OSP_E2E_007_RegisterUser_checkout_Multiple_Items_GiftCode
 
 	@AfterTest
 	public void clearBrowser() {
-		Common.closeAll();
+	//	Common.closeAll();
 
 	}
 

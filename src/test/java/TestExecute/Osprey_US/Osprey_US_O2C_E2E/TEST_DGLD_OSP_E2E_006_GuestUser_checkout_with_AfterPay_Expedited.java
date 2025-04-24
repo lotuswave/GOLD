@@ -22,6 +22,7 @@ public class TEST_DGLD_OSP_E2E_006_GuestUser_checkout_with_AfterPay_Expedited {
 		try {
 			 Osprey_ReEu.prepareOrdersData("OspreyUS_E2E_orderDetails.xlsx");
 			 String Description ="Guest user checkout with after pay + Expedited";
+			 Osprey_ReEu.verifingHomePage();
 		     Osprey_ReEu.search_product("SKU-10005151 -2QTY");
 		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
 		     Osprey_ReEu.minicart_Checkout();
