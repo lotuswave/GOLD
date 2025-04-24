@@ -507,14 +507,13 @@ public class OspreyEMEA_HYVA {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
-			{
-				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
-			}
+//			if(Common.findElements("xpath", "//button[@aria-label='Close dialog']").size()>0)
+//			{
+//				Common.clickElement("xpath", "//button[@aria-label='Close dialog']");
+//			}
 			Common.clickElement("css", "button[name='send']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
-			System.out.println(Common.getPageTitle());
 			Common.assertionCheckwithReport(
 					Common.getPageTitle().contains("Home page") || Common.getPageTitle().contains("Customer Login")
 							|| Common.getPageTitle().contains("Osprey") || Common.getPageTitle().contains("Favourites Sharing"),
@@ -581,32 +580,27 @@ public class OspreyEMEA_HYVA {
 		Sync.waitElementPresent("xpath", "//a[@id='customer.header.dashboard.link']");
 		Common.clickElement("xpath", "//a[@id='customer.header.dashboard.link']");
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
-				Sync.waitPageLoad();
-				Thread.sleep(4000);
+		Thread.sleep(2000);
 				if (Common.getCurrentURL().contains("stage")|| Common.getCurrentURL().contains("preprod")) {
 					String Accountlinks = data.get(Dataset).get("Account Links");
 					String[] Account = Accountlinks.split(",");
 					int i = 0;
 					try {
 						for (i = 0; i < Account.length; i++) {
-							System.out.println(Account[i]);
 							try {
-							Sync.waitElementPresent("xpath",
-									"//a//span[text()='" + Account[i] +"']");
-							Common.clickElement("xpath",
-									"//a//span[text()='" + Account[i] +"']");
+							Sync.waitElementPresent("css",
+									"a[title='" + Account[i] +"']");
+							Common.clickElement("css",
+									"a[title='" + Account[i] +"']");
 							}
 						catch (Exception | Error e) {
 								
-							Sync.waitElementPresent("xpath",
-									"//div[@title='" + Account[i] +"']");
-							Common.clickElement("xpath",
-									"//div[@title='" + Account[i] +"']");
+							Sync.waitElementPresent("css",
+									"div[title='" + Account[i] +"']");
+							Common.clickElement("css",
+									"div[title='" + Account[i] +"']");
 							}
 							Sync.waitPageLoad();
-							Thread.sleep(4000);
-						
 							String currentUrl=Common.getCurrentURL();
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
@@ -618,7 +612,6 @@ public class OspreyEMEA_HYVA {
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
-							Thread.sleep(2000);
 							}
 					} catch (Exception | Error e) {
 						e.printStackTrace();
@@ -639,8 +632,6 @@ public class OspreyEMEA_HYVA {
 									"//a[contains(@id,'account')]//span[text()=\"" + Account[i] +"\"]");
 							Common.clickElement("xpath",
 									"//a[contains(@id,'account')]//span[text()=\"" + Account[i] +"\"]");
-							Sync.waitPageLoad();
-							Thread.sleep(4000);
 							String currentUrl=Common.getCurrentURL();
 							System.out.println(currentUrl);
 							Common.assertionCheckwithReport(
@@ -651,8 +642,6 @@ public class OspreyEMEA_HYVA {
 									"verifying Account page links " + Account[i],
 									"user should navigate to the " + Account[i] + " page",
 									"user successfully Navigated to the " + Account[i], "Failed click on the " + Account[i]);
-							Thread.sleep(2000);
-		 
 
 						}
 					} catch (Exception | Error e) {
@@ -3064,10 +3053,10 @@ public class OspreyEMEA_HYVA {
 
 	public void signout() {
 		try {
-			Sync.waitElementPresent("xpath", "//button[@id='customer-menu']");
-			Common.clickElement("xpath", "//button[@id='customer-menu']");
-			Sync.waitElementPresent("xpath", "//a[@title='Sign Out']");
-			Common.clickElement("xpath", "//a[@title='Sign Out']");
+			Sync.waitElementPresent("id", "customer-menu");
+			Common.clickElement("id", "customer-menu");
+			Sync.waitElementPresent("css", "a[title='Sign Out']");
+			Common.clickElement("css", "a[title='Sign Out']");
 			Thread.sleep(1000);
 			Common.assertionCheckwithReport(
 					Common.getCurrentURL().contains("customer/account/logoutSuccess/") || Common.getPageTitle().contains("Osprey ") ,
@@ -8102,35 +8091,23 @@ return Number;
 		// TODO Auto-generated method stub
 
 		try {
-			Thread.sleep(5000);
 			click_singinButton();
-			Sync.waitElementPresent("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
-			Sync.waitElementPresent(30, "xpath", "//li[@data-msg-field='login[username]']");
-			int errormessage = Common.findElements("xpath", "//li[@data-msg-field='login[username]']").size();
-			int errormessage1 = Common.findElements("xpath", "//li[@data-msg-field='login[password]']").size();
+			Sync.waitElementPresent("css", "button[name='send']");
+			Common.clickElement("css", "button[name='send']");
+			Sync.waitElementVisible("css", "li[data-msg-field='login[username]']");
+			int errormessage = Common.findElements("css", "li[data-msg-field='login[username]']").size();
+			int errormessage1 = Common.findElements("css", "li[data-msg-field='login[password]']").size();
 			Common.assertionCheckwithReport(errormessage>0||errormessage1>0,
 					"verifying the error message validation with empty fileds",
 					"after click on signin button with empty blanks error message should appear",
 					"Sucessfully error messsage should be display ", "Failed to display the error message");
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
-				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("UserName"));
 			} else {
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
-//			Sync.waitPageLoad(40);
-//			Thread.sleep(3000);
-//			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
-//			int message = Common.findElements("xpath", "//div[@ui-id='message-error']").size();
-//			Sync.waitPageLoad(40);
-//			Thread.sleep(4000);
-//			Common.assertionCheckwithReport(message>0,
-//					"verifying the error message for invalid password",
-//					"after click on signin button with empty invalid password error message should appear",
-//					"Sucessfully error messsage should be display ", "Failed to display the error message");
+			Common.clickElement("css", "button[name='send']");
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
 				Sync.waitPageLoad();
 				Common.textBoxInput("id", "email", data.get(dataSet).get("unregisterd Username"));
@@ -8138,9 +8115,8 @@ return Number;
 				Common.textBoxInput("id", "email", data.get(dataSet).get("Prod UserName"));
 			}
 			Common.textBoxInput("id", "pass", data.get(dataSet).get("Password"));
-			Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary') or name='send']/span)[1]");
-			Sync.waitPageLoad(40);
-			Thread.sleep(3000);
+			Common.clickElement("css", "button[name='send']");
+			Sync.waitPageLoad();
 //			Sync.waitElementPresent("xpath", "//div[@ui-id='message-error']");
 //			int message1 = Common.findElements("xpath", "//div[@ui-id='message-error']").size();
 //			
@@ -9271,30 +9247,30 @@ return Number;
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			int size1= Common.findElements("xpath", "//button[contains(text(), 'Agregar código de descuento')]").size();
+			int size1= Common.findElements("xpath", "//h3[contains(text(), 'Agregar código de descuento')]").size();
 		       if (size1>0) {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(), 'Agregar código de descuento')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Agregar código de descuento')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(), 'Agregar código de descuento')]");
 		    	   
 		       } 
 		       else if(Common.getCurrentURL().contains("/fr"))
 		       {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Ajouter un code de réduction')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(),'Ajouter un code de réduction')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(),'Ajouter un code de réduction')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(),'Ajouter un code de réduction')]");
 		       }
 		       else if(Common.getCurrentURL().contains("/it/"))
 		       {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Aggiungi un codice sconto')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(),'Aggiungi un codice sconto')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(),'Aggiungi un codice sconto')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(),'Aggiungi un codice sconto')]");
 		       }
 		       else if(Common.getCurrentURL().contains("/se_sv"))
 		       {
-		    	   Sync.waitElementClickable("xpath", "//button[contains(text(),'Lägg till rabattkod')]");
-		    	   Common.clickElement("xpath", "//button[contains(text(),'Lägg till rabattkod')]");
+		    	   Sync.waitElementClickable("xpath", "//h3[contains(text(),'Lägg till rabattkod')]");
+		    	   Common.clickElement("xpath", "//h3[contains(text(),'Lägg till rabattkod')]");
 		       }
 		       else {
-					Sync.waitElementClickable("xpath", "//button[contains(text(), 'Add Discount Code')]");
-					Common.clickElement("xpath", "//button[contains(text(), 'Add Discount Code')]");
+					Sync.waitElementClickable("xpath", "//h3[contains(text(), 'Add Discount Code')]");
+					Common.clickElement("xpath", "//h3[contains(text(), 'Add Discount Code')]");
 		       }
 			
 			if (Common.getCurrentURL().contains("stage") || Common.getCurrentURL().contains("preprod")) {
@@ -11742,11 +11718,9 @@ catch(Exception | Error e)
 	public void Close_Geolocation() {
 		// TODO Auto-generated method stub
 		try {
-			
-
+	
 			Sync.waitElementPresent("css", "div[x-ref='ip-detection-modal'] button");
 			Common.clickElement("css", "div[x-ref='ip-detection-modal'] button");
-			
 		
 	}catch(Exception | Error e)
 	{
