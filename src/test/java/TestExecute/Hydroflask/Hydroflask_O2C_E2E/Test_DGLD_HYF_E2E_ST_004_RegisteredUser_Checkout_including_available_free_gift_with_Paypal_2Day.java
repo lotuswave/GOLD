@@ -33,7 +33,7 @@ public class Test_DGLD_HYF_E2E_ST_004_RegisteredUser_Checkout_including_availabl
 			Hydro.Add_Free_Gift();
 //			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("2 Day method");
+//            Hydro.selectshippingaddress("2 Day method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();
             String OrderNumber=Hydro.payPal_Payment("PaypalDetails");
 			Hydro.writeOrderNumber(Description,OrderNumber,Used_GiftCode,Details.get("Subtotal"),Details.get("shipping"),Details.get("Tax"),Details.get("Discount"),Details.get("ordertotal"));

@@ -30,7 +30,7 @@ public class Test_DGLD_HYF_E2E_ST_009_Registeruser_checkout_MultipleItems_GiftCo
 			Hydro.search_product("SKU-T20CPB001");     
 			Hydro.Configurable_addtocart_pdp("SKU-T20CPB001");
 			Hydro.minicart_Checkout();
-			Hydro.RegaddDeliveryAddress("AccountDetails");
+//			Hydro.RegaddDeliveryAddress("AccountDetails");
 			String Used_GiftCode = Hydro.Gift_card("Full_RedeemGiftcard");
             Hydro.selectshippingaddress("GroundShipping method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();

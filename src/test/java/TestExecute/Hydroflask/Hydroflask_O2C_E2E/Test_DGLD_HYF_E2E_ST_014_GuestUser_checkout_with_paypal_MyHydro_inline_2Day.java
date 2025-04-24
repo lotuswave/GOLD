@@ -30,7 +30,7 @@ public class Test_DGLD_HYF_E2E_ST_014_GuestUser_checkout_with_paypal_MyHydro_inl
 			Hydro.minicart_Checkout();
 			Hydro.addDeliveryAddress_Guestuser("AccountDetails");
 			String Used_GiftCode = "NULL";
-            Hydro.selectshippingaddress("2 Day method");
+//            Hydro.selectshippingaddress("2 Day method");
             HashMap<String,String> Details=Hydro.ordersummary_Details();
             String OrderNumber=Hydro.payPal_Payment("PaypalDetails");
            

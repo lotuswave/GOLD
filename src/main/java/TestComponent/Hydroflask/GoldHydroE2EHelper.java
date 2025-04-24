@@ -283,10 +283,7 @@ public class GoldHydroE2EHelper {
 	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
-			{
-				Common.clickElement("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']");
-			}
+			
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the  product add to the cart", "Product should be add to cart",
@@ -806,10 +803,12 @@ public class GoldHydroE2EHelper {
 		String method = data.get(Dataset).get("methods");
 
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(4000);
+			Common.scrollIntoView("id", "shipping");
 			int size = Common.findElements("xpath", "//label[contains(@for,'shipping-method')]").size();
 			if (size > 0) {
 				Sync.waitElementPresent(30, "xpath", "//span[text()='" + method + "']");
+				
 				Common.clickElement("xpath", "//span[text()='" + method + "']");
 			} else {
 
@@ -2778,7 +2777,8 @@ System.out.println(MyFavorites);
 
 	public void Add_Free_Gift() throws Exception {
 		try {
-			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.'] | //div[@x-ref='freegift']//button[@aria-label='Close']").size()>0)
+			int hiddenPopupElements= Common.findElements("xpath", "//div[@class='modal-overlay fixed inset-0 bg-popup-overlay z-modal' and contains(@x-bind,'freegift')and @style='display: none;']").size();
+			if (hiddenPopupElements == 0)
 			{
 				System.out.println("Free gift Popud Displayed");
 				Sync.waitElementPresent(50, "xpath", "//span[text()='Add to cart']");
@@ -3327,10 +3327,9 @@ public String giftCardSubmitOrder() throws Exception {
 		Thread.sleep(4000);
 if(Common.getCurrentURL().contains("stage") ||Common.getCurrentURL().contains("preprod") )
 {
-//   Common.refreshpage();
-   Thread.sleep(4000);
+   Thread.sleep(2000);
    Common.clickElement("xpath", "//input[@id='payment-method-free']");
-   Thread.sleep(4000);
+   Thread.sleep(3000);
    Common.clickElement("xpath", "//button[contains(text(),'Place Order')]");
 		//Common.refreshpage();
 	Thread.sleep(3000);
@@ -3347,7 +3346,7 @@ else
 
 	else {
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(3000);
 			String sucessMessage = Common.getText("xpath", "//h1[normalize-space()='Thank you for your purchase!']").trim();
 			int sizes = Common.findElements("xpath", "//h1[normalize-space()='Thank you for your purchase!']").size();
 			Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!"),
