@@ -259,10 +259,9 @@ public class GoldHydroE2EHelper {
 			Sync.waitPageLoad();
 			for (int i = 0; i <= 10; i++) {
 				Thread.sleep(3000);
-				Sync.waitElementPresent("xpath", "//a[contains(@class,'product-image-link')]//img");
+	            Sync.waitElementPresent("css", "a[class*=roduct-image-link]>img");
 //				Sync.waitElementPresent("xpath", "(//img[contains(@class,'m-product-card__image')])[2]");
-				List<WebElement> webelementslist = Common.findElements("xpath",
-						"//a[contains(@class,'product-image-link')]//img");
+	            List<WebElement> webelementslist = Common.findElements("css", "a[class*=roduct-image-link]>img");
 				String s = webelementslist.get(i).getAttribute("src");
 				System.out.println(s);
 				if (s.isEmpty()) {
@@ -271,19 +270,17 @@ public class GoldHydroE2EHelper {
 					break;
 				}
 			}
-			Common.scrollIntoView("xpath", "//img[@alt='" + products + "']");
-			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
-//			Common.mouseOver("xpath", "//img[@alt='" + products + "']");
-			
-			Common.javascriptclickElement("xpath", "//img[@alt='" + products + "']");
+			 Common.scrollIntoView("css", "img[alt='" + products + "']");
+		        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
+			Common.javascriptclickElement("css", "img[alt='" + products + "']");
 			Sync.waitPageLoad();
 			Thread.sleep(2000);
 
 			product_quantity(Dataset);
 			Sync.waitPageLoad();
          
-			Sync.waitElementPresent("xpath", "//button[@title='Add to Cart']");
-			Common.clickElement("xpath", "//button[@title='Add to Cart']");
+			Sync.waitElementPresent("css", "button[title='Add to Cart']");
+	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			if(Common.findElements("xpath", "//div[@x-ref='freegift']//button[@aria-label='Close, button.']").size()>0)
@@ -883,15 +880,11 @@ public class GoldHydroE2EHelper {
 		}
 
 		Thread.sleep(3000);
-		String url = automation_properties.getInstance().getProperty(automation_properties.BASEURL);
-
-		if (url.contains("stage") || url.contains("preprod")) { // Check for stage/preprod explicitly
 	        try {
 	        	
 	        String Current_URL=Common.getCurrentURL();
 	        System.out.println(Current_URL);
-//	            String successMessage = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//h1");
-//                  System.out.println("successMessage");
+
 	            Common.assertionCheckwithReport(Current_URL.contains("onepage/success/"),
 	                    "verifying the Order confirmation", expectedResult,
 	                    "Successfully It redirects to order confirmation page Order Placed",
@@ -916,7 +909,7 @@ public class GoldHydroE2EHelper {
 				Assert.fail();
 			}
 
-		}
+		
 		return order;
 	}
 
@@ -933,15 +926,14 @@ public class GoldHydroE2EHelper {
 
 		try {
 			Sync.waitPageLoad();
-//			Common.actionsKeyPress(Keys.PAGE_DOWN);
-			Sync.waitElementPresent("xpath", "//label[@for='payment-method-stripe_payments']");
-			int sizes = Common.findElements("xpath", "//label[@for='payment-method-stripe_payments']").size();
+            Sync.waitElementPresent("css", "label[for='payment-method-stripe_payments']");
+            int sizes = Common.findElements("css", "label[for='payment-method-stripe_payments']").size();
 
-			Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
-					"User unabel to land opaymentpage");
-			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
+            Common.assertionCheckwithReport(sizes > 0, "Successfully land on the payment section", expectedResult,
+                    "Successfully land on the payment section", "Failed to Navigate to the Payment sections");
 
-			
+            Common.clickElement("css", "label[for='payment-method-stripe_payments']");
+
 			String code = Common.findElement("xpath", "//input[@name='postcode']").getAttribute("value");
 			System.out.println(code);
 			
@@ -977,14 +969,13 @@ public class GoldHydroE2EHelper {
 					Sync.waitElementPresent("xpath", "(//input[@class='checkbox mr-4'])[2]");
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
-				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
-				Thread.sleep(2000);
-				Sync.waitElementPresent("xpath", "//button[@id='card-tab']");
-				Common.clickElement("xpath", "//button[@id='card-tab']");
-				
-				Common.scrollIntoView("xpath", "//label[@for='Field-numberInput']");
-				Common.clickElement("xpath", "//label[@for='Field-numberInput']");
-				Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
+				Sync.waitElementPresent("css", "iframe[title='Secure payment input frame']");
+                Common.switchFrames("css", "iframe[title='Secure payment input frame']");
+
+                Sync.waitElementClickable("css", "label[for='Field-numberInput']");
+                Common.scrollIntoView("css", "label[for='Field-numberInput']");
+                Common.clickElement("css", "label[for='Field-numberInput']");
+                Common.findElement("id", "Field-numberInput").sendKeys(cardnumber);
 
 				Thread.sleep(4000);
 				Number = Common.findElement("id", "Field-numberInput").getAttribute("value").replace(" ", "");
@@ -1875,15 +1866,15 @@ public void FUll_Payment(String dataSet) {
 		String product = data.get(Dataset).get("Products");
 		System.out.println(product);
 		try {
-			Sync.waitElementClickable("xpath", "//button[@id='menu-search-icon']");
-			Common.clickElement("xpath", "//button[@id='menu-search-icon']");
-			String open = Common.findElement("xpath", "//button[@id='menu-search-icon']").getAttribute("aria-expanded");
+			Sync.waitElementClickable("id", "menu-search-icon");
+			Common.clickElement("id", "menu-search-icon");
+			String open = Common.findElement("id", "menu-search-icon").getAttribute("aria-expanded");
 			Thread.sleep(4000);
 			Common.assertionCheckwithReport(open.contains("true"), "User searches using the search field",
 					"User should able to click on the search button", "Search expands to the full page",
 					"Sucessfully search bar should be expand");
-			Sync.waitElementPresent("xpath", "//input[@id='autocomplete-0-input']");
-			Common.textBoxInput("xpath", "//input[@id='autocomplete-0-input']", product);
+			Sync.waitElementPresent("id", "autocomplete-0-input");
+			Common.textBoxInput("id", "autocomplete-0-input", product);
 			Common.actionsKeyPress(Keys.ENTER);
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
