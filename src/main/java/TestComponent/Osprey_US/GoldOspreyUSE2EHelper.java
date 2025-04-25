@@ -8053,6 +8053,7 @@ public void Continue_Shopping() {
 
 	}
 
+
 	public String BillingAddress(String dataSet) {
 		// TODO Auto-generated method stub
 		String update = "";
@@ -8066,61 +8067,79 @@ public void Continue_Shopping() {
 		String zipcode = data.get(dataSet).get("postcode");
 		String shipping = data.get(dataSet).get("Shipping address");
 		try {
-			Sync.waitPageLoad();
-			Thread.sleep(4000);
+//			Sync.waitPageLoad();
+//			Thread.sleep(4000);
 			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
 			Boolean checkbox=Common.findElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']").isSelected();
 			System.out.println(checkbox);
-			Thread.sleep(8000);
+			Thread.sleep(3000);
 			String box=Boolean.toString(checkbox);
 			if(box.contains("true"))
 			{
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
+			Thread.sleep(2000);
 
-			Sync.waitElementPresent("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
-			Common.clickElement("xpath", "//input[@type='checkbox' and @name='billing-as-shipping']");
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='firstname' and @data-form='billing']", data.get(dataSet).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='lastname' and @data-form='billing']", data.get(dataSet).get("LastName"));
-			Common.textBoxInput("xpath", "//input[@name='street[0]' and @data-form='billing']", data.get(dataSet).get("Street"));
-			Thread.sleep(4000);
-			String text = Common.findElement("xpath", "//input[@name='street[0]' and @data-form='billing']").getAttribute("value");
 			Sync.waitPageLoad();
+			Sync.waitElementPresent(30, "css", "label[for='billing-as-shipping']");
+			Common.clickElement("css", "label[for='billing-as-shipping']");
+			
+			if(Common.findElements("xpath", "//label[@for='guest_details-email_address']").size()>0)
+			{
+				Common.findElement("xpath", "//label[@for='guest_details-email_address']").getText();
+			}
+			else
+			{
+			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
+			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
+			}
+ 
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
+					data.get(dataSet).get("FirstName"));
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='lastname']",
+					data.get(dataSet).get("LastName"));
+			
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='street[0]']", data.get(dataSet).get("Street"));
+			String Text = Common.getText("xpath", "//form[@id='billing']//input[@name='street[0]']");
+//			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='city' and @data-form='billing']", data.get(dataSet).get("City"));
+			
+			
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='city']", data.get(dataSet).get("City"));
 			System.out.println(data.get(dataSet).get("City"));
 
 //			Common.actionsKeyPress(Keys.PAGE_DOWN);
 			Thread.sleep(3000);
-			 if(Common.getCurrentURL().contains("gb"))
-             {
-				 Common.scrollIntoView("xpath", "//input[@placeholder='State/Province']");
-					Common.textBoxInput("xpath", "//input[@placeholder='State/Province']", data.get(dataSet).get("Region"));
-				 
-             }
-			 else
-			 {
-				 Common.scrollIntoView("xpath", "//select[@name='region' and @data-form='billing']");
-                 Common.dropdown("xpath", "//select[@name='region' and @data-form='billing']",Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
-                 Thread.sleep(3000);
-                 String Shippingvalue = Common.findElement("xpath", "//select[@name='region' and @data-form='billing']")
-                         .getAttribute("value");
-                 Shipping=Common.findElement("xpath", "//option[@value='"+Shippingvalue+"']").getAttribute("data-title");
-	              System.out.println(Shipping);
-                 System.out.println(Shippingvalue);
-			 }
-				
-			Thread.sleep(2000);
-			// Common.textBoxInputClear("xpath", "//input[@name='postcode']");
-			Thread.sleep(2000);
-			Common.textBoxInput("xpath", "//input[@name='postcode' and @data-form='billing']",
-					data.get(dataSet).get("postcode"));
-			Thread.sleep(5000);
-			Sync.waitElementPresent("xpath", "//input[@name='telephone' and @data-form='billing']");
-			Thread.sleep(5000);
-			Common.textBoxInput("xpath", "//input[@name='telephone' and @data-form='billing']",
+			try {
+				Common.dropdown("xpath", "//form[@id='billing']//select[@name='region']", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			} catch (ElementClickInterceptedException e) {
+				Thread.sleep(3000);
+				Common.dropdown("name", "region_id", Common.SelectBy.TEXT, data.get(dataSet).get("Region"));
+			}
+			Thread.sleep(7000);		
+			Common.textBoxInput("css", "input[id='billing-postcode']", data.get(dataSet).get("postcode"));
+			Thread.sleep(6000);
+			Common.textBoxInput("xpath", "//form[@id='billing']//input[@name='telephone']",
 					data.get(dataSet).get("phone"));
+			Thread.sleep(3000);
+			if(Common.findElements("css", "label[for='guest_details-email_address']").size()>0)
+			{
+				Common.findElement("css", "label[for='guest_details-email_address']").getText();
+			}
+			else
+			{
+			Common.clickElement("css", "label[for='billing-save']");
+			Thread.sleep(2000);
+			Common.clickElement("xpath", "//button[normalize-space()='Save']");
+			Sync.waitPageLoad();
+			Thread.sleep(3000);
+			 update = Common.findElement("xpath", "//select[@id='address-list']//option[last()]").getText();
+			System.out.println(update);
+			Common.assertionCheckwithReport(update.contains("844 N Colony Rd"),
+					"verifying the Billing address form in payment page",
+					"Billing address should be saved in the payment page",
+					"Sucessfully Billing address form should be Display ",
+					"Failed to display the Billing address in payment page");
+			}
 
 		}
 			else {

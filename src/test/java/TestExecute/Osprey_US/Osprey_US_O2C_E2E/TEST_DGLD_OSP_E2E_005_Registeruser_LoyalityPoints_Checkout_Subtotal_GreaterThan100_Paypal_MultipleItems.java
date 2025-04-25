@@ -53,7 +53,7 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 
 	@AfterTest
 	public void clearBrowser() {
-		//Common.closeAll();
+		Common.closeAll();
 
 	}
 
@@ -61,7 +61,7 @@ public class TEST_DGLD_OSP_E2E_005_Registeruser_LoyalityPoints_Checkout_Subtotal
 	public void startTest() throws Exception {
 		System.setProperty("configFile", "Osprey_US\\config.properties");
         Login.signIn();
-        Osprey_ReEu.acceptPrivacy();
+   
         
 
 	}

@@ -27,6 +27,7 @@ public class TEST_DGLD_OSP_E2E_006_GuestUser_checkout_with_AfterPay_Expedited {
 		     Osprey_ReEu.addtocart("SKU-10005151 -2QTY");
 		     Osprey_ReEu.minicart_Checkout();
 		     Osprey_ReEu.addDeliveryAddress_Guestuser("Account");
+		     Osprey_ReEu.BillingAddress("BillingDetails");
 		     Osprey_ReEu.selectshippingmethod("Bestway method");
 		     String Used_GiftCode="NULL";
 		     Osprey_ReEu.clickSubmitbutton_Shippingpage();
