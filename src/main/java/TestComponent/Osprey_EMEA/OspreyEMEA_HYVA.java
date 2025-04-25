@@ -6874,8 +6874,7 @@ return Number;
 
 		String expectedResult = "It should open paypal site window.";
 		try {
-			Thread.sleep(3000);
-			int cancelpayment=Common.findElements("xpath", "//button[@title='Cancel']").size();
+			int cancelpayment=Common.findElements("css", "button[title='Cancel']").size();
 			System.out.println(cancelpayment);
 			if(cancelpayment>0)
 			{
@@ -6884,20 +6883,18 @@ return Number;
 				Common.clickElement("xpath", "//button[contains(text(),'Cancel Payment')]");
 				Sync.waitPageLoad();
 				Thread.sleep(4000);
-				Common.clickElement("xpath", "//input[@id='payment-method-paypal_express']");
-				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
+				Common.clickElement("css", "input[id='payment-method-paypal_express']");
+				Common.clickElement("css", "div[id='paypal-button-paypal_express']");
 				
 			}
 			else
 			{
-				Common.scrollIntoView("xpath", "//label[@for='payment-method-paypal_express']");
-				Thread.sleep(3000);
-				Common.clickElement("xpath", "//label[@for='payment-method-paypal_express']");
+				Common.scrollIntoView("css", "label[for='payment-method-paypal_express']");
+				Common.clickElement("css", "label[for='payment-method-paypal_express']");
 				Thread.sleep(6000);
-				Common.clickElement("xpath", "//div[@id='paypal-button-paypal_express']");
-				Thread.sleep(4000);
-				Common.switchFrames("xpath", "//iframe[@class='component-frame visible']");
-				Common.clickElement("xpath", "//div[@id='buttons-container']//div[@aria-label='PayPal']");
+				Common.clickElement("css", "div[id='paypal-button-paypal_express']");
+				Common.switchFrames("css", "iframe[class='component-frame visible']");
+				Common.clickElement("css", "div[id='buttons-container'] div[aria-label='PayPal']");
 				Common.switchToDefault();
 			}
             
@@ -6971,36 +6968,33 @@ return Number;
 
 			else {
 				try {
-					Thread.sleep(6000);
+	
 					int link=Common.findElements("xpath", "(//div[contains(@x-data,'termsAndConditions')])[2]").size();
 					
 					if(link>0) {
 						Common.clickElement("xpath", "(//div[@class='control']//input[@type='checkbox'])[3]");
 					}
-					Common.scrollIntoView("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
+					Common.scrollIntoView("css", "button[class='action primary checkout']");
 					
-					Common.clickElement("xpath", "(//button[contains(@class,'btn btn-primary place-order')])[2]");
-
-					Thread.sleep(6000);
-					Sync.waitElementPresent(30, "xpath", "//div[@class='checkout-success container px-0 ']//h1");
-					String sucessMessage = Common.getText("xpath",
-							"//div[@class='checkout-success container px-0 ']//h1");
+					Common.clickElement("css", "button[class='action primary checkout']");
+					Sync.waitPageLoad();
+					Sync.waitElementVisible("css", "div[class='checkout-success container px-0 '] h1");
+					Sync.waitElementPresent("css", "div[class='checkout-success container px-0 '] h1");
+					String sucessMessage = Common.getText("css", "div[class='checkout-success container px-0 '] h1");
                       System.out.println(sucessMessage);
-					int sizes = Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//h1")
+					int sizes = Common.findElements("css", "div[class='checkout-success container px-0 '] h1")
 							.size();
 					Common.assertionCheckwithReport(sucessMessage.contains("Thank you for your purchase!") || Common.getCurrentURL().contains("/onepage/success/"),
 							"verifying the product confirmation", expectedResult,
 							"Successfully It redirects to order confirmation page Order Placed",
 							"User unabel to go orderconformation page");
 
-					if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p//span")
+					if (Common.findElements("css", "div[class*='checkout-success container'] p span")
 							.size() > 0) {
-						Thread.sleep(1000);
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success container')]//p//span");
+						order = Common.getText("css", "div[class*='checkout-success container'] p span");
 						System.out.println(order);
 					} else {
-						Thread.sleep(1000);
-						order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+						order = Common.getText("css", "div[class*='checkout-success'] p a");
 						System.out.println(order);
 					}
 				} catch (Exception | Error e) {
@@ -7019,8 +7013,6 @@ return Number;
 
 
 
-
-
 	public String venmo_Payment(String dataSet) throws Exception {
 
 		String order = "";
@@ -7033,7 +7025,6 @@ return Number;
 			Thread.sleep(2000);
 			Common.clickElement("xpath", "//input[@id='paypal_express']");
 			Thread.sleep(2000);
-			
 			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
 
 			// Common.refreshpage();
@@ -9734,14 +9725,12 @@ return Number;
 		String invalidcode = data.get(Dataset).get("invalidcode");
 		try {
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
-			Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+			Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 			Sync.waitElementPresent("id", "discount-code");
 			Common.textBoxInput("id", "discount-code", invalidcode);
 			Common.clickElement("xpath", "//span[contains(text(),'Apply Code')]");
 			
-
 		} catch (Exception | Error e) {
 			e.printStackTrace();
 			ExtenantReportUtils.addFailedLog("validating the discount error message in the payment page",
