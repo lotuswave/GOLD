@@ -4319,7 +4319,7 @@ catch(Exception | Error e)
 			if(size>0) {
 				String otp=Common.findElement("xpath", "(//a[contains(text(),'Try another way')])[1]").getText();
 				System.out.println(otp);
-				Common.clickElement("xpath", "(//a[contains(text(),'Try another way')])[1]");
+				Common.clickElement("xpath", "//div[text()='Log in with your password']");
 				Common.textBoxInput("id", "password", data.get(dataSet).get("Password"));
 			}
 			else {
@@ -7114,7 +7114,7 @@ catch(Exception | Error e)
 								"//span[@class='price']")
 						.getText().replace("$", "");
 				System.out.println(PlpPrice);
-				String name = Common.findElement("xpath", "//span[@itemprop='name']").getText();
+				String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
 				System.out.println(name);
 				Common.assertionCheckwithReport(
 						name.contains(products) && productprice.equals(PlpPrice)
@@ -7162,7 +7162,7 @@ catch(Exception | Error e)
 						.findElement("xpath",
 								"//span[contains(@x-html,'getFormattedFinalPrice')]")
 						.getAttribute("data-price-final-amount--finalprice");
-				String name = Common.findElement("xpath", "//span[@itemprop='name']").getText();
+				String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText();
 				Common.assertionCheckwithReport(
 						name.contains(products) && productprice.equals(PLPprice)
 								|| name.contains(prod) && productprice.equals(PLPprice),
@@ -8817,7 +8817,7 @@ public void header_1_Percent_Planet() {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
 			System.out.println(product);
-			String name = Common.findElement("xpath", "//span[@itemprop='name']").getText().trim();
+			String name = Common.findElement("xpath", "//h1[@itemprop='name']").getText().trim();
 			System.out.println(name);
 			Common.assertionCheckwithReport(name.contains(product),
 					"validating the product should navigate to the PDP page",
@@ -8830,7 +8830,7 @@ public void header_1_Percent_Planet() {
 	
 //			Common.actionsKeyPress(Keys.UP);
 			Thread.sleep(3000);
-			Common.scrollIntoView("xpath", "//span[@itemprop='name']");
+			Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 			Common.clickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div)[14]");	
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@allow='autoplay']");
@@ -8851,7 +8851,7 @@ public void header_1_Percent_Planet() {
 				WebElement video=Common.findElement("xpath", "(//div[@x-ref='jsThumbSlides']//div//button)[12]");
 				Common.scrollIntoView(video);
 				Thread.sleep(3000);
-				Common.scrollIntoView("xpath", "//span[@itemprop='name']");
+				Common.scrollIntoView("xpath", "//h1[@itemprop='name']");
 				Common.javascriptclickElement("xpath", "(//div[@x-ref='jsThumbSlides']//div//button)[12]");
 				Thread.sleep(4000);
 				Common.switchFrames("xpath", "//iframe[@allow='autoplay']");
@@ -12177,8 +12177,8 @@ public void outofstock_subcription(String Dataset) {
 			if(discountordersummary>0)
 			{
 
-				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-				Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 				Sync.waitElementPresent("xpath", "//span[contains(text(),'Cancel Coupon')]");
 				Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 				Sync.waitPageLoad();
@@ -12186,8 +12186,8 @@ public void outofstock_subcription(String Dataset) {
 			}
 			else
 			{
-				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-				Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+				Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 				
 				
 			}
