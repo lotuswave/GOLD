@@ -13719,8 +13719,8 @@ public void contactUsPage(String dataSet) throws Exception {
 //		Common.textBoxInput("xpath", "//input[@name='conversationPhoneForForms']", data.get(dataSet).get("phone"));
 		
 		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//div[@id='conversationCountry']");
-		Common.clickElement("xpath", "//div[@id='conversationCountry']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationCountryCodeFor']");
+		Common.clickElement("xpath", "//div[@id='conversationCountryCodeFor']");
 		Sync.waitElementPresent("xpath", "//div[text()='" + country + "']");
 		Common.clickElement("xpath", "//div[text()='" + country + "']");
 		
@@ -13748,15 +13748,16 @@ public void contactUsPage(String dataSet) throws Exception {
 //		Sync.waitElementPresent("xpath", "//input[@name='conversationPostalCodeForForms']");
 //		Common.textBoxInput("xpath", "//input[@name='conversationPostalCodeForForms']",
 //				data.get(dataSet).get("postcode"));
-
-		Sync.waitElementPresent("xpath", "//div[@id='conversationHowcanwehelpforforms']");
-		Common.clickElement("xpath", "//div[@id='conversationHowcanwehelpforforms']");
+        Common.scrollIntoView("xpath", "//div[@id='conversationHowcanwehelp']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationHowcanwehelp']");
+		Common.clickElement("xpath", "//div[@id='conversationHowcanwehelp']");
 		
-//		Common.clickElement("xpath", "//div[@data-path='order_issues']");
+		Common.clickElement("xpath", "//div[@data-path='order_issues']");
 //
 //		Thread.sleep(4000);
-//		Sync.waitElementPresent("xpath", "//div[@id='conversationOrderIssues']");
-//		Common.clickElement("xpath", "//div[@id='conversationOrderIssues']");
+		Sync.waitElementPresent("xpath", "//div[@id='conversationProductinfoRequest']");
+		Common.clickElement("xpath", "//div[@id='conversationProductinfoRequest']");
+		Common.clickElement("xpath", "//div[@data-path='use_and_care']");
 //
 //		Sync.waitElementPresent("xpath", "//div[text()='Billing Issue']");
 //		Common.clickElement("xpath", "//div[text()='Billing Issue']");
@@ -13772,11 +13773,12 @@ public void contactUsPage(String dataSet) throws Exception {
 		Common.clickElement("xpath","//input[@name='snOrgTermsAndConditions']");
 		Thread.sleep(2000);
 		
-		Common.javascriptclickElement("xpath", "//iframe[@title='reCAPTCHA']");
-		Thread.sleep(3000);
+	
 		if(Common.getCurrentURL().contains("https://www.osprey.com/gb/contact-us"))
 			
 		{
+			Common.javascriptclickElement("xpath", "//iframe[@title='reCAPTCHA']");
+			Thread.sleep(3000);
 			System.out.println(Common.getCurrentURL());
 			Common.assertionCheckwithReport(Common.getCurrentURL().contains("https://www.osprey.com/gb/contact-us"),
 					"verifying the contact us form fileds filled in the production environment", "On production environment in contact us form filleds should be fill",
