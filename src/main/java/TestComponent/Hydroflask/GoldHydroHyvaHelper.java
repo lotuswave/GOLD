@@ -2550,8 +2550,8 @@ Common.clickElement("xpath", "//span[contains(text(),'Cancel Coupon')]");
 }
 			else {
 				Thread.sleep(4000);
-				Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Discount Code')]");
-			Common.clickElement("xpath", "//button[contains(text(),'Add Discount Code')]");
+				Sync.waitElementPresent("xpath", "//h3[contains(text(),'Add Discount Code')]");
+			Common.clickElement("xpath", "//h3[contains(text(),'Add Discount Code')]");
 			}
 			if (Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") ) {
 				Sync.waitElementPresent("id", "discount-code");
@@ -10722,10 +10722,10 @@ public void updateproductcolor_shoppingcart(String Dataset) {
 				       }
 					Thread.sleep(3000);	
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'Travel Bottles')])[1]");
-					Common.clickElement("xpath","(//span[contains(text(),'Travel Bottles')])[1]");
+					Common.javascriptclickElement("xpath","(//span[contains(text(),'Travel Bottles')])[1]");
 					
 					Sync.waitElementPresent("xpath", "(//span[contains(text(),'" + Links[i] + "')])[1]");
-					Common.clickElement("xpath","(//span[contains(text(),'" + Links[i] + "')])[1]");
+					Common.javascriptclickElement("xpath","(//span[contains(text(),'" + Links[i] + "')])[1]");
 					Sync.waitPageLoad();
 					Thread.sleep(4000);
 					String Page_title = "";
