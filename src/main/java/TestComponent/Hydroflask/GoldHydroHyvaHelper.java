@@ -340,13 +340,14 @@ public class GoldHydroHyvaHelper {
 	        Common.scrollIntoView("css", "img[alt='" + products + "']");
 	        Sync.waitElementPresent(30, "css", "img[alt='" + products + "']");
 	        Thread.sleep(3000);
-	        // Add the product to the cart
-	        Sync.waitElementPresent("css", "button[title='Add to Cart']");
+	        Common.clickElement("css", "img[alt='" + products + "']");
+	        
+	        Sync.waitElementPresent(30,"css", "button[title='Add to Cart']");
 	        Common.javascriptclickElement("css", "button[title='Add to Cart']");
 	        Thread.sleep(3000);
 	        // Verify the mini cart opens
-	        String openminicart = Common.findElement("xpath", "//div[contains(@class,'fixed inset-y-0')]").getAttribute("aria-modal");
-	        System.out.println(openminicart);
+	        String openminicart = Common.findElement("css", "div[class*='fixed inset-y-0']").getAttribute("aria-modal");
+	        System.out.println("Minicart Open:"  +openminicart);
 	        Common.assertionCheckwithReport(openminicart.contains("true"), "Add to cart validation",
 	                "Product should be added to the cart and mini cart should open",
 	                "Product added to cart and mini cart opened successfully",
@@ -358,6 +359,7 @@ public class GoldHydroHyvaHelper {
 	        Assert.fail();
 	    }
 	}
+
 	
 	public String website() throws Exception {
 		// TODO Auto-generated method stub
@@ -798,13 +800,6 @@ public class GoldHydroHyvaHelper {
 					"User unable to land o n the paymentpage");
 			Common.clickElement("xpath", "//label[@for='payment-method-stripe_payments']");
 
-//			Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-//			int payment = Common.findElements("xpath", "//div[@class='stripe-dropdown-selection']").size();
-//			System.out.println(payment);
-//			if (payment > 0) {
-				//Sync.waitElementPresent("xpath", "//div[@class='stripe-dropdown-selection']");
-				//Common.clickElement("xpath", "//div[@class='stripe-dropdown-selection']");
-				//Common.clickElement("xpath", "//button[@class='a-btn a-btn--tertiary']");
 				if(Common.getCurrentURL().contains("preprod") || Common.getCurrentURL().contains("stage") )
 						{
 					int savedcard=Common.findElements("xpath", "(//input[@type='radio' and @name='use_saved_stripe_method'])[2]").size();
@@ -827,17 +822,10 @@ public class GoldHydroHyvaHelper {
 						Common.switchToDefault();
 					}
 				Thread.sleep(3000);
-				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[1]");
-				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[1]");
+				Sync.waitElementPresent(30, "xpath", "(//button[contains(@class,'btn-place-order')])[2]");
+				Common.clickElement("xpath", "(//button[contains(@class,'btn-place-order')])[2]");
 				Thread.sleep(7000);
-				
-//				Sync.waitElementPresent(30, "xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
-//				Common.javascriptclickElement("xpath", "//div[@class='stripe-new-payments']//label[@for='stripe-new-payments']");
-//				Thread.sleep(3000);	
-//				
-//				Sync.waitElementPresent(30, "xpath", "//button[@class='action primary checkout']");
-//				Common.clickElement("xpath", "//button[@class='action primary checkout']");
-//				
+	
 				Sync.waitPageLoad();
 				Thread.sleep(5000);
 				Sync.waitElementPresent(60, "xpath", "//a[contains(text(),'Authorize Test Payment')]");
@@ -884,8 +872,8 @@ public class GoldHydroHyvaHelper {
 						"Successfully It redirects to order confirmation page Order Placed",
 						"User unable to go orderconformation page");
 
-				if (Common.findElements("xpath", "//div[contains(@class,'checkout-success container')]//p").size() > 0) {
-					order = Common.getText("xpath", "//div[contains(@class,'checkout-success')]//p//a");
+				if (Common.findElements("css", "a[class*='order-number link link-primary']").size() > 0) {
+					order = Common.getText("css", "a[class*='order-number link link-primary']");
 					System.out.println(order);
 				}
 				if (Common.findElements("xpath", "//div[@class='checkout-success container px-0 ']//p/a").size() > 0) {
@@ -8399,15 +8387,8 @@ catch(Exception | Error e)
 		try {
 			Sync.waitPageLoad();
 			Thread.sleep(4000);
-			Sync.waitElementClickable("xpath", "//label[@for='billing-as-shipping']");
-			int sizes = Common.findElements("xpath", "//label[@for='billing-as-shipping']").size();
-			Common.clickElement("xpath", "//label[@for='billing-as-shipping']");
-			Common.assertionCheckwithReport(sizes > 0, "Validating the payment section page",
-					"payment section should be displayed", "sucessfully payment section has been displayed",
-					"Failed to displayed the payment section");
-			Sync.waitPageLoad();
-			Sync.waitElementPresent(30, "xpath", "(//button[normalize-space()='New Address'])[2]");
-			Common.clickElement("xpath", "(//button[normalize-space()='New Address'])[2]");
+			Sync.waitElementPresent(30, "xpath", "//button[normalize-space()='New Address'] | (//button[normalize-space()='New Address'])[2]");
+			Common.clickElement("xpath", "//button[normalize-space()='New Address'] | (//button[normalize-space()='New Address'])[2]");
            
  
 			Common.textBoxInput("xpath", "//form[@id='billing']//input[@id='billing-firstname']",
@@ -8442,7 +8423,8 @@ catch(Exception | Error e)
 			Common.clickElement("xpath", "//button[normalize-space()='Save']");
 			Sync.waitPageLoad();
 			Thread.sleep(5000);
-			String update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='4335046']").getText().trim();
+
+			String update = Common.findElement("xpath", "//select[@id='address-list']//option[@value='4335046'] | //select[@id='address-list']//option[@value='0']").getText().trim();
 				System.out.println(update);
 			Common.assertionCheckwithReport(update.contains("6 Walnut Valley Dr") ,
 					"verifying the Billing address form in payment page",

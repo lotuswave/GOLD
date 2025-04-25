@@ -20,10 +20,11 @@ public class TEST_DGLD_HYF_US_ST_009_Placeorder_Register_user_validate_Giftcard_
 		try {
 			Hydro.verifingHomePage();
 			Hydro.click_singinButton();
-			Hydro.login_Hydroflask("AccountDetails");
+			Hydro.login_Hydroflask("AccountDetails_2");
 			Hydro.Gift_cards("Hydro Gift Card");
 			Hydro.Send_LaterCard_Value("price");
 			Hydro.minicart_Checkout();
+			 Hydro.register_billingAddress("BillingDetails");
             Hydro.updatePaymentAndSubmitOrder("PaymentDetails");
 
 		} catch (Exception e) {
