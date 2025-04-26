@@ -5947,25 +5947,21 @@ return Number;
 		String products = data.get(Dataset).get("Products");
 		System.out.println(products);
 		try {
-			Thread.sleep(4000);
+			Sync.waitPageLoad();
 			Sync.waitElementPresent(30, "xpath", "//img[@alt='" + products + "']");
 			Common.clickElement("xpath", "//img[@alt='" + products + "']");
 			Sync.waitPageLoad();
-			Thread.sleep(4000);
 			Common.scrollIntoView("xpath", "//h2[contains(text(),'Reviews')]");
 			Sync.waitElementPresent("xpath", "//h2[contains(text(),'Reviews')]");
 			Common.clickElement("xpath", "//h2[contains(text(),'Reviews')]");
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
-			Thread.sleep(3000);
-			Sync.waitElementPresent("xpath", "//span[text()='Write A Review']");
-			int form = Common.findElements("xpath", "//form[@aria-label='Write A Review Form']").size();
+			Common.clickElement("xpath", "//button[text()='Write A Review']");
+			Sync.waitElementPresent("xpath", "//button[text()='Write A Review']");
+			int form = Common.findElements("css", "header[class='yotpo-modal-header'] h2").size();
 			Common.assertionCheckwithReport(form>0, "verifying the write a review button",
 					"Write a review should be appear in the PDP page",
 					"Sucessfully write a review button has been displayed in PDP page",
 					"Failed to display the write a review button in PDP page");
 			
-			
-			Common.clickElement("xpath", "//span[text()='Write A Review']");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -5976,40 +5972,38 @@ return Number;
 		}
 		try {
 			String expectedResult = "Sucessfully title input box has been displayed";
-			Common.clickElement("xpath", "//input[@value='Post']");
-			String errormessage = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
+			Common.clickElement("css", "button[class='yotpo-new-review-submit']");
+			String errormessage = Common.findElement("css", "p[class='yotpo-star-rating-error']").getText();
 			System.out.println(errormessage);
-			Common.assertionCheckwithReport(errormessage.contains("Please enter a star rating for this review"),
+			Common.assertionCheckwithReport(errormessage.contains("A star rating is required"),
 					"verifying the error message in invalid fields",
 					"error message should be display in the invalid fields",
 					"Sucessfully Error message has been displayed in invalid fileds ",
 					"Failed to display the error meesage in invalid fields ");
 			score(data.get(Dataset).get("score"));
-			Sync.waitElementPresent("xpath", "//input[@name='review_title']");
-			int title = Common.findElements("xpath", "//input[@name='review_title']").size();
+			Sync.waitElementPresent("css", "input[name='yotpo-star-rating']");
+			int title = Common.findElements("css", "input[name='yotpo-star-rating']").size();
 			Common.assertionCheckwithReport(title > 0, "verifying the title page",
 					"title input box should be displayed", expectedResult, "User Unable to display the title box");
-			Common.textBoxInput("xpath", "//input[@name='review_title']", data.get(Dataset).get("title"));
-			Common.textBoxInput("xpath", "//textarea[@name='review_content']", data.get(Dataset).get("Review"));
-			Common.textBoxInput("xpath", "//input[@name='display_name']", data.get(Dataset).get("FirstName"));
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("UserName"));
-			Common.clickElement("xpath", "//input[@value='Post']");
-			String emailerror = Common.findElement("xpath", "//span[@class='form-input-error']").getText();
-			Common.assertionCheckwithReport(emailerror.contains("Invalid email"),
+			Common.textBoxInput("css", "input[placeholder='Summarize your experience']", data.get(Dataset).get("title"));
+			Common.textBoxInput("css", "textarea[placeholder='Tell us what you like or dislike']", data.get(Dataset).get("Review"));
+			Common.textBoxInput("css", "input[aria-label='Your name']", data.get(Dataset).get("FirstName"));
+			Common.textBoxInput("css", "input[id='email']", data.get(Dataset).get("UserName"));
+			Common.clickElement("css", "button[class='yotpo-new-review-submit']");
+			String emailerror = Common.findElement("css", "p[id='email-validation']").getText();
+			Common.assertionCheckwithReport(emailerror.contains("A valid email address is required"),
 					"verifying the invaild email for the product review",
 					"error message should be display for invaild email",
 					"Sucessfully error message has been displayed for invalid email",
 					"Failed to display the error message for invaild email");
-			Thread.sleep(4000);
-			Common.textBoxInput("xpath", "//input[@name='email']", data.get(Dataset).get("Email"));
-			Common.clickElement("xpath", "//input[@value='Post']");
-			Thread.sleep(4000);
-			String message = Common.findElement("xpath", "//div[@class='yotpo-thank-you']").getAttribute("aria-label");
-			Common.assertionCheckwithReport(message.equals("Thank you for posting a review"),
+			Common.textBoxInput("css", "input[id='email']", data.get(Dataset).get("Email"));
+			Common.clickElement("css", "button[class='yotpo-new-review-submit']");
+			String message = Common.findElement("css", "div[class='yotpo-body-complete']").getText();
+			Common.assertionCheckwithReport(message.equals("Your feedback helps other shoppers make better decisions."),
 					"verifying the post for the product review",
 					"product review should be submit after clicking on post",
 					"Sucessfully Thank you message has been displayed ", "Failed to display the Thank you message ");
-			// Common.clickElement("xpath", "//div[@aria-label='Next']");
+			 Common.clickElement("css", "span[class='yotpo-icon-button__icon'] svg[class]");
 
 		} catch (Exception | Error e) {
 			e.printStackTrace();
@@ -6028,25 +6022,25 @@ return Number;
 		Thread.sleep(4000);
 		switch (score) {
 		case "1":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 1']");
-			Common.clickElement("xpath", "//span[@aria-label='score 1']");
+			Sync.waitElementPresent("css", "label[for='yotpo_star_rating_1']");
+			Common.clickElement("css", "label[for='yotpo_star_rating_1']");
 			break;
 		case "2":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 2']");
-			Common.clickElement("xpath", "//span[@aria-label='score 2']");
+			Sync.waitElementPresent("css", "label[for='yotpo_star_rating_2']");
+			Common.clickElement("css", "label[for='yotpo_star_rating_2']");
 			break;
 		case "3":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 3']");
-			Common.clickElement("xpath", "//span[@aria-label='score 3']");
+			Sync.waitElementPresent("css", "label[for='yotpo_star_rating_3']");
+			Common.clickElement("css", "label[for='yotpo_star_rating_3']");
 			;
 			break;
 		case "4":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 4']");
-			Common.clickElement("xpath", "//span[@aria-label='score 4']");
+			Sync.waitElementPresent("css", "label[for='yotpo_star_rating_4']");
+			Common.clickElement("css", "label[for='yotpo_star_rating_4']");
 			break;
 		case "5":
-			Sync.waitElementPresent("xpath", "//span[@aria-label='score 5']");
-			Common.clickElement("xpath", "//span[@aria-label='score 5']");
+			Sync.waitElementPresent("css", "label[for='yotpo_star_rating_5']");
+			Common.clickElement("css", "label[for='yotpo_star_rating_5']");
 			break;
 		}
 	}
@@ -6885,6 +6879,10 @@ return Number;
 				Thread.sleep(4000);
 				Common.clickElement("css", "input[id='payment-method-paypal_express']");
 				Common.clickElement("css", "div[id='paypal-button-paypal_express']");
+				Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
+				Sync.waitElementPresent("css", "div[class='paypal-button-label-container']");
+				Common.clickElement("css", "div[class='paypal-button-label-container']");
+				Common.switchToDefault();
 				
 			}
 			else
@@ -6897,17 +6895,7 @@ return Number;
 				Common.clickElement("css", "div[id='buttons-container'] div[aria-label='PayPal']");
 				Common.switchToDefault();
 			}
-            
-			
-			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-			Sync.waitElementPresent("css", "div[class='paypal-button-label-container']");
-			Common.clickElement("css", "div[class='paypal-button-label-container']");
-//			Common.switchFrames("xpath", "//iframe[contains(@class,'component-frame visible')]");
-
-			Thread.sleep(8000);
-			
-			Common.switchToDefault();
-			Thread.sleep(5000);
+       
 			Common.switchWindows();
 			int size = Common.findElements("id", "acceptAllButton").size();
 			if (size > 0) {
@@ -6949,11 +6937,10 @@ return Number;
 			}
 			try {
 				Common.clickElement("id", "btnLogin");
-				Thread.sleep(5000);
+				Sync.waitPageLoad();
 				Common.actionsKeyPress(Keys.END);
-				Thread.sleep(5000);
 				Common.clickElement("id", "payment-submit-btn");
-				Thread.sleep(8000);
+				Thread.sleep(4000);
 				Common.switchToFirstTab();
 			} catch (Exception | Error e) {
 				e.printStackTrace();
@@ -6968,17 +6955,18 @@ return Number;
 
 			else {
 				try {
-	
+
+					Thread.sleep(8000);
 					int link=Common.findElements("xpath", "(//div[contains(@x-data,'termsAndConditions')])[2]").size();
 					
 					if(link>0) {
 						Common.clickElement("xpath", "(//div[@class='control']//input[@type='checkbox'])[3]");
 					}
-					Common.scrollIntoView("css", "button[class='action primary checkout']");
+					Common.scrollIntoView("css", "button[class*='btn btn-primary place-order']");
 					
-					Common.clickElement("css", "button[class='action primary checkout']");
+					Common.clickElement("css", "button[class*='btn btn-primary place-order']");
 					Sync.waitPageLoad();
-					Sync.waitElementVisible("css", "div[class='checkout-success container px-0 '] h1");
+					Thread.sleep(4000);
 					Sync.waitElementPresent("css", "div[class='checkout-success container px-0 '] h1");
 					String sucessMessage = Common.getText("css", "div[class='checkout-success container px-0 '] h1");
                       System.out.println(sucessMessage);
