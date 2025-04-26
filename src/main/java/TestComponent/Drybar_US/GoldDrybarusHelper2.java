@@ -1247,7 +1247,7 @@ public class GoldDrybarusHelper2 {
 		// TODO Auto-generated method stub
 		HashMap<String, String> Paymentmethod = new HashMap<String, String>();
 		Sync.waitPageLoad();
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		String Number = "";
 		String cardnumber = data.get(dataSet).get("cardNumber");
 		System.out.println(cardnumber);
@@ -1348,11 +1348,12 @@ public class GoldDrybarusHelper2 {
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
 
-				Thread.sleep(12000);
+				Thread.sleep(14000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(2000);
-				Common.clickElement("xpath", "//input[@id='Field-numberInput']");
-				Common.textBoxInput("id", "Field-numberInput",cardnumber);
+				Common.clickElement("css", "input[id='Field-numberInput']");
+				Thread.sleep(1000);
+				Common.textBoxInput("css", "input[id='Field-numberInput']",data.get(dataSet).get("cardNumber"));
 
 				Common.textBoxInput("id", "Field-expiryInput", data.get(dataSet).get("ExpMonthYear"));
 

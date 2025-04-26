@@ -30,7 +30,7 @@ public class TEST_DGLD_DB_US_SUB_ST_191_GuestUser_Simple_product_Checkout_with_G
 			Drybar.selectshippingmethod("GroundShipping method");
 			Drybar.clickSubmitbutton_Shippingpage();
 			Drybar.gitCard("GiftCode Full Redeem");
-			Drybar.updatePaymentAndSubmitOrder("PaymentDetails");
+			Drybar.updatePaymentAndSubmitOrder("CCMastercard");
 			//Drybar.giftCardSubmitOrder();  // need to confirm with the amy about the full payment
 			Drybar.subcription_Profile();
 			
