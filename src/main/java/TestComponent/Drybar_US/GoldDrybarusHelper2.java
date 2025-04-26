@@ -1348,7 +1348,7 @@ public class GoldDrybarusHelper2 {
 					Common.clickElement("xpath", "(//input[@class='checkbox mr-4'])[2]");
 				}
 
-				Thread.sleep(5000);
+				Thread.sleep(12000);
 				Common.switchFrames("xpath", "//iframe[@title='Secure payment input frame']");
 				Thread.sleep(2000);
 				Common.clickElement("xpath", "//input[@id='Field-numberInput']");
