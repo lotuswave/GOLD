@@ -10389,9 +10389,9 @@ public void Cancel_Giftcard() {
 	
 	try
 	{
-		Thread.sleep(4000);
-		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
-		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
+//		Thread.sleep(4000);
+//		Sync.waitElementPresent("xpath", "//button[contains(text(),'Add Gift Card')]");
+//		Common.clickElement("xpath", "//button[contains(text(),'Add Gift Card')]");
 		Thread.sleep(4000);
 		Sync.waitElementPresent("xpath", "//button[@aria-label='Remove Gift Cards Code']");
 		Common.clickElement("xpath", "//button[@aria-label='Remove Gift Cards Code']");
